@@ -1,5 +1,5 @@
 ---
-description: Test for GitHub
+description: Build on Avalanche. Build without limits.
 ---
 
 # Introduction to Avalanche
