@@ -138,15 +138,15 @@ The response should be:
 }
 ```
 
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](https://avalanche.gitbook.io/avalanche/build/apis/keystore-api) to see how.
+Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](apis/keystore-api.md) to see how.
 
 **You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
 
 ### Create an Address
 
-Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
+Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
 
-To create a new address on the X-Chain, call [`avm.createAddress`](apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api):
+To create a new address on the X-Chain, call [`avm.createAddress`](apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](apis/exchange-chain-x-chain-api.md):
 
 ```text
 curl -X POST --data '{
@@ -248,7 +248,7 @@ curl -X POST --data '{
 
 If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
 
-In order to prevent spam, Avalanche requires the payment of a [transaction fee](https://avalanche.gitbook.io/avalanche/learn/platform-overview/transaction-fees). The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below. 
+In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below. 
 
 {% page-ref page="../learn/platform-overview/transaction-fees.md" %}
 

@@ -4,7 +4,7 @@ description: Learn more about Avalanche's transaction fees
 
 # Transaction Fees
 
-In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](https://avalanche.gitbook.io/avalanche/#avalanche-avax-token). **The transaction fee is burned \(destroyed forever\).**
+In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned \(destroyed forever\).**
 
 When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
 
@@ -40,5 +40,5 @@ Different types of transactions require payment of a different transaction fee. 
 +----------+-------------------+------------------------+
 ```
 
-The [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain) gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
+The [C-Chain](./#contract-chain-c-chain) gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
 
