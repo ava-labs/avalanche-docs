@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Developer Documentation \| Avalanche](README.md)
+* [Developer Documentation](README.md)
 
 ## Learn
 

@@ -1,10 +1,10 @@
 ---
 description: >-
   Build on Avalanche. Build without limits. Developers who build on Avalanche
-  can easily create powerful, reliable, and secure applications
+  can easily create powerful, reliable, and secure applications.
 ---
 
-# Developer Documentation \| Avalanche
+# Developer Documentation
 
 ## Avalanche
 
