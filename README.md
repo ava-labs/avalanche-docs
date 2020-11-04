@@ -1,8 +1,7 @@
 ---
 description: >-
-  Documentation for decentralized app developers. Build on Avalanche. Build
-  without limits. Developers who build on Avalanche can easily create powerful,
-  reliable, and secure applications
+  Build on Avalanche. Build without limits. Developers who build on Avalanche
+  can easily create powerful, reliable, and secure applications
 ---
 
 # Developer Documentation \| Avalanche
