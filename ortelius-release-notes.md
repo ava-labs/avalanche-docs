@@ -1,2 +1,0 @@
-# Ortelius Release Notes
-
