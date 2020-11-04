@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction to Avalanche](README.md)
+* [Developer Documentation \| Avalanche](README.md)
 
 ## Learn
 
