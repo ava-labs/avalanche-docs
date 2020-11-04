@@ -18,5 +18,5 @@ Other changes:
 * Add fixed/variable cap information to API
 * Add transaction fee data to API
 
-For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
+For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
