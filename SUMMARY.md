@@ -14,8 +14,9 @@
 ## Build
 
 * [Getting Started](build/getting-started.md)
-* [Release Notes](build/release-notes/README.md)
+* [Release Notes](build/release-notes-1/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
+  * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
 * [Tutorials](build/tutorials/README.md)
   * [Platform](build/tutorials/platform/README.md)
     * [Add a Validator](build/tutorials/platform/add-a-validator.md)
@@ -57,4 +58,8 @@
   * [Serialization Primitives](build/references/serialization-primitives.md)
   * [Platform Transaction Format](build/references/platform-transaction-format.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
+
+---
+
+* [Ortelius Release Notes](ortelius-release-notes.md)
 
