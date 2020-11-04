@@ -6,7 +6,7 @@ To get an HTTP status code response that indicates the node’s health, make a `
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](https://docs.avax.network/v1.0/en/api/issuing-api-calls/)
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 ## Endpoint
 

@@ -31,7 +31,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-`avm.getTxStatus(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](https://docs.avax/build/apis/exchange-chain-x-chain-api#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 

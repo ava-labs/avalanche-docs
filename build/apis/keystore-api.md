@@ -6,7 +6,7 @@ _**You should only create a keystore user on a node that you operate, as the nod
 
 ## Format
 
-This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here.](https://docs.avax.network/v1.0/en/api/issuing-api-calls/)
+This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -94,7 +94,7 @@ curl -X POST --data '{
 
 ### keystore.exportUser
 
-Export a user. The user can be imported to another node with `keystore.importUser`. The user’s password remains encrypted.
+Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
 
 ```text
 keystore.exportUser(

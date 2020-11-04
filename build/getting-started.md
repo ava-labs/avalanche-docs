@@ -97,7 +97,7 @@ When the node starts, it has to bootstrap \(catch up with the rest of the networ
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, call [info.isBootstrapped](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-isbootstrapped) like so:
+To check if a given chain is done bootstrapping, call [`info.isBootstrapped`](apis/info-api.md#info-isbootstrapped) like so:
 
 ```text
 curl -X POST --data '{
@@ -114,7 +114,7 @@ If this returns `true`, the chain is bootstrapped. If you make an API call to a 
 
 ### Create a Keystore User
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call `keystore.createUser`:
+Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](apis/keystore-api.md#keystore-createuser):
 
 ```text
 curl -X POST --data '{
@@ -146,7 +146,7 @@ Now, you have a user on this node. Keystore data exists at the node level. Users
 
 Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
 
-To create a new address on the X-Chain, call `avm.createAddress`, a method of the [X-Chain’s API](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api):
+To create a new address on the X-Chain, call [`avm.createAddress`](apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api):
 
 ```text
 curl -X POST --data '{
@@ -269,7 +269,7 @@ The response contains the transaction’s ID. It will be different for every inv
 
 #### Checking the Transaction Status
 
-This transaction will only take a second or two to finalize. We can check its status with `avm.getTxStatus`:
+This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```text
 curl -X POST --data '{

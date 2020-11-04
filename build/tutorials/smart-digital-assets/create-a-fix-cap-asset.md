@@ -8,11 +8,11 @@ Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no mor
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture.](https://docs.avax.network/v1.0/en/core-concepts/overview/) 
+You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/). 
 
 ## Create the Asset
 
-Our asset will exist on the [X-Chain](https://docs.avax.network/v1.0/en/core-concepts/overview/#the-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API.](https://docs.avax.network/v1.0/en/api/avm/)
+Our asset will exist on the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../apis/exchange-chain-x-chain-api.md).
 
 The signature for this method is:
 
@@ -95,7 +95,7 @@ The response contains the asset’s ID, which is also the ID of this transaction
 
 All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
 
-To verify this, we call `avm.getBalance`:
+To verify this, we call [`avm.getBalance`](../../apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```text
 curl -X POST --data '{
@@ -123,7 +123,7 @@ The response confirms that our asset creation was successful and that the expect
 
 ### Send the asset
 
-Now, let’s send 100 shares by calling `avm.send`.
+Now, let’s send 100 shares by calling [`avm.send`](../../apis/exchange-chain-x-chain-api.md#avm-send).
 
 To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
 
@@ -159,7 +159,7 @@ The response from the above call should look like this:
 
 `txID` is the ID of the `send` transaction we sent to the network.
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with `avm.getTxStatus`:
+After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```text
 curl -X POST --data '{

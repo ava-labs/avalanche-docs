@@ -290,7 +290,7 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset \(an asset created with `avm.createVariableCapAsset`\).
+Mint units of a variable-cap asset \(an asset created with [`avm.createVariableCapAsset`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-createvariablecapasset)\).
 
 #### **Signature**
 
@@ -511,7 +511,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with `avm.createNFTAsset`.
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -578,7 +578,7 @@ curl -X POST --data '{
 ### avm.exportAVAX
 
 Send AVAX from the X-Chain to another chain.  
-After calling this method, you must call `importAVAX` on the other chain to complete the transfer.
+After calling this method, you must call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax) on the other chain to complete the transfer.
 
 #### **Signature**
 
@@ -639,7 +639,7 @@ curl -X POST --data '{
 ### avm.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with `avm.importKey`.
+The returned private key can be added to a user with [`avm.importKey`](https://app.gitbook.com/@avalanche/s/avalanche/~/drafts/-MLJEet0dNR5tQOXsXki/build/apis/exchange-chain-x-chain-api#avm-importkey).
 
 #### **Signature**
 
@@ -1060,7 +1060,7 @@ This gives response:
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`exportAVAX`](https://docs.avax.network/v1.0/en/api/platform/#platformexportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax) method to initiate the transfer.
 
 #### **Signature**
 
@@ -1290,7 +1290,7 @@ curl -X POST --data '{
 
 ### avm.sendMultiple
 
-Sends an amount of assetID to an array of specified addresses from a list of owned of addresses.
+Sends an amount of assetID to an array of specified addresses from a list of owned addresses.
 
 #### **Signature**
 

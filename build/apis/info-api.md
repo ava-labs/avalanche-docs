@@ -4,7 +4,7 @@ This API can be used to access basic information about the node.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](https://docs.avax.network/v1.0/en/api/issuing-api-calls/)
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -16,7 +16,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [admin.aliasChain](https://docs.avax.network/v1.0/en/api/admin/#adminaliaschain) for more context.\)
+Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](https://docs.avax-dev.network/build/apis/admin-api#admin-aliaschain)for more context.\)
 
 #### **Signature**
 
