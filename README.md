@@ -40,11 +40,11 @@ Uses a novel consensus protocol, developed by a team of Cornell computer scienti
 
 ### Scalability
 
-Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains
+Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains.
 
 ### Security
 
-Ensures stronger security guarantees well-above the 51% standard of other networks
+Ensures stronger security guarantees well-above the 51% standard of other networks.
 
 ### Flexibility
 
@@ -52,7 +52,7 @@ Easily create custom blockchains and decentralized apps that contain almost any 
 
 ### Sustainability
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work
+Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
 
 ### Smart Contract Support
 
@@ -68,5 +68,5 @@ Native support for easily creating and trading digital smart assets with complex
 
 ## Avalanche \(AVAX\) Token
 
-The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`. 
+The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
