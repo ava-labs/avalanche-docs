@@ -64,7 +64,7 @@ Create your own public or private blockchains.
 
 ### Designed for Finance
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets
+Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 ## Avalanche \(AVAX\) Token
 
