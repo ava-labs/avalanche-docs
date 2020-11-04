@@ -49,6 +49,7 @@
     * [Create an Asset on the X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
     * [Manage X-Chain Keys](build/tools/avalanchejs/manage-x-chain-keys.md)
     * [Send an Asset on the X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
+    * [API]((build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
   * [Ortelius](build/tools/ortelius.md)
 * [References](build/references/README.md)
