@@ -18,9 +18,7 @@ In order to ensure your node is well-connected, make sure that your node can rec
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
-
- 
+Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid): 
 
 ![](../../../.gitbook/assets/1-1.png)
 
