@@ -4,7 +4,7 @@ description: Learn the core concepts and architecture of Avalanche
 
 # Platform Overview
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network ****by staking at least 2,000 AVAX. 
+Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network _\*\*_by staking at least 2,000 AVAX.
 
 Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/platform/add-a-validator.md) to a subnet.
 
@@ -18,7 +18,7 @@ A subnet manages its own membership, and it may require that its constituent val
 
 ### Compliance
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements. 
+Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
 
 Some examples include:
 
@@ -58,7 +58,7 @@ Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized a
 
 ### Creating Your Blockchain and Virtual Machine
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM. 
+Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
 
 {% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
 
@@ -86,5 +86,5 @@ The [P-Chain API](../../build/apis/platform-chain-p-chain-api.md) allows clients
 
 The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/apis/contract-chain-c-chain-api.md).
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../). 
+The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 

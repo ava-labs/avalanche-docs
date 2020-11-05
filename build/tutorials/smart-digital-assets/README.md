@@ -6,5 +6,3 @@
 
 \*\*\*\*[**Create an NFT \(Part 1\)**](creating-a-nft-part-1.md): create and send NFTs using AvalancheGo's API
 
-
-

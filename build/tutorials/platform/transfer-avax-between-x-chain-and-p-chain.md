@@ -6,7 +6,7 @@ AVAX tokens exist on both the X-Chain, where they can be traded, and the P-Chain
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/). 
+You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
 
 ## Export AVAX from the X-Chain to the P-Chain
 
@@ -294,7 +294,7 @@ curl -X POST --data '{
         "username":"myUsername",    
         "password":"myPassword" 
     }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X  
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import it directly to an address that you own in MetaMask or another third-party service.
@@ -329,7 +329,7 @@ The response looks like this:
 
 Note: there is no transaction fee for import transactions to the C Chain.
 
-Once your AVAX has been transferred to the C-Chain, you can immediately begin running smart contracts. 
+Once your AVAX has been transferred to the C-Chain, you can immediately begin running smart contracts.
 
 {% page-ref page="deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
@@ -348,7 +348,7 @@ curl -X POST --data '{
         "username":"myUsername",    
         "password":"myPassword" 
     }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax 
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
 where `to` is the bech32 encoded address of an X-Chain address you hold. Make sure that the amount you export exceeds the transaction fee because both the export and import transactions will charge a transaction fee.
@@ -362,7 +362,7 @@ The response should look like this:
         "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"    
     },  
     "id": 1 
-}   
+}
 ```
 
 ## Import AVAX to the X-Chain from the C-Chain
@@ -380,7 +380,7 @@ curl -X POST --data '{
         "sourceChain": "C", 
         "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
     }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X  
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 where `to` is the bech32 encoded address the X-Chain address which you sent the funds to in the previous step.
@@ -394,7 +394,7 @@ The response should look like this:
         "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"    
     },  
     "id": 1 
-}   
+}
 ```
 
 ## Wrapping Up

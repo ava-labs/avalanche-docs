@@ -74,7 +74,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -99,7 +99,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -126,7 +126,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -151,7 +151,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -179,7 +179,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -207,7 +207,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -236,7 +236,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -266,7 +266,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -296,7 +296,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -321,7 +321,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -355,7 +355,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -389,7 +389,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -432,7 +432,7 @@ curl -X POST --data '{
     ]
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -463,7 +463,7 @@ curl -X POST --data '{
     ]
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**
@@ -703,7 +703,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 #### **Example Response**

@@ -20,7 +20,7 @@ let avax = new Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID)
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-### Describe the new asset
+## Describe the new asset
 
 The first step in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
 
@@ -34,7 +34,7 @@ let symbol = "RICK";
 let denomination = 9;
 ```
 
-### Creating the initial state
+## Creating the initial state
 
 We want to mint an asset with 400 coins to all of our managed keys, 500 to the second address we know of, and 600 to the second and third address. This sets up the state that will result from the Create Asset transaction.
 
@@ -55,7 +55,7 @@ initialState.addOutput(secpOutput2);
 initialState.addOutput(secpOutput3);
 ```
 
-### Creating the signed transaction
+## Creating the signed transaction
 
 Now that we know what we want an asset to look like, we create an output to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
 
@@ -77,7 +77,7 @@ let unsigned = await xchain.buildCreateAssetTx(
 let signed = xchain.keyChain().signTx(unsigned); //returns a Tx class
 ```
 
-### Issue the signed transaction
+## Issue the signed transaction
 
 Now that we have a signed transaction ready to send to the network, let’s issue it!
 
@@ -100,13 +100,13 @@ let txid = await xchain.issueTx(signed.toBuffer()); //returns a CB58 serialized 
 
 We assume ONE of those methods is used to issue the transaction.
 
-### Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
 
 ```text
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
-let status = await xchain.getTxStatus(txid); 
+let status = await xchain.getTxStatus(txid);
 ```
 
 The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
@@ -116,7 +116,7 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 * “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
 * “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
 
-### Identifying the newly created asset <a id="identifying-the-newly-created-asset"></a>
+## Identifying the newly created asset <a id="identifying-the-newly-created-asset"></a>
 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 

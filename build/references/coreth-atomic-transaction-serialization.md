@@ -163,7 +163,7 @@ Let's make a transferable input:
 
 ### SECP256K1 Transfer Input
 
-A [secp256k1](../cryptographic-primitives/#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
+A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
 
 #### What SECP256K1 Transfer Input Contains
 
@@ -665,7 +665,7 @@ Credentials have one possible type: `SECP256K1Credential`. Each credential is pa
 
 ### SECP256K1 Credential
 
-A [secp256k1](../cryptographic-primitives/#cryptography-in-the-avalanche-virtual-machine) credential contains a list of 65-byte recoverable signatures.
+A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) credential contains a list of 65-byte recoverable signatures.
 
 #### What SECP256K1 Credential Contains
 

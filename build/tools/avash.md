@@ -4,14 +4,14 @@ Avash is a temporary stateful shell execution environment used to deploy local a
 
 Avash provides the ability to run Lua scripts which can execute a sequence of shell commands in Avash. This allows for automation of regular tasks. For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.
 
-### Installation <a id="installation"></a>
+## Installation <a id="installation"></a>
 
-#### Requirements <a id="requirements"></a>
+### Requirements <a id="requirements"></a>
 
 * Golang 1.13+
 * An Avalanche Client Implementing Avalanche Standard CLI Flags”
 
-#### Quick Setup <a id="quick-setup"></a>
+### Quick Setup <a id="quick-setup"></a>
 
 1. Install and build an Avalanche client
 2. `cd $GOPATH`
@@ -19,7 +19,7 @@ Avash provides the ability to run Lua scripts which can execute a sequence of sh
 4. `cd src/github.com/ava-labs/avash`
 5. `go build`
 
-### Configuration <a id="configuration"></a>
+## Configuration <a id="configuration"></a>
 
 While Avash can be started without a premade configuration file, it’s available as an option for tweaking some of the shell’s global settings. Avash will search for `.avash.yaml` in the `$HOME` directory by default, but the `--config` flag can be used to set a custom configuration filepath to look for.
 
@@ -40,7 +40,7 @@ The field arguments are described as follows:
 * `<directory>` - A full path to a directory. Example: `/home/username/folder`
 * `<log-level>` - A valid log level to filter logged messages. Must be one of: `{verbo, debug, info, warn, error, fatal, off}`
 
-#### Fields <a id="fields"></a>
+### Fields <a id="fields"></a>
 
 **avalancheLocation**
 
@@ -102,9 +102,9 @@ Default:
   <datadir>/logs
 ```
 
-### Using Avash <a id="using-avash"></a>
+## Using Avash <a id="using-avash"></a>
 
-#### Opening a shell <a id="opening-a-shell"></a>
+### Opening a shell <a id="opening-a-shell"></a>
 
 Start a new instance of Avash with `./avash`.
 
@@ -119,7 +119,7 @@ help procmanager
 help procmanager start
 ```
 
-#### Commands <a id="commands"></a>
+### Commands <a id="commands"></a>
 
 Avash comes with the following root commands:
 
@@ -178,7 +178,7 @@ Usage:
 Exit the shell, attempting to gracefully stop all processes first.
 
 Usage:
-  avash exit 
+  avash exit
 ```
 
 **help**
@@ -328,7 +328,7 @@ Available Commands:
   vardump     Writes the variable to a file.
 ```
 
-### Writing Scripts <a id="writing-scripts"></a>
+## Writing Scripts <a id="writing-scripts"></a>
 
 Avash imports the [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts have hooks available to them which allows the user to write code which invokes the current Avash environment.
 

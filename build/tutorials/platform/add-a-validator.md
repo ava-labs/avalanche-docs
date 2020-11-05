@@ -40,7 +40,7 @@ The response has your node’s ID:
 }
 ```
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`. 
+Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
 
 ![Fill in staking parameters](https://docs.avax.network/images/tutorials/adding-validators/2.png)
 

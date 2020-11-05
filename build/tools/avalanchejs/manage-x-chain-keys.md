@@ -18,7 +18,7 @@ let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBloc
 let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-### Accessing the Keychain <a id="accessing-the-keychain"></a>
+## Accessing the Keychain <a id="accessing-the-keychain"></a>
 
 The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
 
@@ -28,7 +28,7 @@ let myKeychain = xchain.keyChain();
 
 This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
 
-### Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
+## Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
 
 The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
 
@@ -50,7 +50,7 @@ let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
 let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 ```
 
-### Working with Keychains <a id="working-with-keychains"></a>
+## Working with Keychains <a id="working-with-keychains"></a>
 
 The X-Chains’s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
 
@@ -61,7 +61,7 @@ let exists = myKeychain.hasKey(newAddress1); //returns true if the address is ma
 let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 ```
 
-### Working with Keypairs <a id="working-with-keypairs"></a>
+## Working with Keypairs <a id="working-with-keypairs"></a>
 
 The X-Chain’s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
 

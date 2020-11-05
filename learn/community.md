@@ -28,7 +28,7 @@
 
 [**Avalanche Explorer**](https://explorer.avax.network): an analytics tool that enables people to search the Avalanche platform for transactions, addresses, and other platform activities.
 
-\*\*\*\*[**Avascan**](www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan. 
+\*\*\*\*[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
 
 \*\*\*\*[**AvaxMap**](https://avaxmap.com/): visualization of the geographic spread of Avalanche nodes.
 
@@ -44,7 +44,7 @@
 
 ### Wallets
 
-\*\*\*\*[**Avalanche Wallet**](https://wallet.avax.network): ****a simple, secure, non-custodial wallet for storing Avalanche assets.
+\*\*\*\*[**Avalanche Wallet**](https://wallet.avax.network): _\*\*_a simple, secure, non-custodial wallet for storing Avalanche assets.
 
 \*\*\*\*[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
@@ -84,7 +84,7 @@
 
 [**Halborn**](https://halborn.com/): an award-winning team of ethical hackers that work with blockchain projects to defend against cyber attacks. The team at Halborn enhanced the security of the Avalanche Wallet, and also offers smart contract auditing.
 
-[**Kurtosis**](www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
+[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
 
 \*\*\*\*[**Quantstamp**](https://quantstamp.com/): blockchain security firm offering audits and consulting for smart contracts, off-chain applications, networking, and front-end interfaces to enhance the security of decentralized applications.
 
