@@ -20,6 +20,10 @@ First, we show you how to add your node as a validator by using [Avalanche Walle
 
 Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
+ 
+
+![](../../../.gitbook/assets/1-1.png)
+
 ```text
 curl -X POST --data '{
     "jsonrpc":"2.0",
@@ -42,29 +46,29 @@ The response has your node’s ID:
 
 Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
 
-![Fill in staking parameters](https://docs.avax.network/images/tutorials/adding-validators/2.png)
+![](../../../.gitbook/assets/2.png)
 
 Fill out the staking parameters. They are explained in more detail below. When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
 
 {% page-ref page="../../../learn/platform-overview/staking.md" %}
 
-![Confirm transaction](https://docs.avax.network/images/tutorials/adding-validators/3.png)
+![](../../../.gitbook/assets/3.png)
 
 You should see this success message, and your balance should be updated.
 
-![Success message](https://docs.avax.network/images/tutorials/adding-validators/4.png)
+![](../../../.gitbook/assets/4.png)
 
 Calling [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifies that our transaction was accepted.
 
-![Call getPendingValidators](https://docs.avax.network/images/tutorials/adding-validators/5.png)
+![](../../../.gitbook/assets/5.png)
 
 Go back to the `Earn` tab, and click `Estimated Rewards`.
 
-![Click estimated reward](https://docs.avax.network/images/tutorials/adding-validators/6.png)
+![](../../../.gitbook/assets/6.png)
 
 Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
 
-![See validator](https://docs.avax.network/images/tutorials/adding-validators/7.png)
+![](../../../.gitbook/assets/7.png)
 
 That’s it!
 
