@@ -36,7 +36,7 @@ When you add a node to the validator set, you specify:
 * The address to send any rewards to
 * Your delegation fee rate \(see below\)
 
-{% hint style="info" %}
+{% hint style="danger" %}
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
@@ -81,7 +81,7 @@ When you delegate stake to a validator, you specify:
 * How many AVAX you are staking
 * The address to send any rewards to
 
-{% hint style="info" %}
+{% hint style="danger" %}
 Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
