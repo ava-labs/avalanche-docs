@@ -1,6 +1,6 @@
-[avalanche - v3.0.3](README.md)
+[avalanche - v3.0.4](README.md)
 
-# AvalancheJS - v3.0.3
+# AvalancheJS - v3.0.4
 
 ## Index
 
@@ -65,6 +65,7 @@
     * [HelperFunctions](modules/utils_helperfunctions.md)
     * [Payload](modules/utils_payload.md)
     * [PersistanceOptions](modules/utils_persistanceoptions.md)
+    * [Serialization](modules/utils_serialization.md)
 
 ### Source Directory
 

@@ -44,7 +44,7 @@ Class for representing a UTXOID used in [[TransferableOp]] types
 
 \+ **new UTXOID**(): *[UTXOID](api_avm_operations.utxoid.md)*
 
-*Defined in [src/apis/avm/ops.ts:657](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L657)*
+*Defined in [src/apis/avm/ops.ts:657](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L657)*
 
 Class for representing a UTXOID used in [[TransferableOp]] types
 
@@ -58,7 +58,7 @@ Class for representing a UTXOID used in [[TransferableOp]] types
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeID](common_nbytes.nbytes.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/ops.ts:603](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L603)*
+*Defined in [src/apis/avm/ops.ts:603](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L603)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeName](common_nbytes.nbytes.md#protected-_typename)*
 
-*Defined in [src/apis/avm/ops.ts:602](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L602)*
+*Defined in [src/apis/avm/ops.ts:602](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L602)*
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bsize](common_nbytes.nbytes.md#protected-bsize)*
 
-*Defined in [src/apis/avm/ops.ts:608](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L608)*
+*Defined in [src/apis/avm/ops.ts:608](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L608)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bytes](common_nbytes.nbytes.md#protected-bytes)*
 
-*Defined in [src/apis/avm/ops.ts:607](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L607)*
+*Defined in [src/apis/avm/ops.ts:607](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L607)*
 
 ## Methods
 
@@ -98,7 +98,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[clone](common_nbytes.nbytes.md#abstract-clone)*
 
-*Defined in [src/apis/avm/ops.ts:649](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L649)*
+*Defined in [src/apis/avm/ops.ts:649](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L649)*
 
 **Returns:** *this*
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[create](common_nbytes.nbytes.md#abstract-create)*
 
-*Defined in [src/apis/avm/ops.ts:655](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L655)*
+*Defined in [src/apis/avm/ops.ts:655](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L655)*
 
 **Parameters:**
 
@@ -130,7 +130,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/common/nbytes.ts:36](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/nbytes.ts#L36)*
+*Defined in [src/common/nbytes.ts:36](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/nbytes.ts#L36)*
 
 **Parameters:**
 
@@ -149,7 +149,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[fromBuffer](common_nbytes.nbytes.md#frombuffer)*
 
-*Defined in [src/common/nbytes.ts:74](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/nbytes.ts#L74)*
+*Defined in [src/common/nbytes.ts:74](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/nbytes.ts#L74)*
 
 Takes a [[Buffer]], verifies its length, and stores it.
 
@@ -172,7 +172,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[fromString](common_nbytes.nbytes.md#fromstring)*
 
-*Defined in [src/apis/avm/ops.ts:630](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L630)*
+*Defined in [src/apis/avm/ops.ts:630](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L630)*
 
 Takes a base-58 string containing an [UTXOID](api_avm_operations.utxoid.md), parses it, populates the class, and returns the length of the UTXOID in bytes.
 
@@ -194,7 +194,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getSize](common_nbytes.nbytes.md#getsize)*
 
-*Defined in [src/common/nbytes.ts:50](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/nbytes.ts#L50)*
+*Defined in [src/common/nbytes.ts:50](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/nbytes.ts#L50)*
 
 Returns the length of the [Buffer](https://github.com/feross/buffer).
 
@@ -210,7 +210,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -224,7 +224,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -240,7 +240,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/nbytes.ts:28](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/nbytes.ts#L28)*
+*Defined in [src/common/nbytes.ts:28](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/nbytes.ts#L28)*
 
 **Parameters:**
 
@@ -258,7 +258,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[toBuffer](common_nbytes.nbytes.md#tobuffer)*
 
-*Defined in [src/common/nbytes.ts:94](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/nbytes.ts#L94)*
+*Defined in [src/common/nbytes.ts:94](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/nbytes.ts#L94)*
 
 **Returns:** *Buffer*
 
@@ -272,7 +272,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[toString](common_nbytes.nbytes.md#tostring)*
 
-*Defined in [src/apis/avm/ops.ts:619](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L619)*
+*Defined in [src/apis/avm/ops.ts:619](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L619)*
 
 Returns a base-58 representation of the [UTXOID](api_avm_operations.utxoid.md).
 
@@ -284,7 +284,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/apis/avm/ops.ts:613](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L613)*
+*Defined in [src/apis/avm/ops.ts:613](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L613)*
 
 Returns a function used to sort an array of [UTXOID](api_avm_operations.utxoid.md)s
 
