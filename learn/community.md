@@ -2,6 +2,8 @@
 
 ## Resources
 
+\*\*\*\*[**Avalanche Press Kit and Brand Guidelines**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): the official press kit and brand guidelines with logos and fonts
+
 ### Websites and Socials
 
 [**Website**](https://avax.network): the official Ava Labs and Avalanche website
