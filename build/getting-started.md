@@ -21,7 +21,9 @@ Avalanche is an incredibly lightweight protocol, so the minimum computer require
 
 Run `go version`. **It should be 1.13 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
-This tutorial assumes you have enough AVAX to add a validator held under a mnemonic key phrase.
+{% hint style="danger" %}
+This tutorial assumes you have enough AVAX to add a validator held under a mnemonic key phrase **`2,000 AVAX`**.
+{% endhint %}
 
 ## Run an Avalanche Node and Send Funds
 
@@ -35,7 +37,7 @@ The node is a binary program. You can either download the source code and then b
 
 Download the AvalancheGo repository:
 
-```text
+```cpp
 go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
@@ -43,13 +45,13 @@ Note to advanced users: AvalancheGo uses Go modules, so you can clone the [Avala
 
 Change to the `avalanchego` directory:
 
-```text
+```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
 Build AvalancheGo:
 
-```text
+```cpp
 ./scripts/build.sh
 ```
 
@@ -77,13 +79,13 @@ You can run the node with `./avalanche-<VERSION>/avalanchego`
 
 If you built from source:
 
-```text
+```cpp
 ./build/avalanchego
 ```
 
 If you are using the released binaries:
 
-```text
+```cpp
 ./avalanche-<VERSION>/avalanchego
 ```
 
@@ -99,7 +101,7 @@ When the node starts, it has to bootstrap \(catch up with the rest of the networ
 
 To check if a given chain is done bootstrapping, call [`info.isBootstrapped`](apis/info-api.md#info-isbootstrapped) like so:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -116,7 +118,7 @@ If this returns `true`, the chain is bootstrapped. If you make an API call to a 
 
 Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](apis/keystore-api.md#keystore-createuser):
 
-```text
+```cpp
 curl -X POST --data '{
      "jsonrpc": "2.0",
      "id": 1,
@@ -130,7 +132,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```text
+```cpp
 {
      "jsonrpc":"2.0",
      "result":{"success":true},
@@ -140,7 +142,9 @@ The response should be:
 
 Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](apis/keystore-api.md) to see how.
 
+{% hint style="danger" %}
 **You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
+{% endhint %}
 
 ### Create an Address
 
@@ -148,7 +152,7 @@ Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Cha
 
 To create a new address on the X-Chain, call [`avm.createAddress`](apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](apis/exchange-chain-x-chain-api.md):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :2,
@@ -166,7 +170,7 @@ Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion 
 
 The response should look like this:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id":2,
@@ -180,7 +184,9 @@ Your user now controls the address `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf7
 
 ### Send Funds From Avalanche Wallet to Your Node
 
+{% hint style="warning" %}
 _**Note: the instructions below move real funds.**_
+{% endhint %}
 
 Let’s move funds from the Avalanche Wallet to your node.
 
@@ -192,7 +198,7 @@ Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the add
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :3,
@@ -208,7 +214,7 @@ Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric
 
 The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :3,
@@ -228,7 +234,7 @@ The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 
 Now, let’s send some AVAX by making an API call to our node:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :5,
@@ -256,7 +262,7 @@ When you send this request, the node will authenticate you using your username a
 
 The response contains the transaction’s ID. It will be different for every invocation of `send`.
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :5,
@@ -271,7 +277,7 @@ The response contains the transaction’s ID. It will be different for every inv
 
 This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :6,
@@ -284,7 +290,7 @@ curl -X POST --data '{
 
 The response should indicate that the transaction was accepted:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :6,
@@ -298,7 +304,7 @@ You might also see that `status` is `Processing` if the network has not yet fina
 
 Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :7,
@@ -312,7 +318,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :7,
