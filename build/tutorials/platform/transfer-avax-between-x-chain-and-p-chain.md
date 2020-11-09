@@ -16,7 +16,7 @@ To send the AVAX, call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.
 
 Your call should look like this:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -40,7 +40,7 @@ Make sure that the amount that you’re sending exceeds the transaction fee. Oth
 
 The response should look like this:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -53,7 +53,7 @@ The response should look like this:
 
 We can verify that this transaction was accepted by calling [`avm.getTxStatus`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.getTxStatus",
@@ -66,7 +66,7 @@ curl -X POST --data '{
 
 Which shows our transaction is accepted:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -78,7 +78,7 @@ Which shows our transaction is accepted:
 
 We can also call [`avm.getBalance`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -98,7 +98,7 @@ Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.i
 
 Your call should look like this:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
@@ -115,7 +115,7 @@ curl -X POST --data '{
 
 This returns the transaction ID:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -128,7 +128,7 @@ This returns the transaction ID:
 
 We can check that the transaction was accepted with:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -141,7 +141,7 @@ curl -X POST --data '{
 
 It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBalance",
@@ -154,7 +154,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -178,7 +178,7 @@ Now, let’s move AVAX on the P-Chain back to the X-Chain.
 
 To do so, call [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
@@ -201,7 +201,7 @@ This returns the transaction ID, and we can check that the transaction was commi
 
 To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -228,7 +228,7 @@ In order to get around this, you can export a private key from the X-Chain and t
 
 First, export a private key from the X Chain:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -243,7 +243,7 @@ curl -X POST --data '{
 
 Response:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -255,7 +255,7 @@ Response:
 
 Now, import the same private key to the C Chain:
 
-```text
+```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -270,7 +270,7 @@ curl -X POST --data '{
 
 The response contains a hex-encoded EVM address:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -282,7 +282,7 @@ The response contains a hex-encoded EVM address:
 
 Now, you can use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) call:
 
-```text
+```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -299,7 +299,7 @@ curl -X POST --data '{
 
 Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import it directly to an address that you own in MetaMask or another third-party service.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,    
@@ -317,7 +317,7 @@ where `to` is a hex-encoded EVM address of your choice.
 
 The response looks like this:
 
-```text
+```cpp
 {   
     "jsonrpc": "2.0",   
     "result": { 
@@ -337,7 +337,7 @@ Once your AVAX has been transferred to the C-Chain, you can immediately begin ru
 
 Now, you can move AVAX back from the C-Chain to the X-Chain
 
-```text
+```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -355,7 +355,7 @@ where `to` is the bech32 encoded address of an X-Chain address you hold. Make su
 
 The response should look like this:
 
-```text
+```cpp
 {   
     "jsonrpc": "2.0",   
     "result": { 
@@ -369,7 +369,7 @@ The response should look like this:
 
 Lastly, we can finish up by importing AVAX from the C-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax).
 
-```text
+```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -387,7 +387,7 @@ where `to` is the bech32 encoded address the X-Chain address which you sent the 
 
 The response should look like this:
 
-```text
+```cpp
 {   
     "jsonrpc": "2.0",   
     "result": { 
