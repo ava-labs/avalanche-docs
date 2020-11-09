@@ -6,7 +6,7 @@ The [**Platform Chain \(P-Chain\) API**](platform-chain-p-chain-api.md) allows c
 
 The [**Contract Chain \(C-Chain\) API**](contract-chain-c-chain-api.md) allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances.
 
-The [**Exchange Chain \(X-Chain\) API**](exchange-chain-x-chain-api.md) _\*\*_allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM.
+The [**Exchange Chain \(X-Chain\) API**](exchange-chain-x-chain-api.md) \_\*\*\_allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM.
 
 The [**Keystore API**](keystore-api.md) allows clients to use an Avalanche node’s built-in keystore.
 

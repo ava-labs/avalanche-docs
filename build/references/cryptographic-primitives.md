@@ -30,7 +30,7 @@ The addressing scheme of the X-Chain and the P-Chain relies on secp256k1. Avalan
 
 Avalanche uses the convention `chainID-address` to specify which chain an address exists on. `chainID` may be replaced with an alias of the chain. When transmitting information through external applications, the CB58 convention is required.
 
-Read more about the [addressing scheme](%20http://support.avalabs.org/en/articles/4596397-what-is-an-address) and [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
+Read more about the [addressing scheme](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/en/articles/4596397-what-is-an-address/README.md) and [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
 
 ### Secp256k1 Recoverable Signatures
 

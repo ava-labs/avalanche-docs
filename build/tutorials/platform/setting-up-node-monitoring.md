@@ -93,7 +93,7 @@ sudo systemctl enable prometheus
 Prometheus should now be running. To make sure, we can check with:
 
 ```text
-systemctl status prometheus 
+systemctl status prometheus
 ```
 
 which should produce something like:

@@ -8,7 +8,7 @@ Staking is the process of locking up tokens to support a network while receiving
 
 ### How does proof-of-stake work?
 
-To resist [sybil attacks](%20http://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
 ### Staking Parameters on Avalanche
 
@@ -26,7 +26,7 @@ When a validator is done validating the [Primary Network](http://support.avalabs
 
 ## Validators
 
-**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake. 
+**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
 
 When you add a node to the validator set, you specify:
 
@@ -36,7 +36,9 @@ When you add a node to the validator set, you specify:
 * The address to send any rewards to
 * Your delegation fee rate \(see below\)
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq).
+{% hint style="danger" %}
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+{% endhint %}
 
 ### Running a Validator <a id="running-a-validator"></a>
 
@@ -78,6 +80,10 @@ When you delegate stake to a validator, you specify:
 * When you want to start/stop delegating stake \(must be while the validator is validating\)
 * How many AVAX you are staking
 * The address to send any rewards to
+
+{% hint style="danger" %}
+Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+{% endhint %}
 
 ### Delegator rewards <a id="delegator-rewards"></a>
 

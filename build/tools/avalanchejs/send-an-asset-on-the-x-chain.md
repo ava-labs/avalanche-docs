@@ -18,7 +18,7 @@ let xchain = avax.XChain(); //returns a reference to the X-Chain used by Avalanc
 
 We’re also assuming that the keystore contains a list of addresses used in this transaction.
 
-### Getting the UTXO Set <a id="getting-the-utxo-set"></a>
+## Getting the UTXO Set <a id="getting-the-utxo-set"></a>
 
 The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
 
@@ -32,7 +32,7 @@ let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array o
 let utxos = await xchain.getUTXOs(myAddresses);
 ```
 
-### Spending the UTXOs <a id="spending-the-utxos"></a>
+## Spending the UTXOs <a id="spending-the-utxos"></a>
 
 The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
 
@@ -62,7 +62,7 @@ let txid = await xchain.issueTx(signedTx);
 
 And the transaction is sent!
 
-### Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
 
@@ -78,7 +78,7 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 * “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
 * “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
 
-### Check the results <a id="check-the-results"></a>
+## Check the results <a id="check-the-results"></a>
 
 The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
 
