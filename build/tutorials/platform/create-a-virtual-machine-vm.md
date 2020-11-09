@@ -18,7 +18,7 @@ To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Aval
 
 The interface is big, but don’t worry, we’ll explain each method and see an implementation example. It’s not necessary you understand every nuance.
 
-```text
+```cpp
 // ChainVM defines the methods a Virtual Machine must implement to use the Snowman consensus engine.
 //
 // A Snowman VM defines the state contained in a linear blockchain,
@@ -105,7 +105,7 @@ You may have noticed the `snowman.Block` type referenced in the `snowman.VM` int
 
 Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
-```text
+```cpp
 // Block is a block in a blockchain.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
@@ -226,7 +226,7 @@ First, let’s look at our block implementation.
 
 The type declaration is:
 
-```text
+```cpp
 // Block is a block on the chain.
 // Each block contains:
 // 1) A piece of data (the block's payload)
@@ -242,7 +242,7 @@ The `serialize:"true"` tag indicates when a block is persisted in the database o
 
 #### **Verify**
 
-```text
+```cpp
 // Verify returns nil iff this block is valid.
 // To be valid, it must be that:
 // b.parent.Timestamp < b.Timestamp <= [local time] + 1 hour
@@ -290,7 +290,7 @@ Now, let’s look at the implementation of VM, which implements the `snowman.VM`
 
 The declaration is:
 
-```text
+```cpp
 // This Virtual Machine defines a blockchain that acts as a timestamp server
 // Each block contains a piece of data (payload) and the timestamp when it was created
 type VM struct {
@@ -306,7 +306,7 @@ type VM struct {
 
 #### **Initialize**
 
-```text
+```cpp
 // Initialize this vm
 // [ctx] is the execution context
 // [db] is this database we read/write
@@ -388,7 +388,7 @@ func (vm *VM) Initialize(
 
 This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. We’ll see where this is called later.
 
-```text
+```cpp
 // proposeBlock appends [data] to [p.mempool].
 // Then it notifies the consensus engine
 // that a new block is ready to be added to consensus
@@ -401,7 +401,7 @@ func (vm *VM) proposeBlock(data [dataLen]byte) {
 
 #### **ParseBlock**
 
-```text
+```cpp
 // ParseBlock parses [bytes] to a snowman.Block
 // This function is used by the vm's state to unmarshal blocks saved in state
 // and by the consensus layer when it receives the byte representation of a block
@@ -422,7 +422,7 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
 
 #### **NewBlock**
 
-```text
+```cpp
 // NewBlock returns a new Block where:
 // - the block's parent has ID [parentID]
 // - the block's data is [data]
@@ -453,7 +453,7 @@ func (vm *VM) NewBlock(parentID ids.ID, data [dataLen]byte, timestamp time.Time)
 
 This method is called by the consensus layer after the application layer tells it that a new block is ready to be built \(i.e., when `vm.NotifyConsensus()` is called\).
 
-```text
+```cpp
 // BuildBlock returns a block that this VM wants to add to consensus
 func (vm *VM) BuildBlock() (snowman.Block, error) {
     // There is no data to put in a new block
@@ -482,7 +482,7 @@ func (vm *VM) BuildBlock() (snowman.Block, error) {
 
 #### **CreateHandlers**
 
-```text
+```cpp
 // CreateHandlers returns a map where:
 // Keys: The path extension for this blockchain's API (empty in this case)
 // Values: The handler for the API
@@ -507,7 +507,7 @@ Using Gorilla, there is a struct for each API service. In the case of this block
 
 The service struct’s declaration is:
 
-```text
+```cpp
 // Service is the API service for this VM
 type Service struct{ vm *VM }
 ```
@@ -518,7 +518,7 @@ For each API method, there is: \* A struct that defines the method’s arguments
 
 This API method allows clients to add a block to the blockchain.
 
-```text
+```cpp
 // ProposeBlockArgs are the arguments to ProposeValue
 type ProposeBlockArgs struct {
     // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
@@ -557,7 +557,7 @@ func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *P
 
 This API method allows clients to get a block by its ID.
 
-```text
+```cpp
 // APIBlock is the API representation of a block
 type APIBlock struct {
     Timestamp int64  `json:"timestamp"` // Timestamp of most recent block
@@ -626,7 +626,7 @@ Get a block by its ID. If no ID is provided, get the latest block.
 
 **Signature**
 
-```text
+```cpp
 timestamp.getBlock({id: string}) ->
     {
         id: string,
@@ -643,7 +643,7 @@ timestamp.getBlock({id: string}) ->
 
 **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestamp.getBlock",
@@ -656,7 +656,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -675,7 +675,7 @@ Propose the creation of a new block.
 
 **Signature**
 
-```text
+```cpp
 timestamp.proposeBlock({data: string}) -> {success: bool}
 ```
 
@@ -683,7 +683,7 @@ timestamp.proposeBlock({data: string}) -> {success: bool}
 
 **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestamp.proposeBlock",
@@ -696,7 +696,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {

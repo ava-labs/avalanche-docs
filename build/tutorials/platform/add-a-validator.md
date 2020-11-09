@@ -6,7 +6,9 @@ The [Primary Network](https://avalanche.gitbook.io/avalanche/build/tutorials/pla
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
+{% hint style="danger" %}
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+{% endhint %}
 
 ## Requirements
 
@@ -22,7 +24,7 @@ Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/
 
 ![](../../../.gitbook/assets/1-1.png)
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -32,7 +34,7 @@ curl -X POST --data '{
 
 The response has your node’s ID:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -76,7 +78,7 @@ We can also add a node to the validator set by making API calls to our node. To 
 
 This method’s signature is:
 
-```text
+```cpp
 platform.addValidator(
     {
         nodeID: string,
@@ -98,7 +100,7 @@ Let’s go through and examine these arguments.
 
 This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "info.getNodeID",
@@ -109,7 +111,7 @@ curl -X POST --data '{
 
 The response has your node’s ID:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -147,7 +149,7 @@ These parameters are the username and password of the user that pays the transac
 
 Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addValidator",
@@ -168,7 +170,7 @@ curl -X POST --data '{
 
 The response has the transaction ID, as well as the address the change went to.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -181,7 +183,7 @@ The response has the transaction ID, as well as the address the change went to.
 
 We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -194,7 +196,7 @@ curl -X POST --data '{
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -205,7 +207,7 @@ curl -X POST --data '{
 
 The response should include the node we just added:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -234,7 +236,7 @@ Suppose that the Subnet has ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWv
 
 To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
 
-```text
+```cpp
 platform.addSubnetValidator(
     {
         nodeID: string,
@@ -277,7 +279,7 @@ These parameters are the username and password of the user that pays the transac
 
 We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addSubnetValidator",
@@ -297,7 +299,7 @@ curl -X POST --data '{
 
 The response has the transaction ID, as well as the address the change went to.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -310,7 +312,7 @@ The response has the transaction ID, as well as the address the change went to.
 
 We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -323,7 +325,7 @@ curl -X POST --data '{
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -334,7 +336,7 @@ curl -X POST --data '{
 
 The response should include the node we just added:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {

@@ -10,31 +10,49 @@ Today, we will deploy and test a smart contract on Avalanche using Remix and Met
 
 ## Step 1: Setting up MetaMask
 
-![Log in to MetaMask -&amp;gt; Click the Network drop-down -&amp;gt; Select Custom RPC](../../../.gitbook/assets/image%20%2814%29.png)
+Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
-* **Network Name**: Avalanche C-Chain
-* **New RPC URL**:
-  * [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) for Local Testnet
-  * [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for Fuji Testnet
-  * [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for Mainnet
-* **ChainID**:
-  * `0xa868` for Local Testnet
-  * `0xa869` for Fuji Testnet
-  * `0xa86a` for Mainnet
-* **Symbol**: C-AVAX
-* **Explorer**:
+![](../../../.gitbook/assets/image%20%2814%29.png)
 
-  * n/a for Localnet
-  * [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/) for Fuji Testnet
-  * [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) for Mainnet
+**FUJI Testnet Settings:**
 
-![](../../../.gitbook/assets/image%20%2810%29.png)
+* **Network Name**: Avalanche FUJI C-Chain
+* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+* **ChainID**: `0xa869`
+* **Symbol**: `C-AVAX`
+* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+
+#### **Avalanche Mainnet Settings:**
+
+* **Network Name**: Avalanche Mainnet C-Chain
+* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+* **ChainID**: `0xa86a`
+* **Symbol**: `C-AVAX`
+* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+
+#### **Local Testnet \(AVASH\) Settings:**
+
+* **Network Name**: Avalanche Local
+* **New RPC URL**:[ https://api.avax-test.network/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
+* **ChainID**: `0xa868`
+* **Symbol**: `C-AVAX`
+* **Explorer**: N/A
 
 ## Step 2: Funding your C-Chain address
 
-Navigate to [https://faucet.avax.network](https://faucet.avax.network/), and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+### **Funding your C-Chain address on FUJI** <a id="d718"></a>
 
-![](../../../.gitbook/assets/screen-shot-2020-11-05-at-2.43.31-pm.png)
+ Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+
+### Funding your C-Chain address on Mainnet <a id="1997"></a>
+
+Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain. 
+
+{% page-ref page="transfer-avax-between-x-chain-and-p-chain.md" %}
+
+### Funding your C-chain address on local testnet <a id="b5a3"></a>
+
+Deploy your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
 ## Step 3: Connect MetaMask and deploy a smart contract using Remix
 

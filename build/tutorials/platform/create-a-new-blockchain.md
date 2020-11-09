@@ -26,7 +26,7 @@ Each blockchain has some genesis state when it’s created. Each Virtual Machine
 
 The [AVM’s documentation](../../apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis) should look like this:
 
-```text
+```cpp
 {
 "genesisData":
     {
@@ -78,7 +78,7 @@ The [AVM’s documentation](../../apis/exchange-chain-x-chain-api.md) specifies 
 
 To create the byte representation of this genesis state, call [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -139,7 +139,7 @@ curl -X POST --data '{
 
 This returns the byte representation of your blockchain’s genesis state:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -153,7 +153,7 @@ This returns the byte representation of your blockchain’s genesis state:
 
 Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getsubnets).
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -171,7 +171,7 @@ curl -X POST --data '{
 
 The response contains the transaction ID:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -188,7 +188,7 @@ After a few seconds, the transaction to create our blockchain should have been a
 
 To check, call [`platform.getBlockchains`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getblockchains). This returns a list of all blockchains that exist.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -199,7 +199,7 @@ curl -X POST --data '{
 
 The response confirms that the blockchain was created:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -255,7 +255,7 @@ You can interact with this new instance of the AVM almost the same way you’d i
 
 In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

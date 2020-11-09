@@ -14,7 +14,7 @@ First, let’s generate the 2 control keys. To do so we call [`platform.createAd
 
 To generate the first key:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -28,7 +28,7 @@ curl -X POST --data '{
 
 This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -40,7 +40,7 @@ This gives the first control key \(again, it actually gives the _address_ of the
 
 Generate the second key:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -54,7 +54,7 @@ curl -X POST --data '{
 
 The response contains the second control key, which is held by the user we just specified:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -68,7 +68,7 @@ The response contains the second control key, which is held by the user we just 
 
 To create a subnet, we call [`platform.createSubnet`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createsubnet).
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -87,7 +87,7 @@ curl -X POST --data '{
 
 The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -102,7 +102,7 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 We can call [`platform.getSubnets`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-getsubnets) to get all Subnets that exist:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -113,7 +113,7 @@ curl -X POST --data '{
 
 The response confirms that our subnet was created:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {

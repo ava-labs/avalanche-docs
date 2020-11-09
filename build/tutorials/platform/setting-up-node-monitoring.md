@@ -21,7 +21,9 @@ Prerequisites:
 
 ### **Caveat: Security**
 
+{% hint style="danger" %}
 The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
+{% endhint %}
 
 ### Contributions
 
@@ -31,36 +33,69 @@ The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs
 
 First, we need to add a system user account and create directories \(you will need superuser credentials\):
 
-```text
+```cpp
 sudo useradd -M -r -s /bin/false prometheus
+```
+
+```cpp
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
 Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
 
-```text
+```cpp
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
+```
+
+```cpp
 wget https://github.com/prometheus/prometheus/releases/download/v2.21.0/prometheus-2.21.0.linux-amd64.tar.gz
+```
+
+```cpp
 tar xvf prometheus-2.21.0.linux-amd64.tar.gz
+```
+
+```cpp
 cd prometheus-2.21.0.linux-amd64
 ```
 
 Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
 
-```text
+```cpp
 sudo cp {prometheus,promtool} /usr/local/bin/
+```
+
+```cpp
 sudo chown prometheus:prometheus /usr/local/bin/{prometheus,promtool}
+```
+
+```cpp
 sudo chown -R prometheus:prometheus /etc/prometheus
+```
+
+```cpp
 sudo chown prometheus:prometheus /var/lib/prometheus
+```
+
+```cpp
 sudo cp -r {consoles,console_libraries} /etc/prometheus/
+```
+
+```cpp
 sudo cp prometheus.yml /etc/prometheus/
 ```
 
 `/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
 
-Let’s set up Prometheus to run as a system service. Do `sudo nano /etc/systemd/system/prometheus.service` \(or open that file in the text editor of your choice\), and enter the following configuration:
+Let’s set up Prometheus to run as a system service. Do**:**
 
-```text
+```cpp
+sudo nano /etc/systemd/system/prometheus.service
+```
+
+\(or open that file in the text editor of your choice\), and enter the following configuration:
+
+```cpp
 [Unit]
 Description=Prometheus
 Documentation=https://prometheus.io/docs/introduction/overview/
@@ -84,21 +119,27 @@ WantedBy=multi-user.target
 
 Save the file. Now, we can run Prometheus as a system service:
 
-```text
+```cpp
 sudo systemctl daemon-reload
+```
+
+```cpp
 sudo systemctl start prometheus
+```
+
+```cpp
 sudo systemctl enable prometheus
 ```
 
 Prometheus should now be running. To make sure, we can check with:
 
-```text
+```cpp
 systemctl status prometheus
 ```
 
 which should produce something like:
 
-```text
+```cpp
 ● prometheus.service - Prometheus
      Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2020-04-01 19:23:53 CEST; 5 months 12 days ago
@@ -114,31 +155,53 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 ...
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/` \(you may need to do `sudo ufw allow 9090/tcp` if the firewall is on\).
+You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/` 
+
+{% hint style="warning" %}
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
+{% endhint %}
 
 ## Install Grafana
 
 To set up Grafana project repositories with Ubuntu:
 
-```text
+```cpp
 sudo apt-get install -y apt-transport-https
+```
+
+```cpp
 sudo apt-get install -y software-properties-common wget
+```
+
+```cpp
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+```
+
+```cpp
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.lis
 ```
 
 To install Grafana:
 
-```text
+```cpp
 sudo apt-get update
+```
+
+```cpp
 sudo apt-get install grafana
 ```
 
 To configure it as a service:
 
-```text
+```cpp
 sudo systemctl daemon-reload
+```
+
+```cpp
 sudo systemctl start grafana-server
+```
+
+```cpp
 sudo systemctl enable grafana-server.service
 ```
 
@@ -148,7 +211,13 @@ To make sure it’s running properly:
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` \(again, open the port if needed\). Log in with username/password admin/admin and set up a new, secure password.\*\* Now we need to connect Grafana to our data source, Prometheus.
+which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` 
+
+{% hint style="warning" %}
+You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
+{% endhint %}
+
+Log in with username/password admin/admin and set up a new, secure password.\*\* Now we need to connect Grafana to our data source, Prometheus.
 
 On Grafana’s web interface:
 
@@ -171,15 +240,27 @@ curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | 
 
 change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
 
-```text
+```cpp
 tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
+```
+
+```cpp
 sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
+```
+
+```cpp
 node_exporter --version
 ```
 
-Then we add node\_exporter as a service. Do `sudo nano /etc/systemd/system/node_exporter.service` \(or open that file in the text editor of your choice\) and populate it with:
+Then we add node\_exporter as a service. Do:
 
-```text
+```cpp
+sudo nano /etc/systemd/system/node_exporter.service
+```
+
+ \(or open that file in the text editor of your choice\) and populate it with:
+
+```cpp
 [Unit]
 Description=Prometheus
 Documentation=https://github.com/prometheus/node_exporter
@@ -220,9 +301,15 @@ WantedBy=multi-user.target
 
 This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
 
-```text
+```cpp
 sudo systemctl start node_exporter
+```
+
+```cpp
 sudo systemctl enable node_exporter
+```
+
+```cpp
 sudo systemctl status node_exporter
 ```
 
@@ -234,9 +321,15 @@ Make sure that your AvalancheGo node is running with appropriate [command line a
 
 We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
 
-Do `sudo nano /etc/prometheus/prometheus.yml` \(or open that file in the text editor of your choice\) and append to the end:
+Do :
 
-```text
+```cpp
+sudo nano /etc/prometheus/prometheus.yml
+```
+
+\(or open that file in the text editor of your choice\) and append to the end:
+
+```cpp
   - job_name: 'avalanchego'
     metrics_path: '/ext/metrics'
     static_configs:
@@ -253,7 +346,9 @@ Do `sudo nano /etc/prometheus/prometheus.yml` \(or open that file in the text ed
 
 Save the config file and restart Prometheus:
 
-`sudo systemctl restart prometheus`
+```cpp
+sudo systemctl restart prometheus
+```
 
 Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
 
