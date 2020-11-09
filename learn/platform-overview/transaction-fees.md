@@ -12,7 +12,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
-```text
+```cpp
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
 +----------+-------------------+------------------------+
