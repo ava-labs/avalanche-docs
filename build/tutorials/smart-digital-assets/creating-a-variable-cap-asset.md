@@ -21,7 +21,7 @@ Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.c
 
 The signature for this method is:
 
-```text
+```cpp
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
@@ -58,7 +58,7 @@ avm.createVariableCapAsset({
 
 Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -92,7 +92,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -116,7 +116,7 @@ We’ll use [`avm.mint`](../../apis/exchange-chain-x-chain-api.md#avm-mint) to m
 * `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
 * `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -133,7 +133,7 @@ curl -X POST --data '{
 
 The response contains the transaction’s ID:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -146,7 +146,7 @@ The response contains the transaction’s ID:
 
 We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -159,7 +159,7 @@ curl -X POST --data '{
 
 This should give:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -175,7 +175,7 @@ This should give:
 
 All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -189,7 +189,7 @@ curl -X POST --data '{
 
 The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -203,7 +203,7 @@ The response confirms that our asset creation was successful and that the expect
 
 Let’s send 100 shares to another address by using [`avm.send`](../../apis/exchange-chain-x-chain-api.md#avm-send). To do so:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -220,7 +220,7 @@ curl -X POST --data '{
 
 Let’s check the balances of the `to` address:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -234,7 +234,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
