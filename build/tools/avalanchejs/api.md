@@ -67,7 +67,7 @@
   * [HelperFunctions](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_helperfunctions.md)
   * [Payload](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_payload.md)
   * [PersistanceOptions](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_persistanceoptions.md)
-  * [Serialization](modules/utils_serialization.md)
+  * [Serialization](https://github.com/ava-labs/avalanche-docs/tree/b83c3e6db3b0533226c84cd38245acfa80fb8c66/build/tools/avalanchejs/modules/utils_serialization.md)
 
 #### Source Directory
 
