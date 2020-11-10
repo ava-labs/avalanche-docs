@@ -20,4 +20,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/common/credentials.ts:15](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/credentials.ts#L15)*
+*Defined in [src/common/credentials.ts:15](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/credentials.ts#L15)*

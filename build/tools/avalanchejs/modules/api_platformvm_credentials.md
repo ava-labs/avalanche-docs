@@ -22,7 +22,7 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/credentials.ts:15](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/credentials.ts#L15)*
+*Defined in [src/apis/platformvm/credentials.ts:15](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/credentials.ts#L15)*
 
 ## Functions
 
@@ -30,7 +30,7 @@
 
 ▸ **SelectCredentialClass**(`credid`: number, ...`args`: Array‹any›): *[Credential](../classes/common_signature.credential.md)*
 
-*Defined in [src/apis/platformvm/credentials.ts:24](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/credentials.ts#L24)*
+*Defined in [src/apis/platformvm/credentials.ts:24](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/credentials.ts#L24)*
 
 Takes a buffer representing the credential and returns the proper [Credential](../classes/common_signature.credential.md) instance.
 

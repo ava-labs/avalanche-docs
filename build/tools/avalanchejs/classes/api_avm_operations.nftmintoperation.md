@@ -50,7 +50,7 @@ An [Operation](api_avm_operations.operation.md) class which specifies a NFT Mint
 
 \+ **new NFTMintOperation**(`groupID`: number, `payload`: Buffer, `outputOwners`: Array‹[OutputOwners](common_output.outputowners.md)›): *[NFTMintOperation](api_avm_operations.nftmintoperation.md)*
 
-*Defined in [src/apis/avm/ops.ts:497](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L497)*
+*Defined in [src/apis/avm/ops.ts:497](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L497)*
 
 An [Operation](api_avm_operations.operation.md) class which contains an NFT on an assetID.
 
@@ -72,7 +72,7 @@ Name | Type | Default | Description |
 
 *Overrides [Operation](api_avm_operations.operation.md).[_typeID](api_avm_operations.operation.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/ops.ts:370](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L370)*
+*Defined in [src/apis/avm/ops.ts:370](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L370)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[_typeName](api_avm_operations.operation.md#protected-_typename)*
 
-*Defined in [src/apis/avm/ops.ts:369](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L369)*
+*Defined in [src/apis/avm/ops.ts:369](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L369)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **groupID**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/apis/avm/ops.ts:394](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L394)*
+*Defined in [src/apis/avm/ops.ts:394](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L394)*
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • **outputOwners**: *Array‹[OutputOwners](common_output.outputowners.md)›* = []
 
-*Defined in [src/apis/avm/ops.ts:396](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L396)*
+*Defined in [src/apis/avm/ops.ts:396](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L396)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 • **payload**: *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:395](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L395)*
+*Defined in [src/apis/avm/ops.ts:395](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L395)*
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 *Inherited from [Operation](api_avm_operations.operation.md).[sigCount](api_avm_operations.operation.md#protected-sigcount)*
 
-*Defined in [src/apis/avm/ops.ts:61](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L61)*
+*Defined in [src/apis/avm/ops.ts:61](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L61)*
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 *Inherited from [Operation](api_avm_operations.operation.md).[sigIdxs](api_avm_operations.operation.md#protected-sigidxs)*
 
-*Defined in [src/apis/avm/ops.ts:62](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L62)*
+*Defined in [src/apis/avm/ops.ts:62](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L62)*
 
 ## Methods
 
@@ -136,7 +136,7 @@ ___
 
 *Inherited from [Operation](api_avm_operations.operation.md).[addSignatureIdx](api_avm_operations.operation.md#addsignatureidx)*
 
-*Defined in [src/apis/avm/ops.ts:96](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L96)*
+*Defined in [src/apis/avm/ops.ts:96](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L96)*
 
 Creates and adds a [SigIdx](common_signature.sigidx.md) to the [Operation](api_avm_operations.operation.md).
 
@@ -157,7 +157,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[deserialize](api_avm_operations.operation.md#deserialize)*
 
-*Defined in [src/apis/avm/ops.ts:381](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L381)*
+*Defined in [src/apis/avm/ops.ts:381](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L381)*
 
 **Parameters:**
 
@@ -176,7 +176,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[fromBuffer](api_avm_operations.operation.md#frombuffer)*
 
-*Defined in [src/apis/avm/ops.ts:438](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L438)*
+*Defined in [src/apis/avm/ops.ts:438](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L438)*
 
 Popuates the instance from a [Buffer](https://github.com/feross/buffer) representing the [NFTMintOperation](api_avm_operations.nftmintoperation.md) and returns the updated offset.
 
@@ -197,7 +197,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[getCredentialID](api_avm_operations.operation.md#abstract-getcredentialid)*
 
-*Defined in [src/apis/avm/ops.ts:408](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L408)*
+*Defined in [src/apis/avm/ops.ts:408](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L408)*
 
 Returns the credential ID.
 
@@ -211,7 +211,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[getOperationID](api_avm_operations.operation.md#abstract-getoperationid)*
 
-*Defined in [src/apis/avm/ops.ts:401](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L401)*
+*Defined in [src/apis/avm/ops.ts:401](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L401)*
 
 Returns the operation ID.
 
@@ -223,7 +223,7 @@ ___
 
 ▸ **getOutputOwners**(): *Array‹[OutputOwners](common_output.outputowners.md)›*
 
-*Defined in [src/apis/avm/ops.ts:431](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L431)*
+*Defined in [src/apis/avm/ops.ts:431](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L431)*
 
 Returns the outputOwners.
 
@@ -235,7 +235,7 @@ ___
 
 ▸ **getPayload**(): *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:415](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L415)*
+*Defined in [src/apis/avm/ops.ts:415](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L415)*
 
 Returns the payload.
 
@@ -247,7 +247,7 @@ ___
 
 ▸ **getPayloadBuffer**(): *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:422](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L422)*
+*Defined in [src/apis/avm/ops.ts:422](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L422)*
 
 Returns the payload's raw [Buffer](https://github.com/feross/buffer) with length prepended, for use with [PayloadBase](utils_payload.payloadbase.md)'s fromBuffer
 
@@ -261,7 +261,7 @@ ___
 
 *Inherited from [Operation](api_avm_operations.operation.md).[getSigIdxs](api_avm_operations.operation.md#getsigidxs)*
 
-*Defined in [src/apis/avm/ops.ts:83](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L83)*
+*Defined in [src/apis/avm/ops.ts:83](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L83)*
 
 Returns the array of [SigIdx](common_signature.sigidx.md) for this [Operation](api_avm_operations.operation.md)
 
@@ -275,7 +275,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -289,7 +289,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -303,7 +303,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[serialize](api_avm_operations.operation.md#serialize)*
 
-*Defined in [src/apis/avm/ops.ts:372](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L372)*
+*Defined in [src/apis/avm/ops.ts:372](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L372)*
 
 **Parameters:**
 
@@ -321,7 +321,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[toBuffer](api_avm_operations.operation.md#tobuffer)*
 
-*Defined in [src/apis/avm/ops.ts:460](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L460)*
+*Defined in [src/apis/avm/ops.ts:460](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L460)*
 
 Returns the buffer representing the [NFTMintOperation](api_avm_operations.nftmintoperation.md) instance.
 
@@ -335,7 +335,7 @@ ___
 
 *Overrides [Operation](api_avm_operations.operation.md).[toString](api_avm_operations.operation.md#tostring)*
 
-*Defined in [src/apis/avm/ops.ts:495](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L495)*
+*Defined in [src/apis/avm/ops.ts:495](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L495)*
 
 Returns a base-58 string representing the [NFTMintOperation](api_avm_operations.nftmintoperation.md).
 
@@ -349,7 +349,7 @@ ___
 
 *Inherited from [Operation](api_avm_operations.operation.md).[comparator](api_avm_operations.operation.md#static-comparator)*
 
-*Defined in [src/apis/avm/ops.ts:64](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/ops.ts#L64)*
+*Defined in [src/apis/avm/ops.ts:64](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L64)*
 
 **Returns:** *function*
 

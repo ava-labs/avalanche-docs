@@ -20,4 +20,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/utxos.ts:28](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/utxos.ts#L28)*
+*Defined in [src/apis/platformvm/utxos.ts:28](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L28)*

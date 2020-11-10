@@ -54,7 +54,7 @@
 
 *Inherited from [StandardAmountInput](common_inputs.standardamountinput.md).[constructor](common_inputs.standardamountinput.md#constructor)*
 
-*Defined in [src/common/input.ts:311](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L311)*
+*Defined in [src/common/input.ts:311](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L311)*
 
 An [AmountInput](api_platformvm_inputs.amountinput.md) class which issues a payment on an assetID.
 
@@ -74,7 +74,7 @@ Name | Type | Default | Description |
 
 *Overrides [StandardAmountInput](common_inputs.standardamountinput.md).[_typeID](common_inputs.standardamountinput.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/inputs.ts:91](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/inputs.ts#L91)*
+*Defined in [src/apis/platformvm/inputs.ts:91](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/inputs.ts#L91)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 *Overrides [StandardAmountInput](common_inputs.standardamountinput.md).[_typeName](common_inputs.standardamountinput.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/inputs.ts:90](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/inputs.ts#L90)*
+*Defined in [src/apis/platformvm/inputs.ts:90](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/inputs.ts#L90)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [StandardAmountInput](common_inputs.standardamountinput.md).[amount](common_inputs.standardamountinput.md#protected-amount)*
 
-*Defined in [src/common/input.ts:285](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L285)*
+*Defined in [src/common/input.ts:285](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L285)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 *Inherited from [StandardAmountInput](common_inputs.standardamountinput.md).[amountValue](common_inputs.standardamountinput.md#protected-amountvalue)*
 
-*Defined in [src/common/input.ts:286](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L286)*
+*Defined in [src/common/input.ts:286](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L286)*
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[sigCount](common_inputs.input.md#protected-sigcount)*
 
-*Defined in [src/common/input.ts:38](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L38)*
+*Defined in [src/common/input.ts:38](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L38)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[sigIdxs](common_inputs.input.md#protected-sigidxs)*
 
-*Defined in [src/common/input.ts:39](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L39)*
+*Defined in [src/common/input.ts:39](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L39)*
 
 ## Methods
 
@@ -134,7 +134,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[addSignatureIdx](common_inputs.input.md#addsignatureidx)*
 
-*Defined in [src/common/input.ts:70](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L70)*
+*Defined in [src/common/input.ts:70](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L70)*
 
 Creates and adds a [SigIdx](common_signature.sigidx.md) to the [Input](common_inputs.input.md).
 
@@ -155,7 +155,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[clone](common_inputs.input.md#abstract-clone)*
 
-*Defined in [src/common/input.ts:114](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L114)*
+*Defined in [src/common/input.ts:114](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L114)*
 
 **Returns:** *this*
 
@@ -167,7 +167,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[create](common_inputs.input.md#abstract-create)*
 
-*Defined in [src/common/input.ts:116](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L116)*
+*Defined in [src/common/input.ts:116](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L116)*
 
 **Parameters:**
 
@@ -187,7 +187,7 @@ ___
 
 *Overrides [Input](common_inputs.input.md).[deserialize](common_inputs.input.md#deserialize)*
 
-*Defined in [src/common/input.ts:279](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L279)*
+*Defined in [src/common/input.ts:279](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L279)*
 
 **Parameters:**
 
@@ -208,7 +208,7 @@ ___
 
 *Overrides [Input](common_inputs.input.md).[fromBuffer](common_inputs.input.md#frombuffer)*
 
-*Defined in [src/common/input.ts:296](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L296)*
+*Defined in [src/common/input.ts:296](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L296)*
 
 Popuates the instance from a [Buffer](https://github.com/feross/buffer) representing the [AmountInput](api_platformvm_inputs.amountinput.md) and returns the size of the input.
 
@@ -229,7 +229,7 @@ ___
 
 *Inherited from [StandardAmountInput](common_inputs.standardamountinput.md).[getAmount](common_inputs.standardamountinput.md#getamount)*
 
-*Defined in [src/common/input.ts:291](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L291)*
+*Defined in [src/common/input.ts:291](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L291)*
 
 Returns the amount as a [BN](https://github.com/indutny/bn.js/).
 
@@ -243,7 +243,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[getCredentialID](common_inputs.input.md#abstract-getcredentialid)*
 
-*Defined in [src/common/input.ts:62](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L62)*
+*Defined in [src/common/input.ts:62](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L62)*
 
 **Returns:** *number*
 
@@ -255,7 +255,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[getInputID](common_inputs.input.md#abstract-getinputid)*
 
-*Defined in [src/common/input.ts:55](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L55)*
+*Defined in [src/common/input.ts:55](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L55)*
 
 **Returns:** *number*
 
@@ -267,7 +267,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[getSigIdxs](common_inputs.input.md#getsigidxs)*
 
-*Defined in [src/common/input.ts:60](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L60)*
+*Defined in [src/common/input.ts:60](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L60)*
 
 Returns the array of [SigIdx](common_signature.sigidx.md) for this [Input](common_inputs.input.md)
 
@@ -281,7 +281,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -295,7 +295,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -309,7 +309,7 @@ ___
 
 *Overrides [Input](common_inputs.input.md).[select](common_inputs.input.md#abstract-select)*
 
-*Defined in [src/apis/platformvm/inputs.ts:95](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/platformvm/inputs.ts#L95)*
+*Defined in [src/apis/platformvm/inputs.ts:95](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/inputs.ts#L95)*
 
 **Parameters:**
 
@@ -330,7 +330,7 @@ ___
 
 *Overrides [Input](common_inputs.input.md).[serialize](common_inputs.input.md#serialize)*
 
-*Defined in [src/common/input.ts:272](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L272)*
+*Defined in [src/common/input.ts:272](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L272)*
 
 **Parameters:**
 
@@ -350,7 +350,7 @@ ___
 
 *Overrides [Input](common_inputs.input.md).[toBuffer](common_inputs.input.md#tobuffer)*
 
-*Defined in [src/common/input.ts:306](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L306)*
+*Defined in [src/common/input.ts:306](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L306)*
 
 Returns the buffer representing the [AmountInput](api_platformvm_inputs.amountinput.md) instance.
 
@@ -364,7 +364,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[toString](common_inputs.input.md#tostring)*
 
-*Defined in [src/common/input.ts:110](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L110)*
+*Defined in [src/common/input.ts:110](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L110)*
 
 Returns a base-58 representation of the [Input](common_inputs.input.md).
 
@@ -378,7 +378,7 @@ ___
 
 *Inherited from [Input](common_inputs.input.md).[comparator](common_inputs.input.md#static-comparator)*
 
-*Defined in [src/common/input.ts:41](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/input.ts#L41)*
+*Defined in [src/common/input.ts:41](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/input.ts#L41)*
 
 **Returns:** *function*
 

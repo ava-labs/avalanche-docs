@@ -49,7 +49,7 @@ Class for representing a private and public keypair on the Platform Chain.
 
 \+ **new SECP256k1KeyPair**(): *[SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md)*
 
-*Defined in [src/common/secp256k1.ts:182](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L182)*
+*Defined in [src/common/secp256k1.ts:182](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L182)*
 
 Class for representing a private and public keypair in Avalanche PlatformVM.
 
@@ -63,7 +63,7 @@ Class for representing a private and public keypair in Avalanche PlatformVM.
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getAddressString](common_keychain.standardkeypair.md#getaddressstring)*
 
-*Defined in [src/common/secp256k1.ts:98](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L98)*
+*Defined in [src/common/secp256k1.ts:98](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L98)*
 
 Returns the address's string representation.
 
@@ -79,7 +79,7 @@ ___
 
 • **keypair**: *elliptic.ec.KeyPair*
 
-*Defined in [src/common/secp256k1.ts:41](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L41)*
+*Defined in [src/common/secp256k1.ts:41](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L41)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[privk](common_keychain.standardkeypair.md#protected-privk)*
 
-*Defined in [src/common/keychain.ts:14](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L14)*
+*Defined in [src/common/keychain.ts:14](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L14)*
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[pubk](common_keychain.standardkeypair.md#protected-pubk)*
 
-*Defined in [src/common/keychain.ts:13](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L13)*
+*Defined in [src/common/keychain.ts:13](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L13)*
 
 ## Methods
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **addressFromPublicKey**(`pubk`: Buffer): *Buffer*
 
-*Defined in [src/common/secp256k1.ts:107](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L107)*
+*Defined in [src/common/secp256k1.ts:107](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L107)*
 
 Returns an address given a public key.
 
@@ -129,7 +129,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[clone](common_keychain.standardkeypair.md#abstract-clone)*
 
-*Defined in [src/common/keychain.ts:108](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L108)*
+*Defined in [src/common/keychain.ts:108](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L108)*
 
 **Returns:** *this*
 
@@ -141,7 +141,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[create](common_keychain.standardkeypair.md#abstract-create)*
 
-*Defined in [src/common/keychain.ts:106](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L106)*
+*Defined in [src/common/keychain.ts:106](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L106)*
 
 **Parameters:**
 
@@ -159,7 +159,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[generateKey](common_keychain.standardkeypair.md#generatekey)*
 
-*Defined in [src/common/secp256k1.ts:61](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L61)*
+*Defined in [src/common/secp256k1.ts:61](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L61)*
 
 Generates a new keypair.
 
@@ -173,7 +173,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getAddress](common_keychain.standardkeypair.md#getaddress)*
 
-*Defined in [src/common/secp256k1.ts:89](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L89)*
+*Defined in [src/common/secp256k1.ts:89](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L89)*
 
 Returns the address as a [Buffer](https://github.com/feross/buffer).
 
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[getPrivateKey](common_keychain.standardkeypair.md#getprivatekey)*
 
-*Defined in [src/common/keychain.ts:69](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L69)*
+*Defined in [src/common/keychain.ts:69](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L69)*
 
 Returns a reference to the private key.
 
@@ -205,7 +205,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPrivateKeyString](common_keychain.standardkeypair.md#getprivatekeystring)*
 
-*Defined in [src/common/secp256k1.ts:126](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L126)*
+*Defined in [src/common/secp256k1.ts:126](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L126)*
 
 Returns a string representation of the private key.
 
@@ -221,7 +221,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[getPublicKey](common_keychain.standardkeypair.md#getpublickey)*
 
-*Defined in [src/common/keychain.ts:76](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/keychain.ts#L76)*
+*Defined in [src/common/keychain.ts:76](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/keychain.ts#L76)*
 
 Returns a reference to the public key.
 
@@ -237,7 +237,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPublicKeyString](common_keychain.standardkeypair.md#getpublickeystring)*
 
-*Defined in [src/common/secp256k1.ts:135](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L135)*
+*Defined in [src/common/secp256k1.ts:135](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L135)*
 
 Returns the public key.
 
@@ -253,7 +253,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[importKey](common_keychain.standardkeypair.md#importkey)*
 
-*Defined in [src/common/secp256k1.ts:76](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L76)*
+*Defined in [src/common/secp256k1.ts:76](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L76)*
 
 Imports a private key and generates the appropriate public key.
 
@@ -275,7 +275,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[recover](common_keychain.standardkeypair.md#recover)*
 
-*Defined in [src/common/secp256k1.ts:178](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L178)*
+*Defined in [src/common/secp256k1.ts:178](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L178)*
 
 Recovers the public key of a message signer from a message and its associated signature.
 
@@ -298,7 +298,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[sign](common_keychain.standardkeypair.md#sign)*
 
-*Defined in [src/common/secp256k1.ts:147](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L147)*
+*Defined in [src/common/secp256k1.ts:147](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L147)*
 
 Takes a message, signs it, and returns the signature.
 
@@ -320,7 +320,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[verify](common_keychain.standardkeypair.md#verify)*
 
-*Defined in [src/common/secp256k1.ts:165](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/common/secp256k1.ts#L165)*
+*Defined in [src/common/secp256k1.ts:165](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/secp256k1.ts#L165)*
 
 Verifies that the private key associated with the provided public key produces the signature associated with the given message.
 

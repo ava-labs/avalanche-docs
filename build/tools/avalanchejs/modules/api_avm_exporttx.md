@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/exporttx.ts:20](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/apis/avm/exporttx.ts#L20)*
+*Defined in [src/apis/avm/exporttx.ts:20](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/exporttx.ts#L20)*

@@ -33,7 +33,7 @@
 
 \+ **new Serialization**(): *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L83)*
+*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L83)*
 
 **Returns:** *[Serialization](utils_serialization.serialization.md)*
 
@@ -43,7 +43,7 @@
 
 • **bintools**: *[BinTools](utils_bintools.bintools.md)*
 
-*Defined in [src/utils/serialization.ts:88](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L88)*
+*Defined in [src/utils/serialization.ts:88](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L88)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 ▪ **instance**: *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L83)*
+*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L83)*
 
 ## Methods
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **bufferToType**(`vb`: Buffer, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *any*
 
-*Defined in [src/utils/serialization.ts:100](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L100)*
+*Defined in [src/utils/serialization.ts:100](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L100)*
 
 **Parameters:**
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **decoder**(`value`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *any*
 
-*Defined in [src/utils/serialization.ts:193](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L193)*
+*Defined in [src/utils/serialization.ts:193](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L193)*
 
 **Parameters:**
 
@@ -97,7 +97,7 @@ ___
 
 ▸ **deserialize**(`input`: object, `output`: [Serializable](utils_serialization.serializable.md)): *void*
 
-*Defined in [src/utils/serialization.ts:217](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L217)*
+*Defined in [src/utils/serialization.ts:217](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L217)*
 
 **Parameters:**
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **encoder**(`value`: any, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *string*
 
-*Defined in [src/utils/serialization.ts:181](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L181)*
+*Defined in [src/utils/serialization.ts:181](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L181)*
 
 **Parameters:**
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **serialize**(`serialize`: [Serializable](utils_serialization.serializable.md), `vm`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `notes`: string): *object*
 
-*Defined in [src/utils/serialization.ts:204](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L204)*
+*Defined in [src/utils/serialization.ts:204](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L204)*
 
 **Parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **typeToBuffer**(`v`: any, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *Buffer*
 
-*Defined in [src/utils/serialization.ts:132](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L132)*
+*Defined in [src/utils/serialization.ts:132](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L132)*
 
 **Parameters:**
 
@@ -171,7 +171,7 @@ ___
 
 ▸ **getInstance**(): *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:93](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L93)*
+*Defined in [src/utils/serialization.ts:93](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L93)*
 
 Retrieves the Serialization singleton.
 

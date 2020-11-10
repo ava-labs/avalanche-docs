@@ -56,7 +56,7 @@
 
 • **_typeID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L40)*
+*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L40)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **_typeName**: *string* = undefined
 
-*Defined in [src/utils/serialization.ts:39](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L39)*
+*Defined in [src/utils/serialization.ts:39](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L39)*
 
 ## Methods
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **deserialize**(`fields`: object, `encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *void*
 
-*Defined in [src/utils/serialization.ts:64](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L64)*
+*Defined in [src/utils/serialization.ts:64](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L64)*
 
 **Parameters:**
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **getTypeID**(): *number*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **getTypeName**(): *string*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **serialize**(`encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *object*
 
-*Defined in [src/utils/serialization.ts:58](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/serialization.ts#L58)*
+*Defined in [src/utils/serialization.ts:58](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L58)*
 
 **Parameters:**
 

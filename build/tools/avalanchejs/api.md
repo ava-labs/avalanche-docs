@@ -1,8 +1,8 @@
 # API
 
-[avalanche - v3.0.3](./)
+[avalanche - v3.0.4](./)
 
-## AvalancheJS - v3.0.3
+## AvalancheJS - v3.0.4
 
 ### Index
 
@@ -67,6 +67,7 @@
   * [HelperFunctions](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_helperfunctions.md)
   * [Payload](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_payload.md)
   * [PersistanceOptions](https://github.com/ava-labs/avalanche-docs/tree/5a57daadd2cb95fcbf3fd29ac7e57eb4b93e115f/build/tools/avalanchejs/modules/utils_persistanceoptions.md)
+  * [Serialization](modules/utils_serialization.md)
 
 #### Source Directory
 

@@ -18,11 +18,11 @@
 
 ### ▪ **network**: *object*
 
-*Defined in [src/utils/constants.ts:305](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L305)*
+*Defined in [src/utils/constants.ts:305](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L305)*
 
 ▪ **0**: *object*
 
-*Defined in [src/utils/constants.ts:306](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L306)*
+*Defined in [src/utils/constants.ts:306](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L306)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n0P
 
@@ -40,7 +40,7 @@
 
 ▪ **1**: *object*
 
-*Defined in [src/utils/constants.ts:315](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L315)*
+*Defined in [src/utils/constants.ts:315](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L315)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n1P
 
@@ -58,7 +58,7 @@
 
 ▪ **12345**: *object*
 
-*Defined in [src/utils/constants.ts:360](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L360)*
+*Defined in [src/utils/constants.ts:360](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L360)*
 
 * **11111111111111111111111111111111LpoYY**: *any* = n12345P
 
@@ -76,7 +76,7 @@
 
 ▪ **2**: *object*
 
-*Defined in [src/utils/constants.ts:324](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L324)*
+*Defined in [src/utils/constants.ts:324](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L324)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n2P
 
@@ -94,7 +94,7 @@
 
 ▪ **3**: *object*
 
-*Defined in [src/utils/constants.ts:333](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L333)*
+*Defined in [src/utils/constants.ts:333](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L333)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n3P
 
@@ -112,7 +112,7 @@
 
 ▪ **4**: *object*
 
-*Defined in [src/utils/constants.ts:342](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L342)*
+*Defined in [src/utils/constants.ts:342](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L342)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n4P
 
@@ -130,7 +130,7 @@
 
 ▪ **5**: *object*
 
-*Defined in [src/utils/constants.ts:351](https://github.com/ava-labs/avalanchejs/blob/87820e3/src/utils/constants.ts#L351)*
+*Defined in [src/utils/constants.ts:351](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/constants.ts#L351)*
 
 * **11111111111111111111111111111111LpoYY**: *object* = n5P
 
