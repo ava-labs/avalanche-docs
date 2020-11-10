@@ -14,6 +14,8 @@
 
 [**Twitter**](https://twitter.com/avalancheavax): the official Avalanche Twitter for all major news and updates regarding Avalanche and its ecosystem.
 
+[**Forum**](https://forum.avax.network): the official Avalanche Forum for technical discussions related to Avalanche and its community
+
 [**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): a community growth platform building an inclusive environment for all aspects of Avalanche. From expansion efforts to open-source development, members directly contribute to vital research, education, and engineering initiatives to earn AVAX tokens.
 
 [**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
