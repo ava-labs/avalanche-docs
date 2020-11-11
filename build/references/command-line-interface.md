@@ -4,6 +4,28 @@ When running a node, there are a variety of possible configurations that are sup
 
 ## Arguments
 
+
+### Config File
+
+`--config-file` \(string\):
+
+Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+
+```
+./build/avalanchego --config-file=config.json
+```
+
+config.json file:
+
+```json
+{
+    "plugin-dir": "/home/ubuntu/avalanchego/plugins",
+    "log-level": "debug"
+}
+```
+
+### APIs
+
 `--api-admin-enabled` \(boolean\):
 
 If set to `false`, this node will not expose the Admin API. Defaults to `false`.
@@ -36,9 +58,13 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`.
 
+### Assertions
+
 `--assertions-enabled` \(boolean\):
 
 When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+
+### Bootstrapping
 
 `--bootstrap-ids` \(string\):
 
@@ -48,6 +74,8 @@ Bootstrap IDs is an array of validator IDs. These IDs will be used to authentica
 
 Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
+### Connection Metering
+
 `--conn-meter-max-conns` \(int\):
 
 Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
@@ -56,6 +84,8 @@ Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-met
 
 Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
 
+### Database
+
 `--db-dir` \(string, file path\):
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
@@ -63,6 +93,8 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 `--db-enabled` \(boolean\):
 
 If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+
+### HTTP Server
 
 `--http-host` \(string\):
 
@@ -84,6 +116,8 @@ If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Def
 
 This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
 
+### IPCS
+
 `--ipcs-chain-ids` \(string\)
 
 Comma separated list of chain ids to connect to. There is no default value.
@@ -92,9 +126,13 @@ Comma separated list of chain ids to connect to. There is no default value.
 
 The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
 
+### File Descriptor Limit
+
 `--fd-limit` \(int\)
 
 Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+
+### Logging
 
 `--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
@@ -122,6 +160,8 @@ Whether to color/highlight display logs. Default highlights when the output is a
 
 Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
 
+### Network ID
+
 `--network-id` \(string\):
 
 The identity of the network the node should connect to. Can be one of:
@@ -131,6 +171,8 @@ The identity of the network the node should connect to. Can be one of:
 * `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
 * `--network-id=local` -&gt; Connect to a local test-network.
 * `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+
+### Public IP
 
 `--public-ip` \(string\):
 
@@ -144,13 +186,13 @@ Valid values if param is present: `ifconfig` or `opendns`. This overrides `--pub
 
 The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
 
-`--plugin-dir` \(string, file path\):
-
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+### Signature Verification
 
 `--signature-verification-enabled` \(boolean\):
 
 Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+
+### Staking
 
 `--staking-port` \(string\):
 
@@ -176,6 +218,8 @@ Avalanche uses two-way authenticated TLS connections to securely identify the `s
 
 Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
+### Version
+
 `--version` \(boolean\)
 
 If this is `true`, print the version and quit. Defaults to `false`.
@@ -183,6 +227,8 @@ If this is `true`, print the version and quit. Defaults to `false`.
 ## Advanced Options
 
 The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+
+### Benchlist
 
 `--benchlist-duration` \(duration\):
 
@@ -199,6 +245,8 @@ Enables peer specific query latency metrics. Defaults to `false`.
 `--benchlist-min-failing-duration` \(duration\):
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+
+### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
 
@@ -232,10 +280,6 @@ The minimum stake, in nAVAX, required to validate the Primary Network.
 
 Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(5 x 10^-3 AVAX\) on Test Net.
 
-`--max-non-staker-pending-msgs` \(int\):
-
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
-
 `--max-stake-duration` \(duration\):
 
 The maximum staking duration, in seconds. Defaults to `8760h` \(365 days \* 24 hours\) on Main Net.
@@ -243,26 +287,6 @@ The maximum staking duration, in seconds. Defaults to `8760h` \(365 days \* 24 h
 `--max-validator-stake` \(int\):
 
 The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net.
-
-`--network-initial-timeout` \(duration\):
-
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
-
-`--network-minimum-timeout` \(duration\):
-
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
-
-`--network-maximum-timeout` \(duration\):
-
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
-
-`--network-timeout-multiplier` \(float\):
-
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
-
-`--network-timeout-reduction` \(duration\):
-
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
 
 `--snow-avalanche-batch-size` \(int\):
 
@@ -294,15 +318,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days \* 24 hours\).
-
-`--staker-msg-reserved` \(float\):
-
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
-
-`--staker-cpu-reserved` \(float\):
-
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days * 24 hours\).
 
 `--tx-fee` \(int\):
 
@@ -312,6 +328,44 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
+### Message Handling
+
+`--max-non-staker-pending-msgs` \(int\):
+
+Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+
+`--staker-msg-reserved` \(float\):
+
+Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+
+`--staker-cpu-reserved` \(float\):
+
+Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+
+### Network Timeout
+
+`--network-initial-timeout` \(duration\):
+
+Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+
+`--network-minimum-timeout` \(duration\):
+
+Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+
+`--network-maximum-timeout` \(duration\):
+
+Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+
+`--network-timeout-multiplier` \(float\):
+
+Multiplier of the timeout after a failed request. Defaults to `1.1`.
+
+`--network-timeout-reduction` \(duration\):
+
+Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
+
+### Throughput Server
+
 `--xput-server-enabled` \[Deprecated\] \(boolean\):
 
 An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
@@ -320,7 +374,73 @@ An optional server helps run throughput tests by injecting load into the network
 
 This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
 
+### Subnet Whitelist
+
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
+
+### Plugins
+
+`--plugin-dir` \(string, file path\):
+
+Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+
+`--coreth-config` \(json\):
+
+This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
+
+```json
+{
+    "snowman-api-enabled": false,
+    "coreth-admin-api-enabled": false,
+    "net-api-enabled": true,
+    "rpc-gas-cap": 2500000000,
+    "rpc-tx-fee-cap": 100,
+    "eth-api-enabled": true,
+    "personal-api-enabled": true,
+    "tx-pool-api-enabled": true,
+    "debug-api-enabled": false,
+    "web3-api-enabled": true
+}
+```
+
+Note: if a config is specified, all default options are overridden. For example:
+
+```
+./build/avalanchego --config-file=config.json
+```
+
+config.json:
+
+```json
+{
+    "coreth-config": {
+        "snowman-api-enabled": false,
+        "coreth-admin-api-enabled": false,
+        "net-api-enabled": true,
+        "rpc-gas-cap": 2500000000,
+        "rpc-tx-fee-cap": 100,
+        "eth-api-enabled": true,
+        "tx-pool-api-enabled": true,
+        "debug-api-enabled": true,
+        "web3-api-enabled": true
+    }
+}
+```
+
+Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+
+The options specify parameters for Coreth \(the C Chain\) as follows:
+
+* `snowman-api-enabled` -&gt; Enables Snowman API.
+* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
+* `net-api-enabled` -&gt; Enables `net_*` API.
+* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
+* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price * gaslimit\) cap for send-transction variants. The unit is AVAX.
+* `eth-api-enabled` -&gt; Enables `eth_*` API.
+* `personal-api-enabled` -&gt; Enables `personal_*` API.
+* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
+* `debug-api-enabled` -&gt; Enables `debug_*` API.
+* `web3-api-enabled` -&gt; Enables `web3_*` API.
