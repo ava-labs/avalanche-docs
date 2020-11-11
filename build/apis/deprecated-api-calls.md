@@ -6,10 +6,6 @@ description: >-
 
 # Deprecated API Calls
 
-
-
-### X-Chain API
-
 ### P-Chain API
 
 #### `getCurrentValidators`
