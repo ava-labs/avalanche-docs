@@ -34,6 +34,7 @@
     * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
 * [APIs](build/apis/README.md)
+  * [Deprecated API Calls](build/apis/deprecated-api-calls.md)
   * [Issuing API Calls](build/apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/apis/platform-chain-p-chain-api.md)
   * [Contract Chain \(C-Chain\) API](build/apis/contract-chain-c-chain-api.md)
