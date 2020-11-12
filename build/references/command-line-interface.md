@@ -257,35 +257,35 @@ Timeout before killing an unresponsive chain. Defaults to `5s`.
 
 `--creation-tx-fee` \(int\):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX per transaction.
+Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX \(.001 AVAX\) per transaction.
 
 `--min-delegator-stake` \(int\):
 
-The minimum stake that can be delegated to a validator of the Primary Network.
+The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(5 x 10^-3 AVAX\) on Test Net.
+Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
 
 `--min-delegation-fee` \(int\):
 
-The minimum delegation fee, in the range \[0, 1000000\], that can be charged for delegation on the Primary Network. Defaults to `20000` \(2%\) on Main Net.
+The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
 
 `--min-stake-duration` \(duration\):
 
-Minimum staking duration. The Default on Main Net is `24h`.
+Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
 
 `--min-validator-stake` \(int\):
 
 The minimum stake, in nAVAX, required to validate the Primary Network.
 
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(5 x 10^-3 AVAX\) on Test Net.
+Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days \* 24 hours\) on Main Net.
+The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
 
 `--max-validator-stake` \(int\):
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net.
+The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
 
 `--snow-avalanche-batch-size` \(int\):
 
@@ -317,7 +317,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days \* 24 hours\).
+Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
 
 `--tx-fee` \(int\):
 
