@@ -41,7 +41,336 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 To interact with the `avax` specific RPC calls
 
 ```text
-/ext/bc/C/ava
+/ext/bc/C/avax
+```
+
+## AVAX RPC endpoints
+
+### avax.export
+
+Export an asset from the C-Chain to the X-Chain. After calling this method, you must call `import` on the X-Chain to complete the transfer.
+
+#### Signature
+
+```go
+avax.export({
+    to: string,
+    amount: int,
+    assetID: string,
+    username: string,
+    password:string,
+}) -> {txID: string}
+```
+
+* `to` is the X-Chain address the AVAX is sent to.
+* `amount` is the amount of nAVAX to send.
+* `assetID` is the assetID of the AVAX asset. To export AVAX use `"AVAX"` as the `assetID`.
+* The asset is sent from addresses controlled by `username` and `password`.
+
+#### Example Call
+
+```json
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.export",
+    "params" :{
+        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "amount": 500,
+        "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2W5JuFENitZKTpJsy9igBpTcEeBKxBHHGAUkgsSUnkjVVGQ9i8"
+    },
+    "id": 1
+}
+```
+
+### avax.exportAVAX
+
+**DEPRECATED&mdash;instead use [avax.export](./evm.md#avaxexport)**
+
+Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call `importAVAX` on the X-Chain to complete the transfer.
+
+#### Signature
+
+```go
+avax.exportAVAX({
+    from: string[],
+    to: string,
+    amount: int,
+    destinationChain: string,
+    changeAddr: string,
+    username: string,
+    password:string,
+}) -> {txID: string}
+```
+
+##### Request
+
+* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
+* `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
+* `amount` is the amount of nAVAX to send.
+* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
+* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
+* The AVAX is sent from addresses controlled by `username`
+
+##### Response
+
+* `txID` is the txid of the completed ExportTx.
+
+#### Example Call
+
+```json
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.exportAVAX",
+    "params" :{
+        "from": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"],
+        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "amount": 500,
+        "destinationChain": "X",
+        "changeAddr": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2ffcxdkiKXXA4JdyRoS38dd7zoThkapNPeZuGPmmLBbiuBBHDa"
+    },
+    "id": 1
+}
+```
+
+### avax.exportKey
+
+Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+
+#### Signature
+
+```go
+avax.exportKey({
+    username: string,
+    password:string,
+    address:string
+}) -> {privateKey: string}
+```
+
+##### Request
+
+* `username` must control `address`.
+* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+
+##### Response
+
+* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
+* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account in to Metamask.
+
+#### Example Call
+
+```json
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.exportKey",
+    "params" :{
+        "username" :"myUsername",
+        "password":"myPassword",
+        "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "privateKey": "PrivateKey-2o2uPgTSf3aR5nW6yLHjBEAiatAFKEhApvYzsjvAJKRXVWCYkE",
+        "privateKeyHex": "0xec381fb8d32168be4cf7f8d4ce9d8ca892d77ba574264f3665ad5edb89710157"
+    },
+    "id": 1
+}}
+```
+
+### avax.import
+
+Finalize the transfer of a non-AVAX from the X-Chain to the C-Chain.
+Before this method is called, you must call the X-Chain's [`export`](./avm.md#avmexport) method to initiate the transfer.
+
+#### Signature
+
+```go
+avax.import({
+    to: string,
+    sourceChain: string,
+    assetID: string,
+    username: string,
+    password:string,
+}) -> {txID: string}
+```
+
+##### Request
+
+* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
+* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
+* `assetID` is the assetID of the non-AVAX asset.
+* `username` is the user that controls `to`.
+
+##### Response
+
+* `txID` is the txid of the completed ImportTx.
+
+#### Example Call
+
+```json
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.import",
+    "params" :{
+        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
+        "sourceChain":"X",
+        "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "6bJq9dbqhiQvoshT3uSUbg9oB24n7Ei6MLnxvrdmao78oHR9t"
+    },
+    "id": 1
+}
+```
+
+### avax.importAVAX
+
+**DEPRECATED&mdash;instead use [avax.import](./evm.md#avaximport)**
+
+Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](./avm.md#avmexportavax) method to initiate the transfer.
+
+#### Signature
+
+```go
+avax.importAVAX({
+    to: string,
+    sourceChain: string,
+    username: string,
+    password:string,
+}) -> {txID: string}
+```
+
+##### Request
+
+* `to` is the address the AVAX is sent to. It should be in hex format.
+* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
+* `username` is the user that controls `to`.
+
+##### Response
+
+* `txID` is the txid of the completed ImportTx.
+
+#### Example Call
+
+```json
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.importAVAX",
+    "params" :{
+        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
+        "sourceChain":"X",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
+    },
+    "id": 1
+}
+```
+
+### avax.importKey
+
+Give a user control over an address by providing the private key that controls the address.
+
+#### Signature	
+
+```go
+avax.importKey({
+    username: string,
+    password:string,
+    privateKey:string
+}) -> {address: string}
+```
+
+##### Request
+
+* Add `privateKey` to `username`'s set of private keys.
+
+##### Response
+
+* `address` is the address `username` now controls with the private key. It will be in hex format.
+
+#### Example Call
+
+```json	
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.importKey",
+    "params" :{
+        "username" :"myUsername",
+        "password":"myPassword",
+        "privateKey":"PrivateKey-2o2uPgTSf3aR5nW6yLHjBEAiatAFKEhApvYzsjvAJKRXVWCYkE"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
+    },
+    "id": 1
+}
 ```
 
 ## WebSocket-RPC Endpoints
