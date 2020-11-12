@@ -4,20 +4,19 @@ When running a node, there are a variety of possible configurations that are sup
 
 ## Arguments
 
-
 ### Config File
 
 `--config-file` \(string\):
 
 Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
 
-```
+```text
 ./build/avalanchego --config-file=config.json
 ```
 
 config.json file:
 
-```json
+```javascript
 {
     "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
@@ -318,7 +317,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days * 24 hours\).
+Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days \* 24 hours\).
 
 `--tx-fee` \(int\):
 
@@ -380,7 +379,6 @@ This option lets one specify on which port the throughput server, if enabled, wi
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
-
 ### Plugins
 
 `--plugin-dir` \(string, file path\):
@@ -391,7 +389,7 @@ Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.
 
 This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
 
-```json
+```javascript
 {
     "snowman-api-enabled": false,
     "coreth-admin-api-enabled": false,
@@ -408,13 +406,13 @@ This allows you to specify a config to be passed into Coreth, the VM running the
 
 Note: if a config is specified, all default options are overridden. For example:
 
-```
+```text
 ./build/avalanchego --config-file=config.json
 ```
 
 config.json:
 
-```json
+```javascript
 {
     "coreth-config": {
         "snowman-api-enabled": false,
@@ -438,9 +436,10 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
 * `net-api-enabled` -&gt; Enables `net_*` API.
 * `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price * gaslimit\) cap for send-transction variants. The unit is AVAX.
+* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
 * `eth-api-enabled` -&gt; Enables `eth_*` API.
 * `personal-api-enabled` -&gt; Enables `personal_*` API.
 * `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
 * `debug-api-enabled` -&gt; Enables `debug_*` API.
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
+
