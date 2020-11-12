@@ -179,7 +179,7 @@ Validators must know their public facing IP addresses so they can let other node
 
 `--dynamic-public-ip` \(string\):
 
-Valid values if param is present: `ifconfig` or `opendns`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
 
 `--dynamic-update-duration` \(duration\):
 
