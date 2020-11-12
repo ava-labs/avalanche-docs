@@ -212,6 +212,87 @@ curl -X POST --data '{
 }}
 ```
 
+### avax.getUTXOs
+
+Gets the UTXOs that reference a given address.
+
+#### **Signature**
+
+```text
+avax.getUTXOs(
+    {
+        addresses: string,
+        limit: int, (optional)
+        startIndex: { (optional)
+            address: string,
+            utxo: string
+        },
+        sourceChain: string,
+        encoding: string, (optional)
+    },
+) -> 
+{
+    numFetched: int
+    utxos: []string,
+    endIndex: {
+        address: string,
+        utxo: string
+    }
+}
+```
+
+* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
+* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
+* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
+* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
+* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
+* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+
+#### **Example**
+
+Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getUTXOs",
+    "params" :{
+        "addresses":["C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf"],
+        "sourceChain": "X",
+        "limit": 3,
+        "startIndex": {
+            "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+            "utxo": "22RXW7SWjBrrxu2vzDkd8uza7fuEmNpgbj58CxBob9UbP37HSB"
+        },
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+This gives response:
+
+```text
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "3",
+        "utxos": [
+            "11QEQTor9xZ1TyCyq8aFVShdP7YjM1ug9KuPUuMpgvQVz5qjEzo244NbJomjciNUPqUr1cD455dXhVrVNopnMXTQrTFY5kqrEVAQ3Ng9AnapQrYVEYiWc32F5CQuD3N5sB1EhQmMdJr5pis1QLjMmRQmut7Maafwup1vEU",
+            "11Eo6c9iUz3ERtmHbdUb3nzzMaqFffFQStshEsSTiFQP5xqfmeaeCFHCBajmoJUdQRHtkChGAmPucDfuCyBAEyGmmv2w8b7dX5sATxV7HxHZE4eak14GMGVEr7v3ij1B8mE82cymTJJz1X3PpRk2pTaxwEnLWfh1aAiTFC",
+            "118mpEHsia5sYYvKUx4j56mA7i1yvmLNyynm7LcmehcJJwMVY65smT4kGQgyc9DULwuaLTrUcsqbQutCdajoJXBdPVqvHMkYBTYQKs7WSmTXH8v7iUVqZfphMnS7VxVjGU1zykeTnbuAoZt4cFMUJzd8JaZk5eC82zmLmT"
+        ],
+        "endIndex": {
+            "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
+            "utxo": "27q6nsuvtyT4mvXVnQQAXw1YKoTxCow5Qm91GZ678TU1SvUiC2"
+        },
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
+
 ### avax.import
 
 Finalize the transfer of a non-AVAX from the X-Chain to the C-Chain.
@@ -370,6 +451,48 @@ curl -X POST --data '{
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     },
     "id": 1
+}
+```
+
+### avax.issueTx
+
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+
+#### **Signature**
+
+```text
+avax.issueTx({
+    tx: string,
+    encoding: string, (optional)
+}) -> {
+    txID: string,
+    encoding: string,
+}
+```
+
+#### **Example Call**
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avax.issueTx",
+    "params" :{
+        "tx":"111111115k3jo1qCve6vxW4htFh3DmJ2pJ6cAMnJWrduBFBYZ1HpXsRwsodFara48YszCWzgfQRFTMpXk58tTYuBJcvPzc56fBgsSWY7TWUY3F7CMeCHbn5s1FYEA7iT2YgNNMqnvQi8GpoQbPWBSVfp2N4NUaPpArKr32AkNfAZWrCd7BzvciXkTSLg57Pth3MCZ3WGW4MnVvwYSAdq5G5BGWUpRCRZzHKH51urCqNCm5VUr33Umk3Z3gpQJQUU4xVx9M352b2TWQPvCwB8mBRvu7KDWyNkhmrcfaFxhMYw3JfY11S2j2P2oJVawa1QXaCxFp9qf3JYR7EAQReZvLN5jMfPRyiX59cz9XP7QEXGRUfSZrxyZDLvn1AzSKSVpMNDnmaLCtm5Y8F1QD8rRETELvJk1BDtJQh9fU",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Example Response**
+
+```text
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"2LVVdbsbg7Lkp3bVBzbJeopp8HfBMApefoHLZ7VaFkXPPvd7KJ"
+    }
 }
 ```
 
