@@ -511,7 +511,7 @@ platform.exportKey({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -526,7 +526,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -542,7 +542,7 @@ Get the balance of AVAX controlled by a given address.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getBalance({
     address:string
 }) -> {
@@ -567,7 +567,7 @@ platform.getBalance({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
   "jsonrpc":"2.0",
   "id"     : 1,
@@ -580,7 +580,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -609,7 +609,7 @@ Get all the blockchains that exist \(excluding the P-Chain\).
 
 #### **Signature**
 
-```text
+```cpp
 platform.getBlockchains() ->
 {
     blockchains: []{
@@ -629,7 +629,7 @@ platform.getBlockchains() ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlockchains",
@@ -640,7 +640,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -699,7 +699,7 @@ Get the status of a blockchain.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getBlockchainStatus(
     {
         blockchainID: string
@@ -716,7 +716,7 @@ platform.getBlockchainStatus(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlockchainStatus",
@@ -729,7 +729,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -745,7 +745,7 @@ Returns an upper bound on the number of AVAX that exist. This is an upper bound 
 
 #### **Signature**
 
-```text
+```cpp
 platform.getCurrentSupply() -> {supply: int}
 ```
 
@@ -753,7 +753,7 @@ platform.getCurrentSupply() -> {supply: int}
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentSupply",
@@ -764,7 +764,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -784,7 +784,7 @@ The top level field `delegators` is deprecated as of v1.0.1. If you are using it
 
 #### **Signature**
 
-```text
+```cpp
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -853,7 +853,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getCurrentValidators",
@@ -864,7 +864,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -931,7 +931,7 @@ Returns the height of the last accepted block.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getHeight() ->
 {
       height: int,
@@ -940,7 +940,7 @@ platform.getHeight() ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getHeight",
@@ -951,7 +951,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -967,7 +967,7 @@ Get the minimum amount of AVAX required to validate the Primary Network and the 
 
 #### **Signature**
 
-```text
+```cpp
 platform.getMinStake() -> 
 {
     minValidatorStake : uint64,
@@ -977,7 +977,7 @@ platform.getMinStake() ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -987,7 +987,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1004,7 +1004,7 @@ List the validators in the pending validator set of the specified Subnet. Each v
 
 #### **Signature**
 
-```text
+```cpp
 platform.getPendingValidators({subnetID: string}) ->
 {
     validators: []{
@@ -1041,7 +1041,7 @@ platform.getPendingValidators({subnetID: string}) ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -1052,7 +1052,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1085,7 +1085,7 @@ Retrieve an assetID for a subnet’s staking asset. Currently, this always retur
 
 #### **Signature**
 
-```text
+```cpp
 platform.getStakingAssetID() ->
 {
     assetID: string
@@ -1096,7 +1096,7 @@ platform.getStakingAssetID() ->
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStakingAssetID",
@@ -1107,7 +1107,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1123,7 +1123,7 @@ Get all the Subnets that exist.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getSubnets(
     {ids: []string}
 ) ->
@@ -1142,7 +1142,7 @@ See [here](https://docs.avax-dev.network/build/tutorials/platform/add-a-validato
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -1153,7 +1153,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1178,13 +1178,13 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 
 #### **Signature**
 
-```text
+```cpp
 platform.getStake({addresses: []string}) -> {stake: int}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStake",
@@ -1201,7 +1201,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1217,13 +1217,13 @@ Get the total amount of nAVAX staked on the Primary Network.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getTotalStake() -> {stake: int}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStake",
@@ -1235,7 +1235,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1253,7 +1253,7 @@ Optional `encoding` parameter to specify the format for the returned transaction
 
 #### **Signature**
 
-```text
+```cpp
 platform.getTx({
     txID: string,
     encoding: string (optional)
@@ -1265,7 +1265,7 @@ platform.getTx({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTx",
@@ -1279,7 +1279,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1296,13 +1296,13 @@ Gets a transaction’s status by its ID.
 
 #### **Signature**
 
-```text
+```cpp
 platform.getTxStatus({txID: string} -> {status: string})
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -1315,7 +1315,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": "Committed",
