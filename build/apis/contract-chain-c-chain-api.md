@@ -182,7 +182,7 @@ avax.exportKey({
 ##### Response
 
 * `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account in to Metamask.
+* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
 
 #### Example Call
 
@@ -294,7 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX from the X-Chain to the C-Chain.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain.
 Before this method is called, you must call the X-Chain's [`export`](./avm.md#avmexport) method to initiate the transfer.
 
 #### Signature
@@ -303,7 +303,6 @@ Before this method is called, you must call the X-Chain's [`export`](./avm.md#av
 avax.import({
     to: string,
     sourceChain: string,
-    assetID: string,
     username: string,
     password:string,
 }) -> {txID: string}
@@ -311,14 +310,13 @@ avax.import({
 
 ##### Request
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `assetID` is the assetID of the non-AVAX asset.
+* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
+* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
 * `username` is the user that controls `to`.
 
 ##### Response
 
-* `txID` is the txid of the completed ImportTx.
+* `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
@@ -374,7 +372,7 @@ avax.importAVAX({
 
 ##### Response
 
-* `txID` is the txid of the completed ImportTx.
+* `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
