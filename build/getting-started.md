@@ -17,9 +17,9 @@ Avalanche is an incredibly lightweight protocol, so the minimum computer require
 
 * Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
 * OS: Ubuntu 18.04/20.04 or Mac OS X &gt;= Catalina
-* Software: [Go](https://golang.org/doc/install) &gt;= 1.13
+* Software: [Go](https://golang.org/doc/install) 1.15.5 or later 
 
-Run `go version`. **It should be 1.13 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
 {% hint style="danger" %}
 This tutorial assumes you have enough AVAX to add a validator held under a mnemonic key phrase **`2,000 AVAX`**.
