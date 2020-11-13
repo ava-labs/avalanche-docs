@@ -62,9 +62,9 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `assetID` is the assetID of the AVAX asset. To export AVAX use `"AVAX"` as the `assetID`.
+* `to` is the X-Chain address the asset is sent to.
+* `amount` is the amount of the asset to send.
+* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
 * The asset is sent from addresses controlled by `username` and `password`.
 
 #### Example Call
@@ -261,7 +261,6 @@ curl -X POST --data '{
     "params" :{
         "addresses":["C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf"],
         "sourceChain": "X",
-        "limit": 3,
         "startIndex": {
             "address": "C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
             "utxo": "22RXW7SWjBrrxu2vzDkd8uza7fuEmNpgbj58CxBob9UbP37HSB"
