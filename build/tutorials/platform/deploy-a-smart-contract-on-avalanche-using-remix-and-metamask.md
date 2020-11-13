@@ -19,7 +19,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Network Name**: Avalanche FUJI C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `0xa869`
-* **Symbol**: `C-AVAX`
+* **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
 #### **Avalanche Mainnet Settings:**
@@ -35,7 +35,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Network Name**: Avalanche Local
 * **New RPC URL**:[ ](http://localhost:9650/ext/bc/C/rpc)[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
 * **ChainID**: `0xa868`
-* **Symbol**: `C-AVAX`
+* **Symbol**: `AVAX`
 * **Explorer**: N/A
 
 ## Step 2: Funding your C-Chain address

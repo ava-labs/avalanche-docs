@@ -145,38 +145,6 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeIP
-
-Get the IP of this node.
-
-#### **Signature**
-
-```text
-info.getNodeIP() -> {ip: string}
-```
-
-#### **Example Call**
-
-```text
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"info.getNodeIP"
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
-```
-
-#### **Example Response**
-
-```text
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "ip": "192.168.1.1:9651"
-    },
-    "id": 1
-}
-```
-
 ### info.getNodeVersion
 
 Get the version of this node.
