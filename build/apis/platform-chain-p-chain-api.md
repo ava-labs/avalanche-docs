@@ -4,7 +4,7 @@ This API allows clients to interact with the [P-Chain](../../learn/platform-over
 
 ## Endpoint
 
-```text
+```cpp
 /ext/P
 ```
 
@@ -30,7 +30,7 @@ Note that once you issue the transaction to add a node as a delegator, there is 
 
 #### **Signature**
 
-```text
+```cpp
 platform.addDelegator(
     {
         nodeID: string,
@@ -63,7 +63,7 @@ platform.addDelegator(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addDelegator",
@@ -84,7 +84,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -111,7 +111,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 #### **Signature**
 
-```text
+```cpp
 platform.addValidator(
     {
         nodeID: string,
@@ -148,7 +148,7 @@ platform.addValidator(
 
 In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addValidator",
@@ -170,7 +170,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -187,7 +187,7 @@ Add a validator to a subnet other than the Primary Network. The Validator must v
 
 #### **Signature**
 
-```text
+```cpp
 platform.addSubnetValidator(
     {
         nodeID: string,
@@ -220,7 +220,7 @@ platform.addSubnetValidator(
 
 #### **Example call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addSubnetvalidator",
@@ -241,7 +241,7 @@ curl -X POST --data '{
 
 #### **Example response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -258,7 +258,7 @@ Create a new address controlled by the given user.
 
 #### **Signature**
 
-```text
+```cpp
 platform.createAddress({
     username: string,
     password:string
@@ -267,7 +267,7 @@ platform.createAddress({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -281,7 +281,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -297,7 +297,7 @@ Create a new blockchain. Currently only supports the creation of new instances o
 
 #### **Signature**
 
-```text
+```cpp
 platform.createBlockchain(
     {
         subnetID: string,
@@ -332,7 +332,7 @@ platform.createBlockchain(
 
 In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -353,7 +353,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -372,7 +372,7 @@ The subnet’s ID is the same as this transaction’s ID.
 
 #### **Signature**
 
-```text
+```cpp
 platform.createSubnet(
     {
         controlKeys: []string,
@@ -397,7 +397,7 @@ platform.createSubnet(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -418,7 +418,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -434,7 +434,7 @@ Send AVAX from an address on the P-Chain to an address on the X-Chain. After iss
 
 #### **Signature**
 
-```text
+```cpp
 platform.exportAVAX(
     {
         amount: int,
@@ -461,7 +461,7 @@ platform.exportAVAX(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
@@ -479,7 +479,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -497,7 +497,7 @@ The returned private key can be added to a user with [`platform.importKey`](http
 
 #### **Signature**
 
-```text
+```cpp
 platform.exportKey({
     username: string,
     password:string,
