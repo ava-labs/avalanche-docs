@@ -328,7 +328,6 @@ curl -X POST --data '{
     "params" :{
         "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
         "sourceChain":"X",
-        "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
         "username":"myUsername",
         "password":"myPassword"
     }
