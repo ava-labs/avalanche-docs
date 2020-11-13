@@ -22,7 +22,7 @@ Avalanche is an incredibly lightweight protocol, so the minimum computer require
 Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
 {% hint style="danger" %}
-This tutorial assumes you have enough AVAX to add a validator held under a mnemonic key phrase **`2,000 AVAX`**.
+This tutorial assumes you have enough AVAX \(2,000 or more\) to add a validator held under a mnemonic key phrase.
 {% endhint %}
 
 ## Run an Avalanche Node and Send Funds
