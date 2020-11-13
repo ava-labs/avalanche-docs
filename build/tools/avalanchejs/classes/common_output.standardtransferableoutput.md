@@ -45,7 +45,7 @@
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[constructor](common_output.standardparseableoutput.md#constructor)*
 
-*Defined in [src/common/output.ts:409](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L409)*
+*Defined in [src/common/output.ts:409](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L409)*
 
 Class representing an [StandardTransferableOutput](common_output.standardtransferableoutput.md) for a transaction.
 
@@ -66,7 +66,7 @@ Name | Type | Default | Description |
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[_typeID](common_output.standardparseableoutput.md#protected-_typeid)*
 
-*Defined in [src/common/output.ts:384](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L384)*
+*Defined in [src/common/output.ts:384](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L384)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[_typeName](common_output.standardparseableoutput.md#protected-_typename)*
 
-*Defined in [src/common/output.ts:383](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L383)*
+*Defined in [src/common/output.ts:383](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L383)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **assetID**: *Buffer* = undefined
 
-*Defined in [src/common/output.ts:398](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L398)*
+*Defined in [src/common/output.ts:398](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L398)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [StandardParseableOutput](common_output.standardparseableoutput.md).[output](common_output.standardparseableoutput.md#protected-output)*
 
-*Defined in [src/common/output.ts:345](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L345)*
+*Defined in [src/common/output.ts:345](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L345)*
 
 ## Methods
 
@@ -104,7 +104,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/common/output.ts:393](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L393)*
+*Defined in [src/common/output.ts:393](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L393)*
 
 **Parameters:**
 
@@ -123,7 +123,7 @@ ___
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[fromBuffer](common_output.standardparseableoutput.md#abstract-frombuffer)*
 
-*Defined in [src/common/output.ts:403](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L403)*
+*Defined in [src/common/output.ts:403](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L403)*
 
 **Parameters:**
 
@@ -140,7 +140,7 @@ ___
 
 ▸ **getAssetID**(): *Buffer*
 
-*Defined in [src/common/output.ts:400](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L400)*
+*Defined in [src/common/output.ts:400](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L400)*
 
 **Returns:** *Buffer*
 
@@ -152,7 +152,7 @@ ___
 
 *Inherited from [StandardParseableOutput](common_output.standardparseableoutput.md).[getOutput](common_output.standardparseableoutput.md#getoutput)*
 
-*Defined in [src/common/output.ts:356](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L356)*
+*Defined in [src/common/output.ts:356](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L356)*
 
 **Returns:** *[Output](common_output.output.md)*
 
@@ -164,7 +164,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -178,7 +178,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -192,7 +192,7 @@ ___
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[serialize](common_output.standardparseableoutput.md#serialize)*
 
-*Defined in [src/common/output.ts:386](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L386)*
+*Defined in [src/common/output.ts:386](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L386)*
 
 **Parameters:**
 
@@ -210,7 +210,7 @@ ___
 
 *Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[toBuffer](common_output.standardparseableoutput.md#tobuffer)*
 
-*Defined in [src/common/output.ts:405](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L405)*
+*Defined in [src/common/output.ts:405](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L405)*
 
 **Returns:** *Buffer*
 
@@ -222,7 +222,7 @@ ___
 
 *Inherited from [StandardParseableOutput](common_output.standardparseableoutput.md).[comparator](common_output.standardparseableoutput.md#static-comparator)*
 
-*Defined in [src/common/output.ts:350](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/output.ts#L350)*
+*Defined in [src/common/output.ts:350](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L350)*
 
 Returns a function used to sort an array of [ParseableOutput](api_platformvm_outputs.parseableoutput.md)s
 
