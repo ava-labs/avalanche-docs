@@ -577,7 +577,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the C-Chain.  
+Send a non-AVAX from the X-Chain to the P-Chain or C-Chain.  
 After calling this method, you must call [`avax.import`](https://docs.avax-dev.network/build/apis/contract-chain-c-chain-api#avax-import) on the C-Chain to complete the transfer.
 
 #### **Signature**
@@ -598,8 +598,8 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain address the asset is sent to.
-* `amount` is the amount of nASSET to send.
+* `to` is the P-Chain or C-Chain address the asset is sent to.
+* `amount` is the amount of the asset to send.
 * `assetID` is the asset id of the asset which is sent.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -642,7 +642,7 @@ curl -X POST --data '{
 ### avm.exportAVAX
 
 Send AVAX from the X-Chain to another chain.  
-After calling this method, you must call `importAVAX` on the other chain to complete the transfer.
+After calling this method, you must call `import` on the other chain to complete the transfer.
 
 #### **Signature**
 
@@ -1124,7 +1124,7 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the C-Chain to the X-Chain. Before this method is called, you must call the C-Chain’s [`avax.export`](https://docs.avax-dev.network/build/apis/contract-chain-c-chain-api#avax-export) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax) or C-Chain’s [`avax.export`](https://docs.avax-dev.network/build/apis/contract-chain-c-chain-api#avax-export) method to initiate the transfer.
 
 #### **Signature**
 
@@ -1137,7 +1137,7 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
+* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
 * `username` is the user that controls `to`.
 
