@@ -25,9 +25,9 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 #### **Avalanche Mainnet Settings:**
 
 * **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
+* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
 * **ChainID**: `0xa86a`
-* **Symbol**: `C-AVAX`
+* **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
 #### **Local Testnet \(AVASH\) Settings:**
