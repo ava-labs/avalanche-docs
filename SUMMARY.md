@@ -28,6 +28,8 @@
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Set up Node Monitoring](build/tutorials/platform/setting-up-node-monitoring.md)
+    * [Set Up an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/platform/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
+    * [Stake AVAX, by Validating or Delegating, with the Avalanche Wallet](build/tutorials/platform/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
     * [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
