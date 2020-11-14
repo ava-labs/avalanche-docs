@@ -32,7 +32,7 @@ To interact with C-Chain:
 
 To interact with other instances of the EVM:
 
-```text
+```cpp
 /ext/bc/blockchainID/rpc
 ```
 
@@ -40,7 +40,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 To interact with the `avax` specific RPC calls
 
-```text
+```cpp
 /ext/bc/C/avax
 ```
 
@@ -52,7 +52,7 @@ Export an asset from the C-Chain to the X-Chain. After calling this method, you 
 
 #### Signature
 
-```go
+```cpp
 avax.export({
     to: string,
     amount: int,
@@ -218,7 +218,7 @@ Gets the UTXOs that reference a given address.
 
 #### **Signature**
 
-```text
+```cpp
 avax.getUTXOs(
     {
         addresses: string,
@@ -253,7 +253,7 @@ avax.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -272,7 +272,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
