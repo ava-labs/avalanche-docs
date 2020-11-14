@@ -1,8 +1,6 @@
 # AvalancheGo Release Notes
 
-{% hint style="info" %}
-To upgrade your node, please follow this tutorial.
-{% endhint %}
+{% page-ref page="../tutorials/platform/upgrade-your-avalanchego-node.md" %}
 
 ## AvalancheGo Release Notes v1.0.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
 
