@@ -66,3 +66,7 @@
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
+---
+
+* [Upgrade Your AvalancheGo Node](upgrade-your-avalanchego-node.md)
+
