@@ -31,6 +31,7 @@
     * [Set Up an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/platform/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
     * [Stake AVAX, by Validating or Delegating, with the Avalanche Wallet](build/tutorials/platform/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
     * [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
+    * [Upgrade Your AvalancheGo Node](build/tutorials/platform/upgrade-your-avalanchego-node.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
@@ -65,8 +66,4 @@
   * [Serialization Primitives](build/references/serialization-primitives.md)
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
-
----
-
-* [Upgrade Your AvalancheGo Node](upgrade-your-avalanchego-node.md)
 
