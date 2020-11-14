@@ -26,7 +26,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 To interact with C-Chain:
 
-```text
+```cpp
 /ext/bc/C/rpc
 ```
 
