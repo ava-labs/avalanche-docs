@@ -177,7 +177,7 @@ Create a new address controlled by the given user.
 
 #### **Signature**
 
-```text
+```cpp
 avm.createAddress({
     username: string,
     password:string
@@ -186,7 +186,7 @@ avm.createAddress({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.createAddress",
@@ -200,7 +200,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
