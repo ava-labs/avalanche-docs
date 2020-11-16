@@ -57,7 +57,7 @@
     * [Send an Asset on the X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
-  * [Ortelius](build/tools/ortelius.md)
+  * [Ortelius API](build/tools/ortelius.md)
 * [References](build/references/README.md)
   * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
   * [Command Line Interface](build/references/command-line-interface.md)
