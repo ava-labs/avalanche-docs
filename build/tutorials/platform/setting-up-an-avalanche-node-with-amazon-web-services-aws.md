@@ -19,7 +19,7 @@ To get started, we need:
 * the ability to SSH into a machine \(this tutorial uses Openssh and a command line, but PuTTy on Windows could work just as well\)
 * a good place to store and back up staking certificates and \*.pem key pair files
 
-## Step 1 — Log Into AWS <a id="ff31"></a>
+## Log Into AWS <a id="ff31"></a>
 
 We need an AWS account. This sign-up process is outside of the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
@@ -29,7 +29,7 @@ Once completed, we can begin creating our EC2 instance. EC2 is a service provide
 
 ![](../../../.gitbook/assets/image%20%2816%29.png)
 
-## Step 2 — Create AWS Key Pairs <a id="d2a5"></a>
+## Create AWS Key Pairs <a id="d2a5"></a>
 
 ![](../../../.gitbook/assets/image%20%2819%29.png)
 
@@ -51,7 +51,7 @@ Tada! Now, we have a key pair we can use to log into our AWS instance later. In 
 
 This key pair file is highly important. It is the only way to log into our instance we create later. If we lose this, it will be very difficult to recover access to our machine. Anyone with this key pair file will have access to our host, so it is essential to back this key pair file up into a secure place.
 
-## Step 3 — Create a Security Group <a id="f8df"></a>
+## Create a Security Group <a id="f8df"></a>
 
 ![Image for post](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
@@ -77,7 +77,7 @@ We will click “Create security group”, and if all has gone well, we’ll see
 
 As a note, we didn’t do anything to modify the outbound rules. This is because the default outbound rules are that our machine can reach out to any other machine. We leave this as it is because we trust our machine and we also want to leave it open to talk to any other node on the network.
 
-## Step 4 — Launching an AWS Instance <a id="0682"></a>
+## Launching an AWS Instance <a id="0682"></a>
 
 Finally! No more set up, now it’s all content! We’re ready to launch our AWS Instance to host our node. To start, from the EC2 Dashboard, we click the button that says “Launch instance”.
 
@@ -155,7 +155,7 @@ Finally, we’re selecting the instance we just created, as seen below. This wil
 
 ![Image for post](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Step 5 — Setting Up the Node <a id="829e"></a>
+## Setting Up the Node <a id="829e"></a>
 
 To continue, we’re going to need to make sure our instance is running, and we’re going to need the Public DNS name of our instance to log into it via SSH. This can be seen on the EC2 Dashboard by clicking “Running Instances”. Also, when starting our node, we’ll need the “IPv4 Public IP” address, to get the instance running.
 
@@ -254,7 +254,7 @@ sudo systemctl start avalanchego
 sudo systemctl enable avalanchego
 ```
 
-## Step 6 — Wrap It Up! <a id="7a97"></a>
+## Wrap It Up! <a id="7a97"></a>
 
 Our node should now begin bootstrapping! We can run the following command to take a peek at the latest status of the avalanchego node:
 
