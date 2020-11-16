@@ -32,7 +32,7 @@ To interact with C-Chain:
 
 To interact with other instances of the EVM:
 
-```text
+```cpp
 /ext/bc/blockchainID/rpc
 ```
 
@@ -40,7 +40,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 To interact with the `avax` specific RPC calls
 
-```text
+```cpp
 /ext/bc/C/avax
 ```
 
@@ -52,7 +52,7 @@ Export an asset from the C-Chain to the X-Chain. After calling this method, you 
 
 #### Signature
 
-```go
+```cpp
 avax.export({
     to: string,
     amount: int,
@@ -69,7 +69,7 @@ avax.export({
 
 #### Example Call
 
-```json
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -86,7 +86,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -98,7 +98,7 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED&mdash;instead use [avax.export](./evm.md#avaxexport)**
+**DEPRECATED—instead use** [**avax.export**](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/evm.md#avaxexport)
 
 Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call `importAVAX` on the X-Chain to complete the transfer.
 
@@ -116,7 +116,7 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-##### Request
+**Request**
 
 * `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
 * `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
@@ -125,13 +125,13 @@ avax.exportAVAX({
 * `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
 * The AVAX is sent from addresses controlled by `username`
 
-##### Response
+**Response**
 
 * `txID` is the txid of the completed ExportTx.
 
 #### Example Call
 
-```json
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -150,7 +150,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -174,19 +174,19 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-##### Request
+**Request**
 
 * `username` must control `address`.
 * `address` is the address for which you want to export the corresponding private key. It should be in hex format.
 
-##### Response
+**Response**
 
 * `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
 * `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
 
 #### Example Call
 
-```json
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -201,7 +201,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -218,7 +218,7 @@ Gets the UTXOs that reference a given address.
 
 #### **Signature**
 
-```text
+```cpp
 avax.getUTXOs(
     {
         addresses: string,
@@ -253,7 +253,7 @@ avax.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -272,7 +272,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -294,8 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain.
-Before this method is called, you must call the X-Chain's [`export`](./avm.md#avmexport) method to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`export`](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/avm.md#avmexport) method to initiate the transfer.
 
 #### Signature
 
@@ -308,19 +307,19 @@ avax.import({
 }) -> {txID: string}
 ```
 
-##### Request
+**Request**
 
 * `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
 * `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
 * `username` is the user that controls `to`.
 
-##### Response
+**Response**
 
 * `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
-```json
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -336,7 +335,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -348,9 +347,9 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED&mdash;instead use [avax.import](./evm.md#avaximport)**
+**DEPRECATED—instead use** [**avax.import**](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/evm.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](./avm.md#avmexportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/avm.md#avmexportavax) method to initiate the transfer.
 
 #### Signature
 
@@ -363,19 +362,19 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-##### Request
+**Request**
 
 * `to` is the address the AVAX is sent to. It should be in hex format.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
 * `username` is the user that controls `to`.
 
-##### Response
+**Response**
 
 * `txID` is the ID of the completed ImportTx.
 
 #### Example Call
 
-```json
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -391,7 +390,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -405,7 +404,7 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### Signature	
+#### Signature
 
 ```go
 avax.importKey({
@@ -415,17 +414,17 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-##### Request
+**Request**
 
 * Add `privateKey` to `username`'s set of private keys.
 
-##### Response
+**Response**
 
 * `address` is the address `username` now controls with the private key. It will be in hex format.
 
 #### Example Call
 
-```json	
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -440,7 +439,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -449,3 +448,4 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+

@@ -64,7 +64,7 @@
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[constructor](api_avm_basetx.basetx.md#constructor)*
 
-*Defined in [src/apis/avm/createassettx.ts:145](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L145)*
+*Defined in [src/apis/avm/createassettx.ts:145](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L145)*
 
 Class representing an unsigned Create Asset transaction.
 
@@ -92,7 +92,7 @@ Name | Type | Default | Description |
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[_typeID](api_avm_basetx.basetx.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/createassettx.ts:23](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L23)*
+*Defined in [src/apis/avm/createassettx.ts:23](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L23)*
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[_typeName](api_avm_basetx.basetx.md#protected-_typename)*
 
-*Defined in [src/apis/avm/createassettx.ts:22](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L22)*
+*Defined in [src/apis/avm/createassettx.ts:22](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L22)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[blockchainid](common_transactions.standardbasetx.md#protected-blockchainid)*
 
-*Defined in [src/common/tx.ts:49](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L49)*
+*Defined in [src/common/tx.ts:49](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L49)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **denomination**: *Buffer* = Buffer.alloc(1)
 
-*Defined in [src/apis/avm/createassettx.ts:46](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L46)*
+*Defined in [src/apis/avm/createassettx.ts:46](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L46)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **initialstate**: *[InitialStates](api_avm_initialstates.initialstates.md)* = new InitialStates()
 
-*Defined in [src/apis/avm/createassettx.ts:47](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L47)*
+*Defined in [src/apis/avm/createassettx.ts:47](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L47)*
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[ins](common_transactions.standardbasetx.md#protected-ins)*
 
-*Defined in [src/common/tx.ts:53](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L53)*
+*Defined in [src/common/tx.ts:53](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L53)*
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[memo](common_transactions.standardbasetx.md#protected-memo)*
 
-*Defined in [src/common/tx.ts:54](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L54)*
+*Defined in [src/common/tx.ts:54](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L54)*
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 • **name**: *string* = ""
 
-*Defined in [src/apis/avm/createassettx.ts:44](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L44)*
+*Defined in [src/apis/avm/createassettx.ts:44](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L44)*
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[networkid](common_transactions.standardbasetx.md#protected-networkid)*
 
-*Defined in [src/common/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L48)*
+*Defined in [src/common/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L48)*
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[numins](common_transactions.standardbasetx.md#protected-numins)*
 
-*Defined in [src/common/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L52)*
+*Defined in [src/common/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L52)*
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[numouts](common_transactions.standardbasetx.md#protected-numouts)*
 
-*Defined in [src/common/tx.ts:50](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L50)*
+*Defined in [src/common/tx.ts:50](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L50)*
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[outs](common_transactions.standardbasetx.md#protected-outs)*
 
-*Defined in [src/common/tx.ts:51](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L51)*
+*Defined in [src/common/tx.ts:51](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L51)*
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 • **symbol**: *string* = ""
 
-*Defined in [src/apis/avm/createassettx.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L45)*
+*Defined in [src/apis/avm/createassettx.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L45)*
 
 ## Methods
 
@@ -214,7 +214,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[clone](api_avm_basetx.basetx.md#clone)*
 
-*Defined in [src/apis/avm/createassettx.ts:137](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L137)*
+*Defined in [src/apis/avm/createassettx.ts:137](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L137)*
 
 **Returns:** *this*
 
@@ -226,7 +226,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[create](api_avm_basetx.basetx.md#create)*
 
-*Defined in [src/apis/avm/createassettx.ts:143](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L143)*
+*Defined in [src/apis/avm/createassettx.ts:143](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L143)*
 
 **Parameters:**
 
@@ -244,7 +244,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[deserialize](api_avm_basetx.basetx.md#deserialize)*
 
-*Defined in [src/apis/avm/createassettx.ts:35](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L35)*
+*Defined in [src/apis/avm/createassettx.ts:35](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L35)*
 
 **Parameters:**
 
@@ -263,7 +263,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[fromBuffer](api_avm_basetx.basetx.md#frombuffer)*
 
-*Defined in [src/apis/avm/createassettx.ts:92](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L92)*
+*Defined in [src/apis/avm/createassettx.ts:92](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L92)*
 
 Takes a [Buffer](https://github.com/feross/buffer) containing an [CreateAssetTx](api_avm_createassettx.createassettx.md), parses it, populates the class, and returns the length of the [CreateAssetTx](api_avm_createassettx.createassettx.md) in bytes.
 
@@ -288,7 +288,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getBlockchainID](common_transactions.standardbasetx.md#getblockchainid)*
 
-*Defined in [src/common/tx.ts:69](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L69)*
+*Defined in [src/common/tx.ts:69](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L69)*
 
 Returns the Buffer representation of the BlockchainID
 
@@ -300,7 +300,7 @@ ___
 
 ▸ **getDenomination**(): *number*
 
-*Defined in [src/apis/avm/createassettx.ts:74](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L74)*
+*Defined in [src/apis/avm/createassettx.ts:74](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L74)*
 
 Returns the numeric representation of the denomination
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **getDenominationBuffer**(): *Buffer*
 
-*Defined in [src/apis/avm/createassettx.ts:79](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L79)*
+*Defined in [src/apis/avm/createassettx.ts:79](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L79)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the denomination
 
@@ -324,7 +324,7 @@ ___
 
 ▸ **getInitialStates**(): *[InitialStates](api_avm_initialstates.initialstates.md)*
 
-*Defined in [src/apis/avm/createassettx.ts:59](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L59)*
+*Defined in [src/apis/avm/createassettx.ts:59](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L59)*
 
 Returns the array of array of [Output](common_output.output.md)s for the initial state
 
@@ -340,7 +340,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[getIns](common_transactions.standardbasetx.md#abstract-getins)*
 
-*Defined in [src/apis/avm/basetx.ts:53](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L53)*
+*Defined in [src/apis/avm/basetx.ts:53](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L53)*
 
 **Returns:** *Array‹[TransferableInput](api_avm_inputs.transferableinput.md)›*
 
@@ -352,7 +352,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getMemo](common_transactions.standardbasetx.md#getmemo)*
 
-*Defined in [src/common/tx.ts:89](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L89)*
+*Defined in [src/common/tx.ts:89](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L89)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the memo
 
@@ -364,7 +364,7 @@ ___
 
 ▸ **getName**(): *string*
 
-*Defined in [src/apis/avm/createassettx.ts:64](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L64)*
+*Defined in [src/apis/avm/createassettx.ts:64](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L64)*
 
 Returns the string representation of the name
 
@@ -378,7 +378,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getNetworkID](common_transactions.standardbasetx.md#getnetworkid)*
 
-*Defined in [src/common/tx.ts:64](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L64)*
+*Defined in [src/common/tx.ts:64](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L64)*
 
 Returns the NetworkID as a number
 
@@ -394,7 +394,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[getOuts](common_transactions.standardbasetx.md#abstract-getouts)*
 
-*Defined in [src/apis/avm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L49)*
+*Defined in [src/apis/avm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L49)*
 
 **Returns:** *Array‹[TransferableOutput](api_avm_outputs.transferableoutput.md)›*
 
@@ -404,7 +404,7 @@ ___
 
 ▸ **getSymbol**(): *string*
 
-*Defined in [src/apis/avm/createassettx.ts:69](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L69)*
+*Defined in [src/apis/avm/createassettx.ts:69](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L69)*
 
 Returns the string representation of the symbol
 
@@ -420,7 +420,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[getTotalOuts](common_transactions.standardbasetx.md#abstract-gettotalouts)*
 
-*Defined in [src/apis/avm/basetx.ts:57](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L57)*
+*Defined in [src/apis/avm/basetx.ts:57](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L57)*
 
 **Returns:** *Array‹[TransferableOutput](api_avm_outputs.transferableoutput.md)›*
 
@@ -432,7 +432,7 @@ ___
 
 *Overrides [BaseTx](api_avm_basetx.basetx.md).[getTxType](api_avm_basetx.basetx.md#gettxtype)*
 
-*Defined in [src/apis/avm/createassettx.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L52)*
+*Defined in [src/apis/avm/createassettx.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L52)*
 
 Returns the id of the [CreateAssetTx](api_avm_createassettx.createassettx.md)
 
@@ -446,7 +446,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -460,7 +460,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -476,7 +476,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[select](common_transactions.standardbasetx.md#abstract-select)*
 
-*Defined in [src/apis/avm/basetx.ts:143](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L143)*
+*Defined in [src/apis/avm/basetx.ts:143](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L143)*
 
 **Parameters:**
 
@@ -495,7 +495,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[serialize](common_transactions.standardbasetx.md#serialize)*
 
-*Defined in [src/apis/avm/createassettx.ts:25](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L25)*
+*Defined in [src/apis/avm/createassettx.ts:25](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L25)*
 
 **Parameters:**
 
@@ -515,7 +515,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[sign](common_transactions.standardbasetx.md#abstract-sign)*
 
-*Defined in [src/apis/avm/basetx.ts:116](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L116)*
+*Defined in [src/apis/avm/basetx.ts:116](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L116)*
 
 Takes the bytes of an [UnsignedTx](api_avm_transactions.unsignedtx.md) and returns an array of [Credential](common_signature.credential.md)s
 
@@ -538,7 +538,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[toBuffer](common_transactions.standardbasetx.md#tobuffer)*
 
-*Defined in [src/apis/avm/createassettx.ts:118](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/createassettx.ts#L118)*
+*Defined in [src/apis/avm/createassettx.ts:118](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L118)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [CreateAssetTx](api_avm_createassettx.createassettx.md).
 
@@ -552,7 +552,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[toString](common_transactions.standardbasetx.md#tostring)*
 
-*Defined in [src/common/tx.ts:126](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/tx.ts#L126)*
+*Defined in [src/common/tx.ts:126](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L126)*
 
 Returns a base-58 representation of the [StandardBaseTx](common_transactions.standardbasetx.md).
 

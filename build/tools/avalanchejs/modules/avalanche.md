@@ -10,6 +10,7 @@
 * [auth](avalanche.md#auth)
 * [avm](avalanche.md#avm)
 * [common](avalanche.md#common)
+* [evm](avalanche.md#evm)
 * [health](avalanche.md#health)
 * [info](avalanche.md#info)
 * [keystore](avalanche.md#keystore)
@@ -44,6 +45,12 @@ ___
 ###  common
 
 • **common**:
+
+___
+
+###  evm
+
+• **evm**:
 
 ___
 

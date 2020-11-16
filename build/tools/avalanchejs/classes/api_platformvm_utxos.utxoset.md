@@ -65,7 +65,7 @@ Class representing a set of [UTXO](api_platformvm_utxos.utxo.md)s.
 
 *Overrides [StandardUTXOSet](common_utxos.standardutxoset.md).[_typeID](common_utxos.standardutxoset.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/utxos.ts:110](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L110)*
+*Defined in [src/apis/platformvm/utxos.ts:110](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L110)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 *Overrides [StandardUTXOSet](common_utxos.standardutxoset.md).[_typeName](common_utxos.standardutxoset.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/utxos.ts:109](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L109)*
+*Defined in [src/apis/platformvm/utxos.ts:109](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L109)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[addressUTXOs](common_utxos.standardutxoset.md#protected-addressutxos)*
 
-*Defined in [src/common/utxos.ts:193](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L193)*
+*Defined in [src/common/utxos.ts:193](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L193)*
 
 #### Type declaration:
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[utxos](common_utxos.standardutxoset.md#protected-utxos)*
 
-*Defined in [src/common/utxos.ts:192](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L192)*
+*Defined in [src/common/utxos.ts:192](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L192)*
 
 #### Type declaration:
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **_feeCheck**(`fee`: BN, `feeAssetID`: Buffer): *boolean*
 
-*Defined in [src/apis/platformvm/utxos.ts:161](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L161)*
+*Defined in [src/apis/platformvm/utxos.ts:161](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L161)*
 
 **Parameters:**
 
@@ -132,7 +132,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[add](common_utxos.standardutxoset.md#add)*
 
-*Defined in [src/common/utxos.ts:227](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L227)*
+*Defined in [src/common/utxos.ts:227](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L227)*
 
 Adds a [StandardUTXO](common_utxos.standardutxo.md) to the StandardUTXOSet.
 
@@ -155,7 +155,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[addArray](common_utxos.standardutxoset.md#addarray)*
 
-*Defined in [src/common/utxos.ts:265](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L265)*
+*Defined in [src/common/utxos.ts:265](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L265)*
 
 Adds an array of [StandardUTXO](common_utxos.standardutxo.md)s to the [StandardUTXOSet](common_utxos.standardutxoset.md).
 
@@ -176,7 +176,7 @@ ___
 
 ▸ **buildAddDelegatorTx**(`networkid`: number, `blockchainid`: Buffer, `avaxAssetID`: Buffer, `toAddresses`: Array‹Buffer›, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `nodeID`: Buffer, `startTime`: BN, `endTime`: BN, `stakeAmount`: BN, `rewardLocktime`: BN, `rewardThreshold`: number, `rewardAddresses`: Array‹Buffer›, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:797](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L797)*
+*Defined in [src/apis/platformvm/utxos.ts:797](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L797)*
 
 Class representing an unsigned [AddDelegatorTx](api_platformvm_validationtx.adddelegatortx.md) transaction.
 
@@ -212,7 +212,7 @@ ___
 
 ▸ **buildAddValidatorTx**(`networkid`: number, `blockchainid`: Buffer, `avaxAssetID`: Buffer, `toAddresses`: Array‹Buffer›, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `nodeID`: Buffer, `startTime`: BN, `endTime`: BN, `stakeAmount`: BN, `rewardLocktime`: BN, `rewardThreshold`: number, `rewardAddresses`: Array‹Buffer›, `delegationFee`: number, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:876](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L876)*
+*Defined in [src/apis/platformvm/utxos.ts:876](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L876)*
 
 Class representing an unsigned [AddValidatorTx](api_platformvm_validationtx.addvalidatortx.md) transaction.
 
@@ -249,7 +249,7 @@ ___
 
 ▸ **buildBaseTx**(`networkid`: number, `blockchainid`: Buffer, `amount`: BN, `assetID`: Buffer, `toAddresses`: Array‹Buffer›, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:451](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L451)*
+*Defined in [src/apis/platformvm/utxos.ts:451](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L451)*
 
 Creates an [UnsignedTx](api_avm_transactions.unsignedtx.md) wrapping a [BaseTx](api_avm_basetx.basetx.md). For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) wrapping a [BaseTx](api_avm_basetx.basetx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s and [TransferableOutput](api_avm_outputs.transferableoutput.md)s).
@@ -282,7 +282,7 @@ ___
 
 ▸ **buildCreateSubnetTx**(`networkid`: number, `blockchainid`: Buffer, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `subnetOwnerAddresses`: Array‹Buffer›, `subnetOwnerThreshold`: number, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:951](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L951)*
+*Defined in [src/apis/platformvm/utxos.ts:951](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L951)*
 
 Class representing an unsigned [CreateSubnetTx](api_platformvm_createsubnettx.createsubnettx.md) transaction.
 
@@ -311,7 +311,7 @@ ___
 
 ▸ **buildExportTx**(`networkid`: number, `blockchainid`: Buffer, `amount`: BN, `avaxAssetID`: Buffer, `toAddresses`: Array‹Buffer›, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `destinationChain`: Buffer, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:643](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L643)*
+*Defined in [src/apis/platformvm/utxos.ts:643](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L643)*
 
 Creates an unsigned ExportTx transaction.
 
@@ -344,7 +344,7 @@ ___
 
 ▸ **buildImportTx**(`networkid`: number, `blockchainid`: Buffer, `toAddresses`: Array‹Buffer›, `fromAddresses`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›, `atomics`: Array‹[UTXO](api_platformvm_utxos.utxo.md)›, `sourceChain`: Buffer, `fee`: BN, `feeAssetID`: Buffer, `memo`: Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *[UnsignedTx](api_platformvm_transactions.unsignedtx.md)*
 
-*Defined in [src/apis/platformvm/utxos.ts:531](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L531)*
+*Defined in [src/apis/platformvm/utxos.ts:531](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L531)*
 
 Creates an unsigned ImportTx transaction.
 
@@ -378,7 +378,7 @@ ___
 
 *Overrides [StandardUTXOSet](common_utxos.standardutxoset.md).[clone](common_utxos.standardutxoset.md#abstract-clone)*
 
-*Defined in [src/apis/platformvm/utxos.ts:154](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L154)*
+*Defined in [src/apis/platformvm/utxos.ts:154](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L154)*
 
 **Returns:** *this*
 
@@ -390,7 +390,7 @@ ___
 
 *Overrides [StandardUTXOSet](common_utxos.standardutxoset.md).[create](common_utxos.standardutxoset.md#abstract-create)*
 
-*Defined in [src/apis/platformvm/utxos.ts:150](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L150)*
+*Defined in [src/apis/platformvm/utxos.ts:150](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L150)*
 
 **Parameters:**
 
@@ -408,7 +408,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/apis/platformvm/utxos.ts:114](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L114)*
+*Defined in [src/apis/platformvm/utxos.ts:114](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L114)*
 
 **Parameters:**
 
@@ -427,7 +427,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[difference](common_utxos.standardutxoset.md#difference)*
 
-*Defined in [src/common/utxos.ts:528](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L528)*
+*Defined in [src/common/utxos.ts:528](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L528)*
 
 Set difference between this set and a parameter.
 
@@ -449,7 +449,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[filter](common_utxos.standardutxoset.md#filter)*
 
-*Defined in [src/common/utxos.ts:476](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L476)*
+*Defined in [src/common/utxos.ts:476](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L476)*
 
 **Parameters:**
 
@@ -476,7 +476,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getAddresses](common_utxos.standardutxoset.md#getaddresses)*
 
-*Defined in [src/common/utxos.ts:415](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L415)*
+*Defined in [src/common/utxos.ts:415](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L415)*
 
 Gets the addresses in the [StandardUTXOSet](common_utxos.standardutxoset.md) and returns an array of [Buffer](https://github.com/feross/buffer).
 
@@ -490,7 +490,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getAllUTXOStrings](common_utxos.standardutxoset.md#getallutxostrings)*
 
-*Defined in [src/common/utxos.ts:366](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L366)*
+*Defined in [src/common/utxos.ts:366](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L366)*
 
 Gets all the [StandardUTXO](common_utxos.standardutxo.md)s as strings, optionally that match with UTXOIDs in an array.
 
@@ -512,7 +512,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getAllUTXOs](common_utxos.standardutxoset.md#getallutxos)*
 
-*Defined in [src/common/utxos.ts:345](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L345)*
+*Defined in [src/common/utxos.ts:345](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L345)*
 
 Gets all the [StandardUTXO](common_utxos.standardutxo.md)s, optionally that match with UTXOIDs in an array
 
@@ -534,7 +534,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getAssetIDs](common_utxos.standardutxoset.md#getassetids)*
 
-*Defined in [src/common/utxos.ts:454](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L454)*
+*Defined in [src/common/utxos.ts:454](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L454)*
 
 Gets all the Asset IDs, optionally that match with Asset IDs in an array
 
@@ -556,7 +556,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getBalance](common_utxos.standardutxoset.md#getbalance)*
 
-*Defined in [src/common/utxos.ts:427](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L427)*
+*Defined in [src/common/utxos.ts:427](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L427)*
 
 Returns the balance of a set of addresses in the StandardUTXOSet.
 
@@ -578,7 +578,7 @@ ___
 
 ▸ **getConsumableUXTO**(`asOf`: BN, `stakeable`: boolean): *[UTXO](api_platformvm_utxos.utxo.md)[]*
 
-*Defined in [src/apis/platformvm/utxos.ts:168](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L168)*
+*Defined in [src/apis/platformvm/utxos.ts:168](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L168)*
 
 **Parameters:**
 
@@ -595,7 +595,7 @@ ___
 
 ▸ **getMinimumSpendable**(`aad`: [AssetAmountDestination](api_platformvm_utxos.assetamountdestination.md), `asOf`: BN, `locktime`: BN, `threshold`: number, `stakeable`: boolean): *Error*
 
-*Defined in [src/apis/platformvm/utxos.ts:191](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L191)*
+*Defined in [src/apis/platformvm/utxos.ts:191](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L191)*
 
 **Parameters:**
 
@@ -617,7 +617,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -631,7 +631,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -645,7 +645,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getUTXO](common_utxos.standardutxoset.md#getutxo)*
 
-*Defined in [src/common/utxos.ts:336](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L336)*
+*Defined in [src/common/utxos.ts:336](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L336)*
 
 Gets a [StandardUTXO](common_utxos.standardutxo.md) from the [StandardUTXOSet](common_utxos.standardutxoset.md) by its UTXOID.
 
@@ -667,7 +667,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[getUTXOIDs](common_utxos.standardutxoset.md#getutxoids)*
 
-*Defined in [src/common/utxos.ts:391](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L391)*
+*Defined in [src/common/utxos.ts:391](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L391)*
 
 Given an address or array of addresses, returns all the UTXOIDs for those addresses
 
@@ -690,7 +690,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[includes](common_utxos.standardutxoset.md#includes)*
 
-*Defined in [src/common/utxos.ts:202](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L202)*
+*Defined in [src/common/utxos.ts:202](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L202)*
 
 Returns true if the [StandardUTXO](common_utxos.standardutxo.md) is in the StandardUTXOSet.
 
@@ -710,7 +710,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[intersection](common_utxos.standardutxoset.md#intersection)*
 
-*Defined in [src/common/utxos.ts:514](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L514)*
+*Defined in [src/common/utxos.ts:514](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L514)*
 
 Set intersetion between this set and a parameter.
 
@@ -732,7 +732,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[merge](common_utxos.standardutxoset.md#merge)*
 
-*Defined in [src/common/utxos.ts:495](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L495)*
+*Defined in [src/common/utxos.ts:495](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L495)*
 
 Returns a new set with copy of UTXOs in this and set parameter.
 
@@ -755,7 +755,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[mergeByRule](common_utxos.standardutxoset.md#mergebyrule)*
 
-*Defined in [src/common/utxos.ts:577](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L577)*
+*Defined in [src/common/utxos.ts:577](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L577)*
 
 Merges a set by the rule provided.
 
@@ -788,7 +788,7 @@ ___
 
 *Overrides [StandardUTXOSet](common_utxos.standardutxoset.md).[parseUTXO](common_utxos.standardutxoset.md#abstract-parseutxo)*
 
-*Defined in [src/apis/platformvm/utxos.ts:136](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/platformvm/utxos.ts#L136)*
+*Defined in [src/apis/platformvm/utxos.ts:136](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L136)*
 
 **Parameters:**
 
@@ -806,7 +806,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[remove](common_utxos.standardutxoset.md#remove)*
 
-*Defined in [src/common/utxos.ts:283](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L283)*
+*Defined in [src/common/utxos.ts:283](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L283)*
 
 Removes a [StandardUTXO](common_utxos.standardutxo.md) from the [StandardUTXOSet](common_utxos.standardutxoset.md) if it exists.
 
@@ -828,7 +828,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[removeArray](common_utxos.standardutxoset.md#removearray)*
 
-*Defined in [src/common/utxos.ts:318](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L318)*
+*Defined in [src/common/utxos.ts:318](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L318)*
 
 Removes an array of [StandardUTXO](common_utxos.standardutxo.md)s to the [StandardUTXOSet](common_utxos.standardutxoset.md).
 
@@ -852,7 +852,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/utxos.ts:168](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L168)*
+*Defined in [src/common/utxos.ts:168](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L168)*
 
 **Parameters:**
 
@@ -870,7 +870,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[symDifference](common_utxos.standardutxoset.md#symdifference)*
 
-*Defined in [src/common/utxos.ts:542](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L542)*
+*Defined in [src/common/utxos.ts:542](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L542)*
 
 Set symmetrical difference between this set and a parameter.
 
@@ -892,7 +892,7 @@ ___
 
 *Inherited from [StandardUTXOSet](common_utxos.standardutxoset.md).[union](common_utxos.standardutxoset.md#union)*
 
-*Defined in [src/common/utxos.ts:557](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/utxos.ts#L557)*
+*Defined in [src/common/utxos.ts:557](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/utxos.ts#L557)*
 
 Set union between this set and a parameter.
 

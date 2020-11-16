@@ -32,7 +32,7 @@ Note: addresses should not include a chain prefix \(ie. X-\) in calls to the sta
 
 #### **Signature**
 
-```text
+```cpp
 avm.buildGenesis({
     genesisData:JSON,
     encoding: string, (optional)
@@ -46,7 +46,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 
 `genesisData` has this form:
 
-```text
+```cpp
 {
 "genesisData" :
     {
@@ -98,7 +98,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -160,7 +160,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -177,7 +177,7 @@ Create a new address controlled by the given user.
 
 #### **Signature**
 
-```text
+```cpp
 avm.createAddress({
     username: string,
     password:string
@@ -186,7 +186,7 @@ avm.createAddress({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.createAddress",
@@ -200,7 +200,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {

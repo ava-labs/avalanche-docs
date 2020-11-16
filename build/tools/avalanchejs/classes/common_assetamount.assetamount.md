@@ -44,7 +44,7 @@ Class for managing asset amounts in the UTXOSet fee calcuation
 
 \+ **new AssetAmount**(`assetID`: Buffer, `amount`: BN, `burn`: BN): *[AssetAmount](common_assetamount.assetamount.md)*
 
-*Defined in [src/common/assetamount.ts:96](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L96)*
+*Defined in [src/common/assetamount.ts:96](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L96)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ Name | Type |
 
 • **amount**: *BN* = new BN(0)
 
-*Defined in [src/common/assetamount.ts:18](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L18)*
+*Defined in [src/common/assetamount.ts:18](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L18)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **assetID**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/common/assetamount.ts:16](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L16)*
+*Defined in [src/common/assetamount.ts:16](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L16)*
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 • **burn**: *BN* = new BN(0)
 
-*Defined in [src/common/assetamount.ts:20](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L20)*
+*Defined in [src/common/assetamount.ts:20](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L20)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 • **change**: *BN* = new BN(0)
 
-*Defined in [src/common/assetamount.ts:30](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L30)*
+*Defined in [src/common/assetamount.ts:30](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L30)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 • **finished**: *boolean* = false
 
-*Defined in [src/common/assetamount.ts:36](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L36)*
+*Defined in [src/common/assetamount.ts:36](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L36)*
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 • **spent**: *BN* = new BN(0)
 
-*Defined in [src/common/assetamount.ts:23](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L23)*
+*Defined in [src/common/assetamount.ts:23](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L23)*
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 • **stakeableLockChange**: *boolean* = false
 
-*Defined in [src/common/assetamount.ts:33](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L33)*
+*Defined in [src/common/assetamount.ts:33](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L33)*
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 • **stakeableLockSpent**: *BN* = new BN(0)
 
-*Defined in [src/common/assetamount.ts:26](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L26)*
+*Defined in [src/common/assetamount.ts:26](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L26)*
 
 ## Methods
 
@@ -126,7 +126,7 @@ ___
 
 ▸ **getAmount**(): *BN*
 
-*Defined in [src/common/assetamount.ts:46](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L46)*
+*Defined in [src/common/assetamount.ts:46](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L46)*
 
 **Returns:** *BN*
 
@@ -136,7 +136,7 @@ ___
 
 ▸ **getAssetID**(): *Buffer*
 
-*Defined in [src/common/assetamount.ts:38](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L38)*
+*Defined in [src/common/assetamount.ts:38](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L38)*
 
 **Returns:** *Buffer*
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **getAssetIDString**(): *string*
 
-*Defined in [src/common/assetamount.ts:42](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L42)*
+*Defined in [src/common/assetamount.ts:42](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L42)*
 
 **Returns:** *string*
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **getBurn**(): *BN*
 
-*Defined in [src/common/assetamount.ts:54](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L54)*
+*Defined in [src/common/assetamount.ts:54](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L54)*
 
 **Returns:** *BN*
 
@@ -166,7 +166,7 @@ ___
 
 ▸ **getChange**(): *BN*
 
-*Defined in [src/common/assetamount.ts:58](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L58)*
+*Defined in [src/common/assetamount.ts:58](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L58)*
 
 **Returns:** *BN*
 
@@ -176,7 +176,7 @@ ___
 
 ▸ **getSpent**(): *BN*
 
-*Defined in [src/common/assetamount.ts:50](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L50)*
+*Defined in [src/common/assetamount.ts:50](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L50)*
 
 **Returns:** *BN*
 
@@ -186,7 +186,7 @@ ___
 
 ▸ **getStakeableLockChange**(): *boolean*
 
-*Defined in [src/common/assetamount.ts:66](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L66)*
+*Defined in [src/common/assetamount.ts:66](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L66)*
 
 **Returns:** *boolean*
 
@@ -196,7 +196,7 @@ ___
 
 ▸ **getStakeableLockSpent**(): *BN*
 
-*Defined in [src/common/assetamount.ts:62](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L62)*
+*Defined in [src/common/assetamount.ts:62](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L62)*
 
 **Returns:** *BN*
 
@@ -206,7 +206,7 @@ ___
 
 ▸ **isFinished**(): *boolean*
 
-*Defined in [src/common/assetamount.ts:70](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L70)*
+*Defined in [src/common/assetamount.ts:70](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L70)*
 
 **Returns:** *boolean*
 
@@ -216,7 +216,7 @@ ___
 
 ▸ **spendAmount**(`amt`: BN, `stakeableLocked`: boolean): *boolean*
 
-*Defined in [src/common/assetamount.ts:76](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/common/assetamount.ts#L76)*
+*Defined in [src/common/assetamount.ts:76](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/assetamount.ts#L76)*
 
 **Parameters:**
 

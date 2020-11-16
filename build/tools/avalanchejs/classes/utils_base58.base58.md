@@ -42,7 +42,7 @@ let buff:Buffer = b58.decode(somestring);
 
 \+ **new Base58**(): *[Base58](utils_base58.base58.md)*
 
-*Defined in [src/utils/base58.ts:20](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L20)*
+*Defined in [src/utils/base58.ts:20](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L20)*
 
 **Returns:** *[Base58](utils_base58.base58.md)*
 
@@ -52,7 +52,7 @@ let buff:Buffer = b58.decode(somestring);
 
 • **alphabetIdx0**: *string* = "1"
 
-*Defined in [src/utils/base58.ts:36](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L36)*
+*Defined in [src/utils/base58.ts:36](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L36)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
     255, 255, 255, 255, 255, 255, 255, 255,
   ]
 
-*Defined in [src/utils/base58.ts:38](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L38)*
+*Defined in [src/utils/base58.ts:38](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L38)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **b58alphabet**: *string* = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
-*Defined in [src/utils/base58.ts:34](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L34)*
+*Defined in [src/utils/base58.ts:34](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L34)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **big58Radix**: *BN* = new BN(58)
 
-*Defined in [src/utils/base58.ts:73](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L73)*
+*Defined in [src/utils/base58.ts:73](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L73)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • **bigZero**: *BN* = new BN(0)
 
-*Defined in [src/utils/base58.ts:75](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L75)*
+*Defined in [src/utils/base58.ts:75](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L75)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 ▪ **instance**: *[Base58](utils_base58.base58.md)*
 
-*Defined in [src/utils/base58.ts:20](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L20)*
+*Defined in [src/utils/base58.ts:20](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L20)*
 
 ## Methods
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **decode**(`b`: string): *Buffer*
 
-*Defined in [src/utils/base58.ts:109](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L109)*
+*Defined in [src/utils/base58.ts:109](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L109)*
 
 Decodes a base-58 into a [Buffer](https://github.com/feross/buffer)
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **encode**(`buff`: Buffer): *string*
 
-*Defined in [src/utils/base58.ts:84](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L84)*
+*Defined in [src/utils/base58.ts:84](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L84)*
 
 Encodes a [Buffer](https://github.com/feross/buffer) as a base-58 string
 
@@ -173,7 +173,7 @@ ___
 
 ▸ **getInstance**(): *[Base58](utils_base58.base58.md)*
 
-*Defined in [src/utils/base58.ts:27](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/base58.ts#L27)*
+*Defined in [src/utils/base58.ts:27](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/base58.ts#L27)*
 
 Retrieves the Base58 singleton.
 
