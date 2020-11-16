@@ -83,47 +83,47 @@ curl -X POST --data '{
 ```
 
 `peers` should have 4 entries:
-
 ```cpp
 {
-   "jsonrpc":"2.0",
-   "result":{
-      "peers":[
-         {
-            "ip":"127.0.0.1:9158",
-            "publicIP":"127.0.0.1:9158",
-            "id":"NwEmCRVweJs9vTin7LpnweWSKVP4AB9Qi",
-            "version":"avalanche/0.5.0",
-            "lastSent":"2020-06-01T19:41:08Z",
-            "lastReceived":"2020-06-01T19:41:08Z"
-         },
-         {
-            "ip":"127.0.0.1:9156",
-            "publicIP":"127.0.0.1:9156",
-            "id":"6f3yBqjAJYV3tpBHLJKYruY3dPHAzKFEE",
-            "version":"avalanche/0.5.0",
-            "lastSent":"2020-06-01T19:41:08Z",
-            "lastReceived":"2020-06-01T19:41:08Z"
-         },
-         {
-            "ip":"127.0.0.1:9155",
-            "publicIP":"127.0.0.1:9155",
-            "id":"KxLwPp9MYV26CoP8ixTXggWvEgVaa9iPN",
-            "version":"avalanche/0.5.0",
-            "lastSent":"2020-06-01T19:41:08Z",
-            "lastReceived":"2020-06-01T19:41:08Z"
-         },
-         {
-            "ip":"127.0.0.1:9157",
-            "publicIP":"127.0.0.1:9157",
-            "id":"CkcATAFTDK4HHNWycEWfCz5wEMCsssZSt",
-            "version":"avalanche/0.5.0",
-            "lastSent":"2020-06-01T19:41:08Z",
-            "lastReceived":"2020-06-01T19:41:08Z"
-         }
-      ]
-   },
-   "id":1
+    "jsonrpc":"2.0",
+    "result":{
+        "numPeers":"4",
+        "peers":[
+            {
+                "ip":"127.0.0.1:36698",
+                "publicIP":"127.0.0.1:9655",
+                "nodeID":"NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
+                "version":"avalanche/1.0.5",
+                "lastSent":"2020-11-15T09:29:16-05:00",
+                "lastReceived":"2020-11-15T09:29:09-05:00"
+            },
+            {
+                "ip":"127.0.0.1:37036",
+                "publicIP":"127.0.0.1:9657",
+                "nodeID":"NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu",
+                "version":"avalanche/1.0.5",
+                "lastSent":"2020-11-15T09:29:16-05:00",
+                "lastReceived":"2020-11-15T09:29:18-05:00"
+            },
+            {
+                "ip":"127.0.0.1:38764",
+                "publicIP":"127.0.0.1:9659",
+                "nodeID":"NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
+                "version":"avalanche/1.0.5",
+                "lastSent":"2020-11-15T09:29:16-05:00",
+                "lastReceived":"2020-11-15T09:29:15-05:00"
+            },
+            {
+                "ip":"127.0.0.1:60194",
+                "publicIP":"127.0.0.1:9653",
+                "nodeID":"NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
+                "version":"avalanche/1.0.5",
+                "lastSent":"2020-11-15T09:29:16-05:00",
+                "lastReceived":"2020-11-15T09:29:09-05:00"
+            }
+        ]
+    },
+    "id":1
 }
 ```
 
