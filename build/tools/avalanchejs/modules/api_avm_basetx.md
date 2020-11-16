@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/basetx.ts:22](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/basetx.ts#L22)*
+*Defined in [src/apis/avm/basetx.ts:22](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/basetx.ts#L22)*

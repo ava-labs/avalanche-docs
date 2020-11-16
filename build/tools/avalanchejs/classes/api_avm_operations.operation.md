@@ -48,7 +48,7 @@ A class representing an operation. All operation types must extend on this class
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/ops.ts:42](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L42)*
+*Defined in [src/apis/avm/ops.ts:42](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L42)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/apis/avm/ops.ts:41](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L41)*
+*Defined in [src/apis/avm/ops.ts:41](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L41)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **sigCount**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/apis/avm/ops.ts:61](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L61)*
+*Defined in [src/apis/avm/ops.ts:61](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L61)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • **sigIdxs**: *Array‹[SigIdx](common_signature.sigidx.md)›* = []
 
-*Defined in [src/apis/avm/ops.ts:62](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L62)*
+*Defined in [src/apis/avm/ops.ts:62](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L62)*
 
 ## Methods
 
@@ -82,7 +82,7 @@ ___
 
 ▸ **addSignatureIdx**(`addressIdx`: number, `address`: Buffer): *void*
 
-*Defined in [src/apis/avm/ops.ts:96](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L96)*
+*Defined in [src/apis/avm/ops.ts:96](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L96)*
 
 Creates and adds a [SigIdx](common_signature.sigidx.md) to the [Operation](api_avm_operations.operation.md).
 
@@ -103,7 +103,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/apis/avm/ops.ts:51](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L51)*
+*Defined in [src/apis/avm/ops.ts:51](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L51)*
 
 **Parameters:**
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/avm/ops.ts:106](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L106)*
+*Defined in [src/apis/avm/ops.ts:106](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L106)*
 
 **Parameters:**
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **getCredentialID**(): *number*
 
-*Defined in [src/apis/avm/ops.ts:88](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L88)*
+*Defined in [src/apis/avm/ops.ts:88](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L88)*
 
 Returns the credential ID.
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **getOperationID**(): *number*
 
-*Defined in [src/apis/avm/ops.ts:78](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L78)*
+*Defined in [src/apis/avm/ops.ts:78](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L78)*
 
 **Returns:** *number*
 
@@ -159,7 +159,7 @@ ___
 
 ▸ **getSigIdxs**(): *Array‹[SigIdx](common_signature.sigidx.md)›*
 
-*Defined in [src/apis/avm/ops.ts:83](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L83)*
+*Defined in [src/apis/avm/ops.ts:83](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L83)*
 
 Returns the array of [SigIdx](common_signature.sigidx.md) for this [Operation](api_avm_operations.operation.md)
 
@@ -173,7 +173,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -187,7 +187,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -201,7 +201,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/apis/avm/ops.ts:44](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L44)*
+*Defined in [src/apis/avm/ops.ts:44](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L44)*
 
 **Parameters:**
 
@@ -217,7 +217,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:121](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L121)*
+*Defined in [src/apis/avm/ops.ts:121](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L121)*
 
 **Returns:** *Buffer*
 
@@ -227,7 +227,7 @@ ___
 
 ▸ **toString**(): *string*
 
-*Defined in [src/apis/avm/ops.ts:136](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L136)*
+*Defined in [src/apis/avm/ops.ts:136](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L136)*
 
 Returns a base-58 string representing the [NFTMintOperation](api_avm_operations.nftmintoperation.md).
 
@@ -239,7 +239,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/apis/avm/ops.ts:64](https://github.com/ava-labs/avalanchejs/blob/ccc6083/src/apis/avm/ops.ts#L64)*
+*Defined in [src/apis/avm/ops.ts:64](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L64)*
 
 **Returns:** *function*
 
