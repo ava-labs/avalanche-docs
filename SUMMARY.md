@@ -36,6 +36,7 @@
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
+    * [Create ERC-20 token on Avalanche C-Chain](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
 * [APIs](build/apis/README.md)
   * [Issuing API Calls](build/apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/apis/platform-chain-p-chain-api.md)

@@ -83,6 +83,7 @@ curl -X POST --data '{
 ```
 
 `peers` should have 4 entries:
+
 ```cpp
 {
     "jsonrpc":"2.0",
