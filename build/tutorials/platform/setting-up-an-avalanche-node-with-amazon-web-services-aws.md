@@ -309,7 +309,7 @@ If all is well, the response should look something like:
 
 That portion that says, “NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
 
-There are other APIs, such as the [Health API](../../apis/health-api.md) available to our node. To enable these APIs, we must modify the ExecStart section of our “/etc/systemd/system/avalanchego.service” file created in Step 5 to include flags that enable these endpoints. Beware: this port is open to the world, so if we enable an RPC, then the world can query this data from our node, which could eat our bandwidth and computing resources.
+There are other APIs, such as the [Health API](../../avalanchego-apis/health-api.md) available to our node. To enable these APIs, we must modify the ExecStart section of our “/etc/systemd/system/avalanchego.service” file created in Step 5 to include flags that enable these endpoints. Beware: this port is open to the world, so if we enable an RPC, then the world can query this data from our node, which could eat our bandwidth and computing resources.
 
 ![Image for post](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche currently supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../apis/exchange-chain-x-chain-api.md) and the Timestamp VM.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche currently supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) and the Timestamp VM.
 
 In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
 
@@ -24,7 +24,7 @@ Make sure the subnet that will validate your blockchain has at least `snow-sampl
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
 
-The [AVM’s documentation](../../apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis) should look like this:
+The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis) should look like this:
 
 ```cpp
 {
