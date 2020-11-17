@@ -198,21 +198,6 @@ curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
     "assetCount": 180
   }
 }
-
-### Address Chains
-
-Returns the chains that 1 or more addresses has been seen on.
-
-#### **Params**
-
-| Name | Type | Description | Default | Max
-| --- | --- | --- | --- | ---
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None
-
-#### **Example Call**
-
-```shell
-curl "http://127.0.0.1:8080/v2/addressChains?address=avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u&address=avax14q43wu6wp8fs745dt6y5s0a02vx57ypq4xc5s3"
 ```
 
 #### **Example Response**
