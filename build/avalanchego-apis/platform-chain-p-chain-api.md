@@ -784,7 +784,7 @@ The top level field `delegators` is deprecated as of v1.0.1. If you are using it
 #### **Signature**
 
 ```cpp
-platform.getCurrentValidators({subnetID: string}) ->
+platform.getCurrentValidators({subnetID: string, (optional)}) ->
 {
     validators: []{
         startTime: string,
@@ -1004,7 +1004,7 @@ List the validators in the pending validator set of the specified Subnet. Each v
 #### **Signature**
 
 ```cpp
-platform.getPendingValidators({subnetID: string}) ->
+platform.getPendingValidators({subnetID: string, (optional)}) ->
 {
     validators: []{
         startTime: string,
@@ -1678,7 +1678,7 @@ Sample validators from the specified Subnet.
 platform.sampleValidators(
     {
         size: int,
-        subnetID: string
+        subnetID: string, (optional)
     }
 ) ->
 {

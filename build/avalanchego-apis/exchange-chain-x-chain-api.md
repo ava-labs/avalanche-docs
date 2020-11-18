@@ -224,7 +224,7 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
-    denomination: int,  
+    denomination: int, (optional)
     initialHolders: []{
         address: string,
         amount: int
@@ -363,7 +363,7 @@ Create a new variable-cap, fungible asset. No units of the asset exist at initia
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
-    denomination: int,  
+    denomination: int, (optional)
     minterSets: []{
         minters: []string,
         threshold: int
