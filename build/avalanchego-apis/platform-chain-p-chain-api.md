@@ -1547,7 +1547,7 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-**Signature**
+#### **Signature**
 
 ```cpp
 platform.importKey({

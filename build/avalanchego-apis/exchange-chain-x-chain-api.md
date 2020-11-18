@@ -218,7 +218,7 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-**Signature**
+#### **Signature**
 
 ```text
 avm.createFixedCapAsset({
