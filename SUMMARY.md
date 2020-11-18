@@ -30,6 +30,8 @@
     * [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
+    * [How to Run Avalanche at Home: Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
+    * [How to Run Avalanche at Home: Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
     * [Set Up an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
     * [Set up Node Monitoring](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
     * [Stake AVAX, by Validating or Delegating, with the Avalanche Wallet](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
