@@ -216,7 +216,7 @@ Check whether a given chain is done bootstrapping
 #### **Signature**
 
 ```text
-info.isBootstrapped(chain: string) -> {isBootstrapped: bool}
+info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
 `chain` is the ID or alias of a chain.

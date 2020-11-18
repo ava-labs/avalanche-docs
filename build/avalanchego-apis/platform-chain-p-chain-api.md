@@ -338,7 +338,7 @@ curl -X POST --data '{
     "method": "platform.createBlockchain",
     "params" : {
         "vmID":"timestamp",
-        "SubnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
+        "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
         "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
         "encoding": "cb58",
@@ -553,7 +553,6 @@ platform.getBalance({
     utxoIDs: []{
         txID: string,
         outputIndex: int
-        }
     }
 }
 ```
@@ -801,7 +800,7 @@ platform.getCurrentValidators({subnetID: string}) ->
         potentialReward: string,
         delegationFee: string,
         uptime: string,
-        connected: boolean,
+        connected: bool,
         delegators: []{
             startTime: string,
             endTime: string,
@@ -934,7 +933,7 @@ Returns the height of the last accepted block.
 ```cpp
 platform.getHeight() ->
 {
-      height: int,
+    height: int,
 }
 ```
 
@@ -1011,7 +1010,7 @@ platform.getPendingValidators({subnetID: string}) ->
         startTime: string,
         endTime: string,
         stakeAmount: string, (optional)
-        nodeID: string
+        nodeID: string,
         delegationFee: string,
         connected: bool,
         weight: string, (optional)
@@ -1129,9 +1128,9 @@ platform.getSubnets(
 ) ->
 {
     subnets: []{
-            id: string,
-            controlKeys: []string,
-            threshold: string
+        id: string,
+        controlKeys: []string,
+        threshold: string
     }
 }
 ```
@@ -1257,7 +1256,7 @@ Optional `encoding` parameter to specify the format for the returned transaction
 platform.getTx({
     txID: string,
     encoding: string (optional)
-} -> {
+}) -> {
     tx: string,
     encoding: string,
 })
@@ -1297,7 +1296,7 @@ Gets a transaction’s status by its ID.
 #### **Signature**
 
 ```cpp
-platform.getTxStatus({txID: string} -> {status: string})
+platform.getTxStatus({txID: string}) -> {status: string}
 ```
 
 #### **Example Call**
@@ -1334,7 +1333,7 @@ platform.getUTXOs(
     {
         addresses: string,
         limit: int, (optional)
-        startIndex: { (optional )
+        startIndex: { (optional)
             address: string,
             utxo: string
         },
@@ -1343,7 +1342,7 @@ platform.getUTXOs(
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,

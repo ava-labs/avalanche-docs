@@ -364,7 +364,7 @@ avm.createVariableCapAsset({
     name: string,
     symbol: string,
     denomination: int,  
-    minterSets []{
+    minterSets: []{
         minters: []string,
         threshold: int
     },
@@ -448,7 +448,7 @@ Create a new non-fungible asset. No units of the asset exist at initialization. 
 avm.createNFTAsset({
     name: string,
     symbol: string,
-    minterSets []{
+    minterSets: []{
         minters: []string,
         threshold: int
     },
@@ -986,7 +986,7 @@ avm.getUTXOs(
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
@@ -1412,8 +1412,8 @@ avm.sendMultiple({
     outputs: []{
       assetID: string,
       amount: int,
-      to: string
-    }
+      to: string,
+    },
     from: []string, (optional)
     changeAddr: string, (optional)
     memo: string, (optional)
@@ -1596,8 +1596,8 @@ wallet.sendMultiple({
     outputs: []{
       assetID: string,
       amount: int,
-      to: string
-    }
+      to: string,
+    },
     from: []string, (optional)
     changeAddr: string, (optional)
     memo: string, (optional)
