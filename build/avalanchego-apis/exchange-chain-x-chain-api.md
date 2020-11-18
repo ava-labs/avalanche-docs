@@ -353,7 +353,7 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mint`.
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
@@ -438,7 +438,7 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mintNFT`.
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
