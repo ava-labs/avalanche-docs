@@ -72,7 +72,7 @@ You do not need to have AVAX funds on your validating node. In fact, it's best p
 
 Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
 
-{% page-ref page="../../build/tutorials/platform/setting-up-node-monitoring.md" %}
+{% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
 ## Delegators
 

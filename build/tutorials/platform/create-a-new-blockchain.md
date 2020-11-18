@@ -18,7 +18,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](https://docs.avax.network/v1.0/en/references/command-line-interface/) when starting a node. Its default value is 20.\)
 
-{% page-ref page="add-a-validator.md" %}
+{% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
 ### Create the Genesis Data <a id="create-the-genesis-data"></a>
 

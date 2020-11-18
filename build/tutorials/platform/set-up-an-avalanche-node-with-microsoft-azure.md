@@ -188,7 +188,7 @@ Then start the VM
 
 ## Connect to the Avalanche Node <a id="8bb7"></a>
 
-The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
+The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](../nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
 On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select “Advanced” at the bottom
 
@@ -236,7 +236,7 @@ You should now be connected to your Node.
 
 ![Image for post](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
 
-The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
+The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](../nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
 ### Update Linux with security patches <a id="8a1c"></a>
 

@@ -330,7 +330,7 @@ The response should be:
 
 In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` to see that AVAX we sent was deducted from its balance, as well as the transaction fee.
 
-{% page-ref page="tutorials/platform/add-a-validator.md" %}
+{% page-ref page="tutorials/nodes-and-staking/add-a-validator.md" %}
 
 {% page-ref page="tools/avalanchejs/create-an-asset-on-the-x-chain.md" %}
 
