@@ -389,7 +389,7 @@ platform.createSubnet(
 }
 ```
 
-* In order to create add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
+* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
@@ -1324,7 +1324,7 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set address.
+Gets the UTXOs that reference a given set of addresses.
 
 #### **Signature**
 

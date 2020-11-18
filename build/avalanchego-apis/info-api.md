@@ -262,7 +262,7 @@ info.peers() ->
         nodeID: string,
         version: string,
         lastSent: string,
-        lastRecevied: string
+        lastReceived: string
     }
 }
 ```
