@@ -28,6 +28,10 @@
 
 [**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
 
+### Education
+
+\*\*\*\*[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials
+
 ### Explorers
 
 [**Avalanche Explorer**](https://explorer.avax.network): an analytics tool that enables people to search the Avalanche platform for transactions, addresses, and other platform activities.
