@@ -141,6 +141,12 @@ curl -X POST --data '{
 
 Writes a memory profile of the to `mem.profile`.
 
+#### **Signature**
+
+```text
+admin.memoryProfile() -> {success:bool}
+```
+
 #### **Example Call**
 
 ```text
