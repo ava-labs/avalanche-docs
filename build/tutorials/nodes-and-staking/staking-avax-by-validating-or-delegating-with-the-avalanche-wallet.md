@@ -85,6 +85,5 @@ Confirm the details!
 
 ![Image for post](https://miro.medium.com/max/1600/0*Silj8-uZTm5g9xSi)
 
-Congratulations. You are now delegating the Avalanche Primary Network!  
-
+Congratulations. You are now delegating the Avalanche Primary Network!
 

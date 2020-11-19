@@ -42,11 +42,11 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
 ### **Funding your C-Chain address on FUJI** <a id="d718"></a>
 
- Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
 
 ### Funding your C-Chain address on Mainnet <a id="1997"></a>
 
-Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain. 
+Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain.
 
 {% page-ref page="transfer-avax-between-x-chain-and-p-chain.md" %}
 

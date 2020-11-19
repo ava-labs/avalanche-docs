@@ -98,7 +98,7 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/evm.md#avaxexport)
+**DEPRECATED—instead use** [**avax.export**](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api#avax-export).
 
 Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call `importAVAX` on the X-Chain to complete the transfer.
 
@@ -294,7 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`export`](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/avm.md#avmexport) method to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`export`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-export) method to initiate the transfer.
 
 #### Signature
 
@@ -347,9 +347,9 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/evm.md#avaximport)
+**DEPRECATED—instead use** [**avax.import**](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api#avax-import)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](https://github.com/ava-labs/avalanche-docs/tree/cdcd4eeca0089d9f57617123d145da5269d43fa3/build/apis/avm.md#avmexportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
 
 #### Signature
 
