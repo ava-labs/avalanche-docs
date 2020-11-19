@@ -1,3 +1,7 @@
+---
+description: 'Provided by Community member: Murat Çeliktepe'
+---
+
 # Create ERC-20 token on Avalanche C-Chain
 
 ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.

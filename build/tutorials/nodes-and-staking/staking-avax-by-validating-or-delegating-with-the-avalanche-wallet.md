@@ -53,7 +53,7 @@ Using the binaries is easy and convenient and sets you up to be a validator in 4
 
 We will let our node bootstrap and sync with the rest with the network, and we are ready to roll.
 
-We will need our Node ID. Let’s find that using the [info API](../../apis/info-api.md)!
+We will need our Node ID. Let’s find that using the [info API](../../avalanchego-apis/info-api.md)!
 
 If you need any help setting up your node, join us on [Discord](https://chat.avax.network/).
 

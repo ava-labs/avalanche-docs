@@ -134,5 +134,5 @@ The response confirms that our subnet was created:
 
 ### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
 
-This [tutorial](add-a-validator.md) will show you how to add validators to a subnet.
+This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
 
