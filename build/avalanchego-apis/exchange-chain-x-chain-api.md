@@ -231,7 +231,7 @@ avm.createFixedCapAsset({
     },
     from: []string, (optional)
     changeAddr: string, (optional)
-    username: string,  
+    username: string,
     password: string
 }) ->
 {
@@ -370,7 +370,7 @@ avm.createVariableCapAsset({
     },
     from: []string, (optional)
     changeAddr: string, (optional)
-    username: string,  
+    username: string,
     password: string
 }) ->
 {
@@ -454,7 +454,7 @@ avm.createNFTAsset({
     },
     from: []string, (optional)
     changeAddr: string, (optional)
-    username: string,  
+    username: string,
     password: string
 }) ->
  {
@@ -643,7 +643,7 @@ curl -X POST --data '{
 
 ### avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain.  
+Send AVAX from the X-Chain to another chain.
 After calling this method, you must call `import` on the other chain to complete the transfer.
 
 #### **Signature**
@@ -984,7 +984,7 @@ avm.getUTXOs(
         sourceChain: string, (optional)
         encoding: string, (optional)
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
