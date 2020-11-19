@@ -1,6 +1,6 @@
 # Platform Chain \(P-Chain\) API
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](https://docs.avax-dev.network/learn/platform-overview/staking#validators) set and handles blockchain creation.
+This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking#validators) set and handles blockchain creation.
 
 ## Endpoint
 
@@ -24,7 +24,7 @@ The delegatee charges a fee to the delegator; the former receives a percentage o
 
 The delegation period must be a subset of the period that the delegatee validates the Primary Network.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -105,7 +105,7 @@ The validation period must be between 2 weeks and 1 year.
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -430,7 +430,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax) method to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api#avm-importavax) method to complete the transfer.
 
 #### **Signature**
 
@@ -493,7 +493,7 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](#platform-importkey).
 
 #### **Signature**
 
@@ -1484,7 +1484,7 @@ This gives response:
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
 
 #### **Signature**
 
