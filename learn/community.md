@@ -52,7 +52,7 @@
 
 ### Wallets
 
-[**Avalanche Wallet**](https://wallet.avax.network): _\*\*_a simple, secure, non-custodial wallet for storing Avalanche assets.
+[**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
