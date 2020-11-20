@@ -830,3 +830,94 @@ Let's make a signed transaction that uses the unsigned transaction and credentia
     0x00,
 ```
 
+## UTXO
+
+A UTXO is a standalone representation of a transaction output.
+
+### What UTXO Contains
+
+A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+
+* **`CodecID`** The only valid `CodecID` is `00 00`
+* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
+* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
+* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
+* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+
+### Gantt UTXO Specification
+
+```text
++--------------+----------+-------------------------+
+| codec_id     : uint16   |                 2 bytes |
++--------------+----------+-------------------------+
+| tx_id        : [32]byte |                32 bytes |
++--------------+----------+-------------------------+
+| output_index : int      |                 4 bytes |
++--------------+----------+-------------------------+
+| asset_id     : [32]byte |                32 bytes |
++--------------+----------+-------------------------+
+| output       : Output   |      size(output) bytes |
++--------------+----------+-------------------------+
+                          | 70 + size(output) bytes |
+                          +-------------------------+
+```
+
+### Proto UTXO Specification
+
+```text
+message Utxo {
+    uint16 codec_id = 1;     // 02 bytes
+    bytes tx_id = 2;         // 32 bytes
+    uint32 output_index = 3; // 04 bytes
+    bytes asset_id = 4;      // 32 bytes
+    Output output = 5;       // size(output)
+}
+```
+
+### UTXO Example
+
+Let’s make a UTXO from the signed transaction created above:
+
+* **`CodecID`**: `0`
+* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`UTXOIndex`**: 0 = 0x00000000
+* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**: `"Example EVMOutput as defined above"`
+
+```text
+[
+    CodecID   <- 0x0000
+    TxID      <- 0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7
+    UTXOIndex <- 0x00000000
+    AssetID   <- 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+    Output    <-     0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+]
+=
+[
+    // Codec ID:
+    0x00, 0x00,
+    // txID:
+    0xf9, 0x66, 0x75, 0x0f, 0x43, 0x88, 0x67, 0xc3,
+    0xc9, 0x82, 0x8d, 0xdc, 0xdb, 0xe6, 0x60, 0xe2,
+    0x1c, 0xcd, 0xbb, 0x36, 0xa9, 0x27, 0x69, 0x58,
+    0xf0, 0x11, 0xba, 0x47, 0x2f, 0x75, 0xd4, 0xe7,
+    // utxo index:
+    0x00, 0x00, 0x00, 0x00,
+    // assetID:
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+    // output:
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x02, 0x00, 0x01, 0x02, 0x03,
+    0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
+    0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
+    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
+    0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
+    0x24, 0x25, 0x26, 0x27,
+]
+```
+
