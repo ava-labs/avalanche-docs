@@ -11,7 +11,7 @@ import {
   } from "avalanche" 
 
 let myNetworkID = 1; //default is 3, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
+let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // The X-Chain blockchainID on this network
 let avax = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
@@ -29,7 +29,7 @@ However, we do need to get the UTXO Set for the addresses we’re managing.
 ```text
 let myAddresses = xchain.keyChain().getAddresses(); //returns an array of addresses the KeyChain manages
 let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array of addresses the KeyChain manages as strings
-let utxos = await xchain.getUTXOs(myAddresses);
+let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
 ## Spending the UTXOs <a id="spending-the-utxos"></a>
@@ -56,7 +56,7 @@ let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // address
 //   * An array of addresses any leftover funds are sent
 //   * The AssetID of the funds being sent
 let unsignedTx = await xchain.buildBaseTx(utxos, sendAmount, [friendsAddress], addressStrings, addressStrings, assetid);
-let signedTx = xchain.signTx(unsignedTx);
+let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
 ```
 
