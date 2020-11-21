@@ -6,6 +6,8 @@ description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
 
 The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
+{% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" %}
+
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
