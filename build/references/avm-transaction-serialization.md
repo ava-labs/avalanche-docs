@@ -891,7 +891,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
 
 * **`TypeID`** is the ID for this output type. It is `0x0000000d`.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an NFT Transfer Output. This output doesn’t have the **`OutputID`**, because the type is known by the context of being in this operation.
+* **`NFTTransferOutput`** is the output of this operation and must be an NFT Transfer Output. This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
 
 ### **Gantt NFT Transfer Op Specification**
 
