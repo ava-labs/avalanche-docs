@@ -218,6 +218,30 @@ curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
+#### TxFee Aggregate
+
+AVAX Aggregate txfee
+
+**Example Call**
+
+```text
+curl "http://127.0.0.1:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
+```
+
+**Example Response**
+
+```javascript
+{
+  "aggregates": {
+    "startTime": "2020-09-21T00:00:00Z",
+    "endTime": "2020-10-21T00:00:00Z",
+    "txfee": "134818000000"
+  },
+  "startTime": "2020-09-21T00:00:00Z",
+  "endTime": "2020-10-21T00:00:00Z"
+}
+```
+
 #### List Transactions
 
 Find transactions confirmed transactions from the network.
