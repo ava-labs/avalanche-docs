@@ -202,22 +202,6 @@ curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-**Example Response**
-
-```javascript
-{
-  "addressChains": {
-    "avax14q43wu6wp8fs745dt6y5s0a02vx57ypq4xc5s3": [
-      "11111111111111111111111111111111LpoYY"
-    ],
-    "avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u": [
-      "11111111111111111111111111111111LpoYY",
-      "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"
-    ]
-  }
-}
-```
-
 #### TxFee Aggregate
 
 AVAX Aggregate txfee
@@ -239,6 +223,39 @@ curl "http://127.0.0.1:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
   },
   "startTime": "2020-09-21T00:00:00Z",
   "endTime": "2020-10-21T00:00:00Z"
+}
+```
+
+#### Address Chain
+
+Responds with the chains an address appears on.
+
+**Params**
+
+| Name | Type | Description | Default | Max |
+| :--- | :--- | :--- | :--- | :--- |
+| `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
+
+
+**Example Call**
+
+```text
+curl "http://127.0.0.1:8080/v2/addressChains?address=X-fujiABC"
+```
+
+**Example Response**
+
+```javascript
+{
+  "addressChains": {
+    "avax14q43wu6wp8fs745dt6y5s0a02vx57ypq4xc5s3": [
+      "11111111111111111111111111111111LpoYY"
+    ],
+    "avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u": [
+      "11111111111111111111111111111111LpoYY",
+      "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"
+    ]
+  }
 }
 ```
 
