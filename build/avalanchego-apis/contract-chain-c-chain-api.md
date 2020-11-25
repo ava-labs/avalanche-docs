@@ -100,13 +100,13 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.export**](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call `importAVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-importavax) on the X-Chain to complete the transfer.
 
 #### Signature
 
 ```go
 avax.exportAVAX({
-    from: string[],
+    from: []string,
     to: string,
     amount: int,
     destinationChain: string,
@@ -232,7 +232,7 @@ avax.getUTXOs(
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
