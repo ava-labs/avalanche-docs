@@ -62,6 +62,41 @@ Message Signature: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142
 
 Morty was never seen again.
 
+## Signed Messages
+
+A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
+
+```txt
+sign(sha256(length(prefix) . prefix . length(message) . message))
+```
+
+The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is the length of the prefix text and `length(message)` is an int of the message size.
+
+### Gantt Signed Message Specification
+
+```text
++---------------+-----------+------------------------------+
+| prefix        : [26]byte  |                     26 bytes |
++---------------+-----------+------------------------------+
+| messageLength : int       |                      4 bytes |
++---------------+-----------+------------------------------+
+| message       : []byte    |          size(message) bytes |
++---------------+-----------+------------------------------+
+                            |       26 + 4 * size(message) |
+                            +------------------------------+
+``
+
+```text
+// prefix size
+0x1a
+// prefix
+0x41 76 61 6c 61 6e 63 68 65 20 53 69 67 6e 65 64 20 4d 65 73 73 61 67 65 3a 0a 
+// msg size
+0x00 00 00 07
+// msg:
+0x67 61 62 72 69 65 6c
+```
+
 ## Cryptography in Ethereum Virtual Machine
 
 Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
