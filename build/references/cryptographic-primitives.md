@@ -82,7 +82,7 @@ The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is
 +---------------+-----------+------------------------------+
 | message       : []byte    |          size(message) bytes |
 +---------------+-----------+------------------------------+
-                            |       26 + 4 * size(message) |
+                            |       26 + 4 + size(message) |
                             +------------------------------+
 ```
 
