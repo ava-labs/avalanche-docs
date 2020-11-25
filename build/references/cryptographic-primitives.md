@@ -84,7 +84,9 @@ The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is
 +---------------+-----------+------------------------------+
                             |       26 + 4 * size(message) |
                             +------------------------------+
-``
+```
+
+### Example
 
 ```text
 // prefix size
