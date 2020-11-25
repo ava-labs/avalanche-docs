@@ -4,17 +4,19 @@ description: 'This API allows clients to interact with Ortelius, the Avalanche i
 
 # Ortelius API
 
-## Format
+## Ortelius API
+
+### Format
 
 This API uses GET HTTP requests using URL query parameters and returns JSON data.
 
-## Versioning
+### Versioning
 
 Starting with version 2, the API will paths will be prefixed by a version tag, e.g. `http://127.0.0.1:8080/v2`.
 
 The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
 
-## Data Types
+### Data Types
 
 In addition to integers, strings, and booleans, the following data types are used throughout the API:
 
@@ -24,7 +26,7 @@ In addition to integers, strings, and booleans, the following data types are use
 | `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
 | `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
 
-## List Parameters
+### List Parameters
 
 All endpoints for listing resources accept the following parameters:
 
@@ -36,23 +38,23 @@ All endpoints for listing resources accept the following parameters:
 | `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
 | `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
 
-## Available Endpoints
+### Available Endpoints
 
-### Overview
+#### Overview
 
 The root of the API gives an overview of the constants for the active Avalanche network being indexed.
 
-#### **Params**
+**Params**
 
 None
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -76,23 +78,23 @@ curl "http://127.0.0.1:8080/v2"
 }
 ```
 
-### Search
+#### Search
 
 Find an address or a transaction by its ID.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `query` | `string` | An ID prefix to filter items by | None | None |
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -165,24 +167,24 @@ curl "http://127.0.0.1:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-### Aggregate
+#### Aggregate
 
 Calculate aggregate transaction data over a time frame.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `assetID` | `id` | An asset ID to filter results by. | None | None |
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -200,7 +202,7 @@ curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -216,11 +218,11 @@ curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-### List Transactions
+#### List Transactions
 
 Find transactions confirmed transactions from the network.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -230,13 +232,13 @@ Find transactions confirmed transactions from the network.
 | `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
 | `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-desc` | N/A |
 
-#### **Example Call**
+**Example Call**
 
 ```bash
 curl "http://127.0.0.1:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -306,17 +308,17 @@ curl "http://127.0.0.1:8080/v2/transactions?limit=1&chainID=11111111111111111111
 }
 ```
 
-### Get Transaction
+#### Get Transaction
 
 Find a single transaction by its ID.
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -380,24 +382,24 @@ curl "http://127.0.0.1:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-### List Addresses
+#### List Addresses
 
 Find addresses that have been involved in confirmed transactions.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/addresses?limit=1"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -420,17 +422,17 @@ curl "http://127.0.0.1:8080/v2/addresses?limit=1"
 }
 ```
 
-### Get Address
+#### Get Address
 
 Find a single address by its ID.
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -449,23 +451,23 @@ curl "http://127.0.0.1:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-### List Assets
+#### List Assets
 
 Find assets that have been created on the X-chain.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `enableAggregate` | `bool` | When true, aggregated data about the asset will be included. | `false` | N/A |
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/assets?limit=1&enableAggregate=true"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -541,17 +543,17 @@ curl "http://127.0.0.1:8080/v2/assets?limit=1&enableAggregate=true"
 }
 ```
 
-### Get Asset
+#### Get Asset
 
 Find a single asset by its ID.
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -623,11 +625,11 @@ curl "http://127.0.0.1:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 }
 ```
 
-### List Outputs
+#### List Outputs
 
 Find outputs that have been created by a transaction confirmed on the network.
 
-#### **Params**
+**Params**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -635,13 +637,13 @@ Find outputs that have been created by a transaction confirmed on the network.
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 | `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/outputs?limit=1&spent=false"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -665,17 +667,17 @@ curl "http://127.0.0.1:8080/v2/outputs?limit=1&spent=false"
 }
 ```
 
-### Get Output
+#### Get Output
 
 Find a single output by its ID.
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -695,17 +697,17 @@ curl "http://127.0.0.1:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-## Legacy API
+### Legacy API
 
 Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
 
-#### **Example Call**
+**Example Call**
 
 ```text
 curl "http://127.0.0.1:8080/x"
 ```
 
-#### **Example Response**
+**Example Response**
 
 ```javascript
 {
@@ -719,14 +721,15 @@ curl "http://127.0.0.1:8080/x"
 
 The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
 
-# Ortelius Configuration
+## Ortelius Configuration
 
 Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
 
-# Example
+## Example
 
 This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
-```json
+
+```javascript
 {
   "networkID": 5,
   "logDirectory": "/var/log/ortelius",
@@ -763,3 +766,4 @@ This configuration is the one used by the standalone Docker Compose setup and il
   }
 }
 ```
+
