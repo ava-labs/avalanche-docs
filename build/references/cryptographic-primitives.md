@@ -67,7 +67,7 @@ Morty was never seen again.
 A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
 
 ```txt
-sign(sha256(length(prefix) . prefix . length(message) . message))
+sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
 The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is the length of the prefix text and `length(message)` is an int of the message size.
