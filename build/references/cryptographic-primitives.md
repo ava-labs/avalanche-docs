@@ -70,9 +70,9 @@ A standard for interoperable generic signed messages based on the Bitcoin Script
 sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is the length of the prefix text and `length(message)` is an int of the message size.
+The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](./serialization-primitives#integer) of the message size.
 
-### Gantt Signed Message Specification
+### Gantt Pre-image Specification
 
 ```text
 +---------------+-----------+------------------------------+
@@ -88,16 +88,20 @@ The prefix is simply the string '\x1AAvalanche Signed Message:\n', where 0x1A is
 
 ### Example
 
+As an example we will sign the message "Through consensus to the stars"
+
 ```text
-// prefix size
+// prefix size: 26 bytes
 0x1a
-// prefix
+// prefix: Avalanche Signed Message:\n
 0x41 0x76 0x61 0x6c 0x61 0x6e 0x63 0x68 0x65 0x20 0x53 0x69 0x67 0x6e 0x65 0x64 0x20 0x4d 0x65 0x73 0x73 0x61 0x67 0x65 0x3a 0x0a
-// msg size
-0x00 0x00 0x00 0x07
-// msg:
-0x67 0x61 0x62 0x72 0x69 0x65 0x6c
+// msg size: 30 bytes
+0x00 0x00 0x00 0x1e
+// msg: Through consensus to the stars
+54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
 ```
+
+After `sha256`ing and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
 
 ## Cryptography in Ethereum Virtual Machine
 
