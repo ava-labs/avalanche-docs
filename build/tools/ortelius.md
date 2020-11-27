@@ -12,7 +12,7 @@ This API uses GET HTTP requests using URL query parameters and returns JSON data
 
 ### Versioning
 
-Starting with version 2, the API will paths will be prefixed by a version tag, e.g. `http://127.0.0.1:8080/v2`.
+Starting with version 2, the API will paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
 
 The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
 
@@ -51,7 +51,7 @@ None
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2"
+curl "http://localhost:8080/v2"
 ```
 
 **Example Response**
@@ -91,7 +91,7 @@ Find an address or a transaction by its ID.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
+curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
 **Example Response**
@@ -181,7 +181,7 @@ Calculate aggregate transaction data over a time frame.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
+curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
 **Example Response**
@@ -209,7 +209,7 @@ AVAX Aggregate txfee
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
+curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
 **Example Response**
@@ -240,7 +240,7 @@ Responds with the chains an address appears on.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/addressChains?address=X-fujiABC"
+curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 ```
 
 **Example Response**
@@ -276,7 +276,7 @@ Find transactions confirmed transactions from the network.
 **Example Call**
 
 ```bash
-curl "http://127.0.0.1:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
+curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
 ```
 
 **Example Response**
@@ -356,7 +356,7 @@ Find a single transaction by its ID.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
+curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
 **Example Response**
@@ -437,7 +437,7 @@ Find addresses that have been involved in confirmed transactions.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/addresses?limit=1"
+curl "http://localhost:8080/v2/addresses?limit=1"
 ```
 
 **Example Response**
@@ -470,7 +470,7 @@ Find a single address by its ID.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
+curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
 **Example Response**
@@ -505,7 +505,7 @@ Find assets that have been created on the X-chain.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/assets?limit=1&enableAggregate=true"
+curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=true"
 ```
 
 **Example Response**
@@ -591,7 +591,7 @@ Find a single asset by its ID.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
+curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
 ```
 
 **Example Response**
@@ -681,7 +681,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/outputs?limit=1&spent=false"
+curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 ```
 
 **Example Response**
@@ -715,7 +715,7 @@ Find a single output by its ID.
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
+curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
 **Example Response**
@@ -745,7 +745,7 @@ Version 1 of the API was built to support only the X-chain, and it did not use a
 **Example Call**
 
 ```text
-curl "http://127.0.0.1:8080/x"
+curl "http://localhost:8080/x"
 ```
 
 **Example Response**
