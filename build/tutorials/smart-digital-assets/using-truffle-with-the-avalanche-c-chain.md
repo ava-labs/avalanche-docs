@@ -6,6 +6,10 @@
 
 ## Requirements
 
+You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](../../tutorials/platform/transfer-avax-between-x-chain-and-p-chain) tutorial.
+
+## Dependencies
+
 * [Avash](https://github.com/ava-labs/avash) is Avalanche's local development network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle: `npm install -g truffle`
@@ -45,129 +49,9 @@ module.exports = {
      network_id: "*",
      gas: 3000000,
      gasPrice: 470000000000
-   },
-   test: {
-     host: "127.0.0.1",
-     port: 7545,
-     network_id: "*"
    }
   }
 };
-```
-
-## Create and unlock an account on the C-Chain
-
-```js
-const Web3 = require('web3');
-const web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
-
-const main = async () => {
-  let account = await web3.eth.personal.newAccount();
-  console.log(account)
-  let unlock = await web3.eth.personal.unlockAccount(account)
-  console.log(unlock)
-}
-  
-main()
-```
-
-Now run the script via `node`
-
-```zsh
-node web3.js
-0x111Ccab68e655b035Ca6050712bFbd10311EF5Cc
-true
-```
-
-## Create Keystore User
-
-```zsh
-curl --location --request POST 'http://localhost:9650/ext/keystore' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"keystore.createUser",
-    "params" :{
-        "username": "username",
-        "password": "strongPassword"
-    }
-}'
-```
-
-## Import PrivateKey to X-Chain
-
-```zsh
-curl --location --request POST 'http://localhost:9650/ext/bc/X' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.importKey",
-    "params" :{
-        "username": "username",
-        "password": "strongPassword",
-        "privateKey":"PrivateKey-"
-    }
-}'
-```
-
-## Import PrivateKey to C-Chain
-
-```zsh
-curl --location --request POST 'http://localhost:9650/ext/bc/C/avax' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "method": "avax.importKey",
-    "params": {
-        "username":"username",
-        "password":"strongPassword",
-        "privateKey":"PrivateKey-"
-    },
-    "jsonrpc": "2.0",
-    "id": 1
-}'
-```
-
-## Export AVAX from the X-Chain to the C-Chain
-
-```zsh
-curl --location --request POST 'http://localhost:9650/ext/bc/X' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.exportAVAX",
-    "params" :{
-        "from": ["X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"],
-        "to":"C-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
-        "amount": 10000000000,
-        "destinationChain": "C",
-        "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
-        "username":"username",
-        "password":"stringPassword"
-    }
-}'
-```
-
-## Import AVAX to the C-Chain to the X-Chain
-
-Put in the address from running `node web3.js`
-
-```zsh
-curl --location --request POST 'http://localhost:9650/ext/bc/C/avax' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "method": "avax.importAVAX",
-    "params": {
-        "username":"username",
-        "password":"strongPassword",
-        "sourceChain": "X",
-        "to":"0x111Ccab68e655b035Ca6050712bFbd10311EF5Cc"
-    },
-    "jsonrpc": "2.0",
-    "id": 1
-}'
 ```
 
 ## Compile Contracts with Truffle
@@ -175,6 +59,71 @@ curl --location --request POST 'http://localhost:9650/ext/bc/C/avax' \
 ```zsh
 truffle compile
 ```
+
+## Create, fund and unlock an account on the C-Chain
+
+When deploying smart contracts to the C-Chain truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations. If you have not yet created an accounts on your C-Chain instance then you will see the following error message when attempting to run migrations with truffle.
+
+```zsh
+truffle migrate --network development
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+Error: Expected parameter 'from' not passed to function.
+```
+
+Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. We'll use it to create the needed account.
+
+```zsh
+truffle console --network development
+truffle(development)> let account = web3.eth.personal.newAccount()
+truffle(development)> account
+'0x090172CD36e9f4906Af17B2C36D662E69f162282'
+```
+
+Here we used the truffle console, which bundles `web3`, to create a new account `0x090172CD36e9f4906Af17B2C36D662E69f162282`. If we now try and run the migration again we'll see this error:
+
+```zsh
+truffle migrate --network development
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+[...]
+
+Error:  *** Deployment Failed ***
+
+"Migrations" could not deploy due to insufficient funds
+   * Account:  0x090172CD36e9f4906Af17B2C36D662E69f162282
+   * Balance:  0 wei
+   * Message:  sender doesn't have enough funds to send tx. The upfront cost is: 1410000000000000000 and the sender's account only has: 0
+   * Try:
+      + Using an adequately funded account
+```
+
+We need to fund the newly created account. Follow the steps in the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](../../tutorials/platform/transfer-avax-between-x-chain-and-p-chain) tutorial to fund you're newly created account.
+
+```zsh
+truffle migrate --network development
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+[...]
+
+Error:  *** Deployment Failed ***
+
+"Migrations" -- Returned error: authentication needed: password or unlock.
+```
+
+Now the error message is telling us that we need to unlock our newly created account. We can use Truffle console to accomplish this.
+
+```zsh
+truffle console --
 
 ## Run Migrations
 
