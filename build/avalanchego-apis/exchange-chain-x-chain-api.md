@@ -107,6 +107,7 @@ curl -X POST --data '{
     "id"     : 1,
     "method" : "avm.buildGenesis",
     "params" : {
+        "networkId": 16,
         "genesisData": {
             "asset1": {
                 "name": "myFixedCapAsset",
@@ -805,6 +806,7 @@ Get information about an asset.
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
+    assetId: string,
     name: string,
     symbol: string,
     denomination: int
@@ -824,7 +826,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getAssetDescription",
     "params" :{
-        "assetID" :"ZiKfqRXCZgHLgZ4rxGU9Qbycdzuq5DRY4tdSNS9ku8kcNxNLD"
+        "assetID" :"2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -833,13 +835,15 @@ curl -X POST --data '{
 
 ```cpp
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "name":"My asset name",
-        "symbol":"MyAN"
-    }
-}
+    "jsonrpc": "2.0",
+    "result": {
+        "assetID": "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe",
+        "name": "Avalanche",
+        "symbol": "AVAX",
+        "denomination": "9"
+    },
+    "id": 1
+}`
 ```
 
 ### avm.getBalance
@@ -1280,8 +1284,7 @@ avm.issueTx({
     tx: string,
     encoding: string, //optional
 }) -> {
-    txID: string,
-    encoding: string,
+    txID: string
 }
 ```
 
@@ -1534,9 +1537,58 @@ curl -X POST --data '{
 }
 ```
 
+### wallet.issueTx
+
+Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
+
+#### Signature
+
+```cpp
+wallet.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### Example call
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"wallet.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
+```
+
+#### Example response
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
 
 #### **Signature**
 
@@ -1595,7 +1647,11 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
 
 #### **Signature**
 
