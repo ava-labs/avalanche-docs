@@ -62,6 +62,49 @@ Message Signature: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142
 
 Morty was never seen again.
 
+## Signed Messages
+
+A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
+
+```txt
+sign(sha256(length(prefix) + prefix + length(message) + message))
+```
+
+The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](./serialization-primitives#integer) of the message size.
+
+### Gantt Pre-image Specification
+
+```text
++---------------+-----------+------------------------------+
+| prefix        : [26]byte  |                     26 bytes |
++---------------+-----------+------------------------------+
+| messageLength : int       |                      4 bytes |
++---------------+-----------+------------------------------+
+| message       : []byte    |          size(message) bytes |
++---------------+-----------+------------------------------+
+                            |       26 + 4 + size(message) |
+                            +------------------------------+
+```
+
+### Example
+
+As an example we will sign the message "Through consensus to the stars"
+
+```text
+// prefix size: 26 bytes
+0x1a
+// prefix: Avalanche Signed Message:\n
+0x41 0x76 0x61 0x6c 0x61 0x6e 0x63 0x68 0x65 0x20 0x53 0x69 0x67 0x6e 0x65 0x64 0x20 0x4d 0x65 0x73 0x73 0x61 0x67 0x65 0x3a 0x0a
+// msg size: 30 bytes
+0x00 0x00 0x00 0x1e
+// msg: Through consensus to the stars
+54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
+```
+
+After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
+
+<img src='../../.gitbook/assets/sign-message.png' style='width: 50%' />
+
 ## Cryptography in Ethereum Virtual Machine
 
 Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
