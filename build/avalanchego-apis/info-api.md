@@ -16,7 +16,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](https://docs.avax-dev.network/build/apis/admin-api#admin-aliaschain)for more context.\)
+Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain)for more context.\)
 
 #### **Signature**
 

@@ -1,6 +1,6 @@
 # Platform Chain \(P-Chain\) API
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](https://docs.avax-dev.network/learn/platform-overview/staking#validators) set and handles blockchain creation.
+This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
 
 ## Endpoint
 
@@ -430,7 +430,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax) method to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
 
 #### **Signature**
 
@@ -493,7 +493,7 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Signature**
 
@@ -1138,7 +1138,7 @@ platform.getSubnets(
 
 `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets. `id` is the Subnet’s ID.  
 `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
-See [here](https://docs.avax-dev.network/build/tutorials/platform/add-a-validator) for information on adding a validator to a Subnet.
+See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
 #### **Example Call**
 
@@ -1485,7 +1485,7 @@ This gives response:
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
 #### **Signature**
 

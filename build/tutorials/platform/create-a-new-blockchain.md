@@ -16,7 +16,7 @@ Every blockchain is validated by a [subnet](https://avalanche.gitbook.io/avalanc
 
 The subnet needs validators in it to, well, validate blockchains.
 
-Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](https://docs.avax.network/v1.0/en/references/command-line-interface/) when starting a node. Its default value is 20.\)
+Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
 
 {% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
@@ -24,7 +24,7 @@ Make sure the subnet that will validate your blockchain has at least `snow-sampl
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
 
-The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis) should look like this:
+The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
 
 ```cpp
 {
