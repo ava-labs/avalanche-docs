@@ -10,7 +10,7 @@ In this tutorial, we’ll create a new subnet with 2 control keys and a threshol
 
 ### Generate the Control Keys <a id="generate-the-control-keys"></a>
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createaddress) This generates a new private key and stores it for a user.
+First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
 
 To generate the first key:
 
@@ -66,7 +66,7 @@ The response contains the second control key, which is held by the user we just 
 
 ### Create the Subnet <a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createsubnet).
+To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
 
 ```cpp
 curl -X POST --data '{
@@ -100,7 +100,7 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 ### Verifying Success <a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-getsubnets) to get all Subnets that exist:
+We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
 
 ```cpp
 curl -X POST --data '{

@@ -294,7 +294,7 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset \(an asset created with [`avm.createVariableCapAsset`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-createvariablecapasset)\).
+Mint units of a variable-cap asset \(an asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset)\).
 
 #### **Signature**
 
@@ -515,7 +515,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-createnftasset).
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -582,7 +582,7 @@ curl -X POST --data '{
 ### avm.export
 
 Send a non-AVAX from the X-Chain to the P-Chain or C-Chain.  
-After calling this method, you must call [`avax.import`](https://docs.avax-dev.network/build/apis/contract-chain-c-chain-api#avax-import) on the C-Chain to complete the transfer.
+After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
 
 #### **Signature**
 
@@ -1137,7 +1137,7 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax) or C-Chain’s [`avax.export`](https://docs.avax-dev.network/build/apis/contract-chain-c-chain-api#avax-export) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
 
 #### **Signature**
 
@@ -1185,7 +1185,7 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
 
 #### **Signature**
 
