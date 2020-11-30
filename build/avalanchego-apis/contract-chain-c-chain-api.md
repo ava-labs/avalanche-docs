@@ -48,7 +48,7 @@ To interact with the `avax` specific RPC calls
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-import) on the X-Chain to complete the transfer.
+Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -98,9 +98,9 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api#avax-export).
+**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-importavax) on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -294,7 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-export) method to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api#avm-export) method to initiate the transfer.
 
 #### Signature
 
@@ -347,7 +347,7 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api#avax-import)
+**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api#avax-import)
 
 Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
 
