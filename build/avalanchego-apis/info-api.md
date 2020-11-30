@@ -16,7 +16,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain)for more context.\)
+Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
 
 #### **Signature**
 
@@ -216,7 +216,7 @@ Check whether a given chain is done bootstrapping
 #### **Signature**
 
 ```text
-info.isBootstrapped(chain: string) -> {isBootstrapped: bool}
+info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
 `chain` is the ID or alias of a chain.
@@ -262,7 +262,7 @@ info.peers() ->
         nodeID: string,
         version: string,
         lastSent: string,
-        lastRecevied: string
+        lastReceived: string
     }
 }
 ```

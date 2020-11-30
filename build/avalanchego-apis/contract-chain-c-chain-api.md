@@ -48,7 +48,7 @@ To interact with the `avax` specific RPC calls
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call `import` on the X-Chain to complete the transfer.
+Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -100,13 +100,13 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call `importAVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
 
 #### Signature
 
 ```go
 avax.exportAVAX({
-    from: string[],
+    from: []string,
     to: string,
     amount: int,
     destinationChain: string,
@@ -232,7 +232,7 @@ avax.getUTXOs(
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
@@ -349,7 +349,7 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
 #### Signature
 

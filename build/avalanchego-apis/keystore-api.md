@@ -64,6 +64,8 @@ curl -X POST --data '{
 
 Delete a user.
 
+#### **Signature**
+
 ```text
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
@@ -95,6 +97,8 @@ curl -X POST --data '{
 ### keystore.exportUser
 
 Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
+
+#### **Signature**
 
 ```text
 keystore.exportUser(
@@ -134,6 +138,8 @@ curl -X POST --data '{
 ### keystore.importUser
 
 Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+
+#### **Signature**
 
 ```text
 keystore.importUser(

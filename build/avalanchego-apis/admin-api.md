@@ -23,7 +23,7 @@ Assign an API endpoint an alias, a different endpoint for the API. The original 
 #### **Signature**
 
 ```text
-admin.alias(endpoint:string, alias:string) -> {success:bool}
+admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
 * `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
@@ -140,6 +140,12 @@ curl -X POST --data '{
 ### admin.memoryProfile
 
 Writes a memory profile of the to `mem.profile`.
+
+#### **Signature**
+
+```text
+admin.memoryProfile() -> {success:bool}
+```
 
 #### **Example Call**
 

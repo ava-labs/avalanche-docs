@@ -220,20 +220,20 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-**Signature**
+#### **Signature**
 
 ```cpp
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
-    denomination: int,  
+    denomination: int, (optional)
     initialHolders: []{
         address: string,
         amount: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,  
+    from: []string, (optional)
+    changeAddr: string, (optional)
+    username: string,
     password: string
 }) ->
 {
@@ -294,7 +294,7 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset \(an asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset)\).
+Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](#avm-createvariablecapasset).
 
 #### **Signature**
 
@@ -355,7 +355,7 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mint`.
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
@@ -364,15 +364,15 @@ Create a new variable-cap, fungible asset. No units of the asset exist at initia
 ```cpp
 avm.createVariableCapAsset({
     name: string,
-    symbol: string, //optional
-    denomination: int,  
-    minterSets []{
+    symbol: string,
+    denomination: int, (optional)
+    minterSets: []{
         minters: []string,
         threshold: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,  
+    from: []string, (optional)
+    changeAddr: string, (optional)
+    username: string,
     password: string
 }) ->
 {
@@ -440,7 +440,7 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mintNFT`.
+Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -449,14 +449,14 @@ Create a new non-fungible asset. No units of the asset exist at initialization. 
 ```cpp
 avm.createNFTAsset({
     name: string,
-    symbol: string, //optional
-    minterSets []{
+    symbol: string,
+    minterSets: []{
         minters: []string,
         threshold: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,  
+    from: []string, (optional)
+    changeAddr: string, (optional)
+    username: string,
     password: string
 }) ->
  {
@@ -515,7 +515,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -581,8 +581,8 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain.  
-After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+Send a non-AVAX from the X-Chain to the P-Chain or C-Chain.
+After calling this method, you must call [`avax.import`](contract-chain-c-chain-api#avax-import) on the C-Chain to complete the transfer.
 
 #### **Signature**
 
@@ -645,7 +645,7 @@ curl -X POST --data '{
 
 ### avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain.  
+Send AVAX from the X-Chain to another chain.
 After calling this method, you must call `import` on the other chain to complete the transfer.
 
 #### **Signature**
@@ -707,7 +707,7 @@ curl -X POST --data '{
 ### avm.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](https://app.gitbook.com/@avalanche/s/avalanche/~/drafts/-MLJEet0dNR5tQOXsXki/build/apis/exchange-chain-x-chain-api#avm-importkey).
+The returned private key can be added to a user with [`avm.importKey`](#avm-importkey).
 
 #### **Signature**
 
@@ -988,13 +988,13 @@ Gets the UTXOs that reference a given address. If sourceChain is specified, then
 ```cpp
 avm.getUTXOs({
     addresses: []string,
-    limit: int, //optional
-    startIndex: { //optional
+    limit: int, (optional)
+    startIndex: {  (optional)
         address: string,
         utxo: string
     },
-    sourceChain: string, //optional
-    encoding: string, //optional
+    sourceChain: string, (optional)
+    encoding: string (optional)
 }) -> {
     numFetched: int,
     utxos: []string,
@@ -1002,6 +1002,7 @@ avm.getUTXOs({
         address: string,
         utxo: string
     },
+    sourceChain: string, (optional)
     encoding: string
 }
 ```
@@ -1424,10 +1425,10 @@ avm.sendMultiple({
       assetID: string,
       amount: int,
       to: string
-    }
-    memo: string, //optional
-    from: []string, //optional
-    changeAddr: string, //optional
+    },
+    from: []string, (optional)
+    changeAddr: string, (optional)
+    memo: string, (optional)
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}
@@ -1661,10 +1662,10 @@ wallet.sendMultiple({
       assetID: string,
       amount: int,
       to: string
-    }
-    memo: string, //optional
-    from: []string, //optional
-    changeAddr: string, //optional
+    },
+    from: []string, (optional)
+    changeAddr: string, (optional)
+    memo: string, (optional)
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}

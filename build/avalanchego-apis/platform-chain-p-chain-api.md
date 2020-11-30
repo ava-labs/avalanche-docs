@@ -24,7 +24,7 @@ The delegatee charges a fee to the delegator; the former receives a percentage o
 
 The delegation period must be a subset of the period that the delegatee validates the Primary Network.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -105,7 +105,7 @@ The validation period must be between 2 weeks and 1 year.
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -338,7 +338,7 @@ curl -X POST --data '{
     "method": "platform.createBlockchain",
     "params" : {
         "vmID":"timestamp",
-        "SubnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
+        "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
         "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
         "encoding": "cb58",
@@ -389,7 +389,7 @@ platform.createSubnet(
 }
 ```
 
-* In order to create add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
+* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
@@ -493,7 +493,7 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](#platform-importkey).
 
 #### **Signature**
 
@@ -553,7 +553,6 @@ platform.getBalance({
     utxoIDs: []{
         txID: string,
         outputIndex: int
-        }
     }
 }
 ```
@@ -785,7 +784,7 @@ The top level field `delegators` is deprecated as of v1.0.1. If you are using it
 #### **Signature**
 
 ```cpp
-platform.getCurrentValidators({subnetID: string}) ->
+platform.getCurrentValidators( {subnetID : string (optional)} ) ->
 {
     validators: []{
         startTime: string,
@@ -801,7 +800,7 @@ platform.getCurrentValidators({subnetID: string}) ->
         potentialReward: string,
         delegationFee: string,
         uptime: string,
-        connected: boolean,
+        connected: bool,
         delegators: []{
             startTime: string,
             endTime: string,
@@ -934,7 +933,7 @@ Returns the height of the last accepted block.
 ```cpp
 platform.getHeight() ->
 {
-      height: int,
+    height: int,
 }
 ```
 
@@ -1005,13 +1004,13 @@ List the validators in the pending validator set of the specified Subnet. Each v
 #### **Signature**
 
 ```cpp
-platform.getPendingValidators({subnetID: string}) ->
+platform.getPendingValidators( {subnetID: string (optional)} ) ->
 {
     validators: []{
         startTime: string,
         endTime: string,
         stakeAmount: string, (optional)
-        nodeID: string
+        nodeID: string,
         delegationFee: string,
         connected: bool,
         weight: string, (optional)
@@ -1129,9 +1128,9 @@ platform.getSubnets(
 ) ->
 {
     subnets: []{
-            id: string,
-            controlKeys: []string,
-            threshold: string
+        id: string,
+        controlKeys: []string,
+        threshold: string
     }
 }
 ```
@@ -1257,7 +1256,7 @@ Optional `encoding` parameter to specify the format for the returned transaction
 platform.getTx({
     txID: string,
     encoding: string (optional)
-} -> {
+}) -> {
     tx: string,
     encoding: string,
 })
@@ -1297,7 +1296,7 @@ Gets a transaction’s status by its ID.
 #### **Signature**
 
 ```cpp
-platform.getTxStatus({txID: string} -> {status: string})
+platform.getTxStatus({txID: string}) -> {status: string}
 ```
 
 #### **Example Call**
@@ -1325,7 +1324,7 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set address.
+Gets the UTXOs that reference a given set of addresses.
 
 #### **Signature**
 
@@ -1334,7 +1333,7 @@ platform.getUTXOs(
     {
         addresses: string,
         limit: int, (optional)
-        startIndex: { (optional )
+        startIndex: { (optional)
             address: string,
             utxo: string
         },
@@ -1343,7 +1342,7 @@ platform.getUTXOs(
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
@@ -1548,7 +1547,7 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-**Signature**
+#### **Signature**
 
 ```cpp
 platform.importKey({
@@ -1679,7 +1678,7 @@ Sample validators from the specified Subnet.
 platform.sampleValidators(
     {
         size: int,
-        subnetID: string
+        subnetID: string, (optional)
     }
 ) ->
 {
