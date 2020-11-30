@@ -12,7 +12,7 @@ You've completed [Getting Started](../../getting-started.md) and are familiar wi
 
 In order to send AVAX, you need to have some AVAX! Use the [AVAX Test Faucet](https://faucet.avax-test.network) to send some AVAX to an X-Chain address you hold.
 
-To send the AVAX, call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) method.
+To send the AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
 
 Your call should look like this:
 
@@ -32,7 +32,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address you hold and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createaddress) for instructions on creating a new P-Chain address\).
+where `to` is the address of a P-Chain address you hold and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
 
 Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `1,000,000` nAVAX. Then, the above export actually consumes `6,000,000` nAVAX; `5,000,000` goes to the P-Chain and `1,000,000` is burned as a transaction fee.
 
@@ -51,7 +51,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-gettxstatus):
+We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -76,7 +76,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+We can also call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
 
 ```cpp
 curl -X POST --data '{
@@ -94,7 +94,7 @@ The amount deducted is the exported amount \(`5,000,000` in this example\) plus 
 
 ## Import AVAX to the P-Chain from the X-Chain
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-importavax) method to finish the transfer.
+Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) method to finish the transfer.
 
 Your call should look like this:
 
@@ -176,7 +176,7 @@ Note that the balance we see is the amount exported from the X-Chain \(`5,000,00
 
 Now, let’s move AVAX on the P-Chain back to the X-Chain.
 
-To do so, call [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax):
+To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
 
 ```cpp
 curl -X POST --data '{
@@ -195,11 +195,11 @@ curl -X POST --data '{
 
 where `to` is the X-Chain address the AVAX is being sent to.
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
 
 ## Import AVAX to the X-Chain from the P-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax):
+To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
 
 ```cpp
 curl -X POST --data '{
@@ -216,9 +216,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax).
+Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
 
-Just as before, we can call [`avm.getBalance`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-getbalance) to verify the funds were received. The balance should have increased by `3,000,000` minus the transaction fee.
+Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `3,000,000` minus the transaction fee.
 
 ## Export AVAX from the X-Chain to the C-Chain
 
@@ -280,7 +280,7 @@ The response contains a hex-encoded EVM address:
 }
 ```
 
-Now, you can use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) call:
+Now, you can use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) call:
 
 ```cpp
 curl -X POST --data '{  
@@ -367,7 +367,7 @@ The response should look like this:
 
 ## Import AVAX to the X-Chain from the C-Chain
 
-Lastly, we can finish up by importing AVAX from the C-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax).
+Lastly, we can finish up by importing AVAX from the C-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
 
 ```cpp
 curl -X POST --data '{  

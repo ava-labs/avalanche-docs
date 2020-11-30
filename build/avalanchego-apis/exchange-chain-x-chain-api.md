@@ -36,11 +36,12 @@ Note: addresses should not include a chain prefix \(ie. X-\) in calls to the sta
 
 ```cpp
 avm.buildGenesis({
-    genesisData:JSON,
-    encoding: string, (optional)
+    networkID: int,
+    genesisData: JSON,
+    encoding: string, //optional
 }) -> {
-    bytes:string,
-    encoding:string,
+    bytes: string,
+    encoding: string,
 }
 ```
 
@@ -106,6 +107,7 @@ curl -X POST --data '{
     "id"     : 1,
     "method" : "avm.buildGenesis",
     "params" : {
+        "networkId": 16,
         "genesisData": {
             "asset1": {
                 "name": "myFixedCapAsset",
@@ -182,7 +184,7 @@ Create a new address controlled by the given user.
 ```cpp
 avm.createAddress({
     username: string,
-    password:string
+    password: string
 }) -> {address: string}
 ```
 
@@ -193,8 +195,8 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.createAddress",
     "params": {
-        "username":"myUsername",
-        "password":"myPassword"
+        "username": "myUsername",
+        "password": "myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
@@ -220,7 +222,7 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 
 #### **Signature**
 
-```text
+```cpp
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
@@ -251,7 +253,7 @@ avm.createFixedCapAsset({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -279,7 +281,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -296,13 +298,13 @@ Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](#
 
 #### **Signature**
 
-```text
+```cpp
 avm.mint({
     amount: int,
     assetID: string,
     to: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) ->
@@ -321,7 +323,7 @@ avm.mint({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -332,15 +334,15 @@ curl -X POST --data '{
         "to":"X-avax1ap39w4a7fk0au083rrmnhc2pqk20yjt6s3gzkx",
         "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"USERNAME GOES HERE",
-        "password":"PASSWORD GOES HERE"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -359,7 +361,7 @@ Create a new variable-cap, fungible asset. No units of the asset exist at initia
 
 #### **Signature**
 
-```text
+```cpp
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
@@ -391,7 +393,7 @@ avm.createVariableCapAsset({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -425,7 +427,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -444,7 +446,7 @@ Create a new non-fungible asset. No units of the asset exist at initialization. 
 
 #### **Signature**
 
-```text
+```cpp
 avm.createNFTAsset({
     name: string,
     symbol: string,
@@ -474,7 +476,7 @@ avm.createNFTAsset({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -500,7 +502,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -519,14 +521,14 @@ Mint non-fungible tokens which were created with [`avm.createNFTAsset`](#avm-cre
 
 #### **Signature**
 
-```text
+```cpp
 avm.mintNFT({
     assetID: string,
     payload: string,
     to: string,
-    encoding: string, (optional)
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    encoding: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) ->
@@ -547,7 +549,7 @@ avm.mintNFT({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -558,15 +560,15 @@ curl -X POST --data '{
         "to":"X-avax1ap39w4a7fk0au083rrmnhc2pqk20yjt6s3gzkx",
         "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"USERNAME GOES HERE",
-        "password":"PASSWORD GOES HERE"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -584,15 +586,15 @@ After calling this method, you must call [`avax.import`](contract-chain-c-chain-
 
 #### **Signature**
 
-```text
+```cpp
 avm.export({
     to: string,
     amount: int,
     assetID: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
-    password:string,
+    password: string,
 }) ->
 {
     txID: string,
@@ -611,7 +613,7 @@ avm.export({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -630,7 +632,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -648,14 +650,14 @@ After calling this method, you must call `import` on the other chain to complete
 
 #### **Signature**
 
-```text
+```cpp
 avm.exportAVAX({
     to: string,
     amount: int,
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
-    password:string,
+    password: string,
 }) ->
 {
     txID: string,
@@ -673,7 +675,7 @@ avm.exportAVAX({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -691,7 +693,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -709,11 +711,11 @@ The returned private key can be added to a user with [`avm.importKey`](#avm-impo
 
 #### **Signature**
 
-```text
+```cpp
 avm.exportKey({
     username: string,
-    password:string,
-    address:string
+    password: string,
+    address: string
 }) -> {privateKey: string}
 ```
 
@@ -722,22 +724,22 @@ avm.exportKey({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avm.exportKey",
     "params" :{
-        "username" :"myUsername",
+        "username":"myUsername",
         "password":"myPassword",
-        "address": "X-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e"
+        "address":"X-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -753,7 +755,7 @@ Get the balances of all assets controlled by a given address.
 
 #### **Signature**
 
-```text
+```cpp
 avm.getAllBalances({address:string}) -> {
     balances: []{
         asset: string,
@@ -764,7 +766,7 @@ avm.getAllBalances({address:string}) -> {
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -777,7 +779,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -802,38 +804,46 @@ Get information about an asset.
 
 #### **Signature**
 
-```text
-avm.getAssetDescription({assetID: string}) -> {name: string, symbol: string, denomination:int}
+```cpp
+avm.getAssetDescription({assetID: string}) -> {
+    assetId: string,
+    name: string,
+    symbol: string,
+    denomination: int
+}
 ```
 
+* `assetID` is the id of the asset for which the information is requested.
 * `name` is the asset’s human-readable, not necessarily unique name.
 * `symbol` is the asset’s symbol.
 * `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avm.getAssetDescription",
     "params" :{
-        "assetID" :"ZiKfqRXCZgHLgZ4rxGU9Qbycdzuq5DRY4tdSNS9ku8kcNxNLD"
+        "assetID" :"2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "name":"My asset name",
-        "symbol":"MyAN"
-    }
-}
+    "jsonrpc": "2.0",
+    "result": {
+        "assetID": "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe",
+        "name": "Avalanche",
+        "symbol": "AVAX",
+        "denomination": "9"
+    },
+    "id": 1
+}`
 ```
 
 ### avm.getBalance
@@ -842,16 +852,19 @@ Get the balance of an asset controlled by a given address.
 
 #### **Signature**
 
-```text
+```cpp
 avm.getBalance({
-    address:string,
+    address: string,
     assetID: string
 }) -> {balance: int}
 ```
 
+* `address` owner of the asset
+* `assetID` id of the asset for which the balance is requested
+
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
   "jsonrpc":"2.0",
   "id"     : 1,
@@ -865,7 +878,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -887,10 +900,10 @@ Returns the specified transaction. The `encoding` parameter sets the format of t
 
 #### **Signature**
 
-```text
+```cpp
 avm.getTx({
     txID: string,
-    encoding: string, (optional)
+    encoding: string, //optional
 }) -> {
     tx: string,
     encoding: string,
@@ -899,7 +912,7 @@ avm.getTx({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -913,7 +926,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -930,7 +943,7 @@ Get the status of a transaction sent to the network.
 
 #### **Signature**
 
-```text
+```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
@@ -943,7 +956,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -956,7 +969,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -972,26 +985,25 @@ Gets the UTXOs that reference a given address. If sourceChain is specified, then
 
 #### **Signature**
 
-```text
-avm.getUTXOs(
-    {
-        addresses: string,
-        limit: int, (optional)
-        startIndex: { (optional)
-            address: string,
-            utxo: string
-        },
-        sourceChain: string, (optional)
-        encoding: string, (optional)
+```cpp
+avm.getUTXOs({
+    addresses: []string,
+    limit: int, (optional)
+    startIndex: {  (optional)
+        address: string,
+        utxo: string
     },
-) ->
-{
+    sourceChain: string, (optional)
+    encoding: string (optional)
+}) -> {
     numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
         utxo: string
-    }
+    },
+    sourceChain: string, (optional)
+    encoding: string
 }
 ```
 
@@ -999,7 +1011,7 @@ avm.getUTXOs(
 * At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
 * This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
 * `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
@@ -1007,7 +1019,7 @@ avm.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1022,7 +1034,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1046,7 +1058,7 @@ This gives response:
 
 Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :2,
@@ -1065,7 +1077,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1090,7 +1102,7 @@ Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs
 
 Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1106,7 +1118,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1126,26 +1138,27 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api#avax-export) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
 
 #### **Signature**
 
-```text
+```cpp
 avm.import({
     to: string,
     sourceChain: string,
     username: string,
-    password:string,
+    password: string,
 }) -> {txID: string}
 ```
 
 * `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
 * `username` is the user that controls `to`.
+* `txID` is the ID of the newly created atomic transaction.
 
-#### **Example Call**
+#### **Example Call** 
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1161,7 +1174,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1173,16 +1186,16 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api#platform-exportavax) method to initiate the transfer.
+Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
 
 #### **Signature**
 
-```text
+```cpp
 avm.importAVAX({
     to: string,
     sourceChain: string,
     username: string,
-    password:string,
+    password: string,
 }) -> {txID: string}
 ```
 
@@ -1192,7 +1205,7 @@ avm.importAVAX({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1208,7 +1221,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1224,11 +1237,11 @@ Give a user control over an address by providing the private key that controls t
 
 #### **Signature**
 
-```text
+```cpp
 avm.importKey({
     username: string,
-    password:string,
-    privateKey:string
+    password: string,
+    privateKey: string
 }) -> {address: string}
 ```
 
@@ -1236,13 +1249,13 @@ avm.importKey({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avm.importKey",
     "params" :{
-        "username" :"myUsername",
+        "username":"myUsername",
         "password":"myPassword",
         "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
     }
@@ -1251,7 +1264,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1267,19 +1280,18 @@ Send a signed transaction to the network. `encoding` specifies the format of the
 
 #### **Signature**
 
-```text
+```cpp
 avm.issueTx({
     tx: string,
-    encoding: string, (optional)
+    encoding: string, //optional
 }) -> {
-    txID: string,
-    encoding: string,
+    txID: string
 }
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -1293,7 +1305,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1309,7 +1321,7 @@ List addresses controlled by the given user.
 
 #### **Signature**
 
-```text
+```cpp
 avm.listAddresses({
     username: string,
     password: string
@@ -1318,7 +1330,7 @@ avm.listAddresses({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.listAddresses",
@@ -1332,7 +1344,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1348,14 +1360,14 @@ Send a quantity of an asset to an address.
 
 #### **Signature**
 
-```text
+```cpp
 avm.send({
     amount: int,
     assetID: string,
     to: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
-    memo: string, (optional)
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}
@@ -1370,7 +1382,7 @@ avm.send({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1379,7 +1391,7 @@ curl -X POST --data '{
         "assetID"   : "AVAX",
         "amount"    : 10000,
         "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "memo"      : "hi, mom!",
         "username"  : "userThatControlsAtLeast10000OfThisAsset",
@@ -1390,7 +1402,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1403,16 +1415,16 @@ curl -X POST --data '{
 
 ### avm.sendMultiple
 
-Sends an amount of assetID to an array of specified addresses from a list of owned addresses.
+Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
 
 #### **Signature**
 
-```text
+```cpp
 avm.sendMultiple({
     outputs: []{
       assetID: string,
       amount: int,
-      to: string,
+      to: string
     },
     from: []string, (optional)
     changeAddr: string, (optional)
@@ -1423,14 +1435,14 @@ avm.sendMultiple({
 ```
 
 * `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+* `memo` is an optional message, whose length can be up to 256 bytes.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1448,9 +1460,9 @@ curl -X POST --data '{
                 "amount"  : 10
             }
         ],
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "memo"      : "hi, mom!",
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "username",
         "password"  : "myPassword"
     }
@@ -1459,7 +1471,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1476,19 +1488,19 @@ Send a non-fungible token.
 
 #### **Signature**
 
-```text
+```cpp
 avm.sendNFT({
     assetID: string,
     groupID: number,
     to: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT of the NFT being sent.
+* `assetID` is the asset ID of the NFT being sent.
 * `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
 * `to` is the X-Chain address the NFT is sent to.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1496,7 +1508,7 @@ avm.sendNFT({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1505,7 +1517,7 @@ curl -X POST --data '{
         "assetID"   : "2KGdt2HpFKpTH5CtGZjYt5XPWs6Pv9DLoRBhiFfntbezdRvZWP",
         "groupID"   : 0,
         "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-        "from"      :["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "myUsername",
         "password"  : "myPassword"
@@ -1515,7 +1527,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1526,20 +1538,69 @@ curl -X POST --data '{
 }
 ```
 
+### wallet.issueTx
+
+Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
+
+#### Signature
+
+```cpp
+wallet.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### Example call
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"wallet.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
+```
+
+#### Example response
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
 
 #### **Signature**
 
-```text
+```cpp
 wallet.send({
     amount: int,
     assetID: string,
     to: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
-    memo: string, (optional)
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}
@@ -1554,7 +1615,7 @@ wallet.send({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1563,9 +1624,9 @@ curl -X POST --data '{
         "assetID"   : "AVAX",
         "amount"    : 10000,
         "to"        : "X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "memo"      : "hi, mom!",
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "userThatControlsAtLeast10000OfThisAsset",
         "password"  : "myPassword"
     }
@@ -1574,7 +1635,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1587,16 +1648,20 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Sends an amount of assetID to an array of specified addresses from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.  
+  
+This call is made to the wallet API endpoint:
+
+`/ext/bc/X/wallet`
 
 #### **Signature**
 
-```text
+```cpp
 wallet.sendMultiple({
     outputs: []{
       assetID: string,
       amount: int,
-      to: string,
+      to: string
     },
     from: []string, (optional)
     changeAddr: string, (optional)
@@ -1614,7 +1679,7 @@ wallet.sendMultiple({
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -1632,9 +1697,9 @@ curl -X POST --data '{
                 "amount"  : 10
             }
         ],
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "memo"      : "hi, mom!",
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username"  : "username",
         "password"  : "myPassword"
     }
@@ -1643,7 +1708,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,

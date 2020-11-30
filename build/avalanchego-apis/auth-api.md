@@ -14,7 +14,7 @@ Note that if you run your node with `--api-auth-required` then some tools like M
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](https://docs.avax.network/v1.0/en/api/issuing-api-calls/)
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
 
 ## Endpoint
 
@@ -73,7 +73,7 @@ This call will generate an authorization token that allows access to API endpoin
 
 This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](https://docs.avax-dev.network/build/apis/info-api#info-peers) with this token:
+For example, to call [`info.peers`](info-api.md#info-peers) with this token:
 
 ```text
 curl -X POST --data '{

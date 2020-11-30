@@ -31,11 +31,11 @@ If set to `false`, this node will not expose the Admin API. Defaults to `false`.
 
 `--api-auth-required` \(boolean\):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](https://docs.avax-dev.network/build/apis/auth-api) for more information.
+If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api) for more information.
 
 `--api-auth-password` \(string\):
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](https://docs.avax-dev.network/build/apis/auth-api) for more information.
+The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api) for more information.
 
 `--api-health-enabled` \(boolean\):
 
