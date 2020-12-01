@@ -2,6 +2,29 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## AvalancheGo Release Notes v1.0.6 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
+
+![](../../.gitbook/assets/86244a1e-475c-43cc-a09e-13ea580c4b6a.png)
+
+{% hint style="danger" %}
+Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
+{% endhint %}
+
+* Removed deprecated formats of  platform.getTxStatus and platform.getCurrentValidators.
+* Added support for hex encodings of imported and exported users from the keystore API.
+* Set golang requirement to v1.15.5 to avoid a DoS vulnerability found in the golang standard lib.
+* Added API clients to act as helpers interacting with the node software.
+* Enabled falling back to bootstrapping if a node becomes disconnected from the rest of the network.
+* Fixed the GetUTXOs APIs when UTXOs referenced multiple addresses.
+* Refactored binary encoding to better generalize RPC options.
+* Fixed IP block filtering to correctly set the window length.
+* Generalized the codec package to be able to manage multiple codecs with different versions.
+* Added Epoch to the Vertex interface in preparation of a future release.
+* Deferred transaction hashing to reduce CPU/Memory utilization past fast checks.
+* For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
+
+For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
+
 ## AvalancheGo Release Notes v1.0.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
 
 ![](../../.gitbook/assets/group-2105.png)
