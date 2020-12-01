@@ -66,11 +66,11 @@ Morty was never seen again.
 
 A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
 
-```txt
+```text
 sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](./serialization-primitives#integer) of the message size.
+The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](https://github.com/ava-labs/avalanche-docs/tree/b6ca6df0bd6ea6f12dbc18079988c984a08fcba6/build/references/serialization-primitives/README.md#integer) of the message size.
 
 ### Gantt Pre-image Specification
 
@@ -103,7 +103,7 @@ As an example we will sign the message "Through consensus to the stars"
 
 After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
 
-<img src='../../.gitbook/assets/sign-message.png' style='width: 50%' />
+![](../../.gitbook/assets/sign-message.png)
 
 ## Cryptography in Ethereum Virtual Machine
 

@@ -493,7 +493,7 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Signature**
 
@@ -1178,7 +1178,7 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```cpp
-platform.getStake({addresses: []string}) -> {stake: int}
+platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
 #### **Example Call**
@@ -1225,7 +1225,7 @@ platform.getTotalStake() -> {stake: int}
 ```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "platform.getStake",
+    "method": "platform.getTotalStake",
     "params": {},
     "id": 1
 }

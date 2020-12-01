@@ -6,7 +6,7 @@ description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
 
 The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
-{% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" %}
+{% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
 ## Format
 
@@ -294,7 +294,7 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](#avm-createvariablecapasset).
+Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
 
 #### **Signature**
 
@@ -515,7 +515,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](#avm-createnftasset).
+Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -581,8 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain.
-After calling this method, you must call [`avax.import`](contract-chain-c-chain-api#avax-import) on the C-Chain to complete the transfer.
+Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](https://github.com/ava-labs/avalanche-docs/tree/70156b8de88275052d85a1b16d303af405437a52/build/avalanchego-apis/contract-chain-c-chain-api/README.md#avax-import) on the C-Chain to complete the transfer.
 
 #### **Signature**
 
@@ -645,8 +644,7 @@ curl -X POST --data '{
 
 ### avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain.
-After calling this method, you must call `import` on the other chain to complete the transfer.
+Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
 
 #### **Signature**
 
@@ -707,7 +705,7 @@ curl -X POST --data '{
 ### avm.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](#avm-importkey).
+The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
 #### **Signature**
 
@@ -1156,7 +1154,7 @@ avm.import({
 * `username` is the user that controls `to`.
 * `txID` is the ID of the newly created atomic transaction.
 
-#### **Example Call** 
+#### **Example Call**
 
 ```cpp
 curl -X POST --data '{
@@ -1540,8 +1538,8 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.  
-  
+Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
@@ -1585,8 +1583,8 @@ curl -X POST --data '{
 
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.  
-  
+Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
@@ -1648,8 +1646,8 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.  
-  
+Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+
 This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
