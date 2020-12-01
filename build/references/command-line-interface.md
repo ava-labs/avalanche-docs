@@ -16,7 +16,7 @@ Config file specifies a JSON file to configure a node instead of specifying argu
 
 config.json file:
 
-```javascript
+```cpp
 {
     "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
@@ -27,35 +27,35 @@ config.json file:
 
 `--api-admin-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`.
+If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
 
 `--api-auth-required` \(boolean\):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](https://github.com/ava-labs/avalanche-docs/tree/d3cb9c71d791481847fcac5bc3839b450208167c/build/avalanchego-apis/auth-api/README.md) for more information.
+If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
 
 `--api-auth-password` \(string\):
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](https://github.com/ava-labs/avalanche-docs/tree/d3cb9c71d791481847fcac5bc3839b450208167c/build/avalanchego-apis/auth-api/README.md) for more information.
+The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
 
 `--api-health-enabled` \(boolean\):
 
-If set to `true`, this node will expose the Health API. Defaults to `true`.
+If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health-api.md) for more information.
 
 `--api-info-enabled` \(boolean\):
 
-If set to `true`, this node will expose the Info API. Defaults to `true`.
+If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info-api.md) for more information.
 
 `--api-ipcs-enabled` \(boolean\):
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`.
+If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
 
 `--api-keystore-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`.
+If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
 
 `--api-metrics-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`.
+If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
 ### Assertions
 
@@ -389,7 +389,7 @@ Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.
 
 This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
 
-```javascript
+```cpp
 {
     "snowman-api-enabled": false,
     "coreth-admin-api-enabled": false,
@@ -412,7 +412,7 @@ Note: if a config is specified, all default options are overridden. For example:
 
 config.json:
 
-```javascript
+```cpp
 {
     "coreth-config": {
         "snowman-api-enabled": false,
