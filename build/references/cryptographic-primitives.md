@@ -70,7 +70,7 @@ A standard for interoperable generic signed messages based on the Bitcoin Script
 sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](https://github.com/ava-labs/avalanche-docs/tree/b6ca6df0bd6ea6f12dbc18079988c984a08fcba6/build/references/serialization-primitives/README.md#integer) of the message size.
+The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](serialization-primitives.md#integer) of the message size.
 
 ### Gantt Pre-image Specification
 

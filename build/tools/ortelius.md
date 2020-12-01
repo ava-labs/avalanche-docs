@@ -236,7 +236,6 @@ Responds with the chains an address appears on.
 | :--- | :--- | :--- | :--- | :--- |
 | `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
 
-
 **Example Call**
 
 ```text
