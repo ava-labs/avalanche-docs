@@ -6,13 +6,13 @@ description: >-
 
 # Deprecated API Calls
 
-### P-Chain API
+## P-Chain API
 
-#### `getCurrentValidators`
+### `getCurrentValidators`
 
-In v1.0.0, the signature is:
+In v1.0.0, the signature was:
 
-```text
+```cpp
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -46,9 +46,9 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature is as follows. Note that each validator contains a list of its delegators. You should get information about delegators this way going forward. The top level `delegators` field will be removed in a future release.
+In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
 
-```text
+```cpp
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -93,25 +93,59 @@ platform.getCurrentValidators({subnetID: string}) ->
     }
 }
 ```
+Since v1.0.6, top level `delegators` field is removed. The signature is now:
+```cpp
+platform.getCurrentValidators({subnetID: string}) ->
+{
+    validators: []{
+        startTime: string,
+        endTime: string,
+        stakeAmount: string, (optional)
+        nodeID: string,
+        weight: string, (optional)
+        rewardOwner: {
+            locktime: string,
+            threshold: string,
+            addresses: string[]
+        },
+        potentialReward: string,
+        delegationFee: string,
+        uptime: string,
+        connected: boolean,
+        delegators: []{
+            startTime: string,
+            endTime: string,
+            stakeAmount: string, (optional)
+            nodeID: string,
+            rewardOwner: {
+                locktime: string,
+                threshold: string,
+                addresses: string[]
+            },
+            potentialReward: string,
+        }
+    }
+}
+```
 
-`getTxStatus`
 
-Before v1.0.4, the signature is:
+### `getTxStatus`
 
-```text
+Before v1.0.4, the signature was:
+
+```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 adds an additional argument, `includeReason`. If `false` or not provided, this method's response is the same as before. If `true`, this method's response has this new format:
+v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
 
-```text
+```cpp
 {
   status: string,
-  reason: string (optional)
+  reason: string //optional
 }
 ```
 
 Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
 
-In a future release, the `includeReason` argument will be ignored, and this method's response will always be the new format.
-
+Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
