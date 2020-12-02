@@ -779,7 +779,7 @@ The response in this example indicates that AVAX’s supply is at most 365.865 m
 
 List the current validators of the given Subnet.
 
-The top level field `delegators` is deprecated as of v1.0.1. If you are using it, you should stop using it. Instead, each element of `validators` now contains the list of delegators for that validator. You should get information about delegators this way going forward.
+The top level field `delegators` was [deprecated](deprecated-api-calls.md#getCurrentValidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
 #### **Signature**
 
@@ -815,18 +815,6 @@ platform.getCurrentValidators( {subnetID : string (optional)} ) ->
             },
             potentialReward: string,
         }
-    },
-    delegators: []{
-        startTime: string,
-        endTime: string,
-        stakeAmount: string, //optional
-        nodeID: string,
-        rewardOwner: {
-            locktime: string,
-            threshold: string,
-            addresses: string[]
-        },
-        potentialReward: string,
     }
 }
 ```
@@ -1291,14 +1279,15 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If `includeReason` is `true`, result will have `status` field and `reason` field if the transaction was dropped. If `includeReason` is `false` or omitted, only status as a string will be returned.
+Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+
+See [here](deprecated-api-calls.md#getCurrentValidators) for notes on previous behavior.
 
 #### **Signature**
 
 ```cpp
 platform.getTxStatus({
-    txID: string,
-    includeReason: bool //optional
+    txID: string
 }) -> {status: string}
 ```
 
@@ -1309,8 +1298,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
     "params": {
-        "txID":"TAG9Ns1sa723mZy1GSoGqWipK6Mvpaj7CAswVJGM6MkVJDF9Q",
-         "includeReason": true
+        "txID":"TAG9Ns1sa723mZy1GSoGqWipK6Mvpaj7CAswVJGM6MkVJDF9Q"
    },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
