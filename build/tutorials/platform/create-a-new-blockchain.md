@@ -6,9 +6,15 @@ One of the core features of Avalanche is the ability to create new blockchains. 
 
 In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
 
+### Prerequisites
+
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Getting Started](../../getting-started.md) tutorial. 
+
+Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../../../learn/platform-overview/README.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
@@ -76,7 +82,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](https://avalanche.gitbook.io/avalanche/build/apis/exchange-chain-x-chain-api#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
+To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
 
 ```cpp
 curl -X POST --data '{
@@ -151,7 +157,7 @@ This returns the byte representation of your blockchain’s genesis state:
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
 ```cpp
 curl -X POST --data '{
@@ -186,7 +192,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
 
-To check, call [`platform.getBlockchains`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
 
 ```cpp
 curl -X POST --data '{
@@ -248,7 +254,7 @@ The response confirms that the blockchain was created:
 
 ### Interact With the New Blockchain <a id="interact-with-the-new-blockchain"></a>
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain). There are two small differences:
+You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain). There are two small differences:
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
 * Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
