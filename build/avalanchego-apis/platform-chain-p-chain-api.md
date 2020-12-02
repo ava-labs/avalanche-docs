@@ -1281,7 +1281,7 @@ curl -X POST --data '{
 
 Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
 
-See [here](deprecated-api-calls.md#getCurrentValidators) for notes on previous behavior.
+See [here](deprecated-api-calls.md#getTxStatus) for notes on previous behavior.
 
 #### **Signature**
 
