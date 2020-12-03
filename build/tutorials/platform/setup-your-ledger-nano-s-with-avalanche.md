@@ -1,4 +1,4 @@
-# Setup Your Ledger Nano S with Avalanche
+# Set up Your Ledger Nano S with Avalanche
 
 The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys. The Avalanche Ledger wallet app is now available in [Ledger Live](https://www.ledger.com/ledger-live) via Experimental Mode.
 
