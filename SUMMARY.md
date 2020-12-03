@@ -27,6 +27,7 @@
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
+    * [Setup Your Ledger Nano S with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [How to Run Avalanche at Home: Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)

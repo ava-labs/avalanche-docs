@@ -10,4 +10,5 @@
 | [**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md)\*\*\*\* | Create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
 | [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)\*\*\*\* | Deploy and test a smart contract on Avalanche using Remix and MetaMask |
 | [**Transfer AVAX Between X-Chain, P-Chain, and C-Chain**](transfer-avax-between-x-chain-and-p-chain.md)\*\*\*\* | Send AVAX between all of the major blockchains in Avalanche's [Primary Network](../../../learn/platform-overview/). |
+| Setup Your Ledger Nano S with Avalanche | Setup your Ledger with Ledger Live and the Avalanche Wallet |
 

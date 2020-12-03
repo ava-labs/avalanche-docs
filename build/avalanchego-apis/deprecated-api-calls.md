@@ -93,7 +93,9 @@ platform.getCurrentValidators({subnetID: string}) ->
     }
 }
 ```
+
 Since v1.0.6, top level `delegators` field is removed. The signature is now:
+
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
 {
@@ -128,7 +130,6 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-
 ### `getTxStatus`
 
 Before v1.0.4, the signature was:
@@ -149,3 +150,4 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
 
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+

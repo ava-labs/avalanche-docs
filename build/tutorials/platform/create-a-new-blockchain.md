@@ -8,13 +8,13 @@ In this tutorial, we’ll create a blockchain by creating a new instance of the 
 
 ### Prerequisites
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Getting Started](../../getting-started.md) tutorial. 
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Getting Started](../../getting-started.md) tutorial.
 
 Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](../../../learn/platform-overview/README.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
@@ -254,7 +254,7 @@ The response confirms that the blockchain was created:
 
 ### Interact With the New Blockchain <a id="interact-with-the-new-blockchain"></a>
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain). There are two small differences:
+You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are two small differences:
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
 * Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
