@@ -42,6 +42,10 @@
 
 [**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
 
+### Miscellaneous
+
+[**AVAXAlert**](https://avaxalert.com): Receive notifications directly into your email address when transactions occur on your AVAX wallet.
+
 ### Non-Fungible Tokens \(NFTs\)
 
 [**Polyient Games**](https://www.polyient.games): an investment firm focused on the non-fungible token \(NFT\) and blockchain gaming industries. They invest in startups that are building the infrastructure and applications that will scale the NFT asset class.
