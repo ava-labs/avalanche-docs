@@ -16,7 +16,7 @@ If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche 
 Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
 
 * Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
-* OS: Ubuntu 18.04/20.04 or Mac OS X &gt;= Catalina
+* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -65,19 +65,19 @@ If you want to download a pre-built binary instead of building it yourself, go t
 Under `Assets`, select the appropriate file.
 
 For MacOS:  
-Download: `avalanchego-osx-<VERSION>.zip`  
-Unzip: `unzip avalanchego-osx-<VERSION>.zip`  
+Download: `avalanchego-macos-<VERSION>.zip`  
+Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
 The resulting folder, `avalanchego-<VERSION>`, contains the binaries.  
 
 For Linux on PCs or cloud providers:  
 Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux.4`, contains the binaries.  
+The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.  
 
 For Linux on RaspberryPi4 or similar Arm64-based computers:  
 Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux.4`, contains the binaries.  
+The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.  
 
 ### Start a Node, and Connect to Avalanche
 
@@ -87,7 +87,7 @@ If you built from source:
 ./build/avalanchego
 ```
 
-If you are using the pre-built binaries on Mac OSX:
+If you are using the pre-built binaries on MacOS:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
@@ -96,7 +96,7 @@ If you are using the pre-built binaries on Mac OSX:
 If you are using the pre-built binaries on Linux:
 
 ```cpp
-./avalanchego-<VERSION>-linux.4/avalanchego
+./avalanchego-<VERSION>-linux/avalanchego
 ```
 
 When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
