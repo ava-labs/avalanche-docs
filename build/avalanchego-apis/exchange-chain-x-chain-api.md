@@ -581,7 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](https://github.com/ava-labs/avalanche-docs/tree/70156b8de88275052d85a1b16d303af405437a52/build/avalanchego-apis/contract-chain-c-chain-api/README.md#avax-import) on the C-Chain to complete the transfer.
+Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
 
 #### **Signature**
 

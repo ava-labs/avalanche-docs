@@ -779,7 +779,7 @@ The response in this example indicates that AVAX’s supply is at most 365.865 m
 
 List the current validators of the given Subnet.
 
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getCurrentValidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
 #### **Signature**
 
@@ -1282,7 +1282,7 @@ curl -X POST --data '{
 
 Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
 
-See [here](deprecated-api-calls.md#getTxStatus) for notes on previous behavior.
+See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
 
 #### **Signature**
 
