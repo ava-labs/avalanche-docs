@@ -226,13 +226,13 @@ Create a new fixed-cap, fungible asset. A quantity of it is created at initializ
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
-    denomination: int, (optional)
+    denomination: int, //optional
     initialHolders: []{
         address: string,
         amount: int
     },
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) ->
@@ -365,13 +365,13 @@ Create a new variable-cap, fungible asset. No units of the asset exist at initia
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
-    denomination: int, (optional)
+    denomination: int, //optional
     minterSets: []{
         minters: []string,
         threshold: int
     },
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) ->
@@ -454,8 +454,8 @@ avm.createNFTAsset({
         minters: []string,
         threshold: int
     },
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password: string
 }) ->
@@ -986,13 +986,13 @@ Gets the UTXOs that reference a given address. If sourceChain is specified, then
 ```cpp
 avm.getUTXOs({
     addresses: []string,
-    limit: int, (optional)
-    startIndex: {  (optional)
+    limit: int, //optional
+    startIndex: { //optional
         address: string,
         utxo: string
     },
-    sourceChain: string, (optional)
-    encoding: string (optional)
+    sourceChain: string, //optional
+    encoding: string //optional
 }) -> {
     numFetched: int,
     utxos: []string,
@@ -1000,7 +1000,7 @@ avm.getUTXOs({
         address: string,
         utxo: string
     },
-    sourceChain: string, (optional)
+    sourceChain: string, //optional
     encoding: string
 }
 ```
@@ -1424,9 +1424,9 @@ avm.sendMultiple({
       amount: int,
       to: string
     },
-    from: []string, (optional)
-    changeAddr: string, (optional)
-    memo: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
+    memo: string, //optional
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}
@@ -1661,9 +1661,9 @@ wallet.sendMultiple({
       amount: int,
       to: string
     },
-    from: []string, (optional)
-    changeAddr: string, (optional)
-    memo: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
+    memo: string, //optional
     username: string,
     password: string
 }) -> {txID: string, changeAddr: string}

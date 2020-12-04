@@ -18,9 +18,9 @@ platform.getCurrentValidators({subnetID: string}) ->
     validators: []{
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
-        weight: string, (optional)
+        weight: string, //optional
         rewardOwner: {
             locktime: string,
             threshold: string,
@@ -34,7 +34,7 @@ platform.getCurrentValidators({subnetID: string}) ->
     delegators: []{
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
         rewardOwner: {
             locktime: string,
@@ -54,9 +54,9 @@ platform.getCurrentValidators({subnetID: string}) ->
     validators: []{
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
-        weight: string, (optional)
+        weight: string, //optional
         rewardOwner: {
             locktime: string,
             threshold: string,
@@ -69,7 +69,7 @@ platform.getCurrentValidators({subnetID: string}) ->
         delegators: []{
             startTime: string,
             endTime: string,
-            stakeAmount: string, (optional)
+            stakeAmount: string, //optional
             nodeID: string,
             rewardOwner: {
                 locktime: string,
@@ -82,7 +82,7 @@ platform.getCurrentValidators({subnetID: string}) ->
     delegators: []{
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
         rewardOwner: {
             locktime: string,
@@ -102,9 +102,9 @@ platform.getCurrentValidators({subnetID: string}) ->
     validators: []{
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
-        weight: string, (optional)
+        weight: string, //optional
         rewardOwner: {
             locktime: string,
             threshold: string,
@@ -117,7 +117,7 @@ platform.getCurrentValidators({subnetID: string}) ->
         delegators: []{
             startTime: string,
             endTime: string,
-            stakeAmount: string, (optional)
+            stakeAmount: string, //optional
             nodeID: string,
             rewardOwner: {
                 locktime: string,

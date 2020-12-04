@@ -109,8 +109,8 @@ avax.exportAVAX({
     to: string,
     amount: int,
     destinationChain: string,
-    from: []string, (optional)
-    changeAddr: string, (optional)
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password:string,
 }) -> {txID: string}
@@ -222,13 +222,13 @@ Gets the UTXOs that reference a given address.
 avax.getUTXOs(
     {
         addresses: string,
-        limit: int, (optional)
-        startIndex: { (optional)
+        limit: int, //optional
+        startIndex: { //optional
             address: string,
             utxo: string
         },
         sourceChain: string,
-        encoding: string, (optional)
+        encoding: string, //optional
     },
 ) -> 
 {

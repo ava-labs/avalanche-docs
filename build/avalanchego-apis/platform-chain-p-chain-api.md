@@ -784,8 +784,9 @@ The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcur
 #### **Signature**
 
 ```cpp
-platform.getCurrentValidators( {subnetID : string (optional)} ) ->
-{
+platform.getCurrentValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
         txID: string,
         startTime: string,
@@ -981,8 +982,9 @@ List the validators in the pending validator set of the specified Subnet. Each v
 #### **Signature**
 
 ```cpp
-platform.getPendingValidators( {subnetID: string (optional)} ) ->
-{
+platform.getPendingValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
         txID: string,
         startTime: string,
