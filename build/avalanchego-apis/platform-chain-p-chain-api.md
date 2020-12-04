@@ -1068,8 +1068,9 @@ Retrieve an assetID for a subnet’s staking asset. Currently, this only returns
 #### **Signature**
 
 ```cpp
-platform.getStakingAssetID({subnetID: string}) ->
-{
+platform.getStakingAssetID({
+    subnetID: string //optional
+}) -> {
     assetID: string
 }
 ```
@@ -1247,7 +1248,7 @@ platform.getTx({
 }) -> {
     tx: string,
     encoding: string,
-})
+}
 ```
 
 #### **Example Call**

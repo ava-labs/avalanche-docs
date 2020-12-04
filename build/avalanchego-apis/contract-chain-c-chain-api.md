@@ -106,11 +106,11 @@ Send AVAX from the C-Chain to the X-Chain. After calling this method, you must c
 
 ```go
 avax.exportAVAX({
-    from: []string,
     to: string,
     amount: int,
     destinationChain: string,
-    changeAddr: string,
+    from: []string, (optional)
+    changeAddr: string, (optional)
     username: string,
     password:string,
 }) -> {txID: string}
