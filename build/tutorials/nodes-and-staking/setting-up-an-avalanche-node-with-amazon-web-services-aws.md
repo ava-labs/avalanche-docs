@@ -328,10 +328,10 @@ AvalancheGo is an ongoing project. Updates are regularly required and it’s ess
 ```text
 cd ~
 curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
 mkdir -p ~/avalanchego
-tar xvf ~/avalanchego-linux-*.tar.gz -C ~/avalanchego --strip-components=1
-rm ~/avalanchego-linux-*.tar.gz
+tar xvf ~/avalanchego-linux-amd64-*.tar.gz -C ~/avalanchego --strip-components=1
+rm ~/avalanchego-linux-amd64-*.tar.gz
 sudo systemctl stop avalanchego
 sudo systemctl start avalanchego
 ```

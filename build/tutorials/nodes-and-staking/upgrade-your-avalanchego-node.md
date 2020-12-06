@@ -28,22 +28,24 @@ If your node is running as a service, stop it by entering:
 
 `sudo systemctl stop avalanchego.service`
 
-(your service may be named differently, `avalanche.service`, or similar)
+\(your service may be named differently, `avalanche.service`, or similar\)
 
 ### Node running in background
 
-If your node is running in the background (by running with `nohup`, for example) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
+
 In this example, second line shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
 
 Now we are ready to download the new version of the node. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
 Downloading pre-built binary is easier and recommended if you're just looking to run your own node and stake on it.
 
-Building the node [from source](#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
 
 ## **Download Pre-built Binary**
 
