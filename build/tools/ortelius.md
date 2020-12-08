@@ -499,12 +499,12 @@ Find assets that have been created on the X-chain.
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | `bool` | When true, aggregated data about the asset will be included. | `false` | N/A |
+| `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
 
 **Example Call**
 
 ```text
-curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=true"
+curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 ```
 
 **Example Response**
