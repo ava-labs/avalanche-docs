@@ -7,6 +7,7 @@
 * [Platform Overview](learn/platform-overview/README.md)
   * [Staking](learn/platform-overview/staking.md)
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
+  * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
 * [Forum](https://forum.avax.network)
@@ -72,8 +73,4 @@
   * [Serialization Primitives](build/references/serialization-primitives.md)
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
-
----
-
-* [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 
