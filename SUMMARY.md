@@ -73,3 +73,7 @@
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
+---
+
+* [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
+
