@@ -10,7 +10,7 @@ This API uses the `json 2.0` RPC format.
 
 ## Endpoint
 
-```text
+```cpp
 /ext/admin
 ```
 
@@ -22,7 +22,7 @@ Assign an API endpoint an alias, a different endpoint for the API. The original 
 
 #### **Signature**
 
-```text
+```cpp
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
@@ -32,7 +32,7 @@ admin.alias({endpoint:string, alias:string}) -> {success:bool}
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -46,7 +46,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -64,7 +64,7 @@ Give a blockchain an alias, a different name that can be used any place the bloc
 
 #### **Signature**
 
-```text
+```cpp
 admin.aliasChain(
     {
         chain:string,
@@ -78,7 +78,7 @@ admin.aliasChain(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -92,7 +92,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -106,17 +106,17 @@ Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1Fia
 
 ### admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+Writes a profile of mutex statistics a file named `lock.profile` in the home directory.
 
 #### **Signature**
 
-```text
+```cpp
 admin.lockProfile() -> {success:bool}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -127,7 +127,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -139,17 +139,17 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Writes a memory profile of the to `mem.profile`.
+Writes a memory profile of the to a file named `mem.profile` in the home directory.
 
 #### **Signature**
 
-```text
+```cpp
 admin.memoryProfile() -> {success:bool}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -160,7 +160,40 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.stacktrace
+
+Write the stack trace to a file named `stacktrace.txt` in the home directory.
+
+#### **Signature**
+
+```cpp
+admin.stacktrace() -> {success:bool}
+```
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.stacktrace",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -172,17 +205,17 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to a file named `cpu.profile` in the home directory.
 
 #### **Signature**
 
-```text
+```cpp
 admin.startCPUProfiler() -> {success:bool}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -193,7 +226,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -209,13 +242,13 @@ Stop the CPU profile that was previously started.
 
 #### **Signature**
 
-```text
+```cpp
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -225,7 +258,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
