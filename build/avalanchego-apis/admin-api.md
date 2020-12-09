@@ -172,7 +172,7 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
 
 #### **Signature**
 

@@ -106,11 +106,11 @@ Send AVAX from the C-Chain to the X-Chain. After calling this method, you must c
 
 ```go
 avax.exportAVAX({
-    from: []string,
     to: string,
     amount: int,
     destinationChain: string,
-    changeAddr: string,
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password:string,
 }) -> {txID: string}
@@ -222,13 +222,13 @@ Gets the UTXOs that reference a given address.
 avax.getUTXOs(
     {
         addresses: string,
-        limit: int, (optional)
-        startIndex: { (optional)
+        limit: int, //optional
+        startIndex: { //optional
             address: string,
             utxo: string
         },
         sourceChain: string,
-        encoding: string, (optional)
+        encoding: string, //optional
     },
 ) -> 
 {
@@ -294,7 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
 
 #### Signature
 

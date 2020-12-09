@@ -779,13 +779,14 @@ The response in this example indicates that AVAX’s supply is at most 365.865 m
 
 List the current validators of the given Subnet.
 
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getCurrentValidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
 #### **Signature**
 
 ```cpp
-platform.getCurrentValidators( {subnetID : string (optional)} ) ->
-{
+platform.getCurrentValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
         txID: string,
         startTime: string,
@@ -981,8 +982,9 @@ List the validators in the pending validator set of the specified Subnet. Each v
 #### **Signature**
 
 ```cpp
-platform.getPendingValidators( {subnetID: string (optional)} ) ->
-{
+platform.getPendingValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
         txID: string,
         startTime: string,
@@ -1068,8 +1070,9 @@ Retrieve an assetID for a subnet’s staking asset. Currently, this only returns
 #### **Signature**
 
 ```cpp
-platform.getStakingAssetID({subnetID: string}) ->
-{
+platform.getStakingAssetID({
+    subnetID: string //optional
+}) -> {
     assetID: string
 }
 ```
@@ -1247,7 +1250,7 @@ platform.getTx({
 }) -> {
     tx: string,
     encoding: string,
-})
+}
 ```
 
 #### **Example Call**
@@ -1281,7 +1284,7 @@ curl -X POST --data '{
 
 Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
 
-See [here](deprecated-api-calls.md#getTxStatus) for notes on previous behavior.
+See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
 
 #### **Signature**
 
