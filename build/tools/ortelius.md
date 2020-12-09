@@ -270,7 +270,7 @@ Find transactions confirmed transactions from the network.
 | `assetID` | `id` | An asset ID to filter results by. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 | `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
-| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-desc` | N/A |
+| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
 
 **Example Call**
 
@@ -499,12 +499,12 @@ Find assets that have been created on the X-chain.
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | `bool` | When true, aggregated data about the asset will be included. | `false` | N/A |
+| `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
 
 **Example Call**
 
 ```text
-curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=true"
+curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 ```
 
 **Example Response**
@@ -773,7 +773,6 @@ This configuration is the one used by the standalone Docker Compose setup and il
 {
   "networkID": 5,
   "logDirectory": "/var/log/ortelius",
-  "ipcRoot": "ipc:///tmp",
   "listenAddr": "localhost:8080",
   "chains": {
     "11111111111111111111111111111111LpoYY": {
@@ -791,8 +790,13 @@ This configuration is the one used by the standalone Docker Compose setup and il
     "kafka": {
       "brokers": [
         "kafka:9092"
-      ],
-      "groupName": "indexer"
+      ]
+    },
+    "producer": {
+        "ipcRoot": "/tmp"
+    },
+    "consumer": {
+        "groupName": "indexer"
     }
   },
   "services": {
