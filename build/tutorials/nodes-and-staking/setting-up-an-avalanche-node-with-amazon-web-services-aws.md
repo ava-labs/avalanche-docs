@@ -2,251 +2,232 @@
 
 ## Introduction
 
-The Avalanche consensus protocol garnered a lot of attention from token fanatics. The decentralized protocol enables Proof of Stake rewards in a way that token holders have never seen before. With the network being green, requiring very low compute to run your staking node, and with the lack of a limit to the number of stakers on the network, many newcomers are interested in starting their node with high availability.
+This tutorial will guide you through setting up an Avalanche node on [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Cloud services like AWS are a good way to ensure that your node is highly secure, available and accessible.
 
-We will step through the process of setting up key pairs, security groups, and launching a node on [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Then, we will log into this node and install the Avalanche software as a service to ensure that our node runs as long as the machine is running. This tutorial assumes absolutely nothing about our AWS hosting environment and will go through each step with as few assumptions possible.
+To get started, you'll need:
 
-## The Logistics of Cloud Hosting a Node <a id="211d"></a>
+* An AWS account
+* A terminal with which to SSH into your AWS machine
+* A place to securely store and back up files
 
-Cloud providers such as [DigitalOcean](https://www.digitalocean.com/), [Azure](https://azure.microsoft.com/en-us/), [Rackspace](https://www.rackspace.com/), and [AWS](https://aws.amazon.com/) provide high-availability environments. While at-home nodes are a solid option, these services are a good candidate for running a node that is guaranteed to reach [minimum uptime requirements \(60% at the time of writing\)](../../../learn/platform-overview/staking.md). With multiple regions and a wide variety of machines available, AWS is the most common choice for cloud providers in the U.S. today.
-
-The best part? **You do not need to put your private keys onto a node to begin validating on that node.** Even if someone breaks into your cloud environment and gains access to the node, the worst they can do is turn off the node. It is, however, advisable that all staking certificates are backed up just in case a full node rebuild is necessary. This will only impact rewards when the machine itself is in such distress \(or terminated entirely\) that a complete rebuild is necessary.
-
-To get started, we need:
-
-* an Internet connection
-* an AWS account
-* the ability to SSH into a machine \(this tutorial uses Openssh and a command line, but PuTTy on Windows could work just as well\)
-* a good place to store and back up staking certificates and \*.pem key pair files
+This tutorial assumes your local machine has a Unix style terminal. If you're on Windows, you'll have to adapt some of the commands used here.
 
 ## Log Into AWS <a id="ff31"></a>
 
-We need an AWS account. This sign-up process is outside of the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
+Signing up for AWS is outside the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
-It is also _highly_ recommended that we set up Multi-Factor Authentication on our root user account to protect it. Again, Amazon has documentation for this, found [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
+It is _highly_ recommended that you set up Multi-Factor Authentication on your AWS root user account to protect it. Amazon has documentation for this [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
 
-Once completed, we can begin creating our EC2 instance. EC2 is a service provided by AWS to enable AWS users to launch virtual machine instances in the cloud. These virtual machines are small computing environments running an Operating System of your choice. To enter the EC2 panel after logging into AWS, click the EC2 link on the management console.
+Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
 
 ![](../../../.gitbook/assets/image%20%2816%29.png)
 
-## Create AWS Key Pairs <a id="d2a5"></a>
+To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
 
-![](../../../.gitbook/assets/image%20%2819%29.png)
+![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/image%20%2819%29.png)
 
-To log in to our node’s instance on AWS, we must download key pairs from AWS which will grant us access to our host. Key pair files are used by programs like OpenSSH or PuTTy to access our hosts. We’re going to first generate this key pair so that we can assign it to our AWS instance later in the tutorial. We begin by selecting the Key Pairs link on the sidebar of the EC2 console.
+Select **Create key pair** to launch the key pair creation wizard.
 
-We’re going to click “Create key pair” to launch the key pair creation wizard.
+![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-![Image for post](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
+Name your key `avalanche`. If your local machine has MacOS or Linux, select the `pem` file format. If it's Windows, use the `ppk` file format. Optionally, you can add tags for the key pair to assist with tracking.
 
-We will name our key pair and select a file format. In this picture, we named our key pair “avalanche” and selected the “pem” file format as the rest of the tutorial will use OpenSSH. If we wanted to use PuTTy on Windows, the “ppk” file format would be the better option. If we want, we can optionally add tags for our key pair to assist with tracking. In the below key pair we gave it the tag “Name” and the value “Avalanche Key Pair”.
+![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-![Image for post](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
+Click `Create key pair`. You should see a success message, and the key file should be downloaded to your local machine. Without this file, you will not be able to access your EC2 instance. **Make a copy of this file and put it on a separate storage medium such as an external hard drive. Keep this file secret; do not share it with others.**
 
-Next, we click “Create key pair” and if all is well, we’ll see the following success message.
-
-![Image for post](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
-
-Tada! Now, we have a key pair we can use to log into our AWS instance later. In the process of creating this key pair, a file was downloaded. In the above example, we named our key pair “avalanche.pem”, but the name will reflect whatever we entered into the form.
-
-This key pair file is highly important. It is the only way to log into our instance we create later. If we lose this, it will be very difficult to recover access to our machine. Anyone with this key pair file will have access to our host, so it is essential to back this key pair file up into a secure place.
+![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
 
 ## Create a Security Group <a id="f8df"></a>
 
-![Image for post](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
+An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
 
-Security Groups in AWS are templates used for locking down firewall permissions on a host. Since we want to enable some inbound traffic and disable all other traffic, we’ll need to create a custom security group of our own. To start, we’ll select “Security Groups” from the sidebar on the EC2 management page.
+![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
-This should open the Security Groups panel on the page. Next, we’re going to begin the process of creating a new security group. To do that, we’ll click the “Create security group” button in the top right of the Security Groups panel.
+This opens the Security Groups panel. Click **Create security group** in the top right of the Security Groups panel.
 
-![Image for post](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
+![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-Now we’ll need to open some essential ports to inbound traffic on AWS in our new security group. We’ll keep SSH open, though optionally we can restrict it to our IP address. This can only work if we have a static IP address. Since, like most people, do not have a static IP address, we’ll not go with that option and will leave “Source” open to everyone. We also must open traffic to 9651 so that our node can talk to other nodes on the network. This is what our final Inbound Rules looks like for our new Security Group.
+You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\)  Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
 
-![Image for post](https://miro.medium.com/max/1335/1*MMxwsAuoBNqw3h9UqSDgHA.png)
+![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/ss%20%281%29.png)
 
-_**Optionally**_, we may do two more things to our node. If we want to open our API to our public consumption, we can add a rule which sets it to a fixed IP address of our choosing. The API runs on port 9650. In the above inbound rules, we left it closed off by default, but we can open that up if we want. If we add a rule that has port 9650 and “My IP” it’ll use our local IP \(**Warning**: if you’re on DHCP like most home routers are, your local IP can and will change\). We could also make it “Anywhere”, but be warned: that opens your node to anyone who hits its API. Further, we can block port 22 to a specific IP address of our choosing. As above, this comes with the DHCP warning in that your IP address can change, but in this case, you’ll be locked out of your node. **While they are best practices, use these options with caution.**
+Add a tag to the new security group with key  `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
 
-We’ll add a tag to our new security group. The key is “Name” and the value is “Avalanche Security Group”. This will enable us to know what this security group is when we see it in the list of security groups.
+![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-![Image for post](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
+Click `Create security group`. You should see the new security group in the list of security groups. 
 
-We will click “Create security group”, and if all has gone well, we’ll see our security group in the list of security groups. If we select our security group, the details panel on the bottom will open up with its info. If we did everything right, the details of the Inbound tab will look like this:
+## Launch an EC2 Instance <a id="0682"></a>
 
-![Image for post](https://miro.medium.com/max/750/1*vb2toLo74ZhQGlLCUUxLGA.png)
+Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
 
-As a note, we didn’t do anything to modify the outbound rules. This is because the default outbound rules are that our machine can reach out to any other machine. We leave this as it is because we trust our machine and we also want to leave it open to talk to any other node on the network.
+![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-## Launching an AWS Instance <a id="0682"></a>
+Select **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** for the operating system.
 
-Finally! No more set up, now it’s all content! We’re ready to launch our AWS Instance to host our node. To start, from the EC2 Dashboard, we click the button that says “Launch instance”.
+![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-![Image for post](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
+Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.large**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.large instance, select the **Compute-optimized** option from the filter drop-down menu.
 
-Next, we select the Operating System. We’re going to use either “Ubuntu 20.04 LTS \(HVM\), SSD Volume Type” or “Ubuntu 18.04 LTS \(HVM\), SSD Volume Type”. AvalancheGo’s minimum requirements are for Ubuntu 18.04, but 20.04 works just as well. For this tutorial, we’re going with 18.04, but it should make no cosmetic difference in the procedures we’re going through.
+![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-![Image for post](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
+Select the checkbox next to the c5.large instance in the table.
 
-The next step is to select our instance type. AvalancheGo can run on a lot of hardware and has very low CPU requirements. However, the network goes as fast as the minimum machine, and Avalanche has always requested at least 2 vCPUs and 4GB of memory. This makes “c5.large” an ideal instance type for our node. To create a c5.large instance, we select the “Compute-optimized” option from the “Filter by All instance types” drop-down menu.
+![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
 
-![Image for post](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
+Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
 
-We then select the checkbox next to the c5.large instance in the table.
+![](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
-![Image for post](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
+The instance details can stay as their defaults.
 
-And finally, we click the “Next: Configure Instance Details” button in the bottom right-hand corner.
+### Optional: Using Spot Instances or Reserved Instances <a id="c99a"></a>
 
-![Image for post](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
+By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
 
-In the next step, we’re going to set up our instance details. Almost everything on this page can remain the same. However, there’s a way to save a little money on this page that many people do not take advantage of. It’s called “Spot Instances”. Spot instances are instances that are not guaranteed to always be up, but the trade-off is that they cost much much less on average than persistent instances. At the time of this tutorial, a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. At the time of this article, spot instances can save 62%, bringing that total down to $462.
+The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases.  Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option. 
 
-### Optional: Saving a Little Money with Spot Instances <a id="c99a"></a>
+The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
 
-Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for the spot instance goes up. We can set a maximum price we’re willing to pay for the spot instance to 0.08499, and set the instance to “Stop” instead of “Terminate”, and we get whatever the current market value of the computing power is for our instance by the hour. If the market value exceeds $0.08499 for an hour, our instance is stopped and we’ll have to restart it.
+### Add Storage, Tags, Security Group <a id="dbf5"></a>
 
-This sounds risky until we look at the numbers behind this scenario. There’s a very, very low chance of a shutdown. Much less than 5%, and since we require 60% uptime, we can handle the risk for 62% savings.
+Click the **Next: Add Storage** button in the bottom right corner of the screen.
 
-![Image for post](https://miro.medium.com/max/858/1*fGbUcMB2WpKSGZ6-xINErQ.png)
+You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
 
-To set up a spot instance, we click the “Request Spot instances” box, set our maximum price to $0.08499, check the box next to “Persistent request”, and **very importantly**, change the “Interruption behavior” to “Stop”. Super!
+![Select 100 GB for the disk size.](../../../.gitbook/assets/ss.png)
 
-### Continuing Onward, Adding Storage, Adding Tags, Wrapping Up! <a id="dbf5"></a>
+Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
 
-Now we click the “Next: Add Storage” button in the bottom right corner of the screen to move on to adding storage.
+![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
-We need to add additional space to our SD volume to have our node run smoothly on the SSD. We put in 40GB in this example, but that can be more if you feel safer with more space. Remember, the Avalanche database will continually grow until pruning is enabled, so it’s safer to have a larger hard drive allocation for now.
+Now assign the security group created earlier to the instance. Choose **Select an existing security group** and choose the security group created earlier.
 
-![Image for post](https://miro.medium.com/max/1583/1*02xw5D1P-Ypbf8-k6nS3HQ.png)
+![Choose the security group created earlier.](../../../.gitbook/assets/ss%20%283%29.png)
 
-To continue, we click “Next: Add Tags” in the bottom right corner of the screen to add tags to our instance. Tags enable us to associate metadata with our instance. Since this instance needs a name, we’re going to give it the key “Name” and the value “My Avalanche Node”. This will make it clear what this node is on our list of EC2 instances.
+Finally, click **Review and Launch** in the bottom right. A review page will show the details of the instance you're about to launch. Review those, and if all looks good, click the blue **Launch** button in the bottom right corner of the screen.
 
-![Image for post](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
+You'll be asked to select a key pair for this instance. Select **Choose an existing key pair** and then select the `avalanche` key pair you made earlier in the tutorial. Check the box acknowledging that you have access to the `.pem` or `.ppk` file created earlier \(make sure you've backed it up!\) and then click **Launch Instances**.
 
-Now we’re going to assign the security group we created earlier with our instance. We choose “Select an **existing** security group” from the “Assign a security group” option. Now we choose the Avalanche security group we created in Step 3 of this tutorial.
+![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-![Image for post](https://miro.medium.com/max/1062/1*VVwevXxYTnhXMInpaOHV9g.png)
+You should see a new pop up that confirms the instance is launching!
 
-Finally, we click “Review and Launch” in the bottom right. A review page will pop up with the details of what we’re about to launch. We can review those, and if all looks good, we’ll click the blue “Launch” button in the bottom right corner of the screen.
+![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-Doing so will ask us to select a key pair for this instance. We’re going to select “Choose an existing key pair” and then select the “avalanche” key pair we made earlier in the tutorial. We check the box acknowledging that we have access to our “pem” or “ppk” file created earlier and then click “Launch Instances” in the bottom-right corner.
+### Assign an Elastic IP
 
-![Image for post](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
+By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
 
-We should see a new page pop up that confirms our instance is launching!
+![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-![Image for post](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
+Select **Allocate Elastic IP address**.
 
-![Image for post](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
+![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
-AWS uses dynamic IPs for each instance by default. This means our IP address can change for our node. It’s much nicer not to deal with that, so we’re going to use an Elastic IP instead. This is not a hard requirement, but if we want to keep your uptime, it’s important that our node scripts have the IP address. Rather than modify that every time our node restarts, and Elastic IP keeps it static going forward. First step is to enter the Elastic IPs manager and click “Allocate Elastic IP address” at the top right corner of the screen.
+Select the region your instance is running in, and choose to use Amazon’s pool of IPv4 addresses. Click **Allocate**.
 
-![Image for post](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
+![Settings for the Elastic IP.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
 
-Next, select the region we’re in, choose from Amazon’s pool of IPv4 addresses, and click the “Allocate” button”.
+Select the Elastic IP you just created from the Elastic IP manager. From the **Actions** drop-down, choose **Associate Elastic IP address**.
 
-![Image for post](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
+![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-This creates a new elastic IP address. We select the elastic IP we just created from the Elastic IP manager. From the “Actions” button in the top right, we choose “Associate Elastic IP address”.
+Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
 
-![Image for post](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
+![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-Finally, we’re selecting the instance we just created, as seen below. This will associate the new Elastic IP with our instance and give it a static IP address that wont change.
+## Set Up AvalancheGo <a id="829e"></a>
 
-![Image for post](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
+Go back to the EC2 Dashboard and select `Running Instances`.
 
-## Setting Up the Node <a id="829e"></a>
+![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-To continue, we’re going to need to make sure our instance is running, and we’re going to need the Public DNS name of our instance to log into it via SSH. This can be seen on the EC2 Dashboard by clicking “Running Instances”. Also, when starting our node, we’ll need the “IPv4 Public IP” address, to get the instance running.
+Select the newly created EC2 instance. This opens a details panel with information about the instance.
 
-![Image for post](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
+![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Next, we look through our list of running instances and select our newly created Avalanche node. This opens up the details panel on the bottom of the screen. We’re going to look for the “Public DNS” field and copy that address. That’s the address we can use to log into our AWS instance.
+Copy the `IPv4 Public IP` field to use later. From now on we call this value`PUBLICIP.`
 
-![Image for post](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
+ ****_Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems._ _When copy-pasting a command from a code block, copy and paste the entirety of the text in the block._
 
-We’ll copy this address now and continue onward.
+Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier. 
 
-**NOTE:** _This article was written by me, Collin Cusce, and I run a Ubuntu box. Logging into the host and copying files will be told from the perspective of a Ubuntu user. There are different steps for those procedures if using Mac OS or Windows, but they are fairly easy to translate to the operations we’re performing here. If anyone wants to provide instructions for those operating systems, I will gladly link to them in this article._
+Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
 
-Using our Public DNS value that we copied earlier, we’re going to log into our AWS instance from our local computer. We now will open up a terminal in Ubuntu, navigate to the place we downloaded the “pem” file, and type the following commands:
-
-```text
-chmod 400 avalanche.pem
-ssh -i avalanche.pem ubuntu@PUBLICDNS
+```bash
+mv avalanche.pem ~/.ssh
 ```
 
-We will need to replace the value “PUBLICDNS” with the Public DNS copied earlier.
+Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
 
-The first line sets proper permission on our “pem” file. If the permissions are **not** set correctly, we will see the following error.
-
-![Image for post](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
-
-To fix this, we just follow our instructions exactly and change the permissions on the “pem” file.
-
-![Image for post](https://miro.medium.com/max/648/1*G2ViNGO-sVEpouvJDdiUqQ.png)
-
-We may optionally want to move the “pem” file. The ~/.ssh directory is always a popular choice, but for this tutorial, we’re going to assume that we’re working from the same directory as our “pem” file.
-
-The second line logs us into the instance itself.
-
-![Image for post](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
-
-Now that we are on our node, it’s a good idea to update it to the latest packages. To do this, run the following commands, one-at-a-time, in order:
-
-```text
-sudo apt update
-sudo apt upgrade -y
-sudo reboot
+```bash
+ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-This will make our instance up-to-date with the latest security patches for our operating system. This will also reboot the node. We’ll give the node a minute or two to boot back up, then log in again, same as before.
-
-Now we’ll need to set up our Avalanche node. To do this, we’ll need to fetch the node package from the latest releases on Github:
+SSH into the instance. \(Remember to replace `PUBLICIP` with the public IP field from earlier.\)
 
 ```text
-cd ~
-curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
+ssh ubuntu@PUBLICIP
 ```
 
-This will download the \*.tar.gz file for the latest release into our home directory \(/home/ubuntu\). Next, we’re going to extract the \*.tar.gz file into a directory called “avalanchego” in our home directory and remove the \*.tar.gz file since we no longer need it.
+If the permissions are **not** set correctly, you will see the following error.
+
+![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
+
+You are now logged into the EC2 instance.
+
+![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
+
+If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
 
 ```text
-mkdir -p ~/avalanchego
-tar xvf ~/avalanchego-linux-*.tar.gz -C ~/avalanchego --strip-components=1
-rm ~/avalanchego-linux-*.tar.gz
+sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-Our next step is to set up AvalancheGo as a service running on our machine under the “ubuntu” user. To do this, we’re going to create a services file for systemd to read.
+This also reboots the instance. Wait 5 minutes, then log in again by running this command on your local machine:
+
+```bash
+ssh ubuntu@PUBLICIP
+```
+
+You're logged into the EC2 instance again. Download the latest AvalancheGo release from Github.
+
+```
+cd ~; curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
+```
+
+Unzip the AvalancheGo binary and put it in `~/avalanchego`.
+
+```text
+mkdir -p ~/avalanchego; tar xvf ~/avalanchego-linux-amd64*.tar.gz -C ~/avalanchego \
+ --strip-components=1; rm ~/avalanchego-linux-*.tar.gz
+```
+
+Set up AvalancheGo as a service so that it can run in the background.
 
 ```text
 sudo nano /etc/systemd/system/avalanchego.service
 ```
 
-This opens the “nano” text editor. We now copy and paste the following into the text editor. We edit the file in the place where it says, “IPv4PublicIPAddress” and put in our “IPv4 Public IP” copied from earlier in this step \(Step 5\), then hit Ctrl-x to save the file and exit.
+This opens the `nano` text editor. Paste the following into the text editor. Remember to replace `PUBLICIP`. To save and quit do `CTRL + X` followed by `Y` .
 
 ```text
 [Unit]
 Description=AvalancheGo systemd service.
-StartLimitIntervalSec=0[Service]
+StartLimitIntervalSec=0
+[Service]
 Type=simple
 User=ubuntu
-ExecStart=/home/ubuntu/avalanchego/avalanchego --plugin-dir=/home/ubuntu/avalanchego/plugins --public-ip=IPv4PublicIPAddress --http-host=
+ExecStart=/home/ubuntu/avalanchego/avalanchego --plugin-dir=/home/ubuntu/avalanchego/plugins --public-ip=PUBLICIP --http-host=
 Restart=always
 RestartSec=1[Install]
 WantedBy=multi-user.target
 ```
 
-**NOTE:** _By default, this IPv4 Public IP address can change every time this instance is started or stopped. In the event this happens, “/etc/systemd/system/avalanchego.service” must be edited again to add in the new IPv4PublicIPAddress that was generated. To avoid this issue, we could consider allocating an “Elastic IP” which will provide us with a permanent IP address to use. As those are a limited resource, we’re going to go with the generic option, but it would also be a very good idea for us to consider assigning an Elastic IPs instead. AWS’s tutorial on this begins_ [_here_](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)_._
-
-**NOTE2:** _A super community member_ [_Patricio López_](https://medium.com/u/e0b46c913ed7?source=post_page-----1effec72c666--------------------------------) _pointed out that the original article was missing the “http-port” option._
-
-> just a little addon… if you’re running your node with an elastic ip, you also need to set the http-port param to the private IP \(not the elastic\), if you want to connect the node with Postman or CURL
-
-_That has now been added. Thanks Patricio!_
-
-Finally, we run the following commands to give the service file the correct permissions and begin our AvalancheGo service.
+Finally, run the following to give the service file the correct permissions and start the AvalancheGo service.
 
 ```text
 sudo chmod 644 /etc/systemd/system/avalanchego.service
@@ -254,17 +235,23 @@ sudo systemctl start avalanchego
 sudo systemctl enable avalanchego
 ```
 
-## Wrap It Up! <a id="7a97"></a>
-
-Our node should now begin bootstrapping! We can run the following command to take a peek at the latest status of the avalanchego node:
+AvalancheGo is now running! It should begin bootstrapping. You can run the following to take a peek at the latest output of AvalancheGo:
 
 ```text
 sudo systemctl status avalanchego
 ```
 
-![Image for post](https://miro.medium.com/max/1834/1*FVEINyEfuOinqGAhneNGWA.png)
+![Peek at the latest output using &quot;sudo systemctl status avalanchego&quot;](https://miro.medium.com/max/1834/1*FVEINyEfuOinqGAhneNGWA.png)
 
-This begins the bootstrapping process on our node. To check the status of the bootstrap, we’ll need to make a request to the local RPC using “curl”. This request is as follows:
+To continuously follow the output log of AvalancheGo you can use the following command:
+
+```text
+sudo journalctl -u avalanchego -f
+```
+
+Press `CTRL + C` to stop the output.
+
+Bootstrapping will take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
 
 ```text
 curl -X POST --data '{
@@ -277,7 +264,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The node can take some time \(upward of an hour at this moment writing\) to bootstrap. Bootstrapping means that the node downloads and verifies the history of the chains. Give this some time. Once the node is finished bootstrapping, the response will be:
+Once the node is finished bootstrapping, the response will be:
 
 ```text
 {
@@ -289,9 +276,9 @@ The node can take some time \(upward of an hour at this moment writing\) to boot
 }
 ```
 
-We can always use “sudo systemctl status avalanchego” to peek at the latest status of our service as before, as well.
+You can continue on, even if AvalancheGo isn't done bootstrapping. 
 
-We absolutely must get our NodeID if we plan to do any validating on this node. This is retrieved from the RPC as well. We call the following curl command to get our NodeID.
+In order to make your node a validator, you'll need its node ID. To get it, run:
 
 ```text
 curl -X POST --data '{
@@ -301,29 +288,43 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If all is well, the response should look something like:
+The response contains the node ID.
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-That portion that says, “NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
+In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
 
-There are other APIs, such as the [Health API](../../avalanchego-apis/health-api.md) available to our node. To enable these APIs, we must modify the ExecStart section of our “/etc/systemd/system/avalanchego.service” file created in Step 5 to include flags that enable these endpoints. Beware: this port is open to the world, so if we enable an RPC, then the world can query this data from our node, which could eat our bandwidth and computing resources.
+AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created in Step 5\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to. 
 
-![Image for post](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
+![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-The last thing that should be done is backing up our staking keys in the untimely event that our instance is corrupted or terminated. It’s just good practice for us to keep these keys. To back them up, we use the following command:
+Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`. 
 
-```text
-scp -i avalanche.pem -r ubuntu@PUBLICDNS:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
+Exit out of the SSH instance by running:
+
+```bash
+exit
 ```
 
-As before, we’ll need to replace “PUBLICDNS” with the appropriate value that we retrieved. This backs up our staking key and staking certificate into a folder called “aws\_avalanche\_backup” in our home directory.
+Now you're no longer connected to the EC2 instance; you're back on your local machine.
 
-### Upgrading Our Node <a id="9ac7"></a>
+To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP.`
 
-AvalancheGo is an ongoing project. Updates are regularly required and it’s essential to keep our node up to date. To update our node to the latest patch, we need to SSH into our AWS instance as before and use the following commands:
+```text
+scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
+```
+
+Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
+
+### Upgrading Your Node <a id="9ac7"></a>
+
+AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the following commands.
+
+```bash
+cd ~; mkdir -p ~/avalanchego
+```
 
 ```text
 cd ~
@@ -335,4 +336,24 @@ rm ~/avalanchego-linux-amd64-*.tar.gz
 sudo systemctl stop avalanchego
 sudo systemctl start avalanchego
 ```
+
+To download the latest release:
+
+```bash
+curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi - ; \
+tar xvf ~/avalanchego-linux-amd64*.tar.gz -C ~/avalanchego --strip-components=1
+```
+
+Do cleanup and restart AvalancheGo:
+
+```bash
+rm ~/avalanchego-linux-*.tar.gz; sudo systemctl restart avalanchego
+```
+
+Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+
+## Wrap Up
+
+That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 

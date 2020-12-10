@@ -69,24 +69,24 @@ avax.export({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avax.export",
     "params" :{
-        "to": "X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
         "amount": 500,
         "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
-        "username": "myUsername",
-        "password": "myPassword"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -104,10 +104,13 @@ Send AVAX from the C-Chain to the X-Chain. After calling this method, you must c
 
 #### Signature
 
-```cpp
+```go
 avax.exportAVAX({
     to: string,
     amount: int,
+    destinationChain: string,
+    from: []string, //optional
+    changeAddr: string, //optional
     username: string,
     password:string,
 }) -> {txID: string}
@@ -115,8 +118,11 @@ avax.exportAVAX({
 
 **Request**
 
+* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
 * `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
 * `amount` is the amount of nAVAX to send.
+* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
+* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
 * The AVAX is sent from addresses controlled by `username`
 
 **Response**
@@ -125,14 +131,17 @@ avax.exportAVAX({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avax.exportAVAX",
     "params" :{
+        "from": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"],
         "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
         "amount": 500,
+        "destinationChain": "X",
+        "changeAddr": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
         "username":"myUsername",
         "password":"myPassword"
     }
@@ -141,7 +150,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -157,15 +166,12 @@ Get the private key that controls a given address. The returned private key can 
 
 #### Signature
 
-```cpp
+```go
 avax.exportKey({
     username: string,
-    password: string,
-    address: string
-}) -> {
-    privateKey: string,
-    privateKeyHex: string,
-}
+    password:string,
+    address:string
+}) -> {privateKey: string}
 ```
 
 **Request**
@@ -180,14 +186,14 @@ avax.exportKey({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avax.exportKey",
     "params" :{
         "username" :"myUsername",
-        "password" :"myPassword",
+        "password":"myPassword",
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
@@ -195,7 +201,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -215,7 +221,7 @@ Gets the UTXOs that reference a given address.
 ```cpp
 avax.getUTXOs(
     {
-        addresses: []string,
+        addresses: string,
         limit: int, //optional
         startIndex: { //optional
             address: string,
@@ -231,8 +237,7 @@ avax.getUTXOs(
     endIndex: {
         address: string,
         utxo: string
-    },
-    encoding: string
+    }
 }
 ```
 
@@ -293,7 +298,7 @@ Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Bef
 
 #### Signature
 
-```cpp
+```go
 avax.import({
     to: string,
     sourceChain: string,
@@ -314,7 +319,7 @@ avax.import({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -330,7 +335,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -348,7 +353,7 @@ Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method 
 
 #### Signature
 
-```cpp
+```go
 avax.importAVAX({
     to: string,
     sourceChain: string,
@@ -369,7 +374,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -385,7 +390,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -401,11 +406,11 @@ Give a user control over an address by providing the private key that controls t
 
 #### Signature
 
-```cpp
+```go
 avax.importKey({
     username: string,
-    password: string,
-    privateKey: string
+    password:string,
+    privateKey:string
 }) -> {address: string}
 ```
 
@@ -419,13 +424,13 @@ avax.importKey({
 
 #### Example Call
 
-```cpp
+```javascript
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"avax.importKey",
     "params" :{
-        "username":"myUsername",
+        "username" :"myUsername",
         "password":"myPassword",
         "privateKey":"PrivateKey-2o2uPgTSf3aR5nW6yLHjBEAiatAFKEhApvYzsjvAJKRXVWCYkE"
     }
@@ -434,54 +439,13 @@ curl -X POST --data '{
 
 #### Example Response
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     },
     "id": 1
-}
-```
-
-### avax.issueTx
-
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
-
-#### **Signature**
-
-```cpp
-avax.issueTx({
-    tx: string,
-    encoding: string, //optional
-}) -> {
-    txID: string
-}
-```
-
-#### **Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     : 1,
-    "method" :"avax.issueTx",
-    "params" :{
-        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
-        "encoding": "cb58"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-#### **Example Response**
-
-```cpp
-{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
-    }
 }
 ```
 
