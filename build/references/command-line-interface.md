@@ -379,6 +379,20 @@ This option lets one specify on which port the throughput server, if enabled, wi
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
+### Restart on Disconnect
+
+Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
+
+`--restart-on-disconnected` \(boolean, defaults to `false`\)
+
+`--disconnected-check-frequency`  \(duration, defaults to `10s`\)
+
+`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
+
+If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
+
+If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
+
 ### Plugins
 
 `--plugin-dir` \(string, file path\):
