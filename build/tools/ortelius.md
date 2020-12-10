@@ -12,7 +12,7 @@ This API uses GET HTTP requests using URL query parameters and returns JSON data
 
 ### Versioning
 
-Starting with version 2, the API will paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
+Starting with version 2, the API paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
 
 The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
 
