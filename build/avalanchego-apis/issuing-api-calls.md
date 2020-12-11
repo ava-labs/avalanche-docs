@@ -95,7 +95,7 @@ Such a response would look like:
 
 ## Other API Formats
 
-Some APIs, such as the Admin API, may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
 
 ## Sending and Receiving Bytes
 
