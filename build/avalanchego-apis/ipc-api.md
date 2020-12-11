@@ -37,7 +37,7 @@ Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
 #### **Signature**
 
-```text
+```cpp
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
@@ -47,7 +47,7 @@ ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisio
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.publishBlockchain",
@@ -60,7 +60,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "result":{
@@ -77,7 +77,7 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
 #### **Signature**
 
-```text
+```cpp
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
@@ -85,7 +85,7 @@ ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.unpublishBlockchain",
@@ -98,7 +98,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "result":{

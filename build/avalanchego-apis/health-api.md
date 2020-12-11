@@ -22,7 +22,7 @@ The node runs a set of health checks every 30 seconds, including a health check 
 
 #### **Signature**
 
-```text
+```cpp
 health.getLiveness() -> {
     checks: []{
         checkName: {
@@ -53,7 +53,7 @@ More information on these measurements can be found in the documentation for the
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -65,7 +65,7 @@ curl -X POST --data '{
 
 In this example response, the C-Chain’s health check is failing.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
