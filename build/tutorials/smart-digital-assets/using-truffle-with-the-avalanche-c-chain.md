@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching Dapps on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with your deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain.
+[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching Dapps on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with your deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Requirements
 
@@ -16,6 +16,8 @@ You've completed [Getting Started](../../getting-started.md) and are familiar wi
 
 ## Start up a local Avalanche network
 
+[Avash](https://github.com/ava-labs/avash) is Avalanche's local development network. You can use it to spin up private test network deployments with up to 15 full AvalancheGo nodes out-of-the-box. Avash support automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup). Once that is complete you can start avash with these steps:
+
 ```zsh
 cd /path/to/avash
 # start avash
@@ -24,7 +26,11 @@ cd /path/to/avash
 runscript scripts/five_node_staking.lua
 ```
 
+The previous steps `cd` to your avash directory, start avash, and lastly fire up a five node Avalanche network.
+
 ## Create truffle directory and install dependencies
+
+Now we need to create a `truffle` directory and install some further dependencies. First `cd` to a directory within which you intend to create your `truffle` working directory. After creating and entering the `truffle` directory, next, using `npm`, install [web3](https://web3js.readthedocs.io) which is a library though which we can talk to the EVM. We'll use web3 to set an HTTP Provider which is **how** web3 will speak to the EVM. Lastly call `truffle init` to create a boilerplace truffle project.
 
 ```zsh
 cd /path/to/directory
@@ -36,15 +42,18 @@ truffle init
 
 ## Update truffle-config.js
 
-Add the following to your `truffle-config.js` file.
+One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to your `truffle-config.js` file.
 
 ```js
 const Web3 = require('web3');
+const protocol = "http";
+const ip = "localhost";
+const port = 9650;
 module.exports = {
   networks: {
    development: {
      provider: function() {
-      return new Web3.providers.HttpProvider("http://localhost:9650/ext/bc/C/rpc")
+      return new Web3.providers.HttpProvider(`${protocol}://${ip}:${port}/ext/bc/C/rpc`)
      },
      network_id: "*",
      gas: 3000000,
@@ -53,6 +62,8 @@ module.exports = {
   }
 };
 ```
+
+Note that you can change the `protocol`, `ip` and/or `port` as needed. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
 ## Compile Contracts with Truffle
 
