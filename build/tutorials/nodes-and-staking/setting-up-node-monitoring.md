@@ -178,7 +178,7 @@ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 ```
 
 ```cpp
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.lis
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 ```
 
 To install Grafana:
