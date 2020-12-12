@@ -223,7 +223,8 @@ Type=simple
 User=ubuntu
 ExecStart=/home/ubuntu/avalanchego/avalanchego --plugin-dir=/home/ubuntu/avalanchego/plugins --public-ip=PUBLICIP --http-host=
 Restart=always
-RestartSec=1[Install]
+RestartSec=1
+[Install]
 WantedBy=multi-user.target
 ```
 
