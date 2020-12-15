@@ -43,6 +43,7 @@
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
+    * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-digital-assets/using-truffle-with-the-avalanche-c-chain.md)
 * [AvalancheGo APIs](build/avalanchego-apis/README.md)
   * [Issuing API Calls](build/avalanchego-apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/avalanchego-apis/platform-chain-p-chain-api.md)
