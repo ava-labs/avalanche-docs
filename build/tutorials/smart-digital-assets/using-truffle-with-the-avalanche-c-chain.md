@@ -311,7 +311,7 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlocked the account, you'll see this error:
+If you didn't unlock the account, you'll see this error:
 
 ```
 Error:  *** Deployment Failed ***
@@ -351,8 +351,7 @@ If you see this error:
 Error: Returned error: authentication needed: password or unlock
 ```
 
-Then run this again:
-```
+Then run this again: `node web3_script.js`
 
 You should see something like:
 
