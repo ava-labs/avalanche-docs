@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentalized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Requirements
 
