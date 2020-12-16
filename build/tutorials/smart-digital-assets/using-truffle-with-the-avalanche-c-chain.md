@@ -201,7 +201,7 @@ Follow the steps in the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](..
 
 Create a new file called `web3_script.js` in the `truffle` directory and add the following:
 
-```zsh
+```js
 // web3_script.js
 let Web3 = require('web3');
 let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
@@ -225,7 +225,7 @@ node web3_script.js
 
 This should return something like:
 
-```zsh
+```js
 [ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
 true
 ```
@@ -329,7 +329,7 @@ truffle console --network development
 
 Get an instance of the deployed `Storage` contract:
 
-```zsh
+```js
 truffle(development)> let instance = await Storage.deployed()
 ```
 
@@ -342,7 +342,7 @@ undefined
 
 Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
 
-```zsh
+```js
 truffle(development)> instance.store(1234)
 ```
 
@@ -381,25 +381,25 @@ You should see something like:
 
 To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
 
-```
+```js
 truffle(development)> let i = await instance.retrieve()
 ```
 
 This should return:
 
-```
+```js
 undefined
 ```
 
 The result of the call to `retrieve` is a `BN` (big number). Call its `.toNumber` method to see the value:
 
-```zsh
+```js
 truffle(development)> i.toNumber()
 ```
 
 You should see the number you stored.
 
-```
+```js
 1234
 ```
 
