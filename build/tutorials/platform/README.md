@@ -1,7 +1,5 @@
 # Platform
 
-
-
 | Title | Description |
 | :--- | :--- |
 | [**Create a Blockchain**](create-a-new-blockchain.md) | Create a blockchain by creating a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |

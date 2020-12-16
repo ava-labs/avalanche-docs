@@ -48,7 +48,7 @@ Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network
 
 Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain.
 
-{% page-ref page="transfer-avax-between-x-chain-and-p-chain.md" %}
+{% page-ref page="../platform/transfer-avax-between-x-chain-and-p-chain.md" %}
 
 ### Funding your C-chain address on local testnet <a id="b5a3"></a>
 
