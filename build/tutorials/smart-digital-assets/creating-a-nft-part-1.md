@@ -39,7 +39,7 @@ avm.createNFTAsset({
 
 ### **Method**
 
-* [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)\*\*\*\*
+* [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)
 
 **Parameters**
 
