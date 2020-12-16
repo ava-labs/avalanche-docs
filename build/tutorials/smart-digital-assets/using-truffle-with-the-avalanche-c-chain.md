@@ -208,10 +208,10 @@ let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
 
 let main = async () => {
   let accounts = await web3.eth.personal.getAccounts();
-  console.log(accounts)
-  let account = accounts[0]
-  let unlock = await web3.eth.personal.unlockAccount(account)
-  console.log(unlock)
+  console.log(accounts);
+  let account = accounts[0];
+  let unlock = await web3.eth.personal.unlockAccount(account);
+  console.log(unlock);
 }
   
 main()
