@@ -150,7 +150,7 @@ Select the newly created EC2 instance. This opens a details panel with informati
 
 Copy the `IPv4 Public IP` field to use later. From now on we call this value`PUBLICIP.`
 
-_\*\*Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems._ _When copy-pasting a command from a code block, copy and paste the entirety of the text in the block._
+**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
 
 Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
 

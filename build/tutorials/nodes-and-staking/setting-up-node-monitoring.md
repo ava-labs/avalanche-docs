@@ -217,7 +217,7 @@ which should show grafana as `active`. Grafana should now be available at `http:
 You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
 {% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password.\*\* Now we need to connect Grafana to our data source, Prometheus.
+Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
 
 On Grafana’s web interface:
 

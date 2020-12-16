@@ -6,7 +6,7 @@ AVAX tokens exist on both the X-Chain, where they can be traded, and the P-Chain
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
 ## Export AVAX from the X-Chain to the P-Chain
 
