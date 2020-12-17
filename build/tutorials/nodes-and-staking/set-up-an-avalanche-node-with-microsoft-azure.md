@@ -257,17 +257,16 @@ This will make our instance up to date with the latest security patches for our 
 Now we’ll need to set up our Avalanche node. To do this, we’ll need to fetch the node package from the latest releases on GitHub:
 
 ```text
-cd ~
-curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
+cd ~; curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
 ```
 
 This will download the \*.tar.gz file for the latest release into our home directory \(/home/ubuntu\). Next, we’re going to extract the \*.tar.gz file into a directory called “avalanchego” in our home directory and remove the \*.tar.gz file since we no longer need it.
 
 ```text
-mkdir -p ~/avalanchego
-tar xvf ~/avalanchego-linux-*.tar.gz -C ~/avalanchego --strip-components=1
-rm ~/avalanchego-linux-*.tar.gz
+mkdir -p ~/avalanchego; 
+tar xvf ~/avalanchego-linux-amd64*.tar.gz -C ~/avalanchego \ --strip-components=1;
+rm ~/avalanchego-linux-amd64*.tar.gz
 ```
 
 Our next step is to set up AvalancheGo as a service running on our machine under the “ubuntu” user. To do this, we’re going to create a services file for systemd to read.
@@ -281,7 +280,8 @@ This opens the “nano” text editor. We now copy and paste the following into 
 ```text
 [Unit]
 Description=AvalancheGo systemd service.
-StartLimitIntervalSec=0[Service]
+StartLimitIntervalSec=0
+[Service]
 Type=simple
 User=ubuntu
 ExecStart=/home/ubuntu/avalanchego/avalanchego --plugin-dir=/home/ubuntu/avalanchego/plugins --public-ip=IPv4PublicIPAddress --http-host=
