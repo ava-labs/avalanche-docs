@@ -6,7 +6,7 @@
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](../../tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md) tutorial.
+You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](../platform/transfer-avax-between-x-chain-and-p-chain.md) tutorial.
 
 ## Dependencies
 
@@ -203,7 +203,7 @@ Follow the steps in the [Transfer AVAX Between X-Chain, P-Chain, and C-Chain](..
 
 Create a new file called `web3_script.js` in the `truffle` directory and add the following:
 
-```js
+```javascript
 // web3_script.js
 let Web3 = require('web3');
 let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
@@ -227,7 +227,7 @@ node web3_script.js
 
 This should return something like:
 
-```js
+```javascript
 [ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
 true
 ```
@@ -331,7 +331,7 @@ truffle console --network development
 
 Get an instance of the deployed `Storage` contract:
 
-```js
+```javascript
 truffle(development)> let instance = await Storage.deployed()
 ```
 
@@ -345,7 +345,7 @@ undefined
 
 Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
 
-```js
+```javascript
 truffle(development)> instance.store(1234)
 ```
 
@@ -385,25 +385,25 @@ You should see something like:
 
 To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
 
-```js
+```javascript
 truffle(development)> let i = await instance.retrieve()
 ```
 
 This should return:
 
-```js
+```javascript
 undefined
 ```
 
 The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumber` method to see the value:
 
-```js
+```javascript
 truffle(development)> i.toNumber()
 ```
 
 You should see the number you stored.
 
-```js
+```javascript
 1234
 ```
 
