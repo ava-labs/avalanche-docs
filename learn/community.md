@@ -54,6 +54,8 @@
 
 [**BiLira**](https://www.bilira.co): a stable cryptocurrency that is backed by the Turkish Lira.
 
+\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
+
 ### Wallets
 
 [**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
@@ -62,9 +64,11 @@
 
 ## Developer Tools
 
-### Blockchain Infrastructure and Node Providers
+### Blockchain Infrastructure and Node Services
 
 [**Allnodes**](https://www.allnodes.com)**:** a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
+
+\*\*\*\*[**Ankr**](https://www.ankr.com): Web3 insfrastructure for all
 
 [**AVADO**](https://ava.do/)**:** plug and play hardware blockchain nodes that enable individuals and developers to easily and privately access Web3 applications, participate in staking, and run incentivized Dapps to earn crypto.
 
@@ -82,15 +86,15 @@
 
 [**Torus**](https://tor.us/): DirectAuth SDK simplifies onboarding by enabling users to create an Avalanche Wallet with their existing Google accounts, and enables one-click logins to Avalanche applications. Users can customize their wallets to take ownership of private keys as they feel more comfortable with the technology.
 
-### Staking Providers
+### Staking Services
 
-[**ablock**](https://ablock.io/avalanche): delegated staking provider.
+[**ablock**](https://ablock.io/avalanche): delegated staking services.
 
 [**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): delegated staking services offered by independent blockchain explorer.
 
 [**Figment**](https://figment.io/): simple and secure staking as a service.
 
-[**P2P**](https://p2p.org/avalanche): delegated staking provider.
+[**P2P**](https://p2p.org/avalanche): delegated staking services.
 
 [**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): staking calculator for Avalanche.
 
