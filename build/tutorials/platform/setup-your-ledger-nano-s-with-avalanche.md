@@ -16,7 +16,7 @@ Next, fire up Ledger Live and click the “Settings” button.
 
 Once in settings then go to the “Experimental features” tab.
 
-![Image for post](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
+![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
 Scroll down to the “Developer mode” toggle switch, and enable it.
 
@@ -28,7 +28,7 @@ Now with “Developer mode” enabled, you can go to the “Manager” tab and s
 
 You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.2.1.
 
-![Image for post](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
+![](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
 
 ## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
 
@@ -40,11 +40,11 @@ First, to access the wallet, plug in the Ledger to your computer and if needed, 
 
 Next, if you see the text “Pending Ledger review” then click both buttons on the top of the device to skip that screen.
 
-![Image for post](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
+![](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
 
 Lastly, you should land on the “Avalanche” app screen where you can confirm that the app is version 0.2.1.
 
-![Image for post](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
+![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
 
 After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
 
@@ -56,7 +56,7 @@ On the subsequent “How do you want to access your wallet?”, click the “Led
 
 You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
 
-![Image for post](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
+![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
 
 If successful you will be signed into the wallet and any previous balances will be displayed. 
 
@@ -68,7 +68,7 @@ To transfer funds, go to the “Send” tab and paste an X-Address into the “T
 
 You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
 
-![Image for post](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
+![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
 You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
 
