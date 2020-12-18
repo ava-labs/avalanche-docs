@@ -1,6 +1,10 @@
 # Set up Your Ledger Nano S with Avalanche
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys. The Avalanche Ledger wallet app is now available in [Ledger Live](https://www.ledger.com/ledger-live) via Experimental Mode.
+The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys. 
+
+If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+
+The Avalanche Ledger wallet app is currently available via [Ledger Live](https://www.ledger.com/ledger-live) in Experimental Mode.
 
 ## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
 
@@ -12,7 +16,7 @@ Next, fire up Ledger Live and click the “Settings” button.
 
 Once in settings then go to the “Experimental features” tab.
 
-![Image for post](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
+![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
 Scroll down to the “Developer mode” toggle switch, and enable it.
 
@@ -24,7 +28,7 @@ Now with “Developer mode” enabled, you can go to the “Manager” tab and s
 
 You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.2.1.
 
-![Image for post](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
+![](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
 
 ## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
 
@@ -36,11 +40,11 @@ First, to access the wallet, plug in the Ledger to your computer and if needed, 
 
 Next, if you see the text “Pending Ledger review” then click both buttons on the top of the device to skip that screen.
 
-![Image for post](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
+![](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
 
 Lastly, you should land on the “Avalanche” app screen where you can confirm that the app is version 0.2.1.
 
-![Image for post](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
+![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
 
 After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
 
@@ -48,43 +52,35 @@ After you confirm that the Avalanche app is running then on the wallet homepage 
 
 On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
 
-![Ledger button](https://miro.medium.com/max/3860/1*bO8wh3NG-h0x8fuHKVi04A.png)
+![](../../../.gitbook/assets/screenshot-2020-12-15-232003.png)
 
-You’ll now be prompted to confirm on your Ledger device. Click through the prompt on the device and on the last screen click the “Confirm” button.
+You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
 
-![Image for post](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
+![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
 
-If successful you will be signed into the wallet and any previous balances will be displayed. Copy the X-Address from the top right of the screen and go to[ the faucet](https://faucet.avax-test.network/).
+If successful you will be signed into the wallet and any previous balances will be displayed. 
 
-![X-Address](https://miro.medium.com/max/3814/1*HQw19y5D7kJNJVu_JWXHvg.png)
+![](../../../.gitbook/assets/screenshot-2020-12-16-230156.png)
 
-On the faucet, paste your X-Address into the input field, confirm that you’re not a robot and request 1 AVAX.
+To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
 
-![Image for post](https://miro.medium.com/max/2032/1*URY9r57pu_XE6JftXJiFpA.png)
+![](../../../.gitbook/assets/screenshot-2020-12-16-231115.png)
 
-Now, switch back to the web wallet and click the refresh balance button. You’ll see the previous balance increase by 1 AVAX from the faucet drip.
+You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
 
-![Refresh balance button](https://miro.medium.com/max/1352/1*CoyJMXDgGpcbhHVUtqnskQ.png)
+![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-Next, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Lastly, click the “Send Transaction” button and confirm.
+You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
 
-![Send transaction button](https://miro.medium.com/max/3200/1*Y-zaXv9mvBA4S5qBRGbnrg.png)
+![](../../../.gitbook/assets/screenshot-2020-12-16-231242.png)
 
-You’ll be prompted to confirm the action on your Ledger. Confirm that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm and send the transaction.
+In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
 
-![Image for post](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
-
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent.
-
-![Refresh balance button](https://miro.medium.com/max/1548/1*R2T-hlmW-WEoiIXM9aGYUA.png)
-
-In the right-hand column, you will see your latest transaction. You can click the magnifying glass icon to open the transaction in our explorer.
-
-![Magnifying glass icon](https://miro.medium.com/max/1316/1*tN_6qJin7bGYgVCrYHgmZw.png)
+![](../../../.gitbook/assets/screenshot-2020-12-16-231325.png)
 
 Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
 
-![Image for post](https://miro.medium.com/max/4796/1*9dBG46enZzlTVdJfhDAJFQ.png)
+![](../../../.gitbook/assets/screenshot-2020-12-16-231432.png)
 
 ## More Tools to Come <a id="135b"></a>
 

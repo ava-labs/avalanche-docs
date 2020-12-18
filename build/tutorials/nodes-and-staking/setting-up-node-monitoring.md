@@ -155,7 +155,7 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 ...
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/` 
+You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 {% hint style="warning" %}
 You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
@@ -211,13 +211,13 @@ To make sure it’s running properly:
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` 
+which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
 
 {% hint style="warning" %}
 You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
 {% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password.\*\* Now we need to connect Grafana to our data source, Prometheus.
+Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
 
 On Grafana’s web interface:
 
@@ -258,7 +258,7 @@ Then we add node\_exporter as a service. Do:
 sudo nano /etc/systemd/system/node_exporter.service
 ```
 
- \(or open that file in the text editor of your choice\) and populate it with:
+\(or open that file in the text editor of your choice\) and populate it with:
 
 ```cpp
 [Unit]

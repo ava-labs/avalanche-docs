@@ -48,15 +48,15 @@ This opens the Security Groups panel. Click **Create security group** in the top
 
 ![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\)  Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
+You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
 
 ![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/ss%20%281%29.png)
 
-Add a tag to the new security group with key  `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
+Add a tag to the new security group with key `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
 
 ![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-Click `Create security group`. You should see the new security group in the list of security groups. 
+Click `Create security group`. You should see the new security group in the list of security groups.
 
 ## Launch an EC2 Instance <a id="0682"></a>
 
@@ -86,7 +86,7 @@ The instance details can stay as their defaults.
 
 By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
 
-The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases.  Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option. 
+The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
 
 The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
 
@@ -150,9 +150,9 @@ Select the newly created EC2 instance. This opens a details panel with informati
 
 Copy the `IPv4 Public IP` field to use later. From now on we call this value`PUBLICIP.`
 
- ****_Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems._ _When copy-pasting a command from a code block, copy and paste the entirety of the text in the block._
+**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
 
-Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier. 
+Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
 
 Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
 
@@ -194,7 +194,7 @@ ssh ubuntu@PUBLICIP
 
 You're logged into the EC2 instance again. Download the latest AvalancheGo release from Github.
 
-```
+```text
 cd ~; curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
 | grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
 ```
@@ -277,7 +277,7 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping. 
+You can continue on, even if AvalancheGo isn't done bootstrapping.
 
 In order to make your node a validator, you'll need its node ID. To get it, run:
 
@@ -297,11 +297,11 @@ The response contains the node ID.
 
 In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
 
-AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created in Step 5\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to. 
+AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created in Step 5\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`. 
+Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`.
 
 Exit out of the SSH instance by running:
 

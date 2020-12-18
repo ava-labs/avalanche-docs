@@ -6,7 +6,7 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by exchanging them on exchanges. You can get test net AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with the technology.
 

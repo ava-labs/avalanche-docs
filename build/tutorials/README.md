@@ -6,5 +6,9 @@ Check out all of the tutorials that will help you build on Avalanche. We would b
 
 {% page-ref page="nodes-and-staking/" %}
 
+{% page-ref page="smart-contracts/" %}
+
 {% page-ref page="smart-digital-assets/" %}
+
+
 
