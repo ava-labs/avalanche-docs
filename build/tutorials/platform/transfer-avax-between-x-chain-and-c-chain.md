@@ -24,7 +24,7 @@ Select **Access Wallet** to enter, or **Mainnet** if you wish to switch to test 
 
 ### Step 2 - Login to your wallet
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S.
+You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
@@ -46,35 +46,31 @@ Select Cross Chain Transfer.
 
 ### Step 5 - Enter amount To transfer
 
-You will be presented with your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+You will be presented with a choice for Source Chain and Destination Chain. Select X-Chain and C-Chain respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
+![Image for post](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
 
-Enter the amount you wish to transfer from X to P chain.
+Enter the amount you wish to transfer from X to C chain.
 
 ### Step 6 - Confirm the transaction
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
+![Image for post](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
 
-Press Confirm, and then Transfer to initiate the transfer:
-
-![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
+Press Confirm, and then Transfer to initiate the transfer.
 
 ### Step 7 - Transfer
 
-Cross chain transfer is a two step process: export from X, import to P. Wallet will carry out both transactions, and show you the progress while doing it.
+Cross chain transfer is a two step process: export from X, import to C. Wallet will carry out both transactions, and show you the progress while doing it.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-08-done.png)
+![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-And that's it, you've transferred AVAX from X to P Chain! Now you can use them to validate or delegate on the Avalanche network.
+After import transaction shows **Success** status, that's it, you've transferred AVAX from X to C Chain! Now you can use them to deploy smart contracts on C-Chain.
 
-### Transfer from P-Chain to X-chain
+### Transfer from C-Chain to X-chain
 
 To return the AVAX back to X chain, you need to do the transfer in the opposite direction.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-09-p-x-swap.png)
-
-Swap source and destination chain, by pressing the highlighted icon. The rest of the process is the same, just repeat Steps 5 to 7.
+Swap source and destination chain, by selecting them from the Source and Destination dropdown menu. The rest of the process is the same, enter the amount, confirm and transfer.
 
 ## Transferring AVAX programmatically
 

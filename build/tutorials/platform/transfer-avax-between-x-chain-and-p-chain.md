@@ -46,7 +46,7 @@ Select Cross Chain Transfer.
 
 ### Step 5 - Enter amount To transfer
 
-You will be presented with your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+You will be presented with a choice for Source Chain and Destination Chain. Select X-Chain and C-Chain respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
@@ -56,15 +56,13 @@ Enter the amount you wish to transfer from X to P chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
-Press Confirm, and then Transfer to initiate the transfer:
+Press Confirm, and then Transfer to initiate the transfer.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
-
-### Step 7 - Transfer
+### Step 7 - Done
 
 Cross chain transfer is a two step process: export from X, import to P. Wallet will carry out both transactions, and show you the progress while doing it. 
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-08-done.png)
+![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
 And that's it, you've transferred AVAX from X to P Chain! Now you can use them to validate or delegate on the Avalanche network.
 
@@ -72,9 +70,7 @@ And that's it, you've transferred AVAX from X to P Chain! Now you can use them t
 
 To return the AVAX back to X chain, you need to do the transfer in the opposite direction.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-09-p-x-swap.png)
-
-Swap source and destination chain, by pressing the highlighted icon. The rest of the process is the same, just repeat Steps 5 to 7.
+Swap source and destination chain, by selecting them from the Source and Destination dropdown menu. The rest of the process is the same, enter the amount, confirm and transfer.
 
 ## Transferring from X-Chain to P-Chain programmatically
 
