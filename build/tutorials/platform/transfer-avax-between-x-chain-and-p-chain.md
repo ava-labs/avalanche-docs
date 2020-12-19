@@ -1,18 +1,18 @@
-# Transfer AVAX Between X-Chain and P-Chain
+# Transfer AVAX Between the X-Chain and P-Chain
 
 ## Introduction
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. Avalanche supports **atomic swaps** of AVAX between the X-Chain and P-chain \(in the future, Avalanche will support more generic atomic swaps between chains\). In this tutorial, we’ll send AVAX tokens between the X-Chain and P-Chain.
+AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. Avalanche supports movement of AVAX between these chains, and in the future, Avalanche will support more generic atomic swaps between chains. In this tutorial, we’ll send AVAX tokens between the X-Chain and P-Chain.
 
 ## Requirements
 
 You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by exchanging them on exchanges. You can get test net AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with the technology.
+In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
-## Transferring AVAX using the web wallet
+## Transferring AVAX Using the Web Wallet
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/) which is a non-custodial and secure way to access and move AVAX.
+The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/), which is a non-custodial and secure way to access and move AVAX.
 
 The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
 
@@ -20,9 +20,9 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter, or **Mainnet** if you wish to switch to test or local network.
+Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select  **Mainnet** and choose the network to connect to.
 
-### Step 2 - Login to your wallet
+### Step 2 - Log In to Your Wallet
 
 You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S.
 
@@ -30,59 +30,58 @@ You can access your wallet using the private key, mnemonic key phrase, keystore 
 
 After a successful login you will see your balance, assets portfolio and various other information.
 
-### Step 3 - Go to **Earn** tab
+### Step 3 - Go to the **Earn** Tab
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the "Earn" tab.
-
 ### Step 4 - Cross chain transfer
 
-On the **Earn** tab are various operations for becoming a validator, delegating your tokens and other related functions. 
+On the **Earn** tab are various operations involved with adding a node to the validator set, delegating tokens and other related functionality.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-04-xctransfer.png)
 
-Select Cross Chain Transfer.
+Select **Cross Chain Transfer**.
 
-### Step 5 - Enter amount To transfer
+### Step 5 - Enter Amount to Transfer
 
-You will be presented with a choice for Source Chain and Destination Chain. Select X-Chain and C-Chain respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
+You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
-Enter the amount you wish to transfer from X to P chain.
+Enter the amount you wish to transfer from the X-Chain to the P-Chain.
 
-### Step 6 - Confirm the transaction
+### Step 6 - Confirm the Transaction
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
-Press Confirm, and then Transfer to initiate the transfer.
+Press **Confirm**, and then **Transfer** to initiate the transfer.
 
-### Step 7 - Done
+### Step 7 - Done!
 
-Cross chain transfer is a two step process: export from X, import to P. Wallet will carry out both transactions, and show you the progress while doing it. 
+A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the P-Chain.  The wallet will do both and show its the progress while doing so.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
-And that's it, you've transferred AVAX from X to P Chain! Now you can use them to validate or delegate on the Avalanche network.
+That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to validate or delegate on the Avalanche network.
 
 ### Transfer from P-Chain to X-Chain
 
-To return the AVAX back to X chain, you need to do the transfer in the opposite direction.
+To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
-Swap source and destination chain, by selecting them from the Source and Destination dropdown menu. The rest of the process is the same, enter the amount, confirm and transfer.
+Swap the source and destination chains by selecting them from the **Source** and **Destination** drop-down menu. The rest of the process is the same: enter the amount, confirm and transfer.
 
-## Transferring from X-Chain to P-Chain programmatically
+## Transferring from the X-Chain to P-Chain with API Calls 
 
-If you're building applications on the Avalanche network, you might want to do the transfer programmatically, as a step in some bigger functionality. You can do that by calling the appropriate APIs on AvalancheGo node or an API server. The rest of the tutorial assumes you have access to AvalancheGo node or an API server, some tokens on the X chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
 
-All the presented API calls are shown using the node hosted locally \(127.0.0.1\). Node itself can be on the main network, on the test network or on a local network. In each case, the API calls and responses should be the same, except for the address formats. Node itself need not be local, we can use a node elsewhere on the internet, as long as it's accessible. It can even be an API server form an online service.
+All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, cross chain transfer is a two transaction operation:
-* export from X chain
-* import to P chain
+As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
 
-### Step 1 - Export AVAX from X-Chain
+* Export AVAX from the X-Chain
+* Import AVAX to the  P-chain
+
+### Step 1 - Export AVAX from the X-Chain
 
 To export AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
 
@@ -104,9 +103,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address you hold and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
+where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
 
-Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `1,000,000` nAVAX. Then, the above export actually consumes `6,000,000` nAVAX; `5,000,000` goes to the P-Chain and `1,000,000` is burned as a transaction fee.
+Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
 
 Make sure that the amount that you’re sending exceeds the transaction fee. Otherwise, when you import AVAX on the P-Chain, it will consume the transaction fee, and you’ll end up with _less_ AVAX on the P-Chain.
 
@@ -162,9 +161,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`5,000,000` in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+The amount deducted is the exported amount \(`.005` AVAX  in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
 
-### Step 2 - Import AVAX to P-Chain
+### Step 2 - Import AVAX to the P-Chain
 
 Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) method to finish the transfer.
 
@@ -242,17 +241,18 @@ The response should look like this:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`5,000,000`\) less the transaction fee \(`1,000,000` in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+Note that the balance we see is the amount exported from the X-Chain \(`.004` AVAX\) less the transaction fee \(`.001` AVAX in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
 
-## Transferring from P-Chain to X-Chain programmatically
+## Transferring from the P-Chain to X-Chain programmatically
 
-Now, let’s move AVAX on the P-Chain back to the X-Chain.
+Now, let’s move AVAX from the P-Chain back to the X-Chain.
 
 Same as before, this is also a two transaction operation:
-* export from P chain
-* import to X chain
 
-### Step 1 - Export AVAX from P-Chain
+* Export from the P-Chain
+* Import to the X-Chain
+
+### Step 1 - Export AVAX from the P-Chain
 
 To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
 
@@ -296,10 +296,11 @@ curl -X POST --data '{
 
 Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
 
-Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `3,000,000` minus the transaction fee.
+Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
 
 ## Wrapping Up
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on the network node.
 
-The next step would be to use the tokens deposited on the the P chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+
