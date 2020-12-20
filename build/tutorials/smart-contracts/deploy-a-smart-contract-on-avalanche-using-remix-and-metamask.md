@@ -14,14 +14,6 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
 ![](../../../.gitbook/assets/image%20%2814%29.png)
 
-**FUJI Testnet Settings:**
-
-* **Network Name**: Avalanche FUJI C-Chain
-* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `0xa869`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
-
 #### **Avalanche Mainnet Settings:**
 
 * **Network Name**: Avalanche Mainnet C-Chain
@@ -29,6 +21,14 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **ChainID**: `0xa86a`
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+
+#### **FUJI Testnet Settings:**
+
+* **Network Name**: Avalanche FUJI C-Chain
+* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+* **ChainID**: `0xa869`
+* **Symbol**: `AVAX`
+* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
 #### **Local Testnet \(AVASH\) Settings:**
 
@@ -40,19 +40,17 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
 ## Step 2: Funding your C-Chain address
 
-### **Funding your C-Chain address on FUJI** <a id="d718"></a>
+### **Using Avalanche Wallet**
 
-Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
 
-### Funding your C-Chain address on Mainnet <a id="1997"></a>
+### **Using Test Network Faucet**
 
-Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain.
+For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
 
-{% page-ref page="../platform/transfer-avax-between-x-chain-and-p-chain.md" %}
+### Funding on local testnet
 
-### Funding your C-chain address on local testnet <a id="b5a3"></a>
-
-Deploy your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
 ## Step 3: Connect MetaMask and deploy a smart contract using Remix
 
