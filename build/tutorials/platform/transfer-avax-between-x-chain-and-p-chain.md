@@ -30,33 +30,27 @@ You can access your wallet using the private key, mnemonic key phrase, keystore 
 
 After a successful login you will see your balance, assets portfolio and various other information.
 
-### Step 3 - Go to the **Earn** Tab
+### Step 3 - Go to the Cross Chain Tab
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-### Step 4 - Cross-Chain Transfer
+Functionality for transferring tokens between chains is on the **Cross Chain** tab.
 
-On the **Earn** tab are various operations involved with adding a node to the validator set, delegating tokens and other related functionality.
+### Step 4 - Enter Amount to Transfer
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-04-xctransfer.png)
-
-Select **Cross Chain Transfer**.
-
-### Step 5 - Enter Amount to Transfer
-
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
+You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
 Enter the amount you wish to transfer from the X-Chain to the P-Chain.
 
-### Step 6 - Confirm the Transaction
+### Step 5 - Confirm the Transaction
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
 Press **Confirm**, and then **Transfer** to initiate the transfer.
 
-### Step 7 - Done!
+### Step 6 - Done!
 
 A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the P-Chain.  The wallet will do both and show its the progress while doing so.
 
