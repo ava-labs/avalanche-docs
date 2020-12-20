@@ -6,9 +6,9 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by exchanging them on exchanges. You can get test net AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with the technology.
+In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
 ## Transferring AVAX using the web wallet
 
@@ -20,9 +20,9 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter, or **Mainnet** if you wish to switch to test or local network.
+Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select  **Mainnet** and choose the network to connect to.
 
-### Step 2 - Login to your wallet
+### Step 2 - Log In to Your Wallet
 
 You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
 
@@ -30,59 +30,62 @@ You can access your wallet using the private key, mnemonic key phrase, keystore 
 
 After a successful login you will see your balance, assets portfolio and various other information.
 
-### Step 3 - Go to **Earn** tab
+### Step 3 - Go to the **Earn** Tab
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
 Functionality for transferring tokens between chains is on the "Earn" tab.
 
-### Step 4 - Cross chain transfer
+### Step 4 - Cross-Chain Transfer
 
-On the **Earn** tab are various operations for becoming a validator, delegating your tokens and other related functions.
+On the **Earn** tab are various operations involved with adding a node to the validator set, delegating tokens and other related functionality.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-04-xctransfer.png)
 
-Select Cross Chain Transfer.
+Select **Cross Chain Transfer**.
 
-### Step 5 - Enter amount To transfer
+### Step 5 - Enter Amount to Transfer
 
-You will be presented with a choice for Source Chain and Destination Chain. Select X-Chain and C-Chain respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
+You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
 
-Enter the amount you wish to transfer from X to C chain.
+Enter the amount you wish to transfer from the X-Chain to the C-Chain.
 
-### Step 6 - Confirm the transaction
+### Step 6 - Confirm the Transaction
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
 
-Press Confirm, and then Transfer to initiate the transfer.
+Press **Confirm**, and then **Transfer** to initiate the transfer.
 
-### Step 7 - Transfer
+### Step 7 - Done!
 
-Cross chain transfer is a two step process: export from X, import to C. Wallet will carry out both transactions, and show you the progress while doing it.
+A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the C-Chain.  The wallet will do both and show its the progress while doing so.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-After import transaction shows **Success** status, that's it, you've transferred AVAX from X to C Chain! Now you can use them to deploy smart contracts on C-Chain.
+That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to deploy smart contracts on C-Chain.
 
-### Transfer from C-Chain to X-chain
+### Transfer from the C-Chain to X-chain
 
-To return the AVAX back to X chain, you need to do the transfer in the opposite direction.
+To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
-Swap source and destination chain, by selecting them from the Source and Destination dropdown menu. The rest of the process is the same, enter the amount, confirm and transfer.
+Swap source and destination chain, by selecting them from the **Source** and **Destination** dropdown menu. The rest of the process is the same: enter the amount, confirm and transfer.
 
-## Transferring AVAX programmatically
+## Transferring from the X-Chain to C-Chain with API Calls 
 
-If you're building applications on the Avalanche network, you might want to do the transfer programmatically, as a step in some bigger functionality. You can do that by calling the appropriate APIs on AvalancheGo node or an API server. The rest of the tutorial assumes you have access to AvalancheGo node or an API server, some tokens on the X chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, cross chain transfer is a two transaction operation:
-* export from X chain
-* import to C chain
+All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
-But, before we can do the transfer, we need to set up the address on the C-Chain, along with the controlling key.
+As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
 
-### Set up address and key on C-Chain
+* Export AVAX from the X-Chain
+* Import AVAX to the C-Chain
+  
+Before we can do the transfer, we need to set up the address on the C-Chain, along with the controlling key.
+
+### Set Up Address and Key on the C-Chain
 
 The X-Chain uses [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) addresses and the C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
 
@@ -144,7 +147,7 @@ The response contains a hex-encoded EVM address:
 
 Now we have everything we need to transfer the tokens.
 
-### Transfer from X-Chain to C-Chain
+### Transfer from the X-Chain to C-Chain
 
 Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) call:
 
@@ -163,7 +166,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import it directly to an address that you own in MetaMask or another third-party service.
+Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import the AVAX to an address that you own in MetaMask or another third-party service.
 
 ```cpp
 curl -X POST --data '{
@@ -195,11 +198,11 @@ The response looks like this:
 
 Note: there is no transaction fee for import transactions to the C Chain.
 
-Once your AVAX has been transferred to the C-Chain, you can immediately begin running smart contracts.
+Once your AVAX has been transferred to the C-Chain, you can use it to deploy and interact with smart contracts.
 
 {% page-ref page="../smart-digital-assets/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
-## Transfer from C-Chain to X-Chain
+## Transfer from the C-Chain to X-Chain
 
 Now, you can move AVAX back from the C-Chain to the X-Chain. First we need to export:
 
@@ -231,7 +234,7 @@ The response should look like this:
 }
 ```
 
-Lastly, we can finish up by importing AVAX from the C-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
+To finish the transfer, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
 
 ```cpp
 curl -X POST --data '{  
@@ -263,5 +266,4 @@ The response should look like this:
 
 ## Wrapping Up
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain. In the future, Avalanche will support more generalized atomic swaps between chains.
-
+That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.

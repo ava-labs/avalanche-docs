@@ -7,5 +7,5 @@
 | [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
 | [**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md) | Create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
 | [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
-| [**Transfer AVAX Between X-Chain, P-Chain, and C-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between all of the major blockchains in Avalanche's [Primary Network](../../../learn/platform-overview/). |
-
+| [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
+| [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |

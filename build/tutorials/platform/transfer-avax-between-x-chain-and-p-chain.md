@@ -34,7 +34,7 @@ After a successful login you will see your balance, assets portfolio and various
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-### Step 4 - Cross chain transfer
+### Step 4 - Cross-Chain Transfer
 
 On the **Earn** tab are various operations involved with adding a node to the validator set, delegating tokens and other related functionality.
 
@@ -79,7 +79,7 @@ All the example API calls below assume the node is running locally \(that is, li
 As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
 
 * Export AVAX from the X-Chain
-* Import AVAX to the  P-chain
+* Import AVAX to the P-chain
 
 ### Step 1 - Export AVAX from the X-Chain
 
@@ -300,7 +300,6 @@ Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-c
 
 ## Wrapping Up
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on the network node.
+That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
-
