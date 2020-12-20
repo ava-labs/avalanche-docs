@@ -24,18 +24,18 @@ Now, we need to set these boxes with correct values.
 
 * **Network Name**: Avalanche C-Chain
 * **New RPC URL**:
-    * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
-    * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-    * **Local Testnet:** http://localhost:9650/ext/bc/C/rpc 
+  * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
+  * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+  * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) 
 * **ChainID**:
-    * **Mainnet:** `0xa86a` 
-    * **Fuji Testnet:** `0xa869` 
-    * **Local Testnet:** `0xa868` 
+  * **Mainnet:** `0xa86a` 
+  * **Fuji Testnet:** `0xa869` 
+  * **Local Testnet:** `0xa868` 
 * **Symbol**: C-AVAX
 * **Explorer**:
-    * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
-    * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
-    * **Localnet:** n/a 
+  * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
+  * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+  * **Localnet:** n/a 
 
 ![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
 
