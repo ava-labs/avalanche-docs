@@ -28,6 +28,7 @@
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Set up Your Ledger Nano S with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
+    * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [How to Run Avalanche at Home: Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
