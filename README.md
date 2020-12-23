@@ -6,6 +6,20 @@ description: >-
 
 # Developer Documentation
 
+## Getting Started
+
+### Coming From Ethereum?
+
+{% tabs %}
+{% tab title="Coming From Ethereum?" %}
+{% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
+{% endtab %}
+
+{% tab title="Avalanche Wallet" %}
+{% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
+{% endtab %}
+{% endtabs %}
+
 ## Avalanche
 
 [Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
