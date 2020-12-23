@@ -20,11 +20,11 @@ It is _highly_ recommended that you set up Multi-Factor Authentication on your A
 
 Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
 
-![](../../../.gitbook/assets/image%20%2816%29.png)
+![AWS Management Console.png](../../../.gitbook/assets/AWS-Management-Console.png)
 
 To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
 
-![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/image%20%2819%29.png)
+![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/Network-and-Security.png)
 
 Select **Create key pair** to launch the key pair creation wizard.
 
@@ -50,7 +50,7 @@ This opens the Security Groups panel. Click **Create security group** in the top
 
 You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
 
-![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/ss%20%281%29.png)
+![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/inbound-rules.png)
 
 Add a tag to the new security group with key `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
 
@@ -96,7 +96,7 @@ Click the **Next: Add Storage** button in the bottom right corner of the screen.
 
 You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
 
-![Select 100 GB for the disk size.](../../../.gitbook/assets/ss.png)
+![Select 100 GB for the disk size.](../../../.gitbook/assets/add-storage.png)
 
 Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
 
@@ -104,7 +104,7 @@ Click **Next: Add Tags** in the bottom right corner of the screen to add tags to
 
 Now assign the security group created earlier to the instance. Choose **Select an existing security group** and choose the security group created earlier.
 
-![Choose the security group created earlier.](../../../.gitbook/assets/ss%20%283%29.png)
+![Choose the security group created earlier.](../../../.gitbook/assets/configure-security-group.png)
 
 Finally, click **Review and Launch** in the bottom right. A review page will show the details of the instance you're about to launch. Review those, and if all looks good, click the blue **Launch** button in the bottom right corner of the screen.
 

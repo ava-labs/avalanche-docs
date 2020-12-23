@@ -52,7 +52,7 @@ After you confirm that the Avalanche app is running then on the wallet homepage 
 
 On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
 
-![](../../../.gitbook/assets/screenshot-2020-12-15-232003.png)
+![Ledger Access](../../../.gitbook/assets/ledger-access.png)
 
 You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
 
@@ -60,11 +60,11 @@ You’ll now be prompted to confirm on your Ledger device. Click right button th
 
 If successful you will be signed into the wallet and any previous balances will be displayed. 
 
-![](../../../.gitbook/assets/screenshot-2020-12-16-230156.png)
+![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
 To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
 
-![](../../../.gitbook/assets/screenshot-2020-12-16-231115.png)
+![Send Transaction](../../../.gitbook/assets/send-transaction.png)
 
 You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
 
@@ -72,15 +72,15 @@ You’ll be prompted to confirm the action on your Ledger. Check that the hash w
 
 You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
 
-![](../../../.gitbook/assets/screenshot-2020-12-16-231242.png)
+![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
 
 In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
 
-![](../../../.gitbook/assets/screenshot-2020-12-16-231325.png)
+![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
 
 Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
 
-![](../../../.gitbook/assets/screenshot-2020-12-16-231432.png)
+![Transaction details](../../../.gitbook/assets/transaction-details.png)
 
 ## More Tools to Come <a id="135b"></a>
 
