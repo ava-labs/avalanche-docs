@@ -4,7 +4,7 @@
 
 ## AvalancheGo Release Notes v1.0.6 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
-![](../../.gitbook/assets/86244a1e-475c-43cc-a09e-13ea580c4b6a.png)
+![AvalancheGo release notes v1.0.6.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.6.png)
 
 {% hint style="danger" %}
 Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
@@ -27,7 +27,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 
 ## AvalancheGo Release Notes v1.0.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
 
-![](../../.gitbook/assets/group-2105.png)
+![AvalancheGo release notes v1.0.5](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.5.png)
 
 {% hint style="danger" %}
 Please note that the release after this one, v1.0.6, will contain the breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change. 
@@ -51,7 +51,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 
 ## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
-![](../../.gitbook/assets/image%20%283%29.png)
+![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
 
