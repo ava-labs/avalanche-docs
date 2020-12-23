@@ -2,7 +2,7 @@
 
 ## Ortelius Release Notes v1.1.1 \([View on GitHub](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)\)
 
-![](../../.gitbook/assets/group-2094.png)
+![Ortelius release notes v1.1.1.png](../../.gitbook/assets/Ortelius-release-notes-v1.1.1.png)
 
 Breaking changes:
 
