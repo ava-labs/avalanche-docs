@@ -56,7 +56,7 @@ A cross-chain transfer is a two step process: first a transaction to export the 
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to deploy smart contracts on C-Chain.
+That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
 
 ### Transfer from the C-Chain to X-chain
 
