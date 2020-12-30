@@ -36,7 +36,15 @@
 
 ### Exchanges
 
+**Binance**:
+
+**Bitfinex**:
+
+**FTX**: 
+
 [**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+
+Voyager: 
 
 ### Explorers
 
