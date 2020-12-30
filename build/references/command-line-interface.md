@@ -317,7 +317,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--snow-epoch-first-transition` \(int\):
 
-Unix timestamp of the transition from epoch 0 to epoch 1. Defaults to `1609840800`.
+Unix timestamp of the transition from epoch 0 to epoch 1. Defaults to `1609873200` which is 1/5/2021 @ 7:00pm (UTC).
 
 `--stake-minting-period` \(duration\):
 
