@@ -8,6 +8,7 @@
   * [Staking](learn/platform-overview/staking.md)
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
+  * [Why Avalanche Pt. II](https://youtu.be/ZyQPeSSCbYU)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
 * [Forum](https://forum.avax.network)
@@ -15,7 +16,7 @@
 
 ## Build
 
-* [Getting Started](build/getting-started.md)
+* [Run an Avalanche Node](build/getting-started.md)
 * [Release Notes](build/release-notes-1/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
   * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
@@ -31,8 +32,9 @@
     * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
-    * [How to Run Avalanche at Home: Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
-    * [How to Run Avalanche at Home: Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
+    * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
+    * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
+    * [Run an Avalanche Node with Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
     * [Set Up an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
     * [Set Up an Avalanche Node with Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
     * [Set up Node Monitoring](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)

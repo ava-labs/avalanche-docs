@@ -6,7 +6,7 @@ AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, wher
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
@@ -56,7 +56,7 @@ A cross-chain transfer is a two step process: first a transaction to export the 
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to deploy smart contracts on C-Chain.
+That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
 
 ### Transfer from the C-Chain to X-chain
 
