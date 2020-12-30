@@ -44,7 +44,7 @@
 
 [**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
 
 ### Explorers
 
