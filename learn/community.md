@@ -44,8 +44,6 @@
 
 [**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
 
-[**AvaxMap**](https://avaxmap.com/): visualization of the geographic spread of Avalanche nodes.
-
 [**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
 
 ### Miscellaneous
