@@ -1,4 +1,4 @@
-#How to mint NFTs with the Avalanche Wallet
+# How to mint NFTs with the Avalanche Wallet
 
 ## Non-Fungible Tokens on Avalanche
 
