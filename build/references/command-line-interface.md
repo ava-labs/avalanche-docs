@@ -315,6 +315,10 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
 
+`--snow-epoch-first-transition` \(int\):
+
+Unix timestamp of the transition from epoch 0 to epoch 1. Defaults to `1609840800`.
+
 `--stake-minting-period` \(duration\):
 
 Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
