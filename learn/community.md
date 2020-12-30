@@ -36,15 +36,15 @@
 
 ### Exchanges
 
-**Binance**:
+\*\*\*\*[**Binance**](https://www.binance.com): the world's \#1 crypto exchange by trading volume.
 
-**Bitfinex**:
+\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
 
-**FTX**: 
+\*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
 
 [**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
 
-Voyager: 
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker
 
 ### Explorers
 
