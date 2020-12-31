@@ -52,13 +52,13 @@ We need to get some funds into the account.
 
 ### **Using Avalanche Wallet**
 
-If you already have some AVAX, you can transfer them to the Metamask account. But first you need to find out your X-Chain address, as you can only transfer AVAX between accounts on the X-Chain. To do that, open your Ethereum account in the [Avalanche Wallet](https://wallet.avax.network/). Wallet accepts Ethereum private keys, so you need to export it from Metamask. Open the overflow menu \(three dots\), and select **Account details**.
+If you already have some AVAX, you can transfer them to the Metamask account using your [Avalanche Wallet](https://wallet.avax.network/). You can send tokens between different wallets on same chain. You can see where your funds are by selecting **show breakdown** in the wallet panel showing your balance. If you don't have the funds on the C-Chain already, you need do a [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md), to move your AVAX from X-Chain to C-Chain.
 
-![Account details](../../../.ghassets/wavax2avax-01-metamask.png)
+After you have the funds on the C-Chain, just do a regular transaction, by selecting **Send** on the left side menu in the Wallet, and then switching the source chain to **C Contract**. In the **To Address** field paste your Metamask address, enter the amount to send in the appropriate field, and complete the transaction by clicking **Confirm** and then **Send**.
 
-There you select **Export private key**, and after entering your Metamask password, copy the private key to the clipboard. Use that private key to log into the Avalanche Wallet. After navigating to [https://wallet.avax.network/](https://wallet.avax.network/) select **Access Wallet** and then **Private Key**. Paste your Ethereum private key and click **Access Wallet**. Don't worry, your private key will not be saved or transmitted over the network.
+![Account details](../../../.ghassets/wavax2avax-01-send-to-metamask.png)
 
-After you log in, you will see your funds, addresses and other information. Copy your X-Chain address (it starts with `X-avax1` on mainnet, and `X-fuji1` on current test net) and use it to send tokens from your funded wallet. Return to your Wallet logged in with Metamask account. There you can [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md) your AVAX from X-Chain to C-Chain. They should be visible in your Metamask shortly after the transfer.
+Funds should soon be visible in the Metamask interface.
 
 ### **Using Test Network Faucet**
 
