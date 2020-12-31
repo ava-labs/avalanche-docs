@@ -51,9 +51,9 @@ You need to get some AVAX into your account.
 
 ### **Using the Avalanche Wallet**
 
-If you already have some AVAX, you can transfer them to the Metamask account using your [Avalanche Wallet](https://wallet.avax.network/). You can send tokens between different wallets on same chain. You can see where your funds are by selecting **show breakdown** in the wallet panel showing your balance. If you don't have the funds on the C-Chain already, you need do a [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md), to move your AVAX from X-Chain to C-Chain.
+If you already have some AVAX, you can transfer them to the Metamask account using your [Avalanche Wallet](https://wallet.avax.network/). You can see where your funds are by selecting **show breakdown** in the wallet panel showing your balance. If you don't have the funds on the C-Chain already, you need do a [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md), to move your AVAX from X-Chain to C-Chain.
 
-After you have the funds on the C-Chain, just do a regular transaction, by selecting **Send** on the left side menu in the Wallet, and then switching the source chain to **C Contract**. In the **To Address** field paste your Metamask address, enter the amount to send in the appropriate field, and complete the transaction by clicking **Confirm** and then **Send**.
+After you have funds on the C-Chain, select **Send** on the left side menu in the Wallet, and then switch the source chain to **C Contract**. In the **To Address** field paste your Metamask address. Enter the amount to send and click **Confirm** and then **Send**.
 
 ![Send to Metamask](../../../.ghassets/wavax2avax-01-send-to-metamask.png)
 
