@@ -58,15 +58,15 @@ If you already have some AVAX, you can transfer them to the Metamask account. Bu
 
 There you select **Export private key**, and after entering your Metamask password, copy the private key to the clipboard. Use that private key to log into the Avalanche Wallet. After navigating to [https://wallet.avax.network/](https://wallet.avax.network/) select **Access Wallet** and then **Private Key**. Paste your Ethereum private key and click **Access Wallet**. Don't worry, your private key will not be saved or transmitted over the network.
 
-After you log in, you will see your funds, addresses and other information. Copy your X-Chain address (it starts with `x-avax1` on mainnet, and `x-fuji1` on current test net) and use it to send tokens from your funded wallet. Return to your Wallet logged in with Metamask account. There you can [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md) your AVAX from X-Chain to C-Chain. They should be visible in your Metamask shortly after the transfer.
+After you log in, you will see your funds, addresses and other information. Copy your X-Chain address (it starts with `X-avax1` on mainnet, and `X-fuji1` on current test net) and use it to send tokens from your funded wallet. Return to your Wallet logged in with Metamask account. There you can [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md) your AVAX from X-Chain to C-Chain. They should be visible in your Metamask shortly after the transfer.
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your Ethereum address, as it is shown below the account name in Metamask: `0x` prefix, followed by 40 hexadecimal numbers. When you click on the account name, it will automatically copy it to the clipboard.
+For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your Ethereum address, as it is shown below the account name in Metamask: `0x` prefix, followed by 40 hexadecimal numbers. Ex: 0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57. When you click on the account name, it will automatically copy it to the clipboard.
 
 ![Faucet funding](../../../.ghassets/wavax2avax-02-faucet.png)
 
-Paste that address into the faucet, prove that you're not a robot, and then request test AVAX. They should appeat in your Metamask shortly.
+Paste that address into the faucet, prove that you're not a robot, and then request test AVAX. They should appear in your Metamask shortly.
 
 Ok, we're funded and ready for WAVAX smart contract.
 
