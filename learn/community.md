@@ -20,10 +20,6 @@
 
 [**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
 
-### Atomic Swaps
-
-[**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
-
 ### Ecosystem Partners
 
 [**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): training and education platform for both technical developers and business entrepreneurs to learn about blockchain technology.
@@ -37,6 +33,18 @@
 ### Education
 
 [**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+
+### Exchanges
+
+\*\*\*\*[**Binance**](https://www.binance.com): the world's \#1 crypto exchange by trading volume.
+
+\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
+
+\*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
+
+[**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
 
 ### Explorers
 
