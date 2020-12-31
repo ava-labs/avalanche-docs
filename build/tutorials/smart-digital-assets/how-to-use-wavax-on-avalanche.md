@@ -1,32 +1,30 @@
-# How to use WAVAX on Avalanche
+# How to use Wrapped AVAX (WAVAX) on Avalanche
 
 ## What is WAVAX?
 
-AVAX is the native token on the [Avalanche platform](../../../learn/platform-overview/README.md). However, many of the smart contracts on the Contract Chain (C-Chain), which is an instance of the Ethereum Virtual Machine, are designed to work with Ethereum's ERC-20 tokens. Since the two are not directly compatible, to be able to use AVAX in the contracts that expect ERC-20 tokens, AVAX needs to be *wrapped* into WAVAX \(Wrapped AVAX\), which is ERC-20 compatible.
+AVAX is the native token on the [Avalanche platform](../../../learn/platform-overview/README.md). Many smart contracts on the Contract Chain (C-Chain), which is an instance of the Ethereum Virtual Machine, are designed to work with Ethereum's ERC-20 tokens. In order to use AVAX in such contracts, you must use wrapped AVAX \(WAVAX\), which is ERC-20 compatible.
 
 ## Overview
 
-The process of converting AVAX to WAVAX consists of depositing AVAX to a smart contract that locks the received tokens, and issues ERC-20 WAVAX to you. When you wish to get your AVAX back, you return the WAVAX to the smart contract, it burns the WAVAX and unlocked AVAX are withdrawn to you.
+To convert AVAX to WAVAX you will deposit AVAX into a smart contract which will lock the AVAX and issue WAVAX to you. To convert WAVAX to AVAX, you will return the WAVAX to the smart contract, which will burn the WAVAX and return your AVAX.
 
-There are several steps involved:
-* connecting Metamask to Avalanche Platform
-* funding your account  
-* loading WAVAX contract into Remix
-* connecting to deployed contract
-* issuing deposit/withdraw commands to the contract
-* adding WAVAX to Metamask
+In this tutorial, you will:
+* Connect Metamask to Avalanche
+* Fund your Metamask account  
+* Load the WAVAX contract into Remix
+* Connect to the pre-deployed WAVAX contract
+* Convert AVAX to WAVAX and back
+* Add WAVAX as a custom token to Metamask
 
-Ok, let's go.
+## Connect Metamask
 
-## Connecting Metamask
+[Metamask](https://metamask.io/) is a popular web browser extension that makes it easy to interact with Ethereum and compatible blockchains, such as Avalanche's C-Chain. Setting up Metamask and creating an account on it is beyond the scope of this tutorial, but there are a number of resources on the internet to walk you through that.
 
-[Metamask](https://metamask.io/) is a popular web browser extension that makes it easy to interact with Ethereum and compatible blockchains, such as Avalanche's C-Chain. Setting up Metamask, and an account on it is beyond the scope of this tutorial, but there are a number of readily available resources on the internet for that.
-
-After you log in to your Metamask account, we need to connect it to the Avalanche platform. Click the Network drop-down -&gt; Select Custom RPC:
+After you log in to your Metamask account, connect it to the Avalanche network. Click the Network drop-down -&gt; Select **Custom RPC**:
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
-Enter the information for the network of your choice as described below.
+Enter the information for the network of your choice:
 
 ### Avalanche Mainnet Settings:
 
@@ -36,67 +34,65 @@ Enter the information for the network of your choice as described below.
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
-### FUJI Testnet Settings:
+### Fuji Testnet Settings:
 
-* **Network Name**: Avalanche FUJI C-Chain
+* **Network Name**: Avalanche Fuji C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `0xa869`
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
-After the changes are saved, select one of the Avalanche networks. You should see your AVAX balance, which will probably be 0.
+After saving the changes, select the Avalanche network you just specified. You should see your AVAX balance, which will probably be 0.
 
-## Funding your C-Chain account
+## Fund your C-Chain account
 
-We need to get some funds into the account.
+You need to get some AVAX into your account.
 
-### **Using Avalanche Wallet**
+### **Using the Avalanche Wallet**
 
-If you already have some AVAX, you can transfer them to the Metamask account. But first you need to find out your X-Chain address, as you can only transfer AVAX between accounts on the X-Chain. To do that, open your Ethereum account in the [Avalanche Wallet](https://wallet.avax.network/). Wallet accepts Ethereum private keys, so you need to export it from Metamask. Open the overflow menu \(three dots\), and select **Account details**.
+If you already have some AVAX, you can transfer them to your Metamask account. But first you need to find out your X-Chain address, as you can only transfer AVAX between accounts on the X-Chain. To do that, open your Ethereum account in the [Avalanche Wallet](https://wallet.avax.network/). Wallet accepts Ethereum private keys, so you need to export it from Metamask. Open the overflow menu \(three dots\), and select **Account details**.
 
 ![Account details](../../../.ghassets/wavax2avax-01-metamask.png)
 
-There you select **Export private key**, and after entering your Metamask password, copy the private key to the clipboard. Use that private key to log into the Avalanche Wallet. After navigating to [https://wallet.avax.network/](https://wallet.avax.network/) select **Access Wallet** and then **Private Key**. Paste your Ethereum private key and click **Access Wallet**. Don't worry, your private key will not be saved or transmitted over the network.
+Select **Export private key** and enter your Metamask password. Copy the private key to your clipboard. Go to the [Avalanche Wallet](https://wallet.avax.network/), select **Access Wallet** and then **Private Key**. Paste your Ethereum private key and click **Access Wallet**. Don't worry, your private key will not be saved or transmitted over the network.
 
 After you log in, you will see your funds, addresses and other information. Copy your X-Chain address (it starts with `X-avax1` on mainnet, and `X-fuji1` on current test net) and use it to send tokens from your funded wallet. Return to your Wallet logged in with Metamask account. There you can [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md) your AVAX from X-Chain to C-Chain. They should be visible in your Metamask shortly after the transfer.
 
-### **Using Test Network Faucet**
+### **Using the Test Network Faucet**
 
-For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your Ethereum address, as it is shown below the account name in Metamask: `0x` prefix, followed by 40 hexadecimal numbers. Ex: 0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57. When you click on the account name, it will automatically copy it to the clipboard.
+If you're connected to the test network, you can use its faucet to fund your Metamask account. Navigate to [the faucet](https://faucet.avax-test.network/) and paste your Ethereum address, which is shown below the account name in Metamask (e.g.`0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`). When you click on the account name, it will copy the account to the clipboard.
 
 ![Faucet funding](../../../.ghassets/wavax2avax-02-faucet.png)
 
 Paste that address into the faucet, prove that you're not a robot, and then request test AVAX. They should appear in your Metamask shortly.
 
-Ok, we're funded and ready for WAVAX smart contract.
+## Load WAVAX contract into Remix
 
-## Loading WAVAX contract into Remix
-
-Remix is a popular online tool for writing, deploying and interacting with smart contracts. It works in the browser, no need for installation or any local files. Point your browser to [https://remix.ethereum.org/](https://remix.ethereum.org/). You will land on the Home screen, with options for importing contracts.
+Remix is a popular browser-based tool for writing, deploying and interacting with smart contracts. Naviate to [Remix's website](https://remix.ethereum.org/). Scroll down until you see options for importing contracts.
 
 ![Import from GitHub](../../../.ghassets/wavax2avax-03-remix-import.png)
 
-Select **GitHub**, and in the input field paste `https://github.com/ava-labs/wrapped-assets/raw/main/WAVAX.sol` and select **OK**. That will load the contract into Remix.
+Select **GitHub**, and in the input field paste `https://raw.githubusercontent.com/ava-labs/wrapped-assets/main/WAVAX.sol` and select **OK**. That will load the contract into Remix.
 
 ![File Explorer](../../../.ghassets/wavax2avax-04-contract.png)
 
-After switching to the File Explorer on the left side, select `WAVAX.sol`, which is the contract we just loaded.
+Switching to the File Explorer tab on the left and select `WAVAX.sol`, which is the contract we just loaded.
 
 On the left side menu, switch to Compile tab:
 
 ![Compile](../../../.ghassets/wavax2avax-05-compile.png)
 
-Check that compiler version is compatible with the contract, as shown. Press **Compile WAVAX.sol**, and check that WAVAX has appeared under Contract. If everything is ok, we're now ready to connect to the deployed contract on the Avalanche platform.
+Check that compiler version is compatible with the contract, as shown. Press **Compile WAVAX.sol**, and check that WAVAX contract has appeared in the `CONTRACT` field below. Now you're ready to connect to the WAVAX contract, which has already been deployed on the Avalanche network.
 
-## Connecting to deployed WAVAX contract
+## Connect to the WAVAX contract
 
-Switch to **Deploy & Run Tranasactions** tab in the menu:
+Switch to the **Deploy & Run Tranasactions** tab on the left side.
 
 ![Connect](../../../.ghassets/wavax2avax-06-deploy.png)
 
-Make sure you're logged in your Metamask. In the **Environment** dropdown menu, select `Injected Web3`. That will pop up Metamask, asking you to select the account \(choose the one connected with Avalanche\) and allow it to connect. This will pre-fill the **Account** field. Make sure `WAVAX` is selected under **Contract**. We can now connect to the contract that is already published on Avalanche. In the **At Address** edit field, copy:
-* For main net: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
-* For Fuji test net: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
+Make sure you're logged in to your Metamask. In the **Environment** dropdown menu, select `Injected Web3`. Metamask will pop up and ask you to select the account. Choose the one connected to Avalanche and allow it to connect. This will pre-fill the **Account** field. Make sure the **Contract** field is set to the `WAVAX` contract. Now we can connect to the contract, which has already published on Avalanche. In the **At Address** edit field, copy:
+* For Mainnet: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
+* For Fuji Testnet: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
 After pasting the address, press the **At Address** button.
   
@@ -106,29 +102,21 @@ Remix should find the deployed contract:
 
 We are now ready to interact with the contract. Open the contract interface by pressing the highlighted arrow.
 
-## Issuing commands to the contract
+## Issue Commands to the WAVAX Contract
 
 Let's wrap some AVAX!
 
-Since ETH is denominated in 10^18 smaller units \(wei\), and AVAX is denominated in 10^9, switch the value selector from `wei` to `gwei` \(giga-wei, or 10^9 wei, making the units compatible\). 
+Since ETH is denominated in 10^18 smaller units \(wei\), and AVAX is denominated in 10^9, switch the value selector from `wei` to `gwei` \(gigawei\). 1 gwei = 10^9 wei = 1 nAVAX.
 
 ![Interaction](../../../.ghassets/wavax2avax-08-interact.png)
 
-### Wrapping AVAX to WAVAX
+### Wrap AVAX to Create WAVAX
 
-So, to wrap 10AVAX, enter `10000000000` gwei in the **value** field. To initiate the wrapping, click **Deposit**. You will be presented with a Confirm transaction dialog by Remix. When you press **Confirm** Metamask will pop up, also asking for confirmation. Press **Confirm** in Metamask too. You should notice your AVAX amount lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
+To wrap 10 AVAX, enter `10000000000` \(10^10\) gwei in the **Value** field. To initiate the wrapping, click **Deposit**. You will be presented with a prompt by Remix to confirm the transaction. When you press **Confirm** Metamask will pop up, also asking for confirmation. Press **Confirm** in Metamask, too. You should notice your AVAX balance lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
 
-### Unwrapping WAVAX to AVAX
+## Add WAVAX to Metamask
 
-To unwrap WAVAX, expand the arrow next to **Withdraw** button:
-
-![Withdraw](../../../.ghassets/wavax2avax-09-withdraw.png)
-
-Unfortunately, withdraw field is denominated in wei, so our 10AVAX ends up as `10000000000000000000` for the withdraw amount. Pressing **Transact** will trigger the same confirmation first in Remix, then in Metamask. Your AVAX should be back in the account, minus the fee amount.
-
-## Adding WAVAX to Metamask
-
-To see your WAVAX balance, we need to add WAVAX as a custom token. Select **Add token** button in Metamask, and switch to **Custom Token** tab:
+To see your WAVAX balance, you must add WAVAX as a custom token to Metamask. In Metamask, select the three dots next to your account name and select `Expand View`. This opens a new browser tab. Scroll down and select **Add token**. Switch to the **Custom Token** tab.
 
 ![Custom Token](../../../.ghassets/wavax2avax-10-add-token.png)
 
@@ -138,7 +126,15 @@ In the **Token Contract Address** paste the same contract address we used before
 
 Click **Next** and **Add Tokens**. Your WAVAX should now be visible in under your account in Metmask.
 
+### Unwrap WAVAX to AVAX
+
+To unwrap WAVAX, expand the arrow next to **Withdraw** button:
+
+![Withdraw](../../../.ghassets/wavax2avax-09-withdraw.png)
+
+Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represented as `10000000000000000000` \(10^19\) for the withdraw amount. Pressing **Transact** will trigger the same confirmation first in Remix, then in Metamask. Your AVAX should be back in the account, minus the fee amount.
+
 ## Conclusion
 
-You should now be able to interact with smart contracts on Avalanche's C-Chain with WAVAX, ERC-20 version of AVAX. In the future, this should be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you will still be able to access upcoming DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
+You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
