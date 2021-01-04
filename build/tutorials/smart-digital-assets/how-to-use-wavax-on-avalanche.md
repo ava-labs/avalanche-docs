@@ -55,7 +55,7 @@ If you already have some AVAX, you can transfer them to the Metamask account usi
 
 After you have funds on the C-Chain, select **Send** on the left side menu in the Wallet, and then switch the source chain to **C Contract**. In the **To Address** field paste your Metamask address. Enter the amount to send and click **Confirm** and then **Send**.
 
-![Send to Metamask](../../../.ghassets/wavax2avax-01-send-to-metamask.png)
+![Send to Metamask](../../../.gitbook/assets/wavax2avax-01-send-to-metamask.png)
 
 Funds should soon be visible in your Metamask account.
 
