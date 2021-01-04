@@ -1,6 +1,6 @@
 # Platform Chain \(P-Chain\) API
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](https://docs.avax-dev.network/learn/platform-overview/staking#validators) set and handles blockchain creation.
+This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
 
 ## Endpoint
 
@@ -24,7 +24,7 @@ The delegatee charges a fee to the delegator; the former receives a percentage o
 
 The delegation period must be a subset of the period that the delegatee validates the Primary Network.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -38,8 +38,8 @@ platform.addDelegator(
         endTime: int,
         stakeAmount: int,
         rewardAddress: string,
-        from: []string, (optional)
-        changeAddr: string, (optional)
+        from: []string, //optional
+        changeAddr: string, //optional
         username: string,
         password: string
     }
@@ -50,7 +50,7 @@ platform.addDelegator(
 }
 ```
 
-* `nodeID` is the node ID of the delegatee.
+* `nodeID` is the ID of the node to delegate to.
 * `startTime` is the Unix time when the delegator starts delegating.
 * `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
 * `stakeAmount` is the amount of nAVAX the delegator is staking.
@@ -75,8 +75,8 @@ curl -X POST --data '{
         "stakeAmount":100000,
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -97,15 +97,15 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when they are done validating. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
+Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
-The validator can charge a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
 
 The validation period must be between 2 weeks and 1 year.
 
 There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -119,9 +119,9 @@ platform.addValidator(
         endTime: int,
         stakeAmount: int,
         rewardAddress: string,
-        from: []string, (optional)
-        changeAddr: string, (optional)
         delegationFeeRate: float,
+        from: []string, //optional
+        changeAddr: string, //optional
         username: string,
         password: string
     }
@@ -137,9 +137,9 @@ platform.addValidator(
 * `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
 * `stakeAmount` is the amount of nAVAX the validator is staking.
 * `rewardAddress` is the address the validator reward will go to, if there is one.
+* `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
 * `username` is the user that pays the transaction fee.
 * `password` is `username`‘s password.
 * `txID` is the transaction ID
@@ -161,8 +161,8 @@ curl -X POST --data '{
         "endTime":'$(date --date="2 days" +%s)',
         "stakeAmount":1000000,
         "delegationFeeRate":10,
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -195,8 +195,8 @@ platform.addSubnetValidator(
         startTime: int,
         endTime: int,
         weight: int,
-        from: []string, (optional)
-        changeAddr: string, (optional)
+        from: []string, //optional
+        changeAddr: string, //optional
         username: string,
         password: string
     }
@@ -232,8 +232,8 @@ curl -X POST --data '{
         "weight":1,
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -261,7 +261,7 @@ Create a new address controlled by the given user.
 ```cpp
 platform.createAddress({
     username: string,
-    password:string
+    password: string
 }) -> {address: string}
 ```
 
@@ -304,11 +304,11 @@ platform.createBlockchain(
         vmID: string,
         name: string,
         genesisData: string,
-        encoding: string, (optional)
-        from: []string, (optional)
-        changeAddr: string, (optional)
+        encoding: string, //optional
+        from: []string, //optional
+        changeAddr: string, //optional
         username: string,
-        password:string
+        password: string
     }
 ) -> 
 {
@@ -338,14 +338,14 @@ curl -X POST --data '{
     "method": "platform.createBlockchain",
     "params" : {
         "vmID":"timestamp",
-        "SubnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
+        "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
         "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
         "encoding": "cb58",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -377,8 +377,8 @@ platform.createSubnet(
     {
         controlKeys: []string,
         threshold: int,
-        from: []string, (optional)
-        changeAddr: string, (optional)
+        from: []string, //optional
+        changeAddr: string, //optional
         username: string,
         password: string
     }
@@ -389,7 +389,7 @@ platform.createSubnet(
 }
 ```
 
-* In order to create add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
+* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
@@ -409,8 +409,8 @@ curl -X POST --data '{
         "threshold":2,
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -430,7 +430,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax) method to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
 
 #### **Signature**
 
@@ -438,11 +438,11 @@ Send AVAX from an address on the P-Chain to an address on the X-Chain. After iss
 platform.exportAVAX(
     {
         amount: int,
-        from: []string, (optional)
+        from: []string, //optional
         to: string,
-        changeAddr: string, (optional)
+        changeAddr: string, //optional
         username: string,
-        password:string
+        password: string
     }
 ) -> 
 {
@@ -470,8 +470,8 @@ curl -X POST --data '{
         "amount":1,
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"username",
-        "password":"password"
+        "username":"myUsername",
+        "password":"myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -493,15 +493,15 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Signature**
 
 ```cpp
 platform.exportKey({
     username: string,
-    password:string,
-    address:string
+    password: string,
+    address: string
 }) -> {privateKey: string}
 ```
 
@@ -517,8 +517,8 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.exportKey",
     "params" :{
-        "username" :"username",
-        "password":"password",
+        "username" :"myUsername",
+        "password": "myPassword",
         "address": "P-avax1zwp96clwehpwm57r9ftzdm7rnuslrunj68ua3r"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -553,7 +553,6 @@ platform.getBalance({
     utxoIDs: []{
         txID: string,
         outputIndex: int
-        }
     }
 }
 ```
@@ -646,14 +645,14 @@ curl -X POST --data '{
     "result": {
         "blockchains": [
             {
-                "id": "mnihvmrJ4MiojP7qhnF3sKR43RJvJbHrbkM8yFoLdwc4nwEqV",
-                "name": "AVM",
+                "id": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+                "name": "X-Chain",
                 "subnetID": "11111111111111111111111111111111LpoYY",
                 "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
             },
             {
-                "id": "2rWWhAMu2NyNPEHrDNnTfhtdV9MZWKkp1L5D6ANWnhAkJAkosN",
-                "name": "Athereum",
+                "id": "2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5",
+                "name": "C-Chain",
                 "subnetID": "11111111111111111111111111111111LpoYY",
                 "vmID": "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6"
             },
@@ -780,19 +779,21 @@ The response in this example indicates that AVAX’s supply is at most 365.865 m
 
 List the current validators of the given Subnet.
 
-The top level field `delegators` is deprecated as of v1.0.1. If you are using it, you should stop using it. Instead, each element of `validators` now contains the list of delegators for that validator. You should get information about delegators this way going forward.
+The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
 #### **Signature**
 
 ```cpp
-platform.getCurrentValidators({subnetID: string}) ->
-{
+platform.getCurrentValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
+        txID: string,
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
+        stakeAmount: string, //optional
         nodeID: string,
-        weight: string, (optional)
+        weight: string, //optional
         rewardOwner: {
             locktime: string,
             threshold: string,
@@ -801,11 +802,12 @@ platform.getCurrentValidators({subnetID: string}) ->
         potentialReward: string,
         delegationFee: string,
         uptime: string,
-        connected: boolean,
+        connected: bool,
         delegators: []{
+            txID: string,
             startTime: string,
             endTime: string,
-            stakeAmount: string, (optional)
+            stakeAmount: string, //optional
             nodeID: string,
             rewardOwner: {
                 locktime: string,
@@ -814,24 +816,13 @@ platform.getCurrentValidators({subnetID: string}) ->
             },
             potentialReward: string,
         }
-    },
-    delegators: []{
-        startTime: string,
-        endTime: string,
-        stakeAmount: string, (optional)
-        nodeID: string,
-        rewardOwner: {
-            locktime: string,
-            threshold: string,
-            addresses: string[]
-        },
-        potentialReward: string,
     }
 }
 ```
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 * `validators`:
+  * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
   * `endTime` is the Unix time when the validator stops validating the Subnet.
   * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
@@ -842,14 +833,15 @@ platform.getCurrentValidators({subnetID: string}) ->
   * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
   * `uptime` is the % of time the queried node has reported the peer as online.
   * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator.
+  * `delegators` is the list of delegators to this validator:
+    * `txID` is the delegator transaction.
+    * `startTime` is the Unix time when the delegator started.
+    * `endTime` is the Unix time when the delegator stops.
+    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
+    * `nodeID` is the validating node’s node ID.
+    * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
+    * `potentialReward` is the potential reward earned from staking
 * `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
-  * `startTime` is the Unix time when the delegator started.
-  * `endTime` is the Unix time when the delegator stops.
-  * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validating node’s node ID.
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
 
 #### **Example Call**
 
@@ -870,6 +862,7 @@ curl -X POST --data '{
     "result": {
         "validators": [
             {
+                "txID": "2NNkpYTGfTFLSGXJcHtVv6drwVU2cczhmjK2uhvwDyxwsjzZMm",
                 "startTime": "1600368632",
                 "endTime": "1602960455",
                 "stakeAmount": "2000000000000",
@@ -887,6 +880,7 @@ curl -X POST --data '{
                 "connected": false,
                 "delegators": [
                     {
+                        "txID": "Bbai8nzGVcyn2VmeYcbS74zfjJLjDacGNVuzuvAQkHn1uWfoV",
                         "startTime": "1600368523",
                         "endTime": "1602960342",
                         "stakeAmount": "25000000000",
@@ -901,23 +895,6 @@ curl -X POST --data '{
                         "potentialReward": "11743144774"
                     }
                 ]
-            }
-
-        ],
-        "delegators": [
-            {
-                "startTime": "1600368523",
-                "endTime": "1602960342",
-                "stakeAmount": "25000000000",
-                "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
-                "rewardOwner": {
-                    "locktime": "0",
-                    "threshold": "1",
-                    "addresses": [
-                        "P-avax18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
-                    ]
-                },
-                "potentialReward": "11743144774"
             }
         ]
     },
@@ -934,7 +911,7 @@ Returns the height of the last accepted block.
 ```cpp
 platform.getHeight() ->
 {
-      height: int,
+    height: int,
 }
 ```
 
@@ -1005,18 +982,21 @@ List the validators in the pending validator set of the specified Subnet. Each v
 #### **Signature**
 
 ```cpp
-platform.getPendingValidators({subnetID: string}) ->
-{
+platform.getPendingValidators({
+    subnetID: string //optional
+}) -> {
     validators: []{
+        txID: string,
         startTime: string,
         endTime: string,
-        stakeAmount: string, (optional)
-        nodeID: string
+        stakeAmount: string, //optional
+        nodeID: string,
         delegationFee: string,
         connected: bool,
-        weight: string, (optional)
+        weight: string, //optional
     },
     delegators: []{
+        txID: string,
         startTime: string,
         endTime: string,
         stakeAmount: string,
@@ -1027,6 +1007,7 @@ platform.getPendingValidators({subnetID: string}) ->
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 * `validators`:
+  * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
   * `endTime` is the Unix time when the validator stops validating the Subnet.
   * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
@@ -1034,6 +1015,7 @@ platform.getPendingValidators({subnetID: string}) ->
   * `connected` if the node is connected.
   * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
 * `delegators`:
+  * `txID` is the delegator transaction.
   * `startTime` is the Unix time when the delegator starts.
   * `endTime` is the Unix time when the delegator stops.
   * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
@@ -1058,6 +1040,7 @@ curl -X POST --data '{
     "result": {
         "validators": [
             {
+                "txID": "2NNkpYTGfTFLSGXJcHtVv6drwVU2cczhmjK2uhvwDyxwsjzZMm",
                 "startTime": "1600368632",
                 "endTime": "1602960455",
                 "stakeAmount": "200000000000",
@@ -1068,6 +1051,7 @@ curl -X POST --data '{
         ],
         "delegators": [
             {
+                "txID": "Bbai8nzGVcyn2VmeYcbS74zfjJLjDacGNVuzuvAQkHn1uWfoV",
                 "startTime": "1600368523",
                 "endTime": "1602960342",
                 "stakeAmount": "20000000000",
@@ -1081,18 +1065,20 @@ curl -X POST --data '{
 
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this always returns the Primary Network’s staking assetID.
+Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
 
 #### **Signature**
 
 ```cpp
-platform.getStakingAssetID() ->
-{
+platform.getStakingAssetID({
+    subnetID: string //optional
+}) -> {
     assetID: string
 }
 ```
 
-`assetID` is the assetID for a subnet’s staking asset.
+* `subnetID` is the subnet whose assetID is requested.
+* `assetID` is the assetID for a subnet’s staking asset.
 
 #### **Example Call**
 
@@ -1100,7 +1086,9 @@ platform.getStakingAssetID() ->
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getStakingAssetID",
-    "params": {},
+    "params": {
+        "subnetID": "11111111111111111111111111111111LpoYY"
+    },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
@@ -1119,7 +1107,7 @@ curl -X POST --data '{
 
 ### platform.getSubnets
 
-Get all the Subnets that exist.
+Get info about the Subnets.
 
 #### **Signature**
 
@@ -1129,16 +1117,18 @@ platform.getSubnets(
 ) ->
 {
     subnets: []{
-            id: string,
-            controlKeys: []string,
-            threshold: string
+        id: string,
+        controlKeys: []string,
+        threshold: string
     }
 }
 ```
 
-`ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets. `id` is the Subnet’s ID.  
-`threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
-See [here](https://docs.avax-dev.network/build/tutorials/platform/add-a-validator) for information on adding a validator to a Subnet.
+* `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
+* `id` is the Subnet’s ID.  
+* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+
+See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
 #### **Example Call**
 
@@ -1179,7 +1169,7 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```cpp
-platform.getStake({addresses: []string}) -> {stake: int}
+platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
 #### **Example Call**
@@ -1226,7 +1216,7 @@ platform.getTotalStake() -> {stake: int}
 ```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "platform.getStake",
+    "method": "platform.getTotalStake",
     "params": {},
     "id": 1
 }
@@ -1256,11 +1246,11 @@ Optional `encoding` parameter to specify the format for the returned transaction
 ```cpp
 platform.getTx({
     txID: string,
-    encoding: string (optional)
-} -> {
+    encoding: string //optional
+}) -> {
     tx: string,
     encoding: string,
-})
+}
 ```
 
 #### **Example Call**
@@ -1292,12 +1282,16 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID.
+Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+
+See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
 
 #### **Signature**
 
 ```cpp
-platform.getTxStatus({txID: string} -> {status: string})
+platform.getTxStatus({
+    txID: string
+}) -> {status: string}
 ```
 
 #### **Example Call**
@@ -1308,7 +1302,7 @@ curl -X POST --data '{
     "method": "platform.getTxStatus",
     "params": {
         "txID":"TAG9Ns1sa723mZy1GSoGqWipK6Mvpaj7CAswVJGM6MkVJDF9Q"
-    },
+   },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
@@ -1318,32 +1312,34 @@ curl -X POST --data '{
 ```cpp
 {
     "jsonrpc": "2.0",
-    "result": "Committed",
+    "result": {
+        "status": "Committed"
+    },
     "id": 1
 }
 ```
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set address.
+Gets the UTXOs that reference a given set of addresses.
 
 #### **Signature**
 
 ```cpp
 platform.getUTXOs(
     {
-        addresses: string,
-        limit: int, (optional)
-        startIndex: { (optional )
+        addresses: []string,
+        limit: int, //optional
+        startIndex: { //optional
             address: string,
             utxo: string
         },
-        sourceChain: string, (optional)
-        encoding: string, (optional)
+        sourceChain: string, //optional
+        encoding: string, //optional
     },
 ) -> 
 {
-    numFetched: int
+    numFetched: int,
     utxos: []string,
     endIndex: {
         address: string,
@@ -1485,16 +1481,16 @@ This gives response:
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) method to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
 #### **Signature**
 
 ```cpp
 platform.importAVAX(
     {
-        from: []string, (optional)
+        from: []string, //optional
         to: string,
-        changeAddr: string, (optional)
+        changeAddr: string, //optional
         sourceChain: string,
         username: string,
         password: string
@@ -1520,12 +1516,12 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "sourceChain":"X",
-        "to":"P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
+        "sourceChain": "X",
+        "to": "P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"bob",
-        "password":"loblaw"
+        "username": "myUsername",
+        "password": "myPassword"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -1548,12 +1544,12 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-**Signature**
+#### **Signature**
 
 ```cpp
 platform.importKey({
     username: string,
-    password:string,
+    password: string,
     privateKey:string
 }) -> {address: string}
 ```
@@ -1568,9 +1564,9 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.importKey",
     "params" :{
-        "username" :"bob",
-        "password":"loblaw",
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+        "username": "myUsername",
+        "password": "myPassword",
+        "privateKey": "PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
@@ -1580,8 +1576,8 @@ curl -X POST --data '{
 ```cpp
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+    "id": 1,
+    "result": {
         "address":"P-avax19hwpvkx2p5q99w87dlpfhqpt3czyh8ywasfaym"
     }
 }
@@ -1596,7 +1592,7 @@ Issue a transaction to the Platform Chain.
 ```cpp
 platform.issueTx({
     tx: string,
-    encoding: string, (optional)
+    encoding: string, //optional
 }) -> {txID: string}
 ```
 
@@ -1679,11 +1675,11 @@ Sample validators from the specified Subnet.
 platform.sampleValidators(
     {
         size: int,
-        subnetID: string
+        subnetID: string, //optional
     }
 ) ->
 {
-    validators:[size]string
+    validators: []string
 }
 ```
 
@@ -1708,9 +1704,9 @@ curl -X POST --data '{
 
 ```cpp
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
         "validators":[
             "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
             "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN"

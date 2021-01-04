@@ -11,7 +11,7 @@ An API call is made to an endpoint, which is a URL. The base of the URL is alway
 where
 
 * `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#arguments) `http-port` \(default value `9650`\).
+* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
 
 For example, the base URL might look like this: `127.0.0.1:9650`.
 
@@ -31,7 +31,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](https://docs.avax/build/apis/exchange-chain-x-chain-api#avm-gettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](exchange-chain-x-chain-api.md#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 
@@ -95,7 +95,7 @@ Such a response would look like:
 
 ## Other API Formats
 
-Some APIs, such as the Admin API, may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
 
 ## Sending and Receiving Bytes
 

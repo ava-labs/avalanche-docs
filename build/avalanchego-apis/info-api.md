@@ -16,17 +16,17 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](https://docs.avax-dev.network/build/apis/admin-api#admin-aliaschain)for more context.\)
+Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
 
 #### **Signature**
 
-```text
+```cpp
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -39,7 +39,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -55,13 +55,13 @@ Get the ID of the network this node is participating in.
 
 #### **Signature**
 
-```text
+```cpp
 info.getNetworkID() -> {networkID:int}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -71,7 +71,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -87,13 +87,13 @@ Get the name of the network this node is participating in.
 
 #### **Signature**
 
-```text
+```cpp
 info.getNetworkName() -> {networkName:string}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -103,7 +103,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -119,13 +119,13 @@ Get the ID of this node.
 
 #### **Signature**
 
-```text
+```cpp
 info.getNodeID() -> {nodeID: string}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -135,7 +135,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -157,7 +157,7 @@ info.getNodeIP() -> {ip: string}
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -167,7 +167,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -183,13 +183,13 @@ Get the version of this node.
 
 #### **Signature**
 
-```text
+```cpp
 info.getNodeVersion() -> {version: string}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -199,11 +199,11 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/0.5.7"
+        "version": "avalanche/1.1.0"
     },
     "id": 1
 }
@@ -215,15 +215,15 @@ Check whether a given chain is done bootstrapping
 
 #### **Signature**
 
-```text
-info.isBootstrapped(chain: string) -> {isBootstrapped: bool}
+```cpp
+info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
 `chain` is the ID or alias of a chain.
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -236,7 +236,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -252,7 +252,7 @@ Get a description of peer connections.
 
 #### **Signature**
 
-```text
+```cpp
 info.peers() -> 
 {
     numPeers: int,
@@ -262,14 +262,14 @@ info.peers() ->
         nodeID: string,
         version: string,
         lastSent: string,
-        lastRecevied: string
+        lastReceived: string
     }
 }
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -279,7 +279,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -317,17 +317,24 @@ curl -X POST --data '{
 
 ### info.getTxFee
 
-Get the transaction fee of the network.
+Get the fees of the network.
 
 #### **Signature**
 
-```text
-info.getTxFee() -> {txFee:uint64}
+```cpp
+info.getTxFee() -> 
+{
+    creationTxFee: uint64,
+    txFee: uint64
+}
 ```
+
+* `creationTxFee` is the fee for creating assets on the network.
+* `txFee` is the fee for making transactions on the network.
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -337,11 +344,12 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
     "result" :{
+        "creationTxFee": "10000000",
         "txFee": "1000000"
     }
 }

@@ -13,7 +13,7 @@ Suppose that we want to issue an asset that represents shares of a corporation. 
 
 ## Requirements
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
 ## Create the Asset
 

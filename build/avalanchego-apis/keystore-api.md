@@ -4,6 +4,8 @@ Every node has a built-in keystore. Clients create users on the keystore, which 
 
 _**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
 
+For validation and delegation on main net, you should issue transactions through [the wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+
 ## Format
 
 This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
@@ -22,7 +24,7 @@ Create a new user with the specified username and password.
 
 #### **Signature**
 
-```text
+```cpp
 keystore.createUser(
     {
         username:string,
@@ -36,21 +38,21 @@ keystore.createUser(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"keystore.createUser",
     "params" :{
-        "username":"bob",
-        "password":"creme fraiche"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -64,27 +66,29 @@ curl -X POST --data '{
 
 Delete a user.
 
-```text
+#### **Signature**
+
+```cpp
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"keystore.deleteUser",
     "params" : {
-        "username" : "bob",
-        "password" : "3l33th4x0r!!1!"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -96,37 +100,46 @@ curl -X POST --data '{
 
 Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
 
-```text
+#### **Signature**
+
+```cpp
 keystore.exportUser(
     {
         username:string,
-        password:string
+        password:string,
+        encoding:string //optional
     }
-) -> {user:string}
+) -> {
+    user:string,
+    encoding:string
+}
 ```
+
+`encoding` specifies the format of the string encoding user data. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"keystore.exportUser",
     "params" :{
-        "username"  :"bob",
-        "password"  :"creme fraiche"
+        "username":"myUsername",
+        "password":"myPassword"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
     "result" :{
-        "user":"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi"
+        "user":"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi",
+        "encoding":"cb58"
     }
 }
 ```
@@ -135,26 +148,31 @@ curl -X POST --data '{
 
 Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
 
-```text
+#### **Signature**
+
+```cpp
 keystore.importUser(
     {
         username:string,
         password:string,
-        user:string
+        user:string,
+        encoding:string //optional
     }
 ) -> {success:bool}
 ```
 
+`encoding` specifies the format of the string encoding user data . Can be either “cb58” or “hex”. Defaults to “cb58”.
+
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"keystore.importUser",
     "params" :{
-        "username":"accountNameCanBeDifferent",
-        "password":"creme fraiche",
+        "username":"myUsername",
+        "password":"myPassword",
         "user"    :"4CsUh5sfVwz2jNrJXBVpoPtDsb4tZksWykqmxC5CXoDEERyhoRryq62jYTETYh53y13v7NzeReisi"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
@@ -162,7 +180,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -178,13 +196,13 @@ List the users in this keystore.
 
 #### **Signature**
 
-```text
+```cpp
 keystore.ListUsers() -> {users:[]string}
 ```
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -194,13 +212,13 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
     "result" :{
         "users":[
-            "bob"
+            "myUsername"
         ]
     }
 }

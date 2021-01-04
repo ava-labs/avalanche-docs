@@ -14,7 +14,7 @@ Note that if you run your node with `--api-auth-required` then some tools like M
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](https://docs.avax.network/v1.0/en/api/issuing-api-calls/)
+This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
 
 ## Endpoint
 
@@ -30,7 +30,7 @@ Creates a new authorization token that grants access to one or more API endpoint
 
 #### **Signature**
 
-```text
+```cpp
 auth.newToken(
     {
         password: string,
@@ -45,7 +45,7 @@ auth.newToken(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.newToken",
@@ -61,7 +61,7 @@ This call will generate an authorization token that allows access to API endpoin
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -73,9 +73,9 @@ This call will generate an authorization token that allows access to API endpoin
 
 This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](https://docs.avax-dev.network/build/apis/info-api#info-peers) with this token:
+For example, to call [`info.peers`](info-api.md#info-peers) with this token:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -91,7 +91,7 @@ Revoke a previously generated token. The given token will no longer grant access
 
 #### **Signature**
 
-```text
+```cpp
 auth.revokeToken(
     {
         password: string,
@@ -105,7 +105,7 @@ auth.revokeToken(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.revokeToken",
@@ -119,7 +119,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -135,7 +135,7 @@ Change this node’s authorization token password. Any authorization tokens crea
 
 #### **Signature**
 
-```text
+```cpp
 auth.changePassword(
     {
         oldPassword: string,
@@ -149,7 +149,7 @@ auth.changePassword(
 
 #### **Example Call**
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.changePassword",
@@ -163,7 +163,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {

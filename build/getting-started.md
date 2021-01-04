@@ -1,4 +1,4 @@
-# Getting Started
+# Run an Avalanche Node
 
 The quickest way to learn about Avalanche is to run a node and interact with the network.
 
@@ -16,14 +16,7 @@ If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche 
 Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
 
 * Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
-* OS: Ubuntu 18.04/20.04 or Mac OS X &gt;= Catalina
-* Software: [Go](https://golang.org/doc/install) 1.15.5 or later 
-
-Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
-
-{% hint style="danger" %}
-This tutorial assumes you have enough AVAX \(2,000 or more\) to add a validator held under a mnemonic key phrase.
-{% endhint %}
+* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -31,9 +24,17 @@ Let’s install AvalancheGo, the Go implementation of an Avalanche node, and con
 
 ### Download AvalancheGo
 
-The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You can do either of the below. You don’t need to do both.
+The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+
+Downloading [pre-built binary](getting-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+
+Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
 
 #### **Source Code**
+
+If you want to build the node from source, you're first going to need to install Go 1.15.5 or later. Follow the instructions [here](https://golang.org/doc/install).
+
+Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
 Download the AvalancheGo repository:
 
@@ -59,21 +60,24 @@ The binary, named `avalanchego`, is in `avalanchego/build`.
 
 #### **Binary**
 
-Go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
 
 Under `Assets`, select the appropriate file.
 
 For MacOS:  
-Download: `avalanche-osx-<VERSION>.zip`  
-Unzip: `unzip avalanche-osx-<VERSION>.zip`  
-The resulting folder, `avalanche-<VERSION>`, contains the binaries.  
-You can run the node with `./avalanche-<VERSION>/avalanchego`
+Download: `avalanchego-macos-<VERSION>.zip`  
+Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
+The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
-For Linux:  
-Download: `avalanche-linux-<VERSION>.tar.gz`.  
-Unzip: `tar -xvf avalanche-linux-<VERSION>.tar.gz`  
-The resulting folder, `avalanche-<VERSION>`, contains the binaries.  
-You can run the node with `./avalanche-<VERSION>/avalanchego`
+For Linux on PCs or cloud providers:  
+Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+
+For Linux on RaspberryPi4 or similar Arm64-based computers:  
+Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 ### Start a Node, and Connect to Avalanche
 
@@ -83,23 +87,23 @@ If you built from source:
 ./build/avalanchego
 ```
 
-If you are using the released binaries:
+If you are using the pre-built binaries on MacOS:
 
 ```cpp
-./avalanche-<VERSION>/avalanchego
+./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you want to be able to make API calls to your node from other machines, include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+If you are using the pre-built binaries on Linux:
 
-You can use `Ctrl + C` to kill the node.
-
-To connect to the Fuji Testnet instead, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+```cpp
+./avalanchego-<VERSION>-linux/avalanchego
+```
 
 When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, call [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) like so:
+To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) by copying and pasting the following command:
 
 ```cpp
 curl -X POST --data '{
@@ -113,6 +117,16 @@ curl -X POST --data '{
 ```
 
 If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+
+Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
+
+You can use `Ctrl + C` to kill the node.
+
+If you want to experiment and play with your node, read on.
+
+To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+
+To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
 
 ### Create a Keystore User
 
@@ -194,7 +208,7 @@ Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, th
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
-![](../.gitbook/assets/1.png)
+![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29.png)
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 

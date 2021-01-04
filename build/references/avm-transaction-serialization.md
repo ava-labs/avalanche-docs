@@ -1826,7 +1826,7 @@ A UTXO is a standalone representation of a transaction output.
 
 ### What UTXO Contains
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
+A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
 
 * **`CodecID`** The only valid `CodecID` is `00 00`
 * **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
