@@ -1,29 +1,28 @@
-# Setting up node on Linux using the installer script
+# Setting up an AvalancheGo Node on Linux Using the Install Script
 
-Setting up AvalancheGo node to run on [Avalanche platform](../../../learn/platform-overview/README.md) involves a whole series of commands, editing files and system settings. Since those are all known and reproducible, we created a shell \(bash\) script to automate and speed up the process, and also to help those that don't necessarily have extensive technical knowledge and might find the install process too complicated. 
-
-Using our script you can go from a clean system to having a full, running node in a matter of minutes, entering only a couple commands and answering a few prompts.
+We have a shell \(bash\) script that installs AvalancheGo on your computer.
+This script sets up full, running node in a matter of minutes with minimal user input required.
 
 ## Before you start
 
-This install script makes a few assumptions:
-* clean Ubuntu 18.04 or 20.04 install \(sorry, Mac or Windows not supported yet\)
+This install script assumes:
+* OS: Ubuntu 18.04 or 20.04 \(sorry, Mac or Windows not supported yet\)
 * AvalancheGo is not running and not already installed as a service
-* user running the script has superuser privileges \(can run `sudo`\)
+* User running the script has superuser privileges \(can run `sudo`\)
 
 ### Environment considerations
 
 If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
 
-If you have a node already running on the computer, stop it before running the script, otherwise two instances will clash, and you may end up with corrupted files.
+If you have a node already running on the computer, stop it before running the script.
 
 #### Node running from terminal
 
-If your node is running in a terminal stop it by pressing `ctrl+c`.
+If your node is running in a terminal stop it by pressing `ctrl+C`.
 
 #### Node running as a service
 
-If a node is already running as a service, then you probably don't need this script. You're good to go.
+If your node is already running as a service, then you probably don't need this script. You're good to go.
 
 #### Node running in the background
 
@@ -38,7 +37,7 @@ Look for line that doesn't have `grep` on it. In this example, that is the secon
 
 #### Node working files
 
-If you had a previously running node instance, by default you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before, it is completely safe to run the script. That being said, for your own safety and as a generally good practice, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure and safe. You can use those files to recreate your node on a different computer if you ever need to do so.
+If you had a previously running node instance, by default you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before, it is completely safe to run the script. That being said, for your own safety and as a generally good practice, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure and safe. You can use those files to recreate your node on a different computer if you ever need to.
 
 ### Networking considerations
 
@@ -50,7 +49,7 @@ If your node is running on a cloud provider computer instance, it will have a st
 
 #### Running on a home connection
 
-If you're running a node on a computer that is on a residential connection, you will have a dynamic IP; that is, your IP will change periodically. Installer will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
+If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
 
 As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
 
@@ -58,25 +57,15 @@ As there are too many models and router configurations, we cannot provide instru
 
 So, now that you prepared your system and have the info ready, let's get to it.
 
-To download the script, in the terminal run the following command:
+To download the script and run it, enter the following in the terminal:
 
 ```shell
-wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanche-installer.sh
-```
-
-Script should be transferred to your computer. Now we need to make it executable:
-
-```shell
-chmod 755 avalanche-installer.sh
-```
-
-And we're ready to run it. Do so with:
-
-```shell
+wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanche-installer.sh;\
+chmod 755 avalanche-installer.sh;\
 ./avalanche-installer.sh
 ```
 
-And we're off! The output should show you what it's doing, something like this:
+And we're off! The output should look something like this:
 
 ```text
 AvalancheGo installer
@@ -124,7 +113,7 @@ Done!
 Your node should now be bootstrapping on the main net.
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
-To follow the log use (ctrl-c to stop):
+To follow the log use (ctrl+C to stop):
 sudo journalctl -u avalanchego -f
 
 Reach us over on https://chat.avax.network if you're having problems.
@@ -176,7 +165,7 @@ It will produce output like:
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
-Append `NodeID-` to the value, in this case the NodeID is: `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that somewhere you can refer to later, it will be needed for staking or looking up your node.
+Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
 
 Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
 
@@ -184,11 +173,11 @@ Your node should be in the process of bootstrapping now. You can monitor the pro
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl-c` when you wish to stop.
+Press `ctrl+C` when you wish to stop.
 
 ## What next?
 
-That's it, you are running a node on the Avalanche platform now! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
+That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
