@@ -263,16 +263,16 @@ Now your staking key and certificate are in directory `~/aws_avalanche_backup` .
 
 ### Upgrading Your Node <a id="9ac7"></a>
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the following commands.
+AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the following commands. Copy and paste the entire text below.
 
 ```shell
-sudo systemctl stop avalanchego
-cd ~
+sudo systemctl stop avalanchego;\
+cd ~;\
 curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
-mkdir -p ~/avalanche-node
-tar xvf ~/avalanchego-linux-amd64-*.tar.gz -C ~/avalanche-node --strip-components=1
-rm ~/avalanchego-linux-amd64-*.tar.gz
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -;\
+mkdir -p ~/avalanche-node;\
+tar xvf ~/avalanchego-linux-amd64-*.tar.gz -C ~/avalanche-node --strip-components=1;\
+rm ~/avalanchego-linux-amd64-*.tar.gz;\
 sudo systemctl start avalanchego
 ```
 
