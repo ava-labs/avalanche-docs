@@ -6,7 +6,7 @@ This script sets up full, running node in a matter of minutes with minimal user 
 ## Before you start
 
 This install script assumes:
-* OS: Ubuntu 18.04 or 20.04 \(sorry, Mac or Windows not supported yet\)
+* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
 * AvalancheGo is not running and not already installed as a service
 * User running the script has superuser privileges \(can run `sudo`\)
 
@@ -37,7 +37,7 @@ Look for line that doesn't have `grep` on it. In this example, that is the secon
 
 #### Node working files
 
-If you had a previously running node instance, by default you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before, it is completely safe to run the script. That being said, for your own safety and as a generally good practice, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure and safe. You can use those files to recreate your node on a different computer if you ever need to.
+If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
 
 ### Networking considerations
 
@@ -57,12 +57,12 @@ As there are too many models and router configurations, we cannot provide instru
 
 So, now that you prepared your system and have the info ready, let's get to it.
 
-To download the script and run it, enter the following in the terminal:
+To download and run the script, enter the following in the terminal:
 
 ```shell
-wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanche-installer.sh;\
-chmod 755 avalanche-installer.sh;\
-./avalanche-installer.sh
+wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
+chmod 755 avalanchego-installer.sh;\
+./avalanchego-installer.sh
 ```
 
 And we're off! The output should look something like this:
@@ -119,17 +119,18 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-Script should be finished now, and you should see the system prompt again.
+The script is finished, and you should see the system prompt again.
 
 ## Post installation
 
-You can check that the service is running by entering:
+AvalancheGo should be running in the background as a service. 
+You can check that it's running with:
 
 ```shell
 sudo systemctl status avalanchego
 ```
 
-Which should produce something like this:
+This will print the node's latest logs, which should look like this:
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service
@@ -153,7 +154,7 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Note the `active (running)` which indicates the service is running ok. You may need to press q to return to the command prompt.
+Note the `active (running)` which indicates the service is running ok. You may need to press `q` to return to the command prompt.
 
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
@@ -173,7 +174,21 @@ Your node should be in the process of bootstrapping now. You can monitor the pro
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl+C` when you wish to stop.
+Press `ctrl+C` when you wish to stop reading node output.
+
+## Stopping the node
+
+To stop AvalancheGo, run:
+
+```shell
+sudo systemctl stop avalanchego
+```
+
+To start it again, run:
+
+```shell
+sudo systemctl start avalanchego
+```
 
 ## What next?
 
@@ -181,6 +196,6 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can proceed to [interact with the node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
