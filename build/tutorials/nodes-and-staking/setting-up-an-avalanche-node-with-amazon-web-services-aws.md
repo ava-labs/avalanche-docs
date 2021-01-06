@@ -148,7 +148,7 @@ Select the newly created EC2 instance. This opens a details panel with informati
 
 ![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value`PUBLICIP.`
+Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
 
 **Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
 
@@ -192,67 +192,9 @@ This also reboots the instance. Wait 5 minutes, then log in again by running thi
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Download the latest AvalancheGo release from Github.
+You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
 
-```text
-cd ~; curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
-```
-
-Unzip the AvalancheGo binary and put it in `~/avalanchego`.
-
-```text
-mkdir -p ~/avalanchego; tar xvf ~/avalanchego-linux-amd64*.tar.gz -C ~/avalanchego \
- --strip-components=1; rm ~/avalanchego-linux-*.tar.gz
-```
-
-Set up AvalancheGo as a service so that it can run in the background.
-
-```text
-sudo nano /etc/systemd/system/avalanchego.service
-```
-
-This opens the `nano` text editor. Paste the following into the text editor. Remember to replace `PUBLICIP`. To save and quit do `CTRL + X` followed by `Y` .
-
-```text
-[Unit]
-Description=AvalancheGo systemd service.
-StartLimitIntervalSec=0
-[Service]
-Type=simple
-User=ubuntu
-ExecStart=/home/ubuntu/avalanchego/avalanchego --plugin-dir=/home/ubuntu/avalanchego/plugins --public-ip=PUBLICIP --http-host=
-Restart=always
-RestartSec=1
-[Install]
-WantedBy=multi-user.target
-```
-
-Finally, run the following to give the service file the correct permissions and start the AvalancheGo service.
-
-```text
-sudo chmod 644 /etc/systemd/system/avalanchego.service
-sudo systemctl start avalanchego
-sudo systemctl enable avalanchego
-```
-
-AvalancheGo is now running! It should begin bootstrapping. You can run the following to take a peek at the latest output of AvalancheGo:
-
-```text
-sudo systemctl status avalanchego
-```
-
-![Peek at the latest output using &quot;sudo systemctl status avalanchego&quot;](https://miro.medium.com/max/1834/1*FVEINyEfuOinqGAhneNGWA.png)
-
-To continuously follow the output log of AvalancheGo you can use the following command:
-
-```text
-sudo journalctl -u avalanchego -f
-```
-
-Press `CTRL + C` to stop the output.
-
-Bootstrapping will take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
+Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
 
 ```text
 curl -X POST --data '{
@@ -297,7 +239,7 @@ The response contains the node ID.
 
 In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
 
-AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created in Step 5\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
@@ -311,7 +253,7 @@ exit
 
 Now you're no longer connected to the EC2 instance; you're back on your local machine.
 
-To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP.`
+To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP`.
 
 ```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
@@ -321,35 +263,17 @@ Now your staking key and certificate are in directory `~/aws_avalanche_backup` .
 
 ### Upgrading Your Node <a id="9ac7"></a>
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the following commands.
+AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the following commands. Copy and paste the entire text below.
 
-```bash
-cd ~; mkdir -p ~/avalanchego
-```
-
-```text
-cd ~
+```shell
+sudo systemctl stop avalanchego;\
+cd ~;\
 curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -
-mkdir -p ~/avalanchego
-tar xvf ~/avalanchego-linux-amd64-*.tar.gz -C ~/avalanchego --strip-components=1
-rm ~/avalanchego-linux-amd64-*.tar.gz
-sudo systemctl stop avalanchego
+| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi -;\
+mkdir -p ~/avalanche-node;\
+tar xvf ~/avalanchego-linux-amd64-*.tar.gz -C ~/avalanche-node --strip-components=1;\
+rm ~/avalanchego-linux-amd64-*.tar.gz;\
 sudo systemctl start avalanchego
-```
-
-To download the latest release:
-
-```bash
-curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest \
-| grep "avalanchego-linux-amd64.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | wget -P ~/ -qi - ; \
-tar xvf ~/avalanchego-linux-amd64*.tar.gz -C ~/avalanchego --strip-components=1
-```
-
-Do cleanup and restart AvalancheGo:
-
-```bash
-rm ~/avalanchego-linux-*.tar.gz; sudo systemctl restart avalanchego
 ```
 
 Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
