@@ -34,7 +34,7 @@ Non-AVAX Assets (ANTs) are supported on the C-Chain by keeping a mapping [assetI
 
 ##### assetCall
 
-`assetCall` is a precompiled contract at address `0xassetCallAddr`. `assetCall` allows users to atomically transfer a native asset to a given address and (optionally) also make a contract call to that same address. This is parallel to how a normal transaction can send value to some address, and atomically call that address with some `data`.
+`assetCall` is a precompiled contract at address `0x0100000000000000000000000000000000000002`. `assetCall` allows users to atomically transfer a native asset to a given address and (optionally) also make a contract call to that same address. This is parallel to how a normal transaction can send value to some address, and atomically call that address with some `data`.
 
 ```text
 assetCall(address addr, uint256 assetID, uint256 assetAmount, bytes memory callData) -> {ret: bytes memory}
@@ -59,7 +59,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since there
 
 ##### assetBalance
 
-`assetBalance` is a precompiled contract at address `0xassetBalance`. `assetBalance` is the ANT equivalent of using `balance` to get the AVAX balance.
+`assetBalance` is a precompiled contract at address `0x0100000000000000000000000000000000000001`. `assetBalance` is the ANT equivalent of using `balance` to get the AVAX balance.
 
 ```text
 assetBalance(address addr, uint256 assetID) -> {balance: uint256}
@@ -125,7 +125,7 @@ Similar to WETH, in order to deposit some funds into an ARC-20, we need to send 
 * **`nonce`**: 2
 * **`gasPrice`**: 470 gwei
 * **`gasLimit`**: 3000000
-* **`to`**: `0xassetCallAddr`
+* **`to`**: `0x0100000000000000000000000000000000000002`
 * **`value`**: 0
 * **`v, r, s`**: Transaction Signature
 * **`data`**: abi.encodePacked(arc20Address, assetID, assetAmount, abi.encodeWithSignature("deposit()"))
