@@ -48,6 +48,15 @@ else
   echo "Exiting."
   exit
 fi
+if test -f "/etc/systemd/system/avalanchego.service"; then
+  foundAvalancheGo=true
+  echo "Found AvalancheGo systemd service already installed, switching to upgrade mode."
+  echo "Stopping service..."
+  sudo systemctl stop avalanchego
+else
+  foundAvalancheGo=false
+fi
+# download and copy node files
 mkdir -p /tmp/avalanchego-install               #make a directory to work in
 rm -rf /tmp/avalanchego-install/*               #clean up in case previous install didn't
 cd /tmp/avalanchego-install
@@ -61,6 +70,14 @@ tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
 rm avalanchego-linux-*.tar.gz
 echo "Node files unpacked into $HOME/avalanche-node"
 echo
+if [ "$foundAvalancheGo" = "true" ]; then
+  echo "Node upgraded, starting service..."
+  sudo systemctl start avalanchego
+  echo "New node version:"
+  $HOME/avalanche-node/avalanchego --version
+  echo "Done!"
+  exit
+fi
 echo "To complete the setup some networking information is needed."
 echo "Where is the node installed:"
 echo "1) residential network (dynamic IP)"

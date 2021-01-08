@@ -14,6 +14,38 @@ Then download `staker.crt` and `staker.key` files and keep them somewhere safe a
 
 If you use your node for development purposes and have keystore users on your node, you should back up those too.
 
+## Node installed using the installer script
+
+If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+
+```shell
+./avalanchego-installer.sh
+```
+
+It will detect that you already have AvalancheGo installed:
+
+```text
+AvalancheGo installer
+---------------------
+Preparing environment...
+Found 64bit Intel/AMD architecture...
+Found AvalancheGo systemd service already installed, switching to upgrade mode.
+Stopping service...
+```
+
+It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+
+```text
+Node upgraded, starting service...
+New node version:
+avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413bbac158d6626f712d2]
+Done!
+```
+
+And that is it, your node is upgraded to the latest version.
+
+If you installed your node manually, proceed with the rest of the tutorial.
+
 ## **Stop the old node version**
 
 After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
