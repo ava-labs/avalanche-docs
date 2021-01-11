@@ -1,4 +1,4 @@
-# Set Up an Avalanche Node with Amazon Web Services \(AWS\)
+# Run an Avalanche Node with Amazon Web Services \(AWS\)
 
 ## Introduction
 
@@ -265,7 +265,7 @@ Now your staking key and certificate are in directory `~/aws_avalanche_backup` .
 
 AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
 
-```shell
+```text
 ./avalanchego-installer.sh
 ```
 

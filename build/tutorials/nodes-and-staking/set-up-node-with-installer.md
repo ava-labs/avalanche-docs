@@ -1,11 +1,11 @@
-# Setting up an AvalancheGo Node on Linux Using the Install Script
+# Run an Avalanche Node on Linux using Install Script
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer.
-This script sets up full, running node in a matter of minutes with minimal user input required.
+We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
 
 ## Before you start
 
 This install script assumes:
+
 * OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
 * AvalancheGo is not running and not already installed as a service
 * User running the script has superuser privileges \(can run `sudo`\)
@@ -59,7 +59,7 @@ So, now that you prepared your system and have the info ready, let's get to it.
 
 To download and run the script, enter the following in the terminal:
 
-```shell
+```text
 wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
 chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
@@ -100,7 +100,7 @@ enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong (or empty), and then enter the correct IP at the next prompt.
+Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
 
 The script will then continue with system service creation and finish with starting the service.
 
@@ -123,10 +123,9 @@ The script is finished, and you should see the system prompt again.
 
 ## Post installation
 
-AvalancheGo should be running in the background as a service. 
-You can check that it's running with:
+AvalancheGo should be running in the background as a service. You can check that it's running with:
 
-```shell
+```text
 sudo systemctl status avalanchego
 ```
 
@@ -158,19 +157,21 @@ Note the `active (running)` which indicates the service is running ok. You may n
 
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
-```shell
+```text
 sudo journalctl -u avalanchego | grep "node's ID"
 ```
 
 It will produce output like:
+
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
+
 Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
 
 Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
 
-```shell
+```text
 sudo journalctl -u avalanchego -f
 ```
 
@@ -180,13 +181,13 @@ Press `ctrl+C` when you wish to stop reading node output.
 
 To stop AvalancheGo, run:
 
-```shell
+```text
 sudo systemctl stop avalanchego
 ```
 
 To start it again, run:
 
-```shell
+```text
 sudo systemctl start avalanchego
 ```
 
@@ -202,7 +203,7 @@ It is recommended to always upgrade to the latest version, because new versions 
 
 To upgrade your node, just run the installer script again:
 
-```shell
+```text
 ./avalanchego-installer.sh
 ```
 
@@ -230,8 +231,9 @@ Done!
 
 That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
 
-If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
 Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
+

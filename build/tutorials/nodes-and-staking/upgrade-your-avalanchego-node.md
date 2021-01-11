@@ -18,7 +18,7 @@ If you use your node for development purposes and have keystore users on your no
 
 If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
 
-```shell
+```text
 ./avalanchego-installer.sh
 ```
 
