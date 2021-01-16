@@ -191,11 +191,11 @@ Entonces inicia la VM
 
 Las siguientes instrucciones muestran cómo conectarse a la Máquina Virtual desde una máquina de Windows 10. Para las instrucciones sobre cómo conectarse desde una máquina ubuntu ver el [Tutorial en AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
-On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select “Advanced” at the bottom
+En tu PC local, crea una carpeta en la raíz de la unidad C: llamada Avalanche y luego mueve el archivo Avalanche\_key.pem que descargaste antes a la carpeta. Luego haz clic con el botón derecho del ratón en el archivo y selecciona Propiedades. Ve a la pestaña de seguridad y selecciona "Advanced" en la parte inferior
 
 ![Image for post](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
 
-Select “Disable inheritance” and then “Remove all inherited permissions from this object” to remove all existing permissions on that file.
+Seleccione "Disable inheritance" y luego "Remove all inherited permissions from this object" para eliminar todos los permisos existentes en ese archivo.
 
 ![Image for post](https://miro.medium.com/max/740/1*VxuomVeWbhYquRynA8hP4Q.png)
 
@@ -323,7 +323,8 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDE2NTQ3LDg3NzQ2NDM5MiwxOTA4MD
-UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
-LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbLTEyMzE2MDkzMjQsODc3NDY0MzkyLDE5MD
+gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
+NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
+==
 -->
