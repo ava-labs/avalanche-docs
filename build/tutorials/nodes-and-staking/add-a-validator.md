@@ -277,7 +277,7 @@ Cualquier cambio que resulte de esta transacción se enviará a esta dirección.
 
 Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción. Este usuario debe tener un número suficiente de las claves de control de esta Subnet para poder añadir un validador a esta Subnet.
 
-We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` &`endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\) 
 
 ```cpp
 curl -X POST --data '{
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczNDExMDA5NCwtMTgyOTg1NzE4NywtMT
-M0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3
-NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OS
-wxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTE3NjIzNDAxMDQsLTE4Mjk4NTcxODcsLT
+EzNDQzMzA2NDgsMzIxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5
+NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNj
+ksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
 -->
