@@ -42,13 +42,13 @@
     * [AVAX Stake, por Validar o Delegar, con la Wallet de AVAX ](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
     * [Actualice su nodo AvalancheGo](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
-    * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+    * [Implementar un Smart Contract en Avalanche Usando Remix y MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Usando Truffle con la  C-Chain de Avalanche](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
   * [Activos Digitales Inteligentes](build/tutorials/smart-digital-assets/README.md)
     * [Crear un Token ERC-20](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
     * [Crear un Activo de Capital Fijo](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
-    * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
-    * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
+    * [Crear un Activo de Capitalización Variable](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
+    * [Crear un NFT \(Parte 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
     * [Mint NFTs with the Avalanche Wallet](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
     * [Use Wrapped AVAX \(WAVAX\) on Avalanche](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
 * [AvalancheGo APIs](build/avalanchego-apis/README.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY5ODU0ODMwLC0zNDI0MzM5MjIsLTM1MT
-U5Mzg5LDM1ODg3MjAyOV19
+eyJoaXN0b3J5IjpbLTEzMjQ3Mzg0MDksLTM0MjQzMzkyMiwtMz
+UxNTkzODksMzU4ODcyMDI5XX0=
 -->
