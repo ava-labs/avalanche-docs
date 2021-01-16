@@ -127,7 +127,7 @@ Por motivos de seguridad, desea restringir quién puede conectarse remotamente a
 
 Es probable que se le haya asignado una IP pública dinámica para su casa, a menos que usted lo haya solicitado específicamente, y por lo tanto su IP pública asignada puede cambiar en el futuro. Sin embargo, se recomienda restringir el acceso a su IP actual, y luego, en caso de que la IP de su casa cambie y ya no pueda conectarse remotamente a la máquina virtual, puede actualizar las reglas de seguridad de la red con su nueva IP pública para poder conectarse nuevamente.
 
-NOTA: Si necesita cambiar las reglas del grupo de seguridad de la red después del despliegue si la IP de su casa ha cambiado, busque "avalanche-nsg" y puede modificar la regla para SSH y el Puerto 9650 con la nueva IP. **Port 9651 needs to remain open to everyone** though as that’s how it communicates with other Avalanche nodes.
+NOTA: Si necesita cambiar las reglas del grupo de seguridad de la red después del despliegue si la IP de su casa ha cambiado, busque "avalanche-nsg" y puede modificar la regla para SSH y el Puerto 9650 con la nueva IP. **El puerto 9651 debe permanecer abierto a todo el mundo** though as that’s how it communicates with other Avalanche nodes.
 
 ![Image for post](https://miro.medium.com/max/481/1*fR6SrKhTSTQ4cS3PoFrQfQ.png)
 
@@ -325,7 +325,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODAxMzE1MzQsMTkwODA1MzY5Miw1Mz
-gzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1OSwtMTc1ODc4
-MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbOTY5NTAyMTM2LDE5MDgwNTM2OTIsNTM4Mz
+YzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0NTksLTE3NTg3ODA5
+OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
 -->
