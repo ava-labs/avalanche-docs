@@ -32,7 +32,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-La respuesta contiene la ID de tu Nodo:
+La respuesta contiene el ID de tu Nodo:
 
 ```cpp
 {
@@ -76,7 +76,7 @@ Eso es todo!
 
 También podemos añadir un nodo al conjunto de validadores haciendo llamados API a nuestro nodo. Para añadir un nodo a la Red Principal, ejecutaremos [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
 
-This method’s signature is:
+La firma de este método es:
 
 ```cpp
 platform.addValidator(
@@ -94,11 +94,11 @@ platform.addValidator(
 ) -> {txID: string}
 ```
 
-Let’s go through and examine these arguments.
+Vamos a examinar estos argumentos.
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Este es el ID de nodo del validador que se está agregando. Para obtener el ID de tu nodo ejecuta [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +109,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+La respuesta contiene el ID de tu Nodo:
 
 ```cpp
 {
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NjQyNzA2NSwtMTEwOTkzMDI3LC0xMj
-M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
-MzM2N119
+eyJoaXN0b3J5IjpbLTE5NTg5ODMwNDksLTExMDk5MzAyNywtMT
+IzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3
+NTMzNjddfQ==
 -->
