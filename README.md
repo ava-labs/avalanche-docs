@@ -52,11 +52,11 @@ Una diferencia clave entre Avalanche y otras redes descentralizadas es el protoc
 
 El token \(AVAX\) Avalanche es el token nativo de la plataforma Avalanche y se utiliza para proteger la red mediante el staking, realizar transacciones entre pares, pagar las comisiones, y proporcionar una unidad básica de cuenta entre las múltiples subredes creadas en la plataforma Avalanche. 1 nAVAX es igual a 0.000000001 AVAX.
 
-## Protocolo de Consenso
+## Protocolo de Consenso de Avalanche
 
-![Consensus Comparison](.gitbook/assets/consensus-comparison.png)
+![Comparación de consenso](.gitbook/assets/consensus-comparison.png)
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
+Los protocolos en la familia Avalanche operan a través de repetidas votaciones sub-muestreadas. Cuando un [validador](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
 
 If a sufficiently large portion \(_alpha_ $$α$$\) of the validators sampled reply that they think the transaction should be accepted, the validator prefers to accept the transaction. That is, when it is queried about the transaction in the future, it will reply that it thinks the transaction should be accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large portion of the validators replies that they think the transaction should be rejected.
 
@@ -109,6 +109,6 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxMDA1ODMyMywtMTgzMzIyNDMzMSw5OD
-gxMDE5NzBdfQ==
+eyJoaXN0b3J5IjpbLTEzMjI3MDI2OTYsLTE4MzMyMjQzMzEsOT
+g4MTAxOTcwXX0=
 -->
