@@ -308,7 +308,7 @@ Si todo va bien, la respuesta debería ser algo como esto:
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR"},"id":1}
 ```
 
-That portion that says, “NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
+Esa parte que dice, “NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
 
 ### Backup your Staking Keys <a id="ef3e"></a>
 
@@ -323,8 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzc3MzI4NzIsODc3NDY0MzkyLDE5MD
-gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
-NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
-==
+eyJoaXN0b3J5IjpbMTk3ODI5MzE4LDg3NzQ2NDM5MiwxOTA4MD
+UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
+LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
 -->
