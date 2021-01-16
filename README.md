@@ -50,7 +50,7 @@ Una diferencia clave entre Avalanche y otras redes descentralizadas es el protoc
 
 ## Token \(AVAX\) Avalanche
 
-El token \(AVAX\) Avalanche es el token nativo de la plataforma Avalanche y se utiliza para proteger la red mestaking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
+El token \(AVAX\) Avalanche es el token nativo de la plataforma Avalanche y se utiliza para proteger la red mediante el staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
 ## Avalanche Consensus Protocol
 
@@ -109,5 +109,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2MTUxODc0NSw5ODgxMDE5NzBdfQ==
+eyJoaXN0b3J5IjpbLTE4MzMyMjQzMzEsOTg4MTAxOTcwXX0=
 -->
