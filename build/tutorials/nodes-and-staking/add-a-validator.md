@@ -267,7 +267,7 @@ Similar a lo anterior, estos son los tiempos de Unix en que el validador comenza
 
 `weight`
 
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus.
+Este es el peso de la muestra del validador para el consenso. Si el peso del validador es 1 y el peso acumulado de todos los validadores en la subnet es 100, entonces este validador se incluirá en aproximadamente 1 de cada 100 muestras durante el consenso.
 
 `changeAddr`
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Mjk4NTcxODcsLTEzNDQzMzA2NDgsMz
-IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
-MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
-wxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMTM1NzI4MjUwNCwtMTgyOTg1NzE4NywtMT
+M0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3
+NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OS
+wxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
