@@ -52,17 +52,17 @@ Después de que la copia de seguridad esté asegurada, puedes empezar a actualiz
 
 ### Nodo ejecutándose desde la terminal
 
-If your node is running in a terminal stop it by pressing `ctrl+c`.
+Si su nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
 
 ### Nodo ejecutándose como un servicio
 
-If your node is running as a service, stop it by entering:
+Si su nodo se ejecuta como un servicio, deténgalo ingresando:
 
 `sudo systemctl stop avalanchego.service`
 
-\(your service may be named differently, `avalanche.service`, or similar\)
+\(su servicio puede ser nombrado de manera diferente, `avalanche.service`, or similar\)
 
-### Node running in background
+### Nodo ejecutándose en segundo plano
 
 If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
 
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3OTE0OTY1Ml19
+eyJoaXN0b3J5IjpbLTE0MjQ3ODg5NDNdfQ==
 -->
