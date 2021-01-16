@@ -120,9 +120,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un llamado API a una cadena que no ha terminado el bootstrapping,  esta retornará `API call rejected because chain is not done bootstrapping`.Si tu nodo nunca termina el bootstrapping, sigue [Estas Preguntas más Frecuentes](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), si sigues experimentando problemas conta [Discord.](https://chat.avalabs.org/)
+Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un llamado API a una cadena que no ha terminado el bootstrapping,  esta retornará `API call rejected because chain is not done bootstrapping`.Si tu nodo nunca termina el bootstrapping, sigue [Estas Preguntas más Frecuentes](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), si sigues experimentando problemas contactanos en [Discord.](https://chat.avalabs.org/)
 
-Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
+Tu nodo está funcionando y conectado ahora. Si quieres usar tu nodo como validador en la red principal, mira [este tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) para saber cómo añadir tu nodo como validador usando la Wallet Web.
 
 You can use `Ctrl + C` to kill the node.
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxNzYyMzYzNywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbMTE5ODcxNjMzMywtMTcyMjYxNjU4OV19
 -->
