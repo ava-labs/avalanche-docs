@@ -54,13 +54,13 @@ Cambie al directorio de AvalancheGo:
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
-Build AvalancheGo:
+Construya en AvalancheGo:
 
 ```cpp
 ./scripts/build.sh
 ```
 
-The binary, named `avalanchego`, is in `avalanchego/build`.
+El Binario, llamado `avalanchego`, is in `avalanchego/build`.
 
 #### **Binary**
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDc3NjA5NTEzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbMTcxMjExODE2MiwtMTcyMjYxNjU4OV19
 -->
