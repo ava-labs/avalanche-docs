@@ -1,8 +1,8 @@
-# Table of contents
+# Tabla de Contenido
 
-* [Developer Documentation](README.md)
+* [Documentación para desarrolladores](README.md)
 
-## Learn
+## Aprende
 
 * [Platform Overview](learn/platform-overview/README.md)
   * [Staking](learn/platform-overview/staking.md)
@@ -82,3 +82,6 @@
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwMDIxMDMzNDZdfQ==
+-->
