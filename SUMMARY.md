@@ -52,11 +52,11 @@
     * [Acuñe NFTs con la Wallet de Avalanche](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
     * [Use Wrapped AVAX \(WAVAX\) en Avalanche ](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
 * [APIs de AvalancheGo ](build/avalanchego-apis/README.md)
-  * [Api ](build/avalanchego-apis/issuing-api-calls.md)
+  * [API Calls Emitidas](build/avalanchego-apis/issuing-api-calls.md)
   * [API de la Cadena de Plataforma \(P-Chain\) ](build/avalanchego-apis/platform-chain-p-chain-api.md)
   * [API de la Cadena de contratos \(C-Chain\)](build/avalanchego-apis/contract-chain-c-chain-api.md)
   * [API de la Cadena de intercambio \(X-Chain\)](build/avalanchego-apis/exchange-chain-x-chain-api.md)
-  * [Deprecated API Calls](build/avalanchego-apis/deprecated-api-calls.md)
+  * [ API Calls Obsoletas ](build/avalanchego-apis/deprecated-api-calls.md)
   * [Admin API](build/avalanchego-apis/admin-api.md)
   * [Auth API](build/avalanchego-apis/auth-api.md)
   * [Health API](build/avalanchego-apis/health-api.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMDYzMDQ3OCwtMzQyNDMzOTIyLC0zNT
-E1OTM4OSwzNTg4NzIwMjldfQ==
+eyJoaXN0b3J5IjpbNzUwMTI1ODgyLC0zNDI0MzM5MjIsLTM1MT
+U5Mzg5LDM1ODg3MjAyOV19
 -->
