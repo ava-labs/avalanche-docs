@@ -62,11 +62,11 @@ Ejecutando [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalan
 
 ![getPendingValidators postman](../../../.gitbook/assets/getPendingValidators-postman.png)
 
-Go back to the `Earn` tab, and click `Estimated Rewards`.
+Retrocedemos a la pestaña `Earn` y hacemos click en  `Estimated Rewards`.
 
 ![Earn, validate, delegate](../../../.gitbook/assets/earn-validate-delegate.png)
 
-Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+Una vez que la hora de inicio de nuestro validador haya pasado, veremos las recompensas que podemos ganar, así como su hora de inicio, su hora de fin y el porcentaje de su período de validación que ha pasado.
 
 ![Estimated rewards](../../../.gitbook/assets/estimated-rewards.png)
 
@@ -366,6 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMT
-A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbMTA3NTUxMDA4MywtMTEwOTkzMDI3LC0xMj
+M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
+MzM2N119
 -->
