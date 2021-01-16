@@ -43,7 +43,7 @@
     * [Actualice su nodo AvalancheGo](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-    * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
+    * [Usando Truffle con la  C-Chain de Avalanche](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3MzY2NDYxNSwtMzQyNDMzOTIyLC0zNT
-E1OTM4OSwzNTg4NzIwMjldfQ==
+eyJoaXN0b3J5IjpbLTE4NDQ5MDcwMjAsLTM0MjQzMzkyMiwtMz
+UxNTkzODksMzU4ODcyMDI5XX0=
 -->
