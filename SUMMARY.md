@@ -57,11 +57,11 @@
   * [API de la Cadena de contratos \(C-Chain\)](build/avalanchego-apis/contract-chain-c-chain-api.md)
   * [API de la Cadena de intercambio \(X-Chain\)](build/avalanchego-apis/exchange-chain-x-chain-api.md)
   * [ API Calls Obsoletas ](build/avalanchego-apis/deprecated-api-calls.md)
-  * [Admin API](build/avalanchego-apis/admin-api.md)
-  * [Auth API](build/avalanchego-apis/auth-api.md)
-  * [Health API](build/avalanchego-apis/health-api.md)
-  * [Info API](build/avalanchego-apis/info-api.md)
-  * [IPC API](build/avalanchego-apis/ipc-api.md)
+  * [ API de Administración](build/avalanchego-apis/admin-api.md)
+  * [ API de Autenticación](build/avalanchego-apis/auth-api.md)
+  * [API de Salud](build/avalanchego-apis/health-api.md)
+  * [API de Información](build/avalanchego-apis/info-api.md)
+  * [API de IPC](build/avalanchego-apis/ipc-api.md)
   * [Keystore API](build/avalanchego-apis/keystore-api.md)
   * [Metrics API](build/avalanchego-apis/metrics-api.md)
 * [Tools](build/tools/README.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzUwMTI1ODgyLC0zNDI0MzM5MjIsLTM1MT
-U5Mzg5LDM1ODg3MjAyOV19
+eyJoaXN0b3J5IjpbMTQwODIxMTAyMiw3NTAxMjU4ODIsLTM0Mj
+QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
 -->
