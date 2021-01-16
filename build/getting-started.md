@@ -32,11 +32,11 @@ El nodo es un programa binario. Puedes descargar el código fuente y luego const
 
 Descargando el [binario pre-construid](getting-started.md#binary) es más fácil y recomendable si sólo buscas dirigir tu propio nodo y hacer staking en él.
 
-Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
+Se recomienda construir el nodo desde el código fuente si eres un desarrollador que busca experimentar y construir en Avalanche.
 
 #### **Source Code**
 
-If you want to build the node from source, you're first going to need to install Go 1.15.5 or later. Follow the instructions [here](https://golang.org/doc/install).
+Si quieres construir el nodo desde el código fuente, primero tendrás que instalar Go 1.15.5 o posterior. Sigue las instrucciones  [aquí.](https://golang.org/doc/install).
 
 Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1MDc5NzMzMiwtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE2MTQ1MjgyNTMsLTE3MjI2MTY1ODldfQ
+==
 -->
