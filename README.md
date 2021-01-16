@@ -94,7 +94,7 @@ Crea fácilmente cadenas de bloques personalizadas y aplicaciones descentralizad
 
 ### Sostenibilidad
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
+Utiliza el algoritmo de consenso de eficiencia energética  rather than proof-of-work.
 
 ### Smart Contract Support
 
@@ -109,7 +109,7 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5Njk2ODUyOCwtNjQ1MzEwNDIxLDk5NT
-g0MDkzOCwxNTY0OTQ0MzQxLC0xODMzMjI0MzMxLDk4ODEwMTk3
-MF19
+eyJoaXN0b3J5IjpbLTUyNTcwODMxOSwxMjk2OTY4NTI4LC02ND
+UzMTA0MjEsOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQz
+MzEsOTg4MTAxOTcwXX0=
 -->
