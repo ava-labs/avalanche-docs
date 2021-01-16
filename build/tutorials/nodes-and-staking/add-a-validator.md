@@ -32,7 +32,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+La respuesta contiene la ID de tu Nodo:
 
 ```cpp
 {
@@ -44,7 +44,7 @@ The response has your node’s ID:
 }
 ```
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
+Abre [la wallet](https://wallet.avax.network/), Y ve a la pestaña `Earn` . Elige`Add Validator`.
 
 ![Web wallet earn tab](../../../.gitbook/assets/web-wallet-earn-tab.png)
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMTQxMDg3MSwtMTIzNzM1MzkyOCwtMT
-A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTEwNzc4NDY4NDgsLTEyMzczNTM5MjgsLT
+EwNTU5ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
 -->
