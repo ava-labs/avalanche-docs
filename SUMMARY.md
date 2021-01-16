@@ -23,12 +23,12 @@
 * [Tutoriales](build/tutorials/README.md)
   * [Plataforma](build/tutorials/platform/README.md)
     * [Crear una Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
-    * [Crear una Red Local de pruebas](build/tutorials/platform/create-a-local-test-network.md)
-    * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
-    * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
-    * [Set up Your Ledger Nano S with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
+    * [Crear una Red Local de Pruebas](build/tutorials/platform/create-a-local-test-network.md)
+    * [Crear una subred](build/tutorials/platform/create-a-subnet.md)
+    * [Crear una máquina virtual \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
+    * [Configura tu Ledger Nano S con Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
-    * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
+    * [Transferir AVAX entre la X-Chain y la C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NTY3NjI0NSwzNTg4NzIwMjldfQ==
+eyJoaXN0b3J5IjpbLTEyMDY4OTgyMTksMzU4ODcyMDI5XX0=
 -->
