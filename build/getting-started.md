@@ -38,15 +38,15 @@ Se recomienda construir el nodo desde el código fuente si eres un desarrollador
 
 Si quieres construir el nodo desde el código fuente, primero tendrás que instalar Go 1.15.5 o posterior. Sigue las instrucciones  [aquí.](https://golang.org/doc/install).
 
-Ejecuta `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Ejecuta `go version`. **It should be 1.15.5 or above.** Ejecuta `echo $GOPATH`. **No debe estar vacía.**
 
-Download the AvalancheGo repository:
+Descarga el repositorio de AvalancheGo:
 
 ```cpp
 go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
-Note to advanced users: AvalancheGo uses Go modules, so you can clone the [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
+Nota para usuarios avanzados: AvalancheGo utiliza módulos Go, por lo que puede clonar el [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
 
 Change to the `avalanchego` directory:
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzc4NzIzNDUzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbOTE0NjIwOTU4LC0xNzIyNjE2NTg5XX0=
 -->
