@@ -28,11 +28,11 @@ Primero necesitarás una cuenta de Microsoft, si no tienes una ya verás una opc
 
 ![Image for post](https://miro.medium.com/max/1135/1*tr3rEcrvI4rEpC7KPYqg6g.png)
 
-Once two factor has been configured log into the Azure portal by going to [https://portal.azure.com](https://portal.azure.com/) and signing in with your Microsoft account. When you login you won’t have a subscription, so we need to create one first. Select “Subscriptions” as highlighted below:
+Una vez que la verificación de dos pasos ha sido configurada, entra en el portal de Azure yendo a [https://portal.azure.com](https://portal.azure.com/) e iniciando sesión con tu cuenta de Microsoft. Cuando inicies sesión no tendrás una suscripción, así que primero tenemos que crear una. Selecciona "Suscripciones" como se indica a continuación:
 
 ![Image for post](https://miro.medium.com/max/648/1*5Jp8oXzczaEND-z9_QZaQA.png)
 
-Then select “+ Add” to add a new subscription
+Luego seleccione "+ Agregar" para agregar una nueva suscripción.
 
 ![Image for post](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzg4OTY1OTk0LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
 -->
