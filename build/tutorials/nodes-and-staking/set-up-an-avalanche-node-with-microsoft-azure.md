@@ -179,17 +179,17 @@ Seleccione "Size + performance" a la izquierda en la configuración y cambie el 
 
 ![Image for post](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
 
-Doing this now will also extend the partition automatically within ubuntu. To go back to the virtual machine overview page, select Avalanche in the navigation setting.
+Hacer esto ahora también extenderá la partición automáticamente dentro de ubuntu. Para volver a la página de visión general de la máquina virtual, selecciona Avalanche en la configuración de navegación.
 
 ![Image for post](https://miro.medium.com/max/946/1*RGlKMhmlZ1__6u3RjFSDMA.png)
 
-Then start the VM
+Entonces inicia la VM
 
 ![Image for post](https://miro.medium.com/max/929/1*vgVR-3sRejyBcXrMn65v5g.png)
 
-## Connect to the Avalanche Node <a id="8bb7"></a>
+## Conectar al Nodo de Avalanche <a id="8bb7"></a>
 
-The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
+Las siguientes instrucciones muestran cómo conectarse a la Máquina Virtual desde una máquina de Windows 10. Para las instrucciones sobre cómo conectarse desde una máquina ubuntu ver el [Tutorial en AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
 On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select “Advanced” at the bottom
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3NDM4OTI0NCw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTIxNDE2NTQ3LDg3NzQ2NDM5MiwxOTA4MD
+UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
+LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
 -->
