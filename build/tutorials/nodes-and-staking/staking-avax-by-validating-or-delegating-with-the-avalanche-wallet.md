@@ -77,17 +77,17 @@ Selecciona un validador con el que quieras delegar tus tokens de la lista de val
 
 ![Image for post](https://miro.medium.com/max/1600/0*uNnT2PtjCslRKFbF)
 
-Specify your staking period and stake amount. Pay attention to the end time of the selected validator. Your delegation period cannot be set to end past the end date that the validator has set.
+Especifique el período de stake y la cantidad. Preste atención a la hora de finalización del validador seleccionado. Su período de delegación no puede ser configurado para que termine después de la fecha de finalización que el validador ha establecido.
 
 ![Image for post](https://miro.medium.com/max/1600/0*M_6_7L9jtYuPTp-A)
 
-Confirm the details!
+Confirma los detalles!
 
 ![Image for post](https://miro.medium.com/max/1600/0*Silj8-uZTm5g9xSi)
 
-Congratulations. You are now delegating the Avalanche Primary Network!
+Felicitaciones. ¡Ahora estás delegando en  la Red Primaria de Avalanche!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTU3OTMwNzksNTE5NDc5MjY3LC02Nj
+eyJoaXN0b3J5IjpbLTE4MzAzNTMxOTksNTE5NDc5MjY3LC02Nj
 Y5NzA1NzFdfQ==
 -->
