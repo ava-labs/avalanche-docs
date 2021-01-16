@@ -23,15 +23,15 @@ Puedes acceder a tu billetera usando tu key phrase, el archivo keystore, o tu Le
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
-Enter the amount you wish to transfer to your P-Chain and complete the transfer by clicking the “Transfer” button below.
+Ingrese el monto que desea transferir a su P-Chain y complete la transferencia haciendo clic en el botón "Transfer" abajo.
 
 ![Image for post](https://miro.medium.com/max/1488/0*aremeYNYtKP5nGPx)
 
-Voila!
+Voilá!
 
 ![Image for post](https://miro.medium.com/max/1512/0*XP8f8CISy-LJ_Lc3)
 
-Now, we have our funds ready for staking on the P-Chain. Next, you can add a validator or a delegator to your wallet.
+Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puede añadir un validador o un delegador a su wallet.
 
 ### **Step 3A: Become a validator!** <a id="60f0"></a>
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTI3MDk0M119
+eyJoaXN0b3J5IjpbLTg1OTcxMjg5MF19
 -->
