@@ -133,9 +133,9 @@ Para poder hacer llamados a la API de su nodo desde otras máquinas, al iniciar 
 Para conectarse a la Fuji Testnet en lugar de la red principal, use el argumento `--network-id=fuji`. 
 Puedes conseguir fondos en el Testnet desde el [faucet.](https://faucet.avax-test.network/)
 
-### Create a Keystore User
+### Crear un Usuario del Keystore 
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
+Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
 
 ```cpp
 curl -X POST --data '{
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTA5NDQyOSwtMTkyODQzNTM4MywtMT
+eyJoaXN0b3J5IjpbMTY1NDk5MzgxNywtMTkyODQzNTM4MywtMT
 cyMjYxNjU4OV19
 -->
