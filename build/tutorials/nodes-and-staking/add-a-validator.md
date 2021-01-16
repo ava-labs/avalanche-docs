@@ -121,9 +121,9 @@ La respuesta contiene el ID de tu Nodo:
 }
 ```
 
-`startTime` and `endTime`
+`startTime` & `endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+Cuando se emite una transacción para unirse a la Red Principal, se especifica la hora en la que entrarán \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 `stakeAmount`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTg5ODMwNDksLTExMDk5MzAyNywtMT
-IzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3
-NTMzNjddfQ==
+eyJoaXN0b3J5IjpbMTA1Mjc5MDU3MSwtMTEwOTkzMDI3LC0xMj
+M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
+MzM2N119
 -->
