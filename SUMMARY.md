@@ -51,7 +51,7 @@
     * [Crear un NFT \(Parte 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
     * [Acuñe NFTs con la Wallet de Avalanche](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
     * [Use Wrapped AVAX \(WAVAX\) en Avalanche ](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
-* [AvalancheGo APIs](build/avalanchego-apis/README.md)
+* [APIs de AvalancheGo ](build/avalanchego-apis/README.md)
   * [Issuing API Calls](build/avalanchego-apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/avalanchego-apis/platform-chain-p-chain-api.md)
   * [Contract Chain \(C-Chain\) API](build/avalanchego-apis/contract-chain-c-chain-api.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjM3MjA3NzksLTM0MjQzMzkyMiwtMz
-UxNTkzODksMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbMTYyOTI1OTE5MCwtMzQyNDMzOTIyLC0zNT
+E1OTM4OSwzNTg4NzIwMjldfQ==
 -->
