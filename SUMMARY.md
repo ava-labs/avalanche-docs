@@ -31,10 +31,10 @@
     * [Transferir AVAX entre la X-Chain y la C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodos y Staking](build/tutorials/nodes-and-staking/README.md)
     * [Añadir un validador](build/tutorials/nodes-and-staking/add-a-validator.md)
-    * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
-    * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
-    * [Run an Avalanche Node with Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
-    * [Run an Avalanche Node and Stake with the Avalanche Wallet](https://youtu.be/ZyQPeSSCbYU)
+    * [Ejecute un Nodo de Avalanche y conviértete en un Validador](https://youtu.be/ZyQPeSSCbYU)
+    * [Ejecute un Nodo de Avalanche con Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
+    * [Ejecute un Nodo de Avalanche con Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
+    * [Ejecuta un Nodo de Avalanche y  Stake con la Wallet de Avalanche](https://youtu.be/ZyQPeSSCbYU)
     * [Run an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
     * [Run an Avalanche Node with Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
     * [Run an Avalanche Node on Linux using Install Script](build/tutorials/nodes-and-staking/set-up-node-with-installer.md)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODEwOTM4NzYsMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbMTc2ODgyMjE2OSwzNTg4NzIwMjldfQ==
 -->
