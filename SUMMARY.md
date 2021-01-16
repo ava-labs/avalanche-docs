@@ -13,7 +13,7 @@
 * [Foro](https://forum.avax.network)
 * [Comunidad](learn/community.md)
 
-## Desarrolla
+## Construye
 
 * [Empezando: Ejecutar un Nodo de Avalanche](build/getting-started.md)
 * [Notas de lanzamiento](build/release-notes-1/README.md)
@@ -39,7 +39,7 @@
     * [Ejecute un Nodo de Avalanche con Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
     * [Ejecute un Nodo de Avalanche en Linux usando el Script de Instalación](build/tutorials/nodes-and-staking/set-up-node-with-installer.md)
     * [Ejecutar una monitorización de nodos de Avalanche](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
-    * [Stake AVAX, por Validar o Delegar, con la Wallet de AVAX ](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
+    * [AVAX Stake, por Validar o Delegar, con la Wallet de AVAX ](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
     * [Actualice su nodo AvalancheGo](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM0MjQzMzkyMiwtMzUxNTkzODksMzU4OD
-cyMDI5XX0=
+eyJoaXN0b3J5IjpbMjA3MzY2NDYxNSwtMzQyNDMzOTIyLC0zNT
+E1OTM4OSwzNTg4NzIwMjldfQ==
 -->
