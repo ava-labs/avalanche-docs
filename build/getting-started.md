@@ -162,7 +162,7 @@ La respuesta debería ser:
 Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que usted crea en el Keystore de un nodo no existen en otros nodos pero usted puede importar/exportar usuarios a/desde el Keystore. Mira [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
 
 {% hint style="danger" %}
-**You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
+**Sólo debes mantener una pequeña cantidad de tus fondos en tu nodo.** La mayoría de sus fondos deberían estar asegurados por un nemónico que no se guarde en ningún ordenador.
 {% endhint %}
 
 ### Create an Address
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjAzMTU5NjMsLTE5Mjg0MzUzODMsLTE3Mj
-I2MTY1ODldfQ==
+eyJoaXN0b3J5IjpbLTE4MDYzNDI2MzUsLTE5Mjg0MzUzODMsLT
+E3MjI2MTY1ODldfQ==
 -->
