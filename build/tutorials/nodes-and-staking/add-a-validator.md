@@ -70,11 +70,11 @@ Una vez que la hora de inicio de nuestro validador haya pasado, veremos las reco
 
 ![Estimated rewards](../../../.gitbook/assets/estimated-rewards.png)
 
-That’s it!
+Eso es todo!
 
-## Add a validator with API calls
+## Añadir un validador con llamados a la API
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+También podemos añadir un nodo al conjunto de validadores haciendo llamados API a nuestro nodo. Para añadir un nodo a la Red Principal, ejecutaremos [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
 
 This method’s signature is:
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3NTUxMDA4MywtMTEwOTkzMDI3LC0xMj
+eyJoaXN0b3J5IjpbMTM1NjQyNzA2NSwtMTEwOTkzMDI3LC0xMj
 M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
 MzM2N119
 -->
