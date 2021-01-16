@@ -103,7 +103,7 @@ Si estás usando los binarios pre-construidos en Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Cuando el nodo comienza, tiene que arrancar \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
+Cuando el nodo comienza, tiene que arrancar \(actualizarse con el resto de la red\). Verás registros sobre el bootstrapping. Cuando una cadena dada termina de hacer el bootstrapping, imprimirá un registro como este:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTIzNjE2OTg3LC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTE4ODcwNDk1NjksLTE3MjI2MTY1ODldfQ
+==
 -->
