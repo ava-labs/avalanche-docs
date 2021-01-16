@@ -1,10 +1,10 @@
 # Admin API
 
-Esta API puede usarse para medir la salud del nodo y depurar errores. Notar que la API Admin está deshabilitada por defecto por razones de seguridad. Pata correr un nodo con la API Admin habilitada, usaThis API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+Esta API puede usarse para medir la salud del nodo y depurar errores. Notar que la API Admin está deshabilitada por defecto por razones de seguridad. Pata correr un nodo con la API Admin habilitada, utiliza el [argumento de línea de comandos](../references/command-line-interface.md) `--api-admin-enabled=true`.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format.
+Esta API utiliza el formatoThis API uses the `json 2.0` RPC format.
 
 {% page-ref page="issuing-api-calls.md" %}
 
@@ -236,5 +236,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyOTQ1MTc4MF19
+eyJoaXN0b3J5IjpbMjA5OTkxNzM5M119
 -->
