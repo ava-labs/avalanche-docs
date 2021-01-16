@@ -62,8 +62,8 @@
   * [API de Salud](build/avalanchego-apis/health-api.md)
   * [API de Información](build/avalanchego-apis/info-api.md)
   * [API de IPC](build/avalanchego-apis/ipc-api.md)
-  * [Keystore API](build/avalanchego-apis/keystore-api.md)
-  * [Metrics API](build/avalanchego-apis/metrics-api.md)
+  * [API de Keystore](build/avalanchego-apis/keystore-api.md)
+  * [API Métrica ](build/avalanchego-apis/metrics-api.md)
 * [Tools](build/tools/README.md)
   * [AvalancheJS](build/tools/avalanchejs/README.md)
     * [Create an Asset on the X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwODIxMTAyMiw3NTAxMjU4ODIsLTM0Mj
-QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbLTE2MTMwOTM3NzUsNzUwMTI1ODgyLC0zND
+I0MzM5MjIsLTM1MTU5Mzg5LDM1ODg3MjAyOV19
 -->
