@@ -9,7 +9,7 @@
   * [Comisiones de transacción](learn/platform-overview/transaction-fees.md)
   * [¿Por qué Avalanche? Parte. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Conceptos básicos de Blockchain](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
-* [Preguntras frecuentes](https://support.avalabs.org/en/collections/2618154-developer-faq)
+* [Preguntas frecuentes](https://support.avalabs.org/en/collections/2618154-developer-faq)
 * [Foro](https://forum.avax.network)
 * [Comunidad](learn/community.md)
 
@@ -24,13 +24,13 @@
   * [Plataforma](build/tutorials/platform/README.md)
     * [Crear una Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
     * [Crear una Red Local de Pruebas](build/tutorials/platform/create-a-local-test-network.md)
-    * [Crear una subred](build/tutorials/platform/create-a-subnet.md)
-    * [Crear una máquina virtual \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
+    * [Crear una Subred](build/tutorials/platform/create-a-subnet.md)
+    * [Crear una Máquina Virtual \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Configura tu Ledger Nano S con Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transferir AVAX entre la X-Chain y la P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
     * [Transferir AVAX entre la X-Chain y la C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodos y Staking](build/tutorials/nodes-and-staking/README.md)
-    * [Añadir un validador](build/tutorials/nodes-and-staking/add-a-validator.md)
+    * [Añadir un Validador](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [Ejecute un Nodo de Avalanche y conviértete en un Validador](https://youtu.be/ZyQPeSSCbYU)
     * [Ejecute un Nodo de Avalanche con Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
     * [Ejecute un Nodo de Avalanche con Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0MjI2NDQzOCw3NTAxMjU4ODIsLTM0Mj
+eyJoaXN0b3J5IjpbMTMxMzAzMzY3MCw3NTAxMjU4ODIsLTM0Mj
 QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
 -->
