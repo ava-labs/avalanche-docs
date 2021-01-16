@@ -137,7 +137,7 @@ El stake de un validador nunca es reducido, sin importar su comportamiento; siem
 
 `changeAddr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Cualquier cambio que resulte de esta transacción se enviará a esta dirección. Puedes dejar este campo vacío; si lo haces, el cambio será enviado a una de las direcciones que tu usuario controle.
 
 `delegationFeeRate`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMD
-k5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4
-NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbMzg1NjgyOTg5LDE0MzQ4MTM4ODUsOTQ2OT
+Y5NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkz
+NjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
 -->
