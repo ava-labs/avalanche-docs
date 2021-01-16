@@ -91,13 +91,14 @@ A continuación puede ver el historial de precios de la VM en los últimos 3 mes
 
 ### Más Barato que Amazon AWS <a id="45e9"></a>
 
-As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
 
-The next step is to change the username for the VM, to align with other Avalanche tutorials change the username to ubuntu. Otherwise you will need to change several commands later in this article and swap out ubuntu with your new username.
+En comparación, una instancia c5. grande cuesta $0.085 USD por hora en AWS. Esto suma ~$745 USD por año. Las Spot instances pueden ahorrar un 62%, lo que hace que el total baje a 462 dólares.
+
+El siguiente paso es cambiar el nombre de usuario para la VM, para alinearse con otros tutoriales de Avalanche cambie el nombre de usuario a ubuntu. De lo contrario, tendrás que cambiar varios comandos más adelante en este artículo y cambiar ubuntu con tu nuevo nombre de usuario.
 
 ![Image for post](https://miro.medium.com/max/780/1*CNmFTz056EUmahfi5zG3JQ.png)
 
-### Disks <a id="ed2e"></a>
+### Discos <a id="ed2e"></a>
 
 Select Next: Disks to then configure the disks for the instance. There are 2 choices for disks, either Premium SSD which offer greater performance with a 64 GB disk costs around $10 a month, or there is the standard SSD which offers lower performance and is around $5 a month. You also have to pay $0.002 per 10,000 transaction units \(reads / writes and deletes\) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
 
@@ -323,7 +324,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjk3NjMxMzMsLTg1MzY2NjMwNywtMT
-I0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3
-ODY5NF19
+eyJoaXN0b3J5IjpbNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyND
+c2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2
+OTRdfQ==
 -->
