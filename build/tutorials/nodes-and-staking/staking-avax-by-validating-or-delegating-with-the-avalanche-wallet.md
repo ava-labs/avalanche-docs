@@ -55,7 +55,7 @@ Dejaremos que nuestro nodo arranque y se sincronice con el resto de la red, y es
 
 Necesitaremos la ID de nuestro Nodo. Encontraremos eso usando el [API de Información](../../avalanchego-apis/info-api.md)!
 
-If you need any help setting up your node, join us on [Discord](https://chat.avax.network/).
+Si necesitas ayuda para configurar tu nodo, únete a nosotros en Discord](https://chat.avax.network/).
 
 ![Image for post](https://miro.medium.com/max/1600/0*6hZSaT651Dd7R4bL)
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1NTk5MzE0OCwtNjY2OTcwNTcxXX0=
+eyJoaXN0b3J5IjpbMTIzNjI1OTE0NCwtNjY2OTcwNTcxXX0=
 -->
