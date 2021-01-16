@@ -143,9 +143,9 @@ Cualquier cambio que resulte de esta transacción se enviará a esta dirección.
 
 Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de comisión que este validador cobra cuando otros delegan el Stake. Por ejemplo, si `delegationFeeRate` es `1.2345` y alguien delega en este validador, entonces cuando el periodo de delegación termina, el 1.2345% de la recompensa va al validador y el resto al delegador.
 
-`username` and `password`
+`username` & `password`
 
-These parameters are the username and password of the user that pays the transaction fee, provides the staked AVAX, and to whom the staked AVAX will be returned.
+stos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción, proporciona los AVAX en Stake y a quien se les devolverá la AVAX apostada.
 
 Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzMDg2MDI3OSwzMjEyMzI1NzMsMTQzND
+eyJoaXN0b3J5IjpbMTMyNDA5MDQ3NSwzMjEyMzI1NzMsMTQzND
 gxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAyNywtMTIzNzM1Mzky
 OCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ
 ==
