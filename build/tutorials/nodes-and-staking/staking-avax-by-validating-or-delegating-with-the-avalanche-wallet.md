@@ -67,13 +67,13 @@ Revisa cuidadosamente los detalles, y haz clic en "Confirmar" de nuevo!
 
 ![Image for post](https://miro.medium.com/max/1600/0*f3GlN03He6TFkOV7)
 
-Felicitaciones. ¡Ahora estás validando la Red Primaria de Avalanche!
+Felicitaciones. ¡Ahora estás validando en la Red Primaria de Avalanche!
 
-### **Step 3B: Add a Delegator!** <a id="59bd"></a>
+### **Paso 3B: ¡Añade un delegador!** <a id="59bd"></a>
 
 ![Image for post](https://miro.medium.com/max/1600/0*f-wXi2SiSm4eBmHt)
 
-Select a validator you want to delegate your tokens with from the list of active network validators.
+Selecciona un validador con el que quieras delegar tus tokens de la lista de validadores de red activos.
 
 ![Image for post](https://miro.medium.com/max/1600/0*uNnT2PtjCslRKFbF)
 
@@ -88,5 +88,6 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTE5NDc5MjY3LC02NjY5NzA1NzFdfQ==
+eyJoaXN0b3J5IjpbLTIxMTU3OTMwNzksNTE5NDc5MjY3LC02Nj
+Y5NzA1NzFdfQ==
 -->
