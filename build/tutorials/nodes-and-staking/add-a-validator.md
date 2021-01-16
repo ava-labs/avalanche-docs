@@ -141,7 +141,7 @@ Cualquier cambio que resulte de esta transacción se enviará a esta dirección.
 
 `delegationFeeRate`
 
-Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de comisión que este validador cobra cuando otros delegan el Stake. FPor ejemplo, si `delegationFeeRate` es `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
+Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de comisión que este validador cobra cuando otros delegan el Stake. Por ejemplo, si `delegationFeeRate` es `1.2345` y alguien delega en este validador, entonces cuando el periodo de delegación termina, el 1.2345% de la recompensa va al validador y el resto al delegador.
 
 `username` and `password`
 
@@ -366,7 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzIxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OT
-Y5NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkz
-NjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbLTQzMDg2MDI3OSwzMjEyMzI1NzMsMTQzND
+gxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAyNywtMTIzNzM1Mzky
+OCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ
+==
 -->
