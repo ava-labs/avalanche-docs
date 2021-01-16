@@ -237,11 +237,11 @@ Ahora deberías estar conectado a tu Nodo.
 
 ![Image for post](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
 
-La siguiente sección está tomada del excelente tutorial de Collin para [configuring an Avalanche Node on Amazon’s AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
+La siguiente sección está tomada del excelente tutorial de Collin para [configurar un Nodo de Avalanche en Amazon AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
-### Update Linux with security patches <a id="8a1c"></a>
+### Actualiza Linux con parches de seguridad <a id="8a1c"></a>
 
-Now that we are on our node, it’s a good idea to update it to the latest packages. To do this, run the following commands, one-at-a-time, in order:
+Ahora que estamos en nuestro nodo, es una buena idea actualizarlo con los últimos paquetes. Para ello, ejecute los siguientes comandos, uno a uno, en orden:
 
 ```text
 sudo apt update
@@ -251,7 +251,7 @@ sudo reboot
 
 ![Image for post](https://miro.medium.com/max/793/1*_2UmPN6vabjGe6aihX9KqA.png)
 
-This will make our instance up to date with the latest security patches for our operating system. This will also reboot the node. We’ll give the node a minute or two to boot back up, then log in again, same as before.
+Esto hará que nuestra instancia esté al día con los últimos parches de seguridad para nuestro sistema operativo. Esto también reiniciará el nodo. Le daremos al nodo un minuto o dos para que se reinicie, y luego se conectará de nuevo, igual que antes.
 
 ### Set up the Avalanche Node <a id="5688"></a>
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2ODQzNzE1MSw4Nzc0NjQzOTIsMTkwOD
+eyJoaXN0b3J5IjpbLTI4NTMxODYzOSw4Nzc0NjQzOTIsMTkwOD
 A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
 OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
