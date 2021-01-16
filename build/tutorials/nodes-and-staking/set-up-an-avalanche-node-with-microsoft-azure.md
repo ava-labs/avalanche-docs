@@ -146,7 +146,7 @@ El grupo de seguridad de la red debe tener el siguiente aspecto \(aunque su dire
 
 ![Image for post](https://miro.medium.com/max/363/1*7rAR3C_UrX94iXxL4sdV9g.png)
 
-Leave the other settings as default and then press “Review + create” to create the Virtual machine.
+Deje los otros ajustes como predeterminados y luego presione "Review + create" para crear la máquina virtual.
 
 ![Image for post](https://miro.medium.com/max/828/1*01yGser7qYjiXDngemqClQ.png)
 
@@ -324,8 +324,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNzM4NDQ1OTAsODc3NDY0MzkyLDE5MD
-gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
-NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
-==
+eyJoaXN0b3J5IjpbLTU0ODU5OTAwNyw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
