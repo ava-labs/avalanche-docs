@@ -100,9 +100,10 @@ El siguiente paso es cambiar el nombre de usuario para la VM, para alinearse con
 
 ### Discos <a id="ed2e"></a>
 
-Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: la SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o la SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
+Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: la SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o la SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) 
+con el SSD estándar, mientras que con los SSD premium todo está incluido. Personalmente, elegí la SSD Premium por su mayor rendimiento, pero también porque es probable que los discos se utilicen mucho y por lo tanto pueden resultar más baratos a largo plazo.
 
-Select Next: Networking to move onto the network configuration
+Selecciona Siguiente: Red para pasar a la configuración de red
 
 ![Image for post](https://miro.medium.com/max/763/1*Oqv9nA8KoSIyq95DuPDN4g.png)
 
@@ -324,7 +325,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTc3MjEyMjQsNTM4MzYzNDY0LC04NT
-M2NjYzMDcsLTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUw
-MTkzNywyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTA1MTgxMzY0OCw1MzgzNjM0NjQsLTg1Mz
+Y2NjMwNywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAx
+OTM3LDIyMjE3ODY5NF19
 -->
