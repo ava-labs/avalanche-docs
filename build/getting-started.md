@@ -85,25 +85,25 @@ La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarioss.
 
 ### Inicie un Nodo, y Conéctese a Avalanche
 
-If you built from source:
+Si construyes desde el código fuente:
 
 ```cpp
 ./build/avalanchego
 ```
 
-If you are using the pre-built binaries on MacOS:
+Si estás usando los binarios pre-construidos en MacOS:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Si estás usando los binarios pre-construidos en Linux:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
+Cuando el nodo comienza, tiene que arrancar \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
@@ -361,6 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTQ1NzIzMjQsLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbOTIzNjE2OTg3LC0xNzIyNjE2NTg5XX0=
 -->
