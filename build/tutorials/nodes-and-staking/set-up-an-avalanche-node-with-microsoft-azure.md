@@ -127,7 +127,7 @@ Por motivos de seguridad, desea restringir quién puede conectarse remotamente a
 
 Es probable que se le haya asignado una IP pública dinámica para su casa, a menos que usted lo haya solicitado específicamente, y por lo tanto su IP pública asignada puede cambiar en el futuro. Sin embargo, se recomienda restringir el acceso a su IP actual, y luego, en caso de que la IP de su casa cambie y ya no pueda conectarse remotamente a la máquina virtual, puede actualizar las reglas de seguridad de la red con su nueva IP pública para poder conectarse nuevamente.
 
-NOTA: Si necesita cambiar las reglas del grupo de seguridad de la red después del despliegue si la IP de su casa ha cambiado, busque "avalanche-nsg" y puede modificar la regla para SSH y el Puerto 9650 con la nueva IP. **El puerto 9651 debe permanecer abierto a todo el mundo** ya que así es como se comunica con otros nodos de Avalanche.
+NOTA: Si necesita cambiar las reglas del grupo de seguridad de la red después del despliegue, si la IP de su casa ha cambiado, busque "avalanche-nsg" y puede modificar la regla para SSH y el Puerto 9650 con la nueva IP. **El puerto 9651 debe permanecer abierto a todo el mundo** ya que así es como se comunica con otros nodos de Avalanche.
 
 ![Image for post](https://miro.medium.com/max/481/1*fR6SrKhTSTQ4cS3PoFrQfQ.png)
 
@@ -161,7 +161,7 @@ Una vez que su instalación haya terminado, seleccione "Go to resource"
 
 ![Image for post](https://miro.medium.com/max/608/1*dXl1RkH6xZvHkdI1d-XsOQ.png)
 
-## Change the Provisioned Disk Size <a id="00dc"></a>
+## Cambiar el Tamaño del Disco Provisto <a id="00dc"></a>
 
 By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD, whilst this should be sufficient, I personally didn’t want the hassle of potentially needing to extend this later into the staking period. I have included the steps below if you want to increase it to 64 GB or if you ever need to increase it at a later date.
 
@@ -323,7 +323,8 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODY0MDIyMzY5LDg3NzQ2NDM5MiwxOTA4MD
-UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
-LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbLTE3MzM4MTMyMTIsODc3NDY0MzkyLDE5MD
+gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
+NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
+==
 -->
