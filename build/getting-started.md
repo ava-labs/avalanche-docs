@@ -207,9 +207,9 @@ Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl
 _**Nota: las instrucciones de abajo mueven fondos reales.**_
 {% endhint %}
 
-Let’s move funds from the Avalanche Wallet to your node.
+Vamos a mover fondos desde la Wallet de Avalanche a su nodo.
 
-Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, then `Mnemonic Key Phrase`. Enter your mnemonic phrase.
+Vamos a la [Wallet de Avalanche ](https://wallet.avax.network). Click en `Access Wallet`, ahora`Mnemonic Key Phrase`. Enter your mnemonic phrase.
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjYzMjU1MTYsLTIwNjc3ODQyNTAsLT
-E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
+eyJoaXN0b3J5IjpbLTQ2MzYwMzA5LC0yMDY3Nzg0MjUwLC0xOT
+I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
