@@ -124,7 +124,7 @@ Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un
 
 Tu nodo está funcionando y conectado ahora. Si quieres usar tu nodo como validador en la red principal, mira [este tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) para saber cómo añadir tu nodo como validador usando la Wallet Web.
 
-You can use `Ctrl + C` to kill the node.
+Puedes usar `Ctrl + C` para apagar el Nodo
 
 If you want to experiment and play with your node, read on.
 
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5ODcxNjMzMywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ
+==
 -->
