@@ -6,7 +6,7 @@ descripción: 'Tutorial generado por Miembo de la Comunidad: Seq'
 
 Ejecutar un validador y hacer stake con Avalanche proporciona recompensas extremadamente competitivas de entre el 9,69% y el 11,54% dependiendo de la duración de la el stake. La tasa máxima se gana apostando por un año, mientras que la tasa más baja por 14 días. Tampoco hay reducciones, así que no tienes que preocuparte por un fallo de hardware o un error en el cliente que te haga perder parte o todo tu stake. En cambio, con Avalanche sólo necesitas mantener al menos un 60% de tiempo de actividad para recibir recompensas. Si no cumples con este requisito, no te reducirán, pero no recibirás las recompensas. **Tampoco es necesario que pongas tus private keys en un nodo para empezar a validar en ese nodo.** Incluso si alguien irrumpe en tu cloud environment y obtiene acceso al nodo, lo peor que puede hacer es apagar el nodo.
 
-Not only does running a validator node enable you to receive rewards in AVAX, but later you will also be able to validate other subnets in the ecosystem as well and receive rewards in the token native to their subnets.
+La ejecución de un nodo validador no sólo  permite recibir recompensas en AVAX, sino que más adelante también podrá validar otras subnets en el ecosistema y recibir recompensas en el token nativo de sus subnets.
 
 You only need modest hardware requirements of 2 CPU cores, 4 GB Memory and 40 GB SSD to run a validator and it doesn’t use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU2NTE0MDIzLDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbMTgzMTY1ODQyOCwyMjIxNzg2OTRdfQ==
 -->
