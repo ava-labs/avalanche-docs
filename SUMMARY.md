@@ -27,10 +27,10 @@
     * [Crear una subred](build/tutorials/platform/create-a-subnet.md)
     * [Crear una máquina virtual \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Configura tu Ledger Nano S con Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
-    * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
+    * [Transferir AVAX entre la X-Chain y la P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
     * [Transferir AVAX entre la X-Chain y la C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
-  * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
-    * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
+  * [Nodos y Staking](build/tutorials/nodes-and-staking/README.md)
+    * [Añadir un validador](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
     * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
     * [Run an Avalanche Node with Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDY4OTgyMTksMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbLTE2ODEwOTM4NzYsMzU4ODcyMDI5XX0=
 -->
