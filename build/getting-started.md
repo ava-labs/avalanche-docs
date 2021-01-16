@@ -22,9 +22,9 @@ Avalanche es un protocolo increíblemente ligero, por lo que los requisitos mín
 * Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Almacenamiento&gt; 10 GB de espacio libre
 * Sistema Operativo: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
-## Run an Avalanche Node and Send Funds
+## Ejecuta un Nodo de Avalanche y Envía Fondos
 
-Let’s install AvalancheGo, the Go implementation of an Avalanche node, and connect to the Avalanche Public Testnet.
+Instalemos AvalancheGo, la implementación Go de un nodo Avalanche, y conectémonos a la Red Pública de Avalanche.
 
 ### Download AvalancheGo
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTE3Nzk1NTZdfQ==
+eyJoaXN0b3J5IjpbLTE3MjI2MTY1ODldfQ==
 -->
