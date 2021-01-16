@@ -12,17 +12,17 @@ cp ~/.avalanchego/staking/staker.key .
 
 Ahora descarga los archivos`staker.crt` y`staker.key`y mantenlos en un lugar seguro y privado. Si algo le pasa a tu nodo o el nodo de la máquina funciona, estos archivos pueden ser usados para recrear completamente tu nodo.
 
-If you use your node for development purposes and have keystore users on your node, you should back up those too.
+Si utiliza su nodo con fines de desarrollo y tiene usuarios de keystore en su nodo, también debería hacer una copia de seguridad de los mismos.
 
-## Node installed using the installer script
+## Nodo Instalado Usando el Script de Instalación
 
-If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+Si instalaste tu nodo usando el [Script de Instalación](set-up-node-with-installer.md), para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de nuevo.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+Este detectará que ya tiene instalado AvalancheGo:
 
 ```text
 AvalancheGo installer
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExMzExMjc4N119
+eyJoaXN0b3J5IjpbLTE0NDE1MDk1NDBdfQ==
 -->
