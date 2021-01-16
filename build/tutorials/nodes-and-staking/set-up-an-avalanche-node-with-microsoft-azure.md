@@ -100,7 +100,7 @@ El siguiente paso es cambiar el nombre de usuario para la VM, para alinearse con
 
 ### Discos <a id="ed2e"></a>
 
-Select Next: Disks to then configure the disks for the instance. There are 2 choices for disks, either Premium SSD which offer greater performance with a 64 GB disk costs around $10 a month, or there is the standard SSD which offers lower performance and is around $5 a month. You also have to pay $0.002 per 10,000 transaction units \(reads / writes and deletes\) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
+Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: la SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o la SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
 
 Select Next: Networking to move onto the network configuration
 
@@ -324,7 +324,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyND
-c2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2
-OTRdfQ==
+eyJoaXN0b3J5IjpbLTExOTc3MjEyMjQsNTM4MzYzNDY0LC04NT
+M2NjYzMDcsLTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUw
+MTkzNywyMjIxNzg2OTRdfQ==
 -->
