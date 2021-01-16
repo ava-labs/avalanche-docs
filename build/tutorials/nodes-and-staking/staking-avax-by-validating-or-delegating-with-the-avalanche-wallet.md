@@ -40,7 +40,7 @@ Para añadir un validador, necesitamos tener un nodo ejecutándose. Podemos conf
 El uso de los binarios es fácil y conveniente y te prepara para ser un validador en 4 pasos:
 
 * Descargue la última versión de tar.gz \(zip para el osx y Windows\) [aquí](https://github.com/ava-labs/avalanchego/releases)
-* Unpack into a folder of our choosing:
+* Descomprimelo en una carpeta 
 
 \* Linux: tar -xvf avalanchego-linux-&lt;VERSION&gt;.tar.gz
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2Njk3MDU3MV19
+eyJoaXN0b3J5IjpbMTU5NjkyMzc5NSwtNjY2OTcwNTcxXX0=
 -->
