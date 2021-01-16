@@ -199,11 +199,11 @@ Seleccione "Disable inheritance" y luego "Remove all inherited permissions from 
 
 ![Image for post](https://miro.medium.com/max/740/1*VxuomVeWbhYquRynA8hP4Q.png)
 
-Then select “Add” to add a new permission and choose “Select a principal” at the top. From the pop-up box enter in your user account that you use to log into your machine. In this example I log on with a local user called Seq, you may have a Microsoft account that you use to log in, so use whatever account you login to your PC with and press “Check Names” and it should underline it to verify and press OK.
+Luego seleccione "Add" para agregar un nuevo permiso y elija "Select a principal" en la parte superior. En el cuadro emergente, introduzca la cuenta de usuario que utiliza para iniciar sesión en su máquina. En este ejemplo me conecto con un usuario local llamado Seq, es posible que tengas una cuenta de Microsoft que uses para conectarte, así que usa cualquier cuenta con la que te conectes a tu PC y presiona "Check Names" y debería subrayarlo para verificar y presionar OK.
 
 ![Image for post](https://miro.medium.com/max/758/1*sMxk7zaRHVTqA0UyHTKwzQ.png)
 
-Then from the permissions section make sure only “Read & Execute” and “Read” are selected and press OK.
+Entonces desde la sección de permisos asegúrate de que sólo "Read & Execute" y "Read" estén seleccionados y presiona OK.
 
 ![Image for post](https://miro.medium.com/max/903/1*5Fkh3FJQuNeWQyEd0irjtA.png)
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzE2MDkzMjQsODc3NDY0MzkyLDE5MD
+eyJoaXN0b3J5IjpbLTE0NTIyODM1MDIsODc3NDY0MzkyLDE5MD
 gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
 NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
 ==
