@@ -9,13 +9,13 @@ descripción: >-
 ## Iniciando en Avalanche
 
 {% tabs %}
-{% tab title="Coming From Ethereum?" %}
+{% tab title="Vienes de Ethereum?" %}
 {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
 {% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
 {% endtab %}
 
-{% tab title="Avalanche Wallet" %}
+{% tab title=" Wallet de Avalanche" %}
 {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
 
 {% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
@@ -29,7 +29,7 @@ descripción: >-
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
 {% endtab %}
 
-{% tab title="Advanced" %}
+{% tab title="Avanzado" %}
 {% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
 
 {% page-ref page="build/tutorials/platform/create-a-new-blockchain.md" %}
@@ -108,7 +108,7 @@ Crea tus propias blockchains públicas o privadas.
 
 Soporte nativo para crear e intercambiar fácilmente activos digitales inteligentes con reglas complejas y personalizadas.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyMDI5NTA0MCwxMjk2OTY4NTI4LC02ND
-UzMTA0MjEsOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQz
-MzEsOTg4MTAxOTcwXX0=
+eyJoaXN0b3J5IjpbLTIyNjM1MTE2MSwyMDIwMjk1MDQwLDEyOT
+Y5Njg1MjgsLTY0NTMxMDQyMSw5OTU4NDA5MzgsMTU2NDk0NDM0
+MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ==
 -->
