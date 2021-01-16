@@ -20,9 +20,9 @@ En el momento de este artículo, el precio al contado de una máquina virtual co
 
 ## Configuración de la suscripción inicial <a id="6e8d"></a>
 
-### Set up 2 Factor <a id="b9d0"></a>
+### Configura 2Factor <a id="b9d0"></a>
 
-First you will need a Microsoft Account, if you don’t have one already you will see an option to create one at the following link. If you already have one, make sure to set up 2 Factor authentication to secure your node by going to the following link and then selecting “Two-step verification” and following the steps provided.
+Primero necesitarás una cuenta de Microsoft, si no tienes una ya verás una opción para crear una en el siguiente enlace. Si ya tienes una, asegúrate de configurar la autenticación de 2 Factores para asegurar tu nodo yendo al siguiente enlace y seleccionando "Verificación de dos pasos" y siguiendo los pasos provistos.
 
 [https://account.microsoft.com/security](https://account.microsoft.com/security)
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTk5MTI2OSwyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMzg4OTY1OTk0LDIyMjE3ODY5NF19
 -->
