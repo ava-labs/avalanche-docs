@@ -6,10 +6,10 @@ descripción: >-
 
 # Developer Documentation
 
-## Getting Started
+## Empezando con Aval
 
 {% tabs %}
-{% tab title="Coming From Ethereum?" %}
+{% tab title="Vienes de Ethereum?" %}
 {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
 {% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
@@ -109,5 +109,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5MjI4NDI2Myw5ODgxMDE5NzBdfQ==
+eyJoaXN0b3J5IjpbLTk5ODk5Nzk1Nyw5ODgxMDE5NzBdfQ==
 -->
