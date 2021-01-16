@@ -8,9 +8,9 @@ Ejecutar un validador y hacer stake con Avalanche proporciona recompensas extrem
 
 La ejecución de un nodo validador no sólo te permite recibir recompensas en AVAX, sino que más adelante también podrás validar otras subnets en el ecosistema y recibir recompensas en el token nativo de sus subnets.
 
-Sólo se necesitan unos modestos requisitos de hardware, 2 núcleos de CPU, 4 GB de memoria y 40 GB de SSD para ejecutar un validador y no utiliza enormes cantidades de energía. Avalanche [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
+Sólo se necesitan unos modestos requisitos de hardware, 2 núcleos de CPU, 4 GB de memoria y 40 GB de SSD para ejecutar un validador y no utiliza enormes cantidades de energía. El  [mecanismo revolucionario de consenso](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) de Avalanche es capaz de escalar a millones de validadores participando en el consenso a la vez, ofreciendo una descentralización sin precedentes.
 
-Currently the minimum amount required to stake to become a validator is 2,000 AVAX \(which can be reduced over time as price increases\). Alternatively, validators can also charge a small fee to enable users to delegate their stake with them to help towards running costs. You can use a calculator [here](https://vscout.io/) to see how much rewards you would earn when running a node, compared to delegating.
+Actualmente, la cantidad mínima requerida para ser validador es de 2.000 AVAX. \(que puede reducirse con el tiempo a medida que aumenta el precio\). Alternatively, validators can also charge a small fee to enable users to delegate their stake with them to help towards running costs. You can use a calculator [here](https://vscout.io/) to see how much rewards you would earn when running a node, compared to delegating.
 
 I encourage everyone to run their own validators where possible, but for those that don’t meet the minimum staking requirements and want to delegate I am currently running a node which you can find [here](https://avascan.info/staking/validator/NodeID-MGrikMRTmooL1j7uawPHjaMS1cXkbewdb).
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzODU0ODk5OCwyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbLTExMDMxNzM2MTYsMjIyMTc4Njk0XX0=
 -->
