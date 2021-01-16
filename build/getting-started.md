@@ -199,7 +199,7 @@ La respuesta debería ser así:
 }
 ```
 
-Your user now controls the address `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` on the X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
+Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
 
 ### Send Funds From Avalanche Wallet to Your Node
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzA2MjkyMzAxLC0yMDY3Nzg0MjUwLC0xOT
-I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTIwNjk5MDc4MTYsLTIwNjc3ODQyNTAsLT
+E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
 -->
