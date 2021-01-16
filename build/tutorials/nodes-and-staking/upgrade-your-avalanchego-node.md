@@ -78,11 +78,11 @@ Ahora estamos listos para descargar la nueva versión del nodo. Puedes descargar
 
 La descarga del binario preconstruido es más fácil y recomendable si sólo quieres ejecutar tu propio nodo hacer stake en él.
 
-Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+Crear el Nodo [desde el código fuente](upgrade-your-avalanchego-node.md#build-from-source) es recomendado si eres un desarrollador que busca experimentar y construir en Avalanche.
 
-## **Download Pre-built Binary**
+## **Descargar Binario Preconstruido**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Si quieres descargar un binario preconstruido en lugar de construirlo tú mismo, ve a nuestra [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
 
 Under `Assets`, select the appropriate file.
 
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1NzYyMDAxXX0=
+eyJoaXN0b3J5IjpbMTMxOTI2MDY2XX0=
 -->
