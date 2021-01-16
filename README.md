@@ -44,9 +44,11 @@ descripción: >-
 
 ## Avalanche
 
-[Avalanche](https://avax.network) es una plataforma de código abierto para el lanzamiento de [aplicaciones descentralizadas](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) y despliegues de [cadenas de bloques](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) empresariales en un ecosistema interoperable y altamente escalable. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
+[Avalanche](https://avax.network) es una plataforma de código abierto para el lanzamiento de [aplicaciones descentralizadas](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) y despliegues de [cadenas de bloques](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) empresariales en un ecosistema interoperable y altamente escalable. Avalanche le da un control completo tanto de la red como de las capas de aplicación, ayudándole a construir cualquier cosa que pueda imaginar
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
+Una diferencia clave entre Avalanche y otras redes descentralizadas es el protocolo de consenso. Con el tiempo, la gente ha llegado a un falso entendimiento de que las cadenas de bloqueo tienen que ser lentas y no escalables. El protocolo de Avalanche emplea un novedoso enfoque de consenso para lograr sus sólidas garantías de seguridad, su rápida finalidad y su alto rendimiento, sin comprometer la descentralización.
+
+Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
 
 ## Avalanche \(AVAX\) Token
 
@@ -109,5 +111,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3Mjk5OTEwNCw5ODgxMDE5NzBdfQ==
+eyJoaXN0b3J5IjpbMTMxNzAxMTUxNyw5ODgxMDE5NzBdfQ==
 -->
