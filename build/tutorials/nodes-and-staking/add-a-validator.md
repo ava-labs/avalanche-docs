@@ -361,13 +361,13 @@ Now that the node has been added as a validator of the subnet, let’s add it to
 
 To whitelist the subnet, restart the node and add the parameter `--whitelisted-subnets` with a comma separated list of subnets to whitelist.
 
-The full command is:
+El comando completo es:
 
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzMyNzc3NDg3LC0xODI5ODU3MTg3LC0xMz
-Q0MzMwNjQ4LDMyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2
-OSwtMTEwOTkzMDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LD
-EyNjM2Nzg0ODcsMTAzMzc1MzM2N119
+eyJoaXN0b3J5IjpbMjgyMDcwODExLDMzMjc3NzQ4NywtMTgyOT
+g1NzE4NywtMTM0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4
+NSw5NDY5Njk3NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMT
+A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
