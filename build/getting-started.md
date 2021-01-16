@@ -28,9 +28,9 @@ Instalemos AvalancheGo, la implementación Go de un nodo Avalanche, y conectémo
 
 ### Descarga AvalancheGo
 
-The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+El nodo es un programa binario. Puedes descargar el código fuente y luego construir el programa binario, o puedes descargar el binario pre-construido. No necesitas hacer ambas cosas.
 
-Downloading [pre-built binary](getting-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Descargando el [binario pre-construid](getting-started.md#binary) es más fácil y recomendable si sólo buscas dirigir tu propio nodo y hacer staking en él.
 
 Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQyMTI3OTQzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTU1MDc5NzMzMiwtMTcyMjYxNjU4OV19
 -->
