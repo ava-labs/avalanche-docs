@@ -159,7 +159,7 @@ La respuesta debería ser:
 }
 ```
 
-Ahora, tienes un usuario en este nodo. Los datos del Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](avalanchego-apis/keystore-api.md) to see how.
+Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que usted crea en el Keystore de un nodo no existen en otros nodos pero usted puede importar/exportar usuarios a/desde el Keystore. See the [ API del Keystore](avalanchego-apis/keystore-api.md) to see how.
 
 {% hint style="danger" %}
 **You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1MjY3NjE3MywtMTkyODQzNTM4MywtMT
+eyJoaXN0b3J5IjpbLTk4NTc0NTA0NSwtMTkyODQzNTM4MywtMT
 cyMjYxNjU4OV19
 -->
