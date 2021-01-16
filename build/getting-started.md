@@ -46,9 +46,9 @@ Descarga el repositorio de AvalancheGo:
 go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
-Nota para usuarios avanzados: AvalancheGo utiliza módulos Go, por lo que puede clonar el [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
+Nota para usuarios avanzados: AvalancheGo utiliza módulos Go, por lo que puede clonar el [Repositorio de AvalancheGo](https://github.com/ava-labs/avalanchego) en otros lugares que no sean su GOPATH
 
-Change to the `avalanchego` directory:
+Cambie al directorio de AvalancheGo:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE0NjIwOTU4LC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbNDc3NjA5NTEzLC0xNzIyNjE2NTg5XX0=
 -->
