@@ -229,7 +229,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric string.
+Observe que AVAX tiene la identificación especial `AVAX`. Normalmente la ID de un activo es una  is an alphanumeric string.
 
 The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzMDUwNTIyOSwtMjA2Nzc4NDI1MCwtMT
-kyODQzNTM4MywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE3MTQzMTE1NDAsLTIwNjc3ODQyNTAsLT
+E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
 -->
