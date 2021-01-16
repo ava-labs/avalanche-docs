@@ -221,23 +221,23 @@ Para entrar en el nodo Avalanche, abre la línea de comandos buscando "cmd" y se
 
 ![Image for post](https://miro.medium.com/max/384/1*NlYlg9of5O9fQtiroqMFZw.png)
 
-Then use the following command and replace the EnterYourAzureIPHere with the static IP address shown on the Azure portal.
+Entonces usa el siguiente comando y reemplaza el EnterYourAzureIPHere con la dirección IP estática que se muestra en el portal de Azure.
 
 ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@EnterYourAzureIPHere
 
-for my example its:
+para mi ejemplo es:
 
 ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@13.74.10.81
 
-The first time you connect you will receive a prompt asking to continue, enter yes.
+La primera vez que te conectes recibirás un mensaje pidiéndote que continúes, escribe "yes".
 
 ![Image for post](https://miro.medium.com/max/651/1*Hp1AF-03TbO-eRUvuKvZcA.png)
 
-You should now be connected to your Node.
+Ahora deberías estar conectado a tu Nodo.
 
 ![Image for post](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
 
-The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
+La siguiente sección está tomada del excelente tutorial de Collin para [configuring an Avalanche Node on Amazon’s AWS](setting-up-an-avalanche-node-with-amazon-web-services-aws.md).
 
 ### Update Linux with security patches <a id="8a1c"></a>
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk1ODE1MjIwMiw4Nzc0NjQzOTIsMTkwOD
+eyJoaXN0b3J5IjpbLTY2ODQzNzE1MSw4Nzc0NjQzOTIsMTkwOD
 A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
 OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
