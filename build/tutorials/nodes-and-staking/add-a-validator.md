@@ -2,7 +2,7 @@
 
 ## Introducción
 
-La [Red Principal](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) es propia de la plataforma de Avalanche y valida las [ blockchains incorporadas](https://avalanche.gitbook.io/avalanche/learn/platform-overview) de Avalanche. En este tutorial, añadiremos un nodo a la Red Principal y una [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) en Avalanche.
+La [Red Primaria](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) es propia de la plataforma de Avalanche y valida las [ blockchains incorporadas](https://avalanche.gitbook.io/avalanche/learn/platform-overview) de Avalanche. En este tutorial, añadiremos un nodo a la Red Primaria y una [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) en Avalanche.
 
 La P-Chain maneja los metadatos de Avalanche. Esto incluye el seguimiento de qué nodos están en qué subredes, que blockchains existen, y cuales subnets están validando cuales blockchains. Para añadir un validador, emitiremos [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) a la P-Chain.
 
@@ -123,7 +123,7 @@ La respuesta contiene el ID de tu Nodo:
 
 `startTime` & `endTime`
 
-Cuando se emite una transacción para unirse a la Red Primaria, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Primariaes de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Primariadespués de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Primaria, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
+Cuando se emite una transacción para unirse a la Red Primaria, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Primaria es de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Primaria después de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Primaria, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
 
 `stakeAmount`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTE0NDU1MjEsOTQ2OTY5NzY5LC0xMT
-A5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3
-ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbODgyMjMwNDQ5LDk0Njk2OTc2OSwtMTEwOT
+kzMDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0
+ODcsMTAzMzc1MzM2N119
 -->
