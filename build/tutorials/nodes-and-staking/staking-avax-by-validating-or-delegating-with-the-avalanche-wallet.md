@@ -53,7 +53,7 @@ El uso de los binarios es fácil y conveniente y te prepara para ser un validado
 
 Dejaremos que nuestro nodo arranque y se sincronice con el resto de la red, y estamos listos para rodar.
 
-We will need our Node ID. Let’s find that using the [info API](../../avalanchego-apis/info-api.md)!
+Necesitaremos la ID de nuestro Nodo. Encontraremos eso usando el [API de Información](../../avalanchego-apis/info-api.md)!
 
 If you need any help setting up your node, join us on [Discord](https://chat.avax.network/).
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwOTMzMzkzMiwtNjY2OTcwNTcxXX0=
+eyJoaXN0b3J5IjpbMjA1NTk5MzE0OCwtNjY2OTcwNTcxXX0=
 -->
