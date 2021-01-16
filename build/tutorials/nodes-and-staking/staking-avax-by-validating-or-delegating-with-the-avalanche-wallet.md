@@ -35,7 +35,7 @@ Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuació
 
 ### **Paso 3A: Conviértete en un validador!** <a id="60f0"></a>
 
-To add a validator, we need to have a node running. We can set one up using the released [binaries](https://github.com/ava-labs/avalanchego/releases/) or build them from the [AvalancheGo source code](https://github.com/ava-labs/avalanchego).
+Para añadir un validador, necesitamos tener un nodo ejecutándose. Podemos configurar uno usando los [binarios](https://github.com/ava-labs/avalanchego/releases/) liberados o construirlos a partir del [Código fuente deAvalancheGo ](https://github.com/ava-labs/avalanchego).
 
 Using the binaries is easy and convenient and sets you up to be a validator in 4 steps:
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NDM2ODI5MV19
+eyJoaXN0b3J5IjpbMjAzNDI2OTM0MF19
 -->
