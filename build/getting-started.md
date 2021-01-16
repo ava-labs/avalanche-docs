@@ -273,7 +273,7 @@ curl -X POST --data '{
 
 Si quiere especificar una dirección en particular donde debe ir el cambio, puedes especificarla en `changeAddr`. Puede dejar este campo vacío; si lo hace, cualquier cambio irá a una de las direcciones que su usuario controla.
 
-In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below.
+Para evitar el spam, Avalanche requiere el pago de una comisión por la transacción. La comisión por la transacción se deducirá automáticamente de una dirección controlada por el usuario cuando se emita una transacción. Tenlo en cuenta cuando revises los saldos  abajo.
 
 {% page-ref page="../learn/platform-overview/transaction-fees.md" %}
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU2MTI4MjMxLC0yMDY3Nzg0MjUwLC0xOT
-I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbMTc4Njk0NjMyNiwtMjA2Nzc4NDI1MCwtMT
+kyODQzNTM4MywtMTcyMjYxNjU4OV19
 -->
