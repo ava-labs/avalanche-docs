@@ -83,7 +83,7 @@ Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarioss.
 
-### Start a Node, and Connect to Avalanche
+### Inicie un Nodo, y Conéctese a Avalanche
 
 If you built from source:
 
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3ODQxNTY2OCwtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE4NTQ1NzIzMjQsLTE3MjI2MTY1ODldfQ
+==
 -->
