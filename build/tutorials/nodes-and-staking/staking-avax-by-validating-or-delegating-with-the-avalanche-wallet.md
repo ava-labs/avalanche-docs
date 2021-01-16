@@ -9,13 +9,13 @@ El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://g
 
 **Comencemos con el staking!**
 
-### **Step 1 — Open the Avalanche Wallet** <a id="552d"></a>
+### **Paso 1 — Abre la Wallet de Avalanche** <a id="552d"></a>
 
 ![Image for post](https://miro.medium.com/max/1552/0*tpBIOjLdppuNKMjA)
 
-You can access your wallet using your key phrase, keystore file, or Ledger Nano S \(coming soon!\)
+Puedes acceder a tu billetera usando tu key phrase, el archivo keystore, o tu Ledger Nano S \(¡Pronto!\)
 
-### **Step 2 — Navigate to “Earn” section** <a id="dc5a"></a>
+### **Paso 2 — Navega hacia la sección “Earn” section** <a id="dc5a"></a>
 
 ![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzczMTI5NzVdfQ==
+eyJoaXN0b3J5IjpbLTE3NjM0MzQzNDZdfQ==
 -->
