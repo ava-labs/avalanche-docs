@@ -86,15 +86,15 @@ Con capacidad para 4.500 transacciones por segundo, un orden de magnitud mayor q
 
 ### Seguridad
 
-Ensures stronger security guarantees well-above the 51% standard of other networks.
+Asegura garantías de seguridad más fuertes, muy por encima del estándar del 51% de otras redes.
 
-### Flexibility
+### Flexibilidad
 
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
+Crea fácilmente cadenas de bloques personalizadas y aplicaciones descentralizadas que contengan casi cualquier lógica arbitraria.
 
-### Sustainability
+### Sostenibilidad
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
+Utiliza un algoritmo de consenso de prueba de consumo de energía en lugar de prueba de trabajo.
 
 ### Smart Contract Support
 
@@ -109,7 +109,7 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODcyNjg2MzQsLTY0NTMxMDQyMSw5OT
-U4NDA5MzgsMTU2NDk0NDM0MSwtMTgzMzIyNDMzMSw5ODgxMDE5
-NzBdfQ==
+eyJoaXN0b3J5IjpbNjQ2MDIwNDU1LC02NDUzMTA0MjEsOTk1OD
+QwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQzMzEsOTg4MTAxOTcw
+XX0=
 -->
