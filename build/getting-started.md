@@ -279,7 +279,7 @@ Para evitar el spam, Avalanche requiere el pago de una comisión por la transacc
 
 Cuando envíe esta solicitud, el nodo lo autentificará con su nombre de usuario y contraseña. Luego, buscará a través de todas las [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controladas por su usuario hasta que encuentre suficiente AVAX para satisfacer la petición.
 
-The response contains the transaction’s ID. It will be different for every invocation of `send`.
+La respuesta contieneel ID de la transacción. Será diferente para cada invocación de `send`.
 
 ```cpp
 {
@@ -292,9 +292,9 @@ The response contains the transaction’s ID. It will be different for every inv
 }
 ```
 
-#### Checking the Transaction Status
+#### Comprobando el Estado de la Transacción
 
-This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Esta transacción sólo tardará uno o dos segundos en finalizar. Podemos comprobar su estado con [`avm.getTxStatus`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjQ4MTAwODcwLC0yMDY3Nzg0MjUwLC0xOT
+eyJoaXN0b3J5IjpbNzc1NzM1NDE5LC0yMDY3Nzg0MjUwLC0xOT
 I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
