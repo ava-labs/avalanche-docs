@@ -13,7 +13,7 @@ En este tutorial \(Tiempo estimado: 10 minutos\), podremos:
 
 Si su problema no se trata en las preguntas frecuentes, puede pedir ayuda en el [Discord de Avalanche](https://chat.avax.network)! Trabajaremos para que superes cualquier obstáculo.
 
-This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](tutorials/nodes-and-staking/set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
+Este tutorial está dirigido principalmente a desarrolladores y personas interesadas en cómo funciona la Plataforma de Avalanchas. Si sólo estás interesado en configurar un nodo para estacar, tal vez quieras seguir the [Set Up Avalanche Node With Installer](tutorials/nodes-and-staking/set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
 
 ## Requirements
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2ODI0NjY0NV19
+eyJoaXN0b3J5IjpbLTE3ODk2MDM4MDFdfQ==
 -->
