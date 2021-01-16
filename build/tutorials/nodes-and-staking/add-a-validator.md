@@ -226,9 +226,9 @@ La respuesta debería incluir el nodo que acabamos de añadir:
 
 Cuando el tiempo llegue a `1584021450`, este nodo comenzará a validar la Red Primaria. Cuando llegue a `1584121156`, este nodo dejará de validar la Red Primaria. Los AVAX en Stake serán devueltos a una dirección controlada por `username`, y las recompensas, si las hay, se otorgarán a `rewardAddress`.
 
-## Añadir un Validador de Subned
+## Añadir un Validador de Subnet
 
-### Issuing a Subnet Validator Transaction
+### Emisión de una Transacción de Validación de 
 
 Now let’s add the same node to a subnet. The following will make more sense if you’ve already done this [tutorial on creating a Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Right now you can only add validators to subnets with API calls, not with Avalanche Wallet.
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTgxMTY5NTYsLTEzNDQzMzA2NDgsMz
-IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
-MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
-wxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMTc0MDEwOTk4OCwtMTM0NDMzMDY0OCwzMj
+EyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAy
+NywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LD
+EwMzM3NTMzNjddfQ==
 -->
