@@ -67,11 +67,11 @@ Luego seleccione una región de la lista desplegable. Selecciona una de las reco
 Tiene la opción de usar precios al contado para ahorrar cantidades significativas en los costos de funcionamiento. Las instancias spot utilizan una estructura de precios de mercado de oferta y demanda. A medida que la demanda de instancias sube, el precio de la instancia al contado sube. Si no hay suficiente capacidad, entonces su VM se apagará. Sin embargo, las posibilidades de que esto ocurra son increíblemente bajas, especialmente si selecciona la opción de sólo capacidad. Incluso en el improbable caso de que se apague temporalmente, sólo necesita mantener al menos un 60% de tiempo encendida para recibir las recompensas del stake y además no hay reducción implementada en Avalanche.
 
 
-Seleccione Sí para una Spot Instance, selecciona Eviction type to Capacity Only and **make sure to set the eviction policy to Stop / Deallocate — This is very important otherwise the VM will be deleted**
+Seleccione Sí para una Spot Instance, selecciona Eviction type en Capacity Only y **Asegúrate de establecer la política de desalojo en Stop / Deallocate - Esto es muy importante, de lo contrario el VM será eliminado.**
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Choose “Select size” to change the Virtual Machine size, and from the menu select D2s\_v4 under the D-Series v4 selection \(This size has 2 Cores, 8 GB Memory and enables Premium SSDs\). You can use F2s\_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs\) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
+Elija "Seleccionar tamaño" para cambiar el tamaño de la Máquina Virtual, y en el menú seleccione D2s\_v4 bajo la selección D-Series v4 \(Este tamaño tiene 2 núcleos, 8 GB de memoria y permite SSD's Premium\). You can use F2s\_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs\) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
 
 ![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
@@ -323,6 +323,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjU4NjQ4MzgsLTEyNDc2OTk0NTksLTE3NT
-g3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbLTg1MzY2NjMwNywtMTI0NzY5OTQ1OSwtMT
+c1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
