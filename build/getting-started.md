@@ -66,14 +66,14 @@ El Binario, llamado `avalanchego`, está ubicado en `avalanchego/build`.
 
 Si quieres descargar un binario pre-construido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona el  que quieras \(probablemente el último.\)
 
-Under `Assets`, selecc.
+Debajo de `Assets`, selecciona el archivo apropiado.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+Para MacOS:  
+Descarga: `avalanchego-macos-<VERSION>.zip`  
+Descomprime: `unzip avalanchego-macos-<VERSION>.zip`  
+La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-For Linux on PCs or cloud providers:  
+Para Linux en PCs o proveedores de nube:  
 Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzM3MTM5MjA0LC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTIwMzgwNDUwNDQsLTE3MjI2MTY1ODldfQ
+==
 -->
