@@ -207,17 +207,17 @@ Entonces desde la sección de permisos asegúrate de que sólo "Read & Execute" 
 
 ![Image for post](https://miro.medium.com/max/903/1*5Fkh3FJQuNeWQyEd0irjtA.png)
 
-It should look something like the below, except with a different PC name / user account. This just means the key file can’t be modified or accessed by any other accounts on this machine for security purposes so they can’t access your Avalanche Node.
+Debería ser algo parecido a lo de abajo, excepto que con un nombre de PC / cuenta de usuario diferente. Esto sólo significa que el archivo clave no puede ser modificado o accedido por ninguna otra cuenta de esta máquina por razones de seguridad, por lo que no pueden acceder a su Nodo de Avalanche.
 
 ![Image for post](https://miro.medium.com/max/736/1*F-YK0xdB92cIweCQFGGRvA.png)
 
-### Find your Avalanche Node Public IP <a id="4687"></a>
+### Encuentra tu IP Pública del Nodo de Avalanche <a id="4687"></a>
 
-From the Azure Portal make a note of your static public IP address that has been assigned to your node.
+Desde el Portal de Azure toma nota de la dirección IP pública estática que ha sido asignada a tu nodo.
 
 ![Image for post](https://miro.medium.com/max/1082/1*5cf1dAAO0G7Dzu2s0Xxh-Q.png)
 
-To log onto the Avalanche node, open command prompt by searching for “cmd” and selecting “Command Prompt” on your Windows 10 machine.
+Para entrar en el nodo Avalanche, abre la línea de comandos buscando "cmd" y seleccionando "Command Prompt" en tu máquina de Windows 10.
 
 ![Image for post](https://miro.medium.com/max/384/1*NlYlg9of5O9fQtiroqMFZw.png)
 
@@ -323,8 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NTIyODM1MDIsODc3NDY0MzkyLDE5MD
-gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
-NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
-==
+eyJoaXN0b3J5IjpbMTk1ODE1MjIwMiw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
