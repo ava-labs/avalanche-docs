@@ -64,7 +64,7 @@ Si su nodo se ejecuta como un servicio, deténgalo ingresando:
 
 ### Nodo ejecutándose en segundo plano
 
-Si tu nodo está funcionando en segundo plano \(ejecutandose con `nohup`, por ejemplo\) entonces encuentra el proceso que ejecut by running `ps aux | grep avalanche`. This will produce output like:
+Si tu nodo está funcionando en segundo plano \(ejecutandose con `nohup`, por ejemplo\) entonces encuentra el proceso que ejecuta el nodo ejecutando lo siguiente `ps aux | grep avalanche`. Esto producirá una salida como:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDUyMDQ2OTNdfQ==
+eyJoaXN0b3J5IjpbMTA5NzkxNDkyM119
 -->
