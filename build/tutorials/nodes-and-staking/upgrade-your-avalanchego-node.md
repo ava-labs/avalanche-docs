@@ -60,11 +60,11 @@ Si su nodo se ejecuta como un servicio, deténgalo ingresando:
 
 `sudo systemctl stop avalanchego.service`
 
-\(su servicio puede ser nombrado de manera diferente, `avalanche.service`, or similar\)
+\(su servicio puede ser nombrado de manera diferente, `avalanche.service`, o similar\)
 
 ### Nodo ejecutándose en segundo plano
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+Si tu nodo está funcionando en segundo plano \(ejecutandose con `nohup`, por ejemplo\) entonces encuentra el proceso que ejecut by running `ps aux | grep avalanche`. This will produce output like:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MjQ3ODg5NDNdfQ==
+eyJoaXN0b3J5IjpbLTE1NDUyMDQ2OTNdfQ==
 -->
