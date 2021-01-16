@@ -85,11 +85,11 @@ Hay algunas regiones que son aún más baratas, el este de EE.UU. por ejemplo es
 
 ![Image for post](https://miro.medium.com/max/677/1*Th5aDwLS6_IoM0LidRbH6g.png)
 
-Below you can see the price history of the VM over the last 3 months for North Europe and regions nearby.![Image for post](https://miro.medium.com/max/30/1*OJ4monpMy8DhWw_HWycMjg.png?q=20)
+A continuación puede ver el historial de precios de la VM en los últimos 3 meses para el norte de Europa y regiones cercanas.![Image for post](https://miro.medium.com/max/30/1*OJ4monpMy8DhWw_HWycMjg.png?q=20)
 
 ![Image for post](https://miro.medium.com/max/968/1*OJ4monpMy8DhWw_HWycMjg.png)
 
-### Cheaper than Amazon AWS <a id="45e9"></a>
+### Más Barato que Amazon AWS <a id="45e9"></a>
 
 As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTkyOTY2ODUsLTg1MzY2NjMwNywtMT
+eyJoaXN0b3J5IjpbLTIwNjk3NjMxMzMsLTg1MzY2NjMwNywtMT
 I0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3
 ODY5NF19
 -->
