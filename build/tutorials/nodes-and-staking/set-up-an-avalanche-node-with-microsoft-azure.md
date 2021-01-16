@@ -67,7 +67,7 @@ Luego seleccione una región de la lista desplegable. Selecciona una de las reco
 Tiene la opción de usar precios al contado para ahorrar cantidades significativas en los costos de funcionamiento. Las instancias spot utilizan una estructura de precios de mercado de oferta y demanda. A medida que la demanda de instancias sube, el precio de la instancia al contado sube. Si no hay suficiente capacidad, entonces su VM se apagará. Sin embargo, las posibilidades de que esto ocurra son increíblemente bajas, especialmente si selecciona la opción de sólo capacidad. Incluso en el improbable caso de que se apague temporalmente, sólo necesita mantener al menos un 60% de tiempo encendida para recibir las recompensas del stake y además no hay reducción implementada en Avalanche.
 
 
-Select Yes for Azure Spot instance, select Eviction type to Capacity Only and **make sure to set the eviction policy to Stop / Deallocate — This is very important otherwise the VM will be deleted**
+Seleccione Sí para una  Azure Spot instance, select Eviction type to Capacity Only and **make sure to set the eviction policy to Stop / Deallocate — This is very important otherwise the VM will be deleted**
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
@@ -323,6 +323,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDU0Mzk5OTcsLTEyNDc2OTk0NTksLT
+eyJoaXN0b3J5IjpbLTEzOTU4OTQ4NzUsLTEyNDc2OTk0NTksLT
 E3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
 -->
