@@ -1,4 +1,4 @@
-# Getting Started: Run an Avalanche Node
+# Empezando: Ejecutando un Nodo de Avalanche
 
 La forma más rápida de aprender sobre Avalanche es ejecutando un nodo e interactuando con la red.
 
@@ -362,6 +362,6 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwNTc2MjgxNywtMjA2Nzc4NDI1MCwtMT
-kyODQzNTM4MywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTgwMDM4MDg4NSwxNTA1NzYyODE3LC0yMD
+Y3Nzg0MjUwLC0xOTI4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
