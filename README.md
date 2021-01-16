@@ -62,9 +62,9 @@ Si una parte suficientemente grande \(_alpha_ $$α$$\) de los validadores muestr
 
 El validador repite este proceso de muestreo hasta que _alfa_ de los validadores consultados responda de la misma manera \ ~ (aceptar o rechazar) para _beta_ $β$$$ rondas consecutivas.
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When conflicts exist, honest validators quickly cluster around conflicting transactions, entering a positive feedback loop until all correct validators prefer that transaction. This leads to the acceptance of non-conflicting transactions and the rejection of conflicting transactions.
+En el caso común de que una transacción no tenga conflictos, la finalización se produce muy rápidamente. Cuando existen conflictos, los validadores honestos se agrupan rápidamente en torno a las transacciones conflictivas, entrando en un bucle de retroalimentación positiva hasta que todos los validadores correctos prefieran esa transacción. Esto lleva a la aceptación de transacciones no conflictivas y al rechazo de las transacciones conflictivas.
 
-![How Avalanche Consensus Works](.gitbook/assets/howavalancheconsensusworks.png)
+![Cómo funciona el consenso de Avalanche](.gitbook/assets/howavalancheconsensusworks.png)
 
 It is guaranteed \(with high probability based on system parameters\) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
 
@@ -109,6 +109,6 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4Mz
-MyMjQzMzEsOTg4MTAxOTcwXX0=
+eyJoaXN0b3J5IjpbMTE1MjA4NjI0NCw5OTU4NDA5MzgsMTU2ND
+k0NDM0MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ==
 -->
