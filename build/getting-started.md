@@ -335,7 +335,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -347,7 +347,7 @@ The response should be:
 }
 ```
 
-In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` to see that AVAX we sent was deducted from its balance, as well as the transaction fee.
+De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` para ver que el AVAX que enviamos fue deducido de su balance, así como la comisión de la transacción.
 
 {% page-ref page="tutorials/nodes-and-staking/add-a-validator.md" %}
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2Mzg4MDI1MiwtMjA2Nzc4NDI1MCwtMT
+eyJoaXN0b3J5IjpbMTUwNTc2MjgxNywtMjA2Nzc4NDI1MCwtMT
 kyODQzNTM4MywtMTcyMjYxNjU4OV19
 -->
