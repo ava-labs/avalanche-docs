@@ -1,8 +1,8 @@
 # Actualiza tu Nodo AvalancheGo
 
-## **Haz una copia de seguridad de tu **
+## **Haz una copia de seguridad de tu Nodo**
 
-Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
+Antes de actualizar su nodo, se recomienda hacer una copia de seguridad de los archivos de su staker que se utilizan para identificar su nodo en la red. En la instalación predeterminada, puede copiarlos ejecutando los siguientes comandos:
 
 ```text
 cd
@@ -10,7 +10,7 @@ cp ~/.avalanchego/staking/staker.crt .
 cp ~/.avalanchego/staking/staker.key .
 ```
 
-Then download `staker.crt` and `staker.key` files and keep them somewhere safe and private. If anything happens to your node or the machine node runs on, these files can be used to fully recreate your node.
+Ahora descarga los archivos`staker.crt` y`staker.key`y mantenlos en un lugar seguro y privado. Si algo le pasa a tu nodo o el nodo de la máquina funciona, estos archivos pueden ser usados para recrear completamente tu nodo.
 
 If you use your node for development purposes and have keystore users on your node, you should back up those too.
 
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4MjY3MDIyM119
+eyJoaXN0b3J5IjpbMTExMzExMjc4N119
 -->
