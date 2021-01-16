@@ -271,7 +271,7 @@ curl -X POST --data '{
 
 `amount` especifica en numero de nAVAX a enviar.
 
-If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
+Si quiere especificar una dirección en particular donde debe ir el cambio, puedes especificarla en `changeAddr`. Puede dejar este campo vacío; si lo hace, cualquier cambio irá a una de las direcciones que su usuario controla.
 
 In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below.
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDEzNDAzMDcsLTIwNjc3ODQyNTAsLT
-E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
+eyJoaXN0b3J5IjpbOTU2MTI4MjMxLC0yMDY3Nzg0MjUwLC0xOT
+I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
