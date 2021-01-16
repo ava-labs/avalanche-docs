@@ -1,4 +1,4 @@
-# Nodes and Staking
+# Nodos y Staking
 
 |  |  |
 | :--- | :--- |
@@ -13,6 +13,7 @@
 | **​**[**Actualiza tu nodo AvalancheGo**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Actualiza tu nodo de Avalanche. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDcxNzM5MDAsLTM2MzgyNjYwMywxMj
-QzNTUxMjQsMTk4MDYyODgxNSwtNzQ2MDA2Mzk2XX0=
+eyJoaXN0b3J5IjpbNTU5MzY2NDI4LC0xNTQ3MTczOTAwLC0zNj
+M4MjY2MDMsMTI0MzU1MTI0LDE5ODA2Mjg4MTUsLTc0NjAwNjM5
+Nl19
 -->
