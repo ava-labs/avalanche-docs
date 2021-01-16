@@ -54,11 +54,11 @@ Selecciona el Servidor Ubuntu 18.04 LTS \(normalmente estará en la sección pop
 
 ![Image for post](https://miro.medium.com/max/605/1*Y0iZEZExC36c7FXqPlrPuw.png)
 
-This will take you to the Create a virtual machine page as shown below:
+Esto te llevará a la página de Crear una máquina virtual como se muestra a continuación:
 
 ![Image for post](https://miro.medium.com/max/775/1*cv0z0mt6Uavx5MkiazpiUA.png)
 
-First, enter a virtual machine a name, this can be anything but in my example, I have called it Avalanche \(This will also automatically change the resource group name to match\)
+Primero, introduce un nombre en la máquina virtual, puede ser cualquier cosa, pero en mi ejemplo, la he llamado Avalanche. \(Esto también cambiará automáticamente el nombre del grupo de recursos para que coincida\)
 
 Then select a region from the drop-down list. Select one of the recommended ones in a region that you prefer as these tend to be the larger ones with most features enabled and cheaper prices. In this example I have selected North Europe.
 
@@ -322,6 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODY2OTE2NDcsLTI1ODUwMTkzNywyMj
-IxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTMyNDIwOTg5OCwtMjU4NTAxOTM3LDIyMj
+E3ODY5NF19
 -->
