@@ -15,11 +15,11 @@ El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://g
 
 Puedes acceder a tu billetera usando tu key phrase, el archivo keystore, o tu Ledger Nano S \(¡Pronto!\)
 
-### **Paso 2 — Navega hacia la sección “Earn” section** <a id="dc5a"></a>
+### **Paso 2 — Navega hacia la sección “Earn”** <a id="dc5a"></a>
 
 ![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
-**To stake, you need to have your funds available on the** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/#platform-chain-p-chain)**! If your funds are on the** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
+**Para hacer stake, necesitas tener tus fondos disponibles en la** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/#platform-chain-p-chain)**! Si tus fondos están en el** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjM0MzQzNDZdfQ==
+eyJoaXN0b3J5IjpbLTUxMDY4NTIxN119
 -->
