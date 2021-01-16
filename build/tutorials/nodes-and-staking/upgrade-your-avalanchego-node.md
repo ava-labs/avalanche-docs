@@ -82,7 +82,7 @@ Crear el Nodo [desde el código fuente](upgrade-your-avalanchego-node.md#build-f
 
 ## **Descargar Binario Preconstruido**
 
-Si quieres descargar un binario preconstruido en lugar de construirlo tú mismo, ve a nuestra [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Si quieres descargar un binario preconstruido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona release you want \(probably the latest one.\)
 
 Under `Assets`, select the appropriate file.
 
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxOTI2MDY2XX0=
+eyJoaXN0b3J5IjpbLTYzMDA4NDI0OF19
 -->
