@@ -4,7 +4,7 @@
 
 La Wallet de Avalanche es una aplicación basada en la web sin middleware ni ningún tipo de comunicación con el servidor. La Wallet de Avalanche está escrita en Vue JS y puede ser accedida en línea o compilada y ejecutada localmente.
 
-The Avalanche Wallet can be accessed [here](https://wallet.avax.network/).  
+Se puede acceder a la Wallet de Avalanche [aquí](https://wallet.avax.network/).  
 The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
 
 **Let’s get staking!**
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1OTYyMDI2NzldfQ==
+eyJoaXN0b3J5IjpbLTE5OTUxMTkyMzNdfQ==
 -->
