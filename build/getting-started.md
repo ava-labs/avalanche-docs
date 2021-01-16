@@ -1,10 +1,10 @@
 # Getting Started: Run an Avalanche Node
 
-The quickest way to learn about Avalanche is to run a node and interact with the network.
+La forma más rápida de aprender sobre Avalanche es ejecutando un nodo e interactuando con la red.
 
 {% embed url="https://youtu.be/c\_SjtCiOFdg" %}
 
-In this tutorial \(est. time: 10 minutes\), we will:
+En este tutorial \(est. time: 10 minutes\), we will:
 
 * Install and run an Avalanche node
 * Connect to Avalanche
@@ -360,3 +360,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 
 {% page-ref page="references/" %}
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEzMjQ4MzEzMDJdfQ==
+-->
