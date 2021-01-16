@@ -2,7 +2,7 @@
 description: 'Tutorial generado por Miembo de la Comunidad: Seq'
 ---
 
-# Run an Avalanche Node with Microsoft Azure
+# Ejecutar un Nodo de Avalanche con Microsoft Azure
 
 Running a validator and staking with Avalanche provides extremely competitive rewards of between 9.69% and 11.54% depending on the length you stake for. The maximum rate is earned by staking for a year, whilst the lowest rate for 14 days. There is also no slashing, so you don’t need to worry about a hardware failure or bug in the client which causes you to lose part or all of your stake. Instead with Avalanche you only need to currently maintain at least 60% uptime to receive rewards. If you fail to meet this requirement you don’t get slashed, but you don’t receive the rewards. **You also do not need to put your private keys onto a node to begin validating on that node.** Even if someone breaks into your cloud environment and gains access to the node, the worst they can do is turn off the node.
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjcyNjc0OTRdfQ==
+eyJoaXN0b3J5IjpbLTE3MjEyMDk3MDldfQ==
 -->
