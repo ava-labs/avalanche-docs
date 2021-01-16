@@ -103,17 +103,17 @@ El siguiente paso es cambiar el nombre de usuario para la VM, para alinearse con
 Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: la SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o la SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) 
 con el SSD estándar, mientras que con los SSD premium todo está incluido. Personalmente, elegí la SSD Premium por su mayor rendimiento, pero también porque es probable que los discos se utilicen mucho y por lo tanto pueden resultar más baratos a largo plazo.
 
-Selecciona Siguiente: Red para pasar a la configuración de red
+Selecciona Luego: Networking para pasar a la configuración de red
 
 ![Image for post](https://miro.medium.com/max/763/1*Oqv9nA8KoSIyq95DuPDN4g.png)
 
-### Network Config <a id="bc5d"></a>
+### Configuración de Red <a id="bc5d"></a>
 
-You want to use a Static IP so that the public IP assigned to the node doesn’t change in the event it stops. Under Public IP select “Create new”
+Quieres usar una IP estática para que la IP pública asignada al nodo no cambie en caso de que se detenga. En IP Pública selecciona "Crear nuevo"
 
 ![Image for post](https://miro.medium.com/max/774/1*2wsz1_OG7DpLA7jmTJfm0A.png)
 
-Then select “Static” as the Assignment type
+A continuación, seleccione "Estático" como el tipo de asignación
 
 ![Image for post](https://miro.medium.com/max/347/1*y-JbYlRNN3GNNXtZDP-UXQ.png)
 
@@ -325,7 +325,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1MTgxMzY0OCw1MzgzNjM0NjQsLTg1Mz
+eyJoaXN0b3J5IjpbLTQ2MDczMTYzOSw1MzgzNjM0NjQsLTg1Mz
 Y2NjMwNywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAx
 OTM3LDIyMjE3ODY5NF19
 -->
