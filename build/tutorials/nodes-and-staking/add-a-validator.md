@@ -74,7 +74,7 @@ Eso es todo!
 
 ## Añadir un validador con llamados a la API
 
-También podemos añadir un nodo al conjunto de validadores haciendo llamados API a nuestro nodo. Para añadir un nodo a la Red Principal, ejecutaremos [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+También podemos añadir un nodo al conjunto de validadores haciendo llamados API a nuestro nodo. Para añadir un nodo a la Red Primaria, ejecutaremos [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
 
 La firma de este método es:
 
@@ -123,7 +123,7 @@ La respuesta contiene el ID de tu Nodo:
 
 `startTime` & `endTime`
 
-Cuando se emite una transacción para unirse a la Red Principal, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Principal es de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Principal después de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Principal, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
+Cuando se emite una transacción para unirse a la Red Primaria, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Primariaes de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Primariadespués de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Primaria, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
 
 `stakeAmount`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzI2Mjg3NDYsOTQ2OTY5NzY5LC0xMT
+eyJoaXN0b3J5IjpbLTIwOTE0NDU1MjEsOTQ2OTY5NzY5LC0xMT
 A5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3
 ODQ4NywxMDMzNzUzMzY3XX0=
 -->
