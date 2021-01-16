@@ -307,7 +307,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should indicate that the transaction was accepted:
+La respuesta debe indicar que la transacción fue aceptada:
 
 ```cpp
 {
@@ -319,7 +319,7 @@ The response should indicate that the transaction was accepted:
 }
 ```
 
-You might also see that `status` is `Processing` if the network has not yet finalized the transaction.
+También podría ver que `status` está en `Processing` if the network has not yet finalized the transaction.
 
 Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc1NzM1NDE5LC0yMDY3Nzg0MjUwLC0xOT
+eyJoaXN0b3J5IjpbMzU1NDQ0NzUwLC0yMDY3Nzg0MjUwLC0xOT
 I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
