@@ -234,7 +234,7 @@ Ahora añadamos el mismo nodo a una subnet. Lo siguiente tendrá más sentido si
 
 Supongamos que la Subnet tiene la ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, límite 2, y que `username` tiene al menos 2 llaves de control.
 
-Para agregar el validador, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
+Para agregar el validador, ejecutaremos el método API [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
 
 ```cpp
 platform.addSubnetValidator(
@@ -251,11 +251,11 @@ platform.addSubnetValidator(
 ) -> {txID: string}
 ```
 
-Let’s examine the parameters:
+Examinemos los parámetros:
 
 `nodeID`
 
-This is the node ID of the validator being added to the subnet. **This validator must validate the Primary Network for the entire duration that it validates this Subnet.**
+Este es el ID de nodo del validador que se está agregando a la subnet. **Este validador debe validar la Red Primaria durante todo el tiempo que valide esta Subnet.**
 
 `subnetID`
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwNDY2NzE5OCwtMTM0NDMzMDY0OCwzMj
-EyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAy
-NywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LD
-EwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbNTg1NjczNTgxLC0xMzQ0MzMwNjQ4LDMyMT
+IzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkzMDI3
+LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMT
+AzMzc1MzM2N119
 -->
