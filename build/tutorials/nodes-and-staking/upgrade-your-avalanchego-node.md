@@ -121,15 +121,15 @@ Añade`nohup` al comienzo del comando si quieres ejecutar el nodo en segundo pla
 
 ### Nodo ejecutándose como un servicio
 
-If you're running the node as a service, you need to replace the old binaries with the new ones.
+Si estás ejecutando el nodo como un servicio, necesitas reemplazar los binarios viejos por los nuevos.
 
 `cp -r avalanchego-<VERSION>-linux/* <DIRECTORY_WITH_OLD_BINARIES>`
 
-and then restart the service with `sudo systemctl start avalanchego.service`.
+y luego reiniciar el servicio con `sudo systemctl start avalanchego.service`.
 
-## **Build from source**
+## **Creando desde el Código Fuente**
 
-First clone our Github repo \(you can skip this step if you’ve done this before\):
+Primero, clona nuestro repositorio de Github \(puedes saltarte este paso si ya lo has hecho antes\):
 
 ```text
 git clone https://github.com/ava-labs/avalanchego.git
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczODU0OTMwOF19
+eyJoaXN0b3J5IjpbNDUwODAwOTc3XX0=
 -->
