@@ -34,11 +34,11 @@ Descargando el [binario pre-construid](getting-started.md#binary) es más fácil
 
 Se recomienda construir el nodo desde el código fuente si eres un desarrollador que busca experimentar y construir en Avalanche.
 
-#### **Source Code**
+#### **Código Fuente**
 
 Si quieres construir el nodo desde el código fuente, primero tendrás que instalar Go 1.15.5 o posterior. Sigue las instrucciones  [aquí.](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
+ `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
 Download the AvalancheGo repository:
 
@@ -361,6 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTQ1MjgyNTMsLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbLTc0NTQ0NjUyNiwtMTcyMjYxNjU4OV19
 -->
