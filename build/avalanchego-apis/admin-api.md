@@ -18,7 +18,7 @@ Esta API utiliza el formato de RPC `json 2.0`.
 
 ### admin.alias
 
-Asigna un sobrenombre  Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+Asigna un sobrenombre al enpoint de la API, un endpoint distinto endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
 
 #### **Signature**
 
@@ -236,5 +236,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzY0OTcwNCw1NTIxNzc3NTBdfQ==
+eyJoaXN0b3J5IjpbLTIxNDA1MTQyMTAsNTUyMTc3NzUwXX0=
 -->
