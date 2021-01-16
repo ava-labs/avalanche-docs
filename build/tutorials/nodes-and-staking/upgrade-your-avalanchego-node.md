@@ -33,7 +33,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Luego actualizará tu nodo a la última versión, y después de terminar, iniciará el nodo de nuevo, e imprimirá la información sobre la última versión:
 
 ```text
 Node upgraded, starting service...
@@ -42,9 +42,9 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-And that is it, your node is upgraded to the latest version.
+Y eso es todo, tu nodo se ha actualizado a la última versión.
 
-If you installed your node manually, proceed with the rest of the tutorial.
+Si instaló su nodo manualmente, proceda con el resto del tutorial.
 
 ## **Stop the old node version**
 
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDE1MDk1NDBdfQ==
+eyJoaXN0b3J5IjpbMTA2OTM0MTU4MF19
 -->
