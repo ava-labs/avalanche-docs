@@ -323,7 +323,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
+El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos ejecutar [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) y ver que el nodo está ahora en el validador pendiente establecido para la Red Primaria. Esta vez, especificamos el ID de la subnet:
 
 ```cpp
 curl -X POST --data '{
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzc1OTY1MjE2LC0xODI5ODU3MTg3LC0xMz
-Q0MzMwNjQ4LDMyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2
-OSwtMTEwOTkzMDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LD
-EyNjM2Nzg0ODcsMTAzMzc1MzM2N119
+eyJoaXN0b3J5IjpbMTk1OTU5NDcxNywtMTgyOTg1NzE4NywtMT
+M0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3
+NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OS
+wxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
