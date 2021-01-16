@@ -59,15 +59,15 @@ Si necesitas ayuda para configurar tu nodo, únete a nosotros en Discord](https:
 
 ![Image for post](https://miro.medium.com/max/1600/0*6hZSaT651Dd7R4bL)
 
-Fill the fields and confirm!
+Rellena los campos y confirma!
 
 ![Image for post](https://miro.medium.com/max/1600/0*cy61ZMDY5veMvCZj)
 
-Carefully check the details, and click “Confirm” again!
+Revisa cuidadosamente los detalles, y haz clic en "Confirmar" de nuevo!
 
 ![Image for post](https://miro.medium.com/max/1600/0*f3GlN03He6TFkOV7)
 
-Congratulations. You are now validating the Avalanche Primary Network!
+Felicitaciones. ¡Ahora estás validando la Red Primaria de Avalanche!
 
 ### **Step 3B: Add a Delegator!** <a id="59bd"></a>
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNjI1OTE0NCwtNjY2OTcwNTcxXX0=
+eyJoaXN0b3J5IjpbNTE5NDc5MjY3LC02NjY5NzA1NzFdfQ==
 -->
