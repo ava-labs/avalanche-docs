@@ -2,7 +2,7 @@
 
 |  |  |
 | :--- | :--- |
-| [**Añadir un Validador**](add-a-validator.md) | Añade un nodo a la [Red Principal](https://docs.avax.network/learn/platform-overview) y una [subnet](https://docs.avax.network/learn/platform-overview#subnets) en Avalanche. |
+| [**Añadir un Validador**](add-a-validator.md) | Añade un nodo a la [Red Primaria](https://docs.avax.network/learn/platform-overview) y una [subnet](https://docs.avax.network/learn/platform-overview#subnets) en Avalanche. |
 | [**Cómo ejecutar Avalanche en casa: Oracle VM VirtualBox**](https://www.youtube.com/watch?v=7Tx1iKg-jL0) | Crear un nodo que funcione usando el software contenedor Oracle VM VirtualBox. |
 | [**Cómo ejecutar Avalanche en casa: Raspberry Pi 4**](https://www.youtube.com/watch?v=jlur1nef4-E) | Crear un nodo que se ejecute usando Raspberry Pi 4. |
 | [**Configurar un Nodo de Avalanche con los Servicios Web de Amazon \(AWS\)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Crear un nodo que se ejecute en AWS. |
@@ -13,7 +13,7 @@
 | **​**[**Actualiza tu nodo AvalancheGo**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Actualiza tu nodo de Avalanche. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjI1ODQwOTUsLTE1NDcxNzM5MDAsLT
-M2MzgyNjYwMywxMjQzNTUxMjQsMTk4MDYyODgxNSwtNzQ2MDA2
-Mzk2XX0=
+eyJoaXN0b3J5IjpbNTU5MzY2NDI4LC0xNTQ3MTczOTAwLC0zNj
+M4MjY2MDMsMTI0MzU1MTI0LDE5ODA2Mjg4MTUsLTc0NjAwNjM5
+Nl19
 -->
