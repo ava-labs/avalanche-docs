@@ -4,9 +4,9 @@
 
 ## Aprende
 
-* [Platform Overview](learn/platform-overview/README.md)
+* [Resumen de la plataforma](learn/platform-overview/README.md)
   * [Staking](learn/platform-overview/staking.md)
-  * [Transaction Fees](learn/platform-overview/transaction-fees.md)
+  * [Cde transacción](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDIxMDMzNDZdfQ==
+eyJoaXN0b3J5IjpbMjIyNTQwNzE4XX0=
 -->
