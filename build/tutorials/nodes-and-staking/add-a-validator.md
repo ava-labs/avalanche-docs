@@ -127,7 +127,7 @@ Cuando se emite una transacción para unirse a la Red Principal, se especifica l
 
 `stakeAmount`
 
-Para validar la Red Principal, debemos hacer stake de AVAX. Este parámetro define la cantidad de AVAX apostada.
+Para validar la Red Principal, debemos hacer stake de AVAX. Este parámetro define la cantidad de AVAX a la que hacemos Stake.
 
 `rewardAddress`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5Mjg5MTA3MywtMTEwOTkzMDI3LC0xMj
-M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
-MzM2N119
+eyJoaXN0b3J5IjpbOTQ2OTY5NzY5LC0xMTA5OTMwMjcsLTEyMz
+czNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUz
+MzY3XX0=
 -->
