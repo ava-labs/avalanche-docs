@@ -130,7 +130,8 @@ Si quieres experimentar y jugar con tu nodo, sigue leyendo.
 
 Para poder hacer llamados a la API de su nodo desde otras máquinas, al iniciar el nodo incluya el argumento `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+Para conectarse a la Fuji Testnet en lugar de la red principal, use el argumento `--network-id=fuji`. 
+Puedes conseguir fondos en el Testnet desde el [faucet.](https://faucet.avax-test.network/)
 
 ### Create a Keystore User
 
@@ -361,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODc4OTAzOTEyLC0xOTI4NDM1MzgzLC0xNz
-IyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTEzOTA5NDQyOSwtMTkyODQzNTM4MywtMT
+cyMjYxNjU4OV19
 -->
