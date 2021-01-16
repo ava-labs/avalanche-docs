@@ -12,11 +12,11 @@ Sólo se necesitan unos modestos requisitos de hardware, 2 núcleos de CPU, 4 GB
 
 Actualmente, la cantidad mínima requerida para ser validador es de 2.000 AVAX. \(que puede reducirse con el tiempo a medida que aumenta el precio\). Como alternativa, los validadores también pueden cobrar una pequeña cuota para permitir a los usuarios delegar su participación en ellos para ayudar a sufragar los gastos de funcionamiento. Se puede utilizar una calculadora [aquí](https://vscout.io/) para ver cuántas recompensas ganarías al operar un nodo, en comparación con delegar.
 
-I encourage everyone to run their own validators where possible, but for those that don’t meet the minimum staking requirements and want to delegate I am currently running a node which you can find [here](https://avascan.info/staking/validator/NodeID-MGrikMRTmooL1j7uawPHjaMS1cXkbewdb).
+Aliento a todos a ejecutar sus propios validadores cuando sea posible, pero para aquellos que no cumplen con los requisitos mínimos de staking y quieren delegar estoy actualmente ejecutando un nodo que se puede encontrar [aquí](https://avascan.info/staking/validator/NodeID-MGrikMRTmooL1j7uawPHjaMS1cXkbewdb).
 
-In this article we will step through the process of configuring a node on Microsoft Azure. This tutorial assumes no prior experience with Microsoft Azure and will go through each step with as few assumptions possible.
+En este artículo daremos un paso adelante en el proceso de configuración de un nodo en Microsoft Azure. Este tutorial asume que no hay experiencia previa con Microsoft Azure y pasará por cada paso con el menor número de suposiciones posibles.
 
-At the time of this article, spot pricing for a virtual machine with 2 Cores and 8 GB memory costs as little as $0.01060 per hour which works out at about $113.44 a year, **a saving of 83.76%! compared to normal pay as you go prices.** In comparison a virtual machine in AWS with 2 Cores and 4 GB Memory with spot pricing is around $462 a year.
+En el momento de este artículo, el precio al contado de una máquina virtual con 2 núcleos y 8 GB de memoria cuesta tan sólo 0,01060 dólares por hora, lo que equivale a unos 113,44 dólares al año, **a saving of 83.76%! compared to normal pay as you go prices.** In comparison a virtual machine in AWS with 2 Cores and 4 GB Memory with spot pricing is around $462 a year.
 
 ## Initial Subscription Configuration <a id="6e8d"></a>
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDQyNTA0NjUsMjIyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbLTQ5NTA5MjU4NCwyMjIxNzg2OTRdfQ==
 -->
