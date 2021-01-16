@@ -167,7 +167,7 @@ Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de
 
 ### Crear una Dirección
 
-Avalancha es una plataforma de blockchains heterogéneas, una de las cuales es la [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), que actúa como una plataforma descentralizada para la creación y el comercio de activos digitales. Ahora vamos a crear una dirección para guardar AVAX en nuestro nodo.
+Avalanche es una plataforma de blockchains heterogéneas, una de las cuales es la [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), que actúa como una plataforma descentralizada para la creación y el comercio de activos digitales. Ahora vamos a crear una dirección para guardar AVAX en nuestro nodo.
 
 Para crear una nueva dirección en la X-Chain, ejecute[`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), un método de la [API de la X-Chain](avalanchego-apis/exchange-chain-x-chain-api.md):
 
@@ -199,7 +199,7 @@ La respuesta debería ser así:
 }
 ```
 
-Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
+Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
 
 ### Send Funds From Avalanche Wallet to Your Node
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjk5MDc4MTYsLTIwNjc3ODQyNTAsLT
+eyJoaXN0b3J5IjpbLTE0MDE2NjQyMTMsLTIwNjc3ODQyNTAsLT
 E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
 -->
