@@ -46,15 +46,15 @@ Y eso es todo, tu nodo se ha actualizado a la última versión.
 
 Si instaló su nodo manualmente, proceda con el resto del tutorial.
 
-## **Stop the old node version**
+## **Detener la Versión Antigua del Nodo**
 
-After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
+Después de que la copia de seguridad esté asegurada, puedes empezar a actualizar tu nodo. Comienza por detener la versión que se está ejecutando actualmente.
 
-### Node running from terminal
+### Nodo ejecutándose desde la terminal
 
 If your node is running in a terminal stop it by pressing `ctrl+c`.
 
-### Node running as a service
+### Nodo ejecutándose como un servicio
 
 If your node is running as a service, stop it by entering:
 
@@ -179,5 +179,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2OTM0MTU4MF19
+eyJoaXN0b3J5IjpbLTg3OTE0OTY1Ml19
 -->
