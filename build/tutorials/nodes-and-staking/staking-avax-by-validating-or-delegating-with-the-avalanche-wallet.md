@@ -33,7 +33,7 @@ Voilá!
 
 Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puede añadir un validador o un delegador a su wallet.
 
-### **Step 3A: Become a validator!** <a id="60f0"></a>
+### **Paso 3A: Conviértete en un validador!** <a id="60f0"></a>
 
 To add a validator, we need to have a node running. We can set one up using the released [binaries](https://github.com/ava-labs/avalanchego/releases/) or build them from the [AvalancheGo source code](https://github.com/ava-labs/avalanchego).
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1OTcxMjg5MF19
+eyJoaXN0b3J5IjpbLTg1NDM2ODI5MV19
 -->
