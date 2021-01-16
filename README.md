@@ -102,14 +102,13 @@ Permite la creación de smart contracts en Solidity y sus herramientas favoritas
 
 ### Blockchains Públicas y Privadas
 
-Crea tus propias cadenas de bloqueo públicas o privadas.
+Crea tus propias blockchains públicas o privadas.
 
-### Designed for Finance
+### Diseñado para las finanzas
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets.
-
+Soporte nativo para crear e intercambiar fácilmente activos digitales inteligentes con reglas complejas y personalizadas.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAzMjA5MzIyMiwxMjk2OTY4NTI4LC02ND
+eyJoaXN0b3J5IjpbMjAyMDI5NTA0MCwxMjk2OTY4NTI4LC02ND
 UzMTA0MjEsOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQz
 MzEsOTg4MTAxOTcwXX0=
 -->
