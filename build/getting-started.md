@@ -26,7 +26,7 @@ Avalanche es un protocolo increíblemente ligero, por lo que los requisitos mín
 
 Instalemos AvalancheGo, la implementación Go de un nodo Avalanche, y conectémonos a la Red Pública de Avalanche.
 
-### Download AvalancheGo
+### Descarga AvalancheGo
 
 The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjI2MTY1ODldfQ==
+eyJoaXN0b3J5IjpbNTQyMTI3OTQzLC0xNzIyNjE2NTg5XX0=
 -->
