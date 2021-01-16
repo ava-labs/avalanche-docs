@@ -44,9 +44,9 @@
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Usando Truffle con la  C-Chain de Avalanche](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
-  * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
-    * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
-    * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
+  * [Activos Digitales Inteligentes](build/tutorials/smart-digital-assets/README.md)
+    * [Crear un Token ERC-20](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
+    * [Crear un Activo de Capital Fijo](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Create a Variable-Cap Asset](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
     * [Mint NFTs with the Avalanche Wallet](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDQ5MDcwMjAsLTM0MjQzMzkyMiwtMz
-UxNTkzODksMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbMjY5ODU0ODMwLC0zNDI0MzM5MjIsLTM1MT
+U5Mzg5LDM1ODg3MjAyOV19
 -->
