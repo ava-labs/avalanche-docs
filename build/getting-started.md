@@ -64,7 +64,7 @@ El Binario, llamado `avalanchego`, está ubicado en `avalanchego/build`.
 
 #### **Binario**
 
-Si quieres descargar un binario pre-construido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona el  que quieras \(probablemente el último.\)
+Si quieres descargar un binario pre-construido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona la versión que quieras \(probablemente la última.\)
 
 Debajo de `Assets`, selecciona el archivo apropiado.
 
@@ -362,6 +362,7 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMDM4MDg4NSwxNTA1NzYyODE3LC0yMD
-Y3Nzg0MjUwLC0xOTI4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbMjA0MjQyMjgwOSwtODAwMzgwODg1LDE1MD
+U3NjI4MTcsLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLTE3MjI2
+MTY1ODldfQ==
 -->
