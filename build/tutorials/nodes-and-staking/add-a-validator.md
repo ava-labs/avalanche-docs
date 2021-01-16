@@ -259,11 +259,11 @@ Este es el ID de nodo del validador que se está agregando a la subnet. **Este v
 
 `subnetID`
 
-This is the ID of the subnet we’re adding a validator to.
+Este es el ID de la subnet a la que estamos añadiendo un validador.
 
-`startTime` and `endTime`
+`startTime` &`endTime`
 
-Similar to above, these are the Unix times that the validator will start and stop validating the subnet. `startTime` must be at or after the time that the validator starts validating the Primary Network, and `endTime` must be at or before the time that the validator stops validating the Primary Network.
+Similar a lo anterior, estos son los tiempos de Unix en que el validador comenzará y dejará de validar la subnet. `startTime` debe ser en o después del momento en que el validador comience a validar la Red Primaria, y `endTime` debe ser en el momento o antes de que el validador deje de validar la Red Primaria.
 
 `weight`
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTg1NjczNTgxLC0xMzQ0MzMwNjQ4LDMyMT
-IzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkzMDI3
-LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMT
-AzMzc1MzM2N119
+eyJoaXN0b3J5IjpbLTE4Mjk4NTcxODcsLTEzNDQzMzA2NDgsMz
+IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
+MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
+wxMDMzNzUzMzY3XX0=
 -->
