@@ -319,9 +319,9 @@ La respuesta debe indicar que la transacción fue aceptada:
 }
 ```
 
-También podría ver que `status` está en `Processing` if the network has not yet finalized the transaction.
+También podría ver que `status` está en `Processing` si la red no ha finalizado aún la transacción.
 
-Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
+Una vez que vea que la transacción es `Accepted`, comprobar el saldo de la dirección `to` para ver que tiene el AVAX que enviamos:
 
 ```cpp
 curl -X POST --data '{
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU1NDQ0NzUwLC0yMDY3Nzg0MjUwLC0xOT
-I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTM2Mzg4MDI1MiwtMjA2Nzc4NDI1MCwtMT
+kyODQzNTM4MywtMTcyMjYxNjU4OV19
 -->
