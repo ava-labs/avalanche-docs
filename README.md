@@ -1,7 +1,7 @@
 ---
 descripción: >-
   Desarrolla en Avalanche. Desarrolla sin límites. Los desarrolladores que construyen en Avalanche
-  pueden fácilmente crear poderosas, confiables, y seguras.
+  pueden crear fácilmente aplicaciones poderosas, confiables, y seguras.
 ---
 
 # Developer Documentation
@@ -109,5 +109,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDM3MjM0MzQsOTg4MTAxOTcwXX0=
+eyJoaXN0b3J5IjpbMTI5MjI4NDI2Myw5ODgxMDE5NzBdfQ==
 -->
