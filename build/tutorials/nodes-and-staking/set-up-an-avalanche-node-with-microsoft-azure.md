@@ -117,15 +117,15 @@ A continuación, seleccione "Estático" como el tipo de asignación
 
 ![Image for post](https://miro.medium.com/max/347/1*y-JbYlRNN3GNNXtZDP-UXQ.png)
 
-Then we need to configure the network security group to control access inbound to the Avalanche node. Select “Advanced” as the NIC network security group type and select “Create new”
+Entonces necesitamos configurar el grupo de seguridad de la red para controlar el acceso entrante al nodo Avalanche. Selecciona "Avanzado" como el tipo de grupo de seguridad de red NIC y selecciona "Crear nuevo"
 
 ![Image for post](https://miro.medium.com/max/763/1*e5Y-mHGkn42A-mJx6o3J0g.png)
 
-For security purposes you want to restrict who is able to remotely connect to your node. To do this you will first want to find out what your existing public IP is. This can be done by going to google and searching for “what’s my ip”.
+Por motivos de seguridad, desea restringir quién puede conectarse remotamente a su nodo. Para hacer esto, primero querrás averiguar cuál es tu IP pública existente. Esto se puede hacer yendo a Google y buscando "cuál es mi IP".
 
 ![Image for post](https://miro.medium.com/max/450/1*-aV-AdrABCUmludxXUPV6Q.png)
 
-It’s likely that you have been assigned a dynamic public IP for your home, unless you have specifically requested it, and so your assigned public IP may change in the future. It’s still recommended to restrict access to your current IP though, and then in the event your home IP changes and you are no longer able to remotely connect to the VM, you can just update the network security rules with your new public IP so you are able to connect again.
+Es probable que se le haya asignado una IP pública dinámica para su casa, a menos que usted lo haya solicitado específicamente, y por lo tanto su IP pública asignada puede cambiar en el futuro. Sin embargo, se recomienda restringir el acceso a su IP actual, y luego, en caso de que la IP de su casa cambie y ya no pueda conectarse remotamente a la máquina virtual, puede actualizar las reglas de seguridad de la red con su nueva IP pública para poder conectarse nuevamente.
 
 NOTE: If you need to change the network security group rules after deployment if your home IP has changed, search for “avalanche-nsg” and you can modify the rule for SSH and Port 9650 with the new IP. **Port 9651 needs to remain open to everyone** though as that’s how it communicates with other Avalanche nodes.
 
@@ -325,7 +325,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2MDczMTYzOSw1MzgzNjM0NjQsLTg1Mz
+eyJoaXN0b3J5IjpbMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1Mz
 Y2NjMwNywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAx
 OTM3LDIyMjE3ODY5NF19
 -->
