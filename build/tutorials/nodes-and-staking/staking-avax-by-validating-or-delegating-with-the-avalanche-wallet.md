@@ -49,7 +49,7 @@ El uso de los binarios es fácil y conveniente y te prepara para ser un validado
 \* Windows: unzip avalanchego-win-&lt;VERSION&gt;.zip
 
 * Navegue hasta el directorio de binarios cd avalanchego-&lt;VERSION&gt;
-* Ejecute el binario con ./avalanchego en Linux y OSX and AvalancheGo on Windows
+* Ejecute el binario con ./avalanchego en Linux y OSX y AvalancheGo en Windows
 
 We will let our node bootstrap and sync with the rest with the network, and we are ready to roll.
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQxMzE1ODEsLTY2Njk3MDU3MV19
+eyJoaXN0b3J5IjpbLTExNDY1ODM0NjcsLTY2Njk3MDU3MV19
 -->
