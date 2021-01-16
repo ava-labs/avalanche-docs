@@ -1,5 +1,5 @@
 ---
-description: 'Tutorial generado por Miembo de la Comunidad: Seq'
+descripción: 'Tutorial generado por Miembo de la Comunidad: Seq'
 ---
 
 # Ejecutar un Nodo de Avalanche con Microsoft Azure
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjEyMDk3MDldfQ==
+eyJoaXN0b3J5IjpbMjIyMTc4Njk0XX0=
 -->
