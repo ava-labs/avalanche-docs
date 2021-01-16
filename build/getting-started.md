@@ -273,11 +273,11 @@ curl -X POST --data '{
 
 Si quiere especificar una dirección en particular donde debe ir el cambio, puedes especificarla en `changeAddr`. Puede dejar este campo vacío; si lo hace, cualquier cambio irá a una de las direcciones que su usuario controla.
 
-Para evitar el spam, Avalanche requiere el pago de una comisión por la transacción. La comisión por la transacción se deducirá automáticamente de una dirección controlada por el usuario cuando se emita una transacción. Tenlo en cuenta cuando revises los saldos  abajo.
+Para evitar el spam, Avalanche requiere el pago de una comisión por la transacción. La comisión por la transacción se deducirá automáticamente de una dirección controlada por el usuario cuando se emita una transacción. Tenlo en cuenta cuando revises los saldos de abajo.
 
 {% page-ref page="../learn/platform-overview/transaction-fees.md" %}
 
-When you send this request, the node will authenticate you using your username and password. Then, it will look through all the [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controlled by your user until it finds enough AVAX to satisfy the request.
+Cuando envíe esta solicitud, el nodo lo autentificará con su nombre de usuario y contraseña. Luego, buscará a través de todas las [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controladas por su usuario hasta que encuentre suficiente AVAX para satisfacer la petición.
 
 The response contains the transaction’s ID. It will be different for every invocation of `send`.
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4Njk0NjMyNiwtMjA2Nzc4NDI1MCwtMT
-kyODQzNTM4MywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbMjQ4MTAwODcwLC0yMDY3Nzg0MjUwLC0xOT
+I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
