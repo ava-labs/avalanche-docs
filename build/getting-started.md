@@ -135,7 +135,7 @@ Puedes conseguir fondos en el Testnet desde el [faucet.](https://faucet.avax-tes
 
 ### Crear un Usuario del Keystore 
 
-Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **Sólo debe crear un usuario de keystore en un nodo que tú operes, ya que el operador del nodo tiene acceso a su contraseña en texto plano.** Para crear un usuario, call [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
+Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **Sólo debe crear un usuario de keystore en un nodo que tú operes, ya que el operador del nodo tiene acceso a su contraseña en texto plano.** Para crear un usuario ejecute [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
 
 ```cpp
 curl -X POST --data '{
@@ -149,7 +149,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -159,7 +159,7 @@ The response should be:
 }
 ```
 
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](avalanchego-apis/keystore-api.md) to see how.
+Ahora, tienes un usuario en este nodo. Los datos del Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](avalanchego-apis/keystore-api.md) to see how.
 
 {% hint style="danger" %}
 **You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0MjU3Njk1NywtMTkyODQzNTM4MywtMT
+eyJoaXN0b3J5IjpbLTM1MjY3NjE3MywtMTkyODQzNTM4MywtMT
 cyMjYxNjU4OV19
 -->
