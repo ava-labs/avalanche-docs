@@ -91,33 +91,33 @@ Descarga: `avalanchego-macos-<VERSION>.zip`
 Descomprime: `unzip avalanchego-macos-<VERSION>.zip`  
 La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en PCs o proveedores de nube:  
+Descarga: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en computadoras basadas en RaspberryPi4 o similares basadas en Arm64:   
+Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-You are now ready to run the new version of the node.
+Ya estás listo para ejecutar la nueva versión del nodo.
 
-### Running the node from terminal
+### Ejecutando el Nodo desde la terminal
 
-If you are using the pre-built binaries on MacOS:
+Si estás usando los binarios pre-construidos en MacOS:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Si estás usando los binarios pre-construidos en Linux:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Add `nohup` at the start of the command if you want to run the node in the background.
+Añade`nohup` at the start of the command if you want to run the node in the background.
 
 ### Running the node as a service
 
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwNDY3NjU3OV19
+eyJoaXN0b3J5IjpbLTEzNDIzMjk1MzFdfQ==
 -->
