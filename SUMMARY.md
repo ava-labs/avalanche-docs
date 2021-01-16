@@ -67,22 +67,22 @@
 * [Herramientas](build/tools/README.md)
   * [AvalancheJS](build/tools/avalanchejs/README.md)
     * [Crear un activo en la X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
-    * [Administrar las¿' claves de la X-Chain Keys](build/tools/avalanchejs/manage-x-chain-keys.md)
-    * [Send an Asset on the X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
+    * [Administrar Claves de la X-Chain](build/tools/avalanchejs/manage-x-chain-keys.md)
+    * [Envía un activo en la X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
-  * [Ortelius API](build/tools/ortelius.md)
-* [References](build/references/README.md)
-  * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
-  * [Command Line Interface](build/references/command-line-interface.md)
-  * [Coreth Atomic Transaction Format](build/references/coreth-atomic-transaction-serialization.md)
-  * [Cryptographic Primitives](build/references/cryptographic-primitives.md)
-  * [Network Protocol](build/references/network-protocol.md)
-  * [Serialization Primitives](build/references/serialization-primitives.md)
-  * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
+  * [API de Ortelius](build/tools/ortelius.md)
+* [Referencias](build/references/README.md)
+  * [Formato de transacción AVM](build/references/avm-transaction-serialization.md)
+  * [Interfaz de la línea de mando](build/references/command-line-interface.md)
+  * [Formato de transacción atómica de Coreth](build/references/coreth-atomic-transaction-serialization.md)
+  * [Primitivos criptográficos](build/references/cryptographic-primitives.md)
+  * [Protocolo de Red](build/references/network-protocol.md)
+  * [Primitivos de serialización](build/references/serialization-primitives.md)
+  * [Formato de transacción de la plataforma](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI4NTI2OTU2Myw3NTAxMjU4ODIsLTM0Mj
+eyJoaXN0b3J5IjpbMTA0MjI2NDQzOCw3NTAxMjU4ODIsLTM0Mj
 QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
 -->
