@@ -353,7 +353,7 @@ La respuesta debe incluir el nodo que acabamos de añadir:
 }
 ```
 
-Cuando el tiempo llegue a  `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
+Cuando el tiempo llegue a  `1584042912`, este nodo comenzará a validar esta Subnet. Cuando llegue a `1584121156`, este nodo dejará de validar esta Subnet.
 
 ### Whitelisting the Subnet
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzA0OTA2NTksLTE4Mjk4NTcxODcsLT
-EzNDQzMzA2NDgsMzIxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5
-NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNj
-ksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMzMyNzc3NDg3LC0xODI5ODU3MTg3LC0xMz
+Q0MzMwNjQ4LDMyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2
+OSwtMTEwOTkzMDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LD
+EyNjM2Nzg0ODcsMTAzMzc1MzM2N119
 -->
