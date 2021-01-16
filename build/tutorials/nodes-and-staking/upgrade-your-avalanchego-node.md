@@ -135,7 +135,7 @@ Primero, clona nuestro repositorio de Github \(puedes saltarte este paso si ya l
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
-Then move to the avalanchego directory:
+Luego, mueva al directorio de avalanchego:
 
 ```text
 cd avalanchego
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDUwODAwOTc3XX0=
+eyJoaXN0b3J5IjpbMTIyODkyNjE3OCw0NTA4MDA5NzddfQ==
 -->
