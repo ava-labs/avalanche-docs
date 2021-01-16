@@ -150,15 +150,14 @@ Deje los otros ajustes como predeterminados y luego presione "Review + create" p
 
 ![Image for post](https://miro.medium.com/max/828/1*01yGser7qYjiXDngemqClQ.png)
 
-First it will perform a validation test. If you receive an error here, make sure you selected Pay-As-You-Go subscription model and you are not using the Free Trial subscription as Spot instances are not available. Verify everything looks correct and press “Create”
+Primero realizará una prueba de validación. Si recibe un error aquí, asegúrese de haber seleccionado el modelo de suscripción de pago por uso y que no esté utilizando la suscripción de prueba gratuita, ya que para las Spot instances no está disponible. Verifique que todo se vea correcto y presione "Create"
 
 ![Image for post](https://miro.medium.com/max/751/1*HyQP7HJCiVQPPiWodRj6aQ.png)
 
-You should then receive a prompt asking you to generate a new key pair to connect your virtual machine. Select “Download private key and create resource” to download the private key to your PC.
+A continuación, recibirá un mensaje que le pedirá que genere un nuevo par de claves para conectar su máquina virtual. Seleccione "Download private key and create resource" para descargar la private key a su PC.
 
 ![Image for post](https://miro.medium.com/max/456/1*FCAVco29fcianH4TjxVGzQ.png)
-
-Once your deployment has finished, select “Go to resource”
+Una vez que su instalación haya terminado, seleccione "Go to resource"
 
 ![Image for post](https://miro.medium.com/max/608/1*dXl1RkH6xZvHkdI1d-XsOQ.png)
 
@@ -324,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0ODU5OTAwNyw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbODY0MDIyMzY5LDg3NzQ2NDM5MiwxOTA4MD
+UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
+LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
 -->
