@@ -147,7 +147,7 @@ Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de 
 
 Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción, proporciona el AVAX del Stake y a quien se les devolverá los AVAX en Stake.
 
-Ahora vamos a emitir la transacción. Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` and `endTime`, respectively. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\) En este ejemplo hacemos stake de 2,000 AVAX \(2 x 1012 nAVAX\).
+Ahora vamos a emitir la transacción. Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\)  En este ejemplo hacemos stake de 2,000 AVAX \(2 x 1012 nAVAX\).
 
 ```cpp
 curl -X POST --data '{
@@ -277,7 +277,7 @@ Cualquier cambio que resulte de esta transacción se enviará a esta dirección.
 
 Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción. Este usuario debe tener un número suficiente de las claves de control de esta Subnet para poder añadir un validador a esta Subnet.
 
-Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` &`endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\) 
+Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\) 
 
 ```cpp
 curl -X POST --data '{
@@ -297,7 +297,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+La respuesta tiene el ID de la transacción, así como la dirección a la que fué enviado el cambio.
 
 ```cpp
 {
@@ -310,7 +310,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Podemos comprobar el estado de la transacción ejecutando  [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjIzNDAxMDQsLTE4Mjk4NTcxODcsLT
-EzNDQzMzA2NDgsMzIxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5
-NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNj
-ksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMzc1OTY1MjE2LC0xODI5ODU3MTg3LC0xMz
+Q0MzMwNjQ4LDMyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2
+OSwtMTEwOTkzMDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LD
+EyNjM2Nzg0ODcsMTAzMzc1MzM2N119
 -->
