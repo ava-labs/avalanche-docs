@@ -10,9 +10,9 @@
 | [**Configurar Nodo en Linux usando el script de instalación**](set-up-node-with-installer.md) | Crear un nodo en Linux de la manera más fácil. |
 | [**Configurar la Monitorización del Nodo**](setting-up-node-monitoring.md) | Establecer una infraestructura para monitorear una instancia de AvalancheGo. |
 | [**Haz Staking de AVAX, Validando o Delegando, con la Wallet de Avalanche**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Haz Staking de AVAX desde la Wallet de Avalanche. |
-| **​**[**Actualice su nodo AvalancheGo**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Actualice su nodo de Avalanche. |
+| **​**[**Actualiza tu nodo AvalancheGo**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Actualiza su nodo de Avalanche. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI0MzU1MTI0LDE5ODA2Mjg4MTUsLTc0Nj
-AwNjM5Nl19
+eyJoaXN0b3J5IjpbLTM2MzgyNjYwMywxMjQzNTUxMjQsMTk4MD
+YyODgxNSwtNzQ2MDA2Mzk2XX0=
 -->
