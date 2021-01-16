@@ -44,9 +44,9 @@ Introduzca sus datos de facturación y confirme su identidad como parte del proc
 
 ![Image for post](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
-## Create a Virtual Machine <a id="41ac"></a>
+## Crea una Virtual Machine <a id="41ac"></a>
 
-Now that we have a subscription, we can create the Ubuntu Virtual Machine for our Avalanche Node. Select the Icon in the top left for the Menu and choose “+ Create a resource”.
+Ahora que tenemos una suscripción, podemos crear la Máquina Virtual Ubuntu para nuestro Nodo de Avalanche. Selecciona el icono en la parte superior izquierda para el menú y elige "+ Crear un recurso".
 
 ![Image for post](https://miro.medium.com/max/565/1*3nSPwgEM3oIgrIlIo-TS1w.png)
 
@@ -322,6 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEyNDIwOTE5MSwtMjU4NTAxOTM3LDIyMj
+eyJoaXN0b3J5IjpbMTcyMTQwOTE2NCwtMjU4NTAxOTM3LDIyMj
 E3ODY5NF19
 -->
