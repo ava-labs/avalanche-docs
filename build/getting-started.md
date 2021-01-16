@@ -4,12 +4,12 @@ La forma más rápida de aprender sobre Avalanche es ejecutando un nodo e intera
 
 {% embed url="https://youtu.be/c\_SjtCiOFdg" %}
 
-En este tutorial \(est. time: 10 minutes\), we will:
+En este tutorial \(Tiempo estimado: 10 minutos\), podremos:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+* Instalar y ejecutar un nodo de Avalanche
+* Conectar con Avalanche
+* Enviar AVAX
+* Añadir tu nodo al conjunto de validadores
 
 If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjQ4MzEzMDJdfQ==
+eyJoaXN0b3J5IjpbMjYzNDUzMDQyXX0=
 -->
