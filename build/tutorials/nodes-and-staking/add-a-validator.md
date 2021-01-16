@@ -194,7 +194,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos  [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos ejecutar [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) y ver que el nodo está ahora en el validador pendiente establecido para la Red Primaria:
 
 ```cpp
 curl -X POST --data '{
@@ -205,7 +205,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+La respuesta debería incluir el nodo que acabamos de añadir:
 
 ```cpp
 {
@@ -224,7 +224,7 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
+Cuando el tiempo llegue a `1584021450`, este nodo comenzará a validar la Red Primaria. Cuando llegue a `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
 
 ## Adding a Subnet Validator
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTEzOTA3NTcsLTEzNDQzMzA2NDgsMz
-IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
-MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
-wxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMTM0NDMyNzgwMCwtMTM0NDMzMDY0OCwzMj
+EyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAy
+NywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LD
+EwMzM3NTMzNjddfQ==
 -->
