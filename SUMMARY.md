@@ -13,11 +13,11 @@
 * [Foro](https://forum.avax.network)
 * [Comunidad](learn/community.md)
 
-## Build
+## Desarrolla
 
-* [Getting Started: Run an Avalanche Node](build/getting-started.md)
-* [Release Notes](build/release-notes-1/README.md)
-  * [Email Alerts](http://eepurl.com/heNhSX)
+* [Empezando: Ejecutar un Nodo de Avalanche](build/getting-started.md)
+* [Notas de lanzamiento](build/release-notes-1/README.md)
+  * [Alertas de Correo Electrónico](http://eepurl.com/heNhSX)
   * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
   * [Ortelius Release Notes](build/release-notes-1/ortelius-release-notes.md)
 * [Tutorials](build/tutorials/README.md)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbLTE0OTMzODY3NTIsMzU4ODcyMDI5XX0=
 -->
