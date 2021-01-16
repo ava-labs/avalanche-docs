@@ -183,9 +183,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-If your node isn’t finished bootstrapping, this call will return status `503` with message `API call rejected because chain is not done bootstrapping`.
+Si su nodo no ha terminado el bootstrapping, esta llamada devolverá el estado `503` con el mensaje `API call rejected because chain is not done bootstrapping`.
 
-Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID \(or alias\) is `X` \(i.e., the X-Chain\).
+Tenga en cuenta que hacemos esta petición a `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID \(or alias\) is `X` \(i.e., the X-Chain\).
 
 The response should look like this:
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLT
-E3MjI2MTY1ODldfQ==
+eyJoaXN0b3J5IjpbMTc3ODczNDQwOSwtMjA2Nzc4NDI1MCwtMT
+kyODQzNTM4MywtMTcyMjYxNjU4OV19
 -->
