@@ -161,24 +161,25 @@ Ahora construye el binario:
 ./scripts/build.sh
 ```
 
-This should print:
+Esto debería aparecer:
 
 ```text
 Build Successful
 ```
 
-You can check what version you’re running by doing:
+Puedes comprobar qué versión estás ejecutando con:
 
 ```text
 ./build/avalanchego --version
 ```
 
-You can run your node with:
+Puedes ejecutar tu nodo con:
 
 ```text
 ./build/avalanchego
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDI2MjQzMjQsNDUwODAwOTc3XX0=
+eyJoaXN0b3J5IjpbODQ2Nzc0MjE0LC0xMTQyNjI0MzI0LDQ1MD
+gwMDk3N119
 -->
