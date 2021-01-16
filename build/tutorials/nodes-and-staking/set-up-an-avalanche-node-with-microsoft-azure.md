@@ -138,11 +138,11 @@ Ahora que tienes tu IP pública selecciona la regla por defecto de permitir ssh 
 Luego seleccione "+ Add an inbound rule" para agregar otra regla para el acceso a RPC, esto también debe ser restringido sólo a su IP. Cambie la Fuente a "IP Addresses" e introduzca en su IP pública devuelta de google en el campo IP de la Fuente. Esta vez cambie el campo "Rangos de puertos de destino" a 9650 y seleccione "TCP" como protocolo. Cambia la prioridad a 110 y ponle como nombre "Avalanche\_RPC" y presiona Add.
 ![Image for post](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
 
-Select “+ Add an inbound rule” to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep “Source” set to “Any”. Change the Destination port range to “9651” and change the protocol to “TCP”. Enter a priority of 120 and a name of Avalanche\_Protocol and press Add.
+Selecciona "+ Add an inbound rule" para añadir una regla final para el Protocolo de Avalanche para que otros nodos puedan comunicarse con tu nodo. Esta regla debe estar abierta a todos, así que mantén "Source" en "Any". Cambia el rango del puerto de destino a "9651" y cambia el protocolo a "TCP". Introduce una prioridad de 120 y un nombre de Avalanche\_Protocol y pulsa Add.
 
 ![Image for post](https://miro.medium.com/max/662/1*tIMEp7O83NIUitWwlcHAxw.png)
 
-The network security group should look like the below \(albeit your public IP address will be different\) and press OK.
+El grupo de seguridad de la red debe tener el siguiente aspecto \(aunque su dirección IP pública será diferente\) y pulse OK.
 
 ![Image for post](https://miro.medium.com/max/363/1*7rAR3C_UrX94iXxL4sdV9g.png)
 
@@ -324,7 +324,8 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyODk5OTgyMyw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTEyNzM4NDQ1OTAsODc3NDY0MzkyLDE5MD
+gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
+NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
+==
 -->
