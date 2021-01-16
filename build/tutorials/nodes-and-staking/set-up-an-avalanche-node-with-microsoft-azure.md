@@ -308,9 +308,9 @@ Si todo va bien, la respuesta debería ser algo como esto:
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR"},"id":1}
 ```
 
-Esa parte que dice, “NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
+Esa parte que dice, “NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR” es el ID de nuestro Nodo, todo completo. Cópialo y guárdalo en tus notas. No hay nada confidencial o seguro sobre este valor, pero es una necesidad absoluta para cuando enviemos este nodo para ser un validador.
 
-### Backup your Staking Keys <a id="ef3e"></a>
+### Haga una copia de seguridad de las Staking Keys<a id="ef3e"></a>
 
 The last thing that should be done is backing up our staking keys in the untimely event that our instance is corrupted or terminated. It’s just good practice for us to keep these keys. To back them up, we use the following command:
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3ODI5MzE4LDg3NzQ2NDM5MiwxOTA4MD
-UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
-LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbLTQ1NTYwNTM0MCw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
