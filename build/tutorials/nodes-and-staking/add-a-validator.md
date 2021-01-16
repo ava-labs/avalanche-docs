@@ -20,7 +20,7 @@ Para asegurarse de que su nodo está bien conectado, asegúrese de que su nodo p
 
 Primero, te mostramos cómo añadir tu nodo como validador usando la [Wallet de Avalanche](https://wallet.avax.network).
 
-Obten la ID de tu Nodo ejecutando: [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Obten la ID de tu Nodo ejecutando [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ![getNodeID postman](../../../.gitbook/assets/getNodeID-postman.png)
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTcyOTAzMDcsLTEyMzczNTM5MjgsLT
-EwNTU5ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbMjEyMTQxMDg3MSwtMTIzNzM1MzkyOCwtMT
+A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
