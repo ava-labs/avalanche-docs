@@ -30,7 +30,7 @@ Instalemos AvalancheGo, la implementación Go de un nodo Avalanche, y conectémo
 
 El nodo es un programa binario. Puedes descargar el código fuente y luego construir el programa binario, o puedes descargar el binario pre-construido. No necesitas hacer ambas cosas.
 
-Descargando el [binario pre-construid](getting-started.md#binary) es más fácil y recomendable si sólo buscas dirigir tu propio nodo y hacer staking en él.
+Descargando el [binario pre-construido](getting-started.md#binary) es más fácil y recomendable si sólo buscas dirigir tu propio nodo y hacer staking en él.
 
 Se recomienda construir el nodo desde el código fuente si eres un desarrollador que busca experimentar y construir en Avalanche.
 
@@ -60,11 +60,11 @@ Construya en AvalancheGo:
 ./scripts/build.sh
 ```
 
-El Binario, llamado `avalanchego`, is in `avalanchego/build`.
+El Binario, llamado `avalanchego`, está ubicado en `avalanchego/build`.
 
-#### **Binary**
+#### **Binario**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Si quieres descargar un binario pre-construido en lugar de construirlo tú mismo, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
 
 Under `Assets`, select the appropriate file.
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxMjExODE2MiwtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbMTU4NTg5MDA4NywtMTcyMjYxNjU4OV19
 -->
