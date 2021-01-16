@@ -318,12 +318,12 @@ Lo último que deberíamos hacer es respaldar nuestras staking keys en el caso i
 scp -i C:\Avalanche\avalanche_key.pem -r ubuntu@EnterYourAzureIPHere:/home/ubuntu/.avalanchego/staking C:\Avalanche
 ```
 
-As before, we’ll need to replace “EnterYourAzureIPHere” with the appropriate value that we retrieved. This backs up our staking key and staking certificate into the C:\Avalanche folder we created before.
+Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropiado que recuperamos. Esto respalda nuestra staking key y staking certificate en la carpeta C:\Avalanche que creamos antes.
 
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzMTA2MDA1LDg3NzQ2NDM5MiwxOTA4MD
-UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
-LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbMTA0Mzk1NDM1MCw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
