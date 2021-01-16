@@ -10,9 +10,9 @@ La P-Chain maneja los metadatos de Avalanche. Esto incluye el seguimiento de qu�
 Tenga en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **No puedes quitar tu Stake antes de tiempo o cambiar la cantidad del Stake, el ID del nodo o la dirección de la recompensa.** Por favor, asegúrate de utilizar los valores correctos en los llamados de la API a continuación. Si no estás seguro, consulta el [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) o pregunta por ayuda en [Discord.](https://chat.avalabs.org/)
 {% endhint %}
 
-## Requirements
+## Requisitos
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+Has completado [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMTU5Njc2OCwtMTIzNzM1MzkyOCwtMT
+eyJoaXN0b3J5IjpbMjA3OTE2MTMwOCwtMTIzNzM1MzkyOCwtMT
 A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
