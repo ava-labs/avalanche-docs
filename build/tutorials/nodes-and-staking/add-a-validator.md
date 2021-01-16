@@ -334,7 +334,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+La respuesta debe incluir el nodo que acabamos de añadir:
 
 ```cpp
 {
@@ -353,7 +353,7 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
+Cuando el tiempo llegue a  `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
 
 ### Whitelisting the Subnet
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk1OTU5NDcxNywtMTgyOTg1NzE4NywtMT
-M0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3
-NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OS
-wxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTE0MzA0OTA2NTksLTE4Mjk4NTcxODcsLT
+EzNDQzMzA2NDgsMzIxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5
+NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNj
+ksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
 -->
