@@ -62,12 +62,12 @@
   * [API de Salud](build/avalanchego-apis/health-api.md)
   * [API de Información](build/avalanchego-apis/info-api.md)
   * [API de IPC](build/avalanchego-apis/ipc-api.md)
-  * [API de Keystore](build/avalanchego-apis/keystore-api.md)
-  * [API Métrica ](build/avalanchego-apis/metrics-api.md)
-* [Tools](build/tools/README.md)
+  * [API del Keystore](build/avalanchego-apis/keystore-api.md)
+  * [API de Métricas ](build/avalanchego-apis/metrics-api.md)
+* [Herramientas](build/tools/README.md)
   * [AvalancheJS](build/tools/avalanchejs/README.md)
-    * [Create an Asset on the X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
-    * [Manage X-Chain Keys](build/tools/avalanchejs/manage-x-chain-keys.md)
+    * [Crear un activo en la X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
+    * [Administrar las¿' claves de la X-Chain Keys](build/tools/avalanchejs/manage-x-chain-keys.md)
     * [Send an Asset on the X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTMwOTM3NzUsNzUwMTI1ODgyLC0zND
-I0MzM5MjIsLTM1MTU5Mzg5LDM1ODg3MjAyOV19
+eyJoaXN0b3J5IjpbMTI4NTI2OTU2Myw3NTAxMjU4ODIsLTM0Mj
+QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
 -->
