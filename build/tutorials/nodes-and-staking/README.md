@@ -2,7 +2,7 @@
 
 |  |  |
 | :--- | :--- |
-| [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](https://docs.avax.network/learn/platform-overview) and a [subnet](https://docs.avax.network/learn/platform-overview#subnets) on Avalanche. |
+| [**Añadir un validador**](add-a-validator.md) | Añade un nodo a la [Red Primaria](https://docs.avax.network/learn/platform-overview) y una [subnet](https://docs.avax.network/learn/platform-overview#subnets) en Avalanche. |
 | [**How to Run Avalanche at Home: Oracle VM VirtualBox**](https://www.youtube.com/watch?v=7Tx1iKg-jL0) | Create a node that runs using Oracle VM VirtualBox container software. |
 | [**How to Run Avalanche at Home: Raspberry Pi 4**](https://www.youtube.com/watch?v=jlur1nef4-E) | Create a node that runs using Raspberry Pi 4. |
 | [**Set Up an Avalanche Node with Amazon Web Services \(AWS\)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Create a node that runs on AWS. |
@@ -12,3 +12,6 @@
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet. |
 | **​**[**Upgrade Your AvalancheGo Node**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Upgrade your Avalanche node. |
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTUyMzUyMzkwOV19
+-->
