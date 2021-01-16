@@ -50,7 +50,7 @@ Ahora que tenemos una suscripción, podemos crear la Máquina Virtual Ubuntu par
 
 ![Image for post](https://miro.medium.com/max/565/1*3nSPwgEM3oIgrIlIo-TS1w.png)
 
-Select Ubuntu Server 18.04 LTS \(this will normally be under the popular section or alternatively search for it in the marketplace\)
+Selecciona el Servidor Ubuntu 18.04 LTS \(normalmente estará en la sección popular o alternativamente búscalo en el marketplace\)
 
 ![Image for post](https://miro.medium.com/max/605/1*Y0iZEZExC36c7FXqPlrPuw.png)
 
@@ -322,6 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyMTQwOTE2NCwtMjU4NTAxOTM3LDIyMj
-E3ODY5NF19
+eyJoaXN0b3J5IjpbLTE2ODY2OTE2NDcsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
