@@ -169,7 +169,7 @@ Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de
 
 Avalancha es una plataforma de blockchains heterogéneas, una de las cuales es la [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), que actúa como una plataforma descentralizada para la creación y el comercio de activos digitales. Ahora vamos a crear una dirección para guardar AVAX en nuestro nodo.
 
-To create a new address on the X-Chain, call [`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](avalanchego-apis/exchange-chain-x-chain-api.md):
+Para crear una nueva dirección en la X-Chain, ejecute[`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), un método de la [API de la X-Chain](avalanchego-apis/exchange-chain-x-chain-api.md):
 
 ```cpp
 curl -X POST --data '{
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDY2MjMyNjQsLTE5Mjg0MzUzODMsLT
+eyJoaXN0b3J5IjpbLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLT
 E3MjI2MTY1ODldfQ==
 -->
