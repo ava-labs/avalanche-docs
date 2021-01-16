@@ -131,7 +131,7 @@ NOTA: Si necesita cambiar las reglas del grupo de seguridad de la red después d
 
 ![Image for post](https://miro.medium.com/max/481/1*fR6SrKhTSTQ4cS3PoFrQfQ.png)
 
-Now that you have your public IP select the default allow ssh rule on the left under inbound rules to modify it. Change Source from “Any” to “IP Addresses” and then enter in your Public IP address that you found from google in the Source IP address field. Change the Priority towards the bottom to 100 and then press Save.
+Ahora que tienes tu IP pública selecciona la regla por defecto de permitir ssh a la izquierda bajo reglas de entrada para modificarla. Cambia el origen de "Any" a "IP Addresses" y luego ingresa en tu dirección IP pública que encontraste en Google en el campo de dirección IP del origen. Cambie la prioridad hacia abajo a 100 y luego presione Save.
 
 ![Image for post](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
 
@@ -325,7 +325,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODc3NDY0MzkyLDE5MDgwNTM2OTIsNTM4Mz
-YzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0NTksLTE3NTg3ODA5
-OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbODIwMjI3NTEsODc3NDY0MzkyLDE5MDgwNT
+M2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0NTks
+LTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
 -->
