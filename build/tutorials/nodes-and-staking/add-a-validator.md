@@ -232,7 +232,7 @@ Cuando el tiempo llegue a `1584021450`, este nodo comenzará a validar la Red Pr
 
 Ahora añadamos el mismo nodo a una subnet. Lo siguiente tendrá más sentido si ya has hecho este [tutorial sobre la creación de una Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Ahora mismo sólo puedes añadir validadores a las subnets con llamados API, no con la Wallet de Avalanche.
 
-Suppose that the Subnet has ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, and that `username` holds at least 2 control keys.
+Supongamos que la Subnet tiene la ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, and that `username` holds at least 2 control keys.
 
 To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
 
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDY0MTU1MzMsLTEzNDQzMzA2NDgsMz
-IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
-MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
-wxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbNzQzNTgzODMwLC0xMzQ0MzMwNjQ4LDMyMT
+IzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkzMDI3
+LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMT
+AzMzc1MzM2N119
 -->
