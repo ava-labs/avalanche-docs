@@ -34,9 +34,9 @@
     * [Ejecute un Nodo de Avalanche y conviértete en un Validador](https://youtu.be/ZyQPeSSCbYU)
     * [Ejecute un Nodo de Avalanche con Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
     * [Ejecute un Nodo de Avalanche con Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
-    * [Ejecuta un Nodo de Avalanche y  Stake con la Wallet de Avalanche](https://youtu.be/ZyQPeSSCbYU)
-    * [Run an Avalanche Node with Amazon Web Services \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-    * [Run an Avalanche Node with Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
+    * [Ejecuta un Nodo de Avalanche y haz Stake con la Wallet de Avalanche](https://youtu.be/ZyQPeSSCbYU)
+    * [Ejecute un Nodo de Avalanche con los Servicios Web de Amazon \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
+    * [Ejecute un Nodo de Avalancha con Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
     * [Run an Avalanche Node on Linux using Install Script](build/tutorials/nodes-and-staking/set-up-node-with-installer.md)
     * [Run an Avalanche Node Monitoring](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
     * [Stake AVAX, by Validating or Delegating, with the Avalanche Wallet](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2ODgyMjE2OSwzNTg4NzIwMjldfQ==
+eyJoaXN0b3J5IjpbLTQxMzYwNTYzOCwzNTg4NzIwMjldfQ==
 -->
