@@ -253,9 +253,9 @@ sudo reboot
 
 Esto hará que nuestra instancia esté al día con los últimos parches de seguridad para nuestro sistema operativo. Esto también reiniciará el nodo. Le daremos al nodo un minuto o dos para que se reinicie, y luego se conectará de nuevo, igual que antes.
 
-### Set up the Avalanche Node <a id="5688"></a>
+### Configura el Nodo de Avalanche <a id="5688"></a>
 
-Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the “IPv4 Public IP” copied from the Azure Portal we set up earlier.
+Ahora necesitaremos configurar nuestro nodo de Avalanche. Para hacerlo, sigue el [Configurar el Nodo de Avalanche con el Instalador](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the “IPv4 Public IP” copied from the Azure Portal we set up earlier.
 
 Once the installation is complete, our node should now be bootstrapping! We can run the following command to take a peek at the latest status of the avalanchego node:
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4NTMxODYzOSw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbNTUwMDUwMzQxLDg3NzQ2NDM5MiwxOTA4MD
+UzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3LC0xMjQ3Njk5NDU5
+LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4Njk0XX0=
 -->
