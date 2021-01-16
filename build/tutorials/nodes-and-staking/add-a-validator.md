@@ -168,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+La respuesta tiene el ID de la transacción, así como la dirección a la que fué enviado el cambio.
 
 ```cpp
 {
@@ -181,7 +181,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Podemos comprobar el estado de la transacción ejecutando [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -194,7 +194,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos  [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
 ```cpp
 curl -X POST --data '{
@@ -366,8 +366,8 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY1MTI3ODk0MiwtMTM0NDMzMDY0OCwzMj
-EyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAy
-NywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LD
-EwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTEyOTEzOTA3NTcsLTEzNDQzMzA2NDgsMz
+IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
+MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
+wxMDMzNzUzMzY3XX0=
 -->
