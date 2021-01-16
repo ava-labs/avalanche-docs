@@ -14,7 +14,7 @@ Tenga en cuenta que una vez que se emite la transacción para añadir un nodo co
 
 Has completado [Ejecutando un Nodo de Avalanche](../../getting-started.md) y estás familiarizado con la [Arquitectura de Avalanche](../../../learn/platform-overview/). En este tutorial, usamos la [Colección de Postman de Avalanche](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados a la API.
 
-Para asegurarse de que su nodo está bien conectado, asegúrese de que su nodo puede recibir y enviar el tráfico TCP en el puerto de staking \(`9651` por defecto\) y que iniciaste tu nodo con el argumento de la línea de comandos`--public-ip=[LA IP PÚBLICA DE TU NODO AQUÍ]`. Failing to do either of these may jeopardize your staking reward.
+Para asegurarse de que su nodo está bien conectado, asegúrese de que su nodo puede recibir y enviar el tráfico TCP en el puerto de staking \(`9651` por defecto\) y que iniciaste tu nodo con el argumento de la línea de comandos`--public-ip=[LA IP PÚBLICA DE TU NODO AQUÍ]`. El no hacer ninguna de estas cosas puede poner en peligro su recompensa de Staking.
 
 ## Add a validator with Avalanche Wallet
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1ODUzMDM2NywtMTIzNzM1MzkyOCwtMT
+eyJoaXN0b3J5IjpbMTY0ODk1OTk3MSwtMTIzNzM1MzkyOCwtMT
 A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
