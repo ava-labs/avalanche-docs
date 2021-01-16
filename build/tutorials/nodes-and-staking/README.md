@@ -8,10 +8,10 @@
 | [**Configurar un Nodo de Avalanche con los Servicios Web de Amazon \(AWS\)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Crear un nodo que se ejecute en AWS. |
 | [**Configurar un Nodo de Avalanche con Microsoft Azure**](https://docs.avax.network/build/tutorials/platform/set-up-an-avalanche-node-with-microsoft-azure)**​** | Crear un nodo que se ejecute en Microsoft Azure. |
 | [**Configurar Nodo en Linux usando el script de instalación**](set-up-node-with-installer.md) | Crear un nodo en Linux de la manera más fácil. |
-| [**Configurar la Monitorización del Nodo**](setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo. |
-| [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet. |
+| [**Configurar la Monitorización del Nodo**](setting-up-node-monitoring.md) | Establecer una infraestructura para monitorear una instancia de AvalancheGo. |
+| [**Stake AVAX, por Validar o Delegar, con la Wallet de Avalanche **](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet. |
 | **​**[**Upgrade Your AvalancheGo Node**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Upgrade your Avalanche node. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3Mjc5MjgwXX0=
+eyJoaXN0b3J5IjpbLTExNzYxNjM4NzJdfQ==
 -->
