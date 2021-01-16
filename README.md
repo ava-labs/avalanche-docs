@@ -1,6 +1,6 @@
 ---
 descripción: >-
-  Build on Avalanche. Build without limits. Developers who build on Avalanche
+  Desarrolla en Avalanche. Desarrolla sin límites. Dn Avalanche
   can easily create powerful, reliable, and secure applications.
 ---
 
@@ -109,5 +109,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTg4MTAxOTcwXX0=
+eyJoaXN0b3J5IjpbMTg4NDg4NDI0OSw5ODgxMDE5NzBdfQ==
 -->
