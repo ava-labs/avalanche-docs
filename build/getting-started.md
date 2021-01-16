@@ -17,10 +17,10 @@ Este tutorial está dirigido principalmente a desarrolladores y personas interes
 
 ## Requisitos
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
+Avalanche es un protocolo increíblemente ligero, por lo que los requisitos mínimos de la computadora son bastante modestos.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Almacenamiento&gt; 10 GB de espacio libre
+* Sistema Operativo: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -361,5 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMwNjMwMzgzM119
+eyJoaXN0b3J5IjpbLTE0OTE3Nzk1NTZdfQ==
 -->
