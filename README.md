@@ -4,7 +4,7 @@ descripción: >-
   pueden crear fácilmente aplicaciones poderosas, confiables, y seguras.
 ---
 
-# Developer Documentation
+# Documentación para Desarrolladores
 
 ## Iniciando en Avalanche
 
@@ -108,7 +108,8 @@ Crea tus propias blockchains públicas o privadas.
 
 Soporte nativo para crear e intercambiar fácilmente activos digitales inteligentes con reglas complejas y personalizadas.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyNjM1MTE2MSwyMDIwMjk1MDQwLDEyOT
-Y5Njg1MjgsLTY0NTMxMDQyMSw5OTU4NDA5MzgsMTU2NDk0NDM0
-MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ==
+eyJoaXN0b3J5IjpbLTExNzEwMTEzODAsLTIyNjM1MTE2MSwyMD
+IwMjk1MDQwLDEyOTY5Njg1MjgsLTY0NTMxMDQyMSw5OTU4NDA5
+MzgsMTU2NDk0NDM0MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ
+==
 -->
