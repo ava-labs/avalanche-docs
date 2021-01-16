@@ -1,6 +1,6 @@
-# Upgrade Your AvalancheGo Node
+# Actualiza tu Nodo AvalancheGo
 
-## **Backup your node**
+## **Haz una copia de seguridad de tu **
 
 Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
 
@@ -178,3 +178,6 @@ You can run your node with:
 ./build/avalanchego
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTY4MjY3MDIyM119
+-->
