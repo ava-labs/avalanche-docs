@@ -124,11 +124,11 @@ Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un
 
 Tu nodo está funcionando y conectado ahora. Si quieres usar tu nodo como validador en la red principal, mira [este tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) para saber cómo añadir tu nodo como validador usando la Wallet Web.
 
-Puedes usar `Ctrl + C` para apagar el Nodo
+Puedes usar `Ctrl + C` para apagar el Nodo.
 
-If you want to experiment and play with your node, read on.
+Si quieres experimentar y jugar con tu nodo, sigue leyendo.
 
-To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+Para poder hacer llamados a la API de su nodo desde otras máquinas, al iniciar el nodo incluya el argumento `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
 
 To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
 
@@ -361,6 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbODc4OTAzOTEyLC0xOTI4NDM1MzgzLC0xNz
+IyNjE2NTg5XX0=
 -->
