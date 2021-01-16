@@ -16,9 +16,9 @@ Aliento a todos a ejecutar sus propios validadores cuando sea posible, pero para
 
 En este artículo daremos un paso adelante en el proceso de configuración de un nodo en Microsoft Azure. Este tutorial asume que no hay experiencia previa con Microsoft Azure y pasará por cada paso con el menor número de suposiciones posibles.
 
-En el momento de este artículo, el precio al contado de una máquina virtual con 2 núcleos y 8 GB de memoria cuesta tan sólo 0,01060 dólares por hora, lo que equivale a unos 113,44 dólares al año, **a saving of 83.76%! compared to normal pay as you go prices.** In comparison a virtual machine in AWS with 2 Cores and 4 GB Memory with spot pricing is around $462 a year.
+En el momento de este artículo, el precio al contado de una máquina virtual con 2 núcleos y 8 GB de memoria cuesta tan sólo 0,01060 dólares por hora, lo que equivale a unos 113,44 dólares al año, **¡un ahorro del 83,76%! comparado con los precios normales de lo que se paga normalmente.** En comparación, una máquina virtual en AWS con 2 núcleos y 4 GB de memoria tiene un precio de alrededor de 462 dólares al año.
 
-## Initial Subscription Configuration <a id="6e8d"></a>
+## Configuración de la suscripción inicial <a id="6e8d"></a>
 
 ### Set up 2 Factor <a id="b9d0"></a>
 
@@ -322,5 +322,5 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5NTA5MjU4NCwyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbLTIwOTk5MTI2OSwyMjIxNzg2OTRdfQ==
 -->
