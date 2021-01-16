@@ -199,12 +199,12 @@ La respuesta debería ser así:
 }
 ```
 
-Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
+Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Por lo tanto, esta dirección comienza `X-`, denotando que existe en la X-Chain.
 
-### Send Funds From Avalanche Wallet to Your Node
+### Envíe Fondos desde la Wallet de Avalanche a Su Nodo
 
 {% hint style="warning" %}
-_**Note: the instructions below move real funds.**_
+_**Nota: las instrucciones de abajo mueven fondos reales.**_
 {% endhint %}
 
 Let’s move funds from the Avalanche Wallet to your node.
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDE2NjQyMTMsLTIwNjc3ODQyNTAsLT
+eyJoaXN0b3J5IjpbLTE2NjYzMjU1MTYsLTIwNjc3ODQyNTAsLT
 E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
 -->
