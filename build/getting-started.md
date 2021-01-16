@@ -229,9 +229,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Observe que AVAX tiene la identificación especial `AVAX`. Normalmente la ID de un activo es una  is an alphanumeric string.
+Observe que AVAX tiene la identificación especial `AVAX`. Normalmente la ID de un activo es una cadena alfanumérica.
 
-The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
+La respuesta debe indicar que tenemos `2,000,000 nAVAX` o `0.002 AVAX`.
 
 ```cpp
 {
@@ -249,9 +249,9 @@ The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 }
 ```
 
-### Send AVAX
+### Enviar AVAX
 
-Now, let’s send some AVAX by making an API call to our node:
+Ahora, enviemos algunos AVAX haciendo un llamado API a nuestro nodo:
 
 ```cpp
 curl -X POST --data '{
@@ -269,7 +269,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-`amount` specifies the number of nAVAX to send.
+`amount` especifica en numero de nAVAX a enviar.
 
 If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MTQzMTE1NDAsLTIwNjc3ODQyNTAsLT
+eyJoaXN0b3J5IjpbLTEwMDEzNDAzMDcsLTIwNjc3ODQyNTAsLT
 E5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ==
 -->
