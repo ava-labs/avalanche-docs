@@ -66,7 +66,7 @@ En el caso común de que una transacción no tenga conflictos, la finalización 
 
 ![Cómo funciona el consenso de Avalanche](.gitbook/assets/howavalancheconsensusworks.png)
 
-It is guaranteed \(with high probability based on system parameters\) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
+Se garantiza (con una alta probabilidad basada en los parámetros del sistema) que si cualquier validador honesto acepta o rechaza una transacción, todos los validadores honestos aceptarán o rechazarán esa transacción.
 
 Learn more technical components of the Avalanche consensus protocol by reading the [whitepaper](https://arxiv.org/pdf/1906.08936.pdf).
 
@@ -109,6 +109,6 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1MjA4NjI0NCw5OTU4NDA5MzgsMTU2ND
+eyJoaXN0b3J5IjpbMTk4NzU0NTM0Niw5OTU4NDA5MzgsMTU2ND
 k0NDM0MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ==
 -->
