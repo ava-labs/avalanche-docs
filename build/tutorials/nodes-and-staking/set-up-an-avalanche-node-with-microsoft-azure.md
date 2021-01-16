@@ -292,7 +292,7 @@ Siempre podemos usar "sudo systemctl status avalanchego" para ver el último est
 
 ### Consigue el ID de Tu Nodo <a id="20a7"></a>
 
-We absolutely must get our NodeID if we plan to do any validating on this node. This is retrieved from the RPC as well. We call the following curl command to get our NodeID.
+Debemos obtener el ID de nuestro nodo si planeamos hacer alguna validación en este nodo. Esto también se recupera de la RPC. Llamamos al siguiente comando curl para obtener  el ID de nuestro nodo.
 
 ```text
 curl -X POST --data '{
@@ -302,7 +302,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If all is well, the response should look something like:
+Si todo va bien, la respuesta debería ser algo como esto: 
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR"},"id":1}
@@ -323,7 +323,8 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODcwNjQ4NCw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTEwNzc3MzI4NzIsODc3NDY0MzkyLDE5MD
+gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
+NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
+==
 -->
