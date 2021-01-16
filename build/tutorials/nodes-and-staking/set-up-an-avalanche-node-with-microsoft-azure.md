@@ -263,7 +263,7 @@ Una vez que la instalación esté completa, nuestro nodo debería estar ahora en
 sudo systemctl status avalanchego
 ```
 
-To check the status of the bootstrap, we’ll need to make a request to the local RPC using “curl”. This request is as follows:
+Para comprobar el estado del bootstrap, tendremos que hacer una petición a la RPC local usando "curl". Esta petición es la siguiente:
 
 ```text
 curl -X POST --data '{
@@ -276,7 +276,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The node can take some time \(upward of an hour at this moment writing\) to bootstrap. Bootstrapping means that the node downloads and verifies the history of the chains. Give this some time. Once the node is finished bootstrapping, the response will be:
+El nodo puede tomar algún tiempo \(más de una hora mientras escribo\) to bootstrap. Bootstrap significa que el nodo descarga y verifica la historia de las cadenas. Dale a esto un poco de tiempo. Una vez que el nodo termine el bootstrapping, la respuesta será:
 
 ```text
 {
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2ODA0Njk4Miw4Nzc0NjQzOTIsMTkwOD
+eyJoaXN0b3J5IjpbMjAyNzY4NzA5Niw4Nzc0NjQzOTIsMTkwOD
 A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
 OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
