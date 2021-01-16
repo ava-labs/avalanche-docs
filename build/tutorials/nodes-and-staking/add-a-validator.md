@@ -123,11 +123,11 @@ La respuesta contiene el ID de tu Nodo:
 
 `startTime` & `endTime`
 
-Cuando se emite una transacción para unirse a la Red Principal, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Principal es de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Principal después de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar la Red Principal, respectivamente.`startTime` must be in the future relative to the time the transaction is issued.
+Cuando se emite una transacción para unirse a la Red Principal, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Principal es de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Principal después de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Principal, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
 
 `stakeAmount`
 
-In order to validate the Primary Network, one must stake AVAX. This parameter defines the amount of AVAX staked.
+Para validar la Red Principal, se tiene que hacer staking de AVAX. Este parámetro define la cantidad de AVAX apostada.
 
 `rewardAddress`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzE1ODEyNDAyLC0xMTA5OTMwMjcsLTEyMz
-czNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUz
-MzY3XX0=
+eyJoaXN0b3J5IjpbMTM2ODMyNDkzNywtMTEwOTkzMDI3LC0xMj
+M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
+MzM2N119
 -->
