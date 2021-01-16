@@ -75,13 +75,13 @@ Elija "Seleccionar tamaño" para cambiar el tamaño de la Máquina Virtual, y en
 
 ![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
-Once you have selected the size of the Virtual Machine, select “View pricing history and compare prices in nearby regions” to see how the spot price has changed over the last 3 months, and whether it’s cheaper to use a nearby region which may have more spare capacity.
+Una vez que haya seleccionado el tamaño de la Máquina Virtual, seleccione "Ver historial de precios y comparar precios en regiones cercanas" para ver cómo ha cambiado el precio spot en los últimos 3 meses, y si es más barato utilizar una región cercana que puede tener más capacidad libre.
 
 ![Image for post](https://miro.medium.com/max/763/1*UQYmhtL8JMhrOkaWk8cloA.png)
 
-At the time of this article, spot pricing for D2s\_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
+En el momento de este artículo, el precio spot para D2s\_v4 en el norte de Europa cuesta 0,07975 dólares por hora, o alrededor de 698,61 dólares al año. Con el precio spot, el precio cae a 0,01295 dólares por hora, lo que resulta en unos 113,44 dólares al año, **un ahorro del 83.76%!**
 
-There are some regions which are even cheaper, East US for example is $0.01060 per hour or around $92.86 a year!
+Hay algunas regiones que son aún más baratas, el este de EE.UU. por ejemplo es de 0,01060 dólares por hora o alrededor de 92,86 dólares al año!
 
 ![Image for post](https://miro.medium.com/max/677/1*Th5aDwLS6_IoM0LidRbH6g.png)
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0MzY1OTQ5OSwtODUzNjY2MzA3LC0xMj
-Q3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMjIyMTc4
-Njk0XX0=
+eyJoaXN0b3J5IjpbLTE5OTkyOTY2ODUsLTg1MzY2NjMwNywtMT
+I0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3
+ODY5NF19
 -->
