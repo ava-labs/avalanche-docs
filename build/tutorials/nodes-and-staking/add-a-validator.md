@@ -16,11 +16,11 @@ Has completado [Ejecutando un Nodo de Avalanche](../../getting-started.md) y est
 
 Para asegurarse de que su nodo está bien conectado, asegúrese de que su nodo puede recibir y enviar el tráfico TCP en el puerto de staking \(`9651` por defecto\) y que iniciaste tu nodo con el argumento de la línea de comandos`--public-ip=[LA IP PÚBLICA DE TU NODO AQUÍ]`. El no hacer ninguna de estas cosas puede poner en peligro su recompensa de Staking.
 
-## Add a validator with Avalanche Wallet
+## Añade un Validador con la Wallet de Avalanche 
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+Primero, te mostramos cómo añadir tu nodo como validador usando la [Wallet de Avalanche](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Obten la ID de tu Nodo ejecutando: [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ![getNodeID postman](../../../.gitbook/assets/getNodeID-postman.png)
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0ODk1OTk3MSwtMTIzNzM1MzkyOCwtMT
-A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTE4MTcyOTAzMDcsLTEyMzczNTM5MjgsLT
+EwNTU5ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
 -->
