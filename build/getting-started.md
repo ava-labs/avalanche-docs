@@ -81,7 +81,7 @@ La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 Para Linux en computadoras basadas en RaspberryPi4 o similares basadas en Arm64:   
 Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
 Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarioss.
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
 ### Inicie un Nodo, y Conéctese a Avalanche
 
@@ -362,7 +362,7 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0MjQyMjgwOSwtODAwMzgwODg1LDE1MD
+eyJoaXN0b3J5IjpbMTgyODM3OTg3NCwtODAwMzgwODg1LDE1MD
 U3NjI4MTcsLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLTE3MjI2
 MTY1ODldfQ==
 -->
