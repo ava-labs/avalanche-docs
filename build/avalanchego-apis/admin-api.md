@@ -1,10 +1,10 @@
-# Admin API
+# API Admin
 
 Esta API puede usarse para medir la salud del nodo y depurar errores. Notar que la API Admin está deshabilitada por defecto por razones de seguridad. Pata correr un nodo con la API Admin habilitada, utiliza el [argumento de línea de comandos](../references/command-line-interface.md) `--api-admin-enabled=true`.
 
 ## Formato
 
-Esta API utiliza el formatoThis API uses the `json 2.0` RPC format.
+Esta API utiliza el formato de RPC `json 2.0`.
 
 {% page-ref page="issuing-api-calls.md" %}
 
@@ -14,11 +14,11 @@ Esta API utiliza el formatoThis API uses the `json 2.0` RPC format.
 /ext/admin
 ```
 
-## API Methods
+## Métodos de API 
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+Asigna un Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
 
 #### **Signature**
 
@@ -236,5 +236,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA5OTkxNzM5M119
+eyJoaXN0b3J5IjpbNTUyMTc3NzUwXX0=
 -->
