@@ -49,8 +49,8 @@
     * [Crear un Activo de Capital Fijo](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Crear un Activo de Capitalización Variable](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Crear un NFT \(Parte 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
-    * [Acuñe NFTs with the Avalanche Wallet](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
-    * [Use Wrapped AVAX \(WAVAX\) on Avalanche](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
+    * [Acuñe NFTs con la Wallet de Avalanche](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
+    * [Use Wrapped AVAX \(WAVAX\) en Avalanche ](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
 * [AvalancheGo APIs](build/avalanchego-apis/README.md)
   * [Issuing API Calls](build/avalanchego-apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/avalanchego-apis/platform-chain-p-chain-api.md)
@@ -83,6 +83,6 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTkzNzg1NCwtMzQyNDMzOTIyLC0zNT
-E1OTM4OSwzNTg4NzIwMjldfQ==
+eyJoaXN0b3J5IjpbLTE4NjM3MjA3NzksLTM0MjQzMzkyMiwtMz
+UxNTkzODksMzU4ODcyMDI5XX0=
 -->
