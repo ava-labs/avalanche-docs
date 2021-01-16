@@ -211,7 +211,7 @@ Vamos a mover fondos desde la Wallet de Avalanche a su nodo.
 
 Vamos a la [Wallet de Avalanche ](https://wallet.avax.network). Click en `Access Wallet`, ahora `Mnemonic Key Phrase`. Introduce tu frase mnemónica.
 
-Haz click en la pestaña`Send` a la izquierda. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
+Haz click en la pestaña`Send` a la izquierda. Para la cantidad, seleccione, `.002` AVAX. Ingrese la dirección de su nodo, luego haga clic en `Confirm`.
 
 ![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%283%29.png)
 
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4ODk3MTExNCwtMjA2Nzc4NDI1MCwtMT
-kyODQzNTM4MywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbNzQzMDg0Njk4LC0yMDY3Nzg0MjUwLC0xOT
+I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
