@@ -36,7 +36,7 @@ Luego seleccione "+ Agregar" para agregar una nueva suscripción.
 
 ![Image for post](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
 
-If you want to use Spot Instance VM Pricing \(which will be considerably cheaper\) you can’t use a Free Trial account \(and you will receive an error upon validation\), so **make sure to select Pay-As-You-Go.**
+Si quieres usar el precio de Spot Instance VM \(que será considerablemente más barato\) you can’t use a Free Trial account \(and you will receive an error upon validation\), so **make sure to select Pay-As-You-Go.**
 
 ![Image for post](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
 
@@ -322,5 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTEwODczMzg5NSwtMjU4NTAxOTM3LDIyMj
+E3ODY5NF19
 -->
