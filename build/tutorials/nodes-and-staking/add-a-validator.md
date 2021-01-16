@@ -2,7 +2,7 @@
 
 ## Introducción
 
-La [Red Principal](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) es propio de la plataforma de Avalanche y valida las [ blockchains incorporadas](https://avalanche.gitbook.io/avalanche/learn/platform-overview). In this tutorial, we’ll add a node to the Primary Network and a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) on Avalanche.
+La [Red Principal](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) es propio de la plataforma de Avalanche y valida las [ blockchains incorporadas](https://avalanche.gitbook.io/avalanche/learn/platform-overview) de Avalanche. IEn este tutorial, añadiremos un nodo a la Red Principal y una [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) en Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
@@ -366,5 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbLTEwNTU5ODkzNjksMTI2MzY3ODQ4NywxMD
+MzNzUzMzY3XX0=
 -->
