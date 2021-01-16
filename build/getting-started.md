@@ -103,11 +103,11 @@ Si estás usando los binarios pre-construidos en Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Cuando el nodo comienza, tiene que arrancar \(actualizarse con el resto de la red\). Verás registros sobre el bootstrapping. Cuando una cadena dada termina de hacer el bootstrapping, imprimirá un registro como este:
+Cuando el nodo comienza, tiene que arrancar \(actualizarse con el resto de la red\). Verás registros sobre el bootstrapping. Cuando una cadena termina de hacer el bootstrapping, imprimirá un registro como este:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) by copying and pasting the following command:
+Para comprobar si una cadena dada se hace bootstrapping, en otra ventana terminal ejecute [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) copiando y pegando el siguiente comando:
 
 ```cpp
 curl -X POST --data '{
@@ -361,6 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODcwNDk1NjksLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbLTYxMzU3Mzk0OCwtMTcyMjYxNjU4OV19
 -->
