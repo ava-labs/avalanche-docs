@@ -74,14 +74,14 @@ Descomprime: `unzip avalanchego-macos-<VERSION>.zip`
 La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
 Para Linux en PCs o proveedores de nube:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Descarga: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en computadoras basadas en RaspberryPi4 o similares basadas en Arm64:   
+Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarioss.
 
 ### Start a Node, and Connect to Avalanche
 
@@ -361,6 +361,5 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzgwNDUwNDQsLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbMTE3ODQxNTY2OCwtMTcyMjYxNjU4OV19
 -->
