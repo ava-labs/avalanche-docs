@@ -2,6 +2,16 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.1.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
+
+{% hint style="danger" %}
+This update is optional but encouraged. The patch includes minor bug fixes relating to APIs.
+{% endhint %}
+
+* Fixed hanging call when attempting to filter C-chain logs.
+* Fixed C-chain client to call the proper multi-coin API.
+* Added `getAtomicUTXOs` to `avm` and `platformvm` API clients.
+
 ## v1.1.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)\)
 
 {% hint style="danger" %}
