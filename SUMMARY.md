@@ -6,12 +6,12 @@
 
 * [Resumen de la plataforma](learn/platform-overview/README.md)
   * [Staking](learn/platform-overview/staking.md)
-  * [Cde transacción](learn/platform-overview/transaction-fees.md)
-  * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
-* [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
-* [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
-* [Forum](https://forum.avax.network)
-* [Community](learn/community.md)
+  * [Comisiones de transacción](learn/platform-overview/transaction-fees.md)
+  * [¿Por qué Avalanche? Parte. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
+* [Conceptos básicos de Blockchain](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
+* [Preguntras frecuentes](https://support.avalabs.org/en/collections/2618154-developer-faq)
+* [Foro](https://forum.avax.network)
+* [Comunidad](learn/community.md)
 
 ## Build
 
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjIyNTQwNzE4XX0=
+eyJoaXN0b3J5IjpbMzU4ODcyMDI5XX0=
 -->
