@@ -103,7 +103,7 @@ La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
 Ya estás listo para ejecutar la nueva versión del nodo.
 
-### Ejecutando el Nodo desde la terminal
+### Nodo ejecutándose desde la terminal
 
 Si estás usando los binarios pre-construidos en MacOS:
 
@@ -117,9 +117,9 @@ Si estás usando los binarios pre-construidos en Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Añade`nohup` at the start of the command if you want to run the node in the background.
+Añade`nohup` al comienzo del comando si quieres ejecutar el nodo en segundo plano.
 
-### Running the node as a service
+### Nodo ejecutándose como un servicio
 
 If you're running the node as a service, you need to replace the old binaries with the new ones.
 
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDIzMjk1MzFdfQ==
+eyJoaXN0b3J5IjpbLTczODU0OTMwOF19
 -->
