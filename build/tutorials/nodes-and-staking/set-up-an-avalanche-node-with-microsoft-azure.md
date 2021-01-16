@@ -60,7 +60,7 @@ Esto te llevará a la página de Crear una máquina virtual como se muestra a co
 
 Primero, introduce un nombre en la máquina virtual, puede ser cualquier cosa, pero en mi ejemplo, la he llamado Avalanche. \(Esto también cambiará automáticamente el nombre del grupo de recursos para que coincida\)
 
-Then select a region from the drop-down list. Select one of the recommended ones in a region that you prefer as these tend to be the larger ones with most features enabled and cheaper prices. In this example I have selected North Europe.
+Luego seleccione una región de la lista desplegable. Selecciona una de las recomendadas en la región que prefieras, ya que estas tienden a ser las más grandes con la mayoría de las características habilitadas y precios más baratos. En este ejemplo he seleccionado el norte de Europa.
 
 ![Image for post](https://miro.medium.com/max/769/1*XOpa22qSdNI-0PW5oIyUhQ.png)
 
@@ -322,6 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNDIwOTg5OCwtMjU4NTAxOTM3LDIyMj
-E3ODY5NF19
+eyJoaXN0b3J5IjpbLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
