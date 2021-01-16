@@ -163,19 +163,19 @@ Una vez que su instalación haya terminado, seleccione "Go to resource"
 
 ## Cambiar el Tamaño del Disco Provisto <a id="00dc"></a>
 
-By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD, whilst this should be sufficient, I personally didn’t want the hassle of potentially needing to extend this later into the staking period. I have included the steps below if you want to increase it to 64 GB or if you ever need to increase it at a later date.
+Por defecto, la VM de Ubuntu estará provista de un SSD Premium de 30 GB, aunque esto debería ser suficiente, personalmente no quería la molestia de tener que extender esto más tarde en el período de staking. He incluido los pasos a continuación si desea aumentarlo a 64 GB o si alguna vez necesita aumentarlo en una fecha posterior.
 
 ![Image for post](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
 
-To change the Disk size, the VM needs to be stopped and deallocated. Select “Stop” and wait for the status to show deallocated. Then select “Disks” on the left.
+Para cambiar el tamaño del disco, el VM necesita ser parado y colocado. Seleccione "Stop" y espere a que el estado muestre "deallocated". Luego seleccione "Disks" a la izquierda.
 
 ![Image for post](https://miro.medium.com/max/976/1*eUCBMgyQtEukvCyi3pm48g.png)
 
-Select the Disk name that’s current provisioned to modify it
+Seleccione el nombre del disco que está provisto actualmente para modificarlo
 
 ![Image for post](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
 
-Select “Size + performance” on the left under settings and change the size to 64 GB and press “Resize”.
+Seleccione "Size + performance" a la izquierda en la configuración y cambie el tamaño a 64 GB y pulse "Resize".
 
 ![Image for post](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
 
@@ -323,8 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzM4MTMyMTIsODc3NDY0MzkyLDE5MD
-gwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0
-NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ
-==
+eyJoaXN0b3J5IjpbMTE3NDM4OTI0NCw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
