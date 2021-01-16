@@ -48,13 +48,13 @@ Abre [la wallet](https://wallet.avax.network/), Y ve a la pestaña `Earn` . Elig
 
 ![Web wallet earn tab](../../../.gitbook/assets/web-wallet-earn-tab.png)
 
-Rellene los parámetros de Staking. Se explican con más detalle a continuación. Cuando hayas rellenado todos los parámetros de Staking y los hayas comprobado dos veces, haz click en `Confirm`. Asegúrate de que el periodo de Stakinges de al menos 2 semanas, la tarifa de delegación es de al menos el 2%, y estás apostando al menos 2.000 AVAX.
+Rellene los parámetros de Staking. Se explican con más detalle a continuación. Cuando hayas rellenado todos los parámetros de Staking y los hayas comprobado dos veces, haz click en `Confirm`. Asegúrate de que el periodo de Staking es de al menos 2 semanas, la comisión de delegación es de al menos el 2%, y estás haciendo Stake de al menos 2.000 AVAX.
 
 {% page-ref page="../../../learn/platform-overview/staking.md" %}
 
 ![Earn validate](../../../.gitbook/assets/earn-validate.png)
 
-You should see this success message, and your balance should be updated.
+Deberías ver este mensaje de aprobación, y tu balance debería ser actualizado.
 
 ![Your validation transaction is sent](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
 
@@ -366,6 +366,6 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3NjAzOTI1MiwtMTIzNzM1MzkyOCwtMT
+eyJoaXN0b3J5IjpbLTIzNTI5ODg5MSwtMTIzNzM1MzkyOCwtMT
 A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
 -->
