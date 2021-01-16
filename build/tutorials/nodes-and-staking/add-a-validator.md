@@ -133,7 +133,7 @@ Para validar la Red Primaria, se debe hacer stake de AVAX. Este parámetro defin
 
 Cuando un validador deje de validar la Red Primaria, recibirá una recompensa si es lo suficientemente receptivo y correcto mientras valida la Red Primaria. Estos Tokens se envían a `rewardAddress`. El stake original será devuelto a una dirección controlada por `username`.
 
-El stake de un validador nunca es reducido, sin importar su comportamiento; siempre recibirán su estaca de vuelta cuando terminen de validar.
+El stake de un validador nunca es reducido, sin importar su comportamiento; siempre recibirán su stakede vuelta cuando terminen de validar.
 
 `changeAddr`
 
@@ -366,7 +366,7 @@ The full command is:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MDkxMDQ3NCw5NDY5Njk3NjksLTExMD
+eyJoaXN0b3J5IjpbMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMD
 k5MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4
 NDg3LDEwMzM3NTMzNjddfQ==
 -->
