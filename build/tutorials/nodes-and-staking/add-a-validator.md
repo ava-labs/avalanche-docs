@@ -355,7 +355,7 @@ La respuesta debe incluir el nodo que acabamos de añadir:
 
 Cuando el tiempo llegue a  `1584042912`, este nodo comenzará a validar esta Subnet. Cuando llegue a `1584121156`, este nodo dejará de validar esta Subnet.
 
-### Whitelisting the Subnet
+### Agregando la Subnet a la Lista Blanca
 
 Now that the node has been added as a validator of the subnet, let’s add it to the whitelist of subnets. The whitelist prevents the node from validating a subnet unintentionally.
 
@@ -366,8 +366,9 @@ El comando completo es:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjgyMDcwODExLDMzMjc3NzQ4NywtMTgyOT
-g1NzE4NywtMTM0NDMzMDY0OCwzMjEyMzI1NzMsMTQzNDgxMzg4
-NSw5NDY5Njk3NjksLTExMDk5MzAyNywtMTIzNzM1MzkyOCwtMT
-A1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbMTM1NjA3MDUyOCwyODIwNzA4MTEsMzMyNz
+c3NDg3LC0xODI5ODU3MTg3LC0xMzQ0MzMwNjQ4LDMyMTIzMjU3
+MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkzMDI3LC0xMj
+M3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0ODcsMTAzMzc1
+MzM2N119
 -->
