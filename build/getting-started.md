@@ -107,7 +107,7 @@ Cuando el nodo comienza, tiene que arrancar \(actualizarse con el resto de la re
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-Para comprobar si una cadena dada se hace bootstrapping, en otra ventana terminal ejecute [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) copiando y pegando el siguiente comando:
+Para comprobar si una cadena termina de hacer el bootstrapping, en otra ventana terminal ejecute [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) copiando y pegando el siguiente comando:
 
 ```cpp
 curl -X POST --data '{
@@ -120,7 +120,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+Si el resultado es `true`, la cadena terminó de hacer el . If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
 
 Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
 
@@ -361,5 +361,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYxMzU3Mzk0OCwtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE5MTI2MDUzMTUsLTE3MjI2MTY1ODldfQ
+==
 -->
