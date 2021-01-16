@@ -141,19 +141,19 @@ Luego, mueva al directorio de avalanchego:
 cd avalanchego
 ```
 
-Pull the latest code:
+Obtenga el último código:
 
 ```text
 git pull
 ```
 
-Check that your local code is up to date. Do:
+Comprueba que tu código local está actualizado, ejecute:
 
 ```text
 git rev-parse HEAD
 ```
 
-and check that the first 7 characters printed match the Latest commit field on our [Github.](https://github.com/ava-labs/avalanchego)
+y compruebe que los primeros 7 caracteres impresos coinciden con el  [Github.](https://github.com/ava-labs/avalanchego)
 
 Now build the binary:
 
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyODkyNjE3OCw0NTA4MDA5NzddfQ==
+eyJoaXN0b3J5IjpbMjA1MzMyMzc2Niw0NTA4MDA5NzddfQ==
 -->
