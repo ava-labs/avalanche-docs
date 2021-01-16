@@ -1,8 +1,8 @@
-# Stake AVAX, by Validating or Delegating, with the Avalanche Wallet
+# Stakea AVAX, por Validar o Delegar, con la Wallet de Avalanche
 
-## **Introduction** <a id="001f"></a>
+## **Introducción** <a id="001f"></a>
 
-The Avalanche Wallet is a web-based application with no middleware or any kind of server communication. The Avalanche Wallet is written in Vue JS and can be either accessed online or compiled and run locally.
+La Wallet de Avalanche es una aplicación basada en la web sin middleware ni ningún tipo de comunicación con el servidor. La Wallet de Avalanche está escrita en Vue JS y puede ser accedida en línea o compilada y ejecutada localmente.
 
 The Avalanche Wallet can be accessed [here](https://wallet.avax.network/).  
 The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
@@ -87,3 +87,6 @@ Confirm the details!
 
 Congratulations. You are now delegating the Avalanche Primary Network!
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE1OTYyMDI2NzldfQ==
+-->
