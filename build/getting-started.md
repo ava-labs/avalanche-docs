@@ -215,7 +215,7 @@ Haz click en la pestaña`Send` a la izquierda. Para la cantidad, seleccione, `.0
 
 ![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%283%29.png)
 
-We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
+Podemos comprobar el balance de una dirección de un activo dado ejecutando `avm.getBalance`, otro método de la API de la X-Chain. Comprobemos que la transferencia se ha realizado:
 
 ```cpp
 curl -X POST --data '{
@@ -362,6 +362,6 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQzMDg0Njk4LC0yMDY3Nzg0MjUwLC0xOT
-I4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
+eyJoaXN0b3J5IjpbLTUzMDUwNTIyOSwtMjA2Nzc4NDI1MCwtMT
+kyODQzNTM4MywtMTcyMjYxNjU4OV19
 -->
