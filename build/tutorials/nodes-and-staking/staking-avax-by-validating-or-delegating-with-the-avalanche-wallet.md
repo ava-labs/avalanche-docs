@@ -19,7 +19,7 @@ Puedes acceder a tu billetera usando tu key phrase, el archivo keystore, o tu Le
 
 ![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
-**Para hacer stake, necesitas tener tus fondos disponibles en la** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/#platform-chain-p-chain)**! Si tus fondos están en el** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
+**Para hacer stake, necesitas tener tus fondos disponibles en la** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/#platform-chain-p-chain)**! Si tus fondos están en el** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/#exchange-chain-x-chain)**, tendremos que transferirlos a la P-Chain iniciando una transferencia de cross-chain. Si tus fichas están bloqueadas ya están en la P-Chain, así que no necesitas realizar la transferencia de cross-chain de la X-Chain a la P-Chain.**
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
@@ -88,5 +88,5 @@ Confirm the details!
 Congratulations. You are now delegating the Avalanche Primary Network!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMDY4NTIxN119
+eyJoaXN0b3J5IjpbLTIwOTI3MDk0M119
 -->
