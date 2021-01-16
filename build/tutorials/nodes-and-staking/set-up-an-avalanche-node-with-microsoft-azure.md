@@ -135,8 +135,7 @@ Ahora que tienes tu IP pública selecciona la regla por defecto de permitir ssh 
 
 ![Image for post](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
 
-Then select “+ Add an inbound rule” to add another rule for RPC access, this should also be restricted to only your IP. Change Source to “IP Addresses” and enter in your public IP returned from google into the Source IP field. This time change the “Destination port ranges” field to 9650 and select “TCP” as the protocol. Change the priority to 110 and give it a name of “Avalanche\_RPC” and press Add.
-
+Luego seleccione "+ Add an inbound rule" para agregar otra regla para el acceso a RPC, esto también debe ser restringido sólo a su IP. Cambie la Fuente a "IP Addresses" e introduzca en su IP pública devuelta de google en el campo IP de la Fuente. Esta vez cambie el campo "Rangos de puertos de destino" a 9650 y seleccione "TCP" como protocolo. Cambia la prioridad a 110 y ponle como nombre "Avalanche\_RPC" y presiona Add.
 ![Image for post](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
 
 Select “+ Add an inbound rule” to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep “Source” set to “Any”. Change the Destination port range to “9651” and change the protocol to “TCP”. Enter a priority of 120 and a name of Avalanche\_Protocol and press Add.
@@ -325,7 +324,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIwMjI3NTEsODc3NDY0MzkyLDE5MDgwNT
-M2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcsLTEyNDc2OTk0NTks
-LTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMjIxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTIyODk5OTgyMyw4Nzc0NjQzOTIsMTkwOD
+A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
+OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
