@@ -36,11 +36,11 @@ Luego seleccione "+ Agregar" para agregar una nueva suscripción.
 
 ![Image for post](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
 
-Si quieres usar el precio de Spot Instance VM \(que será considerablemente más barato\) you can’t use a Free Trial account \(and you will receive an error upon validation\), so **make sure to select Pay-As-You-Go.**
+Si quieres usar el precio de Spot Instance VM \(que será considerablemente más barato\) no puedes usar una cuenta de prueba gratuita \(y recibirá un error en la validación\), así que **asegúrate de seleccionar Pay-As-You-Go.**
 
 ![Image for post](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
 
-Enter your billing details and confirm identity as part of the sign-up process, when you get to Add technical support select the without support option \(unless you want to pay extra for support\) and press Next.
+Introduzca sus datos de facturación y confirme su identidad como parte del proceso de registro, cuando llegue a Agregar soporte técnico seleccione la opción sin soporte \(a menos que quieras pagar extra por soporte\) y presiona siguiente.
 
 ![Image for post](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
@@ -322,6 +322,6 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwODczMzg5NSwtMjU4NTAxOTM3LDIyMj
+eyJoaXN0b3J5IjpbMTEyNDIwOTE5MSwtMjU4NTAxOTM3LDIyMj
 E3ODY5NF19
 -->
