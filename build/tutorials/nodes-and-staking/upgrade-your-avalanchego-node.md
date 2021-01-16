@@ -84,12 +84,12 @@ Crear el Nodo [desde el código fuente](upgrade-your-avalanchego-node.md#build-f
 
 Si quieres descargar un binario preconstruido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona la versión que quieras \(probablemente la última.\)
 
-Under `Assets`, select the appropriate file.
+Debajo de `Assets`, selecciona el archivo apropiado.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+Para MacOS:  
+Descarga: `avalanchego-macos-<VERSION>.zip`  
+Descomprime: `unzip avalanchego-macos-<VERSION>.zip`  
+La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
 For Linux on PCs or cloud providers:  
 Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
@@ -180,5 +180,5 @@ You can run your node with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyNTQ4MDk1MV19
+eyJoaXN0b3J5IjpbMTcwNDY3NjU3OV19
 -->
