@@ -18,12 +18,12 @@
 * [Empezando: Ejecutar un Nodo de Avalanche](build/getting-started.md)
 * [Notas de lanzamiento](build/release-notes-1/README.md)
   * [Alertas de Correo Electrónico](http://eepurl.com/heNhSX)
-  * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
-  * [Ortelius Release Notes](build/release-notes-1/ortelius-release-notes.md)
-* [Tutorials](build/tutorials/README.md)
-  * [Platform](build/tutorials/platform/README.md)
-    * [Create a Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
-    * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
+  * [Notas de lanzamiento de AvalancheGo](build/release-notes-1/release-notes.md)
+  * [Notas de lanzamiento de Ortelius](build/release-notes-1/ortelius-release-notes.md)
+* [Tutoriales](build/tutorials/README.md)
+  * [Plataforma](build/tutorials/platform/README.md)
+    * [Crear una Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
+    * [Crear una Red Local de pruebas](build/tutorials/platform/create-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Set up Your Ledger Nano S with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
@@ -83,5 +83,5 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTMzODY3NTIsMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbMTM5NTY3NjI0NSwzNTg4NzIwMjldfQ==
 -->
