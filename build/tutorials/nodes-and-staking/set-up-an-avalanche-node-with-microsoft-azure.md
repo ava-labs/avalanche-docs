@@ -276,7 +276,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-El nodo puede tomar algún tiempo \(más de una hora mientras escribo\) to bootstrap. Bootstrap significa que el nodo descarga y verifica la historia de las cadenas. Dale a esto un poco de tiempo. Una vez que el nodo termine el bootstrapping, la respuesta será:
+El nodo puede tomar algún tiempo \(más de una hora mientras escribo\) en arrancar. Arrancar significa que el nodo descarga y verifica la historia de las chains. Dale a esto un poco de tiempo. Una vez que el nodo termine el arrranque, la respuesta será:
 
 ```text
 {
@@ -288,9 +288,9 @@ El nodo puede tomar algún tiempo \(más de una hora mientras escribo\) to boots
 }
 ```
 
-We can always use “sudo systemctl status avalanchego” to peek at the latest status of our service as before, as well.
+Siempre podemos usar "sudo systemctl status avalanchego" para ver el último estado de nuestro servicio como antes, también.
 
-### Get your NodeID <a id="20a7"></a>
+### Consigue el ID de Tu Nodo <a id="20a7"></a>
 
 We absolutely must get our NodeID if we plan to do any validating on this node. This is retrieved from the RPC as well. We call the following curl command to get our NodeID.
 
@@ -323,7 +323,7 @@ As before, we’ll need to replace “EnterYourAzureIPHere” with the appropria
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyNzY4NzA5Niw4Nzc0NjQzOTIsMTkwOD
+eyJoaXN0b3J5IjpbLTE4ODcwNjQ4NCw4Nzc0NjQzOTIsMTkwOD
 A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
 OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
 -->
