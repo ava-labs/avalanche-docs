@@ -98,19 +98,18 @@ Utiliza el algoritmo de consenso de eficiencia energética proof-of-stake  en lu
 
 ### Soporte de Smart Contracts
 
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, Metamask, Truffle, and more.
-Permite la creación de smart contracts de Solidity y sus herramientas favoritas de Ethereo como Remix, Metamask, Trufa, y más.
+Permite la creación de smart contracts en Solidity y sus herramientas favoritas de Ethereum como Remix, Metamask, Truffle, y más.
 
-### Private and Public Blockchains
+### Blockchains Públicas y Privadas
 
-Create your own public or private blockchains.
+Crea tus propias cadenas de bloqueo públicas o privadas.
 
 ### Designed for Finance
 
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5MjY1NDc4MCwxMjk2OTY4NTI4LC02ND
+eyJoaXN0b3J5IjpbMTAzMjA5MzIyMiwxMjk2OTY4NTI4LC02ND
 UzMTA0MjEsOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQz
 MzEsOTg4MTAxOTcwXX0=
 -->
