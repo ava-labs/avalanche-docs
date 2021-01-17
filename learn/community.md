@@ -65,7 +65,7 @@
 
 ### **Mercados de predicción**
 
-\*\*\*\*[**Prosper**](https://prosper.so/)**:** a non-custodial, cross-chain prediction market and hedging platform. Prosper is developing a unique technology of on-chain liquidity aggregation to solve problems of prediction markets.
+\*\*\*\*[**Prosper**](https://prosper.so/)**:** un mercado de predicción de cross-chain y una plataforma de cobertura no custodiada. Prosper está desarrollando una tecnología única de agregación de liquidez en cadena para resolver los problemas de los mercados de predicción.
 
 ### Security Tokens
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM5MDI4NjIxLDU5MTkwMTg4NSwxMjI0Mz
-Q2NTY2XX0=
+eyJoaXN0b3J5IjpbOTc1ODEyNzcsNTkxOTAxODg1LDEyMjQzND
+Y1NjZdfQ==
 -->
