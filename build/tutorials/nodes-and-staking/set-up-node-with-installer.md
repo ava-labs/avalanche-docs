@@ -105,7 +105,7 @@ Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 
 Confirma con `y`, o `n` si la IP detectada no es correcta \(o vacía\), y luego introduzca la IP correcta en el siguiente paso.
 
-The script will then continue with system service creation and finish with starting the service.
+El script continuará con la creación del servicio del sistema y terminará con el inicio del servicio.
 
 ```text
 Installing service with public IP: 3.15.152.14
@@ -241,6 +241,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLT
-E1NjYzMDE1ODgsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbLTg1NzQzNTE1MCwtMjA4NTkwMzgxMywtMT
+c3MzU3Njg1NiwtMTU2NjMwMTU4OCwtMzU2ODg1MzI0XX0=
 -->
