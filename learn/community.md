@@ -27,13 +27,13 @@
 
 [**Blockchain Game Alliance**](https://blockchaingamealliance.org/): es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
 
-[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
+[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): un think tank global que se centra en las implicaciones estratégicas de la tecnología de las blockchain en los negocios, el gobierno y la sociedad. Entre sus miembros se encuentran más de 60 de las principales empresas, gobiernos e instituciones académicas del mundo.
 
-[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
+[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): una organización global que acelera el desarrollo del ecosistema de la blockchain en la región de América Latina y el Caribe. Ahora tiene 25 miembros, incluyendo a Consensys, MIT Media Lab, Enterprise Ethereum Alliance, y el Instituto de Investigación Blockchain.
 
-### Education
+### Educación
 
-[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): un miembro de la comunidad que produce "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
 
 ### Exchanges
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4MTQzOTQ5Niw1OTE5MDE4ODUsMTIyND
-M0NjU2Nl19
+eyJoaXN0b3J5IjpbMTk5MTI3Mjk0LDU5MTkwMTg4NSwxMjI0Mz
+Q2NTY2XX0=
 -->
