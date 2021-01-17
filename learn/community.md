@@ -85,7 +85,7 @@
 
 [**Avalanche Wallet**](https://wallet.avax.network): la simple, segura y no custodiada Wallet de Avalanche para almacenar tus bienes de Avalanche.
 
-[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
+[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** la hardware wallet original hecha por Ledger. Comienza fácilmente tu viaje en las crypto: compra crypto, asegura tus activos, y gestionalos en una sola aplicación.
 
 ## Developer Tools
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3NzY1NTMyNyw1OTE5MDE4ODUsMTIyND
-M0NjU2Nl19
+eyJoaXN0b3J5IjpbLTE4OTE1NDU4ODIsNTkxOTAxODg1LDEyMj
+QzNDY1NjZdfQ==
 -->
