@@ -35,11 +35,11 @@ ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea. Muestra información sobre tu nodo. Fíjate en el id de proceso, en este caso, "2630". Detén el nodo ejecutando `kill -2 2630'.
+Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea. Muestra información sobre tu nodo. Fíjate en el id de proceso, en este caso, "2630". Detén el nodo ejecutando `kill -2 2630`.
 
-#### Node working files
+#### Archivos de Trabajo de Nodo
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
+Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
 
 ### Networking considerations
 
@@ -240,5 +240,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODc1MDQ1ODIsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbMTMyNDQzMDM2LC0zNTY4ODUzMjRdfQ==
 -->
