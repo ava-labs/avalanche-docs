@@ -123,7 +123,7 @@
 
 [**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): calculadora de staking de Avalanche.
 
-### Testing Tools and Frameworks
+### Herramientas de Prueba and Frameworks
 
 [**Halborn**](https://halborn.com/): an award-winning team of ethical hackers that work with blockchain projects to defend against cyber attacks. The team at Halborn enhanced the security of the Avalanche Wallet, and also offers smart contract auditing.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYxOTMxNzQzOSwzNzE4OTIwMzUsLTEwMz
+eyJoaXN0b3J5IjpbMTgwNTg1NjIyNSwzNzE4OTIwMzUsLTEwMz
 EwNDQ1NDEsNTkxOTAxODg1LDEyMjQzNDY1NjZdfQ==
 -->
