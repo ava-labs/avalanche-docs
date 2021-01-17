@@ -158,7 +158,7 @@ Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chai
 
 Fíjese en el `active` (en marcha)" que indica que el servicio está funcionando bien. Es posible que tenga que pulsar `q` para volver a la línea de comandos.
 
-To find out your NodeID, which is used to identify your node to the network, run the following command:
+Para encontrar el ID de su nodo, el cual se usa para identificar su nodo a la red, ejecute el siguiente comando:
 
 ```text
 sudo journalctl -u avalanchego | grep "node's ID"
@@ -241,7 +241,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MDU5NTcwMiwtNDM0ODczMDQ0LC04NT
+eyJoaXN0b3J5IjpbLTQ2MTIwNzMyMywtNDM0ODczMDQ0LC04NT
 c0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYz
 MDE1ODgsLTM1Njg4NTMyNF19
 -->
