@@ -237,12 +237,12 @@ Done!
 
 Si estás en una red residencial \(IP dinámica\), Si estás en una red residencial (IP dinámica), no te olvides de configurar el reenvío de puertos. Si estás en un proveedor de cloud service, estás listo.
 
-Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), o subir el nivel de su instalación configurando la [monitorización de nodos](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzA0Mzg0NzAsLTQzNDg3MzA0NCwtOD
+eyJoaXN0b3J5IjpbLTE1NTA2MDcwOTEsLTQzNDg3MzA0NCwtOD
 U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
 MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
