@@ -115,7 +115,7 @@
 
 [**ablock**](https://ablock.io/avalanche): servicios de staking delegados.
 
-[**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): servicios de staking delegados ofrecidos por exploradores de blockchain independientes 
+[**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): delegated staking services offered by independent blockchain explorer.
 
 [**Figment**](https://figment.io/): simple and secure staking as a service.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzY5Nzc1MjgxLDM3MTg5MjAzNSwtMTAzMT
-A0NDU0MSw1OTE5MDE4ODUsMTIyNDM0NjU2Nl19
+eyJoaXN0b3J5IjpbLTEwNjM4MzE1MTAsMzcxODkyMDM1LC0xMD
+MxMDQ0NTQxLDU5MTkwMTg4NSwxMjI0MzQ2NTY2XX0=
 -->
