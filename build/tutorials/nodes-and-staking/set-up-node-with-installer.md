@@ -45,9 +45,9 @@ Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá ar
 
 Para funcionar con éxito, AvalancheGo necesita aceptar conexiones de Internet en el puerto de red `9651`. Antes de proceder a la instalación, debes determinar el entorno de red en el que se ejecutará tu nodo.
 
-#### Running on a cloud provider
+#### Ejecutandose en un cloud provider
 
-If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already. The script will try to find out the IP by itself, but that might not work in all environments, so you will need to check the IP or enter it yourself.
+Si su nodo se ejecuta en una instancia de ordenador de un cloud provider, tendrá una IP estática. Averigua cuál es esa IP estática, o configúrala si no lo has hecho ya. El script tratará de averiguar la IP por sí mismo, pero eso podría no funcionar en todos los entornos, por lo que tendrás que comprobar la IP o introducirla tú mismo.
 
 #### Running on a home connection
 
@@ -240,6 +240,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDIxMjUyNjAsLTE1NjYzMDE1ODgsLT
-M1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbMTY3ODMyNzcyNywtMTU2NjMwMTU4OCwtMz
+U2ODg1MzI0XX0=
 -->
