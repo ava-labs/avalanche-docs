@@ -54,13 +54,13 @@ Si su nodo se ejecuta en una instancia de ordenador de un cloud provider, tendr�
 
 Si estás ejecutando un nodo en un ordenador que está en una conexión de Internet residencial, tienes una IP dinámica; es decir, tu IP cambiará periódicamente. El script de instalación configurará el nodo apropiadamente para esa situación. Pero, para una conexión doméstica, necesitará configurar el reenvío del puerto `9651` de Internet a la computadora en la que está instalado el nodo.
 
-Como hay demasiados modelos y configuraciones de routers, no podemos dar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar \(como[esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+Como hay demasiados modelos y configuraciones de routers, no podemos dar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar \(como [esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), y el soporte de su proveedor de servicios también podría ayudar.
 
-## Running the script
+## Ejecutando el script
 
-So, now that you prepared your system and have the info ready, let's get to it.
+Así que, ahora que has preparado tu sistema y tienes la información lista, vamos a hacerlo.
 
-To download and run the script, enter the following in the terminal:
+Para descargar y ejecutar el script, introduzca lo siguiente en la terminal:
 
 ```text
 wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
@@ -241,6 +241,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDMyNzM3MjYzLC0xNTY2MzAxNTg4LC0zNT
-Y4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbLTE3NzM1NzY4NTYsLTE1NjYzMDE1ODgsLT
+M1Njg4NTMyNF19
 -->
