@@ -164,7 +164,7 @@ Para encontrar el ID de su nodo, el cual se usa para identificar su nodo a la re
 sudo journalctl -u avalanchego | grep "node's ID"
 ```
 
-It will produce output like:
+Si todo va bien, la respuesta debería ser algo como esto: 
 
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
@@ -241,7 +241,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2MTIwNzMyMywtNDM0ODczMDQ0LC04NT
+eyJoaXN0b3J5IjpbMTQ2OTYwNTY3OCwtNDM0ODczMDQ0LC04NT
 c0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYz
 MDE1ODgsLTM1Njg4NTMyNF19
 -->
