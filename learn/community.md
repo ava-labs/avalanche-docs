@@ -103,7 +103,7 @@
 
 ### Oracles
 
-[**Chainlink**](https://chain.link/): market-leading price and data oracles for decentralized applications and the migration of real-world assets onto Avalanche.
+[**Chainlink**](https://chain.link/): Oracles de datos con el precio lider del mercado para aplicaciones descentralizadas y la migración de los activos del mundo real a Avalanche.
 
 ### Software Development Kits \(SDKs\)
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzEwNDQ1NDEsNTkxOTAxODg1LDEyMj
-QzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbNDk4NzQ5NjM2LC0xMDMxMDQ0NTQxLDU5MT
+kwMTg4NSwxMjI0MzQ2NTY2XX0=
 -->
