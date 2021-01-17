@@ -79,11 +79,11 @@
 
 ### Bots de Trading
 
-[**Hummingbot**](https://hummingbot.io/)**:** a community-driven, open-source project that aims to democratize algorithmic trading by making sophisticated high-frequency trading strategies freely available to everyone in the world.
+[**Hummingbot**](https://hummingbot.io/)**:** un proyecto de código abierto impulsado por la comunidad que tiene por objeto democratizar el comercio algorítmico haciendo que las sofisticadas estrategias de comercio de alta frecuencia estén libremente disponibles para todos en el mundo.
 
 ### Wallets
 
-[**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
+[**Avalanche Wallet**](https://wallet.avax.network):  simple, segura y no custodiada Wallet de Avalanche 
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjQwNzM2MTksNTkxOTAxODg1LDEyMj
+eyJoaXN0b3J5IjpbLTEwNTY2MTQ4NDQsNTkxOTAxODg1LDEyMj
 QzNDY1NjZdfQ==
 -->
