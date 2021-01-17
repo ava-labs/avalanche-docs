@@ -63,7 +63,7 @@
 
 [**Polyient Games**](https://www.polyient.games): una firma de inversiones enfocada en  los non-fungible token \(NFT\) y las industrias del juego basados en la blockchain. Invierten en startups que están construyendo la infraestructura y las aplicaciones que escalarán la clase de activos NFT.
 
-### **Prediction Markets**
+### **Mercados de predicción**
 
 \*\*\*\*[**Prosper**](https://prosper.so/)**:** a non-custodial, cross-chain prediction market and hedging platform. Prosper is developing a unique technology of on-chain liquidity aggregation to solve problems of prediction markets.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0NDg3Njc1NCw1OTE5MDE4ODUsMTIyND
-M0NjU2Nl19
+eyJoaXN0b3J5IjpbNDM5MDI4NjIxLDU5MTkwMTg4NSwxMjI0Mz
+Q2NTY2XX0=
 -->
