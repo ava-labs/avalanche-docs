@@ -21,11 +21,11 @@
 
 [**Esta Semana en Avalanche**](https://weavax.substack.com/): un boletín semanal independiente de noticias, eventos y acontecimientos de Avalanche producido por un miembro de la comunidad.
 
-### Ecosystem Partners
+### Socios del Ecosistema
 
-[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): training and education platform for both technical developers and business entrepreneurs to learn about blockchain technology.
+[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): plataforma de capacitación y educación para que tanto los desarrolladores técnicos como los empresarios aprendan sobre la tecnología de las blockchain.
 
-[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): is an organization committed to promoting blockchain within the game industry. The BGA also provides an open forum for individuals and companies to share knowledge and collaborate, create common standards, establish best practices, and network.
+[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
 
 [**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDc3OTU2MzcsNTkxOTAxODg1LDEyMj
-QzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbMTc4MTQzOTQ5Niw1OTE5MDE4ODUsMTIyND
+M0NjU2Nl19
 -->
