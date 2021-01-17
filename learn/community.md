@@ -87,17 +87,17 @@
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** la hardware wallet original hecha por Ledger. Comienza fácilmente tu viaje en las crypto: compra crypto, asegura tus activos, y gestionalos en una sola aplicación.
 
-## Developer Tools
+## Herramientas para Desarrolladores
 
-### Blockchain Infrastructure and Node Services
+### Infraestructura de Blockchain y Servicios de Nodos
 
-[**Allnodes**](https://www.allnodes.com)**:** a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
+[**Allnodes**](https://www.allnodes.com)**:** una plataforma sin custodia para alojar masternodos y nodos completos, así como servicios completos de staking.
 
-\*\*\*\*[**Ankr**](https://www.ankr.com): Web3 insfrastructure for all
+\*\*\*\*[**Ankr**](https://www.ankr.com): La infraestructura de la Web3 para todos
 
-[**AVADO**](https://ava.do/)**:** plug and play hardware blockchain nodes that enable individuals and developers to easily and privately access Web3 applications, participate in staking, and run incentivized Dapps to earn crypto.
+[**AVADO**](https://ava.do/)**:** nodos de blockchain de hardware plug and play que permiten a los individuos y a los desarrolladores acceder de forma fácil y privada a las aplicaciones Web3, participar en el staking y ejecutar Dapps incentivadas para ganar criptomonedas
 
-[**Bloq**](https://www.bloq.com): managed infrastructure for building on blockchain networks. You get a single interface to an expanding set of enterprise-grade infrastructure services for building on multiple blockchain networks.
+[**Bloq**](https://www.bloq.com): infraestructura gestionada para construir sobre redes de blockchain. Tienes una única interfaz para un conjunto cada vez mayor de servicios de infraestructura de nivel empresarial para construir sobre múltiples redes de blockchain.
 
 [**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTE1NDU4ODIsNTkxOTAxODg1LDEyMj
+eyJoaXN0b3J5IjpbLTExMzk1OTI5MDgsNTkxOTAxODg1LDEyMj
 QzNDY1NjZdfQ==
 -->
