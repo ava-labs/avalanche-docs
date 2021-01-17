@@ -122,7 +122,7 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-The script is finished, and you should see the system prompt again.
+El script finalizó, and you should see the system prompt again.
 
 ## Post installation
 
@@ -241,6 +241,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NzQzNTE1MCwtMjA4NTkwMzgxMywtMT
-c3MzU3Njg1NiwtMTU2NjMwMTU4OCwtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTQzNDg3MzA0NCwtODU3NDM1MTUwLC0yMD
+g1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2MzAxNTg4LC0zNTY4
+ODUzMjRdfQ==
 -->
