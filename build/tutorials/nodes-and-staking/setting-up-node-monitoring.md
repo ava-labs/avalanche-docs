@@ -2,7 +2,7 @@
 
 _Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
 
-## Introduction
+## Introducción
 
 This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
 
@@ -366,3 +366,6 @@ To import the preconfigured dashboard:
 
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTQ2ODM5NDU1OV19
+-->
