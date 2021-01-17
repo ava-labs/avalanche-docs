@@ -203,7 +203,6 @@ AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versi�
 Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
 ```
 
-
 Se recomienda siempre actualizar a la última versión, porque las nuevas versiones traen correcciones de errores, nuevas características y actualizaciones.
 
 Para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de nuevo:
@@ -212,7 +211,7 @@ Para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de 
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+Detectará que ya tiene instalado AvalancheGo:
 
 ```text
 AvalancheGo installer
@@ -223,7 +222,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Luego actualizará su nodo a la última versión, y después de hacerlo, iniciará el nodo de nuevo, y mostrará la información sobre la última versión:
 
 ```text
 Node upgraded, starting service...
@@ -232,9 +231,9 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-## What next?
+## ¿Qué sigue?
 
-That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
+¡Eso es, estás dirigiendo un nodo de AvalancheGo! ¡Felicidades! Haznos saber que lo hiciste en nuestro [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) o [Reddit](https://t.me/avalancheavax)!
 
 If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
@@ -243,7 +242,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjM1MDAxMDcsLTQzNDg3MzA0NCwtOD
-U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
-MzAxNTg4LC0zNTY4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbODMzMDk1NTI1LC00MzQ4NzMwNDQsLTg1Nz
+QzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1NiwtMTU2NjMw
+MTU4OCwtMzU2ODg1MzI0XX0=
 -->
