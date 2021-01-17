@@ -12,11 +12,12 @@ Este script de instalación asume:
 
 ### Consideraciones del Entorno
 
-If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
 
-If you have a node already running on the computer, stop it before running the script.
+Si ejecutas una distribución diferente de Linux, el script podría no funcionar como debería. Asume que `systemd` se usa para ejecutar servicios del sistema. Otras distribuciones de Linux podrían usar algo más, o podrían tener archivos en lugares diferentes a los que asume el script.
 
-#### Node running from terminal
+Si ya tienes un nodo ejecutándose en el ordenador, detenlo antes de ejecutar el script.
+
+#### Nodo ejecutándose desde la terminal
 
 If your node is running in a terminal stop it by pressing `ctrl+C`.
 
@@ -238,5 +239,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzY3Njk4MDQsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbMTU1MTk1NTk0OCwtMzU2ODg1MzI0XX0=
 -->
