@@ -41,11 +41,11 @@
 
 \*\*\*\*[**Bitfinex**](https://www.bitfinex.com): una plataforma de comercio de activos digitales que ofrece servicios de vanguardia para los comerciantes de divisas digitales y los proveedores de liquidez mundial.
 
-\*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
+\*\*\*\*[**FTX**](https://ftx.com): un exchange de derivados de cryptocurrency.
 
-[**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+[**JellySwap**](https://jelly.market/): una aplicación descentralizada de intercambio de cross-chain que permite la transferencia de valor entre diferentes redes.
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): el criy\#1 the United States' \#1 commission-free crypto broker.
 
 ### Explorers
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQ0ODA0MDY5LDU5MTkwMTg4NSwxMjI0Mz
-Q2NTY2XX0=
+eyJoaXN0b3J5IjpbLTExMTg4MDgzMzksNTkxOTAxODg1LDEyMj
+QzNDY1NjZdfQ==
 -->
