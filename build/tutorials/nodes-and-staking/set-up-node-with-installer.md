@@ -28,14 +28,14 @@ Si tu nodo ya está funcionando como un servicio, entonces probablemente no nece
 #### Nodo ejecutándose en segundo plano
 
 Si tu nodo se está ejecutándo en segundo plano
- \(ejecutandose `nohup`, por ejemplo\) y luego encuentra el proceso que ejecuta el nodo ejecutando `ps aux | grep avalanche`. This will produce output like:
+ \(ejecutandose `nohup`, por ejemplo\) luego encuentra el proceso que ejecuta el nodo ejecutando `ps aux | grep avalanche`. Esto producirá una salida como:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-Look for line that doesn't have `grep` on it. In this example, that is the second line. It shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea. Muestra información sobre tu nodo. Fíjate en el id de proceso, en este caso, "2630". Detén el nodo ejecutando `kill -2 2630'.
 
 #### Node working files
 
@@ -240,5 +240,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzOTc1NDA0NywtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTE4ODc1MDQ1ODIsLTM1Njg4NTMyNF19
 -->
