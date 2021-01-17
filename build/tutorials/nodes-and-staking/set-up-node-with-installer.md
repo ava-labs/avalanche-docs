@@ -1,12 +1,12 @@
 # Ejecute un Nodo de Avalanche en Linux Usando el Script de Instalación
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+Tenemos un script de shell que instala AvalancheGo en tu computadora. Este script establece un nodo de ejecución completo en cuestión de minutos con un mínimo de entradas del usuario.
 
 ## Before you start
 
-This install script assumes:
+Este script de instalación asume:
 
-* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
+* OS: Ubuntu 18.04 or 20.04 \(disculpa, MacOS y Windows not yet supported\)
 * AvalancheGo is not running and not already installed as a service
 * User running the script has superuser privileges \(can run `sudo`\)
 
@@ -238,5 +238,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbLTk3MzEwNjQxMywtMzU2ODg1MzI0XX0=
 -->
