@@ -61,7 +61,7 @@
 
 ### Non-Fungible Tokens \(NFTs\)
 
-[**Polyient Games**](https://www.polyient.games): una firma de inversiones enfocada en  los non-fungible token \(NFT\) and blockchain gaming industries. They invest in startups that are building the infrastructure and applications that will scale the NFT asset class.
+[**Polyient Games**](https://www.polyient.games): una firma de inversiones enfocada en  los non-fungible token \(NFT\) y las industrias del juego basados en la blockchain. They invest in startups that are building the infrastructure and applications that will scale the NFT asset class.
 
 ### **Prediction Markets**
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTA5MjAzOTA3LDU5MTkwMTg4NSwxMjI0Mz
-Q2NTY2XX0=
+eyJoaXN0b3J5IjpbLTY0MTk5NjQwMCw1OTE5MDE4ODUsMTIyND
+M0NjU2Nl19
 -->
