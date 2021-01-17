@@ -122,17 +122,17 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-El script finalizó, y deberi
+El script finalizó, y deberías ver un mensaje del sistema.
 
-## Post installation
+## Después de la instalación
 
-AvalancheGo should be running in the background as a service. You can check that it's running with:
+AvalancheGo debería funcionar en segundo plano como un servicio. Puedes comprobar que se está ejecutando con:
 
 ```text
 sudo systemctl status avalanchego
 ```
 
-This will print the node's latest logs, which should look like this:
+Esto imprimirá los últimos registros del nodo, que deberían verse así:
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service
@@ -241,7 +241,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTYyMzM2NzE2LC00MzQ4NzMwNDQsLTg1Nz
-QzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1NiwtMTU2NjMw
-MTU4OCwtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTE3NDgzNzI0MDMsLTQzNDg3MzA0NCwtOD
+U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
+MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
