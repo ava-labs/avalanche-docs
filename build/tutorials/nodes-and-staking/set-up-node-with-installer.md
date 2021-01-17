@@ -68,7 +68,7 @@ chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
 
-And we're off! The output should look something like this:
+La salida debería ser algo como esto:
 
 ```text
 AvalancheGo installer
@@ -87,7 +87,7 @@ avalanchego-v1.1.1/avalanchego
 Node files unpacked into /home/ubuntu/avalanche-node
 ```
 
-And then the script will prompt you for information about the network environment:
+Y luego el script le pedirá información sobre el entorno de la red:
 
 ```text
 To complete the setup some networking information is needed.
@@ -97,7 +97,7 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
+ingresa`1` si tienes un aIP dinámica y `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
@@ -241,6 +241,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NzM1NzY4NTYsLTE1NjYzMDE1ODgsLT
-M1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbOTE1MTY0MDYwLC0xNzczNTc2ODU2LC0xNT
+Y2MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
