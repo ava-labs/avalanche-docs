@@ -111,7 +111,7 @@
 
 [**Torus**](https://tor.us/): El SDK de DirectAuth simplifica la incorporación permitiendo a los usuarios crear una Wallet de Avalanche con sus cuentas existentes de Google, y permite el acceso con un solo clic a las aplicaciones de Avalanche. Los usuarios pueden personalizar sus Wallets para tomar posesión de las private keyss a medida que se sientan más cómodos con la tecnología.
 
-### Staking Services
+### Servicios de Staking 
 
 [**ablock**](https://ablock.io/avalanche): delegated staking services.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDY1NTQ4ODMsLTEwMzEwNDQ1NDEsNT
-kxOTAxODg1LDEyMjQzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbMzcxODkyMDM1LC0xMDMxMDQ0NTQxLDU5MT
+kwMTg4NSwxMjI0MzQ2NTY2XX0=
 -->
