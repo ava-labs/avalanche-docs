@@ -170,17 +170,18 @@ Si todo va bien, la respuesta debería ser algo como esto:
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
 
-Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
 
-Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
+Ponga `NodeID-` al valor para obtener, por ejemplo, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Guarda eso; será necesario para staking o buscar tu nodo.
+
+Tu nodo debería estar en el proceso de arranque ahora. Puedes monitorear el progreso emitiendo el siguiente comando:
 
 ```text
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl+C` when you wish to stop reading node output.
+Presione `ctrl+C` cuando desee dejar de leer la salida del nodo.
 
-## Stopping the node
+## Dthe node
 
 To stop AvalancheGo, run:
 
@@ -241,7 +242,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2OTYwNTY3OCwtNDM0ODczMDQ0LC04NT
-c0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYz
-MDE1ODgsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbODA0NjYzMDY0LC00MzQ4NzMwNDQsLTg1Nz
+QzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1NiwtMTU2NjMw
+MTU4OCwtMzU2ODg1MzI0XX0=
 -->
