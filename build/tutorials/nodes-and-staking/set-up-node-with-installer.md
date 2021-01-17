@@ -97,13 +97,13 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-ingresa`1` si tienes un aIP dinámica y `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
+ingresa`1` si tienes un aIP dinámica y `2` si tienes una IP estática. Si está en una IP estática, intentará detectar automáticamente la IP y pedirá confirmación.
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
+Confirma con `y`, o `n` si la IP detectada no es correcta \(o vacía\), y luego introduzca la IP correcta en el siguiente paso.
 
 The script will then continue with system service creation and finish with starting the service.
 
@@ -241,6 +241,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE1MTY0MDYwLC0xNzczNTc2ODU2LC0xNT
-Y2MzAxNTg4LC0zNTY4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLT
+E1NjYzMDE1ODgsLTM1Njg4NTMyNF19
 -->
