@@ -19,15 +19,16 @@ Si ya tienes un nodo ejecutándose en el ordenador, detenlo antes de ejecutar el
 
 #### Nodo ejecutándose desde la terminal
 
-If your node is running in a terminal stop it by pressing `ctrl+C`.
+Si su nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
 
-#### Node running as a service
+#### Nodo ejecutándose como un servicio
 
-If your node is already running as a service, then you probably don't need this script. You're good to go.
+Si tu nodo ya está funcionando como un servicio, entonces probablemente no necesites este script. Estás listo.
 
-#### Node running in the background
+#### Nodo ejecutándose en segundo plano
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+Si tu nodo se está ejecutándo en segundo plano
+ \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -239,5 +240,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1MTk1NTk0OCwtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTE1ODk1Njk1NDksLTM1Njg4NTMyNF19
 -->
