@@ -73,11 +73,11 @@
 
 ### Stablecoins
 
-[**BiLira**](https://www.bilira.co): una cryptocurrency estable que está respaldada por la lira turca.
+[**BiLira**](https://www.bilira.co): una criptodivisa estable que está respaldada por la lira turca.
 
-\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
+\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): el primer y único Stablecoin con respaldo completo atestiguado independientemente en vivo y on-chain
 
-### Trading Bots
+### Bots de Trading
 
 [**Hummingbot**](https://hummingbot.io/)**:** a community-driven, open-source project that aims to democratize algorithmic trading by making sophisticated high-frequency trading strategies freely available to everyone in the world.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA4MjE5MDMwMiw1OTE5MDE4ODUsMTIyND
-M0NjU2Nl19
+eyJoaXN0b3J5IjpbLTE0NjQwNzM2MTksNTkxOTAxODg1LDEyMj
+QzNDY1NjZdfQ==
 -->
