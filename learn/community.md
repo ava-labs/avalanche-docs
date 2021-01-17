@@ -67,13 +67,13 @@
 
 \*\*\*\*[**Prosper**](https://prosper.so/)**:** un mercado de predicción de cross-chain y una plataforma de cobertura no custodiada. Prosper está desarrollando una tecnología única de agregación de liquidez en cadena para resolver los problemas de los mercados de predicción.
 
-### Security Tokens
+### Tokens de Seguridad
 
-[**Securitize**](https://www.securitize.io/): the industry-leading primary issuance and compliance platform for digital securities \(security tokens\) and a SEC-registered transfer agent.
+[**Securitize**](https://www.securitize.io/): la principal plataforma de emisión y cumplimiento de valores digitales \(tokens de seguridad)\ de la industria y un agente de transferencia registrado en la SEC.
 
 ### Stablecoins
 
-[**BiLira**](https://www.bilira.co): a stable cryptocurrency that is backed by the Turkish Lira.
+[**BiLira**](https://www.bilira.co): una cryptocurrency estable que está respaldada por la lira turca.
 
 \*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc1ODEyNzcsNTkxOTAxODg1LDEyMjQzND
-Y1NjZdfQ==
+eyJoaXN0b3J5IjpbMjA4MjE5MDMwMiw1OTE5MDE4ODUsMTIyND
+M0NjU2Nl19
 -->
