@@ -127,13 +127,13 @@
 
 [**Halborn**](https://halborn.com/): un galardonado equipo de hackers éticos que trabajan con proyectos de blockchain para defenderse de los ataques cibernéticos. El equipo de Halborn mejoró la seguridad de la Wallet de Avalanche, y también ofrece auditoría de smart contracts.
 
-[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
+[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): plataforma de pruebas completa e integral dedicada a ayudar a los desarrolladores a construir tecnologías antifragiles en Avalanche.
 
-[**Quantstamp**](https://quantstamp.com/): blockchain security firm offering audits and consulting for smart contracts, off-chain applications, networking, and front-end interfaces to enhance the security of decentralized applications.
+[**Quantstamp**](https://quantstamp.com/): empresa de seguridad Blockchain que ofrece auditorías y consultoría para smart contracts, aplicaciones off-chain, redes e interfaces front-end para mejorar la seguridad de las aplicaciones descentralizadas.
 
-[**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
+[**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTYzNjc0ODMsMzcxODkyMDM1LC0xMD
-MxMDQ0NTQxLDU5MTkwMTg4NSwxMjI0MzQ2NTY2XX0=
+eyJoaXN0b3J5IjpbMjAzODc1MjM0MSwzNzE4OTIwMzUsLTEwMz
+EwNDQ1NDEsNTkxOTAxODg1LDEyMjQzNDY1NjZdfQ==
 -->
