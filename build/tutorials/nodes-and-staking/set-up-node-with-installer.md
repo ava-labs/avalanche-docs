@@ -156,7 +156,7 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Note the `active (running)` which indicates the service is running ok. You may need to press `q` to return to the command prompt.
+Fíjese en el `active` (en marcha)" que indica que el servicio está funcionando bien. Es posible que tenga que pulsar `q` para volver a la línea de comandos.
 
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
@@ -241,7 +241,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDgzNzI0MDMsLTQzNDg3MzA0NCwtOD
-U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
-MzAxNTg4LC0zNTY4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbMTA3MDU5NTcwMiwtNDM0ODczMDQ0LC04NT
+c0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYz
+MDE1ODgsLTM1Njg4NTMyNF19
 -->
