@@ -125,7 +125,7 @@
 
 ### Herramientas de Prueba and Frameworks
 
-[**Halborn**](https://halborn.com/): an award-winning team of ethical hackers that work with blockchain projects to defend against cyber attacks. The team at Halborn enhanced the security of the Avalanche Wallet, and also offers smart contract auditing.
+[**Halborn**](https://halborn.com/): un galardonado equipo de hackers éticos que trabajan con proyectos de blockchain para defenderse de los ataques cibernéticos. El equipo de Halborn mejoró la seguridad de la Wallet de Avalanche, y también ofrece auditoría de smart contracts.
 
 [**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwNTg1NjIyNSwzNzE4OTIwMzUsLTEwMz
-EwNDQ1NDEsNTkxOTAxODg1LDEyMjQzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbLTE2NTYzNjc0ODMsMzcxODkyMDM1LC0xMD
+MxMDQ0NTQxLDU5MTkwMTg4NSwxMjI0MzQ2NTY2XX0=
 -->
