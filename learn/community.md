@@ -15,11 +15,11 @@
 
 [**Twitter**](https://twitter.com/avalancheavax): el Twitter oficial de Avalanche para todas las noticias y actualizaciones importantes sobre Avalanche y su ecosistema.
 
-[**Forum**](https://forum.avax.network): the official Avalanche Forum for technical discussions related to Avalanche and its community
+[**Forum**](https://forum.avax.network): el Foro oficial de Avalanche para las discusiones técnicas relacionados con Avalanche y su comunidad
 
-[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): a community growth platform building an inclusive environment for all aspects of Avalanche. From expansion efforts to open-source development, members directly contribute to vital research, education, and engineering initiatives to earn AVAX tokens.
+[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): una plataforma para el crecimiento de la comunidad que construye un ambiente inclusivo para todos los aspectos de Avalanche. Desde los esfuerzos de expansión hasta el desarrollo de código abierto, los miembros contribuyen directamente a las iniciativas cruciales de investigación, educación e ingeniería para ganar tokens de AVAX.
 
-[**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
+[**Esta Semana en Avalanche**](https://weavax.substack.com/): un boletín semanal independiente de noticias, eventos y acontecimientos de Avalanche producido por un miembro de la comunidad.
 
 ### Ecosystem Partners
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTM4OTA3MTAsNTkxOTAxODg1LDEyMj
+eyJoaXN0b3J5IjpbLTE0MDc3OTU2MzcsNTkxOTAxODg1LDEyMj
 QzNDY1NjZdfQ==
 -->
