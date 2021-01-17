@@ -45,19 +45,19 @@
 
 [**JellySwap**](https://jelly.market/): una aplicación descentralizada de intercambio de cross-chain que permite la transferencia de valor entre diferentes redes.
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): el criy\#1 the United States' \#1 commission-free crypto broker.
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): el crypto broker sin comisiones \#1 en los Estados Unidos.
 
-### Explorers
+### Exploradores
 
-[**Avalanche Explorer**](https://explorer.avax.network): an analytics tool that enables people to search the Avalanche platform for transactions, addresses, and other platform activities.
+[**Avalanche Explorer**](https://explorer.avax.network): una herramienta analítica que permite a la gente buscar en la plataforma Avalanche transacciones, direcciones y otras actividades de la plataforma.
 
-[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
+[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): un explorador independiente de blockchains que permite a los usuarios navegar por las blockchains, transacciones, validadores, delegadores, activos y smart contracts en Avalanche. También cuenta con un Programa de Validación de Detalle de Activos para añadir datos ricos a los activos en Avascan.
 
-[**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
+[**Vscout**](https://vscout.io): una herramienta analítica para explorar subnets de Avalanche, staking y validadores.
 
-### Miscellaneous
+### Misceláneos
 
-[**AVAXAlert**](https://avaxalert.com): Receive notifications directly into your email address when transactions occur on your AVAX wallet.
+[**AVAXAlert**](https://avaxalert.com): Recibe notificaciones directamente en tu dirección de correo electrónico cuando ocurran transacciones en tu Wallet de AVAX.
 
 ### Non-Fungible Tokens \(NFTs\)
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTg4MDgzMzksNTkxOTAxODg1LDEyMj
-QzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbMTczNTE4NTg4Nyw1OTE5MDE4ODUsMTIyND
+M0NjU2Nl19
 -->
