@@ -235,14 +235,14 @@ Done!
 
 ¡Eso es, estás dirigiendo un nodo de AvalancheGo! ¡Felicidades! Haznos saber que lo hiciste en nuestro [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) o [Reddit](https://t.me/avalancheavax)!
 
-If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+Si estás en una red residencial \(IP dinámica\), Si estás en una red residencial (IP dinámica), no te olvides de configurar el reenvío de puertos. Si estás en un proveedor de cloud service, estás listo.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODMzMDk1NTI1LC00MzQ4NzMwNDQsLTg1Nz
-QzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1NiwtMTU2NjMw
-MTU4OCwtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTE5MzA0Mzg0NzAsLTQzNDg3MzA0NCwtOD
+U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
+MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
