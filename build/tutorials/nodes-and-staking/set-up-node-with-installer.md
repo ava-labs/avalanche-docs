@@ -6,9 +6,9 @@ Tenemos un script de shell que instala AvalancheGo en tu computadora. Este scrip
 
 Este script de instalación asume:
 
-* OS: Ubuntu 18.04 or 20.04 \(disculpa, MacOS y Windows not yet supported\)
-* AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges \(can run `sudo`\)
+* OS: Ubuntu 18.04 or 20.04 \(disculpa, MacOS y Windows aún no soporto\)
+* AvalancheGo no está funcionando y no está instalado como un servicio
+* El usuario que ejecuta el script tiene privilegios de superusuario \(puede ejecutar `sudo`\)
 
 ### Environment considerations
 
@@ -238,5 +238,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3MzEwNjQxMywtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbMzgzMzkwNzE3LC0zNTY4ODUzMjRdfQ==
 -->
