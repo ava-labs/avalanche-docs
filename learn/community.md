@@ -3,17 +3,17 @@
 
 ## Recursos
 
-[**Kit de prensa de Avalanche y Lineamientos de la Marca**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): the official press kit and brand guidelines with logos and fonts
+[**Kit de prensa de Avalanche y Lineamientos de la Marca**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): el kit de prensa oficial y las directrices de la marca con los logotipos y las fuentes
 
-### Websites and Socials
+### Sitio Web y Redes Sociales
 
-[**Website**](https://avax.network): the official Ava Labs and Avalanche website.
+[**SItio Web**](https://avax.network): el sitio web oficial de Ava Labs y Avalanche.
 
-[**GitHub**](https://github.com/ava-labs): the official Ava Labs GitHub hosting all Avalanche public repos.
+[**GitHub**](https://github.com/ava-labs): el GitHub oficial de Ava Labs que aloja todos los repositorios públicos de Avalanche.
 
-[**Discord**](https://chat.avax.network): the official Avalanche Discord for developers and enthusiasts to engage in focused discussions.
+[**Discord**](https://chat.avax.network): Discord oficial de Avalanche para que los desarrolladores y entusiastas participen en discusiones enfocadas.
 
-[**Twitter**](https://twitter.com/avalancheavax): the official Avalanche Twitter for all major news and updates regarding Avalanche and its ecosystem.
+[**Twitter**](https://twitter.com/avalancheavax): el Twitter oficial de Avalanche para todas las noticias y actualizaciones importantes sobre Avalanche y su ecosistema.
 
 [**Forum**](https://forum.avax.network): the official Avalanche Forum for technical discussions related to Avalanche and its community
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2ODkxMDA5OSw1OTE5MDE4ODUsMTIyND
-M0NjU2Nl19
+eyJoaXN0b3J5IjpbLTE4OTM4OTA3MTAsNTkxOTAxODg1LDEyMj
+QzNDY1NjZdfQ==
 -->
