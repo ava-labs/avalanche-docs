@@ -49,11 +49,12 @@ Para funcionar con éxito, AvalancheGo necesita aceptar conexiones de Internet e
 
 Si su nodo se ejecuta en una instancia de ordenador de un cloud provider, tendrá una IP estática. Averigua cuál es esa IP estática, o configúrala si no lo has hecho ya. El script tratará de averiguar la IP por sí mismo, pero eso podría no funcionar en todos los entornos, por lo que tendrás que comprobar la IP o introducirla tú mismo.
 
-#### Running on a home connection
+#### Ejecutandose en una Conexión Doméstica
 
-If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
 
-As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+Si estás ejecutando un nodo en un ordenador que está en una conexión de Internet residencial, tienes una IP dinámica; es decir, tu IP cambiará periódicamente. El script de instalación configurará el nodo apropiadamente para esa situación. Pero, para una conexión doméstica, necesitará configurar el reenvío del puerto `9651` de Internet a la computadora en la que está instalado el nodo.
+
+Como hay demasiados modelos y configuraciones de routers, no podemos dar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar \(como[esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
 
 ## Running the script
 
@@ -240,6 +241,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3ODMyNzcyNywtMTU2NjMwMTU4OCwtMz
-U2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbNDMyNzM3MjYzLC0xNTY2MzAxNTg4LC0zNT
+Y4ODUzMjRdfQ==
 -->
