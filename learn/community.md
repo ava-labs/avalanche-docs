@@ -107,7 +107,7 @@
 
 ### Software Development Kits \(SDKs\)
 
-[**Magic \(formerly Fortmatic\)**](https://magic.link/): passwordless logins and more user-friendly key management in crypto securing over 20 million user authentications per month. Used by over 6,500 developers since launch, including established DeFi organizations like Uniswap, Aave, Augur, Bancor, and Zerion.
+[**Magic \(formerly Fortmatic\)**](https://magic.link/): inicios de sesión sin contraseña y una gestión de claves más fácil de usar en crypto asegurando más de 20 millones de autenticaciones de usuarios al mes. Utilizado por más de 6.500 desarrolladores desde su lanzamiento, incluyendo organizaciones de DeFi establecidas como Uniswap, Aave, Augur, Bancor y Zerion.
 
 [**Torus**](https://tor.us/): DirectAuth SDK simplifies onboarding by enabling users to create an Avalanche Wallet with their existing Google accounts, and enables one-click logins to Avalanche applications. Users can customize their wallets to take ownership of private keys as they feel more comfortable with the technology.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDk4NzQ5NjM2LC0xMDMxMDQ0NTQxLDU5MT
+eyJoaXN0b3J5IjpbODk3MjU5NTM0LC0xMDMxMDQ0NTQxLDU5MT
 kwMTg4NSwxMjI0MzQ2NTY2XX0=
 -->
