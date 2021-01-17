@@ -181,31 +181,32 @@ sudo journalctl -u avalanchego -f
 
 Presione `ctrl+C` cuando desee dejar de leer la salida del nodo.
 
-## Dthe node
+## Deteniendo el Nodo
 
-To stop AvalancheGo, run:
+Para detener AvalancheGo, ejecuta:
 
 ```text
 sudo systemctl stop avalanchego
 ```
 
-To start it again, run:
+Para comenzarlo de nuevo, ejecuta:
 
 ```text
 sudo systemctl start avalanchego
 ```
 
-## Node upgrade
+## Actualización del Nodo
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. When a new version of the node is released, you will notice log lines like:
+AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versión. La mayoría de las actualizaciones se recomiendan pero no se requieren. Se avisará con antelación para las actualizaciones que no sean compatibles con las versiones anteriores. Cuando se libere una nueva versión del nodo, notarás líneas de registro como:
 
 ```text
 Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
 ```
 
-It is recommended to always upgrade to the latest version, because new versions bring bug fixes, new features and upgrades.
 
-To upgrade your node, just run the installer script again:
+Se recomienda siempre actualizar a la última versión, porque las nuevas versiones traen correcciones de errores, nuevas características y actualizaciones.
+
+Para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de nuevo:
 
 ```text
 ./avalanchego-installer.sh
@@ -242,7 +243,7 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA0NjYzMDY0LC00MzQ4NzMwNDQsLTg1Nz
-QzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1NiwtMTU2NjMw
-MTU4OCwtMzU2ODg1MzI0XX0=
+eyJoaXN0b3J5IjpbLTEwMjM1MDAxMDcsLTQzNDg3MzA0NCwtOD
+U3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC0xNTY2
+MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
