@@ -33,11 +33,11 @@
 
 ### Educación
 
-[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): un miembro de la comunidad que produce "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): un miembro de la comunidad que produce videotutoriales de "[Cómo Ejecutar Avalanche en casa](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" .
 
 ### Exchanges
 
-\*\*\*\*[**Binance**](https://www.binance.com): the world's \#1 crypto exchange by trading volume.
+\*\*\*\*[**Binance**](https://www.binance.com): crypto exchange \#1 del mundo  por volumen de comercio.
 
 \*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5MTI3Mjk0LDU5MTkwMTg4NSwxMjI0Mz
+eyJoaXN0b3J5IjpbMzQzNDMxMTI0LDU5MTkwMTg4NSwxMjI0Mz
 Q2NTY2XX0=
 -->
