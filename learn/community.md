@@ -99,7 +99,7 @@
 
 [**Bloq**](https://www.bloq.com): infraestructura gestionada para construir sobre redes de blockchain. Tienes una única interfaz para un conjunto cada vez mayor de servicios de infraestructura de nivel empresarial para construir sobre múltiples redes de blockchain.
 
-[**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
+[**DataHub by Figment**](https://figment.io/datahub/avalanche/): Con DataHub, los desarrolladores de Avalanche ya no tienen que preocuparse por la gestión de la infraestructura, ya que ofrecemos acceso directo a las API de Avalanche a través de nuestra infraestructura de nodos completos de alta disponibilidad.
 
 ### Oracles
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzk1OTI5MDgsNTkxOTAxODg1LDEyMj
+eyJoaXN0b3J5IjpbLTEwMzEwNDQ1NDEsNTkxOTAxODg1LDEyMj
 QzNDY1NjZdfQ==
 -->
