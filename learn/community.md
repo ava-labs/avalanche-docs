@@ -117,11 +117,11 @@
 
 [**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): servicios de staking delegados ofrecidos por exploradores de blockchain independientes.
 
-[**Figment**](https://figment.io/): simple and secure staking as a service.
+[**Figment**](https://figment.io/): simple y seguro servicio de staking.
 
-[**P2P**](https://p2p.org/avalanche): delegated staking services.
+[**P2P**](https://p2p.org/avalanche): servicios de staking delegados.
 
-[**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): staking calculator for Avalanche.
+[**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): calculadora de staking de Avalanche.
 
 ### Testing Tools and Frameworks
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMjcwNjgxODksMzcxODkyMDM1LC0xMD
-MxMDQ0NTQxLDU5MTkwMTg4NSwxMjI0MzQ2NTY2XX0=
+eyJoaXN0b3J5IjpbLTYxOTMxNzQzOSwzNzE4OTIwMzUsLTEwMz
+EwNDQ1NDEsNTkxOTAxODg1LDEyMjQzNDY1NjZdfQ==
 -->
