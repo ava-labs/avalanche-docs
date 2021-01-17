@@ -10,7 +10,7 @@ Este script de instalación asume:
 * AvalancheGo no está funcionando y no está instalado como un servicio
 * El usuario que ejecuta el script tiene privilegios de superusuario \(puede ejecutar `sudo`\)
 
-### Environment considerations
+### Consideraciones del Entorno
 
 If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
 
@@ -238,5 +238,5 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgzMzkwNzE3LC0zNTY4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbLTEyMzY3Njk4MDQsLTM1Njg4NTMyNF19
 -->
