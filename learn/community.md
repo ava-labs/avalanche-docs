@@ -39,7 +39,7 @@
 
 \*\*\*\*[**Binance**](https://www.binance.com): crypto exchange \#1 del mundo  por volumen de comercio.
 
-\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
+\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): una plataforma de comercio de activos digitales que ofrece servicios de vanguardia para los comerciantes de divisas digitales y los proveedores de liquidez mundial.
 
 \*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
 
@@ -134,6 +134,6 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzQzNDMxMTI0LDU5MTkwMTg4NSwxMjI0Mz
+eyJoaXN0b3J5IjpbNTQ0ODA0MDY5LDU5MTkwMTg4NSwxMjI0Mz
 Q2NTY2XX0=
 -->
