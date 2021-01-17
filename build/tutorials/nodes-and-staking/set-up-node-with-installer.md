@@ -39,11 +39,11 @@ Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea.
 
 #### Archivos de Trabajo de Nodo
 
-Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Esos archivos no serán alterados, y el nodo establecido por el script continuará operando con la misma identidad y estado que tenía antes. Dicho esto, para la seguridad de tu nodo, haz una copia de seguridad de los archivos`staker.crt` y `staker.key`, encontrados en`$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
+Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Esos archivos no serán alterados, y el nodo establecido por el script continuará operando con la misma identidad y estado que tenía antes. Dicho esto, para la seguridad de tu nodo, haz una copia de seguridad de los archivos`staker.crt` y `staker.key`, encontrados en`$HOME/.avalanchego/staking` y los guardamos en un lugar seguro. Puedes usar esos archivos para recrear tu nodo en un ordenador diferente si alguna vez lo necesitas.
 
-### Networking considerations
+### Consideraciones de la Red
 
-To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+Para funcionar con éxito, AvalancheGo necesita aceptar conexiones de Internet en el puerto de red `9651`. Antes de proceder a la instalación, debes determinar el entorno de red en el que se ejecutará tu nodo.
 
 #### Running on a cloud provider
 
@@ -240,5 +240,6 @@ Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.m
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjYzMDE1ODgsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbLTEzMDIxMjUyNjAsLTE1NjYzMDE1ODgsLT
+M1Njg4NTMyNF19
 -->
