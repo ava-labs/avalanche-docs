@@ -10,9 +10,9 @@ En este tutorial, crearemos una nueva subnet con 2 control keys y un límite de 
 
 ### Generar las  Control Keys <a id="generate-the-control-keys"></a>
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
+Primero, generemos las 2 control keys. Para eso ejecutamos[`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) Esto genera una nueva private key y la almacena para un usuario.
 
-To generate the first key:
+Para generar la primera control key ejecutamos:
 
 ```cpp
 curl -X POST --data '{
@@ -137,5 +137,5 @@ The response confirms that our subnet was created:
 This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzM1Njc3NjUxXX0=
+eyJoaXN0b3J5IjpbLTE0MDkxMzc1MzJdfQ==
 -->
