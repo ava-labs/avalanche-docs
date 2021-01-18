@@ -212,7 +212,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+Una vez que el nodo termine el arranque, la respuesta será:
 
 ```text
 {
@@ -224,9 +224,10 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
 
-In order to make your node a validator, you'll need its node ID. To get it, run:
+Puedes continuar, aunque AvalancheGo no haya terminado de hacer el arranque.
+
+Para que tu nodo sea un validador, necesitarás su ID de nodo. Para conseguirlo, ejecuta:
 
 ```text
 curl -X POST --data '{
@@ -236,13 +237,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+La respuesta contiene el ID del nodo:
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
+En el ejemplo anterior el ID del nodo es`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
 
 AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
 
@@ -281,7 +282,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDY3MzUyLDE5NDAwNDk0MDEsNDY2MD
-kxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3
-Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbLTEwNDc0NzE2OTEsMTk0MDA0OTQwMSw0Nj
+YwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1
+LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
