@@ -8,9 +8,9 @@ Los tokens  ERC-20 son el concepto más fundamental y esencial en Ethereum. A me
 
 Por lo tanto, crearemos nuestro propio token ERC-20 y lo acuñaremos en cualquier dirección que queramos. El token se generará en la C-Chain de Avalanche y será accesible en esa cadena.
 
-The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
+Lo que tenemos que considerar principalmente es que desplegaremos un smart contract escrito con Solidity a Avalanche. Esta es la característica que nos proporciona Avalanche: poder desplegar cualquier smart contract en la cadena y no es necesario que interactúe con un nuevo concepto de contrato específico del lenguaje. Veamos cómo crear un contrato ERC-20 y desplegarlo en la C-Chain de Avalanche.
 
-## Set up Metamask
+## Configurar Metamask
 
 The first thing we should set is a metamask wallet.
 
@@ -156,5 +156,5 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDU4NzI4NDNdfQ==
+eyJoaXN0b3J5IjpbMTk2MzEwMjk1Nl19
 -->
