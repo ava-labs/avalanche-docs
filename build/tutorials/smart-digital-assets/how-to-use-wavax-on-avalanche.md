@@ -125,9 +125,9 @@ Para ver su balance de WAVAX, debe agregar WAVAX como una ficha personalizada a 
 En **Token Contract Address** pegue la misma dirección de contrato que usamos antes:
 
 * Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
-* Para la Red de Pruebas : `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
+* Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
-Click **Next** and **Add Tokens**. Your WAVAX should now be visible in under your account in Metmask.
+Haz click en **Next** y en **Add Tokens**. Tus WAVAX deberían ser visibles ahora debajo de tu cuenta en Metamask.
 
 ### Unwrap WAVAX to AVAX
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5NTExNzgyOSw0NzczNzc5MzQsLTM2OT
+eyJoaXN0b3J5IjpbLTg1NjE5NjQ5NCw0NzczNzc5MzQsLTM2OT
 IzMjk5OCwxMTc3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0
 OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ
 ==
