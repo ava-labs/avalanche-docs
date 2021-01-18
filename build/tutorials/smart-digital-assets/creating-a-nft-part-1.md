@@ -195,10 +195,10 @@ Ahora que tenemos una familia de NFT y un grupo para el `MinterSet` somos capace
 * `username` debe ser un usuario que tenga control keys que le permitan acuñar más de este NFT. Es decir, controla por lo menos _`threshold`_  control keys para uno de los minter sets que especificamos arriba.
 * `password` es la contraseña válida para `username`
 
-### **Response**
+### **Respuesta**
 
-* `txID` is the transaction ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID` es el ID de la transacción.
+* `changeAddr` esta es la dirección donde se envió el cambio.
 
 ```cpp
 curl -X POST --data '{
@@ -215,8 +215,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
-
+La respuesta contiene el ID de la transacción:
 ```cpp
 {
     "jsonrpc":"2.0",
@@ -228,7 +227,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
+Como en el paso anterior, podemos confirmar que un NFT fué acuñado ejecutando [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y analizando the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
 
 ```cpp
 curl -X POST --data '{
@@ -359,5 +358,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3ODQ3OTg3Ml19
+eyJoaXN0b3J5IjpbLTE4NzIwNzIwMDhdfQ==
 -->
