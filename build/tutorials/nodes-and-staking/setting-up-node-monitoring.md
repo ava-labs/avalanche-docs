@@ -131,13 +131,13 @@ sudo systemctl start prometheus
 sudo systemctl enable prometheus
 ```
 
-Prometheus should now be running. To make sure, we can check with:
+Prometheus debería estar corriendo ahora. Para asegurarnos, podemos comprobarlo con:
 
 ```cpp
 systemctl status prometheus
 ```
 
-which should produce something like:
+el cual debería producir algo como:
 
 ```cpp
 ● prometheus.service - Prometheus
@@ -155,15 +155,15 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 ...
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
+También puede consultar la interfaz web de Prometheus, disponible en `http://your-node-host-ip:9090/`
 
 {% hint style="warning" %}
 You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
 {% endhint %}
 
-## Install Grafana
+## Instalando Grafana
 
-To set up Grafana project repositories with Ubuntu:
+Para establecer los repositorios del proyecto Grafana con Ubuntu:
 
 ```cpp
 sudo apt-get install -y apt-transport-https
@@ -181,7 +181,7 @@ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 ```
 
-To install Grafana:
+Para instalar Grafana:
 
 ```cpp
 sudo apt-get update
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2NDkzMzgxNywtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbMTg2MzQzNjQwOSwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
