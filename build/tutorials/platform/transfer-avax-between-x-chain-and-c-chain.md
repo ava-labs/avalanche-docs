@@ -72,7 +72,7 @@ Si estás construyendo una aplicación en la red de Avalanche, tal vez quieras h
 Todos los llamados API de ejemplo a continuación asumen que el nodo se está ejecutando localmente \(es decir, escuchando en `127.0.0.1`\). 
 El nodo puede conectarse a la red principal, a una red de prueba o a una red local. En cada caso, los llamados y respuestas de la API deben ser las mismas, excepto en lo que respecta a los formatos de dirección. No es necesario que el nodo sea local; se pueden hacer llamados a un nodo alojado en otro lugar.
 
-Como puede haber notado al transferir AVAX usando la Wallet de Avalanche, una transferencia cross-chain es una operación de dos transacciones:
+Como puedes haber notado al transferir AVAX usando la Wallet de Avalanche, una transferencia cross-chain es una operación de dos transacciones:
 
 * Exportar AVAX desde la X-Chain
 * Importar AVAX a la C-Chain
@@ -263,5 +263,6 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0OTk4ODM4NCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbMTkyMjA0Nzg3NywxMzQ5OTg4Mzg0LDExMj
+gyNTEwOTNdfQ==
 -->
