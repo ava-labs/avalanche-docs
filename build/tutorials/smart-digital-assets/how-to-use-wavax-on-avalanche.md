@@ -35,7 +35,7 @@ Introduzca la información de la red de su elección:
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
-### Fuji Testnet Settings:
+### Configuración de la Red de Pruebas Fuji:
 
 * **Network Name**: Avalanche Fuji C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
@@ -142,6 +142,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Mzk4NjY1MDEsMTY2ODkzNDI0OCwtMT
-E4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ==
+eyJoaXN0b3J5IjpbMTgwMzgxODA4NCwxNjY4OTM0MjQ4LC0xMT
+gyNTczMjUwLDY3OTY3NjcwOSwtMTg2ODU1NDE1OV19
 -->
