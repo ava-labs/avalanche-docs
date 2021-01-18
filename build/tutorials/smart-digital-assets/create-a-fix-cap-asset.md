@@ -2,17 +2,18 @@
 
 ## Introducción
 
-This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
 
-Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
+Este tutorial ilustra cómo se puede utilizar Avalanche para crear e intercambiar un activo fungible de capital fijo. Se crea una cantidad específica del activo en la inicialización del mismo, y luego, nunca más se crea.
 
-## Requirements
+Supongamos que hay un acuerdo de reparto de ingresos \(ISA\) con 10 millones de acciones, y no se crearán más acciones. Vamos a crear un activo donde una unidad del activo representa una acción de la ISA.
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+## Requisitos
 
-## Create the Asset
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+## Crear el Activo
+
+Nuestro activo existirá en la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), así que para crear nuestro activo ejecuta `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
 The signature for this method is:
 
@@ -221,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjg4NDcyMDJdfQ==
+eyJoaXN0b3J5IjpbLTE4ODkzMzE5N119
 -->
