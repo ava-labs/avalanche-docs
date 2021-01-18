@@ -10,7 +10,7 @@ A diferencia de las fichas regulares, que son intercambiables \(fungibles\), lo 
 
 Para facilitar la experimentación con la creación e intercambio de NFTs, hemos construido **NFT Studio** en la [Wallet de Avalanche](https://wallet.avax.network/), donde los puedes usar para crear NFTs como activos que llamamos Coleccionables. Los coleccionables pueden ser NFT genéricos con una imagen y una descripción, o NFT personalizados con cargas útiles que contienen JSON, URL personalizado o datos UTF-8. Puedes crearlos usando una simple interfaz de apuntar y hacer clic, lo que te permite la idea de enviar NFTs a tus amigos en cuestión de minutos. Sin que se requieran conocimientos técnicos.
 
-To access the **NFT Studio**, log into your Avalanche Wallet, and on the left side select **Studio**:
+Para acceder al **NFT Studio**, entra en tu Wallet de Avalanche, y en el lado izquierdo selecciona **Studio**:
 
 ![NFT Studio](../../../.gitbook/assets/nft-studio-01-select.png)
 
@@ -89,5 +89,5 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1Mzg1MzIzM119
+eyJoaXN0b3J5IjpbNjgwNTgyMTc5XX0=
 -->
