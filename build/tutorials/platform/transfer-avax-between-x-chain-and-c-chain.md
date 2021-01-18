@@ -69,14 +69,15 @@ Intercambie la cadena de origen y destino, seleccionándolos en el menú despleg
 
 Si estás construyendo una aplicación en la red de Avalanche, tal vez quieras hacer la transferencia programada como parte de una funcionalidad más amplia. Puedes hacerlo llamando a las API adecuadas en un nodo de AvalancheGo. El resto del tutorial asume que tienes acceso a un nodo de AvalancheGo, tokens de AVAX en la X-Chain y credenciales de usuario [creadas](../../avalanchego-apis/keystore-api.md#keystorecreateuser) y almacenadas en el keystore del nodo.
 
-Todos los llamados API de ejemplo a continuación asumen que el nodo se está ejecutando localmente \(es decir, escuchando en `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+Todos los llamados API de ejemplo a continuación asumen que el nodo se está ejecutando localmente \(es decir, escuchando en `127.0.0.1`\). 
+El nodo puede conectarse a la red principal, a una red de prueba o a una red local. En cada caso, los llamados y respuestas de la API deben ser las mismas, excepto en lo que respecta a los formatos de dirección. No es necesario que el nodo sea local; se pueden hacer llamados a un nodo alojado en otro lugar.
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
+Como puede haber notado al transferir AVAX usando la Wallet de Avalanche, una transferencia cross-chain es una operación de dos transacciones:
 
-* Export AVAX from the X-Chain
-* Import AVAX to the C-Chain
+* Exportar AVAX desde la X-Chain
+* Importar AVAX a la C-Chain
 
-Before we can do the transfer, we need to set up the address on the C-Chain, along with the controlling key.
+Antes de que podamos hacer la transferencia, tenemos que establecer la dirección en la C-Chain, junto con la control key.
 
 ### Set Up Address and Key on the C-Chain
 
@@ -260,5 +261,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjMyMjA1MzUsMTEyODI1MTA5M119
+eyJoaXN0b3J5IjpbMjA3NzIyOTI5MCwxMTI4MjUxMDkzXX0=
 -->
