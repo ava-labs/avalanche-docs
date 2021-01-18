@@ -68,11 +68,11 @@ Ahora estamos en Avash. Para iniciar la red:
 runscript scripts/five_node_staking.lua
 ```
 
-When you want to tear down the network, run `exit` to exit Avash.
+Cuando quieras desmantelar la red, ejecuta `exit` para salir de Avash.
 
-### Verifying Nodes are Connected <a id="verifying-nodes-are-connected"></a>
+### Verificando que los Nodos están Conectados <a id="verifying-nodes-are-connected"></a>
 
-We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
+Podemos mirar a uno de los pares del nodo para asegurarnos de que los nodos están conectados. Para hacerlo, ejecuta [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
 
 ```cpp
 curl -X POST --data '{
@@ -152,5 +152,5 @@ That’s it! Your local version of Avalanche is up and running. It has the defau
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTYxNDg5OTJdfQ==
+eyJoaXN0b3J5IjpbMTE0ODk1MDc0NV19
 -->
