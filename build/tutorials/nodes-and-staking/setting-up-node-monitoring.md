@@ -19,13 +19,13 @@ Prerequisitos:
 * Acceso a la máquina que ejecuta el nodo 
 * Privilegios de administrador en la máquina
 
-### **Caveat: Security**
+### **Seguridad**
 
 {% hint style="danger" %}
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
+El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Prometheus ni Grafana, como se muestra aquí, están protegidos contra el acceso no autorizado. Asegúrate de que ambos son accesibles sólo a través de un proxy seguro, red local o VPN. Configurar eso está fuera del alcance de este tutorial, pero tenga cuidado. ¡Las malas prácticas de seguridad podrían llevar a los atacantes a obtener el control de su nodo! Es su responsabilidad seguir las prácticas de seguridad adecuadas.
 {% endhint %}
 
-### Contributions
+### Contribuciones
 
 The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjQwNDI3MjYsLTEwMjMwMDQwMzAsLT
-kwNjUyODkxMCw0MDkyODE1NjNdfQ==
+eyJoaXN0b3J5IjpbNTUxMzE4ODcxLC0xMDIzMDA0MDMwLC05MD
+Y1Mjg5MTAsNDA5MjgxNTYzXX0=
 -->
