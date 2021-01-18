@@ -116,9 +116,9 @@ Después de confirmar todos estos pop-ups hemos desplegado nuestro Token para la
 
 ## Interactuar con el Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+Podemos ver que nuestra transacción se desplegó en la C-Chain de Avalanche a través de este [explorador de la c-chain](https://cchain.explorer.avax-test.network/).
 
-But firstly, let’s see our transaction hash from the remix console.
+Pero primero, veamos el hash de nuestra transacción desde la consola de remix.
 
 ![Image for post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
@@ -157,7 +157,7 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjMyNjE5NTk5LDE3MTc4NDg1MDIsMTYyMT
-g5MzA2NCwtMTU1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3
-OF19
+eyJoaXN0b3J5IjpbMTgyMTYzMjkzMywxNzE3ODQ4NTAyLDE2Mj
+E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
+NzhdfQ==
 -->
