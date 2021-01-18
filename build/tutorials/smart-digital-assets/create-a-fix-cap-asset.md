@@ -213,14 +213,14 @@ La respuesta debería ser:
 }
 ```
 
-## Wrapping up
+## Concluimos!
 
-In this tutorial, we:
+En este tutorial:
 
-* Called `createFixedCapAsset` to create a fixed cap asset
-* Called `getBalance` to check address balances
-* Called `send` to transfer a quantity of our asset
+* Ejecutamos`createFixedCapAsset` para crear un activo de capital fijo
+* Ejecutamos `getBalance` para comprobar los saldos de las direcciones
+* Ejecutamos`send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Mjc1NjI1NTldfQ==
+eyJoaXN0b3J5IjpbMTYxNTczNDE2MF19
 -->
