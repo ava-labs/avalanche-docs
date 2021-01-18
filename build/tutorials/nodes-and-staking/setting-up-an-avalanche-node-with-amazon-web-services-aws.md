@@ -62,11 +62,11 @@ Haz clic en `Create security group`. Deberías ver el nuevo grupo de seguridad e
 
 ## Iniciar una instancia EC2 <a id="0682"></a>
 
-Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
+Ahora estás listo para iniciar una instancia de EC2. Ve al panel de control del EC2 y selecciona **Launch instance**.
 
 ![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-Select **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** for the operating system.
+Seleccione **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** para el sistema operativo.
 
 ![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
@@ -278,6 +278,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU2MjU0NzE1MiwxNjEwMjc4NDUsNzI4Nj
+eyJoaXN0b3J5IjpbMTM0NzIyNDYxMSwxNjEwMjc4NDUsNzI4Nj
 Y1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
