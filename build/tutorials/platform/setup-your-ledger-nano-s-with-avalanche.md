@@ -8,9 +8,10 @@ La aplicación de Ledger Wallet de Avalanche está disponible actualmente a trav
 
 ## Cómo Configurar Avalanche en Ledger Live <a id="1c80"></a>
 
-First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
+Primero necesitarás instalar [Ledger Live](https://www.ledger.com/ledger-live). 
+Hay opciones de descarga para MacOS, Windows y Linux, así como para iOS y Android.
 
-Next, fire up Ledger Live and click the “Settings” button.
+A continuación, enciende Ledger Live y haz clic en el botón **Settings**
 
 ![Settings button on ledger live](https://miro.medium.com/max/3052/1*lMnVGJneUAqgRvZBIDv_rA.png)
 
@@ -87,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDE3MzkyNzRdfQ==
+eyJoaXN0b3J5IjpbNDg0MTYzODU2XX0=
 -->
