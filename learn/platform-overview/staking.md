@@ -6,9 +6,9 @@ descripción: Aprende como hacer stake en Avalanche validando o delegando
 
 El Staking es el proceso de bloquear tokens para apoyar una red mientras se recibe una recompensa a cambio \(Las recompensas pueden ser el aumento de la utilidad de la red, la compensación monetaria, etc.\). El concepto de staking fue [introducido formalmente por primera vez](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) Por Sunny King y Scott Nadal de Peercoin.
 
-### How does proof-of-stake work?
+### ¿Cómo funciona el proof-of-stake?
 
-To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+Para resistir [ataques sybil](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
 ## Staking Parameters on Avalanche
 
@@ -104,5 +104,5 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwMjM5NzA5N119
+eyJoaXN0b3J5IjpbLTg2MjQ2NjI3NV19
 -->
