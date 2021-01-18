@@ -143,9 +143,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Check the transaction status
+### Comprobar el estado de la transacción
 
-The response from the above call should look like this:
+La respuesta de lo que ejecutamos anteriormente debería verse así:
 
 ```cpp
 {
@@ -158,9 +158,9 @@ The response from the above call should look like this:
 }
 ```
 
-`txID` is the ID of the `send` transaction we sent to the network.
+`txID` es el ID de la transacción `send` que enviamos a la red.
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Luego de un segundo o dos la transacción debería finalizar. Podemos comprobar el  [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2MjE2NTkyMl19
+eyJoaXN0b3J5IjpbLTQxOTQzMjU0OF19
 -->
