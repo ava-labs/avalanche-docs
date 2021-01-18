@@ -29,7 +29,7 @@ Puedes acceder a tu wallet utilizando el private key, la frase mnemónica, el ar
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-Después de un inicio de sesión exitoso, verás tu saldo, su cartera de activos y otra información diversa.
+Después de un inicio de sesión exitoso, verás tu saldo, tu portafolio de activos y otra información diversa.
 
 ### Paso 3 - Ve a la pestaña de Cross Chain
 
@@ -263,5 +263,5 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4NDE3MzEwMSwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbODMwNDI0NDkzLDExMjgyNTEwOTNdfQ==
 -->
