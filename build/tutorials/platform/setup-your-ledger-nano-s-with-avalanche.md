@@ -47,7 +47,7 @@ Por último, deberías aterrizar en la pantalla de la aplicación **Avalanche** 
 
 ![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
+Después de confirmar que la aplicación Avalanche está funcionando, entonces en la página de inicio de la Wallet haga clic en el botón **Access Wallet**.
 
 ![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5MDIxMzEyXX0=
+eyJoaXN0b3J5IjpbMTA0Njc4NDc2NF19
 -->
