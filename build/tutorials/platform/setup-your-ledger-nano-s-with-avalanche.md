@@ -4,9 +4,9 @@ El estándar de la industria para asegurar con seguridad las criptodivisas son l
 
 Si quieres usar la dirección de Avalanche que creaste antes, necesitas usar el procedimiento [restaurar desde la frase de recuperación](https://support.ledger.com/hc/en-us/articles/360005434914)  usando la frase mnemónica que obtuviste de la cartera de Avalanche. Si estás creando una nueva dirección, sólo sigue las instrucciones normales [establecer como nuevo dispositivo](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device).
 
-The Avalanche Ledger wallet app is currently available via [Ledger Live](https://www.ledger.com/ledger-live) in Experimental Mode.
+La aplicación de Ledger Wallet de Avalanche está disponible actualmente a través de [Ledger Live](https://www.ledger.com/ledger-live) en Modo Experimental.
 
-## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
+## Cómo Configurar Avalanche en Ledger Live <a id="1c80"></a>
 
 First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
 
@@ -87,5 +87,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NTgwMjA1MDFdfQ==
+eyJoaXN0b3J5IjpbLTEzMDE3MzkyNzRdfQ==
 -->
