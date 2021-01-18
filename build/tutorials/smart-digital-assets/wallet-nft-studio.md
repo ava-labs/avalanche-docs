@@ -1,6 +1,6 @@
-# Mint NFTs with the Avalanche Wallet
+# Acuña NFTs con la Wallet de Avalanche
 
-## Non-Fungible Tokens on Avalanche
+## Tokens no fungibles en Avalanche
 
 Besides the native AVAX token, [Avalanche platform](../platform/) natively supports the creation of other types of digital assets: fixed-cap assets, variable-cap assets, and non-fungible tokens \(NFTs\).
 
@@ -88,3 +88,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTI4NTQ2MzUwMF19
+-->
