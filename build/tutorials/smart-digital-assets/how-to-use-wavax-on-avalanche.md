@@ -65,7 +65,7 @@ Si estás conectado a la red de pruebas, puedes usar su faucet para agregar fond
 
 ![Faucet funding](../../../.gitbook/assets/wavax2avax-02-faucet.png)
 
-Paste that address into the faucet, prove that you're not a robot, and then request test AVAX. They should appear in your Metamask shortly.
+Pega esa dirección en el faucet, prueba que no eres un robot, y luego solicita los AVAX de prueba. Deberían aparecer en tu Metamask en breve.
 
 ## Load WAVAX contract into Remix
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNzIyODQ2MSwxMTc3MjY2OTQ4LDE3MD
+eyJoaXN0b3J5IjpbLTM2OTIzMjk5OCwxMTc3MjY2OTQ4LDE3MD
 Q1NTI3NzgsMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nzk2NzY3
 MDksLTE4Njg1NTQxNTldfQ==
 -->
