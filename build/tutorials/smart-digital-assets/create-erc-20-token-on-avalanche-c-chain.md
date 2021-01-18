@@ -122,15 +122,15 @@ Pero primero, veamos el hash de nuestra transacción desde la consola de remix.
 
 ![Image for post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
-After deploying the contract, we should see a log in remix console. When you click to arrow and expand it, a transaction hash will come up. Copy it.
+Después de desplegar el contrato, deberíamos ver un registro en la consola de remix. Cuando haga clic en la flecha y la expanda, aparecerá un hash de transacción. Cópialo.
 
 ![Image for post](https://miro.medium.com/max/1909/1*NBXgtkYv2VfBkZx1OsBm7A.png)
 
-Just paste the transaction hash to the [explorer](https://cchain.explorer.avax-test.network/) I shared above and press enter.
+Pega el hash de la transacción en el [explorador](https://cchain.explorer.avax-test.network/) y presiona enter.
 
 ![Image for post](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
 
-Here we can see all details about the transaction and token contract.
+Aquí podemos ver todos los detalles sobre la transacción y el contrato del token.
 
 ![Image for post](https://miro.medium.com/max/764/1*tTFQUn3fStbv-TW9kExyUg.png)
 
@@ -157,7 +157,7 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyMTYzMjkzMywxNzE3ODQ4NTAyLDE2Mj
+eyJoaXN0b3J5IjpbLTkyODIwOTg1OCwxNzE3ODQ4NTAyLDE2Mj
 E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
 NzhdfQ==
 -->
