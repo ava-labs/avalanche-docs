@@ -134,7 +134,7 @@ Aquí podemos ver todos los detalles sobre la transacción y el contrato del tok
 
 ![Image for post](https://miro.medium.com/max/764/1*tTFQUn3fStbv-TW9kExyUg.png)
 
-The first one is my wallet address that creates token and the second address is my token contract address which is named “test”. Now, let’s mint some token to our own address.
+La primera es la dirección de mi wallet que crea el token y la segunda es la dirección de mi contrato del token que se llama **“test”**. Ahora, acuñemos algunos tokens para nuestra dirección.
 
 ![Image for post](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
 
@@ -157,7 +157,7 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyODIwOTg1OCwxNzE3ODQ4NTAyLDE2Mj
+eyJoaXN0b3J5IjpbLTQ3OTQ0MTgwMiwxNzE3ODQ4NTAyLDE2Mj
 E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
 NzhdfQ==
 -->
