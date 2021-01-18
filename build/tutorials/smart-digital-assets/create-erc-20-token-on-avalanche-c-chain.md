@@ -42,11 +42,11 @@ Ahora, tenemos que ajustar estas casillas con los valores correctos.
 Después de configurar todos los parámetros correctamente, deberíamos ver esta página. Por ahora, tenemos 0 C-AVAX. "C" se refiere a la C-chain y tenemos que conseguir algo de C-AVAX para interactuar con la red.
 
 ## Agrega fondos a tu dirección de la C-Chain
-Depending on the network used, there are three ways to get funds to your C-Chain address.
+Dependiendo de la red utilizada, hay tres maneras de hacer llegar los fondos a su dirección de la C-Chain.
 
-### **Using Avalanche Wallet**
+### **Usando la Wallet de Avalanche**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+En la red principal, puedes usar la [Wallet de Avalanche](https://wallet.avax.network/) para transferir fondos de la X-Chain a tu dirección de la C-Chain. El proceso es simple, como se explica en este [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
 
 ### **Using Test Network Faucet**
 
@@ -155,5 +155,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzg4ODUwMTE2LC00MjAyODA0NzhdfQ==
+eyJoaXN0b3J5IjpbOTcyOTU3MTMxLDc4ODg1MDExNiwtNDIwMj
+gwNDc4XX0=
 -->
