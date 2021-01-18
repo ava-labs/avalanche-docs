@@ -19,9 +19,9 @@ En este tutorial podrás:
 
 ## Conectar Metamask
 
-[Metamask](https://metamask.io/) is a popular web browser extension that makes it easy to interact with Ethereum and compatible blockchains, such as Avalanche's C-Chain. Setting up Metamask and creating an account on it is beyond the scope of this tutorial, but there are a number of resources on the internet to walk you through that.
+[Metamask](https://metamask.io/) es una popular extensión del navegador web que facilita la interacción con el Ethereum y blockchains compatibles, como la C-Chain de Avalanche. Configurar Metamask y crear una cuenta en él está fuera del alcance de este tutorial, pero hay una serie de recursos en Internet para guiarte a través de eso.
 
-After you log in to your Metamask account, connect it to the Avalanche network. Click the Network drop-down -&gt; Select **Custom RPC**:
+Después de entrar en tu cuenta de Metamask, conéctala a la red de Avalanche. Haz clic en el menú desplegable de **Network** -&gt; Selecciona **Custom RPC**:
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
@@ -142,6 +142,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDE2NDYyNTIsLTExODI1NzMyNTAsNj
-c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
+eyJoaXN0b3J5IjpbMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nz
+k2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
