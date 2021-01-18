@@ -124,7 +124,7 @@ contract Storage {
 
 ## Añade la nueva migración
 
-Crea un nuevo archivo en el directorio  `migrations` llamado `2_deploy_contracts.js`, y agrega el siguiente bloque de código. Esto maneja el despliegue del smart contract de `Storage` en la blockchain.
+Crea un nuevo archivo en el directorio  `migrations` llamado `2_deploy_contracts.js`, y agrega el siguiente bloque de código. Esto maneja el despliegue del smart contract `Storage` en la blockchain.
 
 ```javascript
 const Storage = artifacts.require("Storage");
@@ -235,7 +235,7 @@ true
 
 ## Ejecutar Migraciones
 
-Ahora todo está listo para ejecutar las migraciones y desplegar el contrato de `Storage`:
+Ahora todo está listo para ejecutar las migraciones y desplegar el contrato `Storage`:
 
 ```text
 truffle migrate --network development
@@ -324,13 +324,13 @@ Error:  *** Deployment Failed ***
 
 ## Interactuando con tu smart contract
 
-Ahora que el contrato de `Storage` ha sido desplegado. Escribamos un número en la blockchain y luego lo leemos de vuelta. Abre la consola de truffle de nuevo:
+Ahora que el contrato `Storage` ha sido desplegado. Escribamos un número en la blockchain y luego lo leemos de vuelta. Abre la consola de truffle de nuevo:
 
 ```text
 truffle console --network development
 ```
 
-Consigue una instancia del contrato  `Storage` desplegado:
+Consigue una instancia del contrato `Storage` desplegado:
 
 ```javascript
 truffle(development)> let instance = await Storage.deployed()
@@ -390,7 +390,7 @@ Para leer el número de la blockchain, ejecuta el método `retrieve` de la insta
 truffle(development)> let i = await instance.retrieve()
 ```
 
-This should return:
+Esto nos retorna:
 
 `Storage`
 undefined
@@ -402,7 +402,7 @@ The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumb
 truffle(development)> i.toNumber()
 ```
 
-You should see the number you stored.
+Deberías ver el numero que proporcionamos 
 
 ```javascript
 1234
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzk0NzQ2MjM4LC04NTUzMTIwNjJdfQ==
+eyJoaXN0b3J5IjpbLTE1NDY1NTg0NDQsLTg1NTMxMjA2Ml19
 -->
