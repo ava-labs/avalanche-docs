@@ -10,7 +10,7 @@ En este tutorial, crearemos y enviaremos NFTs usando la API de AvalancheGo. En u
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). en este tutorial usaremos [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados API.
 
 ## Create the NFT Family
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3ODYwNDE4MDNdfQ==
+eyJoaXN0b3J5IjpbNTc2NDc2NzUzXX0=
 -->
