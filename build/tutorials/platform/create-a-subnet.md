@@ -64,9 +64,9 @@ La respuesta contiene la segunda control key, que es guardada por el usuario que
 }
 ```
 
-### Create the Subnet <a id="create-the-subnet"></a>
+### Crea la Subnet <a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
+Para crear una subnet, ejecutamos [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
 
 ```cpp
 curl -X POST --data '{
@@ -85,7 +85,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
+La respuesta nos da el ID de la transacción, que es también el ID de la Subnet recién creada.
 
 ```cpp
 {
@@ -98,9 +98,9 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 }
 ```
 
-### Verifying Success <a id="verifying-success"></a>
+### Comprobando que fué exitoso <a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
+Podemos ejecutar [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) para obtener todas las Subnets que existen:
 
 ```cpp
 curl -X POST --data '{
@@ -137,5 +137,5 @@ The response confirms that our subnet was created:
 This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzQwMzkxNjddfQ==
+eyJoaXN0b3J5IjpbLTE3NTA1NDA0MjldfQ==
 -->
