@@ -260,7 +260,7 @@ Hay dos pequeñas diferencias:
 * El punto final de la API de su blockchain es`127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
 * Las direcciones están predefinidas con`zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` en lugar de `X-`.
 
-En los datos génesis especificamos que la dirección `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
+En los datos génesis especificamos que la dirección `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` tiene 100 000 unidades del activo con alias `asset1`. Verifiquemos eso:
 
 ```cpp
 curl -X POST --data '{
@@ -284,5 +284,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTA1MDk1MzQ3LDExMTIwMjcxODZdfQ==
+eyJoaXN0b3J5IjpbLTIxMzgyMTIzNTgsMTExMjAyNzE4Nl19
 -->
