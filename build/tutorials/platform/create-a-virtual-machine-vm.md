@@ -1,10 +1,10 @@
-# Create a Virtual Machine \(VM\)
+# Crea una Virtual Machine \(VM\)
 
-_The code below is slightly out of date. Some methods, interfaces, and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar, and this tutorial is still useful in demonstrating how Avalanche’s VM model works._
+_El código de abajo está ligeramente desactualizado. Algunos métodos, interfaces e implementaciones son ligeramente diferentes a los de este tutorial. Vamos a dejar esto porque el código actual es muy similar, y este tutorial sigue siendo útil para demostrar cómo funciona el modelo VM de Avalanche._
 
-## Introduction
+## Introducción
 
-One of the core features of Avalanche is the creation of new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
+Una de las características principales de Avalanche es la creación de nuevas blockchains personalizadas, que están definidas por [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
 In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
 
@@ -716,3 +716,6 @@ In this tutorial, we learned:
 * The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTQ1ODYxNTY1MF19
+-->
