@@ -65,9 +65,9 @@ Para devolver AVAX de vuelta a la X-Chain, tienes que hacer la transferencia en 
 
 Intercambie la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
 
-## Transferring from the X-Chain to C-Chain with API Calls
+## Transferencia de la  X-Chain a la C-Chain  con llamados API
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+Si estás construyendo una aplicación en la red de Avalanche, tal vez quieras hacer la transferencia programada como parte de una funcionalidad más amplia. Puedes hacerlo llamando a las API adecuadas en un nodo de AvalancheGo. El resto del tutorial asume que tienes acceso a un nodo de AvalancheGo, tokens de AVAX en la X-Chain y credenciales de usuario [creadas](../../avalanchego-apis/keystore-api.md#keystorecreateuser) y almacenadas en el keystore del nodo.
 
 All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
@@ -260,5 +260,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzg0NzQ4NTEsMTEyODI1MTA5M119
+eyJoaXN0b3J5IjpbMTUzMzI1NTA1NywxMTI4MjUxMDkzXX0=
 -->
