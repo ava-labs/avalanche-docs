@@ -111,7 +111,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that our subnet was created:
+La respuesta confirma que nuestra subnet fue creada:
 
 ```cpp
 {
@@ -132,10 +132,10 @@ The response confirms that our subnet was created:
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
+### Agrega Validadores a la Subnet <a id="add-validators-to-the-subnet"></a>
 
-This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
+Este [tutorial](../nodes-and-staking/add-a-validator.md) te mostrará cómo añadir validadores a una subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTA1NDA0MjldfQ==
+eyJoaXN0b3J5IjpbMjA0NjAwOTcyOV19
 -->
