@@ -112,10 +112,10 @@ En este momento existen 0 acciones. Acuñemos 10 millones de acciones.
 
 Usaremos [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) para acuñar las acciones.
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `amount` es el número de acciones que se crearán.
+* `assetID` es la identificación del activo del que estamos creando más.
+* `to` es la dirección que recibirá las nuevas acciones acuñadas. Reemplaza `to` con una dirección que tu usuario controle para que más tarde puedas enviar algunas de las acciones recién acuñadas.
+* `username` debe ser un usuario que tenga las control keys que le permitan acuñar más de este activo. Es decir, controla al menos _threshold_ keys para uno de los minter sets que especificamos arriba.
 
 ```cpp
 curl -X POST --data '{
@@ -255,5 +255,6 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4Nzg3NzAxMywtMTEzNTAwNTE2MV19
+eyJoaXN0b3J5IjpbLTYyNTAxMjg2MywxMDg3ODc3MDEzLC0xMT
+M1MDA1MTYxXX0=
 -->
