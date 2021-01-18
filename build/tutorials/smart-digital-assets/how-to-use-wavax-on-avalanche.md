@@ -114,9 +114,9 @@ Como ETH está denominado en 10^18 unidades más pequeñas \(wei\), y AVAX está
 
 ### Hacer Wrap a AVAX para Crear WAVAX
 
-Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en el campo **Value**. Para iniciar el wrapping, haz click en **Deposit**. Se le presentará un aviso de Remix para confirmar la transacción. Cuando presione **Confirm** Metamask aparecerá un pop-up de Metamask también pidiendo confirmación . Presione **Confirm** en Metamask. You should notice your AVAX balance lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
+Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en el campo **Value**. Para iniciar el wrapping, haz click en **Deposit**. Se le presentará un aviso de Remix para confirmar la transacción. Cuando presione **Confirm** Metamask aparecerá un pop-up de Metamask también pidiendo confirmación . Presione **Confirm** en Metamask. Deberías notar que tu balance de AVAX se redujo a 10, más la cantidad de la comisión. Pasa a la siguiente sección para ver tu WAVAX en Metamask.
 
-## Add WAVAX to Metamask
+## Agrega WAVAX a Metamask
 
 To see your WAVAX balance, you must add WAVAX as a custom token to Metamask. In Metamask, select the three dots next to your account name and select `Expand View`. This opens a new browser tab. Scroll down and select **Add token**. Switch to the **Custom Token** tab.
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5NzEzNzY4MSw0NzczNzc5MzQsLTM2OT
+eyJoaXN0b3J5IjpbLTM2MjQ1ODQwMyw0NzczNzc5MzQsLTM2OT
 IzMjk5OCwxMTc3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0
 OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ
 ==
