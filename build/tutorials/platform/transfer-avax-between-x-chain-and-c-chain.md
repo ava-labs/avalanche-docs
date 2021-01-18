@@ -1,6 +1,6 @@
-# Transfer AVAX Between the X-Chain y la C-Chain
+# Transferir AVAX entre la X-Chain y la C-Chain
 
-## Introduction
+## Introducción
 
 AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. In this tutorial, we’ll send AVAX tokens between the X-Chain and C-Chain.
 
@@ -259,5 +259,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzNTQxMzM1M119
+eyJoaXN0b3J5IjpbMTYyMTY2NzU2OV19
 -->
