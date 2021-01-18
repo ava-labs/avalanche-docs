@@ -4,7 +4,7 @@ Gracias al miembro de la comunidad Jovica Popović, que escribió este tutorial.
 
 ## Introducción
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
+Este tutorial asume que tienes Ubuntu 18.04 o 20.04 funcionando en tu nodo \(una version de este tutorial para Mac OS X v\).
 
 This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
@@ -367,5 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwNjUyODkxMCw0MDkyODE1NjNdfQ==
+eyJoaXN0b3J5IjpbNDA3OTk2MTQ4LC05MDY1Mjg5MTAsNDA5Mj
+gxNTYzXX0=
 -->
