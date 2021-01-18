@@ -83,10 +83,10 @@ Finalmente, debería poder ver los detalles de la transacción en nuestro explor
 
 ![Transaction details](../../../.gitbook/assets/transaction-details.png)
 
-## Más herramientas por venir <a id="135b"></a>
+## Más Herramientas Por Venir <a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Labs está construyendo la Internet de las finanzas. Estamos desarrollando soluciones para crear un mundo sin fricciones redefiniendo la forma en que la gente construye y utiliza las aplicaciones financieras. Una parte crítica de esta infraestructura es una Wallet de hardware para que los usuarios puedan estar totalmente seguros de que sus claves privadas y monedas están completamente aisladas de cualquier actor potencialmente malicioso. Nuestra recién lanzada aplicación de Ledger hace precisamente esto siguiendo las mejores prácticas de la industria para mantener a los usuarios y las monedas a salvo y seguras.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyMjMyMTcxNV19
+eyJoaXN0b3J5IjpbLTY1MTgzNjMxMl19
 -->
