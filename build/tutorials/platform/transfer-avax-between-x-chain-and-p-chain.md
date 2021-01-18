@@ -106,9 +106,9 @@ donde `to` es la dirección de una cadena P-Chain que el usuario controla y `cha
 
 Ten en cuenta que pagarás una comisión por las operaciones de exportación e importación. En este ejemplo, asumamos que la comisión por la transacción es de "0,001" AVAX. Entonces, la exportación anterior consume realmente `.006` AVAX; `.005` va a la P-Chain y `.001` se quema como comisión por la transacción.
 
-Make sure that the amount that you’re sending exceeds the transaction fee. Otherwise, when you import AVAX on the P-Chain, it will consume the transaction fee, and you’ll end up with _less_ AVAX on the P-Chain.
+Asegúrate de que la cantidad que envías excede la comisión por la transacción. De lo contrario, cuando importes AVAX a la P-Chain, consumirá la comisión de la transacción, y acabarás con _menos_ AVAX en la P-Chain.
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {
@@ -121,7 +121,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Podemos verificar que esta transacción fue aceptada ejecutando: [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTk0MTg0NzldfQ==
+eyJoaXN0b3J5IjpbLTExNzMyOTU4NzddfQ==
 -->
