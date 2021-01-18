@@ -11,7 +11,7 @@ Este tutorial mostrará cómo crear una infraestructura para supervisar una inst
 * [Prometheus](https://prometheus.io/) para reunir y almacenar datos
 * [node\_exporter](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
 * AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
-* [Grafana](https://grafana.com/) para visualizar los datos en un tablero.
+* [Grafana](https://grafana.com/) para visualizar los datos en un Dashboard.
 
 Prerequisitos:
 
@@ -27,7 +27,7 @@ El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Pro
 
 ### Contribuciones
 
-La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
+La base del Dashboard de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
 
 ## Configurando Prometheus
 
@@ -356,7 +356,7 @@ Comprueba la interfaz web de Prometheus en `http://your-node-host-ip:9090/target
 * avalanchego
 * avalanchego-machine
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+Abre Grafana; ahora puedes crear un dashboard usando cualquiera de esas fuentes. También puedes usar [los tableros preconfigurados](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
 
 To import the preconfigured dashboard:
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjA4ODYwOTUsLTEwMjMwMDQwMzAsLT
+eyJoaXN0b3J5IjpbLTE2ODQyNTMwODUsLTEwMjMwMDQwMzAsLT
 kwNjUyODkxMCw0MDkyODE1NjNdfQ==
 -->
