@@ -57,13 +57,13 @@ La transferencia entre cadenas es un proceso de dos pasos: primero una transacci
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
+¡Eso es! ¡Has transferido AVAX de la X-Chain a la C-Chain Ahora puedes usarlas para desplegar smart contracts en la C-Chain.
 
-### Transfer from the C-Chain to X-chain
+### Transferir desde C-Chain a la X-chain
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+Para devolver AVAX de vuelta a la X-Chain, tienes que hacer la transferencia en la dirección opuesta.
 
-Swap source and destination chain, by selecting them from the **Source** and **Destination** dropdown menu. The rest of the process is the same: enter the amount, confirm and transfer.
+Intercambie la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
 
 ## Transferring from the X-Chain to C-Chain with API Calls
 
@@ -260,5 +260,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzcwMzM0OCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTEyMzg0NzQ4NTEsMTEyODI1MTA5M119
 -->
