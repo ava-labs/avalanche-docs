@@ -352,11 +352,10 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 * Usamos`createNFTAsset` para crear una familia y un grupo de activos no fungibles.
 * Usamos`mintNFT` para acuñar unidades de un NFT al grupo.
-* Usamos`getUTXOs` to fetch UTXOs for an address. We then converted the CB58 encoded UTXO to hex and decomposed it to its individual components.
-* Usamos`sendNFT` to transfer NFTs between addresses.
+* Usamos`getUTXOs` para buscar UTXOs para una dirección. Luego convertimos la UTXO codificada en CB58 a hexadecimal y la descompusimos en sus componentes individuales.
+* Usamos`sendNFT` para transferir NFT's entre direcciones.
 
-In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
-
+En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NzAzMDY1MF19
+eyJoaXN0b3J5IjpbLTEyMzg3OTM2NjFdfQ==
 -->
