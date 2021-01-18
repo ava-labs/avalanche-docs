@@ -166,7 +166,7 @@ El monto deducido es el monto exportado \(`.005` AVAX en este ejemplo\) además 
 
 Nuestra transferencia no ha terminado todavía. Necesitamos ejecutar el método de la P-Chain[`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) para terminar la transferencia.
 
-Your call should look like this:
+Tu solicitud debería verse así:
 
 ```cpp
 curl -X POST --data '{
@@ -183,7 +183,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This returns the transaction ID:
+Esto nos proporciona el ID de la transacción:
 
 ```cpp
 {
@@ -196,7 +196,7 @@ This returns the transaction ID:
 }
 ```
 
-We can check that the transaction was accepted with:
+Podemos comprobar que la transacción fué aceptada con:
 
 ```cpp
 curl -X POST --data '{
@@ -209,7 +209,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
+Debería ser `Committed`, lo que significa que la transferencia está completa. También podemos comprobar el saldo de la dirección con:
 
 ```cpp
 curl -X POST --data '{
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4NzIwNzM4NF19
+eyJoaXN0b3J5IjpbMTg5NzU5MTQ3XX0=
 -->
