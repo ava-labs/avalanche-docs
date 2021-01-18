@@ -2,11 +2,11 @@
 
 ## Introducción
 
-Una de las características principales de Avalanche es la capacidad de crear nuevas blockchains. Avalanche actualmente soporta la creación de nuevas instancias del [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) and the Timestamp VM.
+Una de las características principales de Avalanche es la capacidad de crear nuevas blockchains. Avalanche actualmente soporta la creación de nuevas instancias del [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) y el Timestamp VM.
 
-In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
+En este tutorial, crearemos una blockchain creando una nueva instancia de la AVM.
 
-### Prerequisites
+### Prerequisits
 
 You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../getting-started.md) tutorial.
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5ODY0ODMwMV19
+eyJoaXN0b3J5IjpbLTUyOTI4MjkyNV19
 -->
