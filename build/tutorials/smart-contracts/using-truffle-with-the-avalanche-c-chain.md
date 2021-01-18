@@ -34,21 +34,22 @@ Una red de cinco nodos de Avalanche está funcionando en tu máquina. Cuando qui
 
 ## Crea el directorio de truffle e instala las dependencias
 
-Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
 
-First, navigate to the directory within which you intend to create your `truffle` working directory:
+Abre una nueva pestaña de terminal para que podamos crear un directorio de `truffle` e instalar algunas dependencias más.
+
+Primero, navegue hasta el directorio dentro del cual pretende crear su directorio de trabajo `truffle`:
 
 ```text
 cd /path/to/directory
 ```
 
-Create and enter a new directory named `truffle`:
+Crea y accede a un nuevo directorio llamado `truffle`:
 
 ```text
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
+Usa`npm` para instalar [web3](https://web3js.readthedocs.io), que es una biblioteca a través de la cual podemos comunicarnos con el EVM:
 
 ```text
 npm install web3 -s
@@ -412,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2ODQ1NTczMl19
+eyJoaXN0b3J5IjpbLTExMDQwNjc3ODZdfQ==
 -->
