@@ -87,13 +87,13 @@ sudo cp prometheus.yml /etc/prometheus/
 
 `/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
 
-Let’s set up Prometheus to run as a system service. Do**:**
+Preparemos Prometheus para que funcione como un servicio del sistema. Ejecuta **:**
 
 ```cpp
 sudo nano /etc/systemd/system/prometheus.service
 ```
 
-\(or open that file in the text editor of your choice\), and enter the following configuration:
+\(o abre ese archivo en el editor de texto de tu elección\), e introduce la siguiente configuración:
 
 ```cpp
 [Unit]
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2MTY0NDA5OSwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbMTQ2NDkzMzgxNywtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
