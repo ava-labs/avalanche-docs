@@ -10,13 +10,13 @@ En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM 
 
 Tal servidor es útil porque puede utilizarse para probar que un dato existía en el momento en que se creó el bloque. Supongamos que tienes un manuscrito de un libro, y quieres ser capaz de probar en el futuro que el manuscrito existe hoy. Añades un bloque a la blockchain donde la carga útil del bloque es un hash de tu manuscrito. En el futuro, puede probar que el manuscrito existe hoy, mostrando que el bloque tiene el hash de su manuscrito en su carga. \(esto se deriva del hecho de que encontrar la imagen previa de un hash es imposible\).
 
-Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quiere ver el código en un lugar, en lugar de en fragmentos, puede verlo en nuestro [Repositorio de GitHub.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
+Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quieres ver el código en un lugar, en lugar de en fragmentos, puedes verlo en nuestro [Repositorio de GitHub.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
 
 ## La Interfaz `snowman.VM`
 
 Para llegar a un consenso en las blockchains lineales \(a diferencia de las blockchains DAG\), Avalanche utiliza el protocolo de consenso Snowman. Para ser compatible con Snowman, el VM que define la blockchain debe implementar la interfaz`snowman.VM`, que incluimos a continuación de su declaración en[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example. It’s not necessary you understand every nuance.
+La interfaz es grande, pero no se preocupe, le explicaremos cada método y veremos un ejemplo de implementación. No es necesario que entienda todos los detalles.
 
 ```cpp
 // ChainVM defines the methods a Virtual Machine must implement to use the Snowman consensus engine.
@@ -99,7 +99,7 @@ type ChainVM interface {
 }
 ```
 
-## The snowman.Block Interface
+##  La interfaz snowman.Block Interface
 
 You may have noticed the `snowman.Block` type referenced in the `snowman.VM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNzY5ODQ4MDhdfQ==
+eyJoaXN0b3J5IjpbMTIwOTk1NzQ1OV19
 -->
