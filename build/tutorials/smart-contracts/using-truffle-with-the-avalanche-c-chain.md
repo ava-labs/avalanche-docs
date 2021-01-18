@@ -202,7 +202,7 @@ Sigue los pasos en el tutorial de como [Transferir AVAX entre la X-Chain y la C-
 
 ### Desbloquea tu cuenta
 
-Crea un nuevo archivo llamado `web3_script.js` in the `truffle` directory and add the following:
+Crea un nuevo archivo llamado `web3_script.js` en el directorio `truffle` y agrega lo siguiente:
 
 ```javascript
 // web3_script.js
@@ -220,20 +220,20 @@ let main = async () => {
 main()
 ```
 
-Run the script to unlock your account.
+Ejecuta el script para desbloquear tu cuenta.
 
 ```text
 node web3_script.js
 ```
 
-This should return something like:
+Esto debería producir algo así:
 
 ```javascript
 [ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
 true
 ```
 
-## Run Migrations
+## Ejecutar Migraciones
 
 Now everything is in place to run migrations and deploy the `Storage` contract:
 
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4NDk3NDkyMCwtODU1MzEyMDYyXX0=
+eyJoaXN0b3J5IjpbLTE1NTI4MjYwODMsLTg1NTMxMjA2Ml19
 -->
