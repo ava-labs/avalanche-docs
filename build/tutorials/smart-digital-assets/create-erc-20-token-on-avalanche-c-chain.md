@@ -12,11 +12,11 @@ Lo que tenemos que considerar principalmente es que desplegaremos un smart contr
 
 ## Configurar Metamask
 
-The first thing we should set is a metamask wallet.
+Lo primero que debemos configurar es una wallet de metamask.
 
 ![Image for post](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S)
 
-Click to metamask icon on the browser and select the network drop-down menu. Here we should connect to C-Chain. Click to “Custom RPC”.
+Haz clic en el icono de metamask del navegador y selecciona el menú desplegable de la red. Aquí debemos conectarnos a la C-Chain. Haz clic en “Custom RPC”.
 
 ![Image for post](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
 
@@ -156,5 +156,5 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2MzEwMjk1Nl19
+eyJoaXN0b3J5IjpbLTQyMDI4MDQ3OF19
 -->
