@@ -295,14 +295,14 @@ curl -X POST --data '{
 
 Observe que `to` es la misma dirección que especificamos  cuando ejecutamos [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
 
-Al igual que antes, podemos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) para verificar que los fondos fueron recibidos. El saldo debería haber aumentado a `.003` AVAX menos la comisión por la transacción.
 
-## Wrapping Up
+## Concluimos!
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NjY3ODkwM119
+eyJoaXN0b3J5IjpbOTEyMTIwNzU5XX0=
 -->
