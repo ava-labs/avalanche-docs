@@ -186,7 +186,7 @@ Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implemen
 
 #### **Campos**
 
-This type contains several fields that you’ll want to include in your VM implementation. Among them:
+Este método contiene varios campos que querrás incluir en tu implementación de VM. Entre ellos:
 
 * `DB`: the blockchain’s database
 * `Ctx`: the blockchain’s runtime context
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTc5MzkyMjUsMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbMjgyNTg4MjksMTQ4NjEzNTA4OV19
 -->
