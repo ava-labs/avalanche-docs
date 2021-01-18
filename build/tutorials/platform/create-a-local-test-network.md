@@ -2,7 +2,7 @@
 
 ## Introducción
 
-En el [Tutorial de Inicio ](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
+En el [Tutorial de Inicio](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
 
 Te mostraremos cómo lanzar una red de prueba local de 5 nodos. Mostraremos cómo lanzar la red usando [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) y manualmente.
 
@@ -152,5 +152,5 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 Puedes añadir más nodos a la red. Sólo recuerda dar valores únicos a `db-dir`, `http-port` , y `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjg3Mjc2NDRdfQ==
+eyJoaXN0b3J5IjpbLTM3OTAyMDMwMl19
 -->
