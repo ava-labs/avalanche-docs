@@ -1,4 +1,4 @@
-# Crear un Activo de Capitalización Variable
+# Crear un Activo de Capital Variable
 
 ## Introducción
 
@@ -255,6 +255,6 @@ En este tutorial:
 * Usamos`send` para transferir acciones.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc5MjIxMzcyMSwxMDg3ODc3MDEzLC0xMT
-M1MDA1MTYxXX0=
+eyJoaXN0b3J5IjpbLTEzOTc1MDg5ODAsLTc5MjIxMzcyMSwxMD
+g3ODc3MDEzLC0xMTM1MDA1MTYxXX0=
 -->
