@@ -134,15 +134,15 @@ Haz click en **Next** y en **Add Tokens**. Tus WAVAX deberían ser visibles ahor
 Para hacer unwrap de WAVAX, expande la flecha junto al botón **Withdraw**:
 
 ![Withdraw](../../../.gitbook/assets/wavax2avax-09-withdraw.png)
-Desafortunadamente, el campo withdraw se denomina en wei, por lo que 10 AVAX se representan como `10000000000000000000` \(10^19\) for the withdraw amount. Pressing **Transact** will trigger the same confirmation first in Remix, then in Metamask. Your AVAX should be back in the account, minus the fee amount.
+Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX se representan como `10000000000000000000` \(10^19\) para el monto de **withdraw**. Presionando **Transact** provocará la misma confirmación primero en  Remix, luego en Metamask. Tus AVAX deberían estar de vuelta en la cuenta, menos la cantidad de la comisión.
 
-## Conclusion
+## Conclusión
 
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxNTk3OTc4Nyw0NzczNzc5MzQsLTM2OT
-IzMjk5OCwxMTc3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0
-OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ
-==
+eyJoaXN0b3J5IjpbLTEzOTIxNDI5NTAsNDc3Mzc3OTM0LC0zNj
+kyMzI5OTgsMTE3NzI2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQy
+NDgsLTExODI1NzMyNTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX
+0=
 -->
