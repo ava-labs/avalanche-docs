@@ -18,7 +18,7 @@ Esto abrirá  **NFT Studio**. Ahí tienes dos opciones: **New Family**, para la 
 
 ### Crear la Familia NFT
 
-There you will be asked to enter the name of your collectible family, as well as a symbol \(ticker\). Names do not have to be unique.
+Allí se le pedirá que introduzca el nombre , así como un símbolo \(ticker\). Los nombres no tienen que ser únicos.
 
 ![Create new family](../../../.gitbook/assets/nft-studio-02-family.png)
 
@@ -89,5 +89,5 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwOTMyMjUyNV19
+eyJoaXN0b3J5IjpbMTEwNjE1ODc5OCwxMjA5MzIyNTI1XX0=
 -->
