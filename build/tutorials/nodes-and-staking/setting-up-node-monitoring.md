@@ -259,8 +259,7 @@ Entonces añadimos node\_exporter como un servicio. Ejecuta:
 sudo nano /etc/systemd/system/node_exporter.service
 ```
 
-\(or open that file in the text editor of your choice\) and populate it with:
-
+\(o abra ese archivo en el editor de texto de su elección\) y rellénelo con:
 ```cpp
 [Unit]
 Description=Prometheus
@@ -300,7 +299,7 @@ ExecStart=/usr/local/bin/node_exporter \
 WantedBy=multi-user.target
 ```
 
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
+Esto configura node\_exporter para recolectar varios datos que podríamos encontrar interesantes. Inicie el servicio, y habilítelo en el arranque:
 
 ```cpp
 sudo systemctl start node_exporter
@@ -314,9 +313,9 @@ sudo systemctl enable node_exporter
 sudo systemctl status node_exporter
 ```
 
-Now, we’re ready to tie it all together.
+Ahora, estamos listos para unirlo todo.
 
-## Configure AvalancheGo and node\_exporter Prometheus jobs
+## Configurando AvalancheGo and node\_exporter Prometheus 
 
 Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
 
@@ -368,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM1Njk2ODQzLC0xMDIzMDA0MDMwLC05MD
-Y1Mjg5MTAsNDA5MjgxNTYzXX0=
+eyJoaXN0b3J5IjpbMTI0NjE0NDYxMSwtMTAyMzAwNDAzMCwtOT
+A2NTI4OTEwLDQwOTI4MTU2M119
 -->
