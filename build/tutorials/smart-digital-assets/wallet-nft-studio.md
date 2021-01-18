@@ -81,15 +81,15 @@ Cuando hayas introducido la dirección de destino y, opcionalmente, el texto del
 
 ![Transaction](../../../.gitbook/assets/nft-studio-11-send-transaction.png)
 
-After pressing **Send Transaction** it will be published on the network, and the transaction fee will be deducted from your balance. Collectibles will be deposited into the destination address shortly after.
+Después de pulsar **Send Transaction** la transacción se publicará en la red, y la comisión de la transacción se deducirá de tu saldo. Los coleccionables serán depositados en la dirección de destino casi inmediatamente.
 
-## Summary
+## Resumen
 
 Now, you should know how to create NFT families, mint NFT groups, and send them to other addresses. Have fun with it! Make sure to share your creations with us on our [social media channels](https://www.avalabs.org/social)!
 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ4ODg2OTU2MSwxMTA2MTU4Nzk4LDEyMD
-kzMjI1MjVdfQ==
+eyJoaXN0b3J5IjpbLTEwMDQ2MDkxOTEsMTEwNjE1ODc5OCwxMj
+A5MzIyNTI1XX0=
 -->
