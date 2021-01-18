@@ -52,7 +52,7 @@ avm.createFixedCapAsset({
 * `assetID` es la ID del nuevo activo.
 * `changeAddr` en el resultado está la dirección donde se envió el cambio.
 
-Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
+Ahora, en la creación del activo. Querrás reemplazar `address` por una dirección que controles para que puedas controlar todos los activos recién acuñados y poder enviarlos más tarde en este tutorial.
 
 ```cpp
 curl -X POST --data '{
@@ -77,7 +77,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the asset’s ID, which is also the ID of this transaction:
+La respuesta contiene el ID del activo, que es también el ID de esta transacción:
 
 ```cpp
 {
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3MTc5MjIyMl19
+eyJoaXN0b3J5IjpbLTU5NDMxMzIyOV19
 -->
