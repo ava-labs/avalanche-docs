@@ -54,7 +54,7 @@ En la parte superior de la pantalla siempre se puede ver un resumen de tus colec
 
 ![Overview](../../../.gitbook/assets/nft-studio-06-overview.png)
 
-To see your collectibles in more detail, select **Portfolio** from the left-hand side menu. You will be presented with a screen showing all of your assets, with tokens selected by default. Change the selection to **Collectibles** by clicking the corresponding tab.
+Para ver sus coleccionables con más detalle, selecciona **Portfolio** en el menú de la izquierda. Te aparecerá una pantalla que muestra todos tus bienes, con tokens seleccionados por defecto. Cambie la selección a **Collectibles** haciendo clic en la pestaña correspondiente.
 
 ![Collectibles list](../../../.gitbook/assets/nft-studio-07-collectibles.png)
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzkxNzI5ODYzLDExMDYxNTg3OTgsMTIwOT
+eyJoaXN0b3J5IjpbNTYxMTMyMzc2LDExMDYxNTg3OTgsMTIwOT
 MyMjUyNV19
 -->
