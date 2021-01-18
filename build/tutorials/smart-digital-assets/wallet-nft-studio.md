@@ -74,7 +74,7 @@ Se te presentará un menú para seleccionar un coleccionable que desees enviar.
 
 ![Multiple collectibles](../../../.gitbook/assets/nft-studio-10-multiple.png)
 
-You can send multiple collectibles in a single transaction. Clicking the label on the collectible will let you edit the number of copies you wish to send. You can send multiple families and collectible types in a single transaction.
+Puedes enviar varios coleccionables en una sola transacción. Al hacer clic en la etiqueta del coleccionable, podrás editar el número de copias que deseas enviar. Puedes enviar varias familias y tipos de coleccionables en una sola transacción.
 
 When you have entered the destination address, and optionally entered the memo text, press **Confirm** to initiate the transaction.
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwODI0NzA5NCwxMTA2MTU4Nzk4LDEyMD
-kzMjI1MjVdfQ==
+eyJoaXN0b3J5IjpbNzkwMDYzNzQwLDExMDYxNTg3OTgsMTIwOT
+MyMjUyNV19
 -->
