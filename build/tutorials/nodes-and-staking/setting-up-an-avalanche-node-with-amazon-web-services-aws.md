@@ -250,7 +250,7 @@ AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
 
-Haz una copia de seguridad de la clave y el certificado del nodo en caso de que la instancia EC2 esté corrupta o no esté disponible. El ID del nodo se deriva de su staking key y certificado. Si pierdes tu staking key o certificado, tu nodo obtendrá un nuevo ID de nodo, lo que puede hacer que no seas elegible para el staking reward si tu nodo es un validador. **Se recomienda encarecidamente que copies la staking key y el certificado de tu nodo**. La primera vez que ejecutes un nodo, éste generará un nuevo staking key y certificado y los almacenará en el directorio `/home/ubuntu/.avalanchego/staking`..
+Haz una copia de seguridad de la clave y el certificado del nodo en caso de que la instancia EC2 esté corrupta o no esté disponible. El ID del nodo se deriva de su staking key y certificado. Si pierdes tu staking key o certificado, tu nodo obtendrá un nuevo ID de nodo, lo que puede hacer que no seas elegible para el staking reward si tu nodo es un validador. **Se recomienda encarecidamente que copies la staking key y el certificado de tu nodo**. La primera vez que ejecutes un nodo, éste generará un nuevo staking key y certificado y los almacenará en el directorio `/home/ubuntu/.avalanchego/staking`.
 
 Sal de la instancia SSH ejecutando:
 
@@ -258,15 +258,15 @@ Sal de la instancia SSH ejecutando:
 exit
 ```
 
-Now you're no longer connected to the EC2 instance; you're back on your local machine.
+Ahora ya no estás conectado a la instancia EC2; estás de vuelta en tu máquina local.
 
-To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP`.
+Para copiar el staking key y el certificado a su máquina, ejecuta el siguiente comando. Como siempre, reemplaza `PUBLICIP`.
 
 ```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 ```
 
-Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
+Ahora tu staking key y tu certificado están en el directorio `~/aws_avalanche_backup` . **El contenido de este directorio es secreto.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
 
 ### Upgrading Your Node <a id="9ac7"></a>
 
@@ -283,7 +283,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzI0MzIwNDksMzI3MDEwNTY1LDE5ND
+eyJoaXN0b3J5IjpbLTEyMjcwMDYxNzgsMzI3MDEwNTY1LDE5ND
 AwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0
 LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOT
 UzMDNdfQ==
