@@ -124,7 +124,7 @@ contract Storage {
 
 ## Añade la nueva migración
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
+Crea un nuevo archivo en el directorio  `migrations` llamado `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
 
 ```javascript
 const Storage = artifacts.require("Storage");
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzE1NTg5ODk0LC04NTUzMTIwNjJdfQ==
+eyJoaXN0b3J5IjpbMTIzOTczMjU1OCwtODU1MzEyMDYyXX0=
 -->
