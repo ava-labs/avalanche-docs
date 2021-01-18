@@ -43,11 +43,11 @@ Haz clic en `Create key pair`. Debería ver un mensaje de éxito, y el archivo d
 
 ## Crear un Grupo de Seguridad <a id="f8df"></a>
 
-An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
+Un Grupo de Seguridad AWS define qué tráfico de Internet puede entrar y salir de su instancia EC2. Piensa en ello como un firewall.Cree un nuevo Grupo de Seguridad seleccionando **Security Groups** en el menú desplegable **Network & Security**.
 
 ![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
-This opens the Security Groups panel. Click **Create security group** in the top right of the Security Groups panel.
+Esto abre el panel de Grupos de Seguridad. Haz clic en **Create security group** en la parte superior derecha del panel de Grupos de seguridad.
 
 ![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
@@ -279,6 +279,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDcyMjQwNjYsNzI4NjY1Nzk5LC03Mj
-A2ODQ2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbMTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNj
+g0Njc2LDg2MTA5NTMwM119
 -->
