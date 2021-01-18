@@ -106,9 +106,9 @@ Ahora estamos listos para interactuar con el contrato. Abra la interfaz del cont
 
 ## Emitir Comandos para el Contrato de WAVAX
 
-Let's wrap some AVAX!
+¡Hagamos wrap a algunos AVAX!
 
-Since ETH is denominated in 10^18 smaller units \(wei\), and AVAX is denominated in 10^9, switch the value selector from `wei` to `gwei` \(gigawei\). 1 gwei = 10^9 wei = 1 nAVAX.
+Como ETH está denominado en 10^18 smaller units \(wei\), and AVAX is denominated in 10^9, switch the value selector from `wei` to `gwei` \(gigawei\). 1 gwei = 10^9 wei = 1 nAVAX.
 
 ![Interaction](../../../.gitbook/assets/wavax2avax-08-interact.png)
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTU3MjY3NzkwLC0zNjkyMzI5OTgsMTE3Nz
+eyJoaXN0b3J5IjpbMzk3OTk3NDg3LC0zNjkyMzI5OTgsMTE3Nz
 I2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMy
 NTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX0=
 -->
