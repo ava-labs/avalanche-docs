@@ -198,11 +198,11 @@ truffle(development)> .exit
 
 ### Agrega fondos a tu cuenta
 
-Sigue lo [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+Sigue los pasos en el tutorial de como [Transferir AVAX entre la X-Chain y la C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md)  para agregar fondos a la nueva cuenta que creamos. Necesitas enviar por lo menos `135422040` nAVAX a la cuenta para cubrir el costo de el despliegue de los smart contracts.
 
-### Unlock your account
+### Desbloquea tu cuenta
 
-Create a new file called `web3_script.js` in the `truffle` directory and add the following:
+Crea un nuevo archivo llamado `web3_script.js` in the `truffle` directory and add the following:
 
 ```javascript
 // web3_script.js
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2OTYyNDkzNiwtODU1MzEyMDYyXX0=
+eyJoaXN0b3J5IjpbLTI4NDk3NDkyMCwtODU1MzEyMDYyXX0=
 -->
