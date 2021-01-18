@@ -1,4 +1,4 @@
-# Transfer AVAX Between the X-Chain and P-Chain
+# Transferir AVAX entre la X-Chain y la P-Chain
 
 ## Introduction
 
@@ -298,3 +298,6 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTk3NDYzNTldfQ==
+-->
