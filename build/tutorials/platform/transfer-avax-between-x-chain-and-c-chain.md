@@ -10,11 +10,11 @@ Que hayas completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y
 
 ¡Para poder enviar AVAX, necesitas tener algo de AVAX! Puedes conseguir AVAX de verdad comprándola en un exchange, o puedes conseguir AVAX de la red de pruebas desde el [Faucet de Prueba de AVAX](https://faucet.avax-test.network), que es una forma gratis y fácil de ir jugando con Avalanche.
 
-## Transferring AVAX using the web wallet
+## Transferir AVAX usando la Wallet Web
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/) which is a non-custodial and secure way to access and move AVAX.
+La forma más fácil de transferir AVAX entre cadenas es usar [La Wallet de Avalanche](https://wallet.avax.network/) que es una forma segura y no custodiada de acceder y mover AVAX.
 
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://github.com/ava-labs/avalanche-wallet).
 
 ### Step 1 - Open the Avalanche Wallet
 
@@ -259,5 +259,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0MTY5NTc1OV19
+eyJoaXN0b3J5IjpbLTEwMDYwODY2MTFdfQ==
 -->
