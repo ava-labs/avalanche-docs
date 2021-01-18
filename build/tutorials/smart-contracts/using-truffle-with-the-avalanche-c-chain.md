@@ -6,7 +6,7 @@
 
 ## Requisitos
 
-Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). También haber realizado un intercambio de cross-chain a través del tutorial [Transferir AVAX entre la X-Chain y la C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md)  para obtener fondos en tu dirección de la C-Chain.
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). También haber realizado un intercambio de cross-chain a través del tutorial [Transferir AVAX entre la X-Chain y la C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md)  para obtener fondos en tu dirección de C-Chain.
 
 ## Dependencies
 
@@ -412,5 +412,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjcyNzk0MDg4XX0=
+eyJoaXN0b3J5IjpbMTgxMzAwOTM4NV19
 -->
