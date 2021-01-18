@@ -57,9 +57,9 @@ Para la agregar fondos en la red de pruebas, también puede utilizar el Faucet d
 
 En una red local, puede agregar fondos fácilmente a sus direcciones desplegando su propio faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our address with prefix “C-”.
+Vamos al [faucet de avax](https://faucet.avax-test.network/) y pega tu dirección con prefijo “C-”.
 
-For example my address is “0xfe8886bec537252040Dff36448C0F104Be635650”, I need to paste my account address as “C-0xfe8886bec537252040Dff36448C0F104Be635650”
+Por ejemplo mi dirección es: “0xfe8886bec537252040Dff36448C0F104Be635650”, Necesito pegar la dirección de mi cuenta como  “C-0xfe8886bec537252040Dff36448C0F104Be635650”
 
 ![Image for post](https://miro.medium.com/max/422/1*okw3MKlyGcF4U9ibsq5v8w.png)
 
@@ -156,6 +156,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzNDMwNzg1MSw3ODg4NTAxMTYsLTQyMD
-I4MDQ3OF19
+eyJoaXN0b3J5IjpbLTIxMzg4MDQ4MjgsNzg4ODUwMTE2LC00Mj
+AyODA0NzhdfQ==
 -->
