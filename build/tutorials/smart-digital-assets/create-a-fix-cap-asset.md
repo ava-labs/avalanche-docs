@@ -92,11 +92,11 @@ La respuesta contiene el ID del activo, que es también el ID de esta transacci�
 
 ## Intercambie el Activo
 
-### Check a balance
+### Compruebe el balance
 
-All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
+Todas las 10.000.000 de unidades del activo \(acciones\) están controladas por la dirección que especificamos en `initialHolders`.
 
-To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Para verificar esto, ejecutamos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -110,7 +110,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+La respuesta confirma que la creación de nuestro activo tuvo éxitoy que la  was successful and that the expected address holds all 10,000,000 shares:
 
 ```cpp
 {
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODkwNDUyNzZdfQ==
+eyJoaXN0b3J5IjpbLTExMzY3MDMxMTZdfQ==
 -->
