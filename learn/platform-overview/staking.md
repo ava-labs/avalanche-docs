@@ -1,5 +1,5 @@
 ---
-description: Learn how to stake on Avalanche by validating or delegating
+descripción: Aprende como hacer stake en Avalanche validando o delegando
 ---
 
 # Staking
@@ -103,3 +103,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTU5NjEzNzAzMl19
+-->
