@@ -103,7 +103,7 @@ type ChainVM interface {
 
 Puede que hayas notado `snowman.Block` al que se hace referencia en la interfaz `snowman.VM`. este describe los métodos que un bloque debe implementar para ser un bloque en una cadena lineal \(Snowman\) 
 
-Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+Veamos esta interfaz y sus métodos, los cuales copiamos de [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
 ```cpp
 // Block is a block in a blockchain.
@@ -163,7 +163,7 @@ type Block interface {
 }
 ```
 
-## Libraries
+## Bibliotecas
 
 We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5Mjg4MTMyMTVdfQ==
+eyJoaXN0b3J5IjpbLTM3NDk3NDY2M119
 -->
