@@ -6,7 +6,7 @@ En Avalanche, los bienes digitales se representan como tokens. Algunos tokens so
 
 Avalanche también soporta los tokens no fungibles \(NFTs\). Por definición, cada NFT es única y no es perfectamente intercambiable con ninguna otra NFT. Por ejemplo, podría haber una NFT que represente la propiedad de una pieza de arte del mundo real; cada pieza de arte, como cada NFT, es único. Los NFT's representan la escasez digital y pueden resultar incluso más útiles que los tradicionales tokens fungibles.
 
-In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial, we’ll create a custom NFT family using [AvalancheJS](../../tools/avalanchejs/) and explore NFTs in more detail.
+En este tutorial, crearemos y enviaremos NFTs usando la API de AvalancheGo. En un futuro tutorial, crearemos una familia de NFT personalizada usando [AvalancheJS](../../tools/avalanchejs/).
 
 ## Requirements
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDQ5MzE2OTZdfQ==
+eyJoaXN0b3J5IjpbLTE3ODYwNDE4MDNdfQ==
 -->
