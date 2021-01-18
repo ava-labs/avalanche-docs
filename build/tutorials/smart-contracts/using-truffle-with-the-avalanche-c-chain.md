@@ -330,19 +330,19 @@ Ahora que el contrato de `Storage` ha sido desplegado. Escribamos un número en 
 truffle console --network development
 ```
 
-Get an instance of the deployed `Storage` contract:
+Consigue una instancia del contrato de `Storage` desplegado:
 
 ```javascript
 truffle(development)> let instance = await Storage.deployed()
 ```
 
-This returns:
+Esto nos retorna:
 
 ```text
 undefined
 ```
 
-### Writing a number to the blockchain
+### Escribiendo un número en la blockchain
 
 Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
 
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTQyOTQwNDMsLTg1NTMxMjA2Ml19
+eyJoaXN0b3J5IjpbNzYzMDcwNzY0LC04NTUzMTIwNjJdfQ==
 -->
