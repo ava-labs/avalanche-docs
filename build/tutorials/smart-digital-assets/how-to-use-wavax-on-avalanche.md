@@ -77,9 +77,9 @@ Selecciona **GitHub**, y en el campo de entrada pega `https://raw.githubusercont
 
 ![File Explorer](../../../.gitbook/assets/wavax2avax-04-contract.png)
 
-Cambia a la pestaña del Explorador de Archivos a la izquierda y seleccionando  `WAVAX.sol, que es el contrato que acabamos de cargar.
+Cambia a la pestaña del **File Explorer** a la izquierda y selecciona  `WAVAX.sol, que es el contrato que acabamos de cargar.
 
-On the left side menu, switch to Compile tab:
+En el menú de la izquierda, cambia a la pestaña **Compile**:
 
 ![Compile](../../../.gitbook/assets/wavax2avax-05-compile.png)
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0MDUzNjg4MCwtMzY5MjMyOTk4LDExNz
-cyNjY5NDgsMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTcz
-MjUwLDY3OTY3NjcwOSwtMTg2ODU1NDE1OV19
+eyJoaXN0b3J5IjpbLTE3NjY3NzQ4MTEsLTM2OTIzMjk5OCwxMT
+c3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0OCwtMTE4MjU3
+MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
