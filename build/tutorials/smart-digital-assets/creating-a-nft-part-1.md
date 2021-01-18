@@ -101,19 +101,19 @@ Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acu�
 
 ## Obtener UTXOs para NFT
 
-Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas Acuñación NFT tienen un tipo de ID de `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
+Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas Acuñación NFT tienen un tipo de ID de `00 00 00 0a` en hexadecimal \(`10` en decimal\) y las salidas de transferencia de NFT tienen un tipo de ID de `00 00 00 0b` en hexadecimal \(`11` en decimal\).
 
-### **Method**
+### **Método**
 
 * [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)
 
-### **Parameters**
+### **Parámetros**
 
-* `addresses` are the addresses to fetch UTXOs for.
+* `addresses` son las direcciones para buscar UTXOs.
 
-**Response:**
+**Respuesta:**
 
-* `numFetched` is the total number of UTXOs in the response.
+* `numFetched` es el numero total de UTXOs en la respuesta.
 * `utxos` is an array of CB58 encoded strings.
 * `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDUyMDExNjNdfQ==
+eyJoaXN0b3J5IjpbMTY3MDg5OTk0Ml19
 -->
