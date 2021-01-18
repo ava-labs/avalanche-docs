@@ -63,30 +63,30 @@ Si tiene éxito, se ingresará en la wallet y se mostrarán los saldos anteriore
 
 ![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-Para transferir fondos, vaya a la pestaña **Send** y pegue una d X-Chain en el campo **To Address**. Establezca una cantidad y opcionalmente establezca una nota. Presione **Confirm** y luego el botón **Send Transaction**.
+Para transferir fondos, vaya a la pestaña **Send** y pegue una dirección de la X-Chain en el campo **To Address**. Establezca una cantidad y opcionalmente establezca una nota. Presione **Confirm** y luego el botón **Send Transaction**.
 
 ![Send Transaction](../../../.gitbook/assets/send-transaction.png)
 
-You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
+Se le pedirá que confirme la acción en su Ledger. Comprueba que el hash que aparece en la cartera de la web coincide con el que aparece en tu Ledger. Si todo coincide, confirma pulsando los dos botones de la última pantalla para enviar la transacción.
 
 ![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
+Puede hacer clic en el icono para actualizar su saldo y debería verlo disminuir por el importe que acaba de enviar y la tarifa de la transacción.
 
 ![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+En la columna de la derecha, verá su última transacción. Al hacer clic en el icono de la lupa se abrirá la transacción en nuestro explorador.
 
 ![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+Finalmente, debería poder ver los detalles de la transacción en nuestro explorador. Aquí se enumera todo lo relativo a la transacción, incluyendo el ID de la transacción, el estado, cuándo se produjo la transacción y toda la información relativa a las entradas y salidas.
 
 ![Transaction details](../../../.gitbook/assets/transaction-details.png)
 
-## More Tools to Come <a id="135b"></a>
+## Más herramientas por venir <a id="135b"></a>
 
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDY5OTY3MzVdfQ==
+eyJoaXN0b3J5IjpbMTQyMjMyMTcxNV19
 -->
