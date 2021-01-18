@@ -16,7 +16,7 @@ Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que
 
 ## Iniciar una Red Local de Avalanche
 
-[Avash](https://github.com/ava-labs/avash) le permite hacer despliegues de redes de prueba privadas con hasta 15 nodos AvalancheGo listos para usar. Avash admite la automatización de las tareas habituales mediante scripts lua. Esto permite realizar pruebas rápidas con una amplia variedad de configuraciones. La primera vez que uses avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) le permite hacer despliegues de redes de prueba privadas con hasta 15 nodos AvalancheGo listos para usar. Avash admite la automatización de las tareas habituales mediante scripts lua. Esto permite realizar pruebas rápidas con una amplia variedad de configuraciones. La primera vez que uses avash necesitarás [Instalarlo y configurarlo](https://github.com/ava-labs/avash#quick-setup).
 
 Start a local five node Avalanche network:
 
@@ -412,5 +412,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjAyMTM0Mjc1XX0=
+eyJoaXN0b3J5IjpbLTkwMDk1NDExMF19
 -->
