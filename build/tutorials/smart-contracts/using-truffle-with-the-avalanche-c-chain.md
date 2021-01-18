@@ -55,15 +55,15 @@ Usa`npm` para instalar [web3](https://web3js.readthedocs.io), que es una bibliot
 npm install web3 -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+Usaremos la web3 para establecer un proveedor de HTTP, que es como la web3 se comunicará con el EVM. Por último, crea un proyecto de truffle:
 
 ```text
 truffle init
 ```
 
-## Update truffle-config.js
+## Actualizar truffle-config.js
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+Uno de los archivos creados cuando ejecutamos  `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
 
 ```javascript
 const Web3 = require('web3');
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDQwNjc3ODZdfQ==
+eyJoaXN0b3J5IjpbLTY2NDI0NDgxM119
 -->
