@@ -134,7 +134,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Which shows our transaction is accepted:
+La cual nos muestra que nuestra transacción fué aceptada:
 
 ```cpp
 {
@@ -146,7 +146,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+También podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) para comprobar que el AVAX fue deducido de una dirección de nuestro usuario:
 
 ```cpp
 curl -X POST --data '{
@@ -160,7 +160,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`.005` AVAX in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+El monto deducido es el monto exportado \(`.005` AVAX in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
 
 ### Step 2 - Import AVAX to the P-Chain
 
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzMyOTU4NzddfQ==
+eyJoaXN0b3J5IjpbLTEzODc3MjUxMDhdfQ==
 -->
