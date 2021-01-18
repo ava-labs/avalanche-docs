@@ -1,4 +1,4 @@
-# Create a Fixed-Cap Asset
+# Crear un Activo de Capital Fijo
 
 ## Introducción
 
@@ -222,5 +222,6 @@ En este tutorial:
 * Ejecutamos`send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA5MDUyMjQyOCwxNjE1NzM0MTYwXX0=
+eyJoaXN0b3J5IjpbMTU2MjI1MjQzLDEwOTA1MjI0MjgsMTYxNT
+czNDE2MF19
 -->
