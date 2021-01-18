@@ -516,11 +516,11 @@ The service struct’s declaration is:
 type Service struct{ vm *VM }
 ```
 
-For each API method, there is: \* A struct that defines the method’s arguments \* A struct that defines the method’s return values \* A method that implements the API method, and is parameterized on the above 2 structs
+Para cada método API, hay: \* Una estructura que define los argumentos del método. \* Una estructura que define los valores de retorno del método. \* Un método que implementa el método de la API, y está parametrizado en las dos estructuras anteriores.
 
 #### **ProposeBlock**
 
-This API method allows clients to add a block to the blockchain.
+Este método de la API permite que los clientes añadan un bloque a la blockchain.
 
 ```cpp
 // ProposeBlockArgs are the arguments to ProposeValue
@@ -721,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwMjI3MTc4NiwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTEwNzc2Nzg0MzIsMTQ4NjEzNTA4OV19
 -->
