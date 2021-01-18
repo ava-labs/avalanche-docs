@@ -55,13 +55,12 @@ Tendrás que especificar qué tráfico de entrada está permitido. Permite el tr
 
 ![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/inbound-rules.png)
 
-Add a tag to the new security group with key `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
-
+Añade una etiqueta al nuevo grupo de seguridad con la clave `Name` y el valor `Avalanche Security Group`. Esto nos permitirá saber qué es este grupo de seguridad cuando lo veamos en la lista de grupos de seguridad.
 ![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-Click `Create security group`. You should see the new security group in the list of security groups.
+Haz clic en `Create security group`. Deberías ver el nuevo grupo de seguridad en la lista de grupos de seguridad.
 
-## Launch an EC2 Instance <a id="0682"></a>
+## Iniciar una instancia EC2 <a id="0682"></a>
 
 Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
 
@@ -279,6 +278,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDY4ODkzNjksMTYxMDI3ODQ1LDcyOD
-Y2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbLTU2MjU0NzE1MiwxNjEwMjc4NDUsNzI4Nj
+Y1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
