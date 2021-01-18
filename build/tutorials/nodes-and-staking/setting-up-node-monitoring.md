@@ -1,16 +1,16 @@
 # Ejecutar una Monitorización de Nodos de Avalanche
 
-Gracias al miembro de la comunidad Jovica Popović, que escribió este tutorial. Puedes contactarlo en nuestro [_Discord_](https://chat.avax.network) _if needed._
+Gracias al miembro de la comunidad Jovica Popović, que escribió este tutorial. Puedes contactarlo en nuestro [_Discord_](https://chat.avax.network) _si lo necesitas._
 
 ## Introducción
 
 Este tutorial asume que tienes Ubuntu 18.04 o 20.04 funcionando en tu nodo \(una version de este tutorial para Mac OS X vendrá pronto\).
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+Este tutorial mostrará cómo crear una infraestructura para supervisar una instancia de [AvalancheGo](https://github.com/ava-labs/avalanchego). Usaremos:
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) to get information about the node
+* [Prometheus](https://prometheus.io/) para reunir y almacenar datos
+* [node\_exporter](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
+* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
 * [Grafana](https://grafana.com/) to visualize data on a dashboard.
 
 Prerequisites:
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MD
-kyODE1NjNdfQ==
+eyJoaXN0b3J5IjpbMTAxMTE5MDQ4MiwtMTAyMzAwNDAzMCwtOT
+A2NTI4OTEwLDQwOTI4MTU2M119
 -->
