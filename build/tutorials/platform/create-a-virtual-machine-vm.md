@@ -640,10 +640,10 @@ timestamp.getBlock({id: string}) ->
     }
 ```
 
-* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
-* `timestamp` is the Unix timestamp when this block was created
-* `parentID` is the block’s parent
+* `id` es la ID del bloque que se está recuperando. Si se omite en los argumentos, se obtiene el último bloque
+* `data` es la base 58 \(con suma de comprobación\)  que representa la carga útil de 32 bytes del bloque.
+* `timestamp` es el timestamp de Unix de cuando este bloque fue creado
+* `parentID` es el padre del bloque
 
 **Example Call**
 
@@ -675,7 +675,7 @@ curl -X POST --data '{
 
 **timestamp.proposeBlock**
 
-Propose the creation of a new block.
+Propone la creación de un nuevo bloque.
 
 **Signature**
 
@@ -721,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA0NDI5Nzk0LDE0ODYxMzUwODldfQ==
+eyJoaXN0b3J5IjpbLTM1MDAzOTIzNCwxNDg2MTM1MDg5XX0=
 -->
