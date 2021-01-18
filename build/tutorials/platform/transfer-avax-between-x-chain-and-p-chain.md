@@ -222,7 +222,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5NzU5MTQ3XX0=
+eyJoaXN0b3J5IjpbMTY3MDY4ODQ2M119
 -->
