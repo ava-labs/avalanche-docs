@@ -285,13 +285,14 @@ func (b *Block) Verify() error {
 }
 ```
 
-That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
+¡Ese es todo el código para la implementación de nuestro bloque! Todos los demás métodos de `snowman.Block`que nuestro "bloque" debe implementar, son heredados de `*core.Block`.
 
 ### Virtual Machine
 
-Now, let’s look at the implementation of VM, which implements the `snowman.VM` interface.
 
-The declaration is:
+Ahora, veamos la implementación de VM, la cual implementa la interfaz `snowman.VM`.
+
+La declaración es:
 
 ```cpp
 // This Virtual Machine defines a blockchain that acts as a timestamp server
@@ -307,7 +308,7 @@ type VM struct {
 }
 ```
 
-#### **Initialize**
+#### **Inicializar**
 
 ```cpp
 // Initialize this vm
@@ -720,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDQ0ODE3MTMsMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbMTQ0NzMwOTkyMSwxNDg2MTM1MDg5XX0=
 -->
