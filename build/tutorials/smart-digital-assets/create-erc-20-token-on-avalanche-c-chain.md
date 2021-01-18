@@ -59,13 +59,14 @@ En una red local, puede agregar fondos fácilmente a sus direcciones desplegando
 
 Vamos al [faucet de avax](https://faucet.avax-test.network/) y pega tu dirección con prefijo “C-”.
 
-Por ejemplo mi dirección es: “0xfe8886bec537252040Dff36448C0F104Be635650”, Necesito pegar la dirección de mi cuenta como  “C-0xfe8886bec537252040Dff36448C0F104Be635650”
+Por ejemplo mi dirección es: “0xfe8886bec537252040Dff36448C0F104Be635650”, Necesito pegar la dirección de mi cuenta como 
+“C-0xfe8886bec537252040Dff36448C0F104Be635650”
 
 ![Image for post](https://miro.medium.com/max/422/1*okw3MKlyGcF4U9ibsq5v8w.png)
 
-After copy and paste the address here, click request 2.0000 C-AVAX. This test faucet token has no value, it is just for development purposes.
+Después de copiar y pegar la dirección aquí, haga clic en **request 2.0000 C-AVAX**. Este token de prueba del grifo no tiene ningún valor, es sólo para fines de desarrollo.
 
-Then check your wallet balance and you should have some test token in your metamask.
+Entonces comprueba el balance de tu wallet y deberías tener algunos tokens de prueba en metamask.
 
 ## Create mintable token
 
@@ -156,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzg4MDQ4MjgsNzg4ODUwMTE2LC00Mj
-AyODA0NzhdfQ==
+eyJoaXN0b3J5IjpbMTMwMDIxNTQ5MSw3ODg4NTAxMTYsLTQyMD
+I4MDQ3OF19
 -->
