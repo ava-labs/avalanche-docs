@@ -112,9 +112,9 @@ Después de hacer clic en el botón, un pop-up aparecerá y lo confirmaremos.
 
 Aparecerá otro pop-up, una confirmación de metamask. Confirmala.
 
-After confirming all these pop-ups we have deployed our token to avalanche C-Chain. So we can start to interact with it.
+Después de confirmar todos estos pop-ups hemos desplegado nuestro Token para la C-Chain de Avalanche. Así que podemos empezar a interactuar con el.
 
-## Interact with Token
+## Interactuar con el Token
 
 We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
 
@@ -157,7 +157,7 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwMjUzMTQ5MCwxNzE3ODQ4NTAyLDE2Mj
-E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
-NzhdfQ==
+eyJoaXN0b3J5IjpbNjMyNjE5NTk5LDE3MTc4NDg1MDIsMTYyMT
+g5MzA2NCwtMTU1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3
+OF19
 -->
