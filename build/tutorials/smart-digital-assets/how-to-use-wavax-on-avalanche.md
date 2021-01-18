@@ -53,7 +53,7 @@ Necesitas agregar algo de AVAX en tu cuenta.
 
 Si ya tienes algunas AVAX, puedes transferirlas a la cuenta de Metamask usando tu [Wallet de Avalanche](https://wallet.avax.network/). Puedes ver dónde están tus fondos seleccionando **show breakdown** en el panel de la wallet que muestra tu saldo. Si aún no tienes los fondos en la C-Chain necesitas hacer una [Transferencia de Cross Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md), para mover tus AVAX de la X-Chain a la C-Chain.
 
-Después de tener los fondos en la C-Chain, selecciona **Send** en el menú de la izquierda en la Wallet, and then switch the source chain to **C Contract**. In the **To Address** field paste your Metamask address. Enter the amount to send and click **Confirm** and then **Send**.
+Después de tener los fondos en la C-Chain, selecciona **Send** en el menú de la izquierda en la Wallet,  y luego cambie la cadena de origen a **C Contract**. En el campo **To Address** pega tu dirección de Metamask. Introduce el monto a enviar y haz click en **Confirm** y ahora en **Send**.
 
 ![Send to Metamask](../../../.gitbook/assets/wavax2avax-01-send-to-metamask.png)
 
@@ -142,6 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMT
-gyNTczMjUwLDY3OTY3NjcwOSwtMTg2ODU1NDE1OV19
+eyJoaXN0b3J5IjpbMTUxNzk0Nzk0LDE3MDQ1NTI3NzgsMTY2OD
+kzNDI0OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQx
+NTldfQ==
 -->
