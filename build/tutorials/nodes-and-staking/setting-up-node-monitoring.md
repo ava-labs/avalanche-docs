@@ -342,15 +342,15 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también están bien indentadas. Asegúrate de usar la IP del host correcta, or `localhost`, depending on how your node is configured.
+**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también estén bien indentadas. Asegúrate de usar la IP del host correcta, o`localhost`, dependiendo de como está configurado tu nodo.
 
-Save the config file and restart Prometheus:
+Guarda el config file y reinicia Prometheus:
 
 ```cpp
 sudo systemctl restart prometheus
 ```
 
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Comprueba la interfaz web de Prometheus en `http://your-node-host-ip:9090/targets`. Debería ver tres objetivos habilitados:
 
 * Prometheus
 * avalanchego
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyNTA1ODg2OCwtMTAyMzAwNDAzMCwtOT
-A2NTI4OTEwLDQwOTI4MTU2M119
+eyJoaXN0b3J5IjpbLTEwMjA4ODYwOTUsLTEwMjMwMDQwMzAsLT
+kwNjUyODkxMCw0MDkyODE1NjNdfQ==
 -->
