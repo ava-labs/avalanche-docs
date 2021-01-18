@@ -1,4 +1,4 @@
-# Set up Your Ledger Nano S with Avalanche
+# Configura tu Ledger Nano S con Avalanche
 
 The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
 
@@ -86,3 +86,6 @@ Finally, you should be able to see the transaction details in our explorer. This
 
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3NjkxMDY4NTddfQ==
+-->
