@@ -215,13 +215,14 @@ Su implementación VM probablemente anulará `Accept` y `Reject` para que estos 
 
 `core.Block` tiene un campo VM, que es una referencia a `core.SnowmanVM`. Esto significa que un `core.Block` tiene acceso a todos los campos y métodos de ese modelo.
 
-## Timestamp Server Implementation
+## Implementación del Servidor de Timestamp
 
-Now, we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `snowman.VM` and whose blocks implement `snowman.Block`.
+Ahora, sabemos la interfaz que nuestra VM debe implementar y las bibliotecas que podemos usar para construir una VM.
 
-### Block
+Escribamos nuestra VM, que implementa `snowman.VM` y cuyos bloques implementan `snowman.Block`.
+
+### Bloque
 
 First, let’s look at our block implementation.
 
@@ -718,5 +719,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NjY4OTgyOCwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTU1ODI0ODk0NSwxNDg2MTM1MDg5XX0=
 -->
