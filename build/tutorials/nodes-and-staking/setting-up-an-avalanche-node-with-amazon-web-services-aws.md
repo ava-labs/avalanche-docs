@@ -51,7 +51,7 @@ Esto abre el panel de Grupos de Seguridad. Haz clic en **Create security group**
 
 ![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
+Tendrás que especificar qué tráfico de entrada está permitido. Permite el tráfico SSH desde tu dirección IP para que puedas acceder a tu instancia EC2. (Cada vez que su ISP cambie su dirección IP, tendrá que modificar esta regla. Si tu ISP cambia regularmente, puedes permitir el tráfico SSH desde cualquier lugar para evitar tener que modificar esta regla con frecuencia.\) Permite el tráfico TCP en el puerto 9651 para que tu nodo pueda comunicarse con otros nodos de la red. Permite el tráfico TCP en el puerto 9650 de tu IP para que puedas hacer llamados API a tu nodo. **Es importante que sólo permitas el tráfico en este puerto desde tu IP.** Si permites el tráfico entrante desde cualquier lugar, esto podría ser usado como un vector de ataque de denegación de servicio. Finalmente, permite todo el tráfico saliente.
 
 ![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/inbound-rules.png)
 
@@ -279,6 +279,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNj
-g0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbLTIxMDY4ODkzNjksMTYxMDI3ODQ1LDcyOD
+Y2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
