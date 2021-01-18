@@ -88,7 +88,7 @@ Ten en cuenta que puedes cambiar  `protocol`, el `ip` y `port` si quieres dirigi
 
 ## Agregando Storage.sol
 
-En el directorio `contracts` agrega un nuevo archivo llamado `Storage.sol` and add the following block of code:
+En el directorio `contracts` agrega un nuevo archivo llamado `Storage.sol` y agrega el siguiente bloque de código:
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODgyNzU4MTQzXX0=
+eyJoaXN0b3J5IjpbLTg1NTMxMjA2Ml19
 -->
