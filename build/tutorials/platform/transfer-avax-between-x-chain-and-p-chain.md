@@ -40,21 +40,21 @@ La función para transferir Tokens entre cadenas está en la pestaña **Cross Ch
 
 ### Paso 4 - Introduce la Cantidad a Transferir
 
-Se te presentará una opción para **Source Chain** y **Destination Chain**.  Selecciona X-Chain y  P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+Se te presentará una opción para **Source Chain** y **Destination Chain**.  Selecciona X-Chain y  P-Chain, espectivamente. Verás tus saldos X y P, y un campo de entrada para ingresar el monto a transferir de la cadena de origen a la de destino.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
-Enter the amount you wish to transfer from the X-Chain to the P-Chain.
+Introduce la cantidad que deseas transferir desde la X-Chain a la P-Chain.
 
-### Step 5 - Confirm the Transaction
+### Paso 5 - Confirma la Transacción
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
-Press **Confirm**, and then **Transfer** to initiate the transfer.
+Presiona **Confirm**, y luego **Transfer** para iniciar la transferencia.
 
-### Step 6 - Done!
+### Paso 6 - Listo!
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the P-Chain. The wallet will do both and show its the progress while doing so.
+La transferencia entre cadenas es un proceso de dos pasos: primero una transacción para exportar los fondos de la X-Chain y otra para importarlos a la P-Chain. The wallet will do both and show its the progress while doing so.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
@@ -301,5 +301,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTkwMjMxNzBdfQ==
+eyJoaXN0b3J5IjpbMTQ5MzI2OTE5NF19
 -->
