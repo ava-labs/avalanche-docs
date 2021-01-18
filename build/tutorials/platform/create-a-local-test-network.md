@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-`peers` should have 4 entries:
+`peers` debería tener 4 entradas:
 
 ```cpp
 {
@@ -128,9 +128,9 @@ curl -X POST --data '{
 }
 ```
 
-### Getting AVAX <a id="getting-avax"></a>
+### Obteniendo AVAX <a id="getting-avax"></a>
 
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain address that you can import in order to get AVAX. The private key for this address is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
+Cuando se ejecuta una red con `--network-id=local`, como hemos hecho, hay una dirección X-Chain pre-financiada que puedes importar para conseguir AVAX. La private key de esta dirección es `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/platform' \
@@ -152,5 +152,5 @@ That’s it! Your local version of Avalanche is up and running. It has the defau
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0ODk1MDc0NV19
+eyJoaXN0b3J5IjpbMjEyNTkxMzY4NV19
 -->
