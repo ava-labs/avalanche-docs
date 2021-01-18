@@ -138,21 +138,21 @@ Selecciona la IP Elástica que acabas de crear desde el Elastic IP manager. En e
 
 ![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
+Selecciona la instancia que acabas de crear. Esto asociará la nueva IP elástica con la instancia y le dará una dirección IP pública que no cambiará.
 
 ![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo <a id="829e"></a>
+## Configura AvalancheGo <a id="829e"></a>
 
-Go back to the EC2 Dashboard and select `Running Instances`.
+Vuelve al tablero del EC2 y selecciona `Running Instances`.
 
 ![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Select the newly created EC2 instance. This opens a details panel with information about the instance.
+Seleccione la instancia de EC2 recién creada. Esto abre un panel de detalles con información sobre la instancia.
 
 ![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
+Copia el campo `IPv4 Public IP` para usarlo más tarde. A partir de ahora llamaremos a este valor `PUBLICIP`.
 
 **Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
 
@@ -280,7 +280,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMTcxMDg0NCw0NjYwOTE0OTEsLTE1Nj
+eyJoaXN0b3J5IjpbMTk0MDA0OTQwMSw0NjYwOTE0OTEsLTE1Nj
 gwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwt
 NzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
