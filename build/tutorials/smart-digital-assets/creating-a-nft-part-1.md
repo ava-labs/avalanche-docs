@@ -346,17 +346,17 @@ La respuesta confirma que la operación de transferencia NFT fué exitosa
 ```
 Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) en la dirección a la que enviaste el NFT y descomponer la UTXO retornada, después de convertir de CB58 a hex, para confirmar que hay un UTXO con type id `00 00 00 0b` en hex o`11` en decimal.
 
-## Wrapping up
+## Concluimos!
 
-Blockchain technology and tokenomics represent a radical new way of representing digital assets. Non-fungible tokens allow scarce assets to be tokenized. In this tutorial, we:
+BLa tecnología de blockchain y los tokenomics representan una nueva forma radical de representar los activos digitales. Los tokens no fungibles permiten que los escasos activos se conviertan en tokens. En este tutorial, nosotros:
 
-* Used `createNFTAsset` to create a non-fungible asset family and group.
-* Used `mintNFT` to mint units of an NFT to the group.
-* Used `getUTXOs` to fetch UTXOs for an address. We then converted the CB58 encoded UTXO to hex and decomposed it to its individual components.
-* Used `sendNFT` to transfer NFTs between addresses.
+* Usamos`createNFTAsset` para crear una familia y un grupo de activos no fungibles.
+* Usamos`mintNFT` para acuñar unidades de un NFT al grupo.
+* Usamos`getUTXOs` to fetch UTXOs for an address. We then converted the CB58 encoded UTXO to hex and decomposed it to its individual components.
+* Usamos`sendNFT` to transfer NFTs between addresses.
 
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTM4NjkwNTJdfQ==
+eyJoaXN0b3J5IjpbMTg4NzAzMDY1MF19
 -->
