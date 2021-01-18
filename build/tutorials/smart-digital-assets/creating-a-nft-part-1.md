@@ -114,8 +114,8 @@ Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../ava
 **Respuesta:**
 
 * `numFetched` es el numero total de UTXOs en la respuesta.
-* `utxos` is an array of CB58 encoded strings.
-* `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
+* `utxos` es un conjunto de cadenas codificadas CB58.
+* `endIndex` Este método permite la paginación. `endIndex` denota el ultimo UTXO retornado.
 
 ```cpp
 curl -X POST --data '{
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MDg5OTk0Ml19
+eyJoaXN0b3J5IjpbLTExNjE0MDQzMDJdfQ==
 -->
