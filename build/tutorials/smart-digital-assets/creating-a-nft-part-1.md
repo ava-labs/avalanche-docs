@@ -160,7 +160,7 @@ se expresa en hexadecimal como:
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](../../references/avm-transaction-serialization.md):
+Ahora, podemos descomponer el hex en los componentes individuales de la UTXO refiriéndonos al [formato de serialización de transacciones](../../references/avm-transaction-serialization.md):
 
 ```cpp
 NFT Mint Output
@@ -177,7 +177,7 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
+Tenga en cuenta que el `TypeID` e`00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
 
 ## Mint the Asset
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNjIxNzcwNDddfQ==
+eyJoaXN0b3J5IjpbLTc0MTkwNTQxXX0=
 -->
