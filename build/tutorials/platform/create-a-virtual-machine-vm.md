@@ -559,7 +559,7 @@ func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *P
 
 #### **GetBlock**
 
-This API method allows clients to get a block by its ID.
+Este método de la API permite a los clientes obtener un bloque por su ID.
 
 ```cpp
 // APIBlock is the API representation of a block
@@ -622,11 +622,11 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 
 #### **API**
 
-The resulting API has the following methods:
+El API resultante tiene los siguientes métodos:
 
 **timestamp.getBlock**
 
-Get a block by its ID. If no ID is provided, get the latest block.
+Consigue un bloque por su ID. Si no se proporciona un ID, obtener el último bloque.
 
 **Signature**
 
@@ -721,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzc2Nzg0MzIsMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbNDA0NDI5Nzk0LDE0ODYxMzUwODldfQ==
 -->
