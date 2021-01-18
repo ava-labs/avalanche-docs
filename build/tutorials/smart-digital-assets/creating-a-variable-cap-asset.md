@@ -1,10 +1,10 @@
-# Create a Variable-Cap Asset
+# Crear un Activo de Capitalización Variable
 
-## Introduction
+## Introducción
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+Este tutorial ilustra cómo crear un activo fungible de capital variable. No existen unidades del activo cuando éste se inicializa, pero se pueden acuñar más unidades del activo. En la creación del activo, especificamos qué conjuntos de direcciones pueden acuñar más unidades.
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
 * **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
 * **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
@@ -253,3 +253,6 @@ In this tutorial, we:
 * Used `getBalance` to check address balances.
 * Used `send` to transfer shares.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2ODk1NTI3NTldfQ==
+-->
