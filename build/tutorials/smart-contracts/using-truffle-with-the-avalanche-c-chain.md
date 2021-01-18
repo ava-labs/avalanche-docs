@@ -402,16 +402,16 @@ The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumb
 truffle(development)> i.toNumber()
 ```
 
-Deberías ver el numero que proporcionamos 
+Deberías ver el numero que guardaste.
 
 ```javascript
 1234
 ```
 
-## Summary
+## Resumen
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDY1NTg0NDQsLTg1NTMxMjA2Ml19
+eyJoaXN0b3J5IjpbLTExNzUyNzcwNTYsLTg1NTMxMjA2Ml19
 -->
