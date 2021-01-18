@@ -70,11 +70,11 @@ Entonces comprueba el balance de tu wallet y deberías tener algunos tokens de p
 
 ## Crear Token de Acuñación
 
-Ahora podemos crear nuestro Token acuñable en Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
+Ahora podemos crear nuestro Token acuñable en Remix. Abre Remix en tu navegador o ve a [este link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
 
 ![Image for post](https://miro.medium.com/max/1910/1*FWHtbWNXr6FvjzPHH93wvw.png)
 
-You should view this page. On this page, first, click “SOLIDITY” from “Featured Plugins” and then click the “New File” button. When you click the New File button, you will see a pop-up that requires a file name. You can choose a name or leave the default.
+Deberías ver esta página. En esta página, primero, haz clic en **"SOLIDITY"** de **“Featured Plugins”** y luego haz clic en el botón **"Nuevo Archivo"**. Al hacer clic en el botón **"Nuevo Archivo"**, verás un pop-up que requiere un nombre de archivo. Puedes elegir un nombre o dejar el predeterminado.
 
 Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
 
@@ -157,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyMTg5MzA2NCwtMTU1MDg2OTY0Myw3OD
-g4NTAxMTYsLTQyMDI4MDQ3OF19
+eyJoaXN0b3J5IjpbLTY5MDA5MTQzNiwxNjIxODkzMDY0LC0xNT
+UwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwNDc4XX0=
 -->
