@@ -390,7 +390,7 @@ func (vm *VM) Initialize(
 
 #### **proposeBlock**
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. We’ll see where this is called later.
+Este método añade un dato al mempool y notifica a la capa de consenso de la blockchain que un nuevo bloque está listo para ser construido y votado. Veremos dónde se ejecuta esto más tarde.
 
 ```cpp
 // proposeBlock appends [data] to [p.mempool].
@@ -505,7 +505,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 
 ### Service
 
-AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
+AvalancheGo uses [Librería de Gorilla’s RPC ](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
 
 Using Gorilla, there is a struct for each API service. In the case of this blockchain, there’s only one API service.
 
@@ -721,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0NzMwOTkyMSwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTExMjQ1NDYwNzksMTQ4NjEzNTA4OV19
 -->
