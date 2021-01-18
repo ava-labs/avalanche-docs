@@ -95,9 +95,9 @@ La otra forma en que podría ahorrar dinero es usando una **Reserved Instance**.
 
 ### Añadir Almacenamiento, Etiquetas, Grupo de Seguridad <a id="dbf5"></a>
 
-Click the **Next: Add Storage** button in the bottom right corner of the screen.
+Haga clic en **Next: Add Storage** en la esquina inferior derecha de la pantalla.
 
-You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
+Necesitas añadir espacio al disco de tu instancia. Usamos 100 GB en este ejemplo. La base de datos de Avalanche crecerá continuamente hasta que se implemente el pruning, por lo que es más seguro tener una mayor asignación de disco duro por ahora.
 
 ![Select 100 GB for the disk size.](../../../.gitbook/assets/add-storage.png)
 
@@ -279,7 +279,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMTEzOTQ1MTYsNTU3NjU5MTQsMTYxMD
+eyJoaXN0b3J5IjpbLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMD
 I3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 
 -->
