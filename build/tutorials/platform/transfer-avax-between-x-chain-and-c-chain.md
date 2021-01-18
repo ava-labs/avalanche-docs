@@ -23,15 +23,15 @@ El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://g
 Selecciona **Access Wallet** para ingresar a su Wallet. Para conectar la billetera a una red que no sea la red principal de Avalanche, seleccione **Mainnet** y elija la red a la que se conectará.
 
 
-### PAso 2 - Log In to Your Wallet
+### Paso 2 - Iniciar Sesión en tu Wallet
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
+Puedes acceder a tu cartera utilizando private key, la frase mnemónica, el archivo keystore o Ledger Nano S. Las transferencias de C-Chain a través de Ledger no están soportadas todavía.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+Después de un inicio de sesión exitoso, verá su saldo, su cartera de activos y otra información diversa.
 
-### Step 3 - Go to the Cross Chain Tab
+### Paso 3 - Ve a la pestaña de Cross Chain
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
@@ -260,5 +260,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NDQxNzE0OThdfQ==
+eyJoaXN0b3J5IjpbLTE4NTc2NjY0MDFdfQ==
 -->
