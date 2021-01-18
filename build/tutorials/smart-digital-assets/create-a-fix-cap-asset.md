@@ -13,7 +13,7 @@ Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que
 
 ## Crear el Activo
 
-Nuestro activo existirá en la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), así que para crear nuestro activo ejecutaremos `avm.createFixedCapAsset`, un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Nuestro activo existirá en la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), así que para crear nuestro activo ejecutaremos `avm.createFixedCapAsset`, el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
 La firma de este método es:
 
@@ -222,5 +222,5 @@ En este tutorial:
 * Ejecutamos`send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxNTczNDE2MF19
+eyJoaXN0b3J5IjpbMTA5MDUyMjQyOCwxNjE1NzM0MTYwXX0=
 -->
