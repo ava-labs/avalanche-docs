@@ -58,13 +58,13 @@ Para ver sus coleccionables con más detalle, selecciona **Portfolio** en el men
 
 ![Collectibles list](../../../.gitbook/assets/nft-studio-07-collectibles.png)
 
-For each Generic collectible, a picture will be shown, along with the title, and the number indicating how many copies of the collectible are in your portfolio. Hovering over the collectible with your pointer will show the detailed description:
+Para cada coleccionable genérico, se mostrará una imagen, junto con el título, y el número que indica cuántas copias del coleccionable hay en tu cartera. Colocando el puntero sobre el coleccionable se mostrará la descripción detallada:
 
 ![Collectible details](../../../.gitbook/assets/nft-studio-08-detail.png)
 
-If you select a collectible by clicking on it, you will see which group it belongs to, its quantity, along with the **Send** button.
+Si selecciona un objeto de colección haciendo clic en él, verá a qué grupo pertenece y su cantidad, junto al botón **Send**.
 
-## Send NFTs
+## Enviar NFTs
 
 To send your collectible to someone, either click the **Send** button on the selected collectible in the Portfolio, or navigate to **Send** tab on the left-hand side menu, and click **Add Collectible**:
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTYxMTMyMzc2LDExMDYxNTg3OTgsMTIwOT
+eyJoaXN0b3J5IjpbODE4MzM1MTQ4LDExMDYxNTg3OTgsMTIwOT
 MyMjUyNV19
 -->
