@@ -12,9 +12,9 @@ En este tutorial, crearemos y enviaremos NFTs usando la API de AvalancheGo. En u
 
 Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). en este tutorial usaremos [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados API.
 
-## Create the NFT Family
+## Crear la Familia NFT
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Cada NFT pertenece a una **family**, la cual tiene un nombre y un símbolo. cada familia está compuesta por  **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
 The signature for this method is:
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc2NDc2NzUzXX0=
+eyJoaXN0b3J5IjpbNDEyOTMzNTk1XX0=
 -->
