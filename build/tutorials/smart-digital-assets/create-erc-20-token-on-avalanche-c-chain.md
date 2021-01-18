@@ -86,11 +86,11 @@ Después de guardar el archivo, veremos un montón de archivos que se importan a
 
 ![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
-We have ERC20PresetMinterPauser.sol file in the presets. This file is written by OpenZeppelin according to ERC20 standards with minter functionality. After deploying this file, we will be the owner of the contract and will have the authority and ability to mint token how much we want.
+Tenemos el archivo ERC20PresetMinterPauser.sol en los presets. Este archivo está escrito por OpenZeppelin de acuerdo con los estándares ERC20 con funcionalidad minter. Después de desplegar este archivo, seremos los dueños del contrato y tendremos la autoridad y la capacidad de acuñar los tokens que queramos.
 
 ![Image for post](https://miro.medium.com/max/1398/1*5UcrRfoSwjpD29NyuMrrbA.png)
 
-## Deploy the Contract
+## Desplegar el Contrato
 
 Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or bigger than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written and the version is 0.6.0. So, in the compiler I solidity version as 0.6.6. After setting up the solidity version click to compile button. If you did not change anything in the file or the solidity version is not wrong, you should not get an error.
 
@@ -157,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzMyNTQyNDI0LDE2MjE4OTMwNjQsLTE1NT
+eyJoaXN0b3J5IjpbNjYyODAyNzk3LDE2MjE4OTMwNjQsLTE1NT
 A4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0NzhdfQ==
 -->
