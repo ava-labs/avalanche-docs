@@ -90,7 +90,7 @@ La respuesta contiene el ID del activo, que es tambi√©n el ID de esta transacci√
 }
 ```
 
-## Trade the Asset
+## Intercambie el Activo
 
 ### Check a balance
 
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5NDMxMzIyOV19
+eyJoaXN0b3J5IjpbLTE2ODkwNDUyNzZdfQ==
 -->
