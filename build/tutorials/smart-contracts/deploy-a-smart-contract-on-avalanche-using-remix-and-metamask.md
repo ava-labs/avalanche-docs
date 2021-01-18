@@ -10,7 +10,7 @@ Hoy, desplegaremos y probaremos un smart contract en Avalanche usando Remix y Me
 
 ## Paso 1: Configurando MetaMask
 
-Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Network -&gt; Selecciona Custom RPC
+Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Network -&gt; Seleccionamos Custom RPC
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ4MDU1OTI1XX0=
+eyJoaXN0b3J5IjpbLTczMzEyMjc5NF19
 -->
