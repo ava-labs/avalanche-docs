@@ -160,7 +160,7 @@ La respuesta de lo que ejecutamos anteriormente debería verse así:
 
 `txID` es el ID de la transacción `send` que enviamos a la red.
 
-Luego de un segundo o dos la transacción debería finalizar. Podemos comprobar el  [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Luego de un segundo o dos la transacción debería finalizar. Podemos comprobar el estado de la transacción con [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -173,7 +173,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {
@@ -185,9 +185,9 @@ The response should look like this:
 }
 ```
 
-You might also see that `status` is `Pending` if the network has not yet finalized it yet.
+También podría ver que el `status` es `Pending` si la red aún no lo ha finalizado.
 
-Now let’s check the balance of the `to` address:
+Ahora revisemos el balance de la dirección `to`:
 
 ```cpp
 curl -X POST --data '{
@@ -201,7 +201,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxOTQzMjU0OF19
+eyJoaXN0b3J5IjpbLTE1Mjc1NjI1NTldfQ==
 -->
