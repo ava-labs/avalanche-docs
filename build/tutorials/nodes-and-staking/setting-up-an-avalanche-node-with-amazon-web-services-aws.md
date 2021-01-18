@@ -28,7 +28,7 @@ Para acceder a la instancia EC2, necesitará una llave en su máquina local que 
 
 ![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/Network-and-Security.png)
 
-Select **Create key pair** to launch the key pair creation wizard.
+Seleccione **Create key pair** para iniciar el asistente de creación de key pairs.
 
 ![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
@@ -278,5 +278,5 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4OTc4Mzk1MCw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbMjM5Mjc0MzYsODYxMDk1MzAzXX0=
 -->
