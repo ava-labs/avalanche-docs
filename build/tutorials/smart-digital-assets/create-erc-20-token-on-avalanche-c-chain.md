@@ -138,26 +138,27 @@ La primera es la dirección de mi wallet que crea el token y la segunda es la di
 
 ![Image for post](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
 
-Come back to the remix and after deploying, you should be able to see the contract in “Deployed Contracts” section.
 
-Here, we have a bunch of functions that we can use to interact with our token contract. You can check all these methods from OpenZeppelin documentation to learn how to use them. But we will only use the mint method.
+Vuelve a remix y después del despliegue, deberías poder ver el contrato en la sección **“Deployed Contracts”**.
 
-Click to arrow beside the mint method to read it.
+Aquí tenemos un montón de funciones que podemos usar para interactuar con el contrato de nuestro token. Puedes revisar todos estos métodos en la documentación de OpenZeppelin para aprender a usarlos. Pero sólo usaremos el método mint.
+
+Haz clic en la flecha junto al método mint para leerlo.
 
 ![Image for post](https://miro.medium.com/max/577/1*GrxG6rsklrYN4xN1eF_ckw.png)
 
-Enter your address and an amount in WEI. For example, I will mint 1000 tst token so, I entered “1000000000000000000000”
+Introduce tu dirección y una cantidad en WEI. Por ejemplo, acuñaré 1000 tokens **tst**  así que, introduje "1000000000000000000000"
 
 ![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
 
-## Add Token to Metamask
+## Añadir Token a Metamask
 
 Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to “Add Token” button and select “Custom Token” tab.
 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3OTQ0MTgwMiwxNzE3ODQ4NTAyLDE2Mj
-E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
-NzhdfQ==
+eyJoaXN0b3J5IjpbLTE0MzQ1MTc0NjgsMTcxNzg0ODUwMiwxNj
+IxODkzMDY0LC0xNTUwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgw
+NDc4XX0=
 -->
