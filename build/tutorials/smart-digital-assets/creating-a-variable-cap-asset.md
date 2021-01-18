@@ -249,12 +249,12 @@ La respuesta debería ser:
 
 En este tutorial:
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* Usamos`createVariableCapAsset` para crear un activo de capital variable que represente las acciones.
+* Usamos`mint` to mint more units of an asset.
+* Usamos`getBalance` to check address balances.
+* Usamos`send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2NjE4MzAwMywxMDg3ODc3MDEzLC0xMT
-M1MDA1MTYxXX0=
+eyJoaXN0b3J5IjpbLTE0NDMwNDA5NjgsMTA4Nzg3NzAxMywtMT
+EzNTAwNTE2MV19
 -->
