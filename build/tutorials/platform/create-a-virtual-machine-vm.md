@@ -712,14 +712,14 @@ curl -X POST --data '{
 
 ### Concluimos!
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
+¡Eso es todo! Esta es la implementación completa de un VM que define un servidor de timestamp basado en una blockchain.
 
-In this tutorial, we learned:
+En este tutorial, aprendimos:
 
-* The `snowman.ChainVM` interface, which all VMs that define a linear chain must implement
+* La interfaz`snowman.ChainVM` , which all VMs that define a linear chain must implement
 * The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3MjM0OTIwMiwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbMTYzOTAzNzM2MSwxNDg2MTM1MDg5XX0=
 -->
