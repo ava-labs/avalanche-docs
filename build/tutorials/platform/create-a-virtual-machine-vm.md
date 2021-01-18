@@ -165,9 +165,10 @@ type Block interface {
 
 ## Bibliotecas
 
-We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
-In our example, we use both of the library types below, and we encourage you to use them too.
+Hemos creado algunos tipos que tu implementación VM puede integrar \(la incrustación es como la versión de la sucesión de Go\) para manejar el código de la plantilla.
+
+En nuestro ejemplo, usamos los dos tipos de biblioteca que se muestran a continuación, y te animamos a que los uses también.
 
 ### core.SnowmanVM
 
@@ -717,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3NDk3NDY2M119
+eyJoaXN0b3J5IjpbMTQ4NjEzNTA4OV19
 -->
