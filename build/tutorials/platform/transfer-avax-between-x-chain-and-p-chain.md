@@ -79,7 +79,7 @@ Como puedes haber notado al transferir AVAX usando la Wallet de Avalanche, una t
 * Exportar AVAX desde la X-Chain
 * Importar AVAX a la P-chain
 
-### Step 1 - Export AVAX from the X-Chain
+### Paso 1 - Exportar AVAX desde la X-Chain
 
 
 Para exportar AVAX, ejecuta el método de la X-Chain [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax).
@@ -102,7 +102,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
+donde `to` es la dirección de una cadena P-Chain que el usuario controla y `changeAddr`es la dirección a la que enviar cualquier cambio. Puedes dejar `changeAddr en blanco; si lo dejas en blanco, el cambio será devuelto a una dirección controlada por tu usuario \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) para instrucciones sobre cómo crear una nueva dirección de la P-Chain\).
 
 Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
 
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1Nzk5MjI4MV19
+eyJoaXN0b3J5IjpbNDU5MzM0NDgzXX0=
 -->
