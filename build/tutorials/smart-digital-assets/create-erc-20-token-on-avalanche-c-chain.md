@@ -46,15 +46,16 @@ Dependiendo de la red utilizada, hay tres maneras de hacer llegar los fondos a s
 
 ### **Usando la Wallet de Avalanche**
 
-En la red principal, puedes usar la [Wallet de Avalanche](https://wallet.avax.network/) para transferir fondos de la X-Chain a tu dirección de la C-Chain. El proceso es simple, como se explica en este [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+En la red principal, puedes usar la [Wallet de Avalanche](https://wallet.avax.network/) para transferir fondos de la X-Chain a tu dirección de la C-Chain. El proceso es simple, como se explica en este [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). La wallet puede ser usada en redes locales y de pruebas.
 
-### **Using Test Network Faucet**
+### **Usando el Faucet de la Red de Pruebas**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+Para la agregar fondos en la red de pruebas, también puede utilizar el Faucet de la Red de Pruebas. Ve a [https://faucet.avax-test.network/](https://faucet.avax-test.network/) y pega tu dirección C-AVAX. Todo lo que necesitas hacer es agregar el prefijo “C-” y la Faucet cambiará de AVAX a C-AVAX.
 
-### Funding on local testnet
 
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+### Agregando Fondos en la Red de Pruebas Local
+
+En una red local, puede agregar fondos fácilmente a sus direcciones desplegando su propio faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
 Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our address with prefix “C-”.
 
@@ -155,6 +156,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTcyOTU3MTMxLDc4ODg1MDExNiwtNDIwMj
-gwNDc4XX0=
+eyJoaXN0b3J5IjpbMjEzNDMwNzg1MSw3ODg4NTAxMTYsLTQyMD
+I4MDQ3OF19
 -->
