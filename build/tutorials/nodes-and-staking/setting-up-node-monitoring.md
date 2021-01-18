@@ -342,7 +342,7 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
+**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también están bien indentadas. Asegúrate de usar la IP del host correcta, or `localhost`, depending on how your node is configured.
 
 Save the config file and restart Prometheus:
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1MTQ4MTc5MCwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbLTIyNTA1ODg2OCwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
