@@ -239,7 +239,7 @@ Consigue la última versión con:
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
 ```
 
-cambia `linux-amd64` si tienes una arquitectura diferente \(RaspberryPi es`linux-arm64`, por ejemplo\). Des
+cambia `linux-amd64` si tienes una arquitectura diferente \(RaspberryPi es`linux-arm64`, por ejemplo\). descomprime y mueve el ejecutable:
 
 ```cpp
 tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
@@ -253,7 +253,7 @@ sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
 node_exporter --version
 ```
 
-Then we add node\_exporter as a service. Do:
+Entonces añadimos node\_exporter como un servicio. Ejecuta:
 
 ```cpp
 sudo nano /etc/systemd/system/node_exporter.service
@@ -368,6 +368,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2MDkzNDA3MCwtMTAyMzAwNDAzMCwtOT
-A2NTI4OTEwLDQwOTI4MTU2M119
+eyJoaXN0b3J5IjpbNTM1Njk2ODQzLC0xMDIzMDA0MDMwLC05MD
+Y1Mjg5MTAsNDA5MjgxNTYzXX0=
 -->
