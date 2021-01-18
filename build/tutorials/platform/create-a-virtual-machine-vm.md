@@ -182,9 +182,9 @@ Este modelo implementa los siguientes métodos, que forman parte de la interfaz 
 * `Shutdown`
 * `LastAccepted`
 
-Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implementar ninguno de estos métodos porque ya están implementados por `core.SnowmanVM`. You may, if you want, override these inherited methods.
+Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implementar ninguno de estos métodos porque ya están implementados por `core.SnowmanVM`. Si quieres, puedes anular estos métodos que se han heredado.
 
-#### **Fields**
+#### **Campos**
 
 This type contains several fields that you’ll want to include in your VM implementation. Among them:
 
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMxMjAxMTM5MCwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTIwOTc5MzkyMjUsMTQ4NjEzNTA4OV19
 -->
