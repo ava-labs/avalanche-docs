@@ -1,6 +1,6 @@
-# Use Wrapped AVAX \(WAVAX\) on Avalanche
+# Usar Wrapped AVAX \(WAVAX\) en Avalanche
 
-## What is WAVAX?
+## Que es WAVAX?
 
 [AVAX](../../../#avalanche-avax-token) is the native token on the [Avalanche platform](../../../learn/platform-overview/). Many smart contracts on the [Contract Chain \(C-Chain\)](../../../learn/platform-overview/#contract-chain-c-chain), which is an instance of the Ethereum Virtual Machine, are designed to work with Ethereum's ERC-20 tokens. In order to use AVAX in such contracts, you must use wrapped AVAX \(WAVAX\), which is ERC-20 compatible.
 
@@ -141,3 +141,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4Njg1NTQxNTldfQ==
+-->
