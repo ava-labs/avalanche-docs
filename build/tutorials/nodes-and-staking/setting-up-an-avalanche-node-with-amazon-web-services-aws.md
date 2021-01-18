@@ -199,7 +199,7 @@ ssh ubuntu@PUBLICIP
 
 Estás conectado a la instancia del EC2 de nuevo. Ahora tendremos que configurar nuestro nodo de Avalanche. Para ello, sigue el tutorial [Configurar el nodo de Avalanche con el instalador](set-up-node-with-installer.md) que automatiza el proceso de instalación. Necesitarás el `PUBLICIP` que configuramos antes.
 
-Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
+Tu nodo AvalancheGo debería estar funcionando y en proceso de arranque, lo que puede llevar unas horas. Para comprobar si está hecho, puedes emitir un llamado a la API usando `curl`. Si estás haciendo la solicitud desde la instancia EC2, la solicitud es:
 
 ```text
 curl -X POST --data '{
@@ -281,7 +281,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4ODQ1MDQ2NSwxOTQwMDQ5NDAxLDQ2Nj
-A5MTQ5MSwtMTU2ODA5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUs
-NzI4NjY1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbLTIxMDY3MzUyLDE5NDAwNDk0MDEsNDY2MD
+kxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3
+Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
 -->
