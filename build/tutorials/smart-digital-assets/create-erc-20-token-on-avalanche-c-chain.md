@@ -68,7 +68,7 @@ Después de copiar y pegar la dirección aquí, haz clic en **request 2.0000 C-A
 
 Entonces comprueba el balance de tu wallet y deberías tener algunos tokens de prueba en metamask.
 
-## Crear un Token de Acuñación
+## Crear Token de Acuñación
 
 Now, we can create our mintable token on Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
 
@@ -157,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4MzczOTA3Niw3ODg4NTAxMTYsLTQyMD
-I4MDQ3OF19
+eyJoaXN0b3J5IjpbLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00Mj
+AyODA0NzhdfQ==
 -->
