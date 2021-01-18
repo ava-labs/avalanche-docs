@@ -46,7 +46,7 @@ En la Red Principal puedes usar la [Wallet de Avalanche](https://wallet.avax.net
 
 ### **Usando el Faucet de la Red de Pruebas**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+Para la agregar fondos en la red de pruebas, también puede utilizar el Faucet de la Red de Pruebas. Ve a [https://faucet.avax-test.network/](https://faucet.avax-test.network/) y pega tu dirección C-AVAX. Todo lo que necesitas hacer es agregar el prefijo “C-” y la Faucet will switch from AVAX to C-AVAX.
 
 ### Funding on local testnet
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NTcxNjg1M119
+eyJoaXN0b3J5IjpbLTY4OTQ1MzU0NV19
 -->
