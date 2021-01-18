@@ -85,11 +85,11 @@ Después de pulsar **Send Transaction** la transacción se publicará en la red,
 
 ## Resumen
 
-Now, you should know how to create NFT families, mint NFT groups, and send them to other addresses. Have fun with it! Make sure to share your creations with us on our [social media channels](https://www.avalabs.org/social)!
+Ahora, debes saber cómo crear familias de NFT, acuñar grupos de NFT, y enviarlos a otras direcciones. ¡Diviértete con ello! Asegúrate de compartir tus creaciones con nosotros en nuestros [canales de medios sociales](https://www.avalabs.org/social)!
 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDQ2MDkxOTEsMTEwNjE1ODc5OCwxMj
-A5MzIyNTI1XX0=
+eyJoaXN0b3J5IjpbNzU4NDYyOTY5LDExMDYxNTg3OTgsMTIwOT
+MyMjUyNV19
 -->
