@@ -244,9 +244,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the bech32 encoded address the X-Chain address which you sent the funds to in the previous step.
+donde `to` es la dirección codificada de bech32 la dirección de la X-Chain a la que enviaste los fondos en el paso anterior.
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {   
@@ -258,10 +258,10 @@ The response should look like this:
 }
 ```
 
-## Wrapping Up
+## Concluimos!
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyNzU4MjUwOCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTE3Nzk2NDgzMTYsMTEyODI1MTA5M119
 -->
