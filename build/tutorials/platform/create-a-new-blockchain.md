@@ -82,7 +82,7 @@ La [Documentación de las AVM’s ](../../avalanchego-apis/exchange-chain-x-chai
 }
 ```
 
-Para crear la representación de bytes de este estado génesis, ejecuta [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
+Para crear la representación de bytes de este estado génesis, ejecuta [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Su mensaje debe parecerse al de abajo. Ten en cuenta que esto se ejecuta al punto final de la API estática de la AVM, `/ext/vm/avm`.
 
 ```cpp
 curl -X POST --data '{
@@ -143,7 +143,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-This returns the byte representation of your blockchain’s genesis state:
+Esto devuelve la representación en bytes del estado génesis de su blockchain:
 
 ```cpp
 {
@@ -155,7 +155,7 @@ This returns the byte representation of your blockchain’s genesis state:
 }
 ```
 
-## Create the Blockchain
+## Crea la Blockchain
 
 Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzMTQzMjQxOCwxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbMTA3NDc4NDAwMCwxMTEyMDI3MTg2XX0=
 -->
