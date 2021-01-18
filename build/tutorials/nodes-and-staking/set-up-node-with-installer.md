@@ -2,7 +2,7 @@
 
 Tenemos un script de shell que instala AvalancheGo en tu computadora. Este script establece un nodo de ejecución completo en cuestión de minutos con un mínimo de entradas del usuario.
 
-## Before you start
+## Antes de Comenzar
 
 Este script de instalación asume que:
 
@@ -241,7 +241,7 @@ Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDM0OTk1MDMsMTIxNDA2MjIzOCwtND
+eyJoaXN0b3J5IjpbLTEwNDk2NzMzMDYsMTIxNDA2MjIzOCwtND
 M0ODczMDQ0LC04NTc0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1
 NzY4NTYsLTE1NjYzMDE1ODgsLTM1Njg4NTMyNF19
 -->
