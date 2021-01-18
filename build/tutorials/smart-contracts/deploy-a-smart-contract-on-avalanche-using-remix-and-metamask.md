@@ -38,11 +38,11 @@ Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Networ
 * **Symbol**: `AVAX`
 * **Explorer**: N/A
 
-## Step 2: Funding your C-Chain address
+## Paso 2: Agregando fondos a tu dirección de la C-Chain
 
-### **Using Avalanche Wallet**
+### **Usando la Wallet de Avalanche**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+En la Red Principal puedes usar la [Wallet de Avalanche](https://wallet.avax.network/) para transferir fondos desde la X-Chain a tu dirección de la C-Chain. El proceso es simple, como se explica en [este tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
 
 ### **Using Test Network Faucet**
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MjM0OTY4XX0=
+eyJoaXN0b3J5IjpbLTEwOTgwNjk1OTZdfQ==
 -->
