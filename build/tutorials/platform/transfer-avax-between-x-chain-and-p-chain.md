@@ -246,12 +246,12 @@ Observa que el saldo que vemos es la cantidad exportada de la X-Chain (`.004` AV
 
 Ahora, movamos el AVAX de la P-Chain a la X-Chain.
 
-Al igual que antes, también se trata de una operación de dos transacciones:
+Al igual que antes, esta también es una operación de dos transacciones:
 
-* Export from the P-Chain
-* Import to the X-Chain
+* Exportar desde la P-Chain
+* Importar a la X-Chain
 
-### Step 1 - Export AVAX from the P-Chain
+### Paso 1 - Exportar AVAX desde la P-Cha
 
 To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
 
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0Mjg5NjIwMzZdfQ==
+eyJoaXN0b3J5IjpbLTQwNzEwMTk2MV19
 -->
