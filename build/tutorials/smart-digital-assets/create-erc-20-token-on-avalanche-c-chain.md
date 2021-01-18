@@ -96,9 +96,9 @@ Abre la segunda pestaña que es **“SOLIDITY COMPILER”** y selecciona la vers
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Then, let’s jump to the third tab which is DEPLOY & RUN TRANSACTION. Here before deploying our contract, we should change the environment. Click to the environment and select “Injected Web3”. If a pop-up shows up and asks you to connect the account, click to connect. After, you should see the account address in the “ACCOUNT” textbox.
+Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haga clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto ** “ACCOUNT”**.
 
-The last thing before the deployment process is to set the contract that will be deployed as a token. Above the Deploy Button, there is a drop-down menu to select a contract. Select the contract named “ERC20PresetMinterPauser.sol”.
+Lo último antes del proceso de despliegue es establecer el contrato que se desplegará como un token. Sobre el botón **Deploy**, hay un menú desplegable para seleccionar un contrato. Selecciona el contrato llamado "ERC20PresetMinterPauser.sol".
 
 ![Image for post](https://miro.medium.com/max/383/1*s9LtZu4hSuPcVwVZsweZJA.png)
 
@@ -157,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2OTcyMTY4MjgsMTYyMTg5MzA2NCwtMT
-U1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3OF19
+eyJoaXN0b3J5IjpbMTcxNzg0ODUwMiwxNjIxODkzMDY0LC0xNT
+UwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwNDc4XX0=
 -->
