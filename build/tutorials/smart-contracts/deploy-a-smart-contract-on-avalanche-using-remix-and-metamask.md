@@ -14,7 +14,7 @@ Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Networ
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
-#### **Avalanche Mainnet Settings:**
+#### **Configuración de la Red Principal de Avalanche:**
 
 * **Network Name**: Avalanche Mainnet C-Chain
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczMzEyMjc5NF19
+eyJoaXN0b3J5IjpbLTE2MjM0OTY4XX0=
 -->
