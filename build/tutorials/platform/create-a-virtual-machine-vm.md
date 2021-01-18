@@ -197,11 +197,11 @@ Este modelo contiene varios campos que querrás incluir en tu implementación de
 
 ### core.Block
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
+Este modelo, una estructura, contiene métodos y campos comunes a todas las implementaciones de la interfaz `snowman.Block`.
 
-#### **Methods**
+#### **Métodos**
 
-This type implements the following methods, which are part of the `snowman.Block` interface:
+Este modelo implementa los siguientes métodos, que forman parte de la interfaz `snowman.Block`:
 
 * `ID`
 * `Parent`
@@ -209,9 +209,9 @@ This type implements the following methods, which are part of the `snowman.Block
 * `Reject`
 * `Status`
 
-Your VM implementation will probably override `Accept` and `Reject` so that these methods cause application-specific state changes.
+Su implementación VM probablemente anulará `Accept` y `Reject` para que estos métodos causen cambios de estado específicos de la aplicación.
 
-#### **Fields**
+#### **Campos**
 
 `core.Block` has a field VM, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
 
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTk0OTc3MTMsMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbMTM1MTU2NDg1NiwxNDg2MTM1MDg5XX0=
 -->
