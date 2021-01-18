@@ -43,13 +43,13 @@ Se te presentará una opción para **Source Chain** y **Destination Chain**.  Se
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
 
-Introduce la cantidad que desea transferir desde la X-Chain a la C-Chain.
+Introduce la cantidad que deseas transferir desde la X-Chain a la C-Chain.
 
 ### Paso 5 - Confirma la Transacción
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
 
-Presiona**Confirm**, y luego **Transfer** para iniciar la transferencia.
+Presiona **Confirm**, y luego **Transfer** para iniciar la transferencia.
 
 ### Paso 6 - Listo!
 
@@ -263,5 +263,5 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODMwNDI0NDkzLDExMjgyNTEwOTNdfQ==
+eyJoaXN0b3J5IjpbLTE1MjY4ODEzNTQsMTEyODI1MTA5M119
 -->
