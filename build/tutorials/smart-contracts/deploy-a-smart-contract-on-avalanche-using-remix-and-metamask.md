@@ -76,15 +76,15 @@ Ahora, que el smart contract está compilado, MetaMask está inyectado, y estamo
 
 ![Deploy erc20](../../../.gitbook/assets/deploy-erc20.png)
 
-Confirm the transaction on the MetaMask pop up.
+Confirma la transacción en la ventana emergente de MetaMask.
 
 ![Confirm ERC20](../../../.gitbook/assets/confirm-erc20.png)
 
-Our contract is successfully deployed!
+¡Nuestro contrato se ha desplegado con éxito!
 
 ![Published metadata](../../../.gitbook/assets/published-metadata.png)
 
-Now, we can expand it by selecting it from the “Deployed Contracts” tab and test it out.
+Ahora, podemos ampliarlo seleccionándolo en la pestaña “Deployed Contracts” y probarlo.
 
 ![Interact with contract](../../../.gitbook/assets/interact-with-contract.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODI1ODgxMTE0XX0=
+eyJoaXN0b3J5IjpbLTEzODYzNjM5NTldfQ==
 -->
