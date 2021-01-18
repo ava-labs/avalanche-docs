@@ -74,19 +74,19 @@ A continuación, elije el tipo de instancia. Esto define las especificaciones de
 
 ![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Seleccione la casilla de verificación junto a la instancia c5.large en la tabla.
+Selecciona la casilla de verificación junto a la instancia c5.large en la tabla.
 
 ![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
 
-Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
+Haz clic en **Next: Configure Instance Details** en la esquina inferior derecha.
 
 ![](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
-The instance details can stay as their defaults.
+Los detalles de la instancia pueden permanecer como sus predeterminados.
 
-### Optional: Using Spot Instances or Reserved Instances <a id="c99a"></a>
+### Opcional: Usando Spot Instances o Reserved Instances <a id="c99a"></a>
 
-By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
+Por defecto, se le cobrará por hora por ejecutar su instancia de EC2. Hay dos maneras en las que puede pagar menos por su EC2.
 
 The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
 
@@ -278,6 +278,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMzk0NDU0OTgsMTYxMDI3ODQ1LDcyOD
-Y2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NT
+c5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
