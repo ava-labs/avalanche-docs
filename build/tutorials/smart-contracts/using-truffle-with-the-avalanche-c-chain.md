@@ -120,9 +120,9 @@ contract Storage {
 }
 ```
 
-`Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
+`Storage` es un smart contract de solidity que nos permite escribir un número en la blockchain a través de una función de `store` y luego leer el número de vuelta de la cadena de bloques a través de una función de `retrieve`.
 
-## Add new migration
+## Añade la nueva migración
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
 
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NTMxMjA2Ml19
+eyJoaXN0b3J5IjpbNzE1NTg5ODk0LC04NTUzMTIwNjJdfQ==
 -->
