@@ -10,11 +10,11 @@ En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM 
 
 Tal servidor es útil porque puede utilizarse para probar que un dato existía en el momento en que se creó el bloque. Supongamos que tienes un manuscrito de un libro, y quieres ser capaz de probar en el futuro que el manuscrito existe hoy. Añades un bloque a la blockchain donde la carga útil del bloque es un hash de tu manuscrito. En el futuro, puede probar que el manuscrito existe hoy, mostrando que el bloque tiene el hash de su manuscrito en su carga. \(esto se deriva del hecho de que encontrar la imagen previa de un hash es imposible\).
 
-Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quiere ver el código en un lugar, en lugar de en fragmentos, puede verlo en nuestro [GitHub repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
+Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quiere ver el código en un lugar, en lugar de en fragmentos, puede verlo en nuestro [Repositorio de GitHub.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
 
-## The `snowman.VM` Interface
+## La Interfaz `snowman.VM`
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus protocol. In order to be compatible with Snowman, the VM that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+Para llegar a un consenso en las blockchains lineales \(a diferencia de las blockchains DAG\), Avalanche uses the Snowman consensus protocol. In order to be compatible with Snowman, the VM that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 The interface is big, but don’t worry, we’ll explain each method and see an implementation example. It’s not necessary you understand every nuance.
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg0Nzk1MDY2N119
+eyJoaXN0b3J5IjpbLTEyNjYxODE1ODRdfQ==
 -->
