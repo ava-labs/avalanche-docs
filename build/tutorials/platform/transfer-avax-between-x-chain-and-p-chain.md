@@ -30,17 +30,17 @@ Puedes acceder a tu wallet utilizando el private key, la frase mnemónica, el ar
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+Después de un inicio de sesión exitoso, verás tu saldo, tu portafolio de activos y otra información diversa.
 
-### Step 3 - Go to the Cross Chain Tab
+### Paso 3 - Ve a la pestaña de Cross Chain
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+La función para transferir Tokens entre cadenas está en la pestaña **Cross Chain**.
 
-### Step 4 - Enter Amount to Transfer
+### Paso 4 - Introduce la Cantidad a Transferir
 
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+Se te presentará una opción para **Source Chain** y **Destination Chain**.  Selecciona X-Chain y  P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
@@ -301,5 +301,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjY0OTk4MDBdfQ==
+eyJoaXN0b3J5IjpbLTIwOTkwMjMxNzBdfQ==
 -->
