@@ -314,7 +314,7 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlock the account, you'll see this error:
+Si no desbloqueaste la cuenta verás este error:
 
 ```text
 Error:  *** Deployment Failed ***
@@ -322,9 +322,9 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## Interacting with your contract
+## Interactuando con tu smart contract
 
-Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
+Ahora que el contrato de `Storage` ha sido desplegado. Escribamos un número en la blockchain y luego lo leemos de vuelta. Abre la consola de truffle de nuevo:
 
 ```text
 truffle console --network development
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczNzkxNzMzOCwtODU1MzEyMDYyXX0=
+eyJoaXN0b3J5IjpbLTE0OTQyOTQwNDMsLTg1NTMxMjA2Ml19
 -->
