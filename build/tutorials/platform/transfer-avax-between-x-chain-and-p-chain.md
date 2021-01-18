@@ -54,13 +54,13 @@ Presiona **Confirm**, y luego **Transfer** para iniciar la transferencia.
 
 ### Paso 6 - Listo!
 
-La transferencia entre cadenas es un proceso de dos pasos: primero una transacción para exportar los fondos de la X-Chain y otra para importarlos a la P-Chain. The wallet will do both and show its the progress while doing so.
+La transferencia entre cadenas es un proceso de dos pasos: primero una transacción para exportar los fondos de la X-Chain y otra para importarlos a la P-Chain. La Wallet hará ambas cosas y mostrará su progreso mientras lo hace.
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
-That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to validate or delegate on the Avalanche network.
+¡Eso es todo! ¡Has transferido AVAX de la X-Chain a la P-Chain! Ahora puede usarlos para validar o delegar en la red de Avalanche.
 
-### Transfer from P-Chain to X-Chain
+### Transferir desde P-Chain a la X-Chain
 
 To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
 
@@ -301,5 +301,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5MzI2OTE5NF19
+eyJoaXN0b3J5IjpbNDYxMzMwMDMxXX0=
 -->
