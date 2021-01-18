@@ -263,7 +263,7 @@ Esto debería darnos:
 
 Como en el paso anterior, ahora podemos decodificar la UTXO codificada en CB58 a hexadecimal y luego descomponerla en sus componentes individuales para confirmar que tenemos la UTXO y el tipo correctos.
 
-Primero, convertimos la cadena codificada Base58Check que se se proporciona desde [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following CB58 string:
+Primero, convertimos la cadena codificada Base58Check que se se proporciona desde [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) a hex. La siguiente cadena de CB58:
 
 ```cpp
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDgyNjA3MzQ2XX0=
+eyJoaXN0b3J5IjpbOTk0MjYwNDYzXX0=
 -->
