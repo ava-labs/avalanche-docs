@@ -6,9 +6,9 @@ Una [subnet](../../../learn/platform-overview/#subnets) es un conjunto de valida
 
 Cuando se crea una subnet, se especifica un límite y un conjunto de control keys. \(En realidad las direcciones de las control keys están especificadas, no las control keys en sí.\) Para añadir un validador a esa subnet, _se necesitan las firmas de límite de esas control keys. Llamamos a esto las **control keys** de la subnet y llamamos a la firma de una control keys en una transacción que añade un validador a una subnet una **control signature.** El resultado es que una subnet tiene control sobre sus miembros.
 
-In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
+En este tutorial, crearemos una nueva subnet con 2 control keys y un límite de 2.
 
-### Generate the Control Keys <a id="generate-the-control-keys"></a>
+### Generar las  Control Keys <a id="generate-the-control-keys"></a>
 
 First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
 
@@ -137,5 +137,5 @@ The response confirms that our subnet was created:
 This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODkyNzEzODVdfQ==
+eyJoaXN0b3J5IjpbNzM1Njc3NjUxXX0=
 -->
