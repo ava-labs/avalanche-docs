@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Los Tokens de AVAX existen en la X-Chain, donde se pueden comerciar, en la P-Chain, donde se pueden proporcionar como stake al validar la Red Primaria, y en la C-Chain, donde se pueden utilizar en contratos inteligentes o para pagar el gas. En este tutorial, enviaremos tokens de AVAX entre la X-Chain y la C-Chain.
+Los Tokens de AVAX existen en la X-Chain, donde se pueden tradear, en la P-Chain, donde se pueden proporcionar como stake al validar la Red Primaria, y en la C-Chain, donde se pueden utilizar en contratos inteligentes o para pagar el gas. En este tutorial, enviaremos tokens de AVAX entre la X-Chain y la C-Chain.
 
 ## Requisitos
 
@@ -263,5 +263,5 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzE0MzIyNzcsMTEyODI1MTA5M119
+eyJoaXN0b3J5IjpbLTExODg3Njg3MDksMTEyODI1MTA5M119
 -->
