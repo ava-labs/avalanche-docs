@@ -174,7 +174,7 @@ Esto debería darnos:
 
 ### Verifique el Balance
 
-Los 10 millones de activos están siendo controlador por la dirección `to` que especificamos en `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Los 10 millones de activos están siendo controlador por la dirección `to` que especificamos en `mint`. Para verificar esto, usaremos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -188,7 +188,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+La respuesta confirma que nuestra creación de activos fue exitosa y que la dirección deseada tiene la totalidad de los 10 millones de acciones:
 
 ```cpp
 {
@@ -200,9 +200,9 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### Envía el Activo
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+Enviemos 100 activos a otra  [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
 
 ```cpp
 curl -X POST --data '{
@@ -255,6 +255,6 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzOTc2MjY2NSwxMDg3ODc3MDEzLC0xMT
+eyJoaXN0b3J5IjpbMjAxODEzNTMzNywxMDg3ODc3MDEzLC0xMT
 M1MDA1MTYxXX0=
 -->
