@@ -1,8 +1,8 @@
-# Crear un NFT \(Part 1\)
+# Crear un NFT \(Parte 1\)
 
-## Introduction
+## Introducción
 
-On Avalanche, digital goods are represented as tokens. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
+En Avalanche, los bienes digitales se representan como tokens. Algunos tokens son **fungibles**, lo que significa que un token es intercambiable por cualquier otro token. Las monedas del mundo real son fungibles, por ejemplo; un billete de 5 dólares se trata como si fuera igual a cualquier otro billete de 5 dólares.
 
 Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is unique and not perfectly interchangeable for any other NFT. For example, there could be an NFT that represents ownership of a real-world piece of art; each piece of art, like each NFT, is unique. NFTs represent digital scarcity and may prove to have even greater utility than traditional fungible tokens.
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0MjUxMjQ2M119
+eyJoaXN0b3J5IjpbODQ1NTAxNDkyXX0=
 -->
