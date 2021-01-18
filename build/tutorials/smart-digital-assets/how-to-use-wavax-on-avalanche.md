@@ -87,7 +87,7 @@ Compruebe que la versión del compilador es compatible con el contrato, como se 
 
 ## Conecta con el contrato de WAVAX
 
-Cambiate a la pestaña **Deploy & Run Tranasactions** tab on the left side.
+Cambiate a la pestaña **Deploy & Run Tranasactions** en el lado izquierdo.
 
 ![Connect](../../../.gitbook/assets/wavax2avax-06-deploy.png)
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY0MjcyODIyNiwtMzY5MjMyOTk4LDExNz
-cyNjY5NDgsMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTcz
-MjUwLDY3OTY3NjcwOSwtMTg2ODU1NDE1OV19
+eyJoaXN0b3J5IjpbLTMwMzc0MzA5LC0zNjkyMzI5OTgsMTE3Nz
+I2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMy
+NTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX0=
 -->
