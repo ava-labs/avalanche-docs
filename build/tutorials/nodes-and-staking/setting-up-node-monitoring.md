@@ -158,7 +158,7 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 También puede consultar la interfaz web de Prometheus, disponible en `http://your-node-host-ip:9090/`
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on **.**
 {% endhint %}
 
 ## Instalando Grafana
@@ -214,12 +214,12 @@ sudo systemctl status grafana-server
 el cual debería mostrar grafana como `active`. Grafana debería estar ahora disponible en `http://your-node-host-ip:3000/`
 
 {% hint style="warning" %}
-Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendido**.**
+Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendido **.**
 {% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+Inicia sesión con el nombre de usuario/contraseña admin/admin y establece una nueva contraseña segura. Ahora necesitamos conectar a Grafana con nuestra fuente de datos, Prometheus.
 
-On Grafana’s web interface:
+En la Interfaz web de :
 
 * Go to Configuration on the left-side menu and select Data Sources.
 * Click Add Data Source
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyMjExMDc0NywtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbLTQxMzI4NTAyOCwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
