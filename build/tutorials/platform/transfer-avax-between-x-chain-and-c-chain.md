@@ -260,9 +260,9 @@ La respuesta debería verse así:
 
 ## Concluimos!
 
-¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
+¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyMjA0Nzg3NywxMzQ5OTg4Mzg0LDExMj
-gyNTEwOTNdfQ==
+eyJoaXN0b3J5IjpbMjQ1MjYyMDM5LDE5MjIwNDc4NzcsMTM0OT
+k4ODM4NCwxMTI4MjUxMDkzXX0=
 -->
