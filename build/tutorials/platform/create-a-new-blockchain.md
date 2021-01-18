@@ -190,9 +190,9 @@ La respuesta contiene el ID de la transacción:
 
 ### Comprobando que fué exitoso <a id="verify-success"></a>
 
-After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
+Después de unos segundos, la transacción para crear nuestra blockchain debería haber sido aceptada y la blockchain debería existir \(asumiendo que la solicitud estaba bien formada, etc.\)
 
-To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
+Para comprobar, ejecuta [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). Esto genera una lista de todas las blockchains existentes.
 
 ```cpp
 curl -X POST --data '{
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3NDU1NjE1NywxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbLTQ0ODc2OTY1NywxMTEyMDI3MTg2XX0=
 -->
