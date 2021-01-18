@@ -40,11 +40,11 @@ Selecciona la familia que acabamos de crear. Te aparecerá un formulario para re
 
 Por defecto, se seleccionará un tipo de coleccionable **Generic**. Es un NFT que tiene **Title**, **URL** para la imagen, y **Description**. Introduce los datos necesarios, así como **Quantity**, que determinará cuántas copias del coleccionable se crearán, y por lo tanto, cuántas de ellas podrás enviar. Como antes, introduce los datos con cuidado, no podrás cambiar nada una vez que los coleccionables sean acuñados. Verás una vista previa de los datos donde podrás comprobar cómo se verá tu coleccionable.
 
-If you would like to have something else besides a picture collectible, select **Custom**.
+Si deseas que tenga otra cosa además de una imagen coleccionable, selecciona **Custom**.
 
 ![Custom Collectible](../../../.gitbook/assets/nft-studio-05-custom.png)
 
-A custom collectible can contain an **UTF-8** encoded string, an **URL**, or a **JSON** payload. Size of the data cannot exceed 1024 characters.
+Un coleccionable personalizado puede contener una cadena codificada **UTF-8**, una **URL**, o una carga útil **JSON**. El tamaño de los datos no puede exceder los 1024 caracteres.
 
 After you enter and check the data, press **Mint** to create the collectible. Transaction fees will be deducted from your wallet, and a newly created collectible will be placed in your wallet.
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODg3MzUwMDQ0LDExMDYxNTg3OTgsMTIwOT
-MyMjUyNV19
+eyJoaXN0b3J5IjpbLTE0OTU4OTY5NTAsMTEwNjE1ODc5OCwxMj
+A5MzIyNTI1XX0=
 -->
