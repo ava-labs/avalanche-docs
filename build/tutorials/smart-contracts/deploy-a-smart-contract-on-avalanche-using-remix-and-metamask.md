@@ -52,15 +52,15 @@ Para la agregar fondos en la red de pruebas, también puede utilizar el Faucet d
 
 En una red local, puede agregar fondos fácilmente a sus direcciones desplegando su propio faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-## Step 3: Connect MetaMask and deploy a smart contract using Remix
+## Paso 3: Conectar MetaMask y despliega un smart contract usando Remix
 
-Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
+Abre[Remix](https://remix.ethereum.org/) -&gt; Selecciona Solidity
 
 ![remix file explorer](../../../.gitbook/assets/remix-file-explorer.png)
 
-Load or create the smart contracts that we want to compile and deploy using Remix file explorer.
+Carga o crea los smart contracts que queremos compilar y desplegar usando el explorador de archivos Remix.
 
-For this example, we will deploy an ERC20 contract from [OpenZeppelin](https://openzeppelin.com/contracts).
+Para este ejemplo, desplegaremos un ERC20 contract de [OpenZeppelin](https://openzeppelin.com/contracts).
 
 ![ERC20 Contract](../../../.gitbook/assets/erc20-contract.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0NDEwODc5M119
+eyJoaXN0b3J5IjpbLTU0ODYyMDM0N119
 -->
