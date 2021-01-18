@@ -144,7 +144,7 @@ Ahora tenemos todo lo que necesitamos para transferir los tokens.
 
 ### Transferir desde la X-Chain a la C-Chain
 
-Utilice la dirección correspondiente a la private key que ha exportado y cambie a utilizar el prefijo C- [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax): en al momento de ejecutar
+Utilice la dirección correspondiente a la private key que ha exportado y cambie a utilizar el prefijo C- en  [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax): al momento de ejecutar
 
 ```cpp
 curl -X POST --data '{  
@@ -262,5 +262,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzUzNjkzNzU2LDExMjgyNTEwOTNdfQ==
+eyJoaXN0b3J5IjpbNTAzNzAzMjg4LDExMjgyNTEwOTNdfQ==
 -->
