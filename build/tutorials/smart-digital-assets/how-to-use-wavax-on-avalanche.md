@@ -6,12 +6,12 @@
 
 ## Descripción
 
-To convert AVAX to WAVAX you will deposit AVAX into a smart contract which will lock the AVAX and issue WAVAX to you. To convert WAVAX to AVAX, you will return the WAVAX to the smart contract, which will burn the WAVAX and return your AVAX.
+Para convertir AVAX en WAVAX depositarás AVAX en un smart contract que bloqueará los AVAX y te entregará WAVAX. Para convertir WAVAX en AVAX, devolverás los WAVAX al smart contract, que hará burn de los WAVAX y devolverá tu AVAX.
 
-In this tutorial, you will:
+En este tutorial podrás:
 
-* Connect Metamask to Avalanche
-* Fund your Metamask account  
+* Conectar Metamask a Avalanche
+* Agregar fondos a tu cuenta de Metamask
 * Load the WAVAX contract into Remix
 * Connect to the pre-deployed WAVAX contract
 * Convert AVAX to WAVAX and back
@@ -142,6 +142,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4MTA4MDA2NiwtMTE4MjU3MzI1MCw2Nz
+eyJoaXN0b3J5IjpbLTgzMzAxNzgyMCwtMTE4MjU3MzI1MCw2Nz
 k2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
