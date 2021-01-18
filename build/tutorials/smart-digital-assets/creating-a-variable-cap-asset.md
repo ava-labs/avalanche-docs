@@ -91,7 +91,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La respuesta debe verse así:
 
 ```cpp
 {
@@ -104,13 +104,13 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## Acuñar el Activo
 
-Right now 0 shares exist. Let’s mint 10M shares.
+En este momento existen 0 acciones. Acuñemos 10 millones de acciones.
 
-### Create the Unsigned Transaction
+### Crear la Transacción No Firmada
 
-We’ll use [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+Usaremos [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) para acuñar las acciones.
 
 * `amount` is the number of shares that will be created.
 * `assetID` is the ID of the asset we’re creating more of.
@@ -255,6 +255,5 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTY4NDY0NDcsLTExMzUwMDUxNjFdfQ
-==
+eyJoaXN0b3J5IjpbMTA4Nzg3NzAxMywtMTEzNTAwNTE2MV19
 -->
