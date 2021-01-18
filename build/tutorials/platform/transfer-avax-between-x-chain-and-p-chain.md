@@ -301,8 +301,8 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 
 ¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la P-Chain, usando la Wallet de Avalanche, y ejecutando los llamados API apropiados en un nodo de Avalanche.
 
-Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2Njk2MDU0NF19
+eyJoaXN0b3J5IjpbLTI2MTkyNDg3OF19
 -->
