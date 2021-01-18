@@ -172,17 +172,17 @@ En nuestro ejemplo, usamos los dos tipos de biblioteca que se muestran a continu
 
 ### core.SnowmanVM
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
+Este modelo, una estructura, contiene métodos y campos comunes a todas las implementaciones de la interfaz `snowman.ChainVM` 
 
 #### **Methods**
 
-This type implements the following methods, which are part of the `snowman.ChainVM` interface:
+Este modelo implementa los siguientes métodos, que forman parte de la interfaz `snowman.ChainVM` :
 
 * `SetPreference`
 * `Shutdown`
 * `LastAccepted`
 
-If your VM implementation embeds a `core.SnowmanVM`, you do not need to implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
+Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implementar ninguno de estos métodos porque ya están implementados por `core.SnowmanVM`. You may, if you want, override these inherited methods.
 
 #### **Fields**
 
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbLTMxMjAxMTM5MCwxNDg2MTM1MDg5XX0=
 -->
