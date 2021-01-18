@@ -240,13 +240,13 @@ La respuesta debería verse así:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`.004` AVAX\) less the transaction fee \(`.001` AVAX in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+Observa que el saldo que vemos es la cantidad exportada de la X-Chain (`.004` AVAX\) menos la comisión por la transacción (`.001` AVAX en este ejemplo). Ahora, podemos usar los AVAX de esta dirección de la P-Chain para proporcionar stake para validar la Red Primaria.
 
-## Transferring from the P-Chain to X-Chain programmatically
+## Transfiriendo de la P-Chain a la X-Chain de Forma Programada
 
-Now, let’s move AVAX from the P-Chain back to the X-Chain.
+Ahora, movamos el AVAX de la P-Chain a la X-Chain.
 
-Same as before, this is also a two transaction operation:
+Al igual que antes, también se trata de una operación de dos transacciones:
 
 * Export from the P-Chain
 * Import to the X-Chain
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MDY4ODQ2M119
+eyJoaXN0b3J5IjpbLTE0Mjg5NjIwMzZdfQ==
 -->
