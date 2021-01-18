@@ -11,13 +11,13 @@ Este tutorial mostrará cómo crear una infraestructura para supervisar una inst
 * [Prometheus](https://prometheus.io/) para reunir y almacenar datos
 * [node\_exporter](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
 * AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* [Grafana](https://grafana.com/) para visualizar los datos en un tablero.
 
-Prerequisites:
+Prerequisitos:
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
+* Un nodo activo de AvalancheGo
+* Acceso a la máquina que ejecuta el nodo 
+* Privilegios de administrador en la máquina
 
 ### **Caveat: Security**
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMTE5MDQ4MiwtMTAyMzAwNDAzMCwtOT
-A2NTI4OTEwLDQwOTI4MTU2M119
+eyJoaXN0b3J5IjpbLTIwNjQwNDI3MjYsLTEwMjMwMDQwMzAsLT
+kwNjUyODkxMCw0MDkyODE1NjNdfQ==
 -->
