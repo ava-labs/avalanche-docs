@@ -15,11 +15,11 @@ A continuación, enciende Ledger Live y haz clic en el botón **Settings**
 
 ![Settings button on ledger live](https://miro.medium.com/max/3052/1*lMnVGJneUAqgRvZBIDv_rA.png)
 
-Once in settings then go to the “Experimental features” tab.
+Una vez en la configuración, vaya a la pestaña **Ex**.
 
 ![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
-Scroll down to the “Developer mode” toggle switch, and enable it.
+Desplácese hacia abajo hasta el interruptor  del **Developer mode** y actívelo.
 
 ![Toggle on developer mode](https://miro.medium.com/max/2908/1*qdte7MSvSZdfqfCIUMNp2Q.png)
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDg0MTYzODU2XX0=
+eyJoaXN0b3J5IjpbLTE0Njg0NzQyODZdfQ==
 -->
