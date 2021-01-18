@@ -344,21 +344,21 @@ undefined
 
 ### Escribiendo un número en la blockchain
 
-Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
+Ahora que tienes una instancia del contrato de `Storage`, haz un llamado a su método `store` y dale un número para que lo escriba en la blockchain.
 
 ```javascript
 truffle(development)> instance.store(1234)
 ```
 
-If you see this error:
+Si ves este error:
 
 ```text
 Error: Returned error: authentication needed: password or unlock
 ```
 
-Then run this again: `node web3_script.js`
+Entonces ejecuta esto nuevamente: `node web3_script.js`
 
-You should see something like:
+Deberías ver algo así:
 
 ```javascript
 {
@@ -382,9 +382,9 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### Leyendo un número de la blockhain
 
-To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
+Para leer el número de la , call the `retrieve` method of the `Storage` contract instance.
 
 ```javascript
 truffle(development)> let i = await instance.retrieve()
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzYzMDcwNzY0LC04NTUzMTIwNjJdfQ==
+eyJoaXN0b3J5IjpbLTQwMzc0ODg1NCwtODU1MzEyMDYyXX0=
 -->
