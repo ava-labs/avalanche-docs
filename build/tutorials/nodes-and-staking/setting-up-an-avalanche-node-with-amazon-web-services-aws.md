@@ -245,7 +245,7 @@ La respuesta contiene el ID del nodo:
 
 En el ejemplo anterior el ID del nodo es`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copia la ID de tu nodo para más tarde. El ID de tu nodo no es un secreto, así que puedes pegarlo en un editor de texto.
 
-AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/health-api.md), que puede ser usado para interactuar con el nodo. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/health-api.md), que puede ser usado para interactuar con el nodo. Algunas API están desactivadas de forma predeterminada. Para habilitar tales APIs, modifique la sección ExecStart de`/etc/systemd/system/avalanchego.service` \(creada durante el proceso de instalación\) para incluir marcas que habiliten estos puntos finales. No habilites manualmente ninguna API a menos que tengas una razón para hacerlo.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
@@ -282,7 +282,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MzEzODEzMjAsMTk0MDA0OTQwMSw0Nj
-YwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1
-LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbMTI4MjE5NzkwNSwxOTQwMDQ5NDAxLDQ2Nj
+A5MTQ5MSwtMTU2ODA5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUs
+NzI4NjY1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
