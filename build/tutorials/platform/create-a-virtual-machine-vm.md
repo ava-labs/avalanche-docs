@@ -186,14 +186,14 @@ Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implemen
 
 #### **Campos**
 
-Este método contiene varios campos que querrás incluir en tu implementación de VM. Entre ellos:
+Este modelo contiene varios campos que querrás incluir en tu implementación de VM. Entre ellos:
 
-* `DB`: the blockchain’s database
-* `Ctx`: the blockchain’s runtime context
-* `preferred`: ID of the preferred block, which new blocks will be built on
-* `lastAccepted`: ID of the most recently accepted block
-* `toEngine`: the channel where messages are sent to the consensus protocol powering the blockchain
-* `State`: used to persist data such as blocks \(can be used to put/get any bytes\)
+* `DB`: la base de datos de la blockchain
+* `Ctx`: el contexto de ejecución de la blockchain
+* `preferred`: ID del bloque preferido, sobre el cual se construirán nuevos bloques
+* `lastAccepted`: ID del bloque más recientemente aceptado
+* `toEngine`: el canal donde se envían los mensajes al protocolo de consenso que alimenta la blockchain
+* `State`: usado para persistir datos como bloques \(puede ser usado para poner/obtener cualquier byte\)
 
 ### core.Block
 
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjgyNTg4MjksMTQ4NjEzNTA4OV19
+eyJoaXN0b3J5IjpbLTE4OTk0OTc3MTMsMTQ4NjEzNTA4OV19
 -->
