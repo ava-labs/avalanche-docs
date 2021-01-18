@@ -1,10 +1,10 @@
-# Deploy a Smart Contract on Avalanche Using Remix and MetaMask
+# Desplegar un Smart Contract en Avalanche usando Remix y MetaMask
 
-## Introduction
+## Introducción
 
 ![Primary Network](../../../.gitbook/assets/primary-network.png)
 
-Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](../../avalanchego-apis/contract-chain-c-chain-api.md) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties that could considerably improve the performance of DApps and the user experience.
+La Red Primaria de Avalanche es una Subnet que tiene tres cadenas: P-Chain, X-Chain, and C-Chain. La C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](../../avalanchego-apis/contract-chain-c-chain-api.md) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties that could considerably improve the performance of DApps and the user experience.
 
 Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
 
@@ -94,3 +94,6 @@ The contract ABI and Bytecode are available on the compiler tab.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTY0MTQwODUyNl19
+-->
