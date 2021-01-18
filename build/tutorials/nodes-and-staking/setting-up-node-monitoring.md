@@ -13,7 +13,7 @@ Este tutorial mostrará cómo crear una infraestructura para supervisar una inst
 * AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
 * [Grafana](https://grafana.com/) para visualizar los datos en un tablero.
 
-Prerequisitos:
+Requisitos Previos:
 
 * Un nodo activo de AvalancheGo
 * Acceso a la máquina que ejecuta el nodo 
@@ -367,6 +367,6 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc0MDAxOTAzLC0xMDIzMDA0MDMwLC05MD
-Y1Mjg5MTAsNDA5MjgxNTYzXX0=
+eyJoaXN0b3J5IjpbMjA2NTI0NTc2Niw3NzQwMDE5MDMsLTEwMj
+MwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1NjNdfQ==
 -->
