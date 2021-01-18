@@ -1,4 +1,4 @@
-# Transfer AVAX Between the X-Chain and C-Chain
+# Transfer AVAX Between the X-Chain y la C-Chain
 
 ## Introduction
 
@@ -258,3 +258,6 @@ The response should look like this:
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjEzNTQxMzM1M119
+-->
