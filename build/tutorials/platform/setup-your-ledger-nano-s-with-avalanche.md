@@ -1,8 +1,8 @@
 # Configura tu Ledger Nano S con Avalanche
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
+El estándar de la industria para asegurar con seguridad las criptodivisas son las carteras de hardware, dispositivos especializados que proporcionan un aislamiento total entre su ordenador y sus claves privadas.
 
-If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+Si quieres usar la dirección de Avalanche que creaste antes, necesitas usar el procedimiento [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914)  using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
 
 The Avalanche Ledger wallet app is currently available via [Ledger Live](https://www.ledger.com/ledger-live) in Experimental Mode.
 
@@ -87,5 +87,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjkxMDY4NTddfQ==
+eyJoaXN0b3J5IjpbMTUzNzk4MDIzNl19
 -->
