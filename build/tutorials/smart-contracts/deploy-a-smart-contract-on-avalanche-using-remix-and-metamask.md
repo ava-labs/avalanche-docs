@@ -88,12 +88,12 @@ Ahora, podemos ampliarlo seleccionándolo en la pestaña “Deployed Contracts�
 
 ![Interact with contract](../../../.gitbook/assets/interact-with-contract.png)
 
-The contract ABI and Bytecode are available on the compiler tab.
+El ABI / Bytecode del smart contract están disponibles en la pestaña del compilador.
 
 ![ABI bytecode](../../../.gitbook/assets/abi-bytecode.png)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODYzNjM5NTldfQ==
+eyJoaXN0b3J5IjpbLTI1ODc1Nzg4OV19
 -->
