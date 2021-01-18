@@ -101,7 +101,7 @@ Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acu�
 
 ## Obtener UTXOs para NFT
 
-Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas Acuñación NFT tienen un tipo de ID de `00 00 00 0a` en hexadecimal \(`10` en decimal\) y las salidas de transferencia de NFT tienen un tipo de ID de `00 00 00 0b` en hexadecimal \(`11` en decimal\).
+Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas de Acuñación NFT tienen un tipo de ID de `00 00 00 0a` en hexadecimal \(`10` en decimal\) y las salidas de transferencia de NFT tienen un tipo de ID de `00 00 00 0b` en hexadecimal \(`11` en decimal\).
 
 ### **Método**
 
@@ -148,7 +148,7 @@ La respuesta contiene una lista de UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) retorna 2 UTXOs. Tomaremos la primera y la decodificarem and decode it to confirm that it’s an [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) retorna 2 UTXOs. Tomaremos la primera y la decodificaremos para confirmar que es un [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
 
 ```cpp
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYwOTY3MjI5XX0=
+eyJoaXN0b3J5IjpbMjEzNjk4MzMxMV19
 -->
