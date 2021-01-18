@@ -191,9 +191,10 @@ La respuesta se ve así:
 }
 ```
 
-Note: there is no transaction fee for import transactions to the C Chain.
 
-Once your AVAX has been transferred to the C-Chain, you can use it to deploy and interact with smart contracts.
+Nota: no se cobra ninguna tarifa por las transacciones de importación a la C-Chain.
+
+Una vez que tus AVAX ha sido transferida a la C-Chain, puede usarla para desplegar e interactuar con contratos inteligentes.
 
 ## Transfer from the C-Chain to X-Chain
 
@@ -262,5 +263,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3MDQ5Njc5MywxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbMTY2MzQzNjg5LDExMjgyNTEwOTNdfQ==
 -->
