@@ -112,21 +112,21 @@ Ahora asigna el grupo de seguridad creado anteriormente a la instancia. Elija **
 
 Finalmente, haz clic en **Review and Launch** en la parte inferior derecha. Una página de revisión mostrará los detalles de la instancia que estás a punto de iniciar. Revísalos y si todo se ve bien, haz clic en el botón azul **Launch** en la esquina inferior derecha de la pantalla.
 
-Se te pedirá que selecciones un key pair para esta instancia. Selecciona **Choose an existing key pair** y luego selecciona el key pair `avalanche` que hiciste anteriormente en el tutorial. Marca la casilla reconociendo que tiene acceso al archivo `.pem` o `.ppk` creado anteriormente \(asegúrate de hacerle una copia de seguridad!\) y luego haga clic en **Launch Instances**.
+Se te pedirá que selecciones un key pair para esta instancia. Selecciona **Choose an existing key pair** y luego selecciona el key pair `avalanche` que hiciste anteriormente en el tutorial. Marca la casilla reconociendo que tiene acceso al archivo `.pem` o `.ppk` creado anteriormente \(asegúrate de hacerle una copia de seguridad!\) y luego haz clic en **Launch Instances**.
 
 ![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-You should see a new pop up that confirms the instance is launching!
+¡Deberías ver un nuevo pop-up que confirma que la instancia se está iniciando!
 
 ![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-### Assign an Elastic IP
+### Asignar una IP elástica
 
-By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
+Por defecto, tu instancia no tendrá una IP fija. Démosle una IP fija a través del servicio de IP Elástica de AWS. Vuelve al tablero del EC2. En **Network & Security**, seleccione **Elastic IPs**.
 
 ![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-Select **Allocate Elastic IP address**.
+Selecciona **Allocate Elastic IP address**.
 
 ![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
@@ -280,7 +280,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODM5MjU5NDIwLDQ2NjA5MTQ5MSwtMTU2OD
-A5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4NjY1Nzk5LC03
-MjA2ODQ2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbMTY5NzAyNjI3NCw0NjYwOTE0OTEsLTE1Nj
+gwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwt
+NzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
