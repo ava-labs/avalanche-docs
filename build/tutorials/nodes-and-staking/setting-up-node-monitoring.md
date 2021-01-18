@@ -317,7 +317,7 @@ Ahora, estamos listos para unirlo todo.
 
 ## Configurando los Trabajos de y node\_exporter Prometheus AvalancheGo 
 
-Asegúrate de que tu nodo de AvalancheGo funciona con los [command line arguments](../../references/command-line-interface.md)apropiados. The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
+Asegúrate de que tu nodo de AvalancheGo funciona con los [argumentos de la línea de mando](../../references/command-line-interface.md) apropiados. La métrica API debe estar habilitada  \(la cual está habilitada por defecto\). Si usas el argumento CLI `--http-host` para hacer llamados API from outside of the host machine, make note of the address at which APIs listen.
 
 We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzODY3MjA0MCwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbLTY0NDk3ODg4MSwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
