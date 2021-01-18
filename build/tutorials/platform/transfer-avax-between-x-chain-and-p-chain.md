@@ -81,9 +81,10 @@ Como puedes haber notado al transferir AVAX usando la Wallet de Avalanche, una t
 
 ### Step 1 - Export AVAX from the X-Chain
 
-To export AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
 
-Your call should look like this:
+Para exportar AVAX, ejecuta el método de la X-Chain [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax).
+
+Su solicitud debería verse así:
 
 ```cpp
 curl -X POST --data '{
@@ -303,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjY0NzE0MTNdfQ==
+eyJoaXN0b3J5IjpbLTk1Nzk5MjI4MV19
 -->
