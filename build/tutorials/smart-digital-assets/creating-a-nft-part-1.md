@@ -43,14 +43,14 @@ avm.createNFTAsset({
 
 **Parámetros**
 
-* `name` is a human-readable name for our NFT family. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this NFT family. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting operation.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to any of your addresses.
+* `name` es un nombre legible por los humanos para nuestra familia NFT. No es necesariamente único. Entre 0 y 128 caracteres.
+* `symbol` es un símbolo abreviado para esta familia de NFT. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
+* `minterSets` es una lista donde cada elemento especifica que el `threshold` de las direcciones en `minters` pueden juntos acuñar más del activo firmando una operación de acuñación.
+* Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. El `username` y `password` denotan al usuario que paga la comisión.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a cualquiera de sus direcciones.
 
-### **Response**
+### **Respuesta**
 
 * `assetID` is the ID of the new asset that we’ll have created.
 * `changeAddr` in the result is the address where any change was sent.
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUzODI4MzRdfQ==
+eyJoaXN0b3J5IjpbLTEyNDM4NjYxNDVdfQ==
 -->
