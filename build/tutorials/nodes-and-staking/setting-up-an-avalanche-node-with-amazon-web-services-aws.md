@@ -70,11 +70,11 @@ Seleccione **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** para el sistema operati
 
 ![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.large**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.large instance, select the **Compute-optimized** option from the filter drop-down menu.
+A continuación, elije el tipo de instancia. Esto define las especificaciones de hardware de la instancia en la nube. En este tutorial hemos creado un **c5.large**. Esto debería ser más que poderoso ya que Avalanche es un protocolo de consenso ligero. Para crear una instancia c5.large, selecciona la opción **Compute-optimized**  dentro del filtro del menú desplegable .
 
 ![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Select the checkbox next to the c5.large instance in the table.
+Seleccione la casilla de verificación junto a la instancia c5.large en la tabla.
 
 ![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
 
@@ -278,6 +278,6 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0NzIyNDYxMSwxNjEwMjc4NDUsNzI4Nj
-Y1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbLTEzMzk0NDU0OTgsMTYxMDI3ODQ1LDcyOD
+Y2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
