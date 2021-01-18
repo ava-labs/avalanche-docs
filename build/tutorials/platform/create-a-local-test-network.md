@@ -2,15 +2,15 @@
 
 ## Introducción
 
-En el [Tutorial ](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
+En el [Tutorial de Inicio ](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
 
 Le mostraremos cómo lanzar una red de prueba local de 5 nodos. Mostraremos cómo lanzar la red usando [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) y manualmente.
 
-The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` , and `9658`.
+Los 5 nodos tendrán puertos HTTP \(donde los llamados a la API deben ser enviados\) `9650`, `9652`, `9654`, `9656` , y `9658`.
 
-## Create a Local Test Network
+## Crear una Red Local de Pruebas
 
-The below commands assume you have [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+Los siguientes comandos asumen que tienes [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
 ### Manually
 
@@ -152,5 +152,5 @@ That’s it! Your local version of Avalanche is up and running. It has the defau
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkyMDUyMjkwXX0=
+eyJoaXN0b3J5IjpbNDEwMDI0NzM2XX0=
 -->
