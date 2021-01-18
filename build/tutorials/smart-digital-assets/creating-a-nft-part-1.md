@@ -148,13 +148,13 @@ La respuesta contiene una lista de UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) retorna 2 UTXOs. Tomaremos la primera y la decodificaremos para confirmar que es un [Una Salida de Acuñación NFT.](../../references/avm-transaction-serialization.md#nft-mint-output) Primero, convertimos la cadena codificada Base58Check que se recibe de [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) retorna 2 UTXOs. Tomaremos la primera y la decodificaremos para confirmar que es un [Una Salida de Acuñación NFT.](../../references/avm-transaction-serialization.md#nft-mint-output) Primero, convertimos la cadena codificada Base58Check que se recibe de [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) a hex. La siguiente cadena de [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) :
 
 ```cpp
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
-is expressed in hexadecimal as:
+se expresa en hexadecimal como:
 
 ```cpp
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODk3NDc1ODddfQ==
+eyJoaXN0b3J5IjpbLTExNjIxNzcwNDddfQ==
 -->
