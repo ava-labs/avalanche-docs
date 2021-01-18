@@ -17,11 +17,12 @@ Este tutorial asume que su máquina local tiene un terminal de estilo Unix. Si e
 
 Registrarse en AWS está fuera del alcance de este artículo, pero Amazon tiene instrucciones [aquí](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
-It is _highly_ recommended that you set up Multi-Factor Authentication on your AWS root user account to protect it. Amazon has documentation for this [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
 
-Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
+Es _muy_ recomendable que establezca una autenticación de múltiples factores en su cuenta de usuario root de AWS para protegerla. Amazon tiene documentación para esto [aquí](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
 
-![AWS Management Console.png](../../../.gitbook/assets/AWS-Management-Console.png)
+Una vez que su cuenta esté configurada, debería crear una nueva instancia EC2. Un EC2 es una instancia de máquina virtual en la nube de AWS. Vaya a la [Consola de Gestión de AWS](https://console.aws.amazon.com/) y entre en el panel de control del EC2.
+
+![AWS Management Console.png](../../../.gitbook/activos/AWS-Management-Console.png)
 
 To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
 
@@ -277,5 +278,5 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYzODg0MjY0LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbLTY2MjQxNTIzMCw4NjEwOTUzMDNdfQ==
 -->
