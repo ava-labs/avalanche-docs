@@ -112,9 +112,9 @@ Como ETH está denominado en 10^18 unidades más pequeñas \(wei\), y AVAX está
 
 ![Interaction](../../../.gitbook/assets/wavax2avax-08-interact.png)
 
-### Wrap AVAX to Create WAVAX
+### Hacer Wrap a AVAX para Crear WAVAX
 
-To wrap 10 AVAX, enter `10000000000` \(10^10\) gwei in the **Value** field. To initiate the wrapping, click **Deposit**. You will be presented with a prompt by Remix to confirm the transaction. When you press **Confirm** Metamask will pop up, also asking for confirmation. Press **Confirm** in Metamask, too. You should notice your AVAX balance lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
+Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en  **Value** field. To initiate the wrapping, click **Deposit**. You will be presented with a prompt by Remix to confirm the transaction. When you press **Confirm** Metamask will pop up, also asking for confirmation. Press **Confirm** in Metamask, too. You should notice your AVAX balance lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
 
 ## Add WAVAX to Metamask
 
@@ -142,7 +142,8 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3Nz
-I2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMy
-NTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX0=
+eyJoaXN0b3J5IjpbLTE0ODA1MzU1NzUsNDc3Mzc3OTM0LC0zNj
+kyMzI5OTgsMTE3NzI2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQy
+NDgsLTExODI1NzMyNTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX
+0=
 -->
