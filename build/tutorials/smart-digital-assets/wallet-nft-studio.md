@@ -34,7 +34,7 @@ Después de pulsar **Mint Collectible** se le presentará una lista de todas las
 
 ![Select a family](../../../.gitbook/assets/nft-studio-03-select-family.png)
 
-Select the family we have just created. You will be presented with a form to fill out with the parameters of the new collectible:
+Selecciona la familia que acabamos de crear. Te aparecerá un formulario para rellenar con los parámetros del nuevo coleccionable:
 
 ![Mint a Collectible](../../../.gitbook/assets/nft-studio-04-mint.png)
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Njg4OTA2NDEsMTEwNjE1ODc5OCwxMj
+eyJoaXN0b3J5IjpbLTIwMTk1NzgwNzYsMTEwNjE1ODc5OCwxMj
 A5MzIyNTI1XX0=
 -->
