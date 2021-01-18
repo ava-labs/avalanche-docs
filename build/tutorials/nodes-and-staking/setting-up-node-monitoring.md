@@ -219,13 +219,13 @@ Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendi
 
 Inicia sesión con el nombre de usuario/contraseña admin/admin y establece una nueva contraseña segura. Ahora necesitamos conectar a Grafana con nuestra fuente de datos, Prometheus.
 
-En la Interfaz web de :
+En la Interfaz web de Grafana:
 
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
-* Click `Save & Test`
+* Ir a Configuración en el menú de la izquierda y seleccionar Data Sources.
+* Haga clic en Add Data Source
+* Selecciona Prometheus.
+* En el formulario, introduzca el nombre \(Prometheus lo hará\), y`http://localhost:9090` como la URL.
+* Haga clic en `Save & Test`
 * Check for “Data source is working” green message.
 
 ## Set up node\_exporter
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxMzI4NTAyOCwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbMTcyNjU0OTMyOSwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
