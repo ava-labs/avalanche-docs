@@ -47,10 +47,10 @@ avm.createFixedCapAsset({
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de sus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 
-### Response
+### Respuesta
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID` es la ID del nuevo activo.
+* `changeAddr` en el resultado está la dirección donde se envió el cambio.
 
 Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
 
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTkwMTg4MTldfQ==
+eyJoaXN0b3J5IjpbMTM3MTc5MjIyMl19
 -->
