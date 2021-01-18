@@ -10,11 +10,11 @@ En este tutorial, crearemos una blockchain creando una nueva instancia de la AVM
 
 Necesitarás un nodo de ejecución, un usuario en el nodo y algo de AVAX en la dirección controlada por el usuario. Todo eso está cubierto en el tutorial de como [Ejecutar un Nodo de Avalanche](../../getting-started.md).
 
-A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Puedes averiguar cómo hacerlo en el tutorial [Add a Validator](../nodes-and-staking/add-a-validator.md). It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Puedes averiguar cómo hacerlo en el tutorial [Añadir un Validador](../nodes-and-staking/add-a-validator.md). Se recomienda que lo haga [con llamados API](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), ya que esa es la forma en que interactuará con su nodo en el resto de este tutorial.
 
-## Create the Subnet
+## Crea la Subnet
 
-Every blockchain is validated by a [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzQwOTgzNTA5LDExMTIwMjcxODZdfQ==
+eyJoaXN0b3J5IjpbMTc2NDM0MzEwMywxMTEyMDI3MTg2XX0=
 -->
