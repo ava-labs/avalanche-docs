@@ -214,9 +214,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-where `to` is the bech32 encoded address of an X-Chain address you hold. Make sure that the amount you export exceeds the transaction fee because both the export and import transactions will charge a transaction fee.
+donde `to` es la dirección codificada en bech32 de una dirección X-Chain que tienes. Asegúrate de que la cantidad que exportas excede la comisión de transacción porque tanto las transacciones de exportación como las de importación cobrarán una comisión de transacción.
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {   
@@ -228,7 +228,7 @@ The response should look like this:
 }
 ```
 
-To finish the transfer, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
+Para terminar la transferencia, ejecuta [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
 
 ```cpp
 curl -X POST --data '{  
@@ -263,5 +263,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTEwNzYxMSwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTgyNzU4MjUwOCwxMTI4MjUxMDkzXX0=
 -->
