@@ -15,7 +15,7 @@ A continuación, enciende Ledger Live y haz clic en el botón **Settings**
 
 ![Settings button on ledger live](https://miro.medium.com/max/3052/1*lMnVGJneUAqgRvZBIDv_rA.png)
 
-Una vez en la configuración, vaya a la pestaña **Ex**.
+Una vez en la configuración, vaya a la pestaña **Experimental features**.
 
 ![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
@@ -23,7 +23,7 @@ Desplácese hacia abajo hasta el interruptor  del **Developer mode** y actívelo
 
 ![Toggle on developer mode](https://miro.medium.com/max/2908/1*qdte7MSvSZdfqfCIUMNp2Q.png)
 
-Now with “Developer mode” enabled, you can go to the “Manager” tab and search for “Avalanche”. Confirm that the Avalanche app is v0.2.1, and click the “Install” button.
+Ahora con el **Developer Mode** activado, puedes ir a la pestaña "Gerente" y buscar **Avalanche**. Confirma que la aplicación Avalanche es la v0.2.1, y haz clic en el botón **Install**.
 
 ![Avalanche Ledger app install button](https://miro.medium.com/max/4040/1*rGFrSBEfxRlIkc-k7hS2Vg.png)
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0Njg0NzQyODZdfQ==
+eyJoaXN0b3J5IjpbLTE0Njc2ODY2NDFdfQ==
 -->
