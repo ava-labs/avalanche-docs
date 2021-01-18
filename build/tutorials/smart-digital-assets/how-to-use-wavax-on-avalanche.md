@@ -12,12 +12,12 @@ En este tutorial podrás:
 
 * Conectar Metamask a Avalanche
 * Agregar fondos a tu cuenta de Metamask
-* Load the WAVAX contract into Remix
-* Connect to the pre-deployed WAVAX contract
-* Convert AVAX to WAVAX and back
-* Add WAVAX as a custom token to Metamask
+* Cargar el contrato de  WAVAX en Remix
+* Conectar con el contrato de WAVAX pre-desplegado
+* Convierte AVAX en WAVAX y viceversa
+* Añade WAVAX como un token personalizado a Metamask
 
-## Connect Metamask
+## Conectar Metamask
 
 [Metamask](https://metamask.io/) is a popular web browser extension that makes it easy to interact with Ethereum and compatible blockchains, such as Avalanche's C-Chain. Setting up Metamask and creating an account on it is beyond the scope of this tutorial, but there are a number of resources on the internet to walk you through that.
 
@@ -142,6 +142,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzMzAxNzgyMCwtMTE4MjU3MzI1MCw2Nz
-k2NzY3MDksLTE4Njg1NTQxNTldfQ==
+eyJoaXN0b3J5IjpbLTEwNDE2NDYyNTIsLTExODI1NzMyNTAsNj
+c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
 -->
