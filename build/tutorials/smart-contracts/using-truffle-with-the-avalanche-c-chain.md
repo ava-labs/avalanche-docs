@@ -136,13 +136,13 @@ module.exports = function (deployer) {
 
 ## Compila Smart Contracts con Truffle
 
-Any time you make a change to `Storage.sol` you need to run `truffle compile`.
+Cada vez que hagas un cambio a `Storage.sol` tienes que ejecutar `truffle compile`.
 
 ```text
 truffle compile
 ```
 
-You should see:
+Deberías ver:
 
 ```text
 Compiling your contracts...
@@ -154,7 +154,7 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+## Crea, agrega fondos y debloquea una cuenta en la C-Chain
 
 When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
 
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDkzNzU3OTU2LC04NTUzMTIwNjJdfQ==
+eyJoaXN0b3J5IjpbMTc4NDg0MjU3MCwtODU1MzEyMDYyXX0=
 -->
