@@ -68,11 +68,11 @@ Ve a la pestaña Deploy -&gt; Abre el menú desplegable “ENVIRONMENT” y sele
 
 ![Deploy and run transactions](../../../.gitbook/assets/deploy-and-run-transactions.png)
 
-Una vez que se inyectó la web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab
+Una vez que se inyectó la web3-&gt; Vuelve al compilador, y compila el contrato seleccionado -&gt; Ve a la pestaña Deploy 
 
 ![Solidity compiler](../../../.gitbook/assets/solidity-compiler.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC20. Click “Deploy.”
+Ahora, que el smart contract está compilado, MetaMask está inyectado, y estamos listos para desplegar nuestro ERC20. hacemos click en “Deploy.”
 
 ![Deploy erc20](../../../.gitbook/assets/deploy-erc20.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE4ODU1OTM5XX0=
+eyJoaXN0b3J5IjpbODI1ODgxMTE0XX0=
 -->
