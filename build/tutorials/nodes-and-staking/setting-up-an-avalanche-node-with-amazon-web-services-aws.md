@@ -177,22 +177,21 @@ Haz SSH en la instancia. \(Recuerda reemplazar `PUBLICIP` con el campo de IP pú
 ssh ubuntu@PUBLICIP
 ```
 
-If the permissions are **not** set correctly, you will see the following error.
+Si los permisos **no** están establecidos correctamente, verá el siguiente error.
 
 ![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
 
-You are now logged into the EC2 instance.
+Ahora estás conectado a la instancia EC2.
 
 ![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
-If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
+Si aún no lo haz hecho, actualiza la instancia para asegurarte de que tiene el sistema operativo y las actualizaciones de seguridad más recientes:
 
 ```text
 sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-This also reboots the instance. Wait 5 minutes, then log in again by running this command on your local machine:
-
+Esto también reinicia la instancia. Espera 5 minutos, y luego vuelve a iniciar sesión ejecutando este comando en tu máquina local:
 ```bash
 ssh ubuntu@PUBLICIP
 ```
@@ -281,7 +280,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTQzNzgzMTMsMTk0MDA0OTQwMSw0Nj
-YwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1
-LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbMTM4NTcxOTY5NiwxOTQwMDQ5NDAxLDQ2Nj
+A5MTQ5MSwtMTU2ODA5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUs
+NzI4NjY1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
