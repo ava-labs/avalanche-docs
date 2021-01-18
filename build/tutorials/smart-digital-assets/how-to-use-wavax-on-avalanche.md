@@ -25,9 +25,9 @@ Después de entrar en tu cuenta de Metamask, conéctala a la red de Avalanche. H
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
-Enter the information for the network of your choice:
+Introduzca la información de la red de su elección:
 
-### Avalanche Mainnet Settings:
+### Configuración de la Red Principal de Avalanche:
 
 * **Network Name**: Avalanche Mainnet C-Chain
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
@@ -142,6 +142,6 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nz
-k2NzY3MDksLTE4Njg1NTQxNTldfQ==
+eyJoaXN0b3J5IjpbLTE4Mzk4NjY1MDEsMTY2ODkzNDI0OCwtMT
+E4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
