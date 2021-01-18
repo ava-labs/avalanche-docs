@@ -130,7 +130,7 @@ curl -X POST --data '{
 
 ### Obteniendo AVAX <a id="getting-avax"></a>
 
-Cuando se ejecuta una red con `--network-id=local`, como hemos hecho, hay una dirección X-Chain pre-financiada que puedes importar para conseguir AVAX. La private key de esta dirección es `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
+Cuando se ejecuta una red con `--network-id=local`, como hemos hecho, hay una dirección X-Chain pre-financiada que puedes importar para conseguir AVAX. La private key de esta dirección es `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Después de crear un usuario de keystore en un nodo, puedes importar esta keystore, y los fondos que contiene, con:
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/platform' \
@@ -147,10 +147,10 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 }'
 ```
 
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), and [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+¡Eso es todo! Tu versión local de Avalanche está en marcha. Tiene las blockchains predeterminadas: la [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), y [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). La única subnet que existe es la Red Primaria.
 
-You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
+Puedes añadir más nodos a la red. Sólo recuerda dar valores únicos a `db-dir`, `http-port` , and `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyNTkxMzY4NV19
+eyJoaXN0b3J5IjpbMTE1MjQyMzk1MF19
 -->
