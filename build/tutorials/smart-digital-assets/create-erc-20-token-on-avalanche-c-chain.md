@@ -1,10 +1,10 @@
 ---
-descripcción: 'Provided by Community member: Murat Çeliktepe'
+descripcción: "Proporcionado por un miembro de la Comunidad": Murat Çeliktepe'
 ---
 
-# Create an ERC-20 Token
+# Crear un Token ERC-20
 
-ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
+Los tokens  ERC-20 son el concepto más fundamental y esencial en Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
 
 Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
 
@@ -156,5 +156,5 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTYxNzM2ODUxXX0=
+eyJoaXN0b3J5IjpbLTE5MTU4MTIzMzFdfQ==
 -->
