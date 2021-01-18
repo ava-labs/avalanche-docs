@@ -92,7 +92,7 @@ Tenemos el archivo ERC20PresetMinterPauser.sol en los presets. Este archivo est�
 
 ## Desplegar el Contrato
 
-Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or bigger than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written and the version is 0.6.0. So, in the compiler I solidity version as 0.6.6. After setting up the solidity version click to compile button. If you did not change anything in the file or the solidity version is not wrong, you should not get an error.
+Abre la segunda pestaña que es **“SOLIDITY COMPILER”** y selecciona la versión de solidity que coincide con la versión de solidity escrita en el archivo como **“pragma solidity …..”**. La versión debe ser igual o mayor que la versión del archivo. Por ejemplo, en mi archivo, está escrito **“pragma solidity ^0.6.0”** y la versión es 0.6.0. Así que, escribe en el compilador la versión de solidity como 0.6.6. Después de configurar la versión de solidity, haz clic en el botón de compilar. Si no has cambiado nada en el archivo o la versión de solidity no está mal, no deberías obtener un error.
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
@@ -157,6 +157,6 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYyODAyNzk3LDE2MjE4OTMwNjQsLTE1NT
-A4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0NzhdfQ==
+eyJoaXN0b3J5IjpbLTE2OTcyMTY4MjgsMTYyMTg5MzA2NCwtMT
+U1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3OF19
 -->
