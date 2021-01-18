@@ -32,7 +32,7 @@ Seleccione **Create key pair** para iniciar el asistente de creación de key pai
 
 ![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-Name your key `avalanche`. If your local machine has MacOS or Linux, select the `pem` file format. If it's Windows, use the `ppk` file format. Optionally, you can add tags for the key pair to assist with tracking.
+Nombra tu pair key `avalanche`. Si su máquina local tiene MacOS o Linux, seleccione el formato de archivo `pem`. Si es Windows, use el formato de archivo `ppk`. Opcionalmente, puede agregar etiquetas a el key pair para ayudar con el seguimiento.
 
 ![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
@@ -278,5 +278,5 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjM5Mjc0MzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
 -->
