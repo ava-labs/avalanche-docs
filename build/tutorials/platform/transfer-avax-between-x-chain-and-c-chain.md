@@ -57,7 +57,7 @@ La transferencia entre cadenas es un proceso de dos pasos: primero una transacci
 
 ![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-¡Eso es! ¡Has transferido AVAX de la X-Chain a la C-Chain Ahora puedes usarlas para desplegar smart contracts en la C-Chain.
+¡Eso es todo! ¡Has transferido AVAX de la X-Chain a la C-Chain Ahora puedes usarlas para desplegar smart contracts en la C-Chain.
 
 ### Transferir desde C-Chain a la X-chain
 
@@ -263,5 +263,5 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MjY4ODEzNTQsMTEyODI1MTA5M119
+eyJoaXN0b3J5IjpbMTM0OTk4ODM4NCwxMTI4MjUxMDkzXX0=
 -->
