@@ -24,9 +24,9 @@ El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://g
 
 Selecciona **Access Wallet** para ingresar a tu Wallet. Para conectar la Wallet una red que no sea la red principal de Avalanche, selecciona **Mainnet** y elige la red a la que se conectará.
 
-### Step 2 - Log In to Your Wallet
+### Paso 2 - Iniciar Sesión en tu Wallet
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S.
+Puedes acceder a tu wallet utilizando el private key, la frase mnemónica, el archivo keystore o Ledger Nano S
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
@@ -301,5 +301,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5MTg3ODk5MF19
+eyJoaXN0b3J5IjpbLTEwMjY0OTk4MDBdfQ==
 -->
