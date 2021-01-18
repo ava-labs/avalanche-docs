@@ -96,8 +96,8 @@ Un par de cosas a tener en cuenta: primero, además de crear una familia NFT, en
 
 Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Seguridad:** si sólo una dirección puede acuñar más del activo, y se pierde la clave privada de esa dirección, no se podrán acuñar más unidades. Del mismo modo, si sólo una dirección puede acuñar más del activo, nada impide que el titular de esa dirección acuñe unilateralmente todo lo que quiera.
+* **Flexibilidad:** es agradable poder codificar la lógica como, "Alice puede acuñar unilateralmente más unidades de este activo, o 2, en el cual Dinesh, Ellin y Jamie pueden juntos acuñar más".
 
 ## Get UTXOs for NFT
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDM1MjI3ODNdfQ==
+eyJoaXN0b3J5IjpbLTEwODYzNTQzNDldfQ==
 -->
