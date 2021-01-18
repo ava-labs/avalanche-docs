@@ -14,7 +14,7 @@ Para acceder al **NFT Studio**, entra en tu Wallet de Avalanche, y en el lado iz
 
 ![NFT Studio](../../../.gitbook/assets/nft-studio-01-select.png)
 
-This will open the NFT Studio. There you have two options: **New Family**, for the creation of a new family of NFTs, and **Mint Collectible** for creating new assets in existing families. We need to create our first family of NFTs, so click **New Family**.
+Esto abrirá  **NFT Studio**. Ahí tienes dos opciones: **New Family**, para la creación de una nueva familia de NFTs, y **Mint Collectible** para la creación de nuevos activos en las familias existentes. Necesitamos crear nuestra primera familia de NFTs, así que haz clic en **New Family**.
 
 ### Create NFT Family
 
@@ -89,5 +89,5 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjgwNTgyMTc5XX0=
+eyJoaXN0b3J5IjpbLTMwMDc0OTQ1MF19
 -->
