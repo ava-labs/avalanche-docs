@@ -14,9 +14,9 @@ Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que
 
 ## Crear la Familia NFT
 
-Cada NFT pertenece a una **familia**, la cual tiene un nombre y un símbolo. cada familia está compuesta por  **grupos**. El número de grupos de la familia es especificado cuando esta se crea. Nuestro NFT existirá en la  X-Chain, así que para crear la familia de nuestro NFT ejecutaremos [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Cada NFT pertenece a una **familia**, la cual tiene un nombre y un símbolo. cada familia está compuesta por  **grupos**. El número de grupos de la familia es especificado cuando esta se crea. Nuestro NFT existirá en la  X-Chain, así que para crear la familia de nuestro NFT ejecutaremos [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
-The signature for this method is:
+La firma de este método es:
 
 ```cpp
 avm.createNFTAsset({
@@ -37,11 +37,11 @@ avm.createNFTAsset({
 }
 ```
 
-### **Method**
+### **Método**
 
 * [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)
 
-**Parameters**
+**Parámetros**
 
 * `name` is a human-readable name for our NFT family. Not necessarily unique. Between 0 and 128 characters.
 * `symbol` is a shorthand symbol for this NFT family. Between 0 and 4 characters. Not necessarily unique. May be omitted.
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxNTcxMzU0NF19
+eyJoaXN0b3J5IjpbNjUzODI4MzRdfQ==
 -->
