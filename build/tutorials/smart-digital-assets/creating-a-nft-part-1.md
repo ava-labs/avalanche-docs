@@ -101,7 +101,7 @@ Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acu�
 
 ## Obtener UTXOs para NFT
 
-Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
+Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas Acuñación NFT tienen un tipo de ID de `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
 
 ### **Method**
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5Mjk3Nzc2Nl19
+eyJoaXN0b3J5IjpbLTE4MDUyMDExNjNdfQ==
 -->
