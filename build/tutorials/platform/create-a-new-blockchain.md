@@ -14,21 +14,21 @@ A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](htt
 
 ## Crea la Subnet
 
-Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Antes de que puedas crear una blockchain, necesitarás una subnet para validarla. También puedes usar una subnet que ya exista si tienes un número suficiente de sus control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
-### Add Validators to the Subnet
+### Añadir Validadores a la Subnet
 
-The subnet needs validators in it to, well, validate blockchains.
+La subnet necesita validadores en ella para, bueno, validar las blockchains.
 
-Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
+Asegúrate de que la subnet que validará tu blockchain tenga al menos `snow-sample-size` validadores en ella. \(Recuerde que `snow-sample-size` es uno de los [argumentos de la línea de mando](../../references/command-line-interface.md) cuando se inicia un nodo. Su valor por defecto es 20.\)
 
 {% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
-### Create the Genesis Data <a id="create-the-genesis-data"></a>
+### Crear los Datos Génesis <a id="create-the-genesis-data"></a>
 
-Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
+Cada blockchain tiene algún estado génesis cuando se crea. Cada máquina virtual tiene un método API estático llamado `buildGenesis` que toma una representación JSON del estado de génesis de una blockchain y devuelve la representación en bytes de ese estado. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
 
 The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2NDM0MzEwMywxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbLTIwODg5MzUxNjgsMTExMjAyNzE4Nl19
 -->
