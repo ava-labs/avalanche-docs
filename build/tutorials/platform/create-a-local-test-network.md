@@ -4,7 +4,7 @@
 
 En el [Tutorial de Inicio ](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
 
-Le mostraremos cómo lanzar una red de prueba local de 5 nodos. Mostraremos cómo lanzar la red usando [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) y manualmente.
+Te mostraremos cómo lanzar una red de prueba local de 5 nodos. Mostraremos cómo lanzar la red usando [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) y manualmente.
 
 Los 5 nodos tendrán puertos HTTP \(donde los llamados a la API deben ser enviados\) `9650`, `9652`, `9654`, `9656` , y `9658`.
 
@@ -149,8 +149,8 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 
 ¡Eso es todo! Tu versión local de Avalanche está en marcha. Tiene las blockchains predeterminadas: la [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), y [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). La única subnet que existe es la Red Primaria.
 
-Puedes añadir más nodos a la red. Sólo recuerda dar valores únicos a `db-dir`, `http-port` , and `staking-port`.
+Puedes añadir más nodos a la red. Sólo recuerda dar valores únicos a `db-dir`, `http-port` , y `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1MjQyMzk1MF19
+eyJoaXN0b3J5IjpbLTIwNjg3Mjc2NDRdfQ==
 -->
