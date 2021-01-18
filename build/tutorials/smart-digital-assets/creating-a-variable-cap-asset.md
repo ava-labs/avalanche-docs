@@ -43,20 +43,21 @@ avm.createVariableCapAsset({
 
 ### Parametros
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name` es un nombre legible por los humanos para el activo. No necesariamente único.
+* `symbol` es un símbolo abreviado para el activo. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
+* `denomination` determina la forma en que los saldos de este activo son mostrados por las interfaces de usuario. Si la denominación es 0, 100 unidades de este activo se muestran como 100. Si la denominación es 1, 100 unidades de este activo se muestran como 10.0. Si la denominación es 2, 100 unidades de este activo se muestran como .100, etc.
+* Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. `username` y `password`  denotan al usuario que paga la comisión.
+* Cada elemento en `initialHolders` especifica que `address` contiene `amount` unidades del activo en la génesis.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 
-### Response
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+### Respuesta
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+* `assetID` es la ID del nuevo activo.
+* `changeAddr` en el resultado está la dirección donde se envió el cambio.
+
+Más adelante en este ejemplo, acuñaremos más acciones, así que asegúrate de sustituir al menos 2 direcciones del segundo minter set por las direcciones que controle tu usuario.
 
 ```cpp
 curl -X POST --data '{
@@ -254,5 +255,6 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyNzkxMTc4MiwtMTEzNTAwNTE2MV19
+eyJoaXN0b3J5IjpbLTEyOTY4NDY0NDcsLTExMzUwMDUxNjFdfQ
+==
 -->
