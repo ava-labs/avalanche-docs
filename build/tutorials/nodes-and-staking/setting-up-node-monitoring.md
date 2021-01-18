@@ -191,7 +191,7 @@ sudo apt-get update
 sudo apt-get install grafana
 ```
 
-To configure it as a service:
+Para configurarlo como un servicio:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -205,16 +205,16 @@ sudo systemctl start grafana-server
 sudo systemctl enable grafana-server.service
 ```
 
-To make sure it’s running properly:
+Para asegurarnos de que se esté ejecutando apropiadamente:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+el cual debería mostrar grafana como `active`. Grafana debería estar ahora disponible en `http://your-node-host-ip:3000/`
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
+Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendido**.**
 {% endhint %}
 
 Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg2MzQzNjQwOSwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbLTUyMjExMDc0NywtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
