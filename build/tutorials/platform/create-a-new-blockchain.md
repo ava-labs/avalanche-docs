@@ -14,15 +14,15 @@ A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](htt
 
 ## Crea la Subnet
 
-Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Antes de que puedas crear una blockchain, necesitarás una subnet para validarla. También puedes usar una subnet que ya exista si tienes un número suficiente de sus control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
-### Add Validators to the Subnet
+### Añadir Validadores a la Subnet
 
-The subnet needs validators in it to, well, validate blockchains.
+La subnet necesita validadores en ella para, bueno, validar las blockchains.
 
-Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
+Asegúrate de que la subnet que validará tu blockchain tenga al menos `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
 
 {% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2NDM0MzEwMywxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbLTE1OTkyMzk3MzcsMTExMjAyNzE4Nl19
 -->
