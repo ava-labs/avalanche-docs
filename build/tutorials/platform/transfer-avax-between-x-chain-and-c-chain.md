@@ -161,7 +161,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import the AVAX to an address that you own in MetaMask or another third-party service.
+Dado que el usuario de tu keystore posee la correspondiente private key en la C-Chain, ahora puedes importar los AVAX a la dirección que elijas. No es necesario importarla a la misma dirección a la que fue exportada, por lo que puede importar la AVAX a una dirección que posea en MetaMask u otro servicio de terceros.
 
 ```cpp
 curl -X POST --data '{
@@ -177,9 +177,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-where `to` is a hex-encoded EVM address of your choice.
+donde `to` es una dirección EVM con código hexadecimal de su elección.
 
-The response looks like this:
+La respuesta se ve así:
 
 ```cpp
 {   
@@ -262,5 +262,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTAzNzAzMjg4LDExMjgyNTEwOTNdfQ==
+eyJoaXN0b3J5IjpbMTg3MDQ5Njc5MywxMTI4MjUxMDkzXX0=
 -->
