@@ -28,9 +28,9 @@ Asegúrate de que la subnet que validará tu blockchain tenga al menos `snow-sam
 
 ### Crear los Datos Génesis <a id="create-the-genesis-data"></a>
 
-Cada blockchain tiene algún estado génesis cuando se crea. Cada máquina virtual tiene un método API estático llamado `buildGenesis` que toma una representación JSON del estado de génesis de una blockchain y devuelve la representación en bytes de ese estado. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
+Cada blockchain tiene algún estado génesis cuando se crea. Cada máquina virtual tiene un método API estático llamado `buildGenesis` que toma una representación JSON del estado de génesis de una blockchain y devuelve la representación en bytes de ese estado. \(Esto no es cierto para algunas máquinas virtuales, como la Plataforma VM, porque no permitimos la creación de nuevas instancias.\)
 
-The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
+La [Documentación de las AVM’s ](../../avalanchego-apis/exchange-chain-x-chain-api.md) especifica que el argumento para [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
 
 ```cpp
 {
@@ -82,7 +82,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
+Para crear la representación de bytes de este estado génesis, ejecuta [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
 
 ```cpp
 curl -X POST --data '{
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODg5MzUxNjgsMTExMjAyNzE4Nl19
+eyJoaXN0b3J5IjpbMTQzMTQzMjQxOCwxMTEyMDI3MTg2XX0=
 -->
