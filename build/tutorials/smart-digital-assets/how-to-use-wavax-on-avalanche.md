@@ -93,18 +93,18 @@ Cambiate a la pestaña **Deploy & Run Tranasactions** en el lado izquierdo.
 
 Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Environment**, seleccione `Injected Web3`.  Metamask te pedirá que selecciones la cuenta. Elige la que está conectada a Avalanche y permite que se conecte. Esto rellenará el campo **Cuenta**. Asegúrate de que el campo **Contract** está configurado para el contrato `WAVAX`. Ahora podemos conectarnos al contrato, que ya ha sido publicado en Avalanche. En el campo de edición **At Address**, copia:
 
-* For Mainnet: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
-* For Fuji Testnet: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
+* Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
+* Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
-After pasting the address, press the **At Address** button.
+Después de pegar la dirección, pulse el botón **At Address*.
 
-Remix should find the deployed contract:
+Remix debería encontrar el contrato desplegado:
 
 ![Connect](../../../.gitbook/assets/wavax2avax-07-avalanche-contract.png)
 
-We are now ready to interact with the contract. Open the contract interface by pressing the highlighted arrow.
+Ahora estamos listos para interactuar con el contrato. Abra la interfaz del contrato pulsando la flecha resaltada.
 
-## Issue Commands to the WAVAX Contract
+## Emitir Comandos para el Contrato de WAVAX
 
 Let's wrap some AVAX!
 
@@ -142,7 +142,7 @@ Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represent
 You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzNjYxMzYxNiwtMzY5MjMyOTk4LDExNz
-cyNjY5NDgsMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTcz
-MjUwLDY3OTY3NjcwOSwtMTg2ODU1NDE1OV19
+eyJoaXN0b3J5IjpbNTU3MjY3NzkwLC0zNjkyMzI5OTgsMTE3Nz
+I2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMy
+NTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX0=
 -->
