@@ -6,7 +6,7 @@ Las Tokens de AVAX existen en la X-Chain, donde se pueden comerciar, en la P-Cha
 
 ## Requisitos
 
-Has completado [Run an Avalanche Node](../../getting-started.md) y eres familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
+Que hayas completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
@@ -259,5 +259,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NzE2MDQwNF19
+eyJoaXN0b3J5IjpbOTc4NTE3ODA5XX0=
 -->
