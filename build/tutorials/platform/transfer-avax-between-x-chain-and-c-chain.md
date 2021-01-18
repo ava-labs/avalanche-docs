@@ -83,9 +83,10 @@ Antes de que podamos hacer la transferencia, tenemos que establecer la direcció
 
 La X-Chain usa direcciones [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) y la C-Chain utiliza direcciones hexadecimales de Ethereum Virtual Machines \(EVM\). No hay forma de convertir la dirección de un formato a otro, ya que ambos se derivan de una private key usando una función criptográfica unidireccional.
 
-In order to get around this, you can export a private key from the X-Chain and then import it to the C-Chain. This way, you can use the X-Chain address and change the X- prefix to a C- prefix in order to get the correct Bech32 address to use for the C-Chain.
+I
+Para evitar esto, puedes exportar una private key de la X-Chain y luego importarla a la C-Chain. De esta manera, puedes usar la dirección de la X-Chain y cambiar el prefijo X- por un prefijo C- para obtener la dirección Bech32 correcta para la C-Chain
 
-First, export a private key from the X-Chain:
+Primero, exporta una clave privada de la X-Chain:
 
 ```cpp
 curl -X POST --data '{
@@ -100,7 +101,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Response:
+Respuesta:
 
 ```cpp
 {
@@ -112,7 +113,7 @@ Response:
 }
 ```
 
-Now, import the same private key to the C-Chain:
+Ahora, importa la misma private key en la C-Chain:
 
 ```cpp
 curl -X POST --data '{  
@@ -127,7 +128,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-The response contains a hex-encoded EVM address:
+La respuesta contiene una dirección EVM codificada en hexadecimal:
 
 ```cpp
 {
@@ -139,7 +140,7 @@ The response contains a hex-encoded EVM address:
 }
 ```
 
-Now we have everything we need to transfer the tokens.
+Ahora tenemos todo lo que necesitamos para transferir los Tokens.
 
 ### Transfer from the X-Chain to C-Chain
 
@@ -261,5 +262,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAzMzI0MjUzOCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbMTEwNzkxNDI5MywxMTI4MjUxMDkzXX0=
 -->
