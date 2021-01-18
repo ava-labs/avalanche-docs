@@ -258,9 +258,9 @@ Puedes interactuar con esta nueva instancia de la AVM casi de la misma manera qu
 Hay dos pequeñas diferencias:
 
 * El punto final de la API de su blockchain es`127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
-* Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
+* Las direcciones están predefinidas con`zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` en lugar de `X-`.
 
-In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
+En los datos génesis especificamos que la dirección `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
 
 ```cpp
 curl -X POST --data '{
@@ -284,5 +284,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNjkwNDE2OSwxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbNTA1MDk1MzQ3LDExMTIwMjcxODZdfQ==
 -->
