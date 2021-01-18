@@ -683,7 +683,7 @@ Propone la creación de un nuevo bloque.
 timestamp.proposeBlock({data: string}) -> {success: bool}
 ```
 
-* `data` is the base 58 \(with checksum\) representation of the proposed block’s 32 byte payload.
+* `data` es la base 58 \(con suma de comprobación\)  que representa la carga útil de 32 bytes del bloque propuesto.
 
 **Example Call**
 
@@ -710,7 +710,7 @@ curl -X POST --data '{
 }
 ```
 
-### Wrapping Up
+### Concluimos!
 
 That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
 
@@ -721,5 +721,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1MDAzOTIzNCwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTg3MjM0OTIwMiwxNDg2MTM1MDg5XX0=
 -->
