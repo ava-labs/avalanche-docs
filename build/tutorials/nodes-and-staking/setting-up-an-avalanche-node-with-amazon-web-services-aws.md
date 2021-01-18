@@ -268,23 +268,23 @@ scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 
 Ahora tu staking key y tu certificado están en el directorio `~/aws_avalanche_backup` . **El contenido de este directorio es secreto.** Deberías mantener este directorio en un lugar de almacenamiento no conectado a Internet \(como un disco duro externo\).
 
-### Upgrading Your Node <a id="9ac7"></a>
+### Actualizando tu Nodo <a id="9ac7"></a>
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
+AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versión. La mayoría de las actualizaciones se recomiendan pero no se requieren. Se avisará con antelación para las actualizaciones que no sean compatibles con las versiones anteriores. Para actualizar tu nodo a la última versión, introduce SSH en tu instancia AWS como antes y ejecuta el script de instalación de nuevo.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estado del servicio de AvalancheGo, ejecuta `sudo systemctl status avalanchego.`
 
-## Wrap Up
+## concluir
 
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0NjA0MDc3MiwzMjcwMTA1NjUsMTk0MD
-A0OTQwMSw0NjYwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQs
-MTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NT
-MwM119
+eyJoaXN0b3J5IjpbLTExODc4NTc0ODgsMzI3MDEwNTY1LDE5ND
+AwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0
+LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOT
+UzMDNdfQ==
 -->
