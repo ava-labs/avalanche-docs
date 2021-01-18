@@ -31,7 +31,7 @@ La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https:/
 
 ## Configurando Prometheus
 
-First, we need to add a system user account and create directories \(necesitaras acceso de superusuario \):
+Primero, tenemos que añadir una cuenta de usuario del sistema y crear directorios \(necesitaras acceso de superusuario \):
 
 ```cpp
 sudo useradd -M -r -s /bin/false prometheus
@@ -41,7 +41,7 @@ sudo useradd -M -r -s /bin/false prometheus
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
+A continuación, obtén el enlace a la última versión de Prometeo de la [página de descargas](https://prometheus.io/download/) \(asegúrese de seleccionar la arquitectura de procesador apropiada\), y usa wget para descargarlo y tar para desempaquetar el archivo:
 
 ```cpp
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
@@ -59,7 +59,7 @@ tar xvf prometheus-2.21.0.linux-amd64.tar.gz
 cd prometheus-2.21.0.linux-amd64
 ```
 
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
+A continuación, tenemos que mover los binarios, establecer la propiedad y mover los archivos de configuración a las ubicaciones apropiadas:
 
 ```cpp
 sudo cp {prometheus,promtool} /usr/local/bin/
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0NjIyNDU2MSwtMTAyMzAwNDAzMCwtOT
+eyJoaXN0b3J5IjpbMTM2MTY0NDA5OSwtMTAyMzAwNDAzMCwtOT
 A2NTI4OTEwLDQwOTI4MTU2M119
 -->
