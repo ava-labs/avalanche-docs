@@ -1,6 +1,6 @@
 # Create a Fixed-Cap Asset
 
-## Introduction
+## Introducción
 
 This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
 
@@ -220,3 +220,6 @@ In this tutorial, we:
 * Called `getBalance` to check address balances
 * Called `send` to transfer a quantity of our asset
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjg4NDcyMDJdfQ==
+-->
