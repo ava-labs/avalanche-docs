@@ -6,7 +6,7 @@ _El código de abajo está ligeramente desactualizado. Algunos métodos, interfa
 
 Una de las características principales de Avalanche es la creación de nuevas blockchains personalizadas, que están definidas por [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
-En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM es un servidor de timestamp. Cada bloque de la blockchain contiene el timestamp de cuando fue creada, junto con un dato de 32 bytes \(payload\). Each block’s timestamp is after its parent’s timestamp.
+En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM es un servidor de timestamp. Cada bloque de la blockchain contiene el timestamp de cuando fue creada, junto con un dato de 32 bytes \(carga útil\). El timestamp de cada bloque es posterior a la de su predecesor.
 
 Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwMTc2MjA4NV19
+eyJoaXN0b3J5IjpbLTEwNDkwNzk2MjddfQ==
 -->
