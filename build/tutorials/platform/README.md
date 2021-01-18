@@ -6,10 +6,10 @@
 | [**Crear una Red Local de Pruebas**](create-a-local-test-network.md) | Crea una red local de pruebas de Avalanche
 | [**Create a Subnet**](create-a-subnet.md) | Crea una nueva [subnet](../../../learn/platform-overview/#subnets). |
 | [**Crea una Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md) | Crear una muy simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
-| [**Configura tu Ledger Nano S con Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
-| [**Transferir AVAX entre la X-Chain y la P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
-| [**Transferir AVAX entre la X-Chain y la C-Chain**](https://github.com/ava-labs/avalanche-docs/tree/e5dbc74ad73488ae633c3ce49704b98e32e7d5c4/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
+| [**Configura tu Ledger Nano S con Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Configura tu Ledger con Ledger Live y la Wallet de Avalancha |
+| [**Transferir AVAX entre la X-Chain y la P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Envía AVAX entre la X-Chain y la P-Chain |
+| [**Transferir AVAX entre la X-Chain y la C-Chain**](https://github.com/ava-labs/avalanche-docs/tree/e5dbc74ad73488ae633c3ce49704b98e32e7d5c4/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md) | Envía AVAX entre la X-Chain y la P-Chain |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQ1NzE5Mjk2XX0=
+eyJoaXN0b3J5IjpbMTkyMDY0MDE5M119
 -->
