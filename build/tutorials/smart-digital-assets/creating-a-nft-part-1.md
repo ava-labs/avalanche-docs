@@ -300,21 +300,21 @@ Ten en cuenta que el `TypeID` is `00 00 00 0b` el cual es el tipo correcto de id
 
 Ahora puedes enviar el NFT a quién quieras. Para hacer eso usa el Método API [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft) de AvalancheGo.
 
-**Method**
+**Método**
 
 * [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft)
 
-**Parameters**
+**Parámetros**
 
-* `assetID` is the ID of the NFT we’re sending.
-* `to` is the address that will receive the newly minted NFT.
-* `groupID` is the NFT group from which to send the NFT.
-* `username` is the user that controls the NFT.
-* `password` is the valid password for `username`
+* `assetID` es la ID del NFT que enviaremos.
+* `to` es la dirección que va a recibir el NFT que creamos.
+* `groupID` es el grupo NFT desde el cual se envía el NFT.
+* `username` es el usuario que controla el NFT.
+* `password` es la contraseña valida para `username`
 
-**Response**
+**Espuesta**
 
-* `txID` is the transaction ID.
+* `txID` Es el I.
 * `changeAddr` in the result is the address where any change was sent.
 
 ```cpp
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwOTI0NjY1NF19
+eyJoaXN0b3J5IjpbLTU5MDU2OTgxNl19
 -->
