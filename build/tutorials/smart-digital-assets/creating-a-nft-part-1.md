@@ -92,7 +92,7 @@ La respuesta debería verse así:
 }
 ```
 
-Un par de cosas a tener en cuenta: primero, además de crear una familia NFT, AvalancheGo’s [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset) also creates a group for each of the `minterSets`, which are passed in. For example, if `minterSets` has 3 elements, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
+Un par de cosas a tener en cuenta: primero, además de crear una familia NFT, en AvalancheGo [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset) también crea un grupo para cada uno de los `minterSets` . Por ejemplo, si `minterSets` tiene 3 elementos, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
 
 You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
 
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMjMzMzQ3MV19
+eyJoaXN0b3J5IjpbMzUyNzQwNjIyXX0=
 -->
