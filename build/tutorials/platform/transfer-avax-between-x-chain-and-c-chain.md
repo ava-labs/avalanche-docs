@@ -35,9 +35,9 @@ Después de un inicio de sesión exitoso, verá su saldo, su cartera de activos 
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+La función para transferir Tokens entre cadenas está en la pestaña **Cross Chain**.
 
-### Step 4 - Enter Amount to Transfer
+### Paso 4 - Introduce la Cantidad a Transferir
 
 You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
@@ -260,5 +260,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTc2NjY0MDFdfQ==
+eyJoaXN0b3J5IjpbMTEyODI1MTA5M119
 -->
