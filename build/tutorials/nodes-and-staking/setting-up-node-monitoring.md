@@ -230,15 +230,16 @@ En la Interfaz web de Grafana:
 
 ## Configurando node\_exporter
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
 
-Get the latest version with:
+Además de las métricas de AvalancheGo, establezcamos un monitoreo de la máquina misma, para poder comprobar el uso de la CPU, la memoria, la red y el disco y estar al tanto de cualquier anomalía. Para ello, usaremos node\_exporter, un plugin de Prometheus.
+
+Consigue la última versión con:
 
 ```text
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
 ```
 
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
+cambia `linux-amd64` si tienes una arquitectura diferente \(RaspberryPi es`linux-arm64`, por ejemplo\). Des
 
 ```cpp
 tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
@@ -367,6 +368,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxMjUyMzU0LC0xMDIzMDA0MDMwLC05MD
-Y1Mjg5MTAsNDA5MjgxNTYzXX0=
+eyJoaXN0b3J5IjpbMjA2MDkzNDA3MCwtMTAyMzAwNDAzMCwtOT
+A2NTI4OTEwLDQwOTI4MTU2M119
 -->
