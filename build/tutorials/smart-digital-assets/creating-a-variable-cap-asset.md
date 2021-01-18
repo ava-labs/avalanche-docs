@@ -145,7 +145,7 @@ La respuesta contiene el ID de la transacción.
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Podemos comprobar el estado de la transacción que acabamos de enviar a la red usando [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -158,7 +158,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+Esto debería darnos:
 
 ```cpp
 {
@@ -170,11 +170,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
+## Intercambia el Activo
 
-### Check a Balance
+### Verifique el Balance
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Los 10 millones de activos están siendo controlador por la dirección `to` que especificamos en `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -255,6 +255,6 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM1MTE5MDA3LDEwODc4NzcwMTMsLTExMz
-UwMDUxNjFdfQ==
+eyJoaXN0b3J5IjpbLTYzOTc2MjY2NSwxMDg3ODc3MDEzLC0xMT
+M1MDA1MTYxXX0=
 -->
