@@ -171,7 +171,7 @@ Añádelo al agente de SSH para que podamos usarlo en tu instancia de EC2, y má
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-SSH into the instance. \(Remember to replace `PUBLICIP` with the public IP field from earlier.\)
+Haz SSH en la instancia. \(Recuerda reemplazar `PUBLICIP` con el campo de IP pública de antes.\)
 
 ```text
 ssh ubuntu@PUBLICIP
@@ -281,7 +281,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA2Njg3NDUsMTk0MDA0OTQwMSw0NjYwOT
-E0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcy
-ODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbLTEzMTQzNzgzMTMsMTk0MDA0OTQwMSw0Nj
+YwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1
+LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
