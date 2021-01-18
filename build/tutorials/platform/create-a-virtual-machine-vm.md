@@ -8,9 +8,9 @@ Una de las características principales de Avalanche es la creación de nuevas b
 
 En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM es un servidor de timestamp. Cada bloque de la blockchain contiene el timestamp de cuando fue creada, junto con un dato de 32 bytes \(carga útil\). El timestamp de cada bloque es posterior a la de su predecesor.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+Tal servidor es útil porque puede utilizarse para probar que un dato existía en el momento en que se creó el bloque. Supongamos que tienes un manuscrito de un libro, y quieres ser capaz de probar en el futuro que el manuscrito existe hoy. Añades un bloque a la blockchain donde la carga útil del bloque es un hash de tu manuscrito. En el futuro, puede probar que el manuscrito existe hoy, mostrando que el bloque tiene el hash de su manuscrito en su carga. \(esto se deriva del hecho de que encontrar la imagen previa de un hash es imposible\).
 
-Before we get to the implementation of the VM, we’ll look at the interface that a VM must implement to be compatible with the platform’s Avalanche consensus engine. We’ll show and explain all the code in snippets. If you want to see the code in one place, rather than in snippets, you can see it in our [GitHub repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
+Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quiere ver el código en un lugar, en lugar de en fragmentos, puede verlo en nuestro [GitHub repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
 
 ## The `snowman.VM` Interface
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDkwNzk2MjddfQ==
+eyJoaXN0b3J5IjpbMTg0Nzk1MDY2N119
 -->
