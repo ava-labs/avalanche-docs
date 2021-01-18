@@ -1,4 +1,4 @@
-# Create an NFT \(Part 1\)
+# Crear un NFT \(Part 1\)
 
 ## Introduction
 
@@ -358,3 +358,6 @@ Blockchain technology and tokenomics represent a radical new way of representing
 
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTg0MjUxMjQ2M119
+-->
