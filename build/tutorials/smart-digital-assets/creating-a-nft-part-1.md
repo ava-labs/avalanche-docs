@@ -183,14 +183,14 @@ Ten en cuenta que el `TypeID` es`00 00 00 0a` el cual es el tipo correcto de ide
 
 Ahora que tenemos una familia de NFT y un grupo para el `MinterSet` somos capaces de crear NFTs pertenecientes a este grupo. Para hacer eso ejecutamos [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft):
 
-### **M**
+### **Método**
 
 * [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft)
 
-### **Parameters**
+### **Parámetros**
 
-* `assetID` is the ID of the NFT family.
-* `payload` is an arbitrary CB58 encoded payload of up to 1024 bytes. In Part 2 \(**COMING SOON**\) we’ll explore creating a protocol around the NFT payload. For this tutorial, the payload is the string “AVA Labs”.
+* `assetID` es el ID de la familia NFT.
+* `payload` es una carga útil arbitraria codificada en CB58 de hasta 1024 bytes. En la Parte 2 \(**PRONTO**\), exploraremos la creación de un protocolo alrededor de la carga útil de la NFT. Para este tutorial, la carga útil es la cadena "AVA Labs".
 * `to` is the address that will receive the newly minted NFT. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted NFT.
 * `username` must be a user that holds keys giving it permission to mint more of this NFT. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
 * `password` is the valid password for `username`
@@ -359,5 +359,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1NjQ3NDAzMl19
+eyJoaXN0b3J5IjpbLTE4MzA5NzU5MzVdfQ==
 -->
