@@ -2,11 +2,11 @@
 
 ## Introducción
 
-[Truffle Suite](https://www.trufflesuite.com) es un conjunto de herramientas para el lanzamiento de aplicaciones descentralizadas \(Dapps\) en la EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com) es un conjunto de herramientas para el lanzamiento de aplicaciones descentralizadas \(Dapps\) en la EVM. Con Truffle puedes escribir y compilar smart contracts, construir artefactos, ejecutar migraciones e interactuar con smart contracts desplegados. Este tutorial ilustra cómo Truffle puede ser utilizado con la C-Chain de Avalanche, la cual es una instancia del EVM.
 
-## Requirements
+## Requisitos
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
 
 ## Dependencies
 
@@ -412,5 +412,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3OTY2OTkwM119
+eyJoaXN0b3J5IjpbLTE3MDg1NjE2MzhdfQ==
 -->
