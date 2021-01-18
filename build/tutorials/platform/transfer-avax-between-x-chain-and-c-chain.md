@@ -6,7 +6,7 @@ Las Tokens de AVAX existen en la X-Chain, donde se pueden comerciar, en la P-Cha
 
 ## Requisitos
 
-Que hayas completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
 ¡Para poder enviar AVAX, necesitas tener algo de AVAX! Puedes conseguir AVAX de verdad comprándola en un exchange, o puedes conseguir AVAX de la red de pruebas desde el [Faucet de Prueba de AVAX](https://faucet.avax-test.network), que es una forma gratis y fácil de ir jugando con Avalanche.
 
@@ -16,13 +16,14 @@ La forma más fácil de transferir AVAX entre cadenas es usar [La Wallet de Aval
 
 El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://github.com/ava-labs/avalanche-wallet).
 
-### Step 1 - Open the Avalanche Wallet
+### Paso 1 - Abre la Wallet de Avalanche
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
+Selecciona **Access Wallet** para ingresar a su Wallet. Para conectar la billetera a una red que no sea la red principal de Avalanche, seleccione **Mainnet** y elija la red a la que se conectará.
 
-### Step 2 - Log In to Your Wallet
+
+### PAso 2 - Log In to Your Wallet
 
 You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
 
@@ -259,5 +260,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDYwODY2MTFdfQ==
+eyJoaXN0b3J5IjpbLTE2NDQxNzE0OThdfQ==
 -->
