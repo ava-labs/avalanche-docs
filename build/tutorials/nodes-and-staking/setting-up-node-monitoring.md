@@ -221,14 +221,14 @@ Inicia sesión con el nombre de usuario/contraseña admin/admin y establece una 
 
 En la Interfaz web de Grafana:
 
-* Ir a Configuración en el menú de la izquierda y seleccionar Data Sources.
+* Ve a la Configuración en el menú de la izquierda y seleccionar Data Sources.
 * Haga clic en Add Data Source
 * Selecciona Prometheus.
-* En el formulario, introduzca el nombre \(Prometheus lo hará\), y`http://localhost:9090` como la URL.
+* En el formulario, introduce el nombre \(Prometheus lo hará\), y`http://localhost:9090` como la URL.
 * Haga clic en `Save & Test`
-* Check for “Data source is working” green message.
+* Comprueba que haya un mensaje verde que diga "Data source is working".
 
-## Set up node\_exporter
+## Configurando node\_exporter
 
 In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
 
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyNjU0OTMyOSwtMTAyMzAwNDAzMCwtOT
-A2NTI4OTEwLDQwOTI4MTU2M119
+eyJoaXN0b3J5IjpbMTUxMjUyMzU0LC0xMDIzMDA0MDMwLC05MD
+Y1Mjg5MTAsNDA5MjgxNTYzXX0=
 -->
