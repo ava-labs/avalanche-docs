@@ -17,9 +17,9 @@ Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que
 
 ## Create el Activo
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Nuestro activo existirá en la X-Chain, así que para crear nuestro activo ejecutaremos [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
-The signature for this method is:
+La firma de este método es:
 
 ```cpp
 avm.createVariableCapAsset({
@@ -41,7 +41,7 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### Parametros
 
 * `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
 * `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
@@ -254,6 +254,5 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NzU0OTc1MjEsLTExMzUwMDUxNjFdfQ
-==
+eyJoaXN0b3J5IjpbMTIyNzkxMTc4MiwtMTEzNTAwNTE2MV19
 -->
