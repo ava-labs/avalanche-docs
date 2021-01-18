@@ -257,7 +257,7 @@ La respuesta confirma que la blockchain fue creada:
 Puedes interactuar con esta nueva instancia de la AVM casi de la misma manera que interactuarías con la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). 
 Hay dos pequeñas diferencias:
 
-* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
+* El punto final de la API de su blockchain es`127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
 * Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
 
 In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
@@ -284,5 +284,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyNDkwMjM0OSwxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbMjAzNjkwNDE2OSwxMTEyMDI3MTg2XX0=
 -->
