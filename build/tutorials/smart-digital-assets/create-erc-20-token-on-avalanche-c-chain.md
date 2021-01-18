@@ -153,12 +153,13 @@ Introduce tu dirección y una cantidad en WEI. Por ejemplo, acuñaré 1000 token
 
 ## Añadir Token a Metamask
 
-Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to “Add Token” button and select “Custom Token” tab.
 
-Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
+Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los tokens en tu wallet de metamask. Para poder ver nuestro token, tenemos que añadirlo. En metamask, haz clic en el botón **“Add Token”** y selecciona la pestaña **“Custom Token”**.
+
+Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de remix o de metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzQ1MTc0NjgsMTcxNzg0ODUwMiwxNj
-IxODkzMDY0LC0xNTUwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgw
-NDc4XX0=
+eyJoaXN0b3J5IjpbLTE0NjQwOTQzMjcsLTE0MzQ1MTc0NjgsMT
+cxNzg0ODUwMiwxNjIxODkzMDY0LC0xNTUwODY5NjQzLDc4ODg1
+MDExNiwtNDIwMjgwNDc4XX0=
 -->
