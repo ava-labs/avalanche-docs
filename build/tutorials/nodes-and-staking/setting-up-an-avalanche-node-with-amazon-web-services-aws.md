@@ -101,7 +101,7 @@ Necesitas añadir espacio al disco de tu instancia. Usamos 100 GB en este ejempl
 
 ![Select 100 GB for the disk size.](../../../.gitbook/assets/add-storage.png)
 
-Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
+Haga clic en **Next: Add Tags** en la esquina inferior derecha de la pantalla para agregar etiquetas a la instancia. Las etiquetas nos permiten asociar metadatos con nuestra instancia. Añade una etiqueta con la clave `Name` y el valor `My Avalanche Node`. Esto aclarará cual instancia está en su lista de instancias EC2.
 
 ![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
@@ -279,7 +279,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMD
-I3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
-
+eyJoaXN0b3J5IjpbLTE1ODMxMjI1MTIsLTE1NjgwOTE0OTMsNT
+U3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2
+LDg2MTA5NTMwM119
 -->
