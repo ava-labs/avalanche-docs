@@ -178,27 +178,27 @@ Esto nos retorna:
 undefined
 ```
 
-Print the account:
+Imprima la cuenta:
 
 ```text
 truffle(development)> account
 ```
 
-This prints the account:
+Esta es la cuenta que nos proporciona:
 
 ```text
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
-Exit the truffle console:
+Sal de la consola de Truffle:
 
 ```text
 truffle(development)> .exit
 ```
 
-### Fund your account
+### Agrega fondos a tu cuenta
 
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+Sigue lo [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
 ### Unlock your account
 
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExNTA2MDI3NCwtODU1MzEyMDYyXX0=
+eyJoaXN0b3J5IjpbLTc2OTYyNDkzNiwtODU1MzEyMDYyXX0=
 -->
