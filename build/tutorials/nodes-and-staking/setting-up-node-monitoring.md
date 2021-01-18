@@ -27,11 +27,11 @@ El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Pro
 
 ### Contribuciones
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
 
-## Set up Prometheus
+## Configurando Prometheus
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+First, we need to add a system user account and create directories \(necesitaras acceso de superusuario \):
 
 ```cpp
 sudo useradd -M -r -s /bin/false prometheus
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTUxMzE4ODcxLC0xMDIzMDA0MDMwLC05MD
-Y1Mjg5MTAsNDA5MjgxNTYzXX0=
+eyJoaXN0b3J5IjpbLTI0NjIyNDU2MSwtMTAyMzAwNDAzMCwtOT
+A2NTI4OTEwLDQwOTI4MTU2M119
 -->
