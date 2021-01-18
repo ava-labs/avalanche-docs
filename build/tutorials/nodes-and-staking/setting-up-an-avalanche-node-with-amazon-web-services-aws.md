@@ -278,13 +278,13 @@ AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versi�
 
 Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estado del servicio de AvalancheGo, ejecuta `sudo systemctl status avalanchego.`
 
-## concluir
+## Terminamos!
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODc4NTc0ODgsMzI3MDEwNTY1LDE5ND
-AwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0
-LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOT
-UzMDNdfQ==
+eyJoaXN0b3J5IjpbMjExMjE0Njg5NiwzMjcwMTA1NjUsMTk0MD
+A0OTQwMSw0NjYwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQs
+MTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NT
+MwM119
 -->
