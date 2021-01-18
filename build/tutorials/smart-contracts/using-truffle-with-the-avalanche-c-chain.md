@@ -84,11 +84,11 @@ module.exports = {
 };
 ```
 
-Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+Ten en cuenta que puedes cambiar  `protocol`, el `ip` y `port` si quieres dirigir los llamados a la API a un nodo de AvalancheGo diferente. También ten en cuenta que estamos estableciendo el `gasPrice` y `gas` a los valores apropiados para la  C-Chain de Avalanche.
 
-## Add Storage.sol
+## Agregando Storage.sol
 
-In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
+En el directorio `contracts` agrega un nuevo archivo llamado `Storage.sol` and add the following block of code:
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTEyNzMyOF19
+eyJoaXN0b3J5IjpbODgyNzU4MTQzXX0=
 -->
