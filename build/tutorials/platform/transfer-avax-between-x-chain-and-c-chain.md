@@ -79,9 +79,9 @@ Como puede haber notado al transferir AVAX usando la Wallet de Avalanche, una tr
 
 Antes de que podamos hacer la transferencia, tenemos que establecer la dirección en la C-Chain, junto con la control key.
 
-### Set Up Address and Key on the C-Chain
+### Configurar la Dirección y la Clave en la C-Chain
 
-The X-Chain uses [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) addresses and the C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
+La X-Chain usa direcciones [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) y la C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
 
 In order to get around this, you can export a private key from the X-Chain and then import it to the C-Chain. This way, you can use the X-Chain address and change the X- prefix to a C- prefix in order to get the correct Bech32 address to use for the C-Chain.
 
@@ -261,5 +261,5 @@ The response should look like this:
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3NzIyOTI5MCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTE4NzQzNTQ0NTQsMTEyODI1MTA5M119
 -->
