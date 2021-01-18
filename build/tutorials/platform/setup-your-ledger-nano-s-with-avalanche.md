@@ -51,15 +51,15 @@ Después de confirmar que la aplicación Avalanche está funcionando, entonces e
 
 ![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
+En el siguiente mensaje **How do you want to access your wallet?**, haga clic en el botón **Ledger**.
 
 ![Ledger Access](../../../.gitbook/assets/ledger-access.png)
 
-You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
+Ahora se le pedirá que confirme en su dispositivo Ledger. Haz clic con el botón derecho en las indicaciones del dispositivo y en la última pantalla confirma pulsando ambos botones.
 
 ![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
 
-If successful you will be signed into the wallet and any previous balances will be displayed.
+Si tiene éxito, se ingresará en la wallet y se mostrarán los saldos anteriores.
 
 ![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0Njc4NDc2NF19
+eyJoaXN0b3J5IjpbOTg5MTU4MTJdfQ==
 -->
