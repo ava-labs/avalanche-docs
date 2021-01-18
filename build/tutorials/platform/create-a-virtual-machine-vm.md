@@ -213,7 +213,7 @@ Su implementación VM probablemente anulará `Accept` y `Reject` para que estos 
 
 #### **Campos**
 
-`core.Block` has a field VM, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+`core.Block` tiene un campo VM, que es una referencia a `core.SnowmanVM`. Esto significa que un `core.Block` tiene acceso a todos los campos y métodos de ese modelo.
 
 ## Timestamp Server Implementation
 
@@ -718,5 +718,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1MTU2NDg1NiwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbMTM1NjY4OTgyOCwxNDg2MTM1MDg5XX0=
 -->
