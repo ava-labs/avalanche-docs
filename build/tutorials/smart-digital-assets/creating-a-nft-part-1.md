@@ -312,10 +312,10 @@ Ahora puedes enviar el NFT a quién quieras. Para hacer eso usa el Método API [
 * `username` es el usuario que controla el NFT.
 * `password` es la contraseña valida para `username`
 
-**Espuesta**
+**Respuesta**
 
-* `txID` Es el I.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID` Es el ID de la transacción.
+* `changeAddr` esta es la dirección donde se envió el cambio
 
 ```cpp
 curl -X POST --data '{
@@ -332,7 +332,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our NFT Transfer Operation was successful:
+La respuesta confirma que la operación de transferencia NFT fué exitosa
 
 ```cpp
 {
@@ -344,8 +344,7 @@ The response confirms that our NFT Transfer Operation was successful:
     }
 }
 ```
-
-You can call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
+Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
 
 ## Wrapping up
 
@@ -359,5 +358,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5MDU2OTgxNl19
+eyJoaXN0b3J5IjpbNzU2ODM0MDE0XX0=
 -->
