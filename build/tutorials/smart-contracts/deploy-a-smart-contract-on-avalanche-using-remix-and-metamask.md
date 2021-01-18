@@ -64,11 +64,11 @@ Para este ejemplo, desplegaremos un ERC20 contract de [OpenZeppelin](https://ope
 
 ![ERC20 Contract](../../../.gitbook/assets/erc20-contract.png)
 
-Navigate to Deploy Tab -&gt; Open the “ENVIRONMENT” drop-down and select Injected Web3 \(make sure MetaMask is loaded\)
+Ve a la pestaña Deploy -&gt; Abre el menú desplegable “ENVIRONMENT” y selecciona Injected Web3 \(Asegúrate que MetaMask esté cargado\)
 
 ![Deploy and run transactions](../../../.gitbook/assets/deploy-and-run-transactions.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab
+Una vez que se inyectó la web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab
 
 ![Solidity compiler](../../../.gitbook/assets/solidity-compiler.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0ODYyMDM0N119
+eyJoaXN0b3J5IjpbNDE4ODU1OTM5XX0=
 -->
