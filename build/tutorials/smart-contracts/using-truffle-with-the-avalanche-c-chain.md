@@ -12,11 +12,11 @@ Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que
 
 * [Avash](https://github.com/ava-labs/avash) es una herramienta para dirigir una red local de Avalanche. Es similar a la de Truffle [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 o más actual.
-* Truffle, which you can install with `npm install -g truffle`
+* Truffle, el cual puedes instalar con `npm install -g truffle`
 
-## Start up a local Avalanche network
+## Iniciar una Red Local de Avalanche
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) le permite hacer despliegues de redes de prueba privadas con hasta 15 nodos AvalancheGo listos para usar. Avash admite la automatización de las tareas habituales mediante scripts lua. Esto permite realizar pruebas rápidas con una amplia variedad de configuraciones. La primera vez que uses avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
 
 Start a local five node Avalanche network:
 
@@ -412,5 +412,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5MDU3NTk3M119
+eyJoaXN0b3J5IjpbNjAyMTM0Mjc1XX0=
 -->
