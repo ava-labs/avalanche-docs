@@ -203,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that the blockchain was created:
+La respuesta confirma que la blockchain fue creada:
 
 ```cpp
 {
@@ -252,9 +252,10 @@ The response confirms that the blockchain was created:
 }
 ```
 
-### Interact With the New Blockchain <a id="interact-with-the-new-blockchain"></a>
+### Interactúa con la Nueva Blockchain <a id="interact-with-the-new-blockchain"></a>
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are two small differences:
+Puedes interactuar con esta nueva instancia de la AVM casi de la misma manera que interactuarías con la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). 
+Hay dos pequeñas diferencias:
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
 * Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
@@ -283,5 +284,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0ODc2OTY1NywxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbMTgyNDkwMjM0OSwxMTEyMDI3MTg2XX0=
 -->
