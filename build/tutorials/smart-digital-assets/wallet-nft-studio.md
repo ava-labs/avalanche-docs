@@ -50,7 +50,7 @@ Después de introducir y comprobar los datos, pulsa **Mint** para crear el objet
 
 ### Mira Tus Coleccionables
 
-An overview of your collectibles is always visible in the top of the screen, along with your balances.
+En la parte superior de la pantalla siempre se puede ver un resumen de tus coleccionables, junto con tus saldos.
 
 ![Overview](../../../.gitbook/assets/nft-studio-06-overview.png)
 
@@ -89,6 +89,6 @@ Now, you should know how to create NFT families, mint NFT groups, and send them 
 If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI3NTQxNzE4OSwxMTA2MTU4Nzk4LDEyMD
-kzMjI1MjVdfQ==
+eyJoaXN0b3J5IjpbMzkxNzI5ODYzLDExMDYxNTg3OTgsMTIwOT
+MyMjUyNV19
 -->
