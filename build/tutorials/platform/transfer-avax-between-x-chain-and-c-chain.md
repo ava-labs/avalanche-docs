@@ -20,7 +20,7 @@ El código fuente de la Wallet de Avalanche se puede encontrar [aquí](https://g
 
 ![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Selecciona **Access Wallet** para ingresar a su Wallet. Para conectar la billetera a una red que no sea la red principal de Avalanche, seleccione **Mainnet** y elija la red a la que se conectará.
+Selecciona **Access Wallet** para ingresar a tu Wallet. Para conectar la Wallet una red que no sea la red principal de Avalanche, selecciona **Mainnet** y elige la red a la que se conectará.
 
 
 ### Paso 2 - Iniciar Sesión en tu Wallet
@@ -263,5 +263,5 @@ La respuesta debería verse así:
 ¡Eso es! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyODA2MDM1MywxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTE5ODgzMTczODUsMTEyODI1MTA5M119
 -->
