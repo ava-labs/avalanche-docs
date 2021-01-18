@@ -156,23 +156,23 @@ Compiling your contracts...
 
 ## Crea, agrega fondos y debloquea una cuenta en la C-Chain
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
+Cuando se despliegan smart contracts a la C-Chain, truffle se predeterminará a la primera cuenta disponible proporcionada por su cliente de la C-Chain como la dirección `from` utilizada durante las migraciones.
 
-### Create an account
+### Crea una Cuenta
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
+Truffle tiene una muy útil [consola](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) la cual podemos usar para interactuar con la blockchain y nuestro smart contract. Abre la consola:
 
 ```text
 truffle console --network development
 ```
 
-Then, in the console, create the account:
+Ahora, en la consola, crea la cuenta:
 
 ```text
 truffle(development)> let account = web3.eth.personal.newAccount()
 ```
 
-This returns:
+Esto nos retorna:
 
 ```text
 undefined
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4NDg0MjU3MCwtODU1MzEyMDYyXX0=
+eyJoaXN0b3J5IjpbMTExNTA2MDI3NCwtODU1MzEyMDYyXX0=
 -->
