@@ -102,15 +102,15 @@ Lo último antes del proceso de despliegue es establecer el contrato que se desp
 
 ![Image for post](https://miro.medium.com/max/383/1*s9LtZu4hSuPcVwVZsweZJA.png)
 
-Now, here enter the name and symbol of your token. I will name it “test” and the symbol will be “tst”. You can give it a and click to transact button.
+Ahora, aquí introduce el nombre y el símbolo de tu Token. La llamaré **“test”** y el símbolo será **“tst”** . Puedes darle al botón **transact** para hacer la transacción.
 
 ![Image for post](https://miro.medium.com/max/593/1*ZKDEv_h_Pqfd3b7PAosXQw.png)
 
-After clicking the button, a pop-up will show up and just confirm it.
+Después de hacer clic en el botón, un pop-up aparecerá y lo confirmaremos.
 
 ![Image for post](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
 
-And then another pop-up, a metamask confirmation, appears. Confirm it.
+Aparecerá otro pop-up, una confirmación de metamask. Confirmala.
 
 After confirming all these pop-ups we have deployed our token to avalanche C-Chain. So we can start to interact with it.
 
@@ -157,6 +157,7 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxNzg0ODUwMiwxNjIxODkzMDY0LC0xNT
-UwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwNDc4XX0=
+eyJoaXN0b3J5IjpbMTQwMjUzMTQ5MCwxNzE3ODQ4NTAyLDE2Mj
+E4OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0
+NzhdfQ==
 -->
