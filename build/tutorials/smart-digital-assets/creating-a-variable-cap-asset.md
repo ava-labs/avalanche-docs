@@ -6,8 +6,8 @@ Este tutorial ilustra cómo crear un activo fungible de capital variable. No exi
 
 Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Seguridad:** si sólo una dirección puede acuñar más del activo, y se pierde la clave privada de esa dirección, no se podrán acuñar más unidades. Del mismo modo, si sólo una dirección puede acuñar más del activo, nada impide que el titular de esa dirección acuñe unilateralmente todo lo que quiera.
+* **Flexibilidad:** es agradable poder codificar la lógica como, "Alice puede acuñar unilateralmente más unidades de este activo, o 2, en el cual Dinesh, Ellin y Jamie pueden juntos acuñar más".
 
 Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
 
@@ -254,5 +254,5 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODk1NTI3NTldfQ==
+eyJoaXN0b3J5IjpbLTExMzUwMDUxNjFdfQ==
 -->
