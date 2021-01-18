@@ -4,9 +4,9 @@ descripcción: "Proporcionado por un miembro de la Comunidad": Murat Çeliktepe'
 
 # Crear un Token ERC-20
 
-Los tokens  ERC-20 son el concepto más fundamental y esencial en Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
+Los tokens  ERC-20 son el concepto más fundamental y esencial en Ethereum. A medida que la comunidad de Avalanche y el ecosistema crecen, se implementarán nuevos casos de uso y proyectos que están funcionando en Ethereum o en diferentes cadenas. El estándar de tokens que se utilizaría para los proyectos no es específico y cada uno puede crear su propio estándar y su propio token.
 
-Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
+Por lo tanto, crearemos nuestro propio token ERC-20 y lo acuñaremos en cualquier dirección que queramos. El token se generará en la C-Chain de Avalanche y será accesible en esa cadena.
 
 The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
 
@@ -156,5 +156,5 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTU4MTIzMzFdfQ==
+eyJoaXN0b3J5IjpbLTExMDU4NzI4NDNdfQ==
 -->
