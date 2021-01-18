@@ -63,7 +63,7 @@ Si tiene éxito, se ingresará en la wallet y se mostrarán los saldos anteriore
 
 ![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
+Para transferir fondos, vaya a la pestaña **Send** y pegue una d X-Chain en el campo **To Address**. Establezca una cantidad y opcionalmente establezca una nota. Presione **Confirm** y luego el botón **Send Transaction**.
 
 ![Send Transaction](../../../.gitbook/assets/send-transaction.png)
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTg5MTU4MTJdfQ==
+eyJoaXN0b3J5IjpbLTE5NDY5OTY3MzVdfQ==
 -->
