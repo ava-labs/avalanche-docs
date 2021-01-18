@@ -26,7 +26,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+Esto proporciona la primera control key  \(de nuevo, en realidad da la _dirección_ de la primera control key\). The key is held by the user we just specified.
 
 ```cpp
 {
@@ -137,5 +137,5 @@ The response confirms that our subnet was created:
 This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDkxMzc1MzJdfQ==
+eyJoaXN0b3J5IjpbMTA3NDcyODMwN119
 -->
