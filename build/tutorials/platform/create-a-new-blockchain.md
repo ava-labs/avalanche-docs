@@ -8,9 +8,9 @@ En este tutorial, crearemos una blockchain creando una nueva instancia de la AVM
 
 ### Requisitos Previos
 
-Necesitarás un nodo de ejecución, un usuario en el nodo y algo de AVAX en la dirección controlada por el usuario. Todo eso está cubierto en el tutorial de como [Ejecutar un Nodo de Avalanche](../../getting-started.md) tutorial.
+Necesitarás un nodo de ejecución, un usuario en el nodo y algo de AVAX en la dirección controlada por el usuario. Todo eso está cubierto en el tutorial de como [Ejecutar un Nodo de Avalanche](../../getting-started.md).
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Puedes averiguar cómo hacerlo en el tutorial [Add a Validator](../nodes-and-staking/add-a-validator.md). It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Subnet
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExMjAyNzE4Nl19
+eyJoaXN0b3J5IjpbMzQwOTgzNTA5LDExMTIwMjcxODZdfQ==
 -->
