@@ -20,7 +20,7 @@ Haz clic en el icono de metamask del navegador y selecciona el menú desplegable
 
 ![Image for post](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
 
-Now, we need to set these boxes with correct values.
+Ahora, tenemos que ajustar estas casillas con los valores correctos.
 
 * **Network Name**: Avalanche C-Chain
 * **New RPC URL**:
@@ -39,9 +39,9 @@ Now, we need to set these boxes with correct values.
 
 ![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
 
-After setting up all the parameters correctly, we should see this page. For now, we have 0 C-AVAX. “C” refers to C-chain and we have to get some C-AVAX to interact with the network.
+Después de configurar todos los parámetros correctamente, deberíamos ver esta página. Por ahora, tenemos 0 C-AVAX. "C" se refiere a la C-chain y tenemos que conseguir algo de C-AVAX para interactuar con la red.
 
-## Fund your C-Chain address
+## Agrega fondos a tu dire C-Chain address
 
 Depending on the network used, there are three ways to get funds to your C-Chain address.
 
@@ -156,5 +156,5 @@ Now we minted 1000 token to our contract, but you should not be able to see the 
 Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyMDI4MDQ3OF19
+eyJoaXN0b3J5IjpbMTI4ODI1MzYzNiwtNDIwMjgwNDc4XX0=
 -->
