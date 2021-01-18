@@ -202,7 +202,7 @@ La respuesta confirma que nuestra creación de activos fue exitosa y que la dire
 
 ### Envía el Activo
 
-Enviemos 100 activos a otra  [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+Enviemos 100 activos a otra dirección usando [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). Para hacerlo ejecutamos:
 
 ```cpp
 curl -X POST --data '{
@@ -219,7 +219,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+Comprobemos los balances de la dirección `to`:
 
 ```cpp
 curl -X POST --data '{
@@ -233,7 +233,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -245,9 +245,9 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Concluimos!
 
-In this tutorial, we:
+En este tutorial:
 
 * Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
 * Used `mint` to mint more units of an asset.
@@ -255,6 +255,6 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxODEzNTMzNywxMDg3ODc3MDEzLC0xMT
+eyJoaXN0b3J5IjpbMTM2NjE4MzAwMywxMDg3ODc3MDEzLC0xMT
 M1MDA1MTYxXX0=
 -->
