@@ -27,13 +27,13 @@ Ahora con el **Developer Mode** activado, puedes ir a la pestaña "Gerente" y bu
 
 ![Avalanche Ledger app install button](https://miro.medium.com/max/4040/1*rGFrSBEfxRlIkc-k7hS2Vg.png)
 
-You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.2.1.
+Puedes confirmar que la instalación fue exitosa yendo a la pestaña **Apps installed** donde deberías ver Avalanche v0.2.1.
 
 ![](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
 
-## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
+## Usar la Wallet de Avalanche con Ledger <a id="48a3"></a>
 
-Once you have the Avalanche app installed then you’re able to interact with the [Avalanche Wallet](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps between the X-Chain&lt;-&gt;P-Chain as well as staking tokens.
+Una vez que tengas la aplicación de Avalanche instalada, podrás interactuar con la [Wallet de Avalanche](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps between the X-Chain&lt;-&gt;P-Chain as well as staking tokens.
 
 First, to access the wallet, plug in the Ledger to your computer and if needed, enter your pin.
 
@@ -88,5 +88,5 @@ Finally, you should be able to see the transaction details in our explorer. This
 Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0Njc2ODY2NDFdfQ==
+eyJoaXN0b3J5IjpbMTA0NDYyMjU1OF19
 -->
