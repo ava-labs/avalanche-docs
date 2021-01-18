@@ -10,11 +10,11 @@ Los 5 nodos tendrán puertos HTTP \(donde los llamados a la API deben ser enviad
 
 ## Crear una Red Local de Pruebas
 
-Los siguientes comandos asumen que tienes [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+Los siguientes comandos asumen que tienes [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) instalado en `$GOPATH/src/github.com/ava-labs/avalanchego`. Cada uno de los cinco nodos creados es un validador. Las staking keys para estos nodos están en `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
-### Manually
+### Manualmente
 
-To start the network:
+Para iniciar la red:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -44,11 +44,11 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --snow-sample-size=2 --snow-quorum-size=2 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --staking-enabled=true --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-### With Avash
+### Con Avash
 
-We assume you’ve installed [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
+Asumimos que has instalado [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
 
-To open Avash:
+Para abrir Avash:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avash
@@ -62,7 +62,7 @@ go build
 ./avash
 ```
 
-Now we’re in Avash. To start the network:
+Ahora estamos en Avash. Para iniciar la red:
 
 ```cpp
 runscript scripts/five_node_staking.lua
@@ -152,5 +152,5 @@ That’s it! Your local version of Avalanche is up and running. It has the defau
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDEwMDI0NzM2XX0=
+eyJoaXN0b3J5IjpbLTE3OTYxNDg5OTJdfQ==
 -->
