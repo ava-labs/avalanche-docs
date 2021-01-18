@@ -99,9 +99,9 @@ type ChainVM interface {
 }
 ```
 
-##  La interfaz snowman.Block Interface
+##  La Interfaz snowman.Block 
 
-You may have noticed the `snowman.Block` type referenced in the `snowman.VM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+Puede que hayas notado `snowman.Block` al que se hace referencia en la interfaz `snowman.VM`. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
 
 Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
@@ -717,5 +717,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwOTk1NzQ1OV19
+eyJoaXN0b3J5IjpbLTE0MjgxOTEyNTBdfQ==
 -->
