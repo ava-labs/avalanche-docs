@@ -249,9 +249,10 @@ AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`.
 
-Exit out of the SSH instance by running:
+Haz una copia de seguridad de la clave y el certificado del nodo en caso de que la instancia EC2 esté corrupta o no esté disponible. El ID del nodo se deriva de su staking key y certificado. Si pierdes tu staking key o certificado, tu nodo obtendrá un nuevo ID de nodo, lo que puede hacer que no seas elegible para el staking reward si tu nodo es un validador. **Se recomienda encarecidamente que copies la staking key y el certificado de tu nodo**. La primera vez que ejecutes un nodo, éste generará un nuevo staking key y certificado y los almacenará en el directorio `/home/ubuntu/.avalanchego/staking`..
+
+Sal de la instancia SSH ejecutando:
 
 ```bash
 exit
@@ -282,7 +283,8 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI3MDEwNTY1LDE5NDAwNDk0MDEsNDY2MD
-kxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3
-Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbLTE5MzI0MzIwNDksMzI3MDEwNTY1LDE5ND
+AwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0
+LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOT
+UzMDNdfQ==
 -->
