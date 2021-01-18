@@ -110,7 +110,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-La respuesta confirma que la creación de nuestro activo tuvo éxitoy que la  was successful and that the expected address holds all 10,000,000 shares:
+La respuesta confirma que la creación de nuestro activo tuvo éxito y que la dirección especificada contiene los 10,000,000 de acciones:
 
 ```cpp
 {
@@ -122,11 +122,11 @@ La respuesta confirma que la creación de nuestro activo tuvo éxitoy que la  wa
 }
 ```
 
-### Send the asset
+### Envía el Activo
 
-Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
+Ahora enviemos 100 acciones ejecutando [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
 
-To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
+Para enviar las acciones, necesitamos probar que controlamos el usuario desde el que se envían las acciones. Por lo tanto, esta vez tendremos que rellenar `username` y `password`.
 
 ```cpp
 curl -X POST --data '{
@@ -222,5 +222,5 @@ In this tutorial, we:
 * Called `send` to transfer a quantity of our asset
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzY3MDMxMTZdfQ==
+eyJoaXN0b3J5IjpbMTE2MjE2NTkyMl19
 -->
