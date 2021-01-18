@@ -224,9 +224,10 @@ Escribamos nuestra VM, que implementa `snowman.VM` y cuyos bloques implementan `
 
 ### Bloque
 
-First, let’s look at our block implementation.
 
-The type declaration is:
+Primero, veamos la implementación de nuestro bloque.
+
+El tipo de declaración es:
 
 ```cpp
 // Block is a block on the chain.
@@ -240,9 +241,9 @@ type Block struct {
 }
 ```
 
-The `serialize:"true"` tag indicates when a block is persisted in the database or sent to other nodes. The field with the tag is included in the serialized representation.
+La etiqueta "serialize: "true"` indica cuando un bloque persiste en la base de datos o se envía a otros nodos. El campo con la etiqueta se incluye en la representación serializada.
 
-#### **Verify**
+#### **Verifica**
 
 ```cpp
 // Verify returns nil iff this block is valid.
@@ -719,5 +720,5 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1ODI0ODk0NSwxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTE3NDQ0ODE3MTMsMTQ4NjEzNTA4OV19
 -->
