@@ -6,7 +6,7 @@ Una de las características principales de Avalanche es la capacidad de crear nu
 
 En este tutorial, crearemos una blockchain creando una nueva instancia de la AVM.
 
-### Prerequisits
+### Requisitos Previos
 
 You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../getting-started.md) tutorial.
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyOTI4MjkyNV19
+eyJoaXN0b3J5IjpbLTEwNzQwOTgxNjNdfQ==
 -->
