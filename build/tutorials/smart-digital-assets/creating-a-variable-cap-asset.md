@@ -250,11 +250,11 @@ La respuesta debería ser:
 En este tutorial:
 
 * Usamos`createVariableCapAsset` para crear un activo de capital variable que represente las acciones.
-* Usamos`mint` to mint more units of an asset.
-* Usamos`getBalance` to check address balances.
-* Usamos`send` to transfer shares.
+* Usamos`mint` para acuñar más unidades de un activo.
+* Usamos`getBalance` para comprobar los saldos de las direcciones.
+* Usamos`send` para transferir acciones.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDMwNDA5NjgsMTA4Nzg3NzAxMywtMT
-EzNTAwNTE2MV19
+eyJoaXN0b3J5IjpbLTc5MjIxMzcyMSwxMDg3ODc3MDEzLC0xMT
+M1MDA1MTYxXX0=
 -->
