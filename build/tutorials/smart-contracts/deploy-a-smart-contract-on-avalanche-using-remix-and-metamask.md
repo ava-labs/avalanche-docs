@@ -6,11 +6,11 @@
 
 La Red Primaria de Avalanche es una Subnet que tiene tres cadenas: P-Chain, X-Chain, y C-Chain. La C-Chain es una instancia de la Ethereum Virtual Machine impulsada por el protocolo de consenso Snowman de Avalanche. El [RPC de la C-Chain](../../avalanchego-apis/contract-chain-c-chain-api.md) puede hacer todo lo que un cliente típico de Ethereum puede hacer usando los llamados RPC estándar de Ethereum. Los beneficios inmediatos de usar la C-Chain en vez de Ethereum son todos los beneficios de usar Avalanche. Estas propiedades que podrían mejorar considerablemente el rendimiento de los DApps y la experiencia del usuario.
 
-Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
+Hoy, desplegaremos y probaremos un smart contract en Avalanche usando Remix y MetaMask.
 
-## Step 1: Setting up MetaMask
+## Paso 1: Configurando MetaMask
 
-Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
+Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Network -&gt; Selecciona Custom RPC
 
 ![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
 
@@ -95,5 +95,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY0NTg4MDY2XX0=
+eyJoaXN0b3J5IjpbNDQ4MDU1OTI1XX0=
 -->
