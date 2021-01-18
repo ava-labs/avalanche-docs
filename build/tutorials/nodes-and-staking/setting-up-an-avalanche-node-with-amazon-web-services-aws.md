@@ -154,17 +154,18 @@ Seleccione la instancia de EC2 recién creada. Esto abre un panel de detalles co
 
 Copia el campo `IPv4 Public IP` para usarlo más tarde. A partir de ahora llamaremos a este valor `PUBLICIP`.
 
-**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
 
-Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
+**Recuerda: los comandos de terminal de abajo asumen que estás ejecutando Linux. Los comandos pueden ser diferentes para MacOS u otros sistemas operativos. Cuando copie y pegue un comando de un bloque de código, copie y pegue la totalidad del texto en el bloque.**
 
-Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
+Entra en la instancia AWS desde tu máquina local. Abre una terminal \(Intenta con el atajo `CTRL + ALT + T`\)  y navega al directorio que contiene el archivo `.pem` que descargaste anteriormente.
+
+Mueve el archivo `.pem` a `$HOME/.ssh` \(donde generalmente están ubicados los archivos `.pem`\) con:
 
 ```bash
 mv avalanche.pem ~/.ssh
 ```
 
-Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
+Añádelo al agente de SSH para que podamos usarlo en tu instancia de EC2, y márcalo como read-only.
 
 ```bash
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
@@ -280,7 +281,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0MDA0OTQwMSw0NjYwOTE0OTEsLTE1Nj
-gwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwt
-NzIwNjg0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbODA2Njg3NDUsMTk0MDA0OTQwMSw0NjYwOT
+E0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcy
+ODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NTMwM119
 -->
