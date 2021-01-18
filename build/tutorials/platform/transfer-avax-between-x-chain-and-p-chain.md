@@ -270,11 +270,11 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-where `to` is the X-Chain address the AVAX is being sent to.
+donde `to` es la dirección de la X-Chain a la que se está enviando los AVAX.
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+Esto nos proporciona el ID de la transacción, y podemos comprobar que la transacción fue realizada ejecutando [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). de nuevo, Asegúrate de que la cantidad que envías excede la comisión por la transacción.
 
-### Step 2 - Import AVAX to X-Chain
+### Paso 2 - Importar AVAX a X-Chain
 
 To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
 
@@ -304,5 +304,5 @@ That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Cha
 Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwNzEwMTk2MV19
+eyJoaXN0b3J5IjpbMjI5OTk2MTQ4XX0=
 -->
