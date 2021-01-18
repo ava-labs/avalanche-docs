@@ -11,7 +11,7 @@ Este tutorial mostrará cómo crear una infraestructura para supervisar una inst
 * [Prometheus](https://prometheus.io/) para reunir y almacenar datos
 * [node\_exporter](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
 * AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
-* [Grafana](https://grafana.com/) para visualizar los datos en un Dashboard.
+* [Grafana](https://grafana.com/) para visualizar los datos en un tablero.
 
 Prerequisitos:
 
@@ -27,7 +27,7 @@ El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Pro
 
 ### Contribuciones
 
-La base del Dashboard de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
+La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
 
 ## Configurando Prometheus
 
@@ -356,9 +356,9 @@ Comprueba la interfaz web de Prometheus en `http://your-node-host-ip:9090/target
 * avalanchego
 * avalanchego-machine
 
-Abre Grafana; ahora puedes crear un dashboard usando cualquiera de esas fuentes. También puedes usar [los tableros preconfigurados](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+Abre Grafana; ahora puedes crear un tableros usando cualquiera de esas fuentes. También puedes usar [los tableros preconfigurados](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
 
-To import the preconfigured dashboard:
+Para importar el tablero pre-configurado:
 
 * Open Grafana’s web interface
 * Click `+` on the left toolbar
@@ -367,6 +367,6 @@ To import the preconfigured dashboard:
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODQyNTMwODUsLTEwMjMwMDQwMzAsLT
-kwNjUyODkxMCw0MDkyODE1NjNdfQ==
+eyJoaXN0b3J5IjpbLTM1NzIwNzYwMCwtMTAyMzAwNDAzMCwtOT
+A2NTI4OTEwLDQwOTI4MTU2M119
 -->
