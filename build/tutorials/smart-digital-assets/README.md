@@ -1,6 +1,6 @@
 # Smart Digital Assets
 
-| Title | Description |
+| Título| Descripción|
 | :--- | :--- |
 | [**Create a Fixed-Cap Asset**](create-a-fix-cap-asset.md) | Create and trade a fixed-cap, fungible asset on Avalanche. |
 | [**Create a Variable-Cap Asset**](creating-a-variable-cap-asset.md) | Create and trade a variable-cap, fungible asset on Avalanche. |
@@ -9,3 +9,6 @@
 | [**Mint NFTs with the Avalanche Wallet**](wallet-nft-studio.md) | Easily mint NFTs using NFT Studio within the Avalanche Wallet. |
 | [**Use Wrapped AVAX \(WAVAX\) on Avalanche**](how-to-use-wavax-on-avalanche.md) | How to use Wrapped AVAX \(WAVAX\) on Avalanche. |
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3MjY5NDc5NDRdfQ==
+-->
