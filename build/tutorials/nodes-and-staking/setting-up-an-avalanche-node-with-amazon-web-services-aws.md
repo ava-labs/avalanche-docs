@@ -86,12 +86,12 @@ Los detalles de la instancia pueden permanecer como sus predeterminados.
 
 ### Opcional: Usando Spot Instances o Reserved Instances <a id="c99a"></a>
 
-Por defecto, se le cobrará por hora por ejecutar su instancia de EC2. Hay dos maneras en las que puede pagar menos por su EC2.
+Por defecto, se te cobrará por hora por ejecutar tu instancia de EC2. Hay dos maneras en las que puedes pagar menos por tu EC2.
 
 
-La primera es poniendo en marcha su EC2 como una **Spot Instance**. Las Spot instances son instancias que no están garantizadas para estar siempre encendidas, pero que cuestan menos en promedio que las instancias persistentes. Las spot instances utilizan una estructura de precios de mercado de oferta y demanda. A medida que la demanda de instancias sube, el precio de una spot instance sube. Puede establecer un precio máximo que esté dispuesto a pagar por la spot instance. Es posible que pueda ahorrar una cantidad significativa de dinero, con la salvedad de que su instancia EC2 puede detenerse si el precio aumenta. Haga su propia investigación antes de seleccionar esta opción para determinar si la frecuencia de interrupción a su precio máximo justifica el ahorro de costos. Si elige usar una spot instance, asegúrese de establecer el comportamiento de interrupción en **Stop**, no en **Terminate,** y marque la opción **Persistent Request**.
+La primera es poniendo en marcha su EC2 como una **Spot Instance**. Las Spot instances son instancias que no están garantizadas para estar siempre encendidas, pero que cuestan menos en promedio que las instancias persistentes. Las spot instances utilizan una estructura de precios de mercado de oferta y demanda. A medida que la demanda de instancias sube, el precio de una spot instance sube. Puedes establecer un precio máximo que estés dispuesto a pagar por la spot instance. Es posible que puedas ahorrar una cantidad significativa de dinero, con la salvedad de que tu instancia EC2 puede detenerse si el precio aumenta. Haz tu propia investigación antes de seleccionar esta opción para determinar si la frecuencia de interrupción a su precio máximo justifica el ahorro de costos. Si eliges usar una spot instance, asegúrate de establecer el comportamiento de interrupción en **Stop**, no en **Terminate,** y marca la opción **Persistent Request**.
 
-La otra forma en que podría ahorrar dinero es usando una **Reserved Instance**. Con una reserved instance, paga por adelantado un año entero de uso de EC2, y recibe una tarifa por hora más baja a cambio del bloqueo. Si tiene la intención de ejecutar un nodo por un largo tiempo y no quiere arriesgarse a interrupciones del servicio, esta es una buena opción para ahorrar dinero. Una vez más, haga su propia investigación antes de seleccionar esta opción.
+La otra forma en que podría ahorrar dinero es usando una **Reserved Instance**. Con una reserved instance, pagas por adelantado un año entero de uso de EC2, y recibes una tarifa por hora más baja a cambio del bloqueo. Si tienes la intención de ejecutar un nodo por un largo tiempo y no quieres arriesgarte a interrupciones del servicio, esta es una buena opción para ahorrar dinero. Una vez más, haz tu propia investigación antes de seleccionar esta opción.
 
 ### Añadir Almacenamiento, Etiquetas, Grupo de Seguridad <a id="dbf5"></a>
 
@@ -112,7 +112,7 @@ Ahora asigna el grupo de seguridad creado anteriormente a la instancia. Elija **
 
 Finalmente, haz clic en **Review and Launch** en la parte inferior derecha. Una página de revisión mostrará los detalles de la instancia que estás a punto de iniciar. Revísalos y si todo se ve bien, haz clic en el botón azul **Launch** en la esquina inferior derecha de la pantalla.
 
-Se te pedirá que selecciones un key pair para esta instancia. Selecciona **Choose an existing key pair** y luego selecciona el key pair `avalanche` que hiciste anteriormente en el tutorial. Marque la casilla reconociendo que tiene acceso al archivo `.pem` o `.ppk` creado anteriormente \(asegúrate de hacerle una copia de seguridad!\) y luego haga clic en **Launch Instances**.
+Se te pedirá que selecciones un key pair para esta instancia. Selecciona **Choose an existing key pair** y luego selecciona el key pair `avalanche` que hiciste anteriormente en el tutorial. Marca la casilla reconociendo que tiene acceso al archivo `.pem` o `.ppk` creado anteriormente \(asegúrate de hacerle una copia de seguridad!\) y luego haga clic en **Launch Instances**.
 
 ![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
@@ -280,7 +280,7 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5NzI4MTY0LDQ2NjA5MTQ5MSwtMTU2OD
+eyJoaXN0b3J5IjpbODM5MjU5NDIwLDQ2NjA5MTQ5MSwtMTU2OD
 A5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4NjY1Nzk5LC03
 MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
