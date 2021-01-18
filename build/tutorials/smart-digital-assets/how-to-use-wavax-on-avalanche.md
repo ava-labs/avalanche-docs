@@ -138,11 +138,11 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 
 ## Conclusión
 
-You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
+Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTIxNDI5NTAsNDc3Mzc3OTM0LC0zNj
-kyMzI5OTgsMTE3NzI2Njk0OCwxNzA0NTUyNzc4LDE2Njg5MzQy
-NDgsLTExODI1NzMyNTAsNjc5Njc2NzA5LC0xODY4NTU0MTU5XX
-0=
+eyJoaXN0b3J5IjpbMTE3NDM5Njk0MCw0NzczNzc5MzQsLTM2OT
+IzMjk5OCwxMTc3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0
+OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ
+==
 -->
