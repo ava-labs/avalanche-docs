@@ -175,7 +175,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the transaction ID:
+La respuesta contiene el ID de la transacción:
 
 ```cpp
 {
@@ -188,7 +188,7 @@ The response contains the transaction ID:
 }
 ```
 
-### Verify Success <a id="verify-success"></a>
+### Comprobando que fué exitoso <a id="verify-success"></a>
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
 
@@ -283,5 +283,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczMjg3NTE3OSwxMTEyMDI3MTg2XX0=
+eyJoaXN0b3J5IjpbLTg3NDU1NjE1NywxMTEyMDI3MTg2XX0=
 -->
