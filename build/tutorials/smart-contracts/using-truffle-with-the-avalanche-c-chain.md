@@ -235,13 +235,13 @@ true
 
 ## Ejecutar Migraciones
 
-Now everything is in place to run migrations and deploy the `Storage` contract:
+Ahora todo está listo para ejecutar las migraciones y desplegar el contrato de `Storage`:
 
 ```text
 truffle migrate --network development
 ```
 
-You should see:
+Deberías ver:
 
 ```text
 Compiling your contracts...
@@ -295,13 +295,13 @@ Summary
 > Final cost:          0.13542204 ETH
 ```
 
-If you didn't create an account on the C-Chain you'll see this error:
+Si no creaste una cuenta en la C-Chain verás este error:
 
 ```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
-If you didn't fund the account, you'll see this error:
+Si no agregaste fondos a la cuenta verás este error:
 
 ```text
 Error:  *** Deployment Failed ***
@@ -413,5 +413,5 @@ You should see the number you stored.
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTI4MjYwODMsLTg1NTMxMjA2Ml19
+eyJoaXN0b3J5IjpbLTczNzkxNzMzOCwtODU1MzEyMDYyXX0=
 -->
