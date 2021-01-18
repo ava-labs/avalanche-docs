@@ -24,7 +24,7 @@ Una vez que su cuenta esté configurada, debería crear una nueva instancia EC2.
 
 ![AWS Management Console.png](../../../.gitbook/activos/AWS-Management-Console.png)
 
-To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
+Para acceder a la instancia EC2, necesitará una llave en su máquina local que le permita acceder a la instancia. Primero, cree esa clave para que pueda ser asignada a la instancia EC2 más adelante. En la barra de la izquierda, bajo **Network & Security**, seleccione **Key Pairs.**
 
 ![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/Network-and-Security.png)
 
@@ -278,5 +278,5 @@ Your machine is now running the newest AvalancheGo version. To see the status of
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2MjQxNTIzMCw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbLTg4OTc4Mzk1MCw4NjEwOTUzMDNdfQ==
 -->
