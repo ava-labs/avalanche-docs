@@ -299,10 +299,10 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 
 ## Concluimos!
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la P-Chain, usando la Wallet de Avalanche, y ejecutando los llamados API apropiados en un nodo de Avalanche.
 
-Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) on the Primary Network.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTEyMTIwNzU5XX0=
+eyJoaXN0b3J5IjpbLTM2Njk2MDU0NF19
 -->
