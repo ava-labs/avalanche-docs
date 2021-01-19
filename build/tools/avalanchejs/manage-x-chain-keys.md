@@ -56,10 +56,10 @@ let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la direcc
 El KeyChain de la X-Chains tiene capacidades de gestión de claves estandarizadas. Las siguientes funciones están disponibles en cualquier KeyChain que implemente esta interfaz.
 
 ```text
-let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
-let addressStrings = myKeychain.getAddressStrings(); //returns an array of strings for the addresses
-let exists = myKeychain.hasKey(newAddress1); //returns true if the address is managed
-let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
+let addresses = myKeychain.getAddresses(); //devuelve un conjunto de Buffers para las direcciones
+let addressStrings = myKeychain.getAddressStrings(); //devuelve un conjunto de cadenas para las direcciones
+let exists = myKeychain.hasKey(newAddress1); //retorna verdadero si la dirección es administrada
+let keypair = myKeychain.getKey(newAddress1); //devuelve el KeyPair class
 ```
 
 ## Working with Keypairs <a id="working-with-keypairs"></a>
@@ -89,5 +89,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyMDc5MzE5NF19
+eyJoaXN0b3J5IjpbLTgyMTk1NDY1NywtNTIwNzkzMTk0XX0=
 -->
