@@ -12,7 +12,7 @@ Para resistir [ataques sybil](https://support.avalabs.org/en/articles/4064853-wh
 
 ## Parámetros de Staking en Avalanche
 
-Cuando un validador termina de validar la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), recibe de vuelta los tokens de AVAX que ha puesto en stake. Puede recibir una recompensa por ayudar a asegurar la red. Un validador sólo recibe una [recompensa de validación](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) si es suficientemente responsivo y correcto durante el tiempo que valida. Lea el [Whitepaper del Token de Avalanche](https://files.avalabs.org/papers/token.pdf) para aprender más sobre AVAX y las mecánicas del staking.
+Cuando un validador termina de validar la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), recibe de vuelta los tokens de AVAX que ha puesto en stake. Puede recibir una recompensa por ayudar a asegurar la red. Un validador sólo recibe una [recompensa de validación](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) si es suficientemente receptivo y correcto durante el tiempo que valida. Lea el [Whitepaper del Token de Avalanche](https://files.avalabs.org/papers/token.pdf) para aprender más sobre AVAX y las mecánicas del staking.
 
 {% hint style="warning" %}
 Las recompensas del staking se envían a la dirección de tu wallet al final del plazo de staking **siempre y cuando se cumplan todos estos parámetros**.
@@ -100,12 +100,12 @@ Ten en cuenta que una vez emites la transacción tpara añadir tu stake a un del
 
 ### Recompensas para Delegadores <a id="delegator-rewards"></a>
 
-If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
-When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
+Si el validador en el que delega los tokens es lo suficientemente correcto y receptivo, recibirás una recompensa cuando termines de delegar. Los delegados son recompensados de acuerdo a la misma función que los validadores. Sin embargo, el validador en el que usted delega se queda con una parte de tu recompensa, especificada por la comisión de delegación del validador.
 
+Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a su dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3MjczNDM2LC0xNTMzODQwOTkyLC05MD
-UzMTczMDAsOTk1NTU0ODgsNTQyNTY3NjQ4LC0zNjI3OTkzODEs
-NTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbMTQyNjM3Mzc0NiwxNTcyNzM0MzYsLTE1Mz
+M4NDA5OTIsLTkwNTMxNzMwMCw5OTU1NTQ4OCw1NDI1Njc2NDgs
+LTM2Mjc5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
 -->
