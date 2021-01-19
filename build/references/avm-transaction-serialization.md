@@ -720,7 +720,7 @@ Una operación de acuñado SECP256K1 contiene un `TypeID`, `AddressIndices`, `Mi
                                    +------------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Operation Specification**
+### **Especificación Proto de una Operación de Acuñado SECP256K1**
 
 ```text
 message SECP256K1MintOperation {
@@ -731,9 +731,9 @@ message SECP256K1MintOperation {
 }
 ```
 
-### **SECP256K1 Mint Operation Example**
+### **Ejemplo de una Operación de Acuñado SECP256K1**
 
-Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
+Hagamos una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) con:
 
 * **`TypeId`**: 8
 * **`AddressIndices`**:
@@ -781,7 +781,7 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 ]
 ```
 
-## NFT Mint Op
+## Operación de Acuñado NFT
 
 An NFT mint operation consumes an NFT mint output and sends an unspent output to a new set of owners.
 
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODcxMTY1NjgsOTc5MTA3ODUxLDIxMz
+eyJoaXN0b3J5IjpbLTE2MTY3ODQ5OTIsOTc5MTA3ODUxLDIxMz
 E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
 NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
 E5NjQ3ODI3OTldfQ==
