@@ -12,7 +12,7 @@ _Nota: Ehtereum tiene su propia noción de `networkID` y `chainID`. Estos no tie
 
 ## Metodos
 
-Esta API es idéntica al API de Geth, con excepción que solamente soporta los siguientes se except that it only supports the following services:
+Esta API es idéntica al API de Geth, con excepción que solamente soporta los siguientes servicios:
 
 * `web3_`
 * `net_`
@@ -20,7 +20,7 @@ Esta API es idéntica al API de Geth, con excepción que solamente soporta los s
 * `personal_`
 * `txpool_`
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
+Puedes interactuar con estos servicios del mismo modo en que lo harías con Geth. Mira la [Documentación Ethereum Wiki’s JSON-RPC](https://eth.wiki/json-rpc/API) y [Documentación de Geth JSON-RPC](https://geth.ethereum.org/docs/rpc/server) para una defor a full description of this API.
 
 ## JSON-RPC Endpoints
 
@@ -450,5 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0MTUzMTk0NiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbLTIxNDExOTEyNzAsLTE5MDEwODQyNDldfQ
+==
 -->
