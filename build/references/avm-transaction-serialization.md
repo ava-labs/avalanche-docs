@@ -280,7 +280,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Especificación Proto de Salida de Transferencia**
+### **Especificación Proto de Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjYxOTk5MjYsMjA1NzUzNDU3Nyw2Nj
+eyJoaXN0b3J5IjpbLTE3NjM3MDk3NTQsMjA1NzUzNDU3Nyw2Nj
 AxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4
 Mjc5OV19
 -->
