@@ -40,8 +40,8 @@ auth.newToken(
 ```
 
 * `password` es la contraseña del token de autorización de este nodo.
-* `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
-* `token` is the authorization token.
+* `endpoints` es una lista de extremos que pueden ser accesibles usando el token generado. Si `endpoints` contiene el elemento `"*"`, el token generado dará acceso a cualquier extremo de la API.
+* `token` es el token de autorización.
 
 #### **Example Call**
 
@@ -103,7 +103,7 @@ auth.revokeToken(
 * `password` is this node’s authorization token password.
 * `token` is the authorization token being revoked.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -117,7 +117,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -174,6 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY5Mzg4NTYsLTExNzE5MTU1MDUsMTUzMT
-U1NTI3NF19
+eyJoaXN0b3J5IjpbLTEzNDA1OTE0ODYsMjY5Mzg4NTYsLTExNz
+E5MTU1MDUsMTUzMTU1NTI3NF19
 -->
