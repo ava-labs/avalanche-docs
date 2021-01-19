@@ -177,7 +177,7 @@ avax.exportKey({
 **Petición**
 
 * `username` debe tener control de  `address`.
-* `address` es la direcis the address for which you want to export the corresponding private key. It should be in hex format.
+* `address` es la dirección de la cual quieres exportar su correspondiente llave privada. Debe estar en formato hex.
 
 **Response**
 
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTI2Njk0MzAsLTE5MDEwODQyNDldfQ
+eyJoaXN0b3J5IjpbLTIxMDExNTc3MTIsLTE5MDEwODQyNDldfQ
 ==
 -->
