@@ -892,17 +892,17 @@ Hagamos una operación de acuñado NFT con:
 
 ## Operación de Transferencia NFT
 
-Una operación de transferencia NFT sends an unspent NFT transfer output to a new set of owners.
+Una operación de transferencia NFT envía una salida de transferencia NFT no utilizada a un nuevo conjunto de propietarios.
 
-### **What NFT Transfer Op Contains**
+### **Que Contiene una Operación de Transferencia NFT**
 
 Una operación de transferencia NFT contiene un `TypeID`, `AddressIndices` y un no tipificado `NFTTransferOutput`.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000d`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an NFT Transfer Output. This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+* **`TypeID`** es la identificación para este tipo de salida. Es `0x0000000d`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`NFTTransferOutput`** es la salida de esta operación y debe ser una salida de transferencia NFT. Esta salida no tiene el **`TypeId`**, porque el tipo se conoce por el contexto de estar en esta operación.
 
-### **Gantt NFT Transfer Op Specification**
+### **Especificación Gantt de una Operación de Transferencia NFT**
 
 ```text
 +------------------------------+------------------------------------+
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3NTk0NjcwNSwtMjA5NjMxMjQwMCw5Nz
+eyJoaXN0b3J5IjpbLTE5NTQyMzY2NiwtMjA5NjMxMjQwMCw5Nz
 kxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0
 NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLT
 EyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
