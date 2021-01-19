@@ -188,7 +188,7 @@ avm.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -202,7 +202,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -216,7 +216,7 @@ curl -X POST --data '{
 
 ### avm.createFixedCapAsset
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+Crea un nuevo activo fungible, de capitalización fija. Una cantidad  A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MT
-Q1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbNzcwMzk5MjQ3LC05ODA5NjE5ODQsLTQ0NT
+gzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
 -->
