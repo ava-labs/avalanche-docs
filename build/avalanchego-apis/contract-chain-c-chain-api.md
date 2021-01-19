@@ -118,11 +118,11 @@ avax.exportAVAX({
 
 **Petición**
 
-* `from` es la dirección de la C-Chain desde la cual se envían los AVAX is sent from. They should be in hex format.
-* `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
-* `amount` is the amount of nAVAX to send.
-* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
-* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
+* `from` es la dirección de la C-Chain desde la cual se envían los AVAX. Debe estar en formato hex.
+* `to` es la dirección de la X-Chain hacia la cual se enviarán los AVAX. Debe estar en formato bech32.
+* `amount` es el monto en nAVAX a enviar.
+* `destinationChain` es la cadena a la cual el AVAX se envía. Para exportar los fondos a la X-Chain, usa `"X"`.
+* `changeAddr` es la dirección de C-Chain en address where any change is sent to. It should be in hex format.
 * The AVAX is sent from addresses controlled by `username`
 
 **Response**
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI0MjA4MDIsLTE5MDEwODQyNDldfQ==
+eyJoaXN0b3J5IjpbMTE3MzY0NTMwMiwtMTkwMTA4NDI0OV19
 -->
