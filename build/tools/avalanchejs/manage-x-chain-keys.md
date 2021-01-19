@@ -33,14 +33,15 @@ Esto expone la instancia de la clase AVMKeyChain que se crea cuando se crea la A
 El KeyChain tiene la capacidad de crear nuevos KeyPairs para ti y devolver la dirección asociada al key pair.
 
 ```text
-let newAddress1 = myKeychain.makeKey(); //retorna un Buffer for the address
+let newAddress1 = myKeychain.makeKey(); //retorna un Buffer para la dirección
 ```
 
-You may also import your existing private key into the KeyChain using either a Buffer…
+También puede importar su private key existente en el KeyChain usando un Buffer...
 
 ```text
-let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //returns a Buffer
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //retorna un Buffer
+let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la dirección
+
 ```
 
 … or an Avalanche serialized string works, too:
@@ -88,5 +89,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTQzMTI4MjVdfQ==
+eyJoaXN0b3J5IjpbLTEwMDEyMjIxMTNdfQ==
 -->
