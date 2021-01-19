@@ -22,7 +22,7 @@ Tipos de datos
 
 Además de los números enteros, las cadenas y los booleanos, se utilizan los siguientes tipos de datos en toda la API:
 
-| Name | Description | Examples |
+| Nombre| Descripción| Ejemplos|
 | :--- | :--- | :--- |
 | `id` | Un identificador de objeto codificado CB58, como una cadena, una transacción o una identificación de activo | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
 | `address` | Una dirección codificada bech-32 | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
@@ -32,7 +32,7 @@ Además de los números enteros, las cadenas y los booleanos, se utilizan los si
 
 Todos los puntos finales de la lista de recursos aceptan los siguientes parámetros:
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
 | `offset` | `int` | El número de elementos a omitir | `0` | None |
@@ -86,7 +86,7 @@ Encuentra una dirección o una transacción por su ID.
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
 
@@ -175,7 +175,7 @@ Calcular los datos agregados de las transacciones a lo largo de un período de t
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrado varias veces. | None | None |
 | `assetID` | `id` | Una ID de activos para filtrar los resultados.. | None | None |
@@ -234,7 +234,7 @@ Responde con las cadenas en las que aparece una dirección
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
 
@@ -266,7 +266,7 @@ Find transactions confirmed transactions from the network.
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `assetID` | `id` | An asset ID to filter results by. | None | None |
@@ -430,7 +430,7 @@ Find addresses that have been involved in confirmed transactions.
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
@@ -499,7 +499,7 @@ Find assets that have been created on the X-chain.
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
 
@@ -673,7 +673,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 
 **Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Type | Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
@@ -767,7 +767,7 @@ The legacy API supports the same endpoints and parameters as version 2, except t
 
 Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
 
-## Example
+## Ejemplo
 
 This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxMzk4NzY1OSw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbMTYxMjY5NTYxMSw3OTQ3NTg5NjddfQ==
 -->
