@@ -79,15 +79,15 @@ let privkstr = keypair.getPrivateKeyString(); //devuelve una cadena codificada C
 keypair.generateKey(); //crea un nuevo KeyPair aleatorio
 
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let successul = keypair.importKey(mypk); //retorna booleano si el private key fue importado exitosamente
+let successul = keypair.importKey(mypk); //retorna un booleano si el private key fue importado exitosamente
 
 let message = Buffer.from("Wubalubadubdub");
 let signature = keypair.sign(message); //retorna un Buffer con la firma
 
 let signerPubk = keypair.recover(message, signature);
-let isValid = keypair.verify(message, signature); //returns a boolean
+let isValid = keypair.verify(message, signature); //retorna un booleano
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDc2NTQzMDksLTUyMDc5MzE5NF19
+eyJoaXN0b3J5IjpbMTIwNTkzMTY5OSwtNTIwNzkzMTk0XX0=
 -->
