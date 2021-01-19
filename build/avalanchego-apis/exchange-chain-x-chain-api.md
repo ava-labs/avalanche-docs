@@ -45,9 +45,9 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` especifica el formato de codificación para utilizar para bytes arbitrarios ie. los bytes del génesis que son regresados. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-`genesisData` has this form:
+`genesisData` tiene la forma:
 
 ```cpp
 {
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1MzIyNzYyOSwtOTgxNDU4NjM2LDEyMz
-g0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzOD
+QzNjE4M119
 -->
