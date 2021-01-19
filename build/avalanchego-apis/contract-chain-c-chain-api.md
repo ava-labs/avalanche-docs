@@ -6,13 +6,13 @@ descripción: La Cadena C o C-Chain es una instancia de la Máquina Virtual de E
 
 _Nota: Ehtereum tiene su propia noción de `networkID` y `chainID`. Estos no tienen ninguna relación con la visión que tiene Avalanche de networkID and chainID y son puramente internas en la_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. En la red principal, la C-Chain utiliza `1` y `43114` para estos valores. En la red de pruebas Fuji, utiliza `1` y `43113` para estos valores. `networkID` y `chainID` pueden obtenerse usando los métodos `net_version` y `eth_chainId` mostrados más adelante._
 
-## Deploying a Smart Contract
+## Despligue de un Contrato Inteligente
 
 {% page-ref page="../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
-## Methods
+## Metodos
 
-This API is identical to Geth’s API except that it only supports the following services:
+Esta API es idéntica al API de Geth, con excepción que solamente soporta los siguientes se except that it only supports the following services:
 
 * `web3_`
 * `net_`
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDEwODQyNDldfQ==
+eyJoaXN0b3J5IjpbLTU0MTUzMTk0NiwtMTkwMTA4NDI0OV19
 -->
