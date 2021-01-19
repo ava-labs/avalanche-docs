@@ -10,11 +10,11 @@ Esta API es solamente alcanzable si el nodo se inició con el [argumento de lín
 
 La creación de tokens de autorización debe ser permisionada. Si ejecutas tu nodo con  `--api-auth-required`, entonces también deberás especificar una contraseña para el token de autorización con el argumento  `--api-auth-password`. Debes indicar esta contraseña en función de crear/revocar un token de autorización.
 
-Notar que si ejecutas tu nodo con `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+Notar que si ejecutas tu nodo con `--api-auth-required` entonces algunas herramientas como MetaMask pueden no ser capaces de hacer llamadas al API de tu nodo debido a que no cuentan con token de autorización.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
+Esta API utiliza formato RPC `json 2.0`. Para más información en hacer llamadas JSON RPC, mira [aquíe.](issuing-api-calls.md)
 
 ## Endpoint
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4ODUzNzk3MSwxNTMxNTU1Mjc0XX0=
+eyJoaXN0b3J5IjpbLTE1MTA5NzI5MDUsMTUzMTU1NTI3NF19
 -->
