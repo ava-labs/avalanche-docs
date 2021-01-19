@@ -35,7 +35,7 @@ Se puede crear una subnet en la que sólo pueden unirse ciertos validadores pred
 
 En una red heterogénea de blockchains, algunos validadores no querrán validar ciertas blockchains porque simplemente no tienen interés en ellas. El modelo de subnet permite a los validadores sólo preocuparse de las blockchains que les interesan. Esto reduce la carga de los validadores.
 
-### Application-Specific Requirements
+### Requisitos Específicos de la Aplicación
 
 Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
 
@@ -90,5 +90,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMzY5MjY0NV19
+eyJoaXN0b3J5IjpbOTMwMzAzNTk0XX0=
 -->
