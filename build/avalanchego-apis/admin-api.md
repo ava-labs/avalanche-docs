@@ -106,7 +106,7 @@ Ahora, en lugar de interactuar con el ID de la cadena de bloques, que es `sV6o67
 
 ### admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+Escribe un perfil de estadísticas mutex a`lock.profile`.
 
 #### **Signature**
 
@@ -114,7 +114,7 @@ Writes a profile of mutex statistics to `lock.profile`.
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -125,7 +125,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -139,7 +139,7 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Writes a memory profile of the to `mem.profile`.
+Escribe unWrites a memory profile of the to `mem.profile`.
 
 #### **Signature**
 
@@ -236,6 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwNDMzOTU5NSwtMTY5NzE1MDEzLDExNz
-IyMjQ3NCwtMjE0MDUxNDIxMCw1NTIxNzc3NTBdfQ==
+eyJoaXN0b3J5IjpbLTIzMzY5ODQwOSwtNTA0MzM5NTk1LC0xNj
+k3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0MjEwLDU1MjE3Nzc1
+MF19
 -->
