@@ -145,9 +145,9 @@ auth.changePassword(
 ```
 
 * `oldPassword` es la contraseña actual del token de autorización del nodo.
-* `newPassword` es la nueva contraseña del token de autorización  the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `newPassword` es la nueva contraseña del token de autorización que tendrá el nodo después del llamado a la API. Debe tener entre 1 y 1024 caracteres.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -161,7 +161,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -174,6 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5ODc1ODE4NjksMjY5Mzg4NTYsLTExNz
+eyJoaXN0b3J5IjpbLTEyMzAyMzAyNDIsMjY5Mzg4NTYsLTExNz
 E5MTU1MDUsMTUzMTU1NTI3NF19
 -->
