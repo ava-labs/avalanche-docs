@@ -339,18 +339,18 @@ Las funciones disponibles para Lua son:
 * `avash_sleepmicro` - Toma un entero sin signo representando microsegundos y permanece inactivo por ese tiempo
 * `avash_setvar` - Toma un alcance de la variable \(string\), un nombre de la variable\(string\),y una variable \(string\) y lo coloca en el almacen de variables. El scope ya debe haber sido creado.
 
-Al escribir Lua, la funcionalidad estándar de Lua está disponible para automatizar la ejecución de una serie de comandos de Avash. Esto permite a un desarrollador automatizar:
+Al escribir Lua, la funcionalidad estándar de Lua está disponible para automatizar la ejecución de una serie de comandos de Avash. Esto le permite a un desarrollador automatizar:
 
-* Local network deployments
-* Sending transactions
-* Order transaction test cases
-* Save the value of UTXO sets and test results to disk
-* Compare the values of two nodes UTXO sets
-* Track expected results and compare them with real nodes
+* Despliegues de la red local
+* Envío de transacciones
+* Ordenar casos de prueba de transacciones
+* Guardar el valor de los conjuntos UTXO y los resultados de las pruebas en el disco
+* Comparar los valores de dos nodos UTXO conjuntos
+* Rastrear los resultados esperados y compáralos con los nodos reales
 
-Example Lua scripts are in the `./scripts` folder.
+Los scripts Lua de ejemplo están en la carpeta `./scripts`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTk0NjY0OTcsLTE5NjI0Mjk5OTgsMT
-A1MzcxMjM5NSwtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbNjUyNDA2MzcxLC0xOTYyNDI5OTk4LDEwNT
+M3MTIzOTUsLTI4MTcxODA4XX0=
 -->
