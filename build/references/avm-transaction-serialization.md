@@ -1095,7 +1095,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Especificación Proto de una  Credencial SECP256K1**
 
 ```text
 message SECP256K1Credential {
@@ -1104,9 +1104,9 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **Ejemplo de una  Credencial SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeID`**: 9
 * **`signatures`**:
@@ -1150,9 +1150,9 @@ Let’s make a payment input with:
 ]
 ```
 
-## NFT Credential
+## Credencial NFT
 
-An NFT credential is the same as an secp256k1 credential with a different TypeID. The TypeID for an NFT credential is `0x0000000e`.
+Una credencial NFT es la misma que una credencial secp256k1 con un TypeID diferente. El TypeID para una credencial NFT es `0x0000000e`.
 
 ## Unsigned Transactions
 
@@ -1921,9 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MjkzNzY3MzUsLTE5NDMyMzQwNywtMT
-Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
-MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
-w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
-NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbNTAzMzcxMDAxLC0xOTQzMjM0MDcsLTE2OT
+k5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3
+MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNj
+YwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3
+ODI3OTldfQ==
 -->
