@@ -709,9 +709,10 @@ curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 }
 ```
 
-#### Get Output
 
-Find a single output by its ID.
+#### Obtener Salida
+
+Encuentra una salida por su ID.
 
 **Llamado de Ejemplo**
 
@@ -814,5 +815,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUyNzI4NzA5LDc5NDc1ODk2N119
+eyJoaXN0b3J5IjpbNzczNTY3NTM5LDc5NDc1ODk2N119
 -->
