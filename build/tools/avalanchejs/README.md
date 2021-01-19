@@ -2,17 +2,18 @@
 
 AvalancheJS es una biblioteca de JavaScript para interactuar con la plataforma [Avalanche](../../../#avalanche). Está construida usando TypeScript y está pensada para soportar tanto el navegador como Node.js. La biblioteca AvalancheJS permite emitir comandos a las API del nodo Avalanche.
 
-The APIs currently supported by default are:
 
-* Admin API
-* AVM API \(X-Chain\)
-* Health API
-* Info API
-* Keystore API
-* Metrics API
-* PlatformVM API
+Las APIs actualmente soportadas por defecto son:
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network/).
+* API de Administración
+* API de la AVM \(X-Chain\)
+* API de Salud
+* API de Información 
+* API del Keystore 
+* API de Métricas
+* API de PlatformVM
+
+Construimos AvalancheJS pensando en la facilidad de uso. Con esta biblioteca, cualquier desarrollador de Javascript puede interactuar con un nodo de la plataforma de Avalanche que haya habilitado sus puntos finales de la API para el consumo del desarrollador. Mantenemos la biblioteca actualizada con los últimos cambios en la [Especificación de la Plataforma de Avalanche](https://docs.avax.network/).
 
 Using AvalancheJS, developers can:
 
@@ -74,5 +75,5 @@ The above lines import the libraries used in the tutorials. The libraries includ
 * BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTc4NDAwOTRdfQ==
+eyJoaXN0b3J5IjpbLTg0NTE0NTQ0XX0=
 -->
