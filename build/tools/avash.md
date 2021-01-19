@@ -149,18 +149,18 @@ Uso:
   avash avawallet [command] [flags]
 
 Comandos Disponibles:
-  addkey      Adds a private key to a wallet.
-  balance     Checks the balance of an address from a node.
-  compare     Compares the UTXO set between two wallets.
-  create      Creates a wallet.
-  maketx      Creates a signed transaction.
-  newkey      Creates a random private key.
-  refresh     Refreshes UTXO set from node.
-  remove      Removes a transaction from a wallet's UTXO set.
-  send        Sends a transaction to a node.
-  spend       Spends a transaction from a wallet's UTXO set.
-  status      Checks the status of a transaction on a node.
-  writeutxo   Writes the UTXO set to a file.
+  addkey Añade una private key a una cartera.
+  balance Comprueba el balance de una dirección de un nodo.
+  compare Compara el set de UTXO entre dos wallets.
+  create Crea una wallet.
+  maketx Crea una transacción firmada.
+  newkey Crea una private key aleatoria.
+  refresh Refresca el conjunto UTXO desde el nodo.
+  remove Elimina una transacción del set de UTXO de una wallet.
+  send Envía una transacción a un nodo.
+  spend Paga una transacción del set de UTXO de una wallet.
+  status Comprueba el estado de una transacción en un nodo.
+  writeutxo Escribe el conjunto UTXO en un archivo.
 ```
 
 **callrpc**
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE4ODg4NjMsLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbLTE1MzQyMTA3OTcsLTI4MTcxODA4XX0=
 -->
