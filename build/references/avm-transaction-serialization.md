@@ -1400,7 +1400,7 @@ Hagamos una transacción de creación de activo no firmada que utilice las entra
 ]
 ```
 
-### Que Contiene una Operación Tx No Firmada
+### Que Contiene una Transacción de Operación No Firmada
 
 Una operación Tx no firmada contiene un `BaseTx`, y `Ops`. El`TypeID` es `0x00000002`.
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjYyMTEyMzU2LDExNDY3MjgzODksNTU5NT
-Y1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOTc0MzYwMTA0LC05
-Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MD
-MyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3
-LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgzMjgzLC03Nz
-U3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgx
-MF19
+eyJoaXN0b3J5IjpbLTg2NjY5ODQyMiwxMTQ2NzI4Mzg5LDU1OT
+U2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwt
+OTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOT
+AzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1
+NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNz
+c1NzQzOTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4
+MTBdfQ==
 -->
