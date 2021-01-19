@@ -71,11 +71,11 @@ En el futuro, Avalanche le permitirá definir y lanzar blockchains personalizada
 
 ## Exchange Chain \(X-Chain\)
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like “can’t be traded until tomorrow” or “can only be sent to US citizens.”
+La **X-Chain** actúa como una plataforma descentralizada para la creación y el comercio de digital smart assets, una representación de un recurso del mundo real (por ejemplo, acciones, bonos) con un conjunto de reglas que rigen su comportamiento, como "no se puede comerciar hasta mañana" o "sólo se puede enviar a los ciudadanos de EE.UU.".
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
+Un activo comercializado en la X-Chain es AVAX. Cuando se emite una transacción a una blockchain en Avalanche, se paga una comisión denominada AVAX.
 
-The X-Chain is an instance of the Avalanche Virtual Machine \(AVM\). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+La X-Chain is an instance of the Avalanche Virtual Machine \(AVM\). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
 {% page-ref page="../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
@@ -92,6 +92,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM4MjMzMjcwLDY3OTgwMTAxMyw2MzkwMj
-UwNzcsOTMwMzAzNTk0XX0=
+eyJoaXN0b3J5IjpbLTYzNTAwMDY0Nyw2Nzk4MDEwMTMsNjM5MD
+I1MDc3LDkzMDMwMzU5NF19
 -->
