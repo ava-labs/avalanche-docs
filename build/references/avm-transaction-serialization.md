@@ -656,7 +656,7 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
 Let’s make a payment input with:
 
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5MTE4NzA1MCwyMTMxNzYyNzMwLDQ5OT
+eyJoaXN0b3J5IjpbMTMxNDk3OTY3OSwyMTMxNzYyNzMwLDQ5OT
 MwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0
 NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX
 0=
