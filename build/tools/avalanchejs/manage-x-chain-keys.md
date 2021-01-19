@@ -71,23 +71,23 @@ let address = keypair.getAddress(); //retorna Buffer
 let addressString = keypair.getAddressString(); //retorna string
 
 let pubk = keypair.getPublicKey(); //retorna Buffer
-let pubkstr = keypair.getPublicKeyString(); //returns a CB58 encoded string
+let pubkstr = keypair.getPublicKeyString(); //devuelve una cadena codificada CB58
 
-let privk = keypair.getPrivateKey(); //returns Buffer
-let privkstr = keypair.getPrivateKeyString(); //returns a CB58 encoded string
+let privk = keypair.getPrivateKey(); //retorna Buffer
+let privkstr = keypair.getPrivateKeyString(); //devuelve una cadena codificada CB58
 
-keypair.generateKey(); //creates a new random KeyPair
+keypair.generateKey(); //crea un nuevo KeyPair aleatorio
 
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let successul = keypair.importKey(mypk); //returns boolean if private key imported successfully
+let successul = keypair.importKey(mypk); //retorna booleano si el private key fue importado exitosamente
 
 let message = Buffer.from("Wubalubadubdub");
-let signature = keypair.sign(message); //returns a Buffer with the signature
+let signature = keypair.sign(message); //retorna un Buffer con la firma
 
 let signerPubk = keypair.recover(message, signature);
 let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxMjgxMTkzMywtNTIwNzkzMTk0XX0=
+eyJoaXN0b3J5IjpbLTExNDc2NTQzMDksLTUyMDc5MzE5NF19
 -->
