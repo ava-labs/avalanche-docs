@@ -1831,11 +1831,11 @@ Hagamos un ejemplo de una transacción firmada que utilice las entradas y salida
 
 ## UTXO
 
-Un UTXO es una representación independiente de la salida de una transacción.
+Una UTXO o "Unspent Transaction Output"es una representación independiente de la salida de una transacción.
 
-### Que Contiene Un UTXO
+### Que Contiene Una UTXO
 
-Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
+Una UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 
 * **`CodecID`** El único `CodecID` válido es `00 00`
 * **`TxID`** es una identificación de transacción de 32 bytes. Los ID de transacción se calculan tomando sha256 de los bytes de la transacción firmada.
@@ -1843,7 +1843,7 @@ Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
 * **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
-### Especificación Gantt de un UTXO
+### Especificación Gantt de una UTXO
 
 ```text
 +--------------+----------+-------------------------+
@@ -1861,7 +1861,7 @@ Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
                           +-------------------------+
 ```
 
-### Especificación Proto de un UTXO
+### Especificación Proto de una UTXO
 ```text
 message Utxo {
     uint16 codec_id = 1;     // 02 bytes
@@ -1920,11 +1920,11 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE2MDE1ODQ1LC0xMjkzNDE4MjkxLDExND
-Y3MjgzODksNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgs
-OTc0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NT
-Q3NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5
-MCwtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNj
-Y4ODgzMjgzLC03NzU3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4
-MjAzXX0=
+eyJoaXN0b3J5IjpbLTE4NDkwNDYyODEsLTEyOTM0MTgyOTEsMT
+E0NjcyODM4OSw1NTk1NjU5LC04MjM5Mjg4ODAsLTk2Mjk2MDA1
+OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MD
+g1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0
+MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NS
+w2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5
+MTgyMDNdfQ==
 -->
