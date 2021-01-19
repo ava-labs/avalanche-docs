@@ -229,9 +229,9 @@ Este formato puede ser escalado para desplegar simultáneamente muchos nodos en 
 **procmanager**
 
 ```text
-Access the process manager for the avash client. Using this 
-    command we can list, stop, and start processes registered with the 
-    process manager.
+Accede al administrador de procesos para el cliente avash. Usando esto 
+    podemos listar, detener e iniciar procesos registrados con el 
+       el administrador de procesos.
 
 Uso:
   avash procmanager [command] [flags]
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4MjA3OTQxOCwxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTE3MjI0OTYzODQsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
