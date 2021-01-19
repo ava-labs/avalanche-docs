@@ -1,7 +1,6 @@
 # Formato de Transacción de la Plataforma
 
-Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones en la Avalanche’s Platform Virtual Machine, también conocida como la `Platform Chain` o la `P-Chain`. Este documento utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado y [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) para la identificación criptográfica del usuario.
-
+Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones en la Avalanche’s Platform Virtual Machine, también conocida como la`Platform Chain` o la `P-Chain`. Este documento utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado y [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
@@ -12,14 +11,14 @@ Salida transferible
 
 Las salidas transferibles envuelven una salida con una identificación de activo.
 
-### Qué Contiene una Salida Transferible
+### What Transferable Output Contains
 
-Una salida transferible contiene una `AssetID` y un `Output`.
+A transferable output contains an `AssetID` and an `Output`.
 
-* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
-* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
+* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
+* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
 
-### Especificación Gantt de una Salida Transferible
+### Gantt Transferable Output Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -31,7 +30,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Especificación Proto de una Salida Transferible
+### Proto Transferable Output Specification
 
 ```text
 message TransferableOutput {
@@ -40,9 +39,9 @@ message TransferableOutput {
 }
 ```
 
-### Ejemplo de una Salida Transferible
+### Transferable Output Example
 
-Hagamos una salida transferible:
+Let’s make a transferable output:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -69,20 +68,20 @@ Hagamos una salida transferible:
 ]
 ```
 
-## Entrada transferible
+## Transferable Input
 
-Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
+Transferable inputs describe a specific UTXO with a provided transfer input.
 
-### Que Contiene una Entrada Transferible
+### What Transferable Input Contains
 
-Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
+A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
-* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
-* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
-* **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
+* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
+* **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
+* **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
+* **`Input`** is a transferable input object.
 
-### Especificación Gantt de Entrada Transferible
+### Gantt Transferable Input Specification
 
 ```text
 +------------+----------+------------------------+
@@ -98,7 +97,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
                         +------------------------+
 ```
 
-### Especificación Proto de la Entrada Transferible
+### Proto Transferable Input Specification
 
 ```text
 message TransferableInput {
@@ -109,9 +108,9 @@ message TransferableInput {
 }
 ```
 
-### Ejemplo de entrada transferible
+### Transferable Input Example
 
-Hagamos una entrada transferible:
+Let’s make a transferable input:
 
 * **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
 * **`UTXOIndex`**: `0`
@@ -1604,6 +1603,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYwNDA3ODI2LC0zNjc5MzkwNzAsLTQ4Mj
-MzNjUyM119
+eyJoaXN0b3J5IjpbMTAxMjMzNDc2OCwtMzY3OTM5MDcwLC00OD
+IzMzY1MjNdfQ==
 -->
