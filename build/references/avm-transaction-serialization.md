@@ -293,9 +293,9 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **Ejemplo de salida de transferencia SECP256K1**
 
-Let’s make a secp256k1 transfer output with:
+Hagamos una salida de transferencia secp256k1 con:
 
 * **`TypeID`**: 7
 * **`Amount`**: 12345
@@ -1917,6 +1917,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjI0OTc4MDYsLTEyMjU3OTk4MjEsMT
-k2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTI1NjEwNzI2NywtMTIyNTc5OTgyMSwxOT
+Y0NzgyNzk5XX0=
 -->
