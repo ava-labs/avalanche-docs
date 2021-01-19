@@ -242,9 +242,9 @@ avax.getUTXOs(
 ```
 
 * `utxos` es una lista de UTXOs tal que cada UTXO hace referencia a alguna de las direcciones en `addresses`.
-* A lo más se regresaran un máximo de `limit` UTXOs. Si `limit` es o is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
+* A lo más se regresaran un máximo de `limit` UTXOs. Si `limit` es omitido o mayor a 1024, entonces serán 1024.
+* Este método soporta paginación. `endIndex` denota la última UTXO regresada. Para obtener la siguiente UTXOs, utiliza el valor de `endIndex` como `startIndex` en la llamada.
+* Si `startIndex` es omitido,  will fetch all UTXOs up to `limit`.
 * When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
 * `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjUwNTY5MDgsMTY1NzI0ODQ0MiwtMT
+eyJoaXN0b3J5IjpbLTEwMTg5ODYyODQsMTY1NzI0ODQ0MiwtMT
 kwMTA4NDI0OV19
 -->
