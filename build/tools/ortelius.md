@@ -40,23 +40,23 @@ Todos los puntos finales de la lista de recursos aceptan los siguientes parámet
 | `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
 | `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
-### Available Endpoints
+### Puntos Finales Disponibles
 
-#### Overview
+#### Resumen
 
-The root of the API gives an overview of the constants for the active Avalanche network being indexed.
+La raíz de la API da una visión general de las constantes de la red activa de Avalanche que se está indexando.
 
-**Params**
+**Parámetros**
 
-None
+Ninguno
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -80,9 +80,9 @@ curl "http://localhost:8080/v2"
 }
 ```
 
-#### Search
+#### Buscar
 
-Find an address or a transaction by its ID.
+Encuentra una direci.
 
 **Params**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM4Mjg5NTMwNF19
+eyJoaXN0b3J5IjpbNTcyOTU3Mzc1XX0=
 -->
