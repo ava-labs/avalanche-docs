@@ -1070,7 +1070,7 @@ Hagamos un estado inicial con:
 ]
 ```
 
-## Credentials
+## Credenciales
 
 Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
 
@@ -1921,9 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjI1ODM5NjIsLTE5NDMyMzQwNywtMT
-Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
-MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
-w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
-NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbNzc2ODkwNzkyLC0xOTQzMjM0MDcsLTE2OT
+k5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3
+MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNj
+YwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3
+ODI3OTldfQ==
 -->
