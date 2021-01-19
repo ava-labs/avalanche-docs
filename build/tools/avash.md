@@ -305,9 +305,9 @@ Flags:
       --staking-port uint                    Puerto del servidor de consenso. (por defecto 9651)
       --staking-tls-cert-file string         Archivo de certificado TLS para conexiones de staking. Relativo al binario avash si no empieza con '/'. Ejemplo: certs/keys1/staker.crt
       --p2p-tls-enabled                      Requiere autenticación TLS para todas las conexiones P2P.
-      --staking-enabled                  Utilize staking (also requires p2p tls to be enabled).
-      --staking-tls-key-file string          TLS private key file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.key
-      --xput-server-port uint                Port of the deprecated throughput test server. (default 9652)
+      --staking-enabled                  Utiliza el stake (también requiere que se habiliten las tls p2p).
+      --staking-tls-key-file string          Archivo private key TLS para conexiones de staking. Relativo al binario avash si no empieza con '/'. Ejemplo: certs/keys1/staker.key
+      --xput-server-port uint                El puerto del servidor de pruebas de rendimiento obsoleto. (por defecto 9652)
 ```
 
 **varstore**
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2OTM4MTg0MSwxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTE4NjU4MDA5MDUsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
