@@ -339,13 +339,14 @@ Hagamos una salida de transferencia secp256k1 con:
 ]
 ```
 
-## SECP256K1 Mint Output
+##  Salida de Acuñación SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) es una salida que pertenece a una colección de direcciones.
 
-### **What SECP256K1 Mint Output Contains**
 
-A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+### **Que Contiene una Salida de Acuñación SECP256K1**
+
+Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000006`.
 * **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
@@ -1917,6 +1918,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1NjEwNzI2NywtMTIyNTc5OTgyMSwxOT
-Y0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMT
+k2NDc4Mjc5OV19
 -->
