@@ -322,11 +322,12 @@ Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1
 
 Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
+* **`Amount`** es un largo que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+
+### **Especificación Gantt de una Entrada de Transferencia SECP256K1**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -340,7 +341,7 @@ Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices
                           +-------------------------------------+
 ```
 
-**Proto SECP256K1 Transfer Input Specification**
+**Especificación Proto de una  Entrada de Transferencia SECP256K1**
 
 ```text
 message SECP256K1TransferInput {
@@ -350,9 +351,9 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeID`**: 5
 * **`Amount`**: 4000000000
@@ -379,7 +380,7 @@ Let’s make a payment input with:
 
 ## Unsigned Transactions
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
+Las transacciones no firmadas contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, que contiene campos y operaciones comunes.
 
 ## Unsigned BaseTx
 
@@ -1604,6 +1605,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODY5Nzk1ODksLTEyMDE3ODg1OTcsLT
-M3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbMjU5ODI3MDc4LC0xMjAxNzg4NTk3LC0zNz
+kwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
