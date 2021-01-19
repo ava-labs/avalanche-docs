@@ -111,18 +111,18 @@ Inicia una nueva instancia de Avash con `./avash`.
 
 Ejecuta `help` para ver los comandos disponibles.
 
-We can also run `help [command]` to see the list of options available for that command.
+También podemos ejecutar el [comando] `help ` tpara ver la lista de opciones disponibles para ese comando.
 
-Ex:
+Ejemplo:
 
 ```text
 help procmanager
 help procmanager start
 ```
 
-### Commands <a id="commands"></a>
+### Comandos<a id="commands"></a>
 
-Avash comes with the following root commands:
+Avash viene con los siguientes comandos root:
 
 * `avawallet` - Tools for interacting with Avalanche Payments over the network.
 * `callrpc` - Issues an RPC call to a node.
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkzOTE5NTA3NSwtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMzcwMzA2Njc3LC0yODE3MTgwOF19
 -->
