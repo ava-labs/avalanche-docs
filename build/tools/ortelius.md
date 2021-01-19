@@ -40,7 +40,7 @@ Todos los puntos finales de la lista de recursos aceptan los siguientes parámet
 | `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
 | `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
-### Puntos Finales Disponibles
+### Endpoints Disponibles
 
 #### Resumen
 
@@ -228,9 +228,9 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 }
 ```
 
-#### Address Chain
+#### Cadena de Direcciones
 
-Responds with the chains an address appears on.
+Responde con las cadenas en las que aparece una dirección
 
 **Params**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3MDgwMDkzNSw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbLTE0MTQ4ODU3OTEsNzk0NzU4OTY3XX0=
 -->
