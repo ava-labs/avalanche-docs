@@ -149,12 +149,12 @@ Hagamos una entrada transferible:
 
 ## Operaciones Transferibles
 
-Las operaciones transferibles describen un conjunto de UTXOs con una operación de transferencia proporcionada. Sólo se puede hacer referencia a una identificación de activo por operación.
+Las operaciones transferibles o "Transferable Operations" describen un conjunto de UTXOs con una operación de transferencia proporcionada. Sólo se puede hacer referencia a una identificación de activo por operación.
 
 
 ### Que Contiene una Operación Transferible 
 
-Una operación transferible o "Transferable Operation" contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
+Una operación transferible  contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
 
 * **`AssetID`** es un array de 32 bytes que define qué activo cambia esta operación.
 * **`UTXOIDs`** es un array de tuplas TxID-OutputIndex. Esta matriz debe ser ordenada en orden lexicográfico.
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MTc3NzU4Nyw5NzQzNjAxMDQsLTkzOT
-Y2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4
-MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLT
-E2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0
-Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC
-0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5
-MTA3ODUxXX0=
+eyJoaXN0b3J5IjpbODkyNTA4OTQyLDk3NDM2MDEwNCwtOTM5Nj
+Y3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgx
+LDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
+YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
+OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
+E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
+MDc4NTFdfQ==
 -->
