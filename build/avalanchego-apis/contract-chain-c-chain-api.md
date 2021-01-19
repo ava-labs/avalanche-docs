@@ -1,10 +1,10 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+descripción: La Cadena C o C-Chain es una instancia de la Máquina Virtual de Ethereum (EVM)
 ---
 
-# Contract Chain \(C-Chain\) API
+# Cadena de Contratos \(C-Chain\) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` anc `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
+_Nota: Ehtereum tiene su propia noción de `networkID` y `chainID`. Estos no tienen ninguna relación con la visión These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` anc `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
 
 ## Deploying a Smart Contract
 
@@ -449,3 +449,6 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTY5MTg2ODIwNF19
+-->
