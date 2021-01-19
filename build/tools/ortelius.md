@@ -36,7 +36,7 @@ Todos los puntos finales de la lista de recursos aceptan los siguientes parámet
 | :--- | :--- | :--- | :--- | :--- |
 | `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
 | `offset` | `int` | El número de elementos a omitir | `0` | None |
-| `query` | `string` | Un prefijo de ID para filtrar los artículos por | None | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos por | None | None |
 | `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
 | `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
@@ -82,21 +82,21 @@ curl "http://localhost:8080/v2"
 
 #### Buscar
 
-Encuentra una direci.
+Encuentra una dirección o una transacción por su ID.
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `query` | `string` | An ID prefix to filter items by | None | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos por | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -169,7 +169,7 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-#### Aggregate
+#### Agrega
 
 Calculate aggregate transaction data over a time frame.
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTcyOTU3Mzc1XX0=
+eyJoaXN0b3J5IjpbMjExODIxMDc1OV19
 -->
