@@ -148,9 +148,9 @@ Hagamos una entrada transferible:
 
 Las salidas tienen dostipos posibles: `SECP256K1TransferOutput`y `SECP256K1OutputOwners`.
 
-## SECP256K1 Transfer Output
+##  Salida de Transferencia SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time. The only valid asset is AVAX.
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado. The only valid asset is AVAX.
 
 ### **What SECP256K1 Transfer Output Contains**
 
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjYxMDk1MDYsLTM2NzkzOTA3MCwtND
-gyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbLTg2NjMwNTA1OSwtMzY3OTM5MDcwLC00OD
+IzMzY1MjNdfQ==
 -->
