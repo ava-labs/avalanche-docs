@@ -322,10 +322,10 @@ Uso:
 
 Comandos Disponibles:
   create      Crea un almacenamiento variable.
-  list        Enumera todos los almacenamientos. Si el almacenamiento se proporciona, lista todas las variables del almacenamiento.
-  print       Imprime una variable que está dentro del almacenamiento .
-  set         Establece una  variable simple dentro del almacenamiento .
-  storedump   Escribe el almacenamiento en un archivo.
+  list        Enumera todos los almacens. Si el almacen se proporciona, lista todas las variables del almacen.
+  print       Imprime una variable que está dentro del almacen.
+  set         Establece una  variable simple dentro del almacen.
+  storedump   Escribe el almacen en un archivo.
   vardump     Escribe la variable en un archivo.
 ```
 
@@ -336,8 +336,8 @@ Avash importa [gopher-lua](https://github.com/yuin/gopher-lua) para ejecutar los
 Las funciones disponibles para Lua son:
 
 * `avash_call` - Toma una cadena y la ejecuta como un comando de Avash, devolviendo la salida
-* `avash_sleepmicro` - Toma un entero sin signo representando microsegundos y duerme por ese tiempo
-* `avash_setvar` - Takes a variable scope \(string\), a variable name \(string\), and a variable \(string\) and places it in the variable store. The scope must already have been created.
+* `avash_sleepmicro` - Toma un entero sin signo representando microsegundos y permanece inactivo por ese tiempo
+* `avash_setvar` - Toma un alcance de la variable \(string\), un nombre de la variable\(string\),y una variable \(string\) y lo coloca en el almacen de variables. El scope ya debe haber sido creado.
 
 When writing Lua, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
 
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTM3MDU1NzIsMTA1MzcxMjM5NSwtMj
+eyJoaXN0b3J5IjpbLTE4NTYxMDIxNjEsMTA1MzcxMjM5NSwtMj
 gxNzE4MDhdfQ==
 -->
