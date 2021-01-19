@@ -30,10 +30,10 @@ Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrollad
 ![AvalancheGo release notes v1.0.5](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.5.png)
 
 {% hint style="danger" %}
-Tenga en cuenta que la versión posterior a ésta, la v1.0.6, contendrá los cambios de descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
+Tenga en cuenta que la versión posterior a ésta, la v1.0.6, contendrá los cambios de última hora de descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). El formato de respuesta de  `platform.getTxStatus` y`platform.getCurrentValidators` cambiará.
 {% endhint %}
 
-The changes in this release, v1.0.5, are backwards compatible with previous releases. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
+Los cambios en esta versión, v1.0.5, son compatibles con versiones anteriores. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
 
 * Added `IssueTx` and `GetUTXOs` to the C-chain API to enable issuing atomic swaps without revealing private keys to a node.
 * Fixed memory leak in the snowman request manager with oracle block processing.
@@ -97,5 +97,5 @@ Anything that depends on platform.getTxStatus should switch to using the include
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzMjI2NjI3MywtMTI0ODc3NTE3Nl19
+eyJoaXN0b3J5IjpbMTE0NzgyOTE1LC0xMjQ4Nzc1MTc2XX0=
 -->
