@@ -191,9 +191,9 @@ message TransferableOp {
 }
 ```
 
-### Transferable Op Example
+### Ejemplo de Operación Transferible
 
-Let’s make a transferable operation:
+Hagamos una operación transferible:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
 * `UTXOIDs:`
@@ -243,9 +243,9 @@ Let’s make a transferable operation:
 ]
 ```
 
-## Outputs
+## Salidas
 
-Outputs have four possible types: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` and `NFTMintOutput`.
+Las salidas tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
 
 ## SECP256K1 Transfer Output
 
@@ -1915,5 +1915,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzE4NzQ4NzYsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTQ4MjQ5MjY4MCwxOTY0NzgyNzk5XX0=
 -->
