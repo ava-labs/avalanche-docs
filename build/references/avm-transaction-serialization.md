@@ -693,9 +693,9 @@ Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp
 
 A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
 
-### **What SECP256K1 Mint Operation Contains**
+### **Que Contiene una Operación de Acuñado SECP256K1**
 
-A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
+Una operación de acuñado SECP256K1 contiene un `TypeID`, `AddressIndices`, `MintOutput`, y`TransferOutput`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000008`.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjg2ODI3MDcsOTc5MTA3ODUxLDIxMz
-E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
-NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
-E5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbMTU0ODMwOTI0NSw5NzkxMDc4NTEsMjEzMT
+c2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3
+Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMT
+k2NDc4Mjc5OV19
 -->
