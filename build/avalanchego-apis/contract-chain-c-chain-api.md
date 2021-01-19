@@ -179,9 +179,9 @@ avax.exportKey({
 * `username` debe tener control de  `address`.
 * `address` es la dirección de la cual quieres exportar su correspondiente llave privada. Debe estar en formato hex.
 
-**Response**
+**Respuesta**
 
-* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
+* `privateKey` es la cadena codificada con CB58 representando la llave privada que controla `address`. Tiene prefijo `PrivateKey-` y  and can be used to import a key via `avax.importKey`.
 * `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
 
 #### Example Call
@@ -450,6 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDExNTc3MTIsLTE5MDEwODQyNDldfQ
-==
+eyJoaXN0b3J5IjpbODIzNzcwNDAzLC0xOTAxMDg0MjQ5XX0=
 -->
