@@ -1154,7 +1154,7 @@ Hagamos una entrada de pago con:
 
 Una credencial NFT es la misma que una credencial secp256k1 con un TypeID diferente. El TypeID para una credencial NFT es `0x0000000e`.
 
-## Unsigned Transactions
+## Transacciones no Firmadas
 
 Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: `CreateAssetTx`, `OperationTx`, `ImportTx`, and `ExportTx`. They all embed `BaseTx`, which contains common fields and operations.
 
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTAzMzcxMDAxLC0xOTQzMjM0MDcsLTE2OT
+eyJoaXN0b3J5IjpbMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OT
 k5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3
 MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNj
 YwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3
