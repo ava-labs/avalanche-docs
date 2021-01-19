@@ -1725,8 +1725,8 @@ Una transacción firmada es una transacción no firmada con la adición de una s
 
 Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
+* **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
+* **`UnsignedTx`** es una transacción sin firmar, como se describe arriba.
 * **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
 
 ### Gantt Signed Transaction Specification
@@ -1920,11 +1920,11 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Nj
-g4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgy
-MDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLT
-IwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2
-Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC
-0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
-
+eyJoaXN0b3J5IjpbLTQ0NDQ3MTQ4MiwtMTYyODI1Mjc1MywtMT
+Y3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2
+MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMT
+Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
+MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
+w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
+NDc4Mjc5OV19
 -->
