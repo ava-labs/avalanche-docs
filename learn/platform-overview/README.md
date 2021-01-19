@@ -16,17 +16,18 @@ Una **subnet**, o subred, es un conjunto dinámico de validadores que trabajan j
 
 Una subnet gestiona su propia pertenencia, y puede requerir que sus validadores constituyentes tengan ciertas propiedades. Esto es muy útil, y exploramos sus ramificaciones más a fondo a continuación:
 
-### Cumplimientos
+### Cumplimiento
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
 
-Some examples include:
+La arquitectura de subnet de Avalanche hace que el cumplimiento de la normativa sea manejable. Como se ha mencionado anteriormente, una subnet puede requerir que los validadores cumplan una serie de requisitos.
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+Algunos ejemplos son:
 
-### Support for Private Blockchains
+* Los validadores deben estar ubicados en un país determinado
+* Los validadores deben pasar un control KYC/AML
+* Los validadores deben tener una cierta licencia
+
+### Soporte para Blockchains Privadas
 
 You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
 
@@ -89,5 +90,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxNDYxNDc2Nl19
+eyJoaXN0b3J5IjpbLTEzMjM0MTE3NDBdfQ==
 -->
