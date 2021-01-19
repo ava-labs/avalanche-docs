@@ -28,7 +28,7 @@ Esta API utiliza formato RPC `json 2.0`. Para más información en hacer llamada
 
 Crea un nuevo token de autorización que otorga el acceso a uno o más extremos de la API.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.newToken(
@@ -89,7 +89,7 @@ curl -X POST --data '{
 
 Revoke a previously generated token. The given token will no longer grant access to any endpoint. If the token is invalid, does nothing.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.revokeToken(
@@ -174,6 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzAyMzAyNDIsMjY5Mzg4NTYsLTExNz
-E5MTU1MDUsMTUzMTU1NTI3NF19
+eyJoaXN0b3J5IjpbMjA4NTM5NzI1NiwtMTIzMDIzMDI0MiwyNj
+kzODg1NiwtMTE3MTkxNTUwNSwxNTMxNTU1Mjc0XX0=
 -->
