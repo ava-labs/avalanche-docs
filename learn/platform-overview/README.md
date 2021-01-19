@@ -75,15 +75,15 @@ La **X-Chain** actúa como una plataforma descentralizada para la creación y el
 
 Un activo comercializado en la X-Chain es AVAX. Cuando se emite una transacción a una blockchain en Avalanche, se paga una comisión denominada AVAX.
 
-La X-Chain es una instancia de la Avalanche Virtual Machine \(AVM\). El [API de la X-Chain](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+La X-Chain es una instancia de la Avalanche Virtual Machine \(AVM\). El [API de la X-Chain](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) permite a los clientes crear e intercambiar activos en la X-Chain y otras instancias de la AVM.
 
 {% page-ref page="../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
 ## Platform Chain \(P-Chain\)
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+La **P-Chain** es la blockchain de metadatos en Avalanche y coordina los validadores, mantiene el seguimiento de las subnets activas y permite la creación de nuevas subnets. La P-Chain implementa el [protocolo de consenso Snowman](../../#snowman-consensus-protocol).
 
-The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+EL [API de la P-Chain](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
 
 ## Contract Chain \(C-Chain\)
 
@@ -92,6 +92,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzMDk3OTEyMSw2Nzk4MDEwMTMsNjM5MD
+eyJoaXN0b3J5IjpbMjAzODEwMTYwNCw2Nzk4MDEwMTMsNjM5MD
 I1MDc3LDkzMDMwMzU5NF19
 -->
