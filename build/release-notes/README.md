@@ -7,16 +7,16 @@
 Esta actualización es opcional pero se recomienda. El parche incluye mejoras en la calidad de vida y varias mejoras en el rendimiento. Tenga en cuenta que esta actualización requiere que los parámetros de la CLI se especifiquen con -- en lugar de permitir - o --. Por ejemplo, `-public-ip=127.0.0.1` ya no está permitido y debe especificarse como `--public-ip=127.0.0.1`. Por lo demás, esta actualización es compatible con las versiones anteriores.
 
 ```text
-• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
-• Added config file parsing for node settings.
-• Added more options for specifying a node's IP address and added getNodeIP to the info *endpoint.
-• Added a TxID to the result of get.Validators in the platformvm.
-• Updated Coreth version.
-• Cleaned up the snowball trie implementation and added additional tests to align with mutation tests.
-• Implemented and optimized continuous time averages for tracking CPU and network latency.
-• Significantly optimized memory allocations in various locations.
-• Increased the signature verification cache size.
-• Reduced DB reads during vertex management.
+- Se añadió la lista blanca de subnets para permitir al propietario de un nodo elegir qué subnets validar.
+- Se añadió el análisis sintáctico del archivo de configuración para la configuración de los nodos.
+- Añadidas más opciones para especificar la dirección IP de un nodo y añadido getNodeIP a la información *endpoint.
+- Se añadió un TxID al resultado de los validadores get.Validators en la platformvm.
+- Actualizada la versión de Coreth.
+- Limpió la implementación de la prueba snowball y añadió pruebas adicionales para alinearse con las pruebas de mutación.
+- Implementado y optimizado los promedios de tiempo continuo para el seguimiento de la latencia de la CPU y la red.
+- Se optimizaron significativamente las asignaciones de memoria en varios lugares.
+- Aumentado el tamaño de la caché de verificación de firmas.
+- Reducción de las lecturas de la base de datos durante la gestión de vértices.
 ```
 
 ```text
@@ -48,5 +48,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 Para asistencia con esta actualización, sigue nuestras [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgzNzgxNjAsNTQ4ODY4OTVdfQ==
+eyJoaXN0b3J5IjpbODAwMDg0NDUwLDM4Mzc4MTYwLDU0ODg2OD
+k1XX0=
 -->
