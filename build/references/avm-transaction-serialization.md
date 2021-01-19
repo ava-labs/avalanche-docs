@@ -657,7 +657,7 @@ message SECP256K1TransferInput {
 
 ### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
-Hagamos una entrada de transferencia con:
+Hagamos una entrada de pago con:
 
 * **`TypeId`**: 5
 * **`Amount`**: 123456789
@@ -1918,11 +1918,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMT
-E5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgz
-MjgzLC03NzU3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLD
-I1MjQyMDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5Nzg2LC0yMDk2
-MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4Ny
-wtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2
-NzMxOTk5NF19
+eyJoaXN0b3J5IjpbMTAyMTY1MDMyOSwxNTI2NTAxMDA1LC0xMj
+cyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0
+MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1Ny
+wxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5
+NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3Mz
+AsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYw
+MTc5NzQ3XX0=
 -->
