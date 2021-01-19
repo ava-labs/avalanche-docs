@@ -1039,7 +1039,7 @@ message InitialState {
 
 ### Ejemplo de Estado Inicial
 
-Haga
+Hagamos un estado inicial con:
 
 * `FxID: 0x00000000`
 * `InitialState: ["Example SECP256K1 Transfer Output from above"]`
@@ -1921,9 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwNTI0MTEzMSwtMTk0MzIzNDA3LC0xNj
-k5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYy
-NzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LD
-Y2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0
-NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTE5MjI1ODM5NjIsLTE5NDMyMzQwNywtMT
+Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
+MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
+w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
+NDc4Mjc5OV19
 -->
