@@ -18,7 +18,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
 * **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Gantt Transferable Output Specification
+### Especificación de Salida Transferible de Gantt
 
 ```text
 +----------+----------+-------------------------+
@@ -30,7 +30,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Especificación de la Salida Proto Transferible
 
 ```text
 message TransferableOutput {
@@ -39,9 +39,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Ejemplo de Salida Transferible
 
-Let’s make a transferable output:
+Hagamos una salida transferible:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -71,9 +71,9 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Entrada transferible
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
 
 ### What Transferable Input Contains
 
@@ -1913,5 +1913,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQ3Mjg0OTU5XX0=
+eyJoaXN0b3J5IjpbLTExODYwODE2NDBdfQ==
 -->
