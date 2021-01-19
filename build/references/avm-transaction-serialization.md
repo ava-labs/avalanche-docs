@@ -252,7 +252,7 @@ Las salidas tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1M
 Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado.
 
 
-### **¿Qué contiene la salida de la transferencia SECP256K1?**
+### **¿Qué contiene la salida de transferencia SECP256K1?**
 
 Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3MjY1NjYyMyw0OTkzMDY2ODcsLTEyND
+eyJoaXN0b3J5IjpbMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyND
 k3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5
 OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
