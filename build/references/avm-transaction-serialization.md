@@ -71,7 +71,7 @@ Hagamos una salida transferible:
 
 ## Entrada transferible
 
-Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
+Las entradas transferibles o "Transferable Inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
 ### Que Contiene una Entrada Transferible
 
@@ -154,7 +154,7 @@ Las operaciones transferibles describen un conjunto de UTXOs con una operación 
 
 ### Que Contiene una Operación Transferible 
 
-Una operación transferible contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
+Una operación transferible o "Transferable Operation" contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
 
 * **`AssetID`** es un array de 32 bytes que define qué activo cambia esta operación.
 * **`UTXOIDs`** es un array de tuplas TxID-OutputIndex. Esta matriz debe ser ordenada en orden lexicográfico.
@@ -243,7 +243,7 @@ Hagamos una operación transferible:
 
 ## Salidas
 
-Las salidas tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
+Las salidas o  tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
 
 
 ##  Salida de Transferencia SECP256K1
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MD
-g1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0
-MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NS
-w2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5
-MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3OD
-YsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5
-MzA2Njg3XX0=
+eyJoaXN0b3J5IjpbLTE2NTgwMTc2MDcsLTkzOTY2NzgwNCwtND
+M0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAx
+MDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NT
+MsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0
+MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MD
+csLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIx
+MzE3NjI3MzBdfQ==
 -->
