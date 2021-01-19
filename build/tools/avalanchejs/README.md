@@ -1,6 +1,6 @@
 # AvalancheJS
 
-AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](../../../#avalanche) platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+AvalancheJS es una biblioteca de JavaScript para interactuar con la plataforma [Avalanche](../../../#avalanche). Está construida usando TypeScript y está pensada para soportar tanto el navegador como Node.js. La biblioteca AvalancheJS permite emitir comandos a las API del nodo Avalanche.
 
 The APIs currently supported by default are:
 
@@ -73,3 +73,6 @@ The above lines import the libraries used in the tutorials. The libraries includ
 * buffer: A Buffer library.
 * BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwNTc4NDAwOTRdfQ==
+-->
