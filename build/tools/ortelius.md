@@ -36,9 +36,9 @@ Todos los puntos finales de la lista de recursos aceptan los siguientes parámet
 | :--- | :--- | :--- | :--- | :--- |
 | `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
 | `offset` | `int` | El número de elementos a omitir | `0` | None |
-| `query` | `string` | An ID prefix to filter items by | None | None |
-| `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
-| `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
+| `query` | `string` | Un prefijo de ID para filtrar los artículos por | None | None |
+| `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
+| `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
 ### Available Endpoints
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyMDE5MjE3Nl19
+eyJoaXN0b3J5IjpbLTM4Mjg5NTMwNF19
 -->
