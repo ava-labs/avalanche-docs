@@ -149,25 +149,25 @@ Uso:
   avash avawallet [command] [flags]
 
 Comandos Disponibles:
-  addkey Añade una private key a una cartera.
-  balance Comprueba el balance de una dirección de un nodo.
-  compare Compara el set de UTXO entre dos wallets.
-  create Crea una wallet.
-  maketx Crea una transacción firmada.
-  newkey Crea una private key aleatoria.
-  refresh Refresca el conjunto UTXO desde el nodo.
-  remove Elimina una transacción del set de UTXO de una wallet.
-  send Envía una transacción a un nodo.
-  spend Paga una transacción del set de UTXO de una wallet.
-  status Comprueba el estado de una transacción en un nodo.
-  writeutxo Escribe el conjunto UTXO en un archivo.
+  addkey      Añade una private key a una cartera.
+  balance     Comprueba el balance de una dirección de un nodo.
+  compare     Compara el set de UTXO entre dos wallets.
+  create      Crea una wallet.
+  maketx      Crea una transacción firmada.
+  newkey      Crea una private key aleatoria.
+  refresh     Refresca el conjunto UTXO desde el nodo.
+  remove      Elimina una transacción del set de UTXO de una wallet.
+  send        Envía una transacción a un nodo.
+  spend       Paga una transacción del set de UTXO de una wallet.
+  status      Comprueba el estado de una transacción en un nodo.
+  writeutxo   Escribe el conjunto UTXO en un archivo.
 ```
 
 **callrpc**
 
 ```text
-Issues an RPC call to a node endpoint for the specified method and params.
-    Response is saved to the local varstore.
+Emite un llamado RPC a un punto final de nodo para el método y los parámetros especificados.
+    La respuesta se guarda en el almacén local.
 
 Uso:
   callrpc [node name] [endpoint] [method] [JSON params] [var scope] [var name]
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MzQyMTA3OTcsLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbMTA1MzcxMjM5NSwtMjgxNzE4MDhdfQ==
 -->
