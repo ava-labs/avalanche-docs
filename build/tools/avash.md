@@ -286,7 +286,7 @@ Flags:
       --db-dir string                        Directorio de la base de datos del estado de Avalanche. (por defecto "db1")
       --db-enabled                           Enciende el almacenamiento persistente. (Por defecto verdadero)
   -h, --help                                 ayuda para startnode
-      --http-port uint                       Puert HTTP server. (default 9650)
+      --http-port uint                       Puerto del servidor HTTP. (default 9650)
       --http-tls-cert-file string            TLS certificate file for the HTTPS server.
       --http-tls-enabled                     Upgrade the HTTP server to HTTPS.
       --http-tls-key-file string             TLS private key file for the HTTPS server.
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1MzM2NzIzNSwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbMjEzNTA4MDAxMCwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
