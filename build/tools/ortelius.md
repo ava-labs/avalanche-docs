@@ -86,7 +86,7 @@ Encuentra una dirección o una transacción por su ID.
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
 
@@ -175,7 +175,7 @@ Calcular los datos agregados de las transacciones a lo largo de un período de t
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrado varias veces. | None | None |
 | `assetID` | `id` | Una ID de activos para filtrar los resultados.. | None | None |
@@ -234,7 +234,7 @@ Responde con las cadenas en las que aparece una dirección
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
 
@@ -266,7 +266,7 @@ Find transactions confirmed transactions from the network.
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `assetID` | `id` | An asset ID to filter results by. | None | None |
@@ -430,7 +430,7 @@ Find addresses that have been involved in confirmed transactions.
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
@@ -499,7 +499,7 @@ Find assets that have been created on the X-chain.
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
 
@@ -673,7 +673,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 
 **Parámetros**
 
-| Nombre| Type | Descripción| Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzA4NzIxMDYsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbLTM3MzE4MjY2Miw3OTQ3NTg5NjddfQ==
 -->
