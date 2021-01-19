@@ -1,10 +1,10 @@
 # Formato de transacción de AVM
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine \(AVM\). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+Este archivo es la única fuente de verdad de cómo serializamos las transacciones en la Avalanche Virtual Machine \(AVM\). Este documento utiliza la [serialización primitiva](serialization-primitives.md) formato para el empaquetado y [secp256k1](cryptographic-primitives.md#secp256k1-addresses) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
 ## Transferable Output
 
@@ -1912,5 +1912,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNzAwNTQ1MThdfQ==
+eyJoaXN0b3J5IjpbMTA3Njc5Mjc5Ml19
 -->
