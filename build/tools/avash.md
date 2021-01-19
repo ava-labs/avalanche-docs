@@ -302,9 +302,9 @@ Flags:
       --snow-rogue-commit-threshold int      Valor beta para utilizarlo en transacciones fraudulentas. (por defecto 10)
       --snow-sample-size int                 Número de nodos a consultar para cada sondeo de la red. (por defecto 2)
       --snow-virtuous-commit-threshold int   Valor beta a utilizar para transacciones virtuosas. (por defecto 5)
-      --staking-port uint                    Port of the consensus server. (default 9651)
-      --staking-tls-cert-file string         TLS certificate file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.crt
-      --p2p-tls-enabled                      Require TLS authentication for all P2P connections.
+      --staking-port uint                    Puerto del servidor de consenso. (por defecto 9651)
+      --staking-tls-cert-file string         Archivo de certificado TLS para conexiones de staking. Relativo al binario avash si no empieza con '/'. Ejemplo: certs/keys1/staker.crt
+      --p2p-tls-enabled                      Requiere autenticación TLS para todas las conexiones P2P.
       --staking-enabled                  Utilize staking (also requires p2p tls to be enabled).
       --staking-tls-key-file string          TLS private key file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.key
       --xput-server-port uint                Port of the deprecated throughput test server. (default 9652)
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5NDI4NzM1OSwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTM2OTM4MTg0MSwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
