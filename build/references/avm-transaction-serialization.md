@@ -783,11 +783,11 @@ Hagamos una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-
 
 ## Operación de Acuñado NFT
 
-An NFT mint operation consumes an NFT mint output and sends an unspent output to a new set of owners.
+Una operación de acuñado NFT consume una salida de acuñado NFT y envía una salida no gastada a un nuevo conjunto de propietarios.
 
-### **What NFT Mint Op Contains**
+### **Que Contiene una Operación de Acuñado NFT**
 
-An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload`, and `Output` of addresses.
+Una operación de acuñado NFT contiene un `TypeID`, `AddressIndices`, `GroupID`, `Payload`, y`Output` de las direcciones.
 
 * **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTY3ODQ5OTIsOTc5MTA3ODUxLDIxMz
+eyJoaXN0b3J5IjpbLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMz
 E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
 NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
 E5NjQ3ODI3OTldfQ==
