@@ -15,7 +15,7 @@ Esta API usa peticiones GET HTTP usando parámetros de consulta de URL y devuelv
 
 A partir de la versión 2, las rutas de la API serán precedidas por una etiqueta de versión, por ejemplo, `http://localhost:8080/v2`.
 
-La versión actual de la API es la versión 2. La documentación de la [Legacy API](ortelius.md#legacy-api) contiene información sobre el uso de la API v1.
+La versión actual de la API es la versión 2. La documentación de la [API Legacy ](ortelius.md#legacy-api) contiene información sobre el uso de la API v1.
 
 ### 
 Tipos de datos
@@ -740,9 +740,9 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-### Legacy API
+### API Legacy 
 
-Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
+La versión 1 de la API fue construida para soportar sólo la  X-chain, y no usaba un prefijo de versión \(`/v1`\). Está dispon `/x` off of the root, which is the Overview endpoint for only the X-chain:
 
 **Llamado de Ejemplo**
 
@@ -815,5 +815,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzczNTY3NTM5LDc5NDc1ODk2N119
+eyJoaXN0b3J5IjpbLTIwMTk2NjA0Niw3OTQ3NTg5NjddfQ==
 -->
