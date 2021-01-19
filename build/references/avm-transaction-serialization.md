@@ -1430,7 +1430,7 @@ message OperationTx {
 
 ### Ejemplo de una Transacción de Operación No Firmada
 
-Hagamos un ejemplo de una operación Tx no firmada que utilice las entradas y salidas de los ejemplos anteriores:
+Hagamos un ejemplo de una transacción de operación no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
 * **`Ops`**: \[`"Example Transfer Op as defined above"`\]
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgzMjUxODYyOCwxMTQ2NzI4Mzg5LDU1OT
-U2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwt
-OTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOT
-AzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1
-NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNz
-c1NzQzOTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4
-MTBdfQ==
+eyJoaXN0b3J5IjpbLTEyOTkzMzY0MDYsMTE0NjcyODM4OSw1NT
+k1NjU5LC04MjM5Mjg4ODAsLTk2Mjk2MDA1OCw5NzQzNjAxMDQs
+LTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2Mz
+kwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkz
+NTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLT
+c3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIw
+ODEwXX0=
 -->
