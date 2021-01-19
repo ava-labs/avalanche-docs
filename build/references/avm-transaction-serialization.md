@@ -6,12 +6,11 @@ Este archivo es la única fuente de verdad de cómo serializamos las transaccion
 
 Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## 
-Salida transferible
+## Salida transferible
 
-Las salidas transferibles envuelven una salida con una identificación de activo.
+Las salidas transferibles envuelven una salida con el ID  de un activo.
 
-### Qué Contiene la Salida Transferible
+### Que Contiene una Salida Transferible
 
 Una salida transferible contiene una `AssetID` y un `Output`.
 
@@ -1919,11 +1918,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
-YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
-OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
-E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
-MDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NT
-AsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEy
-MjU3OTk4MjFdfQ==
+eyJoaXN0b3J5IjpbLTU2MDUyOTYxNSwtMTI3MjgyNDA5MCwtMT
+E5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgz
+MjgzLC03NzU3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLD
+I1MjQyMDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5Nzg2LC0yMDk2
+MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4Ny
+wtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2
+NzMxOTk5NF19
 -->
