@@ -1013,10 +1013,10 @@ El estado inicial describe el estado inicial de un activo cuando se crea. Contie
 
 El estado inicial contiene un `FxID` y un conjunto de `Output`.
 
-* **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-* **`Outputs`** is a variable length array of outputs, as defined above.
+* **`FxID`** es un int que define la extensión de la característica de este estado. Para los activos SECP256K1, es `0x00000000`. Para los activos NFT, es `0x00000001`.
+* **`Salidas`** es un conjunto de salidas de longitud variable, como se definió anteriormente.
 
-### Gantt Initial State Specification
+### Especificación Gantt de el Estado Inicial
 
 ```text
 +---------------+----------+-------------------------------+
@@ -1028,7 +1028,7 @@ El estado inicial contiene un `FxID` y un conjunto de `Output`.
                            +-------------------------------+
 ```
 
-### Proto Initial State Specification
+### Especificación Proto de el Estado Inicial
 
 ```text
 message InitialState {
@@ -1037,9 +1037,9 @@ message InitialState {
 }
 ```
 
-### Initial State Example
+### Ejemplo de Estado Inicial
 
-Let’s make an initial state:
+Haga
 
 * `FxID: 0x00000000`
 * `InitialState: ["Example SECP256K1 Transfer Output from above"]`
@@ -1921,8 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDMyMzQwNywtMTY5OTk1OTc4NiwtMj
-A5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2
-ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLT
-E1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbMTQwNTI0MTEzMSwtMTk0MzIzNDA3LC0xNj
+k5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYy
+NzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LD
+Y2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0
+NzgyNzk5XX0=
 -->
