@@ -68,13 +68,14 @@ import {
 let bintools = BinTools.getInstance();
 ```
 
-The above lines import the libraries used in the tutorials. The libraries include:
 
-* avalanche: Our javascript module.
-* bn.js: A bignumber module use by AvalancheJS.
-* buffer: A Buffer library.
-* BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
+Las líneas anteriores importan las bibliotecas utilizadas en los tutoriales. Las bibliotecas incluyen:
+
+* avalanche: Nuestro módulo javascript.
+* bn.js: Un módulo bignumber usado por AvalancheJS.
+* buffer: Una biblioteca de Buffer.
+* BinTools: Un módulo integrado en AvalancheJS que se usa para tratar datos binarios.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM4NTUxMjc4NywtODQ1MTQ1NDRdfQ==
+eyJoaXN0b3J5IjpbMTkzNjc3OTI4MCwtODQ1MTQ1NDRdfQ==
 -->
