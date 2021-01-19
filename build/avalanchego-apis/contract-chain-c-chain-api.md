@@ -362,7 +362,7 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
 * `to` es la dirección a la cual se enviará AVAX. Debe estar en formato hex.
 * `sourceChain` es el ID o sobrenombre de la cadena desde la cual se está importando el AVAX. Para importar fondos desde la X-Chain, utiliza `"X"`.
@@ -370,9 +370,9 @@ avax.importAVAX({
 
 **Respuesta**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID` es el ID de la is the ID of the completed ImportTx.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -388,7 +388,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzUwMDI2NTEsLTE5ODcyMzQwNCwyNj
-kwMDc2MDUsMTQ5NzE4ODAxOCwxNjU3MjQ4NDQyLC0xOTAxMDg0
-MjQ5XX0=
+eyJoaXN0b3J5IjpbLTI5MzUyOTA0MSwtMTk4NzIzNDA0LDI2OT
+AwNzYwNSwxNDk3MTg4MDE4LDE2NTcyNDg0NDIsLTE5MDEwODQy
+NDldfQ==
 -->
