@@ -100,7 +100,7 @@ curl -X POST --data '{
 
 **DESCONTINUADA—en lugar use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
+Envía AVAX desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) en la X-Chain para completar la transferencia.
 
 #### Signature
 
@@ -116,9 +116,9 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
-* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
+* `from` es la dirección de la C-Chain desde la cual se envían los AVAX is sent from. They should be in hex format.
 * `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
 * `amount` is the amount of nAVAX to send.
 * `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3OTU4MjIzMywtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbMzI0MjA4MDIsLTE5MDEwODQyNDldfQ==
 -->
