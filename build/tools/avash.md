@@ -297,8 +297,8 @@ Flags:
       --public-ip string                     IP pública de este nodo. (por defecto "127.0.0.1")
       --signature-verification-enabled       Enciende la verificación de la firma. (Por defecto verdadero)
       --snow-avalanche-batch-size int        El número de operaciones a realizar en cada nuevo vértice. (por defecto 30)
-      --snow-avalanche-num-parents int       Number of vertexes for reference from each new vertex. (default 5)
-      --snow-quorum-size int                 Alpha value to use for required number positive results. (default 2)
+      --snow-avalanche-num-parents int       Número de vértices de referencia de cada nuevo vértice. (por defecto 5)
+      --snow-quorum-size int                 Valor alfa a utilizar para los resultados positivos del número requerido. (por defecto 2)
       --snow-rogue-commit-threshold int      Beta value to use for rogue transactions. (default 10)
       --snow-sample-size int                 Number of nodes to query for each network poll. (default 2)
       --snow-virtuous-commit-threshold int   Beta value to use for virtuous transactions. (default 5)
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4OTEzNTA1NywxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTEyNDc2MzU1NDEsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
