@@ -31,6 +31,7 @@
     * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
+    * [Maintain an Avalanche Node](https://youtu.be/o4Fww-sHoaQ)
     * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
     * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
     * [Run an Avalanche Node with Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
