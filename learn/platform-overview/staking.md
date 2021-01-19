@@ -18,15 +18,15 @@ Cuando un validador termina de validar la [Red Primaria](http://support.avalabs.
 Las recompensas del staking se envían a la dirección de tu wallet al final del plazo de staking **siempre y cuando se cumplan todos estos parámetros**.
 {% endhint %}
 
-* The minimum amount that a validator must stake is 2,000 AVAX
-* The minimum amount that a delegator must delegate is 25 AVAX
-* The minimum amount of time one can stake funds for validation is 2 weeks
-* The maximum amount of time one can stake funds for validation is 1 year
-* The minimum amount of time one can stake funds for delegation is 2 weeks
-* The maximum amount of time one can stake funds for delegation is 1 year
-* The minimum delegation fee rate is 2%
-* The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 60%
+* La cantidad mínima que un validador debe poner en stake es de 2 000 AVAX
+* La cantidad mínima que un delegado debe delegar es de 25 AVAX
+* El mínimo tiempo que se puede hacer staking para la validación es de 2 semanas.
+* La cantidad máxima de tiempo que uno puede hacer staking para la validación es de 1 año
+* El mínimo tiempo que uno puede hacer staking para la delegación es de 2 semanas
+* La cantidad máxima de tiempo que uno puede hacer staking para la delegación es de 1 año
+* La tasa mínima de derechos de delegación es del 2%
+* El peso máximo de un validador \(su propio stake + el stake delegado en ellos\) es el mínimo de 3e6 AVAX y 5 veces la cantidad que el validador puso en stake. Por ejemplo, si pusiste en stake 2 000 AVAX para ser un validador, sólo 8 000 AVAX pueden ser delegados al total de tu nodo \(no por delegador\).
+* El porcentaje mínimo de tiempo que un validador debe estar correcto y en línea para recibir una recompensa es del 60%
 
 ## Validators
 
@@ -104,5 +104,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbLTEzNjUxMzM5NzcsNTc2ODA1OTkxLC03MT
+c3MTk4MTFdfQ==
 -->
