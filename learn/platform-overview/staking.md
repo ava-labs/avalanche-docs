@@ -49,9 +49,9 @@ La cantidad mínima que un validador debe poner en stake es de 2 000 AVAX
 Tenga en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **No puede eliminar su stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.** Asegúrese de utilizar los valores correctos en los llamados API que se indican a continuación. Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
-### Ejea Validator <a id="running-a-validator"></a>
+### Ejecutando un Validador <a id="running-a-validator"></a>
 
-If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
+Si estás ejecutando un validador, es importante que tu nodo esté bien conectado para asegurarte de recibirás tu recompensa. Ver [aquí](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
 When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4MzQ4OTU0MiwtMzYyNzk5MzgxLDU3Nj
+eyJoaXN0b3J5IjpbLTQ2Nzk3NjQ5OSwtMzYyNzk5MzgxLDU3Nj
 gwNTk5MSwtNzE3NzE5ODExXX0=
 -->
