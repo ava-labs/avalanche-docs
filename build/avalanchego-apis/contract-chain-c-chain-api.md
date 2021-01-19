@@ -50,7 +50,7 @@ Para interactuar con las llamadas RPC específicas de `avax`.
 
 Exporta un activo desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.import`](exchange-chain-x-chain-api.md#avm-import) en la X-Chain para completar la transferencia.
 
-#### Signature
+#### Firma
 
 ```cpp
 avax.export({
@@ -102,7 +102,7 @@ curl -X POST --data '{
 
 Envía AVAX desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) en la X-Chain para completar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.exportAVAX({
@@ -164,7 +164,7 @@ curl -X POST --data '{
 
 Obtén la llave privada que controla una dirección dada. La llave privada que regresa puede ser agregada a un usuario con `avax.importKey`.
 
-#### Signature
+#### Firma
 
 ```go
 avax.exportKey({
@@ -216,7 +216,7 @@ curl -X POST --data '{
 
 Obtiene los UTXOs con referencia a cierta dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avax.getUTXOs(
@@ -296,7 +296,7 @@ esto nos da como respuesta:
 
 Finaliza la transferencia de un activo no-AVAX o AVAX que fue enviado de la X-Chain a la C-Chain. Antes de llamar este método, debes llamar al método [`avm.export`](exchange-chain-x-chain-api.md#avm-export) para iniciar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.import({
@@ -351,7 +351,7 @@ curl -X POST --data '{
 
 Finaliza una transferencia de AVAX desde la X-Chain hacia la C-Chain. Antes de llamar a este método, debes llamar el método [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) en la  X-Chain para inciar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.importAVAX({
@@ -404,7 +404,7 @@ curl -X POST --data '{
 
 Otorga control de una dirección a un usuario, mediante la asignación de la llave privada que controla la dirección.
 
-#### Signature
+#### Firma
 
 ```go
 avax.importKey({
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1MjExOTE0Niw5ODIwOTc0MDksLTE5OD
-cyMzQwNCwyNjkwMDc2MDUsMTQ5NzE4ODAxOCwxNjU3MjQ4NDQy
-LC0xOTAxMDg0MjQ5XX0=
+eyJoaXN0b3J5IjpbLTE0NzI2OTk4NTEsOTgyMDk3NDA5LC0xOT
+g3MjM0MDQsMjY5MDA3NjA1LDE0OTcxODgwMTgsMTY1NzI0ODQ0
+MiwtMTkwMTA4NDI0OV19
 -->
