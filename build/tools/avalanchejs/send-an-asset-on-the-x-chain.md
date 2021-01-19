@@ -33,13 +33,12 @@ let addressStrings = xchain.keyChain().getAddressStrings(); //devuelve un conjun
 let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
-## Spending the UTXOs <a id="spending-the-utxos"></a>
+## Utilizando los UTXOs <a id="spending-the-utxos"></a>
 
-The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
-
+La función de ayuda `buildBaseTx()` envía un único tipo de activo. Tenemos un assetID particular cuyas monedas queremos enviar a una dirección de destinatario. Este es un activo imaginario para este ejemplo que creemos que tiene 400 monedas. Verifiquemos que tenemos los fondos disponibles para la transacción.
 ```text
 let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6"; //avaSerialized string
-let mybalance = utxos.getBalance(myAddresses, assetid); //returns 400 as a BN
+let mybalance = utxos.getBalance(myAddresses, assetid); //retorna c BN
 ```
 
 We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
@@ -94,5 +93,5 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgzNTA1MDAyLC02NzQwMDUyOTZdfQ==
+eyJoaXN0b3J5IjpbLTE1Mjk2NTk0ODAsLTY3NDAwNTI5Nl19
 -->
