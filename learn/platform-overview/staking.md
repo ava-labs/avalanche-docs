@@ -53,11 +53,11 @@ Tenga en cuenta que una vez que se emite la transacción para añadir un nodo co
 
 Si estás ejecutando un validador, es importante que tu nodo esté bien conectado para asegurarte de recibirás tu recompensa. Ver [aquí](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
-Al emitir la transacción para añadir un validador, los tokens del stake y la comisión de la transacción se deducen de las direcciones que usted controla. Cuando terminas de validar, los fondos del stake se devuelven a las direcciones de donde vinieron. Si has ganado una recompensa, se envía a la dirección que especificaste cuando te agregaste como validador.
+Al emitir la transacción para añadir un validador, los tokens del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando terminas de validar, los fondos del stake se devuelven a las direcciones de donde vinieron. Si has ganado una recompensa, se envía a la dirección que especificaste cuando te agregaste como validador.
 
 #### Permitir Llamados API <a id="allow-api-calls"></a>
 
-To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
+Para hacer llamados a la API a tu nodo desde máquinas remotas, permite el tráfico en el puerto de la API \(`9650` por defecto\), y ejecuta tu nodo con el argumento `--http-host=`
 
 You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTEzNTE3NzcsLTM2Mjc5OTM4MSw1Nz
-Y4MDU5OTEsLTcxNzcxOTgxMV19
+eyJoaXN0b3J5IjpbNTQyNTY3NjQ4LC0zNjI3OTkzODEsNTc2OD
+A1OTkxLC03MTc3MTk4MTFdfQ==
 -->
