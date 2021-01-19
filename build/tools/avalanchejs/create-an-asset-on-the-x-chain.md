@@ -68,11 +68,11 @@ let utxos = await xchain.getUTXOs(addresses);
 // Realizar una transacción Create Asset sin firmar a partir de los datos compilados anteriormente
 let unsigned = await xchain.buildCreateAssetTx(
   utxos, // el UTXOSet que contiene los UTXOs que vamos a gastar
-  addresses, // the addresses which will pay the fees
-  addresses, // the addresses which recieve the change from the spent UTXOs
-  initialState, // the initial state to be created for this new asset 
-  name, // the full name of the asset
-  symbol, // a short ticker symbol for the asset
+  addresses, // las direcciones que pagarán las comisiones
+  addresses, // las direcciones que reciben el cambio de los UTXOs gastados
+  initialState, // el estado inicial que se creará para este nuevo activo 
+  name, // el nombre completo del activo
+  symbol, // un símbolo identificador corto para el activo
   denomination // the asse's denomination 
 );
 
@@ -123,5 +123,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQyNDc3MTEwXX0=
+eyJoaXN0b3J5IjpbLTE0MjkxMDgyMzRdfQ==
 -->
