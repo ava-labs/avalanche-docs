@@ -10,9 +10,9 @@ La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma 
 
 ## Formato
 
-Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas  For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoints
+## Endpoints / Extremos
 
 `/ext/bc/X` to interact with the X-Chain.
 
@@ -1718,5 +1718,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM3Mjk1MywxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
