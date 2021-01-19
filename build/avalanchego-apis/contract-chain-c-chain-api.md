@@ -127,9 +127,9 @@ avax.exportAVAX({
 
 **Respuesta**
 
-* `txID` es the txid of the completed ExportTx.
+* `txID` es el ID de la transacción completada con ExportTx.
 
-#### Example Call
+#### Llamada de Ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -148,7 +148,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -162,7 +162,7 @@ curl -X POST --data '{
 
 ### avax.exportKey
 
-Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+Obtén la llave privada que controla una dirección dada. La llave privada que regresa puede ser agregada a un usuario con `avax.importKey`.
 
 #### Signature
 
@@ -174,10 +174,10 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-**Request**
+**Petición**
 
-* `username` must control `address`.
-* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+* `username` debe tener control de  `address`.
+* `address` es la direcis the address for which you want to export the corresponding private key. It should be in hex format.
 
 **Response**
 
@@ -450,5 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyNjMzODUyMiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbLTEzOTI2Njk0MzAsLTE5MDEwODQyNDldfQ
+==
 -->
