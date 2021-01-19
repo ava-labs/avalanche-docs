@@ -84,7 +84,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
 * **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
 
-### Gantt Transferable Input Specification
+### Especificación de Entrada Transferible de Gantt
 
 ```text
 +------------+----------+------------------------+
@@ -1913,5 +1913,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTU3NTQ1ODRdfQ==
+eyJoaXN0b3J5IjpbMTk2NDc4Mjc5OV19
 -->
