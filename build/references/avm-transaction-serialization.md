@@ -525,9 +525,9 @@ Hagamos una salida de transferencia NFT con:
 ]
 ```
 
-## NFT Mint Output
+## Salida de Acuñación NFT
 
-An NFT mint output is an NFT that is owned by a collection of addresses.
+Una salida acuñación NFT es una NFT que es propiedad de una colección de direcciones.
 
 ### **What NFT Mint Output Contains**
 
@@ -1920,6 +1920,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3ODg4OTc2NjcsNjYwMTc5NzQ3LC0xNT
-Y3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbLTU2NDYwMjcxLDY2MDE3OTc0NywtMTU2Nz
+MxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
 -->
