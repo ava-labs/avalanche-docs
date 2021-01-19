@@ -1832,15 +1832,15 @@ Hagamos un ejemplo de una transacción firmada que utilice las entradas y salida
 
 Un UTXO es una representación independiente de la salida de una transacción.
 
-### What UTXO Contains
+### Que Contiene Un UTXO
 
-Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y`Output`.
+Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`** El único `CodecID` válido es `00 00`
+* **`TxID`** es una identificación de transacción de 32 bytes. Los ID de transacción se calculan tomando sha256 de los bytes de la transacción firmada.
+* **`UTXOIndex`** es un int que especifica qué salida de la transacción especificada por **`TxID`** fue creada por este utxo.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
+* **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
 ### Gantt UTXO Specification
 
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTgxNzU0NzcsLTE2MjgyNTI3NTMsLT
+eyJoaXN0b3J5IjpbLTE3MjUwNzA4MTEsLTE2MjgyNTI3NTMsLT
 E2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4
 NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLT
 E2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3
