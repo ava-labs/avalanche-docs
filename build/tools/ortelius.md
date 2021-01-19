@@ -270,9 +270,9 @@ Encuentra transacciones confirmadas de la red.
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 | `assetID` | `id` | Una ID de activos para filtrar los resultados. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
-| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
+| `address` | `address` | Una dirección por la que filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `disableGenesis` | `bool` | Cuando sea true, los datos del vértice del Génesis no retornan. | true | N/A 
+| `sort` | `string` | Un método para clasificar los resultados. Puede ser `timestamp-asc` o`timestamp-desc`. | `timestamp-asc` | N/A |
 
 **Llamado de Ejemplo**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwNzg4OTEyNCw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbNDk3NTM5NDAzLDc5NDc1ODk2N119
 -->
