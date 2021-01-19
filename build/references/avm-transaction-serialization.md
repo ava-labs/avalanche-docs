@@ -1005,9 +1005,9 @@ Hagamos una operación de transferencia NFT con:
 ]
 ```
 
-## Initial State
+## Estado Inicial
 
-Initial state describes the initial state of an asset when it is created. It contains the ID of the feature extension that the asset uses, and a variable length array of outputs that denote the genesis UTXO set of the asset.
+El estado inicial describe el estado inicial de un activo cuando se crea. Contiene el ID de la extensión de la característica que utiliza el activo y un conjunto de salidas de longitud variable que denotan el conjunto UTXO de la génesis del activo.
 
 ### What Initial State Contains
 
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
-c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
-NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC
-0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbMTg3NTM5MzAyMSwtMTY5OTk1OTc4NiwtMj
+A5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2
+ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLT
+E1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
