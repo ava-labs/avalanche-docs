@@ -18,8 +18,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
 * **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Especificación de Salida Transferible de Gantt
-
+### Especificación Gantt de Salida Transferible
 ```text
 +----------+----------+-------------------------+
 | asset_id : [32]byte |                32 bytes |
@@ -84,7 +83,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
 * **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
 
-### Especificación de Entrada Transferible de Gantt
+### Especificación Gantt de Entrada Transferible
 
 ```text
 +------------+----------+------------------------+
@@ -162,7 +161,7 @@ Una operación transferible contiene un `AssetID` un `UTXOIDs` y un  `TransferOp
 * **`UTXOIDs`** es un array de tuplas TxID-OutputIndex. Esta matriz debe ser ordenada en orden lexicográfico.
 * **`TransferOp`** es un objeto de operación transferible.
 
-### Especificación de Operaciones Transferibles de Gantt
+### Especificación Gantt de Operaciones Transferibles
 
 ```text
 +-------------+------------+------------------------------+
@@ -263,7 +262,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### ** Especificación de Salida de Transferencia Gantt SECP256K1**
+### ** Especificación Gantt de Salida de Transferencia  SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -1921,6 +1920,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3Mjk4MTQyODIsNjYwMTc5NzQ3LC0xNT
-Y3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1Nj
+czMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
