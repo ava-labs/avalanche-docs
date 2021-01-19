@@ -277,7 +277,7 @@ Uso:
   avash startnode [node name] args... [flags]
 
 Flags:
-      --assertions-enabled                   Turn on assertion execution. (default true)
+      --assertions-enabled                   Pon en marcha la ejecución de la afirmación. ( Por defecto verdadero)
       --avax-tx-fee uint                     Transaction fee, in nAVAX.
       --bootstrap-ids string                 Comma separated list of bootstrap peer ids to connect to. Example: JR4dVmy6ffUGAKCBDkyCbeZbyHQBeDsET,8CrVPQZ4VSqgL8zTdvL14G8HqAfrBr4z
       --bootstrap-ips string                 Comma separated list of bootstrap nodes to connect to. Example: 127.0.0.1:9630,127.0.0.1:9620
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4Njg1OTg0NywxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbMTQzMDgxNDkwMCwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
