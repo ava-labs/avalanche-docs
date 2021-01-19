@@ -274,13 +274,13 @@ Find transactions confirmed transactions from the network.
 | `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
 | `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```bash
 curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -354,13 +354,13 @@ curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111
 
 Find a single transaction by its ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -428,20 +428,20 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 
 Find addresses that have been involved in confirmed transactions.
 
-**ParaParámetrosms**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addresses?limit=1"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -468,13 +468,13 @@ curl "http://localhost:8080/v2/addresses?limit=1"
 
 Find a single address by its ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -509,7 +509,7 @@ Find assets that have been created on the X-chain.
 curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -595,7 +595,7 @@ Find a single asset by its ID.
 curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -685,7 +685,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -719,7 +719,7 @@ Find a single output by its ID.
 curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -749,7 +749,7 @@ Version 1 of the API was built to support only the X-chain, and it did not use a
 curl "http://localhost:8080/x"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzOTgwMTUzMSw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbMTUxMzk4NzY1OSw3OTQ3NTg5NjddfQ==
 -->
