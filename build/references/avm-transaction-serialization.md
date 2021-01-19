@@ -251,7 +251,7 @@ Las salidas o "Outputs" tienen cuatro tipos posibles: `SECP256K1TransferOutput`,
 Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer output" permite enviar una cantidad de un activo a un conjunto de direcciones después de un tiempo unix especificado.
 
 
-### **Que contiene la salida de transferencia SECP256K1**
+### **Que contiene una salida de transferencia SECP256K1**
 
 Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
@@ -261,7 +261,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### ** Especificación Gantt de Salida de Transferencia  SECP256K1**
+### ** Especificación Gantt de una Salida de Transferencia  SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -279,7 +279,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
                          +--------------------------------+
 ```
 
-### **Especificación Proto de Salida de Transferencia SECP256K1 **
+### **Especificación Proto de una Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -291,7 +291,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **Ejemplo de salida de transferencia SECP256K1**
+### **Ejemplo de una salida de transferencia SECP256K1**
 
 Hagamos una salida de transferencia secp256k1 con:
 
@@ -1920,11 +1920,11 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDkwNDYyODEsLTEyOTM0MTgyOTEsMT
-E0NjcyODM4OSw1NTk1NjU5LC04MjM5Mjg4ODAsLTk2Mjk2MDA1
-OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MD
-g1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0
-MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NS
-w2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5
-MTgyMDNdfQ==
+eyJoaXN0b3J5IjpbMTU4ODEwNzU2NCwtMTg0OTA0NjI4MSwtMT
+I5MzQxODI5MSwxMTQ2NzI4Mzg5LDU1OTU2NTksLTgyMzkyODg4
+MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwtOTM5NjY3ODA0LC00Mz
+Q0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MDEw
+MDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1My
+wtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQw
+MTg2MjU3XX0=
 -->
