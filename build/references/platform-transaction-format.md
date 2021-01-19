@@ -396,7 +396,7 @@ BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Me
 * **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
 
-### **Gantt Base Tx Specification**
+### **Especificación Gantt de  Base Tx**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -416,7 +416,7 @@ BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Me
                           +------------------------------------------------------+
 ```
 
-### **Proto Base Tx Specification**
+### **Especificación Proto de  Base Tx**
 
 ```text
 message BaseTx {
@@ -429,7 +429,7 @@ message BaseTx {
 }
 ```
 
-### **Base Tx Example**
+### **Ejemplo de Base Tx**
 
 Let’s make a base tx that uses the inputs and outputs from the previous examples:
 
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0NTkzMTIzMywtNTAzNTYzODM4LC02Nz
+eyJoaXN0b3J5IjpbMTQxMTYwOTMxNCwtNTAzNTYzODM4LC02Nz
 Y2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5
 MDcwLC00ODIzMzY1MjNdfQ==
 -->
