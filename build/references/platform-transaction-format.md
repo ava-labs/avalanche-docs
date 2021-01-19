@@ -308,17 +308,19 @@ Hagamos una salida de los propietarios de la salida SECP256K1 con:
 ]
 ```
 
-## Inputs
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+## Entradas
 
-## SECP256K1 Transfer Input
+Las entradas tienen un tipo posible: `SECP256K1TransferInput`.
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+## Entrada de Transferencia SECP256K1 
 
-### **What SECP256K1 Transfer Input Contains**
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite utilizar una salida de transferencia secp256k1 no utilizada.
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+### **Que Contiene una Entrada de Transferencia SECP256K1**
+
+
+Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000005`.
 * **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
@@ -1602,6 +1604,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTg1MzQzODEsLTEyMDE3ODg1OTcsLT
+eyJoaXN0b3J5IjpbLTE2ODY5Nzk1ODksLTEyMDE3ODg1OTcsLT
 M3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
