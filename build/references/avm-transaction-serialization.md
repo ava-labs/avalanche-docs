@@ -1072,9 +1072,9 @@ Hagamos un estado inicial con:
 
 ## Credenciales
 
-Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Las credenciales tienen dos tipos posibles: `SECP256K1Credential`, y `NFTCredential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
 
-## SECP256K1 Credential
+## Credencial SECP256K1 
 
 A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
 
@@ -1921,9 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc2ODkwNzkyLC0xOTQzMjM0MDcsLTE2OT
-k5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3
-MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNj
-YwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3
-ODI3OTldfQ==
+eyJoaXN0b3J5IjpbMjA4OTk5NzgyMiwtMTk0MzIzNDA3LC0xNj
+k5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYy
+NzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LD
+Y2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0
+NzgyNzk5XX0=
 -->
