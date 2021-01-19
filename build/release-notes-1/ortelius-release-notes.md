@@ -19,8 +19,8 @@ Otros cambios:
 * Agregada información de capital fijo/variable a la API
 * Agregados datos de comisiones de transacción a la API
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5ODg5MjUwM119
+eyJoaXN0b3J5IjpbLTM5MTA1NjA4N119
 -->
