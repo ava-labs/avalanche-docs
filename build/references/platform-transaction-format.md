@@ -2,22 +2,24 @@
 
 Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones en la Avalanche’s Platform Virtual Machine, también conocida como la `Platform Chain` o la `P-Chain`. Este documento utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado y [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) para la identificación criptográfica del usuario.
 
+
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## Transferable Output
+## 
+Salida transferible
 
-Transferable outputs wrap an output with an asset ID.
+Las salidas transferibles envuelven una salida con una identificación de activo.
 
-### What Transferable Output Contains
+### Qué Contiene la Salida Transferible
 
-A transferable output contains an `AssetID` and an `Output`.
+Una salida transferible contiene una `AssetID` y un `Output`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
+* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Gantt Transferable Output Specification
+### Especificación Gantt de Salida Transferible
 
 ```text
 +----------+----------+-------------------------+
@@ -1602,5 +1604,5 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
