@@ -154,15 +154,15 @@ Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-
 
 ### **Que contiene la salida de transferencia SECP256K1**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000007`.
+* **`Amount`** es un largo que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
+* **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### ** Especificación Gantt de Salida de Transferencia  SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -180,7 +180,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Especificación Proto de Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -192,9 +192,9 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **Ejemplo de salida de transferencia SECP256K1**
 
-Let’s make a secp256k1 transfer output with:
+Hagamos una salida de transferencia secp256k1 con:
 
 * **`TypeID`**: 7
 * **`Amount`**: 3999000000
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ1NjUxMDM3LC0zNjc5MzkwNzAsLTQ4Mj
-MzNjUyM119
+eyJoaXN0b3J5IjpbLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00OD
+IzMzY1MjNdfQ==
 -->
