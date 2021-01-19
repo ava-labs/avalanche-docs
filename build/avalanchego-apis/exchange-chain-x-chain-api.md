@@ -66,24 +66,24 @@ avm.buildGenesis({
                         "amount":5000, // Al genesis, dirección B tiene
                         "address":"B"  // 1000 unidades del activo
                     },
-                    ...         // Puedes tener multiples poseedores iniciales
+                    ...                // Puedes tener multiples poseedores iniciales
                 ]
             }
         },
         "assetAliasCanBeAnythingUnique": { // El sobrenombre puede usarse en lugar del assetID en las llamadas
-            "name": "human readable name", // nombres no necesitan ser unicos
-            "symbol": "AVAL",              // symbols no necesitan ser unique
+            "name": "human readable name", // nombres no necesitan ser únicos
+            "symbol": "AVAL",              // simbolo no necesitan ser únicos
             "initialState": {
-                "variableCap" : [          // No units of the asset exist at genesis
+                "variableCap" : [          // No existen unidades del activo en el génesis
                     {
-                        "minters": [       // The signature of A or B can mint more of
-                            "A",           // the asset.
+                        "minters": [       // la firma de A o B pueden minar más de
+                            "A",           // los activos.
                             "B"
                         ],
                         "threshold":1
                     },
                     {
-                        "minters": [       // The signatures of 2 of A, B and C can mint
+                        "minters": [       // Las firmas de 2 de A, B y C pueden minar
                             "A",           // more of the asset
                             "B",
                             "C"
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjAxMzQ0NjQ2LC00NDU4Mzc2OSwtOTgxND
-U4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTQ2OTM3MzUzNCwtNDQ1ODM3NjksLTk4MT
+Q1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
