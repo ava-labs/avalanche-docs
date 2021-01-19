@@ -177,9 +177,9 @@ curl -X POST --data '{
 
 ### avm.createAddress
 
-Create a new address controlled by the given user.
+Crea una nueva dirección controlada por cierto usuario.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createAddress({
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzM4MDExMzY0LC00NDU4Mzc2OSwtOTgxND
-U4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MT
+Q1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
