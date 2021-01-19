@@ -36,7 +36,7 @@ Todos los puntos finales de la lista de recursos aceptan los siguientes parámet
 | :--- | :--- | :--- | :--- | :--- |
 | `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
 | `offset` | `int` | El número de elementos a omitir | `0` | None |
-| `query` | `string` | Un prefijo de ID para filtrar los elementos por | None | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
 | `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
 | `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
@@ -88,7 +88,7 @@ Encuentra una dirección o una transacción por su ID.
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `query` | `string` | Un prefijo de ID para filtrar los elementos por | None | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
 
 **Llamado de Ejemplo**
 
@@ -177,8 +177,8 @@ Calcular los datos agregados de las transacciones a lo largo de un período de t
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
+| `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrado varias veces. | None | None |
+| `assetID` | `id` | Una ID de activos para filtrar los resultados.. | None | None |
 
 **Example Call**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDQ4MjI2NDAsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbLTE3MzkyMTY3Myw3OTQ3NTg5NjddfQ==
 -->
