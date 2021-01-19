@@ -1,4 +1,4 @@
-# Notas de versión de AvalancheGo
+# Notas de Versión de AvalancheGo
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
@@ -97,5 +97,5 @@ Anything that depends on platform.getTxStatus should switch to using the include
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDg2NDUwOTZdfQ==
+eyJoaXN0b3J5IjpbLTEyNDg3NzUxNzZdfQ==
 -->
