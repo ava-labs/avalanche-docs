@@ -44,9 +44,9 @@ Si includeReason es verdadero, la salida de getTxStatus tendrá un nuevo formato
 En este nuevo formato, la razón no estará presente a menos que el estado sea "Dropped".
 Cualquier cosa que dependa de platform.getTxStatus debería cambiar a usar el argumento includeReason y usar el nuevo formato de respuesta. Después de algunos lanzamientos, sólo soportaremos el nuevo formato de respuesta.```
 
-Para asistencia con esta actualización, sigue nuestras [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
+Para ayuda con esta actualización ve a [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjAxNDY1MzEsMzgzNzgxNjAsNTQ4OD
-Y4OTVdfQ==
+eyJoaXN0b3J5IjpbLTEwNzMyNDI4MzksLTE3NjAxNDY1MzEsMz
+gzNzgxNjAsNTQ4ODY4OTVdfQ==
 -->
