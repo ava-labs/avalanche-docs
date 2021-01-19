@@ -20,7 +20,7 @@ Esta API utiliza el formato de RPC `json 2.0`.
 
 Asigna un sobrenombre al extremo (endpoint) de la API, un extremo distinto para la API. El  extremo original seguirá funcionando. Esto modifica únicamente a este nodo; otros nodos no sabrán de este sobrenombre.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
@@ -62,7 +62,7 @@ Ahora, las llamadas a la X-Chain pueden hacerse ya sea con `/ext/bc/X` o, equiva
 
 Da un sobrenombre a una cadena de bloques, un nuevo nombre podrá ser usado en cualquier lugar que es usado el ID de una cadena de bloques.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.aliasChain(
@@ -108,7 +108,7 @@ Ahora, en lugar de interactuar con el ID de la cadena de bloques, que es `sV6o67
 
 Escribe un perfil de estadísticas mutex en`lock.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.lockProfile() -> {success:bool}
@@ -141,7 +141,7 @@ curl -X POST --data '{
 
 Escribe un perfil de memoria en `mem.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.memoryProfile() -> {success:bool}
@@ -174,7 +174,7 @@ curl -X POST --data '{
 
 Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama `admin.stopCPUProfiler`. Estando detenido, escribe el perfil en `cpu.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
@@ -207,7 +207,7 @@ curl -X POST --data '{
 
 Defiene el perfilamiento de CPU que fue iniciado previamente.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
@@ -236,7 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5ODQ3NDI1NCwtMTExMjQ3OTQxNSwtNT
+eyJoaXN0b3J5IjpbMTM3NTQxNjg2OCwtMTExMjQ3OTQxNSwtNT
 A0MzM5NTk1LC0xNjk3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0
 MjEwLDU1MjE3Nzc1MF19
 -->
