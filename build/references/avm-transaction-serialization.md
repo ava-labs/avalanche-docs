@@ -1201,7 +1201,7 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Ejemplo de Base Tx
 
 Let’s make an base tx that uses the inputs and outputs from the previous examples:
 
@@ -1920,10 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQ0NTQ5MDc4LC0xOTQwMTg2MjU3LDE2NT
-kxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMTY5OTk1OTc4
-NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMCw0OT
-kzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3
-NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV
-19
+eyJoaXN0b3J5IjpbMTQ4NjM0NzQ3MywtMTk0MDE4NjI1NywxNj
+U5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3
+ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsND
+k5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5
+NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OT
+ldfQ==
 -->
