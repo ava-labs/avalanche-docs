@@ -28,14 +28,14 @@ Además de los números enteros, las cadenas y los booleanos, se utilizan los si
 | `address` | Una dirección codificada bech-32 | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
 | `datetime` | Una timestamp de Unix como un entero o una cadena con formato RFC3339 | `1599696000`, `2020-09-10T00:00:00Z` |
 
-### List Parameters
+### Parámetros de la Lista
 
-All endpoints for listing resources accept the following parameters:
+Todos los puntos finales de la lista de recursos aceptan los siguientes parámetros:
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `limit` | `int` | The maximum number of items to return | `500` | `500` |
-| `offset` | `int` | The number of items to skip | `0` | None |
+| `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
+| `offset` | `int` | El número de elementos a omitir | `0` | None |
 | `query` | `string` | An ID prefix to filter items by | None | None |
 | `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
 | `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczMzQ4OTUyM119
+eyJoaXN0b3J5IjpbLTMyMDE5MjE3Nl19
 -->
