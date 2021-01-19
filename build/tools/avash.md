@@ -293,10 +293,10 @@ Flags:
       --log-dir string                       Nombre del directorio para el registro del nodo. ("logs" por defecto)
       --log-level string                     Especifica el nivel de registro. Debe ser uno de {all, debug, info, warn, error, fatal, off} (por defecto "todos")
       --meta string                          Anular los metadatos por defecto para el proceso del nodo.
-      --network-id string                    Network ID this node will connect to. (default "12345")
-      --public-ip string                     Public IP of this node. (default "127.0.0.1")
-      --signature-verification-enabled       Turn on signature verification. (default true)
-      --snow-avalanche-batch-size int        Number of operations to batch in each new vertex. (default 30)
+      --network-id string                    Identificación de la red a la que este nodo se conectará. (por defecto "12345")
+      --public-ip string                     IP pública de este nodo. (por defecto "127.0.0.1")
+      --signature-verification-enabled       Enciende la verificación de la firma. (Por defecto verdadero)
+      --snow-avalanche-batch-size int        El número de operaciones a realizar en cada nuevo vértice. (por defecto 30)
       --snow-avalanche-num-parents int       Number of vertexes for reference from each new vertex. (default 5)
       --snow-quorum-size int                 Alpha value to use for required number positive results. (default 2)
       --snow-rogue-commit-threshold int      Beta value to use for rogue transactions. (default 10)
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUzNTcxODM1NiwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTc4OTEzNTA1NywxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
