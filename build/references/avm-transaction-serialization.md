@@ -1717,11 +1717,11 @@ Hagamos un ejemplo de un Tx de exportación no firmado que utilice las entradas 
 ]
 ```
 
-## Signed Transaction
+## Transacción Firmada
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+Una transacción firmada es una transacción no firmada con la adición de una serie de credenciales.
 
-### What Signed Transaction Contains
+### Que Contiene una Transacción Firmada
 
 Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
@@ -1920,10 +1920,11 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NT
-c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
-LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
-c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
-NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC
-0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Nj
+g4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgy
+MDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLT
+IwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2
+Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC
+0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+
 -->
