@@ -307,9 +307,9 @@ avax.import({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
+* `to` es la dirección a la cual se enviará el activois the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
 * `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
 * `username` is the user that controls `to`.
 
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY5MDA3NjA1LDE0OTcxODgwMTgsMTY1Nz
-I0ODQ0MiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbODM5NTQzNjk4LDI2OTAwNzYwNSwxNDk3MT
+g4MDE4LDE2NTcyNDg0NDIsLTE5MDEwODQyNDldfQ==
 -->
