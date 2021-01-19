@@ -67,7 +67,7 @@ avax.export({
 * `assetID` es el ID del activo. Para exportar AVAX usa `"AVAX"` como `assetID`.
 * El activo es enviado desde las cuentas controladas por `username` y `password`.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -84,7 +84,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -98,7 +98,7 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
+**DESCONTINUADA—en lugar use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
 Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
 
@@ -450,6 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzQ1MDE5MDIsLTE5MDEwODQyNDldfQ
-==
+eyJoaXN0b3J5IjpbMTA3OTU4MjIzMywtMTkwMTA4NDI0OV19
 -->
