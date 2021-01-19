@@ -56,17 +56,18 @@ initialState.addOutput(secpOutput2);
 initialState.addOutput(secpOutput3);
 ```
 
-## Creating the signed transaction
+## 
+Creación de la transacción firmada
 
-Now that we know what we want an asset to look like, we create an output to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
+Ahora que sabemos cómo queremos que se vea un activo, creamos una salida para enviar a la red. Hay una función de ayuda de AVM `buildCreateAssetTx()` que hace precisamente eso.
 
 ```text
-// Fetch the UTXOSet for our addresses
+// Obtiene el UTXOSet para nuestra dirección
 let utxos = await xchain.getUTXOs(addresses);
 
-// Make an unsigned Create Asset transaction from the data compiled earlier
+// Realizar una transacción Create Asset sin firmar a partir de los datos compilados anteriormente
 let unsigned = await xchain.buildCreateAssetTx(
-  utxos, // the UTXOSet containing the UTXOs we're going to spend
+  utxos, // el UTXOSet que contiene los UTXOs que vamos a gastar
   addresses, // the addresses which will pay the fees
   addresses, // the addresses which recieve the change from the spent UTXOs
   initialState, // the initial state to be created for this new asset 
@@ -122,5 +123,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0MTgyNDgxOF19
+eyJoaXN0b3J5IjpbNzQyNDc3MTEwXX0=
 -->
