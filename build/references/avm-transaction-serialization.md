@@ -427,16 +427,17 @@ Hagamos una salida de acuñación con SECP256K1:
 
 Una salida de transferencia NFT es una NFT que es propiedad de una colección de direcciones.
 
-### **What NFT Transfer Output Contains**
+#
+## **Que Contiene una Salida de Transferencia NFT**
 
-An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, and `Addresses`.
+Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`GroupID`** is an int that specifies the group this NFT was issued with.
-* **`Payload`** is an arbitrary string of bytes no long longer than 1024 bytes.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es "0x0000000b".
+* **`GroupID`** es un int que especifica el grupo con el que se emitió este NFT.
+* **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
+* **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
 ### **Gantt NFT Transfer Output Specification**
 
@@ -1919,6 +1920,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTg1MDM3NjU3LDY2MDE3OTc0NywtMTU2Nz
+eyJoaXN0b3J5IjpbODM1Njc0MDY1LDY2MDE3OTc0NywtMTU2Nz
 MxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
 -->
