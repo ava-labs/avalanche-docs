@@ -1510,7 +1510,7 @@ Una Transacción de Importación No Firmada contiene un `BaseTx`, `SourceChain` 
 * **`SourceChain`** es una identificación de blockchain de fuente de 32 bytes.
 * **`Ins`** es un conjunto de longitud variable de entradas transferibles.
 
-### Especificación Gantt de un Tx de Importación No Firmado
+### Especificación Gantt de una Transacción de Importación No Firmada
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1524,7 +1524,7 @@ Una Transacción de Importación No Firmada contiene un `BaseTx`, `SourceChain` 
                         +--------------------------------------+
 ```
 
-### Especificación Proto de un Tx de Importación No Firmado
+### Especificación Proto de una Transacción de Importación No Firmada
 
 ```text
 message ImportTx {
@@ -1534,7 +1534,7 @@ message ImportTx {
 }
 ```
 
-### Ejemplo de un Tx de Importación No Firmado
+### Ejemplo de una Transacción de Importación No Firmada
 
 Hagamos un ejemplo de un Tx de Importación No Firmado que utilice las entradas y salidas de los ejemplos anteriores:
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3MDIwMjA1OCwxMTQ2NzI4Mzg5LDU1OT
-U2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwt
-OTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOT
-AzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1
-NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNz
-c1NzQzOTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4
-MTBdfQ==
+eyJoaXN0b3J5IjpbMjQwNzkxNzgwLDExNDY3MjgzODksNTU5NT
+Y1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOTc0MzYwMTA0LC05
+Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MD
+MyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3
+LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgzMjgzLC03Nz
+U3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgx
+MF19
 -->
