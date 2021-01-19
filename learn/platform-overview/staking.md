@@ -65,9 +65,9 @@ Deberías desactivar todas las API que no usarás mediante argumentos de la lín
 
 Cada validador de Avalanche lleva un registro del tiempo de funcionamiento de los otros validadores. Puedes ver las conexiones que tiene un nodo llamando a `info.peers`, así como el tiempo de actividad de cada conexión. **Este es sólo el punto de vista de un nodo**. Otros nodos pueden percibir el tiempo de actividad de tu nodo de manera diferente. Sólo porque un nodo perciba que tu tiempo de actividad es bajo no significa que no recibirás recompensas de staking.
 
-The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
+La razón más probable de que su nodo no esté conectado a otro nodo es que el traversal NAT falló, y no comenzó su nodo con `--public-ip=[NODE'S PUBLIC IP]`. En el futuro, añadiremos una mejor monitorización para facilitar la verificación de que su nodo está bien conectado.
 
-#### Secret Management <a id="secret-management"></a>
+#### Gestión Secreta <a id="secret-management"></a>
 
 The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4OTc2OTc2OCw1NDI1Njc2NDgsLTM2Mj
-c5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
+eyJoaXN0b3J5IjpbMjE3NDYxNDQ3LDU0MjU2NzY0OCwtMzYyNz
+k5MzgxLDU3NjgwNTk5MSwtNzE3NzE5ODExXX0=
 -->
