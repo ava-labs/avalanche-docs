@@ -216,23 +216,23 @@ curl -X POST --data '{
 
 ### avm.createFixedCapAsset
 
-Crea un nuevo activo fungible, de capitalización fija. Una cantidad  A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+Crea un nuevo activo fungible, de capitalización fija. Una cantidad de él es creada al inicio y posteriormente no pueden crearse más. El activo puede ser enviado con `avm.send`.
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
-    denomination: int, //optional
+    denomination: int, //opcional
     initialHolders: []{
         address: string,
         amount: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
+    from: []string, //opcional
+    changeAddr: string, //opcional
     username: string,
     password: string
 }) ->
@@ -242,8 +242,8 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+* `name` es un nombre humanamente-legible del activo. No necesariamente único.
+* `symbol` es una abreviaciónis a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
 * `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzcwMzk5MjQ3LC05ODA5NjE5ODQsLTQ0NT
+eyJoaXN0b3J5IjpbNTAzODQ2OTMzLC05ODA5NjE5ODQsLTQ0NT
 gzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
 -->
