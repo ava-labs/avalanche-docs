@@ -770,7 +770,7 @@ Configuración usando un archivo JSON para las aplicaciones de Ortelius. La conf
 
 ## Ejemplo
 
-Esta configuración es la que utiliza la configuración autónoma de Docker Compose e ilustra los diversos ajustes disponibles `kafka`, `mysql`, y`redis` are DNS names that resolve to relevant service.
+Esta configuración es la que utiliza la configuración autónoma de Docker Compose e ilustra los diversos ajustes disponibles `kafka`, `mysql`, y`redis` son nombres de DNS que resuelven el servicio correspondiente.
 
 ```javascript
 {
@@ -815,5 +815,5 @@ Esta configuración es la que utiliza la configuración autónoma de Docker Comp
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk2MjI3NDI1Myw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbLTY0MjI3OTkwMSw3OTQ3NTg5NjddfQ==
 -->
