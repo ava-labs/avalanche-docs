@@ -202,13 +202,13 @@ Uso:
   avash network [command] [flags]
 
 Comandos Disponibles:
-deploy        Despliega una red remota de nodos.
-remove        Remueve una red remota de nodos.
+deploy     Despliega una red remota de nodos.
+remove     Remueve una red remota de nodos.
 ```
 
-**CONFIGURATION**
+**Configuración**
 
-To deploy and remove networks, a `.yaml` network configuration file is required. An example is provided in the Avash codebase at `network/example.network.yaml` and should have the following format:
+Para desplegar y eliminar las redes, se requiere un archivo de configuración de red `.yaml`. Se proporciona un ejemplo en la base de código de Avash en  `network/example.network.yaml` y debe tener el siguiente formato:
 
 ```text
 # List of hosts
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxOTA0NTc1NywxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTI5NDA2OTM3MiwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
