@@ -148,7 +148,7 @@ Herramientas para interactuar con Pagos de Avalanche a través de la red. Usando
 Uso:
   avash avawallet [command] [flags]
 
-Available Commands:
+Comandos Disponibles:
   addkey      Adds a private key to a wallet.
   balance     Checks the balance of an address from a node.
   compare     Compares the UTXO set between two wallets.
@@ -201,7 +201,7 @@ Tools for interfacing with remote hosts. Using this command we can
 Uso:
   avash network [command] [flags]
 
-Available Commands:
+Comandos Disponibles:
   deploy      Deploys a remote network of nodes.
   remove      Removes a remote network of nodes.
 ```
@@ -233,10 +233,10 @@ Access the process manager for the avash client. Using this
     command we can list, stop, and start processes registered with the 
     process manager.
 
-Usage:
+Uso:
   avash procmanager [command] [flags]
 
-Available Commands:
+Comandos Disponibles:
   kill        Kills the process named if currently running.
   killall     Kills all processes if currently running.
   list        Lists the processes currently running.
@@ -253,7 +253,7 @@ Available Commands:
 ```text
 Runs the script provided in the argument, relative to the present working directory.
 
-Usage:
+Uso:
   avash runscript [script file] [flags]
 ```
 
@@ -262,7 +262,7 @@ Usage:
 ```text
 Sets the log level of a specific log output type.
 
-Usage:
+Uso:
   avash setoutput [log output] [log level]
 ```
 
@@ -273,7 +273,7 @@ Starts an Avalanche client node using procmanager and gives it a name. Example:
 
 startnode MyNode1 --public-ip=127.0.0.1 --staking-port=9651 --http-port=9650 ... 
 
-Usage:
+Uso:
   avash startnode [node name] args... [flags]
 
 Flags:
@@ -317,10 +317,10 @@ Tools for creating variable stores and printing variables within them. Using thi
     command we can create variable stores, list all variables they store, and print data 
     placed into these stores. Variable assignment and update is often managed by avash commands.
 
-Usage:
+Uso:
   avash varstore [command] [flags]
 
-Available Commands:
+Comandos Disponibles:
   create      Creates a variable store.
   list        Lists all stores. If store provided, lists all variables in the store.
   print       Prints a variable that is within the store.
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0MTgxMjI5MywtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbOTE4ODg4NjMsLTI4MTcxODA4XX0=
 -->
