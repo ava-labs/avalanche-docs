@@ -315,7 +315,7 @@ avax.import({
 
 **Respuesta**
 
-* `txID` es el ID de la transacción completada ImportTx.
+* `txID` es el ID de la transacción de importación completada.
 
 #### Llamada de ejemplo
 
@@ -370,7 +370,7 @@ avax.importAVAX({
 
 **Respuesta**
 
-* `txID` es el ID de la is the ID of the completed ImportTx.
+* `txID` es el ID de la transacción de importación completada.
 
 #### Llamada de ejemplo
 
@@ -402,7 +402,7 @@ curl -X POST --data '{
 
 ### avax.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga control de una dirección a un usuario, mediante la asignación de la llave privada que controla la dirección.
 
 #### Signature
 
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5MzUyOTA0MSwtMTk4NzIzNDA0LDI2OT
-AwNzYwNSwxNDk3MTg4MDE4LDE2NTcyNDg0NDIsLTE5MDEwODQy
-NDldfQ==
+eyJoaXN0b3J5IjpbLTE3OTI2NTg3ODMsLTE5ODcyMzQwNCwyNj
+kwMDc2MDUsMTQ5NzE4ODAxOCwxNjU3MjQ4NDQyLC0xOTAxMDg0
+MjQ5XX0=
 -->
