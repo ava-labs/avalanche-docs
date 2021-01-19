@@ -44,16 +44,16 @@ let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la direcc
 
 ```
 
-… or an Avalanche serialized string works, too:
+...o, una cadena serializada de Avalanche también funciona:
 
 ```text
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la dirección
 ```
 
-## Working with Keychains <a id="working-with-keychains"></a>
+## Trabajando con Keychains <a id="working-with-keychains"></a>
 
-The X-Chains’s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+El KeyChain de la X-Chains tiene capacidades de gestión de claves estandarizadas. Las siguientes funciones están disponibles en cualquier KeyChain que implemente esta interfaz.
 
 ```text
 let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
@@ -89,5 +89,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDEyMjIxMTNdfQ==
+eyJoaXN0b3J5IjpbLTUyMDc5MzE5NF19
 -->
