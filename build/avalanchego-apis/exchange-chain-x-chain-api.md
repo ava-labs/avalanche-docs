@@ -70,7 +70,7 @@ avm.buildGenesis({
                 ]
             }
         },
-        "assetAliasCanBeAnythingUnique": { // El sobrenombre puede usarse en lugar del assetID en las llamadas
+        "assetAliasCanBeAnythingUnique": { // El sobrenombre puede usarse en vez de assetID en las llamadas
             "name": "human readable name", // nombres no necesitan ser únicos
             "symbol": "AVAL",              // simbolo no necesitan ser únicos
             "initialState": {
@@ -84,22 +84,22 @@ avm.buildGenesis({
                     },
                     {
                         "minters": [       // Las firmas de 2 de A, B y C pueden minar
-                            "A",           // more of the asset
+                            "A",           // mas del activo
                             "B",
                             "C"
                         ],
                         "threshold":2
                     },
-                    ...                    // Can have many minter sets
+                    ...                    // Puedes tener cualquier conjunto de mineros
                 ]
             }
         },
-        ...                                // Can list more assets
+        ...                                // Puedes listar más activos
     }
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -162,7 +162,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2OTM3MzUzNCwtNDQ1ODM3NjksLTk4MT
-Q1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbNzM4MDExMzY0LC00NDU4Mzc2OSwtOTgxND
+U4NjM2LDEyMzg0MzYxODNdfQ==
 -->
