@@ -30,7 +30,7 @@ admin.alias({endpoint:string, alias:string}) -> {success:bool}
 * La API con sobrenombre ahora puede llamarse con `ext/alias`.
 * `alias` puede tener a lo más 512 caracteres.
 
-#### **Ejemplo**
+#### **Ejemplo de llamada**
 
 ```text
 curl -X POST --data '{
@@ -44,7 +44,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```text
 {
@@ -60,7 +60,7 @@ Ahora, las llamadas a la X-Chain pueden hacerse ya sea con `/ext/bc/X` o, equiva
 
 ### admin.aliasChain
 
-Da un sobrenombre a una cadena de bloques, un nuevo nombre podrá ser usado en cualquier lugar qu a different name that can be used any place the blockchain’s ID is used.
+Da un sobrenombre a una cadena de bloques, un nuevo nombre podrá ser usado en cualquier lugar que es usado el ID de una cadena de bloques.
 
 #### **Signature**
 
@@ -73,10 +73,10 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain` es el ID de la cadena de bloques.
+* `alias` ahora puede usarse en lugar del ID de la cadena de bloques \(en extremos de la API, por ejemplo.\)
 
-#### **Example Call**
+#### **Ejemplo de llamada**
 
 ```text
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respu**
 
 ```text
 {
@@ -236,6 +236,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4MjY4Njk0MiwxMTcyMjI0NzQsLTIxND
-A1MTQyMTAsNTUyMTc3NzUwXX0=
+eyJoaXN0b3J5IjpbNzIxNzUyMjYsMTE3MjIyNDc0LC0yMTQwNT
+E0MjEwLDU1MjE3Nzc1MF19
 -->
