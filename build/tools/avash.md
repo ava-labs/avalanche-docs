@@ -129,13 +129,13 @@ Avash viene con los siguientes comandos root:
 * `exit` - Cierra la Shell
 * `help` - Ayuda sobre cualquier comando.
 * `network` Herramientas para interactuar con hosts remotos.
-* `procmanager` - Access the process manager for the avash client.
-* `runscript` - Runs the provided script.
-* `setoutput` - Sets shell log output.
-* `startnode` - Starts a node process and gives it a name.
-* `varstore` - Tools for creating variable stores and printing variables within them.
+* `procmanager` - Accede al gestor de procesos para el cliente avash.
+* `runscript` - Ejecuta el script provisto.
+* `setoutput` - Establece la salida del registro del shell.
+* `startnode` - Inicia un proceso de nodos y le da un nombre
+* `varstore` - Herramientas para crear almacenes de variables e imprimir variables dentro de ellos.
 
-These can be enumerated or auto-completed using the tab key and are explained in detail below.
+Éstos pueden enumerarse o completarse automáticamente utilizando la tecla de tabulación y se explican en detalle a continuación.
 
 **avawallet**
 
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMTc4OTU2MCwtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTk4NDUzNzc1MiwtMjgxNzE4MDhdfQ==
 -->
