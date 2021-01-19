@@ -431,7 +431,7 @@ message BaseTx {
 
 ### **Ejemplo de Base Tx**
 
-Let’s make a base tx that uses the inputs and outputs from the previous examples:
+Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `12345`
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxMTYwOTMxNCwtNTAzNTYzODM4LC02Nz
-Y2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5
-MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3Nj
+YwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5Mzkw
+NzAsLTQ4MjMzNjUyM119
 -->
