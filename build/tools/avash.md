@@ -224,7 +224,7 @@ hosts:
         # ...
 ```
 
-This format can be scaled to simultaneously deploy many nodes on many hosts, using `-` in YAML syntax to add new elements to the host list and each host’s node list. A full list of CLI flags can be found [here](https://docs.avax.network/v1.0/en/references/command-line-interface/), where `--node-flag` corresponds to `nodeflag` in our configuration file.
+Este formato puede ser escalado para desplegar simultáneamente muchos nodos en muchos hosts, usando `-` en la sintaxis YAML para agregar nuevos elementos a la lista de hosts y a la lista de nodos de cada host. Una lista completa de indicadores de CLI puede ser encontrada [aquí](https://docs.avax.network/v1.0/en/references/command-line-interface/), donde`--node-flag` corresponde a  `nodeflag`en nuestro archivo de configuración.
 
 **procmanager**
 
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5NDA2OTM3MiwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTQ4MjA3OTQxOCwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
