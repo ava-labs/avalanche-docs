@@ -143,7 +143,7 @@ Let’s make a transferable input:
     // input:
     0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
     0x07, 0x5b, 0xcd, 0x15, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x03
+    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x07
 ]
 ```
 
@@ -653,13 +653,13 @@ Let’s make a payment input with:
 
 * **`TypeId`**: `5`
 * **`Amount`**: `123456789`
-* **`AddressIndices`**: \[`7`,`3`\]
+* **`AddressIndices`**: \[`3`,`7`\]
 
 ```text
 [
     TypeID         <- 0x00000005
     Amount         <- 123456789 = 0x00000000075bcd15,
-    AddressIndices <- [0x00000007, 0x00000003]
+    AddressIndices <- [0x00000003, 0x00000007]
 ]
 =
 [
@@ -670,9 +670,9 @@ Let’s make a payment input with:
     // length:
     0x00, 0x00, 0x00, 0x02,
     // sig[0]
-    0x00, 0x00, 0x00, 0x07,
-    // sig[1]
     0x00, 0x00, 0x00, 0x03,
+    // sig[1]
+    0x00, 0x00, 0x00, 0x07,
 ]
 ```
 
@@ -728,15 +728,15 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 
 * **`TypeId`**: `8`
 * **`AddressIndices`**:
-* `0x00000007`
 * `0x00000003`
+* `0x00000007`
 * **`MintOutput`**: `“Example SECP256K1 Mint Output from above”`
 * **`TransferOutput`**: `“Example SECP256K1 Transfer Output from above”`
 
 ```text
 [
     TypeID <- 0x00000008
-    AddressIndices <- [0x00000007, 0x00000003]
+    AddressIndices <- [0x00000003, 0x00000007]
     MintOutput <- 0x00000006000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c89
     TransferOutput <- 0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
 ]
@@ -747,9 +747,9 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
     // number of address_indices:
     0x00, 0x00, 0x00, 0x02,
     // address_indices[0]:
-    0x00, 0x00, 0x00, 0x07,
-    // address_indices[1]:
     0x00, 0x00, 0x00, 0x03,
+    // address_indices[1]:
+    0x00, 0x00, 0x00, 0x07,
     // mint output
     0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
@@ -825,8 +825,8 @@ Let’s make an NFT mint operation with:
 
 * **`TypeId`**: `12`
 * **`AddressIndices`**:
-  * `0x00000007`
   * `0x00000003`
+  * `0x00000007`
 * **`GroupID`**: `12345`
 * **`Payload`**: `0x431100`
 * **`Locktime`**: `54321`
@@ -838,8 +838,8 @@ Let’s make an NFT mint operation with:
 [
     TypeID         <- 0x0000000c
     AddressIndices <- [
-        0x00000007,
         0x00000003,
+        0x00000007,
     ]
     GroupID        <- 0x00003039
     Payload        <- 0x431100
@@ -856,9 +856,9 @@ Let’s make an NFT mint operation with:
     // number of address indices:
     0x00, 0x00, 0x00, 0x02,
     // address index 0:
-    0x00, 0x00, 0x00, 0x07,
-    // address index 1:
     0x00, 0x00, 0x00, 0x03,
+    // address index 1:
+    0x00, 0x00, 0x00, 0x07,
     // groupID:
     0x00, 0x00, 0x30, 0x39,
     // length of payload:
