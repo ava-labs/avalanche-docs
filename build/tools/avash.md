@@ -323,8 +323,8 @@ Uso:
 Comandos Disponibles:
   create      Crea un almacenamiento variable.
   list        Enumera todos los almacenamientos. Si el almacenamiento se proporciona, lista todas las variables del almacenamiento.
-  print       Prints a variable that is within the almacenamiento .
-  set         Sets a simple variable that within the almacenamiento .
+  print       Imprime una variable que está dentro del almacenamiento .
+  set         Establece una  variable simple dentro del almacenamiento .
   storedump   Writes the almacenamiento  to a file.
   vardump     Writes the variable to a file.
 ```
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMxOTQzOTUwMCwxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTIwODA4NTkwNjAsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
