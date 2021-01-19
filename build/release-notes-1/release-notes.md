@@ -21,7 +21,7 @@ Tenga en cuenta que este comunicado contiene cambios de última hora descritos [
 * Se ha generalizado el paquete de códecs para poder manejar múltiples códecs con diferentes versiones.
 * Se añadió Epoch a la interfaz Vertex en preparación de una futura versión.
 * Se aplazó el hashing de las transacciones para reducir la utilización de la CPU/Memoria más allá de los chequeos rápidos.
-* Para aquellos usando [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
+* Para aquellos usando [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), la URL va a ser cerrada en un futuro lanzamiento. Por favor, cambiate a [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
 
@@ -97,5 +97,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODcwNjAwMzE1LC0xMjQ4Nzc1MTc2XX0=
+eyJoaXN0b3J5IjpbLTE3NjAzNTc0MDMsLTEyNDg3NzUxNzZdfQ
+==
 -->
