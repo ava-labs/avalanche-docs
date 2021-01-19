@@ -18,7 +18,7 @@
 
 #### Modulos
 
-* [Admin API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_admin.md)
+* [API de Administración](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_admin.md)
 * [AVM API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm.md)
   * [AVM BaseTx](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm_basetx.md)
   * [AVM Constants](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm_constants.md)
@@ -35,12 +35,12 @@
   * [AVM Outputs](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm_outputs.md)
   * [AVM Transactions](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm_transactions.md)
   * [AVM UTXOs](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm_utxos.md)
-* [Auth API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_auth.md)
-* [EVM API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_evm.md)
-* [Health API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_health.md)
-* [Info API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_info.md)
-* [Keystore API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_keystore.md)
-* [Metrics API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_metrics.md)
+* [API de Autenticación](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_auth.md)
+* [API de EVM](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_evm.md)
+* [API de Salud](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_health.md)
+* [API de Información](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_info.md)
+* [API del Keystore](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_keystore.md)
+* [API de Métricas](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_metrics.md)
 * [PlatformVM API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_platformvm.md)
   * [PlatformVM BaseTx](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_platformvm_basetx.md)
   * [PlatformVM Constants](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_platformvm_constants.md)
@@ -89,5 +89,5 @@
 * [src/utils](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/src_utils.md)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2MTc1MjQ1OF19
+eyJoaXN0b3J5IjpbMTk3OTg3NzkzMV19
 -->
