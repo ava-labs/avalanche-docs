@@ -29,8 +29,8 @@ El primer paso para crear un nuevo activo usando AvalancheJS es determinar las c
 let name = "Rickcoin is the most intelligent coin";
 let symbol = "RICK";
 
-// Where is the decimal point indicate what 1 asset is and where fractional assets begin
-// Ex: 1 AVAX is denomination 9, so the smallest unit of AVAX is nanoAVAX (nAVAX) at 10^-9 AVAX
+// Donde la coma decimal indica que es 1 activo y donde comienzan los activos fraccionarios
+// Ejemplo: 1 AVAX es denominación  9, así que la unidad más pequeña de AVAX es nanoAVAX (nAVAX) a 10^-9 AVAX
 let denomination = 9;
 ```
 
@@ -121,5 +121,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0MDcxMjA5NF19
+eyJoaXN0b3J5IjpbLTE0NjE2ODg1MjBdfQ==
 -->
