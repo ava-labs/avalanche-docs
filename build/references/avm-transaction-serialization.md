@@ -557,7 +557,7 @@ Una salida de acuñación NFT contiene un `TypeID`, `GroupID`, `Locktime`, `Thre
                          +--------------------------------+
 ```
 
-### **Proto NFT Mint Output Specification**
+### **Especificación Proto de Salida de Acuñación NFT**
 
 ```text
 message NFTMintOutput {
@@ -569,9 +569,9 @@ message NFTMintOutput {
 }
 ```
 
-### **NFT Mint Output Example**
+### **Ejemplo de Salida de Acuñación NFT**
 
-Let’s make an NFT mint output with:
+Hagamos una salida de acuñación NFT con:
 
 * **`TypeID`**: 10
 * **`GroupID`**: 12345
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzMjU0ODk5MiwyMDU3NTM0NTc3LDY2MD
-E3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0Nzgy
-Nzk5XX0=
+eyJoaXN0b3J5IjpbLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2Nj
+AxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4
+Mjc5OV19
 -->
