@@ -350,9 +350,9 @@ curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111
 }
 ```
 
-#### Get Transaction
+#### Obtener Transacción
 
-Find a single transaction by its ID.
+Encuentra una transacción por su ID.
 
 **Llamado de Ejemplo**
 
@@ -424,9 +424,9 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-#### List Addresses
+#### Lista de direcciones
 
-Find addresses that have been involved in confirmed transactions.
+Encuentra las direcciones que han estado involucradas en transacciones confirmadas.
 
 **Parámetros**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDk3NTM5NDAzLDc5NDc1ODk2N119
+eyJoaXN0b3J5IjpbNTc2NTM4MDQyLDc5NDc1ODk2N119
 -->
