@@ -1,8 +1,8 @@
 ---
-description: Learn the core concepts and architecture of Avalanche
+descripción: Aprende los conceptos básicos y la arquitectura de Avalanche
 ---
 
-# Platform Overview
+# Resumen de la Plataforma
 
 Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
@@ -88,3 +88,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbOTc5OTU4NDY3XX0=
+-->
