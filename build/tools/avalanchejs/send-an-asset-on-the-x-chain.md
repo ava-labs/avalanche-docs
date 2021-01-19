@@ -79,9 +79,9 @@ Los estados pueden ser "Aceptado", "Procesando", "Desconocido" y "Rechazado":
 
 ## Revisa los resultados <a id="check-the-results"></a>
 
-The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+La transacción finalmente regresó como "Aceptada", ahora vamos a actualizar el UTXOSet y verificar que el balance de la transacción esté como esperábamos.
 
-_Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
+_En una red real, el balance no está garantizado para coincidir con este escenario. Las comisiones de transacción o los gastos adicionales pueden variar el saldo. Para el propósito de este ejemplo, no asumimos ninguno de esos casos._
 
 ```text
 let updatedUTXOs = await xchain.getUTXOs();
@@ -92,6 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODI1ODA0NjYzLDE0MTQ3Nzc0MjUsLTY3ND
-AwNTI5Nl19
+eyJoaXN0b3J5IjpbLTkzOTYzNjczMSwxNDE0Nzc3NDI1LC02Nz
+QwMDUyOTZdfQ==
 -->
