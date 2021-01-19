@@ -1006,7 +1006,7 @@ Hagamos una operación de transferencia NFT con:
 
 ## Estado Inicial
 
-El estado inicial describe el estado inicial de un activo cuando se crea. Contiene el ID de la extensión de la característica que utiliza el activo y un conjunto de salidas de longitud variable que denotan el conjunto UTXO de la génesis del activo.
+El estado inicial o "Initial state" describe el estado inicial de un activo cuando se crea. Contiene el ID de la extensión de la característica que utiliza el activo y un conjunto de salidas de longitud variable que denotan el conjunto UTXO de la génesis del activo.
 
 ### Que Contiene El Estado Inicial
 
@@ -1071,7 +1071,7 @@ Hagamos un estado inicial con:
 
 ## Credenciales
 
-Las credenciales tienen dos tipos posibles: `SECP256K1Credential`, y `NFTCredential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
+Las credenciales o "Credentials"  tienen dos tipos posibles: `SECP256K1Credential`, y `NFTCredential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
 
 ## Credencial SECP256K1 
 
@@ -1151,11 +1151,11 @@ Hagamos una entrada de pago con:
 
 ## Credencial NFT
 
-Una credencial NFT es la misma que una credencial secp256k1 con un TypeID diferente. El TypeID para una credencial NFT es `0x0000000e`.
+Una credencial NFT  o "NFT credential" es la misma que una credencial secp256k1 con un TypeID diferente. El TypeID para una credencial NFT es `0x0000000e`.
 
 ## Transacciones no Firmadas
 
-Las transacciones no firmadas contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
+Las transacciones no firmadas o "Unsigned transactions" contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
 ## BaseTx No Firmado
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyMDE4NTMxLC04MjM5Mjg4ODAsLTk2Mj
-k2MDA1OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwtNDM0NDg5MTA2
-LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMj
-cyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0
-MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1Ny
-wxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5
-NTk3ODZdfQ==
+eyJoaXN0b3J5IjpbNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5Nj
+AwNTgsOTc0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwt
+OTA4NTQ3NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAwNSwtMTI3Mj
+gyNDA5MCwtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAw
+NjUsNjY4ODgzMjgzLC03NzU3NDM5NjIsLTE5NDAxODYyNTcsMT
+Y1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5
+Nzg2XX0=
 -->
