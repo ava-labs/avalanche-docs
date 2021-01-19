@@ -8,7 +8,7 @@ Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos 
 
 ## Salida transferible
 
-Las salidas transferibles envuelven una salida con el ID  de un activo.
+Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
 ### What Transferable Output Contains
 
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3Nj
-YwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5Mzkw
-NzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbLTE0NjYxMzE5NTQsMjY1MjUwNTk2LC01MD
+M1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMz
+ODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
