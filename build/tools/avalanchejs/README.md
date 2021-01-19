@@ -15,24 +15,24 @@ Las APIs actualmente soportadas por defecto son:
 
 Construimos AvalancheJS pensando en la facilidad de uso. Con esta biblioteca, cualquier desarrollador de Javascript puede interactuar con un nodo de la plataforma de Avalanche que haya habilitado sus puntos finales de la API para el consumo del desarrollador. Mantenemos la biblioteca actualizada con los últimos cambios en la [Especificación de la Plataforma de Avalanche](https://docs.avax.network/).
 
-Using AvalancheJS, developers can:
+Usando AvalancheJS, los desarrolladores pueden:
 
-* Locally manage private keys
-* Retrieve balances on addresses
-* Get UTXOs for addresses
-* Build and sign transactions
-* Issue signed transactions to the X-Chain
-* Create a Subnetwork
-* Administer a local node
-* Retrieve Avalanche network information from a node
+* Administrar localmente las private keys
+* Recuperar los saldos de las direcciones
+* Consigue UTXOs para las direcciones
+* Construir y firmar transacciones
+* Emitir transacciones firmadas a la X-Chain
+* Crear una subnet
+* Administrar un nodo local
+* Recuperar la información de la red de Avalanche de un nodo
 
-## Requirements
+## Requisitos
 
-AvalancheJS requires Node.js LTS version 12.14.1 or higher to compile.
+AvalancheJS requiere Node.js LTS versión 12.14.1 o superior para compilar.
 
-## Installation
+## Instalación
 
-Avalanche is available for install via `npm`:
+Avalanche está disponible para su instalación a través de `npm`:
 
 `npm install --save avalanche`
 
@@ -75,5 +75,5 @@ The above lines import the libraries used in the tutorials. The libraries includ
 * BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0NTE0NTQ0XX0=
+eyJoaXN0b3J5IjpbLTk5MDc3NjUzMCwtODQ1MTQ1NDRdfQ==
 -->
