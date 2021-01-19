@@ -10,15 +10,15 @@ import {
     BN
   } from "avalanche" 
 
-let myNetworkID = 1; //default is 3, we want to override that for our local network
-let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // The X-Chain blockchainID on this network
+let myNetworkID = 1; //por defecto es 3, queremos anular eso para nuestra red local
+let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // La blockchainID de la X-Chain en esta red
 let avax = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
-let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
+let xchain = avax.XChain(); //devuelve una referencia a la X-Chain usada por AvalancheJS
 ```
 
-We’re also assuming that the keystore contains a list of addresses used in this transaction.
+También suponemos que el keystore contiene una lista de direcciones utilizadas en esta transacción.
 
-## Getting the UTXO Set <a id="getting-the-utxo-set"></a>
+## Obteniendo el Set UTXO<a id="getting-the-utxo-set"></a>
 
 The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
 
@@ -93,5 +93,5 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3NDY2OTg2OF19
+eyJoaXN0b3J5IjpbLTY3NDAwNTI5Nl19
 -->
