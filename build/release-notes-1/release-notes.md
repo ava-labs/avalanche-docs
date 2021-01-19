@@ -35,17 +35,17 @@ Tenga en cuenta que la versión posterior a ésta, la v1.0.6, contendrá los cam
 
 Los cambios en esta versión, v1.0.5, son compatibles con versiones anteriores. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
 
-* Added `IssueTx` and `GetUTXOs` to the C-chain API to enable issuing atomic swaps without revealing private keys to a node.
-* Fixed memory leak in the snowman request manager with oracle block processing.
-* Fix UTXO pagination bug that under-reported available funds.
-* Moved chain http logs to live in the human-readable chain logs folder.
-* Restructure how IDs are managed to avoid heap allocations.
-* Optimized the `UniformSampler`s to avoid creating multiple maps.
-* Reduced usage of `ids.Set` in favor of `[]ids.ID` to better utilize continuous memory.
-* Introduced `[]byte` reuse in `PrefixDB`.
-* Implemented type-specific sorting functions to avoid frequent interface conversion allocations.
-* Optimized AVM load user to avoid reading unnecessary information from disk.
-* Removed a memory allocation + copy in socket sending for the full length of the message.
+* Se añadió `IssueTx` y `GetUTXOs` a la API de la C-chain para permitir la emisión de intercambios atómicos sin revelar las claves privadas de un nodo.
+* Se corregió la fuga de memoria en el gestor de peticiones de snowman con el procesamiento de bloques de oráculo.
+* Se corregió el error de paginación de UTXO que no informaba sobre los fondos disponibles.
+* Se han movido los registros de la cadena http a la carpeta de registros de la cadena legible por los humanos.
+* Se ha reestructurado la forma en que se gestionan las ID para evitar las asignaciones de montones.
+* Se optimizó el `UniformSampler` para evitar la creación de múltiples mapas.
+* Se ha reducido el uso de `ids.Set` a favor de `[]ids.ID` para utilizar mejor la memoria continua.
+* Se introdujo la reutilización de `[]byte` en `PrefixDB`.
+* Se han implementado funciones de clasificación específicas de tipo para evitar asignaciones frecuentes de conversión de interfaz.
+* Se ha optimizado el usuario de carga AVM para evitar leer información innecesaria del disco.
+* Eliminada una asignación de memoria + copia en el envío de sockets para toda la longitud del mensaje.
 
 Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
@@ -97,6 +97,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDUwMzc2OTMsLTEyNDg3NzUxNzZdfQ
-==
+eyJoaXN0b3J5IjpbLTE3MzQ3MTQwNjcsLTE4NDUwMzc2OTMsLT
+EyNDg3NzUxNzZdfQ==
 -->
