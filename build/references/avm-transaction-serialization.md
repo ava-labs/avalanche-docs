@@ -1277,9 +1277,9 @@ Hagamos una transacción base no firmada que utilice las entradas y salidas de l
 ]
 ```
 
-### Que Contiene el Activo de Creación Tx No Firmado
+### Que Contiene una Transacción de Creación de Activo No Firmada
 
-Un activo de creación Tx no firmado contiene un `BaseTx`, `Name`, `Symbol`, `Denomination`, y`InitialStates`. El`TypeID` es`0x00000001`.
+Una transacción de creación de activo no firmada contiene un `BaseTx`, `Name`, `Symbol`, `Denomination`, y`InitialStates`. Su `TypeID` es`0x00000001`.
 
 * **`BaseTx`**
 * **`Name`** es una cadena legible por el ser humano que define el nombre del activo que esta transacción creará. No se garantiza que el nombre sea único. El nombre debe consistir sólo en caracteres ASCII imprimibles y no debe tener más de 128 caracteres.
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0NjcyODM4OSw1NTk1NjU5LC04MjM5Mj
-g4ODAsLTk2Mjk2MDA1OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwt
-NDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NT
-AxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3
-NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMT
-k0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0
-MDddfQ==
+eyJoaXN0b3J5IjpbODgzMjQyNTg0LDExNDY3MjgzODksNTU5NT
+Y1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOTc0MzYwMTA0LC05
+Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MD
+MyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3
+LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgzMjgzLC03Nz
+U3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgx
+MF19
 -->
