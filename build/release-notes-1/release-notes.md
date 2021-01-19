@@ -68,18 +68,19 @@ Esta actualización es opcional pero se recomienda. El parche incluye mejoras en
 - Reducción de las lecturas de la base de datos durante la gestión de vértices.
 ```
 
-```text
-• Added an optional argument includeReason to platform.getTxStatus.
-If not provided, or if false, the output from getTxStatus is the same as before.
 
-For example:
+```text
+• Añadido un argumento opcional includeReason to platform.getTxStatus.
+Si no se proporciona, o si es falso, la salida de getTxStatus es la misma que antes.
+
+Por ejemplo:
 {
     "jsonrpc": "2.0",
     "result": "Dropped",
     "id": 1
 }
 
-If includeReason is true, the output from getTxStatus has a new format. It's an object that looks like this:
+Si includeReason es verdadero, la salida de getTxStatus tendrá un nuevo formato. Es un elemento que se ve así:
 
 {
     "jsonrpc": "2.0",
@@ -90,13 +91,14 @@ If includeReason is true, the output from getTxStatus has a new format. It's an 
     "id": 1
 }
 
-In this new format, reason will not be present unless the status is Dropped.
-Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
+En este nuevo formato, la razón no estará presente a menos que el estado sea "Dropped".
+Cualquier cosa que dependa de platform.getTxStatus debería cambiar a usar el argumento includeReason y usar el nuevo formato de respuesta. Después de algunos lanzamientos, sólo soportaremos el nuevo formato de respuesta.
 ```
 
-Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
+Para ayuda con esta actualización ve a [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY5NDgzMzg1LC0xODQ1MDM3NjkzLC0xMj
-Q4Nzc1MTc2XX0=
+eyJoaXN0b3J5IjpbLTgyMjczOTY5NSwtMTg0NTAzNzY5MywtMT
+I0ODc3NTE3Nl19
 -->
