@@ -4,7 +4,7 @@ descripción: La X-Chain o Cadena X es una instancia de la Máquina Virtual de A
 
 # Cadena de Intercambio \(X-Chain\) API
 
-La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma nativa de Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
 {% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
@@ -1718,5 +1718,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzODQzNjE4M119
+eyJoaXN0b3J5IjpbMTg3MTIxMDc2NiwxMjM4NDM2MTgzXX0=
 -->
