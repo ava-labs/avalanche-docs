@@ -139,13 +139,13 @@ Avash viene con los siguientes comandos root:
 
 **avawallet**
 
-**Warning**: Like all things in Avash, this wallet is temporarily held in memory and all data is cleaned up on exit. This should be used for testing.
+**Advertencia**: Como todas las cosas en Avash, esta cartera se mantiene temporalmente en la memoria y todos los datos se limpian al salir. Esto debería ser utilizado para las pruebas.
 
 ```text
-Tools for interacting with Avalanche Payments over the network. Using this 
-    command we can create, send, and get the status of a transaction.
+Herramientas para interactuar con Pagos de Avalanche a través de la red. Usando este 
+    comando podemos crear, enviar y obtener el estado de una transacción.
 
-Usage:
+Uso:
   avash avawallet [command] [flags]
 
 Available Commands:
@@ -169,7 +169,7 @@ Available Commands:
 Issues an RPC call to a node endpoint for the specified method and params.
     Response is saved to the local varstore.
 
-Usage:
+Uso:
   callrpc [node name] [endpoint] [method] [JSON params] [var scope] [var name]
 ```
 
@@ -178,7 +178,7 @@ Usage:
 ```text
 Exit the shell, attempting to gracefully stop all processes first.
 
-Usage:
+Uso:
   avash exit
 ```
 
@@ -188,7 +188,7 @@ Usage:
 Help provides help for any command in the application.
 Simply type avash help [path to command] for full details.
 
-Usage:
+Uso:
   avash help [command] [flags]
 ```
 
@@ -198,7 +198,7 @@ Usage:
 Tools for interfacing with remote hosts. Using this command we can
   deploy and remove node networks via SSH and a configuration file.
 
-Usage:
+Uso:
   avash network [command] [flags]
 
 Available Commands:
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4NDUzNzc1MiwtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTY0MTgxMjI5MywtMjgxNzE4MDhdfQ==
 -->
