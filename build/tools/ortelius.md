@@ -177,7 +177,7 @@ Calcular los datos agregados de las transacciones a lo largo de un período de t
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
+| `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 | `assetID` | `id` | An asset ID to filter results by. | None | None |
 
 **Example Call**
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbLTE3MDQ4MjI2NDAsNzk0NzU4OTY3XX0=
 -->
