@@ -75,14 +75,14 @@ Hagamos una salida transferible:
 
 Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
 
-### What Transferable Input Contains
+### Que Contiene una Entrada Transferible
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is an input, as defined below. This will be a SECP256K1 transfer input
+* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
+* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
+* **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
 
 ### Gantt Transferable Input Specification
 
@@ -1913,5 +1913,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODYwODE2NDBdfQ==
+eyJoaXN0b3J5IjpbLTE5OTU3NTQ1ODRdfQ==
 -->
