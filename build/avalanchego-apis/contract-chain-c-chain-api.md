@@ -251,7 +251,7 @@ avax.getUTXOs(
 
 #### **Ejemplo**
 
-Supón que Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+Suponer que queremos todos los UTXOs que hagan referencia a al menos una de `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
 ```cpp
 curl -X POST --data '{
@@ -270,7 +270,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-This gives response:
+esto nos da como respuesta:
 
 ```cpp
 {
@@ -294,7 +294,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+Finaliza la transferencia de un activo no-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
 
 #### Signature
 
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5NzE4ODAxOCwxNjU3MjQ4NDQyLC0xOT
-AxMDg0MjQ5XX0=
+eyJoaXN0b3J5IjpbMzgzODA1MTYsMTQ5NzE4ODAxOCwxNjU3Mj
+Q4NDQyLC0xOTAxMDg0MjQ5XX0=
 -->
