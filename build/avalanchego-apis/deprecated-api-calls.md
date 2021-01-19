@@ -46,7 +46,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-En versiones posteriores, la firma fue. Notar que cada validador contiene una lista de sus delegadores. P Please see the next note for current behavior.
+En versiones posteriores, la firma fue. Notar que cada validador contiene una lista de sus delegadores. Por favor, mira la siguiente nota para el comportamiento vigente.
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +94,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+Desde v1.0.6, el campo de nivel superior `delegators` es removido. La firma es ahora:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -132,13 +132,13 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 ### `getTxStatus`
 
-Before v1.0.4, the signature was:
+Antes de v1.0.4, la firma era:
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+La v1.0.4 agregó el argumento `includeReason`. Si  `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
 
 ```cpp
 {
@@ -152,6 +152,6 @@ Where `reason` is the reason the transaction was dropped. `reason` is only prese
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUwNTY5NTcwLC03MzEzODAwLDEwMDM5Nz
-M1NThdfQ==
+eyJoaXN0b3J5IjpbLTQ3Mzk5MjYzMCwtNzMxMzgwMCwxMDAzOT
+czNTU4XX0=
 -->
