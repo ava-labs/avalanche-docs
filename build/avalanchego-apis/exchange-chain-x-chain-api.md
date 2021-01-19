@@ -53,12 +53,12 @@ avm.buildGenesis({
 {
 "genesisData" :
     {
-        "assetAlias1": {               // Each object defines an asset
+        "assetAlias1": {               // Cada objeto define un activo
             "name": "human readable name",
-            "symbol":"AVAL",           // Symbol is between 0 and 4 characters
+            "symbol":"AVAL",           // Debe tener entre 0 y 4 caracteres
             "initialState": {
-                "fixedCap" : [         // Choose the asset type.
-                    {                  // Can be "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
+                "fixedCap" : [         // Elige el tipo de activo.
+                    {                  // Puede ser "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
                         "amount":1000, // At genesis, address A has
                         "address":"A"  // 1000 units of asset
                     },
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzOD
-QzNjE4M119
+eyJoaXN0b3J5IjpbNDUyMDQ2ODExLC00NDU4Mzc2OSwtOTgxND
+U4NjM2LDEyMzg0MzYxODNdfQ==
 -->
