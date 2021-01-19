@@ -782,7 +782,7 @@ Hagamos una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-
 
 ## Operación de Acuñado NFT
 
-Una operación de acuñado NFT consume una salida de acuñado NFT y envía una salida no gastada a un nuevo conjunto de propietarios.
+Una operación de acuñado NFT o "NFT mint operation" consume una salida de acuñado NFT y envía una salida no gastada a un nuevo conjunto de propietarios.
 
 ### **Que Contiene una Operación de Acuñado NFT**
 
@@ -891,7 +891,7 @@ Hagamos una operación de acuñado NFT con:
 
 ## Operación de Transferencia NFT
 
-Una operación de transferencia NFT envía una salida de transferencia NFT no utilizada a un nuevo conjunto de propietarios.
+Una operación de transferencia NFT o "NFT transfer operation" envía una salida de transferencia NFT no utilizada a un nuevo conjunto de propietarios.
 
 ### **Que Contiene una Operación de Transferencia NFT**
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3ND
-M2MDEwNCwtOTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3
-OSwxMjYzOTAzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLT
-ExOTU0OTM1NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4
-MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMy
-wyNTI0MjA4MTAsLTE5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5
-NjMxMjQwMF19
+eyJoaXN0b3J5IjpbLTcyMDE4NTMxLC04MjM5Mjg4ODAsLTk2Mj
+k2MDA1OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwtNDM0NDg5MTA2
+LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMj
+cyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0
+MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1Ny
+wxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5
+NTk3ODZdfQ==
 -->
