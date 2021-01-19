@@ -102,7 +102,7 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+Ahora, en lugar de interactuar con el ID de la cadena de bloques, que es `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
 
 ### admin.lockProfile
 
@@ -236,6 +236,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2OTcxNTAxMywxMTcyMjI0NzQsLTIxND
-A1MTQyMTAsNTUyMTc3NzUwXX0=
+eyJoaXN0b3J5IjpbLTE5Nzc1OTM2NDksLTE2OTcxNTAxMywxMT
+cyMjI0NzQsLTIxNDA1MTQyMTAsNTUyMTc3NzUwXX0=
 -->
