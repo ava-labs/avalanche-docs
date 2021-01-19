@@ -1,6 +1,6 @@
-# Send an Asset on the X-Chain
+# Envíe un activo en la X-Chain
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+Este ejemplo envía un activo en la X-Chain a un solo destinatario. El primer paso en este proceso es crear una instancia de Avalanche conectada a nuestro endpoint de la Plataforma de Avalanche de elección.
 
 ```text
 import {
@@ -92,3 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTA3NDY2OTg2OF19
+-->
