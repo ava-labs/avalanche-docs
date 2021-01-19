@@ -676,8 +676,8 @@ Encontrar salidas que hayan sido creadas por una transacción confirmada en la r
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `spent` | `bool` | Si se establece, los resultados serán filtrados por si se gastan \(true\) o no se gastan \(false\) | None | N/A |
 
 **Llamado de Ejemplo**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjUwMDg5MDgsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbMTUyNzI4NzA5LDc5NDc1ODk2N119
 -->
