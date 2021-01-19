@@ -124,11 +124,11 @@ help procmanager start
 
 Avash viene con los siguientes comandos root:
 
-* `avawallet` - Tools for interacting with Avalanche Payments over the network.
-* `callrpc` - Issues an RPC call to a node.
-* `exit` - Exit the shell.
-* `help` - Help about any command.
-* `network` - Tools for interfacing with remote hosts.
+* `avawallet` - Herramientas para interactuar con Pagos de Avalanche en la red.
+* `callrpc` - Emite una llamada RPC a un nodo.
+* `exit` - Cierra la Shell
+* `help` - Ayuda sobre cualquier comando.
+* `network` Herramientas para interactuar con hosts remotos.
 * `procmanager` - Access the process manager for the avash client.
 * `runscript` - Runs the provided script.
 * `setoutput` - Sets shell log output.
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzcwMzA2Njc3LC0yODE3MTgwOF19
+eyJoaXN0b3J5IjpbLTUxMTc4OTU2MCwtMjgxNzE4MDhdfQ==
 -->
