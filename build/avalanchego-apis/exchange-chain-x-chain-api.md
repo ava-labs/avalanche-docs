@@ -14,9 +14,9 @@ Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas JSO
 
 ## Endpoints / Extremos
 
-`/ext/bc/X` to interact with the X-Chain.
+`/ext/bc/X` para interactuar con la X-Chain.
 
-`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
+`/ext/bc/blockchainID` para interactuar con cualquier otra instancia de AVM, donde `blockchainID` es el ID de la cadena de bloques que ejecuta la AVM.
 
 ## Methods
 
@@ -1718,5 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTE1NTY0MDExMTAsLTk4MTQ1ODYzNiwxMj
+M4NDM2MTgzXX0=
 -->
