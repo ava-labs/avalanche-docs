@@ -45,8 +45,8 @@ In this new format, reason will not be present unless the status is Dropped.
 Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
 ```
 
-For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
+Para asistencia con esta actualización, sigue nuestras [Preguntas más frecuentes de los de](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQ4ODY4OTVdfQ==
+eyJoaXN0b3J5IjpbOTM3NjIxMTQyLDU0ODg2ODk1XX0=
 -->
