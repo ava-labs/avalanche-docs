@@ -439,7 +439,7 @@ Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Loc
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt NFT Transfer Output Specification**
+### **Especificación de salida de la transferencia del Gantt NFT**
 
 ```text
 +-----------+------------+-------------------------------+
@@ -460,7 +460,7 @@ Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Loc
                          +-------------------------------+
 ```
 
-### **Proto NFT Transfer Output Specification**
+### **Especificación de Salida de la Transferencia de Proto NFT**
 
 ```text
 message NFTTransferOutput {
@@ -473,9 +473,9 @@ message NFTTransferOutput {
 }
 ```
 
-### **NFT Transfer Output Example**
+### **Ejemplo de Salida de Transferencia de NFT**
 
-Let’s make an NFT transfer output with:
+Hagamos una salida de transferencia NFT con:
 
 * **`TypeID`**: 11
 * **`GroupID`**: 12345
@@ -1920,6 +1920,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODM1Njc0MDY1LDY2MDE3OTc0NywtMTU2Nz
-MxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTE3ODg4OTc2NjcsNjYwMTc5NzQ3LC0xNT
+Y3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
 -->
