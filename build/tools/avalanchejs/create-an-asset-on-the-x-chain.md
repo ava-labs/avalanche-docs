@@ -87,22 +87,22 @@ Usando la API de AvalancheJS X-Chain, vamos a ejecutar la función issueTx. Esta
 
 ```text
 // uusando la Tx class
-let txid = await xchain.issueTx(signed); //returns a CB58 serialized string for the TxID
+let txid = await xchain.issueTx(signed); //devuelve una cadena serializada CB58 para el TxID
 ```
 
 ```text
-// using the base-58 representation
-let txid = await xchain.issueTx(signed.toString()); //returns a CB58 serialized string for the TxID
+// usando la representación base-58
+let txid = await xchain.issueTx(signed.toString()); //devuelve una cadena serializada CB58 para el TxID
 ```
 
 ```text
-// using the transaction Buffer
-let txid = await xchain.issueTx(signed.toBuffer()); //returns a CB58 serialized string for the TxID
+// usando el Buffer de la transacción
+let txid = await xchain.issueTx(signed.toBuffer()); //devuelve una cadena serializada CB58 para el TxID
 ```
 
-We assume ONE of those methods is used to issue the transaction.
+Suponemos que UNO de esos métodos se utiliza para emitir la transacción.
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## Obtener el estado de la transacción <a id="get-the-status-of-the-transaction"></a>
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
 
@@ -123,5 +123,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNDM5MTk2N119
+eyJoaXN0b3J5IjpbMTgwOTMyNDkwNF19
 -->
