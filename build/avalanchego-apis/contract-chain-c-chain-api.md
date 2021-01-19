@@ -122,12 +122,12 @@ avax.exportAVAX({
 * `to` es la dirección de la X-Chain hacia la cual se enviarán los AVAX. Debe estar en formato bech32.
 * `amount` es el monto en nAVAX a enviar.
 * `destinationChain` es la cadena a la cual el AVAX se envía. Para exportar los fondos a la X-Chain, usa `"X"`.
-* `changeAddr` es la dirección de C-Chain en address where any change is sent to. It should be in hex format.
-* The AVAX is sent from addresses controlled by `username`
+* `changeAddr` es la dirección de C-Chain en la cual se envía cualquier cambio. Debe estar en formato hex.
+* El AVAX es enviado desde las direcciones controladas por`username`
 
-**Response**
+**Respuesta**
 
-* `txID` is the txid of the completed ExportTx.
+* `txID` es the txid of the completed ExportTx.
 
 #### Example Call
 
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3MzY0NTMwMiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbLTUyNjMzODUyMiwtMTkwMTA4NDI0OV19
 -->
