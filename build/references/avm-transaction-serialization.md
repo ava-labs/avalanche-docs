@@ -1009,9 +1009,9 @@ Hagamos una operación de transferencia NFT con:
 
 El estado inicial describe el estado inicial de un activo cuando se crea. Contiene el ID de la extensión de la característica que utiliza el activo y un conjunto de salidas de longitud variable que denotan el conjunto UTXO de la génesis del activo.
 
-### What Initial State Contains
+### Que Contiene El Estado Inicial
 
-Initial state contains a `FxID` and an array of `Output`.
+El estado inicial contiene un `FxID` y un conjunto de `Output`.
 
 * **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
 * **`Outputs`** is a variable length array of outputs, as defined above.
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3NTM5MzAyMSwtMTY5OTk1OTc4NiwtMj
+eyJoaXN0b3J5IjpbLTE5NDMyMzQwNywtMTY5OTk1OTc4NiwtMj
 A5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2
 ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLT
 E1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
