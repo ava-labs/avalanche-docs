@@ -1161,14 +1161,14 @@ Las transacciones no firmadas contienen el contenido completo de una transacció
 ### Que Contiene BaseTx
 BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
+* **`NetworkID`** es un int que define a qué red se destina esta transacción. Este valor está pensado para soportar el enrutamiento de la transacción y no está diseñado para la prevención de ataques de repetición.
+* **`BlockchainID`** es un array de 32 bytes que define a qué blockchain se emitió esta transacción. Se utiliza para la prevención de ataques de repetición de transacciones que podrían ser válidas en toda la red o en la blockchain.
+* **`Outputs`** es una matriz de objetos de salida transferibles. Las salidas deben ser ordenadas lexicográficamente por su representación serializada. La cantidad total de los activos creados en estos productos debe ser inferior o igual a la cantidad total de cada activo consumido en los insumos menos la tasa de transacción.
+* **`Inputs`** es un conjunto de objetos de entrada transferibles. Las entradas deben ser clasificadas y únicas. Las entradas se ordenan primero lexicográficamente por su **`TxID`** y luego por el **`UTXOIndex`** de bajo a alto. Si hay entradas que tienen el mismo **`TxID`** y **`UTXOIndex`**, entonces la transacción es inválida ya que esto resultaría en un doble gasto.
+* **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
-### Gantt Base Tx Specification
+### Especificación Gantt de  Base Tx
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1188,7 +1188,7 @@ BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Me
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Especificación Proto de  Base Tx
 
 ```text
 message BaseTx {
@@ -1920,9 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDAxODYyNTcsMTY1OTE4MjAzLDI1Mj
-QyMDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5Nzg2LC0yMDk2MzEy
-NDAwLDk3OTEwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4NywtMT
-I0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2NzMx
-OTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbNTQ0NTQ5MDc4LC0xOTQwMTg2MjU3LDE2NT
+kxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMTY5OTk1OTc4
+NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMCw0OT
+kzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3
+NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV
+19
 -->
