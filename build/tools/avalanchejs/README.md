@@ -36,25 +36,26 @@ Avalanche está disponible para su instalación a través de `npm`:
 
 `npm install --save avalanche`
 
-You can also pull the repo down directly and build it from scratch:
+También puedes extraerlo del repositorio directamente y construirlo desde cero:
 
 `npm run build`
 
-This will generate a pure Javascript library and place it in a folder named “web” in the project root. The “avalanchejs” file can then be dropped into any project as a pure javascript implementation of Avalanche.
 
-The AvalancheJS library can be imported into your existing Node.js project as follows:
+Esto generará una biblioteca de Javascript pura y la colocará en una carpeta llamada "web" en la raíz del proyecto. El archivo "avalanchejs" puede entonces ser soltado en cualquier proyecto como una implementación de Javascript pura de Avalanche.
+
+La biblioteca AvalancheJS puede ser importada en su proyecto Node.js existente de la siguiente manera:
 
 ```text
 const avalanche = require("avalanche");
 ```
 
-Or into your TypeScript project like this:
+O en tu proyecto de TypeScript como este:
 
 ```text
 import { Avalanche } from "avalanche"
 ```
 
-## Importing essentials
+## Importando los esenciales
 
 ```text
 import {
@@ -75,5 +76,5 @@ The above lines import the libraries used in the tutorials. The libraries includ
 * BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5MDc3NjUzMCwtODQ1MTQ1NDRdfQ==
+eyJoaXN0b3J5IjpbLTM4NTUxMjc4NywtODQ1MTQ1NDRdfQ==
 -->
