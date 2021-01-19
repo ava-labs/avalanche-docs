@@ -1076,14 +1076,14 @@ Las credenciales tienen dos tipos posibles: `SECP256K1Credential`, y `NFTCredent
 
 ## Credencial SECP256K1 
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) contiene una lista de firmas recuperables de 65 bytes.
 
-### **What SECP256K1 Credential Contains**
+### **Que Contiene una  Credencial SECP256K1**
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
 * **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Especificación Gantt de una  Credencial SECP256K1**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1921,9 +1921,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA4OTk5NzgyMiwtMTk0MzIzNDA3LC0xNj
-k5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYy
-NzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LD
-Y2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0
-NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTE0MjkzNzY3MzUsLTE5NDMyMzQwNywtMT
+Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
+MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
+w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
+NDc4Mjc5OV19
 -->
