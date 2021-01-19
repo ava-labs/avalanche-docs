@@ -46,14 +46,14 @@ let mybalance = utxos.getBalance(myAddresses, assetid); //retorna 400 como BN
 let sendAmount = new BN(100); //los montos están en formato BN
 let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // el formato de la dirección es Bech32
 
-//The below returns a UnsignedTx
-//Parameters sent are (in order of appearance):
-//   * The UTXO Set
-//   * The amount being sent as a BN
-//   * An array of addresses to send the funds
-//   * An array of addresses sending the funds
-//   * An array of addresses any leftover funds are sent
-//   * The AssetID of the funds being sent
+//El siguiente devuelve un UnsignedTx
+//Los parámetros enviados son (en orden de aparición):
+//    * El set de UTXO
+//    * La cantidad que se envía como BN
+//    * Una serie de direcciones para enviar los fondos
+//    * Una serie de direcciones que envían los fondos
+//    * Una serie de direcciones donde se envían los fondos sobrantes
+//    * El AssetID de los fondos que se envían
 let unsignedTx = await xchain.buildBaseTx(utxos, sendAmount, [friendsAddress], addressStrings, addressStrings, assetid);
 let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
@@ -92,6 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjMyNjkxMDI0LDE0MTQ3Nzc0MjUsLTY3ND
+eyJoaXN0b3J5IjpbNzc3MTI1Njk2LDE0MTQ3Nzc0MjUsLTY3ND
 AwNTI5Nl19
 -->
