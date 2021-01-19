@@ -26,7 +26,7 @@ El primer paso para crear un nuevo activo usando AvalancheJS es determinar las c
 
 ```text
 // Nombra nuestra nueva moneda y dale un símbolo
-let name = "Rickcoin is the most intelligent coin";
+let name = "Rickcoin es la moneda más inteligente";
 let symbol = "RICK";
 
 // Donde la coma decimal indica que es 1 activo y donde comienzan los activos fraccionarios
@@ -34,11 +34,12 @@ let symbol = "RICK";
 let denomination = 9;
 ```
 
-## Creating the initial state
+## Creando el estado inicial
 
-We want to mint an asset with 400 coins to all of our managed keys, 500 to the second address we know of, and 600 to the second and third address. This sets up the state that will result from the Create Asset transaction.
 
-_Note: This example assumes we have the keys already managed in our X-Chain’s Keychain._
+Queremos acuñar un activo con 400 monedas para todas nuestras llaves administradas, 500 para la segunda dirección que conocemos, y 600 para la segunda y tercera dirección. Esto establece el estado que resultará de la transacción de Crear Activo.
+
+_Nota: Este ejemplo asume que ya tenemos las llaves administradas en el Keychain de nuestra X-Chain._
 
 ```text
 let addresses = xchain.keyChain().getAddresses();
@@ -121,5 +122,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjE2ODg1MjBdfQ==
+eyJoaXN0b3J5IjpbLTc0MTgyNDgxOF19
 -->
