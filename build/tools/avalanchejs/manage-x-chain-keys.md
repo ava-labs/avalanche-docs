@@ -59,18 +59,18 @@ El KeyChain de la X-Chains tiene capacidades de gestión de claves estandarizada
 let addresses = myKeychain.getAddresses(); //devuelve un conjunto de Buffers para las direcciones
 let addressStrings = myKeychain.getAddressStrings(); //devuelve un conjunto de cadenas para las direcciones
 let exists = myKeychain.hasKey(newAddress1); //retorna verdadero si la dirección es administrada
-let keypair = myKeychain.getKey(newAddress1); //devuelve el KeyPair class
+let keypair = myKeychain.getKey(newAddress1); //retorna el KeyPair class
 ```
 
-## Working with Keypairs <a id="working-with-keypairs"></a>
+## Trabajando con Keypairs <a id="working-with-keypairs"></a>
 
-The X-Chain’s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+El KeyPair de la X-Chain tiene una funcionalidad estandarizada de KeyPair. Las siguientes operaciones están disponibles en cualquier KeyPair que implemente esta interfaz.
 
 ```text
-let address = keypair.getAddress(); //returns Buffer
-let addressString = keypair.getAddressString(); //returns string
+let address = keypair.getAddress(); //retorna Buffer
+let addressString = keypair.getAddressString(); //retorna string
 
-let pubk = keypair.getPublicKey(); //returns Buffer
+let pubk = keypair.getPublicKey(); //retorna Buffer
 let pubkstr = keypair.getPublicKeyString(); //returns a CB58 encoded string
 
 let privk = keypair.getPrivateKey(); //returns Buffer
@@ -89,5 +89,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyMTk1NDY1NywtNTIwNzkzMTk0XX0=
+eyJoaXN0b3J5IjpbMTQxMjgxMTkzMywtNTIwNzkzMTk0XX0=
 -->
