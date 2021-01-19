@@ -1,8 +1,9 @@
 # Avash
 
-Avash is a temporary stateful shell execution environment used to deploy local and remote networks and run tests on them. Avalanche nodes locally deployed by Avash are exited when Avash exits.
 
-Avash provides the ability to run Lua scripts which can execute a sequence of shell commands in Avash. This allows for automation of regular tasks. For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.
+Avash es un entorno temporal de ejecución de shells con estado que se utiliza para desplegar redes locales y remotas y ejecutar pruebas en ellas. Los nodos de Avalanche desplegados localmente por Avash se cierran al salir de Avash.
+
+Avash proporciona la capacidad de ejecutar scripts Lua que pueden ejecutar una secuencia de comandos de shell en Avash. Esto permite la automatización de las tareas regulares. Por ejemplo, se podría crear un guión Lua para desplegar una red de nodos Avalanche donde cada nodo tiene una configuración determinada. Esto hace que las pruebas sean más fáciles.
 
 ## Installation <a id="installation"></a>
 
@@ -349,3 +350,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 
 Example Lua scripts are in the `./scripts` folder.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTI4MTcxODA4XX0=
+-->
