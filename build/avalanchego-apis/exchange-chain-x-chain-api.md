@@ -22,11 +22,11 @@ Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas JSO
 
 ### avm.buildGenesis
 
-Dada una representación JSON del estado génesis de esta Máquina Virtual, crea create the byte representation of that state.
+Dada una representación JSON del estado génesis de esta Máquina Virtual, crea la representación en byte de este estado.
 
-#### **Endpoint**
+#### **Extremo**
 
-This call is made to the AVM’s static API endpoint:
+Esta llamada This call is made to the AVM’s static API endpoint:
 
 `/ext/vm/avm`
 
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjIxNjU3OTY3LC05ODE0NTg2MzYsMTIzOD
-QzNjE4M119
+eyJoaXN0b3J5IjpbMTMyNjUwMDY0MCwtOTgxNDU4NjM2LDEyMz
+g0MzYxODNdfQ==
 -->
