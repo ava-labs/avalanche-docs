@@ -1401,12 +1401,12 @@ Hagamos un activo de creación Tx no firmado que utilice las entradas y salidas 
 
 ### Que Contiene una Operación Tx No Firmada
 
-An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
+Una operación Tx no firmada contiene un `BaseTx`, y `Ops`. El`TypeID` es `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of Transferable Ops.
+* **`Ops`** es un conjunto de operaciones transferibles de longitud variable.
 
-### Gantt Unsigned Operation Tx Specification
+### Especificación Gantt de una Operación Tx No Firmada
 
 ```text
 +---------+--------------+-------------------------------------+
@@ -1418,7 +1418,7 @@ An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this t
                          +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### Especificación Proto de una Operación Tx No Firmada
 
 ```text
 message OperationTx {
@@ -1427,7 +1427,7 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### Ejemplo de una Operación Tx No Firmada
 
 Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
 
@@ -1920,10 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjA0OTE3NCwtNzc1NzQzOTYyLC0xOT
-QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
-NywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMj
-EzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUz
-NDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4Mj
-EsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbMTI1NTMyMTE3LC03NzU3NDM5NjIsLTE5ND
+AxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3
+LC0xNjk5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMT
+MxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0
+NTc3LDY2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMS
+wxOTY0NzgyNzk5XX0=
 -->
