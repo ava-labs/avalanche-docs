@@ -892,11 +892,11 @@ Hagamos una operación de acuñado NFT con:
 
 ## Operación de Transferencia NFT
 
-An NFT transfer operation sends an unspent NFT transfer output to a new set of owners.
+Una operación de transferencia NFT sends an unspent NFT transfer output to a new set of owners.
 
 ### **What NFT Transfer Op Contains**
 
-An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `NFTTransferOutput`.
+Una operación de transferencia NFT contiene un `TypeID`, `AddressIndices` y un no tipificado `NFTTransferOutput`.
 
 * **`TypeID`** is the ID for this output type. It is `0x0000000d`.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQ2MTI3NzQzLC0yMDk2MzEyNDAwLDk3OT
-EwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1
-MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2NzMxOTk5NCwtMT
-IyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTY3NTk0NjcwNSwtMjA5NjMxMjQwMCw5Nz
+kxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0
+NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLT
+EyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
