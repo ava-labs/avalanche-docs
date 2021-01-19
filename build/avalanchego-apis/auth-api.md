@@ -133,7 +133,7 @@ curl -X POST --data '{
 
 Cambia la contraseña del token de autorización de este nodo. Cualquier token de autorización creado con la contraseña anterior será inválido.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.changePassword(
@@ -174,6 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA4NTM5NzI1NiwtMTIzMDIzMDI0MiwyNj
+eyJoaXN0b3J5IjpbMjA3ODE4NjIzNywtMTIzMDIzMDI0MiwyNj
 kzODg1NiwtMTE3MTkxNTUwNSwxNTMxNTU1Mjc0XX0=
 -->
