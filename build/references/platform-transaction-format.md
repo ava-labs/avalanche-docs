@@ -6,7 +6,7 @@ Este archivo pretende ser la única fuente de verdad sobre cómo serializamos la
 
 Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## Salida transferible
+## Salida Transferible
 
 Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjYxMzE5NTQsMjY1MjUwNTk2LC01MD
-M1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMz
-ODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbMTM5NjY3NDA5NCwyNjUyNTA1OTYsLTUwMz
+U2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4
+MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
