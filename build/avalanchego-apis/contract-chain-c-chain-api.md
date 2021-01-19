@@ -64,8 +64,8 @@ avax.export({
 
 * `to` es la dirección de la X-Chain a la cual enviar el activo.
 * `amount` es el monto del activo a enviar.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* The asset is sent from addresses controlled by `username` and `password`.
+* `assetID` es el ID del activo. Para exportar AVAX usa `"AVAX"` como `assetID`.
+* El activo es enviado desde la cuenta controlada por is sent from addresses controlled by `username` and `password`.
 
 #### Example Call
 
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI4NTA4NTUzMiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbMTM3NTk4NzAwLC0xOTAxMDg0MjQ5XX0=
 -->
