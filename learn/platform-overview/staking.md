@@ -53,9 +53,9 @@ Tenga en cuenta que una vez que se emite la transacción para añadir un nodo co
 
 Si estás ejecutando un validador, es importante que tu nodo esté bien conectado para asegurarte de recibirás tu recompensa. Ver [aquí](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
-When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
+Al emitir la transacción para añadir un validador, los tokens del stake y la comisión de la transacción se deducen de las direcciones que usted controla. Cuando terminas de validar, los fondos del stake se devuelven a las direcciones de donde vinieron. Si has ganado una recompensa, se envía a la dirección que especificaste cuando te agregaste como validador.
 
-#### Allow API calls <a id="allow-api-calls"></a>
+#### Permitir Llamados API <a id="allow-api-calls"></a>
 
 To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2Nzk3NjQ5OSwtMzYyNzk5MzgxLDU3Nj
-gwNTk5MSwtNzE3NzE5ODExXX0=
+eyJoaXN0b3J5IjpbLTEyMTEzNTE3NzcsLTM2Mjc5OTM4MSw1Nz
+Y4MDU5OTEsLTcxNzcxOTgxMV19
 -->
