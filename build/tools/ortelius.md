@@ -742,7 +742,7 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 
 ### API Legacy 
 
-La versión 1 de la API fue construida para soportar sólo la  X-chain, y no usaba un prefijo de versión \(`/v1`\). Está dispon `/x` off of the root, which is the Overview endpoint for only the X-chain:
+La versión 1 de la API fue construida para soportar sólo la  X-chain, y no usaba un prefijo de versión \(`/v1`\). Está disponible en el directorio `/x` de la raíz, que es el endpoint de la visión general solamente para la X-chain:
 
 **Llamado de Ejemplo**
 
@@ -762,7 +762,7 @@ curl "http://localhost:8080/x"
 }
 ```
 
-The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
+La API legacy admite los mismos endpoints y parámetros que la versión 2, excepto el parámetro chainID para todos los puntos finales, que se ajusta por defecto al ID de la X-chain.
 
 ## Ortelius Configuration
 
@@ -815,5 +815,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTk2NjA0Niw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbLTEzNDYyNjA0MjgsNzk0NzU4OTY3XX0=
 -->
