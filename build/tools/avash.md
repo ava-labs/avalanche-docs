@@ -283,10 +283,10 @@ Flags:
       --bootstrap-ips string                 Lista separada por comas de nodos bootstrap a los que conectarse. Ejemplo: 127.0.0.1:9630,127.0.0.1:9620
       --client-location string               Ruta al cliente del nodo Avalanche, predeterminando el valor del archivo de configuración.
       --data-dir string                      Nombre del directorio de la reserva de datos.
-      --db-dir string                        Database directory for Avalanche state. (default "db1")
-      --db-enabled                           Turn on persistent storage. (default true)
-  -h, --help                                 help for startnode
-      --http-port uint                       Port of the HTTP server. (default 9650)
+      --db-dir string                        Directorio de la base de datos del estado de Avalanche. (por defecto "db1")
+      --db-enabled                           Enciende el almacenamiento persistente. (Por defecto verdadero)
+  -h, --help                                 ayuda para startnode
+      --http-port uint                       Puert HTTP server. (default 9650)
       --http-tls-cert-file string            TLS certificate file for the HTTPS server.
       --http-tls-enabled                     Upgrade the HTTP server to HTTPS.
       --http-tls-key-file string             TLS private key file for the HTTPS server.
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxMzUzNjE5MSwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTc1MzM2NzIzNSwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
