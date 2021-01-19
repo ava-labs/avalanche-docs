@@ -12,15 +12,15 @@ import {
 
 let bintools = BinTools.getInstance();
 
-let myNetworkID = 12345; //por defecto es 3, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
+let myNetworkID = 12345; //por defecto es 3, queremos anular eso para nuestra red local
+let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // La blockchainID de la X-Chain en esta red
 let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
-let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
+let xchain = ava.XChain(); //devuelve una referencia a la X-Chain usada por AvalancheJS
 ```
 
-## Accessing the Keychain <a id="accessing-the-keychain"></a>
+## Accediendo al Keychain <a id="accessing-the-keychain"></a>
 
-The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
+Se accede a la KeyChain a través de la X-Chain y puede ser referenciada directamente o a través de una variable de referencia.
 
 ```text
 let myKeychain = xchain.keyChain();
@@ -88,5 +88,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTY3MTM4OTA4XX0=
+eyJoaXN0b3J5IjpbMjE0MzI2MTkzNV19
 -->
