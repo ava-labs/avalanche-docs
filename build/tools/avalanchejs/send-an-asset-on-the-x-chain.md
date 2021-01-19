@@ -43,8 +43,8 @@ let mybalance = utxos.getBalance(myAddresses, assetid); //retorna 400 como BN
 
 ¡Tenemos 400 monedas! Ahora vamos a enviar 100 de esas monedas a la dirección de nuestro amigo.
 ```text
-let sendAmount = new BN(100); //amounts are in BN format
-let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // address format is Bech32
+let sendAmount = new BN(100); //los montos están en formato BN
+let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // el formato de la dirección es Bech32
 
 //The below returns a UnsignedTx
 //Parameters sent are (in order of appearance):
@@ -92,5 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxNDc3NzQyNSwtNjc0MDA1Mjk2XX0=
+eyJoaXN0b3J5IjpbNjMyNjkxMDI0LDE0MTQ3Nzc0MjUsLTY3ND
+AwNTI5Nl19
 -->
