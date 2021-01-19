@@ -118,10 +118,9 @@ Los estados pueden ser "Aceptado", "Procesando", "Desconocido" y "Rechazado":
 * "Desconocido" indica que el nodo no sabe nada de la transacción, lo que indica que el nodo no lo tiene
 * "Rechazado" indica que el nodo sabe de la transacción, pero entró en conflicto con una transacción aceptada
 
-## Identifying the newly created asset <a id="identifying-the-newly-created-asset"></a>
+## Identificar el activo recién creado <a id="identifying-the-newly-created-asset"></a>
 
-The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
-
+La X-Chain utiliza el TxID de la transacción que creó el activo como identificador único del mismo. Este identificador único se conoce en adelante como el "AssetID" del activo. Cuando los activos se negocian en la X-Chain, siempre hacen referencia al AssetID que representan.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzNDk5MTE3NF19
+eyJoaXN0b3J5IjpbMjAzNzYzNTMzN119
 -->
