@@ -22,11 +22,11 @@ Esta API utiliza formato RPC `json 2.0`. Para más información en hacer llamada
 /ext/auth
 ```
 
-## Methods
+## Metodos
 
 ### auth.newToken
 
-Creates a new authorization token that grants access to one or more API endpoints.
+Crea un nuevo token de autorización que otorga el acceso a uno o más extremos de la API.
 
 #### **Signature**
 
@@ -39,7 +39,7 @@ auth.newToken(
 ) -> {token: string}
 ```
 
-* `password` is this node’s authorization token password.
+* `password` es la contraseña del token de autorización de este nodo.
 * `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
 * `token` is the authorization token.
 
@@ -174,5 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzE5MTU1MDUsMTUzMTU1NTI3NF19
+eyJoaXN0b3J5IjpbMjY5Mzg4NTYsLTExNzE5MTU1MDUsMTUzMT
+U1NTI3NF19
 -->
