@@ -73,10 +73,10 @@ let unsigned = await xchain.buildCreateAssetTx(
   initialState, // el estado inicial que se creará para este nuevo activo 
   name, // el nombre completo del activo
   symbol, // un símbolo identificador corto para el activo
-  denomination // the asse's denomination 
+  denomination // la denominación del activo 
 );
 
-let signed = xchain.keyChain().signTx(unsigned); //returns a Tx class
+let signed = xchain.keyChain().signTx(unsigned); //retorna una Tx class
 ```
 
 ## Issue the signed transaction
@@ -123,5 +123,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MjkxMDgyMzRdfQ==
+eyJoaXN0b3J5IjpbOTQzMTYwMTQzXX0=
 -->
