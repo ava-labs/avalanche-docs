@@ -46,7 +46,7 @@ La cantidad mínima que un validador debe poner en stake es de 2 000 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Tenga en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Tenga en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **No puede eliminar su stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.** Asegúrese de utilizar los valores correctos en los llamados API que se indican a continuación. Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
 ### Running a Validator <a id="running-a-validator"></a>
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg2NDE0MzgzMCw1NzY4MDU5OTEsLTcxNz
+eyJoaXN0b3J5IjpbLTM2Mjc5OTM4MSw1NzY4MDU5OTEsLTcxNz
 cxOTgxMV19
 -->
