@@ -18,11 +18,11 @@ Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas JSO
 
 `/ext/bc/blockchainID` para interactuar con cualquier otra instancia de AVM, donde `blockchainID` es el ID de la cadena de bloques que ejecuta la AVM.
 
-## Methods
+## Métodos
 
 ### avm.buildGenesis
 
-Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+Dada una representación JSON del estado génesis de esta Máquina Virtual, crea create the byte representation of that state.
 
 #### **Endpoint**
 
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTY0MDExMTAsLTk4MTQ1ODYzNiwxMj
-M4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbNjIxNjU3OTY3LC05ODE0NTg2MzYsMTIzOD
+QzNjE4M119
 -->
