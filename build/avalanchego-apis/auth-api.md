@@ -8,7 +8,7 @@ Un token de autorización es enviado en el encabezado de la las llamadas a la AP
 
 Esta API es solamente alcanzable si el nodo se inició con el [argumento de línea de comando ](../references/command-line-interface.md)`--api-auth-required`. Si el nodo es iniciado sin esta caracterísitca, las llamadas a la API no requerirán tokens de autorización, entonces la API no será alcanzable. Esta API nunca requiere un token de autorización para ser alcanzado.
 
-La creación de tokens de autorización debe ser permisionada. Si ejecutas tu nodo con `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+La creación de tokens de autorización debe ser permisionada. Si ejecutas tu nodo con  `--api-auth-required`, entonces también deberás especificar una contraseña para el token de autorización con el argumento  `--api-auth-password`. Debes indicar esta contraseña en función de crear/revocar un token de autorización.
 
 Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzA0ODIxOTksMTUzMTU1NTI3NF19
+eyJoaXN0b3J5IjpbMTYzNDU0OTk1NCwxNTMxNTU1Mjc0XX0=
 -->
