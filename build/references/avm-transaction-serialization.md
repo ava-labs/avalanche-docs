@@ -8,7 +8,7 @@ Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos 
 
 ## Salida transferible No Firmada
 
-Las salidas transferibles envuelven una salida con el ID  de un activo.
+Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
 ### Que Contiene una Salida Transferible
 
@@ -75,7 +75,7 @@ Las entradas transferibles describen un UTXO específico con una entrada de tran
 
 ### Que Contiene una Entrada Transferible
 
-Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
+Una entrada transferible o "Transferable Input" contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
 * **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
 * **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNj
-M5MDMyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5
-MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgzMjgzLC
-03NzU3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4MjAzLDI1MjQy
-MDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5Nzg2LC0yMDk2MzEyND
-AwLDk3OTEwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4NywtMTI0
-OTc0NTQ1MF19
+eyJoaXN0b3J5IjpbLTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MD
+g1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0
+MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NS
+w2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5
+MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3OD
+YsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5
+MzA2Njg3XX0=
 -->
