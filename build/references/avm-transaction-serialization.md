@@ -525,7 +525,7 @@ Hagamos una salida de transferencia NFT con:
 
 ## Salida de Acuñación NFT
 
-Una salida acuñación NFT es una NFT que es propiedad de una colección de direcciones.
+Una salida acuñación NFT o "NFT mint output" es una NFT que es propiedad de una colección de direcciones.
 
 
 ### **Que Contiene una Salida de Acuñación NFT**
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc0MzYwMTA0LC05Mzk2Njc4MDQsLTQzND
-Q4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAw
-NSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC
-0xNjc3NDAwNjUsNjY4ODgzMjgzLC03NzU3NDM5NjIsLTE5NDAx
-ODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3LC
-0xNjk5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMx
-NzYyNzMwXX0=
+eyJoaXN0b3J5IjpbOTYwNDQ5NTM0LDk3NDM2MDEwNCwtOTM5Nj
+Y3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgx
+LDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
+YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
+OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
+E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
+MDc4NTFdfQ==
 -->
