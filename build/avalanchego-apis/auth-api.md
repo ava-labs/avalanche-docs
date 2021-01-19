@@ -2,7 +2,7 @@
 
 Cuando corres tu nodo, puedes requerir que las llamadas de la API tengan un token de autorización asignado. Esta API administra la creación y revoación de tokens de autorizacion.
 
-Una autorización provee An authorization token provides access to one or more API endpoints. This is is useful for delegating access to a node’s APIs. Tokens expire after 12 hours.
+Un token de autorización provee acceso a un o más extremos de la API. Esto es útil para delegar accesso al API de un nodo. Los tokens expiran después de 12 horas.
 
 An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNDgzNzg5MV19
+eyJoaXN0b3J5IjpbMTc0MTU4NjY2NV19
 -->
