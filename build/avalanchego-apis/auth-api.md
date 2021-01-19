@@ -16,7 +16,7 @@ Notar que si ejecutas tu nodo con `--api-auth-required` entonces algunas herrami
 
 Esta API utiliza formato RPC `json 2.0`. Para más información en hacer llamadas JSON RPC, mira [aquí.](issuing-api-calls.md)
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/auth
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzYzNDg0MDg0LDE1MzE1NTUyNzRdfQ==
+eyJoaXN0b3J5IjpbLTExNzE5MTU1MDUsMTUzMTU1NTI3NF19
 -->
