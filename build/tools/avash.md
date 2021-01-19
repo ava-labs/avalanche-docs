@@ -237,15 +237,15 @@ Uso:
   avash procmanager [command] [flags]
 
 Comandos Disponibles:
-  kill        Kills the process named if currently running.
-  killall     Kills all processes if currently running.
-  list        Lists the processes currently running.
-  metadata    Prints the metadata associated with the node name.
-  remove      Removes the process named.
-  start       Starts the process named if not currently running.
-  startall    Starts all processes if currently stopped.
-  stop        Stops the process named if currently running.
-  stopall     Stops all processes if currently running.
+  kill         Mata el proceso nombrado si está actualmente en marcha.
+  killall      Mata todos los procesos si se están ejecutando actualmente.
+  list         Lista los procesos que se están ejecutando actualmente.
+  metadata     Imprime los metadatos asociados al nombre del nodo.
+  remove       Elimina el proceso nombrado.
+  start        Inicia el proceso nombrado si no está actualmente en ejecución.
+  startall     Inicia todos los procesos si están actualmente detenidos.
+  stop         Detiene el proceso nombrado si se está ejecutando actualmente.
+  stopall      Detiene todos los procesos si se están ejecutando actualmente.
 ```
 
 **runscript**
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjI0OTYzODQsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbLTk2NTAzNTg5MywxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
