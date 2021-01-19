@@ -26,14 +26,14 @@ Se accede a la KeyChain a través de la X-Chain y puede ser referenciada directa
 let myKeychain = xchain.keyChain();
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+Esto expone la instancia de la clase AVMKeyChain que se crea cuando se crea la API de la X-Chain. En la actualidad, esto soporta la curva secp256k1 para los key pairs ECDSA.
 
-## Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
+## Creación de Key Pairs de la X-Chain<a id="creating-x-chain-key-pairs"></a>
 
-The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
+El KeyChain tiene la capacidad de crear nuevos KeyPairs para ti y devolver la dirección asociada al key pair.
 
 ```text
-let newAddress1 = myKeychain.makeKey(); //returns a Buffer for the address
+let newAddress1 = myKeychain.makeKey(); //retorna un Buffer for the address
 ```
 
 You may also import your existing private key into the KeyChain using either a Buffer…
@@ -88,5 +88,5 @@ let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0MzI2MTkzNV19
+eyJoaXN0b3J5IjpbLTExOTQzMTI4MjVdfQ==
 -->
