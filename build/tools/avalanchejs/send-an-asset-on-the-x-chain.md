@@ -20,15 +20,16 @@ También suponemos que el keystore contiene una lista de direcciones utilizadas 
 
 ## Obteniendo el Set UTXO<a id="getting-the-utxo-set"></a>
 
-The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
 
-For the case of this example, we’re going to create a simple transaction that spends an amount of available coins and sends it to a single address without any restrictions. The management of the UTXOs will mostly be abstracted away.
+La X-Chain almacena todos los saldos disponibles en un almacén de datos llamado Salidas de Transacciones No Gastadas \(UTXOs\). Un conjunto de UTXO es la lista única de salidas producidas por las transacciones, las direcciones que pueden gastar esas salidas, y otras variables como los tiempos de bloqueo \(un timestamp después del cual la salida puede ser gastada\) y los límites \(cuántos firmantes se requieren para gastar la salida\).
 
-However, we do need to get the UTXO Set for the addresses we’re managing.
+Para el caso de este ejemplo, vamos a crear una simple transacción que consume una cantidad de monedas disponibles y la envía a una sola dirección sin ninguna restricción. La gestión de los UTXOs será mayormente abstraída.
+
+Sin embargo, necesitamos obtener el conjunto de UTXO para las direcciones que estamos administrando.
 
 ```text
-let myAddresses = xchain.keyChain().getAddresses(); //returns an array of addresses the KeyChain manages
-let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array of addresses the KeyChain manages as strings
+let myAddresses = xchain.keyChain().getAddresses(); //devuelve un conjunto de direcciones que el KeyChain maneja
+let addressStrings = xchain.keyChain().getAddressStrings(); //devuelve un conjunto de direcciones que el KeyChain maneja como cadenas
 let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
@@ -93,5 +94,5 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3NDAwNTI5Nl19
+eyJoaXN0b3J5IjpbMTgzNTA1MDAyLC02NzQwMDUyOTZdfQ==
 -->
