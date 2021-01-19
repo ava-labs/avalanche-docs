@@ -380,9 +380,10 @@ message SECP256K1MintOutput {
 }
 ```
 
-### **SECP256K1 Mint Output Example**
 
-Let’s make a SECP256K1 mint output with:
+### **Ejemplo de Salida de Acuñación SECP256K1**
+
+Hagamos una salida de acuñación con SECP256K1:
 
 * **`TypeID`**: 6
 * **`Locktime`**: 54321
@@ -422,9 +423,9 @@ Let’s make a SECP256K1 mint output with:
 ]
 ```
 
-## NFT Transfer Output
+## Salida de Transferencia NFT
 
-An NFT transfer output is an NFT that is owned by a collection of addresses.
+Una salida de transferencia NFT es una NFT que es propiedad de una colección de direcciones.
 
 ### **What NFT Transfer Output Contains**
 
@@ -1918,6 +1919,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTcxNDI1OTg5LDY2MDE3OTc0NywtMTU2Nz
+eyJoaXN0b3J5IjpbNTg1MDM3NjU3LDY2MDE3OTc0NywtMTU2Nz
 MxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
 -->
