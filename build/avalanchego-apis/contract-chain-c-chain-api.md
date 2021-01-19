@@ -347,9 +347,9 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
+**DESCONTINUADA—en lugar use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Finaliza una transferencia de AVAX desde la X-Chain hacia la C-Chain. Antes de llamar a este método, debes llamar el método [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) en la  X-Chain para inciar la transferencia.
 
 #### Signature
 
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzUzODg0MTQ1LDI2OTAwNzYwNSwxNDk3MT
-g4MDE4LDE2NTcyNDg0NDIsLTE5MDEwODQyNDldfQ==
+eyJoaXN0b3J5IjpbLTE5ODcyMzQwNCwyNjkwMDc2MDUsMTQ5Nz
+E4ODAxOCwxNjU3MjQ4NDQyLC0xOTAxMDg0MjQ5XX0=
 -->
