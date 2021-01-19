@@ -1,6 +1,6 @@
-# Manage X-Chain Keys
+# Administrar las Keys de la X-Chain
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it’s registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJS viene con su propio Keychain de AVM. Este KeyChain se utiliza en las funciones de la API, permitiéndoles firmar con las keys con las que está registrado. El primer paso en este proceso es crear una instancia de AvalancheJS conectada a nuestro endpoint de la plataforma Avalanche de elección.
 
 ```text
 import {
@@ -12,7 +12,7 @@ import {
 
 let bintools = BinTools.getInstance();
 
-let myNetworkID = 12345; //default is 3, we want to override that for our local network
+let myNetworkID = 12345; //por defecto es 3, we want to override that for our local network
 let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
 let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
 let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
@@ -87,3 +87,6 @@ let signerPubk = keypair.recover(message, signature);
 let isValid = keypair.verify(message, signature); //returns a boolean
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNTY3MTM4OTA4XX0=
+-->
