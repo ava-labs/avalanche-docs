@@ -176,7 +176,7 @@ Uso:
 **exit**
 
 ```text
-Exit the shell, attempting to gracefully stop all processes first.
+Salir de la shell, intentando detener todos los procesos primero.
 
 Uso:
   avash exit
@@ -351,5 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1MzcxMjM5NSwtMjgxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbOTgyNzA3MjM1LDEwNTM3MTIzOTUsLTI4MT
+cxODA4XX0=
 -->
