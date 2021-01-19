@@ -17,15 +17,16 @@ A partir de la versión 2, las rutas de la API serán precedidas por una etiquet
 
 La versión actual de la API es la versión 2. La documentación de la [Legacy API](ortelius.md#legacy-api) contiene información sobre el uso de la API v1.
 
-### Data Types
+### 
+Tipos de datos
 
-In addition to integers, strings, and booleans, the following data types are used throughout the API:
+Además de los números enteros, las cadenas y los booleanos, se utilizan los siguientes tipos de datos en toda la API:
 
 | Name | Description | Examples |
 | :--- | :--- | :--- |
-| `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
-| `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
-| `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
+| `id` | Un identificador de objeto codificado CB58, como una cadena, una transacción o una identificación de activo | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
+| `address` | Una dirección codificada bech-32 | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
+| `datetime` | Una timestamp de Unix como un entero o una cadena con formato RFC3339 | `1599696000`, `2020-09-10T00:00:00Z` |
 
 ### List Parameters
 
@@ -813,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3ODc2MzcwN119
+eyJoaXN0b3J5IjpbMTczMzQ4OTUyM119
 -->
