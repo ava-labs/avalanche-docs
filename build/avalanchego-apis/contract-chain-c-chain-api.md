@@ -20,31 +20,31 @@ Esta API es idéntica al API de Geth, con excepción que solamente soporta los s
 * `personal_`
 * `txpool_`
 
-Puedes interactuar con estos servicios del mismo modo en que lo harías con Geth. Mira la [Documentación Ethereum Wiki’s JSON-RPC](https://eth.wiki/json-rpc/API) y [Documentación de Geth JSON-RPC](https://geth.ethereum.org/docs/rpc/server) para una defor a full description of this API.
+Puedes interactuar con estos servicios del mismo modo en que lo harías con Geth. Mira la [Documentación Ethereum Wiki’s JSON-RPC](https://eth.wiki/json-rpc/API) y [Documentación de Geth JSON-RPC](https://geth.ethereum.org/docs/rpc/server) para una descipción completa de la API.
 
-## JSON-RPC Endpoints
+## Extremos JSON-RPC 
 
-To interact with C-Chain:
+Para interactuar con la C-Chain:
 
 ```cpp
 /ext/bc/C/rpc
 ```
 
-To interact with other instances of the EVM:
+Para interactuar con otras instancias de EVM:
 
 ```cpp
 /ext/bc/blockchainID/rpc
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+donde `blockchainID` es el ID de la cadena de bloques ejecutando una EVM.
 
-To interact with the `avax` specific RPC calls
+Para interactuar con las llamadas RPC específicas de `avax`.
 
 ```cpp
 /ext/bc/C/avax
 ```
 
-## AVAX RPC endpoints
+## Extremos AVAX RPC
 
 ### avax.export
 
@@ -450,6 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDExOTEyNzAsLTE5MDEwODQyNDldfQ
-==
+eyJoaXN0b3J5IjpbMTM3NDMwNDQ5MiwtMTkwMTA4NDI0OV19
 -->
