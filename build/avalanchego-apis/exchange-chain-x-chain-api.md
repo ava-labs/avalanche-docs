@@ -70,9 +70,9 @@ avm.buildGenesis({
                 ]
             }
         },
-        "assetAliasCanBeAnythingUnique": { // Asset alias can be used in place of assetID in calls
-            "name": "human readable name", // names need not be unique
-            "symbol": "AVAL",              // symbols need not be unique
+        "assetAliasCanBeAnythingUnique": { // El sobrenombre puede usarse en lugar del assetID en las llamadas
+            "name": "human readable name", // nombres no necesitan ser unicos
+            "symbol": "AVAL",              // symbols no necesitan ser unique
             "initialState": {
                 "variableCap" : [          // No units of the asset exist at genesis
                     {
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTUyODAxODUsLTQ0NTgzNzY5LC05OD
-E0NTg2MzYsMTIzODQzNjE4M119
+eyJoaXN0b3J5IjpbNjAxMzQ0NjQ2LC00NDU4Mzc2OSwtOTgxND
+U4NjM2LDEyMzg0MzYxODNdfQ==
 -->
