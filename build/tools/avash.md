@@ -315,7 +315,7 @@ Flags:
 ```text
 Herramientas para crear almacenes de variables e imprimir variables dentro de ellos. Usando esto 
     podemos crear almacenes de variables, listar todas las variables que almacenan e imprimir datos 
-       en estos alamacenes. La asignación y actualización de las variables a menudo es administrada por los comandos avash.
+       en estos almacenes. La asignación y actualización de las variables a menudo es administrada por los comandos avash.
 
 Uso:
   avash varstore [command] [flags]
@@ -339,7 +339,7 @@ Las funciones disponibles para Lua son:
 * `avash_sleepmicro` - Toma un entero sin signo representando microsegundos y permanece inactivo por ese tiempo
 * `avash_setvar` - Toma un alcance de la variable \(string\), un nombre de la variable\(string\),y una variable \(string\) y lo coloca en el almacen de variables. El scope ya debe haber sido creado.
 
-When writing Lua, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
+Al escribir Lua, la funcionalidad estándar de Lua está disponible para automatizar la ejecución de una serie de comandos de Avash. Esto permite a un desarrollador automatizar:
 
 * Local network deployments
 * Sending transactions
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjI0Mjk5OTgsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbLTEwNTk0NjY0OTcsLTE5NjI0Mjk5OTgsMT
+A1MzcxMjM5NSwtMjgxNzE4MDhdfQ==
 -->
