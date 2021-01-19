@@ -7,20 +7,20 @@ Avash proporciona la capacidad de ejecutar scripts Lua que pueden ejecutar una s
 
 ## Instalación<a id="installation"></a>
 
-### Requi<a id="requirements"></a>
+### Requisitos<a id="requirements"></a>
 
-* Golang 1.15.5 or later
-* An Avalanche Client Implementing Avalanche Standard CLI Flags”
+* Golang 1.15.5 o superior
+* Un cliente de Avalanche que esté implementando los Avalanche Standard CLI Flags”
 
-### Quick Setup <a id="quick-setup"></a>
+### Configuración Rápida <a id="quick-setup"></a>
 
-1. Install and build an Avalanche client
+1. Instalar y crear un cliente de Avalanche.
 2. `cd $GOPATH`
 3. `go get github.com/ava-labs/avash`
 4. `cd src/github.com/ava-labs/avash`
 5. `go build`
 
-## Configuration <a id="configuration"></a>
+## Configuración<a id="configuration"></a>
 
 While Avash can be started without a premade configuration file, it’s available as an option for tweaking some of the shell’s global settings. Avash will search for `.avash.yaml` in the `$HOME` directory by default, but the `--config` flag can be used to set a custom configuration filepath to look for.
 
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY2Mzc1NTA3LC0yODE3MTgwOF19
+eyJoaXN0b3J5IjpbNTQzNDQyMjIxLC0yODE3MTgwOF19
 -->
