@@ -70,7 +70,7 @@ Default:
 **log.terminal**
 
 ```text
-Allowed output level for all messages logged to the shell terminal.
+Nivel de salida permitido para todos los mensajes registrados en la terminal shell.
 
 Tipo:
   optional, <log-level>
@@ -82,7 +82,7 @@ Default:
 **log.logfile**
 
 ```text
-Allowed output level for all messages logged to the log file.
+Nivel de salida permitido para todos los mensajes registrados en el archivo de registro.
 
 Tipo:
   optional, <log-level>
@@ -94,7 +94,7 @@ Default:
 **log.dir**
 
 ```text
-Directory for log file.
+Directorio del archivo de registro.
 
 Tipo:
   optional, <directory>
@@ -103,13 +103,13 @@ Default:
   <datadir>/logs
 ```
 
-## Using Avash <a id="using-avash"></a>
+## Usando Avash <a id="using-avash"></a>
 
-### Opening a shell <a id="opening-a-shell"></a>
+### Abriendo un shell <a id="opening-a-shell"></a>
 
-Start a new instance of Avash with `./avash`.
+Inicia una nueva instancia de Avash con `./avash`.
 
-Run `help` to see the commands available.
+Ejecuta `help` para ver los comandos disponibles.
 
 We can also run `help [command]` to see the list of options available for that command.
 
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjIyOTQxODY3LC0yODE3MTgwOF19
+eyJoaXN0b3J5IjpbMTkzOTE5NTA3NSwtMjgxNzE4MDhdfQ==
 -->
