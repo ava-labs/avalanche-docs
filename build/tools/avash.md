@@ -41,14 +41,14 @@ Los argumentos de campo se describen a continuación:
 * `<directory>` - Una ruta completa a un directorio. Ejemplo:  `/home/username/folder`
 * `<log-level>` - Un nivel de registro válido para filtrar los mensajes registrados. Debe ser alguno de: `{verbo, debug, info, warn, error, fatal, off}`
 
-### Fields <a id="fields"></a>
+### Campos<a id="fields"></a>
 
 **avalancheLocation**
 
 ```text
-File path to Avalanche binary.
+Ruta de archivo a el binario de Avalanche.
 
-Type:
+Tipo:
   optional, <filepath>
 
 Default:
@@ -58,9 +58,9 @@ Default:
 **datadir**
 
 ```text
-Directory for Avash data store.
+Directorio para el almacén de datos de Avash.
 
-Type:
+Tipo:
   optional, <directory>
 
 Default:
@@ -72,7 +72,7 @@ Default:
 ```text
 Allowed output level for all messages logged to the shell terminal.
 
-Type:
+Tipo:
   optional, <log-level>
 
 Default:
@@ -84,7 +84,7 @@ Default:
 ```text
 Allowed output level for all messages logged to the log file.
 
-Type:
+Tipo:
   optional, <log-level>
 
 Default:
@@ -96,7 +96,7 @@ Default:
 ```text
 Directory for log file.
 
-Type:
+Tipo:
   optional, <directory>
 
 Default:
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjIzMDI1NTIsLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbNjIyOTQxODY3LC0yODE3MTgwOF19
 -->
