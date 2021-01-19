@@ -48,7 +48,7 @@ Cuando se escribe una VM, no es necesario preocuparse por la lógica de nivel in
 
 Piense en una VM como un plano para una blockchain; puede usar la misma VM para crear muchas blockchains, cada una de las cuales sigue las mismas reglas pero es lógicamente independiente de otras blockchains.
 
-### Why Virtual Machines?
+### ¿Por qué Virtual Machines?
 
 At first, blockchain networks had one Virtual Machine \(VM\) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
 
@@ -91,6 +91,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc1Mjg1MzA5NCw2MzkwMjUwNzcsOTMwMz
-AzNTk0XX0=
+eyJoaXN0b3J5IjpbNjc5ODAxMDEzLDYzOTAyNTA3Nyw5MzAzMD
+M1OTRdfQ==
 -->
