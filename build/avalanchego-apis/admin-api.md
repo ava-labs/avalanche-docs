@@ -106,7 +106,7 @@ Ahora, en lugar de interactuar con el ID de la cadena de bloques, que es `sV6o67
 
 ### admin.lockProfile
 
-Escribe un perfil de estadísticas mutex a`lock.profile`.
+Escribe un perfil de estadísticas mutex en`lock.profile`.
 
 #### **Signature**
 
@@ -139,7 +139,7 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Escribe un perfil de memoria de `mem.profile`.
+Escribe un perfil de memoria en `mem.profile`.
 
 #### **Signature**
 
@@ -172,7 +172,7 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama `admin.stopCPUProfiler`. Estando detenido, escribe el perfil en `cpu.profile`.
 
 #### **Signature**
 
@@ -180,7 +180,7 @@ Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama 
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -236,7 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4MDY3ODU4MiwtNTA0MzM5NTk1LC0xNj
+eyJoaXN0b3J5IjpbMTQ3ODk5MzU3MywtNTA0MzM5NTk1LC0xNj
 k3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0MjEwLDU1MjE3Nzc1
 MF19
 -->
