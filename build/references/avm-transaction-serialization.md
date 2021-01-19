@@ -795,7 +795,7 @@ Una operación de acuñado NFT contiene un `TypeID`, `AddressIndices`, `GroupID`
 * **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
 * **`Output`** es un tiempo de bloqueo, límite y un conjunto de direcciones únicas que corresponden a las private keys que pueden ser usadas para utilizar esta salida. Las direcciones deben ser ordenadas lexicográficamente.
 
-### **Gantt NFT Mint Op Specification**
+### **Especificación Gantt de una Operación de Acuñado NFT**
 
 ```text
 +------------------------------+------------------------------------+
@@ -816,7 +816,7 @@ Una operación de acuñado NFT contiene un `TypeID`, `AddressIndices`, `GroupID`
                                +------------------------------------+
 ```
 
-### **Proto NFT Mint Op Specification**
+### **Especificación Proto de una Operación de Acuñado NFT**
 
 ```text
 message NFTMintOp {
@@ -828,9 +828,9 @@ message NFTMintOp {
 }
 ```
 
-### **NFT Mint Op Example**
+### **Ejemplo de una Operación de Acuñado NFT**
 
-Let’s make an NFT mint operation with:
+Hagamos una operación de acuñado NFT con:
 
 * **`TypeId`**: 12
 * **`AddressIndices`**:
@@ -890,7 +890,7 @@ Let’s make an NFT mint operation with:
 ]
 ```
 
-## NFT Transfer Op
+## Operación de Transferencia NFT
 
 An NFT transfer operation sends an unspent NFT transfer output to a new set of owners.
 
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM4MzA2ODcwLC0yMDk2MzEyNDAwLDk3OT
+eyJoaXN0b3J5IjpbNzQ2MTI3NzQzLC0yMDk2MzEyNDAwLDk3OT
 EwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1
 MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2NzMxOTk5NCwtMT
 IyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
