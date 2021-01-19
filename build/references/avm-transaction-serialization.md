@@ -616,7 +616,7 @@ Hagamos una salida de acuñación NFT con:
 
 ## Entradas
 
-Las entradas tienen un tipo posible: `SECP256K1TransferInput`.
+Las entradas o "Inputs" tienen un tipo posible: `SECP256K1TransferInput`.
 
 ## Entrada de Transferencia SECP256K1 
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTYwNDQ5NTM0LDk3NDM2MDEwNCwtOTM5Nj
-Y3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgx
-LDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
-YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
-OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
-E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
-MDc4NTFdfQ==
+eyJoaXN0b3J5IjpbMTc5OTczOTk0Niw5NzQzNjAxMDQsLTkzOT
+Y2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4
+MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLT
+E2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0
+Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC
+0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5
+MTA3ODUxXX0=
 -->
