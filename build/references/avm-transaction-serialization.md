@@ -42,8 +42,8 @@ message TransferableOutput {
 
 Let’s make a transferable output:
 
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `Output`: `"Example SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -114,10 +114,10 @@ message TransferableInput {
 
 Let’s make a transferable input:
 
-* `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
-* `UTXOIndex: 5`
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `TxID`: `0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
+* `UTXOIndex`: `5`
+* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `Input`: `"Example SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -192,12 +192,12 @@ message TransferableOp {
 
 Let’s make a transferable operation:
 
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `UTXOIDs:`
-  * `UTXOID:`
-    * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
-    * `UTXOIndex: 5`
-* `Op: "Example Transfer Op from below"`
+* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `UTXOIDs`:
+  * `UTXOID`:
+    * `TxID`: `0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
+    * `UTXOIndex`: `5`
+* `Op`: `"Example Transfer Op from below"`
 
 ```text
 [
@@ -292,13 +292,13 @@ message SECP256K1TransferOutput {
 
 Let’s make a secp256k1 transfer output with:
 
-* **`TypeID`**: 7
-* **`Amount`**: 12345
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+* **`TypeID`**: `7`
+* **`Amount`**: `12345`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -378,12 +378,12 @@ message SECP256K1MintOutput {
 
 Let’s make a SECP256K1 mint output with:
 
-* **`TypeID`**: 6
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+* **`TypeID`**: `6`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -469,14 +469,14 @@ message NFTTransferOutput {
 
 Let’s make an NFT transfer output with:
 
-* **`TypeID`**: 11
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+* **`TypeID`**: `11`
+* **`GroupID`**: `12345`
+* **`Payload`**: `0x431100`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -565,13 +565,13 @@ message NFTMintOutput {
 
 Let’s make an NFT mint output with:
 
-* **`TypeID`**: 10
-* **`GroupID`**: 12345
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+* **`TypeID`**: `10`
+* **`GroupID`**: `12345`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -651,9 +651,9 @@ message SECP256K1TransferInput {
 
 Let’s make a payment input with:
 
-* **`TypeId`**: 5
-* **`Amount`**: 123456789
-* **`AddressIndices`**: \[7,3\]
+* **`TypeId`**: `5`
+* **`Amount`**: `123456789`
+* **`AddressIndices`**: \[`7`,`3`\]
 
 ```text
 [
@@ -726,12 +726,12 @@ message SECP256K1MintOperation {
 
 Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
 
-* **`TypeId`**: 8
+* **`TypeId`**: `8`
 * **`AddressIndices`**:
-* 0x00000007
-* 0x00000003
-* **`MintOutput`**: “Example SECP256K1 Mint Output from above”
-* **`TransferOutput`**: “Example SECP256K1 Transfer Output from above”
+* `0x00000007`
+* `0x00000003`
+* **`MintOutput`**: `“Example SECP256K1 Mint Output from above”`
+* **`TransferOutput`**: `“Example SECP256K1 Transfer Output from above”`
 
 ```text
 [
@@ -823,16 +823,16 @@ message NFTMintOp {
 
 Let’s make an NFT mint operation with:
 
-* **`TypeId`**: 12
+* **`TypeId`**: `12`
 * **`AddressIndices`**:
-  * 0x00000007
-  * 0x00000003
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+  * `0x00000007`
+  * `0x00000003`
+* **`GroupID`**: `12345`
+* **`Payload`**: `0x431100`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -935,17 +935,17 @@ message NFTTransferOp {
 
 Let’s make an NFT transfer operation with:
 
-* **`TypeID`**: 13
+* **`TypeID`**: `13`
 * **`AddressIndices`**:
-* 0x00000007
-* 0x00000003
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
+* `0x00000007`
+* `0x00000003`
+* **`GroupID`**: `12345`
+* **`Payload`**: `0x431100`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
 * **`Addresses`**:
-* 0xc3344128e060128ede3523a24a461c8943ab0859
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
 
 ```text
 [
@@ -1032,8 +1032,8 @@ message InitialState {
 
 Let’s make an initial state:
 
-* `FxID: 0x00000000`
-* `InitialState: ["Example SECP256K1 Transfer Output from above"]`
+* `FxID`: `0x00000000`
+* `InitialState`: `["Example SECP256K1 Transfer Output from above"]`
 
 ```text
 [
@@ -1099,7 +1099,7 @@ message SECP256K1Credential {
 
 Let’s make a payment input with:
 
-* **`TypeID`**: 9
+* **`TypeID`**: `9`
 * **`signatures`**:
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
 * `0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
@@ -1529,9 +1529,9 @@ message ImportTx {
 
 Let’s make an unsigned import tx that uses the inputs from the previous examples:
 
-* `BaseTx`: “Example BaseTx as defined above” but with `TypeID` set to `3`
+* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: “Example SECP256K1 Transfer Input as defined above”
+* `Ins`: `“Example SECP256K1 Transfer Input as defined above”`
 
 ```text
 [
@@ -1637,9 +1637,9 @@ message ExportTx {
 
 Let’s make an unsigned export tx that uses the outputs from the previous examples:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to `4`
+* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: `“Example SECP256K1 Transfer Output as defined above”`
 
 ```text
 [
@@ -1870,7 +1870,7 @@ Let’s make a UTXO from the signed transaction created above:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: 0 = 0x00000000
+* **`UTXOIndex`**: `0` = `0x00000000`
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
 * **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
 
