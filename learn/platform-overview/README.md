@@ -83,15 +83,15 @@ La X-Chain es una instancia de la Avalanche Virtual Machine \(AVM\). El [API de 
 
 La **P-Chain** es la blockchain de metadatos en Avalanche y coordina los validadores, mantiene el seguimiento de las subnets activas y permite la creación de nuevas subnets. La P-Chain implementa el [protocolo de consenso Snowman](../../#snowman-consensus-protocol).
 
-EL [API de la P-Chain](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+EL [API de la P-Chain](../../build/avalanchego-apis/platform-chain-p-chain-api.md) permite a los clientes crear subnets, añadir validadores a las subnets y crear blockchains.
 
 ## Contract Chain \(C-Chain\)
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
+La **C-Chain** permite la creación de smart contracts usando el [API de la C-Chain](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
+La Cadena-C es una instancia de la Ethereum Virtual Machine impulsada por [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzODEwMTYwNCw2Nzk4MDEwMTMsNjM5MD
-I1MDc3LDkzMDMwMzU5NF19
+eyJoaXN0b3J5IjpbNzQ4MTY4ODU5LDY3OTgwMTAxMyw2MzkwMj
+UwNzcsOTMwMzAzNTk0XX0=
 -->
