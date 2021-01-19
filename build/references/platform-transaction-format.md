@@ -1,4 +1,4 @@
-# Platform Transaction Format
+# Formato de Transacción de la Plataforma
 
 This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
 
@@ -1601,3 +1601,6 @@ Let’s make a stakeablelockout with:
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTk4ODY1OTE1NV19
+-->
