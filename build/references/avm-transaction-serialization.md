@@ -1319,7 +1319,7 @@ message CreateAssetTx {
 
 ### Ejemplo de un Activo de Creación Tx No Firmado
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
+Hagamos un activo de creación Tx no firmado que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
 * `Name`: `Volatility Index`
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyNTI4NTY5NiwtNzc1NzQzOTYyLC0xOT
+eyJoaXN0b3J5IjpbLTQyOTU5ODYyOCwtNzc1NzQzOTYyLC0xOT
 QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
 NywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMj
 EzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUz
