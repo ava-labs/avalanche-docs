@@ -91,11 +91,11 @@ Cuando delegas el stake a un validador, especificas:
 * La dirección para enviar las recompensas
 
 {% hint style="info" %}
-The minimum amount that a delegator must delegate is 25 AVAX.
+La cantidad mínima que un delegado debe delegar es de 25 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Ten en cuenta que una vez emites la transacción to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
 ### Delegator rewards <a id="delegator-rewards"></a>
@@ -105,7 +105,7 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwNTMxNzMwMCw5OTU1NTQ4OCw1NDI1Nj
-c2NDgsLTM2Mjc5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
-
+eyJoaXN0b3J5IjpbLTE1MzM4NDA5OTIsLTkwNTMxNzMwMCw5OT
+U1NTQ4OCw1NDI1Njc2NDgsLTM2Mjc5OTM4MSw1NzY4MDU5OTEs
+LTcxNzcxOTgxMV19
 -->
