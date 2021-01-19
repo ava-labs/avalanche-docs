@@ -12,18 +12,18 @@ Esta actualización es opcional pero se recomienda. El parche incluye mejoras en
 - Añadidas más opciones para especificar la dirección IP de un nodo y añadido getNodeIP a la información *endpoint.
 - Se añadió un TxID al resultado de los validadores get.Validators en la platformvm.
 - Actualizada la versión de Coreth.
-- Limpió la implementación de la prueba snowball y añadió pruebas adicionales para alinearse con las pruebas de mutación.
-- Implementado y optimizado los promedios de tiempo continuo para el seguimiento de la latencia de la CPU y la red.
+- Se limpió la implementación de la prueba snowball y añadió pruebas adicionales para alinearse con las pruebas de mutación.
+- Se implementaron y optimizaron los promedios de tiempo continuo para el seguimiento de la latencia de la CPU y la red.
 - Se optimizaron significativamente las asignaciones de memoria en varios lugares.
 - Aumentado el tamaño de la caché de verificación de firmas.
 - Reducción de las lecturas de la base de datos durante la gestión de vértices.
 ```
 
 ```text
-• Added an optional argument includeReason to platform.getTxStatus.
-If not provided, or if false, the output from getTxStatus is the same as before.
+• Añadido un argumento opcional includeReason to platform.getTxStatus.
+Si no se proporciona, o si es falso, la salida de getTxStatus es la misma que antes.
 
-For example:
+Por ejemplo:
 {
     "jsonrpc": "2.0",
     "result": "Dropped",
@@ -48,6 +48,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 Para asistencia con esta actualización, sigue nuestras [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODAwMDg0NDUwLDM4Mzc4MTYwLDU0ODg2OD
-k1XX0=
+eyJoaXN0b3J5IjpbLTgzNjM0MjU2MiwzODM3ODE2MCw1NDg4Nj
+g5NV19
 -->
