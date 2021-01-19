@@ -6,7 +6,7 @@ Un token de autorización provee acceso a un o más extremos de la API. Esto es 
 
 Un token de autorización es enviado en el encabezado de la las llamadas a la API. Específicamente el encabezado`Authorization` debe tener el valor `Bearer TOKEN.GOES.HERE` \(donde `TOKEN.GOES.HERE` es reemplazado con el token\).
 
-Esta API es solamente alcanzable si el nodo se inició con el [argumento de línea de comando ](../references/command-line-interface.md)`--api-auth-required`. Si el nodo es iniciadoIf the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+Esta API es solamente alcanzable si el nodo se inició con el [argumento de línea de comando ](../references/command-line-interface.md)`--api-auth-required`. Si el nodo es iniciado sin esta caracterísitca, las llamadas a la API no requerirán calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
 Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDczNDcxODJdfQ==
+eyJoaXN0b3J5IjpbMTUzMTU1NTI3NF19
 -->
