@@ -4,9 +4,9 @@ descripción: Aprende los conceptos básicos y la arquitectura de Avalanche
 
 # Resumen de la Plataforma
 
-Avalanche cuenta con 3 blockchains incorporadas: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), y [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). Las 3 blockchains están [validadas](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) y protegidas por la  [**Red Primaria**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). La Red Primaria es una [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche cuenta con 3 blockchains incorporadas: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), y [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). Las 3 blockchains están [validadas](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) y protegidas por la  [**Red Primaria**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). La Red Primaria es una [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet) especial, y todos los miembros de todas las subnets personalizadas deben ser también miembros de la Red Primaria haciendo stake de al menos 2 000 AVAX.
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
+Aquí hay tutoriales de como [crear una subnet](../../build/tutorials/platform/create-a-subnet.md) y [agregar validadores](../../build/tutorials/nodes-and-staking/add-a-validator.md) a una subnet.
 
 ![Primary network](../../.gitbook/assets/primary-network.png)
 
@@ -89,5 +89,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODM3MDQwOTU3XX0=
+eyJoaXN0b3J5IjpbLTE0MTE3MjczNjZdfQ==
 -->
