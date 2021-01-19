@@ -63,7 +63,7 @@ Deberías desactivar todas las API que no usarás mediante argumentos de la lín
 
 #### ¿Por qué mi tiempo de actividad es bajo? <a id="why-is-my-uptime-low"></a>
 
-Every validator on Avalanche keeps track of the uptime of other validators. You can see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
+Cada validador de Avalanche lleva un registro del tiempo de funcionamiento de los otros validadores. Puedes ver las conexiones que tiene un nodo llamando a `info.peers`, así como el tiempo de actividad de cada conexión. **Este es sólo el punto de vista de un nodo**. Otros nodos pueden percibir el tiempo de actividad de tu nodo de manera diferente. Sólo porque un nodo perciba que tu tiempo de actividad es bajo no significa que no recibirás recompensas de staking.
 
 The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM0MDUyODMzMCw1NDI1Njc2NDgsLTM2Mj
+eyJoaXN0b3J5IjpbLTQ4OTc2OTc2OCw1NDI1Njc2NDgsLTM2Mj
 c5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
 -->
