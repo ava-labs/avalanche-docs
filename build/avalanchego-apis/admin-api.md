@@ -27,10 +27,10 @@ admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
 * `endpoint` es el extramo original de la API. `endpoint` debe incluir únicamente la la parte del extremo después de `/ext/`.
-* La API con The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* La API con sobrenombre ahora puede llamarse con `ext/alias`.
+* `alias` puede tener a lo más 512 caracteres.
 
-#### **Example Call**
+#### **Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -236,6 +236,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDc4ODEwMjAsMTE3MjIyNDc0LC0yMT
+eyJoaXN0b3J5IjpbLTE5MzYyMzU3MjksMTE3MjIyNDc0LC0yMT
 QwNTE0MjEwLDU1MjE3Nzc1MF19
 -->
