@@ -85,10 +85,10 @@ Un delegador es un poseedor de token, que quiere participar en el stake, pero el
 
 Cuando delegas el stake a un validador, especificas:
 
-* The ID of the node you’re delegating to
-* When you want to start/stop delegating stake \(must be while the validator is validating\)
-* How many AVAX you are staking
-* The address to send any rewards to
+* El ID del nodo en el que estás delegando
+* Cuando quieres empezar/dejar de delegar el stake \(debe ser mientras el validador está validando\)
+* Cuántos AVAX estás poniendo en stake
+* La dirección para enviar las recompensas
 
 {% hint style="info" %}
 The minimum amount that a delegator must delegate is 25 AVAX.
@@ -105,7 +105,7 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTk3MDQzNzcsOTk1NTU0ODgsNTQyNT
-Y3NjQ4LC0zNjI3OTkzODEsNTc2ODA1OTkxLC03MTc3MTk4MTFd
-fQ==
+eyJoaXN0b3J5IjpbLTkwNTMxNzMwMCw5OTU1NTQ4OCw1NDI1Nj
+c2NDgsLTM2Mjc5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
+
 -->
