@@ -12,14 +12,14 @@ Salida transferible
 
 Las salidas transferibles envuelven una salida con una identificación de activo.
 
-### Qué Contiene la Salida Transferible
+### Qué Contiene una Salida Transferible
 
 Una salida transferible contiene una `AssetID` y un `Output`.
 
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
 * **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Especificación Gantt de Salida Transferible
+### Especificación Gantt de una Salida Transferible
 
 ```text
 +----------+----------+-------------------------+
@@ -31,7 +31,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Especificación Proto de una Salida Transferible
 
 ```text
 message TransferableOutput {
@@ -40,9 +40,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Ejemplo de una Salida Transferible
 
-Let’s make a transferable output:
+Hagamos una salida transferible:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -69,18 +69,18 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Entrada transferible
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
 
-### What Transferable Input Contains
+### Que Contiene una Entrada Transferible
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Input`** is a transferable input object.
+* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
+* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
+* **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
 
 ### Gantt Transferable Input Specification
 
@@ -1604,5 +1604,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbNTQxNjcxNjYsLTM2NzkzOTA3MCwtNDgyMz
+M2NTIzXX0=
 -->
