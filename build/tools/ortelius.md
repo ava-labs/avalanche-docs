@@ -493,15 +493,15 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-#### List Assets
+#### Lista de activos
 
-Find assets that have been created on the X-chain.
+Encuentra activos que se han creado en la X-chain.
 
 **Parámetros**
 
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
+| `enableAggregate` | string | Los valores "minute", "hour", "day", "week", "month", or "year" cuando se proporcionen, se incluirán datos agregados sobre el activo. | N/A | N/A |
 
 **Llamado de Ejemplo**
 
@@ -585,7 +585,7 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 }
 ```
 
-#### Get Asset
+#### Obtener Asset
 
 Find a single asset by its ID.
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4MTQzMDM0Miw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbLTEyODEyMTUzODgsNzk0NzU4OTY3XX0=
 -->
