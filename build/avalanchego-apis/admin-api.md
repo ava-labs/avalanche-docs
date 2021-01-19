@@ -56,11 +56,11 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+Ahora, las llamadas a la X-Chain pueden hacerse ya sea con `/ext/bc/X` o, equivalentemente, a `/ext/myAlias`.
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+Da un sobrenombre a una cadena de bloques, un nuevo nombre podrá ser usado en cualquier lugar qu a different name that can be used any place the blockchain’s ID is used.
 
 #### **Signature**
 
@@ -236,6 +236,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzYyMzU3MjksMTE3MjIyNDc0LC0yMT
-QwNTE0MjEwLDU1MjE3Nzc1MF19
+eyJoaXN0b3J5IjpbMTE4MjY4Njk0MiwxMTcyMjI0NzQsLTIxND
+A1MTQyMTAsNTUyMTc3NzUwXX0=
 -->
