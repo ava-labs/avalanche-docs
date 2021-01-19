@@ -247,8 +247,8 @@ avm.createFixedCapAsset({
 * `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc. Por defecto es 0.
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+* `username` y `password` denotan el usuario que pagará por la comisión de la transacción.
+* Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades units of the asset at genesis.
 * `assetID` is the ID of the new asset.
 
 #### **Example Call**
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM4MzY1ODE4LC0xMDQ4MDQxMjcyLC05OD
-A5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4
-M119
+eyJoaXN0b3J5IjpbODY3OTg1NDU0LDYzODM2NTgxOCwtMTA0OD
+A0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2
+LDEyMzg0MzYxODNdfQ==
 -->
