@@ -620,7 +620,7 @@ Las entradas o "Inputs" tienen un tipo posible: `SECP256K1TransferInput`.
 
 ## Entrada de Transferencia SECP256K1 
 
-Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite utilizar una salida de transferencia secp256k1 no utilizada.
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer input" permite utilizar una salida de transferencia secp256k1 no utilizada.
 
 ### **Que Contiene una Entrada de Transferencia SECP256K1**
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkyNTA4OTQyLDk3NDM2MDEwNCwtOTM5Nj
-Y3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgx
-LDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
-YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
-OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
-E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
-MDc4NTFdfQ==
+eyJoaXN0b3J5IjpbLTk2Mjk2MDA1OCw5NzQzNjAxMDQsLTkzOT
+Y2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4
+MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLT
+E2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0
+Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC
+0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5
+MTA3ODUxXX0=
 -->
