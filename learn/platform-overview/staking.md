@@ -95,17 +95,17 @@ La cantidad mínima que un delegado debe delegar es de 25 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Ten en cuenta que una vez emites la transacción tpara añadir tu stake a un delegador, no hay forma de cambiar los parámetros. **No puede eliminar su stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.** Asegúrese de utilizar los valores correctos en los llamados API que se indican a continuación. Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Ten en cuenta que una vez emites la transacción tpara añadir tu stake a un delegador, no hay forma de cambiar los parámetros. **No puede eliminar su stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.**  Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
-### Delegator rewards <a id="delegator-rewards"></a>
+### Recompensas para Delegadores <a id="delegator-rewards"></a>
 
 If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3MjQ3MzI4NiwtMTUzMzg0MDk5MiwtOT
-A1MzE3MzAwLDk5NTU1NDg4LDU0MjU2NzY0OCwtMzYyNzk5Mzgx
-LDU3NjgwNTk5MSwtNzE3NzE5ODExXX0=
+eyJoaXN0b3J5IjpbMTU3MjczNDM2LC0xNTMzODQwOTkyLC05MD
+UzMTczMDAsOTk1NTU0ODgsNTQyNTY3NjQ4LC0zNjI3OTkzODEs
+NTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
 -->
