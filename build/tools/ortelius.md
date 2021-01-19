@@ -180,13 +180,13 @@ Calcular los datos agregados de las transacciones a lo largo de un período de t
 | `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrado varias veces. | None | None |
 | `assetID` | `id` | Una ID de activos para filtrar los resultados.. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -204,17 +204,17 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-#### TxFee Aggregate
+#### Agregado TxFee
 
-AVAX Aggregate txfee
+Agregado AVAX  txfee
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzkyMTY3Myw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbMTE3MDgwMDkzNSw3OTQ3NTg5NjddfQ==
 -->
