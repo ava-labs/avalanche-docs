@@ -8,7 +8,7 @@ Esta API utiliza el formato de RPC `json 2.0`.
 
 {% page-ref page="issuing-api-calls.md" %}
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/admin
@@ -236,7 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTI0Nzk0MTUsLTUwNDMzOTU5NSwtMT
-Y5NzE1MDEzLDExNzIyMjQ3NCwtMjE0MDUxNDIxMCw1NTIxNzc3
-NTBdfQ==
+eyJoaXN0b3J5IjpbMTk5ODQ3NDI1NCwtMTExMjQ3OTQxNSwtNT
+A0MzM5NTk1LC0xNjk3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0
+MjEwLDU1MjE3Nzc1MF19
 -->
