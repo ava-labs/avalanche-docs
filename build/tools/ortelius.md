@@ -1,14 +1,14 @@
 ---
-description: 'This API allows clients to interact with Ortelius, the Avalanche indexer.'
+descripción: "Esta API permite a los clientes interactuar con Ortelius, el indexador de Avalanche".
 ---
 
-# Ortelius API
+# API de Ortelius
 
-## Ortelius API
+## API de Ortelius
 
-### Format
+### Formato
 
-This API uses GET HTTP requests using URL query parameters and returns JSON data.
+Esta API usa peticiones GET HTTP usando URL query parameters and returns JSON data.
 
 ### Versioning
 
@@ -811,3 +811,6 @@ This configuration is the one used by the standalone Docker Compose setup and il
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNDEzMzg3NjMwXX0=
+-->
