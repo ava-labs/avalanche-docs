@@ -40,5 +40,5 @@ Different types of transactions require payment of a different transaction fee. 
 +----------+-------------------+------------------------+
 ```
 
-The [C-Chain](./#contract-chain-c-chain) gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
+The [C-Chain](./#contract-chain-c-chain) gas price is 4.7e-7 or 0.00000047 AVAX/gas. The C-Chain gas limit is 10e8 or 1,000,000,000
 
