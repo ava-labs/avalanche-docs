@@ -41,11 +41,12 @@ Diferentes aplicaciones basadas en blockchains pueden requerir que los validador
 
 ## Virtual Machines
 
-Una **Virtual Machine** \(o VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+Una **Virtual Machine** \(o VM\) 
+define la lógica a nivel de aplicación de una blockchain. En términos técnicos, especifica el estado de la blockchain, la función de transición de estado, las transacciones y la API a través de la cual los usuarios pueden interactuar con la blockchain. Cada blockchain de Avalanche es una instancia de una máquina virtual.
 
-When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
+Cuando se escribe una VM, no es necesario preocuparse por la lógica de nivel inferior como la red, el consenso y la estructura de la blockchain. Avalanche hace esto tras bambalinas para que puedas concentrarte en lo que te gustaría construir.
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+Piense en una VM como un plano para una blockchain; puede usar la misma VM para crear muchas blockchains, cada una de las cuales sigue las mismas reglas pero es lógicamente independiente de otras blockchains.
 
 ### Why Virtual Machines?
 
@@ -90,5 +91,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM5MDI1MDc3LDkzMDMwMzU5NF19
+eyJoaXN0b3J5IjpbMTc1Mjg1MzA5NCw2MzkwMjUwNzcsOTMwMz
+AzNTk0XX0=
 -->
