@@ -1,7 +1,7 @@
 ---
-description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+descripción: >-
+  Esta página lista los métodos, argumentos y respustas de la API que han sido descuentinuadas y
+  serán eliminadas o modificadas en versiones siguientes.
 ---
 
 # Deprecated API Calls
@@ -151,3 +151,6 @@ Where `reason` is the reason the transaction was dropped. `reason` is only prese
 
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTAwMzk3MzU1OF19
+-->
