@@ -15,7 +15,7 @@ Para resistir [ataques sybil](https://support.avalabs.org/en/articles/4064853-wh
 Cuando un validador termina de validar la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), recibe de vuelta los tokens de AVAX que ha puesto en stake. Puede recibir una recompensa por ayudar a asegurar la red. Un validador sólo recibe una [recompensa de validación](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) si es suficientemente responsivo y correcto durante el tiempo que valida. Lea el [Whitepaper del Token de Avalanche](https://files.avalabs.org/papers/token.pdf) para aprender más sobre AVAX y las mecánicas del staking.
 
 {% hint style="warning" %}
-Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
+Las recompensas del staking se envían a la dirección de tu wallet al final del plazo de staking **siempre y cuando se cumplan todos estos parámetros**.
 {% endhint %}
 
 * The minimum amount that a validator must stake is 2,000 AVAX
@@ -104,5 +104,5 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjQ2NjM4MDc5LC03MTc3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbNTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
 -->
