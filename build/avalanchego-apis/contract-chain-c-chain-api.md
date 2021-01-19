@@ -437,7 +437,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTgyMDk3NDA5LC0xOTg3MjM0MDQsMjY5MD
-A3NjA1LDE0OTcxODgwMTgsMTY1NzI0ODQ0MiwtMTkwMTA4NDI0
-OV19
+eyJoaXN0b3J5IjpbMTE1MjExOTE0Niw5ODIwOTc0MDksLTE5OD
+cyMzQwNCwyNjkwMDc2MDUsMTQ5NzE4ODAxOCwxNjU3MjQ4NDQy
+LC0xOTAxMDg0MjQ5XX0=
 -->
