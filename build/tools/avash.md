@@ -5,9 +5,9 @@ Avash es un entorno temporal de ejecución de shells con estado que se utiliza p
 
 Avash proporciona la capacidad de ejecutar scripts Lua que pueden ejecutar una secuencia de comandos de shell en Avash. Esto permite la automatización de las tareas regulares. Por ejemplo, se podría crear un guión Lua para desplegar una red de nodos Avalanche donde cada nodo tiene una configuración determinada. Esto hace que las pruebas sean más fáciles.
 
-## Installation <a id="installation"></a>
+## Instalación<a id="installation"></a>
 
-### Requirements <a id="requirements"></a>
+### Requi<a id="requirements"></a>
 
 * Golang 1.15.5 or later
 * An Avalanche Client Implementing Avalanche Standard CLI Flags”
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbLTY2Mzc1NTA3LC0yODE3MTgwOF19
 -->
