@@ -150,9 +150,9 @@ Las salidas tienen dostipos posibles: `SECP256K1TransferOutput`y `SECP256K1Outpu
 
 ##  Salida de Transferencia SECP256K1
 
-Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado. The only valid asset is AVAX.
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado. El único activo válido es AVAX.
 
-### **What SECP256K1 Transfer Output Contains**
+### **Que contiene la salida de transferencia SECP256K1**
 
 A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
 
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2NjMwNTA1OSwtMzY3OTM5MDcwLC00OD
-IzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbODQ1NjUxMDM3LC0zNjc5MzkwNzAsLTQ4Mj
+MzNjUyM119
 -->
