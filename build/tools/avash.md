@@ -299,9 +299,9 @@ Flags:
       --snow-avalanche-batch-size int        El número de operaciones a realizar en cada nuevo vértice. (por defecto 30)
       --snow-avalanche-num-parents int       Número de vértices de referencia de cada nuevo vértice. (por defecto 5)
       --snow-quorum-size int                 Valor alfa a utilizar para los resultados positivos del número requerido. (por defecto 2)
-      --snow-rogue-commit-threshold int      Beta value to use for rogue transactions. (default 10)
-      --snow-sample-size int                 Number of nodes to query for each network poll. (default 2)
-      --snow-virtuous-commit-threshold int   Beta value to use for virtuous transactions. (default 5)
+      --snow-rogue-commit-threshold int      Valor beta para utilizarlo en transacciones fraudulentas. (por defecto 10)
+      --snow-sample-size int                 Número de nodos a consultar para cada sondeo de la red. (por defecto 2)
+      --snow-virtuous-commit-threshold int   Valor beta a utilizar para transacciones virtuosas. (por defecto 5)
       --staking-port uint                    Port of the consensus server. (default 9651)
       --staking-tls-cert-file string         TLS certificate file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.crt
       --p2p-tls-enabled                      Require TLS authentication for all P2P connections.
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDc2MzU1NDEsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTI5NDI4NzM1OSwxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
