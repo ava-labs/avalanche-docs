@@ -12,11 +12,11 @@ Aquí hay tutoriales de como [crear una subnet](../../build/tutorials/platform/c
 
 ## Subnets
 
-Una **subnet**, o subred, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+Una **subnet**, o subred, es un conjunto dinámico de validadores que trabajan juntos para lograr un consenso sobre el estado de un conjunto de blockchains. Cada blockchain es validada por exactamente una subnet. Una subnet puede validar muchas blockchains. Un nodo puede ser miembro de muchas subnets.
 
-A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+Una subnet gestiona su propia pertenencia, y puede requerir que sus validadores constituyentes tengan ciertas propiedades. Esto es muy útil, y exploramos sus ramificaciones más a fondo a continuación:
 
-### Compliance
+### Cumplimientos
 
 Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
 
@@ -89,5 +89,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODc2NzM3Ml19
+eyJoaXN0b3J5IjpbMTgxNDYxNDc2Nl19
 -->
