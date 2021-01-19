@@ -131,7 +131,7 @@ curl -X POST --data '{
 
 ### auth.changePassword
 
-Change this node’s authorization token password. Any authorization tokens created under an old password will become invalid.
+Cambia la contraseña del token de autorización de este nodo. Cualquier token de autorización creado con la contraseña anterior será inválido.
 
 #### **Signature**
 
@@ -144,8 +144,8 @@ auth.changePassword(
 ) -> {success: bool}
 ```
 
-* `oldPassword` is this node’s current authorization token password.
-* `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `oldPassword` es la contraseña actual del token de autorización del nodo.
+* `newPassword` es la nueva contraseña del token de autorización  the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
 
 #### **Example Call**
 
@@ -174,6 +174,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDA1OTE0ODYsMjY5Mzg4NTYsLTExNz
+eyJoaXN0b3J5IjpbLTE5ODc1ODE4NjksMjY5Mzg4NTYsLTExNz
 E5MTU1MDUsMTUzMTU1NTI3NF19
 -->
