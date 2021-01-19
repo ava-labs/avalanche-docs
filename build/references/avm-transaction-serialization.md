@@ -632,7 +632,7 @@ Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices
 * **`Amount`** es un largo que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
 * **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+### **Especificación Gantt de una Entrada de Transferencia SECP256K1**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -1921,7 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyND
-k3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5
-OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbMTU4Mjc4ODY3MywyMTMxNzYyNzMwLDQ5OT
+MwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0
+NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX
+0=
 -->
