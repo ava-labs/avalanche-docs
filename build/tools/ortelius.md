@@ -236,7 +236,7 @@ Responde con las cadenas en las que aparece una dirección
 
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 
 **Llamado de Ejemplo**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3MzE4MjY2Miw3OTQ3NTg5NjddfQ==
+eyJoaXN0b3J5IjpbMjkzMTcwOTMwLDc5NDc1ODk2N119
 -->
