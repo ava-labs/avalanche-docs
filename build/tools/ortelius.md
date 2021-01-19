@@ -232,13 +232,13 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 
 Responde con las cadenas en las que aparece una dirección
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
@@ -264,7 +264,7 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 
 Find transactions confirmed transactions from the network.
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -428,7 +428,7 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 
 Find addresses that have been involved in confirmed transactions.
 
-**Params**
+**ParaParámetrosms**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -497,13 +497,13 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 
 Find assets that have been created on the X-chain.
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
@@ -589,7 +589,7 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 
 Find a single asset by its ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
@@ -671,7 +671,7 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 
 Find outputs that have been created by a transaction confirmed on the network.
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -679,7 +679,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 | `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
@@ -713,7 +713,7 @@ curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 
 Find a single output by its ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
@@ -743,7 +743,7 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 
 Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/x"
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTQ4ODU3OTEsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbMjAzOTgwMTUzMSw3OTQ3NTg5NjddfQ==
 -->
