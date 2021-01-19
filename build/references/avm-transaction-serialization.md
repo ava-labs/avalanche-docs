@@ -1399,7 +1399,7 @@ Hagamos un activo de creación Tx no firmado que utilice las entradas y salidas 
 ]
 ```
 
-### What Unsigned Operation Tx Contains
+### Que Contiene una Operación Tx No Firmada
 
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyOTU5ODYyOCwtNzc1NzQzOTYyLC0xOT
+eyJoaXN0b3J5IjpbLTEyNjA0OTE3NCwtNzc1NzQzOTYyLC0xOT
 QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
 NywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMj
 EzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUz
