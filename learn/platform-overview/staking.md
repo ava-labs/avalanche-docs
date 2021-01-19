@@ -59,9 +59,9 @@ Al emitir la transacción para añadir un validador, los tokens del stake y la c
 
 Para hacer llamados a la API a tu nodo desde máquinas remotas, permite el tráfico en el puerto de la API \(`9650` por defecto\), y ejecuta tu nodo con el argumento `--http-host=`
 
-You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
+Deberías desactivar todas las API que no usarás mediante argumentos de la línea de comandos. Deberías configurar tu red para que sólo permita el acceso al puerto de la API desde máquinas de confianza  \(por ejemplo tu computador personal\)
 
-#### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
+#### ¿Por qué mi tiempo de actividad es bajo? <a id="why-is-my-uptime-low"></a>
 
 Every validator on Avalanche keeps track of the uptime of other validators. You can see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQyNTY3NjQ4LC0zNjI3OTkzODEsNTc2OD
-A1OTkxLC03MTc3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbLTM0MDUyODMzMCw1NDI1Njc2NDgsLTM2Mj
+c5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
 -->
