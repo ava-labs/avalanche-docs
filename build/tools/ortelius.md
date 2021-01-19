@@ -8,13 +8,14 @@ descripción: "Esta API permite a los clientes interactuar con Ortelius, el inde
 
 ### Formato
 
-Esta API usa peticiones GET HTTP usando URL query parameters and returns JSON data.
+Esta API usa peticiones GET HTTP usando parámetros de consulta de URL y devuelve los datos de JSON.
 
-### Versioning
+###
+ Versionado
 
-Starting with version 2, the API paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
+A partir de la versión 2, las rutas de la API serán precedidas por una etiqueta de versión, por ejemplo, `http://localhost:8080/v2`.
 
-The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
+La versión actual de la API es la versión 2. La documentación de la [Legacy API](ortelius.md#legacy-api) contiene información sobre el uso de la API v1.
 
 ### Data Types
 
@@ -812,5 +813,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDEzMzg3NjMwXX0=
+eyJoaXN0b3J5IjpbLTg3ODc2MzcwN119
 -->
