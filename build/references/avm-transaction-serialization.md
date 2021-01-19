@@ -1281,12 +1281,12 @@ Hagamos una base tx que utilice las entradas y salidas de los ejemplos anteriore
 Un activo de creación Tx no firmado contiene un `BaseTx`, `Name`, `Symbol`, `Denomination`, y`InitialStates`. El`TypeID` es`0x00000001`.
 
 * **`BaseTx`**
-* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the initial state of those feature extensions.
+* **`Name`** es una cadena legible por el ser humano que define el nombre del activo que esta transacción creará. No se garantiza que el nombre sea único. El nombre debe consistir sólo en caracteres ASCII imprimibles y no debe tener más de 128 caracteres.
+* **`Symbol`*** es una cadena legible por el ser humano que define el símbolo del activo que esta transacción creará. No se garantiza que el símbolo sea único. El símbolo debe consistir sólo en caracteres ASCII imprimibles y no debe tener más de 4 caracteres.
+* **`Denomination`*** es un byte que define la divisibilidad del activo que esta transacción creará. Por ejemplo, el símbolo AVAX es divisible en billonésimas. Por lo tanto, la denominación del vale AVAX es 9. La denominación no debe ser mayor de 32.
+* **`InitialStates`** es un arreglo de longitud variable que define las extensiones de características que este activo soporta, y el estado inicial de esas extensiones de características.
 
-### Gantt Unsigned Create Asset Tx Specification
+### Especificación Gantt de un Activo de Creación Tx No Firmado
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1305,7 +1305,7 @@ Un activo de creación Tx no firmado contiene un `BaseTx`, `Name`, `Symbol`, `De
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### Especificación Proto de un Activo de Creación Tx No Firmado
 
 ```text
 message CreateAssetTx {
@@ -1317,7 +1317,7 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### Ejemplo de un Activo de Creación Tx No Firmado
 
 Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
 
@@ -1920,10 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNj
-U5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3
-ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsND
-k5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5
-NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OT
-ldfQ==
+eyJoaXN0b3J5IjpbLTkyNTI4NTY5NiwtNzc1NzQzOTYyLC0xOT
+QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
+NywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMj
+EzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUz
+NDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4Mj
+EsMTk2NDc4Mjc5OV19
 -->
