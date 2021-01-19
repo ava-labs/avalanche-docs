@@ -234,11 +234,11 @@ Hagamos una salida de transferencia secp256k1 con:
 
 ##  Salida de los Propietarios de la Salida SECP256K1
 
-Una  salida de los propietarios de la salida [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+Una  salida de los propietarios de la salida [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output recibirá las recompensas del stake cuando termine el período de retención.
 
-### **What SECP256K1 Output Owners Output Contains**
+### **Que Contiene una Salida de los Propietarios de la Salida SECP256K1**
 
-A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+Una una salida de los propietarios de la salida SECP256K1 contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
 * **`TypeID`** is the ID for this output type. It is `0x0000000b`.
 * **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMz
-Y3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbODQ3OTQzMzUsLTEyMDE3ODg1OTcsLTM3OT
+AzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
