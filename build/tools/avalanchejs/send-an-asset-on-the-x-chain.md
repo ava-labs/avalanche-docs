@@ -38,11 +38,10 @@ let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 La función de ayuda `buildBaseTx()` envía un único tipo de activo. Tenemos un assetID particular cuyas monedas queremos enviar a una dirección de destinatario. Este es un activo imaginario para este ejemplo que creemos que tiene 400 monedas. Verifiquemos que tenemos los fondos disponibles para la transacción.
 ```text
 let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6"; //avaSerialized string
-let mybalance = utxos.getBalance(myAddresses, assetid); //retorna c BN
+let mybalance = utxos.getBalance(myAddresses, assetid); //retorna 400 como BN
 ```
 
-We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
-
+¡Tenemos 400 monedas! Ahora vamos a enviar 100 de esas monedas a la dirección de nuestro amigo.
 ```text
 let sendAmount = new BN(100); //amounts are in BN format
 let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // address format is Bech32
@@ -93,5 +92,5 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Mjk2NTk0ODAsLTY3NDAwNTI5Nl19
+eyJoaXN0b3J5IjpbMTQxNDc3NzQyNSwtNjc0MDA1Mjk2XX0=
 -->
