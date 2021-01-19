@@ -690,7 +690,7 @@ Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp
 
 ## **Operación de Acuñado SECP256K1**
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
+Una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o " consume una salida de acuñación SECP256K1, crea una nueva salida de acuñación y envía una salida de transferencia a un nuevo conjunto de propietarios.
 
 ### **Que Contiene una Operación de Acuñado SECP256K1**
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk2Mjk2MDA1OCw5NzQzNjAxMDQsLTkzOT
-Y2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4
-MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLT
-E2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0
-Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC
-0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5
-MTA3ODUxXX0=
+eyJoaXN0b3J5IjpbMTUzNzQ3NDgxMSwtOTYyOTYwMDU4LDk3ND
+M2MDEwNCwtOTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3
+OSwxMjYzOTAzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLT
+ExOTU0OTM1NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4
+MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMy
+wyNTI0MjA4MTAsLTE5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5
+NjMxMjQwMF19
 -->
