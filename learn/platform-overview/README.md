@@ -29,7 +29,7 @@ Algunos ejemplos son:
 
 ### Soporte para Blockchains Privadas
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+Se puede crear una subnet en la que sólo pueden unirse ciertos validadores predefinidos y crear una subnet privada en la que el contenido de las blockchains sea visible sólo para esos validadores. Esto es ideal para las organizaciones interesadas en mantener su información privada.
 
 ### Separation of Concerns
 
@@ -90,5 +90,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjM0MTE3NDBdfQ==
+eyJoaXN0b3J5IjpbMTg1MTY1MzQwMV19
 -->
