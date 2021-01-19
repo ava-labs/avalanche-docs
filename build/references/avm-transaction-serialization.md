@@ -1618,7 +1618,7 @@ Una transacción de exportación no firmada contiene un `BaseTx`, `DestinationCh
 * **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
 * **`Outs`** es un conjunto de longitud variable de salidas transferibles.
 
-### Especificación Gantt de un Tx de Exportación No Firmado
+### Especificación Gantt de una Transacción de Exportación No Firmada
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1632,7 +1632,7 @@ Una transacción de exportación no firmada contiene un `BaseTx`, `DestinationCh
                           +---------------------------------------+
 ```
 
-### Especificación Proto de un Tx de Exportación No Firmado
+### Especificación Proto de una Transacción de Exportación No Firmada
 
 ```text
 message ExportTx {
@@ -1642,9 +1642,9 @@ message ExportTx {
 }
 ```
 
-### Ejemplo de un Tx de Exportación No Firmado
+### Ejemplo de una Transacción de Exportación No Firmada
 
-Hagamos un ejemplo de un Tx de exportación no firmado que utilice las entradas y salidas de los ejemplos anteriores:
+Hagamos un ejemplo de una Transacción de Exportación No Firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1920,7 +1920,7 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyODAwNjE2NiwxMTQ2NzI4Mzg5LDU1OT
+eyJoaXN0b3J5IjpbMTI5MzM3NDY2NiwxMTQ2NzI4Mzg5LDU1OT
 U2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwt
 OTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOT
 AzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1
