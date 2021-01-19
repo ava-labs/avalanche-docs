@@ -658,7 +658,7 @@ message SECP256K1TransferInput {
 
 ### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de transferencia con:
 
 * **`TypeId`**: 5
 * **`Amount`**: 123456789
@@ -685,11 +685,11 @@ Let’s make a payment input with:
 ]
 ```
 
-## Operations
+## Operaciones
 
-Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
+Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
 
-## **SECP256K1 Mint Operation**
+## **Operación de Acuñado SECP256K1**
 
 A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
 
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxNDk3OTY3OSwyMTMxNzYyNzMwLDQ5OT
-MwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3OTc0
-NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX
-0=
+eyJoaXN0b3J5IjpbOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5Mz
+A2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3
+LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ
+==
 -->
