@@ -169,11 +169,11 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-#### Agrega
+#### Agregado
 
-Calculate aggregate transaction data over a time frame.
+Calcular los datos agregados de las transacciones a lo largo de un período de tiempo.
 
-**Params**
+**Parámetros**
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExODIxMDc1OV19
+eyJoaXN0b3J5IjpbNzk0NzU4OTY3XX0=
 -->
