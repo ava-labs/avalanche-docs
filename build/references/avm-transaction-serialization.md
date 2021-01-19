@@ -1287,7 +1287,7 @@ Una transacción de creación de activo no firmada contiene un `BaseTx`, `Name`,
 * **`Denomination`*** es un byte que define la divisibilidad del activo que esta transacción creará. Por ejemplo, el símbolo AVAX es divisible en billonésimas. Por lo tanto, la denominación del vale AVAX es 9. La denominación no debe ser mayor de 32.
 * **`InitialStates`** es un arreglo de longitud variable que define las extensiones de características que este activo soporta, y el estado inicial de esas extensiones de características.
 
-### Especificación Gantt de un Activo de Creación Tx No Firmado
+### Especificación Gantt de una Transacción de Creación de Activo No Firmada
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1306,7 +1306,7 @@ Una transacción de creación de activo no firmada contiene un `BaseTx`, `Name`,
                                   +--------------------------------------+
 ```
 
-### Especificación Proto de un Activo de Creación Tx No Firmado
+### Especificación Proto de una Transacción de Creación de Activo No Firmada
 
 ```text
 message CreateAssetTx {
@@ -1318,9 +1318,9 @@ message CreateAssetTx {
 }
 ```
 
-### Ejemplo de un Activo de Creación Tx No Firmado
+### Ejemplo de una Transacción de Creación de Activo No Firmada
 
-Hagamos un activo de creación Tx no firmado que utilice las entradas y salidas de los ejemplos anteriores:
+Hagamos una transacción de creación de activo no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
 * `Name`: `Volatility Index`
@@ -1920,7 +1920,7 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODgzMjQyNTg0LDExNDY3MjgzODksNTU5NT
+eyJoaXN0b3J5IjpbMjYyMTEyMzU2LDExNDY3MjgzODksNTU5NT
 Y1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOTc0MzYwMTA0LC05
 Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MD
 MyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3
