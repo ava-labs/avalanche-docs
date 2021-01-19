@@ -31,9 +31,9 @@ Algunos ejemplos son:
 
 Se puede crear una subnet en la que sólo pueden unirse ciertos validadores predefinidos y crear una subnet privada en la que el contenido de las blockchains sea visible sólo para esos validadores. Esto es ideal para las organizaciones interesadas en mantener su información privada.
 
-### Separation of Concerns
+### Separación de Inquietudes
 
-In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
+En una red heterogénea de blockchains, algunos validadores no querrán validar ciertas blockchains porque simplemente no tienen interés en ellas. El modelo de subnet permite a los validadores sólo preocuparse de las blockchains que les interesan. Esto reduce la carga de los validadores.
 
 ### Application-Specific Requirements
 
@@ -90,5 +90,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1MTY1MzQwMV19
+eyJoaXN0b3J5IjpbLTUxMzY5MjY0NV19
 -->
