@@ -305,7 +305,7 @@ Flags:
       --staking-port uint                    Puerto del servidor de consenso. (por defecto 9651)
       --staking-tls-cert-file string         Archivo de certificado TLS para conexiones de staking. Relativo al binario avash si no empieza con '/'. Ejemplo: certs/keys1/staker.crt
       --p2p-tls-enabled                      Requiere autenticación TLS para todas las conexiones P2P.
-      --staking-enabled                  Utiliza el stake (también requiere que se habiliten las tls p2p).
+      --staking-enabled                      Utiliza el stake (también requiere que se habiliten las tls p2p).
       --staking-tls-key-file string          Archivo private key TLS para conexiones de staking. Relativo al binario avash si no empieza con '/'. Ejemplo: certs/keys1/staker.key
       --xput-server-port uint                El puerto del servidor de pruebas de rendimiento obsoleto. (por defecto 9652)
 ```
@@ -313,9 +313,9 @@ Flags:
 **varstore**
 
 ```text
-Tools for creating variable stores and printing variables within them. Using this 
-    command we can create variable stores, list all variables they store, and print data 
-    placed into these stores. Variable assignment and update is often managed by avash commands.
+Herramientas para crear almacenes de variables e imprimir variables dentro de ellos. Usando esto 
+    podemos crear almacenes de variables, listar todas las variables que almacenan e imprimir datos 
+       en estos alamacenes. La asignación y actualización de las variables a menudo es administrada por los comandos avash.
 
 Uso:
   avash varstore [command] [flags]
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjU4MDA5MDUsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTM1MjMxMzQ0NSwxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
