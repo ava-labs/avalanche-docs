@@ -66,18 +66,18 @@ let txid = await xchain.issueTx(signedTx);
 Ahora que enviamos la transacción a la red, lleva unos segundos determinar si la transacción ha sido aprobada. Podemos obtener un estado actualizado de la transacción usando el TxID a través de la X-Chain.
 
 ```text
-// returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
+// retorna cualquiera entre: "Accepted", "Processing", "Unknown", y "Rejected"
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+Los estados pueden ser "Aceptado", "Procesando", "Desconocido" y "Rechazado":
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Aceptada" indica que la transacción ha sido aceptada como válida por la red y ejecutada
+* "Procesamiento" indica que la transacción está siendo votada.
+* "Desconocido" indica que el nodo no sabe nada de la transacción, lo que indica que el nodo no lo tiene
+* "Rechazado" indica que el nodo sabe de la transacción, pero entró en conflicto con una transacción aceptada
 
-## Check the results <a id="check-the-results"></a>
+## Revisa los resultados <a id="check-the-results"></a>
 
 The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
 
@@ -92,6 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzNjQ3Mzk4MiwxNDE0Nzc3NDI1LC02Nz
-QwMDUyOTZdfQ==
+eyJoaXN0b3J5IjpbODI1ODA0NjYzLDE0MTQ3Nzc0MjUsLTY3ND
+AwNTI5Nl19
 -->
