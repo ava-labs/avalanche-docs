@@ -1506,10 +1506,10 @@ Hagamos un ejemplo de una operación Tx no firmada que utilice las entradas y sa
 Un Tx de importación no firmado contiene un `BaseTx`, `SourceChain` y`Ins`. \* El `TypeID`es `0x00000003`.
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`** es una identificación de blockchain de fuente de 32 bytes.
+* **`Ins`** es un conjunto de longitud variable de entradas transferibles.
 
-### Gantt Unsigned Import Tx Specification
+### Especificación Gantt de un Tx de Importación No Firmado
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1523,7 +1523,7 @@ Un Tx de importación no firmado contiene un `BaseTx`, `SourceChain` y`Ins`. \* 
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Especificación Proto de un Tx de Importación No Firmado
 
 ```text
 message ImportTx {
@@ -1533,9 +1533,9 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Ejemplo de un Tx de Importación No Firmado
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Hagamos un ejemplo de un Tx de Importación No Firmado que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “Example BaseTx as defined above” but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzNzYwODc5OCw2Njg4ODMyODMsLTc3NT
+eyJoaXN0b3J5IjpbLTUzOTgzNDM2Myw2Njg4ODMyODMsLTc3NT
 c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
 LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
 c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
