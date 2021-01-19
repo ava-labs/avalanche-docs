@@ -22,9 +22,9 @@ Avash proporciona la capacidad de ejecutar scripts Lua que pueden ejecutar una s
 
 ## Configuración<a id="configuration"></a>
 
-Aunque Avash puede iniciarse sin un archivo de configuración preestablecido, está disponible como una opción para ajustar algunas de las configuraciones globales del shell. Avash buscará `.avash.yaml` en el directorio `$HOME` por defecto, pero la etiqueta `--config` puede usarse para establecer una ruta para buscar. de archivo de configuración personalizada
+Aunque Avash puede iniciarse sin un archivo de configuración preestablecido, está disponible como una opción para ajustar algunas de las configuraciones globales del shell. Avash buscará `.avash.yaml` en el directorio `$HOME` por defecto, pero la etiqueta `--config` puede usarse para establecer una ruta de archivo de configuración personalizada para buscar.
 
-Below is the format of an Avash configuration file:
+A continuación se muestra el formato de un archivo de configuración de Avash:
 
 ```text
 avalancheLocation: <filepath>
@@ -35,11 +35,11 @@ log:
   dir: <directory>
 ```
 
-The field arguments are described as follows:
+Los argumentos de campo se describen a continuación:
 
-* `<filepath>` - A full path to a file. Example: `/home/username/file.txt`
-* `<directory>` - A full path to a directory. Example: `/home/username/folder`
-* `<log-level>` - A valid log level to filter logged messages. Must be one of: `{verbo, debug, info, warn, error, fatal, off}`
+* `<filepath>` - Una ruta completa a un archivo. Ejemplo: `/home/username/file.txt`
+* `<directory>` - Una ruta completa a un directorio. Ejemplo:  `/home/username/folder`
+* `<log-level>` - Un nivel de registro válido para filtrar los mensajes registrados. Debe ser alguno de: `{verbo, debug, info, warn, error, fatal, off}`
 
 ### Fields <a id="fields"></a>
 
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTEyNjU1NzMsLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbLTE5MjIzMDI1NTIsLTI4MTcxODA4XX0=
 -->
