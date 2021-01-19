@@ -18,7 +18,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
 * **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Especificación Gantt de Salida Transferible
+### Especificación Gantt de una Salida Transferible
 ```text
 +----------+----------+-------------------------+
 | asset_id : [32]byte |                32 bytes |
@@ -29,7 +29,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Especificación Proto de la Salida  Transferible
+### Especificación Proto de una Salida Transferible
 
 ```text
 message TransferableOutput {
@@ -38,7 +38,7 @@ message TransferableOutput {
 }
 ```
 
-### Ejemplo de Salida Transferible
+### Ejemplo de una Salida Transferible
 
 Hagamos una salida transferible:
 
@@ -1919,11 +1919,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTU0OTM1NywtMTYyODI1Mjc1MywtMT
-Y3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2
-MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMT
-Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
-MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
-w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
-NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMT
+YyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQz
+OTYyLC0xOTQwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLT
+E5NDMyMzQwNywtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5Nzkx
+MDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NT
+AsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEy
+MjU3OTk4MjFdfQ==
 -->
