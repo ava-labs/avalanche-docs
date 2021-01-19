@@ -277,7 +277,7 @@ Uso:
   avash startnode [node name] args... [flags]
 
 Flags:
-      --assertions-enabled                   Pon en marcha la ejecución de la afirmación. ( Por defecto verdadero)
+      --assertions-enabled                   Pon en marcha la ejecución de la afirmación. (Por defecto verdadero)
       --avax-tx-fee uint                     Comisión de la transacción, en nAVAX.
       --bootstrap-ids string                 Lista separada por comas de ID's de pares de bootstrap con los que conectarse. Ejemplo: JR4dVmy6ffUGAKCBDkyCbeZbyHQBeDsET,8CrVPQZ4VSqgL8zTdvL14G8HqAfrBr4z
       --bootstrap-ips string                 Lista separada por comas de nodos bootstrap a los que conectarse. Ejemplo: 127.0.0.1:9630,127.0.0.1:9620
@@ -285,11 +285,11 @@ Flags:
       --data-dir string                      Nombre del directorio de la reserva de datos.
       --db-dir string                        Directorio de la base de datos del estado de Avalanche. (por defecto "db1")
       --db-enabled                           Enciende el almacenamiento persistente. (Por defecto verdadero)
-  -h, --help                                 ayuda para startnode
+  -h, --help                                 Ayuda para startnode
       --http-port uint                       Puerto del servidor HTTP. (default 9650)
-      --http-tls-cert-file string            TLS certificate file for the HTTPS server.
-      --http-tls-enabled                     Upgrade the HTTP server to HTTPS.
-      --http-tls-key-file string             TLS private key file for the HTTPS server.
+      --http-tls-cert-file string            Archivo de certificado TLS para el servidor HTTPS.
+      --http-tls-enabled                     Actualiza el servidor HTTP a HTTPS.
+      --http-tls-key-file string             Archivo private key TLS para el servidor HTTPS.
       --log-dir string                       Name of directory for the node's logging. (default "logs")
       --log-level string                     Specify the log level. Should be one of {all, debug, info, warn, error, fatal, off} (default "all")
       --meta string                          Override default metadata for the node process.
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzNTA4MDAxMCwxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTExMjIyMTUzMTAsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
