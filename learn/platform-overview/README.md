@@ -35,13 +35,13 @@ Se puede crear una subnet en la que sólo pueden unirse ciertos validadores pred
 
 En una red heterogénea de blockchains, algunos validadores no querrán validar ciertas blockchains porque simplemente no tienen interés en ellas. El modelo de subnet permite a los validadores sólo preocuparse de las blockchains que les interesan. Esto reduce la carga de los validadores.
 
-### Requisitos Específicos de la Aplicación
+### Requisitos Específicos de Aplicación
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+Diferentes aplicaciones basadas en blockchains pueden requerir que los validadores tengan ciertas propiedades. Supongamos que hay una aplicación que requiere grandes cantidades de RAM o potencia de CPU. Una subnet podría requerir que los validadores cumplan ciertos [requisitos de hardware](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) para que la aplicación no sufra de bajo rendimiento debido a los validadores lentos.
 
 ## Virtual Machines
 
-A **Virtual Machine** \(VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+Una **Virtual Machine** \(o VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
 
 When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
 
@@ -90,5 +90,5 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTMwMzAzNTk0XX0=
+eyJoaXN0b3J5IjpbNjM5MDI1MDc3LDkzMDMwMzU5NF19
 -->
