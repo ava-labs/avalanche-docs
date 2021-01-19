@@ -78,9 +78,9 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
 * **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
 * **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
-* **`Input`** is a transferable input object.
+* **`Input`** es un elemento de entrada transferible.
 
-### Gantt Transferable Input Specification
+### Especificación Gantt de Entrada Transferible
 
 ```text
 +------------+----------+------------------------+
@@ -96,7 +96,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Especificación Proto de la Entrada Transferible
 
 ```text
 message TransferableInput {
@@ -107,9 +107,9 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Ejemplo de entrada transferible
 
-Let’s make a transferable input:
+Hagamos una entrada transferible:
 
 * **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
 * **`UTXOIndex`**: `0`
@@ -144,9 +144,9 @@ Let’s make a transferable input:
 ]
 ```
 
-## Outputs
+## Salidas
 
-Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwners`.
+Las salidas tienen dostipos posibles: `SECP256K1TransferOutput`y `SECP256K1OutputOwners`.
 
 ## SECP256K1 Transfer Output
 
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4ODUyNzQ3NywtMzY3OTM5MDcwLC00OD
-IzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTE3MjYxMDk1MDYsLTM2NzkzOTA3MCwtND
+gyMzM2NTIzXX0=
 -->
