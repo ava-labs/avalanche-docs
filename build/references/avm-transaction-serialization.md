@@ -256,7 +256,7 @@ Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-
 
 Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** es el ID para este tipo de salida. Es "0x00000007".
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000007`.
 * **`Amount`** es un largo que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
 * **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
@@ -347,7 +347,7 @@ Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-ad
 
 Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** es el ID para este tipo de salida. Es "0x00000006".
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000006`.
 * **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
@@ -431,7 +431,7 @@ Una salida de transferencia NFT es una NFT que es propiedad de una colección de
 
 Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** es el ID para este tipo de salida. Es "0x0000000b".
+* **`TypeID`** es el ID para este tipo de salida. Es `0x0000000b`.
 * **`GroupID`** es un int que especifica el grupo con el que se emitió este NFT.
 * **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
 * **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
@@ -533,7 +533,7 @@ Una salida acuñación NFT es una NFT que es propiedad de una colección de dire
 
 Una salida de acuñación NFT contiene un `TypeID`, `GroupID`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** es el ID para este tipo de salida. Es "0x0000000a".
+* **`TypeID`** es el ID para este tipo de salida. Es `0x0000000a`.
 * **`GroupID`** es un int que especifica el grupo al que se emite este NFT.
 * **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
@@ -1921,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNT
-c1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5
-ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbMjA3MjY1NjYyMyw0OTkzMDY2ODcsLTEyND
+k3NDU0NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5
+OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
