@@ -10,7 +10,7 @@ Esta API es solamente alcanzable si el nodo se inició con el [argumento de lín
 
 La creación de tokens de autorización debe ser permisionada. Si ejecutas tu nodo con  `--api-auth-required`, entonces también deberás especificar una contraseña para el token de autorización con el argumento  `--api-auth-password`. Debes indicar esta contraseña en función de crear/revocar un token de autorización.
 
-Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+Notar que si ejecutas tu nodo con `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
 
 ## Format
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzNDU0OTk1NCwxNTMxNTU1Mjc0XX0=
+eyJoaXN0b3J5IjpbLTU4ODUzNzk3MSwxNTMxNTU1Mjc0XX0=
 -->
