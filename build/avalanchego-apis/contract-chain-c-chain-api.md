@@ -310,14 +310,14 @@ avax.import({
 **Petición**
 
 * `to` es la dirección a la cual se enviará el activo. Esta debe ser la misma en el argumento `to` en la llamada `export` correspondiente en la C-Chain's.
-* `sourceChain` es el ID o sobrenombre de la cchain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `sourceChain` es el ID o sobrenombre de la cadena desde la cual el activo será importado.  Para importar fondos desde la X-Chain, utiliza `"X"`.
+* `username` es el usuario que controla la dirección `to`.
 
-**Response**
+**Respuesta**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID` es el ID de la transacción completada ImportTx.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -333,7 +333,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta Ejemplo
 
 ```javascript
 {
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwODgxMTI1NSwyNjkwMDc2MDUsMTQ5Nz
-E4ODAxOCwxNjU3MjQ4NDQyLC0xOTAxMDg0MjQ5XX0=
+eyJoaXN0b3J5IjpbMzUzODg0MTQ1LDI2OTAwNzYwNSwxNDk3MT
+g4MDE4LDE2NTcyNDg0NDIsLTE5MDEwODQyNDldfQ==
 -->
