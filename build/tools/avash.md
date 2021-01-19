@@ -321,11 +321,11 @@ Uso:
   avash varstore [command] [flags]
 
 Comandos Disponibles:
-  create      Creates a variable store.
-  list        Lists all stores. If store provided, lists all variables in the store.
-  print       Prints a variable that is within the store.
-  set         Sets a simple variable that within the store.
-  storedump   Writes the store to a file.
+  create      Crea un almacenamiento variable.
+  list        Enumera todos los almacenamientos. Si el almacenamiento se proporciona, lista todas las variables del almacenamiento.
+  print       Prints a variable that is within the almacenamiento .
+  set         Sets a simple variable that within the almacenamiento .
+  storedump   Writes the almacenamiento  to a file.
   vardump     Writes the variable to a file.
 ```
 
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1MjMxMzQ0NSwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTMxOTQzOTUwMCwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
