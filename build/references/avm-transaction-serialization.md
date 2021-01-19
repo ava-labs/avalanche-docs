@@ -1842,7 +1842,7 @@ Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
 * **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
-### Gantt UTXO Specification
+### Especificación Gantt de un UTXO
 
 ```text
 +--------------+----------+-------------------------+
@@ -1860,8 +1860,7 @@ Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
-
+### Especificación Proto de un UTXO
 ```text
 message Utxo {
     uint16 codec_id = 1;     // 02 bytes
@@ -1872,9 +1871,9 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### Ejemplo de un UTXO
 
-Let’s make a UTXO from the signed transaction created above:
+Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1920,11 +1919,11 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjUwNzA4MTEsLTE2MjgyNTI3NTMsLT
-E2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4
-NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLT
-E2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3
-NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1Nz
-csNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5
-NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbLTExOTU0OTM1NywtMTYyODI1Mjc1MywtMT
+Y3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2
+MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMT
+Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
+MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
+w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
+NDc4Mjc5OV19
 -->
