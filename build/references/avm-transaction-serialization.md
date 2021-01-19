@@ -1610,12 +1610,12 @@ Hagamos un ejemplo de un Tx de Importación No Firmado que utilice las entradas 
 ]
 ```
 
-### What Unsigned Export Tx Contains
+### Que Contiene un Tx de Exportación No Firmado
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
+Tx de exportación no firmado contiene un `BaseTx`, `DestinationChain`, y `Outs`. El`TypeID` es  `0x00000004`.
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
+* **`Outs`** es un conjunto de longitud variable de salidas transferibles.
 
 ### Gantt Unsigned Export Tx Specification
 
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzOTgzNDM2Myw2Njg4ODMyODMsLTc3NT
+eyJoaXN0b3J5IjpbLTk1Mzc1NTUyMCw2Njg4ODMyODMsLTc3NT
 c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
 LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
 c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
