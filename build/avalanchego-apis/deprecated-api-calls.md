@@ -147,11 +147,11 @@ La v1.0.4 agregó el argumento `includeReason`. Si era `false` o no se especific
 }
 ```
 
-Donde `reason`  es el motivo por el cual la transacción fue desechada. `reason` está presente en la respuesta solamenis only present if `status` is `"Dropped"`.
+Donde `reason`  es el motivo por el cual la transacción fue desechada. `reason` está presente en la respuesta solamente si el `status` es `"Dropped"`.
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+Desde v1.0.6, el argumento `includeReason` es ignorado, y la respuesta de este método siempre es con el nuevo formato.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMjM4MDI5MjIsLTczMTM4MDAsMTAwMz
+eyJoaXN0b3J5IjpbLTE3OTEzMjgxNTcsLTczMTM4MDAsMTAwMz
 k3MzU1OF19
 -->
