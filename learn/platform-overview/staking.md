@@ -28,9 +28,9 @@ Las recompensas del staking se envían a la dirección de tu wallet al final del
 * El peso máximo de un validador \(su propio stake + el stake delegado en ellos\) es el mínimo de 3e6 AVAX y 5 veces la cantidad que el validador puso en stake. Por ejemplo, si pusiste en stake 2 000 AVAX para ser un validador, sólo 8 000 AVAX pueden ser delegados al total de tu nodo \(no por delegador\).
 * El porcentaje mínimo de tiempo que un validador debe estar correcto y en línea para recibir una recompensa es del 60%
 
-## Validators
+## Validadores
 
-**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+**Los validadores** protegen Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
 
 When you add a node to the validator set, you specify:
 
@@ -104,6 +104,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjUxMzM5NzcsNTc2ODA1OTkxLC03MT
-c3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbLTc0NDQ1NzE2Niw1NzY4MDU5OTEsLTcxNz
+cxOTgxMV19
 -->
