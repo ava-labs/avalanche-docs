@@ -1276,7 +1276,7 @@ Hagamos una base tx que utilice las entradas y salidas de los ejemplos anteriore
 ]
 ```
 
-### What Unsigned Create Asset Tx Contains
+### Que Contiene el Activo de Creación Tx No Firmado
 
 An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
 
@@ -1920,10 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIxMjY5NTY1MiwtMTk0MDE4NjI1NywxNj
-U5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3
-ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsND
-k5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5
-NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OT
-ldfQ==
+eyJoaXN0b3J5IjpbLTE4MTY2NjU5MjksLTE5NDAxODYyNTcsMT
+Y1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3LC0xNjk5OTU5
+Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMxNzYyNzMwLD
+Q5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0NTc3LDY2MDE3
+OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNz
+k5XX0=
 -->
