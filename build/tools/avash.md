@@ -331,12 +331,12 @@ Comandos Disponibles:
 
 ## Escribir los Scripts <a id="writing-scripts"></a>
 
-Avash importa [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts have hooks available to them which allows the user to write code which invokes the current Avash environment.
+Avash importa [gopher-lua](https://github.com/yuin/gopher-lua) para ejecutar los scripts de Lua. Los scripts tienen ganchos disponibles que permiten al usuario escribir código que llame al entorno actual de Avash.
 
-The functions available to Lua are:
+Las funciones disponibles para Lua son:
 
-* `avash_call` - Takes a string and runs it as an Avash command, returning output
-* `avash_sleepmicro` - Takes an unsigned integer representing microseconds and sleeps for that long
+* `avash_call` - Toma una cadena y la ejecuta como un comando de Avash, devolviendo la salida
+* `avash_sleepmicro` - Toma un entero sin signo representando microsegundos y duerme por ese tiempo
 * `avash_setvar` - Takes a variable scope \(string\), a variable name \(string\), and a variable \(string\) and places it in the variable store. The scope must already have been created.
 
 When writing Lua, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0NTM3MDU3MiwxMDUzNzEyMzk1LC0yOD
-E3MTgwOF19
+eyJoaXN0b3J5IjpbLTEwOTM3MDU1NzIsMTA1MzcxMjM5NSwtMj
+gxNzE4MDhdfQ==
 -->
