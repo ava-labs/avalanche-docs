@@ -69,7 +69,7 @@ La razón más probable de que su nodo no esté conectado a otro nodo es que el 
 
 #### Gestión Secreta <a id="secret-management"></a>
 
-Lo único que necesitas mantener secreto en tu nodo validador es su Staking Key, la clave TLS que determina el ID de tu nodo. La primera vez que inicias un nodo, la Staking Key se crea y se pone en `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
+Lo único que necesitas mantener secreto en tu nodo validador es su Staking Key, la clave TLS que determina el ID de tu nodo. La primera vez que inicias un nodo, la Staking Key se crea y se pone en `$HOME/.avalanchego/staking/staker.key`. Deberías hacer una copia de seguridad de este archivo \(y `staker.crt`\) en un lugar seguro. Perder tu Staking Key podría poner en peligro tu recompensa de validación, ya que tu nodo tendrá un nuevo ID.
 
 You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in “cold" addresses whose private key is not on any computer.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzOTg2NDU4MSw1NDI1Njc2NDgsLTM2Mj
+eyJoaXN0b3J5IjpbMTA5NzUzNzk1Miw1NDI1Njc2NDgsLTM2Mj
 c5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
 -->
