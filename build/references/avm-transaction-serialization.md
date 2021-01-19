@@ -243,7 +243,7 @@ Hagamos una operación transferible:
 
 ## Salidas
 
-Las salidas o  tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
+Las salidas o "Outputs" tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
 
 
 ##  Salida de Transferencia SECP256K1
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTgwMTc2MDcsLTkzOTY2NzgwNCwtND
-M0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAx
-MDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NT
-MsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0
-MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MD
-csLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIx
-MzE3NjI3MzBdfQ==
+eyJoaXN0b3J5IjpbLTYyOTAzMDYzNywtOTM5NjY3ODA0LC00Mz
+Q0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MDEw
+MDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1My
+wtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQw
+MTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNy
+wtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEz
+MTc2MjczMF19
 -->
