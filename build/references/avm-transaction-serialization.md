@@ -247,9 +247,10 @@ Hagamos una operación transferible:
 
 Las salidas tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
 
-## SECP256K1 Transfer Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+##  Salida de Transferencia SECP256K1
+
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado.
 
 ### **What SECP256K1 Transfer Output Contains**
 
@@ -1915,5 +1916,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4MjQ5MjY4MCwxOTY0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
 -->
