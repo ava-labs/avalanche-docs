@@ -10,18 +10,18 @@
 Tenga en cuenta que este comunicado contiene cambios de última hora descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). Cambia el formato de respuesta por defecto de platform.getTxStatus y platform.getCurrentValidators. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
 {% endhint %}
 
-* Removed deprecated formats of  platform.getTxStatus and platform.getCurrentValidators.
-* Added support for hex encodings of imported and exported users from the keystore API.
-* Set golang requirement to v1.15.5 to avoid a DoS vulnerability found in the golang standard lib.
-* Added API clients to act as helpers interacting with the node software.
-* Enabled falling back to bootstrapping if a node becomes disconnected from the rest of the network.
-* Fixed the GetUTXOs APIs when UTXOs referenced multiple addresses.
-* Refactored binary encoding to better generalize RPC options.
-* Fixed IP block filtering to correctly set the window length.
-* Generalized the codec package to be able to manage multiple codecs with different versions.
-* Added Epoch to the Vertex interface in preparation of a future release.
-* Deferred transaction hashing to reduce CPU/Memory utilization past fast checks.
-* For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
+* Se han eliminado los formatos obsoletos de platform.getTxStatus y platform.getCurrentValidators.
+* Se añadió soporte para codificaciones hexadecimales de usuarios importados y exportados desde la API de keystore.
+* Se ha establecido el requisito de golang a la v1.15.5 para evitar una vulnerabilidad de DoS encontrada en el estándar golang lib.
+* Se han añadido clientes de la API para que actúen como ayudantes interactuando con el software del nodo.
+* Se ha habilitado la posibilidad de volver al arranque si un nodo se desconecta del resto de la red.
+* Arregladas las APIs de GetUTXOs cuando UTXOs referenciaba múltiples direcciones.
+* Se refactorizó la codificación binaria para generalizar mejor las opciones de RPC.
+* Se ha fijado el filtrado de bloque IP para establecer correctamente la longitud de la ventana.
+* Se ha generalizado el paquete de códecs para poder manejar múltiples códecs con diferentes versiones.
+* Se añadió Epoch a la interfaz Vertex en preparación de una futura versión.
+* Se aplazó el hashing de las transacciones para reducir la utilización de la CPU/Memoria más allá de los chequeos rápidos.
+* Para aquellos usando [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
 
@@ -97,5 +97,5 @@ Anything that depends on platform.getTxStatus should switch to using the include
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQ4OTU1ODg3LC0xMjQ4Nzc1MTc2XX0=
+eyJoaXN0b3J5IjpbODcwNjAwMzE1LC0xMjQ4Nzc1MTc2XX0=
 -->
