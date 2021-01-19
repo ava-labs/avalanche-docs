@@ -1872,9 +1872,9 @@ message Utxo {
 }
 ```
 
-### Ejemplo de un UTXO
+### Ejemplo de una UTXO
 
-Ejemplo de un UTXO de la transacción firmada creada anteriormente:
+Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTM0MTgyOTEsMTE0NjcyODM4OSw1NT
-k1NjU5LC04MjM5Mjg4ODAsLTk2Mjk2MDA1OCw5NzQzNjAxMDQs
-LTkzOTY2NzgwNCwtNDM0NDg5MTA2LC05MDg1NDc1NzksMTI2Mz
-kwMzI4MSwxNTI2NTAxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkz
-NTcsLTE2MjgyNTI3NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLT
-c3NTc0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIw
-ODEwXX0=
+eyJoaXN0b3J5IjpbOTE2MDE1ODQ1LC0xMjkzNDE4MjkxLDExND
+Y3MjgzODksNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgs
+OTc0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NT
+Q3NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5
+MCwtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNj
+Y4ODgzMjgzLC03NzU3NDM5NjIsLTE5NDAxODYyNTcsMTY1OTE4
+MjAzXX0=
 -->
