@@ -71,15 +71,15 @@ La razón más probable de que su nodo no esté conectado a otro nodo es que el 
 
 Lo único que necesitas mantener secreto en tu nodo validador es su Staking Key, la clave TLS que determina el ID de tu nodo. La primera vez que inicias un nodo, la Staking Key se crea y se pone en `$HOME/.avalanchego/staking/staker.key`. Deberías hacer una copia de seguridad de este archivo \(y `staker.crt`\) en un lugar seguro. Perder tu Staking Key podría poner en peligro tu recompensa de validación, ya que tu nodo tendrá un nuevo ID.
 
-You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in “cold" addresses whose private key is not on any computer.
+No necesitas tener fondos de AVAX en tu nodo de validación. De hecho, es mejor práctica **not** tener muchos fondos en tu nodo. Casi todos tus fondos deberían estar en direcciones "cold" cuya private key no esté en ningún ordenador.
 
-#### Monitoring <a id="monitoring"></a>
+#### Monitoreo<a id="monitoring"></a>
 
-Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
+Siga este tutorial para aprender a controlar el tiempo de actividad de su nodo, su salud general, etc.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
-## Delegators
+## Delegadores
 
 A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
 
@@ -105,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA5NzUzNzk1Miw1NDI1Njc2NDgsLTM2Mj
-c5OTM4MSw1NzY4MDU5OTEsLTcxNzcxOTgxMV19
+eyJoaXN0b3J5IjpbOTk1NTU0ODgsNTQyNTY3NjQ4LC0zNjI3OT
+kzODEsNTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
 -->
