@@ -1501,9 +1501,9 @@ Hagamos un ejemplo de una operación Tx no firmada que utilice las entradas y sa
 ]
 ```
 
-### What Unsigned Import Tx Contains
+### Que Contiene un Tx de Importación No Firmado
 
-An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
+Un Tx de importación no firmado contiene un `BaseTx`, `SourceChain` y`Ins`. \* El `TypeID`es `0x00000003`.
 
 * **`BaseTx`**
 * **`SourceChain`** is a 32-byte source blockchain ID.
@@ -1920,10 +1920,10 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY4ODgzMjgzLC03NzU3NDM5NjIsLTE5ND
-AxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3
-LC0xNjk5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMT
-MxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0
-NTc3LDY2MDE3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMS
-wxOTY0NzgyNzk5XX0=
+eyJoaXN0b3J5IjpbMTYzNzYwODc5OCw2Njg4ODMyODMsLTc3NT
+c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
+LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
+c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
+NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC
+0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
 -->
