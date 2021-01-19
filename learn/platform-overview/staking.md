@@ -81,9 +81,9 @@ Siga este tutorial para aprender a controlar el tiempo de actividad de su nodo, 
 
 ## Delegadores
 
-A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
+Un delegador es un poseedor de token, que quiere participar en el stake, pero elige confiar en un nodo de validación existente a través de la delegación.
 
-When you delegate stake to a validator, you specify:
+Cuando delegas el stake a un validador, especificas:
 
 * The ID of the node you’re delegating to
 * When you want to start/stop delegating stake \(must be while the validator is validating\)
@@ -105,6 +105,7 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTk1NTU0ODgsNTQyNTY3NjQ4LC0zNjI3OT
-kzODEsNTc2ODA1OTkxLC03MTc3MTk4MTFdfQ==
+eyJoaXN0b3J5IjpbLTIwNTk3MDQzNzcsOTk1NTU0ODgsNTQyNT
+Y3NjQ4LC0zNjI3OTkzODEsNTc2ODA1OTkxLC03MTc3MTk4MTFd
+fQ==
 -->
