@@ -17,7 +17,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
 * **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
 
-### Gantt Transferable Output Specification
+### Especificación Gantt de una Salida Transferible
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Especificación Proto de una Salida Transferible
 
 ```text
 message TransferableOutput {
@@ -38,9 +38,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Ejemplo de una Salida Transferible
 
-Let’s make a transferable output:
+Hagamos una salida transferible:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -67,9 +67,9 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Entrada transferible
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
 
 ### What Transferable Input Contains
 
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MjYzNjIxOTgsLTM2NzkzOTA3MCwtND
-gyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbOTUyMDc0OSwtMzY3OTM5MDcwLC00ODIzMz
+Y1MjNdfQ==
 -->
