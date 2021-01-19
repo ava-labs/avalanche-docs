@@ -59,14 +59,14 @@ avm.buildGenesis({
             "initialState": {
                 "fixedCap" : [         // Elige el tipo de activo.
                     {                  // Puede ser "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
-                        "amount":1000, // At genesis, address A has
-                        "address":"A"  // 1000 units of asset
+                        "amount":1000, // En el genesis, dirección A tiene
+                        "address":"A"  // 1000 unidades de activo
                     },
                     {
-                        "amount":5000, // At genesis, address B has
-                        "address":"B"  // 1000 units of asset
+                        "amount":5000, // Al genesis, dirección B tiene
+                        "address":"B"  // 1000 unidades del activo
                     },
-                    ...                // Can have many initial holders
+                    ...         // Puedes tener multiples poseedores iniciales
                 ]
             }
         },
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDUyMDQ2ODExLC00NDU4Mzc2OSwtOTgxND
-U4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTE5NTUyODAxODUsLTQ0NTgzNzY5LC05OD
+E0NTg2MzYsMTIzODQzNjE4M119
 -->
