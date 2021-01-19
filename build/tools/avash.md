@@ -195,15 +195,15 @@ Uso:
 **network**
 
 ```text
-Tools for interfacing with remote hosts. Using this command we can
-  deploy and remove node networks via SSH and a configuration file.
+Herramientas para interactuar con hosts remotos. Usando este comando podemos
+  desplegar y eliminar redes de nodos a través de SSH y un archivo de configuración.
 
 Uso:
   avash network [command] [flags]
 
 Comandos Disponibles:
-  deploy      Deploys a remote network of nodes.
-  remove      Removes a remote network of nodes.
+deploy        Despliega una red remota de nodos.
+remove        Remueve una red remota de nodos.
 ```
 
 **CONFIGURATION**
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3MjI2MTgzMywxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTkxOTA0NTc1NywxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
