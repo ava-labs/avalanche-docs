@@ -181,10 +181,10 @@ avax.exportKey({
 
 **Respuesta**
 
-* `privateKey` es la cadena codificada con CB58 representando la llave privada que controla `address`. Tiene prefijo `PrivateKey-` y  and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+* `privateKey` es la cadena codificada con CB58 representando la llave privada que controla `address`. Tiene prefijo `PrivateKey-` y puede usarse para importar una llave vía `avax.importKey`.
+* `privateKeyHex` es la cadena en formato hex representando la llave privada que controla `address`. Puede usarse para importar una cuenta en Metamask.
 
-#### Example Call
+#### Llamada de Ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIzNzcwNDAzLC0xOTAxMDg0MjQ5XX0=
+eyJoaXN0b3J5IjpbLTExNTE0NzI3NCwtMTkwMTA4NDI0OV19
 -->
