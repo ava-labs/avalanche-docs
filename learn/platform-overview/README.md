@@ -89,9 +89,9 @@ EL [API de la P-Chain](../../build/avalanchego-apis/platform-chain-p-chain-api.m
 
 La **C-Chain** permite la creación de smart contracts usando el [API de la C-Chain](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
 
-La Cadena-C es una instancia de la Ethereum Virtual Machine impulsada por [Avalanche](../../).
+La C-Chain es una instancia de la Ethereum Virtual Machine impulsada por [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQ4MTY4ODU5LDY3OTgwMTAxMyw2MzkwMj
-UwNzcsOTMwMzAzNTk0XX0=
+eyJoaXN0b3J5IjpbLTgzOTE5MDU3Miw2Nzk4MDEwMTMsNjM5MD
+I1MDc3LDkzMDMwMzU5NF19
 -->
