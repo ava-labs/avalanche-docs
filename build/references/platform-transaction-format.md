@@ -69,7 +69,7 @@ Hagamos una salida transferible:
 
 ## Entrada transferible
 
-Las entradas transferibles describen un UTXO específico con una entrada de transferencia proporcionada.
+Las entradas transferibles o "Transferable inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
 ### Que Contiene una Entrada Transferible
 
@@ -146,7 +146,7 @@ Hagamos una entrada transferible:
 
 ## Salidas
 
-Las salidas tienen dostipos posibles: `SECP256K1TransferOutput`y `SECP256K1OutputOwners`.
+Las salidas o "Outputs" tienen dos tipos posibles: `SECP256K1TransferOutput`y `SECP256K1OutputOwners`.
 
 ##  Salida de Transferencia SECP256K1
 
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NjY3NDA5NCwyNjUyNTA1OTYsLTUwMz
+eyJoaXN0b3J5IjpbLTkyNzM0MDE2NCwyNjUyNTA1OTYsLTUwMz
 U2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4
 MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
