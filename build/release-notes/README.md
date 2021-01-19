@@ -4,7 +4,7 @@
 
 ![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
-Esta actualización es opcional pero se recomienda. El parche incluye mejoras en la calidad de vida y varias mejoras en el rendimiento. Tenga en cuenta que esta actualización requiere que los parámetros de la CLI se especifiquen con -- en lugar de permitir - o --. Por ejemplo, `-public-ip=127.0.0.1` ya no está permitido y debe especificarse como `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
+Esta actualización es opcional pero se recomienda. El parche incluye mejoras en la calidad de vida y varias mejoras en el rendimiento. Tenga en cuenta que esta actualización requiere que los parámetros de la CLI se especifiquen con -- en lugar de permitir - o --. Por ejemplo, `-public-ip=127.0.0.1` ya no está permitido y debe especificarse como `--public-ip=127.0.0.1`. Por lo demás, esta actualización es compatible con las versiones anteriores.
 
 ```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
@@ -48,5 +48,5 @@ Anything that depends on platform.getTxStatus should switch to using the include
 For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTkyNTk4MzM2XX0=
+eyJoaXN0b3J5IjpbNTQ4ODY4OTVdfQ==
 -->
