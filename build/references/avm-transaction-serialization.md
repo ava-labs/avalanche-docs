@@ -789,11 +789,11 @@ Una operación de acuñado NFT consume una salida de acuñado NFT y envía una s
 
 Una operación de acuñado NFT contiene un `TypeID`, `AddressIndices`, `GroupID`, `Payload`, y`Output` de las direcciones.
 
-* **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Payload`** is an arbitrary string of bytes no longer than 1024 bytes.
-* **`Output`** is a locktime, threshold, and an array of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es la identificación para este tipo de operación. Es `0x0000000c`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`GroupID`** es un int que especifica el grupo al que se emite este NFT.
+* **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
+* **`Output`** es un tiempo de bloqueo, límite y un conjunto de direcciones únicas que corresponden a las private keys que pueden ser usadas para utilizar esta salida. Las direcciones deben ser ordenadas lexicográficamente.
 
 ### **Gantt NFT Mint Op Specification**
 
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMz
-E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
-NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
-E5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbNTM4MzA2ODcwLC0yMDk2MzEyNDAwLDk3OT
+EwNzg1MSwyMTMxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1
+MCwyMDU3NTM0NTc3LDY2MDE3OTc0NywtMTU2NzMxOTk5NCwtMT
+IyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
 -->
