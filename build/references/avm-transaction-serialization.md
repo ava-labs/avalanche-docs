@@ -625,11 +625,12 @@ Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1
 
 ### **Que Contiene una Entrada de Transferencia SECP256K1**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
+
+* **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
+* **`Amount`** es un largo que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
 
 ### **Gantt SECP256K1 Transfer Input Specification**
 
@@ -1920,7 +1921,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzQ5OTU2NzgsLTEyNDk3NDU0NTAsMj
-A1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3
-OTk4MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNT
+c1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5
+ODIxLDE5NjQ3ODI3OTldfQ==
 -->
