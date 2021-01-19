@@ -329,9 +329,9 @@ Comandos Disponibles:
   vardump     Escribe la variable en un archivo.
 ```
 
-## Writing Scripts <a id="writing-scripts"></a>
+## Escribir los Scripts <a id="writing-scripts"></a>
 
-Avash imports the [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts have hooks available to them which allows the user to write code which invokes the current Avash environment.
+Avash importa [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts have hooks available to them which allows the user to write code which invokes the current Avash environment.
 
 The functions available to Lua are:
 
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3NTM2NzY2NiwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbMTA0NTM3MDU3MiwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
