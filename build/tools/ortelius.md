@@ -764,13 +764,13 @@ curl "http://localhost:8080/x"
 
 La API legacy admite los mismos endpoints y parámetros que la versión 2, excepto el parámetro chainID para todos los puntos finales, que se ajusta por defecto al ID de la X-chain.
 
-## Ortelius Configuration
+## Configuración de Ortelius
 
-Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
+Configuración usando un archivo JSON para las aplicaciones de Ortelius. La configuración define qué red y blockchains debe indexar Ortelius, así como la información de conexión para los servicios de respaldo requeridos.
 
 ## Ejemplo
 
-This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
+Esta configuración es la que utiliza la configuración autónoma de Docker Compose e ilustra los diversos ajustes disponibles `kafka`, `mysql`, y`redis` are DNS names that resolve to relevant service.
 
 ```javascript
 {
@@ -815,5 +815,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDYyNjA0MjgsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbLTk2MjI3NDI1Myw3OTQ3NTg5NjddfQ==
 -->
