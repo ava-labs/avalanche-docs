@@ -199,7 +199,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -214,7 +214,7 @@ curl -X POST --data '{
 
 ### avax.getUTXOs
 
-Gets the UTXOs that reference a given address.
+Obtiene los UTXOs con referencia a cierta dirección.
 
 #### **Signature**
 
@@ -241,8 +241,8 @@ avax.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
+* `utxos` es una lista de UTXOs tal que cada UTXO hace referencia a alguna de las direcciones en `addresses`.
+* A lo más  `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
 * This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTE0NzI3NCwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbMTY1NzI0ODQ0MiwtMTkwMTA4NDI0OV19
 -->
