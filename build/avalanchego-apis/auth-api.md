@@ -4,7 +4,7 @@ Cuando corres tu nodo, puedes requerir que las llamadas de la API tengan un toke
 
 Un token de autorización provee acceso a un o más extremos de la API. Esto es útil para delegar accesso al API de un nodo. Los tokens expiran después de 12 horas.
 
-An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
+Un token de autorización es enviado en el encabezado de la las llamadas a la API. Específicamente el encabezado`Authorization` debe tener el valor `Bearer TOKEN.GOES.HERE` \(donde `TOKEN.GOES.HERE` es reemplazado con el is replaced with the token\).
 
 This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
@@ -174,5 +174,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0MTU4NjY2NV19
+eyJoaXN0b3J5IjpbMTEzOTMyNzg5OV19
 -->
