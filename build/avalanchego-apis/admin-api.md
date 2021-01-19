@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Respu**
+#### **Respuesta ejemplo**
 
 ```text
 {
@@ -236,6 +236,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzIxNzUyMjYsMTE3MjIyNDc0LC0yMTQwNT
-E0MjEwLDU1MjE3Nzc1MF19
+eyJoaXN0b3J5IjpbLTE2OTcxNTAxMywxMTcyMjI0NzQsLTIxND
+A1MTQyMTAsNTUyMTc3NzUwXX0=
 -->
