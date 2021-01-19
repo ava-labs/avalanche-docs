@@ -138,7 +138,7 @@ Antes de v1.0.4, la firma era:
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-La v1.0.4 agregó el argumento `includeReason`. Si  `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+La v1.0.4 agregó el argumento `includeReason`. Si era `false` o no se especificaba, la respuesta de este método era la misma que anteriormente. Si era `true`, este método responde con este nuevo formato:
 
 ```cpp
 {
@@ -147,11 +147,11 @@ La v1.0.4 agregó el argumento `includeReason`. Si  `false` or not provided, thi
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+Donde `reason`  es el motivo por el cual la transacción fue desechada. `reason` está presente en la respuesta solamenis only present if `status` is `"Dropped"`.
 
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3Mzk5MjYzMCwtNzMxMzgwMCwxMDAzOT
-czNTU4XX0=
+eyJoaXN0b3J5IjpbLTIxMjM4MDI5MjIsLTczMTM4MDAsMTAwMz
+k3MzU1OF19
 -->
