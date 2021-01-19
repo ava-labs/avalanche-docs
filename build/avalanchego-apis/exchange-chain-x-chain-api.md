@@ -26,7 +26,7 @@ Dada una representación JSON del estado génesis de esta Máquina Virtual, crea
 
 #### **Extremo**
 
-Esta llamada This call is made to the AVM’s static API endpoint:
+Esta llamada al extremo estático del API de la AVM:
 
 `/ext/vm/avm`
 
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNjUwMDY0MCwtOTgxNDU4NjM2LDEyMz
-g0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbNzk5ODQ3MDE0LC05ODE0NTg2MzYsMTIzOD
+QzNjE4M119
 -->
