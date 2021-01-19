@@ -246,12 +246,12 @@ avax.getUTXOs(
 * Este método soporta paginación. `endIndex` denota la última UTXO regresada. Para obtener la siguiente UTXOs, utiliza el valor de `endIndex` como `startIndex` en la llamada.
 * Si `startIndex` es omitido, buscará todas las UTXOs hasta alcanzar `limit`.
 * Cuando se utiliza paginación \(ie cuando se provee un `startIndex`\),  las UTXOs no necesariamente serán únicas a lo largo de varias llamadas. Esto es, una UTXO puede aparecer en el resultado de la primer llamada y nuevamente en la segunda llamada.
-* Cuando se utiliza paginación, no está garantizada la consistencia a lo largo de multiples llamadas. Esto es, el conjun de UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* Cuando se utiliza paginación, no está garantizada la consistencia a lo largo de multiples llamadas. Esto es, el conjunto UTXO puede haber cambiado entre llamadas.
+* `encoding` establece el formato en que se regresarán las UTXOs. Puede ser “cb58” o “hex”. Por defecto será “cb58”.
 
-#### **Example**
+#### **Ejemplo**
 
-Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+Supón que Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
 ```cpp
 curl -X POST --data '{
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyNjk2MTIyNSwxNjU3MjQ4NDQyLC0xOT
+eyJoaXN0b3J5IjpbMTQ5NzE4ODAxOCwxNjU3MjQ4NDQyLC0xOT
 AxMDg0MjQ5XX0=
 -->
