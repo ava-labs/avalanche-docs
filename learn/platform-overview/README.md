@@ -59,13 +59,13 @@ Ethereum dio un paso hacia la solución de este problema con smart contracts. Lo
 
 Las VMs de Avalanche \(AVMs\) hacen fácil definir una aplicación descentralizada basada en blockchains. En lugar de nuevos y limitados lenguajes como Solidity, los desarrolladores pueden escribir VMs en Go \(otros lenguajes serán soportados en el futuro\).
 
-### Creating Your Blockchain and Virtual Machine
+### Creando tu Blockchain y Virtual Machine
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
+Avalanche todavía no soporta la creación de nuevas Máquinas Virtuales \(VMs\). Actualmente, Avalanche sólo soporta la creación de nuevas instancias de la Avalanche VM.
 
 {% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
 
-In the future, Avalanche will allow you to define and launch custom blockchains, and we’ll release SDKs to help you do so.
+En el futuro, Avalanche le permitirá definir y lanzar blockchains personalizadas, y lanzaremos SDKs para ayudarle a hacerlo.
 
 {% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
 
@@ -92,6 +92,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzg1MTIxNjgsNjc5ODAxMDEzLDYzOT
-AyNTA3Nyw5MzAzMDM1OTRdfQ==
+eyJoaXN0b3J5IjpbNjM4MjMzMjcwLDY3OTgwMTAxMyw2MzkwMj
+UwNzcsOTMwMzAzNTk0XX0=
 -->
