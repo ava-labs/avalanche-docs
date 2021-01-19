@@ -325,8 +325,8 @@ Comandos Disponibles:
   list        Enumera todos los almacenamientos. Si el almacenamiento se proporciona, lista todas las variables del almacenamiento.
   print       Imprime una variable que está dentro del almacenamiento .
   set         Establece una  variable simple dentro del almacenamiento .
-  storedump   Writes the almacenamiento  to a file.
-  vardump     Writes the variable to a file.
+  storedump   Escribe el almacenamiento en un archivo.
+  vardump     Escribe la variable en un archivo.
 ```
 
 ## Writing Scripts <a id="writing-scripts"></a>
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODA4NTkwNjAsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTY3NTM2NzY2NiwxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
