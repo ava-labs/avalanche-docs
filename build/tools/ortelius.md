@@ -260,16 +260,16 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 }
 ```
 
-#### List Transactions
+#### Lista de transacciones
 
-Find transactions confirmed transactions from the network.
+Encuentra transacciones confirmadas de la red.
 
 **Parámetros**
 
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `assetID` | `id` | Una ID de activos para filtrar los resultados. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 | `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
 | `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjkzMTcwOTMwLDc5NDc1ODk2N119
+eyJoaXN0b3J5IjpbMTgwNzg4OTEyNCw3OTQ3NTg5NjddfQ==
 -->
