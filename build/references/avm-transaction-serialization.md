@@ -1612,7 +1612,7 @@ Hagamos un ejemplo de un Tx de Importación No Firmado que utilice las entradas 
 
 ### Que Contiene un Tx de Exportación No Firmado
 
-Tx de exportación no firmado contiene un `BaseTx`, `DestinationChain`, y `Outs`. El`TypeID` es  `0x00000004`.
+Un Tx de exportación no firmado contiene un `BaseTx`, `DestinationChain`, y `Outs`. El`TypeID` es  `0x00000004`.
 
 * **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
 * **`Outs`** es un conjunto de longitud variable de salidas transferibles.
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1NTY4MDY2Miw2Njg4ODMyODMsLTc3NT
+eyJoaXN0b3J5IjpbLTg4Njg1Mjg0NSw2Njg4ODMyODMsLTc3NT
 c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
 LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
 c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
