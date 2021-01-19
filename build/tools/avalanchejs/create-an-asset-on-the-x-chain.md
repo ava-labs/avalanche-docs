@@ -104,24 +104,24 @@ Suponemos que UNO de esos métodos se utiliza para emitir la transacción.
 
 ## Obtener el estado de la transacción <a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
+Ahora que enviamos la transacción a la red, lleva unos segundos determinar si la transacción ha sido aprobada. Podemos obtener un estado actualizado de la transacción usando el TxID a través de la API de AVM.
 
 ```text
-// returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
+// retorna cualquiera entre: "Accepted", "Processing", "Unknown", y "Rejected"
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+Los estados pueden ser "Aceptado", "Procesando", "Desconocido" y "Rechazado":
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Aceptada" indica que la transacción ha sido aceptada como válida por la red y ejecutada
+* "Procesamiento" indica que la transacción está siendo votada.
+* "Desconocido" indica que el nodo no sabe nada de la transacción, lo que indica que el nodo no lo tiene
+* "Rechazado" indica que el nodo sabe de la transacción, pero entró en conflicto con una transacción aceptada
 
 ## Identifying the newly created asset <a id="identifying-the-newly-created-asset"></a>
 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwOTMyNDkwNF19
+eyJoaXN0b3J5IjpbLTUzNDk5MTE3NF19
 -->
