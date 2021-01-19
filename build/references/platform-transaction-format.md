@@ -232,9 +232,9 @@ Hagamos una salida de transferencia secp256k1 con:
 ]
 ```
 
-## SECP256K1 Output Owners Output
+##  Salida de los Propietarios de la Salida SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+Una  salida de los propietarios de la salida [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
 
 ### **What SECP256K1 Output Owners Output Contains**
 
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00OD
-IzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMz
+Y3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
