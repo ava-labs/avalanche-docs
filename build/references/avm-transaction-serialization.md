@@ -1727,9 +1727,9 @@ Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
 * **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
 * **`UnsignedTx`** es una transacción sin firmar, como se describe arriba.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`Credentials`** es un conjunto de credenciales. Cada credencial será emparejada con la entrada en el mismo índice en esta credencial.
 
-### Gantt Signed Transaction Specification
+### Especificación Gantt de una Transacción Firmada
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1743,7 +1743,7 @@ Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Especificación Proto de una Transacción Firmada
 
 ```text
 message Tx {
@@ -1753,9 +1753,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Ejemplo de una Transacción Firmada
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous examples.
+Hagamos un ejemplo de una transacción firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
@@ -1830,11 +1830,11 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+Un UTXO es una representación independiente de la salida de una transacción.
 
 ### What UTXO Contains
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+Un UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y`Output`.
 
 * **`CodecID`** The only valid `CodecID` is `00 00`
 * **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
@@ -1920,11 +1920,11 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0NDQ3MTQ4MiwtMTYyODI1Mjc1MywtMT
-Y3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2
-MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMT
-Y5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2
-MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Ny
-w2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2
-NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTE4OTgxNzU0NzcsLTE2MjgyNTI3NTMsLT
+E2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4
+NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLT
+E2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3
+NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1Nz
+csNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5
+NjQ3ODI3OTldfQ==
 -->
