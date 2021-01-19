@@ -1723,7 +1723,7 @@ A signed transaction is an unsigned transaction with the addition of an array of
 
 ### What Signed Transaction Contains
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
 * **`CodecID`** The only current valid codec id is `00 00`.
 * **`UnsignedTx`** is an unsigned transaction, as described above.
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4Njg1Mjg0NSw2Njg4ODMyODMsLTc3NT
+eyJoaXN0b3J5IjpbLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NT
 c0Mzk2MiwtMTk0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEw
 LC0xOTQzMjM0MDcsLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
 c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
