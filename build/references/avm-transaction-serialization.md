@@ -29,7 +29,7 @@ Una salida transferible contiene una `AssetID` y un `Output`.
                       +-------------------------+
 ```
 
-### Especificación de la Salida Proto Transferible
+### Especificación Proto de la Salida  Transferible
 
 ```text
 message TransferableOutput {
@@ -99,7 +99,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Especificación Proto de la Entrada Transferible
 
 ```text
 message TransferableInput {
@@ -176,7 +176,7 @@ Una operación transferible contiene un `AssetID` un `UTXOIDs` y un  `TransferOp
                            +------------------------------+
 ```
 
-### Especificaciones de Operaciones Proto Transferibles
+### Especificaciones Proto  de Operaciones Transferibles
 
 ```text
 message UTXOID {
@@ -280,7 +280,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Especificación de Salida de Transferencia**
+### **Proto SECP256K1 Especificación Proto de Salida de Transferencia**
 
 ```text
 message SECP256K1TransferOutput {
@@ -1920,6 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1Nj
-czMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTE1NjYxOTk5MjYsMjA1NzUzNDU3Nyw2Nj
+AxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4
+Mjc5OV19
 -->
