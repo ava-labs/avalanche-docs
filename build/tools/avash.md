@@ -278,11 +278,11 @@ Uso:
 
 Flags:
       --assertions-enabled                   Pon en marcha la ejecución de la afirmación. ( Por defecto verdadero)
-      --avax-tx-fee uint                     Transaction fee, in nAVAX.
-      --bootstrap-ids string                 Comma separated list of bootstrap peer ids to connect to. Example: JR4dVmy6ffUGAKCBDkyCbeZbyHQBeDsET,8CrVPQZ4VSqgL8zTdvL14G8HqAfrBr4z
-      --bootstrap-ips string                 Comma separated list of bootstrap nodes to connect to. Example: 127.0.0.1:9630,127.0.0.1:9620
-      --client-location string               Path to Avalanche node client, defaulting to the config file's value.
-      --data-dir string                      Name of directory for the data stash.
+      --avax-tx-fee uint                     Comisión de la transacción, en nAVAX.
+      --bootstrap-ids string                 Lista separada por comas de ID's de pares de bootstrap con los que conectarse. Ejemplo: JR4dVmy6ffUGAKCBDkyCbeZbyHQBeDsET,8CrVPQZ4VSqgL8zTdvL14G8HqAfrBr4z
+      --bootstrap-ips string                 Lista separada por comas de nodos bootstrap a los que conectarse. Ejemplo: 127.0.0.1:9630,127.0.0.1:9620
+      --client-location string               Ruta al cliente del nodo Avalanche, predeterminando el valor del archivo de configuración.
+      --data-dir string                      Nombre del directorio de la reserva de datos.
       --db-dir string                        Database directory for Avalanche state. (default "db1")
       --db-enabled                           Turn on persistent storage. (default true)
   -h, --help                                 help for startnode
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzMDgxNDkwMCwxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbLTcxMzUzNjE5MSwxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
