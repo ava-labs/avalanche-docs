@@ -25,7 +25,7 @@ let xchain = avax.XChain(); //returns a reference to the X-Chain used by Avalanc
 El primer paso para crear un nuevo activo usando AvalancheJS es determinar las cualidades del activo. Le daremos al activo un nombre, un símbolo de identificación, así como una denominación.
 
 ```text
-// Name our new coin and give it a symbol
+// Nombra nuestra nueva moneda y dale un símbolo
 let name = "Rickcoin is the most intelligent coin";
 let symbol = "RICK";
 
@@ -121,5 +121,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA5MDc0ODQ0M119
+eyJoaXN0b3J5IjpbMTU0MDcxMjA5NF19
 -->
