@@ -619,11 +619,11 @@ Hagamos una salida de acuñación NFT con:
 
 Las entradas tienen un tipo posible: `SECP256K1TransferInput`.
 
-## Transferencia de Entrada SECP256K1 
+## Entrada de Transferencia SECP256K1 
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite utilizar una salida de transferencia secp256k1 no utilizada.
 
-### **What SECP256K1 Transfer Input Contains**
+### **Que Contiene una Entrada de Transferencia SECP256K1**
 
 A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM2NjUwMzcsLTEyNDk3NDU0NTAsMjA1Nz
-UzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4
-MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTIxMzQ5OTU2NzgsLTEyNDk3NDU0NTAsMj
+A1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3
+OTk4MjEsMTk2NDc4Mjc5OV19
 -->
