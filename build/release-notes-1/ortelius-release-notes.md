@@ -1,4 +1,4 @@
-# Ortelius Release Notes
+# Notas de versión de Ortelius
 
 ## Ortelius Release Notes v1.1.1 \([View on GitHub](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)\)
 
@@ -20,3 +20,6 @@ Other changes:
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4NjIyNjA2NDJdfQ==
+-->
