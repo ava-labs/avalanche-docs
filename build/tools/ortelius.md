@@ -585,9 +585,9 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 }
 ```
 
-#### Obtener Asset
+#### Obtener Activo
 
-Find a single asset by its ID.
+Encuentra un activo por su ID.
 
 **Llamado de Ejemplo**
 
@@ -667,15 +667,15 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 }
 ```
 
-#### List Outputs
+#### Lista de salidas
 
-Find outputs that have been created by a transaction confirmed on the network.
+Encontrar salidas que hayan sido creadas por una transacción confirmada en la red.
 
 **Parámetros**
 
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 | `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
 | `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODEyMTUzODgsNzk0NzU4OTY3XX0=
+eyJoaXN0b3J5IjpbLTE0NjUwMDg5MDgsNzk0NzU4OTY3XX0=
 -->
