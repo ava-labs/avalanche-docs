@@ -294,7 +294,7 @@ esto nos da como respuesta:
 
 ### avax.import
 
-Finaliza la transferencia de un activo no-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+Finaliza la transferencia de un activo no-AVAX o AVAX que fue enviado de la X-Chain a la C-Chain. Antes de llamar este método, debes llamar al método [`avm.export`](exchange-chain-x-chain-api.md#avm-export) para iniciar la transferencia.
 
 #### Signature
 
@@ -450,6 +450,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgzODA1MTYsMTQ5NzE4ODAxOCwxNjU3Mj
-Q4NDQyLC0xOTAxMDg0MjQ5XX0=
+eyJoaXN0b3J5IjpbMjY5MDA3NjA1LDE0OTcxODgwMTgsMTY1Nz
+I0ODQ0MiwtMTkwMTA4NDI0OV19
 -->
