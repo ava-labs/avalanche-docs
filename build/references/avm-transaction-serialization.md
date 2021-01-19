@@ -1203,7 +1203,7 @@ message BaseTx {
 
 ### Ejemplo de Base Tx
 
-Let’s make an base tx that uses the inputs and outputs from the previous examples:
+Hagamos una base tx que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ4NjM0NzQ3MywtMTk0MDE4NjI1NywxNj
+eyJoaXN0b3J5IjpbMTIxMjY5NTY1MiwtMTk0MDE4NjI1NywxNj
 U5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5NTk3
 ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3MzAsND
 k5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5
