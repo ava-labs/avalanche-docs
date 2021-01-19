@@ -30,9 +30,9 @@ Esta llamada al extremo estático del API de la AVM:
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix \(ie. X-\) in calls to the static API endpoint because these prefixes refer to a specific chain.
+Nota: las direcciones no deben incluir el prefijo de la cadena \(ie. X-\) en las llamadas al extremo estático de la API, porque estos prefijos hacen referencia a una cadena en específico.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.buildGenesis({
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzk5ODQ3MDE0LC05ODE0NTg2MzYsMTIzOD
-QzNjE4M119
+eyJoaXN0b3J5IjpbLTk1MzIyNzYyOSwtOTgxNDU4NjM2LDEyMz
+g0MzYxODNdfQ==
 -->
