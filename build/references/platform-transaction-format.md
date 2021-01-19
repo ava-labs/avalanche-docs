@@ -378,7 +378,7 @@ Hagamos una entrada de pago con:
 ]
 ```
 
-## Unsigned Transactions
+## Transacciones no Firmadas
 
 Las transacciones no firmadas contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
@@ -1605,6 +1605,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMz
-c5MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbNDg4MDA3ODA0LC02NzY2MDc5NTUsLTEyMD
+E3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1
+MjNdfQ==
 -->
