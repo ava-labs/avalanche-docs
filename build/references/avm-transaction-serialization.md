@@ -248,7 +248,7 @@ Las salidas o "Outputs" tienen cuatro tipos posibles: `SECP256K1TransferOutput`,
 
 ##  Salida de Transferencia SECP256K1
 
-Una salida de transferencia [secp256k1] o"secp256k1 (https://github.com/crypt0ghost/avalanche-docs/blob/master/build/references/cryptographic-primitives.md#secp-256-k1-addresses) transfer output"(cryptographic-primitives.md#secp-256-k1-addresses) permite enviar una cantidad de un activo a un conjunto de direcciones después de un tiempo unix especificado.
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer output" permite enviar una cantidad de un activo a un conjunto de direcciones después de un tiempo unix especificado.
 
 
 ### **Que contiene la salida de transferencia SECP256K1**
@@ -1920,7 +1920,7 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDY2MDY3NjMsLTkzOTY2NzgwNCwtND
+eyJoaXN0b3J5IjpbLTE4ODA4NTE0MDQsLTkzOTY2NzgwNCwtND
 M0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAx
 MDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NT
 MsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0
