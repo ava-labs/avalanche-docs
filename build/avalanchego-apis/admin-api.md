@@ -139,7 +139,7 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Escribe unWrites a memory profile of the to `mem.profile`.
+Escribe un perfil de memoria de `mem.profile`.
 
 #### **Signature**
 
@@ -147,7 +147,7 @@ Escribe unWrites a memory profile of the to `mem.profile`.
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -158,7 +158,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -172,7 +172,7 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
 
 #### **Signature**
 
@@ -236,7 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzMzY5ODQwOSwtNTA0MzM5NTk1LC0xNj
+eyJoaXN0b3J5IjpbLTk4MDY3ODU4MiwtNTA0MzM5NTk1LC0xNj
 k3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0MjEwLDU1MjE3Nzc1
 MF19
 -->
