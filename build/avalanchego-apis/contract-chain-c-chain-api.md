@@ -414,13 +414,13 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-**Request**
+**Petición**
 
-* Add `privateKey` to `username`'s set of private keys.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de un usuario (`username`)
 
 **Response**
 
-* `address` is the address `username` now controls with the private key. It will be in hex format.
+* `address` es la dirección address `username` now controls with the private key. It will be in hex format.
 
 #### Example Call
 
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTI2NTg3ODMsLTE5ODcyMzQwNCwyNj
-kwMDc2MDUsMTQ5NzE4ODAxOCwxNjU3MjQ4NDQyLC0xOTAxMDg0
-MjQ5XX0=
+eyJoaXN0b3J5IjpbMzg3MjQ0ODQyLC0xOTg3MjM0MDQsMjY5MD
+A3NjA1LDE0OTcxODgwMTgsMTY1NzI0ODQ0MiwtMTkwMTA4NDI0
+OV19
 -->
