@@ -290,9 +290,9 @@ Flags:
       --http-tls-cert-file string            Archivo de certificado TLS para el servidor HTTPS.
       --http-tls-enabled                     Actualiza el servidor HTTP a HTTPS.
       --http-tls-key-file string             Archivo private key TLS para el servidor HTTPS.
-      --log-dir string                       Name of directory for the node's logging. (default "logs")
-      --log-level string                     Specify the log level. Should be one of {all, debug, info, warn, error, fatal, off} (default "all")
-      --meta string                          Override default metadata for the node process.
+      --log-dir string                       Nombre del directorio para el registro del nodo. ("logs" por defecto)
+      --log-level string                     Especifica el nivel de registro. Debe ser uno de {all, debug, info, warn, error, fatal, off} (por defecto "todos")
+      --meta string                          Anular los metadatos por defecto para el proceso del nodo.
       --network-id string                    Network ID this node will connect to. (default "12345")
       --public-ip string                     Public IP of this node. (default "127.0.0.1")
       --signature-verification-enabled       Turn on signature verification. (default true)
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjIyMTUzMTAsMTA1MzcxMjM5NSwtMj
-gxNzE4MDhdfQ==
+eyJoaXN0b3J5IjpbMTUzNTcxODM1NiwxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
