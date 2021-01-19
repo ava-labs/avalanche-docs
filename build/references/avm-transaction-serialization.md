@@ -1157,6 +1157,8 @@ Una credencial NFT es la misma que una credencial secp256k1 con un TypeID difere
 
 Las transacciones no firmadas contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
+## Unsigned BaseTx
+
 ### Que Contiene BaseTx
 BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
@@ -1918,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjkxMjc0MzY4LDE1MjY1MDEwMDUsLTEyNz
-I4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1MywtMTY3NzQw
-MDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQwMTg2MjU3LD
-E2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNywtMTY5OTk1
-OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEzMTc2MjczMC
-w0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3Nyw2NjAx
-Nzk3NDddfQ==
+eyJoaXN0b3J5IjpbMjAxNTAzMTY0NCwxNTI2NTAxMDA1LC0xMj
+cyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NTMsLTE2Nzc0
+MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0MDE4NjI1Ny
+wxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MDcsLTE2OTk5
+NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIxMzE3NjI3Mz
+AsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYw
+MTc5NzQ3XX0=
 -->
