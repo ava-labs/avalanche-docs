@@ -243,8 +243,8 @@ avm.createFixedCapAsset({
 ```
 
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
-* `symbol` es una abreviaciónis a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
+* `symbol` es una abreviación del símbolo del activo. Entre 0 y 4 caractéres. No necesariamente único. Puede omitirse.
+* `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` and `password` denote the user paying the transaction fee.
@@ -1718,6 +1718,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTAzODQ2OTMzLC05ODA5NjE5ODQsLTQ0NT
-gzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
+eyJoaXN0b3J5IjpbLTE0ODM3NjI2ODIsLTk4MDk2MTk4NCwtND
+Q1ODM3NjksLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
