@@ -368,7 +368,7 @@ Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### ** Especificación de Salida de Acuñación Proto SECP256K1**
+### ** Especificación Proto  de Salida de Acuñación SECP256K1**
 
 ```text
 message SECP256K1MintOutput {
@@ -459,7 +459,7 @@ Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Loc
                          +-------------------------------+
 ```
 
-### **Especificación de Salida de la Transferencia de Proto NFT**
+### **Especificación Proto de Salida de la Transferencia de NFT**
 
 ```text
 message NFTTransferOutput {
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjM3MDk3NTQsMjA1NzUzNDU3Nyw2Nj
-AxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMTk2NDc4
-Mjc5OV19
+eyJoaXN0b3J5IjpbLTQzMjU0ODk5MiwyMDU3NTM0NTc3LDY2MD
+E3OTc0NywtMTU2NzMxOTk5NCwtMTIyNTc5OTgyMSwxOTY0Nzgy
+Nzk5XX0=
 -->
