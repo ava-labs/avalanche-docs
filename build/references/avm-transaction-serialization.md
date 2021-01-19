@@ -1204,7 +1204,7 @@ message BaseTx {
 
 ### Ejemplo de una Transacción Base No Firmada
 
-Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores:
+Hagamos una transacción base no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIxNzcwNTE4LDU1OTU2NTksLTgyMzkyOD
-g4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwtOTM5NjY3ODA0LC00
-MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MD
-EwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1
-MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOT
-QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
-N119
+eyJoaXN0b3J5IjpbMTE0NjcyODM4OSw1NTk1NjU5LC04MjM5Mj
+g4ODAsLTk2Mjk2MDA1OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwt
+NDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NT
+AxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3
+NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMT
+k0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0
+MDddfQ==
 -->
