@@ -50,13 +50,14 @@ Piense en una VM como un plano para una blockchain; puede usar la misma VM para 
 
 ### ¿Por qué Virtual Machines?
 
-At first, blockchain networks had one Virtual Machine \(VM\) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
 
-People who wanted custom decentralized applications had to create their own, entirely new blockchain network from scratch. Doing so required a great deal of time and effort, offered limited security, and generally resulted in a bespoke, fragile blockchain that never got off the ground.
+Al principio, las redes blockchains tenían una Máquina Virtual \(VM\) con un conjunto predefinido y estático de funcionalidad. Este diseño rígido y monolítico limitaba las aplicaciones basadas en blockchains que se podían ejecutar en tales redes.
 
-Ethereum made a step toward solving this problem with smart contracts. Developers didn’t need to worry about networking and consensus, but creating decentralized applications was still hard. The Ethereum VM has low performance and imposes restrictions on smart contract developers. Solidity and the other few languages for writing Ethereum smart contracts are unfamiliar to most programmers.
+La gente que quería aplicaciones descentralizadas personalizadas tenía que crear su propia red de blockchains completamente nueva desde cero. Hacerlo requería una gran cantidad de tiempo y esfuerzo, ofrecía una seguridad limitada, y generalmente resultaba en una blockchain frágil a medida que nunca se ponía en marcha.
 
-Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go \(other languages will be supported in the future\).
+Ethereum dio un paso hacia la solución de este problema con smart contracts. Los desarrolladores no necesitaban preocuparse por la red y el consenso, pero crear aplicaciones descentralizadas seguía siendo difícil. Las Ethereum VM tienen un bajo rendimiento e imponen restricciones a los desarrolladores de smart contracts. Solidity y los otros pocos lenguajes para escribir smart contracts de Ethereum son desconocidos para la mayoría de los programadores.
+
+Las VMs de Avalanche \(AVMs\) hacen fácil definir una aplicación descentralizada basada en blockchains. En lugar de nuevos y limitados lenguajes como Solidity, los desarrolladores pueden escribir VMs en Go \(otros lenguajes serán soportados en el futuro\).
 
 ### Creating Your Blockchain and Virtual Machine
 
@@ -91,6 +92,6 @@ The **C-Chain** allows for the creation smart contracts using the [C-Chain’s A
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc5ODAxMDEzLDYzOTAyNTA3Nyw5MzAzMD
-M1OTRdfQ==
+eyJoaXN0b3J5IjpbLTIwMzg1MTIxNjgsNjc5ODAxMDEzLDYzOT
+AyNTA3Nyw5MzAzMDM1OTRdfQ==
 -->
