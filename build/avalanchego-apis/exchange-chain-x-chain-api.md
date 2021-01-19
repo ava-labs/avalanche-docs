@@ -4,13 +4,13 @@ descripción: La X-Chain o Cadena X es una instancia de la Máquina Virtual de A
 
 # Cadena de Intercambio \(X-Chain\) API
 
-La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma nativa de Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma nativa de Avalanche para crear e intercambiar activos, es una intancia de la Máquina Virtual de Avalanche \(AVM\). Esta API permite a los clientes crear e intercambiar activos en la X-Chain y otras instancias de la AVM.
 
 {% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas  For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 ## Endpoints
 
@@ -1718,5 +1718,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3MTIxMDc2NiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbNjM3Mjk1MywxMjM4NDM2MTgzXX0=
 -->
