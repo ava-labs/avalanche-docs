@@ -6,16 +6,17 @@ Este archivo es la única fuente de verdad de cómo serializamos las transaccion
 
 Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## Transferable Output
+## 
+Salida transferible
 
-Transferable outputs wrap an output with an asset ID.
+Las salidas transferibles envuelven una salida con una identificación de activo.
 
-### What Transferable Output Contains
+### Qué Contiene la Salida Transferible
 
-A transferable output contains an `AssetID` and an `Output`.
+Una salida transferible contiene una `AssetID` y un `Output`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
+* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
 ### Gantt Transferable Output Specification
 
@@ -1912,5 +1913,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3Njc5Mjc5Ml19
+eyJoaXN0b3J5IjpbOTQ3Mjg0OTU5XX0=
 -->
