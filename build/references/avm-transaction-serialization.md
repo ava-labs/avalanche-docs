@@ -1429,7 +1429,7 @@ message OperationTx {
 
 ### Ejemplo de una Operación Tx No Firmada
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
+Hagamos un ejemplo de una operación Tx no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
 * **`Ops`**: \[`"Example Transfer Op as defined above"`\]
@@ -1920,7 +1920,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1NTMyMTE3LC03NzU3NDM5NjIsLTE5ND
+eyJoaXN0b3J5IjpbNjY4ODgzMjgzLC03NzU3NDM5NjIsLTE5ND
 AxODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3
 LC0xNjk5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMT
 MxNzYyNzMwLDQ5OTMwNjY4NywtMTI0OTc0NTQ1MCwyMDU3NTM0
