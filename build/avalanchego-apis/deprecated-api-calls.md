@@ -10,7 +10,7 @@ descripción: >-
 
 ### `getCurrentValidators`
 
-En v1.0.0, la signature was:
+En v1.0.0, la firma era:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -152,5 +152,5 @@ Where `reason` is the reason the transaction was dropped. `reason` is only prese
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzMDE3NDc5OCwxMDAzOTczNTU4XX0=
+eyJoaXN0b3J5IjpbLTczMTM4MDAsMTAwMzk3MzU1OF19
 -->
