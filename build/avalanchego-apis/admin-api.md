@@ -180,7 +180,7 @@ Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama 
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Llamada de ejemplo**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -191,7 +191,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -205,7 +205,7 @@ curl -X POST --data '{
 
 ### admin.stopCPUProfiler
 
-Stop the CPU profile that was previously started.
+Defiene el perfilamiento de CPU que fue iniciado previamente.
 
 #### **Signature**
 
@@ -213,7 +213,7 @@ Stop the CPU profile that was previously started.
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -223,7 +223,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -236,7 +236,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3ODk5MzU3MywtNTA0MzM5NTk1LC0xNj
-k3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0MjEwLDU1MjE3Nzc1
-MF19
+eyJoaXN0b3J5IjpbLTExMTI0Nzk0MTUsLTUwNDMzOTU5NSwtMT
+Y5NzE1MDEzLDExNzIyMjQ3NCwtMjE0MDUxNDIxMCw1NTIxNzc3
+NTBdfQ==
 -->
