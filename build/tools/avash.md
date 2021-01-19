@@ -22,7 +22,7 @@ Avash proporciona la capacidad de ejecutar scripts Lua que pueden ejecutar una s
 
 ## Configuración<a id="configuration"></a>
 
-While Avash can be started without a premade configuration file, it’s available as an option for tweaking some of the shell’s global settings. Avash will search for `.avash.yaml` in the `$HOME` directory by default, but the `--config` flag can be used to set a custom configuration filepath to look for.
+Aunque Avash puede iniciarse sin un archivo de configuración preestablecido, está disponible como una opción para ajustar algunas de las configuraciones globales del shell. Avash buscará `.avash.yaml` en el directorio `$HOME` por defecto, pero la etiqueta `--config` puede usarse para establecer una ruta para buscar. de archivo de configuración personalizada
 
 Below is the format of an Avash configuration file:
 
@@ -351,5 +351,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQzNDQyMjIxLC0yODE3MTgwOF19
+eyJoaXN0b3J5IjpbLTE3NTEyNjU1NzMsLTI4MTcxODA4XX0=
 -->
