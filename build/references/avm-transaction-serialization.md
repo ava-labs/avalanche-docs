@@ -353,7 +353,7 @@ Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshol
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt SECP256K1 Mint Output Specification**
+### ** Especificación de Salida de Acuñación Gantt SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -369,7 +369,7 @@ Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Output Specification**
+### ** Especificación de Salida de Acuñación Proto SECP256K1**
 
 ```text
 message SECP256K1MintOutput {
@@ -1918,6 +1918,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMj
-I1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
+eyJoaXN0b3J5IjpbOTcxNDI1OTg5LDY2MDE3OTc0NywtMTU2Nz
+MxOTk5NCwtMTIyNTc5OTgyMSwxOTY0NzgyNzk5XX0=
 -->
