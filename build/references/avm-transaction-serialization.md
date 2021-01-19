@@ -1407,7 +1407,7 @@ Una operación Tx no firmada contiene un `BaseTx`, y `Ops`. El`TypeID` es `0x000
 * **`BaseTx`**
 * **`Ops`** es un conjunto de operaciones transferibles de longitud variable.
 
-### Especificación Gantt de una Operación Tx No Firmada
+### Especificación Gantt de una Transacción de Operación No Firmada
 
 ```text
 +---------+--------------+-------------------------------------+
@@ -1419,7 +1419,7 @@ Una operación Tx no firmada contiene un `BaseTx`, y `Ops`. El`TypeID` es `0x000
                          +-------------------------------------+
 ```
 
-### Especificación Proto de una Operación Tx No Firmada
+### Especificación Proto de una Transacción de Operación No Firmada
 
 ```text
 message OperationTx {
@@ -1428,7 +1428,7 @@ message OperationTx {
 }
 ```
 
-### Ejemplo de una Operación Tx No Firmada
+### Ejemplo de una Transacción de Operación No Firmada
 
 Hagamos un ejemplo de una operación Tx no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
@@ -1920,7 +1920,7 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2NjY5ODQyMiwxMTQ2NzI4Mzg5LDU1OT
+eyJoaXN0b3J5IjpbMTgzMjUxODYyOCwxMTQ2NzI4Mzg5LDU1OT
 U2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwt
 OTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOT
 AzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1
