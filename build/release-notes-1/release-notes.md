@@ -49,11 +49,11 @@ Los cambios en esta versión, v1.0.5, son compatibles con versiones anteriores. 
 
 Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
-## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
+## Notas de Versión de AvalancheGo v1.0.4 \([Ver en GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
 ![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
-This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
+Esta actualización es opcional pero se recomienda. El parche incluye mejoras en la calidad de vida y varias mejoras en el rendimiento. Tenga en cuenta que esta actualización requiere que los parámetros de la CLI se especifiquen con -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
 
 ```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
@@ -97,6 +97,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzQ3MTQwNjcsLTE4NDUwMzc2OTMsLT
-EyNDg3NzUxNzZdfQ==
+eyJoaXN0b3J5IjpbODYxMzIwMTU0LC0xODQ1MDM3NjkzLC0xMj
+Q4Nzc1MTc2XX0=
 -->
