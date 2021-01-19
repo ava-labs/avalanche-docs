@@ -30,11 +30,12 @@ Las recompensas del staking se envían a la dirección de tu wallet al final del
 
 ## Validadores
 
-**Los validadores** protegen Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+**Los validadores** protegen Avalanche, 
+crean nuevos bloques/vértices y procesan las transacciones. Para lograr el consenso, los validadores se muestrean repetidamente unos a otros. La probabilidad de que un validador dado sea muestreado es proporcional a su stake.
 
-When you add a node to the validator set, you specify:
+Cuando se añade un nodo al conjunto de validadores, se especifica:
 
-* Your node’s ID
+* El ID de tu nodo
 * When you want to start and stop validating
 * How many AVAX you are staking
 * The address to send any rewards to
@@ -104,6 +105,6 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0NDQ1NzE2Niw1NzY4MDU5OTEsLTcxNz
-cxOTgxMV19
+eyJoaXN0b3J5IjpbLTEzODEwMjg2NDMsNTc2ODA1OTkxLC03MT
+c3MTk4MTFdfQ==
 -->
