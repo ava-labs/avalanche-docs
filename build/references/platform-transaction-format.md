@@ -12,9 +12,9 @@ Las salidas transferibles envuelven una salida con el ID  de un activo.
 
 ### What Transferable Output Contains
 
-A transferable output contains an `AssetID` and an `Output`.
+Una salida transferible contiene una `AssetID` y un `Output`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
 * **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
 
 ### Gantt Transferable Output Specification
@@ -1602,6 +1602,6 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU1NjY1MjQ2LC0zNjc5MzkwNzAsLTQ4Mj
-MzNjUyM119
+eyJoaXN0b3J5IjpbLTE2MjYzNjIxOTgsLTM2NzkzOTA3MCwtND
+gyMzM2NTIzXX0=
 -->
