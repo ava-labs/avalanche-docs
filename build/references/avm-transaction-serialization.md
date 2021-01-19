@@ -926,7 +926,7 @@ Una operación de transferencia NFT contiene un `TypeID`, `AddressIndices` y un 
                                +------------------------------------+
 ```
 
-### **Proto NFT Transfer Op Specification**
+### **Especificación Proto de una Operación de Transferencia NFT**
 
 ```text
 message NFTTransferOp {
@@ -940,9 +940,9 @@ message NFTTransferOp {
 }
 ```
 
-### **NFT Transfer Op Example**
+### **Ejemplo de una Operación de Transferencia NFT**
 
-Let’s make an NFT transfer operation with:
+Hagamos una operación de transferencia NFT con:
 
 * **`TypeID`**: 13
 * **`AddressIndices`**:
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTQyMzY2NiwtMjA5NjMxMjQwMCw5Nz
-kxMDc4NTEsMjEzMTc2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0
-NTAsMjA1NzUzNDU3Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLT
-EyMjU3OTk4MjEsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOT
+c5MTA3ODUxLDIxMzE3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1
+NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC
+0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
 -->
