@@ -322,7 +322,7 @@ Uso:
 
 Comandos Disponibles:
   create      Crea un almacenamiento variable.
-  list        Enumera todos los almacens. Si el almacen se proporciona, lista todas las variables del almacen.
+  list        Enumera todos los almacenes. Si el almacen se proporciona, lista todas las variables del almacen.
   print       Imprime una variable que está dentro del almacen.
   set         Establece una  variable simple dentro del almacen.
   storedump   Escribe el almacen en un archivo.
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTYxMDIxNjEsMTA1MzcxMjM5NSwtMj
+eyJoaXN0b3J5IjpbLTE5NjI0Mjk5OTgsMTA1MzcxMjM5NSwtMj
 gxNzE4MDhdfQ==
 -->
