@@ -6,17 +6,17 @@
 
 ### AvalancheJS - v3.0.5
 
-#### Index
+#### Índice
 
-**Modules**
+**Modulos**
 
 [avalanche](./)
 
 ## avalanche
 
-### Index
+### Índice
 
-#### Modules
+#### Modulos
 
 * [Admin API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_admin.md)
 * [AVM API](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/api_avm.md)
@@ -88,3 +88,6 @@
 * [src/common](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/src_common.md)
 * [src/utils](https://github.com/ava-labs/avalanche-docs/tree/2c498d5b84997c76ce0bae8178200ee940a28911/build/tools/avalanchejs/modules/src_utils.md)
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTg2MTc1MjQ1OF19
+-->
