@@ -79,14 +79,14 @@ let unsigned = await xchain.buildCreateAssetTx(
 let signed = xchain.keyChain().signTx(unsigned); //retorna una Tx class
 ```
 
-## Issue the signed transaction
+## Emitir la transacción firmada
 
-Now that we have a signed transaction ready to send to the network, let’s issue it!
+Ahora que tenemos una transacción firmada lista para enviarla a la red, vamos a emitirla!
 
-Using the AvalancheJS X-Chain API, we going to call the issueTx function. This function can take either the Tx class returned in the previous step, a [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) representation of the transaction, or a raw Buffer class with the data for the transaction. Examples of each are below:
+Usando la API de AvalancheJS X-Chain, vamos a ejecutar la función issueTx. Esta función puede tomar la Tx class devuelta en el paso anterior, una representación [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) de la transacción, o una clase Buffer sin procesar con los datos de la transacción. A continuación se presentan ejemplos de cada una de ellas:
 
 ```text
-// using the Tx class
+// uusando la Tx class
 let txid = await xchain.issueTx(signed); //returns a CB58 serialized string for the TxID
 ```
 
@@ -123,5 +123,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQzMTYwMTQzXX0=
+eyJoaXN0b3J5IjpbMjAzNDM5MTk2N119
 -->
