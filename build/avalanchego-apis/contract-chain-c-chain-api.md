@@ -48,7 +48,7 @@ Para interactuar con las llamadas RPC específicas de `avax`.
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
+Exporta un activo desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.import`](exchange-chain-x-chain-api.md#avm-import) en la X-Chain para completar la transferencia.
 
 #### Signature
 
@@ -62,8 +62,8 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
+* `to` es la dirección de la X-Chain a la cual enviar el activo.
+* `amount` es el monto del activo a enviar.
 * `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
 * The asset is sent from addresses controlled by `username` and `password`.
 
@@ -450,5 +450,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3NDMwNDQ5MiwtMTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbMTI4NTA4NTUzMiwtMTkwMTA4NDI0OV19
 -->
