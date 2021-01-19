@@ -1,6 +1,6 @@
 # Formato de Transacción de la Plataforma
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones en la Avalanche’s Platform Virtual Machine, también conocida como la `Platform Chain` o la `P-Chain`. Este documento utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado y [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
@@ -1602,5 +1602,5 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4ODY1OTE1NV19
+eyJoaXN0b3J5IjpbLTQ4MjMzNjUyM119
 -->
