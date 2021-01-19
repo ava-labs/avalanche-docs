@@ -111,9 +111,9 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Ejemplo de entrada transferible
 
-Let’s make a transferable input:
+Hagamos una entrada transferible:
 
 * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
 * `UTXOIndex: 5`
@@ -148,9 +148,10 @@ Let’s make a transferable input:
 ]
 ```
 
-## Transferable Op
 
-Transferable operations describe a set of UTXOs with a provided transfer operation. Only one Asset ID is able to be referenced per operation.
+## Operaciones Transferibles
+
+Las operaciones transferibles describen un conjunto de UTXOs con una operación de transferencia proporcionada. Sólo se puede hacer referencia a una identificación de activo por operación.
 
 ### What Transferable Op Contains
 
@@ -1913,5 +1914,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTIwNTU1OTc4NzMsMTk2NDc4Mjc5OV19
 -->
