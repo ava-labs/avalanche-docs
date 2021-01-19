@@ -339,7 +339,7 @@ Hagamos una salida de transferencia secp256k1 con:
 
 ##  Salida de Acuñación SECP256K1
 
-Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) es una salida que pertenece a una colección de direcciones.
+Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 Mint output" es una salida que pertenece a una colección de direcciones.
 
 
 ### **Que Contiene una Salida de Acuñación SECP256K1**
@@ -423,7 +423,7 @@ Hagamos una salida de acuñación con SECP256K1:
 
 ## Salida de Transferencia NFT
 
-Una salida de transferencia NFT es una NFT que es propiedad de una colección de direcciones.
+Una salida de transferencia NFT o "NFT transfer output"  es una NFT que es propiedad de una colección de direcciones.
 
 #
 ## **Que Contiene una Salida de Transferencia NFT**
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODA4NTE0MDQsLTkzOTY2NzgwNCwtND
-M0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NTAx
-MDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3NT
-MsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMTk0
-MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0MD
-csLTE2OTk5NTk3ODYsLTIwOTYzMTI0MDAsOTc5MTA3ODUxLDIx
-MzE3NjI3MzBdfQ==
+eyJoaXN0b3J5IjpbMTU2MDIxOTE3NywtOTM5NjY3ODA0LC00Mz
+Q0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MDEw
+MDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1My
+wtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQw
+MTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNy
+wtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEz
+MTc2MjczMF19
 -->
