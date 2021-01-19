@@ -1,4 +1,4 @@
-# Release Notes
+# Notas de versión
 
 ## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
@@ -47,3 +47,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 
 For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTY2MjI5NzMyM119
+-->
