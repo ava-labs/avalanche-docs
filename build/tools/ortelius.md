@@ -432,8 +432,8 @@ Encuentra las direcciones que han estado involucradas en transacciones confirmad
 
 | Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 
 **Llamado de Ejemplo**
 
@@ -464,9 +464,9 @@ curl "http://localhost:8080/v2/addresses?limit=1"
 }
 ```
 
-#### Get Address
+#### Obtener Dirección
 
-Find a single address by its ID.
+Encuentra una dirección por su ID.
 
 **Llamado de Ejemplo**
 
@@ -814,5 +814,5 @@ This configuration is the one used by the standalone Docker Compose setup and il
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc2NTM4MDQyLDc5NDc1ODk2N119
+eyJoaXN0b3J5IjpbMTE4MTQzMDM0Miw3OTQ3NTg5NjddfQ==
 -->
