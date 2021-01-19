@@ -1,6 +1,7 @@
 # Crear un activo en la X-Chain
 
-This example creates an asset in the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+Este ejemplo crea un activo en la X-Chain y lo publica en la plataforma Avalanche. El primer paso de este proceso es crear una instancia de AvalancheJS conectada a nuestro 
+Endpoint de elección de la plataforma Avalanche.
 
 ```text
 import {
@@ -20,9 +21,8 @@ let avax = new Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID)
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Describe the new asset
-
-The first step in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
+## Describe el nuevo activo
+El primer paso para crear un nuevo activo usando AvalancheJS es determinar las cualidades del activo. Le daremos al activo un nombre, un símbolo de identificación, así como una denominación.
 
 ```text
 // Name our new coin and give it a symbol
@@ -121,5 +121,5 @@ The statuses can be one of “Accepted”, “Processing”, “Unknown”, and 
 The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5MTIwNjQzOV19
+eyJoaXN0b3J5IjpbMTA5MDc0ODQ0M119
 -->
