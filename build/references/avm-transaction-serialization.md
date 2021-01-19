@@ -687,7 +687,7 @@ Hagamos una entrada de transferencia con:
 
 ## Operaciones
 
-Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
+Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp`, y `NFTTransferOp`.
 
 ## **Operación de Acuñado SECP256K1**
 
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc5MTA3ODUxLDIxMzE3NjI3MzAsNDk5Mz
-A2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1NzcsNjYwMTc5NzQ3
-LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLDE5NjQ3ODI3OTldfQ
-==
+eyJoaXN0b3J5IjpbLTIwNjg2ODI3MDcsOTc5MTA3ODUxLDIxMz
+E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
+NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
+E5NjQ3ODI3OTldfQ==
 -->
