@@ -697,12 +697,12 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation 
 
 Una operación de acuñado SECP256K1 contiene un `TypeID`, `AddressIndices`, `MintOutput`, y`TransferOutput`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000008`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`MintOutput`** is a SECP256K1 Mint output.
-* **`TransferOutput`** is a SECP256K1 Transfer output
+* **`TypeID`** es la identificación para este tipo de salida. Es `0x00000008`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`MintOutput`** es una salida de acuñado SECP256K1.
+* **`TransferOutput`** es una salida de transferencia SECP256K1
 
-### **Gantt SECP256K1 Mint Operation Specification**
+### **Especificación Gantt de una Operación de Acuñado SECP256K1**
 
 ```text
 +----------------------------------+------------------------------------+
@@ -1921,8 +1921,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0ODMwOTI0NSw5NzkxMDc4NTEsMjEzMT
-c2MjczMCw0OTkzMDY2ODcsLTEyNDk3NDU0NTAsMjA1NzUzNDU3
-Nyw2NjAxNzk3NDcsLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMT
-k2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTE4ODcxMTY1NjgsOTc5MTA3ODUxLDIxMz
+E3NjI3MzAsNDk5MzA2Njg3LC0xMjQ5NzQ1NDUwLDIwNTc1MzQ1
+NzcsNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMjI1Nzk5ODIxLD
+E5NjQ3ODI3OTldfQ==
 -->
