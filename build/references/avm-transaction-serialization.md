@@ -1159,8 +1159,8 @@ Las transacciones no firmadas o "Unsigned transactions" contienen el contenido c
 
 ## Transacción Base No Firmada
 
-### Que Contiene BaseTx
-BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
+### Que Contiene una Transacción Base No Firmada 
+Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
 * **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
 * **`NetworkID`** es un int que define a qué red se destina esta transacción. Este valor está pensado para soportar el enrutamiento de la transacción y no está diseñado para la prevención de ataques de repetición.
@@ -1169,7 +1169,7 @@ BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Me
 * **`Inputs`** es un conjunto de objetos de entrada transferibles. Las entradas deben ser clasificadas y únicas. Las entradas se ordenan primero lexicográficamente por su **`TxID`** y luego por el **`UTXOIndex`** de bajo a alto. Si hay entradas que tienen el mismo **`TxID`** y **`UTXOIndex`**, entonces la transacción es inválida ya que esto resultaría en un doble gasto.
 * **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
-### Especificación Gantt de  Base Tx
+### Especificación Gantt de una Transacción Base No Firmada
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1189,7 +1189,7 @@ BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Me
                           +------------------------------------------------------+
 ```
 
-### Especificación Proto de  Base Tx
+### Especificación Proto de una Transacción Base No Firmada
 
 ```text
 message BaseTx {
@@ -1202,7 +1202,7 @@ message BaseTx {
 }
 ```
 
-### Ejemplo de Base Tx
+### Ejemplo de una Transacción Base No Firmada
 
 Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores:
 
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMjc0ODE0MCw1NTk1NjU5LC04MjM5Mj
-g4ODAsLTk2Mjk2MDA1OCw5NzQzNjAxMDQsLTkzOTY2NzgwNCwt
-NDM0NDg5MTA2LC05MDg1NDc1NzksMTI2MzkwMzI4MSwxNTI2NT
-AxMDA1LC0xMjcyODI0MDkwLC0xMTk1NDkzNTcsLTE2MjgyNTI3
-NTMsLTE2Nzc0MDA2NSw2Njg4ODMyODMsLTc3NTc0Mzk2MiwtMT
-k0MDE4NjI1NywxNjU5MTgyMDMsMjUyNDIwODEwLC0xOTQzMjM0
-MDddfQ==
+eyJoaXN0b3J5IjpbODIxNzcwNTE4LDU1OTU2NTksLTgyMzkyOD
+g4MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwtOTM5NjY3ODA0LC00
+MzQ0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MD
+EwMDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1
+MywtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOT
+QwMTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQw
+N119
 -->
