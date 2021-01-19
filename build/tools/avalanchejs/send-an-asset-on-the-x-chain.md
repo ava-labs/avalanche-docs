@@ -59,11 +59,11 @@ let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
 ```
 
-And the transaction is sent!
+¡Y la transacción es enviada!
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## Obtener estado de la transacción <a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
+Ahora que enviamos la transacción a la red, lleva unos segundos determinar si la transacción ha sido aprobada. Podemos obtener un estado actualizado de la transacción usando el TxID a través de la X-Chain.
 
 ```text
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
@@ -92,6 +92,6 @@ if(newBalance.toNumber() != mybalance.sub(sendAmount).toNumber()){
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc3MTI1Njk2LDE0MTQ3Nzc0MjUsLTY3ND
-AwNTI5Nl19
+eyJoaXN0b3J5IjpbMTQzNjQ3Mzk4MiwxNDE0Nzc3NDI1LC02Nz
+QwMDUyOTZdfQ==
 -->
