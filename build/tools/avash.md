@@ -251,7 +251,7 @@ Comandos Disponibles:
 **runscript**
 
 ```text
-Runs the script provided in the argument, relative to the present working directory.
+Ejecuta el script proporcionado en el argumento, relativo al directorio de trabajo actual.
 
 Uso:
   avash runscript [script file] [flags]
@@ -260,7 +260,7 @@ Uso:
 **setoutput**
 
 ```text
-Sets the log level of a specific log output type.
+Establece el nivel de registro de un tipo específico de salida de registro.
 
 Uso:
   avash setoutput [log output] [log level]
@@ -269,7 +269,7 @@ Uso:
 **startnode**
 
 ```text
-Starts an Avalanche client node using procmanager and gives it a name. Example:
+Inicia un nodo de clientes de Avalanche usando procmanager y le da un nombre. Ejemplo:
 
 startnode MyNode1 --public-ip=127.0.0.1 --staking-port=9651 --http-port=9650 ... 
 
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk2NTAzNTg5MywxMDUzNzEyMzk1LC0yOD
+eyJoaXN0b3J5IjpbMTA4Njg1OTg0NywxMDUzNzEyMzk1LC0yOD
 E3MTgwOF19
 -->
