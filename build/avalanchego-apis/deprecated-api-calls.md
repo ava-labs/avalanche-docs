@@ -1,16 +1,16 @@
 ---
 descripción: >-
-  Esta página lista los métodos, argumentos y respustas de la API que han sido descuentinuadas y
+  Esta página lista los métodos, argumentos y respustas de la API que han sido descontinuadas y
   serán eliminadas o modificadas en versiones siguientes.
 ---
 
-# Deprecated API Calls
+# LLamadas de API DESCONTINUADAS
 
 ## P-Chain API
 
 ### `getCurrentValidators`
 
-In v1.0.0, the signature was:
+En v1.0.0, la signature was:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -152,5 +152,5 @@ Where `reason` is the reason the transaction was dropped. `reason` is only prese
 Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAwMzk3MzU1OF19
+eyJoaXN0b3J5IjpbMTEzMDE3NDc5OCwxMDAzOTczNTU4XX0=
 -->
