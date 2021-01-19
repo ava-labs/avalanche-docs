@@ -47,7 +47,7 @@ Los cambios en esta versión, v1.0.5, son compatibles con versiones anteriores. 
 * Optimized AVM load user to avoid reading unnecessary information from disk.
 * Removed a memory allocation + copy in socket sending for the full length of the message.
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
 ## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
@@ -94,8 +94,9 @@ In this new format, reason will not be present unless the status is Dropped.
 Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
 ```
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0NzgyOTE1LC0xMjQ4Nzc1MTc2XX0=
+eyJoaXN0b3J5IjpbLTE4NDUwMzc2OTMsLTEyNDg3NzUxNzZdfQ
+==
 -->
