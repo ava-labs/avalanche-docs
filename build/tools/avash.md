@@ -185,8 +185,8 @@ Uso:
 **help**
 
 ```text
-Help provides help for any command in the application.
-Simply type avash help [path to command] for full details.
+Help proporciona ayuda para cualquier comando de la aplicación.
+Simplemente escriba avash help [aquí va el comando] para obtener todos los detalles.
 
 Uso:
   avash help [command] [flags]
@@ -351,6 +351,6 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 Example Lua scripts are in the `./scripts` folder.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTgyNzA3MjM1LDEwNTM3MTIzOTUsLTI4MT
-cxODA4XX0=
+eyJoaXN0b3J5IjpbLTc3MjI2MTgzMywxMDUzNzEyMzk1LC0yOD
+E3MTgwOF19
 -->
