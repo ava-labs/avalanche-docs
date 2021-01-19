@@ -423,7 +423,7 @@ Hagamos una salida de acuñación con SECP256K1:
 
 ## Salida de Transferencia NFT
 
-Una salida de transferencia NFT o "NFT transfer output"  es una NFT que es propiedad de una colección de direcciones.
+Una salida de transferencia NFT o "NFT transfer output"  es un NFT que es propiedad de una colección de direcciones.
 
 #
 ## **Que Contiene una Salida de Transferencia NFT**
@@ -1920,11 +1920,11 @@ Ejemplo de un UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2MDIxOTE3NywtOTM5NjY3ODA0LC00Mz
-Q0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MDEw
-MDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1My
-wtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQw
-MTg2MjU3LDE2NTkxODIwMywyNTI0MjA4MTAsLTE5NDMyMzQwNy
-wtMTY5OTk1OTc4NiwtMjA5NjMxMjQwMCw5NzkxMDc4NTEsMjEz
-MTc2MjczMF19
+eyJoaXN0b3J5IjpbOTc0MzYwMTA0LC05Mzk2Njc4MDQsLTQzND
+Q4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAw
+NSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC
+0xNjc3NDAwNjUsNjY4ODgzMjgzLC03NzU3NDM5NjIsLTE5NDAx
+ODYyNTcsMTY1OTE4MjAzLDI1MjQyMDgxMCwtMTk0MzIzNDA3LC
+0xNjk5OTU5Nzg2LC0yMDk2MzEyNDAwLDk3OTEwNzg1MSwyMTMx
+NzYyNzMwXX0=
 -->
