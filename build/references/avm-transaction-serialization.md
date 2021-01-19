@@ -348,10 +348,10 @@ Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-ad
 
 Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000006`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es "0x00000006".
+* **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
 ### **Gantt SECP256K1 Mint Output Specification**
 
@@ -1918,6 +1918,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjczMTk5OTQsLTEyMjU3OTk4MjEsMT
-k2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbNjYwMTc5NzQ3LC0xNTY3MzE5OTk0LC0xMj
+I1Nzk5ODIxLDE5NjQ3ODI3OTldfQ==
 -->
