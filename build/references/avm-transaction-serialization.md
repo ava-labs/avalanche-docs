@@ -153,15 +153,16 @@ Hagamos una entrada transferible:
 
 Las operaciones transferibles describen un conjunto de UTXOs con una operación de transferencia proporcionada. Sólo se puede hacer referencia a una identificación de activo por operación.
 
-### What Transferable Op Contains
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+### Que Contiene una Operación Transferible 
 
-* **`AssetID`** is a 32-byte array that defines which asset this operation changes.
-* **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
-* **`TransferOp`** is a transferable operation object.
+Una operación transferible contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
 
-### Gantt Transferable Op Specification
+* **`AssetID`** es un array de 32 bytes que define qué activo cambia esta operación.
+* **`UTXOIDs`** es un array de tuplas TxID-OutputIndex. Esta matriz debe ser ordenada en orden lexicográfico.
+* **`TransferOp`** es un objeto de operación transferible.
+
+### Especificación de Operaciones Transferibles de Gantt
 
 ```text
 +-------------+------------+------------------------------+
@@ -176,7 +177,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
                            +------------------------------+
 ```
 
-### Proto Transferable Op Specification
+### Especificaciones de Operaciones Proto Transferibles
 
 ```text
 message UTXOID {
@@ -1914,5 +1915,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTU1OTc4NzMsMTk2NDc4Mjc5OV19
+eyJoaXN0b3J5IjpbLTE3MzE4NzQ4NzYsMTk2NDc4Mjc5OV19
 -->
