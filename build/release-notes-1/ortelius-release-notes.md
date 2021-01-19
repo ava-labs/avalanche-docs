@@ -15,12 +15,12 @@ Cambios de comportamiento:
 
 Otros cambios:
 
-* Add opt-in support to not return genesis data
-* Add fixed/variable cap information to API
-* Add transaction fee data to API
+* Agregado el soporte para no devolver los datos de la génesis
+* Agregada información de capital fijo/variable a la API
+* Agregados datos de comisiones de transacción a la API
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2ODkyMjIzNF19
+eyJoaXN0b3J5IjpbMTc5ODg5MjUwM119
 -->
