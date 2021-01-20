@@ -1,12 +1,12 @@
 # Protocolo de Red
 
-Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
+La red de Avalanche define el formato de comunicación central entre los nodos de Avalanche. Utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado de la carga útil.
 
-`"Containers"` are mentioned extensively in the description. A Container is simply a generic term for blocks or vertices, without needing to specify whether the consensus algorithm is DAG or Chain.
+Los `"Containers"` se mencionan extensamente en la descripción. Un Contenedor es simplemente un término genérico para bloques o vértices, sin necesidad de especificar si el algoritmo de consenso es DAG o Chain.
 
 ## GetVersion
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+`GetVersion` solicita que se envíe un mensaje de `Version` como respuesta.
 
 The OpCode used by `GetVersion` messages is: `0x00`.
 
@@ -439,5 +439,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODcxMjc1ODJdfQ==
+eyJoaXN0b3J5IjpbMjA2Mjg4NTE3NF19
 -->
