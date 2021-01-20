@@ -167,10 +167,10 @@ Especifica el directorio en el que se guardan los registros del sistema. El valo
 La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 
 * `--network-id=mainnet` -&gt; Conectar a la Red Principal \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+* `--network-id=fuji` -&gt; Conectar a la Red de Pruebas Fuji.
+* `--network-id=testnet` -&gt; Conectar a la Red de Pruebas actual. \(Right now, this is Fuji.\)
+* `--network-id=local` -&gt; Conectar a una Red de Pruebas Local.
+* `--network-id=network-{id}` -&gt; Conectar a la Red que tenga el  . `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjgxNTY5MDIsLTIwNjk0MjU1ODIsMT
-c2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5
-MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbMTI0NTc2OTY4LC0yMDY5NDI1NTgyLDE3Nj
+czMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3
+LDEyMjc1NjE1NzRdfQ==
 -->
