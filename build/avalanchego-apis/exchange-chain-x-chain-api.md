@@ -387,11 +387,11 @@ avm.createVariableCapAsset({
 * `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones en`minters` que juntos podrán acuñar nuevos activos firmando una transacción de acuñamiento.
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `username` paga por la comisión de transacción.
+* `assetID` es el ID del nuevo activo.
+* `changeAddr` en el resultado, es la dirección a la cual cualquier cambio fue enviado.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -474,7 +474,7 @@ avm.createNFTAsset({
 * `assetID` is the ID of the new asset.
 * `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -547,7 +547,7 @@ avm.mintNFT({
 * `changeAddr` in the result is the address where any change was sent.
 * `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -610,7 +610,7 @@ avm.export({
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU5MjMxNDI2LC0zNTEyOTU2ODEsLTE5OT
+eyJoaXN0b3J5IjpbODc5MjYyNDc1LC0zNTEyOTU2ODEsLTE5OT
 U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
 NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
 M4NDM2MTgzXX0=
