@@ -1548,7 +1548,7 @@ Una StakeableLockOut contiene un `TypeID`, `Locktime` y `TransferableOut`.
 
 * **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
 * **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
-* **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
+* **`transferableout`**: "Tome como ejemplo  Salida de Transferencia SECP256K1 como se ha definido previamente"
 
 ### **Gantt StakeableLockOut Specification**
 
@@ -1608,10 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMwNzY2MjU5NCwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbMjkwMzIyMzUzLC00MTE5MDczNTEsLTIwOD
+g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
+NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
+ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
+NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
+gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
