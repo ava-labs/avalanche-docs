@@ -332,15 +332,15 @@ Fracción de tiempo que un validador debe estar en línea para recibir las recom
 
 `--max-non-staker-pending-msgs` \(int\):
 
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+Número máximo de mensajes que se permite tener pendientes a una persona que no hace stake. El valor por defecto es `20`.
 
 `--staker-msg-reserved` \(float\):
 
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+Parte del buffer de mensajes pendientes reservado para los mensajes de los validadores. El valor por defecto es `0.375`.
 
 `--staker-cpu-reserved` \(float\):
 
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+Porción del tiempo de la CPU de la cadena reservada para los mensajes de los validadores. El valor por defecto es `0.375`.
 
 ### Network Timeout
 
@@ -459,8 +459,9 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4NjI1OTMxMywtOTQ5ODg4NDM2LC0xMT
-I0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0ODI5LC0xNTcyNDIw
-MTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MDksODc4MzgyODQyLD
-E1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbLTEwMTcwNzQ0NzgsLTk4NjI1OTMxMywtOT
+Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
+ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
+ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
+NjE1NzRdfQ==
 -->
