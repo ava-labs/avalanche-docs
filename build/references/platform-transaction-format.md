@@ -162,7 +162,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### ** Especificación Gantt de Salida de Transferencia  SECP256K1**
+### ** Especificación Gantt de una Salida de Transferencia SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -180,7 +180,7 @@ Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Lockti
                          +--------------------------------+
 ```
 
-### **Especificación Proto de Salida de Transferencia SECP256K1 **
+### **Especificación Proto de una Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -192,7 +192,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **Ejemplo de Salida de Transferencia SECP256K1**
+### **Ejemplo de una Salida de Transferencia SECP256K1**
 
 Hagamos una salida de transferencia secp256k1 con:
 
@@ -1606,7 +1606,8 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMz
-U2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4
-MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NT
+I1MDU5NiwtNTAzNTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1
+OTcsLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ
+==
 -->
