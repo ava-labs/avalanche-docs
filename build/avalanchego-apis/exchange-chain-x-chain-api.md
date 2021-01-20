@@ -671,7 +671,7 @@ avm.exportAVAX({
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -720,7 +720,7 @@ avm.exportKey({
 * `username` must control `address`.
 * `privateKey` is the string representation of the private key that controls `address`.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -762,7 +762,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -816,7 +816,7 @@ avm.getAssetDescription({assetID: string}) -> {
 * `symbol` is the asset’s symbol.
 * `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -860,7 +860,7 @@ avm.getBalance({
 * `address` owner of the asset
 * `assetID` id of the asset for which the balance is requested
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -908,7 +908,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -952,7 +952,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 * `Rejected`: The transaction will never be accepted by any node in the network
 * `Unknown`: The transaction hasn’t been seen by this node
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1154,7 +1154,7 @@ avm.import({
 * `username` is the user that controls `to`.
 * `txID` is the ID of the newly created atomic transaction.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1201,7 +1201,7 @@ avm.importAVAX({
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
 * `username` is the user that controls `to`.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1245,7 +1245,7 @@ avm.importKey({
 
 * Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1287,7 +1287,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1326,7 +1326,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1378,7 +1378,7 @@ avm.send({
 * You can attach a `memo`, whose length can be up to 256 bytes.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1438,7 +1438,7 @@ avm.sendMultiple({
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1504,7 +1504,7 @@ avm.sendNFT({
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1555,7 +1555,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+#### Llamada de ejemplo
 
 ```cpp
 curl -X POST --data '{
@@ -1611,7 +1611,7 @@ wallet.send({
 * You can attach a `memo`, whose length can be up to 256 bytes.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1675,7 +1675,7 @@ wallet.sendMultiple({
 * You can attach a `memo`, whose length can be up to 256 bytes.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODc5MjYyNDc1LC0zNTEyOTU2ODEsLTE5OT
+eyJoaXN0b3J5IjpbNzE3Njc3MjU1LC0zNTEyOTU2ODEsLTE5OT
 U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
 NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
 M4NDM2MTgzXX0=
