@@ -1080,7 +1080,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
 ### **Que Contiene una  Credencial SECP256K1**
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
 ### **Especificación Gantt de una  Credencial SECP256K1**
 
@@ -1920,11 +1920,11 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA4MjA4Mjk1LC01ODEyNzQ2NjUsMTU4OD
-EwNzU2NCwtMTg0OTA0NjI4MSwtMTI5MzQxODI5MSwxMTQ2NzI4
-Mzg5LDU1OTU2NTksLTgyMzkyODg4MCwtOTYyOTYwMDU4LDk3ND
-M2MDEwNCwtOTM5NjY3ODA0LC00MzQ0ODkxMDYsLTkwODU0NzU3
-OSwxMjYzOTAzMjgxLDE1MjY1MDEwMDUsLTEyNzI4MjQwOTAsLT
-ExOTU0OTM1NywtMTYyODI1Mjc1MywtMTY3NzQwMDY1LDY2ODg4
-MzI4M119
+eyJoaXN0b3J5IjpbLTEwOTU4NDczODAsLTU4MTI3NDY2NSwxNT
+g4MTA3NTY0LC0xODQ5MDQ2MjgxLC0xMjkzNDE4MjkxLDExNDY3
+MjgzODksNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOT
+c0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3
+NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MC
+wtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4
+ODgzMjgzXX0=
 -->
