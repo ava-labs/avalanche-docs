@@ -85,7 +85,7 @@ Hagamos una entrada de la EVM:
 ]
 ```
 
-### Entrada transferible
+### Entrada Transferible
 
 La entrada transferible envuelve un `SECP256K1TransferInput`. Las entradas transferibles o "Transferable inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
@@ -93,12 +93,12 @@ La entrada transferible envuelve un `SECP256K1TransferInput`. Las entradas trans
 
 Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is a `SECP256K1TransferInput`, as defined below.
+* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
+* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida
+* **`Input`** es un  `SECP256K1TransferInput`, como se define a continuación.
 
-#### Gantt Transferable Input Specification
+#### Especificación Gantt de una Entrada Transferible
 
 ```text
 +------------+----------+------------------------+
@@ -114,7 +114,7 @@ Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`
                         +------------------------+
 ```
 
-#### Proto Transferable Input Specification
+#### Especificación Proto de una Entrada Transferible
 
 ```text
 message TransferableInput {
@@ -125,9 +125,9 @@ message TransferableInput {
 }
 ```
 
-#### Transferable Input Example
+#### Ejemplo de una Entrada Transferible
 
-Let's make a transferable input:
+Hagamos una entrada transferible:
 
 * `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
 * `UTXOIndex: 1`
@@ -923,6 +923,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODExOTA0MDYsLTE0MTkwMTg0ODAsLT
+eyJoaXN0b3J5IjpbLTEzMzk5MTc2OTcsLTE0MTkwMTg0ODAsLT
 c0ODMxNTQ3XX0=
 -->
