@@ -196,11 +196,11 @@ Permite la verificación de la firma. Cuando se configura como `false`, las firm
 
 `--staking-port` \(string\):
 
-The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
+El puerto a través del cual el servidor de stake se conectará a la red de Avalanche externamente. El valor por defecto es `9651`.
 
 `--p2p-tls-enabled` \(boolean\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers. However, This can be disabled for testing. When TLS is disabled, the `stakingID` will be derived from the IP Address the node claims it owns. This will also disable encryption of inter-node communication. This should only be specified for testing. Defaults to `true`. This must be true when `--staking-enabled=true`.
+Avalanche usa conexiones TLS autentificadas de dos vías para identificar con seguridad el `stakingID` de los compañeros conectados. Sin embargo, esto puede ser desactivado para las pruebas. Cuando TLS está deshabilitado, el `stakingID` se derivará de la dirección IP que el nodo dice poseer. Esto también deshabilitará la encriptación de la comunicación entre nodos. Esto sólo debe ser especificado para las pruebas. Por defecto es `true`. Esto debe ser cierto cuando `--staking-enabled=true`.
 
 `--staking-enabled` \(boolean\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3NzkwOTg5OCwtMTU3MjQyMDE0OCwtMj
+eyJoaXN0b3J5IjpbMTMyOTYyMTAwMSwtMTU3MjQyMDE0OCwtMj
 A2OTQyNTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEz
 OTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0XX0=
 -->
