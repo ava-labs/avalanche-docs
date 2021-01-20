@@ -1260,7 +1260,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1301,7 +1301,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1340,7 +1340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1398,7 +1398,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1467,7 +1467,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1523,7 +1523,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1569,7 +1569,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+#### Respuesta Ejemplo
 
 ```cpp
 {
@@ -1631,7 +1631,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1704,7 +1704,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTk1OTAxNjQ2LC0zNTEyOTU2ODEsLTE5OT
-U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
-NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
-M4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMT
+k5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0
+MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LD
+EyMzg0MzYxODNdfQ==
 -->
