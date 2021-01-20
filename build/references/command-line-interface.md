@@ -346,7 +346,7 @@ Porción del tiempo de la CPU de la cadena reservada para los mensajes de los va
 
 `--network-initial-timeout` \(duration\):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Valor de tiempo de espera inicial del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `5s`.
 
 `--network-minimum-timeout` \(duration\):
 
@@ -354,15 +354,15 @@ Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 `--network-maximum-timeout` \(duration\):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+Valor máximo de tiempo de espera del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `10s`.
 
 `--network-timeout-multiplier` \(float\):
 
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
+Multiplicador del tiempo de espera después de una solicitud fallida. Por defecto `1.1`.
 
 `--network-timeout-reduction` \(duration\):
 
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
+Reducción del tiempo de espera después de una solicitud exitosa, en nanosegundos. Por defecto es `1`.
 
 ### Throughput Server
 
@@ -459,9 +459,9 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMTcwNzQ0NzgsLTk4NjI1OTMxMywtOT
-Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
-ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
-ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
-NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbMzU3NTIxMzkxLC05ODYyNTkzMTMsLTk0OT
+g4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0MDE3LDY2NTcyNDgy
+OSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0ODA5LD
+g3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYx
+NTc0XX0=
 -->
