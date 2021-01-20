@@ -451,17 +451,17 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `coreth-admin-apienabled` -&gt; Habilita el API de Administración en el plugin Coreth.
 * `net-api-enabled` -&gt; Habilita el API de `net_*`.
 * `rpc-gas-cap` -&gt; Establece el máximo de gas a ser consumido por un llamado RPC \(usado en `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
+* `rpc-tx-fee-cap` -&gt; Establece la comisión de transacción global \(price \* gaslimit\) para las variantes de transmisión. La unidad es AVAX.
+* `eth-api-enabled` -&gt; Habilita el API de `eth_*`.
+* `personal-api-enabled` -&gt; Habilita el API de `personal_*`.
+* `tx-pool-api-enabled` -&gt; Habilita el API de `txpool_*`.
+* `debug-api-enabled` -&gt; Habilita el API de `debug_*`.
+* `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczNDA3MzI4OCwtOTg2MjU5MzEzLC05ND
-k4ODg0MzYsLTExMjQ5NDgyNjIsLTEyNzA4NDAxNyw2NjU3MjQ4
-MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOS
-w4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2
-MTU3NF19
+eyJoaXN0b3J5IjpbLTEwMjgyMjQzMjksLTk4NjI1OTMxMywtOT
+Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
+ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
+ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
+NjE1NzRdfQ==
 -->
