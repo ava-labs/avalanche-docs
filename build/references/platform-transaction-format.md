@@ -311,11 +311,11 @@ Hagamos una salida de los propietarios de la salida SECP256K1 con:
 
 ## Entradas
 
-Las entradas tienen un tipo posible: `SECP256K1TransferInput`.
+Las entradas o "Inputs"  tienen un tipo posible: `SECP256K1TransferInput`.
 
 ## Entrada de Transferencia SECP256K1 
 
-Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) permite utilizar una salida de transferencia secp256k1 no utilizada.
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer input" permite utilizar una salida de transferencia secp256k1 no utilizada.
 
 ### **Que Contiene una Entrada de Transferencia SECP256K1**
 
@@ -380,7 +380,7 @@ Hagamos una entrada de pago con:
 
 ## Transacciones no Firmadas
 
-Las transacciones no firmadas contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
+Las transacciones no firmadas o "Unsigned transactions"  contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
 ## BaseTx No Firmado
 
@@ -1606,8 +1606,8 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzc1MjY5NzksMTIwOTUwNjI3NCwtNj
-QzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC02NzY2MDc5
-NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC
-00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTIwNTAwNDcyMTQsLTIwMzc1MjY5NzksMT
+IwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYz
+ODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMi
+wtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
