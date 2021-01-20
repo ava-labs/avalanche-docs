@@ -76,14 +76,14 @@ avm.buildGenesis({
             "initialState": {
                 "variableCap" : [          // No existen unidades del activo en el génesis
                     {
-                        "minters": [       // la firma de A o B pueden minar más de
+                        "minters": [       // la firma de A o B pueden acuñar más de
                             "A",           // los activos.
                             "B"
                         ],
                         "threshold":1
                     },
                     {
-                        "minters": [       // Las firmas de 2 de A, B y C pueden minar
+                        "minters": [       // Las firmas de 2 de A, B y C pueden acuñar
                             "A",           // mas del activo
                             "B",
                             "C"
@@ -317,7 +317,7 @@ avm.mint({
 * `amount`  de unidades del `assetID` que se crearán y controlará la dirección especificada en `to`.
 * `from` son las direcciones que deseas usar para esta operación. Si se omiten, necesariamente utiliza alguna de tus direcciones.
 * `changeAddr` es la dirección en la que cualquier cambio será enviado. Si se omite, se enviará a cualquier dirección controlada por el usuario.
-* `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de minar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
+* `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de acuñar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
 * `txID` es el ID de la transacción.
 * `changeAddr` en el resultado es la dirección a la cual se enviará cualquier cambio.
 
@@ -355,7 +355,7 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Crea un nuevo activo fungible con capital variable. No existen unidades del activo al iniciar. Los mineros Minters can mint units of this asset using `avm.mint`.
+Crea un nuevo activo fungible con capital variable. No existen unidades del activo al iniciar. Los mineros pueden acuñar unidades de este activo utilizando `avm.mint`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjc5MzI4NDYsLTM1MTI5NTY4MSwtMT
-k5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0
-MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LD
-EyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbMjEyMTQ1NTg0OCwtMzUxMjk1NjgxLC0xOT
+k1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQx
+MjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMT
+IzODQzNjE4M119
 -->
