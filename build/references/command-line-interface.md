@@ -67,11 +67,11 @@ Cuando se establece en `true`, las aserciones se ejecutarán en tiempo de ejecuc
 
 `--bootstrap-ids` \(string\):
 
-Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se usarán para autenticar a los compañeros de bootstrap. Esto sólo necesita ser establecido cuando `--p2p-tls-enabled=true`. Una configuración de ejemplo de este campo sería `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se usarán para autenticar a los compañeros de bootstrap. Esto sólo necesita ser establecido cuando `--p2p-tls-enabled=true`. Una configuración de ejemplo de este campo sería `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
 `--bootstrap-ips` \(string\):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usarán para arrancar el estado actual de Avalanche. Un ejemplo de configuración de este campo sería `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
 ### Connection Metering
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyODE5ODMzOCwxNTExNTEzOTY0LDIwNT
-U4ODkyNywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbODkxMjE0ODM2LDE1MTE1MTM5NjQsMjA1NT
+g4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
