@@ -1,4 +1,4 @@
-# Command Line Interface
+# Interfaz de Linea de Comando
 
 When running a node, there are a variety of possible configurations that are supported.
 
@@ -457,3 +457,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `debug-api-enabled` -&gt; Enables `debug_*` API.
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTEyMTI4MzY4Ml19
+-->
