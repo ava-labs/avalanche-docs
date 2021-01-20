@@ -647,10 +647,10 @@ Una transacción agregar validador de subnet no firmada contiene un `BaseTx`, `V
 * **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
 * **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
 * **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
-* **`SubnetID`** a 32 byte subnet id
-* **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
-
-### **Gantt Unsigned Add Subnet Validator Tx Specification**
+* **`SubnetID`** un id de subnet de 32 bytes
+* **`SubnetAuth`` contiene `SigIndices`` y tiene un tipo de identificación de `0x0000000a`. `SigIndices` es una lista de ints únicos que definen las direcciones que ejecutan la firma de control para añadir un validador a una subred. El conjunto debe ser clasificado de bajo a alto.
+* 
+### **Especificación Gantt de una Transacción Agregar Validador de Subnet No Firmada**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -666,7 +666,7 @@ Una transacción agregar validador de subnet no firmada contiene un `BaseTx`, `V
                                    +---------------------------------------------+
 ```
 
-### **Proto Unsigned Add Subnet Validator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Validador de Subnet No Firmada**
 
 ```text
 message AddSubnetValidatorTx {
@@ -677,9 +677,9 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### **Unsigned Add Subnet Validator Tx Example**
+### **Ejemplo de una Transacción Agregar Validador de Subnet No Firmada**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous examples:
+Hagamos un ejemplo de una transacción agregar validador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4MjkxODk3MSwtMjA4ODg3MjU5MywxNz
-k5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3
-Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mj
-c0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3
-NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5Mz
-kwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbNDkyNjYzNDA3LC0yMDg4ODcyNTkzLDE3OT
+kxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3
+NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNz
+QsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2
+NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOT
+A3MCwtNDgyMzM2NTIzXX0=
 -->
