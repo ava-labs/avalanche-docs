@@ -91,7 +91,7 @@ Especifica el directorio en el que se encuentra la base de datos. Por defecto `"
 
 `--db-enabled` \(booleano\):
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+Si se configura como `false`, las actualizaciones de estado se realizan únicamente en una base de datos en memoria, sin hacer ningún cambio en el almacenamiento permanente. Si se establece en `true`, las actualizaciones de estado se escriben en una base de datos local persistente. Por defecto es `true`.
 
 ### HTTP Server
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0NDU1MDAxNiwxNTExNTEzOTY0LDIwNT
-U4ODkyNywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbNjY3OTU0ODYwLDE1MTE1MTM5NjQsMjA1NT
+g4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
