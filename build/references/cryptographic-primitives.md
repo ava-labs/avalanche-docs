@@ -35,11 +35,11 @@ Lea más sobre el [esquema de direcciones](https://github.com/ava-labs/avalanche
 
 ### Firmas Recuperables Secp256k1 
 
-Las firmas recuperables se almacenan como el **`[R || S || V]`** de 65 bytes donde**`V`** ies 0 o 1 para permitir una rápida recuperación de la clave pública. **`S`** must be in the lower half of the possible range to prevent signature malleability. Before signing a message, the message is hashed using sha256.
+Las firmas recuperables se almacenan como el **`[R || S || V]`** de 65 bytes donde**`V`** ies 0 o 1 para permitir una rápida recuperación de la clave pública. **`S`** debe estar en la mitad inferior del rango posible para prevenir la maleabilidad de la firma. Antes de firmar un mensaje, el mensaje se somete a hash usando sha256.
 
-### Secp256k1 Example
+### Ejemplo Secp256k1
 
-Suppose Rick and Morty are setting up a secure communication channel. Morty creates a new public-private key pair.
+Supongamos que Rick y Morty están estableciendo un canal de comunicación seguro. Morty crea un nuevo par de claves público-privadas.
 
 Private Key: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070`
 
@@ -115,6 +115,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjY2ODQzNzYsLTE1NjczNTM0MzhdfQ
-==
+eyJoaXN0b3J5IjpbMTUxOTAzMjg1MiwtMTU2NzM1MzQzOF19
 -->
