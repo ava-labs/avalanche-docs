@@ -890,11 +890,11 @@ Hagamos un ejemplo de una transacción agregar delegador de subnet no firmada qu
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## Transacción Crear Subnet No Firmada
 
-### **What Unsigned Create Subnet Tx Contains**
+### **Que Contiene una Transacción Crear Subnet No Firmada**
 
-An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+Una transacción crear subnet no firmada contiene un `BaseTx`, y `RewardsOwner`. Su `TypeID` for this type is `0x00000010`.
 
 * **`BaseTx`**
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQwMTg2MzQ1LC00MTE5MDczNTEsLTIwOD
+eyJoaXN0b3J5IjpbNTMwMTAzMjIyLC00MTE5MDczNTEsLTIwOD
 g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
 NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
 ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
