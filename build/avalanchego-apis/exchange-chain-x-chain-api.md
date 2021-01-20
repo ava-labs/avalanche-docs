@@ -581,7 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+Envía un activo no-AVAX desde la X-Chain hacia la P-Chain o C-Chain. Después de llamar este método, debes llamar [`avax.import`](contract-chain-c-chain-api.md#avax-import) en la C-Chain o P-Chain to complete the transfer.
 
 #### **Firma**
 
@@ -1718,10 +1718,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMD
-AzMzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0
-OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2OD
-EsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEw
-NDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1OD
-YzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMD
+c0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2
+OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMD
+EsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYz
+ODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mz
+c2OSwtOTgxNDU4NjM2LDEyMzg0MzYxODNdfQ==
 -->
