@@ -391,19 +391,20 @@ Un nodo debe enviar un mensaje "PullQuery" si quiere saber las preferencias actu
 
 ### Resumen
 
-A `Chits` message provides a requested set of preferred container\(s\) to a node.
+Un mensaje `Chits` proporciona un conjunto solicitado de contenedores preferidos a un nodo.
 
-The OpCode used by `Chits` messages is: `0x08`.
+El OpCode usado por los mensajes `Chits` es: `0x08`.
 
-### What Chits contains
 
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
+### Que contiene Chits
 
-**`SubnetID`** defines which subnet this message is destined for.
+Un mensaje de `Chits` contiene un `SubnetID`, `RequestID`, y  `Preferences`.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`SubnetID`** define a que subnet está destinado este mensaje.
 
-**`Preferences`** is the list of containerIDs that fully describe the node’s preferences.
+**`RequestID`** es un contador que ayuda a llevar la cuenta de los mensajes enviados por un nodo.
+
+**`Preferences`** es la lista de ContainerIDs que describe completamente las preferencias del nodo.
 
 ```text
 [
@@ -451,6 +452,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyNDcyNzg5LC05MzkzMDU1MDAsMTA2Nz
+eyJoaXN0b3J5IjpbODQ4MjkxNzUzLC05MzkzMDU1MDAsMTA2Nz
 Y0NDM2Ml19
 -->
