@@ -47,17 +47,17 @@ Contenido:
 ]
 ```
 
-### How Version is handled
+### Como se maneja Version
 
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
+Si las versiones son incompatibles o los tiempos actuales difieren demasiado, la conexión será terminada.
 
-### When Version is sent
+### Cuando se envía Version
 
-`Version` is sent in response to a `GetVersion` message.
+`Version` se envía en respuesta a un mensaje `GetVersion`.
 
-### Version Example
+### Ejemplo de Version
 
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
+Enviando un mensaje de `Version` con la fecha`November 16th, 2008 at 12:00am (UTC)` y la versión `avalanche/0.0.1`.
 
 ```text
 [
@@ -75,7 +75,7 @@ Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)`
 
 ## GetPeers
 
-### Overview
+### Resumen
 
 `GetPeers` requests that a `Peers` message be sent as a response.
 
@@ -441,5 +441,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTA0MTQyNzldfQ==
+eyJoaXN0b3J5IjpbMTM0NzY4NTk2Nl19
 -->
