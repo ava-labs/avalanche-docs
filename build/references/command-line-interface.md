@@ -204,7 +204,7 @@ Avalanche usa conexiones TLS autentificadas de dos vías para identificar con se
 
 `--staking-enabled` \(boolean\):
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. When this is `true`, `--p2p-tls-enabled` must be set to `true` in order to secure P2P communications.
+Avalanche usa Proof of Stake \(PoS\) como resistencia de Sybil para que sea prohibitivo atacar la red. Cuando esto es `true`, `--p2p-tls-enabled` debe ser configurado como `true` para asegurar las comunicaciones P2P.
 
 `--staking-tls-cert-file` \(string, file path\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyOTYyMTAwMSwtMTU3MjQyMDE0OCwtMj
-A2OTQyNTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEz
-OTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbNjY1NzI0ODI5LC0xNTcyNDIwMTQ4LC0yMD
+Y5NDI1NTgyLDE3NjczMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5
+NjQsMjA1NTg4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
