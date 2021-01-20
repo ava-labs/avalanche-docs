@@ -248,10 +248,10 @@ avm.createFixedCapAsset({
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
 * `username` y `password` denotan el usuario que pagará por la comisión de la transacción.
-* Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+* Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades del activo en el génesis.
+* `assetID` es el ID del nuevo activo.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -294,9 +294,9 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
+Mina unidades de un activo con capitalización variable creados con [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.mint({
@@ -314,7 +314,7 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
+* `amount` unidades del `assetID` will be created and controlled by address `to`.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODY3OTg1NDU0LDYzODM2NTgxOCwtMTA0OD
+eyJoaXN0b3J5IjpbMzQ2MzI5NDQ0LDYzODM2NTgxOCwtMTA0OD
 A0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2
 LDEyMzg0MzYxODNdfQ==
 -->
