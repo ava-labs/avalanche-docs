@@ -306,11 +306,11 @@ El consenso Snow define `k` como el número de validadores que se muestrean dura
 
 `--snow-quorum-size` \(int\):
 
-El consenso Snow define `alpha` como el número de validadores que deben preferir una transacción durante cada sondeo de la red para aumentar la confianza en la transacción. Este parámetro nos permite definir el valor `alpha` utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow.. El valor debe ser mayor que `k/2`.  El valor por defecto es `14`.
+El consenso Snow define `alpha` como el número de validadores que deben preferir una transacción durante cada sondeo de la red para aumentar la confianza en la transacción. Este parámetro nos permite definir el valor `alpha` utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser mayor que `k/2`.  El valor por defecto es `14`.
 
 `--snow-virtuous-commit-threshold` \(int\):
 
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
+El consenso Snow define `beta1` como el número de sondeos consecutivos que una transacción virtuosa debe aumentar su confianza para que sea aceptada. Este parámetro nos permite definir el valor `beta1`  utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser al menos `1`. El valor por defecto es `15`.
 
 `--snow-rogue-commit-threshold` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMDc4NDEzLC0xMTI0OTQ4MjYyLC0xMj
-cwODQwMTcsNjY1NzI0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1
-NTgyLDE3NjczMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMj
-A1NTg4OTI3LDEyMjc1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbLTExNTUzMjYwMTYsLTExMjQ5NDgyNjIsLT
+EyNzA4NDAxNyw2NjU3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0
+MjU1ODIsMTc2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NC
+wyMDU1ODg5MjcsMTIyNzU2MTU3NF19
 -->
