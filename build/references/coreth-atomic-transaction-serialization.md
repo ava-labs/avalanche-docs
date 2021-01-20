@@ -16,14 +16,14 @@ Tipo de entrada que especifica una cuenta EVM para deducir los fondos como parte
 
 #### What EVM Input Contains
 
-An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
+Una Entrada de EVM contiene una `address`, `amount`, `assetID`, y `nonce`.
 
-* **`Address`** is the EVM address from which to transfer funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
-* **`Nonce`** is the nonce of the EVM account exporting funds.
+* **`Address`** es la dirección de la EVM desde la que se transfieren los fondos.
+* **`Amount`** es la cantidad del activo a ser transferido \(especificado en nAVAX para AVAX y la menor denominación para todos los demás activos\N).
+* **`AssetID`** es la ID del activo a transferir.
+* **`Nonce`** es el nonce de la cuenta de EVM que exporta los fondos.
 
-#### Gantt EVM Input Specification
+#### Especificación Gantt de una Entrada de la EVM
 
 ```text
 +----------+----------+-------------------------+
@@ -922,6 +922,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2MDQ0NDQyNCwtMTQxOTAxODQ4MCwtNz
+eyJoaXN0b3J5IjpbLTkwODgxODYwNCwtMTQxOTAxODQ4MCwtNz
 Q4MzE1NDddfQ==
 -->
