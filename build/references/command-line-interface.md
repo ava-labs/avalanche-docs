@@ -294,7 +294,7 @@ Las implementaciones DAG del consenso de Snow definen `b` como el número de tra
 
 `--snow-avalanche-num-parents` \(int\):
 
-DAG implementations of Snow consensus define `p` as the number of parents a vertex should include. Increasing `p` will improve the amortization of network queries. However, by increasing the connectivity of the graph, the complexity of the graph traversals is increased. The value must be at least `2`. Defaults to `5`.
+Las implementaciones DAG del consenso de Snow definen `p` como el número de progenitores que debe incluir un vértice. Aumentar  `p` mejorará la absorción de las consultas de la red. Sin embargo, al aumentar la conectividad del gráfico, se incrementa la complejidad de los recorridos del gráfico. El valor debe ser al menos `2`. El valor por defecto es `5`.
 
 `--snow-concurrent-repolls` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA5MjU2NDgxOSwtMTI3MDg0MDE3LDY2NT
-cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
-ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
-I3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbLTIwMDAwNzYwNDQsLTEyNzA4NDAxNyw2Nj
+U3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMz
+NDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMT
+IyNzU2MTU3NF19
 -->
