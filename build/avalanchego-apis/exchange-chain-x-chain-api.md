@@ -539,7 +539,7 @@ avm.mintNFT({
 ```
 
 * `assetID` es el ID del activo del nuevo activo NFT creado.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
+* `payload` es una carga arbitraria de hasta 1024 bytes. Su formato de codificación es especificado en Its encoding format is specified by the `encoding` argument.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
@@ -1718,9 +1718,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMT
-cyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEy
-OTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MT
-gsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4
-MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTEwOTA2MDc4LC0xNzAzNTEzMTY1LC0xOT
+IzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzNDMx
+MzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0ND
+UsNjM4MzY1ODE4LC0xMDQ4MDQxMjcyLC05ODA5NjE5ODQsLTQ0
+NTgzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
 -->
