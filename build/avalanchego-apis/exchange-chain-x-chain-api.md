@@ -340,7 +340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -355,7 +355,7 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+Crea un nuevo activo fungible con capital variable. No existen unidades del activo al iniciar. Los mineros Minters can mint units of this asset using `avm.mint`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4ODA5NiwtMzUxMjk1NjgxLC0xOTk1ND
-Y3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQxMjcy
-LC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzOD
-QzNjE4M119
+eyJoaXN0b3J5IjpbLTIwMjc5MzI4NDYsLTM1MTI5NTY4MSwtMT
+k5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0
+MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LD
+EyMzg0MzYxODNdfQ==
 -->
