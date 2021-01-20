@@ -447,10 +447,10 @@ Como la opción `personal-api-enabled` está excluida, será puesta en `false` y
 
 Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la siguiente manera:
 
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
+* `snowman-api-enabled` -&gt; Habilita el API de Snowman.
+* `coreth-admin-apienabled` -&gt; Habilita el API de Administración en el plugin Coreth.
+* `net-api-enabled` -&gt; Habilita el API de `net_*`.
+* `rpc-gas-cap` -&gt; Establece el máximo de gas a ser consumido por un llamado RPC \(usado en `eth_estimateGas`\)
 * `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
 * `eth-api-enabled` -&gt; Enables `eth_*` API.
 * `personal-api-enabled` -&gt; Enables `personal_*` API.
@@ -459,9 +459,9 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2OTM3MjQxMjEsLTk4NjI1OTMxMywtOT
-Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
-ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
-ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
-NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbLTczNDA3MzI4OCwtOTg2MjU5MzEzLC05ND
+k4ODg0MzYsLTExMjQ5NDgyNjIsLTEyNzA4NDAxNyw2NjU3MjQ4
+MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOS
+w4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2
+MTU3NF19
 -->
