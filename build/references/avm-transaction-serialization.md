@@ -1159,7 +1159,7 @@ Las transacciones no firmadas o "Unsigned transactions" contienen el contenido c
 
 ## Transacción Base No Firmada
 
-### Que Contiene una Transacción Base No Firmada 
+### Que Contiene una Transacción Base  
 Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
 * **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
@@ -1169,7 +1169,7 @@ Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `Blo
 * **`Inputs`** es un conjunto de objetos de entrada transferibles. Las entradas deben ser clasificadas y únicas. Las entradas se ordenan primero lexicográficamente por su **`TxID`** y luego por el **`UTXOIndex`** de bajo a alto. Si hay entradas que tienen el mismo **`TxID`** y **`UTXOIndex`**, entonces la transacción es inválida ya que esto resultaría en un doble gasto.
 * **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
-### Especificación Gantt de una Transacción Base No Firmada
+### Especificación Gantt de una Transacción Base 
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1189,7 +1189,7 @@ Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `Blo
                           +------------------------------------------------------+
 ```
 
-### Especificación Proto de una Transacción Base No Firmada
+### Especificación Proto de una Transacción Base
 
 ```text
 message BaseTx {
@@ -1202,9 +1202,9 @@ message BaseTx {
 }
 ```
 
-### Ejemplo de una Transacción Base No Firmada
+### Ejemplo de una Transacción Base
 
-Hagamos una transacción base no firmada que utilice las entradas y salidas de los ejemplos anteriores:
+Hagamos una transacción base  que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
@@ -1920,11 +1920,11 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4ODEwNzU2NCwtMTg0OTA0NjI4MSwtMT
-I5MzQxODI5MSwxMTQ2NzI4Mzg5LDU1OTU2NTksLTgyMzkyODg4
-MCwtOTYyOTYwMDU4LDk3NDM2MDEwNCwtOTM5NjY3ODA0LC00Mz
-Q0ODkxMDYsLTkwODU0NzU3OSwxMjYzOTAzMjgxLDE1MjY1MDEw
-MDUsLTEyNzI4MjQwOTAsLTExOTU0OTM1NywtMTYyODI1Mjc1My
-wtMTY3NzQwMDY1LDY2ODg4MzI4MywtNzc1NzQzOTYyLC0xOTQw
-MTg2MjU3XX0=
+eyJoaXN0b3J5IjpbLTU4MTI3NDY2NSwxNTg4MTA3NTY0LC0xOD
+Q5MDQ2MjgxLC0xMjkzNDE4MjkxLDExNDY3MjgzODksNTU5NTY1
+OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOTc0MzYwMTA0LC05Mz
+k2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3NTc5LDEyNjM5MDMy
+ODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MCwtMTE5NTQ5MzU3LC
+0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4ODgzMjgzLC03NzU3
+NDM5NjJdfQ==
 -->
