@@ -227,9 +227,10 @@ Hagamos una entrada de pago con:
 
 ## Salidas
 
-Outputs to Coreth Atomic Transactions are either an `EVMOutput` to be added to the balance of an address on this chain or a `TransferableOutput` \(whcih contains a `SECP256K1TransferOutput`\) to be moved to another chain.
 
-The EVM Output will be used in `ImportTx` to add funds to this chain, while the `TransferableOutput` will be used to export atomic UTXOs to another chain.
+Las salidas de las transacciones atómicas de Coreth son o bien un `EVMOutput` para ser añadido al balance de una dirección en esta cadena o un `TransferableOutput` \(que contiene un `SECP256K1TransferOutput`\) para ser movido a otra cadena.
+
+La Salida EVM se utilizará en `ImportTx` para añadir fondos a esta cadena, mientras que la `TransferableOutput` se utilizará para exportar UTXOs atómicos a otra cadena.
 
 ### EVM Output
 
@@ -923,6 +924,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNz
-Q4MzE1NDddfQ==
+eyJoaXN0b3J5IjpbLTE2MTkyNDI3NzQsMTI1MDA2NzA5MywtMT
+QxOTAxODQ4MCwtNzQ4MzE1NDddfQ==
 -->
