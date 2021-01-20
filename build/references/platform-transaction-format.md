@@ -1182,15 +1182,15 @@ Hagamos un ejemplo de una transacción exportar no firmada que utilice las entra
 ]
 ```
 
-## Credentials
+## Credenciales
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Las credenciales o "Credentials" tienen un tipo posible: `SECP256K1Credential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
 
-## SECP256K1 Credential
+## Credencial SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) contiene una lista de firmas recuperables de 65 bytes.
 
-### **What SECP256K1 Credential Contains**
+### **Que Contiene una  Credencial SECP256K1**
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
 * **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4MzE0NTU2MSwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbLTEyNDE0MDE3MzYsLTQxMTkwNzM1MSwtMj
+A4ODg3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2
+NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNj
+k3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01
+MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MD
+MzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
