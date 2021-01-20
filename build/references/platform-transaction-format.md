@@ -768,16 +768,16 @@ Hagamos un ejemplo de una transacción agregar validador de subnet no firmada qu
 Una transacción agregar delegador de subnet no firmada o "Unsigned Add Subnet Validator Tx" contiene un `BaseTx`, `Validator`, `Stake`, y `RewardsOwner`. Su `TypeID` es `0x0000000e`.
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
- * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-  * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-  * **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
- * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** An `SECP256K1OutputOwners`
+* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, y `Weight`
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
+* **`Stake`**  el Stake tiene `LockedOuts`
+ * **`LockedOuts`** Un conjunto de salidas transferibles que están bloqueadas mientras dure el período de stake. Al final del periodo de stake, estas salidas son devueltas a sus respectivas direcciones.
+* **`RewardsOwner`** Un `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Add Delegator Tx Specification**
+### **Especificación Gantt de una Transacción Agregar Delegador de Subnet No Firmada**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -793,7 +793,7 @@ Una transacción agregar delegador de subnet no firmada o "Unsigned Add Subnet V
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Delegator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Delegador de Subnet No Firmada**
 
 ```text
 message AddDelegatorTx {
@@ -804,9 +804,9 @@ message AddDelegatorTx {
 }
 ```
 
-### **Unsigned Add Delegator Tx Example**
+### **Ejemplo de una Transacción Agregar Delegador de Subnet No Firmada**
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous examples:
+Hagamos un ejemplo de una transacción agregar delegador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY1MDY4MjYwNSwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbOTQwMTg2MzQ1LC00MTE5MDczNTEsLTIwOD
+g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
+NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
+ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
+NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
+gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
