@@ -581,7 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Envía un activo no-AVAX desde la X-Chain hacia la P-Chain o C-Chain. Después de llamar este método, debes llamar [`avax.import`](contract-chain-c-chain-api.md#avax-import) en la C-Chain o P-Chain to complete the transfer.
+Envía un activo no-AVAX desde la X-Chain hacia la P-Chain o C-Chain. Después de llamar este método, debes llamar [`avax.import`](contract-chain-c-chain-api.md#avax-import) en la C-Chain o P-Chain para completar la transacción.
 
 #### **Firma**
 
@@ -601,9 +601,9 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
+* `to` es la dirección de las cadenas P-Chain or C-Chain a la cual se enviará el activo.
+* `amount` es el monto del activo a enviar.
+* `assetID` es el ID del asis the asset id of the asset which is sent.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * The asset is sent from addresses controlled by `username`
@@ -1718,10 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMD
-c0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2
-OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMD
-EsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYz
-ODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mz
-c2OSwtOTgxNDU4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTQwNjk5NDg4NiwtOTUxODc2NjMzLC0xMD
+I4NjYyNzg4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEz
+MTY1LC0xOTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0My
+wtMTEzNDMxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2
+MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQxMjcyLC05ODA5Nj
+E5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
+
 -->
