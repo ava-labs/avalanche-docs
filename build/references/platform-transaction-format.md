@@ -1470,9 +1470,9 @@ Una StakeableLockIn es una entrada en stake y encerrada. El StakeableLockIn sól
 
 ### **Que Contiene una StakeableLockIn**
 
-Una StakeableLockIn contiene un `TypeID`, `Locktime` and `TransferableIn`.
+Una StakeableLockIn contiene un `TypeID`, `Locktime` y `TransferableIn`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000015`.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
 * **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
 * **`TransferableIn`** is a transferable input object.
 
@@ -1608,10 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUyMjA4NzgwMiwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbLTEyNjk1NzY2NDksLTQxMTkwNzM1MSwtMj
+A4ODg3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2
+NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNj
+k3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01
+MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MD
+MzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
