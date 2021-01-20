@@ -290,7 +290,7 @@ El Stake máximo, en nAVAX, que se puede colocar en un validador de la red prima
 
 `--snow-avalanche-batch-size` \(int\):
 
-DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
+Las implementaciones DAG del consenso de Snow definen `b` como el número de transacciones que un vértice debe incluir. Aumentar `b`, teóricamente, aumentará el rendimiento mientras aumenta la latencia. El nodo esperará como máximo 1 segundo para recoger un lote, y luego emitirá el lote completo de una vez. El valor debe ser al menos `1`. El valor por defecto es `30`.
 
 `--snow-avalanche-num-parents` \(int\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyNjg5MTg1MiwtMTI3MDg0MDE3LDY2NT
+eyJoaXN0b3J5IjpbMjA5MjU2NDgxOSwtMTI3MDg0MDE3LDY2NT
 cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
 ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
 I3NTYxNTc0XX0=
