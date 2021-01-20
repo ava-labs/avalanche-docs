@@ -1195,7 +1195,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
 * **`TypeID`** es el ID para este tipo. Es  `0x00000009`.
 * **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Especificación Gantt de una  Credencial SECP256K1**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1207,7 +1207,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Especificación Proto de una  Credencial SECP256K1**
 
 ```text
 message SECP256K1Credential {
@@ -1216,9 +1216,9 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **Ejemplo de una  Credencial SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`signatures`**:
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
@@ -1260,9 +1260,10 @@ Let’s make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## 
+Transacción Firmada
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+Una transacción firmada o "signed transaction" es una transacción no firmada con la adición de una serie de credenciales.
 
 ### What Signed Transaction Contains
 
@@ -1606,7 +1607,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1Mjc4MzY5NiwtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbMTcwMjQ2Nzc0NCwtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
