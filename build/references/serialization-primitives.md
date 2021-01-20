@@ -1,12 +1,12 @@
 # Primitivos de Serialización
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalanche](../../#avalanche) utiliza una representación simple, uniforme y elegante de todos los datos internos. Este documento describe cómo se codifican los tipos primitivos en la plataforma de Avalanche. Las transacciones se codifican en términos de estos tipos primitivos básicos.
 
-## Byte
+## Bytes
 
-Bytes are packed as-is into the message payload.
+Los bytes se empaquetan tal cual en la carga de mensajes.
 
-Example:
+Ejemplo:
 
 ```text
 Packing:
@@ -19,7 +19,7 @@ Results in:
 
 Shorts are packed in BigEndian format into the message payload.
 
-Example:
+Ejemplo:
 
 ```text
 Packing:
@@ -32,7 +32,7 @@ Results in:
 
 Integers are 32-bit values packed in BigEndian format into the message payload.
 
-Example:
+Ejemplo:
 
 ```text
 Packing:
@@ -45,7 +45,7 @@ Results in:
 
 Long integers are 64-bit values packed in BigEndian format into the message payload.
 
-Example:
+Ejemplo:
 
 ```text
 Packing:
@@ -58,7 +58,7 @@ Results in:
 
 IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
 
-IPv4 example:
+IPv4 Ejemplo:
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+IPv6 Ejemplo:
 
 ```text
 Packing:
@@ -88,7 +88,7 @@ Results in:
 
 Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
 
-Byte array example:
+Byte array Ejemplo:
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+Integer array Ejemplo:
 
 ```text
 Packing:
@@ -110,7 +110,7 @@ Results in:
 
 The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
 
-Byte array example:
+Byte array Ejemplo:
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+Int array Ejemplo:
 
 ```text
 Packing:
@@ -132,7 +132,7 @@ Results in:
 
 A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
 
-Example:
+Ejemplo:
 
 ```text
 Packing:
@@ -142,5 +142,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3MjkxMDI3MF19
+eyJoaXN0b3J5IjpbLTk1MzY4MTQxN119
 -->
