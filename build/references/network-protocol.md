@@ -77,25 +77,26 @@ Enviando un mensaje de `Version` con la fecha`November 16th, 2008 at 12:00am (UT
 
 ### Resumen
 
-`GetPeers` requests that a `Peers` message be sent as a response.
 
-The OpCode used by `GetPeers` messages is: `0x02`.
+`GetPeers` solicita que se envíe un mensaje de `Peers` como respuesta.
 
-### What GetPeers contains
+El OpCode usado por los mensajes `GetPeers` es: `0x02`.
 
-The payload of a `GetPeers` message is empty.
+### Que contiene GetPeers
+
+La carga útil de un mensaje `GetPeers` es nula.
 
 ```text
 []
 ```
 
-### How GetPeers is handled
+### Como se maneja GetPeers
 
-A node receiving `GetPeers` request must respond with a `Peers` message containing the IP addresses of its connected, staking nodes.
+Un nodo que recibe la solicitud `GetPeers` debe responder con un mensaje `Peers` que contiene las direcciones IP de sus nodos conectados, en staking.
 
-### When GetPeers is sent
+### Cuando se envía GetPeers
 
-A node sends `GetPeers` messages upon startup to discover the participants in the network. It may also periodically send `GetPeers` messages in order to discover new nodes as they arrive in the network.
+Un nodo envía mensajes `GetPeers` al inicio para descubrir a los participantes de la red. También puede enviar periódicamente mensajes `GetPeers` para descubrir nuevos nodos a medida que llegan a la red.
 
 ## Peers
 
@@ -441,5 +442,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0NzY4NTk2Nl19
+eyJoaXN0b3J5IjpbLTQ3NDg4MTE5Ml19
 -->
