@@ -440,7 +440,7 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+Crea un nuevo activo no-fungible. No existen unidades del activo al inicializarlo. Mineros pueden acuñar nuevas unidades de estos activos usando `avm.mintNFT`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMT
-k5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0
-MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LD
-EyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMz
+UxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1
+ODE4LC0xMDQ4MDQxMjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5LC
+05ODE0NTg2MzYsMTIzODQzNjE4M119
 -->
