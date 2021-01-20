@@ -31,7 +31,7 @@ Si se establece en `false`, este nodo no expondrá la API de administración. Po
 
 `--api-auth-required` \(booleano\):
 
-Si se establece en `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+Si se establece en `true`, los llamados a la API requieren un token de autorización. Por defecto es `false`. Ver [aquí](../avalanchego-apis/auth-api.md) para más información.
 
 `--api-auth-password` \(string\):
 
@@ -458,5 +458,5 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTI3NjAyNTk3LDEyMjc1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbMjA2NTI0NzA5MiwxMjI3NTYxNTc0XX0=
 -->
