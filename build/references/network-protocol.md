@@ -277,17 +277,18 @@ Un mensaje `PushQuery` solicita los containerIDs preferidos del nodo después de
 
 El OpCode utilizado por los mensajes `PushQuery` es: `0x06`.
 
-### What PushQuery contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+### Que contiene PushQuery
 
-**`SubnetID`** defines which subnet this message is destined for.
+Un mensaje `Put` contiene un `SubnetID`, `RequestID`, `ContainerID`, y `Container`.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`SubnetID`** define a qué subnet está destinado este mensaje.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`RequestID`** es un contador que ayuda a llevar la cuenta de los mensajes enviados por un nodo.
 
-**`Container`** is the bytes of the container with identifier `ContainerID`.
+**`ContainerID`** es el identificador del contenedor que este mensaje está enviando.
+
+**`Container`** son los bytes del contenedor que este mensaje está enviando.
 
 ```text
 [
@@ -298,15 +299,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How PushQuery is handled
+### Como se maneja PushQuery 
 
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+El nodo debe intentar añadir el contenedor al consenso. Después de que el contenedor sea añadido al consenso, un mensaje `Chits` debe ser enviado con las preferencias actuales del nodo.
 
-### When PushQuery is sent
+### Cuando se envía PushQuery
 
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Un nodo debe enviar un mensaje `PushQuery` si quiere saber las preferencias actuales de este nodo y siente que es posible que el nodo no haya aprendido de `Container` todavía. El nodo querrá aprender de las preferencias de los nodos cuando se entere de un nuevo contenedor o haya tenido contenedores pendientes durante "un tiempo".
 
-### PushQuery Example
+### Ejemplo de PushQuery
 
 ```text
 [
@@ -332,11 +333,11 @@ A node should send a `PushQuery` message if it wants to learn of this node’s c
 
 ## PullQuery
 
-### Overview
+### Resumen
 
-A `PullQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus.
+Un mensaje `PullQuery` solicita los containerIDs preferidos del nodo después de que el `ContainerID` especificado haya sido añadido al consenso.
 
-The OpCode used by `PullQuery` messages is: `0x07`.
+El OpCode usado por los mensajes `PullQuery` es: `0x07`.
 
 ### What PullQuery contains
 
@@ -450,5 +451,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzOTMwNTUwMCwxMDY3NjQ0MzYyXX0=
+eyJoaXN0b3J5IjpbMjExNTM0NDU0MCwtOTM5MzA1NTAwLDEwNj
+c2NDQzNjJdfQ==
 -->
