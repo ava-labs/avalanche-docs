@@ -24,15 +24,16 @@ Este identificador de 32 bytes está representado por "PrivateKey-" seguido de l
 
 ### Direcciones Secp256k1 
 
-Avalanche is not prescriptive about addressing schemes, choosing to instead leave addressing up to each blockchain.
 
-The addressing scheme of the X-Chain and the P-Chain relies on secp256k1. Avalanche follows a similar approach as Bitcoin and hashes the ECDSA public key. The 33-byte compressed representation of the public key is hashed with sha256 **once**. The result is then hashed with ripemd160 to yield a 20-byte address.
+Avalanche no es prescriptivo en cuanto a los esquemas de direccionamiento, eligiendo en su lugar dejar el direccionamiento hasta cada blockchain.
 
-Avalanche uses the convention `chainID-address` to specify which chain an address exists on. `chainID` may be replaced with an alias of the chain. When transmitting information through external applications, the CB58 convention is required.
+El esquema de direccionamiento de la X-Chain y de la P-Chain se basa en el secp256k1. Avalanche sigue un enfoque similar al de Bitcoin y hace hash de la clave pública de la ECDSA. La representación comprimida de 33 bytes de la clave pública se somete a hash con sha256 **una vez**. El resultado se comprime con ripemd160 para obtener una dirección de 20 bytes.
 
-Read more about the [addressing scheme](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/en/articles/4596397-what-is-an-address/README.md) and [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
+Avalanche utiliza la convención `chainID-address` para especificar en qué cadena existe una dirección. `chainID` puede ser reemplazado con un alias de la cadena. Cuando se transmite información a través de aplicaciones externas, se requiere la convención CB58.
 
-### Secp256k1 Recoverable Signatures
+Lea más sobre el [esquema de direcciones](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/en/articles/4596397-what-is-an-address/README.md) y [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
+
+### Firmas Recuperables Secp256k1 
 
 Recoverable signatures are stored as the 65-byte **`[R || S || V]`** where **`V`** is 0 or 1 to allow quick public key recoverability. **`S`** must be in the lower half of the possible range to prevent signature malleability. Before signing a message, the message is hashed using sha256.
 
@@ -114,5 +115,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjczNTM0MzhdfQ==
+eyJoaXN0b3J5IjpbODcwODIxMDQsLTE1NjczNTM0MzhdfQ==
 -->
