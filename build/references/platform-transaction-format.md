@@ -497,7 +497,7 @@ Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores
 ]
 ```
 
-## Unsigned Add Validator Tx
+## Transacción Agregar Validador No Firmada
 
 ### **What Unsigned Add Validator Tx Contains**
 
@@ -1606,9 +1606,9 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMD
-Q2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0
-MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC
-0xMjAxNzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgy
-MzM2NTIzXX0=
+eyJoaXN0b3J5IjpbMTUxODM5MDI5NywtNjI5NjQ2NjYwLC03Mz
+UxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5NzksMTIwOTUw
+NjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC
+02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3
+OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
