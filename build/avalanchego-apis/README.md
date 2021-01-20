@@ -10,13 +10,13 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 | [**API de la Cadena de Intercambio \(X-Chain\)**](exchange-chain-x-chain-api.md) | Permite a los clientes crear e intercambiar activos, incluyendo AVAX, en la X-Chain así como otras instancias de la AVM. |
 | [**API Admin**](admin-api.md) | Permite a los clientes examinar el estado interno de un nodo, conjunto de conexiones y el protocolo de datos interno. |
 | [**API Auth**](auth-api.md) | Permite a los clientes administrar la creación y revocación de tokens de aitorización. |
-| [**API Health**](health-api.md) | Permite a los clientes conAllows clients to check a node’s health. |
-| The [**Info API**](info-api.md) | Allows clients to examine basic information about a node. |
-| The [**IPC API**](ipc-api.md) | Allows users to create UNIX domain sockets for blockchains to publish to. |
+| [**API Health**](health-api.md) | Permite a los clientes revisar la salud de un nodo. |
+| [**API Info**](info-api.md) | Permite a los clientes examinar información básica de un nodo. |
+| [**API IPC**](ipc-api.md) | Permite a los usuarios crear sockets de dominio UNIX para que las cadenas de bloques  users to create UNIX domain sockets for blockchains to publish to. |
 | The [**Keystore API**](keystore-api.md) | Allows customers to use the embedded Keystore file of an Avalanche node. |
 | The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0Njg4NTAwOTUsLTE3MTI5MzE1MDUsMj
+eyJoaXN0b3J5IjpbLTExOTcyNDQ1MTUsLTE3MTI5MzE1MDUsMj
 IzMzU0MDIyLDE2MTYwMjYwNzksMTQwMjEyNzA3OF19
 -->
