@@ -1,6 +1,6 @@
 # AvalancheGo APIs
 
-Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos. Parámetros numéricos en llamadas a APIs deben ser enviados como cadenas de caracteres \(e.j., `"5"` o `5` son ambos are both ok for an integer argument\). Numeric return values are always given as strings \(e.g., `"5"` rather than `5`\). In examples, API calls are made to a node listening for HTTP traffic on `127.0.0.1:9650`.
+Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos. Parámetros numéricos en llamadas a APIs deben ser enviados como cadenas de caracteres \(e.j., `"5"` o `5` son ambos correctos para un argumento de enteros\). Numeric return values are always given as strings \(e.g., `"5"` rather than `5`\). In examples, API calls are made to a node listening for HTTP traffic on `127.0.0.1:9650`.
 
 | Title | Description |
 | :--- | :--- |
@@ -17,5 +17,5 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 | The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzMzAzNzU2OF19
+eyJoaXN0b3J5IjpbMTQwMjEyNzA3OF19
 -->
