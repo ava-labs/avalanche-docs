@@ -81,15 +81,15 @@ Actualiza en la mayoría de las conexiones `conn-meter-max-conns`de una IP dada 
 
 `--conn-meter-reset-duration` \(duration\):
 
-Actualiza en la mayoría de las conexiones `conn-meter-max-conns` de una IP dada por `conn-meter-reset-duration`. Si`conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+Actualiza en la mayoría de las conexiones `conn-meter-max-conns` de una IP dada por `conn-meter-reset-duration`. Si`conn-meter-reset-duration` es 0, las conexiones entrantes no tienen límite de velocidad.
 
 ### Database
 
 `--db-dir` \(string, file path\):
 
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
+Especifica el directorio en el que se encuentra la base de datos. Por defecto `"$HOME/.avalanchego/db"`.
 
-`--db-enabled` \(boolean\):
+`--db-enabled` \(booleano\):
 
 If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NjEzMTk0MCwxNTExNTEzOTY0LDIwNT
+eyJoaXN0b3J5IjpbMTk0NDU1MDAxNiwxNTExNTEzOTY0LDIwNT
 U4ODkyNywxMjI3NTYxNTc0XX0=
 -->
