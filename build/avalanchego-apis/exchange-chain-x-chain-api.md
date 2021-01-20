@@ -545,7 +545,7 @@ avm.mintNFT({
 * `username` es el usuario que paga la tarifa de transacción. `username` debe tener las llaves que le dan permiso para acuñar más de este activo. Es decir, debe controlar al menos un umbral ( _threshold_) de llaves para uno de los conjuntos de mineros. 
 * `txID` es el ID de la transacción
 * `changeAddr` en el resultado está la dirección a la que se envió el cambio.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` es la is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Llamada de ejemplo**
 
@@ -1718,9 +1718,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3NDk2NjY3NiwtMTcwMzUxMzE2NSwtMT
-kyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQz
-MTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwND
-Q1LDYzODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00
-NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbMjAwMzMyMjA1LDEwNzQ5NjY2NzYsLTE3MD
+M1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OTYyNSwtMjM1Nzkz
+MTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5OTU0Njc0Nj
+AsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEyNzIsLTk4
+MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMjM4NDM2MT
+gzXX0=
 -->
