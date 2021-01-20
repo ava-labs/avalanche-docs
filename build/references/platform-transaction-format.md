@@ -513,7 +513,7 @@ Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`,
 * **`RewardsOwner`** Un `SECP256K1OutputOwners`
 * **`Shares`**  10 000  veces el porcentaje de recompensa tomado de los delegadores
 
-### **Gantt Unsigned Add Validator Tx Specification**
+### **Especificación Gantt de una Transacción Agregar Validador No Firmada**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -531,7 +531,7 @@ Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`,
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Validator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Validador No Firmada**
 
 ```text
 message AddValidatorTx {
@@ -543,7 +543,7 @@ message AddValidatorTx {
 }
 ```
 
-### **Unsigned Add Validator Tx Example**
+### **Ejemplo de una Transacción Agregar Validador No Firmada**
 
 Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
 
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTE5NDQyNjM3LDE3OTkxMjU4MDQsLTEyOD
-gwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5
-NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOC
-wyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAx
-Nzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NT
-IzXX0=
+eyJoaXN0b3J5IjpbMTczMDU0MzE2NywxNzk5MTI1ODA0LC0xMj
+g4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1
+OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MT
+gsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIw
+MTc4ODU5NywtMzc5MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNj
+UyM119
 -->
