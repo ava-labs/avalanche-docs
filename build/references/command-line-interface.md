@@ -322,11 +322,11 @@ Período de consumo de la función de stake, en segundos. El valor por defecto d
 
 `--tx-fee` \(int\):
 
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
+La cantidad de nAVAX que se debe quemar para que una transacción sea válida. Este parámetro requiere un acuerdo de red en su forma actual. El cambio de este valor del valor por defecto sólo debe hacerse en redes privadas. El valor por defecto es `1000000` nAVAX por transacción.
 
 `--uptime-requirement` \(float\):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
+Fracción de tiempo que un validador debe estar en línea para recibir las recompensas. El valor por defecto es `0.6`.
 
 ### Message Handling
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0OTg4ODQzNiwtMTEyNDk0ODI2MiwtMT
-I3MDg0MDE3LDY2NTcyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQy
-NTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LD
-IwNTU4ODkyNywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbLTk4NjI1OTMxMywtOTQ5ODg4NDM2LC0xMT
+I0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0ODI5LC0xNTcyNDIw
+MTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MDksODc4MzgyODQyLD
+E1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
