@@ -637,14 +637,14 @@ Hagamos un ejemplo de una transacción agregar validador no firmada que utilice 
 
 ## Unsigned Add Subnet Validator Tx
 
-### **What Unsigned Add Subnet Validator Tx Contains**
+### **Que Contiene una Transacción Agregar Validador de Subnet No Firmada**
 
-An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+Una transacción agregar validador de subnet no firmada contiene un `BaseTx`, `Validator`, `SubnetID`, y `SubnetAuth`. Su `TypeID`es `0x0000000d`.
 
 * **`BaseTx`**
 * **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
+ * **`NodeID`** is 20 bytes which is the node ID of the validator.
+ * **`StartTime`** is a long which is the Unix time when the validator starts validating.
   * **`EndTime`** is a long which is the Unix time when the validator stops validating.
   * **`Weight`** is a long which is the amount the validator stakes
 * **`SubnetID`** a 32 byte subnet id
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3MDAwOTU3OSwxNzk5MTI1ODA0LC0xMj
-g4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1
-OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MT
-gsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIw
-MTc4ODU5NywtMzc5MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNj
-UyM119
+eyJoaXN0b3J5IjpbODQwNzYyNDY1LDE3OTkxMjU4MDQsLTEyOD
+gwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5
+NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOC
+wyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAx
+Nzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NT
+IzXX0=
 -->
