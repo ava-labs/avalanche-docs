@@ -77,7 +77,7 @@ Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usar
 
 `--conn-meter-max-conns` \(int\):
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+Actualizar en la mayoría de las conexiones `conn-meter-max-conns` de una IP dada por  `conn-meter-reset-duration`. Si `conn-meter-reset-duration` es 0, las conexiones entrantes no tienen límite de velocidad.
 
 `--conn-meter-reset-duration` \(duration\):
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkxMjE0ODM2LDE1MTE1MTM5NjQsMjA1NT
+eyJoaXN0b3J5IjpbMjM2MDc1OTMzLDE1MTE1MTM5NjQsMjA1NT
 g4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
