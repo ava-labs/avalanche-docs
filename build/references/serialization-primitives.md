@@ -89,7 +89,7 @@ Results in:
 
 Las matrices de longitud fija, cuya longitud se conoce de antemano y por contexto, se empaquetan en orden.
 
-Byte array Ejemplo:
+Ejemplo de matriz de bytes:
 
 ```text
 Packing:
@@ -98,7 +98,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array Ejemplo:
+Ejemplo de matriz entera:
 
 ```text
 Packing:
@@ -109,9 +109,9 @@ Results in:
 
 ## Variable Length Array
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+La longitud de la matriz se prefija en formato Entero, seguido del empaquetado del contenido de la matriz en formato Fixed Length Array.
 
-Byte array Ejemplo:
+Ejemplo de matriz de bytes:
 
 ```text
 Packing:
@@ -143,5 +143,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDQzNzAzNjhdfQ==
+eyJoaXN0b3J5IjpbMjQ0NDY3Nzc1XX0=
 -->
