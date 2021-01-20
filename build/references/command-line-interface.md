@@ -250,11 +250,11 @@ La cantidad mínima de tiempo que los mensajes a un par deben fallar antes de qu
 
 `--consensus-gossip-frequency` \(duration\):
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+Tiempo entre rumores de fronteras aceptadas. Por defecto `10s`.
 
 `--consensus-shutdown-timeout` \(duration\):
 
-Timeout before killing an unresponsive chain. Defaults to `5s`.
+Tiempo de espera antes de eliminar una cadena que no responde. Por  `5s`.
 
 `--creation-tx-fee` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI3NDgyNzUwLC0xMjcwODQwMTcsNjY1Nz
-I0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4
-MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMj
-c1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbLTc3NDc0NTc5NCwtMTI3MDg0MDE3LDY2NT
+cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
+ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
+I3NTYxNTc0XX0=
 -->
