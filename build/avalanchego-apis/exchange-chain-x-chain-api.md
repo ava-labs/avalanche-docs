@@ -317,7 +317,7 @@ avm.mint({
 * `amount`  de unidades del `assetID` que se crearán y controlará la dirección especificada en `to`.
 * `from` son las direcciones que deseas usar para esta operación. Si se omiten, necesariamente utiliza alguna de tus direcciones.
 * `changeAddr` es la dirección en la que cualquier cambio será enviado. Si se omite, se enviará a cualquier dirección controlada por el usuario.
-* `username` es el usuario que paga por la comisión de transacción. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
+* `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de minar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzgyMjczMzU2LDE2MDAxNDA0NDUsNjM4Mz
-Y1ODE4LC0xMDQ4MDQxMjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5
-LC05ODE0NTg2MzYsMTIzODQzNjE4M119
+eyJoaXN0b3J5IjpbLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2Mz
+gzNjU4MTgsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3
+NjksLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
