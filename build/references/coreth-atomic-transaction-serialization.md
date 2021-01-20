@@ -571,7 +571,7 @@ Una Transacción Importar contiene un `typeID`, `networkID`, `blockchainID`, `de
 * **`importedInputs`** es una matriz de TransferableInputs para  agregar fondos a la Transacción Importar.
 * **`Outs`** es un arreglo de Salidas de la EVM para ser importadas a esta cadena.
 
-#### Gantt ImportTx Specification
+#### Especificación Gantt de una Transacción Importar
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -591,9 +591,9 @@ Una Transacción Importar contiene un `typeID`, `networkID`, `blockchainID`, `de
                                              +-------------------------------------------------+
 ```
 
-#### ImportTx Example
+#### Ejemplo de una Transacción Importar
 
-Let's make an ImportTx:
+Hagamos una Transacción Importar:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `12345`
@@ -661,7 +661,7 @@ Let's make an ImportTx:
 ]
 ```
 
-## Credentials
+## Credenciales
 
 Credentials have one possible type: `SECP256K1Credential`. Each credential is paired with an Input. The order of the credentials match the order of the inputs.
 
@@ -924,7 +924,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzA2MTg5MDk1LDEwMjA3MjI0MzcsNDQ5Nz
-ExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMTYxOTI0Mjc3
-NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgzMTU0N119
+eyJoaXN0b3J5IjpbMTIwNzI5MDI2MywxMDIwNzIyNDM3LDQ0OT
+cxMTIwNSwxMjY2MTc5Nzk0LDE1OTgwMTE1ODYsLTE2MTkyNDI3
+NzQsMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ
+==
 -->
