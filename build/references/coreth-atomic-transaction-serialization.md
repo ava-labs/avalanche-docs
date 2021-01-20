@@ -663,7 +663,7 @@ Hagamos una Transacción Importar:
 
 ## Credenciales
 
-Credentials have one possible type: `SECP256K1Credential`. Each credential is paired with an Input. The order of the credentials match the order of the inputs.
+Las credenciales o "Credentials" tienen un tipo posible: `SECP256K1Credential`. Cada credencial está emparejada con una entrada. El orden de las credenciales coincide con el orden de las entradas.
 
 ### SECP256K1 Credential
 
@@ -924,8 +924,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwNzI5MDI2MywxMDIwNzIyNDM3LDQ0OT
-cxMTIwNSwxMjY2MTc5Nzk0LDE1OTgwMTE1ODYsLTE2MTkyNDI3
-NzQsMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ
-==
+eyJoaXN0b3J5IjpbNDk0NDQ5NDEyLDEyMDcyOTAyNjMsMTAyMD
+cyMjQzNyw0NDk3MTEyMDUsMTI2NjE3OTc5NCwxNTk4MDExNTg2
+LC0xNjE5MjQyNzc0LDEyNTAwNjcwOTMsLTE0MTkwMTg0ODAsLT
+c0ODMxNTQ3XX0=
 -->
