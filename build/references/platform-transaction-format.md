@@ -1466,7 +1466,7 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 
 ## StakeableLockIn
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its locktime has passed.
+Una StakeableLockIn es una entrada en stake y encerrada. El StakeableLockIn sólo puede financiar StakeableLockOuts con la misma dirección hasta que su tiempo de encierro haya pasado.
 
 ### **What StakeableLockIn Contains**
 
@@ -1608,10 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU2MTUzNDAyOSwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbNjQ3ODY3MDQsLTQxMTkwNzM1MSwtMjA4OD
+g3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2NDY2
+NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNjk3OS
+wxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01MDM1
+NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzOD
+EyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
