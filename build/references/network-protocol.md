@@ -22,15 +22,16 @@ La carga útil de un mensaje `GetVersion` es nula.
 
 Un nodo que reciba un mensaje `GetVersion` debe responder con un mensaje `Version` que contenga la hora actual y la versión del nodo.
 
-### When GetVersion is sent
+### Cuando se envía GetVersion
 
-`GetVersion` is sent when a node is connected to another node, but has not yet received a `Version` message. It may, however, be re-sent at any time.
+`GetVersion` se envía cuando un nodo está conectado a otro nodo, pero aún no ha recibido un mensaje `Version`. Sin embargo, puede ser reenviado en cualquier momento.
 
 ## Version
 
-`Version` ensures that the nodes we are connected to are running compatible versions of Avalanche, and at least loosely agree on the current time.
 
-The OpCode used by `Version` messages is: `0x01`.
+`Version` asegura que los nodos a los que estamos conectados están ejecutando versiones compatibles de Avalanche, y al menos coinciden en la hora actual.
+
+El OpCode usado por los mensajes de `Version` es: `0x01`.
 
 ### What Version contains
 
@@ -439,5 +440,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODkzNTE1MjldfQ==
+eyJoaXN0b3J5IjpbLTUzNTc4NDY1OV19
 -->
