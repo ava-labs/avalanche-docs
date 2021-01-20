@@ -894,12 +894,12 @@ Hagamos un ejemplo de una transacción agregar delegador de subnet no firmada qu
 
 ### **Que Contiene una Transacción Crear Subnet No Firmada**
 
-Una transacción crear subnet no firmada contiene un `BaseTx`, y `RewardsOwner`. Su `TypeID` for this type is `0x00000010`.
+Una transacción crear subnet no firmada o "Unsigned Create Subnet Tx" contiene un `BaseTx`, y `RewardsOwner`. Su `TypeID` es `0x00000010`.
 
 * **`BaseTx`**
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Create Subnet Tx Specification**
+### **Especificación Gantt de una Transacción Crear Subnet No Firmada**
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -911,7 +911,7 @@ Una transacción crear subnet no firmada contiene un `BaseTx`, y `RewardsOwner`.
                                 +-------------------------------------------+
 ```
 
-### **Proto Unsigned Create Subnet Tx Specification**
+### **Especificación Proto de una Transacción Crear Subnet No Firmada**
 
 ```text
 message CreateSubnetTx {
@@ -920,9 +920,9 @@ message CreateSubnetTx {
 }
 ```
 
-### **Unsigned Create Subnet Tx Example**
+### **Ejemplo de una Transacción Crear Subnet No Firmada**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
+Hagamos un ejemplo de una transacción crear subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
 * **`RewardsOwner`**:
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTMwMTAzMjIyLC00MTE5MDczNTEsLTIwOD
-g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
-NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
-ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
-NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
-gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbMTc4MDA5NzA4OSwtNDExOTA3MzUxLC0yMD
+g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
+NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
+c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
+MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
+M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
