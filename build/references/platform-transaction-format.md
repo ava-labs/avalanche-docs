@@ -157,8 +157,8 @@ Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-
 Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
 * **`TypeID`** es el ID para este tipo de salida. Es `0x00000007`.
-* **`Amount`** es un largo que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
-* **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Amount`** es un long que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
@@ -241,7 +241,7 @@ Una  salida de los propietarios de la salida [secp256k1](cryptographic-primitive
 Una salida de los propietarios de la salida SECP256K1 contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
 * **`TypeID`** es el ID para este tipo de salida. Es `0x0000000b`.
-* **`Locktime`** es un largo que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
 * **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
@@ -323,7 +323,7 @@ Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1
 Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
 
 * **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
-* **`Amount`** es un largo que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`Amount`** es un long que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
 * **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
 
 
@@ -1606,9 +1606,9 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAwNzA0MTI4LC0xMjg4MDAxNjMwLC02Mj
-k2NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUy
-Njk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC
-01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5
-MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNj
+I5NjQ2NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1
+MjY5NzksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5Ni
+wtNTAzNTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3
+OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
