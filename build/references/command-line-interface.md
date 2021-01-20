@@ -45,7 +45,7 @@ Si se establece como `true`, este nodo expondrá el API de Salud. Por defecto es
 
 Si se establece como `true`, este nodo expondrá la API de Información. Por defecto es `true`. Ver [aquí](../avalanchego-apis/info-api.md) para más información.
 
-`--api-ipcs-enabled` \(boolean\):
+`--api-ipcs-enabled` \(booleano\):
 
 If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODk5NTE0MzU3LDIwNTU4ODkyNywxMjI3NT
-YxNTc0XX0=
+eyJoaXN0b3J5IjpbMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNz
+U2MTU3NF19
 -->
