@@ -35,7 +35,7 @@ Si se establece en `true`, los llamados a la API requieren un token de autorizac
 
 `--api-auth-password` \(string\):
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
+La contraseña necesaria para crear/revocar los tokens de autorización. Si `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
 
 `--api-health-enabled` \(boolean\):
 
@@ -458,5 +458,5 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2NTI0NzA5MiwxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbNDIxNDcwMDQ1LDEyMjc1NjE1NzRdfQ==
 -->
