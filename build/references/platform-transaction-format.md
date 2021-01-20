@@ -769,12 +769,12 @@ Una transacción agregar delegador de subnet no firmada o "Unsigned Add Subnet V
 
 * **`BaseTx`**
 * **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
+ * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
   * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
   * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
   * **`Weight`** is a long which is the amount the delegator stakes
 * **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
+ * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
 * **`RewardsOwner`** An `SECP256K1OutputOwners`
 
 ### **Gantt Unsigned Add Delegator Tx Specification**
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxMTkwNzM1MSwtMjA4ODg3MjU5MywxNz
-k5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3
-Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mj
-c0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3
-NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5Mz
-kwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbMTY1MDY4MjYwNSwtNDExOTA3MzUxLC0yMD
+g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
+NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
+c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
+MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
+M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
