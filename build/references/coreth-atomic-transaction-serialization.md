@@ -8,7 +8,7 @@ Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos 
 
 ## Inputs
 
-Inputs to Coreth Atomic Transactions are either an `EVMInput` from this chain or a `TransferableInput` \(which contains a `SECP256K1TransferInput`\) from another chain. The `EVMInput` will be used in `ExportTx` to spend funds from this chain, while the `TransferableInput` will be used to import atomic UTXOs from another chain.
+Las entradas de las transacciones atómicas de Coreth son o bien una `EVMInput` de esta cadena o una `TransferableInput` \(que contiene una `SECP256K1TransferInput`\) de otra cadena. El `EVMInput` se usará en `ExportTx` para utilizar los fondos de esta cadena, mientras que el `TransferableInput` se usará para importar UTXOs atómicos de otra cadena.
 
 ### EVM Input
 
@@ -922,5 +922,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbMTMyNjU1MDM4MiwtMTQxOTAxODQ4MCwtNz
+Q4MzE1NDddfQ==
 -->
