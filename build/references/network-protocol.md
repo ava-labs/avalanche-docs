@@ -339,15 +339,15 @@ Un mensaje `PullQuery` solicita los containerIDs preferidos del nodo después de
 
 El OpCode usado por los mensajes `PullQuery` es: `0x07`.
 
-### What PullQuery contains
+### Que contiene PullQuery
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+Un mensaje `Put` contiene un `SubnetID`, `RequestID`, y `ContainerID`
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`**` define a qué subnet está destinado este mensaje.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** es un contador que ayuda a llevar la cuenta de los mensajes enviados por un nodo.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`ContainerID`** es el identificador del contenedor que este mensaje espera que se haya añadido al consenso antes de que se envíe la respuesta.
 
 ```text
 [
@@ -451,6 +451,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExNTM0NDU0MCwtOTM5MzA1NTAwLDEwNj
-c2NDQzNjJdfQ==
+eyJoaXN0b3J5IjpbMjU4MDAwNzc5LC05MzkzMDU1MDAsMTA2Nz
+Y0NDM2Ml19
 -->
