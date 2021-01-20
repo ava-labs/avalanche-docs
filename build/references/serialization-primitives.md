@@ -120,7 +120,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array Ejemplo:
+Ejemplo de matriz entera:
 
 ```text
 Packing:
@@ -131,7 +131,7 @@ Results in:
 
 ## String
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+Una cadena está empaquetada de forma similar a una matriz de bytes de longitud variable. Sin embargo, el prefijo de longitud es un short en lugar de un int. Las cadenas están codificadas en formato UTF-8.
 
 Ejemplo:
 
@@ -143,5 +143,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjQ0NDY3Nzc1XX0=
+eyJoaXN0b3J5IjpbMTg1NDQ5Njk3MV19
 -->
