@@ -39,7 +39,7 @@ Una Entrada de EVM contiene una `address`, `amount`, `assetID`, y `nonce`.
                       +-------------------------+
 ```
 
-#### Proto EVM Input Specification
+#### Especificación Proto de una Entrada de la EVM
 
 ```text
 message  {
@@ -50,9 +50,10 @@ message  {
 }
 ```
 
-#### EVM Input Example
+#### 
+Ejemplo de una Entrada de la EVM
 
-Let's make an EVM Input:
+Hagamos una entrada de la EVM:
 
 * `Address: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc`
 * `Amount: 2000000`
@@ -922,6 +923,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwODgxODYwNCwtMTQxOTAxODQ4MCwtNz
-Q4MzE1NDddfQ==
+eyJoaXN0b3J5IjpbNDI0MDc5MTEsLTE0MTkwMTg0ODAsLTc0OD
+MxNTQ3XX0=
 -->
