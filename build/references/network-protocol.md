@@ -214,15 +214,18 @@ El OpCode utilizado por los mensajes `Put` es: `0x05`.
 
 ### What Put contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+### Que contiene Put
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+Un mensaje `Put` contiene un `SubnetID`, `RequestID`, `ContainerID`, y `Container`.
 
-**`ContainerID`** is the identifier of the container this message is sending.
+**`SubnetID`** define a qué subnet está destinado este mensaje.
 
-**`Container`** is the bytes of the container this message is sending.
+**`RequestID`** es un contador que ayuda a llevar la cuenta de los mensajes enviados por un nodo.
+
+**`ContainerID`** es el identificador del contenedor que este mensaje está enviando.
+
+**`Container`** son los bytes del contenedor que este mensaje está enviando.
 
 ```text
 [
@@ -446,5 +449,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3MzEwMTYwOCwxMDY3NjQ0MzYyXX0=
+eyJoaXN0b3J5IjpbNDM0MjA0NzA5LDEwNjc2NDQzNjJdfQ==
 -->
