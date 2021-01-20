@@ -123,7 +123,7 @@ Lista separada por comas de identificaciones de cadenas a las que conectarse. No
 
 `--ipcs-path` \(string\)
 
-The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
+El directorio \(Unix\) o el prefijo del nombre de la canalización \(Windows\) para los sockets IPC. Por defecto es /tmp.
 
 ### File Descriptor Limit
 
@@ -458,7 +458,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1NzYwMjgwMCwxNzY3MzM0ODA5LDg3OD
+eyJoaXN0b3J5IjpbLTI0NTY4NzI1OSwxNzY3MzM0ODA5LDg3OD
 M4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0
 XX0=
 -->
