@@ -1192,7 +1192,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
 
 ### **Que Contiene una  Credencial SECP256K1**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
+* **`TypeID`** es el ID para este tipo de salida. Es  `0x00000009`.
 * **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
 ### **Gantt SECP256K1 Credential Specification**
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MDcxNDEzLC00MTE5MDczNTEsLTIwOD
+eyJoaXN0b3J5IjpbLTg3NjkxNjI1LC00MTE5MDczNTEsLTIwOD
 g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
 NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
 ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
