@@ -67,7 +67,7 @@ Cuando se establece en `true`, las aserciones se ejecutarán en tiempo de ejecuc
 
 `--bootstrap-ids` \(string\):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se usarán para autenticar a los compañeros de bootstrap. Esto sólo necesita ser establecido cuando `--p2p-tls-enabled=true`. Una configuración de ejemplo de este campo sería `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
 `--bootstrap-ips` \(string\):
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0NjQzMDcwMywxNTExNTEzOTY0LDIwNT
+eyJoaXN0b3J5IjpbLTYyODE5ODMzOCwxNTExNTEzOTY0LDIwNT
 U4ODkyNywxMjI3NTYxNTc0XX0=
 -->
