@@ -206,9 +206,9 @@ Un nodo enviará un mensaje `Get` a un nodo que nos dice sobre la existencia de 
 
 ## Put
 
-### Overview
+### Resumen
 
-A `Put` message provides a requested container to a node.
+Un mensaje `Put` provides a requested container to a node.
 
 The OpCode used by `Put` messages is: `0x05`.
 
@@ -446,5 +446,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxNDQ3OTUwOSwxMDY3NjQ0MzYyXX0=
+eyJoaXN0b3J5IjpbLTM1NDQ4NzY3NywxMDY3NjQ0MzYyXX0=
 -->
