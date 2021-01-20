@@ -455,9 +455,9 @@ Las Transacciones Atómicas o "Atomic Transactions" se utilizan para mover fondo
 
 Una Transacción Exportar o "ExportTx" es una transacción para exportar fondos de Coreth a una cadena diferente.
 
-#### What ExportTx Contains
+#### Que Contiene una Transacción Exportar
 
-An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, and `exportedOutputs`.
+Una transacción exportar contiene un `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, y`exportedOutputs`.
 
 * **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
 * **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
@@ -924,7 +924,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ5NzExMjA1LDEyNjYxNzk3OTQsMTU5OD
-AxMTU4NiwtMTYxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xNDE5MDE4
-NDgwLC03NDgzMTU0N119
+eyJoaXN0b3J5IjpbMTAyMDcyMjQzNyw0NDk3MTEyMDUsMTI2Nj
+E3OTc5NCwxNTk4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAwNjcw
+OTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
 -->
