@@ -545,7 +545,7 @@ message AddValidatorTx {
 
 ### **Ejemplo de una Transacción Agregar Validador No Firmada**
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
+Hagamos un ejemplo de una transacción agregar validador no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczMDU0MzE2NywxNzk5MTI1ODA0LC0xMj
+eyJoaXN0b3J5IjpbLTY3MDAwOTU3OSwxNzk5MTI1ODA0LC0xMj
 g4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1
 OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MT
 gsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIw
