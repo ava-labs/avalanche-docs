@@ -501,7 +501,7 @@ Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores
 
 ### Que Contiene una Transacción Agregar Validador No Firmada**
 
-Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
+Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, y `Shares`. Su `TypeID` es `0x0000000c`.
 
 * **`BaseTx`**
 * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
@@ -1606,9 +1606,9 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzIxMzg1Mjk2LC02Mjk2NDY2NjAsLTczNT
-E3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2
-Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01MDM1NjM4MzgsLT
-Y3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5
-MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbLTEyODgwMDE2MzAsLTYyOTY0NjY2MCwtNz
+M1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1
+MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOC
+wtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4MTIsLTM2
+NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
