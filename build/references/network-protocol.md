@@ -173,15 +173,16 @@ Un mensaje `Get` contiene un  `SubnetID`, `RequestID`, y  `ContainerID`.
 ]
 ```
 
-### How Get is handled
 
-The node should reply with a `Put` message with the same `SubnetID`, `RequestID`, and `ContainerID` along with the `Container` with the specified identifier. Under correct situations, a node should only be asked for a container that it has. Therefore, if the node does not have the specified container, the `Get` message can safely be dropped.
+### Como se maneja Get
 
-### When Get is sent
+El nodo debe responder con un mensaje `Put` con el mismo `SubnetID`, `RequestID`, y  `ContainerID` junto con el `Container`con el identificador especificado. En situaciones correctas, a un nodo sólo se le debe preguntar por un contenedor que tenga. Por lo tanto, si el nodo no tiene el contenedor especificado, el mensaje `Get` puede ser eliminado con seguridad.
 
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
+### Cuando se envía Get
 
-### Get Example
+Un nodo enviará un mensaje `Get` a un nodo que nos dice sobre la existencia de un contenedor. Por ejemplo, supongamos que tenemos dos nodos: Rick y Morty. Si Rick envía un mensaje `PullQuery` que contiene un `ContainerID`", para el cual Morty no tenga el contenedor, entonces Morty enviará un mensaje `Get` que contenga el `ContainerID` que falta.
+
+### Ejemplo de Get
 
 ```text
 [
@@ -445,5 +446,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2NzY0NDM2Ml19
+eyJoaXN0b3J5IjpbMTgxNDQ3OTUwOSwxMDY3NjQ0MzYyXX0=
 -->
