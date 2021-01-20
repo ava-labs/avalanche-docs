@@ -154,19 +154,19 @@ El nivel de registro determina qué eventos se muestran en la pantalla. Si se de
 
 `--log-display-highlight` \(string, `{auto, plain, colors}`\):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+Colorear o resaltar los registros de la pantalla. Resalta por defecto cuando la salida es un terminal. De lo contrario, debe ser alguno de `{auto, plain, colors}`
 
 `--log-dir` \(string, file path\):
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+Especifica el directorio en el que se guardan los registros del sistema. El valor por defecto es `"$HOME/.avalanchego/logs"`.
 
 ### Network ID
 
 `--network-id` \(string\):
 
-The identity of the network the node should connect to. Can be one of:
+La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+* `--network-id=mainnet` -&gt; Conectar a la Red Principal \(default\).
 * `--network-id=fuji` -&gt; Connect to the Fuji test-network.
 * `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
 * `--network-id=local` -&gt; Connect to a local test-network.
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1OTEwMzU2OCwtMjA2OTQyNTU4MiwxNz
-Y3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODky
-NywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbLTE5NjgxNTY5MDIsLTIwNjk0MjU1ODIsMT
+c2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5
+MjcsMTIyNzU2MTU3NF19
 -->
