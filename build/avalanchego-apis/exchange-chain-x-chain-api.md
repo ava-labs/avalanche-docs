@@ -467,7 +467,7 @@ avm.createNFTAsset({
 
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
 * `symbol` es un símbolo de abreviación para el activo. Entre 0 y 4 caracteres. No ncesariamente único. Puede ser omitido.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+* `minterSets` es una lista donde cada elemento especificado que rebase un umbral (`threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` pays the transaction fee.
@@ -1718,8 +1718,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMT
-M0MzEzMzAxLC0zNTEyOTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0
-MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NC
-wtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbMTI4MjgyNDc1MSwxNzI0MDQ5NjI1LC0yMz
+U3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2
+NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3Mi
+wtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0
+MzYxODNdfQ==
 -->
