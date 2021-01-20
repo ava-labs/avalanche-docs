@@ -162,19 +162,19 @@ Hagamos una entrada transferible:
 ]
 ```
 
-### SECP256K1 Transfer Input
+### Entrada de Transferencia SECP256K1 
 
-A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
+Una entrada de transferencia  [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) o "secp256k1 transfer input" permite utilizar una salida de transferencia secp256k1 no utilizada.
 
-#### What SECP256K1 Transfer Input Contains
+#### **Que Contiene una Entrada de Transferencia SECP256K1**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
+* **`Amount`** es un long que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
 
-#### Gantt SECP256K1 Transfer Input Specification
+#### Especificación Gantt de una Entrada de Transferencia SECP256K1
 
 ```text
 +-------------------------+-------------------------------------+
@@ -188,7 +188,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Input Specification
+#### Especificación Proto de una  Entrada de Transferencia SECP256K1
 
 ```text
 message SECP256K1TransferInput {
@@ -198,9 +198,9 @@ message SECP256K1TransferInput {
 }
 ```
 
-#### SECP256K1 Transfer Input Example
+#### Ejemplo de una Entrada de Transferencia SECP256K1
 
-Let's make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeId`**: 5
 * **`Amount`**: 500000000000
@@ -225,7 +225,7 @@ Let's make a payment input with:
 ]
 ```
 
-## Outputs
+## Salidas
 
 Outputs to Coreth Atomic Transactions are either an `EVMOutput` to be added to the balance of an address on this chain or a `TransferableOutput` \(whcih contains a `SECP256K1TransferOutput`\) to be moved to another chain.
 
@@ -923,6 +923,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMzk5MTc2OTcsLTE0MTkwMTg0ODAsLT
-c0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNz
+Q4MzE1NDddfQ==
 -->
