@@ -286,7 +286,7 @@ La duración máxima de el stake, en segundos. Por defecto es `8760h` \(365 día
 
 `--max-validator-stake` \(int\):
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
+El Stake máximo, en nAVAX, que se puede colocar en un validador de la red primaria. Por defecto es `3000000000000000` \(3,000,000 AVAX\) en la red principal. Esto incluye el stake proporcionado tanto por el validador como por los delegadores del validador.
 
 `--snow-avalanche-batch-size` \(int\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3MzU1NzE4OSwtMTI3MDg0MDE3LDY2NT
+eyJoaXN0b3J5IjpbMjAyNjg5MTg1MiwtMTI3MDg0MDE3LDY2NT
 cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
 ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
 I3NTYxNTc0XX0=
