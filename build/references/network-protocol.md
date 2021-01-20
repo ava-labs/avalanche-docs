@@ -100,17 +100,18 @@ Un nodo envía mensajes `GetPeers` al inicio para descubrir a los participantes 
 
 ## Peers
 
-### Overview
+### Resumen
 
-`Peers` message contains a list of peers, represented as IP Addresses. Note that an IP Address contains both the IP and the port number, and supports both IPv4 and IPv6 format.
 
-The OpCode used by `Peers` messages is: `0x03`.
+El mensaje `Peers` contiene una lista de pares, representados como direcciones IP. Tenga en cuenta que una dirección IP contiene tanto el IP como el número de puerto, y soporta tanto el formato IPv4 como el IPv6.
 
-### What Peers contains
+El OpCode utilizado por los mensajes `Peers` es: `0x03`.
 
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
+### Que contiene Peers
 
-Content:
+`Peers` contiene las direcciones IP de los nodos de staking a los que este nodo está actualmente conectado.
+
+Contenido:
 
 ```text
 [
@@ -442,5 +443,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3NDg4MTE5Ml19
+eyJoaXN0b3J5IjpbMjA2MDc0NjUxNV19
 -->
