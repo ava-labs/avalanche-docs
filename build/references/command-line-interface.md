@@ -8,7 +8,7 @@ Cuando se ejecuta un nodo, hay una variedad de configuraciones posibles que se a
 
 `--config-file` \(string\):
 
-Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+Config file especifica un archivo JSON para configurar un nodo en lugar de especificar argumentos a través de la línea de comandos. Los argumentos de la línea de comandos anularán cualquier opción establecida en el archivo de configuración.
 
 ```text
 ./build/avalanchego --config-file=config.json
@@ -458,5 +458,5 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbLTExNzU2NTU2MTQsMTIyNzU2MTU3NF19
 -->
