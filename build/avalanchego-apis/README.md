@@ -4,7 +4,7 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 
 | Título | Descripción |
 | :--- | :--- |
-| [**Issuing API Calls**](issuing-api-calls.md) | This guide explains how to make calls to APIs exposed by Avalanche nodes. |
+| [**Realizar llamadas a la API**](issuing-api-calls.md) | Esta guía explica cómo hacer llamadas a las APIs expuestas por los nodos Avalanche. |
 | The [**Platform Chain \(P-Chain\) API**](platform-chain-p-chain-api.md) | Allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain and subnet creation. |
 | The [**Contract Chain \(C-Chain\) API**](contract-chain-c-chain-api.md) | Allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances. |
 | The [**Exchange Chain \(X-Chain\) API**](exchange-chain-x-chain-api.md) | Allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM. |
@@ -17,6 +17,6 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 | The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjIzMzU0MDIyLDE2MTYwMjYwNzksMTQwMj
-EyNzA3OF19
+eyJoaXN0b3J5IjpbLTE3MTI5MzE1MDUsMjIzMzU0MDIyLDE2MT
+YwMjYwNzksMTQwMjEyNzA3OF19
 -->
