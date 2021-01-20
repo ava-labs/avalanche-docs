@@ -1193,7 +1193,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
 ### **Que Contiene una  Credencial SECP256K1**
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
 ### **Gantt SECP256K1 Credential Specification**
 
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDE0MDE3MzYsLTQxMTkwNzM1MSwtMj
-A4ODg3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2
-NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNj
-k3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01
-MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MD
-MzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbMTM5MDcxNDEzLC00MTE5MDczNTEsLTIwOD
+g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
+NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
+ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
+NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
+gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
