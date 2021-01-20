@@ -386,7 +386,7 @@ Las transacciones no firmadas o "Unsigned transactions"  contienen el contenido 
 
 ### **What Base Tx Contains**
 
-BaseTx contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`
+Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
 * **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
 * **`NetworkID`** es un int que define a qué red se destina esta transacción. Este valor está pensado para soportar el enrutamiento de la transacción y no está diseñado para la prevención de ataques de repetición.
@@ -1606,8 +1606,8 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDYyNTk3NTksLTIwMzc1MjY5NzksMT
-IwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYz
-ODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMi
-wtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMj
+AzNzUyNjk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUw
+NTk2LC01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5Ny
+wtMzc5MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
