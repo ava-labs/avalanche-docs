@@ -1540,7 +1540,7 @@ Hagamos una StakeableLockIn con:
 
 ## StakeableLockOut
 
-A StakeableLockOut is an output that is locked until its locktime, but can be staked in the meantime.
+Una StakeableLockOut es una salida que está bloqueada hasta el momento de su cierre, pero puede ser puesta en stake mientras tanto.
 
 ### **What StakeableLockOut Contains**
 
@@ -1608,10 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQ1OTc3NDIxLC00MTE5MDczNTEsLTIwOD
-g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
-NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
-ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
-NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
-gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTk4OTM3OTIyOCwtNDExOTA3MzUxLC0yMD
+g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
+NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
+c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
+MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
+M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
