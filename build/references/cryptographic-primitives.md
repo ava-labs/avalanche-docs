@@ -108,14 +108,15 @@ Después de haber hecho "hashing" con `sha256` y haber firmado la imagen previa,
 
 ![Sign message](../../.gitbook/assets/sign-message.png)
 
-## Cryptography in Ethereum Virtual Machine
+## La Criptografía en la Ethereum Virtual Machine
 
-Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
+Los nodos de avalanche soportan la Ethereum Virtual Machine (EVM\) y duplican con precisión todas las construcciones criptográficas utilizadas en Ethereum. Esto incluye la función de hash Keccak y los otros mecanismos utilizados para la seguridad criptográfica en la EVM.
 
-## Cryptography in Other Virtual Machines
+## La Criptografía en otras Virtual Machines
 
-Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
+Dado que Avalanche es una plataforma extensible, esperamos que la gente añada primitivas criptográficas adicionales al sistema con el tiempo.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg2MTkxMDM2OCwtMTU2NzM1MzQzOF19
+eyJoaXN0b3J5IjpbLTE3OTA3NTI3MTcsLTE1NjczNTM0MzhdfQ
+==
 -->
