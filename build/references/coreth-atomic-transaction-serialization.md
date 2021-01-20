@@ -6,13 +6,13 @@ Este archivo pretende ser la única fuente de verdad sobre cómo serializamos la
 
 Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. Ahora mismo, el único códec válido es el 0 \(`0x00 0x00`\).
 
-## Inputs
+## Entrada 
 
-Las entradas de las transacciones atómicas de Coreth son o bien una `EVMInput` de esta cadena o una `TransferableInput` \(que contiene una `SECP256K1TransferInput`\) de otra cadena. El `EVMInput` se usará en `ExportTx` para utilizar los fondos de esta cadena, mientras que el `TransferableInput` se usará para importar UTXOs atómicos de otra cadena.
+Las entradas o "Inputs" de las transacciones atómicas de Coreth son o bien una `EVMInput` de esta cadena o una `TransferableInput` \(que contiene una `SECP256K1TransferInput`\) de otra cadena. El `EVMInput` se usará en `ExportTx` para utilizar los fondos de esta cadena, mientras que el `TransferableInput` se usará para importar UTXOs atómicos de otra cadena.
 
-### EVM Input
+### Entrada de la EVM o "EVM Input"
 
-Input type that specifies an EVM account to deduct the funds from as part of an `ExportTx`.
+Tipo de entrada que especifica una cuenta EVM para deducir los fondos como parte de un `ExportTx`.
 
 #### What EVM Input Contains
 
@@ -922,6 +922,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNjU1MDM4MiwtMTQxOTAxODQ4MCwtNz
+eyJoaXN0b3J5IjpbMTc2MDQ0NDQyNCwtMTQxOTAxODQ4MCwtNz
 Q4MzE1NDddfQ==
 -->
