@@ -129,7 +129,7 @@ El directorio \(Unix\) o el prefijo del nombre de la canalización \(Windows\) p
 
 `--fd-limit` \(int\)
 
-Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+Intenta aumentar el límite del descriptor del archivo de proceso hasta al menos este valor. El valor por defecto es `32768`
 
 ### Logging
 
@@ -458,7 +458,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0NTY4NzI1OSwxNzY3MzM0ODA5LDg3OD
-M4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0
-XX0=
+eyJoaXN0b3J5IjpbLTIwNjk0MjU1ODIsMTc2NzMzNDgwOSw4Nz
+gzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3
+NF19
 -->
