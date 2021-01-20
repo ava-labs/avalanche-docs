@@ -170,7 +170,7 @@ La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 * `--network-id=fuji` -&gt; Conectar a la Red de Pruebas Fuji.
 * `--network-id=testnet` -&gt; Conectar a la Red de Pruebas actual. \(Right now, this is Fuji.\)
 * `--network-id=local` -&gt; Conectar a una Red de Pruebas Local.
-* `--network-id=network-{id}` -&gt; Conectar a la Red que tenga el  . `id` must be in the range `[0, 2^32)`.
+* `--network-id=network-{id}` -&gt; Conectar a la Red que tenga el ID suministrado . `id` debe estar en el rango `[0, 2^32)`.
 
 ### Public IP
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI0NTc2OTY4LC0yMDY5NDI1NTgyLDE3Nj
-czMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3
-LDEyMjc1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbLTc4MTY0MDc0OCwtMjA2OTQyNTU4MiwxNz
+Y3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODky
+NywxMjI3NTYxNTc0XX0=
 -->
