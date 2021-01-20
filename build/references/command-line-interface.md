@@ -1,8 +1,8 @@
 # Interfaz de Linea de Comando
 
-When running a node, there are a variety of possible configurations that are supported.
+Cuando se ejecuta un nodo, hay una variedad de configuraciones posibles que se admiten.
 
-## Arguments
+## Argumentos
 
 ### Config File
 
@@ -458,5 +458,5 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEyMTI4MzY4Ml19
+eyJoaXN0b3J5IjpbMTIyNzU2MTU3NF19
 -->
