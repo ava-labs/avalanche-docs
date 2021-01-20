@@ -135,21 +135,22 @@ Intenta aumentar el límite del descriptor del archivo de proceso hasta al menos
 
 `--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+El nivel de registro determina qué eventos registrar. Hay 7 niveles diferentes, en orden de mayor a menor prioridad.
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
+* `Off`: Ningún registro tiene este nivel de registro.
+* `Fatal`: Errores fatales que no son recuperables.
+* `Error`:  Errores que el nodo encuentra, estos errores pudieron ser recuperados.
+* `Warn`: Una advertencia que podría ser indicativa de un nodo bizantino falsificado, o un potencial error futuro.
+* `Info`: Descripciones útiles de las actualizaciones del estado de los nodos.
+* `Debug`: El registro de depuración es útil cuando se intenta comprender posibles errores en el código. Se mostrará más información de la que sería típicamente deseada para un uso normal.
+* `Verbo`: Rastrea cantidades extensas de información que el nodo está procesando. Esto incluye el contenido de los mensajes y los volcados binarios de datos para el análisis del protocolo de nivel extremadamente bajo.
+
+Cuando se especifica un nivel de registro, hay que tener en cuenta que todos los registros con la prioridad especificada o superior serán rastreados. Por defecto es `Info`.
 
 `--log-display-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
+El nivel de registro determina qué eventos se muestran en la pantalla. Si se deja en blanco, se tomará por defecto el valor proporcionado a `--log-level`.
 
 `--log-display-highlight` \(string, `{auto, plain, colors}`\):
 
@@ -458,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjk0MjU1ODIsMTc2NzMzNDgwOSw4Nz
-gzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3
-NF19
+eyJoaXN0b3J5IjpbMTU1OTEwMzU2OCwtMjA2OTQyNTU4MiwxNz
+Y3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODky
+NywxMjI3NTYxNTc0XX0=
 -->
