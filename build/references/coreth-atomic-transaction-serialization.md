@@ -449,11 +449,11 @@ Hagamos una Salida de Transferencia SECP256K1:
 
 ## Transacciones Atómicas
 
-Atomic Transactions are used to move funds between chains. There are two types `ImportTx` and `ExportTx`.
+Las Transacciones Atómicas o "Atomic Transactions" se utilizan para mover fondos entre las cadenas. Hay dos tipos `ImportTx` y `ExportTx`.
 
 ### ExportTx
 
-ExportTx is a transaction to export funds from Coreth to a different chain.
+Una Transacción Exportar o "ExportTx" es una transacción para exportar fondos de Coreth a una cadena diferente.
 
 #### What ExportTx Contains
 
@@ -924,7 +924,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI2NjE3OTc5NCwxNTk4MDExNTg2LC0xNj
-E5MjQyNzc0LDEyNTAwNjcwOTMsLTE0MTkwMTg0ODAsLTc0ODMx
-NTQ3XX0=
+eyJoaXN0b3J5IjpbNDQ5NzExMjA1LDEyNjYxNzk3OTQsMTU5OD
+AxMTU4NiwtMTYxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xNDE5MDE4
+NDgwLC03NDgzMTU0N119
 -->
