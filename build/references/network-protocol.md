@@ -119,15 +119,16 @@ Contenido:
 ]
 ```
 
-### How Peers is handled
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the message to its own list of neighbors, and forge connections to any new nodes.
+### Como se maneja Peers
 
-### When Peers is sent
+Al recibir un mensaje `Peers`, un nodo debe comparar los nodos que aparecen en el mensaje con su propia lista de vecinos, y forjar conexiones con cualquier nuevo nodo.
 
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
+### Cuando se envía Peers
 
-### Peers Example
+Los mensajes `Peers` no necesitan ser enviados en respuesta a un mensaje `GetPeers`, y son enviados periódicamente para anunciar los nuevos nodos que llegan. El período por defecto para tales mensajes es de 60 segundos.
+
+### Ejemplo de Peers
 
 Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
 
@@ -147,11 +148,11 @@ Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0
 
 ## Get
 
-### Overview
+### Resumen
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+Un mensaje `Get` solicita un contenedor, es decir, un bloque o vértice, de un nodo.
 
-The OpCode used by `Get` messages is: `0x04`.
+El OpCode utilizado por los mensajes `Get` es: `0x04`.
 
 ### What Get contains
 
@@ -443,5 +444,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2MDc0NjUxNV19
+eyJoaXN0b3J5IjpbNTA1MDc1MDAwXX0=
 -->
