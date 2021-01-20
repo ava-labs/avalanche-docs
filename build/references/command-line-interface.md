@@ -47,13 +47,13 @@ Si se establece como `true`, este nodo expondrá la API de Información. Por def
 
 `--api-ipcs-enabled` \(booleano\):
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
+Si se establece como `true`, este nodo expondrá la API de los IPCs. Por defecto es `false`. Ver [aquí](../avalanchego-apis/ipc-api.md) para más información.
 
-`--api-keystore-enabled` \(boolean\):
+`--api-keystore-enabled` \(booleano\):
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API del Keystore. Por defecto es `true`. Ver [aquí](../avalanchego-apis/keystore-api.md) para más información.
 
-`--api-metrics-enabled` \(boolean\):
+`--api-metrics-enabled` \(booleano\):
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNz
-U2MTU3NF19
+eyJoaXN0b3J5IjpbLTEyMTg1ODcwODksMTUxMTUxMzk2NCwyMD
+U1ODg5MjcsMTIyNzU2MTU3NF19
 -->
