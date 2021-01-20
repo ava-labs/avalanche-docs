@@ -1082,7 +1082,7 @@ Una transacción exportar no firmada o "Unsigned Export Tx" contiene un `BaseTx`
 * **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
 * **`Outs`** es un conjunto de longitud variable de salidas transferibles.
 
-### **Gantt Unsigned Export Tx Specification**
+### **Especificación Gantt de una Transacción Exportar No Firmada**
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1096,7 +1096,7 @@ Una transacción exportar no firmada o "Unsigned Export Tx" contiene un `BaseTx`
                           +---------------------------------------+
 ```
 
-### **Proto Unsigned Export Tx Specification**
+### **Especificación Proto de una Transacción Exportar No Firmada**
 
 ```text
 message ExportTx {
@@ -1106,9 +1106,9 @@ message ExportTx {
 }
 ```
 
-### **Unsigned Export Tx Example**
+### **Ejemplo de una Transacción Exportar No Firmada**
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Hagamos un ejemplo de una transacción exportar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjgzMjA2ODYzLC00MTE5MDczNTEsLTIwOD
-g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
-NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
-ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
-NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
-gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbMTY4MzE0NTU2MSwtNDExOTA3MzUxLC0yMD
+g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
+NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
+c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
+MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
+M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
