@@ -62,11 +62,12 @@ Hash del Mensaje: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e
 
 Firma del Mensaje: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
 
-Morty was never seen again.
+Nunca más se volvio a ver a Morty.
 
-## Signed Messages
 
-A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
+## Mensajes Firmados
+
+Un estándar para mensajes genéricos firmados interoperables basados en el formato Bitcoin Script y el formato Ethereum.
 
 ```text
 sign(sha256(length(prefix) + prefix + length(message) + message))
@@ -116,5 +117,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjE1OTQ2NjU5LC0xNTY3MzUzNDM4XX0=
+eyJoaXN0b3J5IjpbLTUzNDE2MjQ1NSwtMTU2NzM1MzQzOF19
 -->
