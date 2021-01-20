@@ -8,19 +8,19 @@ Los `"Containers"` se mencionan extensamente en la descripción. Un Contenedor e
 
 `GetVersion` solicita que se envíe un mensaje de `Version` como respuesta.
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+El OpCode usado por los mensajes `GetVersion` es: `0x00`.
 
-### What GetVersion contains
+### Que contiene GetVersion
 
-The payload of a `GetVersion` message is empty.
+La carga útil de un mensaje `GetVersion` es nula.
 
 ```text
 []
 ```
 
-### How GetVersion is handled
+### Cómo se maneja GetVersion
 
-A node receiving a `GetVersion` message must respond with a `Version` message containing the current time and node version.
+Un nodo que reciba un mensaje `GetVersion` debe responder con un mensaje `Version` que contenga la hora actual y la versión del nodo.
 
 ### When GetVersion is sent
 
@@ -439,5 +439,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2Mjg4NTE3NF19
+eyJoaXN0b3J5IjpbLTEyODkzNTE1MjldfQ==
 -->
