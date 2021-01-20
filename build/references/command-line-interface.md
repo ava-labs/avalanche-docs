@@ -97,11 +97,11 @@ Si se configura como `false`, las actualizaciones de estado se realizan únicame
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For example if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+La dirección en la que escuchan las APIs HTTP. Por defecto es `127.0.0.1`. Esto significa que por defecto, tu nodo sólo puede manejar llamados a la API hechos desde la misma máquina. Para permitir llamados a la API desde otras máquinas, usa `--http-host=`. Por ejemplo, si tu dirección IP pública es `1.2.3.4` y quieres acceder al RPC de AvalancheGo a través de esa dirección IP, debes enviar `--http-host=1.2.3.4`. Para permitir llamadas a la API desde todas las IPs, usa `http-host=`.
 
 `--http-port` \(int\):
 
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
+Cada nodo ejecuta un servidor HTTP que proporciona las API para interactuar con el nodo y la red de Avalanche. Este argumento especifica el puerto en el que el servidor HTTP escuchará. El valor por defecto es `9650`.
 
 `--http-tls-cert-file` \(string, file path\):
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY3OTU0ODYwLDE1MTE1MTM5NjQsMjA1NT
+eyJoaXN0b3J5IjpbODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NT
 g4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
