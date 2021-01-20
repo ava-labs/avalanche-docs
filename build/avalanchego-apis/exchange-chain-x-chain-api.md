@@ -384,7 +384,7 @@ avm.createVariableCapAsset({
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
 * `symbol` es un simbolo que sirve como abreviación del activo. Entre 0 y 4 caracteres. No necesariamente único. Puede omitirse.
 * `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc.
-* `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones  of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+* `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones en`minters` que juntos podrán acuñar nuevos activos firmando una transacción de acuñamiento.
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
 * `username` pays the transaction fee.
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzMzUyMDMzOCwtMzUxMjk1NjgxLC0xOT
-k1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQx
-MjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMT
-IzODQzNjE4M119
+eyJoaXN0b3J5IjpbODU5MjMxNDI2LC0zNTEyOTU2ODEsLTE5OT
+U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
+NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
+M4NDM2MTgzXX0=
 -->
