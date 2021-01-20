@@ -57,9 +57,9 @@ Results in:
 
 ## IP Addresses
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+Las direcciones IP se representan en formato IPv6 de 16 bytes, con el puerto añadido a la carga de mensajes como un Short. Las direcciones IPv4 se rellenan con 12 bytes de 0x00 principales.
 
-IPv4 Ejemplo:
+Ejemplo de IPv4 :
 
 ```text
 Packing:
@@ -72,7 +72,7 @@ Results in:
     ]
 ```
 
-IPv6 Ejemplo:
+Ejemplo de IPv6 :
 
 ```text
 Packing:
@@ -87,7 +87,7 @@ Results in:
 
 ## Fixed-Length Array
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+Las matrices de longitud fija, cuya longitud se conoce de antemano y por contexto, se empaquetan en orden.
 
 Byte array Ejemplo:
 
@@ -143,5 +143,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwODIxMzgzN119
+eyJoaXN0b3J5IjpbLTEzNDQzNzAzNjhdfQ==
 -->
