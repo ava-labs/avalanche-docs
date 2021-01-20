@@ -55,13 +55,13 @@ Si se establece en `false`, este nodo no expondrá la API del Keystore. Por defe
 
 `--api-metrics-enabled` \(booleano\):
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+Si se configura como `false`, este nodo no expondrá el API de Métricas. Por defecto es `true`. Ver [aquí](../avalanchego-apis/metrics-api.md) para más información
 
 ### Assertions
 
-`--assertions-enabled` \(boolean\):
+`--assertions-enabled` \(booleano\):
 
-When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+Cuando se establece en `true`, las aserciones se ejecutarán en tiempo de ejecución en toda la base del código. Esto está pensado para su uso en la depuración, ya que podemos obtener un mensaje de error más específico. Por defecto es `true`.
 
 ### Bootstrapping
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTg1ODcwODksMTUxMTUxMzk2NCwyMD
-U1ODg5MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbLTg0NjQzMDcwMywxNTExNTEzOTY0LDIwNT
+U4ODkyNywxMjI3NTYxNTc0XX0=
 -->
