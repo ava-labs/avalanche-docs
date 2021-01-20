@@ -468,11 +468,11 @@ avm.createNFTAsset({
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
 * `symbol` es un símbolo de abreviación para el activo. Entre 0 y 4 caracteres. No ncesariamente único. Puede ser omitido.
 * `minterSets` es una lista donde cada elemento especificado establece un umbral (`threshold`) de direcciones en `minters` que juntos deben acuñar uno o más activos firmando una transacción para acuñar.
-* `from` son las direcciones que quieres usar para esta operación. Si se omiten, cualquiera de tus direcciones será If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `from` son las direcciones que quieres usar para esta operación. Si se omiten, cualquiera de tus direcciones será necesariamente utilizada.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio se enviará a cualquier dirección controlada por el usuario.
+* `username` paga por la comisión de transacción.
+* `assetID` es el ID del nuevo activo.
+* `changeAddr` en el resultado, es la dirección a la cual se envió cualquier cambio que hubiera.
 
 #### **Llamada de ejemplo**
 
@@ -515,7 +515,7 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+Acuñar tokens no-funMint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5NjQ2MzcyNSwxNzI0MDQ5NjI1LC0yMz
+eyJoaXN0b3J5IjpbLTc4Nzc0MTY1NCwxNzI0MDQ5NjI1LC0yMz
 U3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2
 NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3Mi
 wtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0
