@@ -12,11 +12,11 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 | [**API Auth**](auth-api.md) | Permite a los clientes administrar la creación y revocación de tokens de aitorización. |
 | [**API Health**](health-api.md) | Permite a los clientes revisar la salud de un nodo. |
 | [**API Info**](info-api.md) | Permite a los clientes examinar información básica de un nodo. |
-| [**API IPC**](ipc-api.md) | Permite a los usuarios crear sockets de dominio UNIX para que las cadenas de bloques publiquen   users to create UNIX domain sockets for blockchains to publish to. |
-| The [**Keystore API**](keystore-api.md) | Allows customers to use the embedded Keystore file of an Avalanche node. |
+| [**API IPC**](ipc-api.md) | Permite a los usuarios crear sockets de dominio UNIX para que las cadenas de bloques publiquen. |
+| [**API Keystore**](keystore-api.md) | Permite a los Allows customers to use the embedded Keystore file of an Avalanche node. |
 | The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0NjE3NzYxNiwtMTcxMjkzMTUwNSwyMj
+eyJoaXN0b3J5IjpbMTI2NDQ5NDc3NiwtMTcxMjkzMTUwNSwyMj
 MzNTQwMjIsMTYxNjAyNjA3OSwxNDAyMTI3MDc4XX0=
 -->
