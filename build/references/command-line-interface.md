@@ -276,13 +276,13 @@ Duración mínima de el stake. El valor por defecto de la red principal es de `3
 
 `--min-validator-stake` \(int\):
 
-The minimum stake, in nAVAX, required to validate the Primary Network.
+La participación mínima, en nAVAX, requerida para validar la Red Primaria.
 
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+Por defecto es `2000000000000` \(2,000 AVAX\) en la Red Principal. Por defecto es `5000000` \(.005 AVAX\) en la red de pruebas.
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
+La duración máxima de el stake, en segundos. Por defecto es `8760h` \(365 días\) en la red principal.
 
 `--max-validator-stake` \(int\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0OTk0NjgyOSwtMTI3MDg0MDE3LDY2NT
+eyJoaXN0b3J5IjpbMTQ3MzU1NzE4OSwtMTI3MDg0MDE3LDY2NT
 cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
 ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
 I3NTYxNTc0XX0=
