@@ -642,11 +642,11 @@ Hagamos un ejemplo de una transacción agregar validador no firmada que utilice 
 Una transacción agregar validador de subnet no firmada contiene un `BaseTx`, `Validator`, `SubnetID`, y `SubnetAuth`. Su `TypeID`es `0x0000000d`.
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
- * **`NodeID`** is 20 bytes which is the node ID of the validator.
- * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
+* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, and `Weight`
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
 * **`SubnetID`** a 32 byte subnet id
 * **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
 
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODg4NzI1OTMsMTc5OTEyNTgwNCwtMT
-I4ODAwMTYzMCwtNjI5NjQ2NjYwLC03MzUxNzc3NjcsLTEwNDYy
-NTk3NTksLTIwMzc1MjY5NzksMTIwOTUwNjI3NCwtNjQzMjQxNT
-E4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC02NzY2MDc5NTUsLTEy
-MDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMz
-Y1MjNdfQ==
+eyJoaXN0b3J5IjpbLTIwNjU2NTE5MzksLTIwODg4NzI1OTMsMT
+c5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2NjYwLC03MzUx
+Nzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5NzksMTIwOTUwNj
+I3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC02
+NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OT
+M5MDcwLC00ODIzMzY1MjNdfQ==
 -->
