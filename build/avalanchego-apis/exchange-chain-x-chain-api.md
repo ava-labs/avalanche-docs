@@ -383,19 +383,10 @@ avm.createVariableCapAsset({
 
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
 * `symbol` es un simbolo que sirve como abreviación del activo. Entre 0 y 4 caracteres. No necesariamente único. Puede omitirse.
-
-
+* `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc.
+* `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones  of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
 * `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
-* `username` y `password` denotan el usuario que pagará por la comisión de la transacción.
-* Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades del activo en el génesis.
-* `assetID` es el ID del nuevo activo.
-
-
-* `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` pays the transaction fee.
 * `assetID` is the ID of the new asset.
 * `changeAddr` in the result is the address where any change was sent.
@@ -1727,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDcxNDA4LC0zNTEyOTU2ODEsLTE5OT
-U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
-NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
-M4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbMTIzMzUyMDMzOCwtMzUxMjk1NjgxLC0xOT
+k1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQx
+MjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMT
+IzODQzNjE4M119
 -->
