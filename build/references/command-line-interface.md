@@ -176,7 +176,7 @@ La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 
 `--public-ip` \(string\):
 
-Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
+Los validadores deben conocer sus direcciones IP públicas para que puedan hacer saber a otros nodos cómo conectarse a ellos. Si no se proporciona este argumento, el nodo intentará realizar un recorrido NAT para obtener la IP pública del nodo. Debe estar configurado a `127.0.0.1` para crear una red local. Si no se establece, intenta aprender la IP usando un recorrido NAT.
 
 `--dynamic-public-ip` \(string\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4MTY0MDc0OCwtMjA2OTQyNTU4MiwxNz
-Y3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODky
-NywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMT
+c2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5
+MjcsMTIyNzU2MTU3NF19
 -->
