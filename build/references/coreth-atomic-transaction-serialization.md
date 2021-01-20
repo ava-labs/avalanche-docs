@@ -240,11 +240,11 @@ Tipo de salida que especifica un cambio de estado a aplicar a una cuenta de la E
 
 Una Salida de la EVM contiene un `address`, `amount`, y `assetID`.
 
-* **`Address`** is the EVM address that will receive the funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
+* **`Address`** es la dirección de la EVM que recibirá los fondos.
+* **`Amount`** es la cantidad del activo a ser transferido \ ~ \(especificado en nAVAX para AVAX y la menor denominación para todos los demás activos\).
+* **`AssetID`** es el ID del activo a transferir.
 
-#### Gantt EVM Output Specification
+#### Especificación Gantt de una Salida de la EVM
 
 ```text
 +----------+----------+-------------------------+
@@ -258,7 +258,7 @@ Una Salida de la EVM contiene un `address`, `amount`, y `assetID`.
                       +-------------------------+
 ```
 
-#### Proto EVM Output Specification
+#### Especificación Proto de una Salida de la EVM
 
 ```text
 message  {
@@ -268,9 +268,9 @@ message  {
 }
 ```
 
-#### EVM Output Example
+#### Ejemplo de una Salida de la EVM
 
-Let's make an EVM Output:
+Hagamos una Salida de la EVM:
 
 * `Address: 0x0eb5ccb85c29009b6060decb353a38ea3b52cd20`
 * `Amount: 500000000000`
@@ -924,6 +924,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MTk2NDQ1NjAsLTE2MTkyNDI3NzQsMT
-I1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ==
+eyJoaXN0b3J5IjpbNTM3MTMyNjg2LC0xNjE5MjQyNzc0LDEyNT
+AwNjcwOTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
 -->
