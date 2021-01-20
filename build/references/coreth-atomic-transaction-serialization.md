@@ -1,6 +1,6 @@
 # Formato de Transacción Atómica de Coreth
 
-Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones atómicas en `Coreth`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) for cryptographic user identification.
+Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones atómicas en `Coreth`. Teste documento utiliza la [serialización primitiva](serialization-primitives.md) formato para el empaquetado y [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
@@ -922,5 +922,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0NjA3ODUwMCwtNzQ4MzE1NDddfQ==
+eyJoaXN0b3J5IjpbLTE1NzU4MzQxNjksLTc0ODMxNTQ3XX0=
 -->
