@@ -357,15 +357,15 @@ Un mensaje `Put` contiene un `SubnetID`, `RequestID`, y `ContainerID`
 ]
 ```
 
-### How PullQuery is handled
+### Como se maneja PullQuery
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Si el nodo no ha añadido `ContainerID`, debería intentar añadir el contenedor al consenso. Después de que el contenedor sea añadido al consenso, un mensaje `Chits` debe ser enviado con las preferencias actuales del nodo.
 
-### When PullQuery is sent
+### Cuando se envía PullQuery
 
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Un nodo debe enviar un mensaje "PullQuery" si quiere saber las preferencias actuales de este nodo y cree que es muy probable que el nodo ya haya aprendido de `Container`. El nodo querrá aprender de las preferencias de los nodos cuando se entere de un nuevo contenedor o haya tenido contenedores pendientes durante "un tiempo".
 
-### PullQuery Example
+### Ejemplo de PullQuery
 
 ```text
 [
@@ -389,7 +389,7 @@ A node should send a `PullQuery` message if it wants to learn of this node’s c
 
 ## Chits
 
-### Overview
+### Resumen
 
 A `Chits` message provides a requested set of preferred container\(s\) to a node.
 
@@ -451,6 +451,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjU4MDAwNzc5LC05MzkzMDU1MDAsMTA2Nz
+eyJoaXN0b3J5IjpbMjAyNDcyNzg5LC05MzkzMDU1MDAsMTA2Nz
 Y0NDM2Ml19
 -->
