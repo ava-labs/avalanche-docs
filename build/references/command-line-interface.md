@@ -390,9 +390,9 @@ Algunos usuarios han tenido un problema en el que su nodo  de AvalancheGo entra 
 
 `--disconnected-restart-timeout` \(duration, por defecto `1m`\)
 
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
+Si `restart-on-disconnected` es `true`, el nodo comprobará cada `disconnected-check-frequency` para ver si ha perdido la conexión con todos los pares. Si el nodo ha perdido la conexión con todos los pares para `disconnected-restart-timeout`, se reiniciará. 
 
-If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
+Si  `restart-on-disconnected` es`false` o si `disconnected-check-frequency` o `disconnectedd-restart-timeout` es 0, el nodo no se reiniciará.
 
 ### Plugins
 
@@ -459,9 +459,9 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODY5MTUzNjQsLTk4NjI1OTMxMywtOT
-Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
-ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
-ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
-NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbMjIwMDMzODU4LC05ODYyNTkzMTMsLTk0OT
+g4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0MDE3LDY2NTcyNDgy
+OSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0ODA5LD
+g3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYx
+NTc0XX0=
 -->
