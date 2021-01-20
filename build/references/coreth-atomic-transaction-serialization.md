@@ -463,7 +463,7 @@ Una transacción exportar contiene un `typeID`, `networkID`, `blockchainID`, `de
 * **`networkID`** es un int que define a qué red de Avalanche se destina esta transacción. Esto podría referirse a la Red Principal, Fuji, etc. y es diferente al ID de la red de la EVM.
 * **`blockchainID`** es una matriz de 32 bytes que define a que blockchain emitió esta transacción.
 * **`destinationChain`** es una matriz de 32 bytes que define a que blockchain se exporta esta transacción.
-* **`inputs`** es una matriz de entradas de EVM para agregar fondos a la Transacción Exportar.
+* **`inputs`** es una matriz de entradas de la EVM para agregar fondos a la Transacción Exportar.
 * **`exportedOutputs`** es una matriz de TransferableOutputs para ser transferida a `destinationChain`.
 
 #### Especificación Gantt de una Transacción Exportar
@@ -564,12 +564,12 @@ Una Transacción Importar o "ImportTx" es una transacción para importar fondos 
 
 Una Transacción Importar contiene un `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
 
-* **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`sourceChain`** is a 32-byte array that defines which blockchain from which to import funds.
-* **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
-* **`Outs`** is an array of EVM Outputs to be imported to this chain.
+* **`typeID`** es un int que define el tipo para un ImportTx. El typeID para un `ImportTx` es 0.
+* **`networkID`** es un int que define a qué red de Avalanche se destina esta transacción. Esto podría referirse a la Red Principal, Fuji, etc. y es diferente al ID de la red de la EVM..
+* **`blockchainID`** es una matriz de 32 bytes que define a que blockchain emitió esta transacción
+* **`sourceChain`** es una matriz de 32 bytes que define de qué blockchain se importan los fondos.
+* **`importedInputs`** es una matriz de TransferableInputs para  agregar fondos a la Transacción Importar.
+* **`Outs`** es un arreglo de Salidas de la EVM para ser importadas a esta cadena.
 
 #### Gantt ImportTx Specification
 
@@ -924,7 +924,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTYwNDY5MTYxLDEwMjA3MjI0MzcsNDQ5Nz
+eyJoaXN0b3J5IjpbNzA2MTg5MDk1LDEwMjA3MjI0MzcsNDQ5Nz
 ExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMTYxOTI0Mjc3
 NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgzMTU0N119
 -->
