@@ -180,11 +180,11 @@ Los validadores deben conocer sus direcciones IP públicas para que puedan hacer
 
 `--dynamic-public-ip` \(string\):
 
-Valores válidos si el param está presente: `opendns`, `ifconfigco` o `ifconfigme`. Esto anula la `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Valores válidos si el param está presente: `opendns`, `ifconfigco` o `ifconfigme`. Esto anula la `--public-ip`. Si está configurado, sondeará el servicio remoto cada `--dynamic-update-duration` y actualizará la dirección IP pública del nodo.
 
 `--dynamic-update-duration` \(duration\):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+El tiempo entre los eventos del sondeo para `--dynamic-public-ip` o el recorrido NAT. El mínimo recomendado es de 1 minuto. Por defecto es de `5m`.
 
 ### Signature Verification
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgxNTk2NDAxMCwtMTU3MjQyMDE0OCwtMj
+eyJoaXN0b3J5IjpbMTk2OTAyNjk4NSwtMTU3MjQyMDE0OCwtMj
 A2OTQyNTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEz
 OTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0XX0=
 -->
