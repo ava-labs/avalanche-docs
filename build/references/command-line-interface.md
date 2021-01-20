@@ -268,11 +268,11 @@ El valor por defecto es `25000000000` \(25 AVAX\) en la red principal. Por defec
 
 `--min-delegation-fee` \(int\):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
+La cuota mínima de delegación que se puede cobrar por la delegación en la Red Primaria, multiplicada por `10,000`. Debe estar en el rango de  `[0, 1000000]`. Por defecto es `20000` \(2%\) en la Red Principal.
 
 `--min-stake-duration` \(duration\):
 
-Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
+Duración mínima de el stake. El valor por defecto de la red principal es de `336h` \(dos semanas.\)
 
 `--min-validator-stake` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjY5NDMxNTgsLTEyNzA4NDAxNyw2Nj
-U3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMz
-NDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMT
-IyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbLTg0OTk0NjgyOSwtMTI3MDg0MDE3LDY2NT
+cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
+ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
+I3NTYxNTc0XX0=
 -->
