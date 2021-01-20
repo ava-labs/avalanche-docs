@@ -444,7 +444,7 @@ Crea un nuevo activo no-fungible. No existen unidades del activo al inicializarl
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createNFTAsset({
@@ -538,7 +538,7 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
+* `assetID` es el ID del activo del nuevo activo NFT creado is the assetID of the newly created NFT asset.
 * `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -646,7 +646,7 @@ curl -X POST --data '{
 
 Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.exportAVAX({
@@ -707,7 +707,7 @@ curl -X POST --data '{
 Get the private key that controls a given address.  
 The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.exportKey({
@@ -751,7 +751,7 @@ curl -X POST --data '{
 
 Get the balances of all assets controlled by a given address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getAllBalances({address:string}) -> {
@@ -800,7 +800,7 @@ curl -X POST --data '{
 
 Get information about an asset.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
@@ -848,7 +848,7 @@ curl -X POST --data '{
 
 Get the balance of an asset controlled by a given address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getBalance({
@@ -896,7 +896,7 @@ curl -X POST --data '{
 
 Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getTx({
@@ -939,7 +939,7 @@ curl -X POST --data '{
 
 Get the status of a transaction sent to the network.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
@@ -981,7 +981,7 @@ curl -X POST --data '{
 
 Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getUTXOs({
@@ -1138,7 +1138,7 @@ This gives response:
 
 Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.import({
@@ -1186,7 +1186,7 @@ curl -X POST --data '{
 
 Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.importAVAX({
@@ -1233,7 +1233,7 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.importKey({
@@ -1276,7 +1276,7 @@ curl -X POST --data '{
 
 Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.issueTx({
@@ -1317,7 +1317,7 @@ curl -X POST --data '{
 
 List addresses controlled by the given user.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.listAddresses({
@@ -1356,7 +1356,7 @@ curl -X POST --data '{
 
 Send a quantity of an asset to an address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.send({
@@ -1415,7 +1415,7 @@ curl -X POST --data '{
 
 Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.sendMultiple({
@@ -1484,7 +1484,7 @@ curl -X POST --data '{
 
 Send a non-fungible token.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.sendNFT({
@@ -1544,7 +1544,7 @@ This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### Signature
+#### Firma
 
 ```cpp
 wallet.issueTx({
@@ -1589,7 +1589,7 @@ This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 wallet.send({
@@ -1652,7 +1652,7 @@ This call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 wallet.sendMultiple({
@@ -1718,9 +1718,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjM1Njk0NzUsMTcyNDA0OTYyNSwtMj
-M1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5OTU0
-Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEyNz
-IsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMjM4
-NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbMTQwOTUwNTc3NiwtMTkyMzU2OTQ3NSwxNz
+I0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5
+NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOC
+wtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgx
+NDU4NjM2LDEyMzg0MzYxODNdfQ==
 -->
