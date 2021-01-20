@@ -396,7 +396,7 @@ Una transacción base o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`,
 * **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
 
-### **Especificación Gantt de  Base Tx**
+### **Especificación Gantt de una Transacción Base**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -416,7 +416,7 @@ Una transacción base o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`,
                           +------------------------------------------------------+
 ```
 
-### **Especificación Proto de  Base Tx**
+### **Especificación Proto de una Transacción Base**
 
 ```text
 message BaseTx {
@@ -429,7 +429,7 @@ message BaseTx {
 }
 ```
 
-### **Ejemplo de Base Tx**
+### **Ejemplo de una Transacción Base**
 
 Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores:
 
@@ -1606,9 +1606,9 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxODM5MDI5NywtNjI5NjQ2NjYwLC03Mz
-UxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5NzksMTIwOTUw
-NjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC
-02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3
-OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbLTEzMjU2MTYyMjYsLTYyOTY0NjY2MCwtNz
+M1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1
+MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOC
+wtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4MTIsLTM2
+NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->
