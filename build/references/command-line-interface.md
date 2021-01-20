@@ -25,13 +25,13 @@ config.json file:
 
 ### APIs
 
-`--api-admin-enabled` \(boolean\):
+`--api-admin-enabled` \(booleano\):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API de administración. Por defecto es `false`. Ver [aquí](../avalanchego-apis/admin-api.md) para más información.
 
-`--api-auth-required` \(boolean\):
+`--api-auth-required` \(booleano\):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+Si se establece en `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
 
 `--api-auth-password` \(string\):
 
@@ -458,5 +458,5 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzU2NTU2MTQsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbOTI3NjAyNTk3LDEyMjc1NjE1NzRdfQ==
 -->
