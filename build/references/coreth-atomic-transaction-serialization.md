@@ -4,7 +4,7 @@ Este archivo pretende ser la única fuente de verdad sobre cómo serializamos la
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. Ahora mismo, el único códec válido es el 0 \(`0x00 0x00`\).
 
 ## Inputs
 
@@ -922,5 +922,5 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NzU4MzQxNjksLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
 -->
