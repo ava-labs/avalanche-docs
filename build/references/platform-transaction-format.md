@@ -642,7 +642,7 @@ Hagamos un ejemplo de una transacción agregar validador no firmada que utilice 
 Una transacción agregar validador de subnet no firmada contiene un `BaseTx`, `Validator`, `SubnetID`, y `SubnetAuth`. Su `TypeID`es `0x0000000d`.
 
 * **`BaseTx`**
-* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, and `Weight`
+* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, y `Weight`
 * **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
 * **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
 * **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjU2NTE5MzksLTIwODg4NzI1OTMsMT
-c5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2NjYwLC03MzUx
-Nzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5NzksMTIwOTUwNj
-I3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC02
-NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OT
-M5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbMTk4MjkxODk3MSwtMjA4ODg3MjU5MywxNz
+k5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2NDY2NjAsLTczNTE3
+Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNjk3OSwxMjA5NTA2Mj
+c0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01MDM1NjM4MzgsLTY3
+NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MDMzODEyLC0zNjc5Mz
+kwNzAsLTQ4MjMzNjUyM119
 -->
