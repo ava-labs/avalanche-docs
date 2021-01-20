@@ -1372,21 +1372,22 @@ Hagamos un ejemplo de una transacción firmada que utilice las entradas y salida
     0x7f, 0x00,
 ```
 
+
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+Una UTXO o "Unspent Transaction Output"es una representación independiente de la salida de una transacción.
 
-### What UTXO Contains
+### Que Contiene Una UTXO
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
+Una UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`** El único `CodecID` válido es `00 00`
+* **`TxID`** es una identificación de transacción de 32 bytes. Los ID de transacción se calculan tomando sha256 de los bytes de la transacción firmada.
+* **`UTXOIndex`** es un int que especifica qué salida de la transacción especificada por **`TxID`** fue creada por este utxo.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
+* **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
-#### Gantt UTXO Specification <a id="gantt-utxo-specification"></a>
+#### Especificación Gantt de una UTXO <a id="gantt-utxo-specification"></a>
 
 ```text
 +--------------+----------+-------------------------+
@@ -1607,7 +1608,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5NjQyODEyMywtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbMTEyMTA3ODQzNCwtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
