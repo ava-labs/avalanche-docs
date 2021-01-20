@@ -25,11 +25,11 @@ config.json file:
 
 ### APIs
 
-`--api-admin-enabled` \(booleano\):
+`--api-admin-enabled` \(boolean\):
 
 Si se establece en `false`, este nodo no expondrá la API de administración. Por defecto es `false`. Ver [aquí](../avalanchego-apis/admin-api.md) para más información.
 
-`--api-auth-required` \(booleano\):
+`--api-auth-required` \(boolean\):
 
 Si se establece en `true`, los llamados a la API requieren un token de autorización. Por defecto es `false`. Ver [aquí](../avalanchego-apis/auth-api.md) para más información.
 
@@ -37,29 +37,29 @@ Si se establece en `true`, los llamados a la API requieren un token de autorizac
 
 La contraseña necesaria para crear/revocar los tokens de autorización. Si `--api-auth-required=true`, debe ser especificada; de otra forma sería ignorada. Ver [aquí](../avalanchego-apis/auth-api.md) para más información.
 
-`--api-health-enabled` \(booleano\):
+`--api-health-enabled` \(boolean\):
 
 Si se establece como `true`, este nodo expondrá el API de Salud. Por defecto es `true`. Ver [aquí](../avalanchego-apis/health-api.md) para más información.
 
-`--api-info-enabled` \(booleano\):
+`--api-info-enabled` \(boolean\):
 
 Si se establece como `true`, este nodo expondrá la API de Información. Por defecto es `true`. Ver [aquí](../avalanchego-apis/info-api.md) para más información.
 
-`--api-ipcs-enabled` \(booleano\):
+`--api-ipcs-enabled` \(boolean\):
 
 Si se establece como `true`, este nodo expondrá la API de los IPCs. Por defecto es `false`. Ver [aquí](../avalanchego-apis/ipc-api.md) para más información.
 
-`--api-keystore-enabled` \(booleano\):
+`--api-keystore-enabled` \(boolean\):
 
 Si se establece en `false`, este nodo no expondrá la API del Keystore. Por defecto es `true`. Ver [aquí](../avalanchego-apis/keystore-api.md) para más información.
 
-`--api-metrics-enabled` \(booleano\):
+`--api-metrics-enabled` \(boolean\):
 
 Si se configura como `false`, este nodo no expondrá el API de Métricas. Por defecto es `true`. Ver [aquí](../avalanchego-apis/metrics-api.md) para más información
 
 ### Assertions
 
-`--assertions-enabled` \(booleano\):
+`--assertions-enabled` \(boolean\):
 
 Cuando se establece en `true`, las aserciones se ejecutarán en tiempo de ejecución en toda la base del código. Esto está pensado para su uso en la depuración, ya que podemos obtener un mensaje de error más específico. Por defecto es `true`.
 
@@ -89,7 +89,7 @@ Actualiza en la mayoría de las conexiones `conn-meter-max-conns` de una IP dada
 
 Especifica el directorio en el que se encuentra la base de datos. Por defecto `"$HOME/.avalanchego/db"`.
 
-`--db-enabled` \(booleano\):
+`--db-enabled` \(boolean\):
 
 Si se configura como `false`, las actualizaciones de estado se realizan únicamente en una base de datos en memoria, sin hacer ningún cambio en el almacenamiento permanente. Si se establece en `true`, las actualizaciones de estado se escriben en una base de datos local persistente. Por defecto es `true`.
 
@@ -105,7 +105,7 @@ Cada nodo ejecuta un servidor HTTP que proporciona las API para interactuar con 
 
 `--http-tls-cert-file` \(string, file path\):
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Este argumento especifica la ubicación del certificado TLS utilizado por el nodo para el servidor HTTPS. Esto debe ser especificado cuando `--http-tls-enabled=true`. No hay un valor por defecto.
 
 `--http-tls-enabled` \(boolean\):
 
@@ -458,6 +458,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NT
-g4OTI3LDEyMjc1NjE1NzRdfQ==
+eyJoaXN0b3J5IjpbMTc2NzMzNDgwOSw4NzgzODI4NDIsMTUxMT
+UxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3NF19
 -->
