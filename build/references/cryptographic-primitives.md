@@ -12,10 +12,9 @@ Avalanche no depende de ningún tercero centralizado y, en particular, no utiliz
 
 ### Direcciones TLS 
 
-
 Para evitar la publicación del certificado completo de TLS en la Platform chain, el certificado es primero "hasheado". Por coherencia, Avalanche emplea el mismo mecanismo de hash para los certificados TLS que se utiliza en Bitcoin. Es decir, la representación DER del certificado se somete a hash con sha256, y el resultado se somete a hash con ripemd160 para obtener un identificador de 20 bytes para los stakers.
 
-Este identificador de 20 bytes se representa con "NodeID-" seguido de los datos [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
+Este identificador de 20 bytes está representado por "NodeID-" seguido de la cadena codificada de datos [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58).
 
 ## Cryptography in the Avalanche Virtual Machine
 
@@ -115,5 +114,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyMTI3NzYzOV19
+eyJoaXN0b3J5IjpbNTgzNzQwNjM4XX0=
 -->
