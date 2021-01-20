@@ -1,4 +1,4 @@
-# Cryptographic Primitives
+# Primitivos Criptográficos
 
 [Avalanche](../../#avalanche) uses a variety of cryptographic primitives for its different functions. This file summarizes the type and kind of cryptography used at the network and blockchain layers.
 
@@ -113,3 +113,6 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNTY5Mjc0MzFdfQ==
+-->
