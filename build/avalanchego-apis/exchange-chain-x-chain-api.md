@@ -321,7 +321,7 @@ avm.mint({
 * `txID` es el ID de la transacción.
 * `changeAddr` en el resultado es la dirección a la cual se enviará cualquier cambio.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNj
-AwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYx
-OTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0MzYxODNdfQ
-==
+eyJoaXN0b3J5IjpbLTg4ODA5NiwtMzUxMjk1NjgxLC0xOTk1ND
+Y3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQxMjcy
+LC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzOD
+QzNjE4M119
 -->
