@@ -314,7 +314,7 @@ El consenso Snow define `beta1` como el número de sondeos consecutivos que una 
 
 `--snow-rogue-commit-threshold` \(int\):
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
+El consenso Snow define `beta2` como el número de sondeos consecutivos que una transacción virtuosa debe aumentar su confianza para que sea aceptada. Este parámetro nos permite definir el valor `beta2`  utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser al menos `beta1`. El valor por defecto es `30`.
 
 `--stake-minting-period` \(duration\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTUzMjYwMTYsLTExMjQ5NDgyNjIsLT
-EyNzA4NDAxNyw2NjU3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0
-MjU1ODIsMTc2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NC
-wyMDU1ODg5MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbMTI1NDE0OTUyNiwtMTEyNDk0ODI2MiwtMT
+I3MDg0MDE3LDY2NTcyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQy
+NTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LD
+IwNTU4ODkyNywxMjI3NTYxNTc0XX0=
 -->
