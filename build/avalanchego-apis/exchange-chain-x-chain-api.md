@@ -318,8 +318,8 @@ avm.mint({
 * `from` son las direcciones que deseas usar para esta operación. Si se omiten, necesariamente utiliza alguna de tus direcciones.
 * `changeAddr` es la dirección en la que cualquier cambio será enviado. Si se omite, se enviará a cualquier dirección controlada por el usuario.
 * `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de minar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID` es el ID de la transacción.
+* `changeAddr` en el resultado es la dirección a la cual se enviará cualquier cambio.
 
 #### **Example Call**
 
@@ -1718,7 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2Mz
-gzNjU4MTgsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3
-NjksLTk4MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNj
+AwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYx
+OTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0MzYxODNdfQ
+==
 -->
