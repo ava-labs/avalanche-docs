@@ -51,15 +51,16 @@ SHA256\(Public Key\): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045b
 
 Direción: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
 
-Morty is quite confused because a public key should be safe to be public knowledge. Rick belches and explains that hashing the public key protects the private key owner from potential future security flaws in elliptic curve cryptography. In the event cryptography is broken and a private key can be derived from a public key, users can transfer their funds to an address that has never signed a transaction before, preventing their funds from being compromised by an attacker. This enables coin owners to be protected while the cryptography is upgraded across the clients.
 
-Later, once Morty has learned more about Rick’s backstory, Morty attempts to send Rick a message. Morty knows that Rick will only read the message if he can verify it was from him, so he signs the message with his private key.
+Morty está bastante confundido porque una llave pública debe ser segura para ser de conocimiento público. Rick eructa y explica que el hecho de tener la clave pública protege al propietario de la clave privada de posibles fallos de seguridad futuros en la criptografía de curva elíptica. En caso de que se rompa la criptografía y se pueda derivar una clave privada de una clave pública, los usuarios pueden transferir sus fondos a una dirección que nunca antes haya firmado una transacción, evitando que sus fondos se vean comprometidos por un atacante. Esto permite proteger a los propietarios de las monedas mientras se actualiza la criptografía en los clientes.
 
-Message: `0x68656c702049276d207472617070656420696e206120636f6d7075746572`
+Más tarde, una vez que Morty ha aprendido más sobre la historia de Rick, Morty intenta enviarle un mensaje. Morty sabe que Rick sólo leerá el mensaje si puede verificar que era de él, así que firma el mensaje con su clave privada.
 
-Message Hash: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e4b7da`
+Mensaje: `0x68656c702049276d207472617070656420696e206120636f6d7075746572`
 
-Message Signature: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
+Hash del Mensaje: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e4b7da`
+
+Firma del Mensaje: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
 
 Morty was never seen again.
 
@@ -115,5 +116,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3OTk5MjI2OCwtMTU2NzM1MzQzOF19
+eyJoaXN0b3J5IjpbNjE1OTQ2NjU5LC0xNTY3MzUzNDM4XX0=
 -->
