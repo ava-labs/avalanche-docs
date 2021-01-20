@@ -73,9 +73,9 @@ Un estándar para mensajes genéricos firmados interoperables basados en el form
 sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](serialization-primitives.md#integer) of the message size.
+El prefijo es simplemente la cadena `\x1AAvalanche Signed Message:\n`, donde `0x1A` es la longitud del prefijo del texto y `length(message)` es un [entero](serialization-primitives.md#integer) del tamaño del mensaje.
 
-### Gantt Pre-image Specification
+### Especificación de imagen previa de Gantt
 
 ```text
 +---------------+-----------+------------------------------+
@@ -89,9 +89,9 @@ The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` 
                             +------------------------------+
 ```
 
-### Example
+### Ejemplo
 
-As an example we will sign the message "Through consensus to the stars"
+Como ejemplo, firmaremos el mensaje "A través del consenso a las estrellas"
 
 ```text
 // prefix size: 26 bytes
@@ -117,5 +117,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzNDE2MjQ1NSwtMTU2NzM1MzQzOF19
+eyJoaXN0b3J5IjpbLTYzNjk4MjY5MiwtMTU2NzM1MzQzOF19
 -->
