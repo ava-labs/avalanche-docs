@@ -663,7 +663,7 @@ avm.exportAVAX({
 }
 ```
 
-* `to` is the P-Chain address the AVAX is sent to.
+* `to` es la dirección de la P-Chain a la cual se enviará el AVAX.
 * `amount` is the amount of nAVAX to send.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMD
-I4NjYyNzg4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEz
-MTY1LC0xOTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0My
-wtMTEzNDMxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2
-MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQxMjcyLC05ODA5Nj
-E5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMTIzODQzNjE4M119
-
+eyJoaXN0b3J5IjpbLTU3NDg4MTExNywxOTg4ODUyMjQxLC05NT
+E4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAzMzIy
+MDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OTYyNS
+wtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5
+OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwND
+EyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwx
+MjM4NDM2MTgzXX0=
 -->
