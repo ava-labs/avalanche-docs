@@ -459,14 +459,14 @@ Una Transacción Exportar o "ExportTx" es una transacción para exportar fondos 
 
 Una transacción exportar contiene un `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, y`exportedOutputs`.
 
-* **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`destinationChain`** is a 32-byte array that defines which blockchain this transaction exports funds to.
-* **`inputs`** is an array of EVM Inputs to fund the ExportTx.
-* **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
+* **`typeID`** es un int que define el tipo para un ExportTx. El typeID para una exportTx es 1.
+* **`networkID`** es un int que define a qué red de Avalanche se destina esta transacción. Esto podría referirse a la Red Principal, Fuji, etc. y es diferente al ID de la red de la EVM.
+* **`blockchainID`** es una matriz de 32 bytes que define a que blockchain emitió esta transacción.
+* **`destinationChain`** es una matriz de 32 bytes que define a que blockchain se exporta esta transacción.
+* **`inputs`** es una matriz de entradas de EVM para agregar fondos a la Transacción Exportar.
+* **`exportedOutputs`** es una matriz de TransferableOutputs para ser transferida a `destinationChain`.
 
-#### Gantt ExportTx Specification
+#### Especificación Gantt de una Transacción Exportar
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -486,9 +486,9 @@ Una transacción exportar contiene un `typeID`, `networkID`, `blockchainID`, `de
                                              +-------------------------------------------------+
 ```
 
-#### ExportTx Example
+#### Ejemplo de una Transacción Exportar
 
-Let's make an EVM Output:
+Hagamos una Transacción Exportar:
 
 * **`TypeID`**: `1`
 * **`NetworkID`**: `12345`
@@ -924,7 +924,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMDcyMjQzNyw0NDk3MTEyMDUsMTI2Nj
-E3OTc5NCwxNTk4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAwNjcw
-OTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbMTg4NDg2ODI4MywxMDIwNzIyNDM3LDQ0OT
+cxMTIwNSwxMjY2MTc5Nzk0LDE1OTgwMTE1ODYsLTE2MTkyNDI3
+NzQsMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ
+==
 -->
