@@ -384,11 +384,11 @@ Lista separada por comas de subnets que este nodo validaría si se añadiera. Po
 
 Algunos usuarios han tenido un problema en el que su nodo  de AvalancheGo entra en un estado insalubre cuando su nodo pierde la conección a Internet o cuando cambia su dirección IP. Para ayudar a solucionarlo, hay indicadores de línea de comandos que hacen que el nodo se reinicie si se desconecta de todos sus pares. Estos son:
 
-`--restart-on-disconnected` \(boolean, defaults to `false`\)
+`--restart-on-disconnected` \(boolean, por defecto `false`\)
 
-`--disconnected-check-frequency`  \(duration, defaults to `10s`\)
+`--disconnected-check-frequency`  \(duration, por defecto `10s`\)
 
-`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
+`--disconnected-restart-timeout` \(duration, por defecto `1m`\)
 
 If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTEwNjIyMzYsLTk4NjI1OTMxMywtOT
+eyJoaXN0b3J5IjpbLTE0ODY5MTUzNjQsLTk4NjI1OTMxMywtOT
 Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
 ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
 ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
