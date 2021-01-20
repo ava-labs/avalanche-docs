@@ -236,15 +236,15 @@ La cantidad de tiempo que un compañero es puesto en la lista de referencia desp
 
 `--benchlist-fail-threshold` \(int\):
 
-Number of consecutive failed queries to a node before benching it \(assuming all queries to it will fail\). Defaults to `10`.
+Número de consultas fallidas consecutivas a un nodo antes de ponerlo en el banco \(asumiendo que todas las consultas fallarán\). Por defecto `10`.
 
 `--benchlist-peer-summary-enabled` \(boolean\):
 
-Enables peer specific query latency metrics. Defaults to `false`.
+Permite una métrica de latencia de consulta específica de los pares. Por defecto es `false`.
 
 `--benchlist-min-failing-duration` \(duration\):
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+La cantidad mínima de tiempo que los mensajes a un par deben fallar antes de que el par sea puesto en el banco. El valor por defecto es de `5m`.
 
 ### Consensus Parameters
 
@@ -459,7 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNzA4NDAxNyw2NjU3MjQ4MjksLTE1Nz
-I0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOSw4NzgzODI4
-NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbMzI3NDgyNzUwLC0xMjcwODQwMTcsNjY1Nz
+I0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4
+MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMj
+c1NjE1NzRdfQ==
 -->
