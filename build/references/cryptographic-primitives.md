@@ -2,15 +2,15 @@
 
 [Avalanche](../../#avalanche) utiliza una variedad de primitivas criptográficas para sus diferentes funciones. Este archivo resume el tipo y la clase de criptografía utilizada en las capas de red y blockchain.
 
-## Cryptography in the Network Layer
+## Criptografía en la Capa de la Red
 
-Avalanche uses Transport Layer Security, TLS, to protect node-to-node communications from eavesdroppers. TLS combines the practicality of public-key cryptography with the efficiency of symmetric-key cryptography. This has resulted in TLS becoming the standard for internet communication. Whereas most classical consensus protocols employ public-key cryptography to prove receipt of messages to third parties, the novel Snow\* consensus family does not require such proofs. This enables Avalanche to employ TLS in authenticating stakers and eliminates the need for costly public-key cryptography for signing network messages.
+Avalanche utiliza la Transport Layer Security, TLS, para proteger las comunicaciones de nodo a nodo de los intrusos. TLS combina la practicidad de la criptografía de clave pública con la eficiencia de la criptografía de clave simétrica. Esto ha dado lugar a que el TLS se convierta en el estándar para la comunicación en Internet. Mientras que la mayoría de los protocolos de consenso clásicos emplean criptografía de clave pública para probar la recepción de mensajes a terceros, la nueva familia de consenso de Snow\* no requiere tales pruebas. Esto permite a Avalanche emplear el TLS para autenticar a los stakers y elimina la necesidad de la costosa criptografía de clave pública para firmar los mensajes de la red.
 
-### TLS Certificates
+### Certificados TLS 
 
-Avalanche does not rely on any centralized third-parties, and in particular, it does not use certificates issued by third-party authenticators. All certificates used within the network layer to identify endpoints are self-signed, thus creating a self-sovereign identity layer. No third parties are ever involved.
+Avalanche no depende de ningún tercero centralizado y, en particular, no utiliza certificados emitidos por terceros autentificadores. Todos los certificados utilizados dentro de la capa de red para identificar los puntos finales son autofirmados, creando así una capa de identidad autosoberana. Nunca intervienen terceros.
 
-### TLS Addresses
+### DireTLS 
 
 To avoid posting the full TLS certificate to the Platform chain, the certificate is first hashed. For consistency, Avalanche employs the same hashing mechanism for the TLS certificates as is used in Bitcoin. Namely, the DER representation of the certificate is hashed with sha256, and the result is then hashed with ripemd160 to yield a 20-byte identifier for stakers.
 
@@ -114,5 +114,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzNjQxNTQxOF19
+eyJoaXN0b3J5IjpbLTY2NTcyMjEzOV19
 -->
