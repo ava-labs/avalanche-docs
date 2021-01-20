@@ -977,11 +977,11 @@ Hagamos un ejemplo de una transacción crear subnet no firmada que utilice las e
 ]
 ```
 
-## Unsigned Import Tx
+## Transacción Importar No Firmada
 
-### **What Unsigned Import Tx Contains**
+### **Que Contiene una Transacción Importar No Firmada**
 
-An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
+Una transacción importar no firmada o "Unsigned Import Tx" contiene un `BaseTx`, `SourceChain`, y  `Ins`. The `TypeID` for this type is `0x00000011`.
 
 * **`BaseTx`**
 * **`SourceChain`** is a 32-byte source blockchain ID.
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4MDA5NzA4OSwtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbLTkxMjYyNjU3MiwtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
