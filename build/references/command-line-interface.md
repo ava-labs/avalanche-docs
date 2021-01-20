@@ -298,12 +298,11 @@ Las implementaciones DAG del consenso de Snow definen `p` como el número de pro
 
 `--snow-concurrent-repolls` \(int\):
 
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
+El consenso Snow requiere que se repitan las transacciones que se emiten durante el período de baja utilización de la red. Este parámetro permite definir cuán agresivo será el cliente para finalizar estas transacciones pendientes. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser por lo menos `1` y como máximo `--snow-rogue-commit-threshold`. El valor por defecto es `4`.
 
 `--snow-sample-size` \(int\):
 
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
-
+El consenso Snow define `k` como el número de validadores que se muestrean durante cada sondeo de la red. Este parámetro permite definir el valor `k` utilizado para el consenso. Esto sólo debería cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser por lo menos `1`. El valor por defecto es `20`.
 `--snow-quorum-size` \(int\):
 
 Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
@@ -459,8 +458,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDAwNzYwNDQsLTEyNzA4NDAxNyw2Nj
-U3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMz
-NDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMT
-IyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbNzY0MjQzODQ4LC0xMjcwODQwMTcsNjY1Nz
+I0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4
+MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMj
+c1NjE1NzRdfQ==
 -->
