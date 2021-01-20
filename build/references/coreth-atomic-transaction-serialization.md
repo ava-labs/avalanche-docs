@@ -306,8 +306,8 @@ Las salidas transferibles o "Transferable Outputs" envuelven  un `SECP256K1Trans
 
 Una salida transferible contiene una `AssetID` y un `Output` el cual es un `SECP256K1TransferOutput`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is a `SECP256K1TransferOutput` as defined below.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
+* **`Output`** es una `SECP256K1TransferOutput` como se define a continuación.
 
 #### Gantt Transferable Output Specification
 
@@ -924,6 +924,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU0OTI4MjY1LC0xNjE5MjQyNzc0LDEyNT
-AwNjcwOTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbMTU4ODM3ODAxNywtMTYxOTI0Mjc3NCwxMj
+UwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgzMTU0N119
 -->
