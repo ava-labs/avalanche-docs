@@ -45,11 +45,11 @@ Private Key: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070
 
 Public Key \(33-byte compressed\): `0x02b33c917f2f6103448d7feb42614037d05928433cb25e78f01a825aa829bb3c27`
 
-Because of Rick’s infinite wisdom, he doesn’t trust himself with carrying around Morty’s public key, so he only asks for Morty’s address. Morty follows the instructions, SHA256’s his public key, and then ripemd160’s that result to produce an address.
+Debido a la infinita sabiduría de Rick, no confía en sí mismo para llevar la llave pública de Morty, así que sólo pide la dirección de Morty. Morty sigue las instrucciones, somete a hash su vlave pública usando SHA256, y luego ripemd160, ese resultado producirá una dirección.
 
 SHA256\(Public Key\): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045bffa7b0d2f`
 
-Address: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
+Direción: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
 
 Morty is quite confused because a public key should be safe to be public knowledge. Rick belches and explains that hashing the public key protects the private key owner from potential future security flaws in elliptic curve cryptography. In the event cryptography is broken and a private key can be derived from a public key, users can transfer their funds to an address that has never signed a transaction before, preventing their funds from being compromised by an attacker. This enables coin owners to be protected while the cryptography is upgraded across the clients.
 
@@ -115,5 +115,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxOTAzMjg1MiwtMTU2NzM1MzQzOF19
+eyJoaXN0b3J5IjpbMTU3OTk5MjI2OCwtMTU2NzM1MzQzOF19
 -->
