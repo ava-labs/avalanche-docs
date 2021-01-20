@@ -300,7 +300,7 @@ Hagamos una Salida de la EVM:
 
 ### Transferable Output
 
-Transferable outputs wrap a `SECP256K1TransferOutput` with an asset ID.
+Las salidas transferibles o "Transferable Outputs" envuelven `SECP256K1TransferOutput` con el ID  de un activo.
 
 #### What Transferable Output Contains
 
@@ -924,6 +924,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM3MTMyNjg2LC0xNjE5MjQyNzc0LDEyNT
-AwNjcwOTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbLTE1MDIzMzQyNjcsLTE2MTkyNDI3NzQsMT
+I1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ==
 -->
