@@ -17,7 +17,7 @@ Results in:
 
 ## Short
 
-Shorts are packed in BigEndian format into the message payload.
+Los Shorts están empaquetados en formato BigEndian en la carga de mensajes.
 
 Ejemplo:
 
@@ -30,7 +30,7 @@ Results in:
 
 ## Integer
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+Los números enteros son valores de 32 bits empaquetados en formato BigEndian en la carga de mensajes.
 
 Ejemplo:
 
@@ -43,7 +43,8 @@ Results in:
 
 ## Long Integers
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+Los números enteros largos son valores de 64 bits empaquetados en formato BigEndian en la carga de mensajes.
+
 
 Ejemplo:
 
@@ -142,5 +143,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1MzY4MTQxN119
+eyJoaXN0b3J5IjpbMTEwODIxMzgzN119
 -->
