@@ -398,11 +398,11 @@ Si  `restart-on-disconnected` es`false` o si `disconnected-check-frequency` o `d
 
 `--plugin-dir` \(string, file path\):
 
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+Especifica el directorio en el que se guarda el plugin `evm`. Por defecto `"$HOME/.avalanchego/build/plugins"`.
 
 `--coreth-config` \(json\):
 
-This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
+Esto le permite especificar una configuración para ser pasada a Coreth, el VM que ejecuta la C-Chain. Los valores por defecto de esta configuración son:
 
 ```cpp
 {
@@ -419,7 +419,7 @@ This allows you to specify a config to be passed into Coreth, the VM running the
 }
 ```
 
-Note: if a config is specified, all default options are overridden. For example:
+Nota: si se especifica una configuración, se anulan todas las opciones predeterminadas. Por ejemplo:
 
 ```text
 ./build/avalanchego --config-file=config.json
@@ -443,9 +443,9 @@ config.json:
 }
 ```
 
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+Como la opción `personal-api-enabled` está excluida, será puesta en `false` y desactivará el espacio de nombres `personal_*`.
 
-The options specify parameters for Coreth \(the C Chain\) as follows:
+Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la siguiente manera:
 
 * `snowman-api-enabled` -&gt; Enables Snowman API.
 * `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
@@ -459,9 +459,9 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjIwMDMzODU4LC05ODYyNTkzMTMsLTk0OT
-g4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0MDE3LDY2NTcyNDgy
-OSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0ODA5LD
-g3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYx
-NTc0XX0=
+eyJoaXN0b3J5IjpbLTE2OTM3MjQxMjEsLTk4NjI1OTMxMywtOT
+Q5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQwMTcsNjY1NzI0
+ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MD
+ksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1
+NjE1NzRdfQ==
 -->
