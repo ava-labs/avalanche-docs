@@ -154,15 +154,16 @@ Un mensaje `Get` solicita un contenedor, es decir, un bloque o vértice, de un n
 
 El OpCode utilizado por los mensajes `Get` es: `0x04`.
 
-### What Get contains
 
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+### Que contiene Get
 
-**`SubnetID`** defines which subnet this message is destined for.
+Un mensaje `Get` contiene un  `SubnetID`, `RequestID`, y  `ContainerID`.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
+**`SubnetID`**  define a qué subnet está destinado este mensaje.
 
-**`ContainerID`** is the identifier of the requested container.
+**`RequestID`** es un contador que ayuda a llevar la cuenta de los mensajes enviados por un nodo. Cada vez que un nodo envía un mensaje no solicitado, el nodo creará un nuevo y único `RequestID` para el mensaje.
+
+**`ContainerID`** es el identificador del contenedor solicitado.
 
 ```text
 [
@@ -444,5 +445,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTA1MDc1MDAwXX0=
+eyJoaXN0b3J5IjpbMTA2NzY0NDM2Ml19
 -->
