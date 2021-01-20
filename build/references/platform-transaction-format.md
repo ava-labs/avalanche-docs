@@ -499,9 +499,9 @@ Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores
 
 ## Transacción Agregar Validador No Firmada
 
-### Que Contiene una Transacción Agregar Validador No Firmada**
+### Que Contiene una Transacción Agregar Validador No Firmada
 
-Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, y `Shares`. Su `TypeID` es `0x0000000c`.
+Una transacción agregar validador no firmada o "Unsigned Add Validator Tx" contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, y `Shares`. Su `TypeID` es `0x0000000c`.
 
 * **`BaseTx`**
 * **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
@@ -761,9 +761,9 @@ Hagamos un ejemplo de una transacción agregar validador de subnet no firmada qu
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## Transacción Agregar Delegador de Subnet No Firmada
 
-### **What Unsigned Add Delegator Tx Contains**
+### **Que Contiene una Transacción Agregar Delegador de Subnet No Firmada**
 
 An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
 
@@ -1606,7 +1606,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDkyNjYzNDA3LC0yMDg4ODcyNTkzLDE3OT
+eyJoaXN0b3J5IjpbNjM0OTkxOTczLC0yMDg4ODcyNTkzLDE3OT
 kxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3
 NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNz
 QsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2
