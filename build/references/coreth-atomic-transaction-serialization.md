@@ -558,11 +558,11 @@ Hagamos una Transacción Exportar:
 
 ### ImportTx
 
-ImportTx is a transaction to import funds to Coreth from another chain.
+Una Transacción Importar o "ImportTx" es una transacción para importar fondos de Coreth a una cadena diferente.
 
-#### What ImportTx Contains
+#### Que Contiene una Transacción  Importar
 
-An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
+Una Transacción Importar contiene un `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
 
 * **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
 * **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
@@ -924,8 +924,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NDg2ODI4MywxMDIwNzIyNDM3LDQ0OT
-cxMTIwNSwxMjY2MTc5Nzk0LDE1OTgwMTE1ODYsLTE2MTkyNDI3
-NzQsMTI1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ
-==
+eyJoaXN0b3J5IjpbNTYwNDY5MTYxLDEwMjA3MjI0MzcsNDQ5Nz
+ExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMTYxOTI0Mjc3
+NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgzMTU0N119
 -->
