@@ -664,8 +664,8 @@ avm.exportAVAX({
 ```
 
 * `to` es la dirección de la P-Chain a la cual se enviará el AVAX.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `amount` es el monto de nAVAX a enviar.
+* `from` son las direcciones que quieres usar par esta operación. Si se omiten, utiliza alguna de tus direcciones si se requere
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * The AVAX is sent from addresses controlled by `username`
 * `txID` is this transaction’s ID.
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU3NDg4MTExNywxOTg4ODUyMjQxLC05NT
+eyJoaXN0b3J5IjpbMjAwODU2MzUxNCwxOTg4ODUyMjQxLC05NT
 E4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAzMzIy
 MDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OTYyNS
 wtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5
