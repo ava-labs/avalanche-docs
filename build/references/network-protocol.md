@@ -33,11 +33,12 @@ Un nodo que reciba un mensaje `GetVersion` debe responder con un mensaje `Versio
 
 El OpCode usado por los mensajes de `Version` es: `0x01`.
 
-### What Version contains
 
-`Version` contains the node’s current time in Unix time format in number of milliseconds since the beginning of the epoch in 01/01/1970, as well as a version string describing the version of the code that the node is running.
+### Que Contiene Versión 
 
-Content:
+`Version` contiene la hora actual del nodo en formato de tiempo Unix en número de milisegundos desde el comienzo de la época en 01/01/1970, así como una cadena de versión que describe la versión del código que el nodo está ejecutando.
+
+Contenido:
 
 ```text
 [
@@ -440,5 +441,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzNTc4NDY1OV19
+eyJoaXN0b3J5IjpbLTE4NTA0MTQyNzldfQ==
 -->
