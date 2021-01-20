@@ -226,13 +226,13 @@ Si esto es `true`, imprime la versión y se cierra. Por defecto `false`.
 
 ## Advanced Options
 
-The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+Las siguientes opciones afectan a la corrección de la plataforma. Es posible que sea necesario cambiarlas en toda la red y, por consiguiente, un usuario ordinario no debería cambiarlas de las que están predeterminadas.
 
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+La cantidad de tiempo que un compañero es puesto en la lista de referencia después de superar el `--benchlist-fail-threshold`. Por defecto `1h`.
 
 `--benchlist-fail-threshold` \(int\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxNjkxMjYyMiw2NjU3MjQ4MjksLTE1Nz
+eyJoaXN0b3J5IjpbLTEyNzA4NDAxNyw2NjU3MjQ4MjksLTE1Nz
 I0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOSw4NzgzODI4
 NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3NF19
 -->
