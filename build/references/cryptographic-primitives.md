@@ -104,7 +104,7 @@ Como ejemplo, firmaremos el mensaje "A través del consenso a las estrellas"
 54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
 ```
 
-After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
+Después de haber hecho "hashing" con `sha256` y haber firmado la imagen previa, retornamos el valor [cb58].(https://support.avalabs.org/en/articles/4587395-what-is-cb58) codificado: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Aquí hay un ejemplo usando la [Wallet Web de Avalanche](https://wallet.avax.network/wallet/advanced).
 
 ![Sign message](../../.gitbook/assets/sign-message.png)
 
@@ -117,5 +117,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzNjk4MjY5MiwtMTU2NzM1MzQzOF19
+eyJoaXN0b3J5IjpbMTg2MTkxMDM2OCwtMTU2NzM1MzQzOF19
 -->
