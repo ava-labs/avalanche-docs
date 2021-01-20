@@ -212,7 +212,7 @@ Avalanche utiliza conexiones TLS de dos vías autentificadas para identificar de
 
 `--staking-tls-key-file` \(string, file path\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS private key used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche utiliza conexiones TLS de dos vías autentificadas para identificar de forma segura el  `stakingID` e los pares conectados cuando `--p2p-tls-enabled=true`. Este argumento especifica la ubicación del certificado TLS utilizado por el nodo. Esto debe especificarse cuando `--p2p-tls-enabled=true`. Por defecto `""`.
 
 `--staking-disabled-weight` \(int\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMjM4MjEyOTQsNjY1NzI0ODI5LC0xNT
+eyJoaXN0b3J5IjpbLTE1OTgzMDczOTgsNjY1NzI0ODI5LC0xNT
 cyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MDksODc4Mzgy
 ODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1NjE1NzRdfQ
 ==
