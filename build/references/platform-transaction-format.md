@@ -504,14 +504,14 @@ Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores
 Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, y `Shares`. Su `TypeID` es `0x0000000c`.
 
 * **`BaseTx`**
-* **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-* **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-* **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** A `SECP256K1OutputOwners`
-* **`Shares`** 10,000 times percentage of reward taken from delegators
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
+* **`Stake`**  el Stake tiene `LockedOuts`
+ * **`LockedOuts`** Un conjunto de salidas transferibles que están bloqueadas mientras dure el período de stake. Al final del periodo de stake, estas salidas son devueltas a sus respectivas direcciones.
+* **`RewardsOwner`** Un `SECP256K1OutputOwners`
+* **`Shares`**  10 000 de veces el porcentaje de recompensa tomado de los delegadores
 
 ### **Gantt Unsigned Add Validator Tx Specification**
 
@@ -1606,9 +1606,9 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODgwMDE2MzAsLTYyOTY0NjY2MCwtNz
-M1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OTc5LDEyMDk1
-MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUwMzU2MzgzOC
-wtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMzM4MTIsLTM2
-NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbMTAwNzA0MTI4LC0xMjg4MDAxNjMwLC02Mj
+k2NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUy
+Njk3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC
+01MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5
+MDMzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
