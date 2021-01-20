@@ -236,15 +236,16 @@ Un mensaje `Put` contiene un `SubnetID`, `RequestID`, `ContainerID`, y `Containe
 ]
 ```
 
-### How Put is handled
 
-The node should attempt to add the container to consensus.
+### Como se maneja a Put 
 
-### When Put is sent
+El nodo debe intentar añadir el contenedor al consenso.
 
-A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
+### Cuando se envía Put 
 
-### Put Example
+Un nodo enviará un mensaje `Put` en respuesta a la recepción de un mensaje `Get` para un contenedor al que el nodo tiene acceso.
+
+### Ejemplo de Put
 
 ```text
 [
@@ -270,11 +271,11 @@ A node will send a `Put` message in response to receiving a Get message for a co
 
 ## PushQuery
 
-### Overview
+### Resumen
 
-A `PushQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus. If the `ContainerID` is not known, the `Container` is optimistically provided.
+Un mensaje `PushQuery` solicita los containerIDs preferidos del nodo después de que el `ContainerID`especificado haya sido añadido al consenso. Si el `ContainerID` no es conocido, el `Container` es provisto de manera optimista.
 
-The OpCode used by `PushQuery` messages is: `0x06`.
+El OpCode utilizado por los mensajes `PushQuery` es: `0x06`.
 
 ### What PushQuery contains
 
@@ -449,5 +450,5 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM0MjA0NzA5LDEwNjc2NDQzNjJdfQ==
+eyJoaXN0b3J5IjpbLTkzOTMwNTUwMCwxMDY3NjQ0MzYyXX0=
 -->
