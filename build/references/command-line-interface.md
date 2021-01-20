@@ -306,7 +306,7 @@ El consenso Snow define `k` como el número de validadores que se muestrean dura
 
 `--snow-quorum-size` \(int\):
 
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
+El consenso Snow define `alpha` como el número de validadores que deben preferir una transacción durante cada sondeo de la red para aumentar la confianza en la transacción. Este parámetro nos permite definir el valor `alpha` utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow.. El valor debe ser mayor que `k/2`.  El valor por defecto es `14`.
 
 `--snow-virtuous-commit-threshold` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjQ5NDgyNjIsLTEyNzA4NDAxNyw2Nj
-U3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMz
-NDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMT
-IyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbMTMzMDc4NDEzLC0xMTI0OTQ4MjYyLC0xMj
+cwODQwMTcsNjY1NzI0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1
+NTgyLDE3NjczMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMj
+A1NTg4OTI3LDEyMjc1NjE1NzRdfQ==
 -->
