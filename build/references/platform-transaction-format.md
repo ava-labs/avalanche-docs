@@ -981,13 +981,13 @@ Hagamos un ejemplo de una transacción crear subnet no firmada que utilice las e
 
 ### **Que Contiene una Transacción Importar No Firmada**
 
-Una transacción importar no firmada o "Unsigned Import Tx" contiene un `BaseTx`, `SourceChain`, y  `Ins`. The `TypeID` for this type is `0x00000011`.
+Una transacción importar no firmada o "Unsigned Import Tx" contiene un `BaseTx`, `SourceChain`, y  `Ins`. Su `TypeID`  es `0x00000011`.
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`** es una ID de blockchain de fuente de 32 bytes.
+* **`Ins`** es un conjunto de longitud variable de entradas transferibles.
 
-### **Gantt Unsigned Import Tx Specification**
+### **Especificación Gantt de una Transacción Importar No Firmada**
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -1001,7 +1001,7 @@ Una transacción importar no firmada o "Unsigned Import Tx" contiene un `BaseTx`
                             +--------------------------------------+
 ```
 
-### **Proto Unsigned Import Tx Specification**
+### **Especificación Proto de una Transacción Importar No Firmada**
 
 ```text
 message ImportTx {
@@ -1011,9 +1011,9 @@ message ImportTx {
 }
 ```
 
-### **Unsigned Import Tx Example**
+### **Ejemplo de una Transacción Importar No Firmad**
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Hagamos un ejemplo de una transacción importar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
 * **`SourceChain`**:
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxMjYyNjU3MiwtNDExOTA3MzUxLC0yMD
-g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
-NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
-c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
-MzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NTk3LC0zNzkwMz
-M4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+eyJoaXN0b3J5IjpbLTE5MzU2OTg5OTQsLTQxMTkwNzM1MSwtMj
+A4ODg3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2
+NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNj
+k3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01
+MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MD
+MzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
 -->
