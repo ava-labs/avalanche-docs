@@ -1079,7 +1079,7 @@ Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) co
 
 ### **Que Contiene una  Credencial SECP256K1**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
+* **`TypeID`** es el ID para este tipo. Es `0x00000009`.
 * **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
 ### **Especificación Gantt de una  Credencial SECP256K1**
@@ -1920,7 +1920,7 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTU4NDczODAsLTU4MTI3NDY2NSwxNT
+eyJoaXN0b3J5IjpbLTIwMTc4MDk3MzUsLTU4MTI3NDY2NSwxNT
 g4MTA3NTY0LC0xODQ5MDQ2MjgxLC0xMjkzNDE4MjkxLDExNDY3
 MjgzODksNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOT
 c0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3
