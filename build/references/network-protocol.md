@@ -1,4 +1,4 @@
-# Network Protocol
+# Protocolo de Red
 
 Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
 
@@ -438,3 +438,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEzODcxMjc1ODJdfQ==
+-->
