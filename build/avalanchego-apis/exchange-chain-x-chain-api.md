@@ -666,10 +666,10 @@ avm.exportAVAX({
 * `to` es la dirección de la P-Chain a la cual se enviará el AVAX.
 * `amount` es el monto de nAVAX a enviar.
 * `from` son las direcciones que quieres usar par esta operación. Si se omiten, utiliza alguna de tus direcciones si se requere
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
+* El activo es enviado desde una dirección controlada por el usuario (`username`)
+* `txID` es el ID de la transacción
+* `changeAddr` en el resultado está la dirección a la que se envió el cambio.
 
 #### **Llamada de ejemplo**
 
@@ -704,7 +704,7 @@ curl -X POST --data '{
 
 ### avm.exportKey
 
-Get the private key that controls a given address.  
+Obtén la llave privada que controla una dirección dada.
 The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
 #### **Firma**
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwODU2MzUxNCwxOTg4ODUyMjQxLC05NT
+eyJoaXN0b3J5IjpbLTczNzI4MDI0NCwxOTg4ODUyMjQxLC05NT
 E4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAzMzIy
 MDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OTYyNS
 wtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5
