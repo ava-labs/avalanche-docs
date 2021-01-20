@@ -16,13 +16,13 @@ Para evitar la publicación del certificado completo de TLS en la Platform chain
 
 Este identificador de 20 bytes está representado por "NodeID-" seguido de la cadena codificada de datos [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58).
 
-## Cryptography in the Avalanche Virtual Machine
+## La Criptografía en la Avalanche Virtual Machine
 
-The Avalanche virtual machine uses elliptic curve cryptography, specifically `secp256k1`, for its signatures on the blockchain.
+La Avalanche virtual machine utiliza criptografía de curva elíptica, específicamente `secp256k1`, para sus firmas en la blockchain.
 
-This 32-byte identifier is represented by “PrivateKey-” followed by the data’s [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
+Este identificador de 32 bytes está representado por "PrivateKey-" seguido de la cadena codificada de datos [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58).
 
-### Secp256k1 Addresses
+### Direcciones Secp256k1 
 
 Avalanche is not prescriptive about addressing schemes, choosing to instead leave addressing up to each blockchain.
 
@@ -114,5 +114,5 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTgzNzQwNjM4XX0=
+eyJoaXN0b3J5IjpbLTE1NjczNTM0MzhdfQ==
 -->
