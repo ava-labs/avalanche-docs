@@ -180,7 +180,7 @@ Los validadores deben conocer sus direcciones IP públicas para que puedan hacer
 
 `--dynamic-public-ip` \(string\):
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Valores válidos si el param está presente: `opendns`, `ifconfigco` o `ifconfigme`. Esto anula la `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
 
 `--dynamic-update-duration` \(duration\):
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMT
-c2NzMzNDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5
-MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbLTgxNTk2NDAxMCwtMTU3MjQyMDE0OCwtMj
+A2OTQyNTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEz
+OTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0XX0=
 -->
