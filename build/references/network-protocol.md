@@ -414,15 +414,16 @@ Un mensaje de `Chits` contiene un `SubnetID`, `RequestID`, y  `Preferences`.
 ]
 ```
 
-### How Chits is handled
 
-The node should attempt to add any referenced containers to consensus. If the referenced containers can’t be added, the node can ignore the missing containers and apply the remaining chits to the poll. Once a poll is completed, container confidences should be updated appropriately.
+### Como se maneja Chits
 
-### When Chits is sent
+El nodo debería intentar añadir cualquier contenedor referenciado al consenso. Si no se pueden añadir los contenedores referenciados, el nodo puede ignorar los contenedores que faltan y aplicar los restantes al sondeo. Una vez completado el sondeo, las confidencias de los contenedores deberían actualizarse adecuadamente.
 
-A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
+### Cuando se envía Chits
 
-### Chits Example
+Un nodo enviará un mensaje `Chits` en respuesta a la recepción de un mensaje `PullQuery` o `PushQuery` para un contenedor que el nodo ha añadido al consenso.
+
+### Ejemplo de Chits
 
 ```text
 [
@@ -452,6 +453,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ4MjkxNzUzLC05MzkzMDU1MDAsMTA2Nz
-Y0NDM2Ml19
+eyJoaXN0b3J5IjpbMTg5NDA1NjQ1MiwtOTM5MzA1NTAwLDEwNj
+c2NDQzNjJdfQ==
 -->
