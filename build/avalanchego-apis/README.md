@@ -1,8 +1,8 @@
 # AvalancheGo APIs
 
-Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos. Parámetros numéricos en llamadas a APIs pueden ser enviados como cadenas de caracteres \(e.j., `"5"` o `5` son ambos correctos para un argumento de enteros\). Valores numéricos se regresan siempre como cadena de caracteres en las respuestas \(e.g., `"5"` rather than `5`\). In examples, API calls are made to a node listening for HTTP traffic on `127.0.0.1:9650`.
+Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos. Parámetros numéricos en llamadas a APIs pueden ser enviados como cadenas de caracteres \(e.j., `"5"` o `5` son ambos correctos para un argumento de enteros\). Valores numéricos se regresan siempre como cadena de caracteres \(e.g., `"5"` en lugar de `5`\). En ejemplos, las llamadas a las API se realizan al nodo que está escuchando tráfico HTTP en `127.0.0.1:9650`.
 
-| Title | Description |
+| Título | Descripción |
 | :--- | :--- |
 | [**Issuing API Calls**](issuing-api-calls.md) | This guide explains how to make calls to APIs exposed by Avalanche nodes. |
 | The [**Platform Chain \(P-Chain\) API**](platform-chain-p-chain-api.md) | Allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain and subnet creation. |
@@ -17,5 +17,6 @@ Los Clientes interactúan con Avalanche mediante llamadas a las API de los nodos
 | The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxNjAyNjA3OSwxNDAyMTI3MDc4XX0=
+eyJoaXN0b3J5IjpbMjIzMzU0MDIyLDE2MTYwMjYwNzksMTQwMj
+EyNzA3OF19
 -->
