@@ -190,7 +190,7 @@ El tiempo entre los eventos del sondeo para `--dynamic-public-ip` o el recorrido
 
 `--signature-verification-enabled` \(boolean\):
 
-Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+Permite la verificación de la firma. Cuando se configura como `false`, las firmas no se verificarán en las máquinas virtuales que permiten desactivarlas. Por defecto es `true`.
 
 ### Staking
 
@@ -459,7 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2OTAyNjk4NSwtMTU3MjQyMDE0OCwtMj
+eyJoaXN0b3J5IjpbMTQ3NzkwOTg5OCwtMTU3MjQyMDE0OCwtMj
 A2OTQyNTU4MiwxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEz
 OTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0XX0=
 -->
