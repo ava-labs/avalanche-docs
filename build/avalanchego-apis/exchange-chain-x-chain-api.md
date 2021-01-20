@@ -38,7 +38,7 @@ Nota: las direcciones no deben incluir el prefijo de la cadena \(ie. X-\) en las
 avm.buildGenesis({
     networkID: int,
     genesisData: JSON,
-    encoding: string, //optional
+    encoding: string, //opcional
 }) -> {
     bytes: string,
     encoding: string,
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwND
-gwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYz
-NiwxMjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbNzgyMjczMzU2LDE2MDAxNDA0NDUsNjM4Mz
+Y1ODE4LC0xMDQ4MDQxMjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5
+LC05ODE0NTg2MzYsMTIzODQzNjE4M119
 -->
