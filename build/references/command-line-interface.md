@@ -113,13 +113,13 @@ If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Def
 
 `--http-tls-key-file` \(string, file path\):
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Este argumento especifica la ubicación de la clave privada TLS utilizada por el nodo para el servidor HTTPS. Esto debe ser especificado cuando `--http-tls-enabled=true`. No hay un valor por defecto.
 
 ### IPCS
 
 `--ipcs-chain-ids` \(string\)
 
-Comma separated list of chain ids to connect to. There is no default value.
+Lista separada por comas de identificaciones de cadenas a las que conectarse. No hay ningún valor predeterminado.
 
 `--ipcs-path` \(string\)
 
@@ -458,6 +458,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2NzMzNDgwOSw4NzgzODI4NDIsMTUxMT
-UxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3NF19
+eyJoaXN0b3J5IjpbLTI1NzYwMjgwMCwxNzY3MzM0ODA5LDg3OD
+M4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYxNTc0
+XX0=
 -->
