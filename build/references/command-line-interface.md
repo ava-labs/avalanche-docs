@@ -368,21 +368,21 @@ Reducción del tiempo de espera después de una solicitud exitosa, en nanosegund
 
 `--xput-server-enabled` \[Deprecated\] \(boolean\):
 
-An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
+Un servidor opcional ayuda a realizar pruebas de rendimiento inyectando carga en la red a petición Si está habilitado, este servidor se inicia y audita los comandos de un coordinador de pruebas. Por defecto es `false`.
 
 `--xput-server-port` \[Deprecated\] \(string\):
 
-This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
+Esta opción permite especificar en qué puerto auditará el servidor de transferencia si está habilitado. Por defecto es `9652`.
 
 ### Subnet Whitelist
 
 `--whitelisted-subnets` \(string\):
 
-Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+Lista separada por comas de subnets que este nodo validaría si se añadiera. Por defecto está vacía \(sólo valida la red primaria\).
 
 ### Restart on Disconnect
 
-Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
+Algunos usuarios han tenido un problema en el que su nodo  de AvalancheGo entra en un estado insalubre cuando su nodo pierde la conección a Internet o cuando cambia su dirección IP. Para ayudar a solucionarlo, hay indicadores de línea de comandos que hacen que el nodo se reinicie si se desconecta de todos sus pares. Así es:
 
 `--restart-on-disconnected` \(boolean, defaults to `false`\)
 
@@ -459,9 +459,9 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU3NTIxMzkxLC05ODYyNTkzMTMsLTk0OT
-g4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0MDE3LDY2NTcyNDgy
-OSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0ODA5LD
-g3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYx
-NTc0XX0=
+eyJoaXN0b3J5IjpbLTM4OTEzNDA2NSwtOTg2MjU5MzEzLC05ND
+k4ODg0MzYsLTExMjQ5NDgyNjIsLTEyNzA4NDAxNyw2NjU3MjQ4
+MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOS
+w4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2
+MTU3NF19
 -->
