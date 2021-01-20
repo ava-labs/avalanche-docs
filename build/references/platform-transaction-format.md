@@ -1473,10 +1473,10 @@ Una StakeableLockIn es una entrada en stake y encerrada. El StakeableLockIn sól
 Una StakeableLockIn contiene un `TypeID`, `Locktime` y `TransferableIn`.
 
 * **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
-* **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
-* **`TransferableIn`** is a transferable input object.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`TransferableIn`** es un elemento de entrada transferible.
 
-### **Gantt StakeableLockIn Specification**
+### **Especificación Gantt de una StakeableLockIn**
 
 ```text
 +-----------------+-------------------+--------------------------------+
@@ -1490,7 +1490,7 @@ Una StakeableLockIn contiene un `TypeID`, `Locktime` y `TransferableIn`.
                                     +----------------------------------+
 ```
 
-### **Proto StakeableLockIn Specification**
+### **Especificación Proto de una StakeableLockIn**
 
 ```text
 message StakeableLockIn {
@@ -1500,9 +1500,9 @@ message StakeableLockIn {
 }
 ```
 
-### **StakeableLockIn Example**
+### **Ejemplo de una StakeableLockIn**
 
-Let’s make a StakeableLockIn with:
+Hagamos una StakeableLockIn con:
 
 * **`TypeID`**: 21
 * **`Locktime`**: 54321
@@ -1608,10 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjk1NzY2NDksLTQxMTkwNzM1MSwtMj
-A4ODg3MjU5MywxNzk5MTI1ODA0LC0xMjg4MDAxNjMwLC02Mjk2
-NDY2NjAsLTczNTE3Nzc2NywtMTA0NjI1OTc1OSwtMjAzNzUyNj
-k3OSwxMjA5NTA2Mjc0LC02NDMyNDE1MTgsMjY1MjUwNTk2LC01
-MDM1NjM4MzgsLTY3NjYwNzk1NSwtMTIwMTc4ODU5NywtMzc5MD
-MzODEyLC0zNjc5MzkwNzAsLTQ4MjMzNjUyM119
+eyJoaXN0b3J5IjpbNzQ1OTc3NDIxLC00MTE5MDczNTEsLTIwOD
+g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
+NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
+ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
+NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
+gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
 -->
