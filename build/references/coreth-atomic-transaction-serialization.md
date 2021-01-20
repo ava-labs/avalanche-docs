@@ -85,13 +85,13 @@ Hagamos una entrada de la EVM:
 ]
 ```
 
-### Transferable Input
+### Entrada transferible
 
-Transferable Input wraps a `SECP256K1TransferInput`. Transferable inputs describe a specific UTXO with a provided transfer input.
+La entrada transferible envuelve un `SECP256K1TransferInput`. Las entradas transferibles o "Transferable inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
-#### What Transferable Input Contains
+#### Que Contiene una Entrada Transferible
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
 * **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
 * **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
@@ -923,6 +923,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDI0MDc5MTEsLTE0MTkwMTg0ODAsLTc0OD
-MxNTQ3XX0=
+eyJoaXN0b3J5IjpbLTExODExOTA0MDYsLTE0MTkwMTg0ODAsLT
+c0ODMxNTQ3XX0=
 -->
