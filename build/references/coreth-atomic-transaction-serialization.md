@@ -232,13 +232,13 @@ Las salidas u "Outputs" de las transacciones atómicas de Coreth son o bien un `
 
 La Salida EVM se utilizará en `ImportTx` para añadir fondos a esta cadena, mientras que la `TransferableOutput` se utilizará para exportar UTXOs atómicos a otra cadena.
 
-### Salida de EVM
+### Salida de la EVM
 
-Output type specifying a state change to be applied to an EVM account as part of an `ImportTx`.
+Tipo de salida que especifica un cambio de estado a aplicar a una cuenta de la EVM como parte de un `ImportTx`.
 
-#### What EVM Output Contains
+#### Que Contiene Una Salida de la EVM
 
-An EVM Output contains an `address`, `amount`, and `assetID`.
+Una Salida de la EVM contiene un `address`, `amount`, y `assetID`.
 
 * **`Address`** is the EVM address that will receive the funds.
 * **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
@@ -924,6 +924,6 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwNzY4NTczMSwtMTYxOTI0Mjc3NCwxMj
-UwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgzMTU0N119
+eyJoaXN0b3J5IjpbLTE1MTk2NDQ1NjAsLTE2MTkyNDI3NzQsMT
+I1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ==
 -->
