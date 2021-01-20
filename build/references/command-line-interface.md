@@ -216,13 +216,13 @@ Avalanche utiliza conexiones TLS de dos vías autentificadas para identificar de
 
 `--staking-disabled-weight` \(int\):
 
-Weight to provide to each peer when staking is disabled. Defaults to `1`.
+El peso que se debe proporcionar a cada compañero cuando el staking está desactivado. Por defecto `1`.
 
 ### Version
 
 `--version` \(boolean\)
 
-If this is `true`, print the version and quit. Defaults to `false`.
+Si esto es `true`, imprime la versión y se cierra. Por defecto `false`.
 
 ## Advanced Options
 
@@ -459,8 +459,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1OTgzMDczOTgsNjY1NzI0ODI5LC0xNT
-cyNDIwMTQ4LC0yMDY5NDI1NTgyLDE3NjczMzQ4MDksODc4Mzgy
-ODQyLDE1MTE1MTM5NjQsMjA1NTg4OTI3LDEyMjc1NjE1NzRdfQ
-==
+eyJoaXN0b3J5IjpbMTYxNjkxMjYyMiw2NjU3MjQ4MjksLTE1Nz
+I0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMzNDgwOSw4NzgzODI4
+NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMTIyNzU2MTU3NF19
 -->
