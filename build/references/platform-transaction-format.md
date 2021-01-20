@@ -635,7 +635,7 @@ Hagamos un ejemplo de una transacción agregar validador no firmada que utilice 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## Transacción Agregar Validador de Subnet No Firmada
 
 ### **Que Contiene una Transacción Agregar Validador de Subnet No Firmada**
 
@@ -1606,10 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQwNzYyNDY1LDE3OTkxMjU4MDQsLTEyOD
-gwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5
-NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOC
-wyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAx
-Nzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NT
-IzXX0=
+eyJoaXN0b3J5IjpbLTIwODg4NzI1OTMsMTc5OTEyNTgwNCwtMT
+I4ODAwMTYzMCwtNjI5NjQ2NjYwLC03MzUxNzc3NjcsLTEwNDYy
+NTk3NTksLTIwMzc1MjY5NzksMTIwOTUwNjI3NCwtNjQzMjQxNT
+E4LDI2NTI1MDU5NiwtNTAzNTYzODM4LC02NzY2MDc5NTUsLTEy
+MDE3ODg1OTcsLTM3OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMz
+Y1MjNdfQ==
 -->
