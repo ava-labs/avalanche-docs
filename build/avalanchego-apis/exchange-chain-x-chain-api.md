@@ -515,11 +515,11 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Acuñar tokens no-funMint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+Acuñar tokens no-fungibles (NFTs) que fueron creados con [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.mintNFT({
@@ -583,7 +583,7 @@ curl -X POST --data '{
 
 Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.export({
@@ -1718,9 +1718,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4Nzc0MTY1NCwxNzI0MDQ5NjI1LC0yMz
-U3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2
-NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3Mi
-wtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgxNDU4NjM2LDEyMzg0
-MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTE5MjM1Njk0NzUsMTcyNDA0OTYyNSwtMj
+M1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5OTU0
+Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEyNz
+IsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMjM4
+NDM2MTgzXX0=
 -->
