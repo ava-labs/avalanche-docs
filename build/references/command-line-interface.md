@@ -254,17 +254,17 @@ Tiempo entre rumores de fronteras aceptadas. Por defecto `10s`.
 
 `--consensus-shutdown-timeout` \(duration\):
 
-Tiempo de espera antes de eliminar una cadena que no responde. Por  `5s`.
+Tiempo de espera antes de eliminar una cadena que no responde. Por defecto `5s`.
 
 `--creation-tx-fee` \(int\):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX \(.001 AVAX\) per transaction.
+Cuota de transacción, en nAVAX, para las transacciones que crean un nuevo estado. Por defecto es `1000000` nAVAX \(.001 AVAX\)  por transacción.
 
 `--min-delegator-stake` \(int\):
 
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
+El stake mínimo, en nAVAX, que puede ser delegado a un validador de la Red Primaria.
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+El valor por defecto es `25000000000` \(25 AVAX\) en la red principal. Por defecto es `5000000` \(.005 AVAX\) en la red de pruebas.
 
 `--min-delegation-fee` \(int\):
 
@@ -459,8 +459,8 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NDc0NTc5NCwtMTI3MDg0MDE3LDY2NT
-cyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0
-ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMj
-I3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbLTE3NjY5NDMxNTgsLTEyNzA4NDAxNyw2Nj
+U3MjQ4MjksLTE1NzI0MjAxNDgsLTIwNjk0MjU1ODIsMTc2NzMz
+NDgwOSw4NzgzODI4NDIsMTUxMTUxMzk2NCwyMDU1ODg5MjcsMT
+IyNzU2MTU3NF19
 -->
