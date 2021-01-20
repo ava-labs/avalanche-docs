@@ -1265,15 +1265,15 @@ Transacción Firmada
 
 Una transacción firmada o "signed transaction" es una transacción no firmada con la adición de una serie de credenciales.
 
-### What Signed Transaction Contains
+### Que Contiene una Transacción Firmada
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
+* **`UnsignedTx`** es una transacción sin firmar, como se describe arriba.
+* **`Credentials`** es un conjunto de credenciales. Cada credencial será emparejada con la entrada en el mismo índice en esta credencial.
 
-### Gantt Signed Transaction Specification
+### Especificación Gantt de una Transacción Firmada
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1287,7 +1287,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Especificación Proto de una Transacción Firmada
 
 ```text
 message Tx {
@@ -1297,9 +1297,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Ejemplo de una Transacción Firmada
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+Hagamos un ejemplo de una transacción firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
@@ -1607,7 +1607,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwMjQ2Nzc0NCwtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbMTc5NjQyODEyMywtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
