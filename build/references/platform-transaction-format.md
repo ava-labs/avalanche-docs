@@ -1405,7 +1405,7 @@ Una UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### Especificación Proto de una UTXO
 
 ```text
 message Utxo {
@@ -1417,9 +1417,9 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### Ejemplo de una UTXO
 
-Let’s make a UTXO from the signed transaction created above:
+Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1608,7 +1608,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEyMTA3ODQzNCwtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbLTU2MTUzNDAyOSwtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
