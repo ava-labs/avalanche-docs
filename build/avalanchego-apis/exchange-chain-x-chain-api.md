@@ -359,19 +359,19 @@ Crea un nuevo activo fungible con capital variable. No existen unidades del acti
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
-    denomination: int, //optional
+    denomination: int, //opcional
     minterSets: []{
         minters: []string,
         threshold: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
+    from: []string, //opcional
+    changeAddr: string, //opcional
     username: string,
     password: string
 }) ->
@@ -381,8 +381,8 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+* `name` es un nombre humanamente-legible del activo. No necesariamente único.
+* `symbol` es un simbolo que sirve como abreviación del activo. Entre 0 y 4 caracteres. No necesariamente único. Puede omitirse.
 * `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
 * `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1718,8 +1718,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMTQ1NTg0OCwtMzUxMjk1NjgxLC0xOT
-k1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4LC0xMDQ4MDQx
-MjcyLC05ODA5NjE5ODQsLTQ0NTgzNzY5LC05ODE0NTg2MzYsMT
-IzODQzNjE4M119
+eyJoaXN0b3J5IjpbNDE0NzgwNTc1LC0zNTEyOTU2ODEsLTE5OT
+U0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwNDEy
+NzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwxMj
+M4NDM2MTgzXX0=
 -->
