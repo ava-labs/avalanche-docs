@@ -538,7 +538,7 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` es el ID del activo del nuevo activo NFT creado is the assetID of the newly created NFT asset.
+* `assetID` es el ID del activo del nuevo activo NFT creado.
 * `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1718,9 +1718,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwOTUwNTc3NiwtMTkyMzU2OTQ3NSwxNz
-I0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5
-NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOC
-wtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwtOTgx
-NDU4NjM2LDEyMzg0MzYxODNdfQ==
+eyJoaXN0b3J5IjpbLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMT
+cyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEy
+OTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MT
+gsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4
+MTQ1ODYzNiwxMjM4NDM2MTgzXX0=
 -->
