@@ -1542,12 +1542,12 @@ Hagamos una StakeableLockIn con:
 
 Una StakeableLockOut es una salida que está bloqueada hasta el momento de su cierre, pero puede ser puesta en stake mientras tanto.
 
-### **What StakeableLockOut Contains**
+### **Que Contiene una StakeableLockOut**
 
-A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
+Una StakeableLockOut contiene un `TypeID`, `Locktime` y `TransferableOut`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000016`.
-* **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
 * **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
 
 ### **Gantt StakeableLockOut Specification**
@@ -1608,7 +1608,7 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4OTM3OTIyOCwtNDExOTA3MzUxLC0yMD
+eyJoaXN0b3J5IjpbLTMwNzY2MjU5NCwtNDExOTA3MzUxLC0yMD
 g4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2MzAsLTYyOTY0
 NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC0yMDM3NTI2OT
 c5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUyNTA1OTYsLTUw
