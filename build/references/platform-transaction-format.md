@@ -511,7 +511,7 @@ Una transacción agregar validador no firmada contiene un `BaseTx`, `Validator`,
 * **`Stake`**  el Stake tiene `LockedOuts`
  * **`LockedOuts`** Un conjunto de salidas transferibles que están bloqueadas mientras dure el período de stake. Al final del periodo de stake, estas salidas son devueltas a sus respectivas direcciones.
 * **`RewardsOwner`** Un `SECP256K1OutputOwners`
-* **`Shares`**  10 000 de veces el porcentaje de recompensa tomado de los delegadores
+* **`Shares`**  10 000  veces el porcentaje de recompensa tomado de los delegadores
 
 ### **Gantt Unsigned Add Validator Tx Specification**
 
@@ -1606,9 +1606,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNj
-I5NjQ2NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1
-MjY5NzksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5Ni
-wtNTAzNTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3
-OTAzMzgxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbNTE5NDQyNjM3LDE3OTkxMjU4MDQsLTEyOD
+gwMDE2MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5
+NzU5LC0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOC
+wyNjUyNTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAx
+Nzg4NTk3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NT
+IzXX0=
 -->
