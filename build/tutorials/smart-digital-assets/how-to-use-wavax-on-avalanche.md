@@ -118,11 +118,11 @@ Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en el campo **V
 
 ## Agrega WAVAX a Metamask
 
-Para ver su balance de WAVAX, debe agregar WAVAX como una ficha personalizada a Metamask. En Metamask, selecciona los tres puntos junto a su nombre de cuenta y selecciona `Expand View`. Esto abre una nueva pestaña del navegador. Desplácese hacia abajo y seleccione **Add token**. Cambie a la pestaña **Custom Token**.
+Para ver su balance de WAVAX, debe agregar WAVAX como una ficha personalizada a Metamask. En Metamask, selecciona los tres puntos junto a su nombre de cuenta y selecciona `Expand View`. Esto abre una nueva pestaña del navegador. Desplázate hacia abajo y selecciona **Add token**. Cambia a la pestaña **Custom Token**.
 
 ![Custom Token](../../../.gitbook/assets/wavax2avax-10-add-token.png)
 
-En **Token Contract Address** pegue la misma dirección de contrato que usamos antes:
+En **Token Contract Address** pega la misma dirección de contrato que usamos antes:
 
 * Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
 * Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
@@ -141,7 +141,7 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDM0NDcyNTksLTIzMDAyOTExNSwxMT
+eyJoaXN0b3J5IjpbLTIwOTU1OTQ3OTgsLTIzMDAyOTExNSwxMT
 c0Mzk2OTQwLDQ3NzM3NzkzNCwtMzY5MjMyOTk4LDExNzcyNjY5
 NDgsMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTczMjUwLD
 Y3OTY3NjcwOSwtMTg2ODU1NDE1OV19
