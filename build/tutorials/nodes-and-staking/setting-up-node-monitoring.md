@@ -31,7 +31,7 @@ La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https:/
 
 ## Configurando Prometheus
 
-Primero, tenemos que añadir una cuenta de usuario del sistema y crear directorios \(necesitaras acceso de superusuario \):
+Primero, tenemos que añadir una cuenta de usuario del sistema y crear directorios \(necesitaras acceso de superusuario\):
 
 ```cpp
 sudo useradd -M -r -s /bin/false prometheus
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDM2MjQwMiwyMDY1MjQ1NzY2LDc3ND
-AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
-M119
+eyJoaXN0b3J5IjpbLTExMDQ1MDczNzYsMjA2NTI0NTc2Niw3Nz
+QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
+NjNdfQ==
 -->
