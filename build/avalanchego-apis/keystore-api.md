@@ -4,23 +4,23 @@ Cada nodo tiene un almacén de llaves integrado. Los clientes crean usuarios en 
 
 _**Solo debes crear un usuario de almacén de llaves en un nodo que operes, ya que el operador del nodo tiene acceso a tu contraseña de texto sin formato.**_
 
-Para la validación y delegación en la red principal, debe emitir transacciones a través de [la wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). De esa manera, las llaves de control de tus fondos no se almacenarán en el nodo, lo que reduce significativamente el riesgo en caso de que una computadora que ejecuta un nodo se vea comprometida.That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+Para la validación y delegación en la red principal, debe emitir transacciones a través de [la wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). De esa manera, las llaves de control de tus fondos no se almacenarán en el nodo, lo que reduce significativamente el riesgo en caso de que una computadora que ejecuta un nodo se vea comprometida.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Esta API utiliza formato de API `json 2.0`. Para obtener más información sobre cómo realizar llamadas JSON RPC, consulta [aquí](issuing-api-calls.md).
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/keystore
 ```
 
-## Methods
+## Metodos
 
 ### keystore.createUser
 
-Create a new user with the specified username and password.
+Cree un nuevo usuario con el nombre de usuario y la contraseña especificados.
 
 #### **Signature**
 
@@ -33,7 +33,7 @@ keystore.createUser(
 ) -> {success:bool}
 ```
 
-* `username` and `password` can be at most 1024 characters.
+* `username` y `password` pueden ser a lo más 1024 characters.
 * Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
 
 #### **Example Call**
@@ -225,5 +225,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Njg1MDYyNDFdfQ==
+eyJoaXN0b3J5IjpbLTg2MDM1NjIxMl19
 -->
