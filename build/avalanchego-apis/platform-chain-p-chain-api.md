@@ -24,11 +24,11 @@ El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la
 
 El período de delegación debe ser un subconjunto del período en el que el delegado valida la red primaria.
 
-Notar que una vez que emitiste la transacción de agregar un nodo como delegador, no hay manera de cambiar los parámetros. **No puedes retirar You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Notar que una vez que emitiste la transacción de agregar un nodo como delegador, no hay manera de cambiar los parámetros. **No puedes retirar tu stake antes de tiempo, o cambiar el monto, ID del nodo o dirección de recompensas.** Por favor, asegúrate de usar los valores correctos. Si no estás seguro, puedes revisar nuestas [Preguntas Frecuentes de Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o pedir ayuda en [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addDelegator(
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzg1ODEzOCwtODEyNTI3NTk1LDE0OT
+eyJoaXN0b3J5IjpbLTE3NjM5MTkxOSwtODEyNTI3NTk1LDE0OT
 MxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
