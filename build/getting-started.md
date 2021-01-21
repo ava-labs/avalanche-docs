@@ -159,7 +159,7 @@ La respuesta debería ser:
 }
 ```
 
-Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que creas en el Keystore de un nodo no existen en otros nodos pero tu puedes importar/exportar usuarios a/desde el Keystore. Mira [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
+Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que creas en el Keystore de un nodo no existen en otros nodos pero tu puedes importar/exportar usuarios a/desde el Keystore. Mira la [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
 
 {% hint style="danger" %}
 **Sólo debes mantener una pequeña cantidad de tus fondos en tu nodo.** La mayoría de sus fondos deberían estar asegurados por un nemónico que no se guarde en ningún ordenador.
@@ -362,8 +362,8 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjM2MzIwNDgzLDE4NjI5MzA0NjQsMTMxMz
-I5OTk1NywxODI4Mzc5ODc0LC04MDAzODA4ODUsMTUwNTc2Mjgx
-NywtMjA2Nzc4NDI1MCwtMTkyODQzNTM4MywtMTcyMjYxNjU4OV
-19
+eyJoaXN0b3J5IjpbMTY0ODc2MCwxODYyOTMwNDY0LDEzMTMyOT
+k5NTcsMTgyODM3OTg3NCwtODAwMzgwODg1LDE1MDU3NjI4MTcs
+LTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ
+==
 -->
