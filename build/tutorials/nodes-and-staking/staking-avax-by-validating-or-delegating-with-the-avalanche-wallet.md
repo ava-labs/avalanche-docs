@@ -31,7 +31,7 @@ Voilá!
 
 ![Image for post](https://miro.medium.com/max/1512/0*XP8f8CISy-LJ_Lc3)
 
-Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puedes añadir un validador o un delegador a su wallet.
+Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puedes añadir un validador o un delegador a tu wallet.
 
 ### **Paso 3A: Conviértete en un validador!** <a id="60f0"></a>
 
@@ -51,7 +51,7 @@ El uso de los binarios es fácil y conveniente y te prepara para ser un validado
 * Navega hasta el directorio de binarios cd avalanchego-&lt;VERSION&gt;
 * Ejecuta el binario con ./avalanchego en Linux y OSX y AvalancheGo en Windows
 
-Dejaremos que nuestro nodo arranque y se sincronice con el resto de la red, y estamos listos para rodar.
+Dejaremos que nuestro nodo arranque y se sincronice con el resto de la red, y estamos listos para seguir.
 
 Necesitaremos la ID de nuestro Nodo. Encontraremos eso usando el [API de Información](../../avalanchego-apis/info-api.md)!
 
@@ -88,6 +88,6 @@ Confirma los detalles!
 Felicitaciones. ¡Ahora estás delegando en  la Red Primaria de Avalanche!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyNzcwNjkxMCwtMTgzMDM1MzE5OSw1MT
+eyJoaXN0b3J5IjpbMTQ5MTkzNTgyMiwtMTgzMDM1MzE5OSw1MT
 k0NzkyNjcsLTY2Njk3MDU3MV19
 -->
