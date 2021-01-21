@@ -148,6 +148,7 @@ curl -X POST --data '{
 ### keystore.importUser
 
 Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+Importar un usuario. `password` debe coincidir con la contraseña del usuario. `username` no tiene por qué coincidir con el nombre de usuario que tenía` user` cuando se exportó.
 
 #### **Signature**
 
@@ -162,9 +163,9 @@ keystore.importUser(
 ) -> {success:bool}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` especifica el formato de la cadena que codifica los datos del usuario. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -179,7 +180,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -193,9 +194,9 @@ curl -X POST --data '{
 
 ### keystore.listUsers
 
-List the users in this keystore.
+Lista de usuarios en el almacén de llaves.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 keystore.ListUsers() -> {users:[]string}
@@ -226,5 +227,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTMzNjEwMTYzXX0=
+eyJoaXN0b3J5IjpbLTgwNjA3OTU3XX0=
 -->
