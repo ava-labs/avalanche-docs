@@ -91,7 +91,7 @@ Cambiate a la pestaña **Deploy & Run Tranasactions** en el lado izquierdo.
 
 ![Connect](../../../.gitbook/assets/wavax2avax-06-deploy.png)
 
-Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Environment**, selecciona `Injected Web3`.  Metamask te pedirá que selecciones la cuenta. Elige la que está conectada a Avalanche y permite que se conecte. Esto rellenará el campo **Cuenta**. Asegúrate de que el campo **Contract** está configurado para el contrato `WAVAX`. Ahora podemos conectarnos al contrato, que ya ha sido publicado en Avalanche. En el campo de edición *At Address**, copia:
+Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Environment**, selecciona `Injected Web3`.  Metamask te pedirá que selecciones la cuenta. Elige la que está conectada a Avalanche y permite que se conecte. Esto rellenará el campo **Cuenta**. Asegúrate de que el campo **Contract** está configurado para el contrato `WAVAX`. Ahora podemos conectarnos al contrato, que ya ha sido publicado en Avalanche. En el campo de edición **At Address**, copia:
 
 * Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
 * Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxMzM2MTU0MSwtMjMwMDI5MTE1LDExNz
-QzOTY5NDAsNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3NzI2Njk0
-OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMyNTAsNj
-c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
+eyJoaXN0b3J5IjpbMjEyMjY5MjQ3LC0yMzAwMjkxMTUsMTE3ND
+M5Njk0MCw0NzczNzc5MzQsLTM2OTIzMjk5OCwxMTc3MjY2OTQ4
+LDE3MDQ1NTI3NzgsMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nz
+k2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
