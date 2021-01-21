@@ -47,8 +47,8 @@ avm.createNFTAsset({
 * `symbol` es un símbolo abreviado para esta familia de NFT. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
 * `minterSets` es una lista donde cada elemento especifica que el `threshold` de las direcciones en `minters` pueden juntos acuñar más del activo firmando una operación de acuñación.
 * Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. El `username` y `password` denotan al usuario que paga la comisión.
-* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de sus direcciones según sea necesario.
-* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a cualquiera de sus direcciones.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a cualquiera de tus direcciones.
 
 ### **Respuesta**
 
@@ -357,5 +357,6 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg0NzY1Mjg2NywtMTIzODc5MzY2MV19
+eyJoaXN0b3J5IjpbLTIwNzAwNjA0NSwxODQ3NjUyODY3LC0xMj
+M4NzkzNjYxXX0=
 -->
