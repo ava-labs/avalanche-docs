@@ -109,7 +109,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addValidator(
@@ -185,7 +185,7 @@ curl -X POST --data '{
 
 Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addSubnetValidator(
@@ -256,7 +256,7 @@ curl -X POST --data '{
 
 Create a new address controlled by the given user.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createAddress({
@@ -295,7 +295,7 @@ curl -X POST --data '{
 
 Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createBlockchain(
@@ -370,7 +370,7 @@ Create a new subnet.
 
 The subnet’s ID is the same as this transaction’s ID.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createSubnet(
@@ -432,7 +432,7 @@ curl -X POST --data '{
 
 Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.exportAVAX(
@@ -1211,7 +1211,7 @@ Get the total amount of nAVAX staked on the Primary Network.
 platform.getTotalStake() -> {stake: int}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1253,7 +1253,7 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1294,7 +1294,7 @@ platform.getTxStatus({
 }) -> {status: string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1509,7 +1509,7 @@ platform.importAVAX(
 * `username` is the user that controls the address specified in `to`.
 * `password` is `username`‘s password.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1556,7 +1556,7 @@ platform.importKey({
 
 * Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1600,7 +1600,7 @@ platform.issueTx({
 * `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
 * `txID` is the transaction’s ID.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1639,7 +1639,7 @@ platform.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1687,7 +1687,7 @@ platform.sampleValidators(
 * `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
 * Each element of `validators` is the ID of a validator.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1719,7 +1719,7 @@ curl -X POST --data '{
 
 Get the Subnet that validates a given blockchain.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.validatedBy(
@@ -1732,7 +1732,7 @@ platform.validatedBy(
 * `blockchainID` is the blockchain’s ID.
 * `subnetID` is the ID of the Subnet that validates the blockchain.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1761,7 +1761,7 @@ curl -X POST --data '{
 
 Get the IDs of the blockchains a Subnet validates.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.validates(
@@ -1774,7 +1774,7 @@ platform.validates(
 * `subnetID` is the Subnet’s ID.
 * Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NTgzMjc4LC04MTI1Mjc1OTUsMTQ5Mz
+eyJoaXN0b3J5IjpbMTU0MDA1MDkwLC04MTI1Mjc1OTUsMTQ5Mz
 E5NDc5OSw5NzQyOTAxNTldfQ==
 -->
