@@ -31,16 +31,16 @@
     * [Transferir AVAX entre la X-Chain y la C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
   * [Nodos y Staking](build/tutorials/nodes-and-staking/README.md)
     * [Añadir un Validador](build/tutorials/nodes-and-staking/add-a-validator.md)
-    * [Ejecute un Nodo de Avalanche y conviértete en un Validador](https://youtu.be/ZyQPeSSCbYU)
-    * [Ejecute un Nodo de Avalanche con Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
-    * [Ejecute un Nodo de Avalanche con Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
+    * [Ejecuta un Nodo de Avalanche y conviértete en un Validador](https://youtu.be/ZyQPeSSCbYU)
+    * [Ejecuta un Nodo de Avalanche con Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
+    * [Ejecuta un Nodo de Avalanche con Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E)
     * [Ejecuta un Nodo de Avalanche y haz Stake con la Wallet de Avalanche](https://youtu.be/ZyQPeSSCbYU)
-    * [Ejecute un Nodo de Avalanche con los Servicios Web de Amazon \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
-    * [Ejecute un Nodo de Avalanche con Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
-    * [Ejecute un Nodo de Avalanche en Linux usando el Script de Instalación](build/tutorials/nodes-and-staking/set-up-node-with-installer.md)
-    * [Ejecutar una monitorización de nodos de Avalanche](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
-    * [AVAX Stake, por Validar o Delegar, con la Wallet de AVAX ](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
-    * [Actualice su nodo AvalancheGo](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
+    * [Ejecuta un Nodo de Avalanche con los Servicios Web de Amazon \(AWS\)](build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws.md)
+    * [Ejecuta un Nodo de Avalanche con Microsoft Azure](build/tutorials/nodes-and-staking/set-up-an-avalanche-node-with-microsoft-azure.md)
+    * [Ejecuta un Nodo de Avalanche en Linux usando el Script de Instalación](build/tutorials/nodes-and-staking/set-up-node-with-installer.md)
+    * [Ejecuta una monitorización de nodos de Avalanche](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
+    * [Stake de AVAX , por Validar o Delegar, con la Wallet de AVAX ](build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)
+    * [Actualiza su nodo AvalancheGo](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Implementar un Smart Contract en Avalanche Usando Remix y MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Usando Truffle con la  C-Chain de Avalanche](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
@@ -49,8 +49,8 @@
     * [Crear un Activo de Capital Fijo](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
     * [Crear un Activo de Capitalización Variable](build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md)
     * [Crear un NFT \(Parte 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
-    * [Acuñe NFTs con la Wallet de Avalanche](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
-    * [Use Wrapped AVAX \(WAVAX\) en Avalanche ](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
+    * [Acuña NFTs con la Wallet de Avalanche](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
+    * [Usa Wrapped AVAX \(WAVAX\) en Avalanche ](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
 * [APIs de AvalancheGo ](build/avalanchego-apis/README.md)
   * [API Calls Emitidas](build/avalanchego-apis/issuing-api-calls.md)
   * [API de la Cadena de Plataforma \(P-Chain\) ](build/avalanchego-apis/platform-chain-p-chain-api.md)
@@ -83,6 +83,7 @@
 * [Whitepapers](https://www.avalabs.org/whitepapers)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMzAzMzY3MCw3NTAxMjU4ODIsLTM0Mj
-QzMzkyMiwtMzUxNTkzODksMzU4ODcyMDI5XX0=
+eyJoaXN0b3J5IjpbLTM2NDE1MTc5MCwxMzEzMDMzNjcwLDc1MD
+EyNTg4MiwtMzQyNDMzOTIyLC0zNTE1OTM4OSwzNTg4NzIwMjld
+fQ==
 -->
