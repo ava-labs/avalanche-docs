@@ -1,4 +1,4 @@
-# Getting Started: Run an Avalanche Node
+# Get Started: Run an Avalanche Node
 
 The quickest way to learn about Avalanche is to run a node and interact with the network.
 
