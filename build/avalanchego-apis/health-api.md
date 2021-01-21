@@ -1,8 +1,8 @@
 # Health API
 
-This API can be used for measuring node health.
+Esta API puede ser usada para medir la salud del nodo.
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+Para obtener el código HTTP de estado de un nodo que indique el estado de salud de un To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
 
 ## Format
 
@@ -117,3 +117,6 @@ In this example response, the C-Chain’s health check is failing.
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNDQ4MDI5OTMwXX0=
+-->
