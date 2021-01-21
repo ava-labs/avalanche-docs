@@ -327,7 +327,7 @@ Ejecuta:
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-\(O abre ese archivo en el editor de texto de su elección\) y añádalo al final:
+\(O abre ese archivo en el editor de texto de su elección\) y añádelo al final:
 
 ```cpp
   - job_name: 'avalanchego'
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyODMwNjExNDcsMjA2NTI0NTc2Niw3Nz
-QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
-NjNdfQ==
+eyJoaXN0b3J5IjpbLTIyNDc2OTgyMywyMDY1MjQ1NzY2LDc3ND
+AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
+M119
 -->
