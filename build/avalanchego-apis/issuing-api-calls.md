@@ -4,14 +4,14 @@ Esta guía explica cómo realizar llamadas a las API expuestas por los nodos de 
 
 ### Endpoint <a id="endpoint"></a>
 
-An API call is made to an endpoint, which is a URL. The base of the URL is always:
+Una llamada a la API se hace al extremo, que es una URL. La base de la URL es siempre
 
 `[node-ip]:[http-port]`
 
-where
+donde
 
-* `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
+* `node-ip` es la dirección IP del nodo a llamar.
+* `http-port` es el puerto del nodo escuchando llamadas HTTP.is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
 
 For example, the base URL might look like this: `127.0.0.1:9650`.
 
@@ -102,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5OTIzNTY1Nl19
+eyJoaXN0b3J5IjpbOTM2NTQyMDUxXX0=
 -->
