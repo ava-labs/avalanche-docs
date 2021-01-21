@@ -117,7 +117,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Save the file. Now, we can run Prometheus as a system service:
+Guarde el archivo. Ahora, podemos ejecutar Prometheus como un servicio del sistema:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDIwNzc5MTIxLDIwNjUyNDU3NjYsNzc0MD
-AxOTAzLC0xMDIzMDA0MDMwLC05MDY1Mjg5MTAsNDA5MjgxNTYz
-XX0=
+eyJoaXN0b3J5IjpbMTc0MDc2NjM0MywyMDY1MjQ1NzY2LDc3ND
+AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
+M119
 -->
