@@ -2,7 +2,7 @@
 
 ## **Haz una copia de seguridad de tu Nodo**
 
-Antes de actualizar su nodo, se recomienda hacer una copia de seguridad de los archivos de su staker que se utilizan para identificar su nodo en la red. En la instalación predeterminada, puede copiarlos ejecutando los siguientes comandos:
+Antes de actualizar su nodo, se recomienda hacer una copia de seguridad de los archivos de tu Staker que se utilizan para identificar tu nodo en la red. En la instalación predeterminada, puedes copiarlos ejecutando los siguientes comandos:
 
 ```text
 cd
@@ -12,7 +12,7 @@ cp ~/.avalanchego/staking/staker.key .
 
 Ahora descarga los archivos`staker.crt` y`staker.key`y mantenlos en un lugar seguro y privado. Si algo le pasa a tu nodo o el nodo de la máquina funciona, estos archivos pueden ser usados para recrear completamente tu nodo.
 
-Si utiliza su nodo con fines de desarrollo y tiene usuarios de keystore en su nodo, también debería hacer una copia de seguridad de los mismos.
+Si utilizas tu nodo con fines de desarrollo y tienes usuarios de keystore en tu nodo, también deberías hacer una copia de seguridad de los mismos.
 
 ## Nodo Instalado Usando el Script de Instalación
 
@@ -52,15 +52,15 @@ Después de que la copia de seguridad esté asegurada, puedes empezar a actualiz
 
 ### Nodo ejecutándose desde la terminal
 
-Si su nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
+Si tu nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
 
 ### Nodo ejecutándose como un servicio
 
-Si su nodo se ejecuta como un servicio, deténgalo ingresando:
+Si tu nodo se ejecuta como un servicio, deténgalo ingresando:
 
 `sudo systemctl stop avalanchego.service`
 
-\(su servicio puede ser nombrado de manera diferente, `avalanche.service`, o similar\)
+\(Tu servicio puede llamarse de manera diferente, `avalanche.service`, o similar\)
 
 ### Nodo ejecutándose en segundo plano
 
@@ -180,6 +180,6 @@ Puedes ejecutar tu nodo con:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ2Nzc0MjE0LC0xMTQyNjI0MzI0LDQ1MD
-gwMDk3N119
+eyJoaXN0b3J5IjpbLTg5MzI4OTIsODQ2Nzc0MjE0LC0xMTQyNj
+I0MzI0LDQ1MDgwMDk3N119
 -->
