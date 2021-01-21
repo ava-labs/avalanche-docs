@@ -31,7 +31,7 @@ Voilá!
 
 ![Image for post](https://miro.medium.com/max/1512/0*XP8f8CISy-LJ_Lc3)
 
-Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puede añadir un validador o un delegador a su wallet.
+Ahora, tenemos nuestros fondos listos para staking en la P-Chain. A continuación, puedes añadir un validador o un delegador a su wallet.
 
 ### **Paso 3A: Conviértete en un validador!** <a id="60f0"></a>
 
@@ -88,6 +88,6 @@ Confirma los detalles!
 Felicitaciones. ¡Ahora estás delegando en  la Red Primaria de Avalanche!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0MTY3MDQ5LC0xODMwMzUzMTk5LDUxOT
-Q3OTI2NywtNjY2OTcwNTcxXX0=
+eyJoaXN0b3J5IjpbLTQyNzcwNjkxMCwtMTgzMDM1MzE5OSw1MT
+k0NzkyNjcsLTY2Njk3MDU3MV19
 -->
