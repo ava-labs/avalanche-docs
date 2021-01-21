@@ -1,5 +1,5 @@
 ---
-descripción: Aprende más sobre las comisioness de transacción de Avalanche
+descripción: Aprende más sobre las comisiones de transacción de Avalanche
 ---
 
 # Comisiones de Transacción
@@ -43,5 +43,5 @@ Los diferentes tipos de transacciones requieren el pago de una comisión de tran
 El gas fee de la [C-Chain](./#contract-chain-c-chain) es de 4.7e-7 AVAX/gas. El límite de gas de la C-Chain es de 10e8.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzMxNjc2N119
+eyJoaXN0b3J5IjpbNjk3NDkwNzE0XX0=
 -->
