@@ -109,7 +109,7 @@
 
 [**Magic \(formerly Fortmatic\)**](https://magic.link/): inicios de sesión sin contraseña y una gestión de claves más fácil de usar en crypto asegurando más de 20 millones de autenticaciones de usuarios al mes. Utilizado por más de 6.500 desarrolladores desde su lanzamiento, incluyendo organizaciones de DeFi establecidas como Uniswap, Aave, Augur, Bancor y Zerion.
 
-[**Torus**](https://tor.us/): El SDK de DirectAuth simplifica la incorporación permitiendo a los usuarios crear una Wallet de Avalanche con sus cuentas existentes de Google, y permite el acceso con un solo clic a las aplicaciones de Avalanche. Los usuarios pueden personalizar sus Wallets para tomar posesión de las private keyss a medida que se sientan más cómodos con la tecnología.
+[**Torus**](https://tor.us/): El SDK de DirectAuth simplifica la incorporación permitiendo a los usuarios crear una Wallet de Avalanche con sus cuentas existentes de Google, y permite el acceso con un solo clic a las aplicaciones de Avalanche. Los usuarios pueden personalizar sus Wallets para tomar posesión de las private keys a medida que se sientan más cómodos con la tecnología.
 
 ### Servicios de Staking 
 
@@ -134,7 +134,7 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3MjExODIyLDExOTI1MjcwNjEsMjAzOD
-c1MjM0MSwzNzE4OTIwMzUsLTEwMzEwNDQ1NDEsNTkxOTAxODg1
-LDEyMjQzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbMjA0ODM2ODYzMSwxMTkyNTI3MDYxLDIwMz
+g3NTIzNDEsMzcxODkyMDM1LC0xMDMxMDQ0NTQxLDU5MTkwMTg4
+NSwxMjI0MzQ2NTY2XX0=
 -->
