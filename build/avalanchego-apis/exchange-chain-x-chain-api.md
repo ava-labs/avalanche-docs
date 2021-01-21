@@ -1149,7 +1149,7 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
+* `to` es la dirección a la cual se enviará el AVAX. Esta debe ser igual al argumento `to` en la correspondiente llamada  `exportAVAX` en la P-Chain o `export`.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
 * `username` is the user that controls `to`.
 * `txID` is the ID of the newly created atomic transaction.
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwNDk1MzY1MywtMTUyMzA5ODEzOCwtMT
-Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
-ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
-g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
-OTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzND
-MxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0
-NDUsNjM4MzY1ODE4XX0=
+eyJoaXN0b3J5IjpbNDc1MTAyNTk2LC0xNTIzMDk4MTM4LC0xNj
+Q4OTIwMTc3LDExMTg4MzM5NjAsLTE4MjcxMzQzODIsLTczNzI4
+MDI0NCwxOTg4ODUyMjQxLC05NTE4NzY2MzMsLTEwMjg2NjI3OD
+gsMTA3NDk2NjY3NiwyMDAzMzIyMDUsLTE3MDM1MTMxNjUsLTE5
+MjM1Njk0NzUsMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0Mz
+EzMzAxLC0zNTEyOTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0
+NSw2MzgzNjU4MThdfQ==
 -->
