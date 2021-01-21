@@ -6,19 +6,19 @@ Para obtener el código HTTP de estado de un nodo que indique el estado de salud
 
 ## Formato
 
-La API This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoint
+## Endpoint / Extremos
 
 ```text
 /ext/health
 ```
 
-## Methods
+## Metodos
 
 ### health.getLiveness
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+El nodo ejecuta una serie de revisiones de salud cThe node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
 
 #### **Signature**
 
@@ -118,5 +118,5 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTY4NTQ0OTFdfQ==
+eyJoaXN0b3J5IjpbLTQ5MzQwNjY1N119
 -->
