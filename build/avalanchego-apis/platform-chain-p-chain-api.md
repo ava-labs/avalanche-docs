@@ -61,7 +61,7 @@ platform.addDelegator(
 * `password` is `username`‘s password.
 * `txID` is the transaction ID
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -144,7 +144,7 @@ platform.addValidator(
 * `password` is `username`‘s password.
 * `txID` is the transaction ID
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
 
@@ -218,7 +218,7 @@ platform.addSubnetValidator(
 * `password` is `username`‘s password.
 * `txID` is the transaction ID.
 
-#### **Example call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -265,7 +265,7 @@ platform.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -328,7 +328,7 @@ platform.createBlockchain(
 * `password` is `username`‘s password.
 * `txID` is the transaction ID.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
 
@@ -395,7 +395,7 @@ platform.createSubnet(
 * `username` is the user that pays the transaction fee.
 * `password` is `username`‘s password.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -459,7 +459,7 @@ platform.exportAVAX(
 * `password` is `username`‘s password.
 * `txID` is the ID of this transaction.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -509,7 +509,7 @@ platform.exportKey({
 * `password` is `username`‘s password.
 * `privateKey` is the string representation of the private key that controls `address`.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -564,7 +564,7 @@ platform.getBalance({
 * `lockedNotStakeable` is the locked and not stackeable balance, in nAVAX.
 * `utxoIDs` are the IDs of the UTXOs that reference `address`.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -626,7 +626,7 @@ platform.getBlockchains() ->
 * `subnetID` is the ID of the Subnet that validates this blockchain.
 * `vmID` is the ID of the Virtual Machine the blockchain runs.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -713,7 +713,7 @@ platform.getBlockchainStatus(
 * `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
 * `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -750,7 +750,7 @@ platform.getCurrentSupply() -> {supply: int}
 
 * `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -843,7 +843,7 @@ platform.getCurrentValidators({
     * `potentialReward` is the potential reward earned from staking
 * `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -915,7 +915,7 @@ platform.getHeight() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -952,7 +952,7 @@ platform.getMinStake() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1021,7 +1021,7 @@ platform.getPendingValidators({
   * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
   * `nodeID` is the validating node’s node ID.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1080,7 +1080,7 @@ platform.getStakingAssetID({
 * `subnetID` is the subnet whose assetID is requested.
 * `assetID` is the assetID for a subnet’s staking asset.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1130,7 +1130,7 @@ platform.getSubnets(
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1172,7 +1172,7 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjM5MTkxOSwtODEyNTI3NTk1LDE0OT
-MxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTc3NTgzMjc4LC04MTI1Mjc1OTUsMTQ5Mz
+E5NDc5OSw5NzQyOTAxNTldfQ==
 -->
