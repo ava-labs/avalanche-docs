@@ -67,7 +67,7 @@ Luego seleccione una región de la lista desplegable. Selecciona una de las reco
 Tiene la opción de usar una spot instance para ahorrar cantidades significativas en los costos de funcionamiento. Las spot instances utilizan una estructura de precios de mercado de oferta y demanda. A medida que la demanda de instancias sube, el precio de la spot instance sube. Si no hay suficiente capacidad, entonces su VM se apagará. Sin embargo, las posibilidades de que esto ocurra son increíblemente bajas, especialmente si selecciona la opción de sólo capacidad. Incluso en el improbable caso de que se apague temporalmente, sólo necesita mantener al menos un 60% de tiempo encendida para recibir las recompensas del stake y además no hay reducción implementada en Avalanche.
 
 
-Seleccione Sí para una Spot Instance, selecciona Eviction type en Capacity Only y **Asegúrate de establecer la política de desalojo en Stop / Deallocate - Esto es muy importante, de lo contrario el VM será eliminado.**
+Selecciona Sí para una Spot Instance, selecciona Eviction type en Capacity Only y **Asegúrate de establecer la política de desalojo en Stop / Deallocate - Esto es muy importante, de lo contrario el VM será eliminado.**
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTY4Mjk5OTAsMTA0Mzk1NDM1MCw4Nz
-c0NjQzOTIsMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMw
-NywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LD
-IyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTgxNjQwODIyNiwxMDQzOTU0MzUwLDg3Nz
+Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
+LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
+IyMTc4Njk0XX0=
 -->
