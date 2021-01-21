@@ -1184,7 +1184,7 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
+Finaliza una transferencia de AVAX desde la P-Chain hacia la X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
 
 #### **Firma**
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgzNTQyMDI5MCwtMTUyMzA5ODEzOCwtMT
-Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
-ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
-g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
-OTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzND
-MxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0
-NDUsNjM4MzY1ODE4XX0=
+eyJoaXN0b3J5IjpbNTUzNTcxODE5LDE4MzU0MjAyOTAsLTE1Mj
+MwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEz
+NDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMy
+wtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcw
+MzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OT
+MxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2
+MCwxNjAwMTQwNDQ1XX0=
 -->
