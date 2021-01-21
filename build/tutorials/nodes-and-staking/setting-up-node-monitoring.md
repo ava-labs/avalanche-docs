@@ -137,7 +137,7 @@ Prometheus debería estar corriendo ahora. Para asegurarnos, podemos comprobarlo
 systemctl status prometheus
 ```
 
-el cual debería producir algo como:
+El cual debería producir algo como:
 
 ```cpp
 ● prometheus.service - Prometheus
@@ -211,7 +211,7 @@ Para asegurarnos de que se esté ejecutando apropiadamente:
 sudo systemctl status grafana-server
 ```
 
-el cual debería mostrar grafana como `active`. Grafana debería estar ahora disponible en `http://your-node-host-ip:3000/`
+El cual debería mostrar grafana como `active`. Grafana debería estar ahora disponible en `http://your-node-host-ip:3000/`
 
 {% hint style="warning" %}
 Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendido **.**
@@ -222,9 +222,9 @@ Inicia sesión con el nombre de usuario/contraseña admin/admin y establece una 
 En la Interfaz web de Grafana:
 
 * Ve a la Configuración en el menú de la izquierda y seleccionar Data Sources.
-* Haga clic en Add Data Source
+* Haz clic en Add Data Source
 * Selecciona Prometheus.
-* En el formulario, introduce el nombre \(Prometheus lo hará\), y`http://localhost:9090` como la URL.
+* En el formulario, introduce el nombre \(Prometheus lo hará\), y `http://localhost:9090` como la URL.
 * Haga clic en `Save & Test`
 * Comprueba que haya un mensaje verde que diga "Data source is working".
 
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0MDc2NjM0MywyMDY1MjQ1NzY2LDc3ND
+eyJoaXN0b3J5IjpbMTUxOTkwNTM0NywyMDY1MjQ1NzY2LDc3ND
 AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
 M119
 -->
