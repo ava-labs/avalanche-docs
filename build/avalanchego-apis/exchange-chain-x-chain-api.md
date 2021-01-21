@@ -1274,7 +1274,7 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Envía una transacción firmada a la red. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Envía una transacción firmada a la red. `encoding` específica el formato de la transacción firmada. Puede ser "cb58" o "hex". Por defecto es "cb58".
 
 #### **Firma**
 
@@ -1315,7 +1315,7 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
-List addresses controlled by the given user.
+List addresses controlled by the given user. Lista direcciónes controlados por el usuario asignado.
 
 #### **Firma**
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTkyNzAzMTAsNTUzNTcxODE5LDE4Mz
-U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
-Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
-EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
-MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
-Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
-MSwtMTk5NTQ2NzQ2MF19
+eyJoaXN0b3J5IjpbLTY0NDYwMjA5Niw1NTM1NzE4MTksMTgzNT
+QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
+OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
+wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
+MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
+k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
+LC0xOTk1NDY3NDYwXX0=
 -->
