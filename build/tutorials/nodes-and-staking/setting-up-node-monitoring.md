@@ -342,7 +342,7 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también estén bien indentadas. Asegúrate de usar la IP del host correcta, o`localhost`, dependiendo de como está configurado tu nodo.
+**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también estén bien indentadas. Asegúrate de usar la IP del host correcta, o `localhost`, dependiendo de como está configurado tu nodo.
 
 Guarda el config file y reinicia Prometheus:
 
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyNDc2OTgyMywyMDY1MjQ1NzY2LDc3ND
-AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
-M119
+eyJoaXN0b3J5IjpbNTczMTk3OTg5LDIwNjUyNDU3NjYsNzc0MD
+AxOTAzLC0xMDIzMDA0MDMwLC05MDY1Mjg5MTAsNDA5MjgxNTYz
+XX0=
 -->
