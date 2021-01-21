@@ -1098,8 +1098,7 @@ Esto da la respuesta:
 
 Como `numFetched` es menor que `limit`, sabemos que hemos terminado de obtener los UTXO y no es necesario volver a llamar a este método.
 
-Supongamos que queremos recuperar los UTXO exportados de la Cadena P a la Cadena X para construir un ImportTx. Luego, necesitamos llamar a GetUTXOs con el argumento sourceChain para recuperar los UTXO atómicos:
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Supongamos que queremos recuperar los UTXO exportados de la Cadena P a la Cadena X para construir un ImportTx. Luego, necesitamos llamar a GetUTXOs con el argumento sourceChain para recuperar los UTXOs atómicos:
 
 ```cpp
 curl -X POST --data '{
@@ -1115,7 +1114,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto da la respuesta:
 
 ```cpp
 {
@@ -1719,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwNTIyODEyNSwtMTUyMzA5ODEzOCwtMT
+eyJoaXN0b3J5IjpbLTc0NjAwNzEzNCwtMTUyMzA5ODEzOCwtMT
 Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
 ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
 g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
