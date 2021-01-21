@@ -113,7 +113,7 @@ Quieres usar una IP estática para que la IP pública asignada al nodo no cambie
 
 ![Image for post](https://miro.medium.com/max/774/1*2wsz1_OG7DpLA7jmTJfm0A.png)
 
-A continuación, seleccione "Estático" como el tipo de asignación
+A continuación, selecciona "Estático" como el tipo de asignación
 
 ![Image for post](https://miro.medium.com/max/347/1*y-JbYlRNN3GNNXtZDP-UXQ.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwMjk0NDgzLDEwNDM5NTQzNTAsODc3ND
-Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
-LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
-IxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbLTE5NDc2MDEzMjksMTA0Mzk1NDM1MCw4Nz
+c0NjQzOTIsMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMw
+NywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LD
+IyMjE3ODY5NF19
 -->
