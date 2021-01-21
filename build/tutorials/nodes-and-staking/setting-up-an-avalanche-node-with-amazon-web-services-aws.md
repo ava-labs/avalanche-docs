@@ -43,7 +43,7 @@ Haz clic en `Create key pair`. Deberías ver un mensaje de éxito, y el archivo 
 
 ## Crear un Grupo de Seguridad <a id="f8df"></a>
 
-Un Grupo de Seguridad AWS define qué tráfico de Internet puede entrar y salir de su instancia EC2. Piensa en ello como un firewall.Cree un nuevo Grupo de Seguridad seleccionando **Security Groups** en el menú desplegable **Network & Security**.
+Un Grupo de Seguridad AWS define qué tráfico de Internet puede entrar y salir de su instancia EC2. Piensa en ello como un firewall. Crea un nuevo Grupo de Seguridad seleccionando **Security Groups** en el menú desplegable **Network & Security**.
 
 ![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
@@ -66,11 +66,11 @@ Ahora estás listo para iniciar una instancia de EC2. Ve al panel de control del
 
 ![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-Seleccione **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** para el sistema operativo.
+Selecciona **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** para el sistema operativo.
 
 ![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-A continuación, elije el tipo de instancia. Esto define las especificaciones de hardware de la instancia en la nube. En este tutorial hemos creado un **c5.large**. Esto debería ser más que poderoso ya que Avalanche es un protocolo de consenso ligero. Para crear una instancia c5.large, selecciona la opción **Compute-optimized**  dentro del filtro del menú desplegable .
+A continuación, elige el tipo de instancia. Esto define las especificaciones de hardware de la instancia en la nube. En este tutorial hemos creado un **c5.large**. Esto debería ser más que poderoso ya que Avalanche es un protocolo de consenso ligero. Para crear una instancia c5.large, selecciona la opción **Compute-optimized**  dentro del filtro del menú desplegable .
 
 ![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
@@ -283,7 +283,7 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxMTgxNzM2NiwyMTEyMTQ2ODk2LDMyNz
+eyJoaXN0b3J5IjpbMTE1OTU2NjMyMSwyMTEyMTQ2ODk2LDMyNz
 AxMDU2NSwxOTQwMDQ5NDAxLDQ2NjA5MTQ5MSwtMTU2ODA5MTQ5
 Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4NjY1Nzk5LC03MjA2OD
 Q2NzYsODYxMDk1MzAzXX0=
