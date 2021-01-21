@@ -1,8 +1,8 @@
 # Configura tu Ledger Nano S con Avalanche
 
-El estándar de la industria para asegurar con seguridad las criptodivisas son las carteras de hardware, dispositivos especializados que proporcionan un aislamiento total entre su ordenador y sus claves privadas.
+El estándar de la industria para asegurar con seguridad las criptodivisas son las hardware wallets, dispositivos especializados que proporcionan un aislamiento total entre su ordenador y sus private keys.
 
-Si quieres usar la dirección de Avalanche que creaste antes, necesitas usar el procedimiento [restaurar desde la frase de recuperación](https://support.ledger.com/hc/en-us/articles/360005434914)  usando la frase mnemónica que obtuviste de la cartera de Avalanche. Si estás creando una nueva dirección, sólo sigue las instrucciones normales [establecer como nuevo dispositivo](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device).
+Si quieres usar la dirección de Avalanche que creaste antes, necesitas usar el procedimiento [restaurar desde la frase de recuperación](https://support.ledger.com/hc/en-us/articles/360005434914)  usando la frase mnemónica que obtuviste de la Wallet de Avalanche. Si estás creando una nueva dirección, sólo sigue las instrucciones normales [establecer como nuevo dispositivo](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device).
 
 La aplicación de Ledger Wallet de Avalanche está disponible actualmente a través de [Ledger Live](https://www.ledger.com/ledger-live) en Modo Experimental.
 
@@ -88,5 +88,5 @@ Finalmente, debería poder ver los detalles de la transacción en nuestro explor
 Ava Labs está construyendo la Internet de las finanzas. Estamos desarrollando soluciones para crear un mundo sin fricciones redefiniendo la forma en que la gente construye y utiliza las aplicaciones financieras. Una parte crítica de esta infraestructura es una Wallet de hardware para que los usuarios puedan estar totalmente seguros de que sus claves privadas y monedas están completamente aisladas de cualquier actor potencialmente malicioso. Nuestra recién lanzada aplicación de Ledger hace precisamente esto siguiendo las mejores prácticas de la industria para mantener a los usuarios y las monedas a salvo y seguras.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1MTgzNjMxMl19
+eyJoaXN0b3J5IjpbNDE3Mjg5NjU2LC02NTE4MzYzMTJdfQ==
 -->
