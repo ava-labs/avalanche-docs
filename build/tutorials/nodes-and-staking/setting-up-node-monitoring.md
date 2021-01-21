@@ -299,7 +299,7 @@ ExecStart=/usr/local/bin/node_exporter \
 WantedBy=multi-user.target
 ```
 
-Esto configura node\_exporter para recolectar varios datos que podríamos encontrar interesantes. Inicie el servicio, y habilítelo en el arranque:
+Esto configura node\_exporter para recolectar varios datos que podríamos encontrar interesantes. Inicia el servicio, y habilítalo en el arranque:
 
 ```cpp
 sudo systemctl start node_exporter
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwNDcyMjA4OSwyMDY1MjQ1NzY2LDc3ND
-AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
-M119
+eyJoaXN0b3J5IjpbLTE3NDYyMTc4MDcsMjA2NTI0NTc2Niw3Nz
+QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
+NjNdfQ==
 -->
