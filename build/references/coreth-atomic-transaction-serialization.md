@@ -686,7 +686,7 @@ Una credencial [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e
                                +---------------------------------+
 ```
 
-#### Proto SECP256K1 Credential Specification
+#### Especificación Proto de una Credencial SECP256K1 
 
 ```text
 message SECP256K1Credential {
@@ -695,9 +695,9 @@ message SECP256K1Credential {
 }
 ```
 
-#### SECP256K1 Credential Example
+#### Ejemplo de una Credencial SECP256K1 
 
-Let's make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeID`**: 9
 * **`signatures`**:
@@ -924,7 +924,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyOTU5NDk5OSwtMTg2MTkxNTY4LC0xMz
+eyJoaXN0b3J5IjpbMTY4MzI3MzM4MiwtMTg2MTkxNTY4LC0xMz
 UxNTQyODI1LDQ5NDQ0OTQxMiwxMjA3MjkwMjYzLDEwMjA3MjI0
 MzcsNDQ5NzExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMT
 YxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgz
