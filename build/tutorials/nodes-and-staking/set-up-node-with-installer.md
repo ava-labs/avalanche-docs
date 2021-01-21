@@ -39,7 +39,7 @@ Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea.
 
 #### Archivos de Trabajo de Nodo
 
-Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Esos archivos no serán alterados, y el nodo establecido por el script continuará operando con la misma identidad y estado que tenía antes. Dicho esto, para la seguridad de tu nodo, haz una copia de seguridad de los archivos`staker.crt` y `staker.key`, encontrados en`$HOME/.avalanchego/staking` y los guardamos en un lugar seguro. Puedes usar esos archivos para recrear tu nodo en un ordenador diferente si alguna vez lo necesitas.
+Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Esos archivos no serán alterados, y el nodo establecido por el script continuará operando con la misma identidad y estado que tenía antes. Dicho esto, para la seguridad de tu nodo, haz una copia de seguridad de los archivos `staker.crt` y `staker.key`, encontrados en `$HOME/.avalanchego/staking` y los guardamos en un lugar seguro. Puedes usar esos archivos para recrear tu nodo en un ordenador diferente si alguna vez lo necesitas.
 
 ### Consideraciones de la Red
 
@@ -47,7 +47,7 @@ Para funcionar con éxito, AvalancheGo necesita aceptar conexiones de Internet e
 
 #### Ejecutandose en un cloud provider
 
-Si su nodo se ejecuta en una instancia de ordenador de un cloud provider, tendrá una IP estática. Averigua cuál es esa IP estática, o configúrala si no lo has hecho ya. El script tratará de averiguar la IP por sí mismo, pero eso podría no funcionar en todos los entornos, por lo que tendrás que comprobar la IP o introducirla tú mismo.
+Si tu nodo se ejecuta en una instancia de ordenador de un cloud provider, tendrá una IP estática. Averigua cuál es esa IP estática, o configúrala si no lo has hecho ya. El script tratará de averiguar la IP por sí mismo, pero eso podría no funcionar en todos los entornos, por lo que tendrás que comprobar la IP o introducirla tú mismo.
 
 #### Ejecutandose en una Conexión Doméstica
 
@@ -60,7 +60,7 @@ Como hay demasiados modelos y configuraciones de routers, no podemos dar instruc
 
 Así que, ahora que has preparado tu sistema y tienes la información lista, vamos a hacerlo.
 
-Para descargar y ejecutar el script, introduzca lo siguiente en la terminal:
+Para descargar y ejecutar el script, introduce lo siguiente en la terminal:
 
 ```text
 wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
@@ -87,7 +87,7 @@ avalanchego-v1.1.1/avalanchego
 Node files unpacked into /home/ubuntu/avalanche-node
 ```
 
-Y luego el script le pedirá información sobre el entorno de la red:
+Y luego el script te pedirá información sobre el entorno de la red:
 
 ```text
 To complete the setup some networking information is needed.
@@ -241,8 +241,8 @@ Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTg4NTgyNjc2LDE1OTE0MjgzOTQsLTEwND
-k2NzMzMDYsMTIxNDA2MjIzOCwtNDM0ODczMDQ0LC04NTc0MzUx
-NTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYzMDE1OD
-gsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbLTE0NDg1Mjk3NTksOTg4NTgyNjc2LDE1OT
+E0MjgzOTQsLTEwNDk2NzMzMDYsMTIxNDA2MjIzOCwtNDM0ODcz
+MDQ0LC04NTc0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NT
+YsLTE1NjYzMDE1ODgsLTM1Njg4NTMyNF19
 -->
