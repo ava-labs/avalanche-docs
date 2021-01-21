@@ -667,14 +667,14 @@ Las credenciales o "Credentials" tienen un tipo posible: `SECP256K1Credential`. 
 
 ### SECP256K1 Credential
 
-Una credencial [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) contiene una lista de firmas recuperables de 65 bytes.
+Una credencial [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) o "SECP256K1 Credential" contiene una lista de firmas recuperables de 65 bytes.
 
-#### What SECP256K1 Credential Contains
+#### Que Contiene una Credencial SECP256K1 
 
 * **`TypeID`** is the ID for this type. It is `0x00000009`.
 * **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
 
-#### Gantt SECP256K1 Credential Specification
+#### Especificación Gantt de una Credencial SECP256K1 
 
 ```text
 +------------------------------+---------------------------------+
@@ -924,8 +924,8 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYxNDMzOTczLDQ5NDQ0OTQxMiwxMjA3Mj
-kwMjYzLDEwMjA3MjI0MzcsNDQ5NzExMjA1LDEyNjYxNzk3OTQs
-MTU5ODAxMTU4NiwtMTYxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xND
-E5MDE4NDgwLC03NDgzMTU0N119
+eyJoaXN0b3J5IjpbLTEzNTE1NDI4MjUsNDk0NDQ5NDEyLDEyMD
+cyOTAyNjMsMTAyMDcyMjQzNyw0NDk3MTEyMDUsMTI2NjE3OTc5
+NCwxNTk4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAwNjcwOTMsLT
+E0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
 -->
