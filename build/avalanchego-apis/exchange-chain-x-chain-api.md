@@ -1009,9 +1009,9 @@ avm.getUTXOs({
 * A lo más un límite (`limit`) de UTXOs es devuelta. Si `limit` se omite, o es mayor a 1024, entonces será 1024.
 * Este método soporta paginación. `endIndex` dentota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXOs, usa el valor de `endIndex` como `startIndex` en la siguiente llamada.
 * Si `startIndex` se omite, buscará todos los UTXOs hasta el límite (`limit`).
-* Cuando se usa paginación \(cuando se provee un `startIndex` \),  UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* Cuando se usa paginación \(cuando se provee un `startIndex` \), no se garantiza que los UTXOs sean únicos a lo largo de multiples llamadas. Esto es, una UTXO puede aparecer en el resultado de una primer llamada, y nuevamente en una segunda llamada.
+* Cuando se usa paginación, no se garantiza la consistencia a lo largo de multiples llamadas. Esto es, el conjunto de UTXO de una dirección puede haber cambiado entre llamadas.
+* `encoding` establece el fosets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Example**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDI2NTg1MzIsLTE1MjMwOTgxMzgsLT
+eyJoaXN0b3J5IjpbLTE1MTc4Njg3MzcsLTE1MjMwOTgxMzgsLT
 E2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3
 MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mj
 c4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwt
