@@ -8,7 +8,7 @@ Avalanche también soporta los tokens no fungibles \(NFTs\). Por definición, ca
 
 En este tutorial, crearemos y enviaremos NFTs usando la API de AvalancheGo. En un futuro tutorial, crearemos una familia de NFT personalizada usando [AvalancheJS](../../tools/avalanchejs/).
 
-## Requirements
+## Requisitos
 
 Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). en este tutorial usaremos [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados API.
 
@@ -357,5 +357,5 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzg3OTM2NjFdfQ==
+eyJoaXN0b3J5IjpbMTg0NzY1Mjg2NywtMTIzODc5MzY2MV19
 -->
