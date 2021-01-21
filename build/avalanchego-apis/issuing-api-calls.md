@@ -95,12 +95,12 @@ Dicha respuesta se verá como:
 
 ## Otros Formatos de API
 
-Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+Algunas API pueden utilizar un estándar distinto de JSON RPC 2.0 para formatear sus solicitudes y respuestas. Dicha extensión debe especificar cómo realizar llamadas y analizar las respuestas a ellas en su documentación.
 
-## Sending and Receiving Bytes
+## Enviando y Recib Receiving Bytes
 
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzE3MTcxNTNdfQ==
+eyJoaXN0b3J5IjpbLTEwMTI1ODI1NTBdfQ==
 -->
