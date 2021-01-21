@@ -1650,6 +1650,9 @@ curl -X POST --data '{
 Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
 
 This call is made to the wallet API endpoint:
+Envíe múltiples transferencias del monto (`amount`) del activo con ID `assetID`, a una dirección específica de una lista de direcciones de propiedad y asuma que el tx será aceptado para que futuras llamadas puedan usar el conjunto UTXO modificado.
+
+Esta llamada se realiza al punto final de la API de billetera:
 
 `/ext/bc/X/wallet`
 
@@ -1719,11 +1722,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyNzEyMzEyMSw1NTM1NzE4MTksMTgzNT
-QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
-OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
-wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
-MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
-k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
-LC0xOTk1NDY3NDYwXX0=
+eyJoaXN0b3J5IjpbLTE0MzQwMjc3OTAsNTUzNTcxODE5LDE4Mz
+U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
+Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
+EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
+MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
+Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
+MSwtMTk5NTQ2NzQ2MF19
 -->
