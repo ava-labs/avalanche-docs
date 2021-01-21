@@ -135,7 +135,7 @@ Puedes conseguir fondos en el Testnet desde el [faucet.](https://faucet.avax-tes
 
 ### Crear un Usuario del Keystore 
 
-Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **Sólo debe crear un usuario de keystore en un nodo que tú operes, ya que el operador del nodo tiene acceso a su contraseña en texto plano.** Para crear un usuario ejecute [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
+Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **Sólo debes crear un usuario de keystore en un nodo que tú operes, ya que el operador del nodo tiene acceso a tu contraseña en texto plano.** Para crear un usuario ejecuta [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
 
 ```cpp
 curl -X POST --data '{
@@ -159,7 +159,7 @@ La respuesta debería ser:
 }
 ```
 
-Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que usted crea en el Keystore de un nodo no existen en otros nodos pero usted puede importar/exportar usuarios a/desde el Keystore. Mira [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
+Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que creas en el Keystore de un nodo no existen en otros nodos pero tu puedes importar/exportar usuarios a/desde el Keystore. Mira [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
 
 {% hint style="danger" %}
 **Sólo debes mantener una pequeña cantidad de tus fondos en tu nodo.** La mayoría de sus fondos deberían estar asegurados por un nemónico que no se guarde en ningún ordenador.
@@ -362,8 +362,8 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDY1OTE2MjAsMTg2MjkzMDQ2NCwxMz
-EzMjk5OTU3LDE4MjgzNzk4NzQsLTgwMDM4MDg4NSwxNTA1NzYy
-ODE3LC0yMDY3Nzg0MjUwLC0xOTI4NDM1MzgzLC0xNzIyNjE2NT
-g5XX0=
+eyJoaXN0b3J5IjpbMjM2MzIwNDgzLDE4NjI5MzA0NjQsMTMxMz
+I5OTk1NywxODI4Mzc5ODc0LC04MDAzODA4ODUsMTUwNTc2Mjgx
+NywtMjA2Nzc4NDI1MCwtMTkyODQzNTM4MywtMTcyMjYxNjU4OV
+19
 -->
