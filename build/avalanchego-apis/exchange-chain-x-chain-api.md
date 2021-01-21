@@ -1054,7 +1054,7 @@ Esto nos da la respuesta:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Como `numFetched` es igual que `limit`,  podemos decir que puede haber más UTXO que no fueron recuperados. Llamamos al método nuevamente, esta vez con `startIndex`:
 
 ```cpp
 curl -X POST --data '{
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMTA2NDgyMzksLTE1MjMwOTgxMzgsLT
-E2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3
-MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mj
-c4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwt
-MTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMz
-QzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQw
-NDQ1LDYzODM2NTgxOF19
+eyJoaXN0b3J5IjpbLTIyODcyMDM2MCwtMTUyMzA5ODEzOCwtMT
+Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
+ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
+g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
+OTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzND
+MxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0
+NDUsNjM4MzY1ODE4XX0=
 -->
