@@ -118,7 +118,7 @@ Después de confirmar todos estos pop-ups hemos desplegado nuestro Token para la
 
 Podemos ver que nuestra transacción se desplegó en la C-Chain de Avalanche a través de este [explorador de la c-chain](https://cchain.explorer.avax-test.network/).
 
-Pero primero, veamos el hash de nuestra transacción desde la consola de remix.
+Pero primero, veamos el hash de nuestra transacción desde la consola de Remix.
 
 ![Image for post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
@@ -139,7 +139,7 @@ La primera es la dirección de mi wallet que crea el token y la segunda es la di
 ![Image for post](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
 
 
-Vuelve a remix y después del despliegue, deberías poder ver el contrato en la sección **“Deployed Contracts”**.
+Vuelve a Remix y después del despliegue, deberías poder ver el contrato en la sección **“Deployed Contracts”**.
 
 Aquí tenemos un montón de funciones que podemos usar para interactuar con el contrato de nuestro token. Puedes revisar todos estos métodos en la documentación de OpenZeppelin para aprender a usarlos. Pero sólo usaremos el método mint.
 
@@ -159,8 +159,8 @@ Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los 
 Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de remix o de metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjg3MTMzNTkwLC0xOTk5MTI2MTczLC0xND
-Y0MDk0MzI3LC0xNDM0NTE3NDY4LDE3MTc4NDg1MDIsMTYyMTg5
-MzA2NCwtMTU1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3OF
-19
+eyJoaXN0b3J5IjpbMjEwOTU0NDM0MiwtMTk5OTEyNjE3MywtMT
+Q2NDA5NDMyNywtMTQzNDUxNzQ2OCwxNzE3ODQ4NTAyLDE2MjE4
+OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0Nz
+hdfQ==
 -->
