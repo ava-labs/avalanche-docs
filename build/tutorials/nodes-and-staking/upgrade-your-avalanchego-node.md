@@ -117,7 +117,7 @@ Si estás usando los binarios pre-construidos en Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Añade`nohup` al comienzo del comando si quieres ejecutar el nodo en segundo plano.
+Añade `nohup` al comienzo del comando si quieres ejecutar el nodo en segundo plano.
 
 ### Nodo ejecutándose como un servicio
 
@@ -135,7 +135,7 @@ Primero, clona nuestro repositorio de Github \(puedes saltarte este paso si ya l
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
-Luego, mueva al directorio de avalanchego:
+Luego, mueve al directorio de avalanchego:
 
 ```text
 cd avalanchego
@@ -153,7 +153,7 @@ Comprueba que tu código local está actualizado, ejecute:
 git rev-parse HEAD
 ```
 
-y compruebe que los primeros 7 caracteres impresos coinciden con el último campo de`commit`en nuestro [Github.](https://github.com/ava-labs/avalanchego)
+Y comprueba que los primeros 7 caracteres impresos coinciden con el último campo de`commit`en nuestro [Github.](https://github.com/ava-labs/avalanchego)
 
 Ahora construye el binario:
 
@@ -180,6 +180,6 @@ Puedes ejecutar tu nodo con:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4NTc1NDY2NCw4NDY3NzQyMTQsLTExND
-I2MjQzMjQsNDUwODAwOTc3XX0=
+eyJoaXN0b3J5IjpbMzUxODgyMzAyLDg0Njc3NDIxNCwtMTE0Mj
+YyNDMyNCw0NTA4MDA5NzddfQ==
 -->
