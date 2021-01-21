@@ -1199,7 +1199,7 @@ avm.importAVAX({
 
 * `to` es la dirección a la cual el AVAX se enviará. Esto debe ser igual al argumento `to` en la correspondiente llamada a la P-Chain `exportAVAX`.
 * `sourceChain` es el ID o sobrenombre de la cadena desde la cual el AVAX es importado. Para importar los fondos de la P-Chain, usa `"P"`.
-* `username` is the user that controls `to`.
+* `username` es el usuario que controla `to`.
 
 #### **Llamada de ejemplo**
 
@@ -1231,7 +1231,7 @@ curl -X POST --data '{
 
 ### avm.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga control sobre una dirección a un usuario Give a user control over an address by providing the private key that controls the address.
 
 #### **Firma**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzODU2NTYzNyw1NTM1NzE4MTksMTgzNT
+eyJoaXN0b3J5IjpbMjEzMjMzMzEzOCw1NTM1NzE4MTksMTgzNT
 QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
 OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
 wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
