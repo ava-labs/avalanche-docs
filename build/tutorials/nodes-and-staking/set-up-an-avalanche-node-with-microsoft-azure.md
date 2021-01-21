@@ -4,7 +4,7 @@ descripción: 'Tutorial generado por Miembo de la Comunidad: Seq'
 
 # Ejecutar un Nodo de Avalanche con Microsoft Azure
 
-Ejecutar un validador y hacer stake con Avalanche proporciona recompensas extremadamente competitivas de entre el 9,69% y el 11,54% dependiendo de la duración de la el stake. La tasa máxima se gana apostando por un año, mientras que la tasa más baja por 14 días. Tampoco hay reducciones, así que no tienes que preocuparte por un fallo de hardware o un error en el cliente que te haga perder parte o todo tu stake. En cambio, con Avalanche sólo necesitas mantener al menos un 60% de tiempo de actividad para recibir recompensas. Si no cumples con este requisito, no te reducirán, pero no recibirás las recompensas. **Tampoco es necesario que pongas tus private keys en un nodo para empezar a validar en ese nodo.** Incluso si alguien irrumpe en tu cloud environment y obtiene acceso al nodo, lo peor que puede hacer es apagar el nodo.
+Ejecutar un validador y hacer stake con Avalanche proporciona recompensas extremadamente competitivas de entre el 9,69% y el 11,54% dependiendo de la duración de el stake. La tasa máxima se gana haciendo stake por un año, mientras que la tasa más baja por 14 días. Tampoco hay reducciones, así que no tienes que preocuparte por un fallo de hardware o un error en el cliente que te haga perder parte o todo tu stake. En cambio, con Avalanche sólo necesitas mantener al menos un 60% de tiempo de actividad para recibir recompensas. Si no cumples con este requisito, no te reducirán, pero no recibirás las recompensas. **Tampoco es necesario que pongas tus private keys en un nodo para empezar a validar en ese nodo.** Incluso si alguien irrumpe en tu cloud environment y obtiene acceso al nodo, lo peor que puede hacer es apagar el nodo.
 
 La ejecución de un nodo validador no sólo te permite recibir recompensas en AVAX, sino que más adelante también podrás validar otras subnets en el ecosistema y recibir recompensas en el token nativo de sus subnets.
 
@@ -323,7 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0Mzk1NDM1MCw4Nzc0NjQzOTIsMTkwOD
-A1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMwNywtMTI0NzY5OTQ1
-OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LDIyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbNDI2MTc2MDA3LDEwNDM5NTQzNTAsODc3ND
+Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
+LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
