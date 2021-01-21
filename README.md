@@ -24,7 +24,7 @@ description: >-
 {% endtab %}
 
 {% tab title="Staking" %}
-{% page-ref page="build/getting-started.md" %}
+{% page-ref page="build/get-started.md" %}
 
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
 {% endtab %}

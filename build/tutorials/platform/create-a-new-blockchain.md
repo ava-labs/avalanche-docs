@@ -8,7 +8,7 @@ In this tutorial, we’ll create a blockchain by creating a new instance of the 
 
 ### Prerequisites
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../getting-started.md) tutorial.
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../get-started.md) tutorial.
 
 Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 

@@ -30,7 +30,7 @@ Let’s install AvalancheGo, the Go implementation of an Avalanche node, and con
 
 The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
-Downloading [pre-built binary](getting-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Downloading [pre-built binary](get-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
 
 Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
 
