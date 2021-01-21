@@ -1007,9 +1007,9 @@ avm.getUTXOs({
 
 * `utxos` es una lista de UTXOs tal que cada UTXO hacer referencia a al menos una dirección en `addresses`.
 * A lo más un límite (`limit`) de UTXOs es devuelta. Si `limit` se omite, o es mayor a 1024, entonces será 1024.
-* Este método soporta paginación. `endIndex` dentota el último UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+* Este método soporta paginación. `endIndex` dentota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXOs, usa el valor de `endIndex` como `startIndex` en la siguiente llamada.
+* Si `startIndex` se omite, buscará todos los UTXOs hasta el límite (`limit`).
+* Cuando se usa paginación \(cuando se provee un `startIndex` \),  UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
 * `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzNzQ2MDU0NCwtMTUyMzA5ODEzOCwtMT
-Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
-ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
-g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
-OTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzND
-MxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0
-NDUsNjM4MzY1ODE4XX0=
+eyJoaXN0b3J5IjpbLTEyNDI2NTg1MzIsLTE1MjMwOTgxMzgsLT
+E2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3
+MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mj
+c4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwt
+MTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMz
+QzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQw
+NDQ1LDYzODM2NTgxOF19
 -->
