@@ -165,7 +165,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -179,15 +179,15 @@ curl -X POST --data '{
 
 ### info.getNodeVersion
 
-Get the version of this node.
+Obtén la visión de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNodeVersion() -> {version: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -197,7 +197,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -211,7 +211,7 @@ curl -X POST --data '{
 
 ### info.isBootstrapped
 
-Check whether a given chain is done bootstrapping
+Revisa si una cadena ha terminado de inicializar (bootstrapping).
 
 #### **Signature**
 
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjUxMzA5NzI4XX0=
+eyJoaXN0b3J5IjpbMTQ2MDE2ODQ5NCwyNTEzMDk3MjhdfQ==
 -->
