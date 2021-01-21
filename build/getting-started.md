@@ -83,7 +83,7 @@ Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`
 Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-### Inicie un Nodo, y Conéctese a Avalanche
+### Inicia un Nodo, y Conéctate a Avalanche
 
 Si construyes desde el código fuente:
 
@@ -120,7 +120,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un llamado API a una cadena que no ha terminado el bootstrapping,  esta retornará `API call rejected because chain is not done bootstrapping`.Si tu nodo nunca termina el bootstrapping, sigue [Estas Preguntas más Frecuentes](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), si sigues experimentando problemas contactanos en [Discord.](https://chat.avalabs.org/)
+Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un llamado API a una cadena que no ha terminado el bootstrapping,  esta retornará `API call rejected because chain is not done bootstrapping`. Si tu nodo nunca termina el bootstrapping, sigue [Estas Preguntas más Frecuentes](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), si sigues experimentando problemas contactanos en [Discord.](https://chat.avalabs.org/)
 
 Tu nodo está funcionando y conectado ahora. Si quieres usar tu nodo como validador en la red principal, mira [este tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) para saber cómo añadir tu nodo como validador usando la Wallet Web.
 
@@ -362,8 +362,8 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYxMTQwMTUxLDE4NjI5MzA0NjQsMTMxMz
-I5OTk1NywxODI4Mzc5ODc0LC04MDAzODA4ODUsMTUwNTc2Mjgx
-NywtMjA2Nzc4NDI1MCwtMTkyODQzNTM4MywtMTcyMjYxNjU4OV
-19
+eyJoaXN0b3J5IjpbLTIxMDY1OTE2MjAsMTg2MjkzMDQ2NCwxMz
+EzMjk5OTU3LDE4MjgzNzk4NzQsLTgwMDM4MDg4NSwxNTA1NzYy
+ODE3LC0yMDY3Nzg0MjUwLC0xOTI4NDM1MzgzLC0xNzIyNjE2NT
+g5XX0=
 -->
