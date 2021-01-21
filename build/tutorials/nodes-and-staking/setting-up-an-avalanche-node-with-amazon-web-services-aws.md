@@ -1,8 +1,8 @@
 # Ejecutar un nodo de Avalanche con Amazon Web Services \(AWS\)
 
-## Introduction
+## Introducción
 
-Este tutorial le guiará a través de la configuración de un nodo de Avalanche en [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Los cloud services como AWS son una buena manera de garantizar que su nodo sea altamente seguro, disponible y accesible.
+Este tutorial te guiará a través de la configuración de un nodo de Avalanche en [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Los cloud services como AWS son una buena manera de garantizar que su nodo sea altamente seguro, disponible y accesible.
 
 Para empezar, necesitarás:
 
@@ -283,8 +283,8 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExMjE0Njg5NiwzMjcwMTA1NjUsMTk0MD
-A0OTQwMSw0NjYwOTE0OTEsLTE1NjgwOTE0OTMsNTU3NjU5MTQs
-MTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNjg0Njc2LDg2MTA5NT
-MwM119
+eyJoaXN0b3J5IjpbLTYxMjM1MjUzLDIxMTIxNDY4OTYsMzI3MD
+EwNTY1LDE5NDAwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkz
+LDU1NzY1OTE0LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4ND
+Y3Niw4NjEwOTUzMDNdfQ==
 -->
