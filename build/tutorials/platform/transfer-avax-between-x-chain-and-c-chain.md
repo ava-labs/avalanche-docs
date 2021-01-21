@@ -213,7 +213,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-donde `to` es la dirección codificada en bech32 de una dirección X-Chain que tienes. Asegúrate de que la cantidad que exportas excede la comisión de transacción porque tanto las transacciones de exportación como las de importación cobrarán una comisión de transacción.
+Donde `to` es la dirección codificada en bech32 de una dirección X-Chain que tienes. Asegúrate de que la cantidad que exportas excede la comisión de transacción porque tanto las transacciones de exportación como las de importación cobrarán una comisión de transacción.
 
 La respuesta debería verse así:
 
@@ -243,7 +243,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-donde `to` es la dirección codificada de bech32 la dirección de la X-Chain a la que enviaste los fondos en el paso anterior.
+Donde `to` es la dirección codificada de bech32 la dirección de la X-Chain a la que enviaste los fondos en el paso anterior.
 
 La respuesta debería verse así:
 
@@ -262,6 +262,6 @@ La respuesta debería verse así:
 ¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4NDMwMTU3MSwxOTIyMDQ3ODc3LDEzND
-k5ODgzODQsMTEyODI1MTA5M119
+eyJoaXN0b3J5IjpbNjcxNzEyNDQ1LDE5MjIwNDc4NzcsMTM0OT
+k4ODM4NCwxMTI4MjUxMDkzXX0=
 -->
