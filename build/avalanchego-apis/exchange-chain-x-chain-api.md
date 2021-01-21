@@ -1184,7 +1184,7 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finaliza una transferencia de AVAX desde la P-Chain hacia la X-Chain. Antes de llamar este método, debes de llamar al método de la P-Chain para iniciar la transferencia Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
+Finaliza una transferencia de AVAX desde la P-Chain hacia la X-Chain. Antes de llamar este método, debes de llamar al método [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) de la P-Chain para iniciar la transferencia.
 
 #### **Firma**
 
@@ -1197,7 +1197,7 @@ avm.importAVAX({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
+* `to` es la dirección a la cual el AVAX se enviará. Esto se debe ser el mimsmo que el argument en la llamada correspondiente a is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
 * `username` is the user that controls `to`.
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwOTg5ODQyOCw1NTM1NzE4MTksMTgzNT
-QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
-OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
-wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
-MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
-k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
-LC0xOTk1NDY3NDYwXX0=
+eyJoaXN0b3J5IjpbNzc4MTE5ODgwLDU1MzU3MTgxOSwxODM1ND
+IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
+NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
+05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
+MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
+YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
+LTE5OTU0Njc0NjBdfQ==
 -->
