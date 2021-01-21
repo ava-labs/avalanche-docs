@@ -1136,7 +1136,7 @@ Esto da la respuesta:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+Finaliza la transferencia de AVAX desde la P-Chain o C-Chain hacia la X-Chain. Antes de llamar a este método, debes llamar al método [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) en la P-Chain o al  [`avax.export`](contract-chain-c-chain-api.md#avax-export) en la C-Chain para iniciar la transferencia.
 
 #### **Firma**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0NjAwNzEzNCwtMTUyMzA5ODEzOCwtMT
+eyJoaXN0b3J5IjpbLTYwNDk1MzY1MywtMTUyMzA5ODEzOCwtMT
 Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
 ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
 g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
