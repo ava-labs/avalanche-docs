@@ -58,7 +58,7 @@ Para ver tus coleccionables con más detalle, selecciona **Portfolio** en el men
 
 ![Collectibles list](../../../.gitbook/assets/nft-studio-07-collectibles.png)
 
-Para cada coleccionable genérico, se mostrará una imagen, junto con el título, y el número que indica cuántas copias del coleccionable hay en tu cartera. Colocando el puntero sobre el coleccionable se mostrará la descripción detallada:
+Para cada coleccionable genérico, se mostrará una imagen, junto con el título, y el número que indica cuántas copias del coleccionable hay en tu wallet. Colocando el puntero sobre el coleccionable se mostrará la descripción detallada:
 
 ![Collectible details](../../../.gitbook/assets/nft-studio-08-detail.png)
 
@@ -90,6 +90,6 @@ Ahora, debes saber cómo crear familias de NFT, acuñar grupos de NFT, y enviarl
 Si desesa conocer los antecedentes técnicos de cómo funcionan los NFT en la red de Avalanche o deseas construir productos usando NFT, mira el [Tutorial de NFT](creating-a-nft-part-1.md). Si tienes preguntas técnicas, ponte en contacto con nosotros en nuestro [Servidor de Discord](https://chat.avalabs.org/).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDk2MDQ5MDg1LDExMDYxNTg3OTgsMTIwOT
-MyMjUyNV19
+eyJoaXN0b3J5IjpbMTgwODI4ODY0OCwxMTA2MTU4Nzk4LDEyMD
+kzMjI1MjVdfQ==
 -->
