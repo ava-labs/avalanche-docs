@@ -132,7 +132,7 @@ platform.addValidator(
 }
 ```
 
-* `nodeID` is the node ID of the validator being added.
+* `nodeID` es el ID del nodo of the validator being added.
 * `startTime` is the Unix time when the validator starts validating the Primary Network.
 * `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
 * `stakeAmount` is the amount of nAVAX the validator is staking.
@@ -1803,5 +1803,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE1NjcxNTYwXX0=
+eyJoaXN0b3J5IjpbMTQ1NjQwNzkyNV19
 -->
