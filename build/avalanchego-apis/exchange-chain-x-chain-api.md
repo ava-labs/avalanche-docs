@@ -979,7 +979,7 @@ curl -X POST --data '{
 
 ### avm.getUTXOs
 
-Obtén los UTXOs referenciados a cierta direccioń. Si la cadena de origen (sourceChain) es especificada, entonces  it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+Obtén los UTXOs referenciados a cierta direccioń. Si la cadena de origen (sourceChain) es especificada, entonces recuperará los UTXO atómicos exportados de esa cadena a la Cadena X.
 
 #### **Firma**
 
@@ -1005,7 +1005,7 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
+* `utxos` es una lista de UTXOs tal que cada UTXO referencía references at least one address in `addresses`.
 * At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
 * This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMT
-ExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4
-NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Nj
-c2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwx
-NzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MT
-I5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgx
-OCwtMTA0ODA0MTI3Ml19
+eyJoaXN0b3J5IjpbLTE5ODA3ODM4ODAsLTE1MjMwOTgxMzgsLT
+E2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3
+MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mj
+c4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwt
+MTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMz
+QzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQw
+NDQ1LDYzODM2NTgxOF19
 -->
