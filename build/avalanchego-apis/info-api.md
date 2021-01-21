@@ -213,7 +213,7 @@ curl -X POST --data '{
 
 Revisa si una cadena ha terminado de inicializar (bootstrapping).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2MDE2ODQ5NCwyNTEzMDk3MjhdfQ==
+eyJoaXN0b3J5IjpbMTg4MDc2ODAyNSwyNTEzMDk3MjhdfQ==
 -->
