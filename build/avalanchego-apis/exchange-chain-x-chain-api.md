@@ -1503,7 +1503,7 @@ avm.sendNFT({
 * `to` es la dirección de la X-Chain a la cual se enviará el NFT.
 * `from`  son las direcciones que quieres usar para esta operación. Si se omite usará cualquiera de tus direcciones cuando sea necesario. 
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
-* El activo es enviado desde una dirección controlada or  asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
+* El activo es enviado desde una dirección controlada por el usuario(`username`). \(Por supuesto, ese usuario deberá mantener al menos el saldo del NFT que se envía.\)
 
 #### **Llamada de ejemplo**
 
@@ -1539,7 +1539,7 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Envía una transacción firmada a la red y asuma que se aceptará el tx.. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 This call is made to the wallet API endpoint:
 
@@ -1719,7 +1719,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzOTk4NzAyOSw1NTM1NzE4MTksMTgzNT
+eyJoaXN0b3J5IjpbMTg3MTI1NTI5OSw1NTM1NzE4MTksMTgzNT
 QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
 OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
 wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
