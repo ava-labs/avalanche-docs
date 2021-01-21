@@ -147,7 +147,7 @@ Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de 
 
 Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción, proporciona el AVAX del Stake y a quien se les devolverá los AVAX en Stake.
 
-Ahora vamos a emitir la transacción. Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta `brew install coreutils`.\)  En este ejemplo hacemos stake de 2,000 AVAX \(2 x 1012 nAVAX\).
+Ahora vamos a emitir la transacción. Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta `brew install coreutils`.\)  En este ejemplo hacemos stake de 2 000 AVAX \(2 x 1012 nAVAX\).
 
 ```cpp
 curl -X POST --data '{
@@ -366,10 +366,10 @@ El comando completo es:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDU0MjAxNTAsLTcxOTUzNjI4OCwtMT
-ExMjM3MDI2OCwtNTQwMDU4NjY2LC04MjM1MDI1NDYsMjgyMDcw
-ODExLDMzMjc3NzQ4NywtMTgyOTg1NzE4NywtMTM0NDMzMDY0OC
-wzMjEyMzI1NzMsMTQzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5
-MzAyNywtMTIzNzM1MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4ND
-g3LDEwMzM3NTMzNjddfQ==
+eyJoaXN0b3J5IjpbLTcxODQ1MjYxMCwtNzE5NTM2Mjg4LC0xMT
+EyMzcwMjY4LC01NDAwNTg2NjYsLTgyMzUwMjU0NiwyODIwNzA4
+MTEsMzMyNzc3NDg3LC0xODI5ODU3MTg3LC0xMzQ0MzMwNjQ4LD
+MyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkz
+MDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0OD
+csMTAzMzc1MzM2N119
 -->
