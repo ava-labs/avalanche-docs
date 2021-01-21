@@ -6,9 +6,9 @@ Un nodo solo expondrá esta API si se inicia con el [argumento de línea de coma
 
 ## IPC Message Format
 
-Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.
+Los mensajes de socket constan de un entero de 64 bits en formato BigEndian seguido de esa cantidad de bytes.
 
-Example:
+Ejemplo:
 
 ```text
 Sending:
@@ -18,6 +18,8 @@ Writes to the socket:
 ```
 
 ## IPC Socket URL Format
+
+Los nombres de los sockets tienen el formato `<network_id>-<chain_id>-<event_type>` donde `<event_type>` es `consenso` o` decisiones`. El socket de consenso recibe vértices y bloques y mientras que el socket de decisiones recibe transacciones individuales.
 
 The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
 
@@ -109,5 +111,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwNDM2MjY5N119
+eyJoaXN0b3J5IjpbMTQ0MzYyMTc1Nl19
 -->
