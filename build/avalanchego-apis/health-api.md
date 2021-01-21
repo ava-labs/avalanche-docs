@@ -63,7 +63,7 @@ curl -X POST --data '{
 
 #### **Respuesta de ejemplo**
 
-En la respuesta de ejemplo, la revisión the C-Chain’s health check is failing.
+En la respuesta de ejemplo, la revisión de salud de la C-Chain falló.
 
 ```cpp
 {
@@ -118,6 +118,6 @@ En la respuesta de ejemplo, la revisión the C-Chain’s health check is failing
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTA1MTIwOTQsLTE2MTYzMzg3OTVdfQ
+eyJoaXN0b3J5IjpbLTE0NTUxNzY4ODMsLTE2MTYzMzg3OTVdfQ
 ==
 -->
