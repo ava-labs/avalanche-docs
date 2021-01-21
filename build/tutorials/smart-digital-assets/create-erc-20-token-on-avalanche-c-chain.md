@@ -82,7 +82,7 @@ Ya que usaremos un contrato ERC-20 de [OpenZeppelin](https://openzeppelin.com/co
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
-Después de guardar el archivo, veremos un montón de archivos que se importan a remix. Esta es una característica de remix que nos permite importar un repositorio de contratos GitHub para remix con sólo dar el URL-Link. con una declaración de importación.
+Después de guardar el archivo, veremos un montón de archivos que se importan a Remix. Esta es una característica de Remix que nos permite importar un repositorio de contratos GitHub a Remix con sólo dar el URL-Link con una declaración de importación.
 
 ![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
@@ -159,7 +159,8 @@ Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los 
 Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de remix o de metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTkxMjYxNzMsLTE0NjQwOTQzMjcsLT
-E0MzQ1MTc0NjgsMTcxNzg0ODUwMiwxNjIxODkzMDY0LC0xNTUw
-ODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwNDc4XX0=
+eyJoaXN0b3J5IjpbMTk4Nzg0ODQzOCwtMTk5OTEyNjE3MywtMT
+Q2NDA5NDMyNywtMTQzNDUxNzQ2OCwxNzE3ODQ4NTAyLDE2MjE4
+OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0Nz
+hdfQ==
 -->
