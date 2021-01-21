@@ -176,7 +176,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-donde `to` es una dirección EVM con código hexadecimal de su elección.
+Donde `to` es una dirección EVM con código hexadecimal de su elección.
 
 La respuesta se ve así:
 
@@ -191,9 +191,9 @@ La respuesta se ve así:
 ```
 
 
-Nota: no se cobra ninguna tarifa por las transacciones de importación a la C-Chain.
+Nota: Bo se cobra ninguna comisión por las transacciones de importación a la C-Chain.
 
-Una vez que tus AVAX ha sido transferida a la C-Chain, puede usarla para desplegar e interactuar con contratos inteligentes.
+Una vez que tus AVAX han sido transferidos a la C-Chain, puedes usarlos para desplegar e interactuar con smart contracts
 
 ## Transferir desde la C-Chain a la X-Chain
 
@@ -262,6 +262,6 @@ La respuesta debería verse así:
 ¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDAwMjU5OTIsMTkyMjA0Nzg3NywxMz
-Q5OTg4Mzg0LDExMjgyNTEwOTNdfQ==
+eyJoaXN0b3J5IjpbLTc0NDEzODEwMywxOTIyMDQ3ODc3LDEzND
+k5ODgzODQsMTEyODI1MTA5M119
 -->
