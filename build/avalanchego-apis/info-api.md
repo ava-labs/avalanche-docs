@@ -83,9 +83,9 @@ curl -X POST --data '{
 
 ### info.getNetworkName
 
-Obtén el nombre de la red en la que el nodo  Get the name of the network this node is participating in.
+Obtén el nombre de la red en la que el nodo está participando.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNetworkName() -> {networkName:string}
@@ -115,15 +115,15 @@ curl -X POST --data '{
 
 ### info.getNodeID
 
-Get the ID of this node.
+Obtén el ID de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNodeID() -> {nodeID: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -147,15 +147,15 @@ curl -X POST --data '{
 
 ### info.getNodeIP
 
-Get the IP of this node.
+Obtén el IP de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 info.getNodeIP() -> {ip: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMwMTczODM1MF19
+eyJoaXN0b3J5IjpbMjUxMzA5NzI4XX0=
 -->
