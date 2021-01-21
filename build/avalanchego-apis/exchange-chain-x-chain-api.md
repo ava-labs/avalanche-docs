@@ -1670,12 +1670,12 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` es un arreglo de objetos literales que cada uno contiene un `assetID`,` amount` y `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
-
+* `outputs` es un arreglo de objetos literales, cada uno contiene un `assetID`,` amount` y `to`.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* Puede adjuntar un  `memo`, cuya longitud puede ser de hasta 256 bytes.
+* El activo se envía desde direcciones controladas por el usuario "username". \ (Por supuesto, ese usuario deberá mantener al menos el saldo del activo que se envía. \)
+* 
 #### **Llamada de ejemplo**
 
 ```cpp
@@ -1719,11 +1719,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyNTQyNjc4OSw1NTM1NzE4MTksMTgzNT
-QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
-OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
-wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
-MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
-k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
-LC0xOTk1NDY3NDYwXX0=
+eyJoaXN0b3J5IjpbLTEzMzExODI2MTAsNTUzNTcxODE5LDE4Mz
+U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
+Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
+EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
+MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
+Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
+MSwtMTk5NTQ2NzQ2MF19
 -->
