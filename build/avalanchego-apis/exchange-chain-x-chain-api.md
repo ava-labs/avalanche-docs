@@ -1073,7 +1073,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto da la respuesta:
 
 ```cpp
 {
@@ -1096,7 +1096,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Como `numFetched` es menor que `limit`, sabemos que hemos terminado de obtener los UTXO y no es necesario volver a llamar a este método.
 
 Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyODcyMDM2MCwtMTUyMzA5ODEzOCwtMT
-Y0ODkyMDE3NywxMTE4ODMzOTYwLC0xODI3MTM0MzgyLC03Mzcy
-ODAyNDQsMTk4ODg1MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNz
-g4LDEwNzQ5NjY2NzYsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0x
-OTIzNTY5NDc1LDE3MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzND
-MxMzMwMSwtMzUxMjk1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0
-NDUsNjM4MzY1ODE4XX0=
+eyJoaXN0b3J5IjpbODk5Mjk5NzQ5LC0xNTIzMDk4MTM4LC0xNj
+Q4OTIwMTc3LDExMTg4MzM5NjAsLTE4MjcxMzQzODIsLTczNzI4
+MDI0NCwxOTg4ODUyMjQxLC05NTE4NzY2MzMsLTEwMjg2NjI3OD
+gsMTA3NDk2NjY3NiwyMDAzMzIyMDUsLTE3MDM1MTMxNjUsLTE5
+MjM1Njk0NzUsMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0Mz
+EzMzAxLC0zNTEyOTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0
+NSw2MzgzNjU4MThdfQ==
 -->
