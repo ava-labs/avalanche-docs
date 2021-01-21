@@ -234,7 +234,7 @@ Ahora añadamos el mismo nodo a una subnet. Lo siguiente tendrá más sentido si
 
 Supongamos que la Subnet tiene la ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, límite 2, y que `username` tiene al menos 2 llaves de control.
 
-Para agregar el validador, ejecutaremos el método API [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
+Para agregar el validador, ejecutaremos el método API [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Su firma es:
 
 ```cpp
 platform.addSubnetValidator(
@@ -366,7 +366,7 @@ El comando completo es:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1NjEzNTkwNiwtNzE5NTM2Mjg4LC0xMT
+eyJoaXN0b3J5IjpbMTQxMjUyMjk2NSwtNzE5NTM2Mjg4LC0xMT
 EyMzcwMjY4LC01NDAwNTg2NjYsLTgyMzUwMjU0NiwyODIwNzA4
 MTEsMzMyNzc3NDg3LC0xODI5ODU3MTg3LC0xMzQ0MzMwNjQ4LD
 MyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkz
