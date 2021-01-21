@@ -2,7 +2,7 @@
 descripción: La X-Chain o Cadena X es una instancia de la Máquina Virtual de Avalanche (AVM)
 ---
 
-# Cadena de Intercambio \(X-Chain\) API
+# API de la Cadena de Intercambio \(X-Chain\)
 
 La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma nativa de Avalanche para crear e intercambiar activos, es una intancia de la Máquina Virtual de Avalanche \(AVM\). Esta API permite a los clientes crear e intercambiar activos en la X-Chain y otras instancias de la AVM.
 
@@ -1719,11 +1719,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0NjU3MjQyLDU1MzU3MTgxOSwxODM1ND
-IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
-NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
-05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
-MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
-YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
-LTE5OTU0Njc0NjBdfQ==
+eyJoaXN0b3J5IjpbMTk3MjYyODQ3NCw1NTM1NzE4MTksMTgzNT
+QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
+OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
+wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
+MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
+k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
+LC0xOTk1NDY3NDYwXX0=
 -->
