@@ -1,4 +1,4 @@
-# Ejecute un Nodo de Avalanche en Linux Usando el Script de Instalación
+# Ejecuta un Nodo de Avalanche en Linux Usando el Script de Instalación
 
 Tenemos un script de shell que instala AvalancheGo en tu computadora. Este script establece un nodo de ejecución completo en cuestión de minutos con un mínimo de entradas del usuario.
 
@@ -241,7 +241,8 @@ Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDk2NzMzMDYsMTIxNDA2MjIzOCwtND
-M0ODczMDQ0LC04NTc0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1
-NzY4NTYsLTE1NjYzMDE1ODgsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbMTU5MTQyODM5NCwtMTA0OTY3MzMwNiwxMj
+E0MDYyMjM4LC00MzQ4NzMwNDQsLTg1NzQzNTE1MCwtMjA4NTkw
+MzgxMywtMTc3MzU3Njg1NiwtMTU2NjMwMTU4OCwtMzU2ODg1Mz
+I0XX0=
 -->
