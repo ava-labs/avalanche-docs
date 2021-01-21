@@ -174,7 +174,7 @@ Esto debería darnos:
 
 ### Verifique el Balance
 
-Los 10 millones de activos están siendo controlador por la dirección `to` que especificamos en `mint`. Para verificar esto, usaremos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Los 10 millones de activos están siendo controlados por la dirección `to` que especificamos en `mint`. Para verificar esto, usaremos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -249,12 +249,12 @@ La respuesta debería ser:
 
 En este tutorial:
 
-* Usamos`createVariableCapAsset` para crear un activo de capital variable que represente las acciones.
-* Usamos`mint` para acuñar más unidades de un activo.
-* Usamos`getBalance` para comprobar los saldos de las direcciones.
-* Usamos`send` para transferir acciones.
+* Usamos `createVariableCapAsset` para crear un activo de capital variable que represente las acciones.
+* Usamos `mint` para acuñar más unidades de un activo.
+* Usamos `getBalance` para comprobar los saldos de las direcciones.
+* Usamos `send` para transferir acciones.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzcyNjc1MTczLC03OTIyMTM3MjEsMTA4Nz
-g3NzAxMywtMTEzNTAwNTE2MV19
+eyJoaXN0b3J5IjpbMTQzMTY2OTYwOCwtNzkyMjEzNzIxLDEwOD
+c4NzcwMTMsLTExMzUwMDUxNjFdfQ==
 -->
