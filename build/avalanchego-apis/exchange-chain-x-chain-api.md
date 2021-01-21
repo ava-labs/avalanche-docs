@@ -950,7 +950,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 * `Accepted`: La transacción es \(o será\) acceptada por cada nodo.
 * `Processing`: La transacción está siendo votada por este nodo.
 * `Rejected`: La transacción. no será aceptado por ningún nodo en la red.
-* `Unknown`: The transaction hasn’t been seen by this node
+* `Unknown`: La transacción no ha sido vista por este nodo.
 
 #### **Llamada de ejemplo**
 
@@ -979,7 +979,7 @@ curl -X POST --data '{
 
 ### avm.getUTXOs
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+Obtén los UTXOs referenciados a cierta direccioń. Si la cadena de origen (sourceChain) es especificada, entonces  it will retrieve the atomic UTXOs exported from that chain to the X Chain.
 
 #### **Firma**
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4NzA0MzE2OCwtMTY0ODkyMDE3NywxMT
-E4ODMzOTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1
-MjI0MSwtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2Nz
-YsMjAwMzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3
-MjQwNDk2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMj
-k1NjgxLC0xOTk1NDY3NDYwLDE2MDAxNDA0NDUsNjM4MzY1ODE4
-LC0xMDQ4MDQxMjcyXX0=
+eyJoaXN0b3J5IjpbLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMT
+ExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4
+NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Nj
+c2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwx
+NzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MT
+I5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgx
+OCwtMTA0ODA0MTI3Ml19
 -->
