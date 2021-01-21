@@ -79,7 +79,7 @@ Si la llamada es exitosa, la respuesta se verá así:
 
 Si el método de API invocado devuelve un error, la respuesta tendrá un campo `error`  en lugar de `result`. Además, hay un campo adicional, `data` que contiene información adicional sobre el error que ocurrió.
 
-Dicha respuesta  verse como:Such a response would look like:
+Dicha respuesta se verá como:
 
 ```cpp
 {
@@ -93,7 +93,7 @@ Dicha respuesta  verse como:Such a response would look like:
 }
 ```
 
-## Other API Formats
+## Otros Formatos de API
 
 Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
 
@@ -102,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNDQ2NDk5M119
+eyJoaXN0b3J5IjpbLTE0NzE3MTcxNTNdfQ==
 -->
