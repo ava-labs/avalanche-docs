@@ -85,7 +85,7 @@ sudo cp -r {consoles,console_libraries} /etc/prometheus/
 sudo cp prometheus.yml /etc/prometheus/
 ```
 
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
+`/etc/prometheus` es usado para configuración y `/var/lib/prometheus` para datos.
 
 Preparemos Prometheus para que funcione como un servicio del sistema. Ejecuta **:**
 
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODc4NzU4MzAsMjA2NTI0NTc2Niw3Nz
-QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
-NjNdfQ==
+eyJoaXN0b3J5IjpbLTQ2MDEwMzU5OSwyMDY1MjQ1NzY2LDc3ND
+AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
+M119
 -->
