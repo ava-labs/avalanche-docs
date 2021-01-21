@@ -110,7 +110,7 @@ Después de hacer clic en el botón, un pop-up aparecerá y lo confirmaremos.
 
 ![Image for post](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
 
-Aparecerá otro pop-up, una confirmación de metamask. Confirmala.
+Aparecerá otro pop-up, una confirmación de metamask. Confírmala.
 
 Después de confirmar todos estos pop-ups hemos desplegado nuestro Token para la C-Chain de Avalanche. Así que podemos empezar a interactuar con el.
 
@@ -159,8 +159,8 @@ Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los 
 Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de remix o de metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Nzc4MDUyOTQsLTE5OTkxMjYxNzMsLT
-E0NjQwOTQzMjcsLTE0MzQ1MTc0NjgsMTcxNzg0ODUwMiwxNjIx
-ODkzMDY0LC0xNTUwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwND
-c4XX0=
+eyJoaXN0b3J5IjpbNjg3MTMzNTkwLC0xOTk5MTI2MTczLC0xND
+Y0MDk0MzI3LC0xNDM0NTE3NDY4LDE3MTc4NDg1MDIsMTYyMTg5
+MzA2NCwtMTU1MDg2OTY0Myw3ODg4NTAxMTYsLTQyMDI4MDQ3OF
+19
 -->
