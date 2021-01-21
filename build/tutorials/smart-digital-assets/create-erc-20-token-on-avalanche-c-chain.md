@@ -96,7 +96,7 @@ Abre la segunda pestaña que es **“SOLIDITY COMPILER”** y selecciona la vers
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haga clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto ** “ACCOUNT”**.
+Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto ** “ACCOUNT”**.
 
 Lo último antes del proceso de despliegue es establecer el contrato que se desplegará como un token. Sobre el botón **Deploy**, hay un menú desplegable para seleccionar un contrato. Selecciona el contrato llamado "ERC20PresetMinterPauser.sol".
 
@@ -159,8 +159,8 @@ Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los 
 Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de remix o de metamask.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4Nzg0ODQzOCwtMTk5OTEyNjE3MywtMT
-Q2NDA5NDMyNywtMTQzNDUxNzQ2OCwxNzE3ODQ4NTAyLDE2MjE4
-OTMwNjQsLTE1NTA4Njk2NDMsNzg4ODUwMTE2LC00MjAyODA0Nz
-hdfQ==
+eyJoaXN0b3J5IjpbLTE4Nzc4MDUyOTQsLTE5OTkxMjYxNzMsLT
+E0NjQwOTQzMjcsLTE0MzQ1MTc0NjgsMTcxNzg0ODUwMiwxNjIx
+ODkzMDY0LC0xNTUwODY5NjQzLDc4ODg1MDExNiwtNDIwMjgwND
+c4XX0=
 -->
