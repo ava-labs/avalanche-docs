@@ -276,15 +276,16 @@ AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versi�
 ./avalanchego-installer.sh
 ```
 
-Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estado del servicio de AvalancheGo, ejecuta `sudo systemctl status avalanchego.`
+Tu máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estado del servicio de AvalancheGo, ejecuta `sudo systemctl status avalanchego.`
 
 ## Terminamos!
 
-¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
+¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para tu nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no te sorprendas cuando llegue la factura. Si tienes algún comentario sobre este tutorial, o cualquier otra cosa, envíanos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU1OTAyMDgzMSwxMTU5NTY2MzIxLDIxMT
-IxNDY4OTYsMzI3MDEwNTY1LDE5NDAwNDk0MDEsNDY2MDkxNDkx
-LC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3Mjg2Nj
-U3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbLTE3MzMyMzEwNzIsMTU1OTAyMDgzMSwxMT
+U5NTY2MzIxLDIxMTIxNDY4OTYsMzI3MDEwNTY1LDE5NDAwNDk0
+MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MT
+AyNzg0NSw3Mjg2NjU3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNd
+fQ==
 -->
