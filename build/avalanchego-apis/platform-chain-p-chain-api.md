@@ -1,4 +1,4 @@
-# Platform Chain \(P-Chain\) API
+# API de la Cadena de Plataforma \(P-Chain\) 
 
 This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
 
@@ -1803,5 +1803,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MjA1NzA4XX0=
+eyJoaXN0b3J5IjpbMjE1NjcxNTYwXX0=
 -->
