@@ -14,7 +14,7 @@ En este tutorial podrás:
 * Agregar fondos a tu cuenta de Metamask
 * Cargar el contrato de  WAVAX en Remix
 * Conectar con el contrato de WAVAX pre-desplegado
-* Convierte AVAX en WAVAX y viceversa
+* Convertir AVAX en WAVAX y viceversa
 * Añade WAVAX como un token personalizado a Metamask
 
 ## Conectar Metamask
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzMDAyOTExNSwxMTc0Mzk2OTQwLDQ3Nz
-M3NzkzNCwtMzY5MjMyOTk4LDExNzcyNjY5NDgsMTcwNDU1Mjc3
-OCwxNjY4OTM0MjQ4LC0xMTgyNTczMjUwLDY3OTY3NjcwOSwtMT
-g2ODU1NDE1OV19
+eyJoaXN0b3J5IjpbMzQwNDg3ODIsLTIzMDAyOTExNSwxMTc0Mz
+k2OTQwLDQ3NzM3NzkzNCwtMzY5MjMyOTk4LDExNzcyNjY5NDgs
+MTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTczMjUwLDY3OT
+Y3NjcwOSwtMTg2ODU1NDE1OV19
 -->
