@@ -269,7 +269,7 @@ Primero, convertimos la cadena codificada Base58Check que se se proporciona desd
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
 ```
 
-expresada en hexadecimal como:
+Expresada en hexadecimal como:
 
 ```cpp
 00 00 7d 07 0d 1e fe a6 4e 45 09 05 c6 11 ee b1 cf 61 9f 21 22 eb 17 db aa ea 9a fe 2d ff 17 be 27 6b 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0b 00 00 00 00 00 00 00 08 41 56 41 20 4c 61 62 73 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
@@ -294,7 +294,7 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Ten en cuenta que el `TypeID` is `00 00 00 0b` el cual es el tipo correcto de identificación para una [Salida de Transferencia NFT](../../references/avm-transaction-serialization.md#nft-transfer-output). Además, tenga en cuenta que la carga útil está incluida.
+Ten en cuenta que el `TypeID` is `00 00 00 0b` el cual es el tipo correcto de identificación para una [Salida de Transferencia NFT](../../references/avm-transaction-serialization.md#nft-transfer-output). Además, ten en cuenta que la carga útil está incluida.
 
 ## Enviar el NFT
 
@@ -314,7 +314,7 @@ Ahora puedes enviar el NFT a quién quieras. Para hacer eso usa el Método API [
 
 **Respuesta**
 
-* `txID` Es el ID de la transacción.
+* `txID` es el ID de la transacción.
 * `changeAddr` esta es la dirección donde se envió el cambio
 
 ```cpp
@@ -357,6 +357,6 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyNjEyMTQwNiwxODQ3NjUyODY3LC0xMj
-M4NzkzNjYxXX0=
+eyJoaXN0b3J5IjpbMTg1OTM5NTMwNCwtNTI2MTIxNDA2LDE4ND
+c2NTI4NjcsLTEyMzg3OTM2NjFdfQ==
 -->
