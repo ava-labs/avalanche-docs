@@ -1541,7 +1541,7 @@ curl -X POST --data '{
 
 Envía una transacción firmada a la red y asume que se aceptará la transacción. `encoding` especifica el formato de la transacción firmada. Pueden ser cualquiera de “cb58” o “hex”. Predeterminado en “cb58”.
 
-Esta llamada se realiza al punto final de la API de la wallet:This call is made to the wallet API endpoint:
+Esta llamada se realiza al extremo de la API de la wallet:
 
 `/ext/bc/X/wallet`
 
@@ -1584,9 +1584,9 @@ curl -X POST --data '{
 
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Envía una cantidad de un activo a una dirección y asume que la tx será aceptada para que futuras llamadas puedan usar el conjunto UTXO modificado.
 
-This call is made to the wallet API endpoint:
+Esta llamadThis call is made to the wallet API endpoint:
 
 `/ext/bc/X/wallet`
 
@@ -1719,11 +1719,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MzQzMzk5OTEsNTUzNTcxODE5LDE4Mz
-U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
-Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
-EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
-MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
-Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
-MSwtMTk5NTQ2NzQ2MF19
+eyJoaXN0b3J5IjpbMTYwODMxMjUxOCw1NTM1NzE4MTksMTgzNT
+QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
+OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
+wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
+MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
+k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
+LC0xOTk1NDY3NDYwXX0=
 -->
