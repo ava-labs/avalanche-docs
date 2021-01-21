@@ -342,7 +342,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0MTYzMzk0MiwyNTEzMDk3MjhdfQ==
+eyJoaXN0b3J5IjpbLTIyODI0NTU4NSwyNTEzMDk3MjhdfQ==
 -->
