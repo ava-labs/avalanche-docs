@@ -1011,11 +1011,11 @@ avm.getUTXOs({
 * Si `startIndex` se omite, buscará todos los UTXOs hasta el límite (`limit`).
 * Cuando se usa paginación \(cuando se provee un `startIndex` \), no se garantiza que los UTXOs sean únicos a lo largo de multiples llamadas. Esto es, una UTXO puede aparecer en el resultado de una primer llamada, y nuevamente en una segunda llamada.
 * Cuando se usa paginación, no se garantiza la consistencia a lo largo de multiples llamadas. Esto es, el conjunto de UTXO de una dirección puede haber cambiado entre llamadas.
-* `encoding` establece el fosets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` establece el formato en que se devuelven los UTXOs. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-#### **Example**
+#### **Ejemplo**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+Supón que deseamos todos los UTXOs que hacen referencia a al menos una de las direcciones  `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` y `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
 
 ```cpp
 curl -X POST --data '{
@@ -1030,7 +1030,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MTc4Njg3MzcsLTE1MjMwOTgxMzgsLT
+eyJoaXN0b3J5IjpbLTEwMTA2NDgyMzksLTE1MjMwOTgxMzgsLT
 E2NDg5MjAxNzcsMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNzM3
 MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mj
 c4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwt
