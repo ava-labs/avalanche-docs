@@ -55,7 +55,7 @@ Al principio, las redes blockchains tenían una Máquina Virtual \(VM\) con un c
 
 La gente que quería aplicaciones descentralizadas personalizadas tenía que crear su propia red de blockchains completamente nueva desde cero. Hacerlo requería una gran cantidad de tiempo y esfuerzo, ofrecía una seguridad limitada, y generalmente resultaba en una blockchain frágil a medida que nunca se ponía en marcha.
 
-Ethereum dio un paso hacia la solución de este problema con smart contracts. Los desarrolladores no necesitaban preocuparse por la red y el consenso, pero crear aplicaciones descentralizadas seguía siendo difícil. Las Ethereum VM tienen un bajo rendimiento e imponen restricciones a los desarrolladores de smart contracts. Solidity y los otros pocos lenguajes para escribir smart contracts de Ethereum son desconocidos para la mayoría de los programadores.
+Ethereum dio un paso hacia la solución de este problema con los  smart contracts. Los desarrolladores no necesitaban preocuparse por la red y el consenso, pero crear aplicaciones descentralizadas seguía siendo difícil. Las Ethereum VM tienen un bajo rendimiento e imponen restricciones a los desarrolladores de smart contracts. Solidity y los otros pocos lenguajes para escribir smart contracts de Ethereum son desconocidos para la mayoría de los programadores.
 
 Las VMs de Avalanche \(AVMs\) hacen fácil definir una aplicación descentralizada basada en blockchains. En lugar de nuevos y limitados lenguajes como Solidity, los desarrolladores pueden escribir VMs en Go \(otros lenguajes serán soportados en el futuro\).
 
@@ -92,6 +92,6 @@ La **C-Chain** permite la creación de smart contracts usando el [API de la C-Ch
 La C-Chain es una instancia de la Ethereum Virtual Machine impulsada por [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzOTE5MDU3Miw2Nzk4MDEwMTMsNjM5MD
-I1MDc3LDkzMDMwMzU5NF19
+eyJoaXN0b3J5IjpbLTE3NjYwMDc0MzIsLTgzOTE5MDU3Miw2Nz
+k4MDEwMTMsNjM5MDI1MDc3LDkzMDMwMzU5NF19
 -->
