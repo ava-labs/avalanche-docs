@@ -360,14 +360,14 @@ Abre Grafana; ahora puedes crear un tableros usando cualquiera de esas fuentes. 
 
 Para importar el tablero pre-configurado:
 
-* Abrir la interfaz web de Grafana
+* Abre la interfaz web de Grafana
 * Haz clic en `+` en la barra de herramientas de la izquierda
 * Seleccione `Import JSON` y luego suba el archivo JSON
 
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTczMTk3OTg5LDIwNjUyNDU3NjYsNzc0MD
-AxOTAzLC0xMDIzMDA0MDMwLC05MDY1Mjg5MTAsNDA5MjgxNTYz
-XX0=
+eyJoaXN0b3J5IjpbLTE2NjkwNzcwNDMsMjA2NTI0NTc2Niw3Nz
+QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
+NjNdfQ==
 -->
