@@ -13,7 +13,7 @@ Supongamos que queremos emitir un activo que represente acciones de una corporac
 
 ## Requisitos
 
-Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
+Haber completado [Iniciando en Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
 ## Create el Activo
 
@@ -255,6 +255,6 @@ En este tutorial:
 * Usamos `send` para transferir acciones.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzMTY2OTYwOCwtNzkyMjEzNzIxLDEwOD
+eyJoaXN0b3J5IjpbMTEyNTI4NTc3MCwtNzkyMjEzNzIxLDEwOD
 c4NzcwMTMsLTExMzUwMDUxNjFdfQ==
 -->
