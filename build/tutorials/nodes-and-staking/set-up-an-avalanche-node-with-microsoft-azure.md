@@ -163,15 +163,15 @@ Una vez que su instalación haya terminado, seleccione "Go to resource"
 
 ## Cambiar el Tamaño del Disco Provisto <a id="00dc"></a>
 
-Por defecto, la VM de Ubuntu estará provista de un SSD Premium de 30 GB, aunque esto debería ser suficiente, personalmente no quería la molestia de tener que extender esto más tarde en el período de staking. He incluido los pasos a continuación si desea aumentarlo a 64 GB o si alguna vez necesita aumentarlo en una fecha posterior.
+Por defecto, la VM de Ubuntu estará provista de un SSD Premium de 30 GB, aunque esto debería ser suficiente, personalmente no quería la molestia de tener que extender esto más tarde en el período de staking. He incluido los pasos a continuación si deseas aumentarlo a 64 GB o si alguna vez necesitas aumentarlo en una fecha posterior.
 
 ![Image for post](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
 
-Para cambiar el tamaño del disco, el VM necesita ser parado y colocado. Seleccione "Stop" y espere a que el estado muestre "deallocated". Luego seleccione "Disks" a la izquierda.
+Para cambiar el tamaño del disco, el VM necesita ser parado y colocado. Selecciona "Stop" y espera a que el estado muestre "deallocated". Luego selecciona "Disks" a la izquierda.
 
 ![Image for post](https://miro.medium.com/max/976/1*eUCBMgyQtEukvCyi3pm48g.png)
 
-Seleccione el nombre del disco que está provisto actualmente para modificarlo
+Selecciona el nombre del disco que está provisto actualmente para modificarlo
 
 ![Image for post](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzQwMDE1NjA1LDEwNDM5NTQzNTAsODc3ND
-Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
-LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
-IxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTQyMjE1NTcwOSwxMDQzOTU0MzUwLDg3Nz
+Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
+LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
+IyMTc4Njk0XX0=
 -->
