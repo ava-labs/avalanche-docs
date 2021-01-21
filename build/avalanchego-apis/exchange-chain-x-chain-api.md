@@ -846,7 +846,7 @@ curl -X POST --data '{
 
 ### avm.getBalance
 
-Get the balance of an asset controlled by a given address.
+Obtén el balance de un activo controlado por una dirección.
 
 #### **Firma**
 
@@ -857,7 +857,7 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
+* `address` dueño del activo.
 * `assetID` id of the asset for which the balance is requested
 
 #### **Llamada de ejemplo**
@@ -894,7 +894,7 @@ curl -X POST --data '{
 
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Regresa Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Firma**
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxNzQ3ODQyNCwtNzM3MjgwMjQ0LDE5OD
-g4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2
-Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NS
-wxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1
-MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NT
-gxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwt
-OTgxNDU4NjM2XX0=
+eyJoaXN0b3J5IjpbLTE5MjkyMjA2MzgsLTczNzI4MDI0NCwxOT
+g4ODUyMjQxLC05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2
+NjY3NiwyMDAzMzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0Nz
+UsMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0z
+NTEyOTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNj
+U4MTgsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3Njks
+LTk4MTQ1ODYzNl19
 -->
