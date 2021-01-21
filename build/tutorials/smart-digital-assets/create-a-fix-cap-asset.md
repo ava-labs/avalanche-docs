@@ -217,11 +217,11 @@ La respuesta debería ser:
 
 En este tutorial:
 
-* Ejecutamos`createFixedCapAsset` para crear un activo de capital fijo
-* Ejecutamos `getBalance` para comprobar los saldos de las direcciones
-* Ejecutamos`send` para transferir una cantidad de nuestro activo
+* Ejecutamos `createFixedCapAsset` para crear un activo de capital fijo
+* Ejecutamos  `getBalance` para comprobar los saldos de las direcciones
+* Ejecutamos `send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0NjU5NjQ3NCw5MTAxNDAzNzksMTA5MD
-UyMjQyOCwxNjE1NzM0MTYwXX0=
+eyJoaXN0b3J5IjpbLTE2Nzk1MjM2NjYsOTEwMTQwMzc5LDEwOT
+A1MjI0MjgsMTYxNTczNDE2MF19
 -->
