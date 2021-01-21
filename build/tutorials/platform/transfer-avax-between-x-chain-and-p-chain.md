@@ -164,7 +164,7 @@ El monto deducido es el monto exportado \(`.005` AVAX en este ejemplo\) además 
 
 ### Paso 2 - Importar AVAX a la P-Chain
 
-Nuestra transferencia no ha terminado todavía. Necesitamos ejecutar el método de la P-Chain[`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) para terminar la transferencia.
+Nuestra transferencia no ha terminado todavía. Necesitamos ejecutar el método de la P-Chain [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) para terminar la transferencia.
 
 Tu solicitud debería verse así:
 
@@ -304,6 +304,6 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5ODI0NDMwNSwxMzU3OTIwNDQ0LC0yNj
-E5MjQ4NzhdfQ==
+eyJoaXN0b3J5IjpbMzAxNzMyNzk5LDEzNTc5MjA0NDQsLTI2MT
+kyNDg3OF19
 -->
