@@ -48,10 +48,10 @@ health.getLiveness() -> {
 * `duration` es la duración de la última revisión de salud, en nanoseconds.
 * `contiguousFailures` número de revisiones de salud continuas que fallaron.
 * `timeOfFirstFailure` es el tiempo en que falló por primera vez la revisión
-*
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
 
-#### **Example Call**
+Más información de estas medidas pueden encontrase en la documentación de la librería[go-sundheit](https://github.com/AppsFlyer/go-sundheit).
+
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -61,9 +61,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
-In this example response, the C-Chain’s health check is failing.
+En la respuesta de ejemplo, la revisión the C-Chain’s health check is failing.
 
 ```cpp
 {
@@ -118,5 +118,6 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM4NDU3MTU5NiwtMTYxNjMzODc5NV19
+eyJoaXN0b3J5IjpbLTE1NTA1MTIwOTQsLTE2MTYzMzg3OTVdfQ
+==
 -->
