@@ -814,7 +814,7 @@ avm.getAssetDescription({assetID: string}) -> {
 * `assetID` es el id del activo del cual se solicita información.
 * `name` es el nombre humanamente-legible, no necesariamente único.
 * `symbol` es el símbolo del activo.
-* `denomination` determina cómo se visualizan los balances del activo en la interfaz de usuario determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `denomination` determina cómo se visualizan los balances del activo en la interfaz de usuario. Si la denominación es 0, entonces 100 unidades del activo se desplegarán como 100. Si la denominación es 1, entonces 100 unidades del activo se mostrarán como 10.0. Si la denominación es 2, 100 unidades del activo se visualizarán como .100, etc.
 
 #### **Llamada de ejemplo**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwNTEyNTMwOSwtNzM3MjgwMjQ0LDE5OD
+eyJoaXN0b3J5IjpbMTYxNzQ3ODQyNCwtNzM3MjgwMjQ0LDE5OD
 g4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2
 Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NS
 wxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1
