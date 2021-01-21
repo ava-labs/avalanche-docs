@@ -219,9 +219,9 @@ Revisa si una cadena ha terminado de inicializar (bootstrapping).
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
-`chain` es elis the ID or alias of a chain.
+`chain` es el ID o alias de una cadena.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -234,7 +234,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -248,7 +248,7 @@ curl -X POST --data '{
 
 ### info.peers
 
-Get a description of peer connections.
+Obtén una descripción de las conexiones con pares.
 
 #### **Signature**
 
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NTM1MjU4NCwyNTEzMDk3MjhdfQ==
+eyJoaXN0b3J5IjpbNTI4NDgxMTgyLDI1MTMwOTcyOF19
 -->
