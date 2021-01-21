@@ -56,16 +56,11 @@ curl -X POST --data '{
 * `params` especifica los argumentos del método.
 * `id` es el ID de esta solicitud. Los ID de solicitud deben ser únicos.
 
-¡Eso es!
-* `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
-* `params` specifies the arguments to the method.
-* `id` is the ID of this request. Request IDs should be unique.
+¡Eso es todo!
 
-That’s it!
+### Respuestas JSON RPC Exitosas 
 
-### JSON RPC Success Response
-
-If the call is successful, the response will look like this:
+Si la llamada es exitosa, la respuesta se verá así:
 
 ```cpp
 {
@@ -77,8 +72,8 @@ If the call is successful, the response will look like this:
 }
 ```
 
-* `id` is the ID of the request that this response corresponds to.
-* `result` is the returned values of `getTxStatus`.
+* `id` es el ID de la solicitud a la que corresponde esta respuesta.
+* `result` es el valor devis the returned values of `getTxStatus`.
 
 ### JSON RPC Error Response
 
@@ -107,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjUzOTg1OTIwXX0=
+eyJoaXN0b3J5IjpbLTEzOTk0NDM5MTJdfQ==
 -->
