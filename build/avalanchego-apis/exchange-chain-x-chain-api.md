@@ -894,7 +894,7 @@ curl -X POST --data '{
 
 ### avm.getTx
 
-Regresa Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Regresa una transacción específica. El parámetro `encoding` establece el formato en el que se regresa la transacción. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
 #### **Firma**
 
@@ -937,7 +937,7 @@ curl -X POST --data '{
 
 ### avm.getTxStatus
 
-Get the status of a transaction sent to the network.
+Obtén el estado de una transacción enviada a la red.
 
 #### **Firma**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjkyMjA2MzgsLTczNzI4MDI0NCwxOT
+eyJoaXN0b3J5IjpbLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOT
 g4ODUyMjQxLC05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2
 NjY3NiwyMDAzMzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0Nz
 UsMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0z
