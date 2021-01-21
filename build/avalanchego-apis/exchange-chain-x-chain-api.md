@@ -1373,7 +1373,7 @@ avm.send({
 
 * Envía el monto (`amount`)  de activos con el `assetID` a una dirección `to`. `amount`  es denominado con el menor incremento del activo. Para AVAX esto es 1 nAVAX \(una mil millonesima parte de 1 AVAX.\)
 * `to` es la dirección X-Chain address a la cual el activo se envío
-* `from` son las direcciones que quieres usar para esta operación. Si se omite, usa a alguna de tus direccionesare the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, usa alguna de tus direcciones según sea necesario.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * You can attach a `memo`, whose length can be up to 256 bytes.
 * The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDA2MTg1MjYsNTUzNTcxODE5LDE4Mz
-U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
-Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
-EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
-MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
-Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
-MSwtMTk5NTQ2NzQ2MF19
+eyJoaXN0b3J5IjpbOTcwMzk5NDIxLDU1MzU3MTgxOSwxODM1ND
+IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
+NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
+05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
+MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
+YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
+LTE5OTU0Njc0NjBdfQ==
 -->
