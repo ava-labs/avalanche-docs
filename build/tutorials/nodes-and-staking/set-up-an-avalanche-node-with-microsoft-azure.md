@@ -10,7 +10,7 @@ La ejecución de un nodo validador no sólo te permite recibir recompensas en AV
 
 Sólo se necesitan unos modestos requisitos de hardware, 2 núcleos de CPU, 4 GB de memoria y 40 GB de SSD para ejecutar un validador y no utiliza enormes cantidades de energía. El  [mecanismo revolucionario de consenso](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) de Avalanche es capaz de escalar a millones de validadores participando en el consenso a la vez, ofreciendo una descentralización sin precedentes.
 
-Actualmente, la cantidad mínima requerida para ser validador es de 2.000 AVAX. \(que puede reducirse con el tiempo a medida que aumenta el precio\). Como alternativa, los validadores también pueden cobrar una pequeña cuota para permitir a los usuarios delegar su participación en ellos para ayudar a sufragar los gastos de funcionamiento. Se puede utilizar una calculadora [aquí](https://vscout.io/) para ver cuántas recompensas ganarías al operar un nodo, en comparación con delegar.
+Actualmente, la cantidad mínima requerida para ser validador es de 2 000 AVAX. \(que puede reducirse con el tiempo a medida que aumenta el precio\). Como alternativa, los validadores también pueden cobrar una pequeña cuota para permitir a los usuarios delegar su participación en ellos para ayudar a sufragar los gastos de funcionamiento. Se puede utilizar una calculadora [aquí](https://vscout.io/) para ver cuántas recompensas ganarías al operar un nodo, en comparación con delegar.
 
 Aliento a todos a ejecutar sus propios validadores cuando sea posible, pero para aquellos que no cumplen con los requisitos mínimos de staking y quieren delegar estoy actualmente ejecutando un nodo que se puede encontrar [aquí](https://avascan.info/staking/validator/NodeID-MGrikMRTmooL1j7uawPHjaMS1cXkbewdb).
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDI2MTc2MDA3LDEwNDM5NTQzNTAsODc3ND
-Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
-LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
-IxNzg2OTRdfQ==
+eyJoaXN0b3J5IjpbMTM2MzQyODIxNywxMDQzOTU0MzUwLDg3Nz
+Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
+LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
+IyMTc4Njk0XX0=
 -->
