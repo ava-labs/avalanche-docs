@@ -69,7 +69,7 @@ Pega esa dirección en el faucet, prueba que no eres un robot, y luego solicita 
 
 ## Cargar contrato de WAVAX en Remix
 
-Remix es una popular herramienta basada en un navegador para escribir, desplegar e interactuar con smart contracts. Navegue hasta [Website de Remix](https://remix.ethereum.org/). Desplácese hacia abajo hasta que vea las opciones para importar smart contracts.
+Remix es una popular herramienta basada en un navegador para escribir, desplegar e interactuar con smart contracts. Navega hasta el [Website de Remix](https://remix.ethereum.org/). Desplázate hacia abajo hasta que veas las opciones para importar smart contracts.
 
 ![Import from GitHub](../../../.gitbook/assets/wavax2avax-03-remix-import.png)
 
@@ -83,7 +83,7 @@ En el menú de la izquierda, cambia a la pestaña **Compile**:
 
 ![Compile](../../../.gitbook/assets/wavax2avax-05-compile.png)
 
-Compruebe que la versión del compilador es compatible con el contrato, como se muestra. Presiona **Compilar WAVAX.sol**, y comprueba que el contrato WAVAX ha aparecido en el campo `CONTRACT` de abajo. Ahora estás listo para conectarte al contrato WAVAX, que ya ha sido desplegado en la red de Avalanche.
+Comprueba que la versión del compilador es compatible con el contrato, como se muestra. Presiona **Compilar WAVAX.sol**, y comprueba que el contrato WAVAX ha aparecido en el campo `CONTRACT` de abajo. Ahora estás listo para conectarte al contrato WAVAX, que ya ha sido desplegado en la red de Avalanche.
 
 ## Conecta con el contrato de WAVAX
 
@@ -91,7 +91,7 @@ Cambiate a la pestaña **Deploy & Run Tranasactions** en el lado izquierdo.
 
 ![Connect](../../../.gitbook/assets/wavax2avax-06-deploy.png)
 
-Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Environment**, seleccione `Injected Web3`.  Metamask te pedirá que selecciones la cuenta. Elige la que está conectada a Avalanche y permite que se conecte. Esto rellenará el campo **Cuenta**. Asegúrate de que el campo **Contract** está configurado para el contrato `WAVAX`. Ahora podemos conectarnos al contrato, que ya ha sido publicado en Avalanche. En el campo de edición **At Address**, copia:
+Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Environment**, selecciona `Injected Web3`.  Metamask te pedirá que selecciones la cuenta. Elige la que está conectada a Avalanche y permite que se conecte. Esto rellenará el campo **Cuenta**. Asegúrate de que el campo **Contract** está configurado para el contrato `WAVAX`. Ahora podemos conectarnos al contrato, que ya ha sido publicado en Avalanche. En el campo de edición *At Address**, copia:
 
 * Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
 * Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
@@ -141,7 +141,7 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzMTQ4MjEzOCwtMjMwMDI5MTE1LDExNz
+eyJoaXN0b3J5IjpbMTYxMzM2MTU0MSwtMjMwMDI5MTE1LDExNz
 QzOTY5NDAsNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3NzI2Njk0
 OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMyNTAsNj
 c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
