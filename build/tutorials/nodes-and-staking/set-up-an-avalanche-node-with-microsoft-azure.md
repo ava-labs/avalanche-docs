@@ -40,7 +40,7 @@ Si quieres usar el precio de Spot Instance VM \(que será considerablemente más
 
 ![Image for post](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
 
-Introduzca sus datos de facturación y confirme su identidad como parte del proceso de registro, cuando llegue a Agregar soporte técnico seleccione la opción sin soporte \(a menos que quieras pagar extra por soporte\) y presiona siguiente.
+Introduce tus datos de facturación y confirma tu identidad como parte del proceso de registro, cuando llegues a Agregar soporte técnico selecciona la opción sin soporte \(a menos que quieras pagar extra por soporte\) y presiona siguiente.
 
 ![Image for post](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2MzQyODIxNywxMDQzOTU0MzUwLDg3Nz
-Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
-LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
-IyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbNDc1OTIyODU0LDEwNDM5NTQzNTAsODc3ND
+Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
+LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
