@@ -945,11 +945,11 @@ Obtén el estado de una transacción enviada a la red.
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` puede s one of:
+`status` puede ser cualquiera de:
 
 * `Accepted`: La transacción es \(o será\) acceptada por cada nodo.
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
+* `Processing`: La transacción está siendo votada por este nodo.
+* `Rejected`: La transacciónThe transaction will never be accepted by any node in the network
 * `Unknown`: The transaction hasn’t been seen by this node
 
 #### **Llamada de ejemplo**
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDQ5MzMyNzQsMTExODgzMzk2MCwtMT
+eyJoaXN0b3J5IjpbLTE2NDg5MjAxNzcsMTExODgzMzk2MCwtMT
 gyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3
 NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNS
 wtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0y
