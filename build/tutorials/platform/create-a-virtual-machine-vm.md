@@ -716,11 +716,12 @@ curl -X POST --data '{
 
 En este tutorial, aprendimos:
 
-* La interfaz`snowman.ChainVM` que todos los VM que definen una cadena lineal deben implementar
-* La interfaz`snowman.Block`, que todos los bloques que forman parte de una cadena lineal deben implementar
-* Las librerías `core.SnowmanVM` y `core.Block`, que hacen que la definición de las VMs sea más rápida.
+* La interfaz `snowman.ChainVM` que todos los VM que definen una cadena lineal deben implementar
+* La interfaz `snowman.Block`, que todos los bloques que forman parte de una cadena lineal deben implementar
+* Las librerías  `core.SnowmanVM` y `core.Block`, que hacen que la definición de las VMs sea más rápida.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDQ0MDA3NzMsMTEyOTE0MTI5MSwtMT
-UwOTU2NDY5NCwtMjE2ODI3OTQzLDE0ODYxMzUwODldfQ==
+eyJoaXN0b3J5IjpbMTAzMzU5NzYzNSwtMTEwNDQwMDc3MywxMT
+I5MTQxMjkxLC0xNTA5NTY0Njk0LC0yMTY4Mjc5NDMsMTQ4NjEz
+NTA4OV19
 -->
