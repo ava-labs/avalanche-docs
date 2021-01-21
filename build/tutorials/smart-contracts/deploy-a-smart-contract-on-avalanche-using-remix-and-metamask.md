@@ -54,7 +54,7 @@ En una red local, puede agregar fondos fácilmente a sus direcciones desplegando
 
 ## Paso 3: Conectar MetaMask y despliega un smart contract usando Remix
 
-Abre[Remix](https://remix.ethereum.org/) -&gt; Selecciona Solidity
+Abre [Remix](https://remix.ethereum.org/) -&gt; Selecciona Solidity
 
 ![remix file explorer](../../../.gitbook/assets/remix-file-explorer.png)
 
@@ -95,5 +95,5 @@ El ABI / Bytecode del smart contract están disponibles en la pestaña del compi
 Si tuviste alguna dificultad para seguir este tutorial o simplemente quieres hablar de Avalanche con nosotros, puedes unirte a nuestra comunidad en [Discord](https://chat.avalabs.org/)!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjc0MDcxMTNdfQ==
+eyJoaXN0b3J5IjpbNDcwMDY0MzAxLC0yMDI3NDA3MTEzXX0=
 -->
