@@ -279,7 +279,7 @@ Para evitar el spam, Avalanche requiere el pago de una comisión por la transacc
 
 Cuando envíes esta solicitud, el nodo te autentificará con tu nombre de usuario y contraseña. Luego, buscará a través de todas las [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controladas por tu usuario hasta que encuentre suficiente AVAX para satisfacer la petición.
 
-La respuesta contieneel ID de la transacción. Será diferente para cada invocación de `send`.
+La respuesta contiene el ID de la transacción. Será diferente para cada invocación de `send`.
 
 ```cpp
 {
@@ -362,8 +362,8 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQyMTIzNTA0MSwxNjQ4NzYwLDE4NjI5Mz
-A0NjQsMTMxMzI5OTk1NywxODI4Mzc5ODc0LC04MDAzODA4ODUs
-MTUwNTc2MjgxNywtMjA2Nzc4NDI1MCwtMTkyODQzNTM4MywtMT
-cyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbLTE3MTk4MzYyMDUsMTY0ODc2MCwxODYyOT
+MwNDY0LDEzMTMyOTk5NTcsMTgyODM3OTg3NCwtODAwMzgwODg1
+LDE1MDU3NjI4MTcsLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLT
+E3MjI2MTY1ODldfQ==
 -->
