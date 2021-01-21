@@ -945,7 +945,7 @@ Obtén el estado de una transacción enviada a la red.
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` is one of:
+`status` puede s one of:
 
 * `Accepted`: La transacción es \(o será\) acceptada por cada nodo.
 * `Processing`: The transaction is being voted on by this node
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNz
-M3MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2
-Mjc4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NS
-wtMTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTEx
-MzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMT
-QwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0
-LC00NDU4Mzc2OV19
+eyJoaXN0b3J5IjpbLTEyMDQ5MzMyNzQsMTExODgzMzk2MCwtMT
+gyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3
+NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNS
+wtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0y
+MzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NT
+Q2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3
+MiwtOTgwOTYxOTg0XX0=
 -->
