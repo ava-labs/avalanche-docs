@@ -315,7 +315,7 @@ sudo systemctl status node_exporter
 
 Ahora, estamos listos para unirlo todo.
 
-## Configurando los Trabajos de AvalancheGo  y node\_exporter Prometheus 
+## Configurando los Trabajos de AvalancheGo  y Prometheus node\_exporter  
 
 Asegúrate de que tu nodo de AvalancheGo funciona con los [argumentos de la línea de mando](../../references/command-line-interface.md) apropiados. La métrica API debe estar habilitada  \(la cual está habilitada por defecto\). Si usas el argumento CLI `--http-host` para hacer llamados API desde el exterior de la máquina anfitriona, tome nota de la dirección que utilizan los APIs.
 
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTgzODUzMSwyMDY1MjQ1NzY2LDc3ND
+eyJoaXN0b3J5IjpbMTIwNjE2Mjk1MywyMDY1MjQ1NzY2LDc3ND
 AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
 M119
 -->
