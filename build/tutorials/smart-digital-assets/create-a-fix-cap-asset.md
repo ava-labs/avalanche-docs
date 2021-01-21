@@ -9,7 +9,7 @@ Supongamos que hay un acuerdo de reparto de ingresos \(ISA\) con 10 millones de 
 
 ## Requisitos
 
-Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
+Haber completado [Iniciando en Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
 ## Crear el Activo
 
@@ -222,6 +222,6 @@ En este tutorial:
 * Ejecutamos`send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2MjI1MjQzLDEwOTA1MjI0MjgsMTYxNT
+eyJoaXN0b3J5IjpbOTEwMTQwMzc5LDEwOTA1MjI0MjgsMTYxNT
 czNDE2MF19
 -->
