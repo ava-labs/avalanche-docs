@@ -10,13 +10,19 @@ La API permite a los clientes interactuar con la cadena P o [P-Chain](../../lear
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Esta API usa formato RPC `json 2.0`.
 
-## Methods
+## Metodos
 
 ### platform.addDelegator
 
-Add a delegator to the Primary Network.
+Agrega un delegador a la Red Primaria.
+
+Un delegador apuesta por AVAX y especifica un validador \ (el delegado \) para validar en su nombre. El delegado tiene una mayor probabilidad de ser muestreado por otros validadores \ (peso \) en proporción a la participación que se le delega.
+
+El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la recompensa de validación del delegador \ (si corresponde. \) Una transacción que delega participación no tiene tarifa.
+
+El período de delegación debe ser un subconjunto del período en el que el delegado valida la red primaria.
 
 A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
 
@@ -1803,5 +1809,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTU3Njg4NTQ3OCwxNDkzMTk0Nzk5LDk3ND
+I5MDE1OV19
 -->
