@@ -18,13 +18,13 @@ La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer lla
 
 Dado el sobrenombre de una blockchain, obtiene el ID. \(Mira [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -37,7 +37,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -51,15 +51,15 @@ curl -X POST --data '{
 
 ### info.getNetworkID
 
-Get the ID of the network this node is participating in.
+Obtén el ID de la red en que el nodo está participando.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNetworkID() -> {networkID:int}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -69,7 +69,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -91,7 +91,7 @@ Get the name of the network this node is participating in.
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Example Call**
+#### **Llamada Example Call**
 
 ```cpp
 curl -X POST --data '{
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0MTkzOTcxM119
+eyJoaXN0b3J5IjpbLTIzMTA2MzM1NF19
 -->
