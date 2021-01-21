@@ -77,7 +77,7 @@ Selecciona un validador con el que quieras delegar tus tokens de la lista de val
 
 ![Image for post](https://miro.medium.com/max/1600/0*uNnT2PtjCslRKFbF)
 
-Especifique el período de stake y la cantidad. Preste atención a la hora de finalización del validador seleccionado. Su período de delegación no puede ser configurado para que termine después de la fecha de finalización que el validador ha establecido.
+Especifica el período de stake y la cantidad. Preste atención a la hora de finalización del validador seleccionado. Su período de delegación no puede ser configurado para que termine después de la fecha de finalización que el validador ha establecido.
 
 ![Image for post](https://miro.medium.com/max/1600/0*M_6_7L9jtYuPTp-A)
 
@@ -88,6 +88,6 @@ Confirma los detalles!
 Felicitaciones. ¡Ahora estás delegando en  la Red Primaria de Avalanche!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5MTkzNTgyMiwtMTgzMDM1MzE5OSw1MT
+eyJoaXN0b3J5IjpbLTM0ODc1NjkxNywtMTgzMDM1MzE5OSw1MT
 k0NzkyNjcsLTY2Njk3MDU3MV19
 -->
