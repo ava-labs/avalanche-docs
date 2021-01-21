@@ -33,10 +33,11 @@ keystore.createUser(
 ) -> {success:bool}
 ```
 
-* `username` y `password` pueden ser a lo más 1024 characters.
-* Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
+* `username` y `password` pueden ser a lo más 1024 caracteres.
+* La solicitud será rechazada si la contraseña (`password`) es muy débil. `password` 
+debe tener al menos 8 caracteres y contener letras mayúsculas y minúsculas, así como números y símbolos.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -50,7 +51,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -64,7 +65,7 @@ curl -X POST --data '{
 
 ### keystore.deleteUser
 
-Delete a user.
+Elimina un usuario.
 
 #### **Signature**
 
@@ -72,7 +73,7 @@ Delete a user.
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -225,5 +226,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2MDM1NjIxMl19
+eyJoaXN0b3J5IjpbNjgxMjI5MTEwXX0=
 -->
