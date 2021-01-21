@@ -96,7 +96,7 @@ Asegúrate de estar conectado a tu Metamask. En el menú desplegable de **Enviro
 * Para la Red Principal: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
 * Para la Red de Pruebas Fuji: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
-Después de pegar la dirección, pulse el botón **At Address*.
+Después de pegar la dirección, pulse el botón **At Address**.
 
 Remix debería encontrar el contrato desplegado:
 
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMjY5MjQ3LC0yMzAwMjkxMTUsMTE3ND
-M5Njk0MCw0NzczNzc5MzQsLTM2OTIzMjk5OCwxMTc3MjY2OTQ4
-LDE3MDQ1NTI3NzgsMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nz
-k2NzY3MDksLTE4Njg1NTQxNTldfQ==
+eyJoaXN0b3J5IjpbLTcwNzkwOTU4OSwtMjMwMDI5MTE1LDExNz
+QzOTY5NDAsNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3NzI2Njk0
+OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMyNTAsNj
+c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
 -->
