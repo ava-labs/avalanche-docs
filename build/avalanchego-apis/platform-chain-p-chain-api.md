@@ -495,7 +495,7 @@ curl -X POST --data '{
 Get the private key that controls a given address.  
 The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.exportKey({
@@ -540,7 +540,7 @@ curl -X POST --data '{
 
 Get the balance of AVAX controlled by a given address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBalance({
@@ -606,7 +606,7 @@ curl -X POST --data '{
 
 Get all the blockchains that exist \(excluding the P-Chain\).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBlockchains() ->
@@ -696,7 +696,7 @@ curl -X POST --data '{
 
 Get the status of a blockchain.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBlockchainStatus(
@@ -742,7 +742,7 @@ curl -X POST --data '{
 
 Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getCurrentSupply() -> {supply: int}
@@ -781,7 +781,7 @@ List the current validators of the given Subnet.
 
 The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getCurrentValidators({
@@ -906,7 +906,7 @@ curl -X POST --data '{
 
 Returns the height of the last accepted block.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getHeight() ->
@@ -942,7 +942,7 @@ curl -X POST --data '{
 
 Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getMinStake() -> 
@@ -979,7 +979,7 @@ curl -X POST --data '{
 
 List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getPendingValidators({
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0MDA1MDkwLC04MTI1Mjc1OTUsMTQ5Mz
+eyJoaXN0b3J5IjpbMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5Mz
 E5NDc5OSw5NzQyOTAxNTldfQ==
 -->
