@@ -95,7 +95,7 @@ La cantidad mínima que un delegado debe delegar es de 25 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Ten en cuenta que una vez emites la transacción tpara añadir tu stake a un delegador, no hay forma de cambiar los parámetros. **No puedes eliminar tu stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.**  Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Ten en cuenta que una vez emites la transacción para añadir tu stake a un delegador, no hay forma de cambiar los parámetros. **No puedes eliminar tu stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.**  Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
 ### Recompensas para Delegadores <a id="delegator-rewards"></a>
@@ -105,7 +105,7 @@ Si el validador en el que delega los tokens es lo suficientemente correcto y rec
 
 Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a su dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTM0MjczMjMsLTM1MzcwMTUxMywxND
+eyJoaXN0b3J5IjpbLTE1MjcwNzE3MDUsLTM1MzcwMTUxMywxND
 I2MzczNzQ2LDE1NzI3MzQzNiwtMTUzMzg0MDk5MiwtOTA1MzE3
 MzAwLDk5NTU1NDg4LDU0MjU2NzY0OCwtMzYyNzk5MzgxLDU3Nj
 gwNTk5MSwtNzE3NzE5ODExXX0=
