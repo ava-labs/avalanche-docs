@@ -1315,7 +1315,7 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
-List addresses controlled by the given user. Lista direcciónes controlados por el usuario asignado.
+Lista direcciónes controlados por un usuario dado.
 
 #### **Firma**
 
@@ -1354,7 +1354,7 @@ curl -X POST --data '{
 
 ### avm.send
 
-Send a quantity of an asset to an address.
+Envía una cantidad de un activo a una dirección.
 
 #### **Firma**
 
@@ -1371,7 +1371,7 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
+* Envía  `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
 * `to` is the X-Chain address the asset is sent to.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY0NDYwMjA5Niw1NTM1NzE4MTksMTgzNT
-QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
-OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
-wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
-MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
-k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
-LC0xOTk1NDY3NDYwXX0=
+eyJoaXN0b3J5IjpbMjg1NTM5MzQyLDU1MzU3MTgxOSwxODM1ND
+IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
+NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
+05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
+MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
+YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
+LTE5OTU0Njc0NjBdfQ==
 -->
