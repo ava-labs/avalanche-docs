@@ -729,9 +729,9 @@ Hagamos una entrada de pago con:
 ]
 ```
 
-## Signed Transaction
+## Transacción firmada
 
-A signed transaction contains an unsigned `AtomicTx` and credentials.
+Una transacción firmada o "Signed Transaction" contiene un `AtomicTx` sin firmar y credenciales.
 
 ### What Signed Transaction Contains
 
@@ -924,9 +924,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4MzI3MzM4MiwtMTg2MTkxNTY4LC0xMz
-UxNTQyODI1LDQ5NDQ0OTQxMiwxMjA3MjkwMjYzLDEwMjA3MjI0
-MzcsNDQ5NzExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMT
-YxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgz
-MTU0N119
+eyJoaXN0b3J5IjpbMTI1OTM0ODE3MCwxNjgzMjczMzgyLC0xOD
+YxOTE1NjgsLTEzNTE1NDI4MjUsNDk0NDQ5NDEyLDEyMDcyOTAy
+NjMsMTAyMDcyMjQzNyw0NDk3MTEyMDUsMTI2NjE3OTc5NCwxNT
+k4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAwNjcwOTMsLTE0MTkw
+MTg0ODAsLTc0ODMxNTQ3XX0=
 -->
