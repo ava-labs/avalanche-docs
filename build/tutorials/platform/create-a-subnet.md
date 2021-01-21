@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Una [subnet](../../../learn/platform-overview/#subnets) es un conjunto de validadores. Una subnet valida un conjunto de blockchains Cada blockchain es validada por exactamente una subnet, la cual se especifica en la creación de la blockchain. Las Subnets son una primitiva poderosa que permite la creación de blockchains autorizadas.
+Una [subnet](../../../learn/platform-overview/#subnets) es un conjunto de validadores. Una subnet valida un conjunto de blockchains. Cada blockchain es validada por exactamente una subnet, la cual se especifica en la creación de la blockchain. Las Subnets son una primitiva poderosa que permite la creación de blockchains autorizadas.
 
 Cuando se crea una subnet, se especifica un límite y un conjunto de control keys. \(En realidad las direcciones de las control keys están especificadas, no las control keys en sí.\) Para añadir un validador a esa subnet, _se necesitan las firmas de límite de esas control keys. Llamamos a esto las **control keys** de la subnet y llamamos a la firma de una control keys en una transacción que añade un validador a una subnet una **control signature.** El resultado es que una subnet tiene control sobre sus miembros.
 
@@ -137,5 +137,5 @@ La respuesta confirma que nuestra subnet fue creada:
 Este [tutorial](../nodes-and-staking/add-a-validator.md) te mostrará cómo añadir validadores a una subnet.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0NjAwOTcyOV19
+eyJoaXN0b3J5IjpbNDcyOTg1NDgzXX0=
 -->
