@@ -7,23 +7,23 @@
 
 ### Sitio Web y Redes Sociales
 
-[**SItio Web**](https://avax.network): el sitio web oficial de Ava Labs y Avalanche.
+[**SItio Web**](https://avax.network): El sitio web oficial de Ava Labs y Avalanche.
 
-[**GitHub**](https://github.com/ava-labs): el GitHub oficial de Ava Labs que aloja todos los repositorios públicos de Avalanche.
+[**GitHub**](https://github.com/ava-labs): El GitHub oficial de Ava Labs que aloja todos los repositorios públicos de Avalanche.
 
 [**Discord**](https://chat.avax.network): Discord oficial de Avalanche para que los desarrolladores y entusiastas participen en discusiones enfocadas.
 
-[**Twitter**](https://twitter.com/avalancheavax): el Twitter oficial de Avalanche para todas las noticias y actualizaciones importantes sobre Avalanche y su ecosistema.
+[**Twitter**](https://twitter.com/avalancheavax): El Twitter oficial de Avalanche para todas las noticias y actualizaciones importantes sobre Avalanche y su ecosistema.
 
-[**Forum**](https://forum.avax.network): el Foro oficial de Avalanche para las discusiones técnicas relacionados con Avalanche y su comunidad
+[**Forum**](https://forum.avax.network): El Foro oficial de Avalanche para las discusiones técnicas relacionados con Avalanche y su comunidad
 
-[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): una plataforma para el crecimiento de la comunidad que construye un ambiente inclusivo para todos los aspectos de Avalanche. Desde los esfuerzos de expansión hasta el desarrollo de código abierto, los miembros contribuyen directamente a las iniciativas cruciales de investigación, educación e ingeniería para ganar tokens de AVAX.
+[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): Una plataforma para el crecimiento de la comunidad que construye un ambiente inclusivo para todos los aspectos de Avalanche. Desde los esfuerzos de expansión hasta el desarrollo de código abierto, los miembros contribuyen directamente a las iniciativas cruciales de investigación, educación e ingeniería para ganar tokens de AVAX.
 
-[**Esta Semana en Avalanche**](https://weavax.substack.com/): un boletín semanal independiente de noticias, eventos y acontecimientos de Avalanche producido por un miembro de la comunidad.
+[**Esta Semana en Avalanche**](https://weavax.substack.com/): Un boletín semanal independiente de noticias, eventos y acontecimientos de Avalanche producido por un miembro de la comunidad.
 
 ### Socios del Ecosistema
 
-[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): plataforma de capacitación y educación para que tanto los desarrolladores técnicos como los empresarios aprendan sobre la tecnología de las blockchain.
+[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): Plataforma de capacitación y educación para que tanto los desarrolladores técnicos como los empresarios aprendan sobre la tecnología de las blockchain.
 
 [**Blockchain Game Alliance**](https://blockchaingamealliance.org/): es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
 
@@ -134,7 +134,7 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2ODk4NDYyOSwyMDM4NzUyMzQxLDM3MT
+eyJoaXN0b3J5IjpbMTE5MjUyNzA2MSwyMDM4NzUyMzQxLDM3MT
 g5MjAzNSwtMTAzMTA0NDU0MSw1OTE5MDE4ODUsMTIyNDM0NjU2
 Nl19
 -->
