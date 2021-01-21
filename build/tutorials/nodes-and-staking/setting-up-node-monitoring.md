@@ -93,7 +93,7 @@ Preparemos Prometheus para que funcione como un servicio del sistema. Ejecuta **
 sudo nano /etc/systemd/system/prometheus.service
 ```
 
-\(o abre ese archivo en el editor de texto de tu elección\), e introduce la siguiente configuración:
+\(O abre ese archivo en el editor de texto de tu elección\), e introduce la siguiente configuración:
 
 ```cpp
 [Unit]
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2MDEwMzU5OSwyMDY1MjQ1NzY2LDc3ND
-AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
-M119
+eyJoaXN0b3J5IjpbNDIwNzc5MTIxLDIwNjUyNDU3NjYsNzc0MD
+AxOTAzLC0xMDIzMDA0MDMwLC05MDY1Mjg5MTAsNDA5MjgxNTYz
+XX0=
 -->
