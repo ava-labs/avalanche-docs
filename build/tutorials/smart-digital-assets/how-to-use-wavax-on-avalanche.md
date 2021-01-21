@@ -2,11 +2,11 @@
 
 ## Que es WAVAX?
 
-[AVAX](../../../#avalanche-avax-token) es el token nativo de la  [Plataforma Avalanche ](../../../learn/platform-overview/). Muchos smart contracts en la [Contract Chain \(C-Chain\)](../../../learn/platform-overview/#contract-chain-c-chain), que es una instancia de la Ethereum Virtual Machine, están diseñados para trabajar con Tokens ERC-20 de Ethereum. Para poder usar AVAX en tales contratos, debes usar wrapped AVAX \(WAVAX\), el caul es compatible con ERC-20.
+[AVAX](../../../#avalanche-avax-token) es el token nativo de la  [Plataforma Avalanche ](../../../learn/platform-overview/). Muchos smart contracts en la [Contract Chain \(C-Chain\)](../../../learn/platform-overview/#contract-chain-c-chain), que es una instancia de la Ethereum Virtual Machine, están diseñados para trabajar con Tokens ERC-20 de Ethereum. Para poder usar AVAX en tales contratos, debes usar wrapped AVAX \(WAVAX\), el cual es compatible con ERC-20.
 
 ## Descripción
 
-Para convertir AVAX en WAVAX depositarás AVAX en un smart contract que bloqueará los AVAX y te entregará WAVAX. Para convertir WAVAX en AVAX, devolverás los WAVAX al smart contract, que hará burn de los WAVAX y devolverá tu AVAX.
+Para convertir AVAX en WAVAX depositarás AVAX en un smart contract que bloqueará los AVAX y te entregará WAVAX. Para convertir WAVAX en AVAX, devolverás los WAVAX al smart contract, que hará _burn_ de los WAVAX y devolverá tus AVAX.
 
 En este tutorial podrás:
 
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3NDM5Njk0MCw0NzczNzc5MzQsLTM2OT
-IzMjk5OCwxMTc3MjY2OTQ4LDE3MDQ1NTI3NzgsMTY2ODkzNDI0
-OCwtMTE4MjU3MzI1MCw2Nzk2NzY3MDksLTE4Njg1NTQxNTldfQ
-==
+eyJoaXN0b3J5IjpbLTIzMDAyOTExNSwxMTc0Mzk2OTQwLDQ3Nz
+M3NzkzNCwtMzY5MjMyOTk4LDExNzcyNjY5NDgsMTcwNDU1Mjc3
+OCwxNjY4OTM0MjQ4LC0xMTgyNTczMjUwLDY3OTY3NjcwOSwtMT
+g2ODU1NDE1OV19
 -->
