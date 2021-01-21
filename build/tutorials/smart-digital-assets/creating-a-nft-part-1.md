@@ -348,15 +348,15 @@ Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-a
 
 ## Concluimos!
 
-BLa tecnología de blockchain y los tokenomics representan una nueva forma radical de representar los activos digitales. Los tokens no fungibles permiten que los escasos activos se conviertan en tokens. En este tutorial, nosotros:
+La tecnología de blockchain y los tokenomics representan una nueva forma radical de representar los activos digitales. Los tokens no fungibles permiten que los escasos activos se conviertan en tokens. En este tutorial, nosotros:
 
-* Usamos`createNFTAsset` para crear una familia y un grupo de activos no fungibles.
-* Usamos`mintNFT` para acuñar unidades de un NFT al grupo.
-* Usamos`getUTXOs` para buscar UTXOs para una dirección. Luego convertimos la UTXO codificada en CB58 a hexadecimal y la descompusimos en sus componentes individuales.
-* Usamos`sendNFT` para transferir NFT's entre direcciones.
+* Usamos `createNFTAsset` para crear una familia y un grupo de activos no fungibles.
+* Usamos `mintNFT` para acuñar unidades de un NFT al grupo.
+* Usamos `getUTXOs` para buscar UTXOs para una dirección. Luego convertimos la UTXO codificada en CB58 a hexadecimal y la descompusimos en sus componentes individuales.
+* Usamos `sendNFT` para transferir NFT's entre direcciones.
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDM2NzkwMzYsLTUyNjEyMTQwNiwxOD
+eyJoaXN0b3J5IjpbLTE4NTE4MDMzOTIsLTUyNjEyMTQwNiwxOD
 Q3NjUyODY3LC0xMjM4NzkzNjYxXX0=
 -->
