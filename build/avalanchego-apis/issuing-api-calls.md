@@ -19,11 +19,11 @@ La documentación de cada API especifica a qué extremo un usuario debe realizar
 
 ## APIs con formato JSON RPC
 
-Varias API integradas utilizan el formato [JSON RPC 2.0](https://www.jsonrpc.org/specification) para describir sus solicitudes y respuestas. Dichas API incluyen la API de Plataforma y la API de X-Chain.
+Varias API integradas utilizan el formato [JSON RPC 2.0](https://www.jsonrpc.org/specification) para describir sus peticiones y respuestas. Dichas API incluyen la API de Plataforma (P-Chain) y la API de X-Chain.
 
-### Making a JSON RPC Request
+### Haciendo peticiones JSON RPC
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](exchange-chain-x-chain-api.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+Supongamos que queremos llamar al método `getTxStatus` de la[API de X-Chain](exchange-chain-x-chain-api.md).  La documentación de la API de X-Chain nos dice que el extremo de esta API es `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:
 
@@ -102,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjI2MTAxMTU3XX0=
+eyJoaXN0b3J5IjpbLTEwNDk3NzI0MDBdfQ==
 -->
