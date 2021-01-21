@@ -243,9 +243,9 @@ La respuesta contiene el ID del nodo:
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-En el ejemplo anterior el ID del nodo es`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copia la ID de tu nodo para más tarde. El ID de tu nodo no es un secreto, así que puedes pegarlo en un editor de texto.
+En el ejemplo anterior el ID del nodo es `NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copia la ID de tu nodo para más tarde. El ID de tu nodo no es un secreto, así que puedes pegarlo en un editor de texto.
 
-AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/health-api.md), que puede ser usado para interactuar con el nodo. Algunas API están desactivadas de forma predeterminada. Para habilitar tales APIs, modifique la sección ExecStart de `/etc/systemd/system/avalanchego.service` \(creada durante el proceso de instalación\) para incluir marcas que habiliten estos puntos finales. No habilites manualmente ninguna API a menos que tengas una razón para hacerlo.
+AvalancheGo tiene otras APIs, tal como el [API de Salud](../../avalanchego-apis/health-api.md), que puede ser usado para interactuar con el nodo. Algunas API están desactivadas de forma predeterminada. Para habilitar tales APIs, modifica la sección ExecStart de `/etc/systemd/system/avalanchego.service` \(creada durante el proceso de instalación\) para incluir marcas que habiliten estos puntos finales. No habilites manualmente ninguna API a menos que tengas una razón para hacerlo.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
@@ -283,7 +283,7 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NDk5NTUxMiwxMTU5NTY2MzIxLDIxMT
+eyJoaXN0b3J5IjpbMTU1OTAyMDgzMSwxMTU5NTY2MzIxLDIxMT
 IxNDY4OTYsMzI3MDEwNTY1LDE5NDAwNDk0MDEsNDY2MDkxNDkx
 LC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3Mjg2Nj
 U3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
