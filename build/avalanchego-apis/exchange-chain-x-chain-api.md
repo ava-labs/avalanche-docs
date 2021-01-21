@@ -705,7 +705,7 @@ curl -X POST --data '{
 ### avm.exportKey
 
 Obtén la llave privada que controla una dirección dada.
-The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
+La llave privada devuelta puede ser agregada a un usuario con la llamada [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
 #### **Firma**
 
@@ -717,8 +717,8 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username` debe controlar la dirección en `address`.
+* `privateKey` es la cadena representando la llave privada que controla la dirección `address`.
 
 #### **Llamada de ejemplo**
 
@@ -749,7 +749,7 @@ curl -X POST --data '{
 
 ### avm.getAllBalances
 
-Get the balances of all assets controlled by a given address.
+Obtén los balanGet the balances of all assets controlled by a given address.
 
 #### **Firma**
 
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczNzI4MDI0NCwxOTg4ODUyMjQxLC05NT
-E4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAzMzIy
-MDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OTYyNS
-wtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEsLTE5
-OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNjU4MTgsLTEwNDgwND
-EyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3NjksLTk4MTQ1ODYzNiwx
-MjM4NDM2MTgzXX0=
+eyJoaXN0b3J5IjpbMTg2MjUyNTQ0MywtNzM3MjgwMjQ0LDE5OD
+g4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2
+Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NS
+wxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1
+MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMTQwNDQ1LDYzODM2NT
+gxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0LC00NDU4Mzc2OSwt
+OTgxNDU4NjM2XX0=
 -->
