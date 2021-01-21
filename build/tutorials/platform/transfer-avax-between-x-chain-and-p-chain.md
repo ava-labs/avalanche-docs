@@ -253,7 +253,7 @@ Al igual que antes, esta también es una operación de dos transacciones:
 
 ### Paso 1 - Exportar AVAX desde la P-Cha
 
-To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
+Para hacerlo, ejecutemos [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
 
 ```cpp
 curl -X POST --data '{
@@ -304,6 +304,6 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzAxNzMyNzk5LDEzNTc5MjA0NDQsLTI2MT
-kyNDg3OF19
+eyJoaXN0b3J5IjpbMTgwNDUxNTIzMywxMzU3OTIwNDQ0LC0yNj
+E5MjQ4NzhdfQ==
 -->
