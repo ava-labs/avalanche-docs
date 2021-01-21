@@ -947,7 +947,7 @@ avm.getTxStatus({txID: string}) -> {status: string}
 
 `status` is one of:
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node
+* `Accepted`: La transacción es \(o será\) acceptada por cada nodo.
 * `Processing`: The transaction is being voted on by this node
 * `Rejected`: The transaction will never be accepted by any node in the network
 * `Unknown`: The transaction hasn’t been seen by this node
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOT
-g4ODUyMjQxLC05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2
-NjY3NiwyMDAzMzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0Nz
-UsMTcyNDA0OTYyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0z
-NTEyOTU2ODEsLTE5OTU0Njc0NjAsMTYwMDE0MDQ0NSw2MzgzNj
-U4MTgsLTEwNDgwNDEyNzIsLTk4MDk2MTk4NCwtNDQ1ODM3Njks
-LTk4MTQ1ODYzNl19
+eyJoaXN0b3J5IjpbMTExODgzMzk2MCwtMTgyNzEzNDM4MiwtNz
+M3MjgwMjQ0LDE5ODg4NTIyNDEsLTk1MTg3NjYzMywtMTAyODY2
+Mjc4OCwxMDc0OTY2Njc2LDIwMDMzMjIwNSwtMTcwMzUxMzE2NS
+wtMTkyMzU2OTQ3NSwxNzI0MDQ5NjI1LC0yMzU3OTMxNDMsLTEx
+MzQzMTMzMDEsLTM1MTI5NTY4MSwtMTk5NTQ2NzQ2MCwxNjAwMT
+QwNDQ1LDYzODM2NTgxOCwtMTA0ODA0MTI3MiwtOTgwOTYxOTg0
+LC00NDU4Mzc2OV19
 -->
