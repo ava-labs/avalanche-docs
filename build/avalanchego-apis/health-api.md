@@ -38,9 +38,9 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` es verdadero (true) si el nodo  if the node if all health checks are passing.
+`healthy` es verdadero (true) si todas las condiciones de salud para el nodo se cumplen.
 
-`checks` is a list of health check responses.
+`checks` es una lista de las revisiones de salud del nodo.
 
 * A check response may include a `message` with additional context.
 * A check response may include an `error` describing why the check failed.
@@ -118,5 +118,5 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2NzYyMzk3NV19
+eyJoaXN0b3J5IjpbLTIxMDY0MDYwNzRdfQ==
 -->
