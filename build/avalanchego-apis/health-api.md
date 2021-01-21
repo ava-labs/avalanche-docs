@@ -18,9 +18,9 @@ La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer lla
 
 ### health.getLiveness
 
-El nodo ejecuta una serie de revisiones de salud cThe node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+El nodo ejecuta una serie de revisiones de salud cada 30 segundos, incluyendo una revisión de salud de cada una de las cadenas. Este método regresa la última colección de resultados del análisis de salud.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 health.getLiveness() -> {
@@ -38,7 +38,7 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` is true if the node if all health checks are passing.
+`healthy` es verdadero (true) si el nodo  if the node if all health checks are passing.
 
 `checks` is a list of health check responses.
 
@@ -118,5 +118,5 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5MzQwNjY1N119
+eyJoaXN0b3J5IjpbMTQ2NzYyMzk3NV19
 -->
