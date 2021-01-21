@@ -24,13 +24,13 @@ Allí se te pedirá que introduzcas el nombre, así como un símbolo \(ticker\).
 
 Además del nombre y el indicador, tendrás que introducir **Number of Groups**, es decir, cuántos coleccionables distintos tendrá la familia que creaste. Elige con cuidado, porque una vez creada, los parámetros no pueden ser cambiados.
 
-Cuando decidas el nombre, el indicador y el número de grupos, presiona **Create** para crear la familia coleccionable. La comisión por la transacción se deducirá del saldo de su wallet. Cuando se cree la familia, verá el ID de la transacción \(TxID\), así como los parámetros de la familia. Puedes usar el TxID para buscar la transacción en [el explorador](https://explorer.avax.network/), pero no es necesario anotarla.
+Cuando decidas el nombre, el indicador y el número de grupos, presiona **Create** para crear la familia coleccionable. La comisión por la transacción se deducirá del saldo de su wallet. Cuando se cree la familia, verás el ID de la transacción \(TxID\), así como los parámetros de la familia. Puedes usar el TxID para buscar la transacción en [el explorador](https://explorer.avax.network/), pero no es necesario anotarla.
 
 Presiona **Back to Studio** para volver, y estaremos listos para crear nuestros primeros coleccionables. Presiona **Mint Collectible**.
 
 ### Acuñar NFTs
 
-Después de pulsar **Mint Collectible** se le presentará una lista de todas las familias de Coleccionables que aún tienen grupos de Coleccionables que no han sido creados todavía.
+Después de pulsar **Mint Collectible** se te presentará una lista de todas las familias de Coleccionables que aún tienen grupos de Coleccionables que no han sido creados todavía.
 
 ![Select a family](../../../.gitbook/assets/nft-studio-03-select-family.png)
 
@@ -54,7 +54,7 @@ En la parte superior de la pantalla siempre se puede ver un resumen de tus colec
 
 ![Overview](../../../.gitbook/assets/nft-studio-06-overview.png)
 
-Para ver sus coleccionables con más detalle, selecciona **Portfolio** en el menú de la izquierda. Te aparecerá una pantalla que muestra todos tus bienes, con tokens seleccionados por defecto. Cambie la selección a **Collectibles** haciendo clic en la pestaña correspondiente.
+Para ver tus coleccionables con más detalle, selecciona **Portfolio** en el menú de la izquierda. Te aparecerá una pantalla que muestra todos tus bienes, con tokens seleccionados por defecto. Cambia la selección a **Collectibles** haciendo clic en la pestaña correspondiente.
 
 ![Collectibles list](../../../.gitbook/assets/nft-studio-07-collectibles.png)
 
@@ -90,6 +90,6 @@ Ahora, debes saber cómo crear familias de NFT, acuñar grupos de NFT, y enviarl
 Si desesa conocer los antecedentes técnicos de cómo funcionan los NFT en la red de Avalanche o deseas construir productos usando NFT, mira el [Tutorial de NFT](creating-a-nft-part-1.md). Si tienes preguntas técnicas, ponte en contacto con nosotros en nuestro [Servidor de Discord](https://chat.avalabs.org/).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzIwMTg1MjUzLDExMDYxNTg3OTgsMTIwOT
+eyJoaXN0b3J5IjpbNDk2MDQ5MDg1LDExMDYxNTg3OTgsMTIwOT
 MyMjUyNV19
 -->
