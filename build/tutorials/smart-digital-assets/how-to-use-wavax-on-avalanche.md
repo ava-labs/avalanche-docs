@@ -102,7 +102,7 @@ Remix debería encontrar el contrato desplegado:
 
 ![Connect](../../../.gitbook/assets/wavax2avax-07-avalanche-contract.png)
 
-Ahora estamos listos para interactuar con el contrato. Abra la interfaz del contrato pulsando la flecha resaltada.
+Ahora estamos listos para interactuar con el contrato. Abre la interfaz del contrato pulsando la flecha resaltada.
 
 ## Emitir Comandos para el Contrato de WAVAX
 
@@ -114,11 +114,11 @@ Como ETH está denominado en 10^18 unidades más pequeñas \(wei\), y AVAX está
 
 ### Hacer Wrap a AVAX para Crear WAVAX
 
-Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en el campo **Value**. Para iniciar el wrapping, haz click en **Deposit**. Se le presentará un aviso de Remix para confirmar la transacción. Cuando presione **Confirm** Metamask aparecerá un pop-up de Metamask también pidiendo confirmación . Presione **Confirm** en Metamask. Deberías notar que tu balance de AVAX se redujo a 10, más la cantidad de la comisión. Pasa a la siguiente sección para ver tu WAVAX en Metamask.
+Para hacer wrap a 10 AVAX, introduce`10000000000` \(10^10\) gwei en el campo **Value**. Para iniciar el wrapping, haz click en **Deposit**. Se te presentará un aviso de Remix para confirmar la transacción. Cuando presiones **Confirm**, en Metamask aparecerá un pop-up de Metamask también pidiendo confirmación. Presiona **Confirm** en Metamask. Deberías notar que tu balance de AVAX se redujo a 10, más la cantidad de la comisión. Pasa a la siguiente sección para ver tu WAVAX en Metamask.
 
 ## Agrega WAVAX a Metamask
 
-Para ver su balance de WAVAX, debe agregar WAVAX como una ficha personalizada a Metamask. En Metamask, seleccione los tres puntos junto a su nombre de cuenta y seleccione `Expand View`. Esto abre una nueva pestaña del navegador. Desplácese hacia abajo y seleccione **Add token**. Cambie a la pestaña **Custom Token**.
+Para ver su balance de WAVAX, debe agregar WAVAX como una ficha personalizada a Metamask. En Metamask, selecciona los tres puntos junto a su nombre de cuenta y selecciona `Expand View`. Esto abre una nueva pestaña del navegador. Desplácese hacia abajo y seleccione **Add token**. Cambie a la pestaña **Custom Token**.
 
 ![Custom Token](../../../.gitbook/assets/wavax2avax-10-add-token.png)
 
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzMTU3MzA3MywtMjMwMDI5MTE1LDExNz
-QzOTY5NDAsNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3NzI2Njk0
-OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMyNTAsNj
-c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
+eyJoaXN0b3J5IjpbLTE1NDM0NDcyNTksLTIzMDAyOTExNSwxMT
+c0Mzk2OTQwLDQ3NzM3NzkzNCwtMzY5MjMyOTk4LDExNzcyNjY5
+NDgsMTcwNDU1Mjc3OCwxNjY4OTM0MjQ4LC0xMTgyNTczMjUwLD
+Y3OTY3NjcwOSwtMTg2ODU1NDE1OV19
 -->
