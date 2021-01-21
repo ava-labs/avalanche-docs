@@ -7,7 +7,7 @@
 ![AvalancheGo release notes v1.0.6.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.6.png)
 
 {% hint style="danger" %}
-Tenga en cuenta que este comunicado contiene cambios de última hora descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). Cambia el formato de respuesta por defecto de platform.getTxStatus y platform.getCurrentValidators. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
+Ten en cuenta que este comunicado contiene cambios de última hora descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). Cambia el formato de respuesta por defecto de platform.getTxStatus y platform.getCurrentValidators. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
 {% endhint %}
 
 * Se han eliminado los formatos obsoletos de platform.getTxStatus y platform.getCurrentValidators.
@@ -30,7 +30,7 @@ Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrollad
 ![AvalancheGo release notes v1.0.5](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.5.png)
 
 {% hint style="danger" %}
-Tenga en cuenta que la versión posterior a ésta, la v1.0.6, contendrá los cambios de última hora de descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). El formato de respuesta de  `platform.getTxStatus` y`platform.getCurrentValidators` cambiará.
+Ten en cuenta que la versión posterior a ésta, la v1.0.6, contendrá los cambios de última hora de descritos [aquí](https://docs.avax.network/build/apis/deprecated-api-calls). El formato de respuesta de  `platform.getTxStatus` y`platform.getCurrentValidators` cambiará.
 {% endhint %}
 
 Los cambios en esta versión, v1.0.5, son compatibles con versiones anteriores. La actualización es opcional pero se recomienda. El parche incluye mejoras en el rendimiento y algunas mejoras en la calidad de vida.
@@ -99,6 +99,6 @@ Para ayuda con esta actualización ve a [Preguntas más frecuentes de los desarr
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyMjczOTY5NSwtMTg0NTAzNzY5MywtMT
+eyJoaXN0b3J5IjpbLTI0NTUxOTk5NSwtMTg0NTAzNzY5MywtMT
 I0ODc3NTE3Nl19
 -->
