@@ -155,7 +155,7 @@ Selecciona la instancia de EC2 recién creada. Esto abre un panel de detalles co
 Copia el campo `IPv4 Public IP` para usarlo más tarde. A partir de ahora llamaremos a este valor `PUBLICIP`.
 
 
-**Recuerda: los comandos de terminal de abajo asumen que estás ejecutando Linux. Los comandos pueden ser diferentes para MacOS u otros sistemas operativos. Cuando copie y pegue un comando de un bloque de código, copie y pegue la totalidad del texto en el bloque.**
+**Recuerda: los comandos de terminal de abajo asumen que estás ejecutando Linux. Los comandos pueden ser diferentes para MacOS u otros sistemas operativos. Cuando copies y pegues un comando de un bloque de código, copia y pega la totalidad del texto en el bloque.**
 
 Entra en la instancia AWS desde tu máquina local. Abre una terminal \(Intenta con el atajo `CTRL + ALT + T`\)  y navega al directorio que contiene el archivo `.pem` que descargaste anteriormente.
 
@@ -283,8 +283,8 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzA1MjY4MzUsMTE1OTU2NjMyMSwyMT
-EyMTQ2ODk2LDMyNzAxMDU2NSwxOTQwMDQ5NDAxLDQ2NjA5MTQ5
-MSwtMTU2ODA5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4Nj
-Y1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbLTk4MTg5Mzk2NCwxMTU5NTY2MzIxLDIxMT
+IxNDY4OTYsMzI3MDEwNTY1LDE5NDAwNDk0MDEsNDY2MDkxNDkx
+LC0xNTY4MDkxNDkzLDU1NzY1OTE0LDE2MTAyNzg0NSw3Mjg2Nj
+U3OTksLTcyMDY4NDY3Niw4NjEwOTUzMDNdfQ==
 -->
