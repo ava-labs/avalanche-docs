@@ -11,7 +11,7 @@ En este tutorial \(Tiempo estimado: 10 minutos\), podremos:
 * Enviar AVAX
 * Añadir tu nodo al conjunto de validadores
 
-Si su problema no se trata en las preguntas frecuentes, puede pedir ayuda en el [Discord de Avalanche](https://chat.avax.network)! Trabajaremos para que superes cualquier obstáculo.
+Si tu problema no es tratado en las preguntas frecuentes, puedes pedir ayuda en el [Discord de Avalanche](https://chat.avax.network)! Trabajaremos para que superes cualquier obstáculo.
 
 Este tutorial está dirigido principalmente a desarrolladores y personas interesadas en cómo funciona la Plataforma de Avalanche. Si sólo estás interesado en configurar un nodo para Staking, tal vez quieras seguir el Tutorial [Configura un Nodo de Avalanche con Instalador](tutorials/nodes-and-staking/set-up-node-with-installer.md). El instalador automatiza el proceso de instalación y lo configura como un servicio del sistema, el cual se recomienda para el funcionamiento desatendido. También puedes probar siguiendo este tutorial primero, y luego configurar el nodo usando el instalador como una solución permanente.
 
@@ -362,7 +362,7 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMzI5OTk1NywxODI4Mzc5ODc0LC04MD
-AzODA4ODUsMTUwNTc2MjgxNywtMjA2Nzc4NDI1MCwtMTkyODQz
-NTM4MywtMTcyMjYxNjU4OV19
+eyJoaXN0b3J5IjpbMTg2MjkzMDQ2NCwxMzEzMjk5OTU3LDE4Mj
+gzNzk4NzQsLTgwMDM4MDg4NSwxNTA1NzYyODE3LC0yMDY3Nzg0
+MjUwLC0xOTI4NDM1MzgzLC0xNzIyNjE2NTg5XX0=
 -->
