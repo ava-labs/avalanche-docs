@@ -195,11 +195,11 @@ En tu PC local, crea una carpeta en la raíz de la unidad C: llamada Avalanche y
 
 ![Image for post](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
 
-Seleccione "Disable inheritance" y luego "Remove all inherited permissions from this object" para eliminar todos los permisos existentes en ese archivo.
+Selecciona "Disable inheritance" y luego "Remove all inherited permissions from this object" para eliminar todos los permisos existentes en ese archivo.
 
 ![Image for post](https://miro.medium.com/max/740/1*VxuomVeWbhYquRynA8hP4Q.png)
 
-Luego seleccione "Add" para agregar un nuevo permiso y elija "Select a principal" en la parte superior. En el cuadro emergente, introduzca la cuenta de usuario que utiliza para iniciar sesión en su máquina. En este ejemplo me conecto con un usuario local llamado Seq, es posible que tengas una cuenta de Microsoft que uses para conectarte, así que usa cualquier cuenta con la que te conectes a tu PC y presiona "Check Names" y debería subrayarlo para verificar y presionar OK.
+Luego selecciona "Add" para agregar un nuevo permiso y elige "Select a principal" en la parte superior. En el cuadro emergente, introduce la cuenta de usuario que utilizas para iniciar sesión en tu máquina. En este ejemplo me conecto con un usuario local llamado Seq, es posible que tengas una cuenta de Microsoft que uses para conectarte, así que usa cualquier cuenta con la que te conectes a tu PC y presiona "Check Names" y debería subrayarlo para verificar y presionar OK.
 
 ![Image for post](https://miro.medium.com/max/758/1*sMxk7zaRHVTqA0UyHTKwzQ.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjYwNDA3NzUsMTA0Mzk1NDM1MCw4Nz
-c0NjQzOTIsMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMw
-NywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LD
-IyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbLTM3NzE3MjQwOCwxMDQzOTU0MzUwLDg3Nz
+Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
+LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
+IyMTc4Njk0XX0=
 -->
