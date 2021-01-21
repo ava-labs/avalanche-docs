@@ -42,10 +42,10 @@ ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisio
 ```
 
 * `blockchainID` es la cadena de bloques que publicará los vértices aceptados.
-* `consensusURL` is the path of the Unix domain socket the vertices are published to.
-* `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+* `consensusURL` es la ruta del socket de dominio Unix en el que se publican los vértices.
+* `decisionsURL` es la ruta del socket de dominio Unix en el que se publican las transacciones.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -58,7 +58,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -73,7 +73,7 @@ curl -X POST --data '{
 
 ### ipcs.unpublishBlockchain
 
-Deregister a blockchain so that it no longer publishes to a Unix domain socket.
+Dar de baja una cadena de bloques para que ya no se publique en un socket de dominio Unix.
 
 #### **Signature**
 
@@ -81,9 +81,9 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
-* `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
+* `blockchainID` es la cadena de bloques que ya no publicará en un socket de dominio Unix.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -96,7 +96,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -109,5 +109,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU0NjE3ODMzXX0=
+eyJoaXN0b3J5IjpbMTM0NjMyNzM3OV19
 -->
