@@ -19,7 +19,7 @@ Writes to the socket:
 
 ## IPC Socket URL Format
 
-Los nombres de los sockets tienen el formato `<network_id>-<chain_id>-<event_type>` donde `<event_type>` es `consenso` o` decisiones`. El socket de consenso recibe vértices y bloques y mientras que el socket de decisiones recibe transacciones individuales.
+Los nombres de los sockets tienen el formato `<network_id>-<chain_id>-<event_type>` donde `<event_type>` es `consensus` o` decisions`. El socket de consenso recibe vértices y bloques y mientras que el socket de decisiones recibe transacciones individuales.
 
 The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
 
@@ -111,5 +111,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0MzYyMTc1Nl19
+eyJoaXN0b3J5IjpbLTI1MjU1ODkyMF19
 -->
