@@ -178,7 +178,7 @@ Esto nos retorna:
 undefined
 ```
 
-Imprima la cuenta:
+Imprime la cuenta:
 
 ```text
 truffle(development)> account
@@ -412,6 +412,6 @@ Deberías ver el numero que guardaste.
 
 Ahora tiene las herramientas necesarias para lanzar una red local de Avalanche, crear un proyecto de truffle, así como crear, compilar, desplegar e interactuar con los Smart Contracts de Solidity.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwMDE4MzkzLC0yMTE0MTUzMzYsODY0OT
-QzOTk4LC04NTUzMTIwNjJdfQ==
+eyJoaXN0b3J5IjpbLTE2MDI2Mjk3MjUsLTIxMTQxNTMzNiw4Nj
+Q5NDM5OTgsLTg1NTMxMjA2Ml19
 -->
