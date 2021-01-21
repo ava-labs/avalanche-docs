@@ -24,13 +24,7 @@ El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la
 
 El período de delegación debe ser un subconjunto del período en el que el delegado valida la red primaria.
 
-A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
-
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward \(if any.\) A transaction that delegates stake has no fee.
-
-The delegation period must be a subset of the period that the delegatee validates the Primary Network.
-
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Notar que una vez que emitiste la transacción de agregar un nodo como delegador, no hay manera de cambiar los parámetros. **No puedes retirar You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -1809,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTY0NDI3NzE3LC04MTI1Mjc1OTUsMTQ5Mz
-E5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTEwMzg1ODEzOCwtODEyNTI3NTk1LDE0OT
+MxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
