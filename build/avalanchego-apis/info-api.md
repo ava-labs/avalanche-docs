@@ -1,12 +1,12 @@
 # Info API
 
-This API can be used to access basic information about the node.
+Esta API puede usarse para obtener información básica de un nodo.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/info
@@ -16,7 +16,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
+Dado el sobrenombre de una blockchain, obtiene el ID. \(Mira [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
 
 #### **Signature**
 
@@ -355,3 +355,6 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTg0MTkzOTcxM119
+-->
