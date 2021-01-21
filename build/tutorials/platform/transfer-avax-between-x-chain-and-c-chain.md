@@ -63,7 +63,7 @@ La transferencia entre cadenas es un proceso de dos pasos: primero una transacci
 
 Para devolver AVAX de vuelta a la X-Chain, tienes que hacer la transferencia en la dirección opuesta.
 
-Intercambie la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
+Intercambia la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
 
 ## Transferencia de la  X-Chain a la C-Chain  con llamados API
 
@@ -263,6 +263,6 @@ La respuesta debería verse así:
 ¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjY2NTYxMDA1LDE5MjIwNDc4NzcsMTM0OT
-k4ODM4NCwxMTI4MjUxMDkzXX0=
+eyJoaXN0b3J5IjpbLTM4MjIxMjExOSwxOTIyMDQ3ODc3LDEzND
+k5ODgzODQsMTEyODI1MTA5M119
 -->
