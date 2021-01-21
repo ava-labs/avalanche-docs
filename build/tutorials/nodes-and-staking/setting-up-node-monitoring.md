@@ -259,7 +259,7 @@ Entonces añadimos node\_exporter como un servicio. Ejecuta:
 sudo nano /etc/systemd/system/node_exporter.service
 ```
 
-\(o abra ese archivo en el editor de texto de su elección\) y rellénelo con:
+\(O abre ese archivo en el editor de texto de su elección\) y rellénalo con:
 ```cpp
 [Unit]
 Description=Prometheus
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNDIwNjA1OTksMjA2NTI0NTc2Niw3Nz
-QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
-NjNdfQ==
+eyJoaXN0b3J5IjpbMTgwNDcyMjA4OSwyMDY1MjQ1NzY2LDc3ND
+AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
+M119
 -->
