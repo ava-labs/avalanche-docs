@@ -239,7 +239,7 @@ Consigue la última versión con:
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
 ```
 
-cambia `linux-amd64` si tienes una arquitectura diferente \(RaspberryPi es`linux-arm64`, por ejemplo\). descomprime y mueve el ejecutable:
+cambia `linux-amd64` si tienes una arquitectura diferente  \(RaspberryPi es `linux-arm64`, por ejemplo\). descomprime y mueve el ejecutable:
 
 ```cpp
 tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxOTkwNTM0NywyMDY1MjQ1NzY2LDc3ND
-AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
-M119
+eyJoaXN0b3J5IjpbLTIwNDIwNjA1OTksMjA2NTI0NTc2Niw3Nz
+QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
+NjNdfQ==
 -->
