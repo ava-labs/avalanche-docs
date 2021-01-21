@@ -36,7 +36,7 @@ Nombra tu key pair `avalanche`. Si tu máquina local tiene MacOS o Linux, selecc
 
 ![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-Haz clic en `Create key pair`. Deberías ver un mensaje de éxito, y el archivo de claves debería ser descargado a su máquina local. Sin este archivo, no podrá acceder a su instancia EC2. **Haga una copia de este archivo y póngalo en un medio de almacenamiento separado, como un disco duro externo. Mantenga este archivo en secreto; no lo comparta con otros.**
+Haz clic en `Create key pair`. Deberías ver un mensaje de éxito, y el archivo de claves debería ser descargado a su máquina local. Sin este archivo, no podrá acceder a su instancia EC2. **Haz una copia de este archivo y ponlo en un medio de almacenamiento separado, como un disco duro externo. Mantén este archivo en secreto; no lo compartas nadie más.**
 
 
 ![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
@@ -283,8 +283,8 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTE5NzU2MDAsMjExMjE0Njg5NiwzMj
-cwMTA1NjUsMTk0MDA0OTQwMSw0NjYwOTE0OTEsLTE1NjgwOTE0
-OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNj
-g0Njc2LDg2MTA5NTMwM119
+eyJoaXN0b3J5IjpbLTcxMTgxNzM2NiwyMTEyMTQ2ODk2LDMyNz
+AxMDU2NSwxOTQwMDQ5NDAxLDQ2NjA5MTQ5MSwtMTU2ODA5MTQ5
+Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4NjY1Nzk5LC03MjA2OD
+Q2NzYsODYxMDk1MzAzXX0=
 -->
