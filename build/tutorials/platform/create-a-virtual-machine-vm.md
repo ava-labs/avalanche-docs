@@ -509,7 +509,7 @@ AvalancheGo usa la [Librería RPC de Gorilla](https://www.gorillatoolkit.org/pkg
 
 Usando Gorilla, hay una estructura para cada servicio API. En el caso de esta blockchain, sólo hay un servicio de API.
 
-The service struct’s declaration is:
+La declaración de la estructura de servicio es:
 
 ```cpp
 // Service is the API service for this VM
@@ -721,6 +721,6 @@ En este tutorial, aprendimos:
 * Las librerías `core.SnowmanVM` y `core.Block`, que hacen que la definición de las VMs sea más rápida.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDQ0MDA3NzMsLTE1MDk1NjQ2OTQsLT
-IxNjgyNzk0MywxNDg2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbMTEyOTE0MTI5MSwtMTUwOTU2NDY5NCwtMj
+E2ODI3OTQzLDE0ODYxMzUwODldfQ==
 -->
