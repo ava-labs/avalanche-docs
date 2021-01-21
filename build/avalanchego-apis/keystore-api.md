@@ -87,7 +87,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -99,9 +99,9 @@ curl -X POST --data '{
 
 ### keystore.exportUser
 
-Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
+Exportar un usuario. El usuario se puede importar a otro nodo con [`keystore.importUser`](keystore-api.md#keystore-importuser). La contraseña del usuario permanece encriptada.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 keystore.exportUser(
@@ -116,9 +116,9 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` especifica el formato de la cadena que codifica los datos del usuario. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -132,7 +132,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -201,7 +201,7 @@ List the users in this keystore.
 keystore.ListUsers() -> {users:[]string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -211,7 +211,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -226,5 +226,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjgxMjI5MTEwXX0=
+eyJoaXN0b3J5IjpbNTMzNjEwMTYzXX0=
 -->
