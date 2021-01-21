@@ -18,7 +18,7 @@ Esta API usa formato RPC `json 2.0`.
 
 Agrega un delegador a la Red Primaria.
 
-Un delegador hace stake de AVAX y especifica un validador para validar la red en su nombre. El delegado tiene una mayor probabilidad de ser muestreado por otros validadores \ (peso \) en proporción a la participación que se le delega.
+Un delegador hace stake de AVAX y especifica un validador  para validar la red en su nombre. El delegado tiene una mayor probabilidad de ser muestreado por otros validadores \ (peso \) en proporción a la participación que se le delega.
 
 El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la recompensa de validación del delegador \ (si corresponde. \) Una transacción que delega participación no tiene tarifa.
 
@@ -1809,6 +1809,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3ND
-I5MDE1OV19
+eyJoaXN0b3J5IjpbNjgxNzcyMDkzLC04MTI1Mjc1OTUsMTQ5Mz
+E5NDc5OSw5NzQyOTAxNTldfQ==
 -->
