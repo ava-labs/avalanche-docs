@@ -37,7 +37,7 @@ Una red de cinco nodos de Avalanche está funcionando en tu máquina. Cuando qui
 
 Abre una nueva pestaña de terminal para que podamos crear un directorio de `truffle` e instalar algunas dependencias más.
 
-Primero, navegue hasta el directorio dentro del cual pretende crear su directorio de trabajo `truffle`:
+Primero, navega hasta el directorio dentro del cual pretendes crear tu directorio de trabajo `truffle`:
 
 ```text
 cd /path/to/directory
@@ -412,6 +412,6 @@ Deberías ver el numero que guardaste.
 
 Ahora tiene las herramientas necesarias para lanzar una red local de Avalanche, crear un proyecto de truffle, así como crear, compilar, desplegar e interactuar con los Smart Contracts de Solidity.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTQxNTMzNiw4NjQ5NDM5OTgsLTg1NT
-MxMjA2Ml19
+eyJoaXN0b3J5IjpbLTQwMDE4MzkzLC0yMTE0MTUzMzYsODY0OT
+QzOTk4LC04NTUzMTIwNjJdfQ==
 -->
