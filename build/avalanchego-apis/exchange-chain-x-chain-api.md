@@ -1435,8 +1435,8 @@ avm.sendMultiple({
 * `outputs` es un arreglo de objetos literales que cada uno contiene un `assetID`, `amount` y `to`.
 * `memo` es un mensaje opcional, cuya longitud puede ser hasta de 256 bytes.
 * `from` son las direcciones que se quieren utilizar para esta operación. Si se omite, usa una de tus direcciones según sea necesario.
-* `changeAddr` es la direcciónis the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* El activo se envía de direcciónes controladas por el usuario `username`. \(Claro, ese usuario deberá mantener al menos el saldo del activo que se envía.\)
 
 #### **Llamada de ejemplo**
 
@@ -1482,7 +1482,7 @@ curl -X POST --data '{
 
 ### avm.sendNFT
 
-Send a non-fungible token.
+Envía un token no fungible (NFT)
 
 #### **Firma**
 
@@ -1498,7 +1498,7 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
+* `assetID` es elis the asset ID of the NFT being sent.
 * `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
 * `to` is the X-Chain address the NFT is sent to.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDcxOTcwNzYyLDU1MzU3MTgxOSwxODM1ND
-IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
-NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
-05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
-MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
-YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
-LTE5OTU0Njc0NjBdfQ==
+eyJoaXN0b3J5IjpbLTEyNDQ4NzI5NjEsNTUzNTcxODE5LDE4Mz
+U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
+Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
+EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
+MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
+Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
+MSwtMTk5NTQ2NzQ2MF19
 -->
