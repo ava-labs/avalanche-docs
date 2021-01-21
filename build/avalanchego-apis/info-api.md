@@ -83,7 +83,7 @@ curl -X POST --data '{
 
 ### info.getNetworkName
 
-Get the name of the network this node is participating in.
+Obtén el nombre de la red en la que el nodo  Get the name of the network this node is participating in.
 
 #### **Signature**
 
@@ -91,7 +91,7 @@ Get the name of the network this node is participating in.
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Llamada Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -101,7 +101,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzMTA2MzM1NF19
+eyJoaXN0b3J5IjpbLTMwMTczODM1MF19
 -->
