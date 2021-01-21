@@ -75,7 +75,7 @@ No necesitas tener fondos de AVAX en tu nodo de validación. De hecho, es mejor 
 
 #### Monitoreo<a id="monitoring"></a>
 
-Siga este tutorial para aprender a controlar el tiempo de actividad de su nodo, su salud general, etc.
+Sigue este tutorial para aprender a controlar el tiempo de actividad de tu nodo, su salud general, etc.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
@@ -105,7 +105,7 @@ Si el validador en el que delega los tokens es lo suficientemente correcto y rec
 
 Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a su dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTExMTQ5NjE3LC0zNTM3MDE1MTMsMTQyNj
+eyJoaXN0b3J5IjpbNzc4NjE5NzIxLC0zNTM3MDE1MTMsMTQyNj
 M3Mzc0NiwxNTcyNzM0MzYsLTE1MzM4NDA5OTIsLTkwNTMxNzMw
 MCw5OTU1NTQ4OCw1NDI1Njc2NDgsLTM2Mjc5OTM4MSw1NzY4MD
 U5OTEsLTcxNzcxOTgxMV19
