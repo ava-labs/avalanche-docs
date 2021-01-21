@@ -219,7 +219,7 @@ Revisa si una cadena ha terminado de inicializar (bootstrapping).
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
-`chain` is the ID or alias of a chain.
+`chain` es elis the ID or alias of a chain.
 
 #### **Example Call**
 
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4MDc2ODAyNSwyNTEzMDk3MjhdfQ==
+eyJoaXN0b3J5IjpbLTM2NTM1MjU4NCwyNTEzMDk3MjhdfQ==
 -->
