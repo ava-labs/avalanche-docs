@@ -44,7 +44,7 @@ descripción: >-
 
 ## Avalanche
 
-[Avalanche](https://avax.network) es una plataforma de código abierto para el lanzamiento de [aplicaciones descentralizadas](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) y despliegues de [cadenas de bloques](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) empresariales en un ecosistema interoperable y altamente escalable. Avalanche le da un control completo tanto de la red como de las capas de aplicación, ayudándole a construir cualquier cosa que pueda imaginar
+[Avalanche](https://avax.network) es una plataforma de código abierto para el lanzamiento de [aplicaciones descentralizadas](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) y despliegues de [cadenas de bloques](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) empresariales en un ecosistema interoperable y altamente escalable. Avalanche te da un control completo tanto de la red como de las capas de aplicación, ayudándote a construir cualquier cosa que puedas imaginar
 
 Una diferencia clave entre Avalanche y otras redes descentralizadas es el protocolo de consenso. Con el tiempo, la gente ha llegado a un falso entendimiento de que las cadenas de bloques tienen que ser lentas y no escalables. El protocolo de Avalanche emplea un novedoso enfoque de consenso para lograr sus sólidas garantías de seguridad, su rápida finalidad y su alto rendimiento, sin comprometer la descentralización.
 
@@ -108,8 +108,8 @@ Crea tus propias blockchains públicas o privadas.
 
 Soporte nativo para crear e intercambiar fácilmente activos digitales inteligentes con reglas complejas y personalizadas.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzEwMTEzODAsLTIyNjM1MTE2MSwyMD
-IwMjk1MDQwLDEyOTY5Njg1MjgsLTY0NTMxMDQyMSw5OTU4NDA5
-MzgsMTU2NDk0NDM0MSwtMTgzMzIyNDMzMSw5ODgxMDE5NzBdfQ
-==
+eyJoaXN0b3J5IjpbLTE0ODQxNzExLC0xMTcxMDExMzgwLC0yMj
+YzNTExNjEsMjAyMDI5NTA0MCwxMjk2OTY4NTI4LC02NDUzMTA0
+MjEsOTk1ODQwOTM4LDE1NjQ5NDQzNDEsLTE4MzMyMjQzMzEsOT
+g4MTAxOTcwXX0=
 -->
