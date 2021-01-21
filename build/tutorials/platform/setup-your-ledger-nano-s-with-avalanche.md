@@ -19,7 +19,7 @@ Una vez en la configuración, ve a la pestaña **Experimental features**.
 
 ![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
-Desplázate hacia abajo hasta el interruptor  del **Developer mode** y actívelo.
+Desplázate hacia abajo hasta el interruptor  del **Developer mode** y actívalo.
 
 ![Toggle on developer mode](https://miro.medium.com/max/2908/1*qdte7MSvSZdfqfCIUMNp2Q.png)
 
@@ -33,7 +33,7 @@ Puedes confirmar que la instalación fue exitosa yendo a la pestaña **Apps inst
 
 ## Usar la Wallet de Avalanche con Ledger <a id="48a3"></a>
 
-Una vez que tengas la aplicación de Avalanche instalada, podrás interactuar con la [Wallet de Avalanche](https://wallet.avax.network/) a través del Ledger. Esto incluye el envío de AVAX, fichas, NFTs, intercambios cross-chain entre la X-Chain&lt;-&gt;P-Chain así como hacer stake de tokens.
+Una vez que tengas la aplicación de Avalanche instalada, podrás interactuar con la [Wallet de Avalanche](https://wallet.avax.network/) a través del Ledger. Esto incluye el envío de AVAX, Tokens, NFTs, intercambios cross-chain entre la X-Chain&lt;-&gt;P-Chain así como hacer stake de tokens.
 
 Primero, para acceder a la Wallet, conecte el Ledger a su ordenador y, si es necesario, introduzca su pin.
 
@@ -88,5 +88,6 @@ Finalmente, debería poder ver los detalles de la transacción en nuestro explor
 Ava Labs está construyendo la Internet de las finanzas. Estamos desarrollando soluciones para crear un mundo sin fricciones redefiniendo la forma en que la gente construye y utiliza las aplicaciones financieras. Una parte crítica de esta infraestructura es una Wallet de hardware para que los usuarios puedan estar totalmente seguros de que sus claves privadas y monedas están completamente aisladas de cualquier actor potencialmente malicioso. Nuestra recién lanzada aplicación de Ledger hace precisamente esto siguiendo las mejores prácticas de la industria para mantener a los usuarios y las monedas a salvo y seguras.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5NDE4MjI5NiwtNjUxODM2MzEyXX0=
+eyJoaXN0b3J5IjpbMjMzNDUyMzQ4LDE2OTQxODIyOTYsLTY1MT
+gzNjMxMl19
 -->
