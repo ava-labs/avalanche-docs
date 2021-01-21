@@ -270,13 +270,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-donde `to` es la dirección de la X-Chain a la que se está enviando los AVAX.
+Donde `to` es la dirección de la X-Chain a la que se está enviando los AVAX.
 
 Esto nos proporciona el ID de la transacción, y podemos comprobar que la transacción fue realizada ejecutando [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). de nuevo, Asegúrate de que la cantidad que envías excede la comisión por la transacción.
 
 ### Paso 2 - Importar AVAX a X-Chain
 
-Para finalizar nuestra transferencia de P-Chain a la X-Chain, ejecuta[`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
+Para finalizar nuestra transferencia de P-Chain a la X-Chain, ejecuta [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
 
 ```cpp
 curl -X POST --data '{
@@ -293,7 +293,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Observe que `to` es la misma dirección que especificamos  cuando ejecutamos [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
+Observa que `to` es la misma dirección que especificamos  cuando ejecutamos [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
 
 Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) para verificar que los fondos fueron recibidos. El saldo debería haber aumentado a `.003` AVAX menos la comisión por la transacción.
 
@@ -304,6 +304,6 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwNDUxNTIzMywxMzU3OTIwNDQ0LC0yNj
-E5MjQ4NzhdfQ==
+eyJoaXN0b3J5IjpbLTE5MTcxNjc4MzcsMTM1NzkyMDQ0NCwtMj
+YxOTI0ODc4XX0=
 -->
