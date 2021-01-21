@@ -41,7 +41,7 @@ sudo useradd -M -r -s /bin/false prometheus
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
-A continuación, obtén el enlace a la última versión de Prometeo de la [página de descargas](https://prometheus.io/download/) \(asegúrese de seleccionar la arquitectura de procesador apropiada\), y usa wget para descargarlo y tar para desempaquetar el archivo:
+A continuación, obtén el enlace a la última versión de ## Prometheus de la [página de descargas](https://prometheus.io/download/) \(asegúrate de seleccionar la arquitectura de procesador apropiada\), y usa wget para descargarlo y tar para desempaquetar el archivo:
 
 ```cpp
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
@@ -367,7 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDQ1MDczNzYsMjA2NTI0NTc2Niw3Nz
+eyJoaXN0b3J5IjpbLTE0ODc4NzU4MzAsMjA2NTI0NTc2Niw3Nz
 QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
 NjNdfQ==
 -->
