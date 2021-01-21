@@ -104,7 +104,7 @@ curl -X POST --data '{
 
 Donde `to` es la dirección de una cadena P-Chain que el usuario controla y `changeAddr` es la dirección a la que enviar cualquier cambio. Puedes dejar `changeAddr` en blanco; si lo dejas en blanco, el cambio será devuelto a una dirección controlada por tu usuario \(Ve [aquí](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) para instrucciones sobre cómo crear una nueva dirección de la P-Chain\).
 
-Ten en cuenta que pagarás una comisión por las operaciones de exportación e importación. En este ejemplo, asumamos que la comisión por la transacción es de "0,001" AVAX. Entonces, la exportación anterior consume realmente `.006` AVAX; `.005` va a la P-Chain y `.001` se quema como comisión por la transacción.
+Ten en cuenta que pagarás una comisión por las operaciones de exportación e importación. En este ejemplo, asumamos que la comisión por la transacción es de "0,001" AVAX. Entonces, la exportación anterior consume realmente `.006` AVAX; `.005` va a la P-Chain y `.001` se hace _burn_ como comisión por la transacción.
 
 Asegúrate de que la cantidad que envías excede la comisión por la transacción. De lo contrario, cuando importes AVAX a la P-Chain, consumirá la comisión de la transacción, y acabarás con _menos_ AVAX en la P-Chain.
 
@@ -304,6 +304,6 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0MDAxODM4NCwxMzU3OTIwNDQ0LC0yNj
+eyJoaXN0b3J5IjpbMTE5ODI0NDMwNSwxMzU3OTIwNDQ0LC0yNj
 E5MjQ4NzhdfQ==
 -->
