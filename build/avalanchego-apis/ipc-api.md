@@ -1,8 +1,8 @@
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+La API de IPC permite a los usuarios crear sockets de dominio UNIX para que las cadenas de bloques publiquen. Cuando la cadena de bloques acepta un vértice / bloque, lo publicará en un socket y las decisiones contenidas en su interior se publicarán en otro.
 
-A node will only expose this API if it is started with [command line argument](../references/command-line-interface.md) `api-ipcs-enabled=true`.
+Un nodo solo expondrá esta API si se inicia con el [argumento de línea de comando](../references/command-line-interface.md) `api-ipcs-enabled=true`.
 
 ## IPC Message Format
 
@@ -108,3 +108,6 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTcwNDM2MjY5N119
+-->
