@@ -64,7 +64,7 @@ La transferencia entre cadenas es un proceso de dos pasos: primero una transacci
 
 Para devolver AVAX de vuelta a la X-Chain, tienes que hacer la transferencia en la dirección opuesta.
 
-Intercambie la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
+Intercambia la cadena de origen y destino, seleccionándolos en el menú desplegable **Source** y **Destination**. El resto del proceso es el mismo: introducir el importe, confirmar y transferir.
 
 ## Transferencia de la  X-Chain a la P-Chain  con llamados API
 
@@ -102,7 +102,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-donde `to` es la dirección de una cadena P-Chain que el usuario controla y `changeAddr`es la dirección a la que enviar cualquier cambio. Puedes dejar `changeAddr en blanco; si lo dejas en blanco, el cambio será devuelto a una dirección controlada por tu usuario \(Ve [aquí](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) para instrucciones sobre cómo crear una nueva dirección de la P-Chain\).
+Donde `to` es la dirección de una cadena P-Chain que el usuario controla y `changeAddr` es la dirección a la que enviar cualquier cambio. Puedes dejar `changeAddr` en blanco; si lo dejas en blanco, el cambio será devuelto a una dirección controlada por tu usuario \(Ve [aquí](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) para instrucciones sobre cómo crear una nueva dirección de la P-Chain\).
 
 Ten en cuenta que pagarás una comisión por las operaciones de exportación e importación. En este ejemplo, asumamos que la comisión por la transacción es de "0,001" AVAX. Entonces, la exportación anterior consume realmente `.006` AVAX; `.005` va a la P-Chain y `.001` se quema como comisión por la transacción.
 
@@ -304,5 +304,6 @@ Al igual que antes, podemos ejecutar [`avm.getBalance`](../../avalanchego-apis/e
 Ahora puedes usar los tokens de la P-Chain para [Añadir un Nodo como Validador](../nodes-and-staking/add-a-validator.md) en la Red Primaria.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NzkyMDQ0NCwtMjYxOTI0ODc4XX0=
+eyJoaXN0b3J5IjpbMjE0MDAxODM4NCwxMzU3OTIwNDQ0LC0yNj
+E5MjQ4NzhdfQ==
 -->
