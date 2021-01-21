@@ -4,7 +4,7 @@
 
 Este tutorial ilustra cómo crear un activo fungible de capital variable. No existen unidades del activo cuando éste se inicializa, pero se pueden acuñar más unidades del activo. En la creación del activo, especificamos qué conjuntos de direcciones pueden acuñar más unidades.
 
-Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
+Tal vez te preguntas por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
 * **Seguridad:** si sólo una dirección puede acuñar más del activo, y se pierde la clave privada de esa dirección, no se podrán acuñar más unidades. Del mismo modo, si sólo una dirección puede acuñar más del activo, nada impide que el titular de esa dirección acuñe unilateralmente todo lo que quiera.
 * **Flexibilidad:** es agradable poder codificar la lógica como, "Alice puede acuñar unilateralmente más unidades de este activo, o 2, en el cual Dinesh, Ellin y Jamie pueden juntos acuñar más".
@@ -255,6 +255,6 @@ En este tutorial:
 * Usamos`send` para transferir acciones.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTc1MDg5ODAsLTc5MjIxMzcyMSwxMD
-g3ODc3MDEzLC0xMTM1MDA1MTYxXX0=
+eyJoaXN0b3J5IjpbMTE2MzMyODAwNiwtNzkyMjEzNzIxLDEwOD
+c4NzcwMTMsLTExMzUwMDUxNjFdfQ==
 -->
