@@ -157,7 +157,7 @@ Esto devuelve la representación en bytes del estado génesis de su blockchain:
 
 ## Crea la Blockchain
 
-Ahora vamos a crear la nueva blockchain. Para eso, ejecutamos[`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Su respuesta debería ser como la de abajo. Tienes que cambiar `subnetID` a la subnet que validará su blockchain, y suministrar un `username` que controle un número suficiente de las control keys de la subnet. Como recordatorio, puedes averiguar cuál es el límite de la subred y las control keys ejecutando [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
+Ahora vamos a crear la nueva blockchain. Para eso, ejecutamos[`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Su respuesta debería ser como la de abajo. Tienes que cambiar `subnetID` a la subnet que validará su blockchain, y suministrar un `username` que controle un número suficiente de las control keys de la subnet. Como recordatorio, puedes averiguar cuál es el límite de la subnet y las control keys ejecutando [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
 ```cpp
 curl -X POST --data '{
@@ -284,5 +284,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzgyMTIzNTgsMTExMjAyNzE4Nl19
+eyJoaXN0b3J5IjpbOTM2OTc0NDQ2LC0yMTM4MjEyMzU4LDExMT
+IwMjcxODZdfQ==
 -->
