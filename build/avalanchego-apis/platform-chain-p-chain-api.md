@@ -2,7 +2,7 @@
 
 This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
 
-## Endpoint
+## Endpoint / Extremo
 
 ```cpp
 /ext/P
@@ -132,7 +132,7 @@ platform.addValidator(
 }
 ```
 
-* `nodeID` es el ID del nodo of the validator being added.
+* `nodeID` es el ID del nodo del validador que se agrega.
 * `startTime` is the Unix time when the validator starts validating the Primary Network.
 * `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
 * `stakeAmount` is the amount of nAVAX the validator is staking.
@@ -207,7 +207,7 @@ platform.addSubnetValidator(
 }
 ```
 
-* `nodeID` is the node ID of the validator.
+* `nodeID` es el ID del nodo validator.
 * `subnetID` is the subnet they will validate.
 * `startTime` is the unix time when the validator starts validating the subnet.
 * `endTime` is the unix time when the validator stops validating the subnet.
@@ -1803,5 +1803,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1NjQwNzkyNV19
+eyJoaXN0b3J5IjpbOTc0MjkwMTU5XX0=
 -->
