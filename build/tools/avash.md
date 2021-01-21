@@ -111,7 +111,7 @@ Inicia una nueva instancia de Avash con `./avash`.
 
 Ejecuta `help` para ver los comandos disponibles.
 
-También podemos ejecutar el [comando] `help ` tpara ver la lista de opciones disponibles para ese comando.
+También podemos ejecutar el [comando] `help ` para ver la lista de opciones disponibles para ese comando.
 
 Ejemplo:
 
@@ -351,6 +351,6 @@ Al escribir Lua, la funcionalidad estándar de Lua está disponible para automat
 Los scripts Lua de ejemplo están en la carpeta `./scripts`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUyNDA2MzcxLC0xOTYyNDI5OTk4LDEwNT
-M3MTIzOTUsLTI4MTcxODA4XX0=
+eyJoaXN0b3J5IjpbMTM1OTIzNTI0MSw2NTI0MDYzNzEsLTE5Nj
+I0Mjk5OTgsMTA1MzcxMjM5NSwtMjgxNzE4MDhdfQ==
 -->
