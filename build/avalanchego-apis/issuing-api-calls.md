@@ -17,9 +17,9 @@ Por ejemplo, el URL base podría verse así: `127.0.0.1:9650`.
 
 La documentación de cada API especifica a qué extremo un usuario debe realizar llamadas para acceder a los métodos de la API.
 
-## JSON RPC Formatted APIs
+## APIs con formato JSON RPC
 
-Several built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
+Varias API integradas utilizan el formato [JSON RPC 2.0](https://www.jsonrpc.org/specification) para describir sus solicitudes y respuestas. Dichas API incluyen la API de Plataforma y la API de X-Chain.
 
 ### Making a JSON RPC Request
 
@@ -102,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1MTg1MjU3NF19
+eyJoaXN0b3J5IjpbMjI2MTAxMTU3XX0=
 -->
