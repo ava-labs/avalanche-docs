@@ -672,7 +672,7 @@ Una credencial [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e
 #### Que Contiene una Credencial SECP256K1 
 
 * **`TypeID`** es el ID para este tipo. Es `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
+* **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
 #### Especificación Gantt de una Credencial SECP256K1 
 
@@ -924,8 +924,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjE5MTU2OCwtMTM1MTU0MjgyNSw0OT
-Q0NDk0MTIsMTIwNzI5MDI2MywxMDIwNzIyNDM3LDQ0OTcxMTIw
-NSwxMjY2MTc5Nzk0LDE1OTgwMTE1ODYsLTE2MTkyNDI3NzQsMT
-I1MDA2NzA5MywtMTQxOTAxODQ4MCwtNzQ4MzE1NDddfQ==
+eyJoaXN0b3J5IjpbMTQyOTU5NDk5OSwtMTg2MTkxNTY4LC0xMz
+UxNTQyODI1LDQ5NDQ0OTQxMiwxMjA3MjkwMjYzLDEwMjA3MjI0
+MzcsNDQ5NzExMjA1LDEyNjYxNzk3OTQsMTU5ODAxMTU4NiwtMT
+YxOTI0Mjc3NCwxMjUwMDY3MDkzLC0xNDE5MDE4NDgwLC03NDgz
+MTU0N119
 -->
