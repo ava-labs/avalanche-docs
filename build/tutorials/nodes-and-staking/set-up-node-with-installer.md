@@ -97,13 +97,13 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-ingresa`1` si tienes un aIP dinámica y `2` si tienes una IP estática. Si está en una IP estática, intentará detectar automáticamente la IP y pedirá confirmación.
+Ingresa`1` si tienes una IP dinámica y `2` si tienes una IP estática. Si estás en una IP estática, intentará detectar automáticamente la IP y te pedirá confirmación.
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirma con `y`, o `n` si la IP detectada no es correcta \(o vacía\), y luego introduzca la IP correcta en el siguiente paso.
+Confirma con `y`, o `n` si la IP detectada no es correcta \(o vacía\), y luego introduce la IP correcta en el siguiente paso.
 
 El script continuará con la creación del servicio del sistema y terminará con el inicio del servicio.
 
@@ -156,9 +156,9 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Fíjese en el `active` (en marcha)" que indica que el servicio está funcionando bien. Es posible que tenga que pulsar `q` para volver a la línea de comandos.
+Fíjese en el `active` (en marcha)" que indica que el servicio está funcionando bien. Es posible que tengas que pulsar `q` para volver a la línea de comandos.
 
-Para encontrar el ID de su nodo, el cual se usa para identificar su nodo a la red, ejecute el siguiente comando:
+Para encontrar el ID de tu nodo, el cual se usa para identificar tu nodo a la red, ejecute el siguiente comando:
 
 ```text
 sudo journalctl -u avalanchego | grep "node's ID"
@@ -171,7 +171,7 @@ Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanc
 ```
 
 
-Ponga `NodeID-` al valor para obtener, por ejemplo, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Guarda eso; será necesario para staking o buscar tu nodo.
+Pon `NodeID-` al valor para obtener, por ejemplo, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Guarda eso; será necesario para staking o buscar tu nodo.
 
 Tu nodo debería estar en el proceso de arranque ahora. Puedes monitorear el progreso emitiendo el siguiente comando:
 
@@ -179,7 +179,7 @@ Tu nodo debería estar en el proceso de arranque ahora. Puedes monitorear el pro
 sudo journalctl -u avalanchego -f
 ```
 
-Presione `ctrl+C` cuando desee dejar de leer la salida del nodo.
+Presiona `ctrl+C` cuando desees dejar de leer la salida del nodo.
 
 ## Deteniendo el Nodo
 
@@ -241,8 +241,8 @@ Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDg1Mjk3NTksOTg4NTgyNjc2LDE1OT
-E0MjgzOTQsLTEwNDk2NzMzMDYsMTIxNDA2MjIzOCwtNDM0ODcz
-MDQ0LC04NTc0MzUxNTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NT
-YsLTE1NjYzMDE1ODgsLTM1Njg4NTMyNF19
+eyJoaXN0b3J5IjpbNTk0MDcxODcxLDk4ODU4MjY3NiwxNTkxND
+I4Mzk0LC0xMDQ5NjczMzA2LDEyMTQwNjIyMzgsLTQzNDg3MzA0
+NCwtODU3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC
+0xNTY2MzAxNTg4LC0zNTY4ODUzMjRdfQ==
 -->
