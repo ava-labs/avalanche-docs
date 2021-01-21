@@ -71,12 +71,12 @@ ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-En este ejemplo, la segunda línea muestra información sobre su nodo. Fíjese en la ID del proceso, en este caso, `2630`. Detenga el nodo ejecutando `kill -2 2630`.
+En este ejemplo, la segunda línea muestra información sobre su nodo. Fíjate en la ID del proceso, en este caso, `2630`. Detén el nodo ejecutando `kill -2 2630`.
 
 
 Ahora estamos listos para descargar la nueva versión del nodo. Puedes descargar el código fuente y luego construir el programa binario, o puedes descargar el binario pre-construido. No necesitas hacer ambas cosas.
 
-La descarga del binario preconstruido es más fácil y recomendable si sólo quieres ejecutar tu propio nodo hacer stake en él.
+La descarga del binario preconstruido es más fácil y recomendable si sólo quieres ejecutar tu propio nodo y hacer stake en él.
 
 Crear el Nodo [desde el código fuente](upgrade-your-avalanchego-node.md#build-from-source) es recomendado si eres un desarrollador que busca experimentar y construir en Avalanche.
 
@@ -180,6 +180,6 @@ Puedes ejecutar tu nodo con:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg5MzI4OTIsODQ2Nzc0MjE0LC0xMTQyNj
-I0MzI0LDQ1MDgwMDk3N119
+eyJoaXN0b3J5IjpbMTA4NTc1NDY2NCw4NDY3NzQyMTQsLTExND
+I2MjQzMjQsNDUwODAwOTc3XX0=
 -->
