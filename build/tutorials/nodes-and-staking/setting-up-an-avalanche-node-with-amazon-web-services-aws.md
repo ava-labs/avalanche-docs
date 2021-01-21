@@ -18,25 +18,25 @@ Este tutorial asume que su máquina local tiene un terminal de estilo Unix. Si e
 Registrarse en AWS está fuera del alcance de este artículo, pero Amazon tiene instrucciones [aquí](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
 
-Es _muy_ recomendable que establezca una autenticación de múltiples factores en su cuenta de usuario root de AWS para protegerla. Amazon tiene documentación para esto [aquí](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
+Es _muy_ recomendable que establezcas una autenticación de múltiples factores en tu cuenta de usuario root de AWS para protegerla. Amazon tiene documentación para esto [aquí](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
 
-Una vez que su cuenta esté configurada, debería crear una nueva instancia EC2. Un EC2 es una instancia de máquina virtual en la nube de AWS. Vaya a la [Consola de Gestión de AWS](https://console.aws.amazon.com/) y entre en el panel de control del EC2.
+Una vez que tu cuenta esté configurada, deberías crear una nueva instancia EC2. Un EC2 es una instancia de máquina virtual en la nube de AWS. Ve a la [Consola de Gestión de AWS](https://console.aws.amazon.com/) y entra en el panel de control del EC2.
 
 ![AWS Management Console.png](../../../.gitbook/activos/AWS-Management-Console.png)
 
-Para acceder a la instancia EC2, necesitará una llave en su máquina local que le permita acceder a la instancia. Primero, cree esa clave para que pueda ser asignada a la instancia EC2 más adelante. En la barra de la izquierda, bajo **Network & Security**, seleccione **Key Pairs.**
+Para acceder a la instancia EC2, necesitarás una llave en tu máquina local que te permita acceder a la instancia. Primero, crea esa clave para que pueda ser asignada a la instancia EC2 más adelante. En la barra de la izquierda, bajo **Network & Security**, selecciona **Key Pairs.**
 
 ![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/Network-and-Security.png)
 
-Seleccione **Create key pair** para iniciar el asistente de creación de key pairs.
+Selecciona **Create key pair** para iniciar el asistente de creación de key pairs.
 
 ![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-Nombra tu key pair`avalanche`. Si tu máquina local tiene MacOS o Linux, selecciona el formato de archivo `pem` . Si es Windows, utiliza el formato de archivo `ppk` . Opcionalmente, puedes agregar etiquetas a el key pair para ayudar con el seguimiento.
+Nombra tu key pair `avalanche`. Si tu máquina local tiene MacOS o Linux, selecciona el formato de archivo `pem` . Si es Windows, utiliza el formato de archivo `ppk` . Opcionalmente, puedes agregar etiquetas a el key pair para ayudar con el seguimiento.
 
 ![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-Haz clic en `Create key pair`. Debería ver un mensaje de éxito, y el archivo de claves debería ser descargado a su máquina local. Sin este archivo, no podrá acceder a su instancia EC2. **Haga una copia de este archivo y póngalo en un medio de almacenamiento separado, como un disco duro externo. Mantenga este archivo en secreto; no lo comparta con otros.**
+Haz clic en `Create key pair`. Deberías ver un mensaje de éxito, y el archivo de claves debería ser descargado a su máquina local. Sin este archivo, no podrá acceder a su instancia EC2. **Haga una copia de este archivo y póngalo en un medio de almacenamiento separado, como un disco duro externo. Mantenga este archivo en secreto; no lo comparta con otros.**
 
 
 ![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
@@ -283,8 +283,8 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYxMjM1MjUzLDIxMTIxNDY4OTYsMzI3MD
-EwNTY1LDE5NDAwNDk0MDEsNDY2MDkxNDkxLC0xNTY4MDkxNDkz
-LDU1NzY1OTE0LDE2MTAyNzg0NSw3Mjg2NjU3OTksLTcyMDY4ND
-Y3Niw4NjEwOTUzMDNdfQ==
+eyJoaXN0b3J5IjpbLTExOTE5NzU2MDAsMjExMjE0Njg5NiwzMj
+cwMTA1NjUsMTk0MDA0OTQwMSw0NjYwOTE0OTEsLTE1NjgwOTE0
+OTMsNTU3NjU5MTQsMTYxMDI3ODQ1LDcyODY2NTc5OSwtNzIwNj
+g0Njc2LDg2MTA5NTMwM119
 -->
