@@ -154,7 +154,7 @@ Primero realizará una prueba de validación. Si recibe un error aquí, asegúre
 
 ![Image for post](https://miro.medium.com/max/751/1*HyQP7HJCiVQPPiWodRj6aQ.png)
 
-A continuación, recibirá un mensaje que le pedirá que genere un nuevo par de claves para conectar su máquina virtual. Seleccione "Download private key and create resource" para descargar la private key a su PC.
+A continuación, recibirá un mensaje que le pedirá que genere un nuevo key pair para conectar su máquina virtual. Seleccione "Download private key and create resource" para descargar la private key a su PC.
 
 ![Image for post](https://miro.medium.com/max/456/1*FCAVco29fcianH4TjxVGzQ.png)
 Una vez que su instalación haya terminado, seleccione "Go to resource"
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzc4MjkxNzIsMTA0Mzk1NDM1MCw4Nz
-c0NjQzOTIsMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMw
-NywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LD
-IyMjE3ODY5NF19
+eyJoaXN0b3J5IjpbMzQwMDE1NjA1LDEwNDM5NTQzNTAsODc3ND
+Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
+LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
