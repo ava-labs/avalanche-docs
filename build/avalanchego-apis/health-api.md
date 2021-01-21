@@ -42,8 +42,8 @@ health.getLiveness() -> {
 
 `checks` es una lista de las revisiones de salud del nodo.
 
-* A check response may include a `message` with additional context.
-* A check response may include an `error` describing why the check failed.
+* Una respuesta de revisión puede incluir un mensaje (`message`) con contexto adicional.
+* Una respuesta de revisión puede incluir un  `error` describiendo por qué describing why the check failed.
 * `timestamp` is the timestamp of the last health check.
 * `duration` is the execution duration of the last health check, in nanoseconds.
 * `contiguousFailures` is the number of times in a row this check failed.
@@ -118,5 +118,5 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDY0MDYwNzRdfQ==
+eyJoaXN0b3J5IjpbLTE0Mjg4ODgxOTVdfQ==
 -->
