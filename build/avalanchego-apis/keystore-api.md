@@ -1,6 +1,6 @@
 # Keystore API
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+Cada nodo tiene un almacén de llaves integrado. Los clientes crean usuarios en el almacén de llaves, que actúan como identidades que se utilizarán al interactuar con blockchains. Un almacén de llaves existe a nivel de nodo, por lo que si crea un usuario en un nodo, existe _solamente_ en ese nodo. Sin embargo, los usuarios se pueden importar y exportar utilizando esta API.
 
 _**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
 
@@ -224,3 +224,6 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbODA1MDk1ODZdfQ==
+-->
