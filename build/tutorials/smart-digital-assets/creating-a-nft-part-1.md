@@ -154,7 +154,7 @@ La respuesta contiene una lista de UTXOs:
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
-se expresa en hexadecimal como:
+Se expresa en hexadecimal como:
 
 ```cpp
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
@@ -177,7 +177,7 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Ten en cuenta que el `TypeID` es`00 00 00 0a` el cual es el tipo correcto de identificación para una salida de acuñación NFT. También hay que tener en cuenta que el `GroupID` es`00 00 00 00`. Este`GroupID` fué creado basado en los números de `MinterSets` que pasé a `avm.createNFTAsset`.
+Ten en cuenta que el `TypeID` es`00 00 00 0a` el cual es el tipo correcto de identificación para una salida de acuñación NFT. También hay que tener en cuenta que el `GroupID` es `00 00 00 00`. Este `GroupID` fué creado basado en los números de `MinterSets` que pasamos a `avm.createNFTAsset`.
 
 ## Acuñar el Activo
 
@@ -357,6 +357,6 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjcxODkxOTEsMTg0NzY1Mjg2NywtMT
-IzODc5MzY2MV19
+eyJoaXN0b3J5IjpbLTUyNjEyMTQwNiwxODQ3NjUyODY3LC0xMj
+M4NzkzNjYxXX0=
 -->
