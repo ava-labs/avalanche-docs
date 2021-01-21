@@ -4,7 +4,7 @@
 
 Además del token nativo de AVAX, [La Plataforma de Avalanche](../platform/) apoya nativamente la creación de otros tipos de activos digitales: activos de capital fijo, activos de capital variable y tokens no fungibles \(NFTs\).
 
-A diferencia de las fichas regulares, que son intercambiables \(fungibles\), lo que significa que cada uno es el mismo, cada token no fungible es único en la red, con un ID distinto que lo hace diferente de cualquier otro. Esto permite muchos casos de uso que serían imposibles con los tokens intercambiables, como la prueba de propiedad de un activo único.
+A diferencia de los tokens regulares, que son intercambiables \(fungibles\), lo que significa que cada uno es el mismo, cada token no fungible es único en la red, con un ID distinto que lo hace diferente de cualquier otro. Esto permite muchos casos de uso que serían imposibles con los tokens intercambiables, como la prueba de propiedad de un activo único.
 
 ## NFT Studio en la Wallet de Avalanche
 
@@ -90,6 +90,6 @@ Ahora, debes saber cómo crear familias de NFT, acuñar grupos de NFT, y enviarl
 Si desesa conocer los antecedentes técnicos de cómo funcionan los NFT en la red de Avalanche o deseas construir productos usando NFT, mira el [Tutorial de NFT](creating-a-nft-part-1.md). Si tienes preguntas técnicas, ponte en contacto con nosotros en nuestro [Servidor de Discord](https://chat.avalabs.org/).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3Mjg4MTUwNCwxMTA2MTU4Nzk4LDEyMD
+eyJoaXN0b3J5IjpbMTU2MDA1MTc5NCwxMTA2MTU4Nzk4LDEyMD
 kzMjI1MjVdfQ==
 -->
