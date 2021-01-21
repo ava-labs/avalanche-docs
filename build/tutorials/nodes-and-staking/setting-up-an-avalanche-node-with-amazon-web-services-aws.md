@@ -105,7 +105,7 @@ Haz clic en **Next: Add Tags** en la esquina inferior derecha de la pantalla par
 
 ![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
-Ahora asigna el grupo de seguridad creado anteriormente a la instancia. Elija **Select an existing security group**  y elije el grupo de seguridad creado anteriormente.
+Ahora asigna el grupo de seguridad creado anteriormente a la instancia. Elige **Select an existing security group**  y elige el grupo de seguridad creado anteriormente.
 
 ![Choose the security group created earlier.](../../../.gitbook/assets/configure-security-group.png)
 
@@ -122,7 +122,7 @@ Se te pedirá que selecciones un key pair para esta instancia. Selecciona **Choo
 
 ### Asignar una IP elástica
 
-Por defecto, tu instancia no tendrá una IP fija. Démosle una IP fija a través del servicio de IP Elástica de AWS. Vuelve al tablero del EC2. En **Network & Security**, seleccione **Elastic IPs**.
+Por defecto, tu instancia no tendrá una IP fija. Démosle una IP fija a través del servicio de IP Elástica de AWS. Vuelve al tablero del EC2. En **Network & Security**, selecciona **Elastic IPs**.
 
 ![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
@@ -148,7 +148,7 @@ Vuelve al tablero del EC2 y selecciona `Running Instances`.
 
 ![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Seleccione la instancia de EC2 recién creada. Esto abre un panel de detalles con información sobre la instancia.
+Selecciona la instancia de EC2 recién creada. Esto abre un panel de detalles con información sobre la instancia.
 
 ![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
@@ -283,8 +283,8 @@ Su máquina está ejecutando la nueva versión de AvalancheGo. Para ver el estad
 ¡Eso es! Ahora tienes un nodo de AvalancheGo funcionando en una instancia de AWS EC2. Recomendamos configurar [Monitorización de Nodos ](setting-up-node-monitoring.md)para su nodo AvalancheGo. También recomendamos configurar las alertas de facturación de AWS para que no se sorprenda cuando llegue la factura. Si tiene algún comentario sobre este tutorial, o cualquier otra cosa, envíenos un mensaje en [Discord](https://chat.avalabs.org).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE1OTU2NjMyMSwyMTEyMTQ2ODk2LDMyNz
-AxMDU2NSwxOTQwMDQ5NDAxLDQ2NjA5MTQ5MSwtMTU2ODA5MTQ5
-Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4NjY1Nzk5LC03MjA2OD
-Q2NzYsODYxMDk1MzAzXX0=
+eyJoaXN0b3J5IjpbLTE5MzA1MjY4MzUsMTE1OTU2NjMyMSwyMT
+EyMTQ2ODk2LDMyNzAxMDU2NSwxOTQwMDQ5NDAxLDQ2NjA5MTQ5
+MSwtMTU2ODA5MTQ5Myw1NTc2NTkxNCwxNjEwMjc4NDUsNzI4Nj
+Y1Nzk5LC03MjA2ODQ2NzYsODYxMDk1MzAzXX0=
 -->
