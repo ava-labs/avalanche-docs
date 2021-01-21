@@ -22,7 +22,7 @@ Requisitos Previos:
 ### **Seguridad**
 
 {% hint style="danger" %}
-El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Prometheus ni Grafana, como se muestra aquí, están protegidos contra el acceso no autorizado. Asegúrate de que ambos son accesibles sólo a través de un proxy seguro, red local o VPN. Configurar eso está fuera del alcance de este tutorial, pero tenga cuidado. ¡Las malas prácticas de seguridad podrían llevar a los atacantes a obtener el control de su nodo! Es su responsabilidad seguir las prácticas de seguridad adecuadas.
+El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Prometheus ni Grafana, como se muestra aquí, están protegidos contra el acceso no autorizado. Asegúrate de que ambos son accesibles sólo a través de un proxy seguro, red local o VPN. Configurar eso está fuera del alcance de este tutorial, pero ten cuidado. ¡Las malas prácticas de seguridad podrían llevar a los atacantes a obtener el control de tu nodo! Es tu responsabilidad seguir las prácticas de seguridad adecuadas.
 {% endhint %}
 
 ### Contribuciones
@@ -367,6 +367,7 @@ Para importar el tablero pre-configurado:
 ¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2NTI0NTc2Niw3NzQwMDE5MDMsLTEwMj
-MwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1NjNdfQ==
+eyJoaXN0b3J5IjpbLTEwMDM2MjQwMiwyMDY1MjQ1NzY2LDc3ND
+AwMTkwMywtMTAyMzAwNDAzMCwtOTA2NTI4OTEwLDQwOTI4MTU2
+M119
 -->
