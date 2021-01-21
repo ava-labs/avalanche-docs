@@ -97,7 +97,7 @@
 
 [**AVADO**](https://ava.do/)**:** nodos de blockchain de hardware plug and play que permiten a los individuos y a los desarrolladores acceder de forma fácil y privada a las aplicaciones Web3, participar en el staking y ejecutar Dapps incentivadas para ganar criptomonedas
 
-[**Bloq**](https://www.bloq.com): infraestructura gestionada para construir sobre redes de blockchain. Tienes una única interfaz para un conjunto cada vez mayor de servicios de infraestructura de nivel empresarial para construir sobre múltiples redes de blockchain.
+[**Bloq**](https://www.bloq.com): infraestructura gestionada para construir sobre redes de blockchain. Tiene una interfaz única para un conjunto cada vez mayor de servicios de infraestructura de nivel empresarial para construir sobre múltiples redes de blockchain.
 
 [**DataHub by Figment**](https://figment.io/datahub/avalanche/): Con DataHub, los desarrolladores de Avalanche ya no tienen que preocuparse por la gestión de la infraestructura, ya que ofrecemos acceso directo a las API de Avalanche a través de nuestra infraestructura de nodos completos de alta disponibilidad.
 
@@ -134,7 +134,7 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5MjUyNzA2MSwyMDM4NzUyMzQxLDM3MT
-g5MjAzNSwtMTAzMTA0NDU0MSw1OTE5MDE4ODUsMTIyNDM0NjU2
-Nl19
+eyJoaXN0b3J5IjpbMTQ3MjExODIyLDExOTI1MjcwNjEsMjAzOD
+c1MjM0MSwzNzE4OTIwMzUsLTEwMzEwNDQ1NDEsNTkxOTAxODg1
+LDEyMjQzNDY1NjZdfQ==
 -->
