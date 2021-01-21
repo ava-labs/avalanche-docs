@@ -2,9 +2,9 @@
 
 Cada nodo tiene un almacén de llaves integrado. Los clientes crean usuarios en el almacén de llaves, que actúan como identidades que se utilizarán al interactuar con blockchains. Un almacén de llaves existe a nivel de nodo, por lo que si crea un usuario en un nodo, existe _solamente_ en ese nodo. Sin embargo, los usuarios se pueden importar y exportar utilizando esta API.
 
-_**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
+_**Solo debes crear un usuario de almacén de llaves en un nodo que operes, ya que el operador del nodo tiene acceso a tu contraseña de texto sin formato.**_
 
-For validation and delegation on main net, you should issue transactions through [the wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+Para la validación y delegación en la red principal, debe emitir transacciones a través de [la wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). De esa manera, las llaves de control de tus fondos no se almacenarán en el nodo, lo que reduce significativamente el riesgo en caso de que una computadora que ejecuta un nodo se vea comprometida.That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
 
 ## Format
 
@@ -225,5 +225,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA1MDk1ODZdfQ==
+eyJoaXN0b3J5IjpbLTE1Njg1MDYyNDFdfQ==
 -->
