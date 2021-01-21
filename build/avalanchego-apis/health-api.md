@@ -2,11 +2,11 @@
 
 Esta API puede ser usada para medir la salud del nodo.
 
-Para obtener el código HTTP de estado de un nodo que indique el estado de salud de un To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+Para obtener el código HTTP de estado de un nodo que indique el estado de salud de un nodo, haz una petición tipo `GET` a `/ext/health`. Si el nodo está saludable, regresará un código de estado `200`. Si deseas profundizar más respecto a la salud del nodo, utiliza los siguientes métodos.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+La API This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
 ## Endpoint
 
@@ -118,5 +118,5 @@ In this example response, the C-Chain’s health check is failing.
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ4MDI5OTMwXX0=
+eyJoaXN0b3J5IjpbLTIwOTY4NTQ0OTFdfQ==
 -->
