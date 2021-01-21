@@ -737,11 +737,11 @@ Una transacción firmada o "Signed Transaction" contiene un `AtomicTx` sin firma
 
 Una Transacción Firmada contiene un `CodecID`, `AtomicTx`, y`Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`AtomicTx`** is an atomic transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential corresponds to the input at the same index in the AtomicTx
+* **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
+* **`AtomicTx`** es una transacción atómica, como se describe arriba.
+* **`Credenciales`** es un conjunto de credenciales. Cada credencial corresponde a la entrada en el mismo índice en el AtomicTx
 
-### Gantt Signed Transaction Specification
+### Especificación Gantt de una Transacción Firmada
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -754,8 +754,7 @@ Una Transacción Firmada contiene un `CodecID`, `AtomicTx`, y`Credentials`.
                                      |   6 + size(atomic_tx) + len(credentials) bytes |
                                      +------------------------------------------------+
 ```
-
-### Proto Signed Transaction Specification
+### Especificación Proto de una Transacción Firmada
 
 ```text
 message Tx {
@@ -765,9 +764,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Ejemplo de una Transacción Firmada
 
-Let's make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+Hagamos una transacción firmada que utilice la transacción no firmada y la credencial de los ejemplos anteriores:
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
@@ -924,7 +923,7 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzI0NTI2MzAsMTI1OTM0ODE3MCwxNj
+eyJoaXN0b3J5IjpbLTE2NDIzNzc0MzgsMTI1OTM0ODE3MCwxNj
 gzMjczMzgyLC0xODYxOTE1NjgsLTEzNTE1NDI4MjUsNDk0NDQ5
 NDEyLDEyMDcyOTAyNjMsMTAyMDcyMjQzNyw0NDk3MTEyMDUsMT
 I2NjE3OTc5NCwxNTk4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAw
