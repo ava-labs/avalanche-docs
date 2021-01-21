@@ -222,7 +222,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-Luego actualizará su nodo a la última versión, y después de hacerlo, iniciará el nodo de nuevo, y mostrará la información sobre la última versión:
+Luego actualizará tu nodo a la última versión, y después de hacerlo, iniciará el nodo de nuevo, y mostrará la información sobre la última versión:
 
 ```text
 Node upgraded, starting service...
@@ -235,14 +235,14 @@ Done!
 
 ¡Eso es, estás dirigiendo un nodo de AvalancheGo! ¡Felicidades! Haznos saber que lo hiciste en nuestro [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) o [Reddit](https://t.me/avalancheavax)!
 
-Si estás en una red residencial \(IP dinámica\), Si estás en una red residencial (IP dinámica), no te olvides de configurar el reenvío de puertos. Si estás en un proveedor de cloud service, estás listo.
+Si estás en una red residencial \(IP dinámica\), no te olvides de configurar el reenvío de puertos. Si estás en un proveedor de cloud service, estás listo.
 
 Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), o subir el nivel de su instalación configurando la [monitorización de nodos](setting-up-node-monitoring.md) para tener una mejor visión de lo que su nodo está haciendo.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTk0MDcxODcxLDk4ODU4MjY3NiwxNTkxND
-I4Mzk0LC0xMDQ5NjczMzA2LDEyMTQwNjIyMzgsLTQzNDg3MzA0
-NCwtODU3NDM1MTUwLC0yMDg1OTAzODEzLC0xNzczNTc2ODU2LC
-0xNTY2MzAxNTg4LC0zNTY4ODUzMjRdfQ==
+eyJoaXN0b3J5IjpbMTUwOTMzMzEwMyw5ODg1ODI2NzYsMTU5MT
+QyODM5NCwtMTA0OTY3MzMwNiwxMjE0MDYyMjM4LC00MzQ4NzMw
+NDQsLTg1NzQzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1Ni
+wtMTU2NjMwMTU4OCwtMzU2ODg1MzI0XX0=
 -->
