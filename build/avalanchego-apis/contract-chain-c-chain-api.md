@@ -4,7 +4,7 @@ descripción: La Cadena C o C-Chain es una instancia de la Máquina Virtual de E
 
 # API de la Cadena de Contratos \(C-Chain\)
 
-_Nota: Ehtereum tiene su propia noción de `networkID` y `chainID`. Estos no tienen ninguna relación con la visión que tiene Avalanche de networkID and chainID y son puramente internas en la_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. En la red principal, la C-Chain utiliza `1` y `43114` para estos valores. En la red de pruebas Fuji, utiliza `1` y `43113` para estos valores. `networkID` y `chainID` pueden obtenerse usando los métodos `net_version` y `eth_chainId` mostrados más adelante._
+_Nota: Ethereum tiene su propia noción de `networkID` y `chainID`. Estos no tienen ninguna relación con la visión que tiene Avalanche de networkID and chainID y son puramente internas en la_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. En la red principal, la C-Chain utiliza `1` y `43114` para estos valores. En la red de pruebas Fuji, utiliza `1` y `43113` para estos valores. `networkID` y `chainID` pueden obtenerse usando los métodos `net_version` y `eth_chainId` mostrados más adelante._
 
 ## Despligue de un Contrato Inteligente
 
@@ -450,7 +450,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzAzNzUyNjUsOTgyMDk3NDA5LC0xOTg3Mj
-M0MDQsMjY5MDA3NjA1LDE0OTcxODgwMTgsMTY1NzI0ODQ0Miwt
-MTkwMTA4NDI0OV19
+eyJoaXN0b3J5IjpbLTEyODIwNTQ5MTksMzAzNzUyNjUsOTgyMD
+k3NDA5LC0xOTg3MjM0MDQsMjY5MDA3NjA1LDE0OTcxODgwMTgs
+MTY1NzI0ODQ0MiwtMTkwMTA4NDI0OV19
 -->
