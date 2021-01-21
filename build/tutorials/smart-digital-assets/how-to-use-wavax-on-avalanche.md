@@ -61,7 +61,7 @@ Los fondos pronto estarán visibles en su cuenta de Metamask.
 
 ### **Usando el Faucet de la Red de Pruebas**
 
-Si estás conectado a la red de pruebas, puedes usar su faucet para agregar fondos a tu cuenta de Metamask. Ve a [el faucet](https://faucet.avax-test.network/) y pegue su dirección de Ethereum, que se muestra debajo del nombre de la cuenta en Metamask \(Por ejemplo`0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`\). Cuando hagas click en el nombre de la cuenta, copiará la cuenta al portapapeles.
+Si estás conectado a la red de pruebas, puedes usar su faucet para agregar fondos a tu cuenta de Metamask. Ve a [el faucet](https://faucet.avax-test.network/) y pega tu dirección de Ethereum, que se muestra debajo del nombre de la cuenta en Metamask \(Por ejemplo`0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`\). Cuando hagas click en el nombre de la cuenta, copiará la cuenta al portapapeles.
 
 ![Faucet funding](../../../.gitbook/assets/wavax2avax-02-faucet.png)
 
@@ -141,8 +141,8 @@ Desafortunadamente, el campo **withdraw** se denomina en wei, por lo que 10 AVAX
 Ahora puedes interactuar con smart contracts en la C-Chain de Avalanche con WAVAX, la versión ERC-20 de AVAX. En el futuro, la conversión entre AVAX y WAVAX será significativamente más sencilla, con soporte incorporado en la Wallet y los Exchanges, pero mientras tanto, todavía puede acceder a los DEX, puentes y otros contratos basados en Solidity en la Plataforma de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzMDQxNDcxMCwtMjMwMDI5MTE1LDExNz
-QzOTY5NDAsNDc3Mzc3OTM0LC0zNjkyMzI5OTgsMTE3NzI2Njk0
-OCwxNzA0NTUyNzc4LDE2Njg5MzQyNDgsLTExODI1NzMyNTAsNj
-c5Njc2NzA5LC0xODY4NTU0MTU5XX0=
+eyJoaXN0b3J5IjpbNTkyODUzMTc2LC0yMzAwMjkxMTUsMTE3ND
+M5Njk0MCw0NzczNzc5MzQsLTM2OTIzMjk5OCwxMTc3MjY2OTQ4
+LDE3MDQ1NTI3NzgsMTY2ODkzNDI0OCwtMTE4MjU3MzI1MCw2Nz
+k2NzY3MDksLTE4Njg1NTQxNTldfQ==
 -->
