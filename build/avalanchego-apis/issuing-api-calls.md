@@ -73,13 +73,13 @@ Si la llamada es exitosa, la respuesta se verá así:
 ```
 
 * `id` es el ID de la solicitud a la que corresponde esta respuesta.
-* `result` es el valor devis the returned values of `getTxStatus`.
+* `result` es el valor devuelto de `getTxStatus`.
 
-### JSON RPC Error Response
+### Respuesta JSON RPC Errónea
 
-If the API method invoked returns an error then the response will have a field `error` in place of `result`. Additionally, there is an extra field, `data`, which holds additional information about the error that occurred.
+Si el método de API invocado devuelve un error, la respuesta tendrá un campo `error`  en lugar de `result`. Además, hay un campo adicional, `data` que contiene información adicional sobre el error que ocurrió.
 
-Such a response would look like:
+Dicha respuesta  verse como:Such a response would look like:
 
 ```cpp
 {
@@ -102,5 +102,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTk0NDM5MTJdfQ==
+eyJoaXN0b3J5IjpbMTkyNDQ2NDk5M119
 -->
