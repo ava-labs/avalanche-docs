@@ -43,19 +43,19 @@ A continuación, si ves el texto **Pending Ledger review**, haz clic en los dos 
 
 ![](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
 
-Por último, deberías aterrizar en la pantalla de la aplicación **Avalanche** donde puedes confirmar que la aplicación es la versión 0.2.1.
+Por último, deberías aparecer en la pantalla de la aplicación **Avalanche** donde puedes confirmar que la aplicación es la versión 0.2.1.
 
 ![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
 
-Después de confirmar que la aplicación Avalanche está funcionando, entonces en la página de inicio de la Wallet haga clic en el botón **Access Wallet**.
+Después de confirmar que la aplicación Avalanche está funcionando, entonces en la página de inicio de la Wallet haz clic en el botón **Access Wallet**.
 
 ![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-En el siguiente mensaje **How do you want to access your wallet?**, haga clic en el botón **Ledger**.
+En el siguiente mensaje **How do you want to access your wallet?**, haz clic en el botón **Ledger**.
 
 ![Ledger Access](../../../.gitbook/assets/ledger-access.png)
 
-Ahora se le pedirá que confirme en su dispositivo Ledger. Haz clic con el botón derecho en las indicaciones del dispositivo y en la última pantalla confirma pulsando ambos botones.
+Ahora se te pedirá que confirmes en tu dispositivo Ledger. Haz clic con el botón derecho en las indicaciones del dispositivo y en la última pantalla confirma pulsando ambos botones.
 
 ![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
 
@@ -88,6 +88,6 @@ Finalmente, debería poder ver los detalles de la transacción en nuestro explor
 Ava Labs está construyendo la Internet de las finanzas. Estamos desarrollando soluciones para crear un mundo sin fricciones redefiniendo la forma en que la gente construye y utiliza las aplicaciones financieras. Una parte crítica de esta infraestructura es una Wallet de hardware para que los usuarios puedan estar totalmente seguros de que sus claves privadas y monedas están completamente aisladas de cualquier actor potencialmente malicioso. Nuestra recién lanzada aplicación de Ledger hace precisamente esto siguiendo las mejores prácticas de la industria para mantener a los usuarios y las monedas a salvo y seguras.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjMzNDUyMzQ4LDE2OTQxODIyOTYsLTY1MT
+eyJoaXN0b3J5IjpbOTkwMjU3NzI3LDE2OTQxODIyOTYsLTY1MT
 gzNjMxMl19
 -->
