@@ -169,7 +169,7 @@ Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de
 
 Avalanche es una plataforma de blockchains heterogéneas, una de las cuales es la [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), que actúa como una plataforma descentralizada para la creación y el comercio de activos digitales. Ahora vamos a crear una dirección para guardar AVAX en nuestro nodo.
 
-Para crear una nueva dirección en la X-Chain, ejecute[`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), un método de la [API de la X-Chain](avalanchego-apis/exchange-chain-x-chain-api.md):
+Para crear una nueva dirección en la X-Chain, ejecute [`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), un método de la [API de la X-Chain](avalanchego-apis/exchange-chain-x-chain-api.md):
 
 ```cpp
 curl -X POST --data '{
@@ -183,9 +183,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Si su nodo no ha terminado el bootstrapping, esta llamada devolverá el estado `503` con el mensaje `API call rejected because chain is not done bootstrapping`.
+Si tu nodo no ha terminado el bootstrapping, esta llamada devolverá el estado `503` con el mensaje `API call rejected because chain is not done bootstrapping`.
 
-Tenga en cuenta que hacemos esta petición a `127.0.0.1:9650/ext/bc/X`. La parte`bc/X`  significa que la solicitud se envía a la blockchain cuyo ID \(o alias\) es `X` \(es decir, la X-Chain\).
+Ten en cuenta que hacemos esta petición a `127.0.0.1:9650/ext/bc/X`. La parte`bc/X`  significa que la solicitud se envía a la blockchain cuyo ID \(o alias\) es `X` \(es decir, la X-Chain\).
 
 La respuesta debería ser así:
 
@@ -199,7 +199,7 @@ La respuesta debería ser así:
 }
 ```
 
-Su usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Por lo tanto, esta dirección comienza `X-`, denotando que existe en la X-Chain.
+Tu usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Por lo tanto, esta dirección comienza `X-`, denotando que existe en la X-Chain.
 
 ### Envíe Fondos desde la Wallet de Avalanche a Su Nodo
 
@@ -362,8 +362,8 @@ De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0h
 {% page-ref page="references/" %}
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0ODc2MCwxODYyOTMwNDY0LDEzMTMyOT
-k5NTcsMTgyODM3OTg3NCwtODAwMzgwODg1LDE1MDU3NjI4MTcs
-LTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLTE3MjI2MTY1ODldfQ
-==
+eyJoaXN0b3J5IjpbMTE3MTcyMzE1MiwxNjQ4NzYwLDE4NjI5Mz
+A0NjQsMTMxMzI5OTk1NywxODI4Mzc5ODc0LC04MDAzODA4ODUs
+MTUwNTc2MjgxNywtMjA2Nzc4NDI1MCwtMTkyODQzNTM4MywtMT
+cyMjYxNjU4OV19
 -->
