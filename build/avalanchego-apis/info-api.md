@@ -250,7 +250,7 @@ curl -X POST --data '{
 
 Obtén una descripción de las conexiones con pares.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.peers() -> 
@@ -267,7 +267,7 @@ info.peers() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -277,7 +277,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -317,9 +317,9 @@ curl -X POST --data '{
 
 ### info.getTxFee
 
-Get the fees of the network.
+Obtén las comisiones de la red.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getTxFee() -> 
@@ -329,10 +329,10 @@ info.getTxFee() ->
 }
 ```
 
-* `creationTxFee` is the fee for creating assets on the network.
-* `txFee` is the fee for making transactions on the network.
+* `creationTxFee` es la comisión por crear activos en la red.
+* `txFee` es la comisión por hacer transferencias en la red.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -356,5 +356,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTI4NDgxMTgyLDI1MTMwOTcyOF19
+eyJoaXN0b3J5IjpbLTQ0MTYzMzk0MiwyNTEzMDk3MjhdfQ==
 -->
