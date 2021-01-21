@@ -133,7 +133,7 @@ Para validar la Red Primaria, se debe hacer stake de AVAX. Este parámetro defin
 
 Cuando un validador deje de validar la Red Primaria, recibirá una recompensa si es lo suficientemente receptivo y correcto mientras valida la Red Primaria. Estos Tokens se envían a `rewardAddress`. El stake original será devuelto a una dirección controlada por `username`.
 
-El stake de un validador nunca es reducido, sin importar su comportamiento; siempre recibirán su stakede vuelta cuando terminen de validar.
+El stake de un validador nunca es reducido, sin importar su comportamiento; siempre recibirán su stake de vuelta cuando terminen de validar.
 
 `changeAddr`
 
@@ -277,7 +277,7 @@ Cualquier cambio que resulte de esta transacción se enviará a esta dirección.
 
 Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción. Este usuario debe tener un número suficiente de las claves de control de esta Subnet para poder añadir un validador a esta Subnet.
 
-Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta`brew install coreutils`.\) 
+Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta `brew install coreutils`.\) 
 
 ```cpp
 curl -X POST --data '{
@@ -366,9 +366,10 @@ El comando completo es:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTIzNzAyNjgsLTU0MDA1ODY2NiwtOD
-IzNTAyNTQ2LDI4MjA3MDgxMSwzMzI3Nzc0ODcsLTE4Mjk4NTcx
-ODcsLTEzNDQzMzA2NDgsMzIxMjMyNTczLDE0MzQ4MTM4ODUsOT
-Q2OTY5NzY5LC0xMTA5OTMwMjcsLTEyMzczNTM5MjgsLTEwNTU5
-ODkzNjksMTI2MzY3ODQ4NywxMDMzNzUzMzY3XX0=
+eyJoaXN0b3J5IjpbLTcxOTUzNjI4OCwtMTExMjM3MDI2OCwtNT
+QwMDU4NjY2LC04MjM1MDI1NDYsMjgyMDcwODExLDMzMjc3NzQ4
+NywtMTgyOTg1NzE4NywtMTM0NDMzMDY0OCwzMjEyMzI1NzMsMT
+QzNDgxMzg4NSw5NDY5Njk3NjksLTExMDk5MzAyNywtMTIzNzM1
+MzkyOCwtMTA1NTk4OTM2OSwxMjYzNjc4NDg3LDEwMzM3NTMzNj
+ddfQ==
 -->
