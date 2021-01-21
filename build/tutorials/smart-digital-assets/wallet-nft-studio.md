@@ -24,7 +24,7 @@ Allí se te pedirá que introduzcas el nombre, así como un símbolo \(ticker\).
 
 Además del nombre y el indicador, tendrás que introducir **Number of Groups**, es decir, cuántos coleccionables distintos tendrá la familia que creaste. Elige con cuidado, porque una vez creada, los parámetros no pueden ser cambiados.
 
-Cuando decidas el nombre, el indicador y el número de grupos, presiona **Create** para crear la familia coleccionable. La comisión por la transacción se deducirá del saldo de su cartera. Cuando se cree la familia, verá el ID de la transacción \(TxID\), así como los parámetros de la familia. Puedes usar el TxID para buscar la transacción en [el explorador](https://explorer.avax.network/), pero no es necesario anotarla.
+Cuando decidas el nombre, el indicador y el número de grupos, presiona **Create** para crear la familia coleccionable. La comisión por la transacción se deducirá del saldo de su wallet. Cuando se cree la familia, verá el ID de la transacción \(TxID\), así como los parámetros de la familia. Puedes usar el TxID para buscar la transacción en [el explorador](https://explorer.avax.network/), pero no es necesario anotarla.
 
 Presiona **Back to Studio** para volver, y estaremos listos para crear nuestros primeros coleccionables. Presiona **Mint Collectible**.
 
@@ -90,6 +90,6 @@ Ahora, debes saber cómo crear familias de NFT, acuñar grupos de NFT, y enviarl
 Si desesa conocer los antecedentes técnicos de cómo funcionan los NFT en la red de Avalanche o deseas construir productos usando NFT, mira el [Tutorial de NFT](creating-a-nft-part-1.md). Si tienes preguntas técnicas, ponte en contacto con nosotros en nuestro [Servidor de Discord](https://chat.avalabs.org/).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2MDA1MTc5NCwxMTA2MTU4Nzk4LDEyMD
-kzMjI1MjVdfQ==
+eyJoaXN0b3J5IjpbNzIwMTg1MjUzLDExMDYxNTg3OTgsMTIwOT
+MyMjUyNV19
 -->
