@@ -1647,12 +1647,9 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Envía múltiples transferencias del monto (`amount`) del activo con ID `assetID`, a una dirección específica de una lista de direcciones y asume que la tx será aceptada para que futuras llamadas puedan usar el conjunto UTXO modificado.
 
-This call is made to the wallet API endpoint:
-Envíe múltiples transferencias del monto (`amount`) del activo con ID `assetID`, a una dirección específica de una lista de direcciones de propiedad y asuma que el tx será aceptado para que futuras llamadas puedan usar el conjunto UTXO modificado.
-
-Esta llamada se realiza al punto final de la API de billetera:
+Esta llamada se realiza al extremo de la API de la wallet:
 
 `/ext/bc/X/wallet`
 
@@ -1673,7 +1670,7 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
+* `outputs` es un arreglo de objetos literales que cada uno contiene un `assetID`,` amount` y `to`.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * You can attach a `memo`, whose length can be up to 256 bytes.
@@ -1722,11 +1719,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzQwMjc3OTAsNTUzNTcxODE5LDE4Mz
-U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
-Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
-EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
-MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
-Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
-MSwtMTk5NTQ2NzQ2MF19
+eyJoaXN0b3J5IjpbLTUyNTQyNjc4OSw1NTM1NzE4MTksMTgzNT
+QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
+OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
+wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
+MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
+k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
+LC0xOTk1NDY3NDYwXX0=
 -->
