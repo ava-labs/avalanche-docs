@@ -28,7 +28,7 @@ Si tu nodo ya está funcionando como un servicio, entonces probablemente no nece
 #### Nodo ejecutándose en segundo plano
 
 Si tu nodo se está ejecutándo en segundo plano
- \(ejecutandose `nohup`, por ejemplo\) luego encuentra el proceso que ejecuta el nodo ejecutando `ps aux | grep avalanche`. Esto producirá una salida como:
+ \(ejecutandose `nohup`, por ejemplo\)  encuentra el proceso que ejecuta el nodo ejecutando `ps aux | grep avalanche`. Esto producirá una salida como:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -241,8 +241,8 @@ Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.
 
 Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5MTQyODM5NCwtMTA0OTY3MzMwNiwxMj
-E0MDYyMjM4LC00MzQ4NzMwNDQsLTg1NzQzNTE1MCwtMjA4NTkw
-MzgxMywtMTc3MzU3Njg1NiwtMTU2NjMwMTU4OCwtMzU2ODg1Mz
-I0XX0=
+eyJoaXN0b3J5IjpbOTg4NTgyNjc2LDE1OTE0MjgzOTQsLTEwND
+k2NzMzMDYsMTIxNDA2MjIzOCwtNDM0ODczMDQ0LC04NTc0MzUx
+NTAsLTIwODU5MDM4MTMsLTE3NzM1NzY4NTYsLTE1NjYzMDE1OD
+gsLTM1Njg4NTMyNF19
 -->
