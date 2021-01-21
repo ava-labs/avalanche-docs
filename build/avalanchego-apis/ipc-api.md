@@ -19,31 +19,29 @@ Writes to the socket:
 
 ## IPC Socket URL Format
 
-Los nombres de los sockets tienen el formato `<network_id>-<chain_id>-<event_type>` donde `<event_type>` es `consensus` o` decisions`. El socket de consenso recibe vértices y bloques y mientras que el socket de decisiones recibe transacciones individuales.
+Los nombres de los sockets tienen el formato `<network_id>-<chain_id>-<event_type>` donde `<event_type>` es `consensus` o` decisions`. El socket de consenso recibe vértices y bloques y mientras el socket de decisiones recibe transacciones individuales.
 
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
+## Formato
 
-## Format
+Esta API utiliza formatos RPC `json 2.0`.
 
-This API uses the `json 2.0` RPC format.
-
-## Endpoint
+## Endpoint / Extremo
 
 `/ext/ipcs`
 
-## Methods
+## Métodos
 
 ### ipcs.publishBlockchain
 
-Register a blockchain so it publishes accepted vertices to a Unix domain socket.
+Registra una cadena de bloques para que publique los vértices aceptados en un socket de dominio Unix.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
-* `blockchainID` is the blockchain that will publish accepted vertices.
+* `blockchainID` es la cadena de bloques que publicará los vértices aceptados.
 * `consensusURL` is the path of the Unix domain socket the vertices are published to.
 * `decisionsURL` is the path of the Unix domain socket the transactions are published to.
 
@@ -111,5 +109,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1MjU1ODkyMF19
+eyJoaXN0b3J5IjpbMzU0NjE3ODMzXX0=
 -->
