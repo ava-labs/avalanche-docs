@@ -1243,7 +1243,7 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Agrega la llave privada (`privateKey`) al conjunto de llaves deusuario (`username`)‘s set of private keys. `address` is the address `username` now controls with the private key.
+* Agrega la llave privada (`privateKey`) al conjunto de llaves privadas del usuario (`username`)‘s set of private keys. `address` es la dirección que ahora controla `username` con la llave privada.
 
 #### **Llamada de ejemplo**
 
@@ -1274,7 +1274,7 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Envía una transacción firmada a la red. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Firma**
 
@@ -1718,7 +1718,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzQ4MTExNjEsNTUzNTcxODE5LDE4Mz
+eyJoaXN0b3J5IjpbLTE3OTkyNzAzMTAsNTUzNTcxODE5LDE4Mz
 U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
 Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
 EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
