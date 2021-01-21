@@ -23,7 +23,7 @@ Puedes acceder a tu billetera usando tu key phrase, el archivo keystore, o tu Le
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
-Ingrese el monto que desea transferir a su P-Chain y complete la transferencia haciendo clic en el botón "Transfer" abajo.
+Ingresa el monto que deseas transferir a tu P-Chain y completa la transferencia haciendo clic en el botón "Transfer" abajo.
 
 ![Image for post](https://miro.medium.com/max/1488/0*aremeYNYtKP5nGPx)
 
@@ -88,6 +88,6 @@ Confirma los detalles!
 Felicitaciones. ¡Ahora estás delegando en  la Red Primaria de Avalanche!
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MzAzNTMxOTksNTE5NDc5MjY3LC02Nj
-Y5NzA1NzFdfQ==
+eyJoaXN0b3J5IjpbMTQ0MTY3MDQ5LC0xODMwMzUzMTk5LDUxOT
+Q3OTI2NywtNjY2OTcwNTcxXX0=
 -->
