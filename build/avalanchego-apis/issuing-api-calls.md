@@ -25,18 +25,19 @@ Varias API integradas utilizan el formato [JSON RPC 2.0](https://www.jsonrpc.org
 
 Supongamos que queremos llamar al método `getTxStatus` de la[API de X-Chain](exchange-chain-x-chain-api.md).  La documentación de la API de X-Chain nos dice que el extremo de esta API es `/ext/bc/X`.
 
-That means that the endpoint we send our API call to is:
+Eso significa que el extremo al que enviamos nuestra llamada API es:
 
 `[node-ip]:[http-port]/ext/bc/X`
 
-The X-Chain API documentation tells us that the signature of `getTxStatus` is:
+La documentación de la API de X-Chain nos dice que la firma de `getTxStatus` es:
 
 [`avm.getTxStatus`](exchange-chain-x-chain-api.md#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
-where:
+donde:
 
-* Argument `txID` is the ID of the transaction we’re getting the status of.
+* El argumento `txID` es el ID de la transacción de la que obtenemos el estado.
 * Returned value `status` is the status of the transaction in question.
+* El valor devuelto  `status` es el estado de la transacción en cuestión.
 
 To call this method, then:
 
@@ -102,5 +103,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDk3NzI0MDBdfQ==
+eyJoaXN0b3J5IjpbMTM4MjgxNDE0OV19
 -->
