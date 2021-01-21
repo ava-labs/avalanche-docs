@@ -3,7 +3,7 @@
 
 ## Recursos
 
-[**Kit de prensa de Avalanche y Lineamientos de la Marca**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): el kit de prensa oficial y las directrices de la marca con los logotipos y las fuentes
+[**Kit de prensa de Avalanche y Lineamientos de la Marca**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): El kit de prensa oficial y las directrices de la marca con los logotipos y las fuentes
 
 ### Sitio Web y Redes Sociales
 
@@ -134,6 +134,7 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzODc1MjM0MSwzNzE4OTIwMzUsLTEwMz
-EwNDQ1NDEsNTkxOTAxODg1LDEyMjQzNDY1NjZdfQ==
+eyJoaXN0b3J5IjpbMTM2ODk4NDYyOSwyMDM4NzUyMzQxLDM3MT
+g5MjAzNSwtMTAzMTA0NDU0MSw1OTE5MDE4ODUsMTIyNDM0NjU2
+Nl19
 -->
