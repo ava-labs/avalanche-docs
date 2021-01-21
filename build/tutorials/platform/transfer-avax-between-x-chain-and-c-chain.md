@@ -191,7 +191,7 @@ La respuesta se ve así:
 ```
 
 
-Nota: Bo se cobra ninguna comisión por las transacciones de importación a la C-Chain.
+Nota: No se cobra ninguna comisión por las transacciones de importación a la C-Chain.
 
 Una vez que tus AVAX han sido transferidos a la C-Chain, puedes usarlos para desplegar e interactuar con smart contracts
 
@@ -262,6 +262,6 @@ La respuesta debería verse así:
 ¡Eso es todo! Ahora, puedes intercambiar AVAX entre la X-Chain y la C-Chain, usando la Wallet de Avalanche, y haciendo llamados a la API apropiada en un nodo de Avalanche.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0NDEzODEwMywxOTIyMDQ3ODc3LDEzND
+eyJoaXN0b3J5IjpbLTQ4NDMwMTU3MSwxOTIyMDQ3ODc3LDEzND
 k5ODgzODQsMTEyODI1MTA5M119
 -->
