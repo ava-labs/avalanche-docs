@@ -1198,7 +1198,7 @@ avm.importAVAX({
 ```
 
 * `to` es la dirección a la cual el AVAX se enviará. Esto debe ser igual al argumento `to` en la correspondiente llamada a la P-Chain `exportAVAX`.
-* `sourceChain` es el ID o alias de l aof the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
+* `sourceChain` es el ID o sobrenombre de la cadena desde la cual el AVAX es importado. Para importar los fondos de la P-Chain, usa `"P"`.
 * `username` is the user that controls `to`.
 
 #### **Llamada de ejemplo**
@@ -1718,11 +1718,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQ5NjQxNTE3LDU1MzU3MTgxOSwxODM1ND
-IwMjkwLC0xNTIzMDk4MTM4LC0xNjQ4OTIwMTc3LDExMTg4MzM5
-NjAsLTE4MjcxMzQzODIsLTczNzI4MDI0NCwxOTg4ODUyMjQxLC
-05NTE4NzY2MzMsLTEwMjg2NjI3ODgsMTA3NDk2NjY3NiwyMDAz
-MzIyMDUsLTE3MDM1MTMxNjUsLTE5MjM1Njk0NzUsMTcyNDA0OT
-YyNSwtMjM1NzkzMTQzLC0xMTM0MzEzMzAxLC0zNTEyOTU2ODEs
-LTE5OTU0Njc0NjBdfQ==
+eyJoaXN0b3J5IjpbLTgzODU2NTYzNyw1NTM1NzE4MTksMTgzNT
+QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
+OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
+wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
+MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
+k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
+LC0xOTk1NDY3NDYwXX0=
 -->
