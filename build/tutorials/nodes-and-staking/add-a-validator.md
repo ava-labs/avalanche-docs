@@ -261,7 +261,7 @@ Este es el ID de nodo del validador que se está agregando a la subnet. **Este v
 
 Este es el ID de la subnet a la que estamos añadiendo un validador.
 
-`startTime` &`endTime`
+`startTime` & `endTime`
 
 Similar a lo anterior, estos son los tiempos de Unix en que el validador comenzará y dejará de validar la subnet. `startTime` debe ser en o después del momento en que el validador comience a validar la Red Primaria, y `endTime` debe ser en el momento o antes de que el validador deje de validar la Red Primaria.
 
@@ -271,7 +271,7 @@ Este es el peso de la muestra del validador para el consenso. Si el peso del val
 
 `changeAddr`
 
-Cualquier cambio que resulte de esta transacción se enviará a esta dirección. Puede dejar este campo vacío; si lo hace, el cambio será enviado a una de las direcciones que su usuario controle.
+Cualquier cambio que resulte de esta transacción se enviará a esta dirección. Puedes dejar este campo vacío; si lo hace, el cambio será enviado a una de las direcciones que tu usuario controle.
 
 `username` & `password`
 
@@ -366,10 +366,10 @@ El comando completo es:
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxMjUyMjk2NSwtNzE5NTM2Mjg4LC0xMT
-EyMzcwMjY4LC01NDAwNTg2NjYsLTgyMzUwMjU0NiwyODIwNzA4
-MTEsMzMyNzc3NDg3LC0xODI5ODU3MTg3LC0xMzQ0MzMwNjQ4LD
-MyMTIzMjU3MywxNDM0ODEzODg1LDk0Njk2OTc2OSwtMTEwOTkz
-MDI3LC0xMjM3MzUzOTI4LC0xMDU1OTg5MzY5LDEyNjM2Nzg0OD
-csMTAzMzc1MzM2N119
+eyJoaXN0b3J5IjpbODkyOTgxMTQ5LC03MTk1MzYyODgsLTExMT
+IzNzAyNjgsLTU0MDA1ODY2NiwtODIzNTAyNTQ2LDI4MjA3MDgx
+MSwzMzI3Nzc0ODcsLTE4Mjk4NTcxODcsLTEzNDQzMzA2NDgsMz
+IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
+MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
+wxMDMzNzUzMzY3XX0=
 -->
