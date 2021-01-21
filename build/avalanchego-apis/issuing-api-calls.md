@@ -1,6 +1,6 @@
-# Issuing API Calls
+# Emitiendo llamadas a la API
 
-This guide explains how to make calls to APIs exposed by Avalanche nodes.
+Esta guía explica cómo realizar llamadas a las API expuestas por los nodos de Avalanche.
 
 ### Endpoint <a id="endpoint"></a>
 
@@ -101,3 +101,6 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTI5OTIzNTY1Nl19
+-->
