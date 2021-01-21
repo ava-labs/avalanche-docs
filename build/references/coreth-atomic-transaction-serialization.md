@@ -729,13 +729,13 @@ Hagamos una entrada de pago con:
 ]
 ```
 
-## Transacción firmada
+## Transacción Firmada
 
 Una transacción firmada o "Signed Transaction" contiene un `AtomicTx` sin firmar y credenciales.
 
-### What Signed Transaction Contains
+### Que Contiene una Transacción Firmada
 
-A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
+Una Transacción Firmada contiene un `CodecID`, `AtomicTx`, y`Credentials`.
 
 * **`CodecID`** The only current valid codec id is `00 00`.
 * **`AtomicTx`** is an atomic transaction, as described above.
@@ -924,9 +924,9 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1OTM0ODE3MCwxNjgzMjczMzgyLC0xOD
-YxOTE1NjgsLTEzNTE1NDI4MjUsNDk0NDQ5NDEyLDEyMDcyOTAy
-NjMsMTAyMDcyMjQzNyw0NDk3MTEyMDUsMTI2NjE3OTc5NCwxNT
-k4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAwNjcwOTMsLTE0MTkw
-MTg0ODAsLTc0ODMxNTQ3XX0=
+eyJoaXN0b3J5IjpbLTE5NzI0NTI2MzAsMTI1OTM0ODE3MCwxNj
+gzMjczMzgyLC0xODYxOTE1NjgsLTEzNTE1NDI4MjUsNDk0NDQ5
+NDEyLDEyMDcyOTAyNjMsMTAyMDcyMjQzNyw0NDk3MTEyMDUsMT
+I2NjE3OTc5NCwxNTk4MDExNTg2LC0xNjE5MjQyNzc0LDEyNTAw
+NjcwOTMsLTE0MTkwMTg0ODAsLTc0ODMxNTQ3XX0=
 -->
