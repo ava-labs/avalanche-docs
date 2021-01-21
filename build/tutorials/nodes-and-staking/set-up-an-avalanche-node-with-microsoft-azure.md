@@ -175,7 +175,7 @@ Selecciona el nombre del disco que está provisto actualmente para modificarlo
 
 ![Image for post](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
 
-Seleccione "Size + performance" a la izquierda en la configuración y cambie el tamaño a 64 GB y pulse "Resize".
+Selecciona "Size + performance" a la izquierda en la configuración y cambia el tamaño a 64 GB y pulsa "Resize".
 
 ![Image for post](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
 
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyMjE1NTcwOSwxMDQzOTU0MzUwLDg3Nz
-Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
-LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
-IyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbLTEyNjYwNDA3NzUsMTA0Mzk1NDM1MCw4Nz
+c0NjQzOTIsMTkwODA1MzY5Miw1MzgzNjM0NjQsLTg1MzY2NjMw
+NywtMTI0NzY5OTQ1OSwtMTc1ODc4MDk5OCwtMjU4NTAxOTM3LD
+IyMjE3ODY5NF19
 -->
