@@ -147,7 +147,6 @@ curl -X POST --data '{
 
 ### keystore.importUser
 
-Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
 Importar un usuario. `password` debe coincidir con la contraseña del usuario. `username` no tiene por qué coincidir con el nombre de usuario que tenía` user` cuando se exportó.
 
 #### **Signature**
@@ -227,5 +226,5 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwNjA3OTU3XX0=
+eyJoaXN0b3J5IjpbLTQyMDc5NzY4NF19
 -->
