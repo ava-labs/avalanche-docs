@@ -36,10 +36,9 @@ La documentación de la API de X-Chain nos dice que la firma de `getTxStatus` es
 donde:
 
 * El argumento `txID` es el ID de la transacción de la que obtenemos el estado.
-* Returned value `status` is the status of the transaction in question.
 * El valor devuelto  `status` es el estado de la transacción en cuestión.
 
-To call this method, then:
+Para llamar a este método, entonces:
 
 ```cpp
 curl -X POST --data '{
@@ -52,7 +51,12 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. \(In practice is always 2.0\)
+* `jsonrpc` especifica la versión del protocolo JSON RPC. \(En la práctica siempre es 2.0\)
+* `method` especifica el servicio \(`avm`\) y el método \(`getTxStatus` \) que queremos invocar.
+* `params` especifica los argumentos del método.
+* `id` es el ID de esta solicitud. Los ID de solicitud deben ser únicos.
+
+¡Eso es!
 * `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
 * `params` specifies the arguments to the method.
 * `id` is the ID of this request. Request IDs should be unique.
@@ -103,5 +107,5 @@ Some APIs may use a standard other than JSON RPC 2.0 to format their requests an
 Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4MjgxNDE0OV19
+eyJoaXN0b3J5IjpbMjUzOTg1OTIwXX0=
 -->
