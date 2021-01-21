@@ -344,7 +344,7 @@ La respuesta confirma que la operación de transferencia NFT fué exitosa
     }
 }
 ```
-Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) en la dirección a la que enviaste el NFT y descomponer la UTXO retornada, después de convertir de CB58 a hex, para confirmar que hay un UTXO con type id `00 00 00 0b` en hex o`11` en decimal.
+Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) en la dirección a la que enviaste el NFT y descomponer la UTXO retornada, después de convertir de CB58 a hex, para confirmar que hay un UTXO con type id `00 00 00 0b` en hex o `11` en decimal.
 
 ## Concluimos!
 
@@ -357,6 +357,6 @@ BLa tecnología de blockchain y los tokenomics representan una nueva forma radic
 
 En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1OTM5NTMwNCwtNTI2MTIxNDA2LDE4ND
-c2NTI4NjcsLTEyMzg3OTM2NjFdfQ==
+eyJoaXN0b3J5IjpbLTEyNDM2NzkwMzYsLTUyNjEyMTQwNiwxOD
+Q3NjUyODY3LC0xMjM4NzkzNjYxXX0=
 -->
