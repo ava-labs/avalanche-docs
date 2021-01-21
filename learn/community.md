@@ -25,35 +25,35 @@
 
 [**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): Plataforma de capacitación y educación para que tanto los desarrolladores técnicos como los empresarios aprendan sobre la tecnología de las blockchain.
 
-[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
+[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): Es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
 
-[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): un think tank global que se centra en las implicaciones estratégicas de la tecnología de las blockchain en los negocios, el gobierno y la sociedad. Entre sus miembros se encuentran más de 60 de las principales empresas, gobiernos e instituciones académicas del mundo.
+[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): Un think tank global que se centra en las implicaciones estratégicas de la tecnología de las blockchain en los negocios, el gobierno y la sociedad. Entre sus miembros se encuentran más de 60 de las principales empresas, gobiernos e instituciones académicas del mundo.
 
-[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): una organización global que acelera el desarrollo del ecosistema de la blockchain en la región de América Latina y el Caribe. Ahora tiene 25 miembros, incluyendo a Consensys, MIT Media Lab, Enterprise Ethereum Alliance, y el Instituto de Investigación Blockchain.
+[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): Una organización global que acelera el desarrollo del ecosistema de la blockchain en la región de América Latina y el Caribe. Ahora tiene 25 miembros, incluyendo a Consensys, MIT Media Lab, Enterprise Ethereum Alliance, y el Instituto de Investigación Blockchain.
 
 ### Educación
 
-[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): un miembro de la comunidad que produce videotutoriales de "[Cómo Ejecutar Avalanche en casa](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" .
+[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): Un miembro de la comunidad que produce videotutoriales de "[Cómo Ejecutar Avalanche en casa](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" .
 
 ### Exchanges
 
-\*\*\*\*[**Binance**](https://www.binance.com): crypto exchange \#1 del mundo  por volumen de comercio.
+\*\*\*\*[**Binance**](https://www.binance.com): Crypto exchange \#1 del mundo  por volumen de comercio.
 
-\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): una plataforma de comercio de activos digitales que ofrece servicios de vanguardia para los comerciantes de divisas digitales y los proveedores de liquidez mundial.
+\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): Una plataforma de comercio de activos digitales que ofrece servicios de vanguardia para los comerciantes de divisas digitales y los proveedores de liquidez mundial.
 
-\*\*\*\*[**FTX**](https://ftx.com): un exchange de derivados de cryptocurrency.
+\*\*\*\*[**FTX**](https://ftx.com): Un exchange de derivados de cryptocurrency.
 
-[**JellySwap**](https://jelly.market/): una aplicación descentralizada de intercambio de cross-chain que permite la transferencia de valor entre diferentes redes.
+[**JellySwap**](https://jelly.market/): Una aplicación descentralizada de intercambio de cross-chain que permite la transferencia de valor entre diferentes redes.
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): el crypto broker sin comisiones \#1 en los Estados Unidos.
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): El crypto broker sin comisiones \#1 en los Estados Unidos.
 
 ### Exploradores
 
-[**Avalanche Explorer**](https://explorer.avax.network): una herramienta analítica que permite a la gente buscar en la plataforma Avalanche transacciones, direcciones y otras actividades de la plataforma.
+[**Avalanche Explorer**](https://explorer.avax.network): Una herramienta analítica que permite a la gente buscar en la plataforma Avalanche transacciones, direcciones y otras actividades de la plataforma.
 
-[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): un explorador independiente de blockchains que permite a los usuarios navegar por las blockchains, transacciones, validadores, delegadores, activos y smart contracts en Avalanche. También cuenta con un Programa de Validación de Detalle de Activos para añadir datos ricos a los activos en Avascan.
+[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): Un explorador independiente de blockchains que permite a los usuarios navegar por las blockchains, transacciones, validadores, delegadores, activos y smart contracts en Avalanche. También cuenta con un Programa de Validación de Detalle de Activos para añadir datos ricos a los activos en Avascan.
 
-[**Vscout**](https://vscout.io): una herramienta analítica para explorar subnets de Avalanche, staking y validadores.
+[**Vscout**](https://vscout.io): Una herramienta analítica para explorar subnets de Avalanche, staking y validadores.
 
 ### Misceláneos
 
@@ -61,29 +61,29 @@
 
 ### Non-Fungible Tokens \(NFTs\)
 
-[**Polyient Games**](https://www.polyient.games): una firma de inversiones enfocada en  los non-fungible token \(NFT\) y las industrias del juego basados en la blockchain. Invierten en startups que están construyendo la infraestructura y las aplicaciones que escalarán la clase de activos NFT.
+[**Polyient Games**](https://www.polyient.games): Una firma de inversiones enfocada en  los non-fungible token \(NFT\) y las industrias del juego basados en la blockchain. Invierten en startups que están construyendo la infraestructura y las aplicaciones que escalarán la clase de activos NFT.
 
 ### **Mercados de predicción**
 
-\*\*\*\*[**Prosper**](https://prosper.so/)**:** un mercado de predicción de cross-chain y una plataforma de cobertura no custodiada. Prosper está desarrollando una tecnología única de agregación de liquidez en cadena para resolver los problemas de los mercados de predicción.
+\*\*\*\*[**Prosper**](https://prosper.so/)**:** Un mercado de predicción de cross-chain y una plataforma de cobertura no custodiada. Prosper está desarrollando una tecnología única de agregación de liquidez en cadena para resolver los problemas de los mercados de predicción.
 
 ### Tokens de Seguridad
 
-[**Securitize**](https://www.securitize.io/): la principal plataforma de emisión y cumplimiento de valores digitales \(tokens de seguridad)\ de la industria y un agente de transferencia registrado en la SEC.
+[**Securitize**](https://www.securitize.io/): La principal plataforma de emisión y cumplimiento de valores digitales \(tokens de seguridad)\ de la industria y un agente de transferencia registrado en la SEC.
 
 ### Stablecoins
 
-[**BiLira**](https://www.bilira.co): una criptodivisa estable que está respaldada por la lira turca.
+[**BiLira**](https://www.bilira.co): Una criptodivisa estable que está respaldada por la lira turca.
 
-\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): el primer y único Stablecoin con respaldo completo atestiguado independientemente en vivo y on-chain
+\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): El primer y único Stablecoin con respaldo completo atestiguado independientemente en vivo y on-chain
 
 ### Bots de Trading
 
-[**Hummingbot**](https://hummingbot.io/)**:** un proyecto de código abierto impulsado por la comunidad que tiene por objeto democratizar el comercio algorítmico haciendo que las sofisticadas estrategias de comercio de alta frecuencia estén libremente disponibles para todos en el mundo.
+[**Hummingbot**](https://hummingbot.io/)**:** Un proyecto de código abierto impulsado por la comunidad que tiene por objeto democratizar el comercio algorítmico haciendo que las sofisticadas estrategias de comercio de alta frecuencia estén libremente disponibles para todos en el mundo.
 
 ### Wallets
 
-[**Avalanche Wallet**](https://wallet.avax.network): la simple, segura y no custodiada Wallet de Avalanche para almacenar tus bienes de Avalanche.
+[**Avalanche Wallet**](https://wallet.avax.network): La Wallet  simple, segura y no custodiada de Avalanche para almacenar tus bienes de Avalanche.
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** la hardware wallet original hecha por Ledger. Comienza fácilmente tu viaje en las crypto: compra crypto, asegura tus activos, y gestionalos en una sola aplicación.
 
@@ -134,7 +134,7 @@
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0ODM2ODYzMSwxMTkyNTI3MDYxLDIwMz
+eyJoaXN0b3J5IjpbMTcyMTQxODc1MywxMTkyNTI3MDYxLDIwMz
 g3NTIzNDEsMzcxODkyMDM1LC0xMDMxMDQ0NTQxLDU5MTkwMTg4
 NSwxMjI0MzQ2NTY2XX0=
 -->
