@@ -455,7 +455,7 @@ func (vm *VM) NewBlock(parentID ids.ID, data [dataLen]byte, timestamp time.Time)
 
 #### **BuildBlock**
 
-This method is called by the consensus layer after the application layer tells it that a new block is ready to be built \(i.e., when `vm.NotifyConsensus()` is called\).
+Este método es llamado por la capa de consenso después de que la capa de aplicación le dice que un nuevo bloque está listo para ser construido \(Es decir., when `vm.NotifyConsensus()` is called\).
 
 ```cpp
 // BuildBlock returns a block that this VM wants to add to consensus
@@ -721,6 +721,6 @@ En este tutorial, aprendimos:
 * Las librerías `core.SnowmanVM` y `core.Block`, que hacen que la definición de las VMs sea más rápida.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDk1NjQ2OTQsLTIxNjgyNzk0MywxND
-g2MTM1MDg5XX0=
+eyJoaXN0b3J5IjpbLTE4MzYxNjE3NjUsLTE1MDk1NjQ2OTQsLT
+IxNjgyNzk0MywxNDg2MTM1MDg5XX0=
 -->
