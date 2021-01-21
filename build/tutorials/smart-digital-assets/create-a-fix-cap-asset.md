@@ -44,7 +44,7 @@ avm.createFixedCapAsset({
 * `denomination` determina la forma en que los saldos de este activo son mostrados por las interfaces de usuario. Si la denominación es 0, 100 unidades de este activo se muestran como 100. Si la denominación es 1, 100 unidades de este activo se muestran como 10.0. Si la denominación es 2, 100 unidades de este activo se muestran como .100, etc.
 * Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. `username` y `password`  denotan al usuario que paga la comisión.
 * Cada elemento en `initialHolders` especifica que `address` contiene `amount` unidades del activo en la génesis.
-* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de sus direcciones según sea necesario.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 
 ### Respuesta
@@ -222,6 +222,6 @@ En este tutorial:
 * Ejecutamos`send` para transferir una cantidad de nuestro activo
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTEwMTQwMzc5LDEwOTA1MjI0MjgsMTYxNT
-czNDE2MF19
+eyJoaXN0b3J5IjpbMjE0NjU5NjQ3NCw5MTAxNDAzNzksMTA5MD
+UyMjQyOCwxNjE1NzM0MTYwXX0=
 -->
