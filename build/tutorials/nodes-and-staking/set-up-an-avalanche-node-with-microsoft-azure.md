@@ -71,7 +71,7 @@ Selecciona Sí para una Spot Instance, selecciona Eviction type en Capacity Only
 
 ![Image for post](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Elija "Seleccionar tamaño" para cambiar el tamaño de la Máquina Virtual, y en el menú seleccione D2s\_v4 bajo la selección D-Series v4 \(Este tamaño tiene 2 núcleos, 8 GB de memoria y permite SSD's Premium\). Puedes usar las instancias F2s\_v2 en su lugar, con son 2 Núcleos, 4 GB de memoria y permite SSD's Premium\) pero el precio al contado es más barato para las VM más grandes que actualmente tienen precios al contado. Puedes usar [este link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) para ver los precios en las diferentes regiones.
+Elige "Seleccionar tamaño" para cambiar el tamaño de la Máquina Virtual, y en el menú selecciona D2s\_v4 bajo la selección D-Series v4 \(Este tamaño tiene 2 núcleos, 8 GB de memoria y permite SSD's Premium\). Puedes usar las instancias F2s\_v2 en su lugar, con son 2 Núcleos, 4 GB de memoria y permite SSD's Premium\) pero el precio al contado es más barato para las VM más grandes que actualmente tienen precios al contado. Puedes usar [este link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) para ver los precios en las diferentes regiones.
 
 ![Image for post](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
@@ -323,7 +323,7 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgxNjQwODIyNiwxMDQzOTU0MzUwLDg3Nz
+eyJoaXN0b3J5IjpbMTkyNDkyNTIwMywxMDQzOTU0MzUwLDg3Nz
 Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
 LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
 IyMTc4Njk0XX0=
