@@ -100,7 +100,7 @@ El siguiente paso es cambiar el nombre de usuario para la VM, para alinearse con
 
 ### Discos <a id="ed2e"></a>
 
-Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: la SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o la SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) 
+Seleccione Siguiente: Discos para luego configurar los discos para la VM. Existen dos opciones de discos: el SSD Premium, que ofrece un mayor rendimiento con un disco de 64 GB y cuesta alrededor de 10 dólares al mes, o el SSD estándar, que ofrece un rendimiento menor y cuesta alrededor de 5 dólares al mes. También hay que pagar 0,002 dólares por cada 10 000 unidades de transacción \(lecturas / escrituras y borrado\) 
 con el SSD estándar, mientras que con los SSD premium todo está incluido. Personalmente, elegí la SSD Premium por su mayor rendimiento, pero también porque es probable que los discos se utilicen mucho y por lo tanto pueden resultar más baratos a largo plazo.
 
 Selecciona Luego: Networking para pasar a la configuración de red
@@ -323,8 +323,8 @@ Como antes, necesitaremos reemplazar "EnterYourAzureIPHere" con el valor apropia
 ![Image for post](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNDkyNTIwMywxMDQzOTU0MzUwLDg3Nz
-Q2NDM5MiwxOTA4MDUzNjkyLDUzODM2MzQ2NCwtODUzNjY2MzA3
-LC0xMjQ3Njk5NDU5LC0xNzU4NzgwOTk4LC0yNTg1MDE5MzcsMj
-IyMTc4Njk0XX0=
+eyJoaXN0b3J5IjpbMTQwMjk0NDgzLDEwNDM5NTQzNTAsODc3ND
+Y0MzkyLDE5MDgwNTM2OTIsNTM4MzYzNDY0LC04NTM2NjYzMDcs
+LTEyNDc2OTk0NTksLTE3NTg3ODA5OTgsLTI1ODUwMTkzNywyMj
+IxNzg2OTRdfQ==
 -->
