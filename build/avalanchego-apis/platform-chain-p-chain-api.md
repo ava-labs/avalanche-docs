@@ -134,8 +134,8 @@ platform.addValidator(
 
 * `nodeID` es el ID del nodo del validador que se agrega.
 * `startTime` es el tiempo Unix cuando el validador comienza a validar la red primaria.
-* `endTime` es el tiempo Unix en el que el validador deja de validar la red primaria \(y se devuelve el AVAX en apostado \).
-* `stakeAmount` is the amount of nAVAX the validator is staking.
+* `endTime` es el tiempo Unix en el que el validador deja de validar la red primaria \(y se devuelve el AVAX en stake\).
+* `stakeAmount` es la cantidad de nAVAX que el validador está dejando en stake.
 * `rewardAddress` is the address the validator reward will go to, if there is one.
 * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1803,7 +1803,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjUyOTM2NTQsNzY0OTUzNzMwLDE2Mj
+eyJoaXN0b3J5IjpbLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2Mj
 cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
 XX0=
 -->
