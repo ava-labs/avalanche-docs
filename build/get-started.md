@@ -1,6 +1,8 @@
-# Run an Avalanche Node
+# Get Started: Run an Avalanche Node
 
 The quickest way to learn about Avalanche is to run a node and interact with the network.
+
+{% embed url="https://youtu.be/c\_SjtCiOFdg" %}
 
 In this tutorial \(est. time: 10 minutes\), we will:
 
@@ -10,6 +12,8 @@ In this tutorial \(est. time: 10 minutes\), we will:
 * Add your node to the validator set
 
 If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
+
+This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](tutorials/nodes-and-staking/set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
 
 ## Requirements
 
@@ -26,7 +30,7 @@ Let’s install AvalancheGo, the Go implementation of an Avalanche node, and con
 
 The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
-Downloading [pre-built binary](getting-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Downloading [pre-built binary](get-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
 
 Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
 
@@ -208,7 +212,7 @@ Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, th
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
-![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%285%29.png)
+![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%283%29.png)
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 

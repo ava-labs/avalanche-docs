@@ -24,9 +24,8 @@ description: >-
 
 {% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %}
 
-
-
-{% page-ref page="build/getting-started.md" %}
+{% tab title="Staking" %}
+{% page-ref page="build/get-started.md" %}
 
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
 
@@ -45,6 +44,10 @@ description: >-
 [Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
 
 A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
+
+## Avalanche \(AVAX\) Token
+
+The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
 
 ## Avalanche Consensus Protocol
 
@@ -100,9 +103,5 @@ Create your own public or private blockchains.
 
 ### Designed for Finance
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets
-
-## Avalanche \(AVAX\) Token
-
-The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
+Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 

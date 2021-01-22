@@ -2,9 +2,58 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-## AvalancheGo Release Notes v1.0.6 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
+## v1.1.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
 
-![AvalancheGo release notes v1.0.6.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.6.png)
+{% hint style="danger" %}
+This update is optional but encouraged. The patch includes minor bug fixes relating to APIs.
+{% endhint %}
+
+* Fixed hanging call when attempting to filter C-chain logs.
+* Fixed C-chain client to call the proper multi-coin API.
+* Added `getAtomicUTXOs` to `avm` and `platformvm` API clients.
+
+## v1.1.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)\)
+
+{% hint style="danger" %}
+This update is optional but encouraged. The patch includes bug fixes and performance improvements.
+{% endhint %}
+
+* Fixed bootstrapping processing cache to reduce duplicated traversals when bootstrapping Avalanche.
+* Optimized P-chain verification during bootstrapping.
+* Fixed maximum bench list calculation to use the proper input values.
+* Removed extra linter runs from CI.
+* Added `Height` to the `snowman.Block` interface.
+
+## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\) 
+
+{% hint style="danger" %}
+This update is optional but encouraged. The patch includes bug fixes and performance improvements.
+{% endhint %}
+
+* Fixed a node crash bug when users disabled the `Health` API.
+* Fixed a bug in uptime tracking that could over report a node's uptime.
+* Refactored vertex parsing to use a `Codec`.
+* Separated stateful and stateless vertex management.
+* Added per-field slice length checking to the Codec.
+* Introduced a new codec type that groups `TypeID`s together.
+* Introduced message limit flags to the CLI.
+* Introduced a semanticdb package to be used during a future database migration.
+* Added Epoch tracking to the chain context.
+* Improved some of the error messages returned during transaction validation.
+* Reduced GC pressure in the version DB.
+
+## v1.1.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0)\)
+
+{% hint style="danger" %}
+**Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC \(6 p.m. EST\). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
+{% endhint %}
+
+There are two primary components to this upgrade:
+
+* General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
+* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock ****time had passed
+
+## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
 {% hint style="danger" %}
 Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
@@ -25,9 +74,7 @@ Please note that this release contains breaking changes described [here](https:/
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
 
-## AvalancheGo Release Notes v1.0.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
-
-![AvalancheGo release notes v1.0.5](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.5.png)
+## v1.0.5 AvalancheGo Release Notes  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
 
 {% hint style="danger" %}
 Please note that the release after this one, v1.0.6, will contain the breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
@@ -49,14 +96,19 @@ The changes in this release, v1.0.5, are backwards compatible with previous rele
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
-## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
+## v1.0.4 AvalancheGo Release Notes  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
 ![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
+{% hint style="danger" %}
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
+{% endhint %}
+
+```
+• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
+```
 
 ```text
-• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
 • Added config file parsing for node settings.
 • Added more options for specifying a node's IP address and added getNodeIP to the info *endpoint.
 • Added a TxID to the result of get.Validators in the platformvm.

@@ -1,4 +1,4 @@
-# Set up Node Monitoring
+# Run an Avalanche Node Monitoring
 
 _Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
 
