@@ -103,9 +103,9 @@ El validador cobra una tarifa a los delegadores; el primero recibe un porcentaje
 
 El período de validación debe ser de entre 2 semanas y 1 año.
 
-Hay un máximo peso total impuesto a los validadores. Esto significa que ningún validador podrá tener más AVAX apostado y delegado que este valor. Este valor se establecerá inicialmente en `min (5 * cantidad apostada, 3M AVAX)`. El valor total de un validador es de 3 millones de AVAX.
-There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
+Hay un máximo peso total impuesto a los validadores. Esto significa que ningún validador podrá tener más AVAX en stake que este valor. Este valor se establecerá inicialmente en el `min(5*cantidad en stake, 3M AVAX)`. El valor total de un validador es de 3 millones de AVAX.
 
+Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. ** No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa. ** Asegúrate de que está utilizando los valores correctos. Si no está seguro, consulte nuestro
 Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
@@ -1804,7 +1804,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTY0OTY4MSw3NjQ5NTM3MzAsMTYyNz
-I4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTld
-fQ==
+eyJoaXN0b3J5IjpbLTExNTE5NTQzMjAsNzY0OTUzNzMwLDE2Mj
+cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
+XX0=
 -->
