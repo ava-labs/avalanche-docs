@@ -105,8 +105,7 @@ El período de validación debe ser de entre 2 semanas y 1 año.
 
 Hay un máximo peso total impuesto a los validadores. Esto significa que ningún validador podrá tener más AVAX en stake que este valor. Este valor se establecerá inicialmente en el `min(5*cantidad en stake, 3M AVAX)`. El valor total de un validador es de 3 millones de AVAX.
 
-Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. ** No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa. ** Asegúrate de que está utilizando los valores correctos. Si no está seguro, consulte nuestro
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. ** No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa. ** Asegúrate de que estás utilizando los valores correctos. Si no estás seguro, consulta nuestra sección de [Preguntas Frecuentes para Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o solicita ayuda en [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
@@ -134,8 +133,8 @@ platform.addValidator(
 ```
 
 * `nodeID` es el ID del nodo del validador que se agrega.
-* `startTime` is the Unix time when the validator starts validating the Primary Network.
-* `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
+* `startTime` es el tiempo Unix cuando el validador comienza a validar la red primaria.
+* `endTime` es el tiempo Unix en el que el validador deja de validar la red primaria \(y se devuelve el AVAX en apostado \).
 * `stakeAmount` is the amount of nAVAX the validator is staking.
 * `rewardAddress` is the address the validator reward will go to, if there is one.
 * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
@@ -1804,7 +1803,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTE5NTQzMjAsNzY0OTUzNzMwLDE2Mj
+eyJoaXN0b3J5IjpbLTIwMjUyOTM2NTQsNzY0OTUzNzMwLDE2Mj
 cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
 XX0=
 -->
