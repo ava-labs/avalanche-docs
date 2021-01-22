@@ -50,9 +50,9 @@ platform.addDelegator(
 }
 ```
 
-* `nodeID` is the ID of the node to delegate to.
-* `startTime` is the Unix time when the delegator starts delegating.
-* `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
+* `nodeID` es el ID del nodo al cual delegar.
+* `startTime` es el tiempo Unix cuando el delegador comienza a delegar.
+* `endTime`es el tiempo Unix cuando el delegador termina de delegar \(y el AVAX en stake es devuelto\).
 * `stakeAmount` is the amount of nAVAX the delegator is staking.
 * `rewardAddress` is the address the validator reward goes to, if there is one.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1803,6 +1803,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNT
-I3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTEwOTkzODkwMzcsNzY0OTUzNzMwLDE2Mj
+cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
+XX0=
 -->
