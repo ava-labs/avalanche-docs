@@ -97,12 +97,11 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-Agrega un validador a la red primaria. Debe hacer staking de AVAX para hacer esto. Si el nodo es lo suficientemente correcto y receptivo durante la validación, recibirá una recompensa cuando se alcance el final del período de participación. La probabilidad del validador de ser muestreado por otros validadores durante el consenso es proporcional a la cantidad de AVAX en stake.
+Agrega un validador a la red primaria. Debe hacer staking de AVAX para hacer esto. Si el nodo es lo suficientemente correcto y receptivo durante la validación, recibirá una recompensa cuando finalice el período de participación. La probabilidad del validador de ser muestreado por otros validadores durante el consenso es proporcional a la cantidad de AVAX en stake.
 
 El validador cobra una tarifa a los delegadores; el primero recibe un porcentaje de la recompensa de validación del delegador \ (si corresponde). La tarifa mínima de delegación es del 2%. Una transacción que agrega un validador no tiene tarifa.
 
 El período de validación debe ser de entre 2 semanas y 1 año.
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
 The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
 
@@ -1808,7 +1807,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExNDQ1NDI1Niw3NjQ5NTM3MzAsMTYyNz
+eyJoaXN0b3J5IjpbLTYzNjg0MjgxNSw3NjQ5NTM3MzAsMTYyNz
 I4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTld
 fQ==
 -->
