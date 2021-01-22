@@ -1067,7 +1067,7 @@ curl -X POST --data '{
 
 Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getStakingAssetID({
@@ -1109,7 +1109,7 @@ curl -X POST --data '{
 
 Get info about the Subnets.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getSubnets(
@@ -1126,7 +1126,7 @@ platform.getSubnets(
 
 * `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
 * `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `threshold` firmas from addresses in `controlKeys` are needed to add a validator to the subnet.  
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5Mz
-E5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTg5MTQ1ODE0MiwxNjI3MjgyNjksLTgxMj
+UyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
