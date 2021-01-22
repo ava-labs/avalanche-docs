@@ -1587,7 +1587,7 @@ curl -X POST --data '{
 
 Issue a transaction to the Platform Chain.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.issueTx({
@@ -1630,7 +1630,7 @@ curl -X POST --data '{
 
 List addresses controlled by the given user.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.listAddresses({
@@ -1669,7 +1669,7 @@ curl -X POST --data '{
 
 Sample validators from the specified Subnet.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.sampleValidators(
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDcwOTM3MDUsMTYyNzI4MjY5LC04MT
-I1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNT
+I3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
