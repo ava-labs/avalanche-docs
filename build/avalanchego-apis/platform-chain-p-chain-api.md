@@ -1126,7 +1126,7 @@ platform.getSubnets(
 
 * `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
 * `id` is the Subnet’s ID.  
-* `threshold` firmas from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `threshold` número de firmas from addresses in `controlKeys` are needed to add a validator to the subnet.  
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1166,7 +1166,7 @@ curl -X POST --data '{
 
 Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getStake({addresses: []string}) -> {staked: int}
@@ -1205,7 +1205,7 @@ curl -X POST --data '{
 
 Get the total amount of nAVAX staked on the Primary Network.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTotalStake() -> {stake: int}
@@ -1241,7 +1241,7 @@ Gets a transaction by its ID.
 
 Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTx({
@@ -1286,7 +1286,7 @@ Gets a transaction’s status by its ID. If the transaction was dropped, respons
 
 See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTxStatus({
@@ -1323,7 +1323,7 @@ curl -X POST --data '{
 
 Gets the UTXOs that reference a given set of addresses.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getUTXOs(
@@ -1483,7 +1483,7 @@ Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
 Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.importAVAX(
@@ -1544,7 +1544,7 @@ curl -X POST --data '{
 
 Give a user control over an address by providing the private key that controls the address.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.importKey({
@@ -1803,6 +1803,6 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg5MTQ1ODE0MiwxNjI3MjgyNjksLTgxMj
-UyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTE0NDcwOTM3MDUsMTYyNzI4MjY5LC04MT
+I1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
