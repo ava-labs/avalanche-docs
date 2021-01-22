@@ -53,6 +53,14 @@ platform.addDelegator(
 * `nodeID` es el ID del nodo al cual delegar.
 * `startTime` es el tiempo Unix cuando el delegador comienza a delegar.
 * `endTime`es el tiempo Unix cuando el delegador termina de delegar \(y el AVAX en stake es devuelto\).
+* `stakeAmount` es la cantidad de nAVAX con el que e delegador está participando.
+* `rewardAddress` es la dirección a la que va la recompensa del validador, si hay una.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `contraseña` es la contraseña de` nombre de usuario`.
+* `txID` es el ID de la transacción
+
 * `stakeAmount` is the amount of nAVAX the delegator is staking.
 * `rewardAddress` is the address the validator reward goes to, if there is one.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1803,7 +1811,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTkzODkwMzcsNzY0OTUzNzMwLDE2Mj
-cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
-XX0=
+eyJoaXN0b3J5IjpbLTQ2MTgzODc2OSw3NjQ5NTM3MzAsMTYyNz
+I4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTld
+fQ==
 -->
