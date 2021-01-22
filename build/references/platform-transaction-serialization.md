@@ -500,10 +500,11 @@ Let’s make a base tx that uses the inputs and outputs from the previous exampl
 An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
 
 * **`BaseTx`**
-* **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-* **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-* **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* **`Weight`** is a long which is the amount the delegator stakes
+* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  * **`NodeID`** is 20 bytes which is the node ID of the validator.
+  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  * **`Weight`** is a long which is the amount the validator stakes
 * **`Stake`** Stake has `LockedOuts`
   * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
@@ -544,10 +545,11 @@ message AddValidatorTx {
 Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
 
 * **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
+* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
+  * **`NodeID`** is 20 bytes which is the node ID of the validator.
+  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
+  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
+  * **`Weight`** is a long which is the amount the validator stakes
 * **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
 * **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
 * **`Shares`**: `0x00000064`
