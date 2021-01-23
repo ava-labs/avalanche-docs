@@ -143,9 +143,9 @@ console.log(id)
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
 
-```text
+```ts
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
-const status: string = await xchain.getTxStatus(txid)
+const status: string = await xchain.getTxStatus(id)
 ```
 
 The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
