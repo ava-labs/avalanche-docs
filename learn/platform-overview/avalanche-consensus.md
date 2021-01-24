@@ -50,7 +50,7 @@ while not decided:
     decide(preference) 
 ```
 
-To start, you have some preference, maybe pizza or barbecue. Everyone else is following the same algorithm, though they may decide slightly before or after you but you arrive at your decision independent of everyone else. Until you've decided, you approach a handful of people, we'll call it _k_ or the sample size, in our example we'll say 10, and you ask them what they prefer. If a sufficient portion, which we call α or quorum size, of them give the same response then you adopt the preference that got the majority response.
+To start, you have some preference, maybe pizza or barbecue. Everyone else is following the same algorithm, though they may decide slightly before or after you but you arrive at your decision independent of everyone else. Until you've decided, you approach a handful of people, we'll call it _k_ or the sample size, in our example we'll say 10, and you ask them what they prefer. If a sufficient portion, which we call α, or quorum size, of them give the same response then you adopt the preference that got the majority response.
 
 If you already preferred that option then you're going to increment a `consecutiveSuccesses` counter. If the α majority response was different than your previous preference, you preferred barbecue and asked a bunch of people who all responded pizza, then you're going to shift your preference to pizza and set the `consecutiveSucccesses` counter to `1`.
 
@@ -98,7 +98,7 @@ If you get an α majority response for a transaction then you give that transact
 
 There is also a notion of **confidence**, which is the sum of your chit plus the sum of all your decendent's chits. For example, transaction **V** has a chit. It also has three decendents which have a chit so it's confidence is increased from `3` to `4`. Similary for transactions **W** and **X**. They both have a chit and they both have a decendent with a chit so they each have confidence `2`. Transaction Y has confidence `1`.
 
-**Consecutive successes** is the same as in Snowball. It's the number of times that this transaction, or a decendent of this transaction, received a successful majority query. So previously transaction V had `3` consecutive successes. itself and it's two children, and now it has `4` consecutive successes with transaction Y. Similarly for transactions W and X.
+**Consecutive successes** is the same as in Snowball. It's the number of times that this transaction, or a decendent of this transaction, received a successful majority query. So previously transaction V had `3` consecutive successes, itself and it's two children, and now it has `4` consecutive successes with transaction Y. Similarly for transactions W and X.
 
 ![Working example 3](../../.gitbook/assets/example-3.png)
 
@@ -110,13 +110,13 @@ Now let's say the node learns about transaction **Y'** which conflicts with tran
 
 ![Working example 5](../../.gitbook/assets/example-5.png)
 
-Transactions Y and Y' are in a conflict set where only one of them can ultimately get accepted. Transaction Y' doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have an decendents with a chit. It has `0` consecutive successes because the previous quiery didn't get an α majority response. We also update all the processing ancestor transactions, which in this case is W. It's consecutive successes goes from `2` to `0`. The confidence is still `2`.
+Transactions Y and Y' are in a conflict set where only one of them can ultimately get accepted. Transaction Y' doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any decendents with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. We also update all the processing ancestor transactions, which in this case is W. It's consecutive successes goes from `2` to `0`. The confidence is still `2`.
 
-Confidence is used when a node is queried. It in turn says that it prefers a transaction if no other transaction in it's conflict set with a higher confidence. In our example transaction Y has confidence `1` and transaction Y' has confidence `0` so we prefer transaction Y to transaction Y'.
+Confidence is used when a node is queried. It in turn says that it prefers a transaction if there is no other transaction in it's conflict set with a higher confidence. In our example transaction Y has confidence `1` and transaction Y' has confidence `0` so we prefer transaction Y to transaction Y'.
 
 ![Working example 6](../../.gitbook/assets/example-6.png)
 
-Now we learn about a new transaction, **Z**, and we do the same thing as before. After querying _k_ nodes we get back and a α majority response and we update the DAG.
+Now we learn about a new transaction, **Z**, and we do the same thing as before. After querying _k_ nodes we get back an α majority response and we update the DAG.
 
 ![Working example 7](../../.gitbook/assets/example-7.png)
 
@@ -126,13 +126,13 @@ Transaction Z gets a chit. It also has a confidence of `1` and `1` consecutive s
 
 Everything discussed to this point is how Avalanche is described in [the White Paper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). The implementation which we've done at Ava Labs has some optimizations for latency and throughput. The most important optimization is the idea of **vertices**. It would be a lot of overhead if we had to vote on every single transaction at once so we batch transactions in to vertices. They act just like transactions do in everything we've previously discussed.
 
-If you receive a vote for a vertex then that's a vote for all the transactions in a vertex and votes are applied transitively upward such as incrementing your ancestor's confidence and consecutive successes upon success. A vertex gets accepted when all the transactions which are in it are accepeted. If a vertex contains a rejected transaction then that vertex gets rejected and all of it's decendents get rejected as well. We ignore that part of the DAG and refuse to build on it. If a vertex gets rejected but contains valid transactions then those transactions are re-issue into a new vertex which is not the child of a rejected vertex.
+If you receive a vote for a vertex then that's a vote for all the transactions in a vertex and votes are applied transitively upward such as incrementing your ancestor's confidence and consecutive successes upon success. A vertex gets accepted when all the transactions which are in it are accepted. If a vertex contains a rejected transaction then that vertex gets rejected and all of it's decendents get rejected as well. We ignore that part of the DAG and refuse to build on it. If a vertex gets rejected but contains valid transactions then those transactions are re-issued into a new vertex which is not the child of a rejected vertex.
 
-Avalanche consensus is probabilistic. Technically you aren't guaranteed safety, but you are to a arbitrarily high probabilistic threshold. If any correct node accepts or rejects a vertex then all correct nodes will eventually accept or reject that vertex. Unlike Nakamoto consensus where your block might be included in the chain but later it gets reorged so you have to wait 60 minutes to feel confident that your transaction has settled, on Avalanche acceptance/rejection are **final and irreversible** and occur in 1&ndash;2 seconds.
+Avalanche consensus is probabilistic. Technically you aren't guaranteed safety, but you are to an arbitrarily high probabilistic threshold. If any correct node accepts or rejects a vertex then all correct nodes will eventually accept or reject that vertex. Unlike Nakamoto consensus where your block might be included in the chain but later it gets reorged so you have to wait 60 minutes to feel confident that your transaction has settled, on Avalanche acceptance/rejection are **final and irreversible** and occur in 1&ndash;2 seconds.
 
 ## Optimizations
 
-It's not efficient to just ask "do you prefer this?" and everybody responds with a binary yes or no so instead of asking "do you prefer this vertex?" nodes say "I learned about this vertex. So given that vertex exists, which vertices do you prefer?" Instead of getting a binary yes/no back you get back what they think the accepted vertices will end up being. Nodes don't only query upon hearing of a new transaction. They repeatedly query until there are no virtuous vertices processing. A virtuous vertex is one which has no conflicts.
+It's not efficient to just ask "do you prefer this?" and everybody responds with a binary yes or no so instead of asking "do you prefer this vertex?", nodes say "I learned about this vertex. So given that vertex exists, which vertices do you prefer?" Instead of getting a binary yes/no back you get back what they think the accepted vertices will end up being. Nodes don't only query upon hearing of a new transaction. They repeatedly query until there are no virtuous vertices processing. A virtuous vertex is one which has no conflicts.
 
 If we continued until there are no processesing vertices at all that wouldn't be good because then you could create conflicting vertices and have the network churn forever trying to reach consensus. Nodes don't need to wait until they get all _k_ query responses before registering the outcome of a poll. If no transaction can get an α majority then you don't need to wait for the rest of the responses.
 
@@ -142,7 +142,7 @@ If it were free to become a validator on the Avalanche network it would be probl
 
 To become a validator, a node must **bond** (stake), something very valuable (**AVAX**). The more AVAX which a node bonds then the more often that node is queried by other nodes. When you're sampling the network it's not a uniformly random decision, instead you do weighting based on the amount of staked AVAX. We incentivize nodes by giving them a reward if, while they're validating, they're sufficiently correct and responsive.
 
-Avalanche doesn't have slashing. If a node doesn't behave well while validating, such as giving incorrect responses or perhaps not responding at all, we don't burn their stake or reduce it. We give it back to them but with no reward. This is nice in case your node is down for a reason which is out of your control, such as a network outage. As long as a sufficient portion of the bonded AVAX is held by correct nodes, then the network is live and safe for virtious transactions. Any correct nodes will agree on what has been accepted and rejected.
+Avalanche doesn't have slashing. If a node doesn't behave well while validating, such as giving incorrect responses or perhaps not responding at all, we don't burn their stake or reduce it. We give it back to them but with no reward. This is nice in case your node is down for a reason which is out of your control, such as a network outage. As long as a sufficient portion of the bonded AVAX is held by correct nodes, then the network is live and safe for virtuous transactions. Any correct nodes will agree on what has been accepted and rejected.
 
 ## Big Ideas
 
@@ -154,7 +154,7 @@ Transitive voting, where a vote for a transaction is a vote for all it's ancesto
 
 ## Loose Ends
 
-Transactions are created by users which call an API on the [AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such as [AvalancheJS](https://github.com/ava-labs/avalanchejs). Vertices are created when nodes batch incoming transactions together or when accepted transactions from a rejected vertex get reissued and added to the DAG. A vertex's parents are chosen from the virtuous frontier which are the nodes at the tip of the DAG with no conflicts. It's important to build on virtuous vertices because if we built on non-virtuous vertices there would be a higher chance that the node would get rejected which means there's a higher chance it's ancestors get rejected and we would make less progress.
+Transactions are created by users which call an API on the [AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such as [AvalancheJS](https://github.com/ava-labs/avalanchejs). Vertices are created when nodes batch incoming transactions together or when accepted transactions from a rejected vertex get reissued and added to the DAG. A vertex's parents are chosen from the virtuous frontier, which are the nodes at the tip of the DAG with no conflicts. It's important to build on virtuous vertices because if we built on non-virtuous vertices there would be a higher chance that the node would get rejected which means there's a higher chance it's ancestors get rejected and we would make less progress.
 
 ## Other Observations
 
