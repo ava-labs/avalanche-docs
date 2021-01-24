@@ -4,10 +4,6 @@ description: Avalanche consensus deep dive.
 
 # Avalanche Consensus
 
-## Introduction
-
-Recently Ava Labs Platform Engineer Daniel Laine gave a presentation on Avalanche Consensus to the Encode Hack Club. It was so informative that we've decided to capture it in our docs.
-
 {% embed url="https://www.youtube.com/watch?v=ZUF9sIu-D_k" caption="" %}
 
 ## Consensus
