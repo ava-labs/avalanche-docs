@@ -12,10 +12,10 @@ Transferable outputs wrap an output with an asset ID.
 
 ### What Transferable Output Contains
 
-A transferable output contains an `AssetID` and an [`Output`](#Outputs).
+A transferable output contains an `AssetID` and an [`Output`](#outputs).
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined [below](#Outputs). For example, this can be a [SECP256K1 transfer output](#SECP256K1-Transfer-Output).
+* **`Output`** is an output, as defined [below](#outputs). For example, this can be a [SECP256K1 transfer output](#secp256k1-transfer-output).
 
 ### Gantt Transferable Output Specification
 
@@ -81,7 +81,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 * **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
 * **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
 * **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](#SECP256K1-Transfer-Input)
+* **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](#secp256k1-transfer-input)
 
 ### Gantt Transferable Input Specification
 
@@ -157,7 +157,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this operation changes.
 * **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
-* **`TransferOp`** is a [transferable operation object](#Operations).
+* **`TransferOp`** is a [transferable operation object](#operations).
 
 ### Gantt Transferable Op Specification
 
@@ -242,7 +242,7 @@ Let’s make a transferable operation:
 
 ## Outputs
 
-Outputs have four possible types: [`SECP256K1TransferOutput`](#SECP256K1-Transfer-Output), [`SECP256K1MintOutput`](#SECP256K1-Mint-Output), [`NFTTransferOutput`](#NFT-Transfer-Output) and [`NFTMintOutput`](#NFT-Mint-Output).
+Outputs have four possible types: [`SECP256K1TransferOutput`](#secp256k1-transfer-output), [`SECP256K1MintOutput`](#secp256k1-mint-output), [`NFTTransferOutput`](#nft-transfer-output) and [`NFTMintOutput`](#nft-mint-output).
 
 ## SECP256K1 Transfer Output
 
@@ -689,9 +689,9 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation 
 A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000008`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the [UTXO](#UTXO). Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`MintOutput`** is a [SECP256K1 Mint output](#SECP256K1-Mint-Output).
-* **`TransferOutput`** is a [SECP256K1 Transfer output](#SECP256K1-Transfer-Output).
+* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the [UTXO](#utxo). Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`MintOutput`** is a [SECP256K1 Mint output](#secp256k1-mint-output).
+* **`TransferOutput`** is a [SECP256K1 Transfer output](#secp256k1-transfer-output).
 
 ### **Gantt SECP256K1 Mint Operation Specification**
 
@@ -891,7 +891,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
 
 * **`TypeID`** is the ID for this output type. It is `0x0000000d`.
 * **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an [NFT Transfer Output](#NFT-Transfer-Output). This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+* **`NFTTransferOutput`** is the output of this operation and must be an [NFT Transfer Output](#nft-transfer-output). This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
 
 ### **Gantt NFT Transfer Op Specification**
 
@@ -1005,7 +1005,7 @@ Initial state describes the initial state of an asset when it is created. It con
 Initial state contains a `FxID` and an array of `Output`.
 
 * **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-* **`Outputs`** is a variable length array of [outputs](#Outputs), as defined above.
+* **`Outputs`** is a variable length array of [outputs](#outputs), as defined above.
 
 ### Gantt Initial State Specification
 
@@ -1147,7 +1147,7 @@ An NFT credential is the same as an [secp256k1 credential](#secp256k1-credential
 
 ## Unsigned Transactions
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](#What-Unsigned-Create-Asset-Tx-Contains), [`OperationTx`](#What-Unsigned-Operation-Tx-Contains), [`ImportTx`](#What-Unsigned-Import-Tx-Contains), and [`ExportTx`](#What-Unsigned-Export-Tx-Contains). They all embed [`BaseTx`](#What-Base-Tx-Contains), which contains common fields and operations.
+Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](#what-unsigned-create-asset-tx-contains), [`OperationTx`](#what-unsigned-operation-tx-contains), [`ImportTx`](#what-unsigned-import-tx-contains), and [`ExportTx`](#what-unsigned-export-tx-contains). They all embed [`BaseTx`](#what-base-tx-contains), which contains common fields and operations.
 
 ### What Base Tx Contains
 
@@ -1156,8 +1156,8 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
 * **`TypeID`** is the ID for this type. It is `0x00000000`.
 * **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
 * **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of [transferable output objects](#Transferable-Output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of [transferable input objects](#Transferable-Input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+* **`Outputs`** is an array of [transferable output objects](#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
+* **`Inputs`** is an array of [transferable input objects](#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
 * **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
 
 ### Gantt Base Tx Specification
@@ -1276,7 +1276,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
 * **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
 * **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
 * **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](#Initial-State) of those feature extensions.
+* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](#initial-state) of those feature extensions.
 
 ### Gantt Unsigned Create Asset Tx Specification
 
@@ -1396,7 +1396,7 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of [Transferable Ops](#Transferable-Ops).
+* **`Ops`** is a variable-length array of [Transferable Ops](#transferable-ops).
 
 ### Gantt Unsigned Operation Tx Specification
 
@@ -1499,7 +1499,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
 
 * **`BaseTx`**
 * **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of [Transferable Inputs](#Transferable-Input).
+* **`Ins`** is a variable length array of [Transferable Inputs](#transferable-input).
 
 ### Gantt Unsigned Import Tx Specification
 
@@ -1607,7 +1607,7 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
 
 * **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of [Transferable Outputs](#Transferable-Output).
+* **`Outs`** is a variable length array of [Transferable Outputs](#transferable-output).
 
 ### Gantt Unsigned Export Tx Specification
 
@@ -1711,7 +1711,7 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 
 ## Signed Transaction
 
-A signed transaction is an unsigned transaction with the addition of an array of [credentials](#Credentials).
+A signed transaction is an unsigned transaction with the addition of an array of [credentials](#credentials).
 
 ### What Signed Transaction Contains
 
@@ -1719,7 +1719,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
 
 * **`CodecID`** The only current valid codec id is `00 00`.
 * **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of [credentials](#Credentials). Each credential will be paired with the input in the same index at this credential.
+* **`Credentials`** is an array of [credentials](#credentials). Each credential will be paired with the input in the same index at this credential.
 
 ### Gantt Signed Transaction Specification
 
@@ -1832,7 +1832,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
 * **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
 * **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
 * **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the [output](#Transferable-Output) object that created this utxo. The serialization of Outputs was defined above.
+* **`Output`** is the [output](#transferable-output) object that created this utxo. The serialization of Outputs was defined above.
 
 ### Gantt UTXO Specification
 
@@ -1910,4 +1910,3 @@ Let’s make a UTXO from the signed transaction created above:
     0x24, 0x25, 0x26, 0x27,
 ]
 ```
-
