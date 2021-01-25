@@ -318,10 +318,10 @@ platform.createBlockchain(
 ```
 * `subnetID` es el ID de la subred que valida la nueva cadena de bloques. La subred debe existir y no puede ser la red principal.
 * `vmID` es el ID de la máquina virtual que ejecuta blockchain. También puede ser un alias de la máquina virtual.
-* `name` es un nombre legible por humanos para la nueva cadena de bloques. No necesariamente único.
-* `genesisData` es la representación en bytes del estado de génesis de la nueva cadena de bloques codificada en el formato especificado por el parámetro` encoding`.
-* `encoding` especifica el formato que se utilizará para` genesisData`. Puede ser "cb58" o "hex". El valor predeterminado es "cb58". Las máquinas virtuales deben tener un método de API estático llamado `buildGenesis` que pueda usarse para generar` genesisData`
-* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
+* `name` es un nombre humanamente-legible para la nueva cadena de bloques. No necesariamente único.
+* `genesisData` es la representación en bytes del estado de génesis de la nueva cadena de bloques codificada en el formato especificado por el parámetro `encoding`.
+* `encoding` especifica el formato que se utilizará para `genesisData`. Puede ser "cb58" o "hex". El valor predeterminado es "cb58". Las máquinas virtuales deben tener un método de API estático llamado `buildGenesis` que pueda usarse para generar `genesisData`
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de sus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 * `username` es el usuario que paga la tarifa de transacción. Este usuario debe tener una cantidad suficiente de claves de control de la subred.
 * `password` es la contraseña de`username`.
@@ -1813,8 +1813,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDM2NzkzMzQsLTE3MjQxNzM1MTUsMT
-cyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4
-MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ
-==
+eyJoaXN0b3J5IjpbLTgzODU2OTEyMCwtMTcyNDE3MzUxNSwxNz
+I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
+NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
