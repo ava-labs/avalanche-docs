@@ -365,9 +365,9 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-Create a new subnet.
+Crea una nueva subred.
 
-The subnet’s ID is the same as this transaction’s ID.
+El ID de la subred es el mismo que el ID de esta transacción.
 
 #### **Firma**
 
@@ -387,6 +387,11 @@ platform.createSubnet(
     changeAddr: string
 }
 ```
+* Para agregar un validador a esta subred, se requieren una cantidad (`threshold`) de firmas de las direcciones en `controlKeys`
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `contraseña` es la contraseña de` nombre de usuario`.
 
 * In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1802,7 +1807,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDcwNTAzMywtMTcyNDE3MzUxNSwxNz
-I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
-NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTE5MTg2NzM2MDMsLTE3MjQxNzM1MTUsMT
+cyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4
+MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ
+==
 -->
