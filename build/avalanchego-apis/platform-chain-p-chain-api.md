@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -168,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -351,7 +351,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -416,7 +416,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -477,7 +477,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -524,7 +524,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -577,7 +577,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -637,7 +637,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -726,7 +726,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -761,7 +761,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1803,7 +1803,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2Mj
-cyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5
-XX0=
+eyJoaXN0b3J5IjpbOTE3OTI1OTM1LC0xMzExODczNzQ4LDc2ND
+k1MzczMCwxNjI3MjgyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5
+LDk3NDI5MDE1OV19
 -->
