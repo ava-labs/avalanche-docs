@@ -707,8 +707,8 @@ platform.getBlockchainStatus(
 * `Validating`: La cadena de bloques está siendo validada por este nodo.
 * `Created`: La cadena de bloques existe, pero no está siendo validada por este nodo.
 * `Preferred`: Se propuso crear la cadena de bloques y es probable que se cree, pero la transacción aún no se acepta.
-* `Unknown`: La cadena de bloques no se propuso o no se prefiere la propuesta para crearla.La propuesta puede volver a presentarse.
-* 
+* `Unknown`: La cadena de bloques no se propuso o no se prefiere la propuesta para crearla. La propuesta puede volver a presentarse.
+ 
 #### **Llamada de Ejemplo**
 
 ```cpp
@@ -1799,8 +1799,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4ODUzOTc3OCwxMjI5MzczNDI5LC04Mj
-YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
-Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
-Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTE0NDU3NDYxNDgsMTIyOTM3MzQyOSwtOD
+I2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4
+NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LD
+E0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
