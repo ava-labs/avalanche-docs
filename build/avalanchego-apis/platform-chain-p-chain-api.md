@@ -208,25 +208,15 @@ platform.addSubnetValidator(
 ```
 
 * `nodeID` es el ID del nodo validador.
-*`subnetID`es la subred que validarán.
-* `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+* `subnetID`es la subred que validarán.
+* `startTime` es el tiempo Unix en la que el validador comienza a validar la subred.
 * `endTime` es el tiempo Unix en el que el validador deja de validar la subred.
 * `weight` es el peso del validador utilizado para el muestreo.
 * `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 * `username` es el usuario que paga la tarifa de transacción.
-* `contraseña` es la contraseña de` nombre de usuario`.
+* `password` es la contraseña de`username`.
 * `txID` es el ID de transacción.
-* 
-* `subnetID` is the subnet they will validate.
-* `startTime` is the unix time when the validator starts validating the subnet.
-* `endTime` is the unix time when the validator stops validating the subnet.
-* `weight` is the validator’s weight used for sampling.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
 
 #### **Llamada de Ejemplo**
 
@@ -264,7 +254,7 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
-Create a new address controlled by the given user.
+Crea una nueva dirección controlada por el usuario dado.
 
 #### **Firma**
 
@@ -1813,7 +1803,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQyNzg5OTk3LDE3MjkxNjgyMDgsLTEzMT
-E4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1
-LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMT
+MxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1
+OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
