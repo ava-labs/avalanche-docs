@@ -818,13 +818,13 @@ platform.getCurrentValidators({
 
 * `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
 * `validadores`:
-  * `txID` es la transacción del validador.
+  * `txID` es la transacción de validador.
   * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
   * `endTime` es la hora Unix en la que el validador deja de validar la subred.
-  * `StakeAmount` es la cantidad de nAVAX que este validador apostó. Omitido si "subnetID" no es la red principal.
+  * `stakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si "subnetID" no es la red primaria.
   * `nodeID` es el ID de nodo del validador.
   * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
-  * `PrizeOwner` es una salida de` OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
+  * `rewardOwner` es una salida de `OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
   * `potencialReward` es la recompensa potencial obtenida al apostar
   * `gationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan su participación en ellos.
   * `uptime` es el% de tiempo que el nodo consultado ha informado que el par está en línea.
@@ -840,12 +840,6 @@ platform.getCurrentValidators({
 * `delegators`: \ (** obsoleto a partir de v1.0.1. Consulte la nota en la parte superior de la documentación del método. ** \)
 
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
   * `nodeID` is the validator’s node ID.
   * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
   * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
@@ -1823,7 +1817,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwNDE5NzE4OCwxMjI5MzczNDI5LC04Mj
+eyJoaXN0b3J5IjpbMTQ0OTQ5MTUxNCwxMjI5MzczNDI5LC04Mj
 YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
 Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
 Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
