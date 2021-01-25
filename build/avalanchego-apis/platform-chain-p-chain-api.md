@@ -769,11 +769,13 @@ curl -X POST --data '{
 }
 ```
 
-The response in this example indicates that AVAX’s supply is at most 365.865 million.
+La respuesta en este ejemplo indica que el suministro de AVAX es como máximo de 365,865 millones.
 
 ### platform.getCurrentValidators
 
-List the current validators of the given Subnet.
+Enumera los validadores actuales de una subred dada.
+
+El campo de nivel superior  `delegators` fue [descontinuado](deprecated-api-calls.md#getcurrentvalidators) a partir de v1.0.1, y eliminado en v1.0.6. En cambio, cada elemento de "validadores" ahora contiene la lista de delegadores para ese validador.
 
 The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
 
@@ -1799,8 +1801,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc1MTk4NzUsMTIyOTM3MzQyOSwtODI2Mj
-Q1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3
-NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OT
-MxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbMTE2NjM4OTU0OSwxMjI5MzczNDI5LC04Mj
+YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
+Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
+Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
