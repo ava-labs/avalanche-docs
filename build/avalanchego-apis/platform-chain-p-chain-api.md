@@ -141,17 +141,12 @@ platform.addValidator(
 *  `from` son las direcciones que deseas utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 * `username` es el usuario que paga la tarifa de transacción.
-* `contraseña` es la contraseña de` nombre de usuario`.
+* `password` es la contraseña de `username`.
 * `txID` es el ID de la transacción
-
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
 
 #### **Llamada de Ejemplo**
 
+En este ejemplo, usamos el comando de shell `date` para calcular los tiempos Unix 10 minutos y 2 días en el futuro. \ (Nota: si estás en una Mac, reemplaza `$(date` por` $(gdate`. Si no tienes `gdate` instalado, haz`brew install coreutils`. \)
 In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
 
 ```cpp
@@ -1809,7 +1804,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjc3MjY5MzQ3LDE3MjkxNjgyMDgsLTEzMT
-E4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1
-LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTIwNjc3Mjc1NDMsMTcyOTE2ODIwOCwtMT
+MxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1
+OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
