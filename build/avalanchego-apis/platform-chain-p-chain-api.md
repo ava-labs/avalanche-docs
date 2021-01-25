@@ -775,9 +775,7 @@ La respuesta en este ejemplo indica que el suministro de AVAX es como máximo de
 
 Enumera los validadores actuales de una subred dada.
 
-El campo de nivel superior  `delegators` fue [descontinuado](deprecated-api-calls.md#getcurrentvalidators) a partir de v1.0.1, y eliminado en v1.0.6. En cambio, cada elemento de "validadores" ahora contiene la lista de delegadores para ese validador.
-
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+El campo de nivel superior  `delegators` fue [descontinuado](deprecated-api-calls.md#getcurrentvalidators) a partir de v1.0.1, y eliminado en v1.0.6. En cambio, cada elemento de `validators` ahora contiene la lista de delegadores para ese validador.
 
 #### **Firma**
 
@@ -817,6 +815,30 @@ platform.getCurrentValidators({
     }
 }
 ```
+
+* `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
+* `validadores`:
+  * `txID` es la transacción del validador.
+  * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+  * `endTime` es la hora Unix en la que el validador deja de validar la subred.
+  * `StakeAmount` es la cantidad de nAVAX que este validador apostó. Omitido si "subnetID" no es la red principal.
+  * `nodeID` es el ID de nodo del validador.
+  * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
+  * `PrizeOwner` es una salida de` OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
+  * `potencialReward` es la recompensa potencial obtenida al apostar
+  * `gationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan su participación en ellos.
+  * `uptime` es el% de tiempo que el nodo consultado ha informado que el par está en línea.
+  * `conectado` es si el nodo está conectado a la red
+  * `delegators` es la lista de delegadores a este validador:
+    * `txID` es la transacción del delegador.
+    * `startTime` es la hora Unix en la que se inició el delegador.
+    * `endTime` es el tiempo de Unix en el que se detiene el delegador.
+    * `StakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si "subnetID" no es la red principal.
+    * `nodeID` es el ID del nodo de validación.
+    * `PrizeOwner` es una salida de` OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
+    * `potencialReward` es la recompensa potencial obtenida al apostar
+* `delegators`: \ (** obsoleto a partir de v1.0.1. Consulte la nota en la parte superior de la documentación del método. ** \)
+
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 * `validators`:
@@ -1801,7 +1823,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2NjM4OTU0OSwxMjI5MzczNDI5LC04Mj
+eyJoaXN0b3J5IjpbLTkwNDE5NzE4OCwxMjI5MzczNDI5LC04Mj
 YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
 Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
 Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
