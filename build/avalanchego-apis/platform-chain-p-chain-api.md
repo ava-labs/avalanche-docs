@@ -501,9 +501,9 @@ platform.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` is the user that controls `address`.
-* `password` is `username`‘s password.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username` es el usuario que controla `address`.
+* `password` es la contraseña de `username`.
+* `privateKey` es la representación en cadena de la clave privada que controla `address`.
 
 #### **Llamada de Ejemplo**
 
@@ -534,7 +534,7 @@ curl -X POST --data '{
 
 ### platform.getBalance
 
-Get the balance of AVAX controlled by a given address.
+Obtén el saldo de AVAX controlado por una dirección determinada.
 
 #### **Firma**
 
@@ -552,6 +552,13 @@ platform.getBalance({
     }
 }
 ```
+
+* `address` es la dirección para obtener el saldo.
+* `balance` es el saldo total, en nAVAX.
+* `unlocked` es el saldo desbloqueado, en nAVAX.
+* `lockStakeable` es el saldo apilable bloqueado, en nAVAX.
+* `lockNotStakeable` es el saldo bloqueado y no apilable, en nAVAX.
+* `utxoIDs` son los ID de los UTXO que hacen referencia a la` dirección`.
 
 * `address` is the address to get the balance of.
 * `balance` is the total balance, in nAVAX.
@@ -1799,7 +1806,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0NTQwMDIzNywtMTcyNDE3MzUxNSwxNz
-I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
-NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbODE2MTk4Mzk2LC0xNzI0MTczNTE1LDE3Mj
+kxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2
+OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
