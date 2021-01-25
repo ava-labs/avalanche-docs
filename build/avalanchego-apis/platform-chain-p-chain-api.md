@@ -837,7 +837,7 @@ platform.getCurrentValidators({
     * `nodeID` es el ID del nodo de validación.
     * `rewardOwner` es una salida de` OutputOwners` que incluye `locktime`, `threshold` y un arreglo de direcciones (`addresses`) .
     * `potencialReward` es la recompensa potencial obtenida al hacer staking
-* `delegators`: \ (** obsoleto a partir de v1.0.1. Consulta la nota en la parte superior de la documentación del método. ** \)
+* `delegators`: \(** obsoleto a partir de v1.0.1. Consulta la nota en la parte superior de la documentación del método. **\)
 
 #### **Llamada de Ejemplo**
 
@@ -900,7 +900,7 @@ curl -X POST --data '{
 
 ### platform.getHeight
 
-Returns the height of the last accepted block.
+Devuelve la altura del último bloque aceptado.
 
 #### **Firma**
 
@@ -1799,9 +1799,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMj
-EyNzI2NzUwMiwxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQx
-NzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3Mz
-AsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQy
-OTAxNTldfQ==
+eyJoaXN0b3J5IjpbNTU3MjQwMDgwLC03NTk2OTA4NTIsLTE3MT
+cxNDYyNDcsLTIxMjcyNjc1MDIsMTIyOTM3MzQyOSwtODI2MjQ1
+MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3ND
+gsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OTMx
+OTQ3OTksOTc0MjkwMTU5XX0=
 -->
