@@ -556,9 +556,9 @@ platform.getBalance({
 * `address` es la dirección de la cual se quiere obtener el saldo.
 * `balance` es el saldo total, en nAVAX.
 * `unlocked` es el saldo desbloqueado, en nAVAX.
-* `lockStakeable` es el saldo apilable bloqueado, en nAVAX.
-* `lockNotStakeable` es el saldo bloqueado y no apilable, en nAVAX.
-* `utxoIDs` son los ID de los UTXO que hacen referencia a la` dirección`.
+* `lockedStakeable` es el saldo disponible para stake y bloqueado, en nAVAX.
+* `lockedNotStakeable` es el saldo bloqueado y no disponible para stake, en nAVAX.
+* `utxoIDs` son los ID de los UTXO que hacen referencia a la `dirección`.
 
 * `address` is the address to get the balance of.
 * `balance` is the total balance, in nAVAX.
@@ -1806,7 +1806,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNz
-I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
-NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTI1MDUwNzU3LC04MjYyNDUzNzAsLTE3Mj
+QxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3
+MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5Nz
+QyOTAxNTldfQ==
 -->
