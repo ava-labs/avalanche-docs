@@ -74,7 +74,7 @@ Snowball is very scalable as the number of nodes on the network, _n_, increases.
 
 Now let's introduce a data structure called a DAG or Directed Acyclic Graph. A DAG gives a **partial ordering** of decisions. For example check out the DAG in this diagram:
 
-![Basic DAG](../../.gitbook/assets/basic-dag.png)
+<img src="../../.gitbook/assets/basic-dag.png" alt="Basic DAG" width="200"/>
 
 **a** is before **b**. **b** is before **d**. **d** is before **e**. So transitively we can say that **a** comes before **e**. However, since this is a partial ordering, for some items the ordering is not defined. For example both **b** and **c** are after **a** but there is no notion of whether **b** is before or after **c**.
 
@@ -88,11 +88,11 @@ With Avalanche consensus, the name of the game is to prevent the inclusion of **
 
 Suppose we have an Avalanche network running with the following parameters. The sample size, _k_, is `4`. The quorum size, α majority response, is `14`. The number of consecutive success, β, is `4`.
 
-![Working example 1](../../.gitbook/assets/example-1.png)
+<img src="../../.gitbook/assets/example-1.png" alt="Working example 1" width="200"/>
 
 Here we have a happy little node which finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_, `4` in this example, validators and says "Do you prefer this transaction?" It gets back responses&mdash;three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so we have an α majority of yes responses. Now we're going to update this example DAG.
 
-![Working example 2](../../.gitbook/assets/example-2.png)
+<img src="../../.gitbook/assets/example-2.png" alt="Working example 2" width="200"/>
 
 If you get an α majority response for a transaction then you give that transaction a **chit** which is a boolean that says "when I queried the network about this transaction an α majority said that they preferred it." In our example, we give Transaction Y a chit.
 
@@ -100,25 +100,25 @@ There is also a notion of **confidence**, which is the sum of your chit plus the
 
 **Consecutive successes** is the same as in Snowball. It's the number of times that this transaction, or a decendent of this transaction, received a successful majority query. So previously transaction V had `3` consecutive successes, itself and it's two children, and now it has `4` consecutive successes with transaction Y. Similarly for transactions W and X.
 
-![Working example 3](../../.gitbook/assets/example-3.png)
+<img src="../../.gitbook/assets/example-3.png" alt="Working example 3" width="200"/>
 
 In this example we have the the number of consecutive success, β, set to `4` and now transaction V has `4` consecutive success so it's **accepted**.
 
-![Working example 4](../../.gitbook/assets/example-4.png)
+<img src="../../.gitbook/assets/example-4.png" alt="Working example 4" width="200"/>
 
 Now let's say the node learns about transaction **Y'** which conflicts with transaction Y. We follow the same steps as before and subsample α, or `4`, validators on the network and we ask if they prefer transaction Y'. In this case, two of them say that they prefer Y' and two of them say that they do not prefer Y'. This time we didn't get an α majority response, so we update our DAG accordingly.
 
-![Working example 5](../../.gitbook/assets/example-5.png)
+<img src="../../.gitbook/assets/example-5.png" alt="Working example 5" width="200"/>
 
 Transactions Y and Y' are in a conflict set where only one of them can ultimately get accepted. Transaction Y' doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any decendents with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. We also update all the processing ancestor transactions, which in this case is W. It's consecutive successes goes from `2` to `0`. The confidence is still `2`.
 
 Confidence is used when a node is queried. It in turn says that it prefers a transaction if there is no other transaction in it's conflict set with a higher confidence. In our example transaction Y has confidence `1` and transaction Y' has confidence `0` so we prefer transaction Y to transaction Y'.
 
-![Working example 6](../../.gitbook/assets/example-6.png)
+<img src="../../.gitbook/assets/example-6.png" alt="Working example 6" width="200"/>
 
 Now we learn about a new transaction, **Z**, and we do the same thing as before. After querying _k_ nodes we get back an α majority response and we update the DAG.
 
-![Working example 7](../../.gitbook/assets/example-7.png)
+<img src="../../.gitbook/assets/example-7.png" alt="Working example 7" width="200"/>
 
 Transaction Z gets a chit. It also has a confidence of `1` and `1` consecutive success. We also update the processing ancestors. No ancestors have `4` consecutive successes so no ancestors can get accepted yet.
 
@@ -148,7 +148,7 @@ Avalanche doesn't have slashing. If a node doesn't behave well while validating,
 
 Avalanche has many Big Ideas. In this context two which are worth exploring are **subsampling** and **transitive voting**. Subsampling has low message overhead. It doesn't matter if there are twenty validators or two thousand validators, the number of consensus messages which a node sends remains constant.
 
-![Working example 8](../../.gitbook/assets/example-8.png)
+<img src="../../.gitbook/assets/example-8.png" alt="Working example 8" width="200"/>
 
 Transitive voting, where a vote for a transaction is a vote for all it's ancestors, really helps with transaction throughput. We're essentially getting a bunch of votes for the cost of one. For example in the above diagram, if you get a vote for vertex **D** that implies a vote for all it's ancestors. So, since we just got a vote for **D**, that also means we got a vote for **A**, **B**, and **C**. Message overhead scales well with transaction throughput.
 
