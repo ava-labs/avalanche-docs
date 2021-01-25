@@ -824,9 +824,9 @@ platform.getCurrentValidators({
   * `stakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si "subnetID" no es la red primaria.
   * `nodeID` es el ID de nodo del validador.
   * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
-  * `rewardOwner` es una salida de `OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
-  * `potencialReward` es la recompensa potencial obtenida al apostar
-  * `gationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan su participación en ellos.
+  * `rewardOwner` es una salida de `OutputOwners` que incluye `locktime`,` threshold` y un arreglo de direcciones (`addresses`).
+  * `potencialReward` es la recompensa potencial obtenida al hacer stake.
+  * `gationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan su stake en ellos.
   * `uptime` es el% de tiempo que el nodo consultado ha informado que el par está en línea.
   * `conectado` es si el nodo está conectado a la red
   * `delegators` es la lista de delegadores a este validador:
@@ -840,8 +840,7 @@ platform.getCurrentValidators({
 * `delegators`: \ (** obsoleto a partir de v1.0.1. Consulte la nota en la parte superior de la documentación del método. ** \)
 
 
-  * `nodeID` is the validator’s node ID.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+
   * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
   * `potentialReward` is the potential reward earned from staking
   * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
@@ -1817,8 +1816,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0OTQ5MTUxNCwxMjI5MzczNDI5LC04Mj
-YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
-Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
-Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTIxMjcyNjc1MDIsMTIyOTM3MzQyOSwtOD
+I2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4
+NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LD
+E0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
