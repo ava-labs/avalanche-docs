@@ -146,8 +146,7 @@ platform.addValidator(
 
 #### **Llamada de Ejemplo**
 
-En este ejemplo, usamos el comando de shell `date` para calcular los tiempos Unix 10 minutos y 2 días en el futuro. \ (Nota: si estás en una Mac, reemplaza `$(date` por` $(gdate`. Si no tienes `gdate` instalado, haz`brew install coreutils`. \)
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+En este ejemplo, usamos el comando de shell `date` para calcular los tiempos Unix 10 minutos y 2 días en el futuro. \(Nota: si estás en una Mac, reemplaza `$(date` por` $(gdate`. Si no tienes `gdate` instalado, haz`brew install coreutils`.\)
 
 ```cpp
 curl -X POST --data '{
@@ -184,7 +183,7 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+Agrega un validador a una subred que no sea la red primaria. El validador debe validar la red primaria durante todo el tiempo que valide esta subred.
 
 #### **Firma**
 
@@ -208,7 +207,17 @@ platform.addSubnetValidator(
 }
 ```
 
-* `nodeID` es el ID del nodo validator.
+* `nodeID` es el ID del nodo validador.
+*`subnetID`es la subred que validarán.
+* `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+* `endTime` es el tiempo Unix en el que el validador deja de validar la subred.
+* `weight` es el peso del validador utilizado para el muestreo.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `contraseña` es la contraseña de` nombre de usuario`.
+* `txID` es el ID de transacción.
+* 
 * `subnetID` is the subnet they will validate.
 * `startTime` is the unix time when the validator starts validating the subnet.
 * `endTime` is the unix time when the validator stops validating the subnet.
@@ -1804,7 +1813,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjc3Mjc1NDMsMTcyOTE2ODIwOCwtMT
-MxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1
-OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbNzQyNzg5OTk3LDE3MjkxNjgyMDgsLTEzMT
+E4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1
+LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
