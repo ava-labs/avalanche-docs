@@ -936,7 +936,7 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+Obtén la cantidad mínima de AVAX requerida para validar la Red Primaria y la cantidad mínima de AVAX que se puede delegar.
 
 #### **Firma**
 
@@ -973,7 +973,7 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
+Enumere los validadores en el conjunto de validadores pendientes de la subred especificada. Cada validador no está validando actualmente la subred, pero lo hará en el futuro.
 
 #### **Firma**
 
@@ -1799,9 +1799,9 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTU3MjQwMDgwLC03NTk2OTA4NTIsLTE3MT
-cxNDYyNDcsLTIxMjcyNjc1MDIsMTIyOTM3MzQyOSwtODI2MjQ1
-MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3ND
-gsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OTMx
-OTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTExMjExMDMyOTIsNTU3MjQwMDgwLC03NT
+k2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MDIsMTIyOTM3
+MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMD
+gsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEy
+NTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
