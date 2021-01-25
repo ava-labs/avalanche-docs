@@ -137,9 +137,13 @@ platform.addValidator(
 * `endTime` es el tiempo Unix en el que el validador deja de validar la red primaria \(y se devuelve el AVAX en stake\).
 * `stakeAmount` es la cantidad de nAVAX que el validador está dejando en stake.
 * `rewardAddress` es la dirección a la que irá la recompensa del validador, si hay una.
-* `delegationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan stake en ellos. Se permiten hasta 4 lugares decimales; se ignoran los lugares decimales adicionales. Debe estar entre 0 y 100, inclusive. Por ejemplo, si `DelegaciónFeeRate` es` 1.2345` y alguien delega en este validador, cuando el período de delegación finaliza, el 1.2345% de la recompensa va al validador y el resto al delegador.
+* `delegationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan stake en ellos. Se permiten hasta 4 lugares decimales; se ignoran los lugares decimales adicionales. Debe estar entre 0 y 100, inclusive. Por ejemplo, si `delegationFeeRate` es` 1.2345` y alguien delega en este validador, cuando el período de delegación finaliza, el 1.2345% de la recompensa va al validador y el resto al delegador. 
+*  `from` son las direcciones que deseas utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `contraseña` es la contraseña de` nombre de usuario`.
+* `txID` es el ID de la transacción
 
- is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee.
@@ -1805,7 +1809,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTcyNTQ5NDMsMTcyOTE2ODIwOCwtMT
-MxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1
-OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbMjc3MjY5MzQ3LDE3MjkxNjgyMDgsLTEzMT
+E4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1
+LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
