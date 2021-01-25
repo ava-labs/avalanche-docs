@@ -8,7 +8,7 @@ description: Avalanche consensus deep dive.
 
 ## Consensus
 
-Consensus is the process by which a series of independent validators come in to agreement on a decision. It's a rich field of computer science which goes back several decades. There have been 3 major paradigms in consensus, first was classical consensus, next was Nakamoto consensus which was introduced by Bitcoin, and we believe that Avalanche Consensus represents a third paradigm.
+Consensus is the process by which a series of independent validators come to agreement on a decision. It's a rich field of computer science which goes back several decades. There have been 3 major paradigms in consensus, first was classical consensus, next was Nakamoto consensus which was introduced by Bitcoin, and we believe that Avalanche Consensus represents a third paradigm.
 
 Avalanche consensus is scalable, robust and highly decentralized. It has low latency and high throughput as well as being lightweight and green. It also performs well in adversarial conditions such as being resilient to 51% attacks.
 
@@ -16,7 +16,7 @@ Avalanche has two consensus engines on launch&mdash;Avalanche: A DAG-optimized c
 
 ## Intuition
 
-First let's develop an intution around how the protocol works. Imagine that you're in a room full of people and you're trying to decide what to get for lunch. It's a binary decision between pizza and barbecue. Different people may start with alternative preferences, maybe some want pizza and others want barbecue, but the ultimate goal is to get everyone on the same page and to arrive at **consensus**. It's a democratic process with no leader that can affect the decision.
+First let's develop an intuition around how the protocol works. Imagine that you're in a room full of people and you're trying to decide what to get for lunch. It's a binary decision between pizza and barbecue. Different people may start with alternative preferences, maybe some want pizza and others want barbecue, but the ultimate goal is to get everyone on the same page and to arrive at **consensus**. It's a democratic process with no leader that can affect the decision.
 
 Each person begins asking a random subset of the other people what their preference is and depending on the more popular of the two options, pizza or barbecue, adjusts their own preference. For example, let's say your preference is pizza. You ask a random group their preference and they all say pizza, so your preference remains the same. You do this a second time and most of the people say pizza, so your preference still remains the same. This process is repeated many times and eventually you can be confident that consensus will be reached, around pizza in our example.
 
