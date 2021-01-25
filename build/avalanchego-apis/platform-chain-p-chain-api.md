@@ -448,14 +448,13 @@ platform.exportAVAX(
     changeAddr: string
 }
 ```
-
-* `amount` is the amount of nAVAX to send.
-* `to` is the address on the X-Chain to send the AVAX to
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user sending the AVAX and paying the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the ID of this transaction.
+* `amount` es la cantidad de nAVAX a enviar.
+* `to` es la dirección en X-Chain a la que enviar el AVAX
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que envía el AVAX y paga la tarifa de transacción.
+* `password` es la contraseña de `username`.
+* `txID` es el ID de esta transacción.
 
 #### **Llamada de Ejemplo**
 
@@ -490,8 +489,7 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+Obtén la llave privada que controla una dirección determinada. La llave privada devuelta se puede agregar a un usuario con[`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Firma**
 
@@ -1801,7 +1799,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2ODE5OTU3MSwtMTcyNDE3MzUxNSwxNz
+eyJoaXN0b3J5IjpbLTI0NTQwMDIzNywtMTcyNDE3MzUxNSwxNz
 I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
 NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
