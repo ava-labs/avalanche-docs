@@ -736,7 +736,7 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Devuelve un límite superior en el número de AVAX que existen. Este es un límite superior porque no tiene en cuenta los tokens quemados, incluidas las tarifas de transacción.
 
 #### **Firma**
 
@@ -744,7 +744,7 @@ Returns an upper bound on the number of AVAX that exist. This is an upper bound 
 platform.getCurrentSupply() -> {supply: int}
 ```
 
-* `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+* `supply` es un límite superior en el número de AVAX que existen, denominado en nAVAX.
 
 #### **Llamada de Ejemplo**
 
@@ -1799,8 +1799,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDU3NDYxNDgsMTIyOTM3MzQyOSwtOD
-I2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4
-NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LD
-E0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbNjc1MTk4NzUsMTIyOTM3MzQyOSwtODI2Mj
+Q1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3
+NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OT
+MxOTQ3OTksOTc0MjkwMTU5XX0=
 -->
