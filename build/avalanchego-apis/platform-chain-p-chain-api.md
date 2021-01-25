@@ -321,26 +321,15 @@ platform.createBlockchain(
 * `name` es un nombre humanamente-legible para la nueva cadena de bloques. No necesariamente único.
 * `genesisData` es la representación en bytes del estado de génesis de la nueva cadena de bloques codificada en el formato especificado por el parámetro `encoding`.
 * `encoding` especifica el formato que se utilizará para `genesisData`. Puede ser "cb58" o "hex". El valor predeterminado es "cb58". Las máquinas virtuales deben tener un método de API estático llamado `buildGenesis` que pueda usarse para generar `genesisData`
-* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de sus direcciones según sea necesario.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 * `username` es el usuario que paga la tarifa de transacción. Este usuario debe tener una cantidad suficiente de claves de control de la subred.
 * `password` es la contraseña de`username`.
 * `txID` es el ID de transacción.
 
-* `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and can’t be the Primary Network.
-* `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
-* `name` is a human-readable name for the new blockchain. Not necessarily unique.
-* `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
-
 #### **Llamada de Ejemplo**
 
-In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
+En este ejemplo, estamos creando una nueva instancia de la máquina virtual de Timestamo. `genesisData` proviene de llamar a `timestamp.buildGenesis`.
 
 ```cpp
 curl -X POST --data '{
@@ -1813,7 +1802,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzODU2OTEyMCwtMTcyNDE3MzUxNSwxNz
+eyJoaXN0b3J5IjpbLTIxMDcwNTAzMywtMTcyNDE3MzUxNSwxNz
 I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
 NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
