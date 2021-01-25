@@ -391,13 +391,7 @@ platform.createSubnet(
 * `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 * `username` es el usuario que paga la tarifa de transacción.
-* `contraseña` es la contraseña de` nombre de usuario`.
-
-* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
+* `password` es la contraseña de `username`.
 
 #### **Llamada de Ejemplo**
 
@@ -434,7 +428,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
+Envíe AVAX desde una dirección en P-Chain a una dirección en X-Chain. Después de emitir esta transacción, debe llamar al método [`avm.importAVAX`] (exchange-chain-x-chain-api.md#avm-importavax) de X-Chain para completar la transferencia.
 
 #### **Firma**
 
@@ -1807,8 +1801,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTg2NzM2MDMsLTE3MjQxNzM1MTUsMT
-cyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4
-MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ
-==
+eyJoaXN0b3J5IjpbMjA2ODE5OTU3MSwtMTcyNDE3MzUxNSwxNz
+I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
+NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
