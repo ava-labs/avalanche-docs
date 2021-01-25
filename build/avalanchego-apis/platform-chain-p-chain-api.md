@@ -973,7 +973,7 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-Enumere los validadores en el conjunto de validadores pendientes de la subred especificada. Cada validador no está validando actualmente la subred, pero lo hará en el futuro.
+Enumera los validadores en el conjunto de validadores pendientes de la subred especificada. Cada validador aún no está validando la subred, pero lo hará en el futuro.
 
 #### **Firma**
 
@@ -1001,6 +1001,22 @@ platform.getPendingValidators({
 }
 ```
 
+* `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
+* `validadores`:
+   * `txID` es la transacción del validador.
+   * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+   * `endTime` es la hora Unix en la que el validador deja de validar la subred.
+   * `StakeAmount` es la cantidad de nAVAX que este validador apostó. Omitido si "subnetID" no es la red principal.
+   * `nodeID` es el ID de nodo del validador.
+   * `conectado` si el nodo está conectado.
+   * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
+* `delegadores`:
+   * `txID` es la transacción del delegador.
+   * `startTime` es la hora Unix en la que se inicia el delegador.
+   * `endTime` es el tiempo de Unix en el que se detiene el delegador.
+   * `StakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si "subnetID" no es la red principal.
+   * `nodeID` es el ID del nodo de validación.
+   
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
 * `validators`:
   * `txID` is the validator transaction.
@@ -1799,7 +1815,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMjExMDMyOTIsNTU3MjQwMDgwLC03NT
+eyJoaXN0b3J5IjpbLTExMzc1Nzk1NDIsNTU3MjQwMDgwLC03NT
 k2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MDIsMTIyOTM3
 MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMD
 gsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEy
