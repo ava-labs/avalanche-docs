@@ -835,26 +835,9 @@ platform.getCurrentValidators({
     * `endTime` es el tiempo de Unix en el que se detiene el delegador.
     * `StakeAmount` es la cantidad de nAVAX que este delegador puso en stake. Omitido si `subnetID`  no es la red primaria.
     * `nodeID` es el ID del nodo de validación.
-    * `rewardOwner` es una salida de` OutputOwners` que incluye `locktime`, `threshold` y un arre de `direcciones`.
-    * `potencialReward` es la recompensa potencial obtenida al apostar
-* `delegators`: \ (** obsoleto a partir de v1.0.1. Consulte la nota en la parte superior de la documentación del método. ** \)
-
-
-
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
-  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
-  * `uptime` is the % of time the queried node has reported the peer as online.
-  * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator:
-    * `txID` is the delegator transaction.
-    * `startTime` is the Unix time when the delegator started.
-    * `endTime` is the Unix time when the delegator stops.
-    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-    * `nodeID` is the validating node’s node ID.
-    * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-    * `potentialReward` is the potential reward earned from staking
-* `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
+    * `rewardOwner` es una salida de` OutputOwners` que incluye `locktime`, `threshold` y un arreglo de direcciones (`addresses`) .
+    * `potencialReward` es la recompensa potencial obtenida al hacer staking
+* `delegators`: \ (** obsoleto a partir de v1.0.1. Consulta la nota en la parte superior de la documentación del método. ** \)
 
 #### **Llamada de Ejemplo**
 
@@ -1816,7 +1799,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNTM5MzEyOSwtMTcxNzE0NjI0NywtMj
+eyJoaXN0b3J5IjpbLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMj
 EyNzI2NzUwMiwxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQx
 NzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3Mz
 AsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQy
