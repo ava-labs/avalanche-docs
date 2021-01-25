@@ -553,7 +553,7 @@ platform.getBalance({
 }
 ```
 
-* `address` es la dirección para obtener el saldo.
+* `address` es la dirección de la cual se quiere obtener el saldo.
 * `balance` es el saldo total, en nAVAX.
 * `unlocked` es el saldo desbloqueado, en nAVAX.
 * `lockStakeable` es el saldo apilable bloqueado, en nAVAX.
@@ -1806,7 +1806,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODE2MTk4Mzk2LC0xNzI0MTczNTE1LDE3Mj
-kxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2
-OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNz
+I5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mjgy
+NjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
