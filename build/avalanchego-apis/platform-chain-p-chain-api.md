@@ -835,7 +835,7 @@ platform.getCurrentValidators({
     * `endTime` es el tiempo de Unix en el que se detiene el delegador.
     * `StakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si "subnetID" no es la red principal.
     * `nodeID` es el ID del nodo de validación.
-    * `PrizeOwner` es una salida de` OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
+    * `revaeOwner` es una salida de` OutputOwners` que incluye `locktime`,` umbral` y una matriz de `direcciones`.
     * `potencialReward` es la recompensa potencial obtenida al apostar
 * `delegators`: \ (** obsoleto a partir de v1.0.1. Consulte la nota en la parte superior de la documentación del método. ** \)
 
@@ -1816,8 +1816,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMjcyNjc1MDIsMTIyOTM3MzQyOSwtOD
-I2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4
-NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LD
-E0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTE4MDE4MDE5NSwtMjEyNzI2NzUwMiwxMj
+I5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2
+ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC
+04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
