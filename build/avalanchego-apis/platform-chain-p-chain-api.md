@@ -616,11 +616,11 @@ platform.getBlockchains() ->
 }
 ```
 
-* `blockchains` is all of the blockchains that exists on the Avalanche network.
-* `name` is the human-readable name of this blockchain.
-* `id` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates this blockchain.
-* `vmID` is the ID of the Virtual Machine the blockchain runs.
+* `blockchains` son todas las blockchains que existen en la red Avalanche.
+* `name` es el nombre humanamente-legible de esta cadena de bloques.
+* `id` es el ID de blockchain.
+* `subnetID` es el ID de la subred que valida esta cadena de bloques.
+* `vmID` es el ID de la máquina virtual que ejecuta la cadena de bloques.
 
 #### **Llamada de Ejemplo**
 
@@ -690,7 +690,7 @@ curl -X POST --data '{
 
 ### platform.getBlockchainStatus
 
-Get the status of a blockchain.
+Obtén el estado de una cadena de bloques.
 
 #### **Firma**
 
@@ -702,9 +702,9 @@ platform.getBlockchainStatus(
 ) -> {status: string}
 ```
 
-`status` is one of:
+`status` es una de las siguientes:
 
-* `Validating`: The blockchain is being validated by this node.
+* `Validating`: La cadena de bloques está siendo vali blockchain is being validated by this node.
 * `Created`: The blockchain exists but isn’t being validated by this node.
 * `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
 * `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
@@ -1799,8 +1799,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNz
-I0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUz
-NzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOT
-c0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbMTI0ODI4MzUyNiwxMjI5MzczNDI5LC04Mj
+YyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3
+Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMT
+Q5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
