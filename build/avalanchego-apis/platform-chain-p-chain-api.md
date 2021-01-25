@@ -558,14 +558,7 @@ platform.getBalance({
 * `unlocked` es el saldo desbloqueado, en nAVAX.
 * `lockedStakeable` es el saldo disponible para stake y bloqueado, en nAVAX.
 * `lockedNotStakeable` es el saldo bloqueado y no disponible para stake, en nAVAX.
-* `utxoIDs` son los ID de los UTXO que hacen referencia a la `dirección`.
-
-* `address` is the address to get the balance of.
-* `balance` is the total balance, in nAVAX.
-* `unlocked` is the unlocked balance, in nAVAX.
-* `lockedStakeable` is the locked stackeable balance, in nAVAX.
-* `lockedNotStakeable` is the locked and not stackeable balance, in nAVAX.
-* `utxoIDs` are the IDs of the UTXOs that reference `address`.
+* `utxoIDs` son los ID de los UTXO que hacen referencia a la `address`.
 
 #### **Llamada de Ejemplo**
 
@@ -607,7 +600,7 @@ curl -X POST --data '{
 
 ### platform.getBlockchains
 
-Get all the blockchains that exist \(excluding the P-Chain\).
+Obtén todas las cadenas de bloques que existen \(excluyendo la cadena P\).
 
 #### **Firma**
 
@@ -1806,8 +1799,8 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1MDUwNzU3LC04MjYyNDUzNzAsLTE3Mj
-QxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3
-MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5Nz
-QyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNz
+I0MTczNTE1LDE3MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUz
+NzMwLDE2MjcyODI2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOT
+c0MjkwMTU5XX0=
 -->
