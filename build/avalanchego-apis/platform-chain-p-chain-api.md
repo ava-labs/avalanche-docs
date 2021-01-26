@@ -1006,7 +1006,7 @@ platform.getPendingValidators({
    * `txID` es la transacción del validador.
    * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
    * `endTime` es la hora Unix en la que el validador deja de validar la subred.
-   * `StakeAmount` es la cantidad de nAVAX que este validador apostó. Omitido si "subnetID" no es la red principal.
+   * `StakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si `subnetID` no es la red primaria.
    * `nodeID` es el ID de nodo del validador.
    * `conectado` si el nodo está conectado.
    * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
@@ -1815,9 +1815,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzc1Nzk1NDIsNTU3MjQwMDgwLC03NT
-k2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MDIsMTIyOTM3
-MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3MjkxNjgyMD
-gsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyODI2OSwtODEy
-NTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NT
+cyNDAwODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2
+NzUwMiwxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MT
+UsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYy
+NzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNT
+ldfQ==
 -->
