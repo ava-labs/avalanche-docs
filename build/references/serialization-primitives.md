@@ -6,7 +6,7 @@
 
 Bytes are packed as-is into the message payload.
 
-Example:
+If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -19,7 +19,7 @@ Results in:
 
 Shorts are packed in BigEndian format into the message payload.
 
-Example:
+If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -32,7 +32,7 @@ Results in:
 
 Integers are 32-bit values packed in BigEndian format into the message payload.
 
-Example:
+If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -45,7 +45,7 @@ Results in:
 
 Long integers are 64-bit values packed in BigEndian format into the message payload.
 
-Example:
+If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -58,7 +58,7 @@ Results in:
 
 IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
 
-IPv4 example:
+IPv4 If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+IPv6 If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -88,7 +88,7 @@ Results in:
 
 Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
 
-Byte array example:
+Byte array If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+Integer array If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -110,7 +110,7 @@ Results in:
 
 The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
 
-Byte array example:
+Byte array If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+Int array If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -132,7 +132,7 @@ Results in:
 
 A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
 
-Example:
+If your local machine has MacOS or Linux:
 
 ```text
 Packing:
@@ -141,3 +141,6 @@ Results in:
     [0x00, 0x04, 0x41, 0x76, 0x61, 0x78]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEyNjExNzA1OTBdfQ==
+-->
