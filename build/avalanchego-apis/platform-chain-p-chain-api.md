@@ -1663,7 +1663,7 @@ curl -X POST --data '{
 
 ### platform.sampleValidators
 
-Sample validators from the specified Subnet.
+Muestrea validadores de una Subred específica
 
 #### **Firma**
 
@@ -1679,9 +1679,9 @@ platform.sampleValidators(
 }
 ```
 
-* `size` is the number of validators to sample.
-* `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
-* Each element of `validators` is the ID of a validator.
+* `size` es el número de validadores a muestrear.
+* `subnetID` es la subred de la que se tomará la muestra. Si se omite, el valor predeterminado es la red principal.
+* Cada elemento de `validators` es el ID de un validador.
 
 #### **Llamada de Ejemplo**
 
@@ -1713,7 +1713,7 @@ curl -X POST --data '{
 
 ### platform.validatedBy
 
-Obtén la Subred que valida cierta Get the Subnet that validates a given blockchain.
+Obtén la Subred que valida cierta cadena de bloques dada.
 
 #### **Firma**
 
@@ -1799,7 +1799,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzMzUyNTk4MCwtMTIyODYwNjE5MSwxNT
+eyJoaXN0b3J5IjpbMTg4MjAzNTY2OCwtMTIyODYwNjE5MSwxNT
 MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
 ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
 ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
