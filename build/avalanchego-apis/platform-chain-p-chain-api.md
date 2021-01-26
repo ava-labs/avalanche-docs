@@ -1161,7 +1161,7 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Obtenga la cantidad de nAVAX  por un conjunto de direcciones. La cantidad devuelta no incluye recompensas de apuesta.
+Obtenga la cantidad de nAVAX en stake por un conjunto de direcciones. La cantidad devuelta no incluye la recompensas del staking.
 
 #### **Firma**
 
@@ -1200,7 +1200,7 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+Obtén la cantidad total de nAVAX en stake en la red primaria.
 
 #### **Firma**
 
@@ -1234,9 +1234,9 @@ curl -X POST --data '{
 
 ### platform.getTx
 
-Gets a transaction by its ID.
+Obtén una transacción por su ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Opcional, el parámetro `encoding` para specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
 
 #### **Firma**
 
@@ -1801,11 +1801,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyOTY4NDAzNywxNDU2MjIyMTYyLC0xMj
-I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
-MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
-IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
-MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
-I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbLTE0MTc3MTE2OTAsMTQ1NjIyMjE2MiwtMT
+IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
+MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
+AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
+NzI5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mj
+gyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 
 -->
