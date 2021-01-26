@@ -1346,10 +1346,10 @@ platform.getUTXOs(
 }
 ```
 * `utxos` es una lista de UTXO de modo que cada UTXO hace referencia al menos a una dirección en `addresses`.
-* Como máximo se devuelven una cantidad `limit` de UTXOs. Si se omite "límite" o es superior a 1024, se establece en 1024.
-* Este método admite la paginación. `endIndex` denota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXO, use el valor de `endIndex` como` startIndex` en la siguiente llamada.
-* Si se omite "startIndex", se obtendrán todos los UTXO hasta el "límite".
-* Cuando se usa la paginación \ (es decir, cuando se proporciona `startIndex` \), no se garantiza que los UTXO sean únicos en varias llamadas. Es decir, puede aparecer un UTXO en el resultado de la primera llamada y luego nuevamente en la segunda llamada.
+* Como máximo se devuelven una cantidad `limit` de UTXOs. Si se omite `limit` o es superior a 1024, se establece en 1024.
+* Este método admite la paginación. `endIndex` denota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXO, use el valor de `endIndex` como `startIndex` en la siguiente llamada.
+* Si se omite `startIndex`, se obtendrán todos los UTXO hasta el `limit`.
+* Cuando se usa la paginación \(es decir, cuando se proporciona `startIndex`\), no se garantiza que los UTXO sean únicos en varias llamadas. Es decir, puede aparecer un UTXO en el resultado de la primera llamada y luego nuevamente en la segunda llamada.
 * Cuando se utiliza la paginación, no se garantiza la coherencia en varias llamadas. Es decir, el conjunto UTXO de direcciones puede haber cambiado entre llamadas.
 * `encoding` especifica el formato de los UTXO devueltos. Puede ser "cb58" o "hex" y su valor predeterminado es "cb58".
 * 
@@ -1800,7 +1800,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExOTc1ODQ1OCwxNDU2MjIyMTYyLC0xMj
+eyJoaXN0b3J5IjpbLTgyOTIyMTEwNiwxNDU2MjIyMTYyLC0xMj
 I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
 MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
 IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
