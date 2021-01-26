@@ -1120,9 +1120,10 @@ platform.getSubnets(
 }
 ```
 
-* `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` número de firmas from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `ids` son los ID de las subredes para obtener información. Si se omite, obtiene información sobre todas las subredes.
+* `id` es el ID de la subred.
+* Se necesita el número  `threshold` de firmas de  de las direcciones en `controlKeys` para agregar un validador a la subred.
+
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1800,10 +1801,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzExNzE3NzcsLTEyMjg2MDYxOTEsMT
-UzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5
-MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczND
-I5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwt
-MTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mj
-c1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbMTQ1NjIyMjE2MiwtMTIyODYwNjE5MSwxNT
+MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
+ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
+ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
+MzExODczNzQ4LDc2NDk1MzczMCwxNjI3MjgyNjksLTgxMjUyNz
+U5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
