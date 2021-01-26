@@ -1236,7 +1236,7 @@ curl -X POST --data '{
 
 Obtén una transacción por su ID.
 
-Opcional, el parámetro `encoding` para specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Opcional, el parámetro `encoding` para especificar el formato de la transacción devuelta. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
 
 #### **Firma**
 
@@ -1279,9 +1279,9 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+Obtén el estado de una transacción por su ID. Si se canceló la transacción, la respuesta incluirá un campo de `reason` con el motivo y más información sobre por qué se canceló la transacción.
 
-See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
+Mira [aquí](deprecated-api-calls.md#gettxstatus) para ver notas en comportamientos previos.
 
 #### **Firma**
 
@@ -1801,11 +1801,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTc3MTE2OTAsMTQ1NjIyMjE2MiwtMT
-IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
-MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
-AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
-NzI5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mj
-gyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbMzU0MzY0MTIwLDE0NTYyMjIxNjIsLTEyMj
+g2MDYxOTEsMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAw
+ODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMi
+wxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcy
+OTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4Mj
+Y5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 
 -->
