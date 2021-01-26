@@ -1478,7 +1478,6 @@ Esto nos da la respuesta:
 Completa una transferencia de AVAX de X-Chain a P-Chain.
 
 Antes de llamar a este método, debe llamar al método [`avm.exportAVAX`] (exchange-chain-x-chain-api.md#avm-exportavax) de X-Chain para iniciar la transferencia.
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
 #### **Firma**
 
@@ -1499,6 +1498,12 @@ platform.importAVAX(
 }
 ```
 
+* `to` es la dirección a la que se importa AVAX. Debe ser el mismo que el argumento `to` en la llamada correspondiente al`exportAVAX` de X-Chain.
+* `sourceChain` es el ID o alias de la cadena desde la que se está importando AVAX. Para importar fondos de X-Chain, use "X" `.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que controla la dirección especificada en` to`.
+* `contraseña` es la contraseña de` nombre de usuario`.
 * `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
 * `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -1801,11 +1806,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDIxMTg1MDAsMTQ1NjIyMjE2MiwtMT
-IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
-MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
-AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
-NzI5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mj
-gyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTIwMzc4MTExNywxNDU2MjIyMTYyLC0xMj
+I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
+MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
+IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
+MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
+I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 
 -->
