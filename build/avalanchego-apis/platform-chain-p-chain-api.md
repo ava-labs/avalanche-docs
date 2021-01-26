@@ -1549,11 +1549,7 @@ platform.importKey({
     privateKey:string
 }) -> {address: string}
 ```
-* Agrega una llave privada ( `privateKey` al conjunto de claves privadas de` username`. `address` es la dirección que` username` ahora controla con la clave privada.
-* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de` username`. `address` es la dirección que ahora controla el usuario (` username`) con la llave privada.
-
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
-* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que ahora controla el usuario (`username`) con la llave privada.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que `username` ahora controla con la llave privada.
 
 #### **Llamada de Ejemplo**
 
@@ -1802,11 +1798,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjkyNzE1MjMsMTQ1NjIyMjE2MiwtMT
-IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
-MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
-AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
-NzI5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mj
-gyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbMTc3NTM0Njk5MywxNDU2MjIyMTYyLC0xMj
+I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
+MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
+IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
+MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
+I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 
 -->
