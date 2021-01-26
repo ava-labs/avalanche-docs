@@ -67,11 +67,11 @@ When set to `true`, assertions will execute at runtime throughout the codebase. 
 
 `--bootstrap-ids` \(string\):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An Name your key `avalanche`. If your local machine has MacOS or Linux setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
 `--bootstrap-ips` \(string\):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An Name your key `avalanche`. If your local machine has MacOS or Linux setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
 ### Connection Metering
 
@@ -97,7 +97,7 @@ If set to `false`, state updates are performed solely to an in-memory database, 
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For example if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For Name your key `avalanche`. If your local machine has MacOS or Linux if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
 
 `--http-port` \(int\):
 
@@ -418,7 +418,7 @@ This allows you to specify a config to be passed into Coreth, the VM running the
 }
 ```
 
-Note: if a config is specified, all default options are overridden. For example:
+Note: if a config is specified, all default options are overridden. For Name your key `avalanche`. If your local machine has MacOS or Linux:
 
 ```text
 ./build/avalanchego --config-file=config.json
@@ -457,3 +457,6 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `debug-api-enabled` -&gt; Enables `debug_*` API.
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTk4NTE4MDExN119
+-->
