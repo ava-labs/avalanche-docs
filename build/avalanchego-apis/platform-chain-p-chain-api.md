@@ -1014,24 +1014,8 @@ platform.getPendingValidators({
    * `txID` es la transacción del delegador.
    * `startTime` es la hora Unix en la que se inicia la delegación.
    * `endTime` es el tiempo de Unix en el que se detiene el delegador.
-   * `stakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si `subnetID` no es la red principal.
+   * `stakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si `subnetID` no es la red primaria.
    * `nodeID` es el ID del nodo de validación.
-   
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `connected` if the node is connected.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-* `delegators`:
-  * `txID` is the delegator transaction.
-  * `startTime` is the Unix time when the delegator starts.
-  * `endTime` is the Unix time when the delegator stops.
-  * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validating node’s node ID.
 
 #### **Llamada de Ejemplo**
 
@@ -1077,7 +1061,7 @@ curl -X POST --data '{
 
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+Obtén un el ID de un activo (assetID) para el activo de participación de una subred. Actualmente, esto solo devuelve el assetID de participación de la red principal.
 
 #### **Firma**
 
@@ -1815,10 +1799,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODE2OTYwOTEsLTEyMjg2MDYxOTEsMTUzMT
-I2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5MDg1
-MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczNDI5LC
-04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMx
-MTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OT
-UsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTEwNzMzMDkzMSwtMTIyODYwNjE5MSwxNT
+MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
+ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
+ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
+MzExODczNzQ4LDc2NDk1MzczMCwxNjI3MjgyNjksLTgxMjUyNz
+U5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 -->
