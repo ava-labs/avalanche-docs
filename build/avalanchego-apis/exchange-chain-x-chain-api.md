@@ -244,7 +244,7 @@ avm.createFixedCapAsset({
 
 * `name` is a human-readable name for the asset. Not necessarily unique.
 * `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
+* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` and `password` denote the user paying the transaction fee.
