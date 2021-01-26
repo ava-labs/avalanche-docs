@@ -1002,15 +1002,15 @@ platform.getPendingValidators({
 ```
 
 * `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
-* `validadores`:
+* `validators`:
    * `txID` es la transacción del validador.
    * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
    * `endTime` es la hora Unix en la que el validador deja de validar la subred.
-   * `StakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si `subnetID` no es la red primaria.
+   * `stakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si `subnetID` no es la red primaria.
    * `nodeID` es el ID de nodo del validador.
-   * `conectado` si el nodo está conectado.
+   * `connected` si el nodo está conectado.
    * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
-* `delegadores`:
+* `delegators`:
    * `txID` es la transacción del delegador.
    * `startTime` es la hora Unix en la que se inicia el delegador.
    * `endTime` es el tiempo de Unix en el que se detiene el delegador.
@@ -1815,10 +1815,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NT
-cyNDAwODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2
-NzUwMiwxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MT
-UsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYy
-NzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNT
-ldfQ==
+eyJoaXN0b3J5IjpbLTEyMjg2MDYxOTEsMTUzMTI2NDc4OCwtMT
+EzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5MDg1MiwtMTcxNzE0
+NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczNDI5LC04MjYyNDUzNz
+AsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMxMTg3Mzc0OCw3
+NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OTUsMTQ5MzE5ND
+c5OSw5NzQyOTAxNTldfQ==
 -->
