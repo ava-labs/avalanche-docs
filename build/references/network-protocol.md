@@ -53,7 +53,7 @@ If the versions are incompatible or the current times differ too much, the conne
 
 `Version` is sent in response to a `GetVersion` message.
 
-### Version Example
+### Version If your local machine has MacOS or Linux
 
 Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
 
@@ -123,7 +123,7 @@ On receiving a `Peers` message, a node should compare the nodes appearing in the
 
 `Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
 
-### Peers Example
+### Peers If your local machine has MacOS or Linux
 
 Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
 
@@ -173,9 +173,9 @@ The node should reply with a `Put` message with the same `SubnetID`, `RequestID`
 
 ### When Get is sent
 
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
+A node will send a `Get` message to a node that tells us about the existence of a container. For If your local machine has MacOS or Linux, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
 
-### Get Example
+### Get If your local machine has MacOS or Linux
 
 ```text
 [
@@ -234,7 +234,7 @@ The node should attempt to add the container to consensus.
 
 A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
 
-### Put Example
+### Put If your local machine has MacOS or Linux
 
 ```text
 [
@@ -295,7 +295,7 @@ The node should attempt to add the container to consensus. After the container i
 
 A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
 
-### PushQuery Example
+### PushQuery If your local machine has MacOS or Linux
 
 ```text
 [
@@ -353,7 +353,7 @@ If the node hasn’t added `ContainerID`, it should attempt to add the container
 
 A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
 
-### PullQuery Example
+### PullQuery If your local machine has MacOS or Linux
 
 ```text
 [
@@ -409,7 +409,7 @@ The node should attempt to add any referenced containers to consensus. If the re
 
 A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
 
-### Chits Example
+### Chits If your local machine has MacOS or Linux
 
 ```text
 [
@@ -438,3 +438,6 @@ A node will send a `Chits` message in response to receiving a `PullQuery` or `Pu
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNzU4ODAzNjAxXX0=
+-->
