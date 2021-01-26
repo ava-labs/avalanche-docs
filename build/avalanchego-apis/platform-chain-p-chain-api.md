@@ -1074,7 +1074,7 @@ platform.getStakingAssetID({
 ```
 
 * `subnetID` es la subred en la cual se solicita el assetID.
-* `assetID` es el assetID del activo de staking de una subred.
+* `assetID` es el ID del activo de staking de una subred.
 
 #### **Llamada de Ejemplo**
 
@@ -1538,7 +1538,7 @@ curl -X POST --data '{
 
 ### platform.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga a un usuario control sobre una dirección proporcionando la llave privada que controla la dirección.
 
 #### **Firma**
 
@@ -1551,7 +1551,7 @@ platform.importKey({
 ```
 
 * Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
-* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que` username` ahora controla con la clave privada.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que ahora controla el usuario (`username`) con la llave privada.
 
 #### **Llamada de Ejemplo**
 
@@ -1800,10 +1800,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5ODU4MTc3MiwtMTIyODYwNjE5MSwxNT
-MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
-ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
-ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
-MzExODczNzQ4LDc2NDk1MzczMCwxNjI3MjgyNjksLTgxMjUyNz
-U5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTExMzExNzE3NzcsLTEyMjg2MDYxOTEsMT
+UzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5
+MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczND
+I5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwt
+MTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mj
+c1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
