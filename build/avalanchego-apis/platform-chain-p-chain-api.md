@@ -1122,10 +1122,10 @@ platform.getSubnets(
 
 * `ids` son los ID de las subredes para obtener información. Si se omite, obtiene información sobre todas las subredes.
 * `id` es el ID de la subred.
-* Se necesita el número  `threshold` de firmas de  de las direcciones en `controlKeys` para agregar un validador a la subred.
+* Se necesita el número  `threshold` de firmas de las direcciones en `controlKeys` para agregar un validador a la subred.
 
 
-See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
+Mira [aquí](../tutorials/nodes-and-staking/add-a-validator.md) para obtener información de cómo agregar un validador a una Subred
 
 #### **Llamada de Ejemplo**
 
@@ -1161,7 +1161,7 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
+Obtenga la cantidad de nAVAX  por un conjunto de direcciones. La cantidad devuelta no incluye recompensas de apuesta.
 
 #### **Firma**
 
@@ -1801,10 +1801,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1NjIyMjE2MiwtMTIyODYwNjE5MSwxNT
-MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
-ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
-ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
-MzExODczNzQ4LDc2NDk1MzczMCwxNjI3MjgyNjksLTgxMjUyNz
-U5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbMTMyOTY4NDAzNywxNDU2MjIyMTYyLC0xMj
+I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
+MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
+IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
+MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
+I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+
 -->
