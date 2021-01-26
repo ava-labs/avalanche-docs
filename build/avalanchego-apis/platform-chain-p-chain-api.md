@@ -1318,7 +1318,7 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set of addresses.
+Obtiene los UTXO que hacen referencia a un conjunto de direcciones determinado.
 
 #### **Firma**
 
@@ -1345,15 +1345,14 @@ platform.getUTXOs(
     encoding: string,
 }
 ```
-
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
-
+* `utxos` es una lista de UTXO de modo que cada UTXO hace referencia al menos a una dirección en `addresses`.
+* Como máximo se devuelven una cantidad `limit` de UTXOs. Si se omite "límite" o es superior a 1024, se establece en 1024.
+* Este método admite la paginación. `endIndex` denota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXO, use el valor de `endIndex` como` startIndex` en la siguiente llamada.
+* Si se omite "startIndex", se obtendrán todos los UTXO hasta el "límite".
+* Cuando se usa la paginación \ (es decir, cuando se proporciona `startIndex` \), no se garantiza que los UTXO sean únicos en varias llamadas. Es decir, puede aparecer un UTXO en el resultado de la primera llamada y luego nuevamente en la segunda llamada.
+* Cuando se utiliza la paginación, no se garantiza la coherencia en varias llamadas. Es decir, el conjunto UTXO de direcciones puede haber cambiado entre llamadas.
+* `encoding` especifica el formato de los UTXO devueltos. Puede ser "cb58" o "hex" y su valor predeterminado es "cb58".
+* 
 #### **Ejemplo**
 
 Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
@@ -1801,11 +1800,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU0MzY0MTIwLDE0NTYyMjIxNjIsLTEyMj
-g2MDYxOTEsMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAw
-ODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMi
-wxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcy
-OTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4Mj
-Y5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTExOTc1ODQ1OCwxNDU2MjIyMTYyLC0xMj
+I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
+MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
+IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
+MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
+I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
 
 -->
