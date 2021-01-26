@@ -1350,12 +1350,12 @@ platform.getUTXOs(
 * Este método admite la paginación. `endIndex` denota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXO, use el valor de `endIndex` como `startIndex` en la siguiente llamada.
 * Si se omite `startIndex`, se obtendrán todos los UTXO hasta el `limit`.
 * Cuando se usa la paginación \(es decir, cuando se proporciona `startIndex`\), no se garantiza que los UTXO sean únicos en varias llamadas. Es decir, puede aparecer un UTXO en el resultado de la primera llamada y luego nuevamente en la segunda llamada.
-* Cuando se utiliza la paginación, no se garantiza la coherencia en varias llamadas. Es decir, el conjunto UTXO de direcciones puede haber cambiado entre llamadas.
+* Cuando se utiliza la paginación, no se garantiza la consistencia en varias llamadas. Es decir, el conjunto UTXO de direcciones puede haber cambiado entre llamadas.
 * `encoding` especifica el formato de los UTXO devueltos. Puede ser "cb58" o "hex" y su valor predeterminado es "cb58".
 * 
 #### **Ejemplo**
 
-Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
+Supongamos que queremos todos los UTXO que hagan referencia al menos a uno de`P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` y `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
 
 ```cpp
 curl -X POST --data '{
@@ -1370,7 +1370,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Nos arroja la respuesta:
 
 ```cpp
 {
@@ -1394,7 +1394,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Dado que `numFetched` es lo mismo que `limit`, podemos decir que puede haber más UTXO que no se obtuvieron. Llamamos al método nuevamente, esta vez con`startIndex`:
 
 ```cpp
 curl -X POST --data '{
@@ -1800,11 +1800,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyOTIyMTEwNiwxNDU2MjIyMTYyLC0xMj
-I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
-MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
-IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
-MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
-I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+eyJoaXN0b3J5IjpbOTIyOTU1NDc2LDE0NTYyMjIxNjIsLTEyMj
+g2MDYxOTEsMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAw
+ODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMi
+wxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcy
+OTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4Mj
+Y5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 
 -->
