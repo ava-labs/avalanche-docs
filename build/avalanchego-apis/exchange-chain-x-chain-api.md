@@ -245,7 +245,7 @@ avm.createFixedCapAsset({
 * `name` es un nombre humanamente-legible del activo. No necesariamente único.
 * `symbol` es una abreviación del símbolo del activo. Entre 0 y 4 caractéres. No necesariamente único. Puede omitirse.
 * `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc. Por defecto es 0.
-* `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utilizará cualquiera de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
 * `username` y `password` denotan el usuario que pagará por la comisión de la transacción.
 * Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades del activo en el génesis.
@@ -315,7 +315,7 @@ avm.mint({
 ```
 
 * `amount`  de unidades del `assetID` que se crearán y controlará la dirección especificada en `to`.
-* `from` son las direcciones que deseas usar para esta operación. Si se omiten, necesariamente utiliza alguna de tus direcciones.
+* `from` son las direcciones que deseas usar para esta operación. Si se omiten, utiliza alguna de tus direcciones según sea necesario.
 * `changeAddr` es la dirección en la que cualquier cambio será enviado. Si se omite, se enviará a cualquier dirección controlada por el usuario.
 * `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de acuñar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
 * `txID` es el ID de la transacción.
@@ -385,7 +385,7 @@ avm.createVariableCapAsset({
 * `symbol` es un simbolo que sirve como abreviación del activo. Entre 0 y 4 caracteres. No necesariamente único. Puede omitirse.
 * `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc.
 * `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones en`minters` que juntos podrán acuñar nuevos activos firmando una transacción de acuñamiento.
-* `from` son las direcciones que quieres usar para esta operación. Si se omite, necesariamente utilizará cualquiera de tus direcciones.
+* `from` son las direcciones que quieres usar para esta operación. Si se omiten, utiliza alguna de tus direcciones según sea necesario.
 * `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
 * `username` paga por la comisión de transacción.
 * `assetID` es el ID del nuevo activo.
@@ -1719,11 +1719,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3MjYyODQ3NCw1NTM1NzE4MTksMTgzNT
-QyMDI5MCwtMTUyMzA5ODEzOCwtMTY0ODkyMDE3NywxMTE4ODMz
-OTYwLC0xODI3MTM0MzgyLC03MzcyODAyNDQsMTk4ODg1MjI0MS
-wtOTUxODc2NjMzLC0xMDI4NjYyNzg4LDEwNzQ5NjY2NzYsMjAw
-MzMyMjA1LC0xNzAzNTEzMTY1LC0xOTIzNTY5NDc1LDE3MjQwND
-k2MjUsLTIzNTc5MzE0MywtMTEzNDMxMzMwMSwtMzUxMjk1Njgx
-LC0xOTk1NDY3NDYwXX0=
+eyJoaXN0b3J5IjpbLTE3NzQ2MDQ2ODYsNTUzNTcxODE5LDE4Mz
+U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
+Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
+EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
+MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
+Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
+MSwtMTk5NTQ2NzQ2MF19
 -->
