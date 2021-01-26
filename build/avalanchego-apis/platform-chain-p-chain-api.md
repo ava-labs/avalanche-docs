@@ -1012,9 +1012,9 @@ platform.getPendingValidators({
    * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
 * `delegators`:
    * `txID` es la transacción del delegador.
-   * `startTime` es la hora Unix en la que se inicia la delegador.
+   * `startTime` es la hora Unix en la que se inicia la delegación.
    * `endTime` es el tiempo de Unix en el que se detiene el delegador.
-   * `StakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si "subnetID" no es la red principal.
+   * `stakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si `subnetID` no es la red principal.
    * `nodeID` es el ID del nodo de validación.
    
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
@@ -1815,10 +1815,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTA0NTQxNDEsLTEyMjg2MDYxOTEsMT
-UzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5
-MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczND
-I5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwt
-MTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mj
-c1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbODE2OTYwOTEsLTEyMjg2MDYxOTEsMTUzMT
+I2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5MDg1
+MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczNDI5LC
+04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwtMTMx
+MTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mjc1OT
+UsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
