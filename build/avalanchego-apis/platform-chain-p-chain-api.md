@@ -1767,7 +1767,7 @@ platform.validates(
 ) -> {blockchainIDs: []string}
 ```
 
-* `subnetID` is the Subnet’s ID.
+* `subnetID` es el ID de la sub the Subnet’s ID.
 * Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
 
 #### **Llamada de Ejemplo**
@@ -1799,10 +1799,10 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5ODk4MTQwMSwtMTIyODYwNjE5MSwxNT
-MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
-ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
-ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
-MzExODczNzQ4LDc2NDk1MzczMCwxNjI3MjgyNjksLTgxMjUyNz
-U5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
+eyJoaXN0b3J5IjpbLTExMjEyMDM2NzUsLTEyMjg2MDYxOTEsMT
+UzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAwODAsLTc1OTY5
+MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMiwxMjI5MzczND
+I5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcyOTE2ODIwOCwt
+MTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4MjY5LC04MTI1Mj
+c1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
 -->
