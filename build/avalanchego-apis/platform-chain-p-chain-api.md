@@ -1551,6 +1551,7 @@ platform.importKey({
 ```
 
 * Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que` username` ahora controla con la clave privada.
 
 #### **Llamada de Ejemplo**
 
@@ -1581,7 +1582,7 @@ curl -X POST --data '{
 
 ### platform.issueTx
 
-Issue a transaction to the Platform Chain.
+Emite una transacción a la Cadena de Plataforma.
 
 #### **Firma**
 
@@ -1595,14 +1596,6 @@ platform.issueTx({
 * `tx` es la representación en bytes de una transacción.
 * `encoding` especifica el formato de codificación de los bytes de la transacción. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
 * `txID` es el ID de la transacción.
-
-* `size` es el número de validadores a muestrear.
-* `subnetID` es la subred de la que se tomará la muestra. Si se omite, el valor predeterminado es la red principal.
-* Cada elemento de "validadores" es el ID de un validador.
-
-* `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
-* `txID` is the transaction’s ID.
 
 #### **Llamada de Ejemplo**
 
@@ -1807,7 +1800,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3NDA0MjQzMiwtMTIyODYwNjE5MSwxNT
+eyJoaXN0b3J5IjpbLTM5ODU4MTc3MiwtMTIyODYwNjE5MSwxNT
 MxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0MDA4MCwtNzU5Njkw
 ODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NTAyLDEyMjkzNzM0Mj
 ksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwxNzI5MTY4MjA4LC0x
