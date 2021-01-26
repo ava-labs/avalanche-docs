@@ -1502,14 +1502,8 @@ platform.importAVAX(
 * `sourceChain` es el ID o alias de la cadena desde la que se está importando AVAX. Para importar fondos de X-Chain, use "X".
 * `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
-* `username` es el usuario que controla la dirección especificada en` to`.
-* `contraseña` es la contraseña de` nombre de usuario`.
-* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that controls the address specified in `to`.
-* `password` is `username`‘s password.
+* `username` es el usuario que controla la dirección especificada en `to`.
+* `password` es la contraseña de `username`.
 
 #### **Llamada de Ejemplo**
 
@@ -1555,6 +1549,8 @@ platform.importKey({
     privateKey:string
 }) -> {address: string}
 ```
+* Agrega una llave privada ( `privateKey` al conjunto de claves privadas de` username`. `address` es la dirección que` username` ahora controla con la clave privada.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de` username`. `address` es la dirección que ahora controla el usuario (` username`) con la llave privada.
 
 * Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
 * Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que ahora controla el usuario (`username`) con la llave privada.
@@ -1806,7 +1802,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzI2NDkxMzcsMTQ1NjIyMjE2MiwtMT
+eyJoaXN0b3J5IjpbLTE3NjkyNzE1MjMsMTQ1NjIyMjE2MiwtMT
 IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
 MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
 AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
