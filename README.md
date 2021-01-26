@@ -60,7 +60,7 @@ Los protocolos en la familia Avalanche operan a través de repetidas votaciones 
 
 Si una parte suficientemente grande \(_alpha_ $$α$$\) de los validadores muestreados responde que cree que la transacción debe ser aceptada, el validador prefiere aceptar la transacción. Es decir, cuando se le pregunte sobre la transacción en el futuro, responderá que cree que la transacción debe ser aceptada. Del mismo modo, el validador preferirá rechazar la transacción si una parte suficientemente grande de los validadores responde que cree que la transacción debería ser rechazada.
 
-El validador repite este proceso de muestreo hasta que _alfa_ de los validadores consultados responda de la misma manera \ ~ (aceptar o rechazar) para _beta_ $β$$$ rondas consecutivas.
+El validador repite este proceso de muestreo hasta que _alpha_ de los validadores consultados responda de la misma manera  (aceptar o rechazar\) para _beta_ $$β$$ rondas consecutivas.
 
 En el caso común de que una transacción no tenga conflictos, la finalización se produce muy rápidamente. Cuando existen conflictos, los validadores honestos se agrupan rápidamente en torno a las transacciones conflictivas, entrando en un bucle de retroalimentación positiva hasta que todos los validadores correctos prefieran esa transacción. Esto lleva a la aceptación de transacciones no conflictivas y al rechazo de las transacciones conflictivas.
 
@@ -108,7 +108,7 @@ Crea tus propias blockchains públicas o privadas.
 
 Soporte nativo para crear e intercambiar fácilmente activos digitales inteligentes con reglas complejas y personalizadas.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2MDQ3NjM0OCwtMTU1NjE2MDI3LC0xND
+eyJoaXN0b3J5IjpbLTc4NjQ2MjMzOCwtMTU1NjE2MDI3LC0xND
 g0MTcxMSwtMTE3MTAxMTM4MCwtMjI2MzUxMTYxLDIwMjAyOTUw
 NDAsMTI5Njk2ODUyOCwtNjQ1MzEwNDIxLDk5NTg0MDkzOCwxNT
 Y0OTQ0MzQxLC0xODMzMjI0MzMxLDk4ODEwMTk3MF19
