@@ -350,7 +350,7 @@ Valor de tiempo de espera inicial del administrador de tiempo de espera adaptabl
 
 `--network-minimum-timeout` \(duration\):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `5s`.
 
 `--network-maximum-timeout` \(duration\):
 
@@ -459,9 +459,9 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMDU0Njc2MTAsMjA1ODQyNDAzLC05OD
-YyNTkzMTMsLTk0OTg4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0
-MDE3LDY2NTcyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4Mi
-wxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4
-ODkyNywxMjI3NTYxNTc0XX0=
+eyJoaXN0b3J5IjpbMjA2MjM5OTI4MCwyMDU4NDI0MDMsLTk4Nj
+I1OTMxMywtOTQ5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQw
+MTcsNjY1NzI0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLD
+E3NjczMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4
+OTI3LDEyMjc1NjE1NzRdfQ==
 -->
