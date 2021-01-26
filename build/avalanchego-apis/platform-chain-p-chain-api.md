@@ -1394,7 +1394,7 @@ Nos arroja la respuesta:
 }
 ```
 
-Dado que `numFetched` es lo mismo que `limit`, podemos decir que puede haber más UTXO que no se obtuvieron. Llamamos al método nuevamente, esta vez con`startIndex`:
+Dado que `numFetched` es lo mismo que `limit`, podemos decir que puede haber más UTXO que no se obtuvieron. Llamamos al método nuevamente, esta vez con `startIndex`:
 
 ```cpp
 curl -X POST --data '{
@@ -1413,7 +1413,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1436,9 +1436,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Dado que `numFetched` es menor que` limit`, sabemos que hemos terminado de obtener UTXO y no es necesario volver a llamar a este método.
 
-Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Supongamos que queremos obtener los UTXO exportados de la Cadena X a la Cadena P para construir un ImportTx. Luego, necesitamos llamar a GetUTXOs con el argumento sourceChain para recuperar los UTXO atómicos:
 
 ```cpp
 curl -X POST --data '{
@@ -1453,7 +1453,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1475,8 +1475,9 @@ This gives response:
 
 ### platform.importAVAX
 
-Complete a transfer of AVAX from the X-Chain to the P-Chain.
+Completa una transferencia de AVAX de X-Chain a P-Chain.
 
+Antes de llamar a este método, debe llamar al método [`avm.exportAVAX`] (exchange-chain-x-chain-api.md#avm-exportavax) de X-Chain para iniciar la transferencia.
 Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
 
 #### **Firma**
@@ -1800,11 +1801,11 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTIyOTU1NDc2LDE0NTYyMjIxNjIsLTEyMj
-g2MDYxOTEsMTUzMTI2NDc4OCwtMTEzNzU3OTU0Miw1NTcyNDAw
-ODAsLTc1OTY5MDg1MiwtMTcxNzE0NjI0NywtMjEyNzI2NzUwMi
-wxMjI5MzczNDI5LC04MjYyNDUzNzAsLTE3MjQxNzM1MTUsMTcy
-OTE2ODIwOCwtMTMxMTg3Mzc0OCw3NjQ5NTM3MzAsMTYyNzI4Mj
-Y5LC04MTI1Mjc1OTUsMTQ5MzE5NDc5OSw5NzQyOTAxNTldfQ==
+eyJoaXN0b3J5IjpbLTE4MDIxMTg1MDAsMTQ1NjIyMjE2MiwtMT
+IyODYwNjE5MSwxNTMxMjY0Nzg4LC0xMTM3NTc5NTQyLDU1NzI0
+MDA4MCwtNzU5NjkwODUyLC0xNzE3MTQ2MjQ3LC0yMTI3MjY3NT
+AyLDEyMjkzNzM0MjksLTgyNjI0NTM3MCwtMTcyNDE3MzUxNSwx
+NzI5MTY4MjA4LC0xMzExODczNzQ4LDc2NDk1MzczMCwxNjI3Mj
+gyNjksLTgxMjUyNzU5NSwxNDkzMTk0Nzk5LDk3NDI5MDE1OV19
 
 -->
