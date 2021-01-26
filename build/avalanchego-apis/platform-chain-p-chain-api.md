@@ -1498,7 +1498,7 @@ platform.importAVAX(
 }
 ```
 
-* `to` es la dirección a la que se importa AVAX. Debe ser el mismo que el argumento `to` en la llamada correspondiente al`exportAVAX` de X-Chain.
+* `to` es la dirección a la que se importa AVAX. Debe ser el mismo que el argumento `to` en la llamada correspondiente al `exportAVAX` de X-Chain.
 * `sourceChain` es el ID o alias de la cadena desde la que se está importando AVAX. Para importar fondos de X-Chain, use "X" `.
 * `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
 * `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
@@ -1806,7 +1806,7 @@ curl -X POST --data '{
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzc4MTExNywxNDU2MjIyMTYyLC0xMj
+eyJoaXN0b3J5IjpbMTEyMDkxODY3MSwxNDU2MjIyMTYyLC0xMj
 I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
 MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
 IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
