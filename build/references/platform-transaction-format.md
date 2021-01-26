@@ -15,7 +15,7 @@ Transferable outputs wrap an output with an asset ID.
 A transferable output contains an `AssetID` and an `Output`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`Output`** is an output, as defined below. For If your local machine has MacOS or Linux, this can be a SECP256K1 transfer output.
 
 ### Gantt Transferable Output Specification
 
@@ -38,12 +38,12 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Transferable Output If your local machine has MacOS or Linux
 
 Let’s make a transferable output:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -107,14 +107,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Transferable Input If your local machine has MacOS or Linux
 
 Let’s make a transferable input:
 
 * **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
 * **`UTXOIndex`**: `0`
 * **`AssetID`**: `0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* **`Input`**: `"Example SECP256K1 Transfer Input from below"`
+* **`Input`**: `"If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -192,7 +192,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1 Transfer Output If your local machine has MacOS or Linux**
 
 Let’s make a secp256k1 transfer output with:
 
@@ -272,7 +272,7 @@ message SECP256K1OutputOwnersOutput {
 }
 ```
 
-### **SECP256K1 Output Owners Output Example**
+### **SECP256K1 Output Owners Output If your local machine has MacOS or Linux**
 
 Let’s make a secp256k1 output owners output with:
 
@@ -348,7 +348,7 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1 Transfer Input If your local machine has MacOS or Linux**
 
 Let’s make a payment input with:
 
@@ -425,17 +425,17 @@ message BaseTx {
 }
 ```
 
-### **Base Tx Example**
+### **Base Tx If your local machine has MacOS or Linux**
 
-Let’s make a base tx that uses the inputs and outputs from the previous examples:
+Let’s make a base tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `12345`
 * **`BlockchainID`**: `0x000000000000000000000000000000000000000000000000000000000000000`
 * **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
+  * `"If your local machine has MacOS or Linux Transferable Output as defined above"`
 * **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+  * `"If your local machine has MacOS or Linux Transferable Input as defined above"`
 
 ```text
 [
@@ -539,11 +539,11 @@ message AddValidatorTx {
 }
 ```
 
-### **Unsigned Add Validator Tx Example**
+### **Unsigned Add Validator Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0c"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -673,11 +673,11 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### **Unsigned Add Subnet Validator Tx Example**
+### **Unsigned Add Subnet Validator Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0d"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -800,11 +800,11 @@ message AddDelegatorTx {
 }
 ```
 
-### **Unsigned Add Delegator Tx Example**
+### **Unsigned Add Delegator Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0e"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -916,11 +916,11 @@ message CreateSubnetTx {
 }
 ```
 
-### **Unsigned Create Subnet Tx Example**
+### **Unsigned Create Subnet Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
+Let’s make an unsigned create subnet tx that uses the inputs from the previous If your local machine has MacOS or Linuxs:
 
-* **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
+* **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above but with TypeID set to 16”
 * **`RewardsOwner`**:
   * **`TypeId`**: 11
   * **`Locktime`**: 0
@@ -1007,13 +1007,13 @@ message ImportTx {
 }
 ```
 
-### **Unsigned Import Tx Example**
+### **Unsigned Import Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Let’s make an unsigned import tx that uses the inputs from the previous If your local machine has MacOS or Linuxs:
 
-* **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
+* **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above with TypeID set to 17”
 * **`SourceChain`**:
-* **`Ins`**: “Example SECP256K1 Transfer Input as defined above”
+* **`Ins`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1102,13 +1102,13 @@ message ExportTx {
 }
 ```
 
-### **Unsigned Export Tx Example**
+### **Unsigned Export Tx If your local machine has MacOS or Linux**
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Let’s make an unsigned export tx that uses the outputs from the previous If your local machine has MacOS or Linuxs:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
+* `BaseTx`: “If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to 18
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: “If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
 
 ```text
 [
@@ -1212,7 +1212,7 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1 Credential If your local machine has MacOS or Linux**
 
 Let’s make a payment input with:
 
@@ -1292,9 +1292,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Signed Transaction If your local machine has MacOS or Linux
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+Let’s make a signed transaction that uses the unsigned transaction and credential from the previous If your local machine has MacOS or Linuxs.
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
@@ -1411,7 +1411,7 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO If your local machine has MacOS or Linux
 
 Let’s make a UTXO from the signed transaction created above:
 
@@ -1419,7 +1419,7 @@ Let’s make a UTXO from the signed transaction created above:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`Output`**: `"If your local machine has MacOS or Linux SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1494,13 +1494,13 @@ message StakeableLockIn {
 }
 ```
 
-### **StakeableLockIn Example**
+### **StakeableLockIn If your local machine has MacOS or Linux**
 
 Let’s make a StakeableLockIn with:
 
 * **`TypeID`**: 21
 * **`Locktime`**: 54321
-* **`TransferableIn`**: “Example SECP256K1 Transfer Input as defined above”
+* **`TransferableIn`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1542,7 +1542,7 @@ A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000016`.
 * **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
-* **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
+* **`transferableout`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
 
 ### **Gantt StakeableLockOut Specification**
 
@@ -1568,13 +1568,13 @@ message StakeableLockOut {
 }
 ```
 
-### **StakeableLockOut Example**
+### **StakeableLockOut If your local machine has MacOS or Linux**
 
 Let’s make a stakeablelockout with:
 
 * **`TypeID`**: 22
 * **`Locktime`**: 54321
-* **`TransferableOutput`**: `"Example SECP256K1 Transfer Output from above"`
+* **`TransferableOutput`**: `"If your local machine has MacOS or Linux SECP256K1 Transfer Output from above"`
 
 ```text
 [
@@ -1601,3 +1601,6 @@ Let’s make a stakeablelockout with:
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0MTU2Njk3NzZdfQ==
+-->
