@@ -10,12 +10,12 @@ Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos 
 
 Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
-### What Transferable Output Contains
+### Que Contiene una Salida Transferible.
 
 Una salida transferible contiene una `AssetID` y un `Output`.
 
 * **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
 ### Especificación Gantt de una Salida Transferible
 
@@ -1608,10 +1608,11 @@ Hagamos una StakeableLockOut con:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIxODIxNDIwLC00MTE5MDczNTEsLTIwOD
-g4NzI1OTMsMTc5OTEyNTgwNCwtMTI4ODAwMTYzMCwtNjI5NjQ2
-NjYwLC03MzUxNzc3NjcsLTEwNDYyNTk3NTksLTIwMzc1MjY5Nz
-ksMTIwOTUwNjI3NCwtNjQzMjQxNTE4LDI2NTI1MDU5NiwtNTAz
-NTYzODM4LC02NzY2MDc5NTUsLTEyMDE3ODg1OTcsLTM3OTAzMz
-gxMiwtMzY3OTM5MDcwLC00ODIzMzY1MjNdfQ==
+eyJoaXN0b3J5IjpbOTUyMjMxOTYxLDgyMTgyMTQyMCwtNDExOT
+A3MzUxLC0yMDg4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2
+MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC
+0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUy
+NTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NT
+k3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
+
 -->
