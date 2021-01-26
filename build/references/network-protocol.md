@@ -130,7 +130,7 @@ Los mensajes `Peers` no necesitan ser enviados en respuesta a un mensaje `GetPee
 
 ### Ejemplo de Peers
 
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
+Envío de un mensaje `Peers` con las direcciones IP `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
 
 ```text
 [
@@ -453,6 +453,6 @@ Un nodo enviará un mensaje `Chits` en respuesta a la recepción de un mensaje `
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5NDA1NjQ1MiwtOTM5MzA1NTAwLDEwNj
+eyJoaXN0b3J5IjpbLTkyMjgzMjMwNywtOTM5MzA1NTAwLDEwNj
 c2NDQzNjJdfQ==
 -->
