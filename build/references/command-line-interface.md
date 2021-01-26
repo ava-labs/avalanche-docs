@@ -109,7 +109,7 @@ Este argumento especifica la ubicación del certificado TLS utilizado por el nod
 
 `--http-tls-enabled` \(boolean\):
 
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
+Si se establece como `true`, este marcador intentará actualizar el servidor para utilizar HTTPS. El valor predeterminado es `false`.
 
 `--http-tls-key-file` \(string, file path\):
 
@@ -168,7 +168,7 @@ La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 
 * `--network-id=mainnet` -&gt; Conectar a la Red Principal \(default\).
 * `--network-id=fuji` -&gt; Conectar a la Red de Pruebas Fuji.
-* `--network-id=testnet` -&gt; Conectar a la Red de Pruebas actual. \(Right now, this is Fuji.\)
+* `--network-id=testnet` -&gt; Conectar a la Red de Pruebas actual. \(Actualmente es Fuji.\)
 * `--network-id=local` -&gt; Conectar a una Red de Pruebas Local.
 * `--network-id=network-{id}` -&gt; Conectar a la Red que tenga el ID suministrado . `id` debe estar en el rango `[0, 2^32)`.
 
@@ -459,9 +459,9 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1ODQyNDAzLC05ODYyNTkzMTMsLTk0OT
-g4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0MDE3LDY2NTcyNDgy
-OSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4MiwxNzY3MzM0ODA5LD
-g3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4ODkyNywxMjI3NTYx
-NTc0XX0=
+eyJoaXN0b3J5IjpbLTEzMDU0Njc2MTAsMjA1ODQyNDAzLC05OD
+YyNTkzMTMsLTk0OTg4ODQzNiwtMTEyNDk0ODI2MiwtMTI3MDg0
+MDE3LDY2NTcyNDgyOSwtMTU3MjQyMDE0OCwtMjA2OTQyNTU4Mi
+wxNzY3MzM0ODA5LDg3ODM4Mjg0MiwxNTExNTEzOTY0LDIwNTU4
+ODkyNywxMjI3NTYxNTc0XX0=
 -->
