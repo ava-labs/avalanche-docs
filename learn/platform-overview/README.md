@@ -39,16 +39,16 @@ En una red heterogénea de blockchains, algunos validadores no querrán validar 
 
 Diferentes aplicaciones basadas en blockchains pueden requerir que los validadores tengan ciertas propiedades. Supongamos que hay una aplicación que requiere grandes cantidades de RAM o potencia de CPU. Una subnet podría requerir que los validadores cumplan ciertos [requisitos de hardware](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) para que la aplicación no sufra de bajo rendimiento debido a los validadores lentos.
 
-## Virtual Machines
+##  Máquinas Virtuales
 
-Una **Virtual Machine** \(o VM\) 
+Una ** Máquina Virtual** \(o Virtual Machine (VM)\) 
 define la lógica a nivel de aplicación de una blockchain. En términos técnicos, especifica el estado de la blockchain, la función de transición de estado, las transacciones y la API a través de la cual los usuarios pueden interactuar con la blockchain. Cada blockchain de Avalanche es una instancia de una máquina virtual.
 
 Cuando se escribe una VM, no es necesario preocuparse por la lógica de nivel inferior como la red, el consenso y la estructura de la blockchain. Avalanche hace esto tras bambalinas para que puedas concentrarte en lo que te gustaría construir.
 
 Piense en una VM como un plano para una blockchain; puede usar la misma VM para crear muchas blockchains, cada una de las cuales sigue las mismas reglas pero es lógicamente independiente de otras blockchains.
 
-### ¿Por qué Virtual Machines?
+### ¿Por qué  Máquinas Virtuales?
 
 
 Al principio, las redes blockchains tenían una Máquina Virtual \(VM\) con un conjunto predefinido y estático de funcionalidad. Este diseño rígido y monolítico limitaba las aplicaciones basadas en blockchains que se podían ejecutar en tales redes.
@@ -92,6 +92,7 @@ La **C-Chain** permite la creación de smart contracts usando el [API de la C-Ch
 La C-Chain es una instancia de la Ethereum Virtual Machine impulsada por [Avalanche](../../).
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjYwMDc0MzIsLTgzOTE5MDU3Miw2Nz
-k4MDEwMTMsNjM5MDI1MDc3LDkzMDMwMzU5NF19
+eyJoaXN0b3J5IjpbMTA3NDc3MDA2NCwtMTc2NjAwNzQzMiwtOD
+M5MTkwNTcyLDY3OTgwMTAxMyw2MzkwMjUwNzcsOTMwMzAzNTk0
+XX0=
 -->
