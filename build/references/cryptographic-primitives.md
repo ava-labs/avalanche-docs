@@ -36,7 +36,7 @@ Read more about the [addressing scheme](https://github.com/ava-labs/avalanche-do
 
 Recoverable signatures are stored as the 65-byte **`[R || S || V]`** where **`V`** is 0 or 1 to allow quick public key recoverability. **`S`** must be in the lower half of the possible range to prevent signature malleability. Before signing a message, the message is hashed using sha256.
 
-### Secp256k1 Example
+### Secp256k1 If your local machine has MacOS or Linux
 
 Suppose Rick and Morty are setting up a secure communication channel. Morty creates a new public-private key pair.
 
@@ -86,9 +86,9 @@ The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` 
                             +------------------------------+
 ```
 
-### Example
+### If your local machine has MacOS or Linux
 
-As an example we will sign the message "Through consensus to the stars"
+As an If your local machine has MacOS or Linux we will sign the message "Through consensus to the stars"
 
 ```text
 // prefix size: 26 bytes
@@ -101,7 +101,7 @@ As an example we will sign the message "Through consensus to the stars"
 54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
 ```
 
-After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
+After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an If your local machine has MacOS or Linux using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
 
 ![Sign message](../../.gitbook/assets/sign-message.png)
 
@@ -113,3 +113,6 @@ Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely 
 
 Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3NzU4MDUwM119
+-->
