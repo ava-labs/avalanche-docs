@@ -30,7 +30,22 @@ The addressing scheme of the X-Chain and the P-Chain relies on secp256k1. Avalan
 
 Avalanche uses the convention `chainID-address` to specify which chain an address exists on. `chainID` may be replaced with an alias of the chain. When transmitting information through external applications, the CB58 convention is required.
 
-Read more about the [addressing scheme](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/en/articles/4596397-what-is-an-address/README.md) and [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
+### Bech32
+
+Addresses on the X-Chain and P-Chain follow the [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) standard outlined in [BIP 0173](https://en.bitcoin.it/wiki/BIP_0173). There are four parts to this addressing scheme, in order of appearance:
+
+* A Human-Readable Part (HRP).
+* The number “1” as a separator (the last digit 1 seen is considered the separator).
+Base-32 encoded string for the data-part of the address (the 20 byte address itself).
+* A 6-character base-32 encoded error correction code using the BCH algorithm.
+
+Here is a regular expression which matches Avalanche X, P and C-Chain addresses for mainnet, fuji and localnet.
+
+```text
+^([XPC]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$
+```
+
+Read more about the [addressing scheme](https://support.avalabs.org/en/articles/4596397-what-is-an-address).
 
 ### Secp256k1 Recoverable Signatures
 
