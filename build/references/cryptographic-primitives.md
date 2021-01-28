@@ -39,7 +39,7 @@ Addresses on the X-Chain and P-Chain follow the [Bech32](http://support.avalabs.
 * Base-32 encoded string for the data-part of the address (the 20 byte address itself).
 * A 6-character base-32 encoded error correction code using the BCH algorithm.
 
-Here is a regular expression which matches Avalanche X, P and C-Chain addresses for mainnet, fuji and localnet.
+Here is a regular expression which matches Avalanche X, P and C-Chain addresses for mainnet, fuji and localnet. Note that all valid Avalanche addresses will match this regular expression, but some strings that are not valid Avalanche addresses may match this regular expression.
 
 ```text
 ^([XPC]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$
