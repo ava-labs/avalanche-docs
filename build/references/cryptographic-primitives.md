@@ -36,7 +36,7 @@ Addresses on the X-Chain and P-Chain follow the [Bech32](http://support.avalabs.
 
 * A Human-Readable Part (HRP).
 * The number “1” as a separator (the last digit 1 seen is considered the separator).
-Base-32 encoded string for the data-part of the address (the 20 byte address itself).
+* Base-32 encoded string for the data-part of the address (the 20 byte address itself).
 * A 6-character base-32 encoded error correction code using the BCH algorithm.
 
 Here is a regular expression which matches Avalanche X, P and C-Chain addresses for mainnet, fuji and localnet.
