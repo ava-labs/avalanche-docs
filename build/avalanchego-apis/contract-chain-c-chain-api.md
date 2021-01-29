@@ -68,9 +68,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 #### eth_getAssetBalance
 
-In addition to the standard Ethereum APIs, there is also a method to get the balance of an Avalanche Native Token on the C-Chain (not including AVAX which can be fetched with `eth_getBalance`).
-
-Gets the balance of an asset controlled by a given address.
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
 
 ##### **Signature**
 
