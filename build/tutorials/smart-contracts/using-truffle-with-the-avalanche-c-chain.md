@@ -1,4 +1,4 @@
-# Using Truffle with the Avalanche C-Chain
+# Using Truffle with Avalanche Platform
 
 ## Introduction
 
