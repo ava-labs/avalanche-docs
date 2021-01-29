@@ -10,9 +10,53 @@ _Note: Ethereum has its own notion of `networkID` and `chainID`. These have no r
 
 {% page-ref page="../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
-## Methods
+## Ethereum APIs
 
-This API is identical to Geth’s API except that it only supports the following services:
+### Ethereum API Endpoints
+
+#### JSON-RPC Endpoints
+
+To interact with C-Chain via the JSON-RPC endpoint:
+
+```cpp
+/ext/bc/C/rpc
+```
+
+To interact with other instances of the EVM via the JSON-RPC endpoint:
+
+```cpp
+/ext/bc/blockchainID/rpc
+```
+
+where `blockchainID` is the ID of the blockchain running the EVM.
+
+#### WebSocket Endpoints
+
+To interact with C-Chain via the websocket endpoint:
+
+```cpp
+/ext/bc/C/ws
+```
+
+For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
+
+```cpp
+ws://127.0.0.1:9650/ext/bc/C/ws
+```
+
+To interact with other instances of the EVM via the websocket endpoint:
+
+```cpp
+/ext/bc/blockchainID/ws
+```
+
+where `blockchainID` is the ID of the blockchain running the EVM.
+
+### Methods
+
+#### Standard Ethereum APIs
+
+Avalanche offers an API interface identical to Geth's API except that it only supports the following services:
 
 * `web3_`
 * `net_`
@@ -22,29 +66,66 @@ This API is identical to Geth’s API except that it only supports the following
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
-## JSON-RPC Endpoints
+#### eth_getAssetBalance
 
-To interact with C-Chain:
+In addition to the standard Ethereum APIs, there is also a method to get the balance of an Avalanche Native Token on the C-Chain (not including AVAX which can be fetched with `eth_getBalance`).
 
-```cpp
-/ext/bc/C/rpc
-```
+Gets the balance of an asset controlled by a given address.
 
-To interact with other instances of the EVM:
+##### **Signature**
 
 ```cpp
-/ext/bc/blockchainID/rpc
+eth_getAssetBalance({
+    address: string,
+    blk: BlkNrOrHash,
+    assetID: string,
+}) -> {balance: int}
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+* `address` owner of the asset
+* `blk` is the block number or hash at which to retrieve the balance
+* `assetID` id of the asset for which the balance is requested
 
-To interact with the `avax` specific RPC calls
+##### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getAssetBalance",
+    "params": [
+        "0x8723e5773847A4Eb5FeEDabD9320802c5c812F46",
+        "latest",
+        "3RvKBAmQnfYionFXMfW5P8TDZgZiogKbHjM8cjpu16LKAgF5T"
+    ],
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+##### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x1388"
+}
+```
+
+## Avalanche Specific APIs
+
+### Avalanche Specific API Endpoints
+
+To interact with the `avax` specific RPC calls on the C-Chain:
 
 ```cpp
 /ext/bc/C/avax
 ```
 
-## AVAX RPC endpoints
+To interact with other instances of the EVM AVAX endpoints:
+
+```cpp
+/ext/bc/blockchainID/avax
+```
 
 ### avax.export
 
@@ -448,4 +529,3 @@ curl -X POST --data '{
     "id": 1
 }
 ```
-
