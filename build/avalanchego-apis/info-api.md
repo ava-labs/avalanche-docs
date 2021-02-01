@@ -253,7 +253,9 @@ Get a description of peer connections.
 #### **Signature**
 
 ```cpp
-info.peers() -> 
+info.peers({
+    nodeIDs: string[] // optional
+}) -> 
 {
     numPeers: int,
     peers:[]{
@@ -267,13 +269,18 @@ info.peers() ->
 }
 ```
 
+* `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+
 #### **Example Call**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"info.peers"
+    "method" :"info.peers",
+    "params": {
+        "nodeIDs": []
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
