@@ -5,8 +5,8 @@
 ## Learn
 
 * [Platform Overview](learn/platform-overview/README.md)
+  * [Avalanche Consensus](learn/platform-overview/avalanche-consensus.md)
   * [Staking](learn/platform-overview/staking.md)
-  * [Avalanche Consensus Deep Dive](learn/platform-overview/avalanche-consensus.md)
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
