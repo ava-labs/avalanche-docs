@@ -4,9 +4,9 @@
 
 Avalanche is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers&mdash;helping you build anything you can imagine.
 
-Avalanche can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the Avalanche rather than Ethereum are speed, scale and throughput. Avalanche offers thousands of transactions per second with sub-second finality at inexpensive fees. These properties will considerably improve the performance of DApps and the user experience of smart-contracts.
+Avalanche supports an experience nearly identical to an Ethereum client, but with higher transaction throughput, lower transaction latency and lower fees. Avalanche can process thousands of transactions per second with sub-second finality. Avalanche supports Solidity smart contracts; you can launch and interact with your favorite Ethereum smart contracts exactly the way you do on Ethereum. Avalanche exposes an API nearly identical to an Ethereum client's JSON RPC API. It also supports WebSockets, just like an Ethereum client. These properties considerably improve the performance and user experience of decentalized applications (DApps).
 
-Here is a collection of tutorials showing how to use and deploy smart contracts on Avalanche with the most popular Ethereum development tools.
+This section is a collection of tutorials showing how to use and deploy smart contracts on Avalanche using the most popular Ethereum development tools.
 
 ## Tutorials
 

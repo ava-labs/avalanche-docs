@@ -2,11 +2,15 @@
 
 ## Introduction
 
-The goal of this guide is to lay out a best-practices regarding writing, testing and deploying smart-contracts to Avalanche. We'll be building smart contracts with [Hardhat](https://hardhat.org) which is a very popular development environment for building smart contracts.
+This guide shows you how to write, test and deploy smart contracts to Avalanche. We'll build smart contracts with [Hardhat](https://hardhat.org), which is a very popular development environment for building smart contracts.
+
+The commands in this guide assume your computer is running Linux or MacOS.
 
 ## Prerequisites
 
-First install the LTS of [nodejs](https://nodejs.org/en) which is `14.15.4` at the time of writing. NodeJS bundles `npm`. Next install [yarn](https://yarnpkg.com)
+First, install the long term support (LTS) version of [Node.js](https://nodejs.org/en). This version is `14.15.4` at the time of writing. You can download Node.js [here](https://nodejs.org/en/download/). When you install Node.js, it will include another tool called `npm`, which we'll use.
+
+Next, use `npm` to install [yarn](https://yarnpkg.com):
 
 ```zsh
 npm install -g yarn
@@ -16,7 +20,7 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 
 ## Dependencies
 
-First clone the [repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and download the necessary packages.
+First, clone the quickstart [repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and download the necessary packages:
 
 ```zsh
 git clone https://github.com/ava-labs/smart-contract-quickstart.git
@@ -26,7 +30,7 @@ yarn
 
 ## Write Contracts
 
-Edit the `Coin.sol` contract in `contracts/`. `Coin.sol` is an [Open Zeppelin](https://openzeppelin.com) [ERC20](https://eips.ethereum.org/EIPS/eip-20) contract. ERC20 is a popular smart contract interface for interoperability. You can also place your own contracts in the `contracts` directory.
+One of the directories inside the `smart-contract-quickstart` directory you just cloned is called `contracts`. Inside that directory is a file named `Coin.sol`. This file is an [Open Zeppelin](https://openzeppelin.com) [ERC20](https://eips.ethereum.org/EIPS/eip-20) contract, written in Solidity. ERC20 is a popular smart contract interface for interoperability. You can also place your own contracts in the `contracts` directory.
 
 ## Building
 
@@ -44,7 +48,7 @@ Edit the deployment script in `scripts/deploy.js`. You can add other contract de
 
 ## Deploy to the hardhat test network
 
-In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json) there are scripts for deploying to [avash](https://github.com/ava-labs/avash), `fuji` and `mainnet`:
+In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json) there are scripts for deploying to mainnet, the Fuji testnet, or a local network run with [avash](https://github.com/ava-labs/avash).
 
 ```json
 "test-deploy": "npx hardhat run scripts/deploy.js",
@@ -52,17 +56,17 @@ In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickst
 "deploy-fuji": "npx hardhat run scripts/deploy.js --network fuji",
 ```
 
-Deploy your contract to the hardhat network with `yarn test-deploy`.
+Deploy your contract to the Hardhat network with `yarn test-deploy`.
 
 ## Deploy to Fuji or Mainnet
 
-You need to add your private key to the accounts field in [hardhat.config.js](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/hardhat.config.js).
+You need to add your private key to the accounts field in [hardhat.config.js].
 
 Then run `yarn deploy` for mainnet or `yarn deploy-fuji` for fuji.
 
 ## Hardhat Tasks
 
-You can define custom hardhat tasks in [hardhat.config.js](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/hardhat.config.js). There are two tasks included as examples&mdash;`accounts` and `balances` both of which have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json).
+You can define custom Hardhat tasks in [hardhat.config.js]. There are two tasks included as examples&mdash;`accounts` and `balances` both of which have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json).
 
 ```json
 "accounts": "npx hardhat accounts",
@@ -83,7 +87,7 @@ Run it with `yarn send-avax`.
 
 ## Hardhat Help
 
-You can run `yarn hardhat` to list hardhat version, usage instructions, global options and available tasks.
+You can run `yarn hardhat` to list Hardhat's version, usage instructions, global options and available tasks.
 
 If you hve any questions, problems, or ideas, you can reach out to us at [Discord](https://chat.avalabs.org/).
 
