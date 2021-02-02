@@ -60,13 +60,13 @@ Deploy your contract to the Hardhat network with `yarn test-deploy`.
 
 ## Deploy to Fuji or Mainnet
 
-You need to add your private key to the accounts field in [hardhat.config.js].
+You need to add your private key to the accounts field in hardhat.config.js.
 
 Then run `yarn deploy` for mainnet or `yarn deploy-fuji` for fuji.
 
 ## Hardhat Tasks
 
-You can define custom Hardhat tasks in [hardhat.config.js]. There are two tasks included as examples&mdash;`accounts` and `balances` both of which have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json).
+You can define custom Hardhat tasks in hardhat.config.js. There are two tasks included as examples&mdash;`accounts` and `balances` both of which have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json).
 
 ```json
 "accounts": "npx hardhat accounts",
