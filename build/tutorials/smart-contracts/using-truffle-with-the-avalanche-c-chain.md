@@ -168,7 +168,7 @@ truffle console --network development
 Then, in the console, create the account:
 
 ```text
-truffle(development)> let account = web3.eth.personal.newAccount()
+truffle(development)> let account = await web3.eth.personal.newAccount()
 ```
 
 This returns:
@@ -189,6 +189,12 @@ This prints the account:
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
+### Unlock your account:
+```
+truffle(development)> await web3.eth.personal.unlockAccount(account[0])
+true
+```
+
 Exit the truffle console:
 
 ```text
@@ -198,39 +204,6 @@ truffle(development)> .exit
 ### Fund your account
 
 Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
-
-### Unlock your account
-
-Create a new file called `web3_script.js` in the `truffle` directory and add the following:
-
-```javascript
-// web3_script.js
-let Web3 = require('web3');
-let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
-
-let main = async () => {
-  let accounts = await web3.eth.personal.getAccounts();
-  console.log(accounts);
-  let account = accounts[0];
-  let unlock = await web3.eth.personal.unlockAccount(account);
-  console.log(unlock);
-}
-
-main()
-```
-
-Run the script to unlock your account.
-
-```text
-node web3_script.js
-```
-
-This should return something like:
-
-```javascript
-[ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
-true
-```
 
 ## Run Migrations
 
