@@ -24,6 +24,15 @@ create_service_file () {
   echo "">>avalanchego.service
 }
 
+#helper function to check for presence of curl, and install if missing
+check_curl() {
+if ! command -v curl &> /dev/null
+then
+    echo "curl could not be found, will install..."
+    sudo apt-get install curl -y
+fi
+}
+
 echo "AvalancheGo installer"
 echo "---------------------"
 echo "Preparing environment..."
@@ -48,6 +57,7 @@ else
   echo "Exiting."
   exit
 fi
+check_curl
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
   echo "Found AvalancheGo systemd service already installed, switching to upgrade mode."
