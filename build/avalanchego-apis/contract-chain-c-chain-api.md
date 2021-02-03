@@ -66,11 +66,11 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
-#### eth_getAssetBalance
+#### eth\_getAssetBalance
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain \(excluding AVAX, which must be fetched with `eth_getBalance`\).
 
-##### **Signature**
+**Signature**
 
 ```cpp
 eth_getAssetBalance({
@@ -84,7 +84,7 @@ eth_getAssetBalance({
 * `blk` is the block number or hash at which to retrieve the balance
 * `assetID` id of the asset for which the balance is requested
 
-##### **Example Call**
+**Example Call**
 
 ```cpp
 curl -X POST --data '{
@@ -99,7 +99,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-##### **Example Response**
+**Example Response**
 
 ```cpp
 {
@@ -527,3 +527,4 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+

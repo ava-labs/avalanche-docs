@@ -1,6 +1,6 @@
 # Upgrade Your AvalancheGo Node
 
-{% embed url="https://youtu.be/o4Fww-sHoaQ" %}
+{% embed url="https://youtu.be/o4Fww-sHoaQ" caption="" %}
 
 ## **Backup your node**
 

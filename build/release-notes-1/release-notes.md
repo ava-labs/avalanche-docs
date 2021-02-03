@@ -24,7 +24,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Removed extra linter runs from CI.
 * Added `Height` to the `snowman.Block` interface.
 
-## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\) 
+## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
 
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
@@ -51,7 +51,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 There are two primary components to this upgrade:
 
 * General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
-* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock ****time had passed
+* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock _\*\*_time had passed
 
 ## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
@@ -104,7 +104,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
 {% endhint %}
 
-```
+```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
 ```
 

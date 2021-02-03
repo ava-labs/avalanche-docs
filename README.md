@@ -10,13 +10,9 @@ description: >-
 
 {% tabs %}
 
-
-
 {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
 {% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
-
-
 
 {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
 
@@ -24,7 +20,8 @@ description: >-
 
 {% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %}
 
-{% tab title="Staking" %}
+
+
 {% page-ref page="build/get-started.md" %}
 
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
