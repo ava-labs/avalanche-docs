@@ -17,10 +17,10 @@
 ## Build
 
 * [Get Started: Run an Avalanche Node](build/get-started.md)
-* [Release Notes](build/release-notes-1/README.md)
+* [Release Notes](build/release-notes/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
-  * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
-  * [Ortelius Release Notes](build/release-notes-1/ortelius-release-notes.md)
+  * [AvalancheGo Release Notes](build/release-notes/release-notes.md)
+  * [Ortelius Release Notes](build/release-notes/ortelius-release-notes.md)
 * [Tutorials](build/tutorials/README.md)
   * [Platform](build/tutorials/platform/README.md)
     * [Create a Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
