@@ -6,8 +6,6 @@ description: >-
 
 # Developer Documentation
 
-## Getting Started
-
 {% tabs %}
 {% tab title="Coming From Ethereum?" %}
 {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
