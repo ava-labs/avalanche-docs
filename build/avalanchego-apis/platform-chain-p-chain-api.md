@@ -560,8 +560,8 @@ platform.getBalance({
 * `address` is the address to get the balance of.
 * `balance` is the total balance, in nAVAX.
 * `unlocked` is the unlocked balance, in nAVAX.
-* `lockedStakeable` is the locked stackeable balance, in nAVAX.
-* `lockedNotStakeable` is the locked and not stackeable balance, in nAVAX.
+* `lockedStakeable` is the locked stakeable balance, in nAVAX.
+* `lockedNotStakeable` is the locked and not stakeable balance, in nAVAX.
 * `utxoIDs` are the IDs of the UTXOs that reference `address`.
 
 #### **Example Call**
