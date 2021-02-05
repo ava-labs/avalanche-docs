@@ -2,6 +2,21 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.1.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases)\)
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional but encouraged. The patch includes CLI upgrades, API bug fixes, stability improvements, and performance improvements.
+{% endhint %}
+
+* Fixed an issue where C-chain block indexes could map to unaccepted blocks at a given height.
+* Fixed VM crash when the RPCChainVM experienced high API loads.
+* Fixed optimistic vote bubbling in the Avalanche Engine to correctly pass votes through processing vertices.
+* Added field IncludePartial to the AVM's GetBalance and GetAllBalances API methods. This changes the default behavior to only return the balances of spendable and uniquely owned assets.
+* Added the ability to specify custom genesis configs for custom network IDs.
+* Added additional IPC API functionality.
+* Added additional caching to the RPCChainVM.
+* Improved plugin directory lookup to always work with the binary releases.
+
 ## v1.1.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
 
 {% hint style="danger" %}
