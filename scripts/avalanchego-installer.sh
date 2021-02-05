@@ -2,6 +2,9 @@
 # Pulls latest pre-built node binary from GitHub and installs it as a systemd service.
 # Intended for non-technical validators, assumes running on compatible Ubuntu.
 
+#stop on errors
+set -e
+
 #helper function to create avalanchego.service file
 create_service_file () {
   rm -f avalanchego.service
@@ -72,6 +75,13 @@ rm -rf /tmp/avalanchego-install/*               #clean up in case previous insta
 cd /tmp/avalanchego-install
 echo "Looking for the latest $getArch build..."
 fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest | grep "avalanchego-linux-$getArch.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
+if [ "$fileName" = "" ]; then
+  echo "Unable to fetch the filename. Exiting."
+  if [ "$foundAvalancheGo" = "true" ]; then
+    sudo systemctl start avalanchego
+  fi
+  exit
+fi
 echo "Will attempt to download: $fileName"
 wget -nv --show-progress $fileName
 echo "Unpacking node files..."
