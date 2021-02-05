@@ -78,6 +78,7 @@ fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/l
 if [ "$fileName" = "" ]; then
   echo "Unable to fetch the filename. Exiting."
   if [ "$foundAvalancheGo" = "true" ]; then
+    echo "Restarting service..."
     sudo systemctl start avalanchego
   fi
   exit
