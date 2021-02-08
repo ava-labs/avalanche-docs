@@ -2,6 +2,17 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.1.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5)\)
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional but encouraged. The patch includes stability improvements.
+{% endhint %}
+
+* Fixed a potential deadlock when registering new chains that could cause the P-chain and http\(s\) endpoint to block.
+* Repairs TxID -&gt; Block Height indexing in the C-chain.
+* Added graceful handling of empty contract deployments in the debug\_traceTransaction API in the C-chain.
+* Improved error handling in the C-chain.
+
 ## v1.1.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.4)\)
 
 {% hint style="danger" %}
