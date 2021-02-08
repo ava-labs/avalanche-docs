@@ -42,7 +42,13 @@
 
 \*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
 
+[**Fulcrum**](https://fulcrum.trade/): a powerful DeFi platform for tokenized lending and margin trading.
+
 [**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+
+[**OkCoin**](https://www.okcoin.com/spot/trade/avax-usd): a global cryptocurrency exchange licensed in 44 U.S states and based out of San Francisco. It enables users across 184 countries to easily transition between crypto and fiat currencies.
+
+\*\*\*\*[**Reef**](https://reef.finance/): a smart liquidity aggregator and yield engine that enables trading with access to liquidity from both CEXs and DEXs.
 
 \*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
 
@@ -53,6 +59,14 @@
 [**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
 
 [**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
+
+### Insurance
+
+[**Union**](https://www.unn.finance/): a technology platform that combines bundled protection and a liquid secondary market with a multi-token model. DeFi participants manage their multi-layer risks across smart contracts and protocols in one scalable system.
+
+### Lending
+
+[**Torque**](https://torque.loans/): a powerful DeFi platform for borrowing assets with indefinite-term loans and fixed interest rates. Get an instant, crypto-backed loan with no KYC or credit checks.
 
 ### Miscellaneous
 
@@ -74,11 +88,15 @@
 
 [**BiLira**](https://www.bilira.co): a stable cryptocurrency that is backed by the Turkish Lira.
 
+\*\*\*\*[**e-Money**](https://e-money.com/): a leading issuer of transparent, interest-bearing, currency-backed stablecoins.
+
 \*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
 
 ### Trading Bots
 
 [**Hummingbot**](https://hummingbot.io/)**:** a community-driven, open-source project that aims to democratize algorithmic trading by making sophisticated high-frequency trading strategies freely available to everyone in the world.
+
+\*\*\*\*[**Velox**](https://www.velox.global/): a fully scalable, automated trading assistant for ERC20 tokens. This “trading bot” allows you to define buy/sell parameters, activate Velox, and allow the bot to execute the trade on your behalf.
 
 ### Wallets
 
@@ -86,11 +104,19 @@
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
+### **Wealth Management**
+
+[**Frontier**](https://frontier.xyz/): a chain-agnostic DeFi aggregator that enables users to manage all of their DeFi applications and assets in a safe, simple portal.
+
+\*\*\*\*[**Yield**](https://www.yield.app/): ****the app can constantly monitor and evaluate the profitability of strategies across the DeFi ecosystem, including liquidity mining, arbitrage, liquidations, margin & collateralized lending, and other income-producing strategies.
+
 ## Developer Tools
 
 ### Blockchain Infrastructure and Node Services
 
-[**Allnodes**](https://www.allnodes.com)**:** a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
+[**Aleph.im**](https://aleph.im/): a cross-blockchain layer-2 network specifically focused on decentralized applications and their related infrastructure \(storage, computing servers, security\).
+
+[**Allnodes**](https://www.allnodes.com): a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
 
 \*\*\*\*[**Ankr**](https://www.ankr.com): Web3 insfrastructure for all
 
@@ -99,6 +125,8 @@
 [**Bloq**](https://www.bloq.com): managed infrastructure for building on blockchain networks. You get a single interface to an expanding set of enterprise-grade infrastructure services for building on multiple blockchain networks.
 
 [**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
+
+\*\*\*\*[**DSLA Protocol**](https://stacktical.com/): a risk management framework that enables developers and infrastructure operators to reduce their users’ exposure to service delays, interruptions, and financial losses, using self-executing service level agreements, bonus-malus insurance policies, and crowdfunded liquidity pools.
 
 ### Oracles
 
