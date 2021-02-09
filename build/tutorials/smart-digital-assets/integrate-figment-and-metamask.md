@@ -1,10 +1,6 @@
----
-description: 'Provided by Developer Evangelist: Gabriel Cardona'
----
+# Integrating Figment and Metamask
 
-# Integrating Figment and Metamask 
-
-[Figment](https://figment.io) us a blockchain cloud service provider.  They offer a free API gateway service for AVM, EVM and platform chain APIs which developers can use to build on Avalanche.
+[Figment](https://figment.io) is a blockchain cloud service provider.  They offer a free API gateway service for AVM, EVM and platform chain APIs which developers can use to build on Avalanche.
 
 ## Setup
 
@@ -52,12 +48,6 @@ If you are successully able to POST to the figment full node then you should get
 }
 ```
 
-ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
-
-Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
-
-The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
-
 ## Set up Metamask
 
 The first thing we should set is a metamask wallet.
@@ -81,7 +71,6 @@ Now, we need to set these boxes with correct values.
 * **Explorer**:
   * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
   * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
-  * **Localnet:** n/a 
 
 ![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
 
