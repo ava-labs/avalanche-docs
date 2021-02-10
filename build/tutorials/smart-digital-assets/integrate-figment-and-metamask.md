@@ -27,7 +27,7 @@ You can make an API call to the Fuji testnet at `avalanche--fuji--rpc.datahub.fi
 ### Try it Out
 
 Paste the following command into your computer's terminal to confirm that you can access the Avalanche API hosted by Figment.
-This `curl` is asking for the blockchainID of the X-Chain on the Fuji tesnet.
+This `curl` is asking for the blockchainID of the X-Chain on the Fuji testnet.
 Replace `APIKEYGOESHERE` with the API key you see on the Avalanche dashboard.
 
 ```zsh
