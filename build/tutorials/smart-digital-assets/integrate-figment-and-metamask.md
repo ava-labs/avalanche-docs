@@ -1,5 +1,9 @@
 # Integrating Figment and Metamask
 
+## Video
+
+{% embed url="https://www.youtube.com/watch?v=Q46YMR85ikc" caption="" %}
+
 [Figment](https://figment.io) is a blockchain cloud service provider.  Figment offers free access to Avalanche's APIs, which developers can use to build on Avalanche.
 
 ## Setup
