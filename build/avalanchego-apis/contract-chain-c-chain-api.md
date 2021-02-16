@@ -96,7 +96,7 @@ curl -X POST --data '{
         "3RvKBAmQnfYionFXMfW5P8TDZgZiogKbHjM8cjpu16LKAgF5T"
     ],
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
