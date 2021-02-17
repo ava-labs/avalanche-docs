@@ -198,12 +198,6 @@ This returns:
 true
 ```
 
-Exit the truffle console:
-
-```text
-truffle(development)> .exit
-```
-
 ### Fund your account
 
 Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
@@ -213,7 +207,7 @@ Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/
 Now everything is in place to run migrations and deploy the `Storage` contract:
 
 ```text
-truffle migrate --network development
+truffle(development)> migrate --network development
 ```
 
 You should see:
@@ -301,10 +295,6 @@ Error:  *** Deployment Failed ***
 
 Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
 
-```text
-truffle console --network development
-```
-
 Get an instance of the deployed `Storage` contract:
 
 ```javascript
@@ -331,7 +321,10 @@ If you see this error:
 Error: Returned error: authentication needed: password or unlock
 ```
 
-Then run this again: `node web3_script.js`
+Then run this again:
+```text
+truffle(development)> await web3.eth.personal.unlockAccount(account[0])
+```
 
 You should see something like:
 
