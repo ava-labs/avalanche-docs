@@ -50,7 +50,7 @@ message  {
 }
 ```
 
-#### EVM Input Example
+#### EVM Input If your local machine has MacOS or Linux
 
 Let's make an EVM Input:
 
@@ -124,14 +124,14 @@ message TransferableInput {
 }
 ```
 
-#### Transferable Input Example
+#### Transferable Input If your local machine has MacOS or Linux
 
 Let's make a transferable input:
 
 * `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
 * `UTXOIndex: 1`
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `Input: "If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -197,7 +197,7 @@ message SECP256K1TransferInput {
 }
 ```
 
-#### SECP256K1 Transfer Input Example
+#### SECP256K1 Transfer Input If your local machine has MacOS or Linux
 
 Let's make a payment input with:
 
@@ -266,7 +266,7 @@ message  {
 }
 ```
 
-#### EVM Output Example
+#### EVM Output If your local machine has MacOS or Linux
 
 Let's make an EVM Output:
 
@@ -328,12 +328,12 @@ message TransferableOutput {
 }
 ```
 
-#### Transferable Output Example
+#### Transferable Output If your local machine has MacOS or Linux
 
 Let's make a transferable output:
 
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -405,7 +405,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-#### SECP256K1 Transfer Output Example
+#### SECP256K1 Transfer Output If your local machine has MacOS or Linux
 
 Let's make a secp256k1 transfer output with:
 
@@ -484,7 +484,7 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ExportTx Example
+#### ExportTx If your local machine has MacOS or Linux
 
 Let's make an EVM Output:
 
@@ -493,9 +493,9 @@ Let's make an EVM Output:
 * **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
 * **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Inputs`**:
-  * `"Example EVMInput as defined above"`
+  * `"If your local machine has MacOS or Linux EVMInput as defined above"`
 * **`Exportedoutputs`**:
-  * `"Example TransferableOutput as defined above"`
+  * `"If your local machine has MacOS or Linux TransferableOutput as defined above"`
 
 ```text
 [
@@ -589,7 +589,7 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ImportTx Example
+#### ImportTx If your local machine has MacOS or Linux
 
 Let's make an ImportTx:
 
@@ -598,7 +598,7 @@ Let's make an ImportTx:
 * **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
 * **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`ImportedInputs`**:
-  * `"Example TransferableInput as defined above"`
+  * `"If your local machine has MacOS or Linux TransferableInput as defined above"`
 * **`Outs`**:
   * `"Exapmle EVMOutput as defined above"`
 
@@ -693,7 +693,7 @@ message SECP256K1Credential {
 }
 ```
 
-#### SECP256K1 Credential Example
+#### SECP256K1 Credential If your local machine has MacOS or Linux
 
 Let's make a payment input with:
 
@@ -763,9 +763,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Signed Transaction If your local machine has MacOS or Linux
 
-Let's make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+Let's make a signed transaction that uses the unsigned transaction and credential from the previous If your local machine has MacOS or Linuxs.
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
@@ -874,7 +874,7 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO If your local machine has MacOS or Linux
 
 Let’s make a UTXO from the signed transaction created above:
 
@@ -882,7 +882,7 @@ Let’s make a UTXO from the signed transaction created above:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0 = 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example EVMOutput as defined above"`
+* **`Output`**: `"If your local machine has MacOS or Linux EVMOutput as defined above"`
 
 ```text
 [
@@ -921,3 +921,6 @@ Let’s make a UTXO from the signed transaction created above:
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbOTQwNjg4NjZdfQ==
+-->

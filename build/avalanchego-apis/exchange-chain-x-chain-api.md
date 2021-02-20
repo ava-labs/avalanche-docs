@@ -1,105 +1,105 @@
 ---
-description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
+descripción: La X-Chain o Cadena X es una instancia de la Máquina Virtual de Avalanche (AVM)
 ---
 
-# Exchange Chain \(X-Chain\) API
+# API de la Cadena de Intercambio \(X-Chain\)
 
-The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+La [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), plataforma nativa de Avalanche para crear e intercambiar activos, es una intancia de la Máquina Virtual de Avalanche \(AVM\). Esta API permite a los clientes crear e intercambiar activos en la X-Chain y otras instancias de la AVM.
 
 {% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Esta API utiliza formatos RPC `json 2.0`. Para más información de llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoints
+## Endpoints / Extremos
 
-`/ext/bc/X` to interact with the X-Chain.
+`/ext/bc/X` para interactuar con la X-Chain.
 
-`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
+`/ext/bc/blockchainID` para interactuar con cualquier otra instancia de AVM, donde `blockchainID` es el ID de la cadena de bloques que ejecuta la AVM.
 
-## Methods
+## Métodos
 
 ### avm.buildGenesis
 
-Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+Dada una representación JSON del estado génesis de esta Máquina Virtual, crea la representación en byte de este estado.
 
-#### **Endpoint**
+#### **Extremo**
 
-This call is made to the AVM’s static API endpoint:
+Esta llamada al extremo estático del API de la AVM:
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix \(ie. X-\) in calls to the static API endpoint because these prefixes refer to a specific chain.
+Nota: las direcciones no deben incluir el prefijo de la cadena \(ie. X-\) en las llamadas al extremo estático de la API, porque estos prefijos hacen referencia a una cadena en específico.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.buildGenesis({
     networkID: int,
     genesisData: JSON,
-    encoding: string, //optional
+    encoding: string, //opcional
 }) -> {
     bytes: string,
     encoding: string,
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` especifica el formato de codificación para utilizar para bytes arbitrarios ie. los bytes del génesis que son regresados. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-`genesisData` has this form:
+`genesisData` tiene la forma:
 
 ```cpp
 {
 "genesisData" :
     {
-        "assetAlias1": {               // Each object defines an asset
+        "assetAlias1": {               // Cada objeto define un activo
             "name": "human readable name",
-            "symbol":"AVAL",           // Symbol is between 0 and 4 characters
+            "symbol":"AVAL",           // Debe tener entre 0 y 4 caracteres
             "initialState": {
-                "fixedCap" : [         // Choose the asset type.
-                    {                  // Can be "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
-                        "amount":1000, // At genesis, address A has
-                        "address":"A"  // 1000 units of asset
+                "fixedCap" : [         // Elige el tipo de activo.
+                    {                  // Puede ser "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
+                        "amount":1000, // En el genesis, dirección A tiene
+                        "address":"A"  // 1000 unidades de activo
                     },
                     {
-                        "amount":5000, // At genesis, address B has
-                        "address":"B"  // 1000 units of asset
+                        "amount":5000, // Al genesis, dirección B tiene
+                        "address":"B"  // 1000 unidades del activo
                     },
-                    ...                // Can have many initial holders
+                    ...                // Puedes tener multiples poseedores iniciales
                 ]
             }
         },
-        "assetAliasCanBeAnythingUnique": { // Asset alias can be used in place of assetID in calls
-            "name": "human readable name", // names need not be unique
-            "symbol": "AVAL",              // symbols need not be unique
+        "assetAliasCanBeAnythingUnique": { // El sobrenombre puede usarse en vez de assetID en las llamadas
+            "name": "human readable name", // nombres no necesitan ser únicos
+            "symbol": "AVAL",              // simbolo no necesitan ser únicos
             "initialState": {
-                "variableCap" : [          // No units of the asset exist at genesis
+                "variableCap" : [          // No existen unidades del activo en el génesis
                     {
-                        "minters": [       // The signature of A or B can mint more of
-                            "A",           // the asset.
+                        "minters": [       // la firma de A o B pueden acuñar más de
+                            "A",           // los activos.
                             "B"
                         ],
                         "threshold":1
                     },
                     {
-                        "minters": [       // The signatures of 2 of A, B and C can mint
-                            "A",           // more of the asset
+                        "minters": [       // Las firmas de 2 de A, B y C pueden acuñar
+                            "A",           // mas del activo
                             "B",
                             "C"
                         ],
                         "threshold":2
                     },
-                    ...                    // Can have many minter sets
+                    ...                    // Puedes tener cualquier conjunto de mineros
                 ]
             }
         },
-        ...                                // Can list more assets
+        ...                                // Puedes listar más activos
     }
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -162,7 +162,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -177,9 +177,9 @@ curl -X POST --data '{
 
 ### avm.createAddress
 
-Create a new address controlled by the given user.
+Crea una nueva dirección controlada por cierto usuario.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createAddress({
@@ -188,7 +188,7 @@ avm.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -202,7 +202,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -216,23 +216,23 @@ curl -X POST --data '{
 
 ### avm.createFixedCapAsset
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+Crea un nuevo activo fungible, de capitalización fija. Una cantidad de él es creada al inicio y posteriormente no pueden crearse más. El activo puede ser enviado con `avm.send`.
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
-    denomination: int, //optional
+    denomination: int, //opcional
     initialHolders: []{
         address: string,
         amount: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
+    from: []string, //opcional
+    changeAddr: string, //opcional
     username: string,
     password: string
 }) ->
@@ -242,16 +242,16 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+* `name` es un nombre humanamente-legible del activo. No necesariamente único.
+* `symbol` es una abreviación del símbolo del activo. Entre 0 y 4 caractéres. No necesariamente único. Puede omitirse.
+* `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc. Por defecto es 0.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utilizará cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
+* `username` y `password` denotan el usuario que pagará por la comisión de la transacción.
+* Cada elemento en `initialHolders` especifica que la dirección `address` poseerá `amount` unidades del activo en el génesis.
+* `assetID` es el ID del nuevo activo.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -294,9 +294,9 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
+Mina unidades de un activo con capitalización variable creados con [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.mint({
@@ -314,14 +314,14 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `amount`  de unidades del `assetID` que se crearán y controlará la dirección especificada en `to`.
+* `from` son las direcciones que deseas usar para esta operación. Si se omiten, utiliza alguna de tus direcciones según sea necesario.
+* `changeAddr` es la dirección en la que cualquier cambio será enviado. Si se omite, se enviará a cualquier dirección controlada por el usuario.
+* `username` es el usuario que paga por la comisión de transacción. `username` debe poseer la llave otorgando permiso de acuñar más de estos activos. Esto es, debe controlar al menos  _threshold_ llaves de alguno de los conjuntos de mineros.
+* `txID` es el ID de la transacción.
+* `changeAddr` en el resultado es la dirección a la cual se enviará cualquier cambio.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -340,7 +340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -355,23 +355,23 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+Crea un nuevo activo fungible con capital variable. No existen unidades del activo al iniciar. Los mineros pueden acuñar unidades de este activo utilizando `avm.mint`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
-    denomination: int, //optional
+    denomination: int, //opcional
     minterSets: []{
         minters: []string,
         threshold: int
     },
-    from: []string, //optional
-    changeAddr: string, //optional
+    from: []string, //opcional
+    changeAddr: string, //opcional
     username: string,
     password: string
 }) ->
@@ -381,17 +381,17 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name` es un nombre humanamente-legible del activo. No necesariamente único.
+* `symbol` es un simbolo que sirve como abreviación del activo. Entre 0 y 4 caracteres. No necesariamente único. Puede omitirse.
+* `denomination` determina cómo se mostrarán en la interfáz de usuario los balances del activo. Si `denomination` es 0, 100 unidades del activo se visualizarán como 100. Si `denomination` es 1, 100 unidades del activo se visualizarán como 10.0. Si `denomination` es 2, 100 unidades del activo se visualizarán como .100, etc.
+* `minterSets` es una lista donde cada elemento especifica un límite (`threshold`) de direcciones en`minters` que juntos podrán acuñar nuevos activos firmando una transacción de acuñamiento.
+* `from` son las direcciones que quieres usar para esta operación. Si se omiten, utiliza alguna de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
+* `username` paga por la comisión de transacción.
+* `assetID` es el ID del nuevo activo.
+* `changeAddr` en el resultado, es la dirección a la cual cualquier cambio fue enviado.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -425,7 +425,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -440,11 +440,11 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+Crea un nuevo activo no-fungible. No existen unidades del activo al inicializarlo. Mineros pueden acuñar nuevas unidades de estos activos usando `avm.mintNFT`.
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.createNFTAsset({
@@ -465,16 +465,16 @@ avm.createNFTAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name` es un nombre humanamente-legible del activo. No necesariamente único.
+* `symbol` es un símbolo de abreviación para el activo. Entre 0 y 4 caracteres. No ncesariamente único. Puede ser omitido.
+* `minterSets` es una lista donde cada elemento especificado establece un umbral (`threshold`) de direcciones en `minters` que juntos deben acuñar uno o más activos firmando una transacción para acuñar.
+* `from` son las direcciones que quieres usar para esta operación. Si se omiten, cualquiera de tus direcciones será necesariamente utilizada.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio se enviará a cualquier dirección controlada por el usuario.
+* `username` paga por la comisión de transacción.
+* `assetID` es el ID del nuevo activo.
+* `changeAddr` en el resultado, es la dirección a la cual se envió cualquier cambio que hubiera.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -500,7 +500,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -515,11 +515,11 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+Acuñar tokens no-fungibles (NFTs) que fueron creados con [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.mintNFT({
@@ -538,16 +538,16 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `assetID` es el ID del activo del nuevo activo NFT creado.
+* `payload` es una carga arbitraria de hasta 1024 bytes. Su formato de codificación es especificado en el argumento `encoding`.
+* `from` son las direcciones que quieres usar para esta operación. Si se omiten, se usará una de tus direcciones en caso de ser necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción. `username` debe tener las llaves que le dan permiso para acuñar más de este activo. Es decir, debe controlar al menos un umbral ( _threshold_) de llaves para uno de los conjuntos de mineros. 
+* `txID` es el ID de la transacción
+* `changeAddr` en el resultado está la dirección a la que se envió el cambio.
+* `encoding` es el formato de codificación que se usará para el argumento de carga (payload). Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -566,7 +566,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -581,9 +581,9 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+Envía un activo no-AVAX desde la X-Chain hacia la P-Chain o C-Chain. Después de llamar este método, debes llamar [`avax.import`](contract-chain-c-chain-api.md#avax-import) en la C-Chain o P-Chain para completar la transacción.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.export({
@@ -601,16 +601,16 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to` es la dirección de las cadenas P-Chain or C-Chain a la cual se enviará el activo.
+* `amount` es el monto del activo a enviar.
+* `assetID` es el ID del activo que se desea enviar.
+* `from` son las direcciones que quieres usar par esta operación. Si se omiten, utiliza alguna de tus direcciones si se requere.
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
+* El activo es enviado desde una dirección controlada por el usuario (`username`)
+* `txID` es el ID de la transacción.
+* `changeAddr` en el resultado está la dirección a la que se envió el cambio.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -629,7 +629,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -644,9 +644,9 @@ curl -X POST --data '{
 
 ### avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
+Envía AVAX desde X-Chain a otra cadena. Después de llamar a este método, debes llamar a `import` en la otra cadena para completar la transferencia.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.exportAVAX({
@@ -663,15 +663,15 @@ avm.exportAVAX({
 }
 ```
 
-* `to` is the P-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to` es la dirección de la P-Chain a la cual se enviará el AVAX.
+* `amount` es el monto de nAVAX a enviar.
+* `from` son las direcciones que quieres usar par esta operación. Si se omiten, utiliza alguna de tus direcciones si se requere
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio será enviado a cualquier dirección controlada por el usuario.
+* El activo es enviado desde una dirección controlada por el usuario (`username`)
+* `txID` es el ID de la transacción
+* `changeAddr` en el resultado está la dirección a la que se envió el cambio.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -689,7 +689,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -704,10 +704,10 @@ curl -X POST --data '{
 
 ### avm.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
+Obtén la llave privada que controla una dirección dada.
+La llave privada devuelta puede ser agregada a un usuario con la llamada [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.exportKey({
@@ -717,10 +717,10 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username` debe controlar la dirección en `address`.
+* `privateKey` es la cadena representando la llave privada que controla la dirección `address`.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -735,7 +735,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -749,9 +749,9 @@ curl -X POST --data '{
 
 ### avm.getAllBalances
 
-Get the balances of all assets controlled by a given address.
+Obtén los balances de todos los activos controlados por cierta dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getAllBalances({address:string}) -> {
@@ -762,7 +762,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -775,7 +775,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -798,9 +798,9 @@ curl -X POST --data '{
 
 ### avm.getAssetDescription
 
-Get information about an asset.
+Obtén información de un activo.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
@@ -811,12 +811,12 @@ avm.getAssetDescription({assetID: string}) -> {
 }
 ```
 
-* `assetID` is the id of the asset for which the information is requested.
-* `name` is the asset’s human-readable, not necessarily unique name.
-* `symbol` is the asset’s symbol.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `assetID` es el id del activo del cual se solicita información.
+* `name` es el nombre humanamente-legible, no necesariamente único.
+* `symbol` es el símbolo del activo.
+* `denomination` determina cómo se visualizan los balances del activo en la interfaz de usuario. Si la denominación es 0, entonces 100 unidades del activo se desplegarán como 100. Si la denominación es 1, entonces 100 unidades del activo se mostrarán como 10.0. Si la denominación es 2, 100 unidades del activo se visualizarán como .100, etc.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -829,7 +829,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -846,9 +846,9 @@ curl -X POST --data '{
 
 ### avm.getBalance
 
-Get the balance of an asset controlled by a given address.
+Obtén el balance de un activo controlado por una dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getBalance({
@@ -857,10 +857,10 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
+* `address` dueño del activo.
 * `assetID` id of the asset for which the balance is requested
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -874,7 +874,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -894,9 +894,9 @@ curl -X POST --data '{
 
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Regresa una transacción específica. El parámetro `encoding` establece el formato en el que se regresa la transacción. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getTx({
@@ -908,7 +908,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -922,7 +922,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -937,22 +937,22 @@ curl -X POST --data '{
 
 ### avm.getTxStatus
 
-Get the status of a transaction sent to the network.
+Obtén el estado de una transacción enviada a la red.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` is one of:
+`status` puede ser cualquiera de:
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
-* `Unknown`: The transaction hasn’t been seen by this node
+* `Accepted`: La transacción es \(o será\) acceptada por cada nodo.
+* `Processing`: La transacción está siendo votada por este nodo.
+* `Rejected`: La transacción. no será aceptado por ningún nodo en la red.
+* `Unknown`: La transacción no ha sido vista por este nodo.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -965,7 +965,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -979,9 +979,9 @@ curl -X POST --data '{
 
 ### avm.getUTXOs
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+Obtén los UTXOs referenciados a cierta direccioń. Si la cadena de origen (sourceChain) es especificada, entonces recuperará los UTXO atómicos exportados de esa cadena a la Cadena X.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.getUTXOs({
@@ -1005,17 +1005,17 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `utxos` es una lista de UTXOs tal que cada UTXO hacer referencia a al menos una dirección en `addresses`.
+* A lo más un límite (`limit`) de UTXOs es devuelta. Si `limit` se omite, o es mayor a 1024, entonces será 1024.
+* Este método soporta paginación. `endIndex` dentota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXOs, usa el valor de `endIndex` como `startIndex` en la siguiente llamada.
+* Si `startIndex` se omite, buscará todos los UTXOs hasta el límite (`limit`).
+* Cuando se usa paginación \(cuando se provee un `startIndex` \), no se garantiza que los UTXOs sean únicos a lo largo de multiples llamadas. Esto es, una UTXO puede aparecer en el resultado de una primer llamada, y nuevamente en una segunda llamada.
+* Cuando se usa paginación, no se garantiza la consistencia a lo largo de multiples llamadas. Esto es, el conjunto de UTXO de una dirección puede haber cambiado entre llamadas.
+* `encoding` establece el formato en que se devuelven los UTXOs. Puede ser “cb58” o “hex”. Por defecto es “cb58”.
 
-#### **Example**
+#### **Ejemplo**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+Supón que deseamos todos los UTXOs que hacen referencia a al menos una de las direcciones  `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` y `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
 
 ```cpp
 curl -X POST --data '{
@@ -1030,7 +1030,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1054,7 +1054,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Como `numFetched` es igual que `limit`,  podemos decir que puede haber más UTXO que no fueron recuperados. Llamamos al método nuevamente, esta vez con `startIndex`:
 
 ```cpp
 curl -X POST --data '{
@@ -1073,7 +1073,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto da la respuesta:
 
 ```cpp
 {
@@ -1096,9 +1096,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Como `numFetched` es menor que `limit`, sabemos que hemos terminado de obtener los UTXO y no es necesario volver a llamar a este método.
 
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Supongamos que queremos recuperar los UTXO exportados de la Cadena P a la Cadena X para construir un ImportTx. Luego, necesitamos llamar a GetUTXOs con el argumento sourceChain para recuperar los UTXOs atómicos:
 
 ```cpp
 curl -X POST --data '{
@@ -1114,7 +1114,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Esto da la respuesta:
 
 ```cpp
 {
@@ -1136,9 +1136,9 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+Finaliza la transferencia de AVAX desde la P-Chain o C-Chain hacia la X-Chain. Antes de llamar a este método, debes llamar al método [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) en la P-Chain o al  [`avax.export`](contract-chain-c-chain-api.md#avax-export) en la C-Chain para iniciar la transferencia.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.import({
@@ -1149,12 +1149,12 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
-* `username` is the user that controls `to`.
-* `txID` is the ID of the newly created atomic transaction.
+* `to` es la dirección a la cual se enviará el AVAX. Esta debe ser igual al argumento `to` en la correspondiente llamada  `exportAVAX` en la P-Chain o `export` para la C-Chain.
+* `sourceChain` es el ID o alias de la cadena desde la cual el AVAX está siendo importado. Para importar fondos de la C-Chain, utiliza `"C"`.
+* `username` es el usuario que controla `to`.
+* `txID` es el ID de la recien creada transacción atómica.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1170,7 +1170,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1184,9 +1184,9 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
+Finaliza una transferencia de AVAX desde la P-Chain hacia la X-Chain. Antes de llamar este método, debes de llamar al método [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) de la P-Chain para iniciar la transferencia.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.importAVAX({
@@ -1197,11 +1197,11 @@ avm.importAVAX({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
-* `username` is the user that controls `to`.
+* `to` es la dirección a la cual el AVAX se enviará. Esto debe ser igual al argumento `to` en la correspondiente llamada a la P-Chain `exportAVAX`.
+* `sourceChain` es el ID o sobrenombre de la cadena desde la cual el AVAX es importado. Para importar los fondos de la P-Chain, usa `"P"`.
+* `username` es el usuario que controla `to`.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1217,7 +1217,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1231,9 +1231,9 @@ curl -X POST --data '{
 
 ### avm.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga a un usuario control sobre una dirección proporcionando la llave privada que controla la dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.importKey({
@@ -1243,9 +1243,9 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* Agrega la llave privada (`privateKey`) al conjunto de llaves privadas del usuario (`username`)‘s set of private keys. `address` es la dirección que ahora controla `username` con la llave privada.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1260,7 +1260,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1274,9 +1274,9 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Envía una transacción firmada a la red. `encoding` específica el formato de la transacción firmada. Puede ser "cb58" o "hex". Por defecto es "cb58".
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.issueTx({
@@ -1287,7 +1287,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1301,7 +1301,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1315,9 +1315,9 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
-List addresses controlled by the given user.
+Lista direcciónes controlados por un usuario dado.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.listAddresses({
@@ -1326,7 +1326,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1340,7 +1340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1354,9 +1354,9 @@ curl -X POST --data '{
 
 ### avm.send
 
-Send a quantity of an asset to an address.
+Envía una cantidad de un activo a una dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.send({
@@ -1371,14 +1371,14 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* Envía el monto (`amount`)  de activos con el `assetID` a una dirección `to`. `amount`  es denominado con el menor incremento del activo. Para AVAX esto es 1 nAVAX \(una mil millonesima parte de 1 AVAX.\)
+* `to` es la dirección X-Chain address a la cual el activo se envío
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, usa alguna de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* Puedes añadir un `memo`, cuya longintud puede ser hasta de 256 bytes.
+* El activo se envía de direcciónes controladas por el usuario `username`. \(Claro, ese usuario deberá mantener al menos el saldo del activo que se envía.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1398,7 +1398,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1413,9 +1413,9 @@ curl -X POST --data '{
 
 ### avm.sendMultiple
 
-Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+Envía múltiples transferencias del monto (`amount`) de `assetID`, a una dirección especificada de una lista de direcciones propias.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.sendMultiple({
@@ -1432,13 +1432,13 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `memo` is an optional message, whose length can be up to 256 bytes.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `outputs` es un arreglo de objetos literales que cada uno contiene un `assetID`, `amount` y `to`.
+* `memo` es un mensaje opcional, cuya longitud puede ser hasta de 256 bytes.
+* `from` son las direcciones que se quieren utilizar para esta operación. Si se omite, usa una de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* El activo se envía de direcciónes controladas por el usuario `username`. \(Claro, ese usuario deberá mantener al menos el saldo del activo que se envía.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1467,7 +1467,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1482,9 +1482,9 @@ curl -X POST --data '{
 
 ### avm.sendNFT
 
-Send a non-fungible token.
+Envía un token no fungible (NFT)
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avm.sendNFT({
@@ -1498,13 +1498,14 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
-* `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
-* `to` is the X-Chain address the NFT is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
+* `assetID` es el ID  del activoNFT enviado.
+* `groupID` es el grupo NFT desde el cual se envía el NFT. La creación de NFT permite múltiples grupos con un ID de NFT único. Puedes emitir multiples NFTs a cada grupo.
+* `to` es la dirección de la X-Chain a la cual se enviará el NFT.
+* `from`  son las direcciones que quieres usar para esta operación. Si se omite usará cualquiera de tus direcciones cuando sea necesario. 
+* `changeAddr` es la dirección a la cual se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* El activo es enviado desde una dirección controlada por el usuario(`username`). \(Por supuesto, ese usuario deberá mantener al menos el saldo del NFT que se envía.\)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1523,7 +1524,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1538,13 +1539,13 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Envía una transacción firmada a la red y asume que se aceptará la transacción. `encoding` especifica el formato de la transacción firmada. Pueden ser cualquiera de “cb58” o “hex”. Predeterminado en “cb58”.
 
-This call is made to the wallet API endpoint:
+Esta llamada se realiza al extremo de la API de la wallet:
 
 `/ext/bc/X/wallet`
 
-#### Signature
+#### Firma
 
 ```cpp
 wallet.issueTx({
@@ -1555,7 +1556,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+#### Llamada de ejemplo
 
 ```cpp
 curl -X POST --data '{
@@ -1569,7 +1570,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+#### Respuesta Ejemplo
 
 ```cpp
 {
@@ -1583,13 +1584,13 @@ curl -X POST --data '{
 
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Envía una cantidad de un activo a una dirección y asume que la tx será aceptada para que futuras llamadas puedan usar el conjunto UTXO modificado.
 
-This call is made to the wallet API endpoint:
+Esta llamada se hace al extremo de la API de la wallet:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 wallet.send({
@@ -1604,14 +1605,14 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* Envía un monto (`amount`) de unidades del activo con ID `assetID` a la dirección `to`. `amount` está denominado en el incremento más pequeño del activo. Para AVAX, esto es 1 nAVAX \ (una mil millonésima parte de 1 AVAX. \)
+* `to` es la dirección de la X-Chain a la cual se envía el activo.
+* `from` son las direcciones que deseas utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* Puedes agregar un `memo`, cuya longitus máxima es de 256 bytes.
+* El activo se envía desde direcciones controladas por el usuario `username`. \ (Por supuesto, ese usuario deberá mantener al menos el saldo del activo que se envía. \)
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1631,7 +1632,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1646,13 +1647,13 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Envía múltiples transferencias del monto (`amount`) del activo con ID `assetID`, a una dirección específica de una lista de direcciones y asume que la tx será aceptada para que futuras llamadas puedan usar el conjunto UTXO modificado.
 
-This call is made to the wallet API endpoint:
+Esta llamada se realiza al extremo de la API de la wallet:
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 wallet.sendMultiple({
@@ -1669,13 +1670,13 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
-
-#### **Example Call**
+* `outputs` es un arreglo de objetos literales, cada uno contiene un `assetID`,` amount` y `to`.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* Puede adjuntar un  `memo`, cuya longitud puede ser de hasta 256 bytes.
+* El activo se envía desde direcciones controladas por el usuario `username`. \ (Por supuesto, ese usuario deberá mantener al menos el saldo del activo que se envía. \)
+* 
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1704,7 +1705,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -1717,3 +1718,12 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3NzQ2MDQ2ODYsNTUzNTcxODE5LDE4Mz
+U0MjAyOTAsLTE1MjMwOTgxMzgsLTE2NDg5MjAxNzcsMTExODgz
+Mzk2MCwtMTgyNzEzNDM4MiwtNzM3MjgwMjQ0LDE5ODg4NTIyND
+EsLTk1MTg3NjYzMywtMTAyODY2Mjc4OCwxMDc0OTY2Njc2LDIw
+MDMzMjIwNSwtMTcwMzUxMzE2NSwtMTkyMzU2OTQ3NSwxNzI0MD
+Q5NjI1LC0yMzU3OTMxNDMsLTExMzQzMTMzMDEsLTM1MTI5NTY4
+MSwtMTk5NTQ2NzQ2MF19
+-->

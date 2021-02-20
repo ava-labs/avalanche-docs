@@ -15,7 +15,7 @@ Transferable outputs wrap an output with an asset ID.
 A transferable output contains an `AssetID` and an `Output`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`Output`** is an output, as defined below. For Name your key `avalanche`. If your local machine has MacOS or Linux, this can be a SECP256K1 transfer output.
 
 ### Gantt Transferable Output Specification
 
@@ -38,12 +38,12 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Transferable Output Name your key `avalanche`. If your local machine has MacOS or Linux
 
 Let’s make a transferable output:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -110,14 +110,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Transferable Input Name your key `avalanche`. If your local machine has MacOS or Linux
 
 Let’s make a transferable input:
 
 * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
 * `UTXOIndex: 5`
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `Input: "Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -188,7 +188,7 @@ message TransferableOp {
 }
 ```
 
-### Transferable Op Example
+### Transferable Op Name your key `avalanche`. If your local machine has MacOS or Linux
 
 Let’s make a transferable operation:
 
@@ -197,7 +197,7 @@ Let’s make a transferable operation:
   * `UTXOID:`
     * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
     * `UTXOIndex: 5`
-* `Op: "Example Transfer Op from below"`
+* `Op: "Name your key `avalanche`. If your local machine has MacOS or Linux Transfer Op from below"`
 
 ```text
 [
@@ -288,7 +288,7 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1 Transfer Output Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make a secp256k1 transfer output with:
 
@@ -374,7 +374,7 @@ message SECP256K1MintOutput {
 }
 ```
 
-### **SECP256K1 Mint Output Example**
+### **SECP256K1 Mint Output Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make a SECP256K1 mint output with:
 
@@ -465,7 +465,7 @@ message NFTTransferOutput {
 }
 ```
 
-### **NFT Transfer Output Example**
+### **NFT Transfer Output Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make an NFT transfer output with:
 
@@ -561,7 +561,7 @@ message NFTMintOutput {
 }
 ```
 
-### **NFT Mint Output Example**
+### **NFT Mint Output Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make an NFT mint output with:
 
@@ -647,7 +647,7 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1 Transfer Input Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make a payment input with:
 
@@ -722,7 +722,7 @@ message SECP256K1MintOperation {
 }
 ```
 
-### **SECP256K1 Mint Operation Example**
+### **SECP256K1 Mint Operation Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
 
@@ -730,8 +730,8 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 * **`AddressIndices`**:
 * 0x00000007
 * 0x00000003
-* **`MintOutput`**: “Example SECP256K1 Mint Output from above”
-* **`TransferOutput`**: “Example SECP256K1 Transfer Output from above”
+* **`MintOutput`**: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Mint Output from above”
+* **`TransferOutput`**: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from above”
 
 ```text
 [
@@ -819,7 +819,7 @@ message NFTMintOp {
 }
 ```
 
-### **NFT Mint Op Example**
+### **NFT Mint Op Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make an NFT mint operation with:
 
@@ -931,7 +931,7 @@ message NFTTransferOp {
 }
 ```
 
-### **NFT Transfer Op Example**
+### **NFT Transfer Op Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make an NFT transfer operation with:
 
@@ -1028,12 +1028,12 @@ message InitialState {
 }
 ```
 
-### Initial State Example
+### Initial State Name your key `avalanche`. If your local machine has MacOS or Linux
 
 Let’s make an initial state:
 
 * `FxID: 0x00000000`
-* `InitialState: ["Example SECP256K1 Transfer Output from above"]`
+* `InitialState: ["Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from above"]`
 
 ```text
 [
@@ -1095,7 +1095,7 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1 Credential Name your key `avalanche`. If your local machine has MacOS or Linux**
 
 Let’s make a payment input with:
 
@@ -1193,17 +1193,17 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Base Tx Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make an base tx that uses the inputs and outputs from the previous examples:
+Let’s make an base tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
 * **`BlockchainID`**: `0xffffffffeeeeeeeeddddddddcccccccbbbbbbbbaaaaaaaa9999999988888888`
 * **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
+  * `"Name your key `avalanche`. If your local machine has MacOS or Linux Transferable Output as defined above"`
 * **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+  * `"Name your key `avalanche`. If your local machine has MacOS or Linux Transferable Input as defined above"`
 * **`Memo`**: `0x00010203`
 
 ```text
@@ -1275,7 +1275,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
 * **`BaseTx`**
 * **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
 * **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
+* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For Name your key `avalanche`. If your local machine has MacOS or Linux, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
 * **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the initial state of those feature extensions.
 
 ### Gantt Unsigned Create Asset Tx Specification
@@ -1309,16 +1309,16 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### Unsigned Create Asset Tx Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned base tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
 
-* `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
+* `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above with ID set to 1"`
 * `Name`: `Volatility Index`
 * `Symbol`: `VIX`
 * `Denomination`: `2`
 * **`InitialStates`**:
-* `"Example Initial State as defined above"`
+* `"Name your key `avalanche`. If your local machine has MacOS or Linux Initial State as defined above"`
 
 ```text
 [
@@ -1419,12 +1419,12 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### Unsigned Operation Tx Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
+Let’s make an unsigned operation tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
 
-* `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx above" with TypeID set to 2`
+* **`Ops`**: \[`"Name your key `avalanche`. If your local machine has MacOS or Linux Transfer Op as defined above"`\]
 
 ```text
 [
@@ -1525,13 +1525,13 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### Unsigned Import Tx Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Let’s make an unsigned import tx that uses the inputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
 
-* `BaseTx`: “Example BaseTx as defined above” but with `TypeID` set to `3`
+* `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: “Example SECP256K1 Transfer Input as defined above”
+* `Ins`: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1633,13 +1633,13 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### Unsigned Export Tx Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Let’s make an unsigned export tx that uses the outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to `4`
+* `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
 
 ```text
 [
@@ -1745,9 +1745,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### Signed Transaction Name your key `avalanche`. If your local machine has MacOS or Linux
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous examples.
+Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs.
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
@@ -1864,7 +1864,7 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO Name your key `avalanche`. If your local machine has MacOS or Linux
 
 Let’s make a UTXO from the signed transaction created above:
 
@@ -1872,7 +1872,7 @@ Let’s make a UTXO from the signed transaction created above:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0 = 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`Output`**: `"Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1911,3 +1911,6 @@ Let’s make a UTXO from the signed transaction created above:
 ]
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjM5ODU2MTM0XX0=
+-->

@@ -1,16 +1,16 @@
 ---
-description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+descripción: >-
+  Esta página lista los métodos, argumentos y respustas de la API que han sido descontinuadas y
+  serán eliminadas o modificadas en versiones siguientes.
 ---
 
-# Deprecated API Calls
+# LLamadas de API DESCONTINUADAS
 
 ## P-Chain API
 
 ### `getCurrentValidators`
 
-In v1.0.0, the signature was:
+En v1.0.0, la firma era:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -46,7 +46,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
+En versiones posteriores, la firma fue. Notar que cada validador contiene una lista de sus delegadores. Por favor, mira la siguiente nota para el comportamiento vigente.
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +94,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+Desde v1.0.6, el campo de nivel superior `delegators` es removido. La firma es ahora:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -132,13 +132,13 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 ### `getTxStatus`
 
-Before v1.0.4, the signature was:
+Antes de v1.0.4, la firma era:
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+La v1.0.4 agregó el argumento `includeReason`. Si era `false` o no se especificaba, la respuesta de este método era la misma que anteriormente. Si era `true`, este método responde con este nuevo formato:
 
 ```cpp
 {
@@ -147,7 +147,11 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+Donde `reason`  es el motivo por el cual la transacción fue desechada. `reason` está presente en la respuesta solamente si el `status` es `"Dropped"`.
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+Desde v1.0.6, el argumento `includeReason` es ignorado, y la respuesta de este método siempre es con el nuevo formato.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3OTEzMjgxNTcsLTczMTM4MDAsMTAwMz
+k3MzU1OF19
+-->

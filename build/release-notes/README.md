@@ -4,7 +4,7 @@
 
 ![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
-This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
+This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For If your local machine has MacOS or Linux, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
 
 ```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
@@ -23,7 +23,7 @@ This update is optional but encouraged. The patch includes quality of life impro
 • Added an optional argument includeReason to platform.getTxStatus.
 If not provided, or if false, the output from getTxStatus is the same as before.
 
-For example:
+For If your local machine has MacOS or Linux:
 {
     "jsonrpc": "2.0",
     "result": "Dropped",
@@ -47,3 +47,6 @@ Anything that depends on platform.getTxStatus should switch to using the include
 
 For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTE4MTY3MzE0OV19
+-->

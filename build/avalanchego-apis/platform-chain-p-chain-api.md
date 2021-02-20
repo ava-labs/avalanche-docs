@@ -1,8 +1,8 @@
-# Platform Chain \(P-Chain\) API
+# API de la Cadena de Plataforma \(P-Chain\) 
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
+La API permite a los clientes interactuar con la cadena P o [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), que mantiene al conjunto de [validadores](../../learn/platform-overview/staking.md#validators) de Avalanche y maneja la creación de cadenas de bloques.
 
-## Endpoint
+## Endpoint / Extremo
 
 ```cpp
 /ext/P
@@ -10,25 +10,25 @@ This API allows clients to interact with the [P-Chain](../../learn/platform-over
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Esta API usa formato RPC `json 2.0`.
 
-## Methods
+## Metodos
 
 ### platform.addDelegator
 
-Add a delegator to the Primary Network.
+Agrega un delegador a la Red Primaria.
 
-A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
+Un delegador hace stake de AVAX y especifica un validador (delegado) para validar la red en su nombre. El delegado tiene una mayor probabilidad de ser muestreado por otros validadores \(peso\) en proporción a la participación que se le delega.
 
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward \(if any.\) A transaction that delegates stake has no fee.
+El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la recompensa de validación del delegador \ (si corresponde.\) Una transacción que delega participación no tiene comisión.
 
-The delegation period must be a subset of the period that the delegatee validates the Primary Network.
+El período de delegación debe ser un subconjunto del período en el que el delegado valida la red primaria.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Notar que una vez que emitiste la transacción de agregar un nodo como delegador, no hay manera de cambiar los parámetros. **No puedes retirar tu stake antes de tiempo, o cambiar el monto, ID del nodo o dirección de recompensas.** Por favor, asegúrate de usar los valores correctos. Si no estás seguro, puedes revisar nuestas [Preguntas Frecuentes de Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o pedir ayuda en [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addDelegator(
@@ -50,18 +50,18 @@ platform.addDelegator(
 }
 ```
 
-* `nodeID` is the ID of the node to delegate to.
-* `startTime` is the Unix time when the delegator starts delegating.
-* `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the delegator is staking.
-* `rewardAddress` is the address the validator reward goes to, if there is one.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID` es el ID del nodo al cual delegar.
+* `startTime` es el tiempo Unix cuando el delegador comienza a delegar.
+* `endTime`es el tiempo Unix cuando el delegador termina de delegar \(y el AVAX en stake es devuelto\).
+* `stakeAmount` es la cantidad de nAVAX con el que e delegador está participando.
+* `rewardAddress` es la dirección a la que va la recompensa del validador, si hay una.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `password` es la contraseña de`username`.
+* `txID` es el ID de la transacción
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -97,19 +97,19 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
+Agrega un validador a la red primaria. Debe hacer staking de AVAX para hacer esto. Si el nodo es lo suficientemente correcto y receptivo durante la validación, recibirá una recompensa cuando finalice el período de participación. La probabilidad del validador de ser muestreado por otros validadores durante el consenso es proporcional a la cantidad de AVAX en stake.
 
-The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+El validador cobra una tarifa a los delegadores; el primero recibe un porcentaje de la recompensa de validación del delegador \(si corresponde\). La tarifa mínima de delegación es del 2%. Una transacción que agrega un validador no paga comisión.
 
-The validation period must be between 2 weeks and 1 year.
+El período de validación debe ser de entre 2 semanas y 1 año.
 
-There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
+Hay un máximo peso total impuesto a los validadores. Esto significa que ningún validador podrá tener más AVAX en stake que este valor. Este valor se establecerá inicialmente en el `min(5*cantidad en stake, 3M AVAX)`. El valor total de un validador es de 3 millones de AVAX.
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. ** No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa. ** Asegúrate de que estás utilizando los valores correctos. Si no estás seguro, consulta nuestra sección de [Preguntas Frecuentes para Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o solicita ayuda en [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addValidator(
@@ -132,21 +132,21 @@ platform.addValidator(
 }
 ```
 
-* `nodeID` is the node ID of the validator being added.
-* `startTime` is the Unix time when the validator starts validating the Primary Network.
-* `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the validator is staking.
-* `rewardAddress` is the address the validator reward will go to, if there is one.
-* `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID` es el ID del nodo del validador que se agrega.
+* `startTime` es el tiempo Unix cuando el validador comienza a validar la red primaria.
+* `endTime` es el tiempo Unix en el que el validador deja de validar la red primaria \(y se devuelve el AVAX en stake\).
+* `stakeAmount` es la cantidad de nAVAX que el validador está dejando en stake.
+* `rewardAddress` es la dirección a la que irá la recompensa del validador, si hay una.
+* `delegationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan stake en ellos. Se permiten hasta 4 lugares decimales; se ignoran los lugares decimales adicionales. Debe estar entre 0 y 100, inclusive. Por ejemplo, si `delegationFeeRate` es` 1.2345` y alguien delega en este validador, cuando el período de delegación finaliza, el 1.2345% de la recompensa va al validador y el resto al delegador. 
+*  `from` son las direcciones que deseas utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `password` es la contraseña de `username`.
+* `txID` es el ID de la transacción
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+En este ejemplo, usamos el comando de shell `date` para calcular los tiempos Unix 10 minutos y 2 días en el futuro. \(Nota: si estás en una Mac, reemplaza `$(date` por` $(gdate`. Si no tienes `gdate` instalado, haz`brew install coreutils`.\)
 
 ```cpp
 curl -X POST --data '{
@@ -168,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -183,9 +183,9 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+Agrega un validador a una subred que no sea la red primaria. El validador debe validar la red primaria durante todo el tiempo que valide esta subred.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.addSubnetValidator(
@@ -207,18 +207,18 @@ platform.addSubnetValidator(
 }
 ```
 
-* `nodeID` is the node ID of the validator.
-* `subnetID` is the subnet they will validate.
-* `startTime` is the unix time when the validator starts validating the subnet.
-* `endTime` is the unix time when the validator stops validating the subnet.
-* `weight` is the validator’s weight used for sampling.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+* `nodeID` es el ID del nodo validador.
+* `subnetID`es la subred que validarán.
+* `startTime` es el tiempo Unix en la que el validador comienza a validar la subred.
+* `endTime` es el tiempo Unix en el que el validador deja de validar la subred.
+* `weight` es el peso del validador utilizado para el muestreo.
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `password` es la contraseña de`username`.
+* `txID` es el ID de transacción.
 
-#### **Example call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -239,7 +239,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -254,9 +254,9 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
-Create a new address controlled by the given user.
+Crea una nueva dirección controlada por el usuario dado.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createAddress({
@@ -265,7 +265,7 @@ platform.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -293,9 +293,9 @@ curl -X POST --data '{
 
 ### platform.createBlockchain
 
-Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
+Crea una nueva cadena de bloques. Actualmente solo admite la creación de nuevas instancias de AVM y la MV Timestamp.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createBlockchain(
@@ -316,21 +316,20 @@ platform.createBlockchain(
     changeAddr: string
 }
 ```
+* `subnetID` es el ID de la subred que valida la nueva cadena de bloques. La subred debe existir y no puede ser la red principal.
+* `vmID` es el ID de la máquina virtual que ejecuta blockchain. También puede ser un alias de la máquina virtual.
+* `name` es un nombre humanamente-legible para la nueva cadena de bloques. No necesariamente único.
+* `genesisData` es la representación en bytes del estado de génesis de la nueva cadena de bloques codificada en el formato especificado por el parámetro `encoding`.
+* `encoding` especifica el formato que se utilizará para `genesisData`. Puede ser "cb58" o "hex". El valor predeterminado es "cb58". Las máquinas virtuales deben tener un método de API estático llamado `buildGenesis` que pueda usarse para generar `genesisData`
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción. Este usuario debe tener una cantidad suficiente de claves de control de la subred.
+* `password` es la contraseña de`username`.
+* `txID` es el ID de transacción.
 
-* `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and can’t be the Primary Network.
-* `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
-* `name` is a human-readable name for the new blockchain. Not necessarily unique.
-* `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+#### **Llamada de Ejemplo**
 
-#### **Example Call**
-
-In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
+En este ejemplo, estamos creando una nueva instancia de la máquina virtual de Timestamo. `genesisData` proviene de llamar a `timestamp.buildGenesis`.
 
 ```cpp
 curl -X POST --data '{
@@ -351,7 +350,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -366,11 +365,11 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-Create a new subnet.
+Crea una nueva subred.
 
-The subnet’s ID is the same as this transaction’s ID.
+El ID de la subred es el mismo que el ID de esta transacción.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.createSubnet(
@@ -388,14 +387,13 @@ platform.createSubnet(
     changeAddr: string
 }
 ```
+* Para agregar un validador a esta subred, se requieren una cantidad (`threshold`) de firmas de las direcciones en `controlKeys`
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que paga la tarifa de transacción.
+* `password` es la contraseña de `username`.
 
-* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -416,7 +414,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -430,9 +428,9 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
+Envíe AVAX desde una dirección en P-Chain a una dirección en X-Chain. Después de emitir esta transacción, debe llamar al método [`avm.importAVAX`] (exchange-chain-x-chain-api.md#avm-importavax) de X-Chain para completar la transferencia.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.exportAVAX(
@@ -450,16 +448,15 @@ platform.exportAVAX(
     changeAddr: string
 }
 ```
+* `amount` es la cantidad de nAVAX a enviar.
+* `to` es la dirección en X-Chain a la que enviar el AVAX
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, usa cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que envía el AVAX y paga la tarifa de transacción.
+* `password` es la contraseña de `username`.
+* `txID` es el ID de esta transacción.
 
-* `amount` is the amount of nAVAX to send.
-* `to` is the address on the X-Chain to send the AVAX to
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user sending the AVAX and paying the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the ID of this transaction.
-
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -477,7 +474,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -492,10 +489,9 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+Obtén la llave privada que controla una dirección determinada. La llave privada devuelta se puede agregar a un usuario con[`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.exportKey({
@@ -505,11 +501,11 @@ platform.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` is the user that controls `address`.
-* `password` is `username`‘s password.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username` es el usuario que controla `address`.
+* `password` es la contraseña de `username`.
+* `privateKey` es la representación en cadena de la clave privada que controla `address`.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -524,7 +520,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -538,9 +534,9 @@ curl -X POST --data '{
 
 ### platform.getBalance
 
-Get the balance of AVAX controlled by a given address.
+Obtén el saldo de AVAX controlado por una dirección determinada.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBalance({
@@ -557,14 +553,14 @@ platform.getBalance({
 }
 ```
 
-* `address` is the address to get the balance of.
-* `balance` is the total balance, in nAVAX.
-* `unlocked` is the unlocked balance, in nAVAX.
-* `lockedStakeable` is the locked stackeable balance, in nAVAX.
-* `lockedNotStakeable` is the locked and not stackeable balance, in nAVAX.
-* `utxoIDs` are the IDs of the UTXOs that reference `address`.
+* `address` es la dirección de la cual se quiere obtener el saldo.
+* `balance` es el saldo total, en nAVAX.
+* `unlocked` es el saldo desbloqueado, en nAVAX.
+* `lockedStakeable` es el saldo disponible para stake y bloqueado, en nAVAX.
+* `lockedNotStakeable` es el saldo bloqueado y no disponible para stake, en nAVAX.
+* `utxoIDs` son los ID de los UTXO que hacen referencia a la `address`.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -577,7 +573,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -604,9 +600,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchains
 
-Get all the blockchains that exist \(excluding the P-Chain\).
+Obtén todas las cadenas de bloques que existen \(excluyendo la cadena P\).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBlockchains() ->
@@ -620,13 +616,13 @@ platform.getBlockchains() ->
 }
 ```
 
-* `blockchains` is all of the blockchains that exists on the Avalanche network.
-* `name` is the human-readable name of this blockchain.
-* `id` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates this blockchain.
-* `vmID` is the ID of the Virtual Machine the blockchain runs.
+* `blockchains` son todas las blockchains que existen en la red Avalanche.
+* `name` es el nombre humanamente-legible de esta cadena de bloques.
+* `id` es el ID de blockchain.
+* `subnetID` es el ID de la subred que valida esta cadena de bloques.
+* `vmID` es el ID de la máquina virtual que ejecuta la cadena de bloques.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -637,7 +633,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -694,9 +690,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchainStatus
 
-Get the status of a blockchain.
+Obtén el estado de una cadena de bloques.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getBlockchainStatus(
@@ -706,14 +702,14 @@ platform.getBlockchainStatus(
 ) -> {status: string}
 ```
 
-`status` is one of:
+`status` es una de las siguientes:
 
-* `Validating`: The blockchain is being validated by this node.
-* `Created`: The blockchain exists but isn’t being validated by this node.
-* `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
-* `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
-
-#### **Example Call**
+* `Validating`: La cadena de bloques está siendo validada por este nodo.
+* `Created`: La cadena de bloques existe, pero no está siendo validada por este nodo.
+* `Preferred`: Se propuso crear la cadena de bloques y es probable que se cree, pero la transacción aún no se acepta.
+* `Unknown`: La cadena de bloques no se propuso o no se prefiere la propuesta para crearla. La propuesta puede volver a presentarse.
+ 
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -726,7 +722,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -740,17 +736,17 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Devuelve un límite superior en el número de AVAX que existen. Este es un límite superior porque no tiene en cuenta los tokens quemados, incluidas las tarifas de transacción.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getCurrentSupply() -> {supply: int}
 ```
 
-* `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+* `supply` es un límite superior en el número de AVAX que existen, denominado en nAVAX.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -761,7 +757,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -773,15 +769,15 @@ curl -X POST --data '{
 }
 ```
 
-The response in this example indicates that AVAX’s supply is at most 365.865 million.
+La respuesta en este ejemplo indica que el suministro de AVAX es como máximo de 365,865 millones.
 
 ### platform.getCurrentValidators
 
-List the current validators of the given Subnet.
+Enumera los validadores actuales de una subred dada.
 
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+El campo de nivel superior  `delegators` fue [descontinuado](deprecated-api-calls.md#getcurrentvalidators) a partir de v1.0.1, y eliminado en v1.0.6. En cambio, cada elemento de `validators` ahora contiene la lista de delegadores para ese validador.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getCurrentValidators({
@@ -820,30 +816,30 @@ platform.getCurrentValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
-  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
-  * `uptime` is the % of time the queried node has reported the peer as online.
-  * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator:
-    * `txID` is the delegator transaction.
-    * `startTime` is the Unix time when the delegator started.
-    * `endTime` is the Unix time when the delegator stops.
-    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-    * `nodeID` is the validating node’s node ID.
-    * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-    * `potentialReward` is the potential reward earned from staking
-* `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
+* `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
+* `validadores`:
+  * `txID` es la transacción de validador.
+  * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+  * `endTime` es la hora Unix en la que el validador deja de validar la subred.
+  * `stakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si "subnetID" no es la red primaria.
+  * `nodeID` es el ID de nodo del validador.
+  * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
+  * `rewardOwner` es una salida de `OutputOwners` que incluye `locktime`,` threshold` y un arreglo de direcciones (`addresses`).
+  * `potencialReward` es la recompensa potencial obtenida al hacer stake.
+  * `delegationFeeRate` es la tarifa porcentual que cobra este validador cuando otros delegan su stake en ellos.
+  * `uptime` es el % de tiempo que el nodo consultado ha informado que el par está en línea.
+  * `connected` es si el nodo está conectado a la red
+  * `delegators` es la lista de delegadores a este validador:
+    * `txID` es la transacción del delegador.
+    * `startTime` es la hora Unix en la que se inició el delegador.
+    * `endTime` es el tiempo de Unix en el que se detiene el delegador.
+    * `StakeAmount` es la cantidad de nAVAX que este delegador puso en stake. Omitido si `subnetID`  no es la red primaria.
+    * `nodeID` es el ID del nodo de validación.
+    * `rewardOwner` es una salida de` OutputOwners` que incluye `locktime`, `threshold` y un arreglo de direcciones (`addresses`) .
+    * `potencialReward` es la recompensa potencial obtenida al hacer staking
+* `delegators`: \(** obsoleto a partir de v1.0.1. Consulta la nota en la parte superior de la documentación del método. **\)
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -854,7 +850,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -904,9 +900,9 @@ curl -X POST --data '{
 
 ### platform.getHeight
 
-Returns the height of the last accepted block.
+Devuelve la altura del último bloque aceptado.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getHeight() ->
@@ -915,7 +911,7 @@ platform.getHeight() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -926,7 +922,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -940,9 +936,9 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+Obtén la cantidad mínima de AVAX requerida para validar la Red Primaria y la cantidad mínima de AVAX que se puede delegar.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getMinStake() -> 
@@ -952,7 +948,7 @@ platform.getMinStake() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -962,7 +958,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -977,9 +973,9 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
+Enumera los validadores en el conjunto de validadores pendientes de la subred especificada. Cada validador aún no está validando la subred, pero lo hará en el futuro.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getPendingValidators({
@@ -1005,23 +1001,23 @@ platform.getPendingValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+* `subnetID` es la subred de la cual se devuelven los validadores actuales. Si se omite, devuelve los validadores actuales de la red primaria.
 * `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `connected` if the node is connected.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+   * `txID` es la transacción del validador.
+   * `startTime` es la hora Unix en la que el validador comienza a validar la subred.
+   * `endTime` es la hora Unix en la que el validador deja de validar la subred.
+   * `stakeAmount` es la cantidad de nAVAX que este validador dejó en stake. Omitido si `subnetID` no es la red primaria.
+   * `nodeID` es el ID de nodo del validador.
+   * `connected` si el nodo está conectado.
+   * `weight` es el peso del validador cuando se toman muestras de los validadores. Omitido si `subnetID` es la red principal.
 * `delegators`:
-  * `txID` is the delegator transaction.
-  * `startTime` is the Unix time when the delegator starts.
-  * `endTime` is the Unix time when the delegator stops.
-  * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validating node’s node ID.
+   * `txID` es la transacción del delegador.
+   * `startTime` es la hora Unix en la que se inicia la delegación.
+   * `endTime` es el tiempo de Unix en el que se detiene el delegador.
+   * `stakeAmount` es la cantidad de nAVAX que este delegador apostó. Omitido si `subnetID` no es la red primaria.
+   * `nodeID` es el ID del nodo de validación.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1032,7 +1028,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1065,9 +1061,9 @@ curl -X POST --data '{
 
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+Obtén un el ID (assetID) de un activo de staking de una subred. Actualmente, esto solo devuelve el assetID de participación de la red primaria.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getStakingAssetID({
@@ -1077,10 +1073,10 @@ platform.getStakingAssetID({
 }
 ```
 
-* `subnetID` is the subnet whose assetID is requested.
-* `assetID` is the assetID for a subnet’s staking asset.
+* `subnetID` es la subred en la cual se solicita el assetID.
+* `assetID` es el ID del activo de staking de una subred.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1093,7 +1089,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1107,9 +1103,9 @@ curl -X POST --data '{
 
 ### platform.getSubnets
 
-Get info about the Subnets.
+Obtén información de la Subred.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getSubnets(
@@ -1124,13 +1120,14 @@ platform.getSubnets(
 }
 ```
 
-* `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `ids` son los ID de las subredes para obtener información. Si se omite, obtiene información sobre todas las subredes.
+* `id` es el ID de la subred.
+* Se necesita el número  `threshold` de firmas de las direcciones en `controlKeys` para agregar un validador a la subred.
 
-See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
-#### **Example Call**
+Mira [aquí](../tutorials/nodes-and-staking/add-a-validator.md) para obtener información de cómo agregar un validador a una Subred
+
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1141,7 +1138,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1164,15 +1161,15 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
+Obtenga la cantidad de nAVAX en stake por un conjunto de direcciones. La cantidad devuelta no incluye la recompensas del staking.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1189,7 +1186,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1203,15 +1200,15 @@ curl -X POST --data '{
 
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+Obtén la cantidad total de nAVAX en stake en la red primaria.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTotalStake() -> {stake: int}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1223,7 +1220,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1237,11 +1234,11 @@ curl -X POST --data '{
 
 ### platform.getTx
 
-Gets a transaction by its ID.
+Obtén una transacción por su ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Opcional, el parámetro `encoding` para especificar el formato de la transacción devuelta. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTx({
@@ -1253,7 +1250,7 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1267,7 +1264,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1282,11 +1279,11 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+Obtén el estado de una transacción por su ID. Si se canceló la transacción, la respuesta incluirá un campo de `reason` con el motivo y más información sobre por qué se canceló la transacción.
 
-See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
+Mira [aquí](deprecated-api-calls.md#gettxstatus) para ver notas en comportamientos previos.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getTxStatus({
@@ -1294,7 +1291,7 @@ platform.getTxStatus({
 }) -> {status: string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1307,7 +1304,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1321,9 +1318,9 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set of addresses.
+Obtiene los UTXO que hacen referencia a un conjunto de direcciones determinado.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.getUTXOs(
@@ -1348,18 +1345,17 @@ platform.getUTXOs(
     encoding: string,
 }
 ```
+* `utxos` es una lista de UTXO de modo que cada UTXO hace referencia al menos a una dirección en `addresses`.
+* Como máximo se devuelven una cantidad `limit` de UTXOs. Si se omite `limit` o es superior a 1024, se establece en 1024.
+* Este método admite la paginación. `endIndex` denota el último UTXO devuelto. Para obtener el siguiente conjunto de UTXO, use el valor de `endIndex` como `startIndex` en la siguiente llamada.
+* Si se omite `startIndex`, se obtendrán todos los UTXO hasta el `limit`.
+* Cuando se usa la paginación \(es decir, cuando se proporciona `startIndex`\), no se garantiza que los UTXO sean únicos en varias llamadas. Es decir, puede aparecer un UTXO en el resultado de la primera llamada y luego nuevamente en la segunda llamada.
+* Cuando se utiliza la paginación, no se garantiza la consistencia en varias llamadas. Es decir, el conjunto UTXO de direcciones puede haber cambiado entre llamadas.
+* `encoding` especifica el formato de los UTXO devueltos. Puede ser "cb58" o "hex" y su valor predeterminado es "cb58".
+* 
+#### **Ejemplo**
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
-
-#### **Example**
-
-Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
+Supongamos que queremos todos los UTXO que hagan referencia al menos a uno de`P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` y `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
 
 ```cpp
 curl -X POST --data '{
@@ -1374,7 +1370,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Nos arroja la respuesta:
 
 ```cpp
 {
@@ -1398,7 +1394,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+Dado que `numFetched` es lo mismo que `limit`, podemos decir que puede haber más UTXO que no se obtuvieron. Llamamos al método nuevamente, esta vez con `startIndex`:
 
 ```cpp
 curl -X POST --data '{
@@ -1417,7 +1413,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1440,9 +1436,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+Dado que `numFetched` es menor que` limit`, sabemos que hemos terminado de obtener UTXO y no es necesario volver a llamar a este método.
 
-Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Supongamos que queremos obtener los UTXO exportados de la Cadena X a la Cadena P para construir un ImportTx. Luego, necesitamos llamar a GetUTXOs con el argumento sourceChain para recuperar los UTXO atómicos:
 
 ```cpp
 curl -X POST --data '{
@@ -1457,7 +1453,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Esto nos da la respuesta:
 
 ```cpp
 {
@@ -1479,11 +1475,11 @@ This gives response:
 
 ### platform.importAVAX
 
-Complete a transfer of AVAX from the X-Chain to the P-Chain.
+Completa una transferencia de AVAX de X-Chain a P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Antes de llamar a este método, debe llamar al método [`avm.exportAVAX`] (exchange-chain-x-chain-api.md#avm-exportavax) de X-Chain para iniciar la transferencia.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.importAVAX(
@@ -1502,14 +1498,14 @@ platform.importAVAX(
 }
 ```
 
-* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that controls the address specified in `to`.
-* `password` is `username`‘s password.
+* `to` es la dirección a la que se importa AVAX. Debe ser el mismo que el argumento `to` en la llamada correspondiente al `exportAVAX` de X-Chain.
+* `sourceChain` es el ID o alias de la cadena desde la que se está importando AVAX. Para importar fondos de X-Chain, use "X".
+* `from` son las direcciones que desea utilizar para esta operación. Si se omite, use cualquiera de sus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
+* `username` es el usuario que controla la dirección especificada en `to`.
+* `password` es la contraseña de `username`.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1527,7 +1523,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1542,9 +1538,9 @@ curl -X POST --data '{
 
 ### platform.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga a un usuario control sobre una dirección proporcionando la llave privada que controla la dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.importKey({
@@ -1553,10 +1549,9 @@ platform.importKey({
     privateKey:string
 }) -> {address: string}
 ```
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de `username`. `address` es la dirección que `username` ahora controla con la llave privada.
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
-
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1571,7 +1566,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1585,9 +1580,9 @@ curl -X POST --data '{
 
 ### platform.issueTx
 
-Issue a transaction to the Platform Chain.
+Emite una transacción a la Cadena de Plataforma.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.issueTx({
@@ -1596,11 +1591,11 @@ platform.issueTx({
 }) -> {txID: string}
 ```
 
-* `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
-* `txID` is the transaction’s ID.
+* `tx` es la representación en bytes de una transacción.
+* `encoding` especifica el formato de codificación de los bytes de la transacción. Puede ser "cb58" o "hex". El valor predeterminado es "cb58".
+* `txID` es el ID de la transacción.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1614,7 +1609,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1628,9 +1623,9 @@ curl -X POST --data '{
 
 ### platform.listAddresses
 
-List addresses controlled by the given user.
+Lista de direcciones controladas por un usuario dado.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.listAddresses({
@@ -1639,7 +1634,7 @@ platform.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1653,7 +1648,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1667,9 +1662,9 @@ curl -X POST --data '{
 
 ### platform.sampleValidators
 
-Sample validators from the specified Subnet.
+Muestrea validadores de una Subred específica
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.sampleValidators(
@@ -1683,11 +1678,11 @@ platform.sampleValidators(
 }
 ```
 
-* `size` is the number of validators to sample.
-* `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
-* Each element of `validators` is the ID of a validator.
+* `size` es el número de validadores a muestrear.
+* `subnetID` es la subred de la que se tomará la muestra. Si se omite, el valor predeterminado es la red principal.
+* Cada elemento de `validators` es el ID de un validador.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1700,7 +1695,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1717,9 +1712,9 @@ curl -X POST --data '{
 
 ### platform.validatedBy
 
-Get the Subnet that validates a given blockchain.
+Obtén la Subred que valida cierta cadena de bloques dada.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.validatedBy(
@@ -1729,10 +1724,10 @@ platform.validatedBy(
 ) -> {subnetID: string}
 ```
 
-* `blockchainID` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates the blockchain.
+* `blockchainID` es el ID de la cadena de bloques.
+* `subnetID` es el ID de la Subred que valida la cadena de bloques.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1745,7 +1740,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1759,9 +1754,9 @@ curl -X POST --data '{
 
 ### platform.validates
 
-Get the IDs of the blockchains a Subnet validates.
+Obtén los IDs de las blockchains que valida una Subred.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 platform.validates(
@@ -1771,10 +1766,10 @@ platform.validates(
 ) -> {blockchainIDs: []string}
 ```
 
-* `subnetID` is the Subnet’s ID.
-* Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
+* `subnetID` es el ID de la Subred.
+* Cada elemento de `blockchainIDs` son el ID de las blockchains validadas por una Subred.
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -1787,7 +1782,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -1802,3 +1797,12 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTc3NTM0Njk5MywxNDU2MjIyMTYyLC0xMj
+I4NjA2MTkxLDE1MzEyNjQ3ODgsLTExMzc1Nzk1NDIsNTU3MjQw
+MDgwLC03NTk2OTA4NTIsLTE3MTcxNDYyNDcsLTIxMjcyNjc1MD
+IsMTIyOTM3MzQyOSwtODI2MjQ1MzcwLC0xNzI0MTczNTE1LDE3
+MjkxNjgyMDgsLTEzMTE4NzM3NDgsNzY0OTUzNzMwLDE2MjcyOD
+I2OSwtODEyNTI3NTk1LDE0OTMxOTQ3OTksOTc0MjkwMTU5XX0=
+
+-->

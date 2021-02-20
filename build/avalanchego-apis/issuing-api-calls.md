@@ -1,44 +1,44 @@
-# Issuing API Calls
+# Emitiendo llamadas a la API
 
-This guide explains how to make calls to APIs exposed by Avalanche nodes.
+Esta guía explica cómo realizar llamadas a las API expuestas por los nodos de Avalanche.
 
 ### Endpoint <a id="endpoint"></a>
 
-An API call is made to an endpoint, which is a URL. The base of the URL is always:
+Una llamada a la API se hace al extremo, que es una URL. La base de la URL es siempre
 
 `[node-ip]:[http-port]`
 
-where
+donde
 
-* `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
+* `node-ip` es la dirección IP del nodo a llamar.
+* `http-port` es el puerto del nodo escuchando llamadas HTTP. Este es especificado mediante [argumento de línea de comandos](../references/command-line-interface.md#http-server) `http-port` \( Valor predeterminado `9650`\).
 
-For example, the base URL might look like this: `127.0.0.1:9650`.
+Por ejemplo, el URL base podría verse así: `127.0.0.1:9650`.
 
-Each API’s documentation specifies what endpoint a user should make calls to in order to access the API’s methods.
+La documentación de cada API especifica a qué extremo un usuario debe realizar llamadas para acceder a los métodos de la API.
 
-## JSON RPC Formatted APIs
+## APIs con formato JSON RPC
 
-Several built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
+Varias API integradas utilizan el formato [JSON RPC 2.0](https://www.jsonrpc.org/specification) para describir sus peticiones y respuestas. Dichas API incluyen la API de Plataforma (P-Chain) y la API de X-Chain.
 
-### Making a JSON RPC Request
+### Haciendo peticiones JSON RPC
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](exchange-chain-x-chain-api.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+Supongamos que queremos llamar al método `getTxStatus` de la[API de X-Chain](exchange-chain-x-chain-api.md).  La documentación de la API de X-Chain nos dice que el extremo de esta API es `/ext/bc/X`.
 
-That means that the endpoint we send our API call to is:
+Eso significa que el extremo al que enviamos nuestra llamada API es:
 
 `[node-ip]:[http-port]/ext/bc/X`
 
-The X-Chain API documentation tells us that the signature of `getTxStatus` is:
+La documentación de la API de X-Chain nos dice que la firma de `getTxStatus` es:
 
 [`avm.getTxStatus`](exchange-chain-x-chain-api.md#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
-where:
+donde:
 
-* Argument `txID` is the ID of the transaction we’re getting the status of.
-* Returned value `status` is the status of the transaction in question.
+* El argumento `txID` es el ID de la transacción de la que obtenemos el estado.
+* El valor devuelto  `status` es el estado de la transacción en cuestión.
 
-To call this method, then:
+Para llamar a este método, entonces:
 
 ```cpp
 curl -X POST --data '{
@@ -51,16 +51,16 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. \(In practice is always 2.0\)
-* `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
-* `params` specifies the arguments to the method.
-* `id` is the ID of this request. Request IDs should be unique.
+* `jsonrpc` especifica la versión del protocolo JSON RPC. \(En la práctica siempre es 2.0\)
+* `method` especifica el servicio \(`avm`\) y el método \(`getTxStatus` \) que queremos invocar.
+* `params` especifica los argumentos del método.
+* `id` es el ID de esta solicitud. Los ID de solicitud deben ser únicos.
 
-That’s it!
+¡Eso es todo!
 
-### JSON RPC Success Response
+### Respuestas JSON RPC Exitosas 
 
-If the call is successful, the response will look like this:
+Si la llamada es exitosa, la respuesta se verá así:
 
 ```cpp
 {
@@ -72,14 +72,14 @@ If the call is successful, the response will look like this:
 }
 ```
 
-* `id` is the ID of the request that this response corresponds to.
-* `result` is the returned values of `getTxStatus`.
+* `id` es el ID de la solicitud a la que corresponde esta respuesta.
+* `result` es el valor devuelto de `getTxStatus`.
 
-### JSON RPC Error Response
+### Respuesta JSON RPC Errónea
 
-If the API method invoked returns an error then the response will have a field `error` in place of `result`. Additionally, there is an extra field, `data`, which holds additional information about the error that occurred.
+Si el método de API invocado devuelve un error, la respuesta tendrá un campo `error`  en lugar de `result`. Además, hay un campo adicional, `data` que contiene información adicional sobre el error que ocurrió.
 
-Such a response would look like:
+Dicha respuesta se verá como:
 
 ```cpp
 {
@@ -93,11 +93,14 @@ Such a response would look like:
 }
 ```
 
-## Other API Formats
+## Otros Formatos de API
 
-Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+Algunas API pueden utilizar un estándar distinto de JSON RPC 2.0 para formatear sus solicitudes y respuestas. Dicha extensión debe especificar cómo realizar llamadas y analizar las respuestas a ellas en su documentación.
 
-## Sending and Receiving Bytes
+## Enviando y Recibiendo Bytes
 
-Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
+A menos que se indique lo contrario, cuando se envían bytes en una llamada/respuesta de API, están en representación [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58), una codificación con base 58 con una suma de comprobación
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTgwNjA0NDI4NV19
+-->
