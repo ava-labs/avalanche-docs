@@ -42,7 +42,7 @@ message TransferableOutput {
 Hagamos una salida transferible:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -116,7 +116,7 @@ Hagamos una entrada transferible:
 * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
 * `UTXOIndex: 5`
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `Input: "Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -198,7 +198,7 @@ Hagamos una operación transferible:
   * `UTXOID:`
     * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
     * `UTXOIndex: 5`
-* `Op: "Example Transfer Op from below"`
+* `Op: "Name your key `avalanche`. If your local machine has MacOS or Linux Transfer Op from below"`
 
 ```text
 [
@@ -377,7 +377,6 @@ message SECP256K1MintOutput {
     repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
 }
 ```
-
 
 ### **Ejemplo de Salida de Acuñación SECP256K1**
 
@@ -738,8 +737,8 @@ Hagamos una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-
 * **`AddressIndices`**:
 * 0x00000007
 * 0x00000003
-* **`MintOutput`**: “Example SECP256K1 Mint Output from above”
-* **`TransferOutput`**: “Example SECP256K1 Transfer Output from above”
+* **`MintOutput`**: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Mint Output from above”
+* **`TransferOutput`**: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from above”
 
 ```text
 [
@@ -1041,7 +1040,7 @@ message InitialState {
 Hagamos un estado inicial con:
 
 * `FxID: 0x00000000`
-* `InitialState: ["Example SECP256K1 Transfer Output from above"]`
+* `InitialState: ["Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from above"]`
 
 ```text
 [
@@ -1210,9 +1209,9 @@ Hagamos una transacción base  que utilice las entradas y salidas de los ejemplo
 * **`NetworkID`**: `4`
 * **`BlockchainID`**: `0xffffffffeeeeeeeeddddddddcccccccbbbbbbbbaaaaaaaa9999999988888888`
 * **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
+  * `"Name your key `avalanche`. If your local machine has MacOS or Linux Transferable Output as defined above"`
 * **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+  * `"Name your key `avalanche`. If your local machine has MacOS or Linux Transferable Input as defined above"`
 * **`Memo`**: `0x00010203`
 
 ```text
@@ -1322,12 +1321,12 @@ message CreateAssetTx {
 
 Hagamos una transacción de creación de activo no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
+* `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above with ID set to 1"`
 * `Name`: `Volatility Index`
 * `Symbol`: `VIX`
 * `Denomination`: `2`
 * **`InitialStates`**:
-* `"Example Initial State as defined above"`
+* `"Name your key `avalanche`. If your local machine has MacOS or Linux Initial State as defined above"`
 
 ```text
 [
@@ -1432,8 +1431,8 @@ message OperationTx {
 
 Hagamos un ejemplo de una transacción de operación no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx above" with TypeID set to 2`
+* **`Ops`**: \[`"Name your key `avalanche`. If your local machine has MacOS or Linux Transfer Op as defined above"`\]
 
 ```text
 [
@@ -1538,9 +1537,9 @@ message ImportTx {
 
 Hagamos un ejemplo de una transacción de importación no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* `BaseTx`: “Example BaseTx as defined above” but with `TypeID` set to `3`
+* `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: “Example SECP256K1 Transfer Input as defined above”
+* `Ins`: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1646,9 +1645,9 @@ message ExportTx {
 
 Hagamos un ejemplo de una Transacción de Exportación No Firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to `4`
+* `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: “Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
 
 ```text
 [
@@ -1880,7 +1879,7 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0 = 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`Output`**: `"Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transferable Output as defined above"`
 
 ```text
 [

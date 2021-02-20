@@ -1,18 +1,18 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+descripción: La Cadena C o C-Chain es una instancia de la Máquina Virtual de Ethereum (EVM)
 ---
 
-# Contract Chain \(C-Chain\) API
+# API de la Cadena de Contratos \(C-Chain\)
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` anc `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
+_Nota: Ethereum tiene su propia noción de `networkID` y `chainID`. Estos no tienen ninguna relación con la visión que tiene Avalanche de networkID and chainID y son puramente internas en la_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. En la red principal, la C-Chain utiliza `1` y `43114` para estos valores. En la red de pruebas Fuji, utiliza `1` y `43113` para estos valores. `networkID` y `chainID` pueden obtenerse usando los métodos `net_version` y `eth_chainId` mostrados más adelante._
 
-## Deploying a Smart Contract
+## Despligue de un Contrato Inteligente
 
 {% page-ref page="../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
-## Methods
+## Metodos
 
-This API is identical to Geth’s API except that it only supports the following services:
+Esta API es idéntica al API de Geth, con excepción que solamente soporta los siguientes servicios:
 
 * `web3_`
 * `net_`
@@ -20,37 +20,37 @@ This API is identical to Geth’s API except that it only supports the following
 * `personal_`
 * `txpool_`
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
+Puedes interactuar con estos servicios del mismo modo en que lo harías con Geth. Mira la [Documentación Ethereum Wiki’s JSON-RPC](https://eth.wiki/json-rpc/API) y [Documentación de Geth JSON-RPC](https://geth.ethereum.org/docs/rpc/server) para una descipción completa de la API.
 
-## JSON-RPC Endpoints
+## Extremos JSON-RPC 
 
-To interact with C-Chain:
+Para interactuar con la C-Chain:
 
 ```cpp
 /ext/bc/C/rpc
 ```
 
-To interact with other instances of the EVM:
+Para interactuar con otras instancias de EVM:
 
 ```cpp
 /ext/bc/blockchainID/rpc
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+donde `blockchainID` es el ID de la cadena de bloques ejecutando una EVM.
 
-To interact with the `avax` specific RPC calls
+Para interactuar con las llamadas RPC específicas de `avax`.
 
 ```cpp
 /ext/bc/C/avax
 ```
 
-## AVAX RPC endpoints
+## Extremos AVAX RPC
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
+Exporta un activo desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.import`](exchange-chain-x-chain-api.md#avm-import) en la X-Chain para completar la transferencia.
 
-#### Signature
+#### Firma
 
 ```cpp
 avax.export({
@@ -62,12 +62,12 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* The asset is sent from addresses controlled by `username` and `password`.
+* `to` es la dirección de la X-Chain a la cual enviar el activo.
+* `amount` es el monto del activo a enviar.
+* `assetID` es el ID del activo. Para exportar AVAX usa `"AVAX"` como `assetID`.
+* El activo es enviado desde las cuentas controladas por `username` y `password`.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -84,7 +84,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -98,11 +98,11 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
+**DESCONTINUADA—en lugar use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
+Envía AVAX desde la C-Chain hacia la X-Chain. Después de llamar este método, deberás llamar [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) en la X-Chain para completar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.exportAVAX({
@@ -116,20 +116,20 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
-* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
-* `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
-* `amount` is the amount of nAVAX to send.
-* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
-* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
-* The AVAX is sent from addresses controlled by `username`
+* `from` es la dirección de la C-Chain desde la cual se envían los AVAX. Debe estar en formato hex.
+* `to` es la dirección de la X-Chain hacia la cual se enviarán los AVAX. Debe estar en formato bech32.
+* `amount` es el monto en nAVAX a enviar.
+* `destinationChain` es la cadena a la cual el AVAX se envía. Para exportar los fondos a la X-Chain, usa `"X"`.
+* `changeAddr` es la dirección de C-Chain en la cual se envía cualquier cambio. Debe estar en formato hex.
+* El AVAX es enviado desde las direcciones controladas por`username`
 
-**Response**
+**Respuesta**
 
-* `txID` is the txid of the completed ExportTx.
+* `txID` es el ID de la transacción completada con ExportTx.
 
-#### Example Call
+#### Llamada de Ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -148,7 +148,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -162,9 +162,9 @@ curl -X POST --data '{
 
 ### avax.exportKey
 
-Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+Obtén la llave privada que controla una dirección dada. La llave privada que regresa puede ser agregada a un usuario con `avax.importKey`.
 
-#### Signature
+#### Firma
 
 ```go
 avax.exportKey({
@@ -174,17 +174,17 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-**Request**
+**Petición**
 
-* `username` must control `address`.
-* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+* `username` debe tener control de  `address`.
+* `address` es la dirección de la cual quieres exportar su correspondiente llave privada. Debe estar en formato hex.
 
-**Response**
+**Respuesta**
 
-* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+* `privateKey` es la cadena codificada con CB58 representando la llave privada que controla `address`. Tiene prefijo `PrivateKey-` y puede usarse para importar una llave vía `avax.importKey`.
+* `privateKeyHex` es la cadena en formato hex representando la llave privada que controla `address`. Puede usarse para importar una cuenta en Metamask.
 
-#### Example Call
+#### Llamada de Ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -199,7 +199,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -214,9 +214,9 @@ curl -X POST --data '{
 
 ### avax.getUTXOs
 
-Gets the UTXOs that reference a given address.
+Obtiene los UTXOs con referencia a cierta dirección.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 avax.getUTXOs(
@@ -241,17 +241,17 @@ avax.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `utxos` es una lista de UTXOs tal que cada UTXO hace referencia a alguna de las direcciones en `addresses`.
+* A lo más se regresaran un máximo de `limit` UTXOs. Si `limit` es omitido o mayor a 1024, entonces serán 1024.
+* Este método soporta paginación. `endIndex` denota la última UTXO regresada. Para obtener la siguiente UTXOs, utiliza el valor de `endIndex` como `startIndex` en la llamada.
+* Si `startIndex` es omitido, buscará todas las UTXOs hasta alcanzar `limit`.
+* Cuando se utiliza paginación \(ie cuando se provee un `startIndex`\),  las UTXOs no necesariamente serán únicas a lo largo de varias llamadas. Esto es, una UTXO puede aparecer en el resultado de la primer llamada y nuevamente en la segunda llamada.
+* Cuando se utiliza paginación, no está garantizada la consistencia a lo largo de multiples llamadas. Esto es, el conjunto UTXO puede haber cambiado entre llamadas.
+* `encoding` establece el formato en que se regresarán las UTXOs. Puede ser “cb58” o “hex”. Por defecto será “cb58”.
 
-#### **Example**
+#### **Ejemplo**
 
-Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+Suponer que queremos todos los UTXOs que hagan referencia a al menos una de `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
 ```cpp
 curl -X POST --data '{
@@ -270,7 +270,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-This gives response:
+esto nos da como respuesta:
 
 ```cpp
 {
@@ -294,9 +294,9 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+Finaliza la transferencia de un activo no-AVAX o AVAX que fue enviado de la X-Chain a la C-Chain. Antes de llamar este método, debes llamar al método [`avm.export`](exchange-chain-x-chain-api.md#avm-export) para iniciar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.import({
@@ -307,17 +307,17 @@ avax.import({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to` es la dirección a la cual se enviará el activo. Esta debe ser la misma en el argumento `to` en la llamada `export` correspondiente en la C-Chain's.
+* `sourceChain` es el ID o sobrenombre de la cadena desde la cual el activo será importado.  Para importar fondos desde la X-Chain, utiliza `"X"`.
+* `username` es el usuario que controla la dirección `to`.
 
-**Response**
+**Respuesta**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID` es el ID de la transacción de importación completada.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -333,7 +333,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta Ejemplo
 
 ```javascript
 {
@@ -347,11 +347,11 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
+**DESCONTINUADA—en lugar use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Finaliza una transferencia de AVAX desde la X-Chain hacia la C-Chain. Antes de llamar a este método, debes llamar el método [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) en la  X-Chain para inciar la transferencia.
 
-#### Signature
+#### Firma
 
 ```go
 avax.importAVAX({
@@ -362,17 +362,17 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**Petición**
 
-* `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to` es la dirección a la cual se enviará AVAX. Debe estar en formato hex.
+* `sourceChain` es el ID o sobrenombre de la cadena desde la cual se está importando el AVAX. Para importar fondos desde la X-Chain, utiliza `"X"`.
+* `username` es el usuario que controla la dirección `to`.
 
-**Response**
+**Respuesta**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID` es el ID de la transacción de importación completada.
 
-#### Example Call
+#### Llamada de ejemplo
 
 ```javascript
 curl -X POST --data '{
@@ -388,7 +388,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -402,9 +402,9 @@ curl -X POST --data '{
 
 ### avax.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Otorga control de una dirección a un usuario, mediante la asignación de la llave privada que controla la dirección.
 
-#### Signature
+#### Firma
 
 ```go
 avax.importKey({
@@ -414,15 +414,15 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-**Request**
+**Petición**
 
-* Add `privateKey` to `username`'s set of private keys.
+* Agrega una llave privada (`privateKey`) al conjunto de llaves privadas de un usuario (`username`)
 
-**Response**
+**Respuesta**
 
-* `address` is the address `username` now controls with the private key. It will be in hex format.
+* `address` es la dirección que ahora controla `username` con la llave privada. Debe estar en formato hex.
 
-#### Example Call
+#### Llamada de Ejemplo 
 
 ```javascript
 curl -X POST --data '{
@@ -437,7 +437,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Respuesta ejemplo
 
 ```javascript
 {
@@ -449,3 +449,8 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEyODIwNTQ5MTksMzAzNzUyNjUsOTgyMD
+k3NDA5LC0xOTg3MjM0MDQsMjY5MDA3NjA1LDE0OTcxODgwMTgs
+MTY1NzI0ODQ0MiwtMTkwMTA4NDI0OV19
+-->

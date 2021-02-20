@@ -1,12 +1,12 @@
 # Info API
 
-This API can be used to access basic information about the node.
+Esta API puede usarse para obtener información básica de un nodo.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/info
@@ -16,15 +16,15 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
+Dado el sobrenombre de una blockchain, obtiene el ID. \(Mira [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -37,7 +37,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -51,15 +51,15 @@ curl -X POST --data '{
 
 ### info.getNetworkID
 
-Get the ID of the network this node is participating in.
+Obtén el ID de la red en que el nodo está participando.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNetworkID() -> {networkID:int}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -69,7 +69,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -83,15 +83,15 @@ curl -X POST --data '{
 
 ### info.getNetworkName
 
-Get the name of the network this node is participating in.
+Obtén el nombre de la red en la que el nodo está participando.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -101,7 +101,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -115,15 +115,15 @@ curl -X POST --data '{
 
 ### info.getNodeID
 
-Get the ID of this node.
+Obtén el ID de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNodeID() -> {nodeID: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -147,15 +147,15 @@ curl -X POST --data '{
 
 ### info.getNodeIP
 
-Get the IP of this node.
+Obtén el IP de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 info.getNodeIP() -> {ip: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -165,7 +165,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -179,15 +179,15 @@ curl -X POST --data '{
 
 ### info.getNodeVersion
 
-Get the version of this node.
+Obtén la visión de este nodo.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getNodeVersion() -> {version: string}
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -197,7 +197,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
 ```cpp
 {
@@ -211,17 +211,17 @@ curl -X POST --data '{
 
 ### info.isBootstrapped
 
-Check whether a given chain is done bootstrapping
+Revisa si una cadena ha terminado de inicializar (bootstrapping).
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
-`chain` is the ID or alias of a chain.
+`chain` es el ID o alias de una cadena.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -234,7 +234,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -248,9 +248,9 @@ curl -X POST --data '{
 
 ### info.peers
 
-Get a description of peer connections.
+Obtén una descripción de las conexiones con pares.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.peers() -> 
@@ -267,7 +267,7 @@ info.peers() ->
 }
 ```
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -277,7 +277,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -317,9 +317,9 @@ curl -X POST --data '{
 
 ### info.getTxFee
 
-Get the fees of the network.
+Obtén las comisiones de la red.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 info.getTxFee() -> 
@@ -329,10 +329,10 @@ info.getTxFee() ->
 }
 ```
 
-* `creationTxFee` is the fee for creating assets on the network.
-* `txFee` is the fee for making transactions on the network.
+* `creationTxFee` es la comisión por crear activos en la red.
+* `txFee` es la comisión por hacer transferencias en la red.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -342,7 +342,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -355,3 +355,6 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIyODI0NTU4NSwyNTEzMDk3MjhdfQ==
+-->

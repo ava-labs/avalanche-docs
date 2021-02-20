@@ -1,34 +1,34 @@
 # Auth API
 
-When you run a node, you can require that API calls have an authorization token attached. This API manages the creation and revocation of authorization tokens.
+Cuando corres tu nodo, puedes requerir que las llamadas de la API tengan un token de autorización asignado. Esta API administra la creación y revoación de tokens de autorizacion.
 
-An authorization token provides access to one or more API endpoints. This is is useful for delegating access to a node’s APIs. Tokens expire after 12 hours.
+Un token de autorización provee acceso a un o más extremos de la API. Esto es útil para delegar accesso al API de un nodo. Los tokens expiran después de 12 horas.
 
-An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
+Un token de autorización es enviado en el encabezado de la las llamadas a la API. Específicamente el encabezado`Authorization` debe tener el valor `Bearer TOKEN.GOES.HERE` \(donde `TOKEN.GOES.HERE` es reemplazado con el token\).
 
-This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+Esta API es solamente alcanzable si el nodo se inició con el [argumento de línea de comando ](../references/command-line-interface.md)`--api-auth-required`. Si el nodo es iniciado sin esta caracterísitca, las llamadas a la API no requerirán tokens de autorización, entonces la API no será alcanzable. Esta API nunca requiere un token de autorización para ser alcanzado.
 
-Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+La creación de tokens de autorización debe ser permisionada. Si ejecutas tu nodo con  `--api-auth-required`, entonces también deberás especificar una contraseña para el token de autorización con el argumento  `--api-auth-password`. Debes indicar esta contraseña en función de crear/revocar un token de autorización.
 
-Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+Notar que si ejecutas tu nodo con `--api-auth-required` entonces algunas herramientas como MetaMask pueden no ser capaces de hacer llamadas al API de tu nodo debido a que no cuentan con token de autorización.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
+Esta API utiliza formato RPC `json 2.0`. Para más información en hacer llamadas JSON RPC, mira [aquí.](issuing-api-calls.md)
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/auth
 ```
 
-## Methods
+## Metodos
 
 ### auth.newToken
 
-Creates a new authorization token that grants access to one or more API endpoints.
+Crea un nuevo token de autorización que otorga el acceso a uno o más extremos de la API.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.newToken(
@@ -39,9 +39,9 @@ auth.newToken(
 ) -> {token: string}
 ```
 
-* `password` is this node’s authorization token password.
-* `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
-* `token` is the authorization token.
+* `password` es la contraseña del token de autorización de este nodo.
+* `endpoints` es una lista de extremos que pueden ser accesibles usando el token generado. Si `endpoints` contiene el elemento `"*"`, el token generado dará acceso a cualquier extremo de la API.
+* `token` es el token de autorización.
 
 #### **Example Call**
 
@@ -89,7 +89,7 @@ curl -X POST --data '{
 
 Revoke a previously generated token. The given token will no longer grant access to any endpoint. If the token is invalid, does nothing.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.revokeToken(
@@ -103,7 +103,7 @@ auth.revokeToken(
 * `password` is this node’s authorization token password.
 * `token` is the authorization token being revoked.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -117,7 +117,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```cpp
 {
@@ -131,9 +131,9 @@ curl -X POST --data '{
 
 ### auth.changePassword
 
-Change this node’s authorization token password. Any authorization tokens created under an old password will become invalid.
+Cambia la contraseña del token de autorización de este nodo. Cualquier token de autorización creado con la contraseña anterior será inválido.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 auth.changePassword(
@@ -144,10 +144,10 @@ auth.changePassword(
 ) -> {success: bool}
 ```
 
-* `oldPassword` is this node’s current authorization token password.
-* `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `oldPassword` es la contraseña actual del token de autorización del nodo.
+* `newPassword` es la nueva contraseña del token de autorización que tendrá el nodo después del llamado a la API. Debe tener entre 1 y 1024 caracteres.
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -161,7 +161,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```cpp
 {
@@ -173,3 +173,7 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjA3ODE4NjIzNywtMTIzMDIzMDI0MiwyNj
+kzODg1NiwtMTE3MTkxNTUwNSwxNTMxNTU1Mjc0XX0=
+-->

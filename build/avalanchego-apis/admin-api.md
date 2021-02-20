@@ -1,36 +1,36 @@
-# Admin API
+# API Admin
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+Esta API puede usarse para medir la salud del nodo y depurar errores. Notar que la API Admin está deshabilitada por defecto por razones de seguridad. Pata correr un nodo con la API Admin habilitada, utiliza el [argumento de línea de comandos](../references/command-line-interface.md) `--api-admin-enabled=true`.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format.
+Esta API utiliza el formato de RPC `json 2.0`.
 
 {% page-ref page="issuing-api-calls.md" %}
 
-## Endpoint
+## Endpoint / Extremo
 
 ```text
 /ext/admin
 ```
 
-## API Methods
+## Métodos de API 
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+Asigna un sobrenombre al extremo (endpoint) de la API, un extremo distinto para la API. El  extremo original seguirá funcionando. Esto modifica únicamente a este nodo; otros nodos no sabrán de este sobrenombre.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-* The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* `endpoint` es el extramo original de la API. `endpoint` debe incluir únicamente la la parte del extremo después de `/ext/`.
+* La API con sobrenombre ahora puede llamarse con `ext/alias`.
+* `alias` puede tener a lo más 512 caracteres.
 
-#### **Example Call**
+#### **Ejemplo de llamada**
 
 ```text
 curl -X POST --data '{
@@ -44,7 +44,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```text
 {
@@ -56,13 +56,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+Ahora, las llamadas a la X-Chain pueden hacerse ya sea con `/ext/bc/X` o, equivalentemente, a `/ext/myAlias`.
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+Da un sobrenombre a una cadena de bloques, un nuevo nombre podrá ser usado en cualquier lugar que es usado el ID de una cadena de bloques.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.aliasChain(
@@ -73,10 +73,10 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain` es el ID de la cadena de bloques.
+* `alias` ahora puede usarse en lugar del ID de la cadena de bloques \(en extremos de la API, por ejemplo.\)
 
-#### **Example Call**
+#### **Ejemplo de llamada**
 
 ```text
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta ejemplo**
 
 ```text
 {
@@ -102,19 +102,19 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+Ahora, en lugar de interactuar con el ID de la cadena de bloques, que es `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` haciendo llamadas API a `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, uno también puede hacer las llamadas a `ext/bc/myBlockchainAlias`.
 
 ### admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+Escribe un perfil de estadísticas mutex en`lock.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -125,7 +125,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -139,15 +139,15 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Writes a memory profile of the to `mem.profile`.
+Escribe un perfil de memoria en `mem.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -158,7 +158,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -172,15 +172,15 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Comienza el perfilamiento de utilización del CPU del nodo. Para detener, llama `admin.stopCPUProfiler`. Estando detenido, escribe el perfil en `cpu.profile`.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -191,7 +191,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -205,15 +205,15 @@ curl -X POST --data '{
 
 ### admin.stopCPUProfiler
 
-Stop the CPU profile that was previously started.
+Defiene el perfilamiento de CPU que fue iniciado previamente.
 
-#### **Signature**
+#### **Firma**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Llamada de Ejemplo**
 
 ```text
 curl -X POST --data '{
@@ -223,7 +223,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Respuesta Ejemplo**
 
 ```text
 {
@@ -235,3 +235,8 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTM3NTQxNjg2OCwtMTExMjQ3OTQxNSwtNT
+A0MzM5NTk1LC0xNjk3MTUwMTMsMTE3MjIyNDc0LC0yMTQwNTE0
+MjEwLDU1MjE3Nzc1MF19
+-->

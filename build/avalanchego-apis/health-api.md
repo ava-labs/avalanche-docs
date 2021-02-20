@@ -1,26 +1,26 @@
 # Health API
 
-This API can be used for measuring node health.
+Esta API puede ser usada para medir la salud del nodo.
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+Para obtener el código HTTP de estado de un nodo que indique el estado de salud de un nodo, haz una petición tipo `GET` a `/ext/health`. Si el nodo está saludable, regresará un código de estado `200`. Si deseas profundizar más respecto a la salud del nodo, utiliza los siguientes métodos.
 
-## Format
+## Formato
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+La API utiliza formato RPC `json 2.0`. Para más información de cómo hacer llamadas JSON RPC, mira [aquí](issuing-api-calls.md).
 
-## Endpoint
+## Endpoint / Extremos
 
 ```text
 /ext/health
 ```
 
-## Methods
+## Metodos
 
 ### health.getLiveness
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+El nodo ejecuta una serie de revisiones de salud cada 30 segundos, incluyendo una revisión de salud de cada una de las cadenas. Este método regresa la última colección de resultados del análisis de salud.
 
-#### **Signature**
+#### **Firma**
 
 ```cpp
 health.getLiveness() -> {
@@ -38,20 +38,20 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` is true if the node if all health checks are passing.
+`healthy` es verdadero (true) si todas las condiciones de salud para el nodo se cumplen.
 
-`checks` is a list of health check responses.
+`checks` es una lista de las revisiones de salud del nodo.
 
-* A check response may include a `message` with additional context.
-* A check response may include an `error` describing why the check failed.
-* `timestamp` is the timestamp of the last health check.
-* `duration` is the execution duration of the last health check, in nanoseconds.
-* `contiguousFailures` is the number of times in a row this check failed.
-* `timeOfFirstFailure` is the time this check first failed.
+* Una respuesta de revisión puede incluir un mensaje (`message`) con contexto adicional.
+* Una respuesta de revisión puede incluir un  `error` describiendo por qué falló la revisión.
+* `timestamp` es la marca de tiempo de la última revisión de salud.
+* `duration` es la duración de la última revisión de salud, en nanoseconds.
+* `contiguousFailures` número de revisiones de salud continuas que fallaron.
+* `timeOfFirstFailure` es el tiempo en que falló por primera vez la revisión
 
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
+Más información de estas medidas pueden encontrase en la documentación de la librería[go-sundheit](https://github.com/AppsFlyer/go-sundheit).
 
-#### **Example Call**
+#### **Llamada de ejemplo**
 
 ```cpp
 curl -X POST --data '{
@@ -61,9 +61,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+#### **Respuesta de ejemplo**
 
-In this example response, the C-Chain’s health check is failing.
+En la respuesta de ejemplo, la revisión de salud de la C-Chain falló.
 
 ```cpp
 {
@@ -117,3 +117,7 @@ In this example response, the C-Chain’s health check is failing.
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0NTUxNzY4ODMsLTE2MTYzMzg3OTVdfQ
+==
+-->

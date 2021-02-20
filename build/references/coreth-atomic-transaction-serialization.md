@@ -50,8 +50,7 @@ message  {
 }
 ```
 
-#### 
-Ejemplo de una Entrada de la EVM
+#### Ejemplo de una Entrada de la EVM
 
 Hagamos una entrada de la EVM:
 
@@ -132,7 +131,7 @@ Hagamos una entrada transferible:
 * `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
 * `UTXOIndex: 1`
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `Input: "If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -335,7 +334,7 @@ message TransferableOutput {
 Hagamos una una Salida Transferible:
 
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -495,9 +494,9 @@ Hagamos una Transacción Exportar:
 * **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
 * **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Inputs`**:
-  * `"Example EVMInput as defined above"`
+  * `"If your local machine has MacOS or Linux EVMInput as defined above"`
 * **`Exportedoutputs`**:
-  * `"Example TransferableOutput as defined above"`
+  * `"If your local machine has MacOS or Linux TransferableOutput as defined above"`
 
 ```text
 [
@@ -600,7 +599,7 @@ Hagamos una Transacción Importar:
 * **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
 * **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`ImportedInputs`**:
-  * `"Example TransferableInput as defined above"`
+  * `"If your local machine has MacOS or Linux TransferableInput as defined above"`
 * **`Outs`**:
   * `"Exapmle EVMOutput as defined above"`
 
@@ -883,7 +882,7 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0 = 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example EVMOutput as defined above"`
+* **`Output`**: `"If your local machine has MacOS or Linux EVMOutput as defined above"`
 
 ```text
 [

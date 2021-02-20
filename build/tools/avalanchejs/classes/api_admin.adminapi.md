@@ -153,7 +153,7 @@ ID is used.
 Name | Type | Description |
 ------ | ------ | ------ |
 `chain` | string | - |
-`alias` | string | Can now be used in place of the blockchain’s ID (in API endpoints, for example)  |
+`alias` | string | Can now be used in place of the blockchain’s ID (in API endpoints, for If your local machine has MacOS or Linux)  |
 
 **Returns:** *Promise‹boolean›*
 
@@ -298,3 +298,6 @@ Stop the CPU profile that was previously started.
 **Returns:** *Promise‹boolean›*
 
 Promise for a boolean that is true on success.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTM2MzQyODY2NV19
+-->

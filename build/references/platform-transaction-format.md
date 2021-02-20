@@ -43,7 +43,7 @@ message TransferableOutput {
 Hagamos una salida transferible:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `Output: "If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -114,7 +114,7 @@ Hagamos una entrada transferible:
 * **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
 * **`UTXOIndex`**: `0`
 * **`AssetID`**: `0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* **`Input`**: `"Example SECP256K1 Transfer Input from below"`
+* **`Input`**: `"If your local machine has MacOS or Linux SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -437,9 +437,9 @@ Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores
 * **`NetworkID`**: `12345`
 * **`BlockchainID`**: `0x000000000000000000000000000000000000000000000000000000000000000`
 * **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
+  * `"If your local machine has MacOS or Linux Transferable Output as defined above"`
 * **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+  * `"If your local machine has MacOS or Linux Transferable Input as defined above"`
 
 ```text
 [
@@ -547,7 +547,7 @@ message AddValidatorTx {
 
 Hagamos un ejemplo de una transacción agregar validador no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0c"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -681,7 +681,7 @@ message AddSubnetValidatorTx {
 
 Hagamos un ejemplo de una transacción agregar validador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0d"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -808,7 +808,7 @@ message AddDelegatorTx {
 
 Hagamos un ejemplo de una transacción agregar delegador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
+* **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0e"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
 * **`StarTime`**: `0x000000005f21f31d`
 * **`EndTime`**: `0x000000005f497dc6`
@@ -924,7 +924,7 @@ message CreateSubnetTx {
 
 Hagamos un ejemplo de una transacción crear subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
+* **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above but with TypeID set to 16”
 * **`RewardsOwner`**:
   * **`TypeId`**: 11
   * **`Locktime`**: 0
@@ -1015,9 +1015,9 @@ message ImportTx {
 
 Hagamos un ejemplo de una transacción importar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
+* **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above with TypeID set to 17”
 * **`SourceChain`**:
-* **`Ins`**: “Example SECP256K1 Transfer Input as defined above”
+* **`Ins`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1110,9 +1110,9 @@ message ExportTx {
 
 Hagamos un ejemplo de una transacción exportar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
+* `BaseTx`: “If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to 18
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: “If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
 
 ```text
 [
@@ -1425,7 +1425,7 @@ Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0x00000000
 * **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`Output`**: `"If your local machine has MacOS or Linux SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1506,7 +1506,7 @@ Hagamos una StakeableLockIn con:
 
 * **`TypeID`**: 21
 * **`Locktime`**: 54321
-* **`TransferableIn`**: “Example SECP256K1 Transfer Input as defined above”
+* **`TransferableIn`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Input as defined above”
 
 ```text
 [
@@ -1580,7 +1580,7 @@ Hagamos una StakeableLockOut con:
 
 * **`TypeID`**: 22
 * **`Locktime`**: 54321
-* **`TransferableOutput`**: `"Example SECP256K1 Transfer Output from above"`
+* **`TransferableOutput`**: `"If your local machine has MacOS or Linux SECP256K1 Transfer Output from above"`
 
 ```text
 [
@@ -1614,5 +1614,4 @@ MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC
 0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUy
 NTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NT
 k3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
-
 -->
