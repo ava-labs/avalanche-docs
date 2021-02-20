@@ -1,134 +1,140 @@
-# Community
+# Comunidad
 
-## Resources
 
-[**Avalanche Press Kit and Brand Guidelines**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): the official press kit and brand guidelines with logos and fonts
+## Recursos
 
-### Websites and Socials
+[**Kit de prensa de Avalanche y Lineamientos de la Marca**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): El kit de prensa oficial y las directrices de la marca con los logotipos y las fuentes
 
-[**Website**](https://avax.network): the official Ava Labs and Avalanche website.
+### Sitio Web y Redes Sociales
 
-[**GitHub**](https://github.com/ava-labs): the official Ava Labs GitHub hosting all Avalanche public repos.
+[**SItio Web**](https://avax.network): El sitio web oficial de Ava Labs y Avalanche.
 
-[**Discord**](https://chat.avax.network): the official Avalanche Discord for developers and enthusiasts to engage in focused discussions.
+[**GitHub**](https://github.com/ava-labs): El GitHub oficial de Ava Labs que aloja todos los repositorios públicos de Avalanche.
 
-[**Twitter**](https://twitter.com/avalancheavax): the official Avalanche Twitter for all major news and updates regarding Avalanche and its ecosystem.
+[**Discord**](https://chat.avax.network): Discord oficial de Avalanche para que los desarrolladores y entusiastas participen en discusiones enfocadas.
 
-[**Forum**](https://forum.avax.network): the official Avalanche Forum for technical discussions related to Avalanche and its community
+[**Twitter**](https://twitter.com/avalancheavax): El Twitter oficial de Avalanche para todas las noticias y actualizaciones importantes sobre Avalanche y su ecosistema.
 
-[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): a community growth platform building an inclusive environment for all aspects of Avalanche. From expansion efforts to open-source development, members directly contribute to vital research, education, and engineering initiatives to earn AVAX tokens.
+[**Forum**](https://forum.avax.network): El Foro oficial de Avalanche para las discusiones técnicas relacionados con Avalanche y su comunidad
 
-[**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
+[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): Una plataforma para el crecimiento de la comunidad que construye un ambiente inclusivo para todos los aspectos de Avalanche. Desde los esfuerzos de expansión hasta el desarrollo de código abierto, los miembros contribuyen directamente a las iniciativas cruciales de investigación, educación e ingeniería para ganar tokens de AVAX.
 
-### Ecosystem Partners
+[**Esta Semana en Avalanche**](https://weavax.substack.com/): Un boletín semanal independiente de noticias, eventos y acontecimientos de Avalanche producido por un miembro de la comunidad.
 
-[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): training and education platform for both technical developers and business entrepreneurs to learn about blockchain technology.
+### Socios del Ecosistema
 
-[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): is an organization committed to promoting blockchain within the game industry. The BGA also provides an open forum for individuals and companies to share knowledge and collaborate, create common standards, establish best practices, and network.
+[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): Plataforma de capacitación y educación para que tanto los desarrolladores técnicos como los empresarios aprendan sobre la tecnología de las blockchain.
 
-[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
+[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): Es una organización comprometida con la promoción de la blockchain dentro de la industria de los juegos. La BGA también proporciona un foro abierto para que los individuos y las empresas compartan conocimientos y colaboren, creen estándares comunes, establezcan las mejores prácticas y establezcan redes.
 
-[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
+[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): Un think tank global que se centra en las implicaciones estratégicas de la tecnología de las blockchain en los negocios, el gobierno y la sociedad. Entre sus miembros se encuentran más de 60 de las principales empresas, gobiernos e instituciones académicas del mundo.
 
-### Education
+[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): Una organización global que acelera el desarrollo del ecosistema de la blockchain en la región de América Latina y el Caribe. Ahora tiene 25 miembros, incluyendo a Consensys, MIT Media Lab, Enterprise Ethereum Alliance, y el Instituto de Investigación Blockchain.
 
-[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+### Educación
+
+[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): Un miembro de la comunidad que produce videotutoriales de "[Cómo Ejecutar Avalanche en casa](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" .
 
 ### Exchanges
 
-\*\*\*\*[**Binance**](https://www.binance.com): the world's \#1 crypto exchange by trading volume.
+\*\*\*\*[**Binance**](https://www.binance.com): Crypto exchange \#1 del mundo  por volumen de comercio.
 
-\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
+\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): Una plataforma de comercio de activos digitales que ofrece servicios de vanguardia para los comerciantes de divisas digitales y los proveedores de liquidez mundial.
 
-\*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
+\*\*\*\*[**FTX**](https://ftx.com): Un exchange de derivados de cryptocurrency.
 
-[**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+[**JellySwap**](https://jelly.market/): Una aplicación descentralizada de intercambio de cross-chain que permite la transferencia de valor entre diferentes redes.
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
+\*\*\*\*[**Voyager**](https://www.investvoyager.com): El crypto broker sin comisiones \#1 en los Estados Unidos.
 
-### Explorers
+### Exploradores
 
-[**Avalanche Explorer**](https://explorer.avax.network): an analytics tool that enables people to search the Avalanche platform for transactions, addresses, and other platform activities.
+[**Avalanche Explorer**](https://explorer.avax.network): Una herramienta analítica que permite a la gente buscar en la plataforma Avalanche transacciones, direcciones y otras actividades de la plataforma.
 
-[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
+[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): Un explorador independiente de blockchains que permite a los usuarios navegar por las blockchains, transacciones, validadores, delegadores, activos y smart contracts en Avalanche. También cuenta con un Programa de Validación de Detalle de Activos para añadir datos ricos a los activos en Avascan.
 
-[**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
+[**Vscout**](https://vscout.io): Una herramienta analítica para explorar subnets de Avalanche, staking y validadores.
 
-### Miscellaneous
+### Misceláneos
 
-[**AVAXAlert**](https://avaxalert.com): Receive notifications directly into your email address when transactions occur on your AVAX wallet.
+[**AVAXAlert**](https://avaxalert.com): Recibe notificaciones directamente en tu dirección de correo electrónico cuando ocurran transacciones en tu Wallet de AVAX.
 
 ### Non-Fungible Tokens \(NFTs\)
 
-[**Polyient Games**](https://www.polyient.games): an investment firm focused on the non-fungible token \(NFT\) and blockchain gaming industries. They invest in startups that are building the infrastructure and applications that will scale the NFT asset class.
+[**Polyient Games**](https://www.polyient.games): Una firma de inversiones enfocada en  los non-fungible token \(NFT\) y las industrias del juego basados en la blockchain. Invierten en startups que están construyendo la infraestructura y las aplicaciones que escalarán la clase de activos NFT.
 
-### **Prediction Markets**
+### **Mercados de predicción**
 
-\*\*\*\*[**Prosper**](https://prosper.so/)**:** a non-custodial, cross-chain prediction market and hedging platform. Prosper is developing a unique technology of on-chain liquidity aggregation to solve problems of prediction markets.
+\*\*\*\*[**Prosper**](https://prosper.so/)**:** Un mercado de predicción de cross-chain y una plataforma de cobertura no custodiada. Prosper está desarrollando una tecnología única de agregación de liquidez en cadena para resolver los problemas de los mercados de predicción.
 
-### Security Tokens
+### Tokens de Seguridad
 
-[**Securitize**](https://www.securitize.io/): the industry-leading primary issuance and compliance platform for digital securities \(security tokens\) and a SEC-registered transfer agent.
+[**Securitize**](https://www.securitize.io/): La principal plataforma de emisión y cumplimiento de valores digitales \(tokens de seguridad)\ de la industria y un agente de transferencia registrado en la SEC.
 
 ### Stablecoins
 
-[**BiLira**](https://www.bilira.co): a stable cryptocurrency that is backed by the Turkish Lira.
+[**BiLira**](https://www.bilira.co): Una criptodivisa estable que está respaldada por la lira turca.
 
-\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
+\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): El primer y único Stablecoin con respaldo completo atestiguado independientemente en vivo y on-chain
 
-### Trading Bots
+### Bots de Trading
 
-[**Hummingbot**](https://hummingbot.io/)**:** a community-driven, open-source project that aims to democratize algorithmic trading by making sophisticated high-frequency trading strategies freely available to everyone in the world.
+[**Hummingbot**](https://hummingbot.io/)**:** Un proyecto de código abierto impulsado por la comunidad que tiene por objeto democratizar el comercio algorítmico haciendo que las sofisticadas estrategias de comercio de alta frecuencia estén libremente disponibles para todos en el mundo.
 
 ### Wallets
 
-[**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
+[**Avalanche Wallet**](https://wallet.avax.network): La Wallet  simple, segura y no custodiada de Avalanche para almacenar tus bienes de Avalanche.
 
-[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
+[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** La hardware wallet original hecha por Ledger. Comienza fácilmente tu viaje en las crypto: compra crypto, asegura tus activos, y gestionalos en una sola aplicación.
 
-## Developer Tools
+## Herramientas para Desarrolladores
 
-### Blockchain Infrastructure and Node Services
+### Infraestructura de Blockchain y Servicios de Nodos
 
-[**Allnodes**](https://www.allnodes.com)**:** a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
+[**Allnodes**](https://www.allnodes.com)**:** Una plataforma sin custodia para alojar masternodos y nodos completos, así como servicios completos de staking.
 
-\*\*\*\*[**Ankr**](https://www.ankr.com): Web3 insfrastructure for all
+\*\*\*\*[**Ankr**](https://www.ankr.com): La infraestructura de la Web3 para todos
 
-[**AVADO**](https://ava.do/)**:** plug and play hardware blockchain nodes that enable individuals and developers to easily and privately access Web3 applications, participate in staking, and run incentivized Dapps to earn crypto.
+[**AVADO**](https://ava.do/)**:** Nodos de blockchain de hardware plug and play que permiten a los individuos y a los desarrolladores acceder de forma fácil y privada a las aplicaciones Web3, participar en el staking y ejecutar Dapps incentivadas para ganar criptomonedas
 
-[**Bloq**](https://www.bloq.com): managed infrastructure for building on blockchain networks. You get a single interface to an expanding set of enterprise-grade infrastructure services for building on multiple blockchain networks.
+[**Bloq**](https://www.bloq.com): Infraestructura gestionada para construir sobre redes de blockchain. Tiene una interfaz única para un conjunto cada vez mayor de servicios de infraestructura de nivel empresarial para construir sobre múltiples redes de blockchain.
 
-[**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
+[**DataHub by Figment**](https://figment.io/datahub/avalanche/): Con DataHub, los desarrolladores de Avalanche ya no tienen que preocuparse por la gestión de la infraestructura, ya que ofrecemos acceso directo a las API de Avalanche a través de nuestra infraestructura de nodos completos de alta disponibilidad.
 
 ### Oracles
 
-[**Chainlink**](https://chain.link/): market-leading price and data oracles for decentralized applications and the migration of real-world assets onto Avalanche.
+[**Chainlink**](https://chain.link/): Oracles de datos con el precio lider del mercado para aplicaciones descentralizadas y la migración de los activos del mundo real a Avalanche.
 
 ### Software Development Kits \(SDKs\)
 
-[**Magic \(formerly Fortmatic\)**](https://magic.link/): passwordless logins and more user-friendly key management in crypto securing over 20 million user authentications per month. Used by over 6,500 developers since launch, including established DeFi organizations like Uniswap, Aave, Augur, Bancor, and Zerion.
+[**Magic \(formerly Fortmatic\)**](https://magic.link/): Inicios de sesión sin contraseña y una gestión de claves más fácil de usar en crypto asegurando más de 20 millones de autenticaciones de usuarios al mes. Utilizado por más de 6.500 desarrolladores desde su lanzamiento, incluyendo organizaciones de DeFi establecidas como Uniswap, Aave, Augur, Bancor y Zerion.
 
-[**Torus**](https://tor.us/): DirectAuth SDK simplifies onboarding by enabling users to create an Avalanche Wallet with their existing Google accounts, and enables one-click logins to Avalanche applications. Users can customize their wallets to take ownership of private keys as they feel more comfortable with the technology.
+[**Torus**](https://tor.us/): El SDK de DirectAuth simplifica la incorporación permitiendo a los usuarios crear una Wallet de Avalanche con sus cuentas existentes de Google, y permite el acceso con un solo clic a las aplicaciones de Avalanche. Los usuarios pueden personalizar sus Wallets para tomar posesión de las private keys a medida que se sientan más cómodos con la tecnología.
 
-### Staking Services
+### Servicios de Staking 
 
-[**ablock**](https://ablock.io/avalanche): delegated staking services.
+[**ablock**](https://ablock.io/avalanche): Servicios de staking delegados.
 
-[**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): delegated staking services offered by independent blockchain explorer.
+[**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): Servicios de staking delegados ofrecidos por exploradores de blockchain independientes.
 
-[**Figment**](https://figment.io/): simple and secure staking as a service.
+[**Figment**](https://figment.io/): Servicios simples y seguros de staking.
 
-[**P2P**](https://p2p.org/avalanche): delegated staking services.
+[**P2P**](https://p2p.org/avalanche): Servicios de staking delegados.
 
-[**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): staking calculator for Avalanche.
+[**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): Calculadora de staking de Avalanche.
 
-### Testing Tools and Frameworks
+### Herramientas de Prueba and Frameworks
 
-[**Halborn**](https://halborn.com/): an award-winning team of ethical hackers that work with blockchain projects to defend against cyber attacks. The team at Halborn enhanced the security of the Avalanche Wallet, and also offers smart contract auditing.
+[**Halborn**](https://halborn.com/): Un galardonado equipo de hackers éticos que trabajan con proyectos de blockchain para defenderse de los ataques cibernéticos. El equipo de Halborn mejoró la seguridad de la Wallet de Avalanche, y también ofrece auditoría de smart contracts.
 
-[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
+[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): Plataforma de pruebas completa e integral dedicada a ayudar a los desarrolladores a construir tecnologías antifragiles en Avalanche.
 
-[**Quantstamp**](https://quantstamp.com/): blockchain security firm offering audits and consulting for smart contracts, off-chain applications, networking, and front-end interfaces to enhance the security of decentralized applications.
+[**Quantstamp**](https://quantstamp.com/): Empresa de seguridad Blockchain que ofrece auditorías y consultoría para smart contracts, aplicaciones off-chain, redes e interfaces front-end para mejorar la seguridad de las aplicaciones descentralizadas.
 
-[**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
+[**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" ayuda a los desarrolladores a automatizar el rendimiento práctico y las pruebas de seguridad de los sistemas Web3.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTQ4MjU3NzA3OCwxMTkyNTI3MDYxLDIwMz
+g3NTIzNDEsMzcxODkyMDM1LC0xMDMxMDQ0NTQxLDU5MTkwMTg4
+NSwxMjI0MzQ2NTY2XX0=
+-->

@@ -1,36 +1,36 @@
-# Create a Blockchain
+# Crea una Blockchain
 
-## Introduction
+## Introducción
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche currently supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) and the Timestamp VM.
+Una de las características principales de Avalanche es la capacidad de crear nuevas blockchains. Avalanche actualmente soporta la creación de nuevas instancias del [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) y el Timestamp VM.
 
-In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
+En este tutorial, crearemos una blockchain creando una nueva instancia de la AVM.
 
-### Prerequisites
+### Requisitos Previos
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../getting-started.md) tutorial.
+Necesitarás un nodo de ejecución, un usuario en el nodo y algo de AVAX en la dirección controlada por el usuario. Todo eso está cubierto en el tutorial de como [Ejecutar un Nodo de Avalanche](../../getting-started.md).
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+A continuación, necesitas que tu nodo sea un validador en la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Puedes averiguar cómo hacerlo en el tutorial [Añadir un Validador](../nodes-and-staking/add-a-validator.md). Se recomienda que lo haga [con llamados API](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), ya que esa es la forma en que interactuará con su nodo en el resto de este tutorial.
 
-## Create the Subnet
+## Crea la Subnet
 
-Every blockchain is validated by a [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Cada blockchain ese validada por una [subnet](../../../learn/platform-overview/#subnets). Antes de que puedas crear una blockchain, necesitarás una subnet para validarla. También puedes usar una subnet que ya exista si tienes un número suficiente de sus control keys.
 
 {% page-ref page="create-a-subnet.md" %}
 
-### Add Validators to the Subnet
+### Añadir Validadores a la Subnet
 
-The subnet needs validators in it to, well, validate blockchains.
+La subnet necesita validadores en ella para, bueno, validar las blockchains.
 
-Make sure the subnet that will validate your blockchain has at least `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
+Asegúrate de que la subnet que validará tu blockchain tenga al menos `snow-sample-size` validadores en ella. \(Recuerde que `snow-sample-size` es uno de los [argumentos de la línea de mando](../../references/command-line-interface.md) cuando se inicia un nodo. Su valor por defecto es 20.\)
 
 {% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
-### Create the Genesis Data <a id="create-the-genesis-data"></a>
+### Crear los Datos Génesis <a id="create-the-genesis-data"></a>
 
-Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
+Cada blockchain tiene algún estado génesis cuando se crea. Cada máquina virtual tiene un método API estático llamado `buildGenesis` que toma una representación JSON del estado de génesis de una blockchain y devuelve la representación en bytes de ese estado. \(Esto no es cierto para algunas máquinas virtuales, como la Plataforma VM, porque no permitimos la creación de nuevas instancias.\)
 
-The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
+La [Documentación de las AVM’s ](../../avalanchego-apis/exchange-chain-x-chain-api.md) especifica que el argumento para [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis) should look like this:
 
 ```cpp
 {
@@ -82,7 +82,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
+Para crear la representación de bytes de este estado génesis, ejecuta [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-buildgenesis). Su mensaje debe parecerse al de abajo. Ten en cuenta que esto se ejecuta al punto final de la API estática de la AVM, `/ext/vm/avm`.
 
 ```cpp
 curl -X POST --data '{
@@ -143,7 +143,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-This returns the byte representation of your blockchain’s genesis state:
+Esto devuelve la representación en bytes del estado génesis de su blockchain:
 
 ```cpp
 {
@@ -155,9 +155,9 @@ This returns the byte representation of your blockchain’s genesis state:
 }
 ```
 
-## Create the Blockchain
+## Crea la Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
+Ahora vamos a crear la nueva blockchain. Para eso, ejecutamos[`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Su respuesta debería ser como la de abajo. Tienes que cambiar `subnetID` a la subnet que validará su blockchain, y suministrar un `username` que controle un número suficiente de las control keys de la subnet. Como recordatorio, puedes averiguar cuál es el límite de la subnet y las control keys ejecutando [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
 ```cpp
 curl -X POST --data '{
@@ -175,7 +175,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the transaction ID:
+La respuesta contiene el ID de la transacción:
 
 ```cpp
 {
@@ -188,11 +188,11 @@ The response contains the transaction ID:
 }
 ```
 
-### Verify Success <a id="verify-success"></a>
+### Comprobando que fué exitoso <a id="verify-success"></a>
 
-After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
+Después de unos segundos, la transacción para crear nuestra blockchain debería haber sido aceptada y la blockchain debería existir \(asumiendo que la solicitud estaba bien formada, etc.\)
 
-To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
+Para comprobar, ejecuta [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). Esto genera una lista de todas las blockchains existentes.
 
 ```cpp
 curl -X POST --data '{
@@ -203,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that the blockchain was created:
+La respuesta confirma que la blockchain fue creada:
 
 ```cpp
 {
@@ -252,14 +252,15 @@ The response confirms that the blockchain was created:
 }
 ```
 
-### Interact With the New Blockchain <a id="interact-with-the-new-blockchain"></a>
+### Interactúa con la Nueva Blockchain <a id="interact-with-the-new-blockchain"></a>
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are two small differences:
+Puedes interactuar con esta nueva instancia de la AVM casi de la misma manera que interactuarías con la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). 
+Hay dos pequeñas diferencias:
 
-* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
-* Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
+* El punto final de la API de su blockchain es `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
+* Las direcciones están predefinidas con `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` en lugar de `X-`.
 
-In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
+En los datos génesis especificamos que la dirección `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` tiene 100 000 unidades del activo con alias `asset1`. Verifiquemos eso con:
 
 ```cpp
 curl -X POST --data '{
@@ -282,3 +283,7 @@ curl -X POST --data '{
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNDMyMDMwMjgwLC0yMTM4MjEyMzU4LDExMT
+IwMjcxODZdfQ==
+-->

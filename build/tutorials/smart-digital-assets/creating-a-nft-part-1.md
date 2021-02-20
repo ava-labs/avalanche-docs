@@ -1,22 +1,22 @@
-# Create an NFT \(Part 1\)
+# Crear un NFT \(Parte 1\)
 
-## Introduction
+## Introducción
 
-On Avalanche, digital goods are represented as tokens. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
+En Avalanche, los bienes digitales se representan como tokens. Algunos tokens son **fungibles**, lo que significa que un token es intercambiable por cualquier otro token. Las monedas del mundo real son fungibles, por ejemplo; un billete de 5 dólares se trata como si fuera igual a cualquier otro billete de 5 dólares.
 
-Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is unique and not perfectly interchangeable for any other NFT. For example, there could be an NFT that represents ownership of a real-world piece of art; each piece of art, like each NFT, is unique. NFTs represent digital scarcity and may prove to have even greater utility than traditional fungible tokens.
+Avalanche también soporta los tokens no fungibles \(NFTs\). Por definición, cada NFT es única y no es perfectamente intercambiable con ninguna otra NFT. Por ejemplo, podría haber una NFT que represente la propiedad de una pieza de arte del mundo real; cada pieza de arte, como cada NFT, es único. Los NFT's representan la escasez digital y pueden resultar incluso más útiles que los tradicionales tokens fungibles.
 
-In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial, we’ll create a custom NFT family using [AvalancheJS](../../tools/avalanchejs/) and explore NFTs in more detail.
+En este tutorial, crearemos y enviaremos NFTs usando la API de AvalancheGo. En un futuro tutorial, crearemos una familia de NFT personalizada usando [AvalancheJS](../../tools/avalanchejs/).
 
-## Requirements
+## Requisitos
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+Haber completado [Ejecutar un Nodo de Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/). en este tutorial usaremos [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados API.
 
-## Create the NFT Family
+## Crear la Familia NFT
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Cada NFT pertenece a una **familia**, la cual tiene un nombre y un símbolo. cada familia está compuesta por  **grupos**. El número de grupos de la familia es especificado cuando esta se crea. Nuestro NFT existirá en la  X-Chain, así que para crear la familia de nuestro NFT ejecutaremos [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
-The signature for this method is:
+La firma de este método es:
 
 ```cpp
 avm.createNFTAsset({
@@ -37,25 +37,25 @@ avm.createNFTAsset({
 }
 ```
 
-### **Method**
+### **Método**
 
 * [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)
 
-**Parameters**
+**Parámetros**
 
-* `name` is a human-readable name for our NFT family. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this NFT family. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting operation.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to any of your addresses.
+* `name` es un nombre legible por los humanos para nuestra familia NFT. No es necesariamente único. Entre 0 y 128 caracteres.
+* `symbol` es un símbolo abreviado para esta familia de NFT. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
+* `minterSets` es una lista donde cada elemento especifica que el `threshold` de las direcciones en `minters` pueden juntos acuñar más del activo firmando una operación de acuñación.
+* Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. El `username` y `password` denotan al usuario que paga la comisión.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a cualquiera de tus direcciones.
 
-### **Response**
+### **Respuesta**
 
-* `assetID` is the ID of the new asset that we’ll have created.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID` es el ID del nuevo activo que hemos creado.
+* `changeAddr` en el resultado es la dirección donde se envió el cambio.
 
-Later in this example, we’ll mint an NFT, so be sure to replace at least 1 address in the minter set with an address which your user controls.
+Más tarde en este ejemplo, acuñaremos un NFT, así que asegúrate de reemplazar al menos 1 dirección del minter set con una dirección que tu usuario controle.
 
 ```cpp
 curl -X POST --data '{
@@ -79,7 +79,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {
@@ -92,30 +92,30 @@ The response should look like this:
 }
 ```
 
-A couple things to note: first, in addition to creating an NFT family, AvalancheGo’s [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset) also creates a group for each of the `minterSets`, which are passed in. For example, if `minterSets` has 3 elements, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
+Un par de cosas a tener en cuenta: primero, además de crear una familia NFT, en AvalancheGo [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset) también crea un grupo para cada uno de los `minterSets` . Por ejemplo, si `minterSets` tiene 3 elementos, la familia NFT tiene 3 grupos. En segundo lugar, tome nota del `assetID` el cual es proporcionado en la respuesta. Este es el `assetID` de la familia NFT que acabamos de crear, la necesitarás luego para emitir NFTs.
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+Tal vez se pregunte por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Seguridad:** si sólo una dirección puede acuñar más del activo, y se pierde la clave privada de esa dirección, no se podrán acuñar más unidades. Del mismo modo, si sólo una dirección puede acuñar más del activo, nada impide que el titular de esa dirección acuñe unilateralmente todo lo que quiera.
+* **Flexibilidad:** es agradable poder codificar la lógica como, "Alice puede acuñar unilateralmente más unidades de este activo, o 2, en el cual Dinesh, Ellin y Jamie pueden juntos acuñar más".
 
-## Get UTXOs for NFT
+## Obtener UTXOs para NFT
 
-NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) or [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
+Las salidas de la NFT no aparecen en los llamados a [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) o [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). Para ver tus NFTs, tienes que hacer un llamado a [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y luego analizar el UTXO para comprobar el tipo de ID. Las salidas de Acuñación NFT tienen un tipo de ID de `00 00 00 0a` en hexadecimal \(`10` en decimal\) y las salidas de transferencia de NFT tienen un tipo de ID de `00 00 00 0b` en hexadecimal \(`11` en decimal\).
 
-### **Method**
+### **Método**
 
 * [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)
 
-### **Parameters**
+### **Parámetros**
 
-* `addresses` are the addresses to fetch UTXOs for.
+* `addresses` son las direcciones para buscar UTXOs.
 
-**Response:**
+**Respuesta:**
 
-* `numFetched` is the total number of UTXOs in the response.
-* `utxos` is an array of CB58 encoded strings.
-* `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
+* `numFetched` es el numero total de UTXOs en la respuesta.
+* `utxos` es un conjunto de cadenas codificadas CB58.
+* `endIndex` este método permite la paginación. `endIndex` denota el ultimo UTXO retornado.
 
 ```cpp
 curl -X POST --data '{
@@ -128,7 +128,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains a list of UTXOs:
+La respuesta contiene una lista de UTXOs:
 
 ```cpp
 {
@@ -148,19 +148,19 @@ The response contains a list of UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) retorna 2 UTXOs. Tomaremos la primera y la decodificaremos para confirmar que es un [Una Salida de Acuñación NFT.](../../references/avm-transaction-serialization.md#nft-mint-output) Primero, convertimos la cadena codificada Base58Check que se recibe de [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) a hex. La siguiente cadena de [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) :
 
 ```cpp
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
-is expressed in hexadecimal as:
+Se expresa en hexadecimal como:
 
 ```cpp
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](../../references/avm-transaction-serialization.md):
+Ahora, podemos descomponer el hex en los componentes individuales de la UTXO refiriéndonos al [formato de serialización de transacciones](../../references/avm-transaction-serialization.md):
 
 ```cpp
 NFT Mint Output
@@ -177,28 +177,28 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
+Ten en cuenta que el `TypeID` es`00 00 00 0a` el cual es el tipo correcto de identificación para una salida de acuñación NFT. También hay que tener en cuenta que el `GroupID` es `00 00 00 00`. Este `GroupID` fué creado basado en los números de `MinterSets` que pasamos a `avm.createNFTAsset`.
 
-## Mint the Asset
+## Acuñar el Activo
 
-Now that we have an NFT family and a group for the single `MinterSet` we’re able to create NFTs belonging to this group. To do that we call [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft):
+Ahora que tenemos una familia de NFT y un grupo para el `MinterSet` somos capaces de crear NFTs pertenecientes a este grupo. Para hacer eso ejecutamos [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft):
 
-### **Method**
+### **Método**
 
 * [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft)
 
-### **Parameters**
+### **Parámetros**
 
-* `assetID` is the ID of the NFT family.
-* `payload` is an arbitrary CB58 encoded payload of up to 1024 bytes. In Part 2 \(**COMING SOON**\) we’ll explore creating a protocol around the NFT payload. For this tutorial, the payload is the string “AVA Labs”.
-* `to` is the address that will receive the newly minted NFT. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted NFT.
-* `username` must be a user that holds keys giving it permission to mint more of this NFT. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
-* `password` is the valid password for `username`
+* `assetID` es el ID de la familia NFT.
+* `payload` es una carga útil arbitraria codificada en CB58 de hasta 1024 bytes. En la Parte 2 \(**PRONTO**\), exploraremos la creación de un protocolo alrededor de la carga útil de la NFT. Para este tutorial, la carga útil es la cadena "AVA Labs".
+* `to` es la dirección que recibirá el recién acuñado NFT. Reemplaza `to` con una dirección que tu usuario controle para que más tarde puedas enviar algunos de los recién acuñados NFT.
+* `username` debe ser un usuario que tenga control keys que le permitan acuñar más de este NFT. Es decir, controla por lo menos _`threshold`_  control keys para uno de los minter sets que especificamos arriba.
+* `password` es la contraseña válida para `username`
 
-### **Response**
+### **Respuesta**
 
-* `txID` is the transaction ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID` es el ID de la transacción.
+* `changeAddr` esta es la dirección donde se envió el cambio.
 
 ```cpp
 curl -X POST --data '{
@@ -215,8 +215,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
-
+La respuesta contiene el ID de la transacción:
 ```cpp
 {
     "jsonrpc":"2.0",
@@ -228,7 +227,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
+Como en el paso anterior, podemos confirmar que un NFT fué acuñado ejecutando [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) y analizando el UTXO para confirmar que tenemos una [salida de Transferencia NFT](../../references/avm-transaction-serialization.md#nft-transfer-output).
 
 ```cpp
 curl -X POST --data '{
@@ -241,7 +240,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+Esto debería darnos:
 
 ```cpp
 {
@@ -261,21 +260,22 @@ This should give:
 }
 ```
 
-As in the previous step, we can now decode the CB58 encoded UTXO to hexidecimal and then decompose it to its individual components to confirm that we have the correct UTXO and type.
 
-First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following CB58 string:
+Como en el paso anterior, ahora podemos decodificar la UTXO codificada en CB58 a hexadecimal y luego descomponerla en sus componentes individuales para confirmar que tenemos la UTXO y el tipo correctos.
+
+Primero, convertimos la cadena codificada Base58Check que se se proporciona desde [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) a hex. La siguiente cadena de CB58:
 
 ```cpp
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
 ```
 
-is expressed in hexadecimal as:
+Expresada en hexadecimal como:
 
 ```cpp
 00 00 7d 07 0d 1e fe a6 4e 45 09 05 c6 11 ee b1 cf 61 9f 21 22 eb 17 db aa ea 9a fe 2d ff 17 be 27 6b 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0b 00 00 00 00 00 00 00 08 41 56 41 20 4c 61 62 73 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components:
+Ahora, podemos descomponer el hex en los componentes UTXO’s individuales:
 
 ```cpp
 NFT Mint Output
@@ -294,28 +294,28 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output). Also, note that the Payload is included.
+Ten en cuenta que el `TypeID` is `00 00 00 0b` el cual es el tipo correcto de identificación para una [Salida de Transferencia NFT](../../references/avm-transaction-serialization.md#nft-transfer-output). Además, ten en cuenta que la carga útil está incluida.
 
-## Send the NFT
+## Enviar el NFT
 
-Now, you can send the NFT to anyone. To do that, use AvalancheGo’s [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft) API method.
+Ahora puedes enviar el NFT a quién quieras. Para hacer eso usa el Método API [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft) de AvalancheGo.
 
-**Method**
+**Método**
 
 * [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft)
 
-**Parameters**
+**Parámetros**
 
-* `assetID` is the ID of the NFT we’re sending.
-* `to` is the address that will receive the newly minted NFT.
-* `groupID` is the NFT group from which to send the NFT.
-* `username` is the user that controls the NFT.
-* `password` is the valid password for `username`
+* `assetID` es la ID del NFT que enviaremos.
+* `to` es la dirección que va a recibir el NFT que creamos.
+* `groupID` es el grupo NFT desde el cual se envía el NFT.
+* `username` es el usuario que controla el NFT.
+* `password` es la contraseña valida para `username`
 
-**Response**
+**Respuesta**
 
-* `txID` is the transaction ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID` es el ID de la transacción.
+* `changeAddr` esta es la dirección donde se envió el cambio
 
 ```cpp
 curl -X POST --data '{
@@ -332,7 +332,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our NFT Transfer Operation was successful:
+La respuesta confirma que la operación de transferencia NFT fué exitosa
 
 ```cpp
 {
@@ -344,17 +344,19 @@ The response confirms that our NFT Transfer Operation was successful:
     }
 }
 ```
+Puedes ejecutar [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) en la dirección a la que enviaste el NFT y descomponer la UTXO retornada, después de convertir de CB58 a hex, para confirmar que hay un UTXO con type id `00 00 00 0b` en hex o `11` en decimal.
 
-You can call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
+## Concluimos!
 
-## Wrapping up
+La tecnología de blockchain y los tokenomics representan una nueva forma radical de representar los activos digitales. Los tokens no fungibles permiten que los escasos activos se conviertan en tokens. En este tutorial, nosotros:
 
-Blockchain technology and tokenomics represent a radical new way of representing digital assets. Non-fungible tokens allow scarce assets to be tokenized. In this tutorial, we:
+* Usamos `createNFTAsset` para crear una familia y un grupo de activos no fungibles.
+* Usamos `mintNFT` para acuñar unidades de un NFT al grupo.
+* Usamos `getUTXOs` para buscar UTXOs para una dirección. Luego convertimos la UTXO codificada en CB58 a hexadecimal y la descompusimos en sus componentes individuales.
+* Usamos `sendNFT` para transferir NFT's entre direcciones.
 
-* Used `createNFTAsset` to create a non-fungible asset family and group.
-* Used `mintNFT` to mint units of an NFT to the group.
-* Used `getUTXOs` to fetch UTXOs for an address. We then converted the CB58 encoded UTXO to hex and decomposed it to its individual components.
-* Used `sendNFT` to transfer NFTs between addresses.
-
-In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
-
+En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4NTE4MDMzOTIsLTUyNjEyMTQwNiwxOD
+Q3NjUyODY3LC0xMjM4NzkzNjYxXX0=
+-->

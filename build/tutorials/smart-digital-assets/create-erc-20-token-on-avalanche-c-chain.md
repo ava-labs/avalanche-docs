@@ -1,26 +1,26 @@
 ---
-description: 'Provided by Community member: Murat Çeliktepe'
+descripcción: "Proporcionado por un miembro de la Comunidad": Murat Çeliktepe'
 ---
 
-# Create an ERC-20 Token
+# Crear un Token ERC-20
 
-ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
+Los tokens  ERC-20 son el concepto más fundamental y esencial en Ethereum. A medida que la comunidad de Avalanche y el ecosistema crecen, se implementarán nuevos casos de uso y proyectos que están funcionando en Ethereum o en diferentes cadenas. El estándar de tokens que se utilizaría para los proyectos no es específico y cada uno puede crear su propio estándar y su propio token.
 
-Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
+Por lo tanto, crearemos nuestro propio token ERC-20 y lo acuñaremos en cualquier dirección que queramos. El token se generará en la C-Chain de Avalanche y será accesible en esa cadena.
 
-The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
+Lo que tenemos que considerar principalmente es que desplegaremos un smart contract escrito con Solidity en Avalanche. Esta es la característica que nos proporciona Avalanche: Poder desplegar cualquier smart contract en la cadena y no es necesario que interactúe con un nuevo concepto de contrato específico del lenguaje. Veamos cómo crear un contrato ERC-20 y desplegarlo en la C-Chain de Avalanche.
 
-## Set up Metamask
+## Configurar Metamask
 
-The first thing we should set is a metamask wallet.
+Lo primero que debemos configurar es una wallet de metamask.
 
 ![Image for post](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S)
 
-Click to metamask icon on the browser and select the network drop-down menu. Here we should connect to C-Chain. Click to “Custom RPC”.
+Haz clic en el icono de metamask del navegador y selecciona el menú desplegable de la red. Aquí debemos conectarnos a la C-Chain. Haz clic en “Custom RPC”.
 
 ![Image for post](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
 
-Now, we need to set these boxes with correct values.
+Ahora, tenemos que ajustar estas casillas con los valores correctos.
 
 * **Network Name**: Avalanche C-Chain
 * **New RPC URL**:
@@ -39,119 +39,128 @@ Now, we need to set these boxes with correct values.
 
 ![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
 
-After setting up all the parameters correctly, we should see this page. For now, we have 0 C-AVAX. “C” refers to C-chain and we have to get some C-AVAX to interact with the network.
+Después de configurar todos los parámetros correctamente, deberíamos ver esta página. Por ahora, tenemos 0 C-AVAX. "C" se refiere a la C-chain y tenemos que conseguir algo de C-AVAX para interactuar con la red.
 
-## Fund your C-Chain address
+## Agrega fondos a tu dirección de la C-Chain
+Dependiendo de la red utilizada, hay tres maneras de hacer llegar los fondos a su dirección de la C-Chain.
 
-Depending on the network used, there are three ways to get funds to your C-Chain address.
+### **Usando la Wallet de Avalanche**
 
-### **Using Avalanche Wallet**
+En la red principal, puedes usar la [Wallet de Avalanche](https://wallet.avax.network/) para transferir fondos de la X-Chain a tu dirección de la C-Chain. El proceso es simple, como se explica en este [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). La wallet puede ser usada en redes locales y de pruebas.
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+### **Usando el Faucet de la Red de Pruebas**
 
-### **Using Test Network Faucet**
+Para la agregar fondos en la red de pruebas, también puedes utilizar el Faucet de la Red de Pruebas. Ve a [https://faucet.avax-test.network/](https://faucet.avax-test.network/) y pega tu dirección C-AVAX. Todo lo que necesitas hacer es agregar el prefijo “C-” y la Faucet cambiará de AVAX a C-AVAX.
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
 
-### Funding on local testnet
+### Agregando Fondos en la Red de Pruebas Local
 
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+En una red local, puedes agregar fondos fácilmente a tus direcciones desplegando su propio faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our address with prefix “C-”.
+Vamos al [faucet de avax](https://faucet.avax-test.network/) y pega tu dirección con prefijo “C-”.
 
-For example my address is “0xfe8886bec537252040Dff36448C0F104Be635650”, I need to paste my account address as “C-0xfe8886bec537252040Dff36448C0F104Be635650”
+Por ejemplo mi dirección es: “0xfe8886bec537252040Dff36448C0F104Be635650”, Necesito pegar la dirección de mi cuenta como: 
+“C-0xfe8886bec537252040Dff36448C0F104Be635650”
 
 ![Image for post](https://miro.medium.com/max/422/1*okw3MKlyGcF4U9ibsq5v8w.png)
 
-After copy and paste the address here, click request 2.0000 C-AVAX. This test faucet token has no value, it is just for development purposes.
+Después de copiar y pegar la dirección aquí, haz clic en **request 2.0000 C-AVAX**. Este token de prueba del faucet no tiene ningún valor, es sólo para fines de desarrollo.
 
-Then check your wallet balance and you should have some test token in your metamask.
+Entonces comprueba el balance de tu wallet y deberías tener algunos tokens de prueba en metamask.
 
-## Create mintable token
+## Crear Mint Token 
 
-Now, we can create our mintable token on Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
+Ahora podemos crear nuestro Mint Token en Remix. Abre Remix en tu navegador o ve a [este link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
 
 ![Image for post](https://miro.medium.com/max/1910/1*FWHtbWNXr6FvjzPHH93wvw.png)
 
-You should view this page. On this page, first, click “SOLIDITY” from “Featured Plugins” and then click the “New File” button. When you click the New File button, you will see a pop-up that requires a file name. You can choose a name or leave the default.
+Deberías ver esta página. En esta página, primero, haz clic en **"SOLIDITY"** de **“Featured Plugins”** y luego haz clic en el botón **"Nuevo Archivo"**. Al hacer clic en el botón **"Nuevo Archivo"**, verás un pop-up que requiere un nombre de archivo. Puedes elegir un nombre o dejar el predeterminado.
 
-Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
+Ya que usaremos un contrato ERC-20 de [OpenZeppelin](https://openzeppelin.com/contracts/), solo copia esta linea en el archivo y guardalo.
 
 `import “`[`https://github.com/OpenZeppelin/openzeppelincontracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol)`”;`
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
-After saving the file, we will see a bunch of files that are imported to remix. This is a remix feature that allows us to import a GitHub contract repository to remix by just giving the URL-Link. with an import statement.
+Después de guardar el archivo, veremos un montón de archivos que se importan a Remix. Esta es una característica de Remix que nos permite importar un repositorio de contratos GitHub a Remix con sólo dar el URL-Link con una declaración de importación.
 
 ![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
-We have ERC20PresetMinterPauser.sol file in the presets. This file is written by OpenZeppelin according to ERC20 standards with minter functionality. After deploying this file, we will be the owner of the contract and will have the authority and ability to mint token how much we want.
+Tenemos el archivo ERC20PresetMinterPauser.sol en los presets. Este archivo está escrito por OpenZeppelin de acuerdo con los estándares ERC20 con funcionalidad minter. Después de desplegar este archivo, seremos los dueños del contrato y tendremos la autoridad y la capacidad de acuñar los tokens que queramos.
 
 ![Image for post](https://miro.medium.com/max/1398/1*5UcrRfoSwjpD29NyuMrrbA.png)
 
-## Deploy the Contract
+## Desplegar el Contrato
 
-Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or bigger than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written and the version is 0.6.0. So, in the compiler I solidity version as 0.6.6. After setting up the solidity version click to compile button. If you did not change anything in the file or the solidity version is not wrong, you should not get an error.
+Abre la segunda pestaña que es **“SOLIDITY COMPILER”** y selecciona la versión de solidity que coincide con la versión de solidity escrita en el archivo como **“pragma solidity …..”**. La versión debe ser igual o mayor que la versión del archivo. Por ejemplo, en mi archivo, está escrito **“pragma solidity ^0.6.0”** y la versión es 0.6.0. Así que, escribe en el compilador la versión de solidity como 0.6.6. Después de configurar la versión de solidity, haz clic en el botón de compilar. Si no has cambiado nada en el archivo o la versión de solidity no está mal, no deberías obtener un error.
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Then, let’s jump to the third tab which is DEPLOY & RUN TRANSACTION. Here before deploying our contract, we should change the environment. Click to the environment and select “Injected Web3”. If a pop-up shows up and asks you to connect the account, click to connect. After, you should see the account address in the “ACCOUNT” textbox.
+Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto ** “ACCOUNT”**.
 
-The last thing before the deployment process is to set the contract that will be deployed as a token. Above the Deploy Button, there is a drop-down menu to select a contract. Select the contract named “ERC20PresetMinterPauser.sol”.
+Lo último antes del proceso de despliegue es establecer el contrato que se desplegará como un token. Sobre el botón **Deploy**, hay un menú desplegable para seleccionar un contrato. Selecciona el contrato llamado "ERC20PresetMinterPauser.sol".
 
 ![Image for post](https://miro.medium.com/max/383/1*s9LtZu4hSuPcVwVZsweZJA.png)
 
-Now, here enter the name and symbol of your token. I will name it “test” and the symbol will be “tst”. You can give it a and click to transact button.
+Ahora, aquí introduce el nombre y el símbolo de tu Token. La llamaré **“test”** y el símbolo será **“tst”** . Puedes darle al botón **transact** para hacer la transacción.
 
 ![Image for post](https://miro.medium.com/max/593/1*ZKDEv_h_Pqfd3b7PAosXQw.png)
 
-After clicking the button, a pop-up will show up and just confirm it.
+Después de hacer clic en el botón, un pop-up aparecerá y lo confirmaremos.
 
 ![Image for post](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
 
-And then another pop-up, a metamask confirmation, appears. Confirm it.
+Aparecerá otro pop-up, una confirmación de metamask. Confírmala.
 
-After confirming all these pop-ups we have deployed our token to avalanche C-Chain. So we can start to interact with it.
+Después de confirmar todos estos pop-ups hemos desplegado nuestro Token para la C-Chain de Avalanche. Así que podemos empezar a interactuar con el.
 
-## Interact with Token
+## Interactuar con el Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+Podemos ver que nuestra transacción se desplegó en la C-Chain de Avalanche a través de este [explorador de la c-chain](https://cchain.explorer.avax-test.network/).
 
-But firstly, let’s see our transaction hash from the remix console.
+Pero primero, veamos el hash de nuestra transacción desde la consola de Remix.
 
 ![Image for post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
-After deploying the contract, we should see a log in remix console. When you click to arrow and expand it, a transaction hash will come up. Copy it.
+Después de desplegar el contrato, deberíamos ver un registro en la consola de remix. Cuando haga clic en la flecha y la expanda, aparecerá un hash de transacción. Cópialo.
 
 ![Image for post](https://miro.medium.com/max/1909/1*NBXgtkYv2VfBkZx1OsBm7A.png)
 
-Just paste the transaction hash to the [explorer](https://cchain.explorer.avax-test.network/) I shared above and press enter.
+Pega el hash de la transacción en el [explorador](https://cchain.explorer.avax-test.network/) y presiona enter.
 
 ![Image for post](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
 
-Here we can see all details about the transaction and token contract.
+Aquí podemos ver todos los detalles sobre la transacción y el contrato del token.
 
 ![Image for post](https://miro.medium.com/max/764/1*tTFQUn3fStbv-TW9kExyUg.png)
 
-The first one is my wallet address that creates token and the second address is my token contract address which is named “test”. Now, let’s mint some token to our own address.
+La primera es la dirección de mi wallet que crea el token y la segunda es la dirección de mi contrato del token que se llama **“test”**. Ahora, acuñemos algunos tokens para nuestra dirección.
 
 ![Image for post](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
 
-Come back to the remix and after deploying, you should be able to see the contract in “Deployed Contracts” section.
 
-Here, we have a bunch of functions that we can use to interact with our token contract. You can check all these methods from OpenZeppelin documentation to learn how to use them. But we will only use the mint method.
+Vuelve a Remix y después del despliegue, deberías poder ver el contrato en la sección **“Deployed Contracts”**.
 
-Click to arrow beside the mint method to read it.
+Aquí tenemos un montón de funciones que podemos usar para interactuar con el contrato de nuestro token. Puedes revisar todos estos métodos en la documentación de OpenZeppelin para aprender a usarlos. Pero sólo usaremos el método mint.
+
+Haz clic en la flecha junto al método mint para leerlo.
 
 ![Image for post](https://miro.medium.com/max/577/1*GrxG6rsklrYN4xN1eF_ckw.png)
 
-Enter your address and an amount in WEI. For example, I will mint 1000 tst token so, I entered “1000000000000000000000”
+Introduce tu dirección y una cantidad en WEI. Por ejemplo, acuñaré 1000 tokens **tst**  así que, introduje "1000000000000000000000"
 
 ![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
 
-## Add Token to Metamask
+## Añadir Token a Metamask
 
-Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to “Add Token” button and select “Custom Token” tab.
 
-Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
+Ahora acuñamos 1000 tokens a nuestro contrato, pero no deberías poder ver los tokens en tu wallet de metamask. Para poder ver nuestro token, tenemos que añadirlo. En metamask, haz clic en el botón **“Add Token”** y selecciona la pestaña **“Custom Token”**.
 
+Aquí introduce la dirección del token que puedes ver desde el explorador como mostré anteriormente. Copia y pégala aquí. Luego haz click en el botón **"Next"**, deberías ver 1000 tokens que nombraste en tu wallet de metamask. También, puedes enviarlo a otra cuenta a través de Remix o de metamask.
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTcxMjAzMjM5NCwyMTA5NTQ0MzQyLC0xOT
+k5MTI2MTczLC0xNDY0MDk0MzI3LC0xNDM0NTE3NDY4LDE3MTc4
+NDg1MDIsMTYyMTg5MzA2NCwtMTU1MDg2OTY0Myw3ODg4NTAxMT
+YsLTQyMDI4MDQ3OF19
+-->

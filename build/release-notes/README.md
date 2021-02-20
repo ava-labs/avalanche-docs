@@ -1,36 +1,36 @@
-# Release Notes
+# Notas de Versión
 
-## AvalancheGo Release Notes v1.0.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
+## Notas de Versión de AvalancheGo v1.0.4 \([Ver en GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
 ![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
 
-This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For If your local machine has MacOS or Linux, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
+Esta actualización es opcional pero se recomienda. El parche incluye mejoras en la calidad de vida y varias mejoras en el rendimiento. Tenga en cuenta que esta actualización requiere que los parámetros de la CLI se especifiquen con -- en lugar de permitir - o --. Por ejemplo, `-public-ip=127.0.0.1` ya no está permitido y debe especificarse como `--public-ip=127.0.0.1`. De resto, esta actualización es compatible con las versiones anteriores.
 
 ```text
-• Added subnet whitelisting to allow a node owner to choose which subnets to validate.
-• Added config file parsing for node settings.
-• Added more options for specifying a node's IP address and added getNodeIP to the info *endpoint.
-• Added a TxID to the result of get.Validators in the platformvm.
-• Updated Coreth version.
-• Cleaned up the snowball trie implementation and added additional tests to align with mutation tests.
-• Implemented and optimized continuous time averages for tracking CPU and network latency.
-• Significantly optimized memory allocations in various locations.
-• Increased the signature verification cache size.
-• Reduced DB reads during vertex management.
+- Se añadió la lista blanca de subnets para permitir al propietario de un nodo elegir qué subnets validar.
+- Se añadió el análisis sintáctico del archivo de configuración para la configuración de los nodos.
+- Añadidas más opciones para especificar la dirección IP de un nodo y añadido getNodeIP a la información *endpoint.
+- Se añadió un TxID al resultado de los validadores get.Validators en la platformvm.
+- Actualizada la versión de Coreth.
+- Se limpió la implementación de la prueba snowball y añadió pruebas adicionales para alinearse con las pruebas de mutación.
+- Se implementaron y optimizaron los promedios de tiempo continuo para el seguimiento de la latencia de la CPU y la red.
+- Se optimizaron significativamente las asignaciones de memoria en varios lugares.
+- Aumentado el tamaño de la caché de verificación de firmas.
+- Reducción de las lecturas de la base de datos durante la gestión de vértices.
 ```
 
 ```text
-• Added an optional argument includeReason to platform.getTxStatus.
-If not provided, or if false, the output from getTxStatus is the same as before.
+• Añadido un argumento opcional includeReason to platform.getTxStatus.
+Si no se proporciona, o si es falso, la salida de getTxStatus es la misma que antes.
 
-For If your local machine has MacOS or Linux:
+Por ejemplo:
 {
     "jsonrpc": "2.0",
     "result": "Dropped",
     "id": 1
 }
 
-If includeReason is true, the output from getTxStatus has a new format. It's an object that looks like this:
+Si includeReason es verdadero, la salida de getTxStatus tendrá un nuevo formato. Es un elemento que se ve así:
 
 {
     "jsonrpc": "2.0",
@@ -41,12 +41,13 @@ If includeReason is true, the output from getTxStatus has a new format. It's an 
     "id": 1
 }
 
-In this new format, reason will not be present unless the status is Dropped.
-Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
+En este nuevo formato, la razón no estará presente a menos que el estado sea "Dropped".
+Cualquier cosa que dependa de platform.getTxStatus debería cambiar a usar el argumento includeReason y usar el nuevo formato de respuesta. Después de algunos lanzamientos, sólo soportaremos el nuevo formato de respuesta.
 ```
 
-For assistance with this update, follow our [Developer FAQ](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), if you are still running into issues you can join our [Discord](https://chat.avalabs.org/) for help.
+Para ayuda con esta actualización ve a [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4MTY3MzE0OV19
+eyJoaXN0b3J5IjpbLTc4OTc0OTM5OSwtMTc2MDE0NjUzMSwzOD
+M3ODE2MCw1NDg4Njg5NV19
 -->

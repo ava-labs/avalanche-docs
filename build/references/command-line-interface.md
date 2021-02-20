@@ -1,14 +1,14 @@
-# Command Line Interface
+# Interfaz de Linea de Comando
 
-When running a node, there are a variety of possible configurations that are supported.
+Cuando se ejecuta un nodo, hay una variedad de configuraciones posibles que se admiten.
 
-## Arguments
+## Argumentos
 
 ### Config File
 
 `--config-file` \(string\):
 
-Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+Config file especifica un archivo JSON para configurar un nodo en lugar de especificar argumentos a través de la línea de comandos. Los argumentos de la línea de comandos anularán cualquier opción establecida en el archivo de configuración.
 
 ```text
 ./build/avalanchego --config-file=config.json
@@ -27,381 +27,382 @@ config.json file:
 
 `--api-admin-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API de administración. Por defecto es `false`. Ver [aquí](../avalanchego-apis/admin-api.md) para más información.
 
 `--api-auth-required` \(boolean\):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+Si se establece en `true`, los llamados a la API requieren un token de autorización. Por defecto es `false`. Ver [aquí](../avalanchego-apis/auth-api.md) para más información.
 
 `--api-auth-password` \(string\):
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
+La contraseña necesaria para crear/revocar los tokens de autorización. Si `--api-auth-required=true`, debe ser especificada; de otra forma sería ignorada. Ver [aquí](../avalanchego-apis/auth-api.md) para más información.
 
 `--api-health-enabled` \(boolean\):
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health-api.md) for more information.
+Si se establece como `true`, este nodo expondrá el API de Salud. Por defecto es `true`. Ver [aquí](../avalanchego-apis/health-api.md) para más información.
 
 `--api-info-enabled` \(boolean\):
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info-api.md) for more information.
+Si se establece como `true`, este nodo expondrá la API de Información. Por defecto es `true`. Ver [aquí](../avalanchego-apis/info-api.md) para más información.
 
 `--api-ipcs-enabled` \(boolean\):
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
+Si se establece como `true`, este nodo expondrá la API de los IPCs. Por defecto es `false`. Ver [aquí](../avalanchego-apis/ipc-api.md) para más información.
 
 `--api-keystore-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
+Si se establece en `false`, este nodo no expondrá la API del Keystore. Por defecto es `true`. Ver [aquí](../avalanchego-apis/keystore-api.md) para más información.
 
 `--api-metrics-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+Si se configura como `false`, este nodo no expondrá el API de Métricas. Por defecto es `true`. Ver [aquí](../avalanchego-apis/metrics-api.md) para más información
 
 ### Assertions
 
 `--assertions-enabled` \(boolean\):
 
-When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+Cuando se establece en `true`, las aserciones se ejecutarán en tiempo de ejecución en toda la base del código. Esto está pensado para su uso en la depuración, ya que podemos obtener un mensaje de error más específico. Por defecto es `true`.
 
 ### Bootstrapping
 
 `--bootstrap-ids` \(string\):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An Name your key `avalanche`. If your local machine has MacOS or Linux setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se usarán para autenticar a los compañeros de bootstrap. Esto sólo necesita ser establecido cuando `--p2p-tls-enabled=true`. Una configuración de ejemplo de este campo sería `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
 `--bootstrap-ips` \(string\):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An Name your key `avalanche`. If your local machine has MacOS or Linux setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usarán para arrancar el estado actual de Avalanche. Un ejemplo de configuración de este campo sería `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
 ### Connection Metering
 
 `--conn-meter-max-conns` \(int\):
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+Actualiza en la mayoría de las conexiones `conn-meter-max-conns`de una IP dada por  `conn-meter-reset-duration`. Si `conn-meter-reset-duration` es 0, las conexiones entrantes no tienen límite de velocidad.
 
 `--conn-meter-reset-duration` \(duration\):
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+Actualiza en la mayoría de las conexiones `conn-meter-max-conns` de una IP dada por `conn-meter-reset-duration`. Si`conn-meter-reset-duration` es 0, las conexiones entrantes no tienen límite de velocidad.
 
 ### Database
 
 `--db-dir` \(string, file path\):
 
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
+Especifica el directorio en el que se encuentra la base de datos. Por defecto `"$HOME/.avalanchego/db"`.
 
 `--db-enabled` \(boolean\):
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+Si se configura como `false`, las actualizaciones de estado se realizan únicamente en una base de datos en memoria, sin hacer ningún cambio en el almacenamiento permanente. Si se establece en `true`, las actualizaciones de estado se escriben en una base de datos local persistente. Por defecto es `true`.
 
 ### HTTP Server
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For Name your key `avalanche`. If your local machine has MacOS or Linux if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+La dirección en la que escuchan las APIs HTTP. Por defecto es `127.0.0.1`. Esto significa que por defecto, tu nodo sólo puede manejar llamados a la API hechos desde la misma máquina. Para permitir llamados a la API desde otras máquinas, usa `--http-host=`. Por ejemplo, si tu dirección IP pública es `1.2.3.4` y quieres acceder al RPC de AvalancheGo a través de esa dirección IP, debes enviar `--http-host=1.2.3.4`. Para permitir llamadas a la API desde todas las IPs, usa `http-host=`.
 
 `--http-port` \(int\):
 
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
+Cada nodo ejecuta un servidor HTTP que proporciona las API para interactuar con el nodo y la red de Avalanche. Este argumento especifica el puerto en el que el servidor HTTP escuchará. El valor por defecto es `9650`.
 
 `--http-tls-cert-file` \(string, file path\):
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Este argumento especifica la ubicación del certificado TLS utilizado por el nodo para el servidor HTTPS. Esto debe ser especificado cuando `--http-tls-enabled=true`. No hay un valor por defecto.
 
 `--http-tls-enabled` \(boolean\):
 
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
+Si se establece como `true`, este marcador intentará actualizar el servidor para utilizar HTTPS. El valor predeterminado es `false`.
 
 `--http-tls-key-file` \(string, file path\):
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Este argumento especifica la ubicación de la clave privada TLS utilizada por el nodo para el servidor HTTPS. Esto debe ser especificado cuando `--http-tls-enabled=true`. No hay un valor por defecto.
 
 ### IPCS
 
 `--ipcs-chain-ids` \(string\)
 
-Comma separated list of chain ids to connect to. There is no default value.
+Lista separada por comas de identificaciones de cadenas a las que conectarse. No hay ningún valor predeterminado.
 
 `--ipcs-path` \(string\)
 
-The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
+El directorio \(Unix\) o el prefijo del nombre de la canalización \(Windows\) para los sockets IPC. Por defecto es /tmp.
 
 ### File Descriptor Limit
 
 `--fd-limit` \(int\)
 
-Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+Intenta aumentar el límite del descriptor del archivo de proceso hasta al menos este valor. El valor por defecto es `32768`
 
 ### Logging
 
 `--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+El nivel de registro determina qué eventos registrar. Hay 7 niveles diferentes, en orden de mayor a menor prioridad.
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
+* `Off`: Ningún registro tiene este nivel de registro.
+* `Fatal`: Errores fatales que no son recuperables.
+* `Error`:  Errores que el nodo encuentra, estos errores pudieron ser recuperados.
+* `Warn`: Una advertencia que podría ser indicativa de un nodo bizantino falsificado, o un potencial error futuro.
+* `Info`: Descripciones útiles de las actualizaciones del estado de los nodos.
+* `Debug`: El registro de depuración es útil cuando se intenta comprender posibles errores en el código. Se mostrará más información de la que sería típicamente deseada para un uso normal.
+* `Verbo`: Rastrea cantidades extensas de información que el nodo está procesando. Esto incluye el contenido de los mensajes y los volcados binarios de datos para el análisis del protocolo de nivel extremadamente bajo.
+
+Cuando se especifica un nivel de registro, hay que tener en cuenta que todos los registros con la prioridad especificada o superior serán rastreados. Por defecto es `Info`.
 
 `--log-display-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
+El nivel de registro determina qué eventos se muestran en la pantalla. Si se deja en blanco, se tomará por defecto el valor proporcionado a `--log-level`.
 
 `--log-display-highlight` \(string, `{auto, plain, colors}`\):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+Colorear o resaltar los registros de la pantalla. Resalta por defecto cuando la salida es un terminal. De lo contrario, debe ser alguno de `{auto, plain, colors}`
 
 `--log-dir` \(string, file path\):
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+Especifica el directorio en el que se guardan los registros del sistema. El valor por defecto es `"$HOME/.avalanchego/logs"`.
 
 ### Network ID
 
 `--network-id` \(string\):
 
-The identity of the network the node should connect to. Can be one of:
+La identidad de la red a la que el nodo debe conectarse. Puede ser una de:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+* `--network-id=mainnet` -&gt; Conectar a la Red Principal \(default\).
+* `--network-id=fuji` -&gt; Conectar a la Red de Pruebas Fuji.
+* `--network-id=testnet` -&gt; Conectar a la Red de Pruebas actual. \(Actualmente es Fuji.\)
+* `--network-id=local` -&gt; Conectar a una Red de Pruebas Local.
+* `--network-id=network-{id}` -&gt; Conectar a la Red que tenga el ID suministrado . `id` debe estar en el rango `[0, 2^32)`.
 
 ### Public IP
 
 `--public-ip` \(string\):
 
-Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
+Los validadores deben conocer sus direcciones IP públicas para que puedan hacer saber a otros nodos cómo conectarse a ellos. Si no se proporciona este argumento, el nodo intentará realizar un recorrido NAT para obtener la IP pública del nodo. Debe estar configurado a `127.0.0.1` para crear una red local. Si no se establece, intenta aprender la IP usando un recorrido NAT.
 
 `--dynamic-public-ip` \(string\):
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+Valores válidos si el param está presente: `opendns`, `ifconfigco` o `ifconfigme`. Esto anula la `--public-ip`. Si está configurado, sondeará el servicio remoto cada `--dynamic-update-duration` y actualizará la dirección IP pública del nodo.
 
 `--dynamic-update-duration` \(duration\):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+El tiempo entre los eventos del sondeo para `--dynamic-public-ip` o el recorrido NAT. El mínimo recomendado es de 1 minuto. Por defecto es de `5m`.
 
 ### Signature Verification
 
 `--signature-verification-enabled` \(boolean\):
 
-Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+Permite la verificación de la firma. Cuando se configura como `false`, las firmas no se verificarán en las máquinas virtuales que permiten desactivarlas. Por defecto es `true`.
 
 ### Staking
 
 `--staking-port` \(string\):
 
-The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
+El puerto a través del cual el servidor de stake se conectará a la red de Avalanche externamente. El valor por defecto es `9651`.
 
 `--p2p-tls-enabled` \(boolean\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers. However, This can be disabled for testing. When TLS is disabled, the `stakingID` will be derived from the IP Address the node claims it owns. This will also disable encryption of inter-node communication. This should only be specified for testing. Defaults to `true`. This must be true when `--staking-enabled=true`.
+Avalanche usa conexiones TLS autentificadas de dos vías para identificar con seguridad el `stakingID` de los compañeros conectados. Sin embargo, esto puede ser desactivado para las pruebas. Cuando TLS está deshabilitado, el `stakingID` se derivará de la dirección IP que el nodo dice poseer. Esto también deshabilitará la encriptación de la comunicación entre nodos. Esto sólo debe ser especificado para las pruebas. Por defecto es `true`. Esto debe ser cierto cuando `--staking-enabled=true`.
 
 `--staking-enabled` \(boolean\):
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. When this is `true`, `--p2p-tls-enabled` must be set to `true` in order to secure P2P communications.
+Avalanche usa Proof of Stake \(PoS\) como resistencia de Sybil para que sea prohibitivo atacar la red. Cuando esto es `true`, `--p2p-tls-enabled` debe ser configurado como `true` para asegurar las comunicaciones P2P.
 
 `--staking-tls-cert-file` \(string, file path\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS certificate used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche utiliza conexiones TLS de dos vías autentificadas para identificar de forma segura el `stakingID` de los pares conectados cuando `--p2p-tls-enabled=true`. Este argumento especifica la ubicación del certificado TLS utilizado por el nodo. Esto debe especificarse cuando `--p2p-tls-enabled=true`. Por defecto`""`.
 
 `--staking-tls-key-file` \(string, file path\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS private key used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche utiliza conexiones TLS de dos vías autentificadas para identificar de forma segura el  `stakingID` e los pares conectados cuando `--p2p-tls-enabled=true`. Este argumento especifica la ubicación del certificado TLS utilizado por el nodo. Esto debe especificarse cuando `--p2p-tls-enabled=true`. Por defecto `""`.
 
 `--staking-disabled-weight` \(int\):
 
-Weight to provide to each peer when staking is disabled. Defaults to `1`.
+El peso que se debe proporcionar a cada compañero cuando el staking está desactivado. Por defecto `1`.
 
 ### Version
 
 `--version` \(boolean\)
 
-If this is `true`, print the version and quit. Defaults to `false`.
+Si esto es `true`, imprime la versión y se cierra. Por defecto `false`.
 
 ## Advanced Options
 
-The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+Las siguientes opciones afectan a la corrección de la plataforma. Es posible que sea necesario cambiarlas en toda la red y, por consiguiente, un usuario ordinario no debería cambiarlas de las que están predeterminadas.
 
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+La cantidad de tiempo que un compañero es puesto en la lista de referencia después de superar el `--benchlist-fail-threshold`. Por defecto `1h`.
 
 `--benchlist-fail-threshold` \(int\):
 
-Number of consecutive failed queries to a node before benching it \(assuming all queries to it will fail\). Defaults to `10`.
+Número de consultas fallidas consecutivas a un nodo antes de ponerlo en el banco \(asumiendo que todas las consultas fallarán\). Por defecto `10`.
 
 `--benchlist-peer-summary-enabled` \(boolean\):
 
-Enables peer specific query latency metrics. Defaults to `false`.
+Permite una métrica de latencia de consulta específica de los pares. Por defecto es `false`.
 
 `--benchlist-min-failing-duration` \(duration\):
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+La cantidad mínima de tiempo que los mensajes a un par deben fallar antes de que el par sea puesto en el banco. El valor por defecto es de `5m`.
 
 ### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+Tiempo entre rumores de fronteras aceptadas. Por defecto `10s`.
 
 `--consensus-shutdown-timeout` \(duration\):
 
-Timeout before killing an unresponsive chain. Defaults to `5s`.
+Tiempo de espera antes de eliminar una cadena que no responde. Por defecto `5s`.
 
 `--creation-tx-fee` \(int\):
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX \(.001 AVAX\) per transaction.
+Cuota de transacción, en nAVAX, para las transacciones que crean un nuevo estado. Por defecto es `1000000` nAVAX \(.001 AVAX\)  por transacción.
 
 `--min-delegator-stake` \(int\):
 
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
+El stake mínimo, en nAVAX, que puede ser delegado a un validador de la Red Primaria.
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+El valor por defecto es `25000000000` \(25 AVAX\) en la red principal. Por defecto es `5000000` \(.005 AVAX\) en la red de pruebas.
 
 `--min-delegation-fee` \(int\):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
+La cuota mínima de delegación que se puede cobrar por la delegación en la Red Primaria, multiplicada por `10,000`. Debe estar en el rango de  `[0, 1000000]`. Por defecto es `20000` \(2%\) en la Red Principal.
 
 `--min-stake-duration` \(duration\):
 
-Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
+Duración mínima de el stake. El valor por defecto de la red principal es de `336h` \(dos semanas.\)
 
 `--min-validator-stake` \(int\):
 
-The minimum stake, in nAVAX, required to validate the Primary Network.
+La participación mínima, en nAVAX, requerida para validar la Red Primaria.
 
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+Por defecto es `2000000000000` \(2,000 AVAX\) en la Red Principal. Por defecto es `5000000` \(.005 AVAX\) en la red de pruebas.
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
+La duración máxima de el stake, en segundos. Por defecto es `8760h` \(365 días\) en la red principal.
 
 `--max-validator-stake` \(int\):
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
+El Stake máximo, en nAVAX, que se puede colocar en un validador de la red primaria. Por defecto es `3000000000000000` \(3,000,000 AVAX\) en la red principal. Esto incluye el stake proporcionado tanto por el validador como por los delegadores del validador.
 
 `--snow-avalanche-batch-size` \(int\):
 
-DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
+Las implementaciones DAG del consenso de Snow definen `b` como el número de transacciones que un vértice debe incluir. Aumentar `b`, teóricamente, aumentará el rendimiento mientras aumenta la latencia. El nodo esperará como máximo 1 segundo para recoger un lote, y luego emitirá el lote completo de una vez. El valor debe ser al menos `1`. El valor por defecto es `30`.
 
 `--snow-avalanche-num-parents` \(int\):
 
-DAG implementations of Snow consensus define `p` as the number of parents a vertex should include. Increasing `p` will improve the amortization of network queries. However, by increasing the connectivity of the graph, the complexity of the graph traversals is increased. The value must be at least `2`. Defaults to `5`.
+Las implementaciones DAG del consenso de Snow definen `p` como el número de progenitores que debe incluir un vértice. Aumentar  `p` mejorará la absorción de las consultas de la red. Sin embargo, al aumentar la conectividad del gráfico, se incrementa la complejidad de los recorridos del gráfico. El valor debe ser al menos `2`. El valor por defecto es `5`.
 
 `--snow-concurrent-repolls` \(int\):
 
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
+El consenso Snow requiere que se repitan las transacciones que se emiten durante el período de baja utilización de la red. Este parámetro permite definir cuán agresivo será el cliente para finalizar estas transacciones pendientes. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser por lo menos `1` y como máximo `--snow-rogue-commit-threshold`. El valor por defecto es `4`.
 
 `--snow-sample-size` \(int\):
 
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
+El consenso Snow define `k` como el número de validadores que se muestrean durante cada sondeo de la red. Este parámetro permite definir el valor `k` utilizado para el consenso. Esto sólo debería cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser por lo menos `1`. El valor por defecto es `20`.
 
 `--snow-quorum-size` \(int\):
 
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
+El consenso Snow define `alpha` como el número de validadores que deben preferir una transacción durante cada sondeo de la red para aumentar la confianza en la transacción. Este parámetro nos permite definir el valor `alpha` utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser mayor que `k/2`.  El valor por defecto es `14`.
 
 `--snow-virtuous-commit-threshold` \(int\):
 
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
+El consenso Snow define `beta1` como el número de sondeos consecutivos que una transacción virtuosa debe aumentar su confianza para que sea aceptada. Este parámetro nos permite definir el valor `beta1`  utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser al menos `1`. El valor por defecto es `15`.
 
 `--snow-rogue-commit-threshold` \(int\):
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
+El consenso Snow define `beta2` como el número de sondeos consecutivos que una transacción virtuosa debe aumentar su confianza para que sea aceptada. Este parámetro nos permite definir el valor `beta2`  utilizado para el consenso. Esto sólo debe cambiarse después de considerar cuidadosamente las compensaciones del Consenso Snow. El valor debe ser al menos `beta1`. El valor por defecto es `30`.
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
+Período de consumo de la función de stake, en segundos. El valor por defecto de la red principal es `8760h` \(365 días\).
 
 `--tx-fee` \(int\):
 
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
+La cantidad de nAVAX que se debe quemar para que una transacción sea válida. Este parámetro requiere un acuerdo de red en su forma actual. El cambio de este valor del valor por defecto sólo debe hacerse en redes privadas. El valor por defecto es `1000000` nAVAX por transacción.
 
 `--uptime-requirement` \(float\):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
+Fracción de tiempo que un validador debe estar en línea para recibir las recompensas. El valor por defecto es `0.6`.
 
 ### Message Handling
 
 `--max-non-staker-pending-msgs` \(int\):
 
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+Número máximo de mensajes que se permite tener pendientes a una persona que no hace stake. El valor por defecto es `20`.
 
 `--staker-msg-reserved` \(float\):
 
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+Parte del buffer de mensajes pendientes reservado para los mensajes de los validadores. El valor por defecto es `0.375`.
 
 `--staker-cpu-reserved` \(float\):
 
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+Porción del tiempo de la CPU de la cadena reservada para los mensajes de los validadores. El valor por defecto es `0.375`.
 
 ### Network Timeout
 
 `--network-initial-timeout` \(duration\):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Valor de tiempo de espera inicial del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `5s`.
 
 `--network-minimum-timeout` \(duration\):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `5s`.
 
 `--network-maximum-timeout` \(duration\):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+Valor máximo de tiempo de espera del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `10s`.
 
 `--network-timeout-multiplier` \(float\):
 
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
+Multiplicador del tiempo de espera después de una solicitud fallida. Por defecto `1.1`.
 
 `--network-timeout-reduction` \(duration\):
 
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
+Reducción del tiempo de espera después de una solicitud exitosa, en nanosegundos. Por defecto es `1`.
 
 ### Throughput Server
 
 `--xput-server-enabled` \[Deprecated\] \(boolean\):
 
-An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
+Un servidor opcional ayuda a realizar pruebas de rendimiento inyectando carga en la red a petición Si está habilitado, este servidor se inicia y audita los comandos de un coordinador de pruebas. Por defecto es `false`.
 
 `--xput-server-port` \[Deprecated\] \(string\):
 
-This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
+Esta opción permite especificar en qué puerto auditará el servidor de transferencia si está habilitado. Por defecto es `9652`.
 
 ### Subnet Whitelist
 
 `--whitelisted-subnets` \(string\):
 
-Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+Lista separada por comas de subnets que este nodo validaría si se añadiera. Por defecto está vacía \(sólo valida la red primaria\).
 
 ### Restart on Disconnect
 
-Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
+Algunos usuarios han tenido un problema en el que su nodo  de AvalancheGo entra en un estado insalubre cuando su nodo pierde la conección a Internet o cuando cambia su dirección IP. Para ayudar a solucionarlo, hay indicadores de línea de comandos que hacen que el nodo se reinicie si se desconecta de todos sus pares. Estos son:
 
-`--restart-on-disconnected` \(boolean, defaults to `false`\)
+`--restart-on-disconnected` \(boolean, por defecto `false`\)
 
-`--disconnected-check-frequency`  \(duration, defaults to `10s`\)
+`--disconnected-check-frequency`  \(duration, por defecto `10s`\)
 
-`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
+`--disconnected-restart-timeout` \(duration, por defecto `1m`\)
 
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
+Si `restart-on-disconnected` es `true`, el nodo comprobará cada `disconnected-check-frequency` para ver si ha perdido la conexión con todos los pares. Si el nodo ha perdido la conexión con todos los pares para `disconnected-restart-timeout`, se reiniciará. 
 
-If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
+Si  `restart-on-disconnected` es`false` o si `disconnected-check-frequency` o `disconnectedd-restart-timeout` es 0, el nodo no se reiniciará.
 
 ### Plugins
 
 `--plugin-dir` \(string, file path\):
 
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+Especifica el directorio en el que se guarda el plugin `evm`. Por defecto `"$HOME/.avalanchego/build/plugins"`.
 
 `--coreth-config` \(json\):
 
-This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
+Esto le permite especificar una configuración para ser pasada a Coreth, el VM que ejecuta la C-Chain. Los valores por defecto de esta configuración son:
 
 ```cpp
 {
@@ -418,7 +419,7 @@ This allows you to specify a config to be passed into Coreth, the VM running the
 }
 ```
 
-Note: if a config is specified, all default options are overridden. For Name your key `avalanche`. If your local machine has MacOS or Linux:
+Nota: si se especifica una configuración, se anulan todas las opciones predeterminadas. Por ejemplo:
 
 ```text
 ./build/avalanchego --config-file=config.json
@@ -442,21 +443,25 @@ config.json:
 }
 ```
 
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+Como la opción `personal-api-enabled` está excluida, será puesta en `false` y desactivará el espacio de nombres `personal_*`.
 
-The options specify parameters for Coreth \(the C Chain\) as follows:
+Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la siguiente manera:
 
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
+* `snowman-api-enabled` -&gt; Habilita el API de Snowman.
+* `coreth-admin-apienabled` -&gt; Habilita el API de Administración en el plugin Coreth.
+* `net-api-enabled` -&gt; Habilita el API de `net_*`.
+* `rpc-gas-cap` -&gt; Establece el máximo de gas a ser consumido por un llamado RPC \(usado en `eth_estimateGas`\)
+* `rpc-tx-fee-cap` -&gt; Establece la comisión límite de transacción global \(price \* gaslimit\) para las variantes de transmisión. La unidad es AVAX.
+* `eth-api-enabled` -&gt; Habilita el API de `eth_*`.
+* `personal-api-enabled` -&gt; Habilita el API de `personal_*`.
+* `tx-pool-api-enabled` -&gt; Habilita el API de `txpool_*`.
+* `debug-api-enabled` -&gt; Habilita el API de `debug_*`.
+* `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4NTE4MDExN119
+eyJoaXN0b3J5IjpbMjA2MjM5OTI4MCwyMDU4NDI0MDMsLTk4Nj
+I1OTMxMywtOTQ5ODg4NDM2LC0xMTI0OTQ4MjYyLC0xMjcwODQw
+MTcsNjY1NzI0ODI5LC0xNTcyNDIwMTQ4LC0yMDY5NDI1NTgyLD
+E3NjczMzQ4MDksODc4MzgyODQyLDE1MTE1MTM5NjQsMjA1NTg4
+OTI3LDEyMjc1NjE1NzRdfQ==
 -->

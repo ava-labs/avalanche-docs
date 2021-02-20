@@ -1,6 +1,6 @@
-# Manage X-Chain Keys
+# Administrar las Keys de la X-Chain
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it’s registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJS viene con su propio Keychain de AVM. Este KeyChain se utiliza en las funciones de la API, permitiéndoles firmar con las keys con las que está registrado. El primer paso en este proceso es crear una instancia de AvalancheJS conectada a nuestro endpoint de la plataforma Avalanche de elección.
 
 ```text
 import {
@@ -12,78 +12,82 @@ import {
 
 let bintools = BinTools.getInstance();
 
-let myNetworkID = 12345; //default is 3, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
+let myNetworkID = 12345; //por defecto es 3, queremos anular eso para nuestra red local
+let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // La blockchainID de la X-Chain en esta red
 let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
-let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
+let xchain = ava.XChain(); //devuelve una referencia a la X-Chain usada por AvalancheJS
 ```
 
-## Accessing the Keychain <a id="accessing-the-keychain"></a>
+## Accediendo al Keychain <a id="accessing-the-keychain"></a>
 
-The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
+Se accede a la KeyChain a través de la X-Chain y puede ser referenciada directamente o a través de una variable de referencia.
 
 ```text
 let myKeychain = xchain.keyChain();
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+Esto expone la instancia de la clase AVMKeyChain que se crea cuando se crea la API de la X-Chain. En la actualidad, esto soporta la curva secp256k1 para los key pairs ECDSA.
 
-## Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
+## Creación de Key Pairs de la X-Chain<a id="creating-x-chain-key-pairs"></a>
 
-The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
-
-```text
-let newAddress1 = myKeychain.makeKey(); //returns a Buffer for the address
-```
-
-You may also import your existing private key into the KeyChain using either a Buffer…
+El KeyChain tiene la capacidad de crear nuevos KeyPairs para ti y devolver la dirección asociada al key pair.
 
 ```text
-let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //returns a Buffer
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let newAddress1 = myKeychain.makeKey(); //retorna un Buffer para la dirección
 ```
 
-… or an Avalanche serialized string works, too:
+También puede importar su private key existente en el KeyChain usando un Buffer...
+
+```text
+let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //retorna un Buffer
+let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la dirección
+
+```
+
+...o, una cadena serializada de Avalanche también funciona:
 
 ```text
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
+let newAddress2 = myKeychain.importKey(mypk); //retorna un Buffer para la dirección
 ```
 
-## Working with Keychains <a id="working-with-keychains"></a>
+## Trabajando con Keychains <a id="working-with-keychains"></a>
 
-The X-Chains’s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+El KeyChain de la X-Chains tiene capacidades de gestión de claves estandarizadas. Las siguientes funciones están disponibles en cualquier KeyChain que implemente esta interfaz.
 
 ```text
-let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
-let addressStrings = myKeychain.getAddressStrings(); //returns an array of strings for the addresses
-let exists = myKeychain.hasKey(newAddress1); //returns true if the address is managed
-let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
+let addresses = myKeychain.getAddresses(); //devuelve un conjunto de Buffers para las direcciones
+let addressStrings = myKeychain.getAddressStrings(); //devuelve un conjunto de cadenas para las direcciones
+let exists = myKeychain.hasKey(newAddress1); //retorna verdadero si la dirección es administrada
+let keypair = myKeychain.getKey(newAddress1); //retorna el KeyPair class
 ```
 
-## Working with Keypairs <a id="working-with-keypairs"></a>
+## Trabajando con Keypairs <a id="working-with-keypairs"></a>
 
-The X-Chain’s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+El KeyPair de la X-Chain tiene una funcionalidad estandarizada de KeyPair. Las siguientes operaciones están disponibles en cualquier KeyPair que implemente esta interfaz.
 
 ```text
-let address = keypair.getAddress(); //returns Buffer
-let addressString = keypair.getAddressString(); //returns string
+let address = keypair.getAddress(); //retorna Buffer
+let addressString = keypair.getAddressString(); //retorna string
 
-let pubk = keypair.getPublicKey(); //returns Buffer
-let pubkstr = keypair.getPublicKeyString(); //returns a CB58 encoded string
+let pubk = keypair.getPublicKey(); //retorna Buffer
+let pubkstr = keypair.getPublicKeyString(); //devuelve una cadena codificada CB58
 
-let privk = keypair.getPrivateKey(); //returns Buffer
-let privkstr = keypair.getPrivateKeyString(); //returns a CB58 encoded string
+let privk = keypair.getPrivateKey(); //retorna Buffer
+let privkstr = keypair.getPrivateKeyString(); //devuelve una cadena codificada CB58
 
-keypair.generateKey(); //creates a new random KeyPair
+keypair.generateKey(); //crea un nuevo KeyPair aleatorio
 
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
-let successul = keypair.importKey(mypk); //returns boolean if private key imported successfully
+let successul = keypair.importKey(mypk); //retorna un booleano si el private key fue importado exitosamente
 
 let message = Buffer.from("Wubalubadubdub");
-let signature = keypair.sign(message); //returns a Buffer with the signature
+let signature = keypair.sign(message); //retorna un Buffer con la firma
 
 let signerPubk = keypair.recover(message, signature);
-let isValid = keypair.verify(message, signature); //returns a boolean
+let isValid = keypair.verify(message, signature); //retorna un booleano
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIwNTkzMTY5OSwtNTIwNzkzMTk0XX0=
+-->

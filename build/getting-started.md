@@ -1,113 +1,113 @@
-# Getting Started: Run an Avalanche Node
+# Iniciando: Ejecutando un Nodo de Avalanche
 
-The quickest way to learn about Avalanche is to run a node and interact with the network.
+La forma más rápida de aprender sobre Avalanche es ejecutando un nodo e interactuando con la red.
 
 {% embed url="https://youtu.be/c\_SjtCiOFdg" %}
 
-In this tutorial \(est. time: 10 minutes\), we will:
+En este tutorial \(Tiempo estimado: 10 minutos\), podremos:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+* Instalar y ejecutar un nodo de Avalanche
+* Conectar con Avalanche
+* Enviar AVAX
+* Añadir tu nodo al conjunto de validadores
 
-If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
+Si tu problema no es tratado en las preguntas frecuentes, puedes pedir ayuda en el [Discord de Avalanche](https://chat.avax.network)! Trabajaremos para que superes cualquier obstáculo.
 
-This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](tutorials/nodes-and-staking/set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
+Este tutorial está dirigido principalmente a desarrolladores y personas interesadas en cómo funciona la Plataforma de Avalanche. Si sólo estás interesado en configurar un nodo para Staking, tal vez quieras seguir el Tutorial [Configura un Nodo de Avalanche con Instalador](tutorials/nodes-and-staking/set-up-node-with-installer.md). El instalador automatiza el proceso de instalación y lo configura como un servicio del sistema, el cual se recomienda para el funcionamiento desatendido. También puedes probar siguiendo este tutorial primero, y luego configurar el nodo usando el instalador como una solución permanente.
 
-## Requirements
+## Requisitos
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
+Avalanche es un protocolo increíblemente ligero, por lo que los requisitos mínimos de la computadora son bastante modestos.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Almacenamiento&gt; 10 GB de espacio libre
+* Sistema Operativo: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
-## Run an Avalanche Node and Send Funds
+## Ejecuta un Nodo de Avalanche y Envía Fondos
 
-Let’s install AvalancheGo, the Go implementation of an Avalanche node, and connect to the Avalanche Public Testnet.
+Instalemos AvalancheGo, la implementación Go de un nodo Avalanche, y conectémonos a la Red Pública de Avalanche.
 
-### Download AvalancheGo
+### Descarga AvalancheGo
 
-The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+El nodo es un programa binario. Puedes descargar el código fuente y luego construir el programa binario, o puedes descargar el binario pre-construido. No necesitas hacer ambas cosas.
 
-Downloading [pre-built binary](getting-started.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Descargando el [binario pre-construido](getting-started.md#binary) es más fácil y recomendable si sólo buscas dirigir tu propio nodo y hacer staking en él.
 
-Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
+Se recomienda construir el nodo desde el código fuente si eres un desarrollador que busca experimentar y construir en Avalanche.
 
-#### **Source Code**
+#### **Código Fuente**
 
-If you want to build the node from source, you're first going to need to install Go 1.15.5 or later. Follow the instructions [here](https://golang.org/doc/install).
+Si quieres construir el nodo desde el código fuente, primero tendrás que instalar Go 1.15.5 o posterior. Sigue las instrucciones  [aquí.](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Ejecuta `go version`. **It should be 1.15.5 or above.** Ejecuta `echo $GOPATH`. **No debe estar vacía.**
 
-Download the AvalancheGo repository:
+Descarga el repositorio de AvalancheGo:
 
 ```cpp
 go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
-Note to advanced users: AvalancheGo uses Go modules, so you can clone the [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
+Nota para usuarios avanzados: AvalancheGo utiliza módulos Go, por lo que puedes clonar el [Repositorio de AvalancheGo](https://github.com/ava-labs/avalanchego) en otros lugares que no sean su GOPATH
 
-Change to the `avalanchego` directory:
+Cambia al directorio de AvalancheGo:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
-Build AvalancheGo:
+Construye en AvalancheGo:
 
 ```cpp
 ./scripts/build.sh
 ```
 
-The binary, named `avalanchego`, is in `avalanchego/build`.
+El Binario, llamado `avalanchego`, está ubicado en `avalanchego/build`.
 
-#### **Binary**
+#### **Binario**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Si quieres descargar un binario pre-construido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona la versión que quieras \(probablemente la última.\)
 
-Under `Assets`, select the appropriate file.
+Debajo de `Assets`, selecciona el archivo apropiado.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+Para MacOS:  
+Descarga: `avalanchego-macos-<VERSION>.zip`  
+Descomprime: `unzip avalanchego-macos-<VERSION>.zip`  
+La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en PCs o proveedores de nube:  
+Descarga: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en computadoras basadas en RaspberryPi4 o similares basadas en Arm64:   
+Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-### Start a Node, and Connect to Avalanche
+### Inicia un Nodo, y Conéctate a Avalanche
 
-If you built from source:
+Si construyes desde el código fuente:
 
 ```cpp
 ./build/avalanchego
 ```
 
-If you are using the pre-built binaries on MacOS:
+Si estás usando los binarios pre-construidos en MacOS:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Si estás usando los binarios pre-construidos en Linux:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
+Cuando el nodo comienza, tiene que hacer bootstrapping \(actualizarse con el resto de la red\). Verás registros sobre el bootstrapping. Cuando una cadena termina de hacer el bootstrapping, imprimirá un registro como este:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) by copying and pasting the following command:
+Para comprobar si una cadena termina de hacer el bootstrapping, en otra ventana terminal ejecute [`info.isBootstrapped`](avalanchego-apis/info-api.md#info-isbootstrapped) copiando y pegando el siguiente comando:
 
 ```cpp
 curl -X POST --data '{
@@ -120,21 +120,22 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+Si retorna como`true`, la cadena terminó de hacer el bootstrapping. Si haces un llamado API a una cadena que no ha terminado el bootstrapping,  esta retornará `API call rejected because chain is not done bootstrapping`. Si tu nodo nunca termina el bootstrapping, sigue [Estas Preguntas más Frecuentes](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), si sigues experimentando problemas contactanos en [Discord.](https://chat.avalabs.org/)
 
-Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
+Tu nodo está funcionando y conectado ahora. Si quieres usar tu nodo como validador en la red principal, mira [este tutorial](tutorials/nodes-and-staking/add-a-validator.md#add-a-validator-with-avalanche-wallet) para saber cómo añadir tu nodo como validador usando la Wallet Web.
 
-You can use `Ctrl + C` to kill the node.
+Puedes usar `Ctrl + C` para apagar el Nodo.
 
-If you want to experiment and play with your node, read on.
+Si quieres experimentar y jugar con tu nodo, sigue leyendo.
 
-To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+Para poder hacer llamados a la API de su nodo desde otras máquinas, al iniciar el nodo incluya el argumento `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+Para conectarse a la Fuji Testnet en lugar de la red principal, use el argumento `--network-id=fuji`. 
+Puedes conseguir fondos en el Testnet desde el [faucet.](https://faucet.avax-test.network/)
 
-### Create a Keystore User
+### Crear un Usuario del Keystore 
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
+Los nodos de Avalanche proporcionan un **Keystore.** El Keystore gestiona los usuarios y es muy parecido a una [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). Un usuario es una identidad protegida por una contraseña que un cliente puede utilizar cuando interactúa con blockchains. **Sólo debes crear un usuario de keystore en un nodo que tú operes, ya que el operador del nodo tiene acceso a tu contraseña en texto plano.** Para crear un usuario ejecuta [`keystore.createUser`](avalanchego-apis/keystore-api.md#keystore-createuser):
 
 ```cpp
 curl -X POST --data '{
@@ -148,7 +149,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -158,17 +159,17 @@ The response should be:
 }
 ```
 
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](avalanchego-apis/keystore-api.md) to see how.
+Ahora, tienes un usuario en este nodo. Los datos del Keystore existen a nivel de nodo. Los usuarios que creas en el Keystore de un nodo no existen en otros nodos pero tu puedes importar/exportar usuarios a/desde el Keystore. Mira la [ API del Keystore](avalanchego-apis/keystore-api.md) para ver como.
 
 {% hint style="danger" %}
-**You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
+**Sólo debes mantener una pequeña cantidad de tus fondos en tu nodo.** La mayoría de sus fondos deberían estar asegurados por un nemónico que no se guarde en ningún ordenador.
 {% endhint %}
 
-### Create an Address
+### Crear una Dirección
 
-Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
+Avalanche es una plataforma de blockchains heterogéneas, una de las cuales es la [X-Chain](../learn/platform-overview/#exchange-chain-x-chain), que actúa como una plataforma descentralizada para la creación y el comercio de activos digitales. Ahora vamos a crear una dirección para guardar AVAX en nuestro nodo.
 
-To create a new address on the X-Chain, call [`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](avalanchego-apis/exchange-chain-x-chain-api.md):
+Para crear una nueva dirección en la X-Chain, ejecute [`avm.createAddress`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), un método de la [API de la X-Chain](avalanchego-apis/exchange-chain-x-chain-api.md):
 
 ```cpp
 curl -X POST --data '{
@@ -182,11 +183,11 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-If your node isn’t finished bootstrapping, this call will return status `503` with message `API call rejected because chain is not done bootstrapping`.
+Si tu nodo no ha terminado el bootstrapping, esta llamada devolverá el estado `503` con el mensaje `API call rejected because chain is not done bootstrapping`.
 
-Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID \(or alias\) is `X` \(i.e., the X-Chain\).
+Ten en cuenta que hacemos esta petición a `127.0.0.1:9650/ext/bc/X`. La parte`bc/X`  significa que la solicitud se envía a la blockchain cuyo ID \(o alias\) es `X` \(es decir, la X-Chain\).
 
-The response should look like this:
+La respuesta debería ser así:
 
 ```cpp
 {
@@ -198,23 +199,23 @@ The response should look like this:
 }
 ```
 
-Your user now controls the address `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` on the X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
+Tu usuario ahora controla la dirección `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` en la X-Chain. Para diferenciar las direcciones de las diferentes cadenas, la convención de Avalanche es que una dirección incluya el ID o  alias de la cadena en que existe. Por lo tanto, esta dirección comienza `X-`, denotando que existe en la X-Chain.
 
-### Send Funds From Avalanche Wallet to Your Node
+### Envíe Fondos desde la Wallet de Avalanche a Su Nodo
 
 {% hint style="warning" %}
-_**Note: the instructions below move real funds.**_
+_**Nota: las instrucciones de abajo mueven fondos reales.**_
 {% endhint %}
 
-Let’s move funds from the Avalanche Wallet to your node.
+Vamos a mover fondos desde la Wallet de Avalanche a su nodo.
 
-Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, then `Mnemonic Key Phrase`. Enter your mnemonic phrase.
+Vamos a la [Wallet de Avalanche ](https://wallet.avax.network). Click en `Access Wallet`, ahora `Mnemonic Key Phrase`. Introduce tu frase mnemónica.
 
-Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
+Haz click en la pestaña`Send` a la izquierda. Para la cantidad, seleccione, `.002` AVAX. Ingrese la dirección de su nodo, luego haga clic en `Confirm`.
 
 ![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%283%29.png)
 
-We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
+Podemos comprobar el balance de una dirección de un activo dado ejecutando `avm.getBalance`, otro método de la API de la X-Chain. Comprobemos que la transferencia se ha realizado:
 
 ```cpp
 curl -X POST --data '{
@@ -228,9 +229,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric string.
+Observe que AVAX tiene la identificación especial `AVAX`. Normalmente la ID de un activo es una cadena alfanumérica.
 
-The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
+La respuesta debe indicar que tenemos `2,000,000 nAVAX` o `0.002 AVAX`.
 
 ```cpp
 {
@@ -248,9 +249,9 @@ The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 }
 ```
 
-### Send AVAX
+### Enviar AVAX
 
-Now, let’s send some AVAX by making an API call to our node:
+Ahora, enviemos algunos AVAX haciendo un llamado API a nuestro nodo:
 
 ```cpp
 curl -X POST --data '{
@@ -268,17 +269,17 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-`amount` specifies the number of nAVAX to send.
+`amount` especifica en numero de nAVAX a enviar.
 
-If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
+Si quieres especificar una dirección en particular donde debe ir el cambio, puedes especificarla en `changeAddr`. Puedes dejar este campo vacío; si lo haces, cualquier cambio irá a una de las direcciones que tu usuario controla.
 
-In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below.
+Para evitar el spam, Avalanche requiere el pago de una comisión por la transacción. La comisión por la transacción se deducirá automáticamente de una dirección controlada por el usuario cuando se emita una transacción. Tenlo en cuenta cuando revises los saldos de abajo.
 
 {% page-ref page="../learn/platform-overview/transaction-fees.md" %}
 
-When you send this request, the node will authenticate you using your username and password. Then, it will look through all the [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controlled by your user until it finds enough AVAX to satisfy the request.
+Cuando envíes esta solicitud, el nodo te autentificará con tu nombre de usuario y contraseña. Luego, buscará a través de todas las [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controladas por tu usuario hasta que encuentre suficiente AVAX para satisfacer la petición.
 
-The response contains the transaction’s ID. It will be different for every invocation of `send`.
+La respuesta contiene el ID de la transacción. Será diferente para cada invocación de `send`.
 
 ```cpp
 {
@@ -291,9 +292,9 @@ The response contains the transaction’s ID. It will be different for every inv
 }
 ```
 
-#### Checking the Transaction Status
+#### Comprobando el Estado de la Transacción
 
-This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Esta transacción sólo tardará uno o dos segundos en finalizar. Podemos comprobar su estado con [`avm.getTxStatus`](avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -306,7 +307,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should indicate that the transaction was accepted:
+La respuesta debe indicar que la transacción fue aceptada:
 
 ```cpp
 {
@@ -318,9 +319,9 @@ The response should indicate that the transaction was accepted:
 }
 ```
 
-You might also see that `status` is `Processing` if the network has not yet finalized the transaction.
+También podría ver que `status` está en `Processing` si la red no ha finalizado aún la transacción.
 
-Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
+Una vez que vea que la transacción es `Accepted`, comprobar el saldo de la dirección `to` para ver que tiene el AVAX que enviamos:
 
 ```cpp
 curl -X POST --data '{
@@ -334,7 +335,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -346,7 +347,7 @@ The response should be:
 }
 ```
 
-In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` to see that AVAX we sent was deducted from its balance, as well as the transaction fee.
+De la misma manera, podríamos comprobar `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` para ver que el AVAX que enviamos fue deducido de su balance, así como la comisión de la transacción.
 
 {% page-ref page="tutorials/nodes-and-staking/add-a-validator.md" %}
 
@@ -360,3 +361,9 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 
 {% page-ref page="references/" %}
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3MTk4MzYyMDUsMTY0ODc2MCwxODYyOT
+MwNDY0LDEzMTMyOTk5NTcsMTgyODM3OTg3NCwtODAwMzgwODg1
+LDE1MDU3NjI4MTcsLTIwNjc3ODQyNTAsLTE5Mjg0MzUzODMsLT
+E3MjI2MTY1ODldfQ==
+-->

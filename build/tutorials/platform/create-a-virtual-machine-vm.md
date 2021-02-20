@@ -1,22 +1,22 @@
-# Create a Virtual Machine \(VM\)
+# Crea una Virtual Machine \(VM\)
 
-_The code below is slightly out of date. Some methods, interfaces, and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar, and this tutorial is still useful in demonstrating how Avalanche’s VM model works._
+_El código de abajo está ligeramente desactualizado. Algunos métodos, interfaces e implementaciones son ligeramente diferentes a los de este tutorial. Vamos a dejar esto porque el código actual es muy similar, y este tutorial sigue siendo útil para demostrar cómo funciona el modelo VM de Avalanche._
 
-## Introduction
+## Introducción
 
-One of the core features of Avalanche is the creation of new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
+Una de las características principales de Avalanche es la creación de nuevas blockchains personalizadas, que están definidas por [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
+En este tutorial, crearemos una VM muy simple. La blockchain definida por la VM es un servidor de timestamp. Cada bloque de la blockchain contiene el timestamp de cuando fue creada, junto con un dato de 32 bytes \(carga útil\). El timestamp de cada bloque es posterior a la de su predecesor.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+Tal servidor es útil porque puede utilizarse para probar que un dato existía en el momento en que se creó el bloque. Supongamos que tienes un manuscrito de un libro, y quieres ser capaz de probar en el futuro que el manuscrito existe hoy. Añades un bloque a la blockchain donde la carga útil del bloque es un hash de tu manuscrito. En el futuro, puede probar que el manuscrito existe hoy, mostrando que el bloque tiene el hash de su manuscrito en su carga. \(esto se deriva del hecho de que encontrar la imagen previa de un hash es imposible\).
 
-Before we get to the implementation of the VM, we’ll look at the interface that a VM must implement to be compatible with the platform’s Avalanche consensus engine. We’ll show and explain all the code in snippets. If you want to see the code in one place, rather than in snippets, you can see it in our [GitHub repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
+Antes de llegar a la implementación de la VM, veremos la interfaz que una VM debe implementar para ser compatible con el motor de consenso de la plataforma Avalanche. Mostraremos y explicaremos todo el código en fragmentos. Si quieres ver el código en un lugar, en lugar de en fragmentos, puedes verlo en nuestro [Repositorio de GitHub.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
 
-## The `snowman.VM` Interface
+## La Interfaz `snowman.VM`
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus protocol. In order to be compatible with Snowman, the VM that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+Para llegar a un consenso en las blockchains lineales \(a diferencia de las blockchains DAG\), Avalanche utiliza el protocolo de consenso Snowman. Para ser compatible con Snowman, el VM que define la blockchain debe implementar la interfaz`snowman.VM`, que incluimos a continuación de su declaración en[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example. It’s not necessary you understand every nuance.
+La interfaz es grande, pero no te preocupes, te explicaremos cada método y veremos un ejemplo de implementación. No es necesario que entiendas todos los detalles.
 
 ```cpp
 // ChainVM defines the methods a Virtual Machine must implement to use the Snowman consensus engine.
@@ -99,11 +99,11 @@ type ChainVM interface {
 }
 ```
 
-## The snowman.Block Interface
+##  La Interfaz snowman.Block 
 
-You may have noticed the `snowman.Block` type referenced in the `snowman.VM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+Puede que hayas notado `snowman.Block` al que se hace referencia en la interfaz `snowman.VM`. este describe los métodos que un bloque debe implementar para ser un bloque en una cadena lineal \(Snowman\) 
 
-Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+Veamos esta interfaz y sus métodos, los cuales copiamos de [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
 ```cpp
 // Block is a block in a blockchain.
@@ -163,44 +163,45 @@ type Block interface {
 }
 ```
 
-## Libraries
+## Bibliotecas
 
-We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
-In our example, we use both of the library types below, and we encourage you to use them too.
+Hemos creado algunos tipos que tu implementación VM puede integrar \(la incrustación es como la versión de la sucesión de Go\) para manejar el código de la plantilla.
+
+En nuestro ejemplo, usamos los dos tipos de biblioteca que se muestran a continuación, y te animamos a que los uses también.
 
 ### core.SnowmanVM
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
+Este modelo, una estructura, contiene métodos y campos comunes a todas las implementaciones de la interfaz `snowman.ChainVM` 
 
 #### **Methods**
 
-This type implements the following methods, which are part of the `snowman.ChainVM` interface:
+Este modelo implementa los siguientes métodos, que forman parte de la interfaz `snowman.ChainVM` :
 
 * `SetPreference`
 * `Shutdown`
 * `LastAccepted`
 
-If your VM implementation embeds a `core.SnowmanVM`, you do not need to implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
+Si tu implementación de VM incorpora un `core.SnowmanVM`, no necesitas implementar ninguno de estos métodos porque ya están implementados por `core.SnowmanVM`. Si quieres, puedes anular estos métodos que se han heredado.
 
-#### **Fields**
+#### **Campos**
 
-This type contains several fields that you’ll want to include in your VM implementation. Among them:
+Este modelo contiene varios campos que querrás incluir en tu implementación de VM. Entre ellos:
 
-* `DB`: the blockchain’s database
-* `Ctx`: the blockchain’s runtime context
-* `preferred`: ID of the preferred block, which new blocks will be built on
-* `lastAccepted`: ID of the most recently accepted block
-* `toEngine`: the channel where messages are sent to the consensus protocol powering the blockchain
-* `State`: used to persist data such as blocks \(can be used to put/get any bytes\)
+* `DB`: la base de datos de la blockchain
+* `Ctx`: el contexto de ejecución de la blockchain
+* `preferred`: ID del bloque preferido, sobre el cual se construirán nuevos bloques
+* `lastAccepted`: ID del bloque más recientemente aceptado
+* `toEngine`: el canal donde se envían los mensajes al protocolo de consenso que alimenta la blockchain
+* `State`: usado para persistir datos como bloques \(puede ser usado para poner/obtener cualquier byte\)
 
 ### core.Block
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
+Este modelo, una estructura, contiene métodos y campos comunes a todas las implementaciones de la interfaz `snowman.Block`.
 
-#### **Methods**
+#### **Métodos**
 
-This type implements the following methods, which are part of the `snowman.Block` interface:
+Este modelo implementa los siguientes métodos, que forman parte de la interfaz `snowman.Block`:
 
 * `ID`
 * `Parent`
@@ -208,23 +209,25 @@ This type implements the following methods, which are part of the `snowman.Block
 * `Reject`
 * `Status`
 
-Your VM implementation will probably override `Accept` and `Reject` so that these methods cause application-specific state changes.
+Su implementación VM probablemente anulará `Accept` y `Reject` para que estos métodos causen cambios de estado específicos de la aplicación.
 
-#### **Fields**
+#### **Campos**
 
-`core.Block` has a field VM, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+`core.Block` tiene un campo VM, que es una referencia a `core.SnowmanVM`. Esto significa que un `core.Block` tiene acceso a todos los campos y métodos de ese modelo.
 
-## Timestamp Server Implementation
+## Implementación del Servidor de Timestamp
 
-Now, we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `snowman.VM` and whose blocks implement `snowman.Block`.
+Ahora, sabemos la interfaz que nuestra VM debe implementar y las bibliotecas que podemos usar para construir una VM.
 
-### Block
+Escribamos nuestra VM, que implementa `snowman.VM` y cuyos bloques implementan `snowman.Block`.
 
-First, let’s look at our block implementation.
+### Bloque
 
-The type declaration is:
+
+Primero, veamos la implementación de nuestro bloque.
+
+El tipo de declaración es:
 
 ```cpp
 // Block is a block on the chain.
@@ -238,9 +241,9 @@ type Block struct {
 }
 ```
 
-The `serialize:"true"` tag indicates when a block is persisted in the database or sent to other nodes. The field with the tag is included in the serialized representation.
+La etiqueta "serialize: "true"` indica cuando un bloque persiste en la base de datos o se envía a otros nodos. El campo con la etiqueta se incluye en la representación serializada.
 
-#### **Verify**
+#### **Verifica**
 
 ```cpp
 // Verify returns nil iff this block is valid.
@@ -282,13 +285,14 @@ func (b *Block) Verify() error {
 }
 ```
 
-That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
+¡Ese es todo el código para la implementación de nuestro bloque! Todos los demás métodos de `snowman.Block`que nuestro "bloque" debe implementar, son heredados de `*core.Block`.
 
 ### Virtual Machine
 
-Now, let’s look at the implementation of VM, which implements the `snowman.VM` interface.
 
-The declaration is:
+Ahora, veamos la implementación de VM, la cual implementa la interfaz `snowman.VM`.
+
+La declaración es:
 
 ```cpp
 // This Virtual Machine defines a blockchain that acts as a timestamp server
@@ -304,7 +308,7 @@ type VM struct {
 }
 ```
 
-#### **Initialize**
+#### **Inicializar**
 
 ```cpp
 // Initialize this vm
@@ -386,7 +390,7 @@ func (vm *VM) Initialize(
 
 #### **proposeBlock**
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. We’ll see where this is called later.
+Este método añade un dato al mempool y notifica a la capa de consenso de la blockchain que un nuevo bloque está listo para ser construido y votado. Veremos dónde se ejecuta esto más tarde.
 
 ```cpp
 // proposeBlock appends [data] to [p.mempool].
@@ -451,7 +455,7 @@ func (vm *VM) NewBlock(parentID ids.ID, data [dataLen]byte, timestamp time.Time)
 
 #### **BuildBlock**
 
-This method is called by the consensus layer after the application layer tells it that a new block is ready to be built \(i.e., when `vm.NotifyConsensus()` is called\).
+Este método es llamado por la capa de consenso después de que la capa de aplicación le dice que un nuevo bloque está listo para ser construido \(Es decir, cuando se ejecuta`vm.NotifyConsensus()`\).
 
 ```cpp
 // BuildBlock returns a block that this VM wants to add to consensus
@@ -501,9 +505,9 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 
 ### Service
 
-AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
+AvalancheGo usa la [Librería RPC de Gorilla](https://www.gorillatoolkit.org/pkg/rpc) para implementar APIs.
 
-Using Gorilla, there is a struct for each API service. In the case of this blockchain, there’s only one API service.
+Usando Gorilla, hay una estructura para cada servicio API. En el caso de esta blockchain, sólo hay un servicio de API.
 
 The service struct’s declaration is:
 
@@ -512,11 +516,11 @@ The service struct’s declaration is:
 type Service struct{ vm *VM }
 ```
 
-For each API method, there is: \* A struct that defines the method’s arguments \* A struct that defines the method’s return values \* A method that implements the API method, and is parameterized on the above 2 structs
+Para cada método API, hay: \* Una estructura que define los argumentos del método. \* Una estructura que define los valores de retorno del método. \* Un método que implementa el método de la API, y está parametrizado en las dos estructuras anteriores.
 
 #### **ProposeBlock**
 
-This API method allows clients to add a block to the blockchain.
+Este método de la API permite que los clientes añadan un bloque a la blockchain.
 
 ```cpp
 // ProposeBlockArgs are the arguments to ProposeValue
@@ -555,7 +559,7 @@ func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *P
 
 #### **GetBlock**
 
-This API method allows clients to get a block by its ID.
+Este método de la API permite a los clientes obtener un bloque por su ID.
 
 ```cpp
 // APIBlock is the API representation of a block
@@ -618,11 +622,11 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 
 #### **API**
 
-The resulting API has the following methods:
+El API resultante tiene los siguientes métodos:
 
 **timestamp.getBlock**
 
-Get a block by its ID. If no ID is provided, get the latest block.
+Consigue un bloque por su ID. Si no se proporciona un ID, obtener el último bloque.
 
 **Signature**
 
@@ -636,10 +640,10 @@ timestamp.getBlock({id: string}) ->
     }
 ```
 
-* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
-* `timestamp` is the Unix timestamp when this block was created
-* `parentID` is the block’s parent
+* `id` es la ID del bloque que se está recuperando. Si se omite en los argumentos, se obtiene el último bloque
+* `data` es la base 58 \(con suma de comprobación\)  que representa la carga útil de 32 bytes del bloque.
+* `timestamp` es el timestamp de Unix de cuando este bloque fue creado
+* `parentID` es el padre del bloque
 
 **Example Call**
 
@@ -671,7 +675,7 @@ curl -X POST --data '{
 
 **timestamp.proposeBlock**
 
-Propose the creation of a new block.
+Propone la creación de un nuevo bloque.
 
 **Signature**
 
@@ -679,7 +683,7 @@ Propose the creation of a new block.
 timestamp.proposeBlock({data: string}) -> {success: bool}
 ```
 
-* `data` is the base 58 \(with checksum\) representation of the proposed block’s 32 byte payload.
+* `data` es la base 58 \(con suma de comprobación\)  que representa la carga útil de 32 bytes del bloque propuesto.
 
 **Example Call**
 
@@ -706,13 +710,18 @@ curl -X POST --data '{
 }
 ```
 
-### Wrapping Up
+### Concluimos!
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
+¡Eso es todo! Esta es la implementación completa de un VM que define un servidor de timestamp basado en una blockchain.
 
-In this tutorial, we learned:
+En este tutorial, aprendimos:
 
-* The `snowman.ChainVM` interface, which all VMs that define a linear chain must implement
-* The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
-* The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
+* La interfaz `snowman.ChainVM` que todos los VM que definen una cadena lineal deben implementar
+* La interfaz `snowman.Block`, que todos los bloques que forman parte de una cadena lineal deben implementar
+* Las librerías  `core.SnowmanVM` y `core.Block`, que hacen que la definición de las VMs sea más rápida.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTAzMzU5NzYzNSwtMTEwNDQwMDc3MywxMT
+I5MTQxMjkxLC0xNTA5NTY0Njk0LC0yMTY4Mjc5NDMsMTQ4NjEz
+NTA4OV19
+-->

@@ -1,22 +1,26 @@
-# Ortelius Release Notes
+# Notas de Versión de Ortelius
 
-## Ortelius Release Notes v1.1.1 \([View on GitHub](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)\)
+## Notas de Versión de Ortelius v1.1.1 \([Ver en GitHub](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)\)
 
 ![Ortelius release notes v1.1.1.png](../../.gitbook/assets/Ortelius-release-notes-v1.1.1.png)
 
-Breaking changes:
 
-* None
+Cambios destacados:
 
-Behavioral changes:
+* Ninguno
 
-* Round times to 1 second precisions
+Cambios de comportamiento:
 
-Other changes:
+* Redondea los tiempos a precisiones de 1 segundo
 
-* Add opt-in support to not return genesis data
-* Add fixed/variable cap information to API
-* Add transaction fee data to API
+Otros cambios:
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+* Agregado el soporte para no devolver los datos de la génesis
+* Agregada información de capital fijo/variable a la API
+* Agregados datos de comisiones de transacción a la API
 
+Para ayuda con esta actualización ve a [Preguntas Frecuentes de los Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avax.network) para que te ayudemos.
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTM5MTA1NjA4N119
+-->

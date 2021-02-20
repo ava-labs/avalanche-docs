@@ -1,63 +1,66 @@
-# Run an Avalanche Node on Linux using Install Script
+# Ejecuta un Nodo de Avalanche en Linux Usando el Script de Instalación
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+Tenemos un script de shell que instala AvalancheGo en tu computadora. Este script establece un nodo de ejecución completo en cuestión de minutos con un mínimo de entradas del usuario.
 
-## Before you start
+## Antes de Comenzar
 
-This install script assumes:
+Este script de instalación asume que:
 
-* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
-* AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges \(can run `sudo`\)
+* OS: Ubuntu 18.04 o 20.04 \(MacOS y Windows aún no soportado\)
+* AvalancheGo no está funcionando y no está instalado como un servicio
+* El usuario que ejecuta el script tiene privilegios de superusuario \(puede ejecutar `sudo`\)
 
-### Environment considerations
+### Consideraciones del Entorno
 
-If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
 
-If you have a node already running on the computer, stop it before running the script.
+Si ejecutas una distribución diferente de Linux, el script podría no funcionar como debería. Asume que `systemd` se usa para ejecutar servicios del sistema. Otras distribuciones de Linux podrían usar algo más, o podrían tener archivos en lugares diferentes a los que asume el script.
 
-#### Node running from terminal
+Si ya tienes un nodo ejecutándose en el ordenador, detenlo antes de ejecutar el script.
 
-If your node is running in a terminal stop it by pressing `ctrl+C`.
+#### Nodo ejecutándose desde la terminal
 
-#### Node running as a service
+Si tu nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
 
-If your node is already running as a service, then you probably don't need this script. You're good to go.
+#### Nodo ejecutándose como un servicio
 
-#### Node running in the background
+Si tu nodo ya está funcionando como un servicio, entonces probablemente no necesites este script. Estás listo.
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+#### Nodo ejecutándose en segundo plano
+
+Si tu nodo se está ejecutándo en segundo plano
+ \(ejecutandose `nohup`, por ejemplo\)  encuentra el proceso que ejecuta el nodo ejecutando `ps aux | grep avalanche`. Esto producirá una salida como:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-Look for line that doesn't have `grep` on it. In this example, that is the second line. It shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+Busca una línea que no tenga `grep`. En este ejemplo, esa es la segunda línea. Muestra información sobre tu nodo. Fíjate en el id de proceso, en este caso, "2630". Detén el nodo ejecutando `kill -2 2630`.
 
-#### Node working files
+#### Archivos de Trabajo de Nodo
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
+Si anteriormente ejecutó un nodo de AvalancheGo en esta computadora, tendrá archivos de nodos locales almacenados en `$HOME/.avalanchego` directory. Esos archivos no serán alterados, y el nodo establecido por el script continuará operando con la misma identidad y estado que tenía antes. Dicho esto, para la seguridad de tu nodo, haz una copia de seguridad de los archivos `staker.crt` y `staker.key`, encontrados en `$HOME/.avalanchego/staking` y los guardamos en un lugar seguro. Puedes usar esos archivos para recrear tu nodo en un ordenador diferente si alguna vez lo necesitas.
 
-### Networking considerations
+### Consideraciones de la Red
 
-To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+Para funcionar con éxito, AvalancheGo necesita aceptar conexiones de Internet en el puerto de red `9651`. Antes de proceder a la instalación, debes determinar el entorno de red en el que se ejecutará tu nodo.
 
-#### Running on a cloud provider
+#### Ejecutandose en un cloud provider
 
-If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already. The script will try to find out the IP by itself, but that might not work in all environments, so you will need to check the IP or enter it yourself.
+Si tu nodo se ejecuta en una instancia de ordenador de un cloud provider, tendrá una IP estática. Averigua cuál es esa IP estática, o configúrala si no lo has hecho ya. El script tratará de averiguar la IP por sí mismo, pero eso podría no funcionar en todos los entornos, por lo que tendrás que comprobar la IP o introducirla tú mismo.
 
-#### Running on a home connection
+#### Ejecutandose en una Conexión Doméstica
 
-If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
 
-As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+Si estás ejecutando un nodo en un ordenador que está en una conexión de Internet residencial, tienes una IP dinámica; es decir, tu IP cambiará periódicamente. El script de instalación configurará el nodo apropiadamente para esa situación. Pero, para una conexión doméstica, necesitará configurar el reenvío del puerto `9651` de Internet a la computadora en la que está instalado el nodo.
 
-## Running the script
+Como hay demasiados modelos y configuraciones de routers, no podemos dar instrucciones sobre qué hacer exactamente, pero hay guías en línea que se pueden encontrar \(como [esta](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), o [esta](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), y el soporte de su proveedor de servicios también podría ayudar.
 
-So, now that you prepared your system and have the info ready, let's get to it.
+## Ejecutando el script
 
-To download and run the script, enter the following in the terminal:
+Así que, ahora que has preparado tu sistema y tienes la información lista, vamos a hacerlo.
+
+Para descargar y ejecutar el script, introduce lo siguiente en la terminal:
 
 ```text
 wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
@@ -65,7 +68,7 @@ chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
 
-And we're off! The output should look something like this:
+La salida debería ser algo como esto:
 
 ```text
 AvalancheGo installer
@@ -84,7 +87,7 @@ avalanchego-v1.1.1/avalanchego
 Node files unpacked into /home/ubuntu/avalanche-node
 ```
 
-And then the script will prompt you for information about the network environment:
+Y luego el script te pedirá información sobre el entorno de la red:
 
 ```text
 To complete the setup some networking information is needed.
@@ -94,15 +97,15 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
+Ingresa`1` si tienes una IP dinámica y `2` si tienes una IP estática. Si estás en una IP estática, intentará detectar automáticamente la IP y te pedirá confirmación.
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
+Confirma con `y`, o `n` si la IP detectada no es correcta \(o vacía\), y luego introduce la IP correcta en el siguiente paso.
 
-The script will then continue with system service creation and finish with starting the service.
+El script continuará con la creación del servicio del sistema y terminará con el inicio del servicio.
 
 ```text
 Installing service with public IP: 3.15.152.14
@@ -119,17 +122,17 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-The script is finished, and you should see the system prompt again.
+El script finalizó, y deberías ver un mensaje del sistema.
 
-## Post installation
+## Después de la instalación
 
-AvalancheGo should be running in the background as a service. You can check that it's running with:
+AvalancheGo debería funcionar en segundo plano como un servicio. Puedes comprobar que se está ejecutando con:
 
 ```text
 sudo systemctl status avalanchego
 ```
 
-This will print the node's latest logs, which should look like this:
+Esto imprimirá los últimos registros del nodo, que deberían verse así:
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service
@@ -153,61 +156,62 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Note the `active (running)` which indicates the service is running ok. You may need to press `q` to return to the command prompt.
+Fíjese en el `active` (en marcha)" que indica que el servicio está funcionando bien. Es posible que tengas que pulsar `q` para volver a la línea de comandos.
 
-To find out your NodeID, which is used to identify your node to the network, run the following command:
+Para encontrar el ID de tu nodo, el cual se usa para identificar tu nodo a la red, ejecute el siguiente comando:
 
 ```text
 sudo journalctl -u avalanchego | grep "node's ID"
 ```
 
-It will produce output like:
+Si todo va bien, la respuesta debería ser algo como esto: 
 
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
 
-Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
 
-Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
+Pon `NodeID-` al valor para obtener, por ejemplo, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Guarda eso; será necesario para staking o buscar tu nodo.
+
+Tu nodo debería estar en el proceso de arranque ahora. Puedes monitorear el progreso emitiendo el siguiente comando:
 
 ```text
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl+C` when you wish to stop reading node output.
+Presiona `ctrl+C` cuando desees dejar de leer la salida del nodo.
 
-## Stopping the node
+## Deteniendo el Nodo
 
-To stop AvalancheGo, run:
+Para detener AvalancheGo, ejecuta:
 
 ```text
 sudo systemctl stop avalanchego
 ```
 
-To start it again, run:
+Para comenzarlo de nuevo, ejecuta:
 
 ```text
 sudo systemctl start avalanchego
 ```
 
-## Node upgrade
+## Actualización del Nodo
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. When a new version of the node is released, you will notice log lines like:
+AvalancheGo es un proyecto en curso y hay actualizaciones regulares de la versión. La mayoría de las actualizaciones se recomiendan pero no se requieren. Se avisará con antelación para las actualizaciones que no sean compatibles con las versiones anteriores. Cuando se libere una nueva versión del nodo, notarás líneas de registro como:
 
 ```text
 Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
 ```
 
-It is recommended to always upgrade to the latest version, because new versions bring bug fixes, new features and upgrades.
+Se recomienda siempre actualizar a la última versión, porque las nuevas versiones traen correcciones de errores, nuevas características y actualizaciones.
 
-To upgrade your node, just run the installer script again:
+Para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de nuevo:
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+Detectará que ya tiene instalado AvalancheGo:
 
 ```text
 AvalancheGo installer
@@ -218,7 +222,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Luego actualizará tu nodo a la última versión, y después de hacerlo, iniciará el nodo de nuevo, y mostrará la información sobre la última versión:
 
 ```text
 Node upgraded, starting service...
@@ -227,13 +231,18 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-## What next?
+## ¿Qué sigue?
 
-That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
+¡Eso es, estás dirigiendo un nodo de AvalancheGo! ¡Felicidades! Haznos saber que lo hiciste en nuestro [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) o [Reddit](https://t.me/avalancheavax)!
 
-If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+Si estás en una red residencial \(IP dinámica\), no te olvides de configurar el reenvío de puertos. Si estás en un proveedor de cloud service, estás listo.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), o subir el nivel de su instalación configurando la [monitorización de nodos](setting-up-node-monitoring.md) para tener una mejor visión de lo que su nodo está haciendo.
 
-If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
-
+Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTUwOTMzMzEwMyw5ODg1ODI2NzYsMTU5MT
+QyODM5NCwtMTA0OTY3MzMwNiwxMjE0MDYyMjM4LC00MzQ4NzMw
+NDQsLTg1NzQzNTE1MCwtMjA4NTkwMzgxMywtMTc3MzU3Njg1Ni
+wtMTU2NjMwMTU4OCwtMzU2ODg1MzI0XX0=
+-->

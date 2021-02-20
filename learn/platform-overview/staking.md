@@ -1,105 +1,112 @@
 ---
-description: Learn how to stake on Avalanche by validating or delegating
+descripción: Aprende como hacer stake en Avalanche validando o delegando
 ---
 
 # Staking
 
-Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
+El Staking es el proceso de bloquear tokens para apoyar una red mientras se recibe una recompensa a cambio \(Las recompensas pueden ser el aumento de la utilidad de la red, la compensación monetaria, etc.\). El concepto de staking fue [introducido formalmente por primera vez](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) Por Sunny King y Scott Nadal de Peercoin.
 
-### How does proof-of-stake work?
+### ¿Cómo funciona el proof-of-stake?
 
-To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+Para resistir [ataques sybil](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), una red descentralizada debe exigir que la influencia de la red se pague con un recurso escaso. Esto hace que sea inviable que un atacante obtenga suficiente influencia en la red para comprometer su seguridad. En los sistemas proof-of-work, el recurso escaso es la potencia de computación. En Avalanche, el recurso escaso es el token nativo, [AVAX](../../#avalanche-avax-token). Para que un nodo [valide](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) una blockchain en Avalanche, este debe hacer stake de AVAX.
 
-## Staking Parameters on Avalanche
+## Parámetros de Staking en Avalanche
 
-When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token whitepaper](https://files.avalabs.org/papers/token.pdf) to learn more about AVAX and the mechanics of staking.
+Cuando un validador termina de validar la [Red Primaria](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), recibe de vuelta los tokens de AVAX que ha puesto en stake. Puede recibir una recompensa por ayudar a asegurar la red. Un validador sólo recibe una [recompensa de validación](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) si es suficientemente receptivo y correcto durante el tiempo que valida. Lea el [Whitepaper del Token de Avalanche](https://files.avalabs.org/papers/token.pdf) para aprender más sobre AVAX y las mecánicas del staking.
 
 {% hint style="warning" %}
-Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
+Las recompensas del staking se envían a la dirección de tu wallet al final del plazo de staking **siempre y cuando se cumplan todos estos parámetros**.
 {% endhint %}
 
-* The minimum amount that a validator must stake is 2,000 AVAX
-* The minimum amount that a delegator must delegate is 25 AVAX
-* The minimum amount of time one can stake funds for validation is 2 weeks
-* The maximum amount of time one can stake funds for validation is 1 year
-* The minimum amount of time one can stake funds for delegation is 2 weeks
-* The maximum amount of time one can stake funds for delegation is 1 year
-* The minimum delegation fee rate is 2%
-* The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 60%
+* La cantidad mínima que un validador debe poner en stake es de 2 000 AVAX
+* La cantidad mínima que un delegado debe delegar es de 25 AVAX
+* El mínimo tiempo que se puede hacer staking para la validación es de 2 semanas.
+* La cantidad máxima de tiempo que uno puede hacer staking para la validación es de 1 año
+* El mínimo tiempo que uno puede hacer staking para la delegación es de 2 semanas
+* La cantidad máxima de tiempo que uno puede hacer staking para la delegación es de 1 año
+* La tasa mínima de derechos de delegación es del 2%
+* El peso máximo de un validador \(su propio stake + el stake delegado en ellos\) es el mínimo de 3e6 AVAX y 5 veces la cantidad que el validador puso en stake. Por ejemplo, si pusiste en stake 2 000 AVAX para ser un validador, sólo 8 000 AVAX pueden ser delegados al total de tu nodo \(no por delegador\).
+* El porcentaje mínimo de tiempo que un validador debe estar correcto y en línea para recibir una recompensa es del 60%
 
-## Validators
+## Validadores
 
-**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+**Los validadores** protegen Avalanche, 
+crean nuevos bloques/vértices y procesan las transacciones. Para lograr el consenso, los validadores se muestrean repetidamente unos a otros. La probabilidad de que un validador dado sea muestreado es proporcional a su stake.
 
-When you add a node to the validator set, you specify:
+Cuando se añade un nodo al conjunto de validadores, se especifica:
 
-* Your node’s ID
-* When you want to start and stop validating
-* How many AVAX you are staking
-* The address to send any rewards to
-* Your delegation fee rate \(see below\)
+* El ID de tu nodo
+* Cuando quieres empezar y dejar de validar
+* Cuántos AVAX pones en stake
+* La dirección para enviar las recompensas
+* Su tasa de comisión de delegación \(ver abajo\)
 
 {% hint style="info" %}
-The minimum amount that a validator must stake is 2,000 AVAX.
+La cantidad mínima que un validador debe poner en stake es de 2 000 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Tenga en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **No puedes eliminar tu stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.** Asegúrate de utilizar los valores correctos en los llamados API que se indican a continuación. Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
-### Running a Validator <a id="running-a-validator"></a>
+### Ejecutando un Validador <a id="running-a-validator"></a>
 
-If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
+Si estás ejecutando un validador, es importante que tu nodo esté bien conectado para asegurarte de recibirás tu recompensa. Ver [aquí](http://support.avalabs.org/en/articles/4594192-networking-setup).
 
-When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
+Al emitir la transacción para añadir un validador, los tokens del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando terminas de validar, los fondos del stake se devuelven a las direcciones de donde vinieron. Si has ganado una recompensa, se envía a la dirección que especificaste cuando te agregaste como validador.
 
-#### Allow API calls <a id="allow-api-calls"></a>
+#### Permitir Llamados API <a id="allow-api-calls"></a>
 
-To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
+Para hacer llamados a la API a tu nodo desde máquinas remotas, permite el tráfico en el puerto de la API \(`9650` por defecto\), y ejecuta tu nodo con el argumento `--http-host=`
 
-You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
+Deberías desactivar todas las API que no usarás mediante argumentos de la línea de comandos. Deberías configurar tu red para que sólo permita el acceso al puerto de la API desde máquinas de confianza  \(por ejemplo tu computador personal\)
 
-#### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
+#### ¿Por qué mi tiempo de actividad es bajo? <a id="why-is-my-uptime-low"></a>
 
-Every validator on Avalanche keeps track of the uptime of other validators. You can see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
+Cada validador de Avalanche lleva un registro del tiempo de funcionamiento de los otros validadores. Puedes ver las conexiones que tiene un nodo llamando a `info.peers`, así como el tiempo de actividad de cada conexión. **Este es sólo el punto de vista de un nodo**. Otros nodos pueden percibir el tiempo de actividad de tu nodo de manera diferente. Sólo porque un nodo perciba que tu tiempo de actividad es bajo no significa que no recibirás recompensas de staking.
 
-The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
+La razón más probable de que su nodo no esté conectado a otro nodo es que el traversal NAT falló, y no comenzó su nodo con `--public-ip=[NODE'S PUBLIC IP]`. En el futuro, añadiremos una mejor monitorización para facilitar la verificación de que su nodo está bien conectado.
 
-#### Secret Management <a id="secret-management"></a>
+#### Gestión Secreta <a id="secret-management"></a>
 
-The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
+Lo único que necesitas mantener secreto en tu nodo validador es su Staking Key, la clave TLS que determina el ID de tu nodo. La primera vez que inicias un nodo, la Staking Key se crea y se pone en `$HOME/.avalanchego/staking/staker.key`. Deberías hacer una copia de seguridad de este archivo \(y `staker.crt`\) en un lugar seguro. Perder tu Staking Key podría poner en peligro tu recompensa de validación, ya que tu nodo tendrá un nuevo ID.
 
-You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in “cold" addresses whose private key is not on any computer.
+No necesitas tener fondos de AVAX en tu nodo de validación. De hecho, es mejor práctica **no** tener muchos fondos en tu nodo. Casi todos tus fondos deberían estar en direcciones "cold" cuya private key no esté en ningún ordenador.
 
-#### Monitoring <a id="monitoring"></a>
+#### Monitoreo<a id="monitoring"></a>
 
-Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
+Sigue este tutorial para aprender a controlar el tiempo de actividad de tu nodo, su salud general, etc.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
-## Delegators
+## Delegadores
 
-A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
+Un delegador es un poseedor de token, que quiere participar en el stake, pero elige confiar en un nodo de validación existente a través de la delegación.
 
-When you delegate stake to a validator, you specify:
+Cuando delegas el stake a un validador, especificas:
 
-* The ID of the node you’re delegating to
-* When you want to start/stop delegating stake \(must be while the validator is validating\)
-* How many AVAX you are staking
-* The address to send any rewards to
+* El ID del nodo en el que estás delegando
+* Cuando quieres empezar/dejar de delegar el stake \(debe ser mientras el validador está validando\)
+* Cuántos AVAX estás poniendo en stake
+* La dirección para enviar las recompensas
 
 {% hint style="info" %}
-The minimum amount that a delegator must delegate is 25 AVAX.
+La cantidad mínima que un delegado debe delegar es de 25 AVAX
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Ten en cuenta que una vez emites la transacción para añadir tu stake a un delegador, no hay forma de cambiar los parámetros. **No puedes eliminar tu stake anticipadamente o cambiar el importe de el mismo, el ID del nodo o la dirección de la recompensa.**  Si no estás seguro, pide ayuda en [Discord](https://chat.avax.network) o navega por nuestras [Preguntas más Frecuentes de los Desarrolladores](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}
 
-### Delegator rewards <a id="delegator-rewards"></a>
+### Recompensas para Delegadores <a id="delegator-rewards"></a>
 
-If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
 
-When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
+Si el validador en el que delega los tokens es lo suficientemente correcto y receptivo, recibirás una recompensa cuando termines de delegar. Los delegados son recompensados de acuerdo a la misma función que los validadores. Sin embargo, el validador en el que usted delega se queda con una parte de tu recompensa, especificada por la comisión de delegación del validador.
 
+Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a tu dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4ODMwODI4MiwtMzUzNzAxNTEzLDE0Mj
+YzNzM3NDYsMTU3MjczNDM2LC0xNTMzODQwOTkyLC05MDUzMTcz
+MDAsOTk1NTU0ODgsNTQyNTY3NjQ4LC0zNjI3OTkzODEsNTc2OD
+A1OTkxLC03MTc3MTk4MTFdfQ==
+-->

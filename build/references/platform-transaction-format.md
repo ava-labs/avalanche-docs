@@ -1,23 +1,23 @@
-# Platform Transaction Format
+# Formato de Transacción de la Plataforma
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+Este archivo pretende ser la única fuente de verdad sobre cómo serializamos las transacciones en la Avalanche’s Platform Virtual Machine, también conocida como la`Platform Chain` o la `P-Chain`. Este documento utiliza el formato [serialización primitiva](serialization-primitives.md) para el empaquetado y [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## Transferable Output
+## Salida Transferible
 
-Transferable outputs wrap an output with an asset ID.
+Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
-### What Transferable Output Contains
+### Que Contiene una Salida Transferible.
 
-A transferable output contains an `AssetID` and an `Output`.
+Una salida transferible contiene una `AssetID` y un `Output`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Output`** is an output, as defined below. For If your local machine has MacOS or Linux, this can be a SECP256K1 transfer output.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
+* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Gantt Transferable Output Specification
+### Especificación Gantt de una Salida Transferible
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ A transferable output contains an `AssetID` and an `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Especificación Proto de una Salida Transferible
 
 ```text
 message TransferableOutput {
@@ -38,9 +38,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output If your local machine has MacOS or Linux
+### Ejemplo de una Salida Transferible
 
-Let’s make a transferable output:
+Hagamos una salida transferible:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
@@ -67,20 +67,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Entrada transferible
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Las entradas transferibles o "Transferable inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
-### What Transferable Input Contains
+### Que Contiene una Entrada Transferible
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Una entrada transferible contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Input`** is a transferable input object.
+* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
+* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida. El único `AssetID` válido es el `AssetID` AVAX.
+* **`Input`** es un elemento de entrada transferible.
 
-### Gantt Transferable Input Specification
+### Especificación Gantt de Entrada Transferible
 
 ```text
 +------------+----------+------------------------+
@@ -96,7 +96,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Especificación Proto de la Entrada Transferible
 
 ```text
 message TransferableInput {
@@ -107,9 +107,9 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input If your local machine has MacOS or Linux
+### Ejemplo de entrada transferible
 
-Let’s make a transferable input:
+Hagamos una entrada transferible:
 
 * **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
 * **`UTXOIndex`**: `0`
@@ -144,25 +144,25 @@ Let’s make a transferable input:
 ]
 ```
 
-## Outputs
+## Salidas
 
-Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwners`.
+Las salidas o "Outputs" tienen dos tipos posibles: `SECP256K1TransferOutput`y `SECP256K1OutputOwners`.
 
-## SECP256K1 Transfer Output
+##  Salida de Transferencia SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time. The only valid asset is AVAX.
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)  o "secp256k1 transfer output" permite enviar una cantidad de un bien a un conjunto de direcciones después de un tiempo unix especificado. El único activo válido es AVAX.
 
-### **What SECP256K1 Transfer Output Contains**
+### **Que contiene una Salida de Transferencia SECP256K1**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000007`.
+* **`Amount`** es un long que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### ** Especificación Gantt de una Salida de Transferencia SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -180,7 +180,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Especificación Proto de una Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -192,9 +192,9 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output If your local machine has MacOS or Linux**
+### **Ejemplo de una Salida de Transferencia SECP256K1**
 
-Let’s make a secp256k1 transfer output with:
+Hagamos una salida de transferencia secp256k1 con:
 
 * **`TypeID`**: 7
 * **`Amount`**: 3999000000
@@ -232,20 +232,20 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Output Owners Output
+##  Salida de los Propietarios de la Salida SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+Una  salida de los propietarios de la salida [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 output owners output" recibirá las recompensas del stake cuando termine el período de retención.
 
-### **What SECP256K1 Output Owners Output Contains**
+### **Que Contiene una Salida de los Propietarios de la Salida SECP256K1**
 
-A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+Una salida de los propietarios de la salida SECP256K1 contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x0000000b`.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt SECP256K1 Output Owners Output Specification**
+### **Especificación Gantt de una Salida de los Propietarios de la Salida SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -261,7 +261,7 @@ A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, a
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Output Owners Output Specification**
+### **Especificación Proto de una Salida de los Propietarios de la Salida SECP256K1**
 
 ```text
 message SECP256K1OutputOwnersOutput {
@@ -272,9 +272,9 @@ message SECP256K1OutputOwnersOutput {
 }
 ```
 
-### **SECP256K1 Output Owners Output If your local machine has MacOS or Linux**
+### **Ejemplo de una Salida de los Propietarios de la Salida SECP256K1**
 
-Let’s make a secp256k1 output owners output with:
+Hagamos una salida de los propietarios de la salida SECP256K1 con:
 
 * **`TypeID`**: 11
 * **`Locktime`**: 0
@@ -308,23 +308,26 @@ Let’s make a secp256k1 output owners output with:
 ]
 ```
 
-## Inputs
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+## Entradas
 
-## SECP256K1 Transfer Input
+Las entradas o "Inputs"  tienen un tipo posible: `SECP256K1TransferInput`.
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+## Entrada de Transferencia SECP256K1 
 
-### **What SECP256K1 Transfer Input Contains**
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer input" permite utilizar una salida de transferencia secp256k1 no utilizada.
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+### **Que Contiene una Entrada de Transferencia SECP256K1**
 
-* **`TypeID`** is the ID for this output type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
+
+* **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
+* **`Amount`** es un long que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+
+
+### **Especificación Gantt de una Entrada de Transferencia SECP256K1**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -338,7 +341,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-**Proto SECP256K1 Transfer Input Specification**
+**Especificación Proto de una  Entrada de Transferencia SECP256K1**
 
 ```text
 message SECP256K1TransferInput {
@@ -348,9 +351,9 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input If your local machine has MacOS or Linux**
+### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeID`**: 5
 * **`Amount`**: 4000000000
@@ -375,24 +378,25 @@ Let’s make a payment input with:
 ]
 ```
 
-## Unsigned Transactions
+## Transacciones no Firmadas
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
+Las transacciones no firmadas o "Unsigned transactions"  contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
-## Unsigned BaseTx
+## Transacción Base No Firmada
 
-### **What Base Tx Contains**
+### **Que Contiene una Transacción Base**
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+Una transacción base o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
+* **`NetworkID`** es un int que define a qué red se destina esta transacción. Este valor está pensado para soportar el enrutamiento de la transacción y no está diseñado para la prevención de ataques de repetición.
+* **`BlockchainID`** es un array de 32 bytes que define a qué blockchain se emitió esta transacción. Se utiliza para la prevención de ataques de repetición de transacciones que podrían ser válidas en toda la red o en la blockchain.
+* **`Outputs`** es una matriz de objetos de salida transferibles. Las salidas deben ser ordenadas lexicográficamente por su representación serializada. La cantidad total de los activos creados en estos productos debe ser inferior o igual a la cantidad total de cada activo consumido en los insumos menos la tasa de transacción.
+* **`Inputs`** es un conjunto de objetos de entrada transferibles. Las entradas deben ser clasificadas y únicas. Las entradas se ordenan primero lexicográficamente por su **`TxID`** y luego por el **`UTXOIndex`** de bajo a alto. Si hay entradas que tienen el mismo **`TxID`** y **`UTXOIndex`**, entonces la transacción es inválida ya que esto resultaría en un doble gasto.
+* **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
-### **Gantt Base Tx Specification**
+
+### **Especificación Gantt de una Transacción Base**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -412,7 +416,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### **Proto Base Tx Specification**
+### **Especificación Proto de una Transacción Base**
 
 ```text
 message BaseTx {
@@ -425,9 +429,9 @@ message BaseTx {
 }
 ```
 
-### **Base Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Base**
 
-Let’s make a base tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un base tx que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `12345`
@@ -493,23 +497,23 @@ Let’s make a base tx that uses the inputs and outputs from the previous If you
 ]
 ```
 
-## Unsigned Add Validator Tx
+## Transacción Agregar Validador No Firmada
 
-### **What Unsigned Add Validator Tx Contains**
+### Que Contiene una Transacción Agregar Validador No Firmada
 
-An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
+Una transacción agregar validador no firmada o "Unsigned Add Validator Tx" contiene un `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, y `Shares`. Su `TypeID` es `0x0000000c`.
 
 * **`BaseTx`**
-* **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-* **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-* **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** A `SECP256K1OutputOwners`
-* **`Shares`** 10,000 times percentage of reward taken from delegators
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
+* **`Stake`**  el Stake tiene `LockedOuts`
+ * **`LockedOuts`** Un conjunto de salidas transferibles que están bloqueadas mientras dure el período de stake. Al final del periodo de stake, estas salidas son devueltas a sus respectivas direcciones.
+* **`RewardsOwner`** Un `SECP256K1OutputOwners`
+* **`Shares`**  10 000  veces el porcentaje de recompensa tomado de los delegadores
 
-### **Gantt Unsigned Add Validator Tx Specification**
+### **Especificación Gantt de una Transacción Agregar Validador No Firmada**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -527,7 +531,7 @@ An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `Rewards
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Validator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Validador No Firmada**
 
 ```text
 message AddValidatorTx {
@@ -539,9 +543,9 @@ message AddValidatorTx {
 }
 ```
 
-### **Unsigned Add Validator Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Agregar Validador No Firmada**
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción agregar validador no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0c"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -631,22 +635,22 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## Transacción Agregar Validador de Subnet No Firmada
 
-### **What Unsigned Add Subnet Validator Tx Contains**
+### **Que Contiene una Transacción Agregar Validador de Subnet No Firmada**
 
-An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+Una transacción agregar validador de subnet no firmada o "Unsigned Add Subnet Validator Tx" contiene un `BaseTx`, `Validator`, `SubnetID`, y `SubnetAuth`. Su `TypeID`es `0x0000000d`.
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
-* **`SubnetID`** a 32 byte subnet id
-* **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
-
-### **Gantt Unsigned Add Subnet Validator Tx Specification**
+* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, y `Weight`
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
+* **`SubnetID`** un id de subnet de 32 bytes
+* **`SubnetAuth`` contiene `SigIndices`` y tiene un tipo de identificación de `0x0000000a`. `SigIndices` es una lista de ints únicos que definen las direcciones que ejecutan la firma de control para añadir un validador a una subred. El conjunto debe ser clasificado de bajo a alto.
+* 
+### **Especificación Gantt de una Transacción Agregar Validador de Subnet No Firmada**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -662,7 +666,7 @@ An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
                                    +---------------------------------------------+
 ```
 
-### **Proto Unsigned Add Subnet Validator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Validador de Subnet No Firmada**
 
 ```text
 message AddSubnetValidatorTx {
@@ -673,9 +677,9 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### **Unsigned Add Subnet Validator Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Agregar Validador de Subnet No Firmada**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción agregar validador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0d"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -757,23 +761,23 @@ Let’s make an unsigned add subnet validator tx that uses the inputs and output
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## Transacción Agregar Delegador de Subnet No Firmada
 
-### **What Unsigned Add Delegator Tx Contains**
+### **Que Contiene una Transacción Agregar Delegador de Subnet No Firmada**
 
-An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
+Una transacción agregar delegador de subnet no firmada o "Unsigned Add Subnet Validator Tx" contiene un `BaseTx`, `Validator`, `Stake`, y `RewardsOwner`. Su `TypeID` es `0x0000000e`.
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-  * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-  * **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** An `SECP256K1OutputOwners`
+* **`Validator`** Tiene una `NodeID`, `StartTime`, `EndTime`, y `Weight`
+* **`NodeID`** es de 20 bytes el cual es el  ID del nodo del delegado.
+* **`StartTime`** es un long el cual es el tiempo de Unix cuando el delegado comienza a delegar.
+* **`EndTime`** es un long el cual es el tiempo Unix cuando el delegado deja de delegar \(y se devuelve el AVAX del stake\).
+* **`Weight`** es un long, el cual es la cantidad que el delegado pone en staking
+* **`Stake`**  el Stake tiene `LockedOuts`
+ * **`LockedOuts`** Un conjunto de salidas transferibles que están bloqueadas mientras dure el período de stake. Al final del periodo de stake, estas salidas son devueltas a sus respectivas direcciones.
+* **`RewardsOwner`** Un `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Add Delegator Tx Specification**
+### **Especificación Gantt de una Transacción Agregar Delegador de Subnet No Firmada**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -789,7 +793,7 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Delegator Tx Specification**
+### **Especificación Proto de una Transacción Agregar Delegador de Subnet No Firmada**
 
 ```text
 message AddDelegatorTx {
@@ -800,9 +804,9 @@ message AddDelegatorTx {
 }
 ```
 
-### **Unsigned Add Delegator Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Agregar Delegador de Subnet No Firmada**
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción agregar delegador de subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: `"If your local machine has MacOS or Linux BaseTx as defined above with ID set to 0e"`
 * **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -886,16 +890,16 @@ Let’s make an unsigned add delegator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## Transacción Crear Subnet No Firmada
 
-### **What Unsigned Create Subnet Tx Contains**
+### **Que Contiene una Transacción Crear Subnet No Firmada**
 
-An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+Una transacción crear subnet no firmada o "Unsigned Create Subnet Tx" contiene un `BaseTx`, y `RewardsOwner`. Su `TypeID` es `0x00000010`.
 
 * **`BaseTx`**
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Create Subnet Tx Specification**
+### **Especificación Gantt de una Transacción Crear Subnet No Firmada**
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -907,7 +911,7 @@ An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### **Proto Unsigned Create Subnet Tx Specification**
+### **Especificación Proto de una Transacción Crear Subnet No Firmada**
 
 ```text
 message CreateSubnetTx {
@@ -916,9 +920,9 @@ message CreateSubnetTx {
 }
 ```
 
-### **Unsigned Create Subnet Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Crear Subnet No Firmada**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción crear subnet no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above but with TypeID set to 16”
 * **`RewardsOwner`**:
@@ -973,17 +977,17 @@ Let’s make an unsigned create subnet tx that uses the inputs from the previous
 ]
 ```
 
-## Unsigned Import Tx
+## Transacción Importar No Firmada
 
-### **What Unsigned Import Tx Contains**
+### **Que Contiene una Transacción Importar No Firmada**
 
-An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
+Una transacción importar no firmada o "Unsigned Import Tx" contiene un `BaseTx`, `SourceChain`, y  `Ins`. Su `TypeID`  es `0x00000011`.
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`** es una ID de blockchain de fuente de 32 bytes.
+* **`Ins`** es un conjunto de longitud variable de entradas transferibles.
 
-### **Gantt Unsigned Import Tx Specification**
+### **Especificación Gantt de una Transacción Importar No Firmada**
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -997,7 +1001,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
                             +--------------------------------------+
 ```
 
-### **Proto Unsigned Import Tx Specification**
+### **Especificación Proto de una Transacción Importar No Firmada**
 
 ```text
 message ImportTx {
@@ -1007,9 +1011,9 @@ message ImportTx {
 }
 ```
 
-### **Unsigned Import Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Importar No Firmad**
 
-Let’s make an unsigned import tx that uses the inputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción importar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`BaseTx`**: “If your local machine has MacOS or Linux BaseTx as defined above with TypeID set to 17”
 * **`SourceChain`**:
@@ -1069,16 +1073,16 @@ Let’s make an unsigned import tx that uses the inputs from the previous If you
 ]
 ```
 
-## Unsigned Export Tx
+## Transacción Exportar No Firmada
 
-### **What Unsigned Export Tx Contains**
+### **Que Contiene una Transacción Exportar No Firmada**
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000012`.
+Una transacción exportar no firmada o "Unsigned Export Tx" contiene un `BaseTx`, `DestinationChain`, y  `Outs`. Su `TypeID` es `0x00000012`.
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
+* **`Outs`** es un conjunto de longitud variable de salidas transferibles.
 
-### **Gantt Unsigned Export Tx Specification**
+### **Especificación Gantt de una Transacción Exportar No Firmada**
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1092,7 +1096,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### **Proto Unsigned Export Tx Specification**
+### **Especificación Proto de una Transacción Exportar No Firmada**
 
 ```text
 message ExportTx {
@@ -1102,9 +1106,9 @@ message ExportTx {
 }
 ```
 
-### **Unsigned Export Tx If your local machine has MacOS or Linux**
+### **Ejemplo de una Transacción Exportar No Firmada**
 
-Let’s make an unsigned export tx that uses the outputs from the previous If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción exportar no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to 18
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1178,20 +1182,20 @@ Let’s make an unsigned export tx that uses the outputs from the previous If yo
 ]
 ```
 
-## Credentials
+## Credenciales
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Las credenciales o "Credentials" tienen un tipo posible: `SECP256K1Credential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
 
-## SECP256K1 Credential
+## Credencial SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) contiene una lista de firmas recuperables de 65 bytes.
 
-### **What SECP256K1 Credential Contains**
+### **Que Contiene una  Credencial SECP256K1**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`TypeID`** es el ID para este tipo. Es  `0x00000009`.
+* **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Especificación Gantt de una  Credencial SECP256K1**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1203,7 +1207,7 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential cont
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Especificación Proto de una  Credencial SECP256K1**
 
 ```text
 message SECP256K1Credential {
@@ -1212,9 +1216,9 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential If your local machine has MacOS or Linux**
+### **Ejemplo de una  Credencial SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`signatures`**:
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
@@ -1256,19 +1260,20 @@ Let’s make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## 
+Transacción Firmada
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+Una transacción firmada o "signed transaction" es una transacción no firmada con la adición de una serie de credenciales.
 
-### What Signed Transaction Contains
+### Que Contiene una Transacción Firmada
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
+* **`UnsignedTx`** es una transacción sin firmar, como se describe arriba.
+* **`Credentials`** es un conjunto de credenciales. Cada credencial será emparejada con la entrada en el mismo índice en esta credencial.
 
-### Gantt Signed Transaction Specification
+### Especificación Gantt de una Transacción Firmada
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1282,7 +1287,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Especificación Proto de una Transacción Firmada
 
 ```text
 message Tx {
@@ -1292,9 +1297,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction If your local machine has MacOS or Linux
+### Ejemplo de una Transacción Firmada
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous If your local machine has MacOS or Linuxs.
+Hagamos un ejemplo de una transacción firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
@@ -1367,21 +1372,22 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
     0x7f, 0x00,
 ```
 
+
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+Una UTXO o "Unspent Transaction Output"es una representación independiente de la salida de una transacción.
 
-### What UTXO Contains
+### Que Contiene Una UTXO
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
+Una UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`** El único `CodecID` válido es `00 00`
+* **`TxID`** es una identificación de transacción de 32 bytes. Los ID de transacción se calculan tomando sha256 de los bytes de la transacción firmada.
+* **`UTXOIndex`** es un int que especifica qué salida de la transacción especificada por **`TxID`** fue creada por este utxo.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
+* **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
-#### Gantt UTXO Specification <a id="gantt-utxo-specification"></a>
+#### Especificación Gantt de una UTXO <a id="gantt-utxo-specification"></a>
 
 ```text
 +--------------+----------+-------------------------+
@@ -1399,7 +1405,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### Especificación Proto de una UTXO
 
 ```text
 message Utxo {
@@ -1411,9 +1417,9 @@ message Utxo {
 }
 ```
 
-### UTXO If your local machine has MacOS or Linux
+### Ejemplo de una UTXO
 
-Let’s make a UTXO from the signed transaction created above:
+Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1460,17 +1466,17 @@ Let’s make a UTXO from the signed transaction created above:
 
 ## StakeableLockIn
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its locktime has passed.
+Una StakeableLockIn es una entrada en stake y encerrada. El StakeableLockIn sólo puede financiar StakeableLockOuts con la misma dirección hasta que su tiempo de encierro haya pasado.
 
-### **What StakeableLockIn Contains**
+### **Que Contiene una StakeableLockIn**
 
-A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
+Una StakeableLockIn contiene un `TypeID`, `Locktime` y `TransferableIn`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000015`.
-* **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
-* **`TransferableIn`** is a transferable input object.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`TransferableIn`** es un elemento de entrada transferible.
 
-### **Gantt StakeableLockIn Specification**
+### **Especificación Gantt de una StakeableLockIn**
 
 ```text
 +-----------------+-------------------+--------------------------------+
@@ -1484,7 +1490,7 @@ A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
                                     +----------------------------------+
 ```
 
-### **Proto StakeableLockIn Specification**
+### **Especificación Proto de una StakeableLockIn**
 
 ```text
 message StakeableLockIn {
@@ -1494,9 +1500,9 @@ message StakeableLockIn {
 }
 ```
 
-### **StakeableLockIn If your local machine has MacOS or Linux**
+### **Ejemplo de una StakeableLockIn**
 
-Let’s make a StakeableLockIn with:
+Hagamos una StakeableLockIn con:
 
 * **`TypeID`**: 21
 * **`Locktime`**: 54321
@@ -1534,17 +1540,17 @@ Let’s make a StakeableLockIn with:
 
 ## StakeableLockOut
 
-A StakeableLockOut is an output that is locked until its locktime, but can be staked in the meantime.
+Una StakeableLockOut es una salida que está bloqueada hasta el momento de su cierre, pero puede ser puesta en stake mientras tanto.
 
-### **What StakeableLockOut Contains**
+### **Que Contiene una StakeableLockOut**
 
-A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
+Una StakeableLockOut contiene un `TypeID`, `Locktime` y `TransferableOut`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000016`.
-* **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
-* **`transferableout`**: “If your local machine has MacOS or Linux SECP256K1 Transfer Output as defined above”
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000015`.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`transferableout`**: "Tome como ejemplo  Salida de Transferencia SECP256K1 como se ha definido previamente"
 
-### **Gantt StakeableLockOut Specification**
+### **Especificación Gantt de una StakeableLockOut **
 
 ```text
 +------------------+--------------------+--------------------------------+
@@ -1558,7 +1564,7 @@ A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
                                      +-----------------------------------+
 ```
 
-### **Proto StakeableLockOut Specification**
+### **Especificación Proto de una StakeableLockOut**
 
 ```text
 message StakeableLockOut {
@@ -1568,9 +1574,9 @@ message StakeableLockOut {
 }
 ```
 
-### **StakeableLockOut If your local machine has MacOS or Linux**
+### **Ejemplo de una StakeableLockOut **
 
-Let’s make a stakeablelockout with:
+Hagamos una StakeableLockOut con:
 
 * **`TypeID`**: 22
 * **`Locktime`**: 54321
@@ -1602,5 +1608,10 @@ Let’s make a stakeablelockout with:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTU2Njk3NzZdfQ==
+eyJoaXN0b3J5IjpbOTUyMjMxOTYxLDgyMTgyMTQyMCwtNDExOT
+A3MzUxLC0yMDg4ODcyNTkzLDE3OTkxMjU4MDQsLTEyODgwMDE2
+MzAsLTYyOTY0NjY2MCwtNzM1MTc3NzY3LC0xMDQ2MjU5NzU5LC
+0yMDM3NTI2OTc5LDEyMDk1MDYyNzQsLTY0MzI0MTUxOCwyNjUy
+NTA1OTYsLTUwMzU2MzgzOCwtNjc2NjA3OTU1LC0xMjAxNzg4NT
+k3LC0zNzkwMzM4MTIsLTM2NzkzOTA3MCwtNDgyMzM2NTIzXX0=
 -->

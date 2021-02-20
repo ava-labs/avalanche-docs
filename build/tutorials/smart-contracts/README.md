@@ -1,7 +1,10 @@
 # Smart Contracts
 
-| Title | Description |
+| Título| Descripción|
 | :--- | :--- |
-| [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Deploy and test a smart contract on Avalanche using Remix and MetaMask. |
-| [**Using Truffle with the Avalanche C-Chain**](using-truffle-with-the-avalanche-c-chain.md) | Using Truffle with the Avalanche's C-Chain, an instance of the Ethereum Virtual Machine \(EVM\) |
+| [**Desplegar un Smart Contract en Avalanche usando Remix y MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Desplegar y probar un smart contract en Avalanche usando Remix y MetaMask. |
+| [**Usando Truffle con la C-Chain de Avalanche**](using-truffle-with-the-avalanche-c-chain.md) | Usando Truffle con la  C-Chain de Avalanche, una instancia de la Ethereum Virtual Machine \(EVM\) |
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTg1NDQ0MzMwOV19
+-->

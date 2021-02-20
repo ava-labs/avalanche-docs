@@ -1,6 +1,6 @@
-# Tutorials
+# Tutoriales
 
-Check out all of the tutorials that will help you build on Avalanche. We would be thrilled if you would like to contribute to our [GitHub](https://github.com/ava-labs) or suggest a tutorial on [Discord](https://chat.avax.network)!
+Mira todos los tutoriales que te ayudarán a construir en Avalanche. Estaríamos encantados si quisieras contribuir en nuestro [GitHub](https://github.com/ava-labs) o sugerir un tutorial en nuestro [Discord](https://chat.avax.network)!
 
 {% page-ref page="platform/" %}
 
@@ -12,3 +12,6 @@ Check out all of the tutorials that will help you build on Avalanche. We would b
 
 
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzg4MDgwOTA3XX0=
+-->

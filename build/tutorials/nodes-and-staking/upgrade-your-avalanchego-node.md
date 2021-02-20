@@ -1,8 +1,8 @@
-# Upgrade Your AvalancheGo Node
+# Actualiza tu Nodo AvalancheGo
 
-## **Backup your node**
+## **Haz una copia de seguridad de tu Nodo**
 
-Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
+Antes de actualizar su nodo, se recomienda hacer una copia de seguridad de los archivos de tu Staker que se utilizan para identificar tu nodo en la red. En la instalación predeterminada, puedes copiarlos ejecutando los siguientes comandos:
 
 ```text
 cd
@@ -10,19 +10,19 @@ cp ~/.avalanchego/staking/staker.crt .
 cp ~/.avalanchego/staking/staker.key .
 ```
 
-Then download `staker.crt` and `staker.key` files and keep them somewhere safe and private. If anything happens to your node or the machine node runs on, these files can be used to fully recreate your node.
+Ahora descarga los archivos`staker.crt` y`staker.key`y mantenlos en un lugar seguro y privado. Si algo le pasa a tu nodo o el nodo de la máquina funciona, estos archivos pueden ser usados para recrear completamente tu nodo.
 
-If you use your node for development purposes and have keystore users on your node, you should back up those too.
+Si utilizas tu nodo con fines de desarrollo y tienes usuarios de keystore en tu nodo, también deberías hacer una copia de seguridad de los mismos.
 
-## Node installed using the installer script
+## Nodo Instalado Usando el Script de Instalación
 
-If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+Si instalaste tu nodo usando el [Script de Instalación](set-up-node-with-installer.md), para actualizar tu nodo, sólo tienes que ejecutar el script de instalación de nuevo.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+Este detectará que ya tiene instalado AvalancheGo:
 
 ```text
 AvalancheGo installer
@@ -33,7 +33,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Luego actualizará tu nodo a la última versión, y después de terminar, iniciará el nodo de nuevo, e imprimirá la información sobre la última versión:
 
 ```text
 Node upgraded, starting service...
@@ -42,139 +42,144 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-And that is it, your node is upgraded to the latest version.
+Y eso es todo, tu nodo se ha actualizado a la última versión.
 
-If you installed your node manually, proceed with the rest of the tutorial.
+Si instaló su nodo manualmente, proceda con el resto del tutorial.
 
-## **Stop the old node version**
+## **Detener la Versión Antigua del Nodo**
 
-After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
+Después de que la copia de seguridad esté asegurada, puedes empezar a actualizar tu nodo. Comienza por detener la versión que se está ejecutando actualmente.
 
-### Node running from terminal
+### Nodo ejecutándose desde la terminal
 
-If your node is running in a terminal stop it by pressing `ctrl+c`.
+Si tu nodo está funcionando en un terminal, deténgalo presionando `ctrl+c`.
 
-### Node running as a service
+### Nodo ejecutándose como un servicio
 
-If your node is running as a service, stop it by entering:
+Si tu nodo se ejecuta como un servicio, deténgalo ingresando:
 
 `sudo systemctl stop avalanchego.service`
 
-\(your service may be named differently, `avalanche.service`, or similar\)
+\(Tu servicio puede llamarse de manera diferente, `avalanche.service`, o similar\)
 
-### Node running in background
+### Nodo ejecutándose en segundo plano
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+Si tu nodo está funcionando en segundo plano \(ejecutandose con `nohup`, por ejemplo\) entonces encuentra el proceso que ejecuta el nodo ejecutando lo siguiente `ps aux | grep avalanche`. Esto producirá una salida como:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-In this example, second line shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+En este ejemplo, la segunda línea muestra información sobre su nodo. Fíjate en la ID del proceso, en este caso, `2630`. Detén el nodo ejecutando `kill -2 2630`.
 
-Now we are ready to download the new version of the node. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
 
-Downloading pre-built binary is easier and recommended if you're just looking to run your own node and stake on it.
+Ahora estamos listos para descargar la nueva versión del nodo. Puedes descargar el código fuente y luego construir el programa binario, o puedes descargar el binario pre-construido. No necesitas hacer ambas cosas.
 
-Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+La descarga del binario preconstruido es más fácil y recomendable si sólo quieres ejecutar tu propio nodo y hacer stake en él.
 
-## **Download Pre-built Binary**
+Crear el Nodo [desde el código fuente](upgrade-your-avalanchego-node.md#build-from-source) es recomendado si eres un desarrollador que busca experimentar y construir en Avalanche.
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+## **Descargar Binario Preconstruido**
 
-Under `Assets`, select the appropriate file.
+Si quieres descargar un binario preconstruido en lugar de construirlo tú mismo, ve a nuestra [página de lanzamientos](https://github.com/ava-labs/avalanchego/releases), y selecciona la versión que quieras \(probablemente la última.\)
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+Debajo de `Assets`, selecciona el archivo apropiado.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para MacOS:  
+Descarga: `avalanchego-macos-<VERSION>.zip`  
+Descomprime: `unzip avalanchego-macos-<VERSION>.zip`  
+La carpeta resultante, `avalanchego-<VERSION>`, contiene los binarios.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+Para Linux en PCs o proveedores de nube:  
+Descarga: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-You are now ready to run the new version of the node.
+Para Linux en computadoras basadas en RaspberryPi4 o similares basadas en Arm64:   
+Descarga: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Descomprime: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+La carpeta resultante, `avalanchego-<VERSION>-linux`, contiene los binarios.
 
-### Running the node from terminal
+Ya estás listo para ejecutar la nueva versión del nodo.
 
-If you are using the pre-built binaries on MacOS:
+### Nodo ejecutándose desde la terminal
+
+Si estás usando los binarios pre-construidos en MacOS:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Si estás usando los binarios pre-construidos en Linux:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Add `nohup` at the start of the command if you want to run the node in the background.
+Añade `nohup` al comienzo del comando si quieres ejecutar el nodo en segundo plano.
 
-### Running the node as a service
+### Nodo ejecutándose como un servicio
 
-If you're running the node as a service, you need to replace the old binaries with the new ones.
+Si estás ejecutando el nodo como un servicio, necesitas reemplazar los binarios viejos por los nuevos.
 
 `cp -r avalanchego-<VERSION>-linux/* <DIRECTORY_WITH_OLD_BINARIES>`
 
-and then restart the service with `sudo systemctl start avalanchego.service`.
+y luego reiniciar el servicio con `sudo systemctl start avalanchego.service`.
 
-## **Build from source**
+## **Creando desde el Código Fuente**
 
-First clone our Github repo \(you can skip this step if you’ve done this before\):
+Primero, clona nuestro repositorio de Github \(puedes saltarte este paso si ya lo has hecho antes\):
 
 ```text
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
-Then move to the avalanchego directory:
+Luego, mueve al directorio de avalanchego:
 
 ```text
 cd avalanchego
 ```
 
-Pull the latest code:
+Obtén el último código:
 
 ```text
 git pull
 ```
 
-Check that your local code is up to date. Do:
+Comprueba que tu código local está actualizado, ejecute:
 
 ```text
 git rev-parse HEAD
 ```
 
-and check that the first 7 characters printed match the Latest commit field on our [Github.](https://github.com/ava-labs/avalanchego)
+Y comprueba que los primeros 7 caracteres impresos coinciden con el último campo de`commit`en nuestro [Github.](https://github.com/ava-labs/avalanchego)
 
-Now build the binary:
+Ahora construye el binario:
 
 ```text
 ./scripts/build.sh
 ```
 
-This should print:
+Esto debería aparecer:
 
 ```text
 Build Successful
 ```
 
-You can check what version you’re running by doing:
+Puedes comprobar qué versión estás ejecutando con:
 
 ```text
 ./build/avalanchego --version
 ```
 
-You can run your node with:
+Puedes ejecutar tu nodo con:
 
 ```text
 ./build/avalanchego
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzUxODgyMzAyLDg0Njc3NDIxNCwtMTE0Mj
+YyNDMyNCw0NTA4MDA5NzddfQ==
+-->

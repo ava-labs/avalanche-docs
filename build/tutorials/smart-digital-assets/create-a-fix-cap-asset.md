@@ -1,20 +1,21 @@
-# Create a Fixed-Cap Asset
+# Crear un Activo de Capital Fijo
 
-## Introduction
+## Introducción
 
-This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
 
-Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
+Este tutorial ilustra cómo se puede utilizar Avalanche para crear e intercambiar un activo fungible de capital fijo. Se crea una cantidad específica del activo en la inicialización del mismo, y luego, nunca más se crea.
 
-## Requirements
+Supongamos que hay un acuerdo de reparto de ingresos \(ISA\) con 10 millones de acciones, y no se crearán más acciones. Vamos a crear un activo donde una unidad del activo representa una acción de la ISA.
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+## Requisitos
 
-## Create the Asset
+Haber completado [Iniciando en Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+## Crear el Activo
 
-The signature for this method is:
+Nuestro activo existirá en la [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), así que para crear nuestro activo ejecutaremos `avm.createFixedCapAsset`, el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+
+La firma de este método es:
 
 ```cpp
 avm.createFixedCapAsset({
@@ -36,22 +37,22 @@ avm.createFixedCapAsset({
 }
 ```
 
-### Parameters
+### Parámetros
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name` es un nombre legible por los humanos para el activo. No necesariamente único.
+* `symbol` es un símbolo abreviado para el activo. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
+* `denomination` determina la forma en que los saldos de este activo son mostrados por las interfaces de usuario. Si la denominación es 0, 100 unidades de este activo se muestran como 100. Si la denominación es 1, 100 unidades de este activo se muestran como 10.0. Si la denominación es 2, 100 unidades de este activo se muestran como .100, etc.
+* Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. `username` y `password`  denotan al usuario que paga la comisión.
+* Cada elemento en `initialHolders` especifica que `address` contiene `amount` unidades del activo en la génesis.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 
-### Response
+### Respuesta
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID` es la ID del nuevo activo.
+* `changeAddr` en el resultado está la dirección donde se envió el cambio.
 
-Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
+Ahora, en la creación del activo. Querrás reemplazar `address` por una dirección que controles para que puedas controlar todos los activos recién acuñados y poder enviarlos más tarde en este tutorial.
 
 ```cpp
 curl -X POST --data '{
@@ -76,7 +77,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the asset’s ID, which is also the ID of this transaction:
+La respuesta contiene el ID del activo, que es también el ID de esta transacción:
 
 ```cpp
 {
@@ -89,13 +90,13 @@ The response contains the asset’s ID, which is also the ID of this transaction
 }
 ```
 
-## Trade the Asset
+## Intercambie el Activo
 
-### Check a balance
+### Compruebe el balance
 
-All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
+Todas las 10.000.000 de unidades del activo \(acciones\) están controladas por la dirección que especificamos en `initialHolders`.
 
-To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Para verificar esto, ejecutamos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +110,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+La respuesta confirma que la creación de nuestro activo tuvo éxito y que la dirección especificada contiene los 10,000,000 de acciones:
 
 ```cpp
 {
@@ -121,11 +122,11 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the asset
+### Envía el Activo
 
-Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
+Ahora enviemos 100 acciones ejecutando [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
 
-To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
+Para enviar las acciones, necesitamos probar que controlamos el usuario desde el que se envían las acciones. Por lo tanto, esta vez tendremos que rellenar `username` y `password`.
 
 ```cpp
 curl -X POST --data '{
@@ -142,9 +143,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Check the transaction status
+### Comprobar el estado de la transacción
 
-The response from the above call should look like this:
+La respuesta de lo que ejecutamos anteriormente debería verse así:
 
 ```cpp
 {
@@ -157,9 +158,9 @@ The response from the above call should look like this:
 }
 ```
 
-`txID` is the ID of the `send` transaction we sent to the network.
+`txID` es el ID de la transacción `send` que enviamos a la red.
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Luego de un segundo o dos la transacción debería finalizar. Podemos comprobar el estado de la transacción con [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -172,7 +173,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La respuesta debería verse así:
 
 ```cpp
 {
@@ -184,9 +185,9 @@ The response should look like this:
 }
 ```
 
-You might also see that `status` is `Pending` if the network has not yet finalized it yet.
+También podría ver que el `status` es `Pending` si la red aún no lo ha finalizado.
 
-Now let’s check the balance of the `to` address:
+Ahora revisemos el balance de la dirección `to`:
 
 ```cpp
 curl -X POST --data '{
@@ -200,7 +201,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -212,11 +213,15 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Concluimos!
 
-In this tutorial, we:
+En este tutorial:
 
-* Called `createFixedCapAsset` to create a fixed cap asset
-* Called `getBalance` to check address balances
-* Called `send` to transfer a quantity of our asset
+* Ejecutamos `createFixedCapAsset` para crear un activo de capital fijo
+* Ejecutamos  `getBalance` para comprobar los saldos de las direcciones
+* Ejecutamos `send` para transferir una cantidad de nuestro activo
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2Nzk1MjM2NjYsOTEwMTQwMzc5LDEwOT
+A1MjI0MjgsMTYxNTczNDE2MF19
+-->

@@ -1,12 +1,12 @@
-# Serialization Primitives
+# Primitivos de Serialización
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalanche](../../#avalanche) utiliza una representación simple, uniforme y elegante de todos los datos internos. Este documento describe cómo se codifican los tipos primitivos en la plataforma de Avalanche. Las transacciones se codifican en términos de estos tipos primitivos básicos.
 
-## Byte
+## Bytes
 
-Bytes are packed as-is into the message payload.
+Los bytes se empaquetan tal cual en la carga de mensajes.
 
-If your local machine has MacOS or Linux:
+Ejemplo:
 
 ```text
 Packing:
@@ -17,9 +17,9 @@ Results in:
 
 ## Short
 
-Shorts are packed in BigEndian format into the message payload.
+Los Shorts están empaquetados en formato BigEndian en la carga de mensajes.
 
-If your local machine has MacOS or Linux:
+Ejemplo:
 
 ```text
 Packing:
@@ -30,9 +30,9 @@ Results in:
 
 ## Integer
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+Los números enteros son valores de 32 bits empaquetados en formato BigEndian en la carga de mensajes.
 
-If your local machine has MacOS or Linux:
+Ejemplo:
 
 ```text
 Packing:
@@ -43,9 +43,10 @@ Results in:
 
 ## Long Integers
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+Los números enteros largos son valores de 64 bits empaquetados en formato BigEndian en la carga de mensajes.
 
-If your local machine has MacOS or Linux:
+
+Ejemplo:
 
 ```text
 Packing:
@@ -56,9 +57,9 @@ Results in:
 
 ## IP Addresses
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+Las direcciones IP se representan en formato IPv6 de 16 bytes, con el puerto añadido a la carga de mensajes como un Short. Las direcciones IPv4 se rellenan con 12 bytes de 0x00 principales.
 
-IPv4 If your local machine has MacOS or Linux:
+Ejemplo de IPv4 :
 
 ```text
 Packing:
@@ -71,7 +72,7 @@ Results in:
     ]
 ```
 
-IPv6 If your local machine has MacOS or Linux:
+Ejemplo de IPv6 :
 
 ```text
 Packing:
@@ -86,9 +87,9 @@ Results in:
 
 ## Fixed-Length Array
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+Las matrices de longitud fija, cuya longitud se conoce de antemano y por contexto, se empaquetan en orden.
 
-Byte array If your local machine has MacOS or Linux:
+Ejemplo de matriz de bytes:
 
 ```text
 Packing:
@@ -97,7 +98,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array If your local machine has MacOS or Linux:
+Ejemplo de matriz entera:
 
 ```text
 Packing:
@@ -108,9 +109,9 @@ Results in:
 
 ## Variable Length Array
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+La longitud de la matriz se prefija en formato Entero, seguido del empaquetado del contenido de la matriz en formato Fixed Length Array.
 
-Byte array If your local machine has MacOS or Linux:
+Ejemplo de matriz de bytes:
 
 ```text
 Packing:
@@ -119,7 +120,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array If your local machine has MacOS or Linux:
+Ejemplo de matriz entera:
 
 ```text
 Packing:
@@ -130,9 +131,9 @@ Results in:
 
 ## String
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+Una cadena está empaquetada de forma similar a una matriz de bytes de longitud variable. Sin embargo, el prefijo de longitud es un short en lugar de un int. Las cadenas están codificadas en formato UTF-8.
 
-If your local machine has MacOS or Linux:
+Ejemplo:
 
 ```text
 Packing:
@@ -142,5 +143,5 @@ Results in:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjExNzA1OTBdfQ==
+eyJoaXN0b3J5IjpbMTg1NDQ5Njk3MV19
 -->

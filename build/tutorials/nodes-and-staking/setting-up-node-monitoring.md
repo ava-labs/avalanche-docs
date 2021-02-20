@@ -1,37 +1,37 @@
-# Run an Avalanche Node Monitoring
+# Ejecutar una Monitorización de Nodos de Avalanche
 
-_Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
+Gracias al miembro de la comunidad Jovica Popović, que escribió este tutorial. Puedes contactarlo en nuestro [_Discord_](https://chat.avax.network) _si lo necesitas._
 
-## Introduction
+## Introducción
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
+Este tutorial asume que tienes Ubuntu 18.04 o 20.04 funcionando en tu nodo \(una version de este tutorial para Mac OS X vendrá pronto\).
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+Este tutorial mostrará cómo crear una infraestructura para supervisar una instancia de [AvalancheGo](https://github.com/ava-labs/avalanchego). Usaremos:
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) to get information about the node
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* [Prometheus](https://prometheus.io/) para reunir y almacenar datos
+* [node\_exporter](https://github.com/prometheus/node_exporter) para obtener información sobre la máquina,
+* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) para obtener información sobre el nodo
+* [Grafana](https://grafana.com/) para visualizar los datos en un tablero.
 
-Prerequisites:
+Requisitos Previos:
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
+* Un nodo activo de AvalancheGo
+* Acceso a la máquina que ejecuta el nodo 
+* Privilegios de administrador en la máquina
 
-### **Caveat: Security**
+### **Seguridad**
 
 {% hint style="danger" %}
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
+El sistema descrito aquí **no debería** abrirse a la Internet pública. Ni Prometheus ni Grafana, como se muestra aquí, están protegidos contra el acceso no autorizado. Asegúrate de que ambos son accesibles sólo a través de un proxy seguro, red local o VPN. Configurar eso está fuera del alcance de este tutorial, pero ten cuidado. ¡Las malas prácticas de seguridad podrían llevar a los atacantes a obtener el control de tu nodo! Es tu responsabilidad seguir las prácticas de seguridad adecuadas.
 {% endhint %}
 
-### Contributions
+### Contribuciones
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+La base del tablero de Grafana fue tomada de los chicos de [ColmenaLabs](https://blog.colmenalabs.org/index.html), que aparentemente ya no está disponible. Si tienes ideas y sugerencias para mejorar este tutorial, por favor dilo, publica un issue, o haz una a pull request en [Github](https://github.com/ava-labs).
 
-## Set up Prometheus
+## Configurando Prometheus
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+Primero, tenemos que añadir una cuenta de usuario del sistema y crear directorios \(necesitaras acceso de superusuario\):
 
 ```cpp
 sudo useradd -M -r -s /bin/false prometheus
@@ -41,7 +41,7 @@ sudo useradd -M -r -s /bin/false prometheus
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
+A continuación, obtén el enlace a la última versión de ## Prometheus de la [página de descargas](https://prometheus.io/download/) \(asegúrate de seleccionar la arquitectura de procesador apropiada\), y usa wget para descargarlo y tar para desempaquetar el archivo:
 
 ```cpp
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
@@ -59,7 +59,7 @@ tar xvf prometheus-2.21.0.linux-amd64.tar.gz
 cd prometheus-2.21.0.linux-amd64
 ```
 
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
+A continuación, tenemos que mover los binarios, establecer la propiedad y mover los archivos de configuración a las ubicaciones apropiadas:
 
 ```cpp
 sudo cp {prometheus,promtool} /usr/local/bin/
@@ -85,15 +85,15 @@ sudo cp -r {consoles,console_libraries} /etc/prometheus/
 sudo cp prometheus.yml /etc/prometheus/
 ```
 
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
+`/etc/prometheus` es usado para configuración y `/var/lib/prometheus` para datos.
 
-Let’s set up Prometheus to run as a system service. Do**:**
+Preparemos Prometheus para que funcione como un servicio del sistema. Ejecuta **:**
 
 ```cpp
 sudo nano /etc/systemd/system/prometheus.service
 ```
 
-\(or open that file in the text editor of your choice\), and enter the following configuration:
+\(O abre ese archivo en el editor de texto de tu elección\), e introduce la siguiente configuración:
 
 ```cpp
 [Unit]
@@ -117,7 +117,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Save the file. Now, we can run Prometheus as a system service:
+Guarde el archivo. Ahora, podemos ejecutar Prometheus como un servicio del sistema:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -131,13 +131,13 @@ sudo systemctl start prometheus
 sudo systemctl enable prometheus
 ```
 
-Prometheus should now be running. To make sure, we can check with:
+Prometheus debería estar corriendo ahora. Para asegurarnos, podemos comprobarlo con:
 
 ```cpp
 systemctl status prometheus
 ```
 
-which should produce something like:
+El cual debería producir algo como:
 
 ```cpp
 ● prometheus.service - Prometheus
@@ -155,15 +155,15 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 ...
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
+También puede consultar la interfaz web de Prometheus, disponible en `http://your-node-host-ip:9090/`
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on **.**
 {% endhint %}
 
-## Install Grafana
+## Instalando Grafana
 
-To set up Grafana project repositories with Ubuntu:
+Para establecer los repositorios del proyecto Grafana con Ubuntu:
 
 ```cpp
 sudo apt-get install -y apt-transport-https
@@ -181,7 +181,7 @@ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 ```
 
-To install Grafana:
+Para instalar Grafana:
 
 ```cpp
 sudo apt-get update
@@ -191,7 +191,7 @@ sudo apt-get update
 sudo apt-get install grafana
 ```
 
-To configure it as a service:
+Para configurarlo como un servicio:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -205,40 +205,41 @@ sudo systemctl start grafana-server
 sudo systemctl enable grafana-server.service
 ```
 
-To make sure it’s running properly:
+Para asegurarnos de que se esté ejecutando apropiadamente:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+El cual debería mostrar grafana como `active`. Grafana debería estar ahora disponible en `http://your-node-host-ip:3000/`
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
+Quizas necesites ejecutar `sudo ufw allow 3000/tcp` si el firewall está encendido **.**
 {% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+Inicia sesión con el nombre de usuario/contraseña admin/admin y establece una nueva contraseña segura. Ahora necesitamos conectar a Grafana con nuestra fuente de datos, Prometheus.
 
-On Grafana’s web interface:
+En la Interfaz web de Grafana:
 
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
-* Click `Save & Test`
-* Check for “Data source is working” green message.
+* Ve a la Configuración en el menú de la izquierda y seleccionar Data Sources.
+* Haz clic en Add Data Source
+* Selecciona Prometheus.
+* En el formulario, introduce el nombre \(Prometheus lo hará\), y `http://localhost:9090` como la URL.
+* Haga clic en `Save & Test`
+* Comprueba que haya un mensaje verde que diga "Data source is working".
 
-## Set up node\_exporter
+## Configurando node\_exporter
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
 
-Get the latest version with:
+Además de las métricas de AvalancheGo, establezcamos un monitoreo de la máquina misma, para poder comprobar el uso de la CPU, la memoria, la red y el disco y estar al tanto de cualquier anomalía. Para ello, usaremos node\_exporter, un plugin de Prometheus.
+
+Consigue la última versión con:
 
 ```text
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
 ```
 
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
+cambia `linux-amd64` si tienes una arquitectura diferente  \(RaspberryPi es `linux-arm64`, por ejemplo\). descomprime y mueve el ejecutable:
 
 ```cpp
 tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
@@ -252,14 +253,13 @@ sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
 node_exporter --version
 ```
 
-Then we add node\_exporter as a service. Do:
+Entonces añadimos node\_exporter como un servicio. Ejecuta:
 
 ```cpp
 sudo nano /etc/systemd/system/node_exporter.service
 ```
 
-\(or open that file in the text editor of your choice\) and populate it with:
-
+\(O abre ese archivo en el editor de texto de su elección\) y rellénalo con:
 ```cpp
 [Unit]
 Description=Prometheus
@@ -299,7 +299,7 @@ ExecStart=/usr/local/bin/node_exporter \
 WantedBy=multi-user.target
 ```
 
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
+Esto configura node\_exporter para recolectar varios datos que podríamos encontrar interesantes. Inicia el servicio, y habilítalo en el arranque:
 
 ```cpp
 sudo systemctl start node_exporter
@@ -313,21 +313,21 @@ sudo systemctl enable node_exporter
 sudo systemctl status node_exporter
 ```
 
-Now, we’re ready to tie it all together.
+Ahora, estamos listos para unirlo todo.
 
-## Configure AvalancheGo and node\_exporter Prometheus jobs
+## Configurando los Trabajos de AvalancheGo  y Prometheus node\_exporter  
 
-Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
+Asegúrate de que tu nodo de AvalancheGo funciona con los [argumentos de la línea de mando](../../references/command-line-interface.md) apropiados. La métrica API debe estar habilitada  \(la cual está habilitada por defecto\). Si usas el argumento CLI `--http-host` para hacer llamados API desde el exterior de la máquina anfitriona, tome nota de la dirección que utilizan los APIs.
 
-We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
+Ahora tenemos que definir un trabajo apropiado para Prometheus. Editamos la configuración de Prometheus:
 
-Do :
+Ejecuta:
 
 ```cpp
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-\(or open that file in the text editor of your choice\) and append to the end:
+\(O abre ese archivo en el editor de texto de su elección\) y añádelo al final:
 
 ```cpp
   - job_name: 'avalanchego'
@@ -342,27 +342,32 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**Indentation is important**. Make sure `-job_name` is aligned with existing `-job_name entry`, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
+**La indentación es importante**. Asegúrate que `-job_name` esté a la par con `-job_name entry`, y otras líneas también estén bien indentadas. Asegúrate de usar la IP del host correcta, o `localhost`, dependiendo de como está configurado tu nodo.
 
-Save the config file and restart Prometheus:
+Guarda el config file y reinicia Prometheus:
 
 ```cpp
 sudo systemctl restart prometheus
 ```
 
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Comprueba la interfaz web de Prometheus en `http://your-node-host-ip:9090/targets`. Debería ver tres objetivos habilitados:
 
 * Prometheus
 * avalanchego
 * avalanchego-machine
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+Abre Grafana; ahora puedes crear un tableros usando cualquiera de esas fuentes. También puedes usar [los tableros preconfigurados](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
 
-To import the preconfigured dashboard:
+Para importar el tablero pre-configurado:
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file
+* Abre la interfaz web de Grafana
+* Haz clic en `+` en la barra de herramientas de la izquierda
+* Seleccione `Import JSON` y luego suba el archivo JSON
 
-That’s it! You may now marvel at all the things your node does. Woohoo!
+¡Eso es! Ahora puedes maravillarte de todas las cosas que hace tu nodo. ¡Woohoo!
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2NjkwNzcwNDMsMjA2NTI0NTc2Niw3Nz
+QwMDE5MDMsLTEwMjMwMDQwMzAsLTkwNjUyODkxMCw0MDkyODE1
+NjNdfQ==
+-->

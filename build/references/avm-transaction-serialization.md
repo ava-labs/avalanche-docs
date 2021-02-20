@@ -1,24 +1,23 @@
-# AVM Transaction Format
+# Formato de transacción de AVM
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine \(AVM\). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+Este archivo es la única fuente de verdad de cómo serializamos las transacciones en la Avalanche Virtual Machine \(AVM\). Este documento utiliza la [serialización primitiva](serialization-primitives.md) formato para el empaquetado y [secp256k1](cryptographic-primitives.md#secp256k1-addresses) para la identificación criptográfica del usuario.
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Algunos datos se preparan con un códec ID \(unt16\) que denota cómo los datos deben ser deserializados. En este momento, el único ID de códec válido es el 0 \(`0x00 0x00`\).
 
-## Transferable Output
+## Salida Transferible
 
-Transferable outputs wrap an output with an asset ID.
+Las salidas transferibles o "Transferable Outputs" envuelven una salida con el ID  de un activo.
 
-### What Transferable Output Contains
+### Que Contiene una Salida Transferible
 
-A transferable output contains an `AssetID` and an `Output`.
+Una salida transferible contiene una `AssetID` y un `Output`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined below. For Name your key `avalanche`. If your local machine has MacOS or Linux, this can be a SECP256K1 transfer output.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta salida.
+* **`Output`** es una salida, como se define a continuación. Por ejemplo, puede ser una salida de transferencia SECP256K1.
 
-### Gantt Transferable Output Specification
-
+### Especificación Gantt de una Salida Transferible
 ```text
 +----------+----------+-------------------------+
 | asset_id : [32]byte |                32 bytes |
@@ -29,7 +28,7 @@ A transferable output contains an `AssetID` and an `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Especificación Proto de una Salida Transferible
 
 ```text
 message TransferableOutput {
@@ -38,9 +37,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Salida Transferible
 
-Let’s make a transferable output:
+Hagamos una salida transferible:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
 * `Output: "Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from below"`
@@ -70,20 +69,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Entrada transferible
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Las entradas transferibles o "Transferable Inputs" describen un UTXO específico con una entrada de transferencia proporcionada.
 
-### What Transferable Input Contains
+### Que Contiene una Entrada Transferible
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Una entrada transferible o "Transferable Input" contiene un `TxID`un `UTXOIndex` `AssetID` y un `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is an input, as defined below. This will be a SECP256K1 transfer input
+* **`TxID`** es una matriz de 32 bytes que define de qué transacción esta entrada está consumiendo una salida.
+* **`UTXOIndex`** es un int que define qué utxo está consumiendo esta entrada en la transacción especificada.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia esta entrada.
+* **`Input`** es una entrada, como se define a continuación. Esta será una entrada de transferencia SECP256K1
 
-### Gantt Transferable Input Specification
+### Especificación Gantt de Entrada Transferible
 
 ```text
 +------------+----------+------------------------+
@@ -99,7 +98,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Especificación Proto de la Entrada Transferible
 
 ```text
 message TransferableInput {
@@ -110,9 +109,9 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de entrada transferible
 
-Let’s make a transferable input:
+Hagamos una entrada transferible:
 
 * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
 * `UTXOIndex: 5`
@@ -147,19 +146,21 @@ Let’s make a transferable input:
 ]
 ```
 
-## Transferable Op
 
-Transferable operations describe a set of UTXOs with a provided transfer operation. Only one Asset ID is able to be referenced per operation.
+## Operaciones Transferibles
 
-### What Transferable Op Contains
+Las operaciones transferibles o "Transferable Operations" describen un conjunto de UTXOs con una operación de transferencia proporcionada. Sólo se puede hacer referencia a una identificación de activo por operación.
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
 
-* **`AssetID`** is a 32-byte array that defines which asset this operation changes.
-* **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
-* **`TransferOp`** is a transferable operation object.
+### Que Contiene una Operación Transferible 
 
-### Gantt Transferable Op Specification
+Una operación transferible  contiene un `AssetID` un `UTXOIDs` y un  `TransferOp`.
+
+* **`AssetID`** es un array de 32 bytes que define qué activo cambia esta operación.
+* **`UTXOIDs`** es un array de tuplas TxID-OutputIndex. Esta matriz debe ser ordenada en orden lexicográfico.
+* **`TransferOp`** es un objeto de operación transferible.
+
+### Especificación Gantt de Operaciones Transferibles
 
 ```text
 +-------------+------------+------------------------------+
@@ -174,7 +175,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
                            +------------------------------+
 ```
 
-### Proto Transferable Op Specification
+### Especificaciones Proto  de Operaciones Transferibles
 
 ```text
 message UTXOID {
@@ -188,9 +189,9 @@ message TransferableOp {
 }
 ```
 
-### Transferable Op Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de Operación Transferible
 
-Let’s make a transferable operation:
+Hagamos una operación transferible:
 
 * `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
 * `UTXOIDs:`
@@ -240,25 +241,27 @@ Let’s make a transferable operation:
 ]
 ```
 
-## Outputs
+## Salidas
 
-Outputs have four possible types: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` and `NFTMintOutput`.
+Las salidas o "Outputs" tienen cuatro tipos posibles: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` y `NFTMintOutput`.
 
-## SECP256K1 Transfer Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+##  Salida de Transferencia SECP256K1
 
-### **What SECP256K1 Transfer Output Contains**
+Una salida de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer output" permite enviar una cantidad de un activo a un conjunto de direcciones después de un tiempo unix especificado.
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+### **Que contiene una salida de transferencia SECP256K1**
 
-### **Gantt SECP256K1 Transfer Output Specification**
+Una salida de transferencia de secp256k1 contiene un `TypeID`, `Amount`, `Locktime`, `Threshold`, y `Addresses`.
+
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000007`.
+* **`Amount`** es un long que especifica la cantidad del activo que esta salida posee. Debe ser positivo.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
+
+### ** Especificación Gantt de una Salida de Transferencia  SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -276,7 +279,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Especificación Proto de una Salida de Transferencia SECP256K1 **
 
 ```text
 message SECP256K1TransferOutput {
@@ -288,9 +291,9 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una salida de transferencia SECP256K1**
 
-Let’s make a secp256k1 transfer output with:
+Hagamos una salida de transferencia secp256k1 con:
 
 * **`TypeID`**: 7
 * **`Amount`**: 12345
@@ -334,20 +337,21 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Mint Output
+##  Salida de Acuñación SECP256K1
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+Una salida de acuñación [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 Mint output" es una salida que pertenece a una colección de direcciones.
 
-### **What SECP256K1 Mint Output Contains**
 
-A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+### **Que Contiene una Salida de Acuñación SECP256K1**
 
-* **`TypeID`** is the ID for this output type. It is `0x00000006`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+Una salida de acuñación secp256k1  contiene un `TypeID`, `Locktime`, `Threshold`, y `Addresses`.
 
-### **Gantt SECP256K1 Mint Output Specification**
+* **`TypeID`** es el ID para este tipo de salida. Es `0x00000006`.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
+
+### ** Especificación Gantt de Salida de Acuñación SECP256K1**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -363,7 +367,7 @@ A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addre
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Output Specification**
+### ** Especificación Proto  de Salida de Acuñación SECP256K1**
 
 ```text
 message SECP256K1MintOutput {
@@ -374,9 +378,9 @@ message SECP256K1MintOutput {
 }
 ```
 
-### **SECP256K1 Mint Output Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de Salida de Acuñación SECP256K1**
 
-Let’s make a SECP256K1 mint output with:
+Hagamos una salida de acuñación con SECP256K1:
 
 * **`TypeID`**: 6
 * **`Locktime`**: 54321
@@ -416,22 +420,23 @@ Let’s make a SECP256K1 mint output with:
 ]
 ```
 
-## NFT Transfer Output
+## Salida de Transferencia NFT
 
-An NFT transfer output is an NFT that is owned by a collection of addresses.
+Una salida de transferencia NFT o "NFT transfer output"  es un NFT que es propiedad de una colección de direcciones.
 
-### **What NFT Transfer Output Contains**
+#
+## **Que Contiene una Salida de Transferencia NFT**
 
-An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, and `Addresses`.
+Una salida de transferencia NFT contiene un `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, y `Addresses`.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`GroupID`** is an int that specifies the group this NFT was issued with.
-* **`Payload`** is an arbitrary string of bytes no long longer than 1024 bytes.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es el ID para este tipo de salida. Es `0x0000000b`.
+* **`GroupID`** es un int que especifica el grupo con el que se emitió este NFT.
+* **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
 
-### **Gantt NFT Transfer Output Specification**
+### **Especificación Gantt  de salida de la transferencia  NFT**
 
 ```text
 +-----------+------------+-------------------------------+
@@ -452,7 +457,7 @@ An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `T
                          +-------------------------------+
 ```
 
-### **Proto NFT Transfer Output Specification**
+### **Especificación Proto de Salida de la Transferencia de NFT**
 
 ```text
 message NFTTransferOutput {
@@ -465,9 +470,9 @@ message NFTTransferOutput {
 }
 ```
 
-### **NFT Transfer Output Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de Salida de Transferencia de NFT**
 
-Let’s make an NFT transfer output with:
+Hagamos una salida de transferencia NFT con:
 
 * **`TypeID`**: 11
 * **`GroupID`**: 12345
@@ -517,21 +522,22 @@ Let’s make an NFT transfer output with:
 ]
 ```
 
-## NFT Mint Output
+## Salida de Acuñación NFT
 
-An NFT mint output is an NFT that is owned by a collection of addresses.
+Una salida acuñación NFT o "NFT mint output" es una NFT que es propiedad de una colección de direcciones.
 
-### **What NFT Mint Output Contains**
 
-An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and `Addresses`.
+### **Que Contiene una Salida de Acuñación NFT**
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000a`.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+Una salida de acuñación NFT contiene un `TypeID`, `GroupID`, `Locktime`, `Threshold`, y `Addresses`.
 
-### **Gantt NFT Mint Output Specification**
+* **`TypeID`** es el ID para este tipo de salida. Es `0x0000000a`.
+* **`GroupID`** es un int que especifica el grupo al que se emite este NFT.
+* **`Locktime`** es un long que contiene el timestamp unix en que esta salida puede ser utilizada después. El timestamp unix es específico para el segundo.
+* **`Threshold`** es un int que nombra el número de firmas únicas requeridas para gastar la salida. Debe ser menor o igual a la longitud de las **`Addresses`**. Si **`Addresses`** está vacío, debe ser 0.
+* **`Addresses`** es una lista de direcciones únicas que corresponden a las private keys que pueden ser usadas para gastar esta salida. Las direcciones deben estar ordenadas lexicográficamente.
+
+### **Especificación Gantt de Salida de Acuñación NFT**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -549,7 +555,7 @@ An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and 
                          +--------------------------------+
 ```
 
-### **Proto NFT Mint Output Specification**
+### **Especificación Proto de Salida de Acuñación NFT**
 
 ```text
 message NFTMintOutput {
@@ -561,9 +567,9 @@ message NFTMintOutput {
 }
 ```
 
-### **NFT Mint Output Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de Salida de Acuñación NFT**
 
-Let’s make an NFT mint output with:
+Hagamos una salida de acuñación NFT con:
 
 * **`TypeID`**: 10
 * **`GroupID`**: 12345
@@ -607,23 +613,24 @@ Let’s make an NFT mint output with:
 ]
 ```
 
-## Inputs
+## Entradas
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+Las entradas o "Inputs" tienen un tipo posible: `SECP256K1TransferInput`.
 
-## SECP256K1 Transfer Input
+## Entrada de Transferencia SECP256K1 
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+Una entrada de transferencia [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 transfer input" permite utilizar una salida de transferencia secp256k1 no utilizada.
 
-### **What SECP256K1 Transfer Input Contains**
+### **Que Contiene una Entrada de Transferencia SECP256K1**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+Una entrada de transferencia secp256k1 contiene un `Amount` y un `AddressIndices`.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+* **`TypeID`** es el ID para este tipo de entrada. Es `0x00000005`.
+* **`Amount`** es un long que especifica la cantidad que esta entrada debe utilizar de la UTXO. Debe ser positivo. Debe ser igual a la cantidad especificada en la UTXO.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que se están usando para utilizar la UTXO. Cada UTXO tiene un conjunto de direcciones que pueden utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+
+### **Especificación Gantt de una Entrada de Transferencia SECP256K1**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -637,7 +644,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Input Specification**
+### **Especificación Proto de una  Entrada de Transferencia SECP256K1**
 
 ```text
 message SECP256K1TransferInput {
@@ -647,9 +654,9 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una Entrada de Transferencia SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeId`**: 5
 * **`Amount`**: 123456789
@@ -676,24 +683,24 @@ Let’s make a payment input with:
 ]
 ```
 
-## Operations
+## Operaciones
 
-Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
+Las operaciones tienen tres tipos posibles: `SECP256K1MintOperation`, `NFTMintOp`, y `NFTTransferOp`.
 
-## **SECP256K1 Mint Operation**
+## **Operación de Acuñado SECP256K1**
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
+Una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) o "secp256k1 Mint operation" consume una salida de acuñación SECP256K1, crea una nueva salida de acuñación y envía una salida de transferencia a un nuevo conjunto de propietarios.
 
-### **What SECP256K1 Mint Operation Contains**
+### **Que Contiene una Operación de Acuñado SECP256K1**
 
-A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
+Una operación de acuñado SECP256K1 contiene un `TypeID`, `AddressIndices`, `MintOutput`, y`TransferOutput`.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000008`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`MintOutput`** is a SECP256K1 Mint output.
-* **`TransferOutput`** is a SECP256K1 Transfer output
+* **`TypeID`** es la identificación para este tipo de salida. Es `0x00000008`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`MintOutput`** es una salida de acuñado SECP256K1.
+* **`TransferOutput`** es una salida de transferencia SECP256K1
 
-### **Gantt SECP256K1 Mint Operation Specification**
+### **Especificación Gantt de una Operación de Acuñado SECP256K1**
 
 ```text
 +----------------------------------+------------------------------------+
@@ -711,7 +718,7 @@ A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, 
                                    +------------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Operation Specification**
+### **Especificación Proto de una Operación de Acuñado SECP256K1**
 
 ```text
 message SECP256K1MintOperation {
@@ -722,9 +729,9 @@ message SECP256K1MintOperation {
 }
 ```
 
-### **SECP256K1 Mint Operation Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una Operación de Acuñado SECP256K1**
 
-Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
+Hagamos una operación de acuñado [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) con:
 
 * **`TypeId`**: 8
 * **`AddressIndices`**:
@@ -772,21 +779,21 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 ]
 ```
 
-## NFT Mint Op
+## Operación de Acuñado NFT
 
-An NFT mint operation consumes an NFT mint output and sends an unspent output to a new set of owners.
+Una operación de acuñado NFT o "NFT mint operation" consume una salida de acuñado NFT y envía una salida no gastada a un nuevo conjunto de propietarios.
 
-### **What NFT Mint Op Contains**
+### **Que Contiene una Operación de Acuñado NFT**
 
-An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload`, and `Output` of addresses.
+Una operación de acuñado NFT contiene un `TypeID`, `AddressIndices`, `GroupID`, `Payload`, y`Output` de las direcciones.
 
-* **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Payload`** is an arbitrary string of bytes no longer than 1024 bytes.
-* **`Output`** is a locktime, threshold, and an array of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`** es la identificación para este tipo de operación. Es `0x0000000c`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`GroupID`** es un int que especifica el grupo al que se emite este NFT.
+* **`Payload`** es una cadena arbitraria de bytes que no supera los 1024 bytes.
+* **`Output`** es un tiempo de bloqueo, límite y un conjunto de direcciones únicas que corresponden a las private keys que pueden ser usadas para utilizar esta salida. Las direcciones deben ser ordenadas lexicográficamente.
 
-### **Gantt NFT Mint Op Specification**
+### **Especificación Gantt de una Operación de Acuñado NFT**
 
 ```text
 +------------------------------+------------------------------------+
@@ -807,7 +814,7 @@ An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload
                                +------------------------------------+
 ```
 
-### **Proto NFT Mint Op Specification**
+### **Especificación Proto de una Operación de Acuñado NFT**
 
 ```text
 message NFTMintOp {
@@ -819,9 +826,9 @@ message NFTMintOp {
 }
 ```
 
-### **NFT Mint Op Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una Operación de Acuñado NFT**
 
-Let’s make an NFT mint operation with:
+Hagamos una operación de acuñado NFT con:
 
 * **`TypeId`**: 12
 * **`AddressIndices`**:
@@ -881,19 +888,19 @@ Let’s make an NFT mint operation with:
 ]
 ```
 
-## NFT Transfer Op
+## Operación de Transferencia NFT
 
-An NFT transfer operation sends an unspent NFT transfer output to a new set of owners.
+Una operación de transferencia NFT o "NFT transfer operation" envía una salida de transferencia NFT no utilizada a un nuevo conjunto de propietarios.
 
-### **What NFT Transfer Op Contains**
+### **Que Contiene una Operación de Transferencia NFT**
 
-An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `NFTTransferOutput`.
+Una operación de transferencia NFT contiene un `TypeID`, `AddressIndices` y un no tipificado `NFTTransferOutput`.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000d`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an NFT Transfer Output. This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+* **`TypeID`** es la identificación para este tipo de salida. Es `0x0000000d`.
+* **`AddressIndices`** es una lista de ints únicos que definen las private keys que están siendo usadas para utilizar el UTXO. Cada UTXO tiene un conjunto de direcciones que puede utilizar la UTXO. Cada int representa el índice de esta matriz de direcciones que firmará esta transacción. La matriz debe ser ordenada de baja a alta.
+* **`NFTTransferOutput`** es la salida de esta operación y debe ser una salida de transferencia NFT. Esta salida no tiene el **`TypeId`**, porque el tipo se conoce por el contexto de estar en esta operación.
 
-### **Gantt NFT Transfer Op Specification**
+### **Especificación Gantt de una Operación de Transferencia NFT**
 
 ```text
 +------------------------------+------------------------------------+
@@ -917,7 +924,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
                                +------------------------------------+
 ```
 
-### **Proto NFT Transfer Op Specification**
+### **Especificación Proto de una Operación de Transferencia NFT**
 
 ```text
 message NFTTransferOp {
@@ -931,9 +938,9 @@ message NFTTransferOp {
 }
 ```
 
-### **NFT Transfer Op Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una Operación de Transferencia NFT**
 
-Let’s make an NFT transfer operation with:
+Hagamos una operación de transferencia NFT con:
 
 * **`TypeID`**: 13
 * **`AddressIndices`**:
@@ -996,18 +1003,18 @@ Let’s make an NFT transfer operation with:
 ]
 ```
 
-## Initial State
+## Estado Inicial
 
-Initial state describes the initial state of an asset when it is created. It contains the ID of the feature extension that the asset uses, and a variable length array of outputs that denote the genesis UTXO set of the asset.
+El estado inicial o "Initial state" describe el estado inicial de un activo cuando se crea. Contiene el ID de la extensión de la característica que utiliza el activo y un conjunto de salidas de longitud variable que denotan el conjunto UTXO de la génesis del activo.
 
-### What Initial State Contains
+### Que Contiene El Estado Inicial
 
-Initial state contains a `FxID` and an array of `Output`.
+El estado inicial contiene un `FxID` y un conjunto de `Output`.
 
-* **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-* **`Outputs`** is a variable length array of outputs, as defined above.
+* **`FxID`** es un int que define la extensión de la característica de este estado. Para los activos SECP256K1, es `0x00000000`. Para los activos NFT, es `0x00000001`.
+* **`Salidas`** es un conjunto de salidas de longitud variable, como se definió anteriormente.
 
-### Gantt Initial State Specification
+### Especificación Gantt de el Estado Inicial
 
 ```text
 +---------------+----------+-------------------------------+
@@ -1019,7 +1026,7 @@ Initial state contains a `FxID` and an array of `Output`.
                            +-------------------------------+
 ```
 
-### Proto Initial State Specification
+### Especificación Proto de el Estado Inicial
 
 ```text
 message InitialState {
@@ -1028,9 +1035,9 @@ message InitialState {
 }
 ```
 
-### Initial State Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de Estado Inicial
 
-Let’s make an initial state:
+Hagamos un estado inicial con:
 
 * `FxID: 0x00000000`
 * `InitialState: ["Name your key `avalanche`. If your local machine has MacOS or Linux SECP256K1 Transfer Output from above"]`
@@ -1061,20 +1068,20 @@ Let’s make an initial state:
 ]
 ```
 
-## Credentials
+## Credenciales
 
-Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Las credenciales o "Credentials"  tienen dos tipos posibles: `SECP256K1Credential`, y `NFTCredential`. Cada credencial está emparejada con una entrada u operación. El orden de las credenciales coincide con el orden de las entradas u operaciones.
 
-## SECP256K1 Credential
+## Credencial SECP256K1 
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Una credencial [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) contiene una lista de firmas recuperables de 65 bytes.
 
-### **What SECP256K1 Credential Contains**
+### **Que Contiene una  Credencial SECP256K1**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`TypeID`** es el ID para este tipo. Es `0x00000009`.
+* **`Signatures`** es un conjunto de firmas recuperables de 65 bytes. El orden de las firmas debe coincidir con los índices de firmas de la entrada.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Especificación Gantt de una  Credencial SECP256K1**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1086,7 +1093,7 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential cont
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Especificación Proto de una  Credencial SECP256K1**
 
 ```text
 message SECP256K1Credential {
@@ -1095,9 +1102,9 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Name your key `avalanche`. If your local machine has MacOS or Linux**
+### **Ejemplo de una  Credencial SECP256K1**
 
-Let’s make a payment input with:
+Hagamos una entrada de pago con:
 
 * **`TypeID`**: 9
 * **`signatures`**:
@@ -1141,26 +1148,27 @@ Let’s make a payment input with:
 ]
 ```
 
-## NFT Credential
+## Credencial NFT
 
-An NFT credential is the same as an secp256k1 credential with a different TypeID. The TypeID for an NFT credential is `0x0000000e`.
+Una credencial NFT  o "NFT credential" es la misma que una credencial secp256k1 con un TypeID diferente. El TypeID para una credencial NFT es `0x0000000e`.
 
-## Unsigned Transactions
+## Transacciones no Firmadas
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: `CreateAssetTx`, `OperationTx`, `ImportTx`, and `ExportTx`. They all embed `BaseTx`, which contains common fields and operations.
+Las transacciones no firmadas o "Unsigned transactions" contienen el contenido completo de una transacción en la que sólo faltan las firmas. Las transacciones no firmadas tienen cuatro tipos posibles `CreateAssetTx`, `OperationTx`, `ImportTx`, y `ExportTx`. Todas ellas incluyen `BaseTx`, la cual contiene campos y operaciones comunes.
 
-### What Base Tx Contains
+## Transacción Base No Firmada
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+### Que Contiene una Transacción Base  
+Una transacción base no firmada o "BaseTx" contiene `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, y`Memo`.
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`** es la identificación para este tipo. Es `0x00000000`.
+* **`NetworkID`** es un int que define a qué red se destina esta transacción. Este valor está pensado para soportar el enrutamiento de la transacción y no está diseñado para la prevención de ataques de repetición.
+* **`BlockchainID`** es un array de 32 bytes que define a qué blockchain se emitió esta transacción. Se utiliza para la prevención de ataques de repetición de transacciones que podrían ser válidas en toda la red o en la blockchain.
+* **`Outputs`** es una matriz de objetos de salida transferibles. Las salidas deben ser ordenadas lexicográficamente por su representación serializada. La cantidad total de los activos creados en estos productos debe ser inferior o igual a la cantidad total de cada activo consumido en los insumos menos la tasa de transacción.
+* **`Inputs`** es un conjunto de objetos de entrada transferibles. Las entradas deben ser clasificadas y únicas. Las entradas se ordenan primero lexicográficamente por su **`TxID`** y luego por el **`UTXOIndex`** de bajo a alto. Si hay entradas que tienen el mismo **`TxID`** y **`UTXOIndex`**, entonces la transacción es inválida ya que esto resultaría en un doble gasto.
+* **`Memo`** El campo Memo contiene bytes arbitrarios, hasta 256 bytes.
 
-### Gantt Base Tx Specification
+### Especificación Gantt de una Transacción Base 
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1180,7 +1188,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Especificación Proto de una Transacción Base
 
 ```text
 message BaseTx {
@@ -1193,9 +1201,9 @@ message BaseTx {
 }
 ```
 
-### Base Tx Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción Base
 
-Let’s make an base tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
+Hagamos una transacción base  que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
@@ -1268,17 +1276,17 @@ Let’s make an base tx that uses the inputs and outputs from the previous Name 
 ]
 ```
 
-### What Unsigned Create Asset Tx Contains
+### Que Contiene una Transacción de Creación de Activo No Firmada
 
-An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
+Una transacción de creación de activo no firmada contiene un `BaseTx`, `Name`, `Symbol`, `Denomination`, y`InitialStates`. Su `TypeID` es`0x00000001`.
 
 * **`BaseTx`**
-* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For Name your key `avalanche`. If your local machine has MacOS or Linux, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the initial state of those feature extensions.
+* **`Name`** es una cadena legible por el ser humano que define el nombre del activo que esta transacción creará. No se garantiza que el nombre sea único. El nombre debe consistir sólo en caracteres ASCII imprimibles y no debe tener más de 128 caracteres.
+* **`Symbol`*** es una cadena legible por el ser humano que define el símbolo del activo que esta transacción creará. No se garantiza que el símbolo sea único. El símbolo debe consistir sólo en caracteres ASCII imprimibles y no debe tener más de 4 caracteres.
+* **`Denomination`*** es un byte que define la divisibilidad del activo que esta transacción creará. Por ejemplo, el símbolo AVAX es divisible en billonésimas. Por lo tanto, la denominación del vale AVAX es 9. La denominación no debe ser mayor de 32.
+* **`InitialStates`** es un arreglo de longitud variable que define las extensiones de características que este activo soporta, y el estado inicial de esas extensiones de características.
 
-### Gantt Unsigned Create Asset Tx Specification
+### Especificación Gantt de una Transacción de Creación de Activo No Firmada
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1297,7 +1305,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### Especificación Proto de una Transacción de Creación de Activo No Firmada
 
 ```text
 message CreateAssetTx {
@@ -1309,9 +1317,9 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción de Creación de Activo No Firmada
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
+Hagamos una transacción de creación de activo no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above with ID set to 1"`
 * `Name`: `Volatility Index`
@@ -1391,14 +1399,14 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 ]
 ```
 
-### What Unsigned Operation Tx Contains
+### Que Contiene una Transacción de Operación No Firmada
 
-An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
+Una operación Tx no firmada contiene un `BaseTx`, y `Ops`. El`TypeID` es `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of Transferable Ops.
+* **`Ops`** es un conjunto de operaciones transferibles de longitud variable.
 
-### Gantt Unsigned Operation Tx Specification
+### Especificación Gantt de una Transacción de Operación No Firmada
 
 ```text
 +---------+--------------+-------------------------------------+
@@ -1410,7 +1418,7 @@ An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this t
                          +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### Especificación Proto de una Transacción de Operación No Firmada
 
 ```text
 message OperationTx {
@@ -1419,9 +1427,9 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción de Operación No Firmada
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción de operación no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: `"Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx above" with TypeID set to 2`
 * **`Ops`**: \[`"Name your key `avalanche`. If your local machine has MacOS or Linux Transfer Op as defined above"`\]
@@ -1493,15 +1501,15 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
 ]
 ```
 
-### What Unsigned Import Tx Contains
+### Que Contiene una Transacción de Importación No Firmada
 
-An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
+Una Transacción de Importación No Firmada contiene un `BaseTx`, `SourceChain` y`Ins`. \* El `TypeID`es `0x00000003`.
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`** es una identificación de blockchain de fuente de 32 bytes.
+* **`Ins`** es un conjunto de longitud variable de entradas transferibles.
 
-### Gantt Unsigned Import Tx Specification
+### Especificación Gantt de una Transacción de Importación No Firmada
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1515,7 +1523,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Especificación Proto de una Transacción de Importación No Firmada
 
 ```text
 message ImportTx {
@@ -1525,9 +1533,9 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción de Importación No Firmada
 
-Let’s make an unsigned import tx that uses the inputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una transacción de importación no firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1602,14 +1610,14 @@ Let’s make an unsigned import tx that uses the inputs from the previous Name y
 ]
 ```
 
-### What Unsigned Export Tx Contains
+### Que Contiene una Transacción de Exportación No Firmada
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
+Una transacción de exportación no firmada contiene un `BaseTx`, `DestinationChain`, y `Outs`. El`TypeID` es  `0x00000004`.
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`** es el ID de 32 bytes de la cadena a la que se exportan los fondos.
+* **`Outs`** es un conjunto de longitud variable de salidas transferibles.
 
-### Gantt Unsigned Export Tx Specification
+### Especificación Gantt de una Transacción de Exportación No Firmada
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1623,7 +1631,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Especificación Proto de una Transacción de Exportación No Firmada
 
 ```text
 message ExportTx {
@@ -1633,9 +1641,9 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción de Exportación No Firmada
 
-Let’s make an unsigned export tx that uses the outputs from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs:
+Hagamos un ejemplo de una Transacción de Exportación No Firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * `BaseTx`: “Name your key `avalanche`. If your local machine has MacOS or Linux BaseTx as defined above” with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
@@ -1709,19 +1717,19 @@ Let’s make an unsigned export tx that uses the outputs from the previous Name 
 ]
 ```
 
-## Signed Transaction
+## Transacción Firmada
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+Una transacción firmada o "signed transaction" es una transacción no firmada con la adición de una serie de credenciales.
 
-### What Signed Transaction Contains
+### Que Contiene una Transacción Firmada
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+Una transacción firmada contiene un   `CodecID`, `UnsignedTx`, y`Credentials`.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`** La única identificación de codec válida actualmente es `00 00`.
+* **`UnsignedTx`** es una transacción sin firmar, como se describe arriba.
+* **`Credentials`** es un conjunto de credenciales. Cada credencial será emparejada con la entrada en el mismo índice en esta credencial.
 
-### Gantt Signed Transaction Specification
+### Especificación Gantt de una Transacción Firmada
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1735,7 +1743,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Especificación Proto de una Transacción Firmada
 
 ```text
 message Tx {
@@ -1745,9 +1753,9 @@ message Tx {
 }
 ```
 
-### Signed Transaction Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una Transacción Firmada
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous Name your key `avalanche`. If your local machine has MacOS or Linuxs.
+Hagamos un ejemplo de una transacción firmada que utilice las entradas y salidas de los ejemplos anteriores:
 
 * **`CodecID`**: `0`
 * **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
@@ -1822,19 +1830,19 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+Una UTXO o "Unspent Transaction Output"es una representación independiente de la salida de una transacción.
 
-### What UTXO Contains
+### Que Contiene Una UTXO
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+Una UTXO contiene un `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, y `Output`.
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`** El único `CodecID` válido es `00 00`
+* **`TxID`** es una identificación de transacción de 32 bytes. Los ID de transacción se calculan tomando sha256 de los bytes de la transacción firmada.
+* **`UTXOIndex`** es un int que especifica qué salida de la transacción especificada por **`TxID`** fue creada por este utxo.
+* **`AssetID`** es una matriz de 32 bytes que define a qué activo hace referencia este utxo.
+* **`Output`** es el objeto de salida que creó este utxo. La serialización de las Salidas fue definida anteriormente.
 
-### Gantt UTXO Specification
+### Especificación Gantt de una UTXO
 
 ```text
 +--------------+----------+-------------------------+
@@ -1852,8 +1860,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
-
+### Especificación Proto de una UTXO
 ```text
 message Utxo {
     uint16 codec_id = 1;     // 02 bytes
@@ -1864,9 +1871,9 @@ message Utxo {
 }
 ```
 
-### UTXO Name your key `avalanche`. If your local machine has MacOS or Linux
+### Ejemplo de una UTXO
 
-Let’s make a UTXO from the signed transaction created above:
+Ejemplo de una UTXO de la transacción firmada creada anteriormente:
 
 * **`CodecID`**: `0`
 * **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
@@ -1912,5 +1919,11 @@ Let’s make a UTXO from the signed transaction created above:
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjM5ODU2MTM0XX0=
+eyJoaXN0b3J5IjpbLTIwMTc4MDk3MzUsLTU4MTI3NDY2NSwxNT
+g4MTA3NTY0LC0xODQ5MDQ2MjgxLC0xMjkzNDE4MjkxLDExNDY3
+MjgzODksNTU5NTY1OSwtODIzOTI4ODgwLC05NjI5NjAwNTgsOT
+c0MzYwMTA0LC05Mzk2Njc4MDQsLTQzNDQ4OTEwNiwtOTA4NTQ3
+NTc5LDEyNjM5MDMyODEsMTUyNjUwMTAwNSwtMTI3MjgyNDA5MC
+wtMTE5NTQ5MzU3LC0xNjI4MjUyNzUzLC0xNjc3NDAwNjUsNjY4
+ODgzMjgzXX0=
 -->

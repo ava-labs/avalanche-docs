@@ -1,20 +1,20 @@
-# Create a Local Test Network
+# Crear una Red Local de Pruebas
 
-## Introduction
+## Introducción
 
-In the [Get Started tutorial](https://avalanche.gitbook.io/avalanche/build/getting-started), we connect a node to the test network. You might find it useful to create a local test network.
+En el [Tutorial de Inicio](https://avalanche.gitbook.io/avalanche/build/getting-started), conectamos un nodo a la red de pruebas. Puede ser útil crear una red de prueba local.
 
-We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) and manually.
+Te mostraremos cómo lanzar una red de prueba local de 5 nodos. Mostraremos cómo lanzar la red usando [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) y manualmente.
 
-The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` , and `9658`.
+Los 5 nodos tendrán puertos HTTP \(donde los llamados a la API deben ser enviados\) `9650`, `9652`, `9654`, `9656` , y `9658`.
 
-## Create a Local Test Network
+## Crear una Red Local de Pruebas
 
-The below commands assume you have [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+Los siguientes comandos asumen que tienes [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) instalado en `$GOPATH/src/github.com/ava-labs/avalanchego`. Cada uno de los cinco nodos creados es un validador. Las staking keys para estos nodos están en `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
-### Manually
+### Manualmente
 
-To start the network:
+Para iniciar la red:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -44,11 +44,11 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --snow-sample-size=2 --snow-quorum-size=2 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --staking-enabled=true --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-### With Avash
+### Con Avash
 
-We assume you’ve installed [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
+Asumimos que has instalado [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
 
-To open Avash:
+Para abrir Avash:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avash
@@ -62,17 +62,17 @@ go build
 ./avash
 ```
 
-Now we’re in Avash. To start the network:
+Ahora estamos en Avash. Para iniciar la red:
 
 ```cpp
 runscript scripts/five_node_staking.lua
 ```
 
-When you want to tear down the network, run `exit` to exit Avash.
+Cuando quieras desmantelar la red, ejecuta `exit` para salir de Avash.
 
-### Verifying Nodes are Connected <a id="verifying-nodes-are-connected"></a>
+### Verificando que los Nodos están Conectados <a id="verifying-nodes-are-connected"></a>
 
-We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
+Podemos mirar a uno de los pares del nodo para asegurarnos de que los nodos están conectados. Para hacerlo, ejecuta [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
 
 ```cpp
 curl -X POST --data '{
@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-`peers` should have 4 entries:
+`peers` debería tener 4 entradas:
 
 ```cpp
 {
@@ -128,9 +128,9 @@ curl -X POST --data '{
 }
 ```
 
-### Getting AVAX <a id="getting-avax"></a>
+### Obteniendo AVAX <a id="getting-avax"></a>
 
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain address that you can import in order to get AVAX. The private key for this address is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
+Cuando se ejecuta una red con `--network-id=local`, como hemos hecho, hay una dirección X-Chain pre-financiada que puedes importar para conseguir AVAX. La private key de esta dirección es `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Después de crear un usuario de keystore en un nodo, puedes importar esta keystore, y los fondos que contiene, con:
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/platform' \
@@ -147,7 +147,10 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 }'
 ```
 
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), and [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+¡Eso es todo! Tu versión local de Avalanche está en marcha. Tiene las blockchains predeterminadas: la [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), y [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). La única subnet que existe es la Red Primaria.
 
-You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
+Puedes añadir más nodos a la red. Sólo recuerda dar valores únicos a `db-dir`, `http-port` , y `staking-port`.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTM3OTAyMDMwMl19
+-->

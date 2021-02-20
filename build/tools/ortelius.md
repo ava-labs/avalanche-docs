@@ -1,60 +1,62 @@
 ---
-description: 'This API allows clients to interact with Ortelius, the Avalanche indexer.'
+descripción: "Esta API permite a los clientes interactuar con Ortelius, el indexador de Avalanche".
 ---
 
-# Ortelius API
+# API de Ortelius
 
-## Ortelius API
+## API de Ortelius
 
-### Format
+### Formato
 
-This API uses GET HTTP requests using URL query parameters and returns JSON data.
+Esta API usa peticiones GET HTTP usando parámetros de consulta de URL y devuelve los datos de JSON.
 
-### Versioning
+###
+ Versionado
 
-Starting with version 2, the API paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
+A partir de la versión 2, las rutas de la API serán precedidas por una etiqueta de versión, por ejemplo, `http://localhost:8080/v2`.
 
-The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
+La versión actual de la API es la versión 2. La documentación de la [API Legacy ](ortelius.md#legacy-api) contiene información sobre el uso de la API v1.
 
-### Data Types
+### 
+Tipos de datos
 
-In addition to integers, strings, and booleans, the following data types are used throughout the API:
+Además de los números enteros, las cadenas y los booleanos, se utilizan los siguientes tipos de datos en toda la API:
 
-| Name | Description | Examples |
+| Nombre| Descripción| Ejemplos|
 | :--- | :--- | :--- |
-| `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
-| `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
-| `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
+| `id` | Un identificador de objeto codificado CB58, como una cadena, una transacción o una identificación de activo | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
+| `address` | Una dirección codificada bech-32 | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
+| `datetime` | Una timestamp de Unix como un entero o una cadena con formato RFC3339 | `1599696000`, `2020-09-10T00:00:00Z` |
 
-### List Parameters
+### Parámetros de la Lista
 
-All endpoints for listing resources accept the following parameters:
+Todos los puntos finales de la lista de recursos aceptan los siguientes parámetros:
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `limit` | `int` | The maximum number of items to return | `500` | `500` |
-| `offset` | `int` | The number of items to skip | `0` | None |
-| `query` | `string` | An ID prefix to filter items by | None | None |
-| `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
-| `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
+| `limit` | `int` | El número máximo de elementos a enviar | `500` | `500` |
+| `offset` | `int` | El número de elementos a omitir | `0` | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
+| `startTime` | `datetime` | Límites a los elementos creados en o después de un tiempo determinado | `0` | Now |
+| `endTime` | `datetime` | Límites a los elementos creados en o antes de un tiempo determinado | Now | Now |
 
-### Available Endpoints
+### Endpoints Disponibles
 
-#### Overview
+#### Resumen
 
-The root of the API gives an overview of the constants for the active Avalanche network being indexed.
+La raíz de la API da una visión general de las constantes de la red activa de Avalanche que se está indexando.
 
-**Params**
+**Parámetros**
 
-None
+Ninguno
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -78,23 +80,23 @@ curl "http://localhost:8080/v2"
 }
 ```
 
-#### Search
+#### Buscar
 
-Find an address or a transaction by its ID.
+Encuentra una dirección o una transacción por su ID.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `query` | `string` | An ID prefix to filter items by | None | None |
+| `query` | `string` | Un prefijo de ID para filtrar los elementos. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -167,24 +169,24 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-#### Aggregate
+#### Agregado
 
-Calculate aggregate transaction data over a time frame.
+Calcular los datos agregados de las transacciones a lo largo de un período de tiempo.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
+| `chainID` | `id` | Un ID en cadena para filtrar los resultados. Puede ser suministrado varias veces. | None | None |
+| `assetID` | `id` | Una ID de activos para filtrar los resultados.. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -202,17 +204,17 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-#### TxFee Aggregate
+#### Agregado TxFee
 
-AVAX Aggregate txfee
+Agregado AVAX  txfee
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -226,23 +228,23 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 }
 ```
 
-#### Address Chain
+#### Cadena de Direcciones
 
-Responds with the chains an address appears on.
+Responde con las cadenas en las que aparece una dirección
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -258,27 +260,27 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 }
 ```
 
-#### List Transactions
+#### Lista de transacciones
 
-Find transactions confirmed transactions from the network.
+Encuentra transacciones confirmadas de la red.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
-| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `assetID` | `id` | Una ID de activos para filtrar los resultados. | None | None |
+| `address` | `address` | Una dirección por la que filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `disableGenesis` | `bool` | Cuando sea true, los datos del vértice del Génesis no retornan. | true | N/A 
+| `sort` | `string` | Un método para clasificar los resultados. Puede ser `timestamp-asc` o`timestamp-desc`. | `timestamp-asc` | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```bash
 curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -348,17 +350,17 @@ curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111
 }
 ```
 
-#### Get Transaction
+#### Obtener Transacción
 
-Find a single transaction by its ID.
+Encuentra una transacción por su ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -422,24 +424,24 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-#### List Addresses
+#### Lista de direcciones
 
-Find addresses that have been involved in confirmed transactions.
+Encuentra las direcciones que han estado involucradas en transacciones confirmadas.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addresses?limit=1"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -462,17 +464,17 @@ curl "http://localhost:8080/v2/addresses?limit=1"
 }
 ```
 
-#### Get Address
+#### Obtener Dirección
 
-Find a single address by its ID.
+Encuentra una dirección por su ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -491,23 +493,23 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-#### List Assets
+#### Lista de activos
 
-Find assets that have been created on the X-chain.
+Encuentra activos que se han creado en la X-chain.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
+| `enableAggregate` | string | Los valores "minute", "hour", "day", "week", "month", or "year" cuando se proporcionen, se incluirán datos agregados sobre el activo. | N/A | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -583,17 +585,17 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 }
 ```
 
-#### Get Asset
+#### Obtener Activo
 
-Find a single asset by its ID.
+Encuentra un activo por su ID.
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -665,25 +667,25 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 }
 ```
 
-#### List Outputs
+#### Lista de salidas
 
-Find outputs that have been created by a transaction confirmed on the network.
+Encontrar salidas que hayan sido creadas por una transacción confirmada en la red.
 
-**Params**
+**Parámetros**
 
-| Name | Type | Description | Default | Max |
+| Nombre| Tipo| Descripción| Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
+| `chainID` | `id` | Una ID en cadena para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `address` | `address` | Una dirección para filtrar los resultados. Puede ser suministrada varias veces. | None | None |
+| `spent` | `bool` | Si se establece, los resultados serán filtrados por si se gastan \(true\) o no se gastan \(false\) | None | N/A |
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -707,17 +709,18 @@ curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 }
 ```
 
-#### Get Output
 
-Find a single output by its ID.
+#### Obtener Salida
 
-**Example Call**
+Encuentra una salida por su ID.
+
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -737,17 +740,17 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-### Legacy API
+### API Legacy 
 
-Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
+La versión 1 de la API fue construida para soportar sólo la  X-chain, y no usaba un prefijo de versión \(`/v1`\). Está disponible en el directorio `/x` de la raíz, que es el endpoint de la visión general solamente para la X-chain:
 
-**Example Call**
+**Llamado de Ejemplo**
 
 ```text
 curl "http://localhost:8080/x"
 ```
 
-**Example Response**
+**Respuesta de Ejemplo**
 
 ```javascript
 {
@@ -759,15 +762,15 @@ curl "http://localhost:8080/x"
 }
 ```
 
-The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
+La API legacy admite los mismos endpoints y parámetros que la versión 2, excepto el parámetro chainID para todos los puntos finales, que se ajusta por defecto al ID de la X-chain.
 
-## Ortelius Configuration
+## Configuración de Ortelius
 
-Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
+Configuración usando un archivo JSON para las aplicaciones de Ortelius. La configuración define qué red y blockchains debe indexar Ortelius, así como la información de conexión para los servicios de respaldo requeridos.
 
-## Example
+## Ejemplo
 
-This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
+Esta configuración es la que utiliza la configuración autónoma de Docker Compose e ilustra los diversos ajustes disponibles `kafka`, `mysql`, y`redis` son nombres de DNS que resuelven el servicio correspondiente.
 
 ```javascript
 {
@@ -811,3 +814,6 @@ This configuration is the one used by the standalone Docker Compose setup and il
 }
 ```
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTY0MjI3OTkwMSw3OTQ3NTg5NjddfQ==
+-->

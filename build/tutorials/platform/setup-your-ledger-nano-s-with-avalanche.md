@@ -1,88 +1,93 @@
-# Set up Your Ledger Nano S with Avalanche
+# Configura tu Ledger Nano S con Avalanche
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
+El estándar de la industria para asegurar con seguridad las criptodivisas son las hardware wallets, dispositivos especializados que proporcionan un aislamiento total entre su ordenador y sus private keys.
 
-If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+Si quieres usar la dirección de Avalanche que creaste antes, necesitas usar el procedimiento [restaurar desde la frase de recuperación](https://support.ledger.com/hc/en-us/articles/360005434914)  usando la frase mnemónica que obtuviste de la Wallet de Avalanche. Si estás creando una nueva dirección, sólo sigue las instrucciones normales [establecer como nuevo dispositivo](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device).
 
-The Avalanche Ledger wallet app is currently available via [Ledger Live](https://www.ledger.com/ledger-live) in Experimental Mode.
+La aplicación de Ledger Wallet de Avalanche está disponible actualmente a través de [Ledger Live](https://www.ledger.com/ledger-live) en Modo Experimental.
 
-## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
+## Cómo Configurar Avalanche en Ledger Live <a id="1c80"></a>
 
-First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
+Primero necesitarás instalar [Ledger Live](https://www.ledger.com/ledger-live). 
+Hay opciones de descarga para MacOS, Windows y Linux, así como para iOS y Android.
 
-Next, fire up Ledger Live and click the “Settings” button.
+A continuación, enciende Ledger Live y haz clic en el botón **Settings**
 
 ![Settings button on ledger live](https://miro.medium.com/max/3052/1*lMnVGJneUAqgRvZBIDv_rA.png)
 
-Once in settings then go to the “Experimental features” tab.
+Una vez en la configuración, ve a la pestaña **Experimental features**.
 
 ![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
 
-Scroll down to the “Developer mode” toggle switch, and enable it.
+Desplázate hacia abajo hasta el interruptor  del **Developer mode** y actívalo.
 
 ![Toggle on developer mode](https://miro.medium.com/max/2908/1*qdte7MSvSZdfqfCIUMNp2Q.png)
 
-Now with “Developer mode” enabled, you can go to the “Manager” tab and search for “Avalanche”. Confirm that the Avalanche app is v0.2.1, and click the “Install” button.
+Ahora con el **Developer Mode** activado, puedes ir a la pestaña "Gerente" y buscar **Avalanche**. Confirma que la aplicación Avalanche es la v0.2.1, y haz clic en el botón **Install**.
 
 ![Avalanche Ledger app install button](https://miro.medium.com/max/4040/1*rGFrSBEfxRlIkc-k7hS2Vg.png)
 
-You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.2.1.
+Puedes confirmar que la instalación fue exitosa yendo a la pestaña **Apps installed** donde deberías ver Avalanche v0.2.1.
 
 ![](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
 
-## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
+## Usar la Wallet de Avalanche con Ledger <a id="48a3"></a>
 
-Once you have the Avalanche app installed then you’re able to interact with the [Avalanche Wallet](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps between the X-Chain&lt;-&gt;P-Chain as well as staking tokens.
+Una vez que tengas la aplicación de Avalanche instalada, podrás interactuar con la [Wallet de Avalanche](https://wallet.avax.network/) a través del Ledger. Esto incluye el envío de AVAX, Tokens, NFTs, intercambios cross-chain entre la X-Chain&lt;-&gt;P-Chain así como hacer stake de tokens.
 
-First, to access the wallet, plug in the Ledger to your computer and if needed, enter your pin.
+Primero, para acceder a la Wallet, conecte el Ledger a su ordenador y, si es necesario, introduzca su pin.
 
 ![PIN code screen](https://miro.medium.com/max/1852/1*A_1VgMMLeJCYzNst6tdq9A.jpeg)
 
-Next, if you see the text “Pending Ledger review” then click both buttons on the top of the device to skip that screen.
+A continuación, si ves el texto **Pending Ledger review**, haz clic en los dos botones de la parte superior del dispositivo para saltar esa pantalla.
 
 ![](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
 
-Lastly, you should land on the “Avalanche” app screen where you can confirm that the app is version 0.2.1.
+Por último, deberías aparecer en la pantalla de la aplicación **Avalanche** donde puedes confirmar que la aplicación es la versión 0.2.1.
 
 ![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
+Después de confirmar que la aplicación Avalanche está funcionando, entonces en la página de inicio de la Wallet haz clic en el botón **Access Wallet**.
 
 ![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
+En el siguiente mensaje **How do you want to access your wallet?**, haz clic en el botón **Ledger**.
 
 ![Ledger Access](../../../.gitbook/assets/ledger-access.png)
 
-You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
+Ahora se te pedirá que confirmes en tu dispositivo Ledger. Haz clic con el botón derecho en las indicaciones del dispositivo y en la última pantalla confirma pulsando ambos botones.
 
 ![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
 
-If successful you will be signed into the wallet and any previous balances will be displayed.
+Si tiene éxito, ingresará en la wallet y se mostrarán los saldos anteriores.
 
 ![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
+Para transferir fondos, ve a la pestaña **Send** y pega una dirección de la X-Chain en el campo **To Address**. Establece una cantidad y opcionalmente establece una nota. Presiona **Confirm** y luego el botón **Send Transaction**.
 
 ![Send Transaction](../../../.gitbook/assets/send-transaction.png)
 
-You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
+Se te pedirá que confirmes la acción en tu Ledger. Comprueba que el hash que aparece en la cartera de la web coincide con el que aparece en tu Ledger. Si todo coincide, confirma pulsando los dos botones de la última pantalla para enviar la transacción.
 
 ![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
+Puedes hacer clic en el icono para actualizar tu saldo y deberías verlo disminuir por el importe que acabas de enviar y la comisión de la transacción.
 
 ![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+En la columna de la derecha, verás tu última transacción. Al hacer clic en el icono de la lupa se abrirá la transacción en nuestro explorador.
 
 ![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+Finalmente, deberíamos poder ver los detalles de la transacción en nuestro explorador. Aquí se enumera todo lo relativo a la transacción, incluyendo el ID de la transacción, el estado, cuándo se produjo la transacción y toda la información relativa a las entradas y salidas.
 
 ![Transaction details](../../../.gitbook/assets/transaction-details.png)
 
-## More Tools to Come <a id="135b"></a>
+## Más Herramientas En Camino <a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Labs está construyendo el Internet de las finanzas. Estamos desarrollando soluciones para crear un mundo sin fricciones redefiniendo la forma en que la gente construye y utiliza las aplicaciones financieras. Una parte crítica de esta infraestructura es una Hardware Wallet para que los usuarios puedan estar totalmente seguros de que sus private keys y monedas están completamente aisladas de cualquier actor potencialmente malicioso. Nuestra recién lanzada aplicación de Ledger hace precisamente esto siguiendo las mejores prácticas de la industria para mantener a los usuarios y las monedas a salvo y seguras.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIwNjg3MzI4ODAsMTY5NDE4MjI5NiwtNj
+UxODM2MzEyXX0=
+-->

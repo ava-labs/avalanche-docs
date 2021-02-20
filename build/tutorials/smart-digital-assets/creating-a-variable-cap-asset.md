@@ -1,25 +1,25 @@
-# Create a Variable-Cap Asset
+# Crear un Activo de Capital Variable
 
-## Introduction
+## Introducción
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+Este tutorial ilustra cómo crear un activo fungible de capital variable. No existen unidades del activo cuando éste se inicializa, pero se pueden acuñar más unidades del activo. En la creación del activo, especificamos qué conjuntos de direcciones pueden acuñar más unidades.
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+Tal vez te preguntas por qué especificamos _sets_ de direcciones que pueden acuñar más unidades del activo en lugar de una sola dirección. Aquí está el porqué:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Seguridad:** si sólo una dirección puede acuñar más del activo, y se pierde la clave privada de esa dirección, no se podrán acuñar más unidades. Del mismo modo, si sólo una dirección puede acuñar más del activo, nada impide que el titular de esa dirección acuñe unilateralmente todo lo que quiera.
+* **Flexibilidad:** es agradable poder codificar la lógica como, "Alice puede acuñar unilateralmente más unidades de este activo, o 2, en el cual Dinesh, Ellin y Jamie pueden juntos acuñar más".
 
-Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
+Supongamos que queremos emitir un activo que represente acciones de una corporación. Al principio no existen acciones, pero más adelante se pueden crear más acciones. Vamos a crear tal activo.
 
-## Requirements
+## Requisitos
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+Haber completado [Iniciando en Avalanche](../../getting-started.md) y que seas familiar con [La Arquitectura de Avalanche](../../../learn/platform-overview/).
 
-## Create the Asset
+## Create el Activo
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+Nuestro activo existirá en la X-Chain, así que para crear nuestro activo ejecutaremos [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), el cual es un método de la [API de la X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
-The signature for this method is:
+La firma de este método es:
 
 ```cpp
 avm.createVariableCapAsset({
@@ -41,22 +41,23 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### Parametros
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name` es un nombre legible por los humanos para el activo. No necesariamente único.
+* `symbol` es un símbolo abreviado para el activo. Entre 0 y 4 caracteres. No necesariamente único. Puede ser omitido.
+* `denomination` determina la forma en que los saldos de este activo son mostrados por las interfaces de usuario. Si la denominación es 0, 100 unidades de este activo se muestran como 100. Si la denominación es 1, 100 unidades de este activo se muestran como 10.0. Si la denominación es 2, 100 unidades de este activo se muestran como .100, etc.
+* Realizar una transacción en la X-Chain requiere una comisión de transacción pagada en AVAX. `username` y `password`  denotan al usuario que paga la comisión.
+* Cada elemento en `initialHolders` especifica que `address` contiene `amount` unidades del activo en la génesis.
+* `from` son las direcciones que quieres usar para esta operación. Si se omite, utiliza cualquiera de tus direcciones según sea necesario.
+* `changeAddr` es la dirección a la que se enviará cualquier cambio. Si se omite, el cambio se envía a una de las direcciones controladas por el usuario.
 
-### Response
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+### Respuesta
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+* `assetID` es la ID del nuevo activo.
+* `changeAddr` en el resultado está la dirección donde se envió el cambio.
+
+Más adelante en este ejemplo, acuñaremos más acciones, así que asegúrate de sustituir al menos 2 direcciones del segundo minter set por las direcciones que controle tu usuario.
 
 ```cpp
 curl -X POST --data '{
@@ -90,7 +91,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La respuesta debe verse así:
 
 ```cpp
 {
@@ -103,18 +104,18 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## Acuñar el Activo
 
-Right now 0 shares exist. Let’s mint 10M shares.
+En este momento existen 0 acciones. Acuñemos 10 millones de acciones.
 
-### Create the Unsigned Transaction
+### Crear la Transacción No Firmada
 
-We’ll use [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+Usaremos [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) para acuñar las acciones.
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `amount` es el número de acciones que se crearán.
+* `assetID` es la identificación del activo del que estamos creando más.
+* `to` es la dirección que recibirá las nuevas acciones acuñadas. Reemplaza `to` con una dirección que tu usuario controle para que más tarde puedas enviar algunas de las acciones recién acuñadas.
+* `username` debe ser un usuario que tenga las control keys que le permitan acuñar más de este activo. Es decir, controla al menos _`threshold`_ keys para uno de los minter sets que especificamos arriba.
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +132,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+La respuesta contiene el ID de la transacción.
 
 ```cpp
 {
@@ -144,7 +145,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Podemos comprobar el estado de la transacción que acabamos de enviar a la red usando [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -157,7 +158,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+Esto debería darnos:
 
 ```cpp
 {
@@ -169,11 +170,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
+## Intercambia el Activo
 
-### Check a Balance
+### Verifique el Balance
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Los 10 millones de activos están siendo controlados por la dirección `to` que especificamos en `mint`. Para verificar esto, usaremos [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -187,7 +188,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+La respuesta confirma que nuestra creación de activos fue exitosa y que la dirección deseada tiene la totalidad de los 10 millones de acciones:
 
 ```cpp
 {
@@ -199,9 +200,9 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### Envía el Activo
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+Enviemos 100 activos a otra dirección usando [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). Para hacerlo ejecutamos:
 
 ```cpp
 curl -X POST --data '{
@@ -218,7 +219,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+Comprobemos los balances de la dirección `to`:
 
 ```cpp
 curl -X POST --data '{
@@ -232,7 +233,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La respuesta debería ser:
 
 ```cpp
 {
@@ -244,12 +245,16 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Concluimos!
 
-In this tutorial, we:
+En este tutorial:
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* Usamos `createVariableCapAsset` para crear un activo de capital variable que represente las acciones.
+* Usamos `mint` para acuñar más unidades de un activo.
+* Usamos `getBalance` para comprobar los saldos de las direcciones.
+* Usamos `send` para transferir acciones.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTEyNTI4NTc3MCwtNzkyMjEzNzIxLDEwOD
+c4NzcwMTMsLTExMzUwMDUxNjFdfQ==
+-->

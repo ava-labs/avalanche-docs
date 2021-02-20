@@ -1,16 +1,16 @@
 ---
-description: Learn more about Avalanche's transaction fees
+descripción: Aprende más sobre las comisiones de transacción de Avalanche
 ---
 
-# Transaction Fees
+# Comisiones de Transacción
 
-In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned \(destroyed forever\).**
+Para evitar el spam, las transacciones en Avalanche requieren el pago de una comisión por la transacción. La comisión se paga en [AVAX](../../#avalanche-avax-token). **Se le hace _Burn_ a la comisión de la transacción  \(se destruye por siempre\).**
 
-When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
+Cuando emites una transacción a través de la API de Avalanche, la comisión por la transacción se deduce automáticamente de una de las direcciones que controlas.
 
-## Fee Schedule
+## Lista de comisiones
 
-Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
+Los diferentes tipos de transacciones requieren el pago de una comisión de transacción diferente. Esta tabla muestra la tabla de comisiones de transacción:
 
 ```cpp
 +----------+-------------------+------------------------+
@@ -40,5 +40,8 @@ Different types of transactions require payment of a different transaction fee. 
 +----------+-------------------+------------------------+
 ```
 
-The [C-Chain](./#contract-chain-c-chain) gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
+El gas fee de la [C-Chain](./#contract-chain-c-chain) es de 4.7e-7 AVAX/gas. El límite de gas de la C-Chain es de 10e8.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNjk3NDkwNzE0XX0=
+-->

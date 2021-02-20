@@ -1,26 +1,26 @@
-# Add a Validator
+# [**Añadir un Validador**](https://stackedit.io/add-a-validator.md)
 
-## Introduction
+## Introducción
 
-The [Primary Network](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](https://avalanche.gitbook.io/avalanche/learn/platform-overview). In this tutorial, we’ll add a node to the Primary Network and a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) on Avalanche.
+La [Red Primaria](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) es propia de la plataforma de Avalanche y valida las [ blockchains incorporadas](https://avalanche.gitbook.io/avalanche/learn/platform-overview) de Avalanche. En este tutorial, añadiremos un nodo a la Red Primaria y una [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) en Avalanche.
 
-The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
+La P-Chain maneja los metadatos de Avalanche. Esto incluye el seguimiento de qué nodos están en qué subredes, que blockchains existen, y cuales subnets están validando cuales blockchains. Para añadir un validador, emitiremos [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) a la P-Chain.
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Ten en cuenta que una vez que se emite la transacción para añadir un nodo como validador, no hay forma de cambiar los parámetros. **No puedes quitar tu Stake antes de tiempo o cambiar la cantidad del Stake, el ID del nodo o la dirección de la recompensa.** Por favor, asegúrate de utilizar los valores correctos en los llamados de la API a continuación. Si no estás seguro, consulta el [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) o pide ayuda en [Discord.](https://chat.avalabs.org/)
 {% endhint %}
 
-## Requirements
+## Requisitos
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+Has completado [Iniciando en Avalanche](../../getting-started.md) y estás familiarizado con la [Arquitectura de Avalanche](../../../learn/platform-overview/). En este tutorial, usamos la [Colección de Postman de Avalanche](https://github.com/ava-labs/avalanche-postman-collection) para ayudarnos a hacer llamados a la API.
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
+Para asegurarse de que su nodo está bien conectado, asegúrese de que su nodo puede recibir y enviar el tráfico TCP en el puerto de staking \(`9651` por defecto\) y que iniciaste tu nodo con el argumento de la línea de comandos`--public-ip=[LA IP PÚBLICA DE TU NODO AQUÍ]`. El no hacer ninguna de estas cosas puede poner en peligro su recompensa de Staking.
 
-## Add a validator with Avalanche Wallet
+## Añade un Validador con la Wallet de Avalanche 
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+Primero, te mostramos cómo añadir tu nodo como validador usando la [Wallet de Avalanche](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Obten la ID de tu Nodo ejecutando [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ![getNodeID postman](../../../.gitbook/assets/getNodeID-postman.png)
 
@@ -32,7 +32,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+La respuesta contiene el ID de tu Nodo:
 
 ```cpp
 {
@@ -44,39 +44,39 @@ The response has your node’s ID:
 }
 ```
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
+Abre [la wallet](https://wallet.avax.network/), Y ve a la pestaña `Earn` . Elige `Add Validator`.
 
 ![Web wallet earn tab](../../../.gitbook/assets/web-wallet-earn-tab.png)
 
-Fill out the staking parameters. They are explained in more detail below. When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+Rellena los parámetros de Staking. Se explican con más detalle a continuación. Cuando hayas rellenado todos los parámetros de Staking y los hayas comprobado dos veces, haz click en `Confirm`. Asegúrate de que el periodo de Staking es de al menos 2 semanas, la comisión de delegación es de al menos el 2%, y estás haciendo Stake de al menos 2.000 AVAX.
 
 {% page-ref page="../../../learn/platform-overview/staking.md" %}
 
 ![Earn validate](../../../.gitbook/assets/earn-validate.png)
 
-You should see this success message, and your balance should be updated.
+Deberías ver este mensaje de aprobación, y tu balance debería ser actualizado.
 
 ![Your validation transaction is sent](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifies that our transaction was accepted.
+Ejecutando [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifica que nuestra transacción fue aceptada.
 
 ![getPendingValidators postman](../../../.gitbook/assets/getPendingValidators-postman.png)
 
-Go back to the `Earn` tab, and click `Estimated Rewards`.
+Retrocedemos a la pestaña `Earn` y hacemos click en  `Estimated Rewards`.
 
 ![Earn, validate, delegate](../../../.gitbook/assets/earn-validate-delegate.png)
 
-Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+Una vez que la hora de inicio de nuestro validador haya pasado, veremos las recompensas que podemos ganar, así como su hora de inicio, su hora de fin y el porcentaje de su período de validación que ha pasado.
 
 ![Estimated rewards](../../../.gitbook/assets/estimated-rewards.png)
 
-That’s it!
+Eso es todo!
 
-## Add a validator with API calls
+## Añadir un validador con llamados a la API
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+También podemos añadir un nodo al conjunto de validadores haciendo llamados API a nuestro nodo. Para añadir un nodo a la Red Primaria, ejecutaremos [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
 
-This method’s signature is:
+La firma de este método es:
 
 ```cpp
 platform.addValidator(
@@ -94,11 +94,11 @@ platform.addValidator(
 ) -> {txID: string}
 ```
 
-Let’s go through and examine these arguments.
+Vamos a examinar estos argumentos.
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Este es el ID de nodo del validador que se está agregando. Para obtener el ID de tu nodo ejecuta [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +109,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+La respuesta contiene el ID de tu Nodo:
 
 ```cpp
 {
@@ -121,33 +121,33 @@ The response has your node’s ID:
 }
 ```
 
-`startTime` and `endTime`
+`startTime` & `endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+Cuando se emite una transacción para unirse a la Red Primaria, se especifica la hora en la que entrará \(empezará a validar\) y saldrá \(dejará de validar\) La duración mínima que se puede validar la Red Primaria es de 24 horas, y la máxima de un año. Uno puede volver a entrar en la Red Primaria después de salir, es sólo que la duración máxima _continua_ es de un año.`startTime` y`endTime` son los tiempos de Unix en que nuestro validador comenzará y dejará de validar en la Red Primaria, respectivamente.`startTime` debe ser en el futuro relativo al momento en que se emite la transacción. 
 
 `stakeAmount`
 
-In order to validate the Primary Network, one must stake AVAX. This parameter defines the amount of AVAX staked.
+Para validar la Red Primaria, se debe hacer stake de AVAX. Este parámetro define el monto de AVAX del stake.
 
 `rewardAddress`
 
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddress`. The original stake will be sent back to an address controlled by `username`.
+Cuando un validador deje de validar la Red Primaria, recibirá una recompensa si es lo suficientemente receptivo y correcto mientras valida la Red Primaria. Estos Tokens se envían a `rewardAddress`. El stake original será devuelto a una dirección controlada por `username`.
 
-A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
+El stake de un validador nunca es reducido, sin importar su comportamiento; siempre recibirán su stake de vuelta cuando terminen de validar.
 
 `changeAddr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Cualquier cambio que resulte de esta transacción se enviará a esta dirección. Puedes dejar este campo vacío; si lo haces, el cambio será enviado a una de las direcciones que tu usuario controle.
 
 `delegationFeeRate`
 
-Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
+Avalanche permite la delegación del Stake. Este parámetro es el porcentaje de comisión que este validador cobra cuando otros delegan el Stake. Por ejemplo, si `delegationFeeRate` es `1.2345` y alguien delega en este validador, entonces cuando el periodo de delegación termina, el 1.2345% de la recompensa va al validador y el resto al delegador.
 
-`username` and `password`
+`username` & `password`
 
-These parameters are the username and password of the user that pays the transaction fee, provides the staked AVAX, and to whom the staked AVAX will be returned.
+Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción, proporciona el AVAX del Stake y a quien se les devolverá los AVAX en Stake.
 
-Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
+Ahora vamos a emitir la transacción. Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza `$(date` con `$(gdate`. Si no tienes `gdate` instalado, ejecuta `brew install coreutils`.\)  En este ejemplo hacemos stake de 2 000 AVAX \(2 x 1012 nAVAX\).
 
 ```cpp
 curl -X POST --data '{
@@ -168,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+La respuesta tiene el ID de la transacción, así como la dirección a la que fué enviado el cambio.
 
 ```cpp
 {
@@ -181,7 +181,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Podemos comprobar el estado de la transacción ejecutando [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -194,7 +194,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos ejecutar [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) y ver que el nodo está ahora en el validador pendiente establecido para la Red Primaria:
 
 ```cpp
 curl -X POST --data '{
@@ -205,7 +205,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+La respuesta debería incluir el nodo que acabamos de añadir:
 
 ```cpp
 {
@@ -224,17 +224,17 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
+Cuando el tiempo llegue a `1584021450`, este nodo comenzará a validar la Red Primaria. Cuando llegue a `1584121156`, este nodo dejará de validar la Red Primaria. Los AVAX en Stake serán devueltos a una dirección controlada por `username`, y las recompensas, si las hay, se otorgarán a `rewardAddress`.
 
-## Adding a Subnet Validator
+## Añadir un Validador de Subnet
 
-### Issuing a Subnet Validator Transaction
+### Emisión de una Transacción de Validador de una Subnet
 
-Now let’s add the same node to a subnet. The following will make more sense if you’ve already done this [tutorial on creating a Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Right now you can only add validators to subnets with API calls, not with Avalanche Wallet.
+Ahora añadamos el mismo nodo a una subnet. Lo siguiente tendrá más sentido si ya has hecho este [tutorial sobre la creación de una Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Ahora mismo sólo puedes añadir validadores a las subnets con llamados API, no con la Wallet de Avalanche.
 
-Suppose that the Subnet has ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, and that `username` holds at least 2 control keys.
+Supongamos que la Subnet tiene la ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, límite 2, y que `username` tiene al menos 2 llaves de control.
 
-To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
+Para agregar el validador, ejecutaremos el método API [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Su firma es:
 
 ```cpp
 platform.addSubnetValidator(
@@ -251,33 +251,33 @@ platform.addSubnetValidator(
 ) -> {txID: string}
 ```
 
-Let’s examine the parameters:
+Examinemos los parámetros:
 
 `nodeID`
 
-This is the node ID of the validator being added to the subnet. **This validator must validate the Primary Network for the entire duration that it validates this Subnet.**
+Este es el ID de nodo del validador que se está agregando a la subnet. **Este validador debe validar la Red Primaria durante todo el tiempo que valide esta Subnet.**
 
 `subnetID`
 
-This is the ID of the subnet we’re adding a validator to.
+Este es el ID de la subnet a la que estamos añadiendo un validador.
 
-`startTime` and `endTime`
+`startTime` & `endTime`
 
-Similar to above, these are the Unix times that the validator will start and stop validating the subnet. `startTime` must be at or after the time that the validator starts validating the Primary Network, and `endTime` must be at or before the time that the validator stops validating the Primary Network.
+Similar a lo anterior, estos son los tiempos de Unix en que el validador comenzará y dejará de validar la subnet. `startTime` debe ser en o después del momento en que el validador comience a validar la Red Primaria, y `endTime` debe ser en el momento o antes de que el validador deje de validar la Red Primaria.
 
 `weight`
 
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus.
+Este es el peso de la muestra del validador para el consenso. Si el peso del validador es 1 y el peso acumulado de todos los validadores en la subnet es 100, entonces este validador se incluirá en aproximadamente 1 de cada 100 muestras durante el consenso.
 
 `changeAddr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Cualquier cambio que resulte de esta transacción se enviará a esta dirección. Puedes dejar este campo vacío; si lo hace, el cambio será enviado a una de las direcciones que tu usuario controle.
 
-`username` and `password`
+`username` & `password`
 
-These parameters are the username and password of the user that pays the transaction fee. This user must hold a sufficient number of this Subnet’s control keys in order to add a validator to this Subnet.
+Estos parámetros son el nombre de usuario y la contraseña del usuario que paga la comisión de la transacción. Este usuario debe tener un número suficiente de las claves de control de esta Subnet para poder añadir un validador a esta Subnet.
 
-We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+Usamos el comando shell `date` para calcular el tiempo de Unix 10 minutos y 30 días en el futuro para usar como los valores de `startTime` & `endTime`, respectivamente. \(Nota: Si usas Mac, reemplaza`$(date` con`$(gdate`. Si no tienes `gdate` instalado, ejecuta `brew install coreutils`.\) 
 
 ```cpp
 curl -X POST --data '{
@@ -297,7 +297,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+La respuesta tiene el ID de la transacción, así como la dirección a la que fué enviado el cambio.
 
 ```cpp
 {
@@ -310,7 +310,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Podemos comprobar el estado de la transacción ejecutando  [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -323,7 +323,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
+El estatus debe ser `Committed`, lo que significa que la transacción fue exitosa. Podemos ejecutar [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) y ver que el nodo está ahora en el validador pendiente establecido para la Red Primaria. Esta vez, especificamos el ID de la subnet:
 
 ```cpp
 curl -X POST --data '{
@@ -334,7 +334,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+La respuesta debe incluir el nodo que acabamos de añadir:
 
 ```cpp
 {
@@ -353,15 +353,23 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
+Cuando el tiempo llegue a  `1584042912`, este nodo comenzará a validar esta Subnet. Cuando llegue a `1584121156`, este nodo dejará de validar esta Subnet.
 
-### Whitelisting the Subnet
+### Agregando la Subnet a la Lista Blanca
 
-Now that the node has been added as a validator of the subnet, let’s add it to the whitelist of subnets. The whitelist prevents the node from validating a subnet unintentionally.
+Ahora que el nodo ha sido añadido como validador de la subnet, añadámoslo a la lista blanca de subnets. La lista blanca evita que el nodo valide una subnet sin querer.
 
-To whitelist the subnet, restart the node and add the parameter `--whitelisted-subnets` with a comma separated list of subnets to whitelist.
+Para hacer una lista blanca de la subnet, reinicie el nodo y añada el parámetro `--whitelisted-subnets` con una lista separada por comas de subnets a ingresar en la lista blanca.
 
-The full command is:
+El comando completo es:
 
 `./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbODkyOTgxMTQ5LC03MTk1MzYyODgsLTExMT
+IzNzAyNjgsLTU0MDA1ODY2NiwtODIzNTAyNTQ2LDI4MjA3MDgx
+MSwzMzI3Nzc0ODcsLTE4Mjk4NTcxODcsLTEzNDQzMzA2NDgsMz
+IxMjMyNTczLDE0MzQ4MTM4ODUsOTQ2OTY5NzY5LC0xMTA5OTMw
+MjcsLTEyMzczNTM5MjgsLTEwNTU5ODkzNjksMTI2MzY3ODQ4Ny
+wxMDMzNzUzMzY3XX0=
+-->
