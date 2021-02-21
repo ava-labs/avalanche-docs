@@ -1,5 +1,5 @@
 ---
-descripción: >-
+description: >-
   Desarrolla en Avalanche. Desarrolla sin límites. Los desarrolladores que construyen en Avalanche
   pueden crear fácilmente aplicaciones poderosas, confiables, y seguras.
 ---
@@ -15,7 +15,7 @@ descripción: >-
 {% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
 {% endtab %}
 
-{% tab title=" Wallet de Avalanche" %}
+{% tab title="Wallet de Avalanche" %}
 {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
 
 {% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
