@@ -7,8 +7,6 @@ description: >-
 
 # Documentación para desarrolladores
 
-## Iniciando en Avalanche
-
 {% tabs %}
 
 
