@@ -15,10 +15,6 @@ description: >-
 
 
 
-{% page-ref page="construye/tutorials/platform/create-a-new-blockchain.md" %}
-
-{% page-ref page="construye/tutorials/platform/create-a-subnet.md" %}
-
 ## Avalanche
 
 [Avalanche](https://avax.network) es una plataforma de código abierto para el lanzamiento de [aplicaciones descentralizadas](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) y despliegues de [blockchains](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) empresariales en un ecosistema interoperable y altamente escalable. Avalanche te da un control completo tanto de la red como de las capas de aplicación, ayudándote a construir cualquier cosa que puedas imaginar
