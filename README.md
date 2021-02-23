@@ -9,16 +9,12 @@ description: >-
 
 {% tabs %}
 {% tab title="Vienes de Ethereum?" %}
-
-
 {% page-ref page="construye/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
 
 {% page-ref page="construye/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 {% endtab %}
 
 {% tab title="Wallet de Avalanche" %}
-
-
 {% page-ref page="construye/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
 
 {% page-ref page="construye/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
@@ -27,16 +23,12 @@ description: >-
 {% endtab %}
 
 {% tab title="Staking" %}
-
-
 {% page-ref page="construye/getting-started.md" %}
 
 {% page-ref page="construye/tutorials/nodes-and-staking/" %}
 {% endtab %}
 
 {% tab title="Avanzado" %}
-
-
 {% page-ref page="construye/tutorials/platform/create-a-subnet.md" %}
 
 {% page-ref page="construye/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
