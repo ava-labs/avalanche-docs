@@ -101,5 +101,5 @@ Ten en cuenta que una vez emites la transacción para añadir tu stake a un dele
 
 Si el validador en el que delega los tokens es lo suficientemente correcto y receptivo, recibirás una recompensa cuando termines de delegar. Los delegados son recompensados de acuerdo a la misma función que los validadores. Sin embargo, el validador en el que usted delega se queda con una parte de tu recompensa, especificada por la comisión de delegación del validador.
 
-Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a tu dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens. 
+Al emitir la transacción para delegar tokens, las fichas del stake y la comisión de la transacción se deducen de las direcciones que controlas. Cuando termines de delegar, los tokens del stake se devuelven a tu dirección. Si has ganado una recompensa, ésta se envía a la dirección que especificaste al delegar los tokens.
 

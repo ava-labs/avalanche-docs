@@ -34,7 +34,7 @@ keystore.createUser(
 ```
 
 * `username` y `password` pueden ser a lo más 1024 caracteres.
-* La solicitud será rechazada si la contraseña \(`password`\) es muy débil. `password` 
+* La solicitud será rechazada si la contraseña \(`password`\) es muy débil. `password`
 
   debe tener al menos 8 caracteres y contener letras mayúsculas y minúsculas, así como números y símbolos.
 

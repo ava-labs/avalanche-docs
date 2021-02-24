@@ -235,5 +235,5 @@ Si estás en una red residencial \(IP dinámica\), no te olvides de configurar e
 
 Ahora puedes [interactuar con tu nodo](../../avalanchego-apis/issuing-api-calls.md), [hacer stake con tus tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), o subir el nivel de su instalación configurando la [monitorización de nodos](setting-up-node-monitoring.md) para tener una mejor visión de lo que su nodo está haciendo.
 
-Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/) 
+Si tienes alguna pregunta, o necesitas ayuda, no dudes en contactarnos en nuestro canal de [Discord](https://chat.avalabs.org/)
 

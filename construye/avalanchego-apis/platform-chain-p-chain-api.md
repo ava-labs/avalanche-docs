@@ -20,7 +20,7 @@ Agrega un delegador a la Red Primaria.
 
 Un delegador hace stake de AVAX y especifica un validador \(delegado\) para validar la red en su nombre. El delegado tiene una mayor probabilidad de ser muestreado por otros validadores \(peso\) en proporción a la participación que se le delega.
 
-El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la recompensa de validación del delegador  \(si corresponde.\) Una transacción que delega participación no tiene comisión.
+El delegado cobra una tarifa al delegador; el primero recibe un porcentaje de la recompensa de validación del delegador \(si corresponde.\) Una transacción que delega participación no tiene comisión.
 
 El período de delegación debe ser un subconjunto del período en el que el delegado valida la red primaria.
 
@@ -105,7 +105,7 @@ El período de validación debe ser de entre 2 semanas y 1 año.
 
 Hay un máximo peso total impuesto a los validadores. Esto significa que ningún validador podrá tener más AVAX en stake que este valor. Este valor se establecerá inicialmente en el `min(5*cantidad en stake, 3M AVAX)`. El valor total de un validador es de 3 millones de AVAX.
 
-Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros.  **No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa.**  Asegúrate de que estás utilizando los valores correctos. Si no estás seguro, consulta nuestra sección de [Preguntas Frecuentes para Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o solicita ayuda en [Discord.](https://chat.avalabs.org/)
+Toma en cuenta que una vez que se emite la transacción para agregar un nodo como validador, no hay forma de cambiar los parámetros. **No puede retirar el stake antes de tiempo ni cambiar la cantidad de la participación, el ID de nodo o la dirección de la recompensa.** Asegúrate de que estás utilizando los valores correctos. Si no estás seguro, consulta nuestra sección de [Preguntas Frecuentes para Desarrolladores](https://support.avalabs.org/en/collections/2618154-developer-faq) o solicita ayuda en [Discord.](https://chat.avalabs.org/)
 
 {% page-ref page="../../aprende/platform-overview/staking.md" %}
 

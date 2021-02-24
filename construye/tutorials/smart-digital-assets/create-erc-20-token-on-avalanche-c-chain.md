@@ -95,7 +95,7 @@ Abre la segunda pestaña que es **“SOLIDITY COMPILER”** y selecciona la vers
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto  **“ACCOUNT”**.
+Entonces, vayamos a la tercera pestaña que es **DEPLOY & RUN TRANSACTION**. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y seleccione **“Injected Web3”**. Si aparece un pop-up que le pide que conecte la cuenta, haga clic en conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto **“ACCOUNT”**.
 
 Lo último antes del proceso de despliegue es establecer el contrato que se desplegará como un token. Sobre el botón **Deploy**, hay un menú desplegable para seleccionar un contrato. Selecciona el contrato llamado "ERC20PresetMinterPauser.sol".
 

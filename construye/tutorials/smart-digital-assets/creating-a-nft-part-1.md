@@ -356,5 +356,5 @@ La tecnología de blockchain y los tokenomics representan una nueva forma radica
 * Usamos `getUTXOs` para buscar UTXOs para una dirección. Luego convertimos la UTXO codificada en CB58 a hexadecimal y la descompusimos en sus componentes individuales.
 * Usamos `sendNFT` para transferir NFT's entre direcciones.
 
-En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos. 
+En la segunda parte de esta serie, profundizaremos en el uso de AvalancheJS para crear un protocolo para nuestra carga útil NFT emitiéndola a múltiples grupos.
 

@@ -118,5 +118,5 @@ Los estados pueden ser "Aceptado", "Procesando", "Desconocido" y "Rechazado":
 
 ## Identificar el activo recién creado <a id="identifying-the-newly-created-asset"></a>
 
-La X-Chain utiliza el TxID de la transacción que creó el activo como identificador único del mismo. Este identificador único se conoce en adelante como el "AssetID" del activo. Cuando los activos se negocian en la X-Chain, siempre hacen referencia al AssetID que representan. 
+La X-Chain utiliza el TxID de la transacción que creó el activo como identificador único del mismo. Este identificador único se conoce en adelante como el "AssetID" del activo. Cuando los activos se negocian en la X-Chain, siempre hacen referencia al AssetID que representan.
 
