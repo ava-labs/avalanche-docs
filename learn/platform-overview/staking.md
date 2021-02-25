@@ -2,104 +2,170 @@
 description: Learn how to stake on Avalanche by validating or delegating
 ---
 
-# Staking
 
-Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
+# ステーキング
 
-### How does proof-of-stake work?
+  
 
-To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+検証または委任することでAvalancheにステークする方法を学びます。
 
-## Staking Parameters on Avalanche
+  
 
-When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token whitepaper](https://files.avalabs.org/papers/token.pdf) to learn more about AVAX and the mechanics of staking.
+ステーキングとは、トークンをロックアップすることでネットワークをサポートしながら、その報酬を受け取るプロセスです。ステーキングの概念は、PeercoinのSunny King氏とScott Nadal氏により最初に正式導入されました。
 
-{% hint style="warning" %}
-Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
-{% endhint %}
+  
 
-* The minimum amount that a validator must stake is 2,000 AVAX
-* The minimum amount that a delegator must delegate is 25 AVAX
-* The minimum amount of time one can stake funds for validation is 2 weeks
-* The maximum amount of time one can stake funds for validation is 1 year
-* The minimum amount of time one can stake funds for delegation is 2 weeks
-* The maximum amount of time one can stake funds for delegation is 1 year
-* The minimum delegation fee rate is 2%
-* The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 60%
+## プルーフオブステークはどのように機能するのか?
 
-## Validators
+  
 
-**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+シビル攻撃に対抗するために、分散型ネットワーク内の希少な資源を影響力を及ぼせる唯一のリソースとすることで、攻撃者はネットワークのセキュリティを侵害するには理論上その行為が無意味になるレベルにまで高価なコストが必要となります。プルーフオブワークシステムでは、この希少なリソースはコンピューティングパワーです。Avalancheでは、リソースはネイティブトークンであるAVAXが適用されます。ノードがAvalanche上でブロックチェーンを検証するためにAVAXを利用する必要があります。
 
-When you add a node to the validator set, you specify:
+  
 
-* Your node’s ID
-* When you want to start and stop validating
-* How many AVAX you are staking
-* The address to send any rewards to
-* Your delegation fee rate \(see below\)
+# Avalancheのステーキングパラメータ
 
-{% hint style="info" %}
-The minimum amount that a validator must stake is 2,000 AVAX.
-{% endhint %}
+バリデーターはプライマリネットワークの検証が終了すると、ネットワークのセキュリティ確保への貢献に対して報酬を受け取ることができます。バリデーターは、検証を行っている間に十分な応答をし、正しく動作していた場合にのみバリデーション報酬を受け取ることができます。AVAXとステークの仕組みの詳細は、Avalancheトークンホワイトペーパーをお読みください。
 
-{% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
-{% endhint %}
+  
 
-### Running a Validator <a id="running-a-validator"></a>
+ステーキング報酬は、これらのパラメータがすべて満たされている限り、ステーキング期間の終了時にウォレットアドレスに送信されます。
 
-If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
+  
 
-When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
+- バリデーターの最低ステーク額は2,000AVAX
 
-#### Allow API calls <a id="allow-api-calls"></a>
+- デリゲーターがによる委任最低額は25AVAX
 
-To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
+- 検証のための資金のステーク最低期間は2週間
 
-You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
+- 検証のための資金のステーク最大期間は1年
 
-#### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
+- 委任において資金をステークできる最低期間は2週間
 
-Every validator on Avalanche keeps track of the uptime of other validators. You can see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
+- 委任において資金をステークできる最大期間は1年
 
-The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
+- 最低委任料率は2％
 
-#### Secret Management <a id="secret-management"></a>
+- バリデータの最大保有量(自己持ち分+委任持ち分)は、最低3e6AVAXとバリデータの5倍の額であり、例えばバリデータになるために2,000AVAXをステークした場合、自身のノードに委任できるのは8,000AVAXのみとなる(デリゲーターごとではありません)
 
-The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
+- 報酬を受け取るには、バリデーターは対象期間のうち60％以上の時間で正しくオンラインである必要がある
 
-You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in “cold" addresses whose private key is not on any computer.
+  
 
-#### Monitoring <a id="monitoring"></a>
+# バリデーター
 
-Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
+  
 
-{% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
+Validatorsは、Avalancheを保護し、新しいブロックを作成し、トランザクションを処理する役割を持ちます。また、コンセンサスを得るためにバリデーターは相互に繰り返しサンプリングを行い、特定のバリデーターがサンプリングされる確率はそのステーク量に比例します。
 
-## Delegators
+  
 
-A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
+バリデータセットにノードを追加するときに以下を指定します：
 
-When you delegate stake to a validator, you specify:
+  
 
-* The ID of the node you’re delegating to
-* When you want to start/stop delegating stake \(must be while the validator is validating\)
-* How many AVAX you are staking
-* The address to send any rewards to
+  
 
-{% hint style="info" %}
-The minimum amount that a delegator must delegate is 25 AVAX.
-{% endhint %}
+- ノードID
 
-{% hint style="danger" %}
-Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
-{% endhint %}
+- ステークAVAX量
 
-### Delegator rewards <a id="delegator-rewards"></a>
+- 報酬を送付先のアドレス
 
-If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
+- デリゲーション料率（下記参照）
 
-When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
+  
 
+バリデーターの最低ステーク量は2,000AVAXです。
+
+バリデーターとしてノードを追加のトランザクションを発行すると、パラメーターはできなくなることに注意してください。ステークを早期に削除したり、ステーク額、ノードID、リワードアドレスを変更したりすることはできなくなります。以下のAPIコールで正しい値を設定していることを確認してください。不明な場合は、Discordでヘルプを求めるか、開発者向けのFAQを参照してください。
+
+  
+
+  
+
+**バリデータの実行**
+
+バリデーターを実行して報酬を受け取るためには、ノードが接続されていることが重要です。[こちら](http://support.avalabs.org/en/articles/4594192-networking-setup)を参照してください。
+
+  
+
+バリデーターを追加するためにトランザクションを発行すると、管理アドレスからステークトークンとトランザクション手数料が差し引かれます。バリデーションが完了すると、ステーク資金は元のアドレスに返却されます。獲得した報酬は、バリデーターを追加した際に指定したアドレスに送付されます。
+
+  
+
+**APIコールを許可する**
+
+リモートマシンからノードにAPIコールを行うには、API ポート (デフォルトでは9650) でトラフィックを許可し、引数 --http-host=でノードを実行します。
+
+  
+
+コマンドライン引数を介して使用しないすべてのAPIを無効にする必要があります。信頼されたマシン (例：PCなど) からのAPIポートへのアクセスのみを許可するようにネットワークを構成する必要があります。
+
+  
+
+### 私のアップタイムが低い原因は？
+
+  
+
+Avalanche上の全てのバリデータは、他のバリデータの稼働時間を追跡します。info.peersをコールすることで、ノード接続を確認でき、各接続のアップタイムも確認できます。これはあくまでも一つのノードの視点に過ぎません。1つのノードがあなたのアップタイムが低いと認識したことで、あなたがステーク報酬を受け取られなくなるということはありません。
+
+  
+
+あなたのノードが他のノードに接続されていない理由として考えられるのは、NATトラバーサルが失敗したことにより --public-ip=[NODE'S PUBLIC IP]でノードが起動されていないことです。将来的には、ノードが接続されているかどうかを簡単に確認できるように、より良い監視機能を追加する予定です。
+
+  
+
+**シークレットマネジメント**
+
+バリデーションノードに必要なシークレット要素は、ノードのIDを決定するTLSキーであるStaking Keyだけです。最初にノードを起動するとStaking Key が作成され$HOME/.avalanchego/staking/staker.key に置かれます。このファイル（およびstaker.crt）は安全な場所にバックアップしてください。ステーキングキーを失うと、あなたのノードは新しいIDを持つことになりバリデーション報酬が危険にさらされる可能性があります。
+
+  
+
+バリデーションノードにAVAXを保持する必要はありません。ノードに多くの資金を持たないのが最善の方法です。ほとんど全ての資金は、秘密鍵がどのコンピュータにもないコールドアドレスに置くべきです。
+
+  
+
+**モニタリング**
+
+このチュートリアルでは、ノードのアップタイムや一般的な稼働状態を監視する方法を学びます。
+
+  
+
+# デリゲーター
+
+  
+
+デリゲーターとは、ステークで貢献する上で既存のバリデーターノードを信頼して保有トークンを委任することを選択したトークンホルダーのことです。
+
+バリデーターに委任する際には以下を指定します：
+
+  
+
+- 委任先のノード ID
+
+- ステークするAVAX量数
+
+- 報酬を送付先アドレス
+
+  
+
+委任の最低量は、25AVAXに設定されています。
+
+委任先にステークを追加するためにトランザクションを発行した場合、そのパラメータを変更することはできません。また、ステーク額、ノードID、報酬アドレスを変更することもできません。不明点は、[Discord](https://chat.avax.network/)でヘルプを求めるか[開発者向けFAQ](http://support.avalabs.org/en/collections/2618154-developer-faq)を参照してください。
+
+  
+
+## デリゲーター報酬
+
+  
+
+トークン委任先のバリデーターが正しい稼働をしている場合は、 委任が完了した時点で報酬を受け取ることができます。デリゲーターはバリデーターと同じシステムに従って報酬を受け取ります。ただし、バリデーターはデリゲーション料率で指定された報酬の一部を保持します。
+
+  
+
+トークンを委任するためにトランザクションを発行すると、アドレスからステークトークンとトランザクション手数料が差し引かれます。委任が完了するとステークトークンはアドレスに返却されます。報酬を獲得した場合は、トークンを委任した際に指定したアドレスに送られます。
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTU4NjI4NzcwMl19
+-->
