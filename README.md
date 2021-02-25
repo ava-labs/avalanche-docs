@@ -3,9 +3,12 @@ description: >-
 **Avalancheでの構築に制限は存在しません。開発者は、強力かつ高い信頼性と安全性を持つアプリケーションを簡単に作成することができます。**
 ---
 
-# Developer Documentation
 
-## Getting Started
+# [](https://github.com/ava-labs/avalanche-docs/blob/master/README.md#developer-documentation)開発者向けドキュメント
+
+  
+
+## [](https://github.com/ava-labs/avalanche-docs/blob/master/README.md#getting-started)入門
 
 {% tabs %}
 {% tab title="Coming From Ethereum?" %}
@@ -108,5 +111,5 @@ Create your own public or private blockchains.
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwMDM1NzYxNl19
+eyJoaXN0b3J5IjpbMTYxNDgyNjI5OF19
 -->
