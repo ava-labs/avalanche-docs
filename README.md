@@ -1,7 +1,6 @@
 ---
 description: >-
-  Build on Avalanche. Build without limits. Developers who build on Avalanche
-  can easily create powerful, reliable, and secure applications.
+**Avalancheでの構築に制限は存在しません。開発者は、強力かつ高い信頼性と安全性を持つアプリケーションを簡単に作成することができます。**
 ---
 
 # Developer Documentation
@@ -108,3 +107,6 @@ Create your own public or private blockchains.
 
 Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTUwMDM1NzYxNl19
+-->
