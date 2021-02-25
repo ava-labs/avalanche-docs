@@ -1,14 +1,9 @@
 ---
-description: Learn how to stake on Avalanche by validating or delegating
+検証または委任することでAvalancheにステークする方法を学びます。
 ---
 
 
 # ステーキング
-
-  
-
-検証または委任することでAvalancheにステークする方法を学びます。
-
   
 
 ステーキングとは、トークンをロックアップすることでネットワークをサポートしながら、その報酬を受け取るプロセスです。ステーキングの概念は、PeercoinのSunny King氏とScott Nadal氏により最初に正式導入されました。
@@ -167,5 +162,5 @@ Avalanche上の全てのバリデータは、他のバリデータの稼働時�
 
 トークンを委任するためにトランザクションを発行すると、アドレスからステークトークンとトランザクション手数料が差し引かれます。委任が完了するとステークトークンはアドレスに返却されます。報酬を獲得した場合は、トークンを委任した際に指定したアドレスに送られます。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4NjI4NzcwMl19
+eyJoaXN0b3J5IjpbMTA5NTgzNDk4NCwtNTg2Mjg3NzAyXX0=
 -->
