@@ -1,5 +1,5 @@
 ---
-description: Learn the core concepts and architecture of Avalanche
+**Avalancheのコアコンセプトとアーキテクチャを学ぶ**
 ---
 
 
@@ -7,7 +7,7 @@ description: Learn the core concepts and architecture of Avalanche
 
   
 
-**Avalancheのコアコンセプトとアーキテクチャを学ぶ**
+
 
 Avalancheには、Exchange Chain（X-Chain）、Platform Chain（P-Chain）、Contract Chain（C-Chain）3つのブロックチェーンが組み込まれています。これらは全てプライマリネットワークにより検証・保護されています。プライマリネットワークは特別なサブネットであり、全てのカスタムサブネットのメンバーは少なくとも2,000AVAXをステークする必要があります。
 
@@ -137,5 +137,6 @@ C-Chainでは、C-Chain APIを使用してスマートコントラクトを作�
 
 C-Chainは、Avalancheが提供するEthereum仮想マシンのインスタンスです。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTEwMDg1MTQsNjU5NzY3MzkwXX0=
+eyJoaXN0b3J5IjpbMTIwNzU2NjU0NSwtMTI1MTAwODUxNCw2NT
+k3NjczOTBdfQ==
 -->
