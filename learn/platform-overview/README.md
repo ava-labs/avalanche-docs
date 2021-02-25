@@ -136,10 +136,6 @@ P-Chain APIにより、クライアントはサブネットの作成、サブネ
 C-Chainでは、C-Chain APIを使用してスマートコントラクトを作成することができます。
 
 C-Chainは、Avalancheが提供するEthereum仮想マシンのインスタンスです。
-
-  
-
-# ステーキング
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjU5NzY3MzkwXX0=
+eyJoaXN0b3J5IjpbLTEyNTEwMDg1MTQsNjU5NzY3MzkwXX0=
 -->
