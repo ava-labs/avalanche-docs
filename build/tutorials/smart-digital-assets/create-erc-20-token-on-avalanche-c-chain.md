@@ -117,7 +117,7 @@ After confirming all these pop-ups we have deployed our token to avalanche C-Cha
 
 ## Interact with Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+We can see our transaction that deployed on avalanche C-Chain via this [c-chain explorer](https://cchain.explorer.avax-test.network/).
 
 But firstly, let’s see our transaction hash from the remix console.
 

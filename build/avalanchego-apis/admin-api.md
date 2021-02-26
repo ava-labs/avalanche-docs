@@ -46,7 +46,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -92,7 +92,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -107,6 +107,7 @@ Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1Fia
 ### admin.getChainAliases
 
 Returns the aliases of the chain
+
 #### **Signature**
 
 ```text
@@ -134,7 +135,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -171,7 +172,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -204,7 +205,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -237,7 +238,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -269,7 +270,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -278,3 +279,4 @@ curl -X POST --data '{
     }
 }
 ```
+
