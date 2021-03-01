@@ -363,12 +363,12 @@ Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
 
-`--network-timeout-halflife` `\(duration\):
+`--network-timeout-halflife` \(duration\):
 
 Halflife used when calculating average network latency. Larger value --> less volatile network latency calculation.
 Defaults to `5m`.
 
-`--network-timeout-coefficient` `\(duration\):
+`--network-timeout-coefficient` \(duration\):
 
 Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
 Defaults to `2`.
@@ -377,12 +377,12 @@ Defaults to `2`.
 
 Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
 
-`--network-health-max-time-since-msg-received` `\(duration\):
+`--network-health-max-time-since-msg-received` \(duration\):
 
 Node will report unhealthy if it hasn't received a message for this amount of time. 
 Defaults to `1m`. 
 
-`--network-health-max-time-since-no-requests` `\(duration\):
+`--network-health-max-time-since-no-requests` \(duration\):
 
 Node will report unhealthy if it hasn't received a message for this amount of time. 
 Defaults to `1m`. 
@@ -397,11 +397,11 @@ Node will report unhealthy if more than this portion of message sends fail. Must
 
 ### Health
 
-`--health-check-frequency` `\(duration\):
+`--health-check-frequency` \(duration\):
 
 Health check runs with this freqency. Defaults to `30s`.
 
-`--health-check-averager-halflife`  `\(duration\):
+`--health-check-averager-halflife`  \(duration\):
 
 Halflife of averagers used in health checks (to measure the rate of message failures, for example.)
 Larger value --> less volatile calculation of averages. Defaults to `10s`.
