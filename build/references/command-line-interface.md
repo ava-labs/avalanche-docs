@@ -73,6 +73,14 @@ Bootstrap IDs is an array of validator IDs. These IDs will be used to authentica
 
 Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
+`--bootstrap-retry-enabled` \(boolean\):
+
+If true, will retry bootstrapping if it fails. 
+
+`--bootstrap-retry-max-attempts` \(uint\):
+
+Max number of times to retry bootstrapping after a failure.
+
 ### Connection Metering
 
 `--conn-meter-max-conns` \(int\):
@@ -341,7 +349,7 @@ Portion of pending message buffer reserved for messages from validators. Default
 
 Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
 
-### Network Timeout
+### Network
 
 `--network-initial-timeout` \(duration\):
 
@@ -349,19 +357,54 @@ Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 `--network-minimum-timeout` \(duration\):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
 
 `--network-maximum-timeout` \(duration\):
 
 Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
 
-`--network-timeout-multiplier` \(float\):
+`--network-timeout-halflife` `\(duration\):
 
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
+Halflife used when calculating average network latency. Larger value --> less volatile network latency calculation.
+Defaults to `5m`.
 
-`--network-timeout-reduction` \(duration\):
+`--network-timeout-coefficient` `\(duration\):
 
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
+Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
+Defaults to `2`.
+
+`--network-health-min-conn-peers` `\(uint\):
+
+Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+
+`--network-health-max-time-since-msg-received` `\(duration\):
+
+Node will report unhealthy if it hasn't received a message for this amount of time. 
+Defaults to `1m`. 
+
+`--network-health-max-time-since-no-requests` `\(duration\):
+
+Node will report unhealthy if it hasn't received a message for this amount of time. 
+Defaults to `1m`. 
+
+`--network-health-max-portion-send-queue-full` `\(float\):
+
+Node will report unhealthy if its send queue is more than this portion full. Must be in [0,1]. Defaults to `0.9`.
+
+`--network-health-max-send-fail-rate` `\(float\):
+
+Node will report unhealthy if more than this portion of message sends fail. Must be in [0,1]. Defaults to `0.25`.
+
+### Health
+
+`--health-check-frequency` `\(duration\):
+
+Health check runs with this freqency. Defaults to `30s`.
+
+`--health-check-averager-halflife`  `\(duration\):
+
+Halflife of averagers used in health checks (to measure the rate of message failures, for example.)
+Larger value --> less volatile calculation of averages. Defaults to `10s`.
 
 ### Throughput Server
 
