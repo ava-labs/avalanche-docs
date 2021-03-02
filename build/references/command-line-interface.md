@@ -8,15 +8,12 @@ When running a node, there are a variety of possible configurations that are sup
 
 `--config-file` \(string\):
 
-Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+Path to a JSON file that specifies this node's configuration. 
+Command line arguments will override arguments set in the config file.
 
-```text
-./build/avalanchego --config-file=config.json
-```
+Example JSON config file:
 
-config.json file:
-
-```cpp
+```json
 {
     "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
@@ -100,6 +97,14 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 `--db-enabled` \(boolean\):
 
 If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+
+### Genesis
+
+`--genesis` \(string\):
+
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Testnet.)
+If not given, uses default genesis data. 
+For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16). 
 
 ### HTTP Server
 
