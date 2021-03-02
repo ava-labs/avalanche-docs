@@ -11,7 +11,7 @@ description: >-
 ## [](https://github.com/ava-labs/avalanche-docs/blob/master/README.md#getting-started)入門
 
 
-{% tabs %} {% tab title="Coming From Ethereum?" %} {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
+{% tabs %} {% tab title="Ethereumからの導入" %} {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
   
 
@@ -19,7 +19,7 @@ description: >-
 
   
 
-{% tab title="Avalanche Wallet" %} {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
+{% tab title="Avalancheウォレット" %} {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
 
   
 
@@ -199,5 +199,5 @@ Solidityでのスマートコントラクトの作成、Remix、Metamask、Truff
 
 複雑なカスタムルールの条件設定が可能なデジタルスマートアセットの作成と取引プロセスの簡易化をネイティブサポートしています。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU4NTMxNzc4XX0=
+eyJoaXN0b3J5IjpbLTk3MTY0ODExNiw4NTg1MzE3NzhdfQ==
 -->
