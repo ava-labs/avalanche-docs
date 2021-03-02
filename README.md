@@ -31,7 +31,7 @@ description: >-
 
   
 
-{% tab title="Staking" %} {% page-ref page="build/getting-started.md" %}
+{% tab title="ステーキング" %} {% page-ref page="build/getting-started.md" %}
 
   
 
@@ -39,7 +39,7 @@ description: >-
 
   
 
-{% tab title="Advanced" %} {% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
+{% tab title="詳細設定" %} {% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
 
   
 
@@ -199,5 +199,5 @@ Solidityでのスマートコントラクトの作成、Remix、Metamask、Truff
 
 複雑なカスタムルールの条件設定が可能なデジタルスマートアセットの作成と取引プロセスの簡易化をネイティブサポートしています。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3MTY0ODExNiw4NTg1MzE3NzhdfQ==
+eyJoaXN0b3J5IjpbLTIxNDYxOTQwOTgsODU4NTMxNzc4XX0=
 -->
