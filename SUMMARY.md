@@ -15,12 +15,13 @@
 
 ---
 
-* [Pour commencer](commencer.md)
+* [Pour commencer : lancer un nœud Avalanche](commencer.md)
 * [Notes de version](notes-de-version-1/README.md)
   * [Alertes par email](https://avalabs.us20.list-manage.com/subscribe?u=2332c947c1cd876b244f62288&id=15a3fb98a7)
   * [Notes de mise à jour d'AvalancheGo](notes-de-version-1/notes-de-mise-a-jour-davalanchego.md)
   * [Notes de mise à jour d'Ortelius](notes-de-version-1/notes-de-mise-a-jour-dortelius.md)
 * [Tutoriels](tutoriels/README.md)
+  * [Nœuds et mise en jeu](tutoriels/noeuds-et-mise-en-jeu.md)
   * [Plateforme](tutoriels/plateforme/README.md)
     * [Ajouter un validateur](tutoriels/plateforme/ajouter-un-validateur.md)
     * [Installation OVH de A à Z](tutoriels/plateforme/instalation-ovh-de-a-a-z.md)
