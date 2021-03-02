@@ -1,74 +1,75 @@
 ---
 description: >-
-  Build on Avalanche. Build without limits. Developers who build on Avalanche
-  can easily create powerful, reliable, and secure applications.
+  Construisez sur Avalanche. Construisez sans limites. Les développeurs qui
+  s'appuient sur Avalanche peuvent facilement créer des applications puissantes,
+  fiables et sécurisées.
 ---
 
-# Developer Documentation
+# Documentation du développeur
 
 ## Avalanche
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
+[Avalanche](https://fr.avalabs.org/) est une plateforme open-source pour le lancement d'[applications décentralisées](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) et de déploiements de [blockchains](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) pour les entreprise dans un écosystème interopérable et hautement évolutif. Avalanche vous donne un contrôle complet sur les couches réseau et application, vous aidant à créer tout ce que vous pouvez imaginer.
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
+Une différence clé entre Avalanche et d'autres réseaux décentralisés est son protocole de consensus. Au fil du temps, les gens ont compris à tort que les blockchains doivent être lentes et non évolutives. Le protocole Avalanche utilise une nouvelle approche du consensus pour atteindre ses solides garanties de sécurité, sa finalité rapide et son haut débit, sans compromettre la décentralisation.
 
-## Avalanche Consensus Protocol
+## Avalanche Protocole de Consensus
 
-![](.gitbook/assets/image.png)
+![](.gitbook/assets/image%20%2810%29.png)
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
+Les protocoles de la famille Avalanche fonctionnent par le biais de votes répétés sous-échantillonnés. Lorsqu'un [validateur](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) détermine si une transaction doit être acceptée ou rejetée, il demande à un petit sous-ensemble aléatoire de validateurs s'ils pensent que la transaction doit être acceptée ou rejetée. Si le validateur interrogé pense que la transaction est invalide, a déjà rejeté la transaction ou préfère une transaction en conflit, il répond qu'il pense que la transaction doit être rejetée. Sinon, il répond qu'il pense que la transaction doit être acceptée.
 
-If a sufficiently large portion \(_alpha_\) of the validators sampled reply that they think the transaction should be accepted, the validator prefers to accept the transaction. That is, when it is queried about the transaction in the future, it will reply that it thinks the transaction should be accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large portion of the validators replies that they think the transaction should be rejected.
+Si une partie suffisamment importante \(_alpha_ $$α $$\) des validateurs échantillonnés répond qu'ils pensent que la transaction devrait être acceptée, le validateur préfère accepter la transaction. Autrement dit, lorsqu'il sera interrogé sur la transaction à l'avenir, il répondra qu'il pense que la transaction devrait être acceptée. De même, le validateur préférera rejeter la transaction si une partie suffisamment importante des validateurs répond qu'ils pensent que la transaction devrait être rejetée.
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply the same way \(accept or reject\) for _beta_ consecutive rounds.
+Le validateur répète ce processus d'échantillonnage jusqu'à ce que l'_alpha_ des validateurs interrogés réponde de la même manière \(accepter ou rejeter\) pour les cycles _bêta_ $$β $$ consécutifs.
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When conflicts exist, honest validators quickly cluster around conflicting transactions, entering a positive feedback loop until all correct validators prefer that transaction. This leads to the acceptance of non-conflicting transactions and the rejection of conflicting transactions.
+Dans le cas courant où une transaction n'a pas de conflit, la finalisation se produit très rapidement. En cas de conflit, les validateurs honnêtes se regroupent rapidement autour de transactions conflictuelles, entrant dans une boucle de rétroaction positive jusqu'à ce que tous les validateurs appropriés préfèrent cette transaction. Cela conduit à l'acceptation de transactions non conflictuelles et au rejet des transactions conflictuelles.
 
-![](.gitbook/assets/image%20%281%29.png)
+![](.gitbook/assets/image%20%286%29.png)
 
-It is guaranteed \(with high probability based on system parameters\) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
+Il est garanti \(avec une probabilité élevée basée sur les paramètres du système\) que si un validateur honnête accepte ou rejette une transaction, tous les validateurs honnêtes accepteront ou rejetteront cette transaction.
 
-Learn more technical components of the Avalanche consensus protocol by reading the [whitepaper](https://arxiv.org/pdf/1906.08936.pdf).
+Apprenez-en plus sur les composants techniques du protocole de consensus Avalanche en lisant le livre blanc.
 
-## Snowman Consensus Protocol
+## Snowman Protocole de Consensus
 
-Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](learn/platform-overview/#platform-chain-p-chain) and [C-Chain](learn/platform-overview/#contract-chain-c-chain) implement the Snowman consensus protocol.
+Snowman est un protocole de consensus optimisé pour une chaîne à haut débit, totalement ordonné et idéal pour les contrats intelligents. Snowman est alimenté par le [protocole de consensus Avalanche](./#avalanche-protocole-de-consensus). [P-Chain](apprendre/presentation-du-systeme/#chaine-de-plateformes-p-chain) et [C-Chain](apprendre/presentation-du-systeme/#chaine-de-contrats-c-chain) implémentent le protocole de consensus Snowman.
 
-## Key Features
+## Les principales caractéristiques
 
-### Speed
+### Vitesse
 
-Uses a novel consensus protocol, developed by a team of Cornell computer scientists, and is able to permanently confirm transactions in under 1 second.
+Utilise un nouveau protocole de consensus, développé par une équipe d'informaticiens de Cornell, et est capable de confirmer de manière permanente les transactions en moins d'une seconde.
 
-### Scalability
+### Évolutivité
 
-Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains.
+Capable de 4 500 transactions par seconde - un ordre de grandeur plus important que les blockchains existantes.
 
-### Security
+### Sécurité
 
-Ensures stronger security guarantees well-above the 51% standard of other networks.
+Assure des garanties de sécurité plus solides, bien au-dessus de la norme de 51% des autres réseaux.
 
-### Flexibility
+### Flexibilité
 
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
+Créez facilement des blockchains personnalisées et des applications décentralisées contenant presque n'importe quelle logique arbitraire.
 
-### Sustainability
+### Durabilité
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
+Utilise un algorithme de consensus de preuve d'enjeu écoénergétique plutôt qu'une preuve de travail.
 
-### Smart Contract Support
+### Support de contrat intelligent
 
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, Metamask, Truffle, and more.
+Prend en charge la création de contrats intelligents Solidity et de vos outils Ethereum préférés tels que Remix, Metamask, Truffle, etc.
 
-### Private and Public Blockchains
+### Blockchains privées et publiques
 
-Create your own public or private blockchains.
+Créez vos propres blockchains publiques ou privées.
 
-### Designed for Finance
+### Conçu pour la finance
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets
+Prise en charge native pour créer et échanger facilement des actifs numériques intelligents avec des ensembles de règles complexes et personnalisés
 
-## Avalanche \(AVAX\) Token
+## Avalanche \(AVAX\) Jeton
 
-The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
+Le jeton Avalanche \(AVAX\) est le jeton natif de la plate-forme Avalanche et est utilisé pour sécuriser le réseau via une mise en jeu, effectuer des transactions de pair-à-pair, payer des frais et fournir une unité de compte de base entre les multiples sous-réseaux créés sur la plateforme Avalanche. `1 nAVAX` est égal à `0.000000001 AVAX`.
 
