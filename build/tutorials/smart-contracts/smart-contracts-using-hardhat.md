@@ -50,7 +50,7 @@ Edit the deployment script in `scripts/deploy.js`. You can add other contract de
 
 ## Deploy to the hardhat test network
 
-Hardhat enables deploying to multiple environments. In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json) is a script for deploying.
+Hardhat enables deploying to multiple environments. In `package.json` is a script for deploying.
 
 ```json
 "deploy": "npx hardhat run scripts/deploy.js",
@@ -73,11 +73,9 @@ You can define custom Hardhat tasks in [hardhat.config.js](https://github.com/av
 "balances": "npx hardhat balances"
 ```
 
-`yarn accounts` will print the list of accounts. `yarn balances` prints the list of AVAX account balances. As with other `yarn` scripts you can pass in a `--network` flag to hardhat tasks.
+### Accounts task
 
-### Accounts
-
-Print a list of accounts on the `avash` network.
+Print a list of accounts on the `avash` network, as defined in `hardhat.config.js`.
 
 ```zsh
 yarn accounts --network avash
@@ -95,7 +93,7 @@ $ npx hardhat accounts --network avash
 0x0Fa8EA536Be85F32724D57A37758761B86416123
 ```
 
-### Balances
+### Balances task
 
 Print a list of accounts and their corresponding AVAX balances on the `avash` network.
 
@@ -117,7 +115,8 @@ $ npx hardhat balances --network avash
 
 ## Sending AVAX
 
-[package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json) has a `send-avax` script which is found in [scripts/sendAvax.js](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/scripts/sendAvax.js).
+[package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/package.json) has a `send-avax` script which is found in [scripts/sendAvax.js](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/master/scripts/sendAvax.js). It will send a small amount of AVAX from the first address in the private key pool to the
+* rest of the addresses in the set.
 
 ```json
 "send-avax": "npx hardhat run scripts/sendAvax.js",
