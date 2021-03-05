@@ -8,12 +8,11 @@ When running a node, there are a variety of possible configurations that are sup
 
 `--config-file` \(string\):
 
-Path to a JSON file that specifies this node's configuration. 
-Command line arguments will override arguments set in the config file.
+Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file.
 
 Example JSON config file:
 
-```json
+```javascript
 {
     "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
@@ -72,7 +71,7 @@ Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to
 
 `--bootstrap-retry-enabled` \(boolean\):
 
-If true, will retry bootstrapping if it fails. 
+If true, will retry bootstrapping if it fails.
 
 `--bootstrap-retry-max-attempts` \(uint\):
 
@@ -102,9 +101,7 @@ If set to `false`, state updates are performed solely to an in-memory database, 
 
 `--genesis` \(string\):
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Testnet.)
-If not given, uses default genesis data. 
-For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16). 
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks \(Mainnet, Testnet.\) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
 
 ### HTTP Server
 
@@ -370,13 +367,11 @@ Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 `--network-timeout-halflife` \(duration\):
 
-Halflife used when calculating average network latency. Larger value --> less volatile network latency calculation.
-Defaults to `5m`.
+Halflife used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
 
 `--network-timeout-coefficient` \(duration\):
 
-Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
-Defaults to `2`.
+Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
 
 `--network-health-min-conn-peers` \(uint\):
 
@@ -384,21 +379,19 @@ Node will report unhealthy if connected to less than this many peers. Defaults t
 
 `--network-health-max-time-since-msg-received` \(duration\):
 
-Node will report unhealthy if it hasn't received a message for this amount of time. 
-Defaults to `1m`. 
+Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
 
 `--network-health-max-time-since-no-requests` \(duration\):
 
-Node will report unhealthy if it hasn't received a message for this amount of time. 
-Defaults to `1m`. 
+Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
 
 `--network-health-max-portion-send-queue-full` \(float\):
 
-Node will report unhealthy if its send queue is more than this portion full. Must be in [0,1]. Defaults to `0.9`.
+Node will report unhealthy if its send queue is more than this portion full. Must be in \[0,1\]. Defaults to `0.9`.
 
 `--network-health-max-send-fail-rate` \(float\):
 
-Node will report unhealthy if more than this portion of message sends fail. Must be in [0,1]. Defaults to `0.25`.
+Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
 
 ### Health
 
@@ -406,10 +399,9 @@ Node will report unhealthy if more than this portion of message sends fail. Must
 
 Health check runs with this freqency. Defaults to `30s`.
 
-`--health-check-averager-halflife`  \(duration\):
+`--health-check-averager-halflife` \(duration\):
 
-Halflife of averagers used in health checks (to measure the rate of message failures, for example.)
-Larger value --> less volatile calculation of averages. Defaults to `10s`.
+Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
 ### Throughput Server
 
@@ -433,11 +425,11 @@ Some users have had an issue where their AvalancheGo node gets into an unhealthy
 
 `--restart-on-disconnected` \(boolean, defaults to `false`\)
 
-`--disconnected-check-frequency`  \(duration, defaults to `10s`\)
+`--disconnected-check-frequency` \(duration, defaults to `10s`\)
 
 `--disconnected-restart-timeout` \(duration, defaults to `1m`\)
 
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
+If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart.
 
 If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
 
