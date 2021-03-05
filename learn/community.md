@@ -1,134 +1,183 @@
-# Community
 
-## Resources
+## Webサイトとソーシャルメディア
 
-[**Avalanche Press Kit and Brand Guidelines**](https://support.avalabs.org/en/articles/4132288-ava-labs-and-avalanche-press-kit-and-brand-assets): the official press kit and brand guidelines with logos and fonts
+  
 
-### Websites and Socials
+​[Website](https://avax.network/): 公式Ava Labs ＆ Avalanche webサイト
 
-[**Website**](https://avax.network): the official Ava Labs and Avalanche website.
+​[GitHub](https://github.com/ava-labs): 公式Ava LabsのGitHubはすべてのAvalancheパブリックリポジトリをホスティングしています
 
-[**GitHub**](https://github.com/ava-labs): the official Ava Labs GitHub hosting all Avalanche public repos.
+​[Discord](https://chat.avax.network/): 公式Avalanche Discordには開発者や愛好家の議論の場です
 
-[**Discord**](https://chat.avax.network): the official Avalanche Discord for developers and enthusiasts to engage in focused discussions.
+​[Twitter](https://twitter.com/avalancheavax): 公式Avalanche Twitterでは、とそのエコシステムに関する全ての主要ニュースと更新情報を提供します
 
-[**Twitter**](https://twitter.com/avalancheavax): the official Avalanche Twitter for all major news and updates regarding Avalanche and its ecosystem.
+​[Forum](https://forum.avax.network/): 公式Avalanche Forumでは、Avalancheとそのコミュニティに関する技術的な議論の場を提供します
 
-[**Forum**](https://forum.avax.network): the official Avalanche Forum for technical discussions related to Avalanche and its community
+​[Avalanche Hub](https://community.avax.network/accounts/login/?next=/): Avalanche Hubでは、Avalancheの全ての面で包括的な環境を構築するコミュニティ成長プラットフォームです。コミュニティの拡張からオープンソース開発に至るまで、メンバーは研究、教育、エンジニアリングの取り組みに貢献し、AVAX トークンを獲得することができます
 
-[**Avalanche Hub**](https://community.avax.network/accounts/login/?next=/): a community growth platform building an inclusive environment for all aspects of Avalanche. From expansion efforts to open-source development, members directly contribute to vital research, education, and engineering initiatives to earn AVAX tokens.
+​[This Week in Avalanche](https://weavax.substack.com/): コミュニティメンバーが作成するのニュース、イベント、開発をまとめた独立系週刊ニュースレターです
 
-[**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
+## エコシステムパートナー
 
-### Ecosystem Partners
+  
 
-[**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): training and education platform for both technical developers and business entrepreneurs to learn about blockchain technology.
+​[Blockchain Academy Chile](https://www.blockchainacademy.cl/): ブロックチェーン技術を学ぶための技術開発者と起業家のためのトレーニング・教育プラットフォーム
 
-[**Blockchain Game Alliance**](https://blockchaingamealliance.org/): is an organization committed to promoting blockchain within the game industry. The BGA also provides an open forum for individuals and companies to share knowledge and collaborate, create common standards, establish best practices, and network.
+​[Blockchain Game Alliance](https://blockchaingamealliance.org/): BGAは、ゲーム業界におけるブロックチェーンの普及に尽力している組織であり、個人や企業が知識を共有・協力し、共通の標準を作成し、ベストプラクティスを確立してネットワークを構築するためのオープンなフォーラムを提供しています
 
-[**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
+​[Blockchain Research Institute (BRI)](https://www.blockchainresearchinstitute.org/): ブロックチェーン技術がビジネス、政府、社会に与える戦略的な影響に焦点を当てたグローバルシンクタンクであり、世界をリードする60以上の企業、政府、学術機関が加盟しています
 
-[**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
+​[LACChain Alliance](https://www.lacchain.net/home#/alliance): ラテンアメリカ・カリブ海地域（LAC）におけるブロックチェーンエコシステムの発展を加速させる世界的な組織であり、現在、Consensys、MIT Media Lab、Enterprise Ethereum Alliance、Blockchain Research Instituteなど25名のメンバーを擁しています
 
-### Education
+  
 
-[**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+## 教育
 
-### Exchanges
+  
 
-\*\*\*\*[**Binance**](https://www.binance.com): the world's \#1 crypto exchange by trading volume.
+​[FireStorm](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): コミュニティメンバーにより "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" というビデオチュートリアルが制作されています
 
-\*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
+  
 
-\*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
+## 取引所
 
-[**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
+  
 
-\*\*\*\*[**Voyager**](https://www.investvoyager.com): the United States' \#1 commission-free crypto broker.
+​[Binance](https://www.binance.com/): 取引量世界第1位の暗号取引所​
 
-### Explorers
+[Bitfinex](https://www.bitfinex.com/): デジタル通貨トレーダーやグローバル流動性プロバイダーに最先端のサービスを提供するデジタル資産取引プラットフォームを運営
 
-[**Avalanche Explorer**](https://explorer.avax.network): an analytics tool that enables people to search the Avalanche platform for transactions, addresses, and other platform activities.
+​[FTX](https://ftx.com/): 暗号通貨のデリバティブ取引所
 
-[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): an independent blockchain explorer that enables users to browse blockchains, transactions, validators, delegators, assets, and smart contracts on Avalanche. Also features an Asset Detail Validation Program to add rich data to assets on Avascan.
+​[JellySwap](https://jelly.market/): 異なるネットワーク間での価値移転を可能にするクロスチェーンスワップを実装した分散型アプリケーション
 
-[**Vscout**](https://vscout.io): an analytics tool for exploring Avalanche subnets, staking, and validators.
+​[Voyager](https://www.investvoyager.com/): 米国第1位の手数料無料の暗号ブローカー
 
-### Miscellaneous
+## エクスプローラー
 
-[**AVAXAlert**](https://avaxalert.com): Receive notifications directly into your email address when transactions occur on your AVAX wallet.
+  
 
-### Non-Fungible Tokens \(NFTs\)
+​[Avalanche Explorer](https://explorer.avax.network/): アナリティクスツールで、トランザクション、アドレスその他のプラットフォームのアクティビティを検索することができます
 
-[**Polyient Games**](https://www.polyient.games): an investment firm focused on the non-fungible token \(NFT\) and blockchain gaming industries. They invest in startups that are building the infrastructure and applications that will scale the NFT asset class.
+​[Avascan](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): 独立系ブロックチェーンエクスプローラーで、Avalanche上でブロックチェーン、トランザクション、バリデータ、デリゲータ、アセット、スマートコントラクトを閲覧できます。またAvalascan上のアセットにリッチなデータを追加するためのアセット詳細検証プログラムも備えています
 
-### **Prediction Markets**
+  
 
-\*\*\*\*[**Prosper**](https://prosper.so/)**:** a non-custodial, cross-chain prediction market and hedging platform. Prosper is developing a unique technology of on-chain liquidity aggregation to solve problems of prediction markets.
+## その他
 
-### Security Tokens
+  
 
-[**Securitize**](https://www.securitize.io/): the industry-leading primary issuance and compliance platform for digital securities \(security tokens\) and a SEC-registered transfer agent.
+​[AVAXAlert](https://avaxalert.com/): AVAXウォレットでトランザクションが発生した時にメールアドレスで通知を受け取れます
 
-### Stablecoins
+  
 
-[**BiLira**](https://www.bilira.co): a stable cryptocurrency that is backed by the Turkish Lira.
+## ノンファンジブルトークン (NFTs)
 
-\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
+  
 
-### Trading Bots
+​[Polyient Games](https://www.polyient.games/): Non-fungible Token（NFT）とブロックチェーンゲーム業界に特化した投資会社であり、NFTの資産クラスを拡大するインフラとアプリケーションを構築しているスタートアップに投資しています
 
-[**Hummingbot**](https://hummingbot.io/)**:** a community-driven, open-source project that aims to democratize algorithmic trading by making sophisticated high-frequency trading strategies freely available to everyone in the world.
+## 予測市場
 
-### Wallets
+  
 
-[**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
+​[Prosper](https://prosper.so/): ノンカストディアル、クロスチェーンの予測市場とヘッジプラットフォームであるProsperは、予測市場の問題を解決するために、オンチェーンの流動性アグリゲーションという独自の技術を開発しています
 
-[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
+  
 
-## Developer Tools
+## セキュリティトークン
 
-### Blockchain Infrastructure and Node Services
+  
 
-[**Allnodes**](https://www.allnodes.com)**:** a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
+​[Securitize](https://www.securitize.io/): 業界をリードするデジタル証券（セキュリティ・トークン）のプライマリー発行とコンプライアンスプラットフォームを提供するSEC登録のトランスファーエージェントです
 
-\*\*\*\*[**Ankr**](https://www.ankr.com): Web3 insfrastructure for all
+  
 
-[**AVADO**](https://ava.do/)**:** plug and play hardware blockchain nodes that enable individuals and developers to easily and privately access Web3 applications, participate in staking, and run incentivized Dapps to earn crypto.
+## ステーブルコイン
 
-[**Bloq**](https://www.bloq.com): managed infrastructure for building on blockchain networks. You get a single interface to an expanding set of enterprise-grade infrastructure services for building on multiple blockchain networks.
+  
 
-[**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
+​[BiLira](https://www.bilira.co/): トルコリラにサポートされたステーブルコイン
 
-### Oracles
+​[TrueUSD](https://www.trusttoken.com/): 最初で唯一の完全バックアップのステーブルコインであり、独立してライブでオンチェーン認証されます
 
-[**Chainlink**](https://chain.link/): market-leading price and data oracles for decentralized applications and the migration of real-world assets onto Avalanche.
+## トレーディングボット
 
-### Software Development Kits \(SDKs\)
+  
 
-[**Magic \(formerly Fortmatic\)**](https://magic.link/): passwordless logins and more user-friendly key management in crypto securing over 20 million user authentications per month. Used by over 6,500 developers since launch, including established DeFi organizations like Uniswap, Aave, Augur, Bancor, and Zerion.
+​[Hummingbot](https://hummingbot.io/): 洗練された高頻度のトレードストラテジーを誰もが自由に利用できるようにすることで、アルゴリズムトレードの民主化を目指すコミュニティ主導のオープンソースプロジェクトです
 
-[**Torus**](https://tor.us/): DirectAuth SDK simplifies onboarding by enabling users to create an Avalanche Wallet with their existing Google accounts, and enables one-click logins to Avalanche applications. Users can customize their wallets to take ownership of private keys as they feel more comfortable with the technology.
+  
 
-### Staking Services
+## ウォレット
 
-[**ablock**](https://ablock.io/avalanche): delegated staking services.
+  
 
-[**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): delegated staking services offered by independent blockchain explorer.
+​[Avalanche Wallet](https://wallet.avax.network/): Avalancheの資産を保管するためのシンプルで安全な非保管型ウォレットです
 
-[**Figment**](https://figment.io/): simple and secure staking as a service.
+​[Ledger Nano S](https://shop.ledger.com/products/ledger-nano-s): Ledgerが作ったオリジナルのハードウェアウォレットであり、簡単かつ安全に暗号を購入・保護できるハードウェアウォレットです
 
-[**P2P**](https://p2p.org/avalanche): delegated staking services.
+  
 
-[**Staking Rewards**](https://www.stakingrewards.com/earn/avalanche): staking calculator for Avalanche.
+# 開発ツール
 
-### Testing Tools and Frameworks
+  
 
-[**Halborn**](https://halborn.com/): an award-winning team of ethical hackers that work with blockchain projects to defend against cyber attacks. The team at Halborn enhanced the security of the Avalanche Wallet, and also offers smart contract auditing.
+## ブロックチェーンインフラとノードサービス
 
-[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): complete, end-to-end testing platform dedicated to helping developers build anti-fragile technologies on Avalanche.
+​[Allnodes](https://www.allnodes.com/): マスターノードとフルノードをホスティングするためのプラットフォームでありフルステークスサービスも提供しています
 
-[**Quantstamp**](https://quantstamp.com/): blockchain security firm offering audits and consulting for smart contracts, off-chain applications, networking, and front-end interfaces to enhance the security of decentralized applications.
+​[Ankr](https://www.ankr.com/): 全てのためのWeb3インフラストラクチャ
 
-[**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
+​[AVADO](https://ava.do/): プラグアンドプレイのハードウェアブロックチェーンノードであるAVADOは、個人や開発者が簡単にWeb3アプリケーションにアクセスしたり、ステークキングに参加したり、Dappsのインセンティブを実行して報酬を獲得することを可能にします
 
+​[Bloq](https://www.bloq.com/): ブロックチェーンネットワーク上に構築するためのマネージドインフラストラクチャであり、複数のブロックチェーンネットワーク上に構築するための拡張されたエンタープライズグレードのインフラストラクチャサービスのセットへの単一のインターフェイスを得ることができます
+
+​[DataHub by Figment](https://figment.io/datahub/avalanche/): DataHubを使用することでAvalancheの開発者はインフラストラクチャの管理を心配する必要がなくなり、利用可能性の高いフルノードインフラストラクチャを介してAvalancheのAPIを利用できるようになります
+
+  
+
+## オラクル
+
+  
+
+​[Chainlink](https://chain.link/): 分散型アプリケーション市場を価格とデータのオラクルでリードする代表的プロジェクトであり現実世界の資産のAvalancheへの移行をサポートします
+
+## ソフトウェア開発キット(SDKs)
+
+  
+
+​[Magic (formerly Fortmatic)](https://magic.link/): パスワードレスのログインと、月に2000万人以上のユーザー認証を確保した暗号化されたよりユーザーフレンドリーな鍵管理を実現します。Uniswap、Aave、Augur、Bancor、Zerionなどの確立されたDeFi組織を含む6,500以上の開発者によって使用されています
+
+​[Torus](https://tor.us/): DirectAuth SDKは、ユーザーが既存のGoogleアカウントでAvalancheウォレットを作成できるようにすることでオンボーディングを簡素化し、Avalancheアプリケーションへのワンクリックログインを可能にします
+
+## ステーキングサービス
+
+  
+
+​[ablock](https://ablock.io/avalanche): デリゲートステーキングサービス
+
+​[Avascan](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): デリゲートステーキングサービスと独自のエクスプローラーを運営
+
+​[Figment](https://figment.io/): シンプルかつ安全なステーキングサービスを提供
+
+​[P2P](https://p2p.org/avalanche): デリゲートステーキングサービス
+
+​[Staking Rewards](https://www.stakingrewards.com/earn/avalanche): Avalanche向けカルキュレーターサービスを提供
+
+  
+
+## テスティングツール及びフレームワーク
+
+  
+
+​[Halborn](https://halborn.com/): ブロックチェーンプロジェクトでサイバー攻撃から身を守るために活動する受賞歴のあるホワイトハッカーチームです。HalbornのチームはAvalanche Walletのセキュリティを強化し、スマートコントラクト監査も提供しています
+
+​[Kurtosis](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.kurtosistech.com): 開発者にたいするAvalanche上での脆弱性対策技術の構築サポートに特化した完全なエンドツーエンドのテストプラットフォームです
+
+​[Quantstamp](https://quantstamp.com/): スマートコントラクト、オフチェーンアプリケーション、ネットワーク、フロントエンドインターフェースの監査とコンサルティングを提供し、分散型アプリケーションのセキュリティを強化するブロックチェーンセキュリティ会社です
+
+​[Whiteblock](https://whiteblock.io/): "Genesis Platform "は、開発者がWeb3システムの実用的なパフォーマンスとセキュリティのテストを自動化するのに役立ちます
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTAyNjgzNTkzXX0=
+-->

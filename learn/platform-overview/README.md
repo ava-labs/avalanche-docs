@@ -1,90 +1,142 @@
 ---
-description: Learn the core concepts and architecture of Avalanche
+**Avalancheのコアコンセプトとアーキテクチャを学ぶ**
 ---
 
-# Platform Overview
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+# プラットフォームの概要
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
+  
 
-![Primary network](../../.gitbook/assets/primary-network.png)
 
-## Subnets
 
-A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+Avalancheには、Exchange Chain（X-Chain）、Platform Chain（P-Chain）、Contract Chain（C-Chain）3つのブロックチェーンが組み込まれています。これらは全てプライマリネットワークにより検証・保護されています。プライマリネットワークは特別なサブネットであり、全てのカスタムサブネットのメンバーは少なくとも2,000AVAXをステークする必要があります。
 
-A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+  
 
-### Compliance
+ここでは、[サブネットの作成](https://docs.avax.network/build/tutorials/platform/create-a-subnet)と[バリデーターの追加](https://docs.avax.network/build/tutorials/nodes-and-staking/add-a-validator)についてのチュートリアルを紹介します。
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
+  
 
-Some examples include:
+![](https://lh5.googleusercontent.com/VekrIGsempafgLnqzHQDA29BG1ZZ7BLSCaoXP2GjqEnlg4EQ5YXaXYn2N7mPdKMWWFxEmlBqafWa8FW_b5_LPiu1owvnVKypaJaaE47-YRuI_UeIpNUiO7K6r-IKeywZrppscKbU)　　　　　プライマリネットワーク
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+  
 
-### Support for Private Blockchains
+**サブネット**
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+サブネット（サブネットワーク）とは、ブロックチェーンの状態に関するコンセンサスを得るためのバリデーターの動的セットです。各ブロックチェーンは1つのサブネットによって検証されます。また、1つのサブネットは多くのブロックチェーンを検証することができ、ノードは多くのサブネットのメンバーになることができます。
 
-### Separation of Concerns
+  
 
-In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
+サブネットは自身のメンバーシップを管理すると共に、構成するバリデーターに特定のプロパティの保持を要求することができます。これは非常に便利な機能であり、以下にその意味を詳しく説明します：
 
-### Application-Specific Requirements
+  
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+**コンプライアンス**
 
-## Virtual Machines
+Avalancheのサブネットアーキテクチャは、規制コンプライアンスを管理可能にします。前述のように、サブネットは一連の要件を満たすためにバリデーターを必要とする場合があります。
 
-A **Virtual Machine** \(VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+  
 
-When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
+例として以下のようなものがあります：
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+  
 
-### Why Virtual Machines?
+- バリデーターは指定の国に設置されている必要があります
 
-At first, blockchain networks had one Virtual Machine \(VM\) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
+- バリデーターはKYC/AMLチェックに合格する必要があります
 
-People who wanted custom decentralized applications had to create their own, entirely new blockchain network from scratch. Doing so required a great deal of time and effort, offered limited security, and generally resulted in a bespoke, fragile blockchain that never got off the ground.
+- バリデーターは一定のライセンスを持っている必要があります
 
-Ethereum made a step toward solving this problem with smart contracts. Developers didn’t need to worry about networking and consensus, but creating decentralized applications was still hard. The Ethereum VM has low performance and imposes restrictions on smart contract developers. Solidity and the other few languages for writing Ethereum smart contracts are unfamiliar to most programmers.
+  
 
-Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go \(other languages will be supported in the future\).
+**プライベートブロックチェーンのサポート**
 
-### Creating Your Blockchain and Virtual Machine
+事前に定義された特定のバリデーターのみが参加できるサブネットを作成し、ブロックチェーンの内容がバリデーターのみに公開されるプライベートサブネットを作成することができます。これは、情報の非公開を考える組織に最適です。
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
+  
 
-{% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
+**関心項目の分離**
 
-In the future, Avalanche will allow you to define and launch custom blockchains, and we’ll release SDKs to help you do so.
+ブロックチェーンの異なるネットワークにおいて、バリデーターの中には特定のブロックチェーンのバリデーションを望まない場合も想定できますあります。サブネットモデルでは、バリデーターは自身が関心を持つブロックチェーンだけを担当することができ、これによりバリデーターの負担が軽減されます。
 
-{% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
+  
 
-## Exchange Chain \(X-Chain\)
+**アプリケーション固有の要件**
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like “can’t be traded until tomorrow” or “can only be sent to US citizens.”
+ブロックチェーンベースのアプリケーションでは、バリデーターに特定の特性を持たせる必要がある場合があります。例えば、大量のRAMやCPUパワーを必要とするアプリケーションがある場合、サブネットは、アプリケーションがバリデーターの動作の遅延によりパフォーマンスが低下しないよう、バリデーターに対し特定のハードウェア要件を要求することができます。
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
+  
 
-The X-Chain is an instance of the Avalanche Virtual Machine \(AVM\). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+# 仮想マシン
 
-{% page-ref page="../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
+  
 
-## Platform Chain \(P-Chain\)
+仮想マシン (VM) は、ブロックチェーンのアプリケーションレベルのロジックを定義します。技術的な用語では、ブロックチェーンの状態、状態遷移機能、トランザクション、対話APIを指定します。Avalanche上の全てのブロックチェーンはVMのインスタンスです。
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+  
 
-The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+VMで記述する場合は、ネットワーキング、コンセンサス、ブロックチェーンの構造などの低レベルのロジックを気にする必要はありません。Avalancheはこれを裏で実行するため、構築に集中することができます。
 
-## Contract Chain \(C-Chain\)
+  
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
+同じVMを使用して複数のブロックチェーンを作成することができ、各ブロックチェーンは同じルールセットに従いますが、他のブロックチェーンからは論理的には独立するものとなります。
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
+当初、ブロックチェーンネットワークには、あらかじめ定義された静的な機能セットを持つ1つの仮想マシン（VM）がありました。このモノリシックデザインは、ネットワーク上で実行できるブロックチェーンベースのアプリケーションを制限していました。
 
+  
+
+カスタム可能な分散型アプリケーションを望む人は、独自のブロックチェーンネットワークをゼロから構築する必要があり、そのため膨大な時間と労力が必要で、セキュリティも制限され、一般的には特注の脆弱なブロックチェーンを構築することになり、決して有用性を持つことはありませんでした。
+
+  
+
+Ethereumはスマートコントラクトでこの問題を解決するための手段を作り、開発者はネットワーキングやコンセンサスについて心配する必要がなくなりましたが、分散型アプリケーションの作成は依然として困難なものでした。Ethereum VMはパフォーマンスが低く、スマートコントラクトの開発者に制限を課しています。Solidityや、Ethereumスマートコントラクトを書くためのその他の言語は、ほとんどのプログラマーには馴染みがありません。
+
+  
+
+Avalanche VM（AVM）は、ブロックチェーンベースの分散型アプリケーションを簡単に定義できるようにします。開発者はSolidityのような限定された言語ではなく、GoでVMを書くことができます（将来的には他の言語もサポート予定です）。
+
+  
+
+  
+
+**ブロックチェーンと仮想マシンの作成**
+
+Avalancheはまだ新しい仮想マシン（VM）の作成をサポートしていません。現在、Avalancheは、Avalanche VMの新しいインスタンスの作成のみをサポートしています。
+
+将来的には、Avalancheでカスタムブロックチェーンを定義して起動できるようにする為のSDKをリリース予定です。
+
+  
+
+# Exchange Chain (X-Chain)
+
+  
+
+X-Chainは、デジタルスマートアセットを作成・取引するための分散型プラットフォームとして機能します。これは実世界の資源（株式や債券など）の表現であり、例えば「明日まで取引できない」とか「米国市民にしか送れない」というように、その行動を支配する一連のルールが設定可能となっています。
+
+X-Chainで取引される資産の一つがAVAXです。Avalanche上のブロックチェーンにトランザクションを発行した場合にAVAXによる手数料を支払います。
+
+X-ChainはAvalanche Virtual Machine（AVM）のインスタンスです。X-Chain APIを使用することで、クライアントはX-ChainやAVMの他のインスタンス上で資産を作成し、取引することができます。
+
+  
+
+# Platform Chain (P-Chain)
+
+  
+
+P-ChainはAvalanche上のメタデータブロックチェーンであり、バリデーターを調整し、アクティブなサブネットを追跡し、新たなサブネットの作成を可能にします。P-ChainはSnowmanコンセンサスプロトコルを実装しています。
+
+P-Chain APIにより、クライアントはサブネットの作成、サブネットへのバリデーターの追加、ブロックチェーンの作成を行うことができます。
+
+  
+
+# Contract Chain (C-Chain)
+
+  
+
+C-Chainでは、C-Chain APIを使用してスマートコントラクトを作成することができます。
+
+C-Chainは、Avalancheが提供するEthereum仮想マシンのインスタンスです。
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIwNzU2NjU0NSwtMTI1MTAwODUxNCw2NT
+k3NjczOTBdfQ==
+-->

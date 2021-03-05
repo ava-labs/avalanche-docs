@@ -1,110 +1,203 @@
 ---
 description: >-
-  Build on Avalanche. Build without limits. Developers who build on Avalanche
-  can easily create powerful, reliable, and secure applications.
+**Avalancheでの構築に制限は存在しません。開発者は、強力かつ高い信頼性と安全性を持つアプリケーションを簡単に作成することができます。**
 ---
 
-# Developer Documentation
 
-## Getting Started
+# [](https://github.com/ava-labs/avalanche-docs/blob/master/README.md#developer-documentation)開発者向けドキュメント
 
-{% tabs %}
-{% tab title="Coming From Ethereum?" %}
-{% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
+  
 
-{% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
-{% endtab %}
+## [](https://github.com/ava-labs/avalanche-docs/blob/master/README.md#getting-started)入門
 
-{% tab title="Avalanche Wallet" %}
-{% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
+
+{% tabs %} {% tab title="Ethereumからの導入" %} {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
+
+  
+
+{% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %} {% endtab %}
+
+  
+
+{% tab title="Avalancheウォレット" %} {% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
+
+  
 
 {% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
 
-{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %}
-{% endtab %}
+  
 
-{% tab title="Staking" %}
-{% page-ref page="build/getting-started.md" %}
+{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %} {% endtab %}
 
-{% page-ref page="build/tutorials/nodes-and-staking/" %}
-{% endtab %}
+  
 
-{% tab title="Advanced" %}
-{% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
+{% tab title="ステーキング" %} {% page-ref page="build/getting-started.md" %}
+
+  
+
+{% page-ref page="build/tutorials/nodes-and-staking/" %} {% endtab %}
+
+  
+
+{% tab title="詳細設定" %} {% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
+
+  
 
 {% page-ref page="build/tutorials/platform/create-a-new-blockchain.md" %}
 
+  
+
 {% page-ref page="build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
+
+  
 
 {% page-ref page="build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
-{% page-ref page="build/tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
-{% endtab %}
-{% endtabs %}
+  
 
-## Avalanche
+{% page-ref page="build/tutorials/smart-digital-assets/creating-a-nft-part-1.md" %} {% endtab %} {% endtabs %}# Developer Documentation
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
+  
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
+Avalancheでは制限のない構築が可能です。Avalancheを使用することで開発者は、強力で信頼性が高く安全なアプリケーションを簡単に作成することができます。
 
-## Avalanche \(AVAX\) Token
+  
 
-The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
+# Avalanche
 
-## Avalanche Consensus Protocol
+  
 
-![Consensus Comparison](.gitbook/assets/consensus-comparison.png)
+[Avalanche](https://avax.network/)は、相互運用可能で拡張性の高い単一のエコシステムで[分散型アプリケーション](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp)とエンタープライズ[ブロックチェーン](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain)デプロイメントを起動するためのオープンソースプラットフォームです。 Avalancheを使用することで、ネットワーク層とアプリケーション層の両方を制御することができ、あなたが想像できるあらゆるものを構築することが可能になります。
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
+  
 
-If a sufficiently large portion \(_alpha_ $$α$$\) of the validators sampled reply that they think the transaction should be accepted, the validator prefers to accept the transaction. That is, when it is queried about the transaction in the future, it will reply that it thinks the transaction should be accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large portion of the validators replies that they think the transaction should be rejected.
+Avalancheと他の分散型ネットワークの主な相違点はコンセンサスプロトコルです。 一般的に、ブロックチェーンは時間の経過とともに低速になりかつスケーラブルではなくなるという誤った理解が広まっていました。 Avalancheプロトコルは、分散化を損なうことなく、強力な安全性の保証、迅速なファイナリティ、高スループットを実現するというコンセンサスへの新しいアプローチを採用しています。
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply the same way \(accept or reject\) for _beta_ $$β$$ consecutive rounds.
+  
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When conflicts exist, honest validators quickly cluster around conflicting transactions, entering a positive feedback loop until all correct validators prefer that transaction. This leads to the acceptance of non-conflicting transactions and the rejection of conflicting transactions.
+# Avalanche (AVAX) トークン
 
-![How Avalanche Consensus Works](.gitbook/assets/howavalancheconsensusworks.png)
+  
 
-It is guaranteed \(with high probability based on system parameters\) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
+Avalanche（AVAX）トークンは、Avalancheプラットフォームのネイティブトークンであり、ステークキングによるネットワークの安全性確保、ピアツーピア取引、料金の支払い、Avalancheプラットフォーム上に作成された複数のサブネットワーク間での基本的なアカウント単位として使用されます。1nAVAXは、0.00000000001AVAXに相当します。
 
-Learn more technical components of the Avalanche consensus protocol by reading the [whitepaper](https://arxiv.org/pdf/1906.08936.pdf).
+  
 
-## Snowman Consensus Protocol
+# Avalanche コンセンサスプロトコル
 
-Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](learn/platform-overview/#platform-chain-p-chain) and [C-Chain](learn/platform-overview/#contract-chain-c-chain) implement the Snowman consensus protocol.
+  
 
-## Key Features
+![](https://lh4.googleusercontent.com/sPP4M2RkpY7_QAqT-XIXxIv18-_rbCP8WdfdvWHfGCZcdEsd3vCGd3i6rzRf1gWE2cI_h_OJsWMR7krXMI-58BYEVJ29M_IKS_T4Dc1Pgh8YHTwAk0s2fehphzjJEp2PQauoYhgq)
 
-### Speed
+  
 
-Uses a novel consensus protocol, developed by a team of Cornell computer scientists, and is able to permanently confirm transactions in under 1 second.
+**コンセンサスの比較**
 
-### Scalability
+  
 
-Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains.
+Avalancheファミリーのプロトコルは、サブサンプル投票を繰り返すことで動作します。[バリデーター](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)が[トランザクション](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)を受け入れるか拒否するかを決定するとき、バリデーターの中から少数のランダムなサブセットに、トランザクションを受け入れるべきか拒否すべきかを尋ねます。クエリされたバリデーターが、トランザクションが無効であると考える場合、既にそのトランザクションを拒否している場合、 矛盾するトランザクションが存在する場合には、そのトランザクションを拒否すべきであると回答され考えます。そうでない場合は、そのトランザクションは受け入れられるべきであると回答されます。
 
-### Security
+  
 
-Ensures stronger security guarantees well-above the 51% standard of other networks.
+サンプリングされたバリデーターの大部分(αααα)がトランザクションを受け入れるべきだと回答する場合、バリデーターはそのトランザクションを受け入れます。同様に、バリデーターのうちの大部分がトランザクションを拒否すべきであると回答した場合、バリデーターはトランザクションを拒否します。
 
-### Flexibility
+  
 
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
+バリデーターはこのサンプリングプロセスを、問い合わせ先となったバリデーターのうち、αがβββのラウンドを連続して繰り返すことで同じように回答する(受け入れるか否か)まで繰り返します。
 
-### Sustainability
+  
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
+トランザクションに矛盾がない場合には、ファイナリティが迅速に行われます。矛盾が生じている場合には、誠実なバリデーターが当該トランザクションに対して、全てのバリデーターがそのトランザクションを合意するようになるまで正のフィードバックループに入ります。これにより矛盾しないトランザクションが受け入れられ、矛盾するトランザクションが拒否されます。
 
-### Smart Contract Support
+  
 
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, Metamask, Truffle, and more.
+![](https://lh5.googleusercontent.com/-eteYpE8nH7a1qyTM71zTLUbKk9ckIGpPBqFKj2saLJcJfYf4akGaQhGaA_xB1DRUsWOwI4r8EHW-khjjU1kF9Vdy0DtVgaxnAHbiqSJNbG_WeMJZZa5i-dZ4eER7iqaz1nnecnP)
 
-### Private and Public Blockchains
+  
 
-Create your own public or private blockchains.
+**Avalancheのコンセンサスの仕組み**
 
-### Designed for Finance
+正当なバリデーターがトランザクションを承認または拒否する場合、全ての正当なバリデーターがそのトランザクションを承認または拒否することが（システムパラメーターに基づいて高確率で）保証されています。
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets.
+  
 
+Avalancheコンセンサスプロトコルの技術的な構成要素については[ホワイトペーパー](https://arxiv.org/pdf/1906.08936.pdf) を参照してください。
+
+  
+
+# Snowman コンセンサスプロトコル
+
+  
+
+Snowmanは、チェーンに最適化されたコンセンサスプロトコルであり、ハイスループット、完全な順序付けがなされており、スマートコントラクトに最適なものとなっています。Snowmanは、[Avalancheコンセンサスプロトコル](https://github.com/ava-labs/avalanche-docs/blob/master/#avalanche-consensus-protocol)を搭載しており、[P-Chain](https://github.com/ava-labs/avalanche-docs/blob/master/learn/platform-overview/#platform-chain-p-chain)と[C-Chain](https://github.com/ava-labs/avalanche-docs/blob/master/learn/platform-overview/#contract-chain-c-chain)の両方がSnowmanのコンセンサスプロトコルを実装しています。
+
+  
+
+# 主な特徴
+
+  
+
+## スピード
+
+  
+
+コーネル大学のコンピュータサイエンティストのチームにより開発された新しいコンセンサスプロトコルを使用することにより1 秒以内のトランザクション確認を恒久的に実行することができます。
+
+  
+
+## スケーラビリティ
+
+  
+
+既存ブロックチェーンより桁違いに優れた、1秒単位で4,500件のトランザクションが可能です。
+
+  
+
+## セキュリティ
+
+  
+
+他のネットワークの51%標準と比較し、より高いセキュリティを保証します。
+
+  
+
+## フレキシビリティ
+
+  
+
+任意のロジックを含むカスタムブロックチェーンや分散型アプリを簡単に作成できます。
+
+  
+
+## サステナビリティ
+
+  
+
+プルーフオブワークと比較して遥かにエネルギー効率の高いプルーフオブステークコンセンサスアルゴリズムを使用しています。
+
+  
+
+## スマートコントラクトサポート
+
+  
+
+Solidityでのスマートコントラクトの作成、Remix、Metamask、Truffleの利用などお馴染みのEthereumツールに対応しています。
+
+  
+
+## プライベート/パブリックブロックチェーン
+
+  
+
+独自のプライベートまたはパブリックブロックチェーンを作成することができます。
+
+  
+
+## 金融向けの設計
+
+  
+
+複雑なカスタムルールの条件設定が可能なデジタルスマートアセットの作成と取引プロセスの簡易化をネイティブサポートしています。
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIxNDYxOTQwOTgsODU4NTMxNzc4XX0=
+-->
