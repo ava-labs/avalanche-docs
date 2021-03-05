@@ -8,5 +8,4 @@
 | [**Create an NFT \(Part 1\)**](creating-a-nft-part-1.md) | Create and send NFTs using AvalancheGo's API. |
 | [**Mint NFTs with the Avalanche Wallet**](wallet-nft-studio.md) | Easily mint NFTs using NFT Studio within the Avalanche Wallet. |
 | [**Use Wrapped AVAX \(WAVAX\) on Avalanche**](how-to-use-wavax-on-avalanche.md) | How to use Wrapped AVAX \(WAVAX\) on Avalanche. |
-| [**Integrate Figment and Metamask**](integrate-figment-and-metamask.md) | Integrate Figment and Metamask |
 

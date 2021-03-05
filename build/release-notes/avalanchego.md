@@ -2,6 +2,74 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.2.1 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements. 
+
+Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments.
+{% endhint %}
+
+Change Summary:
+
+* Added \`UTXO\`s to the \`platformvm.getStake\` response.
+* Added benchlist reporting to the \`info.peers\` response.
+* Added additional health checks into the networking layer.
+* Added \`percent of stake connected\` as a reported metric.
+* Added bootstrapping restart logic to ensure the node has caught up to the current tip, even during times of high throughput.
+* Added subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
+* Prevented verification of rejected blocks to avoid unnecessary computation.
+* Removed gossiping of non-preferred blocks to the network.
+* Switched the network timeout calculator to use an EWMA of the observed network latency.
+* Removed \`Get\` requests from the network latency calculations.
+* Cleaned up the benchlisting algorithm.
+* Cleaned up handling of dropped messages on send.
+* Cleaned up outstanding request and timeout logic.
+* Generalized performance tracking to allow for prefixing of profile names.
+* Added additional caching to the Avalanche bootstrapping traversal.
+* Fixed ansible linting.
+* The added command line arguments mainly consist of configurations of health checks. Additionally, the modified network latency calculations changed the name of some command line args.
+
+Added command line arguments:
+
+* \`network-timeout-halflife\`
+* \`network-timeout-coefficient\`
+* \`network-health-min-conn-peers\`
+* \`network-health-max-time-since-msg-received\`
+* \`network-health-max-time-since-msg-sent\`
+* \`network-health-max-portion-send-queue-full\`
+* \`network-health-max-send-fail-rate\`
+* \`network-health-max-time-since-no-requests\`
+* \`router-health-max-drop-rate\`
+* \`router-health-max-outstanding-requests\`
+* \`health-check-frequency\`
+* \`health-check-averager-halflife\`
+* \`bootstrap-retry-enabled\`
+* \`bootstrap-retry-max-attempts\`
+
+Removed command line arguments:
+
+* \`network-timeout-increase\`
+* \`network-timeout-reduction\`
+
+## v1.2.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.0)\)
+
+{% hint style="danger" %}
+**Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.**
+{% endhint %}
+
+The primary components to this upgrade include:
+
+* Fixed atomic import validation on C-Chain
+* Added rule exception logic to allow atomic bonus blocks
+* Added fail-fast logic into Shared Memory if duplicated deletes are issued
+* Fixed issue where polls could stall in snowman because of a failure to clear requests
+* Fixed BAD BLOCK issue in coreth due to unknown ancestors
+* Fixed a race condition in the repair canonical chain script in coreth
+* Limited number of processing blocks in Snowman and processing txs in Avalanche
+* Updated networking timeout default values and benchlist settings
+* Verified there was no safety violation after the initial network instability
+
 ## v1.1.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5)\)
 
 {% hint style="danger" %}
