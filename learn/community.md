@@ -1,7 +1,6 @@
+# Community
 
-## Webサイトとソーシャルメディア
-
-  
+### Webサイトとソーシャルメディア
 
 ​[Website](https://avax.network/): 公式Ava Labs ＆ Avalanche webサイト
 
@@ -17,31 +16,21 @@
 
 ​[This Week in Avalanche](https://weavax.substack.com/): コミュニティメンバーが作成するのニュース、イベント、開発をまとめた独立系週刊ニュースレターです
 
-## エコシステムパートナー
-
-  
+### エコシステムパートナー
 
 ​[Blockchain Academy Chile](https://www.blockchainacademy.cl/): ブロックチェーン技術を学ぶための技術開発者と起業家のためのトレーニング・教育プラットフォーム
 
 ​[Blockchain Game Alliance](https://blockchaingamealliance.org/): BGAは、ゲーム業界におけるブロックチェーンの普及に尽力している組織であり、個人や企業が知識を共有・協力し、共通の標準を作成し、ベストプラクティスを確立してネットワークを構築するためのオープンなフォーラムを提供しています
 
-​[Blockchain Research Institute (BRI)](https://www.blockchainresearchinstitute.org/): ブロックチェーン技術がビジネス、政府、社会に与える戦略的な影響に焦点を当てたグローバルシンクタンクであり、世界をリードする60以上の企業、政府、学術機関が加盟しています
+​[Blockchain Research Institute \(BRI\)](https://www.blockchainresearchinstitute.org/): ブロックチェーン技術がビジネス、政府、社会に与える戦略的な影響に焦点を当てたグローバルシンクタンクであり、世界をリードする60以上の企業、政府、学術機関が加盟しています
 
 ​[LACChain Alliance](https://www.lacchain.net/home#/alliance): ラテンアメリカ・カリブ海地域（LAC）におけるブロックチェーンエコシステムの発展を加速させる世界的な組織であり、現在、Consensys、MIT Media Lab、Enterprise Ethereum Alliance、Blockchain Research Instituteなど25名のメンバーを擁しています
 
-  
-
-## 教育
-
-  
+### 教育
 
 ​[FireStorm](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): コミュニティメンバーにより "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" というビデオチュートリアルが制作されています
 
-  
-
-## 取引所
-
-  
+### 取引所
 
 ​[Binance](https://www.binance.com/): 取引量世界第1位の暗号取引所​
 
@@ -53,77 +42,47 @@
 
 ​[Voyager](https://www.investvoyager.com/): 米国第1位の手数料無料の暗号ブローカー
 
-## エクスプローラー
-
-  
+### エクスプローラー
 
 ​[Avalanche Explorer](https://explorer.avax.network/): アナリティクスツールで、トランザクション、アドレスその他のプラットフォームのアクティビティを検索することができます
 
 ​[Avascan](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/learn/www.avascan.info): 独立系ブロックチェーンエクスプローラーで、Avalanche上でブロックチェーン、トランザクション、バリデータ、デリゲータ、アセット、スマートコントラクトを閲覧できます。またAvalascan上のアセットにリッチなデータを追加するためのアセット詳細検証プログラムも備えています
 
-  
-
-## その他
-
-  
+### その他
 
 ​[AVAXAlert](https://avaxalert.com/): AVAXウォレットでトランザクションが発生した時にメールアドレスで通知を受け取れます
 
-  
-
-## ノンファンジブルトークン (NFTs)
-
-  
+### ノンファンジブルトークン \(NFTs\)
 
 ​[Polyient Games](https://www.polyient.games/): Non-fungible Token（NFT）とブロックチェーンゲーム業界に特化した投資会社であり、NFTの資産クラスを拡大するインフラとアプリケーションを構築しているスタートアップに投資しています
 
-## 予測市場
-
-  
+### 予測市場
 
 ​[Prosper](https://prosper.so/): ノンカストディアル、クロスチェーンの予測市場とヘッジプラットフォームであるProsperは、予測市場の問題を解決するために、オンチェーンの流動性アグリゲーションという独自の技術を開発しています
 
-  
-
-## セキュリティトークン
-
-  
+### セキュリティトークン
 
 ​[Securitize](https://www.securitize.io/): 業界をリードするデジタル証券（セキュリティ・トークン）のプライマリー発行とコンプライアンスプラットフォームを提供するSEC登録のトランスファーエージェントです
 
-  
-
-## ステーブルコイン
-
-  
+### ステーブルコイン
 
 ​[BiLira](https://www.bilira.co/): トルコリラにサポートされたステーブルコイン
 
 ​[TrueUSD](https://www.trusttoken.com/): 最初で唯一の完全バックアップのステーブルコインであり、独立してライブでオンチェーン認証されます
 
-## トレーディングボット
-
-  
+### トレーディングボット
 
 ​[Hummingbot](https://hummingbot.io/): 洗練された高頻度のトレードストラテジーを誰もが自由に利用できるようにすることで、アルゴリズムトレードの民主化を目指すコミュニティ主導のオープンソースプロジェクトです
 
-  
-
-## ウォレット
-
-  
+### ウォレット
 
 ​[Avalanche Wallet](https://wallet.avax.network/): Avalancheの資産を保管するためのシンプルで安全な非保管型ウォレットです
 
 ​[Ledger Nano S](https://shop.ledger.com/products/ledger-nano-s): Ledgerが作ったオリジナルのハードウェアウォレットであり、簡単かつ安全に暗号を購入・保護できるハードウェアウォレットです
 
-  
+## 開発ツール
 
-# 開発ツール
-
-  
-
-## ブロックチェーンインフラとノードサービス
+### ブロックチェーンインフラとノードサービス
 
 ​[Allnodes](https://www.allnodes.com/): マスターノードとフルノードをホスティングするためのプラットフォームでありフルステークスサービスも提供しています
 
@@ -135,25 +94,17 @@
 
 ​[DataHub by Figment](https://figment.io/datahub/avalanche/): DataHubを使用することでAvalancheの開発者はインフラストラクチャの管理を心配する必要がなくなり、利用可能性の高いフルノードインフラストラクチャを介してAvalancheのAPIを利用できるようになります
 
-  
-
-## オラクル
-
-  
+### オラクル
 
 ​[Chainlink](https://chain.link/): 分散型アプリケーション市場を価格とデータのオラクルでリードする代表的プロジェクトであり現実世界の資産のAvalancheへの移行をサポートします
 
-## ソフトウェア開発キット(SDKs)
+### ソフトウェア開発キット\(SDKs\)
 
-  
-
-​[Magic (formerly Fortmatic)](https://magic.link/): パスワードレスのログインと、月に2000万人以上のユーザー認証を確保した暗号化されたよりユーザーフレンドリーな鍵管理を実現します。Uniswap、Aave、Augur、Bancor、Zerionなどの確立されたDeFi組織を含む6,500以上の開発者によって使用されています
+​[Magic \(formerly Fortmatic\)](https://magic.link/): パスワードレスのログインと、月に2000万人以上のユーザー認証を確保した暗号化されたよりユーザーフレンドリーな鍵管理を実現します。Uniswap、Aave、Augur、Bancor、Zerionなどの確立されたDeFi組織を含む6,500以上の開発者によって使用されています
 
 ​[Torus](https://tor.us/): DirectAuth SDKは、ユーザーが既存のGoogleアカウントでAvalancheウォレットを作成できるようにすることでオンボーディングを簡素化し、Avalancheアプリケーションへのワンクリックログインを可能にします
 
-## ステーキングサービス
-
-  
+### ステーキングサービス
 
 ​[ablock](https://ablock.io/avalanche): デリゲートステーキングサービス
 
@@ -165,11 +116,7 @@
 
 ​[Staking Rewards](https://www.stakingrewards.com/earn/avalanche): Avalanche向けカルキュレーターサービスを提供
 
-  
-
-## テスティングツール及びフレームワーク
-
-  
+### テスティングツール及びフレームワーク
 
 ​[Halborn](https://halborn.com/): ブロックチェーンプロジェクトでサイバー攻撃から身を守るために活動する受賞歴のあるホワイトハッカーチームです。HalbornのチームはAvalanche Walletのセキュリティを強化し、スマートコントラクト監査も提供しています
 
@@ -177,7 +124,5 @@
 
 ​[Quantstamp](https://quantstamp.com/): スマートコントラクト、オフチェーンアプリケーション、ネットワーク、フロントエンドインターフェースの監査とコンサルティングを提供し、分散型アプリケーションのセキュリティを強化するブロックチェーンセキュリティ会社です
 
-​[Whiteblock](https://whiteblock.io/): "Genesis Platform "は、開発者がWeb3システムの実用的なパフォーマンスとセキュリティのテストを自動化するのに役立ちます
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyNjgzNTkzXX0=
--->
+​[Whiteblock](https://whiteblock.io/): "Genesis Platform "は、開発者がWeb3システムの実用的なパフォーマンスとセキュリティのテストを自動化するのに役立ちます 
+

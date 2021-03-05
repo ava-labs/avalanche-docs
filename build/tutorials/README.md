@@ -4,11 +4,15 @@ Check out all of the tutorials that will help you build on Avalanche. We would b
 
 {% page-ref page="platform/" %}
 
+{% endpage-ref %}
+
 {% page-ref page="nodes-and-staking/" %}
+
+{% endpage-ref %}
 
 {% page-ref page="smart-contracts/" %}
 
+{% endpage-ref %}
+
 {% page-ref page="smart-digital-assets/" %}
-
-
 
