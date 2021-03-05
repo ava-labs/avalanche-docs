@@ -46,7 +46,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -92,7 +92,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -103,6 +103,51 @@ curl -X POST --data '{
 ```
 
 Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+
+### admin.getChainAliases
+
+Returns the aliases of the chain
+
+#### **Signature**
+
+```text
+admin.getChainAliases(
+    {
+        chain:string
+    }
+) -> {aliases:string[]}
+```
+
+* `chain` is the blockchain’s ID.
+
+#### **Example Call**
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getChainAliases",
+    "params": {
+        "chain":"sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "aliases": [
+            "X",
+            "avm",
+            "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
+        ]
+    },
+    "id": 1
+}
+```
 
 ### admin.lockProfile
 
@@ -127,7 +172,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -160,7 +205,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -193,7 +238,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -225,7 +270,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,

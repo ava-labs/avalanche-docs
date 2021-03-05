@@ -78,7 +78,7 @@ You should view this page. On this page, first, click “SOLIDITY” from “Fea
 Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
 
 ```javascript
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
 ```
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
@@ -117,7 +117,7 @@ After confirming all these pop-ups we have deployed our token to avalanche C-Cha
 
 ## Interact with Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+We can see our transaction that deployed on avalanche C-Chain via this [c-chain explorer](https://cchain.explorer.avax-test.network/).
 
 But firstly, let’s see our transaction hash from the remix console.
 

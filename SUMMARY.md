@@ -5,8 +5,8 @@
 ## Learn
 
 * [Platform Overview](learn/platform-overview/README.md)
+  * [Avalanche Consensus](learn/platform-overview/avalanche-consensus.md)
   * [Staking](learn/platform-overview/staking.md)
-  * [Avalanche Consensus Deep Dive](learn/platform-overview/avalanche-consensus.md)
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
@@ -17,10 +17,10 @@
 ## Build
 
 * [Get Started: Run an Avalanche Node](build/get-started.md)
-* [Release Notes](build/release-notes-1/README.md)
+* [Release Notes](build/release-notes/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
-  * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
-  * [Ortelius Release Notes](build/release-notes-1/ortelius-release-notes.md)
+  * [AvalancheGo Release Notes](build/release-notes/avalanchego.md)
+  * [Ortelius Release Notes](build/release-notes/ortelius.md)
 * [Tutorials](build/tutorials/README.md)
   * [Platform](build/tutorials/platform/README.md)
     * [Create a Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
