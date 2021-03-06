@@ -28,11 +28,15 @@
 
 [**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
 
+\*\*\*\*[**Congress of the Mexican State of Quintana Roo**](http://comunicacion.congresoqroo.gob.mx/20210301/congreso-de-quintana-roo-primero-en-utilizar-tecnologia-blockchain/): ****becoming the first national congress to use Avalanche for the digital certification of its legislative documentation, which works through the correspondence and file management system.
+
 [**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
 
 ### Education
 
 [**FireStorm**](https://www.youtube.com/channel/UC96iC-a7Ekk6GdaYhQ_mI-w): a community member producing "[How to Run Avalanche at Home](https://www.youtube.com/watch?v=kyHiLcw4Qg0&list=PLRjGGVtaMdsvR3OChEp4862V6fQyPYJ7T)" video tutorials.
+
+\*\*\*\*[**Proof of Learning \(PoL\)**](https://techtec.co.jp/en): a blockchain company developing a curriculum for users and developers to learn about its high-performance, decentralized network through [Proof of Learning \(PoL\)](https://pol.techtec.world/), Japan’s most popular blockchain education platform.
 
 ### Exchanges
 
@@ -40,13 +44,19 @@
 
 \*\*\*\*[**Bitfinex**](https://www.bitfinex.com): a digital asset trading platform offering state-of-the-art services for digital currency traders and global liquidity providers.
 
+\*\*\*\*[**Bitpanda**](https://www.bitpanda.com/): a digital assets platform founded in 2014 and based in Vienna, Austria. Since then, they have grown to become Europe’s leading retail broker for digital assets.
+
 \*\*\*\*[**FTX**](https://ftx.com): a cryptocurrency derivatives exchange.
 
 [**Fulcrum**](https://fulcrum.trade/): a powerful DeFi platform for tokenized lending and margin trading.
 
+\*\*\*\*[**Injective Protocol**](https://injectiveprotocol.com/): is the first layer-2 decentralized exchange protocol that unlocks the full potential of decentralized derivatives and borderless DeFi. Injective Protocol enables fully decentralized trading without any restrictions, allowing individuals to trade on any derivative market of their choosing.
+
 [**JellySwap**](https://jelly.market/): a decentralized application for cross-chain swaps allowing value transfer between different networks.
 
 [**OkCoin**](https://www.okcoin.com/spot/trade/avax-usd): a global cryptocurrency exchange licensed in 44 U.S states and based out of San Francisco. It enables users across 184 countries to easily transition between crypto and fiat currencies.
+
+\*\*\*\*[**Pangolin**](https://pangolin.exchange/): A community-driven decentralized exchange for Avalanche and Ethereum assets with fast settlement, low transaction fees, and a democratic distribution–powered by Avalanche. Pangolin brings you the best trading opportunities to find and maximize your yield.
 
 \*\*\*\*[**Reef**](https://reef.finance/): a smart liquidity aggregator and yield engine that enables trading with access to liquidity from both CEXs and DEXs.
 
@@ -90,7 +100,9 @@
 
 \*\*\*\*[**e-Money**](https://e-money.com/): a leading issuer of transparent, interest-bearing, currency-backed stablecoins.
 
-\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain
+\*\*\*\*[**OIN Finance**](https://oin.finance/): a cross-chain decentralized stablecoin issuance platform.
+
+\*\*\*\*[**TrueUSD**](https://www.trusttoken.com): the first and only fully-backed stablecoin attested independently live and on-chain.
 
 ### Trading Bots
 
@@ -101,6 +113,8 @@
 ### Wallets
 
 [**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
+
+[**Coin98**](https://coin98.app/): ****is a non-custodial wallet used to store, send and receive multi-chain, multi-source digital assets. Coin98 Wallet has both Mobile App and Extension version, which becomes a gateway connecting users to the DeFi world.
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
@@ -122,11 +136,21 @@
 
 [**AVADO**](https://ava.do/)**:** plug and play hardware blockchain nodes that enable individuals and developers to easily and privately access Web3 applications, participate in staking, and run incentivized Dapps to earn crypto.
 
+\*\*\*\*[**Axelar**](https://axelar.network/): a decentralized network and tools that help connect dApp builders with multiple blockchain ecosystems, applications, and users for frictionless cross-chain communication. Axelar consists of a protocol suite, tools, and APIs, designed to break down the barriers to cross-chain communication.
+
 [**Bloq**](https://www.bloq.com): managed infrastructure for building on blockchain networks. You get a single interface to an expanding set of enterprise-grade infrastructure services for building on multiple blockchain networks.
+
+\*\*\*\*[**Cartesi**](https://cartesi.io/): is solving the urgent problem of scalability and high fees by implementing a variant of optimistic roll-ups. Most notably, Cartesi is revolutionizing smart contract programming by allowing developers to code with mainstream software stacks. Noether is Cartesi’s side-chain that’s optimized for ephemeral data, providing low-cost data availability to DApps.
+
+[**Copper**](https://copper.co/): provides a gateway into the cryptoasset space for institutional investors by offering custody, prime brokerage, and settlements across 150 digital assets and more than 25 exchanges. It is committed to providing flexible solutions for institutional investors that can adapt to the changing cryptoasset space, while enabling far greater transparency and control for asset managers.
 
 [**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
 
 \*\*\*\*[**DSLA Protocol**](https://stacktical.com/): a risk management framework that enables developers and infrastructure operators to reduce their users’ exposure to service delays, interruptions, and financial losses, using self-executing service level agreements, bonus-malus insurance policies, and crowdfunded liquidity pools.
+
+\*\*\*\*[**Router**](http://routerprotocol.com/): connects multiple Layer-1 and Layer-2 blockchains and opens up avenues for smart order routing across chains for any trade. Router users can seamlessly deploy liquidity to any automated market makers \(AMMs\) on Avalanche and across any other blockchain platforms integrating with Router.
+
+\*\*\*\*[**SIMBA Chain**](https://simbachain.com/): ****a ****cloud-based, Smart Contract as a Service \(SCaaS\) platform that enables industry and governments to quickly develop and deploy Web 3.0 distributed applications \(dApps\) for many blockchains and across many platforms.
 
 ### Oracles
 
@@ -145,6 +169,8 @@
 [**Avascan**](https://blog.avascan.info/2020-10-14-avascan-validators-october-2020.html): delegated staking services offered by independent blockchain explorer.
 
 [**Figment**](https://figment.io/): simple and secure staking as a service.
+
+\*\*\*\*[**MyCointainer**](https://www.mycointainer.com/): is an online automatic staking and masternode staking platform.
 
 [**P2P**](https://p2p.org/avalanche): delegated staking services.
 
