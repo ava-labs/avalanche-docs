@@ -2,6 +2,24 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.2.2 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**\)**
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
+{% endhint %}
+
+* Added IP aliases in the network library to avoid repeated `SYN` calls.
+* Fixed bootstrap message handling when bootstrapping from yourself.
+* Simplified `AdvanceTimeTx` issuance.
+* Added new consensus health checks.
+* Adding node health logging.
+* Added health responses to health `GET` requests.
+* Consolidated incoming message logs.
+* Added error logging to the `LevelDB` wrapper.
+* Added error codes to the `rpcdb` to avoid string parsing.
+* Improved C-chain handling of canonical chain to reduce the number of reorgs.
+* Improved C-chain handling of mock calls performed on the `pending` block.
+
 ## **v1.2.1 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
 
 {% hint style="danger" %}
