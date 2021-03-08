@@ -1,0 +1,532 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures how many of each database operation is performed each second",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_db_put_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_db_get_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_db_delete_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_db_has_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_db_compact_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_put_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_delete_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_reset_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_replay_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_key_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "iterator key",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_value_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "iterator value",
+          "refId": "K"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Operations per second",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures what percentage of each second is being spent on different database operations",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_db_put_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_db_get_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_db_delete_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_db_has_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_db_compact_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_put_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_key_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "iterator key",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_value_sum{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "iterator value",
+          "refId": "K"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "% of time spent on operations",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": "Percent of time",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": "Percent of time",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures the time, in seconds, each operation takes",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_db_put_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_put_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_db_get_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_get_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_db_delete_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_delete_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "delete",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_db_has_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_has_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "has",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_db_compact_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_compact_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "compact",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_put_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_batch_put_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_batch_delete_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch delete",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_batch_reset_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch reset",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_batch_replay_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "batch replay",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_key_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_iterator_key_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "iterator key",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_db_iterator_value_sum{job=\"avalanchego\"}[1m])/rate(avalanche_db_iterator_value_count{job=\"avalanchego\"}[1m])/10000000",
+          "interval": "",
+          "legendFormat": "iterator value",
+          "refId": "K"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Time per operation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": "Percent of time",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Database",
+  "uid": "59YBoqOMk",
+  "version": 2
+}

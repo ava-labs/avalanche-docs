@@ -1,0 +1,1403 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 5,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))",
+          "interval": "",
+          "legendFormat": "Accepted",
+          "refId": "A"
+        },
+        {
+          "expr": "round(increase(avalanche_X_vtx_rejected_count{job=\"avalanchego\"}[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Rejected",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Vertices in Last Minute",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                10000
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Average Vertex Rejection Latency alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "The average time between a vertex's issuance and acceptance by this node over the last 5 minutes.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 23,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_X_vtx_accepted_sum{job=\"avalanchego\"}[5m]) / rate(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[5m])",
+          "interval": "",
+          "legendFormat": "Accepted",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_X_vtx_rejected_sum{job=\"avalanchego\"}[5m]) / rate(avalanche_X_vtx_rejected_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Rejected",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 10000,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average Vertex Latency",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "ms",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                100
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "max"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                100
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "or"
+            },
+            "query": {
+              "params": [
+                "B",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "max"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "1m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "High number of processing transactions/vertices",
+        "name": "X-Chain Processing alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 9,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avalanche_X_tx_processing{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "Transactions",
+          "refId": "A"
+        },
+        {
+          "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}",
+          "interval": "",
+          "legendFormat": "Vertices",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 100,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Processing Vertices",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.9
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "X-Chain queries are failing at a high rate",
+        "name": "X-Chain Percentage of Successful Queries alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Percentage of queries for which we receive chits on time.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Success pct",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 0.9,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Percentage of Successful Queries",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures how much of each second is being spent handling different kinds of messages on the X-Chain.\nThe value for chits, for example, is the number of seconds spent handling chits messages per second, over the last 30 seconds.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_X_handler_pull_query_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "pull query",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_push_query_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "push query",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_chits_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "chits",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_accepted_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "accepted",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_put_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_multiput_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "multiput",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get ancestors",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get failed",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_query_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "query failed",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_accepted_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get accepted",
+          "refId": "K"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get ancestors failed",
+          "refId": "L"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Message Handling Time (Total)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "seconds/second",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures how many of each kind of message are received per second on the X-Chain.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_X_handler_pull_query_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "pull query",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_push_query_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "push query",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "chits",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_accepted_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "accepted",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_put_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_multi_put_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "multiput",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get ancestors",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_failed_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get failed",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "query failed",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_accepted_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get accepted",
+          "refId": "K"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_failed_count{job=\"avalanchego\"}[1m])",
+          "interval": "",
+          "legendFormat": "get ancestors failed",
+          "refId": "L"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Messages Received per Second",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Messages received/s",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "hiddenSeries": false,
+      "id": 17,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "increase(avalanche_X_handler_dropped[1m])",
+          "interval": "",
+          "legendFormat": "Dropped",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Incoming Messages Dropped in Last Minute",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "Measures how long each kind of request on the X-Chain takes to handle.\nThe value for chits, for example, is how long, in seconds, it takes to handle a chits message.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(avalanche_X_handler_pull_query_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_pull_query_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "pull query",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_push_query_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_push_query_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "push query",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_chits_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "chits",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_accepted_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_accepted_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "accepted",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_get_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "E"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_put_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_put_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "F"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_multiput_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_multi_put_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "multiput",
+          "refId": "G"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_get_ancestors_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get ancestors",
+          "refId": "H"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_get_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get failed",
+          "refId": "I"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_query_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "query failed",
+          "refId": "J"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_accepted_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_get_accepted_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get accepted",
+          "refId": "K"
+        },
+        {
+          "expr": "rate(avalanche_X_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_X_handler_get_ancestors_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "interval": "",
+          "legendFormat": "get ancestors failed",
+          "refId": "L"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Message Handling Time (per Message)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "seconds",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "hiddenSeries": false,
+      "id": 25,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avalanche_X_benchlist_benched_weight{job=\"avalanchego\"} / 10^9",
+          "interval": "",
+          "legendFormat": "AVAX Benched",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "AVAX Benched",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "hiddenSeries": false,
+      "id": 19,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avalanche_X_handler_pending",
+          "interval": "",
+          "legendFormat": "Pending Messages",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Unprocessed Incoming Messages",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "X-Chain",
+  "uid": "eE8nd3dGk",
+  "version": 3
+}
