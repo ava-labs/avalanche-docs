@@ -371,7 +371,8 @@ To import the preconfigured dashboard:
 
 * Open Grafana’s web interface
 * Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file
+* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
+* Select `Prometheus` as Data Source
 
 That’s it! You may now marvel at all the things your node does. Woohoo!
 
