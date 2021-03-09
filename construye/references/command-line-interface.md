@@ -366,17 +366,14 @@ Valor máximo de tiempo de espera del administrador de tiempo de espera adaptabl
 
 `--network-timeout-halflife` \(duration\):
 
-Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --> menor volatilidad less volatile network latency calculation.
-
-Defaults to `5m`.
-
-  
+Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --> menor volatilidad en los cálculos de la latencia en la red
+Predeterminado en `5m`.
 
 `--network-timeout-coefficient` \(duration\):
 
   
 
-Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
+Petición a los peers expirarán desp Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
 
 Defaults to `2`.
 
@@ -533,5 +530,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODcwMzU1NzNdfQ==
+eyJoaXN0b3J5IjpbLTM1ODI2NzQwMl19
 -->
