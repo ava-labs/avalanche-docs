@@ -394,11 +394,11 @@ El nodo informará que no está en buen estado si falla más de esta proporción
 ###  Health
 
 `--health-check-frequency` \(duration\):
-Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `1.1`.
+Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `30 s`.
 
-`--network-timeout-reduction` \(duration\):
-
-Reducción del tiempo de espera después de una solicitud exitosa, en nanosegundos. Por defecto es `1`.
+`--health-check-averager-halflife`  \(duration\):
+Vida media de los promedios utilizados en las verificaciones de estado (para medir la tasa de errores de mensajes, por ejemplo).
+Valor más grande --> cálculo de promedios menos volátil. El valor predeterminado es '10s'.
 
 ### Throughput Server
 
@@ -495,5 +495,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTUxMzYzNDRdfQ==
+eyJoaXN0b3J5IjpbLTgyMDcyODE5NF19
 -->
