@@ -2,7 +2,7 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3)**\)**
+## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanche-docs/pull/106)**\)**
 
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
