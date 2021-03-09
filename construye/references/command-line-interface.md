@@ -391,15 +391,10 @@ El nodo informará que no está saludable si su cola de envíos está más llena
 `--network-health-max-send-fail-rate` \(float\):
 El nodo informará que no está en buen estado si falla más de esta proporción de los envíos de mensajes. Debe estar en [0,1]. Predeterminado a `0.25`.
 
-  
-
 ###  Health
 
-  
-
 `--health-check-frequency` \(duration\):
-
-Multiplicador del tiempo de espera después de una solicitud fallida. Por defecto `1.1`.
+Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `1.1`.
 
 `--network-timeout-reduction` \(duration\):
 
@@ -500,5 +495,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjc4Njg5NTAyXX0=
+eyJoaXN0b3J5IjpbLTEyMTUxMzYzNDRdfQ==
 -->
