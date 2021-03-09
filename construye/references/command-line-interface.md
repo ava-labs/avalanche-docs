@@ -386,16 +386,10 @@ El nodo informará que no está saludable si no ha recibido un mensaje durante e
 Defaults to `1m`.
 
 `--network-health-max-portion-send-queue-full` \(float\):
-El nodo informará en mal estado si su cola de envío está más llena que esta parte. Debe estar en [0,1]. El valor predeterminado es "0.9".
-Node will report unhealthy if its send queue is more than this portion full. Must be in [0,1]. Defaults to `0.9`.
-
-  
+El nodo informará que no está saludable si su cola de envíos está más llena que esta proporción. Debe estar en [0,1]. El valor predeterminado es `0.9`.
 
 `--network-health-max-send-fail-rate` \(float\):
-
-  
-
-Node will report unhealthy if more than this portion of message sends fail. Must be in [0,1]. Defaults to `0.25`.
+El nodo informará que no está en buen estado si falla más de esta proporción de los envíos de mensajes. Debe estar en [0,1]. Predeterminado a `0.25`.
 
   
 
@@ -506,5 +500,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzkzOTM2OTJdfQ==
+eyJoaXN0b3J5IjpbMjc4Njg5NTAyXX0=
 -->
