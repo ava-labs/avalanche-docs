@@ -2,6 +2,12 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.2.3-signed AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
+
+{% hint style="danger" %}
+This is a re-release of v1.2.3 off of a signed commit. For the change log please see [v1.2.3](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3).
+{% endhint %}
+
 ## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3)**\)**
 
 {% hint style="danger" %}
