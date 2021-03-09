@@ -371,26 +371,13 @@ Predeterminado en `5m`.
 
 `--network-timeout-coefficient` \(duration\):
 
-  
-
-Petición a los peers expirarán desp Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
-
+Petición a los peers expirarán después de [`network-timeout-coefficient`] * [latencia promedio de peticiones].
 Defaults to `2`.
 
-  
-
 `--network-health-min-conn-peers` \(uint\):
-
-  
-
-Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
-
-  
+El nodo informará que no está en buen estado si está conectado a menos de este número de pares. Predeterminado a `1`.
 
 `--network-health-max-time-since-msg-received` \(duration\):
-
-  
-
 Node will report unhealthy if it hasn't received a message for this amount of time.
 
 Defaults to `1m`.
@@ -530,5 +517,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1ODI2NzQwMl19
+eyJoaXN0b3J5IjpbNDU0MTI3MzEwXX0=
 -->
