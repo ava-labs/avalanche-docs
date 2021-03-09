@@ -80,9 +80,7 @@ Si es verdadero, reintentará el bootstrapping si falla.
 
 `--bootstrap-retry-max-attempts` \(uint\):
 
-Máximo número de intentos x number of times to retry bootstrapping after a failure.
-
-
+Máximas veces que reintentará el bootstrapping después de cada falla.
 
 ### Connection Metering
 
@@ -352,7 +350,7 @@ Parte del buffer de mensajes pendientes reservado para los mensajes de los valid
 
 Porción del tiempo de la CPU de la cadena reservada para los mensajes de los validadores. El valor por defecto es `0.375`.
 
-### Network Timeout
+### Red (Network) 
 
 `--network-initial-timeout` \(duration\):
 
@@ -360,7 +358,7 @@ Valor de tiempo de espera inicial del administrador de tiempo de espera adaptabl
 
 `--network-minimum-timeout` \(duration\):
 
-Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `5s`.
+Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `2s`.
 
 `--network-maximum-timeout` \(duration\):
 
@@ -469,5 +467,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU1ODU2MjI5XX0=
+eyJoaXN0b3J5IjpbLTE3NDQ4MTM5NzJdfQ==
 -->
