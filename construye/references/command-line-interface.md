@@ -364,7 +364,73 @@ Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en 
 
 Valor máximo de tiempo de espera del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `10s`.
 
-`--network-timeout-multiplier` \(float\):
+`--network-timeout-halflife` \(duration\):
+
+Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --> menor volatilidad less volatile network latency calculation.
+
+Defaults to `5m`.
+
+  
+
+`--network-timeout-coefficient` \(duration\):
+
+  
+
+Requests to peers will time out after [`network-timeout-coefficient`] * [average request latency].
+
+Defaults to `2`.
+
+  
+
+`--network-health-min-conn-peers` \(uint\):
+
+  
+
+Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+
+  
+
+`--network-health-max-time-since-msg-received` \(duration\):
+
+  
+
+Node will report unhealthy if it hasn't received a message for this amount of time.
+
+Defaults to `1m`.
+
+  
+
+`--network-health-max-time-since-no-requests` \(duration\):
+
+  
+
+Node will report unhealthy if it hasn't received a message for this amount of time.
+
+Defaults to `1m`.
+
+  
+
+`--network-health-max-portion-send-queue-full` \(float\):
+
+  
+
+Node will report unhealthy if its send queue is more than this portion full. Must be in [0,1]. Defaults to `0.9`.
+
+  
+
+`--network-health-max-send-fail-rate` \(float\):
+
+  
+
+Node will report unhealthy if more than this portion of message sends fail. Must be in [0,1]. Defaults to `0.25`.
+
+  
+
+###  Health
+
+  
+
+`--health-check-frequency` \(duration\):
 
 Multiplicador del tiempo de espera después de una solicitud fallida. Por defecto `1.1`.
 
@@ -467,5 +533,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDQ4MTM5NzJdfQ==
+eyJoaXN0b3J5IjpbLTIwODcwMzU1NzNdfQ==
 -->
