@@ -73,6 +73,17 @@ Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se 
 
 Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usarán para arrancar el estado actual de Avalanche. Un ejemplo de configuración de este campo sería `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
+`--bootstrap-retry-enabled` \(booleano\):
+
+Si es verdadero, reintentará el bootstrapping si falla.
+ 
+
+`--bootstrap-retry-max-attempts` \(uint\):
+
+Máximo número de intentos x number of times to retry bootstrapping after a failure.
+
+
+
 ### Connection Metering
 
 `--conn-meter-max-conns` \(int\):
@@ -457,3 +468,6 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `debug-api-enabled` -&gt; Habilita el API de `debug_*`.
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzU1ODU2MjI5XX0=
+-->
