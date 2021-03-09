@@ -375,29 +375,18 @@ Petición a los peers expirarán después de [`network-timeout-coefficient`] * [
 Defaults to `2`.
 
 `--network-health-min-conn-peers` \(uint\):
-El nodo informará que no está en buen estado si está conectado a menos de este número de pares. Predeterminado a `1`.
+El nodo informará que no está saludable si está conectado a menos de este número de pares. Predeterminado a `1`.
 
 `--network-health-max-time-since-msg-received` \(duration\):
-Node will report unhealthy if it hasn't received a message for this amount of time.
-
+El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo. 
 Defaults to `1m`.
-
-  
 
 `--network-health-max-time-since-no-requests` \(duration\):
-
-  
-
-Node will report unhealthy if it hasn't received a message for this amount of time.
-
+El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo..
 Defaults to `1m`.
 
-  
-
 `--network-health-max-portion-send-queue-full` \(float\):
-
-  
-
+El nodo informará en mal estado si su cola de envío está más llena que esta parte. Debe estar en [0,1]. El valor predeterminado es "0.9".
 Node will report unhealthy if its send queue is more than this portion full. Must be in [0,1]. Defaults to `0.9`.
 
   
@@ -517,5 +506,5 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDU0MTI3MzEwXX0=
+eyJoaXN0b3J5IjpbLTExMzkzOTM2OTJdfQ==
 -->
