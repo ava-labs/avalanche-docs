@@ -2,6 +2,15 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3)**\)**
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
+{% endhint %}
+
+* Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
+* Simplified C-chain block handling.
+
 ## **v1.2.2 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**\)**
 
 {% hint style="danger" %}
