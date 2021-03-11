@@ -73,6 +73,15 @@ Las ID de Bootstrap son una serie de ID de validador. Estas identificaciones se 
 
 Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usarán para arrancar el estado actual de Avalanche. Un ejemplo de configuración de este campo sería `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Por defecto está vacío \(no intenta arrancar desde otros nodos.\)
 
+`--bootstrap-retry-enabled` \(booleano\):
+
+Si es verdadero, reintentará el bootstrapping si falla.
+ 
+
+`--bootstrap-retry-max-attempts` \(uint\):
+
+Máximas veces que reintentará el bootstrapping después de cada falla.
+
 ### Connection Metering
 
 `--conn-meter-max-conns` \(int\):
@@ -341,7 +350,7 @@ Parte del buffer de mensajes pendientes reservado para los mensajes de los valid
 
 Porción del tiempo de la CPU de la cadena reservada para los mensajes de los validadores. El valor por defecto es `0.375`.
 
-### Network Timeout
+### Red (Network) 
 
 `--network-initial-timeout` \(duration\):
 
@@ -349,19 +358,47 @@ Valor de tiempo de espera inicial del administrador de tiempo de espera adaptabl
 
 `--network-minimum-timeout` \(duration\):
 
-Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `5s`.
+Valor mínimo de tiempo de espera del gestor de tiempo de espera adaptativo, en nanosegundos. Por defecto es `2s`.
 
 `--network-maximum-timeout` \(duration\):
 
 Valor máximo de tiempo de espera del administrador de tiempo de espera adaptable, en nanosegundos. El valor por defecto es `10s`.
 
-`--network-timeout-multiplier` \(float\):
+`--network-timeout-halflife` \(duration\):
 
-Multiplicador del tiempo de espera después de una solicitud fallida. Por defecto `1.1`.
+Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --> menor volatilidad en los cálculos de la latencia en la red
+Predeterminado en `5m`.
 
-`--network-timeout-reduction` \(duration\):
+`--network-timeout-coefficient` \(duration\):
 
-Reducción del tiempo de espera después de una solicitud exitosa, en nanosegundos. Por defecto es `1`.
+Petición a los peers expirarán después de [`network-timeout-coefficient`] * [latencia promedio de peticiones].
+Defaults to `2`.
+
+`--network-health-min-conn-peers` \(uint\):
+El nodo informará que no está saludable si está conectado a menos de este número de pares. Predeterminado a `1`.
+
+`--network-health-max-time-since-msg-received` \(duration\):
+El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo. 
+Defaults to `1m`.
+
+`--network-health-max-time-since-no-requests` \(duration\):
+El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo..
+Defaults to `1m`.
+
+`--network-health-max-portion-send-queue-full` \(float\):
+El nodo informará que no está saludable si su cola de envíos está más llena que esta proporción. Debe estar en [0,1]. El valor predeterminado es `0.9`.
+
+`--network-health-max-send-fail-rate` \(float\):
+El nodo informará que no está en buen estado si falla más de esta proporción de los envíos de mensajes. Debe estar en [0,1]. Predeterminado a `0.25`.
+
+###  Health
+
+`--health-check-frequency` \(duration\):
+Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `30s`.
+
+`--health-check-averager-halflife`  \(duration\):
+Vida media de los promedios utilizados en las verificaciones de estado (para medir la tasa de errores de mensajes, por ejemplo).
+Valor más grande --> cálculo de promedios menos volátil. El valor predeterminado es `10s`
 
 ### Throughput Server
 
@@ -457,3 +494,6 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `debug-api-enabled` -&gt; Habilita el API de `debug_*`.
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0NzQ4NTc4OThdfQ==
+-->
