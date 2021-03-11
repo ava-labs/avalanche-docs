@@ -205,6 +205,22 @@ true
 
 Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
+### Scripting account creation and funding
+
+Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](../../../scripts/make_accounts.js). Download it using this command:
+
+```text
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
+```
+
+You can run the script with:
+
+```text
+truffle exec make_accounts.js --network development
+```
+
+Script will create an account and fund its C-Chain address. You can customize the number of accounts and the amount of AVAX deposited by editing the `maxAccounts` and `amount` variables in the script.
+
 ## Run Migrations
 
 Now everything is in place to run migrations and deploy the `Storage` contract:
