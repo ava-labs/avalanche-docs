@@ -54,8 +54,6 @@ Accédez à [https://faucet.avax.network](https://faucet.avax.network) et collez
 
 Le financement de votre adresse C-chain sur le réseau principal se fait via un échange inter-chaîne de X-chain à C-chain. 
 
-{% page-ref page="../plateforme/tranfert-davax-entre-les-chaines.md" %}
-
 ### Financement de votre adresse C-Chain sur votre local Testnet
 
 Déployer votre propre faucet : Suivez de [tutoriel](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
