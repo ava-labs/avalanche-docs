@@ -80,7 +80,7 @@ Vous n'avez pas besoin de fonds AVAX sur votre nœud de validation. En fait, sa 
 
 Consultez ce tutoriel sur la configuration de la surveillance des nœuds.
 
-{% page-ref page="../../tutoriels/plateforme/configuration-du-monitoring-des-noeuds.md" %}
+{% page-ref page="../../tutoriels/noeuds-et-mise-en-jeu/configuration-du-monitoring-des-noeuds.md" %}
 
 ## Délégateurs
 
