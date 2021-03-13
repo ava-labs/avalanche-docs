@@ -243,7 +243,7 @@ AvalancheGo a d'autres API, telles que [Health API](../../apis/health-api.md), q
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Sauvegardez la clé de mise en jeu et le certificat du nœud au cas où l'instance EC2 serait corrompue ou indisponible. L'ID du nœud est dérivé de sa clé d'implantation et de son certificat. Si vous perdez votre clé de jalonnement ou votre certificat, votre nœud recevra un nouvel ID de nœud, ce qui pourrait vous empêcher de bénéficier d'une récompense de jalonnement si votre nœud est un validateur. **Il est très fortement conseillé de copier la clé de mise en jeu et le certificat de votre nœud**. La première fois que vous exécutez un nœud, il génère une nouvelle paire clé de mise en jeu / certificat et les stocke dans le répertoire `/home/ubuntu/.avalanchego/staking`.
+Sauvegardez la clé de mise en jeu et le certificat du nœud au cas où l'instance EC2 serait corrompue ou indisponible. L'ID du nœud est dérivé de sa clé d'implantation et de son certificat. Si vous perdez votre clé de mise en jeu ou votre certificat, votre nœud recevra un nouvel ID de nœud, ce qui pourrait vous empêcher de bénéficier d'une récompense de mise en jeu si votre nœud est un validateur. **Il est très fortement conseillé de copier la clé de mise en jeu et le certificat de votre nœud**. La première fois que vous exécutez un nœud, il génère une nouvelle paire clé de mise en jeu / certificat et les stocke dans le répertoire `/home/ubuntu/.avalanchego/staking`.
 
 Quittez l'instance SSH en exécutant:
 
