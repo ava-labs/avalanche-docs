@@ -4,17 +4,17 @@
 
 ![](../.gitbook/assets/image%20%284%29.png)
 
-Breaking changes:
+Changements de rupture:
 
-* None
+* Aucun
 
-Behavioral changes:
+Changements de comportement:
 
-* Round times to 1 second precisions
+* Arrondir les temps à 1 seconde de précision
 
-Other changes:
+Autres changements:
 
-* Add opt-in support to not return genesis data
-* Add fixed/variable cap information to API
-* Add transaction fee data to API
+* Ajouter un support opt-in pour ne pas renvoyer les données de genèse
+* Ajouter des informations de plafond fixe / variable à l'API
+* Ajouter des données sur les frais de transaction à l'API
 
