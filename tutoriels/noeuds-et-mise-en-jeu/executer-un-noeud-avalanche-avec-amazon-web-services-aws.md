@@ -192,11 +192,11 @@ Cela redémarre également l'instance. Attendez 5 minutes, puis reconnectez-vous
 ssh ubuntu@PUBLICIP
 ```
 
-Vous êtes à nouveau connecté à l'instance EC2. Nous devons maintenant configurer notre nœud Avalanche. Pour ce faire, suivez le didacticiel Configurer le nœud d'avalanche avec le programme d'installation qui automatise le processus d'installation. Vous aurez besoin du `PUBLICIP` que nous avons mis en place plus tôt.
+Vous êtes à nouveau connecté à l'instance EC2. Nous devons maintenant configurer notre nœud Avalanche. Pour ce faire, suivez le didacticiel[ Configurer le nœud d'avalanche](executer-un-noeud-avalanche-avec-ovh.md#46d9) avec le programme d'installation qui automatise le processus d'installation. Vous aurez besoin du `PUBLICIP` que nous avons mis en place plus tôt.
 
-Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
+Votre nœud AvalancheGo devrait maintenant être en cours d'exécution et en cours de démarrage, ce qui peut prendre quelques heures. Pour vérifier si c'est fait, vous pouvez émettre un appel API en utilisant `curl`. Si vous faites la demande à partir de l'instance EC2, la demande est:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -207,9 +207,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+Une fois que le nœud a terminé le boostrap, la réponse sera:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -219,11 +219,11 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
+Vous pouvez continuer, même si AvalancheGo n'a pas terminé le bootstrap.
 
-In order to make your node a validator, you'll need its node ID. To get it, run:
+Pour faire de votre nœud un validateur, vous aurez besoin de son ID de nœud. Pour l'obtenir, exécutez:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -231,47 +231,49 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+La réponse contient l'ID du nœud.
 
-```text
+```cpp
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
+Dans l'exemple ci-dessus, l'ID de nœud est`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. CCopiez votre ID de nœud pour plus tard. Votre identifiant de nœud n'est pas un secret, vous pouvez donc simplement le coller dans un éditeur de texte.
 
-AvalancheGo has other APIs, such as the [Health API](), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+AvalancheGo a d'autres API, telles que [Health API](../../apis/health-api.md), qui peut être utilisé pour interagir avec le nœud. Certaines API sont désactivées par défaut. Pour activer ces API, modifiez la section ExecStart de `/etc/systemd/system/avalanchego.service` \(créé pendant le processus d'installation\) pour inclure des indicateurs qui activent ces points de terminaison. N'activez manuellement aucune API sauf si vous avez une raison de le faire.
 
 ![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`.
+Sauvegardez la clé de mise en jeu et le certificat du nœud au cas où l'instance EC2 serait corrompue ou indisponible. L'ID du nœud est dérivé de sa clé d'implantation et de son certificat. Si vous perdez votre clé de jalonnement ou votre certificat, votre nœud recevra un nouvel ID de nœud, ce qui pourrait vous empêcher de bénéficier d'une récompense de jalonnement si votre nœud est un validateur. **Il est très fortement conseillé de copier la clé de mise en jeu et le certificat de votre nœud**. La première fois que vous exécutez un nœud, il génère une nouvelle paire clé de mise en jeu / certificat et les stocke dans le répertoire `/home/ubuntu/.avalanchego/staking`.
 
-Exit out of the SSH instance by running:
+Quittez l'instance SSH en exécutant:
 
 ```bash
 exit
 ```
 
-Now you're no longer connected to the EC2 instance; you're back on your local machine.
+Vous n'êtes plus connecté à l'instance EC2; vous êtes de retour sur votre machine locale.
 
-To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP`.
+Pour copier la clé et le certificat d'implantation sur votre ordinateur, exécutez la commande suivante. Comme toujours, remplacez`PUBLICIP`.
 
-```text
+```cpp
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 ```
 
 Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
 
-### Upgrading Your Node <a id="9ac7"></a>
+Maintenant, votre clé de mise en jeu et votre certificat se trouvent dans le répertoire `~/aws_avalanche_backup`. **Le contenu de ce répertoire est secret**. Vous devez conserver ce répertoire sur un stockage non connecté à Internet \(comme un disque dur externe.\)
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
+### Mettre à niveau votre nœud
 
-```text
+AvalancheGo est un projet en cours et il y a des mises à niveau de version régulières. La plupart des mises à niveau sont recommandées mais non obligatoires. Un préavis sera donné pour les mises à niveau qui ne sont pas rétrocompatibles. Pour mettre à jour votre nœud vers la dernière version, effectuez une connexion SSH dans votre instance AWS comme auparavant et exécutez à nouveau le script du programme d'installation.
+
+```cpp
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+Votre machine exécute maintenant la dernière version d'AvalancheGo. Pour voir l'état du service AvalancheGo, exécutez `sudo systemctl status avalanchego.`
 
-## Wrap Up
+## Récapitulatif
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ]()for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+C'est tout! Vous disposez désormais d'un nœud AvalancheGo en cours d'exécution sur une instance AWS EC2. Nous vous recommandons de [configurer la surveillance des nœuds](configuration-du-monitoring-des-noeuds.md) pour votre nœud AvalancheGo. Nous vous recommandons également de configurer des alertes de facturation AWS pour ne pas être surpris lorsque la facture arrive. Si vous avez des commentaires sur ce tutoriel, ou autre chose, envoyez-nous un message sur [Telegram](https://t.co/gDb4teV2L6?amp=1).
 
