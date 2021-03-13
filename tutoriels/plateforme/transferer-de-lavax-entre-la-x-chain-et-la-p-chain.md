@@ -247,5 +247,60 @@ Notez que le solde que nous voyons est le montant exporté de la X-Chain \(`4.00
 
 Maintenant, déplaçons AVAX sur la P-Chain vers la X-Chain.
 
+Comme précédemment, il s'agit également d'une opération à deux transactions:
 
+* Exportation depuis la P-Chain
+* Importer dans la X-Chain
+
+### Étape 1 - Exporter de l'AVAX à partir de la P-Chain
+
+Pour ce faire, appelez [`platform.exportAVAX`](../../apis/platform-api-p-chain.md#platform-exportavax):
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.exportAVAX",
+    "params": {
+        "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
+        "amount":3000000,
+        "changeAddr":"P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
+        "username":"myUsername",
+        "password":"myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+Où `to` est l'adresse X-Chain à laquelle l'AVAX est envoyé.
+
+Cela renvoie l'ID de transaction et nous pouvons vérifier que la transaction a été validée avec un autre appel à [`platform.getTxStatus`](../../apis/platform-api-p-chain.md#platform-gettxstatus). Encore une fois, assurez-vous que le montant que vous envoyez dépasse les frais de transaction.
+
+### Étape 1 - Importer de l'AVAX vers X-Chain
+
+Pour terminer notre transfert de la P-Chain vers la X-Chain, appelez [`avm.importAVAX`](../../apis/avm-api-x-chain.md#avm-importavax):
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.importAVAX",
+    "params" :{
+        "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
+        "sourceChain":"P",
+        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+Notez que `to` est la même adresse spécifiée dans notre appel à [`platform.exportAVAX`](../../apis/platform-api-p-chain.md#platform-exportavax).
+
+Comme auparavant, nous pouvons appeler `avm.getBalance` pour vérifier que les fonds ont été reçus. Le solde aurait dû augmenter de `3 000 000` nAVAX soit `0.003` AVAX moins les frais de transaction.
+
+## Récapitulatif
+
+Vous pouvez maintenant permuter AVAX dans les deux sens entre la X-Chain et la P-Chain à la fois en utilisant le portefeuille Avalanche et en appelant les appels API appropriés sur un nœud Avalanche.
+
+Vous pouvez maintenant utiliser les jetons sur la P-Chain pour ajouter [un nœud en tant que validateur](ajouter-un-validateur.md) sur le réseau principal.
 
