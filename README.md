@@ -11,6 +11,22 @@ description: >-
 {% tab title="Vous venez d\'Ethereum?" %}
 
 
+{% page-ref page="tutoriels/plateforme/deployer-un-contrat-intelligent.md" %}
+
+{% page-ref page="./" %}
+{% endtab %}
+
+{% tab title="Portefeuille Avalanche" %}
+{% page-ref page="./" %}
+{% endtab %}
+
+{% tab title="Mise en jeu" %}
+{% page-ref page="commencer.md" %}
+
+{% page-ref page="tutoriels/noeuds-et-mise-en-jeu.md" %}
+{% endtab %}
+
+{% tab title="Avancée" %}
 {% page-ref page="tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
 
 {% page-ref page="tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
@@ -21,23 +37,7 @@ description: >-
 
 {% page-ref page="tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
 {% endtab %}
-
-{% tab title="Portefeuille Avalanche" %}
-
-{% endtab %}
-
-{% tab title="Mise en jeu" %}
-
-{% endtab %}
-
-{% tab title="Avancée" %}
-
-{% endtab %}
 {% endtabs %}
-
-
-
-## 
 
 ## Avalanche
 
