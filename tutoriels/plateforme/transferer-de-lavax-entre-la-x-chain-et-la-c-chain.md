@@ -262,7 +262,7 @@ La réponse devrait ressembler à ceci :
 
 ## Récapitulatif
 
-Vous pouvez maintenant permuter AVAX dans les deux sens entre la X-Chain, C-Chain et la P-Chain. À l'avenir, Avalanche prendra en charge des échanges atomiques plus généralisés entre les chaînes.
+Vous pouvez maintenant permuter AVAX dans les deux sens entre la X-Chain et la C-Chain, à la fois en utilisant le portefeuille Avalanche et en appelant les appels API appropriés sur un nœud Avalanche.
 
 
 
