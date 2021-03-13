@@ -123,5 +123,117 @@ Le script est terminé et vous devriez voir à nouveau l'invite système.
 
 ## Post-installation
 
+AvalancheGo devrait fonctionner en arrière-plan en tant que service. Vous pouvez vérifier qu'il fonctionne avec:
 
+```cpp
+sudo systemctl status avalanchego
+```
+
+Cela imprimera les derniers journaux du nœud, qui devraient ressembler à ceci:
+
+```cpp
+● avalanchego.service - AvalancheGo systemd service
+Loaded: loaded (/etc/systemd/system/avalanchego.service; enabled; vendor preset: enabled)
+Active: active (running) since Tue 2021-01-05 10:38:21 UTC; 51s ago
+Main PID: 2142 (avalanchego)
+Tasks: 8 (limit: 4495)
+Memory: 223.0M
+CGroup: /system.slice/avalanchego.service
+└─2142 /home/ubuntu/avalanche-node/avalanchego --plugin-dir=/home/ubuntu/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=
+
+Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: initializing last accepted block as 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
+Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: initializing consensus engine
+Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] avalanchego/api/server.go#143: adding route /ext/bc/11111111111111111111111111111111LpoYY
+Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] avalanchego/api/server.go#88: HTTP API server listening on ":9650"
+Jan 05 10:38:58 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:58] <P Chain> avalanchego/snow/engine/common/bootstrapper.go#185: Bootstrapping started syncing with 1 vertices in the accepted frontier
+Jan 05 10:39:02 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:02] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 2500 blocks
+Jan 05 10:39:04 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:04] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 5000 blocks
+Jan 05 10:39:06 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:06] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 7500 blocks
+Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 10000 blocks
+Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> 
+```
+
+Notez `active (running)` qui indique que le service fonctionne correctement. Vous devrez peut-être appuyer sur `q` pour revenir à l'invite de commande.
+
+Pour connaître votre NodeID, qui est utilisé pour identifier votre nœud sur le réseau, exécutez la commande suivante:
+
+```cpp
+sudo journalctl -u avalanchego | grep "node's ID"
+```
+
+Il produira une sortie comme:
+
+```cpp
+Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
+```
+
+Ajoutez `NodeID-` à la valeur pour obtenir, par exemple, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Stockez cela; il sera nécessaire pour le jalonnement ou la recherche de votre nœud.
+
+Votre nœud devrait être en cours de bootstrap maintenant. Vous pouvez surveiller la progression en exécutant la commande suivante:
+
+```cpp
+sudo journalctl -u avalanchego -f
+```
+
+Appuyez sur `ctrl + C` lorsque vous souhaitez arrêter la lecture de la sortie du nœud.
+
+## Arrêter le nœud
+
+Pour arrêter AvalancheGo, exécutez:
+
+```cpp
+sudo systemctl stop avalanchego
+```
+
+Pour le relancer, exécutez:
+
+```cpp
+sudo systemctl start avalanchego
+```
+
+## Mise à niveau du nœud
+
+AvalancheGo est un projet en cours et il y a des mises à niveau de version régulières. La plupart des mises à niveau sont recommandées mais non obligatoires. Un préavis sera donné pour les mises à niveau qui ne sont pas rétrocompatibles. Lorsqu'une nouvelle version du nœud est publiée, vous remarquerez des lignes de journal comme:
+
+```cpp
+Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
+```
+
+Il est recommandé de toujours mettre à niveau vers la dernière version, car les nouvelles versions apportent des corrections de bogues, de nouvelles fonctionnalités et des mises à niveau.
+
+Pour mettre à niveau votre nœud, exécutez simplement à nouveau le script du programme d'installation:
+
+```cpp
+./avalanchego-installer.sh
+```
+
+Il détectera que vous avez déjà installé AvalancheGo:
+
+```cpp
+AvalancheGo installer
+---------------------
+Preparing environment...
+Found 64bit Intel/AMD architecture...
+Found AvalancheGo systemd service already installed, switching to upgrade mode.
+Stopping service...
+```
+
+Il mettra ensuite à niveau votre nœud vers la dernière version, et une fois terminé, redémarrera le nœud et imprimera les informations sur la dernière version:
+
+```cpp
+Node upgraded, starting service...
+New node version:
+avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413bbac158d6626f712d2]
+Done!
+```
+
+## Et ensuite?
+
+Voilà, vous exécutez un nœud AvalancheGo! Toutes nos félicitations! Faites-nous savoir que vous l'avez fait sur notre [Twitter](https://twitter.com/avalanche_fr), [Telegram](https://t.me/Avalanche_fr) ou [Reddit](https://www.reddit.com/r/Avax/)!
+
+Si vous êtes sur un réseau résidentiel \(IP dynamique\), n'oubliez pas de configurer la redirection de port. Si vous êtes sur un fournisseur de services cloud, vous êtes prêt à partir.
+
+Vous pouvez désormais [interagir avec votre nœud](../../apis/emettre-des-appels-dapi.md), [mettre en jeu vos jetons](deleguer-a-un-noeud.md) ou améliorer votre installation en configurant la [surveillance des nœuds](configuration-du-monitoring-des-noeuds.md) pour avoir un meilleur aperçu de ce que fait votre nœud.
+
+Si vous avez des questions ou avez besoin d'aide, n'hésitez pas à nous contacter sur notre [Telegram](https://t.me/Avalanche_fr) !
 
