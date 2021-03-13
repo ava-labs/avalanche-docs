@@ -6,7 +6,7 @@
 
 ## Conditions
 
-
+Vous avez terminé l'[exécution d'un nœud Avalanche](../../commencer.md) et vous connaissez l'[architecture d'Avalanche](../../apprendre/presentation-du-systeme/). Vous avez également effectué un swap cross-chain via le tutoriel Transférer AVAX entre la X-Chain et la C-Chain pour obtenir des fonds sur votre adresse C-Chain.
 
 
 
