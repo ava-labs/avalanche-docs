@@ -4,7 +4,7 @@
 | :--- | :--- |
 | \*\*\*\*[**Ajouter un validateur**](../noeuds-et-mise-en-jeu/ajouter-un-validateur.md) | Ajouter un nœud au [réseau primaire](../../apprendre/presentation-du-systeme/) et un [sous-réseau](../../apprendre/presentation-du-systeme/#sous-reseaux-subnets) sur Avalanche |
 | \*\*\*\*[**Installation OVH de A à Z**](instalation-ovh-de-a-a-z.md) | Lancer un VPS OVH en suivant un tutoriel pas-à-pas |
-| \*\*\*\*[**Déléguer à un nœud**](deleguer-a-un-noeud.md) | Apprendre à déléguer à un nœud et comment bien le choisir |
+| \*\*\*\*[**Déléguer à un nœud**](../noeuds-et-mise-en-jeu/deleguer-a-un-noeud.md) | Apprendre à déléguer à un nœud et comment bien le choisir |
 | \*\*\*\*[**Sécurisation d'un serveur VPS**](securisation-dun-serveur-vps.md) | Apprendre à sécuriser votre VPS et avoir les bons automatismes |
 | \*\*\*\*[**Créer une nouvelle blockchain**](creer-une-nouvelle-blockchain.md) | Créer une blockchain en créant une nouvelle instance de la [machine virtuelle Avalanche](../../apprendre/presentation-du-systeme/#chaine-dechange-x-chain) |
 | \*\*\*\*[**Créer un réseau local testnet**](creer-un-reseau-local-testnet.md) | Créer un réseau local testnet d'Avalanche |
