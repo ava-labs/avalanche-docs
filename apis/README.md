@@ -1,4 +1,4 @@
-# APIs
+# AvalancheGo APIs
 
 Les clients interagissent avec Avalanche via des appels d'API aux nœuds. Les paramètres numériques dans les appels d'API peuvent être donnés sous forme de strings \(par exemple, `"5"` ou `5` sont tous les deux ok pour un argument entier\). Les valeurs de retour numériques sont toujours données sous forme de chaînes \(par exemple `"5"` au lieu de `5`\). Dans les exemples, les appels d'API sont effectués vers un nœud écoutant le trafic HTTP sur `127.0.0.1:9650`.
 

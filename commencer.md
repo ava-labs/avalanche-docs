@@ -4,7 +4,7 @@ description: >-
   et d'interagir avec le réseau.
 ---
 
-# Pour commencer
+# Pour commencer: exécuter un nœud Avalanche
 
 Dans ce tutoriel \(durée estimée: 10 minutes\), nous allons:
 
