@@ -610,6 +610,8 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> .bashrc
 ```cpp
 source .bashrc
 ```
+
+puis reprendre à `./scripts/build.sh`
 {% endhint %}
 
 ### Monitorer son node avec htop ou bpytop <a id="a6d8"></a>
