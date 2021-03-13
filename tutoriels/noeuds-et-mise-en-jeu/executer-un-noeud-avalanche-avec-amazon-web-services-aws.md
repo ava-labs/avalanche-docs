@@ -138,61 +138,61 @@ Sélectionnez l'instance que vous venez de créer. Cela associera la nouvelle ad
 
 ![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo <a id="829e"></a>
+## Configurer AvalancheGo <a id="829e"></a>
 
-Go back to the EC2 Dashboard and select `Running Instances`.
+Revenez au tableau de bord EC2 et sélectionnez `Running Instances`.
 
 ![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Select the newly created EC2 instance. This opens a details panel with information about the instance.
+Sélectionnez l'instance EC2 nouvellement créée. Cela ouvre un panneau de détails avec des informations sur l'instance.
 
 ![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
+Copiez le champ à utiliser plus tard`IPv4 Public IP` field to use later.A partir de maintenant, nous appelons cette valeur `PUBLICIP`.
 
-**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
+**N'oubliez pas: les commandes de terminal ci-dessous supposent que vous exécutez Linux. Les commandes peuvent différer pour MacOS ou d'autres systèmes d'exploitation. Lors du copier-coller d'une commande à partir d'un bloc de code, copiez et collez l'intégralité du texte dans le bloc.**
 
-Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
+Connectez-vous à l'instance AWS depuis votre machine locale. Ouvrez un terminal \(essayez le raccourci `CTRL + ALT + T`\) et accédez au répertoire contenant le fichier `.pem` que vous avez téléchargé plus tôt
 
-Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
+Bougez le fichier `.pem` vers `$HOME/.ssh` \(où `.pem` est généralement localisé\) avec:
 
-```bash
+```cpp
 mv avalanche.pem ~/.ssh
 ```
 
-Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
+Ajoutez-le à l'agent SSH afin que nous puissions l'utiliser pour SSH dans votre instance EC2 et marquez-le comme lecture seule.
 
-```bash
+```cpp
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-SSH into the instance. \(Remember to replace `PUBLICIP` with the public IP field from earlier.\)
+SSH dans l'instance. \(N'oubliez pas de remplacer `PUBLICIP` par le champ IP public antérieur.\)
 
-```text
+```cpp
 ssh ubuntu@PUBLICIP
 ```
 
-If the permissions are **not** set correctly, you will see the following error.
+Si les autorisations **ne sont pas** définies correctement, vous verrez l'erreur suivante.
 
 ![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
 
-You are now logged into the EC2 instance.
+Vous êtes maintenant connecté à l'instance EC2.
 
 ![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
-If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
+Si vous ne l'avez pas déjà fait, mettez à jour l'instance pour vous assurer qu'elle dispose du dernier système d'exploitation et des dernières mises à jour de sécurité:
 
-```text
+```cpp
 sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-This also reboots the instance. Wait 5 minutes, then log in again by running this command on your local machine:
+Cela redémarre également l'instance. Attendez 5 minutes, puis reconnectez-vous en exécutant cette commande sur votre machine locale:
 
-```bash
+```cpp
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer]() tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
+Vous êtes à nouveau connecté à l'instance EC2. Nous devons maintenant configurer notre nœud Avalanche. Pour ce faire, suivez le didacticiel Configurer le nœud d'avalanche avec le programme d'installation qui automatise le processus d'installation. Vous aurez besoin du `PUBLICIP` que nous avons mis en place plus tôt.
 
 Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
 
