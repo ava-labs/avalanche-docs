@@ -140,7 +140,7 @@ La réponse confirme que notre sous-réseau a été créé :
 
 Pour ajouter un validateur à un sous-réseau veuillez suivre le lien ci-dessous.
 
-{% page-ref page="ajouter-un-validateur.md" %}
+{% page-ref page="../noeuds-et-mise-en-jeu/ajouter-un-validateur.md" %}
 
 
 

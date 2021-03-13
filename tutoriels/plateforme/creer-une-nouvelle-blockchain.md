@@ -22,7 +22,7 @@ Le sous-réseau a besoin de validateurs pour valider les blockchains.
 
 Assurez-vous que le sous-réseau qui validera vôtre blockchain contient au moins des validateurs `snow-sample-size` dedans. \(Rappelez-vous que `snow-sample-size` est l'un des arguments de ligne de commande lors du démarrage d'un nœud. Sa valeur par défaut est 20.\)
 
-{% page-ref page="ajouter-un-validateur.md" %}
+{% page-ref page="../noeuds-et-mise-en-jeu/ajouter-un-validateur.md" %}
 
 ## Créer les données Genesis
 

@@ -8,7 +8,7 @@ La P-Chain gère les métadonnées sur Avalanche. Cela inclut le suivi des nœud
 
 Si vous souhaitez lancer votre nœud sur un VPS et avoir un tutoriel pas-à-pas merci de regarder ce tutoriel:
 
-{% page-ref page="instalation-ovh-de-a-a-z.md" %}
+{% page-ref page="../plateforme/instalation-ovh-de-a-a-z.md" %}
 
 {% hint style="danger" %}
 Notez qu'une fois que vous émettez la transaction pour ajouter un nœud en tant que validateur, il n'y a aucun moyen de modifier les paramètres. **Vous ne pouvez pas annuler la mise plus tôt ni modifier le montant de la mise, l'ID du nœud ou l'adresse de récompense.** Veuillez vous assurer que vous utilisez les valeurs correctes dans les appels API ci-dessous. Si vous n’êtes pas sûr, demandez de l’aide sur [Telegram](https://t.me/Avalanche_fr), [Discord ](https://chat.avax.network/)où la [FAQ du développeur](http://support.avalabs.org/en/collections/2618154-developer-faq).
@@ -239,7 +239,7 @@ Lorsque l'heure atteint `1584021450`, ce nœud commencera à valider le réseau 
 
 ### Émettre une transaction de validation de sous-réseau <a id="issuing-a-subnet-validator-transaction"></a>
 
-Ajoutons maintenant le même nœud à un sous-réseau. Ce qui suit aura plus de sens si vous avez déjà suivi ce tutoriel sur la [création d’un sous-réseau](creer-un-sous-reseau-subnet.md). À l'heure actuelle, vous ne pouvez ajouter des validateurs aux sous-réseaux qu'avec des appels d'API, pas avec le portefeuille Avalanche.
+Ajoutons maintenant le même nœud à un sous-réseau. Ce qui suit aura plus de sens si vous avez déjà suivi ce tutoriel sur la [création d’un sous-réseau](../plateforme/creer-un-sous-reseau-subnet.md). À l'heure actuelle, vous ne pouvez ajouter des validateurs aux sous-réseaux qu'avec des appels d'API, pas avec le portefeuille Avalanche.
 
 Supposons que le sous-réseau a un ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, et l'`username` détient au moins 2 clés de contrôle.
 

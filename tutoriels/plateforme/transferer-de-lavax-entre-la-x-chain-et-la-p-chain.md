@@ -302,5 +302,5 @@ Comme auparavant, nous pouvons appeler `avm.getBalance` pour vérifier que les f
 
 Vous pouvez maintenant permuter AVAX dans les deux sens entre la X-Chain et la P-Chain à la fois en utilisant le portefeuille Avalanche et en appelant les appels API appropriés sur un nœud Avalanche.
 
-Vous pouvez maintenant utiliser les jetons sur la P-Chain pour ajouter [un nœud en tant que validateur](ajouter-un-validateur.md) sur le réseau principal.
+Vous pouvez maintenant utiliser les jetons sur la P-Chain pour ajouter [un nœud en tant que validateur](../noeuds-et-mise-en-jeu/ajouter-un-validateur.md) sur le réseau principal.
 

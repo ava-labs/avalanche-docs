@@ -335,7 +335,7 @@ Remarque: il n'y a pas de frais de transaction pour les transactions d'importati
 
 Une fois que votre AVAX a été transféré vers la C-Chain, vous pouvez immédiatement commencer à exécuter des contrats intelligents. 
 
-{% page-ref page="deployer-un-contrat-intelligent.md" %}
+{% page-ref page="../contrats-intelligents/deployer-un-contrat-intelligent.md" %}
 
 ### Exporter AVAX de la C-Chain à la X-Chain <a id="export-avax-from-the-c-chain-to-the-x-chain"></a>
 

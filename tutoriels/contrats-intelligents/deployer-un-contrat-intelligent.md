@@ -54,7 +54,7 @@ Accédez à [https://faucet.avax.network](https://faucet.avax.network) et collez
 
 Le financement de votre adresse C-chain sur le réseau principal se fait via un échange inter-chaîne de X-chain à C-chain. 
 
-{% page-ref page="tranfert-davax-entre-les-chaines.md" %}
+{% page-ref page="../plateforme/tranfert-davax-entre-les-chaines.md" %}
 
 ### Financement de votre adresse C-Chain sur votre local Testnet
 

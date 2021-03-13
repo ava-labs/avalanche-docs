@@ -11,7 +11,7 @@ description: >-
 {% tab title="Vous venez d\'Ethereum?" %}
 
 
-{% page-ref page="tutoriels/plateforme/deployer-un-contrat-intelligent.md" %}
+{% page-ref page="tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md" %}
 
 {% page-ref page="./" %}
 {% endtab %}
@@ -23,7 +23,7 @@ description: >-
 {% tab title="Mise en jeu" %}
 {% page-ref page="commencer.md" %}
 
-{% page-ref page="tutoriels/noeuds-et-mise-en-jeu.md" %}
+{% page-ref page="tutoriels/noeuds-et-mise-en-jeu/" %}
 {% endtab %}
 
 {% tab title="Avancée" %}

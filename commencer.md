@@ -342,7 +342,7 @@ La réponse devrait être :
 
 IDe la même manière, nous avons pu vérifier `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` pour voir que les AVAX que nous avons envoyé a été déduit de son solde, ainsi que les frais de transaction.
 
-{% page-ref page="tutoriels/plateforme/ajouter-un-validateur.md" %}
+{% page-ref page="tutoriels/noeuds-et-mise-en-jeu/ajouter-un-validateur.md" %}
 
 {% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
 
