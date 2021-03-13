@@ -26,6 +26,7 @@
     * [Ajouter un validateur](tutoriels/plateforme/ajouter-un-validateur.md)
     * [Installation OVH de A à Z](tutoriels/plateforme/instalation-ovh-de-a-a-z.md)
     * [Transférer de l'AVAX entre la X-Chain et  la C-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-c-chain.md)
+    * [Transférer de l'AVAX entre la X-Chain et la P-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-p-chain.md)
     * [Déléguer à un nœud](tutoriels/plateforme/deleguer-a-un-noeud.md)
     * [Sécurisation d'un serveur VPS](tutoriels/plateforme/securisation-dun-serveur-vps.md)
     * [Créer une nouvelle blockchain](tutoriels/plateforme/creer-une-nouvelle-blockchain.md)

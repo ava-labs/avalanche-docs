@@ -14,6 +14,8 @@ Pour envoyer de l'AVAX, vous devez avoir du AVAX! Vous pouvez obtenir le vrai AV
 
 Le moyen le plus simple de transférer de l'AVAX entre les chaînes est d'utiliser le [portefeuille Avalanche](https://wallet.avax.network/), qui est un moyen non custodial et sécurisé d'accéder et de déplacer de l'AVAX.
 
+Le code source du portefeuille Avalanche peut être trouvé [ici](https://github.com/ava-labs/avalanche-wallet).
+
 ### Étape 1 - Ouvrez le portefeuille Avalanche
 
 ![](../../.gitbook/assets/image%20%2830%29.png)
