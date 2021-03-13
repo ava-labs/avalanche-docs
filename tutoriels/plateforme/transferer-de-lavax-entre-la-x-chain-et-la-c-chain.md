@@ -34,7 +34,7 @@ Après une connexion réussie, vous verrez votre solde, votre portefeuille d'act
 
 
 
-![](../../.gitbook/assets/image%20%2833%29.png)
+![](../../.gitbook/assets/image%20%2834%29.png)
 
 La fonctionnalité de transfert de jetons entre les chaînes se trouve sur l'onglet **Cross Chain**.
 
@@ -56,7 +56,7 @@ Appuyez sur **Confirm,** puis sur **Transfer** pour lancer le transfert.
 
 Un transfert inter-chaîne est un processus en deux étapes: d'abord une transaction pour exporter les fonds de la X-Chain, et une autre pour les importer dans la C-Chain. Le portefeuille fera les deux et montrera sa progression tout en le faisant.
 
-![](../../.gitbook/assets/image%20%2834%29.png)
+![](../../.gitbook/assets/image%20%2835%29.png)
 
 C'est tout! Vous avez transféré de l'AVAX de la X-Chain vers la C-Chain! Vous pouvez désormais les utiliser pour déployer des contrats intelligents sur C-Chain.
 
