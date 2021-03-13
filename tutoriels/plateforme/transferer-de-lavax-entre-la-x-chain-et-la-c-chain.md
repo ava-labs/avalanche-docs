@@ -18,7 +18,7 @@ Le code source du portefeuille Avalanche peut être trouvé [ici](https://github
 
 ### Étape 1 - Ouvrez le portefeuille Avalanche
 
-![](../../.gitbook/assets/image%20%2830%29.png)
+![](../../.gitbook/assets/image%20%2831%29.png)
 
 Sélectionnez **"Acces Wallet"** pour accéder à votre portefeuille. Pour connecter le portefeuille à un réseau autre que le réseau principal d'Avalanche, sélectionnez **"Mainnet"** et choisissez le réseau auquel vous connecter.
 
@@ -26,7 +26,7 @@ Sélectionnez **"Acces Wallet"** pour accéder à votre portefeuille. Pour conne
 
 Vous pouvez accéder à votre portefeuille en utilisant la clé privée, la phrase clé mnémonique, le fichier keystore ou Ledger Nano S. Les transferts C-Chain via Ledger ne sont pas encore pris en charge.
 
-![](../../.gitbook/assets/image%20%2829%29.png)
+![](../../.gitbook/assets/image%20%2830%29.png)
 
 Après une connexion réussie, vous verrez votre solde, votre portefeuille d'actifs et diverses autres informations.
 
@@ -34,7 +34,7 @@ Après une connexion réussie, vous verrez votre solde, votre portefeuille d'act
 
 
 
-![](../../.gitbook/assets/image%20%2831%29.png)
+![](../../.gitbook/assets/image%20%2833%29.png)
 
 La fonctionnalité de transfert de jetons entre les chaînes se trouve sur l'onglet **Cross Chain**.
 
@@ -42,7 +42,7 @@ La fonctionnalité de transfert de jetons entre les chaînes se trouve sur l'ong
 
 Vous serez présenté avec un choix pour la chaîne **source** et la chaîne de **destination**. Sélectionnez respectivement X-Chain et C-Chain. Vous verrez vos soldes X et C et un champ de saisie pour saisir le montant à transférer de la chaîne source à la chaîne de destination.
 
-![](../../.gitbook/assets/image%20%2828%29.png)
+![](../../.gitbook/assets/image%20%2829%29.png)
 
 Entrez le montant \(amount\) que vous souhaitez transférer de la X-Chain vers la C-Chain.
 
@@ -56,7 +56,7 @@ Appuyez sur **Confirm,** puis sur **Transfer** pour lancer le transfert.
 
 Un transfert inter-chaîne est un processus en deux étapes: d'abord une transaction pour exporter les fonds de la X-Chain, et une autre pour les importer dans la C-Chain. Le portefeuille fera les deux et montrera sa progression tout en le faisant.
 
-![](../../.gitbook/assets/image%20%2832%29.png)
+![](../../.gitbook/assets/image%20%2834%29.png)
 
 C'est tout! Vous avez transféré de l'AVAX de la X-Chain vers la C-Chain! Vous pouvez désormais les utiliser pour déployer des contrats intelligents sur C-Chain.
 

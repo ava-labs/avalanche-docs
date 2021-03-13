@@ -16,3 +16,41 @@ Le moyen le plus simple de transférer de l'AVAX entre les chaînes est d'utilis
 
 Le code source du portefeuille Avalanche peut être trouvé [ici](https://github.com/ava-labs/avalanche-wallet).
 
+### Étape 1 - Ouvrez le portefeuille Avalanche
+
+![](../../.gitbook/assets/image%20%2831%29.png)
+
+Sélectionnez **"Acces Wallet"** pour accéder à votre portefeuille. Pour connecter le portefeuille à un réseau autre que le réseau principal d'Avalanche, sélectionnez **"Mainnet"** et choisissez le réseau auquel vous connecter.
+
+### Étape 2 - Connectez-vous à votre portefeuille
+
+Vous pouvez accéder à votre portefeuille en utilisant la clé privée, la phrase clé mnémonique, le fichier keystore ou Ledger Nano S. Les transferts C-Chain via Ledger ne sont pas encore pris en charge.
+
+![](../../.gitbook/assets/image%20%2830%29.png)
+
+Après une connexion réussie, vous verrez votre solde, votre portefeuille d'actifs et diverses autres informations.
+
+### Étape 3 - Accédez à l'onglet Cross Chain
+
+
+
+![](../../.gitbook/assets/image%20%2833%29.png)
+
+La fonctionnalité de transfert de jetons entre les chaînes se trouve sur l'onglet **Cross Chain**.
+
+### Étape 4 - Entrez le montant à transférer
+
+Vous serez présenté avec un choix pour la chaîne **source** et la chaîne de **destination**. Sélectionnez respectivement X-Chain et P-Chain. Vous verrez vos soldes X et P et un champ de saisie pour saisir le montant à transférer de la chaîne source à la chaîne de destination.
+
+![](../../.gitbook/assets/image%20%2828%29.png)
+
+Entrez le montant que vous souhaitez transférer de la X-Chain vers la P-Chain.
+
+### Étape 5 - Confirmer la transaction <a id="etape-5-confirmer-la-transaction"></a>
+
+![](../../.gitbook/assets/image%20%2832%29.png)
+
+Appuyez sur **Confirm,** puis sur **Transfer** pour lancer le transfert.
+
+### 
+
