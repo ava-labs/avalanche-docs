@@ -10,6 +10,16 @@ description: >-
 {% tabs %}
 {% tab title="Vous venez d\'Ethereum?" %}
 
+
+{% page-ref page="tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
+
+{% page-ref page="tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
 {% endtab %}
 
 {% tab title="Portefeuille Avalanche" %}
@@ -21,17 +31,11 @@ description: >-
 {% endtab %}
 
 {% tab title="Avancée" %}
-{% page-ref page="tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
 
-{% page-ref page="tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
-
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
-
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md" %}
-
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
 {% endtab %}
 {% endtabs %}
+
+
 
 ## 
 
