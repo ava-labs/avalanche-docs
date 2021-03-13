@@ -48,6 +48,7 @@
     * [Déployer un contrat intelligent en utilisant Remix et MetaMask](tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md)
     * [Utilisation de Truffle avec la C-Chain d'Avalanche](tutoriels/contrats-intelligents/utilisation-de-truffle-avec-la-c-chain-davalanche.md)
   * [Actifs Numériques Intelligents](tutoriels/actifs-numeriques-intelligents/README.md)
+    * [Créer un token ERC-20](tutoriels/actifs-numeriques-intelligents/creer-un-token-erc-20.md)
     * [Créer un actif à capitalisation fixe](tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md)
     * [Créer un actif à capitalisation variable](tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md)
     * [Création d'un NFT - Partie 1](tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md)
