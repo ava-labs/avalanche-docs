@@ -9,9 +9,10 @@
   * [Frais de transaction](apprendre/presentation-du-systeme/frais-de-transaction.md)
 * [Les bases de la blockchain](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
+* [Forum](https://forum.avax.network/)
 * [Communauté](apprendre/communaute.md)
 
-## Construire
+## Créer <a id="construire"></a>
 
 ---
 
