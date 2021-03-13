@@ -7,6 +7,34 @@ description: >-
 
 # Documentation du développeur
 
+{% tabs %}
+{% tab title="Vous venez d\'Ethereum?" %}
+
+{% endtab %}
+
+{% tab title="Portefeuille Avalanche" %}
+
+{% endtab %}
+
+{% tab title="Mise en jeu" %}
+
+{% endtab %}
+
+{% tab title="Avancée" %}
+{% page-ref page="tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
+
+{% page-ref page="tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md" %}
+
+{% page-ref page="tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
+{% endtab %}
+{% endtabs %}
+
+## 
+
 ## Avalanche
 
 [Avalanche](https://fr.avalabs.org/) est une plateforme open-source pour le lancement d'[applications décentralisées](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) et de déploiements de [blockchains](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) pour les entreprise dans un écosystème interopérable et hautement évolutif. Avalanche vous donne un contrôle complet sur les couches réseau et application, vous aidant à créer tout ce que vous pouvez imaginer.
