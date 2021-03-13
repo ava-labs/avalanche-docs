@@ -33,7 +33,6 @@
     * [Tranfert d'AVAX entre X-Chain, P-Chain et C-Chain](tutoriels/plateforme/tranfert-davax-entre-les-chaines.md)
   * [Nœuds et mise en jeu](tutoriels/noeuds-et-mise-en-jeu/README.md)
     * [Ajouter un validateur](tutoriels/noeuds-et-mise-en-jeu/ajouter-un-validateur.md)
-    * [Untitled](tutoriels/noeuds-et-mise-en-jeu/untitled.md)
     * [Maintenir un nœud Avalanche](https://www.youtube.com/watch?v=o4Fww-sHoaQ&ab_channel=Avalanche)
     * [Exécutez un nœud Avalanche et devenez validateur](https://www.youtube.com/watch?v=ZyQPeSSCbYU&ab_channel=Avalanche)
     * [Exécuter un nœud Avalanche avec Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0&ab_channel=Avalanche)
