@@ -10,7 +10,7 @@ Les jetons AVAX existent à la fois sur la X-Chain, où ils peuvent être échan
 
 ### Hypothèses <a id="requirements"></a>
 
-Nous supposons que le lecteur a déjà terminé le guide de d'[installation sur OVH](instalation-ovh-de-a-a-z.md) et est familiarisé avec l'[architecture du réseau d'Avalanche](../../apprendre/presentation-du-systeme/).
+Nous supposons que le lecteur a déjà terminé le guide de d'[installation sur OVH]() et est familiarisé avec l'[architecture du réseau d'Avalanche](../../apprendre/presentation-du-systeme/).
 
 ### Exporter AVAX sur la X-Chain vers la P-Chain <a id="export-avax-from-the-x-chain-to-the-p-chain"></a>
 

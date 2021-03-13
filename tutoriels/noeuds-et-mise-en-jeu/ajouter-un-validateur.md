@@ -8,8 +8,6 @@ La P-Chain gère les métadonnées sur Avalanche. Cela inclut le suivi des nœud
 
 Si vous souhaitez lancer votre nœud sur un VPS et avoir un tutoriel pas-à-pas merci de regarder ce tutoriel:
 
-{% page-ref page="../plateforme/instalation-ovh-de-a-a-z.md" %}
-
 {% hint style="danger" %}
 Notez qu'une fois que vous émettez la transaction pour ajouter un nœud en tant que validateur, il n'y a aucun moyen de modifier les paramètres. **Vous ne pouvez pas annuler la mise plus tôt ni modifier le montant de la mise, l'ID du nœud ou l'adresse de récompense.** Veuillez vous assurer que vous utilisez les valeurs correctes dans les appels API ci-dessous. Si vous n’êtes pas sûr, demandez de l’aide sur [Telegram](https://t.me/Avalanche_fr), [Discord ](https://chat.avax.network/)où la [FAQ du développeur](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}

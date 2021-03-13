@@ -1108,7 +1108,7 @@ platform.getSubnets(
 * `id` est l'ID du sous-réseau.
 * `threshold` les signatures des adresses de `controlKeys` qui sont nécessaires pour ajouter un validateur au sous-réseau.
 
-Voir [ici](../tutoriels/plateforme/instalation-ovh-de-a-a-z.md#181d) pour plus d'informations sur l'ajout d'un validateur à un sous-réseau.  
+Voir [ici]() pour plus d'informations sur l'ajout d'un validateur à un sous-réseau.  
 
 
 **Example d'un Appel**

@@ -29,7 +29,6 @@
     * [Créer une Machine Virtuelle \(VM\)](tutoriels/plateforme/creer-une-machine-virtuelle.md)
     * [Transférer de l'AVAX entre la X-Chain et  la C-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-c-chain.md)
     * [Transférer de l'AVAX entre la X-Chain et la P-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-p-chain.md)
-    * [Installation OVH de A à Z](tutoriels/plateforme/instalation-ovh-de-a-a-z.md)
     * [Sécurisation d'un serveur VPS](tutoriels/plateforme/securisation-dun-serveur-vps.md)
     * [Tranfert d'AVAX entre X-Chain, P-Chain et C-Chain](tutoriels/plateforme/tranfert-davax-entre-les-chaines.md)
   * [Nœuds et mise en jeu](tutoriels/noeuds-et-mise-en-jeu/README.md)

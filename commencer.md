@@ -17,8 +17,6 @@ Si votre problème n'est pas abordé dans la FAQ, venez demander de l'aide dans 
 
 Si vous souhaitez lancer votre nœud sur un VPS et avoir un tutoriel pas-à-pas merci de regarder ce tutoriel:
 
-{% page-ref page="tutoriels/plateforme/instalation-ovh-de-a-a-z.md" %}
-
 ## Exigences <a id="requirements"></a>
 
 Avalanche est un protocole incroyablement léger, donc les exigences informatiques minimales requises sont assez modestes.
