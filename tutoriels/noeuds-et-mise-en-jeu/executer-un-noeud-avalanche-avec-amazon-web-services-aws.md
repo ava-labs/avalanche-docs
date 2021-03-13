@@ -106,35 +106,35 @@ Attribuez maintenant le groupe de sécurité créé précédemment à l'instance
 
 ![](../../.gitbook/assets/image%20%2828%29.png)
 
-Finally, click **Review and Launch** in the bottom right. A review page will show the details of the instance you're about to launch. Review those, and if all looks good, click the blue **Launch** button in the bottom right corner of the screen.
+Enfin, cliquez sur **Review and Launch** en bas à droite. Une page de révision affichera les détails de l'instance que vous êtes sur le point de lancer. Passez en revue ceux-ci, et si tout semble bon, cliquez sur le bouton bleu **Launch** dans le coin inférieur droit de l'écran.
 
-You'll be asked to select a key pair for this instance. Select **Choose an existing key pair** and then select the `avalanche` key pair you made earlier in the tutorial. Check the box acknowledging that you have access to the `.pem` or `.ppk` file created earlier \(make sure you've backed it up!\) and then click **Launch Instances**.
+Vous serez invité à sélectionner une paire de clés pour cette instance. Sélectionnez **Choose an existing key pair** puis sélectionnez la paire de clés `avalanche` ue vous avez créée précédemment dans le didacticiel. Cochez la case reconnaissant que vous avez accès au fichier `.pem` ou `.ppk` créé précédemment \(assurez-vous de l'avoir sauvegardé!\), Puis cliquez sur **Launch Instances**.
 
 ![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-You should see a new pop up that confirms the instance is launching!
+Vous devriez voir une nouvelle fenêtre contextuelle confirmant le lancement de l'instance!
 
 ![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-### Assign an Elastic IP
+### Attribuer une adresse IP élastique
 
-By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
+Par défaut, votre instance n'aura pas d'adresse IP fixe. Donnons-lui une adresse IP fixe via le service IP Elastic d'AWS. Revenez au tableau de bord EC2. Sous **Network & Security,** selectionnez **Elastic IPs**.
 
 ![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-Select **Allocate Elastic IP address**.
+Selectionnez **Allocate Elastic IP address**.
 
 ![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
-Select the region your instance is running in, and choose to use Amazon’s pool of IPv4 addresses. Click **Allocate**.
+Sélectionnez la région dans laquelle votre instance s'exécute et choisissez d'utiliser le pool d'adresses IPv4 d'Amazon. Cliquez sur **Allocate**.
 
 ![Settings for the Elastic IP.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
 
-Select the Elastic IP you just created from the Elastic IP manager. From the **Actions** drop-down, choose **Associate Elastic IP address**.
+Sélectionnez l'adresse IP Elastic que vous venez de créer à partir du gestionnaire d'adresses IP Elastic. Du menu déroulant **Actions** choisisez **Associate Elastic IP address**.
 
 ![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
+Sélectionnez l'instance que vous venez de créer. Cela associera la nouvelle adresse IP Elastic à l'instance et lui donnera une adresse IP publique qui ne changera pas.
 
 ![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
