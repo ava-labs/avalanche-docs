@@ -20,15 +20,15 @@ Au moment de cet article, le prix au comptant pour une machine virtuelle avec 2 
 
 ## Configuration d'abonnement initiale <a id="6e8d"></a>
 
-### Configurer le 2 Factor <a id="b9d0"></a>
+### Configurer l'authentification à 2 facteurs <a id="b9d0"></a>
 
-First you will need a Microsoft Account, if you don’t have one already you will see an option to create one at the following link. If you already have one, make sure to set up 2 Factor authentication to secure your node by going to the following link and then selecting “Two-step verification” and following the steps provided.
+Vous aurez d'abord besoin d'un compte Microsoft, si vous n'en avez pas déjà, vous verrez une option pour en créer un via le lien suivant. Si vous en avez déjà un, assurez-vous de configurer l'authentification à 2 facteurs pour sécuriser votre nœud en allant sur le lien suivant, puis en sélectionnant “Two-step verification” et en suivant les étapes fournies.
 
 ​[https://account.microsoft.com/security](https://account.microsoft.com/security)
 
 ![](https://miro.medium.com/max/1135/1*tr3rEcrvI4rEpC7KPYqg6g.png)
 
-Once two factor has been configured log into the Azure portal by going to [https://portal.azure.com](https://portal.azure.com/) and signing in with your Microsoft account. When you login you won’t have a subscription, so we need to create one first. Select “Subscriptions” as highlighted below:
+Une fois que deux facteurs ont été configurés, connectez-vous au portail Azure en accédant à [https://portal.azure.com](https://portal.azure.com) et en vous connectant avec votre compte Microsoft. Lorsque vous vous connectez, vous n'avez pas d'abonnement, nous devons donc en créer un au préalable. Sélectionnez “Subscriptions” comme indiqué ci-dessous:
 
 ![](https://miro.medium.com/max/648/1*5Jp8oXzczaEND-z9_QZaQA.png)
 
