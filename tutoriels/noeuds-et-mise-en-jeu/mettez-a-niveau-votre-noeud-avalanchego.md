@@ -79,7 +79,7 @@ Nous sommes maintenant prêts à télécharger la nouvelle version du nœud. Vou
 
 Le téléchargement de binaires pré-construits est plus facile et recommandé si vous cherchez simplement à exécuter votre propre nœud et à vous y impliquer.
 
-Construire le nœud à partir de la source est recommandé si vous êtes un développeur qui souhaite expérimenter et construire sur Avalanche.
+Construire le nœud à [partir de la source](mettez-a-niveau-votre-noeud-avalanchego.md#construire-a-partir-de-la-source) est recommandé si vous êtes un développeur qui souhaite expérimenter et construire sur Avalanche.
 
 ## Télécharger le binaire pré-construit
 
