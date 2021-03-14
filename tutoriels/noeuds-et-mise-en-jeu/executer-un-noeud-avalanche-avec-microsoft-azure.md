@@ -32,115 +32,115 @@ Une fois que deux facteurs ont été configurés, connectez-vous au portail Azur
 
 ![](https://miro.medium.com/max/648/1*5Jp8oXzczaEND-z9_QZaQA.png)
 
-Then select “+ Add” to add a new subscription
+Sélectionnez ensuite “+ Add” pour ajouter un nouvel abonnement
 
 ![](https://miro.medium.com/max/374/1*Lw3HklSSC8NDN2ftQEVgYA.png)
 
-If you want to use Spot Instance VM Pricing \(which will be considerably cheaper\) you can’t use a Free Trial account \(and you will receive an error upon validation\), so **make sure to select Pay-As-You-Go.**
+Si vous souhaitez utiliser la tarification de VM Instance Spot \(qui sera considérablement moins chère\), vous ne pouvez pas utiliser un compte d'essai gratuit \(et vous recevrez une erreur lors de la validation\), alors assurez-vous **de sélectionner Pay-As-You-Go.**
 
 ![](https://miro.medium.com/max/789/1*TO5Uh07OkH_QdwludEgapg.png)
 
-Enter your billing details and confirm identity as part of the sign-up process, when you get to Add technical support select the without support option \(unless you want to pay extra for support\) and press Next.
+Entrez vos informations de facturation et confirmez votre identité dans le cadre du processus d'inscription, lorsque vous arrivez à Ajouter un support technique, sélectionnez l'option "no technical support" \(sauf si vous souhaitez payer un supplément pour l'assistance\) et appuyez sur Suivant.
 
 ![](https://miro.medium.com/max/783/1*5KJOATvu3giAr6ygO3rF6Q.png)
 
-## Create a Virtual Machine <a id="41ac"></a>
+## Créer une machine virtuelle <a id="41ac"></a>
 
-Now that we have a subscription, we can create the Ubuntu Virtual Machine for our Avalanche Node. Select the Icon in the top left for the Menu and choose “+ Create a resource”.
+Maintenant que nous avons un abonnement, nous pouvons créer la machine virtuelle Ubuntu pour notre nœud d'avalanche. Sélectionnez l'icône en haut à gauche du menu et choisissez “+ Create a resource”.
 
 ![](https://miro.medium.com/max/565/1*3nSPwgEM3oIgrIlIo-TS1w.png)
 
-Select Ubuntu Server 18.04 LTS \(this will normally be under the popular section or alternatively search for it in the marketplace\)
+Sélectionnez Ubuntu Server 18.04 LTS \(ce sera normalement dans la section "popular" ou recherchez-le sur le marché\)
 
 ![](https://miro.medium.com/max/605/1*Y0iZEZExC36c7FXqPlrPuw.png)
 
-This will take you to the Create a virtual machine page as shown below:
+Cela vous mènera à la page Créer une machine virtuelle comme indiqué ci-dessous:
 
 ![](https://miro.medium.com/max/775/1*cv0z0mt6Uavx5MkiazpiUA.png)
 
-First, enter a virtual machine a name, this can be anything but in my example, I have called it Avalanche \(This will also automatically change the resource group name to match\)
+Tout d'abord, entrez un nom de machine virtuelle, cela peut être n'importe quoi, mais dans mon exemple, je l'ai appelé Avalanche \(cela changera également automatiquement le nom du groupe de ressources pour qu'il corresponde\)
 
-Then select a region from the drop-down list. Select one of the recommended ones in a region that you prefer as these tend to be the larger ones with most features enabled and cheaper prices. In this example I have selected North Europe.
+Sélectionnez ensuite une région dans la liste déroulante. Sélectionnez l'une des recommandations recommandées dans la région que vous préférez, car elles ont tendance à être les plus grandes avec la plupart des fonctionnalités activées et des prix moins chers. Dans cet exemple, j'ai sélectionné l'Europe du Nord.
 
 ![](https://miro.medium.com/max/769/1*XOpa22qSdNI-0PW5oIyUhQ.png)
 
-You have the option of using spot pricing to save significant amounts on running costs. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for the spot instance goes up. If there is insufficient capacity, then your VM will be turned off. The chances of this happening are incredibly low though, especially if you select the Capacity only option. Even in the unlikely event it does get turned off temporarily you only need to maintain at least 60% up time to receive the staking rewards and there is no slashing implemented in Avalanche.
+Vous avez la possibilité d'utiliser la tarification au comptant pour économiser des sommes importantes sur les coûts de fonctionnement. Les instances ponctuelles utilisent une structure de prix de marché offre et demande. À mesure que la demande d'instances augmente, le prix de l'instance spot augmente. Si la capacité est insuffisante, votre VM sera désactivée. Les chances que cela se produise sont cependant incroyablement faibles, surtout si vous sélectionnez l'option Capacité uniquement. Même dans le cas improbable où il serait désactivé temporairement, vous n'avez besoin que de maintenir au moins 60% de temps pour recevoir les récompenses de jalonnement et il n'y a pas de slash mis en œuvre dans Avalanche.
 
-Select Yes for Azure Spot instance, select Eviction type to Capacity Only and **make sure to set the eviction policy to Stop / Deallocate — This is very important otherwise the VM will be deleted**
+Sélectionnez Oui pour l'instance Azure Spot, sélectionnez l'Eviction type sur Capacity Only aet assurez-vous de définir la stratégie **eviction policy sur Stop / Deallocate — Ceci est très important sinon la machine virtuelle sera supprimée**
 
 ![](https://miro.medium.com/max/756/1*zWWiYhloPdnKEXGhZJA3dQ.png)
 
-Choose “Select size” to change the Virtual Machine size, and from the menu select D2s\_v4 under the D-Series v4 selection \(This size has 2 Cores, 8 GB Memory and enables Premium SSDs\). You can use F2s\_v2 instances instead, with are 2 Cores, 4 GB Memory and enables Premium SSDs\) but the spot price actually works out cheaper for the larger VM currently with spot instance prices. You can use [this link](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) to view the prices across the different regions.
+Choisissez “Select size” pour modifier la taille de la machine virtuelle, et dans le menu, sélectionnez D2s\_v4 sous la sélection D-Series v4 \(cette taille a 2 cœurs, 8 Go de mémoire et active les SSD Premium\). Vous pouvez utiliser des instances F2s\_v2 à la place, avec 2 cœurs, 4 Go de mémoire et des disques SSD Premium\), mais le prix au comptant est en fait moins cher pour la machine virtuelle plus grande actuellement avec des prix d'instance au comptant. Vous pouvez utiliser [ce lien](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) pour afficher les prix dans les différentes régions.
 
 ![](https://miro.medium.com/max/957/1*JzebwGho6qDFbzlqCJSN9w.png)
 
-Once you have selected the size of the Virtual Machine, select “View pricing history and compare prices in nearby regions” to see how the spot price has changed over the last 3 months, and whether it’s cheaper to use a nearby region which may have more spare capacity.
+Une fois que vous avez sélectionné la taille de la machine virtuelle, sélectionnez“View pricing history and compare prices in nearby regions” pour voir comment le prix au comptant a changé au cours des 3 derniers mois et s'il est moins coûteux d'utiliser une région voisine qui peut en avoir plus. capacité de réserve.
 
 ![](https://miro.medium.com/max/763/1*UQYmhtL8JMhrOkaWk8cloA.png)
 
-At the time of this article, spot pricing for D2s\_v4 in North Europe costs $0.07975 per hour, or around $698.61 a year. With spot pricing, the price falls to $0.01295 per hour, which works out at about $113.44 a year, **a saving of 83.76%!**
+Au moment de cet article, le prix au comptant pour D2s\_v4 en Europe du Nord coûte 0,07975 USD par heure, soit environ 698,61 USD par an. Avec les prix au comptant, le prix tombe à 0,01295 $ l'heure, ce qui équivaut à environ 113,44 $ par an, **soit une économie de 83,76%!**
 
-There are some regions which are even cheaper, East US for example is $0.01060 per hour or around $92.86 a year!
+Certaines régions sont encore moins chères, l'est des États-Unis par exemple coûte 0,01060 $ l'heure ou environ 92,86 $ par an!
 
 ![](https://miro.medium.com/max/677/1*Th5aDwLS6_IoM0LidRbH6g.png)
 
-Below you can see the price history of the VM over the last 3 months for North Europe and regions nearby.​
+Vous trouverez ci-dessous l'historique des prix de la VM au cours des 3 derniers mois pour l'Europe du Nord et les régions à proximité.​
 
 ![](https://miro.medium.com/max/968/1*OJ4monpMy8DhWw_HWycMjg.png)
 
-### Cheaper than Amazon AWS <a id="45e9"></a>
+### Moins cher qu'Amazon AWS <a id="45e9"></a>
 
-As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
+À titre de comparaison, une instance c5.large coûte 0,085 USD par heure sur AWS. Cela représente environ 745 USD par an. Les instances ponctuelles peuvent économiser 62%, ce qui ramène ce total à 462 $.
 
-The next step is to change the username for the VM, to align with other Avalanche tutorials change the username to ubuntu. Otherwise you will need to change several commands later in this article and swap out ubuntu with your new username
+L'étape suivante consiste à modifier le nom d'utilisateur de la machine virtuelle, à s'aligner sur les autres didacticiels d'Avalanche, à changer le nom d'utilisateur en ubuntu. Sinon, vous devrez modifier plusieurs commandes plus loin dans cet article et échanger ubuntu avec votre nouveau nom d'utilisateur.
 
 ![](https://miro.medium.com/max/780/1*CNmFTz056EUmahfi5zG3JQ.png)
 
-### Disks <a id="ed2e"></a>
+### Disques <a id="ed2e"></a>
 
-Select Next: Disks to then configure the disks for the instance. There are 2 choices for disks, either Premium SSD which offer greater performance with a 64 GB disk costs around $10 a month, or there is the standard SSD which offers lower performance and is around $5 a month. You also have to pay $0.002 per 10,000 transaction units \(reads / writes and deletes\) with the Standard SSD, whereas with Premium SSDs everything is included. Personally, I chose the Premium SSD for greater performance, but also because the disks are likely to be heavily used and so may even work out cheaper in the long run.
+Sélectionnez ensuite : Disks our ensuite configurer les disques de l'instance. Il existe 2 choix pour les disques, soit le SSD Premium qui offre de meilleures performances avec un disque de 64 Go coûte environ 10 $ par mois, soit le SSD standard qui offre des performances inférieures et coûte environ 5 $ par mois. Vous devez également payer 0,002 USD pour 10000 unités de transaction \(lectures / écritures et suppressions\) avec le SSD Standard, alors qu'avec les SSD Premium, tout est inclus. Personnellement, j'ai choisi le SSD Premium pour de meilleures performances, mais aussi parce que les disques sont susceptibles d'être fortement utilisés et peuvent donc même être moins chers à long terme.
 
-Select Next: Networking to move onto the network configuration
+Sélectionnez ensuite: Networking pour passer à la configuration du réseau
 
 ![](https://miro.medium.com/max/763/1*Oqv9nA8KoSIyq95DuPDN4g.png)
 
-### Network Config <a id="bc5d"></a>
+### Configuration du réseau <a id="bc5d"></a>
 
-You want to use a Static IP so that the public IP assigned to the node doesn’t change in the event it stops. Under Public IP select “Create new”
+Vous souhaitez utiliser une adresse IP statique afin que l'adresse IP publique attribuée au nœud ne change pas en cas d'arrêt. Sous IP publique, sélectionnez “Create new”.
 
 ![](https://miro.medium.com/max/774/1*2wsz1_OG7DpLA7jmTJfm0A.png)
 
-Then select “Static” as the Assignment type
+Sélectionnez ensuite “Static” comme type d'affectation
 
 ![](https://miro.medium.com/max/347/1*y-JbYlRNN3GNNXtZDP-UXQ.png)
 
-Then we need to configure the network security group to control access inbound to the Avalanche node. Select “Advanced” as the NIC network security group type and select “Create new”
+Ensuite, nous devons configurer le groupe de sécurité réseau pour contrôler l'accès entrant au nœud Avalanche. Sélectionnez “Advanced” comme type de groupe de sécurité du réseau NIC et sélectionnez “Create new”
 
 ![](https://miro.medium.com/max/763/1*e5Y-mHGkn42A-mJx6o3J0g.png)
 
-For security purposes you want to restrict who is able to remotely connect to your node. To do this you will first want to find out what your existing public IP is. This can be done by going to google and searching for “what’s my ip”.
+Pour des raisons de sécurité, vous souhaitez restreindre les personnes autorisées à se connecter à distance à votre nœud. Pour ce faire, vous voudrez d'abord savoir quelle est votre adresse IP publique existante. Cela peut être fait en accédant à Google et en recherchant "quelle est mon adresse IP".
 
 ![](https://miro.medium.com/max/450/1*-aV-AdrABCUmludxXUPV6Q.png)
 
-It’s likely that you have been assigned a dynamic public IP for your home, unless you have specifically requested it, and so your assigned public IP may change in the future. It’s still recommended to restrict access to your current IP though, and then in the event your home IP changes and you are no longer able to remotely connect to the VM, you can just update the network security rules with your new public IP so you are able to connect again.
+Il est probable que vous ayez reçu une adresse IP publique dynamique pour votre domicile, sauf si vous l'avez spécifiquement demandée, et votre adresse IP publique attribuée peut donc changer à l'avenir. Cependant, il est toujours recommandé de restreindre l'accès à votre adresse IP actuelle, puis dans le cas où votre adresse IP domestique change et que vous ne pouvez plus vous connecter à distance à la machine virtuelle, vous pouvez simplement mettre à jour les règles de sécurité réseau avec votre nouvelle adresse IP publique afin que vous soyez capable de se connecter à nouveau.
 
-NOTE: If you need to change the network security group rules after deployment if your home IP has changed, search for “avalanche-nsg” and you can modify the rule for SSH and Port 9650 with the new IP. **Port 9651 needs to remain open to everyone** though as that’s how it communicates with other Avalanche nodes.
+REMARQUE: Si vous devez modifier les règles du groupe de sécurité réseau après le déploiement si votre adresse IP domestique a changé, recherchez «avalanche-nsg» et vous pouvez modifier la règle pour SSH et le port 9650 avec la nouvelle adresse IP. **Le port 9651 doit rester ouvert à tous**, car c'est ainsi qu'il communique avec les autres nœuds Avalanche.
 
 ![](https://miro.medium.com/max/481/1*fR6SrKhTSTQ4cS3PoFrQfQ.png)
 
-Now that you have your public IP select the default allow ssh rule on the left under inbound rules to modify it. Change Source from “Any” to “IP Addresses” and then enter in your Public IP address that you found from google in the Source IP address field. Change the Priority towards the bottom to 100 and then press Save.
+Maintenant que vous avez votre adresse IP publique, sélectionnez la règle Autoriser ssh par défaut sur la gauche sous les règles entrantes pour la modifier. Changez la source de “Any” à “IP Addresses”, puis entrez votre adresse IP publique que vous avez trouvée sur google dans le champ Adresse IP source. Modifiez la priorité vers le bas à 100, puis appuyez sur "Save".
 
 ![](https://miro.medium.com/max/1039/1*iLP9gUH4weTfsPcmeUbXLw.png)
 
-Then select “+ Add an inbound rule” to add another rule for RPC access, this should also be restricted to only your IP. Change Source to “IP Addresses” and enter in your public IP returned from google into the Source IP field. This time change the “Destination port ranges” field to 9650 and select “TCP” as the protocol. Change the priority to 110 and give it a name of “Avalanche\_RPC” and press Add.
+Ensuite, sélectionnez “+ Add an inbound rule” pour ajouter une autre règle pour l'accès RPC, cela devrait également être limité à votre adresse IP uniquement. Remplacez la source par "Adresses IP" et entrez votre adresse IP publique renvoyée par Google dans le champ IP source. Cette fois, changez le champ “Destination port ranges” sur 9650 et sélectionnez “TCP” comme protocole. Changez la priorité à 110 et donnez-lui un nom de “Avalanche\_RPC” et appuyez sur "Add".
 
 ![](https://miro.medium.com/max/914/1*Zg9mHCkU7G5BoinN0EWZAg.png)
 
-Select “+ Add an inbound rule” to add a final rule for the Avalanche Protocol so that other nodes can communicate with your node. This rule needs to be open to everyone so keep “Source” set to “Any”. Change the Destination port range to “9651” and change the protocol to “TCP”. Enter a priority of 120 and a name of Avalanche\_Protocol and press Add.
+Sélectionnez “+ Add an inbound rule” our ajouter une règle finale pour le protocole Avalanche afin que d'autres nœuds puissent communiquer avec votre nœud. Cette règle doit être ouverte à tous, alors gardez «Source» sur “Any”. Changez la plage de ports de destination sur «9651» et changez le protocole sur «TCP». Entrez une priorité de 120 et un nom de Avalanche\_Protocol et appuyez sur "Add".
 
 ![](https://miro.medium.com/max/662/1*tIMEp7O83NIUitWwlcHAxw.png)
 
-The network security group should look like the below \(albeit your public IP address will be different\) and press OK.
+Le groupe de sécurité réseau doit ressembler à celui ci-dessous \(bien que votre adresse IP publique soit différente\) et appuyez sur OK.
 
 ![](https://miro.medium.com/max/363/1*7rAR3C_UrX94iXxL4sdV9g.png)
 
