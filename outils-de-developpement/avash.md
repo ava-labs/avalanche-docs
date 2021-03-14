@@ -336,7 +336,7 @@ Available Commands:
 
 ## Écriture de scripts
 
-Avash importe le [gopher-lua](https://github.com/yuin/gopher-lua)pour exécuter les scripts Lua. Les scripts ont des hooks à leur disposition qui permettent à l'utilisateur d'écrire du code qui appelle l'environnement Avash actuel.
+Avash importe le [gopher-lua](https://github.com/yuin/gopher-lua) pour exécuter les scripts Lua. Les scripts ont des hooks à leur disposition qui permettent à l'utilisateur d'écrire du code qui appelle l'environnement Avash actuel.
 
 Les fonctions disponibles pour Lua sont :
 
