@@ -74,15 +74,15 @@ Vous pouvez cliquer sur l'icône pour actualiser votre solde et vous devriez le 
 
 ![](../../.gitbook/assets/image%20%2844%29.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+Dans la colonne de droite, vous verrez votre dernière transaction. Cliquez sur l'icône de la loupe pour ouvrir la transaction dans notre explorateur.
 
 ![](../../.gitbook/assets/image%20%2842%29.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+Enfin, vous devriez pouvoir voir les détails de la transaction dans notre explorateur. Cela répertorie tout sur la transaction, y compris l'ID de transaction, le statut, le moment où la transaction a eu lieu et toutes les informations concernant les entrées et les sorties.
 
 ![](../../.gitbook/assets/image%20%2846%29.png)
 
-## More Tools to Come <a id="135b"></a>
+## Plus d'outils à venir <a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Labs construit l'Internet of Finance. Nous développons des solutions pour créer un monde sans friction en redéfinissant la façon dont les gens créent et utilisent les applications financières. Un élément essentiel de cette infrastructure est un portefeuille matériel afin que les utilisateurs puissent être totalement convaincus que leurs clés privées et leurs pièces sont complètement isolées de tout acteur potentiellement malveillant. C'est exactement ce que fait notre nouvelle application Ledger en suivant les meilleures pratiques de l'industrie pour assurer la sécurité des utilisateurs et des jetons.
 
