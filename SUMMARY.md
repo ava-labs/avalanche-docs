@@ -61,6 +61,7 @@
   * [Platform API \(P-Chain\)](apis/platform-api-p-chain.md)
   * [EVM API \(C-Chain\)](apis/evm-api-c-chain.md)
   * [AVM API \(X-Chain\)](apis/avm-api-x-chain.md)
+  * [Appels d'API obsolètes](apis/appels-dapi-obsoletes.md)
   * [API Admin](apis/admin-api.md)
   * [API Auth](apis/auth-api.md)
   * [API Health](apis/health-api.md)
