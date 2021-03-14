@@ -144,161 +144,161 @@ Le groupe de sécurité réseau doit ressembler à celui ci-dessous \(bien que v
 
 ![](https://miro.medium.com/max/363/1*7rAR3C_UrX94iXxL4sdV9g.png)
 
-Leave the other settings as default and then press “Review + create” to create the Virtual machine.
+Laissez les autres paramètres par défaut, puis appuyez sur “Review + create” pour créer la machine virtuelle.
 
 ![](https://miro.medium.com/max/828/1*01yGser7qYjiXDngemqClQ.png)
 
-First it will perform a validation test. If you receive an error here, make sure you selected Pay-As-You-Go subscription model and you are not using the Free Trial subscription as Spot instances are not available. Verify everything looks correct and press “Create”
+Il effectuera d'abord un test de validation. Si vous recevez une erreur ici, assurez-vous d'avoir sélectionné le modèle d'abonnement Pay-As-You-Go et que vous n'utilisez pas l'abonnement d'essai gratuit car les instances Spot ne sont pas disponibles. Vérifiez que tout semble correct et appuyez sur “Create”
 
 ![](https://miro.medium.com/max/751/1*HyQP7HJCiVQPPiWodRj6aQ.png)
 
-You should then receive a prompt asking you to generate a new key pair to connect your virtual machine. Select “Download private key and create resource” to download the private key to your PC.
+Vous devriez alors recevoir une invite vous demandant de générer une nouvelle paire de clés pour connecter votre machine virtuelle. Sélectionnez “Download private key and create resource” pour télécharger la clé privée sur votre PC.
 
 ![](https://miro.medium.com/max/456/1*FCAVco29fcianH4TjxVGzQ.png)
 
-Once your deployment has finished, select “Go to resource”
+Une fois votre déploiement terminé, sélectionnez “Go to resource”
 
 ![](https://miro.medium.com/max/608/1*dXl1RkH6xZvHkdI1d-XsOQ.png)
 
-## Change the Provisioned Disk Size <a id="00dc"></a>
+## Modifier la taille du disque provisionné <a id="00dc"></a>
 
-By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD, whilst this should be sufficient, I personally didn’t want the hassle of potentially needing to extend this later into the staking period. I have included the steps below if you want to increase it to 64 GB or if you ever need to increase it at a later date.
+Par défaut, la VM Ubuntu sera provisionnée avec un SSD Premium de 30 Go, alors que cela devrait être suffisant, je ne voulais personnellement pas avoir à le prolonger plus tard dans la période de mise. J'ai inclus les étapes ci-dessous si vous souhaitez l'augmenter à 64 Go ou si vous devez l'augmenter ultérieurement.
 
 ![](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
 
-To change the Disk size, the VM needs to be stopped and deallocated. Select “Stop” and wait for the status to show deallocated. Then select “Disks” on the left.
+Pour modifier la taille du disque, la machine virtuelle doit être arrêtée et désallouée. Sélectionnez “Stop” et attendez que l'état soit deallocated. Sélectionnez ensuite “Disks” sur la gauche.
 
 ![](https://miro.medium.com/max/976/1*eUCBMgyQtEukvCyi3pm48g.png)
 
-Select the Disk name that’s current provisioned to modify it
+Sélectionnez le nom du disque actuellement provisionné pour le modifier
 
 ![](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
 
-Select “Size + performance” on the left under settings and change the size to 64 GB and press “Resize”.
+Sélectionnez “Size + performance” sur la gauche en-dessous de settings et changez la taille à 64 Go et appuyez sur “Resize”.
 
 ![](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
 
-Doing this now will also extend the partition automatically within ubuntu. To go back to the virtual machine overview page, select Avalanche in the navigation setting.
+Faire cela maintenant étendra également la partition automatiquement dans ubuntu. Pour revenir à la page de présentation de la machine virtuelle, sélectionnez Avalanche dans les paramètres de navigation.
 
 ![](https://miro.medium.com/max/946/1*RGlKMhmlZ1__6u3RjFSDMA.png)
 
-Then start the VM
+Puis démarrez la VM
 
 ![](https://miro.medium.com/max/929/1*vgVR-3sRejyBcXrMn65v5g.png)
 
-## Connect to the Avalanche Node <a id="8bb7"></a>
+## Connectez-vous au nœud Avalanche <a id="8bb7"></a>
 
-The following instructions show how to connect to the Virtual Machine from a Windows 10 machine. For instructions on how to connect from a ubuntu machine see the [AWS tutorial](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws).
+Les instructions suivantes montrent comment se connecter à la machine virtuelle à partir d'une machine Windows 10. Pour obtenir des instructions sur la connexion à partir d'une machine ubuntu, consultez le [didacticiel AWS](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws).
 
-On your local PC, create a folder on the root of the C: drive called Avalanche and then move the Avalanche\_key.pem file you downloaded before into the folder. Then right click the file and select Properties. Go to the security tab and select “Advanced” at the bottom
+Sur votre PC local, créez un dossier à la racine du lecteur C: appelé Avalanche, puis déplacez le fichier Avalanche\_key.pem que vous avez téléchargé précédemment dans le dossier. Cliquez ensuite avec le bouton droit sur le fichier et sélectionnez Propriétés. Accédez à l'onglet de sécurité et sélectionnez «Avancé» en bas
 
 ![](https://miro.medium.com/max/719/1*KlzhuVcn5Vt0imxDPblBtA.png)
 
-Select “Disable inheritance” and then “Remove all inherited permissions from this object” to remove all existing permissions on that file.
+Sélectionnez «Désactiver l'héritage», puis «Supprimer toutes les autorisations héritées de cet objet» pour supprimer toutes les autorisations existantes sur ce fichier.
 
 ![](https://miro.medium.com/max/740/1*VxuomVeWbhYquRynA8hP4Q.png)
 
-Then select “Add” to add a new permission and choose “Select a principal” at the top. From the pop-up box enter in your user account that you use to log into your machine. In this example I log on with a local user called Seq, you may have a Microsoft account that you use to log in, so use whatever account you login to your PC with and press “Check Names” and it should underline it to verify and press OK.
+Sélectionnez ensuite «Ajouter» pour ajouter une nouvelle autorisation et choisissez «Sélectionner un mandant» en haut. Dans la fenêtre contextuelle, entrez votre compte d'utilisateur que vous utilisez pour vous connecter à votre machine. Dans cet exemple, je me connecte avec un utilisateur local appelé Seq, vous pouvez avoir un compte Microsoft que vous utilisez pour vous connecter, alors utilisez le compte avec lequel vous vous connectez à votre PC et appuyez sur "Vérifier les noms" et il doit le souligner pour vérifier et appuyer sur OK.
 
 ![](https://miro.medium.com/max/758/1*sMxk7zaRHVTqA0UyHTKwzQ.png)
 
-Then from the permissions section make sure only “Read & Execute” and “Read” are selected and press OK.
+Ensuite, dans la section des autorisations, assurez-vous que seuls «Lire et exécuter» et «Lire» sont sélectionnés et appuyez sur OK.
 
 ![](https://miro.medium.com/max/903/1*5Fkh3FJQuNeWQyEd0irjtA.png)
 
-It should look something like the below, except with a different PC name / user account. This just means the key file can’t be modified or accessed by any other accounts on this machine for security purposes so they can’t access your Avalanche Node.
+Cela devrait ressembler à quelque chose comme ci-dessous, sauf avec un nom de PC / un compte d'utilisateur différent. Cela signifie simplement que le fichier de clé ne peut être modifié ou accessible par aucun autre compte sur cette machine à des fins de sécurité afin qu'ils ne puissent pas accéder à votre nœud Avalanche.
 
 ![](https://miro.medium.com/max/736/1*F-YK0xdB92cIweCQFGGRvA.png)
 
-### Find your Avalanche Node Public IP <a id="4687"></a>
+### Trouvez l'adresse IP publique de votre nœud Avalanche <a id="4687"></a>
 
-From the Azure Portal make a note of your static public IP address that has been assigned to your node.
+Depuis le portail Azure, notez votre adresse IP publique statique qui a été attribuée à votre nœud.
 
 ![](https://miro.medium.com/max/1082/1*5cf1dAAO0G7Dzu2s0Xxh-Q.png)
 
-To log onto the Avalanche node, open command prompt by searching for “cmd” and selecting “Command Prompt” on your Windows 10 machine.Image for post
+Pour vous connecter au nœud Avalanche, ouvrez l'invite de commande en recherchant «cmd» et en sélectionnant «Invite de commandes» sur votre ordinateur Windows 10.
 
 ![](https://miro.medium.com/max/384/1*NlYlg9of5O9fQtiroqMFZw.png)
 
-Then use the following command and replace the EnterYourAzureIPHere with the static IP address shown on the Azure portal.
+Ensuite, utilisez la commande suivante et remplacez EnterYourAzureIPHere par l'adresse IP statique indiquée sur le portail Azure.
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@EnterYourAzureIPHere
+`ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@EnterYourAzureIPHere`
 
-for my example its:
+pour mon exemple c'est:
 
-ssh -i C:\Avalanche\Avalanche\_key.pem ubuntu@13.74.10.81
+`ssh -i C:\Avalanche\Avalanche_key.pem ubuntu@13.74.10.81`
 
-The first time you connect you will receive a prompt asking to continue, enter yes.
+La première fois que vous vous connectez, vous recevrez une invite vous demandant de continuer, entrez oui.
 
 ![](https://miro.medium.com/max/651/1*Hp1AF-03TbO-eRUvuKvZcA.png)
 
-You should now be connected to your Node.
+Vous devriez maintenant être connecté à votre Node.
 
 ![](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
 
-The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws).
+La section suivante est tirée de l'excellent tutoriel de Colin pour [configurer un nœud Avalanche sur AWS d'Amazon](executer-un-noeud-avalanche-avec-amazon-web-services-aws.md).
 
-### Update Linux with security patches <a id="8a1c"></a>
+### Mettre à jour Linux avec des correctifs de sécurité <a id="8a1c"></a>
 
-Now that we are on our node, it’s a good idea to update it to the latest packages. To do this, run the following commands, one-at-a-time, in order:
+Maintenant que nous sommes sur notre nœud, il est judicieux de le mettre à jour avec les derniers packages. Pour ce faire, exécutez les commandes suivantes, une par une, dans l'ordre:
 
-```text
+```cpp
 sudo apt updatesudo apt upgrade -ysudo reboot
 ```
 
 ![](https://miro.medium.com/max/793/1*_2UmPN6vabjGe6aihX9KqA.png)
 
-This will make our instance up to date with the latest security patches for our operating system. This will also reboot the node. We’ll give the node a minute or two to boot back up, then log in again, same as before.
+Cela mettra notre instance à jour avec les derniers correctifs de sécurité pour notre système d'exploitation. Cela redémarrera également le nœud. Nous donnerons au nœud une minute ou deux pour redémarrer, puis nous reconnecterons, comme auparavant.
 
-### Set up the Avalanche Node <a id="5688"></a>
+### Configurer le nœud Avalanche <a id="5688"></a>
 
-Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer) tutorial which automates the installation process. You will need the “IPv4 Public IP” copied from the Azure Portal we set up earlier.
+Nous devons maintenant configurer notre nœud Avalanche. Pour ce faire, suivez le [didacticiel Configurer le nœud d'avalanche avec le programme d'installation](executer-un-noeud-avalanche-sous-linux-a-laide-du-script-dinstallation.md) qui automatise le processus d'installation. Vous aurez besoin de «l'adresse IP publique IPv4» copiée à partir du portail Azure que nous avons configuré précédemment.
 
-Once the installation is complete, our node should now be bootstrapping! We can run the following command to take a peek at the latest status of the avalanchego node:
+Une fois l'installation terminée, notre nœud devrait maintenant être bootstrap! Nous pouvons exécuter la commande suivante pour jeter un coup d'œil au dernier statut du nœud avalanchego:
 
-```text
+```cpp
 sudo systemctl status avalanchego
 ```
 
-To check the status of the bootstrap, we’ll need to make a request to the local RPC using “curl”. This request is as follows:
+Pour vérifier l'état du bootstrap, nous devons adresser une requête au RPC local à l'aide de "curl". Cette demande est la suivante:
 
-```text
+```cpp
 curl -X POST --data '{    "jsonrpc":"2.0",    "id"     :1,    "method" :"info.isBootstrapped",    "params": {        "chain":"X"    }}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The node can take some time \(upward of an hour at this moment writing\) to bootstrap. Bootstrapping means that the node downloads and verifies the history of the chains. Give this some time. Once the node is finished bootstrapping, the response will be:
+Le nœud peut prendre un certain temps \(plus d'une heure à ce moment d'écriture\) pour démarrer. Le boostrap signifie que le nœud télécharge et vérifie l'historique des chaînes. Donnez-lui un peu de temps. Une fois que le nœud a terminé l'amorçage, la réponse sera:
 
-```text
+```cpp
 {    "jsonrpc": "2.0",    "result": {        "isBootstrapped": true    },    "id": 1}
 ```
 
-We can always use “sudo systemctl status avalanchego” to peek at the latest status of our service as before, as well.
+Nous pouvons toujours utiliser «`sudo systemctl status avalanchego`» pour consulter le dernier statut de notre service, comme auparavant.
 
-### Get your NodeID <a id="20a7"></a>
+### Obtenez votre NodeID <a id="20a7"></a>
 
-We absolutely must get our NodeID if we plan to do any validating on this node. This is retrieved from the RPC as well. We call the following curl command to get our NodeID.
+Nous devons absolument obtenir notre NodeID si nous prévoyons de faire une validation sur ce nœud. Ceci est également récupéré à partir du RPC. Nous appelons la commande curl suivante pour obtenir notre NodeID.
 
-```text
+```cpp
 curl -X POST --data '{    "jsonrpc":"2.0",    "id"     :1,    "method" :"info.getNodeID"}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If all is well, the response should look something like:
+Si tout va bien, la réponse devrait ressembler à quelque chose comme:
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR"},"id":1}
 ```
 
-That portion that says, “NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR” is our NodeID, the entire thing. Copy that and keep that in our notes. There’s nothing confidential or secure about this value, but it’s an absolute must for when we submit this node to be a validator.
+Cette partie qui dit, "NodeID-Lve2PzuCvXZrqn8Stqwy9vWZux6VyGUCR" est notre NodeID, le tout. Copiez-le et conservez-le dans nos notes. Cette valeur n’a rien de confidentiel ou de sécurisé, mais c’est un must absolu lorsque nous soumettons ce nœud pour être un validateur.
 
-### Backup your Staking Keys <a id="ef3e"></a>
+### Sauvegardez vos clés de mise en jeu <a id="ef3e"></a>
 
-The last thing that should be done is backing up our staking keys in the untimely event that our instance is corrupted or terminated. It’s just good practice for us to keep these keys. To back them up, we use the following command:
+La dernière chose à faire est de sauvegarder nos clés de mise en jeu dans le cas intempestif où notre instance est corrompue ou arrêtée. C’est simplement une bonne pratique pour nous de conserver ces clés. Pour les sauvegarder, nous utilisons la commande suivante:
 
-```text
+```cpp
 scp -i C:\Avalanche\avalanche_key.pem -r ubuntu@EnterYourAzureIPHere:/home/ubuntu/.avalanchego/staking C:\Avalanche
 ```
 
-As before, we’ll need to replace “EnterYourAzureIPHere” with the appropriate value that we retrieved. This backs up our staking key and staking certificate into the C:\Avalanche folder we created before.
+Comme précédemment, nous devrons remplacer "EnterYourAzureIPHere" par la valeur appropriée que nous avons récupérée. Cela sauvegarde notre clé de mise en jeu et notre certificat de mise en jeu dans le dossier C:\Avalanche que nous avons créé auparavant.
 
 ![](https://miro.medium.com/max/358/1*nqsjJAv2fkcLKPri5idN-Q.png)
 
