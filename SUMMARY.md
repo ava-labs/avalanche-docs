@@ -27,6 +27,7 @@
     * [Créer un Réseau Local Testnet](tutoriels/plateforme/creer-un-reseau-local-testnet.md)
     * [Créer un sous-réseau \(subnet\)](tutoriels/plateforme/creer-un-sous-reseau-subnet.md)
     * [Créer une Machine Virtuelle \(VM\)](tutoriels/plateforme/creer-une-machine-virtuelle.md)
+    * [Configurez votre Ledger Nano S avec Avalanche](tutoriels/plateforme/configurez-votre-ledger-nano-s-avec-avalanche.md)
     * [Transférer de l'AVAX entre la X-Chain et  la C-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-c-chain.md)
     * [Transférer de l'AVAX entre la X-Chain et la P-Chain](tutoriels/plateforme/transferer-de-lavax-entre-la-x-chain-et-la-p-chain.md)
   * [Nœuds et mise en jeu](tutoriels/noeuds-et-mise-en-jeu/README.md)
