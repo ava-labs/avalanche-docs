@@ -1,90 +1,90 @@
 # Créez des NFT avec le portefeuille Avalanche
 
-## Non-Fungible Tokens on Avalanche
+## Jetons non fongibles sur Avalanche
 
-Besides the native AVAX token, [Avalanche platform]() natively supports the creation of other types of digital assets: fixed-cap assets, variable-cap assets, and non-fungible tokens \(NFTs\).
+Outre le jeton AVAX natif, la [plateforme Avalanche](../plateforme/) prend en charge nativement la création d'autres types d'actifs numériques: actifs à capitalisation fixe, actifs à capitalisation variable et jetons non fongibles \(NFT\).
 
-As opposed to regular tokens, which are interchangeable \(fungible\), meaning that each one is the same, each non-fungible token is unique on the network, with a distinct ID making it different from any other. This enables many use cases that would be impossible with interchangeable tokens, like proof of ownership of a unique asset.
+Contrairement aux jetons réguliers, qui sont interchangeables \(fongibles\), ce qui signifie que chacun est le même, chaque jeton non fongible est unique sur le réseau, avec un identifiant distinct le rendant différent de tout autre. Cela permet de nombreux cas d'utilisation qui seraient impossibles avec des jetons interchangeables, comme la preuve de propriété d'un actif unique.
 
-## NFT Studio on Avalanche Wallet
+## NFT Studio sur le portefeuille Avalanche
 
-To make experimenting with the creation and exchange of NFTs easier, we have built **NFT Studio** into the [Avalanche Wallet](https://wallet.avax.network/), where you can use it to create NFTs as assets that we call Collectibles. Collectibles can be generic NFTs with a picture and a description, or custom NFTs with payloads containing JSON, custom URL, or UTF-8 data. You can create them using a simple point and click interface, enabling you to go from an idea of sending NFTs to your friends within minutes. No technical knowledge required.
+Pour faciliter l'expérimentation de la création et de l'échange de NFT, nous avons intégré **NFT Studio** au [Avalanche portefeuille](https://wallet.avax.network/), où vous pouvez l'utiliser pour créer des NFT en tant qu'actifs que nous appelons Collectibles. Les objets de collection peuvent être des NFT génériques avec une image et une description, ou des NFT personnalisés avec des charges utiles contenant des données JSON, URL personnalisées ou UTF-8. Vous pouvez les créer à l'aide d'une simple interface pointer-cliquer, vous permettant de passer d'une idée d'envoi de NFT à vos amis en quelques minutes. Aucune connaissance technique requise.
 
-To access the **NFT Studio**, log into your Avalanche Wallet, and on the left side select **Studio**:
+Pour accéder au **NFT Studio**, connectez-vous à votre portefeuille Avalanche, et sur le côté gauche, sélectionnez **Studio**:
 
 ![](../../.gitbook/assets/image%20%2856%29.png)
 
-This will open the NFT Studio. There you have two options: **New Family**, for the creation of a new family of NFTs, and **Mint Collectible** for creating new assets in existing families. We need to create our first family of NFTs, so click **New Family**.
+Cela ouvrira le NFT Studio. Là, vous avez deux options: **New Family**, pour la création d'une nouvelle famille de NFT, et **Mint Collectible** pour créer de nouveaux actifs dans les familles existantes. Nous devons créer notre première famille de NFT, alors cliquez sur **New Family**.
 
-### Create NFT Family
+### Créer une famille NFT
 
-There you will be asked to enter the name of your collectible family, as well as a symbol \(ticker\). Names do not have to be unique.
+Là, il vous sera demandé d'entrer le nom de votre famille \(Name\) à collectionner, ainsi qu'un symbole \(ticker\). Les noms ne doivent pas être uniques.
 
 ![](../../.gitbook/assets/image%20%2847%29.png)
 
-Besides the name and the ticker, you will need to enter **Number of Groups**, that is, how many distinct collectibles will the newly created family hold. Choose carefully, because once created, the parameters of the collectible family cannot be changed.
+Outre le nom et le symbole, vous devrez entrer le **nombre de groupes \(Number of Groups\)**, c'est-à-dire combien d'objets de collection distincts la famille nouvellement créée détiendra. Choisissez avec soin, car une fois créés, les paramètres de la famille à collectionner ne peuvent pas être modifiés.
 
-When you decided upon the name, ticker, and number of groups, press **Create** to actually create the collectible family. The transaction fee will be deducted from your wallet's balance. When the family is created, you will see the transaction ID \(TxID\), as well as parameters for the family. You can use the TxID to look up the transaction in [the explorer](https://explorer.avax.network/), but it is not necessary to write it down.
+Lorsque vous avez choisi le nom, le symbole et le nombre de groupes, appuyez sur **Create** pour créer réellement la famille à collectionner. Les frais de transaction seront déduits du solde de votre portefeuille. Lorsque la famille est créée, vous verrez l'ID de transaction \(TxID\), ainsi que les paramètres de la famille. Vous pouvez utiliser le TxID pour rechercher la transaction dans[ l'explorateur](https://explorer.avax.network/), mais il n'est pas nécessaire de l'écrire.
 
-Press **Back to Studio** to return, and we're ready to create our first collectibles. Press **Mint Collectible**.
+Appuyez sur **Back to Studio** pour revenir et nous sommes prêts à créer nos premiers objets de collection. Appuyez sur **Mint Collectible**.
 
-### Mint NFTs
+### Mint les NFTs
 
-After pressing **Mint Collectible** you will be presented with a list of all the Collectible families that still have Collectible groups that have not been created yet.
+Après avoir appuyer sur **Mint Collectible** on vous présentera une liste de toutes les familles à collectionner qui ont encore des groupes à collectionner qui n'ont pas encore été créés.
 
 ![](../../.gitbook/assets/image%20%2848%29.png)
 
-Select the family we have just created. You will be presented with a form to fill out with the parameters of the new collectible:
+Sélectionnez la famille que nous venons de créer. Il vous sera présenté un formulaire à remplir avec les paramètres du nouvel objet de collection:
 
 ![](../../.gitbook/assets/image%20%2852%29.png)
 
-By default, a **Generic** type of collectible will be selected. That is an NFT that has a **Title**, **URL** for the image, and a **Description**. Enter the required data, as well as the **Quantity**, which will determine how many copies of the collectible will be created, and therefore, how many of them you will be able to send. As before, enter the data carefully, you won't be able to change anything once collectibles are minted. You will see a preview of the data where you can check how your collectible will look like.
+Par défaut, un type générique d'objet de collection sera sélectionné. C'est un NFT qui a un **titre \(Title\)**, une **URL** pour l'image et une **description**. Entrez les données requises, ainsi que la **quantité \(quantity\)**, qui déterminera le nombre d'exemplaires de l'objet de collection qui seront créés et, par conséquent, combien vous pourrez en envoyer. Comme auparavant, saisissez soigneusement les données, vous ne pourrez rien changer une fois que les objets de collection seront frappés. Vous verrez un aperçu des données où vous pourrez vérifier à quoi ressemblera votre objet de collection.
 
-If you would like to have something else besides a picture collectible, select **Custom**.
+Si vous souhaitez avoir autre chose qu'une photo à collectionner, sélectionnez **Custom**.
 
 ![](../../.gitbook/assets/image%20%2857%29.png)
 
-A custom collectible can contain an **UTF-8** encoded string, an **URL**, or a **JSON** payload. Size of the data cannot exceed 1024 characters.
+Un objet de collection custom peut contenir une chaîne encodée en **UTF-8** , une **URL**, ou un **JSON** payload. La taille des données ne peut pas dépasser 1 024 caractères.
 
-After you enter and check the data, press **Mint** to create the collectible. Transaction fees will be deducted from your wallet, and a newly created collectible will be placed in your wallet.
+Après avoir entré et vérifié les données, appuyez sur **Mint** pour créer l'objet de collection. Les frais de transaction seront déduits de votre portefeuille et un objet de collection nouvellement créé sera placé dans votre portefeuille.
 
-### See your collectibles
+### Voir vos collectibles
 
-An overview of your collectibles is always visible in the top of the screen, along with your balances.
+Un aperçu de vos objets de collection est toujours visible en haut de l'écran, avec vos soldes.
 
 ![](../../.gitbook/assets/image%20%2849%29.png)
 
-To see your collectibles in more detail, select **Portfolio** from the left-hand side menu. You will be presented with a screen showing all of your assets, with tokens selected by default. Change the selection to **Collectibles** by clicking the corresponding tab.
+Pour voir vos objets de collection plus en détail, sélectionnez **Portfolio** dans le menu de gauche. Vous serez présenté avec un écran montrant tous vos actifs, avec des jetons sélectionnés par défaut. Changez la sélection en **collectibles** en cliquant sur l'onglet correspondant.
 
 ![](../../.gitbook/assets/image%20%2854%29.png)
 
-For each Generic collectible, a picture will be shown, along with the title, and the number indicating how many copies of the collectible are in your portfolio. Hovering over the collectible with your pointer will show the detailed description:
+Pour chaque objet de collection générique, une image sera affichée, ainsi que le titre et le numéro indiquant le nombre d'exemplaires de l'objet de collection dans votre portefeuille. En survolant l'objet à collectionner avec votre pointeur, vous verrez la description détaillée:
 
 ![](../../.gitbook/assets/image%20%2855%29.png)
 
-If you select a collectible by clicking on it, you will see which group it belongs to, its quantity, along with the **Send** button.
+Si vous sélectionnez un objet de collection en cliquant dessus, vous verrez à quel groupe il appartient, sa quantité, ainsi que le bouton **Send.**
 
 ## Envoyer des NFTs
 
-To send your collectible to someone, either click the **Send** button on the selected collectible in the Portfolio, or navigate to **Send** tab on the left-hand side menu, and click **Add Collectible**:
+Pour envoyer votre objet de collection à quelqu'un, cliquez sur le bouton **Send** sur l'objet de collection sélectionné dans le portefeuille, ou accédez à l'onglet **Send** dans le menu de gauche, puis cliquez sur **Add Collectible**:
 
 ![](../../.gitbook/assets/image%20%2851%29.png)
 
-You will be presented with a menu to select a collectible you wish to send.
+Un menu vous sera présenté pour sélectionner un objet de collection que vous souhaitez envoyer.
 
 ![](../../.gitbook/assets/image%20%2853%29.png)
 
-You can send multiple collectibles in a single transaction. Clicking the label on the collectible will let you edit the number of copies you wish to send. You can send multiple families and collectible types in a single transaction.
+Vous pouvez envoyer plusieurs objets de collection en une seule transaction. En cliquant sur l'étiquette de l'objet de collection, vous pourrez modifier le nombre d'exemplaires que vous souhaitez envoyer. Vous pouvez envoyer plusieurs familles et types d'objets à collectionner en une seule transaction.
 
-When you have entered the destination address, and optionally entered the memo text, press **Confirm** to initiate the transaction.
+Lorsque vous avez entré l'adresse de destination et, le cas échéant, entré le texte du mémo, appuyez sur **Confirm** pour lancer la transaction.
 
 ![](../../.gitbook/assets/image%20%2850%29.png)
 
-After pressing **Send Transaction** it will be published on the network, and the transaction fee will be deducted from your balance. Collectibles will be deposited into the destination address shortly after.
+Après avoir appuyé sur **Send Transaction** , elle sera publiée sur le réseau et les frais de transaction seront déduits de votre solde. Les objets de collection seront déposés à l'adresse de destination peu de temps après.
 
-## Summary
+## Résumé
 
-Now, you should know how to create NFT families, mint NFT groups, and send them to other addresses. Have fun with it! Make sure to share your creations with us on our [social media channels](https://www.avalabs.org/social)!
+Maintenant, vous devez savoir comment créer des familles NFT, créer des groupes NFT et les envoyer à d'autres adresses. Aie du plaisir avec ça! Assurez-vous de partager vos créations avec nous sur [nos réseaux sociaux](https://www.avalabs.org/social)!
 
-If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
+Si vous souhaitez connaître le contexte technique du fonctionnement des NFT sur le réseau Avalanche ou si vous souhaitez créer des produits à l'aide de NFT, veuillez consulter le [didacticiel NFT](creation-dun-nft-partie-1.md). Si vous avez des questions techniques, contactez-nous sur notre [Telegram](https://t.co/gDb4teV2L6?amp=1).
 
