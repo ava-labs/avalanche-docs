@@ -55,6 +55,7 @@
     * [Créer un actif à capitalisation variable](tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md)
     * [Création d'un NFT - Partie 1](tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md)
     * [Créez des NFT avec le portefeuille Avalanche](tutoriels/actifs-numeriques-intelligents/creez-des-nft-avec-le-portefeuille-avalanche.md)
+    * [Utilisez les Wrapped AVAX \(WAVAX\) sur Avalanche](tutoriels/actifs-numeriques-intelligents/utilisez-les-wrapped-avax-wavax-sur-avalanche.md)
 * [AvalancheGo APIs](apis/README.md)
   * [Émettre des appels d'API](apis/emettre-des-appels-dapi.md)
   * [Platform API \(P-Chain\)](apis/platform-api-p-chain.md)

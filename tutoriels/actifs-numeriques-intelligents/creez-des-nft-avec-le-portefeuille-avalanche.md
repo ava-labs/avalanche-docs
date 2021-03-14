@@ -12,7 +12,7 @@ Pour faciliter l'expérimentation de la création et de l'échange de NFT, nous 
 
 Pour accéder au **NFT Studio**, connectez-vous à votre portefeuille Avalanche, et sur le côté gauche, sélectionnez **Studio**:
 
-![](../../.gitbook/assets/image%20%2856%29.png)
+![](../../.gitbook/assets/image%20%2867%29.png)
 
 Cela ouvrira le NFT Studio. Là, vous avez deux options: **New Family**, pour la création d'une nouvelle famille de NFT, et **Mint Collectible** pour créer de nouveaux actifs dans les familles existantes. Nous devons créer notre première famille de NFT, alors cliquez sur **New Family**.
 
@@ -36,13 +36,13 @@ Après avoir appuyer sur **Mint Collectible** on vous présentera une liste de t
 
 Sélectionnez la famille que nous venons de créer. Il vous sera présenté un formulaire à remplir avec les paramètres du nouvel objet de collection:
 
-![](../../.gitbook/assets/image%20%2852%29.png)
+![](../../.gitbook/assets/image%20%2861%29.png)
 
 Par défaut, un type générique d'objet de collection sera sélectionné. C'est un NFT qui a un **titre \(Title\)**, une **URL** pour l'image et une **description**. Entrez les données requises, ainsi que la **quantité \(quantity\)**, qui déterminera le nombre d'exemplaires de l'objet de collection qui seront créés et, par conséquent, combien vous pourrez en envoyer. Comme auparavant, saisissez soigneusement les données, vous ne pourrez rien changer une fois que les objets de collection seront frappés. Vous verrez un aperçu des données où vous pourrez vérifier à quoi ressemblera votre objet de collection.
 
 Si vous souhaitez avoir autre chose qu'une photo à collectionner, sélectionnez **Custom**.
 
-![](../../.gitbook/assets/image%20%2857%29.png)
+![](../../.gitbook/assets/image%20%2868%29.png)
 
 Un objet de collection custom peut contenir une chaîne encodée en **UTF-8** , une **URL**, ou un **JSON** payload. La taille des données ne peut pas dépasser 1 024 caractères.
 
@@ -56,11 +56,11 @@ Un aperçu de vos objets de collection est toujours visible en haut de l'écran,
 
 Pour voir vos objets de collection plus en détail, sélectionnez **Portfolio** dans le menu de gauche. Vous serez présenté avec un écran montrant tous vos actifs, avec des jetons sélectionnés par défaut. Changez la sélection en **collectibles** en cliquant sur l'onglet correspondant.
 
-![](../../.gitbook/assets/image%20%2854%29.png)
+![](../../.gitbook/assets/image%20%2865%29.png)
 
 Pour chaque objet de collection générique, une image sera affichée, ainsi que le titre et le numéro indiquant le nombre d'exemplaires de l'objet de collection dans votre portefeuille. En survolant l'objet à collectionner avec votre pointeur, vous verrez la description détaillée:
 
-![](../../.gitbook/assets/image%20%2855%29.png)
+![](../../.gitbook/assets/image%20%2866%29.png)
 
 Si vous sélectionnez un objet de collection en cliquant dessus, vous verrez à quel groupe il appartient, sa quantité, ainsi que le bouton **Send.**
 
@@ -68,17 +68,17 @@ Si vous sélectionnez un objet de collection en cliquant dessus, vous verrez à 
 
 Pour envoyer votre objet de collection à quelqu'un, cliquez sur le bouton **Send** sur l'objet de collection sélectionné dans le portefeuille, ou accédez à l'onglet **Send** dans le menu de gauche, puis cliquez sur **Add Collectible**:
 
-![](../../.gitbook/assets/image%20%2851%29.png)
+![](../../.gitbook/assets/image%20%2857%29.png)
 
 Un menu vous sera présenté pour sélectionner un objet de collection que vous souhaitez envoyer.
 
-![](../../.gitbook/assets/image%20%2853%29.png)
+![](../../.gitbook/assets/image%20%2864%29.png)
 
 Vous pouvez envoyer plusieurs objets de collection en une seule transaction. En cliquant sur l'étiquette de l'objet de collection, vous pourrez modifier le nombre d'exemplaires que vous souhaitez envoyer. Vous pouvez envoyer plusieurs familles et types d'objets à collectionner en une seule transaction.
 
 Lorsque vous avez entré l'adresse de destination et, le cas échéant, entré le texte du mémo, appuyez sur **Confirm** pour lancer la transaction.
 
-![](../../.gitbook/assets/image%20%2850%29.png)
+![](../../.gitbook/assets/image%20%2853%29.png)
 
 Après avoir appuyé sur **Send Transaction** , elle sera publiée sur le réseau et les frais de transaction seront déduits de votre solde. Les objets de collection seront déposés à l'adresse de destination peu de temps après.
 
