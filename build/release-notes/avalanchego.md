@@ -2,6 +2,18 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.2.4 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
+{% endhint %}
+
+* Updated readme to correct storage requirements.
+* Added additional error handling to Avalanche Tx verification during bootstrapping.
+* Updated numerous metrics, including adding numerous new metrics relating to node health and database usage, removing unused and invalid metrics, and fixing some metric names.
+* Added additional logging to CI.
+* Added the C-chain to the list of critical chains.
+
 ## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
 
 {% hint style="danger" %}
