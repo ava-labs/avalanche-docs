@@ -144,6 +144,8 @@
 
 [**Copper**](https://copper.co/): provides a gateway into the cryptoasset space for institutional investors by offering custody, prime brokerage, and settlements across 150 digital assets and more than 25 exchanges. It is committed to providing flexible solutions for institutional investors that can adapt to the changing cryptoasset space, while enabling far greater transparency and control for asset managers.
 
+[**Covalent**](https://www.covalenthq.com): provides a unified API to bring full transparency and visibility to assets across all blockchain networks.
+
 [**DataHub by Figment**](https://figment.io/datahub/avalanche/): with DataHub, Avalanche developers no longer have to worry about managing infrastructure as we offer direct access to Avalanche’s APIs via our highly available full node infrastructure.
 
 \*\*\*\*[**DSLA Protocol**](https://stacktical.com/): a risk management framework that enables developers and infrastructure operators to reduce their users’ exposure to service delays, interruptions, and financial losses, using self-executing service level agreements, bonus-malus insurance policies, and crowdfunded liquidity pools.

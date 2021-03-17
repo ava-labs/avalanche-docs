@@ -207,7 +207,7 @@ Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/
 
 ### Scripting account creation and funding
 
-Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](../../../scripts/make_accounts.js). Download it using this command:
+Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js). Download it using this command:
 
 ```text
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
@@ -341,6 +341,7 @@ Error: Returned error: authentication needed: password or unlock
 ```
 
 Then run this again:
+
 ```text
 truffle(development)> await web3.eth.personal.unlockAccount(account[0])
 ```

@@ -761,4 +761,3 @@ curl "http://localhost:8080/x"
 
 The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
 
-
