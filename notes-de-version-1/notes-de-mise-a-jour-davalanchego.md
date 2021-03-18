@@ -1,5 +1,17 @@
 # Notes de mise à jour d'AvalancheGo
 
+## Notes de mise à jour AvalancheGo v1**.2.4  \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
+
+{% hint style="danger" %}
+Cette mise à jour est rétrocompatible. C'est facultatif, mais encouragé. Le correctif inclut des améliorations de stabilité, de performances et de surveillance
+{% endhint %}
+
+* Readme mis à jour pour corriger les exigences de stockage.
+* Ajout de la gestion des erreurs supplémentaire à la vérification d'Avalanche Tx lors du démarrage \(boostrap\).
+* Mise à jour de nombreuses métriques, y compris l'ajout de nombreuses nouvelles métriques relatives à la santé des nœuds et à l'utilisation de la base de données, la suppression des métriques inutilisées et non valides et la correction de certains noms de métriques.
+* Ajout de la journalisation supplémentaire à CI.
+* Ajout de la C-Chain à la liste des chaînes critiques.
+
 ## Notes de mise à jour AvalancheGo v1**.2.3 \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
 
 {% hint style="danger" %}
