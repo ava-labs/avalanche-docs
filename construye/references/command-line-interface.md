@@ -326,7 +326,7 @@ El consenso Snow define `beta2` como el número de sondeos consecutivos que una 
 
 `--stake-minting-period` \(duration\):
 
-Período de consumo de la función de stake, en segundos. El valor por defecto de la red principal es `8760h` \(365 días\).
+Período de consumo de la función de stake, en horas. El valor por defecto de la red principal es `8760h` \(365 días\).
 
 `--tx-fee` \(int\):
 
@@ -495,5 +495,6 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzQ4NTc4OThdfQ==
+eyJoaXN0b3J5IjpbLTIwOTUwNjYwMjksNjc0MDc4Njg5LC0xND
+c0ODU3ODk4XX0=
 -->
