@@ -291,9 +291,9 @@ Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
+The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Main Net.
 
-`--max-validator-stake` \(int\):
+`--max-validator-stake` \(int\):s
 
 The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
 
@@ -327,7 +327,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
+Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
 
 `--tx-fee` \(int\):
 
