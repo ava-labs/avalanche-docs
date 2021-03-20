@@ -227,6 +227,33 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
+### Downgrading to a previous release
+
+Bugs do occur, even with quality control involving strict testing. It may so happen that the newly released build is broken for a given architecture, or in a particular context. If you just upgraded and error messages keep flooding the logs, and you're not alone judging by messages on the usual communication channels, this procedure may help you get back to a stable state by replacing the new executable with a former one. A script named `downgrade-avalanche.sh` will select the correct version and architecture for you.
+
+Download the script and make it executable:
+
+```text
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/downgrade-avalanchego.sh;\
+chmod 755 downgrade-avalanchego.sh;\
+```
+
+Just running the script should bring your node back to normal by installing the next-to-last compatible release:
+
+```text
+./downgrade-avalanchego.sh
+```
+
+You will be asked confirmation. In this example, we would be running v1.2.4, but a build issue would make it mandatory to downgrade to the previous release.
+
+```text
+This will install v1.2.3-signed. Ok [y/n]? y
+Version v1.2.3-signed installed.
+```
+Now restart the service and check the logs. If the error messages don't appear anymore, congratulations, you're done! Otherwise, more drastic measures should be taken, including deleting the database and restarting afresh.
+
+In the very unlikely event of having two broken builds in a row, the `--list` and `--tag` options would allow you to list compatible release tags in order to select which one you want to specifically install. In this "should not happen" case, instructions would be given on Discord and Telegram.
+
 ## What next?
 
 That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
