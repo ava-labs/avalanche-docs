@@ -2,7 +2,7 @@
 
 ## What is Postman?
 
-Postman is a free tool used by developers to quickly and easily send REST, POST, and GraphQL requests and test APIs. It is available as both an online tool and an application for Linux, MacOS and Windows. Postman allows you to quickly issue API calls and see the responses in a nicely formatted, searchable form.
+Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs. It is available as both an online tool and an application for Linux, MacOS and Windows. Postman allows you to quickly issue API calls and see the responses in a nicely formatted, searchable form.
 
 We have made a Postman collection for [Avalanche](https://docs.avax.network), that includes all the public API calls that are available on [AvalancheGo instance](../release-notes/avalanchego.md), allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
 
@@ -33,7 +33,7 @@ We're ready to import the collection. On the header of the Worskspaces tab selec
 There, in the URL input field paste the link to the collection:
 
 ```
-https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/Avalanche.postman_collection.json
+https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Avalanche.postman_collection.json
 ```
 
 Postman will recognize the format of the file content and offer to import the file as a collection. Complete the import. Now you will have Avalanche collection in your Workspace.
@@ -45,7 +45,7 @@ Postman will recognize the format of the file content and offer to import the fi
 Next, we have to import the environment variables. Again, the header of the Worskspaces tab select `New` and switch to `Link` tab. this time, paste the link to the environment JSON:
 
 ```
-https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/Avalanche.postman_environment.json
+https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example_Avalanche_Environment.postman_environment.json
 ```
 
 Postman will recognize the format of the file:
