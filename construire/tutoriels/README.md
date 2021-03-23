@@ -4,5 +4,9 @@ Découvrez tous les tutoriels qui vous aideront à tirer parti d'Avalanche. Nous
 
 {% page-ref page="plateforme/" %}
 
+{% page-ref page="noeuds-et-mise-en-jeu/" %}
+
+{% page-ref page="contrats-intelligents/" %}
+
 {% page-ref page="actifs-numeriques-intelligents/" %}
 
