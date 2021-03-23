@@ -10,29 +10,9 @@ description: >-
 {% tabs %}
 {% tab title="Vous venez d\'Ethereum?" %}
 
-{% tab %}
-{% page-ref page="construire/tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md" %}
-{% endtab %}
-
-{% tab %}
-{% page-ref page="./" %}
-{% endtab %}
-
 {% tab title="Portefeuille Avalanche" %}
 
-{% tab %}
-{% page-ref page="./" %}
-{% endtab %}
-
 {% tab title="Mise en jeu" %}
-
-{% tab %}
-{% page-ref page="construire/commencer.md" %}
-{% endtab %}
-
-{% tab %}
-{% page-ref page="construire/tutoriels/noeuds-et-mise-en-jeu/" %}
-{% endtab %}
 
 {% tab title="Avancée" %}
 {% page-ref page="construire/tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
