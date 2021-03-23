@@ -52,7 +52,7 @@ AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that i
 
 ## Avalanche Consensus Protocol
 
-![Consensus Comparison](.gitbook/assets/image%20%2810%29.png)
+![Consensus Comparison](.gitbook/assets/image%20%2810%29%20%281%29.png)
 
 Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
 
