@@ -8,8 +8,8 @@ description: >-
 
 Dans ce tutoriel \(durée estimée: 10 minutes\), nous allons:
 
-* Installer et lancer un noeud Avalanche
-* Nous connecter à Avalanche
+* Installer et lancer un nœud Avalanche
+* Se connecter à Avalanche
 * Envoyer des AVAX
 * Ajoutez votre nœud à l'ensemble de validateurs
 
