@@ -10,32 +10,40 @@ description: >-
 {% tabs %}
 {% tab title="Vous venez d\'Ethereum?" %}
 
+{% tab %}
+{% page-ref page="construire/tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md" %}
+{% endtab %}
 
-{% page-ref page="tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md" %}
-
+{% tab %}
 {% page-ref page="./" %}
 {% endtab %}
 
 {% tab title="Portefeuille Avalanche" %}
+
+{% tab %}
 {% page-ref page="./" %}
 {% endtab %}
 
 {% tab title="Mise en jeu" %}
-{% page-ref page="commencer.md" %}
 
-{% page-ref page="tutoriels/noeuds-et-mise-en-jeu/" %}
+{% tab %}
+{% page-ref page="construire/commencer.md" %}
+{% endtab %}
+
+{% tab %}
+{% page-ref page="construire/tutoriels/noeuds-et-mise-en-jeu/" %}
 {% endtab %}
 
 {% tab title="Avancée" %}
-{% page-ref page="tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
+{% page-ref page="construire/tutoriels/plateforme/creer-un-sous-reseau-subnet.md" %}
 
-{% page-ref page="tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
+{% page-ref page="construire/tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
 
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
+{% page-ref page="construire/tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
 
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md" %}
+{% page-ref page="construire/tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-variable.md" %}
 
-{% page-ref page="tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
+{% page-ref page="construire/tutoriels/actifs-numeriques-intelligents/creation-dun-nft-partie-1.md" %}
 {% endtab %}
 {% endtabs %}
 
@@ -51,9 +59,9 @@ Une différence clé entre Avalanche et d'autres réseaux décentralisés est so
 
 Les protocoles de la famille Avalanche fonctionnent par le biais de votes répétés sous-échantillonnés. Lorsqu'un [validateur](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) détermine si une transaction doit être acceptée ou rejetée, il demande à un petit sous-ensemble aléatoire de validateurs s'ils pensent que la transaction doit être acceptée ou rejetée. Si le validateur interrogé pense que la transaction est invalide, a déjà rejeté la transaction ou préfère une transaction en conflit, il répond qu'il pense que la transaction doit être rejetée. Sinon, il répond qu'il pense que la transaction doit être acceptée.
 
-Si une partie suffisamment importante \(_alpha_ $$α $$\) des validateurs échantillonnés répond qu'ils pensent que la transaction devrait être acceptée, le validateur préfère accepter la transaction. Autrement dit, lorsqu'il sera interrogé sur la transaction à l'avenir, il répondra qu'il pense que la transaction devrait être acceptée. De même, le validateur préférera rejeter la transaction si une partie suffisamment importante des validateurs répond qu'ils pensent que la transaction devrait être rejetée.
+Si une partie suffisamment importante \(_alpha_ $$α$$\) des validateurs échantillonnés répond qu'ils pensent que la transaction devrait être acceptée, le validateur préfère accepter la transaction. Autrement dit, lorsqu'il sera interrogé sur la transaction à l'avenir, il répondra qu'il pense que la transaction devrait être acceptée. De même, le validateur préférera rejeter la transaction si une partie suffisamment importante des validateurs répond qu'ils pensent que la transaction devrait être rejetée.
 
-Le validateur répète ce processus d'échantillonnage jusqu'à ce que l'_alpha_ des validateurs interrogés réponde de la même manière \(accepter ou rejeter\) pour les cycles _bêta_ $$β $$ consécutifs.
+Le validateur répète ce processus d'échantillonnage jusqu'à ce que l'_alpha_ des validateurs interrogés réponde de la même manière \(accepter ou rejeter\) pour les cycles _bêta_ $$β$$ consécutifs.
 
 Dans le cas courant où une transaction n'a pas de conflit, la finalisation se produit très rapidement. En cas de conflit, les validateurs honnêtes se regroupent rapidement autour de transactions conflictuelles, entrant dans une boucle de rétroaction positive jusqu'à ce que tous les validateurs appropriés préfèrent cette transaction. Cela conduit à l'acceptation de transactions non conflictuelles et au rejet des transactions conflictuelles.
 

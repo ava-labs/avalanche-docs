@@ -30,7 +30,7 @@
 
 [**Avalanche Explorer**](https://explorer.avax.network): un outil d'analyse qui permet aux gens de rechercher sur la plateforme Avalanche des transactions, des adresses et d'autres activités de la plateforme.
 
-\*\*\*\*[**Avascan**](www.avascan.info): un explorateur de blockchains indépendant qui permet aux utilisateurs de parcourir les blockchains, les transactions, les validateurs, les délégués, les actifs et les contrats intelligents sur Avalanche. Comprend également un programme de validation des détails des actifs pour ajouter des données riches aux actifs sur Avascan.
+\*\*\*\*[**Avascan**](https://github.com/ava-labs/avalanche-docs/tree/89302c9e1b7c85aa15b75e5cabc5bb26ca861a68/apprendre/www.avascan.info): un explorateur de blockchains indépendant qui permet aux utilisateurs de parcourir les blockchains, les transactions, les validateurs, les délégués, les actifs et les contrats intelligents sur Avalanche. Comprend également un programme de validation des détails des actifs pour ajouter des données riches aux actifs sur Avascan.
 
 \*\*\*\*[**AvaxMap**](https://avaxmap.com/): visualisation de la répartition géographique des nœuds Avalanche.
 
@@ -46,9 +46,9 @@
 
 ### Portefeuilles
 
-\*\*\*\*[**Avalanche Wallet**](https://wallet.avax.network): ****un portefeuille simple, sécurisé et non-dépositaire pour stocker les actifs d'Avalanche.
+\*\*\*\*[**Avalanche Wallet**](https://wallet.avax.network): _\*\*_un portefeuille simple, sécurisé et non-dépositaire pour stocker les actifs d'Avalanche.
 
-\*\*\*\*[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** le portefeuille matériel d'origine fabriqué par Ledger. Commencez facilement votre aventure cryptographique : achetez de la crypto, sécurisez vos actifs et gérez-les dans une seule application.
+\*\*\*\*[**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** le portefeuille matériel d'origine fabriqué par Ledger. Commencez facilement votre aventure cryptographique : achetez de la crypto, sécurisez vos actifs et gérez-les dans une seule application.
 
 ## Outils de développement
 
@@ -86,7 +86,7 @@
 
 [**Halborn**](https://halborn.com/): une équipe primée de hackers éthiques qui travaillent avec des projets blockchain pour se défendre contre les cyberattaques. L'équipe de Halborn a amélioré la sécurité du portefeuille Avalanche et propose également un audit intelligent des contrats.
 
-[**Kurtosis**](www.kurtosistech.com): plateforme de test complète et de bout en bout dédiée à aider les développeurs à créer des technologies anti-fragiles sur Avalanche.
+[**Kurtosis**](https://github.com/ava-labs/avalanche-docs/tree/89302c9e1b7c85aa15b75e5cabc5bb26ca861a68/apprendre/www.kurtosistech.com): plateforme de test complète et de bout en bout dédiée à aider les développeurs à créer des technologies anti-fragiles sur Avalanche.
 
 \*\*\*\*[**Quantstamp**](https://quantstamp.com/): Cabinet de sécurité blockchain proposant des audits et des conseils pour les contrats intelligents, les applications hors chaîne, la mise en réseau et les interfaces frontales pour améliorer la sécurité des applications décentralisées.
 

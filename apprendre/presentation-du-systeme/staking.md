@@ -80,7 +80,7 @@ Vous n'avez pas besoin de fonds AVAX sur votre nœud de validation. En fait, sa 
 
 Consultez ce tutoriel sur la configuration de la surveillance des nœuds.
 
-{% page-ref page="../../tutoriels/noeuds-et-mise-en-jeu/configuration-du-monitoring-des-noeuds.md" %}
+{% page-ref page="../../construire/tutoriels/noeuds-et-mise-en-jeu/configuration-du-monitoring-des-noeuds.md" %}
 
 ## Délégateurs
 
@@ -98,7 +98,7 @@ Vous devez avoir au minimum 25 AVAX pour pouvoir déléguer à un nœud.
 {% endhint %}
 
 {% hint style="danger" %}
-Notez qu'une fois que vous émettez la transaction pour déléguer à un nœud, il n'y a aucun moyen de modifier les paramètres. **Vous ne pouvez pas annuler la mise plus tôt ni modifier le montant de la mise, le nœud auquel vous déléguez ou l'adresse de récompense.** 
+Notez qu'une fois que vous émettez la transaction pour déléguer à un nœud, il n'y a aucun moyen de modifier les paramètres. **Vous ne pouvez pas annuler la mise plus tôt ni modifier le montant de la mise, le nœud auquel vous déléguez ou l'adresse de récompense.**
 
 Si vous n’êtes pas sûr, demandez de l’aide sur [Telegram](https://t.me/Avalanche_fr), [Discord ](https://chat.avax.network/)où la [FAQ du développeur](http://support.avalabs.org/en/collections/2618154-developer-faq).
 {% endhint %}

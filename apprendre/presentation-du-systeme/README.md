@@ -4,9 +4,9 @@ description: Apprenez les concepts de base et l'architecture d'Avalanche
 
 # Aperçu de la plateforme
 
-Avalanche dispose de 3 blockchains intégrées : ****[**Chaîne d'échange \(X-Chain\)**](./#chaine-dechange-x-chain), ****[**Chaîne de plateforme \(P-Chain\)**](./#chaine-de-plateformes-p-chain), et ****[**Chaîne de contrat \(C-Chain\)**](./#chaine-de-contrats-c-chain). Les 3 blockchains sont validées et sécurisées par le ****[**réseau primaire**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Le réseau principal est un sous-réseau \([subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet)\) spécial et tous les membres de tous les sous-réseaux personnalisés doivent également être membres du réseau principal \*\* en mettant en jeu au moins 2 000 AVAX. 
+Avalanche dispose de 3 blockchains intégrées : **\*\*\[**Chaîne d'échange \(X-Chain\)**\]\(./\#chaine-dechange-x-chain\), \*\***[**Chaîne de plateforme \(P-Chain\)**](./#chaine-de-plateformes-p-chain), et **\*\*\[**Chaîne de contrat \(C-Chain\)**\]\(./\#chaine-de-contrats-c-chain\). Les 3 blockchains sont validées et sécurisées par le \*\***[**réseau primaire**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Le réseau principal est un sous-réseau \([subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet)\) spécial et tous les membres de tous les sous-réseaux personnalisés doivent également être membres du réseau principal \*\* en mettant en jeu au moins 2 000 AVAX.
 
-Voici des tutoriels sur la [création d'un sous-réseau](../../tutoriels/plateforme/creer-un-sous-reseau-subnet.md) et l'[ajout de validateurs](../../tutoriels/noeuds-et-mise-en-jeu/ajouter-un-validateur.md) à un sous-réseau.
+Voici des tutoriels sur la [création d'un sous-réseau](../../construire/tutoriels/plateforme/creer-un-sous-reseau-subnet.md) et l'[ajout de validateurs](../../construire/tutoriels/noeuds-et-mise-en-jeu/ajouter-un-validateur.md) à un sous-réseau.
 
 ![](../../.gitbook/assets/image%20%281%29.png)
 
@@ -58,11 +58,11 @@ Les machines virtuelles d'Avalanche facilitent la définition d'une application 
 
 Avalanche ne prend pas encore en charge la création de nouvelles machines virtuelles \(VM\). Actuellement, Avalanche ne prend en charge que la création de nouvelles instances de la VM Avalanche.
 
-{% page-ref page="../../tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
+{% page-ref page="../../construire/tutoriels/plateforme/creer-une-nouvelle-blockchain.md" %}
 
 À l'avenir, Avalanche vous permettra de définir et de lancer des blockchains personnalisées, et nous publierons des SDK pour vous aider à le faire.
 
-{% page-ref page="../../tutoriels/plateforme/creer-une-machine-virtuelle.md" %}
+{% page-ref page="../../construire/tutoriels/plateforme/creer-une-machine-virtuelle.md" %}
 
 ## Chaîne d'échange **\(X-Chain\)**
 
@@ -70,19 +70,19 @@ La **X-Chain** agit comme une plateforme décentralisée pour créer et échange
 
 Un actif négocié sur la X-Chain est AVAX. Lorsque vous émettez une transaction vers une blockchain sur Avalanche, vous payez des frais libellés en AVAX.
 
-La X-Chain est une instance de la machine virtuelle Avalanche \(AVM\). L'[API X-Chain](../../apis/avm-api-x-chain.md) permet aux clients de créer et d'échanger des actifs sur la X-Chain et d'autres instances de l'AVM.
+La X-Chain est une instance de la machine virtuelle Avalanche \(AVM\). L'[API X-Chain](../../construire/apis/avm-api-x-chain.md) permet aux clients de créer et d'échanger des actifs sur la X-Chain et d'autres instances de l'AVM.
 
-{% page-ref page="../../tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
+{% page-ref page="../../construire/tutoriels/actifs-numeriques-intelligents/creer-un-actif-a-capitalisation-fixe.md" %}
 
 ## Chaîne de plateforme **\(P-Chain\)**
 
-La **P-Chain** est la blockchain de métadonnées sur Avalanche et coordonne les validateurs, garde la trace des sous-réseaux actifs et permet la création de nouveaux sous-réseaux. La P-Chain ****implémente le protocole de consensus Snowman.
+La **P-Chain** est la blockchain de métadonnées sur Avalanche et coordonne les validateurs, garde la trace des sous-réseaux actifs et permet la création de nouveaux sous-réseaux. La P-Chain _\*\*_implémente le protocole de consensus Snowman.
 
-L'[API P-Chain](../../apis/platform-api-p-chain.md) permet aux clients de créer des sous-réseaux, d'ajouter des validateurs aux sous-réseaux et de créer des blockchains.
+L'[API P-Chain](../../construire/apis/platform-api-p-chain.md) permet aux clients de créer des sous-réseaux, d'ajouter des validateurs aux sous-réseaux et de créer des blockchains.
 
 ## Chaîne de contrat \(C-Chain\)
 
-La C-Chain permet la création de contrats intelligents à l'aide de l'[API de la C-Chain](../../apis/evm-api-c-chain.md).
+La C-Chain permet la création de contrats intelligents à l'aide de l'[API de la C-Chain](../../construire/apis/evm-api-c-chain.md).
 
 La C-Chain est une instance de la machine virtuelle Ethereum alimentée par Avalanche.
 
