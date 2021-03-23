@@ -42,7 +42,7 @@
     * [Mise en jeu d'AVAX, en validant ou délégant via le portefeuille Avalanche](construire/tutoriels/noeuds-et-mise-en-jeu/mise-en-jeu-davax-en-validant-ou-delegant-via-le-portefeuille-avalanche.md)
     * [Déléguer à un nœud](construire/tutoriels/noeuds-et-mise-en-jeu/deleguer-a-un-noeud.md)
     * [Sécurisation d'un serveur VPS](construire/tutoriels/noeuds-et-mise-en-jeu/securisation-dun-serveur-vps.md)
-    * [Mettez à niveau votre nœud AvalancheGo](construire/tutoriels/noeuds-et-mise-en-jeu/mettez-a-niveau-votre-noeud-avalanchego.md)
+    * [Mettez à jour votre nœud AvalancheGo](construire/tutoriels/noeuds-et-mise-en-jeu/mettez-a-niveau-votre-noeud-avalanchego.md)
   * [Contrats intelligents](construire/tutoriels/contrats-intelligents/README.md)
     * [Déployer un contrat intelligent en utilisant Remix et MetaMask](construire/tutoriels/contrats-intelligents/deployer-un-contrat-intelligent.md)
     * [Utilisation de Truffle avec la C-Chain d'Avalanche](construire/tutoriels/contrats-intelligents/utilisation-de-truffle-avec-la-c-chain-davalanche.md)

@@ -1,10 +1,10 @@
-# Mettez à niveau votre nœud AvalancheGo
+# Mettez à jour votre nœud AvalancheGo
 
 {% embed url="https://www.youtube.com/watch?v=o4Fww-sHoaQ&ab\_channel=Avalanche" caption="" %}
 
 ## Sauvegardez votre nœud
 
-Avant de mettre à niveau votre nœud, il est recommandé de sauvegarder vos fichiers staker qui sont utilisés pour identifier votre nœud sur le réseau. Dans l'installation par défaut, vous pouvez les copier en exécutant les commandes suivantes:
+Avant de mettre à jour votre nœud, il est recommandé de sauvegarder vos fichiers staker qui sont utilisés pour identifier votre nœud sur le réseau. Dans l'installation par défaut, vous pouvez les copier en exécutant les commandes suivantes:
 
 ```cpp
 cd
@@ -18,7 +18,7 @@ Si vous utilisez votre nœud à des fins de développement et que vous avez des 
 
 ## Nœud installé à l'aide du script d'installation
 
-Si vous avez installé votre nœud à l'aide [du script d'installation](executer-un-noeud-avalanche-sous-linux-a-laide-du-script-dinstallation.md), pour mettre à niveau votre nœud, exécutez simplement à nouveau le script d'installation.
+Si vous avez installé votre nœud à l'aide [du script d'installation](executer-un-noeud-avalanche-sous-linux-a-laide-du-script-dinstallation.md), pour mettre à jour votre nœud, exécutez simplement à nouveau le script d'installation.
 
 ```cpp
 ./avalanchego-installer.sh
@@ -35,7 +35,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-Il mettra ensuite à niveau votre nœud vers la dernière version, et une fois terminé, redémarrera le nœud et imprimera les informations sur la dernière version:
+Il mettra ensuite à jour votre nœud vers la dernière version, et une fois terminé, redémarrera le nœud et imprimera les informations sur la dernière version:
 
 ```cpp
 Node upgraded, starting service...
@@ -44,13 +44,13 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-Et voilà, votre nœud est mis à niveau vers la dernière version.
+Et voilà, votre nœud est mis à jour vers la dernière version.
 
 Si vous avez installé votre nœud manuellement, continuez avec le reste du didacticiel.
 
 ## Arrêtez l'ancienne version du nœud
 
-Une fois la sauvegarde sécurisée, vous pouvez commencer à mettre à niveau votre nœud. Commencez par arrêter la version en cours d'exécution.
+Une fois la sauvegarde sécurisée, vous pouvez commencer à mettre à jour votre nœud. Commencez par arrêter la version en cours d'exécution.
 
 ### Nœud s'exécutant à partir du terminal
 

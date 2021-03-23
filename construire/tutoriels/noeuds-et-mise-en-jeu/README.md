@@ -12,5 +12,5 @@ Voici les articles de cette section :
 | \*\*\*\*[**Mise en jeu d'AVAX, en validant ou délégant via le portefeuille Avalanche**](mise-en-jeu-davax-en-validant-ou-delegant-via-le-portefeuille-avalanche.md)\*\*\*\* |
 | \*\*\*\*[**Déléguer à un noeud**](deleguer-a-un-noeud.md)\*\*\*\* |
 | \*\*\*\*[**Sécurisation d'un serveur VPS**](securisation-dun-serveur-vps.md)\*\*\*\* |
-| \*\*\*\*[**Mettez à niveau votre nœud Avalanche**](mettez-a-niveau-votre-noeud-avalanchego.md)\*\*\*\* |
+| \*\*\*\*[**Mettez à jour votre noeud AvalancheGo**](mettez-a-niveau-votre-noeud-avalanchego.md)\*\*\*\* |
 
