@@ -74,6 +74,7 @@
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
   * [Ortelius API](build/tools/ortelius.md)
+  * [Postman collection](build/tools/postman-avalanche-collection.md)
 * [References](build/references/README.md)
   * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
   * [Command Line Interface](build/references/command-line-interface.md)
