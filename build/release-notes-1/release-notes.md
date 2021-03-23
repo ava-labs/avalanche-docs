@@ -51,7 +51,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 There are two primary components to this upgrade:
 
 * General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
-* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock _\*\*_time had passed
+* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock \_\*\*\_time had passed
 
 ## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
