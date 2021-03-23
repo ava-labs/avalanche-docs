@@ -6,5 +6,5 @@
 
 [**Ortelius API**](ortelius.md)**:** is an API that allows clients to interact with Ortelius, the Avalanche indexer.
 
-[**Postman collection**](https://github.com/ava-labs/avalanche-postman-collection)**:** is an AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to your node and examine the output in a nicely formatted, readable way.
+[**Postman collection**](postman-avalanche-collection.md)**:** is an AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to your node and examine the output in a nicely formatted, readable way.
 
