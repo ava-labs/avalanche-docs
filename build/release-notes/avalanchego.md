@@ -231,7 +231,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 
 ## v1.0.4 AvalancheGo Release Notes  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
 
-![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/AvalancheGo-release-notes-v1.0.4.png)
+![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/image%20%2817%29.png)
 
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.

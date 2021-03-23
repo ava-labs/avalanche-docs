@@ -2,7 +2,7 @@
 
 ## Introduction
 
-![Primary Network](../../../.gitbook/assets/primary-network.png)
+![Primary Network](../../../.gitbook/assets/image%20%2821%29.png)
 
 Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](../../avalanchego-apis/contract-chain-c-chain-api.md) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties that could considerably improve the performance of DApps and the user experience.
 
@@ -12,7 +12,7 @@ Today, we will deploy and test a smart contract on Avalanche using Remix and Met
 
 Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
-![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
+![metamask network dropdown](../../../.gitbook/assets/image%20%2860%29.png)
 
 #### **Avalanche Mainnet Settings:**
 
