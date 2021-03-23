@@ -23,7 +23,7 @@ In this tutorial, you will:
 
 After you log in to your Metamask account, connect it to the Avalanche network. Click the Network drop-down -&gt; Select **Custom RPC**:
 
-![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
+![metamask network dropdown](../../../.gitbook/assets/image%20%2860%29.png)
 
 Enter the information for the network of your choice:
 
