@@ -212,7 +212,7 @@ Vamos a la [Wallet de Avalanche ](https://wallet.avax.network). Click en `Access
 
 Haz click en la pestaña`Send` a la izquierda. Para la cantidad, seleccione, `.002` AVAX. Ingrese la dirección de su nodo, luego haga clic en `Confirm`.
 
-![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%283%29.png)
+![web wallet send tab](../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%284%29.png)
 
 Podemos comprobar el balance de una dirección de un activo dado ejecutando `avm.getBalance`, otro método de la API de la X-Chain. Comprobemos que la transferencia se ha realizado:
 

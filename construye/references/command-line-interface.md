@@ -76,7 +76,6 @@ Bootstrap IPs es un array de pares de puertos IPv4. Estas direcciones IP se usar
 `--bootstrap-retry-enabled` \(booleano\):
 
 Si es verdadero, reintentará el bootstrapping si falla.
- 
 
 `--bootstrap-retry-max-attempts` \(uint\):
 
@@ -350,7 +349,7 @@ Parte del buffer de mensajes pendientes reservado para los mensajes de los valid
 
 Porción del tiempo de la CPU de la cadena reservada para los mensajes de los validadores. El valor por defecto es `0.375`.
 
-### Red (Network) 
+### Red \(Network\)
 
 `--network-initial-timeout` \(duration\):
 
@@ -366,39 +365,27 @@ Valor máximo de tiempo de espera del administrador de tiempo de espera adaptabl
 
 `--network-timeout-halflife` \(duration\):
 
-Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --> menor volatilidad en los cálculos de la latencia en la red
-Predeterminado en `5m`.
+Vida media utilizada para calcular el promedio de la latencia en la red. Un valor grande --&gt; menor volatilidad en los cálculos de la latencia en la red Predeterminado en `5m`.
 
 `--network-timeout-coefficient` \(duration\):
 
-Petición a los peers expirarán después de [`network-timeout-coefficient`] * [latencia promedio de peticiones].
-Defaults to `2`.
+Petición a los peers expirarán después de \[`network-timeout-coefficient`\] \* \[latencia promedio de peticiones\]. Defaults to `2`.
 
-`--network-health-min-conn-peers` \(uint\):
-El nodo informará que no está saludable si está conectado a menos de este número de pares. Predeterminado a `1`.
+`--network-health-min-conn-peers` \(uint\): El nodo informará que no está saludable si está conectado a menos de este número de pares. Predeterminado a `1`.
 
-`--network-health-max-time-since-msg-received` \(duration\):
-El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo. 
-Defaults to `1m`.
+`--network-health-max-time-since-msg-received` \(duration\): El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo. Defaults to `1m`.
 
-`--network-health-max-time-since-no-requests` \(duration\):
-El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo..
-Defaults to `1m`.
+`--network-health-max-time-since-no-requests` \(duration\): El nodo informará que no está saludable si no ha recibido un mensaje durante este período de tiempo.. Defaults to `1m`.
 
-`--network-health-max-portion-send-queue-full` \(float\):
-El nodo informará que no está saludable si su cola de envíos está más llena que esta proporción. Debe estar en [0,1]. El valor predeterminado es `0.9`.
+`--network-health-max-portion-send-queue-full` \(float\): El nodo informará que no está saludable si su cola de envíos está más llena que esta proporción. Debe estar en \[0,1\]. El valor predeterminado es `0.9`.
 
-`--network-health-max-send-fail-rate` \(float\):
-El nodo informará que no está en buen estado si falla más de esta proporción de los envíos de mensajes. Debe estar en [0,1]. Predeterminado a `0.25`.
+`--network-health-max-send-fail-rate` \(float\): El nodo informará que no está en buen estado si falla más de esta proporción de los envíos de mensajes. Debe estar en \[0,1\]. Predeterminado a `0.25`.
 
-###  Health
+### Health
 
-`--health-check-frequency` \(duration\):
-Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `30s`.
+`--health-check-frequency` \(duration\): Las revisiones de salud se ejecutan con esta frecuencia. Por defecto `30s`.
 
-`--health-check-averager-halflife`  \(duration\):
-Vida media de los promedios utilizados en las verificaciones de estado (para medir la tasa de errores de mensajes, por ejemplo).
-Valor más grande --> cálculo de promedios menos volátil. El valor predeterminado es `10s`
+`--health-check-averager-halflife` \(duration\): Vida media de los promedios utilizados en las verificaciones de estado \(para medir la tasa de errores de mensajes, por ejemplo\). Valor más grande --&gt; cálculo de promedios menos volátil. El valor predeterminado es `10s`
 
 ### Throughput Server
 
@@ -494,7 +481,3 @@ Las opciones especifican los parámetros para Coreth \(the C-Chain\) de la sigui
 * `debug-api-enabled` -&gt; Habilita el API de `debug_*`.
 * `web3-api-enabled` -&gt; Habilita el API de `web3_*`.
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTUwNjYwMjksNjc0MDc4Njg5LC0xND
-c0ODU3ODk4XX0=
--->
