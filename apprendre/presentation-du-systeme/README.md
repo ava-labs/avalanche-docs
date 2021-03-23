@@ -76,7 +76,7 @@ La X-Chain est une instance de la machine virtuelle Avalanche \(AVM\). L'[API X-
 
 ## Chaîne de plateforme **\(P-Chain\)**
 
-La **P-Chain** est la blockchain de métadonnées sur Avalanche et coordonne les validateurs, garde la trace des sous-réseaux actifs et permet la création de nouveaux sous-réseaux. La P-Chain _\*\*_implémente le protocole de consensus Snowman.
+La **P-Chain** est la blockchain de métadonnées sur Avalanche et coordonne les validateurs, garde la trace des sous-réseaux actifs et permet la création de nouveaux sous-réseaux. La P-Chain **implémente le protocole de consensus Snowman.**
 
 L'[API P-Chain](../../construire/apis/platform-api-p-chain.md) permet aux clients de créer des sous-réseaux, d'ajouter des validateurs aux sous-réseaux et de créer des blockchains.
 

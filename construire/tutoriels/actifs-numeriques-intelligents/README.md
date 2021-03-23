@@ -1,8 +1,12 @@
 # Actifs Numériques Intelligents
 
-| Titre | Description |
-| :--- | :--- |
-| [**Créer un actif à capitalisation fixe**](creer-un-actif-a-capitalisation-fixe.md) | créer et échanger un actif fongible à plafond fixe sur Avalanche |
-| [**Créer un actif à capitalisation variable**](creer-un-actif-a-capitalisation-variable.md) | créer et échanger un actif fongible à capitalisation variable sur Avalanche |
-| [**Création d'un NFT - Partie 1**](creation-dun-nft-partie-1.md) | créer et envoyer des NFT à l'aide de l'API d'AvalancheGo \(non fongible\) |
+Voici les articles de cette section :
+
+| [Créer un token ERC-20](creer-un-token-erc-20.md) |
+| :--- |
+| [**Créer un actif à capitalisation fixe**](creer-un-actif-a-capitalisation-fixe.md) |
+| [**Créer un actif à capitalisation variable**](creer-un-actif-a-capitalisation-variable.md) |
+| [**Création d'un NFT - Partie 1**](creation-dun-nft-partie-1.md) |
+| \*\*\*\*[**Créez des NFT avec le portefeuille Avalanche**](creez-des-nft-avec-le-portefeuille-avalanche.md)\*\*\*\* |
+| \*\*\*\*[**Utilisez les Wrapped AVAX \(WAVAX\) sur Avalanche**](utilisez-les-wrapped-avax-wavax-sur-avalanche.md)\*\*\*\* |
 

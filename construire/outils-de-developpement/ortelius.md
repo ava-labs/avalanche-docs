@@ -4,7 +4,7 @@ description: >-
   d'Avalanche.
 ---
 
-# Ortelius
+# Ortelius API
 
 ## Ortelius API
 
