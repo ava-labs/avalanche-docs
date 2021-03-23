@@ -4,7 +4,7 @@ description: Apprenez les concepts de base et l'architecture d'Avalanche
 
 # Aperçu de la plateforme
 
-Avalanche dispose de 3 blockchains intégrées : Xhaîne d'échange \(X-Chain\)**,** Xhaîne de plateforme \(P-Chain\), Xhaîne de contrat \(C-Chain\)**.** Les 3 blockchains sont validées et sécurisées par le [réseau primaire](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Le réseau principal est un sous-réseau \([subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet)\) spécial et tous les membres de tous les sous-réseaux personnalisés doivent également être membres du réseau principal en mettant en jeu au moins 2 000 AVAX.
+Avalanche dispose de 3 blockchains intégrées : Chaîne d'échange \(X-Chain\)**,** Chaîne de plateforme \(P-Chain\), Chaîne de contrat \(C-Chain\)**.** Les 3 blockchains sont validées et sécurisées par le [réseau primaire](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). Le réseau principal est un sous-réseau \([subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet)\) spécial et tous les membres de tous les sous-réseaux personnalisés doivent également être membres du réseau principal en mettant en jeu au moins 2 000 AVAX.
 
 Voici des tutoriels sur la [création d'un sous-réseau](../../construire/tutoriels/plateforme/creer-un-sous-reseau-subnet.md) et l'[ajout de validateurs](../../construire/tutoriels/noeuds-et-mise-en-jeu/ajouter-un-validateur.md) à un sous-réseau.
 
