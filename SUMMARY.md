@@ -33,7 +33,6 @@
     * [Maintenir un nœud Avalanche](https://www.youtube.com/watch?v=o4Fww-sHoaQ&ab_channel=Avalanche)
     * [Exécutez un nœud Avalanche et devenez validateur](https://www.youtube.com/watch?v=ZyQPeSSCbYU&ab_channel=Avalanche)
     * [Exécuter un nœud Avalanche avec Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0&ab_channel=Avalanche)
-    * [Exécutez un nœud Avalanche avec un Raspberry Pi 4](https://www.youtube.com/watch?v=jlur1nef4-E&ab_channel=Avalanche)
     * [Exécutez un nœud Avalanche et faites une mise en jeu avec le portefeuille](https://www.youtube.com/watch?v=ZyQPeSSCbYU&ab_channel=Avalanche)
     * [Exécuter un nœud Avalanche avec OVH](construire/tutoriels/noeuds-et-mise-en-jeu/executer-un-noeud-avalanche-avec-ovh.md)
     * [Exécuter un nœud Avalanche avec Amazon Web Services \(AWS\)](construire/tutoriels/noeuds-et-mise-en-jeu/executer-un-noeud-avalanche-avec-amazon-web-services-aws.md)
