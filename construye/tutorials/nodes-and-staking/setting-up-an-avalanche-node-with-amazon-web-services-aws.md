@@ -24,7 +24,7 @@ Una vez que tu cuenta esté configurada, deberías crear una nueva instancia EC2
 
 Para acceder a la instancia EC2, necesitarás una llave en tu máquina local que te permita acceder a la instancia. Primero, crea esa clave para que pueda ser asignada a la instancia EC2 más adelante. En la barra de la izquierda, bajo **Network & Security**, selecciona **Key Pairs.**
 
-![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/Network-and-Security.png)
+![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/image%20%2838%29.png)
 
 Selecciona **Create key pair** para iniciar el asistente de creación de key pairs.
 

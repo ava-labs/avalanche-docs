@@ -57,7 +57,7 @@ El token \(AVAX\) Avalanche es el token nativo de la plataforma Avalanche y se u
 
 ## Protocolo de Consenso de Avalanche
 
-![Comparaci&#xF3;n de consenso](.gitbook/assets/consensus-comparison.png)
+![Comparaci&#xF3;n de consenso](.gitbook/assets/image%20%2810%29.png)
 
 Los protocolos en la familia Avalanche operan a través de repetidas votaciones sub-muestreadas. Cuando un [validador](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) está determinando si una [transacción](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) debe ser aceptada o rechazada, esta pregunta a un pequeño subconjunto aleatorio de validadores si creen que la transacción debe ser aceptada o rechazada. Si el validador consultado piensa que la transacción no es válida, ya la ha rechazado o prefiere una transacción conflictiva, responde que piensa que la transacción debe ser rechazada. En caso contrario, responde que cree que la transacción debería ser aceptada.
 

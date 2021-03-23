@@ -2,7 +2,7 @@
 
 ## Introducción
 
-![Primary Network](../../../.gitbook/assets/primary-network.png)
+![Primary Network](../../../.gitbook/assets/image%20%2821%29.png)
 
 La Red Primaria de Avalanche es una Subnet que tiene tres cadenas: P-Chain, X-Chain, y C-Chain. La C-Chain es una instancia de la Ethereum Virtual Machine impulsada por el protocolo de consenso Snowman de Avalanche. El [RPC de la C-Chain](../../avalanchego-apis/contract-chain-c-chain-api.md) puede hacer todo lo que un cliente típico de Ethereum puede hacer usando los llamados RPC estándar de Ethereum. Los beneficios inmediatos de usar la C-Chain en vez de Ethereum son todos los beneficios de usar Avalanche. Estas propiedades que podrían mejorar considerablemente el rendimiento de los DApps y la experiencia del usuario.
 
@@ -12,7 +12,7 @@ Hoy, desplegaremos y probaremos un smart contract en Avalanche usando Remix y Me
 
 Iniciamos sesión en MetaMask -&gt; Hacemos click en el menú desplegable Network -&gt; Seleccionamos Custom RPC
 
-![metamask network dropdown](../../../.gitbook/assets/metamask-network-dropdown.png)
+![metamask network dropdown](../../../.gitbook/assets/image%20%2860%29.png)
 
 #### **Configuración de la Red Principal de Avalanche:**
 

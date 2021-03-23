@@ -8,7 +8,7 @@ Avalanche cuenta con 3 blockchains incorporadas: [**Exchange Chain \(X-Chain\)**
 
 Aquí hay tutoriales de como [crear una subnet](../../construye/tutorials/platform/create-a-subnet.md) y [agregar validadores](../../construye/tutorials/nodes-and-staking/add-a-validator.md) a una subnet.
 
-![Primary network](../../.gitbook/assets/primary-network.png)
+![Primary network](../../.gitbook/assets/image%20%2821%29.png)
 
 ## Subnets
 
