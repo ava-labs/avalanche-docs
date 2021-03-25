@@ -2,6 +2,38 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## **v1.3.0 AvalancheGo Release Notes \(View on GitHub\)**
+
+{% hint style="danger" %}
+Please note that this change is not backwards compatible with previous releases.  
+****  
+This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
+{% endhint %}
+
+The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the Fuji testnet and 10 AM EST, March 31st 2021 on mainnet.
+
+**The primary components to this upgrade include:**
+
+* Reduced C-chain gas cost from 470 nAVAX to 225 nAVAX.
+* Removed C-chain gas refunds. This change adopts [EIP-3298](https://eips.ethereum.org/EIPS/eip-3298).
+* Refactored C-chain verification to be cleaner when performing network upgrades.
+* Fixed the Auth API to properly enforce revoked tokens.
+* Strengthened the Auth API to ensure the expected signature format is used.
+* Removed the Auth API's password from the CLI arguments.
+* Added more strict file permissions checks.
+* Added some minor additional error handling.
+* Sanitized log writes before being written to disk.
+* Added configurable origins to the HTTP endpoint.
+* Removed attempted HTTPs to HTTP fail over on startup. Now the node will close on startup if upgrading the HTTP endpoint to HTTPs fails.
+
+**Added command line arguments:**
+
+* `api-auth-password-file` specifies the file to read the Auth API's password from.
+
+**Removed command line arguments:**
+
+* `api-auth-password`
+
 ## **v1.2.4 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
 
 {% hint style="danger" %}
