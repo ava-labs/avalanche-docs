@@ -11,10 +11,11 @@ To import preconfigured dashboards:
 
 | Link | Description |
 | :--- | :--- |
-| [General](general.json) | Dashboard with basic panels showing high-level info |
+| [Network](network.json) | Dashboard with networking information |
 | [Database](database.json) | Dashboard with in-depth info about the database operations |
 | [Machine](machine.json) | Information about the computer node is running on |
 | [X-Chain](x_chain.json) | Dashboard showing in-depth info about X-Chain operation |
 | [P-Chain](p_chain.json) | Dashboard showing in-depth info about P-Chain operation |
 | [C-Chain](c_chain.json) | Dashboard showing in-depth info about C-Chain operation |
+| [Main Dashboard](main.json) | Main dashboard, showing most important info, with links to other dashboards, useful as a starting point |
 
