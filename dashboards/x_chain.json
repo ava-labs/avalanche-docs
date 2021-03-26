@@ -56,7 +56,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -194,7 +194,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -364,7 +364,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -511,7 +511,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -621,7 +621,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -791,7 +791,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -916,10 +916,11 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -935,7 +936,7 @@
         "y": 25
       },
       "hiddenSeries": false,
-      "id": 17,
+      "id": 25,
       "legend": {
         "avg": true,
         "current": true,
@@ -945,14 +946,14 @@
         "total": false,
         "values": true
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -962,9 +963,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(avalanche_X_handler_dropped[1m])",
+          "expr": "avalanche_X_benchlist_benched_weight{job=\"avalanchego\"} / 10^9",
           "interval": "",
-          "legendFormat": "Dropped",
+          "legendFormat": "AVAX Benched",
           "refId": "A"
         }
       ],
@@ -972,7 +973,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Incoming Messages Dropped in Last Minute",
+      "title": "AVAX Benched",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -992,7 +993,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1056,7 +1057,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1181,11 +1182,10 @@
     },
     {
       "aliasColors": {},
-      "bars": true,
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1201,7 +1201,7 @@
         "y": 33
       },
       "hiddenSeries": false,
-      "id": 25,
+      "id": 17,
       "legend": {
         "avg": true,
         "current": true,
@@ -1211,14 +1211,14 @@
         "total": false,
         "values": true
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1228,9 +1228,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_X_benchlist_benched_weight{job=\"avalanchego\"} / 10^9",
+          "expr": "increase(avalanche_X_handler_dropped[1m])",
           "interval": "",
-          "legendFormat": "AVAX Benched",
+          "legendFormat": "Dropped",
           "refId": "A"
         }
       ],
@@ -1238,7 +1238,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "AVAX Benched",
+      "title": "Incoming Messages Dropped in Last Minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1313,7 +1313,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.4.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1371,10 +1371,12 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 27,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Avalanche"
+  ],
   "templating": {
     "list": []
   },
@@ -1399,5 +1401,5 @@
   "timezone": "",
   "title": "X-Chain",
   "uid": "eE8nd3dGk",
-  "version": 3
+  "version": 6
 }
