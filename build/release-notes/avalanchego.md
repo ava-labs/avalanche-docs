@@ -2,7 +2,7 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-## **v1.3.0 AvalancheGo Release Notes \(View on GitHub\)**
+## **v1.3.0 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)**\)**
 
 {% hint style="danger" %}
 Please note that this change is not backwards compatible with previous releases.  
