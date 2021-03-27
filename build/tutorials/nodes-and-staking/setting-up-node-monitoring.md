@@ -62,11 +62,11 @@ wget https://github.com/prometheus/prometheus/releases/download/v2.25.0/promethe
 ```
 
 ```cpp
-tar xvf prometheus-2.21.0.linux-amd64.tar.gz
+tar xvf prometheus-2.25.0.linux-amd64.tar.gz
 ```
 
 ```cpp
-cd prometheus-2.21.0.linux-amd64
+cd prometheus-2.25.0.linux-amd64
 ```
 
 Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
