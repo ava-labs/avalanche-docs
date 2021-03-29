@@ -998,7 +998,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "Measures how long each kind of request on the X-Chain takes to handle.\nThe value for chits, for example, is how long, in seconds, it takes to handle a chits message.",
+      "description": "Measures how long each kind of request on the X-Chain takes to process.\nThe value for chits, for example, is how long, in seconds, it takes to process a chits message.",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
