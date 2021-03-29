@@ -25,9 +25,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -56,7 +54,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -120,9 +118,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -151,7 +147,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -251,9 +247,7 @@
       "datasource": "Prometheus",
       "description": "The average time between a block's issuance and acceptance by this node over the last 5 minutes.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -282,7 +276,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -356,9 +350,7 @@
       "datasource": "Prometheus",
       "description": "The average time between a block's issuance and rejection by this node over the last 5 minutes.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -387,7 +379,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -487,13 +479,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "thresholds": {
-            "mode": "absolute",
-            "steps": []
-          }
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -522,7 +508,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -632,9 +618,7 @@
       "datasource": "Prometheus",
       "description": "Percentage of queries for which we receive chits on time.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -663,7 +647,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -738,9 +722,7 @@
       "datasource": "Prometheus",
       "description": "Measures how much of each second is being spent handling different kinds of messages on the C-Chain.\nThe value for chits, for example, is the number of seconds spent handling chits messages per second, over the last 30 seconds.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -773,7 +755,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -904,13 +886,7 @@
       "datasource": "Prometheus",
       "description": "Measures how long each kind of request on the C-Chain takes to handle.\nThe value for chits, for example, is how long, in seconds, it takes to handle a chits message.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "thresholds": {
-            "mode": "absolute",
-            "steps": []
-          }
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -943,7 +919,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1074,9 +1050,7 @@
       "datasource": "Prometheus",
       "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1105,7 +1079,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1170,13 +1144,7 @@
       "datasource": "Prometheus",
       "description": "Measures how many of each kind of message are received per second on the C-Chain.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "thresholds": {
-            "mode": "absolute",
-            "steps": []
-          }
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1209,7 +1177,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1343,7 +1311,7 @@
       },
       "id": 33,
       "panels": [],
-      "title": "Problem indicators (these should generally be 0 or close to it)",
+      "title": "Possible Problem Indicators (these should return to 0 after a few minutes)",
       "type": "row"
     },
     {
@@ -1353,9 +1321,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1384,7 +1350,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1448,9 +1414,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1479,7 +1443,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1543,9 +1507,7 @@
       "dashes": false,
       "datasource": null,
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1574,7 +1536,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1594,7 +1556,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Messages expired",
+      "title": "Incoming Messages Expired in Last Minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1632,15 +1594,71 @@
       }
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                100
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "15m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "15m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "min"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Incoming Messages Throttled in Last Minute alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1669,7 +1687,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1685,11 +1703,20 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 100,
+          "visible": true
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Handler throttled",
+      "title": "Incoming Messages Throttled in Last Minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1734,9 +1761,7 @@
       "datasource": "Prometheus",
       "description": "The number of blocks that are waiting to be issued because of a missing dependency.",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -1765,7 +1790,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "7.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1854,5 +1879,5 @@
   "timezone": "",
   "title": "C-Chain",
   "uid": "eE8nd3dGm",
-  "version": 8
+  "version": 9
 }
