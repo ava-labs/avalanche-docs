@@ -212,6 +212,7 @@ Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made 
 ```text
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
 ```
+**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 (the default used by truffle). 
 
 You can run the script with:
 
