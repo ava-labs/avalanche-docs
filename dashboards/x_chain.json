@@ -1,4 +1,34 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.5.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,7 +45,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -23,7 +53,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -54,7 +84,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -158,7 +188,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "The average time between a vertex's issuance and acceptance by this node over the last 5 minutes.",
       "fieldConfig": {
         "defaults": {},
@@ -190,7 +220,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -327,7 +357,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -358,7 +388,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -471,7 +501,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Percentage of queries for which we receive chits on time.",
       "fieldConfig": {
         "defaults": {},
@@ -503,7 +533,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -575,7 +605,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Measures how much of each second is being spent handling different kinds of messages on the X-Chain.\nThe value for chits, for example, is the number of seconds spent handling chits messages per second, over the last 30 seconds.",
       "fieldConfig": {
         "defaults": {},
@@ -611,7 +641,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -739,7 +769,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Measures how long each kind of request on the X-Chain takes to handle.\nThe value for chits, for example, is how long, in seconds, it takes to handle a chits message.",
       "fieldConfig": {
         "defaults": {},
@@ -775,7 +805,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -903,7 +933,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
       "fieldConfig": {
         "defaults": {},
@@ -935,7 +965,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -997,7 +1027,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Measures how many of each kind of message are received per second on the X-Chain.",
       "fieldConfig": {
         "defaults": {},
@@ -1033,7 +1063,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1157,7 +1187,7 @@
       }
     },
     {
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1175,7 +1205,7 @@
           {
             "evaluator": {
               "params": [
-                100
+                250
               ],
               "type": "gt"
             },
@@ -1231,7 +1261,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -1262,7 +1292,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1284,7 +1314,7 @@
           "fill": true,
           "line": true,
           "op": "gt",
-          "value": 100,
+          "value": 250,
           "visible": true
         }
       ],
@@ -1307,6 +1337,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1308",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1315,6 +1346,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1309",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1333,7 +1365,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -1364,7 +1396,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1401,6 +1433,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1229",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1409,6 +1442,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1230",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1427,7 +1461,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {},
@@ -1459,7 +1493,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1521,8 +1555,8 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "description": "Number of incoming messages dropped because a non-validator used the max number of messages from the at-large pool",
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "Number of incoming messages dropped due to rate-limiting.",
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -1553,7 +1587,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.1",
+      "pluginVersion": "7.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1564,9 +1598,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_X_handler_throttled_pool_alloc_exhausted[1m])",
+          "expr": "increase(avalanche_X_handler_throttled_pool_alloc_exhausted[1m]) + increase(avalanche_X_handler_throttled_pool_empty[1m]) + increase(avalanche_X_handler_throttled_validator_alloc_exhausted[1m])",
           "interval": "",
-          "legendFormat": "Pool exhausted",
+          "legendFormat": "Throttled Messages",
           "refId": "A"
         }
       ],
@@ -1574,7 +1608,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Throttled message pool exhausted",
+      "title": "Throttled Messages in Last Minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1590,6 +1624,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1068",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1598,289 +1633,7 @@
           "show": true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "Number of incoming messages dropped because at-large pending message pool is empty",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 42
-      },
-      "hiddenSeries": false,
-      "id": 39,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_X_handler_throttled_pool_empty[1m])",
-          "interval": "",
-          "legendFormat": "Pool empty",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throttled message pool empty",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "Number of incoming messages dropped because a validator used the max number of pending messages allocated to them",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 49
-      },
-      "hiddenSeries": false,
-      "id": 41,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_X_handler_throttled_validator_alloc_exhausted[1m])",
-          "interval": "",
-          "legendFormat": "Pool exhausted",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Validator message pool exhausted",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 49
-      },
-      "hiddenSeries": false,
-      "id": 31,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "avalanche_X_handler_pending",
-          "interval": "",
-          "legendFormat": "Pending Messages",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Unprocessed Incoming Messages",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
+          "$$hashKey": "object:1069",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1925,5 +1678,5 @@
   "timezone": "",
   "title": "X-Chain",
   "uid": "eE8nd3dGk",
-  "version": 8
+  "version": 3
 }
