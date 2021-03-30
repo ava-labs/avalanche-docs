@@ -192,7 +192,7 @@ This prints the account:
 ### Unlock your account:
 
 ```text
-truffle(development)> await web3.eth.personal.unlockAccount(account[0])
+truffle(development)> await web3.eth.personal.unlockAccount(account)
 ```
 
 This returns:
