@@ -107,7 +107,7 @@ Path to a JSON file containing the genesis data to use. Ignored when running sta
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For example if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`.
 
 `--http-port` \(int\):
 
