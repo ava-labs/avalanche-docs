@@ -2,7 +2,31 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-## **v1.3.0 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)**\)**
+## v1.3.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability, monitoring improvements, and minor bug fixes.
+{% endhint %}
+
+**The primary components to this upgrade include:**
+
+* Fixed C-chain segfault when performing compression on arm64 CPUs.
+* Added group permissions to local files to enable complex node monitoring.
+* Stripped white space from Auth passwords passed through the api-auth-password-file flag.
+* Removed timeSinceNoOutstandingRequests as it was replaced by longestRunningRequest.
+* Added additional metrics in network throttling.
+* Various code cleanup.
+
+**Added command line arguments:**
+
+* `network-health-max-outstanding-request-duration`
+
+**Removed command line arguments:**
+
+* `network-health-max-time-since-no-requests`
+
+
+## v1.3.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)\)
 
 {% hint style="danger" %}
 Please note that this change is not backwards compatible with previous releases.  
