@@ -46,8 +46,3 @@ Cualquier cosa que dependa de platform.getTxStatus debería cambiar a usar el ar
 ```
 
 Para ayuda con esta actualización ve a [Preguntas más frecuentes de los desarrolladores](http://support.avalabs.org/en/articles/4593477-how-do-i-upgrade-my-node), si todavía tienes problemas, puedes unirte a nuestro servidor de [Discord](https://chat.avalabs.org/) para que te ayudemos.
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4OTc0OTM5OSwtMTc2MDE0NjUzMSwzOD
-M3ODE2MCw1NDg4Njg5NV19
--->

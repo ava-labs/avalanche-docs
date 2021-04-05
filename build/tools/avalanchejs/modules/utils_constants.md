@@ -1518,6 +1518,3 @@ ___
 • **vm**: *string* = XChainVMName
 
 *Defined in [src/utils/constants.ts:264](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L264)*
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjg2MzE0MDddfQ==
--->

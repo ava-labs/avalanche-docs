@@ -409,7 +409,3 @@ Deberías ver el numero que guardaste.
 ## Resumen
 
 Ahora tiene las herramientas necesarias para lanzar una red local de Avalanche, crear un proyecto de truffle, así como crear, compilar, desplegar e interactuar con los Smart Contracts de Solidity.
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5OTQ0NTM2MV19
--->

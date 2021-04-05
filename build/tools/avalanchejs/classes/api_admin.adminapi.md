@@ -298,6 +298,3 @@ Stop the CPU profile that was previously started.
 **Returns:** *Promise‹boolean›*
 
 Promise for a boolean that is true on success.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2MzQyODY2NV19
--->
