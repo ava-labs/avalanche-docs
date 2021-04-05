@@ -1606,7 +1606,3 @@ Hagamos una StakeableLockOut con:
     0x43, 0xab, 0x08, 0x59,
 ]
 ```
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbODEyMDY0MTg5XX0=
--->
