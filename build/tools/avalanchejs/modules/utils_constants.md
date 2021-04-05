@@ -527,7 +527,7 @@ ___
 
 ###  gasPrice
 
-• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225470))
+• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
 *Defined in [src/utils/constants.ts:122](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L122)*
 
@@ -719,7 +719,7 @@ ___
 
 ###  gasPrice
 
-• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225470))
+• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
 *Defined in [src/utils/constants.ts:157](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L157)*
 
@@ -1211,7 +1211,7 @@ ___
 
 ###  gasPrice
 
-• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225470))
+• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
 *Defined in [src/utils/constants.ts:256](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L256)*
 
@@ -1379,7 +1379,7 @@ ___
 
 ###  gasPrice
 
-• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225470))
+• **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
 *Defined in [src/utils/constants.ts:290](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L290)*
 
@@ -1519,5 +1519,6 @@ ___
 
 *Defined in [src/utils/constants.ts:264](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/constants.ts#L264)*
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNDU1MTY4NSwtMTI2ODYzMTQwN119
+eyJoaXN0b3J5IjpbLTEyNjg2MzE0MDcsLTEyNjg2MzE0MDddfQ
+==
 -->
