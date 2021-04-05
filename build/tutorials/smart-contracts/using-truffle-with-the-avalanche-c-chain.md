@@ -77,7 +77,7 @@ module.exports = {
      },
      network_id: "*",
      gas: 3000000,
-     gasPrice: 470000000000
+     gasPrice: 225000000000
    }
   }
 };
@@ -264,7 +264,7 @@ Migrations dry-run (simulation)
    > account:             0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD
    > balance:             1000.91683679
    > gas used:            176943 (0x2b32f)
-   > gas price:           470 gwei
+   > gas price:           225 gwei
    > value sent:          0 ETH
    > total cost:          0.08316321 ETH
 
@@ -281,7 +281,7 @@ Migrations dry-run (simulation)
    > account:             0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD
    > balance:             1000.8587791
    > gas used:            96189 (0x177bd)
-   > gas price:           470 gwei
+   > gas price:           225 gwei
    > value sent:          0 ETH
    > total cost:          0.04520883 ETH
 
@@ -411,3 +411,6 @@ You should see the number you stored.
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTgwMjEyNjU5Nl19
+-->
