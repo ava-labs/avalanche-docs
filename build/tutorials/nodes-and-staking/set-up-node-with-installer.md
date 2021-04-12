@@ -37,7 +37,7 @@ Look for line that doesn't have `grep` on it. In this example, that is the secon
 
 #### Node working files
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
+If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to. Check out this [tutorial](node-backup-and-restore.md) for backup and restore procedure.
 
 ### Networking considerations
 
@@ -233,7 +233,9 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
+
+Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 
 If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
 
