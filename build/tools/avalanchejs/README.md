@@ -6,8 +6,8 @@ The APIs currently supported by default are:
 
 * Admin API
 * Auth API
-* AVM API \(X-Chain\)
-* EVM API \(C-Chain)
+* AVM API (X-Chain)
+* EVM API (C-Chain)
 * Health API
 * Info API
 * Keystore API
@@ -22,11 +22,11 @@ Using AvalancheJS, developers can:
 * Retrieve balances on addresses
 * Get UTXOs for addresses
 * Build and sign transactions
-* Issue signed transactions to the X-Chain, P-Chain and C-Chain on the primary subnet
+* Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
 * Create a Subnetwork
 * Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
-* Add a Validator to the primary subnet
-* Add a Delegator to the primary subnet
+* Add a Validator to the Primary network
+* Add a Delegator to the Primary network
 * Administer a local node
 * Retrieve Avalanche network information from a node
 

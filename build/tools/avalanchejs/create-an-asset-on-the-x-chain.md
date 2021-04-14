@@ -1,6 +1,6 @@
 # Create an Asset on the X-Chain
 
-This example creates an asset in the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](../avash). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
+This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](../avash). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
 
 ```ts
 import { 
@@ -31,9 +31,9 @@ const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
 const xchain: AVMAPI = avalanche.XChain() // Returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Import the local network's whale
+## Import the local network's pre-funded address
 
-Next we get an instance of bintools, for dealing with binary data, an the X-Chain local keychain. The local network `12345` has a whale which you can access with the private key `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Lastly get the whale address as a `Buffer` and as a `string`.
+Next we get an instance of bintools, for dealing with binary data, an the X-Chain local keychain. The local network `12345` has a pre-funded address which you can access with the private key `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Lastly get the pre-funded address as a `Buffer` and as a `string`.
 
 ```ts
 const bintools: BinTools = BinTools.getInstance()
@@ -46,7 +46,7 @@ const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 
 ## Prepare for the Mint Output
 
-Now we need to create an empty array for the `SECPMintOutput` which we're going to create. We also need a `threshold` and `locktime` for the outputs which we're going to create. Each X-Chain transaction can accepts a 256 byte `memo` of arbitrary data.
+Now we need to create an empty array for the `SECPMintOutput` which we're going to create. We also need a `threshold` and `locktime` for the outputs which we're going to create. Each X-Chain transaction can can contain a `memo` field of up to 256 bytes. of arbitrary data.
 
 ```ts
 const outputs: SECPMintOutput[] = []
@@ -88,7 +88,7 @@ Pass the `xAddressStrings` to `xchain.getUTXOs` to fetch the UTXO.
 
 ## Creating the initial state
 
-We want to mint an asset with 507 coins to of our managed key. This sets up the state that will result from the Create Asset transaction.
+We want to mint an asset with 507 units of the asset held by the managed key. This sets up the state that will result from the Create Asset transaction.
 
 ```ts
 // Create outputs for the asset's initial state
