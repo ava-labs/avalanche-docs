@@ -785,7 +785,8 @@ The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcur
 
 ```cpp
 platform.getCurrentValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -821,6 +822,7 @@ platform.getCurrentValidators({
 ```
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+* `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
 * `validators`:
   * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
@@ -983,7 +985,8 @@ List the validators in the pending validator set of the specified Subnet. Each v
 
 ```cpp
 platform.getPendingValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -1006,6 +1009,7 @@ platform.getPendingValidators({
 ```
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+* `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
 * `validators`:
   * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
