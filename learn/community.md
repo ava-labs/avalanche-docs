@@ -20,6 +20,8 @@
 
 [**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
 
+[**Bug Bounty Program**](https://hackenproof.com/avalanche): the official Avalanche bug bounty program hosted by HackenProof. Submit security issues to receive a bounty reward (terms and conditions apply).
+
 ### Ecosystem Partners
 
 [**Blockchain Academy Chile**](https://www.blockchainacademy.cl/): training and education platform for both technical developers and business entrepreneurs to learn about blockchain technology.
