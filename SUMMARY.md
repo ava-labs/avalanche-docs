@@ -5,6 +5,7 @@
 ## Learn
 
 * [Platform Overview](learn/platform-overview/README.md)
+  * [Avalanche Consensus](learn/platform-overview/avalanche-consensus.md)
   * [Staking](learn/platform-overview/staking.md)
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
@@ -16,10 +17,10 @@
 ## Build
 
 * [Get Started: Run an Avalanche Node](build/get-started.md)
-* [Release Notes](build/release-notes-1/README.md)
+* [Release Notes](build/release-notes/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
-  * [AvalancheGo Release Notes](build/release-notes-1/release-notes.md)
-  * [Ortelius Release Notes](build/release-notes-1/ortelius-release-notes.md)
+  * [AvalancheGo Release Notes](build/release-notes/avalanchego.md)
+  * [Ortelius Release Notes](build/release-notes/ortelius.md)
 * [Tutorials](build/tutorials/README.md)
   * [Platform](build/tutorials/platform/README.md)
     * [Create a Blockchain](build/tutorials/platform/create-a-new-blockchain.md)
@@ -45,6 +46,7 @@
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
+    * [Add Avalanche to MetaMask programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
@@ -73,6 +75,7 @@
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
   * [Ortelius API](build/tools/ortelius.md)
+  * [Postman collection](build/tools/postman-avalanche-collection.md)
 * [References](build/references/README.md)
   * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
   * [Command Line Interface](build/references/command-line-interface.md)

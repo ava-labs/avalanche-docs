@@ -8,15 +8,11 @@ When running a node, there are a variety of possible configurations that are sup
 
 `--config-file` \(string\):
 
-Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file.
 
-```text
-./build/avalanchego --config-file=config.json
-```
+Example JSON config file:
 
-config.json file:
-
-```cpp
+```javascript
 {
     "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
@@ -73,6 +69,14 @@ Bootstrap IDs is an array of validator IDs. These IDs will be used to authentica
 
 Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
 
+`--bootstrap-retry-enabled` \(boolean\):
+
+If true, will retry bootstrapping if it fails.
+
+`--bootstrap-retry-max-attempts` \(uint\):
+
+Max number of times to retry bootstrapping after a failure.
+
 ### Connection Metering
 
 `--conn-meter-max-conns` \(int\):
@@ -93,11 +97,17 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 
 If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
 
+### Genesis
+
+`--genesis` \(string\):
+
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks \(Mainnet, Testnet.\) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+
 ### HTTP Server
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For example if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`.
 
 `--http-port` \(int\):
 
@@ -281,9 +291,9 @@ Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
+The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Main Net.
 
-`--max-validator-stake` \(int\):
+`--max-validator-stake` \(int\):s
 
 The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
 
@@ -317,7 +327,7 @@ Snow consensus defines `beta2` as the number of consecutive polls that a rogue t
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
+Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
 
 `--tx-fee` \(int\):
 
@@ -341,7 +351,7 @@ Portion of pending message buffer reserved for messages from validators. Default
 
 Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
 
-### Network Timeout
+### Network
 
 `--network-initial-timeout` \(duration\):
 
@@ -349,19 +359,49 @@ Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 `--network-minimum-timeout` \(duration\):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
 
 `--network-maximum-timeout` \(duration\):
 
 Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
 
-`--network-timeout-multiplier` \(float\):
+`--network-timeout-halflife` \(duration\):
 
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
+Halflife used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
 
-`--network-timeout-reduction` \(duration\):
+`--network-timeout-coefficient` \(duration\):
 
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
+Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
+
+`--network-health-min-conn-peers` \(uint\):
+
+Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+
+`--network-health-max-time-since-msg-received` \(duration\):
+
+Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+
+`--network-health-max-time-since-no-requests` \(duration\):
+
+Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+
+`--network-health-max-portion-send-queue-full` \(float\):
+
+Node will report unhealthy if its send queue is more than this portion full. Must be in \[0,1\]. Defaults to `0.9`.
+
+`--network-health-max-send-fail-rate` \(float\):
+
+Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
+
+### Health
+
+`--health-check-frequency` \(duration\):
+
+Health check runs with this freqency. Defaults to `30s`.
+
+`--health-check-averager-halflife` \(duration\):
+
+Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
 ### Throughput Server
 
@@ -385,11 +425,11 @@ Some users have had an issue where their AvalancheGo node gets into an unhealthy
 
 `--restart-on-disconnected` \(boolean, defaults to `false`\)
 
-`--disconnected-check-frequency`  \(duration, defaults to `10s`\)
+`--disconnected-check-frequency` \(duration, defaults to `10s`\)
 
 `--disconnected-restart-timeout` \(duration, defaults to `1m`\)
 
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart. 
+If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart.
 
 If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
 

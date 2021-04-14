@@ -2,6 +2,9 @@
 # Pulls latest pre-built node binary from GitHub and installs it as a systemd service.
 # Intended for non-technical validators, assumes running on compatible Ubuntu.
 
+#stop on errors
+set -e
+
 #helper function to create avalanchego.service file
 create_service_file () {
   rm -f avalanchego.service
@@ -22,6 +25,15 @@ create_service_file () {
   echo "[Install]">>avalanchego.service
   echo "WantedBy=multi-user.target">>avalanchego.service
   echo "">>avalanchego.service
+}
+
+#helper function to check for presence of curl, and install if missing
+check_curl() {
+if ! command -v curl &> /dev/null
+then
+    echo "curl could not be found, will install..."
+    sudo apt-get install curl -y
+fi
 }
 
 echo "AvalancheGo installer"
@@ -48,6 +60,7 @@ else
   echo "Exiting."
   exit
 fi
+check_curl
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
   echo "Found AvalancheGo systemd service already installed, switching to upgrade mode."
@@ -60,9 +73,25 @@ fi
 mkdir -p /tmp/avalanchego-install               #make a directory to work in
 rm -rf /tmp/avalanchego-install/*               #clean up in case previous install didn't
 cd /tmp/avalanchego-install
-echo "Looking for the latest $getArch build..."
-fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest | grep "avalanchego-linux-$getArch.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
-echo "Will attempt to download: $fileName"
+
+read -p "Press enter to install the latest AvalancheGo version, or specify the version to install (e.g. v1.2.3): " version
+version=${version:-latest}
+echo "Looking for $getArch version $version..."
+if [ "$version" = "latest" ]; then
+  fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest | grep "avalanchego-linux-$getArch.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
+else
+  fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
+fi
+
+if [ "$fileName" = "" ]; then
+  echo "Unable to find AvalancheGo version $version. Exiting."
+  if [ "$foundAvalancheGo" = "true" ]; then
+    echo "Restarting service..."
+    sudo systemctl start avalanchego
+  fi
+  exit
+fi
+echo "Attempting to download: $fileName"
 wget -nv --show-progress $fileName
 echo "Unpacking node files..."
 mkdir -p $HOME/avalanche-node
@@ -78,10 +107,10 @@ if [ "$foundAvalancheGo" = "true" ]; then
   echo "Done!"
   exit
 fi
-echo "To complete the setup some networking information is needed."
-echo "Where is the node installed:"
-echo "1) residential network (dynamic IP)"
-echo "2) cloud provider (static IP)"
+echo "To complete the setup, some networking information is needed."
+echo "Where is your node running?"
+echo "1) Residential network (dynamic IP)"
+echo "2) Cloud provider (static IP)"
 ipChoice="x"
 while [ "$ipChoice" != "1" ] && [ "$ipChoice" != "2" ]
 do

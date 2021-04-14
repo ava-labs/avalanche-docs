@@ -60,7 +60,7 @@ So, now that you prepared your system and have the info ready, let's get to it.
 To download and run the script, enter the following in the terminal:
 
 ```text
-wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
 chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
