@@ -6,7 +6,7 @@
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+You've completed [Run an Avalanche Node](../../get-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
 
 ## Dependencies
 
@@ -168,7 +168,7 @@ truffle console --network development
 Then, in the console, create the account:
 
 ```text
-truffle(development)> let account = web3.eth.personal.newAccount()
+truffle(development)> let account = await web3.eth.personal.newAccount()
 ```
 
 This returns:
@@ -189,55 +189,45 @@ This prints the account:
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
-Exit the truffle console:
+### Unlock your account:
 
 ```text
-truffle(development)> .exit
+truffle(development)> await web3.eth.personal.unlockAccount(account)
+```
+
+This returns:
+
+```text
+true
 ```
 
 ### Fund your account
 
 Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
-### Unlock your account
+### Scripting account creation and funding
 
-Create a new file called `web3_script.js` in the `truffle` directory and add the following:
-
-```javascript
-// web3_script.js
-let Web3 = require('web3');
-let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
-
-let main = async () => {
-  let accounts = await web3.eth.personal.getAccounts();
-  console.log(accounts);
-  let account = accounts[0];
-  let unlock = await web3.eth.personal.unlockAccount(account);
-  console.log(unlock);
-}
-
-main()
-```
-
-Run the script to unlock your account.
+Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js). Download it using this command:
 
 ```text
-node web3_script.js
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
+```
+**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 (the default used by truffle). 
+
+You can run the script with:
+
+```text
+truffle exec make_accounts.js --network development
 ```
 
-This should return something like:
-
-```javascript
-[ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
-true
-```
+Script will create an account and fund its C-Chain address. You can customize the number of accounts and the amount of AVAX deposited by editing the `maxAccounts` and `amount` variables in the script.
 
 ## Run Migrations
 
 Now everything is in place to run migrations and deploy the `Storage` contract:
 
 ```text
-truffle migrate --network development
+truffle(development)> migrate --network development
 ```
 
 You should see:
@@ -264,7 +254,7 @@ Migrations dry-run (simulation)
    > account:             0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD
    > balance:             1000.91683679
    > gas used:            176943 (0x2b32f)
-   > gas price:           470 gwei
+   > gas price:           225 gwei
    > value sent:          0 ETH
    > total cost:          0.08316321 ETH
 
@@ -281,7 +271,7 @@ Migrations dry-run (simulation)
    > account:             0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD
    > balance:             1000.8587791
    > gas used:            96189 (0x177bd)
-   > gas price:           470 gwei
+   > gas price:           225 gwei
    > value sent:          0 ETH
    > total cost:          0.04520883 ETH
 
@@ -325,10 +315,6 @@ Error:  *** Deployment Failed ***
 
 Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
 
-```text
-truffle console --network development
-```
-
 Get an instance of the deployed `Storage` contract:
 
 ```javascript
@@ -355,7 +341,11 @@ If you see this error:
 Error: Returned error: authentication needed: password or unlock
 ```
 
-Then run this again: `node web3_script.js`
+Then run this again:
+
+```text
+truffle(development)> await web3.eth.personal.unlockAccount(account[0])
+```
 
 You should see something like:
 

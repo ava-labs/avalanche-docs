@@ -6,8 +6,6 @@ description: >-
 
 # Developer Documentation
 
-## Getting Started
-
 {% tabs %}
 {% tab title="Coming From Ethereum?" %}
 {% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
@@ -24,7 +22,7 @@ description: >-
 {% endtab %}
 
 {% tab title="Staking" %}
-{% page-ref page="build/getting-started.md" %}
+{% page-ref page="build/get-started.md" %}
 
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
 {% endtab %}
@@ -44,13 +42,17 @@ description: >-
 
 ## Avalanche
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers–helping you build anything you can imagine.
+[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche is the first smart contracts platform that processes 4,500+ transactions/second and instantly confirms transactions. Ethereum developers can quickly build on Avalanche as Solidity works out-of-the-box.
 
 A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
 
+## AVAX
+
+AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the multiple subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+
 ## Avalanche Consensus Protocol
 
-![Consensus Comparison](.gitbook/assets/consensus-comparison.png)
+![Consensus Comparison](.gitbook/assets/image%20%2810%29%20%281%29.png)
 
 Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
 
@@ -102,9 +104,5 @@ Create your own public or private blockchains.
 
 ### Designed for Finance
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets
-
-## Avalanche \(AVAX\) Token
-
-The Avalanche \(AVAX\) token is the native token of the Avalanche platform and is used to secure the network through staking, transact peer-to-peer, pay for fees, and provide a basic unit of account between the multiple subnetworks created on the Avalanche platform. `1 nAVAX` is equal to `0.000000001 AVAX`.
+Native support for easily creating and trading digital smart assets with complex, custom rulesets.
 

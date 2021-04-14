@@ -38,9 +38,9 @@ All endpoints for listing resources accept the following parameters:
 | `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
 | `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
 
-### Available Endpoints
+## Available Endpoints
 
-#### Overview
+### Overview
 
 The root of the API gives an overview of the constants for the active Avalanche network being indexed.
 
@@ -78,7 +78,7 @@ curl "http://localhost:8080/v2"
 }
 ```
 
-#### Search
+### Search
 
 Find an address or a transaction by its ID.
 
@@ -167,7 +167,7 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-#### Aggregate
+### Aggregate
 
 Calculate aggregate transaction data over a time frame.
 
@@ -202,7 +202,7 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-#### TxFee Aggregate
+### TxFee Aggregate
 
 AVAX Aggregate txfee
 
@@ -226,7 +226,7 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 }
 ```
 
-#### Address Chain
+### Address Chain
 
 Responds with the chains an address appears on.
 
@@ -258,7 +258,7 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 }
 ```
 
-#### List Transactions
+### List Transactions
 
 Find transactions confirmed transactions from the network.
 
@@ -348,7 +348,7 @@ curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111
 }
 ```
 
-#### Get Transaction
+### Get Transaction
 
 Find a single transaction by its ID.
 
@@ -422,7 +422,7 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-#### List Addresses
+### List Addresses
 
 Find addresses that have been involved in confirmed transactions.
 
@@ -462,7 +462,7 @@ curl "http://localhost:8080/v2/addresses?limit=1"
 }
 ```
 
-#### Get Address
+### Get Address
 
 Find a single address by its ID.
 
@@ -491,7 +491,7 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-#### List Assets
+### List Assets
 
 Find assets that have been created on the X-chain.
 
@@ -583,7 +583,7 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
 }
 ```
 
-#### Get Asset
+### Get Asset
 
 Find a single asset by its ID.
 
@@ -665,7 +665,7 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 }
 ```
 
-#### List Outputs
+### List Outputs
 
 Find outputs that have been created by a transaction confirmed on the network.
 
@@ -707,7 +707,7 @@ curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 }
 ```
 
-#### Get Output
+### Get Output
 
 Find a single output by its ID.
 
@@ -760,54 +760,4 @@ curl "http://localhost:8080/x"
 ```
 
 The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
-
-## Ortelius Configuration
-
-Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
-
-## Example
-
-This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
-
-```javascript
-{
-  "networkID": 5,
-  "logDirectory": "/var/log/ortelius",
-  "listenAddr": "localhost:8080",
-  "chains": {
-    "11111111111111111111111111111111LpoYY": {
-      "id": "11111111111111111111111111111111LpoYY",
-      "alias": "P",
-      "vmType": "pvm"
-    },
-    "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm": {
-      "id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm",
-      "alias": "F",
-      "vmType": "avm"
-    }
-  },
-  "stream": {
-    "kafka": {
-      "brokers": [
-        "kafka:9092"
-      ]
-    },
-    "producer": {
-        "ipcRoot": "/tmp"
-    },
-    "consumer": {
-        "groupName": "indexer"
-    }
-  },
-  "services": {
-    "redis": {
-      "addr": "redis:6379"
-    },
-    "db": {
-      "dsn": "root:password@tcp(mysql:3306)/ortelius",
-      "driver": "mysql"
-    }
-  }
-}
-```
 

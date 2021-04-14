@@ -1,5 +1,7 @@
 # Upgrade Your AvalancheGo Node
 
+{% embed url="https://youtu.be/o4Fww-sHoaQ" %}
+
 ## **Backup your node**
 
 Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
@@ -13,6 +15,38 @@ cp ~/.avalanchego/staking/staker.key .
 Then download `staker.crt` and `staker.key` files and keep them somewhere safe and private. If anything happens to your node or the machine node runs on, these files can be used to fully recreate your node.
 
 If you use your node for development purposes and have keystore users on your node, you should back up those too.
+
+## Node installed using the installer script
+
+If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+
+```text
+./avalanchego-installer.sh
+```
+
+It will detect that you already have AvalancheGo installed:
+
+```text
+AvalancheGo installer
+---------------------
+Preparing environment...
+Found 64bit Intel/AMD architecture...
+Found AvalancheGo systemd service already installed, switching to upgrade mode.
+Stopping service...
+```
+
+It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+
+```text
+Node upgraded, starting service...
+New node version:
+avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413bbac158d6626f712d2]
+Done!
+```
+
+And that is it, your node is upgraded to the latest version.
+
+If you installed your node manually, proceed with the rest of the tutorial.
 
 ## **Stop the old node version**
 
@@ -114,6 +148,8 @@ Pull the latest code:
 git pull
 ```
 
+NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout tags/<tag>` (where `<tag>` is the latest release tag; for example `v1.3.2`) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository (in which case you should check out to a branch and to the ordinary merges). 
+
 Check that your local code is up to date. Do:
 
 ```text
@@ -121,6 +157,8 @@ git rev-parse HEAD
 ```
 
 and check that the first 7 characters printed match the Latest commit field on our [Github.](https://github.com/ava-labs/avalanchego)
+
+NOTE: if you used the `git checkout tags/<tag>` then these first 7 characters should match commit hash of that tag.
 
 Now build the binary:
 

@@ -10,9 +10,13 @@ Staking is the process of locking up tokens to support a network while receiving
 
 To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
-### Staking Parameters on Avalanche
+## Staking Parameters on Avalanche
 
 When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token whitepaper](https://files.avalabs.org/papers/token.pdf) to learn more about AVAX and the mechanics of staking.
+
+{% hint style="warning" %}
+Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
+{% endhint %}
 
 * The minimum amount that a validator must stake is 2,000 AVAX
 * The minimum amount that a delegator must delegate is 25 AVAX

@@ -77,7 +77,9 @@ You should view this page. On this page, first, click “SOLIDITY” from “Fea
 
 Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
 
-`import “`[`https://github.com/OpenZeppelin/openzeppelincontracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol)`”;`
+```javascript
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
+```
 
 ![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
@@ -85,13 +87,13 @@ After saving the file, we will see a bunch of files that are imported to remix. 
 
 ![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
-We have ERC20PresetMinterPauser.sol file in the presets. This file is written by OpenZeppelin according to ERC20 standards with minter functionality. After deploying this file, we will be the owner of the contract and will have the authority and ability to mint token how much we want.
+We have ERC20PresetMinterPauser.sol file in the presets. This file is written by OpenZeppelin according to ERC20 standards with minter functionality. After deploying this file, we will be the owner of the contract and thus have the authority and ability to mint the tokens.
 
 ![Image for post](https://miro.medium.com/max/1398/1*5UcrRfoSwjpD29NyuMrrbA.png)
 
 ## Deploy the Contract
 
-Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or bigger than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written and the version is 0.6.0. So, in the compiler I solidity version as 0.6.6. After setting up the solidity version click to compile button. If you did not change anything in the file or the solidity version is not wrong, you should not get an error.
+Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or higher than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written so the required version is 0.6.0 or higher. As shown, in the compiler the solidity version is 0.6.6, which is ok. After checking the solidity version click the compile button. If you did not change anything in the file, or the solidity version is not wrong, the contract should compile without any errors.
 
 ![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
@@ -115,7 +117,7 @@ After confirming all these pop-ups we have deployed our token to avalanche C-Cha
 
 ## Interact with Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+We can see our transaction that deployed on avalanche C-Chain via this [c-chain explorer](https://cchain.explorer.avax-test.network/).
 
 But firstly, let’s see our transaction hash from the remix console.
 
