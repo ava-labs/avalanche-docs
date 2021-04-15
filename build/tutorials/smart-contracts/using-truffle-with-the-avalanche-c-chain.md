@@ -411,6 +411,3 @@ You should see the number you stored.
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMjEyNjU5Nl19
--->
