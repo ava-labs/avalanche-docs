@@ -1,17 +1,50 @@
 # Index API
 
-This API can be used to fetch transaction, vertex, or block by ID.
+AvalancheGo can be configured to run with an indexer.
+That is, it saves (indexes) every container (a block, vertex or transaction) it accepts on the X-Chain, P-Chain and C-Chain.
+To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`.
+AvalancheGo will only index containers that are accepted when running with `--index-enabled`.
+To ensure your node has a complete index, run a node with a fresh database and `--index-enabled`.
+The node will accept every block, vertex and transaction in the network history during bootstrapping, ensuring your index is complete. It is OK to turn off your node if it is running with indexing enabled. If it restarts with indexing still enabled, it will accept all containers that were accepted while it was offline. The indexer should never fail to index an accepted block, vertex or transaction.
+
+Indexed containers (that is, accepted blocks, vertices and transactions) are timestamped with the time at which the node accepted that container.
+Note that if the container was indexed during bootstrapping, other nodes may have accepted the container much earlier.
+Every container indexed during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it was first accepted by the network.
+
+This document shows how to query data from AvalancheGo's Index API.
+The Index API is only available when running with `--index-enabled`.
 
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
-## Endpoint
+## Endpoints
+
+Each chain has one or more index.
+To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index.
+To see if an X-Chain block is accepted, for example, send an API to the C-Chain block index.
+
+### X-Chain Transactions
 
 ```text
 /ext/index/X/tx
+```
+
+### X-Chain Vertices
+
+```text
 /ext/index/X/vtx
+```
+
+### P-Chain Blocks
+
+```text
 /ext/index/P/block
+```
+
+### C-Chain Blocks
+
+```text
 /ext/index/C/block
 ```
 
@@ -19,14 +52,13 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### index.getLastAccepted
 
-Get last accepted tx, vtx or block
+Get the most recently accepted container.
 
 #### **Signature**
 
 ```cpp
 info.getLastAccepted({
   encoding:string
-  baseurl: string
 }) -> {
   id: string
   bytes: string
@@ -35,6 +67,14 @@ info.getLastAccepted({
   index: string
 }
 ```
+
+where:
+
+* `id` is the container's ID
+* `bytes` is the byte representation of the container
+* `timestamp` is the time at which this node accepted the container
+* `index` is how many containers were accepted in this index before this one 
+* `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
 
@@ -69,7 +109,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getContainerByIndex
 
-Get container by index
+Get container by index. The first container accepted is at index 0, the second is at index 1, etc. 
 
 #### **Signature**
 
@@ -77,7 +117,6 @@ Get container by index
 info.getContainerByIndex({
   index: string
   encoding:string
-  baseurl: string
 }) -> {
   id: string
   bytes: string
@@ -86,6 +125,12 @@ info.getContainerByIndex({
   index: string
 }
 ```
+
+* `id` is the container's ID
+* `bytes` is the byte representation of the container
+* `timestamp` is the time at which this node accepted the container
+* `index` is how many containers were accepted in this index before this one 
+* `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
 
@@ -121,8 +166,8 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getContainerRange
 
-Get container range
-
+Returns containers with indices in [`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch` - 1]. `numToFetch` must be in `[0,1024]`.
+  
 #### **Signature**
 
 ```cpp
@@ -130,15 +175,21 @@ info.getContainerRange({
   startIndex: number 
   numToFetch: number 
   encoding: string
-  baseurl: string
-}) -> {
+}) -> []{
   id: string
   bytes: string
   timestamp: string
   encoding: string
   index: string
-}[]
+}
 ```
+
+
+* `id` is the container's ID
+* `bytes` is the byte representation of the container
+* `timestamp` is the time at which this node accepted the container
+* `index` is how many containers were accepted in this index before this one 
+* `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
 
@@ -151,7 +202,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "params": {
         "startIndex":0,
         "numToFetch":100,
-        "encoding":"hex"
+        "encoding":"cb58"
     },
     "id": 1
 }'
@@ -175,23 +226,19 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getIndex
 
-Get index by containerID
+Get a container's index.
 
 #### **Signature**
 
 ```cpp
 info.getIndex({
   containerID: string
-  encoding: string
-  baseurl: string
 }) -> {
-  id: string
-  bytes: string
-  timestamp: string
-  encoding: string
-  index: string
-}[]
+  index: int
+}
 ```
+
+where `encoding` is `"cb58"` or `"hex"`.
 
 #### **Example Call**
 
@@ -203,7 +250,6 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "method": "index.getIndex",
     "params": {
         "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-        "encoding":"hex"
     },
     "id": 1
 }'
@@ -224,22 +270,16 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.isAccepted
 
-Check if container is accepted
+Returns true if the container is in this index.
 
 #### **Signature**
 
 ```cpp
 info.isAccepted({
   containerID: string
-  encoding: string
-  baseurl: string
 }) -> {
-  id: string
-  bytes: string
-  timestamp: string
-  encoding: string
-  index: string
-}[]
+  isAccepted: bool
+}
 ```
 
 #### **Example Call**
@@ -252,7 +292,6 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "method": "index.isAccepted",
     "params": {
         "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
-        "encoding":"hex"
     },
     "id": 1
 }'
@@ -263,7 +302,10 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 ```cpp
 {
   "jsonrpc":"2.0",
-  "result":true,
+  "result": 
+    {
+      "isAccepted": true
+    },
   "id":1
 }
 ```
