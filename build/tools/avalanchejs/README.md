@@ -5,14 +5,16 @@ AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](../../.
 The APIs currently supported by default are:
 
 * Admin API
-* AVM API \(X-Chain\)
+* Auth API
+* AVM API (X-Chain)
+* EVM API (C-Chain)
 * Health API
 * Info API
 * Keystore API
 * Metrics API
 * PlatformVM API
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network/).
+We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network).
 
 Using AvalancheJS, developers can:
 
@@ -20,14 +22,17 @@ Using AvalancheJS, developers can:
 * Retrieve balances on addresses
 * Get UTXOs for addresses
 * Build and sign transactions
-* Issue signed transactions to the X-Chain
+* Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
 * Create a Subnetwork
+* Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
+* Add a Validator to the Primary network
+* Add a Delegator to the Primary network
 * Administer a local node
 * Retrieve Avalanche network information from a node
 
 ## Requirements
 
-AvalancheJS requires Node.js LTS version 12.14.1 or higher to compile.
+AvalancheJS requires Node.js version 12.14.1 or higher to compile.
 
 ## Installation
 

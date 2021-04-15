@@ -1,112 +1,151 @@
 # Create an Asset on the X-Chain
 
-This example creates an asset in the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](../avash). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
 
-```text
-import {
-    Avalanche,
-    BinTools,
-    Buffer,
-    BN
-  } from "avalanche" 
-import {
-    InitialStates,
-    SECPTransferOutput
-  } from "avalanche/dist/apis/avm"
+```ts
+import { 
+  Avalanche,
+  BinTools,
+  BN,
+  Buffer
+ } from "avalanche"
+import { 
+  AVMAPI, 
+  InitialStates, 
+  KeyChain,
+  SECPMintOutput, 
+  SECPTransferOutput, 
+  Tx,
+  UnsignedTx,
+  UTXOSet
+} from "avalanche/dist/apis/avm"
+import { 
+  iAVMUTXOResponse 
+} from "avalanche/dist/apis/avm/interfaces"
+      
+const ip: string = "localhost"
+const port: number = 9650
+const protocol: string = "http"
+const networkID: number = 12345 // Default is 1, we want to override that for our local network
+const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
+const xchain: AVMAPI = avalanche.XChain() // Returns a reference to the X-Chain used by AvalancheJS
+```
 
-let myNetworkID = 12345; //default is 3, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
-let avax = new Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
-let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
+## Import the local network's pre-funded address
+
+Next we get an instance of bintools, for dealing with binary data, an the X-Chain local keychain. The local network `12345` has a pre-funded address which you can access with the private key `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Lastly get the pre-funded address as a `Buffer` and as a `string`.
+
+```ts
+const bintools: BinTools = BinTools.getInstance()
+const xKeychain: KeyChain = xchain.keyChain()
+const privKey: string = "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+xKeychain.importKey(privKey)
+const xAddresses: Buffer[] = xchain.keyChain().getAddresses()
+const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
+```
+
+## Prepare for the Mint Output
+
+Now we need to create an empty array for the `SECPMintOutput` which we're going to create. We also need a `threshold` and `locktime` for the outputs which we're going to create. Each X-Chain transaction can can contain a `memo` field of up to 256 bytes. of arbitrary data.
+
+```ts
+const outputs: SECPMintOutput[] = []
+const threshold: number = 1
+const locktime: BN = new BN(0)
+const memo: Buffer = bintools.stringToBuffer("AVM utility method buildCreateAssetTx to create an ANT")
 ```
 
 ## Describe the new asset
 
 The first step in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
 
-```text
-// Name our new coin and give it a symbol
-let name = "Rickcoin is the most intelligent coin";
-let symbol = "RICK";
-
+```ts
+const name: string = "TestToken"
+const symbol: string = "TEST"
 // Where is the decimal point indicate what 1 asset is and where fractional assets begin
 // Ex: 1 AVAX is denomination 9, so the smallest unit of AVAX is nanoAVAX (nAVAX) at 10^-9 AVAX
-let denomination = 9;
+const denomination: number = 3
+```
+
+## Set up async/await
+
+The remaining code will be encapsulated by this `main` function so that we can use the `async` / `await` pattern.
+
+```ts
+const main = async (): Promise<any> => {
+}
+main()
+```
+
+## Fetch the UTXO
+
+Pass the `xAddressStrings` to `xchain.getUTXOs` to fetch the UTXO.
+
+```ts
+  const avmUTXOResponse: iAVMUTXOResponse = await xchain.getUTXOs(xAddressStrings)
+  const utxoSet: UTXOSet = avmUTXOResponse.utxos
 ```
 
 ## Creating the initial state
 
-We want to mint an asset with 400 coins to all of our managed keys, 500 to the second address we know of, and 600 to the second and third address. This sets up the state that will result from the Create Asset transaction.
+We want to mint an asset with 507 units of the asset held by the managed key. This sets up the state that will result from the Create Asset transaction.
 
-_Note: This example assumes we have the keys already managed in our X-Chain’s Keychain._
-
-```text
-let addresses = xchain.keyChain().getAddresses();
-
+```ts
 // Create outputs for the asset's initial state
-let secpOutput1 = new SECPTransferOutput(new BN(400), new BN(400), 1, addresses);
-let secpOutput2 = new SECPTransferOutput(new BN(500), new BN(400), 1, [addresses[1]]);
-let secpOutput3 = new SECPTransferOutput(new BN(600), new BN(400), 1, [addresses[1], addresses[2]]);
+const amount: BN = new BN(507)
+const secpTransferOutput = new SECPTransferOutput(amount, xAddresses, locktime, threshold)
+const initialStates: InitialStates = new InitialStates()
 
 // Populate the initialStates with the outputs
-let initialState = new InitialStates();
-initialState.addOutput(secpOutput1);
-initialState.addOutput(secpOutput2);
-initialState.addOutput(secpOutput3);
+initialStates.addOutput(secpTransferOutput)
+```
+
+## Create the Mint Output
+
+We also want to create a `SECPMintOutput` so that we can mint more of this asset later.
+
+```ts
+const secpMintOutput: SECPMintOutput = new SECPMintOutput(xAddresses, locktime, threshold)
+outputs.push(secpMintOutput
 ```
 
 ## Creating the signed transaction
 
-Now that we know what we want an asset to look like, we create an output to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
+Now that we know what we want an asset to look like, we create a transaction to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
 
-```text
-// Fetch the UTXOSet for our addresses
-let utxos = await xchain.getUTXOs(addresses);
-
-// Make an unsigned Create Asset transaction from the data compiled earlier
-let unsigned = await xchain.buildCreateAssetTx(
-  utxos, // the UTXOSet containing the UTXOs we're going to spend
-  addresses, // the addresses which will pay the fees
-  addresses, // the addresses which recieve the change from the spent UTXOs
-  initialState, // the initial state to be created for this new asset 
-  name, // the full name of the asset
-  symbol, // a short ticker symbol for the asset
-  denomination // the asse's denomination 
-);
-
-let signed = xchain.keyChain().signTx(unsigned); //returns a Tx class
+```ts
+const unsignedTx: UnsignedTx = await xchain.buildCreateAssetTx(
+  utxoSet,
+  xAddressStrings,
+  xAddressStrings,
+  initialStates,
+  name,
+  symbol,
+  denomination,
+  outputs,
+  memo
+)
 ```
 
-## Issue the signed transaction
+## Sign and issue the transaction
+
+Now let's sign the transaction and issue it to the Avalanche network. If successful it will return a [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) serialized string for the TxID.
 
 Now that we have a signed transaction ready to send to the network, let’s issue it!
 
-Using the AvalancheJS X-Chain API, we going to call the issueTx function. This function can take either the Tx class returned in the previous step, a [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) representation of the transaction, or a raw Buffer class with the data for the transaction. Examples of each are below:
-
-```text
-// using the Tx class
-let txid = await xchain.issueTx(signed); //returns a CB58 serialized string for the TxID
+```ts
+const tx: Tx = unsignedTx.sign(xKeychain)
+const id: string = await xchain.issueTx(tx)
+console.log(id)
 ```
-
-```text
-// using the base-58 representation
-let txid = await xchain.issueTx(signed.toString()); //returns a CB58 serialized string for the TxID
-```
-
-```text
-// using the transaction Buffer
-let txid = await xchain.issueTx(signed.toBuffer()); //returns a CB58 serialized string for the TxID
-```
-
-We assume ONE of those methods is used to issue the transaction.
 
 ## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
 
-```text
+```ts
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
-let status = await xchain.getTxStatus(txid);
+const status: string = await xchain.getTxStatus(id)
 ```
 
 The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
