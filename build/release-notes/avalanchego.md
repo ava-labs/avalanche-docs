@@ -2,6 +2,29 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.3.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
+
+{% hint style="danger" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes security improvements, bug fixes, and monitoring improvements.
+{% endhint %}
+
+**Security Improvements**
+
+* Enforced a strict canonical format for C-chain blocks made prior to `Apricot Phase 1`. This ensures that modifications to the `extra-data` block field can not result in modifications to the chain state during bootstrapping.
+* Changed the `Keystore` to ensure only encrypted values are sent over the IPC between avalanchego and plugin processes.
+
+**Bug Fixes:**
+
+* Fixed delegation cap calculations to include updating the current delegation maximum before removing a delegator. This ensures that the delegation cap is always enforced.
+* Fixed `AVM`'s static API to be registered correctly on startup.
+* Updated node `uptime` calculations to take network upgrades into account.
+
+**Monitoring Improvements**
+
+* Added an optional node indexer that can provide a locally consistent ordering of operations accepted on a chain.
+* Updated ansible inventory to include numerous improvements (Huge thanks to @moreati).
+
+
 ## v1.3.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
 
 {% hint style="danger" %}

@@ -14,7 +14,7 @@ NodeID is a unique identifier that differentiates your node from all the other p
 * `staker.crt`
 * `staker.key`
 
-In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All the we need to do to recreate the node on another machine is to run a new installation with those same two files.
+In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All we need to do to recreate the node on another machine is to run a new installation with those same two files.
 
 {% hint style="warning" %} If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../avalanchego-apis/keystore-api.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it. {% endhint %}
 
