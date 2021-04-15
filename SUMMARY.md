@@ -63,6 +63,7 @@
   * [Admin API](build/avalanchego-apis/admin-api.md)
   * [Auth API](build/avalanchego-apis/auth-api.md)
   * [Health API](build/avalanchego-apis/health-api.md)
+  * [Index API](build/avalanchego-apis/index-api.md)
   * [Info API](build/avalanchego-apis/info-api.md)
   * [IPC API](build/avalanchego-apis/ipc-api.md)
   * [Keystore API](build/avalanchego-apis/keystore-api.md)
