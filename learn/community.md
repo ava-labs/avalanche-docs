@@ -20,7 +20,7 @@
 
 [**This Week in Avalanche**](https://weavax.substack.com/): an independent weekly newsletter round-up of Avalanche news, events, and developments produced by a community member.
 
-[**Bug Bounty Program**](https://hackenproof.com/avalanche): the official Avalanche bug bounty program hosted by HackenProof. Submit security issues to receive a bounty reward (terms and conditions apply).
+[**Bug Bounty Program**](https://hackenproof.com/avalanche): the official Avalanche bug bounty program hosted by HackenProof. Submit security issues to receive a bounty reward \(terms and conditions apply\).
 
 ### Ecosystem Partners
 
@@ -30,7 +30,7 @@
 
 [**Blockchain Research Institute \(BRI\)**](https://www.blockchainresearchinstitute.org/): global think tank focusing on the strategic implications of blockchain technology on business, government, and society. Membership includes more than 60 of the world’s leading enterprises, governments, and academic institutions.
 
-\*\*\*\*[**Congress of the Mexican State of Quintana Roo**](http://comunicacion.congresoqroo.gob.mx/20210301/congreso-de-quintana-roo-primero-en-utilizar-tecnologia-blockchain/): ****becoming the first national congress to use Avalanche for the digital certification of its legislative documentation, which works through the correspondence and file management system.
+\*\*\*\*[**Congress of the Mexican State of Quintana Roo**](http://comunicacion.congresoqroo.gob.mx/20210301/congreso-de-quintana-roo-primero-en-utilizar-tecnologia-blockchain/): _\*\*_becoming the first national congress to use Avalanche for the digital certification of its legislative documentation, which works through the correspondence and file management system.
 
 [**LACChain Alliance**](https://www.lacchain.net/home#/alliance): a global organization accelerating the development of the blockchain ecosystem in Latin America and the Caribbean \(LAC\) region. It now has 25 members, including Consensys, MIT Media Lab, Enterprise Ethereum Alliance, and the Blockchain Research Institute.
 
@@ -116,7 +116,7 @@
 
 [**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
 
-[**Coin98**](https://coin98.app/): ****is a non-custodial wallet used to store, send and receive multi-chain, multi-source digital assets. Coin98 Wallet has both Mobile App and Extension version, which becomes a gateway connecting users to the DeFi world.
+[**Coin98**](https://coin98.app/): _\*\*_is a non-custodial wallet used to store, send and receive multi-chain, multi-source digital assets. Coin98 Wallet has both Mobile App and Extension version, which becomes a gateway connecting users to the DeFi world.
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
@@ -124,7 +124,7 @@
 
 [**Frontier**](https://frontier.xyz/): a chain-agnostic DeFi aggregator that enables users to manage all of their DeFi applications and assets in a safe, simple portal.
 
-\*\*\*\*[**Yield**](https://www.yield.app/): ****the app can constantly monitor and evaluate the profitability of strategies across the DeFi ecosystem, including liquidity mining, arbitrage, liquidations, margin & collateralized lending, and other income-producing strategies.
+\*\*\*\*[**Yield**](https://www.yield.app/): _\*\*_the app can constantly monitor and evaluate the profitability of strategies across the DeFi ecosystem, including liquidity mining, arbitrage, liquidations, margin & collateralized lending, and other income-producing strategies.
 
 ## Developer Tools
 
@@ -154,7 +154,7 @@
 
 \*\*\*\*[**Router**](http://routerprotocol.com/): connects multiple Layer-1 and Layer-2 blockchains and opens up avenues for smart order routing across chains for any trade. Router users can seamlessly deploy liquidity to any automated market makers \(AMMs\) on Avalanche and across any other blockchain platforms integrating with Router.
 
-\*\*\*\*[**SIMBA Chain**](https://simbachain.com/): ****a ****cloud-based, Smart Contract as a Service \(SCaaS\) platform that enables industry and governments to quickly develop and deploy Web 3.0 distributed applications \(dApps\) for many blockchains and across many platforms.
+\*\*\*\*[**SIMBA Chain**](https://simbachain.com/): **a** cloud-based, Smart Contract as a Service \(SCaaS\) platform that enables industry and governments to quickly develop and deploy Web 3.0 distributed applications \(dApps\) for many blockchains and across many platforms.
 
 ### Oracles
 

@@ -1,18 +1,10 @@
 # Index API
 
-AvalancheGo can be configured to run with an indexer.
-That is, it saves (indexes) every container (a block, vertex or transaction) it accepts on the X-Chain, P-Chain and C-Chain.
-To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`.
-AvalancheGo will only index containers that are accepted when running with `--index-enabled`.
-To ensure your node has a complete index, run a node with a fresh database and `--index-enabled`.
-The node will accept every block, vertex and transaction in the network history during bootstrapping, ensuring your index is complete. It is OK to turn off your node if it is running with indexing enabled. If it restarts with indexing still enabled, it will accept all containers that were accepted while it was offline. The indexer should never fail to index an accepted block, vertex or transaction.
+AvalancheGo can be configured to run with an indexer. That is, it saves \(indexes\) every container \(a block, vertex or transaction\) it accepts on the X-Chain, P-Chain and C-Chain. To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`. AvalancheGo will only index containers that are accepted when running with `--index-enabled`. To ensure your node has a complete index, run a node with a fresh database and `--index-enabled`. The node will accept every block, vertex and transaction in the network history during bootstrapping, ensuring your index is complete. It is OK to turn off your node if it is running with indexing enabled. If it restarts with indexing still enabled, it will accept all containers that were accepted while it was offline. The indexer should never fail to index an accepted block, vertex or transaction.
 
-Indexed containers (that is, accepted blocks, vertices and transactions) are timestamped with the time at which the node accepted that container.
-Note that if the container was indexed during bootstrapping, other nodes may have accepted the container much earlier.
-Every container indexed during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it was first accepted by the network.
+Indexed containers \(that is, accepted blocks, vertices and transactions\) are timestamped with the time at which the node accepted that container. Note that if the container was indexed during bootstrapping, other nodes may have accepted the container much earlier. Every container indexed during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it was first accepted by the network.
 
-This document shows how to query data from AvalancheGo's Index API.
-The Index API is only available when running with `--index-enabled`.
+This document shows how to query data from AvalancheGo's Index API. The Index API is only available when running with `--index-enabled`.
 
 ## Format
 
@@ -20,9 +12,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Endpoints
 
-Each chain has one or more index.
-To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index.
-To see if an X-Chain block is accepted, for example, send an API to the C-Chain block index.
+Each chain has one or more index. To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index. To see if an X-Chain block is accepted, for example, send an API to the C-Chain block index.
 
 ### X-Chain Transactions
 
@@ -109,7 +99,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getContainerByIndex
 
-Get container by index. The first container accepted is at index 0, the second is at index 1, etc. 
+Get container by index. The first container accepted is at index 0, the second is at index 1, etc.
 
 #### **Signature**
 
@@ -166,8 +156,8 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getContainerRange
 
-Returns containers with indices in [`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch` - 1]. `numToFetch` must be in `[0,1024]`.
-  
+Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch` - 1\]. `numToFetch` must be in `[0,1024]`.
+
 #### **Signature**
 
 ```cpp
@@ -183,7 +173,6 @@ info.getContainerRange({
   index: string
 }
 ```
-
 
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
@@ -309,3 +298,4 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "id":1
 }
 ```
+

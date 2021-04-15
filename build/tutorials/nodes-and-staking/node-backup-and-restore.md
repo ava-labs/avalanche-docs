@@ -11,18 +11,23 @@ Even if your node is a validator on the network and has multiple delegations on 
 ## NodeID
 
 NodeID is a unique identifier that differentiates your node from all the other peers on the network. It's a string formatted like `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD`. You can look up the technical background of how the NodeID is constructed [here](../../references/cryptographic-primitives.md#tls-addresses). In essence, NodeID is defined by two files:
+
 * `staker.crt`
 * `staker.key`
 
 In the default installation, they can be found in the working directory, specifically in `~/.avalanchego/staking/`. All we need to do to recreate the node on another machine is to run a new installation with those same two files.
 
-{% hint style="warning" %} If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../avalanchego-apis/keystore-api.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it. {% endhint %}
+{% hint style="warning" %}
+If you have users defined in the keystore of your node, then you need to back up and restore those as well. [Keystore API](../../avalanchego-apis/keystore-api.md) has methods that can be used to export and import user keys. Note that Keystore API is used by developers only and not intended for use in production nodes. If you don't know what a keystore API is and have not used it, you don't need to worry about it.
+{% endhint %}
 
 ## Backup
 
 To back up your node, we need to store `staker.crt` and `staker.key` files somewhere safe and private, preferably to a different computer, to your private storage in the cloud, a USB stick or similar. Storing them to a couple of different, secure locations increases the safety.
 
-{% hint style="warning" %} If someone gets a hold of your staker files, they still cannot get to your funds, as they are controlled by the wallet private keys, not by the node. But, they could re-create your node somewhere else, and depending on the circumstances make you lose the staking rewards. So make sure your staker files are secure. {% endhint %}
+{% hint style="warning" %}
+If someone gets a hold of your staker files, they still cannot get to your funds, as they are controlled by the wallet private keys, not by the node. But, they could re-create your node somewhere else, and depending on the circumstances make you lose the staking rewards. So make sure your staker files are secure.
+{% endhint %}
 
 Let's get the staker files off the machine running the node.
 
@@ -40,12 +45,13 @@ To copy the files from the node, you will need to be able to remotely log into t
 
 When you have means of remote login into the machine, you can copy the files over with the following command:
 
-```shell
+```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
+
 This assumes the username on the machine is `ubuntu`, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
 
-```shell
+```text
 scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
@@ -57,7 +63,7 @@ To restore your node from a backup, we need to do the reverse: restore `staker.k
 
 First, we need to do the usual [installation](set-up-node-with-installer.md) of the node. This will create a new NodeID, which we need to replace. When the node is installed correctly, log into the machine where the node is running and stop it:
 
-```shell
+```text
 sudo systemctl stop avalanchego
 ```
 
@@ -71,28 +77,29 @@ If you're running the node locally, just copy the `staker.key` and `staker.crt` 
 
 Again, the process is just the reverse operation. Using `scp` we need to copy the `staker.key` and `staker.crt` files from the backup location into the remote working directory. Assuming the backed up files are located in the directory where the above backup procedure placed them:
 
-```shell
+```text
 scp ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
 ```
 
 Or if you need to specify the path to the SSH key:
 
-```shell
+```text
 scp -i /path/to/the/key.pem ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
 ```
+
 And again, replace `ubuntu` with correct username if different, and `PUBLICIP` with the actual public IP of the machine running the node, as well as the path to the SSH key if used.
 
 ### Restart the node and verify
 
 Once the files have been replaced, log into the machine and start the node using:
 
-```shell
+```text
 sudo systemctl start avalanchego
 ```
 
 You can now check that the node is restored with the correct NodeID by issuing the [getNodeID](https://docs.avax.network/build/avalanchego-apis/info-api#info-getnodeid) API call in the same console you ran the previous command:
 
-```shell
+```text
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -107,3 +114,4 @@ You should see your original NodeID. Restore process is done.
 Essential part of securing your node is the backup that enables full and painless restoration of your node. Following this tutorial you can rest easy knowing that should you ever find yourself in a situation where you need to restore your node from scratch, you can easily and quickly do so.
 
 If you have any problems following this tutorial, comments you want to share with us or just want to chat, you can reach us on our [Discord](https://chat.avalabs.org/) server.
+

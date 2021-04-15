@@ -22,8 +22,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 **Monitoring Improvements**
 
 * Added an optional node indexer that can provide a locally consistent ordering of operations accepted on a chain.
-* Updated ansible inventory to include numerous improvements (Huge thanks to @moreati).
-
+* Updated ansible inventory to include numerous improvements \(Huge thanks to @moreati\).
 
 ## v1.3.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
 
@@ -48,12 +47,11 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 
 * `network-health-max-time-since-no-requests`
 
-
 ## v1.3.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)\)
 
 {% hint style="danger" %}
-Please note that this change is not backwards compatible with previous releases.  
-****  
+Please note that this change is not backwards compatible with previous releases.
+
 This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
 {% endhint %}
 
@@ -123,7 +121,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 ## **v1.2.1 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
 
 {% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements. 
+This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
 
 Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments.
 {% endhint %}
@@ -236,7 +234,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Removed extra linter runs from CI.
 * Added `Height` to the `snowman.Block` interface.
 
-## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\) 
+## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
 
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
@@ -263,7 +261,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 There are two primary components to this upgrade:
 
 * General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
-* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock ****time had passed
+* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock _\*\*_time had passed
 
 ## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
@@ -316,7 +314,7 @@ For assistance with this update, follow our [Developer FAQ](https://support.aval
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
 {% endhint %}
 
-```
+```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
 ```
 

@@ -1,8 +1,8 @@
 # Create an Asset on the X-Chain
 
-This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](../avash). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
+This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](https://github.com/ava-labs/avalanche-docs/tree/bba457018ce99b2a1bdf51e488b136049254e330/build/tools/avash/README.md). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
 
-```ts
+```typescript
 import { 
   Avalanche,
   BinTools,
@@ -22,7 +22,7 @@ import {
 import { 
   iAVMUTXOResponse 
 } from "avalanche/dist/apis/avm/interfaces"
-      
+
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
@@ -35,7 +35,7 @@ const xchain: AVMAPI = avalanche.XChain() // Returns a reference to the X-Chain 
 
 Next we get an instance of bintools, for dealing with binary data, an the X-Chain local keychain. The local network `12345` has a pre-funded address which you can access with the private key `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Lastly get the pre-funded address as a `Buffer` and as a `string`.
 
-```ts
+```typescript
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: KeyChain = xchain.keyChain()
 const privKey: string = "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
@@ -48,7 +48,7 @@ const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 
 Now we need to create an empty array for the `SECPMintOutput` which we're going to create. We also need a `threshold` and `locktime` for the outputs which we're going to create. Each X-Chain transaction can can contain a `memo` field of up to 256 bytes. of arbitrary data.
 
-```ts
+```typescript
 const outputs: SECPMintOutput[] = []
 const threshold: number = 1
 const locktime: BN = new BN(0)
@@ -59,7 +59,7 @@ const memo: Buffer = bintools.stringToBuffer("AVM utility method buildCreateAsse
 
 The first step in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
 
-```ts
+```typescript
 const name: string = "TestToken"
 const symbol: string = "TEST"
 // Where is the decimal point indicate what 1 asset is and where fractional assets begin
@@ -71,7 +71,7 @@ const denomination: number = 3
 
 The remaining code will be encapsulated by this `main` function so that we can use the `async` / `await` pattern.
 
-```ts
+```typescript
 const main = async (): Promise<any> => {
 }
 main()
@@ -81,7 +81,7 @@ main()
 
 Pass the `xAddressStrings` to `xchain.getUTXOs` to fetch the UTXO.
 
-```ts
+```typescript
   const avmUTXOResponse: iAVMUTXOResponse = await xchain.getUTXOs(xAddressStrings)
   const utxoSet: UTXOSet = avmUTXOResponse.utxos
 ```
@@ -90,7 +90,7 @@ Pass the `xAddressStrings` to `xchain.getUTXOs` to fetch the UTXO.
 
 We want to mint an asset with 507 units of the asset held by the managed key. This sets up the state that will result from the Create Asset transaction.
 
-```ts
+```typescript
 // Create outputs for the asset's initial state
 const amount: BN = new BN(507)
 const secpTransferOutput = new SECPTransferOutput(amount, xAddresses, locktime, threshold)
@@ -104,7 +104,7 @@ initialStates.addOutput(secpTransferOutput)
 
 We also want to create a `SECPMintOutput` so that we can mint more of this asset later.
 
-```ts
+```typescript
 const secpMintOutput: SECPMintOutput = new SECPMintOutput(xAddresses, locktime, threshold)
 outputs.push(secpMintOutput
 ```
@@ -113,7 +113,7 @@ outputs.push(secpMintOutput
 
 Now that we know what we want an asset to look like, we create a transaction to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
 
-```ts
+```typescript
 const unsignedTx: UnsignedTx = await xchain.buildCreateAssetTx(
   utxoSet,
   xAddressStrings,
@@ -133,7 +133,7 @@ Now let's sign the transaction and issue it to the Avalanche network. If success
 
 Now that we have a signed transaction ready to send to the network, let’s issue it!
 
-```ts
+```typescript
 const tx: Tx = unsignedTx.sign(xKeychain)
 const id: string = await xchain.issueTx(tx)
 console.log(id)
@@ -143,7 +143,7 @@ console.log(id)
 
 Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
 
-```ts
+```typescript
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
 const status: string = await xchain.getTxStatus(id)
 ```

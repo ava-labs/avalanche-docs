@@ -1,6 +1,6 @@
 # Upgrade Your AvalancheGo Node
 
-{% embed url="https://youtu.be/o4Fww-sHoaQ" %}
+{% embed url="https://youtu.be/o4Fww-sHoaQ" caption="" %}
 
 ## **Backup your node**
 
@@ -148,7 +148,7 @@ Pull the latest code:
 git pull
 ```
 
-NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout tags/<tag>` (where `<tag>` is the latest release tag; for example `v1.3.2`) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository (in which case you should check out to a branch and to the ordinary merges). 
+NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout tags/<tag>` \(where `<tag>` is the latest release tag; for example `v1.3.2`\) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository \(in which case you should check out to a branch and to the ordinary merges\).
 
 Check that your local code is up to date. Do:
 

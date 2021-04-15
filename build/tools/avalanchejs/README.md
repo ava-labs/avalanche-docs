@@ -6,8 +6,8 @@ The APIs currently supported by default are:
 
 * Admin API
 * Auth API
-* AVM API (X-Chain)
-* EVM API (C-Chain)
+* AVM API \(X-Chain\)
+* EVM API \(C-Chain\)
 * Health API
 * Info API
 * Keystore API

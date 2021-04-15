@@ -13,7 +13,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
 {% hint style="warning" %}
-The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX (225 GWei). The C-Chain gas limit is 10e8 (100,000,000)
+The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\). The C-Chain gas limit is 10e8 \(100,000,000\)
 {% endhint %}
 
 ```cpp
