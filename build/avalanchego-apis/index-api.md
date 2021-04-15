@@ -4,6 +4,8 @@ AvalancheGo can be configured to run with an indexer. That is, it saves \(indexe
 
 Indexed containers \(that is, accepted blocks, vertices and transactions\) are timestamped with the time at which the node accepted that container. Note that if the container was indexed during bootstrapping, other nodes may have accepted the container much earlier. Every container indexed during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it was first accepted by the network.
 
+Note that for DAGs (including the X-Chain), nodes may accept vertices and transactions in a different order from one another. 
+
 This document shows how to query data from AvalancheGo's Index API. The Index API is only available when running with `--index-enabled`.
 
 ## Format
