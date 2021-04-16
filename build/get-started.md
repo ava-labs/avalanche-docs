@@ -27,7 +27,7 @@ This tutorial is primarily geared toward developers and people interested in how
 
 Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
+* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 40 GB free space
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
