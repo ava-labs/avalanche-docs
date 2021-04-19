@@ -52,10 +52,10 @@ Get the most recently accepted container.
 info.getLastAccepted({
   encoding:string
 }) -> {
-  id: string
-  bytes: string
-  timestamp: string
-  encoding: string
+  id: string,
+  bytes: string,
+  timestamp: string,
+  encoding: string,
   index: string
 }
 ```
@@ -107,13 +107,13 @@ Get container by index. The first container accepted is at index 0, the second i
 
 ```cpp
 info.getContainerByIndex({
-  index: string
-  encoding:string
-}) -> {
-  id: string
-  bytes: string
-  timestamp: string
+  index: uint64,
   encoding: string
+}) -> {
+  id: string,
+  bytes: string,
+  timestamp: string,
+  encoding: string,
   index: string
 }
 ```
@@ -133,7 +133,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "jsonrpc": "2.0",
     "method": "index.getContainerByIndex",
     "params": {
-        "index":"0",
+        "index":0,
         "encoding":"cb58"
     },
     "id": 1
@@ -164,14 +164,14 @@ Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startI
 
 ```cpp
 info.getContainerRange({
-  startIndex: number 
-  numToFetch: number 
+  startIndex: uint64, 
+  numToFetch: uint64, 
   encoding: string
 }) -> []{
-  id: string
-  bytes: string
-  timestamp: string
-  encoding: string
+  id: string,
+  bytes: string,
+  timestamp: string,
+  encoding: string,
   index: string
 }
 ```
@@ -223,9 +223,10 @@ Get a container's index.
 
 ```cpp
 info.getIndex({
-  containerID: string
+  containerID: string,
+  encoding: string
 }) -> {
-  index: int
+  index: string
 }
 ```
 
@@ -241,6 +242,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "method": "index.getIndex",
     "params": {
         "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding":"cb58"
     },
     "id": 1
 }'
@@ -267,7 +269,8 @@ Returns true if the container is in this index.
 
 ```cpp
 info.isAccepted({
-  containerID: string
+  containerID: string,
+  encoding: string
 }) -> {
   isAccepted: bool
 }
@@ -283,6 +286,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
     "method": "index.isAccepted",
     "params": {
         "containerID":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding":"cb58"
     },
     "id": 1
 }'
