@@ -63,6 +63,7 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 * `eth_`
 * `personal_`
 * `txpool_`
+* `debug_`
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
