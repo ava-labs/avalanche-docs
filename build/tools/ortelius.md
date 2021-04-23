@@ -263,7 +263,7 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 
 ### List Transactions
 
-Find transactions confirmed transactions from the network.
+Find transactions that have been confirmed on the network.
 
 **Params**
 
@@ -797,7 +797,7 @@ curl "http://localhost:8080/v2/ctxdata/10"
 
 ### List C Transactions
 
-Find outputs that have been created by a transaction confirmed on the network.
+Find C transactions that have been confirmed on the network.
 
 **Params**
 
