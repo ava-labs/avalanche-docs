@@ -27,18 +27,69 @@ create_service_file () {
   echo "">>avalanchego.service
 }
 
-#helper function to check for presence of curl, and install if missing
-check_curl() {
+#helper function to check for presence of required commands, and install if missing
+check_reqs () {
 if ! command -v curl &> /dev/null
 then
     echo "curl could not be found, will install..."
     sudo apt-get install curl -y
 fi
+if ! command -v wget &> /dev/null
+then
+    echo "wget could not be found, will install..."
+    sudo apt-get install wget -y
+fi
+if ! command -v dig &> /dev/null
+then
+    echo "dig could not be found, will install..."
+    sudo apt-get install dnsutils -y
+fi
+}
+
+#helper function that prints usage
+usage () {
+echo "Usage: $0 [--list] [--version <tag>] [--help]"
+echo ""
+echo "Options:"
+echo "   --help            Shows this message"
+echo "   --list            Lists 10 newest versions available to install"
+echo "   --version <tag>   Installs <tag> version"
+echo ""
+echo "Ran without any options, script will install or upgrade AvalancheGo to latest available version."
+echo ""
+exit 0
 }
 
 echo "AvalancheGo installer"
 echo "---------------------"
+
+if [ $# -ne 0 ] #arguments check
+then
+  case $1 in
+    --list) #print version list and exit (last 10 versions)
+      echo "Available versions:"
+      wget -q -O - https://api.github.com/repos/ava-labs/avalanchego/releases \
+      | grep tag_name \
+      | sed 's/.*: "\(.*\)".*/\1/' \
+      | head
+      exit 0
+      ;;
+    --version) #explicit version selection
+      if [ $# -eq 2 ]
+      then
+        version=$2
+      else
+        usage
+      fi
+      ;;
+    *)
+      usage
+      ;;
+  esac
+fi
+
 echo "Preparing environment..."
+check_reqs
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
 foundOS="$(uname)"                              #get OS
@@ -60,7 +111,6 @@ else
   echo "Exiting."
   exit
 fi
-check_curl
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
   echo "Found AvalancheGo systemd service already installed, switching to upgrade mode."
@@ -74,7 +124,6 @@ mkdir -p /tmp/avalanchego-install               #make a directory to work in
 rm -rf /tmp/avalanchego-install/*               #clean up in case previous install didn't
 cd /tmp/avalanchego-install
 
-read -p "Press enter to install the latest AvalancheGo version, or specify the version to install (e.g. v1.2.3): " version
 version=${version:-latest}
 echo "Looking for $getArch version $version..."
 if [ "$version" = "latest" ]; then
@@ -82,8 +131,9 @@ if [ "$version" = "latest" ]; then
 else
   fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
 fi
-
-if [ "$fileName" = "" ]; then
+if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+  echo "Node version found."
+else
   echo "Unable to find AvalancheGo version $version. Exiting."
   if [ "$foundAvalancheGo" = "true" ]; then
     echo "Restarting service..."
