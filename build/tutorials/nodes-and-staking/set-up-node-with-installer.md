@@ -59,7 +59,7 @@ So, now that you prepared your system and have the info ready, let's get to it.
 
 To download and run the script, enter the following in the terminal:
 
-```text
+```bash
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
 chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
@@ -125,7 +125,7 @@ The script is finished, and you should see the system prompt again.
 
 AvalancheGo should be running in the background as a service. You can check that it's running with:
 
-```text
+```bash
 sudo systemctl status avalanchego
 ```
 
@@ -157,7 +157,7 @@ Note the `active (running)` which indicates the service is running ok. You may n
 
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
-```text
+```bash
 sudo journalctl -u avalanchego | grep "node's ID"
 ```
 
@@ -171,7 +171,7 @@ Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRb
 
 Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
 
-```text
+```bash
 sudo journalctl -u avalanchego -f
 ```
 
@@ -181,13 +181,13 @@ Press `ctrl+C` when you wish to stop reading node output.
 
 To stop AvalancheGo, run:
 
-```text
+```bash
 sudo systemctl stop avalanchego
 ```
 
 To start it again, run:
 
-```text
+```bash
 sudo systemctl start avalanchego
 ```
 
@@ -203,7 +203,7 @@ It is recommended to always upgrade to the latest version, because new versions 
 
 To upgrade your node, just run the installer script again:
 
-```text
+```bash
 ./avalanchego-installer.sh
 ```
 
@@ -226,6 +226,45 @@ New node version:
 avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413bbac158d6626f712d2]
 Done!
 ```
+
+## Using a previous version
+
+The installer script can also be used to install a version of AvalancheGo other than the latest version.
+
+To see a list of available versions for installation, run:
+
+```bash
+./avalanchego-installer.sh --list
+```
+It will print out a list, something like:
+
+```text
+AvalancheGo installer
+---------------------
+Available versions:
+v1.3.2
+v1.3.1
+v1.3.0
+v1.2.4-arm-fix
+v1.2.4
+v1.2.3-signed
+v1.2.3
+v1.2.2
+v1.2.1
+v1.2.0
+```
+
+To install a specific version, run the script with `--version` followed by the tag of the version. For example:
+
+```bash
+./avalanchego-installer.sh --version v1.3.1
+```
+
+{% hint style="danger" %}
+Note that not all AvalancheGo versions are compatible. You should generally run the latest version. Running a version other than latest may lead to your node not working properly and, for validators, not receiving a staking reward.
+{% endhint %}
+
+Thanks to community member [Jean Zundel](https://github.com/jzu) for the inspiration and help implementing support for installing non-latest node versions.
 
 ## What next?
 
