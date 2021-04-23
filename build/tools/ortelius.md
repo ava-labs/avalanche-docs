@@ -497,16 +497,10 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 
 Find assets that have been created on the X-chain.
 
-**Params**
-
-| Name | Type | Description | Default | Max |
-| :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | `string` | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
-
 **Example Call**
 
 ```text
-curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
+curl "http://localhost:8080/v2/assets"
 ```
 
 **Example Response**
@@ -523,63 +517,8 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
       "currentSupply": "24509771588234718",
       "timestamp": "2020-09-10T00:00:00Z",
       "denomination": 9,
-      "variableCap": 0,
-      "aggregates": {
-        "day": {
-          "startTime": "2020-11-15T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "hour": {
-          "startTime": "2020-11-16T03:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "minute": {
-          "startTime": "2020-11-16T04:46:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "month": {
-          "startTime": "2020-10-17T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "week": {
-          "startTime": "2020-11-09T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "year": {
-          "startTime": "2019-11-17T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "6637657099999996",
-          "transactionCount": 1,
-          "addressCount": 159,
-          "outputCount": 1,
-          "assetCount": 817
-        }
-      }
+      "variableCap": 0, 
+      "nft": 1
     }
   ]
 }
