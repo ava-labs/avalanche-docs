@@ -805,7 +805,7 @@ Find outputs that have been created by a transaction confirmed on the network.
 | :--- | :--- | :--- | :--- | :--- |
 | `toAddress` | `caddress` | address | None | None |
 | `fromAddress` | `caddress` | address | None | None |
-| `address` | `caddress` | address | None | None |
+| `address` | `caddress` | address (to or from) | None | None |
 | `hash` | `chash` | transaction hash | None | None |
 | `blockStart` | `number` | Starting block number inclusive | None | N/A |
 | `blockEnd` | `number` | Ending block number exclusive | None | N/A |
