@@ -25,6 +25,8 @@ In addition to integers, strings, and booleans, the following data types are use
 | `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
 | `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
 | `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
+| `caddress` | A hex encoded address | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` |
+| `chash` | A hex encoded hash | `0xe5b935988317e8552e769ad92b6a2fd01ac8f0f90d8ffa4377e50fcb8d970077` |
 
 ### List Parameters
 
@@ -801,10 +803,10 @@ Find outputs that have been created by a transaction confirmed on the network.
 
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `toAddress` | `caddress` | C address | None | None |
-| `fromAddress` | `caddress` | C address | None | None |
-| `address` | `caddress` | C address | None | None |
-| `hash` | `hash` | C transaction hash | None | None |
+| `toAddress` | `caddress` | address | None | None |
+| `fromAddress` | `caddress` | address | None | None |
+| `address` | `caddress` | address | None | None |
+| `hash` | `chash` | transaction hash | None | None |
 | `blockStart` | `number` | Starting block number inclusive | None | N/A |
 | `blockEnd` | `number` | Ending block number exclusive | None | N/A |
 
