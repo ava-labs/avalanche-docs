@@ -517,7 +517,7 @@ curl "http://localhost:8080/v2/assets"
       "currentSupply": "24509771588234718",
       "timestamp": "2020-09-10T00:00:00Z",
       "denomination": 9,
-      "variableCap": 0, 
+      "variableCap": 0,
       "nft": 1
     }
   ]
@@ -531,7 +531,7 @@ Find a single asset by its ID.
 **Example Call**
 
 ```text
-curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=minute"
+curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
 ```
 
 **Example Response**
@@ -546,63 +546,8 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
   "currentSupply": "24509771588234718",
   "timestamp": "2020-09-10T00:00:00Z",
   "denomination": 9,
-  "variableCap": 0,
-  "aggregates": {
-    "day": {
-      "startTime": "2020-11-15T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "hour": {
-      "startTime": "2020-11-16T03:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "minute": {
-      "startTime": "2020-11-16T04:49:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "month": {
-      "startTime": "2020-10-17T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "week": {
-      "startTime": "2020-11-09T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "year": {
-      "startTime": "2019-11-17T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "6637657099999996",
-      "transactionCount": 1,
-      "addressCount": 159,
-      "outputCount": 1,
-      "assetCount": 817
-    }
-  }
+  "variableCap": 0, 
+  "nft": 1
 }
 ```
 
@@ -729,6 +674,22 @@ curl "http://localhost:8080/v2/ctxdata/10"
             "r": "0x30cb390fdc1ef12b2f6e2b1bc604d0ddc6996fe601b351908f762ec589ce53b6",
             "s": "0x5529ac942dd2e5e970475cd6392291271f02ad0d5c48fdff68daea856c752e84",
             "hash": "0xe91eeb7aca41cb41b6d32ffd841eee3a297ab9318e7467961ed43b5e0ee3e58e"
+        }
+    ],
+    "logs": [
+        {
+            "address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+            "topics": [
+                "0x7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65",
+                "0x000000000000000000000000e54ca86531e17ef3616d22ca28b0d458b6c89106"
+            ],
+            "data": "0x000000000000000000000000000000000000000000000000128fc29c60e5e255",
+            "blockNumber": "0x12bf12",
+            "transactionHash": "0xf5d3dfbdf9722db34907b65b22dca5715bb2eac4f02f4b4992ffe2c06f3a88d2",
+            "transactionIndex": "0x1",
+            "blockHash": "0xaf0f4d2c60544fe24d0393ec0160f31ba4bad8532af64ad37960719e34bc6c4c",
+            "logIndex": "0x9",
+            "removed": false
         }
     ]
 }
