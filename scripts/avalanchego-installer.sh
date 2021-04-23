@@ -55,8 +55,7 @@ echo "   --help            Shows this message"
 echo "   --list            Lists 10 newest versions available to install"
 echo "   --version <tag>   Installs <tag> version"
 echo ""
-echo "Ran without any options, script will install or upgrade AvalancheGo to latest available version."
-echo ""
+echo "Run without any options, script will install or upgrade AvalancheGo to latest available version."
 exit 0
 }
 
@@ -104,7 +103,7 @@ if [ "$foundArch" = "aarch64" ]; then
   echo "Found arm64 architecture..."
 elif [ "$foundArch" = "x86_64" ]; then
   getArch="amd64"                               #we're running on intel/amd
-  echo "Found 64bit Intel/AMD architecture..."
+  echo "Found amd64 architecture..."
 else
   #sorry, don't know you.
   echo "Unsupported architecture: $foundArch!"

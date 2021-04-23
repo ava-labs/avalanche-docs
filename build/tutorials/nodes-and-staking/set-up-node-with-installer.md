@@ -227,11 +227,11 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-## Downgrade to a previous version
+## Using a previous version
 
-Bugs do occur, even with quality control involving strict testing. It may so happen that the newly released build is broken for a given architecture, or in a particular context. Check the official communication channels and team Discord for more information. If it turns out the problem really is with the newly released version, and the recommended solution is to return to the previous node version, installer script can help you in that situation too.
+The installer script can also be used to install a version of AvalancheGo other than the latest version.
 
-To see a list of available node versions for installation, run:
+To see a list of available versions for installation, run:
 
 ```bash
 ./avalanchego-installer.sh --list
@@ -254,19 +254,17 @@ v1.2.1
 v1.2.0
 ```
 
-Note the version you need to install to get the node to a known good configuration, and then run the installer with `--version` flag followed by the tag of the version you wish to install. For example:
+To install a specific version, run the script with `--version` followed by the tag of the version. For example:
 
 ```bash
 ./avalanchego-installer.sh --version v1.3.1
 ```
 
-Command will start the upgrade process using the node version specified.
-
 {% hint style="danger" %}
-Do not downgrade your node version without explicit advice from the team to do so! Running an outdated version may lead to incompatibilities that may hinder your node and network performance, and may result in your node being banned by other nodes, potentially risking your staking rewards!
+Note that not all AvalancheGo versions are compatible. You should generally run the latest version. Running a version other than latest may lead to your node not working properly and, for validators, not receiving a staking reward.
 {% endhint %}
 
-Thanks to community member [Jean Zundel](https://github.com/jzu) for motivation and script for node downgrade.
+Thanks to community member [Jean Zundel](https://github.com/jzu) for the inspiration and help implementing support for installing non-latest node versions.
 
 ## What next?
 
