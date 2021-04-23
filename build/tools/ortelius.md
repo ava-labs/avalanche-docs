@@ -23,9 +23,9 @@ In addition to integers, strings, and booleans, the following data types are use
 | Name | Description | Examples |
 | :--- | :--- | :--- |
 | `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
-| `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
+| `address` | A bech-32 encoded address (used on the X-Chain and P-Chain) | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
 | `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
-| `caddress` | A hex encoded address | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` |
+| `caddress` | A hex encoded address (used on the C-Chain) | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` |
 | `chash` | A hex encoded hash | `0xe5b935988317e8552e769ad92b6a2fd01ac8f0f90d8ffa4377e50fcb8d970077` |
 
 ### List Parameters
@@ -263,7 +263,7 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 
 ### List Transactions
 
-Find transactions that have been confirmed on the network.
+Find transactions that have been accepted.
 
 **Params**
 
@@ -426,7 +426,7 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 
 ### List Addresses
 
-Find addresses that have been involved in confirmed transactions.
+Find addresses that have been referenced in accepted transactions.
 
 **Params**
 
@@ -553,7 +553,7 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 
 ### List Outputs
 
-Find outputs that have been created by a transaction confirmed on the network.
+Find outputs that have been created by an accepted transaction.
 
 **Params**
 
@@ -623,7 +623,7 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-### Get C block
+### Get a C-Chain Block
 
 Find a single block by its number.
 
@@ -695,9 +695,9 @@ curl "http://localhost:8080/v2/ctxdata/10"
 }
 ```
 
-### List C Transactions
+### List C-Chain Transactions
 
-Find C transactions that have been confirmed on the network.
+Find accepted C-Chain transactions.
 
 **Params**
 
@@ -757,9 +757,9 @@ curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6
 }
 ```
 
-### Get Raw Transaction
+### Get a Raw C-Chain Transaction
 
-Find a single block by its number.
+Get an accepted C-Chain transaction by its ID.
 
 **Example Call**
 
