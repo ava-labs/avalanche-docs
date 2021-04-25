@@ -10,27 +10,8 @@ You've completed [Run an Avalanche Node](../../get-started.md) and are familiar 
 
 ## Dependencies
 
-* [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
-
-## Start up a local Avalanche network
-
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
-
-Start a local five node Avalanche network:
-
-```text
-cd /path/to/avash
-# build Avash if you haven't done so
-go build
-# start Avash
-./avash
-# start a five node staking network
-runscript scripts/five_node_staking.lua
-```
-
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
 
 ## Create truffle directory and install dependencies
 
