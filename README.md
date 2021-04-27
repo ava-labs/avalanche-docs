@@ -22,7 +22,7 @@ description: >-
 {% endtab %}
 
 {% tab title="Staking" %}
-{% page-ref page="build/run-avalanche-node.md" %}
+{% page-ref page="build/tutorials/nodes-and-staking/run-avalanche-node.md" %}
 
 {% page-ref page="build/tutorials/nodes-and-staking/" %}
 {% endtab %}

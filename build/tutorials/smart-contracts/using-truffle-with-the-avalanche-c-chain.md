@@ -6,7 +6,7 @@
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
 
 ## Dependencies
 
