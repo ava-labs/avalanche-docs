@@ -16,7 +16,7 @@
 
 ## Build
 
-* [Get Started: Run an Avalanche Node](build/get-started.md)
+* [Run an Avalanche Node](build/run-avalanche-node.md)
 * [Release Notes](build/release-notes/README.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
   * [AvalancheGo Release Notes](build/release-notes/avalanchego.md)
