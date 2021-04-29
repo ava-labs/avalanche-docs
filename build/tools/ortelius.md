@@ -35,7 +35,6 @@ All endpoints for listing resources accept the following parameters:
 | Name | Type | Description | Default | Max |
 | :--- | :--- | :--- | :--- | :--- |
 | `limit` | `int` | The maximum number of items to return | `5000` | `5000` |
-| `offset` | `int` | The number of items to skip | `0` | None |
 | `query` | `string` | An ID prefix to filter items by | None | None |
 | `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
 | `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
