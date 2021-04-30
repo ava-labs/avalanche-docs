@@ -160,7 +160,7 @@ Transactions are created by users which call an API on the [AvalancheGo](https:/
 
 ## Other Observations
 
-Conflicting transactions are not guaranteed to be live. That's not really a problem because if you don't want your transaction to not be live then don't issue a conflicting transaction.
+Conflicting transactions are not guaranteed to be live. That's not really a problem because if you want your transaction to be live then you should not issue a conflicting transaction.
 
 Avalanche works for linear chains too. The protocol is largely the same as above, but each vertex has only have one parent. This gives a total ordering of vertices. This is useful for certain applications where one needs to know if a transaction came before another transaction, such as with smart contracts. Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol for linear chains.
 
