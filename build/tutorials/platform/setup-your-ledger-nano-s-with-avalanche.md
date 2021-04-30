@@ -1,4 +1,4 @@
-# Set up Your Ledger Nano S with Avalanche
+# Set up Your Ledger Nano S or Nano X with Avalanche
 
 The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
 
@@ -10,13 +10,13 @@ The Avalanche Ledger wallet app is available via [Ledger Live](https://www.ledge
 
 First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
 
-After successfully installing the app run it. Go to the “Manager” tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter “Avalanche”. Confirm that the Avalanche app is v0.5.2 (or greater), and click the “Install” button.
+After successfully installing the app run it. Go to the “Manager” tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter “Avalanche”. Confirm that the Avalanche app is v0.5.2 \(or greater\), and click the “Install” button.
 
-![Avalanche Ledger app install button](../../../.github/ledger-06-live-install.png)
+![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-06-live-install.png)
 
 You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.5.2.
 
-![Avalanche Ledger app install button](../../../.github/ledger-07-live-version.png)
+![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-07-live-version.png)
 
 ## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
 
@@ -24,15 +24,15 @@ Once you have the Avalanche app installed then you’re able to interact with th
 
 First, to access the wallet, plug in the Ledger to your computer and enter your pin.
 
-![PIN code screen](../../../.github/ledger-03-pin.png)
+![PIN code screen](../../../.gitbook/assets/ledger-03-pin.png)
 
-If you have more than one app installed on the device, use left and right buttons to select Avalanche app: 
+If you have more than one app installed on the device, use left and right buttons to select Avalanche app:
 
-![Avalanche app](../../../.github/ledger-04-app-start.png)
+![Avalanche app](../../../.gitbook/assets/ledger-04-app-start.png)
 
-Press both buttons to start the app. You should land on the “Avalanche” app screen where you can confirm that the app is version 0.5.2 (or greater).
+Press both buttons to start the app. You should land on the “Avalanche” app screen where you can confirm that the app is version 0.5.2 \(or greater\).
 
-![App version](../../../.github/ledger-05-app-version.png)
+![App version](../../../.gitbook/assets/ledger-05-app-version.png)
 
 After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
 
@@ -40,11 +40,11 @@ After you confirm that the Avalanche app is running then on the wallet homepage 
 
 On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
 
-![Ledger Access](../../../.github/ledger-01-wallet-access.png)
+![Ledger Access](../../../.gitbook/assets/ledger-01-wallet-access.png)
 
 You’ll now be prompted to confirm access to the public keys on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
 
-![](../../../.github/ledger-02-confirm-access.png)
+![](../../../.gitbook/assets/ledger-02-confirm-access.png)
 
 You will need to do this twice, because different keys are used for different chains. If successful you will be signed into the wallet and any previous balances will be displayed.
 
