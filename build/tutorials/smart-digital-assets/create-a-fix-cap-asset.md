@@ -8,7 +8,7 @@ Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no mor
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../get-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
 
 ## Create the Asset
 

@@ -236,6 +236,7 @@ To see a list of available versions for installation, run:
 ```bash
 ./avalanchego-installer.sh --list
 ```
+
 It will print out a list, something like:
 
 ```text
