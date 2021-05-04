@@ -1,6 +1,6 @@
 # Command Line Interface
 
-When running a node, there are a variety of possible configurations that are supported.
+You can specify the configuration of a node with the arguments below.
 
 ## Arguments
 
@@ -63,11 +63,11 @@ When set to `true`, assertions will execute at runtime throughout the codebase. 
 
 `--bootstrap-ids` \(string\):
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The default value depends on the network ID.
 
 `--bootstrap-ips` \(string\):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. The default value depends on the network ID.
 
 `--bootstrap-retry-enabled` \(boolean\):
 
@@ -207,21 +207,17 @@ Enables signature verification. When set to `false`, signatures won’t be check
 
 The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
 
-`--p2p-tls-enabled` \(boolean\):
-
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers. However, This can be disabled for testing. When TLS is disabled, the `stakingID` will be derived from the IP Address the node claims it owns. This will also disable encryption of inter-node communication. This should only be specified for testing. Defaults to `true`. This must be true when `--staking-enabled=true`.
-
 `--staking-enabled` \(boolean\):
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. When this is `true`, `--p2p-tls-enabled` must be set to `true` in order to secure P2P communications.
+Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network.
 
 `--staking-tls-cert-file` \(string, file path\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS certificate used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`.
 
 `--staking-tls-key-file` \(string, file path\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS private key used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`.
 
 `--staking-disabled-weight` \(int\):
 
@@ -235,7 +231,7 @@ If this is `true`, print the version and quit. Defaults to `false`.
 
 ## Advanced Options
 
-The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+The following options may affect the correctness of a node. Only power users should change these.
 
 ### Benchlist
 
@@ -255,6 +251,70 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
 
+### C-Chain / Coreth
+
+`--plugin-dir` \(string, file path\):
+
+Specifies the directory containing the `evm` (C-Chain) plugin binary. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+
+`--coreth-config` \(json\):
+
+This allows you to specify a config to be passed into the C-Chain. The default values for this config are:
+
+```cpp
+{
+    "snowman-api-enabled": false,
+    "coreth-admin-api-enabled": false,
+    "net-api-enabled": true,
+    "rpc-gas-cap": 2500000000,
+    "rpc-tx-fee-cap": 100,
+    "eth-api-enabled": true,
+    "personal-api-enabled": true,
+    "tx-pool-api-enabled": true,
+    "debug-api-enabled": false,
+    "web3-api-enabled": true
+}
+```
+
+Note: if a config is specified, all default options are overridden. For example:
+
+```text
+./build/avalanchego --config-file=config.json
+```
+
+config.json:
+
+```cpp
+{
+    "coreth-config": {
+        "snowman-api-enabled": false,
+        "coreth-admin-api-enabled": false,
+        "net-api-enabled": true,
+        "rpc-gas-cap": 2500000000,
+        "rpc-tx-fee-cap": 100,
+        "eth-api-enabled": true,
+        "tx-pool-api-enabled": true,
+        "debug-api-enabled": true,
+        "web3-api-enabled": true
+    }
+}
+```
+
+Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+
+The options specify parameters for Coreth \(the C Chain\) as follows:
+
+* `snowman-api-enabled` -&gt; Enables Snowman API.
+* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
+* `net-api-enabled` -&gt; Enables `net_*` API.
+* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
+* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
+* `eth-api-enabled` -&gt; Enables `eth_*` API.
+* `personal-api-enabled` -&gt; Enables `personal_*` API.
+* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
+* `debug-api-enabled` -&gt; Enables `debug_*` API.
+* `web3-api-enabled` -&gt; Enables `web3_*` API.
+  
 ### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
@@ -403,97 +463,15 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
-### Throughput Server
+### Plugin Mode
 
-`--xput-server-enabled` \[Deprecated\] \(boolean\):
+`--plugin-mode-enabled` \(bool\):
 
-An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
-
-`--xput-server-port` \[Deprecated\] \(string\):
-
-This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
+If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin)
+Defaults to `false`.
 
 ### Subnet Whitelist
 
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
-
-### Restart on Disconnect
-
-Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
-
-`--restart-on-disconnected` \(boolean, defaults to `false`\)
-
-`--disconnected-check-frequency` \(duration, defaults to `10s`\)
-
-`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
-
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart.
-
-If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
-
-### Plugins
-
-`--plugin-dir` \(string, file path\):
-
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
-
-`--coreth-config` \(json\):
-
-This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
-
-```cpp
-{
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "rpc-gas-cap": 2500000000,
-    "rpc-tx-fee-cap": 100,
-    "eth-api-enabled": true,
-    "personal-api-enabled": true,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": false,
-    "web3-api-enabled": true
-}
-```
-
-Note: if a config is specified, all default options are overridden. For example:
-
-```text
-./build/avalanchego --config-file=config.json
-```
-
-config.json:
-
-```cpp
-{
-    "coreth-config": {
-        "snowman-api-enabled": false,
-        "coreth-admin-api-enabled": false,
-        "net-api-enabled": true,
-        "rpc-gas-cap": 2500000000,
-        "rpc-tx-fee-cap": 100,
-        "eth-api-enabled": true,
-        "tx-pool-api-enabled": true,
-        "debug-api-enabled": true,
-        "web3-api-enabled": true
-    }
-}
-```
-
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
-
-The options specify parameters for Coreth \(the C Chain\) as follows:
-
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
-
