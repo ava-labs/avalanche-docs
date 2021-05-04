@@ -209,7 +209,7 @@ The port through which the staking server will connect to the Avalanche network 
 
 `--staking-enabled` \(boolean\):
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network.
+Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`.
 
 `--staking-tls-cert-file` \(string, file path\):
 
