@@ -2,6 +2,42 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)\)
+
+{% hint style="danger" %}
+**Please note that this change is not backwards compatible with previous releases.**
+{% endhint %}
+
+{% hint style="warning" %}
+This upgrade applies the Ethereum Berlin upgrade to the C-chain, adds a new AVM endpoint, and includes various stability improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
+
+The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
+{% endhint %}
+
+**The primary components to this upgrade include:**
+
+* Updated Coreth to depend on v1.10.2 of go-ethereum.
+* Applied the Ethereum Berlin upgrade. Specifically [EIP-2565](https://eips.ethereum.org/EIPS/eip-2565), [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718), [EIP-2929](https://eips.ethereum.org/EIPS/eip-2929), and [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930).
+* Added new stateful pre-compiled smart contracts to the C-chain to support ANT transfers and ARC-20 wrappers around ANTs.
+* Added an AVM `/events` endpoint that supports websocket notification of transactions being accepted matching an addresses filter.
+* Added two new networking message types `SignedVersion` and `SignedPeerlist` to improve validator -&gt; IP mappings.
+* Fixed a long standing bug where shutting down the node while a chain was bootstrapping could cause the chain to be shut down ungracefully.
+* Updated the plugin gRPC packages to paginate large requests to improve stability.
+* Added the ability to run avalanchego's main binary as a plugin.
+* Fixed a potential race condition in the leveldb corruption protection.
+* Updated the automated build scripts to better support multiple architectures.
+
+**Added command line arguments:**
+
+* `plugin-mode-enabled` specifies the binary to run in plugin mode.
+
+**Removed command line arguments:**
+
+* `p2p-tls-enabled`
+* `disconnected-check-frequency`
+* `disconnected-restart-timeout`
+* `restart-on-disconnected`
+
 ## v1.3.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
 
 {% hint style="danger" %}
