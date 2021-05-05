@@ -18,7 +18,7 @@ Le code source du portefeuille Avalanche peut être trouvé [ici](https://github
 
 ### Étape 1 - Ouvrez le portefeuille Avalanche
 
-![](../../../.gitbook/assets/image%20%2832%29%20%281%29.png)
+![](../../../.gitbook/assets/image%20%2832%29%20%281%29%20%281%29%20%281%29.png)
 
 Sélectionnez **"Acces Wallet"** pour accéder à votre portefeuille. Pour connecter le portefeuille à un réseau autre que le réseau principal d'Avalanche, sélectionnez **"Mainnet"** et choisissez le réseau auquel vous connecter.
 

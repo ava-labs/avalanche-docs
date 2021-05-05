@@ -35,7 +35,7 @@ Une différence clé entre Avalanche et d'autres réseaux décentralisés est so
 
 ## Avalanche Protocole de Consensus
 
-![](.gitbook/assets/image%20%2810%29%20%281%29%20%281%29.png)
+![](.gitbook/assets/image%20%2810%29%20%281%29%20%281%29%20%281%29.png)
 
 Les protocoles de la famille Avalanche fonctionnent par le biais de votes répétés sous-échantillonnés. Lorsqu'un [validateur](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) détermine si une transaction doit être acceptée ou rejetée, il demande à un petit sous-ensemble aléatoire de validateurs s'ils pensent que la transaction doit être acceptée ou rejetée. Si le validateur interrogé pense que la transaction est invalide, a déjà rejeté la transaction ou préfère une transaction en conflit, il répond qu'il pense que la transaction doit être rejetée. Sinon, il répond qu'il pense que la transaction doit être acceptée.
 

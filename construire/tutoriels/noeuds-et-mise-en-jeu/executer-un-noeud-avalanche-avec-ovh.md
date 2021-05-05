@@ -556,6 +556,21 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 git pull
 ```
 
+{% hint style="danger" %}
+Si vous rencontrez cette erreur :
+
+```text
+error: Your local changes to the following files would be overwritten by merge: go.sum`
+```
+
+Tapez ces commandes :
+
+```text
+rm go.sum
+git pull
+```
+{% endhint %}
+
 ```cpp
 ./scripts/build.sh
 ```
