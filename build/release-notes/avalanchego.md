@@ -5,7 +5,9 @@
 ## v1.4.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)\)
 
 {% hint style="danger" %}
-**Please note that this change is not backwards compatible with previous releases.**
+**Please note that this change is not backwards compatible with previous releases.  
+  
+The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
 {% endhint %}
 
 {% hint style="warning" %}
@@ -37,8 +39,6 @@ The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji
 * `disconnected-check-frequency`
 * `disconnected-restart-timeout`
 * `restart-on-disconnected`
-
-Related blog post can be found [here](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf).
 
 ## v1.3.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
 
