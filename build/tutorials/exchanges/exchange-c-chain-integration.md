@@ -2,7 +2,7 @@
 
 ## Overview
 
-The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node (which has the same API as go-ethereum) and populating Avalanche’s ChainID (43114) when constructing transactions.
+The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node (which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)) and populating Avalanche’s ChainID (43114) when constructing transactions.
 
 ### Running Avalanche node
 
@@ -12,31 +12,26 @@ If you want to build your node form source or include it in a docker image, refe
 
 All command line options available are described [here](../../references/command-line-interface.md), along with their default values.
 
-You can supply options on the command line, or use the config file, which is probably easier to work with. Use `—config-file=config.json` option, and then provide complete configuration in the `config.json` file, for example:
+You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide complete configuration in the `config.json` file, for example:
 ```json
 {
-"coreth-config": {
-  "snowman-api-enabled": true,
-  "coreth-admin-api-enabled": true,
-  "net-api-enabled": true,
-  "eth-api-enabled": true,
-  "personal-api-enabled": true,
-  "tx-pool-api-enabled": true,
-  "debug-api-enabled": true,
-  "web3-api-enabled": true,
-  "api-max-duration": 0,
-  "local-txs-enabled": true
-},
-"db-dir": "./db/",
-"http-port": 9545,
-"log-level": "verbo",
-"log-dir": "./log/"
+  "coreth-config": {
+    "snowman-api-enabled": false,
+    "coreth-admin-api-enabled": false,
+    "net-api-enabled": true,
+    "eth-api-enabled": true,
+    "personal-api-enabled": false,
+    "tx-pool-api-enabled": true,
+    "debug-api-enabled": true,
+    "web3-api-enabled": true,
+    "local-txs-enabled": true
+  }
 }
 ```
 
 ### Interacting with the C-Chain
 
-Interacting with the C-Chain is identical as interacting with `go-ethereum`. You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
+Interacting with the C-Chain is identical as interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
 
 Please note that `personal_` namespace is turned off by default. To turn it on, you need to pass the appropriate command line switch to your node, like in the above config example.
 
@@ -65,6 +60,6 @@ If you plan on extracting data from the C-Chain into your own systems using gola
 
 If you plan on reading JSON responses directly or use web3.js (doesn't recompute hash received over the wire) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
 
-## Summary
+## Support
 
-We hope that his document will enable you to quickly integrate with Avalance Network on the C-Chain. If you have any problems or questions, reach out to us either directly to our developers, or on our public [Discord](https://chat.avalabs.org/) server.
+If you have any problems or questions, reach out either directly to our developers, or on our public [Discord](https://chat.avalabs.org/) server.
