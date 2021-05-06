@@ -61,6 +61,10 @@ When set to `true`, assertions will execute at runtime throughout the codebase. 
 
 ### Bootstrapping
 
+`--bootstrap-beacon-connection-timeout` \(duration\):
+
+Timeout when attempting to connect to bootstrapping beacons. Defaults to `1m`.
+
 `--bootstrap-ids` \(string\):
 
 Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. The default value depends on the network ID.
@@ -468,6 +472,23 @@ Health check runs with this freqency. Defaults to `30s`.
 `--health-check-averager-halflife` \(duration\):
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+
+### Peer List Gossiping
+
+Nodes gossip peers to each other so that each node can have an up-to-date peer list.
+A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
+
+`--network-peer-list-gossip-frequency` \(duration\):
+
+Defaults to `1m`.
+
+`--network-peer-list-gossip-size` \(int\):
+
+Defaults to `50`.
+
+`--network-peer-list-size` \(int\):
+
+Defaults to `20`.
 
 ### Plugin Mode
 
