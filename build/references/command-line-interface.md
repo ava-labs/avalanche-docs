@@ -469,6 +469,17 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
+### Peer List Gossiping
+
+Nodes gossip peers to each other so that each node can have an up-to-date peer list.
+A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
+
+`--network-peer-list-gossip-frequency` \(duration\)
+
+`--network-peer-list-gossip-size` \(int\)
+
+`--network-peer-list-size` \(int)
+
 ### Plugin Mode
 
 `--plugin-mode-enabled` \(bool\):
