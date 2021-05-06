@@ -1,46 +1,45 @@
 ---
-description: Learn more about Avalanche's transaction fees
+description: Avalanche'ın işlem ücretleri hakkında daha fazla bilgi edinin
 ---
 
-# Transaction Fees
+# İşlem Ücretleri
 
-In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned \(destroyed forever\).**
+Spami engellemek adına, Avalanche üzerinde yapılan işlemler için bir işlem ücreti ödenmesi gerekir. Bu ücret, [AVAX](../../#avalanche-avax-token) ile ödenir. **İşlem ücreti yakılır \(sonsuza kadar yok olur\).**
 
-When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
+Avalanche’ın API'si aracılığıyla bir işlem yaptığınızda; işlem ücreti, sizin kontrolünüzde olan adreslerin birinden otomatik olarak kesilir.
 
-## Fee Schedule
+## Ücret Tarifesi
 
-Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
+Yapılan işlem türüne göre farklı bir işlem ücretinin ödenmesi gerekir. İşlem türlerine göre ücretleri görmek için aşağıdaki tablodan faydalanabilirsiniz:
 
 {% hint style="warning" %}
-The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\). The C-Chain gas limit is 10e8 \(100,000,000\)
+[C-Chain](./#contract-chain-c-chain) için gas fiyatı 225 nAVAX'dır. \(225 GWei\). C-Chain'in gas limiti 10e8'dir. \(100,000,000\)
 {% endhint %}
 
 ```cpp
-+----------+-------------------+------------------------+
-| Chain    : Transaction Type  | Transaction Fee (AVAX) |
-+----------+-------------------+------------------------+
-| P        : Create Blockchain |                   0.01 |
-+----------+-------------------+------------------------+
-| P        : Add Validator     |                      0 |
-+----------+-------------------+------------------------+
-| P        : Add Delegator     |                      0 |
-+----------+-------------------+------------------------+
-| P        : Create Subnet     |                   0.01 |
-+----------+-------------------+------------------------+
-| P        : Import AVAX       |                  0.001 |
-+----------+-------------------+------------------------+
-| P        : Export AVAX       |                  0.001 |
-+----------+-------------------+------------------------+
-| X        : Send              |                  0.001 |
-+----------+-------------------+------------------------+
-| X        : Create Asset      |                   0.01 |
-+----------+-------------------+------------------------+
-| X        : Mint Asset        |                  0.001 |
-+----------+-------------------+------------------------+
-| X        : Import AVAX       |                  0.001 |
-+----------+-------------------+------------------------+
-| X        : Export AVAX       |                  0.001 |
-+----------+-------------------+------------------------+
++----------+---------------------+------------------------+
+| Zincir   : İşlem Türü          | İşlem Ücreti (AVAX)    |
++----------+---------------------+------------------------+
+| P        : Blokzincir Oluştur  |                   0.01 |
++----------+---------------------+------------------------+
+| P        : Validatör Ekle      |                      0 |
++----------+---------------------+------------------------+
+| P        : Delegatör Ekle      |                      0 |
++----------+---------------------+------------------------+
+| P        : Subnet Oluştur      |                   0.01 |
++----------+---------------------+------------------------+
+| P        : AVAX'ı İçe Aktar    |                  0.001 |
++----------+---------------------+------------------------+
+| P        : AVAX'ı Dışa Aktar   |                  0.001 |
++----------+---------------------+------------------------+
+| X        : Gönder              |                  0.001 |
++----------+---------------------+------------------------+
+| X        : Varlık Oluştur      |                   0.01 |
++----------+---------------------+------------------------+
+| X        : Varlık Çıkart       |                  0.001 |
++----------+---------------------+------------------------+
+| X        : AVAX'ı İçe Aktar    |                  0.001 |
++----------+---------------------+------------------------+
+| X        : AVAX'ı Dışa Aktar   |                  0.001 |
++----------+---------------------+------------------------+
 ```
-
