@@ -255,7 +255,13 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 `--plugin-dir` \(string, file path\):
 
-Specifies the directory containing the `evm` (C-Chain) plugin binary. Defaults to `"$HOME/.avalanchego/build/plugins"`.
+Specifies the directory containing the `evm` (C-Chain) plugin binary.
+By default, looks for the binary in these directories:
+
+* `[directory AvalancheGo was invoked from]/plugins`
+* `/usr/local/lib/avalanchego`
+* `[current directory]/plugins`
+* `[current directory]/build/plugins`
 
 `--coreth-config` \(json\):
 
@@ -269,8 +275,8 @@ This allows you to specify a config to be passed into the C-Chain. The default v
     "rpc-gas-cap": 2500000000,
     "rpc-tx-fee-cap": 100,
     "eth-api-enabled": true,
-    "personal-api-enabled": true,
-    "tx-pool-api-enabled": true,
+    "personal-api-enabled": false,
+    "tx-pool-api-enabled": false,
     "debug-api-enabled": false,
     "web3-api-enabled": true
 }
