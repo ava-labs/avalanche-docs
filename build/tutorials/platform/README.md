@@ -9,4 +9,5 @@
 | [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
 | [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
 | [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
+| [**Integration with C-Chain**](exchange-c-chain-integration.md) | Guidelines for exchange integration with Ethereum-compatible C-Chain |
 

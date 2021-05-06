@@ -42,8 +42,8 @@ Avalanche C-Chain transactions are identical to standard EVM transactions with 2
 * The gas price is fixed to 225 Gwei.
 
 For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
-* [MetaMask and Remix](../../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
-* [Truffle](../../tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
+* [MetaMask and Remix](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+* [Truffle](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
 * [Hardhat](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
 ## Ingesting On-Chain Data
