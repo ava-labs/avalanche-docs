@@ -259,8 +259,7 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 `--plugin-dir` \(string, file path\):
 
-Specifies the directory containing the `evm` (C-Chain) plugin binary.
-By default, looks for the binary in these directories:
+Specifies the directory containing the `evm` \(C-Chain\) plugin binary. By default, looks for the binary in these directories:
 
 * `[directory AvalancheGo was invoked from]/plugins`
 * `/usr/local/lib/avalanchego`
@@ -324,7 +323,7 @@ The options specify parameters for Coreth \(the C Chain\) as follows:
 * `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
 * `debug-api-enabled` -&gt; Enables `debug_*` API.
 * `web3-api-enabled` -&gt; Enables `web3_*` API.
-  
+
 ### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
@@ -475,8 +474,7 @@ Halflife of averagers used in health checks \(to measure the rate of message fai
 
 ### Peer List Gossiping
 
-Nodes gossip peers to each other so that each node can have an up-to-date peer list.
-A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
+Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
 
 `--network-peer-list-gossip-frequency` \(duration\):
 
@@ -494,11 +492,11 @@ Defaults to `20`.
 
 `--plugin-mode-enabled` \(bool\):
 
-If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin)
-Defaults to `false`.
+If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
 ### Subnet Whitelist
 
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+
