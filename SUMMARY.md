@@ -29,6 +29,7 @@
     * [Set up Your Ledger Nano S or Nano X with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
     * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
+    * [Exchange integration with C-Chain](build/tutorials/platform/exchange-c-chain-integration.md)
   * [Nodes and Staking](build/tutorials/nodes-and-staking/README.md)
     * [Add a Validator](build/tutorials/nodes-and-staking/add-a-validator.md)
     * [Maintain an Avalanche Node](https://youtu.be/o4Fww-sHoaQ)
