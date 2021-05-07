@@ -12,7 +12,7 @@ If you want to build your node form source or include it in a docker image, refe
 
 All command line options available are described [here](../../references/command-line-interface.md), along with their default values.
 
-You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide complete configuration in the `config.json` file, for example:
+You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file, for example:
 
 ```javascript
 {
@@ -32,7 +32,7 @@ You can supply options on the command line, or use the config file, which can be
 
 ### Interacting with the C-Chain
 
-Interacting with the C-Chain is identical as interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
+Interacting with the C-Chain is identical to interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
 
 Please note that `personal_` namespace is turned off by default. To turn it on, you need to pass the appropriate command line switch to your node, like in the above config example.
 
@@ -55,7 +55,7 @@ You can use any standard way of ingesting on-chain data you use for Ethereum net
 
 ### Determining Finality
 
-Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up to date finalized block, query any value \(i.e. block, balance, state, etc\) with the `latest` parameter. If you query above the last finalized block \(i.e. eth\_blockNumber returns 10 and you query 11\), an error will be thrown indicating that unfinalized data cannot be queried \(as of avalanchego@v1.3.2\).
+Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value \(i.e. block, balance, state, etc\) with the `latest` parameter. If you query above the last finalized block \(i.e. eth\_blockNumber returns 10 and you query 11\), an error will be thrown indicating that unfinalized data cannot be queried \(as of avalanchego@v1.3.2\).
 
 ### \(Optional\) Custom Golang SDK
 
