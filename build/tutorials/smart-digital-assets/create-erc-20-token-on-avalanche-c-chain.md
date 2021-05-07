@@ -31,15 +31,15 @@ Now, we need to set these boxes with correct values.
   * **Mainnet:** `0xa86a` 
   * **Fuji Testnet:** `0xa869` 
   * **Local Testnet:** `0xa868` 
-* **Symbol**: C-AVAX
+* **Symbol**: AVAX
 * **Explorer**:
   * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
   * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
   * **Localnet:** n/a 
 
-![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
+![Image for post](../../../.github/erc20-metamask.png)
 
-After setting up all the parameters correctly, we should see this page. For now, we have 0 C-AVAX. “C” refers to C-chain and we have to get some C-AVAX to interact with the network.
+After setting up all the parameters correctly, we should see this page. For now, we have 0 AVAX.
 
 ## Fund your C-Chain address
 
@@ -51,19 +51,17 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-Chain address.
 
 ### Funding on local testnet
 
 On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our address with prefix “C-”.
+Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our C-Chain address, for exmaple “0xfe8886bec537252040Dff36448C0F104Be635650”.
 
-For example my address is “0xfe8886bec537252040Dff36448C0F104Be635650”, I need to paste my account address as “C-0xfe8886bec537252040Dff36448C0F104Be635650”
+![Image for post](../../../.github/erc20-faucet.png)
 
-![Image for post](https://miro.medium.com/max/422/1*okw3MKlyGcF4U9ibsq5v8w.png)
-
-After copy and paste the address here, click request 2.0000 C-AVAX. This test faucet token has no value, it is just for development purposes.
+After copy and paste the address here, click request 20 AVAX. This test faucet token has no value, it is just for development purposes.
 
 Then check your wallet balance and you should have some test token in your metamask.
 
