@@ -37,7 +37,7 @@ Now, we need to set these boxes with correct values.
   * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
   * **Localnet:** n/a 
 
-![Image for post](../../../.github/erc20-metamask.png)
+![Image for post](../../../.gitbook/assets/erc20-metamask.png)
 
 After setting up all the parameters correctly, we should see this page. For now, we have 0 AVAX.
 
@@ -59,7 +59,7 @@ On a local network, you can easily fund your addresses by deploying your own fau
 
 Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our C-Chain address, for exmaple “0xfe8886bec537252040Dff36448C0F104Be635650”.
 
-![Image for post](../../../.github/erc20-faucet.png)
+![Image for post](../../../.gitbook/assets/erc20-faucet.png)
 
 After copy and paste the address here, click request 20 AVAX. This test faucet token has no value, it is just for development purposes.
 
