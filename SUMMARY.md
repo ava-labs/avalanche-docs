@@ -26,7 +26,7 @@
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
-    * [Integrate an Exchange with Avalanche C-Chain](build/tutorials/platform/exchange-c-chain-integration.md)
+    * [Integrate an Exchange with Avalanche C-Chain](build/tutorials/platform/integrate-exchange-with-avalanche.md)
     * [Set up Your Ledger Nano S or Nano X with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
     * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
