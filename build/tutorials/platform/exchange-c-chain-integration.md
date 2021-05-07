@@ -1,4 +1,4 @@
-# Exchange integration with C-Chain
+# Integrate an Exchange with Avalanche C-Chain
 
 ## Overview
 
