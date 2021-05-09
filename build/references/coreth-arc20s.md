@@ -123,7 +123,7 @@ For simplicity, we will use total supply to indicate the total supply of the wra
 Similar to WETH, in order to deposit some funds into an ARC-20, we need to send the ARC-20 contract the deposit amount and then invoke the contract's deposit function, so that the contract can acknowledge the deposit and update the caller's balance. With WETH, this can be accomplished with a simple `call` because it allows the caller to both send the native coin and invoke a smart contract. With non-AVAX ARC-20s, `nativeAssetCall` allows the same functionality for all ANTs on the C-Chain.
 
 * **`nonce`**: 2
-* **`gasPrice`**: 470 gwei
+* **`gasPrice`**: 225 gwei
 * **`gasLimit`**: 3000000
 * **`to`**: `0x0100000000000000000000000000000000000002`
 * **`value`**: 0
