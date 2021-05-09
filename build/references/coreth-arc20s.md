@@ -30,14 +30,14 @@ An EVM Transaction is composed of the following fields:
 
 Non-AVAX Assets, however, have no counterpart within the EVM. Therefore, Coreth makes minor modifications to the EVM and state management in order to support asset balances and the ability to transfer these assets on the C-Chain.
 
-Non-AVAX Assets (ANTs) are supported on the C-Chain by keeping a mapping [assetID -> balance] in each account's storage. These assets can be exported back to the X-Chain or manipulated on the C-Chain using `assetCall` and `assetBalance`.
+Non-AVAX Assets (ANTs) are supported on the C-Chain by keeping a mapping [assetID -> balance] in each account's storage. These assets can be exported back to the X-Chain or manipulated on the C-Chain using `nativeAssetCall` and `nativeAssetBalance`. `nativeAssetCall` and `nativeAssetBalance` are precompiled contracts released in Apricot Phase 2 to improve the UX of interacting with ANTs on the C-Chain.
 
-##### assetCall
+##### nativeAssetCall
 
-`assetCall` is a precompiled contract at address `0x0100000000000000000000000000000000000002`. `assetCall` allows users to atomically transfer a native asset to a given address and (optionally) also make a contract call to that same address. This is parallel to how a normal transaction can send value to some address, and atomically call that address with some `data`.
+`nativeAssetCall` is a precompiled contract at address `0x0100000000000000000000000000000000000002`. `nativeAssetCall` allows users to atomically transfer a native asset to a given address and (optionally) also make a contract call to that same address. This is parallel to how a normal transaction can send value to some address, and atomically call that address with some `data`.
 
 ```text
-assetCall(address addr, uint256 assetID, uint256 assetAmount, bytes memory callData) -> {ret: bytes memory}
+nativeAssetCall(address addr, uint256 assetID, uint256 assetAmount, bytes memory callData) -> {ret: bytes memory}
 ```
 
 These arguments can be packed by `abi.encodePacked(...)` in Solidity since there is only one argument with variadic length (`callData`). The first three arguments are constant length, so the precompiled contract simply parses the call input as:
@@ -57,12 +57,12 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since there
                               +--------------------------------+
 ```
 
-##### assetBalance
+##### nativeAssetBalance
 
-`assetBalance` is a precompiled contract at address `0x0100000000000000000000000000000000000001`. `assetBalance` is the ANT equivalent of using `balance` to get the AVAX balance.
+`nativeAssetBalance` is a precompiled contract at address `0x0100000000000000000000000000000000000001`. `nativeAssetBalance` is the ANT equivalent of using `balance` to get the AVAX balance.
 
 ```text
-assetBalance(address addr, uint256 assetID) -> {balance: uint256}
+nativeAssetBalance(address addr, uint256 assetID) -> {balance: uint256}
 ```
 
 These arguments can be packed by `abi.encodePacked(...)` in Solidity since all of the arguments have constant length.
@@ -110,7 +110,7 @@ As a smart contract, ERC-20s maintain their own state. This means that if your a
 
 Avalanche Native Tokens (ANTs) are stored directly on the account that owns them. In order to make ANTs easier to use in smart contracts on the C-Chain, we would like to wrap them in the ERC-20 interface. We'll call this wrapped asset an ARC-20. To do this, we'll add an `assetID` field to a regular ERC-20 contract to represent the underlying asset that the ARC-20 will wrap.
 
-Additionally, the ARC-20 contract will support two additional functions: `withdraw` and `deposit`. To implement this, ARC-20s will need to use the precompiled contracts: `assetCall` and `assetBalance`.
+Additionally, the ARC-20 contract will support two additional functions: `withdraw` and `deposit`. To implement this, ARC-20s will need to use the precompiled contracts: `nativeAssetCall` and `nativeAssetBalance`.
 
 #### Contract Balance / Total Supply
 
@@ -120,7 +120,7 @@ For simplicity, we will use total supply to indicate the total supply of the wra
 
 #### ARC-20 Deposits
 
-Similar to WETH, in order to deposit some funds into an ARC-20, we need to send the ARC-20 contract the deposit amount and then invoke the contract's deposit function, so that the contract can acknowledge the deposit and update the caller's balance. With WETH, this can be accomplished with a simple `call` because it allows the caller to both send the native coin and invoke a smart contract. With non-AVAX ARC-20s, `assetCall` allows the same functionality for all ANTs on the C-Chain.
+Similar to WETH, in order to deposit some funds into an ARC-20, we need to send the ARC-20 contract the deposit amount and then invoke the contract's deposit function, so that the contract can acknowledge the deposit and update the caller's balance. With WETH, this can be accomplished with a simple `call` because it allows the caller to both send the native coin and invoke a smart contract. With non-AVAX ARC-20s, `nativeAssetCall` allows the same functionality for all ANTs on the C-Chain.
 
 * **`nonce`**: 2
 * **`gasPrice`**: 470 gwei
@@ -150,7 +150,7 @@ Note: the contract's balance of `assetID` may become out of sync with the total 
 
 #### ARC-20 Withdrawals
 
-A withdrawal is much simpler. When an ARC-20 receives a withdraw request, it simply needs to verify there's a sufficient account balance, update the balance and total supply, and then send the funds to the withdrawer with `assetCall`. The ARC-20s withdraw function will look like this:
+A withdrawal is much simpler. When an ARC-20 receives a withdraw request, it simply needs to verify there's a sufficient account balance, update the balance and total supply, and then send the funds to the withdrawer with `nativeAssetCall`. The ARC-20s withdraw function will look like this:
 
 ```go
     function withdraw(uint256 value) public {
