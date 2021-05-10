@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/createsubnettx.ts:13](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/createsubnettx.ts#L13)*
+*Defined in [src/apis/platformvm/createsubnettx.ts:14](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/createsubnettx.ts#L14)*

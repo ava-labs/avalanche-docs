@@ -12,11 +12,11 @@
 * [common](avalanche.md#common)
 * [evm](avalanche.md#evm)
 * [health](avalanche.md#health)
+* [index](avalanche.md#index)
 * [info](avalanche.md#info)
 * [keystore](avalanche.md#keystore)
 * [metrics](avalanche.md#metrics)
 * [platformvm](avalanche.md#platformvm)
-* [utils](avalanche.md#utils)
 
 ### Classes
 
@@ -60,6 +60,12 @@ ___
 
 ___
 
+###  index
+
+• **index**:
+
+___
+
 ###  info
 
 • **info**:
@@ -81,9 +87,3 @@ ___
 ###  platformvm
 
 • **platformvm**:
-
-___
-
-###  utils
-
-• **utils**:

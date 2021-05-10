@@ -30,6 +30,7 @@ Class representing an unsigned transaction.
 
 ### Properties
 
+* [_codecID](common_transactions.standardunsignedtx.md#protected-_codecid)
 * [_typeID](common_transactions.standardunsignedtx.md#protected-_typeid)
 * [_typeName](common_transactions.standardunsignedtx.md#protected-_typename)
 * [codecid](common_transactions.standardunsignedtx.md#protected-codecid)
@@ -57,7 +58,7 @@ Class representing an unsigned transaction.
 
 \+ **new StandardUnsignedTx**(`transaction`: SBTx, `codecid`: number): *[StandardUnsignedTx](common_transactions.standardunsignedtx.md)*
 
-*Defined in [src/common/tx.ts:288](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L288)*
+*Defined in [src/common/tx.ts:286](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L286)*
 
 **Parameters:**
 
@@ -70,13 +71,23 @@ Name | Type | Default |
 
 ## Properties
 
+### `Protected` _codecID
+
+• **_codecID**: *number* = undefined
+
+*Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
+
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L42)*
+
+___
+
 ### `Protected` _typeID
 
 • **_typeID**: *any* = undefined
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/common/tx.ts:183](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L183)*
+*Defined in [src/common/tx.ts:180](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L180)*
 
 ___
 
@@ -86,7 +97,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/common/tx.ts:182](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L182)*
+*Defined in [src/common/tx.ts:179](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L179)*
 
 ___
 
@@ -94,7 +105,7 @@ ___
 
 • **codecid**: *number* = 0
 
-*Defined in [src/common/tx.ts:199](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L199)*
+*Defined in [src/common/tx.ts:196](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L196)*
 
 ___
 
@@ -102,7 +113,7 @@ ___
 
 • **transaction**: *SBTx*
 
-*Defined in [src/common/tx.ts:200](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L200)*
+*Defined in [src/common/tx.ts:197](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L197)*
 
 ## Methods
 
@@ -112,7 +123,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/common/tx.ts:194](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L194)*
+*Defined in [src/common/tx.ts:191](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L191)*
 
 **Parameters:**
 
@@ -129,7 +140,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset?`: number): *number*
 
-*Defined in [src/common/tx.ts:267](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L267)*
+*Defined in [src/common/tx.ts:264](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L264)*
 
 **Parameters:**
 
@@ -146,7 +157,7 @@ ___
 
 ▸ **getBurn**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/tx.ts:258](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L258)*
+*Defined in [src/common/tx.ts:255](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L255)*
 
 Returns the number of burned tokens as a BN
 
@@ -164,7 +175,9 @@ ___
 
 ▸ **getCodecID**(): *number*
 
-*Defined in [src/common/tx.ts:205](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L205)*
+*Overrides [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
+
+*Defined in [src/common/tx.ts:202](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L202)*
 
 Returns the CodecID as a number
 
@@ -176,7 +189,7 @@ ___
 
 ▸ **getCodecIDBuffer**(): *Buffer*
 
-*Defined in [src/common/tx.ts:210](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L210)*
+*Defined in [src/common/tx.ts:207](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L207)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the CodecID
 
@@ -188,7 +201,7 @@ ___
 
 ▸ **getInputTotal**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/tx.ts:219](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L219)*
+*Defined in [src/common/tx.ts:216](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L216)*
 
 Returns the inputTotal as a BN
 
@@ -206,7 +219,7 @@ ___
 
 ▸ **getOutputTotal**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/tx.ts:239](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L239)*
+*Defined in [src/common/tx.ts:236](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L236)*
 
 Returns the outputTotal as a BN
 
@@ -224,7 +237,7 @@ ___
 
 ▸ **getTransaction**(): *SBTx*
 
-*Defined in [src/common/tx.ts:265](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L265)*
+*Defined in [src/common/tx.ts:262](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L262)*
 
 Returns the Transaction
 
@@ -238,7 +251,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -252,7 +265,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -266,7 +279,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/tx.ts:185](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L185)*
+*Defined in [src/common/tx.ts:182](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L182)*
 
 **Parameters:**
 
@@ -282,7 +295,7 @@ ___
 
 ▸ **sign**(`kc`: KCClass): *[StandardTx](common_transactions.standardtx.md)‹KPClass, KCClass, [StandardUnsignedTx](common_transactions.standardunsignedtx.md)‹KPClass, KCClass, SBTx››*
 
-*Defined in [src/common/tx.ts:284](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L284)*
+*Defined in [src/common/tx.ts:282](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L282)*
 
 Signs this [UnsignedTx](api_avm_transactions.unsignedtx.md) and returns signed [StandardTx](common_transactions.standardtx.md)
 
@@ -302,6 +315,6 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/common/tx.ts:269](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/tx.ts#L269)*
+*Defined in [src/common/tx.ts:266](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/tx.ts#L266)*
 
 **Returns:** *Buffer*

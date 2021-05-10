@@ -23,7 +23,7 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/tx.ts:24](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/tx.ts#L24)*
+*Defined in [src/apis/platformvm/tx.ts:25](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/tx.ts#L25)*
 
 ## Functions
 
@@ -31,7 +31,7 @@
 
 ▸ **SelectTxClass**(`txtype`: number, ...`args`: Array‹any›): *[BaseTx](../classes/api_platformvm_basetx.basetx.md)*
 
-*Defined in [src/apis/platformvm/tx.ts:33](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/tx.ts#L33)*
+*Defined in [src/apis/platformvm/tx.ts:34](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/tx.ts#L34)*
 
 Takes a buffer representing the output and returns the proper [BaseTx](../classes/api_avm_basetx.basetx.md) instance.
 

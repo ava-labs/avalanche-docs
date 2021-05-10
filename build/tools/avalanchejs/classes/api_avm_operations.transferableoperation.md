@@ -18,6 +18,7 @@ A class which contains an [Operation](api_avm_operations.operation.md) for trans
 
 ### Properties
 
+* [_codecID](api_avm_operations.transferableoperation.md#protected-_codecid)
 * [_typeID](api_avm_operations.transferableoperation.md#protected-_typeid)
 * [_typeName](api_avm_operations.transferableoperation.md#protected-_typename)
 * [assetid](api_avm_operations.transferableoperation.md#protected-assetid)
@@ -29,6 +30,7 @@ A class which contains an [Operation](api_avm_operations.operation.md) for trans
 * [deserialize](api_avm_operations.transferableoperation.md#deserialize)
 * [fromBuffer](api_avm_operations.transferableoperation.md#frombuffer)
 * [getAssetID](api_avm_operations.transferableoperation.md#getassetid)
+* [getCodecID](api_avm_operations.transferableoperation.md#getcodecid)
 * [getOperation](api_avm_operations.transferableoperation.md#getoperation)
 * [getTypeID](api_avm_operations.transferableoperation.md#gettypeid)
 * [getTypeName](api_avm_operations.transferableoperation.md#gettypename)
@@ -43,7 +45,7 @@ A class which contains an [Operation](api_avm_operations.operation.md) for trans
 
 \+ **new TransferableOperation**(`assetid`: Buffer, `utxoids`: Array‹[UTXOID](api_avm_operations.utxoid.md) | string | Buffer›, `operation`: [Operation](api_avm_operations.operation.md)): *[TransferableOperation](api_avm_operations.transferableoperation.md)*
 
-*Defined in [src/apis/avm/ops.ts:234](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L234)*
+*Defined in [src/apis/avm/ops.ts:238](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L238)*
 
 **Parameters:**
 
@@ -57,13 +59,23 @@ Name | Type | Default |
 
 ## Properties
 
+### `Protected` _codecID
+
+• **_codecID**: *number* = undefined
+
+*Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
+
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L42)*
+
+___
+
 ### `Protected` _typeID
 
 • **_typeID**: *any* = undefined
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/ops.ts:148](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L148)*
+*Defined in [src/apis/avm/ops.ts:152](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L152)*
 
 ___
 
@@ -73,7 +85,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/apis/avm/ops.ts:147](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L147)*
+*Defined in [src/apis/avm/ops.ts:151](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L151)*
 
 ___
 
@@ -81,7 +93,7 @@ ___
 
 • **assetid**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/apis/avm/ops.ts:171](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L171)*
+*Defined in [src/apis/avm/ops.ts:175](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L175)*
 
 ___
 
@@ -89,7 +101,7 @@ ___
 
 • **operation**: *[Operation](api_avm_operations.operation.md)*
 
-*Defined in [src/apis/avm/ops.ts:173](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L173)*
+*Defined in [src/apis/avm/ops.ts:177](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L177)*
 
 ___
 
@@ -97,7 +109,7 @@ ___
 
 • **utxoIDs**: *Array‹[UTXOID](api_avm_operations.utxoid.md)›* = []
 
-*Defined in [src/apis/avm/ops.ts:172](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L172)*
+*Defined in [src/apis/avm/ops.ts:176](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L176)*
 
 ## Methods
 
@@ -107,7 +119,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/apis/avm/ops.ts:159](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L159)*
+*Defined in [src/apis/avm/ops.ts:163](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L163)*
 
 **Parameters:**
 
@@ -124,7 +136,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/avm/ops.ts:198](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L198)*
+*Defined in [src/apis/avm/ops.ts:202](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L202)*
 
 **Parameters:**
 
@@ -141,7 +153,7 @@ ___
 
 ▸ **getAssetID**(): *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:186](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L186)*
+*Defined in [src/apis/avm/ops.ts:190](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L190)*
 
 Returns the assetID as a [Buffer](https://github.com/feross/buffer).
 
@@ -149,11 +161,25 @@ Returns the assetID as a [Buffer](https://github.com/feross/buffer).
 
 ___
 
+###  getCodecID
+
+▸ **getCodecID**(): *number*
+
+*Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
+
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L61)*
+
+Used in serialization. Optional. TypeID is a number for the typeID of object being output.
+
+**Returns:** *number*
+
+___
+
 ###  getOperation
 
 ▸ **getOperation**(): *[Operation](api_avm_operations.operation.md)*
 
-*Defined in [src/apis/avm/ops.ts:196](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L196)*
+*Defined in [src/apis/avm/ops.ts:200](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L200)*
 
 Returns the operation
 
@@ -167,7 +193,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -181,7 +207,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -193,7 +219,7 @@ ___
 
 ▸ **getUTXOIDs**(): *Array‹[UTXOID](api_avm_operations.utxoid.md)›*
 
-*Defined in [src/apis/avm/ops.ts:191](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L191)*
+*Defined in [src/apis/avm/ops.ts:195](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L195)*
 
 Returns an array of UTXOIDs in this operation.
 
@@ -207,7 +233,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/apis/avm/ops.ts:150](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L150)*
+*Defined in [src/apis/avm/ops.ts:154](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L154)*
 
 **Parameters:**
 
@@ -223,7 +249,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/apis/avm/ops.ts:215](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L215)*
+*Defined in [src/apis/avm/ops.ts:219](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L219)*
 
 **Returns:** *Buffer*
 
@@ -233,7 +259,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/apis/avm/ops.ts:178](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L178)*
+*Defined in [src/apis/avm/ops.ts:182](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L182)*
 
 Returns a function used to sort an array of [TransferableOperation](api_avm_operations.transferableoperation.md)s
 
