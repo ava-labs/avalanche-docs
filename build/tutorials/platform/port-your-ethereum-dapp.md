@@ -8,7 +8,7 @@ The purpose of this document is to help you with porting your existing dapp over
 
 Avalanche is a [network of networks](../../../learn/platform-overview/README.md). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogenous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain (contract chain).
 
-C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Solidity VM, which runs the smart contracts and manages data structures and blocks on the chain. As a result you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../../../learn/platform-overview/avalanche-consensus.md) enables.
+C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../../../learn/platform-overview/avalanche-consensus.md) enables.
 
 Coreth is loaded as a plugin into [AvalancheGo](https://github.com/ava-labs/avalancheg), the client node application used to run Avalanche network.
 
@@ -46,11 +46,11 @@ In your application's web interface, you can [add Avalanche programmatically](..
 
 Instead of proxying network operations through MetaMask, you can use the public API, which consists of a number of load-balanced AvalancheGo nodes behind a load balancer.
 
-The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the main net and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
+The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
 ### Running your own node
 
-If you don't want for your dapp to depend on a centralized service you don't control, you can run your own node and access the network that way.
+If you don't want for your dapp to depend on a centralized service you don't control, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate limiting.
 
 For development purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial for downloading, building and installation of AvalancheGo. If you're going to run a production node on a Linux machine, [here](../nodes-and-staking/set-up-node-with-installer.md) is a tutorial that shows how to use the installer script to quickly and easily install the node as a systemd service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
 
@@ -76,15 +76,15 @@ You can also use Truffle to test and deploy smart contracts on Avalanche. Find o
 
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-[Here](https://github.com/ava-labs/avalanche-smart-contract-quickstart) is a quickstart repository that our developers use to start new projects.
+[Here](https://github.com/ava-labs/avalanche-smart-contract-quickstart) is a quickstart repository that our developers use to start new projects. It is already configured for Avalanche so no additional setup is required.
 
 ## Avalanche Explorer
 
-Essential part of the smart contract development environment is the explorer, that indexes and serves blockchain data. Main net C-Chain explorer is available at [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/) and test net explorer at [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/). Besides the web interface, it also exposes the standard [Ethereum JSON RPC API](https://eth.wiki/json-rpc/API).
+Essential part of the smart contract development environment is the explorer, that indexes and serves blockchain data. Mainnet C-Chain explorer is available at [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/) and testnet explorer at [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/). Besides the web interface, it also exposes the standard [Ethereum JSON RPC API](https://eth.wiki/json-rpc/API).
 
 ## Avalanche Faucet
 
-For development purposes, you will need test tokens. Avalanche has a [Faucet](https://faucet.avax-test.network/) that drips tet tokens to address of your choice. Paste your C-Chain address there.
+For development purposes, you will need test tokens. Avalanche has a [Faucet](https://faucet.avax-test.network/) that drips test tokens to address of your choice. Paste your C-Chain address there.
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 
@@ -106,17 +106,17 @@ Here are the main differences you should be aware of.
 
 ### Measuring time
 
-It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the amount of blocks that are produced. You both get inaccurate results, and be open to manipulation by third parties.
+It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the amount of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
 Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing, and to be within 30s of the real time.
 
 ### Finality
 
-On Ethereum, blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final. 
+On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final. 
 
 ### Gas price
 
-Gas on Avalanche is burned. Validators don't keep the gas for themselves (they get reward for staking), so the dynamics of 'gas wars' where higher priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
+Gas on Avalanche is burned. Validators don't keep the gas for themselves (they get rewarded for staking), so the dynamics of 'gas wars' where higher priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
 
 ### Coreth configuration
 
