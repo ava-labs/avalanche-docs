@@ -2,7 +2,7 @@
 
 ## What is an Avalanche Native Token?
 
-An Avalanche Native Token (ANT) is a fixed-cap or variable-cap token created on the X-Chain. These tokens can be exchanged at lightning fast speeds on the X-Chain, which takes advantage of the superior performance of a DAG over a linear chain. In this document, Avalanche Native Tokens do not include non-fungible tokens (NFTs) created on the X-Chain. 
+An Avalanche Native Token (ANT) is a fixed-cap or variable-cap token created on the X-Chain. These tokens can be exchanged at lightning fast speeds on the X-Chain, which takes advantage of the superior performance of a DAG over a linear chain. In this document, Avalanche Native Tokens do not include non-fungible tokens (NFTs) created on the X-Chain.
 
 ## Why move an ANT from the X-Chain to the C-Chain?
 
@@ -77,7 +77,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since all o
 
 ## ARC-20s
 
-An ARC-20 is very similar to an ERC-20 except that it wraps an Avalanche Native Token.
+An ARC-20 is an ERC-20 token that wraps an underlying Avalanche Native Token, similar to how WAVAX wraps AVAX.
 
 ### What is an ERC-20
 
@@ -106,7 +106,7 @@ An ERC-20 is implemented by a smart contract, meaning they maintain their own st
 
 ### From ANT to ARC-20
 
-Unlike ERC-20s, Avalanche Native Tokens (ANTs) are stored directly on the account that owns them. ANTs can be "wrapped" in order to them usable in smart contracts on the C-Chain. We call this wrapped asset an ARC-20. To do this, we add an `assetID` field to a regular ERC-20 contract to represent the underlying asset that the ARC-20 wraps.
+Unlike ERC-20s, Avalanche Native Tokens (ANTs) are stored directly on the account that owns them. ANTs can be "wrapped" in order to make them usable in smart contracts on the C-Chain. We call this wrapped asset an ARC-20. To do this, we add an `assetID` field to a regular ERC-20 contract to represent the underlying asset that the ARC-20 wraps.
 
 Additionally, the ARC-20 contract supports two additional functions: `withdraw` and `deposit`. To implement this, ARC-20s need to use the precompiled contracts: `nativeAssetCall` and `nativeAssetBalance`.
 
@@ -118,7 +118,7 @@ For simplicity, we use total supply to indicate the total supply of the wrapped 
 
 #### ARC-20 Deposits
 
-In order to deposit funds into an ARC-20, we need to send the ARC-20 contract the deposit amount and then invoke the contract's deposit function so that the contract can acknowledge the deposit and update the caller's balance. This is similar to WETH (Wrapped ETH) on Ethereum. With WETH, this can be accomplished with a simple `call` because that method allows the caller to both send ETH and invoke a smart contract. With non-AVAX ARC-20s, `nativeAssetCall` allows the same functionality for ANTs on the C-Chain.
+In order to deposit funds into an ARC-20, we need to send the ARC-20 contract the deposit amount and then invoke the contract's deposit function so that the contract can acknowledge the deposit and update the caller's balance. This is similar to WETH (Wrapped ETH) on Ethereum. With WETH, this can be accomplished with a simple `call` because that method allows the caller to both send ETH and invoke a smart contract atomically. With non-AVAX ARC-20s, `nativeAssetCall` allows the same functionality for ANTs on the C-Chain.
 
 For example:
 
