@@ -24,4 +24,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/common/output.ts:18](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L18)*
+*Defined in [src/common/output.ts:18](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L18)*

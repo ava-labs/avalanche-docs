@@ -46,7 +46,7 @@ Class for representing an address used in [Output](common_output.output.md) type
 
 \+ **new Address**(): *[Address](common_output.address.md)*
 
-*Defined in [src/common/output.ts:79](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L79)*
+*Defined in [src/common/output.ts:79](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L79)*
 
 Class for representing an address used in [Output](common_output.output.md) types
 
@@ -60,7 +60,7 @@ Class for representing an address used in [Output](common_output.output.md) type
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeID](common_nbytes.nbytes.md#protected-_typeid)*
 
-*Defined in [src/common/output.ts:25](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L25)*
+*Defined in [src/common/output.ts:25](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L25)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeName](common_nbytes.nbytes.md#protected-_typename)*
 
-*Defined in [src/common/output.ts:24](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L24)*
+*Defined in [src/common/output.ts:24](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L24)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bsize](common_nbytes.nbytes.md#protected-bsize)*
 
-*Defined in [src/common/output.ts:30](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L30)*
+*Defined in [src/common/output.ts:30](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L30)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bytes](common_nbytes.nbytes.md#protected-bytes)*
 
-*Defined in [src/common/output.ts:29](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L29)*
+*Defined in [src/common/output.ts:29](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L29)*
 
 ## Methods
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[clone](common_nbytes.nbytes.md#abstract-clone)*
 
-*Defined in [src/common/output.ts:71](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L71)*
+*Defined in [src/common/output.ts:71](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L71)*
 
 **Returns:** *this*
 
@@ -122,7 +122,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[create](common_nbytes.nbytes.md#abstract-create)*
 
-*Defined in [src/common/output.ts:77](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L77)*
+*Defined in [src/common/output.ts:77](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L77)*
 
 **Parameters:**
 
@@ -142,7 +142,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/common/nbytes.ts:37](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/nbytes.ts#L37)*
+*Defined in [src/common/nbytes.ts:37](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/nbytes.ts#L37)*
 
 **Parameters:**
 
@@ -161,7 +161,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[fromBuffer](common_nbytes.nbytes.md#frombuffer)*
 
-*Defined in [src/common/nbytes.ts:75](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/nbytes.ts#L75)*
+*Defined in [src/common/nbytes.ts:75](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/nbytes.ts#L75)*
 
 Takes a [[Buffer]], verifies its length, and stores it.
 
@@ -184,7 +184,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[fromString](common_nbytes.nbytes.md#fromstring)*
 
-*Defined in [src/common/output.ts:53](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L53)*
+*Defined in [src/common/output.ts:53](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L53)*
 
 Takes a base-58 string containing an [Address](common_output.address.md), parses it, populates the class, and returns the length of the Address in bytes.
 
@@ -206,7 +206,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -220,7 +220,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getSize](common_nbytes.nbytes.md#getsize)*
 
-*Defined in [src/common/nbytes.ts:51](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/nbytes.ts#L51)*
+*Defined in [src/common/nbytes.ts:51](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/nbytes.ts#L51)*
 
 Returns the length of the [Buffer](https://github.com/feross/buffer).
 
@@ -236,7 +236,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -250,7 +250,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -266,7 +266,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/nbytes.ts:29](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/nbytes.ts#L29)*
+*Defined in [src/common/nbytes.ts:29](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/nbytes.ts#L29)*
 
 **Parameters:**
 
@@ -284,7 +284,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[toBuffer](common_nbytes.nbytes.md#tobuffer)*
 
-*Defined in [src/common/nbytes.ts:95](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/nbytes.ts#L95)*
+*Defined in [src/common/nbytes.ts:95](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/nbytes.ts#L95)*
 
 **Returns:** *Buffer*
 
@@ -298,7 +298,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[toString](common_nbytes.nbytes.md#tostring)*
 
-*Defined in [src/common/output.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L42)*
+*Defined in [src/common/output.ts:42](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L42)*
 
 Returns a base-58 representation of the [Address](common_output.address.md).
 
@@ -310,7 +310,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/common/output.ts:35](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L35)*
+*Defined in [src/common/output.ts:35](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/output.ts#L35)*
 
 Returns a function used to sort an array of [Address](common_output.address.md)es
 

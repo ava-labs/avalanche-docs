@@ -43,7 +43,7 @@ Class for representing a threshold and set of minting addresses in Avalanche.
 
 \+ **new MinterSet**(`threshold`: number, `minters`: Array‹string | Buffer›): *[MinterSet](api_avm_minterset.minterset.md)*
 
-*Defined in [src/apis/avm/minterset.ts:66](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L66)*
+*Defined in [src/apis/avm/minterset.ts:66](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L66)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ Name | Type | Description |
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/minterset.ts:23](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L23)*
+*Defined in [src/apis/avm/minterset.ts:23](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L23)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/apis/avm/minterset.ts:22](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L22)*
+*Defined in [src/apis/avm/minterset.ts:22](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L22)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • **minters**: *Array‹Buffer›* = []
 
-*Defined in [src/apis/avm/minterset.ts:40](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L40)*
+*Defined in [src/apis/avm/minterset.ts:40](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L40)*
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • **threshold**: *number*
 
-*Defined in [src/apis/avm/minterset.ts:39](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L39)*
+*Defined in [src/apis/avm/minterset.ts:39](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L39)*
 
 ## Methods
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **_cleanAddresses**(`addresses`: Array‹string | Buffer›): *Array‹Buffer›*
 
-*Defined in [src/apis/avm/minterset.ts:56](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L56)*
+*Defined in [src/apis/avm/minterset.ts:56](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L56)*
 
 **Parameters:**
 
@@ -124,7 +124,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/apis/avm/minterset.ts:33](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L33)*
+*Defined in [src/apis/avm/minterset.ts:33](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L33)*
 
 **Parameters:**
 
@@ -143,7 +143,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -155,7 +155,7 @@ ___
 
 ▸ **getMinters**(): *Array‹Buffer›*
 
-*Defined in [src/apis/avm/minterset.ts:52](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L52)*
+*Defined in [src/apis/avm/minterset.ts:52](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L52)*
 
 Returns the minters.
 
@@ -167,7 +167,7 @@ ___
 
 ▸ **getThreshold**(): *number*
 
-*Defined in [src/apis/avm/minterset.ts:45](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L45)*
+*Defined in [src/apis/avm/minterset.ts:45](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L45)*
 
 Returns the threshold.
 
@@ -181,7 +181,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -195,7 +195,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -209,7 +209,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/apis/avm/minterset.ts:25](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/minterset.ts#L25)*
+*Defined in [src/apis/avm/minterset.ts:25](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L25)*
 
 **Parameters:**
 
