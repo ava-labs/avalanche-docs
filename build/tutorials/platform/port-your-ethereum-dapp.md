@@ -88,6 +88,16 @@ For development purposes, you will need test tokens. Avalanche has a [Faucet](ht
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 
+## Contract verification
+
+Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://cchain.explorer.avax.network/). The procedure is simple:
+* navigate to your published contract address on the explorer
+* on the `code` tab select `verify & publish`
+* copy and paste the flattened source code and enter all the build parameters exactly as they are on the published contract
+* click `verify & publish`
+
+If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
+
 ## Gotchas and things to look out for
 
 Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There are some differences you need to be aware of, otherwise you may create subtle bugs or inconsistencies in how you dapps behave.
@@ -96,13 +106,13 @@ Here are the main differences you should be aware of.
 
 ### Measuring time
 
-It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the amount of blocks that are produced. You both get inaccurate results, and be oen to manipulation by third parties.
+It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the amount of blocks that are produced. You both get inaccurate results, and be open to manipulation by third parties.
 
 Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be increasing, and to be within 30s of the real time.
 
 ### Finality
 
-On Ethereum, blockchain can be reogranized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final. 
+On Ethereum, blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final. 
 
 ### Gas price
 
