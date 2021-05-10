@@ -2,6 +2,7 @@
 
 | Title | Description |
 | :--- | :--- |
+| [**Port your Ethereum dapp**](port-your-ethereum-dapp.md) | Guide for porting existing dapps to Avalanche Platform |
 | [**Create a Blockchain**](create-a-new-blockchain.md) | Create a blockchain by creating a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |
 | [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
 | [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
