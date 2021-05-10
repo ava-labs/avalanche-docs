@@ -9,21 +9,9 @@
 * [NFTCredential](../classes/api_avm_credentials.nftcredential.md)
 * [SECPCredential](../classes/api_avm_credentials.secpcredential.md)
 
-### Variables
-
-* [serializer](api_avm_credentials.md#const-serializer)
-
 ### Functions
 
 * [SelectCredentialClass](api_avm_credentials.md#const-selectcredentialclass)
-
-## Variables
-
-### `Const` serializer
-
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
-
-*Defined in [src/apis/avm/credentials.ts:15](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/credentials.ts#L15)*
 
 ## Functions
 
@@ -31,7 +19,7 @@
 
 ▸ **SelectCredentialClass**(`credid`: number, ...`args`: Array‹any›): *[Credential](../classes/common_signature.credential.md)*
 
-*Defined in [src/apis/avm/credentials.ts:24](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/credentials.ts#L24)*
+*Defined in [src/apis/avm/credentials.ts:17](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/credentials.ts#L17)*
 
 Takes a buffer representing the credential and returns the proper [Credential](../classes/common_signature.credential.md) instance.
 

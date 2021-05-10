@@ -93,7 +93,7 @@ Class for interacting with a node endpoint that is using the AVM.
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/avm/api.ts:1470](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1470)*
+*Defined in [src/apis/avm/api.ts:1480](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1480)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
 
@@ -113,7 +113,7 @@ Name | Type | Default | Description |
 
 • **AVAXAssetID**: *Buffer* = undefined
 
-*Defined in [src/apis/avm/api.ts:48](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L48)*
+*Defined in [src/apis/avm/api.ts:55](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L55)*
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseurl](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L38)*
+*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L38)*
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 • **blockchainAlias**: *string* = undefined
 
-*Defined in [src/apis/avm/api.ts:46](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L46)*
+*Defined in [src/apis/avm/api.ts:53](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L53)*
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 • **blockchainID**: *string* = ""
 
-*Defined in [src/apis/avm/api.ts:44](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L44)*
+*Defined in [src/apis/avm/api.ts:51](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L51)*
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L36)*
+*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L36)*
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 • **creationTxFee**: *BN* = undefined
 
-*Defined in [src/apis/avm/api.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L52)*
+*Defined in [src/apis/avm/api.ts:59](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L59)*
 
 ___
 
@@ -167,7 +167,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L40)*
+*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L40)*
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:17](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/jrpcapi.ts#L17)*
+*Defined in [src/common/jrpcapi.ts:17](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/jrpcapi.ts#L17)*
 
 ___
 
@@ -187,7 +187,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcid](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:19](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/jrpcapi.ts#L19)*
+*Defined in [src/common/jrpcapi.ts:19](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/jrpcapi.ts#L19)*
 
 ___
 
@@ -195,7 +195,7 @@ ___
 
 • **txFee**: *BN* = undefined
 
-*Defined in [src/apis/avm/api.ts:50](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L50)*
+*Defined in [src/apis/avm/api.ts:57](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L57)*
 
 ## Methods
 
@@ -203,7 +203,7 @@ ___
 
 ▸ **addressFromBuffer**(`address`: Buffer): *string*
 
-*Defined in [src/apis/avm/api.ts:122](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L122)*
+*Defined in [src/apis/avm/api.ts:130](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L130)*
 
 **Parameters:**
 
@@ -219,7 +219,7 @@ ___
 
 ▸ **buildBaseTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `amount`: BN, `assetID`: Buffer | string, `toAddresses`: Array‹string›, `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:721](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L721)*
+*Defined in [src/apis/avm/api.ts:729](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L729)*
 
 Helper function which creates an unsigned transaction. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -252,7 +252,7 @@ ___
 
 ▸ **buildCreateAssetTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `initialStates`: [InitialStates](api_avm_initialstates.initialstates.md), `name`: string, `symbol`: string, `denomination`: number, `mintOutputs`: Array‹[SECPMintOutput](api_avm_outputs.secpmintoutput.md)›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:1021](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1021)*
+*Defined in [src/apis/avm/api.ts:1031](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1031)*
 
 Creates an unsigned transaction. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -282,7 +282,7 @@ ___
 
 ▸ **buildCreateNFTAssetTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `minterSets`: [MinterSet](api_avm_minterset.minterset.md)[], `name`: string, `symbol`: string, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:1149](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1149)*
+*Defined in [src/apis/avm/api.ts:1159](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1159)*
 
 Creates an unsigned transaction. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -311,7 +311,7 @@ ___
 
 ▸ **buildCreateNFTMintTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `owners`: Array‹[OutputOwners](common_output.outputowners.md)› | [OutputOwners](common_output.outputowners.md), `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `utxoid`: string | Array‹string›, `groupID`: number, `payload`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹any›*
 
-*Defined in [src/apis/avm/api.ts:1210](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1210)*
+*Defined in [src/apis/avm/api.ts:1220](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1220)*
 
 Creates an unsigned transaction. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -338,9 +338,9 @@ ___
 
 ###  buildExportTx
 
-▸ **buildExportTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `amount`: BN, `destinationChain`: Buffer | string, `toAddresses`: Array‹string›, `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
+▸ **buildExportTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `amount`: BN, `destinationChain`: Buffer | string, `toAddresses`: Array‹string›, `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number, `assetID`: string): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:931](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L931)*
+*Defined in [src/apis/avm/api.ts:941](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L941)*
 
 Helper function which creates an unsigned Export Tx. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -358,7 +358,8 @@ Name | Type | Default | Description |
 `memo` | [PayloadBase](utils_payload.payloadbase.md) &#124; Buffer | undefined | Optional CB58 Buffer or String which contains arbitrary bytes, up to 256 bytes |
 `asOf` | BN | UnixNow() | Optional. The timestamp to verify the transaction against as a [BN](https://github.com/indutny/bn.js/) |
 `locktime` | BN | new BN(0) | Optional. The locktime field created in the resulting outputs |
-`threshold` | number | 1 | Optional. The number of signatures required to spend the funds in the resultant UTXO  |
+`threshold` | number | 1 | Optional. The number of signatures required to spend the funds in the resultant UTXO |
+`assetID` | string | undefined | Optional. The assetID of the asset to send. Defaults to AVAX assetID. Regardless of the asset which you're exporting, all fees are paid in AVAX.  |
 
 **Returns:** *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
@@ -370,7 +371,7 @@ ___
 
 ▸ **buildGenesis**(`genesisData`: object): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:1440](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1440)*
+*Defined in [src/apis/avm/api.ts:1450](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1450)*
 
 Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
 
@@ -390,7 +391,7 @@ ___
 
 ▸ **buildImportTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `ownerAddresses`: Array‹string›, `sourceChain`: Buffer | string, `toAddresses`: Array‹string›, `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:852](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L852)*
+*Defined in [src/apis/avm/api.ts:860](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L860)*
 
 Helper function which creates an unsigned Import Tx. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -423,7 +424,7 @@ ___
 
 ▸ **buildNFTTransferTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `toAddresses`: Array‹string›, `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `utxoid`: string | Array‹string›, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_avm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/avm/api.ts:785](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L785)*
+*Defined in [src/apis/avm/api.ts:793](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L793)*
 
 Helper function which creates an unsigned NFT Transfer. For more granular control, you may create your own
 [UnsignedTx](api_avm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_avm_inputs.transferableinput.md)s, [TransferableOutput](api_avm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -455,7 +456,7 @@ ___
 
 ▸ **buildSECPMintTx**(`utxoset`: [UTXOSet](api_avm_utxos.utxoset.md), `mintOwner`: [SECPMintOutput](api_avm_outputs.secpmintoutput.md), `transferOwner`: [SECPTransferOutput](api_avm_outputs.secptransferoutput.md), `fromAddresses`: Array‹string›, `changeAddresses`: Array‹string›, `mintUTXOID`: string, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹any›*
 
-*Defined in [src/apis/avm/api.ts:1075](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1075)*
+*Defined in [src/apis/avm/api.ts:1085](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1085)*
 
 **Parameters:**
 
@@ -476,11 +477,11 @@ ___
 
 ###  callMethod
 
-▸ **callMethod**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **callMethod**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `headers?`: object): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:21](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/jrpcapi.ts#L21)*
+*Defined in [src/common/jrpcapi.ts:21](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/jrpcapi.ts#L21)*
 
 **Parameters:**
 
@@ -489,6 +490,7 @@ Name | Type |
 `method` | string |
 `params?` | Array‹object› &#124; object |
 `baseurl?` | string |
+`headers?` | object |
 
 **Returns:** *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
@@ -498,7 +500,7 @@ ___
 
 ▸ **checkGooseEgg**(`utx`: [UnsignedTx](api_avm_transactions.unsignedtx.md), `outTotal`: BN): *Promise‹boolean›*
 
-*Defined in [src/apis/avm/api.ts:253](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L253)*
+*Defined in [src/apis/avm/api.ts:261](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L261)*
 
 Helper function which determines if a tx is a goose egg transaction.
 
@@ -522,7 +524,7 @@ ___
 
 ▸ **createAddress**(`username`: string, `password`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:292](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L292)*
+*Defined in [src/apis/avm/api.ts:300](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L300)*
 
 Creates an address (and associated private keys) on a user on a blockchain.
 
@@ -543,7 +545,7 @@ ___
 
 ▸ **createFixedCapAsset**(`username`: string, `password`: string, `name`: string, `symbol`: string, `denomination`: number, `initialHolders`: Array‹object›): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:326](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L326)*
+*Defined in [src/apis/avm/api.ts:334](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L334)*
 
 Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and there no more is ever created.
 
@@ -568,7 +570,7 @@ ___
 
 ▸ **createVariableCapAsset**(`username`: string, `password`: string, `name`: string, `symbol`: string, `denomination`: number, `minterSets`: Array‹object›): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:370](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L370)*
+*Defined in [src/apis/avm/api.ts:378](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L378)*
 
 Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using createMintTx, signMintTx and sendMintTx.
 
@@ -593,7 +595,7 @@ ___
 
 ▸ **export**(`username`: string, `password`: string, `to`: string, `amount`: BN, `assetID`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:469](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L469)*
+*Defined in [src/apis/avm/api.ts:477](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L477)*
 
 Send ANT (Avalanche Native Token) assets including AVAX from the X-Chain to an account on the P-Chain or C-Chain.
 
@@ -619,7 +621,7 @@ ___
 
 ▸ **exportAVAX**(`username`: string, `password`: string, `to`: string, `amount`: BN): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:492](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L492)*
+*Defined in [src/apis/avm/api.ts:500](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L500)*
 
 Send AVAX from the X-Chain to an account on the P-Chain or C-Chain.
 
@@ -644,7 +646,7 @@ ___
 
 ▸ **exportKey**(`username`: string, `password`: string, `address`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:425](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L425)*
+*Defined in [src/apis/avm/api.ts:433](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L433)*
 
 Exports the private key for an address.
 
@@ -666,7 +668,7 @@ ___
 
 ▸ **getAVAXAssetID**(`refresh`: boolean): *Promise‹Buffer›*
 
-*Defined in [src/apis/avm/api.ts:134](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L134)*
+*Defined in [src/apis/avm/api.ts:142](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L142)*
 
 Fetches the AVAX AssetID and returns it in a Promise.
 
@@ -686,7 +688,7 @@ ___
 
 ▸ **getAllBalances**(`address`: string): *Promise‹Array‹object››*
 
-*Defined in [src/apis/avm/api.ts:571](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L571)*
+*Defined in [src/apis/avm/api.ts:579](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L579)*
 
 Retrieves all assets for an address on a server and their associated balances.
 
@@ -706,7 +708,7 @@ ___
 
 ▸ **getAssetDescription**(`assetID`: Buffer | string): *Promise‹object›*
 
-*Defined in [src/apis/avm/api.ts:589](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L589)*
+*Defined in [src/apis/avm/api.ts:597](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L597)*
 
 Retrieves an assets name and symbol.
 
@@ -726,7 +728,7 @@ ___
 
 ▸ **getBalance**(`address`: string, `assetID`: string): *Promise‹object›*
 
-*Defined in [src/apis/avm/api.ts:272](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L272)*
+*Defined in [src/apis/avm/api.ts:280](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L280)*
 
 Gets the balance of a particular asset on a blockchain.
 
@@ -749,7 +751,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L63)*
+*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L63)*
 
 Returns the baseurl's path.
 
@@ -761,7 +763,7 @@ ___
 
 ▸ **getBlockchainAlias**(): *string*
 
-*Defined in [src/apis/avm/api.ts:59](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L59)*
+*Defined in [src/apis/avm/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L67)*
 
 Gets the alias for the blockchainID if it exists, otherwise returns `undefined`.
 
@@ -775,7 +777,7 @@ ___
 
 ▸ **getBlockchainID**(): *string*
 
-*Defined in [src/apis/avm/api.ts:90](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L90)*
+*Defined in [src/apis/avm/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L98)*
 
 Gets the blockchainID and returns it.
 
@@ -789,7 +791,7 @@ ___
 
 ▸ **getCreationTxFee**(): *BN*
 
-*Defined in [src/apis/avm/api.ts:206](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L206)*
+*Defined in [src/apis/avm/api.ts:214](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L214)*
 
 Gets the creation fee for this chain.
 
@@ -805,7 +807,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L68)*
 
 Returns the baseurl's database.
 
@@ -817,7 +819,7 @@ ___
 
 ▸ **getDefaultCreationTxFee**(): *BN*
 
-*Defined in [src/apis/avm/api.ts:197](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L197)*
+*Defined in [src/apis/avm/api.ts:205](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L205)*
 
 Gets the default creation fee for this chain.
 
@@ -831,7 +833,7 @@ ___
 
 ▸ **getDefaultTxFee**(): *BN*
 
-*Defined in [src/apis/avm/api.ts:166](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L166)*
+*Defined in [src/apis/avm/api.ts:174](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L174)*
 
 Gets the default tx fee for this chain.
 
@@ -847,7 +849,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:66](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/jrpcapi.ts#L66)*
+*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/jrpcapi.ts#L78)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -860,7 +862,7 @@ ___
 
 ▸ **getTx**(`txid`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:614](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L614)*
+*Defined in [src/apis/avm/api.ts:622](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L622)*
 
 Returns the treansaction data of a provided transaction ID by calling the node's `getTx` method.
 
@@ -880,7 +882,7 @@ ___
 
 ▸ **getTxFee**(): *BN*
 
-*Defined in [src/apis/avm/api.ts:175](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L175)*
+*Defined in [src/apis/avm/api.ts:183](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L183)*
 
 Gets the tx fee for this chain.
 
@@ -894,7 +896,7 @@ ___
 
 ▸ **getTxStatus**(`txid`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:628](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L628)*
+*Defined in [src/apis/avm/api.ts:636](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L636)*
 
 Returns the status of a provided transaction ID by calling the node's `getTxStatus` method.
 
@@ -914,7 +916,7 @@ ___
 
 ▸ **getUTXOs**(`addresses`: Array‹string› | string, `sourceChain`: string, `limit`: number, `startIndex`: object, `persistOpts`: [PersistanceOptions](utils_persistanceoptions.persistanceoptions.md)): *Promise‹object›*
 
-*Defined in [src/apis/avm/api.ts:650](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L650)*
+*Defined in [src/apis/avm/api.ts:658](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L658)*
 
 Retrieves the UTXOs related to the addresses provided from the node's `getUTXOs` method.
 
@@ -958,7 +960,7 @@ ___
 
 ▸ **import**(`username`: string, `password`: string, `to`: string, `sourceChain`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:515](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L515)*
+*Defined in [src/apis/avm/api.ts:523](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L523)*
 
 Send ANT (Avalanche Native Token) assets including AVAX from an account on the P-Chain or C-Chain to an address on the X-Chain. This transaction
 must be signed with the key of the account that the asset is sent from and which pays
@@ -984,7 +986,7 @@ ___
 
 ▸ **importAVAX**(`username`: string, `password`: string, `to`: string, `sourceChain`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:538](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L538)*
+*Defined in [src/apis/avm/api.ts:546](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L546)*
 
 Finalize a transfer of AVAX from the P-Chain to the X-Chain.
 
@@ -1009,7 +1011,7 @@ ___
 
 ▸ **importKey**(`username`: string, `password`: string, `privateKey`: string): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:447](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L447)*
+*Defined in [src/apis/avm/api.ts:455](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L455)*
 
 Imports a private key into the node's keystore under an user and for a blockchain.
 
@@ -1031,7 +1033,7 @@ ___
 
 ▸ **issueTx**(`tx`: string | Buffer | [Tx](api_avm_transactions.tx.md)): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:1277](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1277)*
+*Defined in [src/apis/avm/api.ts:1287](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1287)*
 
 Calls the node's issueTx method from the API and returns the resulting transaction ID as a string.
 
@@ -1051,7 +1053,7 @@ ___
 
 ▸ **keyChain**(): *[KeyChain](api_avm_keychain.keychain.md)*
 
-*Defined in [src/apis/avm/api.ts:227](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L227)*
+*Defined in [src/apis/avm/api.ts:235](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L235)*
 
 Gets a reference to the keychain for this class.
 
@@ -1065,7 +1067,7 @@ ___
 
 ▸ **listAddresses**(`username`: string, `password`: string): *Promise‹Array‹string››*
 
-*Defined in [src/apis/avm/api.ts:556](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L556)*
+*Defined in [src/apis/avm/api.ts:564](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L564)*
 
 Lists all the addresses under a user.
 
@@ -1086,7 +1088,7 @@ ___
 
 ▸ **mint**(`username`: string, `password`: string, `amount`: number | BN, `assetID`: Buffer | string, `to`: string, `minters`: Array‹string›): *Promise‹string›*
 
-*Defined in [src/apis/avm/api.ts:392](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L392)*
+*Defined in [src/apis/avm/api.ts:400](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L400)*
 
 Create an unsigned transaction to mint more of an asset.
 
@@ -1111,7 +1113,7 @@ ___
 
 ▸ **parseAddress**(`addr`: string): *Buffer*
 
-*Defined in [src/apis/avm/api.ts:116](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L116)*
+*Defined in [src/apis/avm/api.ts:124](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L124)*
 
 Takes an address string and returns its [Buffer](https://github.com/feross/buffer) representation if valid.
 
@@ -1131,7 +1133,7 @@ ___
 
 ▸ **refreshBlockchainID**(`blockchainID`: string): *boolean*
 
-*Defined in [src/apis/avm/api.ts:99](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L99)*
+*Defined in [src/apis/avm/api.ts:107](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L107)*
 
 Refresh blockchainID, and if a blockchainID is passed in, use that.
 
@@ -1151,7 +1153,7 @@ ___
 
 ▸ **send**(`username`: string, `password`: string, `assetID`: string | Buffer, `amount`: number | BN, `to`: string, `from`: Array‹string› | Array‹Buffer›, `changeAddr`: string, `memo`: string | Buffer): *Promise‹object›*
 
-*Defined in [src/apis/avm/api.ts:1311](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1311)*
+*Defined in [src/apis/avm/api.ts:1321](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1321)*
 
 Sends an amount of assetID to the specified address from a list of owned of addresses.
 
@@ -1178,7 +1180,7 @@ ___
 
 ▸ **sendMultiple**(`username`: string, `password`: string, `sendOutputs`: Array‹object›, `from`: Array‹string› | Array‹Buffer›, `changeAddr`: string, `memo`: string | Buffer): *Promise‹object›*
 
-*Defined in [src/apis/avm/api.ts:1375](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1375)*
+*Defined in [src/apis/avm/api.ts:1385](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1385)*
 
 Sends an amount of assetID to an array of specified addresses from a list of owned of addresses.
 
@@ -1203,7 +1205,7 @@ ___
 
 ▸ **setAVAXAssetID**(`avaxAssetID`: string | Buffer): *void*
 
-*Defined in [src/apis/avm/api.ts:154](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L154)*
+*Defined in [src/apis/avm/api.ts:162](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L162)*
 
 Overrides the defaults and sets the cache to a specific AVAX AssetID
 
@@ -1225,7 +1227,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L47)*
+*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L47)*
 
 Sets the path of the APIs baseurl.
 
@@ -1243,7 +1245,7 @@ ___
 
 ▸ **setBlockchainAlias**(`alias`: string): *string*
 
-*Defined in [src/apis/avm/api.ts:79](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L79)*
+*Defined in [src/apis/avm/api.ts:87](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L87)*
 
 Sets the alias for the blockchainID.
 
@@ -1261,7 +1263,7 @@ ___
 
 ▸ **setCreationTxFee**(`fee`: BN): *void*
 
-*Defined in [src/apis/avm/api.ts:218](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L218)*
+*Defined in [src/apis/avm/api.ts:226](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L226)*
 
 Sets the creation fee for this chain.
 
@@ -1279,7 +1281,7 @@ ___
 
 ▸ **setTxFee**(`fee`: BN): *void*
 
-*Defined in [src/apis/avm/api.ts:187](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L187)*
+*Defined in [src/apis/avm/api.ts:195](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L195)*
 
 Sets the tx fee for this chain.
 
@@ -1297,7 +1299,7 @@ ___
 
 ▸ **signTx**(`utx`: [UnsignedTx](api_avm_transactions.unsignedtx.md)): *[Tx](api_avm_transactions.tx.md)*
 
-*Defined in [src/apis/avm/api.ts:1268](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/api.ts#L1268)*
+*Defined in [src/apis/avm/api.ts:1278](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/api.ts#L1278)*
 
 Helper function which takes an unsigned transaction and signs it, returning the resulting [Tx](api_avm_transactions.tx.md).
 

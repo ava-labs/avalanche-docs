@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/createassettx.ts:19](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/createassettx.ts#L19)*
+*Defined in [src/apis/avm/createassettx.ts:20](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/createassettx.ts#L20)*

@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/initialstates.ts:16](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/initialstates.ts#L16)*
+*Defined in [src/apis/avm/initialstates.ts:16](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/initialstates.ts#L16)*

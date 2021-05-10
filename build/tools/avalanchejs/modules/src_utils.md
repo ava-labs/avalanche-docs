@@ -88,6 +88,93 @@
 * [getPreferredHRP](src_utils.md#getpreferredhrp)
 * [privateKeyStringToBuffer](src_utils.md#privatekeystringtobuffer)
 
+### Classes
+
+* [AddressError](../classes/src_utils.addresserror.md)
+* [AddressIndexError](../classes/src_utils.addressindexerror.md)
+* [AvalancheError](../classes/src_utils.avalancheerror.md)
+* [Base58Error](../classes/src_utils.base58error.md)
+* [Bech32Error](../classes/src_utils.bech32error.md)
+* [BufferSizeError](../classes/src_utils.buffersizeerror.md)
+* [ChainIdError](../classes/src_utils.chainiderror.md)
+* [ChecksumError](../classes/src_utils.checksumerror.md)
+* [CodecIdError](../classes/src_utils.codeciderror.md)
+* [CredIdError](../classes/src_utils.crediderror.md)
+* [DelegationFeeError](../classes/src_utils.delegationfeeerror.md)
+* [EVMFeeError](../classes/src_utils.evmfeeerror.md)
+* [EVMInputError](../classes/src_utils.evminputerror.md)
+* [EVMOutputError](../classes/src_utils.evmoutputerror.md)
+* [FeeAssetError](../classes/src_utils.feeasseterror.md)
+* [GooseEggCheckError](../classes/src_utils.gooseeggcheckerror.md)
+* [HexError](../classes/src_utils.hexerror.md)
+* [InputIdError](../classes/src_utils.inputiderror.md)
+* [InsufficientFundsError](../classes/src_utils.insufficientfundserror.md)
+* [InvalidOperationIdError](../classes/src_utils.invalidoperationiderror.md)
+* [MergeRuleError](../classes/src_utils.mergeruleerror.md)
+* [NameError](../classes/src_utils.nameerror.md)
+* [NoAtomicUTXOsError](../classes/src_utils.noatomicutxoserror.md)
+* [NodeIdError](../classes/src_utils.nodeiderror.md)
+* [OperationError](../classes/src_utils.operationerror.md)
+* [OutputIdError](../classes/src_utils.outputiderror.md)
+* [PrivateKeyError](../classes/src_utils.privatekeyerror.md)
+* [PublicKeyError](../classes/src_utils.publickeyerror.md)
+* [SECPMintOutputError](../classes/src_utils.secpmintoutputerror.md)
+* [StakeError](../classes/src_utils.stakeerror.md)
+* [SubnetOwnerError](../classes/src_utils.subnetownererror.md)
+* [SymbolError](../classes/src_utils.symbolerror.md)
+* [ThresholdError](../classes/src_utils.thresholderror.md)
+* [TimeError](../classes/src_utils.timeerror.md)
+* [TransactionError](../classes/src_utils.transactionerror.md)
+* [TransferableInputError](../classes/src_utils.transferableinputerror.md)
+* [TransferableOutputError](../classes/src_utils.transferableoutputerror.md)
+* [TypeIdError](../classes/src_utils.typeiderror.md)
+* [TypeNameError](../classes/src_utils.typenameerror.md)
+* [UTXOError](../classes/src_utils.utxoerror.md)
+* [UnknownTypeError](../classes/src_utils.unknowntypeerror.md)
+
+### Variables
+
+* [ADDRESS_ERROR_CODE](src_utils.md#const-address_error_code)
+* [ADDRESS_INDEX_ERROR_CODE](src_utils.md#const-address_index_error_code)
+* [BASE58_ERROR_CODE](src_utils.md#const-base58_error_code)
+* [BECH32_ERROR_CODE](src_utils.md#const-bech32_error_code)
+* [BUFFER_SIZE_ERROR_CODE](src_utils.md#const-buffer_size_error_code)
+* [CHAIN_ID_ERROR_CODE](src_utils.md#const-chain_id_error_code)
+* [CHECKSUM_ERROR_CODE](src_utils.md#const-checksum_error_code)
+* [CODEC_ID_ERROR_CODE](src_utils.md#const-codec_id_error_code)
+* [CRED_ID_ERROR_CODE](src_utils.md#const-cred_id_error_code)
+* [DELEGATION_FEE_ERROR_CODE](src_utils.md#const-delegation_fee_error_code)
+* [EVM_FEE_ERROR_CODE](src_utils.md#const-evm_fee_error_code)
+* [EVM_INPUT_ERROR_CODE](src_utils.md#const-evm_input_error_code)
+* [EVM_OUTPUT_ERROR_CODE](src_utils.md#const-evm_output_error_code)
+* [FEE_ASSET_ERROR_CODE](src_utils.md#const-fee_asset_error_code)
+* [GOOSE_EGG_CHECK_ERROR_CODE](src_utils.md#const-goose_egg_check_error_code)
+* [HEX_ERROR_CODE](src_utils.md#const-hex_error_code)
+* [INPUT_ID_ERROR_CODE](src_utils.md#const-input_id_error_code)
+* [INSUFFICIENT_FUNDS_ERROR_CODE](src_utils.md#const-insufficient_funds_error_code)
+* [INVALID_OPERATION_ID_CODE](src_utils.md#const-invalid_operation_id_code)
+* [MERGE_RULE_ERROR_CODE](src_utils.md#const-merge_rule_error_code)
+* [NAME_ERROR_CODE](src_utils.md#const-name_error_code)
+* [NODE_ID_ERROR_CODE](src_utils.md#const-node_id_error_code)
+* [NO_ATOMIX_UTXOS_ERROR_CODE](src_utils.md#const-no_atomix_utxos_error_code)
+* [OPERATION_ERROR_CODE](src_utils.md#const-operation_error_code)
+* [OUTPUT_ID_ERROR_CODE](src_utils.md#const-output_id_error_code)
+* [PRIVATE_KEY_ERROR_CODE](src_utils.md#const-private_key_error_code)
+* [PUBLIC_KEY_ERROR_CODE](src_utils.md#const-public_key_error_code)
+* [SECP_MINT_OUTPUT_ERROR_CODE](src_utils.md#const-secp_mint_output_error_code)
+* [STAKE_ERROR_CODE](src_utils.md#const-stake_error_code)
+* [SUBNET_OWNER_ERROR_CODE](src_utils.md#const-subnet_owner_error_code)
+* [SYMBOL_ERROR_CODE](src_utils.md#const-symbol_error_code)
+* [THRESHOLD_ERROR_CODE](src_utils.md#const-threshold_error_code)
+* [TIME_ERROR_CODE](src_utils.md#const-time_error_code)
+* [TRANSACTION_ERROR_CODE](src_utils.md#const-transaction_error_code)
+* [TRANSFERABLE_INPUT_ERROR_CODE](src_utils.md#const-transferable_input_error_code)
+* [TRANSFERABLE_OUTPUT_ERROR_CODE](src_utils.md#const-transferable_output_error_code)
+* [TYPE_ID_ERROR_CODE](src_utils.md#const-type_id_error_code)
+* [TYPE_NAME_ERROR_CODE](src_utils.md#const-type_name_error_code)
+* [UNKNOWN_TYPE_ERROR_CODE](src_utils.md#const-unknown_type_error_code)
+* [UTXO_ERROR_CODE](src_utils.md#const-utxo_error_code)
+
 ## References
 
 ###  ASSETIDPayload
@@ -573,3 +660,323 @@ ___
 ###  privateKeyStringToBuffer
 
 • **privateKeyStringToBuffer**:
+
+## Variables
+
+### `Const` ADDRESS_ERROR_CODE
+
+• **ADDRESS_ERROR_CODE**: *string* = "1000"
+
+*Defined in [src/utils/errors.ts:1](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L1)*
+
+___
+
+### `Const` ADDRESS_INDEX_ERROR_CODE
+
+• **ADDRESS_INDEX_ERROR_CODE**: *string* = "1028"
+
+*Defined in [src/utils/errors.ts:29](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L29)*
+
+___
+
+### `Const` BASE58_ERROR_CODE
+
+• **BASE58_ERROR_CODE**: *string* = "1031"
+
+*Defined in [src/utils/errors.ts:32](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L32)*
+
+___
+
+### `Const` BECH32_ERROR_CODE
+
+• **BECH32_ERROR_CODE**: *string* = "1037"
+
+*Defined in [src/utils/errors.ts:39](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L39)*
+
+___
+
+### `Const` BUFFER_SIZE_ERROR_CODE
+
+• **BUFFER_SIZE_ERROR_CODE**: *string* = "1027"
+
+*Defined in [src/utils/errors.ts:28](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L28)*
+
+___
+
+### `Const` CHAIN_ID_ERROR_CODE
+
+• **CHAIN_ID_ERROR_CODE**: *string* = "1002"
+
+*Defined in [src/utils/errors.ts:3](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L3)*
+
+___
+
+### `Const` CHECKSUM_ERROR_CODE
+
+• **CHECKSUM_ERROR_CODE**: *string* = "1014"
+
+*Defined in [src/utils/errors.ts:15](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L15)*
+
+___
+
+### `Const` CODEC_ID_ERROR_CODE
+
+• **CODEC_ID_ERROR_CODE**: *string* = "1007"
+
+*Defined in [src/utils/errors.ts:8](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L8)*
+
+___
+
+### `Const` CRED_ID_ERROR_CODE
+
+• **CRED_ID_ERROR_CODE**: *string* = "1008"
+
+*Defined in [src/utils/errors.ts:9](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L9)*
+
+___
+
+### `Const` DELEGATION_FEE_ERROR_CODE
+
+• **DELEGATION_FEE_ERROR_CODE**: *string* = "1025"
+
+*Defined in [src/utils/errors.ts:26](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L26)*
+
+___
+
+### `Const` EVM_FEE_ERROR_CODE
+
+• **EVM_FEE_ERROR_CODE**: *string* = "1038"
+
+*Defined in [src/utils/errors.ts:40](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L40)*
+
+___
+
+### `Const` EVM_INPUT_ERROR_CODE
+
+• **EVM_INPUT_ERROR_CODE**: *string* = "1020"
+
+*Defined in [src/utils/errors.ts:21](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L21)*
+
+___
+
+### `Const` EVM_OUTPUT_ERROR_CODE
+
+• **EVM_OUTPUT_ERROR_CODE**: *string* = "1021"
+
+*Defined in [src/utils/errors.ts:22](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L22)*
+
+___
+
+### `Const` FEE_ASSET_ERROR_CODE
+
+• **FEE_ASSET_ERROR_CODE**: *string* = "1022"
+
+*Defined in [src/utils/errors.ts:23](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L23)*
+
+___
+
+### `Const` GOOSE_EGG_CHECK_ERROR_CODE
+
+• **GOOSE_EGG_CHECK_ERROR_CODE**: *string* = "1001"
+
+*Defined in [src/utils/errors.ts:2](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L2)*
+
+___
+
+### `Const` HEX_ERROR_CODE
+
+• **HEX_ERROR_CODE**: *string* = "1034"
+
+*Defined in [src/utils/errors.ts:35](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L35)*
+
+___
+
+### `Const` INPUT_ID_ERROR_CODE
+
+• **INPUT_ID_ERROR_CODE**: *string* = "1011"
+
+*Defined in [src/utils/errors.ts:12](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L12)*
+
+___
+
+### `Const` INSUFFICIENT_FUNDS_ERROR_CODE
+
+• **INSUFFICIENT_FUNDS_ERROR_CODE**: *string* = "1017"
+
+*Defined in [src/utils/errors.ts:18](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L18)*
+
+___
+
+### `Const` INVALID_OPERATION_ID_CODE
+
+• **INVALID_OPERATION_ID_CODE**: *string* = "1013"
+
+*Defined in [src/utils/errors.ts:14](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L14)*
+
+___
+
+### `Const` MERGE_RULE_ERROR_CODE
+
+• **MERGE_RULE_ERROR_CODE**: *string* = "1030"
+
+*Defined in [src/utils/errors.ts:31](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L31)*
+
+___
+
+### `Const` NAME_ERROR_CODE
+
+• **NAME_ERROR_CODE**: *string* = "1005"
+
+*Defined in [src/utils/errors.ts:6](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L6)*
+
+___
+
+### `Const` NODE_ID_ERROR_CODE
+
+• **NODE_ID_ERROR_CODE**: *string* = "1033"
+
+*Defined in [src/utils/errors.ts:34](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L34)*
+
+___
+
+### `Const` NO_ATOMIX_UTXOS_ERROR_CODE
+
+• **NO_ATOMIX_UTXOS_ERROR_CODE**: *string* = "1003"
+
+*Defined in [src/utils/errors.ts:4](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L4)*
+
+___
+
+### `Const` OPERATION_ERROR_CODE
+
+• **OPERATION_ERROR_CODE**: *string* = "1012"
+
+*Defined in [src/utils/errors.ts:13](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L13)*
+
+___
+
+### `Const` OUTPUT_ID_ERROR_CODE
+
+• **OUTPUT_ID_ERROR_CODE**: *string* = "1015"
+
+*Defined in [src/utils/errors.ts:16](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L16)*
+
+___
+
+### `Const` PRIVATE_KEY_ERROR_CODE
+
+• **PRIVATE_KEY_ERROR_CODE**: *string* = "1032"
+
+*Defined in [src/utils/errors.ts:33](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L33)*
+
+___
+
+### `Const` PUBLIC_KEY_ERROR_CODE
+
+• **PUBLIC_KEY_ERROR_CODE**: *string* = "1029"
+
+*Defined in [src/utils/errors.ts:30](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L30)*
+
+___
+
+### `Const` SECP_MINT_OUTPUT_ERROR_CODE
+
+• **SECP_MINT_OUTPUT_ERROR_CODE**: *string* = "1019"
+
+*Defined in [src/utils/errors.ts:20](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L20)*
+
+___
+
+### `Const` STAKE_ERROR_CODE
+
+• **STAKE_ERROR_CODE**: *string* = "1023"
+
+*Defined in [src/utils/errors.ts:24](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L24)*
+
+___
+
+### `Const` SUBNET_OWNER_ERROR_CODE
+
+• **SUBNET_OWNER_ERROR_CODE**: *string* = "1026"
+
+*Defined in [src/utils/errors.ts:27](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L27)*
+
+___
+
+### `Const` SYMBOL_ERROR_CODE
+
+• **SYMBOL_ERROR_CODE**: *string* = "1004"
+
+*Defined in [src/utils/errors.ts:5](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L5)*
+
+___
+
+### `Const` THRESHOLD_ERROR_CODE
+
+• **THRESHOLD_ERROR_CODE**: *string* = "1018"
+
+*Defined in [src/utils/errors.ts:19](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L19)*
+
+___
+
+### `Const` TIME_ERROR_CODE
+
+• **TIME_ERROR_CODE**: *string* = "1024"
+
+*Defined in [src/utils/errors.ts:25](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L25)*
+
+___
+
+### `Const` TRANSACTION_ERROR_CODE
+
+• **TRANSACTION_ERROR_CODE**: *string* = "1006"
+
+*Defined in [src/utils/errors.ts:7](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L7)*
+
+___
+
+### `Const` TRANSFERABLE_INPUT_ERROR_CODE
+
+• **TRANSFERABLE_INPUT_ERROR_CODE**: *string* = "1010"
+
+*Defined in [src/utils/errors.ts:11](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L11)*
+
+___
+
+### `Const` TRANSFERABLE_OUTPUT_ERROR_CODE
+
+• **TRANSFERABLE_OUTPUT_ERROR_CODE**: *string* = "1009"
+
+*Defined in [src/utils/errors.ts:10](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L10)*
+
+___
+
+### `Const` TYPE_ID_ERROR_CODE
+
+• **TYPE_ID_ERROR_CODE**: *string* = "1035"
+
+*Defined in [src/utils/errors.ts:36](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L36)*
+
+___
+
+### `Const` TYPE_NAME_ERROR_CODE
+
+• **TYPE_NAME_ERROR_CODE**: *string* = "1035"
+
+*Defined in [src/utils/errors.ts:37](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L37)*
+
+___
+
+### `Const` UNKNOWN_TYPE_ERROR_CODE
+
+• **UNKNOWN_TYPE_ERROR_CODE**: *string* = "1036"
+
+*Defined in [src/utils/errors.ts:38](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L38)*
+
+___
+
+### `Const` UTXO_ERROR_CODE
+
+• **UTXO_ERROR_CODE**: *string* = "1016"
+
+*Defined in [src/utils/errors.ts:17](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/errors.ts#L17)*

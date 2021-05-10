@@ -36,27 +36,43 @@
 
   ↳ [StandardUTXOSet](common_utxos.standardutxoset.md)
 
+  ↳ [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md)
+
+  ↳ [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md)
+
+  ↳ [EVMStandardTx](common_transactions.evmstandardtx.md)
+
 ## Index
 
 ### Properties
 
+* [_codecID](utils_serialization.serializable.md#protected-_codecid)
 * [_typeID](utils_serialization.serializable.md#protected-_typeid)
 * [_typeName](utils_serialization.serializable.md#protected-_typename)
 
 ### Methods
 
 * [deserialize](utils_serialization.serializable.md#deserialize)
+* [getCodecID](utils_serialization.serializable.md#getcodecid)
 * [getTypeID](utils_serialization.serializable.md#gettypeid)
 * [getTypeName](utils_serialization.serializable.md#gettypename)
 * [serialize](utils_serialization.serializable.md#serialize)
 
 ## Properties
 
+### `Protected` _codecID
+
+• **_codecID**: *number* = undefined
+
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L42)*
+
+___
+
 ### `Protected` _typeID
 
 • **_typeID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L40)*
+*Defined in [src/utils/serialization.ts:41](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L41)*
 
 ___
 
@@ -64,7 +80,7 @@ ___
 
 • **_typeName**: *string* = undefined
 
-*Defined in [src/utils/serialization.ts:39](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L39)*
+*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L40)*
 
 ## Methods
 
@@ -72,7 +88,7 @@ ___
 
 ▸ **deserialize**(`fields`: object, `encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *void*
 
-*Defined in [src/utils/serialization.ts:64](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L64)*
+*Defined in [src/utils/serialization.ts:74](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L74)*
 
 **Parameters:**
 
@@ -85,11 +101,23 @@ Name | Type |
 
 ___
 
+###  getCodecID
+
+▸ **getCodecID**(): *number*
+
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L61)*
+
+Used in serialization. Optional. TypeID is a number for the typeID of object being output.
+
+**Returns:** *number*
+
+___
+
 ###  getTypeID
 
 ▸ **getTypeID**(): *number*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -101,7 +129,7 @@ ___
 
 ▸ **getTypeName**(): *string*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -113,7 +141,7 @@ ___
 
 ▸ **serialize**(`encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *object*
 
-*Defined in [src/utils/serialization.ts:58](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L58)*
+*Defined in [src/utils/serialization.ts:67](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L67)*
 
 **Parameters:**
 
