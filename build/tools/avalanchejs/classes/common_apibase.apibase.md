@@ -36,7 +36,7 @@ Abstract class defining a generic endpoint that all endpoints must implement (ex
 
 \+ **new APIBase**(`core`: [AvalancheCore](avalanchecore.avalanchecore-1.md), `baseurl`: string): *[APIBase](common_apibase.apibase.md)*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L68)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ Name | Type | Description |
 
 • **baseurl**: *string*
 
-*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L38)*
+*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L38)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • **core**: *[AvalancheCore](avalanchecore.avalanchecore-1.md)*
 
-*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L36)*
+*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L36)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **db**: *StoreAPI*
 
-*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L40)*
+*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L40)*
 
 ## Methods
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **getBaseURL**(): *string*
 
-*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L63)*
+*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L63)*
 
 Returns the baseurl's path.
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **getDB**(): *StoreAPI*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L68)*
 
 Returns the baseurl's database.
 
@@ -101,7 +101,7 @@ ___
 
 ▸ **setBaseURL**(`baseurl`: string): *void*
 
-*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/apibase.ts#L47)*
+*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/apibase.ts#L47)*
 
 Sets the path of the APIs baseurl.
 

@@ -24,7 +24,7 @@
 
 Ƭ **SerializedEncoding**: *"hex" | "cb58" | "base58" | "base64" | "decimalString" | "number" | "utf8" | "display"*
 
-*Defined in [src/utils/serialization.ts:28](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L28)*
+*Defined in [src/utils/serialization.ts:28](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L28)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 Ƭ **SerializedType**: *"hex" | "BN" | "Buffer" | "bech32" | "nodeID" | "privateKey" | "cb58" | "base58" | "base64" | "decimalString" | "number" | "utf8"*
 
-*Defined in [src/utils/serialization.ts:13](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L13)*
+*Defined in [src/utils/serialization.ts:13](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L13)*
 
 ## Variables
 
@@ -40,4 +40,4 @@ ___
 
 • **SERIALIZATIONVERSION**: *0* = 0
 
-*Defined in [src/utils/serialization.ts:11](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L11)*
+*Defined in [src/utils/serialization.ts:11](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L11)*

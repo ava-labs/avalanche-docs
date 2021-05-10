@@ -25,7 +25,7 @@
 
 ▪ **ADDRESSLENGTH**: *number* = 20
 
-*Defined in [src/apis/evm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L21)*
+*Defined in [src/apis/evm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L21)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 ▪ **ASSETIDLEN**: *number* = 32
 
-*Defined in [src/apis/evm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L15)*
+*Defined in [src/apis/evm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L15)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 ▪ **EXPORTTX**: *number* = 1
 
-*Defined in [src/apis/evm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L11)*
+*Defined in [src/apis/evm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L11)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 ▪ **IMPORTTX**: *number* = 0
 
-*Defined in [src/apis/evm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L9)*
+*Defined in [src/apis/evm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L9)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 ▪ **LATESTCODEC**: *number* = 0
 
-*Defined in [src/apis/evm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L19)*
+*Defined in [src/apis/evm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L19)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 ▪ **SECPCREDENTIAL**: *number* = 9
 
-*Defined in [src/apis/evm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L7)*
+*Defined in [src/apis/evm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L7)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 ▪ **SECPINPUTID**: *number* = 5
 
-*Defined in [src/apis/evm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L13)*
+*Defined in [src/apis/evm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L13)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 ▪ **SECPXFEROUTPUTID**: *number* = 7
 
-*Defined in [src/apis/evm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/evm/constants.ts#L17)*
+*Defined in [src/apis/evm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/constants.ts#L17)*
