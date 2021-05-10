@@ -108,7 +108,7 @@ Here are the main differences you should be aware of.
 
 It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the amount of blocks that are produced. You both get inaccurate results, and be open to manipulation by third parties.
 
-Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be increasing, and to be within 30s of the real time.
+Instead of block rate, you should measure time simply by reading the timestamp attribute of the produced blocks. Timestamps are guaranteed to be monotonically increasing, and to be within 30s of the real time.
 
 ### Finality
 
