@@ -28,7 +28,7 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)‹›* = BinTools.getInstance()
 
-*Defined in [src/apis/avm/ops.ts:15](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L15)*
+*Defined in [src/apis/avm/ops.ts:19](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L19)*
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/ops.ts:16](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L16)*
+*Defined in [src/apis/avm/ops.ts:20](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L20)*
 
 ## Functions
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **SelectOperationClass**(`opid`: number, ...`args`: Array‹any›): *[Operation](../classes/api_avm_operations.operation.md)*
 
-*Defined in [src/apis/avm/ops.ts:25](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/avm/ops.ts#L25)*
+*Defined in [src/apis/avm/ops.ts:29](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/avm/ops.ts#L29)*
 
 Takes a buffer representing the output and returns the proper [Operation](../classes/api_avm_operations.operation.md) instance.
 

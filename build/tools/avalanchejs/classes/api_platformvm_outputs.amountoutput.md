@@ -20,6 +20,7 @@
 
 ### Properties
 
+* [_codecID](api_platformvm_outputs.amountoutput.md#protected-_codecid)
 * [_typeID](api_platformvm_outputs.amountoutput.md#protected-_typeid)
 * [_typeName](api_platformvm_outputs.amountoutput.md#protected-_typename)
 * [addresses](api_platformvm_outputs.amountoutput.md#protected-addresses)
@@ -39,6 +40,7 @@
 * [getAddressIdx](api_platformvm_outputs.amountoutput.md#getaddressidx)
 * [getAddresses](api_platformvm_outputs.amountoutput.md#getaddresses)
 * [getAmount](api_platformvm_outputs.amountoutput.md#getamount)
+* [getCodecID](api_platformvm_outputs.amountoutput.md#getcodecid)
 * [getLocktime](api_platformvm_outputs.amountoutput.md#getlocktime)
 * [getOutputID](api_platformvm_outputs.amountoutput.md#abstract-getoutputid)
 * [getSpenders](api_platformvm_outputs.amountoutput.md#getspenders)
@@ -63,7 +65,7 @@
 
 *Overrides [OutputOwners](common_output.outputowners.md).[constructor](common_output.outputowners.md#constructor)*
 
-*Defined in [src/common/output.ts:472](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L472)*
+*Defined in [src/common/output.ts:473](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L473)*
 
 A [StandardAmountOutput](common_output.standardamountoutput.md) class which issues a payment on an assetID.
 
@@ -80,13 +82,23 @@ Name | Type | Default | Description |
 
 ## Properties
 
+### `Protected` _codecID
+
+• **_codecID**: *number* = undefined
+
+*Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
+
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L42)*
+
+___
+
 ### `Protected` _typeID
 
 • **_typeID**: *any* = undefined
 
 *Overrides [StandardAmountOutput](common_output.standardamountoutput.md).[_typeID](common_output.standardamountoutput.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/outputs.ts:78](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/outputs.ts#L78)*
+*Defined in [src/apis/platformvm/outputs.ts:79](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/outputs.ts#L79)*
 
 ___
 
@@ -96,7 +108,7 @@ ___
 
 *Overrides [StandardAmountOutput](common_output.standardamountoutput.md).[_typeName](common_output.standardamountoutput.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/outputs.ts:77](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/outputs.ts#L77)*
+*Defined in [src/apis/platformvm/outputs.ts:78](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/outputs.ts#L78)*
 
 ___
 
@@ -106,7 +118,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[addresses](common_output.outputowners.md#protected-addresses)*
 
-*Defined in [src/common/output.ts:120](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L120)*
+*Defined in [src/common/output.ts:121](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L121)*
 
 ___
 
@@ -116,7 +128,7 @@ ___
 
 *Inherited from [StandardAmountOutput](common_output.standardamountoutput.md).[amount](common_output.standardamountoutput.md#protected-amount)*
 
-*Defined in [src/common/output.ts:445](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L445)*
+*Defined in [src/common/output.ts:446](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L446)*
 
 ___
 
@@ -126,7 +138,7 @@ ___
 
 *Inherited from [StandardAmountOutput](common_output.standardamountoutput.md).[amountValue](common_output.standardamountoutput.md#protected-amountvalue)*
 
-*Defined in [src/common/output.ts:446](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L446)*
+*Defined in [src/common/output.ts:447](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L447)*
 
 ___
 
@@ -136,7 +148,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[locktime](common_output.outputowners.md#protected-locktime)*
 
-*Defined in [src/common/output.ts:117](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L117)*
+*Defined in [src/common/output.ts:118](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L118)*
 
 ___
 
@@ -146,7 +158,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[numaddrs](common_output.outputowners.md#protected-numaddrs)*
 
-*Defined in [src/common/output.ts:119](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L119)*
+*Defined in [src/common/output.ts:120](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L120)*
 
 ___
 
@@ -156,7 +168,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[threshold](common_output.outputowners.md#protected-threshold)*
 
-*Defined in [src/common/output.ts:118](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L118)*
+*Defined in [src/common/output.ts:119](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L119)*
 
 ## Methods
 
@@ -166,7 +178,7 @@ ___
 
 *Inherited from [Output](common_output.output.md).[clone](common_output.output.md#abstract-clone)*
 
-*Defined in [src/common/output.ts:318](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L318)*
+*Defined in [src/common/output.ts:319](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L319)*
 
 **Returns:** *this*
 
@@ -178,7 +190,7 @@ ___
 
 *Inherited from [Output](common_output.output.md).[create](common_output.output.md#abstract-create)*
 
-*Defined in [src/common/output.ts:320](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L320)*
+*Defined in [src/common/output.ts:321](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L321)*
 
 **Parameters:**
 
@@ -198,7 +210,7 @@ ___
 
 *Overrides [OutputOwners](common_output.outputowners.md).[deserialize](common_output.outputowners.md#deserialize)*
 
-*Defined in [src/common/output.ts:439](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L439)*
+*Defined in [src/common/output.ts:440](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L440)*
 
 **Parameters:**
 
@@ -219,7 +231,7 @@ ___
 
 *Overrides [OutputOwners](common_output.outputowners.md).[fromBuffer](common_output.outputowners.md#frombuffer)*
 
-*Defined in [src/common/output.ts:456](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L456)*
+*Defined in [src/common/output.ts:457](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L457)*
 
 Popuates the instance from a [Buffer](https://github.com/feross/buffer) representing the [StandardAmountOutput](common_output.standardamountoutput.md) and returns the size of the output.
 
@@ -240,7 +252,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getAddress](common_output.outputowners.md#getaddress)*
 
-*Defined in [src/common/output.ts:167](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L167)*
+*Defined in [src/common/output.ts:168](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L168)*
 
 Returns the address from the index provided.
 
@@ -262,7 +274,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getAddressIdx](common_output.outputowners.md#getaddressidx)*
 
-*Defined in [src/common/output.ts:150](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L150)*
+*Defined in [src/common/output.ts:151](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L151)*
 
 Returns the index of the address.
 
@@ -284,7 +296,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getAddresses](common_output.outputowners.md#getaddresses)*
 
-*Defined in [src/common/output.ts:135](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L135)*
+*Defined in [src/common/output.ts:136](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L136)*
 
 Returns an array of [Buffer](https://github.com/feross/buffer)s for the addresses.
 
@@ -298,11 +310,25 @@ ___
 
 *Inherited from [StandardAmountOutput](common_output.standardamountoutput.md).[getAmount](common_output.standardamountoutput.md#getamount)*
 
-*Defined in [src/common/output.ts:451](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L451)*
+*Defined in [src/common/output.ts:452](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L452)*
 
 Returns the amount as a [BN](https://github.com/indutny/bn.js/).
 
 **Returns:** *BN*
+
+___
+
+###  getCodecID
+
+▸ **getCodecID**(): *number*
+
+*Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
+
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L61)*
+
+Used in serialization. Optional. TypeID is a number for the typeID of object being output.
+
+**Returns:** *number*
 
 ___
 
@@ -312,7 +338,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getLocktime](common_output.outputowners.md#getlocktime)*
 
-*Defined in [src/common/output.ts:130](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L130)*
+*Defined in [src/common/output.ts:131](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L131)*
 
 Returns the a [BN](https://github.com/indutny/bn.js/) repersenting the UNIX Timestamp when the lock is made available.
 
@@ -326,7 +352,7 @@ ___
 
 *Inherited from [Output](common_output.output.md).[getOutputID](common_output.output.md#abstract-getoutputid)*
 
-*Defined in [src/common/output.ts:316](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L316)*
+*Defined in [src/common/output.ts:317](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L317)*
 
 Returns the outputID for the output which tells parsers what type it is
 
@@ -340,7 +366,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getSpenders](common_output.outputowners.md#getspenders)*
 
-*Defined in [src/common/output.ts:196](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L196)*
+*Defined in [src/common/output.ts:197](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L197)*
 
 Given an array of addresses and an optional timestamp, select an array of address [Buffer](https://github.com/feross/buffer)s of qualified spenders for the output.
 
@@ -361,7 +387,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[getThreshold](common_output.outputowners.md#getthreshold)*
 
-*Defined in [src/common/output.ts:125](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L125)*
+*Defined in [src/common/output.ts:126](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L126)*
 
 Returns the threshold of signers required to spend this output.
 
@@ -375,7 +401,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:52](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L52)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -389,7 +415,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L45)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -403,7 +429,7 @@ ___
 
 *Overrides [Output](common_output.output.md).[makeTransferable](common_output.output.md#abstract-maketransferable)*
 
-*Defined in [src/apis/platformvm/outputs.ts:85](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/outputs.ts#L85)*
+*Defined in [src/apis/platformvm/outputs.ts:86](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/outputs.ts#L86)*
 
 **Parameters:**
 
@@ -421,7 +447,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[meetsThreshold](common_output.outputowners.md#meetsthreshold)*
 
-*Defined in [src/common/output.ts:177](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L177)*
+*Defined in [src/common/output.ts:178](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L178)*
 
 Given an array of address [Buffer](https://github.com/feross/buffer)s and an optional timestamp, returns true if the addresses meet the threshold required to spend the output.
 
@@ -442,7 +468,7 @@ ___
 
 *Overrides [Output](common_output.output.md).[select](common_output.output.md#abstract-select)*
 
-*Defined in [src/apis/platformvm/outputs.ts:89](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/outputs.ts#L89)*
+*Defined in [src/apis/platformvm/outputs.ts:90](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/apis/platformvm/outputs.ts#L90)*
 
 **Parameters:**
 
@@ -463,7 +489,7 @@ ___
 
 *Overrides [OutputOwners](common_output.outputowners.md).[serialize](common_output.outputowners.md#serialize)*
 
-*Defined in [src/common/output.ts:432](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L432)*
+*Defined in [src/common/output.ts:433](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L433)*
 
 **Parameters:**
 
@@ -483,7 +509,7 @@ ___
 
 *Overrides [OutputOwners](common_output.outputowners.md).[toBuffer](common_output.outputowners.md#tobuffer)*
 
-*Defined in [src/common/output.ts:466](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L466)*
+*Defined in [src/common/output.ts:467](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L467)*
 
 Returns the buffer representing the [StandardAmountOutput](common_output.standardamountoutput.md) instance.
 
@@ -497,7 +523,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[toString](common_output.outputowners.md#tostring)*
 
-*Defined in [src/common/output.ts:261](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L261)*
+*Defined in [src/common/output.ts:262](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L262)*
 
 Returns a base-58 string representing the [Output](common_output.output.md).
 
@@ -511,7 +537,7 @@ ___
 
 *Inherited from [OutputOwners](common_output.outputowners.md).[comparator](common_output.outputowners.md#static-comparator)*
 
-*Defined in [src/common/output.ts:265](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/output.ts#L265)*
+*Defined in [src/common/output.ts:266](https://github.com/ava-labs/avalanchejs/blob/40de7e6/src/common/output.ts#L266)*
 
 **Returns:** *function*
 
