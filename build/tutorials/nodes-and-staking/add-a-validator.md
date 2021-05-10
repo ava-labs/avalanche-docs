@@ -1,4 +1,4 @@
-# Add a Validator
+# Add a node to the Validator Set
 
 ## Introduction
 
