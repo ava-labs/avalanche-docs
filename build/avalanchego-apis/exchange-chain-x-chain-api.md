@@ -1717,3 +1717,105 @@ curl -X POST --data '{
 }
 ```
 
+### events
+
+Listen for events from an address.
+
+This call is made to the events API endpoint:
+
+`/ext/bc/X/events`
+
+#### **Example**
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"github.com/ava-labs/avalanchego/api"
+	"github.com/ava-labs/avalanchego/pubsub"
+	"github.com/gorilla/websocket"
+	"github.com/prometheus/common/log"
+	"net"
+	"net/http"
+	"time"
+)
+
+func main() {
+	dialer := websocket.Dialer{
+		NetDial: func(netw, addr string) (net.Conn, error) {
+			return net.Dial(netw, addr)
+		},
+	}
+
+	httpHeader := http.Header{}
+	conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+	if err != nil {
+		panic(err)
+	}
+
+	readMsg := func() {
+		for {
+			mt, msg, err := conn.ReadMessage()
+			if err != nil {
+				log.Warn(err)
+				return
+			}
+			switch mt {
+			case websocket.TextMessage:
+				log.Info(string(msg))
+			default:
+				log.Info(mt, string(msg))
+			}
+		}
+	}
+
+	go readMsg()
+
+	cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+	cmdmsg, err := json.Marshal(cmd)
+	if err != nil {
+		panic(err)
+	}
+	err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+	if err != nil {
+		panic(err)
+	}
+
+	var addresses []string
+	addresses = append(addresses, " X-fuji...")
+	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+	cmdmsg, err = json.Marshal(cmd)
+	if err != nil {
+		panic(err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+	if err != nil {
+		panic(err)
+	}
+
+	for {
+		time.Sleep(1 * time.Minute)
+	}
+}
+```
+
+| Command | Description | Example | Arguments |
+| --- | --- | --- | --- |
+| **NewSet** | create a new address map set | {"newSet":{}} | none |
+| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter, collisionProb - allowed collision probability |
+| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":["X-fuji..."]}} | addresses - list of addresses to match |
+
+Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.  **AddAddresses** can be called multiple times.
+
+Sets will filter on absolute address matches, only if the address is in the set will you see a transaction.
+
+[Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) allows for a for false negatives, but can allow a greater number of addresses to be filtered.
+
+#### **Example Response**
+
+```s
+INFO[0038] {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}  source="eventtest.go:36"
+```
+
