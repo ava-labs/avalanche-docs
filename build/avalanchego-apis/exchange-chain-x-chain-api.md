@@ -1808,7 +1808,7 @@ func main() {
 | Command | Description | Example | Arguments |
 | --- | --- | --- | --- |
 | **NewSet** | create a new address map set | {"newSet":{}} | none |
-| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter, collisionProb - allowed collision probability |
+| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be > 0, collisionProb - allowed collision probability |
 | **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":["X-fuji..."]}} | addresses - list of addresses to match |
 
 Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.
