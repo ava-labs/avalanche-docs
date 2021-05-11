@@ -1719,7 +1719,7 @@ curl -X POST --data '{
 
 ### events
 
-Listen for events from an address.
+Listen for transactions on a specified address.
 
 This call is made to the events API endpoint:
 
@@ -1788,7 +1788,7 @@ func main() {
 	}
 
 	var addresses []string
-	addresses = append(addresses, " X-fuji1jcl25386gs9dsk7zxy0hvz00e63lv0au3cwg0m")
+	addresses = append(addresses, " X-fuji....")
 	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
 	cmdmsg, err = json.Marshal(cmd)
 	if err != nil {
