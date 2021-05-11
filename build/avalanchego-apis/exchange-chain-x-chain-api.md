@@ -1805,18 +1805,21 @@ func main() {
 }
 ```
 
+##### Operations
+
 | Command | Description | Example | Arguments |
 | --- | --- | --- | --- |
-| **NewSet** | create a new address map set | {"newSet":{}} | none |
-| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be > 0, collisionProb - allowed collision probability |
+| **NewSet** | create a new address map set | {"newSet":{}} |  |
+| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be > 0<br/>collisionProb - allowed collision probability must be > 0 and <= 1 |
 | **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":["X-fuji..."]}} | addresses - list of addresses to match |
 
 Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.
-**AddAddresses** can be called multiple times to add addresses to the set.
+**AddAddresses** can be called multiple times.
 
-Sets will perform absolute address matches, only if the address is in the set will you see a transaction.
+##### Set details
 
-[Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) allows for a for false positives, but can allow a greater number of addresses to be filtered.
+* **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
+* **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered.  If the addresses is in the filter, you will be sent the transaction.
 
 #### **Example Response**
 
