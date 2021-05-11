@@ -1725,7 +1725,7 @@ This call is made to the events API endpoint:
 
 `/ext/bc/X/events`
 
-#### **Example**
+#### **Golang Example**
 
 ```go
 package main
@@ -1738,7 +1738,7 @@ import (
 	"github.com/prometheus/common/log"
 	"net"
 	"net/http"
-	"time"
+	"sync"
 )
 
 func main() {
@@ -1754,7 +1754,12 @@ func main() {
 		panic(err)
 	}
 
+	waitGroup := &sync.WaitGroup{}
+	waitGroup.Add(1)
+	
 	readMsg := func() {
+		defer waitGroup.Done()
+		
 		for {
 			mt, msg, err := conn.ReadMessage()
 			if err != nil {
@@ -1783,7 +1788,7 @@ func main() {
 	}
 
 	var addresses []string
-	addresses = append(addresses, " X-fuji...")
+	addresses = append(addresses, " X-fuji1jcl25386gs9dsk7zxy0hvz00e63lv0au3cwg0m")
 	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
 	cmdmsg, err = json.Marshal(cmd)
 	if err != nil {
@@ -1795,9 +1800,7 @@ func main() {
 		panic(err)
 	}
 
-	for {
-		time.Sleep(1 * time.Minute)
-	}
+	waitGroup.Wait()
 }
 ```
 
@@ -1807,7 +1810,8 @@ func main() {
 | **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter, collisionProb - allowed collision probability |
 | **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":["X-fuji..."]}} | addresses - list of addresses to match |
 
-Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.  **AddAddresses** can be called multiple times.
+Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.
+**AddAddresses** can be called multiple times to add addresses to the set.
 
 Sets will filter on absolute address matches, only if the address is in the set will you see a transaction.
 
