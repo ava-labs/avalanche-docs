@@ -1788,7 +1788,7 @@ func main() {
 	}
 
 	var addresses []string
-	addresses = append(addresses, " X-fuji....")
+	addresses = append(addresses, "X-fuji....")
 	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
 	cmdmsg, err = json.Marshal(cmd)
 	if err != nil {
