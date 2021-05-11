@@ -1815,7 +1815,7 @@ Calling **NewSet** or **NewBoom** resets the filter, and must be followed with *
 
 Sets will perform absolute address matches, only if the address is in the set will you see a transaction.
 
-[Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) allows for a for false negatives, but can allow a greater number of addresses to be filtered.
+[Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) allows for a for false positives, but can allow a greater number of addresses to be filtered.
 
 #### **Example Response**
 
