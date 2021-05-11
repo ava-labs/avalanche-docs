@@ -1732,13 +1732,14 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/ava-labs/avalanchego/api"
-	"github.com/ava-labs/avalanchego/pubsub"
-	"github.com/gorilla/websocket"
-	"github.com/prometheus/common/log"
+	"log"
 	"net"
 	"net/http"
 	"sync"
+
+	"github.com/ava-labs/avalanchego/api"
+	"github.com/ava-labs/avalanchego/pubsub"
+	"github.com/gorilla/websocket"
 )
 
 func main() {
@@ -1756,21 +1757,21 @@ func main() {
 
 	waitGroup := &sync.WaitGroup{}
 	waitGroup.Add(1)
-	
+
 	readMsg := func() {
 		defer waitGroup.Done()
-		
+
 		for {
 			mt, msg, err := conn.ReadMessage()
 			if err != nil {
-				log.Warn(err)
+				log.Println(err)
 				return
 			}
 			switch mt {
 			case websocket.TextMessage:
-				log.Info(string(msg))
+				log.Println(string(msg))
 			default:
-				log.Info(mt, string(msg))
+				log.Println(mt, string(msg))
 			}
 		}
 	}
@@ -1788,7 +1789,7 @@ func main() {
 	}
 
 	var addresses []string
-	addresses = append(addresses, "X-fuji....")
+	addresses = append(addresses, " X-fuji....")
 	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
 	cmdmsg, err = json.Marshal(cmd)
 	if err != nil {
@@ -1820,6 +1821,6 @@ Sets will perform absolute address matches, only if the address is in the set wi
 #### **Example Response**
 
 ```cpp
-INFO[0038] {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}  source="eventtest.go:36"
+2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
 
