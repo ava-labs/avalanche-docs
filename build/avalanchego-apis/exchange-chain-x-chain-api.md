@@ -1813,7 +1813,7 @@ func main() {
 Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.
 **AddAddresses** can be called multiple times to add addresses to the set.
 
-Sets will filter on absolute address matches, only if the address is in the set will you see a transaction.
+Sets will perform absolute address matches, only if the address is in the set will you see a transaction.
 
 [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) allows for a for false negatives, but can allow a greater number of addresses to be filtered.
 
