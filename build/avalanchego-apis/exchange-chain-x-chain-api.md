@@ -1819,7 +1819,7 @@ Sets will filter on absolute address matches, only if the address is in the set 
 
 #### **Example Response**
 
-```s
+```cpp
 INFO[0038] {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}  source="eventtest.go:36"
 ```
 
