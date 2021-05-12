@@ -4,7 +4,7 @@
 
 The purpose of this document is to help you with launching your existing dapp on Avalanche. It contains a series of resources designed to help you get the basics of Avalanche Platform and how it works, show how to connect to the network, how to use your existing tools and environments in developing and deploying on Avalanche, as well as some common pitfalls you need to consider when running your dapp on Avalanche.
 
-## Platform basics
+## Platform Basics
 
 Avalanche is a [network of networks](../../../learn/platform-overview/). It means that it is not a single chain running a single, uniform type of blocks. It contains multiple subnets, each running one of more heterogeneous chains. But, to run an Ethereum dapp on a low-fee, fast network with instant finality, we don't need to concern ourselves with that right now. Using the link above you can find out more if you wish, but all you need to know right now is that one of the chains running on Avalanche Primary Network is the C-Chain \(contract chain\).
 
@@ -42,25 +42,25 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 
 In your application's web interface, you can [add Avalanche programmatically](../smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
 
-### Using the public API nodes
+### Using the Public API Nodes
 
 Instead of proxying network operations through MetaMask, you can use the public API, which consists of a number of load-balanced AvalancheGo nodes behind a load balancer.
 
 The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
-### Running your own node
+### Running Your Own Node
 
 If you don't want your dapp to depend on a centralized service you don't control, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
 
 For development purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial for downloading, building, and installation of AvalancheGo. If you're going to run a production node on a Linux machine, [here](../nodes-and-staking/set-up-node-with-installer.md) is a tutorial that shows how to use the installer script to quickly and easily install the node as a systemd service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
 
-### Running a local test network
+### Running a Local Test Network
 
 If you need a private test network to test your dapp, [Avash](https://github.com/ava-labs/avash) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
 Avash uses Lua as a scripting language for orchestrating local networks. You can find a tutorial for Avash [here](../../tools/avash.md).
 
-## Developing and deploying contracts
+## Developing and Deploying Contracts
 
 Being an Ethereum-compatible blockchain, all of the usual Ethereum developer tools and environments can be used to develop and deploy dapps for Avalanche's C-Chain.
 
@@ -105,7 +105,7 @@ Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There a
 
 Here are the main differences you should be aware of.
 
-### Measuring time
+### Measuring Time
 
 It is customary on Ethereum to use block height progress as a proxy for time. You should not do that on Avalanche. Chains on Avalanche are quiescent, meaning that if there is no activity, there are no blocks produced. The opposite is also true, if there is a great amount of activity, blocks are produced very fast. Because of that, you should not measure the passage of time by the number of blocks that are produced. The results will not be accurate, and your contract may be manipulated by third parties.
 
@@ -115,11 +115,11 @@ Instead of block rate, you should measure time simply by reading the timestamp a
 
 On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip \(usually, it is presumed that blocks 6 places deep are safe\). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped, or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final.
 
-### Gas price
+### Gas Price
 
 Gas on Avalanche is burned. Validators don't keep the gas for themselves \(they get rewarded for staking\), so the dynamics of 'gas wars' where higher-priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
 
-### Coreth configuration
+### Coreth Configuration
 
 By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. This is done through node's command-line options. Command-line options for coreth are listed [here](../../references/command-line-interface.md#c-chain--coreth), along with their default values.
 
