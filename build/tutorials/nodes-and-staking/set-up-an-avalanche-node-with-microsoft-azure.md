@@ -8,7 +8,7 @@ Running a validator and staking with Avalanche provides extremely competitive re
 
 Not only does running a validator node enable you to receive rewards in AVAX, but later you will also be able to validate other subnets in the ecosystem as well and receive rewards in the token native to their subnets.
 
-You only need modest hardware requirements of 2 CPU cores, 4 GB Memory and 40 GB SSD to run a validator and it doesn’t use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
+You only need modest hardware requirements of 2 CPU cores, 4 GB Memory and 200 GB SSD to run a validator and it doesn’t use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
 
 Currently the minimum amount required to stake to become a validator is 2,000 AVAX \(which can be reduced over time as price increases\). Alternatively, validators can also charge a small fee to enable users to delegate their stake with them to help towards running costs. You can use a calculator [here](https://vscout.io/) to see how much rewards you would earn when running a node, compared to delegating.
 
@@ -162,7 +162,7 @@ Once your deployment has finished, select “Go to resource”
 
 ## Change the Provisioned Disk Size <a id="00dc"></a>
 
-By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD. You should increase this to 64 GB, to allow for database growth.
+By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD. You should increase this to 250 GB, to allow for database growth.
 
 ![Image for post](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
 
@@ -174,7 +174,7 @@ Select the Disk name that’s current provisioned to modify it
 
 ![Image for post](https://miro.medium.com/max/696/1*faady6O9ZyS2AvKotRFFWA.png)
 
-Select “Size + performance” on the left under settings and change the size to 64 GB and press “Resize”.
+Select “Size + performance” on the left under settings and change the size to 250 GB and press “Resize”.
 
 ![Image for post](https://miro.medium.com/max/850/1*zZhh27myfdBcEhf3QMhs3A.png)
 
