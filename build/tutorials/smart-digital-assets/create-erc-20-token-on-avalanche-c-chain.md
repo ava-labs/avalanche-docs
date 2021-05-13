@@ -28,9 +28,9 @@ Now, we need to set these boxes with correct values.
   * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
   * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) 
 * **ChainID**:
-  * **Mainnet:** `0xa86a` 
-  * **Fuji Testnet:** `0xa869` 
-  * **Local Testnet:** `0xa868` 
+  * **Mainnet:** `43114` 
+  * **Fuji Testnet:** `43113` 
+  * **Local Testnet:** `43112` 
 * **Symbol**: AVAX
 * **Explorer**:
   * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
