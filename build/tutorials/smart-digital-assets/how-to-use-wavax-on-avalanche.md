@@ -31,7 +31,7 @@ Enter the information for the network of your choice:
 
 * **Network Name**: Avalanche Mainnet C-Chain
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-* **ChainID**: `0xa86a`
+* **ChainID**: `43114`
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
@@ -39,7 +39,7 @@ Enter the information for the network of your choice:
 
 * **Network Name**: Avalanche Fuji C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `0xa869`
+* **ChainID**: `43113`
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
