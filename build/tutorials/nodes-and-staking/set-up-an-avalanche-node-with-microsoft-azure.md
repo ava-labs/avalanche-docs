@@ -162,7 +162,7 @@ Once your deployment has finished, select “Go to resource”
 
 ## Change the Provisioned Disk Size <a id="00dc"></a>
 
-By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD, whilst this should be sufficient, I personally didn’t want the hassle of potentially needing to extend this later into the staking period. I have included the steps below if you want to increase it to 64 GB or if you ever need to increase it at a later date.
+By default, the Ubuntu VM will be provisioned with a 30 GB Premium SSD. You should increase this to 64 GB, to allow for database growth.
 
 ![Image for post](https://miro.medium.com/max/880/1*2uJoRLC586qLEhr1RNNeTg.png)
 
