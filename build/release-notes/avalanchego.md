@@ -2,7 +2,52 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.3)\)
+
+**Apricot Phase 2 - Patch 3**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged.
+{% endhint %}
+
+The patch includes bug fixes, updated uptime monitoring, and performance improvements.
+
+* Fixed benched message handling that could cause a node to be unable to progress during bootstrapping. This was typically experienced when the node would fail to transition to normal execution as it was finishing bootstrapping.
+* Fixed a non-deterministic bug in the C-Chain codebase that could cause nodes that receive a lot of transaction broadcast requests to temporarily stop producing blocks until they process a block produced by another node.
+* Restricted the number of version messages to be sent to a peer to one.
+* Removed legacy handshake messages that were deprecated in Apricot Phase 2.
+* Marked nodes that have been benched as being offline for uptime calculations.
+* Updated the validator set to be more performant during validator set changes.
+* Updated the networking to only attempt to re-connect to a peer on disconnect if they are currently a validator.
+
+
+## v1.4.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.2)\)
+
+**Apricot Phase 2 - Patch 2**
+
+{% hint style="warning" %}
+This update is backwards compatible with v1.4.0 and v1.4.1. The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
+{% endhint %}
+
+The patch further reduces the size of gossiped peerlist messages and introduces several new flags:
+
+* `network-peer-list-size` allows for tuning the number of peers gossiped in each `peerlist` message.
+* `network-peer-list-gossip-size` allows for tuning the number of peers to gossip `peerlist` messages to.
+* `network-peer-list-gossip-frequency` allows for tuning how frequently `peerlist`s are gossiped.
+
+## v1.4.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.1)\)
+
+**Apricot Phase 2 - Patch 1**
+
+{% hint style="warning" %}
+This update is backwards compatible with v1.4.0. Please see the expected update times in the v1.4.0 release.
+{% endhint %}
+
+The patch reduces the size of gossiped peerlist messages and introduces a new flag `--bootstrap-beacon-connection-timeout` that allows for the beacon connection timeout to be configured on startup.
+
 ## v1.4.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)\)
+
+**Apricot Phase 2**
 
 {% hint style="danger" %}
 **Please note that this change is not backwards compatible with previous releases.  
@@ -42,6 +87,8 @@ The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji
 
 ## v1.3.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
 
+**Apricot Phase 1 - Patch 2**
+
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes security improvements, bug fixes, and monitoring improvements.
 {% endhint %}
@@ -63,6 +110,8 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Updated ansible inventory to include numerous improvements \(Huge thanks to @moreati\).
 
 ## v1.3.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
+
+**Apricot Phase 1 - Patch 1**
 
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, monitoring improvements, and minor bug fixes.
@@ -86,6 +135,8 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * `network-health-max-time-since-no-requests`
 
 ## v1.3.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)\)
+
+**Apricot Phase 1**
 
 {% hint style="danger" %}
 Please note that this change is not backwards compatible with previous releases.
@@ -119,6 +170,8 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 ## **v1.2.4 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
 
+**Apricot Phase 0 - Upgrade 1 - Patch 4**
+
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
 {% endhint %}
@@ -131,6 +184,8 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 
 ## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
 
+**Apricot Phase 0 - Upgrade 1 - Patch 3**
+
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
 {% endhint %}
@@ -139,6 +194,8 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Simplified C-chain block handling.
 
 ## **v1.2.2 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**\)**
+
+**Apricot Phase 0 - Upgrade 1 - Patch 2**
 
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
@@ -157,6 +214,8 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Improved C-chain handling of mock calls performed on the `pending` block.
 
 ## **v1.2.1 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
+
+**Apricot Phase 0 - Upgrade 1 - Patch 1**
 
 {% hint style="danger" %}
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
@@ -208,6 +267,8 @@ Removed command line arguments:
 
 ## v1.2.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.0)\)
 
+**Apricot Phase 0 - Upgrade 1**
+
 {% hint style="danger" %}
 **Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.**
 {% endhint %}
@@ -226,6 +287,8 @@ The primary components to this upgrade include:
 
 ## v1.1.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5)\)
 
+**Apricot Phase 0 - Patch 5**
+
 {% hint style="danger" %}
 This update is backwards compatible. It is optional but encouraged. The patch includes stability improvements.
 {% endhint %}
@@ -236,6 +299,8 @@ This update is backwards compatible. It is optional but encouraged. The patch in
 * Improved error handling in the C-chain.
 
 ## v1.1.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.4)\)
+
+**Apricot Phase 0 - Patch 4**
 
 {% hint style="danger" %}
 This update is backwards compatible. It is optional but encouraged. The patch includes CLI upgrades, API bug fixes, stability improvements, and performance improvements.
@@ -252,6 +317,8 @@ This update is backwards compatible. It is optional but encouraged. The patch in
 
 ## v1.1.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
 
+**Apricot Phase 0 - Patch 3**
+
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes minor bug fixes relating to APIs.
 {% endhint %}
@@ -261,6 +328,8 @@ This update is optional but encouraged. The patch includes minor bug fixes relat
 * Added `getAtomicUTXOs` to `avm` and `platformvm` API clients.
 
 ## v1.1.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)\)
+
+**Apricot Phase 0 - Patch 2**
 
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
@@ -273,6 +342,8 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Added `Height` to the `snowman.Block` interface.
 
 ## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
+
+**Apricot Phase 0 - Patch 1**
 
 {% hint style="danger" %}
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
@@ -291,6 +362,8 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Reduced GC pressure in the version DB.
 
 ## v1.1.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0)\)
+
+**Apricot Phase 0**
 
 {% hint style="danger" %}
 **Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC \(6 p.m. EST\). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
