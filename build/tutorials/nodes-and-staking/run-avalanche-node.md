@@ -2,7 +2,7 @@
 
 The quickest way to learn about Avalanche is to run a node and interact with the network.
 
-{% embed url="https://youtu.be/c\_SjtCiOFdg" %}
+{% embed url="https://youtu.be/c\_SjtCiOFdg" caption="" %}
 
 In this tutorial \(est. time: 10 minutes\), we will:
 
@@ -21,12 +21,9 @@ If you're interested in using a third-party service to host your node or run a v
 
 This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
 
-
-
 ## Requirements
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
-Note that as network usage increases, hardware requirements may change.
+Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest. Note that as network usage increases, hardware requirements may change.
 
 * Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
@@ -221,7 +218,7 @@ Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, th
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
-![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%289%29.png)
+![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%2810%29.png)
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 

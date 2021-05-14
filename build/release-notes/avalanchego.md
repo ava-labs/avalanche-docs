@@ -20,7 +20,6 @@ The patch includes bug fixes, updated uptime monitoring, and performance improve
 * Updated the validator set to be more performant during validator set changes.
 * Updated the networking to only attempt to re-connect to a peer on disconnect if they are currently a validator.
 
-
 ## v1.4.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.2)\)
 
 **Apricot Phase 2 - Patch 2**
@@ -50,9 +49,9 @@ The patch reduces the size of gossiped peerlist messages and introduces a new fl
 **Apricot Phase 2**
 
 {% hint style="danger" %}
-**Please note that this change is not backwards compatible with previous releases.  
-  
-The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
+**Please note that this change is not backwards compatible with previous releases.**
+
+**The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
 {% endhint %}
 
 {% hint style="warning" %}
@@ -372,7 +371,7 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 There are two primary components to this upgrade:
 
 * General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
-* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock _\*\*_time had passed
+* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock \_\*\*\_time had passed
 
 ## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
 
