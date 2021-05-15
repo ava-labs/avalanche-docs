@@ -44,5 +44,3 @@ Le prix de gas de la [C-Chain](../../construire/apis/evm-api-c-chain.md) est de 
 +----------+-------------------+------------------------+
 ```
 
-Le prix du gaz de la [C-Chain](./#chaine-de-contrat-c-chain) est de 4,7e-7 AVAX / gaz. La limite de gaz de la C-Chain est de 10e8.
-
