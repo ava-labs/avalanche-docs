@@ -17,10 +17,6 @@ Le prix de gas de la [C-Chain](../../construire/apis/evm-api-c-chain.md) est de 
 {% endhint %}
 
 ```cpp
-
-```
-
-```cpp
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
 +----------+-------------------+------------------------+
