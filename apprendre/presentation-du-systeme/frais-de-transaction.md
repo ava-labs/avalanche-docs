@@ -12,6 +12,14 @@ Lorsque vous effectuez une transaction via l'API d'Avalanche, les frais de trans
 
 Différents types de transactions nécessitent le paiement de frais de transaction différents. Ce tableau présente le barème des frais de transaction :
 
+{% hint style="warning" %}
+Le prix de gas de la [C-Chain](../../construire/apis/evm-api-c-chain.md) est de 225 nAVAX \(225 GWei\). La limite en gas est de 8 \* 10e6 \(8,000,000\).
+{% endhint %}
+
+```cpp
+
+```
+
 ```cpp
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
