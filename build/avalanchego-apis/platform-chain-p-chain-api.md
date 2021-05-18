@@ -1298,6 +1298,13 @@ platform.getTxStatus({
 }) -> {status: string}
 ```
 
+`status` is one of:
+
+* `Committed`: The transaction is \(or will be\) accepted by every node
+* `Processing`: The transaction is being voted on by this node
+* `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field for more information
+* `Unknown`: The transaction hasn’t been seen by this node
+
 #### **Example Call**
 
 ```cpp
