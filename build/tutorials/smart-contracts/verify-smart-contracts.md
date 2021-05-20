@@ -97,7 +97,7 @@ The c-chain explorers will interpret all keccak256(...) strings.  This can cause
 keccak256("2");
 ```
 All kecak256 strings even if they are in comments will be parsed.
-This could lead automatic constructor verification.  If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
+This could cause automatic constructor verification failures.  If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
 
 ### Solidity constructors
 
