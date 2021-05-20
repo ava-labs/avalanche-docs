@@ -4,6 +4,8 @@
 
 ## v1.4.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4)\)
 
+**Apricot Phase 2 - Patch 4**
+
 {% hint style="warning" %}
 This update is backwards compatible. It is optional, but encouraged.
 {% endhint %}
