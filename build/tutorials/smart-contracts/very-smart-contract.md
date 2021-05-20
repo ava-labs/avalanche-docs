@@ -60,6 +60,11 @@ This requires you to add external libraries in order to veriy the code.
 
 A library can have dependant libraries.  To verify a library the hierarchy of dependencies will need to be provided into the c-chain explorer.  It may fail if you provide more than the library plus it's dependencies.
 
+You can also see references in the byte code in the form `__$75f20d36....$__`.  The keccak256 is generated from the library name.
+
+Example [online converter](https://emn178.github.io/online-tools/keccak_256.html):
+`contracts/Storage.sol:MathUtils` => `75f20d361629befd780a5bd3159f017ee0f8283bdb6da80805f83e829337fd12`
+
 ### Example
 
 [SwapFlashLoan](https://cchain.explorer.avax-test.network/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
