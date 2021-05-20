@@ -2,6 +2,21 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4)\)
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged.
+{% endhint %}
+
+The patch includes bug fixes and performance improvements that aim to optimize the upcoming `db-upgrade` release.
+
+* Skipped tailing delay in bootstrapping so that all chains finish as soon as the last chain is marked as bootstrapped in a subnet.
+* Improved message handling during bootstrapping to handle messages while waiting for other chains to sync.
+* Reduced sampler allocations by re-using existing samplers.
+* Updated docker scripts to only push images from the `master` branch.
+* Fixed log formatting.
+* Improved error messages.
+
 ## v1.4.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.3)\)
 
 **Apricot Phase 2 - Patch 3**

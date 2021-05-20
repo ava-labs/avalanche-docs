@@ -1731,92 +1731,91 @@ This call is made to the events API endpoint:
 package main
 
 import (
-	"encoding/json"
-	"log"
-	"net"
-	"net/http"
-	"sync"
+    "encoding/json"
+    "log"
+    "net"
+    "net/http"
+    "sync"
 
-	"github.com/ava-labs/avalanchego/api"
-	"github.com/ava-labs/avalanchego/pubsub"
-	"github.com/gorilla/websocket"
+    "github.com/ava-labs/avalanchego/api"
+    "github.com/ava-labs/avalanchego/pubsub"
+    "github.com/gorilla/websocket"
 )
 
 func main() {
-	dialer := websocket.Dialer{
-		NetDial: func(netw, addr string) (net.Conn, error) {
-			return net.Dial(netw, addr)
-		},
-	}
+    dialer := websocket.Dialer{
+        NetDial: func(netw, addr string) (net.Conn, error) {
+            return net.Dial(netw, addr)
+        },
+    }
 
-	httpHeader := http.Header{}
-	conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
-	if err != nil {
-		panic(err)
-	}
+    httpHeader := http.Header{}
+    conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+    if err != nil {
+        panic(err)
+    }
 
-	waitGroup := &sync.WaitGroup{}
-	waitGroup.Add(1)
+    waitGroup := &sync.WaitGroup{}
+    waitGroup.Add(1)
 
-	readMsg := func() {
-		defer waitGroup.Done()
+    readMsg := func() {
+        defer waitGroup.Done()
 
-		for {
-			mt, msg, err := conn.ReadMessage()
-			if err != nil {
-				log.Println(err)
-				return
-			}
-			switch mt {
-			case websocket.TextMessage:
-				log.Println(string(msg))
-			default:
-				log.Println(mt, string(msg))
-			}
-		}
-	}
+        for {
+            mt, msg, err := conn.ReadMessage()
+            if err != nil {
+                log.Println(err)
+                return
+            }
+            switch mt {
+            case websocket.TextMessage:
+                log.Println(string(msg))
+            default:
+                log.Println(mt, string(msg))
+            }
+        }
+    }
 
-	go readMsg()
+    go readMsg()
 
-	cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
-	cmdmsg, err := json.Marshal(cmd)
-	if err != nil {
-		panic(err)
-	}
-	err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
-	if err != nil {
-		panic(err)
-	}
+    cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+    cmdmsg, err := json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
 
-	var addresses []string
-	addresses = append(addresses, " X-fuji....")
-	cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
-	cmdmsg, err = json.Marshal(cmd)
-	if err != nil {
-		panic(err)
-	}
+    var addresses []string
+    addresses = append(addresses, " X-fuji....")
+    cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+    cmdmsg, err = json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
 
-	err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
-	if err != nil {
-		panic(err)
-	}
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
 
-	waitGroup.Wait()
+    waitGroup.Wait()
 }
 ```
 
-##### Operations
+**Operations**
 
 | Command | Description | Example | Arguments |
-| --- | --- | --- | --- |
+| :--- | :--- | :--- | :--- |
 | **NewSet** | create a new address map set | {"newSet":{}} |  |
-| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be > 0<br/>collisionProb - allowed collision probability must be > 0 and <= 1 |
-| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":["X-fuji..."]}} | addresses - list of addresses to match |
+| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":\["X-fuji..."\]}} | addresses - list of addresses to match |
 
-Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**.
-**AddAddresses** can be called multiple times.
+Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
 
-##### Set details
+**Set details**
 
 * **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
 * **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered.  If the addresses is in the filter, you will be sent the transaction.
