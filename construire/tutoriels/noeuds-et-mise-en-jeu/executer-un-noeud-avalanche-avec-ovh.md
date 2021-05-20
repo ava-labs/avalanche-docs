@@ -626,9 +626,28 @@ source .bashrc
 ```
 
 puis reprendre à `./scripts/build.sh`
-{% endhint %}
 
-### Monitorer son node avec htop ou bpytop <a id="a6d8"></a>
+Si vous rencontrez cette erreur :  
+**AvalancheGo requires Go &gt;= 1.15.5, Go 1.15.2 found.**
+
+```cpp
+cd /tmp
+```
+
+```cpp
+wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
+```
+
+```cpp
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
+```
+
+```cpp
+go version
+```
+
+puis reprendre à ****`cd $GOPATH/src/github.com/ava-labs/avalanchego`
+{% endhint %}
 
 Afin de monitorer votre noeud vous avez la possibilité d'installer htop ou bpytop, selon votre préférence graphique.
 
