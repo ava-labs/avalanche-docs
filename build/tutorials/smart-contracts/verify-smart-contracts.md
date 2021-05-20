@@ -59,7 +59,8 @@ The compile bytecode will identify if there are are external libraries.  If you 
 
 This requires you to add external libraries in order to veriy the code.
 
-A library can have dependant libraries.  To verify a library the hierarchy of dependencies will need to be provided into the c-chain explorer.  It may fail if you provide more than the library plus it's dependencies.
+A library can have dependant libraries.  To verify a library the hierarchy of dependencies will need to be provided into the c-chain explorer.
+Verification may fail if you provide more than the actual library plus any dependencies (i.e. you might need to prune the solidity code to exclude anything but the necessary classes).
 
 You can also see references in the byte code in the form `__$75f20d36....$__`.  The keccak256 is generated from the library name.
 
