@@ -48,6 +48,7 @@
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
     * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
+    * [Verify Smart Contracts on the C-Chain Explorer](build/tutorials/smart-contracts/verify-smart-contracts.md)
     * [Add Avalanche to MetaMask programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
