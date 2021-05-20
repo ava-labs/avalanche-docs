@@ -32,8 +32,7 @@ You can try this [online abi encoder](https://abi.hashex.org/).
 * Contracts must be flattened.
   - Includes will not work.  
 * Contracts must be compile-able in [Remix](https://remix.ethereum.org).
-  - Our c-chain explorers can **only** validate with the [solc javascript binaries](https://github.com/ethereum/solc-bin).
-  - Our c-chain explorers only support [solidity](https://docs.soliditylang.org) contracts.
+  - C-chain explorers **only** validate with the [solc javascript](https://github.com/ethereum/solc-bin) and support [solidity](https://docs.soliditylang.org) contracts.
 
 ## Libraries
 
