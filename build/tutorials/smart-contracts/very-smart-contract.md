@@ -18,15 +18,13 @@ Click *Verify &amp; Publish* to enter the smart contract verification page.
 
 ![Contract Entry](../../../.gitbook/assets/smart-contract-input-page.png)
 
-[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided, libraries must be deployed and verified separately.
-They can be entered in the *Add Contract Libraries* section.
+[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided, libraries must be deployed.  They need to be independently verified.   They need to be in the *Add Contract Libraries* section.
 
 ![Libraries](../../../.gitbook/assets/smart-contract-library.png)
 
 The c-chain explorers will be able to fetch constructor arguments automatically for simple smart contracts.  More complicated contracts might require you to pass in special constructor arguments.
 As described in [Caveats](#caveats) section smart contracts with complicated constructors will have validation issues.
 You can try this [online abi encoder](https://abi.hashex.org/).
-
 
 ## Requirements
 
@@ -36,6 +34,45 @@ You can try this [online abi encoder](https://abi.hashex.org/).
 * Contracts must be compile-able in [Remix](https://remix.ethereum.org).
   - Our c-chain explorers can **only** validate with the [solc javascript binaries](https://github.com/ethereum/solc-bin).
   - Our c-chain explorers only support [solidity](https://docs.soliditylang.org) contracts.
+
+## Libraries
+
+The compile bytecode will identify if there are are external libraries.  If you released with remix, you will also see multiple transactions created.
+
+```json
+{
+  "linkReferences": {
+    "contracts/Storage.sol": {
+      "MathUtils": [
+        {
+          "length": 20,
+          "start": 3203
+        }
+        ...
+      ]
+    }
+  },
+  "object": "....",
+  ...
+}
+```
+
+This requires you to add external libraries in order to veriy the code.
+
+A library can have dependant libraries.  To verify a library the hierarchy of dependencies will need to be provided into the c-chain explorer.  It may fail if you provide more than the library plus it's dependencies.
+
+### Example
+
+[SwapFlashLoan](https://cchain.explorer.avax-test.network/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
+
+SwapFlashLoan uses swaputils and mathutils:
+
+[SwapUtils](https://cchain.explorer.avax-test.network/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
+
+SwapUtils requires mathutils:
+
+[MathUtils](https://cchain.explorer.avax-test.network/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
+
 
 ## Caveats
 
