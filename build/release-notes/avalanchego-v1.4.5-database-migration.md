@@ -67,7 +67,7 @@ If your computer \(computer 1\) has less than 6 GB of RAM, it may not be able to
 If you are unable to run the migration and you want to minimize the amount of time your node is offline, you can do the following:
 
 * On another computer \(computer 2\), run AvalancheGo v1.4.5, wait until it bootstraps, then stop AvalancheGo .
-* On computer 1, stop AvalancheGo. Move the database directory _$HOME/.avalanchego/db/_ from computer 2 \(which has just bootstrapped database version v1.4.5\) to the same location on computer 1. Then upgrade to AvalancheGo v1.4.5 and run it.
+* On computer 1, stop AvalancheGo. Move the database directory _`$HOME/.avalanchego/db/`_ from computer 2 \(which has just bootstrapped database version v1.4.5\) to the same location on computer 1. Then upgrade to AvalancheGo v1.4.5 and run it.
 
 Note that **this is not the advised approach,** and you should only do it if your node has less than 6 GB of RAM or insufficient disk space. Again, we advise that your node has at least 6 GB of RAM and at least 200 GB of disk space. Note that this approach does not migrate keystore or validator uptime data.
 
@@ -79,13 +79,13 @@ We recommend that you dedicate at least 200 GB of disk space on your computer to
 
 To see the amount of available disk space in your database directory on Mac OS or Linux, do:
 
-_df -h $HOME/.avalanchego/db_
+_`df -h $HOME/.avalanchego/db`_
 
 This output, for example, says that 609 GB of disk space is available:
 
-_Filesystem Size Used Avail Use% Mounted on_
+_`Filesystem Size Used Avail Use% Mounted on`_
 
-_/dev/nvme0n1p2 916G 261G 609G 30% /_
+_`/dev/nvme0n1p2 916G 261G 609G 30% /`_
 
 ### How long will it take for the new database to bootstrap?
 
@@ -93,17 +93,17 @@ On an AWS c5.large instance \(2 vCPU, 4 GB RAM\), it takes around 30 hours. Howe
 
 ### How do I know that the database migration has completed?
 
-When _“starting to run node in normal execution mode”_ is printed, then the new database has been bootstrapped, and the node has restarted.
+When _`“starting to run node in normal execution mode”`_ is printed, then the new database has been bootstrapped, and the node has restarted.
 
-When _“finished migrating keystore from database version v1.0.0 to v1.4.5”_ is printed, then the keystore data is finished migrating.
+When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the keystore data is finished migrating.
 
-When _“finished migrating platform vm from database version v1.0.0 to v1.4.5”_ is printed, then validator uptimes are finished migrating.
+When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator uptimes are finished migrating.
 
 ### Can I delete the old database?
 
 Once the new database version is bootstrapped, the v1.4.5 node restarts and completes the database migration. After this has happened, you may delete the old database directory, which by default is at:
 
-_$HOME/.avalanchego/db/mainnet/v1.0.0_
+_`$HOME/.avalanchego/db/mainnet/v1.0.0`_
 
 It is not necessary for you to delete the old database \(v1.0.0\).
 
@@ -128,7 +128,7 @@ Yes, but as a precaution you should [back up](https://docs.avax.network/build/tu
 
 ### How can I see the logs for the v1.4.5 node in the background?
 
-By default, these logs are in _$HOME/.avalanchego/logs/fetch-only_.
+By default, these logs are in _`$HOME/.avalanchego/logs/fetch-only`_.
 
 ### What should I do if my computer doesn’t have enough disk space?
 
