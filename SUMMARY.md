@@ -17,6 +17,7 @@
 ## Build
 
 * [Release Notes](build/release-notes/README.md)
+  * [AvalancheGo v1.4.5: Database Migration](build/release-notes/avalanchego-v1.4.5-database-migration.md)
   * [Email Alerts](http://eepurl.com/heNhSX)
   * [AvalancheGo Release Notes](build/release-notes/avalanchego.md)
   * [Ortelius Release Notes](build/release-notes/ortelius.md)

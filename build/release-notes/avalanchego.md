@@ -2,6 +2,100 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5)\)
+
+**Apricot Phase 2 - Patch 5 - DB Upgrade**
+
+**This upgrade is more involved than the typical version update. More detailed instructions and an FAQ can be found** [**here**](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration)**.**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes significant performance improvements and numerous other updates.
+{% endhint %}
+
+#### VM Improvements:
+
+* Fully redesigned the `platformvm`'s state management.
+  * Removed the usage of `versiondb`s being passed through blocks to pass state references that can be modified and read without re-parsing objects.
+  * Implemented a base state manager to properly cache and mange writes to the underlying database.
+  * Implemented CoW validator sets to enable caching multiple validator sets in memory.
+  * Indexed chains by subnet to avoid touching unused state objects.
+  * Indexed validators by `nodeID` to avoid unnecessary iterations while accepting `addDelegator` and `addSubnetValidator` transactions.
+  * Reduced the number of key-value pairs dedicated to managing validator sets on disk and validator uptimes.
+* Added staking reward look-ups to the `platformvm`'s API to support indexing of rewards.
+* Refactored validator uptime metering to simplify testing.
+* Added block and transaction type metrics to the `platformvm`.
+* Added API call metrics to the `avm` and the `platformvm`.
+* Updated the `avm`'s state management to use `prefixdb`s, record caching metrics, and share additional code with the `platformvm`.
+* Simplified `UTXO` management and indexing in the `avm` and `platformvm`.
+* Restructured address parsing and management to be fully shared across compatible VM instances.
+* Restructured shared memory of the primary subnet to be fully shared across VM instances.
+* Added a chain state implementation to support seamless caching over existing VM implementations and to simplify the implementation of new VMs.
+* Integrated the new chain state manager into the `rpcchainvm`, which also adds various metrics.
+* Added `upgradeBytes` and `configBytes` to the standard VM interface to better support future network upgrades.
+* Added `getAtomicTx` and `getAtomicTxStatus` endpoints to the `evm` API.
+* Simplified `evm` block production to be synchronously performed with the consensus engine.
+* Added an atomic transaction mempool to re-introduce orphaned atomic transactions.
+* Fixed bug in the `evm` client to properly set the `sourceChain` in `getAtomicUTXOs`.
+* Integrated the new chain state manager into the `evm` to better optimize block management.
+
+#### Bootstrapping Improvements:
+
+* Removed re-traversals during bootstrapping. This significantly improves the performance of the node during restarts of the bootstrapping process.
+* Fixed an ungraceful node shutdown when attempting to exit the node while executing bootstrapped containers.
+* Fixed duplicated IPC container broadcasts during bootstrapping.
+* Standardized the bootstrapping jobs queue to write to state using `prefixdb`s rather than implementing custom prefixing.
+* Added additional bootstrapping caching and cache metrics.
+
+#### Database Migration Additions:
+
+* Added a daemon process manager to seamlessly migrate to the updated database format.
+* Refactored version handling to track database semantic versions.
+* Implemented a database manager to track and operate over different database versions.
+* Implemented a `keystore` migration that automatically copies users from the `v1.0.0` database to the `v1.4.5` database.
+* Implemented a validator uptime migration from the `v1.0.0` database to the `v1.4.5` database.
+
+#### Node Improvements:
+
+* Updating config parsing to always expand environment variables.
+* Refactored the node config to allow specifying TLS certificates in memory without touching disk.
+* Added better support for meaningful exit codes.
+* Displayed listening address of the `http` and `staking` servers to aid in supporting non-specific port mappings.
+* Implemented a `versionable` database to be able to toggle between a pass through database and a `versioned` database.
+* Optimized ID `Set` pre-allocations and reduced the memory usage of the `struct`s.
+* Enforced stricter linting rules.
+
+#### Modified command line arguments:
+
+For the following arguments `"default"` was previously treated as a keyword. Now, `"default"` will attempt to be treated as the intended value of the flag. To retain the default behavior, the flag should not be specified.
+
+* `config-file`
+* `coreth-config`
+* `plugin-dir`
+* `staking-tls-key-file`
+* `staking-tls-cert-file`
+* `bootstrap-ips`
+* `bootstrap-ids`
+* `ipcs-path`
+* `db-dir`
+
+For the following arguments `""` was previously treated as a keyword. Now, `""` will attempt to be treated as the intended value of the flag. To retain the default behavior, the flag should not be specified.
+
+* `ipcs-chain-ids`
+* `log-dir`
+* `log-display-level`
+
+It is no longer required that the `bootstrap-ips` and `bootstrap-ids` are paired. This means it is now valid to specify a different number of `bootstrap-ips` than `bootstrap-ids`. The `bootstrap-ips` are used to initially connect to the network and the `bootstrap-ids` are used as the beacons in bootstrapping.
+
+#### Added command line arguments:
+
+* `fetch-only`
+* `build-dir`
+
+#### Removed command line arguments:
+
+* `xput-server-port`
+* `xput-server-enabled`
+
 ## v1.4.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4)\)
 
 **Apricot Phase 2 - Patch 4**

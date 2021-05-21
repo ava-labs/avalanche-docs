@@ -1,4 +1,4 @@
-# Verifying Smart Contracts
+# Verify Smart Contracts on the C-Chain Explorer
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it.
 
@@ -8,35 +8,34 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
 ## Steps
 
-Navigate to the *Code* tab at the Explorer page for your contract's address.
+Navigate to the _Code_ tab at the Explorer page for your contract's address.
 
 ![Verify &amp; Publish](../../../.gitbook/assets/smart-contract-verify-page.png)
 
-Click *Verify &amp; Publish* to enter the smart contract verification page.
+Click _Verify & Publish_ to enter the smart contract verification page.
 
 ![Contract Entry](../../../.gitbook/assets/smart-contract-input-page.png)
 
-[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the *Add Contract Libraries* section.
+[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
 ![Libraries](../../../.gitbook/assets/smart-contract-library.png)
 
-The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts.  More complicated contracts might require you to pass in special constructor arguments.
-Smart contracts with complicated constructors [may have validation issues](#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
+The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
 
 ## Requirements
 
 * **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
 * Contracts must be flattened.
-  - Includes will not work.  
+  * Includes will not work.  
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
-  - A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs.  This might cause validation issues.
+  * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
 * The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
 
 ## Libraries
 
-The compile bytecode will identify if there are are external libraries.  If you released with Remix, you will also see multiple transactions created.
+The compile bytecode will identify if there are are external libraries. If you released with Remix, you will also see multiple transactions created.
 
-```json
+```javascript
 {
   "linkReferences": {
     "contracts/Storage.sol": {
@@ -56,13 +55,11 @@ The compile bytecode will identify if there are are external libraries.  If you 
 
 This requires you to add external libraries in order to veriy the code.
 
-A library can have dependent libraries.  To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer.
-Verification may fail if you provide more than the library plus any dependencies (i.e. you might need to prune the Solidity code to exclude anything but the necessary classes).
+A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies \(i.e. you might need to prune the Solidity code to exclude anything but the necessary classes\).
 
-You can also see references in the byte code in the form `__$75f20d36....$__`.  The keccak256 hash is generated from the library name.
+You can also see references in the byte code in the form `__$75f20d36....$__`. The keccak256 hash is generated from the library name.
 
-Example [online converter](https://emn178.github.io/online-tools/keccak_256.html):
-`contracts/Storage.sol:MathUtils` => `75f20d361629befd780a5bd3159f017ee0f8283bdb6da80805f83e829337fd12`
+Example [online converter](https://emn178.github.io/online-tools/keccak_256.html): `contracts/Storage.sol:MathUtils` =&gt; `75f20d361629befd780a5bd3159f017ee0f8283bdb6da80805f83e829337fd12`
 
 ## Examples
 
@@ -76,19 +73,20 @@ SwapUtils requires mathutils:
 
 * [MathUtils](https://cchain.explorer.avax-test.network/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
 
-
 ## Caveats
 
 ### SPDX License Required
 
 An SPDX must be provided.
+
 ```javascript
 // SPDX-License-Identifier: ...
 ```
 
 ### keccak256 Strings Processed
 
-The C-Chain Explorer interprets all keccak256(...) strings, even those in comments.  This can cause issues with constructor args.
+The C-Chain Explorer interprets all keccak256\(...\) strings, even those in comments. This can cause issues with constructor args.
+
 ```javascript
 /// keccak256("1");
 keccak256("2");
@@ -101,6 +99,7 @@ This could cause automatic constructor verification failures. If you receive err
 Constructors and inherited constructors can can cause problems verifying the constructor arguments.
 
 example:
+
 ```javascript
 abstract contract Parent {
   constructor () {
