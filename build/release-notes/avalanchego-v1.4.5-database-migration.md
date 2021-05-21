@@ -24,7 +24,7 @@ This upgrade also significantly shortens the amount of time it takes to bootstra
 
 If you have an existing database on your computer, then when you run AvalancheGo v1.4.5, it will actually start 2 nodes. One will be running v1.4.4, which uses the “old” database version \(v1.0.0\). The other will be running v1.4.5, which uses the “new” database format \(v1.4.5\).
 
-The v1.4.5 node will run as normal, and you will see its logs as before. The node will connect to the network using the same node ID as before and, if it is a validator, participate in consensus as before. In short, things should look the same as when running v1.4.4.
+The v1.4.4 node will run as normal, and you will see its logs as before. The node will connect to the network using the same node ID as before and, if it is a validator, participate in consensus as before. In short, things should look the same as when running v1.4.4.
 
 The v1.4.5 node will run in the background, and will bootstrap from the v1.4.4 node running on the same computer. This is faster and uses less bandwidth than the normal bootstrap procedure, which requires data to be sent over the internet. During the bootstrapping process, the v1.4.5 node will populate the “new” database.
 
