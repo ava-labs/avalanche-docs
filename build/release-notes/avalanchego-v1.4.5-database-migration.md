@@ -38,7 +38,7 @@ When the migration completes, there will be 2 bootstrapped databases on your com
 
 Memory and CPU usage will also be somewhat elevated while both nodes are running. We anticipate that any computer with specs equivalent or greater than an AWS c5.large instance \(2 vCPU, 6 GB RAM\) will not have any issues. That said, you should monitor your node especially closely for the first few days to ensure that it is healthy.
 
-See FAQ for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended specs.
+See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended specs.
 
 ## How to Upgrade
 
@@ -147,6 +147,10 @@ If you follow the instructions in this document, no. Your node will continue to 
 ### Should I just re-bootstrap from scratch?
 
 Probably not. If your node is a validator, this will cause its uptime to decrease. \(See the above answer\). If your node is not a validator, but it has already bootstrapped, it will be faster to migrate your database than to re-bootstrap from an empty database. In either case, you are better off running the migration as explained above rather than just deleting your existing v1.0.0 database.
+
+### **My node shut off during the migration / bootstrapping. What do I do?**
+
+Just restart your node. The migration will pick up where it left off. We highly recommend that you set up AvalancheGo to run as a service so that it will restart automatically upon shutdown. 
 
 ### I think something is wrong. What do I do?
 
