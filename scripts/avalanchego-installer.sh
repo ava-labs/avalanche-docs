@@ -5,6 +5,12 @@
 #stop on errors
 set -e
 
+#running as root gives the wrong homedir, check and exit if run with sudo.
+if ((EUID == 0)); then
+    echo "The script is not designed to run as root user. Please run it without sudo prefix."
+    exit
+fi
+
 #helper function to create avalanchego.service file
 create_service_file () {
   rm -f avalanchego.service
