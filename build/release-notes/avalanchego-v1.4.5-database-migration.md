@@ -36,7 +36,7 @@ During the migration, when both nodes are running, AvalancheGo will consume more
 
 When the migration completes, there will be 2 bootstrapped databases on your computer. Make sure that the amount of free disk space on your computer exceeds the size of a fully bootstrapped database \(~32 GB\). We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. While AvalancheGo currently uses only a fraction of that amount, we anticipate disk usage will rise before we implement a pruning solution.
 
-Memory and CPU usage will also be somewhat elevated while both nodes are running. We anticipate that any computer with specs equivalent or greater than an AWS c5.large instance \(2 vCPU, 6 GB RAM\) will not have any issues. That said, you should monitor your node especially closely for the first few days to ensure that it is healthy.
+Memory and CPU usage will also be elevated while both nodes are running. We anticipate that any computer with CPU &gt;= 2GHz and &gt;= 6 GB of RAM available for AvalancheGo will not have any issues. That said, you should monitor your node especially closely for the first few days to ensure that it is healthy.
 
 See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended specs.
 
