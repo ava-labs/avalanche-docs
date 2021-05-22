@@ -183,8 +183,10 @@ One change in this Ortelius release is that Ortelius will now use the node’s b
 
 If your node was installed with the [installer script](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer), you need to fix the service definition file after upgrading to 1.4.5. In the console, enter the command:  
 `sudo nano /etc/systemd/system/avalanchego.service`  
-In the editor, locate the line that begins with `ExecStart=` and on it delete the following part: `--plugin-dir=/home/ubuntu/avalanche-node/plugins`, then save the changes by pressing `ctrl-x` and `y`. To apply the changes enter the command:   
+In the editor, locate the line that begins with `ExecStart=` and on it delete the following part: `--plugin-dir=/home/ubuntu/avalanche-node/plugins` 
+
+Then save the changes by pressing `ctrl-x` and `y`. To apply the changes run the command:   
 `sudo systemctl daemon-reload`  
-and finally, restart the node with:  
+Finally, restart the node with:  
 `sudo systemctl restart avalanchego`
 
