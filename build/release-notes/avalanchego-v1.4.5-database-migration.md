@@ -58,6 +58,10 @@ You should also back up information in your node’s keystore, such as private k
 
 ## FAQ
 
+### Why does \[explorer\] say my node is still on v1.4.4?
+
+During the migration, a v1.4.4 node will be running on your computer, as explained above. Other nodes on the network will see yours as running v1.4.4 until the migration is complete.
+
 ### Is the database migration mandatory?
 
 Yes. Every future AvalancheGo will use the new database version \(v1.4.5\), so you will eventually have to migrate your database to that version. However, it is not urgent that you upgrade to AvalancheGo v1.4.5 _right away_ \(i.e. you do not have to upgrade as soon as possible\). Nodes running AvalancheGo &gt;= v.1.4.0 will continue to operate normally.
