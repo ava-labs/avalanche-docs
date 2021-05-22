@@ -40,7 +40,7 @@ When the migration completes, there will be 2 bootstrapped databases on your com
 
 Memory and CPU usage will also be elevated while both nodes are running. We anticipate that any computer with CPU &gt;= 2GHz and &gt;= 6 GB of RAM available for AvalancheGo will not have any issues. That said, you should monitor your node especially closely for the first few days to ensure that it is healthy.
 
-See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended specs.
+See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended ones.
 
 ## How to Upgrade
 
