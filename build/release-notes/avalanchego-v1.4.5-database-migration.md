@@ -62,6 +62,10 @@ You should also back up information in your node’s keystore, such as private k
 
 Yes. Every future AvalancheGo will use the new database version \(v1.4.5\), so you will eventually have to migrate your database to that version. However, it is not urgent that you upgrade to AvalancheGo v1.4.5 _right away_ \(i.e. you do not have to upgrade as soon as possible\). Nodes running AvalancheGo &gt;= v.1.4.0 will continue to operate normally.
 
+### Can I upgrade to AvalancheGo 1.4.5 from a version other than v1.4.4?
+
+Yes, it should work from any version &lt; 1.4.5. 
+
 ### What if my computer can’t run 2 nodes at once?
 
 If your computer \(computer 1\) has less than 6 GB of RAM, it may not be able to run the migration because it doesn’t have enough memory to run 2 nodes at once. As a reminder, we advise that your node has at least 6 GB of RAM.
