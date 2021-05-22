@@ -36,7 +36,7 @@ If you previously ran your node with flag `--plugin-dir`, you should remove that
 
 During the migration, when both nodes are running, AvalancheGo will consume more system resources than usual.
 
-When the migration completes, there will be 2 bootstrapped databases on your computer. Make sure that the amount of free disk space on your computer exceeds the size of a fully bootstrapped database \(~32 GB\). We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. While AvalancheGo currently uses only a fraction of that amount, we anticipate disk usage will rise before we implement a pruning solution.
+When the migration completes, there will be 2 bootstrapped databases on your computer. Make sure that the amount of free disk space on your computer exceeds the size of a fully bootstrapped database \(~38 GB\). We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. While AvalancheGo currently uses only a fraction of that amount, we anticipate disk usage will rise before we implement a pruning solution.
 
 Memory and CPU usage will also be elevated while both nodes are running. We anticipate that any computer with CPU &gt;= 2GHz and &gt;= 6 GB of RAM available for AvalancheGo will not have any issues. That said, you should monitor your node especially closely for the first few days to ensure that it is healthy.
 
@@ -83,7 +83,7 @@ Note that **this is not the advised approach,** and you should only do it if you
 
 ### How much disk space do I need?
 
-We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. While AvalancheGo currently uses only a fraction of that amount \(~32 GB\), we anticipate disk usage will rise before we implement a pruning solution.
+We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. While AvalancheGo currently uses only a fraction of that amount \(~38 GB\), we anticipate disk usage will rise before we implement a pruning solution.
 
 ### How much disk space is available right now?
 
