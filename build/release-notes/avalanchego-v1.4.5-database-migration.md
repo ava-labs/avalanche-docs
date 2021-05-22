@@ -30,7 +30,7 @@ The v1.4.5 node will run in the background, and will bootstrap from the v1.4.4 n
 
 When the v1.4.5 node is done bootstrapping, the v1.4.4 node will stop and the v1.4.5 node will restart. When the v1.4.5 node restarts, it will run normally, using the “new” database, and complete the migration. Your node will have the same node ID as before.
 
-If you previously ran your node with flag `--plugin-dir`, you should remove that flag \(installer script does this, see the [note](avalanchego-v1.4.5-database-migration.md#note-for-the-nodes-installed-with-installer-script)\). 
+You should not provide the flag`--plugin-dir`. \(The installer script does this. See this [note](avalanchego-v1.4.5-database-migration.md#note-for-the-nodes-installed-with-installer-script).\) 
 
 ## Resource Usage
 
