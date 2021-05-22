@@ -22,9 +22,9 @@ create_service_file () {
   echo "User=$(whoami)">>avalanchego.service
   echo "WorkingDirectory=$HOME">>avalanchego.service
   if [ "$ipChoice" = "1" ]; then
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --plugin-dir=$HOME/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=">>avalanchego.service
+    echo "ExecStart=$HOME/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=">>avalanchego.service
   else
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --plugin-dir=$HOME/avalanche-node/plugins --public-ip=$foundIP --http-host=">>avalanchego.service
+    echo "ExecStart=$HOME/avalanche-node/avalanchego --public-ip=$foundIP --http-host=">>avalanchego.service
   fi
   echo "Restart=always">>avalanchego.service
   echo "RestartSec=1">>avalanchego.service
