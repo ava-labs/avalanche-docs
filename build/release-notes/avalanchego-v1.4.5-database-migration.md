@@ -30,6 +30,8 @@ The v1.4.5 node will run in the background, and will bootstrap from the v1.4.4 n
 
 When the v1.4.5 node is done bootstrapping, the v1.4.4 node will stop and the v1.4.5 node will restart. When the v1.4.5 node restarts, it will run normally, using the “new” database, and complete the migration. Your node will have the same node ID as before.
 
+If you previously ran your node with flag `--plugin-dir`, you should remove that flag and replace it with `--build-dir` . The value of this flag should be the path to the`build` directory created by running the build script, or the folder containing the binaries download from our Github. Specifically, the path specified by `--build-dir` should contain `avalanchego`, `avalanchego-latest`,  and`avalanchego-preupgrade`.
+
 ## Resource Usage
 
 During the migration, when both nodes are running, AvalancheGo will consume more system resources than usual.
