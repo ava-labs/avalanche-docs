@@ -8,7 +8,7 @@
 
 ## Background
 
-We are excited to announce the release of [v1.4.5 of AvalanceGo](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5), which brings significant database optimizations and stability improvements to AvalancheGo.
+We are excited to announce the release of [v1.4.5 of AvalancheGo](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5), which brings significant database optimizations and stability improvements to AvalancheGo.
 
 In tests, we observed a ~90% reduction in read I/O on a Mainnet validator, as shown in the graph below:
 
