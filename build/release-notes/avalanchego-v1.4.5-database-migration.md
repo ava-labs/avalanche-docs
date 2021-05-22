@@ -184,7 +184,6 @@ If you are using Ortelius, follow these steps to upgrade it:
 * After the new Ortelius instance has finished bootstrapping, switch to the new instance.
 * Shut down the old Ortelius instance.
 
-  
 Instructions for deploying Ortelius can be found at [https://github.com/ava-labs/ortelius/blob/master/docs/deployment.md](https://github.com/ava-labs/ortelius/blob/master/docs/deployment.md)
 
 One change in this Ortelius release is that Ortelius will now use the node’s built-in indexer. This improves stability and ensures that Ortelius has no missing transactions, even if it is restarted.
