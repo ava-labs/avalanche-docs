@@ -58,15 +58,6 @@ You should also back up information in your node’s keystore, such as private k
 
 ## FAQ
 
-### Note for the nodes installed with installer script
-
-If your node was installed with the [installer script](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer), you need to fix the service definition file after upgrading to 1.4.5. In the console, enter the command:  
-`sudo nano /etc/systemd/system/avalanchego.service`  
-In the editor, locate the line that begins with `ExecStart=` and on it delete the following part: `--plugin-dir=/home/ubuntu/avalanche-node/plugins`, then save the changes by pressing `ctrl-x` and `y`. To apply the changes enter the command:   
-`sudo systemctl daemon-reload`  
-and finally, restart the node with:  
-`sudo systemctl restart avalanchego`
-
 ### Why does \[explorer\] say my node is still on v1.4.4?
 
 During the migration, a v1.4.4 node will be running on your computer, as explained above. Other nodes on the network will see yours as running v1.4.4 until the migration is complete.
@@ -187,4 +178,13 @@ If you are using Ortelius, follow these steps to upgrade it:
 Instructions for deploying Ortelius can be found at [https://github.com/ava-labs/ortelius/blob/master/docs/deployment.md](https://github.com/ava-labs/ortelius/blob/master/docs/deployment.md)
 
 One change in this Ortelius release is that Ortelius will now use the node’s built-in indexer. This improves stability and ensures that Ortelius has no missing transactions, even if it is restarted.
+
+### Note for the nodes installed with installer script
+
+If your node was installed with the [installer script](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer), you need to fix the service definition file after upgrading to 1.4.5. In the console, enter the command:  
+`sudo nano /etc/systemd/system/avalanchego.service`  
+In the editor, locate the line that begins with `ExecStart=` and on it delete the following part: `--plugin-dir=/home/ubuntu/avalanche-node/plugins`, then save the changes by pressing `ctrl-x` and `y`. To apply the changes enter the command:   
+`sudo systemctl daemon-reload`  
+and finally, restart the node with:  
+`sudo systemctl restart avalanchego`
 
