@@ -1813,7 +1813,7 @@ func main() {
 | **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
 | **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":\["X-fuji..."\]}} | addresses - list of addresses to match |
 
-Calling **NewSet** or **NewBoom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
+Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
 
 **Set details**
 
