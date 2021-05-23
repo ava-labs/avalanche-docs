@@ -12,7 +12,7 @@ We are excited to announce the release of [v1.4.5 of AvalancheGo](https://github
 
 In tests, we observed a ~90% reduction in read I/O on a Mainnet validator, as shown in the graph below:
 
-![](../../.gitbook/assets/0%20%281%29.png)
+![](../../.gitbook/assets/0%20%281%29%20%281%29.png)
 
 The improvements are due to extensive refactoring of state management in the P-Chain, as well as other other database optimizations.
 
@@ -107,7 +107,7 @@ When _`“starting to run node in normal execution mode”`_ is printed, then th
 
 When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the keystore data is finished migrating.
 
-When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator uptimes are finished migrating.
+When _`“finished migrating platformvm from database version v1.0.0 to v1.4.5”`_ is printed, then validator uptimes are finished migrating.
 
 ### Can I delete the old database?
 
