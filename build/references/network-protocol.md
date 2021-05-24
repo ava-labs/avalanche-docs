@@ -268,7 +268,7 @@ The OpCode used by `PushQuery` messages is: `0x06`.
 
 ### What PushQuery contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
 
 **`SubnetID`** defines which subnet this message is destined for.
 
