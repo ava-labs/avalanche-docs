@@ -54,6 +54,35 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since there
                               +--------------------------------+
 ```
 
+##### Example
+
+For example, to send an ANT with an assetID of `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK` from address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to address `0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address which is receiving the ANT, assetID and assetAmount and POST the value as the `data` param to the `0x0100000000000000000000000000000000000002` address using the `eth_sendTransaction` RPC.
+
+```zsh
+curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_sendTransaction",
+    "params": [
+        {
+            "to": "0x0100000000000000000000000000000000000002",
+            "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+            "value": "",
+            "gas": "0x2DC6C0",
+            "gasPrice": "0x34630B8A00",
+            "data": "0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57ec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7000000000000000000000000000000000000000000000000000000000000012c"
+        }
+    ]
+}'
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x451ffb79936be1baba438b591781192cbc9659d1f3a693a7a434b4a93dda639f"
+}
+```
+
 #### nativeAssetBalance
 
 `nativeAssetBalance` is a precompiled contract at address `0x0100000000000000000000000000000000000001`. `nativeAssetBalance` is the ANT equivalent of using `balance` to get the AVAX balance.
@@ -74,7 +103,9 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since all o
                               +-----------------+
 ```
 
-For example, to get the balance of address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` and assetID `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `ec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address and assetID and POST the value as the `data` param to the `0x0100000000000000000000000000000000000001` address using the `eth_call` RPC.
+##### Example
+
+For example, to get the balance of address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` and assetID `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address and assetID and POST the value as the `data` param to the `0x0100000000000000000000000000000000000001` address using the `eth_call` RPC.
 
 ```text
 curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
