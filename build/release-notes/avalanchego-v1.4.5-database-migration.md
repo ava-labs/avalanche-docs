@@ -5,7 +5,7 @@
 * [AvalancheGo v1.4.5](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5) brings significant database optimizations.
 * It will temporarily double the amount of disk space used by AvalancheGo, and will temporarily increase usage of memory and CPU.
 * Please read this entire document to make sure that your node successfully migrates and remains healthy during the migration. If it doesn’t answer your question, go to our [Discord](https://chat.avalabs.org/) server and post in the \#troubleshooting channel. Please read the pinned messages and search for your question before posting.
-* This article explains how to upgrade a node running AvalancheGo < v1.4.5 to AvalancheGo >= 1.4.5.
+* This article explains how to upgrade a node running AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= 1.4.5.
 
 ## Background
 
@@ -21,7 +21,7 @@ We anticipate that nodes upgraded to &gt;= v1.4.5 will consume less CPU and perf
 
 This upgrade also significantly shortens the amount of time it takes to bootstrap.
 
-This article is applicable when you're upgrading your node from AvalancheGo < v1.4.5 to AvalancheGo >= v1.4.5. Although this article is written for v1.4.5 and references that version below. For example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6. When reading this document, replace v1.4.5 with the version you are updating to (except in reference to the database subdirectory v1.4.5, which will not change.)
+This article is applicable when you're upgrading your node from AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= v1.4.5. Although this article is written for v1.4.5 and references that version below, for example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6. When reading this document, replace v1.4.5 with the version you are updating to \(except in reference to the database subdirectory v1.4.5, which will not change.\)
 
 ## The Upgrade Process
 
@@ -71,7 +71,7 @@ Yes. Every future AvalancheGo will use the new database version \(v1.4.5\), so y
 
 ### Can I upgrade to AvalancheGo 1.4.5 from a version other than v1.4.4?
 
-Yes, it should work from any version &lt; 1.4.5. 
+Yes, it should work from any version &lt; 1.4.5.
 
 ### What if my computer can’t run 2 nodes at once?
 
@@ -163,7 +163,7 @@ Probably not. If your node is a validator, this will cause its uptime to decreas
 
 ### **My node shut off during the migration / bootstrapping. What do I do?**
 
-Just restart your node. The migration will pick up where it left off. We highly recommend that you set up AvalancheGo to run as a service so that it will restart automatically upon shutdown. 
+Just restart your node. The migration will pick up where it left off. We highly recommend that you set up AvalancheGo to run as a service so that it will restart automatically upon shutdown.
 
 ### I think something is wrong. What do I do?
 
@@ -187,7 +187,7 @@ One change in this Ortelius release is that Ortelius will now use the node’s b
 If your node was installed with the [installer script](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer), you need to fix the service definition file after upgrading to 1.4.5. In the console, enter the command:_`sudo nano /etc/systemd/system/avalanchego.service`_  
 In the editor, locate the line that begins with _`ExecStart=`_ and on it delete the following part: _`--plugin-dir=/home/ubuntu/avalanche-node/plugins`_ Then save the changes by pressing ctrl-x and y.
 
- To apply the changes run the command:   
+To apply the changes run the command:  
 _`sudo systemctl daemon-reload`_  
 Finally, restart the node with:  
 _`sudo systemctl restart avalanchego`_
