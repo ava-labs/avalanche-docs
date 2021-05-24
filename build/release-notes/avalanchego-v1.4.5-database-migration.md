@@ -5,7 +5,7 @@
 * [AvalancheGo v1.4.5](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5) brings significant database optimizations.
 * It will temporarily double the amount of disk space used by AvalancheGo, and will temporarily increase usage of memory and CPU.
 * Please read this entire document to make sure that your node successfully migrates and remains healthy during the migration. If it doesn’t answer your question, go to our [Discord](https://chat.avalabs.org/) server and post in the \#troubleshooting channel. Please read the pinned messages and search for your question before posting.
-* This article is applicable to node upgrade from any version of pre 1.4.5 to that of post 1.4.5.
+* This article explains how to upgrade a node running AvalancheGo < v1.4.5 to AvalancheGo >= 1.4.5.
 
 ## Background
 
@@ -21,7 +21,7 @@ We anticipate that nodes upgraded to &gt;= v1.4.5 will consume less CPU and perf
 
 This upgrade also significantly shortens the amount of time it takes to bootstrap.
 
-This article is applicable to node upgrade from any version of pre 1.4.5 to that of post 1.4.5. As this article is written specifically for v1.4.5, if you are upgrading to any version of post 1.4.5, when reading this document, just replace v1.4.5 with the version you are updating to, except the database directory v1.4.5 which will not change.
+This article is applicable when you're upgrading your node from AvalancheGo < v1.4.5 to AvalancheGo >= v1.4.5. Although this article is written for v1.4.5 and references that version below. For example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6. When reading this document, replace v1.4.5 with the version you are updating to (except in reference to the database subdirectory v1.4.5, which will not change.)
 
 ## The Upgrade Process
 
