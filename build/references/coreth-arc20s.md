@@ -56,7 +56,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since there
 
 ##### Example
 
-For example, to send an ANT with an assetID of `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK` from address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to address `0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57` and assetID `0x2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address, assetID and assetAmount and POST the value as the `data` param to the `0x0100000000000000000000000000000000000002` address using the `eth_sendTransaction` RPC.
+For example, to send an ANT with an assetID of `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK` from address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to address `0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address, assetID and assetAmount and POST the value as the `data` param to the `0x0100000000000000000000000000000000000002` address using the `eth_sendTransaction` RPC.
 
 ```zsh
 curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
