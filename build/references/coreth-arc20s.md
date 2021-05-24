@@ -74,7 +74,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since all o
                               +-----------------+
 ```
 
-For example, to get the balance of address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` and assetID `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `ec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address and assetID and POST the value as the data param to the `0x0100000000000000000000000000000000000001` address using the `eth_call` RPC.
+For example, to get the balance of address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` and assetID `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `ec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address and assetID and POST the value as the `data` param to the `0x0100000000000000000000000000000000000001` address using the `eth_call` RPC.
 
 ```zsh
 curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
