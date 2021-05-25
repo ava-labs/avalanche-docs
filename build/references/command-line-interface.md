@@ -14,7 +14,6 @@ Example JSON config file:
 
 ```javascript
 {
-    "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
 }
 ```
@@ -256,15 +255,6 @@ Enables peer specific query latency metrics. Defaults to `false`.
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
 
 ### C-Chain / Coreth
-
-`--plugin-dir` \(string, file path\):
-
-Specifies the directory containing the `evm` \(C-Chain\) plugin binary. By default, looks for the binary in these directories:
-
-* `[directory AvalancheGo was invoked from]/plugins`
-* `/usr/local/lib/avalanchego`
-* `[current directory]/plugins`
-* `[current directory]/build/plugins`
 
 `--coreth-config` \(json\):
 
