@@ -2,6 +2,26 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.6)\)
+
+**Apricot Phase 2 - Patch 6**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged. This patch includes performance improvements and bug fixes.
+{% endhint %}
+
+**If the previously installed node version is <= v1.4.4 then this node will perform a database migration. For details about the database migration please see the v1.4.5 release notes.** If the previously installed node version is v1.4.5 then this node use the existing database and does not need to perform a database migration.
+
+This patch:
+
+* Removes invalid transaction issuance into P-chain mempool that caused high sustained DB writes.
+* Ignored non-database files and folders in the database directory. This should specifically fix errors reported on macOS with .DS_Store files.
+* Fixed the build-dir flag to be able to be specified via CLI without causing the preupgrade node to error.
+* Removed the plugin-dir flag that is no longer supported with the node-manager daemon. Typically not specifying the flag leads to the correct behavior. However, for complex installations the build-dir flag may be required.
+* Enforced gossiping messages only to connections that have finished the peer handshake.
+* Reduced memory allocations during consensus traversals and bootstrapping.
+
+
 ## v1.4.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5)\)
 
 **Apricot Phase 2 - Patch 5 - DB Upgrade**
