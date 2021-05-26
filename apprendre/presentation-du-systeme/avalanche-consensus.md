@@ -179,21 +179,5 @@ Avalanche est très performant. Il peut traiter des milliers de transactions par
 
 ## Résumé
 
-Le consensus d'Avalanche est une percée radicale dans les systèmes distribués. Il représente un bond en avant aussi important que les protocoles de consensus classique et Nakamoto qui l'ont précédé. Maintenant que vous avez une meilleure compréhension de son fonctionnement, consultez d'autres [documents](https://docs.avax.network/v/francais/) sur la création de Dapps et d'instruments financiers révolutionnaires sur Avalanche.[  
-](https://docs.avax.network/learn/platform-overview)
-
-## 
-
-
-
-
-
-  
-
-
-
-
-## 
-
-
+Le consensus d'Avalanche est une percée radicale dans les systèmes distribués. Il représente un bond en avant aussi important que les protocoles de consensus classique et Nakamoto qui l'ont précédé. Maintenant que vous avez une meilleure compréhension de son fonctionnement, consultez d'autres [documents](https://docs.avax.network/v/francais/) sur la création de Dapps et d'instruments financiers révolutionnaires sur Avalanche.
 
