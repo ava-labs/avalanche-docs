@@ -76,7 +76,7 @@ New version can be downloaded with **one** of the following approaches depending
 
 To start the new version
 
-* If you run AvalancheGo as a service, which we highly recommend, verify that the _`--plugin-dir`_ flag is not present in the _`avalanchego.service`_ file. If it is present, follow the instructions below to remove it. You should remove this flag before starting the new version AvalancheGo &gt;=v1.4.5.
+* If you run AvalancheGo as a service, which we highly recommend, verify that the _`--plugin-dir`_ flag is not present in the _`avalanchego.service`_ file. If it is not present, you can skip the following paragraph. If it is present, follow the instructions below to remove it.
 
   In the console, enter the command: _`sudo nano /etc/systemd/system/avalanchego.service`_  
   In the editor, locate the line that begins with _`ExecStart=`_ and on it delete the following part: _`--plugin-dir=/home/ubuntu/avalanche-node/plugins`_ Then save the changes by pressing ctrl-x and y.
