@@ -45,66 +45,62 @@ Memory and CPU usage will also be elevated while both nodes are running. We anti
 
 See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended ones.
 
-
 ## How to Upgrade
 
 * Verify that your computer meets the following requirements:
-    * CPU >= 2GHz 
-    * RAM >= 6 GB
-    * Hard drive: you should have at least 1.3 times of the disk space currently occupied by _`$HOME/.avalanchego/db/mainnet/v1.0.0`_, which is around 38GB. This means that you should have about 50 GB free space. Otherwise, the program will not be able to proceed to upgrade the database. We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. To check how much space you have, see [How much disk space is available right now](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#how-much-disk-space-is-available-right-now)
-
-    * To remedy, see following
-        * [What should I do if my computer doesn’t have enough disk space?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-should-i-do-if-my-computer-doesnt-have-enough-disk-space)
-        * [What if my computer can’t run 2 nodes at once?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-if-my-computer-cant-run-2-nodes-at-once)
-
+  * CPU &gt;= 2GHz 
+  * RAM &gt;= 6 GB
+  * Hard drive: you should have at least 1.3 times of the disk space currently occupied by _`$HOME/.avalanchego/db/mainnet/v1.0.0`_, which is around 38GB. This means that you should have about 50 GB free space. Otherwise, the program will not be able to proceed to upgrade the database. We recommend that you dedicate at least 200 GB of disk space on your computer to AvalancheGo. To check how much space you have, see [How much disk space is available right now](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#how-much-disk-space-is-available-right-now)
+  * To remedy, see following
+    * [What should I do if my computer doesn’t have enough disk space?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-should-i-do-if-my-computer-doesnt-have-enough-disk-space)
+    * [What if my computer can’t run 2 nodes at once?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-if-my-computer-cant-run-2-nodes-at-once)
 * Back up your node’s data by following [this](https://docs.avax.network/build/tutorials/nodes-and-staking/node-backup-and-restore).
 
-    Your staking key/certificate are not in the database, and **should not be affected at all** by the database migration. Even so, it is good practice to [have a backup](https://docs.avax.network/build/tutorials/nodes-and-staking/node-backup-and-restore) of your staking key/certificate.
-
+  Your staking key/certificate are not in the database, and **should not be affected at all** by the database migration. Even so, it is good practice to [have a backup](https://docs.avax.network/build/tutorials/nodes-and-staking/node-backup-and-restore) of your staking key/certificate.
 
 * New version can be downloaded with **one** of the following approaches depending on your practices: 
-    * With [Installer Scripts](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer#node-upgrade), run _`./avalanchego-installer.sh`_
-    * With binary download, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#binary)
-    * With building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#source-code)
+  * With [Installer Scripts](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer#node-upgrade), run _`./avalanchego-installer.sh`_
+  * With binary download, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#binary)
+  * With building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#source-code)
 * Start the new version
-    * If you run AvalancheGo as a service, which we highly recommend, verify that the _`--plugin-dir`_ flag is not present in the _`avalanchego.service`_ file. If it is present, follow the instructions below to remove it. You should remove this flag before starting the new version AvalancheGo >=v1.4.5. 
+  * If you run AvalancheGo as a service, which we highly recommend, verify that the _`--plugin-dir`_ flag is not present in the _`avalanchego.service`_ file. If it is present, follow the instructions below to remove it. You should remove this flag before starting the new version AvalancheGo &gt;=v1.4.5.
 
-        In the console, enter the command: _`sudo nano /etc/systemd/system/avalanchego.service`_  
-        In the editor, locate the line that begins with _`ExecStart=`_ and on it delete the following part: _`--plugin-dir=/home/ubuntu/avalanche-node/plugins`_ Then save the changes by pressing ctrl-x and y.
+    In the console, enter the command: _`sudo nano /etc/systemd/system/avalanchego.service`_  
+    In the editor, locate the line that begins with _`ExecStart=`_ and on it delete the following part: _`--plugin-dir=/home/ubuntu/avalanche-node/plugins`_ Then save the changes by pressing ctrl-x and y.
 
-        To apply the changes run the command:  
-        _`sudo systemctl daemon-reload`_  
-        Finally, restart the node with:  
-        _`sudo systemctl restart avalanchego`_
-    * With binary download or building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#start-a-node-and-connect-to-avalanche)
-* Monitor and make sure that migration completes successfully: 
-    * You can check progress by doing the following:
-        * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
-        * Check your disk space usage using command 
-        _`du -h $HOME/.avalanchego/db/mainnet`_
-        which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively.
-        * These messages indicate the completion of the database migration:
-            * When _`“starting to run node in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
+    To apply the changes run the command:  
+    _`sudo systemctl daemon-reload`_  
+    Finally, restart the node with:  
+    _`sudo systemctl restart avalanchego`_
 
-            * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
+  * With binary download or building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#start-a-node-and-connect-to-avalanche)
+* Monitor and make sure that migration completes successfully:
+  * You can check progress by doing the following:
+    * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
+    * Check your disk space usage using command 
 
-            * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
+      _`du -h $HOME/.avalanchego/db/mainnet`_
 
-        * Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days (migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads). However, your node will continue to work during the migration without downtime.
-        * You can verify your node’s version by issuing info.getNodeVersion API (see tutorial on Postman)  and you should get the response as follows, where the version number should be >=1.4.6 depending which version you are updating to.
-        ```javascript
-            {
-            "jsonrpc": "2.0",
-            "result": {
-                "version": "avalanche/1.4.6"
-            },
-            "id": 1
-            }
-        ```
+      which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively.
 
+    * These messages indicate the completion of the database migration:
+      * When _`“starting to run node in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
+      * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
+      * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
+    * Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
+    * You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.6 depending which version you are updating to.
+
+      ```javascript
+        {
+        "jsonrpc": "2.0",
+        "result": {
+            "version": "avalanche/1.4.6"
+        },
+        "id": 1
+        }
+      ```
 
 More information on updating a node can be found [here](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node).
-
 
 ## FAQ
 
