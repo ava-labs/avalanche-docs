@@ -30,4 +30,4 @@
 
 • **encoding**: *string*
 
-*Defined in [src/common/interfaces.ts:27](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L27)*
+*Defined in [src/common/interfaces.ts:27](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L27)*

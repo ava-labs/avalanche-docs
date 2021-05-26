@@ -26,7 +26,7 @@
 
 *Inherited from [BaseIndexResponse](common_interfaces.baseindexresponse.md).[bytes](common_interfaces.baseindexresponse.md#bytes)*
 
-*Defined in [src/common/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L32)*
+*Defined in [src/common/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L32)*
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 *Inherited from [BaseIndexResponse](common_interfaces.baseindexresponse.md).[encoding](common_interfaces.baseindexresponse.md#encoding)*
 
-*Defined in [src/common/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L34)*
+*Defined in [src/common/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L34)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 *Inherited from [BaseIndexResponse](common_interfaces.baseindexresponse.md).[id](common_interfaces.baseindexresponse.md#id)*
 
-*Defined in [src/common/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L31)*
+*Defined in [src/common/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L31)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 *Inherited from [BaseIndexResponse](common_interfaces.baseindexresponse.md).[index](common_interfaces.baseindexresponse.md#index)*
 
-*Defined in [src/common/interfaces.ts:35](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L35)*
+*Defined in [src/common/interfaces.ts:35](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L35)*
 
 ___
 
@@ -66,4 +66,4 @@ ___
 
 *Inherited from [BaseIndexResponse](common_interfaces.baseindexresponse.md).[timestamp](common_interfaces.baseindexresponse.md#timestamp)*
 
-*Defined in [src/common/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L33)*
+*Defined in [src/common/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L33)*

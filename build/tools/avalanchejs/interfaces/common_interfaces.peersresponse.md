@@ -23,7 +23,7 @@
 
 • **ip**: *string*
 
-*Defined in [src/common/interfaces.ts:82](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L82)*
+*Defined in [src/common/interfaces.ts:82](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L82)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **lastReceived**: *string*
 
-*Defined in [src/common/interfaces.ts:87](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L87)*
+*Defined in [src/common/interfaces.ts:87](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L87)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **lastSent**: *string*
 
-*Defined in [src/common/interfaces.ts:86](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L86)*
+*Defined in [src/common/interfaces.ts:86](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L86)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **nodeID**: *string*
 
-*Defined in [src/common/interfaces.ts:84](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L84)*
+*Defined in [src/common/interfaces.ts:84](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L84)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **publicIP**: *string*
 
-*Defined in [src/common/interfaces.ts:83](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L83)*
+*Defined in [src/common/interfaces.ts:83](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L83)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **version**: *string*
 
-*Defined in [src/common/interfaces.ts:85](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/interfaces.ts#L85)*
+*Defined in [src/common/interfaces.ts:85](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L85)*

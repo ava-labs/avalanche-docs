@@ -42,7 +42,7 @@ convention: secp256k1 signature (130 bytes)
 
 *Overrides [PayloadBase](utils_payload.payloadbase.md).[constructor](utils_payload.payloadbase.md#constructor)*
 
-*Defined in [src/utils/payload.ts:324](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L324)*
+*Defined in [src/utils/payload.ts:323](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L323)*
 
 **Parameters:**
 
@@ -60,7 +60,7 @@ Name | Type | Default | Description |
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[payload](utils_payload.payloadbase.md#protected-payload)*
 
-*Defined in [src/utils/payload.ts:167](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L167)*
+*Defined in [src/utils/payload.ts:166](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L166)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 *Overrides [B58STRPayload](utils_payload.b58strpayload.md).[typeid](utils_payload.b58strpayload.md#protected-typeid)*
 
-*Defined in [src/utils/payload.ts:532](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L532)*
+*Defined in [src/utils/payload.ts:531](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L531)*
 
 ## Methods
 
@@ -80,7 +80,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[fromBuffer](utils_payload.payloadbase.md#frombuffer)*
 
-*Defined in [src/utils/payload.ts:205](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L205)*
+*Defined in [src/utils/payload.ts:204](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L204)*
 
 Decodes the payload as a [Buffer](https://github.com/feross/buffer) including 4 bytes for the length and TypeID.
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[getContent](utils_payload.payloadbase.md#getcontent)*
 
-*Defined in [src/utils/payload.ts:187](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L187)*
+*Defined in [src/utils/payload.ts:186](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L186)*
 
 Returns the payload content (minus typeID).
 
@@ -115,7 +115,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[getPayload](utils_payload.payloadbase.md#getpayload)*
 
-*Defined in [src/utils/payload.ts:195](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L195)*
+*Defined in [src/utils/payload.ts:194](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L194)*
 
 Returns the payload (with typeID).
 
@@ -131,7 +131,7 @@ ___
 
 *Overrides [PayloadBase](utils_payload.payloadbase.md).[returnType](utils_payload.payloadbase.md#abstract-returntype)*
 
-*Defined in [src/utils/payload.ts:322](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L322)*
+*Defined in [src/utils/payload.ts:321](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L321)*
 
 Returns a base58 string for the payload.
 
@@ -145,7 +145,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[toBuffer](utils_payload.payloadbase.md#tobuffer)*
 
-*Defined in [src/utils/payload.ts:218](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L218)*
+*Defined in [src/utils/payload.ts:217](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L217)*
 
 Encodes the payload as a [Buffer](https://github.com/feross/buffer) including 4 bytes for the length and TypeID.
 
@@ -159,7 +159,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[typeID](utils_payload.payloadbase.md#typeid)*
 
-*Defined in [src/utils/payload.ts:173](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L173)*
+*Defined in [src/utils/payload.ts:172](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L172)*
 
 Returns the TypeID for the payload.
 
@@ -173,7 +173,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[typeName](utils_payload.payloadbase.md#typename)*
 
-*Defined in [src/utils/payload.ts:180](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/payload.ts#L180)*
+*Defined in [src/utils/payload.ts:179](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/payload.ts#L179)*
 
 Returns the string name for the payload's type.
 

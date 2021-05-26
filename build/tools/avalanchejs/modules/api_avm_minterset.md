@@ -18,4 +18,4 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/minterset.ts:14](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/avm/minterset.ts#L14)*
+*Defined in [src/apis/avm/minterset.ts:14](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/minterset.ts#L14)*
