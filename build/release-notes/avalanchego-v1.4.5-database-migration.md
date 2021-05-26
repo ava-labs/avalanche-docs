@@ -45,7 +45,7 @@ Memory and CPU usage will also be elevated while both nodes are running. We anti
 
 See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/avalanchego-v1.4.5-database-migration#faq) for how to check that your computer has adequate disk space, and what to do if your computer has specs lower than the recommended ones.
 
-## How to Upgrade
+## Step-by-Step Upgrade Instructions
 
 * Verify that your computer meets the following requirements:
   * CPU &gt;= 2GHz 
