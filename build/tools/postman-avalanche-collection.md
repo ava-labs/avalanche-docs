@@ -45,7 +45,7 @@ Postman will recognize the format of the file content and offer to import the fi
 Next, we have to import the environment variables. Again, the header of the Worskspaces tab select `New` and switch to `Link` tab. this time, paste the link to the environment JSON:
 
 ```text
-https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example_Avalanche_Environment.postman_environment.json
+https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example-Avalanche-Environment.postman_environment.json
 ```
 
 Postman will recognize the format of the file:
