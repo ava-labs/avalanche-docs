@@ -43,7 +43,7 @@
 
 \+ **new StandardParseableInput**(`input`: [Input](common_inputs.input.md)): *[StandardParseableInput](common_inputs.standardparseableinput.md)*
 
-*Defined in [src/common/input.ts:156](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L156)*
+*Defined in [src/common/input.ts:156](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L156)*
 
 Class representing an [StandardParseableInput](common_inputs.standardparseableinput.md) for a transaction.
 
@@ -63,7 +63,7 @@ Name | Type | Default | Description |
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/common/input.ts:124](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L124)*
+*Defined in [src/common/input.ts:124](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L124)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/common/input.ts:123](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L123)*
+*Defined in [src/common/input.ts:123](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L123)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 • **input**: *[Input](common_inputs.input.md)*
 
-*Defined in [src/common/input.ts:134](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L134)*
+*Defined in [src/common/input.ts:134](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L134)*
 
 ## Methods
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/utils/serialization.ts:74](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L74)*
+*Defined in [src/utils/serialization.ts:74](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L74)*
 
 **Parameters:**
 
@@ -118,7 +118,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset?`: number): *number*
 
-*Defined in [src/common/input.ts:148](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L148)*
+*Defined in [src/common/input.ts:148](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L148)*
 
 **Parameters:**
 
@@ -137,7 +137,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **getInput**(): *[Input](common_inputs.input.md)*
 
-*Defined in [src/common/input.ts:145](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L145)*
+*Defined in [src/common/input.ts:145](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L145)*
 
 **Returns:** *[Input](common_inputs.input.md)*
 
@@ -161,7 +161,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -175,7 +175,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -189,7 +189,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/input.ts:126](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L126)*
+*Defined in [src/common/input.ts:126](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L126)*
 
 **Parameters:**
 
@@ -205,7 +205,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/common/input.ts:150](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L150)*
+*Defined in [src/common/input.ts:150](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L150)*
 
 **Returns:** *Buffer*
 
@@ -215,13 +215,13 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/common/input.ts:139](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/common/input.ts#L139)*
+*Defined in [src/common/input.ts:139](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/input.ts#L139)*
 
 Returns a function used to sort an array of [StandardParseableInput](common_inputs.standardparseableinput.md)s
 
 **Returns:** *function*
 
-▸ (`a`: [StandardParseableInput](common_inputs.standardparseableinput.md), `b`: [StandardParseableInput](common_inputs.standardparseableinput.md)): *0 | 1 | -1*
+▸ (`a`: [StandardParseableInput](common_inputs.standardparseableinput.md), `b`: [StandardParseableInput](common_inputs.standardparseableinput.md)): *1 | -1 | 0*
 
 **Parameters:**
 

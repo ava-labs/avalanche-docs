@@ -40,7 +40,7 @@
 
 \+ **new EVMOutput**(`address`: Buffer | string, `amount`: BN | number, `assetID`: Buffer | string): *[EVMOutput](api_evm_outputs.evmoutput.md)*
 
-*Defined in [src/apis/evm/outputs.ts:177](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L177)*
+*Defined in [src/apis/evm/outputs.ts:177](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L177)*
 
 An [EVMOutput](api_evm_outputs.evmoutput.md) class which contains address, amount, and assetID.
 
@@ -60,7 +60,7 @@ Name | Type | Default | Description |
 
 • **address**: *Buffer* = Buffer.alloc(20)
 
-*Defined in [src/apis/evm/outputs.ts:99](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L99)*
+*Defined in [src/apis/evm/outputs.ts:99](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L99)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **amount**: *Buffer* = Buffer.alloc(8)
 
-*Defined in [src/apis/evm/outputs.ts:100](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L100)*
+*Defined in [src/apis/evm/outputs.ts:100](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L100)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • **amountValue**: *BN* = new BN(0)
 
-*Defined in [src/apis/evm/outputs.ts:101](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L101)*
+*Defined in [src/apis/evm/outputs.ts:101](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L101)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **assetID**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/apis/evm/outputs.ts:102](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L102)*
+*Defined in [src/apis/evm/outputs.ts:102](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L102)*
 
 ## Methods
 
@@ -92,7 +92,7 @@ ___
 
 ▸ **clone**(): *this*
 
-*Defined in [src/apis/evm/outputs.ts:173](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L173)*
+*Defined in [src/apis/evm/outputs.ts:173](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L173)*
 
 **Returns:** *this*
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **create**(...`args`: any[]): *this*
 
-*Defined in [src/apis/evm/outputs.ts:169](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L169)*
+*Defined in [src/apis/evm/outputs.ts:169](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L169)*
 
 **Parameters:**
 
@@ -118,7 +118,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/evm/outputs.ts:152](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L152)*
+*Defined in [src/apis/evm/outputs.ts:152](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L152)*
 
 Decodes the [EVMOutput](api_evm_outputs.evmoutput.md) as a [Buffer](https://github.com/feross/buffer) and returns the size.
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **getAddress**(): *Buffer*
 
-*Defined in [src/apis/evm/outputs.ts:122](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L122)*
+*Defined in [src/apis/evm/outputs.ts:122](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L122)*
 
 Returns the address of the input as [Buffer](https://github.com/feross/buffer)
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **getAddressString**(): *string*
 
-*Defined in [src/apis/evm/outputs.ts:127](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L127)*
+*Defined in [src/apis/evm/outputs.ts:127](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L127)*
 
 Returns the address as a bech32 encoded string.
 
@@ -161,7 +161,7 @@ ___
 
 ▸ **getAmount**(): *BN*
 
-*Defined in [src/apis/evm/outputs.ts:132](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L132)*
+*Defined in [src/apis/evm/outputs.ts:132](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L132)*
 
 Returns the amount as a [BN](https://github.com/indutny/bn.js/).
 
@@ -173,7 +173,7 @@ ___
 
 ▸ **getAssetID**(): *Buffer*
 
-*Defined in [src/apis/evm/outputs.ts:137](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L137)*
+*Defined in [src/apis/evm/outputs.ts:137](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L137)*
 
 Returns the assetid of the input as [Buffer](https://github.com/feross/buffer)
 
@@ -185,7 +185,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/apis/evm/outputs.ts:142](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L142)*
+*Defined in [src/apis/evm/outputs.ts:142](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L142)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [EVMOutput](api_evm_outputs.evmoutput.md).
 
@@ -197,7 +197,7 @@ ___
 
 ▸ **toString**(): *string*
 
-*Defined in [src/apis/evm/outputs.ts:165](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L165)*
+*Defined in [src/apis/evm/outputs.ts:165](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L165)*
 
 Returns a base-58 representation of the [EVMOutput](api_evm_outputs.evmoutput.md).
 
@@ -209,13 +209,13 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/apis/evm/outputs.ts:107](https://github.com/ava-labs/avalanchejs/blob/cfff19f/src/apis/evm/outputs.ts#L107)*
+*Defined in [src/apis/evm/outputs.ts:107](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/evm/outputs.ts#L107)*
 
 Returns a function used to sort an array of [EVMOutput](api_evm_outputs.evmoutput.md)s
 
 **Returns:** *function*
 
-▸ (`a`: [EVMOutput](api_evm_outputs.evmoutput.md) | [EVMInput](api_evm_inputs.evminput.md), `b`: [EVMOutput](api_evm_outputs.evmoutput.md) | [EVMInput](api_evm_inputs.evminput.md)): *0 | 1 | -1*
+▸ (`a`: [EVMOutput](api_evm_outputs.evmoutput.md) | [EVMInput](api_evm_inputs.evminput.md), `b`: [EVMOutput](api_evm_outputs.evmoutput.md) | [EVMInput](api_evm_inputs.evminput.md)): *1 | -1 | 0*
 
 **Parameters:**
 
