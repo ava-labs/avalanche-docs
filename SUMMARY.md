@@ -5,6 +5,7 @@
 ## Apprendre
 
 * [Aperçu de la plateforme](apprendre/presentation-du-systeme/README.md)
+  * [Avalanche Consensus](apprendre/presentation-du-systeme/avalanche-consensus.md)
   * [Staking](apprendre/presentation-du-systeme/staking.md)
   * [Frais de transaction](apprendre/presentation-du-systeme/frais-de-transaction.md)
 * [Les bases de la blockchain](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
