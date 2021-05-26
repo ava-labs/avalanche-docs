@@ -8,6 +8,7 @@
   * [Avalanche Consensus](apprendre/presentation-du-systeme/avalanche-consensus.md)
   * [Staking](apprendre/presentation-du-systeme/staking.md)
   * [Frais de transaction](apprendre/presentation-du-systeme/frais-de-transaction.md)
+  * [Pourquoi Avalanche Pt.1](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Les bases de la blockchain](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
 * [Forum](https://forum.avax.network/)
