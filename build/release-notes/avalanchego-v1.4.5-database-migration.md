@@ -95,30 +95,33 @@ To start the new version
 
 Monitor and make sure that migration completes successfully:
 
-* You can check progress by doing the following:
-  * Check your disk space usage using command 
+You can check progress by doing the following:
 
-    _`du -h $HOME/.avalanchego/db/mainnet`_
+* Check your disk space usage using command 
 
-    which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively. 
+  _`du -h $HOME/.avalanchego/db/mainnet`_
 
-  * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
-  * These messages indicate the completion of the database migration:
-    * When _`“starting to run node in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
-    * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
-    * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
-* Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
-* You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.6 depending which version you are updating to, after the completion of migration.
+  which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively. 
 
-  ```javascript
-    {
-    "jsonrpc": "2.0",
-    "result": {
-        "version": "avalanche/1.4.6"
-    },
-    "id": 1
-    }
-  ```
+* Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
+* These messages indicate the completion of the database migration:
+  * When _`“starting to run node in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
+  * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
+  * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
+
+Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
+
+You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.6 depending which version you are updating to, after the completion of migration.
+
+```javascript
+  {
+  "jsonrpc": "2.0",
+  "result": {
+      "version": "avalanche/1.4.6"
+  },
+  "id": 1
+  }
+```
 
 More information on updating a node can be found [here](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node).
 
