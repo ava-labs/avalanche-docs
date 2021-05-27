@@ -1066,6 +1066,56 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+### platform.getRewardUTXOs
+
+Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period ended.
+
+#### **Signature**
+
+```cpp
+platform.getRewardUTXOs({
+    txID: string,
+    encoding: string //optional
+}) -> {
+	numFetched: integer,
+	utxos: []string,
+    encoding: string
+}
+```
+* `txID` is the ID of the staking or delegating transaction
+* `numFetched` is the number of returned UTXOs
+* `utxos` is an array of encoded reward UTXOs 
+* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getRewardUTXOs",
+    "params": {
+        "txID": "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y5"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "2",
+        "utxos": [
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+        ],
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
 
 ### platform.getStakingAssetID
 
