@@ -47,7 +47,10 @@ See [FAQ](https://app.gitbook.com/@avalanche/s/avalanche/build/release-notes/ava
 
 ## Step-by-Step Upgrade Instructions
 
-### Verify
+* **Your node will not have downtime by following these instructions.**
+* **The database, plus keystore data and validator's uptimes, are migrated automatically.**
+
+### Verify Requirements
 
 Verify that your computer meets the following requirements:
 
@@ -58,13 +61,13 @@ Verify that your computer meets the following requirements:
   * [What should I do if my computer doesn’t have enough disk space?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-should-i-do-if-my-computer-doesnt-have-enough-disk-space)
   * [What if my computer can’t run 2 nodes at once?](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration#what-if-my-computer-cant-run-2-nodes-at-once)
 
-### Backup 
+### Backup Data
 
 Backup your node’s data by following [this](https://docs.avax.network/build/tutorials/nodes-and-staking/node-backup-and-restore).
 
 Your staking key/certificate are not in the database, and **should not be affected at all** by the database migration. Even so, it is good practice to [have a backup](https://docs.avax.network/build/tutorials/nodes-and-staking/node-backup-and-restore) of your staking key/certificate.
 
-### Download 
+### Download the New Version
 
 New version can be downloaded with **one** of the following approaches depending on your practices: 
 
@@ -72,7 +75,7 @@ New version can be downloaded with **one** of the following approaches depending
 * With binary download, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#binary)
 * With building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#source-code)
 
-### Execute
+### Run the New Version
 
 To start the new version
 
@@ -86,9 +89,9 @@ To start the new version
   Finally, restart the node with:  
   _`sudo systemctl restart avalanchego`_
 
-* With binary download or building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#start-a-node-and-connect-to-avalanche)
+* With binary download or building from source code, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#start-a-node-and-connect-to-avalanche).
 
-### Monitor
+### Monitor Progress
 
 Monitor and make sure that migration completes successfully:
 
