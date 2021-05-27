@@ -1066,6 +1066,7 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+
 ### platform.getRewardUTXOs
 
 Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period ended.
@@ -1077,11 +1078,12 @@ platform.getRewardUTXOs({
     txID: string,
     encoding: string //optional
 }) -> {
-	numFetched: integer,
-	utxos: []string,
+    numFetched: integer,
+    utxos: []string,
     encoding: string
 }
 ```
+
 * `txID` is the ID of the staking or delegating transaction
 * `numFetched` is the number of returned UTXOs
 * `utxos` is an array of encoded reward UTXOs 

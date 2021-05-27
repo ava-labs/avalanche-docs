@@ -114,13 +114,13 @@ Depending on your computer, the upgrade process could take a significant amount 
 You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.6 depending which version you are updating to, after the completion of migration.
 
 ```javascript
-  {
-  "jsonrpc": "2.0",
-  "result": {
-      "version": "avalanche/1.4.6"
-  },
-  "id": 1
-  }
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "version": "avalanche/1.4.6"
+    },
+    "id": 1
+}
 ```
 
 More information on updating a node can be found [here](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node).
