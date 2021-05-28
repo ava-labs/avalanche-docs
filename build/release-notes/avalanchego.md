@@ -2,6 +2,23 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.7 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7)\)
+
+**Apricot Phase 2 - Patch 7**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes performance improvements and bug fixes.
+{% endhint %}
+
+If the previously installed node version is <= v1.4.4 then this node may have stopped processing blocks. This update will repair the node and perform a database migration. For details about the database migration please see the [v1.4.5 database migration notes](avalanchego-v1.4.5-database-migration.md). If the previously installed node version is >=v1.4.5 then this node will use the existing database and does not need to perform a database migration.
+
+* Fixed the pre-migration node to correctly verify the P-chain block `SHraz7TtMfTQ5DX1rREhNZW1bi7PpPzAq7xoJAwrWNQrLhQcD`.
+* Fixed regression in `platformvm.GetBlockchains` to correctly return the primary subnet blockchains.
+* Updated the grpc version to v1.37.
+* Optimized peerlist sampling.
+* Added database benchmarks.
+* Reduced various repeated memory allocations.
+
 ## v1.4.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.6)\)
 
 **Apricot Phase 2 - Patch 6**
