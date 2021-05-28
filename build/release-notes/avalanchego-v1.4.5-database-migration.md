@@ -7,6 +7,8 @@
 * Please read this entire document to make sure that your node successfully migrates and remains healthy during the migration. If it doesn’t answer your question, go to our [Discord](https://chat.avalabs.org/) server and post in the \#troubleshooting channel. Please read the pinned messages and search for your question before posting.
 * This article explains how to upgrade a node running AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= 1.4.5.
 
+This article is applicable when you're upgrading your node from AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= v1.4.5. Although this article is written for v1.4.5 and references that version below, for example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6. When reading this document, replace v1.4.5 with the version you are updating to \(except in reference to the database subdirectory v1.4.5, which will not change.\)
+
 ## Background
 
 We are excited to announce the release of [v1.4.5 of AvalancheGo](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5), which brings significant database optimizations and stability improvements to AvalancheGo.
@@ -20,8 +22,6 @@ The improvements are due to extensive refactoring of state management in the P-C
 We anticipate that nodes upgraded to &gt;= v1.4.5 will consume less CPU and perform many fewer disk reads once the migration has been completed. These changes will also significantly improve P-Chain decision latency.
 
 This upgrade also significantly shortens the amount of time it takes to bootstrap.
-
-This article is applicable when you're upgrading your node from AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= v1.4.5. Although this article is written for v1.4.5 and references that version below, for example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6. When reading this document, replace v1.4.5 with the version you are updating to \(except in reference to the database subdirectory v1.4.5, which will not change.\)
 
 ## The Upgrade Process
 
@@ -133,7 +133,7 @@ During the migration, a v1.4.4 node will be running on your computer, as explain
 
 ### Is the database migration mandatory?
 
-Yes. Every future AvalancheGo will use the new database version \(v1.4.5\), so you will eventually have to migrate your database to that version. However, it is not urgent that you upgrade to AvalancheGo v1.4.5 _right away_ \(i.e. you do not have to upgrade as soon as possible\). Nodes running AvalancheGo &gt;= v.1.4.0 will continue to operate normally.
+Yes. Nodes running AvalancheGo &lt; v1.4.5 no longer work.
 
 ### Can I upgrade to AvalancheGo 1.4.5 from a version other than v1.4.4?
 
