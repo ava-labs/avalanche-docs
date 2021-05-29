@@ -24,7 +24,7 @@ This upgrade also significantly shortens the amount of time it takes to bootstra
 
 ## The Upgrade Process
 
-If you have an existing database on your computer, then when you run AvalancheGo v1.4.5, it will actually start 2 nodes. One will be running v1.4.4, which uses the “old” database version \(v1.0.0\). The other will be running v1.4.5, which uses the “new” database format \(v1.4.5\).
+If you have an existing database on your computer, then when you run AvalancheGo v1.4.5, it will actually start 2 nodes. One will be running v1.4.4, which uses the “old” database version \(v1.0.0\). The other will be running v1.4.5, which uses the “new” database format \(v1.4.5 which will stay the same for any AvalancheGo &lt;=1.4.5\).
 
 The v1.4.4 node will run as normal, and you will see its logs as before. The node will connect to the network using the same node ID as before and, if it is a validator, participate in consensus as before. In short, things should look the same as when running v1.4.4.
 
@@ -110,13 +110,13 @@ You can check progress by doing the following:
 
 Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
 
-You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.6 depending which version you are updating to, after the completion of migration.
+You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.7 depending which version you are updating to, after the completion of migration.
 
 ```javascript
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/1.4.6"
+        "version": "avalanche/1.4.7"
     },
     "id": 1
 }
