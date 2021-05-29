@@ -1,6 +1,6 @@
 # AvalancheGo v1.4.5: Database Migration
 
-This article is applicable when you're upgrading your node from AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= v1.4.5. Although this article is written for v1.4.5 and references that version below, for example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.7. When reading this document, replace v1.4.5 with the version you are updating to \(except in reference to the database subdirectory v1.4.5, which will not change.\)
+This article is applicable when you're upgrading your node from AvalancheGo &lt; v1.4.5 to AvalancheGo &gt;= v1.4.5. Although this article is written for v1.4.5 and references that version below, for example, it still applies if you're upgrading from AvalancheGo v1.4.4 to AvalancheGo v1.4.6, v1.4.7, etc.. When reading this document, replace v1.4.5 with the version you are updating to \(except in reference to the database subdirectory v1.4.5, which will not change.\)
 
 ## Summary
 
