@@ -104,7 +104,7 @@ You can check progress by doing the following:
 
 * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
 * These messages indicate the completion of the database migration:
-  * When _`“starting to run node in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
+  * When _`“starting latest node version in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
   * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
   * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
 
