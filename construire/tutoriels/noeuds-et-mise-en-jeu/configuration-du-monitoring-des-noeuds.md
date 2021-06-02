@@ -364,7 +364,7 @@ Vérifiez l'interface Web de Prometheus sur `http://your-node-host-ip:9090/targe
 * Avalanchego
 * Avalanchego-machine
 
-Ouvrez Grafana; vous pouvez maintenant créer un tableau de bord en utilisant l'une de ces sources. Vous pouvez également utiliser les tableaux de bord préconfigurés [\[ici\]](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+Ouvrez Grafana; vous pouvez maintenant créer un tableau de bord en utilisant l'une de ces sources. Vous pouvez également utiliser les tableaux de bord préconfigurés [\[ici\]](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards).
 
 Pour importer le tableau de bord préconfiguré :
 
