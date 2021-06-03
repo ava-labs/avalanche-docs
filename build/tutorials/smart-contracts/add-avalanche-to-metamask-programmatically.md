@@ -1,4 +1,4 @@
-# Add Avalanche to MetaMask programmatically
+# Add Avalanche to MetaMask Programmatically
 
 Adding new networks to Metamask is not a trivial task for people that are not technically savvy, and it can be error prone. To help easier onboarding of users to your application it is useful to simplify that process as much as possible. This tutorial will show how to build a simple button in your front-end application that will automate the process of adding the Avalanche network to MetaMask.
 

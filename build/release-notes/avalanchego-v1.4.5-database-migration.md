@@ -68,7 +68,7 @@ Your staking key/certificate are not in the database, and **should not be affect
 
 ### Download the New Version
 
-New version can be downloaded with **one** of the following approaches depending on your practices: 
+New version can be downloaded with **one** of the following approaches depending on your practices:
 
 * With [Installer Scripts](https://docs.avax.network/build/tutorials/nodes-and-staking/set-up-node-with-installer#node-upgrade), run _`./avalanchego-installer.sh`_
 * With binary download, see [here](https://docs.avax.network/build/tutorials/nodes-and-staking/run-avalanche-node#binary)
@@ -96,11 +96,11 @@ Monitor and make sure that migration completes successfully:
 
 You can check progress by doing the following:
 
-* Check your disk space usage using command 
+* Check your disk space usage using command
 
   _`du -h $HOME/.avalanchego/db/mainnet`_
 
-  which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively. 
+  which should produce results showing the size of both databases under v1.0.0 and v1.4.5, respectively.
 
 * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
 * These messages indicate the completion of the database migration:
@@ -110,7 +110,7 @@ You can check progress by doing the following:
 
 Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
 
-You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\)  and you should get the response as follows, where the version number should be &gt;=1.4.7 depending which version you are updating to, after the completion of migration.
+You can verify your node’s version by issuing `info.getNodeVersion` API \(see tutorial on [Postman](https://docs.avax.network/build/tools/postman-avalanche-collection)\) and you should get the response as follows, where the version number should be &gt;=1.4.7 depending which version you are updating to, after the completion of migration.
 
 ```javascript
 {
