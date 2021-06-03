@@ -569,7 +569,8 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "result" :{
-        "status":"Accepted"
+        "status":"Accepted",
+        "blockHeight": "1"
     }
 }
 ```
