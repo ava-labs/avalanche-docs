@@ -529,3 +529,47 @@ curl -X POST --data '{
 }
 ```
 
+### avax.getAtomicTxStatus
+
+Get the status of an atomic transaction sent to the network.
+
+#### **Signature**
+
+```cpp
+avax.getAtomicTxStatus({txID: string}) -> {
+  status: string,
+  blockHeight: string // returned when status is Accepted
+}
+```
+
+`status` is one of:
+
+* `Accepted`: The transaction is \(or will be\) accepted by every node. Check the `blockHeight` property
+* `Processing`: The transaction is being voted on by this node
+* `Dropped`: The transaction will never be accepted by any node in the network
+* `Unknown`: The transaction hasn’t been seen by this node
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "status":"Accepted"
+    }
+}
+```
