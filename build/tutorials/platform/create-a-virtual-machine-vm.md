@@ -67,7 +67,7 @@ type ChainVM interface {
     // "transactions" --> [handler for API calls that pertain to transactions]
     //
     // The accounts handler would have endpoint [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]/accounts
-    // The trasnsactions handler would have endpoint [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]/trasnsactions
+    // The transactions handler would have endpoint [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]/transactions
     //
     // If a handler is mapped to by the empty string, it has no extension.
     // It handles traffic at [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]
