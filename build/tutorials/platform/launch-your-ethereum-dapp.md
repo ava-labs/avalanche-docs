@@ -143,11 +143,11 @@ You can supply options on the command line, or use the config file, which can be
 }
 ```
 
-### Using `eth_newFilter` and related calls
+### Using `eth_newFilter` and Related Calls with the Public API
 
-If you're using the [`eth_newFilter`](https://eth.wiki/json-rpc/API#eth_newfilter) and any of the related calls on the public API nodes, they may not behave as you expect. Public API is a single URL that is backed by a number of nodes behind a load balancer. So, if you make an `eth_newFilter` call, subsequent calls to [`eth_getFilterChanges`](https://eth.wiki/json-rpc/API#eth_getfilterchanges) may not end up on the same node as the first call, and you will end up with undefined results.
+If you're using the [`eth_newFilter`](https://eth.wiki/json-rpc/API#eth_newfilter) API method on the public API server, it may not behave as you expect because the public API is actually several nodes behind a load balancer. If you make an `eth_newFilter` call, subsequent calls to [`eth_getFilterChanges`](https://eth.wiki/json-rpc/API#eth_getfilterchanges) may not end up on the same node as the first call, and you will end up with undefined results.
 
-If you need the log filtering functionality it is recommended that you use a websocket connection, which ensures that your client is always talking to the same node. Alternatively, you can use [`eth_getLogs`](https://eth.wiki/json-rpc/API#eth_getlogs) instead.
+If you need the log filtering functionality, you should use a websocket connection, which ensures that your client is always talking to the same node behind the load balancer. Alternatively, you can use [`eth_getLogs`](https://eth.wiki/json-rpc/API#eth_getlogs), or run your own node and make API calls to it.
 
 ## Support
 
