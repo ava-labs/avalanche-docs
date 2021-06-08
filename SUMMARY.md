@@ -79,6 +79,7 @@
     * [Send an Asset on the X-Chain](build/tools/avalanchejs/send-an-asset-on-the-x-chain.md)
     * [API](build/tools/avalanchejs/api.md)
   * [Avash](build/tools/avash.md)
+  * [Public API](build/tools/public-api.md)
   * [Ortelius API](build/tools/ortelius.md)
   * [Postman collection](build/tools/postman-avalanche-collection.md)
 * [References](build/references/README.md)

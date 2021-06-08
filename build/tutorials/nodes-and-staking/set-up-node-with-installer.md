@@ -158,7 +158,7 @@ Note the `active (running)` which indicates the service is running ok. You may n
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
 ```bash
-sudo journalctl -u avalanchego | grep "node's ID"
+sudo journalctl -u avalanchego | grep "NodeID"
 ```
 
 It will produce output like:
