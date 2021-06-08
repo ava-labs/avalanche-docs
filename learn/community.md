@@ -130,6 +130,8 @@
 
 ### Blockchain Infrastructure and Node Services
 
+[**Public API**](../build/tools/public-api.md): public API for accessing Avalanche Platform without having tu run the node yourself.
+
 [**Aleph.im**](https://aleph.im/): a cross-blockchain layer-2 network specifically focused on decentralized applications and their related infrastructure \(storage, computing servers, security\).
 
 [**Allnodes**](https://www.allnodes.com): a non-custodial platform for hosting masternodes and full nodes, as well as full staking services.
