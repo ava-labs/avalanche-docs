@@ -17,6 +17,7 @@
 * [EVMStandardBaseTx](src_common.md#evmstandardbasetx)
 * [EVMStandardTx](src_common.md#evmstandardtx)
 * [EVMStandardUnsignedTx](src_common.md#evmstandardunsignedtx)
+* [GetAtomicTxStatusParams](src_common.md#getatomictxstatusparams)
 * [GetBlockchainIDParams](src_common.md#getblockchainidparams)
 * [GetContainerByIDParams](src_common.md#getcontainerbyidparams)
 * [GetContainerByIDResponse](src_common.md#getcontainerbyidresponse)
@@ -28,6 +29,10 @@
 * [GetIsAcceptedParams](src_common.md#getisacceptedparams)
 * [GetLastAcceptedParams](src_common.md#getlastacceptedparams)
 * [GetLastAcceptedResponse](src_common.md#getlastacceptedresponse)
+* [GetRewardUTXOsParams](src_common.md#getrewardutxosparams)
+* [GetRewardUTXOsResponse](src_common.md#getrewardutxosresponse)
+* [GetStakeParams](src_common.md#getstakeparams)
+* [GetStakeResponse](src_common.md#getstakeresponse)
 * [Index](src_common.md#index)
 * [Input](src_common.md#input)
 * [IsBootstrappedParams](src_common.md#isbootstrappedparams)
@@ -43,6 +48,7 @@
 * [SECP256k1KeyPair](src_common.md#secp256k1keypair)
 * [SigIdx](src_common.md#sigidx)
 * [Signature](src_common.md#signature)
+* [StakedOuts](src_common.md#stakedouts)
 * [StandardAmountInput](src_common.md#standardamountinput)
 * [StandardAmountOutput](src_common.md#standardamountoutput)
 * [StandardAssetAmountDestination](src_common.md#standardassetamountdestination)
@@ -58,6 +64,7 @@
 * [StandardUTXOSet](src_common.md#standardutxoset)
 * [StandardUnsignedTx](src_common.md#standardunsignedtx)
 * [UTXOResponse](src_common.md#utxoresponse)
+* [WordLists](src_common.md#wordlists)
 
 ## References
 
@@ -127,6 +134,12 @@ ___
 
 ___
 
+###  GetAtomicTxStatusParams
+
+• **GetAtomicTxStatusParams**:
+
+___
+
 ###  GetBlockchainIDParams
 
 • **GetBlockchainIDParams**:
@@ -190,6 +203,30 @@ ___
 ###  GetLastAcceptedResponse
 
 • **GetLastAcceptedResponse**:
+
+___
+
+###  GetRewardUTXOsParams
+
+• **GetRewardUTXOsParams**:
+
+___
+
+###  GetRewardUTXOsResponse
+
+• **GetRewardUTXOsResponse**:
+
+___
+
+###  GetStakeParams
+
+• **GetStakeParams**:
+
+___
+
+###  GetStakeResponse
+
+• **GetStakeResponse**:
 
 ___
 
@@ -283,6 +320,12 @@ ___
 
 ___
 
+###  StakedOuts
+
+• **StakedOuts**:
+
+___
+
 ###  StandardAmountInput
 
 • **StandardAmountInput**:
@@ -370,3 +413,9 @@ ___
 ###  UTXOResponse
 
 • **UTXOResponse**:
+
+___
+
+###  WordLists
+
+• **WordLists**:

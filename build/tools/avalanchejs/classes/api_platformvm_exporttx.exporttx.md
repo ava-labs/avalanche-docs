@@ -64,7 +64,7 @@ Class representing an unsigned Export transaction.
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[constructor](api_platformvm_basetx.basetx.md#constructor)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:131](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L131)*
+*Defined in [src/apis/platformvm/exporttx.ts:131](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L131)*
 
 Class representing an unsigned Export transaction.
 
@@ -90,7 +90,7 @@ Name | Type | Default | Description |
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[_typeID](api_platformvm_basetx.basetx.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:28](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L28)*
+*Defined in [src/apis/platformvm/exporttx.ts:28](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L28)*
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[_typeName](api_platformvm_basetx.basetx.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:27](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L27)*
+*Defined in [src/apis/platformvm/exporttx.ts:27](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L27)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[blockchainid](common_transactions.standardbasetx.md#protected-blockchainid)*
 
-*Defined in [src/common/tx.ts:49](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L49)*
+*Defined in [src/common/tx.ts:49](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L49)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **destinationChain**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/apis/platformvm/exporttx.ts:50](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L50)*
+*Defined in [src/apis/platformvm/exporttx.ts:50](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L50)*
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 • **exportOuts**: *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›* = []
 
-*Defined in [src/apis/platformvm/exporttx.ts:52](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L52)*
+*Defined in [src/apis/platformvm/exporttx.ts:52](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L52)*
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[ins](common_transactions.standardbasetx.md#protected-ins)*
 
-*Defined in [src/common/tx.ts:53](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L53)*
+*Defined in [src/common/tx.ts:53](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L53)*
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[memo](common_transactions.standardbasetx.md#protected-memo)*
 
-*Defined in [src/common/tx.ts:54](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L54)*
+*Defined in [src/common/tx.ts:54](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L54)*
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[networkid](common_transactions.standardbasetx.md#protected-networkid)*
 
-*Defined in [src/common/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L48)*
+*Defined in [src/common/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L48)*
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 • **numOuts**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/apis/platformvm/exporttx.ts:51](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L51)*
+*Defined in [src/apis/platformvm/exporttx.ts:51](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L51)*
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[numins](common_transactions.standardbasetx.md#protected-numins)*
 
-*Defined in [src/common/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L52)*
+*Defined in [src/common/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L52)*
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[numouts](common_transactions.standardbasetx.md#protected-numouts)*
 
-*Defined in [src/common/tx.ts:50](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L50)*
+*Defined in [src/common/tx.ts:50](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L50)*
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[outs](common_transactions.standardbasetx.md#protected-outs)*
 
-*Defined in [src/common/tx.ts:51](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L51)*
+*Defined in [src/common/tx.ts:51](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L51)*
 
 ## Methods
 
@@ -214,7 +214,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[clone](api_platformvm_basetx.basetx.md#clone)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:123](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L123)*
+*Defined in [src/apis/platformvm/exporttx.ts:123](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L123)*
 
 **Returns:** *this*
 
@@ -226,7 +226,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[create](api_platformvm_basetx.basetx.md#create)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:129](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L129)*
+*Defined in [src/apis/platformvm/exporttx.ts:129](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L129)*
 
 **Parameters:**
 
@@ -244,7 +244,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[deserialize](api_platformvm_basetx.basetx.md#deserialize)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:38](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L38)*
+*Defined in [src/apis/platformvm/exporttx.ts:38](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L38)*
 
 **Parameters:**
 
@@ -263,7 +263,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[fromBuffer](api_platformvm_basetx.basetx.md#frombuffer)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:92](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L92)*
+*Defined in [src/apis/platformvm/exporttx.ts:92](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L92)*
 
 Takes a [Buffer](https://github.com/feross/buffer) containing an [ExportTx](api_platformvm_exporttx.exporttx.md), parses it, populates the class, and returns the length of the [ExportTx](api_platformvm_exporttx.exporttx.md) in bytes.
 
@@ -288,7 +288,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getBlockchainID](common_transactions.standardbasetx.md#getblockchainid)*
 
-*Defined in [src/common/tx.ts:69](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L69)*
+*Defined in [src/common/tx.ts:69](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L69)*
 
 Returns the Buffer representation of the BlockchainID
 
@@ -302,7 +302,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -314,7 +314,7 @@ ___
 
 ▸ **getExportOutputs**(): *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
 
-*Defined in [src/apis/platformvm/exporttx.ts:64](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L64)*
+*Defined in [src/apis/platformvm/exporttx.ts:64](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L64)*
 
 Returns an array of [TransferableOutput](api_avm_outputs.transferableoutput.md)s in this transaction.
 
@@ -326,7 +326,7 @@ ___
 
 ▸ **getExportTotal**(): *BN*
 
-*Defined in [src/apis/platformvm/exporttx.ts:71](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L71)*
+*Defined in [src/apis/platformvm/exporttx.ts:71](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L71)*
 
 Returns the total exported amount as a [BN](https://github.com/indutny/bn.js/).
 
@@ -342,7 +342,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[getIns](common_transactions.standardbasetx.md#abstract-getins)*
 
-*Defined in [src/apis/platformvm/basetx.ts:53](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/basetx.ts#L53)*
+*Defined in [src/apis/platformvm/basetx.ts:53](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/basetx.ts#L53)*
 
 **Returns:** *Array‹[TransferableInput](api_platformvm_inputs.transferableinput.md)›*
 
@@ -354,7 +354,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getMemo](common_transactions.standardbasetx.md#getmemo)*
 
-*Defined in [src/common/tx.ts:89](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L89)*
+*Defined in [src/common/tx.ts:89](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L89)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the memo
 
@@ -368,7 +368,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[getNetworkID](common_transactions.standardbasetx.md#getnetworkid)*
 
-*Defined in [src/common/tx.ts:64](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L64)*
+*Defined in [src/common/tx.ts:64](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L64)*
 
 Returns the NetworkID as a number
 
@@ -384,7 +384,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[getOuts](common_transactions.standardbasetx.md#abstract-getouts)*
 
-*Defined in [src/apis/platformvm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/basetx.ts#L49)*
+*Defined in [src/apis/platformvm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/basetx.ts#L49)*
 
 **Returns:** *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
 
@@ -396,7 +396,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[getTotalOuts](api_platformvm_basetx.basetx.md#gettotalouts)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:79](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L79)*
+*Defined in [src/apis/platformvm/exporttx.ts:79](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L79)*
 
 **Returns:** *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
 
@@ -408,7 +408,7 @@ ___
 
 *Overrides [BaseTx](api_platformvm_basetx.basetx.md).[getTxType](api_platformvm_basetx.basetx.md#gettxtype)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:57](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L57)*
+*Defined in [src/apis/platformvm/exporttx.ts:57](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L57)*
 
 Returns the id of the [ExportTx](api_platformvm_exporttx.exporttx.md)
 
@@ -422,7 +422,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -436,7 +436,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -452,7 +452,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[select](common_transactions.standardbasetx.md#abstract-select)*
 
-*Defined in [src/apis/platformvm/basetx.ts:144](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/basetx.ts#L144)*
+*Defined in [src/apis/platformvm/basetx.ts:144](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/basetx.ts#L144)*
 
 **Parameters:**
 
@@ -471,7 +471,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[serialize](common_transactions.standardbasetx.md#serialize)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:30](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L30)*
+*Defined in [src/apis/platformvm/exporttx.ts:30](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L30)*
 
 **Parameters:**
 
@@ -491,7 +491,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[sign](common_transactions.standardbasetx.md#abstract-sign)*
 
-*Defined in [src/apis/platformvm/basetx.ts:117](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/basetx.ts#L117)*
+*Defined in [src/apis/platformvm/basetx.ts:117](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/basetx.ts#L117)*
 
 Takes the bytes of an [UnsignedTx](api_avm_transactions.unsignedtx.md) and returns an array of [Credential](common_signature.credential.md)s
 
@@ -514,7 +514,7 @@ ___
 
 *Overrides [StandardBaseTx](common_transactions.standardbasetx.md).[toBuffer](common_transactions.standardbasetx.md#tobuffer)*
 
-*Defined in [src/apis/platformvm/exporttx.ts:110](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/platformvm/exporttx.ts#L110)*
+*Defined in [src/apis/platformvm/exporttx.ts:110](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/platformvm/exporttx.ts#L110)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [ExportTx](api_platformvm_exporttx.exporttx.md).
 
@@ -528,7 +528,7 @@ ___
 
 *Inherited from [StandardBaseTx](common_transactions.standardbasetx.md).[toString](common_transactions.standardbasetx.md#tostring)*
 
-*Defined in [src/common/tx.ts:126](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L126)*
+*Defined in [src/common/tx.ts:126](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L126)*
 
 Returns a base-58 representation of the [StandardBaseTx](common_transactions.standardbasetx.md).
 

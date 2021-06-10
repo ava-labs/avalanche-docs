@@ -46,7 +46,7 @@ Class for representing a UTXOID used in [[TransferableOp]] types
 
 \+ **new UTXOID**(): *[UTXOID](api_avm_operations.utxoid.md)*
 
-*Defined in [src/apis/avm/ops.ts:701](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L701)*
+*Defined in [src/apis/avm/ops.ts:701](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L701)*
 
 Class for representing a UTXOID used in [[TransferableOp]] types
 
@@ -60,7 +60,7 @@ Class for representing a UTXOID used in [[TransferableOp]] types
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeID](common_nbytes.nbytes.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/ops.ts:647](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L647)*
+*Defined in [src/apis/avm/ops.ts:647](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L647)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeName](common_nbytes.nbytes.md#protected-_typename)*
 
-*Defined in [src/apis/avm/ops.ts:646](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L646)*
+*Defined in [src/apis/avm/ops.ts:646](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L646)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bsize](common_nbytes.nbytes.md#protected-bsize)*
 
-*Defined in [src/apis/avm/ops.ts:652](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L652)*
+*Defined in [src/apis/avm/ops.ts:652](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L652)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bytes](common_nbytes.nbytes.md#protected-bytes)*
 
-*Defined in [src/apis/avm/ops.ts:651](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L651)*
+*Defined in [src/apis/avm/ops.ts:651](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L651)*
 
 ## Methods
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[clone](common_nbytes.nbytes.md#abstract-clone)*
 
-*Defined in [src/apis/avm/ops.ts:693](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L693)*
+*Defined in [src/apis/avm/ops.ts:693](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L693)*
 
 **Returns:** *this*
 
@@ -122,7 +122,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[create](common_nbytes.nbytes.md#abstract-create)*
 
-*Defined in [src/apis/avm/ops.ts:699](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L699)*
+*Defined in [src/apis/avm/ops.ts:699](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L699)*
 
 **Parameters:**
 
@@ -142,7 +142,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/common/nbytes.ts:37](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/nbytes.ts#L37)*
+*Defined in [src/common/nbytes.ts:37](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/nbytes.ts#L37)*
 
 **Parameters:**
 
@@ -161,7 +161,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[fromBuffer](common_nbytes.nbytes.md#frombuffer)*
 
-*Defined in [src/common/nbytes.ts:75](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/nbytes.ts#L75)*
+*Defined in [src/common/nbytes.ts:75](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/nbytes.ts#L75)*
 
 Takes a [[Buffer]], verifies its length, and stores it.
 
@@ -184,7 +184,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[fromString](common_nbytes.nbytes.md#fromstring)*
 
-*Defined in [src/apis/avm/ops.ts:674](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L674)*
+*Defined in [src/apis/avm/ops.ts:674](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L674)*
 
 Takes a base-58 string containing an [UTXOID](api_avm_operations.utxoid.md), parses it, populates the class, and returns the length of the UTXOID in bytes.
 
@@ -206,7 +206,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -220,7 +220,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[getSize](common_nbytes.nbytes.md#getsize)*
 
-*Defined in [src/common/nbytes.ts:51](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/nbytes.ts#L51)*
+*Defined in [src/common/nbytes.ts:51](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/nbytes.ts#L51)*
 
 Returns the length of the [Buffer](https://github.com/feross/buffer).
 
@@ -236,7 +236,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -250,7 +250,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -266,7 +266,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/nbytes.ts:29](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/nbytes.ts#L29)*
+*Defined in [src/common/nbytes.ts:29](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/nbytes.ts#L29)*
 
 **Parameters:**
 
@@ -284,7 +284,7 @@ ___
 
 *Inherited from [NBytes](common_nbytes.nbytes.md).[toBuffer](common_nbytes.nbytes.md#tobuffer)*
 
-*Defined in [src/common/nbytes.ts:95](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/nbytes.ts#L95)*
+*Defined in [src/common/nbytes.ts:95](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/nbytes.ts#L95)*
 
 **Returns:** *Buffer*
 
@@ -298,7 +298,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[toString](common_nbytes.nbytes.md#tostring)*
 
-*Defined in [src/apis/avm/ops.ts:663](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L663)*
+*Defined in [src/apis/avm/ops.ts:663](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L663)*
 
 Returns a base-58 representation of the [UTXOID](api_avm_operations.utxoid.md).
 
@@ -310,7 +310,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/apis/avm/ops.ts:657](https://github.com/ava-labs/avalanchejs/blob/9282770/src/apis/avm/ops.ts#L657)*
+*Defined in [src/apis/avm/ops.ts:657](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/ops.ts#L657)*
 
 Returns a function used to sort an array of [UTXOID](api_avm_operations.utxoid.md)s
 

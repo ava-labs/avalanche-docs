@@ -24,7 +24,7 @@ Response data for HTTP requests.
 
 • **data**: *any*
 
-*Defined in [src/common/apibase.ts:21](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/apibase.ts#L21)*
+*Defined in [src/common/apibase.ts:21](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/apibase.ts#L21)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **headers**: *any*
 
-*Defined in [src/common/apibase.ts:23](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/apibase.ts#L23)*
+*Defined in [src/common/apibase.ts:23](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/apibase.ts#L23)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **request**: *ClientRequest | XMLHttpRequest*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/apibase.ts#L29)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **status**: *number*
 
-*Defined in [src/common/apibase.ts:25](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/apibase.ts#L25)*
+*Defined in [src/common/apibase.ts:25](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/apibase.ts#L25)*
 
 ___
 
@@ -56,4 +56,4 @@ ___
 
 • **statusText**: *string*
 
-*Defined in [src/common/apibase.ts:27](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/apibase.ts#L27)*
+*Defined in [src/common/apibase.ts:27](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/apibase.ts#L27)*

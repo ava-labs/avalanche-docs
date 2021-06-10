@@ -24,7 +24,7 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/common/tx.ts:19](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/tx.ts#L19)*
+*Defined in [src/common/tx.ts:19](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/tx.ts#L19)*
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/evmtx.ts:20](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/evmtx.ts#L20)*
+*Defined in [src/common/evmtx.ts:20](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/evmtx.ts#L20)*

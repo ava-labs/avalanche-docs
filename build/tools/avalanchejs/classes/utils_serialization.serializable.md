@@ -64,7 +64,7 @@
 
 • **_codecID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **_typeID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:41](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L41)*
+*Defined in [src/utils/serialization.ts:41](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L41)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **_typeName**: *string* = undefined
 
-*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L40)*
+*Defined in [src/utils/serialization.ts:40](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L40)*
 
 ## Methods
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **deserialize**(`fields`: object, `encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *void*
 
-*Defined in [src/utils/serialization.ts:74](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L74)*
+*Defined in [src/utils/serialization.ts:74](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L74)*
 
 **Parameters:**
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **getCodecID**(): *number*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -117,7 +117,7 @@ ___
 
 ▸ **getTypeID**(): *number*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **getTypeName**(): *string*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **serialize**(`encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *object*
 
-*Defined in [src/utils/serialization.ts:67](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/serialization.ts#L67)*
+*Defined in [src/utils/serialization.ts:67](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L67)*
 
 **Parameters:**
 

@@ -88,6 +88,8 @@
 
   ↳ [EVMFeeError](src_utils.evmfeeerror.md)
 
+  ↳ [InvalidEntropy](src_utils.invalidentropy.md)
+
 ## Index
 
 ### Constructors
@@ -112,7 +114,7 @@
 
 \+ **new AvalancheError**(`m`: string, `code`: string): *[AvalancheError](src_utils.avalancheerror.md)*
 
-*Defined in [src/utils/errors.ts:43](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/errors.ts#L43)*
+*Defined in [src/utils/errors.ts:44](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L44)*
 
 **Parameters:**
 
@@ -129,7 +131,7 @@ Name | Type |
 
 • **errorCode**: *string*
 
-*Defined in [src/utils/errors.ts:43](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/errors.ts#L43)*
+*Defined in [src/utils/errors.ts:44](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L44)*
 
 ___
 
@@ -177,6 +179,6 @@ Defined in node_modules/typescript/lib/lib.es5.d.ts:984
 
 ▸ **getCode**(): *string*
 
-*Defined in [src/utils/errors.ts:50](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/errors.ts#L50)*
+*Defined in [src/utils/errors.ts:51](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L51)*
 
 **Returns:** *string*
