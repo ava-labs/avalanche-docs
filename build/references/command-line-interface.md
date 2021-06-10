@@ -150,13 +150,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `Off`: No logs have this level of logging.
+- `Fatal`: Fatal errors that are not recoverable.
+- `Error`: Errors that the node encounters, these errors were able to be recovered.
+- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `Info`: Useful descriptions of node status updates.
+- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -178,11 +178,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+- `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
+- `--network-id=local` -&gt; Connect to a local test-network.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -254,65 +254,168 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
 
-### C-Chain / Coreth
+### Chain Configs
+
+AvalancheGo can read chain-specific configs from external files. VM interface have 2 fields named `configBytes` and `upgradeBytes`. These are supplied with contents in the `config` and `upgrade` files.
+
+AvalancheGo looks for sub-folders named with chain IDs or chain aliases, under chain config directory. Each sub-folder may include two files named `config` or `upgrade`. Their extensions do not matter as their contents will be handled by their own VMs. However if more than one file is provided with the same name, i.e both `config.json` & `config.txt` in the same sub-folder, AvalancheGo will give error.
+
+AvalancheGo always precedes chain ID over chain alias, similarly primary alias precedes over other aliases. All folder & file names are case sensitive.
+
+`--chain-config-dir` \(string\):
+
+Specifies root folder for chain configs, it defaults to `$HOME/.avalanchego/configs/chains/`. If the flag is not set and this default directory is not available (not exist), it won’t give any; error since configs are optional. However if the flag is set, the pointed folder must exists, otherwise it gives error.
+
+For example assume X-Chain (X) is able to use these configs. In that case a valid config file must be put under default directory `$HOME/.avalanchego/configs/chains/X/config.json`.
+
+If `--chain-config-dir` is specified as `/etc/avalanchego/chains` then valid directories would be:
+`/etc/avalanchego/chains/X/config.json`, `/etc/avalanchego/chains/X/upgrade.json`
+
+#### C-Chain Configs
+
+Currently C-Chain (Coreth) is the only VM uses `configBytes`. In order to specify config for Coreth, a JSON config file must be put under `{chain-config-dir}/C/config.json`.
+
+For example if `chain-config-dir` uses default directory then `config.json` must be in `$HOME/.avalanchego/configs/chains/C/config.json`, with content something like:
+
+```json
+{
+  "rpc-tx-fee-cap": 90,
+  "eth-api-enabled": true,
+  "tx-pool-api-enabled": true,
+  "debug-api-enabled": true,
+  "web3-api-enabled": true
+}
+```
+
+For more information about Coreth config JSON params see [C-Chain / Coreth](#coreth-config).
+
+### C-Chain / Coreth<a id="coreth-config"></a>
 
 `--coreth-config` \(json\):
+(Deprecated)
+
+CLI parameter is deprecated in favor of using [Chain Configs](#chain-configs). JSON format and parameters will be valid.
 
 This allows you to specify a config to be passed into the C-Chain. The default values for this config are:
 
-```cpp
+```json
 {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "rpc-gas-cap": 2500000000,
-    "rpc-tx-fee-cap": 100,
-    "eth-api-enabled": true,
-    "personal-api-enabled": false,
-    "tx-pool-api-enabled": false,
-    "debug-api-enabled": false,
-    "web3-api-enabled": true
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "rpc-gas-cap": 2500000000,
+  "rpc-tx-fee-cap": 100,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": false,
+  "debug-api-enabled": false,
+  "web3-api-enabled": true,
+  "local-txs-enabled": false,
+  "api-max-duration": 0, // Default to no maximum
+  "api-max-blocks-per-request": 0, // Default to no maximum
+  "allow-unfinalized-queries": false
 }
 ```
 
-Note: if a config is specified, all default options are overridden. For example:
-
-```text
-./build/avalanchego --config-file=config.json
-```
-
-config.json:
-
-```cpp
-{
-    "coreth-config": {
-        "snowman-api-enabled": false,
-        "coreth-admin-api-enabled": false,
-        "net-api-enabled": true,
-        "rpc-gas-cap": 2500000000,
-        "rpc-tx-fee-cap": 100,
-        "eth-api-enabled": true,
-        "tx-pool-api-enabled": true,
-        "debug-api-enabled": true,
-        "web3-api-enabled": true
-    }
-}
-```
-
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+~~Note: if a config is specified, all default options are overridden.~~ Now Default options are not overridden altogether. They're overridden only if explicitly specified.
 
 The options specify parameters for Coreth \(the C Chain\) as follows:
 
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
+#### Coreth APIs
+
+`snowman-api-enabled` \(boolean\):
+
+Enables Snowman API. Defaults to false.
+
+`coreth-admin-api-enabled` \(boolean\):
+
+Enables Admin API on Coreth plugin. Defaults to false.
+
+`net-api-enabled` \(boolean\):
+
+Enables `net_*` API. Defaults to true.
+
+#### Coreth API Gas/Price Caps
+
+`rpc-gas-cap` \(int\):
+
+Sets the maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`). Defaults to 2500000000.
+
+`rpc-tx-fee-cap` \(int\):
+
+Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX. Defaults to 100.
+
+#### Eth APIs
+
+`eth-api-enabled` \(boolean\):
+
+Enables `eth_*` API. Defaults to true.
+
+`personal-api-enabled` \(boolean\):
+
+Enables `personal_*` API. Defaults to false.
+
+`tx-pool-api-enabled` \(boolean\):
+
+Enables `txpool_*` API. Defaults to false.
+
+`debug-api-enabled` \(boolean\):
+
+Enables `debug_*` API. Defaults to false.
+
+`web3-api-enabled` \(boolean\):
+
+Enables `web3_*` API. Defaults to true.
+
+#### Eth Settings
+
+`local-txs-enabled` \(boolean\):
+
+Enables local transaction handling. Defaults to false.
+
+`api-max-duration` \(duration\):
+
+Maximum API call duration. If API calls exceed this duration, they will timeout. Expects either strings like `15s`, `15m`; or nanoseconds. Defaults to 0 (no maximum).
+
+`api-max-blocks-per-request` \(int\):
+
+Maximum number of blocks to serve per getLogs request. Defaults to 0 (no maximum).
+
+`allow-unfinalized-queries` \(boolean\):
+
+Allows unfinalized (not accepted) queries. Defaults to false.
+
+#### Continuous Profiler
+
+Continuous Profiler can be enabled and recorded if `continuous-profiler-dir` is explicitly set.
+
+`continuous-profiler-dir` \(string\):
+
+If set to non-empty string creates a continuous profiler under specified directory. Defaults to empty string (not enabled).
+
+`continuous-profiler-frequency` \(duration\):
+
+Frequency of ticks to run continuous profiler if enabled. Expects either strings like `15s`, `15m`; or nanoseconds.Defaults to `15m`.
+
+`continuous-profiler-max-files` \(int\):
+
+Maximum number of files to maintain. Defaults to 5.
+
+#### Keystore Settings
+
+`keystore-directory` \(string\):
+
+KeyStoreDir is the file system folder that contains private keys. The directory can
+be specified as a relative path, in which case it is resolved relative to the
+current directory. If set to empty string uses a temporary `coreth-keystore` dir. Defaults to empty string.
+
+`keystore-external-signer` \(string\):
+
+Specifies an external URI for a clef-type signer. Defaults to empty string (not enabled).
+
+`keystore-insecure-unlock-allowed` \(bool\):
+
+Allows user to unlock accounts in unsafe http environment. Defaults to false.
 
 ### Consensus Parameters
 
@@ -489,4 +592,3 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
-
