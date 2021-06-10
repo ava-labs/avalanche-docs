@@ -20,7 +20,7 @@
 
 ▸ **MaxWeightFormula**(`staked`: BN, `cap`: BN): *BN*
 
-*Defined in [src/utils/helperfunctions.ts:26](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L26)*
+*Defined in [src/utils/helperfunctions.ts:26](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L26)*
 
 **Parameters:**
 
@@ -37,7 +37,7 @@ ___
 
 ▸ **NodeIDStringToBuffer**(`pk`: string): *Buffer*
 
-*Defined in [src/utils/helperfunctions.ts:73](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L73)*
+*Defined in [src/utils/helperfunctions.ts:73](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L73)*
 
 Takes a nodeID string and produces a nodeID [Buffer](https://github.com/feross/buffer).
 
@@ -55,7 +55,7 @@ ___
 
 ▸ **UnixNow**(): *BN*
 
-*Defined in [src/utils/helperfunctions.ts:33](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L33)*
+*Defined in [src/utils/helperfunctions.ts:33](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L33)*
 
 Function providing the current UNIX time using a [BN](https://github.com/indutny/bn.js/).
 
@@ -67,7 +67,7 @@ ___
 
 ▸ **bufferToNodeIDString**(`pk`: Buffer): *string*
 
-*Defined in [src/utils/helperfunctions.ts:64](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L64)*
+*Defined in [src/utils/helperfunctions.ts:64](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L64)*
 
 Takes a nodeID buffer and produces a nodeID string with prefix.
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **bufferToPrivateKeyString**(`pk`: Buffer): *string*
 
-*Defined in [src/utils/helperfunctions.ts:42](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L42)*
+*Defined in [src/utils/helperfunctions.ts:42](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L42)*
 
 Takes a private key buffer and produces a private key string with prefix.
 
@@ -103,7 +103,7 @@ ___
 
 ▸ **getPreferredHRP**(`networkID`: number): *any*
 
-*Defined in [src/utils/helperfunctions.ts:17](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L17)*
+*Defined in [src/utils/helperfunctions.ts:17](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L17)*
 
 **Parameters:**
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **privateKeyStringToBuffer**(`pk`: string): *Buffer*
 
-*Defined in [src/utils/helperfunctions.ts:51](https://github.com/ava-labs/avalanchejs/blob/9282770/src/utils/helperfunctions.ts#L51)*
+*Defined in [src/utils/helperfunctions.ts:51](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/helperfunctions.ts#L51)*
 
 Takes a private key string and produces a private key [Buffer](https://github.com/feross/buffer).
 

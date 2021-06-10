@@ -21,7 +21,7 @@
 
 • **containerID**: *string*
 
-*Defined in [src/common/interfaces.ts:66](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L66)*
+*Defined in [src/common/interfaces.ts:86](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L86)*
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 *Inherited from [BaseIndexParams](common_interfaces.baseindexparams.md).[encoding](common_interfaces.baseindexparams.md#encoding)*
 
-*Defined in [src/common/interfaces.ts:27](https://github.com/ava-labs/avalanchejs/blob/9282770/src/common/interfaces.ts#L27)*
+*Defined in [src/common/interfaces.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L47)*
