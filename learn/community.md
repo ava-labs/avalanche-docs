@@ -116,7 +116,7 @@
 
 [**Avalanche Wallet**](https://wallet.avax.network): a simple, secure, non-custodial wallet for storing Avalanche assets.
 
-[**Coin98**](https://coin98.app/): _\*\*_is a non-custodial wallet used to store, send and receive multi-chain, multi-source digital assets. Coin98 Wallet has both Mobile App and Extension version, which becomes a gateway connecting users to the DeFi world.
+[**Coin98**](https://coin98.app/): \_\*\*\_is a non-custodial wallet used to store, send and receive multi-chain, multi-source digital assets. Coin98 Wallet has both Mobile App and Extension version, which becomes a gateway connecting users to the DeFi world.
 
 [**Ledger Nano S**](https://shop.ledger.com/products/ledger-nano-s)**:** the original hardware wallet made by Ledger. Easily start your crypto journey: buy crypto, secure your assets, and manage them in one single app.
 
@@ -124,7 +124,7 @@
 
 [**Frontier**](https://frontier.xyz/): a chain-agnostic DeFi aggregator that enables users to manage all of their DeFi applications and assets in a safe, simple portal.
 
-[**Yield**](https://www.yield.app/): _\*\*_the app can constantly monitor and evaluate the profitability of strategies across the DeFi ecosystem, including liquidity mining, arbitrage, liquidations, margin & collateralized lending, and other income-producing strategies.
+[**Yield**](https://www.yield.app/): \_\*\*\_the app can constantly monitor and evaluate the profitability of strategies across the DeFi ecosystem, including liquidity mining, arbitrage, liquidations, margin & collateralized lending, and other income-producing strategies.
 
 ## Developer Tools
 
@@ -191,3 +191,4 @@
 [**Quantstamp**](https://quantstamp.com/): blockchain security firm offering audits and consulting for smart contracts, off-chain applications, networking, and front-end interfaces to enhance the security of decentralized applications.
 
 [**Whiteblock**](https://whiteblock.io/)**:** "Genesis Platform" helps developers automate practical performance and security testing for Web3 systems.
+

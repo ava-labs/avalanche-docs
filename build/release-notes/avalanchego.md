@@ -2,6 +2,43 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.8 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.8)\)
+
+**Apricot Phase 2 - Patch 8**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged. The patch includes performance improvements, monitoring improvements, and subnet fixes.
+{% endhint %}
+
+* Changed the AVM's fee definition to enforce fees to be paid in the first genesis transaction. In the `PrimarySubnet`, this doesn't change any behavior. However, this enables other subnets to use the AVM.
+* Added the ability to specify configs to specific chains. This deprecates the `coreth-config` CLI parameter.
+* Added rate limiting to the number of new outbound connections.
+* Introduced a VM wrapper that adds transparent metrics to a chain.
+* Added the ability to enable continuous node profiling.
+* Reduced byte allocations in the networking layer.
+* Added various CLI parameters for tuning gossip parameters.
+* Enabled nodes to run using an ephemeral key pair, rather than one that is read from disk.
+* Removed incorrect spurious warning.
+* Moved CI tests to run in Github Actions rather than running in Travis.
+* Removed special cases from the VM interface.
+
+Added Command Line Arguments:
+
+* `profile-dir`
+* `profile-continuous-enabled`
+* `profile-continuous-freq`
+* `profile-continuous-max-files`
+* `chain-config-dir`
+* `bootstrap-multiput-max-containers-received`
+* `bootstrap-multiput-max-containers-sent`
+* `boostrap-max-time-get-ancestors`
+* `consensus-on-accept-gossip-size`
+* `consensus-accepted-frontier-gossip-size`
+* `meter-vms-enabled`
+* `staking-ephemeral-cert-enabled`
+* `outbound-connection-timeout`
+* `outbound-connection-throttling-rps`
+
 ## v1.4.7 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7)\)
 
 **Apricot Phase 2 - Patch 7**

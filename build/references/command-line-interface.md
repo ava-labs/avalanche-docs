@@ -150,13 +150,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-- `Off`: No logs have this level of logging.
-- `Fatal`: Fatal errors that are not recoverable.
-- `Error`: Errors that the node encounters, these errors were able to be recovered.
-- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-- `Info`: Useful descriptions of node status updates.
-- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+* `Off`: No logs have this level of logging.
+* `Fatal`: Fatal errors that are not recoverable.
+* `Error`: Errors that the node encounters, these errors were able to be recovered.
+* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+* `Info`: Useful descriptions of node status updates.
+* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -178,11 +178,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-- `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-- `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-- `--network-id=local` -&gt; Connect to a local test-network.
-- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
+* `--network-id=local` -&gt; Connect to a local test-network.
+* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -256,11 +256,11 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 ### Chain Configs
 
-Some chains (right now, just the C-Chain) allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
+Some chains \(right now, just the C-Chain\) allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized. For example, the config for the C-Chain should be at: `[chain-config-dir-goes-here]/C/config.json`.
 
-The extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
+The extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions \(e.g. `config.json` and `config.txt`\) in the same sub-directory, AvalancheGo will exit with an error.
 
 For a given chain, AvalancheGo will look first for a config sub-directory whose name is the chain ID. If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias. If it's not found, it looks for a config sub-directory whose name is another alias for the chain. All folder and file names are case sensitive.
 
@@ -272,11 +272,11 @@ Specifies the directory that contains chain configs, as described above. Default
 
 #### C-Chain Configs
 
-Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
+Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
 For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`, with these contents:
 
-```json
+```javascript
 {
   "rpc-tx-fee-cap": 90,
   "eth-api-enabled": true,
@@ -286,17 +286,17 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 }
 ```
 
-For more information about C-Chain configs, see [here](#coreth-config).
+For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
 
-### C-Chain / Coreth<a id="coreth-config"></a>
+### C-Chain / Coreth <a id="coreth-config"></a>
 
 `--coreth-config` \(json\):
 
-(This argument is deprecated in favor of using [Chain Configs](#chain-configs).)
+\(This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs).\)
 
 This allows you to specify a config to be passed into the C-Chain. The default values for this config are:
 
-```json
+```javascript
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
@@ -337,11 +337,11 @@ Enables the `net_*` API. Defaults to true.
 
 `rpc-gas-cap` \(int\):
 
-The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`), measured in nAVAX (GWei). Defaults to 2,500,000,000.
+The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 2,500,000,000.
 
 `rpc-tx-fee-cap` \(int\):
 
-Global transaction fee \(price \* gaslimit\) cap (measured in AVAX) for send-transction variants. Defaults to 100.
+Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
 
 #### Eth APIs
 
@@ -373,24 +373,23 @@ Enables local transaction handling. Defaults to false.
 
 `api-max-duration` \(duration\):
 
-Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 \(no maximum\).
 
 `api-max-blocks-per-request` \(int\):
 
-Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
+Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maximum\).
 
 `allow-unfinalized-queries` \(boolean\):
 
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
 #### Continuous Profiling
 
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones.
-Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
 
 `continuous-profiler-dir` \(string\):
 
-If non-empty, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the empty string (not enabled).
+If non-empty, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the empty string \(not enabled\).
 
 `continuous-profiler-frequency` \(duration\):
 
@@ -408,7 +407,7 @@ The directory that contains private keys. Can be given as a relative path. If em
 
 `keystore-external-signer` \(string\):
 
-Specifies an external URI for a clef-type signer. Defaults to the empty string (not enabled).
+Specifies an external URI for a clef-type signer. Defaults to the empty string \(not enabled\).
 
 `keystore-insecure-unlock-allowed` \(bool\):
 
@@ -589,3 +588,4 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+
