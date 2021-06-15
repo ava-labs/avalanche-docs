@@ -12,7 +12,7 @@ This update is backwards compatible. It is optional, but encouraged.
 
 The patch includes performance improvements, monitoring improvements, and subnet fixes:
 
-* Changed the AVM's fee definition to enforce fees to be paid in the first genesis transaction. In the `PrimarySubnet`, this doesn't change any behavior. However, this enables other subnets to use the AVM.
+* Changed the AVM's fee definition to enforce fees to be paid in the chain's native asset. This doesn't change the X-Chain's  behavior, but it makes other AVM instances usable.
 * Added the ability to specify configs to specific chains. This deprecates the `coreth-config` CLI parameter.
 * Added rate limiting to the number of new outbound connections.
 * Introduced a VM wrapper that adds transparent metrics to a chain.
@@ -652,4 +652,3 @@ Anything that depends on platform.getTxStatus should switch to using the include
 ```
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
-
