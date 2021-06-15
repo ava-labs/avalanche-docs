@@ -315,29 +315,29 @@ This allows you to specify a config to be passed into the C-Chain. The default v
 }
 ```
 
-~~Note: if a config is specified, all default options are overridden.~~ Now Default options are not overridden altogether. They're overridden only if explicitly specified.
+Default values are overridden only if explicitly specified in the config.
 
-The options specify parameters for Coreth \(the C Chain\) as follows:
+The parameters are as follows:
 
 #### Coreth APIs
 
 `snowman-api-enabled` \(boolean\):
 
-Enables Snowman API. Defaults to false.
+Enables the Snowman API. Defaults to false.
 
 `coreth-admin-api-enabled` \(boolean\):
 
-Enables Admin API on Coreth plugin. Defaults to false.
+Enables the Admin API. Defaults to false.
 
 `net-api-enabled` \(boolean\):
 
-Enables `net_*` API. Defaults to true.
+Enables the `net_*` API. Defaults to true.
 
 #### Coreth API Gas/Price Caps
 
 `rpc-gas-cap` \(int\):
 
-Sets the maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`). Defaults to 2500000000.
+The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`), measured in nAVAX (GWei). Defaults to 2,500,000,000.
 
 `rpc-tx-fee-cap` \(int\):
 
@@ -347,23 +347,23 @@ Global transaction fee \(price \* gaslimit\) cap (measured in AVAX) for send-tra
 
 `eth-api-enabled` \(boolean\):
 
-Enables `eth_*` API. Defaults to true.
+Enables the `eth_*` API. Defaults to true.
 
 `personal-api-enabled` \(boolean\):
 
-Enables `personal_*` API. Defaults to false.
+Enables the `personal_*` API. Defaults to false.
 
 `tx-pool-api-enabled` \(boolean\):
 
-Enables `txpool_*` API. Defaults to false.
+Enables the `txpool_*` API. Defaults to false.
 
 `debug-api-enabled` \(boolean\):
 
-Enables `debug_*` API. Defaults to false.
+Enables the `debug_*` API. Defaults to false.
 
 `web3-api-enabled` \(boolean\):
 
-Enables `web3_*` API. Defaults to true.
+Enables the `web3_*` API. Defaults to true.
 
 #### Eth Settings
 
@@ -373,17 +373,17 @@ Enables local transaction handling. Defaults to false.
 
 `api-max-duration` \(duration\):
 
-Maximum API call duration. If API calls exceed this duration, they will timeout. Expects either strings like `15s`, `15m`; or nanoseconds. Defaults to 0 (no maximum).
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
 
 `api-max-blocks-per-request` \(int\):
 
-Maximum number of blocks to serve per getLogs request. Defaults to 0 (no maximum).
+Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
 
 `allow-unfinalized-queries` \(boolean\):
 
-Allows unfinalized (not accepted) queries. Defaults to false.
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
 
-#### Continuous Profiler
+#### Continuous Profiling
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones.
 Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
@@ -404,17 +404,15 @@ Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 `keystore-directory` \(string\):
 
-KeyStoreDir is the file system folder that contains private keys. The directory can
-be specified as a relative path, in which case it is resolved relative to the
-current directory. If set to empty string uses a temporary `coreth-keystore` dir. Defaults to empty string.
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
 
 `keystore-external-signer` \(string\):
 
-Specifies an external URI for a clef-type signer. Defaults to empty string (not enabled).
+Specifies an external URI for a clef-type signer. Defaults to the empty string (not enabled).
 
 `keystore-insecure-unlock-allowed` \(bool\):
 
-Allows user to unlock accounts in unsafe http environment. Defaults to false.
+If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
 ### Consensus Parameters
 
