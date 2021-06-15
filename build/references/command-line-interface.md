@@ -256,26 +256,25 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 ### Chain Configs
 
-AvalancheGo can read chain-specific configs from external files. VM interface have 2 fields named `configBytes` and `upgradeBytes`. These are supplied with contents in the `config` and `upgrade` files.
+Some chains (right now, just the C-Chain) allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
-AvalancheGo looks for sub-folders named with chain IDs or chain aliases, under chain config directory. Each sub-folder may include two files named `config` or `upgrade`. Their extensions do not matter as their contents will be handled by their own VMs. However if more than one file is provided with the same name, i.e both `config.json` & `config.txt` in the same sub-folder, AvalancheGo will exit with an error.
+AvalancheGo looks for these files in the directory specified by `--chain-config-dir`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized. For example, the config for the C-Chain should be at: `[chain-config-dir-goes-here]/C/config.json`.
 
-AvalancheGo always prefers chain ID over chain alias, similarly primary aliases are given preference over other aliases. All folder & file names are case sensitive.
+The extension that these files should have, and the contents of thse files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
+
+For a given chain, AvalancheGo will look first for a config sub-directory whose name is the chain ID. If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias. If it's not found, it looks for a config sub-directory whose name is another alias for the chain. All folder and file names are case sensitive.
+
+It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used.
 
 `--chain-config-dir` \(string\):
 
-Specifies root folder for chain configs, it defaults to `$HOME/.avalanchego/configs/chains/`. If the flag is not set and this default directory does not exist, it will not exit with an error since configs are optional. However if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
-
-For example, to use these a config json for C-Chain (Coreth), valid config file must be put under default directory: `$HOME/.avalanchego/configs/chains/X/config.json`.
-
-If `--chain-config-dir` is specified as `/etc/avalanchego/chains` then valid config and upgrade file paths would be:
-`/etc/avalanchego/chains/X/config.json`, `/etc/avalanchego/chains/X/upgrade.json`
+Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
 
 #### C-Chain Configs
 
-Currently C-Chain (Coreth) is the only VM uses `configBytes`. In order to specify config for Coreth, a JSON config file must be put under `{chain-config-dir}/C/config.json`.
+Currently, the C-Chain is the only chain that supports custom configurations. In order to specify config for the C-Chain, a JSON config file should be put at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
 
-For example if `chain-config-dir` uses default directory then `config.json` must be in `$HOME/.avalanchego/configs/chains/C/config.json`, with content something like:
+For example if `chain-config-dir` has the default value, then `config.json` can be at `$HOME/.avalanchego/configs/chains/C/config.json`, with content:
 
 ```json
 {
@@ -287,14 +286,13 @@ For example if `chain-config-dir` uses default directory then `config.json` must
 }
 ```
 
-For more information about Coreth config JSON params see [C-Chain / Coreth](#coreth-config).
+For more information about C-Chain configs, see [here](#coreth-config).
 
 ### C-Chain / Coreth<a id="coreth-config"></a>
 
 `--coreth-config` \(json\):
-(Deprecated)
 
-CLI parameter is deprecated in favor of using [Chain Configs](#chain-configs). JSON format and parameters will be valid.
+(This argument is deprecated in favor of using [Chain Configs](#chain-configs).)
 
 This allows you to specify a config to be passed into the C-Chain. The default values for this config are:
 
