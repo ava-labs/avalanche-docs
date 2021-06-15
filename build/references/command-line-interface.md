@@ -341,7 +341,7 @@ Sets the maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`). 
 
 `rpc-tx-fee-cap` \(int\):
 
-Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. Units given in AVAX. Defaults to 100.
+Global transaction fee \(price \* gaslimit\) cap (measured in AVAX) for send-transction variants. Defaults to 100.
 
 #### Eth APIs
 
@@ -385,19 +385,20 @@ Allows unfinalized (not accepted) queries. Defaults to false.
 
 #### Continuous Profiler
 
-Continuous Profiler can be enabled and recorded if `continuous-profiler-dir` is explicitly set.
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones.
+Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
 
 `continuous-profiler-dir` \(string\):
 
-If set to non-empty string creates a continuous profiler under specified directory. Defaults to empty string (not enabled).
+If non-empty, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the empty string (not enabled).
 
 `continuous-profiler-frequency` \(duration\):
 
-Frequency of ticks to run continuous profiler if enabled. Expects either strings like `15s`, `15m`; or nanoseconds. Defaults to `15m`.
+How often a new CPU/memory profile is created. Defaults to `15m`.
 
 `continuous-profiler-max-files` \(int\):
 
-Maximum number of files to maintain. Defaults to 5.
+Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 #### Keystore Settings
 
