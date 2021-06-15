@@ -272,7 +272,7 @@ Specifies the directory that contains chain configs, as described above. Default
 
 #### C-Chain Configs
 
-Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be put at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
+Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
 
 For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`, with these contents:
 
