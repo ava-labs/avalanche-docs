@@ -329,7 +329,7 @@ The OpCode used by `PullQuery` messages is: `0x07`.
 
 ### What PullQuery contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 
 **`SubnetID`** defines which subnet this message is destined for.
 
