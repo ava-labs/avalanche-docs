@@ -258,17 +258,17 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 AvalancheGo can read chain-specific configs from external files. VM interface have 2 fields named `configBytes` and `upgradeBytes`. These are supplied with contents in the `config` and `upgrade` files.
 
-AvalancheGo looks for sub-folders named with chain IDs or chain aliases, under chain config directory. Each sub-folder may include two files named `config` or `upgrade`. Their extensions do not matter as their contents will be handled by their own VMs. However if more than one file is provided with the same name, i.e both `config.json` & `config.txt` in the same sub-folder, AvalancheGo will give error.
+AvalancheGo looks for sub-folders named with chain IDs or chain aliases, under chain config directory. Each sub-folder may include two files named `config` or `upgrade`. Their extensions do not matter as their contents will be handled by their own VMs. However if more than one file is provided with the same name, i.e both `config.json` & `config.txt` in the same sub-folder, AvalancheGo will exit with an error.
 
-AvalancheGo always precedes chain ID over chain alias, similarly primary alias precedes over other aliases. All folder & file names are case sensitive.
+AvalancheGo always prefers chain ID over chain alias, similarly primary aliases are given preference over other aliases. All folder & file names are case sensitive.
 
 `--chain-config-dir` \(string\):
 
-Specifies root folder for chain configs, it defaults to `$HOME/.avalanchego/configs/chains/`. If the flag is not set and this default directory is not available (not exist), it won’t give any; error since configs are optional. However if the flag is set, the pointed folder must exists, otherwise it gives error.
+Specifies root folder for chain configs, it defaults to `$HOME/.avalanchego/configs/chains/`. If the flag is not set and this default directory does not exist, it will not exit with an error since configs are optional. However if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
 
-For example assume X-Chain (X) is able to use these configs. In that case a valid config file must be put under default directory `$HOME/.avalanchego/configs/chains/X/config.json`.
+For example, to use these a config json for C-Chain (Coreth), valid config file must be put under default directory: `$HOME/.avalanchego/configs/chains/X/config.json`.
 
-If `--chain-config-dir` is specified as `/etc/avalanchego/chains` then valid directories would be:
+If `--chain-config-dir` is specified as `/etc/avalanchego/chains` then valid config and upgrade file paths would be:
 `/etc/avalanchego/chains/X/config.json`, `/etc/avalanchego/chains/X/upgrade.json`
 
 #### C-Chain Configs
@@ -343,7 +343,7 @@ Sets the maximum gas to be consumed by an RPC Call (used in `eth_estimateGas`). 
 
 `rpc-tx-fee-cap` \(int\):
 
-Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX. Defaults to 100.
+Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. Units given in AVAX. Defaults to 100.
 
 #### Eth APIs
 
@@ -395,7 +395,7 @@ If set to non-empty string creates a continuous profiler under specified directo
 
 `continuous-profiler-frequency` \(duration\):
 
-Frequency of ticks to run continuous profiler if enabled. Expects either strings like `15s`, `15m`; or nanoseconds.Defaults to `15m`.
+Frequency of ticks to run continuous profiler if enabled. Expects either strings like `15s`, `15m`; or nanoseconds. Defaults to `15m`.
 
 `continuous-profiler-max-files` \(int\):
 
