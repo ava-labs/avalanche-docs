@@ -770,7 +770,7 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7haclsz5r"
+        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7hapvdyht"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
