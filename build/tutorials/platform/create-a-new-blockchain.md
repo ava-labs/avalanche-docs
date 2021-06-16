@@ -22,13 +22,11 @@ Every blockchain is validated by a [subnet](../../../learn/platform-overview/#su
 
 The subnet needs validators in it to, well, validate blockchains.
 
-Make sure the subnet that will validate your blockchain has more than `snow-sample-size` validators in it. \(Recall that `snow-sample-size` is one of the [command-line arguments](../../references/command-line-interface.md) when starting a node. Its default value is 20.\)
-
-{% page-ref page="../nodes-and-staking/add-a-validator.md" %}
+{% page-ref page="../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator" %}
 
 ### Create the Genesis Data <a id="create-the-genesis-data"></a>
 
-Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow the creation of new instances.\)
+Each blockchain has some genesis state when it’s created. AVM and EVM has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some other VMs, like the Platform VM, because we disallow the creation of new instances.\)
 
 The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.buildGenesis) should look like this:
 
@@ -279,7 +277,7 @@ curl -X POST --data '{
 
 If you created a new subnet, as in this example, then `platform.getBlockchainStatus` response may return `Created`. This means blockchain created, but the subnet is not validating it. You need to start your `avalanchego` node with flag `--whitelisted-subnets {SubnetID}` in order to start validating. For this example the flag is: `--whitelisted-subnets KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`. After starting node, the [`platform.getBlockchainStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchainstatus) request should respond with `"status": "Validating"`
 
-More information can be found in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial.
+More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
 ### Interact With the New Blockchain <a id="interact-with-the-new-blockchain"></a>
 
