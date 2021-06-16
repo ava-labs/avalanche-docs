@@ -14,7 +14,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Endpoints
 
-Each chain has one or more index. To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index. To see if an X-Chain block is accepted, for example, send an API to the C-Chain block index.
+Each chain has one or more index. To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index. To see if an X-Chain block is accepted, for example, send an API to the X-Chain block index.
 
 ### X-Chain Transactions
 
