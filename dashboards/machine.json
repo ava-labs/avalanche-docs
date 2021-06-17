@@ -17,7 +17,15 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [
+        "Avalanche"
+      ],
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
       "alert": {
