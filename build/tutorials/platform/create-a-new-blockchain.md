@@ -22,7 +22,7 @@ Every blockchain is validated by a [subnet](../../../learn/platform-overview/#su
 
 The subnet needs validators in it to, well, validate blockchains.
 
-{% page-ref page="../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator" %}
+{% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
 ### Create the Genesis Data <a id="create-the-genesis-data"></a>
 
