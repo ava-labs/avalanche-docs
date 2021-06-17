@@ -447,7 +447,7 @@
       "pluginVersion": "8.0.2",
       "targets": [
         {
-          "expr": "avalanche_P_vm_total_staked{job=\"avalanchego\"}",
+          "expr": "avalanche_P_vm_total_staked{job=\"avalanchego\"}/1000000000",
           "interval": "",
           "legendFormat": "AVAX",
           "refId": "A"
