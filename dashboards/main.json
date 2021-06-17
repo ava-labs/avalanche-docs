@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 7,
+  "id": 26,
   "links": [
     {
       "icon": "external link",
@@ -35,7 +35,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "links": [
             {
               "title": "Machine details",
@@ -43,6 +42,8 @@
             }
           ],
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -83,7 +84,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "(1 - avg(irate(node_cpu_seconds_total{job=~\"avalanchego-machine\", mode=\"idle\"}[1m])) by (instance)) * 100",
@@ -103,7 +104,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "links": [
             {
               "title": "Detail view",
@@ -111,6 +111,8 @@
             }
           ],
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -152,7 +154,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "max(((node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"} - node_filesystem_free_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) / node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) * 100) by (instance)",
@@ -174,7 +176,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "max": 4,
           "min": 0,
@@ -218,7 +219,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_health_checks_failing{job=\"avalanchego\"}",
@@ -238,7 +239,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "links": [
             {
               "title": "Networking Dashboard",
@@ -285,7 +285,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_avg_network_latency/1000000000",
@@ -304,12 +304,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Number of accepted and rejected vertices on the X chain in the last minute",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -342,7 +336,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -414,7 +408,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -451,7 +444,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_P_vm_total_staked{job=\"avalanchego\"}",
@@ -471,8 +464,9 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -508,7 +502,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_P_vm_percent_connected{job=\"avalanchego\"}",
@@ -529,18 +523,12 @@
       "description": "Number of peers node is connected to",
       "fieldConfig": {
         "defaults": {
-          "color": {},
-          "custom": {},
           "links": [
             {
               "title": "Networking Dashboard",
               "url": "/d/mdn45aXzGi/avalanche-general?orgId=1&refresh=10s"
             }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": []
-          }
+          ]
         },
         "overrides": []
       },
@@ -570,7 +558,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -634,12 +622,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Number of accepted and rejected blocks on the P chain in the last minute.",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -672,7 +654,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -744,7 +726,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "max": 100,
           "thresholds": {
@@ -779,7 +760,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))",
@@ -813,7 +794,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "max": 100,
           "thresholds": {
@@ -856,7 +836,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}",
@@ -890,7 +870,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -924,7 +903,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "avalanche_X_benchlist_benched_num{job=\"avalanchego\"}",
@@ -958,7 +937,6 @@
           "color": {
             "mode": "continuous-RdYlGr"
           },
-          "custom": {},
           "mappings": [],
           "max": 1,
           "min": 0.8,
@@ -1003,7 +981,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "targets": [
         {
           "expr": "(increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
@@ -1038,12 +1016,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Number of accepted and rejected blocks on the C chain in the last minute.",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1076,7 +1048,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1147,12 +1119,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each database operation is taking on average",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1183,7 +1149,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1193,55 +1159,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_db_put_latency_sum{job=\"avalanchego\"}/avalanche_db_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "avalanche_db_get_latency_sum{job=\"avalanchego\"}/avalanche_db_get_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "avalanche_db_delete_latency_sum{job=\"avalanchego\"}/avalanche_db_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "avalanche_db_has_latency_sum{job=\"avalanchego\"}/avalanche_db_has_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "avalanche_db_compact_size_sum{job=\"avalanchego\"}/avalanche_db_compact_size_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "avalanche_db_batch_put_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "avalanche_db_batch_delete_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "avalanche_db_batch_reset_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_reset_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "avalanche_db_batch_replay_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_replay_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -1267,6 +1242,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1167",
           "format": "ns",
           "label": null,
           "logBase": 1,
@@ -1275,6 +1251,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1168",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1289,8 +1266,8 @@
       }
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 27,
+  "refresh": "",
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "Avalanche"
@@ -1305,6 +1282,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Avalanche Main Dashboard",
-  "uid": "dzQKmJ8Mz",
-  "version": 24
+  "uid": "Kdj2XTR7z",
+  "version": 3
 }

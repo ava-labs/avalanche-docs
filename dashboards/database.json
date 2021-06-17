@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 28,
   "links": [],
   "panels": [
     {
@@ -25,12 +25,6 @@
       "dashes": false,
       "datasource": null,
       "description": "Amount read in the last minute",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -57,7 +51,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -122,12 +116,6 @@
       "dashes": false,
       "datasource": null,
       "description": "Amount written in the last minute",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -154,7 +142,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -218,12 +206,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how many of each database operation is performed each second across all chains",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -254,7 +236,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -264,25 +246,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(avalanche_db_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_db_get_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_get_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_db_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_delete_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_db_has_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_has_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
@@ -294,25 +280,29 @@
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_db_batch_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_put_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_db_batch_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_delete_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_db_batch_reset_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_reset_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_db_batch_replay_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_db_batch_replay_count{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -338,6 +328,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:331",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -346,6 +337,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:332",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -366,12 +358,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each database operation is taking on average",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -402,7 +388,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -412,55 +398,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_db_put_latency_sum{job=\"avalanchego\"}/avalanche_db_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "avalanche_db_get_latency_sum{job=\"avalanchego\"}/avalanche_db_get_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "avalanche_db_delete_latency_sum{job=\"avalanchego\"}/avalanche_db_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "avalanche_db_has_latency_sum{job=\"avalanchego\"}/avalanche_db_has_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "avalanche_db_compact_size_sum{job=\"avalanchego\"}/avalanche_db_compact_size_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "avalanche_db_batch_put_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "avalanche_db_batch_delete_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "avalanche_db_batch_reset_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_reset_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "avalanche_db_batch_replay_latency_sum{job=\"avalanchego\"}/avalanche_db_batch_replay_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -486,6 +481,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:495",
           "format": "ns",
           "label": null,
           "logBase": 1,
@@ -494,6 +490,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:496",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -514,12 +511,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how many of each database operation is performed each second on X-Chain",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -550,7 +541,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -560,55 +551,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(avalanche_X_db_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_X_db_get_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_X_db_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_X_db_has_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_X_db_compact_size_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_X_db_batch_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_X_db_batch_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_X_db_batch_reset_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_X_db_batch_replay_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_X_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -634,6 +634,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:577",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -642,6 +643,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:578",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -662,12 +664,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each database operation is taking on average on X-Chain",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -698,7 +694,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -708,55 +704,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_X_db_put_latency_sum{job=\"avalanchego\"}/avalanche_X_db_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "avalanche_X_db_get_latency_sum{job=\"avalanchego\"}/avalanche_X_db_get_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "avalanche_X_db_delete_latency_sum{job=\"avalanchego\"}/avalanche_X_db_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "avalanche_X_db_has_latency_sum{job=\"avalanchego\"}/avalanche_X_db_has_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "avalanche_X_db_compact_size_sum{job=\"avalanchego\"}/avalanche_X_db_compact_size_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "avalanche_X_db_batch_put_latency_sum{job=\"avalanchego\"}/avalanche_X_db_batch_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "avalanche_X_db_batch_delete_latency_sum{job=\"avalanchego\"}/avalanche_X_db_batch_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "avalanche_X_db_batch_reset_latency_sum{job=\"avalanchego\"}/avalanche_X_db_batch_reset_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "avalanche_X_db_batch_replay_latency_sum{job=\"avalanchego\"}/avalanche_X_db_batch_replay_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_X_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_X_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -782,6 +787,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:661",
           "format": "ns",
           "label": null,
           "logBase": 1,
@@ -790,6 +796,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:662",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -810,12 +817,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how many of each database operation is performed each second on P-Chain",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -846,7 +847,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -856,55 +857,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(avalanche_P_db_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_P_db_get_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_P_db_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_P_db_has_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_P_db_compact_size_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_P_db_batch_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_P_db_batch_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_P_db_batch_reset_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_P_db_batch_replay_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -930,6 +940,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:982",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -938,6 +949,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:983",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -958,12 +970,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each database operation is taking on average on P-Chain",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -994,7 +1000,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1004,55 +1010,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_P_db_put_latency_sum{job=\"avalanchego\"}/avalanche_P_db_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "avalanche_P_db_get_latency_sum{job=\"avalanchego\"}/avalanche_P_db_get_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "avalanche_P_db_delete_latency_sum{job=\"avalanchego\"}/avalanche_P_db_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "avalanche_P_db_has_latency_sum{job=\"avalanchego\"}/avalanche_P_db_has_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "avalanche_P_db_compact_size_sum{job=\"avalanchego\"}/avalanche_P_db_compact_size_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "avalanche_P_db_batch_put_latency_sum{job=\"avalanchego\"}/avalanche_P_db_batch_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "avalanche_P_db_batch_delete_latency_sum{job=\"avalanchego\"}/avalanche_P_db_batch_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "avalanche_P_db_batch_reset_latency_sum{job=\"avalanchego\"}/avalanche_P_db_batch_reset_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "avalanche_P_db_batch_replay_latency_sum{job=\"avalanchego\"}/avalanche_P_db_batch_replay_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_P_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_P_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -1078,6 +1093,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:740",
           "format": "ns",
           "label": null,
           "logBase": 1,
@@ -1086,6 +1102,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:741",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1106,12 +1123,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how many of each database operation is performed each second across all chains",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1142,7 +1153,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1152,55 +1163,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(avalanche_C_db_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_C_db_get_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_C_db_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_C_db_has_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_C_db_compact_size_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_C_db_batch_put_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_C_db_batch_delete_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_C_db_batch_reset_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_C_db_batch_replay_latency_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_C_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -1226,6 +1246,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:898",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1234,6 +1255,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:899",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1254,12 +1276,6 @@
       "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each database operation is taking on average on C-Chain",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1290,7 +1306,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.5",
+      "pluginVersion": "8.0.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1300,55 +1316,64 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avalanche_C_db_put_latency_sum{job=\"avalanchego\"}/avalanche_C_db_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "avalanche_C_db_get_latency_sum{job=\"avalanchego\"}/avalanche_C_db_get_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_get_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "avalanche_C_db_delete_latency_sum{job=\"avalanchego\"}/avalanche_C_db_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "delete",
           "refId": "C"
         },
         {
-          "expr": "avalanche_C_db_has_latency_sum{job=\"avalanchego\"}/avalanche_C_db_has_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_has_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_has_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "has",
           "refId": "D"
         },
         {
-          "expr": "avalanche_C_db_compact_size_sum{job=\"avalanchego\"}/avalanche_C_db_compact_size_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_compact_size_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_compact_size_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "compact",
           "refId": "E"
         },
         {
-          "expr": "avalanche_C_db_batch_put_latency_sum{job=\"avalanchego\"}/avalanche_C_db_batch_put_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_put_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch put",
           "refId": "F"
         },
         {
-          "expr": "avalanche_C_db_batch_delete_latency_sum{job=\"avalanchego\"}/avalanche_C_db_batch_delete_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_delete_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_delete_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch delete",
           "refId": "G"
         },
         {
-          "expr": "avalanche_C_db_batch_reset_latency_sum{job=\"avalanchego\"}/avalanche_C_db_batch_reset_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_reset_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_reset_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch reset",
           "refId": "H"
         },
         {
-          "expr": "avalanche_C_db_batch_replay_latency_sum{job=\"avalanchego\"}/avalanche_C_db_batch_replay_latency_count{job=\"avalanchego\"}",
+          "exemplar": true,
+          "expr": "increase(avalanche_C_db_batch_replay_sum{job=\"avalanchego\"}[5m])/increase(avalanche_C_db_batch_replay_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "batch replay",
           "refId": "I"
@@ -1374,6 +1399,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:819",
           "format": "ns",
           "label": null,
           "logBase": 1,
@@ -1382,6 +1408,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:820",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1396,8 +1423,8 @@
       }
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 27,
+  "refresh": "",
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [
     "Avalanche"
@@ -1425,6 +1452,6 @@
   },
   "timezone": "",
   "title": "Database",
-  "uid": "59YBoqOMk",
-  "version": 6
+  "uid": "TgETuTgnk",
+  "version": 9
 }
