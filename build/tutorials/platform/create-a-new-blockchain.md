@@ -26,7 +26,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 ### Create the Genesis Data <a id="create-the-genesis-data"></a>
 
-Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. The AVM and Coreth have a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. 
+Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. The AVM and Coreth have a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state.
 
 The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.buildGenesis) should look like this:
 
@@ -80,7 +80,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../learn/platform-overview/transaction-fees.md#transaction-fees)
+To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` \(named `myFixedCapAsset`.\) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../learn/platform-overview/transaction-fees.md#transaction-fees)
 
 Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`:
 
@@ -267,7 +267,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -277,7 +277,7 @@ curl -X POST --data '{
 }
 ```
 
-If it responds `"Validating"`, the node is validating the given chain. If it responds `"Created"`, then the chain exists but this node is not validating it. Note that in order to validate a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
+If it responds `"Validating"`, the node is validating the given chain. If it responds `"Created"`, then the chain exists but this node is not validating it. Note that in order to validate a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` \(e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`\) as well as add the node to the subnet's validator set.
 
 More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
@@ -285,9 +285,9 @@ More information can be found in the [Adding a Subnet Validator](../nodes-and-st
 
 You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are some small differences:
 
-- The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
-- Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
-- Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
+* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
+* Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
+* Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
 
 In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000,000 units of the asset with alias `asset1`. Let’s verify that:
 
@@ -303,7 +303,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -333,7 +333,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -362,7 +362,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -386,7 +386,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -410,7 +410,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -426,7 +426,7 @@ curl -X POST --data '{
 }
 ```
 
-As mentioned above, transaction fees are paid with `asset1`. We can confirm 1,000,000 unit (default) is used as fee in our transaction. Let's check senders balance after the transaction.
+As mentioned above, transaction fees are paid with `asset1`. We can confirm 1,000,000 unit \(default\) is used as fee in our transaction. Let's check senders balance after the transaction.
 
 ```cpp
 curl -X POST --data '{
@@ -440,7 +440,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -482,7 +482,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -506,7 +506,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -526,3 +526,4 @@ curl -X POST --data '{
 ```
 
 As we can see, 1 unit of `asset2` was minted. Address `AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
+

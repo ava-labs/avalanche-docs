@@ -7,7 +7,7 @@
 **Apricot Phase 2 - Patch 8**
 
 {% hint style="warning" %}
-This update is backwards compatible. It is optional, but encouraged. 
+This update is backwards compatible. It is optional, but encouraged.
 {% endhint %}
 
 The patch includes performance improvements, monitoring improvements, and subnet fixes:
@@ -23,22 +23,23 @@ The patch includes performance improvements, monitoring improvements, and subnet
 * Removed incorrect spurious warning.
 * Moved CI tests to run in Github Actions rather than running in Travis.
 * Removed special cases from the VM interface.
-  
+
 **Added Command Line Arguments:**
-- `profile-dir`
-- `profile-continuous-enabled`
-- `profile-continuous-freq`
-- `profile-continuous-max-files`
-- `chain-config-dir`
-- `bootstrap-multiput-max-containers-received`
-- `bootstrap-multiput-max-containers-sent`
-- `boostrap-max-time-get-ancestors`
-- `consensus-on-accept-gossip-size`
-- `consensus-accepted-frontier-gossip-size`
-- `meter-vms-enabled`
-- `staking-ephemeral-cert-enabled`
-- `outbound-connection-timeout`
-- `outbound-connection-throttling-rps`
+
+* `profile-dir`
+* `profile-continuous-enabled`
+* `profile-continuous-freq`
+* `profile-continuous-max-files`
+* `chain-config-dir`
+* `bootstrap-multiput-max-containers-received`
+* `bootstrap-multiput-max-containers-sent`
+* `boostrap-max-time-get-ancestors`
+* `consensus-on-accept-gossip-size`
+* `consensus-accepted-frontier-gossip-size`
+* `meter-vms-enabled`
+* `staking-ephemeral-cert-enabled`
+* `outbound-connection-timeout`
+* `outbound-connection-throttling-rps`
 
 ## v1.4.7 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7)\)
 
@@ -652,3 +653,4 @@ Anything that depends on platform.getTxStatus should switch to using the include
 ```
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+

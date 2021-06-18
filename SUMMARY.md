@@ -12,7 +12,7 @@
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
 * [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
 * [Forum](https://forum.avax.network)
-* [Community](learn/community.md)
+* [Ecosystem](https://www.avax.network/ecosystem)
 
 ## Build
 

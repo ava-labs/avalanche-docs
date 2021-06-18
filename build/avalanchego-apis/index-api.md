@@ -304,3 +304,4 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
   "id":1
 }
 ```
+
