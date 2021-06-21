@@ -2,7 +2,9 @@
 
 ## Overview
 
-The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions.
+The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions. There is also a [Rosetta](https://www.rosetta-api.org/) implementation for Avalanche, which can be even easier to integrate.
+
+## Direct integration with C-Chain
 
 ### Running Avalanche node
 
@@ -35,6 +37,12 @@ You can supply options on the command line, or use the config file, which can be
 Interacting with the C-Chain is identical to interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
 
 Please note that `personal_` namespace is turned off by default. To turn it on, you need to pass the appropriate command line switch to your node, like in the above config example.
+
+## Integration using Rosetta
+
+[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with Ethereum-compatible blockchains easier by presenting the same set of APIs for every network.
+
+You can find the Rosetta server implementation for Avalanche C-Chain [here](https://github.com/ava-labs/avalanche-rosetta), all you need to do is install and run the server with proper configuration. You don't necessarily need to even run you own node, and can instead rely on our [Public API](https://docs.avax.network/build/tools/public-api) to provide network access. 
 
 ## Constructing transactions
 
