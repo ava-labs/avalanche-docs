@@ -725,7 +725,7 @@ curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6
             "hash": "0x00000217bc17e7e3187efae9248523f4fe2bc90e029e3ba13ddd8ff69607c705",
             "createdAt": "2021-03-28T07:42:30.471607Z",
             "nonce": 0,
-            "gasPrice": "470000000000",
+            "gasPrice": "225000000000",
             "gasLimit": 21000,
             "blockGasUsed": 63000,
             "blockGasLimit": 8000000,
