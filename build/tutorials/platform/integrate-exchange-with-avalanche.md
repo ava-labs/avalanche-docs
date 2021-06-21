@@ -2,9 +2,11 @@
 
 ## Overview
 
-The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions. There is also a [Rosetta](https://www.rosetta-api.org/) implementation for Avalanche, which can be even easier to integrate.
+The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions.
 
-## Direct integration with C-Chain
+Additionally, Ava Labs maintains an implementation of the [Rosetta API](https://www.rosetta-api.org/) for the C-Chain called [avalanche-rosetta](https://github.com/ava-labs/avalanche-rosetta). You can learn more about this standardized integration path on the attached Rosetta API website.
+
+## Integration using EVM Endpoints
 
 ### Running Avalanche node
 
@@ -40,7 +42,7 @@ Please note that `personal_` namespace is turned off by default. To turn it on, 
 
 ## Integration using Rosetta
 
-[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with different blockchain networks easier by presenting the same set of APIs for every network. The Rosetta API is made up of 2 core components, the Data API and the Construction API. Together, these APIs allow for anyone to read and write to blockchains in a standard format over a standard communication protocol. The specifications for these APIs can be found in the rosetta-specifications repository.
+[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with different blockchain networks easier by presenting the same set of APIs for every network. The Rosetta API is made up of 2 core components, the [Data API](https://www.rosetta-api.org/docs/data_api_introduction.html) and the [Construction API](https://www.rosetta-api.org/docs/construction_api_introduction.html). Together, these APIs allow for anyone to read and write to blockchains in a standard format over a standard communication protocol. The specifications for these APIs can be found in the [rosetta-specifications](https://github.com/coinbase/rosetta-specifications) repository.
 
 You can find the Rosetta server implementation for Avalanche C-Chain [here](https://github.com/ava-labs/avalanche-rosetta), all you need to do is install and run the server with proper configuration. It comes with a Dockerfile that packages both the server and the Avalanche client. Detailed instructions can be found in the linked repository.
 
