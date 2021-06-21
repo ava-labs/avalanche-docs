@@ -98,19 +98,19 @@ curl -X POST --data '{
                     "fixedCap" : [
                         {
                             "amount":100000000,
-                            "address": "8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ"
+                            "address": "avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z"
                         },
                         {
                             "amount":100000000,
-                            "address": "AgVkHvvDShLumJrzXzkwuHa7rYpewj9Kg"
+                            "address": "avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl"
                         },
                         {
                             "amount":5000000,
-                            "address": "AwBDGsUwNdXgVc8XG2E8A8dL3bkoVbkL9"
+                            "address": "avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
                         },
                         {
                             "amount":5000000,
-                            "address": "AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8"
+                            "address": "avax1hzrwdlpum8xmt3pgstejx4sz86ajylmmaylspc"
                         }
                     ]
                 }
@@ -122,16 +122,16 @@ curl -X POST --data '{
                     "variableCap" : [
                         {
                             "minters": [
-                                "AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8",
-                                "FNqMDYafoDVYQ2o4a7Zd9maJAxcUEieQb"
+                                "avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
+                                "avax1hzrwdlpum8xmt3pgstejx4sz86ajylmmaylspc"
                             ],
                             "threshold":1
                         },
                         {
                             "minters": [
-                                "JJSiKQfha9Z2TiMxBZ8XdW9F6KFw8aKS4",
-                                "7jJHY1vZL6AAbCFb97KMLY8nqMQVyd5JG",
-                                "58pM5cEf1wMSncPdCwtQ8tbHs2xdMA4eo"
+                                "avax1je76jegcc0qylnz473ag9l5ywvhe8we8e5qw0k",
+                                "avax1y9sull9tpaz9s507uekmm4sejwvndrela0mu43",
+                                "avax1grn5kuzalzek7uk405fmgae06ly8cw52ms070k"
                             ],
                             "threshold":2
                         }
@@ -289,7 +289,7 @@ You can interact with this new instance of the AVM almost the same way you’d i
 * Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
 * Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
 
-In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000,000 units of the asset with alias `asset1`. Let’s verify that:
+In the genesis data we specified that address `avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z` has 100,000,000 units of the asset with alias `asset1`. Let’s verify that:
 
 ```cpp
 curl -X POST --data '{
@@ -297,7 +297,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ",
+        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "assetID":"asset1"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
@@ -337,7 +337,7 @@ curl -X POST --data '{
 {
   "jsonrpc": "2.0",
   "result": {
-    "address": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-6JnJrXHM5g6L6hTz119jxI7i9nu0tvhRl"
+    "address": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl"
   },
   "id": 1
 }
@@ -353,9 +353,9 @@ curl -X POST --data '{
     "params" :{
         "assetID" : "asset1",
         "amount"  : 1,
-        "from"    : ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ"],
-        "to"      : "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-6JnJrXHM5g6L6hTz119jxI7i9nu0tvhRl",
-        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ",
+        "from"    : ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z"],
+        "to"      : "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
+        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "username": "USERNAME GOES HERE",
         "password": "PASSWORD GOES HERE"
     }
@@ -367,7 +367,7 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "result": {
     "txID": "2MqZ5x6keEF1mZ4d6rb12bN4euirTqwTTm1AZGVzTT7n3eKQqq",
-    "changeAddr": "g1GK7GErN3BqauK6BhhU8uCNfaBTMz4VWr3JdwvXXNCwpwQJQ-8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ"
+    "changeAddr": "g1GK7GErN3BqauK6BhhU8uCNfaBTMz4VWr3JdwvXXNCwpwQJQ-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z"
   },
   "id": 1
 }
@@ -404,7 +404,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-6JnJrXHM5g6L6hTz119jxI7i9nu0tvhRl",
+        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
         "assetID": "asset1"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
@@ -434,7 +434,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ",
+        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "assetID": "asset1"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
@@ -460,7 +460,7 @@ This address had 100,000,000 `asset1`, then we sent 1 unit to the other address 
 
 #### Mint Asset
 
-Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.mint). Address `AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
+Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
 
 ```cpp
 curl -X POST --data '{
@@ -470,12 +470,12 @@ curl -X POST --data '{
     "params" :{
         "amount": 1,
         "assetID": "asset2",
-        "from": ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8"],
-        "to": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8",
+        "from": ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"],
+        "to": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
         "minters": [
-            "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8"
+            "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
         ],
-        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8",
+        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
         "username": "USERNAME GOES HERE",
         "password": "PASSWORD GOES HERE"
     }
@@ -487,7 +487,7 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "result": {
     "txID": "2UQL5u5ZEELHfRpAtDYtmFF8BMSdoWNWS1Zf2dkbVSDeTbXeJQ",
-    "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8"
+    "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
   },
   "id": 1
 }
@@ -501,7 +501,7 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8"
+        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
 ```
@@ -525,5 +525,5 @@ curl -X POST --data '{
 }
 ```
 
-As we can see, 1 unit of `asset2` was minted. Address `AATN8YjgmFjC2jQRq45sEeGcBFXNYPcM8` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
+As we can see, 1 unit of `asset2` was minted. Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
 
