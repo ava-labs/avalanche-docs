@@ -40,9 +40,9 @@ Please note that `personal_` namespace is turned off by default. To turn it on, 
 
 ## Integration using Rosetta
 
-[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with different blockchain networks easier by presenting the same set of APIs for every network.
+[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with different blockchain networks easier by presenting the same set of APIs for every network. The Rosetta API is made up of 2 core components, the Data API and the Construction API. Together, these APIs allow for anyone to read and write to blockchains in a standard format over a standard communication protocol. The specifications for these APIs can be found in the rosetta-specifications repository.
 
-You can find the Rosetta server implementation for Avalanche C-Chain [here](https://github.com/ava-labs/avalanche-rosetta), all you need to do is install and run the server with proper configuration. You don't necessarily need to even run you own node, and can instead rely on our [Public API](https://docs.avax.network/build/tools/public-api) to provide network access. 
+You can find the Rosetta server implementation for Avalanche C-Chain [here](https://github.com/ava-labs/avalanche-rosetta), all you need to do is install and run the server with proper configuration. It comes with a Dockerfile that packages both the server and the Avalanche client. Detailed instructions can be found in the linked repository.
 
 ## Constructing transactions
 
