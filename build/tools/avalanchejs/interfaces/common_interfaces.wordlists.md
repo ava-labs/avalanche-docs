@@ -29,7 +29,7 @@
 
 • **EN**: *string[]*
 
-*Defined in [src/common/interfaces.ts:133](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L133)*
+*Defined in [src/common/interfaces.ts:133](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L133)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **JA**: *string[]*
 
-*Defined in [src/common/interfaces.ts:130](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L130)*
+*Defined in [src/common/interfaces.ts:130](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L130)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • **chinese_simplified**: *string[]*
 
-*Defined in [src/common/interfaces.ts:123](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L123)*
+*Defined in [src/common/interfaces.ts:123](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L123)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • **chinese_traditional**: *string[]*
 
-*Defined in [src/common/interfaces.ts:124](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L124)*
+*Defined in [src/common/interfaces.ts:124](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L124)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • **czech**: *string[]*
 
-*Defined in [src/common/interfaces.ts:122](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L122)*
+*Defined in [src/common/interfaces.ts:122](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L122)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **english**: *string[]*
 
-*Defined in [src/common/interfaces.ts:132](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L132)*
+*Defined in [src/common/interfaces.ts:132](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L132)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • **french**: *string[]*
 
-*Defined in [src/common/interfaces.ts:126](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L126)*
+*Defined in [src/common/interfaces.ts:126](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L126)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **italian**: *string[]*
 
-*Defined in [src/common/interfaces.ts:127](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L127)*
+*Defined in [src/common/interfaces.ts:127](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L127)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 • **japanese**: *string[]*
 
-*Defined in [src/common/interfaces.ts:129](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L129)*
+*Defined in [src/common/interfaces.ts:129](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L129)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **korean**: *string[]*
 
-*Defined in [src/common/interfaces.ts:125](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L125)*
+*Defined in [src/common/interfaces.ts:125](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L125)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **portuguese**: *string[]*
 
-*Defined in [src/common/interfaces.ts:131](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L131)*
+*Defined in [src/common/interfaces.ts:131](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L131)*
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 • **spanish**: *string[]*
 
-*Defined in [src/common/interfaces.ts:128](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L128)*
+*Defined in [src/common/interfaces.ts:128](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L128)*

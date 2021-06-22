@@ -526,4 +526,3 @@ curl -X POST --data '{
 ```
 
 As we can see, 1 unit of `asset2` was minted. Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
-

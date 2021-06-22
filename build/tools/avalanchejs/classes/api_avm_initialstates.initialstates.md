@@ -38,7 +38,7 @@ Class for creating initial output states used in asset creation
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[_codecID](utils_serialization.serializable.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L42)*
+*Defined in [src/utils/serialization.ts:42](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/serialization.ts#L42)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/initialstates.ts:23](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L23)*
+*Defined in [src/apis/avm/initialstates.ts:23](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L23)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/apis/avm/initialstates.ts:22](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L22)*
+*Defined in [src/apis/avm/initialstates.ts:22](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L22)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **fxs**: *object*
 
-*Defined in [src/apis/avm/initialstates.ts:49](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L49)*
+*Defined in [src/apis/avm/initialstates.ts:49](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L49)*
 
 #### Type declaration:
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **addOutput**(`out`: [Output](common_output.output.md), `fxid`: number): *void*
 
-*Defined in [src/apis/avm/initialstates.ts:56](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L56)*
+*Defined in [src/apis/avm/initialstates.ts:56](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L56)*
 
 **Parameters:**
 
@@ -97,7 +97,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[deserialize](utils_serialization.serializable.md#deserialize)*
 
-*Defined in [src/apis/avm/initialstates.ts:36](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L36)*
+*Defined in [src/apis/avm/initialstates.ts:36](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L36)*
 
 **Parameters:**
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/avm/initialstates.ts:63](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L63)*
+*Defined in [src/apis/avm/initialstates.ts:63](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L63)*
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getCodecID](utils_serialization.serializable.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L61)*
+*Defined in [src/utils/serialization.ts:61](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/serialization.ts#L61)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -147,7 +147,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeID](utils_serialization.serializable.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L54)*
+*Defined in [src/utils/serialization.ts:54](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/serialization.ts#L54)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -161,7 +161,7 @@ ___
 
 *Inherited from [Serializable](utils_serialization.serializable.md).[getTypeName](utils_serialization.serializable.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/serialization.ts#L47)*
+*Defined in [src/utils/serialization.ts:47](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/serialization.ts#L47)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -175,7 +175,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/apis/avm/initialstates.ts:25](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L25)*
+*Defined in [src/apis/avm/initialstates.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L25)*
 
 **Parameters:**
 
@@ -191,6 +191,6 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/apis/avm/initialstates.ts:88](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/initialstates.ts#L88)*
+*Defined in [src/apis/avm/initialstates.ts:88](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/initialstates.ts#L88)*
 
 **Returns:** *Buffer*
