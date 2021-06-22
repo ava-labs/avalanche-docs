@@ -20,7 +20,7 @@
 
 • **encoding**: *string*
 
-*Defined in [src/common/interfaces.ts:118](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L118)*
+*Defined in [src/common/interfaces.ts:118](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L118)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **numFetched**: *number*
 
-*Defined in [src/common/interfaces.ts:116](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L116)*
+*Defined in [src/common/interfaces.ts:116](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L116)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **utxos**: *string[]*
 
-*Defined in [src/common/interfaces.ts:117](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L117)*
+*Defined in [src/common/interfaces.ts:117](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L117)*

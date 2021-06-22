@@ -24,7 +24,7 @@
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/inputs.ts:16](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/inputs.ts#L16)*
+*Defined in [src/apis/avm/inputs.ts:16](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/inputs.ts#L16)*
 
 ## Functions
 
@@ -32,7 +32,7 @@
 
 ▸ **SelectInputClass**(`inputid`: number, ...`args`: Array‹any›): *[Input](../classes/common_inputs.input.md)*
 
-*Defined in [src/apis/avm/inputs.ts:25](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/apis/avm/inputs.ts#L25)*
+*Defined in [src/apis/avm/inputs.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/inputs.ts#L25)*
 
 Takes a buffer representing the output and returns the proper [Input](../classes/common_inputs.input.md) instance.
 

@@ -24,7 +24,7 @@
 
 *Inherited from [BaseIndexParams](common_interfaces.baseindexparams.md).[encoding](common_interfaces.baseindexparams.md#encoding)*
 
-*Defined in [src/common/interfaces.ts:47](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L47)*
+*Defined in [src/common/interfaces.ts:47](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L47)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **numToFetch**: *number*
 
-*Defined in [src/common/interfaces.ts:76](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L76)*
+*Defined in [src/common/interfaces.ts:76](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L76)*
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 • **startIndex**: *number*
 
-*Defined in [src/common/interfaces.ts:75](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L75)*
+*Defined in [src/common/interfaces.ts:75](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L75)*

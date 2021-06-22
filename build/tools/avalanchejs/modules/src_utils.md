@@ -9,12 +9,17 @@
 * [ASSETIDPayload](src_utils.md#assetidpayload)
 * [AVAXGWEI](src_utils.md#avaxgwei)
 * [AVAXSTAKECAP](src_utils.md#avaxstakecap)
+* [AddressError](src_utils.md#addresserror)
+* [AddressIndexError](src_utils.md#addressindexerror)
 * [B58STRPayload](src_utils.md#b58strpayload)
 * [B64STRPayload](src_utils.md#b64strpayload)
 * [BIGNUMPayload](src_utils.md#bignumpayload)
 * [BINPayload](src_utils.md#binpayload)
 * [BMPPayload](src_utils.md#bmppayload)
 * [Base58](src_utils.md#base58)
+* [Base58Error](src_utils.md#base58error)
+* [Bech32Error](src_utils.md#bech32error)
+* [BufferSizeError](src_utils.md#buffersizeerror)
 * [CCHAINADDRPayload](src_utils.md#cchainaddrpayload)
 * [CChainAlias](src_utils.md#cchainalias)
 * [CChainVMName](src_utils.md#cchainvmname)
@@ -22,22 +27,37 @@
 * [CHAINIDPayload](src_utils.md#chainidpayload)
 * [CSVPayload](src_utils.md#csvpayload)
 * [ChainAddressPayload](src_utils.md#chainaddresspayload)
+* [ChainIdError](src_utils.md#chainiderror)
+* [ChecksumError](src_utils.md#checksumerror)
+* [CodecIdError](src_utils.md#codeciderror)
+* [CredIdError](src_utils.md#crediderror)
 * [DECIAVAX](src_utils.md#deciavax)
 * [DefaultEVMLocalGenesisAddress](src_utils.md#defaultevmlocalgenesisaddress)
 * [DefaultEVMLocalGenesisPrivateKey](src_utils.md#defaultevmlocalgenesisprivatekey)
 * [DefaultLocalGenesisPrivateKey](src_utils.md#defaultlocalgenesisprivatekey)
 * [DefaultNetworkID](src_utils.md#defaultnetworkid)
 * [Defaults](src_utils.md#defaults)
+* [DelegationFeeError](src_utils.md#delegationfeeerror)
 * [EMAILPayload](src_utils.md#emailpayload)
+* [EVMFeeError](src_utils.md#evmfeeerror)
+* [EVMInputError](src_utils.md#evminputerror)
+* [EVMOutputError](src_utils.md#evmoutputerror)
 * [FallbackEVMChainID](src_utils.md#fallbackevmchainid)
 * [FallbackHRP](src_utils.md#fallbackhrp)
 * [FallbackNetworkName](src_utils.md#fallbacknetworkname)
+* [FeeAssetError](src_utils.md#feeasseterror)
 * [FujiAPI](src_utils.md#fujiapi)
 * [GWEI](src_utils.md#gwei)
+* [GooseEggCheckError](src_utils.md#gooseeggcheckerror)
 * [HEXSTRPayload](src_utils.md#hexstrpayload)
 * [HRPToNetworkID](src_utils.md#hrptonetworkid)
+* [HexError](src_utils.md#hexerror)
 * [ICOPayload](src_utils.md#icopayload)
 * [IPFSPayload](src_utils.md#ipfspayload)
+* [InputIdError](src_utils.md#inputiderror)
+* [InsufficientFundsError](src_utils.md#insufficientfundserror)
+* [InvalidEntropy](src_utils.md#invalidentropy)
+* [InvalidOperationIdError](src_utils.md#invalidoperationiderror)
 * [JPEGPayload](src_utils.md#jpegpayload)
 * [JSONPayload](src_utils.md#jsonpayload)
 * [MAGNETPayload](src_utils.md#magnetpayload)
@@ -46,16 +66,22 @@
 * [MainnetAPI](src_utils.md#mainnetapi)
 * [MaxWeightFormula](src_utils.md#maxweightformula)
 * [MergeRule](src_utils.md#mergerule)
+* [MergeRuleError](src_utils.md#mergeruleerror)
 * [NANOAVAX](src_utils.md#nanoavax)
 * [NFTIDPayload](src_utils.md#nftidpayload)
 * [NODEIDPayload](src_utils.md#nodeidpayload)
+* [NameError](src_utils.md#nameerror)
 * [NetworkIDToHRP](src_utils.md#networkidtohrp)
 * [NetworkIDToNetworkNames](src_utils.md#networkidtonetworknames)
 * [NetworkNameToNetworkID](src_utils.md#networknametonetworkid)
+* [NoAtomicUTXOsError](src_utils.md#noatomicutxoserror)
 * [NodeIDPrefix](src_utils.md#nodeidprefix)
 * [NodeIDStringToBuffer](src_utils.md#nodeidstringtobuffer)
+* [NodeIdError](src_utils.md#nodeiderror)
 * [ONEAVAX](src_utils.md#oneavax)
 * [ONIONPayload](src_utils.md#onionpayload)
+* [OperationError](src_utils.md#operationerror)
+* [OutputIdError](src_utils.md#outputiderror)
 * [PCHAINADDRPayload](src_utils.md#pchainaddrpayload)
 * [PChainAlias](src_utils.md#pchainalias)
 * [PChainVMName](src_utils.md#pchainvmname)
@@ -66,9 +92,11 @@
 * [PlatformChainID](src_utils.md#platformchainid)
 * [PrimaryAssetAlias](src_utils.md#primaryassetalias)
 * [PrimaryNetworkID](src_utils.md#primarynetworkid)
+* [PrivateKeyError](src_utils.md#privatekeyerror)
 * [PrivateKeyPrefix](src_utils.md#privatekeyprefix)
-* [PubSub](src_utils.md#pubsub)
+* [PublicKeyError](src_utils.md#publickeyerror)
 * [SECPENCPayload](src_utils.md#secpencpayload)
+* [SECPMintOutputError](src_utils.md#secpmintoutputerror)
 * [SECPSIGPayload](src_utils.md#secpsigpayload)
 * [SERIALIZATIONVERSION](src_utils.md#serializationversion)
 * [SUBNETIDPayload](src_utils.md#subnetidpayload)
@@ -77,11 +105,23 @@
 * [Serialization](src_utils.md#serialization)
 * [SerializedEncoding](src_utils.md#serializedencoding)
 * [SerializedType](src_utils.md#serializedtype)
+* [StakeError](src_utils.md#stakeerror)
+* [SubnetOwnerError](src_utils.md#subnetownererror)
+* [SymbolError](src_utils.md#symbolerror)
 * [TXIDPayload](src_utils.md#txidpayload)
+* [ThresholdError](src_utils.md#thresholderror)
+* [TimeError](src_utils.md#timeerror)
+* [TransactionError](src_utils.md#transactionerror)
+* [TransferableInputError](src_utils.md#transferableinputerror)
+* [TransferableOutputError](src_utils.md#transferableoutputerror)
+* [TypeIdError](src_utils.md#typeiderror)
+* [TypeNameError](src_utils.md#typenameerror)
 * [URLPayload](src_utils.md#urlpayload)
 * [UTF8Payload](src_utils.md#utf8payload)
+* [UTXOError](src_utils.md#utxoerror)
 * [UTXOIDPayload](src_utils.md#utxoidpayload)
 * [UnixNow](src_utils.md#unixnow)
+* [UnknownTypeError](src_utils.md#unknowntypeerror)
 * [WEI](src_utils.md#wei)
 * [XCHAINADDRPayload](src_utils.md#xchainaddrpayload)
 * [XChainAlias](src_utils.md#xchainalias)
@@ -204,6 +244,18 @@ ___
 
 ___
 
+###  AddressError
+
+• **AddressError**:
+
+___
+
+###  AddressIndexError
+
+• **AddressIndexError**:
+
+___
+
 ###  B58STRPayload
 
 • **B58STRPayload**:
@@ -237,6 +289,24 @@ ___
 ###  Base58
 
 • **Base58**:
+
+___
+
+###  Base58Error
+
+• **Base58Error**:
+
+___
+
+###  Bech32Error
+
+• **Bech32Error**:
+
+___
+
+###  BufferSizeError
+
+• **BufferSizeError**:
 
 ___
 
@@ -282,6 +352,30 @@ ___
 
 ___
 
+###  ChainIdError
+
+• **ChainIdError**:
+
+___
+
+###  ChecksumError
+
+• **ChecksumError**:
+
+___
+
+###  CodecIdError
+
+• **CodecIdError**:
+
+___
+
+###  CredIdError
+
+• **CredIdError**:
+
+___
+
 ###  DECIAVAX
 
 • **DECIAVAX**:
@@ -318,9 +412,33 @@ ___
 
 ___
 
+###  DelegationFeeError
+
+• **DelegationFeeError**:
+
+___
+
 ###  EMAILPayload
 
 • **EMAILPayload**:
+
+___
+
+###  EVMFeeError
+
+• **EVMFeeError**:
+
+___
+
+###  EVMInputError
+
+• **EVMInputError**:
+
+___
+
+###  EVMOutputError
+
+• **EVMOutputError**:
 
 ___
 
@@ -342,6 +460,12 @@ ___
 
 ___
 
+###  FeeAssetError
+
+• **FeeAssetError**:
+
+___
+
 ###  FujiAPI
 
 • **FujiAPI**:
@@ -351,6 +475,12 @@ ___
 ###  GWEI
 
 • **GWEI**:
+
+___
+
+###  GooseEggCheckError
+
+• **GooseEggCheckError**:
 
 ___
 
@@ -366,6 +496,12 @@ ___
 
 ___
 
+###  HexError
+
+• **HexError**:
+
+___
+
 ###  ICOPayload
 
 • **ICOPayload**:
@@ -375,6 +511,30 @@ ___
 ###  IPFSPayload
 
 • **IPFSPayload**:
+
+___
+
+###  InputIdError
+
+• **InputIdError**:
+
+___
+
+###  InsufficientFundsError
+
+• **InsufficientFundsError**:
+
+___
+
+###  InvalidEntropy
+
+• **InvalidEntropy**:
+
+___
+
+###  InvalidOperationIdError
+
+• **InvalidOperationIdError**:
 
 ___
 
@@ -426,6 +586,12 @@ ___
 
 ___
 
+###  MergeRuleError
+
+• **MergeRuleError**:
+
+___
+
 ###  NANOAVAX
 
 • **NANOAVAX**:
@@ -441,6 +607,12 @@ ___
 ###  NODEIDPayload
 
 • **NODEIDPayload**:
+
+___
+
+###  NameError
+
+• **NameError**:
 
 ___
 
@@ -462,6 +634,12 @@ ___
 
 ___
 
+###  NoAtomicUTXOsError
+
+• **NoAtomicUTXOsError**:
+
+___
+
 ###  NodeIDPrefix
 
 • **NodeIDPrefix**:
@@ -474,6 +652,12 @@ ___
 
 ___
 
+###  NodeIdError
+
+• **NodeIdError**:
+
+___
+
 ###  ONEAVAX
 
 • **ONEAVAX**:
@@ -483,6 +667,18 @@ ___
 ###  ONIONPayload
 
 • **ONIONPayload**:
+
+___
+
+###  OperationError
+
+• **OperationError**:
+
+___
+
+###  OutputIdError
+
+• **OutputIdError**:
 
 ___
 
@@ -546,21 +742,33 @@ ___
 
 ___
 
+###  PrivateKeyError
+
+• **PrivateKeyError**:
+
+___
+
 ###  PrivateKeyPrefix
 
 • **PrivateKeyPrefix**:
 
 ___
 
-###  PubSub
+###  PublicKeyError
 
-• **PubSub**:
+• **PublicKeyError**:
 
 ___
 
 ###  SECPENCPayload
 
 • **SECPENCPayload**:
+
+___
+
+###  SECPMintOutputError
+
+• **SECPMintOutputError**:
 
 ___
 
@@ -612,9 +820,69 @@ ___
 
 ___
 
+###  StakeError
+
+• **StakeError**:
+
+___
+
+###  SubnetOwnerError
+
+• **SubnetOwnerError**:
+
+___
+
+###  SymbolError
+
+• **SymbolError**:
+
+___
+
 ###  TXIDPayload
 
 • **TXIDPayload**:
+
+___
+
+###  ThresholdError
+
+• **ThresholdError**:
+
+___
+
+###  TimeError
+
+• **TimeError**:
+
+___
+
+###  TransactionError
+
+• **TransactionError**:
+
+___
+
+###  TransferableInputError
+
+• **TransferableInputError**:
+
+___
+
+###  TransferableOutputError
+
+• **TransferableOutputError**:
+
+___
+
+###  TypeIdError
+
+• **TypeIdError**:
+
+___
+
+###  TypeNameError
+
+• **TypeNameError**:
 
 ___
 
@@ -630,6 +898,12 @@ ___
 
 ___
 
+###  UTXOError
+
+• **UTXOError**:
+
+___
+
 ###  UTXOIDPayload
 
 • **UTXOIDPayload**:
@@ -639,6 +913,12 @@ ___
 ###  UnixNow
 
 • **UnixNow**:
+
+___
+
+###  UnknownTypeError
+
+• **UnknownTypeError**:
 
 ___
 
@@ -712,7 +992,7 @@ ___
 
 • **ADDRESS_ERROR_CODE**: *string* = "1000"
 
-*Defined in [src/utils/errors.ts:1](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L1)*
+*Defined in [src/utils/errors.ts:1](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L1)*
 
 ___
 
@@ -720,7 +1000,7 @@ ___
 
 • **ADDRESS_INDEX_ERROR_CODE**: *string* = "1028"
 
-*Defined in [src/utils/errors.ts:29](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L29)*
+*Defined in [src/utils/errors.ts:29](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L29)*
 
 ___
 
@@ -728,7 +1008,7 @@ ___
 
 • **BASE58_ERROR_CODE**: *string* = "1031"
 
-*Defined in [src/utils/errors.ts:32](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L32)*
+*Defined in [src/utils/errors.ts:32](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L32)*
 
 ___
 
@@ -736,7 +1016,7 @@ ___
 
 • **BECH32_ERROR_CODE**: *string* = "1037"
 
-*Defined in [src/utils/errors.ts:39](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L39)*
+*Defined in [src/utils/errors.ts:39](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L39)*
 
 ___
 
@@ -744,7 +1024,7 @@ ___
 
 • **BUFFER_SIZE_ERROR_CODE**: *string* = "1027"
 
-*Defined in [src/utils/errors.ts:28](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L28)*
+*Defined in [src/utils/errors.ts:28](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L28)*
 
 ___
 
@@ -752,7 +1032,7 @@ ___
 
 • **CHAIN_ID_ERROR_CODE**: *string* = "1002"
 
-*Defined in [src/utils/errors.ts:3](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L3)*
+*Defined in [src/utils/errors.ts:3](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L3)*
 
 ___
 
@@ -760,7 +1040,7 @@ ___
 
 • **CHECKSUM_ERROR_CODE**: *string* = "1014"
 
-*Defined in [src/utils/errors.ts:15](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L15)*
+*Defined in [src/utils/errors.ts:15](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L15)*
 
 ___
 
@@ -768,7 +1048,7 @@ ___
 
 • **CODEC_ID_ERROR_CODE**: *string* = "1007"
 
-*Defined in [src/utils/errors.ts:8](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L8)*
+*Defined in [src/utils/errors.ts:8](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L8)*
 
 ___
 
@@ -776,7 +1056,7 @@ ___
 
 • **CRED_ID_ERROR_CODE**: *string* = "1008"
 
-*Defined in [src/utils/errors.ts:9](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L9)*
+*Defined in [src/utils/errors.ts:9](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L9)*
 
 ___
 
@@ -784,7 +1064,7 @@ ___
 
 • **DELEGATION_FEE_ERROR_CODE**: *string* = "1025"
 
-*Defined in [src/utils/errors.ts:26](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L26)*
+*Defined in [src/utils/errors.ts:26](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L26)*
 
 ___
 
@@ -792,7 +1072,7 @@ ___
 
 • **EVM_FEE_ERROR_CODE**: *string* = "1038"
 
-*Defined in [src/utils/errors.ts:40](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L40)*
+*Defined in [src/utils/errors.ts:40](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L40)*
 
 ___
 
@@ -800,7 +1080,7 @@ ___
 
 • **EVM_INPUT_ERROR_CODE**: *string* = "1020"
 
-*Defined in [src/utils/errors.ts:21](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L21)*
+*Defined in [src/utils/errors.ts:21](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L21)*
 
 ___
 
@@ -808,7 +1088,7 @@ ___
 
 • **EVM_OUTPUT_ERROR_CODE**: *string* = "1021"
 
-*Defined in [src/utils/errors.ts:22](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L22)*
+*Defined in [src/utils/errors.ts:22](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L22)*
 
 ___
 
@@ -816,7 +1096,7 @@ ___
 
 • **FEE_ASSET_ERROR_CODE**: *string* = "1022"
 
-*Defined in [src/utils/errors.ts:23](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L23)*
+*Defined in [src/utils/errors.ts:23](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L23)*
 
 ___
 
@@ -824,7 +1104,7 @@ ___
 
 • **GOOSE_EGG_CHECK_ERROR_CODE**: *string* = "1001"
 
-*Defined in [src/utils/errors.ts:2](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L2)*
+*Defined in [src/utils/errors.ts:2](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L2)*
 
 ___
 
@@ -832,7 +1112,7 @@ ___
 
 • **HEX_ERROR_CODE**: *string* = "1034"
 
-*Defined in [src/utils/errors.ts:35](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L35)*
+*Defined in [src/utils/errors.ts:35](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L35)*
 
 ___
 
@@ -840,7 +1120,7 @@ ___
 
 • **INPUT_ID_ERROR_CODE**: *string* = "1011"
 
-*Defined in [src/utils/errors.ts:12](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L12)*
+*Defined in [src/utils/errors.ts:12](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L12)*
 
 ___
 
@@ -848,7 +1128,7 @@ ___
 
 • **INSUFFICIENT_FUNDS_ERROR_CODE**: *string* = "1017"
 
-*Defined in [src/utils/errors.ts:18](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L18)*
+*Defined in [src/utils/errors.ts:18](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L18)*
 
 ___
 
@@ -856,7 +1136,7 @@ ___
 
 • **INVALID_ENTROPY**: *string* = "1039"
 
-*Defined in [src/utils/errors.ts:41](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L41)*
+*Defined in [src/utils/errors.ts:41](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L41)*
 
 ___
 
@@ -864,7 +1144,7 @@ ___
 
 • **INVALID_OPERATION_ID_CODE**: *string* = "1013"
 
-*Defined in [src/utils/errors.ts:14](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L14)*
+*Defined in [src/utils/errors.ts:14](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L14)*
 
 ___
 
@@ -872,7 +1152,7 @@ ___
 
 • **MERGE_RULE_ERROR_CODE**: *string* = "1030"
 
-*Defined in [src/utils/errors.ts:31](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L31)*
+*Defined in [src/utils/errors.ts:31](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L31)*
 
 ___
 
@@ -880,7 +1160,7 @@ ___
 
 • **NAME_ERROR_CODE**: *string* = "1005"
 
-*Defined in [src/utils/errors.ts:6](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L6)*
+*Defined in [src/utils/errors.ts:6](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L6)*
 
 ___
 
@@ -888,7 +1168,7 @@ ___
 
 • **NODE_ID_ERROR_CODE**: *string* = "1033"
 
-*Defined in [src/utils/errors.ts:34](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L34)*
+*Defined in [src/utils/errors.ts:34](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L34)*
 
 ___
 
@@ -896,7 +1176,7 @@ ___
 
 • **NO_ATOMIX_UTXOS_ERROR_CODE**: *string* = "1003"
 
-*Defined in [src/utils/errors.ts:4](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L4)*
+*Defined in [src/utils/errors.ts:4](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L4)*
 
 ___
 
@@ -904,7 +1184,7 @@ ___
 
 • **OPERATION_ERROR_CODE**: *string* = "1012"
 
-*Defined in [src/utils/errors.ts:13](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L13)*
+*Defined in [src/utils/errors.ts:13](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L13)*
 
 ___
 
@@ -912,7 +1192,7 @@ ___
 
 • **OUTPUT_ID_ERROR_CODE**: *string* = "1015"
 
-*Defined in [src/utils/errors.ts:16](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L16)*
+*Defined in [src/utils/errors.ts:16](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L16)*
 
 ___
 
@@ -920,7 +1200,7 @@ ___
 
 • **PRIVATE_KEY_ERROR_CODE**: *string* = "1032"
 
-*Defined in [src/utils/errors.ts:33](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L33)*
+*Defined in [src/utils/errors.ts:33](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L33)*
 
 ___
 
@@ -928,7 +1208,7 @@ ___
 
 • **PUBLIC_KEY_ERROR_CODE**: *string* = "1029"
 
-*Defined in [src/utils/errors.ts:30](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L30)*
+*Defined in [src/utils/errors.ts:30](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L30)*
 
 ___
 
@@ -936,7 +1216,7 @@ ___
 
 • **SECP_MINT_OUTPUT_ERROR_CODE**: *string* = "1019"
 
-*Defined in [src/utils/errors.ts:20](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L20)*
+*Defined in [src/utils/errors.ts:20](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L20)*
 
 ___
 
@@ -944,7 +1224,7 @@ ___
 
 • **STAKE_ERROR_CODE**: *string* = "1023"
 
-*Defined in [src/utils/errors.ts:24](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L24)*
+*Defined in [src/utils/errors.ts:24](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L24)*
 
 ___
 
@@ -952,7 +1232,7 @@ ___
 
 • **SUBNET_OWNER_ERROR_CODE**: *string* = "1026"
 
-*Defined in [src/utils/errors.ts:27](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L27)*
+*Defined in [src/utils/errors.ts:27](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L27)*
 
 ___
 
@@ -960,7 +1240,7 @@ ___
 
 • **SYMBOL_ERROR_CODE**: *string* = "1004"
 
-*Defined in [src/utils/errors.ts:5](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L5)*
+*Defined in [src/utils/errors.ts:5](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L5)*
 
 ___
 
@@ -968,7 +1248,7 @@ ___
 
 • **THRESHOLD_ERROR_CODE**: *string* = "1018"
 
-*Defined in [src/utils/errors.ts:19](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L19)*
+*Defined in [src/utils/errors.ts:19](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L19)*
 
 ___
 
@@ -976,7 +1256,7 @@ ___
 
 • **TIME_ERROR_CODE**: *string* = "1024"
 
-*Defined in [src/utils/errors.ts:25](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L25)*
+*Defined in [src/utils/errors.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L25)*
 
 ___
 
@@ -984,7 +1264,7 @@ ___
 
 • **TRANSACTION_ERROR_CODE**: *string* = "1006"
 
-*Defined in [src/utils/errors.ts:7](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L7)*
+*Defined in [src/utils/errors.ts:7](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L7)*
 
 ___
 
@@ -992,7 +1272,7 @@ ___
 
 • **TRANSFERABLE_INPUT_ERROR_CODE**: *string* = "1010"
 
-*Defined in [src/utils/errors.ts:11](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L11)*
+*Defined in [src/utils/errors.ts:11](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L11)*
 
 ___
 
@@ -1000,7 +1280,7 @@ ___
 
 • **TRANSFERABLE_OUTPUT_ERROR_CODE**: *string* = "1009"
 
-*Defined in [src/utils/errors.ts:10](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L10)*
+*Defined in [src/utils/errors.ts:10](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L10)*
 
 ___
 
@@ -1008,7 +1288,7 @@ ___
 
 • **TYPE_ID_ERROR_CODE**: *string* = "1035"
 
-*Defined in [src/utils/errors.ts:36](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L36)*
+*Defined in [src/utils/errors.ts:36](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L36)*
 
 ___
 
@@ -1016,7 +1296,7 @@ ___
 
 • **TYPE_NAME_ERROR_CODE**: *string* = "1035"
 
-*Defined in [src/utils/errors.ts:37](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L37)*
+*Defined in [src/utils/errors.ts:37](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L37)*
 
 ___
 
@@ -1024,7 +1304,7 @@ ___
 
 • **UNKNOWN_TYPE_ERROR_CODE**: *string* = "1036"
 
-*Defined in [src/utils/errors.ts:38](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L38)*
+*Defined in [src/utils/errors.ts:38](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L38)*
 
 ___
 
@@ -1032,4 +1312,4 @@ ___
 
 • **UTXO_ERROR_CODE**: *string* = "1016"
 
-*Defined in [src/utils/errors.ts:17](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/utils/errors.ts#L17)*
+*Defined in [src/utils/errors.ts:17](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L17)*

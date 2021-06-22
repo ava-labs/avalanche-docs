@@ -18,4 +18,4 @@
 
 • **alias**: *string*
 
-*Defined in [src/common/interfaces.ts:90](https://github.com/ava-labs/avalanchejs/blob/f2c4a10/src/common/interfaces.ts#L90)*
+*Defined in [src/common/interfaces.ts:90](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L90)*
