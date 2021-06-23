@@ -4,7 +4,14 @@
 
 Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you've developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the Mainnet (sans any issued assets) and testing your dapp or smart contract against a test environment before going live ensures that no actual value-bearing assets are lost during development and testing. It's considered a best-practice to first develop your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the Mainnet with real value-bearing assets.
 
-Every resource which you would use on the Mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore the Avalanche API and ecosystem of developer tooling. 
+Every resource which you would use on the Mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore the Avalanche API and ecosystem of developer tooling. Ultimately we will accomplish the following:
+
+1. Generating a 24 word english mnemonic via AvalancheJS
+2. Deriving the first external BIP44 X-Chain address via AvalancheJS
+3. Getting a drip from the faucet
+4. Sending AVAX from the first external BIP44 address to the second external BIP44 address via AvalancheJS
+5. Checking out the txid on the explorer
+6. Using the same mnemonic from step 1 to sign into the web wallet and confirm the balance is there. The wallet should auto-derive the third external BIP44 address
 
 ### Prerequisites
 
