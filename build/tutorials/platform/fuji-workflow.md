@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's testnet and is the place for testing your app after you have developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the mainnet (sans any issued assets) and testing your app against a test environment before going live ensures that no actual value bearing assets are lost during development and testing. It's considered a best-practice to first developer your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the mainnet with real value bearing assets.
+Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you have developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the mainnet (sans any issued assets) and testing your app against a test environment before going live ensures that no actual value bearing assets are lost during development and testing. It's considered a best-practice to first developer your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the mainnet with real value bearing assets.
 
 Every resource which you would use on the mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore the Avalanche API and ecosystem of developer tooling. 
 
