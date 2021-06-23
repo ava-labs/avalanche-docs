@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you have developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the mainnet (sans any issued assets) and testing your app against a test environment before going live ensures that no actual value bearing assets are lost during development and testing. It's considered a best-practice to first developer your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the mainnet with real value bearing assets.
+Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you've developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the Mainnet (sans any issued assets) and testing your dapp or smart contract against a test environment before going live ensures that no actual value-bearing assets are lost during development and testing. It's considered a best-practice to first develop your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the Mainnet with real value-bearing assets.
 
-Every resource which you would use on the mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore the Avalanche API and ecosystem of developer tooling. 
+Every resource which you would use on the Mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore the Avalanche API and ecosystem of developer tooling. 
 
 ### Prerequisites
 
@@ -160,7 +160,7 @@ Also **note** that the wallet GUI shows it derived the same 3 addresses as our s
 
 ## Summary
 
-The Fuji network plays a critical role as the final step for testing and QAing dapps, smart contracts and financial products on non-value bearing assets before deploying to the mainnet. The entire Avalanche ecosystem, from developer tooling like AvalancheJS, the API nodes and the faucet, to the explorer for verifying transactions and balances and even the wallet are all available on the Fuji network to ensure that your testing and QA cycle is as close to mainnet as possible so that you can be confident when you go live on production. 
+The Fuji network plays a critical role as the final step for testing and QAing dapps, smart contracts and financial products on non-value-bearing assets before deploying to the Mainnet. The entire Avalanche ecosystem, from developer tooling like AvalancheJS, the API nodes and the faucet, to the explorer for verifying transactions and balances and even the wallet are all available on the Fuji network to ensure that your testing and QA cycle is as close to Mainnet as possible so that you can be confident when you go live on production. 
 
 ## Resources
 
@@ -168,11 +168,11 @@ For additional and valuable resources please see below.
 
 ### Faucet
 
-The [Fuji Faucet](https://faucet.avax-test.network) is the place to get AVAX for the X-Chain and the C-Chain to test your dapps with non-value bearing assets before deploying to the mainnet.
+The [Fuji Faucet](https://faucet.avax-test.network) is the place to get AVAX for the X-Chain and the C-Chain to test your dapps with non-value-bearing assets before deploying to the Mainnet.
 
 ### Wallet
 
-The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure, non-custodial wallet for storing Avalanche assets. It has support for mainnet, Fuji and custom networks.
+The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure, non-custodial wallet for storing Avalanche assets. It has support for Mainnet, Fuji and custom networks.
 
 ### Explorer
 
