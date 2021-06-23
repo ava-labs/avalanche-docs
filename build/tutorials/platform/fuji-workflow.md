@@ -28,7 +28,7 @@ const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
 // "pool hat domain flame stomach canal fury master farm gown tide supreme winner motion this first divide spray forum wall reopen bounce spider palm"
 ```
 
-### Derive Addresses
+## Derive Addresses
 
 After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) keypairs.
 
@@ -54,9 +54,9 @@ console.log(xAddressStrings)
 
 Mnemonics and HD paths enable us to deterministically recreate a vast number of keys from nothing more than a string of human-readable words. This is an extremely empowering technology for personal and financial sovereignty. This convention let's us at any time in the future recreate the 3 keypairs which the addresses were created from in order to sign a transaction moving funds.
 
-### Getting a drip from the faucet
+## Getting a drip from the faucet
  
-The previous step generated 3 addresses per the BIP44 spec. We're going to use the 1st address to get some AVAX from the [Fuji faucet](https://faucet.avax-test.network). To get AVAX go to the faucet and paste in your Fuji address. **Note** that this is for the Fuji testnet and these AVAX tokens have no monetary value.
+The previous step generated 3 addresses per the BIP44 spec. We're going to use the 1st address to get some AVAX from the [Fuji faucet](https://faucet.avax-test.network). To get AVAX go to the faucet and paste in your Fuji address. These AVAX are for the Fuji testnet and have no monetary value.
 
 <img src="../../../.gitbook/assets/faucet-request.png" alt="Faucet requesting AVAX" width="30%">
 
@@ -64,16 +64,16 @@ After the faucet successfully drips some AVAX to the address it'll return a tran
 
 <img src="../../../.gitbook/assets/faucet-response.png" alt="Faucet receiving AVAX" width="30%">
 
-#### Check the Transaction Details
+### Check the Transaction Details
 
-The txid, `2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct`, can be seen on the [Fuji Explorer](https://explorer.avax-test.network/tx/2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct). **Note** Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
+The txid, `2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct`, can be seen on the [Fuji Explorer](https://explorer.avax-test.network/tx/2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct). Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
 
 <img src="../../../.gitbook/assets/explorer-1.png" alt="Transaction details" width="30%">
 <img src="../../../.gitbook/assets/explorer-2.png" alt="Input and Output details" width="30%">
 
-#### Get the Balance
+### Get the Balance
 
-We can also use the Fuji Explorer to get the balance for [the 1st BIP44 derived address](https://explorer.avax-test.network/address/fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40).
+We can also use the Fuji Explorer to get the balance for the 1st BIP44 derived address&mdash;[X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40](https://explorer.avax-test.network/address/fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40).
 
 <img src="../../../.gitbook/assets/balance-1.png" alt="1st derived address balance" width="30%">
 <img src="../../../.gitbook/assets/balance-2.png" alt="1st derived address transactions" width="30%">
@@ -142,13 +142,8 @@ console.log(`Success! TXID: ${txid}`)
 We can verify that the txid returned from the previous transaction, `ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g`, was successful using AvalancheJS. 
 
 ```ts
-const ip: string = "api.avax-test.network"
-const port: number = 443
-const protocol: string = "https"
-const networkID: number = 5
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
-const status: string = await xchain.getTxStatus("ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g")
+const txid: string = "ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g"
+const status: string = await xchain.getTxStatus(txid)
 console.log(status)
 // Accepted
 ```
@@ -188,10 +183,16 @@ console.log(balance)
 
 Lastly, we can take the mnemonic and access the [Avalanche Web Wallet](https://wallet.avax.network). We'll see that it has the AVAX balance and that it auto-magically derives the 3rd address per the BIP44 spec.
 
+Use the mnemonic to access the Web Wallet.
+
+<img src="../../../.gitbook/assets/mnemonic.png" alt="Faucet requesting AVAX" width="50%">
+
+The balance is correct and the active address is the 3rd derived BIP44 address.
+
 <img src="../../../.gitbook/assets/wallet-1.png" alt="Web wallet balance" width="30%">
 <img src="../../../.gitbook/assets/wallet-2.png" alt="3rd derived BIP44 address" width="30%">
 
-Also **note** that the wallet GUI shows it derived the same 3 addresses as our script above.
+Also note that the wallet GUI shows it derived the same 3 addresses as our script above.
 
 <img src="../../../.gitbook/assets/wallet-3.png" alt="Wallet derived addresses" width="30%">
 <img src="../../../.gitbook/assets/derived.png" alt="AvalancheJS derived addresses" width="30%">
@@ -218,7 +219,7 @@ The Avalanche Explorer works for [Mainnet](https://explorer.avax.network) and [F
 
 ### API Nodes
 
-There is a public API server that allows developers to access the Avalanche network without having to run a node thesmelves. The public API server is actually several AvalancheGo nodes behind a load balancer to ensure high availability and high request throughput with support for both [Mainnet](https://api.avax.network) and [Fuji](https://api.avax-test.network).
+There is a public API server that allows developers to access the Avalanche network without having to run a node themselves. The public API server is actually several AvalancheGo nodes behind a load balancer to ensure high availability and high request throughput with support for both [Mainnet](https://api.avax.network) and [Fuji](https://api.avax-test.network).
 
 ### AvalancheJS Example Scripts
 
