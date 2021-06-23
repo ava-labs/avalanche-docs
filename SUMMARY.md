@@ -27,6 +27,7 @@
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
+    * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
     * [Integrate an Exchange with Avalanche C-Chain](build/tutorials/platform/integrate-exchange-with-avalanche.md)
     * [Launch Your Ethereum Dapp](build/tutorials/platform/launch-your-ethereum-dapp.md)
     * [Set up Your Ledger Nano S or Nano X with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
