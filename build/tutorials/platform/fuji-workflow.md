@@ -50,13 +50,13 @@ console.log(xAddressStrings)
 // ]
 ```
 
-**Note** that we're using `keychain` which hasn't been defined yet. Creating an empty keychain can be seen in [this example AvalancheJS script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/newKeyChain.ts).
+**Note** that we're using `keychain` which hasn't been defined yet. Creating an empty keychain can be seen in [this example AvalancheJS script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/newKeyChain.ts). There is a link to dozens of AvalancheJS examples in the resources listed below.
 
-Mnemonics and HD paths enable us to deterministically recreate a vast number of keys from nothing more than a string of words. This is an extremely empowering technology for personal and financial sovereignty. This convention let's us at any time in the future recreate the 3 keypairs which the addresses were created from in order to sign a transaction moving funds.
+Mnemonics and HD paths enable us to deterministically recreate a vast number of keys from nothing more than a string of human-readable words. This is an extremely empowering technology for personal and financial sovereignty. This convention let's us at any time in the future recreate the 3 keypairs which the addresses were created from in order to sign a transaction moving funds.
 
 ### Getting a drip from the faucet
  
-**Note** that the previous step generated 3 addresses per the BIP44 spec. We're going to first get some AVAX from the [Fuji faucet](https://faucet.avax-test.network) sent to the 1st address. To get AVAX go to the faucet and paste in your Fuji address. **Note** that this is for the Fuji testnet and these AVAX tokens have no monetary value.
+The previous step generated 3 addresses per the BIP44 spec. We're going to use the 1st address to get some AVAX from the [Fuji faucet](https://faucet.avax-test.network). To get AVAX go to the faucet and paste in your Fuji address. **Note** that this is for the Fuji testnet and these AVAX tokens have no monetary value.
 
 <img src="../../../.gitbook/assets/faucet-request.png" alt="Faucet requesting AVAX" width="30%">
 
