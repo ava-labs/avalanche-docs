@@ -87,14 +87,14 @@ Alternatively we can use AvalancheJS to get the balance.
 const address: string = "X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40"
 const balance: any = await xchain.getBalance(address, "AVAX")
 console.log(balance)
-{
-  balance: '2000000000',
-  utxoIDs: [
-    {
-      txID: '2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct',
-      outputIndex: 0
-    }
-  ]
+// {
+//   balance: '2000000000',
+//   utxoIDs: [
+//     {
+//       txID: '2GjAMJrBUYs8RuK2bXrNCuu34fNpJVor2ubNzvcUDPo5t9nMct',
+//       outputIndex: 0
+//     }
+//   ]
 }
 ```
 
@@ -103,6 +103,7 @@ console.log(balance)
 The faucet dripped 2 AVAX. First, let's send both AVAX, sans the fees, from the 1st address to the 2nd address.
 
 ```ts
+// get the AVAX asset ID
 const avaxAssetID: string = Defaults.network[networkID].X['avaxAssetID']
 
 // get the AVAX balance for the 1st address
@@ -124,11 +125,7 @@ const unsignedTx: UnsignedTx = await xchain.buildBaseTx(
   avaxAssetID,
   [xAddressStrings[1]],
   [xAddressStrings[0]],
-  [xAddressStrings[1]],
-  memo,
-  asOf,
-  locktime,
-  threshold
+  [xAddressStrings[1]]
 )
 
 // sign it
@@ -169,14 +166,14 @@ Alternatively we can use AvalancheJS to get the balance.
 const address: string = "X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y"
 const balance: any = await xchain.getBalance(address, "AVAX")
 console.log(balance)
-{
-  balance: '1999000000',
-  utxoIDs: [
-    {
-      txID: 'ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g',
-      outputIndex: 0
-    }
-  ]
+// {
+//   balance: '1999000000',
+//   utxoIDs: [
+//     {
+//       txID: 'ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g',
+//       outputIndex: 0
+//     }
+//   ]
 }
 ```
 
