@@ -7,7 +7,7 @@ Fuji is the Avalanche network's testnet and is the place for testing your dapp o
 Every resource which you would use on the Mainnet, such as an explorer, wallet and api node, are all available on the Fuji network. In this tutorial, we’ll explore a full Fuji workflow, from generating a mnemonic to sending a transaction. Ultimately we'll accomplish the following:
 
 1. Generating a 24 word english mnemonic via AvalancheJS
-2. Deriving the 1st external BIP44 X-Chain address via AvalancheJS
+2. Deriving 3 external BIP44 X-Chain addresses via AvalancheJS
 3. Getting a drip from the faucet
 4. Sending AVAX from the 1st external BIP44 address to the 2nd external BIP44 address via AvalancheJS
 5. Checking out the txid on the explorer
