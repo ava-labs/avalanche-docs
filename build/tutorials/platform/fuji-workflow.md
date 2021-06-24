@@ -2,9 +2,11 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you've developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the Mainnet (sans any issued assets) and testing your dapp or smart contract against a test environment before going live on the mainnet ensures that no actual value-bearing assets are lost during development and testing. It's considered a best-practice to first develop your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the Mainnet with real value-bearing assets.
+Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you've developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the Mainnet (sans any issued assets) and testing your dapp or smart contract against a test environment before going live on the mainnet ensures that no actual value-bearing assets are lost during development and testing. 
 
-Every resource which you would use on the Mainnet, such as an explorer, wallet and cloud full-node infrastructure, are all available on the Fuji network. In this tutorial, we’ll explore a full Fuji workflow, from generating a mnemonic to sending a transaction. Ultimately we'll accomplish the following:
+It's considered a best-practice to first develop your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the Mainnet with real value-bearing assets.
+
+Every resource which you would use on the Mainnet, such as an explorer, wallet and api node, are all available on the Fuji network. In this tutorial, we’ll explore a full Fuji workflow, from generating a mnemonic to sending a transaction. Ultimately we'll accomplish the following:
 
 1. Generating a 24 word english mnemonic via AvalancheJS
 2. Deriving the 1st external BIP44 X-Chain address via AvalancheJS
@@ -33,14 +35,16 @@ const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
 After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) keypairs.
 
 ```ts
+import HDNode from "avalanche/utils/hdnode"
 const seed: Buffer = mnemonic.mnemonicToSeedSync(m)
 const hdnode: HDNode = new HDNode(seed)
+
 for (let i: number = 0; i <= 2; i++) {
   // Deriving the _i_th external BIP44 X-Chain address
   const child: HDNode = hdnode.derive(`m/44'/9000'/0'/0/${i}`)
   keychain.importKey(child.privateKeyCB58)
 }
-// Getting a drip from the faucet
+
 const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 console.log(xAddressStrings)
 // [
@@ -50,19 +54,19 @@ console.log(xAddressStrings)
 // ]
 ```
 
-**Note** that we're using `keychain` which hasn't been defined yet. Creating an empty keychain can be seen in [this example AvalancheJS script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/newKeyChain.ts). There is a link to dozens of AvalancheJS examples in the resources listed below.
+**Note** that we're using `keychain` which hasn't been defined yet. Creating an empty keychain can be seen in [this example AvalancheJS script](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/newKeyChain.ts). There is a link to dozens of AvalancheJS examples in [the resources listed below](#resources).
 
 Mnemonics and HD paths enable us to deterministically recreate a vast number of keys from nothing more than a string of human-readable words. This is an extremely empowering technology for personal and financial sovereignty. This convention let's us at any time in the future recreate the 3 keypairs which the addresses were created from in order to sign a transaction moving funds.
 
 ## Getting a drip from the faucet
  
-The previous step generated 3 addresses per the BIP44 spec. We're going to use the 1st address to get some AVAX from the [Fuji faucet](https://faucet.avax-test.network). To get AVAX go to the faucet and paste in your Fuji address. These AVAX are for the Fuji testnet and have no monetary value.
+The previous step generated 3 addresses per [the BIP44 spec](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki). We're going to use the 1st address to get some AVAX by pasting the address into the [Fuji faucet](https://faucet.avax-test.network). These AVAX are for the Fuji testnet and have no monetary value.
 
-<img src="../../../.gitbook/assets/faucet-request.png" alt="Faucet requesting AVAX" width="30%">
+<img src="../../../.gitbook/assets/faucet-request.png" alt="Requesting AVAX" width="30%">
 
 After the faucet successfully drips some AVAX to the address it'll return a transaction id, also known as a txid. This txid can be used with the Fuji testnet blockchain explorer to learn more about the transaction.
 
-<img src="../../../.gitbook/assets/faucet-response.png" alt="Faucet receiving AVAX" width="30%">
+<img src="../../../.gitbook/assets/faucet-response.png" alt="Receiving AVAX" width="30%">
 
 ### Check the Transaction Details
 
@@ -82,7 +86,7 @@ Alternatively we can use AvalancheJS to get the balance.
 
 ```ts
 const address: string = "X-fuji1cfvdpdqyzpp8pq0g6trmjsrn9pt8nutsfm7a40"
-const balance: object = await xchain.getBalance(address, "AVAX")
+const balance: any = await xchain.getBalance(address, "AVAX")
 console.log(balance)
 {
   balance: '2000000000',
@@ -166,7 +170,7 @@ Alternatively we can use AvalancheJS to get the balance.
 
 ```ts
 const address: string = "X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y"
-const balance: object = await xchain.getBalance(address, "AVAX")
+const balance: any = await xchain.getBalance(address, "AVAX")
 console.log(balance)
 {
   balance: '1999000000',
@@ -185,7 +189,7 @@ Lastly, we can take the mnemonic and access the [Avalanche Web Wallet](https://w
 
 Use the mnemonic to access the Web Wallet.
 
-<img src="../../../.gitbook/assets/mnemonic.png" alt="Faucet requesting AVAX" width="50%">
+<img src="../../../.gitbook/assets/mnemonic.png" alt="Acess the wallet" width="50%">
 
 The balance is correct and the active address is the 3rd derived BIP44 address.
 
