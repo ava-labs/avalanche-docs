@@ -4,8 +4,6 @@
 
 Fuji is the Avalanche network's testnet and is the place for testing your dapp or smart contract after you've developed it locally using [avash](https://docs.avax.network/build/tools/avash). Fuji is a mirror of the Mainnet (sans any issued assets) and testing your dapp or smart contract against a test environment before going live on the mainnet ensures that no actual value-bearing assets are lost during development and testing. 
 
-It's considered a best-practice to first develop your dapp locally using avash, once you're confident the features are baked then deploy your dapp to the Fuji testnet and only after passing all tests and QA do you actually deploy on the Mainnet with real value-bearing assets.
-
 Every resource which you would use on the Mainnet, such as an explorer, wallet and api node, are all available on the Fuji network. In this tutorial, we’ll explore a full Fuji workflow, from generating a mnemonic to sending a transaction. Ultimately we'll accomplish the following:
 
 1. Generating a 24 word english mnemonic via AvalancheJS
