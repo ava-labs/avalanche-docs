@@ -25,6 +25,7 @@ const mnemonic: Mnemonic = Mnemonic.getInstance()
 const strength: number = 256
 const wordlist = mnemonic.getWordlists("english") as string[]
 const m: string = mnemonic.generateMnemonic(strength, randomBytes, wordlist)
+console.log(m)
 // "pool hat domain flame stomach canal fury master farm gown tide supreme winner motion this first divide spray forum wall reopen bounce spider palm"
 ```
 
@@ -150,8 +151,6 @@ console.log(status)
 // Accepted
 ```
 
-#### Check the Transaction Details
-
 Alternatively we can use the Fuji Explorer. The txid, `ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g`, can be seen on the [Fuji Explorer](https://explorer.avax-test.network/tx/ankMr1tD65A9SSto5w4ic1d31t6w42jeu8pfv6v4gRPpMg17g).
 
 <img src="../../../.gitbook/assets/explorer-3.png" alt="Transaction details" width="30%">
@@ -159,7 +158,7 @@ Alternatively we can use the Fuji Explorer. The txid, `ankMr1tD65A9SSto5w4ic1d31
 
 #### Get the Balance
 
-We can also use the Fuji Explorer to get the balance for the 2nd BIP44 derived address.
+We can also use the Fuji Explorer to get the balance for the 2nd BIP44 derived address&mdash;[X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y](https://explorer.avax-test.network/address/X-fuji1y75dj6qygj7frw2xtcfn724qfty4aadnmeth6y).
 
 <img src="../../../.gitbook/assets/balance-3.png" alt="2nd derived address balance" width="30%">
 <img src="../../../.gitbook/assets/balance-4.png" alt="2nd derived address transactions" width="30%">
@@ -194,7 +193,7 @@ The balance is correct and the active address is the 3rd derived BIP44 address.
 <img src="../../../.gitbook/assets/wallet-1.png" alt="Web wallet balance" width="30%">
 <img src="../../../.gitbook/assets/wallet-2.png" alt="3rd derived BIP44 address" width="30%">
 
-Also note that the wallet GUI shows it derived the same 3 addresses as our script above.
+Also note that the wallet GUI shows that it derived the same 3 addresses as our script above.
 
 <img src="../../../.gitbook/assets/wallet-3.png" alt="Wallet derived addresses" width="30%">
 <img src="../../../.gitbook/assets/derived.png" alt="AvalancheJS derived addresses" width="30%">
