@@ -95,7 +95,7 @@ console.log(balance)
 //       outputIndex: 0
 //     }
 //   ]
-}
+// }
 ```
 
 ## Sending AVAX
@@ -174,7 +174,7 @@ console.log(balance)
 //       outputIndex: 0
 //     }
 //   ]
-}
+// }
 ```
 
 ### Sign into the Web Wallet
