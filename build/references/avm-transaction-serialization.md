@@ -15,7 +15,7 @@ Transferable outputs wrap an output with an asset ID.
 A transferable output contains an `AssetID` and an [`Output`](avm-transaction-serialization.md#outputs).
 
 * **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). For example, this can be a [SECP256K1 transfer output](avm-transaction-serialization.md#secp256k1-transfer-output).
+* **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). For example, this can be a [SECP256K1 transfer output](avm-transaction-serialization.md#secp-256-k1-transfer-output).
 
 ### Gantt Transferable Output Specification
 
