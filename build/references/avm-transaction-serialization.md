@@ -1396,7 +1396,7 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-ops).
+* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-op).
 
 ### Gantt Unsigned Operation Tx Specification
 
