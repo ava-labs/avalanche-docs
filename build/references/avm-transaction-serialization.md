@@ -1424,7 +1424,7 @@ message OperationTx {
 Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
 
 * `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* **`Ops`**: \[`"Example Transferable Op as defined above"`\]
 
 ```text
 [
