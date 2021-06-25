@@ -78,7 +78,7 @@ Transferable inputs describe a specific UTXO with a provided transfer input.
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
+* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
 * **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
 * **`AssetID`** is a 32-byte array that defines which asset this input references.
 * **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](avm-transaction-serialization.md#secp256k1-transfer-input)
