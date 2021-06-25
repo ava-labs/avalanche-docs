@@ -153,7 +153,7 @@ Transferable operations describe a set of UTXOs with a provided transfer operati
 
 ### What Transferable Op Contains
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+A transferable operation contains an `AssetID`, `UTXOIDs`, and a `TransferOp`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this operation changes.
 * **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
@@ -1401,13 +1401,13 @@ An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this t
 ### Gantt Unsigned Operation Tx Specification
 
 ```text
-+---------+--------------+-------------------------------------+
-| base_tx : BaseTx       |                 size(base_tx) bytes |
-+---------+--------------+-------------------------------------+
-| ops     : []TransferOp |                 4 + size(ops) bytes |
-+---------+--------------+-------------------------------------+
-                         | 4 + size(ops) + size(base_tx) bytes |
-                         +-------------------------------------+
++---------+------------------+-------------------------------------+
+| base_tx : BaseTx           |                 size(base_tx) bytes |
++---------+------------------+-------------------------------------+
+| ops     : []TransferableOp |                 4 + size(ops) bytes |
++---------+------------------+-------------------------------------+
+                             | 4 + size(ops) + size(base_tx) bytes |
+                             +-------------------------------------+
 ```
 
 ### Proto Unsigned Operation Tx Specification
