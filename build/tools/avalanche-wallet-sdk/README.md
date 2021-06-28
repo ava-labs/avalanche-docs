@@ -19,7 +19,7 @@ Wallet types supported:
 Using the avalanche-wallet-sdk developers can:
 
 - Receive and send tokens and NFTs.
-- Cross chain transfer
+- Transfer cross chain
 - Validation & Delegation
 - Create keystore files from wallet instances
 - Get transaction history of wallets
@@ -117,7 +117,6 @@ Network.setNetwork(NetNetworkConstants.MainnetConfig)
 Network.setNetwork(NetNetworkConstants.TestnetConfig)
 
 ```
-
 
 
 
