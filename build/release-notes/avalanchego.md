@@ -2,6 +2,27 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.9 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
+
+**Apricot Phase 2 - Patch 9**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged.
+{% endhint %}
+
+The patch includes performance improvements, and monitoring improvements:
+* Added support to run the C-chain with pruning enabled. Pruning is currently disabled by default.
+* Reduced C-chain Websocket ping interval to reduce disconnects when behind load balancer.
+* Added timestamp to snowman Block interface.
+* Fixed bug in C-chain API max duration enforcement for calls made via websockets.
+* Added gzip header support for the http endpoint.
+* Added additional version descriptions to the `info.getNodeVersion` endpoint.
+* Restrict connecting to node versions >= 1.4.5.
+* Moved daemon logs under the primary log folder.
+* Added support for deterministic sampling.
+* Added auto deployment GitHub action for new tags.
+* Refactored config management to better support launching nodes programmatically.
+
 ## v1.4.8 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.8)\)
 
 **Apricot Phase 2 - Patch 8**
