@@ -1917,7 +1917,7 @@ An asset to be issued in an instance of the AVM's Genesis
 
 ### What GenesisAsset Contains
 
-An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`, `Name`, `Symbol`, `Denomination`, and `InitialStates`.
+An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, `Memo`, `Name`, `Symbol`, `Denomination`, and `InitialStates`.
 
 * **`Alias`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
 * **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
