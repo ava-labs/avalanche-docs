@@ -91,10 +91,10 @@ By default the SDK is connected to the Avalanche Mainnet.
 import { NetworkConstants, Network} from '@avalabs/avalanche-wallet-sdk';
 
 // Set to Mainnet
-Network.setNetwork(NetNetworkConstants.MainnetConfig)
+Network.setNetwork(NetworkConstants.MainnetConfig)
 
 // Set to Fuji Testnet
-Network.setNetwork(NetNetworkConstants.TestnetConfig)
+Network.setNetwork(NetworkConstants.TestnetConfig)
 ```
 
 ### Printing BN (Big Number)
