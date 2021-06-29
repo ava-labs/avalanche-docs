@@ -15,9 +15,9 @@ import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 let newMnemonic = MnemonicWallet.generateMnemonicPhrase()
 let myWallet = MnemonicWallet.fromMnemonic(newMnemonic)
 
-let addressX = myWallet1.getAddressX()
-let addressP = myWallet1.getAddressP()
-let addressC = myWallet1.getAddressC()
+let addressX = myWallet.getAddressX()
+let addressP = myWallet.getAddressP()
+let addressC = myWallet.getAddressC()
 ```
 
 ### From an Existing Mnemonic Phrase
