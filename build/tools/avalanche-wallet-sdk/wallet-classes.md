@@ -1,11 +1,11 @@
 # Wallet Classes
 
-The core of the SDK are the wallet classes that let users easily create and manage different 
-types of wallets.
+The core of the SDK are the wallet classes that let users easily create and manage different types of wallets.
 
 ## Mnemonic Wallet
-Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 proposals. For each transaction received,
-the mnemonic wallet will generate a new address. This increases privacy but decreases performance for this wallet type.
+Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 specifications.
+For each transaction received, the mnemonic wallet generates a new address.
+This increases privacy but decreases performance for this wallet type.
 
 #### New wallet
 ```typescript
@@ -20,7 +20,7 @@ let addressP = myWallet1.getAddressP()
 let addressC = myWallet1.getAddressC()
 ```
 
-#### From existing mnemonic phrase
+#### From an Existing Mnemonic Phrase
 ```typescript
 import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 
@@ -50,7 +50,7 @@ myWallet.resetHdIndices().then(()=>{
 ```
 
 ## Public Mnemonic Wallet
-Similar to the MnemonicWallet class but in readonly mode without access to seed phrase.
+Similar to the MnemonicWallet class but in read-only mode without access to the seed phrase.
 
 ```typescript
 import {PublicMnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
@@ -62,8 +62,7 @@ let wallet = new PublicMnemonicWallet(XPUB_AVM, XPUB_EVM);
 ```
 
 ## Ledger Wallet
-Similar to the MnemonicWallet class. Instead of having access to a seed phrase it 
-communicates with an external ledger device to sign transactions.
+Similar to the MnemonicWallet class. Instead of having access to a seed phrase, it communicates with an external ledger device to sign transactions.
 
 The client application needs to provide the appropriate [ledger transport](https://github.com/LedgerHQ/ledgerjs#ledgerhqhw-transport-).
 
