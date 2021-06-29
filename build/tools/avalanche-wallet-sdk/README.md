@@ -21,7 +21,7 @@ Using the avalanche-wallet-sdk developers can:
 
 - Receive and send tokens and NFTs.
 - Transfer cross chain
-- Validation & Delegation
+- Validate & Delegate
 - Create keystore files from wallet instances
 - Get transaction history of wallets
 - Mint NFTs on the X chain
