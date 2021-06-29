@@ -30,6 +30,8 @@ Using the avalanche-wallet-sdk developers can:
 ### Creating a mnemonic wallet
 Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 proposals. For each transaction received,
 the mnemonic wallet will generate a new address. This increases privacy but decreases performance for this wallet type.
+
+#### New wallet
 ```typescript
 import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 
@@ -37,7 +39,21 @@ import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 let newMnemonic = MnemonicWallet.generateMnemonicPhrase()
 let myWallet = MnemonicWallet.fromMnemonic(newMnemonic)
 
-// Mnemonic wallets need to find their HD index on startup
+let addressX = myWallet1.getAddressX()
+let addressP = myWallet1.getAddressP()
+let addressC = myWallet1.getAddressC()
+```
+
+#### From existing mnemonic phrase
+```typescript
+import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
+
+// Create a wallet instance from the known mnemonic phrase
+let myWallet = MnemonicWallet.fromMnemonic(myMnemonicPhrase)
+
+// This is also a good place to attach the event listeners. More information on event listeners below.
+
+// Mnemonic wallets with activity need to find their HD index on startup
 // This is a heavy operation and can take a long time for wallets with extensive activity
 myWallet.resetHdIndices().then(()=>{
     // The wallet is ready to use
@@ -51,11 +67,12 @@ myWallet.resetHdIndices().then(()=>{
     // update C chain ERC20 balance
     myWallet.updateBalanceERC20()
 
-    let addressX = myWallet1.getAddressX()
-    let addressP = myWallet1.getAddressP()
-    let addressC = myWallet1.getAddressC()
+    let addressX = myWallet.getAddressX()
+    let addressP = myWallet.getAddressP()
+    let addressC = myWallet.getAddressC()
 })
 ```
+
 
 ### Event listeners
 Every wallet instance will fire events to indicate changes in its state.
@@ -107,7 +124,7 @@ let txID = await myWallet.sendAvax(to, amount)
 ```
 
 ### Changing Networks
-
+By default the SDK is connected to the Avalanche Mainnet.
 ```typescript
 import { NetworkConstants, Network} from '@avalabs/avalanche-wallet-sdk';
 
@@ -162,7 +179,11 @@ The SDK comes loaded with a set of ERC20 contracts. You can add additional contr
 import { Assets } from '@avalabs/avalanche-wallet-sdk'
 
 // Will try to fetch details about the ERC20 contract
-await Assets.addErc20Token('0x34B6C87bb59Eb37EFe35C8d594a234Cd8C654D50'); // Testnet DAI
+try{
+    await Assets.addErc20Token('0x34B6C87bb59Eb37EFe35C8d594a234Cd8C654D50'); // Testnet DAI
+}catch(e){
+    // Contract not found or not valid
+}
 
 // or from known data
 let tokenData = {
