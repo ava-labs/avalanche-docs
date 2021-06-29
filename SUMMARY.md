@@ -74,6 +74,8 @@
   * [Keystore API](build/avalanchego-apis/keystore-api.md)
   * [Metrics API](build/avalanchego-apis/metrics-api.md)
 * [Tools](build/tools/README.md)
+  * [Wallet SDK](build/tools/avalanche-wallet-sdk/README.md)
+    * [Wallet Classes](build/tools/avalanche-wallet-sdk/wallet-classes.md)
   * [AvalancheJS](build/tools/avalanchejs/README.md)
     * [Create an Asset on the X-Chain](build/tools/avalanchejs/create-an-asset-on-the-x-chain.md)
     * [Manage X-Chain Keys](build/tools/avalanchejs/manage-x-chain-keys.md)

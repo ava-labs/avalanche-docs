@@ -3,3 +3,6 @@
 .DS_Store
 .DS_Store?
 .markdownlint.json
+
+# Editor files
+.idea
