@@ -1,7 +1,8 @@
 
 # 🔴WARNING: Beta Release🔴
 
-This library is under development and there might be frequent breaking changes.
+- This library is under development and there might be frequent breaking changes.
+- Audit pending.
 
 # Avalanche Wallet SDK (Beta)
 
@@ -27,51 +28,7 @@ Using the avalanche-wallet-sdk developers can:
 
 ## Tutorials
 
-### Creating a mnemonic wallet
-Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 proposals. For each transaction received,
-the mnemonic wallet will generate a new address. This increases privacy but decreases performance for this wallet type.
-
-#### New wallet
-```typescript
-import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
-
-// Create a new wallet
-let newMnemonic = MnemonicWallet.generateMnemonicPhrase()
-let myWallet = MnemonicWallet.fromMnemonic(newMnemonic)
-
-let addressX = myWallet1.getAddressX()
-let addressP = myWallet1.getAddressP()
-let addressC = myWallet1.getAddressC()
-```
-
-#### From existing mnemonic phrase
-```typescript
-import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
-
-// Create a wallet instance from the known mnemonic phrase
-let myWallet = MnemonicWallet.fromMnemonic(myMnemonicPhrase)
-
-// This is also a good place to attach the event listeners. More information on event listeners below.
-
-// Mnemonic wallets with activity need to find their HD index on startup
-// This is a heavy operation and can take a long time for wallets with extensive activity
-myWallet.resetHdIndices().then(()=>{
-    // The wallet is ready to use
-
-    // Update X chain balance
-    myWallet.updateUtxosX()
-    // Update P chain balance
-    myWallet.updateUtxosP()
-    // Update C chain AVAX balance
-    myWallet.updateAvaxBalanceC()
-    // update C chain ERC20 balance
-    myWallet.updateBalanceERC20()
-
-    let addressX = myWallet.getAddressX()
-    let addressP = myWallet.getAddressP()
-    let addressC = myWallet.getAddressC()
-})
-```
+ - [Wallet Classes](wallet-classes.md)
 
 
 ### Event listeners
