@@ -1911,3 +1911,152 @@ Let’s make a UTXO from the signed transaction created above:
 ]
 ```
 
+## GenesisAsset
+
+An asset to be issued in an instance of the AVM's Genesis
+
+### What GenesisAsset Contains
+
+An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`, `Name`, `Symbol`, `Denomination`, and `InitialStates`.
+
+* **`Alias`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
+* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
+* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
+* **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
+* **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
+* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
+* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
+* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](avm-transaction-serialization.md#initial-state) of those feature extensions.
+
+### Gantt GenesisAsset Specification
+
+```text
++----------------+----------------------+--------------------------------+
+| alias          :   string             |           2 + len(alias) bytes |
++----------------+----------------------+--------------------------------+
+| network_id     : int                  |                        4 bytes |
++----------------+----------------------+--------------------------------+
+| blockchain_id  : [32]byte             |                       32 bytes |
++----------------+----------------------+--------------------------------+
+| outputs        : []TransferableOutput |        4 + size(outputs) bytes |
++----------------+----------------------+--------------------------------+
+| inputs         : []TransferableInput  |         4 + size(inputs) bytes |
++----------------+----------------------+--------------------------------+
+| memo           : [256]byte            |           4 + size(memo) bytes |
++----------------+----------------------+--------------------------------+
+| name           : string               |            2 + len(name) bytes |
++----------------+----------------------+--------------------------------+
+| symbol         : string               |          2 + len(symbol) bytes |
++----------------+----------------------+--------------------------------+
+| denomination   : byte                 |                        1 bytes |
++----------------+----------------------+--------------------------------+
+| initial_states : []InitialState       | 4 + size(initial_states) bytes |
++----------------+----------------------+--------------------------------+
+|           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
+|                 + len(name) + len(symbol) + size(initial_states) bytes |
++------------------------------------------------------------------------+
+```
+
+### Proto GenesisAsset Specification
+
+```text
+message GenesisAsset {
+    string alias = 1;                          // 2 bytes + len(alias)
+    uint32 network_id = 2;                     // 04 bytes
+    bytes blockchain_id = 3;                   // 32 bytes
+    repeated Output outputs = 4;               // 04 bytes + size(outputs)
+    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
+    bytes memo = 6;                            // 04 bytes + size(memo)
+    string name = 7;                           // 2 bytes + len(name)
+    name symbol = 8;                           // 2 bytes + len(symbol)
+    uint8 denomination = 9;                    // 1 bytes
+    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
+}
+```
+
+### GenesisAsset Example
+
+
+```text
+[
+    NetworkID    <- 0x00000004
+    BlockchainID <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs      <- []
+    Inputs       <- []
+    Memo <- 0x00010203
+]
+```
+
+Let’s make a GenesisAsset:
+
+const memo: Buffer = serialization.typeToBuffer("2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X", "cb58")
+const name: string = "asset1"
+const symbol: string = "MFCA"
+
+* **`Alias`**: `0x617373657431`
+* **`NetworkID`**: `12345`
+* **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
+* **`Outputs`**: []
+* **`Inputs`**: []
+* **`Memo`**: `2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X`
+* **`Name`**: `asset1`
+* **`Symbol`**: `MFCA`
+* **`Denomination`**: `1`
+* **`InitialStates`**:
+* `"Example Initial State as defined above"`
+
+```text
+[
+    TxID      <- 0x617373657431 
+    UTXOIndex <- 0x00000000
+    AssetID   <- 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+    Output    <-     0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+]
+=
+[
+    // asset alias len: 
+    0x00, 0x06, 
+    // asset alias: 
+    0x61, 0x73, 0x73, 0x65, 0x74, 0x31, 
+    // network_id: 
+    0x00, 0x00, 0x00, 0x00, 
+    // blockchain_id: 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // output_len: 
+    0x00, 0x00, 0x00, 0x00, 
+    // input_len: 
+    0x00, 0x00, 0x00, 0x00, 
+    // memo_len: 
+    0x00, 0x00, 0x00, 0x1b, 
+    // memo: 
+    0x66, 0x72, 0x6f, 0x6d, 0x20, 0x73, 0x6e, 0x6f, 0x77, 0x66, 0x6c, 0x61, 
+    0x6b, 0x65, 0x20, 0x74, 0x6f, 0x20, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x68, 0x65, 
+    // asset_name_len: 
+    0x00, 0x0f, 
+    // asset_name: 
+    0x6d, 0x79, 0x46, 0x69, 0x78, 0x65, 0x64, 0x43, 0x61, 0x70, 0x41, 0x73, 0x73, 0x65, 0x74, 
+    // symbol_len: 
+    0x00, 0x04, 
+    // symbol: 
+    0x4d, 0x46, 0x43, 0x41, 
+    // denomination: 
+    0x07, 
+    // number of InitialStates:
+    0x00, 0x00, 0x00, 0x01,
+    // InitialStates[0]:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
+]
+```
