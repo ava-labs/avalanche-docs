@@ -26,6 +26,16 @@ Using the avalanche-wallet-sdk developers can:
 - Get transaction history of wallets
 - Mint NFTs on the X chain
 
+## Installation
+
+With npm
+
+```npm install --save @avalabs/avalanche-wallet-sdk```
+
+or yarn
+
+```yarn add @avalabs/avalanche-wallet-sdk```
+
 ## Tutorials
 
  - [Wallet Classes](wallet-classes.md)
