@@ -11,13 +11,14 @@ This update is backwards compatible. It is optional, but encouraged.
 {% endhint %}
 
 The patch includes performance improvements, and monitoring improvements:
+
 * Added support to run the C-chain with pruning enabled. Pruning is currently disabled by default.
 * Reduced C-chain Websocket ping interval to reduce disconnects when behind load balancer.
 * Added timestamp to snowman Block interface.
 * Fixed bug in C-chain API max duration enforcement for calls made via websockets.
 * Added gzip header support for the http endpoint.
 * Added additional version descriptions to the `info.getNodeVersion` endpoint.
-* Restrict connecting to node versions >= 1.4.5.
+* Restricted connecting to node versions &gt;= 1.4.5.
 * Moved daemon logs under the primary log folder.
 * Added support for deterministic sampling.
 * Added auto deployment GitHub action for new tags.

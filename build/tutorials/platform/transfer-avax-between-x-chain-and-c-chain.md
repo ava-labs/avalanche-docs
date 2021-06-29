@@ -257,3 +257,4 @@ The response should look like this:
 ## Wrapping Up
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+
