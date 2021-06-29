@@ -157,7 +157,7 @@ Use the `WebsocketProvider` class to update wallet balances in real time without
 ```typescript
 import { Network, NetworkConstants } from 'avalanche-wallet-sdk';
 
-// Create a websocket provider from the current network used by the SDK
+// Create a websocket provider from the network currently used by the SDK
 const provider = Network.WebsocketProvider.fromActiveNetwork()
 
 // To track wallets and update their balances
