@@ -140,7 +140,7 @@ Network.setNetwork(NetNetworkConstants.TestnetConfig)
 Token amounts are represented in their smallest divisible unit using BN.js. The `Utils` namespace has helper functions to display BN numbers in a 
 human readable way.
 ```typescript
-import {Utils} from `@avalabs/avalanche-wallet-sdk`
+import {Utils} from '@avalabs/avalanche-wallet-sdk'
 
 // On X and P chains AVAX has 9 decimals
 let amtX = new BN(1234567000000)
