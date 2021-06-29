@@ -1978,24 +1978,13 @@ message GenesisAsset {
 
 ### GenesisAsset Example
 
-
-```text
-[
-    NetworkID    <- 0x00000004
-    BlockchainID <- 0x0000000000000000000000000000000000000000000000000000000000000000
-    Outputs      <- []
-    Inputs       <- []
-    Memo <- 0x00010203
-]
-```
-
 Let’s make a GenesisAsset:
 
 const memo: Buffer = serialization.typeToBuffer("2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X", "cb58")
 const name: string = "asset1"
 const symbol: string = "MFCA"
 
-* **`Alias`**: `0x617373657431`
+* **`Alias`**: `asset1`
 * **`NetworkID`**: `12345`
 * **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
 * **`Outputs`**: []
@@ -2009,10 +1998,18 @@ const symbol: string = "MFCA"
 
 ```text
 [
-    TxID      <- 0x617373657431 
-    UTXOIndex <- 0x00000000
-    AssetID   <- 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
-    Output    <-     0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    Alias         <- 0x617373657431
+    NetworkID     <- 0x00000004
+    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs       <- []
+    Inputs        <- []
+    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Name          <- 0x617373657431 
+    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    InitialStates <- [
+        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    ]
 ]
 =
 [
