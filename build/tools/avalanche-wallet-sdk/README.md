@@ -1,5 +1,5 @@
 
-# WARNING: Beta Release
+# 🔴WARNING: Beta Release🔴
 
 This library is under development and there might be frequent breaking changes.
 
@@ -7,7 +7,7 @@ This library is under development and there might be frequent breaking changes.
 
 Avalanche wallet SDK is a typescript library for creating and managing decentralized wallets. 
 
-It provides high level methods to transact on Avalanche's primary networks: X, P and C.
+It provides high level methods to transact on Avalanche's primary networks: X-Chain, P-Chain and C-Chain.
 
 Wallet types supported:
 - Singleton Wallets
@@ -19,7 +19,7 @@ Wallet types supported:
 Using the avalanche-wallet-sdk developers can:
 
 - Receive and send tokens and NFTs.
-- Cross chain transfer
+- Transfer cross chain
 - Validation & Delegation
 - Create keystore files from wallet instances
 - Get transaction history of wallets
@@ -175,9 +175,6 @@ let tokenData = {
 
 Assets.addErc20TokenFromData(tokenData)
 ```
-
-
-
 
 
 
