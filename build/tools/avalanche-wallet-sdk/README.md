@@ -26,11 +26,13 @@ Using `avalanche-wallet-sdk`, developers can:
 
 ## Installation
 
-With `npm`:
+Source code can be found in this library's [Github repo](https://github.com/ava-labs/avalanche-wallet-sdk).
+
+### Install with `npm`
 
 ```npm install --save @avalabs/avalanche-wallet-sdk```
 
-Or with `yarn`:
+### Install with `yarn`
 
 ```yarn add @avalabs/avalanche-wallet-sdk```
 
