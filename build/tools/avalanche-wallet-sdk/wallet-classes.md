@@ -3,11 +3,11 @@
 The core of the SDK are the wallet classes that let users easily create and manage different types of wallets.
 
 ## Mnemonic Wallet
-Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 specifications.
-For each transaction received, the mnemonic wallet generates a new address.
-This increases privacy but decreases performance for this wallet type.
 
-#### New wallet
+Mnemonic wallets are designed according to BIP44, BIP32 and BIP39 specifications. For each transaction received, the mnemonic wallet generates a new address. This increases privacy but decreases performance for this wallet type.
+
+### New wallet
+
 ```typescript
 import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 
@@ -20,7 +20,8 @@ let addressP = myWallet1.getAddressP()
 let addressC = myWallet1.getAddressC()
 ```
 
-#### From an Existing Mnemonic Phrase
+### From an Existing Mnemonic Phrase
+
 ```typescript
 import {MnemonicWallet} from '@avalabs/avalanche-wallet-sdk'
 
@@ -50,6 +51,7 @@ myWallet.resetHdIndices().then(()=>{
 ```
 
 ## Public Mnemonic Wallet
+
 Similar to the MnemonicWallet class but in read-only mode without access to the seed phrase.
 
 ```typescript
@@ -62,6 +64,7 @@ let wallet = new PublicMnemonicWallet(XPUB_AVM, XPUB_EVM);
 ```
 
 ## Ledger Wallet
+
 Similar to the MnemonicWallet class. Instead of having access to a seed phrase, it communicates with an external ledger device to sign transactions.
 
 The client application needs to provide the appropriate [ledger transport](https://github.com/LedgerHQ/ledgerjs#ledgerhqhw-transport-).
@@ -74,6 +77,7 @@ let wallet = await LedgerWallet.fromTransport(transport);
 ```
 
 ## Singleton Wallet
+
 Singleton wallets are the most performant wallet type because they consist of a single private key, with a single address.
 
 ```typescript
@@ -82,3 +86,4 @@ import { SingletonWallet } from '@avalabs/avalanche-wallet-sdk'
 let privateKey = "PrivateKey-23Zqf7uScHNEoj5kuQfGkk8LSoUjM95LawSxFmgNCK6kFnWC7p"
 let wallet = new SingletonWallet(privateKey);
 ```
+

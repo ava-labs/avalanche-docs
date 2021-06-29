@@ -309,6 +309,7 @@ This allows you to specify a config to be passed into the C-Chain. The default v
   "debug-api-enabled": false,
   "web3-api-enabled": true,
   "local-txs-enabled": false,
+  "pruning-enabled": false,
   "api-max-duration": 0, // Default to no maximum
   "api-max-blocks-per-request": 0, // Default to no maximum
   "allow-unfinalized-queries": false
@@ -412,6 +413,12 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string \
 `keystore-insecure-unlock-allowed` \(bool\):
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
+
+#### Database Pruning
+
+`pruning-enabled`\(bool\):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions. 
 
 ### Consensus Parameters
 
