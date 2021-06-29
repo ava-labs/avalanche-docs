@@ -1980,10 +1980,6 @@ message GenesisAsset {
 
 Let’s make a GenesisAsset:
 
-const memo: Buffer = serialization.typeToBuffer("2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X", "cb58")
-const name: string = "asset1"
-const symbol: string = "MFCA"
-
 * **`Alias`**: `asset1`
 * **`NetworkID`**: `12345`
 * **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
