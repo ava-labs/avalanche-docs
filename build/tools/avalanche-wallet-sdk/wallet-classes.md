@@ -71,7 +71,7 @@ The client application needs to provide the appropriate [ledger transport](https
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 
 let transport = await TransportU2F.create();
-this.wallet = await LedgerWallet.fromTransport(transport);
+let wallet = await LedgerWallet.fromTransport(transport);
 ```
 
 ## Singleton Wallet
