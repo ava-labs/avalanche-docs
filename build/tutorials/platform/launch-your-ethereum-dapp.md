@@ -110,7 +110,7 @@ Most popular are:
 * [MythX](https://mythx.io/)
 * [Mythril](https://github.com/ConsenSys/mythril)
 
-We highly recommend using at least one of them if professional contract security review is not possible.
+We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
 
 ## Gotchas and things to look out for
 
