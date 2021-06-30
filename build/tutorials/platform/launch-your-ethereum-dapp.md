@@ -101,6 +101,17 @@ Smart contract verification provides transparency for users interacting with sma
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
+## Contract security checks
+
+Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
+
+Most popular are:
+* [Slither](https://github.com/crytic/slither), here's a [tutorial](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/)
+* [MythX](https://mythx.io/)
+* [Mythril](https://github.com/ConsenSys/mythril)
+
+We highly recommend using at least one of them if professional contract security review is not possible. A more comprehensive look into secure development practices can be found [here](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/workflow.md).
+
 ## Gotchas and things to look out for
 
 Avalanche Platform's C-Chain is EVM-compatible, but it is not identical. There are some differences you need to be aware of, otherwise, you may create subtle bugs or inconsistencies in how your dapps behave.
@@ -123,7 +134,7 @@ Gas on Avalanche is burned. Validators don't keep the gas for themselves \(they 
 
 ### Coreth Configuration
 
-By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. This is done through node's command-line options. Command-line options for coreth are listed [here](../../references/command-line-interface.md#c-chain--coreth), along with their default values.
+By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. This is done through node's command-line options. Command-line options for coreth are listed [here](../../references/command-line-interface.md#coreth-config), along with their default values.
 
 You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file, for example:
 
