@@ -288,9 +288,9 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 
 For more information about C-Chain configs, see [here](command-line-interface.md#config-file).
 
-### C-Chain / Coreth <a id="config-file"></a>
+### C-Chain / Coreth <a id="coreth-config"></a>
 
-`--config-file` \(json\):
+`--coreth-config` \(json\):
 
 \(This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs).\)
 
