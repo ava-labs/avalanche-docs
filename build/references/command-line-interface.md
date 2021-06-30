@@ -286,7 +286,7 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 }
 ```
 
-For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
+For more information about C-Chain configs, see [here](command-line-interface.md#config-file).
 
 ### C-Chain / Coreth <a id="coreth-config"></a>
 

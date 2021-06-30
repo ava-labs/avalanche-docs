@@ -78,7 +78,7 @@ Transferable inputs describe a specific UTXO with a provided transfer input.
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
+* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
 * **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
 * **`AssetID`** is a 32-byte array that defines which asset this input references.
 * **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](avm-transaction-serialization.md#secp256k1-transfer-input)
@@ -153,7 +153,7 @@ Transferable operations describe a set of UTXOs with a provided transfer operati
 
 ### What Transferable Op Contains
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+A transferable operation contains an `AssetID`, `UTXOIDs`, and a `TransferOp`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this operation changes.
 * **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
@@ -1396,18 +1396,18 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-ops).
+* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-op).
 
 ### Gantt Unsigned Operation Tx Specification
 
 ```text
-+---------+--------------+-------------------------------------+
-| base_tx : BaseTx       |                 size(base_tx) bytes |
-+---------+--------------+-------------------------------------+
-| ops     : []TransferOp |                 4 + size(ops) bytes |
-+---------+--------------+-------------------------------------+
-                         | 4 + size(ops) + size(base_tx) bytes |
-                         +-------------------------------------+
++---------+------------------+-------------------------------------+
+| base_tx : BaseTx           |                 size(base_tx) bytes |
++---------+------------------+-------------------------------------+
+| ops     : []TransferableOp |                 4 + size(ops) bytes |
++---------+------------------+-------------------------------------+
+                             | 4 + size(ops) + size(base_tx) bytes |
+                             +-------------------------------------+
 ```
 
 ### Proto Unsigned Operation Tx Specification
@@ -1424,7 +1424,7 @@ message OperationTx {
 Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
 
 * `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* **`Ops`**: \[`"Example Transferable Op as defined above"`\]
 
 ```text
 [
