@@ -13,11 +13,17 @@ Avash provides the ability to run Lua scripts which can execute a sequence of sh
 
 ### Quick Setup <a id="quick-setup"></a>
 
-1. Install and build an Avalanche client
-2. `cd $GOPATH`
-3. `go get github.com/ava-labs/avash`
-4. `cd src/github.com/ava-labs/avash`
-5. `go build`
+To download and build Avash:
+
+```sh
+git clone https://github.com/ava-labs/avash.git; cd avash; go build
+```
+
+To run Avash:
+
+```sh
+./avash
+```
 
 ## Configuration <a id="configuration"></a>
 
