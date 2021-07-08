@@ -21,11 +21,7 @@ create_service_file () {
   echo "Type=simple">>avalanchego.service
   echo "User=$(whoami)">>avalanchego.service
   echo "WorkingDirectory=$HOME">>avalanchego.service
-  if [ "$ipChoice" = "1" ]; then
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=">>avalanchego.service
-  else
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --public-ip=$foundIP --http-host=">>avalanchego.service
-  fi
+  echo "ExecStart=$HOME/avalanche-node/avalanchego --config-file=$HOME/.avalanchego/configs/node.json">>avalanchego.service
   echo "Restart=always">>avalanchego.service
   echo "RestartSec=1">>avalanchego.service
   echo "[Install]">>avalanchego.service
@@ -33,36 +29,59 @@ create_service_file () {
   echo "">>avalanchego.service
 }
 
+create_config_file () {
+  rm -f node.json
+  echo "{" >>node.json
+  if [ "$ipChoice" = "1" ]; then
+    echo "  \"dynamic-public-ip\": \"opendns\",">>node.json
+  else
+    echo "  \"public-ip\": \"$foundIP\",">>node.json
+  fi
+  echo "  \"http-host\": \"\"">>node.json
+  echo "}" >>node.json
+  mkdir -p $HOME/.avalanchego/configs
+  cp -f node.json $HOME/.avalanchego/configs/node.json
+}
+
+remove_service_file () {
+  if test -f "/etc/systemd/system/avalanchego.service"; then
+    sudo systemctl stop avalanchego
+    sudo systemctl disable avalanchego
+    sudo rm /etc/systemd/system/avalanchego.service
+  fi
+}
+
 #helper function to check for presence of required commands, and install if missing
 check_reqs () {
-if ! command -v curl &> /dev/null
-then
-    echo "curl could not be found, will install..."
-    sudo apt-get install curl -y
-fi
-if ! command -v wget &> /dev/null
-then
-    echo "wget could not be found, will install..."
-    sudo apt-get install wget -y
-fi
-if ! command -v dig &> /dev/null
-then
-    echo "dig could not be found, will install..."
-    sudo apt-get install dnsutils -y
-fi
+  if ! command -v curl &> /dev/null
+  then
+      echo "curl could not be found, will install..."
+      sudo apt-get install curl -y
+  fi
+  if ! command -v wget &> /dev/null
+  then
+      echo "wget could not be found, will install..."
+      sudo apt-get install wget -y
+  fi
+  if ! command -v dig &> /dev/null
+  then
+      echo "dig could not be found, will install..."
+      sudo apt-get install dnsutils -y
+  fi
 }
 
 #helper function that prints usage
 usage () {
-echo "Usage: $0 [--list] [--version <tag>] [--help]"
-echo ""
-echo "Options:"
-echo "   --help            Shows this message"
-echo "   --list            Lists 10 newest versions available to install"
-echo "   --version <tag>   Installs <tag> version"
-echo ""
-echo "Run without any options, script will install or upgrade AvalancheGo to latest available version."
-exit 0
+  echo "Usage: $0 [--list] [--version <tag>] [--help] [--reinstall]"
+  echo ""
+  echo "Options:"
+  echo "   --help            Shows this message"
+  echo "   --list            Lists 10 newest versions available to install"
+  echo "   --version <tag>   Installs <tag> version"
+  echo "   --reinstall       Run the installer from scratch, overwriting the old service file"
+  echo ""
+  echo "Run without any options, script will install or upgrade AvalancheGo to latest available version."
+  exit 0
 }
 
 echo "AvalancheGo installer"
@@ -86,6 +105,10 @@ then
       else
         usage
       fi
+      ;;
+    --reinstall) #recreate service file and install
+      echo "Will reinstall the node."
+      remove_service_file
       ;;
     *)
       usage
@@ -180,15 +203,18 @@ else
   fi
   echo "Installing service with public IP: $foundIP"
 fi
+create_config_file
 create_service_file
 chmod 644 avalanchego.service
 sudo cp -f avalanchego.service /etc/systemd/system/avalanchego.service
+sudo systemctl daemon-reload
 sudo systemctl start avalanchego
 sudo systemctl enable avalanchego
 echo
 echo "Done!"
 echo
 echo "Your node should now be bootstrapping on the main net."
+echo "Node configuration file is $HOME/.avalanchego/confgis/node.json"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"

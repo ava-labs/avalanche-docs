@@ -52,6 +52,10 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
+`--index-enabled` \(boolean\):
+
+If set to `false`, this node will not enable the indexer and Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
+
 ### Assertions
 
 `--assertions-enabled` \(boolean\):

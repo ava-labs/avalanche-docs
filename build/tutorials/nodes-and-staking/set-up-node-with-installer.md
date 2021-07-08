@@ -111,6 +111,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service 
 Done!
 
 Your node should now be bootstrapping on the main net.
+Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
 To follow the log use (ctrl+C to stop):
@@ -227,6 +228,18 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
+## Node configuration
+
+File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/command-line-interface.md). Default configuration may look like this:
+
+```json
+{
+  "dynamic-public-ip": "opendns",
+  "http-host": ""
+}
+```
+Note that configuration file needs to be a properly formatted `JSON` file, so switches are formatted differently than for command line, so don't enter options like `--dynamic-public-ip=opendns` but as in the example above.
+
 ## Using a previous version
 
 The installer script can also be used to install a version of AvalancheGo other than the latest version.
@@ -266,6 +279,22 @@ Note that not all AvalancheGo versions are compatible. You should generally run 
 {% endhint %}
 
 Thanks to community member [Jean Zundel](https://github.com/jzu) for the inspiration and help implementing support for installing non-latest node versions.
+
+## Reinstall and script update
+
+Installer script gets updated from time to time, with new features and capabilities added. To take advantage of new features or to recover from modifications that made the node fail, you may want to reinstall the node. To do that, fetch the latest version of the script from the web with:
+
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
+```
+
+After the script has updated, run it again with the `--reinstall` command line argument:
+
+```bash
+./avalanchego-installer.sh --reinstall
+```
+
+This will delete the existing service file, and run the installer from scratch, like it was started for the first time. Note that the database and NodeID will be left intact.
 
 ## What next?
 
