@@ -1,6 +1,6 @@
 # API
 
-## AvalancheJS - v3.8.1
+## AvalancheJS - v3.8.0
 
 ### Modules
 
