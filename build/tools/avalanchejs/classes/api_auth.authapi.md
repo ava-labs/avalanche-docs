@@ -45,7 +45,7 @@ Class for interacting with a node's AuthAPI.
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/auth/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/auth/api.ts#L67)*
+*Defined in [src/apis/auth/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/auth/api.ts#L67)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ Name | Type | Default |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseurl](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L38)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L28)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L36)*
+*Defined in [src/common/apibase.ts:26](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L26)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L40)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L30)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:17](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L17)*
+*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L11)*
 
 ___
 
@@ -104,24 +104,24 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcid](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:19](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L19)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L12)*
 
 ## Methods
 
 ###  callMethod
 
-▸ **callMethod**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `headers?`: object): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **callMethod**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `headers?`: object): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:21](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L21)*
+*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L14)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `headers?` | object |
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **changePassword**(`oldPassword`: string, `newPassword`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/auth/api.ts:60](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/auth/api.ts#L60)*
+*Defined in [src/apis/auth/api.ts:60](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/auth/api.ts#L60)*
 
 Change this node's authorization token password. **Any authorization tokens created under an old password will become invalid.**
 
@@ -156,7 +156,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L63)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L53)*
 
 Returns the baseurl's path.
 
@@ -170,7 +170,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L58)*
 
 Returns the baseurl's database.
 
@@ -184,7 +184,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:69](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L69)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -195,9 +195,9 @@ ___
 
 ###  newToken
 
-▸ **newToken**(`password`: string, `endpoints`: Array‹string›): *Promise‹string›*
+▸ **newToken**(`password`: string, `endpoints`: string[]): *Promise‹string›*
 
-*Defined in [src/apis/auth/api.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/auth/api.ts#L25)*
+*Defined in [src/apis/auth/api.ts:25](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/auth/api.ts#L25)*
 
 Creates a new authorization token that grants access to one or more API endpoints.
 
@@ -206,7 +206,7 @@ Creates a new authorization token that grants access to one or more API endpoint
 Name | Type | Description |
 ------ | ------ | ------ |
 `password` | string | This node's authorization token password, set through the CLI when the node was launched. |
-`endpoints` | Array‹string› | A list of endpoints that will be accessible using the generated token. If there's an element that is "*", this token can reach any endpoint.  |
+`endpoints` | string[] | A list of endpoints that will be accessible using the generated token. If there"s an element that is "*", this token can reach any endpoint.  |
 
 **Returns:** *Promise‹string›*
 
@@ -218,7 +218,7 @@ ___
 
 ▸ **revokeToken**(`password`: string, `token`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/auth/api.ts:43](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/auth/api.ts#L43)*
+*Defined in [src/apis/auth/api.ts:43](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/auth/api.ts#L43)*
 
 Revokes an authorization token, removing all of its rights to access endpoints.
 
@@ -241,7 +241,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L47)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseurl.
 

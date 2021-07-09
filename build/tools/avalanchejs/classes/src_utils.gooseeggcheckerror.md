@@ -33,7 +33,7 @@
 
 *Overrides [AvalancheError](src_utils.avalancheerror.md).[constructor](src_utils.avalancheerror.md#constructor)*
 
-*Defined in [src/utils/errors.ts:63](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L63)*
+*Defined in [src/utils/errors.ts:63](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/errors.ts#L63)*
 
 **Parameters:**
 
@@ -51,7 +51,7 @@ Name | Type |
 
 *Inherited from [AvalancheError](src_utils.avalancheerror.md).[errorCode](src_utils.avalancheerror.md#errorcode)*
 
-*Defined in [src/utils/errors.ts:44](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L44)*
+*Defined in [src/utils/errors.ts:44](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/errors.ts#L44)*
 
 ___
 
@@ -91,6 +91,6 @@ Defined in node_modules/typescript/lib/lib.es5.d.ts:975
 
 *Inherited from [AvalancheError](src_utils.avalancheerror.md).[getCode](src_utils.avalancheerror.md#getcode)*
 
-*Defined in [src/utils/errors.ts:51](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/errors.ts#L51)*
+*Defined in [src/utils/errors.ts:51](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/errors.ts#L51)*
 
 **Returns:** *string*

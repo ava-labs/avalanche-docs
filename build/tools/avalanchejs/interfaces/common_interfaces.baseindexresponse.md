@@ -30,7 +30,7 @@
 
 • **bytes**: *string*
 
-*Defined in [src/common/interfaces.ts:52](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L52)*
+*Defined in [src/common/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L53)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **encoding**: *string*
 
-*Defined in [src/common/interfaces.ts:54](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L54)*
+*Defined in [src/common/interfaces.ts:55](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L55)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [src/common/interfaces.ts:51](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L51)*
+*Defined in [src/common/interfaces.ts:52](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L52)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **index**: *string*
 
-*Defined in [src/common/interfaces.ts:55](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L55)*
+*Defined in [src/common/interfaces.ts:56](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L56)*
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 • **timestamp**: *string*
 
-*Defined in [src/common/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L53)*
+*Defined in [src/common/interfaces.ts:54](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L54)*

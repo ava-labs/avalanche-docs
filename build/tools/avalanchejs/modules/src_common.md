@@ -46,6 +46,7 @@
 * [RequestResponseData](src_common.md#requestresponsedata)
 * [SECP256k1KeyChain](src_common.md#secp256k1keychain)
 * [SECP256k1KeyPair](src_common.md#secp256k1keypair)
+* [Serialized](src_common.md#serialized)
 * [SigIdx](src_common.md#sigidx)
 * [Signature](src_common.md#signature)
 * [StakedOuts](src_common.md#stakedouts)
@@ -305,6 +306,12 @@ ___
 ###  SECP256k1KeyPair
 
 • **SECP256k1KeyPair**:
+
+___
+
+###  Serialized
+
+• **Serialized**:
 
 ___
 

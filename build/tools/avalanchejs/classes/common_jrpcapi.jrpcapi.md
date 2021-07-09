@@ -12,9 +12,9 @@
 
   ↳ [AuthAPI](api_auth.authapi.md)
 
-  ↳ [AVMAPI](api_avm.avmapi.md)
-
   ↳ [PlatformVMAPI](api_platformvm.platformvmapi.md)
+
+  ↳ [AVMAPI](api_avm.avmapi.md)
 
   ↳ [EVMAPI](api_evm.evmapi.md)
 
@@ -56,7 +56,7 @@
 
 *Overrides [APIBase](common_apibase.apibase.md).[constructor](common_apibase.apibase.md#constructor)*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:69](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L69)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ Name | Type | Default | Description |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseurl](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L38)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L28)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L36)*
+*Defined in [src/common/apibase.ts:26](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L26)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L40)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L30)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **jrpcVersion**: *string* = "2.0"
 
-*Defined in [src/common/jrpcapi.ts:17](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L17)*
+*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L11)*
 
 ___
 
@@ -112,22 +112,22 @@ ___
 
 • **rpcid**: *number* = 1
 
-*Defined in [src/common/jrpcapi.ts:19](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L19)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L12)*
 
 ## Methods
 
 ###  callMethod
 
-▸ **callMethod**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `headers?`: object): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **callMethod**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `headers?`: object): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
-*Defined in [src/common/jrpcapi.ts:21](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L21)*
+*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L14)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `headers?` | object |
 
@@ -141,7 +141,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L63)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L53)*
 
 Returns the baseurl's path.
 
@@ -155,7 +155,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L58)*
 
 Returns the baseurl's database.
 
@@ -167,7 +167,7 @@ ___
 
 ▸ **getRPCID**(): *number*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:69](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/jrpcapi.ts#L69)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -182,7 +182,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/apibase.ts#L47)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseurl.
 

@@ -19,7 +19,7 @@
 
 • **addresses**: *string[]*
 
-*Defined in [src/common/interfaces.ts:38](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L38)*
+*Defined in [src/common/interfaces.ts:39](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L39)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **encoding**: *string*
 
-*Defined in [src/common/interfaces.ts:39](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L39)*
+*Defined in [src/common/interfaces.ts:40](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L40)*
