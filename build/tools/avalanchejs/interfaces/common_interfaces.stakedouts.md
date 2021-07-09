@@ -23,7 +23,7 @@
 
 • **amount**: *string*
 
-*Defined in [src/common/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L34)*
+*Defined in [src/common/interfaces.ts:35](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L35)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **nodeID**: *string*
 
-*Defined in [src/common/interfaces.ts:29](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L29)*
+*Defined in [src/common/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L30)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **owners**: *string[]*
 
-*Defined in [src/common/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L32)*
+*Defined in [src/common/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L33)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **stakeOnlyUntil**: *string*
 
-*Defined in [src/common/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L31)*
+*Defined in [src/common/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L32)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **stakedUntil**: *string*
 
-*Defined in [src/common/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L30)*
+*Defined in [src/common/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L31)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **threshold**: *string*
 
-*Defined in [src/common/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L33)*
+*Defined in [src/common/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L34)*

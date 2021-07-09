@@ -18,4 +18,4 @@
 
 • **chain**: *string*
 
-*Defined in [src/common/interfaces.ts:94](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L94)*
+*Defined in [src/common/interfaces.ts:95](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L95)*

@@ -16,11 +16,11 @@ Class for representing a key chain in Avalanche.
 
   ↳ **SECP256k1KeyChain**
 
+  ↳ [KeyChain](api_platformvm_keychain.keychain.md)
+
   ↳ [KeyChain](api_avm_keychain.keychain.md)
 
   ↳ [KeyChain](api_evm_keychain.keychain.md)
-
-  ↳ [KeyChain](api_platformvm_keychain.keychain.md)
 
 ## Index
 
@@ -50,7 +50,7 @@ Class for representing a key chain in Avalanche.
 
 *Overrides [StandardKeyChain](common_keychain.standardkeychain.md).[importKey](common_keychain.standardkeychain.md#importkey)*
 
-*Defined in [src/common/secp256k1.ts:219](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/secp256k1.ts#L219)*
+*Defined in [src/common/secp256k1.ts:219](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/secp256k1.ts#L219)*
 
 Given a private key, makes a new key pair, returns the address.
 
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[keys](common_keychain.standardkeychain.md#protected-keys)*
 
-*Defined in [src/common/keychain.ts:119](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L119)*
+*Defined in [src/common/keychain.ts:119](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L119)*
 
 #### Type declaration:
 
@@ -90,7 +90,7 @@ ___
 
 *Overrides [StandardKeyChain](common_keychain.standardkeychain.md).[makeKey](common_keychain.standardkeychain.md#makekey)*
 
-*Defined in [src/common/secp256k1.ts:206](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/secp256k1.ts#L206)*
+*Defined in [src/common/secp256k1.ts:206](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/secp256k1.ts#L206)*
 
 Makes a new key pair, returns the address.
 
@@ -108,7 +108,7 @@ Makes a new key pair, returns the address.
 
 *Overrides [StandardKeyChain](common_keychain.standardkeychain.md).[addKey](common_keychain.standardkeychain.md#addkey)*
 
-*Defined in [src/common/secp256k1.ts:208](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/secp256k1.ts#L208)*
+*Defined in [src/common/secp256k1.ts:208](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/secp256k1.ts#L208)*
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[clone](common_keychain.standardkeychain.md#abstract-clone)*
 
-*Defined in [src/common/keychain.ts:205](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L205)*
+*Defined in [src/common/keychain.ts:205](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L205)*
 
 **Returns:** *this*
 
@@ -138,7 +138,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[create](common_keychain.standardkeychain.md#abstract-create)*
 
-*Defined in [src/common/keychain.ts:203](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L203)*
+*Defined in [src/common/keychain.ts:203](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L203)*
 
 **Parameters:**
 
@@ -152,15 +152,15 @@ ___
 
 ###  getAddressStrings
 
-▸ **getAddressStrings**(): *Array‹string›*
+▸ **getAddressStrings**(): *string[]*
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[getAddressStrings](common_keychain.standardkeychain.md#getaddressstrings)*
 
-*Defined in [src/common/keychain.ts:150](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L150)*
+*Defined in [src/common/keychain.ts:150](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L150)*
 
 Gets an array of addresses stored in the [StandardKeyChain](common_keychain.standardkeychain.md).
 
-**Returns:** *Array‹string›*
+**Returns:** *string[]*
 
 An array of string representations of the addresses
 
@@ -168,15 +168,15 @@ ___
 
 ###  getAddresses
 
-▸ **getAddresses**(): *Array‹Buffer›*
+▸ **getAddresses**(): *Buffer[]*
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[getAddresses](common_keychain.standardkeychain.md#getaddresses)*
 
-*Defined in [src/common/keychain.ts:143](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L143)*
+*Defined in [src/common/keychain.ts:143](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L143)*
 
 Gets an array of addresses stored in the [StandardKeyChain](common_keychain.standardkeychain.md).
 
-**Returns:** *Array‹Buffer›*
+**Returns:** *Buffer[]*
 
 An array of [Buffer](https://github.com/feross/buffer)  representations
 of the addresses
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[getKey](common_keychain.standardkeychain.md#getkey)*
 
-*Defined in [src/common/keychain.ts:201](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L201)*
+*Defined in [src/common/keychain.ts:201](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L201)*
 
 Returns the [StandardKeyPair](common_keychain.standardkeypair.md) listed under the provided address
 
@@ -211,7 +211,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[hasKey](common_keychain.standardkeychain.md#haskey)*
 
-*Defined in [src/common/keychain.ts:191](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L191)*
+*Defined in [src/common/keychain.ts:191](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L191)*
 
 Checks if there is a key associated with the provided address.
 
@@ -233,7 +233,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[removeKey](common_keychain.standardkeychain.md#removekey)*
 
-*Defined in [src/common/keychain.ts:170](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L170)*
+*Defined in [src/common/keychain.ts:170](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L170)*
 
 Removes the key pair from the list of they keys managed in the [StandardKeyChain](common_keychain.standardkeychain.md).
 
@@ -255,7 +255,7 @@ ___
 
 *Inherited from [StandardKeyChain](common_keychain.standardkeychain.md).[union](common_keychain.standardkeychain.md#abstract-union)*
 
-*Defined in [src/common/keychain.ts:207](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/keychain.ts#L207)*
+*Defined in [src/common/keychain.ts:207](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/keychain.ts#L207)*
 
 **Parameters:**
 

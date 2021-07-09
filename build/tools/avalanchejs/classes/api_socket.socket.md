@@ -32,7 +32,7 @@
 
 \+ **new Socket**(`url`: string | URL, `options?`: WebSocket.ClientOptions | ClientRequestArgs): *[Socket](api_socket.socket.md)*
 
-*Defined in [src/apis/socket/socket.ts:36](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L36)*
+*Defined in [src/apis/socket/socket.ts:36](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L36)*
 
 Provides the API for creating and managing a WebSocket connection to a server, as well as for sending and receiving data on the connection.
 
@@ -51,7 +51,7 @@ Name | Type | Default | Description |
 
 • **onclose**: *any*
 
-*Defined in [src/apis/socket/socket.ts:14](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L14)*
+*Defined in [src/apis/socket/socket.ts:14](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L14)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **onerror**: *any*
 
-*Defined in [src/apis/socket/socket.ts:16](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L16)*
+*Defined in [src/apis/socket/socket.ts:16](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L16)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **onmessage**: *any*
 
-*Defined in [src/apis/socket/socket.ts:12](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L12)*
+*Defined in [src/apis/socket/socket.ts:12](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L12)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 • **onopen**: *any*
 
-*Defined in [src/apis/socket/socket.ts:10](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L10)*
+*Defined in [src/apis/socket/socket.ts:10](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L10)*
 
 ## Methods
 
@@ -83,7 +83,7 @@ ___
 
 ▸ **close**(`mcode?`: number, `data?`: string): *void*
 
-*Defined in [src/apis/socket/socket.ts:34](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L34)*
+*Defined in [src/apis/socket/socket.ts:34](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L34)*
 
 Terminates the connection completely
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **send**(`data`: any, `cb?`: any): *void*
 
-*Defined in [src/apis/socket/socket.ts:24](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/socket/socket.ts#L24)*
+*Defined in [src/apis/socket/socket.ts:24](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/socket/socket.ts#L24)*
 
 Send a message to the server
 

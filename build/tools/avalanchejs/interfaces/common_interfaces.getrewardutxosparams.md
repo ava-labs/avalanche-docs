@@ -19,7 +19,7 @@
 
 • **encoding**: *string*
 
-*Defined in [src/common/interfaces.ts:112](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L112)*
+*Defined in [src/common/interfaces.ts:113](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L113)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **txID**: *string*
 
-*Defined in [src/common/interfaces.ts:111](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L111)*
+*Defined in [src/common/interfaces.ts:112](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L112)*

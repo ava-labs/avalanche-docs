@@ -29,6 +29,7 @@
 * [IsBootstrappedParams](../interfaces/common_interfaces.isbootstrappedparams.md)
 * [PeersParams](../interfaces/common_interfaces.peersparams.md)
 * [PeersResponse](../interfaces/common_interfaces.peersresponse.md)
+* [Serialized](../interfaces/common_interfaces.serialized.md)
 * [StakedOuts](../interfaces/common_interfaces.stakedouts.md)
 * [UTXOResponse](../interfaces/common_interfaces.utxoresponse.md)
 * [WordLists](../interfaces/common_interfaces.wordlists.md)

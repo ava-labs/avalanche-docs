@@ -17,9 +17,9 @@
 
 ### `Const` SelectCredentialClass
 
-▸ **SelectCredentialClass**(`credid`: number, ...`args`: Array‹any›): *[Credential](../classes/common_signature.credential.md)*
+▸ **SelectCredentialClass**(`credid`: number, ...`args`: any[]): *[Credential](../classes/common_signature.credential.md)*
 
-*Defined in [src/apis/avm/credentials.ts:17](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/credentials.ts#L17)*
+*Defined in [src/apis/avm/credentials.ts:17](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/avm/credentials.ts#L17)*
 
 Takes a buffer representing the credential and returns the proper [Credential](../classes/common_signature.credential.md) instance.
 
@@ -28,7 +28,7 @@ Takes a buffer representing the credential and returns the proper [Credential](.
 Name | Type | Description |
 ------ | ------ | ------ |
 `credid` | number | A number representing the credential ID parsed prior to the bytes passed in  |
-`...args` | Array‹any› | - |
+`...args` | any[] | - |
 
 **Returns:** *[Credential](../classes/common_signature.credential.md)*
 

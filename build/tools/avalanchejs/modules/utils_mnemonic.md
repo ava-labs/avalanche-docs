@@ -19,7 +19,7 @@
 
 • **bip39**: *any* = require('bip39')
 
-*Defined in [src/utils/mnemonic.ts:9](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/mnemonic.ts#L9)*
+*Defined in [src/utils/mnemonic.ts:9](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/mnemonic.ts#L9)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **randomBytes**: *any* = require("randombytes")
 
-*Defined in [src/utils/mnemonic.ts:10](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/utils/mnemonic.ts#L10)*
+*Defined in [src/utils/mnemonic.ts:10](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/mnemonic.ts#L10)*

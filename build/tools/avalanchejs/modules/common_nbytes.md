@@ -10,12 +10,12 @@
 
 ### Variables
 
-* [serializer](common_nbytes.md#const-serializer)
+* [serialization](common_nbytes.md#const-serialization)
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/nbytes.ts:16](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/nbytes.ts#L16)*
+*Defined in [src/common/nbytes.ts:15](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/nbytes.ts#L15)*

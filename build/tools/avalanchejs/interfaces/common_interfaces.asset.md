@@ -21,7 +21,7 @@
 
 • **assetID**: *Buffer*
 
-*Defined in [src/common/interfaces.ts:24](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L24)*
+*Defined in [src/common/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L25)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **denomination**: *number*
 
-*Defined in [src/common/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L25)*
+*Defined in [src/common/interfaces.ts:26](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L26)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [src/common/interfaces.ts:22](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L22)*
+*Defined in [src/common/interfaces.ts:23](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L23)*
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 • **symbol**: *string*
 
-*Defined in [src/common/interfaces.ts:23](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/interfaces.ts#L23)*
+*Defined in [src/common/interfaces.ts:24](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/interfaces.ts#L24)*

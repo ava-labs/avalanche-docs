@@ -16,12 +16,12 @@
 
 ### Variables
 
-* [serializer](common_output.md#const-serializer)
+* [serialization](common_output.md#const-serialization)
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/output.ts:18](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/output.ts#L18)*
+*Defined in [src/common/output.ts:18](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/output.ts#L18)*

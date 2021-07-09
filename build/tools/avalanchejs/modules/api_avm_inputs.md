@@ -10,29 +10,17 @@
 * [SECPTransferInput](../classes/api_avm_inputs.secptransferinput.md)
 * [TransferableInput](../classes/api_avm_inputs.transferableinput.md)
 
-### Variables
-
-* [serializer](api_avm_inputs.md#const-serializer)
-
 ### Functions
 
 * [SelectInputClass](api_avm_inputs.md#const-selectinputclass)
-
-## Variables
-
-### `Const` serializer
-
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
-
-*Defined in [src/apis/avm/inputs.ts:16](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/inputs.ts#L16)*
 
 ## Functions
 
 ### `Const` SelectInputClass
 
-▸ **SelectInputClass**(`inputid`: number, ...`args`: Array‹any›): *[Input](../classes/common_inputs.input.md)*
+▸ **SelectInputClass**(`inputid`: number, ...`args`: any[]): *[Input](../classes/common_inputs.input.md)*
 
-*Defined in [src/apis/avm/inputs.ts:25](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/avm/inputs.ts#L25)*
+*Defined in [src/apis/avm/inputs.ts:24](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/avm/inputs.ts#L24)*
 
 Takes a buffer representing the output and returns the proper [Input](../classes/common_inputs.input.md) instance.
 
@@ -41,7 +29,7 @@ Takes a buffer representing the output and returns the proper [Input](../classes
 Name | Type | Description |
 ------ | ------ | ------ |
 `inputid` | number | A number representing the inputID parsed prior to the bytes passed in  |
-`...args` | Array‹any› | - |
+`...args` | any[] | - |
 
 **Returns:** *[Input](../classes/common_inputs.input.md)*
 

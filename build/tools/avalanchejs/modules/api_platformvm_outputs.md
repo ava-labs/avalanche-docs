@@ -16,7 +16,7 @@
 ### Variables
 
 * [bintools](api_platformvm_outputs.md#const-bintools)
-* [serializer](api_platformvm_outputs.md#const-serializer)
+* [serialization](api_platformvm_outputs.md#const-serialization)
 
 ### Functions
 
@@ -26,25 +26,25 @@
 
 ### `Const` bintools
 
-• **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)‹›* = BinTools.getInstance()
+• **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/apis/platformvm/outputs.ts:13](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/platformvm/outputs.ts#L13)*
+*Defined in [src/apis/platformvm/outputs.ts:13](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/outputs.ts#L13)*
 
 ___
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/outputs.ts:14](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/platformvm/outputs.ts#L14)*
+*Defined in [src/apis/platformvm/outputs.ts:14](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/outputs.ts#L14)*
 
 ## Functions
 
 ### `Const` SelectOutputClass
 
-▸ **SelectOutputClass**(`outputid`: number, ...`args`: Array‹any›): *[Output](../classes/common_output.output.md)*
+▸ **SelectOutputClass**(`outputid`: number, ...`args`: any[]): *[Output](../classes/common_output.output.md)*
 
-*Defined in [src/apis/platformvm/outputs.ts:23](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/platformvm/outputs.ts#L23)*
+*Defined in [src/apis/platformvm/outputs.ts:23](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/outputs.ts#L23)*
 
 Takes a buffer representing the output and returns the proper Output instance.
 
@@ -53,8 +53,8 @@ Takes a buffer representing the output and returns the proper Output instance.
 Name | Type | Description |
 ------ | ------ | ------ |
 `outputid` | number | A number representing the inputID parsed prior to the bytes passed in  |
-`...args` | Array‹any› | - |
+`...args` | any[] | - |
 
 **Returns:** *[Output](../classes/common_output.output.md)*
 
-An instance of an [Output](../classes/common_output.output.md)-extended class.
+An instance of an [Output](src_common.md#output)-extended class.

@@ -15,16 +15,52 @@
 
 ### Variables
 
-* [serializer](common_transactions.md#const-serializer)
+* [buffer](common_transactions.md#const-buffer)
+* [cb58](common_transactions.md#const-cb58)
+* [decimalString](common_transactions.md#const-decimalstring)
+* [hex](common_transactions.md#const-hex)
+* [serialization](common_transactions.md#const-serialization)
 * [serializer](common_transactions.md#const-serializer)
 
 ## Variables
 
-### `Const` serializer
+### `Const` buffer
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **buffer**: *[SerializedType](src_utils.md#serializedtype)* = "Buffer"
 
-*Defined in [src/common/tx.ts:19](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/tx.ts#L19)*
+*Defined in [src/common/tx.ts:23](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/tx.ts#L23)*
+
+___
+
+### `Const` cb58
+
+• **cb58**: *[SerializedType](src_utils.md#serializedtype)* = "cb58"
+
+*Defined in [src/common/tx.ts:20](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/tx.ts#L20)*
+
+___
+
+### `Const` decimalString
+
+• **decimalString**: *[SerializedType](src_utils.md#serializedtype)* = "decimalString"
+
+*Defined in [src/common/tx.ts:22](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/tx.ts#L22)*
+
+___
+
+### `Const` hex
+
+• **hex**: *[SerializedType](src_utils.md#serializedtype)* = "hex"
+
+*Defined in [src/common/tx.ts:21](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/tx.ts#L21)*
+
+___
+
+### `Const` serialization
+
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
+
+*Defined in [src/common/tx.ts:19](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/tx.ts#L19)*
 
 ___
 
@@ -32,4 +68,4 @@ ___
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/evmtx.ts:20](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/evmtx.ts#L20)*
+*Defined in [src/common/evmtx.ts:20](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/evmtx.ts#L20)*

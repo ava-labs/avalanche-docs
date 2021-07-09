@@ -47,19 +47,19 @@
 
 ###  constructor
 
-\+ **new AssetAmountDestination**(`destinations`: Array‹Buffer›, `senders`: Array‹Buffer›, `changeAddresses`: Array‹Buffer›): *[AssetAmountDestination](api_platformvm_utxos.assetamountdestination.md)*
+\+ **new AssetAmountDestination**(`destinations`: Buffer[], `senders`: Buffer[], `changeAddresses`: Buffer[]): *[AssetAmountDestination](api_platformvm_utxos.assetamountdestination.md)*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[constructor](common_assetamount.standardassetamountdestination.md#constructor)*
 
-*Defined in [src/common/assetamount.ts:187](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L187)*
+*Defined in [src/common/assetamount.ts:187](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L187)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`destinations` | Array‹Buffer› |
-`senders` | Array‹Buffer› |
-`changeAddresses` | Array‹Buffer› |
+`destinations` | Buffer[] |
+`senders` | Buffer[] |
+`changeAddresses` | Buffer[] |
 
 **Returns:** *[AssetAmountDestination](api_platformvm_utxos.assetamountdestination.md)*
 
@@ -71,77 +71,77 @@ Name | Type |
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[amountkey](common_assetamount.standardassetamountdestination.md#protected-amountkey)*
 
-*Defined in [src/common/assetamount.ts:114](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L114)*
+*Defined in [src/common/assetamount.ts:114](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L114)*
 
 ___
 
 ### `Protected` amounts
 
-• **amounts**: *Array‹[AssetAmount](common_assetamount.assetamount.md)›* = []
+• **amounts**: *[AssetAmount](common_assetamount.assetamount.md)[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[amounts](common_assetamount.standardassetamountdestination.md#protected-amounts)*
 
-*Defined in [src/common/assetamount.ts:110](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L110)*
+*Defined in [src/common/assetamount.ts:110](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L110)*
 
 ___
 
 ### `Protected` change
 
-• **change**: *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›* = []
+• **change**: *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[change](common_assetamount.standardassetamountdestination.md#protected-change)*
 
-*Defined in [src/common/assetamount.ts:117](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L117)*
+*Defined in [src/common/assetamount.ts:117](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L117)*
 
 ___
 
 ### `Protected` changeAddresses
 
-• **changeAddresses**: *Array‹Buffer›* = []
+• **changeAddresses**: *Buffer[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[changeAddresses](common_assetamount.standardassetamountdestination.md#protected-changeaddresses)*
 
-*Defined in [src/common/assetamount.ts:113](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L113)*
+*Defined in [src/common/assetamount.ts:113](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L113)*
 
 ___
 
 ### `Protected` destinations
 
-• **destinations**: *Array‹Buffer›* = []
+• **destinations**: *Buffer[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[destinations](common_assetamount.standardassetamountdestination.md#protected-destinations)*
 
-*Defined in [src/common/assetamount.ts:111](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L111)*
+*Defined in [src/common/assetamount.ts:111](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L111)*
 
 ___
 
 ### `Protected` inputs
 
-• **inputs**: *Array‹[TransferableInput](api_platformvm_inputs.transferableinput.md)›* = []
+• **inputs**: *[TransferableInput](api_platformvm_inputs.transferableinput.md)[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[inputs](common_assetamount.standardassetamountdestination.md#protected-inputs)*
 
-*Defined in [src/common/assetamount.ts:115](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L115)*
+*Defined in [src/common/assetamount.ts:115](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L115)*
 
 ___
 
 ### `Protected` outputs
 
-• **outputs**: *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›* = []
+• **outputs**: *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[outputs](common_assetamount.standardassetamountdestination.md#protected-outputs)*
 
-*Defined in [src/common/assetamount.ts:116](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L116)*
+*Defined in [src/common/assetamount.ts:116](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L116)*
 
 ___
 
 ### `Protected` senders
 
-• **senders**: *Array‹Buffer›* = []
+• **senders**: *Buffer[]* = []
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[senders](common_assetamount.standardassetamountdestination.md#protected-senders)*
 
-*Defined in [src/common/assetamount.ts:112](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L112)*
+*Defined in [src/common/assetamount.ts:112](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L112)*
 
 ## Methods
 
@@ -151,7 +151,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[addAssetAmount](common_assetamount.standardassetamountdestination.md#addassetamount)*
 
-*Defined in [src/common/assetamount.ts:121](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L121)*
+*Defined in [src/common/assetamount.ts:121](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L121)*
 
 **Parameters:**
 
@@ -171,7 +171,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[addChange](common_assetamount.standardassetamountdestination.md#addchange)*
 
-*Defined in [src/common/assetamount.ts:135](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L135)*
+*Defined in [src/common/assetamount.ts:135](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L135)*
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[addInput](common_assetamount.standardassetamountdestination.md#addinput)*
 
-*Defined in [src/common/assetamount.ts:127](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L127)*
+*Defined in [src/common/assetamount.ts:127](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L127)*
 
 **Parameters:**
 
@@ -207,7 +207,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[addOutput](common_assetamount.standardassetamountdestination.md#addoutput)*
 
-*Defined in [src/common/assetamount.ts:131](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L131)*
+*Defined in [src/common/assetamount.ts:131](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L131)*
 
 **Parameters:**
 
@@ -225,7 +225,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[assetExists](common_assetamount.standardassetamountdestination.md#assetexists)*
 
-*Defined in [src/common/assetamount.ts:159](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L159)*
+*Defined in [src/common/assetamount.ts:159](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L159)*
 
 **Parameters:**
 
@@ -243,7 +243,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[canComplete](common_assetamount.standardassetamountdestination.md#cancomplete)*
 
-*Defined in [src/common/assetamount.ts:179](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L179)*
+*Defined in [src/common/assetamount.ts:179](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L179)*
 
 **Returns:** *boolean*
 
@@ -251,25 +251,25 @@ ___
 
 ###  getAllOutputs
 
-▸ **getAllOutputs**(): *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+▸ **getAllOutputs**(): *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getAllOutputs](common_assetamount.standardassetamountdestination.md#getalloutputs)*
 
-*Defined in [src/common/assetamount.ts:175](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L175)*
+*Defined in [src/common/assetamount.ts:175](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L175)*
 
-**Returns:** *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+**Returns:** *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 ___
 
 ###  getAmounts
 
-▸ **getAmounts**(): *Array‹[AssetAmount](common_assetamount.assetamount.md)›*
+▸ **getAmounts**(): *[AssetAmount](common_assetamount.assetamount.md)[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getAmounts](common_assetamount.standardassetamountdestination.md#getamounts)*
 
-*Defined in [src/common/assetamount.ts:139](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L139)*
+*Defined in [src/common/assetamount.ts:139](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L139)*
 
-**Returns:** *Array‹[AssetAmount](common_assetamount.assetamount.md)›*
+**Returns:** *[AssetAmount](common_assetamount.assetamount.md)[]*
 
 ___
 
@@ -279,7 +279,7 @@ ___
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getAssetAmount](common_assetamount.standardassetamountdestination.md#getassetamount)*
 
-*Defined in [src/common/assetamount.ts:155](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L155)*
+*Defined in [src/common/assetamount.ts:155](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L155)*
 
 **Parameters:**
 
@@ -293,70 +293,70 @@ ___
 
 ###  getChangeAddresses
 
-▸ **getChangeAddresses**(): *Array‹Buffer›*
+▸ **getChangeAddresses**(): *Buffer[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getChangeAddresses](common_assetamount.standardassetamountdestination.md#getchangeaddresses)*
 
-*Defined in [src/common/assetamount.ts:151](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L151)*
+*Defined in [src/common/assetamount.ts:151](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L151)*
 
-**Returns:** *Array‹Buffer›*
+**Returns:** *Buffer[]*
 
 ___
 
 ###  getChangeOutputs
 
-▸ **getChangeOutputs**(): *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+▸ **getChangeOutputs**(): *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getChangeOutputs](common_assetamount.standardassetamountdestination.md#getchangeoutputs)*
 
-*Defined in [src/common/assetamount.ts:171](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L171)*
+*Defined in [src/common/assetamount.ts:171](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L171)*
 
-**Returns:** *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+**Returns:** *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 ___
 
 ###  getDestinations
 
-▸ **getDestinations**(): *Array‹Buffer›*
+▸ **getDestinations**(): *Buffer[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getDestinations](common_assetamount.standardassetamountdestination.md#getdestinations)*
 
-*Defined in [src/common/assetamount.ts:143](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L143)*
+*Defined in [src/common/assetamount.ts:143](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L143)*
 
-**Returns:** *Array‹Buffer›*
+**Returns:** *Buffer[]*
 
 ___
 
 ###  getInputs
 
-▸ **getInputs**(): *Array‹[TransferableInput](api_platformvm_inputs.transferableinput.md)›*
+▸ **getInputs**(): *[TransferableInput](api_platformvm_inputs.transferableinput.md)[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getInputs](common_assetamount.standardassetamountdestination.md#getinputs)*
 
-*Defined in [src/common/assetamount.ts:163](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L163)*
+*Defined in [src/common/assetamount.ts:163](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L163)*
 
-**Returns:** *Array‹[TransferableInput](api_platformvm_inputs.transferableinput.md)›*
+**Returns:** *[TransferableInput](api_platformvm_inputs.transferableinput.md)[]*
 
 ___
 
 ###  getOutputs
 
-▸ **getOutputs**(): *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+▸ **getOutputs**(): *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getOutputs](common_assetamount.standardassetamountdestination.md#getoutputs)*
 
-*Defined in [src/common/assetamount.ts:167](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L167)*
+*Defined in [src/common/assetamount.ts:167](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L167)*
 
-**Returns:** *Array‹[TransferableOutput](api_platformvm_outputs.transferableoutput.md)›*
+**Returns:** *[TransferableOutput](api_platformvm_outputs.transferableoutput.md)[]*
 
 ___
 
 ###  getSenders
 
-▸ **getSenders**(): *Array‹Buffer›*
+▸ **getSenders**(): *Buffer[]*
 
 *Inherited from [StandardAssetAmountDestination](common_assetamount.standardassetamountdestination.md).[getSenders](common_assetamount.standardassetamountdestination.md#getsenders)*
 
-*Defined in [src/common/assetamount.ts:147](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/common/assetamount.ts#L147)*
+*Defined in [src/common/assetamount.ts:147](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/assetamount.ts#L147)*
 
-**Returns:** *Array‹Buffer›*
+**Returns:** *Buffer[]*

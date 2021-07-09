@@ -41,3 +41,15 @@
 * [XCHAINADDRPayload](../classes/utils_payload.xchainaddrpayload.md)
 * [YAMLPayload](../classes/utils_payload.yamlpayload.md)
 * [cb58EncodedPayload](../classes/utils_payload.cb58encodedpayload.md)
+
+### Variables
+
+* [serialization](utils_payload.md#const-serialization)
+
+## Variables
+
+### `Const` serialization
+
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
+
+*Defined in [src/utils/payload.ts:16](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/payload.ts#L16)*

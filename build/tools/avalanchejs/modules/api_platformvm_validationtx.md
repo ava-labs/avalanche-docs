@@ -13,12 +13,12 @@
 
 ### Variables
 
-* [serializer](api_platformvm_validationtx.md#const-serializer)
+* [serialization](api_platformvm_validationtx.md#const-serialization)
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/validationtx.ts:23](https://github.com/ava-labs/avalanchejs/blob/1a2866a/src/apis/platformvm/validationtx.ts#L23)*
+*Defined in [src/apis/platformvm/validationtx.ts:23](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/validationtx.ts#L23)*
