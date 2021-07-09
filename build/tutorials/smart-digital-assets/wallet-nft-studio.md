@@ -4,16 +4,13 @@
 
 [Avalanche](../platform/) natively supports the creation of of digital assets including fixed-cap assets, variable-cap assets, and non-fungible tokens \(NFTs\).
 
-Some assets are fungible, meaning all units of that asset are perfectly interchangeable. Notes of a currency are fungible, for example: one $5 note is the treated the same as any other $5 note.
-Some assets, by contrast, are non-fungible. That is, elements are not unique and perfectly interchangeable. Real estate is non-fungible because each piece of land is distinct.
+Some assets are fungible, meaning all units of that asset are perfectly interchangeable. Notes of a currency are fungible, for example: one $5 note is the treated the same as any other $5 note. Some assets, by contrast, are non-fungible. That is, elements are not unique and perfectly interchangeable. Real estate is non-fungible because each piece of land is distinct.
 
 Non-fungible tokens are a useful way of representing proof of ownership of a unique asset.
 
 ## NFT Studio on Avalanche Wallet
 
-The **NFT Studio** in the [Avalanche Wallet](https://wallet.avax.network/) can be used to create NFTs. 
-In this tutorial we'll create a **Collectible** asset: a generic NFTs with a picture and a description, or with a custom payload.
-You can create them using a simple point and click interface, and no technical knowledge required.
+The **NFT Studio** in the [Avalanche Wallet](https://wallet.avax.network/) can be used to create NFTs. In this tutorial we'll create a **Collectible** asset: a generic NFTs with a picture and a description, or with a custom payload. You can create them using a simple point and click interface, and no technical knowledge required.
 
 To access the **NFT Studio**, log into the Avalanche Wallet. On the left side, select **Studio**:
 

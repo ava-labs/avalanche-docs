@@ -52,10 +52,6 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
-`--index-enabled` \(boolean\):
-
-If set to `false`, this node will not enable the indexer and Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
-
 ### Assertions
 
 `--assertions-enabled` \(boolean\):
@@ -422,7 +418,7 @@ If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to 
 
 `pruning-enabled`\(bool\):
 
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions. 
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
 ### Consensus Parameters
 

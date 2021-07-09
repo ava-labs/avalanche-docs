@@ -106,6 +106,7 @@ If successful, the `code` tab will now have a green checkmark, and your users wi
 Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
 
 Most popular are:
+
 * [Slither](https://github.com/crytic/slither), here's a [tutorial](https://blog.trailofbits.com/2018/10/19/slither-a-solidity-static-analysis-framework/)
 * [MythX](https://mythx.io/)
 * [Mythril](https://github.com/ConsenSys/mythril)
