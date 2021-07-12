@@ -259,7 +259,22 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 `--build-dir` \(string\):
 
-Build directory where AvalancheGo & plugin executables are to be found. Defaults to the path of executed AvalancheGo binary.
+Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary.
+The structure of this directory must be as follows:
+
+```
+build-dir  
+|_avalanchego-latest  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+|_avalanchego-preupgrade  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+```
 
 ### Chain Configs
 
@@ -622,7 +637,7 @@ Comma separated list of subnets that this node would validate if added to. Defau
 
 `--vm-aliases-file` \(string\):
 
-Path for JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example JSON content:
+Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example content:
 
 ```json
 {
@@ -632,3 +647,5 @@ Path for JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/
   ]
 }
 ```
+
+The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.

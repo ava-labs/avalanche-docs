@@ -1,4 +1,4 @@
-# Create AVM Blockchain
+# Create a Blockchain Running the AVM
 
 ## Introduction
 

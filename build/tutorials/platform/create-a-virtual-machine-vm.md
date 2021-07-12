@@ -2,28 +2,25 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the creation of new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
+One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
 In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
 
-Virtual Machines can be run as separate plugins. One such as example is [Coreth](https://github.com/ava-labs/coreth). These plugin VMs are run as a seperate processes. AvalancheGo uses [go-plugin](https://pkg.go.dev/github.com/hashicorp/go-plugin) module to connect plugins over RPC. `rpcchainvm` is a special VM that wraps plugin VMs for the `go-plugin` module. Wrapped methods can be found in [`vms/rpcchainvm/vm_server.go`](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go)
+A blockchain can run as a separate processes from AvalancheGo, and communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
-Before we get to the implementation of the VM, we’ll look at the interface that a VM must implement to be compatible with the platform’s Avalanche consensus engine. We’ll show and explain all the code in snippets. If you want to see the code in one place, rather than in snippets, you can see it in our [TimestampVM GitHub repository.](https://github.com/ava-labs/timestampvm-rpc/)
+Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/)
 
 ## Interfaces
 
-### `snowman.VM`
+### `block.ChainVM`
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus protocol. In order to be compatible with Snowman, the VM that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which we include below from [its declaration](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example.
+The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away.
 
 ```go
-// (c) 2019-2020, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
 package block
 
 import (
@@ -83,7 +80,7 @@ type ChainVM interface {
 
 ### `common.VM`
 
-`common.VM` is a type that every `VM` type (DAG, Chain etc.) should implement.
+`common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
 ```cpp
 // VM describes the interface that all consensus VMs must implement
@@ -168,9 +165,9 @@ type VM interface {
 
 ### `snowman.Block`
 
-You may have noticed the `snowman.Block` type referenced in the `snowman.VM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
 
-Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
 ```cpp
 // Block is a possible decision that dictates the next canonical block.
@@ -248,7 +245,7 @@ type Decidable interface {
 }
 ```
 
-## Libraries
+## Helper Libraries
 
 We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
@@ -256,11 +253,11 @@ In our example, we use both of the library types below, and we encourage you to 
 
 ### core.SnowmanVM
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface in [github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
+This helper type is a struct that implements many of the `block.ChainVM` methods. Its implementation can be found [here.](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
 
 #### Methods
 
-Some included `snowman.ChainVM` interface methods are:
+Some `block.ChainVM` methods implemented by `core.SnowmanVM` are:
 
 - `ParseBlock`
 - `GetBlock`
@@ -272,7 +269,7 @@ Some included `snowman.ChainVM` interface methods are:
 - `Shutdown`
 - `Initialize`
 
-If your VM implementation embeds a `core.SnowmanVM`, you do not need to implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
+If your VM implementation embeds a `core.SnowmanVM`, you need not implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
 
 #### Fields
 
@@ -282,16 +279,16 @@ This type contains several fields that you’ll want to include in your VM imple
 - `Ctx`: the blockchain’s runtime context
 - `preferred`: ID of the preferred block, which new blocks will be built on
 - `LastAcceptedID`: ID of the most recently accepted block
-- `ToEngine`: the channel where messages are sent to the consensus protocol powering the blockchain
-- `State`: used to persist data such as blocks \(can be used to put/get any bytes\)
+- `ToEngine`: channel used to send messages to the consensus engine powering this blockchain
+- `State`: used to persist data such as blocks
 
 ### core.Block
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
+This helper type implements many methods of the `snowman.Block` interface.
 
 #### Methods
 
-Some included `snowman.Block` interface methods are:
+Some implemented `snowman.Block` interface methods are:
 
 - `ID`
 - `Parent`
@@ -300,22 +297,24 @@ Some included `snowman.Block` interface methods are:
 - `Status`
 - `Height`
 
-Your VM implementation will probably override `Accept` and `Reject` so that these methods cause application-specific state changes.
+The blocks in your VM implementation will probably override `Accept` and `Reject` so that those methods cause application-specific state changes.
 
 #### Fields
 
-`core.Block` has a field VM, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+`core.Block` has a field `VM`, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
 
 ### rpcchainvm
 
-`rpcchainvm` is a special VM that wraps `block.ChainVM` methods to connect a real VM implementation via plugins. There are 2 main files that defines this `VM`. First one is `vm_client` in [github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go). `vm_client` defines a `VM` implementation that connects to a RPC server and calls API methods. The other file is [github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go). `vm_server` defines an RPC-API server which connects to a served plugin and calls their method through RPC.
+`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [`server`](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
 
-VMServer actually does not implement a real VM by itself. It inherits an "inner" VM that implements the `block.ChainVM`. VMServer calls this inner VM's methods. For example let's take a look at `vm_server.go/BuildBlock` method:
+To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
+
+As another example, let's look at the server's `BuildBlock` method:
 
 ```go
 func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) (*vmproto.BuildBlockResponse, error) {
 	blk, err := vm.vm.BuildBlock()
-	if err != nil {`
+	if err != nil {
 		return nil, err
 	}
 	blkID := blk.ID()
@@ -329,13 +328,13 @@ func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) 
 }
 ```
 
-It calls `vm.vm.BuildBlock()` which must be implemented by the VM plugin.
+It calls `vm.vm.BuildBlock()`, where `vm.vm` is the underlying VM implementation, and returns a new block.
 
 ## Timestamp Server Implementation
 
-Now, we know the interface our VM must implement and the libraries we can use to build a VM.
+Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `snowman.VM` and whose blocks implement `snowman.Block`. Also serve it as an external plugin over RPC.
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`.
 
 ### Block
 
@@ -349,17 +348,17 @@ The type declaration is:
 // 1) A piece of data (the block's payload)
 // 2) The (unix) timestamp when the block was created
 type Block struct {
-    *core.Block           `serialize:"true"`
-    Data        [32]byte  `serialize:"true"`
-    Timestamp   int64     `serialize:"true"`
+    *core.Block                `serialize:"true"`
+    Data        [dataLen]byte  `serialize:"true"`
+    Timestamp   int64          `serialize:"true"`
 }
 ```
 
-The `serialize:"true"` tag indicates when a block is persisted in the database or sent to other nodes. The field with the tag is included in the serialized representation.
+The `serialize:"true"` tag indicates that the field should be included in the byte representation of the block used when persisting the block or sending it to other nodes.
 
 #### Verify
 
-This method verifies a block and saves it in the database.
+This method verifies that a block is valid and saves it in the database.
 
 ```go
 // Verify returns nil iff this block is valid.
@@ -407,13 +406,13 @@ That’s all the code for our block implementation! All of the other methods of 
 
 ### Virtual Machine
 
-Now, let’s look at the implementation of VM, which implements the `snowman.VM` interface.
+Now, let’s look at our timestamp VM implementation, which implements the `block.ChainVM` interface.
 
 The declaration is:
 
 ```go
 // This Virtual Machine defines a blockchain that acts as a timestamp server
-// Each block contains data (payload) and the timestamp when it was created
+// Each block contains data (a payload) and the timestamp when it was created
 
 const (
 	dataLen      = 32
@@ -516,7 +515,7 @@ func (vm *VM) Initialize(
 
 #### proposeBlock
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. We’ll see where this is called later.
+This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`, which we’ll see later.
 
 ```go
 // proposeBlock appends [data] to [p.mempool].
@@ -531,7 +530,7 @@ func (vm *VM) proposeBlock(data [dataLen]byte) {
 
 #### ParseBlock
 
-Parses block from bytes.
+Parse a block from its byte representation.
 
 ```go
 // ParseBlock parses [bytes] to a snowman.Block
@@ -559,7 +558,7 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
 
 #### CreateHandlers
 
-Registed handlers defined in `Service`.
+Registed handlers defined in `Service`. See [below](#api) for more on APIs.
 
 ```go
 // CreateHandlers returns a map where:
@@ -580,7 +579,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`.
+Registers static handlers defined in `StaticService`. See [below](#static-api) for more on static APIs.
 
 ```go
 // CreateStaticHandlers returns a map where:
@@ -602,18 +601,18 @@ func (vm *VM) CreateStaticHandlers() (map[string]*common.HTTPHandler, error) {
 }
 ```
 
-### StaticService
+### Static API
 
-AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
+A VM may have a static API, which allows clients to call methods that do not query or update the state of a particular blockchain, but rather apply to the VM as a whole. This is analagous to static methods in computer programming. AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
 
-Static Service does not contain any instance. So this service cannot know the VM state.
-
-The static service struct’s declaration is:
+`StaticService` implements the static API for our VM.
 
 ```go
-// StaticService defines the base service for the timestamp vm
+// StaticService defines the static API for the timestamp vm
 type StaticService struct{}
 ```
+
+#### Encode
 
 For each API method, there is:
 
@@ -621,25 +620,23 @@ For each API method, there is:
 - A struct that defines the method’s return values
 - A method that implements the API method, and is parameterized on the above 2 structs
 
-#### Encode
-
-This API methods Encodes a string data into bytes using `Encoding` argument (defaults to `CB58`). It can be used to generate data for blocks.
+This API method encodes a string to its byte representation using a given encoding scheme. It can be used to encode data that is then put in a block and proposed as the next block for this chain.
 
 ```go
-// EncoderArgs are arguments for Encode
-type EncoderArgs struct {
+// EncodeArgs are arguments for Encode
+type EncodeArgs struct {
 	Data     string              `json:"data"`
 	Encoding formatting.Encoding `json:"encoding"`
 }
 
-// EncoderReply is the reply from Encoder
-type EncoderReply struct {
+// EncodeReply is the reply from Encoder
+type EncodeReply struct {
 	Bytes    string              `json:"bytes"`
 	Encoding formatting.Encoding `json:"encoding"`
 }
 
 // Encoder returns the encoded data
-func (ss *StaticService) Encode(_ *http.Request, args *EncoderArgs, reply *EncoderReply) error {
+func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *EncodeReply) error {
 	bytes, err := formatting.Encode(args.Encoding, []byte(args.Data))
 	if err != nil {
 		return fmt.Errorf("couldn't encode data as string: %s", err)
@@ -652,7 +649,7 @@ func (ss *StaticService) Encode(_ *http.Request, args *EncoderArgs, reply *Encod
 
 #### Decode
 
-This API methods Decodes an encoded string data into string using `Encoding` argument (defaults to `CB58`). It can be used to decode data in blocks.
+This API method is the inverse of `Encode`.
 
 ```go
 // DecoderArgs are arguments for Decode
@@ -679,57 +676,71 @@ func (ss *StaticService) Decode(_ *http.Request, args *DecoderArgs, reply *Decod
 }
 ```
 
-### Service
+### API
 
-Service type includes a `VM` instance, unlike the Static Service.
+A VM may also have a non-static HTTP API, which allows clients to query and update the blockchain's state.
 
-The service struct’s declaration is:
+`Service`'s declaration is:
 
 ```go
 // Service is the API service for this VM
 type Service struct{ vm *VM }
 ```
 
-#### ProposeBlock
+Note that this struct has a reference to the VM, so it can query and update state.
 
-This API method allows clients to add a block to the blockchain.
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain.
 
-```go
-// ProposeBlockArgs are the arguments to ProposeValue
-type ProposeBlockArgs struct {
-    // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
-    Data string
-}
+#### timestampvm.getBlock
 
-// ProposeBlockReply is the reply from function ProposeBlock
-type ProposeBlockReply struct{
-    // True if the operation was successful
-    Success bool
-}
+Get a block by its ID. If no ID is provided, get the latest block.
 
-// ProposeBlock is an API method to propose a new block whose data is [args].Data.
-func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *ProposeBlockReply) error {
-    // Decodes data
-	bytes, err := formatting.Decode(formatting.CB58, args.Data)
+**Signature**
 
-    // Ensures byte length is as expected
-	if err != nil || len(bytes) != dataLen {
-		return errBadData
-	}
+```cpp
+timestampvm.getBlock({id: string}) ->
+    {
+        id: string,
+        data: string,
+        timestamp: int,
+        parentID: string
+    }
+```
 
-	var data [dataLen]byte         // The data as an array of bytes
-	copy(data[:], bytes[:dataLen]) // Copy the bytes in dataSlice to data
+- `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
+- `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
+- `timestamp` is the Unix timestamp when this block was created
+- `parentID` is the block’s parent
 
-    // proposes block with the data to VM
-	s.vm.proposeBlock(data)
-	reply.Success = true
-	return nil
+**Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "timestampvm.getBlock",
+    "params":{
+        "id":"xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
+```
+
+**Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "timestamp": "1581717416",
+    "data": "11111111111111111111111111111111LpoYY",
+    "id": "xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K",
+    "parentID": "22XLgiM5dfCwTY9iZnVk8ZPuPe3aSrdVr5Dfrbxd3ejpJd7oef"
+  },
+  "id": 1
 }
 ```
 
-#### GetBlock
-
-This API method allows clients to get a block by its ID.
+**Implementation**
 
 ```go
 // APIBlock is the API representation of a block
@@ -787,212 +798,13 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 	reply.APIBlock.Timestamp = json.Uint64(block.Timestamp)
 	reply.APIBlock.ParentID = block.ParentID().String()
 	reply.Data, err = formatting.Encode(formatting.CB58, block.Data[:])
-
 	return err
-}
-```
-
-### Plugin
-
-In order to make it compatible with `go-plugin` module we need to first define a main package and method for our VM.
-
-Main file contains:
-
-```go
-func main() {
-	log.Root().SetHandler(log.LvlFilterHandler(log.LvlDebug, log.StreamHandler(os.Stderr, log.TerminalFormat())))
-	plugin.Serve(&plugin.ServeConfig{
-		HandshakeConfig: rpcchainvm.Handshake,
-		Plugins: map[string]plugin.Plugin{
-			"vm": rpcchainvm.New(&timestampvm.VM{}),
-		},
-
-		// A non-nil value here enables gRPC serving for this plugin...
-		GRPCServer: plugin.DefaultGRPCServer,
-	})
-}
-```
-
-This main method serves the module over RPC. So AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods and inherits the TimestampVM.
-
-#### VM Aliases <a id="vm-aliases">
-
-It's possible to use an alias for VMs and their URls. For example we can alias TimestampVM by creating a JSON file under `~/.avalanchego/configs/vms/aliases.json` with:
-
-```json
-{
-  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
-    "timestampvm",
-    "timestamp"
-  ]
-}
-```
-
-In this case Static API URL's can be aliased. E.g `/ext/vm/timestampvm`.
-
-For more details, see CLI flag [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
-
-#### Building the Executable
-
-There is a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that creates an executable from module and puts it under given path. The path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latest/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
-
-A custom path can be provided with positional parameters. First parameter changes plugin directory and the second one changes executable name.
-For example:
-
-```
-./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins/ timestampvm
-```
-
-AvalancheGo seeks and registers plugins under `{buildDir}/avalanchego-latest/plugins`. See [Build Directory Flag](../../references/command-line-interface.md#build-directory) for more information.
-
-Binary names must be either a full VM ID (CB58 compatible), or must be aliases defined by [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
-
-For example, AvalancheGo aliases `evm` with C-Chain's Virtual Machine's (EVM) ID. AvalancheGo uses executable name `evm` to register EVM through plugins.
-
-In this tutorial we used a direct VM ID for our executable name to simplify the process. However AvalancheGo would still register TimestampVM even if plugin's name was changed to one of VM's aliases (`timestampvm`, `timestamp`). E.g. `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latest/plugins/timestampvm`
-
-### API
-
-The resulting API has the following methods:
-
-#### `timestampvm.encode`
-
-Encodes given string data to bytes with given encoding algorithm (defaults to `cb58`)
-
-**Signature**
-
-```cpp
-timestampvm.encode({data: string, encoding: string}) ->
-    {
-        bytes: string,
-        encoding: string,
-    }
-```
-
-- `bytes` is the encoded representation of the data.
-- `encoding` is the used algorithm to encode data.
-
-**Example Call**
-
-```bash
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "timestampvm.encode",
-    "params":{
-        "data":"helloworld"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "bytes": "fP1vxkpyLWnH9dD6BQA",
-    "encoding": "cb58"
-  },
-  "id": 1
-}
-```
-
-#### timestampvm.decode
-
-Decodes given bytes to string data with given encoding algorithm (defaults to `cb58`)
-
-**Signature**
-
-```cpp
-timestampvm.decode({bytes: string, encoding: string}) ->
-    {
-        data: string,
-        encoding: string,
-    }
-```
-
-- `data` is decoded representation of the bytes.
-- `encoding` is the used algorithm to encode data.
-
-**Example Call**
-
-```bash
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "timestampvm.decode",
-    "params":{
-        "bytes":"fP1vxkpyLWnH9dD6BQA"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "data": "helloworld",
-    "encoding": "cb58"
-  },
-  "id": 1
-}
-```
-
-#### timestampvm.getBlock
-
-Get a block by its ID. If no ID is provided, get the latest block.
-
-**Signature**
-
-```cpp
-timestampvm.getBlock({id: string}) ->
-    {
-        id: string,
-        data: string,
-        timestamp: int,
-        parentID: string
-    }
-```
-
-- `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-- `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
-- `timestamp` is the Unix timestamp when this block was created
-- `parentID` is the block’s parent
-
-**Example Call**
-
-```bash
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "timestampvm.getBlock",
-    "params":{
-        "id":"xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
-```
-
-**Example Response**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "timestamp": "1581717416",
-    "data": "11111111111111111111111111111111LpoYY",
-    "id": "xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K",
-    "parentID": "22XLgiM5dfCwTY9iZnVk8ZPuPe3aSrdVr5Dfrbxd3ejpJd7oef"
-  },
-  "id": 1
 }
 ```
 
 #### timestampvm.proposeBlock
 
-Propose the creation of a new block.
+Propose the next block on this blockchain.
 
 **Signature**
 
@@ -1027,16 +839,109 @@ curl -X POST --data '{
 }
 ```
 
+**Implementation**
+
+```go
+// ProposeBlockArgs are the arguments to ProposeValue
+type ProposeBlockArgs struct {
+    // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
+    Data string
+}
+
+// ProposeBlockReply is the reply from function ProposeBlock
+type ProposeBlockReply struct{
+    // True if the operation was successful
+    Success bool
+}
+
+// ProposeBlock is an API method to propose a new block whose data is [args].Data.
+func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *ProposeBlockReply) error {
+    // Decodes data
+	bytes, err := formatting.Decode(formatting.CB58, args.Data)
+
+    // Ensures byte length is as expected
+	if err != nil || len(bytes) != dataLen {
+		return errBadData
+	}
+
+	var data [dataLen]byte         // The data as a byte array
+	copy(data[:], bytes[:dataLen]) // Copy [bytes] to [data]
+
+    // proposes block with the data to VM
+	s.vm.proposeBlock(data)
+	reply.Success = true
+	return nil
+}
+```
+
+### Plugin
+
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+
+`main.go`'s contents are:
+
+```go
+func main() {
+	log.Root().SetHandler(log.LvlFilterHandler(log.LvlDebug, log.StreamHandler(os.Stderr, log.TerminalFormat())))
+	plugin.Serve(&plugin.ServeConfig{
+		HandshakeConfig: rpcchainvm.Handshake,
+		Plugins: map[string]plugin.Plugin{
+			"vm": rpcchainvm.New(&timestampvm.VM{}),
+		},
+
+		// A non-nil value here enables gRPC serving for this plugin...
+		GRPCServer: plugin.DefaultGRPCServer,
+	})
+}
+```
+
+Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
+
+#### VM Aliases
+
+It's possible to alias VMs and their API endpoints. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
+
+```json
+{
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timestamp"
+  ]
+}
+```
+
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. 
+Giving a VM an alias has other implications, as we'll see below.
+For more details, see [here](../../references/command-line-interface.md#vm-configs).
+
+#### Building the Executable
+
+This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
+
+The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
+
+```
+./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins/ timestampvm
+```
+
+If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` (`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.)
+
+AvalancheGo searches for and registers plugins under `[buildDir]/avalanchego-latest/plugins`. See [here](../../references/command-line-interface.md#build-directory) for more information.
+
+Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
+
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are aliases for this VM.
+
 ### Wrapping Up
 
 That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
 
 In this tutorial, we learned:
 
-- The `snowman.ChainVM` interface, which all VMs that define a linear chain must implement
+- The `block.ChainVM` interface, which all VMs that define a linear chain must implement
 - The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 - The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
-- The `vms.rpcchainvm` which can serve external plugins and connects with AvalancheGo.
+- The `rpcchainvm` type, which allows blockchains to run in their own processes.
 
 Now we can create a new blockchain with this custom virtual machine.
 

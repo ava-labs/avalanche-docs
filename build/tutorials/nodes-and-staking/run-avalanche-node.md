@@ -75,18 +75,18 @@ If you want to download a pre-built binary instead of building it yourself, go t
 Under `Assets`, select the appropriate file.
 
 For MacOS:
-Download: `avalanchego-macos-<VERSION>.zip`
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`
+Download: `avalanchego-macos-<VERSION>.zip`  
+Unzip: `unzip avalanchego-macos-<VERSION>.zip` 
 The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
 For Linux on PCs or cloud providers:
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`
+Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 For Linux on RaspberryPi4 or similar Arm64-based computers:
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`
+Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 ### Start a Node, and Connect to Avalanche
