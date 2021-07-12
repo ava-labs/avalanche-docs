@@ -22,9 +22,9 @@ Avalanche’s subnet architecture makes regulatory compliance manageable. As men
 
 Some examples include:
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+- Validators must be located in a given country
+- Validators must pass a KYC/AML checks
+- Validators must hold a certain license
 
 ### Support for Private Blockchains
 
@@ -58,13 +58,15 @@ Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized a
 
 ### Creating Your Blockchain and Virtual Machine
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
+Avalanche supports the creation of new instances of the Avalanche VM.
 
-{% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
+{% page-ref page="../../build/tutorials/platform/create-avm-blockchain.md" %}
 
-In the future, Avalanche will allow you to define and launch custom blockchains, and we’ll release SDKs to help you do so.
+Avalanche also supports creating custom blockchains with virtual machines.
 
 {% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
+
+{% page-ref page="../../build/tutorials/platform/create-custom-blockchain.md" %}
 
 ## Exchange Chain \(X-Chain\)
 
@@ -87,4 +89,3 @@ The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) al
 The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
 
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
-

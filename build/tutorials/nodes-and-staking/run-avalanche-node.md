@@ -6,10 +6,10 @@ The quickest way to learn about Avalanche is to run a node and interact with the
 
 In this tutorial \(est. time: 10 minutes\), we will:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+- Install and run an Avalanche node
+- Connect to Avalanche
+- Send AVAX
+- Add your node to the validator set
 
 {% hint style="warning" %}
 If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
@@ -25,8 +25,8 @@ This tutorial is primarily geared toward developers and people interested in how
 
 Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest. Note that as network usage increases, hardware requirements may change.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
+- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -74,19 +74,19 @@ If you want to download a pre-built binary instead of building it yourself, go t
 
 Under `Assets`, select the appropriate file.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
+For MacOS:
+Download: `avalanchego-macos-<VERSION>.zip`
+Unzip: `unzip avalanchego-macos-<VERSION>.zip`
 The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
+For Linux on PCs or cloud providers:
+Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
+Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
+For Linux on RaspberryPi4 or similar Arm64-based computers:
+Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
+Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 ### Start a Node, and Connect to Avalanche
@@ -358,11 +358,12 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 
 {% page-ref page="../../tools/avalanchejs/create-an-asset-on-the-x-chain.md" %}
 
-{% page-ref page="../platform/create-a-new-blockchain.md" %}
+{% page-ref page="../platform/create-avm-blockchain.md" %}
+
+{% page-ref page="../platform/create-custom-blockchain.md" %}
 
 {% page-ref page="../platform/create-a-subnet.md" %}
 
 {% page-ref page="../../avalanchego-apis/" %}
 
 {% page-ref page="../../references/" %}
-

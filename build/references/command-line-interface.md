@@ -99,7 +99,7 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 `--db-type` \(boolean\):
 
 Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`, which causes the node to use LevelDB, RocksDB, or an in-memory (not persisted) database, respectively.
-Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa. 
+Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
 
 ### Genesis
 
@@ -151,13 +151,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `Off`: No logs have this level of logging.
+- `Fatal`: Fatal errors that are not recoverable.
+- `Error`: Errors that the node encounters, these errors were able to be recovered.
+- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `Info`: Useful descriptions of node status updates.
+- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -179,11 +179,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+- `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
+- `--network-id=local` -&gt; Connect to a local test-network.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -254,6 +254,12 @@ Enables peer specific query latency metrics. Defaults to `false`.
 `--benchlist-min-failing-duration` \(duration\):
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+
+### Build Directory
+
+`--build-dir` \(string\):
+
+Build directory where AvalancheGo & plugin executables are to be found. Defaults to the path of executed AvalancheGo binary.
 
 ### Chain Configs
 
@@ -612,3 +618,17 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
+### Virtual Machine (VM) Configs <a id="vm-configs"></a>
+
+`--vm-aliases-file` \(string\):
+
+Path for JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example JSON content:
+
+```json
+{
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timerpc"
+  ]
+}
+```
