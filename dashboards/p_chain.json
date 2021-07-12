@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 45,
+  "id": 50,
   "links": [
     {
       "icon": "external link",
@@ -27,134 +27,177 @@
   ],
   "panels": [
     {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
       },
-      "hiddenSeries": false,
       "id": 21,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
+          "exemplar": true,
           "expr": "round(increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[1m]))",
           "interval": "",
           "legendFormat": "Accepted",
           "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Accepted Blocks in Last Minute",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "exemplar": true,
+          "expr": "round(increase(avalanche_P_blks_acc_count{job=\"avalanchego\"}[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Accepted Blocks in Last Minute",
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
       },
-      "hiddenSeries": false,
       "id": 15,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "expr": "round(increase(avalanche_P_blks_rejected_count{job=\"avalanchego\"}[1m]))",
@@ -163,123 +206,87 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Rejected Blocks in Last Minute",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                10000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Average Block Acceptance Latency alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "The average time between a block's issuance and acceptance by this node over the last 5 minutes.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 10000
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 8
       },
-      "hiddenSeries": false,
       "id": 23,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "expr": "rate(avalanche_P_blks_accepted_sum{job=\"avalanchego\"}[5m]) / rate(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[5m])",
@@ -288,266 +295,177 @@
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 10000,
-          "visible": true
-        }
-      ],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Average Block Acceptance Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                10000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Average Block Acceptance Latency alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "The average time between a block's issuance and rejection by this node over the last 5 minutes.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 10000
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 8
       },
-      "hiddenSeries": false,
       "id": 25,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
+          "exemplar": true,
           "expr": "rate(avalanche_P_blks_rejected_sum{job=\"avalanchego\"}[5m]) / rate(avalanche_P_blks_rejected_count{job=\"avalanchego\"}[5m])",
           "interval": "",
-          "legendFormat": "Avg Rejection Latency",
+          "legendFormat": "Rejection Latency",
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 10000,
-          "visible": true
-        }
-      ],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Average Block Rejection Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                500
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "1m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "High number of processing blocks",
-        "name": "P-Chain Processing Blocks alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Transactions",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 16
       },
-      "hiddenSeries": false,
       "id": 9,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
           "expr": "avalanche_P_blks_processing{job=\"avalanchego\"}",
@@ -556,761 +474,691 @@
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 500,
-          "visible": true
-        }
-      ],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Processing Blocks",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "Transactions",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": "Vertices",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0.9
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "P-Chain queries are failing at a high rate",
-        "name": "P-Chain Percentage of Successful Queries alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "Percentage of queries for which we receive chits on time.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "transparent",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 16
       },
-      "hiddenSeries": false,
       "id": 11,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": false,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "(increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[2m]) + 1) / (increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[2m]) + increase(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[2m]) + 1)",
+          "exemplar": true,
+          "expr": "(increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[5m]) + 1) / (increase(avalanche_P_handler_chits_count{job=\"avalanchego\"}[5m]) + increase(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[5m]) + 1)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Queries pct",
+          "legendFormat": "% Successful",
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "lt",
-          "value": 0.9,
-          "visible": true
-        }
-      ],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Percentage of Successful Queries",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how much of each second is being spent handling different kinds of messages on the P-Chain.\nThe value for chits, for example, is the number of seconds spent handling chits messages per second, over the last 30 seconds.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "seconds/second",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 24
       },
-      "hiddenSeries": false,
       "id": 5,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "rate(avalanche_P_handler_pull_query_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_pull_query_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_P_handler_push_query_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_push_query_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_P_handler_chits_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_chits_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "chits",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_P_handler_accepted_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_accepted_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_P_handler_put_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_put_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_P_handler_multiput_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_multiput_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_failed_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get failed",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_P_handler_query_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_query_failed_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "query failed",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_accepted_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_accepted_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Message Handling Time (Total)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "seconds/second",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how long each kind of request on the P-Chain takes to handle.\nThe value for chits, for example, is how long, in seconds, it takes to handle a chits message.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "seconds",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 24
       },
-      "hiddenSeries": false,
       "id": 7,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "rate(avalanche_P_handler_pull_query_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_pull_query_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_pull_query_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_pull_query_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_P_handler_push_query_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_push_query_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_push_query_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_push_query_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_P_handler_chits_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_chits_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_chits_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_chits_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "chits",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_P_handler_accepted_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_accepted_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_accepted_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_accepted_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_get_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_P_handler_put_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_put_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_put_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_P_handler_multiput_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_multi_put_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_multiput_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_multi_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_get_ancestors_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_get_ancestors_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_get_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_failed_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_get_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get failed",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_P_handler_query_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_query_failed_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "query failed",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_accepted_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_get_accepted_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_accepted_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_get_accepted_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[1m])/rate(avalanche_P_handler_get_ancestors_failed_count{job=\"avalanchego\"}[1m])/1000000000",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_failed_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_get_ancestors_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Message Handling Time (per Message)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "seconds",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "The total stake of validators currently \"benched\" due to poor query responsiveness. Queries to these validators will immediately timeout until they are removed from the \"bench.\"",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 33
       },
-      "hiddenSeries": false,
       "id": 29,
-      "legend": {
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "avalanche_P_benchlist_benched_weight{job=\"avalanchego\"} / 10^9",
+          "exemplar": true,
+          "expr": "avg_over_time(avalanche_P_benchlist_benched_weight{job=\"avalanchego\"}[15m]) / 10^9",
           "interval": "",
           "legendFormat": "AVAX Benched",
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "AVAX Benched",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "Measures how many of each kind of message are received per second on the P-Chain.",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Messages received/s",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 33
       },
-      "hiddenSeries": false,
       "id": 6,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "rate(avalanche_P_handler_pull_query_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_pull_query_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_P_handler_push_query_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_push_query_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_P_handler_chits_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_chits_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "chits",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_P_handler_accepted_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_accepted_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_P_handler_put_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_P_handler_multi_put_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_multi_put_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_failed_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get failed",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_query_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "query failed",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_accepted_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_accepted_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_P_handler_get_ancestors_failed_count{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_get_ancestors_failed_count{job=\"avalanchego\"}[5m])",
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Messages Received per Second",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "Messages received/s",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "datasource": null,
@@ -1356,7 +1204,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.3",
+      "pluginVersion": "8.0.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1448,7 +1296,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.3",
+      "pluginVersion": "8.0.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1504,99 +1352,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 50
-      },
-      "hiddenSeries": false,
-      "id": 35,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.0.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_P_handler_throttled_pool_alloc_exhausted[1m]) + increase(avalanche_P_handler_throttled_pool_empty[1m]) + increase(avalanche_P_handler_throttled_validator_alloc_exhausted[1m])",
-          "interval": "",
-          "legendFormat": "Throttled Messages",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throttled Messages in Last Minute",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:298",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:299",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     }
   ],
   "refresh": "",
@@ -1628,6 +1383,6 @@
   },
   "timezone": "",
   "title": "P-Chain",
-  "uid": "-ArUr2z7k",
-  "version": 3
+  "uid": "uWlS20i7z",
+  "version": 12
 }
