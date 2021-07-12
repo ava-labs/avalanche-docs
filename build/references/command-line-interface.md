@@ -96,7 +96,7 @@ Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-met
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
 
-`--db-type` \(boolean\):
+`--db-type` \(string\):
 
 Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`, which causes the node to use LevelDB, RocksDB, or an in-memory (not persisted) database, respectively.
 Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
