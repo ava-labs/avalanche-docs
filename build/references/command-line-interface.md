@@ -96,9 +96,10 @@ Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-met
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
 
-`--db-enabled` \(boolean\):
+`--db-type` \(boolean\):
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`, which causes the node to use LevelDB, RocksDB, or an in-memory (not persisted) database, respectively.
+Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa. 
 
 ### Genesis
 
@@ -502,19 +503,34 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
-### Message Handling
+### Message Rate-Limiting (Throttling)
 
-`--max-non-staker-pending-msgs` \(int\):
+These flags govern rate-limiting of inbound and outbound messages.
+For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+`--throttler-inbound-at-large-alloc-size` \(uint\):
 
-`--staker-msg-reserved` \(float\):
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+`--throttler-inbound-validator-alloc-size` \(uint\):
 
-`--staker-cpu-reserved` \(float\):
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+`--throttler-inbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` (2 mebibytes).
+
+`--throttler-outbound-at-large-alloc-size` \(uint\):
+
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
+
+`--throttler-outbound-validator-alloc-size` \(uint\):
+
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
+
+`--throttler-outbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` (2 mebibytes).
 
 ### Network
 
