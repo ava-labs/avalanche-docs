@@ -2,6 +2,25 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.10 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10)\)
+
+**Apricot Phase 2 - Patch 10**
+
+{% hint style="warning" %}
+This update is backwards compatible. It is optional, but encouraged.
+{% endhint %}
+
+The patch includes performance, throttling, and VM improvements:
+- Added support to use `RocksDB` rather than `LevelDB` on supported architectures.
+- Restructured inbound network throttling to be on a per-node basis, to restrict the bandwidth usage of peer nodes.
+- Restructured outbound network throttling to weight allocated bytes by stake.
+- Updated the default value of the `pruning-enabled` flag to `true` for the C-chain.
+- Enabled registering of custom VMs over RPC.
+- Updated blockchain status to report validation status.
+- Moved `TimestampVM` into its own repository to match the expected VM creation path.
+- Fixed protobuf code-gen script to place `grpc` files in the correct location.
+- Passed the block bytes through the `rpcchainvm#Block.Verify` to avoid any potential cache eviction verification failures.
+
 ## v1.4.9 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
 
 **Apricot Phase 2 - Patch 9**
