@@ -17,7 +17,7 @@ Requests to the public API server API are distributed by a load balancer to an i
 If you're using [AvalancheJS](avalanchejs/) to access the public API, simply set the following in your code:
 
 ```javascript
-avalanche.setRequestConfig('withCredentials', true)
+avalanche.setRequestConfig("withCredentials", true);
 ```
 
 ## Availability
@@ -27,4 +27,3 @@ Usage of public API nodes is free and available to everyone without any authenti
 ## Support
 
 If you have questions, problems or suggestions, come [talk to us](https://chat.avalabs.org/).
-

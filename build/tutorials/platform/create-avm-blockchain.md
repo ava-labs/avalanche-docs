@@ -1,10 +1,11 @@
-# Create a Blockchain
+# Create a Blockchain Running the AVM
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche currently supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../avalanchego-apis/exchange-chain-x-chain-api.md) and the Timestamp VM.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
 
-In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
+If you're interested in building custom blockchains, see
+[Create a Virtual Machine \(VM\)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
 ### Prerequisites
 
@@ -24,7 +25,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 {% page-ref page="../nodes-and-staking/add-a-validator.md" %}
 
-### Create the Genesis Data <a id="create-the-genesis-data"></a>
+## Create the Genesis Data <a id="create-the-genesis-data"></a>
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. The AVM and Coreth have a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state.
 
@@ -223,25 +224,13 @@ The response confirms that the blockchain was created:
                 "vmID": "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6"
             },
             {
-                "id": "CqhF97NNugqYLiGaQJ2xckfmkEr8uNeGG5TQbyGcgnZ5ahQwa",
-                "name": "Simple DAG Payments",
-                "subnetID": "11111111111111111111111111111111LpoYY",
-                "vmID": "sqjdyTKUSrQs1YmKDTUbdUhdstSdtRTGRbUn8sqK8B6pkZkz1"
-            },
-            {
-                "id": "VcqKNBJsYanhVFxGyQE5CyNVYxL3ZFD7cnKptKWeVikJKQkjv",
-                "name": "Simple Chain Payments",
-                "subnetID": "11111111111111111111111111111111LpoYY",
-                "vmID": "sqjchUjzDqDfBPGjfQq2tXW1UCwZTyvzAWHsNzF2cb1eVHt6w"
-            },
-            {
-                "id": "2SMYrx4Dj6QqCEA3WjnUTYEFSnpqVTwyV3GPNgQqQZbBbFgoJX",
-                "name": "Simple Timestamp Server",
-                "subnetID": "11111111111111111111111111111111LpoYY",
+                "id": "sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk",
+                "name": "My new TSVM",
+                "subnetID": "KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT",
                 "vmID": "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"
             },
             {
-                "id": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK",
+                "id": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH",
                 "name": "My new AVM",
                 "subnetID": "KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT",
                 "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
@@ -262,7 +251,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"platform.getBlockchainStatus",
     "params" :{
-        "blockchainID":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK"
+        "blockchainID":"xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
@@ -277,17 +266,20 @@ curl -X POST --data '{
 }
 ```
 
-If it responds `"Validating"`, the node is validating the given chain. If it responds `"Created"`, then the chain exists but this node is not validating it. Note that in order to validate a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` \(e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`\) as well as add the node to the subnet's validator set.
+If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` \(e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`\) as well as add the node to the subnet's validator set.
 
 More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
-### Interacting with the New Blockchain <a id="interact-with-the-new-blockchain"></a>
+## Interacting with the New Blockchain <a id="interact-with-the-new-blockchain"></a>
 
 You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are some small differences:
 
-* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK`.
-* Addresses are prepended with `zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-` rather than `X-`.
-* Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
+- The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
+  [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
+- Addresses are prepended with `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`.
+- Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
+
+### Verify Balance
 
 In the genesis data we specified that address `avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z` has 100,000,000 units of the asset with alias `asset1`. Let’s verify that:
 
@@ -297,10 +289,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
+        "address":"xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "assetID":"asset1"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -319,6 +311,8 @@ curl -X POST --data '{
 }
 ```
 
+### Send Asset
+
 Let's send some `asset1` to another address. First, create a recipient address:
 
 ```cpp
@@ -330,14 +324,14 @@ curl -X POST --data '{
         "password":"PASSWORD GOES HERE"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
 {
   "jsonrpc": "2.0",
   "result": {
-    "address": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl"
+    "address": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl"
   },
   "id": 1
 }
@@ -353,13 +347,13 @@ curl -X POST --data '{
     "params" :{
         "assetID" : "asset1",
         "amount"  : 1,
-        "from"    : ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z"],
-        "to"      : "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
-        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
+        "from"    : ["xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z"],
+        "to"      : "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
+        "changeAddr": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "username": "USERNAME GOES HERE",
         "password": "PASSWORD GOES HERE"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -383,7 +377,7 @@ curl -X POST --data '{
     "params" :{
        "txID": "2MqZ5x6keEF1mZ4d6rb12bN4euirTqwTTm1AZGVzTT7n3eKQqq"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -404,10 +398,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
+        "address":"xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1u4uvatmymlue3zf4w0admnyj6vsw9mqk7hjckl",
         "assetID": "asset1"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -434,10 +428,10 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getBalance",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
+        "address":"xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z",
         "assetID": "asset1"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -458,7 +452,7 @@ curl -X POST --data '{
 
 This address had 100,000,000 `asset1`, then we sent 1 unit to the other address and paid 1,000,000 for the transaction fee, resulting in a balance of 98,999,999 units of `asset1`.
 
-#### Mint Asset
+### Mint Asset
 
 Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
 
@@ -470,16 +464,16 @@ curl -X POST --data '{
     "params" :{
         "amount": 1,
         "assetID": "asset2",
-        "from": ["zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"],
-        "to": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
+        "from": ["xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"],
+        "to": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
         "minters": [
-            "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
+            "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
         ],
-        "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
+        "changeAddr": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70",
         "username": "USERNAME GOES HERE",
         "password": "PASSWORD GOES HERE"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -487,7 +481,7 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "result": {
     "txID": "2UQL5u5ZEELHfRpAtDYtmFF8BMSdoWNWS1Zf2dkbVSDeTbXeJQ",
-    "changeAddr": "zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
+    "changeAddr": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
   },
   "id": 1
 }
@@ -501,9 +495,9 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
+        "address":"xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
 ```javascript
@@ -526,4 +520,3 @@ curl -X POST --data '{
 ```
 
 As we can see, 1 unit of `asset2` was minted. Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
-

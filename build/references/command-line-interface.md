@@ -96,9 +96,10 @@ Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-met
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
 
-`--db-enabled` \(boolean\):
+`--db-type` \(string\):
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`, which causes the node to use LevelDB, RocksDB, or an in-memory (not persisted) database, respectively.
+Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
 
 ### Genesis
 
@@ -150,13 +151,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `Off`: No logs have this level of logging.
+- `Fatal`: Fatal errors that are not recoverable.
+- `Error`: Errors that the node encounters, these errors were able to be recovered.
+- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `Info`: Useful descriptions of node status updates.
+- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -178,11 +179,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+- `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
+- `--network-id=local` -&gt; Connect to a local test-network.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -253,6 +254,27 @@ Enables peer specific query latency metrics. Defaults to `false`.
 `--benchlist-min-failing-duration` \(duration\):
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+
+### Build Directory
+
+`--build-dir` \(string\):
+
+Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary.
+The structure of this directory must be as follows:
+
+```
+build-dir  
+|_avalanchego-latest  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+|_avalanchego-preupgrade  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+```
 
 ### Chain Configs
 
@@ -502,19 +524,34 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
-### Message Handling
+### Message Rate-Limiting (Throttling)
 
-`--max-non-staker-pending-msgs` \(int\):
+These flags govern rate-limiting of inbound and outbound messages.
+For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+`--throttler-inbound-at-large-alloc-size` \(uint\):
 
-`--staker-msg-reserved` \(float\):
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+`--throttler-inbound-validator-alloc-size` \(uint\):
 
-`--staker-cpu-reserved` \(float\):
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+`--throttler-inbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` (2 mebibytes).
+
+`--throttler-outbound-at-large-alloc-size` \(uint\):
+
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
+
+`--throttler-outbound-validator-alloc-size` \(uint\):
+
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
+
+`--throttler-outbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` (2 mebibytes).
 
 ### Network
 
@@ -596,3 +633,19 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
+### Virtual Machine (VM) Configs <a id="vm-configs"></a>
+
+`--vm-aliases-file` \(string\):
+
+Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example content:
+
+```json
+{
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timerpc"
+  ]
+}
+```
+
+The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
