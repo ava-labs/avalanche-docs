@@ -21,7 +21,7 @@ Si vous souhaitez lancer votre nœud sur un VPS et avoir un tutoriel pas-à-pas 
 
 Avalanche est un protocole incroyablement léger, donc les exigences informatiques minimales requises sont assez modestes.
 
-* Matériel: CPU&gt; 2 GHz, RAM&gt; 4 Go, stockage&gt; 10 Go d'espace libre
+* Matériel: CPU&gt; 2 GHz, RAM&gt; 4 Go, stockage&gt; 100 Go d'espace libre
 * OS: Ubuntu 18.04/20.04 ou Mac OS X &gt;= Catalina
 * Software: [Go](https://golang.org/doc/install) &gt;= 1.13
 
