@@ -136,7 +136,7 @@ The response confirms that the blockchain was created:
                 "vmID": "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"
             },
             {
-                "id": "sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk",
+                "id": "xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH",
                 "name": "My new AVM",
                 "subnetID": "KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT",
                 "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
@@ -228,7 +228,7 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "data":"helloworld                      ",
+        "data":"helloworld",
         "encoding": "cb58"
     },
     "id": 1
