@@ -253,7 +253,7 @@ In our example, we use both of the library types below, and we encourage you to 
 
 ### core.SnowmanVM
 
-This helper type is a struct that implements many of the `block.ChainVM` methods. Its implementation can be found [here.](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
+This helper type is a struct that implements many of the `block.ChainVM` methods. Its implementation can be found [here](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
 
 #### Methods
 
@@ -266,7 +266,6 @@ Some `block.ChainVM` methods implemented by `core.SnowmanVM` are:
 - `Shutdown`
 - `Bootstrapping`
 - `Bootstrapped`
-- `Shutdown`
 - `Initialize`
 
 If your VM implementation embeds a `core.SnowmanVM`, you need not implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
@@ -920,8 +919,8 @@ This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/ma
 
 The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
 
-```
-./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins/ timestampvm
+```zsh
+./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins timestampvm
 ```
 
 If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` (`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.)
