@@ -228,7 +228,7 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "data":"helloworld����������������������",
+        "data":"helloworld",
         "encoding": "cb58"
     },
     "id": 1
