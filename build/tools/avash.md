@@ -9,7 +9,7 @@ Avash provides the ability to run Lua scripts which can execute a sequence of sh
 ### Requirements <a id="requirements"></a>
 
 * Golang 1.15.5 or later
-* An Avalanche Client Implementing Avalanche Standard CLI Flags”
+* An Avalanche Client Implementing Avalanche Standard CLI Flags
 
 ### Quick Setup <a id="quick-setup"></a>
 
@@ -51,13 +51,13 @@ The field arguments are described as follows:
 **avalancheLocation**
 
 ```text
-File path to Avalanche binary.
+File path to AvalancheGo binary.
 
 Type:
   optional, <filepath>
 
 Default:
-  $GOPATH/src/github.com/ava-labs/avalanchego/build/avalanche
+  $GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego
 ```
 
 **datadir**
@@ -131,10 +131,10 @@ Avash comes with the following root commands:
 
 * `avawallet` - Tools for interacting with Avalanche Payments over the network.
 * `callrpc` - Issues an RPC call to a node.
-* `exit` - Exit the shell.
-* `help` - Help about any command.
+* `exit` - Exits the shell.
+* `help` - Helps about any command.
 * `network` - Tools for interfacing with remote hosts.
-* `procmanager` - Access the process manager for the avash client.
+* `procmanager` - Accesses the process manager for the avash client.
 * `runscript` - Runs the provided script.
 * `setoutput` - Sets shell log output.
 * `startnode` - Starts a node process and gives it a name.
@@ -213,7 +213,7 @@ Available Commands:
 
 **CONFIGURATION**
 
-To deploy and remove networks, a `.yaml` network configuration file is required. An example is provided in the Avash codebase at `network/example.network.yaml` and should have the following format:
+To deploy and remove networks, a `.yaml` network configuration file is required. An example is provided in the Avash codebase at [`example.network.yaml`](https://github.com/ava-labs/avash/blob/master/example.network.yaml) and should have the following format:
 
 ```text
 # List of hosts
@@ -229,7 +229,7 @@ hosts:
         # ...
 ```
 
-This format can be scaled to simultaneously deploy many nodes on many hosts, using `-` in YAML syntax to add new elements to the host list and each host’s node list. A full list of CLI flags can be found [here](https://docs.avax.network/v1.0/en/references/command-line-interface/), where `--node-flag` corresponds to `nodeflag` in our configuration file.
+This format can be scaled to simultaneously deploy many nodes on many hosts, using `-` in YAML syntax to add new elements to the host list and each host’s node list. A full list of CLI flags can be found [here](https://docs.avax.network/build/references/command-line-interface), where `--node-flag` corresponds to `node-flag` in the Avash .yaml file, e.g. `--http-host` in the CLI flags corresponds to `http-host` in the Avash .yaml file.
 
 **procmanager**
 
@@ -352,5 +352,5 @@ When writing Lua, the standard Lua functionality is available to automate the ex
 * Compare the values of two nodes UTXO sets
 * Track expected results and compare them with real nodes
 
-Example Lua scripts are in the `./scripts` folder.
+Example Lua scripts are in the Avash codebase [`./scripts` folder](https://github.com/ava-labs/avash/tree/master/scripts).
 
