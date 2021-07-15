@@ -109,7 +109,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "8.0.4",
+      "pluginVersion": "8.0.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -790,12 +790,12 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Messages Failed per Second",
+      "title": "Messages Failed To Send per Second",
       "type": "timeseries"
     },
     {
       "datasource": null,
-      "description": "Amount of the stake in AVAX that is benched (ignored) because the nodes are unhealthy",
+      "description": "Number of outstanding requests related to consensus/bootstrapping. Doesn't include handshake messages.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -813,24 +813,23 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 4,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": true,
+            "showPoints": "auto",
+            "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -843,8 +842,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
@@ -854,47 +852,27 @@
         "x": 12,
         "y": 17
       },
-      "id": 14,
+      "id": 34,
       "options": {
         "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right"
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "tooltip": {
           "mode": "single"
         }
       },
-      "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "avalanche_X_benchlist_benched_weight/1000000000",
+          "exemplar": true,
+          "expr": "avalanche_outstanding_requests",
           "interval": "",
-          "legendFormat": "X chain",
+          "legendFormat": "Outstanding Requests",
           "refId": "A"
-        },
-        {
-          "expr": "avalanche_P_benchlist_benched_weight/1000000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "P Chain",
-          "refId": "B"
-        },
-        {
-          "expr": "avalanche_C_benchlist_benched_weight/1000000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "C Chain",
-          "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Benched stake",
+      "title": "Outstanding Requests",
       "type": "timeseries"
     },
     {
@@ -981,7 +959,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of messages that are currently being handled and haven't yet returned their bytes to the inbound message throttler.",
+      "description": "Amount of the stake in AVAX that is benched (ignored) because the nodes are unhealthy",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1005,17 +983,18 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
-            "spanNulls": false,
+            "showPoints": "never",
+            "spanNulls": true,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1028,7 +1007,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -1038,27 +1018,47 @@
         "x": 12,
         "y": 25
       },
-      "id": 20,
+      "id": 14,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
         },
         "tooltip": {
           "mode": "single"
         }
       },
+      "pluginVersion": "8.0.3",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "avalanche_throttler_inbound_awaiting_release",
+          "expr": "avalanche_X_benchlist_benched_weight/1000000000",
           "interval": "",
-          "legendFormat": "Messages Awaiting Release",
+          "legendFormat": "X chain",
           "refId": "A"
+        },
+        {
+          "expr": "avalanche_P_benchlist_benched_weight/1000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "P Chain",
+          "refId": "B"
+        },
+        {
+          "expr": "avalanche_C_benchlist_benched_weight/1000000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "C Chain",
+          "refId": "C"
         }
       ],
-      "title": "Inbound Throttler Awaiting Release (Messages Processing)",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Benched stake",
       "type": "timeseries"
     },
     {
@@ -1146,7 +1146,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of bytes left in the validator byte allocation of the inbound message throttler",
+      "description": "Number of messages that are currently being handled and haven't yet returned their bytes to the inbound message throttler.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1193,8 +1193,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "bytes"
+          }
         },
         "overrides": []
       },
@@ -1204,7 +1203,7 @@
         "x": 12,
         "y": 33
       },
-      "id": 23,
+      "id": 20,
       "options": {
         "legend": {
           "calcs": [],
@@ -1218,13 +1217,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_inbound_remaining_validator_bytes",
+          "expr": "avalanche_throttler_inbound_awaiting_release",
           "interval": "",
-          "legendFormat": "Bytes Remaining",
+          "legendFormat": "Messages Awaiting Release",
           "refId": "A"
         }
       ],
-      "title": "Inbound Throttler Remaining Validator Bytyes",
+      "title": "Inbound Throttler Awaiting Release (Messages Processing)",
       "type": "timeseries"
     },
     {
@@ -1312,7 +1311,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of messages that could not be parsed because they were of unknown type or invalidly formatted.",
+      "description": "Number of bytes left in the validator byte allocation of the inbound message throttler",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1359,7 +1358,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -1369,7 +1369,7 @@
         "x": 12,
         "y": 41
       },
-      "id": 25,
+      "id": 23,
       "options": {
         "legend": {
           "calcs": [],
@@ -1383,13 +1383,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_msgs_failed_to_parse[1m])",
+          "expr": "avalanche_throttler_inbound_remaining_validator_bytes",
           "interval": "",
-          "legendFormat": "Failed to Parse",
+          "legendFormat": "Bytes Remaining",
           "refId": "A"
         }
       ],
-      "title": "Messages Failed To Parse per Minute",
+      "title": "Inbound Throttler Remaining Validator Bytyes",
       "type": "timeseries"
     },
     {
@@ -1476,7 +1476,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of outbound messages dropped (not sent) due to rate-limiting in the last minute",
+      "description": "Number of messages that could not be parsed because they were of unknown type or invalidly formatted.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1533,7 +1533,7 @@
         "x": 12,
         "y": 49
       },
-      "id": 26,
+      "id": 25,
       "options": {
         "legend": {
           "calcs": [],
@@ -1547,13 +1547,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_throttler_outbound_acquire_failures[1m])",
+          "expr": "increase(avalanche_msgs_failed_to_parse[1m])",
           "interval": "",
-          "legendFormat": "Messages Dropped",
+          "legendFormat": "Failed to Parse",
           "refId": "A"
         }
       ],
-      "title": "Outbound Messages Dropped in Last Minute",
+      "title": "Messages Failed To Parse per Minute",
       "type": "timeseries"
     },
     {
@@ -1640,7 +1640,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of bytes left in the validator byte allocation of the outbound message throttler",
+      "description": "Number of outbound messages dropped (not sent) due to rate-limiting in the last minute",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1687,8 +1687,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "bytes"
+          }
         },
         "overrides": []
       },
@@ -1698,7 +1697,7 @@
         "x": 12,
         "y": 57
       },
-      "id": 31,
+      "id": 26,
       "options": {
         "legend": {
           "calcs": [],
@@ -1712,13 +1711,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_outbound_remaining_validator_bytes",
+          "expr": "increase(avalanche_throttler_outbound_acquire_failures[1m])",
           "interval": "",
-          "legendFormat": "Bytes Remaining",
+          "legendFormat": "Messages Dropped",
           "refId": "A"
         }
       ],
-      "title": "Outbound Throttler Remaining Validator Bytyes",
+      "title": "Outbound Messages Dropped in Last Minute",
       "type": "timeseries"
     },
     {
@@ -1803,6 +1802,89 @@
       ],
       "title": "Outbound Throttler Remaining At-Large Bytyes",
       "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of bytes left in the validator byte allocation of the outbound message throttler",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 65
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_throttler_outbound_remaining_validator_bytes",
+          "interval": "",
+          "legendFormat": "Bytes Remaining",
+          "refId": "A"
+        }
+      ],
+      "title": "Outbound Throttler Remaining Validator Bytyes",
+      "type": "timeseries"
     }
   ],
   "refresh": "",
@@ -1815,7 +1897,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -1834,5 +1916,5 @@
   "timezone": "",
   "title": "Network",
   "uid": "MXbw4zmnz",
-  "version": 13
+  "version": 15
 }

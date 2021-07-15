@@ -1011,11 +1011,92 @@
     },
     {
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_vm_utxo_cache_hit[5m])/(increase(avalanche_X_vm_utxo_cache_hit[5m])+increase(avalanche_X_vm_utxo_cache_miss[5m]))",
+          "interval": "",
+          "legendFormat": "Hit Rate",
+          "refId": "A"
+        }
+      ],
+      "title": "UTXO Cache Hit Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 42
       },
       "id": 27,
       "title": "Possible Problem Indicators (these should return to 0 after a few minutes)",
@@ -1079,7 +1160,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "id": 43,
       "options": {
@@ -1169,7 +1250,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 35
+        "y": 43
       },
       "id": 33,
       "options": {
@@ -1230,5 +1311,5 @@
   "timezone": "",
   "title": "X-Chain",
   "uid": "ceRH2Am7z",
-  "version": 18
+  "version": 19
 }
