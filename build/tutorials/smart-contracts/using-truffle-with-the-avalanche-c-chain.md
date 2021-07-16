@@ -27,7 +27,7 @@ go build
 # start Avash
 ./avash
 # start a five node staking network
-runscript scripts/five_node_staking.lua
+runscript scripts/five_node_staking_with_config.lua
 ```
 
 A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
