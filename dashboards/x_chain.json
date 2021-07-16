@@ -105,14 +105,16 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))",
+          "exemplar": true,
+          "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))>0",
           "interval": "",
           "legendFormat": "Accepted",
           "refId": "A"
         },
         {
-          "expr": "round(increase(avalanche_X_vtx_rejected_count{job=\"avalanchego\"}[1m]))",
-          "hide": false,
+          "exemplar": true,
+          "expr": "round(increase(avalanche_X_vtx_rejected_count{job=\"avalanchego\"}[1m]))>0",
+          "hide": true,
           "interval": "",
           "legendFormat": "Rejected",
           "refId": "B"
@@ -264,10 +266,6 @@
               {
                 "color": "transparent",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 100
               }
             ]
           },
@@ -300,7 +298,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_X_txs_processing{job=\"avalanchego\"}",
+          "expr": "avalanche_X_txs_processing{job=\"avalanchego\"}>0",
           "hide": false,
           "interval": "",
           "legendFormat": "Transactions",
@@ -308,7 +306,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}",
+          "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}>0",
           "hide": false,
           "interval": "",
           "legendFormat": "Vertices",
@@ -1311,5 +1309,5 @@
   "timezone": "",
   "title": "X-Chain",
   "uid": "ceRH2Am7z",
-  "version": 19
+  "version": 21
 }
