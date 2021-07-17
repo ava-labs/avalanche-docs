@@ -416,6 +416,88 @@ Let’s make a SECP256K1 mint output with:
 ]
 ```
 
+## SECP256K1 Managed Asset Status Output
+
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) managed status output is an output that can be frozen.
+
+### **What SECP256K1 Managed Asset Status Output Contains**
+
+A secp256k1 Managed Asset Status Output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+
+* **`TypeID`** is the ID for this output type. It is `0x00000006`.
+* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
+* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
+* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+
+### **Gantt SECP256K1 Managed Asset Status Output Specification**
+
+```text
++-----------+------------+--------------------------------+
+| type_id   : int        |                       4 bytes  |
++-----------+------------+--------------------------------+
+| locktime  : long       |                       8 bytes  |
++-----------+------------+--------------------------------+
+| threshold : int        |                       4 bytes  |
++-----------+------------+--------------------------------+
+| addresses : [][20]byte |  4 + 20 * len(addresses) bytes |
++-----------+------------+--------------------------------+
+                         | 20 + 20 * len(addresses) bytes |
+                         +--------------------------------+
+```
+
+### **Proto SECP256K1 Managed Asset Status Output Specification**
+
+```text
+message SECP256K1ManagedAssetStatusOutput {
+    uint32 typeID = 1;            // 04 bytes
+    uint64 locktime = 2;          // 08 bytes
+    uint32 threshold = 3;         // 04 bytes
+    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+}
+```
+
+### **SECP256K1 Managed Asset Status Output Example**
+
+Let’s make a SECP256K1 Managed Asset Status Output with:
+
+* **`TypeID`**: `65541`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
+* **`Addresses`**:
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
+
+```text
+[
+    TypeID    <- 0x00010005
+    Locktime  <- 0x000000000000d431
+    Threshold <- 0x00000001
+    Addresses <- [
+        0x51025c61fbcfc078f69334f834be6dd26d55a955,
+        0xc3344128e060128ede3523a24a461c8943ab0859,
+    ]
+]
+=
+[
+    // typeID:
+    0x00, 0x01, 0x00, 0x05,
+    // locktime:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
+    // threshold:
+    0x00, 0x00, 0x00, 0x01,
+    // number of addresses:
+    0x00, 0x00, 0x00, 0x02,
+    // addrs[0]:
+    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
+    0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
+    0x6d, 0x55, 0xa9, 0x55,
+    // addrs[1]:
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
+]
+```
+
 ## NFT Transfer Output
 
 An NFT transfer output is an NFT that is owned by a collection of addresses.

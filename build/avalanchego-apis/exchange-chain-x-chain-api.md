@@ -214,6 +214,103 @@ curl -X POST --data '{
 }
 ```
 
+### avm.createAsset
+
+Create a new fixed asset.
+
+#### **Signature**
+
+```cpp
+avm.createAsset({
+    name: string,
+    symbol: string,
+    denomination: int, //optional
+    initialHolders: []{
+        address: string,
+        amount: int
+    },
+    minterSets: []{
+        minters: []string,
+        threshold: int
+    },
+    manager: {
+      threshold: int,
+      addresses: []string,
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    assetID: string,
+    changeAddr: string
+}
+```
+
+* `name` is a human-readable name for the asset. Not necessarily unique.
+* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
+* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+* `manager` is a `threshold` and array of `addresses`
+* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `username` and `password` denote the user paying the transaction fee.
+* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
+* `assetID` is the ID of the new asset.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.createAsset",
+    "params" :{
+        "name": "myManagedAsset",
+        "symbol":"MMA",
+        "initialHolders": [
+            {
+                "address": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+                "amount": 10000
+            }
+        ],
+        "minterSets":[
+            {
+                "minters":[
+                    "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+                ],
+                "threshold": 1
+            }
+        ],
+        "manager":{
+            "threshold": 1,
+            "addresses": [
+                "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+            ]
+        },
+        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr":"X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "assetID": "9odZGa5TUuPcbDhizQNWHzYvQ7mJ3x2JKBk23hByFXSZUtHDz",
+        "changeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+    },
+    "id": 1
+}
+```
+
 ### avm.createFixedCapAsset
 
 Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
@@ -1408,6 +1505,160 @@ curl -X POST --data '{
         "txID":"2iXSVLPNVdnFqn65rRvLrsu8WneTFqBJRMqkBJx5vZTwAQb8c1",
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
     }
+}
+```
+
+### avm.sendManaged
+
+Send a quantity of an managed asset to an address.
+
+#### **Signature**
+
+```cpp
+avm.sendManaged({
+    amount: int,
+    assetID: string,
+    feeFrom: []string,
+    feeChangeAddr: string,
+    to: string,
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
+* `feeFrom` are the addresses that tx fee is paid from.
+* `feeChangeAddr` is the address that change from the tx fee is paid to.
+* `to` is the X-Chain address the asset is sent to.
+* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* You can attach a `memo`, whose length can be up to 256 bytes.
+* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.send",
+    "params" :{
+        "assetID"   : "9odZGa5TUuPcbDhizQNWHzYvQ7mJ3x2JKBk23hByFXSZUtHDz",
+        "amount"    : 10000,
+        "feeFrom"   : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "feeChangeAddr" : "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "to"        : "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "memo"      : "hi, mom!",
+        "username"  : "userThatControlsAtLeast10000OfThisAsset",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+If the asset is unfrozen the response will look like this.
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"y76DNTRrP6ZDSMjxaxrNzkRn2fjFaz8ivhQ9VyMLsxUas1PPo",
+        "changeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "feeChangeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+    }
+}
+```
+
+If the asset is frozen the response will look like this.
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "error": {
+        "code": -32000,
+        "message": "problem issuing transaction: asset 9odZGa5TUuPcbDhizQNWHzYvQ7mJ3x2JKBk23hByFXSZUtHDz is frozen",
+        "data": null
+    },
+    "id": 1
+}
+```
+
+### avm.updateManagedAsset
+
+Update the frozen state of a managed asset
+
+#### **Signature**
+
+```cpp
+avm.updateManagedAsset({
+    assetID: string,
+    manager: {
+      threshold: int,
+      addresses: []string,
+    },
+    frozen: bool,
+    to: string,
+    memo: string, //optional
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) -> {txID: string, changeAddr: string}
+```
+
+* `assetID` is the ID of the managed asset.
+* `manager` is a `threshold` and array of `addresses`.
+* `frozen` is a `boolean` representing the if the asset is frozen or not.
+* `to` is the X-Chain address the asset is sent to.
+* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* You can attach a `memo`, whose length can be up to 256 bytes.
+* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.updateManagedAsset",
+    "params" :{
+        "assetID"   : "9odZGa5TUuPcbDhizQNWHzYvQ7mJ3x2JKBk23hByFXSZUtHDz",
+        "frozen": true,
+        "manager":{
+            "threshold": 1,
+            "addresses": [
+                "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+            ]
+        },
+        "to"        : "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "from"      : ["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
+        "changeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp",
+        "memo"      : "hi, mom!",
+        "username"  : "userThatControlsThisAsset",
+        "password"  : "myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "YAtEJdz6zBHjqbhMsYq2fbjhu2z6KoYcE3bfWKHY68NBsBXmt",
+        "changeAddr": "X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"
+    },
+    "id": 1
 }
 ```
 
