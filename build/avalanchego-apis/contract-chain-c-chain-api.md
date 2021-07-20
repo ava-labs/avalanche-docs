@@ -529,6 +529,47 @@ curl -X POST --data '{
 }
 ```
 
+### avax.issueTx
+
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+
+#### **Signature**
+
+```javascript
+avax.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avax.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
 ### avax.getAtomicTxStatus
 
 Get the status of an atomic transaction sent to the network.
