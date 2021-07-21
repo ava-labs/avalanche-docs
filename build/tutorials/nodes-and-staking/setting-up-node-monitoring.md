@@ -227,7 +227,7 @@ On Grafana’s web interface:
 * Select Prometheus.
 * In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
 * Click `Save & Test`
-* Check for “Data source is working” green message.
+* Check for "Data source is working" green message.
 
 ## Set up node\_exporter
 

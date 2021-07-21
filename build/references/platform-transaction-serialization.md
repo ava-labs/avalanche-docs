@@ -922,7 +922,7 @@ message CreateSubnetTx {
 
 Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
 
-* **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
+* **`BaseTx`**: "Example BaseTx as defined above but with TypeID set to 16"
 * **`RewardsOwner`**:
   * **`TypeId`**: 11
   * **`Locktime`**: 0
@@ -1013,9 +1013,9 @@ message ImportTx {
 
 Let’s make an unsigned import tx that uses the inputs from the previous examples:
 
-* **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
+* **`BaseTx`**: "Example BaseTx as defined above with TypeID set to 17"
 * **`SourceChain`**:
-* **`Ins`**: “Example SECP256K1 Transfer Input as defined above”
+* **`Ins`**: "Example SECP256K1 Transfer Input as defined above"
 
 ```text
 [
@@ -1108,9 +1108,9 @@ message ExportTx {
 
 Let’s make an unsigned export tx that uses the outputs from the previous examples:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
+* `BaseTx`: "Example BaseTx as defined above" with `TypeID` set to 18
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `Outs`: "Example SECP256K1 Transfer Output as defined above"
 
 ```text
 [
@@ -1502,7 +1502,7 @@ Let’s make a StakeableLockIn with:
 
 * **`TypeID`**: 21
 * **`Locktime`**: 54321
-* **`TransferableIn`**: “Example SECP256K1 Transfer Input as defined above”
+* **`TransferableIn`**: "Example SECP256K1 Transfer Input as defined above"
 
 ```text
 [
@@ -1544,7 +1544,7 @@ A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
 
 * **`TypeID`** is the ID for this output type. It is `0x00000016`.
 * **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
-* **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
+* **`transferableout`**: "Example SECP256K1 Transfer Output as defined above"
 
 ### **Gantt StakeableLockOut Specification**
 

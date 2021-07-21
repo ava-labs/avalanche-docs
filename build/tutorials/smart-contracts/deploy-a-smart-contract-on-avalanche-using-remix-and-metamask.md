@@ -46,7 +46,7 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a "C-" prefix and the faucet will switch from AVAX to C-AVAX.
 
 ### Funding on local testnet
 
@@ -64,7 +64,7 @@ For this example, we will deploy an ERC20 contract from [OpenZeppelin](https://o
 
 ![ERC20 Contract](../../../.gitbook/assets/erc20-contract.png)
 
-Navigate to Deploy Tab -&gt; Open the “ENVIRONMENT” drop-down and select Injected Web3 \(make sure MetaMask is loaded\)
+Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 \(make sure MetaMask is loaded\)
 
 ![Deploy and run transactions](../../../.gitbook/assets/deploy-and-run-transactions.png)
 
@@ -72,7 +72,7 @@ Once we injected the web3-&gt; Go back to the compiler, and compile the selected
 
 ![Solidity compiler](../../../.gitbook/assets/solidity-compiler.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC20. Click “Deploy.”
+Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC20. Click "Deploy."
 
 ![Deploy erc20](../../../.gitbook/assets/deploy-erc20.png)
 
@@ -84,7 +84,7 @@ Our contract is successfully deployed!
 
 ![Published metadata](../../../.gitbook/assets/published-metadata.png)
 
-Now, we can expand it by selecting it from the “Deployed Contracts” tab and test it out.
+Now, we can expand it by selecting it from the "Deployed Contracts" tab and test it out.
 
 ![Interact with contract](../../../.gitbook/assets/interact-with-contract.png)
 

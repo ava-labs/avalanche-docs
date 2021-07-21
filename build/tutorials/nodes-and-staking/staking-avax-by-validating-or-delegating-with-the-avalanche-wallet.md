@@ -15,7 +15,7 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 You can access your wallet using your key phrase, keystore file, or Ledger Nano S \(coming soon!\)
 
-### **Step 2 — Navigate to “Earn” section** <a id="dc5a"></a>
+### **Step 2 — Navigate to "Earn" section** <a id="dc5a"></a>
 
 ![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
@@ -23,7 +23,7 @@ You can access your wallet using your key phrase, keystore file, or Ledger Nano 
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
-Enter the amount you wish to transfer to your P-Chain and complete the transfer by clicking the “Transfer” button below.
+Enter the amount you wish to transfer to your P-Chain and complete the transfer by clicking the "Transfer" button below.
 
 ![Image for post](https://miro.medium.com/max/1488/0*aremeYNYtKP5nGPx)
 
@@ -63,7 +63,7 @@ Fill the fields and confirm!
 
 ![Image for post](https://miro.medium.com/max/1600/0*cy61ZMDY5veMvCZj)
 
-Carefully check the details, and click “Confirm” again!
+Carefully check the details, and click "Confirm" again!
 
 ![Image for post](https://miro.medium.com/max/1600/0*f3GlN03He6TFkOV7)
 

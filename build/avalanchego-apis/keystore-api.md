@@ -115,7 +115,7 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` specifies the format of the string encoding user data. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 
@@ -161,7 +161,7 @@ keystore.importUser(
 ) -> {success:bool}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` specifies the format of the string encoding user data . Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 

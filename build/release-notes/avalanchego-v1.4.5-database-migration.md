@@ -24,13 +24,13 @@ This upgrade also significantly shortens the amount of time it takes to bootstra
 
 ## The Upgrade Process
 
-If you have an existing database on your computer, then when you run AvalancheGo v1.4.5, it will actually start 2 nodes. One will be running v1.4.4, which uses the “old” database version \(v1.0.0\). The other will be running v1.4.5, which uses the “new” database format \(v1.4.5 which will stay the same for any AvalancheGo &lt;=1.4.5\).
+If you have an existing database on your computer, then when you run AvalancheGo v1.4.5, it will actually start 2 nodes. One will be running v1.4.4, which uses the "old" database version \(v1.0.0\). The other will be running v1.4.5, which uses the "new" database format \(v1.4.5 which will stay the same for any AvalancheGo &lt;=1.4.5\).
 
 The v1.4.4 node will run as normal, and you will see its logs as before. The node will connect to the network using the same node ID as before and, if it is a validator, participate in consensus as before. In short, things should look the same as when running v1.4.4.
 
-The v1.4.5 node will run in the background, and will bootstrap from the v1.4.4 node running on the same computer. This is faster and uses less bandwidth than the normal bootstrap procedure, which requires data to be sent over the internet. During the bootstrapping process, the v1.4.5 node will populate the “new” database.
+The v1.4.5 node will run in the background, and will bootstrap from the v1.4.4 node running on the same computer. This is faster and uses less bandwidth than the normal bootstrap procedure, which requires data to be sent over the internet. During the bootstrapping process, the v1.4.5 node will populate the "new" database.
 
-When the v1.4.5 node is done bootstrapping, the v1.4.4 node will stop and the v1.4.5 node will restart. When the v1.4.5 node restarts, it will run normally, using the “new” database, and complete the migration. Your node will have the same node ID as before.
+When the v1.4.5 node is done bootstrapping, the v1.4.4 node will stop and the v1.4.5 node will restart. When the v1.4.5 node restarts, it will run normally, using the "new" database, and complete the migration. Your node will have the same node ID as before.
 
 You should not provide the flag`--plugin-dir`. If you used the installer script to install AvalancheGo, you need to remove this flag from your AvalancheGo service file. See this [note](avalanchego-v1.4.5-database-migration.md#note-for-the-nodes-installed-with-installer-script).
 
@@ -104,9 +104,9 @@ You can check progress by doing the following:
 
 * Logs for the node populating the new database can be found under _`$HOME/.avalanchego/logs/fetch-only`_
 * These messages indicate the completion of the database migration:
-  * When _`“starting latest node version in normal execution mode”`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
-  * When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the **keystore** data is finished migrating.
-  * When _`“finished migrating platform vm from database version v1.0.0 to v1.4.5”`_ is printed, then validator **uptimes** are finished migrating.
+  * When _`"starting latest node version in normal execution mode"`_ is printed, then the new **database** has been bootstrapped, and the node has restarted.
+  * When _`"finished migrating keystore from database version v1.0.0 to v1.4.5"`_ is printed, then the **keystore** data is finished migrating.
+  * When _`"finished migrating platform vm from database version v1.0.0 to v1.4.5"`_ is printed, then validator **uptimes** are finished migrating.
 
 Depending on your computer, the upgrade process could take a significant amount of time. Some validators have reported 30+ hours with less powerful computers. It mainly depends on the type of storage on the computer. If the storage is SSD-based it should complete in 12 hours or less. On HDD-based systems it can take a couple of days \(migration is almost exclusively random reads/writes and HDDs are pretty slow on those types of workloads\). However, your node will continue to work during the migration without downtime.
 
@@ -171,11 +171,11 @@ It can take around 30 hours. However, it may take more or less time depending on
 
 ### How do I know that the database migration has completed?
 
-When _`“starting to run node in normal execution mode”`_ is printed, then the new database has been bootstrapped, and the node has restarted.
+When _`"starting to run node in normal execution mode"`_ is printed, then the new database has been bootstrapped, and the node has restarted.
 
-When _`“finished migrating keystore from database version v1.0.0 to v1.4.5”`_ is printed, then the keystore data is finished migrating.
+When _`"finished migrating keystore from database version v1.0.0 to v1.4.5"`_ is printed, then the keystore data is finished migrating.
 
-When _`“finished migrating platformvm from database version v1.0.0 to v1.4.5”`_ is printed, then validator uptimes are finished migrating.
+When _`"finished migrating platformvm from database version v1.0.0 to v1.4.5"`_ is printed, then validator uptimes are finished migrating.
 
 ### Can I delete the old database?
 

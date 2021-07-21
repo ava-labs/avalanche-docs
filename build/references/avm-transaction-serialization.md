@@ -730,8 +730,8 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 * **`AddressIndices`**:
 * `0x00000003`
 * `0x00000007`
-* **`MintOutput`**: `“Example SECP256K1 Mint Output from above”`
-* **`TransferOutput`**: `“Example SECP256K1 Transfer Output from above”`
+* **`MintOutput`**: `"Example SECP256K1 Mint Output from above"`
+* **`TransferOutput`**: `"Example SECP256K1 Transfer Output from above"`
 
 ```text
 [
@@ -1529,9 +1529,9 @@ message ImportTx {
 
 Let’s make an unsigned import tx that uses the inputs from the previous examples:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `3`
+* `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: `“Example SECP256K1 Transfer Input as defined above”`
+* `Ins`: `"Example SECP256K1 Transfer Input as defined above"`
 
 ```text
 [
@@ -1637,9 +1637,9 @@ message ExportTx {
 
 Let’s make an unsigned export tx that uses the outputs from the previous examples:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `4`
+* `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: `“Example SECP256K1 Transfer Output as defined above”`
+* `Outs`: `"Example SECP256K1 Transfer Output as defined above"`
 
 ```text
 [
