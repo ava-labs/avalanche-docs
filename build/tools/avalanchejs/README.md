@@ -44,7 +44,7 @@ You can also pull the repo down directly and build it from scratch:
 
 `npm run build`
 
-This will generate a pure Javascript library and place it in a folder named “web” in the project root. The “avalanchejs” file can then be dropped into any project as a pure javascript implementation of Avalanche.
+This will generate a pure Javascript library and place it in a folder named "web" in the project root. The "avalanchejs" file can then be dropped into any project as a pure javascript implementation of Avalanche.
 
 The AvalancheJS library can be imported into your existing Node.js project as follows:
 

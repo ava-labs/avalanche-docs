@@ -14,11 +14,11 @@ First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live
 Make sure you have the latest version of the Ledger Live application before proceeding. Older versions may not show the latest device firmware and Avalanche app version. The latest Ledger Live app version at the time of writing is 2.26.1.
 {% endhint %}
 
-After successfully installing the app run it. Go to the “Manager” tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter “Avalanche”. Confirm that the Avalanche app is v0.5.2 \(or greater\), and click the “Install” button.
+After successfully installing the app run it. Go to the "Manager" tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter "Avalanche". Confirm that the Avalanche app is v0.5.2 \(or greater\), and click the "Install" button.
 
 ![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-06-live-install.png)
 
-You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.5.2.
+You can confirm the installation was successful by going to the "Apps installed" tab where you should see Avalanche v0.5.2.
 
 ![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-07-live-version.png)
 
@@ -34,15 +34,15 @@ If you have more than one app installed on the device, use left and right button
 
 ![Avalanche app](../../../.gitbook/assets/ledger-04-app-start.png)
 
-Press both buttons to start the app. You should land on the “Avalanche” app screen where you can confirm that the app is version 0.5.2 \(or greater\).
+Press both buttons to start the app. You should land on the "Avalanche" app screen where you can confirm that the app is version 0.5.2 \(or greater\).
 
 ![App version](../../../.gitbook/assets/ledger-05-app-version.png)
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
+After you confirm that the Avalanche app is running then on the wallet homepage click the "Access Wallet" button.
 
 ![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
+On the subsequent "How do you want to access your wallet?", click the "Ledger" button.
 
 ![Ledger Access](../../../.gitbook/assets/ledger-01-wallet-access.png)
 
@@ -54,7 +54,7 @@ You will need to do this twice, because different keys are used for different ch
 
 ![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
+To transfer funds, go to the "Send" tab and paste an X-Address into the "To Address" field. Set an amount and optionally set a memo. Press "Confirm" and then the "Send Transaction" button.
 
 ![Send Transaction](../../../.gitbook/assets/send-transaction.png)
 

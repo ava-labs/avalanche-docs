@@ -45,7 +45,7 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either "cb58" or "hex". Defaults to "cb58".
 
 `genesisData` has this form:
 
@@ -545,7 +545,7 @@ avm.mintNFT({
 * `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 
@@ -894,7 +894,7 @@ curl -X POST --data '{
 
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1011,7 +1011,7 @@ avm.getUTXOs({
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example**
 
@@ -1274,7 +1274,7 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1538,7 +1538,7 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 This call is made to the wallet API endpoint:
 

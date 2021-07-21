@@ -7,7 +7,7 @@ This tutorial illustrates how to create a variable-cap, fungible asset. No units
 You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
 
 * **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Flexibility:** it’s nice to be able to encode logic like, "Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more."
 
 Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
 

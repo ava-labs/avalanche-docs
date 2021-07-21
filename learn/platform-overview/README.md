@@ -70,7 +70,7 @@ Avalanche also supports creating custom blockchains with virtual machines.
 
 ## Exchange Chain \(X-Chain\)
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like “can’t be traded until tomorrow” or “can only be sent to US citizens.”
+The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
