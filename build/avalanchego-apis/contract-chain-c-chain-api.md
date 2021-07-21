@@ -546,7 +546,7 @@ avax.issueTx({
 
 #### **Example Call**
 
-```bash
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
