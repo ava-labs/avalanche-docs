@@ -531,11 +531,11 @@ curl -X POST --data '{
 
 ### avax.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
-```javascript
+```cpp
 avax.issueTx({
     tx: string,
     encoding: string, //optional
@@ -560,7 +560,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
