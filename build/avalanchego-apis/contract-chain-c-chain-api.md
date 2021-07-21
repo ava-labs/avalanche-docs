@@ -102,7 +102,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -149,7 +149,7 @@ avax.export({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -166,7 +166,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -211,7 +211,7 @@ avax.exportAVAX({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -230,7 +230,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -266,7 +266,7 @@ avax.exportKey({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -281,7 +281,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -352,7 +352,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -399,7 +399,7 @@ avax.import({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -415,7 +415,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -454,7 +454,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -470,7 +470,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -504,7 +504,7 @@ avax.importKey({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -519,7 +519,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -605,7 +605,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
