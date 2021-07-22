@@ -64,7 +64,7 @@ The patch includes performance, throttling, and VM improvements:
 - Fixed protobuf code-gen script to place `grpc` files in the correct location.
 - Passed the block bytes through the `rpcchainvm#Block.Verify` to avoid any potential cache eviction verification failures.
 
-## v1.4.9 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
+## v1.4.9 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
 
 **Apricot Phase 2 - Patch 9**
 
