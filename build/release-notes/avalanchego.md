@@ -4,6 +4,9 @@
 
 ## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
 
+### C-Chain
+This release enables snapshots by default.
+
 ### Config Flags
 #### Removed
 * `conn-meter-reset-duration`
@@ -37,6 +40,7 @@ Refactored inbound connection rate-limiting and enable it by default.
 * Refactor P2P message definitions and move them from the `network` package.
 * Add VM aliases to the HTTP API server
 * Replace `1024` with `units.KiB`, etc.
+* Improve partition tolerance by processing chits in order of the creation of the corresponding queries.
 
 ### Fuji IPs
 Update the bootstrap IPs for the Fuji Testnet.
