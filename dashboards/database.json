@@ -348,7 +348,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Cumulative operations per second",
+      "title": "Total Operations per Second",
       "type": "timeseries"
     },
     {
@@ -495,7 +495,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Cumulative Operations Latency",
+      "title": "Total Operations Latency",
       "type": "timeseries"
     },
     {
@@ -1388,7 +1388,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1408,5 +1408,5 @@
   "timezone": "",
   "title": "Database",
   "uid": "R8N89hznk",
-  "version": 15
+  "version": 17
 }

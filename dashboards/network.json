@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 48,
+  "id": 54,
   "links": [
     {
       "icon": "external link",
@@ -77,107 +77,92 @@
         "noDataState": "no_data",
         "notifications": []
       },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "Number of network peers the node is connected to",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 1
       },
-      "hiddenSeries": false,
       "id": 4,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": false
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_peers{job=\"avalanchego\"}",
+          "expr": "avalanche_network_peers{job=\"avalanchego\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "Peers connected",
           "refId": "B"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": false,
-          "line": false,
-          "op": "lt",
-          "value": 100,
-          "visible": true
-        }
-      ],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Peer Count",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:261",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:262",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "datasource": "Prometheus",
@@ -256,13 +241,13 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "avalanche_network_timeout/1000000000",
+          "expr": "avalanche_requests_current_timeout/1000000000",
           "interval": "",
           "legendFormat": "Timeout",
           "refId": "A"
         },
         {
-          "expr": "avalanche_avg_network_latency/1000000000",
+          "expr": "avalanche_requests_average_latency/1000000000",
           "hide": false,
           "interval": "",
           "legendFormat": "Latency",
@@ -351,93 +336,106 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "rate(avalanche_accepted_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_accepted_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_get_accepted_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_accepted_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_get_accepted_frontier_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_accepted_frontier_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted frontier",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_get_ancestors_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_ancestors_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_put_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_put_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_multi_put_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_multi_put_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_get_version_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_version_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get version",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_get_peerlist_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_peerlist_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get peerlist",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_pull_query_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_pull_query_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_push_query_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_push_query_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_version_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_version_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "version",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_ping_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_ping_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "ping",
           "refId": "L"
         },
         {
-          "expr": "rate(avalanche_pong_received{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_pong_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pong",
           "refId": "M"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_get_received{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_received{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "N"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_chits_received{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_chits_received{job=\"avalanchego\"}[1m])",
           "hide": false,
           "interval": "",
           "legendFormat": "chits",
@@ -526,93 +524,93 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "rate(avalanche_accepted_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_accepted_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_get_accepted_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_accepted_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_get_accepted_frontier_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_accepted_frontier_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted frontier",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_get_ancestors_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_ancestors_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_put_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_put_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_multi_put_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_multi_put_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_get_version_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_version_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get version",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_get_peerlist_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_peerlist_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get peerlist",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_pull_query_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_pull_query_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_push_query_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_push_query_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_version_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_version_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "version",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_ping_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_ping_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "ping",
           "refId": "L"
         },
         {
-          "expr": "rate(avalanche_pong_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_pong_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pong",
           "refId": "M"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_get_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_get_sent{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get",
           "refId": "N"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_chits_sent{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_chits_sent{job=\"avalanchego\"}[1m])",
           "hide": false,
           "interval": "",
           "legendFormat": "chits",
@@ -701,87 +699,99 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "rate(avalanche_accepted_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_accepted_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "accepted",
           "refId": "A"
         },
         {
-          "expr": "rate(avalanche_get_accepted_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_accepted_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted",
           "refId": "B"
         },
         {
-          "expr": "rate(avalanche_get_accepted_frontier_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_accepted_frontier_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get accepted frontier",
           "refId": "C"
         },
         {
-          "expr": "rate(avalanche_get_ancestors_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_ancestors_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get ancestors",
           "refId": "D"
         },
         {
-          "expr": "rate(avalanche_put_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_put_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "put",
           "refId": "E"
         },
         {
-          "expr": "rate(avalanche_multi_put_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_multi_put_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "multiput",
           "refId": "F"
         },
         {
-          "expr": "rate(avalanche_get_version_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_version_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get version",
           "refId": "G"
         },
         {
-          "expr": "rate(avalanche_get_peerlist_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_get_peerlist_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "get peerlist",
           "refId": "H"
         },
         {
-          "expr": "rate(avalanche_pull_query_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_pull_query_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pull query",
           "refId": "I"
         },
         {
-          "expr": "rate(avalanche_push_query_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_push_query_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "push query",
           "refId": "J"
         },
         {
-          "expr": "rate(avalanche_version_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_version_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "version",
           "refId": "K"
         },
         {
-          "expr": "rate(avalanche_ping_failed{job=\"avalanchego\"}[1m])",
+          "exemplar": true,
+          "expr": "rate(avalanche_network_ping_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "ping",
           "refId": "L"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_pong_failed{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_pong_failed{job=\"avalanchego\"}[1m])",
           "interval": "",
           "legendFormat": "pong",
           "refId": "M"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_chits_failed{job=\"avalanchego\"}[1m])",
+          "expr": "rate(avalanche_network_chits_failed{job=\"avalanchego\"}[1m])",
           "hide": false,
           "interval": "",
           "legendFormat": "chits",
@@ -819,7 +829,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -866,7 +876,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_outstanding_requests",
+          "expr": "avalanche_requests_outstanding",
           "interval": "",
           "legendFormat": "Outstanding Requests",
           "refId": "A"
@@ -895,13 +905,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -948,7 +958,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_inbound_awaiting_acquire",
+          "expr": "avalanche_network_throttler_inbound_awaiting_acquire",
           "interval": "",
           "legendFormat": "Messages Awaiting Acquire",
           "refId": "A"
@@ -1010,7 +1020,32 @@
           },
           "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "X chain"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1082,13 +1117,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1136,7 +1171,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_inbound_remaining_at_large_bytes",
+          "expr": "avalanche_network_throttler_inbound_remaining_at_large_bytes",
           "interval": "",
           "legendFormat": "Inbound Throttler Remaining Bytes",
           "refId": "A"
@@ -1165,13 +1200,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1218,7 +1253,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_inbound_awaiting_release",
+          "expr": "avalanche_network_throttler_inbound_awaiting_release",
           "interval": "",
           "legendFormat": "Messages Awaiting Release",
           "refId": "A"
@@ -1247,13 +1282,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1270,10 +1305,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -1301,7 +1332,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_throttler_inbound_acquire_latency_count[2m])",
+          "expr": "increase(avalanche_network_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_network_throttler_inbound_acquire_latency_count[2m])",
           "interval": "",
           "legendFormat": "Acquire Bytes Latency",
           "refId": "A"
@@ -1337,7 +1368,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1385,7 +1416,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_inbound_remaining_validator_bytes",
+          "expr": "avalanche_network_throttler_inbound_remaining_validator_bytes",
           "interval": "",
           "legendFormat": "Bytes Remaining",
           "refId": "A"
@@ -1414,13 +1445,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1496,13 +1527,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1519,10 +1550,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -1549,7 +1576,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_msgs_failed_to_parse[1m])",
+          "expr": "increase(avalanche_network_msgs_failed_to_parse[1m])",
           "interval": "",
           "legendFormat": "Failed to Parse",
           "refId": "A"
@@ -1578,13 +1605,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1631,7 +1658,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_outbound_awaiting_release",
+          "expr": "avalanche_network_throttler_outbound_awaiting_release",
           "interval": "",
           "legendFormat": "Messages Awaiting Send",
           "refId": "A"
@@ -1660,13 +1687,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1713,7 +1740,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_throttler_outbound_acquire_failures[1m])",
+          "expr": "increase(avalanche_network_throttler_outbound_acquire_failures[1m])",
           "interval": "",
           "legendFormat": "Messages Dropped",
           "refId": "A"
@@ -1743,13 +1770,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1797,7 +1824,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_outbound_remaining_at_large_bytes",
+          "expr": "avalanche_network_throttler_outbound_remaining_at_large_bytes",
           "interval": "",
           "legendFormat": "Bytes Remaining",
           "refId": "A"
@@ -1827,13 +1854,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1881,7 +1908,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_throttler_outbound_remaining_validator_bytes",
+          "expr": "avalanche_network_throttler_outbound_remaining_validator_bytes",
           "interval": "",
           "legendFormat": "Bytes Remaining",
           "refId": "A"
@@ -1889,9 +1916,637 @@
       ],
       "title": "Outbound Throttler Remaining Validator Bytyes",
       "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of inbound connections dropped due to inbound connection rate-limiting",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 73
+      },
+      "id": 36,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_inbound_conn_throttler_rate_limited[1m])",
+          "interval": "",
+          "legendFormat": "Rate-Limited",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Connections Dropped due to Rate-Limiting per Minute",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Rate at which we save bytes by doing compression before sending them, over the last minute.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 73
+      },
+      "id": 38,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_multi_put_bytes_saved_sum[5m])",
+          "interval": "",
+          "legendFormat": "Multiput",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_push_query_bytes_saved_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Push Query",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_put_bytes_saved_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Put",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_peerlist_bytes_saved_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Peer List",
+          "refId": "D"
+        }
+      ],
+      "title": "Bytes Saved by Compression",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 81
+      },
+      "id": 39,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_multi_put_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_multi_put_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Multiput",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_push_query_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_push_query_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Push Query",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_put_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_put_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Put",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_peerlist_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_peerlist_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Peer List",
+          "refId": "D"
+        }
+      ],
+      "title": "Average Message Compression Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Portion of messages of this type that are sent compressed",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 81
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_codec_multi_put_bytes_saved_count[5m])/increase(avalanche_network_multi_put_sent[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Multiput",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_codec_put_bytes_saved_count[5m])/increase(avalanche_network_put_sent[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Put",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_codec_peerlist_bytes_saved_count[5m])/increase(avalanche_network_peerlist_sent[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Peer List",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_codec_push_query_bytes_saved_count[5m])/increase(avalanche_network_push_query_sent[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Push Query",
+          "refId": "D"
+        }
+      ],
+      "title": "Percent of Messages Compressed",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Considers the X, P and C Chains",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "min": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 89
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "hidden",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.3",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_accepted_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "accepted",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_accepted_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get accepted",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_accepted_frontier_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get accepted frontier",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_ancestors_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get ancestors",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_put_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "put",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_multi_put_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "multiput",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_version_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get version",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_peerlist_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get peerlist",
+          "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_pull_query_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "pull query",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_push_query_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "push query",
+          "refId": "J"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_version_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "version",
+          "refId": "K"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_ping_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "ping",
+          "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_pong_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "pong",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_get_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "get",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_chits_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "chits",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[5m]) ",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[5m]) ",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Q"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "R"
+        },
+        {
+          "datasource": "__expr__",
+          "expression": "($A + $B + $C + $D +  $E + $F + $G + $H + $I + $J +  $K + $L + $M + $N + $O) / ($P + $Q + $R)",
+          "hide": false,
+          "refId": "S",
+          "type": "math"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Bytes Sent per Accepted Container",
+      "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -1901,7 +2556,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1919,6 +2574,6 @@
   },
   "timezone": "",
   "title": "Network",
-  "uid": "MXbw4zmnz",
-  "version": 19
+  "uid": "jB1TgdZ7z",
+  "version": 31
 }

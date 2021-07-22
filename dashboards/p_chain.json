@@ -251,14 +251,10 @@
               {
                 "color": "transparent",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 10000
               }
             ]
           },
-          "unit": "ms"
+          "unit": "ns"
         },
         "overrides": []
       },
@@ -340,14 +336,10 @@
               {
                 "color": "transparent",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 10000
               }
             ]
           },
-          "unit": "ms"
+          "unit": "ns"
         },
         "overrides": []
       },
@@ -1371,7 +1363,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1439,7 +1431,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1459,5 +1451,5 @@
   "timezone": "",
   "title": "P-Chain",
   "uid": "uWlS20i7z",
-  "version": 24
+  "version": 29
 }
