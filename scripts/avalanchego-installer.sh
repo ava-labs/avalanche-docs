@@ -214,7 +214,7 @@ echo
 echo "Done!"
 echo
 echo "Your node should now be bootstrapping on the main net."
-echo "Node configuration file is $HOME/.avalanchego/confgis/node.json"
+echo "Node configuration file is $HOME/.avalanchego/configs/node.json"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"
