@@ -4,37 +4,44 @@
 
 ## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
 
-### C-Chain
+**C-Chain**
+
 This release enables snapshots by default.
 
-### Config Flags
-#### Removed
+**Config Flags**
+
+*Removed*
 * `conn-meter-reset-duration`
 * `conn-meter-max-conns`
-#### Added
+
+*Added*
 * `network-compression-enabled`
 
-### Prometheus Metrics
+**Prometheus Metrics**
+
 Many Prometheus metrics were renamed, and many histograms were replaced with 2 gauges.
 See [here](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) for updated Grafana Dashboards.
 
 This release also adds helper methods to the `utils/metric` package.
 
-### RocksDB
+**RocksDB**
+
 RocksDB is no longer built by default when running the build script, and it is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`. 
 
 The RocksDB database now places/looks for its files in a subdirectory `rocksdb`.
 Note that if you previously ran with RocksDB, you'll need to move the existing files.
 
-### Message Compression
+**Message Compression**
+
 Nodes now compress some P2P messages.
 If a peer is version >= v1.4.11, Put, Push Query, Peer List and Multiput messages sent to the peer are compressed using gzip before being sent over the network.
 This reduces AvalancheGo's bandwidth usage.
 
-### Inbound Connection Throttling
+**Inbound Connection Throttling**
 Refactored inbound connection rate-limiting and enable it by default.
 
-### General Improvements
+**General Improvements**
+
 * Refactored and improved performance of iteration over a database served by gRPC to a plugin.
 * On Linux, clean up the C-Chain if AvalancheGo dies ungracefully
 * Refactored P2P message definitions and move them from the `network` package.
@@ -42,7 +49,8 @@ Refactored inbound connection rate-limiting and enable it by default.
 * Replaced `1024` with `units.KiB`, etc.
 * Improved partition tolerance by processing chits in order of the creation of the corresponding queries.
 
-### Fuji IPs
+**Fuji IPs**
+
 Updated the bootstrap IPs for the Fuji Testnet.
 
 ## v1.4.10 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10)\)
