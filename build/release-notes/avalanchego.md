@@ -38,7 +38,7 @@ Refactored inbound connection rate-limiting and enable it by default.
 * Refactored and improved performance of iteration over a database served by gRPC to a plugin.
 * On Linux, clean up the C-Chain if AvalancheGo dies ungracefully
 * Refactor P2P message definitions and move them from the `network` package.
-* Add VM aliases to the HTTP API server
+* Added VM aliases to the HTTP API server
 * Replace `1024` with `units.KiB`, etc.
 * Improve partition tolerance by processing chits in order of the creation of the corresponding queries.
 
