@@ -43,7 +43,7 @@ Refactored inbound connection rate-limiting and enable it by default.
 * Improved partition tolerance by processing chits in order of the creation of the corresponding queries.
 
 ### Fuji IPs
-Update the bootstrap IPs for the Fuji Testnet.
+Updated the bootstrap IPs for the Fuji Testnet.
 
 ## v1.4.10 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10)\)
 
