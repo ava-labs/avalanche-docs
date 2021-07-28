@@ -39,7 +39,7 @@ Refactored inbound connection rate-limiting and enable it by default.
 * On Linux, clean up the C-Chain if AvalancheGo dies ungracefully
 * Refactor P2P message definitions and move them from the `network` package.
 * Added VM aliases to the HTTP API server
-* Replace `1024` with `units.KiB`, etc.
+* Replaced `1024` with `units.KiB`, etc.
 * Improved partition tolerance by processing chits in order of the creation of the corresponding queries.
 
 ### Fuji IPs
