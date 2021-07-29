@@ -80,16 +80,6 @@ If true, will retry bootstrapping if it fails.
 
 Max number of times to retry bootstrapping after a failure.
 
-### Connection Metering
-
-`--conn-meter-max-conns` \(int\):
-
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
-
-`--conn-meter-reset-duration` \(duration\):
-
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
-
 ### Database
 
 `--db-dir` \(string, file path\):
@@ -98,8 +88,13 @@ Specifies the directory to which the database is persisted. Defaults to `"$HOME/
 
 `--db-type` \(string\):
 
-Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`, which causes the node to use LevelDB, RocksDB, or an in-memory (not persisted) database, respectively.
+Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`. `memdb` is an in-memory, non-persisted database.
+
 Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
+
+**Two important notes about RocksDB**: First, RocksDB does not work on all computers. 
+Second, RocksDB is not built by default and is not included in publicly released binaries.
+To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`. 
 
 ### Genesis
 
@@ -436,12 +431,6 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string \
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
-#### Database Pruning
-
-`pruning-enabled`\(bool\):
-
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
-
 ### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
@@ -524,6 +513,22 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
+#### Database Pruning
+
+`pruning-enabled`\(bool\):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+### Health
+
+`--health-check-frequency` \(duration\):
+
+Health check runs with this freqency. Defaults to `30s`.
+
+`--health-check-averager-halflife` \(duration\):
+
+Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+
 ### Message Rate-Limiting (Throttling)
 
 These flags govern rate-limiting of inbound and outbound messages.
@@ -554,6 +559,10 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` (2 mebibytes).
 
 ### Network
+
+`--network-compression-enabled` \(bool\) \(v1.4.11\):
+
+If true, compress certain messages sent to peers on version >= v1.4.11 to reduce bandwidth usage. 
 
 `--network-initial-timeout` \(duration\):
 
@@ -595,15 +604,12 @@ Node will report unhealthy if its send queue is more than this portion full. Mus
 
 Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
 
-### Health
+`--inbound-connection-throtting-cooldown` \(duration\)
 
-`--health-check-frequency` \(duration\):
+`--inbound-connection-throttling-max-recent` \(uint\)
 
-Health check runs with this freqency. Defaults to `30s`.
-
-`--health-check-averager-halflife` \(duration\):
-
-Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+Node will only accept (attempt to upgrade) an inbound connection from an IP if it has not done so in the last `inbound-connection-throtting-cooldown`.
+Node will only allow `inbound-connection-throttling-max-recent` from all IPS per `inbound-connection-throttling-max-recent`.
 
 ### Peer List Gossiping
 

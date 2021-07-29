@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 44,
+  "id": 52,
   "links": [
     {
       "icon": "external link",
@@ -84,7 +84,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "(1 - avg(irate(node_cpu_seconds_total{job=~\"avalanchego-machine\", mode=\"idle\"}[1m])) by (instance)) * 100",
@@ -154,7 +154,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "max(((node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"} - node_filesystem_free_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) / node_filesystem_size_bytes{job=~\"avalanchego-machine\", fstype=~\"ext4|vfat\"}) * 100) by (instance)",
@@ -219,7 +219,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "avalanche_health_checks_failing{job=\"avalanchego\"}",
@@ -289,11 +289,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_avg_network_latency",
+          "expr": "avalanche_requests_average_latency",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -451,7 +451,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "exemplar": true,
@@ -518,7 +518,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "avalanche_P_vm_percent_connected{job=\"avalanchego\"}",
@@ -613,7 +613,7 @@
       "pluginVersion": "8.0.5",
       "targets": [
         {
-          "expr": "avalanche_peers{job=\"avalanchego\"}",
+          "expr": "avalanche_network_peers{job=\"avalanchego\"}",
           "interval": "",
           "legendFormat": "Peers",
           "refId": "A"
@@ -770,7 +770,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "round(increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[1m]))",
@@ -846,7 +846,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "avalanche_X_vtx_processing{job=\"avalanchego\"}",
@@ -913,7 +913,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "avalanche_X_benchlist_benched_num{job=\"avalanchego\"}",
@@ -991,7 +991,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "(increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + 1) / (increase(avalanche_X_handler_chits_count{job=\"avalanchego\"}[1m]) + increase(avalanche_X_handler_query_failed_count{job=\"avalanchego\"}[1m]) + 1)",
@@ -1283,6 +1283,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Avalanche Main Dashboard",
-  "uid": "xjY8r2znz",
-  "version": 14
+  "uid": "kBQpRdWnk",
+  "version": 1
 }
