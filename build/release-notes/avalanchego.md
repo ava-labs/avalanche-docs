@@ -10,7 +10,7 @@ This update is backwards compatible. It is optional, but encouraged.
 * Added formatting argument `"json"` to API method `GetTx`, which returns the JSON representation of the queried transaction
 * Added interface type assertions
 
-**API**
+**Info API**
 * Added method `GetNodeVersion` to Info API client
 
 **Prometheus Metrics**
@@ -22,7 +22,7 @@ This update is backwards compatible. It is optional, but encouraged.
 * Updated/added benchmarks
 
 **Shared Memory**
-* Replace `Put` and `Remove` with `Apply` to allow for future atomic transaction optimization.
+* Replace `Put` and `Remove` with `Apply` to allow for future atomic transaction optimization
 
 ## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
 
