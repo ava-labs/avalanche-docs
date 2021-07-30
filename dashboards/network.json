@@ -1997,7 +1997,7 @@
     },
     {
       "datasource": null,
-      "description": "Rate at which we save bytes by doing compression before sending them, over the last minute.",
+      "description": "Rate at which we save bytes (don't send/receive them over the network) by compressing messages/receiving compressed messages.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2047,7 +2047,33 @@
           },
           "unit": "Bps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Outbound Push Query",
+                  "Inbound Push Query"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -2069,34 +2095,66 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(avalanche_network_codec_multi_put_bytes_saved_sum[5m])",
+          "expr": "rate(avalanche_network_multi_put_compression_saved_received_bytes_sum[5m])",
           "interval": "",
-          "legendFormat": "Multiput",
+          "legendFormat": "Inbound Multiput",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_network_codec_push_query_bytes_saved_sum[5m])",
+          "expr": "rate(avalanche_network_multi_put_compression_saved_sent_bytes_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Push Query",
+          "legendFormat": "Outbound Multiput",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_network_codec_put_bytes_saved_sum[5m])",
+          "expr": "rate(avalanche_network_put_compression_saved_received_bytes_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Put",
+          "legendFormat": "Inbound Put",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "rate(avalanche_network_codec_peerlist_bytes_saved_sum[5m])",
+          "expr": "rate(avalanche_network_put_compression_saved_sent_bytes_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Peer List",
+          "legendFormat": "Outbound Put",
           "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_push_query_compression_saved_received_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inbound Push Query",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_push_query_compression_saved_sent_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Outbound Push Query",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_peerlist_compression_saved_received_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inbound Peer List",
+          "refId": "G"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_peerlist_compression_saved_sent_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Outbound Peer List",
+          "refId": "H"
         }
       ],
       "title": "Bytes Saved by Compression",
@@ -2212,7 +2270,7 @@
     },
     {
       "datasource": null,
-      "description": "Portion of messages of this type that are sent compressed",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2247,17 +2305,20 @@
             }
           },
           "mappings": [],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "ns"
         },
         "overrides": []
       },
@@ -2267,7 +2328,7 @@
         "x": 12,
         "y": 81
       },
-      "id": 41,
+      "id": 46,
       "options": {
         "legend": {
           "calcs": [],
@@ -2281,7 +2342,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_codec_multi_put_bytes_saved_count[5m])/increase(avalanche_network_multi_put_sent[5m])",
+          "expr": "rate(avalanche_network_codec_multi_put_compress_time_sum[5m])",
           "hide": false,
           "interval": "",
           "legendFormat": "Multiput",
@@ -2289,41 +2350,42 @@
         },
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_codec_put_bytes_saved_count[5m])/increase(avalanche_network_put_sent[5m])",
+          "expr": "rate(avalanche_network_codec_push_query_compress_time_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Put",
+          "legendFormat": "Push Query",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_codec_peerlist_bytes_saved_count[5m])/increase(avalanche_network_peerlist_sent[5m])",
+          "expr": "rate(avalanche_network_codec_put_compress_time_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Peer List",
+          "legendFormat": "Put",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_codec_push_query_bytes_saved_count[5m])/increase(avalanche_network_push_query_sent[5m])",
+          "expr": "rate(avalanche_network_codec_peerlist_compress_time_sum[5m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Push Query",
+          "legendFormat": "Peer List",
           "refId": "D"
         }
       ],
-      "title": "Percent of Messages Compressed",
+      "title": "Total Message Compression Time per Second",
       "type": "timeseries"
     },
     {
       "datasource": "Prometheus",
-      "description": "Considers the X, P and C Chains",
+      "description": "Considers all outbound traffic, including non-consensus messages",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -2556,8 +2618,8 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2021-07-29T22:45:35.398Z",
+    "to": "2021-07-29T23:24:30.770Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2575,5 +2637,5 @@
   "timezone": "",
   "title": "Network",
   "uid": "jB1TgdZ7z",
-  "version": 31
+  "version": 34
 }

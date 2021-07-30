@@ -2,6 +2,28 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.4.12 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.12)\)
+
+This update is backwards compatible. It is optional, but encouraged.
+
+**X-Chain**
+* Added formatting argument `"json"` to API method `GetTx`, which returns the JSON representation of the queried transaction
+* Added interface type assertions
+
+**API**
+* Added method `GetNodeVersion` to Info API client
+
+**Prometheus Metrics**
+* Fixed and renamed metrics for bytes not sent due to compression
+* Added metrics for bytes not received due to compression
+* Added helper struct `noAverager` to `metrics` package
+
+**Database**
+* Updated/added benchmarks
+
+**Shared Memory**
+* Replace `Put` and `Remove` with `Apply` to allow for future atomic transaction optimization.
+
 ## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
 
 **C-Chain**
