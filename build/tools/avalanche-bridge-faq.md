@@ -93,7 +93,7 @@ Currently the Avalanche Bridge only supports native Ethereum Assets moving over 
 While the AEB bridge is still operating, you are able to transfer any AEB tokens back to Ethereum. The AEB bridge is planned to be sunset the week of August 11th, 2021. When this happens the AEB bridge tokens will be migrated to the new AB bridge, and you will be able to convert your AEB tokens into AB tokens seamlessly without needing to cross the bridge. See Q6.2 for more details.
 
 ### How do I convert my AEB tokens to Avalanche bridged tokens?
-Once the AEB migration happens (currently scheduled for August 11th, 2021), you will be able to convert your AEB tokens to AB tokens at bridge.avax.network/convert. Further, many ecosystem projects such as Pangolin are working on making it easy for everyone to convert their tokens and re-enter new liquidity pools. 
+Once the AEB migration happens (currently scheduled for August 11th, 2021), you will be able to convert your AEB tokens to AB tokens at [bridge.avax.network/convert](http://bridge.avax.network/convert). Further, many ecosystem projects such as Pangolin are working on making it easy for everyone to convert their tokens and re-enter new liquidity pools. 
 
 ## Design/Technical 
 ### Is the use of tx.origin in the BridgeToken contracts a potential risk?
@@ -101,7 +101,6 @@ While using tx.origin to check authorization within smart contracts poses potent
 
 ### Can a single private key arbitrarily mint tokens?
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
-
 
 ## Other
 ### On the Proof of Assets page, why the amount of each asset on ethereum and avalanche side aren't matching up?
@@ -138,8 +137,3 @@ Specifications for the banner are as follows:
 * Use solid color as BG or have gradient that fades into #000000 (edited) 
 
 Promotional banners rotate on two week cycles.
-
-
-
-
-
