@@ -1,4 +1,4 @@
-# Bridge
+# Avalanche Bridge (AB) FAQ
 
 ## Transactions
 
