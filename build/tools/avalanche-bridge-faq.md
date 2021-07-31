@@ -14,28 +14,28 @@ When moving ERC20 assets from Ethereum to Avalanche, you are allowed to transfer
 When moving assets from Avalanche back to Ethereum, the bridge charges an in-kind transfer fee, as outlined below in Q2.1. While the web app will not allow you to send transfers less than this fee amount, if such a transaction is manually generated and sent to the Avalanche network, the bridge will simply mark the transfer as invalid since it does not have enough funds to cover the transfer fee.
 
 ### Can I send my native avalanche tokens to Ethereum?
- Not yet. The initial launch of the AB only supports moving native Ethereum tokens to Avalanche and back. However, in future releases we hope to enable bidirectional transfers which would allow you to also move Avalanche native tokens to Ethereum
+Not yet. The initial launch of the AB only supports moving native Ethereum tokens to Avalanche and back. However, in future releases we hope to enable bidirectional transfers which would allow you to also move Avalanche native tokens to Ethereum
 
 ### Can I send ETH or BTC across the bridge?
- Currently, the AB does not support native ETH or BTC. However, you can transfer the wrapped version of these assets (WETH and WBTC) across the bridge. These tokens are available through Metamask or AMMs on Ethereum. 
+Currently, the AB does not support native ETH or BTC. However, you can transfer the wrapped version of these assets (WETH and WBTC) across the bridge. These tokens are available through Metamask or AMMs on Ethereum. 
 
 ### What if my transaction is not visible in the Explorer?
- When transferring assets in either direction across the bridge, the transaction you send to the respective network will take seconds to minutes to appear in its respective explorer. To search for your transaction in the explorer, copy and paste your wallet address into either [cchain.explorer.avax.network](https://cchain.explorer.avax.network/) or [etherscan.io](https://etherscan.io/). To view the transactions sent by the bridge itself, you can look [here for Avalanche](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04/transactions) and [here for Ethereum](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0). If you still aren’t seeing your transaction, feel free to reach out to us on [Telegram](https://t.me/avalancheavax) or [Discord](https://chat.avax.network/).
+When transferring assets in either direction across the bridge, the transaction you send to the respective network will take seconds to minutes to appear in its respective explorer. To search for your transaction in the explorer, copy and paste your wallet address into either [cchain.explorer.avax.network](https://cchain.explorer.avax.network/) or [etherscan.io](https://etherscan.io/). To view the transactions sent by the bridge itself, you can look [here for Avalanche](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04/transactions) and [here for Ethereum](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0). If you still aren’t seeing your transaction, feel free to reach out to us on [Telegram](https://t.me/avalancheavax) or [Discord](https://chat.avax.network/).
 
 ### Are there tutorials on how to use the bridge?
- Yes, you can view video tutorials for all bridge functionality [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP).
+Yes, you can view video tutorials for all bridge functionality [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP).
 
 ### Can I send to a different wallet address?
- After crossing the bridge in either direction, you can send assets to any wallet or contract address you would like to. However, the bridge was designed to only allow transfers across networks from and to the same wallet address. 
+After crossing the bridge in either direction, you can send assets to any wallet or contract address you would like to. However, the bridge was designed to only allow transfers across networks from and to the same wallet address. 
  
 ### Can I safely speed up my transaction?
- Yes, you can click on the “Speed Up” button on Metamask. However, keep in mind of [this FAQ](#what-happens-after-I-have-sped-up-a-transaction-on-metamask). 
+Yes, you can click on the “Speed Up” button on Metamask. However, keep in mind of [this FAQ](#what-happens-after-I-have-sped-up-a-transaction-on-metamask). 
 
 ### What happens after I have sped up a transaction on Metamask?
- “Speeding up” a transaction through metamask issues a new transaction on Ethereum that has a higher gas price than the transaction that was originally sent. Since the new transaction has a high gas price, it is more likely to be included in a block, and since both transactions use the same nonce, only one will be accepted into the blockchain. Speeding up a transaction that is transferring funds to the bridge is perfectly safe; however, the UI is not currently aware of the new transaction, meaning you may not see the confirmations animation. Once the new transaction has 35 confirmations on Ethereum, check your metamask wallet on Avalanche to see the wrapped funds.
+“Speeding up” a transaction through metamask issues a new transaction on Ethereum that has a higher gas price than the transaction that was originally sent. Since the new transaction has a high gas price, it is more likely to be included in a block, and since both transactions use the same nonce, only one will be accepted into the blockchain. Speeding up a transaction that is transferring funds to the bridge is perfectly safe; however, the UI is not currently aware of the new transaction, meaning you may not see the confirmations animation. Once the new transaction has 35 confirmations on Ethereum, check your metamask wallet on Avalanche to see the wrapped funds.
 
 ### When transferring from Avalanche to Ethereum, why does the number showing on Metamask not match the number I requested?
- When transferring from Avalanche to Ethereum, 0 shows up on Metamask, not the actual number of tokens to be transferred. This is a known problem with Metamask.
+When transferring from Avalanche to Ethereum, 0 shows up on Metamask, not the actual number of tokens to be transferred. This is a known problem with Metamask.
 
 ## Fees
 ### How do fees work on the Avalanche Bridge?
@@ -56,7 +56,7 @@ If you haven’t received your airdrop, please confirm that the transfer amount 
 
 ## Security
 ### I have heard of the bridge referred to as trustless.  What does this mean?
- The Avalanche Bridge is trustless in the sense that no one party is able to access any of the funds held as collateral or mint wrapped assets. All transfers across the bridge must be approved by 3 of 4 independent parties (called Wardens). In this sense, when using the bridge you are not trusting any one party to properly transfer your funds.
+The Avalanche Bridge is trustless in the sense that no one party is able to access any of the funds held as collateral or mint wrapped assets. All transfers across the bridge must be approved by 3 of 4 independent parties (called Wardens). In this sense, when using the bridge you are not trusting any one party to properly transfer your funds.
 
 ### What is the role of the wardens?
 The role of the wardens is four fold:
@@ -114,7 +114,7 @@ It is possible for the bridge to be over collateralized (i.e. hold more of an ER
 AVAX tokens can be purchased on various centralized exchanges depending on your location. Alternatively, AVAX can also be purchased on automated market makers on the Avalanche C-chain, such as [Pangolin](https://app.pangolin.exchange/).
 
 ### How can I contact someone for support?
- Support is available using the chat at [support.avax.network](https://support.avax.network). You can also join our Telegram and Discord channels.
+Support is available using the chat at [support.avax.network](https://support.avax.network). You can also join our [Telegram](https://t.me/avalancheavax) or [Discord](https://chat.avax.network/) channels.
 
 ### What does the .e suffix mean at the end of each token?
 The “.e” suffix denotes that the asset moved across the bridge from the Ethereum EVM.
@@ -124,7 +124,7 @@ To set up your Metamask wallet and connect it to the Avalanche network, see [her
 
 # Ecosystem
 ## How do I add my project to the ecosystem directory?
-To have your project added to the ecosystem directory, please send an email to ecosystem@avalabs.org.  Please include your project name, a brief description of your services and a 88h x88w .svg version of your logo..  A member of the Ava Labs team will get back to you within 2 business days to confirm the addition of your project.
+To have your project added to the ecosystem directory, please send an email to ecosystem@avalabs.org.  Please include your project name, a brief description of your services and a 88h x88w .svg version of your logo.  A member of the Ava Labs team will get back to you within 2 business days to confirm the addition of your project.
 
 ### How can I get a banner promoted on the Ecosystem page?
 To have your project listed in the promotional carousel section of the Avalanche Ecosystem page, please submit a request to ecosystem@avalabs.org.  Please include a short description of your project and the promotional details. An Ava Labs support team member will respond to you within 2 business days.
