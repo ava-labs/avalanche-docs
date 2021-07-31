@@ -29,7 +29,7 @@ When moving assets from Avalanche back to Ethereum, the bridge charges an in-kin
  After crossing the bridge in either direction, you can send assets to any wallet or contract address you would like to. However, the bridge was designed to only allow transfers across networks from and to the same wallet address. 
  
 ### Can I safely speed up my transaction?
- Yes, you can click on the “Speed Up” button on Metamask. However, keep in mind of [this FAQ](https://docs.avax.network/build/tools/avalanche-bridge-faq#what-happens-after-I-have-sped-up-a-transaction-on-metamask). 
+ Yes, you can click on the “Speed Up” button on Metamask. However, keep in mind of [this FAQ](#what-happens-after-I-have-sped-up-a-transaction-on-metamask). 
 
 ### What happens after I have sped up a transaction on Metamask?
  “Speeding up” a transaction through metamask issues a new transaction on Ethereum that has a higher gas price than the transaction that was originally sent. Since the new transaction has a high gas price, it is more likely to be included in a block, and since both transactions use the same nonce, only one will be accepted into the blockchain. Speeding up a transaction that is transferring funds to the bridge is perfectly safe; however, the UI is not currently aware of the new transaction, meaning you may not see the confirmations animation. Once the new transaction has 35 confirmations on Ethereum, check your metamask wallet on Avalanche to see the wrapped funds.
@@ -41,7 +41,7 @@ When moving assets from Avalanche back to Ethereum, the bridge charges an in-kin
 ### How do fees work on the Avalanche Bridge?
  The bridge charges certain transfer fees in order to cover the cost of the transaction fees on each blockchain network. These fees are charged in kind of the ERC20 asset being transferred. Currently, the fees are calculated as follows.
 
-For moving assets from Ethereum to Avalanche, the fee is a fixed small percentage of the assets being transferred, capped at a reasonable amount to incentivize larger transfers. However, as a welcome gesture to the Avalanche community, the fee percentage when transferring from Ethereum to Avalanche is currently 0.00%. Further, transfers to Avalanche may qualify for an AVAX airdrop as explained below in [this FAQ](https://docs.avax.network/build/tools/avalanche-bridge-faq#How-does-the-airdrop-work).
+For moving assets from Ethereum to Avalanche, the fee is a fixed small percentage of the assets being transferred, capped at a reasonable amount to incentivize larger transfers. However, as a welcome gesture to the Avalanche community, the fee percentage when transferring from Ethereum to Avalanche is currently 0.00%. Further, transfers to Avalanche may qualify for an AVAX airdrop as explained below in [this FAQ](#how-does-the-airdrop-work).
 
 For moving assets from Avalanche back to Ethereum, the fee is based on the current Ethereum gas price and current price of the ERC20 asset compared to ETH. The bridge charges the equivalent value of the amount of gas set as the gas limit for the transaction, plus a constant dollar amount (currently $5) to account for any price volatility. The bridge leverages Chainlink price feeds to determine the current asset prices and uses that to calculate the amount of the ERC20  that is equivalent to this fee value.
 
