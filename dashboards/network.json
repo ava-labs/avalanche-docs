@@ -2618,8 +2618,8 @@
     "list": []
   },
   "time": {
-    "from": "2021-07-29T22:45:35.398Z",
-    "to": "2021-07-29T23:24:30.770Z"
+    "from": "now-1h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
