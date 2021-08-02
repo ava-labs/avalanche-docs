@@ -79,7 +79,7 @@ Yes, the code for the bridge, warden and smart contracts have been audited by Ha
 Here is [the doc](https://github.com/ava-labs/avalanche-bridge-resources#readme).
 
 ### How can I add a token used in bridge to Metamask?
-[Here](https://www.youtube.com/watch?v=vZqclPuPjMw&list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP&index=3) is the tutorial on how to add a token.
+[Here](https://www.youtube.com/watch?v=vZqclPuPjMw&list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP&index=3) is the tutorial on how to add a token to Metamask.
 
 ### How to get WETH from ETH?
 You can use Metamask’s SWAP function to swap from ETH to WETH. Alternatively, you can also use any AMM on Ethereum, such as [Uniswap](https://app.uniswap.org/#/).
