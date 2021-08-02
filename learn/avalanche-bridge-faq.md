@@ -106,7 +106,7 @@ The current-generation Avalanche Bridge (AB) to which this document refers is pr
 The AEB bridge and AB bridge each have their own unique token sets.
 The AEB tokens will be deprecated in the coming weeks in favor of the AB tokens. AB tokens have a `.e` suffix.
 While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address.
-The AB token contract addresses can be found [here](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json) 
+The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
 ## Supported Chains
 ### What chains are supported by the Avalanche Bridge?
