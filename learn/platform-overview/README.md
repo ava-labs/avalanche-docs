@@ -22,9 +22,9 @@ Avalanche’s subnet architecture makes regulatory compliance manageable. As men
 
 Some examples include:
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+- Validators must be located in a given country
+- Validators must pass a KYC/AML checks
+- Validators must hold a certain license
 
 ### Support for Private Blockchains
 
@@ -89,4 +89,3 @@ The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) al
 The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
 
 The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
-

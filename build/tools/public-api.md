@@ -27,4 +27,3 @@ Usage of public API nodes is free and available to everyone without any authenti
 ## Support
 
 If you have questions, problems or suggestions, come [talk to us](https://chat.avalabs.org/).
-

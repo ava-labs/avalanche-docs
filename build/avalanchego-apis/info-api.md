@@ -193,7 +193,6 @@ info.getNodeVersion() -> {
 ```
 
 where:
-
 * `version` is this node's version
 * `databaseVersion` is the version of the database this node is using
 * `gitCommit` is the Git commit that this node was built from
@@ -211,7 +210,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {

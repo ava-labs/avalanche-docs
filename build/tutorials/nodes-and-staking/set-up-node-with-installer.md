@@ -232,13 +232,12 @@ Done!
 
 File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/command-line-interface.md). Default configuration may look like this:
 
-```javascript
+```json
 {
   "dynamic-public-ip": "opendns",
   "http-host": ""
 }
 ```
-
 Note that configuration file needs to be a properly formatted `JSON` file, so switches are formatted differently than for command line, so don't enter options like `--dynamic-public-ip=opendns` but as in the example above.
 
 ## Using a previous version

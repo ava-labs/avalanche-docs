@@ -38,7 +38,9 @@ If set to `true`, this node will expose the Health API. Defaults to `true`. See 
 
 `--index-enabled` \(boolean\):
 
-If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
+If `false`, this node will not enable the indexer and the Index API will not be available.
+Defaults to `false`.
+See [here](../avalanchego-apis/index-api.md) for more information.
 
 `--api-info-enabled` \(boolean\):
 
@@ -96,7 +98,9 @@ Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `mem
 
 Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
 
-**Two important notes about RocksDB**: First, RocksDB does not work on all computers. Second, RocksDB is not built by default and is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`.
+**Two important notes about RocksDB**: First, RocksDB does not work on all computers. 
+Second, RocksDB is not built by default and is not included in publicly released binaries.
+To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`. 
 
 ### Genesis
 
@@ -148,13 +152,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `Off`: No logs have this level of logging.
+- `Fatal`: Fatal errors that are not recoverable.
+- `Error`: Errors that the node encounters, these errors were able to be recovered.
+- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `Info`: Useful descriptions of node status updates.
+- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -176,11 +180,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+- `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
+- `--network-id=local` -&gt; Connect to a local test-network.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ### Public IP
 
@@ -256,9 +260,10 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 `--build-dir` \(string\):
 
-Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary. The structure of this directory must be as follows:
+Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary.
+The structure of this directory must be as follows:
 
-```text
+```
 build-dir  
 |_avalanchego-latest  
     |_avalanchego-process (the binary from compiling the app directory)  
@@ -530,39 +535,40 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
-### Message Rate-Limiting \(Throttling\)
+### Message Rate-Limiting (Throttling)
 
-These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
+These flags govern rate-limiting of inbound and outbound messages.
+For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
 `--throttler-inbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
 `--throttler-inbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` (32 mebibytes).
 
 `--throttler-inbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` (2 mebibytes).
 
 `--throttler-outbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
 
 `--throttler-outbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` (32 mebibytes).
 
 `--throttler-outbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` (2 mebibytes).
 
 ### Network
 
 `--network-compression-enabled` \(bool\) \(v1.4.11\):
 
-If true, compress certain messages sent to peers on version &gt;= v1.4.11 to reduce bandwidth usage.
+If true, compress certain messages sent to peers on version >= v1.4.11 to reduce bandwidth usage. 
 
 `--network-initial-timeout` \(duration\):
 
@@ -608,7 +614,8 @@ Node will report unhealthy if more than this portion of message sends fail. Must
 
 `--inbound-connection-throttling-max-recent` \(uint\)
 
-Node will only accept \(attempt to upgrade\) an inbound connection from an IP if it has not done so in the last `inbound-connection-throtting-cooldown`. Node will only allow `inbound-connection-throttling-max-recent` from all IPS per `inbound-connection-throttling-max-recent`.
+Node will only accept (attempt to upgrade) an inbound connection from an IP if it has not done so in the last `inbound-connection-throtting-cooldown`.
+Node will only allow `inbound-connection-throttling-max-recent` from all IPS per `inbound-connection-throttling-max-recent`.
 
 ### Peer List Gossiping
 
@@ -638,13 +645,13 @@ If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) De
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
-### Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
+### Virtual Machine (VM) Configs <a id="vm-configs"></a>
 
 `--vm-aliases-file` \(string\):
 
 Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example content:
 
-```javascript
+```json
 {
   "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
     "timestampvm",
@@ -654,4 +661,3 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 ```
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
-

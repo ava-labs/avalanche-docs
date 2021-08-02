@@ -6,10 +6,10 @@ The quickest way to learn about Avalanche is to run a node and interact with the
 
 In this tutorial \(est. time: 10 minutes\), we will:
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+- Install and run an Avalanche node
+- Connect to Avalanche
+- Send AVAX
+- Add your node to the validator set
 
 {% hint style="warning" %}
 If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
@@ -25,8 +25,8 @@ This tutorial is primarily geared toward developers and people interested in how
 
 Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest. Note that as network usage increases, hardware requirements may change.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+- Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
+- OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
 
@@ -74,14 +74,18 @@ If you want to download a pre-built binary instead of building it yourself, go t
 
 Under `Assets`, select the appropriate file.
 
-For MacOS: Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip` The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+For MacOS:
+Download: `avalanchego-macos-<VERSION>.zip`  
+Unzip: `unzip avalanchego-macos-<VERSION>.zip` 
+The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
-For Linux on PCs or cloud providers: Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+For Linux on PCs or cloud providers:
+Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+For Linux on RaspberryPi4 or similar Arm64-based computers:
+Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
 Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
@@ -214,7 +218,7 @@ Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, th
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
-![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%2819%29.png)
+![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%2810%29.png)
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 
@@ -363,4 +367,3 @@ In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf
 {% page-ref page="../../avalanchego-apis/" %}
 
 {% page-ref page="../../references/" %}
-

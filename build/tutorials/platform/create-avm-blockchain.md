@@ -4,7 +4,8 @@
 
 One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
 
-If you're interested in building custom blockchains, see [Create a Virtual Machine \(VM\)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
+If you're interested in building custom blockchains, see
+[Create a Virtual Machine \(VM\)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
 ### Prerequisites
 
@@ -273,12 +274,10 @@ More information can be found in the [Adding a Subnet Validator](../nodes-and-st
 
 You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are some small differences:
 
-* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
-
+- The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
   [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
-
-* Addresses are prepended with `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`.
-* Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
+- Addresses are prepended with `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`.
+- Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
 
 ### Verify Balance
 
@@ -521,4 +520,3 @@ curl -X POST --data '{
 ```
 
 As we can see, 1 unit of `asset2` was minted. Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` had 5,000,000 `asset1`, as defined in the genesis data, and now has 4,000,000 `asset1` after paying the transaction fee.
-

@@ -14,7 +14,7 @@ We are excited to announce the release of [v1.4.5 of AvalancheGo](https://github
 
 In tests, we observed a ~90% reduction in read I/O on a Mainnet validator, as shown in the graph below:
 
-![](../../.gitbook/assets/0%20%281%29%20%282%29%20%283%29.png)
+![](../../.gitbook/assets/0%20%281%29%20%282%29%20%282%29.png)
 
 The improvements are due to extensive refactoring of state management in the P-Chain, as well as other other database optimizations.
 

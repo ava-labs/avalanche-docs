@@ -7,26 +7,21 @@
 This update is backwards compatible. It is optional, but encouraged.
 
 **X-Chain**
-
 * Added formatting argument `"json"` to API method `GetTx`, which returns the JSON representation of the queried transaction
 * Added interface type assertions
 
 **Info API**
-
 * Added method `GetNodeVersion` to Info API client
 
 **Prometheus Metrics**
-
 * Fixed and renamed metrics for bytes not sent due to compression
 * Added metrics for bytes not received due to compression
 * Added helper struct `noAverager` to `metrics` package
 
 **Database**
-
 * Updated/added benchmarks
 
 **Shared Memory**
-
 * Replace `Put` and `Remove` with `Apply` to allow for future atomic transaction optimization
 
 ## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
@@ -37,32 +32,35 @@ This release enables snapshots by default.
 
 **Config Flags**
 
-_Removed_
-
+*Removed*
 * `conn-meter-reset-duration`
 * `conn-meter-max-conns`
 
-_Added_
-
+*Added*
 * `network-compression-enabled`
 
 **Prometheus Metrics**
 
-Many Prometheus metrics were renamed, and many histograms were replaced with 2 gauges. See [here](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) for updated Grafana Dashboards.
+Many Prometheus metrics were renamed, and many histograms were replaced with 2 gauges.
+See [here](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) for updated Grafana Dashboards.
 
 This release also adds helper methods to the `utils/metric` package.
 
 **RocksDB**
 
-RocksDB is no longer built by default when running the build script, and it is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`.
+RocksDB is no longer built by default when running the build script, and it is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`. 
 
-The RocksDB database now places/looks for its files in a subdirectory `rocksdb`. Note that if you previously ran with RocksDB, you'll need to move the existing files.
+The RocksDB database now places/looks for its files in a subdirectory `rocksdb`.
+Note that if you previously ran with RocksDB, you'll need to move the existing files.
 
 **Message Compression**
 
-Nodes now compress some P2P messages. If a peer is version &gt;= v1.4.11, Put, Push Query, Peer List and Multiput messages sent to the peer are compressed using gzip before being sent over the network. This reduces AvalancheGo's bandwidth usage.
+Nodes now compress some P2P messages.
+If a peer is version >= v1.4.11, Put, Push Query, Peer List and Multiput messages sent to the peer are compressed using gzip before being sent over the network.
+This reduces AvalancheGo's bandwidth usage.
 
-**Inbound Connection Throttling** Refactored inbound connection rate-limiting and enable it by default.
+**Inbound Connection Throttling**
+Refactored inbound connection rate-limiting and enable it by default.
 
 **General Improvements**
 
@@ -86,16 +84,15 @@ This update is backwards compatible. It is optional, but encouraged.
 {% endhint %}
 
 The patch includes performance, throttling, and VM improvements:
-
-* Added support to use `RocksDB` rather than `LevelDB` on supported architectures.
-* Restructured inbound network throttling to be on a per-node basis, to restrict the bandwidth usage of peer nodes.
-* Restructured outbound network throttling to weight allocated bytes by stake.
-* Updated the default value of the `pruning-enabled` flag to `true` for the C-chain.
-* Enabled registering of custom VMs over RPC.
-* Updated blockchain status to report validation status.
-* Moved `TimestampVM` into its own repository to match the expected VM creation path.
-* Fixed protobuf code-gen script to place `grpc` files in the correct location.
-* Passed the block bytes through the `rpcchainvm#Block.Verify` to avoid any potential cache eviction verification failures.
+- Added support to use `RocksDB` rather than `LevelDB` on supported architectures.
+- Restructured inbound network throttling to be on a per-node basis, to restrict the bandwidth usage of peer nodes.
+- Restructured outbound network throttling to weight allocated bytes by stake.
+- Updated the default value of the `pruning-enabled` flag to `true` for the C-chain.
+- Enabled registering of custom VMs over RPC.
+- Updated blockchain status to report validation status.
+- Moved `TimestampVM` into its own repository to match the expected VM creation path.
+- Fixed protobuf code-gen script to place `grpc` files in the correct location.
+- Passed the block bytes through the `rpcchainvm#Block.Verify` to avoid any potential cache eviction verification failures.
 
 ## v1.4.9 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
 
@@ -770,4 +767,3 @@ Anything that depends on platform.getTxStatus should switch to using the include
 ```
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
-
