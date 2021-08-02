@@ -6,8 +6,6 @@
 
 [**Avash**](avash.md) is a shell client for interacting with Avalanche and can deploy local networks and interact with the nodes in those networks. You can use Avash to rapidly launch test network environments.
 
-[**Avalanche Bridge (AB) FAQ **](avalanche-bridge-faq.md): FAQ for the next generation cross-chain bridge.
-
 [**Public API**](public-api.md): Learn about the public API server you can use to interact with the Avalanche Network.
 
 [**Ortelius API**](ortelius.md) allows clients to interact with Ortelius, which indexes the Avalanche Network.
