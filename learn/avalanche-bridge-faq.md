@@ -12,7 +12,7 @@ If the Ethereum transaction transferring funds over the bridge to Avalanche seem
 Is is possible, but very unlikely, that the Ethereum transaction issued by the bridge when transferring funds to Ethereum takes a long time to receive 35 confirmations. This may occur if there is a sudden significant spike in Ethereum gas prices. If the transaction is not included within 200 blocks of when it was issued on Ethereum, a new transaction with a higher gas price may be issued to "unstick" the transfer.
 
 ### What if the gas price is more than the amount I am transferring?
-When moving ERC20 assets from Ethereum to Avalanche, you are allowed to transfer any value of tokens you would like to. The bridge was designed in such a way that minimizes transaction fees. However, if the transaction fee is higher than the value you are looking to transfer, it may make sense to wait until the Ethereum gas price decreases.
+When moving ERC20 assets from Ethereum to Avalanche, you are allowed to transfer any number of tokens you would like to. The bridge was designed in such a way that minimizes transaction fees. However, if the transaction fee is higher than the value you are looking to transfer, it may make sense to wait until the Ethereum gas price decreases.
 
 When moving assets from Avalanche back to Ethereum, the bridge charges an in-kind transfer fee, as described [here](#fees). The user interface does now allow transfers less than the fee amount. If a user manually generates and issues such a transaction, the bridge will mark the transfer as invalid and not process it.
 
