@@ -118,9 +118,12 @@ There are also plans to support networks other than Avalanche and Ethereum.
 The current-generation Avalanche Bridge (AB) to which this document refers is predated by a previous bridge implementation called the AEB.
 This section deals with questions about the previous bridge implementation (AEB).
 
+### When does the AEB stop operating?
+On August 11, 2021, the AEB will be turned off and transfers across it will not be possible. The funds held on the Ethereum side will be migrated into the new Avalanche Bridge (AB) wallet. Token swaps will be enabled on the Avalanche C-Chain, allowing users to swap their AEB tokens on a 1-1 basis for their equivalent on the Avalanche Bridge. AEB token support timelines will be left up to the individual DApp projects.
+
 ### Can I transfer my AEB tokens to Ethereum?
 While the AEB bridge is still operating, you may transfer AEB tokens back to Ethereum.
-The AEB bridge is planned to be sunset the week of August 11th, 2021.
+The AEB bridge will be turned off the week of August 11th, 2021. (See above question.)
 When this happens the AEB bridge tokens will be migrated to the new AB bridge, and you will be able to convert your AEB tokens into AB tokens seamlessly without needing to cross the bridge.
 
 ### How do I convert my AEB (deprecated bridge) tokens to Avalanche Bridge (AB) tokens?
