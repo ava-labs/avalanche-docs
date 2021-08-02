@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine (Timestamp VM).
+Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine \(Timestamp VM\).
 
-If you want a blockchain that has capabilities of X-Chain (AVM), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
+If you want a blockchain that has capabilities of X-Chain \(AVM\), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
 
 ### Prerequisites
 
@@ -14,7 +14,7 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 
 ## Create the Virtual Machine
 
-Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains (instances) from Virtual Machines. In this case we will use Timestamp VM, which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
+Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains \(instances\) from Virtual Machines. In this case we will use Timestamp VM, which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
 
 {% page-ref page="create-a-virtual-machine-vm.md" %}
 
@@ -47,7 +47,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
 ```
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -64,7 +64,7 @@ Our genesis data will be `fP1vxkpyLWnH9dD6BQA`.
 
 Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
-Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
+Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine\(VM\)](create-a-virtual-machine-vm.md#vm-aliases).
 
 ```cpp
 curl -X POST --data '{
@@ -180,8 +180,7 @@ More information can be found in the [Adding a Subnet Validator](../nodes-and-st
 
 You can interact with this new instance of the VM. The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`.
 
-You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information:
-[admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
+You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
 
 ### Verify Genesis Block
 
@@ -211,7 +210,7 @@ curl -X POST --data '{
 }
 ```
 
-As you can see our first block has `timestamp: 0`. Also the parent ID (`11111111111111111111111111111111LpoYY`) is the P-chain's ID. Let's decode the genesis data with VM's static API method. Recall that our TimestampVM ID is aliased with `timestampvm`:
+As you can see our first block has `timestamp: 0`. Also the parent ID \(`11111111111111111111111111111111LpoYY`\) is the P-chain's ID. Let's decode the genesis data with VM's static API method. Recall that our TimestampVM ID is aliased with `timestampvm`:
 
 ```cpp
 curl -X POST --data '{
@@ -257,7 +256,7 @@ curl -X POST --data '{
 
 Result:
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -283,7 +282,7 @@ curl -X POST --data '{
 
 Result:
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -308,7 +307,7 @@ curl -X POST --data '{
 
 Result:
 
-```json
+```javascript
 {
   "jsonrpc": "2.0",
   "result": {
@@ -322,3 +321,4 @@ Result:
 ```
 
 Result contains `data` field has `qDNkrS9xuyGmaAgdHAjbmANSvCKnK5BHvyCybJaFCAqx46Z8y`. This is the same data as our proposed data in the previous step.
+

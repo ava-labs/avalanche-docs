@@ -1,11 +1,8 @@
 # Avash
 
-Avash is a temporary shell execution environment used to deploy and test on Avalanche networks.
-Avalanche nodes deployed locally by Avash are exited when Avash exits.
+Avash is a temporary shell execution environment used to deploy and test on Avalanche networks. Avalanche nodes deployed locally by Avash are exited when Avash exits.
 
-Avash provides the ability to run Lua scripts, which can execute a sequence of shell commands in Avash. 
-This allows for automation of tasks. 
-For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.
+Avash provides the ability to run Lua scripts, which can execute a sequence of shell commands in Avash. This allows for automation of tasks. For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.
 
 ## Installation <a id="installation"></a>
 
@@ -18,13 +15,13 @@ For instance, one could create a Lua script to deploy a network of Avalanche nod
 
 To download and build Avash:
 
-```sh
+```bash
 git clone https://github.com/ava-labs/avash.git; cd avash; go build
 ```
 
 To run Avash:
 
-```sh
+```bash
 ./avash
 ```
 
@@ -303,8 +300,7 @@ Available Commands:
 
 ## Writing Scripts <a id="writing-scripts"></a>
 
-Avash uses [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. 
-Scripts can use hooks to allow the user to write code that invokes the current Avash environment.
+Avash uses [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts can use hooks to allow the user to write code that invokes the current Avash environment.
 
 The functions available to Lua are:
 
@@ -312,8 +308,7 @@ The functions available to Lua are:
 * `avash_sleepmicro` - Takes an unsigned integer representing microseconds and sleeps for that long
 * `avash_setvar` - Takes a variable scope \(string\), a variable name \(string\), and a variable \(string\) and places it in the variable store. The scope must already have been created.
 
-When writing Lua scripts, the standard Lua functionality is available to automate the execution of series of Avash commands.
-This allows a developer to automate:
+When writing Lua scripts, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
 
 * Local network deployments
 * Sending transactions
@@ -323,3 +318,4 @@ This allows a developer to automate:
 * Track expected results and compare them with real nodes
 
 Example Lua scripts are in the [`scripts` folder](https://github.com/ava-labs/avash/tree/master/scripts).
+

@@ -102,7 +102,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -166,7 +166,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -230,7 +230,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -281,7 +281,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -352,7 +352,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -415,7 +415,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -470,7 +470,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -519,7 +519,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```json
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -560,7 +560,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -605,7 +605,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```json
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
