@@ -75,7 +75,10 @@ Yes, the code for the bridge, warden and smart contracts have been audited by Ha
 
 ##Tokens
 
-### How can I add a token to the bridge?
+### How can I add a token used to bridge?
+Here is [the doc](https://github.com/ava-labs/avalanche-bridge-resources#readme).
+
+### How can I add a token used in bridge to Metamask?
 [Here](https://www.youtube.com/watch?v=vZqclPuPjMw&list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP&index=3) is the tutorial on how to add a token.
 
 ### How to get WETH from ETH?
