@@ -12,3 +12,6 @@
 
 [**Postman collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
 
+[**Running a Chainlink node, pt.1**](chainlink-node-deployment.md): How to deploy and run a Chainlink oracle node on Fuji testnet.
+
+[**Running a Chainlink node, pt.2**](chainlink-fulfilling-requests.md): How to fulfill requests on the Chainlink node created in part 1.

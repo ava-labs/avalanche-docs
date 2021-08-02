@@ -1,4 +1,4 @@
-# Fuji Chainlink Node Deployment
+# Running a Chainlink Node: Fuji Node Deployment
 
 Many projects need access to real-world data, like token prices, for their smart contracts to properly function. Services that provide such data on chain are called [Oracles](https://en.wikipedia.org/wiki/Blockchain_oracle). One of the most popular oracle providers is [Chainlink](https://chain.link/).
 
@@ -211,17 +211,18 @@ sudo gpasswd -a $USER docker
 exit
 ```
 
-Your instance public DNS may change when you re-start your instance so check that you are using the right DNS before you run the command
+Your instance public DNS may change when you re-start your instance so check that you are using the right DNS before you run the command:
 
 ```bash
 ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 
-This can be found in the **SSH client** tab of your **Connect to instance** page
+This can be found in the **SSH client** tab of your **Connect to instance** page.
 
 RECORD YOUR PASSWORDS ACCURATELY!
 
-[PT 2 here!](https://www.notion.so/Fulfilling-Requests-d0a2a4813f6f48f1866c9754d5984453)
-
 You can reference Chainlink's docs on the subject here : [https://docs.chain.link/docs/fulfilling-requests/](https://docs.chain.link/docs/fulfilling-requests/)
 
+If you followed this tutorial successfully, you now have a Chainlink node running on Fuji testnet. But node by itself is not useful. In [part 2](chainlink-fulfilling-requests.md), we will show how to have the node fulfill requests for data.
+
+If you have questions, comments, or just want to reach out, you can contact us on our official [Discord](https://chat.avalabs.org/) server.

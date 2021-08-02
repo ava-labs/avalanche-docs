@@ -86,6 +86,8 @@
   - [Public API](build/tools/public-api.md)
   - [Ortelius API](build/tools/ortelius.md)
   - [Postman collection](build/tools/postman-avalanche-collection.md)
+  - [Chainlink Node, pt.1](build/tools/chainlink-node-deployment.md)
+  - [Chainlink Node, pt.2](build/tools/chainlink-fulfilling-requests.md)
 - [References](build/references/README.md)
   - [Avalanche Native Tokens and ARC-20s](build/references/coreth-arc20s.md)
   - [AVM Transaction Format](build/references/avm-transaction-serialization.md)
