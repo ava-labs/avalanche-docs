@@ -26,13 +26,13 @@ Assign an API endpoint an alias, a different endpoint for the API. The original 
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-- `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-- The API being aliased can now be called at `ext/alias`.
-- `alias` can be at most 512 characters.
+* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
+* The API being aliased can now be called at `ext/alias`.
+* `alias` can be at most 512 characters.
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -73,12 +73,12 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-- `chain` is the blockchain’s ID.
-- `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain` is the blockchain’s ID.
+* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -118,11 +118,11 @@ admin.getChainAliases(
 ) -> {aliases:string[]}
 ```
 
-- `chain` is the blockchain’s ID.
+* `chain` is the blockchain’s ID.
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -170,11 +170,11 @@ admin.getLoggerLevel(
     }
 ```
 
-- `loggerName` is the name of the logger to be returned. This is an optional argument. If not specified, it returns all possible loggers.
+* `loggerName` is the name of the logger to be returned. This is an optional argument. If not specified, it returns all possible loggers.
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -214,7 +214,7 @@ admin.lockProfile() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -247,7 +247,7 @@ admin.memoryProfile() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -284,15 +284,15 @@ admin.setLoggerLevel(
 ) -> {success:bool}
 ```
 
-- `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
-- `logLevel` is the log level of written logs, can be omitted.
-- `displayLevel` is the log level of displayed logs, can be omitted.
+* `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
+* `logLevel` is the log level of written logs, can be omitted.
+* `displayLevel` is the log level of displayed logs, can be omitted.
 
 `logLevel` and `displayLevel` cannot be omited at the same time.
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -329,7 +329,7 @@ admin.startCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -362,7 +362,7 @@ admin.stopCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
