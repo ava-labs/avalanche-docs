@@ -285,10 +285,10 @@ admin.setLoggerLevel(
 ```
 
 - `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
-- `logLevel` is the log level of written logs, can be ommitted.
-- `displayLevel` is the log level of displayed logs, can be ommitted.
+- `logLevel` is the log level of written logs, can be omitted.
+- `displayLevel` is the log level of displayed logs, can be omitted.
 
-`logLevel` and `displayLevel` cannot be ommited at the same time.
+`logLevel` and `displayLevel` cannot be omited at the same time.
 
 #### **Example Call**
 
