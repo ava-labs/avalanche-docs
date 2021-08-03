@@ -32,7 +32,7 @@ admin.alias({endpoint:string, alias:string}) -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -78,7 +78,7 @@ admin.aliasChain(
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -122,7 +122,7 @@ admin.getChainAliases(
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -149,6 +149,59 @@ curl -X POST --data '{
 }
 ```
 
+### admin.getLoggerLevel
+
+Returns log and display levels of loggers.
+
+#### **Signature**
+
+```text
+admin.getLoggerLevel(
+    {
+        loggerName:string // optional
+    }
+) -> {
+        loggerLevels: {
+            loggerName: {
+                    logLevel: string,
+                    displayLevel: string
+            }
+        }
+    }
+```
+
+* `loggerName` is the name of the logger to be returned. This is an optional argument. If not specified, it returns all possible loggers.
+
+#### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getLoggerLevel",
+    "params": {
+        "loggerName": "C"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "loggerLevels": {
+            "C": {
+                "logLevel": "DEBUG",
+                "displayLevel": "INFO"
+            }
+        }
+    },
+    "id": 1
+}
+```
+
 ### admin.lockProfile
 
 Writes a profile of mutex statistics to `lock.profile`.
@@ -161,7 +214,7 @@ admin.lockProfile() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -194,12 +247,61 @@ admin.memoryProfile() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"admin.memoryProfile",
     "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.setLoggerLevel
+
+Sets log and display levels of loggers.
+
+#### **Signature**
+
+```text
+admin.setLoggerLevel(
+    {
+        loggerName: string, // optional
+        logLevel: string, // optional
+        displayLevel: string, // optional
+    }
+) -> {success:bool}
+```
+
+* `loggerName` is the logger's name to be changed. This is an optional parameter. If not specified, it changes all possible loggers.
+* `logLevel` is the log level of written logs, can be omitted.
+* `displayLevel` is the log level of displayed logs, can be omitted.
+
+`logLevel` and `displayLevel` cannot be omited at the same time.
+
+#### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLoggerLevel",
+    "params": {
+        "loggerName": "C",
+        "logLevel": "DEBUG",
+        "displayLevel": "INFO"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
@@ -227,7 +329,7 @@ admin.startCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -260,7 +362,7 @@ admin.stopCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```text
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -279,4 +381,3 @@ curl -X POST --data '{
     }
 }
 ```
-
