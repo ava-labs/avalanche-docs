@@ -16,23 +16,29 @@ If you want to build your node form source or include it in a docker image, refe
 
 All command line options available are described [here](../../references/command-line-interface.md), along with their default values.
 
-You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file, for example:
+You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file.
 
-```javascript
+Individual chains use separate config files, which also applies to the C-Chain, running coreth. For more details, refer to [chain config docs](../../references/command-line-interface.md#chain-configs).
+
+Using the default installation paths, C-Chain config file should be `~/.avalanchego/configs/chains/C/config.json`. The contents can contain only the switches that are different from default, for example:
+
+```json
 {
-  "coreth-config": {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "eth-api-enabled": true,
-    "personal-api-enabled": false,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": true,
-    "web3-api-enabled": true,
-    "local-txs-enabled": true
-  }
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": true,
+  "debug-api-enabled": true,
+  "web3-api-enabled": true,
+  "local-txs-enabled": true
 }
 ```
+
+{% hint style="warning" %}
+If you need your node to have full transaction history, you need to disable C-Chain pruning that is on by default since v1.4.10. In that case, make sure you include `"pruning-enabled": false` in the C-Chain config file.
+{% endhint %}
 
 ### Interacting with the C-Chain
 
