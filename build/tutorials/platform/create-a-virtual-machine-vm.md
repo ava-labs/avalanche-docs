@@ -81,7 +81,7 @@ type ChainVM interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-```cpp
+```golang
 // VM describes the interface that all consensus VMs must implement
 type VM interface {
     // Returns nil if the VM is healthy.
@@ -168,7 +168,7 @@ You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` 
 
 Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
-```cpp
+```golang
 // Block is a possible decision that dictates the next canonical block.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
@@ -182,11 +182,8 @@ Let’s look at this interface and its methods, which we copy from [here.](https
 type Block interface {
     choices.Decidable
 
-    // Parent returns the block that this block points to.
-    //
-    // If the parent block is not known, a Block should be returned with the
-    // status Unknown.
-    Parent() Block
+    // Parent returns the ID of this block's parent.
+    Parent() ids.ID
 
     // Verify that the state transition this block would make if accepted is
     // valid. If the state transition is invalid, a non-nil error should be
@@ -316,7 +313,7 @@ func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) 
         return nil, err
     }
     blkID := blk.ID()
-    parentID := blk.Parent().ID()
+    parentID := blk.Parent()
     return &vmproto.BuildBlockResponse{
         Id:       blkID[:],
         ParentID: parentID[:],
@@ -372,9 +369,14 @@ func (b *Block) Verify() error {
     }
 
     // Get [b]'s parent
-    parent, ok := b.Parent().(*Block)
-    if !ok {
+    parentID := b.Parent()
+    parentIntf, err := b.VM.GetBlock(parentID)
+    if err != nil {
         return errDatabaseGet
+    }
+    parent, ok := parentIntf.(*Block)
+    if !ok {
+        return errBlockType
     }
 
     // Ensure [b]'s timestamp is after its parent's timestamp.
@@ -794,7 +796,7 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
     // Fill out the response with the block's data
     reply.APIBlock.ID = block.ID().String()
     reply.APIBlock.Timestamp = json.Uint64(block.Timestamp)
-    reply.APIBlock.ParentID = block.ParentID().String()
+    reply.APIBlock.ParentID = block.Parent().String()
     reply.Data, err = formatting.Encode(formatting.CB58, block.Data[:])
     return err
 }
