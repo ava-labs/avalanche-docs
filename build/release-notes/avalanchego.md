@@ -204,7 +204,7 @@ This patch:
 This update is backwards compatible. It is optional, but encouraged. The patch includes significant performance improvements and numerous other updates.
 {% endhint %}
 
-### VM Improvements:
+**VM Improvements:**
 
 * Fully redesigned the `platformvm`'s state management.
   * Removed the usage of `versiondb`s being passed through blocks to pass state references that can be modified and read without re-parsing objects.
@@ -230,7 +230,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Fixed bug in the `evm` client to properly set the `sourceChain` in `getAtomicUTXOs`.
 * Integrated the new chain state manager into the `evm` to better optimize block management.
 
-### Bootstrapping Improvements:
+**Bootstrapping Improvements:**
 
 * Removed re-traversals during bootstrapping. This significantly improves the performance of the node during restarts of the bootstrapping process.
 * Fixed an ungraceful node shutdown when attempting to exit the node while executing bootstrapped containers.
@@ -238,7 +238,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Standardized the bootstrapping jobs queue to write to state using `prefixdb`s rather than implementing custom prefixing.
 * Added additional bootstrapping caching and cache metrics.
 
-### Database Migration Additions:
+**Database Migration Additions:**
 
 * Added a daemon process manager to seamlessly migrate to the updated database format.
 * Refactored version handling to track database semantic versions.
@@ -246,7 +246,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Implemented a `keystore` migration that automatically copies users from the `v1.0.0` database to the `v1.4.5` database.
 * Implemented a validator uptime migration from the `v1.0.0` database to the `v1.4.5` database.
 
-### Node Improvements:
+**Node Improvements:**
 
 * Updating config parsing to always expand environment variables.
 * Refactored the node config to allow specifying TLS certificates in memory without touching disk.
@@ -256,7 +256,7 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Optimized ID `Set` pre-allocations and reduced the memory usage of the `struct`s.
 * Enforced stricter linting rules.
 
-### Modified command line arguments:
+**Modified command line arguments:**
 
 For the following arguments `"default"` was previously treated as a keyword. Now, `"default"` will attempt to be treated as the intended value of the flag. To retain the default behavior, the flag should not be specified.
 
@@ -278,12 +278,12 @@ For the following arguments `""` was previously treated as a keyword. Now, `""` 
 
 It is no longer required that the `bootstrap-ips` and `bootstrap-ids` are paired. This means it is now valid to specify a different number of `bootstrap-ips` than `bootstrap-ids`. The `bootstrap-ips` are used to initially connect to the network and the `bootstrap-ids` are used as the beacons in bootstrapping.
 
-### Added command line arguments:
+**Added command line arguments:**
 
 * `fetch-only`
 * `build-dir`
 
-### Removed command line arguments:
+**Removed command line arguments:**
 
 * `xput-server-port`
 * `xput-server-enabled`
