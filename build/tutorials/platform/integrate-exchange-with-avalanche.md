@@ -8,19 +8,19 @@ Additionally, Ava Labs maintains an implementation of the [Rosetta API](https://
 
 ## Integration using EVM Endpoints
 
-### Running Avalanche node
+### Running an Avalanche node
 
 If you want to build your node form source or include it in a docker image, reference the [AvalancheGo GitHub repository](https://github.com/ava-labs/avalanchego). To quickly get up and running, you can use the [node installation script](../nodes-and-staking/set-up-node-with-installer.md) that automates installing and updating avalanchego node as a systemd service on Linux, using prebuilt binaries.
 
-### Configuring Avalanche node
+### Configuring an Avalanche node
 
-All command line options available are described [here](../../references/command-line-interface.md), along with their default values.
+All configuration options and their default values are described [here](../../references/command-line-interface.md).
 
-You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file.
+You can supply configuration options on the command line, or use a config file, which can be easier to work with when supplying many options. You can specify the config file location with `—config-file=config.json`, where `config.json` is a JSON file whose keys and values are option names and values.
 
-Individual chains use separate config files, which also applies to the C-Chain, running coreth. For more details, refer to [chain config docs](../../references/command-line-interface.md#chain-configs).
+Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
 
-Using the default installation paths, C-Chain config file should be `~/.avalanchego/configs/chains/C/config.json`. The contents can contain only the switches that are different from default, for example:
+The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`.  An example C-Chain config file:
 
 ```json
 {
@@ -37,7 +37,7 @@ Using the default installation paths, C-Chain config file should be `~/.avalanch
 ```
 
 {% hint style="warning" %}
-If you need your node to have full transaction history, you need to disable C-Chain pruning that is on by default since v1.4.10. In that case, make sure you include `"pruning-enabled": false` in the C-Chain config file.
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
 {% endhint %}
 
 ### Interacting with the C-Chain
