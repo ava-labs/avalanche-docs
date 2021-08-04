@@ -283,7 +283,7 @@ It is no longer required that the `bootstrap-ips` and `bootstrap-ids` are paired
 * `fetch-only`
 * `build-dir`
 
-### Removed command line arguments:
+**Removed command line arguments:**
 
 * `xput-server-port`
 * `xput-server-enabled`
