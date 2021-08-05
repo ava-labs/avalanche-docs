@@ -152,6 +152,9 @@ While using tx.origin to check authorization within smart contracts poses potent
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
 
+#### Where can I find more information about the design?
+See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
+
 ### Miscellaneous
 
 #### On the Proof of Assets page, why don't the amount of an asset on Ethereum and Avalanche match?
