@@ -148,6 +148,9 @@ Once the AEB migration happens \(currently scheduled for August 11th, 2021\), yo
 
 While using tx.origin to check authorization within smart contracts poses potential security risks, our use case does not. In the bridge contracts, tx.origin is only used to disallow smart contracts from directly calling the "unwrap" function, since the bridge currently only supports transfer from externally owned accounts. It is safe to do this by comparing the tx.origin value to the msg.sender value.
 
+
+
+
 #### Can a single private key mint tokens?
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
