@@ -10,7 +10,7 @@
   * [Transaction Fees](learn/platform-overview/transaction-fees.md)
   * [Why Avalanche Pt. I](https://www.youtube.com/watch?v=QlbFzraRT_8)
 * [Blockchain Basics](https://support.avalabs.org/en/collections/2353492-blockchain-basics)
-* [FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)
+* [FAQ](https://support.avax.network/en/)
 * [Avalanche Bridge \(AB\) FAQ](learn/avalanche-bridge-faq.md)
 * [Forum](https://forum.avax.network)
 * [Ecosystem](https://www.avax.network/ecosystem)
