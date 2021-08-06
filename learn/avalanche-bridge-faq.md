@@ -78,14 +78,11 @@ The Avalanche Bridge is trustless in the sense that no one party is able to acce
 
 #### What is the role of the wardens?
 
-The role of the wardens is fourfold: 
+The role of the wardens is fourfold:
 
-1. Storing Secret Shares 
-
-2. Indexing Supported Blockchains 
-
-3. Tracking Processed Transactions 
-
+1. Storing Secret Shares
+2. Indexing Supported Blockchains
+3. Tracking Processed Transactions
 4. Hosting Public Information
 
 A complete breakdown of a Warden’s role and responsibilities will be provided in an upcoming Avalanche Bridge Tech Design article.
@@ -153,18 +150,17 @@ While using tx.origin to check authorization within smart contracts poses potent
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
 
 #### Where can I find more information about the design?
+
 See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
 
 ### Miscellaneous
 
 #### On the Proof of Assets page, why don't the amount of an asset on Ethereum and Avalanche match?
 
-It is possible for the bridge to be over-collateralized \(i.e. hold more of an ERC20 asset on Ethereum than exists on Avalanche\) for three reasons. These are all expected. 
+It is possible for the bridge to be over-collateralized \(i.e. hold more of an ERC20 asset on Ethereum than exists on Avalanche\) for three reasons. These are all expected.
 
-1. There are new transfers from Ethereum to Avalanche. The bridge only processes transfers once the Ethereum transaction receives 35 confirmations. Before then, the collateral balance will be more than the wrapped asset supply. 
-
-2. AEB collateral has been transferred to the new AB bridge, but not all AEB tokens have been converted to AB tokens on Avalanche yet. 
-
+1. There are new transfers from Ethereum to Avalanche. The bridge only processes transfers once the Ethereum transaction receives 35 confirmations. Before then, the collateral balance will be more than the wrapped asset supply.
+2. AEB collateral has been transferred to the new AB bridge, but not all AEB tokens have been converted to AB tokens on Avalanche yet.
 3. Bridge fees have accumulated on the Ethereum side. The enclave doesn't immediately collect the fees generated from the bridge. Instead it holds all collected fees of each asset in the bridge wallet until a configured threshold is met. At which point, the fees are sent to a separate wallet.
 
 #### Where can I buy AVAX?

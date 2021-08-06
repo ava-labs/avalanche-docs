@@ -20,9 +20,9 @@ You can supply configuration options on the command line, or use a config file, 
 
 Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
 
-The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`.  An example C-Chain config file:
+The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. An example C-Chain config file:
 
-```json
+```javascript
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
