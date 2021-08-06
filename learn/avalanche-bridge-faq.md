@@ -120,6 +120,11 @@ You can use Metamask’s SWAP function to swap from ETH to WETH. Alternatively, 
 
 The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens will be deprecated in the coming weeks in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
+#### Why doesn’t the newly bridged token appear on the portfolio automatically?
+
+It can't appear automatically because there are too many contracts running on the EVM. Metamask can't scan all of them to check if your address has a balance. Tokens are not physically in your C-chain address. They are "inside" the smart contract related to the token, and it's written in the chain that your address has xxx token. Your wallet (AVAX or Metamask) has to check all those contracts in order to see if there are some token belonging to you. But there are so many contracts it will take a lot of time, thus you have to manually tell to your wallet which contract it has to check.
+
+
 ### Supported Chains
 
 #### What chains are supported by the Avalanche Bridge?
@@ -151,6 +156,10 @@ While using tx.origin to check authorization within smart contracts poses potent
 #### Can a single private key mint tokens?
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
+
+#### Why isn’t a smart contract chosen to hold the assets?
+
+By using a wallet rather than a smart contract we were able to lower the gas fees and the time it takes to move assets across the bridge. 
 
 #### Where can I find more information about the design?
 See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
