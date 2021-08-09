@@ -49,11 +49,9 @@ When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are t
 #### What are the bridge contract adresses? 
 
 Bridge Addresses:
-    - ETH: `0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0` https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0
-    - AVAX: `0x50Ff3B278fCC70ec7A9465063d68029AB460eA04` https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04
-Bridge Addresses:
 * ETH: `0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0` [https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
 * AVAX: `0x50Ff3B278fCC70ec7A9465063d68029AB460eA04` [https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
+
 ### Fees
 
 #### How do fees work on the Avalanche Bridge?
