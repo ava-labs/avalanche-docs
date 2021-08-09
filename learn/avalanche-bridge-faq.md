@@ -51,7 +51,9 @@ When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are t
 Bridge Addresses:
     - ETH: `0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0` https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0
     - AVAX: `0x50Ff3B278fCC70ec7A9465063d68029AB460eA04` https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04
-
+Bridge Addresses:
+* ETH: `0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0` [https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
+* AVAX: `0x50Ff3B278fCC70ec7A9465063d68029AB460eA04` [https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
 ### Fees
 
 #### How do fees work on the Avalanche Bridge?
@@ -216,4 +218,3 @@ Specifications for the banner are as follows:
 * Portrait and Mobile:  720px \* 337px
 * Design elements in middle of banner or they will be cut off
 * Use solid color as BG or have gradient that fades into \#000000 \(edited\) 
-
