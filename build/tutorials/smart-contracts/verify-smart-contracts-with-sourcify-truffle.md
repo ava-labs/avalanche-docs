@@ -35,40 +35,19 @@ Once this operation is completed, you'll now have a project structure with the f
 Configure your ``truffle-config.js`` file to the appropriate solidity compiler
 
 ```zsh
-module.exports = {
-...
-   },
- 
-   // Configure your compilers
-   compilers: {
-     solc: {
-        version: "^0.7.6",    // Fetch exact version from solc-bin (default: truffle's version)
-       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-       settings: {          // See the solidity docs for advice about optimization and evmVersion
-        optimizer: {
-          enabled: false,
-          runs: 200
-        },
-        ...
- };
-```
-
-Run
-
-```zsh
-truffle compile
-```
-You should see various ``.json`` files populate your ``./build/contracts`` folder
-
-### Migrate
-
-```zsh
 yarn add @truffle/hdwallet-provider
+```
+<br>
+
+Create a ``.env.json`` file in your project's root directory
+
+```zsh
+{"mnemonic": "your-wallet-seed-phrase"}
 ```
 
 Configure your ``truffle-config.js`` file to the appropriate settings
 
-```zsh
+```js
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -131,20 +110,30 @@ Configure your ``truffle-config.js`` file to the appropriate settings
           enabled: false,
           runs: 200
         },
-        evmVersion: "byzantium"
+        evmVersion: "instanbul"
        }
      },
    },
  };
 ```
-<br>
 
-Create a ``.env.json`` file in your project's root directory
+
+Run
 
 ```zsh
-{"mnemonic": "your-wallet-seed-phrase"}
+truffle compile
 ```
+<br>
+Once this operation is completed, your ``./build/contracts`` folder should contain the following items:<br>
+<br>
 
+``ConvertLib.json`` <br>
+``MetaCoin.json``<br>
+``Migrations.json``<br>
+<br>
+You will need ``MetaCoin.json`` for future use
+
+### Migrate
 
 Run
 ```zsh
@@ -155,17 +144,6 @@ _Note: Network can be configured for mainnet deployment_
 You should see the txn in your terminal
 <img width="1027" alt="MigrationExample" src="https://user-images.githubusercontent.com/73849597/128917753-2b96ed18-d3b5-47a8-9799-bbafda3b9f90.png">
 
-
-### Optional Flatten files for verification
-```zsh
-yarn add truffle-flattener
-```
-
-Run 
-
-```zsh
-npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
-```
 
 # Verify Smart Contracts on the C-Chain Explorer
 
@@ -197,8 +175,18 @@ View the verified contract
 ## Requirements
 
 * **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
-* Contracts must be flattened.
-  * Includes will not work.  
+
+* Optional: Flatten files for verification
+```zsh
+yarn add truffle-flattener
+```
+
+Run 
+
+```zsh
+npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
+```
+
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
   * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
 
