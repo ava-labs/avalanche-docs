@@ -181,7 +181,9 @@ Navigate to the _Code_ tab at the Explorer page for your contract's address.
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
-![Contract Entry](../../../.gitbook/assets/smart-contract-input-page.png)
+![Screen Shot 2021-08-09 at 10 27 23 PM](https://user-images.githubusercontent.com/73849597/128813070-81bc2c11-6e38-47da-a3af-c6d90125b6a1.png)
+
+Click _Sourcify: sources and metadataJSON file_
 
 [Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
