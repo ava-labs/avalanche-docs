@@ -150,6 +150,8 @@ Run
 ```zsh
 truffle migrate --network fuji
 ```
+_Note: Network can be configured for mainnet deployment_ 
+
 You should see the txn in your terminal
 <img width="1027" alt="MigrationExample" src="https://user-images.githubusercontent.com/73849597/128917753-2b96ed18-d3b5-47a8-9799-bbafda3b9f90.png">
 
