@@ -178,6 +178,8 @@ repeat compiliation, migration and verification steps <br>
 Configure your ``truffle-config.js`` file to the appropriate settings<br>
 
 ```js
+module.exports = {
+...
    networks: {
  
     mainnet: {
