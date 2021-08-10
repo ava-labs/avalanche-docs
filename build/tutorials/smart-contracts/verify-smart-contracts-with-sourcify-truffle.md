@@ -1,3 +1,77 @@
+## Prerequisites
+
+### NodeJS and Yarn
+
+First install the LTS of [nodejs](https://nodejs.org/en) which is `16.5.0` at the time of writing. NodeJS bundles `npm`.
+
+Next install [yarn](https://yarnpkg.com):
+
+```zsh
+npm install -g yarn
+```
+
+## Dependencies
+
+First clone [this](https://github.com/ava-labs/avalanche-smart-contract-quickstart) repo and download the necessary packages.
+
+```zsh
+git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
+cd avalanche-smart-contract-quickstart
+yarn
+```
+
+## Write Contracts
+
+Edit the [`ERC20.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/ERC20.sol) contract in `contracts/`. `ERC20.sol` is an [Open Zeppelin](https://openzeppelin.com) [ERC20](https://eips.ethereum.org/EIPS/eip-20) contract. ERC20 is a popular smart contract interface for interoperability. You can also add your own contracts.
+
+## Initialize Truffle
+Install truffle
+
+yarn 
+```yarn add global truffle```
+
+npm
+```npm install -g truffle```
+
+Run
+```zsh
+truffle init
+```
+
+**Do not overwrite contracts or test file folders**
+
+you shoud see a migrations folder and truffle-config.js file populate your IDE
+
+## Compile and Migrate
+
+Configure your truffle-config.js file to the appropriate solidity compiler
+
+```zsh
+module.exports = {
+...
+   },
+ 
+   // Configure your compilers
+   compilers: {
+     solc: {
+        version: "^0.8.3",    // Fetch exact version from solc-bin (default: truffle's version)
+       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+       settings: {          // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+          enabled: false,
+          runs: 200
+        },
+        ...
+ };
+```
+
+Run
+
+```zsh
+truffle compile
+```
+
+
 # Verify Smart Contracts on the C-Chain Explorer
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it.
