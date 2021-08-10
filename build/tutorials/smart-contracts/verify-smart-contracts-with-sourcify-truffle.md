@@ -1,16 +1,18 @@
-This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)<br>
-Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)
+# Verifying contracts with Sourcify : truffle
+
+_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_<br>
+_Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
 
 
 
 ### Create a project
 
-Make sure you have truffle installed
+Make sure you have truffle installed:
 ```
 npm install -g truffle
 ```
 <br>
-Create a new directory for your Truffle project
+Create a new directory for your Truffle project:
 
 ```zsh
 mkdir MetaCoin
@@ -24,10 +26,10 @@ truffle unbox metacoin
 
 Once this operation is completed, you'll now have a project structure with the following items:
 
-``contracts/``: Directory for Solidity contracts<br>
-``migrations/``: Directory for scriptable deployment files<br>
-``test/``: Directory for test files for testing your application and contracts<br>
-``truffle.js``: Truffle configuration file
+* ``contracts/``: Directory for Solidity contracts<br>
+* ``migrations/``: Directory for scriptable deployment files<br>
+* ``test/``: Directory for test files for testing your application and contracts<br>
+* ``truffle.js``: Truffle configuration file
 
 ## Compiling
 Set up your environment
