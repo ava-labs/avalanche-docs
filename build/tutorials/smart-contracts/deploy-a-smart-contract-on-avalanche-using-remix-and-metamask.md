@@ -30,7 +30,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
-#### **Local Testnet \(AVASH\) Settings:**
+#### **Local Testnet \(AVASH\) Settings:** [(Avash Tutorial)](https://docs.avax.network/build/tools/avash)
 
 * **Network Name**: Avalanche Local
 * **New RPC URL**:[ ](http://localhost:9650/ext/bc/C/rpc)[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
