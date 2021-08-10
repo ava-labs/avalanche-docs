@@ -88,8 +88,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
  
     fuji: {
       provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
-      network_id: 1,
-      //confirmations: 10,
+      network_id: "*",
       timeoutBlocks: 200,
       skipDryRun: true
     }
