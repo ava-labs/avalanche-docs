@@ -32,7 +32,7 @@ Once this operation is completed, you'll now have a project structure with the f
 ## Compiling
 ### Compile
 
-Configure your ``truffle-config.js`` file to the appropriate solidity compiler
+Set up your environment
 
 ```zsh
 yarn add @truffle/hdwallet-provider
@@ -40,10 +40,10 @@ yarn add @truffle/hdwallet-provider
 <br>
 
 Create a ``.env.json`` file in your project's root directory
-
-```zsh
+```json
 {"mnemonic": "your-wallet-seed-phrase"}
 ```
+<br>
 
 Configure your ``truffle-config.js`` file to the appropriate settings
 
@@ -89,7 +89,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
     fuji: {
       provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
       network_id: 1,
-      confirmations: 10,
+      //confirmations: 10,
       timeoutBlocks: 200,
       skipDryRun: true
     }
