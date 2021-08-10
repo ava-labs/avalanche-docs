@@ -50,7 +50,7 @@ For funding on the test network, you can also use the Test Network Faucet. Navig
 
 ### Funding on local testnet
 
-On a local network, you can easily fund your addresses by following [this](../platform/create-a-local-test-network.md#getting-avax)
+On a local network, you can easily fund your addresses by following [this](../platform/create-a-local-test-network.md#getting-avax).
 
 ## Step 3: Connect MetaMask and deploy a smart contract using Remix
 
