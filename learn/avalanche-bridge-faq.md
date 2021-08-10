@@ -46,6 +46,14 @@ Yes, you can click on the “Speed Up” button on Metamask. “Speeding up” a
 
 When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are to be transferred, not the actual number of tokens. This is a known problem with Metamask.
 
+#### What are the bridge contract adresses? 
+
+Bridge Addresses:
+* Ethereum: [`0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0`](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
+* Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
+
+Note that **you should not directly transfer tokens to these addresses**. You should use the Bridge's user interface, which checks for malformed transactions.
+
 ### Fees
 
 #### How do fees work on the Avalanche Bridge?
@@ -117,6 +125,10 @@ You can use Metamask’s SWAP function to swap from ETH to WETH. Alternatively, 
 
 The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens will be deprecated in the coming weeks in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
+#### Why doesn’t the newly bridged token appear in my wallet automatically?
+
+Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet (i.e. Metamask) which smart contracts to check for balances held by your addresses.
+
 ### Supported Chains
 
 #### What chains are supported by the Avalanche Bridge?
@@ -148,6 +160,10 @@ While using tx.origin to check authorization within smart contracts poses potent
 #### Can a single private key mint tokens?
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
+
+#### Why doesn't the bridge hold funds in a a smart contract?
+
+Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers.
 
 #### Where can I find more information about the design?
 
@@ -201,4 +217,3 @@ Specifications for the banner are as follows:
 * Portrait and Mobile:  720px \* 337px
 * Design elements in middle of banner or they will be cut off
 * Use solid color as BG or have gradient that fades into \#000000 \(edited\) 
-
