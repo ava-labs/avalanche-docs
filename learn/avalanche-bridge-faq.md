@@ -49,8 +49,8 @@ When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are t
 #### What are the bridge contract adresses? 
 
 Bridge Addresses:
-* ETH: `0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0` [https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
-* AVAX: `0x50Ff3B278fCC70ec7A9465063d68029AB460eA04` [https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
+* Ethereum: [`0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0`](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
+* Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
 
 ### Fees
 
@@ -126,10 +126,9 @@ You can use Metamask’s SWAP function to swap from ETH to WETH. Alternatively, 
 
 The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens will be deprecated in the coming weeks in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
-#### Why doesn’t the newly bridged token appear on the portfolio automatically?
+#### Why doesn’t the newly bridged token appear in my wallet automatically?
 
-It can't appear automatically because there are too many contracts running on the EVM. Metamask can't scan all of them to check if your address has a balance. Tokens are not physically in your C-chain address. They are "inside" the smart contract related to the token, and it's written in the chain that your address has xxx token. Your wallet (AVAX or Metamask) has to check all those contracts in order to see if there are some token belonging to you. But there are so many contracts it will take a lot of time, thus you have to manually tell to your wallet which contract it has to check.
-
+Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet (i.e. Metamask) which smart contracts to check for balances held by your addresses.
 
 ### Supported Chains
 
@@ -163,9 +162,9 @@ While using tx.origin to check authorization within smart contracts poses potent
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
 
-#### Why isn’t a smart contract chosen to hold the assets?
+#### Why doesn't the bridge hold funds in a a smart contract?
 
-By using a wallet rather than a smart contract we were able to lower the gas fees and the time it takes to move assets across the bridge. 
+Not using a smart contract allows for lower gas fees and faster transfers. 
 
 #### Where can I find more information about the design?
 See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
