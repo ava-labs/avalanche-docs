@@ -103,8 +103,11 @@ Run
 truffle compile
 ```
 <br>
-Once this operation is completed, your ``./build/contracts`` folder should contain the following items:<br>
+
+Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
 <br>
+<br>
+
 
 ``ConvertLib.json`` <br>
 ``MetaCoin.json``<br>
