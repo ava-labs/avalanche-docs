@@ -24,7 +24,7 @@ yarn
 
 Edit the [`ERC20.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/ERC20.sol) contract in `contracts/`. `ERC20.sol` is an [Open Zeppelin](https://openzeppelin.com) [ERC20](https://eips.ethereum.org/EIPS/eip-20) contract. ERC20 is a popular smart contract interface for interoperability. You can also add your own contracts.
 
-## Initialize Truffle
+## Initialize truffle
 Install truffle
 
 yarn 
@@ -43,8 +43,9 @@ truffle init
 you shoud see a migrations folder and truffle-config.js file populate your IDE
 
 ## Compile and Migrate
+### Compile
 
-Configure your truffle-config.js file to the appropriate solidity compiler
+Configure your ``truffle-config.js`` file to the appropriate solidity compiler
 
 ```zsh
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
    // Configure your compilers
    compilers: {
      solc: {
-        version: "^0.8.3",    // Fetch exact version from solc-bin (default: truffle's version)
+        version: "^0.7.6",    // Fetch exact version from solc-bin (default: truffle's version)
        // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
        settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
@@ -69,6 +70,88 @@ Run
 
 ```zsh
 truffle compile
+```
+You should see various ``.json`` files populate your ``./build/contracts`` folder
+
+### Migrate
+
+``yarn add @truffle/hdwallet-provider``
+
+Configure your ``truffle-config.js`` file to the appropriate settings
+
+```zsh
+/**
+ * Use this file to configure your truffle project. It's seeded with some
+ * common settings for different networks and features like migrations,
+ * compilation and testing. Uncomment the ones you need or modify
+ * them to suit your project as necessary.
+ *
+ * More information about configuration can be found at:
+ *
+ * trufflesuite.com/docs/advanced/configuration
+ *
+ * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
+ * to sign your transactions before they're sent to a remote public node. Infura accounts
+ * are available for free at: infura.io/register.
+ *
+ * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
+ * public/private key pairs. If you're publishing your code to GitHub make sure you load this
+ * phrase from a file you've .gitignored so it doesn't accidentally become public.
+ *
+ */
+
+ const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+ //
+ const { mnemonic} = require('./env.json');
+ 
+ module.exports = {
+   /**
+    * Networks define how you connect to your ethereum client and let you set the
+    * defaults web3 uses to send transactions. If you don't specify one truffle
+    * will spin up a development blockchain for you on port 9545 when you
+    * run `develop` or `test`. You can ask a truffle command to use a specific
+    * network from the command line, e.g
+    *
+    * $ truffle test --network <network-name>
+    */
+
+   networks: {
+ 
+    fuji: {
+      provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
+      network_id: 1,
+      confirmations: 1,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    }
+   },
+ 
+   // Set default mocha options here, use special reporters etc.
+   mocha: {
+     timeout: 100000
+   },
+ 
+   // Configure your compilers
+   compilers: {
+     solc: {
+        version: "^0.7.6",    // Fetch exact version from solc-bin (default: truffle's version)
+       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+       settings: {          // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+          enabled: false,
+          runs: 200
+        },
+        evmVersion: "byzantium"
+       }
+     },
+   },
+ };
+```
+
+Run
+```zsh
+truffle migrate --network fuji
 ```
 
 
