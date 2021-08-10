@@ -164,6 +164,14 @@ truffle migrate --network fuji
 You should see the txn in your terminal
 <img width="1152" alt="Screen Shot 2021-08-09 at 10 21 06 PM" src="https://user-images.githubusercontent.com/73849597/128812345-824eed14-0b40-492e-a7ab-8c3130eb3227.png">
 
+### Flatten files for verification
+```yarn add truffle-flattener```
+
+Run 
+
+```zsh
+npx truffle-flattener contracts/ERC20.sol > contracts/ERC20_flat.sol
+```
 
 # Verify Smart Contracts on the C-Chain Explorer
 
