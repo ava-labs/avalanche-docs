@@ -103,7 +103,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
  const HDWalletProvider = require("@truffle/hdwallet-provider");
 
  //
- const { mnemonic} = require('./.env.json');
+ const { mnemonic } = require('./.env.json');
  
  module.exports = {
    /**
