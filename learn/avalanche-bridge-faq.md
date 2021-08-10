@@ -52,6 +52,8 @@ Bridge Addresses:
 * Ethereum: [`0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0`](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
 * Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
 
+Note that **you should not directly transfer tokens to these addresses**. You should use the Bridge's user interface, which checks for malformed transactions.
+
 ### Fees
 
 #### How do fees work on the Avalanche Bridge?
@@ -164,7 +166,7 @@ No single party has access to the SGX enclave address. Only the enclave itself c
 
 #### Why doesn't the bridge hold funds in a a smart contract?
 
-Not using a smart contract allows for lower gas fees and faster transfers. 
+Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers.
 
 #### Where can I find more information about the design?
 See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
