@@ -12,17 +12,21 @@ Make sure you have truffle installed:
 npm install -g truffle
 ```
 <br>
+
 Create a new directory for your Truffle project:
+<br>
 
 ```zsh
 mkdir MetaCoin
 cd MetaCoin
 ```
+<br>
 
-Download ("unbox") the MetaCoin box
+Download ("unbox") the MetaCoin box:
 ```
 truffle unbox metacoin
 ```
+<br>
 
 Once this operation is completed, you'll now have a project structure with the following items:
 
@@ -32,20 +36,22 @@ Once this operation is completed, you'll now have a project structure with the f
 * ``truffle.js``: Truffle configuration file
 
 ## Compiling
-Set up your environment
+Set up your environment:
 
 ```zsh
 yarn add @truffle/hdwallet-provider
 ```
 <br>
 
-Create a ``.env.json`` file in your project's root directory
+Create a ``.env.json`` file in your project's root directory:
+
 ```json
 {"mnemonic": "your-wallet-seed-phrase"}
 ```
 <br>
 
-Configure your ``truffle-config.js`` file to the appropriate settings<br>
+Configure your ``truffle-config.js`` file to the appropriate settings:
+<br>
 
 ```js
 /**
@@ -97,7 +103,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings<br>
 ```
 _Note: Network can be configured for mainnet deployment(see Alternatives)_ 
 
-Run
+Run the following command:
 
 ```zsh
 truffle compile
@@ -107,24 +113,26 @@ truffle compile
 Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
 <br>
 
-
-
-``ConvertLib.json`` <br>
-``MetaCoin.json``<br>
-``Migrations.json``<br>
+* ``ConvertLib.json`` <br>
+* ``MetaCoin.json``<br>
+* ``Migrations.json``<br>
 <br>
+
 You will need ``MetaCoin.json`` for future use
 
 ### Migrate
 
-Run
+Run the following command:
 ```zsh
 truffle migrate --network fuji
 ```
 
+You should see the txn activity in your terminal
+![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
+![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
 
-You should see the txn in your terminal
-<img width="928" alt="MigrationNoConfirms" src="https://user-images.githubusercontent.com/73849597/128941508-0d2926aa-890c-47b7-a93e-2ba71d58ab9a.png">
+![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
+
 
 
 
