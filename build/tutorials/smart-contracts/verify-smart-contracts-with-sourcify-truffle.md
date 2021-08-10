@@ -183,11 +183,11 @@ Click _Verify & Publish_ to enter the smart contract verification page.
 
 Click _Sourcify: sources and metadataJSON file_
 
-[Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
+Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
+![SourcifywithJSON](https://user-images.githubusercontent.com/73849597/128923990-af19b32a-d008-4c9e-ac02-d673914b7f84.png)
 
-![Libraries](../../../.gitbook/assets/smart-contract-library.png)
-
-The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
+View the verified contract
+![VerifiedMetaCoin](https://user-images.githubusercontent.com/73849597/128925965-280c8018-da90-4647-8b62-f67a807b40db.png)
 
 ## Requirements
 
