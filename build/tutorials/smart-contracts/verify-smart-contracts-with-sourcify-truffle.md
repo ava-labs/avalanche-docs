@@ -43,7 +43,7 @@ Create a ``.env.json`` file in your project's root directory
 ```
 <br>
 
-Configure your ``truffle-config.js`` file to the appropriate settings
+Configure your ``truffle-config.js`` file to the appropriate settings<br>
 
 ```js
 /**
@@ -93,7 +93,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
    },
  };
 ```
-
+_Note: Network can be configured for mainnet deployment(see Alternatives)_ 
 
 Run
 
@@ -104,7 +104,7 @@ truffle compile
 
 Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
 <br>
-<br>
+
 
 
 ``ConvertLib.json`` <br>
@@ -119,7 +119,7 @@ Run
 ```zsh
 truffle migrate --network fuji
 ```
-_Note: Network can be configured for mainnet deployment_ 
+
 
 You should see the txn in your terminal
 <img width="928" alt="MigrationNoConfirms" src="https://user-images.githubusercontent.com/73849597/128941508-0d2926aa-890c-47b7-a93e-2ba71d58ab9a.png">
@@ -148,15 +148,19 @@ Click _Sourcify: sources and metadataJSON file_
 
 Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
 <br>
+Click _Verify & Publish_
+
 ![SourcifywithJSON](https://user-images.githubusercontent.com/73849597/128923990-af19b32a-d008-4c9e-ac02-d673914b7f84.png)
 
 View the verified contract
+
 ![VerifiedMetaCoin](https://user-images.githubusercontent.com/73849597/128925965-280c8018-da90-4647-8b62-f67a807b40db.png)
 
 <br>
 
-### Optional: Flatten files for verification
+## Alternatives
 
+### Flatten files for verification
 ```zsh
 yarn add truffle-flattener
 ```
@@ -167,8 +171,28 @@ Run
 npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 ```
 
-repeat compiliation, migration and verification steps
+repeat compiliation, migration and verification steps <br>
 
+### Mainnet deployment
+
+Configure your ``truffle-config.js`` file to the appropriate settings<br>
+
+```js
+   networks: {
+ 
+    mainnet: {
+      provider: () => new HDWalletProvider(mnemonic, `https://api.avax.network/ext/bc/C/rpc`),
+      network_id: "*",
+      timeoutBlocks: 200,
+      skipDryRun: true
+    }
+   },
+ };
+```
+Run 
+```zsh
+truffle migrate --network mainnet
+```
 
 ## Caveats
 
@@ -176,4 +200,3 @@ repeat compiliation, migration and verification steps
 
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
   * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
-
