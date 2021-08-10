@@ -1,48 +1,33 @@
-## Prerequisites
+This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)
 
-### NodeJS and Yarn
 
-First install the LTS of [nodejs](https://nodejs.org/en) which is `16.5.0` at the time of writing. NodeJS bundles `npm`.
+### Create a project
 
-Next install [yarn](https://yarnpkg.com):
+Make sure you have truffle installed
+```
+npm install -g truffle
+```
+<br>
+Create a new directory for your Truffle project
 
 ```zsh
-npm install -g yarn
+mkdir MetaCoin
+cd MetaCoin
 ```
 
-## Dependencies
-
-First clone [this](https://github.com/ava-labs/avalanche-smart-contract-quickstart) repo and download the necessary packages.
-
-```zsh
-git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
-cd avalanche-smart-contract-quickstart
-yarn
+Download ("unbox") the MetaCoin box
+```
+truffle unbox metacoin
 ```
 
-## Write Contracts
+Once this operation is completed, you'll now have a project structure with the following items:
 
-Edit the [`ERC20.sol`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/ERC20.sol) contract in `contracts/`. `ERC20.sol` is an [Open Zeppelin](https://openzeppelin.com) [ERC20](https://eips.ethereum.org/EIPS/eip-20) contract. ERC20 is a popular smart contract interface for interoperability. You can also add your own contracts.
+``contracts/``: Directory for Solidity contracts<br>
+``migrations/``: Directory for scriptable deployment files<br>
+``test/``: Directory for test files for testing your application and contracts<br>
+``truffle.js``: Truffle configuration file
 
-## Initialize truffle
-Install truffle
-
-yarn 
-```yarn add global truffle```
-
-npm
-```npm install -g truffle```
-
-Run
-```zsh
-truffle init
-```
-
-**Do not overwrite contracts or test file folders**
-
-you shoud see a migrations folder and truffle-config.js file populate your IDE
-
-## Compile and Migrate
+## Compiling
 ### Compile
 
 Configure your ``truffle-config.js`` file to the appropriate solidity compiler
@@ -75,7 +60,9 @@ You should see various ``.json`` files populate your ``./build/contracts`` folde
 
 ### Migrate
 
-``yarn add @truffle/hdwallet-provider``
+```zsh
+yarn add @truffle/hdwallet-provider
+```
 
 Configure your ``truffle-config.js`` file to the appropriate settings
 
@@ -121,7 +108,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
     fuji: {
       provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
       network_id: 1,
-      confirmations: 1,
+      confirmations: 10,
       timeoutBlocks: 200,
       skipDryRun: true
     }
@@ -135,7 +122,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings
    // Configure your compilers
    compilers: {
      solc: {
-        version: "^0.7.6",    // Fetch exact version from solc-bin (default: truffle's version)
+        version: "^0.6.12",    // Fetch exact version from solc-bin (default: truffle's version)
        // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
        settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
@@ -162,15 +149,18 @@ Run
 truffle migrate --network fuji
 ```
 You should see the txn in your terminal
-<img width="1152" alt="Screen Shot 2021-08-09 at 10 21 06 PM" src="https://user-images.githubusercontent.com/73849597/128812345-824eed14-0b40-492e-a7ab-8c3130eb3227.png">
+<img width="1027" alt="MigrationExample" src="https://user-images.githubusercontent.com/73849597/128917753-2b96ed18-d3b5-47a8-9799-bbafda3b9f90.png">
 
-### Flatten files for verification
-```yarn add truffle-flattener```
+
+### Optional Flatten files for verification
+```zsh
+yarn add truffle-flattener
+```
 
 Run 
 
 ```zsh
-npx truffle-flattener contracts/ERC20.sol > contracts/ERC20_flat.sol
+npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 ```
 
 # Verify Smart Contracts on the C-Chain Explorer
