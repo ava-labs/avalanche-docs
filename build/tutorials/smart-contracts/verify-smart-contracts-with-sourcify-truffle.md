@@ -1,4 +1,6 @@
-This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)
+This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)<br>
+Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)
+
 
 
 ### Create a project
@@ -196,94 +198,4 @@ View the verified contract
   * Includes will not work.  
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
   * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
-* The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
-
-## Libraries
-
-The compile bytecode will identify if there are are external libraries. If you released with Remix, you will also see multiple transactions created.
-
-```javascript
-{
-  "linkReferences": {
-    "contracts/Storage.sol": {
-      "MathUtils": [
-        {
-          "length": 20,
-          "start": 3203
-        }
-        ...
-      ]
-    }
-  },
-  "object": "....",
-  ...
-}
-```
-
-This requires you to add external libraries in order to veriy the code.
-
-A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies \(i.e. you might need to prune the Solidity code to exclude anything but the necessary classes\).
-
-You can also see references in the byte code in the form `__$75f20d36....$__`. The keccak256 hash is generated from the library name.
-
-Example [online converter](https://emn178.github.io/online-tools/keccak_256.html): `contracts/Storage.sol:MathUtils` =&gt; `75f20d361629befd780a5bd3159f017ee0f8283bdb6da80805f83e829337fd12`
-
-## Examples
-
-* [SwapFlashLoan](https://cchain.explorer.avax-test.network/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
-
-SwapFlashLoan uses swaputils and mathutils:
-
-* [SwapUtils](https://cchain.explorer.avax-test.network/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
-
-SwapUtils requires mathutils:
-
-* [MathUtils](https://cchain.explorer.avax-test.network/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
-
-## Caveats
-
-### SPDX License Required
-
-An SPDX must be provided.
-
-```javascript
-// SPDX-License-Identifier: ...
-```
-
-### keccak256 Strings Processed
-
-The C-Chain Explorer interprets all keccak256\(...\) strings, even those in comments. This can cause issues with constructor args.
-
-```javascript
-/// keccak256("1");
-keccak256("2");
-```
-
-This could cause automatic constructor verification failures. If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
-
-### Solidity Constructors
-
-Constructors and inherited constructors can can cause problems verifying the constructor arguments.
-
-example:
-
-```javascript
-abstract contract Parent {
-  constructor () {
-    address msgSender = ...;
-    emit Something(address(0), msgSender);
-  }
-}
-contract Main is Parent {
-  constructor (
-          string memory _name,
-          address deposit,
-          uint fee
-  ) {
-    ...
-  }
-}
-```
-
-If you receive errors about constructor args they can be provided in ABI hex encoded form on the contract verification page.
 
