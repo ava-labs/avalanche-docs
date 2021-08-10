@@ -30,8 +30,6 @@ Once this operation is completed, you'll now have a project structure with the f
 ``truffle.js``: Truffle configuration file
 
 ## Compiling
-### Compile
-
 Set up your environment
 
 ```zsh
@@ -124,7 +122,8 @@ truffle migrate --network fuji
 _Note: Network can be configured for mainnet deployment_ 
 
 You should see the txn in your terminal
-<img width="1027" alt="MigrationExample" src="https://user-images.githubusercontent.com/73849597/128917753-2b96ed18-d3b5-47a8-9799-bbafda3b9f90.png">
+<img width="928" alt="MigrationNoConfirms" src="https://user-images.githubusercontent.com/73849597/128941508-0d2926aa-890c-47b7-a93e-2ba71d58ab9a.png">
+
 
 
 # Verify Smart Contracts on the C-Chain Explorer
@@ -154,11 +153,10 @@ Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build 
 View the verified contract
 ![VerifiedMetaCoin](https://user-images.githubusercontent.com/73849597/128925965-280c8018-da90-4647-8b62-f67a807b40db.png)
 
-## Requirements
+<br>
 
-* **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
+### Optional: Flatten files for verification
 
-* Optional: Flatten files for verification
 ```zsh
 yarn add truffle-flattener
 ```
@@ -168,6 +166,13 @@ Run
 ```zsh
 npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 ```
+
+repeat compiliation, migration and verification steps
+
+
+## Caveats
+
+ * **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
 
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
   * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
