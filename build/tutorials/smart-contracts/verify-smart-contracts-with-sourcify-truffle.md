@@ -188,6 +188,7 @@ Click _Verify & Publish_ to enter the smart contract verification page.
 Click _Sourcify: sources and metadataJSON file_
 
 Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
+<br>
 ![SourcifywithJSON](https://user-images.githubusercontent.com/73849597/128923990-af19b32a-d008-4c9e-ac02-d673914b7f84.png)
 
 View the verified contract
