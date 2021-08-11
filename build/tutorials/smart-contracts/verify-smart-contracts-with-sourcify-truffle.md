@@ -101,7 +101,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings:
    },
  };
 ```
-_Note: Network can be configured for mainnet deployment(see Alternatives)_ 
+_Network can be configured for mainnet deployment(see Alternatives)_ 
 
 Run the following command:
 
@@ -118,7 +118,7 @@ Once this operation is completed, your ``./build/contracts`` folder should conta
 * ``Migrations.json``<br>
 <br>
 
-You will need ``MetaCoin.json`` for future use
+_You will need ``MetaCoin.json`` for future use_
 
 ### Migrate
 
@@ -132,7 +132,9 @@ You should see the txn activity in your terminal
 ![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
 ![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
 
+<br>
 
+_You will need your MetaCoin contract address for future use_
 
 
 # Verify Smart Contracts on the C-Chain Explorer
@@ -145,12 +147,12 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ## Steps
 
-Navigate to the _Code_ tab at the Explorer page for your contract's address.
+Navigate to the _Code_ tab at the Explorer page for your contract's address
 
 ![CodeTab2](https://user-images.githubusercontent.com/73849597/128950386-35d89fe5-c61f-41b0-badf-87a487bf422c.png)
 
 
-Click _Verify & Publish_ to enter the smart contract verification page.
+Click _Verify & Publish_ to enter the smart contract verification page
 
 ![SourcifyVerify](https://user-images.githubusercontent.com/73849597/128950515-cc74c92f-6da3-485f-bb7f-a033eb59bd2e.png)
 
@@ -183,11 +185,11 @@ Run the following command:
 npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 ```
 
-repeat compiliation, migration and verification steps <br>
+repeat compiliation, migration, and verification steps <br>
 
 ### Mainnet deployment
 
-Configure your ``truffle-config.js`` file to the appropriate settings<br>
+Configure your ``truffle-config.js`` file to the appropriate settings:<br>
 
 ```js
 module.exports = {
