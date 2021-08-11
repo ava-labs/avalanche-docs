@@ -116,7 +116,6 @@ Once this operation is completed, your ``./build/contracts`` folder should conta
 * ``ConvertLib.json`` <br>
 * ``MetaCoin.json``<br>
 * ``Migrations.json``<br>
-<br>
 
 _You will need ``MetaCoin.json`` for future use_
 
@@ -141,7 +140,7 @@ _You will need your MetaCoin contract address for future use_
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it
 
-The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) and the Fuji Testnet Explorer is [here.](https://cchain.explorer.avax-test.network/)
+The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) and the Fuji Testnet Explorer is [here](https://cchain.explorer.avax-test.network/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
@@ -210,9 +209,3 @@ Run the following command:
 truffle migrate --network mainnet
 ```
 
-## Caveats
-
- * **IMPORTANT** Contracts should be verified on Testnet before being deployed to Mainnet to ensure there are no issues.
-
-* Contracts should be compile-able in [Remix](https://remix.ethereum.org).
-  * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
