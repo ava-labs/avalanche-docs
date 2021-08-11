@@ -125,6 +125,7 @@ Run the following command:
 ```zsh
 truffle migrate --network fuji
 ```
+<br>
 
 You should see the txn activity in your terminal
 ![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
