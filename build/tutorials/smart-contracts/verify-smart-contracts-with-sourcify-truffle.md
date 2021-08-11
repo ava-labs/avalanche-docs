@@ -130,7 +130,6 @@ truffle migrate --network fuji
 You should see the txn activity in your terminal
 ![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
 ![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
-
 ![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
 
 
@@ -138,21 +137,23 @@ You should see the txn activity in your terminal
 
 # Verify Smart Contracts on the C-Chain Explorer
 
-The C-Chain Explorer supports verifying smart contracts, allowing users to review it.
+The C-Chain Explorer supports verifying smart contracts, allowing users to review it
 
 The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) and the Fuji Testnet Explorer is [here.](https://cchain.explorer.avax-test.network/)
 
-If you have issues, contact us on [Discord](https://chat.avalabs.org).
+If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ## Steps
 
 Navigate to the _Code_ tab at the Explorer page for your contract's address.
 
-![Verify &amp; Publish](../../../.gitbook/assets/smart-contract-verify-page.png)
+![CodeTab2](https://user-images.githubusercontent.com/73849597/128950386-35d89fe5-c61f-41b0-badf-87a487bf422c.png)
+
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
-![Screen Shot 2021-08-09 at 10 27 23 PM](https://user-images.githubusercontent.com/73849597/128813070-81bc2c11-6e38-47da-a3af-c6d90125b6a1.png)
+![SourcifyVerify](https://user-images.githubusercontent.com/73849597/128950515-cc74c92f-6da3-485f-bb7f-a033eb59bd2e.png)
+
 
 Click _Sourcify: sources and metadataJSON file_
 
@@ -160,11 +161,12 @@ Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build 
 <br>
 Click _Verify & Publish_
 
-![SourcifywithJSON](https://user-images.githubusercontent.com/73849597/128923990-af19b32a-d008-4c9e-ac02-d673914b7f84.png)
+![JSONSourcify](https://user-images.githubusercontent.com/73849597/128950634-55bdd46e-885b-437e-84d2-534bd1801df0.png)
 
-View the verified contract
+View the verified contract: [MetaCoin](https://cchain.explorer.avax-test.network/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
 
-![VerifiedMetaCoin](https://user-images.githubusercontent.com/73849597/128925965-280c8018-da90-4647-8b62-f67a807b40db.png)
+![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
+
 
 <br>
 
@@ -175,7 +177,7 @@ View the verified contract
 yarn add truffle-flattener
 ```
 
-Run 
+Run the following command:
 
 ```zsh
 npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
@@ -201,7 +203,7 @@ module.exports = {
    },
  };
 ```
-Run 
+Run the following command:
 ```zsh
 truffle migrate --network mainnet
 ```
