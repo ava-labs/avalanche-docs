@@ -123,7 +123,7 @@ You can use Metamask’s SWAP function to swap from ETH to WETH. Alternatively, 
 
 #### Why are there two types of the same token?  How can I tell which one derives from the Avalanche Bridge?
 
-The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens have now been deprecated in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
+The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens have been deprecated in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
 #### Why doesn’t the newly bridged token appear in my wallet automatically?
 
@@ -141,11 +141,11 @@ The current-generation Avalanche Bridge \(AB\) to which this document refers is 
 
 #### When does the AEB stop operating?
 
-As of August 12, 2021, the AEB has been be turned off and transfers across it are no longer possible. The funds held on the Ethereum side of the AEB have been to the new Avalanche Bridge \(AB\). Token conversions have been enabled on the Avalanche C-Chain, allowing users to convert their AEB tokens on a 1-1 basis for their equivalent on the Avalanche Bridge. This conversion can be done at https://bridge.avax.network/convert. AEB token support timelines will be left up to the individual DApp projects.
+The AEB is deactivated and transfers across it are no longer possible. The funds held on the Ethereum side of the AEB have been moved to the new Avalanche Bridge \(AB\). Token conversions have been enabled on the Avalanche C-Chain, allowing users to convert their AEB tokens on a 1-1 basis for their equivalent on the Avalanche Bridge. This conversion can be done at [https://bridge.avax.network/convert](https://bridge.avax.network/convert). AEB token support timelines will be left up to the individual DApp projects.
 
 #### Can I transfer my AEB tokens to Ethereum?
 
-In order to move your AEB tokens to Ethereum, you must first convert them into AB tokens as described in the question above. Once convert, you are able to use the new Avalanche Bridge to then move the AB tokens back to Ethereum.
+In order to move your AEB tokens to Ethereum, you must first convert them into AB tokens as described in the question above. Once converted, you can use the new Avalanche Bridge to move the AB tokens back to Ethereum.
 
 #### How do I convert my AEB \(deprecated bridge\) tokens to Avalanche Bridge \(AB\) tokens?
 
