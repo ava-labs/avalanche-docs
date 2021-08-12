@@ -338,6 +338,7 @@ Default values are overridden only if explicitly specified in the config.
 
 The parameters are as follows:
 
+
 #### Coreth APIs
 
 `snowman-api-enabled` \(boolean\):
@@ -361,6 +362,12 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), mea
 `rpc-tx-fee-cap` \(int\):
 
 Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
+
+#### Database Pruning
+
+`pruning-enabled`\(bool\):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
 #### Eth APIs
 
@@ -513,12 +520,6 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 `--uptime-requirement` \(float\):
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
-
-#### Database Pruning
-
-`pruning-enabled`\(bool\):
-
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
 ### Health
 
