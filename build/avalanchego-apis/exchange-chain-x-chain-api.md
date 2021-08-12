@@ -892,6 +892,65 @@ curl -X POST --data '{
 }
 ```
 
+### avm.getAddressTxs <a id="avm-get-address-txs-api"></a>
+
+Returns all transactions under the specified address. 
+
+Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+
+#### **Signature**
+
+```cpp
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+##### Request parameters
+* `address`  wallet address.
+* `assetID`  ID of the asset for which the transactions are requested.
+* `pageSize` Number of items to return per page. Optional. Defaults to 1024.
+
+##### Response parameters
+* `txIDs`  List of transaction IDs that belong to this address.
+* `cursor` Page number or offset. Use this in request to get the next page.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txIDs": [
+            "SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"
+        ],
+        "cursor": "1"
+    },
+    "id": 1
+}
+```
+
 ### avm.getTx
 
 Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
