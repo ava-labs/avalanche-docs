@@ -1,71 +1,71 @@
-# Run an Avalanche Node on Linux using Install Script
+# Avalancheノードを実行する
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+AvalancheGo をコンピュータにインストールするシェル \(bash\) スクリプトがあります。このスクリプトは、ユーザー入力が必要なくても数分でノードを実行するように設定します。
 
-## Before you start
+## 始める前に
 
-This install script assumes:
+このインストールスクリプトは次のようにします。
 
-* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
-* AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges \(can run `sudo`\)
+* OS: Ubuntu 18.04 または 20.04 \(Sorry, MacOS, Windows NT-JP サポートされていない\)
+* AvalancheGoは実行されていませんし、すでにサービスとしてインストールされていません
+* スクリプトを実行しているユーザーにはスーパーユーザー権限があります \(`sudo`\ を実行できます)
 
-### Environment considerations
+### 環境への配慮
 
-If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
+Linux の別のフレーバーを実行すると、スクリプトは意図した通りに動作しないかもしれません。`Systemd` はシステムサービスの実行に使用されることを想定しています。他のLinuxフレーバーは何か他のものを使うかもしれませんし、スクリプトによって想定されるとは異なる場所にファイルがあるかもしれません。
 
-If you have a node already running on the computer, stop it before running the script.
+コンピューター上で既にノードが実行されている場合は、スクリプトを実行する前にそれを停止します。
 
-#### Node running from terminal
+#### Terminal から実行するノード
 
-If your node is running in a terminal stop it by pressing `ctrl+C`.
+Node がターミナルで動作している場合、`ctrl+C` を押して停止します。
 
-#### Node running as a service
+#### Node as a service as a JavaScript.
 
-If your node is already running as a service, then you probably don't need this script. You're good to go.
+Node がすでにサービスとして実行されている場合、おそらくこのスクリプトは必要ありません。- 行って良かったわ
 
-#### Node running in the background
+#### バックグラウンドで実行するノード
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+ノードがバックグラウンド \(`nohup`で実行することにより、例えば\)で実行されている場合、`ps aux | grep avalanche`を実行してノードを実行するプロセスを見つけます。これは次のように出力します:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-Look for line that doesn't have `grep` on it. In this example, that is the second line. It shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+`grep` を持っていない行を探します。この例では、それが 2 行目です。ノードに関する情報が表示されます。`JP-JP-``kill -2 2630` を実行してノードを停止します。
 
-#### Node working files
+#### ノード作業ファイル
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to.
+AvalancheGoノードがこのコンピュータで以前に実行された場合、`$HOME/.avalanchego`ディレクトリにローカルノードファイルが保存されます。これらのファイルは乱されず、スクリプトで設定されたノードは、以前と同じIDで動作し、ステートメントを続けます。つまり、ノードのセキュリティのために、`staker.crt`と`staker.key`ファイルをバックアップして、`$HOME/.avalanchego/staking`に保存します。必要な場合は、これらのファイルを使用して別のコンピューターでノードを再作成できます。この[チュートリアル](node-backup-and-restore.md)では、バックアップと復元手順についてご覧ください。
 
-### Networking considerations
+### ネットワークに関する考慮事項
 
-To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+AvalancheGoはネットワークポート`9651`でインターネットからの接続を受け入れる必要があります。NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、NetBeans IDE 6.1 では、
 
-#### Running on a cloud provider
+#### クラウドプロバイダーでの実行
 
-If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already. The script will try to find out the IP by itself, but that might not work in all environments, so you will need to check the IP or enter it yourself.
+クラウドプロバイダーコンピューター・インスタンスでノードが実行されている場合、静的IPが存在します。JP-JP-このスクリプトは IP を自分で調べることを試みますが、それはすべての環境で動作しない可能性がありますので、IP をチェックするか、自分で入力する必要があります。
 
-#### Running on a home connection
+#### ホーム接続で実行する
 
-If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
+家庭用インターネット接続にあるコンピューターでノードを実行している場合、動的IPがあります。つまり、IPは定期的に変化します。installスクリプトは、その状況に合わせてノードを適切に設定します。しかし、ホーム接続のためには、ノードがインストールされているコンピューターへのポート`9651`のインバウンドポート転送を設定する必要があります。
 
-As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+モデルやルーターの設定が多すぎるため、何をすべきかについての指示はでき[ませ](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/)んが、オンラインガイド([この](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/)ような \)が見つかるかもしれません。
 
-## Running the script
+## スクリプトの実行
 
-So, now that you prepared your system and have the info ready, let's get to it.
+それで、システムを準備し、情報の準備ができましたら、それに到達しましょう。
 
-To download and run the script, enter the following in the terminal:
+スクリプトをダウンロードして実行するには、次のように入力します。
 
-```text
-wget https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
 chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
 
-And we're off! The output should look something like this:
+- もうすぐ！出力は次のようになります:
 
 ```text
 AvalancheGo installer
@@ -84,7 +84,7 @@ avalanchego-v1.1.1/avalanchego
 Node files unpacked into /home/ubuntu/avalanche-node
 ```
 
-And then the script will prompt you for information about the network environment:
+そして、スクリプトはネットワーク環境に関する情報を求めます:
 
 ```text
 To complete the setup some networking information is needed.
@@ -94,15 +94,15 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
+JP-JP`-```SPARC-JP-JP-J
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
+検出されたIPが間違っているかどうか`、n```で確認し、次のプロンプトで正しいIPを入力します。
 
-The script will then continue with system service creation and finish with starting the service.
+その後、スクリプトはシステムサービスの作成を続け、サービスを開始して終了します。
 
 ```text
 Installing service with public IP: 3.15.152.14
@@ -111,6 +111,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service 
 Done!
 
 Your node should now be bootstrapping on the main net.
+Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
 To follow the log use (ctrl+C to stop):
@@ -119,17 +120,17 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-The script is finished, and you should see the system prompt again.
+スクリプトが終了し、システムプロンプトが再び表示されます。
 
-## Post installation
+## Post installation-JP
 
-AvalancheGo should be running in the background as a service. You can check that it's running with:
+AvalancheGoはサービスとしてバックグラウンドで実行する必要があります。JavaScript-JP-JP-
 
-```text
+```bash
 sudo systemctl status avalanchego
 ```
 
-This will print the node's latest logs, which should look like this:
+これによりノードの最新のログが表示されます。これは次のように表示されます:
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service
@@ -139,7 +140,7 @@ Main PID: 2142 (avalanchego)
 Tasks: 8 (limit: 4495)
 Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
-└─2142 /home/ubuntu/avalanche-node/avalanchego --plugin-dir=/home/ubuntu/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=
+└─2142 /home/ubuntu/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=
 
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: initializing last accepted block as 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: initializing consensus engine
@@ -153,61 +154,61 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Note the `active (running)` which indicates the service is running ok. You may need to press `q` to return to the command prompt.
+`JavaScript`-JP`-`JP-
 
-To find out your NodeID, which is used to identify your node to the network, run the following command:
+NodeID を確認するには、次のコマンドを実行します。
 
-```text
-sudo journalctl -u avalanchego | grep "node's ID"
+```bash
+sudo journalctl -u avalanchego | grep "NodeID"
 ```
 
-It will produce output like:
+それは次のように出力します:
 
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
 
-Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
+NodeID--`を`取得する値に、`NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`を準備します。それを保存します。ノードをステーキングまたは検索するために必要です。
 
-Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
+Node はブートストラップのプロセスにあるはずです。進捗状況を監視するには、次のコマンドを発行します。
 
-```text
+```bash
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl+C` when you wish to stop reading node output.
+ノード出力の読み込みを停止したい場合は、`ctrl+C`を押します。
 
-## Stopping the node
+## Node の停止
 
-To stop AvalancheGo, run:
+AvalancheGoを停止するには、次のように実行します。
 
-```text
+```bash
 sudo systemctl stop avalanchego
 ```
 
-To start it again, run:
+JavaScript-JP-JP-
 
-```text
+```bash
 sudo systemctl start avalanchego
 ```
 
-## Node upgrade
+## ノードアップグレード
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. When a new version of the node is released, you will notice log lines like:
+AvalancheGoは現在進行中のプロジェクトであり、定期的なバージョンアップが行われています。ほとんどのアップグレードは推奨されますが、必要ありません。後方互換性がないアップグレードについては、事前通知が表示されます。新しいバージョンのノードがリリースされると、次のようなログ行に気付きます:
 
 ```text
 Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
 ```
 
-It is recommended to always upgrade to the latest version, because new versions bring bug fixes, new features and upgrades.
+新しいバージョンではバグ修正、新機能、アップグレードが行われているため、常に最新バージョンにアップグレードすることをお勧めします。
 
-To upgrade your node, just run the installer script again:
+Node をアップグレードするには、インストーラ・スクリプトを実行します。
 
-```text
+```bash
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+AvalancheGoがすでにインストールされていることを検出します:
 
 ```text
 AvalancheGo installer
@@ -218,7 +219,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+それからノードを最新バージョンにアップグレードし、終了後、ノードバックアップを開始し、最新バージョンに関する情報を出力します。
 
 ```text
 Node upgraded, starting service...
@@ -227,13 +228,82 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-## What next?
+## Node 構成
 
-That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
+ノード操作を設定するファイルは`~/.avalanchego/configs/node.json`です。設定オプションを追加または変更することができます。設定オプションのドキュメントは[こちら](../../references/command-line-interface.md)からご覧ください。デフォルトの設定は次のようになります:
 
-If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+```javascript
+{
+  "dynamic-public-ip": "opendns",
+  "http-host": ""
+}
+```
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing.
+コンフィギュレーションファイルは`JSON`ファイルで正しくフォーマットされている必要が`あり`ますので、スイッチはコマンドラインと異なるフォーマットでフォーマットされています。
 
-If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
+## 前のバージョンの使用
+
+インストーラースクリプトは、最新バージョン以外にAvalancheGoのバージョンをインストールするためにも使用できます。
+
+インストール可能なバージョンのリストを表示するには、次のようにします。
+
+```bash
+./avalanchego-installer.sh --list
+```
+
+これは、次のようなものを印刷します。
+
+```text
+AvalancheGo installer
+---------------------
+Available versions:
+v1.3.2
+v1.3.1
+v1.3.0
+v1.2.4-arm-fix
+v1.2.4
+v1.2.3-signed
+v1.2.3
+v1.2.2
+v1.2.1
+v1.2.0
+```
+
+特定のバージョンをインストールするには、`--version` でスクリプトを実行し、バージョンのタグを続けてください。JavaScript-JavaScript-JavaScript-Java
+
+```bash
+./avalanchego-installer.sh --version v1.3.1
+```
+
+{% ヒント スタイル="danger" %}AvalancheGo バージョンすべてが互換性があるわけではありません。通常、最新バージョンを実行する必要があります。最新バージョン以外のバージョンを実行すると、ノードが正常に動作しなくなり、バリデーターでは、ステーキングリワードが受け取られない可能性があります。{% endhint %}
+
+[Jean Zundel](https://github.com/jzu) 氏は、ノードバージョンをインストールするためのサポートを実装してくれたことに感謝しています。
+
+## 再インストールとスクリプトの更新
+
+Installer スクリプトは随時更新され、新機能や機能が追加されました。新機能を利用したり、ノードが失敗した変更から復元したりするには、ノードを再インストールすることができます。それを行うには、Webからスクリプトの最新バージョンを取得します:
+
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
+```
+
+スクリプトが更新されたら、`--reinstall` コマンドライン引数で再び実行します:
+
+```bash
+./avalanchego-installer.sh --reinstall
+```
+
+これにより、既存のサービスファイルを削除し、初めて起動したように、インストーラーを最初から実行します。NodeID はそのままにします。
+
+## 次は何ですか？
+
+それで、AvalancheGoノードを実行しています！おめでとうございます![Twitter](https://twitter.com/avalancheavax)、[Telegram](https://t.me/avalancheavax)、[Reddit](https://t.me/avalancheavax)でそれをやったことを知らせてください！
+
+PPP ドライバは、PPP ドライバのサポートを含んでいます。クラウドサービスプロバイダーにいる場合は、行ってください。
+
+これで、ノードが何をしているのかをよりよく把握するために、[ノード監視](setting-up-node-monitoring.md)を設定することで[、ノードとやり取り、](../../avalanchego-apis/issuing-api-calls.md)トークンを[賭け](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)たり、インストールをレベルアップできます。また、[Postmanコレクション](../../tools/postman-avalanche-collection.md)を使用して、ノードにコマンドをより簡単に発行することもできます。
+
+最後に、まだまだない場合は、ノードを別のマシンに復元する必要がある場合に備えて重要なファイルを[バックアップ](node-backup-and-restore.md)することをお勧めします。
+
+ご質問、またはヘルプが必要な場合は、[Discord](https://chat.avalabs.org/)サーバーでお気軽にお問い合わせください。
 
