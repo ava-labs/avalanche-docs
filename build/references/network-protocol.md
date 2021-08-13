@@ -1,42 +1,42 @@
-# Network Protocol
+# Ağ Protokolü
 
-Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
+Avalanche ağı Avalanche düğümleri arasındaki temel iletişim biçimini tanımlar. Yükleme paketleme için [ilkel serileştirme](serialization-primitives.md) biçimini kullanır.
 
-`"Containers"` are mentioned extensively in the description. A Container is simply a generic term for blocks or vertices, without needing to specify whether the consensus algorithm is DAG or Chain.
+`"Konteyner"` tanımında geniş bir şekilde bahsedilir. Konteyner, sadece blok veya dikişler için genel bir terimdir, uzlaşma algoritmasının DAG mi yoksa Zincir mi olduğunu belirtmek gerekmeden belirlemek gerekmeyen bir terimdir.
 
-## GetVersion
+## - GetVersion
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+`Version``` bir cevap olarak gönderilmesi için bir Sürüm mesajını talep eder.
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+`GetVersion` mesajları tarafından kullanılan OpCode `0x00`.
 
-### What GetVersion contains
+### GetVersion içerdiği
 
-The payload of a `GetVersion` message is empty.
+Bir `GetVersion` mesajının yükü boş.
 
 ```text
 []
 ```
 
-### How GetVersion is handled
+### GetVersion nasıl ele alınır
 
-A node receiving a `GetVersion` message must respond with a `Version` message containing the current time and node version.
+Bir `GetVersion` mesajı alan bir düğüm, mevcut zaman ve düğüm sürümünü içeren bir `Sürüm` mesajıyla cevap vermelidir.
 
-### When GetVersion is sent
+### GetVersion gönderildiğinde
 
-`GetVersion` is sent when a node is connected to another node, but has not yet received a `Version` message. It may, however, be re-sent at any time.
+Bir düğüm, başka bir düğümle bağlandığında `GetVersion` gönderilir, ancak henüz bir `Sürüm` mesajı almadı. Ancak her zaman geri gönderilebilir.
 
-## Version
+## Sürüm
 
-`Version` ensures that the nodes we are connected to are running compatible versions of Avalanche, and at least loosely agree on the current time.
+`Sürüm` bağladığımız düğümlerin of uyumlu sürümlerini çalıştırdığını ve en azından mevcut zaman üzerinde anlaşmalarını sağlar.
 
-The OpCode used by `Version` messages is: `0x01`.
+`Sürüm` mesajları tarafından kullanılan OpCode `0x01`'dir.
 
-### What Version contains
+### Hangi Sürüm içerir
 
-`Version` contains the node’s current time in Unix time format in number of milliseconds since the beginning of the epoch in 01/01/1970, as well as a version string describing the version of the code that the node is running.
+`Sürüm,` düğümün geçerli zamanı Unix zaman biçiminde (Unix zaman biçimi) 01/01/1970'te dönemin başlangıcından bu yana milisaniyeler sayısında ve düğünün çalıştığı kodun sürümü tanımlayan bir sürüm dizimi içerir.
 
-Content:
+İçerik:
 
 ```text
 [
@@ -45,17 +45,17 @@ Content:
 ]
 ```
 
-### How Version is handled
+### Sürüm nasıl ele alınır
 
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
+Eğer sürümler uyumsuz veya mevcut zaman çok farklıysa, bağlantı sonlandırılır.
 
-### When Version is sent
+### Sürüm gönderildiğinde
 
-`Version` is sent in response to a `GetVersion` message.
+`Sürüm` bir `GetVersion` mesajına yanıt olarak gönderilir.
 
-### Version Example
+### Sürüm Örnekleri
 
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
+`16 Kasım 2008 tarihinde saat 12:00'de (UTC)``` ve sürüm `avalanche/0.0.1`
 
 ```text
 [
@@ -73,41 +73,41 @@ Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)`
 
 ## GetPeers
 
-### Overview
+### Gözden geçirme
 
-`GetPeers` requests that a `Peers` message be sent as a response.
+`GetPeers` `bir cevap` olarak Peers mesajının gönderilmesini talep ediyor.
 
-The OpCode used by `GetPeers` messages is: `0x02`.
+`GetPeers` mesajları tarafından kullanılan OpCode `0x02`.
 
-### What GetPeers contains
+### GetPeers içindekileri
 
-The payload of a `GetPeers` message is empty.
+Bir `GetPeers` mesajının yükü boş.
 
 ```text
 []
 ```
 
-### How GetPeers is handled
+### GetPeers nasıl idare edilir?
 
-A node receiving `GetPeers` request must respond with a `Peers` message containing the IP addresses of its connected, staking nodes.
+`GetPeers` çağrısı ile ilgili bir düğüm, bağlanmış IP adreslerini içeren `bir Peers` mesajıyla cevap vermelidir.
 
-### When GetPeers is sent
+### GetPeers gönderildiğinde
 
-A node sends `GetPeers` messages upon startup to discover the participants in the network. It may also periodically send `GetPeers` messages in order to discover new nodes as they arrive in the network.
+Bir düğüm, ağ içindeki katılımcıları keşfetmek için `GetPeers` mesaj gönderir. Ayrıca çevre ağına ulaştıklarında yeni düğümleri keşfetmek için `GetPeers` düzenli olarak mesaj gönderebilir.
 
-## Peers
+## Arkadaşlarım
 
-### Overview
+### Gözden geçirme
 
-`Peers` message contains a list of peers, represented as IP Addresses. Note that an IP Address contains both the IP and the port number, and supports both IPv4 and IPv6 format.
+`Peers` mesajında IP Adresleri olarak temsil edilen bir grup akrabaları yer almaktadır. IP Adresinin hem IP hem de port numarasını içerdiğini ve hem IPv4 hem de IPv6 formatını desteklediğini unutmayın.
 
-The OpCode used by `Peers` messages is: `0x03`.
+`Peers` mesajları tarafından kullanılan OpCode `0x03`'tür.
 
-### What Peers contains
+### Akrabaların içindekileri
 
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
+`Bu` düğümün şu anda bağlandığı tıkalı düğümlerin IP adreslerini içeriyor.
 
-Content:
+İçerik:
 
 ```text
 [
@@ -115,17 +115,17 @@ Content:
 ]
 ```
 
-### How Peers is handled
+### Akrabaların nasıl idare edilir
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the message to its own list of neighbors, and forge connections to any new nodes.
+Bir `Peers` mesajı aldığında, bir düğüm, mesajdaki düğümleri komşu listesiyle karşılaştırmalı ve yeni düğümlerle bağlantılar kurmalıdır.
 
-### When Peers is sent
+### Esirler gönderildiğinde
 
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
+`Bir` `GetPeers` mesajına yanıt olarak gönderilmesi gerekmez, ve yeni gelen düğümleri duyurmak için periyodik yollanır. Bu tür bir itme dedikodu için varsayılan dönem 60 saniyedir.
 
-### Peers Example
+### Peers Örnek
 
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
+IP adresleri ile bir `Peers` mesajı gönderiliyor: `"127.0.0.1:9650"` ve `"[2001:0db8:ac10:fe01::12345.]`
 
 ```text
 [
@@ -141,23 +141,23 @@ Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0
 ]
 ```
 
-## Get
+## - Git
 
-### Overview
+### Gözden geçirme
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+Bir `Get` mesajı bir konteynır, yani düğümden blok veya çeviri şeklinde bir konteynır talep eder.
 
-The OpCode used by `Get` messages is: `0x04`.
+`İletiler` tarafından kullanılan OpCode `0x04`'tür.
 
-### What Get contains
+### Ne elde ediliyor
 
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+Bir `Get` mesajı bir `SubnetID`, `İstenir` ve `ContainerID` içerir.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** bu mesajın hangi alt net için yazıldığını tanımlar.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
+**`RequestID`** bir düğümle gönderilen mesajların izini sürmesine yardımcı olan bir sayacı. Her bir düğüm, beklenmedik bir mesaj gönderdiğinde düğüm, mesaj için yeni bir özgün `RequestID` yaratacaktır.
 
-**`ContainerID`** is the identifier of the requested container.
+**`Konteyner,`** istenen konteynırın tanımlayıcısıdır.
 
 ```text
 [
@@ -167,15 +167,15 @@ A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How Get is handled
+### Nasıl halledilir
 
-The node should reply with a `Put` message with the same `SubnetID`, `RequestID`, and `ContainerID` along with the `Container` with the specified identifier. Under correct situations, a node should only be asked for a container that it has. Therefore, if the node does not have the specified container, the `Get` message can safely be dropped.
+Düğün, aynı `SubnetID`, `İstenç` ve `ContainerID` bir `mesaj` ile belirtilen the `birlikte bir` Put birlikte bir Put mesajıyla cevap vermelidir. Doğru durumlarda, bir düğüm, sadece sahip olduğu bir konteynır istenmelidir. Bu nedenle, eğer düğüm, belirtilmiş konteynıra sahip değilse, `Get` mesajı güvenli bir şekilde indirilebilir.
 
-### When Get is sent
+### Get gönderildiğinde
 
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
+Bir düğüm, bize `konteynırın` varlığını anlatan bir düğüme mesaj gönderecektir. Örneğin, iki nodes: var: Rick ve Morty. Eğer `Rick, ContainerID`, içeren `PullQuery` mesajı gönderirse, Morty'nin konteynırın yanında olmadığı için Morty kayıp `ContainerID,` içeren bir mesaj gönderecektir.
 
-### Get Example
+### Örnek Alın
 
 ```text
 [
@@ -197,25 +197,25 @@ A node will send a `Get` message to a node that tells us about the existence of 
 ]
 ```
 
-## Put
+## - Kaldır şunu
 
-### Overview
+### Gözden geçirme
 
-A `Put` message provides a requested container to a node.
+Bir `mesaj` bir düğümle istenen konteynır sağlar.
 
-The OpCode used by `Put` messages is: `0x05`.
+`Mesajlar` tarafından kullanılan OpCode `0x05`'tir.
 
-### What Put contains
+### Koyu'nun ne olduğunu
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+Bir `Put` mesajında `SubnetID`, `İstenilen`, `ContainerID` ve `Container` bulunur.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** bu mesajın hangi alt net için yazıldığını tanımlar.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** bir düğümle gönderilen mesajların izini sürmesine yardımcı olan bir sayacı.
 
-**`ContainerID`** is the identifier of the container this message is sending.
+**`ContainerID`** bu mesajın gönderdiği konteynırın tanımlayıcısıdır.
 
-**`Container`** is the bytes of the container this message is sending.
+**`Konteynır,`** bu mesajın gönderdiği konteynırın the
 
 ```text
 [
@@ -226,15 +226,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How Put is handled
+### Nasıl
 
-The node should attempt to add the container to consensus.
+Bu düğüm, konteynırın uzlaşmasını eklemeye çalışmalıdır.
 
-### When Put is sent
+### Gönderildiğinde
 
-A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
+Bir düğüm, düğümün erişebileceği bir konteynıra ulaşma mesajı almak için bir `Put` mesajı gönderecektir.
 
-### Put Example
+### Örnek Koy
 
 ```text
 [
@@ -258,25 +258,25 @@ A node will send a `Put` message in response to receiving a Get message for a co
 ]
 ```
 
-## PushQuery
+## İt PushQuery
 
-### Overview
+### Gözden geçirme
 
-A `PushQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus. If the `ContainerID` is not known, the `Container` is optimistically provided.
+Bir `PushQuery` mesajı belirtilen `ContainerID` uzlaşmaya eklendikten sonra düğümden tercih edilen containerIDs talep eder. Eğer `ContainerID` bilinmiyorsa, `Konteyner` optimistically sağlanmaktadır.
 
-The OpCode used by `PushQuery` messages is: `0x06`.
+`PushQuery` mesajları tarafından kullanılan OpCode `0x06`.
 
-### What PushQuery contains
+### PushQuery
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+Bir `PushQuery` mesajında `SubnetID`, `İstenilen`, `Konteyneri` ve `a` içeriyor.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** bu mesajın hangi alt net için yazıldığını tanımlar.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** bir düğümle gönderilen mesajların izini sürmesine yardımcı olan bir sayacı.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`Konteynır,`** bu mesajın yanıt gönderilmeden önce uzlaşma için eklenmesini beklediği konteynırın tanımlayıcısıdır.
 
-**`Container`** is the bytes of the container with identifier `ContainerID`.
+**`Konteynır,`** konteynırın tanımlayıcı `ContainerID` ile bytes parçalarıdır.
 
 ```text
 [
@@ -287,15 +287,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How PushQuery is handled
+### Nasıl İt Sorgulanır
 
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Bu düğüm, konteynırın uzlaşmasını eklemeye çalışmalıdır. Konteynır uzlaşmaya eklendikten sonra, düğümün şu anki tercihi \(s\) ile bir `Chits` mesajı gönderilmelidir.
 
-### When PushQuery is sent
+### İt Sorgu gönderildiğinde
 
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Bu düğüm, bu düğümün mevcut tercihlerini öğrenmek istiyorsa bir `PushQuery` mesajı göndermeli ve bu düğümün `of` henüz öğrenememiş olması mümkün olduğunu düşünmektedir. Düğüm, yeni bir konteynır öğrendiğinde ya da "uzun süre" için konteynırları bulunduğunda, düğümlerin tercihlerini öğrenmek isteyecektir.
 
-### PushQuery Example
+### PushQuery PushQuery
 
 ```text
 [
@@ -319,23 +319,23 @@ A node should send a `PushQuery` message if it wants to learn of this node’s c
 ]
 ```
 
-## PullQuery
+## Çekici Bir Arama
 
-### Overview
+### Gözden geçirme
 
-A `PullQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus.
+Bir `PullQuery` mesajı belirtilen `ContainerID` uzlaşmaya eklendikten sonra düğümden tercih edilen containerIDs talep eder.
 
-The OpCode used by `PullQuery` messages is: `0x07`.
+`PullQuery` mesajları tarafından kullanılan OpCode `0x07`.
 
-### What PullQuery contains
+### PullQuery ne kadar da
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+Bir `PullQuery` mesajında `SubnetID`, `İstenir` ve `ContainerID` bulunur.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** bu mesajın hangi alt net için yazıldığını tanımlar.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** bir düğümle gönderilen mesajların izini sürmesine yardımcı olan bir sayacı.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`Konteynır,`** bu mesajın yanıt gönderilmeden önce uzlaşma için eklenmesini beklediği konteynırın tanımlayıcısıdır.
 
 ```text
 [
@@ -345,15 +345,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How PullQuery is handled
+### Çekme Sorunu nasıl halledilir
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Eğer düğüm, `ContainerID`, If konteynırları uzlaşmaya eklemek için çalışmalıdır. Konteynır uzlaşmaya eklendikten sonra, düğümün şu anki tercihi \(s\) ile bir `Chits` mesajı gönderilmelidir.
 
-### When PullQuery is sent
+### Çekici Sorgu gönderildiğinde
 
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Bu düğüm, bu düğümün mevcut tercihlerini öğrenmek istiyorsa `PullQuery` mesajı göndermeli ve muhtemelen `konteynırdan` öğrenmiş olması muhtemeldir. Düğüm, yeni bir konteynır öğrendiğinde ya da "uzun süre" için konteynırları bulunduğunda, düğümlerin tercihlerini öğrenmek isteyecektir.
 
-### PullQuery Example
+### Çekici Sorgu Örnekleri
 
 ```text
 [
@@ -377,21 +377,21 @@ A node should send a `PullQuery` message if it wants to learn of this node’s c
 
 ## Chits
 
-### Overview
+### Gözden geçirme
 
-A `Chits` message provides a requested set of preferred container\(s\) to a node.
+Bir `Chits` mesajı bir düğüme istenen container\(s\) setini sunar.
 
-The OpCode used by `Chits` messages is: `0x08`.
+`Chits` mesajları tarafından kullanılan OpCode `0x08`'dir.
 
-### What Chits contains
+### Chits içerdiği
 
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
+Bir `Chits` mesajı bir `SubnetID`, `RequestID`, ve `Tercihler` içerir.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** bu mesajın hangi alt net için yazıldığını tanımlar.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** bir düğümle gönderilen mesajların izini sürmesine yardımcı olan bir sayacı.
 
-**`Preferences`** is the list of containerIDs that fully describe the node’s preferences.
+**`Tercihler,`** konteynerlerin tam olarak tanımladığı bir listedir.
 
 ```text
 [
@@ -401,13 +401,13 @@ A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
 ]
 ```
 
-### How Chits is handled
+### Chits nasıl idare edilir?
 
-The node should attempt to add any referenced containers to consensus. If the referenced containers can’t be added, the node can ignore the missing containers and apply the remaining chits to the poll. Once a poll is completed, container confidences should be updated appropriately.
+Bu düğüm, referanslı konteynırlara katılmaya çalışmalıdır. Eğer referanslı konteynırlar If düğüm, kayıp konteynırları görmezden gelebilir ve geri kalan çeneleri ankete uygulayabilir. Anketler tamamlandıktan sonra konteynır sırları uygun şekilde güncellenmelidir.
 
-### When Chits is sent
+### Chits gönderildiğinde
 
-A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
+Bir düğüm, düğümün uzlaşmaya eklediği bir konteynıra `PullQuery` veya `PushQuery` mesajı alabilmek için `Chits` mesajı gönderecektir.
 
 ### Chits Example
 
