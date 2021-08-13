@@ -1,14 +1,14 @@
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+IPC API, kullanıcıların blok zincirlerinin yayınlanması için UNIX alan yuvaları oluşturmalarına izin verir. Blok zinciri bir vertex/bloke kabul ettiğinde bir sokete yayınlayacak ve içerideki kararlar başka bir kişiye yayınlanacak.
 
-A node will only expose this API if it is started with [command line argument](../references/command-line-interface.md) `api-ipcs-enabled=true`.
+Bir `düğüm,` bu API'yi ancak [komut satırı argümanı](../references/command-line-interface.md) it başlatılırsa ortaya çıkaracaktır.
 
-## IPC Message Format
+## IPC İleti Biçimi
 
-Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.
+Soket mesajları Bigendian formatında 64bit tam sayıdan oluşur.
 
-Example:
+Örnek Olarak:
 
 ```text
 Sending:
@@ -17,35 +17,35 @@ Writes to the socket:
     [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x41, 0x76, 0x61, 0x78]
 ```
 
-## IPC Socket URL Format
+## IPC Soket URL Biçimi
 
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
+sockets isimleri `<network_id>-<chain_id>-<event_type>` burada `<event_type>` ya `da fikir birliği` veya `kararları` vardır. Konsensus soketi dikey ve bloklar alırken, karar soketi bireysel işlemleri geri alır.
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Bu API, `json 2.0` RPC formatını kullanır.
 
-## Endpoint
+## Sonucu noktası
 
 `/ext/ipcs`
 
-## Methods
+## Yöntemler
 
-### ipcs.publishBlockchain
+### ipcs.publishBlockchain yayıncılık Blockchain
 
-Register a blockchain so it publishes accepted vertices to a Unix domain socket.
+Bir blok zinciri Register ki Unix alan yuvasına kabul edilen dikenleri yayınlar.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
-* `blockchainID` is the blockchain that will publish accepted vertices.
-* `consensusURL` is the path of the Unix domain socket the vertices are published to.
-* `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+* `blockchainID` kabul edilen dikenleri yayınlayacak blok zinciridir.
+* `ConsensusURL` Unix alan soketi (İngilizce: Unix domain soketi) yöntemidir.
+* `decisionsURL` işlemlerin yayınlandığı Unix alan soketinin yoludur.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -58,7 +58,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -73,17 +73,17 @@ curl -X POST --data '{
 
 ### ipcs.unpublishBlockchain
 
-Deregister a blockchain so that it no longer publishes to a Unix domain socket.
+Bir blok zinciri oluştur, böylece artık Unix alan yuvasına basılmayacak.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
-* `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
+* `blockchainID` bir Unix alan yuvasına artık basılmayacak blok zinciridir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -96,7 +96,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
