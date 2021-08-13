@@ -1,5 +1,6 @@
 ---
-description: 'This API allows clients to interact with Ortelius, the Avalanche indexer.'
+description: 'Bu API, hastaların Avalanche indeksi Ortelius ile etkileşime girmelerine izin verir.'
+
 ---
 
 # Ortelius API
@@ -8,54 +9,54 @@ description: 'This API allows clients to interact with Ortelius, the Avalanche i
 
 ### Format
 
-This API uses GET HTTP requests using URL query parameters and returns JSON data.
+Bu API, URL sorgulama parametrelerini kullanarak GET HTTP isteklerini kullanır ve JSON verilerini gönderir.
 
-### Versioning
+### Version
 
-Starting with version 2, the API paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
+Sürüm 2'den başlayarak, API yolları bir sürüm etiketi ile önceden belirlenecektir, örneğin `http://localhost:8080/v2`.
 
-The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
+API'nin mevcut versiyonu 2. sürümü. [Legacy API](ortelius.md#legacy-api) belgeselinin v1 API kullanımına ilişkin bilgisi vardır.
 
-### Data Types
+### Veri Tipleri
 
-In addition to integers, strings, and booleans, the following data types are used throughout the API:
+integers, ipler ve booleans, yanı sıra, aşağıdaki veri tipleri API boyunca kullanılır:
 
-| Name | Description | Examples |
+| Adı ne? | Tarif edilmesi | Örnekler |
 | :--- | :--- | :--- |
-| `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
-| `address` | A bech-32 encoded address \(used on the X-Chain and P-Chain\) | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
-| `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
-| `caddress` | A hex encoded address \(used on the C-Chain\) | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` |
-| `chash` | A hex encoded hash | `0xe5b935988317e8552e769ad92b6a2fd01ac8f0f90d8ffa4377e50fcb8d970077` |
+| `Kimlik` | Bir CB58 kodlanmış nesne tanımlayıcısı, örneğin bir zincir, işlem veya varlık kimliği gibi. | `2oYMBNV4eNHyqk2fjjV5nV5nVDmNJq5s3qs3Lo6ftnCByM` |
+| `Adres` | Bir bech-32 kodlanmış adres\ (X-Chain ve P-Chain\ üzerinde kullanılır) | `Fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
+| `- Zaman zamanı` | Bir Unix zaman damgası tam sayı veya RFC3339 biçimlendirilmiş bir sicim olarak | `1599696000`, `2020-09-10T00:00Z` |
+| `Caddress` | Şifrelenmiş bir adres \ (C-Chain\ üzerinde kullanılan) | `0xB31f66A3C1e78533F0875A1B74E27b85FD66c7` |
+| `- Chash` | Şifrelenmiş bir hash | `0xe5b9398317e8552e7692b6a2fd01ac8f90d8ffa437e50fccb8d97077` |
 
-### List Parameters
+### Parametreleri Liste
 
-All endpoints for listing resources accept the following parameters:
+Kaynakları listelemek için tüm son noktaları aşağıdaki parametreleri kabul edin:
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `limit` | `int` | The maximum number of items to return | `5000` | `5000` |
-| `query` | `string` | An ID prefix to filter items by | None | None |
-| `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
-| `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
+| `- Sınır` | `int` | Geri dönecek en fazla öge sayısı | `5000` | `5000` |
+| `Sorgu` | `İp` | & Ögeleri filtreleyecek bir kimlik prefix | Hiç yok | Hiç yok |
+| `Başlama zamanı` | `- Zaman zamanı` | Verilen bir zamanda veya sonra oluşturulan ögelerin sınırları | `0` | - Şimdi mi? |
+| `- Sona geldik` | `- Zaman zamanı` | Verilen bir zaman üzerinde veya öncesinde oluşturulan öğelere sınırlar | - Şimdi mi? | - Şimdi mi? |
 
-## Available Endpoints
+## Kullanılabilir Enlem Noktaları
 
-### Overview
+### Gözden geçirme
 
-The root of the API gives an overview of the constants for the active Avalanche network being indexed.
+API'nin kökü aktif Avalanche ağı için sabitlerin bir genel bakışını sağlar.
 
 **Params**
 
-None
+Hiç yok
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -79,23 +80,23 @@ curl "http://localhost:8080/v2"
 }
 ```
 
-### Search
+### Aramak
 
-Find an address or a transaction by its ID.
+Adres ya da kimlik ile bir işlem bulun.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `query` | `string` | An ID prefix to filter items by | None | None |
+| `Sorgu` | `İp` | & Ögeleri filtreleyecek bir kimlik prefix | Hiç yok | Hiç yok |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -168,25 +169,25 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-### Aggregate
+### - Aggregate
 
-Calculate aggregate transaction data over a time frame.
+Bir zaman aralığında toplu işlem verilerini hesapla.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
-| `intervalSize` | `string` | Values 'minute', 'hour', 'day', 'week', 'month', 'year' | None | None |
+| `Zincir` | `Kimlik` | Sonuçları filtrelemek için bir zincir kimliği. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `Varsayım` | `Kimlik` | Sonuçları filtrelemek için bir kimlik var. | Hiç yok | Hiç yok |
+| `Ara boyutu` | `İp` | Değerler 'dakika 'dakika', 'saat', 'gün', 'hafta', 'ay', 'yıl' | Hiç yok | Hiç yok |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -204,17 +205,17 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-### TxFee Aggregate
+### TxFee EklentisiName
 
-AVAX Aggregate txfee
+AVAX Eklentisi txfee
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -228,23 +229,23 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 }
 ```
 
-### Address Chain
+### Adres Zinciri
 
-Responds with the chains an address appears on.
+Zincirlerle ilgili bir adres beliriyor.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
+| `Adres` | `Adres` | Filtre sonuçları için bir adres. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -260,26 +261,26 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 }
 ```
 
-### List Transactions
+### İşlemleri Liste
 
-Find transactions that have been accepted.
+Kabul edilmiş işlemleri bulun.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
+| `Zincir` | `Kimlik` | Sonuçları filtrelemek için bir zincir kimliği. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `Varsayım` | `Kimlik` | Sonuçları filtrelemek için bir kimlik var. | Hiç yok | Hiç yok |
+| `Adres` | `Adres` | Filtre sonuçları için bir adres. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `- Tür` | `İp` | Sonuçları sıralamak için bir yöntem. `Zaman` damgası veya `zaman damgası inişi` olabilir. | `Zaman damgası asc` | N/A |
 
-**Example Call**
+**Örnek Example**
 
 ```bash
 curl "http://localhost:8080/v2/transactions?chainID=11111111111111111111111111111111LpoYY"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -349,17 +350,17 @@ curl "http://localhost:8080/v2/transactions?chainID=1111111111111111111111111111
 }
 ```
 
-### Get Transaction
+### İşlemleri Getirin
 
-Find a single transaction by its ID.
+Kimliği ile tek bir işlem bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -423,24 +424,24 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-### List Addresses
+### Adresleri Liste
 
-Find addresses that have been referenced in accepted transactions.
+Kabul edilen işlemlerde referans alınan adresleri bulun.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
+| `Zincir` | `Kimlik` | Sonuçları filtrelemek için bir zincir kimliği. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `Adres` | `Adres` | Filtre sonuçları için bir adres. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/addresses?address=X-avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -463,17 +464,17 @@ curl "http://localhost:8080/v2/addresses?address=X-avax1y8cyrzn2kg4udccs5d625gka
 }
 ```
 
-### Get Address
+### Adresi Al.
 
-Find a single address by its ID.
+Kimliğinin tek bir adresi bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -492,17 +493,17 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-### List Assets
+### Varlıkları Liste
 
-Find assets that have been created on the X-chain.
+on yaratılmış varlıkları bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/assets"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -523,17 +524,17 @@ curl "http://localhost:8080/v2/assets"
 }
 ```
 
-### Get Asset
+### Varlığı Getirin
 
-Find a single asset by its ID.
+Kimliği ile tek bir varlık bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -545,30 +546,30 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
   "currentSupply": "24509771588234718",
   "timestamp": "2020-09-10T00:00:00Z",
   "denomination": 9,
-  "variableCap": 0, 
+  "variableCap": 0,
   "nft": 1
 }
 ```
 
-### List Outputs
+### Çıkıntıları Liste
 
-Find outputs that have been created by an accepted transaction.
+Kabul edilmiş bir işlem tarafından yaratılan çıktıları bulun.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
+| `Zincir` | `Kimlik` | Sonuçları filtrelemek için bir zincir kimliği. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `Adres` | `Adres` | Filtre sonuçları için bir adres. Birkaç kez tedarik edilebilir. | Hiç yok | Hiç yok |
+| `Harcanmış` | `Bool` | Eğer ayarlanırsa, sonuçlar harcanmış veya harcanmamış \(false\ ) ile filtrelenir. | Hiç yok | N/A |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/outputs?address=X-avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u&spent=false"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -592,17 +593,17 @@ curl "http://localhost:8080/v2/outputs?address=X-avax1y8cyrzn2kg4udccs5d625gkac7
 }
 ```
 
-### Get Output
+### Çıktı
 
-Find a single output by its ID.
+Kimliğiyle tek bir çıkış bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -622,17 +623,17 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-### Get a C-Chain Block
+### C-Chain Blok al.
 
-Find a single block by its number.
+Numarasına göre tek bir blok bulun.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/ctxdata/10"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -694,28 +695,28 @@ curl "http://localhost:8080/v2/ctxdata/10"
 }
 ```
 
-### List C-Chain Transactions
+### C-Chain Işlemlerini Liste
 
-Find accepted C-Chain transactions.
+Kabul edilen C-Chain işlemlerini bulun.
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| Adı ne? | - Tip | Tarif edilmesi | Öntanımlı | Max |
 | :--- | :--- | :--- | :--- | :--- |
-| `toAddress` | `caddress` | address | None | None |
-| `fromAddress` | `caddress` | address | None | None |
-| `address` | `caddress` | address \(to or from\) | None | None |
-| `hash` | `chash` | transaction hash | None | None |
-| `blockStart` | `number` | Starting block number inclusive | None | N/A |
-| `blockEnd` | `number` | Ending block number exclusive | None | N/A |
+| `Adres` | `Caddress` | Adres | Hiç yok | Hiç yok |
+| `fromAddress` | `Caddress` | Adres | Hiç yok | Hiç yok |
+| `Adres` | `Caddress` | Adres \ ya da kendisinden | Hiç yok | Hiç yok |
+| `- Hah` | `- Chash` | transferi özeti | Hiç yok | Hiç yok |
+| `Blok başlasın` | `Numara` | Blok numarası ekleniyor | Hiç yok | N/A |
+| `Blok Sonu` | `Numara` | Blok numarası özel sona erdirildi | Hiç yok | N/A |
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6dffd1eae0a0855a2a&blockStart=797380&blockEnd=797381"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -725,7 +726,7 @@ curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6
             "hash": "0x00000217bc17e7e3187efae9248523f4fe2bc90e029e3ba13ddd8ff69607c705",
             "createdAt": "2021-03-28T07:42:30.471607Z",
             "nonce": 0,
-            "gasPrice": "470000000000",
+            "gasPrice": "225000000000",
             "gasLimit": 21000,
             "blockGasUsed": 63000,
             "blockGasLimit": 8000000,
@@ -756,17 +757,17 @@ curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6
 }
 ```
 
-### Get a Raw C-Chain Transaction
+### Çiğ C-Chain Transaction
 
-Get an accepted C-Chain transaction by its ID.
+Kimliği ile kabul edilmiş C-Chain işlemlerini alın.
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/v2/rawtransaction/pxiBJkwnaKhaJdYkkfAVRZXrJj47jJF3QAvsasbYF2Rfweoog"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -774,17 +775,17 @@ curl "http://localhost:8080/v2/rawtransaction/pxiBJkwnaKhaJdYkkfAVRZXrJj47jJF3QA
 }
 ```
 
-### Legacy API
+### Mirasçı API
 
-Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
+API'nin `1.` sürümü sadece of desteklemek için inşa edildi ve bir sürüm önekini kullanmadı. Kökün dışındaki `/ x` yolunda sadece for Gözlem sonucudur:
 
-**Example Call**
+**Örnek Example**
 
 ```text
 curl "http://localhost:8080/x"
 ```
 
-**Example Response**
+**Örnek Tepki**
 
 ```javascript
 {
@@ -796,5 +797,5 @@ curl "http://localhost:8080/x"
 }
 ```
 
-The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
+API, X-chain öntanımlı sonları için varsayılan noktalar için zincir parametreleri hariç sürüm 2 ile aynı uç noktaları ve parametreleri destekler.
 
