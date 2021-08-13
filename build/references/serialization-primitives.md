@@ -1,12 +1,12 @@
-# Serialization Primitives
+# Primaires de sérialisation
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalanche](../../#avalanche) utilise une représentation simple, uniforme et élégante pour toutes les données internal document décrit comment les types primitifs sont encodés sur la plate-forme Avalanche. Les transactions sont encodées en termes de ces types primitifs de base.
 
 ## Byte
 
-Bytes are packed as-is into the message payload.
+Les octets sont emballés comme -est dans la charge utile du message.
 
-Example:
+Exemple:
 
 ```text
 Packing:
@@ -15,11 +15,11 @@ Results in:
     [0x01]
 ```
 
-## Short
+## Courte durée
 
-Shorts are packed in BigEndian format into the message payload.
+Les shorts sont emballés dans le format BigEndian dans la charge utile du message.
 
-Example:
+Exemple:
 
 ```text
 Packing:
@@ -28,11 +28,11 @@ Results in:
     [0x01, 0x02]
 ```
 
-## Integer
+## Intégrité
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+Les intégrateurs sont des valeurs 32-bit emballées dans le format BigEndian dans la charge utile du message.
 
-Example:
+Exemple:
 
 ```text
 Packing:
@@ -41,11 +41,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04]
 ```
 
-## Long Integers
+## Longues intégrales
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+Les entiers longs sont des valeurs 64-bit emballées dans le format BigEndian dans la charge utile du message.
 
-Example:
+Exemple:
 
 ```text
 Packing:
@@ -54,11 +54,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]
 ```
 
-## IP Addresses
+## Adresses IP
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+Les adresses IP sont représentées comme format IPv6 16 octets, le port étant ajouté dans la charge utile du message comme un court. Les adresses IPv4 sont rembourrées avec 12 octets de 0x00s leader.
 
-IPv4 example:
+Exemple IPv4:
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+Exemple IPv6:
 
 ```text
 Packing:
@@ -84,11 +84,11 @@ Results in:
     ]
 ```
 
-## Fixed-Length Array
+## Longueur fixe
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+Les tableaux de longueur fixe, dont la longueur est connue en avance et par contexte, sont emballés dans l'ordre.
 
-Byte array example:
+Exemple de tableau Byte:
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+Exemple de tableau entier :
 
 ```text
 Packing:
@@ -106,11 +106,11 @@ Results in:
     [0x03, 0x04, 0x05, 0x06]
 ```
 
-## Variable Length Array
+## Variable rayon de longueur
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+La longueur du tableau est préfixe au format integer, suivie par l'emballage du contenu du tableau au format Array longueur fixe.
 
-Byte array example:
+Exemple de tableau Byte:
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+Exemple de tableau int :
 
 ```text
 Packing:
@@ -128,11 +128,11 @@ Results in:
     [0x00, 0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x06]
 ```
 
-## String
+## Chaîne
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+Une chaîne est emballée de la même manière qu'un tableau a variable. Cependant, le préfixe de longueur est un court plutôt qu'une int. Les chaînes sont encodées au format UTF-8.
 
-Example:
+Exemple:
 
 ```text
 Packing:
