@@ -1,28 +1,28 @@
 # Keystore API
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+すべてのノードには鍵ストアが組み込まれています。クライアントは、keystoreにユーザーを作成します。これは、ブロックチェーンとやり取りする際に使用するIDとして機能します。キーストアはノードレベルに存在するので、ユーザーをノードに作成するとそのノードに_のみ_存在します。ただし、このAPIを使用してユーザーをインポートしてエクスポートすることができます。
 
-_**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
+_**Nodeオペレーターがプレーンテキストパスワードにアクセスできるため、keystoreユーザーを操作するノードにのみ作成する必要があります。**_
 
-For validation and delegation on main net, you should issue transactions through [the wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+メインネットでのバリデーションとデリジェンスについては、[ウォレット](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md)を通じてトランザクションを発行する必要があります。そのため、資金の制御キーはノードに保存されず、ノードを実行するコンピュータが侵害された場合にリスクを大幅に低下します。
 
-## Format
+## JP-JP-
 
-This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+`JSON 2.0` API 形式を使用しています。JSON RPC 呼び出しの詳細については、[こちら](issuing-api-calls.md)を参照してください。
 
-## Endpoint
+## Endpoint-JP
 
 ```text
 /ext/keystore
 ```
 
-## Methods
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ### keystore.createUser
 
-Create a new user with the specified username and password.
+指定したユーザー名とパスワードで新しいユーザーを作成します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 keystore.createUser(
@@ -33,10 +33,10 @@ keystore.createUser(
 ) -> {success:bool}
 ```
 
-* `username` and `password` can be at most 1024 characters.
-* Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
+* `username` と`パスワード`は1024文字以上です。
+* `パスワード`が弱い場合、リクエストは拒否されます。`パスワード`は8文字以上で、大文字と小文字、数字と記号を含んでいます。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -50,7 +50,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -64,15 +64,15 @@ curl -X POST --data '{
 
 ### keystore.deleteUser
 
-Delete a user.
+ユーザーを削除します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -86,7 +86,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -98,9 +98,9 @@ curl -X POST --data '{
 
 ### keystore.exportUser
 
-Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
+ユーザーをエクスポートします。ユーザーは[`keystore.importUser`](keystore-api.md#keystore-importuser)で別のノードにインポートできます。ユーザーのパスワードは暗号化されたままです。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 keystore.exportUser(
@@ -115,9 +115,9 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` は、文字列のエンコーディングユーザデータの書式を指定します。"cb58" または "hex" でもできます。デフォルトは "cb58" です。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -146,9 +146,9 @@ curl -X POST --data '{
 
 ### keystore.importUser
 
-Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+`user`-JP`-```JP-
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 keystore.importUser(
@@ -161,9 +161,9 @@ keystore.importUser(
 ) -> {success:bool}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding` は、文字列のエンコーディングユーザーデータの書式を指定します。--デフォルトは "cb58" です。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -178,7 +178,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -192,15 +192,15 @@ curl -X POST --data '{
 
 ### keystore.listUsers
 
-List the users in this keystore.
+このキーストアのユーザーを一覧表示します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 keystore.ListUsers() -> {users:[]string}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -210,7 +210,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
