@@ -1,85 +1,85 @@
-# Transfer AVAX Between the X-Chain and P-Chain
+# X-Chain ve P-Chain Arasındaki AVAX Aktar
 
-## Introduction
+## Tanıştırma
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. Avalanche supports movement of AVAX between these chains, and in the future, Avalanche will support more generic atomic swaps between chains. In this tutorial, we’ll send AVAX tokens between the X-Chain and P-Chain.
+AVAX işaretleri on mevcut olup, traded, takas edilebilir, burada Primary Network'ü onaylarken ve akıllı sözleşmelerde kullanılabilecekleri veya benzin için ödeme yapılabilecek on de bulunur. Avalanche bu zincirler arasında of hareketini destekler ve gelecekte Avalanche zincirler arasındaki daha genel atom değişimlerini destekler. Bu özel ders için, X-Chain ve P-Chain. arasında AVAX işaretleri göndereceğiz.
 
-## Requirements
+## Gereklilik
 
-You've completed [Getting Started](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Başlatmayı](../nodes-and-staking/run-avalanche-node.md) bitirdin ve [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsun.
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
+to göndermek için biraz AVAX kullanmanız gerek! Borsada satın alarak gerçek AVAX elde edebilirsiniz ya da [AVAX Test](https://faucet.avax-test.network) from testnet AVAX alabilirsiniz ki bu Avalanche ile oynamak için ücretsiz ve kolay bir yoldur.
 
-## Transferring AVAX Using the Web Wallet
+## Web Cüzdanı kullanarak AVAX Transfer Ediliyor
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/), which is a non-custodial and secure way to access and move AVAX.
+to zincirler arasında aktarmanın en kolay yolu to taşımak için özel olmayan ve güvenli bir yol olan [Avalanche Cüzdan](https://wallet.avax.network/) kullanmaktır.
 
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+Avalanche Cüzdan kaynak kodu [burada](https://github.com/ava-labs/avalanche-wallet) bulunabilir.
 
-### Step 1 - Open the Avalanche Wallet
+### Adım 1 - Çığ Cüzdanını Aç
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
+Cüzdanınızı girmek için **giriş** cüzdanını seçin. Cüzdanı ana Avalanche ağı dışında bir ağa bağlamak için **to** seçin ve bağlanacak ağı seçin.
 
-### Step 2 - Log In to Your Wallet
+### İkinci Adım - Cüzdanına Gir.
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S.
+Cüzdanına özel anahtar, mnemonik anahtar cümlesi, anahtar dosyası veya Ledger Nano S'yi kullanarak erişebilirsiniz.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+Başarılı bir giriş yaptıktan sonra dengenizi görebilirsiniz, portföyü ve çeşitli diğer bilgilerinizi varlığınıza göre.
 
-### Step 3 - Go to the Cross Chain Tab
+### Adım 3 - Çapraz Zincir Tablosuna Git
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+Zincir arasındaki tokaların transfer edilmesinin fonksiyonelliği **Cross Chain** hesabında bulunmaktadır.
 
-### Step 4 - Enter Amount to Transfer
+### Adım 4 - Aktarıma Miktarı Girin
 
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+**Kaynak** Zinciri ve **Hedef** Zinciri için bir seçim sunacaksınız. X-Chain ve P-Chain seçin, sırasıyla X ve P dengelerinizi ve kaynaktan hedef zincirine aktarmak için miktarı girme için bir giriş alanı göreceksiniz.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
-Enter the amount you wish to transfer from the X-Chain to the P-Chain.
+from to aktarmak istediğiniz miktarı girin.
 
-### Step 5 - Confirm the Transaction
+### Adım 5 - İşlemi Onayla.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
-Press **Confirm**, and then **Transfer** to initiate the transfer.
+**Tetikte** ve sonra transferi başlatmak için **transferi** başlat.
 
-### Step 6 - Done!
+### - Adım 6.
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the P-Chain. The wallet will do both and show its the progress while doing so.
+Çapraz zincir transferi, iki adım işlemidir: ilk olarak from fonları aktarmak için bir işlem, diğeri ise to aktarmak için. Cüzdan ikisini de yapar ve bunu yaparken gelişimini gösterecektir.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
-That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to validate or delegate on the Avalanche network.
+İşte böyle! AVAX to AVAX transfer ettin! Şimdi onları Avalanche ağına doğrulamak veya delege yapmak için kullanabilirsiniz.
 
-### Transfer from P-Chain to X-Chain
+### from to aktarım
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+AVAX to geri döndürmek için ters yönde transfer yapmanız gerekir.
 
-Swap the source and destination chains by selecting them from the **Source** and **Destination** drop-down menu. The rest of the process is the same: enter the amount, confirm and transfer.
+Kaynak ve hedef zincirlerini **kaynak** ve hedef zincirlerini kaynak ve **hedef** indirme menüsünden seçerek değiştir. Sürecin geri kalanı aynı: miktarı girin, onaylayın ve aktarın.
 
-## Transferring from the X-Chain to P-Chain with API Calls
+## from to API Çağrıları ile aktarılıyor.
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+Avalanche ağına bir uygulama inşa ediyorsanız, transfer işlemi programlamalı olarak daha geniş bir işlevselliğin parçası olarak yapmak isteyebilirsiniz. Bunu AvalancheGo düğümündeki API'leri arayarak yapabilirsin. Diğer öğretmenler bir AvalancheGo düğümüne erişebileceğinizi varsayıyor on AVAX işaretleri ve düğümün anahtarında [oluşturulmuş](../../avalanchego-apis/keystore-api.md#keystorecreateuser) ve depolanan kullanıcı kimlik bilgilerine erişiminiz var.
 
-All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+Aşağıdaki tüm API çağrıları düğümün yerel olarak çalıştığını varsayar. (yani `127.0.1`\ dinleme ile ilgili olarak). Düğün, ana ağa, test ağı veya yerel bir ağa bağlı olabilir. Her durumda, API çağrıları ve yanıtlar aynı olmalıdır, adres formatları hariç. Düğüm yerel olmamalıdır; başka bir yere ev sahipliği yapan bir düğümle telefon edebilirsiniz.
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
+AVAX Avalanche Cüzdan kullanılarak transfer edildiğini fark etmiş olabileceğiniz gibi, bir çapraz zincir transfer iki işlem operasyonu:
 
-* Export AVAX from the X-Chain
-* Import AVAX to the P-chain
+* from AVAX aktar
+* AVAX P zincirine aktar
 
-### Step 1 - Export AVAX from the X-Chain
+### Adım 1 - from AVAX Aktar
 
-To export AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
+AVAX, dışa aktarmak için, X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) yöntemini çağırın.
 
-Your call should look like this:
+Araman şöyle olmalı:
 
 ```cpp
 curl -X POST --data '{
@@ -97,13 +97,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
+Kullanıcı denetimlerinizi ve `değiştirme` Adresi, bir P-Chain adresi adresi olarak adresi adresi adresi `olarak` gönderilecek herhangi bir değişiklik göndermek için adres adresidir. `Değiştirilmiş Addr` boş bırakabilirsiniz; eğer boş bırakırsanız, değişiklik kullanıcınız tarafından kontrol edilen bir adrese geri verilecektir\ (yeni bir P-Chain adresi oluşturma talimatları için [burada](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) bakın).
 
-Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
+İhracat ve ithalat işlemleri için bir işlem ücreti ödeyeceğinizi unutmayın. Bu örnekte, işlem ücretinin `.001` AVAX olduğunu varsayalım. Daha sonra yukarıdaki ihracat aslında `.006` AVAX; tüketir; `.005` to gider ve `.001` işlem ücreti olarak yanar.
 
-Make sure that the amount that you’re sending exceeds the transaction fee. Otherwise, when you import AVAX on the P-Chain, it will consume the transaction fee, and you’ll end up with _less_ AVAX on the P-Chain.
+Gönderdiğiniz miktarın işlem ücretinin çok olduğundan emin olun. Aksi takdirde, AVAX on aktardığınızda, işlem ücretini tüketir ve P-Chain, daha _az_ AVAX ile end
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {
@@ -116,7 +116,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Bu işlemin [`this`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus) çağırarak kabul edildiğini doğrulayabiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -129,7 +129,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Which shows our transaction is accepted:
+Bu da bizim işlemimizin kabul edildiğini gösteriyor:
 
 ```cpp
 {
@@ -141,7 +141,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) arayabiliriz. AVAX kullanıcımızın yaptığı bir adresten çıkarıldığını kontrol etmek için:
 
 ```cpp
 curl -X POST --data '{
@@ -155,13 +155,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`.005` AVAX in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+Düşürülen miktar, \(`.005` AVAX bu örnekteki aktarma ücreti artı işlem ücretidir. Eğer kullanıcınız birden fazla X-Chain adreslerini kontrol ediyorsa, AVAX herhangi bir kombinasyonundan gönderilmiş olabilir.
 
-### Step 2 - Import AVAX to the P-Chain
+### Adım 2 - AVAX to Aktar
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) method to finish the transfer.
+Transferimiz henüz bitmedi. Transferi bitirmek için P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) yöntemini aramalıyız.
 
-Your call should look like this:
+Araman şöyle olmalı:
 
 ```cpp
 curl -X POST --data '{
@@ -178,7 +178,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This returns the transaction ID:
+Bu işlem kimliğini gönderir:
 
 ```cpp
 {
@@ -191,7 +191,7 @@ This returns the transaction ID:
 }
 ```
 
-We can check that the transaction was accepted with:
+İşlemin kabul edildiğini kontrol edebiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -204,7 +204,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
+`Bu` da nakil tamamlandı anlamına geliyor. Adres dengesini de kontrol edebiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -217,7 +217,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {
@@ -235,20 +235,20 @@ The response should look like this:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`.004` AVAX\) less the transaction fee \(`.001` AVAX in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+Gördüğümüz denge, işlem ücreti \(`.004` AVAX\) bu örnekteki işlem ücreti \(`.001` AVAX daha az aktarılan miktardır. Şimdi, bu P-Chain adresi tarafından tutulan the Primary Network'ü onaylamak için bir hisse sağlayabiliriz.
 
-## Transferring from the P-Chain to X-Chain programmatically
+## from to aktarılıyor programlamalı
 
-Now, let’s move AVAX from the P-Chain back to the X-Chain.
+Şimdi, AVAX from to geri taşıyalım.
 
-Same as before, this is also a two transaction operation:
+Önceki gibi bu da iki işlem operasyonu:
 
-* Export from the P-Chain
-* Import to the X-Chain
+* from dışarıya aktar
+* to Aktar
 
-### Step 1 - Export AVAX from the P-Chain
+### Adım 1 - from AVAX Aktar
 
-To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
+Bu yüzden [`call`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax) arayın:
 
 ```cpp
 curl -X POST --data '{
@@ -265,13 +265,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-where `to` is the X-Chain address the AVAX is being sent to.
+X-Chain gönderdiği X-Chain `adresi` nerede olacak?
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+Bu işlem kimliğini geri verir, ve [`işlemin`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus) to başka bir çağrı ile işlendiğini kontrol edebiliriz. Gönderdiğiniz miktarın işlem ücretinin çok olduğundan emin olun.
 
-### Step 2 - Import AVAX to X-Chain
+### Adım 2 - AVAX to Aktar
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
+from to aktarmamızı bitirmek için [`to`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax) arayın:
 
 ```cpp
 curl -X POST --data '{
@@ -288,13 +288,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
+Bu adresin [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax) `çağrısında` belirtilen aynı adres olduğunu unutmayın.
 
-Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+Tıpkı önceki gibi, [`call`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) arayıp, fonların alındığını doğrulayabiliriz. Denge işlem ücreti eksi `.003` AVAX ile artmış olmalıydı.
 
-## Wrapping Up
+## Toplantı
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+İşte böyle! AVAX X-Chain ve P-Chain arasında bir ileri geri değiştirebilirsiniz. Hem Avalanche Cüzdan kullanarak, hem de Avalanche düğümünü kullanarak uygun API çağrılarını arayabilirsiniz.
 
-Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+Şimdi on işaretleri Primary Network'te [geçerli bir düğüm](../nodes-and-staking/add-a-validator.md) eklemede kullanabilirsiniz.
 
