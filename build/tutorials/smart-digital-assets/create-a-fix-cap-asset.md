@@ -1,20 +1,20 @@
-# Create a Fixed-Cap Asset
+# Düzeltilmiş Başlık Varlığı Oluştur
 
-## Introduction
+## Tanıştırma
 
-This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
+Bu özel ders Avalanche sabit kapak ve mantarlı bir varlık oluşturmak için nasıl kullanılabileceğini göstermektedir. Varlığın belirli bir miktarı varlığın başlatılmasında yaratılır ve daha sonra hiçbir zaman yaratılmamıştır.
 
-Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
+10 M hissesi olan bir gelir paylaşımı anlaşması (ISA\) olduğunu ve daha fazla hisse bulunmadığını varsayalım. Varlık birimi ISA'nın bir payını temsil eden bir varlık yaratalım.
 
-## Requirements
+## Gereklilik
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Bir Avalanche](../nodes-and-staking/run-avalanche-node.md) an tamamladınız. [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsunuz.
 
-## Create the Asset
+## Varlığı oluştur
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+[on](../../../learn/platform-overview/#exchange-chain-x-chain) varlığımız var, bu yüzden varlığımızı yaratmak için [X-Chain, X-Chain’s](../../avalanchego-apis/exchange-chain-x-chain-api.md) bir metodu olan `avm.createFixedCapAsset`, olarak adlandıracağız.
 
-The signature for this method is:
+Bu yöntemin imzası:
 
 ```cpp
 avm.createFixedCapAsset({
@@ -36,22 +36,22 @@ avm.createFixedCapAsset({
 }
 ```
 
-### Parameters
+### Parametreler
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `İsim` insan tarafından okunabilir bir isimdir. Eşsiz olması gerekmez.
+* `Sembol,` varlığın bir kısaltma sembolüdür. 0 ile 4 karakter arasında. Eşsiz olması gerekmez. Belki de atılmıştır.
+* `Bu` değerin dengelerinin kullanıcı arayüzleri tarafından nasıl gösterildiğini belirler. Eğer bu varlığın paydası 0, 100 ünite olarak gösterilecek. Eğer payda 1 100 birim ise bu varlığın 10.0 olarak gösterilecek. Eğer bu varlığın paydası 2, 100 ünite .100 olarak görüntülenir.
+* X-Chain üzerinde bir işlem gerçekleştirmek AVAX ile ödenen bir işlem ücreti gerektirir. `Kullanıcı adı` ve `parola` ücreti ödeyen kullanıcıyı belirtir.
+* `Başlat` in her element `bu adrese` in varlığın `miktarı` olduğunu belirtir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
 
-### Response
+### Yanıt
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `Varlık` yeni varlığın kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
+Şimdi de varlığı yaratmaya devam ediyoruz. Kontrol ettiğiniz adres ile `adresi` değiştirmek isteyeceksiniz. Böylece yeni yeni naneli varlıkların hepsini kontrol edebileceksiniz. Ve daha sonra bu ders için göndereceksiniz.
 
 ```cpp
 curl -X POST --data '{
@@ -76,7 +76,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the asset’s ID, which is also the ID of this transaction:
+Bu işlem aynı zamanda bu işlemin kimliği de içeriyor:
 
 ```cpp
 {
@@ -89,13 +89,13 @@ The response contains the asset’s ID, which is also the ID of this transaction
 }
 ```
 
-## Trade the Asset
+## Varlığı takas et
 
-### Check a balance
+### Denge kontrol et
 
-All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
+10.000.000 ünite varlık \(Shares\) `baş` sahiplerinde belirttiğimiz adres tarafından kontrol ediliyor.
 
-To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Bunu doğrulamak için [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +109,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+Cevap varlık yaratmamızın başarılı olduğunu ve beklenen adresin 10.000 hissesi olduğunu doğruluyor:
 
 ```cpp
 {
@@ -121,11 +121,11 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the asset
+### Varlığı gönder.
 
-Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
+Şimdi, [`Avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send) arayarak 100 hisse gönderelim.
 
-To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
+Hisseleri göndermek için hisseleri gönderen kullanıcıyı kontrol ettiğimizi kanıtlamalıyız. Bu nedenle bu sefer `kullanıcı adı` ve `parola` doldurmamız gerekecek.
 
 ```cpp
 curl -X POST --data '{
@@ -142,9 +142,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Check the transaction status
+### İşlem durumunu kontrol et
 
-The response from the above call should look like this:
+Yukarıdaki çağrıdan gelen yanıt şöyle olmalı:
 
 ```cpp
 {
@@ -157,9 +157,9 @@ The response from the above call should look like this:
 }
 ```
 
-`txID` is the ID of the `send` transaction we sent to the network.
+`TxID` şebekeye gönderdiğimiz `aktarmanın` kimliği.
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Bir iki saniye sonra işlem tamamlanacaktır. İşlemin durumunu [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -172,7 +172,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {
@@ -184,9 +184,9 @@ The response should look like this:
 }
 ```
 
-You might also see that `status` is `Pending` if the network has not yet finalized it yet.
+Eğer ağ henüz tamamlanmadıysa `durum` `bitiyor` demektir.
 
-Now let’s check the balance of the `to` address:
+Şimdi adresi dengesini `kontrol` edelim:
 
 ```cpp
 curl -X POST --data '{
@@ -200,7 +200,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+Cevap şöyle olmalı:
 
 ```cpp
 {
@@ -212,11 +212,11 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Toplantı
 
-In this tutorial, we:
+Bu özel ders için:
 
-* Called `createFixedCapAsset` to create a fixed cap asset
-* Called `getBalance` to check address balances
-* Called `send` to transfer a quantity of our asset
+* Sabit bir kap varlığı oluşturmak için `yaratılma`
+* Adres dengeleri kontrol etmek için `getBalance` adı
+* Varlığımızın miktarını aktarmak `için` çağrıldım.
 
