@@ -1,22 +1,22 @@
-# Ortelius Release Notes
+# Ortelius Yayınlama Notları
 
-## Ortelius Release Notes v1.1.1 \([View on GitHub](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)\)
+## Ortelius Release Notes [v1.1\(GitHub\ Görünüm](https://github.com/ava-labs/ortelius/releases/tag/v1.1.1)
 
-![Ortelius release notes v1.1.1.png](../../.gitbook/assets/Ortelius-release-notes-v1.1.1.png)
+![Ortelius notları v1.1.png](../../.gitbook/assets/Ortelius-release-notes-v1.1.1.png)
 
-Breaking changes:
+Kırma değişikliği:
 
-* None
+* Hiç yok
 
-Behavioral changes:
+Davranış değişikliği:
 
-* Round times to 1 second precisions
+* İkinci bir saniyeye kadar yuvarlak
 
-Other changes:
+Diğer değişiklikler:
 
-* Add opt-in support to not return genesis data
-* Add fixed/variable cap information to API
-* Add transaction fee data to API
+* Genesis verilerini geri getirmemek için opt desteği ekle
+* API'ye sabit / değişken kapak bilgilerini ekle
+* API'ye işlem ücreti verilerini ekle
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+Bu güncellemede yardım için, [Geliştirici](https://support.avalabs.org/en/collections/2618154-developer-faq) our takip edin, eğer hala sorunlarla uğraşıyorsanız [Discord](https://chat.avax.network) ile yardım için bize katılabilirsiniz.
 
