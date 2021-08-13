@@ -1,86 +1,86 @@
-# Postman collection
+# Posta koleksiyonu
 
-## What is Postman?
+## Postacı nedir?
 
-Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs. It is available as both an online tool and an application for Linux, MacOS and Windows. Postman allows you to quickly issue API calls and see the responses in a nicely formatted, searchable form.
+Postacı, geliştiriciler tarafından hızlı ve kolayca dinlenme, SOAP ve GraphQL isteklerini ve API'leri test etmek için kullanılan ücretsiz bir araçtır. Linux, MacOS ve Windows'un bir online araç ve bir uygulama olarak kullanılabilir. Postacı hızlı bir şekilde API çağrılarını yayınlamanızı ve cevapları iyi biçimlendirilmiş ve aranabilir bir formda görmenizi sağlıyor.
 
-We have made a Postman collection for [Avalanche](https://docs.avax.network), that includes all the public API calls that are available on [AvalancheGo instance](../release-notes/avalanchego.md), allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
+[Avalanche](https://docs.avax.network)[](../release-notes/avalanchego.md), bir Postacı koleksiyonu yaptık. Avalanchego örneğinde mevcut tüm API çağrılarını da içeren bir postane koleksiyonu yaptık. Bu da kısa sürede kodlarınızı alıp uzun ve karmaşık `kıvrık` komutları kopyalamak zorunda kalmadan yanıtları görmenizi sağlıyor.
 
-Along with the API collection, there is also the example Avalanche environment for Postman, that defines common variables such as IP address of the node, your Avalanche addresses and similar common elements of the queries, so you don't have to enter them multiple times.
+API koleksiyonu ile birlikte, Postacı için Avalanche ortamı da vardır, düğümün IP adresi gibi ortak değişkenleri tanımlar, Avalanche adresleriniz ve sorgunun benzer ortak unsurları gibi ortak değişkenleri tanımlar, bu yüzden onlara birden fazla kez girmek zorunda kalmazsınız.
 
-Combined, they will allow you to easily keep tabs on your node, check on its state and do quick queries to find out details about its operation.
+Birleştikçe, kolayca şifrenizi takip etmenize izin verecekler. Durumunu kontrol edin ve operasyonu hakkında detayları öğrenmek için hızlı sorular sorun.
 
-## Setup
+## Hazırlanın
 
-### Postman installation
+### Postacı kurulumu
 
-Postman can be installed locally or used as a web app. We recommend installing the application, as it simplifies operation. You can download Postman from its [website](https://www.postman.com/downloads/). It is recommended that you sign up using your email address as then your workspace can be easily backed up and shared between web app and the app installed on your computer.
+Postacı yerel olarak kurulabilir veya web uygulaması olarak kullanılabilir. Uygulamanın kurulmasını öneriyoruz, çünkü operasyonu basitleştiriyor. Postman [web sitesinden](https://www.postman.com/downloads/) indirebilirsin. Çalışma alanınız kolayca desteklenebilir ve web uygulaması ile bilgisayarınıza yüklenmiş uygulama arasında paylaşılabilir ve e-posta adresinizi kullanarak kayıt yaptırmanız tavsiye edilir.
 
-![Download Postman](../../.gitbook/assets/postman_01_download.png)
+![Postacı İndir](../../.gitbook/assets/postman_01_download.png)
 
-After you installed the application, run it. It will prompt you to create an account or log in. Do so. Again, it is not necessary, but recommended.
+Başvuruyu yükledikten sonra çalıştır. Bu sizi bir hesap oluşturmaya veya giriş yapmaya teşvik edecek. Öyle yap. Yine gerek yok ama önerildi.
 
-### Collection import
+### Koleksiyon içeriye aktarma
 
-Select `New workspace` from Workspaces tab and follow the prompts to crate a new workspace. This will where the rest of the work will be done.
+Workspace sekmesinden yeni `çalışma` alanını seçin ve yeni bir çalışma alanı the için gerekli şartları takip edin. Bu işin geri kalanının yapılacağı yer olacak.
 
-![New workspace](../../.gitbook/assets/postman_02_workspace.png)
+![Yeni çalışma alanı](../../.gitbook/assets/postman_02_workspace.png)
 
-We're ready to import the collection. On the header of the Worskspaces tab select `New` and switch to `Link` tab.
+Koleksiyonu ithal etmeye hazırız. Worskspaces sekmesinin başlığında `Yeni` seçin ve `Link` sekmesini geçin.
 
-![Import collection](../../.gitbook/assets/postman_03_import.png)
+![Koleksiyonu içeriye aktar.](../../.gitbook/assets/postman_03_import.png)
 
-There, in the URL input field paste the link to the collection:
+Burada, URL giriş alanı içinde koleksiyona bağlanıyor:
 
 ```text
 https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Avalanche.postman_collection.json
 ```
 
-Postman will recognize the format of the file content and offer to import the file as a collection. Complete the import. Now you will have Avalanche collection in your Workspace.
+Postacı dosya içeriğinin biçimini tanıyacak ve dosyayı bir koleksiyon olarak aktarmayı teklif edecek. İthalatı tamamla. Şimdi Avalanche koleksiyonu çalışma alanınızda olacak.
 
-![Collection content](../../.gitbook/assets/postman_04_collection.png)
+![Koleksiyon içeriği](../../.gitbook/assets/postman_04_collection.png)
 
-### Environment import
+### Çevre aktarımı
 
-Next, we have to import the environment variables. Again, the header of the Worskspaces tab select `New` and switch to `Link` tab. this time, paste the link to the environment JSON:
+Sonra da çevre değişkenlerini aktarmalıyız. of başlığı `Yeni` sekmeyi seçer ve `Link` sekmesini geç. Bu sefer to bağlanın:
 
 ```text
-https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example_Avalanche_Environment.postman_environment.json
+https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example-Avalanche-Environment.postman_environment.json
 ```
 
-Postman will recognize the format of the file:
+Postacı dosyanın biçimini tanıyacak:
 
-![Environment import](../../.gitbook/assets/postman_05_environment.png)
+![Çevre aktarımı](../../.gitbook/assets/postman_05_environment.png)
 
-Import it to your workspace. Now, we will need to edit that environment to suit the actual parameters of your particular installation. These are the parameters that differ from the defaults in the imported file.
+Çalışma alanına aktar. Şimdi, bu çevreyi düzenlememiz gerekiyor. Özel kurulumunuzun gerçek parametrelerine uygun olarak. Bunlar aktarılan dosyanın öntanımlı parametrelerinden farklı parametrelerdir.
 
-Click the eye icon next to the environment dropdown:
+Çevre indiriminin yanına göz simgesini tıklayın:
 
-![Environment content](../../.gitbook/assets/postman_06_variables.png)
+![Çevre içeriği](../../.gitbook/assets/postman_06_variables.png)
 
-Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node \(change both the `initial` and `current` values\). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/command-line-interface.md#http-server).
+Öntanımlı ayarları değiştirmek için `Düzenleme` düğmesini seçin. En az olarak, `sunucunun` değişkeninin değeri olan düğümünün IP adresini değiştirmeniz gerekiyor. Bunu of IP olarak değiştirin (hem `başlangıç` hem de `mevcut` değerleri değiştirin). Ayrıca, düğümünüz Postacı yüklediğiniz makine üzerinde çalışmıyorsa your uygun [komut satırı](../references/command-line-interface.md#http-server) seçeneğini kontrol ederek API limanındaki bağlantıları dışarıdan kabul ettiğinden emin olun.
 
-Now we sorted everything out, and we're ready to query the node.
+Şimdi her şeyi çözdük ve düğümleri sorgulamaya hazırız.
 
-## Making API calls
+## API araması yapıyorum.
 
-Open one of the API call groups, for example `Health`. Double-click `getLiveness` call:
+API çağrısı gruplarından birini aç, örneğin `Sağlık`. Çift tıklama `getLiveness` çağrısı:
 
-![API call](../../.gitbook/assets/postman_07_making_calls.png)
+![API çağrısı](../../.gitbook/assets/postman_07_making_calls.png)
 
-You will see that format of the call uses the `http`, `host` and `port` environment variables. Click `Send`. Request will be sent, and soon you will see the response, in the `Body` tab in the `Response`:
+Bu çağrının biçimi `http`, `ev sahibi` ve `port` çevre değişkenlerini kullanır. `Tıklayın`. İstek gönderilecek ve yakında cevabı görebilirsiniz. `Ceset``` sekmesinde:
 
-![Response](../../.gitbook/assets/postman_08_response.png)
+![Yanıt](../../.gitbook/assets/postman_08_response.png)
 
-To see the actual call and the variables that are sent to the node, switch to `Body` tab in the API call tabs. There you can quickly change the variables to see the response to different queries.
+Gerçek çağrıyı ve düğüme gönderilen değişkenleri görmek için, API arama sekmelerinde `Vücut` Sekme geçimini sağlar. Farklı sorulara yanıt vermek için değişkenleri çabucak değiştirebilirsiniz.
 
-## Conclusion
+## Sonuç
 
-If you completed the tutorial, you are now able to quickly issue API calls to your node without messing with the curl commands in the terminal. This allows you to quickly see the state of your node, track changes or double-check the health or liveness of your node.
+Eğer özel ders tamamladıysanız, hemen API çağrılarını terminaldeki kıvırcık komutları ile uğraşmadan iletebilirsiniz. Bu your durumunu çabucak görmenizi sağlar, değişimlerinizi takip edin, ya da of sağlığını veya yaşam durumunu iki kez kontrol edin.
 
-## Contributing
+## Katkılar
 
-We're hoping to continuously keep this collection up-to-date with the [Avalanche APIs](https://docs.avax.network/build/avalanchego-apis), and also add [data visualizations](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data). If you're able to help improve the Avalanche Postman Collection in any way, first create a feature branch by branching off of `master`, next make the improvements on your feature branch and lastly create a [pull request](https://github.com/ava-labs/avalanche-docs/pulls) to merge your work back in to `master`.
+Bu koleksiyonu [Avalanche](https://docs.avax.network/build/avalanchego-apis) API'lerle sürekli olarak sürdürmeyi ve [veri görüntüleri](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data) eklemek istiyoruz. Eğer Avalanche Postacı Koleksiyonunu geliştirmeye herhangi bir şekilde yardım edebilirseniz, önce `ustadan` ayrılarak bir özellik dalı oluşturun, sonra da özellikli dalınızda iyileştirmeler yapın ve son olarak çalışmanızı `yeniden yeniden` birleştirmek için [bir çekme isteği](https://github.com/ava-labs/avalanche-docs/pulls) yaratın.
 
-If you have any other questions or suggestions, come [talk to us](https://chat.avalabs.org/).
+Başka bir sorunuz ya da öneriniz varsa gelin [bizimle konuşun](https://chat.avalabs.org/).
 
