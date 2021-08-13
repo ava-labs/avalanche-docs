@@ -1,24 +1,24 @@
-# Add Avalanche to MetaMask programmatically
+# MetaMask Programlamalı Olarak Çığ Ekle
 
-Adding new networks to Metamask is not a trivial task for people that are not technically savvy, and it can be error prone. To help easier onboarding of users to your application it is useful to simplify that process as much as possible. This tutorial will show how to build a simple button in your front-end application that will automate the process of adding the Avalanche network to MetaMask.
+to yeni ağlar eklemek teknik olarak somut olmayan insanlar için önemsiz bir görev değildir ve hata eğilimi olabilir. Kullanıcıların uygulamanıza daha kolay yüklenmesine yardımcı olmak için bu süreci mümkün olduğunca basitleştirmek yararlıdır. Bu özel ders ön uç uygulamasında nasıl basit bir düğme inşa edileceğini gösterecektir. Böylece Avalanche ağı to ekleme sürecini otomatik olarak ayarlayacak.
 
 ## EIP-3038 & MetaMask
 
-[EIP-3038](https://eips.ethereum.org/EIPS/eip-3085) is an [Ethereum Improvement Proposal](https://eips.ethereum.org/) that defines an RPC method for adding Ethereum-compatible chains to wallet applications.
+[EIP-3038](https://eips.ethereum.org/EIPS/eip-3085), Cüzdan uygulamalarına Ethereum uyumlu zincirler eklemek için bir RPC metodu tanımlayan [Ethereum Geliştirme](https://eips.ethereum.org/) Teklifidir.
 
-Since March 2021 Metamask has implemented that EIP as part of their Metamask [Custom Networks API](https://consensys.net/blog/metamask/connect-users-to-layer-2-networks-with-the-metamask-custom-networks-api/).
+Mart 2021'den beri Metamask Metamask [Custom Networks API](https://consensys.net/blog/metamask/connect-users-to-layer-2-networks-with-the-metamask-custom-networks-api/)'nin bir parçası olarak EIP uyguladı.
 
-Let's see how it works.
+Bakalım nasıl olacak.
 
-## Data structures
+## Veri yapıları
 
-To add the Avalanche network to Metamask, we need to prepare the data structures that will be contain all the necessary data.
+Avalanche ağını to eklemek için gerekli tüm verileri içerecek veri yapılarını hazırlamalıyız.
 
-Main network data:
+Ana ağ verileri:
 
 ```javascript
 export const AVALANCHE_MAINNET_PARAMS = {
-    chainId: '0xa86a', // A 0x-prefixed hexadecimal chainId
+    chainId: '43114',
     chainName: 'Avalanche Mainnet C-Chain',
     nativeCurrency: {
         name: 'Avalanche',
@@ -30,11 +30,11 @@ export const AVALANCHE_MAINNET_PARAMS = {
 }
 ```
 
-Test network data:
+Test ağ verileri:
 
 ```javascript
 export const AVALANCHE_TESTNET_PARAMS = {
-    chainId: '0xa869', // A 0x-prefixed hexadecimal chainId
+    chainId: '43113',
     chainName: 'Avalanche Testnet C-Chain',
     nativeCurrency: {
         name: 'Avalanche',
@@ -46,9 +46,9 @@ export const AVALANCHE_TESTNET_PARAMS = {
 }
 ```
 
-## Adding the network
+## Ağ ekliyor
 
-To add the network to MetaMask, we need to call the `wallet_addEthereumChain` method, exposed by the web3 provider.
+Ağı to eklemek için web3 sağlayıcısı tarafından açığa çıkan `wallet_addEthereumChain` yöntemini çağırmalıyız.
 
 ```javascript
   function addAvalancheNetwork() {
@@ -65,25 +65,25 @@ To add the network to MetaMask, we need to call the `wallet_addEthereumChain` me
   }
 ```
 
-Where `injected` is initialized as a `web3-react/injected-connector` used to interface with MetaMask APIs. Usage for other popular web frameworks is similar. Replace `AVALANCHE_MAINNET_PARAMS` with `AVALANCHE_TESTNET_PARAMS` if you want to add the test network.
+`Enjekte edilen` yerde MetaMask API'leri arayüze sokmak için kullanılan `bir web3 reaksiyon/enjekte edilmiş konektör` olarak başlatılır. Diğer popüler web çerçeveleri için kullanım benzerdir. `AVALANCHE_MAINNET_PARAMS` test ağını eklemek istiyorsanız `AVALANCHE_TESTNET_PARAMS` ile değiştirin.
 
-Typical usage pattern would be to expose a button calling that method if you get `Wrong Network` or `Error connecting` errors when attempting to establish a connection to MetaMask.
+Tipik kullanım deseni, to bağlantı kurmaya çalışırken yanlış `Ağ` veya hata `bağlanması` durumunda bu metodu arayan bir düğmeyi ortaya çıkarmak olacaktır.
 
-## User experience
+## Kullanıcı deneyimi
 
-When users first come to your dapp's website they need to approve connection to MetaMask. After they do that, if you don't detect successful web3 network connection, you can present them with a dialog asking them to confirm switch to a new network:
+Kullanıcılar dapp's web sitesine ilk geldiğinde to bağlantıyı onaylamak zorundalar. Bunu yaptıktan sonra, başarılı bir web ağ bağlantısı tespit edemezseniz yeni bir ağa geçişi onaylamalarını isteyen bir diyalog ile sunabilirsiniz:
 
-![wrong network](../../../.gitbook/assets/add-avalanche-to-metamask-01-wrong-network.png)
+![Yanlış ağ](../../../.gitbook/assets/add-avalanche-to-metamask-01-wrong-network.png)
 
-If they press the button, they are shown a dialog from MetaMask asking for approval to add the new network:
+Düğmeye basarlarsa, from yeni ağ eklemek için onay isteyen bir diyalog gösterilir:
 
-![add a network](../../../.gitbook/assets/add-avalanche-to-metamask-02-add-network.png)
+![Bir ağ ekle](../../../.gitbook/assets/add-avalanche-to-metamask-02-add-network.png)
 
-If they approve, your app will be connected to the Avalanche network. Very easy, no need for any data entry, no chance of wrong data entry. And that's it, users are ready to interacy with your dapp!
+Eğer onaylarlarsa, uygulamanız Avalanche ağına bağlanacaktır. Çok kolay, herhangi bir veri girişi veya yanlış veri girişi için hiç bir şeye gerek yok. Ve bu kadar, kullanıcılar your etkileşime girmeye hazır!
 
-## Conclusion
+## Sonuç
 
-Dapps users are often not very technically sophisticated and onboarding them needs to be as seamless and easy as possible. Manually adding a new network to MetaMask is a hurdle than a certain percentage of your potential users will not be able to clear. Removing that requirement is a simple step that will enhance their experience and enable more users to get to actually use your dapp.
+Dapps kullanıcıları genellikle teknik olarak çok sofistike değildir ve onlara binmek mümkün olduğunca dikişsiz ve kolay olmalıdır. to yeni bir ağ eklemek potansiyel kullanıcılarının belli bir yüzdesinden daha büyük bir engeldir. Bu gereksinimi kaldırmak, deneyimlerini artıracak ve daha fazla kullanıcının your kullanmasını sağlayacak basit bir adımdır.
 
-If you have any questions, problems, or ideas on how to improve, or simply want to join our developer community, you can contact us on our [Discord](https://chat.avalabs.org/) server.
+Eğer herhangi bir sorunuz varsa, sorununuz ya da geliştirici topluluğumuza katılmak istiyorsanız [Discord](https://chat.avalabs.org/) sunucumuzla iletişime geçebilirsiniz.
 
