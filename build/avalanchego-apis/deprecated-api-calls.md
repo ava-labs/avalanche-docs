@@ -1,16 +1,16 @@
 ---
 description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+  Bu sayfa API yöntemleri, argümanlar ve yanıtları listeliyor ve gelecekteki bir sürümde kaldırılabilir veya değiştirilecek.
+
 ---
 
-# Deprecated API Calls
+# Alçak API Çağrıları
 
-## P-Chain API
+## P- Chain API
 
-### `getCurrentValidators`
+### `Geçerli Geçerliler`
 
-In v1.0.0, the signature was:
+V1.0.0 yılında imza:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -46,7 +46,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
+Daha sonraki sürümlerde imza aşağıdaki gibiydi. Her validator delegelerinin bir listesini içerdiğini unutmayın. Lütfen şimdiki davranışların bir sonraki notunu görün.
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +94,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+V1.0.6'dan bu yana üst düzey `delegators` alanı kaldırıldı. İmza şu anda:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -130,15 +130,15 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-### `getTxStatus`
+### `getTxStatus al`
 
-Before v1.0.4, the signature was:
+V1.0.4 öncesinde imza:
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+V1.0.4 bir argüman ekledi `buna sebep dahil`. `Bu` yöntemin yanlış veya sağlanması yoksa bu yöntemin tepkisi eskisi gibi oldu. `Eğer` doğruysa, bu yöntemin cevabı yeni bir biçime sahipti:
 
 ```cpp
 {
@@ -147,7 +147,7 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+Bu nedenle bu işlem `düşüşünün` nedeni `nedendir.` `Sebep` sadece `durum` düşürülürse mevcut olur.
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+V1.0.6'dan beri, `içerik` argümanı görmezden gelinir ve bu yöntemin cevabı her zaman yeni formatta geçer.
 
