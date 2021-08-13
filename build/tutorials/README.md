@@ -1,18 +1,14 @@
-# Tutorials
+# JPJ-PJ-PJ
 
-Check out all of the tutorials that will help you build on Avalanche. We would be thrilled if you would like to contribute to our [GitHub](https://github.com/ava-labs) or suggest a tutorial on [Discord](https://chat.avax.network)!
+Avalanche上で構築するのに役立つチュートリアルすべてをチェックしてください。[GitHub](https://github.com/ava-labs)に貢献したい、または[Discord](https://chat.avax.network)のチュートリアルを提案したいなら、私たちは興奮しています!
 
-{% page-ref page="platform/" %}
-
-{% endpage-ref %}
+--
 
 {% page-ref page="nodes-and-staking/" %}
 
-{% endpage-ref %}
+{% page-ref page="smart-contracts/"%}
 
-{% page-ref page="smart-contracts/" %}
+--
 
-{% endpage-ref %}
 
-{% page-ref page="smart-digital-assets/" %}
 
