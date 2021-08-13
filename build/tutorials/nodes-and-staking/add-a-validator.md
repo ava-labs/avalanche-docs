@@ -1,28 +1,26 @@
-# Add a Validator
+# Doğrulayıcı Sitesi için bir düğüm ekle
 
-## Introduction
+## Tanıştırma
 
-The [Primary Network](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](https://avalanche.gitbook.io/avalanche/learn/platform-overview). In this tutorial, we’ll add a node to the Primary Network and a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) on Avalanche.
+[Ana Ağ](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) Avalanche platformuna bağlı olup Avalanche [yerleşik blok zincirlerini](https://avalanche.gitbook.io/avalanche/learn/platform-overview) onaylar. Bu özel derslerde, Primary ana ağa bir düğüm ve [bir alt ağ](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) ekleyeceğiz.
 
-The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
+P-Chain on metadata yönetiyor. Bu da hangi düğümlerin hangi alt ağların var olduğu ve hangi alt ağların hangi blok zincirlerini doğruladığını içerir. Bir doğrulama eklemek için, to [işlemler](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) yayınlayacağız.
 
-{% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
-{% endhint %}
+{% ipuçları style="danger" % } Bir kere bir geçiş kartı eklemek için işlem yapınca parametreleri değiştirmenin yolu olmadığını unutmayın. **your erken kaldıramazsınız, ya da kazık miktarını, düğümünü veya ödül adresi değiştiremezsiniz.** Lütfen aşağıdaki API çağrılarında doğru değerleri kullandığınızdan emin olun. Emin değilseniz, [Geliştirici FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) kontrol edin veya [Discord](https://chat.avalabs.org/) için yardım isteyin. {% endhint }
 
-## Requirements
+## Gereklilik
 
-You've completed [Run an Avalanche Node](run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+[Bir Avalanche](run-avalanche-node.md) an tamamladınız. [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsunuz. Bu özel ders için, API çağrıları yapmak için [Avalanche’s Postacı koleksiyonunu](https://github.com/ava-labs/avalanche-postman-collection) kullanıyoruz.
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
+Düğününüzün iyi bağlantılı olduğundan emin olmak için, your hata portuna TCP trafiğini öntanımlı `olarak` gönderebileceğinden emin olun ve komut satırı argümanı `well-connected, PUBLIC IP` here] ile started başlattığınızdan emin olun. Bunlardan birini yapamayınca ödül kazanmanı tehlikeye atabilir.
 
-## Add a validator with Avalanche Wallet
+## Avalanche Cüzdan ile bir doğrulayıcı ekle
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+Önce [Avalanche Cüzdan](https://wallet.avax.network) kullanarak bir onaylayıcı olarak düğümünü nasıl ekleyeceğini göstereceğiz.
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+[`node’s`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid)
 
-![getNodeID postman](../../../.gitbook/assets/getNodeID-postman.png)
+![getNodeID postman kap](../../../.gitbook/assets/getNodeID-postman.png)
 
 ```cpp
 curl -X POST --data '{
@@ -32,7 +30,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+Cevap düğümünün kimliğine sahip:
 
 ```cpp
 {
@@ -44,39 +42,39 @@ The response has your node’s ID:
 }
 ```
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
+[Cüzdanı](https://wallet.avax.network/) aç ve `Earn` hesabını kullan. `Doğrulama` Eklemeyi seç.
 
-![Web wallet earn tab](../../../.gitbook/assets/web-wallet-earn-tab.png)
+![Web cüzdanı hak ediyor.](../../../.gitbook/assets/web-wallet-earn-tab.png)
 
-Fill out the staking parameters. They are explained in more detail below. When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+Parametreleri doldurun. Aşağıda daha detaylı olarak açıklanır. Tüm eklenti parametrelerini doldurup onları iki kez kontrol ettiğinizde `Tıklayın`. İzleme süresi en az 2 hafta olduğundan, delege ücret oranı % 2 ve en az 2,000 AVAX gözetliyorsunuz.
 
-{% page-ref page="../../../learn/platform-overview/staking.md" %}
+{% page-ref page="... /.. /../learn/platform-overview/staking.md" }
 
-![Earn validate](../../../.gitbook/assets/earn-validate.png)
+![Geçerli kazan.](../../../.gitbook/assets/earn-validate.png)
 
-You should see this success message, and your balance should be updated.
+Bu başarı mesajını görmeniz gerek. Denge güncellenmeli.
 
-![Your validation transaction is sent](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
+![Doğrulama işleminiz gönderildi](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifies that our transaction was accepted.
+Platformu çağırmak [`için onay verenler`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) işlemimizin kabul edildiğini doğruluyor.
 
-![getPendingValidators postman](../../../.gitbook/assets/getPendingValidators-postman.png)
+![Geçerli Geçerli Postacı](../../../.gitbook/assets/getPendingValidators-postman.png)
 
-Go back to the `Earn` tab, and click `Estimated Rewards`.
+`Earn` hesabına geri dön ve `Tahmini Ödülleri` tıkla.
 
-![Earn, validate, delegate](../../../.gitbook/assets/earn-validate-delegate.png)
+![Kazan, onayla, delege](../../../.gitbook/assets/earn-validate-delegate.png)
 
-Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+Geçerli bir başlangıç süresi geçtikten sonra, kazanabileceği ödülleri görebilirsiniz, başlangıç zamanı, son zamanı ve geçerlilik süresi yüzdesi.
 
-![Estimated rewards](../../../.gitbook/assets/estimated-rewards.png)
+![Tahmini ödüller](../../../.gitbook/assets/estimated-rewards.png)
 
-That’s it!
+İşte böyle!
 
-## Add a validator with API calls
+## API çağrıları ile bir doğrulayıcı ekle
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+Ayrıca API çağrıları yaparak the bir düğüm ekleyebiliriz. Birincil Ağ düğümünü eklemek için [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator). Verici arayacağız.
 
-This method’s signature is:
+Bu yöntemin imzası:
 
 ```cpp
 platform.addValidator(
@@ -94,11 +92,11 @@ platform.addValidator(
 ) -> {txID: string}
 ```
 
-Let’s go through and examine these arguments.
+Hadi gidip bu tartışmaları inceleyelim.
 
-`nodeID`
+`NodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Bu validator giriş numarası. Düğününün kimliğini almak için bilgiyi ara. [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +107,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+Cevap düğümünün kimliğine sahip:
 
 ```cpp
 {
@@ -121,33 +119,33 @@ The response has your node’s ID:
 }
 ```
 
-`startTime` and `endTime`
+`Başlangıç zamanı` ve `son zamanı`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+Birincil Ağa katılmak için bir işlem yayınladığında, \(onaylamaya başlayacaklar\ (onaylamaya başlayacaklar) ve \(onaylanmayı bırakacaklar) \) Birincil Ağı onaylayabilecek en düşük süre, 24 saat ve maksimum süresi bir yıldır. İlk Ağ'a ayrıldıktan sonra tekrar girebilir, sadece maksimum _süreklilik_ bir yıldır. `Başlangıç ve` `son,` birincil Ağ'ı onaylamayı bırakan Unix zamanıdır. `Başlangıç` zamanı işlemlerin yapıldığı zamana göre gelecekte de bir eş zamanlı olmalıdır.
 
-`stakeAmount`
+`Kazık Miktarı`
 
-In order to validate the Primary Network, one must stake AVAX. This parameter defines the amount of AVAX staked.
+Ana Ağ'ı onaylamak için, the kazık must Bu parametre of çarptığı miktarı tanımlar.
 
-`rewardAddress`
+`Ödül ödülü`
 
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddress`. The original stake will be sent back to an address controlled by `username`.
+Bir onaylayıcı Primary Network'ü onaylamayı bıraktığında, eğer yeterince tepki verdikleri ve doğru olan bir ödül alırlar. Bu işaretler `ödül için` gönderiliyor. Orijinal kazık `kullanıcı adı` tarafından kontrol edilen bir adrese geri gönderilecek.
 
-A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
+Bir validator’s kazığı asla kesilmez, davranışları ne olursa olsun, onlar her zaman onaylandıktan sonra hisselerini geri alırlar.
 
-`changeAddr`
+`Addr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Bu işlem sonucunda meydana gelen herhangi bir değişiklik bu adrese gönderilecek. Bu alanı boş bırakabilirsiniz; eğer bırakırsanız, kullanıcı denetlediğiniz adreslerden birine değişim gönderilecektir.
 
-`delegationFeeRate`
+`Delege delegationFeeRate`
 
-Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
+Avalanche kazık delegeleri için izin verir. Bu parametre diğer kişiler onlara kazığı verirken bu doğrulayıcı ücretin yüzde ücretidir. Örneğin, eğer delege `delegationFeeRate` `1.2345` ise ve birisi bu onaylama sürecine delege devresinin bittiği zaman, ödülün %1.2345'i the gider ve geri kalanı delege olur.
 
-`username` and `password`
+`Kullanıcı adı` ve `parola`
 
-These parameters are the username and password of the user that pays the transaction fee, provides the staked AVAX, and to whom the staked AVAX will be returned.
+Bu parametreler, işlem ücretini ödeyen kullanıcının kullanıcı adı ve parolası olan ve parolası olan of sağlar.
 
-Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
+Şimdi alışverişi yapalım. Unix saatini hesaplamak için kabuk komuta `tarihini` kullanıyoruz. Gelecekte sırasıyla `başlangıç zamanı` ve `son` zamanların değerleri olarak kullanacağız. \\ (Not: Eğer bir you’re `$($'la tarih ile tarih``` ile tarih ile değiştirin. `Gdate` yüklenmemişse, `çekirdek` kullanım yapınız. \) Bu örnekte 2,000 AVAX \(2 x 1012 nAVAX\) kazığa çıkarız.
 
 ```cpp
 curl -X POST --data '{
@@ -168,7 +166,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+Cevap işlem kimliği ve değişimin gittiği adres ile birlikte işlem kimliğine sahiptir.
 
 ```cpp
 {
@@ -181,7 +179,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Alışveriş durumunu [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -194,7 +192,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+Bu durum `işlemin` başarılı olduğu anlamına gelir. Platformu çağırabiliriz. [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) çağırabilir ve düğümün şu anda ana ağın beklemekte olan geçerli olan setinde olduğunu görebiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -205,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+Tepki de eklediğimiz düğümleri içermeli:
 
 ```cpp
 {
@@ -218,23 +216,23 @@ The response should include the node we just added:
                 "endtime": "1584121156",
                 "stakeAmount": "2000000000000",
             }
-        ] 
+        ]
     },
     "id": 1
 }
 ```
 
-When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
+Zaman `1584021450`'ye ulaştığında, bu düğüm, birincil Ağ'ı onaylamaya başlayacak. `1584121156` yılına ulaştığında bu düğüm, birincil Ağ'ın onaylanmasını durduracaktır. Uzatılmış AVAX `kullanıcı adı` tarafından kontrol edilen bir adrese geri verilecek ve eğer ödül `verilecekse, ödüller ödül adrese` verilecek.
 
-## Adding a Subnet Validator
+## Subnet Doğrulayıcı Ekle
 
-### Issuing a Subnet Validator Transaction
+### Subnet Doğrulayıcı İşletme Başlatılıyor
 
-Now let’s add the same node to a subnet. The following will make more sense if you’ve already done this [tutorial on creating a Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Right now you can only add validators to subnets with API calls, not with Avalanche Wallet.
+Şimdi aynı düğümü bir alt ağa ekleyelim. Eğer bir [Subnet yaratma üzerine](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet) bu ders verdiyseniz aşağıdaki anlamlı olacaktır. Şu anda sadece API çağrılarına onay verenleri ekleyebilirsiniz, Avalanche Cüzdan ile değil.
 
-Suppose that the Subnet has ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, and that `username` holds at least 2 control keys.
+Subnet nTd2Q2nTLp8M9qv2VKHMvYhtNWXX7aTPa4SMEK7x7yJHbccWvr, eşik `2` ve `kullanıcı adı` en az 2 kontrol anahtarı olduğunu varsayalım.
 
-To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
+Doğrulayıcı eklemek için, API Yöntemi [`API`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator) the arayacağız. İmzası :
 
 ```cpp
 platform.addSubnetValidator(
@@ -251,33 +249,33 @@ platform.addSubnetValidator(
 ) -> {txID: string}
 ```
 
-Let’s examine the parameters:
+Parametreleri inceleyelim:
 
-`nodeID`
+`NodeID`
 
-This is the node ID of the validator being added to the subnet. **This validator must validate the Primary Network for the entire duration that it validates this Subnet.**
+Bu dosya alt ağa eklenecek validator düğümü. **Bu doğrulayıcı, for geçerli kılacak tüm süreç için birincil Ağ'ı onaylamak zorundadır.**
 
 `subnetID`
 
-This is the ID of the subnet we’re adding a validator to.
+Bu alt ağ kimlik the eklediğimiz bir kimlik
 
-`startTime` and `endTime`
+`Başlangıç zamanı` ve `son zamanı`
 
-Similar to above, these are the Unix times that the validator will start and stop validating the subnet. `startTime` must be at or after the time that the validator starts validating the Primary Network, and `endTime` must be at or before the time that the validator stops validating the Primary Network.
+Yukarıya göre bunlar geçerli olan Unix saatleri, subnetin geçersiz sayılmasını durduracaktır. `Başlangıç zamanı` birincil Ağ'ı onaylamaya başladığı zaman veya sonra olmalıdır, ve `son zaman` geçerli olan geçerli olan birincil Ağ'ı onaylamayı durdurmadan önce veya zaman zaman olmalıdır.
 
-`weight`
+`Kilo olsun`
 
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus.
+Bu validator’s uzlaşma için örnek ağırlığı. Eğer validator’s ağırlığı 1 ve subnet içindeki tüm of kümülatif ağırlığı 100 ise, bu doğrulayıcı consensus. sırasında her 100 örnekte yaklaşık 1 tane dahil edilir. Alt ağ içindeki tüm of kümülatif ağırlığı en azından `kar örnekleri olmalıdır`. Örneğin, alt ağda sadece bir doğrulayıcı varsa, ağırlığı en az kar `snow-sample-size` (varsayılan 20\) olmalıdır. Bir validator's ağırlığı doğrulayıcı iken değiştirilemez o yüzden uygun bir değer kullanın.
 
-`changeAddr`
+`Addr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+Bu işlem sonucunda meydana gelen herhangi bir değişiklik bu adrese gönderilecek. Bu alanı boş bırakabilirsiniz; eğer bırakırsanız, kullanıcı denetlediğiniz adreslerden birine değişim gönderilecektir.
 
-`username` and `password`
+`Kullanıcı adı` ve `parola`
 
-These parameters are the username and password of the user that pays the transaction fee. This user must hold a sufficient number of this Subnet’s control keys in order to add a validator to this Subnet.
+Bu parametreler, işlem ücretini ödeyen kullanıcının kullanıcı adı ve parolası olarak kullanılır. Bu kullanıcı, Subnet’s bir doğrulayıcı eklemek için Subnet’s kontrol anahtarlarının yeterli sayıda bulundurmalıdır.
 
-We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+Unix saatini hesaplamak için kabuk komuta `tarihini` kullanıyoruz. Gelecekte sırasıyla `başlangıç zamanı` ve `son` zamanların değerleri olarak kullanacağız. \\ (Not: Eğer bir you’re `$($'la tarih ile tarih``` ile tarih ile değiştirin. `Gdate` yüklenmemişse, `çekirdek` kullanım yapınız. \)
 
 ```cpp
 curl -X POST --data '{
@@ -288,7 +286,7 @@ curl -X POST --data '{
         "subnetID":"nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr",
         "startTime":'$(date --date="10 minutes" +%s)',
         "endTime":'$(date --date="30 days" +%s)',
-        "weight":1,
+        "weight":30,
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"USERNAME",
         "password":"PASSWORD"
@@ -297,7 +295,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+Cevap işlem kimliği ve değişimin gittiği adres ile birlikte işlem kimliğine sahiptir.
 
 ```cpp
 {
@@ -310,7 +308,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+Alışveriş durumunu [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -323,7 +321,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
+Bu durum `işlemin` başarılı olduğu anlamına gelir. [`Platformu`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) çağırabiliriz ve düğümün şu anda Birincil Ağ için bekleyen geçerli doğrulama setinde olduğunu görebiliriz. Bu kez alt ağ kimliğini belirleyeceğiz:
 
 ```cpp
 curl -X POST --data '{
@@ -334,7 +332,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+Tepki de eklediğimiz düğümleri içermeli:
 
 ```cpp
 {
@@ -345,7 +343,7 @@ The response should include the node we just added:
                 "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
                 "startTime":1584042912,
                 "endTime":1584121156,
-                "weight": "1"
+                "weight": "30"
             }
         ]
     },
@@ -353,15 +351,15 @@ The response should include the node we just added:
 }
 ```
 
-When the time reaches `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
+Zaman `1584042912'ye` ulaştığında, bu düğüm, 1584042912, onaylamaya başlayacak. `1584121156` yılına ulaştığında bu düğüm, 1584121156, onaylamayı bırakacaktır.
 
-### Whitelisting the Subnet
+### Whitelisting Whitelisting
 
-Now that the node has been added as a validator of the subnet, let’s add it to the whitelist of subnets. The whitelist prevents the node from validating a subnet unintentionally.
+Şimdi düğüm, alt ağın doğrulayıcısı olarak eklendiğine göre alt ağların the ekleyebiliriz. Beyaz bilimci düğümün kasıtsız olarak geçerli olmasını engeller.
 
-To whitelist the subnet, restart the node and add the parameter `--whitelisted-subnets` with a comma separated list of subnets to whitelist.
+subnet, beyazlatmak için düğümü yeniden başlatıp parametreyi eklemek, beyaz `--whitelisted-subnets` eklemek.
 
-The full command is:
+Tam komut:
 
-`./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
+`./build/avalanchego --whitelisted-subnets=nTd2Q2TLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7xcWvvs=nTTTLp8M9qv2Q2nTLp8M9qv2V2V2`
 
