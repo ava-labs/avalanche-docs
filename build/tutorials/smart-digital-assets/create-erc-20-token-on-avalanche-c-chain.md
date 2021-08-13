@@ -1,157 +1,158 @@
 ---
-description: 'Provided by Community member: Murat Çeliktepe'
+description: 'JPJ-PRJ-PRJ-P'
+
 ---
 
-# Create an ERC-20 Token
+# ERC-20トークンを作成します。
 
-ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
+ERC-20トークンはEthereumで最も基本的で本質的なコンセプトです。Avalancheコミュニティとエコシステムが成長するにつれて、Ethereumまたは異なるチェーンで実行されている新しいユースケースやプロジェクトがAvalancheに実装されます。プロジェクトに使用されるトークン標準は特定のものではなく、誰でも独自の標準および独自のトークンを作成できます。
 
-Therefore, we will be creating our own mintable ERC-20 token and will mint it to any address we want. The token will be generated on Avalanche C-Chain and will be accessible on that chain.
+したがって、私たちは独自のmintable ERC-20トークンを作成し、それを私たちが望む任意のアドレスにそれをミントします。トークンはAvalanche C-Chainで生成され、そのチェーンでアクセスできます。
 
-The thing we have to mainly consider is that we will deploy a smart contract written with Solidity to Avalanche. This is the feature that Avalanche provides us- to be able to deploy any smart contract to the chain and no requirement for a new language specific contract concept to interact. Let’s look at how to create an ERC-20 contract and deploy it to avalanche C-Chain.
+主に考慮すべき点は、Solidityで書かれたスマートコントラクトをAvalancheに展開することです。Avalancheが提供する機能です。スマートコントラクトをチェーンに展開できるように、新しい言語固有の契約コンセプトに相互に取り組む必要はありません。ERC-20コントラクトを作成し、それをavalanche C-Chainにデプロイする方法を見てみましょう。
 
-## Set up Metamask
+## Metamaskの設定
 
-The first thing we should set is a metamask wallet.
+まず最初に設定すべきことは、メタマスクウォレットです。
 
-![Image for post](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S)
+![投稿の画像](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S)
 
-Click to metamask icon on the browser and select the network drop-down menu. Here we should connect to C-Chain. Click to “Custom RPC”.
+ブラウザのメタマスクアイコンをクリックして、ネットワークドロップダウンメニューを選択します。C-Chainに接続する必要があります。Custom RPCをクリックします。
 
-![Image for post](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
+![投稿の画像](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
 
-Now, we need to set these boxes with correct values.
+これで、これらのボックスを正しい値で設定する必要があります。
 
-* **Network Name**: Avalanche C-Chain
-* **New RPC URL**:
-  * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) 
-  * **Fuji Testnet:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-  * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc) 
+* **ネットワーク名**: Avalanche C-Chain
+* **新しいRPC URL**:
+   * **Mainnet:** [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+   * **JPJ**[-JP-](https://api.avax-test.network/ext/bc/C/rpc)JP
+   * **Local Testnet:** [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
 * **ChainID**:
-  * **Mainnet:** `0xa86a` 
-  * **Fuji Testnet:** `0xa869` 
-  * **Local Testnet:** `0xa868` 
-* **Symbol**: C-AVAX
+   * **メインネット:** `43114`
+   * **富士テストネット:** `43113`
+   * **Local Testnet:** `43112`
+* **シンボル：**AVAX
 * **Explorer**:
-  * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
-  * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
-  * **Localnet:** n/a 
+   * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/)
+   * **JP**[-JP-](https://cchain.explorer.avax-test.network/)
+   * **Localnet:** n/a
 
-![Image for post](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
+![投稿の画像](../../../.gitbook/assets/erc20-metamask.png)
 
-After setting up all the parameters correctly, we should see this page. For now, we have 0 C-AVAX. “C” refers to C-chain and we have to get some C-AVAX to interact with the network.
+すべてのパラメータを正しく設定した後、このページを見るはずです。JavaScript-JP-JP-
 
-## Fund your C-Chain address
+## C-Chainアドレスに資金を供給する
 
-Depending on the network used, there are three ways to get funds to your C-Chain address.
+使用しているネットワークによっては、C-Chainアドレスに資金を取得する方法は3つあります。
 
-### **Using Avalanche Wallet**
+### **Avalancheウォレットの使用**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+メインネットでは、[Avalanche Wallet](https://wallet.avax.network/)を使用して、X-ChainからC-Chainアドレスに資金を振り込むことができます。このチュートリアルで説明したように、プロセスは簡単です[。](../platform/transfer-avax-between-x-chain-and-c-chain.md)Walletはテストやローカルネットワークでも使用できます。
 
-### **Using Test Network Faucet**
+### **Test Network Faucetの使用**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+テストネットワークでの資金調達には、[Test Network Faucet]を使用することもできます。[https://faucet.avax-test.network/](https://faucet.avax-test.network/) に移動し、C-Chain アドレスを貼り付けます。
 
-### Funding on local testnet
+### ローカルテストネットでの資金調達
 
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+ローカルネットワークでは、自分で蛇口を展開することによって、簡単にアドレスに資金を供給することができます。[JavaScript-JP-JP-](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our address with prefix “C-”.
+[avax蛇口](https://faucet.avax-test.network/)に行き、C-Chainアドレスを貼り付けましょう。exmaple "0xfe8886bec537252040Dff36448C0F104Be635650" のために。
 
-For example my address is “0xfe8886bec537252040Dff36448C0F104Be635650”, I need to paste my account address as “C-0xfe8886bec537252040Dff36448C0F104Be635650”
+![投稿の画像](../../../.gitbook/assets/erc20-faucet.png)
 
-![Image for post](https://miro.medium.com/max/422/1*okw3MKlyGcF4U9ibsq5v8w.png)
+ここにアドレスをコピーして貼り付けた後、[20 AVAX]をクリックします。このテスト蛇口トークンは、単に開発目的のためだけです。
 
-After copy and paste the address here, click request 2.0000 C-AVAX. This test faucet token has no value, it is just for development purposes.
+その後、ウォレットの残高を確認し、メタマスクでテストトークンを持っている必要があります。
 
-Then check your wallet balance and you should have some test token in your metamask.
+## mintableトークンを作成します。
 
-## Create mintable token
+これで、Remixでmintableトークンを作成できます。Remix を開くか[、このリンク](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js)に移動します。
 
-Now, we can create our mintable token on Remix. Open Remix on your browser or go to [this link](https://remix.ethereum.org/#optimize=false&evmVersion=null&version=soljson-v0.6.6+commit.6c089d02.js).
+![投稿の画像](https://miro.medium.com/max/1910/1*FWHtbWNXr6FvjzPHH93wvw.png)
 
-![Image for post](https://miro.medium.com/max/1910/1*FWHtbWNXr6FvjzPHH93wvw.png)
+このページを見るべきです。このページではまず、「Featured Plugins」から「SOLIDITY」をクリックし、「New File」ボタンをクリックします。[New File]ボタンをクリックすると、ファイル名が必要なポップアップが表示されます。名前を選択するか、デフォルトを残すことができます。
 
-You should view this page. On this page, first, click “SOLIDITY” from “Featured Plugins” and then click the “New File” button. When you click the New File button, you will see a pop-up that requires a file name. You can choose a name or leave the default.
+[OpenZeppelin](https://openzeppelin.com/contracts/)からERC-20コントラクトを使用するので、この行をファイルに貼り付けて保存してください。
 
-Since we will use an ERC-20 contract from [OpenZeppelin](https://openzeppelin.com/contracts/), just paste this line to the file and save.
+```javascript
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/presets/ERC20PresetMinterPauser.sol";
+```
 
-`import “`[`https://github.com/OpenZeppelin/openzeppelincontracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/presets/ERC20PresetMinterPauser.sol)`”;`
+![投稿の画像](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
-![Image for post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
+ファイルを保存した後、Remixにインポートしたたくさんのファイルが表示されます。これは、GitHubコントラクトリポジトリをインポートして、URL-Link. を import 文で remix することができます。
 
-After saving the file, we will see a bunch of files that are imported to remix. This is a remix feature that allows us to import a GitHub contract repository to remix by just giving the URL-Link. with an import statement.
+![投稿の画像](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
-![Image for post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
+ERC20PresetMinterPauser.sol ファイルはプリセットに含まれています。このファイルは、Minter機能を備えたERC20規格に従ってOpenZeppelinによって書かれています。このファイルをデプロイした後、私たちはコントラクトの所有者になり、トークンをミントする権限と能力があります。
 
-We have ERC20PresetMinterPauser.sol file in the presets. This file is written by OpenZeppelin according to ERC20 standards with minter functionality. After deploying this file, we will be the owner of the contract and will have the authority and ability to mint token how much we want.
+![投稿の画像](https://miro.medium.com/max/1398/1*5UcrRfoSwjpD29NyuMrrbA.png)
 
-![Image for post](https://miro.medium.com/max/1398/1*5UcrRfoSwjpD29NyuMrrbA.png)
+## Contractのデプロイ
 
-## Deploy the Contract
+2番目のタブを開き、「SOLIDITY COMPILER」で書き込まれたsolidityバージョンと一致するsolidityバージョンを選択します。バージョンはファイルのバージョンと同じまたはそれ以上でなければなりません。例えば、私のファイルには、"pragma solidity ^0.6.0" と書かれているので、必要なバージョンは0.6.0以上です。JavaScript-JP-JP-もし、ファイル内の何も変更されなかったり、solidityバージョンが間違っていない場合は、コントラクトはエラーなしでコンパイルする必要があります。
 
-Open the second tab which is “SOLIDITY COMPILER” and select the solidity version that matches with the solidity version written in file as “pragma solidity …..”. The version should be equal to or bigger than the file’s version. For example, in my file, “pragma solidity ^0.6.0” is written and the version is 0.6.0. So, in the compiler I solidity version as 0.6.6. After setting up the solidity version click to compile button. If you did not change anything in the file or the solidity version is not wrong, you should not get an error.
+![投稿の画像](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-![Image for post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
+次に、DEPLOY & RUN TRANSACTIONの3番目のタブにジャンプしましょう。ここでは、契約を展開する前に、環境を変更する必要があります。環境に戻って、「Injected Web3」を選択します。ポップアップが表示され、アカウントの接続を求められたら、[接続]をクリックします。その後、[ACCOUNT]テキストボックスにアカウントアドレスが表示されます。
 
-Then, let’s jump to the third tab which is DEPLOY & RUN TRANSACTION. Here before deploying our contract, we should change the environment. Click to the environment and select “Injected Web3”. If a pop-up shows up and asks you to connect the account, click to connect. After, you should see the account address in the “ACCOUNT” textbox.
+デプロイプロセスの前の最後のものは、トークンとしてデプロイされるコントラクトを設定することです。Deploy Buttonの上に、契約を選択するドロップダウンメニューがあります。ERC20PresetMinterPauser.solという名前のコントラクトを選択します。
 
-The last thing before the deployment process is to set the contract that will be deployed as a token. Above the Deploy Button, there is a drop-down menu to select a contract. Select the contract named “ERC20PresetMinterPauser.sol”.
+![投稿の画像](https://miro.medium.com/max/383/1*s9LtZu4hSuPcVwVZsweZJA.png)
 
-![Image for post](https://miro.medium.com/max/383/1*s9LtZu4hSuPcVwVZsweZJA.png)
+ここにトークンの名前とシンボルを入力します。Test と名前を付けて、シンボルは "tst" になります。あなたはそれを与え、クリックしてトランザクションボタンを押します。
 
-Now, here enter the name and symbol of your token. I will name it “test” and the symbol will be “tst”. You can give it a and click to transact button.
+![投稿の画像](https://miro.medium.com/max/593/1*ZKDEv_h_Pqfd3b7PAosXQw.png)
 
-![Image for post](https://miro.medium.com/max/593/1*ZKDEv_h_Pqfd3b7PAosXQw.png)
+ボタンをクリックすると、ポップアップが表示され、それを確認するだけです。
 
-After clicking the button, a pop-up will show up and just confirm it.
+![投稿の画像](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
 
-![Image for post](https://miro.medium.com/max/353/1*yOOQYZvESjSKx2qec5pYgA.png)
+そして別のポップアップ、メタマスク確認が表示されます。確認してください。
 
-And then another pop-up, a metamask confirmation, appears. Confirm it.
+これらのポップアップをすべて確認した後、私たちはavalanche C-Chainにトークンを展開しました。それで、それと対話し始めます。
 
-After confirming all these pop-ups we have deployed our token to avalanche C-Chain. So we can start to interact with it.
+## Tokenと交換する
 
-## Interact with Token
+この[c](https://cchain.explorer.avax-test.network/)-chainエクスプローラーを通じて、avalanche C-Chainにデプロイしたトランザクションを見ることができます。
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explore](https://cchain.explorer.avax-test.network/).
+まず、remixコンソールからトランザクションハッシュを見てみましょう。
 
-But firstly, let’s see our transaction hash from the remix console.
+![投稿の画像](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
-![Image for post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
+コントラクトをデプロイしたら、log in remix console が表示されます。矢印をクリックして展開するとトランザクションハッシュが表示されます。- それをコピーします
 
-After deploying the contract, we should see a log in remix console. When you click to arrow and expand it, a transaction hash will come up. Copy it.
+![投稿の画像](https://miro.medium.com/max/1909/1*NBXgtkYv2VfBkZx1OsBm7A.png)
 
-![Image for post](https://miro.medium.com/max/1909/1*NBXgtkYv2VfBkZx1OsBm7A.png)
+トランザクションハッシュを上記の[エクスプローラ](https://cchain.explorer.avax-test.network/)に貼り付けてEnterキーを押します。
 
-Just paste the transaction hash to the [explorer](https://cchain.explorer.avax-test.network/) I shared above and press enter.
+![投稿の画像](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
 
-![Image for post](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
+ここでは、トランザクションとトークン契約のすべての詳細を見ることができます。
 
-Here we can see all details about the transaction and token contract.
+![投稿の画像](https://miro.medium.com/max/764/1*tTFQUn3fStbv-TW9kExyUg.png)
 
-![Image for post](https://miro.medium.com/max/764/1*tTFQUn3fStbv-TW9kExyUg.png)
+1つ目は、トークンを作成する私のウォレットアドレスであり、2つ目は、testという名前の私のトークンコントラクトアドレスです。さて、自分自身のアドレスにトークンをミントしましょう。
 
-The first one is my wallet address that creates token and the second address is my token contract address which is named “test”. Now, let’s mint some token to our own address.
+![投稿の画像](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
 
-![Image for post](https://miro.medium.com/max/607/1*K9eBNTQFkvUYjjmvegDZtQ.png)
+リミックスに戻って、デプロイした後、「Deployed Contracts」セクションで契約を確認できるはずです。
 
-Come back to the remix and after deploying, you should be able to see the contract in “Deployed Contracts” section.
+トークンコントラクトと対話するために使える関数がたくさんあります。これらのメソッドは、OpenZeppelin ドキュメントから確認できます。しかし、mintメソッドのみを使用します。
 
-Here, we have a bunch of functions that we can use to interact with our token contract. You can check all these methods from OpenZeppelin documentation to learn how to use them. But we will only use the mint method.
+mintメソッドの横にある矢印をクリックして読み込む。
 
-Click to arrow beside the mint method to read it.
+![投稿の画像](https://miro.medium.com/max/577/1*GrxG6rsklrYN4xN1eF_ckw.png)
 
-![Image for post](https://miro.medium.com/max/577/1*GrxG6rsklrYN4xN1eF_ckw.png)
+WEIであなたの住所と金額を入力します。例えば、1000 tst tokenをmintしますので、「100
 
-Enter your address and an amount in WEI. For example, I will mint 1000 tst token so, I entered “1000000000000000000000”
+![投稿の画像](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
 
-![Image for post](https://miro.medium.com/max/354/1*FM-PMUY7au61ejHJzBIsfg.png)
+## TokenをMetamaskに追加
 
-## Add Token to Metamask
+今度は1000トークンがコントラクトにマイナーされましたが、メタマスクウォレットにトークンが表示されないはずです。独自のトークンを見るには、追加する必要があります。metamaskでは、「Add Token」ボタンをクリックし、「Custom Token」タブを選択します。
 
-Now we minted 1000 token to our contract, but you should not be able to see the tokens in your metamask wallet. In order to see our own token, we have to add it. On metamask, click to “Add Token” button and select “Custom Token” tab.
-
-Here enter the token address that you can see from explorer as I showed above. Copy and paste it here. Then click on the Next button, you should see 1000 token that you named in your metamask wallet. Also, you can send it to another account via either remix or metamask.
+ここでは、上記のように、エクスプローラーから見ることができるトークンアドレスを入力します。ここにそれをコピーして貼り付けます。次に[Next]ボタンをクリックすると、メタマスクウォレットに名前を付けた1000トークンが表示されます。また、remixまたはmetamaskで別のアカウントに送信することもできます。
 
