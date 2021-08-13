@@ -1,25 +1,25 @@
-# Create a Variable-Cap Asset
+# Variable-Cap Assetの作成
 
-## Introduction
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+このチュートリアルでは、可変キャップの真菌可能なアセットの作成方法を説明します。アセットの単位は存在しませんが、アセットの単位をマイニングすることができます。アセットの作成では、どのアドレスがより多くのユニットをミントするか指定します。
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+なぜ、単一のアドレスではなく、アセットの単位をミントできるアドレスを指定するの_か_疑問に思うかもしれません。JavaScript-JP-JP-
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **セキュリティ:** 一つのアドレスだけがアセットの多くをミントできるようにし、そのアドレスのための秘密鍵が失われた場合、これ以上のユニットをミントすることはできません。同様に、1つのアドレスだけが資産の多くをmintできる場合、そのアドレスの保持者を望むだけの限り一方的にmintingから停止するものはありません。
+* **柔軟性:** 「Aliceはこの資産の単位を単位でmintすることができます。Dinesh、Ellin、Jamieは2つのmint moreをmintすることができます。」というようなロジックをエンコードできるのは嬉しいことです。
 
-Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
+企業の株式を代表する資産を発行したいとします。最初に株式は存在しないが、後でより多くの株式を作成することができます。そんな資産を作りましょう。
 
-## Requirements
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Avalanche Node](../nodes-and-staking/run-avalanche-node.md)の実行を完了しました。[Avalancheの建築](../../../learn/platform-overview/)に精通しています。
 
-## Create the Asset
+## Asset の作成
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+X-Chainにアセットが存在するので、アセットを作成するために[`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset)を呼び出します。これは[X-ChainのAPI](../../avalanchego-apis/exchange-chain-x-chain-api.md)のメソッドです。
 
-The signature for this method is:
+このメソッドの署名は次のとおりです。
 
 ```cpp
 avm.createVariableCapAsset({
@@ -41,22 +41,22 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### Parameters-Parameters-JP-JP-J
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name` は、アセットの人間が読みやすい名前です。必ずしも一意なわけではありません。0-128文字の間です。
+* `symbol` はこの資産の短縮記号です。0-4文字の間で、JavaScriptを有効にします。必ずしも一意なわけではありません。JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
+* `denomination` は、このアセットの残高をユーザーインターフェイスによってどのように表示するかを決定します。デノニーが0の場合、この資産の100単位は100で表示されます。デノニーが1の場合、この資産の100単位は10.0で表示されます。2の場合、この資産の100単位は.100などで表示されます。
+* `minterSets`は、各要素が`minting`トランザクションに署名することにより、mintingトランザクションに署名する`こと`により、より多くのアセットをmintingすることができますことを指定するリストです。
+* X-Chainでトランザクションを実行するには、AVAXで支払うトランザクション手数料が`必要```です。
+* `For` example, the component is any use-parallely.JavaScript-JP-JP-
+* `changeAddr` は、変更が送信されるアドレスです。JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-### Response
+### JPRESSENTS
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID`は、新しいアセットのIDです。
+* `changeAddr` は、変更が送信されたアドレスです。
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+この例では、より多くのシェアをミントします。だから、2番目のminter設定の2つのアドレスをユーザーコントロールしたアドレスに置き換えてください。
 
 ```cpp
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+レスポンスは次のようになります:
 
 ```cpp
 {
@@ -103,18 +103,18 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## 資産のミント
 
-Right now 0 shares exist. Let’s mint 10M shares.
+現在、0株が存在します。10M株をミントしましょう。
 
-### Create the Unsigned Transaction
+### Unsigned Transactionsの作成
 
-We’ll use [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+[`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint)を使ってシェアをミントします。
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `amount` は、作成される株式数です。
+* `assetID`は、私たちが作成しているアセットのIDです。
+* `to`は、新規発行済株式を取得する住所です。ユーザーコントロールのアドレスに置き換えます。これにより、新しく作成さ`れ`た株式の一部を送信できます。
+* `username` は、このアセットの詳細をmintする権限を与えるキーを保持するユーザーでなければなりません。つまり、上記の1つのミンターセットのいずれかに対して少なくとも_閾値_キーを制御します。
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+レスポンスにはトランザクションのIDが含まれています。
 
 ```cpp
 {
@@ -144,7 +144,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+[`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus)を使用して、ネットワークに送ったトランザクションのステータスを確認できます。
 
 ```cpp
 curl -X POST --data '{
@@ -157,7 +157,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+これは次のようにする必要があります。
 
 ```cpp
 {
@@ -169,11 +169,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
+## 資産の取引
 
-### Check a Balance
+### バランスを確認する
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+10Mの株式はすべて`mint`で指定した`to`アドレスによって管理されます。これを検証するには、[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) を使います:
 
 ```cpp
 curl -X POST --data '{
@@ -187,7 +187,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+この応答により、当社の資産作成が成功し、予想されるアドレスが10,000,000株すべてを保有していることを確認します。
 
 ```cpp
 {
@@ -199,9 +199,9 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### Assetを送信する
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+[`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send)を使って100株のシェアを別のアドレスに送りましょう。--
 
 ```cpp
 curl -X POST --data '{
@@ -218,7 +218,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+To addressの残高を確認しましょ`う`:
 
 ```cpp
 curl -X POST --data '{
@@ -232,7 +232,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+レスポンスは次のようにしてください。
 
 ```cpp
 {
@@ -244,12 +244,12 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## JP-JP-
 
-In this tutorial, we:
+JavaScript-JP-JP-
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* `createVariableCapAsset` を使用して、シェアを表す可変キャップアセットを作成します。
+* `Mint`を使って、資産の単位をミントします。
+* `getBalance` を使用してアドレス残高を確認します。
+* `Send` を使用するシェアを転送します。
 
