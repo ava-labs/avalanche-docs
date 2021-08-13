@@ -1,12 +1,15 @@
-# Platform
+# Platform プラットフォーム
 
-| Title | Description |
+| JPT-JP | JavaScript-JP-JP- |
 | :--- | :--- |
-| [**Create a Blockchain**](create-a-new-blockchain.md) | Create a blockchain by creating a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |
-| [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
-| [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
-| [**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md) | Create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
-| [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
-| [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
-| [**Transfer AVAX Between the X-Chain and C-Chain**](https://github.com/ava-labs/avalanche-docs/tree/e5dbc74ad73488ae633c3ce49704b98e32e7d5c4/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
+| [**Ethereum dappをポートする**](launch-your-ethereum-dapp.md) | Avalanche Platform への既存の dapps の移植ガイド |
+| [**AVMを実行するブロックチェーンを作成する**](create-avm-blockchain.md) | [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain) の新しいインスタンスを作成します。 |
+| [**Local Test Networkの作成**](create-a-local-test-network.md) | Avalancheテストネットワークを作成します。 |
+| [**サブネットの作成**](create-a-subnet.md) | 新しい[サブネット](../../../learn/platform-overview/#subnets)を作成します。 |
+| [**仮想マシン \(VM\) を作成する**](create-a-virtual-machine-vm.md) | 非常にシンプルな[仮想マシン \(VM\)](../../../learn/platform-overview/#virtual-machines)を作成します。 |
+| [**Custom Blockchainの作成**](create-custom-blockchain.md) | [仮想マシン \(VM\)](../../../learn/platform-overview/#virtual-machines)でカスタムブロックチェーンを作成します。 |
+| [**Avalancheで元帳Nano Sを設定する**](setup-your-ledger-nano-s-with-avalanche.md) | Ledger LiveとAvalancheウォレットでLedgerを設定する |
+| [**AVAX-Chain-P-Chain-JP-JP-J**](transfer-avax-between-x-chain-and-p-chain.md) | X-ChainとP-Chainの間でAVAXを送る |
+| [**AVAX-Chain-C-C-Chain-JP-JP**](transfer-avax-between-x-chain-and-c-chain.md) | X-ChainとC-Chainの間でAVAXを送る |
+| [**C-Chainとの統合**](integrate-exchange-with-avalanche.md) | Ethereum対応C-Chainとの交換統合ガイドライン |
 
