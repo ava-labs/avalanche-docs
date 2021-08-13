@@ -1,12 +1,12 @@
-# Serialization Primitives
+# シリアライゼーションプリミティブ
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalancheは](../../#avalanche)、すべての内部データに対して、シンプルでユニフォームで優雅な表現を使用しています。このドキュメントでは、Avalancheプラットフォーム上でプリミティブ型がどのようにエンコードされているかを説明します。トランザクションはこれらの基本的なプリミティブ型の点でエンコードされています。
 
-## Byte
+## Byte バイト
 
-Bytes are packed as-is into the message payload.
+Byteは、メッセージペイロードにパックされます。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Packing:
@@ -15,11 +15,11 @@ Results in:
     [0x01]
 ```
 
-## Short
+## JP-JP-
 
-Shorts are packed in BigEndian format into the message payload.
+ShortsはBigEndian形式でメッセージペイロードに詰め込まれています。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Packing:
@@ -28,11 +28,11 @@ Results in:
     [0x01, 0x02]
 ```
 
-## Integer
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+整数は、メッセージペイロードにBigEndian形式でパックされた32ビットの値です。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Packing:
@@ -41,11 +41,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04]
 ```
 
-## Long Integers
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+長い整数は、メッセージペイロードにBigEndian形式でパックされた64ビットの値です。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Packing:
@@ -54,11 +54,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]
 ```
 
-## IP Addresses
+## IPアドレス
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+IPアドレスは16バイトIPv6形式で表現され、ポートはメッセージペイロードにショートとして追加されます。IPv4アドレスは12バイトでパッドされます。 0x00sの先頭に置かれています。
 
-IPv4 example:
+IPv4の例:
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+IPv6の例:
 
 ```text
 Packing:
@@ -84,11 +84,11 @@ Results in:
     ]
 ```
 
-## Fixed-Length Array
+## Fixed-Length Array-JP
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+Fixed-length arrays arrays, そして、コンテキストによって長さが知られています。
 
-Byte array example:
+Byte arrayの例:
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+整数配列の例:
 
 ```text
 Packing:
@@ -106,11 +106,11 @@ Results in:
     [0x03, 0x04, 0x05, 0x06]
 ```
 
-## Variable Length Array
+## 変数長さ配列
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+配列の長さは整数形式で接頭辞を付け、続いて配列内容を固定長配列形式でパッキングします。
 
-Byte array example:
+Byte arrayの例:
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+Int arrayの例:
 
 ```text
 Packing:
@@ -128,11 +128,11 @@ Results in:
     [0x00, 0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x06]
 ```
 
-## String
+## JavaScript-JP-JP-
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+String は、変数長のバイト配列と同様にパックされます。しかし、長さの接頭辞は int ではなく短いです。文字列はUTF-8形式でエンコードされます。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Packing:
