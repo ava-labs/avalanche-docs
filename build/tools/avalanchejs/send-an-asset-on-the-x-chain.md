@@ -1,6 +1,6 @@
-# Send an Asset on the X-Chain
+# X-Chainでアセットを送信する
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+この例では、X-Chain のアセットを 1 つの受信者に送信します。このプロセスの最初のステップは、Avalanche Platformの選択肢に接続したAvalancheのインスタンスを作成することです。
 
 ```text
 import {
@@ -8,7 +8,7 @@ import {
     BinTools,
     Buffer,
     BN
-  } from "avalanche" 
+  } from "avalanche"
 
 let myNetworkID = 1; //default is 3, we want to override that for our local network
 let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // The X-Chain blockchainID on this network
@@ -16,15 +16,15 @@ let avax = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlo
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-We’re also assuming that the keystore contains a list of addresses used in this transaction.
+また、キーストアには、このトランザクションで使用されるアドレスの一覧が含まれていると仮定しています。
 
-## Getting the UTXO Set <a id="getting-the-utxo-set"></a>
+## UTXOセットの取得<a id="getting-the-utxo-set"></a>
 
-The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
+X-Chain は、利用可能なすべての残高を、Unspeed Transaction Outputs \(UTXOs\) と呼ばれるデータストアに格納します。UTXO Set はトランザクションによって生成される出力の一意のリストであり、それらの出力を費やすことができるアドレス、および他の変数(出力が使えるタイムスタンプ) およびしきい値 \(出力に必要なシグナー数) などの変数です。
 
-For the case of this example, we’re going to create a simple transaction that spends an amount of available coins and sends it to a single address without any restrictions. The management of the UTXOs will mostly be abstracted away.
+この例では、利用可能なコインの量を費やし、制限なしに1つのアドレスに送信するシンプルなトランザクションを作成します。UTXOの管理はほとんど抽象化されます。
 
-However, we do need to get the UTXO Set for the addresses we’re managing.
+ただし、管理しているアドレスに対してUTXO Setを取得する必要があります。
 
 ```text
 let myAddresses = xchain.keyChain().getAddresses(); //returns an array of addresses the KeyChain manages
@@ -32,16 +32,16 @@ let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array o
 let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
-## Spending the UTXOs <a id="spending-the-utxos"></a>
+## UTXOの費用<a id="spending-the-utxos"></a>
 
-The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
+`buildBaseTx()` ヘルパー関数は、単一のアセットタイプを送信します。私たちは、受信者アドレスに送りたいコインを特定のassetIDを持っています。これは、400コインを有すると信じています。JavaScriptが取引で利用可能な資金を持っていることを確認しましょう。
 
 ```text
 let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6"; //avaSerialized string
 let mybalance = utxos.getBalance(myAddresses, assetid); //returns 400 as a BN
 ```
 
-We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
+400コインがいます!これで、100コインを友達の住所に送ります。
 
 ```text
 let sendAmount = new BN(100); //amounts are in BN format
@@ -60,29 +60,29 @@ let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
 ```
 
-And the transaction is sent!
+そしてトランザクションが送信されます！
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-<a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
+トランザクションをネットワークに送信したので、トランザクションが通過したかどうかを判断するのに数秒かかります。X-Chainを通じてTxIDを使用してトランザクションの更新ステータスを取得できます。
 
 ```text
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+ステータスは "Accepted", "Processing", "Unknown", "Rejected" のいずれかです:
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Accepted" はトランザクションがネットワークによって有効であると認められ、実行されたことを示します。
+* "Processing"はトランザクションが投票されていることを示します。
+* "Unknown" は、ノードがトランザクションについて何も知らないことを示し、ノードがそれを持っていないことを示します。
+* "Rejected" は、トランザクションのノードがトランザクションを知っていることを示しますが、受け入れられたトランザクションと矛盾します。
 
-## Check the results <a id="check-the-results"></a>
+## 結果を確認する<a id="check-the-results"></a>
 
-The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+トランザクションは最終的に「Accepted」として戻ってきました。これでは、UTXOSetを更新して、トランザクション残高が予想通りであることを確認しましょう。
 
-_Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
+_注: 実際のネットワークでは、バランスがこのシナリオに一致するものではありません。取引手数料や追加の費用は残高が異なる場合があります。この例では、これらのケースではいずれも想定しています。_
 
 ```text
 let updatedUTXOs = await xchain.getUTXOs();
