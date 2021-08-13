@@ -1,37 +1,35 @@
-# Run an Avalanche Node Monitoring
+# Bir Çığ Düğününü İzle
 
-_Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
+_Bu dersi yazan toplum üyesi Jovica to teşekkür ederim._ _Gerekirse_ ona bizim [_Discord_](https://chat.avax.network) ile ulaşabilirsiniz.
 
-## Introduction
+## Tanıştırma
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
+Bu ders veren, your Ubuntu 18.04 veya 20.04 olduğunu varsayar. \(bu ders verinin Mac OS X versiyonu daha sonra gelecek).
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+Bu özel ders [AvalancheGo](https://github.com/ava-labs/avalanchego). bir örneğini izlemek için altyapı kurulmasını gösterecek. Kullanacağız:
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/build/avalanchego-apis/metrics-api) to get information about the node
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* [Prometheus](https://prometheus.io/) veri toplayıp depolanıyor
+* Makineyle ilgili bilgi almak için [node\ exporter](https://github.com/prometheus/node_exporter)
+* AvalancheGo’s düğümle ilgili bilgi almak için [metrik API](https://docs.avax.network/build/avalanchego-apis/metrics-api)
+* [Grafana](https://grafana.com/) bir gösterge panosundaki verileri görselleştirmek için.
 
-Prerequisites:
+Öncelikler:
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
+* Çalışan AvalancheGo düğümü:
+* Düğümü çalıştıran makineye erişim Shell
+* Makine üzerindeki yönetici ayrıcalıkları.
 
-### **Caveat: Security**
+### **Mağara: Güvenlik**
 
-{% hint style="danger" %}
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
-{% endhint %}
+{% ipuçları style="danger" % } Burada tanımlanan sistem halka açık internet **açılmamalıdır.** Burada gösterilen Prometheus ve Grafana izinsiz erişime karşı sertleşmiş değildir. Her ikisine de güvenli bir vekil, yerel ağ veya VPN üzerinden erişilebildiğinden emin olun. Bunu ayarlamak bu özel ders için çok önemli ama dikkatli olun. Kötü güvenlik uygulamaları saldırganlara senin düğümünü kontrol ettirebilir! Uygun güvenlik uygulamalarını takip etmek senin sorumluluğun. {% endhint }
 
-### Contributions
+### Katkılar
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+Grafana gösterge panosu için temel [at](https://blog.colmenalabs.org/index.html) iyi adamlardan alındı ki artık mevcut değil. Eğer bu dersi nasıl geliştireceğinize dair fikirleriniz ve önerileriniz varsa lütfen söyleyin, bir sorun yayınlayın ya da [Github](https://github.com/ava-labs)'a bir çekiş talebi yapın.
 
-## Set up Prometheus
+## Prometheus'u kur.
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+Öncelikle bir sistem kullanıcı hesabı ekleyip dizinleri oluşturmalıyız\ (size süper kullanıcı kimlik bilgilerine ihtiyacınız olacak):
 
 ```cpp
 sudo useradd -M -r -s /bin/false prometheus
@@ -41,7 +39,7 @@ sudo useradd -M -r -s /bin/false prometheus
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
-Get the necessary utilities, in case they are not already installed:
+Gerekli hizmetleri alın, eğer zaten kurulu değillerse:
 
 ```cpp
 sudo apt-get install -y apt-transport-https
@@ -51,7 +49,7 @@ sudo apt-get install -y apt-transport-https
 sudo apt-get install -y software-properties-common wget
 ```
 
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
+Sonraki [olarak, indirme](https://prometheus.io/download/) sayfasından Prometheus'un en son sürümüne bağlantı kur (uygun işlemci mimarisini seçtiğinizden emin olun) ve arşivi açmak için wget indirip the kullanın:
 
 ```cpp
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
@@ -69,7 +67,7 @@ tar xvf prometheus-2.25.0.linux-amd64.tar.gz
 cd prometheus-2.25.0.linux-amd64
 ```
 
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
+Sonra ikili işlemleri ayarlayıp mülkiyeti belirlememiz ve yapılandırma dosyalarını uygun yerlere taşımamız gerekiyor:
 
 ```cpp
 sudo cp {prometheus,promtool} /usr/local/bin/
@@ -95,15 +93,15 @@ sudo cp -r {consoles,console_libraries} /etc/prometheus/
 sudo cp prometheus.yml /etc/prometheus/
 ```
 
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
+`/etc/prometheus` yapılandırma için ve veri için `/var/lib/prometheus` kullanılır.
 
-Let’s set up Prometheus to run as a system service. Do**:**
+Prometheus'u sistem hizmeti olarak çalıştıralım. - Bu kadar yeter.
 
 ```cpp
 sudo nano /etc/systemd/system/prometheus.service
 ```
 
-\(or open that file in the text editor of your choice\), and enter the following configuration:
+\ (veya seçtiğiniz metin düzenleyicisinde bu dosyayı açınız\ ) ve aşağıdaki yapılandırmayı girin:
 
 ```cpp
 [Unit]
@@ -126,7 +124,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Save the file. Now, we can run Prometheus as a system service:
+Dosyayı kaydet. Prometheus'u sistem hizmeti olarak çalıştırabiliriz:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -140,13 +138,13 @@ sudo systemctl start prometheus
 sudo systemctl enable prometheus
 ```
 
-Prometheus should now be running. To make sure, we can check with:
+Prometheus şimdi koşuyor olmalı. Emin olmak için şöyle bir kontrol edebiliriz:
 
 ```cpp
 sudo systemctl status prometheus
 ```
 
-which should produce something like:
+Bu da şöyle bir şey üretmeli:
 
 ```cpp
 ● prometheus.service - Prometheus
@@ -164,15 +162,13 @@ Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z 
 ...
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
+`Ayrıca http:///node-host-ip:9090/`
 
-{% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
-{% endhint %}
+{% ipuçları style="warning" } Güvenlik duvarı açık ise `9090/tcp izin` vermeniz gerekebilir. ** {% endhint }
 
-## Install Grafana
+## Grafana Yükle
 
-To set up Grafana project repositories with Ubuntu:
+Grafana projesi depolarını with kurmak için:
 
 ```cpp
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
@@ -182,7 +178,7 @@ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 ```
 
-To install Grafana:
+Grafana: yüklemek için:
 
 ```cpp
 sudo apt-get update
@@ -192,7 +188,7 @@ sudo apt-get update
 sudo apt-get install grafana
 ```
 
-To configure it as a service:
+Bir hizmet olarak yapılandırılsın:
 
 ```cpp
 sudo systemctl daemon-reload
@@ -206,40 +202,38 @@ sudo systemctl start grafana-server
 sudo systemctl enable grafana-server.service
 ```
 
-To make sure it’s running properly:
+Doğru düzgün çalıştığından emin olmak için:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+Bu grafana `aktif` olduğunu gösterir. Grafana şimdi `http://node-host-ip:3000/`
 
-{% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
-{% endhint %}
+{% ipuçları style="warning" } Güvenlik duvarı açık ise `sudo ufw için 3000/tcp izin` vermeniz gerekebilir. ** {% endhint }
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+Kullanıcı adını/parola admin/yöneticiyle girin ve yeni ve güvenli bir şifre kurun. Grafana veri kaynağımız Prometheus'la bağlamamız gerekiyor.
 
-On Grafana’s web interface:
+Grafana’s web arayüzünde:
 
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
-* Click `Save & Test`
-* Check for “Data source is working” green message.
+* Sol taraftaki yapılandırma işlemine git ve Veri Kaynaklarını seç.
+* Veri Kaynağını Ekle.
+* Prometheus'u Seçin.
+* Forma girdiğinde, \(Prometheus do\ ) adını gir, ve `http://localhost:9090` host:9090 URL olarak adlandırılır.
+* `Kaydet & Denemede` tıkla
+* "Veri kaynağı çalışıyor" yeşil mesajını kontrol edin.
 
-## Set up node\_exporter
+## Node\ } exporter ayarla
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
+from gelen metriklere ek olarak, makinenin kendisini izlemesini ayarlayalım, böylece CPU, bellek, ağ ve disk kullanımını kontrol edebiliriz, herhangi bir anomalinin farkında olabiliriz. Bunun için node\ exporter kullanacağız, bir Prometheus eklentisi.
 
-Get the latest version with:
+Son versiyonu şu şekilde alın:
 
 ```text
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
 ```
 
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
+Farklı bir mimariye sahipseniz `linux-amd64` değişimi (RaspberryPi `linux-arm64`, örneğin\). Katran ve çalıştırılabilir şekilde hareket ettir:
 
 ```cpp
 tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
@@ -249,19 +243,19 @@ tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
 sudo mv node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
 ```
 
-Check that it is installed correctly with:
+Doğru şekilde yüklendiğini kontrol edin:
 
 ```cpp
 node_exporter --version
 ```
 
-Then we add node\_exporter as a service. Do:
+O zaman bir servis olarak node\ ihracatçıyı ekleriz. Do:
 
 ```cpp
 sudo nano /etc/systemd/system/node_exporter.service
 ```
 
-\(or open that file in the text editor of your choice\) and populate it with:
+\ (veya seçtiğiniz metin düzenleyicisinde o dosyayı açın ve onu nüfusa kavuşturun:
 
 ```cpp
 [Unit]
@@ -302,7 +296,7 @@ ExecStart=/usr/local/bin/node_exporter \
 WantedBy=multi-user.target
 ```
 
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
+Bu node\ exporter, ilginç bulabileceğimiz çeşitli verileri toplamaya ayarlar. Hizmeti başlatın ve çizme olarak etkinleştirin:
 
 ```cpp
 sudo systemctl start node_exporter
@@ -312,29 +306,29 @@ sudo systemctl start node_exporter
 sudo systemctl enable node_exporter
 ```
 
-Again, we check that the service is running correctly:
+Tekrar kontrol ediyoruz, servis doğru çalışıyor:
 
 ```cpp
 sudo systemctl status node_exporter
 ```
 
-If you see messages such as `Ignoring unknown escape sequences`, double check that the contents of the service file is correctly copied over and there are no extra backslashes or extra newlines. Correct if necessary and restart the service afterwards.
+`Bilinmeyen kaçış dizilimleri` gibi mesajları görürseniz servis dosyasının içeriğinin doğru kopyalandığını ve ekstra ek ek ek çizmeler veya yeni çizgiler olmadığını iki kez kontrol edin. Gerekirse düzeltir ve hizmete tekrar başlar.
 
-Now, we’re ready to tie it all together.
+Şimdi her şeyi birbirine bağlamaya hazırız.
 
-## Configure AvalancheGo and node\_exporter Prometheus jobs
+## AvalancheGo ve node\ exporter Prometheus işlerini Yapılandır
 
-Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
+AvalancheGo your uygun [komut satırı](../../references/command-line-interface.md) argümanlarıyla çalıştığından emin olun. Ek olarak (varsayılan olarak, o\ ) metrik API etkinleştirilmelidir. Eğer CLI argümanı `-http-host` kullanarak, sunucu makinesinin dışından API çağrılarını yapmak için API'nin dinlediği adresi not alın.
 
-We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
+Şimdi uygun bir Prometheus işini tanımlamamız gerekiyor. Prometheus yapılandırmasını düzenleyelim:
 
-Do :
+Yap :
 
 ```cpp
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-\(or open that file in the text editor of your choice\) and append to the end:
+\ (veya seçtiğiniz metin düzenleyicisinde bu dosyayı açın ve sonuna kadar ekleyin:
 
 ```cpp
   - job_name: 'avalanchego'
@@ -349,30 +343,30 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**Indentation is important**. Make sure `-job_name` is aligned vertically with existing `-job_name` entry, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
+**Kimlik saptama önemlidir**. `-job_name` var olan `-job_name` girişi ile dikey olarak hizalandığından emin olun, ve diğer satırların da doğru şekilde girildiğinden emin olun. Düğününün nasıl yapılandırıldığına bağlı olarak doğru IP veya `yerel` sunucuyu kullandığından emin ol.
 
-Save the config file and restart Prometheus:
+Config dosyasını kaydet ve Prometheus'u yeniden başlat:
 
 ```cpp
 sudo systemctl restart prometheus
 ```
 
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Prometheus web arayüzünü `http://n-node-host-ip:9090/hedeflerde` kontrol edin. Üç hedef etkinleştirilmiş görmelisiniz:
 
 * Prometheus
-* avalanchego
-* avalanchego-machine
+* Çığlık
+* Çığ makinesiName
 
-Make sure that all of them have `State` as `UP`.
+Hepsinin `devlet` olarak göründüğünden emin `ol`.
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/c65ea53488738b0b624a53382fe89ac5e02597ca/dashboards/README.md).
+Grafana; aç; şimdi bu kaynaklardan herhangi birini kullanarak bir işaret panosu oluşturabilirsiniz. [Ayrıca önceden yapılandırılmış çizelgeleri](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) kullanabilirsiniz.
 
-To import the preconfigured dashboard:
+Önceden yapılandırılmış gösterge panosunu içeriye aktarmak için:
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
-* Select `Prometheus` as Data Source
+* Grafana’s web arayüzünü aç
+* Sol araç çubuğuna `+` tıkla
+* `JSON Aktar` ve sonra JSON dosyasını yükle ya da içeriği `panel json bölgesi üzerinden içeriye` aktarma içine yapıştır.
+* `Prometheus`'u Veri Kaynağı olarak Seç
 
-That’s it! You may now marvel at all the things your node does. Woohoo!
+İşte böyle! Düğününün yaptığı her şeye hayret edebilirsin. Woohoo!
 
