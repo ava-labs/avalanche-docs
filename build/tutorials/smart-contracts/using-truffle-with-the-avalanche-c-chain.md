@@ -1,24 +1,24 @@
-# Using Truffle with the Avalanche C-Chain
+# Truffleを使うC-Chain
 
-## Introduction
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com)は、EVM上で分散型アプリケーション \(dapps\)を起動するためのツールキットです。Truffle を使用すると、スマートコントラクトの書き込みとコンパイル、アーティファクトのビルド、移行の実行、およびデプロイされたコントラクトとのやり取りができます。このチュートリアルでは、TruffleをEVMのインスタンスであるAvalancheのC-Chainでどのように使用できるかを説明します。
 
-## Requirements
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+[Avalanche Node](../nodes-and-staking/run-avalanche-node.md)の実行を完了しました。[Avalancheの建築](../../../learn/platform-overview/)に精通しています。また、C-Chainアドレスに資金を入手するために[、AVAX Between X-Chain と C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) チュートリアルを使用して、クロスチェーンスワップを実行しました。
 
-## Dependencies
+## 依存性
 
-* [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
-* [NodeJS](https://nodejs.org/en) v8.9.4 or later.
-* Truffle, which you can install with `npm install -g truffle`
+* [Avash](https://github.com/ava-labs/avash) は、ローカルAvalancheネットワークを実行するためのツールです。トリュフの[ガナッシュ](https://www.trufflesuite.com/ganache)に似ています。
+* [NodeJS](https://nodejs.org/en) v8.9.4 以降。
+* Truffle-truffle-`g-truffle-truffle-truffle-truffle-truffle-truffle-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff-truff`
 
-## Start up a local Avalanche network
+## Avalancheネットワークを起動する
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) を使用すると、すぐに使える最大 15 個の AvalancheGo ノードでプライベート テスト ネットワーク デプロイメントをスピンアップできます。Avash は、lua スクリプトによる通常のタスクの自動化をサポートします。これにより、さまざまな構成に対して迅速なテストが可能になります。avash を初めて使用する際は、それを[インストールしてビルド](https://github.com/ava-labs/avash#quick-setup)する必要があります。
 
-Start a local five node Avalanche network:
+Avalancheネットワークを起動します:
 
 ```text
 cd /path/to/avash
@@ -30,39 +30,39 @@ go build
 runscript scripts/five_node_staking.lua
 ```
 
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
+5つのノードAvalancheネットワークがマシン上で実行されています。Avash を終了したい場合は、`exit` を実行しますが、今すぐそれをしないで、このターミナルタブを閉じないでください。
 
-## Create truffle directory and install dependencies
+## Truffle ディレクトリを作成し、依存関係をインストールします。
 
-Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
+`Truffle` ディレクトリを作成し、さらに依存関係をインストールできるように、新しいターミナルタブを開きます。
 
-First, navigate to the directory within which you intend to create your `truffle` working directory:
+まず、`Truffle`の作業ディレクトリを作成するディレクトリに移動します。
 
 ```text
 cd /path/to/directory
 ```
 
-Create and enter a new directory named `truffle`:
+`Truffleという`名前の新しいディレクトリを作成して入力します。
 
 ```text
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
+`npm` を使用して[、Web3](https://web3js.readthedocs.io) をインストールします。これは EVM に通じるライブラリです。
 
 ```text
 npm install web3 -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+Web3を使ってHTTPプロバイダーを設定します。これは、Web3がEVMにどのように話すかです。最後に、boilerplace truffle プロジェクトを作成します。
 
 ```text
 truffle init
 ```
 
-## Update truffle-config.js
+## Truffle-config.jsを更新
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+`Truffle init` を実行したときに作成されたファイルの1つは、`truffle-config.js`です。`Truffle-config.js` に以下のように追加します。
 
 ```javascript
 const Web3 = require('web3');
@@ -83,11 +83,11 @@ module.exports = {
 };
 ```
 
-Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+APIコールを別のAvalancheGoノードに直接接続する場合は`、プロトコル、``ip`、`ポート`を変更できます。また、`GasPrice`と`gas`をAvalanche C-Chainの適切な値に設定することにも注意してください。
 
-## Add Storage.sol
+## Storage.solを追加
 
-In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
+`contracts` ディレクトリーに `Storage.sol` という新しいファイルを追加し、次のコードブロックを追加します。
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -110,7 +110,7 @@ contract Storage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
     function retrieve() public view returns (uint256){
@@ -119,11 +119,11 @@ contract Storage {
 }
 ```
 
-`Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
+`Storage`はStore関数でブロックチェーンに数字を書き、`Reatribe`関数でブロックチェーンから番号を読み戻すこと`が`できるSolidityスマートコントラクトです。
 
-## Add new migration
+## 新しいマイグレーションを追加
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
+`2_deploy_contracts.js`という名前の`マイグレーションズ`・ディレクトリーに新しいファイルを作成し、次のコード・ブロックを追加します。これにより、`Storage` スマートコントラクトをブロックチェーンにデプロイします。
 
 ```javascript
 const Storage = artifacts.require("Storage");
@@ -133,15 +133,15 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+## Truffleとの契約をコンパイルする
 
-Any time you make a change to `Storage.sol` you need to run `truffle compile`.
+`Storage.sol` に変更を加えるときはいつでも`、Truffle compile を`実行する必要があります。
 
 ```text
 truffle compile
 ```
 
-You should see:
+JPY-JPY-JPY
 
 ```text
 Compiling your contracts...
@@ -153,94 +153,85 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+## C-Chainでアカウントを作成、資金調達、およびロック解除
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
+C-Chain にスマートコントラクトをデプロイする際、Truffle は、移行時に使用される`from`アドレスとして、C-Chain クライアントが提供する最初の利用可能なアカウントにデフォルトで使用します。
 
-### Create an account
+### アカウントを作成する
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
+Truffleには非常に便利な[コンソール](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console)があり、ブロックチェーンや契約書とやり取りに使用できます。コンソールを開きます:
 
 ```text
 truffle console --network development
 ```
 
-Then, in the console, create the account:
+次に、コンソールでアカウントを作成します。
 
 ```text
-truffle(development)> let account = web3.eth.personal.newAccount()
+truffle(development)> let account = await web3.eth.personal.newAccount()
 ```
 
-This returns:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
 ```text
 undefined
 ```
 
-Print the account:
+アカウントを印刷します:
 
 ```text
 truffle(development)> account
 ```
 
-This prints the account:
+これはアカウントを表示します:
 
 ```text
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
-Exit the truffle console:
+### アカウントのロック解除:
 
 ```text
-truffle(development)> .exit
+truffle(development)> await web3.eth.personal.unlockAccount(account)
 ```
 
-### Fund your account
-
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
-
-### Unlock your account
-
-Create a new file called `web3_script.js` in the `truffle` directory and add the following:
-
-```javascript
-// web3_script.js
-let Web3 = require('web3');
-let web3 = new Web3("http://localhost:9650/ext/bc/C/rpc");
-
-let main = async () => {
-  let accounts = await web3.eth.personal.getAccounts();
-  console.log(accounts);
-  let account = accounts[0];
-  let unlock = await web3.eth.personal.unlockAccount(account);
-  console.log(unlock);
-}
-
-main()
-```
-
-Run the script to unlock your account.
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
 ```text
-node web3_script.js
-```
-
-This should return something like:
-
-```javascript
-[ '0x34Cb796d4D6A3e7F41c4465C65b9056Fe2D3B8fD' ]
 true
 ```
 
-## Run Migrations
+### あなたのアカウントに資金を供給する
 
-Now everything is in place to run migrations and deploy the `Storage` contract:
+[AVAX Transfer AVAX Transfer AVAX Tween X-Chain と C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) チュートリアルで、新しく作成されたアカウントに資金を提供します。契約展開のコストをカバーするために、少なくとも`135422040` nAVAXをアカウントに送信する必要があります。
+
+### スクリプトアカウント作成と資金調達
+
+[Cinque McFarlane-Blake](https://github.com/cinquemb) はこのプロセスを自動化する便利なスクリプトを作成しました。[ここ](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js)で見つけることができます。このコマンドを使用してダウンロードします:
 
 ```text
-truffle migrate --network development
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
 ```
 
-You should see:
+**注**: このチュートリアルでは、`truffle-config.js` を設定する際に手順に従った場合、port 9545 \(Truffle\ で使用されるデフォルト)ではなく、port 9650 を使用するために `make_accounts.js` スクリプトを変更する必要があります。
+
+スクリプトを実行できます:
+
+```text
+truffle exec make_accounts.js --network development
+```
+
+Scriptはアカウントを作成し、C-Chainアドレスに資金を提供します。スクリプト内の`maxAccounts`と`amount`s変数を編集することで、AVAXの入金口数とAVAXの量をカスタマイズできます。
+
+## マイグレーションを実行する
+
+これで、マイグレーションを実行し、`Storage`コントラクトを展開することができます。
+
+```text
+truffle(development)> migrate --network development
+```
+
+JPY-JPY-JPY
 
 ```text
 Compiling your contracts...
@@ -294,13 +285,13 @@ Summary
 > Final cost:          0.13542204 ETH
 ```
 
-If you didn't create an account on the C-Chain you'll see this error:
+C-Chainでアカウントを作成していない場合、このエラーが表示されます。
 
 ```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
-If you didn't fund the account, you'll see this error:
+アカウントに資金を供給していない場合、次のエラーが表示されます。
 
 ```text
 Error:  *** Deployment Failed ***
@@ -313,7 +304,7 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlock the account, you'll see this error:
+アカウントのロックを解除していない場合、次のエラーが表示されます:
 
 ```text
 Error:  *** Deployment Failed ***
@@ -321,43 +312,43 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## Interacting with your contract
+## 契約書と交流する
 
-Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
+これで`、`ストレージ契約がデプロイされました。ブロックチェーンに数字を書き、それを元に戻してみましょう。Truffle コンソールを再度開きます:
 
-```text
-truffle console --network development
-```
-
-Get an instance of the deployed `Storage` contract:
+Deploy `Storage` Contractのインスタンスを取得します。
 
 ```javascript
 truffle(development)> let instance = await Storage.deployed()
 ```
 
-This returns:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
 ```text
 undefined
 ```
 
-### Writing a number to the blockchain
+### ブロックチェーンに数字を書く
 
-Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
+`Storage`コントラクトのインスタンスがあれば、`store`メソッドを呼び出して、ブロックチェーンに書き込むように番号を渡します。
 
 ```javascript
 truffle(development)> instance.store(1234)
 ```
 
-If you see this error:
+このエラーが表示された場合:
 
 ```text
 Error: Returned error: authentication needed: password or unlock
 ```
 
-Then run this again: `node web3_script.js`
+次に、これを再び実行します:
 
-You should see something like:
+```text
+truffle(development)> await web3.eth.personal.unlockAccount(account[0])
+```
+
+JP-JP-
 
 ```javascript
 {
@@ -381,33 +372,33 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### Blockhainから数字を読み込む
 
-To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
+ブロックチェーンから数字を読み込むには、`Storage` contract インスタンスの`revew-`modeを呼び出します。
 
 ```javascript
 truffle(development)> let i = await instance.retrieve()
 ```
 
-This should return:
+これが返されるはずです:
 
 ```javascript
 undefined
 ```
 
-The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumber` method to see the value:
+`JavaScript`-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-`JavaScript`-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri`.toNumber`メソッドを呼び出して値を確認します。
 
 ```javascript
 truffle(development)> i.toNumber()
 ```
 
-You should see the number you stored.
+あなたが保存した番号が表示されるはずです。
 
 ```javascript
 1234
 ```
 
-## Summary
+## JavaScript-JP-JP-
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+これで、ローカルAvalancheネットワークを起動し、Truffleプロジェクトを作成し、Solidity契約の作成、コンパイル、デプロイ、およびやり取りを行うために必要なツールが用意されています。
 
