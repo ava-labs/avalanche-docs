@@ -1,42 +1,42 @@
-# Network Protocol
+# ネットワークプロトコル
 
-Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
+AvalancheネットワークはAvalancheノード間のコア通信フォーマットを定義しています。Payload Packingには[、Primitive](serialization-primitives.md) serialization formatを使用しています。
 
-`"Containers"` are mentioned extensively in the description. A Container is simply a generic term for blocks or vertices, without needing to specify whether the consensus algorithm is DAG or Chain.
+`「コンテナ」`は、説明の中で広く言及されています。コンセンサスアルゴリズムがDAGかChainであるかどうかを指定する必要はありません。
 
-## GetVersion
+## GetVersion-JP
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+`GetVersion` では、`レスポンス`として送信する Version メッセージを要求します。
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+`GetVersion` メッセージで使用されるOpCodeは: `0x00`です。
 
-### What GetVersion contains
+### GetVersion には何が含まれていますか？
 
-The payload of a `GetVersion` message is empty.
+`GetVersion` メッセージのペイロードは空です。
 
 ```text
 []
 ```
 
-### How GetVersion is handled
+### GetVersionの取り扱い方法
 
-A node receiving a `GetVersion` message must respond with a `Version` message containing the current time and node version.
+`GetVersion` メッセージを受け取るノードは、現在の時刻とノードバージョンを含む`Version` メッセージで応答する必要があります。
 
-### When GetVersion is sent
+### GetVersion が送信される場合
 
-`GetVersion` is sent when a node is connected to another node, but has not yet received a `Version` message. It may, however, be re-sent at any time.
+`GetVersion` はノードが別のノードに接続されているときに送信されますが、まだ`Versionメッセージ`を受けていません。ただし、いつでも再送することができます。
 
-## Version
+## JavaScript-JavaScript-JavaScript-Java
 
-`Version` ensures that the nodes we are connected to are running compatible versions of Avalanche, and at least loosely agree on the current time.
+`バージョン`では、接続されているノードが互換性のあるバージョンのAvalancheを実行していることを保証し、少なくとも現在の時間に合意します。
 
-The OpCode used by `Version` messages is: `0x01`.
+`Version` メッセージで使用される OpCode は: `0x01` です。
 
-### What Version contains
+### JPJ-PARJ-PAR
 
-`Version` contains the node’s current time in Unix time format in number of milliseconds since the beginning of the epoch in 01/01/1970, as well as a version string describing the version of the code that the node is running.
+`Version`には、ノードの現在時刻をUNIX時刻形式で1970年1月1日から1970年1月1日までのエポックの開始時刻をミリ秒単位で記述した文字列と、ノードが実行しているコードのバージョンを記述したバージョン文字列が含まれています。
 
-Content:
+コンテンツ:
 
 ```text
 [
@@ -45,17 +45,17 @@ Content:
 ]
 ```
 
-### How Version is handled
+### JavaScript-JP-JP-
 
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
+バージョンが互換性がない場合や現在の時刻が多すぎると、接続は終了します。
 
-### When Version is sent
+### Versionが送信される場合
 
-`Version` is sent in response to a `GetVersion` message.
+`JavaScript```-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-
 
-### Version Example
+### バージョン例
 
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
+`バージョンメッセージ`を`2008年11月16日12:00am（UTC）`とバージョン`avalanche/0.0.1`で送信する
 
 ```text
 [
@@ -71,43 +71,43 @@ Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)`
 ]
 ```
 
-## GetPeers
+## GetPeers-JP
 
-### Overview
+### JavaScript-JP-JP-
 
-`GetPeers` requests that a `Peers` message be sent as a response.
+`GetPeers`は`Peersメッセージ`をレスポンスとして送信することを要求します。
 
-The OpCode used by `GetPeers` messages is: `0x02`.
+`GetPeers`メッセージで使用されるOpCodeは`0x02`です。
 
-### What GetPeers contains
+### GetPeersが含まれているもの
 
-The payload of a `GetPeers` message is empty.
+`GetPeers` メッセージのペイロードは空です。
 
 ```text
 []
 ```
 
-### How GetPeers is handled
+### GetPeersの取り扱い方法
 
-A node receiving `GetPeers` request must respond with a `Peers` message containing the IP addresses of its connected, staking nodes.
+`GetPeers`リクエストを受け取るノードは、接続されたステーキングノードの IP アドレスを含む`Peersメッセージ`で応答する必要があります。
 
-### When GetPeers is sent
+### GetPeersが送られるとき
 
-A node sends `GetPeers` messages upon startup to discover the participants in the network. It may also periodically send `GetPeers` messages in order to discover new nodes as they arrive in the network.
+ノードは、ネットワーク内の参加者を発見するために、起動時に`GetPeers`メッセージを送信します。また、ネットワークに到着したときに新しいノードを発見するために`GetPeers`メッセージを定期的に送信することもできます。
 
-## Peers
+## Peers-JP
 
-### Overview
+### JavaScript-JP-JP-
 
-`Peers` message contains a list of peers, represented as IP Addresses. Note that an IP Address contains both the IP and the port number, and supports both IPv4 and IPv6 format.
+`Peers` メッセージには、IP アドレスとして表現されるピアのリストが含まれています。IPアドレスにはIPとポート番号の両方が含まれており、IPv4とIPv6の両方のフォーマットをサポートしています。
 
-The OpCode used by `Peers` messages is: `0x03`.
+`Peers`メッセージで使用されるOpCodeは`0x03`です。
 
-### What Peers contains
+### Peersが含まれているもの
 
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
+`Peers`には、このノードが現在接続しているステーキングノードのIPアドレスが含まれています。
 
-Content:
+コンテンツ:
 
 ```text
 [
@@ -115,17 +115,17 @@ Content:
 ]
 ```
 
-### How Peers is handled
+### Peersの取り扱い方法
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the message to its own list of neighbors, and forge connections to any new nodes.
+`Peers`メッセージを受信するとき、ノードはメッセージに表示されるノードを自分の隣接するノードと比較し、新しいノードへの接続をフォージする必要があります。
 
-### When Peers is sent
+### Peersが送られる場合
 
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
+`Peersメッセージ`は`GetPeers`メッセージに応じて送信する必要はなく、新しく到着したノードを発表するために定期的に送信されます。このようなプッシュゴシップのデフォルトの期間は60秒です。
 
-### Peers Example
+### Peers 例
 
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
+`Peers`メッセージ`をIPアドレス「127.0.0.1:9650」`と`「[2001:0db8:ac10:fe01::]:12345」`で送信する
 
 ```text
 [
@@ -141,23 +141,23 @@ Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0
 ]
 ```
 
-## Get
+## JavaScript-JP-JP-
 
-### Overview
+### JavaScript-JP-JP-
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+`Get`メッセージは、ノードからコンテナ、つまりblockまたはvertexを要求します。
 
-The OpCode used by `Get` messages is: `0x04`.
+`Get`メッセージで使用されるOpCodeは`0x04`です。
 
-### What Get contains
+### Get には何が含まれていますか？
 
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+`Get`メッセージには、`SubnetID`、`RequestID`、`ContainerID`が含まれています。
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** は、このメッセージがどのサブネットに宛てられているかを定義します。
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
+**`RequestID`** は、ノードから送信されたメッセージを追跡するのに役立つカウンターです。ノードがプロンプトされていないメッセージを送信するたびに、そのノードはメッセージに対して新しい一意の`RequestID`を作成します。
 
-**`ContainerID`** is the identifier of the requested container.
+**`ContainerID`** は、要求されたコンテナの識別子です。
 
 ```text
 [
@@ -167,15 +167,15 @@ A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How Get is handled
+### Get の処理方法
 
-The node should reply with a `Put` message with the same `SubnetID`, `RequestID`, and `ContainerID` along with the `Container` with the specified identifier. Under correct situations, a node should only be asked for a container that it has. Therefore, if the node does not have the specified container, the `Get` message can safely be dropped.
+Nodeは、`Put`メッセージと同じ`SubnetID`、`RequestID`、`ContainerID`と、ContainerIDと、指定した識別子を持つ`ContainerID`を返信する必要があります。正しい状況では、ノードはそのコンテナを求められるべきです。したがって、ノードに指定されたコンテナがない場合、`Get`メッセージを安全にドロップできます。
 
-### When Get is sent
+### Getが送信される場合
 
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
+ノードは、コンテナの存在について説明するノードに`Get`メッセージを送信します。例えば、RickとMortyの2つのノードがあるとします。Rick`が``ContainerID`を含む`PullQuery`メッセージを送信した場合、MortyがContainerIDを取得したGetメッセージを送信します。
 
-### Get Example
+### Get Exampleを取得する
 
 ```text
 [
@@ -197,25 +197,25 @@ A node will send a `Get` message to a node that tells us about the existence of 
 ]
 ```
 
-## Put
+## Put QuickForm
 
-### Overview
+### JavaScript-JP-JP-
 
-A `Put` message provides a requested container to a node.
+`Put`メッセージは、要求されたコンテナをノードに提供します。
 
-The OpCode used by `Put` messages is: `0x05`.
+`Put`メッセージで使用されるOpCodeは`0x05`です。
 
-### What Put contains
+### Put 内容
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+`Put`メッセージには、`SubnetID`、`RequestID`、`ContainerID`、およびContainerが含まれています`。`
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** は、このメッセージがどのサブネットに宛てられているかを定義します。
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** は、ノードから送信されたメッセージを追跡するのに役立つカウンターです。
 
-**`ContainerID`** is the identifier of the container this message is sending.
+**`ContainerID`** は、このメッセージが送信するコンテナの識別子です。
 
-**`Container`** is the bytes of the container this message is sending.
+**`Container`** は、このメッセージが送信するコンテナのバイトです。
 
 ```text
 [
@@ -226,15 +226,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How Put is handled
+### Putの取り扱い方法
 
-The node should attempt to add the container to consensus.
+Node はコンセンサスにコンテナを追加しようとします。
 
-### When Put is sent
+### Putが送信されるとき
 
-A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
+ノードがアクセスできるコンテナのGetメッセージを受け取るときに、`Put`メッセージを送信します。
 
-### Put Example
+### Put 例
 
 ```text
 [
@@ -258,25 +258,25 @@ A node will send a `Put` message in response to receiving a Get message for a co
 ]
 ```
 
-## PushQuery
+## PushQuery-JP
 
-### Overview
+### JavaScript-JP-JP-
 
-A `PushQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus. If the `ContainerID` is not known, the `Container` is optimistically provided.
+`PushQuery`メッセージは、指定した`ContainerID`がコンセンサスに追加された後、ノードから好ましいcontainerIDを要求します。`ContainerID```が不明な場合、コンテナは最適化されます。
 
-The OpCode used by `PushQuery` messages is: `0x06`.
+`PushQuery` メッセージで使用されるOpCodeは: `0x06`です。
 
-### What PushQuery contains
+### PushQuery が含まれているもの
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+`PushQuery` メッセージには、`SubnetID`、`RequestID`、`ContainerID`、およびContainerが含まれています`。`
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** は、このメッセージがどのサブネットに宛てられているかを定義します。
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** は、ノードから送信されたメッセージを追跡するのに役立つカウンターです。
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`ContainerID`** は、レスポンスが送信される前にこのメッセージがコンセンサスに追加されることを期待するコンテナの識別子です。
 
-**`Container`** is the bytes of the container with identifier `ContainerID`.
+**`Container`**は、`ContainerID` という識別子を持つコンテナのバイトです。
 
 ```text
 [
@@ -287,15 +287,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How PushQuery is handled
+### PushQuery の取り扱い方法
 
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Node はコンセンサスにコンテナを追加しようとします。コンテナがコンセンサスに追加された後、`Chits`メッセージはノードの現在のpreference\(s\)で送信されます。
 
-### When PushQuery is sent
+### PushQuery が送信される場合
 
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+ノードは`PushQuery`メッセージを送信する必要があります。このノードの現在の環境設定を知りたい場合、ノードが`Container`をまだ学習していない可能性があると感じることです。ノードは、新しいコンテナを学習したとき、または "awhile" のためのコンテナが保留中の状態だったときに、ノード設定を学びたいと思います。
 
-### PushQuery Example
+### PushQuery 例
 
 ```text
 [
@@ -319,23 +319,23 @@ A node should send a `PushQuery` message if it wants to learn of this node’s c
 ]
 ```
 
-## PullQuery
+## PullQuery-JP
 
-### Overview
+### JavaScript-JP-JP-
 
-A `PullQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus.
+`PullQuery` メッセージは、指定した`ContainerID`がコンセンサスに追加された後、ノードから好ましいcontainerIDを要求します。
 
-The OpCode used by `PullQuery` messages is: `0x07`.
+`PullQuery` メッセージで使用されるOpCodeは: `0x07`です。
 
-### What PullQuery contains
+### PullQuery には何が含まれていますか？
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+`PullQuery` メッセージには、`SubnetID`、`RequestID`、および`ContainerID`が含まれています。
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** は、このメッセージがどのサブネットに宛てられているかを定義します。
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** は、ノードから送信されたメッセージを追跡するのに役立つカウンターです。
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`ContainerID`** は、レスポンスが送信される前にこのメッセージがコンセンサスに追加されることを期待するコンテナの識別子です。
 
 ```text
 [
@@ -345,15 +345,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How PullQuery is handled
+### PullQuery の取り扱い方法
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+`ContainerID`を追加していないノードがコンセンサスにコンテナを追加しようと試みるべきです。コンテナがコンセンサスに追加された後、`Chits`メッセージはノードの現在のpreference\(s\)で送信されます。
 
-### When PullQuery is sent
+### PullQuery が送信される場合
 
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+ノードは、このノードの現在の環境設定を知りたい場合は、`PullQuery`メッセージを送信する必要があります。そして、ノードがすでに`Container`を知っている可能性が高いと感じています。ノードは、新しいコンテナを学習したとき、または "awhile" のためのコンテナが保留中の状態だったときに、ノード設定を学びたいと思います。
 
-### PullQuery Example
+### PullQuery 例
 
 ```text
 [
@@ -375,23 +375,23 @@ A node should send a `PullQuery` message if it wants to learn of this node’s c
 ]
 ```
 
-## Chits
+## Chits-JP
 
-### Overview
+### JavaScript-JP-JP-
 
-A `Chits` message provides a requested set of preferred container\(s\) to a node.
+`Chits`メッセージは、要求された好ましいコンテナ\(s\)のセットをノードに提供します。
 
-The OpCode used by `Chits` messages is: `0x08`.
+`Chits`メッセージで使用されるOpCodeは`0x08`です。
 
-### What Chits contains
+### Chitsが含まれているもの
 
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
+`Chits` メッセージには、`SubnetID`、`RequestID`、および`Preferences`が含まれています。
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** は、このメッセージがどのサブネットに宛てられているかを定義します。
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** は、ノードから送信されたメッセージを追跡するのに役立つカウンターです。
 
-**`Preferences`** is the list of containerIDs that fully describe the node’s preferences.
+**`Preferences`** は、ノードの設定を完全に記述する containerID のリストです。
 
 ```text
 [
@@ -401,15 +401,15 @@ A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
 ]
 ```
 
-### How Chits is handled
+### Chitsの取り扱い方法
 
-The node should attempt to add any referenced containers to consensus. If the referenced containers can’t be added, the node can ignore the missing containers and apply the remaining chits to the poll. Once a poll is completed, container confidences should be updated appropriately.
+Node は、参照されたコンテナをコンセンサスに追加しようとします。参照されたコンテナを追加できない場合、ノードは欠けているコンテナを無視して、残りのチットをポーリングに適用できます。投票が完了すると、コンテナの信頼関係を適切に更新する必要があります。
 
-### When Chits is sent
+### Chitsが送信されるとき
 
-A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
+ノードはコンセンサスに追加したコンテナの`PullQuery`または`PushQuery`メッセージを受け取るために、`Chits`メッセージを送信します。
 
-### Chits Example
+### Chitsの例
 
 ```text
 [
