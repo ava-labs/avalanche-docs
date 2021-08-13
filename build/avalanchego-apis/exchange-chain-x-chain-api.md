@@ -916,13 +916,13 @@ avm.getAddressTxs({
 ```
 
 ##### Request parameters
-* `address`  wallet address.
-* `assetID`  ID of the asset for which the transactions are requested.
-* `pageSize` Number of items to return per page. Optional. Defaults to 1024.
+* `address`: The address for which we're fetching related transactions
+* `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
+* `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
 
 ##### Response parameters
-* `txIDs`  List of transaction IDs that belong to this address.
-* `cursor` Page number or offset. Use this in request to get the next page.
+* `txIDs`: List of transaction IDs that affected the balance of this address.
+* `cursor`: Page number or offset. Use this in request to get the next page.
 
 #### **Example Call**
 
