@@ -1,18 +1,18 @@
-# Create a Subnet
+# サブネットの作成
 
-## Introduction
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
-A [subnet](../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
+[サブネット](../../../learn/platform-overview/#subnets)とは、バリデーターのセットです。サブネットは、一連のブロックチェーンを検証します。各ブロックチェーンは、ブロックチェーン作成時に指定された1つのサブネットで検証されます。Subnetsは、許可されたブロックチェーンを作成できる強力なプリミティブです。
 
-When a subnet is created, a threshold and a set of keys are specified. \(Actually the addresses of the keys, not the keys themselves, are specified.\) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
+サブネットが作成されると、閾値とキーのセットが指定されます。JavaScript-JP-JP-\) そのサブネットにバリデーターを追加するには、それらのキーからの_閾値_署名が必要です。これらをサブネットの**コントロールキー**と呼び、コントロールキーのシグネチャーをサブネットにバリデーターを追加するトランザクションでコントロールキーのシグネチャーを呼び出します**。**アップショットは、サブネットがメンバーシップを制御していることです。
 
-In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
+このチュートリアルでは、2つのコントロールキーと2の閾値を持つ新しいサブネットを作成します。
 
-### Generate the Control Keys <a id="generate-the-control-keys"></a>
+### コントロールキーの生成<a id="generate-the-control-keys"></a>
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
+まず、2つのコントロールキーを生成しましょう。これを行うには、[`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) これにより新しい秘密鍵が生成され、ユーザーに保存されます。
 
-To generate the first key:
+最初のキーを生成するには:
 
 ```cpp
 curl -X POST --data '{
@@ -26,7 +26,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+これにより、最初の制御キー \(再び、それは実際に最初の制御キー\\の_アドレス_を与えます)。キーは、指定したユーザーによって保持されます。
 
 ```cpp
 {
@@ -38,7 +38,7 @@ This gives the first control key \(again, it actually gives the _address_ of the
 }
 ```
 
-Generate the second key:
+2番目のキーを生成します:
 
 ```cpp
 curl -X POST --data '{
@@ -52,7 +52,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the second control key, which is held by the user we just specified:
+レスポンスには、指定したユーザーが保持する2番目の制御キーが含まれています。
 
 ```cpp
 {
@@ -64,9 +64,9 @@ The response contains the second control key, which is held by the user we just 
 }
 ```
 
-### Create the Subnet <a id="create-the-subnet"></a>
+### サブネットの作成<a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
+サブネットを作成するには、[`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet) を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -85,7 +85,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
+レスポンスはトランザクションのIDを取得します。これは新しく作成したSubnetのIDでもあります。
 
 ```cpp
 {
@@ -98,9 +98,9 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 }
 ```
 
-### Verifying Success <a id="verifying-success"></a>
+### 成功の検証<a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
+[`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) を呼び出すことで、存在するすべてのサブネットを取得できます:
 
 ```cpp
 curl -X POST --data '{
@@ -111,7 +111,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that our subnet was created:
+レスポンスは、サブネットが作成されたことを確認します。
 
 ```cpp
 {
@@ -132,7 +132,7 @@ The response confirms that our subnet was created:
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
+### Validators をサブネットに追加する<a id="add-validators-to-the-subnet"></a>
 
-This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
+この[チュートリアル](../nodes-and-staking/add-a-validator.md)では、バリデーターをサブネットに追加する方法を説明します。
 
