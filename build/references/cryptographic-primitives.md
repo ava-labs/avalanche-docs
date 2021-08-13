@@ -1,78 +1,95 @@
-# Cryptographic Primitives
+# Cryptographic Primitives - 暗号プリミティブ
 
-[Avalanche](../../#avalanche) uses a variety of cryptographic primitives for its different functions. This file summarizes the type and kind of cryptography used at the network and blockchain layers.
+[Avalanche](../../#avalanche)はさまざまな機能にさまざまな暗号プリミティブを使用しています。このファイルは、ネットワークおよびブロックチェーンレイヤーで使用される暗号化の種類と種類をまとめています。
 
-## Cryptography in the Network Layer
+## ネットワークレイヤーの暗号化
 
-Avalanche uses Transport Layer Security, TLS, to protect node-to-node communications from eavesdroppers. TLS combines the practicality of public-key cryptography with the efficiency of symmetric-key cryptography. This has resulted in TLS becoming the standard for internet communication. Whereas most classical consensus protocols employ public-key cryptography to prove receipt of messages to third parties, the novel Snow\* consensus family does not require such proofs. This enables Avalanche to employ TLS in authenticating stakers and eliminates the need for costly public-key cryptography for signing network messages.
+AvalancheはTransport Layer Security(TLS)を使用して、ノード間通信を盗聴者から保護します。TLSは、公開鍵暗号の実用性と対称鍵暗号の効率性を組み合わせたものです。これによりTLSがインターネット通信の標準化に繋がりました。ほとんどの古典的なコンセンサスプロトコルでは、第三者へのメッセージの受信を証明するために公開鍵暗号を採用しているのに対し、新しいSnow\*コンセンサスファミリーではそのような証明を必要としない。これによりAvalancheはステーカーの認証にTLSを採用し、ネットワークメッセージに署名するための高価な公開鍵暗号化の必要性をなくします。
 
-### TLS Certificates
+### TLS 証明書
 
-Avalanche does not rely on any centralized third-parties, and in particular, it does not use certificates issued by third-party authenticators. All certificates used within the network layer to identify endpoints are self-signed, thus creating a self-sovereign identity layer. No third parties are ever involved.
+Avalanche は一元化されたサードパーティに依存せず、特に、サードパーティ認証子によって発行された証明書を使用しません。エンドポイントを識別するためにネットワーク層内で使用されるすべての証明書は、自己署名され、それゆえ、自己主権の ID レイヤーを作成します。第三者には関与していません。
 
-### TLS Addresses
+### TLS アドレス
 
-To avoid posting the full TLS certificate to the Platform chain, the certificate is first hashed. For consistency, Avalanche employs the same hashing mechanism for the TLS certificates as is used in Bitcoin. Namely, the DER representation of the certificate is hashed with sha256, and the result is then hashed with ripemd160 to yield a 20-byte identifier for stakers.
+TLS 証明書を Platform チェーンに投稿しないようにするには、証明書は最初にハッシュされます。Avalancheは、Bitcoinで使用されているTLS証明書のハッシュ化メカニズムを採用しています。つまり、証明書のDER表現はsha256でハッシュされ、結果はripemd160でハッシュされ、ステーカーの20バイト識別子が得られます。
 
-This 20-byte identifier is represented by “NodeID-” followed by the data’s [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
+この20バイト識別子は、"NodeID-" で表現さ[れ](https://support.avalabs.org/en/articles/4587395-what-is-cb58)ます。
 
-## Cryptography in the Avalanche Virtual Machine
+## Avalanche仮想マシンにおける暗号化
 
-The Avalanche virtual machine uses elliptic curve cryptography, specifically `secp256k1`, for its signatures on the blockchain.
+Avalanche仮想マシンは、ブロックチェーン上の署名のために、楕円曲線暗号技術、特に`secp256k1`を使用しています。
 
-This 32-byte identifier is represented by “PrivateKey-” followed by the data’s [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded string.
+この32バイト識別子は、"PrivateKey-" で表現されます。その後にデータの[CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58)エンコードされた文字列が続きます。
 
-### Secp256k1 Addresses
+### Secp256k1 アドレス
 
-Avalanche is not prescriptive about addressing schemes, choosing to instead leave addressing up to each blockchain.
+Avalancheはスキームにアドレスを指定するのではなく、各ブロックチェーンにアドレスを指定する方法を選ぶことができます。
 
-The addressing scheme of the X-Chain and the P-Chain relies on secp256k1. Avalanche follows a similar approach as Bitcoin and hashes the ECDSA public key. The 33-byte compressed representation of the public key is hashed with sha256 **once**. The result is then hashed with ripemd160 to yield a 20-byte address.
+X-ChainとP-Chainのアドレス指定スキームはsecp256k1に依存しています。AvalancheはBitcoinと同様のアプローチに従い、ECDSA公開鍵をハッシュします。公開鍵の33バイト圧縮表現は、sha256で一**度**ハッシュされます。結果は、20バイトアドレスを取得するためにripemd160でハッシュされます。
 
-Avalanche uses the convention `chainID-address` to specify which chain an address exists on. `chainID` may be replaced with an alias of the chain. When transmitting information through external applications, the CB58 convention is required.
+Avalanche はコンベンション `chainID-address` を使用して、どのチェーンに存在するかを指定します。`chainID` はチェーンのエイリアスに置き換えることができます。CB58条約は外部アプリケーションを通じて情報を伝達する場合に必要です。
 
-Read more about the [addressing scheme](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/en/articles/4596397-what-is-an-address/README.md) and [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32).
+### Bech32-JP
 
-### Secp256k1 Recoverable Signatures
+X-ChainおよびP-Chain上のアドレスは、[BIP 0173](https://en.bitcoin.it/wiki/BIP_0173)で概説されている[Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32)規格を使用します。Bech32アドレススキームには4つの部分があります。出現の順序で:
 
-Recoverable signatures are stored as the 65-byte **`[R || S || V]`** where **`V`** is 0 or 1 to allow quick public key recoverability. **`S`** must be in the lower half of the possible range to prevent signature malleability. Before signing a message, the message is hashed using sha256.
+* HOME-READ-COMPANY-JP-JP-JMainnet では `avax` です。
+* HRP をアドレスとエラー補正コードから区切る番号`1`。
+* Base-32 エンコードされた文字列は、20バイトアドレスを表します。
+* 6文字のbase-32エンコードされたエラー訂正コードです。
 
-### Secp256k1 Example
+さらに、Avalancheアドレスは、その上にあるチェーンのエイリアスに接頭辞を付けて、その後ダッシュが続きます。例えば、X-Chain アドレスは`X-`で接頭辞を付けています。
 
-Suppose Rick and Morty are setting up a secure communication channel. Morty creates a new public-private key pair.
+次の正規表現は、mainnet、fuji、localnetのX-Chain、P-Chain、C-Chainのアドレスにマッチします。Avalanche のすべての有効な Avalanche アドレスはこの正規表現に一致しますが、Avalanche アドレスでない文字列はこの正規表現に一致するかもしれません。
 
-Private Key: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070`
+```text
+^([XPC]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$
+```
+
+Avalancheの[アドレス指定スキーム](https://support.avalabs.org/en/articles/4596397-what-is-an-address)についてもっと読む。
+
+### Secp256k1 回復可能な署名
+
+回復可能な署名は65バイト**`[R || S || V]`****``**として保存され、公開鍵の迅速な回復可能性を可能にします。**`S`**は、署名の可鍛性を防ぐために可能な範囲の下半分になければなりません。メッセージに署名する前に、メッセージは sha256 を使用してハッシュされます。
+
+### Secp256k1 例
+
+RickとMortyが安全な通信チャネルを設定しているとします。Mortyは新しい公開鍵のペアを作成します。
+
+プライベートキー: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070`
 
 Public Key \(33-byte compressed\): `0x02b33c917f2f6103448d7feb42614037d05928433cb25e78f01a825aa829bb3c27`
 
-Because of Rick’s infinite wisdom, he doesn’t trust himself with carrying around Morty’s public key, so he only asks for Morty’s address. Morty follows the instructions, SHA256’s his public key, and then ripemd160’s that result to produce an address.
+リックの無限の知恵のため、彼はモーティの公開鍵を携帯すること自体を信頼していないので、彼はモーティの住所を尋ねるだけです。MortyはSHA256の公開鍵であり、その結果ripemd160のアドレスを生成します。
 
 SHA256\(Public Key\): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045bffa7b0d2f`
 
-Address: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
+住所: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
 
-Morty is quite confused because a public key should be safe to be public knowledge. Rick belches and explains that hashing the public key protects the private key owner from potential future security flaws in elliptic curve cryptography. In the event cryptography is broken and a private key can be derived from a public key, users can transfer their funds to an address that has never signed a transaction before, preventing their funds from being compromised by an attacker. This enables coin owners to be protected while the cryptography is upgraded across the clients.
+Mortyは、公開鍵が公共の知識であるために安全であるべきであるため、かなり混乱しています。Rick は、公開鍵をハッシュすると、秘密鍵の所有者を楕円曲線暗号化における潜在的な将来のセキュリティ上の欠陥から保護することを説明します。暗号化が壊れ、秘密鍵が公開鍵から生成される場合、ユーザーはトランザクションに署名したことがないアドレスに資金を転送することができ、その資金が攻撃者によって侵害されるのを防ぎます。これにより、コイン所有者は、クライアント全体で暗号化がアップグレードされる間、保護されます。
 
-Later, once Morty has learned more about Rick’s backstory, Morty attempts to send Rick a message. Morty knows that Rick will only read the message if he can verify it was from him, so he signs the message with his private key.
+その後、モーティーがリックのバックストーリーを知り、モーティーはリックにメッセージを送ろうとする。モーティはリックがメッセージを読むことを知っているので、彼がメッセージを秘密鍵で署名する。
 
-Message: `0x68656c702049276d207472617070656420696e206120636f6d7075746572`
+メッセージ：`0x68656c702049276d207472617070656420696e206120636f6d7075746572`
 
-Message Hash: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e4b7da`
+メッセージハッシュ: `0x912800c29d554fb9cdce579c0abba991165bbbc8bfec9622481d01e0b3e4b7da`
 
-Message Signature: `0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
+メッセージ署名：`0xb52aa0535c5c48268d843bd65395623d2462016325a86f09420c81f142578e121d11bd368b88ca6de4179a007e6abe0e8d0be1a6a4485def8f9e02957d3d72da01`
 
-Morty was never seen again.
+モーティーは二度と会ったことがない。
 
-## Signed Messages
+## 署名されたメッセージ
 
-A standard for interoperable generic signed messages based on the Bitcoin Script format and Ethereum format.
+Bitcoin Script 形式および Ethereum 形式に基づいた相互運用可能なジェネリック署名メッセージの標準です。
 
 ```text
 sign(sha256(length(prefix) + prefix + length(message) + message))
 ```
 
-The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` is the length of the prefix text and `length(message)` is an [integer](serialization-primitives.md#integer) of the message size.
+プレフィックスは単純に文字列 `\x1AAvalanche Signed Message:\n` です。ここで `0x1A` はプレフィックステキストの長さであり、`length(message)`はメッセージサイズの[整数](serialization-primitives.md#integer)です。
 
-### Gantt Pre-image Specification
+### Gantt Pre-image Specifications
 
 ```text
 +---------------+-----------+------------------------------+
@@ -86,9 +103,9 @@ The prefix is simply the string `\x1AAvalanche Signed Message:\n`, where `0x1A` 
                             +------------------------------+
 ```
 
-### Example
+### JPE-JP-JP
 
-As an example we will sign the message "Through consensus to the stars"
+例として、「星々にコンセンサスを通して」というメッセージに署名します。
 
 ```text
 // prefix size: 26 bytes
@@ -101,15 +118,15 @@ As an example we will sign the message "Through consensus to the stars"
 54 68 72 6f 75 67 68 20 63 6f 6e 73 65 6e 73 75 73 20 74 6f 20 74 68 65 20 73 74 61 72 73
 ```
 
-After hashing with `sha256` and signing the pre-image we return the value [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded: `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`. Here's an example using the [Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced).
+`sha256` でハッシュし、プリイメージに署名した後、[cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) エンコードされた値を返します。`4Eb2zAHF4JJZFJjmp4usSokTGqq9mEGwVMY2WZzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjjhqzvoRFvghnvSN`.[Avalanche Web Wallet](https://wallet.avax.network/wallet/advanced)を使用した例を示します。
 
-![Sign message](../../.gitbook/assets/sign-message.png)
+![メッセージメッセージ](../../.gitbook/assets/sign-message.png)
 
-## Cryptography in Ethereum Virtual Machine
+## Ethereum Virtual Machineの暗号化
 
-Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
+AvalancheノードはEthereum Virtual Machine \(EVM\)をサポートし、Ethereumで使用されるすべての暗号化構造を正確に複製します。これには、Keccakハッシュ関数やEVMで暗号化セキュリティに使用される他のメカニズムが含まれています。
 
-## Cryptography in Other Virtual Machines
+## 他の仮想マシンにおける暗号化
 
-Since Avalanche is an extensible platform, we expect that people will add additional cryptographic primitives to the system over time.
+Avalancheは拡張可能なプラットフォームであるため、私たちは時間の経過とともに、システムに追加の暗号プリミティブを追加することを期待しています。
 
