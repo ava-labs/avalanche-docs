@@ -1,142 +1,74 @@
 ---
-description: Avalancheでの構築に制限は存在しません。開発者は、強力かつ高い信頼性と安全性を持つアプリケーションを簡単に作成することができます。
+description: >-
+  Avalancheで構築。制限なしにビルドします。Avalancheを構築する開発者は、強力で信頼性があり、安全なアプリケーションを簡単に作成できます。
+
 ---
 
-# Developer Documentation
+# JPD-JPD-JPD
 
-## 開発者向けドキュメント
+## Avalanche-JP
 
-### 入門
+[Avalanche](https://avax.network)は、[分散型](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp)アプリケーションと[エンタープライズブロックチェーン](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain)展開を1つの相互運用性が高くスケーラブルなエコシステムで起動するためのオープンソースプラットフォームです。Avalancheは、ほぼ即時トランザクションの最終的には、グローバルな金融の規模のために構築された最初の分散型スマートコントラクトプラットフォームです。Ethereumの開発者はAvalancheをすぐに構築できます。
 
-{% tabs %}
-{% tab title="Ethereumからの導入" %}
-{% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
+Avalancheと他の分散型ネットワークとの重要な違いは、コンセンサスプロトコルです。時間の経過とともに、人々はブロックチェーンが遅く、スケーラブルでない必要があるという誤った理解に来ました。Avalancheプロトコルは、分散化を妥協することなく、強力な安全性保証、迅速な最終性、およびハイスループットを実現するためにコンセンサスに対する新しいアプローチを採用しています。
 
-{% endpage-ref %}
+## AVAX-JP
 
-{% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
+AVAXはAvalancheのネイティブトークンです。これは、手数料の支払い、ステーキングを通じてプラットフォームを保護し、Avalancheで作成された複数のサブネット間の基本的なアカウント単位を提供するために使用される硬いキャップの不足の資産です。`1 nAVAX`は`0.001` AVAXに等しいです。
 
-{% endpage-ref %}
-{% endtab %}
+## Avalancheコンセンサスプロトコル
 
-{% tab title="Avalancheウォレット" %}
-{% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
+![コンセンサス比較](.gitbook/assets/image%20%2810%29%20%281%29%20%281%29%20%281%29.png)
 
-{% endpage-ref %}
+Avalancheファミリーの議定書は、サブサンプリング投票を繰り返し行うことによって機能します。[JavaScript](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript[-](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-クエリーされたバリデーターがトランザクションが無効であると考えている場合、トランザクションをすでに拒否している場合、または競合するトランザクションを好む場合、トランザクションが拒否されるべきであると答えます。そうでなければ、トランザクションが受け入れられるべきであると考えていることを返信します。
 
-{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
+_JavaScript_-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-つまり、将来的にトランザクションについて問い合わせると、トランザクションが受け入れられるべきだと考えられることを返信します。同様に、バリデータは、トランザクションを拒否すべきだと考えるバリデータが十分に大部分が返信した場合、トランザクションを拒否することを好むでしょう。
 
-{% endpage-ref %}
+バリデータは、このサンプリングプロセスを繰り返します。バリデーターの_アルファ_が_ベータ_$$$$ $$ 連続したラウンドに対して、 \(acplet-or reject\)と同じ返信を返します。
 
-{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %}
+トランザクションに競合がない一般的なケースでは、最終化は非常に迅速に行われます。コンフリクトが存在する場合、正直なバリデータは、コンフリクトなトランザクションの周りに素早くクラスターを付け、すべての正しいバリデータがそのトランザクションを好むまで正のフィードバックループを入力します。これにより、競合しない取引の受け入れと競合する取引の拒否につながります。
 
-{% endpage-ref %}
-{% endtab %}
+![Avalanche Consensusの仕組み](.gitbook/assets/howavalancheconsensusworks.png)
 
-{% tab title="ステーキング" %}
-{% page-ref page="build/getting-started.md" %}
+\(システムパラメーターに基づく高い確率で\) もし正直なバリデータがトランザクションを受け入れるか拒否する場合、すべての正直なバリデータがそのトランザクションを受け入れるか拒否するか、または拒否するかを保証します。
 
-{% endpage-ref %}
+Avalancheコンセンサスプロトコルの技術的コンポーネントについては[、](https://arxiv.org/pdf/1906.08936.pdf)ホワイトペーパーを参照してください。
 
-{% page-ref page="build/tutorials/nodes-and-staking/" %}
+## Snowman Consensus Protocol-JP
 
-{% endpage-ref %}
-{% endtab %}
-
-{% tab title="詳細設定" %}
-{% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
-
-{% endpage-ref %}
-
-{% page-ref page="build/tutorials/platform/create-a-new-blockchain.md" %}
-
-{% endpage-ref %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
-
-{% endpage-ref %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
-
-{% endpage-ref %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
-
-{% endpage-ref %}
-{% endtab %}
-{% endtabs %}
-
-## Developer Documentation
-
-Avalancheでは制限のない構築が可能です。Avalancheを使用することで開発者は、強力で信頼性が高く安全なアプリケーションを簡単に作成することができます。
-
-## Avalanche
-
-[Avalanche](https://avax.network/)は、相互運用可能で拡張性の高い単一のエコシステムで[分散型アプリケーション](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp)とエンタープライズ[ブロックチェーン](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain)デプロイメントを起動するためのオープンソースプラットフォームです。 Avalancheを使用することで、ネットワーク層とアプリケーション層の両方を制御することができ、あなたが想像できるあらゆるものを構築することが可能になります。
-
-Avalancheと他の分散型ネットワークの主な相違点はコンセンサスプロトコルです。 一般的に、ブロックチェーンは時間の経過とともに低速になりかつスケーラブルではなくなるという誤った理解が広まっていました。 Avalancheプロトコルは、分散化を損なうことなく、強力な安全性の保証、迅速なファイナリティ、高スループットを実現するというコンセンサスへの新しいアプローチを採用しています。
-
-## Avalanche \(AVAX\) トークン
-
-Avalanche（AVAX）トークンは、Avalancheプラットフォームのネイティブトークンであり、ステークキングによるネットワークの安全性確保、ピアツーピア取引、料金の支払い、Avalancheプラットフォーム上に作成された複数のサブネットワーク間での基本的なアカウント単位として使用されます。1nAVAXは、0.00000000001AVAXに相当します。
-
-## Avalanche コンセンサスプロトコル
-
-![](https://lh4.googleusercontent.com/sPP4M2RkpY7_QAqT-XIXxIv18-_rbCP8WdfdvWHfGCZcdEsd3vCGd3i6rzRf1gWE2cI_h_OJsWMR7krXMI-58BYEVJ29M_IKS_T4Dc1Pgh8YHTwAk0s2fehphzjJEp2PQauoYhgq)
-
-**コンセンサスの比較**
-
-Avalancheファミリーのプロトコルは、サブサンプル投票を繰り返すことで動作します。[バリデーター](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)が[トランザクション](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)を受け入れるか拒否するかを決定するとき、バリデーターの中から少数のランダムなサブセットに、トランザクションを受け入れるべきか拒否すべきかを尋ねます。クエリされたバリデーターが、トランザクションが無効であると考える場合、既にそのトランザクションを拒否している場合、 矛盾するトランザクションが存在する場合には、そのトランザクションを拒否すべきであると回答され考えます。そうでない場合は、そのトランザクションは受け入れられるべきであると回答されます。
-
-サンプリングされたバリデーターの大部分\(αααα\)がトランザクションを受け入れるべきだと回答する場合、バリデーターはそのトランザクションを受け入れます。同様に、バリデーターのうちの大部分がトランザクションを拒否すべきであると回答した場合、バリデーターはトランザクションを拒否します。
-
-バリデーターはこのサンプリングプロセスを、問い合わせ先となったバリデーターのうち、αがβββのラウンドを連続して繰り返すことで同じように回答する\(受け入れるか否か\)まで繰り返します。
-
-トランザクションに矛盾がない場合には、ファイナリティが迅速に行われます。矛盾が生じている場合には、誠実なバリデーターが当該トランザクションに対して、全てのバリデーターがそのトランザクションを合意するようになるまで正のフィードバックループに入ります。これにより矛盾しないトランザクションが受け入れられ、矛盾するトランザクションが拒否されます。
-
-![](https://lh5.googleusercontent.com/-eteYpE8nH7a1qyTM71zTLUbKk9ckIGpPBqFKj2saLJcJfYf4akGaQhGaA_xB1DRUsWOwI4r8EHW-khjjU1kF9Vdy0DtVgaxnAHbiqSJNbG_WeMJZZa5i-dZ4eER7iqaz1nnecnP)
-
-**Avalancheのコンセンサスの仕組み**
-
-正当なバリデーターがトランザクションを承認または拒否する場合、全ての正当なバリデーターがそのトランザクションを承認または拒否することが（システムパラメーターに基づいて高確率で）保証されています。
-
-Avalancheコンセンサスプロトコルの技術的な構成要素については[ホワイトペーパー](https://arxiv.org/pdf/1906.08936.pdf) を参照してください。
-
-## Snowman コンセンサスプロトコル
-
-Snowmanは、チェーンに最適化されたコンセンサスプロトコルであり、ハイスループット、完全な順序付けがなされており、スマートコントラクトに最適なものとなっています。Snowmanは、[Avalancheコンセンサスプロトコル](https://github.com/ava-labs/avalanche-docs/blob/master/#avalanche-consensus-protocol)を搭載しており、[P-Chain](https://github.com/ava-labs/avalanche-docs/blob/master/learn/platform-overview/#platform-chain-p-chain)と[C-Chain](https://github.com/ava-labs/avalanche-docs/blob/master/learn/platform-overview/#contract-chain-c-chain)の両方がSnowmanのコンセンサスプロトコルを実装しています。
+Snowman は、チェーン最適化されたコンセンサスプロトコルで、高スループット、全量オーダーで、スマートコントラクトに最適です。スノーマンは[Avalancheコンセンサスプロトコル](./#avalanche-consensus-protocol)によって供給されています。[P-Chain](learn/platform-overview/#platform-chain-p-chain)と[C-Chain](learn/platform-overview/#contract-chain-c-chain)の両方でSnowmanコンセンサスプロトコルを実装しています。
 
 ## 主な特徴
 
-### スピード
+### JPS-PEED-JP
 
-コーネル大学のコンピュータサイエンティストのチームにより開発された新しいコンセンサスプロトコルを使用することにより1 秒以内のトランザクション確認を恒久的に実行することができます。
+Cornellのコンピュータ科学者チームによって開発された新しいコンセンサスプロトコルを使用し、1秒以内にトランザクションを永久に確認できます。
 
-### スケーラビリティ
+### Scalability-JP
 
-既存ブロックチェーンより桁違いに優れた、1秒単位で4,500件のトランザクションが可能です。
+1秒間に4,500のトランザクションが可能–既存のブロックチェーンよりも大きい順序です。
 
-### セキュリティ
+### --
 
-他のネットワークの51%標準と比較し、より高いセキュリティを保証します。
+より強力なセキュリティ保証が、他のネットワークで51%標準をはるかに上回っています。
 
-### フレキシビリティ
+### JP-JP-
 
-任意のロジックを含むカスタムブロックチェーンや分散型アプリを簡単に作成できます。
+ほとんど任意のロジックを含む、カスタムブロックチェーンと分散型アプリを簡単に作成できます。
 
-### サステナビリティ
+### JPS-JP-JP
 
-プルーフオブワークと比較して遥かにエネルギー効率の高いプルーフオブステークコンセンサスアルゴリズムを使用しています。
+Proof-of-workではなく、エネルギー効率の良いProof-of-stakeコンセンサスアルゴリズムを使用します。
 
 ### スマートコントラクトサポート
 
-Solidityでのスマートコントラクトの作成、Remix、Metamask、Truffleの利用などお馴染みのEthereumツールに対応しています。
+Solidityスマートコントラクトの作成と、Remix、Metamask、Truffleなどのお気に入りのEthereumツールがサポートされています。
 
-### プライベート/パブリックブロックチェーン
+### PrivateおよびPublic Blockchains
 
-独自のプライベートまたはパブリックブロックチェーンを作成することができます。
+独自のパブリックまたはプライベートブロックチェーンを作成します。
 
-### 金融向けの設計
+### 金融向けに設計
 
-複雑なカスタムルールの条件設定が可能なデジタルスマートアセットの作成と取引プロセスの簡易化をネイティブサポートしています。 
+複雑なカスタムルールセットでデジタルスマートアセットを簡単に作成し、取引するためのネイティブサポート。
 
