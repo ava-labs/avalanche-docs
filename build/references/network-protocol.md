@@ -1,42 +1,42 @@
-# Network Protocol
+# Protocole de réseau
 
-Avalanche network defines the core communication format between Avalanche nodes. It uses the [primitive serialization](serialization-primitives.md) format for payload packing.
+Le réseau Avalanche définit le format de communication principal entre les nœuds Avalanche. Il utilise le format [de sérialisation primitive](serialization-primitives.md) pour l'emballage de charge utile.
 
-`"Containers"` are mentioned extensively in the description. A Container is simply a generic term for blocks or vertices, without needing to specify whether the consensus algorithm is DAG or Chain.
+`Les "conteneurs"` sont mentionnés abondamment dans la description. Un conteneur est simplement un terme générique pour les blocs ou les sommets, sans avoir besoin de préciser si l'algorithme de consensus est DAG ou chaîne.
 
 ## GetVersion
 
-`GetVersion` requests for a `Version` message to be sent as a response.
+`GetVersion` demande qu'un message `Version` soit envoyé comme réponse.
 
-The OpCode used by `GetVersion` messages is: `0x00`.
+L'OpCode utilisé par les messages `GetVersion` est: `0x00`.
 
-### What GetVersion contains
+### Quoi que GetVersion contient
 
-The payload of a `GetVersion` message is empty.
+La charge utile d'un message `GetVersion` est vide.
 
 ```text
 []
 ```
 
-### How GetVersion is handled
+### Comment GetVersion gérée
 
-A node receiving a `GetVersion` message must respond with a `Version` message containing the current time and node version.
+Un noeud recevant un message `GetVersion` doit répondre avec un message `Version` contenant l'heure et la version du noeud courants.
 
-### When GetVersion is sent
+### Lorsque GetVersion envoyée
 
-`GetVersion` is sent when a node is connected to another node, but has not yet received a `Version` message. It may, however, be re-sent at any time.
+`GetVersion` est envoyé lorsqu'un noeud est connecté à un autre noeud, mais n'a pas encore reçu de message `version.` Il peut toutefois être réenvoyé à tout moment.
 
-## Version
+## Version anglaise
 
-`Version` ensures that the nodes we are connected to are running compatible versions of Avalanche, and at least loosely agree on the current time.
+`La version` assure que les nœuds auxquels nous sommes connectés sont en cours d'exécution des versions compatibles d'Avalanche, et du moins de manière lâche accord sur l'heure actuelle.
 
-The OpCode used by `Version` messages is: `0x01`.
+L'OpCode utilisé par les messages `Version` est: `0x01`.
 
-### What Version contains
+### Quelle version contient
 
-`Version` contains the node’s current time in Unix time format in number of milliseconds since the beginning of the epoch in 01/01/1970, as well as a version string describing the version of the code that the node is running.
+`La version` contient l'heure actuelle du noeud dans le format temps Unix en nombre de millisecondes depuis le début de l'époque du 01/01/1970, ainsi qu'une chaîne de version décrivant la version du code que le noeud est en cours d'exécution.
 
-Content:
+Contenu :
 
 ```text
 [
@@ -45,17 +45,17 @@ Content:
 ]
 ```
 
-### How Version is handled
+### Comment la version est gérée
 
-If the versions are incompatible or the current times differ too much, the connection will be terminated.
+Si les versions sont incompatibles ou les temps actuels diffèrent trop, la connexion sera terminée.
 
-### When Version is sent
+### Quand la version est envoyée
 
-`Version` is sent in response to a `GetVersion` message.
+`La version` est envoyée en réponse à un message `Getversion.`
 
-### Version Example
+### Exemple de version
 
-Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)` and the version `avalanche/0.0.1`
+Envoyer un message `version` avec l'heure `16 novembre 2008 à 12:00am (UTC)` et la version `avalanche/0.0.1`
 
 ```text
 [
@@ -73,41 +73,41 @@ Sending a `Version` message with the time `November 16th, 2008 at 12:00am (UTC)`
 
 ## GetPeers
 
-### Overview
+### Aperçu général
 
-`GetPeers` requests that a `Peers` message be sent as a response.
+`GetPeers``` demande qu'un message Peers soit envoyé comme réponse.
 
-The OpCode used by `GetPeers` messages is: `0x02`.
+L'OpCode utilisé par les messages `GetPeers` est: `0x02`.
 
-### What GetPeers contains
+### Ce que GetPeers contient
 
-The payload of a `GetPeers` message is empty.
+La charge utile d'un message `GetPeers` est vide.
 
 ```text
 []
 ```
 
-### How GetPeers is handled
+### Comment GetPeers est géré
 
-A node receiving `GetPeers` request must respond with a `Peers` message containing the IP addresses of its connected, staking nodes.
+Une demande de noeud recevant `GetPeers` doit répondre avec un message `Peers` contenant les adresses IP de ses noeuds de jalonnement connectés.
 
-### When GetPeers is sent
+### Lorsque GetPeers est envoyé
 
-A node sends `GetPeers` messages upon startup to discover the participants in the network. It may also periodically send `GetPeers` messages in order to discover new nodes as they arrive in the network.
+Un noeud envoie des messages `GetPeers` lors de la mise en démarrage pour découvrir les participants du réseau. Il peut également envoyer périodiquement des messages `GetPeers` afin de découvrir de nouveaux nœuds lorsqu'ils arrivent dans le réseau.
 
-## Peers
+## Les pairs
 
-### Overview
+### Aperçu général
 
-`Peers` message contains a list of peers, represented as IP Addresses. Note that an IP Address contains both the IP and the port number, and supports both IPv4 and IPv6 format.
+Le message `par les pairs` contient une liste de pairs, représentés comme adresses IP. Notez qu'une Adresse IP contient à la fois le numéro IP et le numéro de port, et supporte à la fois le format IPv4 et IPv6.
 
-The OpCode used by `Peers` messages is: `0x03`.
+L'OpCode utilisé par les messages `Peers` est: `0x03`.
 
-### What Peers contains
+### Ce que les pairs contient
 
-`Peers` contains the IP addresses of the staking nodes this node is currently connected to.
+`Peers` contient les adresses IP des nœuds de jalonnement auxquels ce nœud est actuellement connecté.
 
-Content:
+Contenu :
 
 ```text
 [
@@ -115,17 +115,17 @@ Content:
 ]
 ```
 
-### How Peers is handled
+### Comment les pairs sont manipulés
 
-On receiving a `Peers` message, a node should compare the nodes appearing in the message to its own list of neighbors, and forge connections to any new nodes.
+Lors de la réception d'un message `par les` pairs, un noeud doit comparer les noeuds apparaissant dans le message à sa propre liste de voisins, et forger les connexions à n'importe quel noeuds.
 
-### When Peers is sent
+### Lorsque les pairs sont envoyés
 
-`Peers` messages do not need to be sent in response to a `GetPeers` message, and are sent periodically to announce newly arriving nodes. The default period for such push gossip is 60 seconds.
+Les messages `par les pairs` n'ont pas besoin d'être envoyés en réponse à un message `GetPeers`, et sont envoyés périodiquement pour annoncer les nœuds nouvellement arrivants. La période par défaut pour ce type de gossip push est de 60 secondes.
 
-### Peers Example
+### Exemple par les pairs
 
-Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0db8:ac10:fe01::]:12345"`
+Envoyer un message `par les pairs` avec les adresses IP `"127.0.1:9650"` et `"[2001:0db8:ac10:fe01::]:12345"`
 
 ```text
 [
@@ -141,23 +141,23 @@ Sending a `Peers` message with the IP addresses `"127.0.0.1:9650"` and `"[2001:0
 ]
 ```
 
-## Get
+## Obtenez
 
-### Overview
+### Aperçu général
 
-A `Get` message requests a container, that is, block or vertex, from a node.
+Un message `obtenir` demande un conteneur, c'est-à-dire bloquer ou vertex, à partir d'un nœud.
 
-The OpCode used by `Get` messages is: `0x04`.
+L'OpCode utilisé par `Get` messages est: `0x04`.
 
-### What Get contains
+### Qu'est-ce que contient
 
-A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+Un message `Get` contient un `SubnetID`, `SubnetID`, et `Conteneur ID`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** définit quel sous-réseau ce message est destiné.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node. Each time a node sends an un-prompted message, the node will create a new unique `RequestID` for the message.
+**`RequestID`** est un compteur qui aide à garder la trace des messages envoyés par un nœud. Chaque fois qu'un noeud envoie un message non induit, le noeud créera un nouveau `RequestID` unique pour le message.
 
-**`ContainerID`** is the identifier of the requested container.
+**`Conteneur ID`** est l'identifiant du conteneur demandé.
 
 ```text
 [
@@ -167,15 +167,15 @@ A `Get` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How Get is handled
+### Comment obtenir géré
 
-The node should reply with a `Put` message with the same `SubnetID`, `RequestID`, and `ContainerID` along with the `Container` with the specified identifier. Under correct situations, a node should only be asked for a container that it has. Therefore, if the node does not have the specified container, the `Get` message can safely be dropped.
+Le noeud doit répondre avec un message `Put` avec le même `SubnetID`, `SubnetID`, et `Conteneur` avec le `Conteneur` avec l'identifiant spécifié. Dans les situations correctes, un noeud ne devrait être demandé qu'un conteneur qu'il a. Par conséquent, si le noeud n'a pas le conteneur spécifié, le message `Get` peut être abandonné en toute sécurité.
 
-### When Get is sent
+### Quand Get envoyé
 
-A node will send a `Get` message to a node that tells us about the existence of a container. For example, suppose we have two nodes: Rick and Morty. If Rick sends a `PullQuery` message that contains a `ContainerID`, that Morty doesn’t have the container for, then Morty will send a Get message containing the missing `ContainerID`.
+Un noeud enverra un message `Get` à un noeud qui nous indique l'existence d'un conteneur. Par exemple, supposons que nous avons deux nœuds: Rick et Morty. Si Rick envoie un message `PullQuery` qui contient un `Conteneur ID`, que Morty n'a pas le conteneur pour, alors Morty enverra un message Get contenant le `Conteneur` ID manquant.
 
-### Get Example
+### Obtenir l'exemple
 
 ```text
 [
@@ -197,25 +197,25 @@ A node will send a `Get` message to a node that tells us about the existence of 
 ]
 ```
 
-## Put
+## Mets
 
-### Overview
+### Aperçu général
 
-A `Put` message provides a requested container to a node.
+Un message `Put` fournit un conteneur demandé à un nœud.
 
-The OpCode used by `Put` messages is: `0x05`.
+L'OpCode utilisé par les messages `Put` est: `0x05`.
 
-### What Put contains
+### Qu'il contient
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+Un message `Put` contient un `SubnetID`, `SubnetID`, `Conteneur` et `conteneur`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** définit quel sous-réseau ce message est destiné.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** est un compteur qui aide à garder la trace des messages envoyés par un nœud.
 
-**`ContainerID`** is the identifier of the container this message is sending.
+**`Conteneur ID`** est l'identifiant du conteneur que ce message est envoyé.
 
-**`Container`** is the bytes of the container this message is sending.
+**`Conteneur`** est les octets du conteneur ce message est envoie.
 
 ```text
 [
@@ -226,15 +226,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How Put is handled
+### Comment mettre est géré
 
-The node should attempt to add the container to consensus.
+Le noeud devrait tenter d'ajouter le contenant au consensus.
 
-### When Put is sent
+### Quand la mise est envoyée
 
-A node will send a `Put` message in response to receiving a Get message for a container the node has access to.
+Un noeud enverra un message `Put` en réponse à la réception d'un message Obtenir un conteneur auquel le noeud a accès.
 
-### Put Example
+### Mettez l'exemple
 
 ```text
 [
@@ -260,23 +260,23 @@ A node will send a `Put` message in response to receiving a Get message for a co
 
 ## PushQuery
 
-### Overview
+### Aperçu général
 
-A `PushQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus. If the `ContainerID` is not known, the `Container` is optimistically provided.
+Un message `PushQuery` demande les containerIDs préférés du noeud après que le `conteneur` spécifié a été ajouté au consensus. Si le `Conteneur ID` n'est pas connu, le Conteneur est fourni de façon `optimale.`
 
-The OpCode used by `PushQuery` messages is: `0x06`.
+L'OpCode utilisé par les messages `PushQuery` est: `0x06`.
 
-### What PushQuery contains
+### Quelles mesures PushQuery contient
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+Un message `PushQuery` contient un `SubnetID`, `SubnetID`, `conteneur` et `conteneur`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** définit quel sous-réseau ce message est destiné.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** est un compteur qui aide à garder la trace des messages envoyés par un nœud.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`Conteneur ID`** est l'identifiant du conteneur que ce message prévoit avoir été ajouté au consensus avant que la réponse ne soit envoyée.
 
-**`Container`** is the bytes of the container with identifier `ContainerID`.
+**`Conteneur`** est les octets du conteneur avec l'identifiant `Conteneur ID`.
 
 ```text
 [
@@ -287,15 +287,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Containe
 ]
 ```
 
-### How PushQuery is handled
+### Comment PushQuery est géré
 
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Le noeud devrait tenter d'ajouter le contenant au consensus. Après que le conteneur est ajouté au consensus, un message `Chits` doit être envoyé avec la préférence current du nœud .
 
-### When PushQuery is sent
+### Lorsque PushQuery est envoyé
 
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Un noeud devrait envoyer un message `PushQuery` si il veut apprendre des préférences actuelles de ce noeud et il pense qu'il est possible que le noeud n'a pas encore appris de `Conteneur` . Le noeud voudra apprendre les préférences des noeuds lorsqu'il apprend un nouveau conteneur ou qu'il a eu des conteneurs en attente pour "un moment".
 
-### PushQuery Example
+### Exemple de la demande
 
 ```text
 [
@@ -321,21 +321,21 @@ A node should send a `PushQuery` message if it wants to learn of this node’s c
 
 ## PullQuery
 
-### Overview
+### Aperçu général
 
-A `PullQuery` message requests the preferred containerIDs from the node after the specified `ContainerID` has been added to consensus.
+Un message `PullQuery` demande les containerIDs préférés du noeud après que le `conteneur` spécifié a été ajouté au consensus.
 
-The OpCode used by `PullQuery` messages is: `0x07`.
+L'OpCode utilisé par les messages `PullQuery` est: `0x07`.
 
-### What PullQuery contains
+### Qu'est-ce que PullQuery contient
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+Un message `PullQuery` contient un `SubnetID`, `RequestID`, et `Conteneur ID`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** définit quel sous-réseau ce message est destiné.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** est un compteur qui aide à garder la trace des messages envoyés par un nœud.
 
-**`ContainerID`** is the identifier of the container this message expects to have been added to consensus before the response is sent.
+**`Conteneur ID`** est l'identifiant du conteneur que ce message prévoit avoir été ajouté au consensus avant que la réponse ne soit envoyée.
 
 ```text
 [
@@ -345,15 +345,15 @@ A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 ]
 ```
 
-### How PullQuery is handled
+### Comment PullQuery est géré
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+Si le noeud n'a pas ajouté `Conteneur ID`, il devrait tenter d'ajouter le conteneur au consensus. Après que le conteneur est ajouté au consensus, un message `Chits` doit être envoyé avec la préférence current du nœud .
 
-### When PullQuery is sent
+### Lorsque PullQuery est envoyé
 
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+Un noeud devrait envoyer un message `PullQuery` s'il veut apprendre des préférences actuelles de ce noeud et il pense qu'il est fort probable que le noeud a déjà appris de `Conteneur `. Le noeud voudra apprendre les préférences des noeuds lorsqu'il apprend un nouveau conteneur ou qu'il a eu des conteneurs en attente pour "un moment".
 
-### PullQuery Example
+### Exemple de PullQuery
 
 ```text
 [
@@ -377,21 +377,21 @@ A node should send a `PullQuery` message if it wants to learn of this node’s c
 
 ## Chits
 
-### Overview
+### Aperçu général
 
-A `Chits` message provides a requested set of preferred container\(s\) to a node.
+Un message `Chits` fournit un ensemble demandé de container\(s\) preferred un nœud.
 
-The OpCode used by `Chits` messages is: `0x08`.
+L'OpCode utilisé par les messages `Chits` est: `0x08`.
 
-### What Chits contains
+### Qu'est-ce que les Chits contient
 
-A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
+Un message `Chits` contient un `SubnetID`, `SubnetID`, et `Préférences`.
 
-**`SubnetID`** defines which subnet this message is destined for.
+**`SubnetID`** définit quel sous-réseau ce message est destiné.
 
-**`RequestID`** is a counter that helps keep track of the messages sent by a node.
+**`RequestID`** est un compteur qui aide à garder la trace des messages envoyés par un nœud.
 
-**`Preferences`** is the list of containerIDs that fully describe the node’s preferences.
+**`Les préférences`** sont la liste des containerIDs qui décrivent pleinement les préférences du nœud.
 
 ```text
 [
@@ -401,15 +401,15 @@ A `Chits` message contains a `SubnetID`, `RequestID`, and `Preferences`.
 ]
 ```
 
-### How Chits is handled
+### Comment les chits sont manipulés
 
-The node should attempt to add any referenced containers to consensus. If the referenced containers can’t be added, the node can ignore the missing containers and apply the remaining chits to the poll. Once a poll is completed, container confidences should be updated appropriately.
+Le noeud devrait tenter d'ajouter les conteneurs référencés au consensus. Si les conteneurs référencés ne peuvent pas être ajoutés, le noeud peut ignorer les conteneurs manquants et appliquer les derniers morceaux au sondage. Une fois qu'un sondage est terminé, les confidences de conteneurs devraient être mises à jour adéquatement.
 
-### When Chits is sent
+### Lorsque Chits envoyés
 
-A node will send a `Chits` message in response to receiving a `PullQuery` or `PushQuery` message for a container the node has added to consensus.
+Un noeud enverra un message `Chits` en réponse à la réception d'un message `PullQuery` ou `PushQuery` pour un conteneur que le noeud a ajouté au consensus.
 
-### Chits Example
+### Exemple de poussins
 
 ```text
 [
