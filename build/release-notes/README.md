@@ -1,2 +1,2 @@
-# Release Notes
+# Notları Sil
 
