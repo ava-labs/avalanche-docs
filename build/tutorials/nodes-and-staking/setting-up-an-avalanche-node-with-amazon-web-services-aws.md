@@ -1,200 +1,200 @@
-# Run an Avalanche Node with Amazon Web Services \(AWS\)
+# Amazon Web Hizmetleri ile bir Avalanche Node çalıştır \(AWS\
 
-## Introduction
+## Tanıştırma
 
-This tutorial will guide you through setting up an Avalanche node on [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Cloud services like AWS are a good way to ensure that your node is highly secure, available, and accessible.
+Bu ders size [Amazon Web Hizmetleri (AWS\)](https://aws.amazon.com/) üzerinde bir Avalanche düğümü kurarak rehberlik edecek. AWS gibi bulut hizmetleri your çok güvenli, müsait ve erişilebilir olduğundan emin olmak için iyi bir yoldur.
 
-To get started, you'll need:
+Başlamak için ihtiyacın var:
 
-* An AWS account
-* A terminal with which to SSH into your AWS machine
-* A place to securely store and back up files
+* AWS hesabı
+* AWS makinene to giden bir terminal.
+* Güvenle depolanıp dosyaları destekleyecek bir yer
 
-This tutorial assumes your local machine has a Unix style terminal. If you're on Windows, you'll have to adapt some of the commands used here.
+Bu ders yerel makinenizin Unix tarzı terminali olduğunu varsayıyor. you're buradaki bazı komutları uyarlamak zorundasınız.
 
-## Log Into AWS <a id="ff31"></a>
+## AWS & Ghost<a id="ff31"></a>
 
-Signing up for AWS is outside the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
+AWS için kayıt yapmak bu makalenin dışında ama Amazon'da talimatlar [var](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
 
-It is _highly_ recommended that you set up Multi-Factor Authentication on your AWS root user account to protect it. Amazon has documentation for this [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
+Bunu korumak için AWS kök kullanıcı hesabınıza Çoklu Faktör Doğrulama ayarlamanızı _çok_ tavsiye [eder](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root). Amazon'da bunun için belgeler var.
 
-Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
+Hesabınız kurulduğunda, yeni bir EC2 örneği oluşturmalısınız. EC2 AWS'nin bulutunda sanal bir makine örneğidir. [AWS Yönetim Konsoluna](https://console.aws.amazon.com/) git ve EC2 işaretleme panosuna gir.
 
-![AWS Management Console.png](../../../.gitbook/assets/image%20%2835%29.png)
+![AWS Yönetim Console.png](../../../.gitbook/assets/image%20%2835%29.png)
 
-To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
+EC2 örneğine girmek için yerel makinenizin anahtarına ihtiyacınız olacak. Bu örnekte erişim izni sağlayan bir anahtar. İlk olarak, bu anahtarı oluştur, böylece daha sonra EC2 örneğine atanabilir. Sol taraftaki barda, **Network & Security** altında **Key Pairs.** seçin.
 
-![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/image%20%2838%29.png)
+![& quot;Key Pairs&quot; & quot;Network & amp; Security & quot; drop-down.](../../../.gitbook/assets/image%20%2838%29.png)
 
-Select **Create key pair** to launch the key pair creation wizard.
+Anahtar çift yaratma büyücüsünü başlatmak için **anahtar çifti** oluşturun.
 
-![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
+![& alıntıyı Select pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-Name your key `avalanche`. If your local machine has MacOS or Linux, select the `pem` file format. If it's Windows, use the `ppk` file format. Optionally, you can add tags for the key pair to assist with tracking.
+Anahtar `your` söyle. Eğer yerel makineniz MacOS veya Linux varsa `pem` dosya biçimini seçin. it's `ppk` dosya biçimini kullan. Seçenekli olarak, anahtar eşleşme için etiketler ekleyebilirsiniz.
 
-![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
+![Daha sonra EC2 örneğinize atanacak anahtar bir çift oluşturun.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-Click `Create key pair`. You should see a success message, and the key file should be downloaded to your local machine. Without this file, you will not be able to access your EC2 instance. **Make a copy of this file and put it on a separate storage medium such as an external hard drive. Keep this file secret; do not share it with others.**
+`Tıklayın anahtar çifti oluşturun`. Bir başarı mesajı görmelisiniz, ve anahtar dosyası yerel makinene indirilmelidir. Bu dosya olmadan EC2 örneğinize erişemeyeceksiniz. **Bu dosyanın bir kopyasını yap ve harici sabit disk gibi ayrı bir depolama ortamına koy. Bu dosyayı gizli tut; diğerleriyle paylaşmayın.**
 
-![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
+![Bir anahtar çift oluşturduktan sonra başarı mesajı](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
 
-## Create a Security Group <a id="f8df"></a>
+## Bir Güvenlik Grubu oluştur<a id="f8df"></a>
 
-An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
+AWS Güvenlik Grubu internet trafiğinin size hangi şekilde girebileceğini ve EC2 örneğini bırakabileceğini belirler. Güvenlik duvarı gibi düşün. **Ağ & Güvenlik** indirimi altındaki **Güvenlik Gruplarını** seçerek yeni bir Güvenlik Grubu oluşturun.
 
-![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
+![& alıntı; Güvenlik Grupları & alıntı; & quot;Network & amp; &quot;Security](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
-This opens the Security Groups panel. Click **Create security group** in the top right of the Security Groups panel.
+Bu da Güvenlik Grupları panelini açar. Güvenlik Grupları panelinin sağındaki **güvenlik grubunu** oluştur.
 
-![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
+![& alıntı Select grubunu oluşturun. & alıntı yapın;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
+Hangi trafiğe girildiğini belirtmeniz gerekiyor. IP adresinden SSH trafiğine izin ver böylece EC2 örneğinize girebilirsiniz. \\ (ISP adresiniz her değiştiğinde bu kuralı değiştirmeniz gerekecek. ISP düzenli olarak değişirse, SSH trafiğinin bu kuralı sık değiştirmekten kaçınmasına izin verebilirsiniz. \) 9651 numaralı port trafiğine izin ver böylece düğümünüz ağdaki diğer düğümlerle iletişim kurabilsin. from 9650 numaralı port TCP trafiğine izin verin böylece API çağrılarını your gönderebilirsiniz. **Bu limanda sadece from trafiğe izin vermen önemli.** Herhangi bir yerden gelen trafiğe izin verirseniz, bu saldırı vektörünü reddetmek için kullanılabilir. Sonunda tüm trafiğe izin verin.
 
-![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/inbound-rules.png)
+![Senin iç ve dış kuralların böyle olmalı.](../../../.gitbook/assets/inbound-rules.png)
 
-Add a tag to the new security group with key `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
+Yeni güvenlik grubuna anahtar `isim` ve `değerli Avalanche Güvenlik Grubu` etiketi ekleyin. Bu güvenlik gruplarının listesindeki görüntüleri gördüğümüzde bu güvenlik grubunun ne olduğunu bilmemizi sağlayacak.
 
-![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
+![Güvenlik grubunu daha sonra teşhis edebilmeniz için etiketle.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-Click `Create security group`. You should see the new security group in the list of security groups.
+`Güvenlik grubuna` tıklayın. Güvenlik gruplarının listesindeki yeni güvenlik grubunu görmelisin.
 
-## Launch an EC2 Instance <a id="0682"></a>
+## Bir EC2 Instance Başlat<a id="0682"></a>
 
-Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
+Şimdi EC2 örneğini başlatmaya hazırsın. EC2 Dashboard ile birlikte **fırlatma** örneğini seç.
 
-![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
+![& &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-Select **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** for the operating system.
+**Ubuntu 20.04 LTS \(HVM\), SSD Ses Türünü** işletim sistemi için seçin.
 
-![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
+![Ubuntu 20.04 LTS. seçin.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.large**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.large instance, select the **Compute-optimized** option from the filter drop-down menu.
+Sıradaki, örnek tipini seç. Bu da bulut örneğinin donanım özelliklerini tanımlar. Bu özel derslerde **bir c5.büyük** bir şey ayarladık. Avalanche hafif bir uzlaşma protokolü olduğundan bu yeterince güçlü olmalı. C5.büyük bir örnek oluşturmak için, filtre indirme menüsünden **Bilgisayar optimize** seçeneğini seçin.
 
-![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
+![Hesapla filtrelenen bir filtreleme](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Select the checkbox next to the c5.large instance in the table.
+Masadaki c5.büyük örneklerin yanında checkbox seç
 
-![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
+![C5.büyük seçin.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
 
-Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
+**Sonraki tıklayın: Temel Detayları** sağ köşede yapılandırın.
 
 ![](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
-The instance details can stay as their defaults.
+Örnek ayrıntıları varsayılan olarak kalabilir.
 
-### Optional: Using Spot Instances or Reserved Instances <a id="c99a"></a>
+### Seçenek: Nokta Kurumları veya Ayrıntılı Örnekleri Kullanılıyor<a id="c99a"></a>
 
-By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
+Öntanımlı olarak, EC2 örneğinizi çalıştırdığınız için saat başı ücret alınacaksınız. EC2 için daha az ödeme yapabilmenin iki yolu var.
 
-The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
+İlki EC2'yi bir **Spot Instance** olarak fırlatmak. Spot örnekleri her zaman ayakta kalacağı garantili olmayan ama sürekli olarak ortalama olarak daha az maliyetli durumlardır. Spot örnekleri pazarlama ve talep edilen fiyat yapısını kullanır. Örnek talep arttıkça, bir nokta için fiyat artacak. Bu durum için ödemeye hazır olduğunuz maksimum bir fiyat belirleyebilirsiniz. Eğer fiyat artarsa EC2 örneğinin durması için önemli miktarda para biriktirebilirsiniz. Maksimum at kesinti frekansının maliyet tasarruflarını haklı çıkarıp çıkarmadığını belirlemek için bu seçeneği seçmeden önce kendi araştırmanızı yapın. Eğer bir nokta **örneği** kullanmayı seçerseniz, kesintiyi **durdurun**, **sonlandırma** yerine durdurun.
 
-The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
+Para biriktirmenin diğer yolu **Reserved** Kullanmak. Ayrıntılı bir örnekle, tüm bir EC2 kullanımına ön ödeme yaparsınız ve kilitlemek karşılığında saat başına daha düşük bir oran alırsınız. Eğer uzun bir süre bir düğüm işletirsen ve hizmet kesintilerini riske atmak istemiyorsan bu para biriktirmek için iyi bir seçenek. Bu seçeneği seçmeden önce kendi araştırmanı yap.
 
-### Add Storage, Tags, Security Group <a id="dbf5"></a>
+### Depolama Etiketleri, Güvenlik Grubu Ekle<a id="dbf5"></a>
 
-Click the **Next: Add Storage** button in the bottom right corner of the screen.
+**Sonraki** tuşa bas: Ekranın sağ köşesine depolama düğmesine tıklayın.
 
-You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
+Örnek diskine yer eklemen gerekiyor. Bu örnekte 100 GB kullanıyoruz. Avalanche veritabanı pruning uygulanana kadar sürekli olarak büyüyecek, bu yüzden şimdilik daha büyük bir sabit disk tahsis edilmesi daha güvenli.
 
-![Select 100 GB for the disk size.](../../../.gitbook/assets/add-storage.png)
+![Disk boyutu için 100 GB seçin.](../../../.gitbook/assets/add-storage.png)
 
-Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
+**Sonraki** tıklayın: Etiketleri eklemek için eklemek için ekrana sağ köşe etiketleri ekleyin. Etiketler bize metadata ile ilgili bir şey sağlar. Anahtar `adı` ve Değer Veren Bir etiket Ekle `Benim Avalanche Node`. Bu durum EC2 örneğinin listesindeki bu örneklerin ne olduğunu açıkça gösterecektir.
 
-![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
+![Anahtar & alıntı; isim/ alıntı ile bir etiket ekleyin; ve değer &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
-Now assign the security group created earlier to the instance. Choose **Select an existing security group** and choose the security group created earlier.
+Şimdi daha önce yaratılan güvenlik grubunu görevlendirin. **Varolan bir güvenlik grubunu** seçin ve daha önce oluşturulan güvenlik grubunu seçin.
 
-![Choose the security group created earlier.](../../../.gitbook/assets/configure-security-group.png)
+![Daha önce oluşturulan güvenlik grubunu seçin.](../../../.gitbook/assets/configure-security-group.png)
 
-Finally, click **Review and Launch** in the bottom right. A review page will show the details of the instance you're about to launch. Review those, and if all looks good, click the blue **Launch** button in the bottom right corner of the screen.
+Sonunda, alt tabana **tıklayın ve** fırlatın. Bir gözden geçirme sayfası fırlatmak üzere olduğunuz olayın detaylarını gösterecek. Şunları gözden geçirin ve her şey iyi görünürse ekranın sağ köşesindeki mavi **fırlatma** düğmesine tıklayın.
 
-You'll be asked to select a key pair for this instance. Select **Choose an existing key pair** and then select the `avalanche` key pair you made earlier in the tutorial. Check the box acknowledging that you have access to the `.pem` or `.ppk` file created earlier \(make sure you've backed it up!\) and then click **Launch Instances**.
+Bu örnek için anahtar bir çift seçmeniz istenecek. **Mevcut anahtar çifti** seçin ve daha önce özel ders sırasında yaptığınız `çığın` anahtar çifti seçin. Daha önce oluşturulan `.pem` veya `.ppk` dosyasına erişimin olduğunu kabul eden kutuyu kontrol edin. (yedeklediğinizden emin olun! \) ve sonra **fırlatma Instances**. tıklayın.
 
-![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
+![Daha önce oluşturulan anahtar çifti kullan.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-You should see a new pop up that confirms the instance is launching!
+Bu olayın açıldığını doğrulayan yeni bir çıkış görmelisin!
 
-![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
+![Örnek alınıyor!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-### Assign an Elastic IP
+### Elastik IP atla
 
-By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
+Varsayılan olarak, örneğinizin sabit IP bulunmayacağı belirtilmiştir. AWS's Elastik IP servisinden sabit IP verelim. EC2 paneline geri dön. **Ağ & Güvenlik** altında, **Elastik IPleri** seçin.
 
-![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
+![& &quot;Elastic IPs&quot; & quot;Network & amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-Select **Allocate Elastic IP address**.
+**Elastik IP adresini** Select seçin.
 
-![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
+![& alıntı; Elastik IP adresini &quot;Allocate](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
-Select the region your instance is running in, and choose to use Amazon’s pool of IPv4 addresses. Click **Allocate**.
+Örneklerinizin girdiği bölgeyi seçin ve Amazon'un IPv4 adresleri havuzunu kullanmayı seçin. **Sokağa** tıklayın.
 
-![Settings for the Elastic IP.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
+![Elastik IP'nin ayarları.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
 
-Select the Elastic IP you just created from the Elastic IP manager. From the **Actions** drop-down, choose **Associate Elastic IP address**.
+Elastik IP yöneticisinden oluşturduğunuz Elastik IP adresini seçin. **Eylemler** düşüşünden **Elastik IP adresini** seç.
 
-![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
+![& &quot;Actions&quot;, Elastic IP address.&quot;.](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
+Az önce yarattığınız olayı seçin. Bu yeni Elastik IP ile bu örnekle ilişkilendirilecek ve değişmeyecek bir halka açık IP adresi verecek.
 
-![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
+![Elastik IP örneğinize atayın.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo <a id="829e"></a>
+## Çığ Hazırla<a id="829e"></a>
 
-Go back to the EC2 Dashboard and select `Running Instances`.
+EC2 Dashboard ile geri dön ve `Koşu Tesislerini` seç.
 
-![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
+![Koşma durumlarına git.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Select the newly created EC2 instance. This opens a details panel with information about the instance.
+Yeni oluşturulan EC2 örneğini seçin. Bu olay olay hakkında bilgi içeren bir detay paneli açar.
 
-![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
+![Yeni your ilgili detaylar.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
+`IPv4 Kamu IP` alanını daha sonra kullanması için kopyala. Bundan sonra bu değer `kamuoyu` olarak adlandıracağız.
 
-**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
+**Unutmayın: aşağıdaki terminal komutları Linux'u yönettiğini varsayıyor. Komutlar MacOS veya diğer işletim sistemleri için farklı olabilir. Bir koddan bir komut kopyaladığında, in metin tümünü kopyalayıp yapıştır.**
 
-Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
+Yerel makinenizden AWS örneğine gir. Bir terminal aç (kısa yoldan `CTRL + ALT + T`\ yi dene, daha önce indirdiğiniz `.pem` dosyasını içeren dizine doğru yönlendir.
 
-Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
+`.pem``` dosyasını `$HOME/.ssh` \(hangi dosyaların genellikle canlı olduğu yere) ile taşın:
 
 ```bash
 mv avalanche.pem ~/.ssh
 ```
 
-Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
+SSH ajanına ekle ki SSH ile EC2 örneğine girebilelim.
 
 ```bash
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-SSH into the instance. \(Remember to replace `PUBLICIP` with the public IP field from earlier.\)
+SSH örneği. \ (Daha önceki IP alanıyla `PUBLICIP` yerine geçmeyi unutmayın. \)
 
 ```text
 ssh ubuntu@PUBLICIP
 ```
 
-If the permissions are **not** set correctly, you will see the following error.
+Eğer izinler doğru **ayarlanmazsa,** aşağıdaki hatayı göreceksiniz.
 
-![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
+![İzinleri doğru ayarladığınızdan emin olun.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
 
-You are now logged into the EC2 instance.
+EC2 örneğine girdiniz.
 
-![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
+![Siz & apos; EC2 You&apos;re](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
-If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
+Eğer bunu yapmamışsanız, en son işletim sistemi ve güvenlik güncellemelerinin olduğundan emin olmak için durumu güncelleyin:
 
 ```text
 sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-This also reboots the instance. Wait 5 minutes, then log in again by running this command on your local machine:
+Bu da örnekleri yeniden başlatır. 5 dakika bekle, sonra yerel makinene bu komutu çalıştırarak tekrar içeri gir.
 
 ```bash
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
+EC2 örneğine tekrar girdiniz. Şimdi Avalanche düğümümüzü kurmamız gerekecek. Bunu yapmak için, kurulum sürecini otomatik olarak ayarlayan İnstaller öğretisi [ile Set Up Avalanche](set-up-node-with-installer.md) the takip edin. Daha önce kurduğumuz `kamuya` ihtiyacın olacak.
 
-Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
+AvalancheGo düğümünüz şu anda çalışıyor olmalı ve bir kaç saat sürebilir. Yapıldı mı diye kontrol etmek için `kıvrım` kullanarak API çağrısı yayınlayabilirsiniz. Eğer EC2 örneğinden istek yapıyorsanız, istek şu:
 
 ```text
 curl -X POST --data '{
@@ -207,7 +207,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+Düğüm bot kayışı bittiğinde, cevap şöyle olacak:
 
 ```text
 {
@@ -219,9 +219,9 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
+AvalancheGo kayma işini yapmamış olsa bile devam edebilirsin.
 
-In order to make your node a validator, you'll need its node ID. To get it, run:
+Düğününü onaylayıcı yapmak için node kimliğine ihtiyacın olacak. Alabilmek için, koş.
 
 ```text
 curl -X POST --data '{
@@ -231,47 +231,47 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+Cevap düğümlü kimlik içerir.
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
+Örnek olarak `nodeID-DznHmm3o7RkmpLkWMnnqafH66mqunXbM'dir`. Sonrası için düğümlü kimliğinizi kopyalayın. Kimliğin bir sır değil, bu yüzden onu bir metin editörüne yapıştırabilirsin.
 
-AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+[AvalancheGo sağlığa açık API](../../avalanchego-apis/health-api.md) gibi diğer API'leri vardır, düğümle etkileşimde kullanılabilir. Bazı API'ler varsayılan olarak devre dışı bırakılır. Bu API'leri etkinleştirmek için, bu uç noktalarını sağlayan bayrakları içeren bayrakları içeren `/etc/systemd/system/avalanchego.service` \(kurulum süreci sırasında oluşturulur) ExecStart bölümünü değiştirin. Bir sebebin yoksa API'leri elle etkinleştirme.
 
-![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
+![Bazı API'ler varsayılan olarak devre dışı bırakılır.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`.
+EC2 örneğinin bozulması veya başka bir şekilde kullanılamaz olması durumunda düğümün anahtar ve sertifikasını geri çek. Düğünün kimliği gizlenme anahtarı ve sertifikasından türetilmiştir. Eğer anahtar ya da sertifikanızı kaybederseniz düğümünüz yeni bir düğümlü kimlik alır, bu da düğümünüz bir doğrulayıcı ise, bir ödül için uygun olmayabilirsiniz. **Düğününüzün anahtar ve sertifikasını kopyalamanız çok şiddetle tavsiye edilir**. İlk düğümünü çalıştırdığınızda yeni bir anahtar / sertifika çifti oluşturacak ve onları `in` depolayacak.
 
-Exit out of the SSH instance by running:
+SSH örneğinden çık:
 
 ```bash
 exit
 ```
 
-Now you're no longer connected to the EC2 instance; you're back on your local machine.
+Artık EC2 ile bağlantın yok, yerel makinene geri döndün.
 
-To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP`.
+İzleme anahtarı ve sertifikayı makinene kopyalamak için şu komutu çalıştır. Her zamanki gibi `kamuoyu` yerini al.
 
 ```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 ```
 
-Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
+Şimdi de anahtar ve sertifikanız dizin `~/aws_avalanche_backup` içinde. **Bu dizinin içeriği gizlidir.** Bu dizini internete bağlı olmayan depolama üzerinde tutmalısınız. (harici bir sabit disk gibi. \)
 
-### Upgrading Your Node <a id="9ac7"></a>
+### Düğününü Güncelleştiriyor<a id="9ac7"></a>
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
+AvalancheGo devam eden bir proje ve düzenli sürüm güncellemeleri var. Çoğu güncelleme tavsiye edilir ama gerekli değildir. Geri uyumlu olmayan güncelleme için öncü bildiri verilecek. Son sürümüne your güncellemek için SSH AWS örneğinize önceki gibi ve installer senaryosunu tekrar çalıştırın.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+Makinen şimdi en yeni AvalancheGo versiyonunu çalıştırıyor. AvalancheGo servisinin durumunu görmek için, `sudo systemctl statü avalanchego.` çalıştır.
 
-## Wrap Up
+## Toparlanın
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+İşte böyle! AWS EC2 örneğinde çalışan bir AvalancheGo düğümünüz var. AvalancheGo your [takibe](setting-up-node-monitoring.md) almanızı öneriyoruz. Ayrıca AWS fatura uyarısı ayarlamasını öneriyoruz. Böylece fatura geldiğinde şaşırmazsın. Bu özel ders hakkında bir bilgi varsa, [on](https://chat.avalabs.org) bir mesaj gönder.
 
