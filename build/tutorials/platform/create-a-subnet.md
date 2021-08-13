@@ -1,20 +1,20 @@
-# Create a Subnet
+# Créer un sous-réseau
 
 ## Introduction
 
-A [subnet](../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
+Un [sous-réseau](../../../learn/platform-overview/#subnets) est un ensemble de validateurs. Un sous-réseau valide un ensemble de blockchains. Chaque blockchain est validé par exactement un sous-réseau, qui est spécifié sur la création de blockchain. Les Subnets sont un puissant primitif qui permet la création de blockchains permises.
 
-When a subnet is created, a threshold and a set of keys are specified. \(Actually the addresses of the keys, not the keys themselves, are specified.\) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
+Lorsqu'un sous-réseau est créé, un seuil et un ensemble de touches sont spécifiés. \(En fait, les adresses des clés, pas les clés elles-mêmes, sont spécifiées. \) Afin d'ajouter un validateur à ce sous-réseau, les signatures _de seuil_ de ces touches sont nécessaires. Nous appelons ces **clés de contrôle** du sous-réseau et nous appelons la signature d'une clé de contrôle sur une transaction qui ajoute un validateur à un sous-réseau une **signature de contrôle.** L'aperçu est qu'un sous-réseau a le contrôle de son adhésion.
 
-In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
+Dans ce tutoriel, nous allons créer un nouveau sous-réseau avec 2 clés de contrôle et un seuil de 2.
 
-### Generate the Control Keys <a id="generate-the-control-keys"></a>
+### Générer les clés de contrôle<a id="generate-the-control-keys"></a>
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createaddress) This generates a new private key and stores it for a user.
+Premièrement, générons les 2 clés de contrôle. Pour ce faire, nous appelons [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) Cela génère une nouvelle clé privée et la stocke pour un utilisateur.
 
-To generate the first key:
+Pour générer la première clé :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -26,9 +26,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+Cela donne la première clé de contrôle \(encore, il donne effectivement _l'adresse_ de la première clé de contrôle\). La clé est tenue par l'utilisateur que nous venons de spécifier.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -38,9 +38,9 @@ This gives the first control key \(again, it actually gives the _address_ of the
 }
 ```
 
-Generate the second key:
+Générer la seconde clé:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -52,9 +52,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the second control key, which is held by the user we just specified:
+La réponse contient la deuxième clé de contrôle, qui est tenue par l'utilisateur que nous venons de spécifier:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -64,11 +64,11 @@ The response contains the second control key, which is held by the user we just 
 }
 ```
 
-### Create the Subnet <a id="create-the-subnet"></a>
+### Créer le sous-réseau<a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createsubnet).
+Pour créer un sous-réseau, nous appelons [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -85,9 +85,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
+La réponse nous donne l'ID de la transaction, qui est également l'ID du nouveau Subnet créé.
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -98,11 +98,11 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 }
 ```
 
-### Verifying Success <a id="verifying-success"></a>
+### Vérification du succès<a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-getsubnets) to get all Subnets that exist:
+Nous pouvons appeler [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) pour obtenir tous les Subnets qui existent:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -111,9 +111,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that our subnet was created:
+La réponse confirme que notre sous-réseau a été créé:
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -132,7 +132,7 @@ The response confirms that our subnet was created:
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
+### Ajouter les validateurs au Sous-réseau<a id="add-validators-to-the-subnet"></a>
 
-This [tutorial](add-a-validator.md) will show you how to add validators to a subnet.
+Ce [tutoriel](../nodes-and-staking/add-a-validator.md) vous montrera comment ajouter des validateurs à un sous-réseau.
 
