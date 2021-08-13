@@ -1,90 +1,92 @@
-# Mint NFTs with the Avalanche Wallet
+# AvalancheウォレットでNFTを作成する
 
-## Non-Fungible Tokens on Avalanche
+## Avalancheの非ファンジブルトークン
 
-Besides the native AVAX token, [Avalanche platform](../platform/) natively supports the creation of other types of digital assets: fixed-cap assets, variable-cap assets, and non-fungible tokens \(NFTs\).
+[Avalanche](../platform/)は、固定キャップアセット、可変キャップアセット、および非真菌性トークン \(NFTs\)を含むデジタルアセットの作成をネイティブにサポートしています。
 
-As opposed to regular tokens, which are interchangeable \(fungible\), meaning that each one is the same, each non-fungible token is unique on the network, with a distinct ID making it different from any other. This enables many use cases that would be impossible with interchangeable tokens, like proof of ownership of a unique asset.
+一部のアセットは真菌性であり、そのアセットのすべてのユニットは完全に交換可能であることを意味します。例えば、通貨のノートは真偽です。例えば、1 $5 ノートは他の $5 ノートと同じ扱いです。一部の資産は、対照的に、真菌性ではありません。つまり、要素は一意で完全に交換可能ではありません。不動産は、土地の各部分が異なるため、真菌性はありません。
 
-## NFT Studio on Avalanche Wallet
+非真菌トークンとは、一意の資産の所有権を証明するのに役立つ方法です。
 
-To make experimenting with the creation and exchange of NFTs easier, we have built **NFT Studio** into the [Avalanche Wallet](https://wallet.avax.network/), where you can use it to create NFTs as assets that we call Collectibles. Collectibles can be generic NFTs with a picture and a description, or custom NFTs with payloads containing JSON, custom URL, or UTF-8 data. You can create them using a simple point and click interface, enabling you to go from an idea of sending NFTs to your friends within minutes. No technical knowledge required.
+## NFT Studio on Avalanche Wallet on JP
 
-To access the **NFT Studio**, log into your Avalanche Wallet, and on the left side select **Studio**:
+[Avalanche Wallet](https://wallet.avax.network/)の**NFT Studio**を使用してNFTを作成できます。このチュートリアルでは、**Collectible**アセットを作成します。: 画像と説明付きの汎用NFT、またはカスタムペイロード付きのNFTです。シンプルなポイントとクリックインターフェイスを使用してそれらを作成できます。また、技術的な知識は必要ありません。
 
-![NFT Studio](../../../.gitbook/assets/nft-studio-01-select.png)
+**NFT Studio**にアクセスするには、Avalanche Walletにログインします。左側で、**Studio**を選択します。
 
-This will open the NFT Studio. There you have two options: **New Family**, for the creation of a new family of NFTs, and **Mint Collectible** for creating new assets in existing families. We need to create our first family of NFTs, so click **New Family**.
+![NFTスタジオ](../../../.gitbook/assets/nft-studio-01-select.png)
 
-### Create NFT Family
+これによりNFT Studioが開きます。2つのオプションがあります:NFTの新しいファミリーを作成するには、**New Family**、および既存のファミリーに新しいアセットを作成するための**Mint Collectible**です。NFTの最初のファミリーを作成する必要がありますので、**New Family**をクリックします。
 
-There you will be asked to enter the name of your collectible family, as well as a symbol \(ticker\). Names do not have to be unique.
+### NFTファミリーの作成
 
-![Create new family](../../../.gitbook/assets/nft-studio-02-family.png)
+そこで、コレクターファミリーの名前とシンボル \(ticker\)を入力するように求められます。名前は一意でなければならない。
 
-Besides the name and the ticker, you will need to enter **Number of Groups**, that is, how many distinct collectibles will the newly created family hold. Choose carefully, because once created, the parameters of the collectible family cannot be changed.
+![新しいファミリーを作成する](../../../.gitbook/assets/nft-studio-02-family.png)
 
-When you decided upon the name, ticker, and number of groups, press **Create** to actually create the collectible family. The transaction fee will be deducted from your wallet's balance. When the family is created, you will see the transaction ID \(TxID\), as well as parameters for the family. You can use the TxID to look up the transaction in [the explorer](https://explorer.avax.network/), but it is not necessary to write it down.
+また、**Number of Groups** の値を入力する必要があります。これは、新しく作成したファミリーがどのくらいの個別のコレクティブルを保持するかを指定します。一度作成したら、collectible ファミリーのパラメーターを変更することはできませんので、慎重に選択してください。
 
-Press **Back to Studio** to return, and we're ready to create our first collectibles. Press **Mint Collectible**.
+完了したら、[**Create**]キーを押して、Collectibleファミリーを作成します。取引手数料は、ウォレットの残高から差し引かれます。ファミリーが作成されると、トランザクションID \(TxID\)とファミリーのパラメーターが表示されます。TxID を使用して[、](https://explorer.avax.network/)エクスプローラー内のトランザクションを調べることができますが、それを書き留める必要はありません。
+
+**Back to Studio**を押して戻り、最初のコレクタブルを作成する準備ができました。**Mint Collectible**を押します。
 
 ### Mint NFTs
 
-After pressing **Mint Collectible** you will be presented with a list of all the Collectible families that still have Collectible groups that have not been created yet.
+**Mint Collectible**を押した後、まだ作成されていないCollectibleグループがまだ存在するCollectibleファミリーのリストが表示されます。
 
-![Select a family](../../../.gitbook/assets/nft-studio-03-select-family.png)
+![家族を選択する](../../../.gitbook/assets/nft-studio-03-select-family.png)
 
-Select the family we have just created. You will be presented with a form to fill out with the parameters of the new collectible:
+作成したファミリーを選択します。新しいコレクティブルパラメーターでフォームに記入するように求められます。
 
 ![Mint a Collectible](../../../.gitbook/assets/nft-studio-04-mint.png)
 
-By default, a **Generic** type of collectible will be selected. That is an NFT that has a **Title**, **URL** for the image, and a **Description**. Enter the required data, as well as the **Quantity**, which will determine how many copies of the collectible will be created, and therefore, how many of them you will be able to send. As before, enter the data carefully, you won't be able to change anything once collectibles are minted. You will see a preview of the data where you can check how your collectible will look like.
+デフォルトでは、**Generic** タイプの collectible が選択されます。これはNFT**で、タイトル、**画像の**URL**、および**Description**を持つものです。必要なデータと**、**コレクターの数を決定します。前述のように、データを慎重に入力してください。トークンがマイニングされたら何も変更できません。データのプレビューが表示され、収集可能な状態がどのようなものかを確認できます。
 
-If you would like to have something else besides a picture collectible, select **Custom**.
+写真の収集機能以外に何か他のものを持ちたい場合は、**[カスタム]**を選択します。
 
-![Custom Collectible](../../../.gitbook/assets/nft-studio-05-custom.png)
+![Custom Collectible-Collectible](../../../.gitbook/assets/nft-studio-05-custom.png)
 
-A custom collectible can contain an **UTF-8** encoded string, an **URL**, or a **JSON** payload. Size of the data cannot exceed 1024 characters.
+カスタムコレクターは、**UTF-8**エンコードされた文字列、**URL**、**JSON** ペイロードを含むことができます。JavaScript-JP-JP-
 
-After you enter and check the data, press **Mint** to create the collectible. Transaction fees will be deducted from your wallet, and a newly created collectible will be placed in your wallet.
+完了したら、**Mint**を押してコレクティブルを作成します。取引手数料はウォレットから差し引かれ、新しく作成されたコレクタブルがウォレットに置かれます。
 
-### See your collectibles
+### あなたのコレクティブルを見る
 
-An overview of your collectibles is always visible in the top of the screen, along with your balances.
+コレクティブルの概要は、常に画面上部に表示され、残高とともに表示されます。
 
-![Overview](../../../.gitbook/assets/nft-studio-06-overview.png)
+![JavaScript-JP-JP-](../../../.gitbook/assets/nft-studio-06-overview.png)
 
-To see your collectibles in more detail, select **Portfolio** from the left-hand side menu. You will be presented with a screen showing all of your assets, with tokens selected by default. Change the selection to **Collectibles** by clicking the corresponding tab.
+コレクティブルを詳細に表示するには、左側のメニューから**「**ポートフォリオ」を選択します。すべてのアセットを表示する画面が表示され、トークンがデフォルトで選択されています。選択範囲を**Collectibles**に変更します。
 
-![Collectibles list](../../../.gitbook/assets/nft-studio-07-collectibles.png)
+![Collectibles一覧](../../../.gitbook/assets/nft-studio-07-collectibles.png)
 
-For each Generic collectible, a picture will be shown, along with the title, and the number indicating how many copies of the collectible are in your portfolio. Hovering over the collectible with your pointer will show the detailed description:
+Generic collectibleごとに、タイトルとともに写真が表示されます。また、ポートフォリオ内のコピー数を示す番号も表示されます。ポインターでコレクターをマウスカードする場合は、詳細な説明が表示されます。
 
-![Collectible details](../../../.gitbook/assets/nft-studio-08-detail.png)
+![Collectibleの詳細](../../../.gitbook/assets/nft-studio-08-detail.png)
 
-If you select a collectible by clicking on it, you will see which group it belongs to, its quantity, along with the **Send** button.
+クリックしてコレクターを選択すると、そのグループの数量が表示さ**れ**ます。
 
-## Send NFTs
+## NFTを送信する
 
-To send your collectible to someone, either click the **Send** button on the selected collectible in the Portfolio, or navigate to **Send** tab on the left-hand side menu, and click **Add Collectible**:
+誰かにコレクティブルを送信するには、ポートフォリオで選択したコレクティブルで**[**Send]ボタンをクリックするか、左側のメニューの**[Send**]タブに移動して[**Collectibleを追加**]をクリックします。
 
-![Choosing the collectibles](../../../.gitbook/assets/nft-studio-09-send.png)
+![Collectiblesの選択](../../../.gitbook/assets/nft-studio-09-send.png)
 
-You will be presented with a menu to select a collectible you wish to send.
+あなたが送信したいコレクターを選択するためのメニューが表示されます。
 
-![Multiple collectibles](../../../.gitbook/assets/nft-studio-10-multiple.png)
+![複数のコレクティブル](../../../.gitbook/assets/nft-studio-10-multiple.png)
 
-You can send multiple collectibles in a single transaction. Clicking the label on the collectible will let you edit the number of copies you wish to send. You can send multiple families and collectible types in a single transaction.
+複数のコレクティブルを1回のトランザクションで送信できます。コレクターのラベルをクリックすると、送信するコピー数を編集できます。複数のファミリーとコレクタータイプを1回のトランザクションで送信できます。
 
-When you have entered the destination address, and optionally entered the memo text, press **Confirm** to initiate the transaction.
+JavaScript-JP**-**JP-
 
-![Transaction](../../../.gitbook/assets/nft-studio-11-send-transaction.png)
+![JavaScript-JP-JP-](../../../.gitbook/assets/nft-studio-11-send-transaction.png)
 
-After pressing **Send Transaction** it will be published on the network, and the transaction fee will be deducted from your balance. Collectibles will be deposited into the destination address shortly after.
+**トランザクションを押し**た後、ネットワーク上に公開され、トランザクション手数料はお客様の残高から差し引かれます。Collectiblesはすぐに宛先アドレスに堆積されます。
 
-## Summary
+## JavaScript-JP-JP-
 
-Now, you should know how to create NFT families, mint NFT groups, and send them to other addresses. Have fun with it! Make sure to share your creations with us on our [social media channels](https://www.avalabs.org/social)!
+NFT ファミリー、ミント NFT グループを作成し、NFT を送信できるようになりました。楽しんでください！あなたの作品を[SNSチャンネル](https://www.avalabs.org/social)でシェアしてください！
 
-If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out the [NFT tutorial](creating-a-nft-part-1.md). If you have technical questions, reach out to us on our [Discord](https://chat.avalabs.org/) server.
+NFTがAvalancheネットワーク上でどのように動作するか、NFTを使った製品の構築をご希望の場合は、この[NFT](creating-a-nft-part-1.md)チュートリアルをご覧ください。技術的な質問がある場合は、[Discord](https://chat.avalabs.org/)サーバーでお問い合わせください。
 
