@@ -1,38 +1,39 @@
 ---
-description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
+description: X-Chain Avalanche Sanal Makinesi'nin (AVM) bir örneğidir.
+
 ---
 
-# Exchange Chain \(X-Chain\) API
+# Zincir \(X-Chain\ API
 
-The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+Avalanche’s ana platformu olan [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche Sanal Makine \ (AVM\) bir örnektir. Bu API, müşterilerin X-Chain ve AVM'nin diğer örnekleri üzerinde varlıklarını oluşturma ve ticaret yapmalarına izin verir.
 
-{% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
+{% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo="" %}
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Bu API, `json 2.0` RPC formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoints
+## Son nokta
 
-`/ext/bc/X` to interact with the X-Chain.
+`/ext/bc/X` X-Chain ile etkileşim kurmak.
 
-`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
+`/ext/bc/blockchain ID` diğer AVM örnekleriyle etkileşime geçmek için `blok` zincirinin AVM çalıştıran bir blok zincirinin kimliği olduğu bir diğer AVM örnekleridir.
 
-## Methods
+## Yöntemler
 
-### avm.buildGenesis
+### Avm, İnşaat.
 
-Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+Bu sanal makine genez durumunun JSON temsili olarak bu devletin byte temsilini oluşturmaktadır.
 
-#### **Endpoint**
+#### **Sonucu noktası**
 
-This call is made to the AVM’s static API endpoint:
+Bu arama AVM'nin statik API uç noktasına yapıldı:
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix \(ie. X-\) in calls to the static API endpoint because these prefixes refer to a specific chain.
+Not: Adresler bir zincir önekleme içermemeli. (ie) X-\) statik API sonlarına çağrılarda, çünkü bu önekler belirli bir zincire işaret eder.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.buildGenesis({
@@ -45,9 +46,9 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Kodlama, keyfi bytes ie için kullanılacak kodlama biçimini belirler. Geri dönen genesis bytes "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-`genesisData` has this form:
+`genesisData` bu formu var:
 
 ```cpp
 {
@@ -99,7 +100,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 }
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -162,7 +163,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -175,11 +176,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createAddress
+### avm. Yaradılış Adresi
 
-Create a new address controlled by the given user.
+Verilen kullanıcı tarafından kontrol edilen yeni bir adres oluştur.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.createAddress({
@@ -188,7 +189,7 @@ avm.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -202,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -214,13 +215,13 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createFixedCapAsset
+### avm, Yaratıldı
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+Yeni bir sabit kapak oluştur, mantarlı bir varlık oluştur. Bu sayının bir kısmı başlatılma ile oluşturulur ve daha sonra hiç yaratılmamıştır. Varlık `avm.send`.
 
-{% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
+{% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" dijital varlıklar / page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md"
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.createFixedCapAsset({
@@ -242,16 +243,16 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+* `İsim` insan tarafından okunabilir bir isimdir. Eşsiz olması gerekmez.
+* `Sembol,` varlığın bir kısaltma sembolüdür. 0 ile 4 karakter arasında. Eşsiz olması gerekmez. Belki de atılmıştır.
+* `Bu` değerin dengelerinin kullanıcı arayüzleri tarafından nasıl gösterildiğini belirler. `Eğer bu` varlığın paydası 0, 100 ünite olarak gösterilecek. Eğer payda 1 100 `birim` ise bu varlığın 10.0 olarak gösterilecek. `Eğer bu` varlığın paydası 2, 100 ünite 1.00 ve 0 olarak gösterilebilir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* `Kullanıcı adı` ve `parola` kullanıcının işlem ücretini ödemelerini belirtir.
+* `Başlat` in her element `bu adrese` in varlığın `miktarı` olduğunu belirtir.
+* `Varlık` yeni varlığın kimliği.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +280,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -292,11 +293,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mint
+### avm. nane
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
+[`avm.createVariableCapAsset. avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset). ile oluşturulan değişken kapsülü bir varlığın mint birimi.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.mint({
@@ -314,14 +315,14 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* Adresle ilgili `olarak` sayısal `değerler` oluşturulacak ve kontrol `edilecek`.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* `Kullanıcı adı` işlem ücretini ödeyen kullanıcıdır `kullanıcı adı` anahtarları tutmalı ve bu varlığın daha fazla nane şekline izin vermelidir. Yani en azından bir minter setinin _eşik_ anahtarını kontrol etmesi gerekir.
+* `TxID` bu işlem kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -340,7 +341,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -353,13 +354,13 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createVariableCapAsset
+### avm. Yaratılabilir Kaput
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+Yeni bir değişken kapak oluştur, mantarlı varlık oluştur. Varlığın başlatılmasında hiçbir birim yok. Minters bu varlığın `avm.mint`. kullanarak birimleri naneli olabilir.
 
-{% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
+{% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" dijital varlıklar / page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md"
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.createVariableCapAsset({
@@ -381,17 +382,17 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `İsim` insan tarafından okunabilir bir isimdir. Eşsiz olması gerekmez.
+* `Sembol,` varlığın bir kısaltma sembolüdür. 0 ile 4 karakter arasında. Eşsiz olması gerekmez. Belki de atılmıştır.
+* `Bu` değerin dengelerinin kullanıcı arayüzleri tarafından nasıl gösterildiğini belirler. Eğer bu varlığın paydası 0, 100 ünite olarak gösterilecek. Eğer payda 1 100 birim ise bu varlığın 10.0 olarak gösterilecek. Eğer bu varlığın paydası 2, 100 ünite .100 olarak görüntülenir.
+* `MinterSets,` `her` elementin in adreslerin `eşiğinin` bir minting işlemini imzalayarak daha çok varlığı birleştirebileceği bir listedir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* `Kullanıcı adı` işlem ücretini öder.
+* `Varlık` yeni varlığın kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -425,7 +426,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -438,13 +439,13 @@ curl -X POST --data '{
 }
 ```
 
-### avm.createNFTAsset
+### avm. avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+Mantıksız bir varlık oluştur. Varlığın başlatılmasında hiçbir birim yok. Minters bu varlığın `avm.mintNFT`. kullanarak birimleri naneli olabilir.
 
-{% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
+{% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" dijital varlıklar / yaratılma-nft-part-1.md%}
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.createNFTAsset({
@@ -465,16 +466,16 @@ avm.createNFTAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `İsim` insan tarafından okunabilir bir isimdir. Eşsiz olması gerekmez.
+* `Sembol,` varlığın bir kısaltma sembolüdür. 0 ile 4 karakter arasında. Eşsiz olması gerekmez. Belki de atılmıştır.
+* `MinterSets,` `her` elementin in adreslerin `eşiğinin` bir minting işlemini imzalayarak daha çok varlığı birleştirebileceği bir listedir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* `Kullanıcı adı` işlem ücretini öder.
+* `Varlık` yeni varlığın kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -500,7 +501,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -513,13 +514,13 @@ curl -X POST --data '{
 }
 ```
 
-### avm.mintNFT
+### avm. avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+[`Avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset) ile yaratılan mantarsız olmayan işaretler.
 
-{% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
+{% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" dijital varlıklar / yaratılma-nft-part-1.md%}
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.mintNFT({
@@ -538,16 +539,16 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `assetID` yeni yaratılan NFT varlığının bir numaralı kaynağı.
+* `Yük,` 1024 baytlık bir keyfi yüküdür. Şifreleme biçimi `kodlama` argümanı ile belirtilir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* `Kullanıcı adı` işlem ücretini ödeyen kullanıcıdır `kullanıcı adı` anahtarları tutmalı ve bu varlığın daha fazla nane şekline izin vermelidir. Yani en azından bir minter setinin _eşik_ anahtarını kontrol etmesi gerekir.
+* `TxID` bu işlem kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
+* `Kodlama,` yükleme argümanı için kullanılacak kodlama biçimi. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -566,7 +567,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -579,11 +580,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.export
+### avm. Dışarıya aktarılıyor
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+from X-Chain veya X-Chain bir AVAX gönder. Bu yöntemi aradıktan sonra, C-Chain üzerinden aktarımı tamamlamak için [`avax.import`](contract-chain-c-chain-api.md#avax-import) aktarmayı çağırmalısınız.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.export({
@@ -601,16 +602,16 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `...` P-Chain veya C-Chain adresi varlığın gönderdiği adres.
+* `Gönderilecek` varlığın miktarı.
+* `Varlık` kimlik, gönderilen varlığın kimliğidir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Varlık `kullanıcı adı` tarafından kontrol edilen adreslerden gönderiliyor
+* `TxID` bu işlem kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -629,7 +630,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -642,11 +643,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportAVAX
+### avm. avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
+from başka bir zincire AVAX gönder. Bu yöntemi aradıktan sonra, aktarımı tamamlamak için diğer zincire `ithalat` çağrısı yapmanız gerekir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.exportAVAX({
@@ -663,15 +664,15 @@ avm.exportAVAX({
 }
 ```
 
-* `to` is the P-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to` gönderdiği P-Chain adresidir.
+* `NAVAX` miktarı gönderilir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* AVAX `kullanıcı adı` tarafından kontrol edilen adreslerden gönderiliyor
+* `TxID` bu işlem kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -689,7 +690,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -702,12 +703,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportKey
+### avm. avm.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
+Verilen adresi kontrol eden özel anahtarı al.   Geri dönen özel anahtar [`with`](exchange-chain-x-chain-api.md#avm-importkey) eklenebilir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.exportKey({
@@ -717,10 +717,10 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `Kullanıcı adı` `adresi` kontrol etmeli.
+* `Özel` anahtar, `adresi` kontrol eden özel anahtarın sicim temsilidir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -735,7 +735,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -747,11 +747,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAllBalances
+### avm. avm.getAllBalances dengeleri
 
-Get the balances of all assets controlled by a given address.
+Verilen bir adres tarafından tüm varlıkların dengesini kontrol altına alın.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getAllBalances({address:string}) -> {
@@ -762,7 +762,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -770,12 +770,12 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7haclsz5r"
+        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7hapvdyht"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -796,11 +796,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAssetDescription
+### avm.getAssetDescription Varlık Tanımlaması
 
-Get information about an asset.
+Bir varlık hakkında bilgi edin.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
@@ -811,12 +811,12 @@ avm.getAssetDescription({assetID: string}) -> {
 }
 ```
 
-* `assetID` is the id of the asset for which the information is requested.
-* `name` is the asset’s human-readable, not necessarily unique name.
-* `symbol` is the asset’s symbol.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `Varlık` bilginin istendiği varlığın kimliği.
+* `Ad,` eşsiz bir isim değil, insan okunabilir bir isimdir.
+* `Sembol,` varlığın sembolüdür.
+* `Bu` değerin dengelerinin kullanıcı arayüzleri tarafından nasıl gösterildiğini belirler. Eğer bu varlığın paydası 0, 100 ünite olarak gösterilecek. Eğer payda 1 100 birim ise bu varlığın 10.0 olarak gösterilecek. Eğer bu varlığın paydası 2, 100 ünite .100 olarak görüntülenir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -829,7 +829,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -844,11 +844,11 @@ curl -X POST --data '{
 }`
 ```
 
-### avm.getBalance
+### avm.getBalance in New York USA
 
-Get the balance of an asset controlled by a given address.
+Verilen bir adres tarafından kontrol edilen bir varlığın dengesini sağla.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getBalance({
@@ -857,10 +857,10 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `assetID` id of the asset for which the balance is requested
+* `Varlığın` sahibi
+* Dengenin istendiği varlığın `varlığının özet` kimliği
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -874,7 +874,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -892,11 +892,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getTx
+### avm. avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Belirtilmiş işlemleri geri verir. `Şifreleme` parametresi, geri dönüşü işleminin biçimini belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getTx({
@@ -908,7 +908,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -922,7 +922,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -937,22 +937,22 @@ curl -X POST --data '{
 
 ### avm.getTxStatus
 
-Get the status of a transaction sent to the network.
+Ağa gönderilen bir işlem durumunu bildir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` is one of:
+`Durum` şu:
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
-* `Unknown`: The transaction hasn’t been seen by this node
+* `Kabul edildi`: işlem her düğümle kabul edilir\ (veya olacak)
+* `İşlem`: işlem bu düğümle oylanıyor
+* `Reddedildi`: Bu işlem ağdaki herhangi bir düğümle kabul edilmeyecek
+* `Bilinmiyor`: Bu düğümle işlem görülmedi.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -965,7 +965,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -979,9 +979,9 @@ curl -X POST --data '{
 
 ### avm.getUTXOs
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+Verilen adresi gönderen UTXOs ulaşıyor. Kaynak Zinciri belirtilmişse, o zaman X zincirine aktarılan atomik UTXOs geri alır.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.getUTXOs({
@@ -1005,17 +1005,17 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `UTXos,` UTXO referansları en az bir adres `olarak` adlandırılan UTXOs listesidir.
+* En `çok sınırda` UTXOs geri döner. `Eğer sınır` 1024'ten daha büyük veya ihmal edilirse, 1024'e ayarlanır.
+* Bu yöntem pagination. destekler. `endIndex` son UTXO geri döndüğü anlamına gelir. Bir sonraki UTXOs setini almak için, bir sonraki çağrıda `endIndex` olarak `endIndex` değerini kullanın.
+* Eğer `startIndex` atılırsa, tüm UTXOs `sınıra` kadar getirecektir.
+* pagination \ (`startIndex` verildiğinde), UTXOs birden fazla arama arasında eşsiz olması garantisi yoktur. Bu da ilk çağrının sonucu olarak UTXO görünebilir, sonra ikinci çağrıda da görünebilir.
+* pagination, kullanırken tutarlılık birden fazla arama arasında garanti edilmez. Bu da UTXO adresleri aramalar arasında değişmiş olabilir.
+* `Şifreleme` UTXOs. için biçimi belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Example**
+#### **Örnek olarak**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+Tüm UTXOs bu referans `X-avax1yzt57wd8me6xmy32lz8m5lg6yruy79m6whsf` ve `X-avax1x459sj0ssujguq723cljfty4jlae28evjt7xzz`.
 
 ```cpp
 curl -X POST --data '{
@@ -1030,7 +1030,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Bu cevap verir:
 
 ```cpp
 {
@@ -1054,7 +1054,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+`Uyuşmuş` `limitle` aynı olduğu için daha fazla UTXOs alınmadığını söyleyebiliriz. Bu sefer `başlangıç` endeksiyle yöntemi tekrar ararız:
 
 ```cpp
 curl -X POST --data '{
@@ -1073,7 +1073,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Bu cevap verir:
 
 ```cpp
 {
@@ -1096,9 +1096,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+`Uyuşmuş` `bir` sınırdan az olduğundan UTXOs getirmeyi bitirdiğimizi ve bu yöntemi tekrar aramamıza gerek olmadığını biliyoruz.
 
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Bir ImportTx yapmak için P Zincirinden X to aktarılan UTXOs almak istediğimizi varsayalım. O zaman kaynak Chain argümanıyla GetUTXOs aramalıyız. Atom GetUTXOs geri almak için:
 
 ```cpp
 curl -X POST --data '{
@@ -1114,7 +1114,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+Bu cevap verir:
 
 ```cpp
 {
@@ -1134,11 +1134,11 @@ This gives response:
 }
 ```
 
-### avm.import
+### avm. İçeriye aktar.
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+of from C-Chain aktarılmasını tamamla. Bu yöntem çağrılmadan önce, P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) veya C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) metodunu çağırmalısınız.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.import({
@@ -1149,12 +1149,12 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
-* `username` is the user that controls `to`.
-* `txID` is the ID of the newly created atomic transaction.
+* `to` gönderdiği adres. Bu durum P-Chain’s `ihracatına````` karşılık gelen çağrıda veya C-Chain's ihracatında tartışmayla aynı olmalıdır.
+* `Kaynak zinciri` of ithal edildiği zincirin kimliği, kimliktir. from fon aktarmak için `"C"` kullanın.
+* `Kullanıcı adı` kontrol eden `kullanıcı`.
+* `TxID` yeni yaratılmış atom işleminin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1170,7 +1170,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1182,11 +1182,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importAVAX
+### avm. avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
+of from to transfer edilmesini tamamla. Bu yöntem çağrılmadan önce, P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) metodunu kullanmalısınız.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.importAVAX({
@@ -1197,11 +1197,11 @@ avm.importAVAX({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
-* `username` is the user that controls `to`.
+* `to` gönderdiği adres. Bu P-Chain’s `ihracatına` `karşılık` gelen çağrıda tartışmayla aynı olmalıdır.
+* `Kaynak zinciri` of ithal edildiği zincirin kimliği, kimliktir. from fonları aktarmak için `"P"` kullanın.
+* `Kullanıcı adı` kontrol eden `kullanıcı`.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1217,7 +1217,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1229,11 +1229,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importKey
+### avm. avm.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Adresi kontrol eden özel anahtarı sağlayarak bir kullanıcı adresi kontrol ettir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.importKey({
@@ -1243,9 +1243,9 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* `Özel` `anahtarları kullanıcı adı` ile özel anahtar setine özel anahtarları ekleyin. `Adres` artık özel anahtar ile kontrol eden adres `kullanıcı` adıdır.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1260,7 +1260,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1272,11 +1272,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.issueTx
+### avm. avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+İmzalı bir işlem gönderin. `Şifreleme` imzalanmış işlem biçimini belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.issueTx({
@@ -1287,7 +1287,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1301,7 +1301,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1313,11 +1313,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.listAddresses
+### avm.listAddresses Adresleri
 
-List addresses controlled by the given user.
+Verilen kullanıcı tarafından kontrol edilen adresler listelenir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.listAddresses({
@@ -1326,7 +1326,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1340,7 +1340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1352,11 +1352,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.send
+### Avm. Gönder.
 
-Send a quantity of an asset to an address.
+Bir adrese bir miktar varlık gönderin.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.send({
@@ -1371,14 +1371,14 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* Adres için kimlik `özetiyle` `birlikte bir miktar` varlık `gönderir`. `Miktar` varlığın en küçük artışında belirgindir. AVAX için bu 1 nAVAX (1 of milyarda biri. \)
+* `...` X-Chain adresi varlığın gönderildiği adres.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Uzunluğu 256 baytlık olan bir `not` ekleyebilirsiniz.
+* Varlık kullanıcı `adı` tarafından kontrol edilen adreslerden gönderilir. \ (elbette, bu kullanıcının gönderilen varlığın dengesini en azından tutması gerekecek. \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1398,7 +1398,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1413,9 +1413,9 @@ curl -X POST --data '{
 
 ### avm.sendMultiple
 
-Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+Bir adres listesinden `belirlenmiş` bir adrese çoklu `miktarda varlık` aktarımı gönderir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.sendMultiple({
@@ -1432,13 +1432,13 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `memo` is an optional message, whose length can be up to 256 bytes.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `Çıkışlar` her biri bir `assetID`, `miktarı` ve `yönünü` içeren bir nesne literatürüdür.
+* `Not,` 256 baytlık uzunluğu olan opsiyonel bir mesajdır.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Varlık kullanıcı `adı` tarafından kontrol edilen adreslerden gönderilir. \ (elbette, bu kullanıcının gönderilen varlığın dengesini en azından tutması gerekecek. \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1467,7 +1467,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1480,11 +1480,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendNFT
+### avm.
 
-Send a non-fungible token.
+Mantıksız bir işaret gönder.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avm.sendNFT({
@@ -1498,13 +1498,13 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
-* `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
-* `to` is the X-Chain address the NFT is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
+* `NFT` gönderilen varlıkların kimliği var.
+* `Grup kimliği` NFT gönderme için NFT grubudur. NFT oluşturma her NFT ID altında birden fazla gruba izin verir. Her gruba birden fazla NFTs yayınlayabilirsiniz.
+* `to` gönderdiği X-Chain adresidir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, adreslerinizden herhangi birini ihtiyaç duyulduğu gibi kullanır. `Değişiklik Addr` herhangi bir değişiklik gönderilecek adresdir. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Varlık kullanıcı `adı` tarafından kontrol edilen adreslerden gönderilir. \ (elbette, bu kullanıcının en azından NFT gönderilen dengesini tutması gerekecek. \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1523,7 +1523,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1536,15 +1536,15 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.issueTx
+### Cüzdan.
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Ağa imzalı bir işlem gönder ve tx kabul edileceğini varsay. `Şifrelenmek,` imzalanmış işlem biçimini belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-This call is made to the wallet API endpoint:
+Bu arama API sonlarına yapılmış:
 
-`/ext/bc/X/wallet`
+`/ext/bc/X/cüzdan`
 
-#### Signature
+#### İmzalanma
 
 ```cpp
 wallet.issueTx({
@@ -1555,7 +1555,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+#### Örnek çağrı
 
 ```cpp
 curl -X POST --data '{
@@ -1569,7 +1569,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+#### Örnek tepki
 
 ```cpp
 {
@@ -1581,15 +1581,15 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.send
+### Cüzdan.
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Bir adrese bir varlık gönderin ve tx kabul edileceğini varsayın, böylece gelecekteki aramalar değiştirilmiş UTXO setini kullanabilsin.
 
-This call is made to the wallet API endpoint:
+Bu arama API sonlarına yapılmış:
 
-`/ext/bc/X/wallet`
+`/ext/bc/X/cüzdan`
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 wallet.send({
@@ -1604,14 +1604,14 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* Adres için kimlik `özetiyle` `birlikte bir miktar` varlık `gönderir`. `Miktar` varlığın en küçük artışında belirgindir. AVAX için bu 1 nAVAX (1 of milyarda biri. \)
+* `...` X-Chain adresi varlığın gönderildiği adres.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Uzunluğu 256 baytlık olan bir `not` ekleyebilirsiniz.
+* Varlık kullanıcı `adı` tarafından kontrol edilen adreslerden gönderilir. \ (elbette, bu kullanıcının gönderilen varlığın dengesini en azından tutması gerekecek. \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1631,7 +1631,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1644,15 +1644,15 @@ curl -X POST --data '{
 }
 ```
 
-### wallet.sendMultiple
+### Cüzdan. wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+Birden fazla `sayıda varlık` transferi gönder, ait adreslerin ait olduğu bir listeden belirlenmiş `bir` adrese gönderin ve gelecekteki aramalar değiştirilmiş UTXO setini kullanabilsin diye tx kabul edileceğini varsayın.
 
-This call is made to the wallet API endpoint:
+Bu arama API sonlarına yapılmış:
 
-`/ext/bc/X/wallet`
+`/ext/bc/X/cüzdan`
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 wallet.sendMultiple({
@@ -1669,13 +1669,13 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `Çıkışlar` her biri bir `assetID`, `miktarı` ve `yönünü` içeren bir nesne literatürüdür.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
+* Uzunluğu 256 baytlık olan bir `not` ekleyebilirsiniz.
+* Varlık kullanıcı `adı` tarafından kontrol edilen adreslerden gönderilir. \ (elbette, bu kullanıcının gönderilen varlığın dengesini en azından tutması gerekecek. \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -1704,7 +1704,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -1715,5 +1715,114 @@ curl -X POST --data '{
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
     }
 }
+```
+
+### Olaylar
+
+Belirlenmiş bir adresteki işlemleri dinle.
+
+Bu arama API sonlarına doğru yapılır:
+
+`/// / X/etkinlikleri`
+
+#### **Golang Örnek**
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "log"
+    "net"
+    "net/http"
+    "sync"
+
+    "github.com/ava-labs/avalanchego/api"
+    "github.com/ava-labs/avalanchego/pubsub"
+    "github.com/gorilla/websocket"
+)
+
+func main() {
+    dialer := websocket.Dialer{
+        NetDial: func(netw, addr string) (net.Conn, error) {
+            return net.Dial(netw, addr)
+        },
+    }
+
+    httpHeader := http.Header{}
+    conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup := &sync.WaitGroup{}
+    waitGroup.Add(1)
+
+    readMsg := func() {
+        defer waitGroup.Done()
+
+        for {
+            mt, msg, err := conn.ReadMessage()
+            if err != nil {
+                log.Println(err)
+                return
+            }
+            switch mt {
+            case websocket.TextMessage:
+                log.Println(string(msg))
+            default:
+                log.Println(mt, string(msg))
+            }
+        }
+    }
+
+    go readMsg()
+
+    cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+    cmdmsg, err := json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    var addresses []string
+    addresses = append(addresses, " X-fuji....")
+    cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+    cmdmsg, err = json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup.Wait()
+}
+```
+
+**Operasyonlar**
+
+| Emredersiniz | Tarif edilmesi | Örnek olarak | Tartışmalar |
+| :--- | :--- | :--- | :--- |
+| **NewSet** | Yeni bir adres haritası oluştur | "newSet:{}} |  |
+| **NewBloom** | Yeni bir çiçek seti oluştur. | "newBloom":{"maxElements":"1000", "CollisionProb":"0.0100"}} | Maksimum Elementler - filtredeki element sayısı >0 çarpışma Prob olmalıdır. - çarpışma olasılığı >0 ve <= 1 olmalıdır. |
+| **Adresler** | Sete bir adres ekle | {"addAddresses":{"addresses":\["X-fuji..." \]}} | Adresler - eşleştirilecek adreslerin listesi |
+
+**NewSet** veya **NewBloom** filtreyi yeniden arar ve **AddAddresses**. ile takip edilmelidir. **Adresler** birden fazla kez adlandırılabilir.
+
+**Detayları ayarla**
+
+* **NewSet** mutlak adres eşleşmelerini gerçekleştirir, eğer adres if işlem gönderilecektir.
+* **NewBloom** [Bloom filtrelemesi](https://en.wikipedia.org/wiki/Bloom_filter) yanlış pozitifler üretebilir ancak daha fazla sayıda adresin filtrelenmesine izin verebilir. Eğer adresler filtrede ise, işlem gönderilecek.
+
+#### **Örnek Tepki**
+
+```cpp
+2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
 
