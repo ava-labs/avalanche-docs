@@ -1,16 +1,16 @@
 ---
 description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+  このページでは、API メソッド、引数、およびレスポンスを一覧表示し、将来のリリースで削除または変更します。
+
 ---
 
-# Deprecated API Calls
+# 非推奨APIコール
 
 ## P-Chain API
 
 ### `getCurrentValidators`
 
-In v1.0.0, the signature was:
+v1.0.0では、署名は次の通りです。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -46,7 +46,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
+後述のバージョンでは、署名は次のように述べた。各バリデータにはデリゲーターのリストが含まれています。現在の動作については、次の注意点をご覧ください。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +94,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+v1.0.6 以降、トップレベルの `delegators` フィールドは削除されました。署名は今です:
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -130,15 +130,15 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-### `getTxStatus`
+### `getTxStatus-JP`
 
-Before v1.0.4, the signature was:
+v1.0.4以前は、次のようなシグネチャーでした。
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+v1.0.4 引数 `includeReason` を追加しました。`false` が指定されたか否かは、このメソッドのレスポンスは以前と同じでした。`true`ならば、このメソッドのレスポンスはこの新しいフォーマットを持っていました。
 
 ```cpp
 {
@@ -147,7 +147,7 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+`JavaScript````-JP-JP-```
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+v1.0.6 以降、`includeReason` 引数は無視され、このメソッドのレスポンスは常に新しいフォーマットです。
 
