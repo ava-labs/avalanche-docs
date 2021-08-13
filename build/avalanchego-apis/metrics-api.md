@@ -1,16 +1,16 @@
-# Metrics API
+# Metrik API
 
-The API allows clients to get statistics about a node’s health and performance.
+API, hastaların bir düğümün sağlık ve performansı hakkında istatistikleri almalarına izin verir.
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/metrics
 ```
 
-## Usage
+## Kullanım için
 
-To get the node metrics:
+Düğüm metriklerini almak için:
 
 ```cpp
 curl -X POST 127.0.0.1:9650/ext/metrics
@@ -18,7 +18,7 @@ curl -X POST 127.0.0.1:9650/ext/metrics
 
 ## Format
 
-This API produces Prometheus compatible metrics. See [here](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md) for information on Prometheus’ formatting.
+Bu API Prometheus uyumlu metrikler üretir. Prometheus'un biçimlendirme hakkında bilgi için [burada](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md) bakın.
 
-[Here](../tutorials/nodes-and-staking/setting-up-node-monitoring.md) is a tutorial that shows how to set up Prometheus and Grafana to monitor AvalancheGo node using the Metrics API.
+[Bu](../tutorials/nodes-and-staking/setting-up-node-monitoring.md) da Prometheus ve Grafana metrik API'sini kullanarak AvalancheGo düğümünü izlemesini sağlayacak bir ders sunuyor.
 
