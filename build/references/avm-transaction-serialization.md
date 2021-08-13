@@ -1,23 +1,23 @@
-# AVM Transaction Format
+# AVM İşlem Biçimi
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine \(AVM\). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+Bu dosya Avalanche Sanal in işlemleri nasıl we tek gerçek kaynağı olarak tanımlanmaktadır. Bu belge, şifreli kullanıcı tanımlaması için paketi paketlemek ve [secp256k1](cryptographic-primitives.md#secp256k1-addresses) için [ilkel serileştirme](serialization-primitives.md) biçimini kullanır.
 
-## Codec ID
+## Codec kimlik
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Bazı veriler verilerin nasıl çölleşmesi gerektiğini belirten bir kod kod numarası (16\) ile hazırlanır. Şu anda geçerli kod çözücü tek kimlik 0 \(`0x00 0x00`\).
 
-## Transferable Output
+## Transfer Edilebilir Çıktı
 
-Transferable outputs wrap an output with an asset ID.
+Transferable çıktılar, bir çıktıyı varlık kimliğiyle paketler.
 
-### What Transferable Output Contains
+### Hangi Aktarılabilir Çıktı Içeriyor
 
-A transferable output contains an `AssetID` and an [`Output`](avm-transaction-serialization.md#outputs).
+Transfer edilebilir bir çıkış bir `AssetID` ve [`bir Çıktı`](avm-transaction-serialization.md#outputs) içerir.
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined [below](avm-transaction-serialization.md#outputs). For example, this can be a [SECP256K1 transfer output](avm-transaction-serialization.md#secp256k1-transfer-output).
+* **`AssetID`** bu çıkış referanslarını belirleyen 32 byte dizidir.
+* **`Çıkış`** [aşağıdaki](avm-transaction-serialization.md#outputs) gibi tanımlanmış bir output, Örneğin, [SECP256K1 transfer çıkışı](avm-transaction-serialization.md#secp256k1-transfer-output) olabilir.
 
-### Gantt Transferable Output Specification
+### Gantt Transferable Çıktı Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ A transferable output contains an `AssetID` and an [`Output`](avm-transaction-se
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Proto Transferable Output Specification Specification
 
 ```text
 message TransferableOutput {
@@ -38,12 +38,12 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Transfer Edilebilir Çıktı Örnek
 
-Let’s make a transferable output:
+Transfer edilebilir bir çıkış yapalım:
 
-* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Output`: `"Example SECP256K1 Transfer Output from below"`
+* `Erişim` `tarihi: 11213151718181911b112141618181811214161818113161818191b1d1e1e1)`
+* `Çıktı`: `"Örnek SECP256K1 Aktarım Çıktısı"`
 
 ```text
 [
@@ -70,20 +70,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Transfer Edilebilir Girdi
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Transferable girdiler, belirli bir UTXO aktarımı ile tanımlar.
 
-### What Transferable Input Contains
+### Hangi Aktarılabilir Girdi Içeriyor
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+Transfer edilebilir bir girdi `TxID`, `UTXOIndex` `Varlık` ve `bir Girdi` içerir.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](avm-transaction-serialization.md#secp256k1-transfer-input)
+* **`TxID`** bu girişin bir çıktıyı tüketen işlemleri tanımlayan 32 byte dizidir. İşlem kimlikleri imzalanmış işlemlerin bytes Sha256 ile hesaplanır.
+* **`UTXOIndex`** bu girişin belirlenen işlemde hangi utxo consuming tanımlayan bir is
+* **`AssetID`** bu giriş referanslarını belirleyen 32 byte dizidir.
+* **`Girdi`** aşağıda tanımlandığı gibi bir girdir. Bu sadece [SECP256K1 transfer girdisi](avm-transaction-serialization.md#secp256k1-transfer-input) olabilir.
 
-### Gantt Transferable Input Specification
+### Gantt Transferable Input Specification Comment
 
 ```text
 +------------+----------+------------------------+
@@ -110,14 +110,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Transfer Edilebilir Girdi Örnekleri
 
-Let’s make a transferable input:
+Transfer edilebilir bir girişim yapalım:
 
-* `TxID`: `0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
+* `TxID`: `0xf1d1c1c1c111010d0b090806050403020000 0060504030101016161513110d0d0101000`
 * `UTXOIndex`: `5`
-* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Input`: `"Example SECP256K1 Transfer Input from below"`
+* `Erişim` `tarihi: 11213151718181911b112141618181811214161818113161818191b1d1e1e1)`
+* `Giriş`: `"Örnek SECP256K1 Aktarma Girdi"`
 
 ```text
 [
@@ -147,19 +147,19 @@ Let’s make a transferable input:
 ]
 ```
 
-## Transferable Op
+## Transfer edilebilir Otomobil
 
-Transferable operations describe a set of UTXOs with a provided transfer operation. Only one Asset ID is able to be referenced per operation.
+Transferable operasyonlar bir transfer operasyonu ile bir dizi UTXOs tanımlar. Sadece bir tane Varlık Kimliği operasyonu için referans alınabilir.
 
-### What Transferable Op Contains
+### Hangi Aktarılabilir Operasyon Içeriyor
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+Transfer edilebilir bir `operasyon, bir AssetID`, `AssetID`, ve bir `Transferop` içerir.
 
-* **`AssetID`** is a 32-byte array that defines which asset this operation changes.
-* **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
-* **`TransferOp`** is a [transferable operation object](avm-transaction-serialization.md#operations).
+* **`AssetID`** bu işlemin değişimini belirleyen 32 byte dizidir.
+* **`UTXOIDs`** TxID-OutputIndex tuples dizisidir. Bu dizinin lexicographical sırayla sıralanması gerekir.
+* **`TransferOp`** [transferi mümkün](avm-transaction-serialization.md#operations) bir işlemdir.
 
-### Gantt Transferable Op Specification
+### Gantt Aktarılabilir Op Specification
 
 ```text
 +-------------+------------+------------------------------+
@@ -174,7 +174,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
                            +------------------------------+
 ```
 
-### Proto Transferable Op Specification
+### Proto Transferable Op Specification Specification Comment
 
 ```text
 message UTXOID {
@@ -188,16 +188,16 @@ message TransferableOp {
 }
 ```
 
-### Transferable Op Example
+### Transfer Edilebilir Op Örnekleri
 
-Let’s make a transferable operation:
+Transfer edilebilir bir operasyon yapalım:
 
-* `AssetID`: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `Erişim` `tarihi: 11213151718181911b112141618181811214161818113161818191b1d1e1e1)`
 * `UTXOIDs`:
-  * `UTXOID`:
-    * `TxID`: `0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
-    * `UTXOIndex`: `5`
-* `Op`: `"Example Transfer Op from below"`
+   * `UTXOID`:
+      * `TxID`: `0xf1d1c1c1c111010d0b090806050403020000 0060504030101016161513110d0d0101000`
+      * `UTXOIndex`: `5`
+* `Op`: `"Aşağıdan Örnek Transfer Op`
 
 ```text
 [
@@ -240,25 +240,25 @@ Let’s make a transferable operation:
 ]
 ```
 
-## Outputs
+## Çıktı
 
-Outputs have four possible types: [`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) and [`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output).
+Çıkışlar dört olası türüne sahiptir: [`SECP256K1Transferoutput`](avm-transaction-serialization.md#secp256k1-transfer-output), [`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output), [`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output) ve [`NFTMintoutput`](avm-transaction-serialization.md#nft-mint-output).
 
-## SECP256K1 Transfer Output
+## SECP256K1 Transfer Çıktı
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer çıktısı, belirtilen bir unix zaman sonrasında bir adresler koleksiyonuna bir miktar varlık gönderme imkanı sağlar.
 
-### **What SECP256K1 Transfer Output Contains**
+### **SECP256K1 Aktarım Çıktısını Içeriyor**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+Bir secp256k1 transfer çıktısı `TypeID`, `Amount`, `Locktime`, `Threshold` ve `Adresler` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `007`.
+* **`Miktar,`** bu çıkışın sahip olduğu varlığın miktarını belirten uzunluktur. Olumlu olmalı.
+* **`Locktime`**, bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunluktadır. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**, çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int **`Adreslerin`** uzunluğuna eşit ya da daha az olmalı. **`Adresler`** boşsa, 0 olmalı.
+* **`Adresler,`** bu çıkışı harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### **Gantt SECP256K1 Transfer Çıktı Specification**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -276,7 +276,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Proto SECP256K1 Transfer Çıktı Specification**
 
 ```text
 message SECP256K1TransferOutput {
@@ -288,17 +288,17 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1 Transfer Çıktı Örneği**
 
-Let’s make a secp256k1 transfer output with:
+Bir secp256k1 transfer çıktısı yapalım:
 
 * **`TypeID`**: `7`
 * **`Amount`**: `12345`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0x51025c61fccc078f6933f834be6d5a955`
+* `0xc344128e0601283523a24a461c8943ab089989`
 
 ```text
 [
@@ -334,20 +334,20 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Mint Output
+## SECP256K1 Mint Çıktı
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) nane çıktısı bir adres koleksiyona ait bir çıktıdır.
 
-### **What SECP256K1 Mint Output Contains**
+### **SECP256K1 Mint Çıktı Içerir**
 
-A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+Bir secp256k1 Mint çıktısı `TypeID`, `Locktime`, `Threshold` ve `Adresler` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000006`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `006`.
+* **`Locktime`**, bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunluktadır. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**, çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int **`Adreslerin`** uzunluğuna eşit ya da daha az olmalı. **`Adresler`** boşsa, 0 olmalı.
+* **`Adresler,`** bu çıkışı harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt SECP256K1 Mint Output Specification**
+### **Gantt SECP256K1 Mint Çıktı Specification**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -363,7 +363,7 @@ A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addre
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Output Specification**
+### **Proto SECP256K1 Mint Çıktı Specification**
 
 ```text
 message SECP256K1MintOutput {
@@ -374,16 +374,16 @@ message SECP256K1MintOutput {
 }
 ```
 
-### **SECP256K1 Mint Output Example**
+### **SECP256K1 Mint Çıktı Örneği**
 
-Let’s make a SECP256K1 mint output with:
+SECP256K1 nane çıktısı yapalım:
 
 * **`TypeID`**: `6`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0x51025c61fccc078f6933f834be6d5a955`
+* `0xc344128e0601283523a24a461c8943ab089989`
 
 ```text
 [
@@ -416,22 +416,22 @@ Let’s make a SECP256K1 mint output with:
 ]
 ```
 
-## NFT Transfer Output
+## NFT Transfer Çıktı
 
-An NFT transfer output is an NFT that is owned by a collection of addresses.
+NFT transfer çıktısı bir adres koleksiyona sahip olan bir NFT NFT
 
-### **What NFT Transfer Output Contains**
+### **NFT Aktarım Çıktısını Içeriyor**
 
-An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, and `Addresses`.
+Bir NFT transfer çıktısı `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold` ve `Adres` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`GroupID`** is an int that specifies the group this NFT was issued with.
-* **`Payload`** is an arbitrary string of bytes no long longer than 1024 bytes.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `00b`.
+* **`GroupID`** bu NFT ile verilen grubu belirten bir int
+* **`Yük,`** 1024 bayttan fazla uzun sürmeyen bir bayt dizisidir.
+* **`Locktime`**, bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunluktadır. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**, çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int **`Adreslerin`** uzunluğuna eşit ya da daha az olmalı. **`Adresler`** boşsa, 0 olmalı.
+* **`Adresler,`** bu çıkışı harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt NFT Transfer Output Specification**
+### **Gantt NFT Transfer Çıktı Specification**
 
 ```text
 +-----------+------------+-------------------------------+
@@ -452,7 +452,7 @@ An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `T
                          +-------------------------------+
 ```
 
-### **Proto NFT Transfer Output Specification**
+### **Protez NFT Transfer Çıktı Specification**
 
 ```text
 message NFTTransferOutput {
@@ -465,18 +465,18 @@ message NFTTransferOutput {
 }
 ```
 
-### **NFT Transfer Output Example**
+### **NFT Transfer Çıktı Örnek**
 
-Let’s make an NFT transfer output with:
+NFT transfer çıktısını şöyle yapalım:
 
 * **`TypeID`**: `11`
 * **`GroupID`**: `12345`
-* **`Payload`**: `0x431100`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* **`Yük`**: `0x431100`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0x51025c61fccc078f6933f834be6d5a955`
+* `0xc344128e0601283523a24a461c8943ab089989`
 
 ```text
 [
@@ -517,21 +517,21 @@ Let’s make an NFT transfer output with:
 ]
 ```
 
-## NFT Mint Output
+## NFT Mint Çıktı
 
-An NFT mint output is an NFT that is owned by a collection of addresses.
+NFT nane çıktısı bir adres koleksiyona sahip olan bir NFT idi.
 
-### **What NFT Mint Output Contains**
+### **NFT Mint Çıktı Içeriyor**
 
-An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and `Addresses`.
+NFT Mint çıktısı bir `TypeID`, `GroupID`, `Locktime`, `Threshold` ve `Adres` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000a`.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `00a`.
+* **`GroupID`** bu NFT tarafından verilen grubu belirleyen bir int
+* **`Locktime`**, bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunluktadır. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**, çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int **`Adreslerin`** uzunluğuna eşit ya da daha az olmalı. **`Adresler`** boşsa, 0 olmalı.
+* **`Adresler,`** bu çıkışı harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt NFT Mint Output Specification**
+### **Gantt NFT Mint Çıktı Specification**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -549,7 +549,7 @@ An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and 
                          +--------------------------------+
 ```
 
-### **Proto NFT Mint Output Specification**
+### **Protez NFT Mint Çıktı Specification**
 
 ```text
 message NFTMintOutput {
@@ -561,17 +561,17 @@ message NFTMintOutput {
 }
 ```
 
-### **NFT Mint Output Example**
+### **NFT Mint Çıktı Örnek**
 
-Let’s make an NFT mint output with:
+NFT nane çıktısı yapalım:
 
 * **`TypeID`**: `10`
 * **`GroupID`**: `12345`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0x51025c61fccc078f6933f834be6d5a955`
+* `0xc344128e0601283523a24a461c8943ab089989`
 
 ```text
 [
@@ -607,23 +607,23 @@ Let’s make an NFT mint output with:
 ]
 ```
 
-## Inputs
+## Girdiler
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+Girdilerin tek bir türü vardır: `SECP256K1TransferInput`.
 
-## SECP256K1 Transfer Input
+## SECP256K1 Transfer Girdi
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer girdisi harcanmamış bir secp256k1 transfer çıktısını harcamasına izin verir.
 
-### **What SECP256K1 Transfer Input Contains**
+### **SECP256K1 Aktarma Girdi Içeriyor**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+Bir secp256k1 transfer girdisi `bir miktar` ve `Adres` contains içerir.
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`Bu`** girdi tipinin kimliği. `005`.
+* **`Miktar,`** bu girişin from tüketilmesi gereken miktarı belirten uzundur. Olumlu olmalı. in belirtilen miktara eşit olmalı.
+* Adres Indices, UTXO. harcamak için kullanılan özel anahtarları tanımlayan eşsiz **`AddressIndices`** listesidir. UTXO her bir adresi UTXO. harcayabilecek bir dizi adres vardır. Her int bu işlem için imza atan adres dizisindeki indeksi temsil eder. Dizinin üst seviyeye kadar sıralanması gerekiyor.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+### **Gantt SECP256K1 Transfer Girdi Belirtisi**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -637,7 +637,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Input Specification**
+### **Proto SECP256K1 Transfer Girdi Belirtisi**
 
 ```text
 message SECP256K1TransferInput {
@@ -647,13 +647,13 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1 Transfer Girdi Örnek**
 
-Let’s make a payment input with:
+Ödeme girdisi ile yapalım:
 
 * **`TypeId`**: `5`
 * **`Amount`**: `123456789`
-* **`AddressIndices`**: \[`3`,`7`\]
+* **`Adres Adresi`**````:
 
 ```text
 [
@@ -676,24 +676,24 @@ Let’s make a payment input with:
 ]
 ```
 
-## Operations
+## Operasyonlar
 
-Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
+Operasyonlarda üç olası tip vardır: `SECP256K1MintOperation`, `NFTMintOp`, ve `NFTTransferop`.
 
-## **SECP256K1 Mint Operation**
+## **SECP256K1 MM Operasyonu**
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
+[SECP256K1](cryptographic-primitives.md#secp-256-k1-addresses) nane işlemleri SECP256K1 nane çıktısını tüketir, yeni bir nane çıktısı yaratır ve yeni bir grup sahiplerine transfer çıktısını gönderir.
 
-### **What SECP256K1 Mint Operation Contains**
+### **SECP256K1 Mint Operasyonu Içeriyor**
 
-A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
+Bir secp256k1 Mint operasyonu bir `TypeID`, `Adres Adresleri`, `MintOutput`, ve `a` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000008`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the [UTXO](avm-transaction-serialization.md#utxo). Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`MintOutput`** is a [SECP256K1 Mint output](avm-transaction-serialization.md#secp256k1-mint-output).
-* **`TransferOutput`** is a [SECP256K1 Transfer output](avm-transaction-serialization.md#secp256k1-transfer-output).
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `008`.
+* Adres Indices, [UTXO](avm-transaction-serialization.md#utxo). harcamak için kullanılan özel anahtarları tanımlayan eşsiz **`AddressIndices`** listesidir. UTXO her bir adresi UTXO. harcayabilecek bir dizi adres vardır. Her int bu işlem için imza atan adres dizisindeki indeksi temsil eder. Dizinin üst seviyeye kadar sıralanması gerekiyor.
+* **`MintOutput`** [SECP256K1 Mint](avm-transaction-serialization.md#secp256k1-mint-output) çıktısı.
+* **`Transferoutput`** [SECP256K1 Transfer](avm-transaction-serialization.md#secp256k1-transfer-output) çıktısı.
 
-### **Gantt SECP256K1 Mint Operation Specification**
+### **Gantt SECP256K1 Mint Operasyonu Belirleniyor**
 
 ```text
 +----------------------------------+------------------------------------+
@@ -711,7 +711,7 @@ A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, 
                                    +------------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Operation Specification**
+### **Proto SECP256K1 Mint Operasyonu Belirleniyor**
 
 ```text
 message SECP256K1MintOperation {
@@ -722,16 +722,16 @@ message SECP256K1MintOperation {
 }
 ```
 
-### **SECP256K1 Mint Operation Example**
+### **SECP256K1 Mint Operasyonu Örnek**
 
-Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
+[Şu sekp256k1](cryptographic-primitives.md#secp-256-k1-addresses) nane operasyonu yapalım:
 
 * **`TypeId`**: `8`
-* **`AddressIndices`**:
-* `0x00000003`
-* `0x00000007`
-* **`MintOutput`**: `“Example SECP256K1 Mint Output from above”`
-* **`TransferOutput`**: `“Example SECP256K1 Transfer Output from above”`
+* **`Adres Adres Adresi`**:
+* `003`
+* `0x007`
+* **`Mintoutput`**: `"Örnek SECP256K1 Mint Çıktı Yukarıdan`
+* **`Transferoutput`**: `"Örnek SECP256K1 Transfer Çıktısı"`
 
 ```text
 [
@@ -774,17 +774,17 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 
 ## NFT Mint Op
 
-An NFT mint operation consumes an NFT mint output and sends an unspent output to a new set of owners.
+NFT nane operasyonu NFT nane çıktısını tüketir ve yeni bir sahiplere harcanmamış bir çıkış gönderir.
 
-### **What NFT Mint Op Contains**
+### **NFT Mint Op Içeriyor**
 
-An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload`, and `Output` of addresses.
+NFT nane operasyonu `bir` `TypeID`, `Adres Adres Adres Adresi Adresi ve` `a``` içerir.
 
-* **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Payload`** is an arbitrary string of bytes no longer than 1024 bytes.
-* **`Output`** is not a `TransferableOutput`, but rather is a locktime, threshold, and an array of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* Bu tip bir operasyon için **`TypeID`** kimliktir. `00c`.
+* Adres Indices, UTXO. harcamak için kullanılan özel anahtarları tanımlayan eşsiz **`AddressIndices`** listesidir. UTXO her bir adresi UTXO. harcayabilecek bir dizi adres vardır. Her int bu işlem için imza atan adres dizisindeki indeksi temsil eder. Dizinin üst seviyeye kadar sıralanması gerekiyor.
+* **`GroupID`** bu NFT tarafından verilen grubu belirleyen bir int
+* **`Yük,`** 1024 bayttan fazla olmayan bir bayt dizisidir.
+* **`Çıkış`** bir `TransferableOutput`, fakat daha ziyade bir kilit, eşik ve bu çıkışı harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adresler dizisidir. Adresler lexicographically. olarak sıralanmalıdır.
 
 ### **Gantt NFT Mint Op Specification**
 
@@ -807,7 +807,7 @@ An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload
                                +------------------------------------+
 ```
 
-### **Proto NFT Mint Op Specification**
+### **Protez NFT Mint Op Specification**
 
 ```text
 message NFTMintOp {
@@ -819,20 +819,20 @@ message NFTMintOp {
 }
 ```
 
-### **NFT Mint Op Example**
+### **NFT Mint Op Örnek**
 
-Let’s make an NFT mint operation with:
+NFT nane ameliyatı yapalım:
 
 * **`TypeId`**: `12`
-* **`AddressIndices`**:
-  * `0x00000003`
-  * `0x00000007`
+* **`Adres Adres Adresi`**:
+   * `003`
+   * `0x007`
 * **`GroupID`**: `12345`
-* **`Payload`**: `0x431100`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* **`Yük`**: `0x431100`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0xc344128e0601283523a24a461c8943ab089989`
 
 ```text
 [
@@ -883,17 +883,17 @@ Let’s make an NFT mint operation with:
 
 ## NFT Transfer Op
 
-An NFT transfer operation sends an unspent NFT transfer output to a new set of owners.
+NFT transfer işlemi yeni bir sahiplere harcanmamış NFT transfer çıktısını gönderir.
 
-### **What NFT Transfer Op Contains**
+### **NFT Transfer Operasyonu Içeriyor**
 
-An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `NFTTransferOutput`.
+Bir NFT transfer operasyonu bir `TypeID`, `Adres Indices` ve bir `an` içerir.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000d`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an [NFT Transfer Output](avm-transaction-serialization.md#nft-transfer-output). This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+* Bu çıktıların kimliği, **`TypeID`** tipidir. `00d`.
+* Adres Indices, UTXO. harcamak için kullanılan özel anahtarları tanımlayan eşsiz **`AddressIndices`** listesidir. UTXO her bir adresi UTXO. harcayabilecek bir dizi adres vardır. Her int bu işlem için imza atan adres dizisindeki indeksi temsil eder. Dizinin üst seviyeye kadar sıralanması gerekiyor.
+* **`NFTTransferoutput`** bu operasyonun çıkışı ve [bir NFT Transfer Çıkışı](avm-transaction-serialization.md#nft-transfer-output) olması gerekiyor. Bu çıkışın **`the`** yoktur, çünkü bu tür bu operasyonun içeriği ile bilinmektedir.
 
-### **Gantt NFT Transfer Op Specification**
+### **Gantt NFT Aktarma Operasyonu Specification**
 
 ```text
 +------------------------------+------------------------------------+
@@ -917,7 +917,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
                                +------------------------------------+
 ```
 
-### **Proto NFT Transfer Op Specification**
+### **Protez NFT Aktarma Operasyonu Belirtisi**
 
 ```text
 message NFTTransferOp {
@@ -931,21 +931,21 @@ message NFTTransferOp {
 }
 ```
 
-### **NFT Transfer Op Example**
+### **NFT Transfer Op Örnek**
 
-Let’s make an NFT transfer operation with:
+NFT transfer işlemlerini şöyle yapalım:
 
 * **`TypeID`**: `13`
-* **`AddressIndices`**:
-* `0x00000007`
-* `0x00000003`
+* **`Adres Adres Adresi`**:
+* `0x007`
+* `003`
 * **`GroupID`**: `12345`
-* **`Payload`**: `0x431100`
-* **`Locktime`**: `54321`
-* **`Threshold`**: `1`
-* **`Addresses`**:
-* `0xc3344128e060128ede3523a24a461c8943ab0859`
-* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* **`Yük`**: `0x431100`
+* **`Kilit`**: `54321`
+* **`Eşik`**: `1`
+* **`Adresler`**:
+* `0xc344128e0601283523a24a461c8943ab089989`
+* `0x51025c61fccc078f6933f834be6d5a955`
 
 ```text
 [
@@ -996,18 +996,18 @@ Let’s make an NFT transfer operation with:
 ]
 ```
 
-## Initial State
+## İlk Durum
 
-Initial state describes the initial state of an asset when it is created. It contains the ID of the feature extension that the asset uses, and a variable length array of outputs that denote the genesis UTXO set of the asset.
+İlk durum bir varlığın ilk durumunu tanımlar. Varlığın kullandığı özellik uzantısının kimliğini ve varlığın genesis UTXO kümesini belirten değişken uzunluk a dizisini içermektedir.
 
-### What Initial State Contains
+### Hangi Başlangıç Durumu Içeriyor
 
-Initial state contains a `FxID` and an array of `Output`.
+İlk durum bir `FxID` ve `bir` an içerir.
 
-* **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-* **`Outputs`** is a variable length array of [outputs](avm-transaction-serialization.md#outputs), as defined above.
+* **`FxID`** bu durumun bir parçası olduğu uzantıyı tanımlayan bir is SECP256K1 varlığı için `0x00'den` arıyorum. NFT varlıkları için, burası `001`.
+* **`Çıkışlar`** yukarıda tanımlandığı [gibi](avm-transaction-serialization.md#outputs) değişken uzunluk dizisidir.
 
-### Gantt Initial State Specification
+### Gantt Başlangıç Durumu Belirtisi
 
 ```text
 +---------------+----------+-------------------------------+
@@ -1019,7 +1019,7 @@ Initial state contains a `FxID` and an array of `Output`.
                            +-------------------------------+
 ```
 
-### Proto Initial State Specification
+### Proto Başlangıç Durumu Belirtisi
 
 ```text
 message InitialState {
@@ -1028,12 +1028,12 @@ message InitialState {
 }
 ```
 
-### Initial State Example
+### İlk Durum Örnekleri
 
-Let’s make an initial state:
+İlk bir durum yapalım:
 
-* `FxID`: `0x00000000`
-* `InitialState`: `["Example SECP256K1 Transfer Output from above"]`
+* `FxID`: `0x00.`
+* `İlk durum`: `["Örnek SECP256K1 Transfer Çıktısı"]`
 
 ```text
 [
@@ -1061,20 +1061,20 @@ Let’s make an initial state:
 ]
 ```
 
-## Credentials
+## Kimlikler
 
-Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+Credentials iki olası türü vardır: `SECP256K1Credential`, ve `NFTCredential`. Her bir giriş veya operasyon ile eşleştirilir. Kimlik düzeni girişin veya operasyonların sırasıyla uyuşuyor.
 
 ## SECP256K1 Credential
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) referansları 65 byte geri alınabilir imzalar listesi içerir.
 
-### **What SECP256K1 Credential Contains**
+### **SECP256K1 Credential Içeriyor**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`Bu`** tip için bir kimlik örneğidir. `009`.
+* **`İmzalar`** 65 byte yeniden kurtarılabilir imzalar dizisidir. İmzaların sırası, girişin imza input’s uymalıdır.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Gantt SECP256K1 Credential Specification Specification**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1095,14 +1095,14 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1 Credential Örnek**
 
-Let’s make a payment input with:
+Ödeme girdisi ile yapalım:
 
 * **`TypeID`**: `9`
-* **`signatures`**:
-* `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
-* `0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
+* **`İmzalar`**:
+* `00102030405060708090a0b0c0d0d0e0f11213151618191b1c1d1d1f22425262728292a22d303133f013f0113f013f133f11111b11b1b11b11b11cc3322`
+* `0x404142445565667766`
 
 ```text
 [
@@ -1143,22 +1143,22 @@ Let’s make a payment input with:
 
 ## NFT Credential
 
-An NFT credential is the same as an [secp256k1 credential](avm-transaction-serialization.md#secp256k1-credential) with a different TypeID. The TypeID for an NFT credential is `0x0000000e`.
+NFT Credential farklı bir TypeID ile [secp256k1](avm-transaction-serialization.md#secp256k1-credential) Credential ile aynıdır. NFT Credential için TypeID `0x00e`.
 
-## Unsigned Transactions
+## İmzalamamış İşlemler
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: [`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains), [`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains), [`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains), and [`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains). They all embed [`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), which contains common fields and operations.
+İmzalanmamış işlemler sadece imzalar eksik olan bir işlemin tam içeriğini içermektedir. İmzalanmamış işlemler dört olası tip içerir: [`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains), [`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains), [`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains), ve [`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains). Hepsi [`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains), yerleştiriyor, bu da ortak alanlar ve operasyonlar içeriyor.
 
-### What Base Tx Contains
+### Hangi Taban Tx Içeriyor
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+Bir temel tx bir `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Girdi` ve `Memo` içerir.
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`Bu`** tip için bir kimlik örneğidir. `00`.
+* **`NetworkID`** bu işlem için hangi ağ için verileceği tanımlanan bir int (NetworkID (NetworkID) bir int olarak tanımlanır. Bu değer işlem yönlendirmesini desteklemek için tasarlanır ve yeniden oynanma saldırı önleme için tasarlanmaz.
+* **`Blockchain ID`** bu işlem için hangi blok zincirini tanımlayan 32 byte dizidir. Bu işlem ağ veya blok zinciri boyunca geçerli olabilecek işlemler için yeniden oynanma saldırı önleme için kullanılır.
+* **`Çıkışlar`** [transferi edilebilir bir](avm-transaction-serialization.md#transferable-output) nesne dizisidir. Çıkışlar seri temsili lexicographically olarak sıralamalıdır. Bu çıkışlarda yaratılan varlıkların toplam miktarı girdilerde tüketilen toplam varlığın toplam miktarına eşit veya işlem ücreti eksi olarak tüketilmesine eşit olmalıdır.
+* **`Girdiler,`** [transfer edilebilir girişim nesnelerinin](avm-transaction-serialization.md#transferable-input) bir dizisidir. Girdilerin sıralanması ve eşsiz olması gerekir. Girdiler, ilk olarak **`TxID`** ve sonra **`UTXOIndex`** tarafından satılır. Eğer aynı **`TxID`** ve **`UTXOIndex`** olan girdilerde varsa, bu işlem çift harcanmaya neden olacağı için geçersizdir.
+* **`Memo`** alanı 256 baytlık bir bayttan oluşmaktadır.
 
 ### Gantt Base Tx Specification
 
@@ -1193,18 +1193,18 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### Bas Tx Örnek
 
-Let’s make an base tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan bir baz tx yapalım:
 
 * **`TypeID`**: `0`
 * **`NetworkID`**: `4`
-* **`BlockchainID`**: `0xffffffffeeeeeeeeddddddddcccccccbbbbbbbbaaaaaaaa9999999988888888`
-* **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
-* **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
-* **`Memo`**: `0x00010203`
+* **`Blockchain ID`**: `0xffffeeeeeedddccbbaa99888`
+* **`Çıktılar`**:
+   * `"Örnek Transferable Çıktı yukarıda tanımlanır`
+* **`Girdiler`**:
+   * `"Örnek Transferable Girdi yukarıda tanımlanır`
+* **`Not`**: `0x0010203`
 
 ```text
 [
@@ -1268,17 +1268,17 @@ Let’s make an base tx that uses the inputs and outputs from the previous examp
 ]
 ```
 
-### What Unsigned Create Asset Tx Contains
+### İmzalamamış Varlık Tx Içeriyor
 
-An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
+İmzalamamış bir varlık `tx`, `İsmi`, `Sembol`, `Denomination` ve `contains` içerir. `TypeID` `001`.
 
 * **`BaseTx`**
-* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](avm-transaction-serialization.md#initial-state) of those feature extensions.
+* **`Bu`** işlem yaratacağı varlığın adını tanımlayan bir insan okunabilir sicim. Bu isim eşsiz olmak için garanti değil. Bu isim sadece basılabilir ASCII karakterlerinden oluşmalı ve 128 karakterden fazla olmamalıdır.
+* **`Sembol,`** bu işlem yaratacağı varlığın sembolünü tanımlayan okunabilir bir dizidir. Sembolün eşsiz olması garanti değil. Sembol sadece basılabilir ASCII karakterlerinden oluşmalı ve 4 karakterden fazla olmamalıdır.
+* **`Bu`** işlem yaratacağı varlığın bölünebilirliğini tanımlayan bir bayttır. Örneğin, AVAX işareti, milyarlarca kişiye bölünür. Bu nedenle, AVAX işaretinin paydası 9 oldu. 32 den fazla olmamalı.
+* **`İlk Devletler`** bu varlık destekleyeceği özellikler uzantılarını ve bu özelliklerin [başlangıç](avm-transaction-serialization.md#initial-state) durumunu tanımlayan değişken uzunluk dizisidir.
 
-### Gantt Unsigned Create Asset Tx Specification
+### Gantt İmzalamamış Varlık Varlığı Tx Specification
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1297,7 +1297,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### İmzalamamış Proto Varlık Tx Specification
 
 ```text
 message CreateAssetTx {
@@ -1309,16 +1309,16 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### İmzalamamış Varlık Varlığı Tx Örnekleri
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan imzasız bir tx yapalım:
 
-* `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
-* `Name`: `Volatility Index`
-* `Symbol`: `VIX`
+* `BaseTx`: `"Örnek BaseTx yukarıda tanımlanan kimlik seti 1'e göre tanımlanır`
+* `Adı`: `Volatility Volatility`
+* `Sembol`: `VIX`
 * `Denomination`: `2`
-* **`InitialStates`**:
-* `"Example Initial State as defined above"`
+* **`İlk olarak`**:
+* `"Örnek Başlangıç Durumu yukarıda tanımlanıyor`
 
 ```text
 [
@@ -1333,22 +1333,22 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 =
 [
     // base tx:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 
-    0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee, 
-    0xdd, 0xdd, 0xdd, 0xdd, 
-    0xcc, 0xcc, 0xcc, 0xcc, 0xbb, 0xbb, 0xbb, 0xbb, 
-    0xaa, 0xaa, 0xaa, 0xaa, 0x99, 0x99, 0x99, 0x99, 
-    0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x01, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04,
+    0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee,
+    0xdd, 0xdd, 0xdd, 0xdd,
+    0xcc, 0xcc, 0xcc, 0xcc, 0xbb, 0xbb, 0xbb, 0xbb,
+    0xaa, 0xaa, 0xaa, 0xaa, 0x99, 0x99, 0x99, 0x99,
+    0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x01,
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
     0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00, 
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61, 
-    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8, 
-    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55, 
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
     0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
     0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
     0x43, 0xab, 0x08, 0x59, 0x00, 0x00, 0x00, 0x01,
@@ -1391,26 +1391,26 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 ]
 ```
 
-### What Unsigned Operation Tx Contains
+### Hangi İmzalanmamış Tx Operasyonu Içeriyor
 
-An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
+İmzalanmamış bir tx bir `BaseTx` ve `Ops` içerir. Bu tip için `TypeID` `0x002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-ops).
+* **`Operasyon`** değişken uzunlukta bir [transferable operasyon](avm-transaction-serialization.md#transferable-op) dizisidir.
 
-### Gantt Unsigned Operation Tx Specification
+### Gantt İmzalanmamış Tx Özelleştirme Operasyonu
 
 ```text
-+---------+--------------+-------------------------------------+
-| base_tx : BaseTx       |                 size(base_tx) bytes |
-+---------+--------------+-------------------------------------+
-| ops     : []TransferOp |                 4 + size(ops) bytes |
-+---------+--------------+-------------------------------------+
-                         | 4 + size(ops) + size(base_tx) bytes |
-                         +-------------------------------------+
++---------+------------------+-------------------------------------+
+| base_tx : BaseTx           |                 size(base_tx) bytes |
++---------+------------------+-------------------------------------+
+| ops     : []TransferableOp |                 4 + size(ops) bytes |
++---------+------------------+-------------------------------------+
+                             | 4 + size(ops) + size(base_tx) bytes |
+                             +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### İmzalanmamış Proto Tx Özelleştirme Operasyonu
 
 ```text
 message OperationTx {
@@ -1419,12 +1419,12 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### İmzalanmamış Tx Örnek
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan imzasız bir tx yapalım:
 
-* `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* `BaseTx`: `"Örnek BaseTx Yukarı" TypeID seti 2 e`
+* **`Ops`**: `\["Örnek Transferable Op yukarıda tanımlanmış gibi"`\
 
 ```text
 [
@@ -1493,15 +1493,15 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
 ]
 ```
 
-### What Unsigned Import Tx Contains
+### İmzalanmamış Tx Içeriyor
 
-An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
+İmzasız bir ithal tx bir `BaseTx`, `SourceChain` ve `Ins` içerir. \* Bu tip için `TypeID`for `0x003`.
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of [Transferable Inputs](avm-transaction-serialization.md#transferable-input).
+* **`Kaynak`** zinciri 32 byte kaynak kodu bir kimliktir.
+* **`Ins`** [Transferable](avm-transaction-serialization.md#transferable-input) of değişken uzunluk dizisidir.
 
-### Gantt Unsigned Import Tx Specification
+### Gantt İmzalanmamış Aktarma Tx Tx
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1515,7 +1515,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### İmzalanmamış Proto Aktarma Tx Tx
 
 ```text
 message ImportTx {
@@ -1525,13 +1525,13 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### İmzalanmamış Tx Örnek
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Önceki örneklerden girdileri kullanan imzasız bir aktarma tx yapalım:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `3`
-* `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: `“Example SECP256K1 Transfer Input as defined above”`
+* `BaseTx`: `"Örnek BaseTx yukarıda tanımlanmış` ama `TypeID` seti `3`'e ayarlandı.
+* `Kaynak Zinciri`: `0x00`
+* `Ins`: `"Örnek SECP256K1 Transfer Girdi yukarıda tanımlanır`
 
 ```text
 [
@@ -1602,14 +1602,14 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 ]
 ```
 
-### What Unsigned Export Tx Contains
+### İmzalanmamış Aktarma Tx Içeriyor
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
+İmzasız bir ihracat tx bir `BaseTx`, `Destination Chain` ve `Outs` içerir. Bu tip için `TypeID` `0x004`.
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of [Transferable Outputs](avm-transaction-serialization.md#transferable-output).
+* **`Tahliye`** zinciri, fonların ihraç edildiği zincirin 32 byte kimliği.
+* **`Outs`** [Transferable Outputs](avm-transaction-serialization.md#transferable-output). değişken uzunluk dizisidir.
 
-### Gantt Unsigned Export Tx Specification
+### Gantt İmzalamamış Aktarma Tx Tx
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1623,7 +1623,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Proto İmzalamadı Aktarma Tx Tx
 
 ```text
 message ExportTx {
@@ -1633,13 +1633,13 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### İmzalanmamış Aktarma Tx Örnekleri
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Önceki örneklerden çıkan çıktıları kullanan imzasız bir aktarma tx yapalım:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `4`
-* `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: `“Example SECP256K1 Transfer Output as defined above”`
+* `BaseTx`: `"Örnek BaseTx yukarıda tanımlanmış` gibi tanımlanabilir", ama `TypeID` seti `4`'e ayarlanır
+* `Hedef Zinciri`: `0x00`
+* `Outs`: `"Örnek SECP256K1 Transfer Çıktı yukarıda tanımlanır`
 
 ```text
 [
@@ -1709,19 +1709,19 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 ]
 ```
 
-## Signed Transaction
+## İmzalamış İşlem
 
-A signed transaction is an unsigned transaction with the addition of an array of [credentials](avm-transaction-serialization.md#credentials).
+İmzalı [işlem, bir](avm-transaction-serialization.md#credentials) dizi kimlik dizisinin eklenmesiyle imzalanmamış bir işlemdir.
 
-### What Signed Transaction Contains
+### İmzaladığı Işlem Içeriyor
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+İmzalı bir işlem, `CodecID`, `UnsignedTx` ve `Credentials` içerir.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of [credentials](avm-transaction-serialization.md#credentials). Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`** geçerli kod kod çözücü tek kimlik `000`.
+* **`İmzalanmamış Tx`** yukarıda belirtildiği gibi imzalanmamış bir işlemdir.
+* **`Kimlik`** [bir dizi kimlik](avm-transaction-serialization.md#credentials) dizisidir. Her bir kimlik bu kimlik belgesindeki girdilerle aynı girişte eşleştirilecektir.
 
-### Gantt Signed Transaction Specification
+### Gantt İmzalamış İşlem Belirtisi
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1735,7 +1735,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Proto İmzalamış İşlem Belirtisi
 
 ```text
 message Tx {
@@ -1745,13 +1745,13 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### İmzalamış Aktarım Örnekleri
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous examples.
+İmzasız işlemleri ve özetlerini önceki örneklerden kullanan imzalı bir işlem yapalım.
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
-* **`Credentials`** `0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
+* **`Şifreleme `**: `0`
+* **`100404ffffcc`**` 5900b1c0b1c0b0b0d0d0b0d0d0b0101010d0d0d010d0d000d0100d0d000d00d0d010100d0d000d0d00d0d0d01000000d00d0d00d0d00d00d0d000d0d00d0d0d000101000d01010d0d0d0100d00100d0d0d010001010d0d01010d01010d010111010d0d0d00100d0d01010d0d01010d0d01010d0101010d0101001010`
+* **`0010113141516171816191a1c1c1dd1dd122628292233`**``
 
 ```text
 [
@@ -1766,12 +1766,12 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
     // Codec ID
     0x00, 0x00,
     // unsigned transaction:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04,
     0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee,
     0xdd, 0xdd, 0xdd, 0xdd, 0xcc, 0xcc, 0xcc, 0xcc,
-    0xbb, 0xbb, 0xbb, 0xbb, 0xaa, 0xaa, 0xaa, 0xaa, 
+    0xbb, 0xbb, 0xbb, 0xbb, 0xaa, 0xaa, 0xaa, 0xaa,
     0x99, 0x99, 0x99, 0x99, 0x88, 0x88, 0x88, 0x88,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03,
     0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
     0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
@@ -1779,7 +1779,7 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
     0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
-    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78, 
+    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
     0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
     0x6d, 0x55, 0xa9, 0x55, 0xc3, 0x34, 0x41, 0x28,
     0xe0, 0x60, 0x12, 0x8e, 0xde, 0x35, 0x23, 0xa2,
@@ -1822,17 +1822,17 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXO bir işlem çıkışını temsil eden tek bir uygulamadır.
 
-### What UTXO Contains
+### UTXO Içeriyor
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+UTXO bir `CodecID`, `TxID`, `UTXOIndex`, `Varlık` ve `Çıktı` içerir.
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the [output](avm-transaction-serialization.md#transferable-output) object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`** tek geçerli `CodecID` `000.`
+* **`TxID`** 32 byte işlem kimliği. İşlem kimlikleri imzalanmış işlemlerin bytes Sha256 ile hesaplanır.
+* **`UTXOIndex`**, **`TxID`** tarafından belirtilen işlemde bu utxo tarafından yaratılan bir işlemde hangi çıktıyı belirleyen bir is
+* **`AssetID`** bu utxo referanslarını tanımlayan 32 byte dizidir.
+* **`Çıkış`** bu utxo yaratan [çıkış](avm-transaction-serialization.md#transferable-output) object Çıkışların seri düzleştirilmesi yukarıda tanımlanmıştı.
 
 ### Gantt UTXO Specification
 
@@ -1864,15 +1864,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO Örnek
 
-Let’s make a UTXO from the signed transaction created above:
+Yukarıda yaratılan imzalı işlemden UTXO yapalım:
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: `0` = `0x00000000`
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`Şifreleme `**: `0`
+* **`TxID`**: `0xf96650f438867c3c9828dcdddbe660e21cccdb36a9276958f011ba472f75d4e7`
+* **`UTXOIndex`**: `0` = `0x00.`
+* **`Erişim`** `tarihi: 11213151718181911b112141618181811214161818113161818191b1d1e1e1)`
+* **`Çıktı`**: `"Örnek SECP256K1 Aktarılabilir Çıktı yukarıda tanımlanır`
 
 ```text
 [
@@ -1908,6 +1908,149 @@ Let’s make a UTXO from the signed transaction created above:
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
     0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
     0x24, 0x25, 0x26, 0x27,
+]
+```
+
+## GenesisAsset
+
+AVM'nin Genesis örneğinde verilecek bir varlık
+
+### GenesisAsset Varlığı Içeriyor
+
+Bir GenesisAsset örneğinde bir `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, `Memo`, `Adı`, `Sembol`, `Denomination` ve `of` oluşur.
+
+* **`Alias`** bu varlığın takma adı.
+* **`NetworkID`** bu işlem hangi ağa verilecek olduğunu belirler. Bu değer işlem yönlendirmesini desteklemek için tasarlanır ve yeniden oynanma saldırı önleme için tasarlanmaz.
+* **`Blockchain ID`** bu işlem için hangi blok zincirini tanımlayan ID \(32-byte array\) tanımlar. Bu işlem ağ veya blok zinciri boyunca geçerli olabilecek işlemler için yeniden oynanma saldırı önleme için kullanılır.
+* **`Çıkışlar`** [transferi edilebilir bir](avm-transaction-serialization.md#transferable-output) nesne dizisidir. Çıkışlar seri temsili lexicographically olarak sıralamalıdır. Bu çıkışlarda yaratılan varlıkların toplam miktarı girdilerde tüketilen toplam varlığın toplam miktarına eşit veya işlem ücreti eksi olarak tüketilmesine eşit olmalıdır.
+* **`Girdiler,`** [transfer edilebilir girişim nesnelerinin](avm-transaction-serialization.md#transferable-input) bir dizisidir. Girdilerin sıralanması ve eşsiz olması gerekir. Girdiler, ilk olarak **`TxID`** ve sonra **`UTXOIndex`** tarafından satılır. Eğer aynı **`TxID`** ve **`UTXOIndex`** olan girdilerde varsa, bu işlem çift harcanmaya neden olacağı için geçersizdir.
+* **`Memo`**, 256 baytlık bir bayt içeren, bir not alanıdır.
+* **`Bu`** işlem yaratacağı varlığın adını tanımlayan bir insan okunabilir sicim. Bu isim eşsiz olmak için garanti değil. Bu isim sadece basılabilir ASCII karakterlerinden oluşmalı ve 128 karakterden fazla olmamalıdır.
+* **`Sembol,`** bu işlem yaratacağı varlığın sembolünü tanımlayan okunabilir bir dizidir. Sembolün eşsiz olması garanti değil. Sembol sadece basılabilir ASCII karakterlerinden oluşmalı ve 4 karakterden fazla olmamalıdır.
+* **`Bu`** işlem yaratacağı varlığın bölünebilirliğini tanımlayan bir bayttır. Örneğin, AVAX işareti, milyarlarca kişiye bölünür. Bu nedenle, AVAX işaretinin paydası 9 oldu. 32 den fazla olmamalı.
+* **`İlk Devletler`** bu varlık destekleyeceği özellikler uzantılarını ve bu özelliklerin [başlangıç](avm-transaction-serialization.md#initial-state) durumunu tanımlayan değişken uzunluk dizisidir.
+
+### Gantt GenesisAsset Specification
+
+```text
++----------------+----------------------+--------------------------------+
+| alias          : string               |           2 + len(alias) bytes |
++----------------+----------------------+--------------------------------+
+| network_id     : int                  |                        4 bytes |
++----------------+----------------------+--------------------------------+
+| blockchain_id  : [32]byte             |                       32 bytes |
++----------------+----------------------+--------------------------------+
+| outputs        : []TransferableOutput |        4 + size(outputs) bytes |
++----------------+----------------------+--------------------------------+
+| inputs         : []TransferableInput  |         4 + size(inputs) bytes |
++----------------+----------------------+--------------------------------+
+| memo           : [256]byte            |           4 + size(memo) bytes |
++----------------+----------------------+--------------------------------+
+| name           : string               |            2 + len(name) bytes |
++----------------+----------------------+--------------------------------+
+| symbol         : string               |          2 + len(symbol) bytes |
++----------------+----------------------+--------------------------------+
+| denomination   : byte                 |                        1 bytes |
++----------------+----------------------+--------------------------------+
+| initial_states : []InitialState       | 4 + size(initial_states) bytes |
++----------------+----------------------+--------------------------------+
+|           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
+|                 + len(name) + len(symbol) + size(initial_states) bytes |
++------------------------------------------------------------------------+
+```
+
+### Proto GenesisAsset Specification
+
+```text
+message GenesisAsset {
+    string alias = 1;                          // 2 bytes + len(alias)
+    uint32 network_id = 2;                     // 04 bytes
+    bytes blockchain_id = 3;                   // 32 bytes
+    repeated Output outputs = 4;               // 04 bytes + size(outputs)
+    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
+    bytes memo = 6;                            // 04 bytes + size(memo)
+    string name = 7;                           // 2 bytes + len(name)
+    name symbol = 8;                           // 2 bytes + len(symbol)
+    uint8 denomination = 9;                    // 1 bytes
+    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
+}
+```
+
+### GenesisAsset Örnek
+
+Bir GenesisAsset: yapalım:
+
+* **`İsim`**: `Varlık 1`
+* **`Ağ ID`**: `12345`
+* **`Blockchain ID,`** `0x00`
+* **`Çıktılar`**: [\]
+* **`Girdiler`**:
+* **`Mem`**: `2Zc54v4ek37TEwu4LiV3j41PUMRd6ACDDU3ZCVSxE7X`
+* **`İsim`**: `Varlık 1`
+* **`Sembol`**: `MFCA`
+* **`Denomination`**: `1`
+* **`İlk olarak`**:
+* `"Örnek Başlangıç Durumu yukarıda tanımlanıyor`
+
+```text
+[
+    Alias         <- 0x617373657431
+    NetworkID     <- 0x00003039
+    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs       <- []
+    Inputs        <- []
+    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    Name          <- 0x617373657431
+    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    InitialStates <- [
+        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    ]
+]
+=
+[
+    // asset alias len:
+    0x00, 0x06,
+    // asset alias:
+    0x61, 0x73, 0x73, 0x65, 0x74, 0x31,
+    // network_id:
+    0x00, 0x00, 0x30, 0x39,
+    // blockchain_id:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    // output_len:
+    0x00, 0x00, 0x00, 0x00,
+    // input_len:
+    0x00, 0x00, 0x00, 0x00,
+    // memo_len:
+    0x00, 0x00, 0x00, 0x1b,
+    // memo:
+    0x66, 0x72, 0x6f, 0x6d, 0x20, 0x73, 0x6e, 0x6f, 0x77, 0x66, 0x6c, 0x61,
+    0x6b, 0x65, 0x20, 0x74, 0x6f, 0x20, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x68, 0x65,
+    // asset_name_len:
+    0x00, 0x0f,
+    // asset_name:
+    0x6d, 0x79, 0x46, 0x69, 0x78, 0x65, 0x64, 0x43, 0x61, 0x70, 0x41, 0x73, 0x73, 0x65, 0x74,
+    // symbol_len:
+    0x00, 0x04,
+    // symbol:
+    0x4d, 0x46, 0x43, 0x41,
+    // denomination:
+    0x07,
+    // number of InitialStates:
+    0x00, 0x00, 0x00, 0x01,
+    // InitialStates[0]:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
 ]
 ```
 
