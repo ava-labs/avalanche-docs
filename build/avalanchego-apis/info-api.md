@@ -1,30 +1,30 @@
-# Info API
+# Bilgi API
 
-This API can be used to access basic information about the node.
+Bu API, düğümle ilgili temel bilgilere ulaşmak için kullanılabilir.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Bu API, `json 2.0` RPC formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/info
 ```
 
-## API Methods
+## API Yöntemleri
 
-### info.getBlockchainID
+### info, info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
+Bir blok zincirinin takma adlarını alın, kimliğini alın. \ [`\(See zincir`](admin-api.md#admin-aliaschain). \)
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -37,7 +37,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -51,15 +51,15 @@ curl -X POST --data '{
 
 ### info.getNetworkID
 
-Get the ID of the network this node is participating in.
+Bu düğümün katıldığı ağın kimliğini alın.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getNetworkID() -> {networkID:int}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -69,7 +69,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -81,17 +81,17 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNetworkName
+### info.getNetworkName Name
 
-Get the name of the network this node is participating in.
+Bu düğümün katıldığı ağın adını öğren.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -101,7 +101,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -113,17 +113,17 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeID
+### info, info.getNodeID
 
-Get the ID of this node.
+Bu düğümün kimliğini öğren.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getNodeID() -> {nodeID: string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -145,17 +145,17 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeIP
+### info, info.getNodeIP
 
-Get the IP of this node.
+Bu düğümün IP adresini al.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 info.getNodeIP() -> {ip: string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -165,7 +165,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -177,17 +177,29 @@ curl -X POST --data '{
 }
 ```
 
-### info.getNodeVersion
+### info. info.getNodeVersion
 
-Get the version of this node.
+Bu düğümün versiyonunu al.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
-info.getNodeVersion() -> {version: string}
+info.getNodeVersion() -> {
+    version: string,
+    databaseVersion: string,
+    gitCommit: string,
+    vmVersions: map[string]string,
+}
 ```
 
-#### **Example Call**
+Nereye?
+
+* `Bu` düğümün versiyonu
+* `Veritabanı` bu düğümün kullandığı veritabanı sürümü
+* `GitCommit` bu düğümün yapıldığı için Git işletiyor.
+* `VmVersions` her anahtar / değer çifti bir of adı olduğu harita ve bu düğümün çalıştırdığı of sürümü
+
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -197,13 +209,20 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/1.1.0"
+        "version": "avalanche/1.4.10",
+        "databaseVersion": "v1.4.5",
+        "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
+        "vmVersions": {
+            "avm": "v1.4.10",
+            "evm": "v0.5.5-rc.1",
+            "platform": "v1.4.10"
+        }
     },
     "id": 1
 }
@@ -211,17 +230,17 @@ curl -X POST --data '{
 
 ### info.isBootstrapped
 
-Check whether a given chain is done bootstrapping
+Verilen zincir çizme işlemi yapılıp yapılmadığını kontrol et
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
-`chain` is the ID or alias of a chain.
+`Zincir` bir zincirin kimliği, takma isimleridir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -234,7 +253,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -248,14 +267,14 @@ curl -X POST --data '{
 
 ### info.peers
 
-Get a description of peer connections.
+Akrabaları tanımlayın.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.peers({
     nodeIDs: string[] // optional
-}) -> 
+}) ->
 {
     numPeers: int,
     peers:[]{
@@ -269,9 +288,9 @@ info.peers({
 }
 ```
 
-* `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+* `nodeIDs` nodeIDs tanımlamalarının geri verilmesi gerektiğini belirlemek için opsiyonel bir parametredir. Eğer bu parametre boş kalırsa, tüm aktif bağlantılar için tanımlar geri verilecektir. Eğer düğüm, belirtilmiş bir nodeID ile bağlantılı değilse, yanıttan atlanacaktır.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -284,7 +303,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -324,22 +343,22 @@ curl -X POST --data '{
 
 ### info.getTxFee
 
-Get the fees of the network.
+Ağın ücretlerini alın.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
-info.getTxFee() -> 
+info.getTxFee() ->
 {
     creationTxFee: uint64,
     txFee: uint64
 }
 ```
 
-* `creationTxFee` is the fee for creating assets on the network.
-* `txFee` is the fee for making transactions on the network.
+* `CreationTxFee` şebeke üzerindeki varlıklar oluşturmak için bir bedeldir.
+* `TxFee` ağda işlem yapmak için gereken ücrettir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -349,7 +368,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
