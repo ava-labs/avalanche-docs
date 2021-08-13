@@ -1,7 +1,9 @@
-# Smart Contracts
+# スマートコントラクト
 
-| Title | Description |
+| JPT-JP | JavaScript-JP-JP- |
 | :--- | :--- |
-| [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Deploy and test a smart contract on Avalanche using Remix and MetaMask. |
-| [**Using Truffle with the Avalanche C-Chain**](using-truffle-with-the-avalanche-c-chain.md) | Using Truffle with the Avalanche's C-Chain, an instance of the Ethereum Virtual Machine \(EVM\) |
+| [**RemixとMetaMaskを使用してAvalancheにスマートコントラクトをデプロイする**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Avalanche上でスマートコントラクトを展開してテストします。RemixとMetaMaskを使用してMetaMaskを活用します。 |
+| [**Truffleを使うC-Chain**](using-truffle-with-the-avalanche-c-chain.md) | TruffleとAvalancheのC-Chainを使う,Ethereum Virtual Machine \(EVM\) |
+| [**MetaMaskにAvalancheをプログラム的に追加**](add-avalanche-to-metamask-programmatically.md) | AvalancheネットワークをMetaMaskに追加する方法を簡単に説明します。 |
+| [**C-Chain Explorerでスマートコントラクトを確認する**](verify-smart-contracts.md) | スマートコントラクトの検証 |
 
