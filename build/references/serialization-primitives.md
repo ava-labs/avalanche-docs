@@ -1,12 +1,12 @@
 # Serialization Primitives
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalanche](../../#avalanche) tüm iç veriler için basit ve zarif bir temsilci kullanır. Bu belge, Avalanche platformunda ilkel türlerin nasıl are açıklar. Bu temel ilkel tipler için işlemler kodlanmaktadır.
 
 ## Byte
 
-Bytes are packed as-is into the message payload.
+Mesaj yüküne baytlar yerleştirildi.
 
-Example:
+Örnek Olarak:
 
 ```text
 Packing:
@@ -15,11 +15,11 @@ Results in:
     [0x01]
 ```
 
-## Short
+## - Kısa boylu
 
-Shorts are packed in BigEndian format into the message payload.
+Şort BigEndian formatında mesaj yüküne paketlendi.
 
-Example:
+Örnek Olarak:
 
 ```text
 Packing:
@@ -28,11 +28,11 @@ Results in:
     [0x01, 0x02]
 ```
 
-## Integer
+## Tam sayı
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+Sayılar Bigendian biçiminde mesaj yüküne yüklenmiş 32 bit değerleridir.
 
-Example:
+Örnek Olarak:
 
 ```text
 Packing:
@@ -41,11 +41,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04]
 ```
 
-## Long Integers
+## Uzun Sayılar
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+Uzun tamsayılar Bigendian biçiminde mesaj yüküne paketlenmiş 64 bit değerleridir.
 
-Example:
+Örnek Olarak:
 
 ```text
 Packing:
@@ -54,11 +54,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]
 ```
 
-## IP Addresses
+## IP Adresleri
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+IP adresleri 16-byte IPv6 formatı olarak temsil edilirken, port bir kısa olarak mesaj yüküne eklenmiştir. IPv4 adresleri 0x00'lerin önde gelen 12 bayt ile eklenir.
 
-IPv4 example:
+IPv4 örneği:
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+IPv6 örneği:
 
 ```text
 Packing:
@@ -84,11 +84,11 @@ Results in:
     ]
 ```
 
-## Fixed-Length Array
+## Düzeltilmiş Uzunluk Fixed-Length
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+Uzun uzunluğu zaman öncesinden ve bağlamla bilinen sabit uzunluklu diziler sırayla paketlenir.
 
-Byte array example:
+Byte dizili örneği:
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+Sayfa dizisi örneği:
 
 ```text
 Packing:
@@ -106,11 +106,11 @@ Results in:
     [0x03, 0x04, 0x05, 0x06]
 ```
 
-## Variable Length Array
+## Değişken Uzunluk Dizisi
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+Dizinin uzunluğu Integer formatında önceden ayarlanmış, ardından Fixed Length Array formatındaki dizinin içeriğini paketlemesi takip etmektedir.
 
-Byte array example:
+Byte dizili örneği:
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+Int örneği:
 
 ```text
 Packing:
@@ -130,9 +130,9 @@ Results in:
 
 ## String
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+Bir ip, değişken uzunluklu bayt dizisine benzer şekilde paketlenir. Ancak uzunluk prefix bir intten ziyade kısa bir mesafededir. İpler UTF-8 formatında kodlanmıştır.
 
-Example:
+Örnek Olarak:
 
 ```text
 Packing:
