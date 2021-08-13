@@ -1,26 +1,26 @@
-# Health API
+# Health API-JP
 
-This API can be used for measuring node health.
+このAPIはノードの健康状態を測定するために使用できます。
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+ノードのヘルスを示すHTTPステータスコードレスポンスを取得するには、`/ext/health`に`GET`リクエストを行います。ノードがヘルシーならば、`200`ステータスコードを返します。ノードの健康に関するより詳細な情報が必要な場合は、以下のメソッドを使用してください。
 
-## Format
+## JP-JP-
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+`JSON 2.0` RPC 形式を使用しています。JSON RPC 呼び出しの詳細については、[こちら](issuing-api-calls.md)を参照してください。
 
-## Endpoint
+## Endpoint-JP
 
 ```text
 /ext/health
 ```
 
-## Methods
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
-### health.getLiveness
+### Health.getLiveness-JP
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+ノードは30秒ごとに一連のヘルスチェックを実行し、各チェーンごとにヘルスチェックを取得します。このメソッドは、ヘルスチェック結果の最後のセットを返します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 health.getLiveness() -> {
@@ -38,20 +38,20 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` is true if the node if all health checks are passing.
+`halesy`はすべてのヘルスチェックが合格している場合に、trueです。
 
-`checks` is a list of health check responses.
+`checks`は、ヘルスチェックレスポンスの一覧です。
 
-* A check response may include a `message` with additional context.
-* A check response may include an `error` describing why the check failed.
-* `timestamp` is the timestamp of the last health check.
-* `duration` is the execution duration of the last health check, in nanoseconds.
-* `contiguousFailures` is the number of times in a row this check failed.
-* `timeOfFirstFailure` is the time this check first failed.
+* チェックレスポンスには、追加のコンテキストを持つ`メッセージ`が含まれます。
+* check レスポンスには、なぜチェックが失敗したのかを説明する`エラー`が含まれている場合があります。
+* `timestamp` は、最後のヘルスチェックのタイムスタンプです。
+* `duration` は、最後のヘルスチェックの実行時間(ナノ秒)です。
+* `contiguousFailures` は、このチェックに失敗した行の回数です。
+* `timeOfFirstFailure` は、このチェックが最初に失敗した時期です。
 
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
+これらの測定値の詳細は、[go-sundheit](https://github.com/AppsFlyer/go-sundheit) ライブラリのドキュメントを参照してください。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -61,9 +61,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-In this example response, the C-Chain’s health check is failing.
+この例では、C-Chainの健康チェックは失敗しています。
 
 ```cpp
 {
