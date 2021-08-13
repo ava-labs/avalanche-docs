@@ -1,45 +1,49 @@
 ---
-description: Avalanche'ın işlem ücretleri hakkında daha fazla bilgi edinin
+description: Avalanche's işlem ücretleri hakkında daha fazla bilgi edin.
+
 ---
 
 # İşlem Ücretleri
 
-Spami engellemek adına, Avalanche üzerinde yapılan işlemler için bir işlem ücreti ödenmesi gerekir. Bu ücret, [AVAX](../../#avalanche-avax-token) ile ödenir. **İşlem ücreti yakılır \(sonsuza kadar yok olur\).**
+spam, işlemler bir işlem ücretinin ödemesini gerektirir. Ücret [in](../../#avalanche-avax-token) ödeniyor. **Bu işlem ücreti yakıldı (sonsuza dek yok edildi).**
 
-Avalanche’ın API'si aracılığıyla bir işlem yaptığınızda; işlem ücreti, sizin kontrolünüzde olan adreslerin birinden otomatik olarak kesilir.
+Avalanche’s API aracılığıyla bir işlem yayınladığınızda, işlem ücreti otomatik olarak kontrol ettiğiniz adreslerden birinden indirilir.
 
-## Ücret Tarifesi
+## Fiyat Programı
 
-Yapılan işlem türüne göre farklı bir işlem ücretinin ödenmesi gerekir. İşlem türlerine göre ücretleri görmek için aşağıdaki tablodan faydalanabilirsiniz:
+Farklı işlemler farklı bir işlem ücreti ödemesi gerektirir. Bu masa işlem ücreti programını gösteriyor:
 
-{% hint style="warning" %}
-[C-Chain](./#contract-chain-c-chain) için gas fiyatı 225 nAVAX'dır. \(225 GWei\). C-Chain'in gas limiti 10e8'dir. \(100,000,000\)
-{% endhint %}
+{% ipuçları style="warning" } [C-Chain](./#contract-chain-c-chain) gaz fiyatı 225 nAVAX \(225 GWei\). C-Chain gaz sınırı 8 \* 10e6 \(8,000,000\). {% endhint }
 
 ```cpp
-+----------+---------------------+------------------------+
-| Zincir   : İşlem Türü          | İşlem Ücreti (AVAX)    |
-+----------+---------------------+------------------------+
-| P        : Blokzincir Oluştur  |                   0.01 |
-+----------+---------------------+------------------------+
-| P        : Validatör Ekle      |                      0 |
-+----------+---------------------+------------------------+
-| P        : Delegatör Ekle      |                      0 |
-+----------+---------------------+------------------------+
-| P        : Subnet Oluştur      |                   0.01 |
-+----------+---------------------+------------------------+
-| P        : AVAX'ı İçe Aktar    |                  0.001 |
-+----------+---------------------+------------------------+
-| P        : AVAX'ı Dışa Aktar   |                  0.001 |
-+----------+---------------------+------------------------+
-| X        : Gönder              |                  0.001 |
-+----------+---------------------+------------------------+
-| X        : Varlık Oluştur      |                   0.01 |
-+----------+---------------------+------------------------+
-| X        : Varlık Çıkart       |                  0.001 |
-+----------+---------------------+------------------------+
-| X        : AVAX'ı İçe Aktar    |                  0.001 |
-+----------+---------------------+------------------------+
-| X        : AVAX'ı Dışa Aktar   |                  0.001 |
-+----------+---------------------+------------------------+
++----------+-------------------+------------------------+
+| Chain    : Transaction Type  | Transaction Fee (AVAX) |
++----------+-------------------+------------------------+
+| P        : Create Blockchain |                   0.01 |
++----------+-------------------+------------------------+
+| P        : Add Validator     |                      0 |
++----------+-------------------+------------------------+
+| P        : Add Delegator     |                      0 |
++----------+-------------------+------------------------+
+| P        : Create Subnet     |                   0.01 |
++----------+-------------------+------------------------+
+| P        : Import AVAX       |                  0.001 |
++----------+-------------------+------------------------+
+| P        : Export AVAX       |                  0.001 |
++----------+-------------------+------------------------+
+| X        : Send              |                  0.001 |
++----------+-------------------+------------------------+
+| X        : Create Asset      |                   0.01 |
++----------+-------------------+------------------------+
+| X        : Mint Asset        |                  0.001 |
++----------+-------------------+------------------------+
+| X        : Import AVAX       |                  0.001 |
++----------+-------------------+------------------------+
+| X        : Export AVAX       |                  0.001 |
++----------+-------------------+------------------------+
+| C        : Simple send       |           (*) 0.004725 |
++----------+-------------------+------------------------+
+
+(*) 21000 gas units at 225 nAVAX gas price
 ```
+
