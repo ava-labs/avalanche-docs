@@ -1,28 +1,28 @@
 # Keystore API
 
-Every node has a built-in keystore. Clients create users on the keystore, which act as identities to be used when interacting with blockchains. A keystore exists at the node level, so if you create a user on a node it exists _only_ on that node. However, users may be imported and exported using this API.
+Her düğümün bir tuş mağazası vardır. Müşteriler blok zincirleriyle etkileşim halinde kullanılmak üzere kimlikler olarak hareket eden anahtar mağazada kullanıcılar oluşturur. Bir anahtar mağazası düğümün seviyesinde vardır, yani bir kullanıcı oluşturursanız _sadece_ bu düğümde var. Bununla birlikte, kullanıcılar bu API kullanarak ithal edilebilir ve ihraç edilebilir.
 
-_**You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.**_
+_**Sadece düğüm operatörünün düz metin parolanıza erişimi olduğu için işlediğiniz bir düğümle bir anahtar kullanıcısı oluşturmalısınız.**_
 
-For validation and delegation on main net, you should issue transactions through [the wallet](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md). That way control keys for your funds won't be stored on the node, which significantly lowers the risk should a computer running a node be compromised.
+Ana ağdaki onaylama ve heyet için [cüzdandan](../tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) işlemler yayınlamalısınız. Böylece fonlarınızın kontrol anahtarları düğümlerde saklanmaz, bu da bir düğümle çalışan bir bilgisayar tehlikeye girerse risk önemli ölçüde düşürür.
 
 ## Format
 
-This API uses the `json 2.0` API format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Bu API, `json 2.0` API formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/keystore
 ```
 
-## Methods
+## Yöntemler
 
-### keystore.createUser
+### keystore. keystore.createUser Kullanıcı
 
-Create a new user with the specified username and password.
+Belirtilmiş kullanıcı adı ve parola ile yeni bir kullanıcı oluştur.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 keystore.createUser(
@@ -33,10 +33,10 @@ keystore.createUser(
 ) -> {success:bool}
 ```
 
-* `username` and `password` can be at most 1024 characters.
-* Your request will be rejected if `password` is too weak. `password` should be at least 8 characters and contain upper and lower case letters as well as numbers and symbols.
+* `Kullanıcı adı` ve `parola` en fazla 1024 karakterde olabilir.
+* `Parola` çok zayıf ise talebiniz reddedilecek. `Parola` en az 8 karakter olmalı ve üst ve alt dosya harfleri ve rakamlar ve semboller içermelidir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -50,7 +50,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -62,17 +62,17 @@ curl -X POST --data '{
 }
 ```
 
-### keystore.deleteUser
+### keystore. Silin@ info: whatsthis
 
-Delete a user.
+Kullanıcı sil.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -86,7 +86,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -96,11 +96,11 @@ curl -X POST --data '{
 }
 ```
 
-### keystore.exportUser
+### keystore. keystore.exportUser
 
-Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
+Kullanıcı aktar. Kullanıcı başka bir [`düğüme`](keystore-api.md#keystore-importuser) aktarılabilir. Kullanıcının şifresi şifrelenir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 keystore.exportUser(
@@ -115,9 +115,9 @@ keystore.exportUser(
 }
 ```
 
-`encoding` specifies the format of the string encoding user data. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`Kodlama` sicim kodlayan kullanıcı verisinin biçimini belirtir. "cb58" veya "hek" olabilir. "Cb58" için Defaults
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -144,11 +144,11 @@ curl -X POST --data '{
 }
 ```
 
-### keystore.importUser
+### keystore. keystore.importUser
 
-Import a user. `password` must match the user’s password. `username` doesn’t have to match the username `user` had when it was exported.
+Bir kullanıcı içeriye aktar. `Parola` kullanıcının parolasına uymalıdır. `Kullanıcı adı` `kullanıcıya` ait olan kullanıcı adı ile eşleşmek zorunda değildir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 keystore.importUser(
@@ -161,9 +161,9 @@ keystore.importUser(
 ) -> {success:bool}
 ```
 
-`encoding` specifies the format of the string encoding user data . Can be either “cb58” or “hex”. Defaults to “cb58”.
+`Kodlama,` sicim kodlayan kullanıcı verisinin biçimini belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -178,7 +178,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -190,17 +190,17 @@ curl -X POST --data '{
 }
 ```
 
-### keystore.listUsers
+### keystore. keystore.listUsers
 
-List the users in this keystore.
+Bu anahtar mağazasındaki kullanıcıları listele.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 keystore.ListUsers() -> {users:[]string}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -210,7 +210,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
