@@ -1,21 +1,21 @@
-# AvalancheGo APIs
+# Avalanchego APIs
 
-Clients interact with Avalanche through APIs calls to nodes. Numeric parameters in API calls may be given as strings \(e.g., `"5"` or `5` are both ok for an integer argument\). Numeric return values are always given as strings \(e.g., `"5"` rather than `5`\). In examples, API calls are made to a node listening for HTTP traffic on `127.0.0.1:9650`.
+Müşteriler API'ler ile Avalanche ile etkileşime girerler. API çağrılarında sayısal parametreler sicim olarak may `5"` veya `5` tam sayı argümanı için her ikisi de uygundur). Sayısal dönüş değerleri her zaman sicim olarak given `5\'dan` ziyade `"5"` (5). Örnek olarak, API çağrıları, `127.0.0.1:9650`'deki HTTP trafiğini dinleme düğmesine dönüştürülür.
 
-| Title | Description |
+| Başlık | Tarif edilmesi |
 | :--- | :--- |
-| [**Issuing API Calls**](issuing-api-calls.md) | This guide explains how to make calls to APIs exposed by Avalanche nodes. |
-| The [**Platform Chain \(P-Chain\) API**](platform-chain-p-chain-api.md) | Allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain and subnet creation. |
-| The [**Contract Chain \(C-Chain\) API**](contract-chain-c-chain-api.md) | Allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances. |
-| The [**Exchange Chain \(X-Chain\) API**](exchange-chain-x-chain-api.md) | Allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM. |
-| The [**Admin API**](admin-api.md) | Allows clients to examine a node’s internal state, set of connections, and similar internal protocol data. |
-| The [**Auth API**](auth-api.md) | Allows clients to manage the creation and revocation of authorization tokens. |
-| The [**Health API**](health-api.md) | Allows clients to check a node’s health. |
-| The [**Index API**](index-api.md) | Fetch transactions, vertex, or block by ID. |
-| The [**Info API**](info-api.md) | Allows clients to examine basic information about a node. |
-| The [**IPC API**](ipc-api.md) | Allows users to create UNIX domain sockets for blockchains to publish to. |
-| The [**Keystore API**](keystore-api.md) | Allows customers to use the embedded Keystore file of an Avalanche node. |
-| The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
+| [**API Çağrıları Veriyor**](issuing-api-calls.md) | Bu rehber Avalanche düğümleri tarafından açık to nasıl telefon açacağını açıklar. |
+| [**Platform Zinciri \(P-Chain\ ) API**](platform-chain-p-chain-api.md) | clients doğrulama setini koruyan P-Chain \(Platform Chain\) ile etkileşime girmelerine izin verir, bu da blok zinciri ve alt net yaratılışıyla ilgilenir. |
+| [**Kontrat Zinciri \(C-Chain\ ) API**](contract-chain-c-chain-api.md) | Müşterilerin C-Chain ile etkileşime girmelerine izin verir, Avalanche’s ana EVM örneği, diğer EVM örnekleri ile etkileşim sağlar. |
+| [**Takas Zinciri \(X-Chain\ ) API**](exchange-chain-x-chain-api.md) | AVAX ve AVAX, ve AVM'nin diğer örnekleri de dahil olmak üzere müşterilerin oluşturma ve ticaret varlıklarını sağlar. |
+| [**İdari API**](admin-api.md) | Müşterilerin, bir düğümün iç durumu, bağlantıların kümesi ve benzer iç protokol verilerini incelemesine izin verir. |
+| [**Auth API**](auth-api.md) | Müşterilerin yetki işaretlerinin oluşturulmasını ve kaldırılmasını yönetmesine izin verir. |
+| [**Sağlık API**](health-api.md) | Hastaların bir düğümün sağlığını kontrol etmesine izin verir. |
+| [**Endeks API**](index-api.md) | İşlemleri getir, vertex, veya kimlik ile blok getir. |
+| [**Bilgi API**](info-api.md) | Müşterilerin bir düğüm hakkında temel bilgileri incelemesine izin verir. |
+| [**IPC API**](ipc-api.md) | Kullanıcıların blok zincirleri yayınlamak için UNIX alan yuvaları oluşturmasına izin verir. |
+| [**Keystore API**](keystore-api.md) | Müşterilere bir Avalanche düğümünün gömülü Keystore dosyasını kullanmalarına izin verir. |
+| [**Metrik API**](metrics-api.md) | Müşterilerin bir düğümün sağlık ve performansı hakkında istatistikleri almasına izin verir. |
 
 
 
