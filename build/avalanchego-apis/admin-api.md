@@ -1,36 +1,36 @@
 # Admin API
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+このAPIはノードの健全性測定やデバッグに使用できます。Admin API は、セキュリティ上の理由によりデフォルトで無効になっていることに注意してください。Admin API を有効にしたノードを実行するには、[コマンドライン引数](../references/command-line-interface.md)`--api-admin-enabled=true`を使用します。
 
-## Format
+## JP-JP-
 
-This API uses the `json 2.0` RPC format.
+`JSON 2.0` RPC 形式を使用しています。
 
-{% page-ref page="issuing-api-calls.md" %}
+--
 
-## Endpoint
+## Endpoint-JP
 
 ```text
 /ext/admin
 ```
 
-## API Methods
+## API メソッド
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+API エンドポイント、API の別のエンドポイントを割り当てます。元のエンドポイントはまだ機能します。この変更はこのノードにのみ影響します。他のノードはこのエイリアスについて知りません。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-* The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* `endpoint` は API の元のエンドポイントです。`endpoint` は `/ext/` の後にエンドポイントの部分のみを含める必要があります。
+* エイリアスされたAPIを `ext/alias` で呼び出すことができるようになりました。
+* `alias` は最大 512 文字でできます。
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -44,9 +44,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -56,13 +56,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+X-Chain への呼び出しは `/ext/bc/X` か、または `/ext/myAlias` に行うことができます。
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+ブロックチェーンに別名エイリアス、ブロックチェーンIDが使用されている場所で使用できる別の名前を付けます。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.aliasChain(
@@ -73,10 +73,10 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain`はブロックチェーンのIDです。
+* `alias`はブロックチェーンのID \(例えばAPIエンドポイントで使用できるようになりました。\)
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -90,9 +90,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -102,19 +102,64 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+現在、`sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4`VQAWmJQnM というブロックチェーンと交換するのではなく、`/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` でも`ext/bc/myBlockchainAlias`への呼び出しをすることができます。
+
+### admin.getChainAliases
+
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaServer-JavaScript-JavaScript-JavaScript-JavaJavaJav
+
+#### **JPS-JP-JP**
+
+```text
+admin.getChainAliases(
+    {
+        chain:string
+    }
+) -> {aliases:string[]}
+```
+
+* `chain`はブロックチェーンのIDです。
+
+#### **Call 例**
+
+```text
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getChainAliases",
+    "params": {
+        "chain":"sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **レスポンス例**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "aliases": [
+            "X",
+            "avm",
+            "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
+        ]
+    },
+    "id": 1
+}
+```
 
 ### admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+`lock.profile` に mutex 統計のプロファイルを書き込んでください。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -125,9 +170,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -139,15 +184,15 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Writes a memory profile of the to `mem.profile`.
+`mem.profile`のメモリプロファイルを書き込みます。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -158,9 +203,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -172,15 +217,15 @@ curl -X POST --data '{
 
 ### admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+ノードのCPU使用率のプロファイリングを開始します。停止するには、`admin.stopCPUProfiler` を呼び出します。PPP プロファイルにプロファイルを書き込む`。`
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -191,9 +236,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -205,15 +250,15 @@ curl -X POST --data '{
 
 ### admin.stopCPUProfiler
 
-Stop the CPU profile that was previously started.
+CPU プロファイルを停止します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Call 例**
 
 ```text
 curl -X POST --data '{
@@ -223,9 +268,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
