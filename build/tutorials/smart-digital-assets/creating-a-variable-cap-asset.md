@@ -1,25 +1,25 @@
-# Create a Variable-Cap Asset
+# Değişken Başlık Varlığı Oluştur
 
-## Introduction
+## Tanıştırma
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+Bu özel ders değişken kapak ve mantarlı bir varlık yaratmayı gösterir. Varlık başlatıldığında hiçbir varlık birimi mevcut değildir ancak daha fazla varlık birimi azalabilir. Varlık yaratılışında, hangi adreslerin daha fazla birim şekline girebileceğini belirleriz.
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+Neden tek bir adres yerine varlığın daha fazla birimini şekillendirebilen adresleri belirleyeceğimizi merak _ediyor_ olabilirsiniz. İşte neden:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Güvenlik:** Eğer bir adres varlığı daha fazla nane yapabilirse ve bu adrese giden özel anahtar kaybolursa, başka birim asla daraltılamaz. Benzer şekilde, sadece bir adres varlığı daha fazla nane yapabilirse bu adres sahibinin istedikleri kadar tek taraflı şekilde naneli olmasını durduramaz.
+* **Esneklik:** "Alice bu varlığın tek taraflı olarak daha fazla birimini dinesh, Ellin, ve Jamie daha fazla nane yapabilir." gibi mantığı kodlamak güzel.
 
-Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
+Diyelim ki bir şirketin hisselerini temsil eden bir varlık yayınlamak istiyoruz. Başlangıç için hiçbir hisse mevcut değildir ancak daha sonra daha fazla hisse oluşturulabilir. Böyle bir varlık yaratalım.
 
-## Requirements
+## Gereklilik
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Bir Avalanche](../nodes-and-staking/run-avalanche-node.md) an tamamladınız. [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsunuz.
 
-## Create the Asset
+## Varlığı oluştur
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+on varlığımız var, bu yüzden varlığımızı oluşturmak için [X-Chain, X-Chain’s](../../avalanchego-apis/exchange-chain-x-chain-api.md) bir metodu [`olan avm.createVariableCapAsset, avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), adını vereceğiz.
 
-The signature for this method is:
+Bu yöntemin imzası:
 
 ```cpp
 avm.createVariableCapAsset({
@@ -41,22 +41,22 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### Parametreler
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `İsim` bizim varlığımız için okunabilir bir isim. Eşsiz olması gerekmez. 0 ile 128 karakter.
+* `Sembol,` bu varlığın bir kısaltma sembolüdür. 0 ile 4 karakter arasında. Eşsiz olması gerekmez. Belki de atılmıştır.
+* `Bu` değerin dengelerinin kullanıcı arayüzleri tarafından nasıl gösterildiğini belirler. Eğer bu varlığın paydası 0, 100 ünite olarak gösterilecek. Eğer payda 1 100 birim ise bu varlığın 10.0 olarak gösterilecek. Eğer bu varlığın paydası 2, 100 ünite .100 olarak görüntülenir.
+* `MinterSets,` `her` elementin in adreslerin `eşiğinin` bir minting işlemini imzalayarak daha çok varlığı birleştirebileceği bir listedir.
+* X-Chain üzerinde bir işlem gerçekleştirmek AVAX ile ödenen bir işlem ücreti gerektirir. `Kullanıcı adı` ve `parola` ücreti ödeyen kullanıcıyı belirtir.
+* Bu operasyon için kullanmak istediğiniz `adresler.` Eğer reddedilirse, gerekli olan adreslerinizi kullanın.
+* `Değişiklik Addr` herhangi bir değişikliğin gönderileceği adres. Eğer reddedilirse, değişim kullanıcının kontrol ettiği adreslerden birine gönderilir.
 
-### Response
+### Yanıt
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `Varlık` yeni varlığın kimliği.
+* `Sonuç` olarak değişim, herhangi bir değişikliğin gönderildiği adres.
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+Daha sonra bu örnekte daha fazla paylaşım yapacağız, bu yüzden kullanıcı your belirlenen ikinci minter içinde en az 2 adres değiştirmeyi unutmayın.
 
 ```cpp
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {
@@ -103,18 +103,18 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## Varlığı Mint
 
-Right now 0 shares exist. Let’s mint 10M shares.
+Şu anda 0 hisse var. 10 milyon hisse senedi yapalım.
 
-### Create the Unsigned Transaction
+### İmzasız İşlemini Oluştur
 
-We’ll use [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+Hisseleri nane yapmak için [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) kullanacağız.
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `Bu` miktar, yaratılacak hisse sayısıdır.
+* `Varlık` kimliği, daha fazla yarattığımız varlığın kimliğidir.
+* `...yeni` tazminat hisseleri alacak olan adres. Kullanıcı kontrollerinizin yerine `geçin` böylece yeni yeni mined hisselerden bazılarını gönderebileceksiniz.
+* `Kullanıcı adı` anahtarları tutan bir kullanıcı olmalı, bu varlığı daha fazla nane için izin verir. Yani yukarıda belirttiğimiz minter setlerinden birinin _en_ azından eşik anahtarlarını kontrol ediyor.
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+Cevap işlemlerin kimliğini içeriyor:
 
 ```cpp
 {
@@ -144,7 +144,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+[`Avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -157,7 +157,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+Bu da şöyle olmalı:
 
 ```cpp
 {
@@ -169,11 +169,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
+## Varlığı takas et
 
-### Check a Balance
+### Denge Kontrol Et
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+10 M hisselerinin `hepsi` `nane olarak` belirttiğimiz adres ile kontrol ediliyor. Bunu doğrulamak için [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -187,7 +187,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+Cevap varlık yaratmamızın başarılı olduğunu ve beklenen adresin 10.000 hissesi olduğunu doğruluyor:
 
 ```cpp
 {
@@ -199,9 +199,9 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### Varlığı gönder.
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+[`Avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send) kullanarak başka bir adrese 100 hisse gönderelim. Bunu yapmak için:
 
 ```cpp
 curl -X POST --data '{
@@ -218,7 +218,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+Adrese giden dengeleri `kontrol` edelim:
 
 ```cpp
 curl -X POST --data '{
@@ -232,7 +232,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+Cevap şöyle olmalı:
 
 ```cpp
 {
@@ -244,12 +244,12 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Toplantı
 
-In this tutorial, we:
+Bu özel ders için:
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* Paylaşımları temsil eden `değişken` kap varlığı oluşturmak için kullanılıyor.
+* Daha fazla mal varlığı `nane` şekeri kullanmış.
+* Adres dengesini kontrol etmek için kullanılmış `bir` ayarlama ayarlaması.
+* Hisselerini aktarmak için `kullanılmış.`
 
