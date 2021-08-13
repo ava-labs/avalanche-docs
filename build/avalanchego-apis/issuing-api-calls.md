@@ -1,44 +1,44 @@
-# Issuing API Calls
+# API Çağrıları Veriyor
 
-This guide explains how to make calls to APIs exposed by Avalanche nodes.
+Bu rehber Avalanche düğümleri tarafından açık to nasıl telefon açacağını açıklar.
 
-### Endpoint <a id="endpoint"></a>
+### Sonucu noktası<a id="endpoint"></a>
 
-An API call is made to an endpoint, which is a URL. The base of the URL is always:
+Bir API çağrısı bir son noktaya getirilir, ki bu bir URL olur. URL'nin tabanı her zaman şöyle:
 
 `[node-ip]:[http-port]`
 
-where
+- Nerede?
 
-* `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
+* `Node-ip` çağrının IP adresi olarak adlandırılır.
+* `http-port` HTTP çağrıları için düğümün dinlediği port Bu [durum komut-satırı argümanı](../references/command-line-interface.md#http-server) `http-port` \(varsayılan değer `9650`\) ile belirtilir.
 
-For example, the base URL might look like this: `127.0.0.1:9650`.
+Örneğin, taban URL şöyle görünebilir: `127.0.1:9650`.
 
-Each API’s documentation specifies what endpoint a user should make calls to in order to access the API’s methods.
+Her API’nin belgeseli, API’nin yöntemlerine ulaşmak için kullanıcının hangi uç noktasının hangi noktasını aradığını belirtir.
 
-## JSON RPC Formatted APIs
+## JSON RPC API Biçimi
 
-Several built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
+Birçok dahili API, isteklerini ve yanıtlarını tanımlamak için [JSON RPC 2.0](https://www.jsonrpc.org/specification) biçimini kullanır. Bu API'ler Platform API ve X-Chain API içerir.
 
-### Making a JSON RPC Request
+### JSON RPC İsteği Yapılıyor.
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](exchange-chain-x-chain-api.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+[X-Chain API](exchange-chain-x-chain-api.md)'nin `getTxStatus` yöntemini aramak istiyoruz. X-Chain API belgeseli bu API için sonun `/ext/bc/X` olduğunu söyler.
 
-That means that the endpoint we send our API call to is:
+Bu da API çağrımızı gönderdiğimiz son nokta şu:
 
 `[node-ip]:[http-port]/ext/bc/X`
 
-The X-Chain API documentation tells us that the signature of `getTxStatus` is:
+X-Chain API belgeseli bize `getTxStatus` imzasının şöyle olduğunu söylüyor:
 
 [`avm.getTxStatus`](exchange-chain-x-chain-api.md#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
-where:
+Nereye?
 
-* Argument `txID` is the ID of the transaction we’re getting the status of.
-* Returned value `status` is the status of the transaction in question.
+* Argent `txID` durumunun nasıl olduğunu öğrendiğimiz işlemlerin kimliğidir.
+* Değerlendirme `durumu` söz konusu işlemlerin durumudur.
 
-To call this method, then:
+Bu yöntemi aramak için:
 
 ```cpp
 curl -X POST --data '{
@@ -51,16 +51,16 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. \(In practice is always 2.0\)
-* `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
-* `params` specifies the arguments to the method.
-* `id` is the ID of this request. Request IDs should be unique.
+* `Jsonrpc` JSON RPC protokolünün sürümünü belirler. \ (Pratikte her zaman 2.0\
+* `Yöntemi,``` to istediğimiz service ve metodu \(`getTxStatus`\) belirler.
+* `Params` yöntemin argümanlarını belirler.
+* `Bu` isteğin kimliği. Kimlikler eşsiz olmalı.
 
-That’s it!
+İşte böyle!
 
-### JSON RPC Success Response
+### JSON RPC Başarı Tepkisi
 
-If the call is successful, the response will look like this:
+Eğer arama başarılı olursa, cevap şöyle olacak:
 
 ```cpp
 {
@@ -72,14 +72,14 @@ If the call is successful, the response will look like this:
 }
 ```
 
-* `id` is the ID of the request that this response corresponds to.
-* `result` is the returned values of `getTxStatus`.
+* `Bu` yanıtın cevabının kimlik kimliği kimliğidir.
+* `Sonuç ise` of `geri` dönme değerleridir.
 
-### JSON RPC Error Response
+### JSON RPC Hata Yanıtı
 
-If the API method invoked returns an error then the response will have a field `error` in place of `result`. Additionally, there is an extra field, `data`, which holds additional information about the error that occurred.
+Eğer API yöntemi çağrıldığında bir hata geri dönerse, sonuç yerine bir alan `hatası` `olacaktır`. Ayrıca, meydana gelen hata hakkında ek bilgi içeren fazladan bir alan `var.`
 
-Such a response would look like:
+Böyle bir tepki şöyle olurdu:
 
 ```cpp
 {
@@ -93,11 +93,11 @@ Such a response would look like:
 }
 ```
 
-## Other API Formats
+## Diğer API Biçimleri
 
-Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+Bazı API'ler isteklerini ve yanıtlarını biçimlendirmek için JSON RPC 2.0 dışında bir standart kullanabilirler. Bu tür uzantı, onlara nasıl telefon açacağını ve onlara yanıtları to belirtmelidir.
 
-## Sending and Receiving Bytes
+## Gönderme ve Alıcı Eklentileri
 
-Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
+Aksi belirtilmedikçe bytes bir API çağrısı / yanıt gönderilirse, [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) temsilinde, bir checksum ile bir taban 58 kodlaması
 
