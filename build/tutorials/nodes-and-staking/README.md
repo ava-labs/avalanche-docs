@@ -1,14 +1,14 @@
-# Nodes and Staking
+# ノードとステーキング
 
 |  |  |
 | :--- | :--- |
-| [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](https://docs.avax.network/learn/platform-overview) and a [subnet](https://docs.avax.network/learn/platform-overview#subnets) on Avalanche. |
-| [**How to Run Avalanche at Home: Oracle VM VirtualBox**](https://www.youtube.com/watch?v=7Tx1iKg-jL0) | Create a node that runs using Oracle VM VirtualBox container software. |
-| [**How to Run Avalanche at Home: Raspberry Pi 4**](https://www.youtube.com/watch?v=jlur1nef4-E) | Create a node that runs using Raspberry Pi 4. |
-| [**Set Up an Avalanche Node with Amazon Web Services \(AWS\)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Create a node that runs on AWS. |
-| [**Set Up an Avalanche Node with Microsoft Azure**](https://docs.avax.network/build/tutorials/platform/set-up-an-avalanche-node-with-microsoft-azure)**​** | Create a node that runs on Microsoft Azure. |
-| [**Set up Node on Linux using install script**](set-up-node-with-installer.md) | Create a node on Linux the easy way. |
-| [**Set up Node Monitoring**](setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo. |
-| [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet. |
-| **​**[**Upgrade Your AvalancheGo Node**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)**​** | Upgrade your Avalanche node. |
+| [**Validatorを追加する**](add-a-validator.md) | [Primary Network](https://docs.avax.network/learn/platform-overview)にノードを追加し、Avalancheの[サブネット](https://docs.avax.network/learn/platform-overview#subnets)を追加します。 |
+| [**Avalancheを自宅で実行する方法：Oracle VM VirtualBox**](https://www.youtube.com/watch?v=7Tx1iKg-jL0) | Oracle VM VirtualBoxコンテナ・ソフトウェアを使用して実行するノードを作成します。 |
+| [**Amazon Web Services \(AWS\)でAvalancheノードを設定する**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**** | AWSで実行するノードを作成します。 |
+| [**Microsoft AzureでAvalancheノードを設定する**](https://docs.avax.network/build/tutorials/platform/set-up-an-avalanche-node-with-microsoft-azure)**** | Microsoft Azure で実行されるノードを作成します。 |
+| [**Linux上でNodeをインストールスクリプトで設定する**](set-up-node-with-installer.md) | Linux上で簡単な方法でノードを作成します。 |
+| [**ノードバックアップと復元**](node-backup-and-restore.md) | ノードを復元できるように重要なファイルをバックアップします。 |
+| [**Node Monitoringの設定**](setting-up-node-monitoring.md) | AvalancheGo のインスタンスを監視するためのインフラストラクチャを設定します。 |
+| [**AvalancheウォレットでAVAXを検証またはDelegatingで持株します。**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | AvalancheウォレットからAVAXをステークします。 |
+| ​[**AvalancheGoノードをアップグレードする**](https://docs.avax.network/build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node)******​** | Avalancheノードをアップグレードします。 |
 
