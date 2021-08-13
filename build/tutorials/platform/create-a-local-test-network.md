@@ -1,20 +1,20 @@
-# Create a Local Test Network
+# Local Test Networkの作成
 
-## Introduction
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-
 
-In the [Get Started tutorial](https://avalanche.gitbook.io/avalanche/build/getting-started), we connect a node to the test network. You might find it useful to create a local test network.
+[Get](https://avalanche.gitbook.io/avalanche/build/getting-started) Started チュートリアルでは、ノードをテスト・ネットワークに接続します。Local test ネットワークを作成するのに便利です。
 
-We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) and manually.
+5ノードローカルテストネットワークを起動する方法を紹介します。どちらも、[Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) と手動でネットワークを起動する方法を説明します。
 
-The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` , and `9658`.
+5つのノードにはHTTPポート \(Where API callss to send\)`9650`, `9652`, `9654`, `9656`, `9658`があります。
 
-## Create a Local Test Network
+## Local Test Networkの作成
 
-The below commands assume you have [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+以下のコマンドは、[AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) が`$GOPATH/src/github.com/ava-labs/avalanchego` にインストールされていると仮定します。作成された5つのノードはそれぞれバリデータです。これらのノードのステーキングキーは、`$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt` などにあります。
 
-### Manually
+### 手動で
 
-To start the network:
+ネットワークを起動するには:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
@@ -44,11 +44,11 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --snow-sample-size=2 --snow-quorum-size=2 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --staking-enabled=true --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-### With Avash
+### Avashを使って
 
-We assume you’ve installed [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
+[Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) をインストールしたと仮定します。
 
-To open Avash:
+Avash を開くには:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avash
@@ -62,17 +62,17 @@ go build
 ./avash
 ```
 
-Now we’re in Avash. To start the network:
+今、私たちはAvashにいます。ネットワークを起動するには:
 
 ```cpp
 runscript scripts/five_node_staking.lua
 ```
 
-When you want to tear down the network, run `exit` to exit Avash.
+ネットワークを解体したい場合は、`exit`を実行してAvashを終了します。
 
-### Verifying Nodes are Connected <a id="verifying-nodes-are-connected"></a>
+### ノードが接続されていることを確認する<a id="verifying-nodes-are-connected"></a>
 
-We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
+ノードが接続されていることを確認するために、ノードのピアの1つを見ることができます。これを行うには、[`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers) を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-`peers` should have 4 entries:
+`peers` は 4 つのエントリーを持っている必要があります。
 
 ```cpp
 {
@@ -128,9 +128,9 @@ curl -X POST --data '{
 }
 ```
 
-### Getting AVAX <a id="getting-avax"></a>
+### AVAXの取得<a id="getting-avax"></a>
 
-When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain address that you can import in order to get AVAX. The private key for this address is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
+`--network-id=local` でネットワークを実行する場合、AVAX を取得するためにインポートできるX-Chainアドレスがあります。このアドレスに対する秘密鍵は`PrivateKey-ewoqjJP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGgztUrTXtNNです。`keystore ユーザーをノードに作成した後、このキーとその保有する資金をインポートできます。
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/platform' \
@@ -147,7 +147,7 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 }'
 ```
 
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), and [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+それでいい！Avalancheのローカルバージョンが稼働しています。[X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain)、[C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain)、[P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain)というデフォルトのブロックチェーンがあります。唯一のサブネットは、Primary Networkです。
 
-You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
+ネットワークにさらに多くのノードを追加できます。`db-dir`、`http-port`、`staking-port` に対してユニークな値を与えることを忘れないでください。
 
