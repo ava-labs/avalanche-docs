@@ -894,7 +894,10 @@ curl -X POST --data '{
 
 ### avm.getAddressTxs <a id="avm-get-address-txs-api"></a>
 
-Returns all transactions under the specified address. 
+Returns all transactions that change the balance of the given address.
+A transaction is said to change an address's balance if either is true:
+* A UTXO that the transaction consumes was at least partially owned by the address.
+* A UTXO that the transaction produces is at least partially owned by the address.
 
 Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
 
