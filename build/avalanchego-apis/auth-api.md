@@ -1,34 +1,34 @@
 # Auth API
 
-When you run a node, you can require that API calls have an authorization token attached. This API manages the creation and revocation of authorization tokens.
+ノードを実行するときに、APIコールにAuthorization Tokenが付属していることを要求できます。この API は、認可トークンの作成と失効を管理します。
 
-An authorization token provides access to one or more API endpoints. This is is useful for delegating access to a node’s APIs. Tokens expire after 12 hours.
+認可トークンにより、1つ以上のAPIエンドポイントへのアクセスが可能になります。これは、ノードの API にアクセスする際に便利です。トークンは12時間後に有効期限が切れます。
 
-An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
+API コールのヘッダーに認可トークンが提供されます。具体的には、ヘッダー`Authorization`には`Bearer TOKEN.GOES.HERE` \(`where TOKEN.GOES.HERE` is rundata token\)があります。
 
-This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+このAPIは[、コマンドライン引数--api-auth-required](../references/command-line-interface.md)``でノードが起動した場合にのみ到達可能です。このCLIなしでノードが起動された場合、APIコールでは認可トークンが不要なため、このAPIは到達できません。このAPIでは、認可トークンに到達する必要はありません。
 
-Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+Authorization tokenの作成は許可されなければなりません。`--api-auth-required` を使用してノードを実行する場合、`--api-auth-password` 引数で認可トークンパスワードを指定する必要があります。認可トークンを作成/取り消すには、このパスワードを提供する必要があります。
 
-Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+`--api-auth-required`でノードを実行すると、MetaMaskのようないくつかのツールでは、Authトークンを持っていないため、ノードにAPIコールを実行できない可能性があります。
 
-## Format
+## JP-JP-
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
+`JSON 2.0` RPC 形式を使用しています。JSON RPC 呼び出しの詳細については、[こちら](issuing-api-calls.md)を参照してください。
 
-## Endpoint
+## Endpoint-JP
 
 ```text
 /ext/auth
 ```
 
-## Methods
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri
 
 ### auth.newToken
 
-Creates a new authorization token that grants access to one or more API endpoints.
+1つ以上の API エンドポイントへのアクセスを許可する新しい認可トークンを作成します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 auth.newToken(
@@ -39,11 +39,11 @@ auth.newToken(
 ) -> {token: string}
 ```
 
-* `password` is this node’s authorization token password.
-* `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
-* `token` is the authorization token.
+* `password` はこのノードの認可トークンパスワードです。
+* `endpoints` は、生成されたトークンを使用してアクセスできるエンドポイントのリストです。`endpoints` には、`"*"` 要素が含まれている場合、生成されたトークンが API エンドポイントにアクセスできます。
+* `token` は認可トークンです。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -57,9 +57,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` \(ie the X-Chain\) and `/ext/info` \(ie the [info API](info-api.md).\)
+この呼び出しにより、API エンドポイント`/ext/bc/X` \(すなわちX-Chain\)および`/ext/info` \(すなわち[info API](info-api.md))へのアクセスを可能にする認可トークンが生成されます。\)
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -71,9 +71,9 @@ This call will generate an authorization token that allows access to API endpoin
 }
 ```
 
-This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
+この認証トークンは、APIコールに含まれている必要があります`。Authorization value Bearer eyJhbGciOiJIJIJIUzI1NiIsInR5cCI6IkpXVCJJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps```.
 
-For example, to call [`info.peers`](info-api.md#info-peers) with this token:
+例えば、このトークンで [`info.peers`](info-api.md#info-peers) を呼び出すには、次のようにします。
 
 ```cpp
 curl -X POST --data '{
@@ -87,9 +87,9 @@ curl -X POST --data '{
 
 ### auth.revokeToken
 
-Revoke a previously generated token. The given token will no longer grant access to any endpoint. If the token is invalid, does nothing.
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScri与えられたトークンにより、エンドポイントへのアクセスが許可されなくなります。トークンが無効である場合、何もありません。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 auth.revokeToken(
@@ -100,10 +100,10 @@ auth.revokeToken(
 ) -> {success: bool}
 ```
 
-* `password` is this node’s authorization token password.
-* `token` is the authorization token being revoked.
+* `password` はこのノードの認可トークンパスワードです。
+* `token` は、取り消される認可トークンです。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -117,7 +117,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -129,11 +129,11 @@ curl -X POST --data '{
 }
 ```
 
-### auth.changePassword
+### auth.changePasswordPassword
 
-Change this node’s authorization token password. Any authorization tokens created under an old password will become invalid.
+このノードの認可トークンパスワードを変更します。古いパスワードで作成された認可トークンは無効になります。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 auth.changePassword(
@@ -144,10 +144,10 @@ auth.changePassword(
 ) -> {success: bool}
 ```
 
-* `oldPassword` is this node’s current authorization token password.
-* `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `oldPassword`はこのノードの現在の認可トークンパスワードです。
+* `newPassword` は、このAPIコール後のノードの新しい認可トークンパスワードです。1-1024文字でなければなりません。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -161,7 +161,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
