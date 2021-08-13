@@ -1,8 +1,9 @@
-# Smart Contracts
+# Akıllı Sözleşmeler
 
-| Title | Description |
+| Başlık | Tarif edilmesi |
 | :--- | :--- |
-| [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Deploy and test a smart contract on Avalanche using Remix and MetaMask. |
-| [**Using Truffle with the Avalanche C-Chain**](using-truffle-with-the-avalanche-c-chain.md) | Using Truffle with the Avalanche's C-Chain, an instance of the Ethereum Virtual Machine \(EVM\) |
-| [**Add Avalanche to MetaMask programmatically**](add-avalanche-to-metamask-programmatically.md) | Simple tutorial showing how to add Avalanche network to MetaMask from your front-end code. |
+| [**Avalanche ve MetaMask Kullanılarak Akıllı Bir Sözleşme Gönder**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Remix ve on kullanarak Avalanche ile ilgili akıllı bir kontrat hazırlayıp test et. |
+| [**Avalanche C-Chain ile Truffle kullanıyor**](using-truffle-with-the-avalanche-c-chain.md) | Avalanche's C-Chain, ile Truffle kullanılarak Ethereum Sanal Makinesi (EVM\ |
+| [**Avalanche Programlama olarak Avalanche Ekle**](add-avalanche-to-metamask-programmatically.md) | Ön uç kodunuzdan Avalanche ağı nasıl to ekleneceğini gösteren basit bir ders ver. |
+| [**C-Chain Explorer üzerindeki Akıllı Sözleşmeleri Doğrulayın.**](verify-smart-contracts.md) | Akıllı sözleşmeleri doğruluyor. |
 
