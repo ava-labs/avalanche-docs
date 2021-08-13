@@ -1,29 +1,40 @@
-# Avash
+# Avance
 
-Avash is a temporary stateful shell execution environment used to deploy local and remote networks and run tests on them. Avalanche nodes locally deployed by Avash are exited when Avash exits.
+Avash est un environnement temporaire d'exécution de shell utilisé pour déployer et tester sur les réseaux Avalanche. Les nœuds avalanches déployés localement par Avash sont sortis lorsque les issues Avash
 
-Avash provides the ability to run Lua scripts which can execute a sequence of shell commands in Avash. This allows for automation of regular tasks. For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.
+Avash fournit la capacité d'exécuter les scripts Lua, qui peuvent exécuter une séquence de commandes shell dans Avash. Cela permet l'automatisation des tâches. Par exemple, on pourrait créer un script Lua pour déployer un réseau de nœuds Avalanche où chaque nœud a une certaine configuration donnée. Cela facilite les tests.
 
-## Installation <a id="installation"></a>
+## Installation<a id="installation"></a>
 
-### Requirements <a id="requirements"></a>
+### Exigences minimales<a id="requirements"></a>
 
-* Golang 1.13+
-* An Avalanche Client Implementing Avalanche Standard CLI Flags”
+* Golang 1.15.5 ou plus tard
+* AvalancheGo
 
-### Quick Setup <a id="quick-setup"></a>
+### Configuration rapide<a id="quick-setup"></a>
 
-1. Install and build an Avalanche client
-2. `cd $GOPATH`
-3. `go get github.com/ava-labs/avash`
-4. `cd src/github.com/ava-labs/avash`
-5. `go build`
+Télécharger et construire Avash:
 
-## Configuration <a id="configuration"></a>
+```bash
+git clone https://github.com/ava-labs/avash.git; cd avash; go build
+```
 
-While Avash can be started without a premade configuration file, it’s available as an option for tweaking some of the shell’s global settings. Avash will search for `.avash.yaml` in the `$HOME` directory by default, but the `--config` flag can be used to set a custom configuration filepath to look for.
+Pour exécuter Avash et incendier un réseau de mise en ligne de 5 noeuds:
 
-Below is the format of an Avash configuration file:
+```bash
+./avash
+Config file set: /Users/username/.avash.yaml
+Avash successfully configured.
+avash> runscript scripts/five_node_staking.lua
+RunScript: Running scripts/five_node_staking.lua
+RunScript: Successfully ran scripts/five_node_staking.lua:
+```
+
+## Configuration<a id="configuration"></a>
+
+Alors que Avash peut être démarré sans un fichier de configuration préfabriqué, il est disponible comme une option pour la tweaking certains des paramètres globaux de la shell. Avash recherchera `.avash.yaml` dans le répertoire `$HOME` par défaut, mais le drapeau `--config` peut être utilisé pour définir un fichier de configuration personnalisé à chercher.
+
+Ci-dessous est le format d'un fichier de configuration Avash :
 
 ```text
 avalancheLocation: <filepath>
@@ -34,30 +45,30 @@ log:
   dir: <directory>
 ```
 
-The field arguments are described as follows:
+Les arguments de terrain sont décrits comme suit:
 
-* `<filepath>` - A full path to a file. Example: `/home/username/file.txt`
-* `<directory>` - A full path to a directory. Example: `/home/username/folder`
-* `<log-level>` - A valid log level to filter logged messages. Must be one of: `{verbo, debug, info, warn, error, fatal, off}`
+* `<filepath>` - Un chemin complet vers un fichier. Exemple: `/home/username/file.txt`
+* `<directory>` - Un chemin complet vers un répertoire. Exemple: `/home/nom` d'utilisateur/dossier
+* `<log-level>` - Un niveau de log valide pour filtrer les messages enregistrés. Doit être l'un des: `{verbo, debug, info, avertissement, erreur, fatal, off}`
 
-### Fields <a id="fields"></a>
+### Champs<a id="fields"></a>
 
 **avalancheLocation**
 
 ```text
-File path to Avalanche binary.
+Path to AvalancheGo binary.
 
 Type:
   optional, <filepath>
 
 Default:
-  $GOPATH/src/github.com/ava-labs/avalanchego/build/avalanche
+  $GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego
 ```
 
 **datadir**
 
 ```text
-Directory for Avash data store.
+Path to store Avash data at.
 
 Type:
   optional, <directory>
@@ -69,7 +80,7 @@ Default:
 **log.terminal**
 
 ```text
-Allowed output level for all messages logged to the shell terminal.
+Log level for messages logged to terminal.
 
 Type:
   optional, <log-level>
@@ -81,7 +92,7 @@ Default:
 **log.logfile**
 
 ```text
-Allowed output level for all messages logged to the log file.
+Log level for messages logged to log files.
 
 Type:
   optional, <log-level>
@@ -93,7 +104,7 @@ Default:
 **log.dir**
 
 ```text
-Directory for log file.
+Path to put log directory at.
 
 Type:
   optional, <directory>
@@ -102,46 +113,46 @@ Default:
   <datadir>/logs
 ```
 
-## Using Avash <a id="using-avash"></a>
+## Utilisation Using<a id="using-avash"></a>
 
-### Opening a shell <a id="opening-a-shell"></a>
+### Ouverture de la coque<a id="opening-a-shell"></a>
 
-Start a new instance of Avash with `./avash`.
+Démarrez une nouvelle instance of avec `./avash`.
 
-Run `help` to see the commands available.
+Exécutez `l'aide` pour voir les commandes disponibles.
 
-We can also run `help [command]` to see the list of options available for that command.
+Exécuter `l'aide [commande]` pour voir la liste des options disponibles pour cette commande.
 
-Ex:
+Ex :
 
 ```text
 help procmanager
 help procmanager start
 ```
 
-### Commands <a id="commands"></a>
+### Commandes<a id="commands"></a>
 
-Avash comes with the following root commands:
+Avash est livré avec les commandes root suivantes:
 
-* `avawallet` - Tools for interacting with Avalanche Payments over the network.
-* `callrpc` - Issues an RPC call to a node.
-* `exit` - Exit the shell.
-* `help` - Help about any command.
-* `network` - Tools for interfacing with remote hosts.
-* `procmanager` - Access the process manager for the avash client.
-* `runscript` - Runs the provided script.
-* `setoutput` - Sets shell log output.
-* `startnode` - Starts a node process and gives it a name.
-* `varstore` - Tools for creating variable stores and printing variables within them.
+* `avawallet` - Outils pour interagir avec les paiements avalanches sur le réseau.
+* `callrpc` - émet un appel RPC à un nœud.
+* `sortie` - Sort la coquille.
+* `aide` - Affiche le texte d'aide.
+* `réseau` - Outils d'interface avec les hôtes distants.
+* `procmanager` - Interagir avec le gestionnaire de processus Avash.
+* `runscript` - exécute le script fourni.
+* `setoutput` - Définit la sortie du journal de la shell.
+* `startnode` - Commence un nœud.
+* `varstore` - Outils pour la création de variables stockées et d'impression à leur sein.
 
-These can be enumerated or auto-completed using the tab key and are explained in detail below.
+Ceux-ci peuvent être énumérés ou auto-completed à l'aide de la clé de l'onglet et sont expliqués en détail ci-dessous.
 
 **avawallet**
 
-**Warning**: Like all things in Avash, this wallet is temporarily held in memory and all data is cleaned up on exit. This should be used for testing.
+**Attention**: ce portefeuille est tenu en mémoire et toutes les données sont essuyées à la sortie. Ceci ne devrait être utilisé que pour les tests.
 
 ```text
-Tools for interacting with Avalanche Payments over the network. Using this 
+Tools for interacting with Avalanche Payments over the network. Using this
     command we can create, send, and get the status of a transaction.
 
 Usage:
@@ -172,7 +183,7 @@ Usage:
   callrpc [node name] [endpoint] [method] [JSON params] [var scope] [var name]
 ```
 
-**exit**
+**sortie sortie**
 
 ```text
 Exit the shell, attempting to gracefully stop all processes first.
@@ -181,7 +192,7 @@ Usage:
   avash exit
 ```
 
-**help**
+**aide**
 
 ```text
 Help provides help for any command in the application.
@@ -191,7 +202,7 @@ Usage:
   avash help [command] [flags]
 ```
 
-**network**
+**réseau**
 
 ```text
 Tools for interfacing with remote hosts. Using this command we can
@@ -207,7 +218,7 @@ Available Commands:
 
 **CONFIGURATION**
 
-To deploy and remove networks, a `.yaml` network configuration file is required. An example is provided in the Avash codebase at `network/example.network.yaml` and should have the following format:
+Pour déployer et supprimer les réseaux, un fichier de configuration réseau `.yaml` est nécessaire. Un exemple est fourni dans la base de code Avash à [`example.network.yaml`](https://github.com/ava-labs/avash/blob/master/example.network.yaml) et devrait avoir le format suivant:
 
 ```text
 # List of hosts
@@ -223,14 +234,12 @@ hosts:
         # ...
 ```
 
-This format can be scaled to simultaneously deploy many nodes on many hosts, using `-` in YAML syntax to add new elements to the host list and each host’s node list. A full list of CLI flags can be found [here](https://docs.avax.network/v1.0/en/references/command-line-interface/), where `--node-flag` corresponds to `nodeflag` in our configuration file.
+Cela peut être utilisé pour déployer simultanément de nombreux nœuds sur de nombreux hôtes. Une liste complète des drapeaux CLI peut être trouvée [ici](https://docs.avax.network/build/references/command-line-interface).
 
 **procmanager**
 
 ```text
-Access the process manager for the avash client. Using this 
-    command we can list, stop, and start processes registered with the 
-    process manager.
+Used to list, stop, and start nodes.
 
 Usage:
   avash procmanager [command] [flags]
@@ -270,51 +279,17 @@ Usage:
 ```text
 Starts an Avalanche client node using procmanager and gives it a name. Example:
 
-startnode MyNode1 --public-ip=127.0.0.1 --staking-port=9651 --http-port=9650 ... 
+startnode MyNode1 --public-ip=127.0.0.1 --staking-port=9651 --http-port=9650 ...
 
 Usage:
   avash startnode [node name] args... [flags]
-
-Flags:
-      --assertions-enabled                   Turn on assertion execution. (default true)
-      --avax-tx-fee uint                     Transaction fee, in nAVAX.
-      --bootstrap-ids string                 Comma separated list of bootstrap peer ids to connect to. Example: JR4dVmy6ffUGAKCBDkyCbeZbyHQBeDsET,8CrVPQZ4VSqgL8zTdvL14G8HqAfrBr4z
-      --bootstrap-ips string                 Comma separated list of bootstrap nodes to connect to. Example: 127.0.0.1:9630,127.0.0.1:9620
-      --client-location string               Path to Avalanche node client, defaulting to the config file's value.
-      --data-dir string                      Name of directory for the data stash.
-      --db-dir string                        Database directory for Avalanche state. (default "db1")
-      --db-enabled                           Turn on persistent storage. (default true)
-  -h, --help                                 help for startnode
-      --http-port uint                       Port of the HTTP server. (default 9650)
-      --http-tls-cert-file string            TLS certificate file for the HTTPS server.
-      --http-tls-enabled                     Upgrade the HTTP server to HTTPS.
-      --http-tls-key-file string             TLS private key file for the HTTPS server.
-      --log-dir string                       Name of directory for the node's logging. (default "logs")
-      --log-level string                     Specify the log level. Should be one of {all, debug, info, warn, error, fatal, off} (default "all")
-      --meta string                          Override default metadata for the node process.
-      --network-id string                    Network ID this node will connect to. (default "12345")
-      --public-ip string                     Public IP of this node. (default "127.0.0.1")
-      --signature-verification-enabled       Turn on signature verification. (default true)
-      --snow-avalanche-batch-size int        Number of operations to batch in each new vertex. (default 30)
-      --snow-avalanche-num-parents int       Number of vertexes for reference from each new vertex. (default 5)
-      --snow-quorum-size int                 Alpha value to use for required number positive results. (default 2)
-      --snow-rogue-commit-threshold int      Beta value to use for rogue transactions. (default 10)
-      --snow-sample-size int                 Number of nodes to query for each network poll. (default 2)
-      --snow-virtuous-commit-threshold int   Beta value to use for virtuous transactions. (default 5)
-      --staking-port uint                    Port of the consensus server. (default 9651)
-      --staking-tls-cert-file string         TLS certificate file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.crt
-      --p2p-tls-enabled                      Require TLS authentication for all P2P connections.
-      --staking-enabled                  Utilize staking (also requires p2p tls to be enabled).
-      --staking-tls-key-file string          TLS private key file for staking connections. Relative to the avash binary if doesn't start with '/'. Ex: certs/keys1/staker.key
-      --xput-server-port uint                Port of the deprecated throughput test server. (default 9652)
 ```
 
 **varstore**
 
 ```text
-Tools for creating variable stores and printing variables within them. Using this 
-    command we can create variable stores, list all variables they store, and print data 
-    placed into these stores. Variable assignment and update is often managed by avash commands.
+Tools for creating variable stores and printing variables within them.
+Using this command we can create variable stores, list all variables they store, and print data placed into these stores.
 
 Usage:
   avash varstore [command] [flags]
@@ -328,24 +303,24 @@ Available Commands:
   vardump     Writes the variable to a file.
 ```
 
-## Writing Scripts <a id="writing-scripts"></a>
+## Ecriture des Scripts<a id="writing-scripts"></a>
 
-Avash imports the [gopher-lua](https://github.com/yuin/gopher-lua) to run Lua scripts. Scripts have hooks available to them which allows the user to write code which invokes the current Avash environment.
+Avash utilise [gopher-lua](https://github.com/yuin/gopher-lua) pour exécuter les scripts Lua. Les scripts peuvent utiliser des crochets pour permettre à l'utilisateur d'écrire le code qui invoque l'environnement Avash actuel.
 
-The functions available to Lua are:
+Les fonctions disponibles à Lua sont:
 
-* `avash_call` - Takes a string and runs it as an Avash command, returning output
-* `avash_sleepmicro` - Takes an unsigned integer representing microseconds and sleeps for that long
-* `avash_setvar` - Takes a variable scope \(string\), a variable name \(string\), and a variable \(string\) and places it in the variable store. The scope must already have been created.
+* `avash_call` - Prend une chaîne et la exécute comme une commande Avash, retournant la sortie
+* `avash_sleepmicro` - Prend un entier non signé représentant les microsecondes et dormons pour cette longue
+* `avash_setvar` - Prend une étendue variable \(string\), un nom variable \(string\), et une variable \(string\) et la place dans le magasin variable. La portée doit déjà avoir été créée.
 
-When writing Lua, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
+Lors de l'écriture des scripts Lua, la fonctionnalité Lua standard est disponible pour automatiser l'exécution des séries de commandes Avash. Cela permet à un développeur d'automatiser :
 
-* Local network deployments
-* Sending transactions
-* Order transaction test cases
-* Save the value of UTXO sets and test results to disk
-* Compare the values of two nodes UTXO sets
-* Track expected results and compare them with real nodes
+* Déploiements de réseaux locaux
+* Opérations d'envoi
+* Commander des tests de transaction
+* Sauvegardez la valeur des ensembles UTXO et résultats de test sur le disque
+* Comparer les valeurs des deux ensembles UTXO
+* Suivre les résultats attendus et les comparer avec les nœuds réels
 
-Example Lua scripts are in the `./scripts` folder.
+Exemple Les scripts Lua sont dans le [dossier `scripts`](https://github.com/ava-labs/avash/tree/master/scripts).
 
