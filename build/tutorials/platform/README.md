@@ -1,18 +1,15 @@
-# Platform
+# Plateforme de la plate-forme
 
-[**Add a Validator**](add-a-validator.md)**:** add a node to the [Primary Network](../../../learn/platform-overview/) and a [subnet](../../../learn/platform-overview/#subnets) on Avalanche.
-
-[**Create a Blockchain**](create-a-new-blockchain.md)**:** create a blockchain by creating a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain).
-
-[**Create a Local Test Network**](create-a-local-test-network.md)**:** create a local Avalanche test network
-
-[**Create a Subnet**](create-a-subnet.md)**:** create a new [subnet](../../../learn/platform-overview/#subnets)
-
-[**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md)**:** create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines)
-
-[**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)**:** deploy and test a smart contract on Avalanche using Remix and MetaMask
-
-[**Set up Node Monitoring**](setting-up-node-monitoring.md)**:** set up infrastructure to monitor an instance of AvalancheGo
-
-[**Transfer AVAX Between X-Chain, P-Chain, and C-Chain**](transfer-avax-between-x-chain-and-p-chain.md)**:** send AVAX between all of the major blockchains in Avalanche's [Primary Network](../../../learn/platform-overview/)
+| Titre | Description |
+| :--- | :--- |
+| [**Port votre dapp Ethereum**](launch-your-ethereum-dapp.md) | Guide pour le transport des apps existantes à la plateforme Avalanche |
+| [**Créer une chaîne de verrouillage Exécuter l'AVM**](create-avm-blockchain.md) | Créez une nouvelle instance de la [machine virtuelle Avalanche \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |
+| [**Créer un réseau local de test**](create-a-local-test-network.md) | Créer un réseau local de test d'avalanche. |
+| [**Créer un sous-réseau**](create-a-subnet.md) | Créer un nouveau [sous-réseau](../../../learn/platform-overview/#subnets). |
+| [**Créer une machine virtuelle \(VM\)**](create-a-virtual-machine-vm.md) | Créer une [machine virtuelle](../../../learn/platform-overview/#virtual-machines) très simple \(VM\). |
+| [**Créer une chaîne de blocage personnalisée**](create-custom-blockchain.md) | Créer une chaîne de blocs personnalisée avec [la machine virtuelle \(VM\)](../../../learn/platform-overview/#virtual-machines). |
+| [**Configurez votre livre Nano S avec Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Configurez votre livre avec Ledger Live et le portefeuille Avalanche |
+| [**Transfert AVAX entre la chaîne X-Chain la chaîne P**](transfer-avax-between-x-chain-and-p-chain.md) | Envoyer AVAX entre la chaîne X-Chain la chaîne P- |
+| [**Transfert AVAX entre la chaîne X-Chain la chaîne C**](transfer-avax-between-x-chain-and-c-chain.md) | Envoyer AVAX entre la chaîne X-Chain la chaîne C |
+| [**Intégration avec la chaîne C**](integrate-exchange-with-avalanche.md) | Lignes directrices pour l'intégration des échanges avec la chaîne Ethereum-compatible Ethereum |
 
