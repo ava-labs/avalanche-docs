@@ -1,36 +1,36 @@
-# Admin API
+# API yönetir
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+Bu API şifre ölçümü ve hata hattını ölçmek için kullanılabilir. Admin API'nin güvenlik nedenleri yüzünden varsayılan olarak devre dışı bırakıldığını unutmayın. Admin API etkinleştirilebilir bir düğüm çalıştırmak için, [komut satırı argümanı](../references/command-line-interface.md) `use =doğru`.
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Bu API, `json 2.0` RPC formatını kullanır.
 
-{% page-ref page="issuing-api-calls.md" %}
+{% page-ref page="issuing-api-calls.md" page="issuing-api-calls.md" }
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/admin
 ```
 
-## API Methods
+## API Yöntemleri
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+API sonlu bir isim belirleyin, API için farklı bir son. Orijinal sonumuz hala işe yarayacak. Bu değişim, sadece bu düğümleri etkiler; diğer düğümler bu takma isimlerden haberdar olmayacaktır.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-* The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* `Sonucu` API'nin orijinal `sonucudur.` Sonucu sadece sonunun `/ext/sonrası` kısmını içermelidir.
+* API takma adı artık `soy/takma adıyla` adlandırılabilir.
+* `Takma` isimler en çok 512 karakterden oluşabilir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -44,7 +44,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -56,13 +56,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+to yapılan çağrılar ya `/ext/bc/X` ya da benzer şekilde, `/ext/bc/X` yapılabilir.
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+Bir blok zinciri takma isim ver, blok zincirinin kimlik kullandıkları herhangi bir yerde kullanılabilecek farklı bir isim ver.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.aliasChain(
@@ -73,10 +73,10 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `Zincir` blok zincirinin kimliğidir.
+* `Takma` isimler şu anda blok zincirinin kimlik (API sonları olarak kullanılabilir) \)
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -102,13 +102,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+Şimdi, kimliği `sV6o671RtkGBcno1FiaDbVcc2sG5aVXMZYZ4VQAWmJQNM'yi` API çağrıları `yaparak` /ext/bc/sV6o671RtkGBcno1FiaDbccv2sG5aVXMMM, bir kişi de ApI çağrıları yaparak `API` ile etkileşim yapabilir.
 
-### admin.getChainAliases
+### admin.getChainAliases admin.getChainAliases lar
 
-Returns the aliases of the chain
+Zincirin takma isimlerini geri getiriyor
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.getChainAliases(
@@ -118,9 +118,9 @@ admin.getChainAliases(
 ) -> {aliases:string[]}
 ```
 
-* `chain` is the blockchain’s ID.
+* `Zincir` blok zincirinin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -149,17 +149,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+### Admin. admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+`Profili` kilitlemek için muteks istatistikleri profili yazar.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -170,7 +170,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -182,17 +182,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+### Admin. Bellek Profili
 
-Writes a memory profile of the to `mem.profile`.
+`Profilin` bir bellek profilini yazar.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -203,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -215,17 +215,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### Admin. admin.startCPUProfiler
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Düğümün CPU kullanımını profiling başla. Durmak için, `yöneticiyi` ara. Durakta, profili `cpu.profile` yazarak yazıyor.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -236,7 +236,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -248,17 +248,17 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### Admin. admin.stopCPUProfiler
 
-Stop the CPU profile that was previously started.
+Daha önce başlatılan CPU profilini durdurun.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```text
 curl -X POST --data '{
@@ -268,7 +268,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
