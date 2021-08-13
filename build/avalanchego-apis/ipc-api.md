@@ -1,14 +1,14 @@
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+IPC APIにより、ユーザーはブロックチェーンに公開するUNIXドメインソケットを作成できます。ブロックチェーンがvertex/blockを受け入れると、それをソケットに公開し、内部に含まれる決定は別のものに公開されます。
 
-A node will only expose this API if it is started with [command line argument](../references/command-line-interface.md) `api-ipcs-enabled=true`.
+Node は、[コマンドライン引数](../references/command-line-interface.md) `api-ipcs-enabled=true` で起動した場合にのみこのAPIを公開します。
 
-## IPC Message Format
+## IPCメッセージフォーマット
 
-Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.
+Socket メッセージはBigEndian形式の64bit整数で構成され、その多くはそのままです。
 
-Example:
+JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
 ```text
 Sending:
@@ -17,35 +17,35 @@ Writes to the socket:
     [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x41, 0x76, 0x61, 0x78]
 ```
 
-## IPC Socket URL Format
+## IPC Socket URL フォーマット
 
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
+ソケットの名前は `<network_id>-<chain_id>-<event_type>` という形式で、`<event_type>` は`コンセンサス`か`意思決定`です。コンセンサスソケットはverticiesとブロックを受け取り、決定ソケットは個々のトランザクションを再生します。
 
-## Format
+## JP-JP-
 
-This API uses the `json 2.0` RPC format.
+`JSON 2.0` RPC 形式を使用しています。
 
-## Endpoint
+## Endpoint-JP
 
-`/ext/ipcs`
+`/ext/ipcs/JP`
 
-## Methods
+## JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-JavaScript-Java
 
-### ipcs.publishBlockchain
+### ipcs.publishBlockchain-JP
 
-Register a blockchain so it publishes accepted vertices to a Unix domain socket.
+ブロックチェーンに登録して、受け入れられた頂点をUNIXドメインソケットに公開します。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
-* `blockchainID` is the blockchain that will publish accepted vertices.
-* `consensusURL` is the path of the Unix domain socket the vertices are published to.
-* `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+* `blockchainID`は、受け入れられた頂点を公開するブロックチェーンです。
+* `consensusURL` は、頂点が公開される Unix ドメインソケットのパスです。
+* `design`-URL はトランザクションが公開される Unix ドメインソケットのパスです。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -58,7 +58,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -73,17 +73,17 @@ curl -X POST --data '{
 
 ### ipcs.unpublishBlockchain
 
-Deregister a blockchain so that it no longer publishes to a Unix domain socket.
+ブロックチェーンをDeregisterで、Unixドメインソケットに公開されなくなります。
 
-#### **Signature**
+#### **JPS-JP-JP**
 
 ```cpp
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
-* `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
+* `blockchainID`は、UNIXドメインソケットに公開されなくなったブロックチェーンです。
 
-#### **Example Call**
+#### **Call 例**
 
 ```cpp
 curl -X POST --data '{
@@ -96,7 +96,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
