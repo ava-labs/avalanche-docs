@@ -1,18 +1,21 @@
 ---
-description: Learn more about Avalanche's transaction fees
+description: En savoir plus sur les frais de transaction d'Avalanche
+
 ---
 
-# Transaction Fees
+# Frais de transaction
 
-In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned \(destroyed forever\).**
+Afin d'éviter les spams, les transactions sur Avalanche nécessitent le paiement d'une taxe de transaction. Les frais sont payés en [AVAX](../../#avalanche-avax-token). **La taxe de transaction est brûlée \(détruite pour toujours\).**
 
-When you issue a transaction through Avalanche’s API, the transaction fee is automatically deducted from one of the addresses you control.
+Lorsque vous émettez une transaction via l'API d'Avalanche, les frais de transaction sont automatiquement déduits de l'une des adresses que vous contrôlez.
 
-## Fee Schedule
+## Calendrier des frais
 
-Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
+Différents types de transactions nécessitent le paiement d'une taxe de transaction différente. Ce tableau montre le calendrier des frais de transaction :
 
-```text
+{% allusion style="warning" %} Le prix du gaz [C-Chain](./#contract-chain-c-chain) est 225 nAVAX \(225 GWei\). La limite de gaz de la chaîne C est de 8 \* 10e6 \(8,000,000\). {% endhint %}
+
+```cpp
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
 +----------+-------------------+------------------------+
@@ -38,7 +41,9 @@ Different types of transactions require payment of a different transaction fee. 
 +----------+-------------------+------------------------+
 | X        : Export AVAX       |                  0.001 |
 +----------+-------------------+------------------------+
-```
+| C        : Simple send       |           (*) 0.004725 |
++----------+-------------------+------------------------+
 
-The [C-Chain](./#contract-chain-c-chain) gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
+(*) 21000 gas units at 225 nAVAX gas price
+```
 
