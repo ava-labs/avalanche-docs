@@ -1,10 +1,10 @@
-# Upgrade Your AvalancheGo Node
+# Çığ Düğümünü Yükselt
 
-{% embed url="https://youtu.be/o4Fww-sHoaQ" caption="" %}
+{% embed url="https:/youtu.be/o4Fw-sHoaQ" başlık="% }
 
-## **Backup your node**
+## **Düğününü geri ver**
 
-Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
+Düğününüzü güncellemeden önce, ağ üzerindeki your tanımlamak için kullanılan yedek dosyalarınızı yedeklemenizi tavsiye eder. Öntanımlı kurulumda onları komutları uygulayarak kopyalayabilirsiniz:
 
 ```text
 cd
@@ -12,19 +12,19 @@ cp ~/.avalanchego/staking/staker.crt .
 cp ~/.avalanchego/staking/staker.key .
 ```
 
-Then download `staker.crt` and `staker.key` files and keep them somewhere safe and private. If anything happens to your node or the machine node runs on, these files can be used to fully recreate your node.
+Sonra `staker.crt` ve `staker.key` dosyalarını indirip güvenli ve özel bir yerde tut. Düğününüze ya da makine düğümüne bir şey olursa bu dosyalar node tamamen yeniden oluşturmak için kullanılabilir.
 
-If you use your node for development purposes and have keystore users on your node, you should back up those too.
+Eğer gelişim amaçları için your kullanırsanız ve keystore anahtar kullanıcıları varsa, bunları da desteklemelisiniz.
 
-## Node installed using the installer script
+## Düğüm yüklenmiş installer betiğini kullanarak
 
-If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+Düğününüzü [node](set-up-node-with-installer.md) installer yükseltmek için yükleyin, your yeniden çalıştırın.
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+AvalancheGo çoktan kurduğunuzu anlayacaktır:
 
 ```text
 AvalancheGo installer
@@ -35,7 +35,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Daha sonra your son sürümüne yükseltecek ve bittikten sonra düğümleri tekrar açacak ve son sürümle ilgili bilgileri yazdıracak:
 
 ```text
 Node upgraded, starting service...
@@ -44,141 +44,132 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-And that is it, your node is upgraded to the latest version.
+Ve işte bu kadar, düğümünüz son versiyonuna yükseltildi.
 
-If you installed your node manually, proceed with the rest of the tutorial.
+Eğer your elle yerleştirdiyseniz, diğer derslere devam edin.
 
-## **Stop the old node version**
+## **Eski düğümlü sürümünü durdur**
 
-After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
+Yedek güvenliğe alındıktan sonra your değiştirmeye başlayabilirsiniz. Şu anda çalıştırılan sürümünü durdurarak başlayın.
 
-### Node running from terminal
+### Terminalden akan düğüm
 
-If your node is running in a terminal stop it by pressing `ctrl+c`.
+Eğer düğümünüz terminal içinde çalışıyorsa `ctrl+c` tuşuyla durdurun.
 
-### Node running as a service
+### Bir servis olarak çalıştırılan düğüm
 
-If your node is running as a service, stop it by entering:
+Eğer düğümünüz bir hizmet olarak çalışıyorsa girerek durdurun:
 
-`sudo systemctl stop avalanchego.service`
+`Sudo systemctl durdur stop`
 
-\(your service may be named differently, `avalanche.service`, or similar\)
+\ (Hizmetinize farklı olarak adlandırılabilir, `avalanche.service`,
 
-### Node running in background
+### Arka planda çalıştırılan düğüm
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+Eğer düğümünüz arka planda çalışıyorsa\ (örneğin, `with` çalışırken) o zaman `düğümü çalıştırarak çöz by   grep avalanche`. çalıştırarak çalıştıran süreci bulun. Bu da çıktıları şöyle üretir:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-In this example, second line shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+Bu örnekte, ikinci satır düğümünüz hakkında bilgi verir. Bu durumda `2630` sayılı işlem kimliğine dikkat edin. `- 2630` öldürerek düğmeyi durdurun.
 
-Now we are ready to download the new version of the node. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+Şimdi düğümün yeni versiyonunu indirmeye hazırız. Kaynak kodunu indirip ikili programı kurabilirsiniz, ya da önceden yapılmış ikili aryayı indirebilirsiniz. İkisini de yapmana gerek yok.
 
-Downloading pre-built binary is easier and recommended if you're just looking to run your own node and stake on it.
+Önceden yapılmış ikili yazıları indirmek daha kolay ve kendi düğümünü çalıştırmak ve kazığı kazığa kazık atmak istiyorsan önerilir.
 
-Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+[Kaynağından](upgrade-your-avalanchego-node.md#build-from-source) düğümü inşa etmek tavsiye edilir, eğer Avalanche'i deneye ve geliştirmek isteyen bir geliştirici iseniz.
 
-## **Download Pre-built Binary**
+## **Öncesi İkili İndir**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Eğer kendi binası yerine önceden inşa edilmiş bir ikili indirmek istiyorsanız [bizim sürümler](https://github.com/ava-labs/avalanchego/releases) sayfamıza gidin ve istediğiniz salıverilmeyi seçin. \)
 
-Under `Assets`, select the appropriate file.
+`Varlıklar` altında, uygun dosyayı seçin.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+MacOS için:   İndirme: `avalanchego-macos-<VERSION>.zip`   Unzip: `unzip avalanchego-macos-<VERSION>.zip`   Ortaya çıkan klasör olan `avalanchego-<VERSION>`, ikili içerir.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+PC'ler veya bulut sağlayıcıları için Linux için:   İndirme: avalanchego-linux-amd64, `avalanchego-linux-amd64-<VERSION>.tar.gz`   Unzip: `tar - xvf avalanchego-linux-amd64<VERSION>.tar.gz`   Ortaya çıkan klasör `avalanchego-<VERSION>-linux`, ikili içerir.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+RaspberryPi4 veya benzer Arm64 tabanlı bilgisayarlar için Linux için:   İndirme: `avalanchego-linux-arm64<VERSION>.tar.gz`   Unzip: `tar - xvf avalanchego-linux-arm64<VERSION>.tar.gz`   Ortaya çıkan klasör `avalanchego-<VERSION>-linux`, ikili içerir.
 
-You are now ready to run the new version of the node.
+Şimdi düğümün yeni versiyonunu çalıştırmaya hazırsın.
 
-### Running the node from terminal
+### Terminalden düğümleri çalıştırıyor
 
-If you are using the pre-built binaries on MacOS:
+Eğer on önceden inşa edilmiş ikili harfleri kullanıyorsanız:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Linux'ta önceden inşa edilmiş ikili kullanacaksanız:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Add `nohup` at the start of the command if you want to run the node in the background.
+Eğer arka plandaki düğmeyi çalıştırmak istiyorsanız komutun başlangıcına `nohup` ekle.
 
-### Running the node as a service
+### Düğümü bir servis olarak çalıştırıyorum.
 
-If you're running the node as a service, you need to replace the old binaries with the new ones.
+Eğer düğümü bir hizmet olarak çalıştırıyorsan, eski ikili harfleri yenileriyle değiştirmelisin.
 
-`cp -r avalanchego-<VERSION>-linux/* <DIRECTORY_WITH_OLD_BINARIES>`
+`cp - r avalanchego-<VERSION>-linux/* <DIRECTORY_with_OLD_BINARIES>`
 
-and then restart the service with `sudo systemctl start avalanchego.service`.
+Sonra da servisi `sudo sistemiyle` yeniden başlat.
 
-## **Build from source**
+## **Kaynaktan yapılıyor**
 
-First clone our Github repo \(you can skip this step if you’ve done this before\):
+İlk klonumuz Github repo-- (eğer bunu daha önce yaptıysanız bu adımı atabilirsiniz):
 
 ```text
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
-Then move to the avalanchego directory:
+Sonra da avalanchego dizine geç:
 
 ```text
 cd avalanchego
 ```
 
-Pull the latest code:
+Son kodu çıkar:
 
 ```text
 git pull
 ```
 
-NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout tags/<tag>` \(where `<tag>` is the latest release tag; for example `v1.3.2`\) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository \(in which case you should check out to a branch and to the ordinary merges\).
+Not: Ana şubesi son etiketi ile güncellenmediyse, doğrudan çalıştırılan `git git git getir, tüm etiketler` ve sonra `git` --\ \(<tag> burada `<tag>` en son etiket; <tagdır ; `örneğin v1,3.2\) ile git` etiket, maket çekme yerine `v1.)` ile doğrudan ulaşabilirsiniz. Yerel kopyanızın "kopyalanmış başlık" durumunda olacağınıza dikkat edin, bu bir sorun değil, eğer kaynak için değişiklik yapmazsanız bu sorun değil.\ (bu durumda bir dal ve sıradan merges\ 'a başvurmanız gerekir). Ayrıca `bu` bayrağın yerel değişiklikleri göz ardı edeceğine dikkat edin.
 
-Check that your local code is up to date. Do:
+Yerel kodunuzun güncel olup olmadığını kontrol edin. Do:
 
 ```text
 git rev-parse HEAD
 ```
 
-and check that the first 7 characters printed match the Latest commit field on our [Github.](https://github.com/ava-labs/avalanchego)
+Ve ilk 7 karakterin [our](https://github.com/ava-labs/avalanchego) en son çalışma alanıyla eşleştiğini kontrol et.
 
-NOTE: if you used the `git checkout tags/<tag>` then these first 7 characters should match commit hash of that tag.
+Not: `Eğer git kontrol tags/<tag>` kullanırsanız bu ilk 7 karakterler bu etiketin özetini kullanacaktır.
 
-Now build the binary:
+Şimdi ikili yap:
 
 ```text
 ./scripts/build.sh
 ```
 
-This should print:
+Bu basılmalı:
 
 ```text
 Build Successful
 ```
 
-You can check what version you’re running by doing:
+Hangi versiyonunu kullandığınıza bakabilirsiniz:
 
 ```text
 ./build/avalanchego --version
 ```
 
-You can run your node with:
+Düğününü şöyle çalıştırabilirsin:
 
 ```text
 ./build/avalanchego
