@@ -2,6 +2,50 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## PRE\_RELEASE v1.5.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji)\)
+
+**Please note that this release is unable to run mainnet - and will display "this node version doesn't support mainnet" if attempted to run with a mainnet configuration. If you run a mainnet node, no action is required until the official release is published next week.**
+
+**This change is not backwards compatible with previous releases.**
+
+This upgrade adds dynamic fees to the C-chain, along with various other improvements.
+
+The changes in the upgrade go into effect at 3 PM EDT, August 16th 2021 on the Fuji testnet. After Fuji is updated and verified, a mainnet compatible release will be published.
+
+**Network Upgrades**
+
+* Added dynamic fee calculations to the C-chain.
+* Increased `CreateSubnetTx` and `CreateChainTx` fees.
+* Fixed heap corruption bug in delegator validation.
+* Enforced `MaxStakeWeight` for delegation transactions.
+
+**Client Upgrades**
+
+* Added transaction indexing capabilities to the X-chain to enable historical lookups of transactions by address and asset.
+* Added `./avalanchego` as the default command in the docker image.
+* Used static dependency versions in the docker image.
+* Removed database migration support and deamon runner.
+* Refactored node config parsing.
+* Optimized container gossiping sampling.
+* Added the ability to statically build the AvalancheGo and EVM binaries.
+* Simplified the `Block` interface to only expose the parent block's ID rather than fetching the full parent block.
+* Added additional metrics for pending jobs in the consensus engines.
+* Refactored P-chain statuses to handle blockchain validation statuses separately from transaction confirmation statuses.
+
+**Updated APIs**
+
+* Added `GetAddressTxs` to the `avm` API.
+* Added `SetLoggerLevel` and `GetLoggerLevel` to the `Admin` API to allow fine grained tuning of log levels while the node is still running.
+* Added `GetConfig` to the `Admin` API to allow fetching the node config that the node is currently using.
+* Updated `platformvm.Client` to allow specifying `nodeID`s in `GetCurrentValidators` and `GetPendingValidators` and generalized the response to `GetStake`.
+
+**Updated CLI Arguments**
+
+* Removed `fetch-only`.
+* Added JSON config parsing to `avm` VM.
+  * Added `indexTransactions`
+  * Added `indexAllowIncomplete`
+
 ## v1.4.12 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.12)\)
 
 This update is backwards compatible. It is optional, but encouraged.
