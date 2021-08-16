@@ -51,7 +51,7 @@ The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\) pri
 
 ## C-Chain Dynamic Fees
 
-Apricot Phase 3 introduces dynamic fees to the C-Chain. After this upgrade goes into effect, the Avalanche C-Chain uses an algorithm to determine the "base fee" for transaction.
+Apricot Phase 3 introduces dynamic fees to the C-Chain. After this upgrade goes into effect, the Avalanche C-Chain uses an algorithm to determine the "base fee" for a transaction.
 The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target.
 This change goes into effect on Avalanche Mainnet at 11:00:00 UTC on August 24, 2021. 
 
