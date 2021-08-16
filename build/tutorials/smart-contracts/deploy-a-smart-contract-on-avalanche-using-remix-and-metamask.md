@@ -46,7 +46,7 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-Chain address and the faucet will know that it needs to send the test AVAX to C-Chain.
+For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-Chain address. Faucet will automatically know that it needs to send the test AVAX to C-Chain. Click the captcha checkbox and select 'Request AVAX' button. Your address will receive test AVAX in a few seconds. 
 
 ### Funding on local testnet
 
