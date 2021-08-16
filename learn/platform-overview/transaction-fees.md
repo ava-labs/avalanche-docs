@@ -51,23 +51,23 @@ The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\) pri
 
 ## C-Chain Dynamic Fees
 
-
-Apricot Phase 3 introduces dynamic fees to the C-Chain. This changes the gas price from a fixed minimum gas price of 225 GWei to
-using a dynamic fee algorithm that determines a "base fee" based on network activity. The "base fee" is increased during periods
-where utilization is above the target gas utilization and decreased when the network is operating below its target gas utilization.
+Apricot Phase 3 introduces dynamic fees to the C-Chain. After this upgrade goes into effect, the Avalanche C-Chain uses an algorithm to determine the "base fee" for transaction.
+The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target.
+This change goes into effect on Avalanche Mainnet at 11:00:00 UTC on August 24, 2021. 
 
 ### Base Fee
 
-The "base fee" is bound by a minimum of 75 GWei and a maximum of 225 GWei. These bounds are set for the first phase
-of dynamic fees to ensure that any transaction sent with the old gas price of 225 GWei will be valid in Apricot Phase 3. However, the next phase will introduce a loosening of this constraint, so it is recommended that users switch to using the `eth_baseFee` and `eth_maxPriorityFeePerGas` endpoint to estimate what fees will be required to be included in a block.
+The base fee can go as low as 75 nAVAX (gwei) and as high as 225 nAVAX (gwei). 
+Any transaction issued with the old, constant gas price of 225 nAVAX will be considered valid and included in a block.
+We recommend that users switch to using the `eth_baseFee` and `eth_maxPriorityFeePerGas` API methods to estimate what fee to use in their transactions.
 
 ### Dynamic Fee Transactions
 
-Transaction fees are based on EIP-1559 style Dynamic Fee Transactions, which consists of a gas fee cap and a gas tip cap. For all legacy transactions, which only specify a single gas price, the gas price serves as both the gas fee cap and the gas tip cap. The fee cap specifies the maximum price the transaction is willing to pay per unit of gas. The tip cap specifies the maximum amount above the base fee that the transaction is willing to pay to be included in a block (this is also called the priority fee). Therefore, the effective gas price paid by a transaction will be `min(gasFeeCap, baseFee + gasTipCap)`. Unlike in Ethereum where the priority fee is paid to the miner that produces the block, in Avalanche both the base fee and the priority fee are burned.
+Transaction fees are based on Ethereum's EIP-1559 style Dynamic Fee Transactions, which consists of a gas fee cap and a gas tip cap. For all legacy transactions, which only specify a single gas price, the gas price serves as both the gas fee cap and the gas tip cap. The fee cap specifies the maximum price the transaction is willing to pay per unit of gas. The tip cap specifies the maximum amount above the base fee that the transaction is willing to pay to be included in a block (this is also called the priority fee). Therefore, the effective gas price paid by a transaction will be `min(gasFeeCap, baseFee + gasTipCap)`. Unlike in Ethereum, where the priority fee is paid to the miner that produces the block, in Avalanche both the base fee and the priority fee are burned.
 
 ### MetaMask
 
-MetaMask will automatically start using Dynamic Fee Transactions once Apricot Phase 3 goes into effect, which means that if you are using MetaMask, you will automatically start taking advantage of dynamic fees as soon as Apricot Phase 3 goes live!
+MetaMask will automatically start using Dynamic Fee Transactions once Apricot Phase 3 goes into effect. If you use MetaMask, you will automatically start taking advantage of dynamic fees as soon as Apricot Phase 3 goes live.
 
 ### How Should You Take Advantage of Dynamic Fees?
 
