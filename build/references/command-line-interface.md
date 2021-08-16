@@ -338,7 +338,6 @@ Default values are overridden only if explicitly specified in the config.
 
 The parameters are as follows:
 
-
 #### Coreth APIs
 
 `snowman-api-enabled` \(boolean\):

@@ -46,9 +46,10 @@ Yes, you can click on the “Speed Up” button on Metamask. “Speeding up” a
 
 When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are to be transferred, not the actual number of tokens. This is a known problem with Metamask.
 
-#### What are the bridge contract adresses? 
+#### What are the bridge contract adresses?
 
 Bridge Addresses:
+
 * Ethereum: [`0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0`](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
 * Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
 
@@ -127,7 +128,7 @@ The current-generation Avalanche Bridge \(AB\) to which this document refers is 
 
 #### Why doesn’t the newly bridged token appear in my wallet automatically?
 
-Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet (i.e. Metamask) which smart contracts to check for balances held by your addresses.
+Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet \(i.e. Metamask\) which smart contracts to check for balances held by your addresses.
 
 ### Supported Chains
 
@@ -217,3 +218,4 @@ Specifications for the banner are as follows:
 * Portrait and Mobile:  720px \* 337px
 * Design elements in middle of banner or they will be cut off
 * Use solid color as BG or have gradient that fades into \#000000 \(edited\) 
+
