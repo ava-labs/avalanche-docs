@@ -30,7 +30,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
-#### **Local Testnet \(AVASH\) Settings:**
+#### **Local Testnet \(AVASH\) Settings:** [\(Avash Tutorial\)](https://docs.avax.network/build/tools/avash)
 
 * **Network Name**: Avalanche Local
 * **New RPC URL**:[ ](http://localhost:9650/ext/bc/C/rpc)[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
@@ -46,7 +46,7 @@ On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/
 
 ### **Using Test Network Faucet**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a "C-" prefix and the faucet will switch from AVAX to C-AVAX.
+For funding on the test network, you can use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-Chain address. Faucet will automatically know that it needs to send the test AVAX to C-Chain. Click the captcha checkbox and select 'Request AVAX' button. Your address will receive test AVAX in a few seconds. 
 
 ### Funding on local testnet
 
