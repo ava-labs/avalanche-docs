@@ -30,10 +30,10 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
-#### **Local Testnet \(AVASH\) Settings:** [\(Avash Tutorial\)](https://docs.avax.network/build/tools/avash)
+#### **Local Testnet \(AVASH\) Settings:** [(Avash Tutorial)](../../tools/avash.md)
 
 * **Network Name**: Avalanche Local
-* **New RPC URL**:[ ](http://localhost:9650/ext/bc/C/rpc)[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
+* **New RPC URL**:[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
 * **ChainID**: `43112`
 * **Symbol**: `AVAX`
 * **Explorer**: N/A
@@ -50,7 +50,7 @@ For funding on the test network, you can use the Test Network Faucet. Navigate t
 
 ### Funding on local testnet
 
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+On a local network, you can easily fund your addresses by following [this](../platform/create-a-local-test-network.md#getting-avax).
 
 ## Step 3: Connect MetaMask and deploy a smart contract using Remix
 
