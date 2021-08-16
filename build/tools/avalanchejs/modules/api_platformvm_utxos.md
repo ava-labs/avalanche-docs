@@ -12,12 +12,12 @@
 
 ### Variables
 
-* [serializer](api_platformvm_utxos.md#const-serializer)
+* [serialization](api_platformvm_utxos.md#const-serialization)
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/utxos.ts:28](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/utxos.ts#L28)*
+*Defined in [src/apis/platformvm/utxos.ts:34](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/utxos.ts#L34)*

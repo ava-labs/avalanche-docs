@@ -1,112 +1,175 @@
 # Create a Virtual Machine \(VM\)
 
-_The code below is slightly out of date. Some methods, interfaces, and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar, and this tutorial is still useful in demonstrating how Avalanche’s VM model works._
-
 ## Introduction
 
-One of the core features of Avalanche is the creation of new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
+One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
 In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
 
-Before we get to the implementation of the VM, we’ll look at the interface that a VM must implement to be compatible with the platform’s Avalanche consensus engine. We’ll show and explain all the code in snippets. If you want to see the code in one place, rather than in snippets, you can see it in our [GitHub repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
+A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
-## The `snowman.VM` Interface
+Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/)
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus protocol. In order to be compatible with Snowman, the VM that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in[`github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go`](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+## Interfaces
 
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example. It’s not necessary you understand every nuance.
+### `block.ChainVM`
+
+To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which we include below from [its declaration](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+
+The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away.
+
+```go
+package block
+
+import (
+    "github.com/ava-labs/avalanchego/ids"
+    "github.com/ava-labs/avalanchego/snow/consensus/snowman"
+    "github.com/ava-labs/avalanchego/snow/engine/common"
+)
+
+// ChainVM defines the required functionality of a Snowman VM.
+//
+// A Snowman VM is responsible for defining the representation of state,
+// the representation of operations on that state, the application of operations
+// on that state, and the creation of the operations. Consensus will decide on
+// if the operation is executed and the order operations are executed in.
+//
+// For example, suppose we have a VM that tracks an increasing number that
+// is agreed upon by the network.
+// The state is a single number.
+// The operation is setting the number to a new, larger value.
+// Applying the operation will save to the database the new value.
+// The VM can attempt to issue a new number, of larger value, at any time.
+// Consensus will ensure the network agrees on the number at every block height.
+type ChainVM interface {
+    common.VM
+
+    // Attempt to create a new block from data contained in the VM.
+    //
+    // If the VM doesn't want to issue a new block, an error should be
+    // returned.
+    BuildBlock() (snowman.Block, error)
+
+    // Attempt to create a block from a stream of bytes.
+    //
+    // The block should be represented by the full byte array, without extra
+    // bytes.
+    ParseBlock([]byte) (snowman.Block, error)
+
+    // Attempt to load a block.
+    //
+    // If the block does not exist, then an error should be returned.
+    GetBlock(ids.ID) (snowman.Block, error)
+
+    // Notify the VM of the currently preferred block.
+    //
+    // This should always be a block that has no children known to consensus.
+    SetPreference(ids.ID) error
+
+    // LastAccepted returns the ID of the last accepted block.
+    //
+    // If no blocks have been accepted by consensus yet, it is assumed there is
+    // a definitionally accepted block, the Genesis block, that will be
+    // returned.
+    LastAccepted() (ids.ID, error)
+}
+```
+
+### `common.VM`
+
+`common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
 ```cpp
-// ChainVM defines the methods a Virtual Machine must implement to use the Snowman consensus engine.
-//
-// A Snowman VM defines the state contained in a linear blockchain,
-// the state transition functions that modify the blockchain's state,
-// the API exposed by the blockchain, as well as other aspects of the blockchain.
-type ChainVM interface {
-    // Initialize an instance of the blockchain defined by this VM.
-    // [ctx]: Run-time context and metadata about the blockchain.
-    //     [ctx.networkID]: The ID of the network this blockchain exists on.
-    //     [ctx.chainID]: The unique ID of this blockchain.
+// VM describes the interface that all consensus VMs must implement
+type VM interface {
+    // Returns nil if the VM is healthy.
+    // Periodically called and reported via the node's Health API.
+    health.Checkable
+
+    // Connector represents a handler that is called on connection connect/disconnect
+    validators.Connector
+
+    // Initialize this VM.
+    // [ctx]: Metadata about this VM.
+    //     [ctx.networkID]: The ID of the network this VM's chain is running on.
+    //     [ctx.chainID]: The unique ID of the chain this VM is running on.
     //     [ctx.Log]: Used to log messages
-    //     [ctx.NodeID]: The ID of this node.
-    // [db]: The database the blockchain persists data to.
-    // [genesisBytes]: The byte representation of the genesis state of this blockchain.
-    //                 If this VM were an account-based payments system, for example
-    //                 `genesisBytes` would probably be a genesis
+    //     [ctx.NodeID]: The unique staker ID of this node.
+    //     [ctx.Lock]: A Read/Write lock shared by this VM and the consensus
+    //                 engine that manages this VM. The write lock is held
+    //                 whenever code in the consensus engine calls the VM.
+    // [dbManager]: The manager of the database this VM will persist data to.
+    // [genesisBytes]: The byte-encoding of the genesis information of this
+    //                 VM. The VM uses it to initialize its state. For
+    //                 example, if this VM were an account-based payments
+    //                 system, `genesisBytes` would probably contain a genesis
     //                 transaction that gives coins to some accounts, and this
     //                 transaction would be in the genesis block.
     // [toEngine]: The channel used to send messages to the consensus engine.
     // [fxs]: Feature extensions that attach to this VM.
-    // In this release, we do not document feature extensions. You can ignore them.
     Initialize(
         ctx *snow.Context,
-        db database.Database,
+        dbManager manager.Manager,
         genesisBytes []byte,
+        upgradeBytes []byte,
+        configBytes []byte,
         toEngine chan<- Message,
         fxs []*Fx,
     ) error
 
-    // Shutdown this blockchain.
-    Shutdown()
+    // Bootstrapping is called when the node is starting to bootstrap this chain.
+    Bootstrapping() error
 
-    // Creates the HTTP handlers for this blockchain's API
-    // and specifies the endpoint where they handle traffic.
+    // Bootstrapped is called when the node is done bootstrapping this chain.
+    Bootstrapped() error
+
+    // Shutdown is called when the node is shutting down.
+    Shutdown() error
+
+    // Version returns the version of the VM this node is running.
+    Version() (string, error)
+
+    // Creates the HTTP handlers for custom VM network calls.
     //
-    // Each handler handles traffic to a specific endpoint.
-    // Each endpoint begins with:
-    // [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]
-    // A handler may handle traffic at an *extension* of the above endpoint.
+    // This exposes handlers that the outside world can use to communicate with
+    // a static reference to the VM. Each handler has the path:
+    // [Address of node]/ext/VM/[VM ID]/[extension]
     //
-    // The method returns a mapping from an extension to the HTTP handler at that extension.
+    // Returns a mapping from [extension]s to HTTP handlers.
+    //
+    // Each extension can specify how locking is managed for convenience.
+    //
+    // For example, it might make sense to have an extension for creating
+    // genesis bytes this VM can interpret.
+    CreateStaticHandlers() (map[string]*HTTPHandler, error)
+
+    // Creates the HTTP handlers for custom chain network calls.
+    //
+    // This exposes handlers that the outside world can use to communicate with
+    // the chain. Each handler has the path:
+    // [Address of node]/ext/bc/[chain ID]/[extension]
+    //
+    // Returns a mapping from [extension]s to HTTP handlers.
+    //
+    // Each extension can specify how locking is managed for convenience.
     //
     // For example, if this VM implements an account-based payments system,
-    // CreateHandlers might return this map:
-    // "accounts" --> [handler for API calls that pertain to accounts]
-    // "transactions" --> [handler for API calls that pertain to transactions]
-    //
-    // The accounts handler would have endpoint [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]/accounts
-    // The trasnsactions handler would have endpoint [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]/trasnsactions
-    //
-    // If a handler is mapped to by the empty string, it has no extension.
-    // It handles traffic at [Node's address]:[Node's HTTP port]/ext/bc/[blockchain ID]
-    CreateHandlers() map[string]*HTTPHandler
-
-    // Attempt to create a new block from pending data in the blockchain's mempool.
-    //
-    // If there is no new block to be created, returns an error.
-    BuildBlock() (snowman.Block, error)
-
-    // Attempt to create a block from its byte representation.
-    ParseBlock([]byte) (snowman.Block, error)
-
-    // Attempt to fetch a block by its ID.
-    //
-    // If the block does not exist, returns an error.
-    GetBlock(ids.ID) (snowman.Block, error)
-
-    // Set the preferred block to the one with the specified ID.
-    // New blocks will be built atop the preferred block.
-    //
-    // This should always be a block that has no children known to consensus.
-    SetPreference(ids.ID)
-
-    // LastAccepted returns the ID of the last accepted block.
-    //
-    // If no blocks have been accepted yet, should return the genesis block's ID.
-    LastAccepted() ids.ID
+    // it have an extension called `accounts`, where clients could get
+    // information about their accounts.
+    CreateHandlers() (map[string]*HTTPHandler, error)
 }
 ```
 
-## The snowman.Block Interface
+### `snowman.Block`
 
-You may have noticed the `snowman.Block` type referenced in the `snowman.VM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
 
-Let’s look at this interface and its methods, which we copy from [`github.com/ava-labs/avalanchego/snow/consensus/snowman/block.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
 ```cpp
-// Block is a block in a blockchain.
+// Block is a possible decision that dictates the next canonical block.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
 // order. Specifically, if Verify is called, then the parent has already been
@@ -117,32 +180,9 @@ Let’s look at this interface and its methods, which we copy from [`github.com/
 // If the status of the block is Accepted or Rejected; Parent, Verify, Accept,
 // and Reject will never be called.
 type Block interface {
-    // ID returns this block's unique ID.
-    //
-    // Typically, a block's ID is a hash of its byte representation.
-    // A block should return the same ID upon repeated calls.
-    ID() ids.ID
+    choices.Decidable
 
-    // Accept this block.
-    //
-    // This block will be accepted by every correct node in the network.
-    Accept()
-
-    // Reject this block.
-    //
-    // This block will not be accepted by any correct node in the network.
-    Reject()
-
-    // Status returns this block's current status.
-    //
-    // If Accept has been called on n block with this ID, Accepted should be
-    // returned. Similarly, if Reject has been called on a block with this
-    // ID, Rejected should be returned. If the contents of this block are
-    // unknown, then Unknown should be returned. Otherwise, Processing should be
-    // returned.
-    Status() Status
-
-    // Parent returns this block's parent.
+    // Parent returns the block that this block points to.
     //
     // If the parent block is not known, a Block should be returned with the
     // status Unknown.
@@ -160,10 +200,51 @@ type Block interface {
     // This is used for sending blocks to peers. The bytes should be able to be
     // parsed into the same block on another node.
     Bytes() []byte
+
+    // Height returns the height of this block in the chain.
+    Height() uint64
 }
 ```
 
-## Libraries
+### `choices.Decidable`
+
+This interface is the superset of every decidable object, such as transactions, blocks and vertices.
+
+```go
+// Decidable represents element that can be decided.
+//
+// Decidable objects are typically thought of as either transactions, blocks, or
+// vertices.
+type Decidable interface {
+    // ID returns a unique ID for this element.
+    //
+    // Typically, this is implemented by using a cryptographic hash of a
+    // binary representation of this element. An element should return the same
+    // IDs upon repeated calls.
+    ID() ids.ID
+
+    // Accept this element.
+    //
+    // This element will be accepted by every correct node in the network.
+    Accept() error
+
+    // Reject this element.
+    //
+    // This element will not be accepted by any correct node in the network.
+    Reject() error
+
+    // Status returns this element's current status.
+    //
+    // If Accept has been called on an element with this ID, Accepted should be
+    // returned. Similarly, if Reject has been called on an element with this
+    // ID, Rejected should be returned. If the contents of this element are
+    // unknown, then Unknown should be returned. Otherwise, Processing should be
+    // returned.
+    Status() Status
+}
+```
+
+## Helper Libraries
 
 We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
@@ -171,54 +252,87 @@ In our example, we use both of the library types below, and we encourage you to 
 
 ### core.SnowmanVM
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
+This helper type is a struct that implements many of the `block.ChainVM` methods. Its implementation can be found [here](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
 
-#### **Methods**
+#### Methods
 
-This type implements the following methods, which are part of the `snowman.ChainVM` interface:
+Some `block.ChainVM` methods implemented by `core.SnowmanVM` are:
 
+* `ParseBlock`
+* `GetBlock`
 * `SetPreference`
-* `Shutdown`
 * `LastAccepted`
+* `Shutdown`
+* `Bootstrapping`
+* `Bootstrapped`
+* `Initialize`
 
-If your VM implementation embeds a `core.SnowmanVM`, you do not need to implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
+If your VM implementation embeds a `core.SnowmanVM`, you need not implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
 
-#### **Fields**
+#### Fields
 
 This type contains several fields that you’ll want to include in your VM implementation. Among them:
 
 * `DB`: the blockchain’s database
 * `Ctx`: the blockchain’s runtime context
 * `preferred`: ID of the preferred block, which new blocks will be built on
-* `lastAccepted`: ID of the most recently accepted block
-* `toEngine`: the channel where messages are sent to the consensus protocol powering the blockchain
-* `State`: used to persist data such as blocks \(can be used to put/get any bytes\)
+* `LastAcceptedID`: ID of the most recently accepted block
+* `ToEngine`: channel used to send messages to the consensus engine powering this blockchain
+* `State`: used to persist data such as blocks
 
 ### core.Block
 
-This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
+This helper type implements many methods of the `snowman.Block` interface.
 
-#### **Methods**
+#### Methods
 
-This type implements the following methods, which are part of the `snowman.Block` interface:
+Some implemented `snowman.Block` interface methods are:
 
 * `ID`
 * `Parent`
 * `Accept`
 * `Reject`
 * `Status`
+* `Height`
 
-Your VM implementation will probably override `Accept` and `Reject` so that these methods cause application-specific state changes.
+The blocks in your VM implementation will probably override `Accept` and `Reject` so that those methods cause application-specific state changes.
 
-#### **Fields**
+#### Fields
 
-`core.Block` has a field VM, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+`core.Block` has a field `VM`, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+
+### rpcchainvm
+
+`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [`server`](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
+
+To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
+
+As another example, let's look at the server's `BuildBlock` method:
+
+```go
+func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) (*vmproto.BuildBlockResponse, error) {
+    blk, err := vm.vm.BuildBlock()
+    if err != nil {
+        return nil, err
+    }
+    blkID := blk.ID()
+    parentID := blk.Parent().ID()
+    return &vmproto.BuildBlockResponse{
+        Id:       blkID[:],
+        ParentID: parentID[:],
+        Bytes:    blk.Bytes(),
+        Height:   blk.Height(),
+    }, nil
+}
+```
+
+It calls `vm.vm.BuildBlock()`, where `vm.vm` is the underlying VM implementation, and returns a new block.
 
 ## Timestamp Server Implementation
 
-Now, we know the interface our VM must implement and the libraries we can use to build a VM.
+Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `snowman.VM` and whose blocks implement `snowman.Block`.
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`.
 
 ### Block
 
@@ -226,23 +340,25 @@ First, let’s look at our block implementation.
 
 The type declaration is:
 
-```cpp
+```go
 // Block is a block on the chain.
 // Each block contains:
 // 1) A piece of data (the block's payload)
 // 2) The (unix) timestamp when the block was created
 type Block struct {
-    *core.Block           `serialize:"true"`
-    Data        [32]byte  `serialize:"true"`
-    Timestamp   int64     `serialize:"true"`
+    *core.Block                `serialize:"true"`
+    Data        [dataLen]byte  `serialize:"true"`
+    Timestamp   int64          `serialize:"true"`
 }
 ```
 
-The `serialize:"true"` tag indicates when a block is persisted in the database or sent to other nodes. The field with the tag is included in the serialized representation.
+The `serialize:"true"` tag indicates that the field should be included in the byte representation of the block used when persisting the block or sending it to other nodes.
 
-#### **Verify**
+#### Verify
 
-```cpp
+This method verifies that a block is valid and saves it in the database.
+
+```go
 // Verify returns nil iff this block is valid.
 // To be valid, it must be that:
 // b.parent.Timestamp < b.Timestamp <= [local time] + 1 hour
@@ -258,24 +374,26 @@ func (b *Block) Verify() error {
     // Get [b]'s parent
     parent, ok := b.Parent().(*Block)
     if !ok {
-        return errors.New("error while retrieving block from database")
+        return errDatabaseGet
     }
 
     // Ensure [b]'s timestamp is after its parent's timestamp.
     if b.Timestamp < time.Unix(parent.Timestamp, 0).Unix() {
-        return errors.New("block's timestamp is more than 1 hour ahead of local time")
+        return errTimestampTooEarly
     }
 
-    // Ensure [b]'s timestamp is not more than an hour 
+    // Ensure [b]'s timestamp is not more than an hour
     // ahead of this node's time
     if b.Timestamp >= time.Now().Add(time.Hour).Unix() {
-        return errors.New("block's timestamp is more than 1 hour ahead of local time")
+        return errTimestampTooLate
     }
 
     // Our block inherits VM from *core.Block.
     // It holds the database we read/write, b.VM.DB
     // We persist this block to that database using VM's SaveBlock method.
-    b.VM.SaveBlock(b.VM.DB, b)
+    if err := b.VM.SaveBlock(b.VM.DB, b); err != nil {
+        return errDatabaseSave
+    }
 
     // Then we flush the database's contents
     return b.VM.DB.Commit()
@@ -286,97 +404,106 @@ That’s all the code for our block implementation! All of the other methods of 
 
 ### Virtual Machine
 
-Now, let’s look at the implementation of VM, which implements the `snowman.VM` interface.
+Now, let’s look at our timestamp VM implementation, which implements the `block.ChainVM` interface.
 
 The declaration is:
 
-```cpp
+```go
 // This Virtual Machine defines a blockchain that acts as a timestamp server
-// Each block contains a piece of data (payload) and the timestamp when it was created
+// Each block contains data (a payload) and the timestamp when it was created
+
+const (
+    dataLen      = 32
+    codecVersion = 0
+)
+
 type VM struct {
     core.SnowmanVM
 
     // codec serializes and de-serializes structs to/from bytes
-    codec codec.Codec
+    codec codec.Manager
 
-    // Proposed pieces of data that haven't been put into a block and proposed yet
-    mempool [][32]byte
+    // Proposed data that haven't been put into a block and proposed yet
+    mempool [][dataLen]byte
 }
 ```
 
-#### **Initialize**
+#### Initialize
 
-```cpp
+This method is called when a new instance of VM is initialized. Genesis block is created under this method.
+
+```go
 // Initialize this vm
-// [ctx] is the execution context
-// [db] is this database we read/write
+// [ctx] is this vm's context
+// [dbManager] is the manager of this vm's database
 // [toEngine] is used to notify the consensus engine that new blocks are
 //   ready to be added to consensus
 // The data in the genesis block is [genesisData]
 func (vm *VM) Initialize(
     ctx *snow.Context,
-    db database.Database,
+    dbManager manager.Manager,
     genesisData []byte,
+    upgradeData []byte,
+    configData []byte,
     toEngine chan<- common.Message,
     _ []*common.Fx,
 ) error {
-    // First, we initialize the core.SnowmanVM.
-    // vm.ParseBlock, which we'll see further on, tells the core.SnowmanVM how to deserialize
-    // a block from bytes
-    if err := vm.SnowmanVM.Initialize(ctx, db, vm.ParseBlock, toEngine); err != nil {
-        ctx.Log.Error("error initializing SnowmanVM: %v", err)
+    version, err := vm.Version()
+    if err != nil {
+        log.Error("error initializing Timestamp VM: %v", err)
         return err
     }
-    // Set vm's codec to a new codec, which we can use to 
-    // serialize and deserialize blocks
-    vm.codec = codec.NewDefault()
+    log.Info("Initializing Timestamp VM", "Version", version)
+    if err := vm.SnowmanVM.Initialize(ctx, dbManager.Current().Database, vm.ParseBlock, toEngine); err != nil {
+        log.Error("error initializing SnowmanVM: %v", err)
+        return err
+    }
+    c := linearcodec.NewDefault()
+    manager := codec.NewDefaultManager()
+    if err := manager.RegisterCodec(codecVersion, c); err != nil {
+        return err
+    }
+    vm.codec = manager
 
-    // If the database is empty, initialize the state of this blockchain
-    // using the genesis data
+    // If database is empty, create it using the provided genesis data
     if !vm.DBInitialized() {
-        // Ensure that the genesis bytes are no longer than 32 bytes
-        // (the genesis block, like all blocks, holds 32 bytes of data)
-        if len(genesisData) > 32 {
-            return errors.New("genesis data should be bytes (max length 32)")
+        if len(genesisData) > dataLen {
+            return errBadGenesisBytes
         }
 
-        // genesisData is a byte slice (because that's what the snowman.VM interface says)
-        // but each block contains an byte array.
-        // To make the types match, take the first [dataLen] bytes from genesisData
-        // and put them in an array
+        // genesisData is a byte slice but each block contains an byte array
+        // Take the first [dataLen] bytes from genesisData and put them in an array
         var genesisDataArr [dataLen]byte
         copy(genesisDataArr[:], genesisData)
 
         // Create the genesis block
-        // Timestamp of genesis block is 0. It has no parent, so we say the parent's ID is empty.
-        // We'll come to the definition of NewBlock later.
-        genesisBlock, err := vm.NewBlock(ids.Empty, genesisDataArr, time.Unix(0, 0))
+        // Timestamp of genesis block is 0. It has no parent.
+        genesisBlock, err := vm.NewBlock(ids.Empty, 0, genesisDataArr, time.Unix(0, 0))
         if err != nil {
-            vm.Ctx.Log.Error("error while creating genesis block: %v", err)
+            log.Error("error while creating genesis block: %v", err)
             return err
         }
 
-        // Persist the genesis block to the database.
-        // Normally, a block is saved to the database when Verify() is called on the block.
-        // We don't call Verify on the genesis block, though. (It has no parent so
-        // it wouldn't pass verification.)
-        // vm.DB is the database, and was set when we initialized the embedded SnowmanVM.
+        // Saves the genesis block to DB
         if err := vm.SaveBlock(vm.DB, genesisBlock); err != nil {
-            vm.Ctx.Log.Error("error while saving genesis block: %v", err)
+            log.Error("error while saving genesis block: %v", err)
             return err
         }
 
-        // Accept the genesis block.
-        // Sets [vm.lastAccepted] and [vm.preferred] to the genesisBlock.
-        genesisBlock.Accept()
+        // Accept the genesis block
+        // Sets [vm.lastAccepted] and [vm.preferred]
+        if err := genesisBlock.Accept(); err != nil {
+            return fmt.Errorf("error accepting genesis block: %w", err)
+        }
 
-        // Mark the database as initialized so that in the future when this chain starts
-        // it pulls state from the database rather than starting over from genesis
-        vm.SetDBInitialized()
+        // Sets DB status to initialized.
+        if err := vm.SetDBInitialized(); err != nil {
+            return fmt.Errorf("error while setting db to initialized: %w", err)
+        }
 
-        // Flush the database
+        // Flush VM's database to underlying db
         if err := vm.DB.Commit(); err != nil {
-            vm.Ctx.Log.Error("error while commiting db: %v", err)
+            log.Error("error while committing db: %v", err)
             return err
         }
     }
@@ -384,11 +511,11 @@ func (vm *VM) Initialize(
 }
 ```
 
-#### **proposeBlock**
+#### proposeBlock
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. We’ll see where this is called later.
+This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`, which we’ll see later.
 
-```cpp
+```go
 // proposeBlock appends [data] to [p.mempool].
 // Then it notifies the consensus engine
 // that a new block is ready to be added to consensus
@@ -399,9 +526,11 @@ func (vm *VM) proposeBlock(data [dataLen]byte) {
 }
 ```
 
-#### **ParseBlock**
+#### ParseBlock
 
-```cpp
+Parse a block from its byte representation.
+
+```go
 // ParseBlock parses [bytes] to a snowman.Block
 // This function is used by the vm's state to unmarshal blocks saved in state
 // and by the consensus layer when it receives the byte representation of a block
@@ -411,78 +540,25 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
     block := &Block{}
 
     // Unmarshal the byte repr. of the block into our empty block
-    err := vm.codec.Unmarshal(bytes, block)
+    _, err := vm.codec.Unmarshal(bytes, block)
+    if err != nil {
+        return nil, err
+    }
 
     // Initialize the block
     // (Block inherits Initialize from its embedded *core.Block)
     block.Initialize(bytes, &vm.SnowmanVM)
-    return block, err
-}
-```
 
-#### **NewBlock**
-
-```cpp
-// NewBlock returns a new Block where:
-// - the block's parent has ID [parentID]
-// - the block's data is [data]
-// - the block's timestamp is [timestamp]
-func (vm *VM) NewBlock(parentID ids.ID, data [dataLen]byte, timestamp time.Time) (*Block, error) {
-    // Create our new block
-    block := &Block{
-        Block:     core.NewBlock(parentID),
-        Data:      data,
-        Timestamp: timestamp.Unix(),
-    }
-
-    // Get the byte representation of the block
-    blockBytes, err := vm.codec.Marshal(block)
-    if err != nil {
-        return nil, err
-    }
-
-    // Initialize the block by providing it with its byte representation
-    // and a reference to SnowmanVM
-    block.Initialize(blockBytes, &vm.SnowmanVM)
-
+    // Return the block
     return block, nil
 }
 ```
 
-#### **BuildBlock**
+#### CreateHandlers
 
-This method is called by the consensus layer after the application layer tells it that a new block is ready to be built \(i.e., when `vm.NotifyConsensus()` is called\).
+Registed handlers defined in `Service`. See [below](create-a-virtual-machine-vm.md#api) for more on APIs.
 
-```cpp
-// BuildBlock returns a block that this VM wants to add to consensus
-func (vm *VM) BuildBlock() (snowman.Block, error) {
-    // There is no data to put in a new block
-    if len(vm.mempool) == 0 { 
-        return nil, errors.New("there is no block to propose")
-    }
-
-    // Get the value to put in the new block
-    value := vm.mempool[0]
-    vm.mempool = vm.mempool[1:]
-
-    // Notify consensus engine that there are more pending data for blocks
-    // (if that is the case) when done building this block
-    if len(vm.mempool) > 0 {
-        defer vm.NotifyBlockReady()
-    }
-
-    // Build the block
-    block, err := vm.NewBlock(vm.Preferred(), value, time.Now())
-    if err != nil {
-        return nil, err
-    }
-    return block, nil
-}
-```
-
-#### **CreateHandlers**
-
-```cpp
+```go
 // CreateHandlers returns a map where:
 // Keys: The path extension for this blockchain's API (empty in this case)
 // Values: The handler for the API
@@ -499,65 +575,172 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 }
 ```
 
-### Service
+#### CreateStaticHandlers
 
-AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
+Registers static handlers defined in `StaticService`. See [below](create-a-virtual-machine-vm.md#static-api) for more on static APIs.
 
-Using Gorilla, there is a struct for each API service. In the case of this blockchain, there’s only one API service.
+```go
+// CreateStaticHandlers returns a map where:
+// Keys: The path extension for this VM's static API
+// Values: The handler for that static API
+// We return nil because this VM has no static API
+// CreateStaticHandlers implements the common.StaticVM interface
+func (vm *VM) CreateStaticHandlers() (map[string]*common.HTTPHandler, error) {
+    newServer := rpc.NewServer()
+    codec := cjson.NewCodec()
+    newServer.RegisterCodec(codec, "application/json")
+    newServer.RegisterCodec(codec, "application/json;charset=UTF-8")
 
-The service struct’s declaration is:
-
-```cpp
-// Service is the API service for this VM
-type Service struct{ vm *VM }
+    // name this service "timestamp"
+    staticService := CreateStaticService()
+    return map[string]*common.HTTPHandler{
+        "": {LockOptions: common.WriteLock, Handler: newServer},
+    }, newServer.RegisterService(staticService, "timestampvm")
+}
 ```
 
-For each API method, there is: \* A struct that defines the method’s arguments \* A struct that defines the method’s return values \* A method that implements the API method, and is parameterized on the above 2 structs
+### Static API
 
-#### **ProposeBlock**
+A VM may have a static API, which allows clients to call methods that do not query or update the state of a particular blockchain, but rather apply to the VM as a whole. This is analagous to static methods in computer programming. AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
 
-This API method allows clients to add a block to the blockchain.
+`StaticService` implements the static API for our VM.
 
-```cpp
-// ProposeBlockArgs are the arguments to ProposeValue
-type ProposeBlockArgs struct {
-    // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
-    Data string
+```go
+// StaticService defines the static API for the timestamp vm
+type StaticService struct{}
+```
+
+#### Encode
+
+For each API method, there is:
+
+* A struct that defines the method’s arguments
+* A struct that defines the method’s return values
+* A method that implements the API method, and is parameterized on the above 2 structs
+
+This API method encodes a string to its byte representation using a given encoding scheme. It can be used to encode data that is then put in a block and proposed as the next block for this chain.
+
+```go
+// EncodeArgs are arguments for Encode
+type EncodeArgs struct {
+    Data     string              `json:"data"`
+    Encoding formatting.Encoding `json:"encoding"`
 }
 
-// ProposeBlockReply is the reply from function ProposeBlock
-type ProposeBlockReply struct{ 
-    // True if the operation was successful
-    Success bool
+// EncodeReply is the reply from Encoder
+type EncodeReply struct {
+    Bytes    string              `json:"bytes"`
+    Encoding formatting.Encoding `json:"encoding"`
 }
 
-// ProposeBlock is an API method to propose a new block whose data is [args].Data.
-func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *ProposeBlockReply) error {
-    // Parse the data given as argument to bytes
-    byteFormatter := formatting.CB58{}
-    if err := byteFormatter.FromString(args.Data); err != nil {
-        return errBadData
+// Encoder returns the encoded data
+func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *EncodeReply) error {
+    bytes, err := formatting.Encode(args.Encoding, []byte(args.Data))
+    if err != nil {
+        return fmt.Errorf("couldn't encode data as string: %s", err)
     }
-    // Ensure the data is 32 bytes
-    dataSlice := byteFormatter.Bytes
-    if len(dataSlice) != 32 {
-        return errBadData
-    }
-    // Convert the data from a byte slice to byte array
-    var data [dataLen]byte             
-    copy(data[:], dataSlice[:dataLen])
-    // Invoke proposeBlock to trigger creation of block with this data
-    s.vm.proposeBlock(data)
-    reply.Success = true
+    reply.Bytes = bytes
+    reply.Encoding = args.Encoding
     return nil
 }
 ```
 
-#### **GetBlock**
+#### Decode
 
-This API method allows clients to get a block by its ID.
+This API method is the inverse of `Encode`.
+
+```go
+// DecoderArgs are arguments for Decode
+type DecoderArgs struct {
+    Bytes    string              `json:"bytes"`
+    Encoding formatting.Encoding `json:"encoding"`
+}
+
+// DecoderReply is the reply from Decoder
+type DecoderReply struct {
+    Data     string              `json:"data"`
+    Encoding formatting.Encoding `json:"encoding"`
+}
+
+// Decoder returns the Decoded data
+func (ss *StaticService) Decode(_ *http.Request, args *DecoderArgs, reply *DecoderReply) error {
+    bytes, err := formatting.Decode(args.Encoding, args.Bytes)
+    if err != nil {
+        return fmt.Errorf("couldn't Decode data as string: %s", err)
+    }
+    reply.Data = string(bytes)
+    reply.Encoding = args.Encoding
+    return nil
+}
+```
+
+### API
+
+A VM may also have a non-static HTTP API, which allows clients to query and update the blockchain's state.
+
+`Service`'s declaration is:
+
+```go
+// Service is the API service for this VM
+type Service struct{ vm *VM }
+```
+
+Note that this struct has a reference to the VM, so it can query and update state.
+
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain.
+
+#### timestampvm.getBlock
+
+Get a block by its ID. If no ID is provided, get the latest block.
+
+**Signature**
 
 ```cpp
+timestampvm.getBlock({id: string}) ->
+    {
+        id: string,
+        data: string,
+        timestamp: int,
+        parentID: string
+    }
+```
+
+* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
+* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
+* `timestamp` is the Unix timestamp when this block was created
+* `parentID` is the block’s parent
+
+**Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "timestampvm.getBlock",
+    "params":{
+        "id":"xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
+```
+
+**Example Response**
+
+```javascript
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "timestamp": "1581717416",
+    "data": "11111111111111111111111111111111LpoYY",
+    "id": "xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K",
+    "parentID": "22XLgiM5dfCwTY9iZnVk8ZPuPe3aSrdVr5Dfrbxd3ejpJd7oef"
+  },
+  "id": 1
+}
+```
+
+**Implementation**
+
+```go
 // APIBlock is the API representation of a block
 type APIBlock struct {
     Timestamp int64  `json:"timestamp"` // Timestamp of most recent block
@@ -583,128 +766,167 @@ type GetBlockReply struct {
 func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockReply) error {
     // If an ID is given, parse its string representation to an ids.ID
     // If no ID is given, ID becomes the ID of last accepted block
-    var ID ids.ID
+    var id ids.ID
     var err error
     if args.ID == "" {
-        ID = s.vm.LastAccepted()
+        id, err = s.vm.LastAccepted()
+        if err != nil {
+            return fmt.Errorf("problem finding the last accepted ID: %s", err)
+        }
     } else {
-        ID, err = ids.FromString(args.ID)
+        id, err = ids.FromString(args.ID)
         if err != nil {
             return errors.New("problem parsing ID")
         }
     }
 
     // Get the block from the database
-    blockInterface, err := s.vm.GetBlock(ID)
+    blockInterface, err := s.vm.GetBlock(id)
     if err != nil {
-        return errors.New("error getting data from database")
+        return errNoSuchBlock
     }
 
     block, ok := blockInterface.(*Block)
     if !ok { // Should never happen but better to check than to panic
-        return errors.New("error getting data from database")
+        return errBadData
     }
 
     // Fill out the response with the block's data
     reply.APIBlock.ID = block.ID().String()
-    reply.APIBlock.Timestamp = block.Timestamp
+    reply.APIBlock.Timestamp = json.Uint64(block.Timestamp)
     reply.APIBlock.ParentID = block.ParentID().String()
-    byteFormatter := formatting.CB58{Bytes: block.Data[:]}
-    reply.Data = byteFormatter.String()
-
-    return nil
+    reply.Data, err = formatting.Encode(formatting.CB58, block.Data[:])
+    return err
 }
 ```
 
-#### **API**
+#### timestampvm.proposeBlock
 
-The resulting API has the following methods:
-
-**timestamp.getBlock**
-
-Get a block by its ID. If no ID is provided, get the latest block.
+Propose the next block on this blockchain.
 
 **Signature**
 
 ```cpp
-timestamp.getBlock({id: string}) ->
-    {
-        id: string,
-        data: string,
-        timestamp: int,
-        parentID: string
-    }
-```
-
-* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
-* `timestamp` is the Unix timestamp when this block was created
-* `parentID` is the block’s parent
-
-**Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "timestamp.getBlock",
-    "params":{
-        "id":"xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/timestamp
-```
-
-**Example Response**
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "timestamp": "1581717416",
-        "data": "11111111111111111111111111111111LpoYY",
-        "id": "xqQV1jDnCXDxhfnNT7tDBcXeoH2jC3Hh7Pyv4GXE1z1hfup5K",
-        "parentID": "22XLgiM5dfCwTY9iZnVk8ZPuPe3aSrdVr5Dfrbxd3ejpJd7oef"
-    },
-    "id": 1
-}
-```
-
-**timestamp.proposeBlock**
-
-Propose the creation of a new block.
-
-**Signature**
-
-```cpp
-timestamp.proposeBlock({data: string}) -> {success: bool}
+timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
 * `data` is the base 58 \(with checksum\) representation of the proposed block’s 32 byte payload.
 
 **Example Call**
 
-```cpp
+```bash
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "timestamp.proposeBlock",
+    "method": "timestampvm.proposeBlock",
     "params":{
         "data":"SkB92YpWm4Q2iPnLGCuDPZPgUQMxajqQQuz91oi3xD984f8r"
     },
     "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/timestamp
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
 **Example Response**
 
-```cpp
+```javascript
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "Success": true
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "Success": true
+  },
+  "id": 1
 }
 ```
+
+**Implementation**
+
+```go
+// ProposeBlockArgs are the arguments to ProposeValue
+type ProposeBlockArgs struct {
+    // Data for the new block. Must be base 58 encoding (with checksum) of 32 bytes.
+    Data string
+}
+
+// ProposeBlockReply is the reply from function ProposeBlock
+type ProposeBlockReply struct{
+    // True if the operation was successful
+    Success bool
+}
+
+// ProposeBlock is an API method to propose a new block whose data is [args].Data.
+func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *ProposeBlockReply) error {
+    // Decodes data
+    bytes, err := formatting.Decode(formatting.CB58, args.Data)
+
+    // Ensures byte length is as expected
+    if err != nil || len(bytes) != dataLen {
+        return errBadData
+    }
+
+    var data [dataLen]byte         // The data as a byte array
+    copy(data[:], bytes[:dataLen]) // Copy [bytes] to [data]
+
+    // proposes block with the data to VM
+    s.vm.proposeBlock(data)
+    reply.Success = true
+    return nil
+}
+```
+
+### Plugin
+
+In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+
+`main.go`'s contents are:
+
+```go
+func main() {
+    log.Root().SetHandler(log.LvlFilterHandler(log.LvlDebug, log.StreamHandler(os.Stderr, log.TerminalFormat())))
+    plugin.Serve(&plugin.ServeConfig{
+        HandshakeConfig: rpcchainvm.Handshake,
+        Plugins: map[string]plugin.Plugin{
+            "vm": rpcchainvm.New(&timestampvm.VM{}),
+        },
+
+        // A non-nil value here enables gRPC serving for this plugin...
+        GRPCServer: plugin.DefaultGRPCServer,
+    })
+}
+```
+
+Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
+
+#### VM Aliases
+
+It's possible to alias VMs and their API endpoints. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
+
+```javascript
+{
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timestamp"
+  ]
+}
+```
+
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. Giving a VM an alias has other implications, as we'll see below. For more details, see [here](../../references/command-line-interface.md#vm-configs).
+
+#### Building the Executable
+
+This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that builds an executable of this VM \(when invoked, it runs the `main` method from above.\)
+
+The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
+
+```text
+./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins timestampvm
+```
+
+If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` \(`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.\)
+
+AvalancheGo searches for and registers plugins under `[buildDir]/avalanchego-latest/plugins`. See [here](../../references/command-line-interface.md#build-directory) for more information.
+
+Executable names must be either a full VM ID \(encoded in CB58\), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
+
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are aliases for this VM.
 
 ### Wrapping Up
 
@@ -712,7 +934,12 @@ That’s it! That’s the entire implementation of a VM which defines a blockcha
 
 In this tutorial, we learned:
 
-* The `snowman.ChainVM` interface, which all VMs that define a linear chain must implement
+* The `block.ChainVM` interface, which all VMs that define a linear chain must implement
 * The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
+* The `rpcchainvm` type, which allows blockchains to run in their own processes.
+
+Now we can create a new blockchain with this custom virtual machine.
+
+{% page-ref page="create-custom-blockchain.md" %}
 

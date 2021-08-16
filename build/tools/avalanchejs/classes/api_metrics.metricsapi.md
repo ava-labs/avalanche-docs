@@ -50,7 +50,7 @@ Class for interacting with a node API that is using the node's MetricsApi.
 
 *Overrides [RESTAPI](common_restapi.restapi.md).[constructor](common_restapi.restapi.md#constructor)*
 
-*Defined in [src/apis/metrics/api.ts:32](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/metrics/api.ts#L32)*
+*Defined in [src/apis/metrics/api.ts:32](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/metrics/api.ts#L32)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
 
@@ -71,7 +71,7 @@ Name | Type | Default | Description |
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[acceptType](common_restapi.restapi.md#protected-accepttype)*
 
-*Defined in [src/common/restapi.ts:19](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L19)*
+*Defined in [src/common/restapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L12)*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseurl](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:38](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L38)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L28)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[contentType](common_restapi.restapi.md#protected-contenttype)*
 
-*Defined in [src/common/restapi.ts:17](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L17)*
+*Defined in [src/common/restapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L11)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:36](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L36)*
+*Defined in [src/common/apibase.ts:26](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L26)*
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:40](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L40)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L30)*
 
 ## Methods
 
@@ -121,7 +121,7 @@ ___
 
 *Overrides [RESTAPI](common_restapi.restapi.md).[axConf](common_restapi.restapi.md#protected-axconf)*
 
-*Defined in [src/apis/metrics/api.ts:19](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/metrics/api.ts#L19)*
+*Defined in [src/apis/metrics/api.ts:18](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/metrics/api.ts#L18)*
 
 **Returns:** *AxiosRequestConfig*
 
@@ -129,18 +129,18 @@ ___
 
 ###  delete
 
-▸ **delete**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **delete**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[delete](common_restapi.restapi.md#delete)*
 
-*Defined in [src/common/restapi.ts:90](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L90)*
+*Defined in [src/common/restapi.ts:79](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L79)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `contentType?` | string |
 `acceptType?` | string |
@@ -155,7 +155,7 @@ ___
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[get](common_restapi.restapi.md#get)*
 
-*Defined in [src/common/restapi.ts:45](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L45)*
+*Defined in [src/common/restapi.ts:37](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L37)*
 
 **Parameters:**
 
@@ -175,7 +175,7 @@ ___
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[getAcceptType](common_restapi.restapi.md#getaccepttype)*
 
-*Defined in [src/common/restapi.ts:131](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L131)*
+*Defined in [src/common/restapi.ts:119](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L119)*
 
 Returns what type of representation is desired at the client side
 
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:63](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L63)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L53)*
 
 Returns the baseurl's path.
 
@@ -203,7 +203,7 @@ ___
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[getContentType](common_restapi.restapi.md#getcontenttype)*
 
-*Defined in [src/common/restapi.ts:126](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L126)*
+*Defined in [src/common/restapi.ts:114](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L114)*
 
 Returns the type of the entity attached to the incoming request
 
@@ -217,7 +217,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:68](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L68)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L58)*
 
 Returns the baseurl's database.
 
@@ -229,7 +229,7 @@ ___
 
 ▸ **getMetrics**(): *Promise‹string›*
 
-*Defined in [src/apis/metrics/api.ts:31](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/metrics/api.ts#L31)*
+*Defined in [src/apis/metrics/api.ts:29](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/metrics/api.ts#L29)*
 
 **Returns:** *Promise‹string›*
 
@@ -239,18 +239,18 @@ ___
 
 ###  patch
 
-▸ **patch**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **patch**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[patch](common_restapi.restapi.md#patch)*
 
-*Defined in [src/common/restapi.ts:106](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L106)*
+*Defined in [src/common/restapi.ts:95](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L95)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `contentType?` | string |
 `acceptType?` | string |
@@ -261,18 +261,18 @@ ___
 
 ###  post
 
-▸ **post**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **post**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[post](common_restapi.restapi.md#post)*
 
-*Defined in [src/common/restapi.ts:53](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L53)*
+*Defined in [src/common/restapi.ts:44](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L44)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `contentType?` | string |
 `acceptType?` | string |
@@ -287,7 +287,7 @@ ___
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[prepHeaders](common_restapi.restapi.md#protected-prepheaders)*
 
-*Defined in [src/common/restapi.ts:21](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L21)*
+*Defined in [src/common/restapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L14)*
 
 **Parameters:**
 
@@ -302,18 +302,18 @@ ___
 
 ###  put
 
-▸ **put**(`method`: string, `params?`: Array‹object› | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
+▸ **put**(`method`: string, `params?`: object[] | object, `baseurl?`: string, `contentType?`: string, `acceptType?`: string): *Promise‹[RequestResponseData](common_apibase.requestresponsedata.md)›*
 
 *Inherited from [RESTAPI](common_restapi.restapi.md).[put](common_restapi.restapi.md#put)*
 
-*Defined in [src/common/restapi.ts:70](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/restapi.ts#L70)*
+*Defined in [src/common/restapi.ts:60](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/restapi.ts#L60)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `method` | string |
-`params?` | Array‹object› &#124; object |
+`params?` | object[] &#124; object |
 `baseurl?` | string |
 `contentType?` | string |
 `acceptType?` | string |
@@ -328,7 +328,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:47](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/common/apibase.ts#L47)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseurl.
 

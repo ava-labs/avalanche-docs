@@ -5,6 +5,12 @@
 #stop on errors
 set -e
 
+#running as root gives the wrong homedir, check and exit if run with sudo.
+if ((EUID == 0)); then
+    echo "The script is not designed to run as root user. Please run it without sudo prefix."
+    exit
+fi
+
 #helper function to create avalanchego.service file
 create_service_file () {
   rm -f avalanchego.service
@@ -15,11 +21,7 @@ create_service_file () {
   echo "Type=simple">>avalanchego.service
   echo "User=$(whoami)">>avalanchego.service
   echo "WorkingDirectory=$HOME">>avalanchego.service
-  if [ "$ipChoice" = "1" ]; then
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --plugin-dir=$HOME/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=">>avalanchego.service
-  else
-    echo "ExecStart=$HOME/avalanche-node/avalanchego --plugin-dir=$HOME/avalanche-node/plugins --public-ip=$foundIP --http-host=">>avalanchego.service
-  fi
+  echo "ExecStart=$HOME/avalanche-node/avalanchego --config-file=$HOME/.avalanchego/configs/node.json">>avalanchego.service
   echo "Restart=always">>avalanchego.service
   echo "RestartSec=1">>avalanchego.service
   echo "[Install]">>avalanchego.service
@@ -27,18 +29,95 @@ create_service_file () {
   echo "">>avalanchego.service
 }
 
-#helper function to check for presence of curl, and install if missing
-check_curl() {
-if ! command -v curl &> /dev/null
-then
-    echo "curl could not be found, will install..."
-    sudo apt-get install curl -y
-fi
+create_config_file () {
+  rm -f node.json
+  echo "{" >>node.json
+  if [ "$ipChoice" = "1" ]; then
+    echo "  \"dynamic-public-ip\": \"opendns\",">>node.json
+  else
+    echo "  \"public-ip\": \"$foundIP\",">>node.json
+  fi
+  echo "  \"http-host\": \"\"">>node.json
+  echo "}" >>node.json
+  mkdir -p $HOME/.avalanchego/configs
+  cp -f node.json $HOME/.avalanchego/configs/node.json
+}
+
+remove_service_file () {
+  if test -f "/etc/systemd/system/avalanchego.service"; then
+    sudo systemctl stop avalanchego
+    sudo systemctl disable avalanchego
+    sudo rm /etc/systemd/system/avalanchego.service
+  fi
+}
+
+#helper function to check for presence of required commands, and install if missing
+check_reqs () {
+  if ! command -v curl &> /dev/null
+  then
+      echo "curl could not be found, will install..."
+      sudo apt-get install curl -y
+  fi
+  if ! command -v wget &> /dev/null
+  then
+      echo "wget could not be found, will install..."
+      sudo apt-get install wget -y
+  fi
+  if ! command -v dig &> /dev/null
+  then
+      echo "dig could not be found, will install..."
+      sudo apt-get install dnsutils -y
+  fi
+}
+
+#helper function that prints usage
+usage () {
+  echo "Usage: $0 [--list] [--version <tag>] [--help] [--reinstall]"
+  echo ""
+  echo "Options:"
+  echo "   --help            Shows this message"
+  echo "   --list            Lists 10 newest versions available to install"
+  echo "   --version <tag>   Installs <tag> version"
+  echo "   --reinstall       Run the installer from scratch, overwriting the old service file"
+  echo ""
+  echo "Run without any options, script will install or upgrade AvalancheGo to latest available version."
+  exit 0
 }
 
 echo "AvalancheGo installer"
 echo "---------------------"
+
+if [ $# -ne 0 ] #arguments check
+then
+  case $1 in
+    --list) #print version list and exit (last 10 versions)
+      echo "Available versions:"
+      wget -q -O - https://api.github.com/repos/ava-labs/avalanchego/releases \
+      | grep tag_name \
+      | sed 's/.*: "\(.*\)".*/\1/' \
+      | head
+      exit 0
+      ;;
+    --version) #explicit version selection
+      if [ $# -eq 2 ]
+      then
+        version=$2
+      else
+        usage
+      fi
+      ;;
+    --reinstall) #recreate service file and install
+      echo "Will reinstall the node."
+      remove_service_file
+      ;;
+    *)
+      usage
+      ;;
+  esac
+fi
+
 echo "Preparing environment..."
+check_reqs
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
 foundOS="$(uname)"                              #get OS
@@ -53,14 +132,13 @@ if [ "$foundArch" = "aarch64" ]; then
   echo "Found arm64 architecture..."
 elif [ "$foundArch" = "x86_64" ]; then
   getArch="amd64"                               #we're running on intel/amd
-  echo "Found 64bit Intel/AMD architecture..."
+  echo "Found amd64 architecture..."
 else
   #sorry, don't know you.
   echo "Unsupported architecture: $foundArch!"
   echo "Exiting."
   exit
 fi
-check_curl
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
   echo "Found AvalancheGo systemd service already installed, switching to upgrade mode."
@@ -74,7 +152,6 @@ mkdir -p /tmp/avalanchego-install               #make a directory to work in
 rm -rf /tmp/avalanchego-install/*               #clean up in case previous install didn't
 cd /tmp/avalanchego-install
 
-read -p "Press enter to install the latest AvalancheGo version, or specify the version to install (e.g. v1.2.3): " version
 version=${version:-latest}
 echo "Looking for $getArch version $version..."
 if [ "$version" = "latest" ]; then
@@ -82,8 +159,9 @@ if [ "$version" = "latest" ]; then
 else
   fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
 fi
-
-if [ "$fileName" = "" ]; then
+if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+  echo "Node version found."
+else
   echo "Unable to find AvalancheGo version $version. Exiting."
   if [ "$foundAvalancheGo" = "true" ]; then
     echo "Restarting service..."
@@ -125,15 +203,18 @@ else
   fi
   echo "Installing service with public IP: $foundIP"
 fi
+create_config_file
 create_service_file
 chmod 644 avalanchego.service
 sudo cp -f avalanchego.service /etc/systemd/system/avalanchego.service
+sudo systemctl daemon-reload
 sudo systemctl start avalanchego
 sudo systemctl enable avalanchego
 echo
 echo "Done!"
 echo
 echo "Your node should now be bootstrapping on the main net."
+echo "Node configuration file is $HOME/.avalanchego/configs/node.json"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"

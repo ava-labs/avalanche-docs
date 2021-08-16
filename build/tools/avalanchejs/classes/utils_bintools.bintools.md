@@ -48,6 +48,7 @@ let b58str = bintools.bufferToB58(Buffer.from("Wubalubadubdub!"));
 * [fromBufferToBN](utils_bintools.bintools.md#frombuffertobn)
 * [isBase58](utils_bintools.bintools.md#isbase58)
 * [isBase64](utils_bintools.bintools.md#isbase64)
+* [isCB58](utils_bintools.bintools.md#iscb58)
 * [isDecimal](utils_bintools.bintools.md#isdecimal)
 * [isHex](utils_bintools.bintools.md#ishex)
 * [isPrimaryBechAddress](utils_bintools.bintools.md#isprimarybechaddress)
@@ -63,7 +64,7 @@ let b58str = bintools.bufferToB58(Buffer.from("Wubalubadubdub!"));
 
 \+ **new BinTools**(): *[BinTools](utils_bintools.bintools.md)*
 
-*Defined in [src/utils/bintools.ts:29](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L29)*
+*Defined in [src/utils/bintools.ts:31](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L31)*
 
 **Returns:** *[BinTools](utils_bintools.bintools.md)*
 
@@ -73,7 +74,7 @@ let b58str = bintools.bufferToB58(Buffer.from("Wubalubadubdub!"));
 
 • **b58**: *[Base58](utils_base58.base58.md)*
 
-*Defined in [src/utils/bintools.ts:35](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L35)*
+*Defined in [src/utils/bintools.ts:37](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L37)*
 
 ___
 
@@ -81,7 +82,7 @@ ___
 
 ▪ **instance**: *[BinTools](utils_bintools.bintools.md)*
 
-*Defined in [src/utils/bintools.ts:29](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L29)*
+*Defined in [src/utils/bintools.ts:31](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L31)*
 
 ## Methods
 
@@ -89,7 +90,7 @@ ___
 
 ▸ **addChecksum**(`buff`: Buffer): *Buffer*
 
-*Defined in [src/utils/bintools.ts:237](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L237)*
+*Defined in [src/utils/bintools.ts:251](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L251)*
 
 Takes a [Buffer](https://github.com/feross/buffer) and adds a checksum, returning
 a [Buffer](https://github.com/feross/buffer) with the 4-byte checksum appended.
@@ -108,7 +109,7 @@ ___
 
 ▸ **addressToString**(`hrp`: string, `chainid`: string, `bytes`: Buffer): *string*
 
-*Defined in [src/utils/bintools.ts:283](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L283)*
+*Defined in [src/utils/bintools.ts:297](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L297)*
 
 **Parameters:**
 
@@ -126,7 +127,7 @@ ___
 
 ▸ **b58ToBuffer**(`b58str`: string): *Buffer*
 
-*Defined in [src/utils/bintools.ts:163](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L163)*
+*Defined in [src/utils/bintools.ts:177](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L177)*
 
 Takes a base-58 string and returns a [Buffer](https://github.com/feross/buffer).
 
@@ -144,7 +145,7 @@ ___
 
 ▸ **bufferToB58**(`buff`: Buffer): *string*
 
-*Defined in [src/utils/bintools.ts:155](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L155)*
+*Defined in [src/utils/bintools.ts:169](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L169)*
 
 Takes a [Buffer](https://github.com/feross/buffer) and returns a base-58 string of
 the [Buffer](https://github.com/feross/buffer).
@@ -163,7 +164,7 @@ ___
 
 ▸ **bufferToString**(`buff`: Buffer): *string*
 
-*Defined in [src/utils/bintools.ts:120](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L120)*
+*Defined in [src/utils/bintools.ts:134](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L134)*
 
 Produces a string from a [Buffer](https://github.com/feross/buffer)
 representing a string. ONLY USED IN TRANSACTION FORMATTING, ASSUMED LENGTH IS PREPENDED.
@@ -182,7 +183,7 @@ ___
 
 ▸ **cb58Decode**(`bytes`: Buffer | string): *Buffer*
 
-*Defined in [src/utils/bintools.ts:273](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L273)*
+*Defined in [src/utils/bintools.ts:287](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L287)*
 
 Takes a cb58 serialized [Buffer](https://github.com/feross/buffer) or base-58 string
 and returns a [Buffer](https://github.com/feross/buffer) of the original data. Throws on error.
@@ -201,7 +202,7 @@ ___
 
 ▸ **cb58Encode**(`bytes`: Buffer): *string*
 
-*Defined in [src/utils/bintools.ts:262](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L262)*
+*Defined in [src/utils/bintools.ts:276](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L276)*
 
 Takes a [Buffer](https://github.com/feross/buffer) and returns a base-58 string with
 checksum as per the cb58 standard.
@@ -214,7 +215,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-A serialized base-58 strig of the Buffer.
+A serialized base-58 string of the Buffer.
 
 ___
 
@@ -222,7 +223,7 @@ ___
 
 ▸ **copyFrom**(`buff`: Buffer, `start`: number, `end`: number): *Buffer*
 
-*Defined in [src/utils/bintools.ts:142](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L142)*
+*Defined in [src/utils/bintools.ts:156](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L156)*
 
 Makes a copy (no reference) of a [Buffer](https://github.com/feross/buffer)
 over provided indecies.
@@ -243,7 +244,7 @@ ___
 
 ▸ **fromArrayBufferToBuffer**(`ab`: ArrayBuffer): *Buffer*
 
-*Defined in [src/utils/bintools.ts:185](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L185)*
+*Defined in [src/utils/bintools.ts:199](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L199)*
 
 Takes an ArrayBuffer and converts it to a [Buffer](https://github.com/feross/buffer).
 
@@ -261,7 +262,7 @@ ___
 
 ▸ **fromBNToBuffer**(`bn`: BN, `length?`: number): *Buffer*
 
-*Defined in [src/utils/bintools.ts:214](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L214)*
+*Defined in [src/utils/bintools.ts:228](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L228)*
 
 Takes a [BN](https://github.com/indutny/bn.js/) and converts it
 to a [Buffer](https://github.com/feross/buffer).
@@ -281,7 +282,7 @@ ___
 
 ▸ **fromBufferToArrayBuffer**(`buff`: Buffer): *ArrayBuffer*
 
-*Defined in [src/utils/bintools.ts:171](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L171)*
+*Defined in [src/utils/bintools.ts:185](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L185)*
 
 Takes a [Buffer](https://github.com/feross/buffer) and returns an ArrayBuffer.
 
@@ -299,7 +300,7 @@ ___
 
 ▸ **fromBufferToBN**(`buff`: Buffer): *BN*
 
-*Defined in [src/utils/bintools.ts:200](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L200)*
+*Defined in [src/utils/bintools.ts:214](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L214)*
 
 Takes a [Buffer](https://github.com/feross/buffer) and converts it
 to a [BN](https://github.com/indutny/bn.js/).
@@ -316,9 +317,9 @@ ___
 
 ###  isBase58
 
-▸ **isBase58**(`str`: string): *boolean*
+▸ **isBase58**(`base58`: string): *boolean*
 
-*Defined in [src/utils/bintools.ts:65](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L65)*
+*Defined in [src/utils/bintools.ts:75](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L75)*
 
 Returns true if base58, otherwise false
 
@@ -326,7 +327,7 @@ Returns true if base58, otherwise false
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`str` | string | the string to verify is base58  |
+`base58` | string | the string to verify is base58  |
 
 **Returns:** *boolean*
 
@@ -336,7 +337,7 @@ ___
 
 ▸ **isBase64**(`str`: string): *boolean*
 
-*Defined in [src/utils/bintools.ts:51](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L51)*
+*Defined in [src/utils/bintools.ts:53](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L53)*
 
 Returns true if base64, otherwise false
 
@@ -350,11 +351,29 @@ Name | Type | Description |
 
 ___
 
+###  isCB58
+
+▸ **isCB58**(`cb58`: string): *boolean*
+
+*Defined in [src/utils/bintools.ts:67](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L67)*
+
+Returns true if cb58, otherwise false
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`cb58` | string | the string to verify is cb58  |
+
+**Returns:** *boolean*
+
+___
+
 ###  isDecimal
 
 ▸ **isDecimal**(`str`: string): *boolean*
 
-*Defined in [src/utils/bintools.ts:87](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L87)*
+*Defined in [src/utils/bintools.ts:101](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L101)*
 
 Returns true if decimal, otherwise false
 
@@ -370,9 +389,9 @@ ___
 
 ###  isHex
 
-▸ **isHex**(`str`: string): *false | RegExpMatchArray‹›*
+▸ **isHex**(`hex`: string): *boolean*
 
-*Defined in [src/utils/bintools.ts:78](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L78)*
+*Defined in [src/utils/bintools.ts:88](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L88)*
 
 Returns true if hexidecimal, otherwise false
 
@@ -380,9 +399,9 @@ Returns true if hexidecimal, otherwise false
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`str` | string | the string to verify is hexidecimal  |
+`hex` | string | the string to verify is hexidecimal  |
 
-**Returns:** *false | RegExpMatchArray‹›*
+**Returns:** *boolean*
 
 ___
 
@@ -390,7 +409,7 @@ ___
 
 ▸ **isPrimaryBechAddress**(`address`: string): *boolean*
 
-*Defined in [src/utils/bintools.ts:100](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L100)*
+*Defined in [src/utils/bintools.ts:114](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L114)*
 
 Returns true if meets requirements to parse as an address as Bech32 on X-Chain or P-Chain, otherwise false
 
@@ -408,7 +427,7 @@ ___
 
 ▸ **parseAddress**(`addr`: string, `blockchainID`: string, `alias`: string, `addrlen`: number): *Buffer*
 
-*Defined in [src/utils/bintools.ts:306](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L306)*
+*Defined in [src/utils/bintools.ts:348](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L348)*
 
 Takes an address and returns its [Buffer](https://github.com/feross/buffer)
 representation if valid. A more strict version of stringToAddress.
@@ -431,15 +450,16 @@ ___
 
 ###  stringToAddress
 
-▸ **stringToAddress**(`address`: string): *Buffer*
+▸ **stringToAddress**(`address`: string, `hrp?`: string): *Buffer*
 
-*Defined in [src/utils/bintools.ts:286](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L286)*
+*Defined in [src/utils/bintools.ts:299](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L299)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `address` | string |
+`hrp?` | string |
 
 **Returns:** *Buffer*
 
@@ -449,7 +469,7 @@ ___
 
 ▸ **stringToBuffer**(`str`: string): *Buffer*
 
-*Defined in [src/utils/bintools.ts:127](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L127)*
+*Defined in [src/utils/bintools.ts:141](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L141)*
 
 Produces a [Buffer](https://github.com/feross/buffer) from a string. ONLY USED IN TRANSACTION FORMATTING, LENGTH IS PREPENDED.
 
@@ -467,7 +487,7 @@ ___
 
 ▸ **validateChecksum**(`buff`: Buffer): *boolean*
 
-*Defined in [src/utils/bintools.ts:248](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L248)*
+*Defined in [src/utils/bintools.ts:262](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L262)*
 
 Takes a [Buffer](https://github.com/feross/buffer) with an appended 4-byte checksum
 and returns true if the checksum is valid, otherwise false.
@@ -486,7 +506,7 @@ ___
 
 ▸ **getInstance**(): *[BinTools](utils_bintools.bintools.md)*
 
-*Defined in [src/utils/bintools.ts:40](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/bintools.ts#L40)*
+*Defined in [src/utils/bintools.ts:42](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/bintools.ts#L42)*
 
 Retrieves the BinTools singleton.
 

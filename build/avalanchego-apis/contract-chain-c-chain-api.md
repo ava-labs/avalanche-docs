@@ -4,7 +4,7 @@ description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
 
 # Contract Chain \(C-Chain\) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
+_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
 
 ## Deploying a Smart Contract
 
@@ -63,6 +63,7 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 * `eth_`
 * `personal_`
 * `txpool_`
+* `debug_`
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
@@ -101,7 +102,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -148,7 +149,7 @@ avax.export({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -210,7 +211,7 @@ avax.exportAVAX({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -265,7 +266,7 @@ avax.exportKey({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -326,7 +327,7 @@ avax.getUTXOs(
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example**
 
@@ -351,7 +352,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -398,7 +399,7 @@ avax.import({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -453,7 +454,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -503,7 +504,7 @@ avax.importKey({
 
 #### Example Call
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -525,6 +526,93 @@ curl -X POST --data '{
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     },
     "id": 1
+}
+```
+
+### avax.issueTx
+
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+
+#### **Signature**
+
+```cpp
+avax.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avax.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
+### avax.getAtomicTxStatus
+
+Get the status of an atomic transaction sent to the network.
+
+#### **Signature**
+
+```cpp
+avax.getAtomicTxStatus({txID: string}) -> {
+  status: string,
+  blockHeight: string // returned when status is Accepted
+}
+```
+
+`status` is one of:
+
+* `Accepted`: The transaction is \(or will be\) accepted by every node. Check the `blockHeight` property
+* `Processing`: The transaction is being voted on by this node
+* `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
+* `Unknown`: The transaction hasn’t been seen by this node
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "status":"Accepted",
+        "blockHeight": "1"
+    }
 }
 ```
 

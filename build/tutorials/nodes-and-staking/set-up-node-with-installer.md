@@ -1,4 +1,4 @@
-# Run an Avalanche Node on Linux using Install Script
+# Run an Avalanche Node using the Install Script
 
 We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
 
@@ -59,7 +59,7 @@ So, now that you prepared your system and have the info ready, let's get to it.
 
 To download and run the script, enter the following in the terminal:
 
-```text
+```bash
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
 chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
@@ -111,6 +111,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service 
 Done!
 
 Your node should now be bootstrapping on the main net.
+Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
 To follow the log use (ctrl+C to stop):
@@ -125,7 +126,7 @@ The script is finished, and you should see the system prompt again.
 
 AvalancheGo should be running in the background as a service. You can check that it's running with:
 
-```text
+```bash
 sudo systemctl status avalanchego
 ```
 
@@ -139,7 +140,7 @@ Main PID: 2142 (avalanchego)
 Tasks: 8 (limit: 4495)
 Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
-└─2142 /home/ubuntu/avalanche-node/avalanchego --plugin-dir=/home/ubuntu/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=
+└─2142 /home/ubuntu/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=
 
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: initializing last accepted block as 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: initializing consensus engine
@@ -157,8 +158,8 @@ Note the `active (running)` which indicates the service is running ok. You may n
 
 To find out your NodeID, which is used to identify your node to the network, run the following command:
 
-```text
-sudo journalctl -u avalanchego | grep "node's ID"
+```bash
+sudo journalctl -u avalanchego | grep "NodeID"
 ```
 
 It will produce output like:
@@ -171,7 +172,7 @@ Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRb
 
 Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
 
-```text
+```bash
 sudo journalctl -u avalanchego -f
 ```
 
@@ -181,13 +182,13 @@ Press `ctrl+C` when you wish to stop reading node output.
 
 To stop AvalancheGo, run:
 
-```text
+```bash
 sudo systemctl stop avalanchego
 ```
 
 To start it again, run:
 
-```text
+```bash
 sudo systemctl start avalanchego
 ```
 
@@ -203,7 +204,7 @@ It is recommended to always upgrade to the latest version, because new versions 
 
 To upgrade your node, just run the installer script again:
 
-```text
+```bash
 ./avalanchego-installer.sh
 ```
 
@@ -226,6 +227,75 @@ New node version:
 avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413bbac158d6626f712d2]
 Done!
 ```
+
+## Node configuration
+
+File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/command-line-interface.md). Default configuration may look like this:
+
+```javascript
+{
+  "dynamic-public-ip": "opendns",
+  "http-host": ""
+}
+```
+
+Note that configuration file needs to be a properly formatted `JSON` file, so switches are formatted differently than for command line, so don't enter options like `--dynamic-public-ip=opendns` but as in the example above.
+
+## Using a previous version
+
+The installer script can also be used to install a version of AvalancheGo other than the latest version.
+
+To see a list of available versions for installation, run:
+
+```bash
+./avalanchego-installer.sh --list
+```
+
+It will print out a list, something like:
+
+```text
+AvalancheGo installer
+---------------------
+Available versions:
+v1.3.2
+v1.3.1
+v1.3.0
+v1.2.4-arm-fix
+v1.2.4
+v1.2.3-signed
+v1.2.3
+v1.2.2
+v1.2.1
+v1.2.0
+```
+
+To install a specific version, run the script with `--version` followed by the tag of the version. For example:
+
+```bash
+./avalanchego-installer.sh --version v1.3.1
+```
+
+{% hint style="danger" %}
+Note that not all AvalancheGo versions are compatible. You should generally run the latest version. Running a version other than latest may lead to your node not working properly and, for validators, not receiving a staking reward.
+{% endhint %}
+
+Thanks to community member [Jean Zundel](https://github.com/jzu) for the inspiration and help implementing support for installing non-latest node versions.
+
+## Reinstall and script update
+
+Installer script gets updated from time to time, with new features and capabilities added. To take advantage of new features or to recover from modifications that made the node fail, you may want to reinstall the node. To do that, fetch the latest version of the script from the web with:
+
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
+```
+
+After the script has updated, run it again with the `--reinstall` command line argument:
+
+```bash
+./avalanchego-installer.sh --reinstall
+```
+
+This will delete the existing service file, and run the installer from scratch, like it was started for the first time. Note that the database and NodeID will be left intact.
 
 ## What next?
 

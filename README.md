@@ -6,45 +6,11 @@ description: >-
 
 # Developer Documentation
 
-{% tabs %}
-{% tab title="Coming From Ethereum?" %}
-{% page-ref page="build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
-
-{% page-ref page="build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
-{% endtab %}
-
-{% tab title="Avalanche Wallet" %}
-{% page-ref page="build/tutorials/nodes-and-staking/staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md" %}
-
-{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md" %}
-
-{% page-ref page="build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md" %}
-{% endtab %}
-
-{% tab title="Staking" %}
-{% page-ref page="build/get-started.md" %}
-
-{% page-ref page="build/tutorials/nodes-and-staking/" %}
-{% endtab %}
-
-{% tab title="Advanced" %}
-{% page-ref page="build/tutorials/platform/create-a-subnet.md" %}
-
-{% page-ref page="build/tutorials/platform/create-a-new-blockchain.md" %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
-
-{% page-ref page="build/tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
-{% endtab %}
-{% endtabs %}
-
 ## Avalanche
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche is the first smart contracts platform that processes 4,500+ transactions/second and instantly confirms transactions. Ethereum developers can quickly build on Avalanche as Solidity works out-of-the-box.
+[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche is the first decentralized smart contracts platform built for the scale of global finance, with near-instant transaction finality. Ethereum developers can quickly build on Avalanche as Solidity works out-of-the-box.
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput, without compromising decentralization.
+A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput without compromising decentralization.
 
 ## AVAX
 
@@ -52,7 +18,7 @@ AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that i
 
 ## Avalanche Consensus Protocol
 
-![Consensus Comparison](.gitbook/assets/image%20%2810%29%20%281%29.png)
+![Consensus Comparison](.gitbook/assets/image%20%2810%29%20%281%29%20%281%29%20%281%29.png)
 
 Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
 

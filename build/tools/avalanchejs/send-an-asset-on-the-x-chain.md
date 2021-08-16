@@ -71,16 +71,16 @@ Now that we sent the transaction to the network, it takes a few seconds to deter
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+The statuses can be one of "Accepted", "Processing", "Unknown", and "Rejected":
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Accepted" indicates that the transaction has been accepted as valid by the network and executed
+* "Processing" indicates that the transaction is being voted on.
+* "Unknown" indicates that node knows nothing about the transaction, indicating the node doesn’t have it
+* "Rejected" indicates the node knows about the transaction, but it conflicted with an accepted transaction
 
 ## Check the results <a id="check-the-results"></a>
 
-The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+The transaction finally came back as "Accepted", now let’s update the UTXOSet and verify that the transaction balance is as we expected.
 
 _Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
 

@@ -321,7 +321,7 @@ platform.createBlockchain(
 * `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
 * `name` is a human-readable name for the new blockchain. Not necessarily unique.
 * `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
+* `encoding` specifies the format to use for `genesisData`. Can be either "cb58" or "hex". Defaults to "cb58". Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
@@ -1067,6 +1067,58 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getRewardUTXOs
+
+Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period ended.
+
+#### **Signature**
+
+```cpp
+platform.getRewardUTXOs({
+    txID: string,
+    encoding: string //optional
+}) -> {
+    numFetched: integer,
+    utxos: []string,
+    encoding: string
+}
+```
+
+* `txID` is the ID of the staking or delegating transaction
+* `numFetched` is the number of returned UTXOs
+* `utxos` is an array of encoded reward UTXOs 
+* `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getRewardUTXOs",
+    "params": {
+        "txID": "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y5"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "2",
+        "utxos": [
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+        ],
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
+
 ### platform.getStakingAssetID
 
 Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
@@ -1243,7 +1295,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1297,6 +1349,13 @@ platform.getTxStatus({
     txID: string
 }) -> {status: string}
 ```
+
+`status` is one of:
+
+* `Committed`: The transaction is \(or will be\) accepted by every node
+* `Processing`: The transaction is being voted on by this node
+* `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field for more information
+* `Unknown`: The transaction hasn’t been seen by this node
 
 #### **Example Call**
 
@@ -1359,7 +1418,7 @@ platform.getUTXOs(
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
+* `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 
 #### **Example**
 
@@ -1601,7 +1660,7 @@ platform.issueTx({
 ```
 
 * `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` specifies the encoding format for the transaction bytes. Can be either "cb58" or "hex". Defaults to "cb58".
 * `txID` is the transaction’s ID.
 
 #### **Example Call**

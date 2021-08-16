@@ -6,7 +6,7 @@
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../get-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
 
 ## Dependencies
 
@@ -77,7 +77,7 @@ module.exports = {
      },
      network_id: "*",
      gas: 3000000,
-     gasPrice: 470000000000
+     gasPrice: 225000000000
    }
   }
 };
@@ -212,7 +212,8 @@ Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made 
 ```text
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
 ```
-**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 (the default used by truffle). 
+
+**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 \(the default used by truffle\).
 
 You can run the script with:
 

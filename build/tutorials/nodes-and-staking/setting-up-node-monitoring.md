@@ -1,4 +1,4 @@
-# Run an Avalanche Node Monitoring
+# Monitor an Avalanche Node
 
 _Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
 
@@ -227,7 +227,7 @@ On Grafana’s web interface:
 * Select Prometheus.
 * In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
 * Click `Save & Test`
-* Check for “Data source is working” green message.
+* Check for "Data source is working" green message.
 
 ## Set up node\_exporter
 
@@ -365,7 +365,7 @@ Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You s
 
 Make sure that all of them have `State` as `UP`.
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/c65ea53488738b0b624a53382fe89ac5e02597ca/dashboards/README.md).
+Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards).
 
 To import the preconfigured dashboard:
 
