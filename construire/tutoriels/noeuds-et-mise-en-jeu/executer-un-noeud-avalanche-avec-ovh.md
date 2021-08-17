@@ -228,7 +228,7 @@ type .ssh\id_rsa.pub | ssh avalanche-user@VPS_IP -p 2221 "mkdir -p ~/.ssh && chm
 pour MacOS :
 
 ```cpp
-cat .ssh\id_rsa.pub | ssh avalanche-user@VPS_IP -p 2221 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cat .ssh/id_rsa.pub | ssh avalanche-user@VPS_IP -p 2221 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys"
 ```
 
 ![](https://miro.medium.com/max/1238/1*CpOR-NeAE2LmA_fili4PLg.png)
@@ -321,11 +321,11 @@ Installons AvalancheGo, l’implémentation Go d’un nœud Avalanche, et connec
 Pour cela, installons **Go**
 
 ```cpp
-wget https://golang.org/dl/go1.15.2.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.15.5.linux-amd64.tar.gz
 ```
 
 ```cpp
-sudo sudo tar -C /usr/local -xzf go1.15.2.linux-amd64.tar.gz
+sudo sudo tar -C /usr/local -xzf go1.15.5.linux-amd64.tar.gz
 ```
 
 ```cpp
