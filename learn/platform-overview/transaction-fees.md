@@ -13,7 +13,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
 {% hint style="warning" %}
-The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\) prior to Apricot Phase 3. The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). Apricot Phase 3 introduces dynamic fees to the C-Chain which will allow the gas price to fluctuate between 75 GWei and 225 GWei (dependent on network activity). See below for more detailed information on dynamic fees in Apricot Phase 3.
+The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX (GWei) prior to Apricot Phase 3. The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). Apricot Phase 3 introduces dynamic fees to the C-Chain which will allow the gas price to fluctuate between 75 nAVAX (GWei) and 225 nAVAX (GWei) (dependent on network activity). See below for more detailed information on dynamic fees in Apricot Phase 3.
 {% endhint %}
 
 
@@ -46,19 +46,19 @@ The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(225 GWei\) pri
 | C        : Simple send       |           (*) 0.004725 |
 +----------+-------------------+------------------------+
 
-(*) 21000 gas units at 225 nAVAX gas price
+(*) 21000 gas units at 225 nAVAX (GWei) gas price
 ```
 
 ## C-Chain Dynamic Fees
 
 Apricot Phase 3 introduces dynamic fees to the C-Chain. After this upgrade goes into effect, the Avalanche C-Chain uses an algorithm to determine the "base fee" for a transaction.
 The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target.
-This change goes into effect on Avalanche Mainnet at 11:00:00 UTC on August 24, 2021. 
+This change goes into effect on Avalanche Mainnet at 14:00:00 UTC on August 24, 2021. 
 
 ### Base Fee
 
-The base fee can go as low as 75 nAVAX (gwei) and as high as 225 nAVAX (gwei). 
-Any transaction issued with the old, constant gas price of 225 nAVAX will be considered valid and included in a block.
+The base fee can go as low as 75 nAVAX (GWei) and as high as 225 nAVAX (GWei). 
+Any transaction issued with the old, constant gas price of 225 nAVAX (GWei) will be considered valid and included in a block.
 We recommend that users switch to using the `eth_baseFee` and `eth_maxPriorityFeePerGas` API methods to estimate what fee to use in their transactions.
 
 ### Dynamic Fee Transactions
