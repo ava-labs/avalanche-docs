@@ -133,9 +133,11 @@ On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so yo
 
 Gas on Avalanche is burned. Validators don't keep the gas for themselves \(they get rewarded for staking\), so the dynamics of 'gas wars' where higher-priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
 
-### Coreth Configuration
+### C-Chain Configuration
 
-By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. Individual chains, including the C-Chain, have their own configuration options specified in a separate config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
+Individual chains, including the C-Chain, have their own configuration options that can be given in a config file.
+You may want to use a C-Chain configiguration other than the default when developing dapps.
+For more details on chain configs, see [here.](../../references/command-line-interface.md#chain-configs)
 
 The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/command-line-interface.md#coreth-config). An example C-Chain config file:
 
