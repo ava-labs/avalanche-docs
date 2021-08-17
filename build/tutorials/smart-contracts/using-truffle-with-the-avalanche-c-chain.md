@@ -195,6 +195,8 @@ To open the truffle console:
 $ truffle console --network development
 ```
 
+Note: If you see  `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
+
 Inside truffle console:
 ```bash
 truffle(development)> accounts
