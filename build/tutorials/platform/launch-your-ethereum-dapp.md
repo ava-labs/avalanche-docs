@@ -135,25 +135,27 @@ Gas on Avalanche is burned. Validators don't keep the gas for themselves \(they 
 
 ### Coreth Configuration
 
-By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. This is done through node's command-line options. Command-line options for coreth are listed [here](../../references/command-line-interface.md#coreth-config), along with their default values.
+By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. Individual chains, including the C-Chain, have their own configuration options specified in a separate config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
 
-You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file, for example:
+The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/command-line-interface.md#coreth-config). An example C-Chain config file:
 
 ```javascript
 {
-  "coreth-config": {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "eth-api-enabled": true,
-    "personal-api-enabled": false,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": true,
-    "web3-api-enabled": true,
-    "local-txs-enabled": true
-  }
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": true,
+  "debug-api-enabled": true,
+  "web3-api-enabled": true,
+  "local-txs-enabled": true
 }
 ```
+
+{% hint style="warning" %}
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
+{% endhint %}
 
 ### Using `eth_newFilter` and Related Calls with the Public API
 
