@@ -10,7 +10,7 @@ This upgrade adds dynamic fees to the C-chain, along with various other improvem
 
 The changes in the upgrade go into effect at 10 AM EDT, August 24th 2021 on Mainnet.
 
-More info can be found at https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60 
+More info can be found [here](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60).
 
 **Network Upgrades**
 
