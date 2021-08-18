@@ -32,7 +32,7 @@ admin.alias({endpoint:string, alias:string}) -> {success:bool}
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -78,7 +78,7 @@ admin.aliasChain(
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -122,7 +122,7 @@ admin.getChainAliases(
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -174,7 +174,7 @@ admin.getLoggerLevel(
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -214,7 +214,7 @@ admin.lockProfile() -> {success:bool}
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -247,7 +247,7 @@ admin.memoryProfile() -> {success:bool}
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -292,7 +292,7 @@ admin.setLoggerLevel(
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -329,7 +329,7 @@ admin.startCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -362,7 +362,7 @@ admin.stopCPUProfiler() -> {success:bool}
 
 #### **Example Call**
 
-```sh
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -381,3 +381,4 @@ curl -X POST --data '{
     }
 }
 ```
+

@@ -894,12 +894,12 @@ curl -X POST --data '{
 
 ### avm.getAddressTxs <a id="avm-get-address-txs-api"></a>
 
-Returns all transactions that change the balance of the given address.
-A transaction is said to change an address's balance if either is true:
+Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
+
 * A UTXO that the transaction consumes was at least partially owned by the address.
 * A UTXO that the transaction produces is at least partially owned by the address.
 
-Note: Indexing (`index-transactions`) must be enabled in the X-chain config.
+Note: Indexing \(`index-transactions`\) must be enabled in the X-chain config.
 
 #### **Signature**
 
@@ -915,12 +915,14 @@ avm.getAddressTxs({
 }
 ```
 
-##### Request parameters
+**Request parameters**
+
 * `address`: The address for which we're fetching related transactions
 * `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
 * `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
 
-##### Response parameters
+**Response parameters**
+
 * `txIDs`: List of transaction IDs that affected the balance of this address.
 * `cursor`: Page number or offset. Use this in request to get the next page.
 

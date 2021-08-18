@@ -81,7 +81,7 @@ type ChainVM interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-```golang
+```go
 // VM describes the interface that all consensus VMs must implement
 type VM interface {
     // Returns nil if the VM is healthy.
@@ -168,7 +168,7 @@ You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` 
 
 Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
-```golang
+```go
 // Block is a possible decision that dictates the next canonical block.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
