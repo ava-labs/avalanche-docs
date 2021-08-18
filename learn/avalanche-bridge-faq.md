@@ -108,7 +108,7 @@ Yes, the code for the bridge, warden and smart contracts have been audited by Ha
 
 #### What kind of tokens can be transferred across the bridge?
 
-Only ERC20 tokens can be transferred across the bridge.
+Only supported ERC20 tokens can be transferred across the bridge. On Avalanche, these tokens are represented by the token symbol with ".e" appended. For example, the bridged DAI token is DAI.e.
 
 #### How can I add a token to the bridge?
 
@@ -129,6 +129,10 @@ The current-generation Avalanche Bridge \(AB\) to which this document refers is 
 #### Why doesn’t the newly bridged token appear in my wallet automatically?
 
 Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet \(i.e. Metamask\) which smart contracts to check for balances held by your addresses.
+
+#### Does the Avalanche Bridge support transferring NFTs?
+
+The Avalanche Bridge does not currently support NFT transfers.
 
 ### Supported Chains
 
@@ -154,10 +158,6 @@ You can convert your AEB tokens to AB tokens using the [AB user interface](http:
 
 ### Design/Technical
 
-#### Is the use of tx.origin in the BridgeToken contracts safe?
-
-While using tx.origin to check authorization within smart contracts poses potential security risks, our use case does not. In the bridge contracts, tx.origin is only used to disallow smart contracts from directly calling the "unwrap" function, since the bridge currently only supports transfer from externally owned accounts. It is safe to do this by comparing the tx.origin value to the msg.sender value.
-
 #### Can a single private key mint tokens?
 
 No single party has access to the SGX enclave address. Only the enclave itself can construct/sign a transaction using that key when it receives approvals from 3 of 4 wardens. In this sense, the enclave here is functioning as a cross-chain smart contract.
@@ -165,6 +165,14 @@ No single party has access to the SGX enclave address. Only the enclave itself c
 #### Why doesn't the bridge hold funds in a a smart contract?
 
 Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers.
+
+#### Can I integrate bridge transfers into my own smart contracts?
+
+Currently, the bridge only supports cross-chain transfers from externally owned accounts (EOAs). This is because the bridge uses the same address on both networks, ensuring that funds moved across the bridge are kept within the same wallet, and there is not a way to ensure that a smart contract at a given address on Ethereum also exists at the same address on Avalanche. ERC20 tokens sent to the bridge address from smart contracts on the Ethereum network will not be minted as wrapped tokens on Avalanche.
+
+#### Is the use of tx.origin in the BridgeToken contracts safe?
+
+While using tx.origin to check authorization within smart contracts poses potential security risks, our use case does not. In the bridge contracts, tx.origin is only used to disallow smart contracts from directly calling the "unwrap" function, since the bridge currently only supports transfer from externally owned accounts. It is safe to do this by comparing the tx.origin value to the msg.sender value.
 
 #### Where can I find more information about the design?
 
@@ -195,6 +203,10 @@ The `.e` suffix denotes that the asset moved across the bridge from Ethereum.
 #### How do I configure Metamask on Avalanche?
 
 To set up your Metamask wallet and connect it to the Avalanche network, see [here](https://support.avax.network/en/articles/4626956-how-do-i-set-up-metamask-on-avalanche).
+
+#### I transfered my ERC20 over the Avalanche Bridge. Where can I trade it now?
+
+You can trade bridge tokens on multiple different AMMs on the Avalanche C-Chain, such as [Pangolin](https://app.pangolin.exchange/).
 
 ## Ecosystem
 
