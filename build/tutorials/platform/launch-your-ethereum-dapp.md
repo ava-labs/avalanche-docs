@@ -74,7 +74,7 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer too
 
 ### Remix
 
-There is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to Avalanche network.
+There is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
 
 {% page-ref page="../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
