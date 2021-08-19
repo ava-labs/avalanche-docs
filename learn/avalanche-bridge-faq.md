@@ -34,6 +34,10 @@ The transactions that correspond to bridge transfers will appear on explorers fo
 
 Yes, you can view video tutorials for bridge functionality [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP).
 
+#### How do I pay for transaction fees on Avalanche?
+
+On Avalanche, transaction fees are paid in the native asset, AVAX. In order to send transactions on the Avalanche C-Chain, you must have sufficient AVAX in your wallet to cover the cost of the gas for the transaction. To help you get started on Avalanche, the bridge will airdrop you a small amount of AVAX if you move more than $75 \(subject to change\) worth of tokens over from Ethereum. In order to avoid running out of AVAX to cover your transaction fees, we recommend first buying an adequate amount of AVAX. You can do so on [Pangolin](https://app.pangolin.exchange/).
+
 #### Can I send to a different address on the other network?
 
 The bridge only allows transfers to the same address on the other network. After the asset is transferred to the other network, it can be sent to any address or contract.
