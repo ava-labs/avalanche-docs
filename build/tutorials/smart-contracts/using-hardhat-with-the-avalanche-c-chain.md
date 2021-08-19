@@ -142,6 +142,8 @@ Now you're running a local Avalanche network with 5 nodes.
 
 Transfer 1,000 AVAX from the X-Chain to each of the 10 accounts in `hardhat.config.ts` with the script [`fund-cchain-addresses`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/scripts/fund-cchain-addresses.js). Funding these accounts is a prerequisite for deploying and interacting with smart contracts.
 
+Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
+
 
 ```zsh
 $ cd /path/to/avalanche-smart-contract-quickstart
@@ -271,7 +273,7 @@ Type ".help" for more information.
 Get the contract instance with factory and contract address to interact with our contract:
 
 ```js
-> const Coin = await ethers.getContractFactory('ERC20');
+> const Coin = await ethers.getContractFactory('ExampleERC20');
 undefined
 > const coin = await Coin.attach('0x17aB05351fC94a1a67Bf3f56DdbB941aE6')
 undefined
