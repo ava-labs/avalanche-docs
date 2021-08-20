@@ -2,6 +2,35 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
+
+**Configuration**
+
+* Removed option `bootstrap-retry-max-attempts` and added option `bootstrap-retry-warn-frequency`
+
+**Subnets**
+
+* Added `subnetID`s to the handshake message. This notifies peers about which subnets a node is interesting in syncing.
+* Optimized subnet container gossiping.
+
+**AVM**
+
+* Fixed `avm.GetTx`'s JSON endpoint to properly report `amount`s on UTXOs.
+
+**Bootstrapping**
+
+* Fixed busy loop that could occur if a node's internet dropped during bootstrapping, causing the node to report a fatal error.
+
+**RPCChainVM**
+
+* Improved caching of unverified blocks.
+
+**Coreth**
+
+* Updated to Geth v1.10.7.  
+
 ## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
 
 **This change is not backwards compatible with previous releases.**
