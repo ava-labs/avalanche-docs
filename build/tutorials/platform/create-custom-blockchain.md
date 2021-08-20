@@ -14,7 +14,7 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 
 ## Create the Virtual Machine
 
-Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains \(instances\) from Virtual Machines. In this case we will use Timestamp VM, which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
+Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains \(instances\) from Virtual Machines. In this case we will use [Timestamp VM](https://github.com/ava-labs/timestampvm), which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
 
 {% page-ref page="create-a-virtual-machine-vm.md" %}
 
