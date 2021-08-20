@@ -4,11 +4,15 @@
 
 ## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
 
-This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
+
+**Configuration**
+
+* Removed option `bootstrap-retry-max-attempts` and added option `bootstrap-retry-warn-frequency`
 
 **Subnets**
 
-* Added `subnetID`s to the handshake message. This notifies peers about which subnet's a node is interesting in syncing.
+* Added `subnetID`s to the handshake message. This notifies peers about which subnets a node is interesting in syncing.
 * Optimized subnet container gossiping.
 
 **AVM**
@@ -26,7 +30,6 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 **Coreth**
 
 * Updated to Geth v1.10.7.  
-
 
 ## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
 
