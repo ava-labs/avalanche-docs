@@ -2,6 +2,32 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
+
+**Subnets**
+
+* Added `subnetID`s to the handshake message. This notifies peers about which subnet's a node is interesting in syncing.
+* Optimized subnet container gossiping.
+
+**AVM**
+
+* Fixed `avm.GetTx`'s JSON endpoint to properly report `amount`s on UTXOs.
+
+**Bootstrapping**
+
+* Fixed busy loop that could occur if a node's internet dropped during bootstrapping, causing the node to report a fatal error.
+
+**RPCChainVM**
+
+* Improved caching of unverified blocks.
+
+**Coreth**
+
+- Updated to Geth v1.10.7.  
+
+
 ## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
 
 **This change is not backwards compatible with previous releases.**
