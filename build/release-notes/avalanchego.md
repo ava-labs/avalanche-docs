@@ -25,7 +25,7 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 **Coreth**
 
-- Updated to Geth v1.10.7.  
+* Updated to Geth v1.10.7.  
 
 
 ## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
