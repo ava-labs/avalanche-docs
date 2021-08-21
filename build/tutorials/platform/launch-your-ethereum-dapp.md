@@ -48,7 +48,9 @@ Instead of proxying network operations through MetaMask, you can use the public 
 
 The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
-For more information, refer to the [documentation](../../tools/public-api.md).
+For more information, see documentation:
+
+{% page-ref page="../../tools/public-api.md" %}
 
 ### Running Your Own Node
 
@@ -60,7 +62,11 @@ For development purposes, [here](../nodes-and-staking/run-avalanche-node.md) is 
 
 If you need a private test network to test your dapp, [Avash](https://github.com/ava-labs/avash) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-Avash uses Lua as a scripting language for orchestrating local networks. You can find a tutorial for Avash [here](../../tools/avash.md).
+Avash uses Lua as a scripting language for orchestrating local networks.
+
+For more information, see documentation:
+
+{% page-ref page="../../tools/avash.md" %}
 
 ## Developing and Deploying Contracts
 
@@ -68,17 +74,22 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer too
 
 ### Remix
 
-[Here](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to Avalanche network.
+There is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
+
+{% page-ref page="../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in [this](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md) tutorial.
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this tutorial:
+
+{% page-ref page="../smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
 
 ### Hardhat
 
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-[Here](https://github.com/ava-labs/avalanche-smart-contract-quickstart) is a quickstart repository that our developers use to start new projects. It is already configured for Avalanche so no additional setup is required.
+For more information see:
+{% page-ref page="../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md" %}
 
 ## Avalanche Explorer
 
