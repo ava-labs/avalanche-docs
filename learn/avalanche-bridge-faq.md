@@ -77,7 +77,7 @@ The bridge also uses Chainlink price feeds to determine token prices used to cal
 
 #### Is there an airdrop? <a id="airdrop"></a>
 
-Users will be airdropped 0.1 AVAX when they transfer more than $75 \(subject to change\) of a token from Ethereum to Avalanche.
+Users will be airdropped 0.05 AVAX when they transfer more than $75 \(subject to change\) of a token from Ethereum to Avalanche.
 
 #### What if I did not receive my airdrop?
 
