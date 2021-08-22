@@ -65,9 +65,9 @@ Note that **you should not directly transfer tokens to these addresses**. You sh
 
 The bridge charges transfer fees in order to cover the cost of the transaction fees on the Avalanche and Ethereum networks. These fees are charged in-kind with the ERC20 asset being transferred. That is, when you transfer a token, a portion of the balance transferred is taken by the AB as a fee.
 
-The fee is a percentage of the estimated Ethereum transaction fee, plus a constant amount \(currently $5\) to account for price volatility.
+For moving assets from Avalanche to Ethereum, the fee is the amount of the Ethereum transaction fee, plus a constant amount \(currently $5\) to account for price volatility.
 
-For a limited time, this percentage is zero to encourage users to transfer assets. Further, transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
+For moving assets from Ethereum to Avalanche, the fee is the minimum of 5% of the tokens being transfers and ~$1.00 worth of the asset. Further, transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
 #### How is gas estimated? How does the bridge get token prices?
 
