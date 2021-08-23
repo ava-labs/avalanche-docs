@@ -51,6 +51,7 @@
     * [Upgrade Your AvalancheGo Node](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+    * [Using Hardhat with the Avalanche C-Chain](build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
     * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
     * [Verify Smart Contracts on the C-Chain Explorer](build/tutorials/smart-contracts/verify-smart-contracts.md)
     * [Add Avalanche to MetaMask Programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
