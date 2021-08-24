@@ -42,19 +42,19 @@ The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(GWei\) prior t
 +----------+-------------------+------------------------+
 | X        : Export AVAX       |                  0.001 |
 +----------+-------------------+------------------------+
-| C        : Simple send       |           (*) 0.004725 |
+| C        : Simple send       |   0.001575 - 0.004725* |
 +----------+-------------------+------------------------+
 
-(*) 21000 gas units at 225 nAVAX (GWei) gas price
+(*) C-Chain gas price varies. See below.
 ```
 
-## C-Chain Dynamic Fees
+## C-Chain Fees
 
-Apricot Phase 3 introduces dynamic fees to the C-Chain. After this upgrade goes into effect, the Avalanche C-Chain uses an algorithm to determine the "base fee" for a transaction. The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target. This change goes into effect on Avalanche Mainnet at 14:00:00 UTC on August 24, 2021.
+The Avalanche C-Chain uses an algorithm to determine the "base fee" for a transaction. The base fee increases when network utilization is above the target utilization and decreases when network utilization is below the target.
 
 ### Base Fee
 
-The base fee can go as low as 75 nAVAX \(GWei\) and as high as 225 nAVAX \(GWei\). Any transaction issued with the old, constant gas price of 225 nAVAX \(GWei\) will be considered valid and included in a block. We recommend that users switch to using the `eth_baseFee` and `eth_maxPriorityFeePerGas` API methods to estimate what fee to use in their transactions.
+The base fee can go as low as 75 nAVAX \(GWei\) and as high as 225 nAVAX \(GWei\). Previously, the gas price was fixed at 225 nAVAX. Any transaction issued with the old, constant gas price of 225 nAVAX \(GWei\) will be considered valid and included in a block. We recommend that users switch to using the `eth_baseFee` and `eth_maxPriorityFeePerGas` API methods to estimate what fee to use in their transactions.
 
 ### Dynamic Fee Transactions
 
