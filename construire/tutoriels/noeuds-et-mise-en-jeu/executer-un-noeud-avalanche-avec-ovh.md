@@ -595,7 +595,7 @@ cette commande vous retournera un message comme celui-ci, vérifier si tout est 
 {"jsonrpc":"2.0","result":{"version":"avalanche/1.0.1"},"id":1}
 ```
 
-{% hint style="warning" %}
+{% hint style="danger" %}
 Si vous rencontrez cette erreur : **`-bash: cd: /src/github.com/ava-labs/avalanchego: No such file or directory`**
 
 `Faites les commandes suivantes :`
@@ -647,6 +647,18 @@ go version
 ```
 
 puis reprendre à ****`cd $GOPATH/src/github.com/ava-labs/avalanchego`
+
+**`Si votre noeud ne se met pas à jour correctement faites la commande suivante:`**
+
+```cpp
+git reset --hard && git pull
+```
+
+puis reprendre à
+
+```cpp
+git pull
+```
 {% endhint %}
 
 Afin de monitorer votre noeud vous avez la possibilité d'installer htop ou bpytop, selon votre préférence graphique.
