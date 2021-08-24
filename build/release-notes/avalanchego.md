@@ -2,6 +2,24 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.5.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)\)
+
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
+
+**Coreth**
+
+* Patched a [Geth security vulnerability](https://twitter.com/go_ethereum/status/1430067637996990464)
+* Patched a panic in the api backend.
+
+**AVM**
+
+* Introduced stateless codec generation for improved tooling.
+
+**Consensus**
+
+* Added additional logging around bubbling votes.
+
 
 ## v1.5.1-eth_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
 
