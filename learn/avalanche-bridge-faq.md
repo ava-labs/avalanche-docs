@@ -176,10 +176,10 @@ The Avalanche Bridge currently only supports transfer of Ethereum ERC20s to the 
 #### Can I bridge assets from (network) to Avalanche?
 
 The Avalanche Bridge can only transfer assets between Ethereum and Avalanche.
-To get assets from another network onto Avalanche, you can:
-1. Transfer those assets to Ethereum, and from Ethereum to Avalanche
-2. Use a third party bridge not created/maintained/supported by Ava Labs
-3. Buy AVAX on a centralized exchange and withdraw AVAX to Avalanche, then use an AMM to swap for other assets.
+To get assets from another network onto Avalanche, you can do one of the following:
+* Transfer those assets to Ethereum, and from Ethereum to Avalanche
+* Use a third party bridge not created/maintained/supported by Ava Labs
+* Buy AVAX on a centralized exchange and withdraw AVAX to Avalanche, then use an AMM to swap for other assets.
 
 ### AEB \(Deprecated Bridge\)
 
