@@ -290,7 +290,7 @@ Specifies the directory that contains chain configs, as described above. Default
 
 #### C-Chain Configs
 
-Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
 For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`, with these contents:
 
@@ -305,6 +305,21 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 ```
 
 For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
+
+#### X-Chain Configs
+
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
+
+For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`, with these contents:
+
+```javascript
+{
+  "index-transactions": true,
+  "index-allow-incomplete": false
+}
+```
+
+For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
 
 ### C-Chain / Coreth <a id="coreth-config"></a>
 
@@ -361,6 +376,12 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), mea
 `rpc-tx-fee-cap` \(int\):
 
 Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
+
+#### Database Pruning
+
+`pruning-enabled`\(bool\):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
 #### Eth APIs
 
@@ -514,12 +535,6 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
-#### Database Pruning
-
-`pruning-enabled`\(bool\):
-
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
-
 ### Health
 
 `--health-check-frequency` \(duration\):
@@ -654,4 +669,33 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 ```
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
+
+### X-Chain / AVM <a id="avm-config"></a>
+
+This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
+
+```javascript
+{
+  "index-transactions": false,
+  "index-allow-incomplete": false
+}
+```
+
+Default values are overridden only if explicitly specified in the config.
+
+The parameters are as follows:
+
+#### Transaction Indexing
+
+`index-transactions` \(boolean\):
+
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api).
+
+Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` \(see below\).
+
+`index-allow-incomplete` \(boolean\):
+
+Allows incomplete indices. Default value is `false`.
+
+This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 

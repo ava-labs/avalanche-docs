@@ -19,10 +19,15 @@ To download and build Avash:
 git clone https://github.com/ava-labs/avash.git; cd avash; go build
 ```
 
-To run Avash:
+To run Avash and fire up a 5 node staking network:
 
 ```bash
 ./avash
+Config file set: /Users/username/.avash.yaml
+Avash successfully configured.
+avash> runscript scripts/five_node_staking.lua
+RunScript: Running scripts/five_node_staking.lua
+RunScript: Successfully ran scripts/five_node_staking.lua:
 ```
 
 ## Configuration <a id="configuration"></a>
