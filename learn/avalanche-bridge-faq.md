@@ -65,7 +65,7 @@ Yes, you can click on the “Speed Up” button on Metamask. “Speeding up” a
 
 When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are to be transferred, not the actual number of tokens. This is a known problem with Metamask.
 
-#### What are the bridge contract adresses?
+#### What is the Bridge's address on Ethereum and Avalanche?
 
 Bridge Addresses:
 
@@ -117,7 +117,7 @@ The role of the wardens is fourfold:
 3. Tracking Processed Transactions
 4. Hosting Public Information
 
-A complete breakdown of a Warden’s role and responsibilities will be provided in an upcoming Avalanche Bridge Tech Design article.
+A complete breakdown of a Warden’s role and responsibilities can be found [here](https://medium.com/avalancheavax/avalanche-bridge-secure-cross-chain-asset-transfers-using-intel-sgx-b04f5a4c7ad1).
 
 #### What is the relationship between Ava Labs and the Wardens?
 
@@ -205,7 +205,7 @@ No single party has access to the SGX enclave address. Only the enclave itself c
 
 #### Why doesn't the bridge hold funds in a a smart contract?
 
-Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers.
+Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers. 
 
 #### Can I integrate bridge transfers into my own smart contracts?
 
