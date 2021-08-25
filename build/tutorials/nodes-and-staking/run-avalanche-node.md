@@ -23,7 +23,7 @@ This tutorial is primarily geared toward developers and people interested in how
 
 ## Requirements
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest. Note that as network usage increases, hardware requirements may change.
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 * CPU: Equivalent of 8 AWS vCPU
 * RAM: 16 GB
