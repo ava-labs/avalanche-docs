@@ -223,7 +223,7 @@ See [Avalanche Bridge: Secure Cross-Chain Asset Transfers Using Intel SGX](https
 
 #### I can't see my tokens in my wallet. Are they lost forever?
 
-No. It is very likely a user interface issue, and the tokens are there but you just don't see the tokens. See [here](avalanche-bridge-faq.md#cant-see-tokens).
+No. It is very likely a user interface issue, and the tokens are there but you just don't see the tokens. See [here](avalanche-bridge-faq.md#cant-see-funds).
 
 #### On the Proof of Assets page, why don't the amount of an asset on Ethereum and Avalanche match?
 
