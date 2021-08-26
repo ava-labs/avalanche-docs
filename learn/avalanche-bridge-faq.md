@@ -82,7 +82,7 @@ The bridge charges transfer fees in order to cover the cost of the transaction f
 
 For moving assets from Avalanche to Ethereum, the fee is the value of the maximum Ethereum transaction fee (gas limit * current gas price), plus a constant dollar amount \(currently $5\) to account for price volatility. Note that the maximum Ethereum transaction fee is based on the gas limit and may be higher than the actual transaction fee, which is based on the amount of gas used by the transaction.
 
-For moving assets from Ethereum to Avalanche, the fee is at most $1,  which is the minimum of 5% of the tokens being transferred and $1.00. Foe example, if you transfer more than $20 of assets, the fee will be $1; if you transfer less than $20 of assets, the fee will be 5% of the transferred assets. Further, transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
+For moving assets from Ethereum to Avalanche, the fee is at most $1,  which is the minimum of 5% of the tokens being transferred and $1.00. For example, if you transfer more than $20 of assets, the fee will be $1; if you transfer less than $20 of assets, the fee will be 5% of the transferred assets. Further, transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
 #### Why doesn't the amount of asset I received on one network match the amount that I sent from the other?
 
