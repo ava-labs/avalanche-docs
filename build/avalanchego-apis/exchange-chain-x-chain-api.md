@@ -958,7 +958,7 @@ curl -X POST --data '{
 
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be, `"cb58"`, `"hex"` or `"json"`. Defaults to "cb58".
 
 #### **Signature**
 
