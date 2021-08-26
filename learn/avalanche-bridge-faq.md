@@ -84,7 +84,7 @@ When moving assets from Avalanche to Ethereum, the fee is the value of the maxim
 
 When moving assets from Ethereum to Avalanche:
 * If you're transeferring less than $20 of assets, the fee is 5% of the value of the assets transferred.
-* If you're transferring more then $20 of assets, the fee is $1.
+* If you're transferring more than $20 of assets, the fee is $1.
  
 Transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
