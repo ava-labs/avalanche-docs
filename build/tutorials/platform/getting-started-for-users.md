@@ -2,21 +2,25 @@
 
 The purpose of this tutorial is to give a general overview and serve as a starting point for users new to the Avalanche Platform and its ecosystem. General knowledge of cryptocurrency space is assumed, in particular familiarity with Ethereum ecosystem.
 
-We recommend reading this document entirely before going further, as that way you may avoid common pitfalls and problems that new users run into when onboarding onto Avalanche. Also, many of these components and applications depend on each other, so it's best to get a full picture of relationships before diving in. Also, it contains safety warnings and pointers that you need to be familiar with in order not to get scammed and your tokens stolen.
+We recommend reading this document entirely before going further, as that way you may avoid common pitfalls and problems that new users run into when onboarding onto Avalanche. In addition, many of these components and applications depend on each other, so it's best to get a full picture of relationships before diving in. Also, it contains safety warnings and pointers that you need to be familiar with in order not to get scammed and your tokens stolen.
 
 You can find a general overview of the Avalanche Platform [here](https://support.avax.network/en/articles/4135427-avalanche-platform-overview), it will be useful in understanding commonalities and differences between Avalanche and other platforms.
 
 ## Funding
 
-As all fees on Avalanche are paid in native token, you will need to have some in order to participate in the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Further ways are explained below.
+As all fees on Avalanche are paid in native token AVAX, you will need to have some in order to participate in the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Further ways are explained below.
 
 ## Wallet
 
-Cryptocurrency funds are usually accessed through wallets. [Avalanche Wallet](https://wallet.avax.network/) is the official web wallet for the Avalanche platform. You can use it to [create your wallet](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) for use on the network.
+Cryptocurrency funds are usually accessed through wallets. Your wallet is how you send and receive tokens on the Avalanche Network, and can almost be seen like a bank account. But, unlike traditional banking, there is no customer support to go to if you lose access to your wallet. It's very important to safely store your secret passphrase in a secure manner, like the password manager of your choice (Enpass, Lastpass, etc). **If you do not save your secret passphrase, you will lose access to your funds forever!**
+
+[Avalanche Wallet](https://wallet.avax.network/) is the official web wallet for the Avalanche platform. You can follow [this](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) to create your own wallet.
 
 You can also use a [HW Ledger](https://docs.avax.network/build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche) to log into your wallet. Using a HW wallet is the most secure way of accessing the network because your private keys and the passphrase never leave the device.
 
 Once you have your wallet, you may want to send your AVAX [from exchange to your wallet](https://support.avax.network/en/articles/5315157-how-to-send-avax-from-an-exchange-to-the-avalanche-wallet).
+
+Avalanche Primary Network consists of three different chains, as explained in the overview article linked above. To move your funds from one chain to another, you will need to make [cross-chain transfers](https://support.avax.network/en/articles/4840306-how-do-i-transfer-my-avax-between-avalanche-x-p-and-c-chains).
 
 ## Metamask
 
@@ -26,57 +30,39 @@ By default, Metamask connects to Ethereum. To connect to Avalanche, you need to 
 
 In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or exporting the C-Chain private key from the wallet (Select `Manage Keys`, then `View C Chain Private Key`). If you use the Ledger hardware wallet, you can use it in Metamask too, it will connect to the same wallet.
 
-## Explorers
+To see your funds in Metamask (if you imported Avalanche Wallet), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. If you transferred the funds from an exchange they will usually be on the X-Chain, so you will need to a cross-chain transfer, as explained in the previous section. 
 
-Explorers are websites that index and present network activity, where you can look up individual transactions, and find out more about what's flowing through the network.
+## Transactions
 
-### Official explorer
+You can send transactions from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to a wrong address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that the address is actually on Avalanche.
 
-[explorer.avax.network](https://explorer.avax.network/) is the official network explorer maintained by Ava Labs.
+### Sending to Other Networks
 
-### AvaScan
+Other networks may have address formats that are identical to the ones on Avalanche. But that doesn't mean that you can send funds from Avalanche Wallet to, for example, Ethereum or BSC. Wallet or Metamask have no way of knowing that your intention is to send funds to Ethereum, so they will allow you to do that. But your funds will not end up on Ethereum (or BSC, or another network). They will stay on Avalanche and be sent to that address, but on Avalanche. And once sent, only the person that has the private keys that control that address can ever get to them. If you control the destination address you will probably be able to retrieve them by adding the controlling account to Metamask and switching to Avalanche. But if you sent them to someone else's account, you will need their cooperation, and if the address was an exchange's hot wallet address (for example), you will have a hard time convincing the exchange to retrieve them.
 
-[AvaScan](https://avascan.info/) is an independent explorer website, known for its slick presentation and comprehensive overview, especially interesting for [validators and delegators](https://avascan.info/staking/validators) as it shows lots of interesting information about individual network validators.
+The above stands in reverse direction too. You cannot send to your Avalanche Wallet directly from Ethereum, BSC or other networks. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](#Avalanche Bridge) section below.
 
-### VScout
+If you're unsure of what you're attempting to do, especially if you're attempting something for the first time, it's best to send a small amount ('dust') first, to check that it arrives at the intended destination.
 
-[VScout](https://vscout.io/) is another alternative explorer for Avalanche. Among other things there you can see distribution of validators across the planet.
+### Adding Tokens
+
+Besides the native token, AVAX, numerous other tokens exist on the network. Avalanche Wallet has built in support for the most popular tokens, but Metamask does not. If you acquire other tokens, they may not immediately be visible in your wallet or Metamask. You may need to add them manually, by selecting 'Add token' button. To add a token, you will need to know the token contract address. Do not use the search function in Metamask, it only works correctly on Ethereum. You can find addresses of the most popular tokens [here](https://tokenlists.org/token-list?url=https://raw.githubusercontent.com/pangolindex/tokenlists/main/ab.tokenlist.json) for assets from Ethereum, or [here](https://tokenlists.org/token-list?url=https://raw.githubusercontent.com/pangolindex/tokenlists/main/defi.tokenlist.json) for Avalanche assets.
+
+When you add the address, the rest of the data will autofill, and your balance should be visible. You can automatically add tokens to Metamask [here](https://bridge.avax.network/proof-of-assets) by pressing the Metamask icon in the `Wrapped token` you want to add. 
 
 ## Dapps
 
 ### Avalanche Bridge
 
-Once you have your browser extension set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do (*yield farming*), will require that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
+Once you have your browser extension set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do (*yield farming*), which requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
 
 You can find a collection of video tutorials on the basic usage of the Avalanche Bridge [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP). Also, make sure that you go over the [FAQ](https://docs.avax.network/learn/avalanche-bridge-faq) which answers most common questions about the bridge and highlights things to watch out for.
 
-When you bridge over $75 or more of assets, you will also be airdropped some AVAX to help pay for initial swaps. Use those funds only to acquire additional AVAX as you will need AVAX to pay for fees on every other dapp you use! If you get stranded without enough AVAX for fees you will be unable to do anything else, so make sure you always have some AVAX in your wallet. You can swap for AVAX on:
-
-### Pangolin
-
-Another popular way of acquiring tokens on Avalanche are decentralized exchanges (DEXes). Biggest by liquidity is [Pangolin](https://app.pangolin.exchange/#/swap). It was launched with the help from Ava Labs, but it is completely community owned [DAO](https://gov.pangolin.exchange/) now.
-
-There is a collection of [tutorials](https://pangolin.exchange/tutorials/) explaining usage, and there is a community [Discord](https://discord.com/invite/PARrDYYbfw) too where you can find support and discussions.
-
-### BenQI
-
-Another popular DeFi dapp that recently launched is [BenQi](https://www.benqi.fi/), a decentralized liquidity protocol (basically, an application where you can lend and borrow tokens). You can find the instructions for using it [here](https://docs.benqi.fi/). 
-
-### Penguin Finance
-
-[Penguin Finance](https://penguinfinance.org/) is one of the fastest moving projects on the platform. They offer participation in upcoming projects, compounders, as well as a ever expanding array of products.
-
-### Snowball Finance
-
-[Snowball](https://snowball.network/) combines multiple DeFi protocols to create an interconnected experience. Swap stablecoins, deposit liquidity, or auto-compound liquidity rewards. Here's the [FAQ](https://app.snowball.network/faq). Especially interesting is their [StableVault](https://app.snowball.network/stablevault/).
-
-### Markr
-
-[Markr.io](https://markr.io/) is an aggregator of financial information about the Avalanche ecosystem. Token prices, liquidity pools, DEXes, wallet overviews. Lots of information to help you notice what is up and coming, where to go next and how your investments are doing. Well worth your time.
+When you bridge over $75 or more of assets, you will also be airdropped some AVAX to help pay for initial swaps. Use those funds only to acquire additional AVAX as you will need AVAX to pay for fees on every other dapp you use! If you get stranded without enough AVAX for fees you will be unable to do anything else, so make sure you always have some AVAX in your wallet. You can swap for AVAX on [Pangolin](https://app.pangolin.exchange).
 
 ### Ecosystem
 
-Those are only a few in an ever-growing collection of dapps deployed on Avalanche. To find others, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects.
+There is an ever-growing collection of dapps deployed on Avalanche. To find them, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects.
 
 Dip in, browse, try stuff. There are many gems in there.
 
@@ -103,6 +89,22 @@ Also, don't rush into unknown projects that promise outsized returns. Any dapp y
 ### Fake tokens
 
 Anyone can create a new token, and on Avalanche it is pretty cheap. Also, liquidity pool creation on DEXes is permissionless so anyone can create a new pair with a fake token that has the same name and token image as the real thing. To avoid that kind of scams, always select tokens from the official token lists on the DEXes, don't use links from other places.
+
+## Explorers
+
+Explorers are websites that index and present network activity, where you can look up individual transactions, and find out more about what's flowing through the network.
+
+### Official explorer
+
+[explorer.avax.network](https://explorer.avax.network/) is the official network explorer maintained by Ava Labs.
+
+### AvaScan
+
+[AvaScan](https://avascan.info/) is an independent explorer website, known for its slick presentation and comprehensive overview, especially interesting for [validators and delegators](https://avascan.info/staking/validators) as it shows lots of interesting information about individual network validators.
+
+### VScout
+
+[VScout](https://vscout.io/) is another alternative explorer for Avalanche. Among other things there you can see distribution of validators across the planet.
 
 ## Online support
 
