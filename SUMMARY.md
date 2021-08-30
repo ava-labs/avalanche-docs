@@ -24,6 +24,7 @@
   * [Ortelius Release Notes](build/release-notes/ortelius.md)
 * [Tutorials](build/tutorials/README.md)
   * [Platform](build/tutorials/platform/README.md)
+    * [Getting started for users](build/tutorials/platform/getting-started-for-users.md)
     * [Create a Blockchain Running the AVM](build/tutorials/platform/create-avm-blockchain.md)
     * [Create a Custom Blockchain](build/tutorials/platform/create-custom-blockchain.md)
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
