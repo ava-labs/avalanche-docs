@@ -1,48 +1,50 @@
 # Getting Started For Users
 
-The purpose of this tutorial is to give a general overview and serve as a starting point for users new to the Avalanche Platform and its ecosystem. General knowledge of cryptocurrency space is assumed, in particular familiarity with Ethereum ecosystem.
+The purpose of this tutorial is to give a general overview of Avalanche and to serve as a starting point for new users to the Avalanche ecosystem. General knowledge of cryptocurrency is assumed, and in particular familiarity with the Ethereum ecosystem. If you don't understand something right away, that's OK. Search for an answer online, and if you don't find it, ask on our [Discord](https://chat.avax.network).
 
-We recommend reading this document entirely before going further, as that way you may avoid common pitfalls and problems that new users run into when onboarding onto Avalanche. In addition, many of these components and applications depend on each other, so it's best to get a full picture of relationships before diving in. Also, it contains safety warnings and pointers that you need to be familiar with in order not to get scammed and your tokens stolen.
+We recommend reading this document entirely before using Avalanche so that you can avoid common pitfalls and problems that new users run into. There are many facets of Avalanche, so it's best to get a full picture of things before diving in to save yourself confusion. Also, this guide contains tips and warnings to help you avoid falling victim to scammers.
 
-You can find a general overview of the Avalanche Platform [here](https://support.avax.network/en/articles/4135427-avalanche-platform-overview), it will be useful in understanding commonalities and differences between Avalanche and other platforms.
+You can find a general overview of Avalanche [here](https://support.avax.network/en/articles/4135427-avalanche-platform-overview). It will be useful in understanding similarities and differences between Avalanche and other platforms.
 
-## Funding
+## Fees
 
-As all fees on Avalanche are paid in native token AVAX, you will need to have some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Further ways are explained below.
+All fees on Avalanche are paid in the native token, AVAX, so you'll need some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Other ways ways are explained below.
+
+If you use the [Avalanche Bridge](https://bridge.avax.network) to transfer assets to Avalanche, you will need some AVAX to move/swap your assets. The Avalanche Bridge provides an [airdrop](https://support.avax.network/en/articles/5462264-is-there-an-airdrop) of AVAX to users who transfer more than a certain value of assets to Avalanche. Use this AVAX to swap some of your bridged assets for AVAX so that you can pay future transaction fees.
 
 ## Wallet
 
-Cryptocurrency funds are usually accessed through wallets. Your wallet is how you send and receive tokens on the Avalanche Network, and can almost be seen like a bank account. But, unlike traditional banking, there is no customer support to go to if you lose access to your wallet. It's very important to safely store your secret passphrase in a secure manner, like the password manager of your choice (Enpass, Lastpass, etc). **If you do not save your secret passphrase, you will lose access to your funds forever!**
+An *address* can hold a balance of cryptocurrencies. A *wallet* controls a set of addresses. Think of an address like a lockbox, and a wallet as a key for many lockboxes. A wallet is accessible by providing a unique, secret 24 word passphrase. **If you lose this passphrase, you don't have access to your wallet, and there is no way to recover your assets!** Therefore, it's very important to safely store your wallet's secret passphrase securely. At the same time, **anyone with your passphrase can access and take all of your assets**, so it's vital to make sure nobody else knows your passphrase. It's best practice to **not have your passphrase saved on any computer.**
 
-[Avalanche Wallet](https://wallet.avax.network/) is the official web wallet for the Avalanche platform. You can follow [this](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) to create your own wallet.
+You can access your wallet on the [Avalanche Wallet](https://wallet.avax.network/) website. You can follow [this](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) guide to set up a new own wallet.
 
-You can also use a [HW Ledger](https://docs.avax.network/build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche) to log into your wallet. Using a HW wallet is the most secure way of accessing the network because your private keys and the passphrase never leave the device.
+You can and should use a [hardware Ledger](https://docs.avax.network/build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche) to log into your wallet. **Using a hardware wallet is the most secure way of accessing your tokens** because your private keys and the passphrase never leave the device.
 
-Once you have your wallet, you may want to send your AVAX [from exchange to your wallet](https://support.avax.network/en/articles/5315157-how-to-send-avax-from-an-exchange-to-the-avalanche-wallet).
+Once you have your wallet, you may want to send your AVAX from an exchange to your wallet. See [here](https://support.avax.network/en/articles/5315157-how-to-send-avax-from-an-exchange-to-the-avalanche-wallet) for a guide on doing so.
 
-Avalanche Primary Network consists of three different chains, as explained in the overview article linked above. To move your funds from one chain to another, you will need to make [cross-chain transfers](https://support.avax.network/en/articles/4840306-how-do-i-transfer-my-avax-between-avalanche-x-p-and-c-chains).
+Avalanche's Primary Network consists of three different chains, as explained in the overview article linked above. To move your funds from one chain to another, you will need to make [cross-chain transfers](https://support.avax.network/en/articles/4840306-how-do-i-transfer-my-avax-between-avalanche-x-p-and-c-chains).
 
 ## Metamask
 
-Most of the activity on the Avalanche network happens on various Dapps (decentralized apps). To interact with them, you need a browser extension that will connect your wallet with the dapp. [Metamask](http://metamask.io/) is one such popular wallet extension.
+Most of the activity on the Avalanche network happens on various dapps (decentralized apps). To interact with them, you can use a browser extension that will connect your wallet with the dapp. [Metamask](http://metamask.io/) is one such popular wallet extension.
 
 By default, Metamask connects to Ethereum. To connect to Avalanche, you need to [add Avalanche as a custom network](https://support.avax.network/en/articles/4626956-how-do-i-set-up-metamask-on-avalanche).
 
-In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or exporting the C-Chain private key from the wallet (Select `Manage Keys`, then `View C Chain Private Key`). If you use the Ledger hardware wallet, you can use it in Metamask too, it will connect to the same wallet.
+In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or by exporting the C-Chain private key from the wallet (Select `Manage Keys`, then `View C Chain Private Key`). If you use the Ledger hardware wallet, you can use it in Metamask too. It will connect to your wallet and have the same balances/addresses as if you accessed your wallet on the wallet website.
 
 To see your funds in Metamask (if you imported Avalanche Wallet), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. If you transferred the funds from an exchange they will usually be on the X-Chain, so you will need to a cross-chain transfer, as explained in the previous section. 
 
 ## Transactions
 
-You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to a wrong address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that the address is actually on Avalanche.
+You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to an incorrect address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that you mean to send to an address on Avalanche and not a different network (see next section.)
 
 ### Sending to Other Networks
 
-Other networks may have address formats that are identical to the ones on Avalanche. But that doesn't mean that you can send funds from Avalanche Wallet to, for example, Ethereum or BSC (Binance Smart Chain). Wallet or Metamask have no way of knowing that your intention is to send funds to Ethereum, so they will allow you to do that. But your funds will not end up on Ethereum (or BSC, or another network). They will be sent to that address, but stay on Avalanche. And once sent, only the person who has the private keys that control that address can ever get to them. If you control the destination address you will probably be able to retrieve them by adding the controlling account to Metamask and switching to Avalanche. But if you sent them to someone else's account, you will need their cooperation, and if the address was an exchange's hot wallet address (for example), you will have a hard time convincing the exchange to retrieve them.
+Other networks may have address formats that are identical to the ones on Avalanche. But **that doesn't mean that you can send funds on Avalanche directly to other blockchain networks**, including, for example, Ethereum or BSC (Binance Smart Chain). If you tell Avalanche to send funds to address (`0x12345`), for example, it will do so **on Avalanche**, not another network, even if that address exists or is valid on another network. Your funds will not end up on the other network. Once the funds are sent, only the person who has the private keys that control the destination address can ever access them. If *you* control the destination address, you can probably be able to retrieve them by importing the private key that controls the address to Metamask. If you sent them to someone else's address, though, you will need their cooperation, which may be difficult.
 
-The above stands in reverse direction too. You cannot send to your Avalanche Wallet directly from Ethereum, BSC or other networks. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](#Avalanche Bridge) section below.
+The above applies in the reverse direction, too. You cannot send funds to an Avalanche address directly from Ethereum, BSC, etc. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](#Avalanche Bridge) section below.
 
-If you're unsure of what you're attempting to do, especially if you're attempting something for the first time, it's best to send a small amount ('dust') first, to check that it arrives at the intended destination.
+If you're unsure of what you're attempting to do, or doing something for the first time, it's best to send a small amount ('dust') first, to check that it arrives at the intended destination.
 
 ### Adding Tokens
 
@@ -54,7 +56,7 @@ When you add the address, the rest of the data will autofill, and your balance s
 
 ### Avalanche Bridge
 
-Once you have your browser extension (Metamask for example) set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do, such as *yield farming*, which requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
+Once you have your browser extension (Metamask for example) set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do, such as *yield farming*, requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
 
 You can find a collection of video tutorials on the basic usage of the Avalanche Bridge [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP). Also, make sure that you go over the [FAQ](https://docs.avax.network/learn/avalanche-bridge-faq) which answers most common questions about the bridge and highlights things to watch out for.
 
@@ -62,29 +64,29 @@ When you bridge over $75 or more of assets, you will also be airdropped some AVA
 
 ### Ecosystem
 
-There is an ever-growing collection of dapps deployed on Avalanche. To find them, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects.
+There is an ever-growing collection of dapps deployed on Avalanche. To find them, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects. (You should not consider the presence of a project on the lists above as an endorsement of the project.)
 
-Dip in, browse, try stuff. There are many gems in there.
+Dip in, browse, and try stuff. There are many gems in there.
 
 ## Security
 
-As elsewhere in cryptocurrency space, you need to be keenly aware of the dangers. All transactions are final and irreversible, if you get scammed chances are nobody will be able to help you retrieve your funds.
+As elsewhere in the cryptocurrency space, you need to be keenly aware of the dangers. All transactions are final and irreversible, and if you fall victim to a scamm, nobody will be able to retrieve your funds.
 
 ### Wallet Passphrase
 
-What is crucial to understand is that **your secret passphrase is your wallet**. Whoever has access to the secret 24 word passphrase has complete and full access and control over everything in the wallet. If you give someone your passphrase, you have given them everything in it. Therefore, never give your passphrase to anyone. Do not send it anywhere, do not type it into websites you found online or someone sent you the link to.
+It's crucial to understand that **your secret passphrase is your wallet**. Whoever has access to the secret 24 word passphrase has complete and full access and control over everything in the wallet. If you give someone your passphrase, you have given them everything in it. Therefore, **never give your passphrase to anyone**. Do not send it anywhere. Do not type it into websites you found online or that someone sent you a link to. Best practice is to not have your passphrase saved on any computer. 
 
-The only place where you can enter the passphrase is into the official wallet, and even then, make sure you're on a secure network, that the website is genuine by typing the address wallet.avax.network address yourself, and checking the padlock to make sure that it really is wallet.avax.network. Any other site where you enter your passphrase into may easily steal all your funds. So be very, very careful about entering your passphrase anywhere. If in doubt, don't. Reach out to us to check if the site is legitimate.
+The only place where you can enter the passphrase is into the [official Avalanche Wallet](https://wallet.avax.network) website, and even then, make sure you're on a secure network and that the website is the right one by typing the address `https://wallet.avax.network` address yourself. Check the padlock icon in your browser to make sure your connection is secure. If you're in doubt as to whether to enter your passphrase, don't.
 
-If you're working with non-trivial amounts of tokens (in other words, money you cannot comfortably lose), it is strongly advised to invest in a [Ledger HW wallet](https://www.ledger.com/).
+If you're working with non-trivial amounts of tokens (in other words, money you can't comfortably lose), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access yourf funds.
 
 ### DYOR
 
 That stands for 'Do your own research'. In other words, don't just blindly trust anything you read online. Check for other sources, ask for second opinions. Be very careful and judicious with accepting news from one source.
 
-Be especially suspicious of people contacting you in private, offering help about issues you posted about publicly. Virtually every time it happens, that's a scammer trying to convince you to expose your passphrase, private keys or otherwise compromise your tokens.
+Be especially suspicious of people contacting you in private, offering help about issues you posted about publicly. Virtually every time it happens, it's a scammer trying to convince you to expose your passphrase, private keys or otherwise compromise your tokens.
 
-Also, don't rush into unknown projects that promise outsized returns. Any dapp you deposit your funds into has access to them. Google the project, see who is behind the project, check that it has traction in community. Check that the contracts are verified and audited. Look out for potential red flags.
+Don't rush into unknown projects that promise outsized returns. Any dapp you deposit your funds into has access to them. Search for the project online and see who maintains it. Check that the contracts are verified and audited. Look out for potential red flags.
 
 ### Fake tokens
 
@@ -100,7 +102,7 @@ Explorers are websites that index and present network activity, where you can lo
 
 ### AvaScan
 
-[AvaScan](https://avascan.info/) is an independent explorer website, known for its slick presentation and comprehensive overview, especially interesting for [validators and delegators](https://avascan.info/staking/validators) as it shows lots of interesting information about individual network validators.
+[Avascan](https://avascan.info/) is an independent explorer website, known for its slick presentation and comprehensive overview, especially interesting for viewing [validators and delegators](https://avascan.info/staking/validators),  as it shows lots of interesting information about individual network validators.
 
 ### VScout
 
@@ -108,16 +110,20 @@ Explorers are websites that index and present network activity, where you can lo
 
 ## Online support
 
-We offer several ways of getting support. There's the official [Support site](https://support.avax.network/en/). There's the Twitter [tech support account](https://twitter.com/avaxtechsupport). There's the official [Telegram channel](https://t.me/avalancheavax). But the biggest and the best is our [Discord server](http://chat.avax.network/).
+We offer several ways of getting support. Here are some:
+* [Support site](https://support.avax.network/en/)
+* [Twitter tech support](https://twitter.com/avaxtechsupport).
+* [Telegram](https://t.me/avalancheavax)
+* [Discord server](http://chat.avax.network/) (most popular and highest traffic.)
 
-Expanding on [DYOR](#dyor) section above: When using any public support channel, be suspicious of anyone contacting you in private, via DMs, email or similar. They may pose as admins, moderators or team members. **Legitimate accounts will never contact you in DMs first!** Real admins and team members will always engage publicly first, and if needed request that you *contact them* in direct message.
+Expanding on the [DYOR](#dyor) section above: When using any public support channel, be suspicious of anyone contacting you in private via DMs, email or similar. They may pose as admins, moderators or team members. **Legitimate accounts will never contact you in DMs first!** Real admins and team members will always engage publicly first, and if needed request that you *contact them* in direct message.
 
-Scammers monitor public channels for people looking for help and then contact them in private offering to help. 'Help' usually consists of requests to 'sync your wallet' or something similar giving you a link where you are supposed to enter the wallet passphrase to complete the process, which then proceeds to steal any funds that can be moved. They might also offer an app that will solve the problem, but ends up doing the same.
+Scammers monitor public channels for people looking for help and then contact them in private offering to help. A scammer might tell you that you need to 'sync your wallet' or something similar and give you a link where you are supposed to enter the wallet passphrase to complete the process. They might offer an app that will solve the problem. In both cases, it's just someone looking to steal your funds.
 
 It bears repeating: do not give anyone your secret 24 word passphrase or your private keys!
 
 ## Conclusion
 
-Avalanche is a young platform, but it offers many interesting and exciting opportunities to get engaged and participate in the new frontier that are cryptocurrencies. But the domain knowledge required to make informed and correct decisions may be overwhelming for newcomers to the space. We hope this document will easy your introduction and onboarding.
+Avalanche is a young platform, but it offers many interesting and exciting opportunities to get engaged and participate in the new frontier of blockchains. Getting started can feel daunting, but we hope this document will ease your introduction and onboarding.
 
-If you have any questions, or doubts, need something to be cleared up, or just want to chat, please join us on our [Discord server](http://chat.avax.network/), we'd love to hear from you.
+If you have any questions, or doubts, need something to be cleared up, or just want to chat, please join us on our [Discord server](http://chat.avax.network/). We'd love to hear from you.
