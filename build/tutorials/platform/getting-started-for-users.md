@@ -8,7 +8,7 @@ You can find a general overview of the Avalanche Platform [here](https://support
 
 ## Funding
 
-As all fees on Avalanche are paid in native token AVAX, you will need to have some in order to participate in the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Further ways are explained below.
+As all fees on Avalanche are paid in native token AVAX, you will need to have some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Further ways are explained below.
 
 ## Wallet
 
@@ -34,11 +34,11 @@ To see your funds in Metamask (if you imported Avalanche Wallet), or to be able 
 
 ## Transactions
 
-You can send transactions from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to a wrong address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that the address is actually on Avalanche.
+You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to a wrong address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that the address is actually on Avalanche.
 
 ### Sending to Other Networks
 
-Other networks may have address formats that are identical to the ones on Avalanche. But that doesn't mean that you can send funds from Avalanche Wallet to, for example, Ethereum or BSC. Wallet or Metamask have no way of knowing that your intention is to send funds to Ethereum, so they will allow you to do that. But your funds will not end up on Ethereum (or BSC, or another network). They will stay on Avalanche and be sent to that address, but on Avalanche. And once sent, only the person that has the private keys that control that address can ever get to them. If you control the destination address you will probably be able to retrieve them by adding the controlling account to Metamask and switching to Avalanche. But if you sent them to someone else's account, you will need their cooperation, and if the address was an exchange's hot wallet address (for example), you will have a hard time convincing the exchange to retrieve them.
+Other networks may have address formats that are identical to the ones on Avalanche. But that doesn't mean that you can send funds from Avalanche Wallet to, for example, Ethereum or BSC (Binance Smart Chain). Wallet or Metamask have no way of knowing that your intention is to send funds to Ethereum, so they will allow you to do that. But your funds will not end up on Ethereum (or BSC, or another network). They will be sent to that address, but stay on Avalanche. And once sent, only the person who has the private keys that control that address can ever get to them. If you control the destination address you will probably be able to retrieve them by adding the controlling account to Metamask and switching to Avalanche. But if you sent them to someone else's account, you will need their cooperation, and if the address was an exchange's hot wallet address (for example), you will have a hard time convincing the exchange to retrieve them.
 
 The above stands in reverse direction too. You cannot send to your Avalanche Wallet directly from Ethereum, BSC or other networks. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](#Avalanche Bridge) section below.
 
@@ -54,7 +54,7 @@ When you add the address, the rest of the data will autofill, and your balance s
 
 ### Avalanche Bridge
 
-Once you have your browser extension set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do (*yield farming*), which requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
+Once you have your browser extension (Metamask for example) set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do, such as *yield farming*, which requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
 
 You can find a collection of video tutorials on the basic usage of the Avalanche Bridge [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP). Also, make sure that you go over the [FAQ](https://docs.avax.network/learn/avalanche-bridge-faq) which answers most common questions about the bridge and highlights things to watch out for.
 
@@ -76,7 +76,7 @@ What is crucial to understand is that **your secret passphrase is your wallet**.
 
 The only place where you can enter the passphrase is into the official wallet, and even then, make sure you're on a secure network, that the website is genuine by typing the address wallet.avax.network address yourself, and checking the padlock to make sure that it really is wallet.avax.network. Any other site where you enter your passphrase into may easily steal all your funds. So be very, very careful about entering your passphrase anywhere. If in doubt, don't. Reach out to us to check if the site is legitimate.
 
-If you're working with non-trivial amounts of tokens (in other words, money you cannot comfortably lose), it is strongly advised to invest in a Ledger HW wallet. 
+If you're working with non-trivial amounts of tokens (in other words, money you cannot comfortably lose), it is strongly advised to invest in a [Ledger HW wallet](https://www.ledger.com/).
 
 ### DYOR
 
