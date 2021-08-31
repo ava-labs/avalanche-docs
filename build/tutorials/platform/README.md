@@ -2,7 +2,6 @@
 
 | Title | Description |
 | :--- | :--- |
-| [**Getting started for users**](getting-started-for-users.md) | Guide for new users of Avalanche |
 | [**Port your Ethereum dapp**](launch-your-ethereum-dapp.md) | Guide for porting existing dapps to Avalanche |
 | [**Create a Blockchain Running the AVM**](create-avm-blockchain.md) | Create a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |
 | [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
