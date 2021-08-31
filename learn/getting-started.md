@@ -1,4 +1,4 @@
-# Getting Started For Users
+# Getting Started
 
 The purpose of this tutorial is to give a general overview of Avalanche and to serve as a starting point for new users to the Avalanche ecosystem. General knowledge of cryptocurrency is assumed, and in particular familiarity with the Ethereum ecosystem. If you don't understand something right away, that's OK. Search for an answer online, and if you don't find it, ask on our [Discord](https://chat.avax.network).
 
