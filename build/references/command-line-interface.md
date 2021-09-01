@@ -423,7 +423,7 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
-#### Continuous Profiling
+### Continuous Profiling
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
 
@@ -439,7 +439,7 @@ How often a new CPU/memory profile is created. Defaults to `15m`.
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
-#### Keystore Settings
+### Keystore Settings
 
 `keystore-directory` \(string\):
 
