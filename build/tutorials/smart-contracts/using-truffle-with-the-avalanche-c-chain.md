@@ -1,24 +1,24 @@
-# Using Truffle with the Avalanche C-Chain
+# Avalanche C-Chain ile Truffle kullanıyor
 
-## Introduction
+## Tanıştırma
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com), on ademi merkeziyetli uygulamaları \(dapps\) başlatmak için bir araç setidir. Truffle ile akıllı sözleşmeler yazabilir ve derleyebilir, objeler inşa edebilir, göçleri yönetebilir ve konuşlandırılmış sözleşmelerle etkileşime girebilirsiniz. Bu özel ders Truffle Avalanche's Avalanche's ile nasıl kullanılabileceğini göstermektedir.
 
-## Requirements
+## Gereklilik
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+[Bir Avalanche](../nodes-and-staking/run-avalanche-node.md) an tamamladınız. [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsunuz. Ayrıca [X-Chain ve](../platform/transfer-avax-between-x-chain-and-c-chain.md) C-Chain özel ders ile C-Chain adresine para toplamak için transfer AVAX aracılığıyla zincir zinciri takası yaptın.
 
-## Dependencies
+## Bağımlılıklar
 
-* [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
-* [NodeJS](https://nodejs.org/en) v8.9.4 or later.
-* Truffle, which you can install with `npm install -g truffle`
+* [Avash](https://github.com/ava-labs/avash), yerel bir Avalanche ağı çalıştırmak için bir araçtır. Truffle's [Truffle's](https://www.trufflesuite.com/ganache) benziyor.
+* [NodeJS](https://nodejs.org/en) v8.9.4 veya sonra.
+* - Mantar takabilirsiniz`npm install -g truffle`
 
-## Start up a local Avalanche network
+## Yerel Avalanche ağı başlat
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) özel test ağı deployments 15 AvalancheGo düğümünü kutudan dışarı çıkararak çevirmenize izin veriyor. Avash düzenli görevlerin otomatik olarak lua betikleri aracılığıyla destekler. Bu da çeşitli yapıtlara karşı hızlı testler sağlar. Avash kullandığın ilk sefer [kurup inşa](https://github.com/ava-labs/avash#quick-setup) etmen gerekecek.
 
-Start a local five node Avalanche network:
+Yerel beş düğüm Avalanche ağı başlat:
 
 ```text
 cd /path/to/avash
@@ -30,64 +30,93 @@ go build
 runscript scripts/five_node_staking.lua
 ```
 
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
+Beş node Avalanche ağı senin makinende çalışıyor. to çıkmak istediğinde kaç, ama şimdi bunu `exit`yapma, ve bu terminal hesabını kapatma.
 
-## Create truffle directory and install dependencies
+## Yer mantarı dizini oluştur ve bağımlılıkları yükle
 
-Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
+Yeni bir terminal sekmesi açın ki bir `truffle`dizin oluşturup bazı bağımlılıklar kurabilelim.
 
-First, navigate to the directory within which you intend to create your `truffle` working directory:
+İlk olarak, `truffle`çalışma dizini oluşturmak niyetindeki dizine yönlendir:
 
 ```text
 cd /path/to/directory
 ```
 
-Create and enter a new directory named `truffle`:
+Yeni bir dizin oluştur ve `truffle`gir:
 
 ```text
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
+to konuşabileceğimiz bir kütüphane olan [web3](https://web3js.readthedocs.io) yüklemek `npm`için kullanın:
 
 ```text
 npm install web3 -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+HTTP Sağlayıcısını kurmak için web3 kullanacağız. Bu da web3 böyle konuşacak. Son olarak, kazan yermantarı projesi oluştur:
 
 ```text
 truffle init
 ```
 
-## Update truffle-config.js
+in geliştirme \(yerel yerel\) ağı oluşturulduğunda bazı statik adresleri kaynak önlemektedir. Bu önden fonlanmış adresleri hesaplarımız olarak kullanmak için [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) sağlayıcıyı kullanacağız.
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+```text
+npm install @truffle/hdwallet-provider
+```
+
+## truffle-config.js güncelle
+
+Kaçarken yaratılan dosyalardan biri de `truffle init`var.`truffle-config.js` Aşağıdakileri `truffle-config.js`ekleyin.
 
 ```javascript
-const Web3 = require('web3');
+const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 const protocol = "http";
 const ip = "localhost";
 const port = 9650;
+const provider = new Web3.providers.HttpProvider(
+  `${protocol}://${ip}:${port}/ext/bc/C/rpc`
+);
+
+const privateKeys = [
+  "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+  "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
+  "0x15614556be13730e9e8d6eacc1603143e7b96987429df8726384c2ec4502ef6e",
+  "0x31b571bf6894a248831ff937bb49f7754509fe93bbd2517c9c73c4144c0e97dc",
+  "0x6934bef917e01692b789da754a0eae31a8536eb465e7bff752ea291dad88c675",
+  "0xe700bdbdbc279b808b1ec45f8c2370e4616d3a02c336e68d85d4668e08f53cff",
+  "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
+  "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
+  "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
+  "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
+];
+
 module.exports = {
   networks: {
-   development: {
-     provider: function() {
-      return new Web3.providers.HttpProvider(`${protocol}://${ip}:${port}/ext/bc/C/rpc`)
-     },
-     network_id: "*",
-     gas: 3000000,
-     gasPrice: 470000000000
-   }
-  }
+    development: {
+      provider: () => {
+        return new HDWalletProvider({
+          privateKeys: privateKeys,
+          providerOrUrl: provider,
+        });
+      },
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 225000000000,
+    },
+  },
 };
+
 ```
 
-Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+`protocol``port`Not: Değiştirebileceğinizi `ip`ve API çağrılarını farklı bir AvalancheGo düğümüne yönlendirmek istiyorsanız unutmayın. `gasPrice``gas`Ayrıca Avalanche C-Chain. için uygun değerleri belirlediğimizi de not edin.
 
-## Add Storage.sol
+## Depolama Ekle. sol
 
-In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
+`contracts`Dizinde yeni bir dosya ekle `Storage.sol`ve şu kodu ekle:
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -110,7 +139,7 @@ contract Storage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
     function retrieve() public view returns (uint256){
@@ -119,11 +148,11 @@ contract Storage {
 }
 ```
 
-`Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
+`Storage`Bu sağlam bir sözleşmedir ve bu da blok zincirine bir `store`fonksiyon aracılığıyla bir sayı yazmamızı ve blok zincirinden bir fonksiyon aracılığıyla tekrar okunmasını `retrieve`sağlar.
 
-## Add new migration
+## Yeni göçü ekle
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
+Adlı `migrations`dizinde yeni bir dosya oluştur `2_deploy_contracts.js`ve şu kodu ekle. Bu da `Storage`akıllı sözleşmeyi blok zincirine yerleştiriyor.
 
 ```javascript
 const Storage = artifacts.require("Storage");
@@ -133,15 +162,15 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+## Trakya ile Birlikte Derle Anlaşmalar
 
-Any time you make a change to `Storage.sol` you need to run `truffle compile`.
+`Storage.sol`Ne zaman değişiklik yaparsan koşman gerek.`truffle compile`
 
 ```text
 truffle compile
 ```
 
-You should see:
+Görmelisin:
 
 ```text
 Compiling your contracts...
@@ -153,85 +182,89 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+## C-chain hesapları
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
+to akıllı sözleşmeler yerleştirildiğinde, trüf trüf işlemler sırasında kullanılan `from`adres olarak C-Chain istemciniz tarafından sağlanan ilk uygun hesaba varsayılır. Hesaplarımıza önceden tanımlanmış özel anahtarlar `truffle-config.json`ekledik. İlk ve öntanımlı hesap önceden finanse edilmiş AVAX olmalı.
 
-### Create an account
+### Aktarma Hesapları
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
+Aktarılmış hesapları mantarla görebilirsiniz.
 
-```text
-truffle console --network development
+Mantarlı konsolu açmak için:
+```bash
+$ truffle console --network development
 ```
 
-Then, in the console, create the account:
+`Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`Not: Eğer görürseniz, ağ kayışlı ve kullanmaya hazır olana kadar beklemeniz gerekir. Çok uzun sürmemeli.
 
-```text
-truffle(development)> let account = await web3.eth.personal.newAccount()
+İçerideki mantarlar konsolu:
+```bash
+truffle(development)> accounts
+[
+  '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+  '0x9632a79656af553F58738B0FB750320158495942',
+  '0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430',
+  '0x4Cf2eD3665F6bFA95cE6A11CFDb7A2EF5FC1C7E4',
+  '0x0B891dB1901D4875056896f28B6665083935C7A8',
+  '0x01F253bE2EBF0bd64649FA468bF7b95ca933BDe2',
+  '0x78A23300E04FB5d5D2820E23cc679738982e1fd5',
+  '0x3C7daE394BBf8e9EE1359ad14C1C47003bD06293',
+  '0x61e0B3CD93F36847Abbd5d40d6F00a8eC6f3cfFB',
+  '0x0Fa8EA536Be85F32724D57A37758761B86416123'
+]
 ```
 
-This returns:
+Dengeleri şu şekilde görebilirsiniz:
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0])
+'50000000000000000000000000'
+
+truffle(development)> await web3.eth.getBalance(accounts[1])
+'0'
+```
+Dikkat edin, `accounts[0]`\(varsayılan hesap\) denge `accounts[1]`bulunamasa da bir denge vardır.
+
+
+
+### Yazılım hesabı fonunu
+`accounts`Listeye kaynak sağlayan uygun bir senaryo var. [Burada](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/fund-cchain-addresses.js) bulabilirsin. Bu komutu kullanarak da indirebilirsiniz:
 
 ```text
-undefined
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js;
 ```
 
-Print the account:
+Senaryoyu şöyle yazabilirsiniz:
 
 ```text
-truffle(development)> account
+truffle exec fund-cchain-addresses.js --network development
 ```
 
-This prints the account:
-
-```text
-'0x090172CD36e9f4906Af17B2C36D662E69f162282'
+Senaryo `accounts`yukarıdaki her hesaba 1000 AVAX fonunu sunacak. Betiği başarılı bir şekilde çalıştırdıktan sonra dengeleri kontrol edebilirsiniz.
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0]);
+'50000001000000000000000000'
+truffle(development)> await web3.eth.getBalance(accounts[1]);
+'1000000000000000000'
 ```
 
-### Unlock your account:
+### Hesabınızı finanse edin.
 
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account)
-```
+Kendi hesaplarınızı finanse etmek istiyorsanız [X-Chain ve C-Chain Ders Sınıfı Arasındaki Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md) in adımları takip edin. Kontrat deployments. maliyetini karşılamak için en azından `135422040`nAVAX hesaba göndermeniz gerek.
 
-This returns:
+### Kişisel APIs
 
-```text
-true
-```
+Kişisel API'ler node’s hesaplarıyla etkileşime girer. Bazı fonksiyonları `web3`kullanır, örneğin `web3.eth.personal.newAccount``web3.eth.personal.unlockAccount`vb... Ancak bu API öntanımlı olarak devre dışı bırakıldı. `C-chain`/ configs ile `Coreth`etkinleştirilebilir. Avash şu anda bu API'yi etkinleştirmeyi desteklemiyor. Bu özellikleri kullanmak istiyorsanız kendi ağınızı elle çalıştırmanız `personal-api-enabled`gerekir. Yerel [Test Ağı/Manuel](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) ve [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs) Oluştur.
 
-### Fund your account
 
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+## Göçmenleri Çalıştır
 
-### Scripting account creation and funding
-
-Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js). Download it using this command:
-
-```text
-wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
-```
-
-**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 \(the default used by truffle\).
-
-You can run the script with:
-
-```text
-truffle exec make_accounts.js --network development
-```
-
-Script will create an account and fund its C-Chain address. You can customize the number of accounts and the amount of AVAX deposited by editing the `maxAccounts` and `amount` variables in the script.
-
-## Run Migrations
-
-Now everything is in place to run migrations and deploy the `Storage` contract:
+Şimdi her şey göçleri yönetecek ve sözleşmeyi `Storage`yayınlayacak:
 
 ```text
 truffle(development)> migrate --network development
 ```
 
-You should see:
+Görmelisin:
 
 ```text
 Compiling your contracts...
@@ -285,13 +318,13 @@ Summary
 > Final cost:          0.13542204 ETH
 ```
 
-If you didn't create an account on the C-Chain you'll see this error:
+Eğer on hesap you bu hatayı göreceksin:
 
 ```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
-If you didn't fund the account, you'll see this error:
+Eğer hesabı finanse etmediysen, bu hatayı göreceksin:
 
 ```text
 Error:  *** Deployment Failed ***
@@ -304,51 +337,32 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlock the account, you'll see this error:
 
-```text
-Error:  *** Deployment Failed ***
+## your etkileşim kuruyorum.
 
-"Migrations" -- Returned error: authentication needed: password or unlock.
-```
+Şimdi `Storage`sözleşme imzalandı. Zincirin numarasını yazıp sonra tekrar okuyalım. Yer mantarı konsolunu tekrar aç:
 
-## Interacting with your contract
-
-Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
-
-Get an instance of the deployed `Storage` contract:
+Görevli sözleşmenin bir örneğini `Storage`alın:
 
 ```javascript
 truffle(development)> let instance = await Storage.deployed()
 ```
 
-This returns:
+Bu geri dönüş:
 
 ```text
 undefined
 ```
 
-### Writing a number to the blockchain
+### Blok zincirine bir sayı yazılıyor
 
-Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
+`Storage`Kontratın bir örneğini aldığınıza göre `store`yöntemini arayıp blok zincirine yazacak bir sayı ver.
 
 ```javascript
 truffle(development)> instance.store(1234)
 ```
 
-If you see this error:
-
-```text
-Error: Returned error: authentication needed: password or unlock
-```
-
-Then run this again:
-
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account[0])
-```
-
-You should see something like:
+Şöyle bir şey görmelisin:
 
 ```javascript
 {
@@ -372,33 +386,33 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### from bir sayı okunuyor.
 
-To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
+Buket zincirindeki numarayı okumak için `Storage`sözleşmenin `retrieve`yöntemini ara.
 
 ```javascript
 truffle(development)> let i = await instance.retrieve()
 ```
 
-This should return:
+Bu geri dönmeli.
 
 ```javascript
 undefined
 ```
 
-The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumber` method to see the value:
+Bu aramanın sonucu `BN`\(büyük sayı\) `retrieve`olur. Değeri görmek için `.toNumber`yöntemini ara:
 
 ```javascript
 truffle(development)> i.toNumber()
 ```
 
-You should see the number you stored.
+Sakladığın numarayı görmelisin.
 
 ```javascript
 1234
 ```
 
-## Summary
+## Özetle
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+Şimdi yerel bir Avalanche ağı başlatmak için gereken araçlara sahipsiniz, bir mantarlı projesi yaratmak, derlemek, dağıtım ve Solidity sözleşmeleriyle etkileşim kurmak için de ihtiyacınız var.
 
