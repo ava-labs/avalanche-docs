@@ -1,34 +1,34 @@
-# Auth API
+# API
 
-When you run a node, you can require that API calls have an authorization token attached. This API manages the creation and revocation of authorization tokens.
+Bir düğümü çalıştırdığınızda, API çağrılarının bir yetki işaretine sahip olması gerekebilir. Bu API yetki işaretlerinin oluşturulmasını ve kaldırılmasını yönetir.
 
-An authorization token provides access to one or more API endpoints. This is is useful for delegating access to a node’s APIs. Tokens expire after 12 hours.
+Bir yetki işareti bir veya daha fazla API uç noktalarına erişim sağlar. Bu bir node’s node’s erişimi için kullanışlıdır. Tokatların süresi 12 saat sonra doluyor.
 
-An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
+Bir API çağrısının başında bir yetki işareti bulunur. Başlık değer `Bearer TOKEN.GOES.HERE`\(burada işaretle `Authorization``TOKEN.GOES.HERE`değiştirilir\).
 
-This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+Bu API sadece [komut satırı](../references/command-line-interface.md) argümanıyla başlaması halinde `--api-auth-required`erişilebilir. Eğer düğüm bu without başlatılırsa, API çağrıları izin işaretlerine ihtiyaç duymaz, bu API erişilebilir değildir. Bu API'ye ulaşılması için izin verilmesi gerekmez.
 
-Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+İzinli gösterge oluşturulması izin verilmelidir. Eğer your `--api-auth-required`çalıştırırsanız, argüman ile bir yetki işaretli parolası `--api-auth-password`belirtmelisiniz. Bu parolayı oluşturmak için vermelisiniz.
 
-Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
+Eğer your o `--api-auth-required`zaman MetaMask gibi bazı araçlar sizin your API çağrıları that dikkat edin, çünkü onlarda doğrulama işareti yok.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here.](issuing-api-calls.md)
+Bu API, `json 2.0`RPC formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/auth
 ```
 
-## Methods
+## Yöntemler
 
-### auth.newToken
+### - auth.newToken
 
-Creates a new authorization token that grants access to one or more API endpoints.
+Bir veya daha fazla API uç noktalarına erişimi sağlayan yeni bir yetki işareti oluşturur.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 auth.newToken(
@@ -39,11 +39,11 @@ auth.newToken(
 ) -> {token: string}
 ```
 
-* `password` is this node’s authorization token password.
-* `endpoints` is a list of endpoints that will be accessible using the generated token. If `endpoints` contains an element `"*"`, the generated token can access any API endpoint.
-* `token` is the authorization token.
+* `password`Bu düğümün izin işaretleme parolası.
+* `endpoints`Bu liste oluşturulan token. kullanılarak erişilebilir olan son noktalar listesidir. Eğer bir element `endpoints`içeriyorsa, üretilen token herhangi API uç `"*"`noktasına erişebilir.
+* `token`Bu izin işareti.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -57,9 +57,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` \(ie the X-Chain\) and `/ext/info` \(ie the [info API](info-api.md).\)
+`/ext/info`Bu arama [API](info-api.md) uç noktalarına \(X zincirini ie ie `/ext/bc/X`the X-Chain\) erişimi sağlayan bir yetki işareti oluşturacaktır.
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -71,9 +71,9 @@ This call will generate an authorization token that allows access to API endpoin
 }
 ```
 
-This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
+Bu yetki işareti, başlık `Authorization`değeri vererek API çağrılarına dahil edilmelidir.`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`
 
-For example, to call [`info.peers`](info-api.md#info-peers) with this token:
+Örneğin, bu [`info.peers`](info-api.md#info-peers)işaretle çağırmak:
 
 ```cpp
 curl -X POST --data '{
@@ -85,11 +85,11 @@ curl -X POST --data '{
 -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps'
 ```
 
-### auth.revokeToken
+### - ...geri auth.revokeToken
 
-Revoke a previously generated token. The given token will no longer grant access to any endpoint. If the token is invalid, does nothing.
+Daha önce üretilen bir jetonu kaldırın. Verilen token artık hiçbir uç noktasına erişim izni vermeyecek. Eğer işaret geçersizse, hiçbir şey yapmaz.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 auth.revokeToken(
@@ -100,10 +100,10 @@ auth.revokeToken(
 ) -> {success: bool}
 ```
 
-* `password` is this node’s authorization token password.
-* `token` is the authorization token being revoked.
+* `password`Bu düğümün izin işaretleme parolası.
+* `token`Bu izin işaretinin iptal edilmesi.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -117,7 +117,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -129,11 +129,11 @@ curl -X POST --data '{
 }
 ```
 
-### auth.changePassword
+### - auth.changePassword
 
-Change this node’s authorization token password. Any authorization tokens created under an old password will become invalid.
+Bu düğümün izin işaretleme parolasını değiştir. Eski bir parola altında oluşturulan herhangi bir yetki işaretleri geçersiz olacaktır.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 auth.changePassword(
@@ -144,10 +144,10 @@ auth.changePassword(
 ) -> {success: bool}
 ```
 
-* `oldPassword` is this node’s current authorization token password.
-* `newPassword` is the node’s new authorization token password after this API call. Must be between 1 and 1024 characters.
+* `oldPassword`Bu düğümün geçerli yetki işaretleme parolası.
+* `newPassword`Bu API çağrısından sonra düğümün yeni yetki işaretleme parolası 1 ile 1024 arasında olmalı.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -161,7 +161,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
