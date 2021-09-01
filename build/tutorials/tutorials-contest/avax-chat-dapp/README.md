@@ -801,11 +801,11 @@ npm start
 
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the app.
 
-* User registration and adding a new friend
-![preview](./images/register.gif) 
+* User registration and adding a new friend  
+![preview](./images/register.gif)   
 Make sure your friend is also registered to the application while adding him as a friend.
 
-* Chatting with friend
+* Chatting with friend  
 ![preview](./images/chat.gif)
 
 # Conclusion
