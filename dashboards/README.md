@@ -1,21 +1,21 @@
-# Grafana dashboards
+# Grafana çizelgeleri.
 
-These are pre-configured Grafana dashboards that work with the setup as shown in [Setting up node monitoring](../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md).
+Bunlar önceden yapılandırılmış Grafana [çizelgeleri, düğümleri izleme](../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md) ayarında gösterilen ayarla çalışmaktadır.
 
-To import preconfigured dashboards:
+Önceden yapılandırılmış çizelge aktarmak için:
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
-* Select `Prometheus` as Data Source
+* Grafana’s web arayüzünü aç
+* `+`Sol araç çubuğuna tıkla
+* JSON dosyasını seçin `Import JSON`ve yükleyin ya da içeriği `Import via panel json`bölgeye yapıştırın
+* Veri Kaynağı `Prometheus`olarak Seç
 
-| Link | Description |
+| Link | Tarif edilmesi |
 | :--- | :--- |
-| [Network](network.json) | Dashboard with networking information |
-| [Database](database.json) | Dashboard with in-depth info about the database operations |
-| [Machine](machine.json) | Information about the computer node is running on |
-| [X-Chain](x_chain.json) | Dashboard showing in-depth info about X-Chain operation |
-| [P-Chain](p_chain.json) | Dashboard showing in-depth info about P-Chain operation |
-| [C-Chain](c_chain.json) | Dashboard showing in-depth info about C-Chain operation |
-| [Main Dashboard](main.json) | Main dashboard, showing most important info, with links to other dashboards, useful as a starting point |
+| [Ağ Ağı](network.json) | Ağ bilgisi ile bir işaret panosu |
+| [Veritaban](database.json) | Veritabanı işlemleri hakkında derinlik bilgisini içeren bir pano |
+| [Makine](machine.json) | Bilgisayar düğümüyle ilgili bilgi devam ediyor. |
+| [X-Chain](x_chain.json) | X-Chain operasyonu hakkında derinlik bilgileri gösteriyor |
+| [P-Chain](p_chain.json) | P-Chain operasyonu hakkında derinlik bilgileri gösteriyor |
+| [C-Chain](c_chain.json) | C-Chain operasyonu hakkında derinlik bilgileri gösteriyor |
+| [Ana Dashboard](main.json) | Ana gösterge panosu, en önemli bilgileri gösteren, diğer çizelgelerle bağlantıları ile başlangıç noktası olarak kullanışlı. |
 
