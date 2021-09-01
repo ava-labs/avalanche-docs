@@ -1,0 +1,90 @@
+/// <reference types="node" />
+import { Block } from "@ethereumjs/block";
+import { RunBlockResult } from "@ethereumjs/vm/dist/runBlock";
+import { BN } from "ethereumjs-util";
+import { BuildInfo } from "../../../types";
+import { MessageTrace } from "../stack-traces/message-trace";
+export declare type NodeConfig = LocalNodeConfig | ForkedNodeConfig;
+interface CommonConfig {
+    automine: boolean;
+    blockGasLimit: number;
+    chainId: number;
+    genesisAccounts: GenesisAccount[];
+    hardfork: string;
+    networkId: number;
+    networkName: string;
+    allowUnlimitedContractSize?: boolean;
+    initialDate?: Date;
+    tracingConfig?: TracingConfig;
+}
+export declare type LocalNodeConfig = CommonConfig;
+export interface ForkConfig {
+    jsonRpcUrl: string;
+    blockNumber?: number;
+}
+export interface ForkedNodeConfig extends CommonConfig {
+    forkConfig: ForkConfig;
+    forkCachePath?: string;
+}
+export interface TracingConfig {
+    buildInfos?: BuildInfo[];
+}
+export declare type IntervalMiningConfig = number | [number, number];
+export interface GenesisAccount {
+    privateKey: string;
+    balance: string | number | BN;
+}
+export declare type AccessListBufferItem = [Buffer, Buffer[]];
+export interface CallParams {
+    to?: Buffer;
+    from: Buffer;
+    gasLimit: BN;
+    gasPrice: BN;
+    value: BN;
+    data: Buffer;
+    accessList?: AccessListBufferItem[];
+}
+export interface TransactionParams {
+    to?: Buffer;
+    from: Buffer;
+    gasLimit: BN;
+    gasPrice: BN;
+    value: BN;
+    data: Buffer;
+    nonce: BN;
+    accessList?: AccessListBufferItem[];
+}
+export interface FilterParams {
+    fromBlock: BN;
+    toBlock: BN;
+    addresses: Buffer[];
+    normalizedTopics: Array<Array<Buffer | null> | null>;
+}
+export interface Snapshot {
+    id: number;
+    date: Date;
+    latestBlock: Block;
+    stateRoot: Buffer;
+    txPoolSnapshotId: number;
+    blockTimeOffsetSeconds: BN;
+    nextBlockTimestamp: BN;
+}
+export declare type SendTransactionResult = string | MineBlockResult | MineBlockResult[];
+export interface MineBlockResult {
+    block: Block;
+    blockResult: RunBlockResult;
+    traces: GatherTracesResult[];
+}
+export interface RunCallResult extends GatherTracesResult {
+    result: Buffer;
+}
+export interface EstimateGasResult extends GatherTracesResult {
+    estimation: BN;
+}
+export interface GatherTracesResult {
+    trace: MessageTrace | undefined;
+    error?: Error;
+    consoleLogMessages: string[];
+}
+export {};
+//# sourceMappingURL=node-types.d.ts.map
