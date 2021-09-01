@@ -1,6 +1,6 @@
-# Tutorials
+# Tutorial
 
-Check out all of the tutorials that will help you build on Avalanche. We would be thrilled if you would like to contribute to our [GitHub](https://github.com/ava-labs) or suggest a tutorial on [Discord](https://chat.avax.network)!
+on inşa etmene yardım edecek tüm derslere bak. [GitHub](https://github.com/ava-labs)'a katkıda bulunmak veya [Discord](https://chat.avax.network) üzerine bir ders önermek isterseniz çok seviniriz.
 
 {% page-ref page="platform/" %}
 
