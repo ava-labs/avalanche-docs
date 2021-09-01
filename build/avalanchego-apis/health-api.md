@@ -1,26 +1,26 @@
-# Health API
+# Sağlık API
 
-This API can be used for measuring node health.
+Bu API düğümlü sağlık için kullanılabilir.
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+Düğümün sağlığını gösteren bir HTTP durum kodu yanıt almak için bir `GET`istek yap.`/ext/health` Eğer düğüm sağlıklı ise, `200`durum kodunu geri verecek. Eğer bir düğümün sağlığı hakkında daha derin bilgi istiyorsanız aşağıdaki yöntemleri kullanın.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Bu API, `json 2.0`RPC formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/health
 ```
 
-## Methods
+## Yöntemler
 
-### health.getLiveness
+### Sağlık. Getir health.getLiveness in New York USA
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+Düğün, her bir zincir için sağlık kontrolü de dahil olmak üzere her 30 saniyede bir sağlık kontrolleri yapar. Bu yöntem sağlık kontrol sonuçlarının son kümesini gönderir.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 health.getLiveness() -> {
@@ -38,20 +38,20 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` is true if the node if all health checks are passing.
+`healthy`Eğer tüm sağlık kontrolleri geçerse bu doğru olur.
 
-`checks` is a list of health check responses.
+`checks`Sağlık kontrolleri listesi var.
 
-* A check response may include a `message` with additional context.
-* A check response may include an `error` describing why the check failed.
-* `timestamp` is the timestamp of the last health check.
-* `duration` is the execution duration of the last health check, in nanoseconds.
-* `contiguousFailures` is the number of times in a row this check failed.
-* `timeOfFirstFailure` is the time this check first failed.
+* `message`Bir kontrol cevabı ek bağlamda içerebilir.
+* Bir kontrol yanıtı, çekin neden başarısız olduğunu `error`açıklayabilir.
+* `timestamp`Son sağlık kontrolünün zaman damgası.
+* `duration`Son sağlık kontrolünün yürütme süresidir, nanosaniye.
+* `contiguousFailures`Bu çek üst üste kaç kez başarısız oldu.
+* `timeOfFirstFailure`Bu çekin ilk başarısız olduğu zaman.
 
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
+Bu ölçümler hakkında daha fazla bilgi [go-sundheit](https://github.com/AppsFlyer/go-sundheit) kütüphanesi için belgelendirmede bulunabilir.
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -61,9 +61,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
-In this example response, the C-Chain’s health check is failing.
+Bu örnekte C-Chain’s sağlık kontrolü başarısız olur.
 
 ```cpp
 {
