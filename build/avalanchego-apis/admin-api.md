@@ -1,38 +1,38 @@
-# Admin API
+# 管理API
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+このAPIは、ノードヘルスとデバッグのために使用することができます。セキュリティ上の理由により、管理APIは無効になっていることに注意してください。管理APIを有効にした上でノードを実行するには、[コマンドライン引数](../references/command-line-interface.md)を使用します`--api-admin-enabled=true`。
 
-## Format
+## フォーマット
 
-This API uses the `json 2.0` RPC format.
+このAPIは、`json 2.0`RPC形式を使用します。
 
 {% page-ref page="issuing-api-calls.md" %}
 
-## Endpoint
+## エンドポイント
 
 ```text
 /ext/admin
 ```
 
-## API Methods
+## APIメソッド
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+APIエンドポイント、APIの別のエンドポイント、エイリアを割り当てます。元のエンドポイントはまだ機能します。この変更は、このノードにのみ影響します。他のノードは、このエイリアスについて知らないことはありません。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-* The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* `endpoint``endpoint`APIの元のエンドポイントです。`/ext/`
+* エイリアスされるAPIを、以下に呼び出すことができます`ext/alias`。
+* `alias`最大で512文字の文字になります。
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -44,9 +44,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -56,13 +56,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+`/ext/bc/X`現在、X-Chainへの呼び出しが可能になります。`/ext/myAlias`
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+ブロックチェーンのIDが使用される場所で使用できる別名、ブロックチェーンにエイリアを与える。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 admin.aliasChain(
@@ -73,12 +73,12 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain`ブロックチェーンのIDです。
+* `alias`ブロックチェーンのID代わりに（APIエンドポイントなどで使用できるようになりました。
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -90,9 +90,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -102,21 +102,119 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+`/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`APIコール`sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`によりIDがやり取りされる代わりに、APIコールが行われるブロックチェーンとやり取りすることも可能になります。`ext/bc/myBlockchainAlias`
+
+### admin.getChainAliass
+
+チェーンのエイリアスを返します
+
+#### **シグネチャ**
+
+```text
+admin.getChainAliases(
+    {
+        chain:string
+    }
+) -> {aliases:string[]}
+```
+
+* `chain`ブロックチェーンのIDです。
+
+#### **コール例**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getChainAliases",
+    "params": {
+        "chain":"sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **例**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "aliases": [
+            "X",
+            "avm",
+            "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
+        ]
+    },
+    "id": 1
+}
+```
+
+### admin.getLoggerLevel
+
+ログとロガーの表示レベルを返します。
+
+#### **シグネチャ**
+
+```text
+admin.getLoggerLevel(
+    {
+        loggerName:string // optional
+    }
+) -> {
+        loggerLevels: {
+            loggerName: {
+                    logLevel: string,
+                    displayLevel: string
+            }
+        }
+    }
+```
+
+* `loggerName`issで、返されるロガーの名前になります。これはオプションの引数です。指定されていない場合、すべての可能なロガーを返します。
+
+#### **コール例**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getLoggerLevel",
+    "params": {
+        "loggerName": "C"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **例**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "loggerLevels": {
+            "C": {
+                "logLevel": "DEBUG",
+                "displayLevel": "INFO"
+            }
+        }
+    },
+    "id": 1
+}
+```
 
 ### admin.lockProfile
 
-Writes a profile of mutex statistics to `lock.profile`.
+ミューテックス統計のプロフィールを、以下のように書き出します`lock.profile`。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -125,9 +223,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -139,17 +237,17 @@ curl -X POST --data '{
 
 ### admin.memoryProfile
 
-Writes a memory profile of the to `mem.profile`.
+Toにのメモリプロファイルを書き込む`mem.profile`。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -158,9 +256,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -170,19 +268,68 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### admin.setLoggerLevel
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+ロガーのログレベルを設定します。
 
-#### **Signature**
+#### **シグネチャ**
+
+```text
+admin.setLoggerLevel(
+    {
+        loggerName: string, // optional
+        logLevel: string, // optional
+        displayLevel: string, // optional
+    }
+) -> {success:bool}
+```
+
+* `loggerName`は、変更されるロガーの名前です。これはオプションのパラメータです。指定されていない場合、すべての可能なロガーを変更します。
+* `logLevel`は、書き込みされたログレベルで、省略できます。
+* `displayLevel`isで、表示されたログのログレベルです。
+
+`logLevel`そして、同時に省略することは`displayLevel`できません。
+
+#### **コール例**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLoggerLevel",
+    "params": {
+        "loggerName": "C",
+        "logLevel": "DEBUG",
+        "displayLevel": "INFO"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **例**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.startCProfiler
+
+ノードのCPU利用率プロファイリングを開始します。停止するには、呼び出します`admin.stopCPUProfiler`。停止すると、プロファイルを以下に書き込む`cpu.profile`。
+
+#### **シグネチャ**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -191,9 +338,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -203,19 +350,19 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### admin.stopCProfiler
 
-Stop the CPU profile that was previously started.
+以前に開始されたCPUプロファイルを停止します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **コール例**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -223,9 +370,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **例**
 
-```text
+```javascript
 {
     "jsonrpc":"2.0",
     "id"     :1,
