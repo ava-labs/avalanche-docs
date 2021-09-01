@@ -1,6 +1,6 @@
-# Manage X-Chain Keys
+# Gérer les clés de X-Chain
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it’s registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJS est livré avec son propre Keychain AVM. Cette KeyChain est utilisée dans les fonctions de l'API, leur permettant de signer en utilisant les clés qu'elle est enregistrée. La première étape de ce processus est de créer une instance d'AvalancheJS connectée à notre endpoint de choix de la plateforme Avalanche.
 
 ```text
 import {
@@ -8,7 +8,7 @@ import {
     BinTools,
     Buffer,
     BN
-  } from "avalanche" 
+  } from "avalanche"
 
 let bintools = BinTools.getInstance();
 
@@ -18,41 +18,41 @@ let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBloc
 let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Accessing the Keychain <a id="accessing-the-keychain"></a>
+## Accéder à la Keychain<a id="accessing-the-keychain"></a>
 
-The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
+La KeyChain est accessible via la X-Chain et peut être référencé directement ou par une variable de référence.
 
 ```text
 let myKeychain = xchain.keyChain();
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+Cela expose l'instance de la classe AVMKeyChain qui est créée lorsque l'API X-Chain est créée. À l'heure actuelle, cela prend en charge la courbe secp256k1 pour les paires de clés ECDSA.
 
-## Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
+## Créer des paires de clés de X-Chain<a id="creating-x-chain-key-pairs"></a>
 
-The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
+La KeyChain a la capacité de créer de nouvelles KeyPairs pour vous et de retourner l'adresse associée à la paire de clés.
 
 ```text
 let newAddress1 = myKeychain.makeKey(); //returns a Buffer for the address
 ```
 
-You may also import your existing private key into the KeyChain using either a Buffer…
+Vous pouvez également importer votre clé privée existante dans la KeyChain en utilisant soit un buffer…
 
 ```text
 let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //returns a Buffer
 let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 ```
 
-… or an Avalanche serialized string works, too:
+… ou une chaîne de caractères sérialisés d'Avalanche fonctionne aussi :
 
 ```text
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
 let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 ```
 
-## Working with Keychains <a id="working-with-keychains"></a>
+## Travailler avec Keychains<a id="working-with-keychains"></a>
 
-The X-Chains’s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+La KeyChain de X-Chain a des capacités de gestion de clés normalisées. Les fonctions suivantes sont disponibles sur n'importe quelle KeyChain qui met en œuvre cette interface.
 
 ```text
 let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
@@ -61,9 +61,9 @@ let exists = myKeychain.hasKey(newAddress1); //returns true if the address is ma
 let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 ```
 
-## Working with Keypairs <a id="working-with-keypairs"></a>
+## Travailler avec les Keypairs<a id="working-with-keypairs"></a>
 
-The X-Chain’s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+Le KeyPair de X-Chain a une fonctionnalité KeyPair. Les opérations suivantes sont disponibles sur n'importe quel KeyPair qui met en œuvre cette interface.
 
 ```text
 let address = keypair.getAddress(); //returns Buffer
