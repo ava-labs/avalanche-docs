@@ -1,63 +1,63 @@
-# Run an Avalanche Node on Linux using Install Script
+# Bir Çığ Düğümü Kurul Senaryosunu kullanarak çalıştır
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+AvalancheGo bilgisayarınıza yükleyen bir kabuk \(bash\) betiği var. Bu betik tam olarak ayarlanır, birkaç dakika içinde çalıştırılan düğüm, minimum kullanıcı girdisi gereklidir.
 
-## Before you start
+## Başlamadan önce
 
-This install script assumes:
+Bu senaryo varsayım:
 
-* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
-* AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges \(can run `sudo`\)
+* OS: Ubuntu 18. 04 veya 20.04 \(üzgünüm, MacOS ve Windows henüz desteklenmedi\)
+* AvalancheGo çalışmıyor ve zaten bir hizmet olarak kurulmuyor.
+* Betiği çalıştıran kullanıcı süper kullanıcı ayrıcalıkları `sudo`\(çalıştırılabilir\)
 
-### Environment considerations
+### Çevre değerlendirmeleri
 
-If you run a different flavor of Linux, the script might not work as intended. It assumes `systemd` is used to run system services. Other Linux flavors might use something else, or might have files in different places than is assumed by the script.
+Linux'un farklı bir çeşidi işletirseniz, senaryo istenilen şekilde çalışmayabilir. Sistem hizmetlerini çalıştırmak için `systemd`kullanıldığını varsayar. Diğer Linux aromaları başka bir şey kullanabilir veya senaryo tarafından varsayıldığından farklı yerlerde dosyalara sahip olabilir.
 
-If you have a node already running on the computer, stop it before running the script.
+Bilgisayarda zaten çalışan bir düğümünüz varsa senaryoyu çalıştırmadan önce durdurun.
 
-#### Node running from terminal
+#### Terminalden akan düğüm
 
-If your node is running in a terminal stop it by pressing `ctrl+C`.
+Eğer düğümünüz terminalde çalışıyorsa basarak `ctrl+C`durdurun.
 
-#### Node running as a service
+#### Bir servis olarak çalıştırılan düğüm
 
-If your node is already running as a service, then you probably don't need this script. You're good to go.
+Eğer düğümünüz zaten hizmet olarak çalışıyorsa muhtemelen bu senaryoya ihtiyacınız yoktur. Gitmeye hazırsın.
 
-#### Node running in the background
+#### Arka planda çalıştırılan düğüm
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+Eğer düğümünüz arka planda çalışıyorsa `nohup`\(örneğin, koşarak çalıştırarak\) düğümü çalıştırarak işleten süreci `ps aux | grep avalanche`bulun. Bu da çıktıları şöyle üretir:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-Look for line that doesn't have `grep` on it. In this example, that is the second line. It shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+`grep`Üzerinde olmayan bir çizgi arayın. Düğününüz hakkında bilgi veriyor. `2630`Bu durumda sürecin kimliğine dikkat edin. Koşarak düğmeyi `kill -2 2630`durdur.
 
-#### Node working files
+#### & Çalışma dosyaları@ info: whatsthis
 
-If you previously ran an AvalancheGo node on this computer, you will have local node files stored in `$HOME/.avalanchego` directory. Those files will not be disturbed, and node set up by the script will continue operation with the same identity and state it had before. That being said, for your node's security, back up `staker.crt` and `staker.key` files, found in `$HOME/.avalanchego/staking` and store them somewhere secure. You can use those files to recreate your node on a different computer if you ever need to. Check out this [tutorial](node-backup-and-restore.md) for backup and restore procedure.
+Eğer bu bilgisayarda bir AvalancheGo düğümünü çalıştırdıysanız, dizinde yerel düğümlü dosyalarınız `$HOME/.avalanchego`olacaktır. Bu dosyalar rahatsız edilmeyecek ve betik tarafından ayarlanan düğüm, önceki kimlik ve durumu ile çalışmaya devam edecek. Bu da demek oluyor ki, düğümünün güvenliği için arka `staker.crt`ve `staker.key`dosyalar, onları güvenli bir yerde `$HOME/.avalanchego/staking`bulunup saklayın. Eğer ihtiyacın olursa düğümünü farklı bir bilgisayarda yeniden oluşturmak için o dosyaları kullanabilirsin. Yedek dersi kontrol [et](node-backup-and-restore.md) ve prosedürü geri getir.
 
-### Networking considerations
+### Ağ değerlendirmeleri
 
-To run successfully, AvalancheGo needs to accept connections from the Internet on the network port `9651`. Before you proceed with the installation, you need to determine the networking environment your node will run in.
+Başarılı bir şekilde çalıştırmak için AvalancheGo ağ portundaki internet bağlantılarını kabul etmek `9651`zorundadır. Kuruluma başlamadan önce your gireceği ağ ortamını belirlemeniz gerekiyor.
 
-#### Running on a cloud provider
+#### Bulut sağlayıcısının üzerinde koşuyor.
 
-If your node is running on a cloud provider computer instance, it will have a static IP. Find out what that static IP is, or set it up if you didn't already. The script will try to find out the IP by itself, but that might not work in all environments, so you will need to check the IP or enter it yourself.
+Eğer düğümünüz bulut sağlayıcı bilgisayarında çalışıyorsa, statik bir IP vardır. Statik IP ne olduğunu öğren, ya da henüz yapmadıysan ayarla. Betik IP yi kendi kendine bulmaya çalışacaktır, ama bu tüm ortamlarda işe yaramayabilir, bu yüzden IP IP yi kontrol etmeniz ya da kendiniz girmeniz gerek.
 
-#### Running on a home connection
+#### Ev bağlantısı üzerinde koşuyor.
 
-If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
+Eğer bir bilgisayarda bir düğüm çalıştırıyorsanız, dinamik bir connection, var; yani IP periyodik olarak değişecektir. Bu durum için uygun şekilde kodlanacaktır. `9651`Ama ev bağlantısı için düğümün yüklenmiş olduğu bilgisayara bağlantı bağlantı noktası oluşturmanız gerekiyor.
 
-As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+Çok fazla model ve yönlendirici yapılandırması olduğu için, tam olarak ne yapılacağı konusunda [talimatlar](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) veremeyiz ancak bulunacak çevrimiçi rehberler vardır [\(bu](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/) ya da böyle\), ve hizmet sağlayıcı desteğiniz de yardımcı olabilir.
 
-## Running the script
+## Betiği çalıştırıyorum.
 
-So, now that you prepared your system and have the info ready, let's get to it.
+Şimdi sisteminizi hazırlayıp bilgileri hazırladığınıza göre, hadi başlayalım.
 
-To download and run the script, enter the following in the terminal:
+Betiği indirmek ve çalıştırmak için, terminaldeki aşağıdaki girin:
 
 ```bash
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh;\
@@ -65,7 +65,7 @@ chmod 755 avalanchego-installer.sh;\
 ./avalanchego-installer.sh
 ```
 
-And we're off! The output should look something like this:
+Ve gidiyoruz! Çıkış şöyle bir şeye benzeyecek:
 
 ```text
 AvalancheGo installer
@@ -84,7 +84,7 @@ avalanchego-v1.1.1/avalanchego
 Node files unpacked into /home/ubuntu/avalanche-node
 ```
 
-And then the script will prompt you for information about the network environment:
+Ve sonra senaryo sizi ağ çevreyle ilgili bilgi için harekete geçirecek:
 
 ```text
 To complete the setup some networking information is needed.
@@ -94,15 +94,15 @@ Where is the node installed:
 Enter your connection type [1,2]:
 ```
 
-enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on a static IP, it will try to auto-detect the IP and ask for confirmation.
+`1``2`Dinamik you varsa girin ve statik you varsa. Eğer statik bir you IP IP 'yi otomatik olarak tespit edip doğrulama isteyecektir.
 
 ```text
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
+`y`Eğer tespit edilmiş IP yanlış veya boş `n`ise, doğrula, ve sonraki anda doğru IP gir.
 
-The script will then continue with system service creation and finish with starting the service.
+Senaryo sistem servis oluşturulması ile devam edecek ve hizmetin başlamasıyla bitirecek.
 
 ```text
 Installing service with public IP: 3.15.152.14
@@ -111,6 +111,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/avalanchego.service 
 Done!
 
 Your node should now be bootstrapping on the main net.
+Node configuration file is /home/ubuntu/.avalanchego/configs/node.json
 To check that the service is running use the following command (q to exit):
 sudo systemctl status avalanchego
 To follow the log use (ctrl+C to stop):
@@ -119,17 +120,17 @@ sudo journalctl -u avalanchego -f
 Reach us over on https://chat.avax.network if you're having problems.
 ```
 
-The script is finished, and you should see the system prompt again.
+Senaryo bitti ve sistemin tekrar çalıştığını görmelisin.
 
-## Post installation
+## Posta kurulumu
 
-AvalancheGo should be running in the background as a service. You can check that it's running with:
+AvalancheGo arka planda hizmet olarak çalışmalı. Bununla birlikte çalıştığına bakabilirsin:
 
 ```bash
 sudo systemctl status avalanchego
 ```
 
-This will print the node's latest logs, which should look like this:
+Bu düğümün son günlüklerini basacak. Bu da şöyle görünmeli:
 
 ```text
 ● avalanchego.service - AvalancheGo systemd service
@@ -139,7 +140,7 @@ Main PID: 2142 (avalanchego)
 Tasks: 8 (limit: 4495)
 Memory: 223.0M
 CGroup: /system.slice/avalanchego.service
-└─2142 /home/ubuntu/avalanche-node/avalanchego --plugin-dir=/home/ubuntu/avalanche-node/plugins --dynamic-public-ip=opendns --http-host=
+└─2142 /home/ubuntu/avalanche-node/avalanchego --dynamic-public-ip=opendns --http-host=
 
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/vms/platformvm/vm.go#322: initializing last accepted block as 2FUFPVPxbTpKNn39moGSzsmGroYES4NZRdw3mJgNvMkMiMHJ9e
 Jan 05 10:38:45 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:45] <P Chain> avalanchego/snow/engine/snowman/transitive.go#58: initializing consensus engine
@@ -153,61 +154,61 @@ Jan 05 10:39:09 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:09] <P Chai
 Jan 05 10:39:11 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:39:11] <P Chain> avalanchego/snow/engine/snowman/bootstrap/bootstrapper.go#210: fetched 12500 blocks
 ```
 
-Note the `active (running)` which indicates the service is running ok. You may need to press `q` to return to the command prompt.
+Hizmet iyi olduğunu belirten `active (running)`işaretleyin. Komuta hızına dönmek `q`için baskı yapmanız gerekebilir.
 
-To find out your NodeID, which is used to identify your node to the network, run the following command:
+Ağa your belirlemek için kullanılan NodeID dosyalarınızı bulmak için aşağıdaki komutu çalıştır:
 
 ```bash
-sudo journalctl -u avalanchego | grep "node's ID"
+sudo journalctl -u avalanchego | grep "NodeID"
 ```
 
-It will produce output like:
+Çıkış şöyle olacak:
 
 ```text
 Jan 05 10:38:38 ip-172-31-30-64 avalanchego[2142]: INFO [01-05|10:38:38] avalanchego/node/node.go#428: Set node's ID to 6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY
 ```
 
-Prepend `NodeID-` to the value to get, for example, `NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY`. Store that; it will be needed for staking or looking up your node.
+Mesela değerine `NodeID-`hazırlanın.`NodeID-6seStrauyCnVV7NEVwRbfaT9B6EnXEzfY` Bunu saklayın; your gözetlemek veya bakmak için gerekecektir.
 
-Your node should be in the process of bootstrapping now. You can monitor the progress by issuing the following command:
+Düğününüz şu anda kayma sürecinde olmalı. Aşağıdaki komutu vererek ilerlemeyi izleyebilirsiniz:
 
 ```bash
 sudo journalctl -u avalanchego -f
 ```
 
-Press `ctrl+C` when you wish to stop reading node output.
+Düğüm çıkışını okumayı bırakmak `ctrl+C`istediğinde bas.
 
-## Stopping the node
+## Düğümü durduruyorum.
 
-To stop AvalancheGo, run:
+AvalancheGo, durdurmak için, koş:
 
 ```bash
 sudo systemctl stop avalanchego
 ```
 
-To start it again, run:
+Tekrar başlatmak için, koş:
 
 ```bash
 sudo systemctl start avalanchego
 ```
 
-## Node upgrade
+## Düğüm yükseltmesi
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. When a new version of the node is released, you will notice log lines like:
+AvalancheGo devam eden bir proje ve düzenli sürüm güncellemeleri var. Çoğu güncelleme tavsiye edilir ama gerekli değildir. Geri uyumlu olmayan güncelleme için öncü bildiri verilecek. Düğünün yeni bir versiyonu piyasaya sürüldüğünde, kayıt çizgilerini şöyle göreceksiniz:
 
 ```text
 Jan 08 10:26:45 ip-172-31-16-229 avalanchego[6335]: INFO [01-08|10:26:45] avalanchego/network/peer.go#526: beacon 9CkG9MBNavnw7EVSRsuFr7ws9gascDQy3 attempting to connect with newer version avalanche/1.1.1. You may want to update your client
 ```
 
-It is recommended to always upgrade to the latest version, because new versions bring bug fixes, new features and upgrades.
+Yeni sürümler hata düzeltmeleri, yeni özellikler ve güncellemeler getirdiği için her zaman en son sürümüne yükseltilmesi önerilir.
 
-To upgrade your node, just run the installer script again:
+Düğününüzü yükseltmek için, sadece kurum senaryosunu tekrar çalıştır:
 
 ```bash
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+AvalancheGo çoktan kurduğunuzu anlayacaktır:
 
 ```text
 AvalancheGo installer
@@ -218,7 +219,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+Daha sonra your son sürümüne yükseltecek ve bittikten sonra düğümleri tekrar açacak ve son sürümle ilgili bilgileri yazdıracak:
 
 ```text
 Node upgraded, starting service...
@@ -227,17 +228,30 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-## Using a previous version
+## Node yapılandırması
 
-The installer script can also be used to install a version of AvalancheGo other than the latest version.
+Düğüm işlemini ayarlayan `~/.avalanchego/configs/node.json`dosya. Yapılandırma seçeneklerini eklemek veya değiştirebilirsiniz. Yapılandırma seçeneklerinin belgelendirilmesi [burada](../../references/command-line-interface.md) bulunabilir. Öntanımlı yapılandırma şöyle görünebilir:
 
-To see a list of available versions for installation, run:
+```javascript
+{
+  "dynamic-public-ip": "opendns",
+  "http-host": ""
+}
+```
+
+`--dynamic-public-ip=opendns`Yapılandırma dosyası düzgün biçimlendirilmiş bir dosya olması gerektiğini, bu yüzden düğmeler komut satırı için biçimlendirildiğinden farklı `JSON`biçimlendirilir, bu yüzden yukarıdaki gibi seçenekleri girme.
+
+## Önceki sürüm kullanılıyor
+
+Bu tablo ayrıca AvalancheGo sürümünün son sürümünden başka bir sürümünü yüklemek için de kullanılabilir.
+
+Kurulum için mevcut sürümlerin listesini görmek için, çalıştır:
 
 ```bash
 ./avalanchego-installer.sh --list
 ```
 
-It will print out a list, something like:
+Bir liste çıkaracak. Şöyle bir şey:
 
 ```text
 AvalancheGo installer
@@ -255,27 +269,41 @@ v1.2.1
 v1.2.0
 ```
 
-To install a specific version, run the script with `--version` followed by the tag of the version. For example:
+Belirli bir sürüm yüklemek için, senaryoyu `--version`sürümün etiketi ile çalıştırın. Örneğin:
 
 ```bash
 ./avalanchego-installer.sh --version v1.3.1
 ```
 
-{% hint style="danger" %}
-Note that not all AvalancheGo versions are compatible. You should generally run the latest version. Running a version other than latest may lead to your node not working properly and, for validators, not receiving a staking reward.
-{% endhint %}
+{% hint style="danger" %}Tüm Avalanchego sürümlerinin uyumlu olmadığını not edin. En son versiyonunu sen yapmalısın. Son sürümden başka bir sürüm çalıştırmak your düzgün çalışmayıp, validators, için de mükemmel bir ödül almamanıza yol açabilir.{% endhint %}
 
-Thanks to community member [Jean Zundel](https://github.com/jzu) for the inspiration and help implementing support for installing non-latest node versions.
+İlham kaynağı ve son olmayan nod sürümlerinin kurulmasına destek sağladığı için toplum üyesi [Jean Zundel](https://github.com/jzu) sayesinde.
 
-## What next?
+## & & & Betik güncellemesi yeniden yükle
 
-That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
+Yazıcı betiği zaman zaman güncellenir, yeni özellikler ve yetenekler eklenir. Yeni özelliklerden faydalanmak veya düğümleri başarısız yapan değişikliklerden kurtulmak için, düğümleri yeniden yüklemek isteyebilirsiniz. Bunu yapmak için, senaryonun son sürümünü internetten getir:
 
-If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
+```
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
+Betik güncellendikten sonra, `--reinstall`komut satırı argümanıyla tekrar çalıştır:
 
-Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
+```bash
+./avalanchego-installer.sh --reinstall
+```
 
-If you have any questions, or need help, feel free to contact us on our [Discord](https://chat.avalabs.org/) server.
+Bu mevcut servis dosyasını silecek ve ilk kez başlatılmış gibi yükleyiciyi sıfırdan çalıştıracak. Veri tabanı ve NodeID sağlam bırakılacak.
+
+## Şimdi ne olacak?
+
+İşte böyle, AvalancheGo düğümünü çalıştırıyorsun! Tebrikler! Tebrikler! [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) veya [Reddit](https://t.me/avalancheavax)'te yaptığını bize bildir!
+
+Eğer konut you're \(dinamik IP\) bağlantı kurmayı unutmayın. Bulut servisi you're gidebilirsiniz.
+
+Şimdi [with](../../avalanchego-apis/issuing-api-calls.md) etkileşime girebilirsiniz, [işaretlerinizi kazık ya](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) da your daha iyi bir şekilde [algılayarak](setting-up-node-monitoring.md) installation yerleştirerek kurulumunuzu düzeye getirebilirsiniz. Ayrıca [Postacı](../../tools/postman-avalanche-collection.md) koleksiyonumuzu kullanarak your daha kolay saymak isteyebilirsiniz.
+
+Son olarak, eğer henüz yapmadıysanız, düğümünü başka bir makineye geri vermek için önemli dosyaları [desteklemeniz](node-backup-and-restore.md) iyi bir fikir.
+
+Herhangi bir sorunuz olursa ya da yardıma ihtiyacınız olursa, [Discord](https://chat.avalabs.org/) sunucumuzla irtibata geçebilirsiniz.
 
