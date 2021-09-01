@@ -1,18 +1,18 @@
-# Create a Subnet
+# Bir Subnet Oluştur
 
-## Introduction
+## Tanıştırma
 
-A [subnet](../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
+[Alt ağ](../../../learn/platform-overview/#subnets) bir doğrulayıcı kümesidir. Bir alt ağ bir dizi blok zincirini geçerlidir. Her blok zinciri tam olarak bir alt ağ tarafından doğrulanır ve blok zinciri yaratılmasında belirtilir. Subnetler izin verilen blok zincirlerinin oluşturulmasına olanak sağlayan güçlü bir ilkel özelliktir.
 
-When a subnet is created, a threshold and a set of keys are specified. \(Actually the addresses of the keys, not the keys themselves, are specified.\) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
+Bir alt ağ oluşturulduğunda bir eşik ve bir dizi anahtar belirlenir. \(Aslında anahtarların adresleri değil, anahtarların kendileri belirtilmiştir.\) Bu alt ağa bir doğrulayıcı eklemek için, bu anahtarlardan _eşik _imzalar gereklidir. Bunlara subnet’s **kontrol anahtarları diyoruz, **bir alt ağ kontrol imzasına bir doğrulayıcı ekleyen bir işlemde **kontrol anahtarının imzasını çağırıyoruz.** Özetle, bir alt ağ üyeliğini kontrol ediyor.
 
-In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
+Bu özel programda, 2 kontrol anahtarı ve 2 eşik eşiği olan yeni bir alt ağ oluşturacağız.
 
-### Generate the Control Keys <a id="generate-the-control-keys"></a>
+### Kontrol Anahtarlarını oluştur<a id="generate-the-control-keys"></a>
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
+İlk olarak, 2 kontrol anahtarını oluşturalım. Buna [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress)"bu yeni bir özel anahtar oluşturur ve bir kullanıcı için depolar.
 
-To generate the first key:
+İlk anahtarı oluşturmak için:
 
 ```cpp
 curl -X POST --data '{
@@ -26,7 +26,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+_Bu ilk kontrol anahtarını verir \(tekrar söylüyorum, ilk kontrol anahtarının _adresini verir\). Anahtar az önce belirttiğimiz kullanıcı tarafından tutuluyor.
 
 ```cpp
 {
@@ -38,7 +38,7 @@ This gives the first control key \(again, it actually gives the _address_ of the
 }
 ```
 
-Generate the second key:
+İkinci anahtarı oluştur:
 
 ```cpp
 curl -X POST --data '{
@@ -52,7 +52,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the second control key, which is held by the user we just specified:
+Cevap az önce belirttiğimiz kullanıcı tarafından tutulan ikinci kontrol anahtarı içerir:
 
 ```cpp
 {
@@ -64,9 +64,9 @@ The response contains the second control key, which is held by the user we just 
 }
 ```
 
-### Create the Subnet <a id="create-the-subnet"></a>
+### Subnet oluştur<a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
+Bir alt ağ yaratmak için biz [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet)çağırırız.
 
 ```cpp
 curl -X POST --data '{
@@ -85,7 +85,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
+Bu cevap bize işlemlerin kimliğini verir, bu da yeni yaratılmış of kimliğidir.
 
 ```cpp
 {
@@ -98,9 +98,9 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 }
 ```
 
-### Verifying Success <a id="verifying-success"></a>
+### Başarıyı Doğrulanıyor<a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
+[`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets)Tüm Subnets çağırabiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -111,7 +111,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that our subnet was created:
+Tepki our yaratıldığını doğruluyor:
 
 ```cpp
 {
@@ -132,7 +132,7 @@ The response confirms that our subnet was created:
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
+### Subnet Geçerli Yazılar Ekle<a id="add-validators-to-the-subnet"></a>
 
-This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
+Bu [ders](../nodes-and-staking/add-a-validator.md) size bir alt ağa nasıl doğrulayıcı ekleneceğini gösterecek.
 
