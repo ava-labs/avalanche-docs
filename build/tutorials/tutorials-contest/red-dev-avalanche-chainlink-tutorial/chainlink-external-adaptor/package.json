@@ -1,0 +1,25 @@
+{
+    "name": "JSON-RPC-TEST",
+    "version": "0.1.0",
+    "author": "",
+    "description": "",
+    "license": "MIT",
+    "scripts": {
+        "start": "babel-node app.js",
+        "startServer": "forever start -c babel-node app.js",
+        "stopServer": "forever stop app.js",
+        "test": "babel-node test.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "json-rpc-2.0": "^0.2.16",
+        "nconf": "^0.11.2",
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.13.16",
+        "@babel/core": "^7.14.0",
+        "@babel/node": "^7.13.13",
+        "@babel/preset-env": "^7.14.1"
+    }
+}
