@@ -1,22 +1,22 @@
 # Index API
 
-AvalancheGo can be configured to run with an indexer. That is, it saves \(indexes\) every container \(a block, vertex or transaction\) it accepts on the X-Chain, P-Chain and C-Chain. To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`. AvalancheGo will only index containers that are accepted when running with `--index-enabled`. To ensure your node has a complete index, run a node with a fresh database and `--index-enabled`. The node will accept every block, vertex and transaction in the network history during bootstrapping, ensuring your index is complete. It is OK to turn off your node if it is running with indexing enabled. If it restarts with indexing still enabled, it will accept all containers that were accepted while it was offline. The indexer should never fail to index an accepted block, vertex or transaction.
+AvalancheGo bir indeksleyici ile çalıştırılabilir Bu da her konteynırın \(bir blok, vertex veya işlem\) tasarrufu \(indeksler\) X-Chain, P-Chain ve C-Chain üzerinde kabul edilir. AvalancheGo indeksleme etkinleştirmek için komut satırı bayrağını `--index-enabled`kullanın. AvalancheGo sadece birlikte koşarken kabul edilen konteynırları indeks olarak `--index-enabled`kullanacak. Düğününün tam bir indeksi olduğundan emin olmak için yeni bir veritabanı ile bir düğüm çalıştır ve bir `--index-enabled`düğüm. Düğün, ağ tarihindeki her bloğu, vertex ve işlemleri bootstrapping sırasında kabul eder, your tamamlanmasını sağlar. Eğer indeksleme etkinleştirme ile çalışıyorsa your kapatmanız sorun değil. Eğer endekse hala etkin olarak yeniden başlarsa, çevrimdışı olduğu sürece kabul edilen tüm konteynırları kabul edecektir. indeksleyici kabul edilmiş bir bloğu, vertex veya işlem indeksini asla yapamayacaktır.
 
-Indexed containers \(that is, accepted blocks, vertices and transactions\) are timestamped with the time at which the node accepted that container. Note that if the container was indexed during bootstrapping, other nodes may have accepted the container much earlier. Every container indexed during bootstrapping will be timestamped with the time at which the node bootstrapped, not when it was first accepted by the network.
+Endekslenmiş konteynırlar \(yani kabul edilmiş bloklar, dikler ve işlemler\) düğümün konteynırı kabul ettiği zaman ile zaman damgalanır. Eğer konteynır boz kayma sırasında if diğer düğümler konteynırı çok daha önce kabul etmiş olabilir. Bağlama sırasında indekslenmiş her konteyner, düğümün düğümünün düğümlendiği zaman ile zaman be ağ tarafından ilk kabul edildiğinde değil.
 
-Note that for DAGs \(including the X-Chain\), nodes may accept vertices and transactions in a different order from one another.
+DAGs için \(X-Chain dahil\) düğümlerin dikey ve işlemleri birbirinden farklı bir sırayla kabul edebileceğinin dikkat edin.
 
-This document shows how to query data from AvalancheGo's Index API. The Index API is only available when running with `--index-enabled`.
+Bu belge, AvalancheGo's Endeksi from verileri nasıl sorgulayacağını gösteriyor. Endeks API sadece birlikte çalıştığında `--index-enabled`mevcuttur.
 
 ## Format
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+Bu API, `json 2.0`RPC formatını kullanır. JSON RPC arama yapmak için daha fazla bilgi için, [buraya](issuing-api-calls.md) bakın.
 
-## Endpoints
+## Son nokta
 
-Each chain has one or more index. To see if a C-Chain block is accepted, for example, send an API to the C-Chain block index. To see if an X-Chain block is accepted, for example, send an API to the C-Chain block index.
+Her zincir bir veya daha fazla endeksi vardır. C-Chain bloğu kabul edilip edilmediğini görmek için, örneğin C-Chain blok indeksine bir API çağrısı gönder. Örneğin, X-Chain bloğu kabul edilip edilmediğini görmek için X-Chain blok indeksine bir API çağrısı gönder.
 
-### X-Chain Transactions
+### X-Chain İşlemleri
 
 ```text
 /ext/index/X/tx
@@ -28,25 +28,25 @@ Each chain has one or more index. To see if a C-Chain block is accepted, for exa
 /ext/index/X/vtx
 ```
 
-### P-Chain Blocks
+### P-Chain Blokları
 
 ```text
 /ext/index/P/block
 ```
 
-### C-Chain Blocks
+### C-Chain Blokları
 
 ```text
 /ext/index/C/block
 ```
 
-## API Methods
+## API Yöntemleri
 
-### index.getLastAccepted
+### index.getLastAccepted Edildi
 
-Get the most recently accepted container.
+En son kabul edilen konteynırı al.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getLastAccepted({
@@ -60,15 +60,15 @@ info.getLastAccepted({
 }
 ```
 
-where:
+Nereye?
 
-* `id` is the container's ID
-* `bytes` is the byte representation of the container
-* `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
-* `encoding` is `"cb58"` or `"hex"`
+* `id`Konteynırın kimliği.
+* `bytes`Konteynırın byte temsili
+* `timestamp`Bu düğümün konteynırı kabul ettiği zaman
+* `index`Bu indekse daha önce kaç tane konteyner kabul edildi?
+* `encoding``"cb58"`#`"hex"`
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
@@ -83,7 +83,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }'
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -99,11 +99,11 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getContainerByIndex
+### index.getContainerByIndex index.getContainerByIndex info: status
 
-Get container by index. The first container accepted is at index 0, the second is at index 1, etc.
+Konteyneri indeksle al. Kabul edilen ilk konteyner indeks 0, ikincisi indeks 1, vb.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getContainerByIndex({
@@ -118,13 +118,13 @@ info.getContainerByIndex({
 }
 ```
 
-* `id` is the container's ID
-* `bytes` is the byte representation of the container
-* `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
-* `encoding` is `"cb58"` or `"hex"`
+* `id`Konteynırın kimliği.
+* `bytes`Konteynırın byte temsili
+* `timestamp`Bu düğümün konteynırı kabul ettiği zaman
+* `index`Bu indekse daha önce kaç tane konteyner kabul edildi?
+* `encoding``"cb58"`#`"hex"`
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
@@ -140,7 +140,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }'
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -156,16 +156,16 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.getContainerRange
+### index.getContainerRange Aralığı
 
-Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch` - 1\]. `numToFetch` must be in `[0,1024]`.
+Konteynırların \(, , `startIndex``startIndex+1`.., , `startIndex`\+ - `numToFetch`1\) içinde olması `numToFetch`gerekir.`[0,1024]`
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getContainerRange({
-  startIndex: uint64, 
-  numToFetch: uint64, 
+  startIndex: uint64,
+  numToFetch: uint64,
   encoding: string
 }) -> []{
   id: string,
@@ -176,13 +176,13 @@ info.getContainerRange({
 }
 ```
 
-* `id` is the container's ID
-* `bytes` is the byte representation of the container
-* `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
-* `encoding` is `"cb58"` or `"hex"`
+* `id`Konteynırın kimliği.
+* `bytes`Konteynırın byte temsili
+* `timestamp`Bu düğümün konteynırı kabul ettiği zaman
+* `index`Bu indekse daha önce kaç tane konteyner kabul edildi?
+* `encoding``"cb58"`#`"hex"`
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
@@ -199,7 +199,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }'
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -217,9 +217,9 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ### index.getIndex
 
-Get a container's index.
+Konteynır indeksini al.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.getIndex({
@@ -230,9 +230,9 @@ info.getIndex({
 }
 ```
 
-where `encoding` is `"cb58"` or `"hex"`.
+Nerede ya `"cb58"`da nerede `encoding`olduğunu.`"hex"`
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
@@ -248,7 +248,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }'
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
@@ -261,11 +261,11 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
-### index.isAccepted
+### index.isAccepted kabul edildi
 
-Returns true if the container is in this index.
+Konteyner bu indekste ise doğru döner.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 info.isAccepted({
@@ -276,7 +276,7 @@ info.isAccepted({
 }
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
 ```cpp
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
@@ -292,12 +292,12 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }'
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```cpp
 {
   "jsonrpc":"2.0",
-  "result": 
+  "result":
     {
       "isAccepted": true
     },
