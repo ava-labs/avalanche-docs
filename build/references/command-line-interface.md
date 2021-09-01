@@ -425,17 +425,22 @@ Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Default
 
 ### Continuous Profiling
 
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
 
-`continuous-profiler-dir` \(string\):
 
-If non-empty, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the empty string \(not enabled\).
+`profile-continuous-enabled` \(boolean\):
 
-`continuous-profiler-frequency` \(duration\):
+Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
+
+`profile-dir` \(string\):
+
+If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+
+`profile-continuous-freq` \(duration\):
 
 How often a new CPU/memory profile is created. Defaults to `15m`.
 
-`continuous-profiler-max-files` \(int\):
+`profile-continuous-max-files` \(int\):
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
