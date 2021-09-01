@@ -1,356 +1,816 @@
-# AvalancheGo Release Notes
+# AvalancheGo Notları Yayınlar
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-## v1.4.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)\)
+## v1.5.2 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)
 
-{% hint style="danger" %}
-**Please note that this change is not backwards compatible with previous releases.  
-  
-The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
-{% endhint %}
 
-{% hint style="warning" %}
-This upgrade applies the Ethereum Berlin upgrade to the C-chain, adds a new AVM endpoint, and includes various stability improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
+Bu güncelleme geriye doğru [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0) ile uyumludur. Lütfen v1.5.0 sürümündeki beklenen güncelleme saatlerini görün.
 
-The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
-{% endhint %}
+**Coreth**
 
-**The primary components to this upgrade include:**
+* [Geth güvenlik güvenlik](https://twitter.com/go_ethereum/status/1430067637996990464) açığını bağladı.
+* Api arka tarafındaki paniğe kapıldım.
 
-* Updated Coreth to depend on v1.10.2 of go-ethereum.
-* Applied the Ethereum Berlin upgrade. Specifically [EIP-2565](https://eips.ethereum.org/EIPS/eip-2565), [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718), [EIP-2929](https://eips.ethereum.org/EIPS/eip-2929), and [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930).
-* Added new stateful pre-compiled smart contracts to the C-chain to support ANT transfers and ARC-20 wrappers around ANTs.
-* Added an AVM `/events` endpoint that supports websocket notification of transactions being accepted matching an addresses filter.
-* Added two new networking message types `SignedVersion` and `SignedPeerlist` to improve validator -&gt; IP mappings.
-* Fixed a long standing bug where shutting down the node while a chain was bootstrapping could cause the chain to be shut down ungracefully.
-* Updated the plugin gRPC packages to paginate large requests to improve stability.
-* Added the ability to run avalanchego's main binary as a plugin.
-* Fixed a potential race condition in the leveldb corruption protection.
-* Updated the automated build scripts to better support multiple architectures.
+**AVM**
 
-**Added command line arguments:**
+* Geliştirilmiş araç için statüsüz kodlayıcı nesil.
 
-* `plugin-mode-enabled` specifies the binary to run in plugin mode.
+**Anlaşma**
 
-**Removed command line arguments:**
+* Oylama için ek kütükler eklendi.
+
+
+## v1.5.1-eth\_call \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)
+
+Bu güncelleme geriye doğru [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0) ile uyumludur. Lütfen v1.5.0 sürümündeki beklenen ağ güncellemesi saatlerini görün.
+
+Bu güncelleme, dış ait hesap hesabı olmadan eth\_call kullanımına izin veren v1.5.1 için bir hotfix uygulamadır.
+
+
+## v1.5.1 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)
+
+Bu güncelleme geriye doğru [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0) ile uyumludur. Lütfen v1.5.0 sürümündeki beklenen ağ güncellemesi saatlerini görün.
+
+**Yapılandırma**
+
+* `bootstrap-retry-max-attempts`Kaldırılma ve ekleme seçeneği`bootstrap-retry-warn-frequency`
+
+**Alt ağlar**
+
+* El sıkışma mesajına `subnetID`eklendi. Bu durum hangi alt ağların syncing. ilginç olduğunu belirtmektedir.
+* Optimize altağ konteynırları dedikoduları.
+
+**AVM**
+
+* `avm.GetTx`JSON UTXOs hakkındaki `amount`raporları doğru şekilde hazırladı.
+
+**- Çizme takıntısı**
+
+* Bir düğümün internet kayışta düşmesi sonucu ölümcül bir hata bildirmesine neden olabilecek bir sabit döngü.
+
+**RPCChainVM**
+
+* Onaylanmamış blokların önbelleğini geliştirdim.
+
+**Coreth**
+
+* Geth v1.10.7 güncellenmiştir.
+
+## v1.5. 0 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)
+
+**Bu değişim, önceki sürümlerle ters uyumsuz değildir.**
+
+Bu yükseltme to dinamik ücretler ekler, çeşitli gelişmeler ile birlikte.
+
+Güncellenen değişiklikler, 24 Ağustos 2021'de saat 10'da on yürürlüğe girdi. Değişiklikler yürürlüğe girmeden önce your yükseltmelisiniz, aksi takdirde on üst zamları kaybedersiniz.
+
+[Burada](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) daha fazla bilgi bulunabilir.
+
+**Ağ Güncellemesi**
+
+* to dinamik ücret hesaplamaları eklendi.
+* Arttırılmış `CreateSubnetTx`ve `CreateChainTx`ücretler.
+* Delege onayında düzgünce yolsuzluk hatası.
+* Delege işlemleri `MaxStakeWeight`için zorlandı.
+
+**İstemci Yükseltileri**
+
+* Adres ve varlık tarafından tarihsel işlemlerin görüntülerini etkinleştirmek için to işlem indeksleme yetenekleri eklendi.
+* Dokter görüntüsünde öntanımlı komutu `./avalanchego`olarak eklendi.
+* Düz resimde statik bağımlılık sürümleri kullanılıyor.
+* Veritabanı göçü desteği ve deamon koşucu.
+* Aktörlü düğüm yapılandırma parlaması.
+* Optimize konteynır dedikodu örneklemesi.
+* AvalancheGo ve EVM ikili oluşturma becerisini de eklediler.
+* Tüm ebeveyn bloğunu almak yerine ana bloğun kimliğini ortaya çıkarmak için `Block`arayüzü basitleştirdi.
+* consensus motorlarında bekleyen işleri bekleyen ek metrik eklendi.
+* Tampon zinciri doğrulama statuses transaction confirmation from ayrı ayrı olarak halletmek için önerilen P-chain statuses
+
+**Güncellenmiş API**
+
+* `GetAddressTxs`API'ye `avm`eklendi.
+* `SetLoggerLevel`Kütük hala çalışıyorken ve `GetLoggerLevel``Admin`API'ye eklenmiş kütük seviyelerinin ince tanılı ayarlanmasına izin vermek için eklendi.
+* Bu düğümün şu anda kullandığı düğüm yapılandırmasını almak için `GetConfig``Admin`API'ye eklendi.
+* `GetPendingValidators`S'nin `nodeID`girmesine izin vermek `GetCurrentValidators`ve cevap genelleştirmek `platformvm.Client`için güncellendi.`GetStake`
+
+**Güncellenmiş CLI Tartışmaları**
+
+* `fetch-only`Kaldırıldı.
+* JSON yapılandırması to `avm`eklendi.
+   * Eklendi`indexTransactions`
+   * Eklendi`indexAllowIncomplete`
+
+## PRE\_RELEASE v1.5.0-fuji \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji)
+
+**Lütfen bu sürümün mainnet unable ve bir ana ağ yapılandırması ile çalışmaya kalkıştığında "bu düğüm sürümü doesn't desteklemiyor" görüneceğini unutmayın. Eğer bir ana ağ düğümünü çalıştırırsanız, resmi yayın haftaya yayınlanana kadar eylem yapılmaz.**
+
+**Bu değişim, önceki sürümlerle ters uyumsuz değildir.**
+
+Bu yükseltme to dinamik ücretler ekler, çeşitli gelişmeler ile birlikte.
+
+Güncellenen değişiklikler, 16 Ağustos 2021 tarihinde Fuji on saat 3'te yürürlüğe girdi. Fuji güncellendikten ve doğrulandıktan sonra bir mainnet uyumlu sürümü yayınlanacak.
+
+**Ağ Güncellemesi**
+
+* to dinamik ücret hesaplamaları eklendi.
+* Arttırılmış `CreateSubnetTx`ve `CreateChainTx`ücretler.
+* Delege onayında düzgünce yolsuzluk hatası.
+* Delege işlemleri `MaxStakeWeight`için zorlandı.
+
+**İstemci Yükseltileri**
+
+* Adres ve varlık tarafından tarihsel işlemlerin görüntülerini etkinleştirmek için to işlem indeksleme yetenekleri eklendi.
+* Dokter görüntüsünde öntanımlı komutu `./avalanchego`olarak eklendi.
+* Düz resimde statik bağımlılık sürümleri kullanılıyor.
+* Veritabanı göçü desteği ve deamon koşucu.
+* Aktörlü düğüm yapılandırma parlaması.
+* Optimize konteynır dedikodu örneklemesi.
+* AvalancheGo ve EVM ikili oluşturma becerisini de eklediler.
+* Tüm ebeveyn bloğunu almak yerine ana bloğun kimliğini ortaya çıkarmak için `Block`arayüzü basitleştirdi.
+* consensus motorlarında bekleyen işleri bekleyen ek metrik eklendi.
+* Tampon zinciri doğrulama statuses transaction confirmation from ayrı ayrı olarak halletmek için önerilen P-chain statuses
+
+**Güncellenmiş API**
+
+* `GetAddressTxs`API'ye `avm`eklendi.
+* `SetLoggerLevel`Kütük hala çalışıyorken ve `GetLoggerLevel``Admin`API'ye eklenmiş kütük seviyelerinin ince tanılı ayarlanmasına izin vermek için eklendi.
+* Bu düğümün şu anda kullandığı düğüm yapılandırmasını almak için `GetConfig``Admin`API'ye eklendi.
+* `GetPendingValidators`S'nin `nodeID`girmesine izin vermek `GetCurrentValidators`ve cevap genelleştirmek `platformvm.Client`için güncellendi.`GetStake`
+
+**Güncellenmiş CLI Tartışmaları**
+
+* `fetch-only`Kaldırıldı.
+* JSON yapılandırması to `avm`eklendi.
+   * Eklendi`indexTransactions`
+   * Eklendi`indexAllowIncomplete`
+
+## v1.4.12 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.12)
+
+Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.
+
+**X-Chain**
+
+* Sorulan işlemin JSON temsilini `GetTx`gönderen API `"json"`yöntemine biçimlendirme argümanı eklendi
+* Arayüz tipi eklendi
+
+**Bilgi API**
+
+* `GetNodeVersion`Bilgi API istemcisine metot eklendi
+
+**Prometheus Metrik**
+
+* Sıkıştırma nedeniyle gönderilmemiş baytlar için düzeltilmiş ve yeniden adlandırılmış metrik
+* Sıkıştırma nedeniyle alınmamış baytlar için metrik eklendi
+* `noAverager``metrics`Pakete yardım yapısı eklendi
+
+**Veritaban**
+
+* Güncelle/ eklenen kriterler
+
+**Paylaşılan Hafıza@ info: whatsthis**
+
+* `Remove`Gelecekteki atom işlem optimizasyonuna izin `Apply`verilecek `Put`ve yer değiştirin
+
+## v1.4.11 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)
+
+**C-Chain**
+
+Bu sürüm öntanımlı olarak fotoğraf çekimlerini sağlar.
+
+**Yapılandırma Bayrakları**
+
+_- Çıkarıldı_
+
+* `conn-meter-reset-duration`
+* `conn-meter-max-conns`
+
+_Eklendi_
+
+* `network-compression-enabled`
+
+**Prometheus Metrik**
+
+Birçok Prometheus metriği yeniden adlandırıldı ve birçok histogram 2 ölçü ile değiştirildi. Güncellenmiş Grafana Dashboard için [buraya](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) bak.
+
+Bu sürüm pakete yardımcı yöntemler de `utils/metric`ekler.
+
+**RocksDB**
+
+RocksDB artık inşa senaryosunu çalıştırırken varsayılan olarak inşa edilmemektedir ve halka açık şekilde serbest bırakılan ikili içeriğe dahil edilmemiştir. RocksDB ile AvalancheGo inşa etmek için `export ROCKSDBALLOWED=1`terminalinde koş ve sonra da`scripts/build.sh` Bunu kullanmadan önce `--db-type=rocksdb`yapmalısın.
+
+RocksDB veritabanı şimdi bir alt dizinde dosyalarını `rocksdb`arıyor. Eğer with daha önce görüşürseniz mevcut dosyaları taşımak zorunda kalacaksınız.
+
+**İleti Sıkıştırma**
+
+Düğümler şimdi P2P mesajlarını sıkıştır. Eğer bir peer >= v1.4.11, Put, Push Query, Peer Listesi ve Multiput mesajları ağ üzerinden gönderilmeden önce gzip kullanarak sıkıştırılır. Bu durum AvalancheGo's bant genişliği kullanımını azaltmaktadır.
+
+**Bağlantı Gazı İçten Bağlantı Yazı Bağlantı Bağlantı Oranı Sınırlandırma ve varsayılan olarak **etkinleştirildi.
+
+**Genel Gelişmeler**
+
+* GRPC tarafından bir eklentiye sunulan bir veritabanı üzerinde tekrarlama ve geliştirilmiş performans.
+* Linux'ta, AvalancheGo zarafetsiz ölürse C-Chain temizleyin.
+* P2P mesaj tanımlarını değiştirdi ve paketten `network`kaldırın.
+* HTTP API sunucusuna VM takma isimlerini ekle
+* `1024`Yerine başka bir şey `units.KiB`koydular.
+* İlgili sorguların oluşturulması için çeneleri işleme yoluyla bölünme toleransı geliştirildi.
+
+**Fuji IPleri**
+
+Fuji for çizme iplerini güncellendi.
+
+## v1.4.10 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10)
+
+**Kayısı 2. Aşama 10**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.{% endhint %}
+
+Yama performans, gazı ve VM iyileştirmeleri içerir:
+
+* `LevelDB`Desteklenen mimarilerden `RocksDB`ziyade kullanıma destek eklendi.
+* Yeniden yapılandırılmış inbound ağ gazı düğümlü düğümlerin bant genişliği kullanımını kısıtlamak için düğümlü bir temele dayanıyor.
+* Yeniden yapılandırılmış dış şebeke gazı ağırlığa kazıkla ayrılmış bytes doğru gidiyor.
+* `pruning-enabled`Bayrağın öntanımlı değerini C-chain `true`için güncellendi.
+* RPC üzerinden özel VM'ler kayıt edilebildi.
+* Geçerlilik durumunu bildirmek için güncellenen blok zinciri durumu.
+* `TimestampVM`Beklenen VM yaratma yoluyla eşleşmek için kendi deposuna taşınmış.
+* `grpc`Dosyalar doğru yere yerleştirmek için protobuf kod gen betiği ayarlandı.
+* Önbellek tahliye doğrulama hatalarını önlemek `rpcchainvm#Block.Verify`için blok bytes geçtiler.
+
+## v1.4.9 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)
+
+**Kayısı 2. Aşama 9.**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.{% endhint %}
+
+Yama performans iyileştirmeleri ve izleme iyileştirmeleri içerir:
+
+* C-chain çalıştırmak için destek eklendi. Pruning şu anda öntanımlı olarak devre dışı bırakıldı.
+* Yükleme dengesi arkasında bağlantıları kesmek için C-chain web sitesi ping aralığı azaltıldı.
+* Kardan Adam Blok arabirimi için zaman damgası eklendi.
+* C-chain API max uygulama uygulamasında ayarlanmış hata, web kovanları aracılığıyla yapılan aramalar için ayarlanmış hata.
+* http uç noktası için eklenmiş gzip başlık desteği eklendi.
+* Sonuna ek sürüm tanımlamaları `info.getNodeVersion`eklendi.
+* Düğüm sürümlerine bağlanma >= 1.4.5.
+* Birincil kayıt dizininin altına Daemon kayıtlarını taşıdı.
+* Belirleyici örnekleme için destek eklendi.
+* Yeni etiketler için GitHub yerleştirme işlemi eklendi.
+* Düğümlerin programlama programında daha iyi desteklemek için yapılandırılmış yapılandırma yönetimi ayarlandı.
+
+## v1.4.8 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.8)
+
+**Kayısı 2. Aşama 8.**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.{% endhint %}
+
+Yama performans iyileştirmeleri, izleme iyileştirmeleri ve alt ağ düzeltmeleri içerir:
+
+* AVM'nin ücret tanımını zincirin ana varlığına ödenmesi için uygulamak için değiştirdi. Bu X-Chain's davranışlarını değiştirmez ama diğer AVM'leri kullanabilir kılıyor.
+* İncirleri belirli zincirlere ekleme yeteneği eklendi. Bu `coreth-config`CLI parametresini bozuyor.
+* Yeni çıkış bağlantılarının sayısına sınırlandırılmış oran eklendi.
+* Bir zincire şeffaf metrik ekleyen bir VM paketi sundu.
+* Sürekli düğüm profilleme yapabilme yeteneğini eklendi.
+* Ağ katmanında byte tahsis edildi.
+* Dedikodu parametrelerini ayarlamak için çeşitli CLI parametreleri eklendi.
+* Diskten okunan bir anahtar çifti yerine ephemeral anahtar çifti kullanabilmek için düğümler etkinleştirildi.
+* Yanlış bir uyarı.
+* Travis'te koşmaktansa Github Eylemlerinde C.'yi test etmek için hareket etti.
+* VM arayüzünden özel vakalar kaldırıldı.
+
+**Komut Satırı Argümanları Eklendi:**
+
+* `profile-dir`
+* `profile-continuous-enabled`
+* `profile-continuous-freq`
+* `profile-continuous-max-files`
+* `chain-config-dir`
+* `bootstrap-multiput-max-containers-received`
+* `bootstrap-multiput-max-containers-sent`
+* `boostrap-max-time-get-ancestors`
+* `consensus-on-accept-gossip-size`
+* `consensus-accepted-frontier-gossip-size`
+* `meter-vms-enabled`
+* `staking-ephemeral-cert-enabled`
+* `outbound-connection-timeout`
+* `outbound-connection-throttling-rps`
+
+## v1.4.7 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7)
+
+**Kayısı 2. Aşama 7**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Bu yama performans iyileştirmeleri ve hata düzeltmeleri içerir.{% endhint %}
+
+Eğer önceden yüklenmiş düğüm sürümü <= v1.4.4 ise bu düğüm, blokları işlemeyi durdurmuş olabilir. Bu güncelleme düğümleri onaracak ve bir veritabanı göçü gerçekleştirecek. Veritabanı göçü hakkında detaylar için lütfen [V1.4.5 veritabanı göç](avalanchego-v1.4.5-database-migration.md) notlarına bakın. Eğer önceden yüklenmiş düğüm sürümü >=v1.4.5 ise bu düğüm, mevcut veritabanı kullanır ve bir veritabanı göçü gerçekleştirmek zorunda kalmaz.
+
+* Göç öncesi düğümü, P-chain bloğunu doğru doğrulamak için `SHraz7TtMfTQ5DX1rREhNZW1bi7PpPzAq7xoJAwrWNQrLhQcD`ayarlandı.
+* Ana alt ağ blok zincirlerini doğru şekilde geri getirmek `platformvm.GetBlockchains`için geri dönme işlemi ayarlandı.
+* Grpc sürümünü v1.37 olarak güncellendi.
+* Optimize bir peerlist örnekleme.
+* Veritabanı krizleri eklendi.
+* Çeşitli tekrarlanan hafıza tahsis edilmesini azalttı.
+
+## v1.4.6 \([GitHub Görünümü](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.6)\)
+
+**Kayısı 2. Aşama 6.**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Bu yama performans iyileştirmeleri ve hata düzeltmeleri içerir.{% endhint %}
+
+**Eğer önceden yüklenmiş düğüm sürümü <= v1.4.4 ise bu düğüm, bir veritabanı göçünü gerçekleştirecektir. Veritabanı göçü hakkında detaylar için lütfen v1.4.5 sürümleri notlarını görün.** Eğer önceden yüklenmiş düğüm sürümü v1.4.5 ise bu düğüm, mevcut veritabanı kullanır ve bir veritabanı göçü gerçekleştirmek zorunda değildir.
+
+Şu yamağa:
+
+* Yüksek sürdürülebilir DB yazılarına yol açan P-chain mempool için geçersiz işlem çıkarımı kaldırır.
+* Veritabanı dizinindeki veritabanı olmayan dosyaları ve dizinleri görmezden geliniyor. Bu özellikle macOS ile ilgili rapor edilen hataları düzeltmelidir. DS\_Store dosyaları.
+* CLI üzerinden belirlenen yapı dir bayrağını ayarladı, preupgrade düğümünün hataya sebep olmadan belirlendi.
+* Artık node-manager the desteklenmeyen eklenti dir bayrağı kaldırıldı. Genellikle bayrağı belirtmek doğru davranışa yol açar. Ancak kompleks tesisler için build-dir bayrağı gerekebilir.
+* Sadece akraba el sıkışmasını bitiren bağlantılara mesaj gönderme zorunluluğu uygulandı.
+* Uzlaşım ve kayma sırasında hafıza tahsilatlarını azalttı.
+
+## v1.4.5 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5)
+
+**Kayısı 2. Aşama - Patama 5 - DB Upgrade**
+
+**Bu güncelleme tipik sürüm güncellemesinden daha çok içeriklidir. Daha detaylı talimatlar ve bir FAQ [**burada**](https://docs.avax.network/build/release-notes/avalanchego-v1.4.5-database-migration) ****bulunabilir.**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Bu yama önemli performans iyileştirmeleri ve birçok güncelleme içerir.{% endhint %}
+
+**VM Geliştirmeleri:**
+
+* `platformvm`Devlet yönetimini tamamen yeniden tasarladı.
+   * `versiondb`Resimlerin kullanımını kaldırıp değiştirilebilen ve yeniden ayrıştırılmadan okunabilen devlet referanslarını geçerek bloklardan geçilerek kaldırıldı.
+   * Temel bir devlet yöneticisi uyguladı ve bellek yöneticisi alttaki veritabanına yazılar yazıyordu.
+   * Uygulanmış CoW doğrulayıcısı bellekte birden fazla doğrulama ayarlarını etkinleştirmek için ayarlar.
+   * Kullanılmamış devlet nesnelerine dokunmamak için alt ağ tarafından zincirlenmiş zincirler.
+   * Kabul `addDelegator`ve işlemler sırasında gereksiz yinelemelerden kaçınmak `nodeID`için onaylayıcıları `addSubnetValidator`Indexed
+   * Disk ve doğrulayıcı ayarları yönetmeye adanmış anahtar değerli çiftlerin sayısını yükseltti.
+* Ödüllerin indekslenmesini desteklemek için `platformvm`API'ye eklenen stokla ödül görüntüleri eklendi.
+* Testi basitleştirmek için doğrulama ayarlama ayarlandı.
+* Blok ve işlem tipi metrikleri `platformvm`eklendi.
+* API arama metriklerini `avm`ekledi.`platformvm`
+* `avm``prefixdb`S, kayıt önleme metrikleri ve ek kodu paylaşmak için devlet yönetimi `platformvm`güncelledi.
+* `avm`Basitleştirilmiş `UTXO`yönetim ve indekslenme.`platformvm`
+* Yeniden yapılandırılmış adres ayrıştırma ve yönetim uyumlu VM örnekleri arasında tamamen paylaşılmalıdır.
+* Ana subnet yeniden yapılandırılmış paylaşılmış anısı VM örnekleri arasında tam olarak paylaşılacaktır.
+* Mevcut VM uygulamaları üzerinde dikişsiz önbelleğini desteklemek ve yeni of uygulanmasını kolaylaştırmak için zincir devlet uygulaması eklendi.
+* `rpcchainvm`Yeni zincir devlet yöneticisini birleştirdi ve bu da çeşitli metrikler de ekliyor.
+* Gelecekteki ağ güncellemelerini daha iyi desteklemek için standart VM arayüzü eklendi `upgradeBytes`ve `configBytes`eklendi.
+* API'ye eklenmiş `getAtomicTx`ve son noktaları da `getAtomicTxStatus``evm`eklenmiş.
+* Ortak motorla uyumlu şekilde gerçekleştirilmek için basitleştirilmiş `evm`blok üretimi.
+* orphaned atomik işlemleri yeniden tanıtmak için bir atom işlem mempool eklendi.
+* `evm``sourceChain`Müşterideki hata ayarlanarak ayarlandı.`getAtomicUTXOs`
+* Yeni zincir devlet yöneticisini blok yönetimini daha iyi optimize etmek `evm`için birleştirdi.
+
+**Çizme Kayışı Geliştirmeleri:**
+
+* Kayıplar sırasında geri dönüşler kaldırıldı. Bu durum kayma sürecinin yeniden başlaması sırasında düğümün performansını önemli ölçüde artırır.
+* Düğümlerden çıkmaya çalışırken zarif bir düğüm, kapalı kapılar çalıştırmaya çalışırken kapatıldı.
+* Çizme sırasında kopyalamış IPC konteyner yayınları ayarlanmış.
+* Çizme kayışları sıralamasında özel önyargı uygulamak yerine `prefixdb`S kullanılarak yazılacak şekilde yazılmıştır.
+* Eklenen ek kayma önleme ve önbellek metrikleri eklendi.
+
+**Veritabanı Göçmenliği Ek Olarak:**
+
+* Güncellenmiş veritabanı formatına bir daemon işlem yöneticisi eklendi.
+* Veritabanı semantik sürümleri takip etmek için değiştirilmiş sürüm işleme.
+* Farklı veritabanı sürümleri üzerinde takip etmek ve çalıştırmak için bir veritabanı yöneticisi uyguladı.
+* Kullanıcıları veritabanından `v1.0.0`veritabanına otomatik olarak kopyalayan bir `keystore`göçü `v1.4.5`uyguladı.
+* `v1.0.0`Veritabanından veritabanına doğru bir doğrulayıcı üst zamanlı göçü `v1.4.5`uyguladı.
+
+**Düğüm Geliştirmeleri:**
+
+* Çevre değişkenlerini her zaman genişletmek için yapılandırma güncelleniyor.
+* Düğüm yapılandırmasını diske dokunmadan hafızada TLS sertifikalarını belirtmek için ayarladı.
+* Anlamlı çıkış kodları için daha iyi destek eklendi.
+* Belirli olmayan port haritalarını desteklemek için sunucuların `http`ve `staking`sunucuların dinleme adresini gösterildi.
+* Bir veritabanı ile veritabanı arasında geçiş yapabilmek için bir `versionable`veritabanı `versioned`uyguladı.
+* Kimlik öncesi `Set`tahsilatlarını en iyi şekilde değerlendirmiş ve of hafıza kullanımını `struct`azaltmıştır.
+* Zorla sıkı bağlama kuralları.
+
+**Değiştirilmiş komut satırı argümanları:**
+
+Bu nedenle daha önce bir anahtar sözcüğü olarak `"default"`değerlendirilmişti. `"default"`Şimdi, bayrağın niyeti olarak muamele görecek. Öntanımlı davranışları korumak için, bayrak belirtilmemeli.
+
+* `config-file`
+* `coreth-config`
+* `plugin-dir`
+* `staking-tls-key-file`
+* `staking-tls-cert-file`
+* `bootstrap-ips`
+* `bootstrap-ids`
+* `ipcs-path`
+* `db-dir`
+
+Bu nedenle daha önce bir anahtar sözcüğü olarak `""`değerlendirilmişti. `""`Şimdi, bayrağın niyeti olarak muamele görecek. Öntanımlı davranışları korumak için, bayrak belirtilmemeli.
+
+* `ipcs-chain-ids`
+* `log-dir`
+* `log-display-level`
+
+`bootstrap-ips``bootstrap-ids`Artık çiftleşmesi ve çiftleşmesi gereksizdir. `bootstrap-ips`Bu da demek oluyor ki farklı sayıları belirlemek için geçerli bir durum.`bootstrap-ids` `bootstrap-ips``bootstrap-ids`Başlangıçta ağa bağlanmak için kullanılırlar ve bu aygıtlar in işaret fişekleri olarak kullanılır.
+
+**Komut satırı argümanları eklendi:**
+
+* `fetch-only`
+* `build-dir`
+
+**Alınan komut satırı argümanları:**
+
+* `xput-server-port`
+* `xput-server-enabled`
+
+## v1.4.4 \([GitHub Görünümü](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4)\)
+
+**Kayısı 2. Aşama 4.**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.{% endhint %}
+
+Yama yaklaşan salıverilmeyi optimize etmek amacıyla hata düzeltmeleri ve performans iyileştirmeleri `db-upgrade`içerir.
+
+* Çizme kayışında takip gecikmesi atlayıp tüm zincirler son zincir bir alt ağda baglanır işaretlenmez bitsin diye bitsin.
+* Diğer zincirlerin senkronize olmasını beklerken mesaj kayışında iletileri kaldırma işlemi geliştirildi.
+* Mevcut sürücüleri tekrar kullanılarak örnek tahsilatlarını azalttı.
+* Sadece daldan görüntüleri itmek için güncellenmiş docker betikleri `master`güncelleniyor.
+* Sabit kütük biçimlendirme.
+* Geliştirilmiş hata mesajları.
+
+## v1.4.3 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.3)
+
+**Kayısı 2. Aşama - Patika 3**
+
+{% hint style="warning" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş.{% endhint %}
+
+Bu yama hata düzeltmeleri, güncellenmiş güncellenmiş zamanlama izleme ve performans iyileştirmeleri içerir.
+
+* Düzeltilmiş yedek mesaj işlemesi bot kayışında ilerleme kaydedemeyecek bir düğümün oluşmasına neden olabilir. Bu durum genellikle düğüm, bot kayışlarını bitirirken normal infaz edilemeyince deneyimliydi.
+* C-Chain kod tabanında belirleyici olmayan bir hata ayarladı. Bu sayede başka bir düğümle üretilen bloklar üreten bir blok işlemeden önce geçici olarak kesilecek birçok işlem yayın isteğini alabilecek bir dizi işlem isteğini elde edebilir.
+* Bir akraba gönderilmesi için sürüm mesajlarının sayısını kısıtladı.
+* Kayısı 2'de çekilmiş olan el sıkışma mesajları.
+* Üst hesaplamalar için çevrimdışı olarak çizilmiş işaretlenmiş düğümler.
+* Doğrulama ayarlama ayarları sırasında daha fazla performans olacak şekilde ayarlanan doğrulayıcı güncellendi.
+* Ağı sadece bir akranla bağlantıyı koparma girişimi için güncelledim eğer şu anda doğrulayıcı olurlarsa.
+
+## v1.4.2 \([GitHub Görüntüsü](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.2)\)
+
+**Kayısı 2. Aşama 2 - Patika 2**
+
+{% hint style="warning" %}Bu güncelleme v1.4.0 ve v1.4.1 ile geriye uyumludur. Güncellenen değişiklikler, 10 Mayıs 2021 tarihinde saat 10.00 EDT, Fuji testnet ve 7 EDT ile 10 Mayıs 2021 tarihinde anakaraya doğru yürürlüğe girmiştir.{% endhint %}
+
+Yama daha fazla dedikodu listesindeki mesajların boyutunu azaltıyor ve birkaç yeni bayrak sunuyor:
+
+* `network-peer-list-size`Her mesajda dedikodu yapan akranların sayısını ayarlamak için izin `peerlist`verir.
+* `network-peer-list-gossip-size`Akrabaların sayısını dedikodu `peerlist`mesajlarına ayarlamak için izin verir.
+* `network-peer-list-gossip-frequency``peerlist`Bu tür şeylerin ne kadar sık söylendiğini ayarlar.
+
+## v1.4.1 \([GitHub Görüntüsü](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.1)\)
+
+**Kayısı 2. Aşama 1**
+
+{% hint style="warning" %}Bu güncelleme v1.4.0 ile ters uyumludur. Lütfen v1.4.0 sürümündeki beklenen güncelleme saatlerini görün.{% endhint %}
+
+`--bootstrap-beacon-connection-timeout`Yama dedikodu listesindeki mesajların boyutunu azaltır ve yeni bir bayrak sunar, bu sayede sinyal bağlantı süresinin başlatılmasında yapılandırılmasına izin verir.
+
+## v1.4.0 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)
+
+**Kayısı 2. Aşama**
+
+{% hint style="danger" %}**Lütfen bu değişikliğin önceki sürümlerle ters uyumlu olmadığını unutmayın.**
+
+**Bu yazının [**yazısı burada**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf) ****bulunabilir.**{% endhint %}
+
+{% hint style="warning" %}Bu yükseltme Ethereum Berlin'in to yükseltmesini uyguluyor, yeni bir AVM uç noktası ekliyor ve çeşitli istikrar geliştirmeleri içerir. Toplumdaki herkesi düğümlerinin sağlıklı kalmasını sağlamak için en kısa sürede güncellemeye çağırıyoruz.
+
+Güncellenen değişiklikler, 10 Mayıs 2021 tarihinde saat 10.00 EDT, Fuji testnet ve 7 EDT ile 10 Mayıs 2021 tarihinde anakaraya doğru yürürlüğe girmiştir.{% endhint %}
+
+**Bu yükseltmenin ana bileşenleri şunlardır:**
+
+* Güncellenmiş Coreth v1.10.2 of bağlı olarak
+* Ethereum Berlin güncellemesini uyguladı. Özellikle [EIP-2565](https://eips.ethereum.org/EIPS/eip-2565), [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718), [EIP-2929](https://eips.ethereum.org/EIPS/eip-2929) ve [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930).
+* to etrafındaki to ve ARC-20 paketleyicilerini desteklemek için to yeni statik önceden derlenmiş akıllı sözleşmeler eklendi.
+* Bir adres filtresinin eşleştirilmesi kabul edilen işlemlerin web soketi bildirimini destekleyen bir AVM uç `/events`noktası eklendi.
+* İki yeni ağ iletisi türü eklendi `SignedVersion`ve doğrulayıcı -> IP haritalarını geliştirmek `SignedPeerlist`için
+* Zincir bağlıyken düğümü kapatan uzun bir hatayı tamir ettim. Zincirin zarif bir şekilde kapatılmasına neden olabilir.
+* Eklenti gRPC paketlerini istikrarı artırmak için büyük istekleri to için güncellendi.
+* avalanchego's ana ikili çalışmasını bir eklenti olarak eklendi.
+* Yozlaşma korumasında potansiyel bir ırk durumunu düzelttim.
+* Çoklu mimariyi daha iyi desteklemek için otomatik inşa metinleri güncellendi.
+
+**Komut satırı argümanları eklendi:**
+
+* `plugin-mode-enabled`Eklenti kipinde çalıştırmak için ikili bir yer belirler.
+
+**Alınan komut satırı argümanları:**
 
 * `p2p-tls-enabled`
 * `disconnected-check-frequency`
 * `disconnected-restart-timeout`
 * `restart-on-disconnected`
 
-## v1.3.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
+## v1.3.2 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes security improvements, bug fixes, and monitoring improvements.
-{% endhint %}
+**Kayısı 1 - Patika 2**
 
-**Security Improvements**
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama güvenlik iyileştirmeleri, hata düzeltmeleri ve izleme iyileştirmeleri içerir.{% endhint %}
 
-* Enforced a strict canonical format for C-chain blocks made prior to `Apricot Phase 1`. This ensures that modifications to the `extra-data` block field can not result in modifications to the chain state during bootstrapping.
-* Changed the `Keystore` to ensure only encrypted values are sent over the IPC between avalanchego and plugin processes.
+**Güvenlik Geliştirmeleri**
 
-**Bug Fixes:**
+* C-chain blokları için katı bir kanonik biçimi uygulamaya `Apricot Phase 1`zorlandı. Bu, `extra-data`blok alanındaki değişikliklerin during zincir durumuna göre değişimlere neden olmayacağı garantisini verir.
+* Çığ ve eklenti işlemleri arasında sadece şifreli değerlerin gönderilmesini sağlamak `Keystore`için ayarlandı.
 
-* Fixed delegation cap calculations to include updating the current delegation maximum before removing a delegator. This ensures that the delegation cap is always enforced.
-* Fixed `AVM`'s static API to be registered correctly on startup.
-* Updated node `uptime` calculations to take network upgrades into account.
+**Böcek Düzeltmeleri:**
 
-**Monitoring Improvements**
+* Delege kapağı hesaplamaları, bir delege kaldırmadan önce mevcut delege maksimum güncellemesini içerecek şekilde ayarlanmış bir hesaplama. Bu da heyet başlığının her zaman uygulanmasını sağlar.
+* Başlama sırasında doğru kayıtlı olan statik `AVM`API'yi ayarladım.
+* Ağ güncellemelerini hesaba katmak için güncellenmiş düğüm `uptime`hesaplamaları.
 
-* Added an optional node indexer that can provide a locally consistent ordering of operations accepted on a chain.
-* Updated ansible inventory to include numerous improvements \(Huge thanks to @moreati\).
+**Geliştirmeleri İzleniyor**
 
-## v1.3.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
+* Bir zincir üzerinde kabul edilen işlemlerin yerel olarak tutarlı bir düzenleme sağlayabilecek bir opsiyonel düğüm indeksi eklendi.
+* Güncellenen ansible envanter, çok sayıda iyileştirme \(@moreati sayesinde büyük teşekkürler\).
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability, monitoring improvements, and minor bug fixes.
-{% endhint %}
+## v1.3.1 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)
 
-**The primary components to this upgrade include:**
+**Kayısı 1 - Patika 1**
 
-* Fixed C-chain segfault when performing compression on arm64 CPUs.
-* Added group permissions to local files to enable complex node monitoring.
-* Stripped white space from Auth passwords passed through the api-auth-password-file flag.
-* Removed timeSinceNoOutstandingRequests as it was replaced by longestRunningRequest.
-* Added additional metrics in network throttling.
-* Various code cleanup.
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama istikrarı ve izleme iyileştirmeleri ve küçük hata düzeltmeleri içerir.{% endhint %}
 
-**Added command line arguments:**
+**Bu yükseltmenin ana bileşenleri şunlardır:**
+
+* C-chain segfault arm64 CPU'da sıkıştırma yaparken ayarlandı.
+* Kompleks düğüm izleme etkinleştirmek için yerel dosyalara grup izinleri eklendi.
+* Yazar şifrelerinden alınan beyaz boşluk api-- - şifreli dosya bayrağından geçti.
+* En uzun süre istek edildiğinden beri geri kalan süreyi kaldırdılar.
+* Ağ gazı içinde ek metrik eklendi.
+* Çeşitli kod temizlik.
+
+**Komut satırı argümanları eklendi:**
 
 * `network-health-max-outstanding-request-duration`
 
-**Removed command line arguments:**
+**Alınan komut satırı argümanları:**
 
 * `network-health-max-time-since-no-requests`
 
-## v1.3.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)\)
+## v1.3.0 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)
 
-{% hint style="danger" %}
-Please note that this change is not backwards compatible with previous releases.
+**Kayısı 1 Aşama**
 
-This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
-{% endhint %}
+{% hint style="danger" %}Lütfen bu değişikliğin önceki sürümlerle ters uyumlu olmadığını unutmayın.
 
-The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the Fuji testnet and 10 AM EST, March 31st 2021 on mainnet.
+Bu yükseltme C-chain gaz ücretlerini azaltıyor, C-chain gazı geri ödeme yapılıyor ve çeşitli güvenlik iyileştirmeleri de içeriyor. Toplumdaki herkesi düğümlerinin sağlıklı kalmasını sağlamak için en kısa sürede güncellemeye çağırıyoruz.{% endhint %}
 
-**The primary components to this upgrade include:**
+Güncellenen değişiklikler, 25 Mart 2021 tarihinde saat 10'da Fuji testnet ve 10 Mart 2021 tarihinde anakaraya doğru yürürlüğe girdi.
 
-* Reduced C-chain gas cost from 470 nAVAX to 225 nAVAX.
-* Removed C-chain gas refunds. This change adopts [EIP-3298](https://eips.ethereum.org/EIPS/eip-3298).
-* Refactored C-chain verification to be cleaner when performing network upgrades.
-* Fixed the Auth API to properly enforce revoked tokens.
-* Strengthened the Auth API to ensure the expected signature format is used.
-* Removed the Auth API's password from the CLI arguments.
-* Added more strict file permissions checks.
-* Added some minor additional error handling.
-* Sanitized log writes before being written to disk.
-* Added configurable origins to the HTTP endpoint.
-* Removed attempted HTTPs to HTTP fail over on startup. Now the node will close on startup if upgrading the HTTP endpoint to HTTPs fails.
+**Bu yükseltmenin ana bileşenleri şunlardır:**
 
-**Added command line arguments:**
+* C-chain gazı 470 from 225 to düşürülmüş.
+* C-chain gazı geri alınıyor. Bu değişim, [EIP-3298](https://eips.ethereum.org/EIPS/eip-3298) kabul edilir.
+* Ağ güncellemesi yaparken C-chain doğrulama daha temiz hale getirilmiştir.
+* Geçersiz işaretleri doğru şekilde uygulamak için Auth API'yi ayarladım.
+* Beklenen imza biçiminin kullanılmasını sağlamak için Auth API'yi güçlendirdi.
+* Auth API'nin şifresini CLI argümanlarından kaldırdım.
+* Daha katı dosya izinleri kontrolleri eklendi.
+* Bazı küçük hatalar da ekledim.
+* Sanitized kütük diskte yazılmadan önce yazılır.
+* HTTP uç noktasına yapılandırılabilir kökenler eklendi.
+* HTTP'ye kaldırılma girişimi başlangıçta başarısız oldu. HTTP'nin sonunun upgrading yükseltilmesi başarısız olursa düğüm, başlangıç noktasını kapatacaktır.
 
-* `api-auth-password-file` specifies the file to read the Auth API's password from.
+**Komut satırı argümanları eklendi:**
 
-**Removed command line arguments:**
+* `api-auth-password-file`Yazar API'nin şifresini okumak için dosyayı belirler.
+
+**Alınan komut satırı argümanları:**
 
 * `api-auth-password`
 
-## **v1.2.4 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
+## **v1.2.4 \([**GitHub Görünümü**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)****\)**
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
-{% endhint %}
+**Kayısı 0. Aşama 1 - Düzen 4**
 
-* Updated readme to correct storage requirements.
-* Added additional error handling to Avalanche Tx verification during bootstrapping.
-* Updated numerous metrics, including adding numerous new metrics relating to node health and database usage, removing unused and invalid metrics, and fixing some metric names.
-* Added additional logging to CI.
-* Added the C-chain to the list of critical chains.
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama istikrar ve izleme iyileştirmeleri içerir.{% endhint %}
 
-## **v1.2.3 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
+* Depo gereksinimlerini düzeltmeye ayarlayın.
+* Avalanche Tx doğrulama sırasında ek hata işleme eklendi.
+* Sayısız metrik, node sağlık ve veritabanı kullanımına ilişkin sayısız yeni metrik eklemek ve kullanılmayan ve geçersiz metriklerin kaldırılması ve bazı metrik isimlerin düzeltilmesi dahil olmak üzere güncellenmiştir.
+* to ek kütük eklendi.
+* Kritik zincirler listesine C zinciri eklendi.
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
-{% endhint %}
+## **v1.2.3 **\([**GitHub'da Görünüm**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)****
 
-* Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
-* Simplified C-chain block handling.
+**Kayısı 0. Aşama 1 - Düzen 3**
 
-## **v1.2.2 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**\)**
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama istikrar ve izleme iyileştirmeleri içerir.{% endhint %}
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
-{% endhint %}
+* `[network, router, consensus]`Sağlık kontrolleri ayarlanarak sağlık kontrollerini kaldırın.
+* Basitleştirilmiş C-chain blok işlemi.
 
-* Added IP aliases in the network library to avoid repeated `SYN` calls.
-* Fixed bootstrap message handling when bootstrapping from yourself.
-* Simplified `AdvanceTimeTx` issuance.
-* Added new consensus health checks.
-* Adding node health logging.
-* Added health responses to health `GET` requests.
-* Consolidated incoming message logs.
-* Added error logging to the `LevelDB` wrapper.
-* Added error codes to the `rpcdb` to avoid string parsing.
-* Improved C-chain handling of canonical chain to reduce the number of reorgs.
-* Improved C-chain handling of mock calls performed on the `pending` block.
+## **v1.2.2 **\([**GitHub'da Görünüm**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)****
 
-## **v1.2.1 AvalancheGo Release Notes \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
+**Kayısı 0. Aşama 1 - Düzen 2**
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama istikrarı ve izleme iyileştirmeleri içerir.{% endhint %}
 
-Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments.
-{% endhint %}
+* Ağ kütüphanesine tekrarlanan aramalardan kaçınmak için IP isimlerini `SYN`eklendi.
+* Kendinden kaydırma yaparken ayarlanmış çizme mesajı.
+* Basitleştirilmiş bir `AdvanceTimeTx`bası.
+* Yeni uzlaşma sağlığı kontrolleri eklendi.
+* Sağlık kayıtları ekleniyor.
+* Sağlık isteklerine sağlık yanıtları `GET`eklendi.
+* Gelen mesaj günlüklerini birleştirin.
+* Paketleme işlemi hatası `LevelDB`eklendi.
+* Sicim ayrıştırmasını önlemek `rpcdb`için hata kodları eklendi.
+* reorgs. sayısını azaltmak için kanonik zincir geliştirilmiş C-chain işleme işlemi.
+* Mahallede yapılan sahte çağrıların geliştirilmiş C-chain işleme işlemi `pending`geliştirildi.
 
-Change Summary:
+## **v1.2.1 **\([**GitHub'da Görünüm**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)****
 
-* Added \`UTXO\`s to the \`platformvm.getStake\` response.
-* Added benchlist reporting to the \`info.peers\` response.
-* Added additional health checks into the networking layer.
-* Added \`percent of stake connected\` as a reported metric.
-* Added bootstrapping restart logic to ensure the node has caught up to the current tip, even during times of high throughput.
-* Added subnet-wide bootstrapping to ensure that a chain won't fall behind due to another chain bootstrapping.
-* Prevented verification of rejected blocks to avoid unnecessary computation.
-* Removed gossiping of non-preferred blocks to the network.
-* Switched the network timeout calculator to use an EWMA of the observed network latency.
-* Removed \`Get\` requests from the network latency calculations.
-* Cleaned up the benchlisting algorithm.
-* Cleaned up handling of dropped messages on send.
-* Cleaned up outstanding request and timeout logic.
-* Generalized performance tracking to allow for prefixing of profile names.
-* Added additional caching to the Avalanche bootstrapping traversal.
-* Fixed ansible linting.
-* The added command line arguments mainly consist of configurations of health checks. Additionally, the modified network latency calculations changed the name of some command line args.
+**Kayısı 0. Aşama 1 - Düzen 1**
 
-Added command line arguments:
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama cesaretlendirilmiş. Yama istikrarı ve izleme iyileştirmeleri içerir.
 
-* \`network-timeout-halflife\`
-* \`network-timeout-coefficient\`
-* \`network-health-min-conn-peers\`
-* \`network-health-max-time-since-msg-received\`
-* \`network-health-max-time-since-msg-sent\`
-* \`network-health-max-portion-send-queue-full\`
-* \`network-health-max-send-fail-rate\`
-* \`network-health-max-time-since-no-requests\`
-* \`router-health-max-drop-rate\`
-* \`router-health-max-outstanding-requests\`
-* \`health-check-frequency\`
-* \`health-check-averager-halflife\`
-* \`bootstrap-retry-enabled\`
-* \`bootstrap-retry-max-attempts\`
+Lütfen bu güncellemenin komut satırı argümanları olarak 'ağ zamanlaması artması' ve ‘ağ \`network-timeout-increase\` kaldırdığını unutmayın.{% endhint %}
 
-Removed command line arguments:
+Özeti Değiştir
 
-* \`network-timeout-increase\`
-* \`network-timeout-reduction\`
+* \`UTXO\`s 's 'platformvm.getStake' yanıtına eklendi.
+* \`info.peers\` yanıtına eklenen yedek liste eklendi.
+* Ağ katmanına ek sağlık kontrolleri eklendi.
+* Raporlanan bir metrik olarak bağlanan kazığın %'unu eklendi.
+* Düğünün yüksek geçit zamanında bile geçerli ipuçlarına yetişmesini sağlamak için yeniden bağlama mantığı eklendi.
+* Başka bir zincir kayması yüzünden zincirin gerisinde kalmamasını sağlamak için altağ çapındaki çizme kayması eklendi.
+* Gereksiz hesaplamadan kaçınmak için reddedilmiş blokların doğrulanmasını önlemiş.
+* Ağa istenmeyen blokların dedikodularını kaldırdım.
+* Gözlenen ağ gecikmesinin bir EWMA kullanması için ağ zaman hesaplayıcısını değiştirdi.
+* Ağ gecikme hesaplamalarından 'Get' talepleri kaldırıldı.
+* Yedek algoritmasını temizledim.
+* Gönderilen mesajların kaldırılmasıyla ilgili temizlik yapıldı.
+* Olağanüstü bir istek ve zaman kaçışı mantığı temizledi.
+* Profilin isimlerinin prefixing izin vermek için genelleştirilmiş performans takip edilmesi.
+* Avalanche kayma alanına ek önleme eklendi.
+* Tamir edilmiş ansible mertebe.
+* Eklenen komut satırı argümanları çoğunlukla sağlık kontrollerinin yapılandırmalarından oluşur. Ayrıca, değiştirilmiş ağ gecikme hesaplamaları bazı komut satırı args. adını değiştirdi.
 
-## v1.2.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.0)\)
+Komut satırı argümanları eklendi:
 
-{% hint style="danger" %}
-**Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.**
-{% endhint %}
+* \`network-timeout-halflife\` devre arası yarı-yaşam'
+* \`network-timeout-coefficient\` aşımı katsayısı'
+* \`network-health-min-conn-peers\` \`network-health-min-conn-peers\` arkadaşları'
+* \`network-health-max-time-since-msg-received\` beri sağlığa -en fazla zaman veriliyor'
+* \`network-health-max-time-since-msg-sent\` fazla \`network-health-max-time-since-msg-sent\` zamandan beri
+* \`network-health-max-portion-send-queue-full\` \`network-health-max-portion-send-queue-full\`
+* \`network-health-max-send-fail-rate\` -maksimum \`network-health-max-send-fail-rate\` oranı '
+* \`network-health-max-time-since-no-requests\` -en fazla talep edilmeyeli
+* \`router-health-max-drop-rate\` yüksek düşüş oranı"
+* \`router-health-max-outstanding-requests\` istekler
+* "Sağlık kontrolü"
+* "Sağlık \`health-check-averager-halflife\` yarı ömrü"
+* \`bootstrap-retry-enabled\` girme etkinleştirildi'
+* "Çizme \`bootstrap-retry-max-attempts\` deneme"
 
-The primary components to this upgrade include:
+Alınan komut satırı argümanları:
 
-* Fixed atomic import validation on C-Chain
-* Added rule exception logic to allow atomic bonus blocks
-* Added fail-fast logic into Shared Memory if duplicated deletes are issued
-* Fixed issue where polls could stall in snowman because of a failure to clear requests
-* Fixed BAD BLOCK issue in coreth due to unknown ancestors
-* Fixed a race condition in the repair canonical chain script in coreth
-* Limited number of processing blocks in Snowman and processing txs in Avalanche
-* Updated networking timeout default values and benchlist settings
-* Verified there was no safety violation after the initial network instability
+* \`network-timeout-increase\` aşımı'
+* \`network-timeout-reduction\` aşımı indirgeme'
 
-## v1.1.5 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5)\)
+## v1.2.0 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/tree/v1.2.0)
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional but encouraged. The patch includes stability improvements.
-{% endhint %}
+**Kayısı 0. Aşama 1 Yükseltilmesi**
 
-* Fixed a potential deadlock when registering new chains that could cause the P-chain and http\(s\) endpoint to block.
-* Repairs TxID -&gt; Block Height indexing in the C-chain.
-* Added graceful handling of empty contract deployments in the debug\_traceTransaction API in the C-chain.
-* Improved error handling in the C-chain.
+{% hint style="danger" %}**Lütfen bu yamanın önceki sürümlerle ters uyumlu olmadığını unutmayın. Bu yükseltme, X, C ve P zinciri arasındaki transferi ile ilgili performans sorunlarını düzeltir. Toplumdaki herkesi düğümlerinin etkilenmemesini sağlamak için en kısa sürede yükseltmeye çağırıyoruz. Ayrıca, düğümlerin yükseltilmeden sonra bağlanması birkaç dakika sürebilir ve sürecin kesintisiz olarak tamamlanması gerekir.**{% endhint %}
 
-## v1.1.4 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.4)\)
+Bu yükseltmenin ana bileşenleri şunlardır:
 
-{% hint style="danger" %}
-This update is backwards compatible. It is optional but encouraged. The patch includes CLI upgrades, API bug fixes, stability improvements, and performance improvements.
-{% endhint %}
+* C-Chain üzerinde ayarlanmış atomik ithalat Fixed
+* Atom bonusu bloklarına izin vermek için kural istisnası mantığı eklendi
+* Kopyalanmış deletes verilirse Paylaşılan Hafızaya hatalı hızlı mantık eklendi
+* Kararlı bir konu var ki anketlerin kardan adam gibi durabilmesi istenmeyen bir şey
+* Bilinmeyen atalar yüzünden in kötü BLOK sorununu düzeltti.
+* Coreth onarım zincirinde bir yarış şartı ayarladım.
+* Kardan Adam'da işlem blokları sayısı ve in txs işleme
+* Güncellenmiş ağ zaman aşımı öntanımlı değerleri ve yedek liste ayarları
+* İlk ağ istikrarsızlığından sonra güvenlik ihlali olmadığını doğruladı.
 
-* Fixed an issue where C-chain block indexes could map to unaccepted blocks at a given height.
-* Fixed VM crash when the RPCChainVM experienced high API loads.
-* Fixed optimistic vote bubbling in the Avalanche Engine to correctly pass votes through processing vertices.
-* Added field IncludePartial to the AVM's GetBalance and GetAllBalances API methods. This changes the default behavior to only return the balances of spendable and uniquely owned assets.
-* Added the ability to specify custom genesis configs for custom network IDs.
-* Added additional IPC API functionality.
-* Added additional caching to the RPCChainVM.
-* Improved plugin directory lookup to always work with the binary releases.
+## v1.1.5 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/tree/v1.1.5)
 
-## v1.1.3 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
+**Kayısı 0. Aşama 5**
 
-{% hint style="danger" %}
-This update is optional but encouraged. The patch includes minor bug fixes relating to APIs.
-{% endhint %}
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama teşvik edilmişti. Yama istikrar iyileştirmeleri içerir.{% endhint %}
 
-* Fixed hanging call when attempting to filter C-chain logs.
-* Fixed C-chain client to call the proper multi-coin API.
-* Added `getAtomicUTXOs` to `avm` and `platformvm` API clients.
+* P-chain ve http\(s\) sonlanmasına yol açabilecek yeni zincirler kaydedilirken potansiyel bir çıkmazı ayarladı.
+* in TxID -> Blok Yüksekliği indekslenmesini tamir eder.
+* in debug\_TraceTransaction API'da boş kontrat deployments zarif bir şekilde işletir.
+* in geliştirilmiş hata oluştu.
 
-## v1.1.2 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)\)
+## v1.1.4 \([GitHub Görünümü](https://github.com/ava-labs/avalanchego/tree/v1.1.4)\)
 
-{% hint style="danger" %}
-This update is optional but encouraged. The patch includes bug fixes and performance improvements.
-{% endhint %}
+**Kayısı 0. Aşama 4**
 
-* Fixed bootstrapping processing cache to reduce duplicated traversals when bootstrapping Avalanche.
-* Optimized P-chain verification during bootstrapping.
-* Fixed maximum bench list calculation to use the proper input values.
-* Removed extra linter runs from CI.
-* Added `Height` to the `snowman.Block` interface.
+{% hint style="danger" %}Bu güncelleme geriye doğru uyumlu. İsteğe bağlı ama teşvik edilmişti. Yama CLI güncellemeleri, API hata düzeltmeleri, istikrar iyileştirmeleri ve performans iyileştirmeleri içerir.{% endhint %}
 
-## v1.1.1 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
+* C-chain blok indekslerinin belirli bir yükseklikte kabul edilmemiş blokları harita edebileceği bir sorunu ayarladım.
+* RPCChainVM yüksek API yükleri ile ayarlanmış VM kazası.
+* Oyları işleme dikenleriyle doğru geçmek için Avalanche Motoru'nda köpüklü iyimser oylama düzenlendi.
+* Eklenen alan AVM'nin GetBalance ve GetAllBalances API yöntemlerine Ayrı Bölümü Içeriyor. Bu durum sadece harcanabilir ve eşsiz mal varlıklarının dengesini geri vermek için varsayılan davranışları değiştirir.
+* Özel ağ kimlikleri için özel gen incirlerini belirleme becerisini eklendi.
+* IPC API işlevselliği eklendi.
+* to ek önbellek eklendi.
+* İkili sürümler için geliştirilmiş eklenti dizini her zaman işe yarar.
 
-{% hint style="danger" %}
-This update is optional but encouraged. The patch includes bug fixes and performance improvements.
-{% endhint %}
+## v1.1.3 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/tree/v1.1.3)
 
-* Fixed a node crash bug when users disabled the `Health` API.
-* Fixed a bug in uptime tracking that could over report a node's uptime.
-* Refactored vertex parsing to use a `Codec`.
-* Separated stateful and stateless vertex management.
-* Added per-field slice length checking to the Codec.
-* Introduced a new codec type that groups `TypeID`s together.
-* Introduced message limit flags to the CLI.
-* Introduced a semanticdb package to be used during a future database migration.
-* Added Epoch tracking to the chain context.
-* Improved some of the error messages returned during transaction validation.
-* Reduced GC pressure in the version DB.
+**Kayısı 0. Aşama 3**
 
-## v1.1.0 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0)\)
+{% hint style="danger" %}Bu güncelleme isteğe bağlı ama teşvik edildi. Yama API'lerle ilgili küçük hata düzeltmeleri içerir.{% endhint %}
 
-{% hint style="danger" %}
-**Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC \(6 p.m. EST\). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
-{% endhint %}
+* C-chain kayıtlarını filtrelemeye çalışırken ayarlanmış asılma çağrısı.
+* C-chain istemcisi uygun çoklu madeni API'yi aramak için ayarlandı.
+* `getAtomicUTXOs``avm``platformvm`API müşterilerine eklendi.
 
-There are two primary components to this upgrade:
+## v1.1.2 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)
 
-* General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
-* Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock _\*\*_time had passed
+**Kayısı 0. Aşama 2**
 
-## v1.0.6 AvalancheGo Release Notes \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
+{% hint style="danger" %}Bu güncelleme isteğe bağlı ama teşvik edildi. Bu yama hata düzeltmeleri ve performans iyileştirmeleri içerir.{% endhint %}
 
-{% hint style="danger" %}
-Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
-{% endhint %}
+* Avalanche kayışında kopyalanmış traversals azaltmak için ayarlanmış bootstrapping işleme önbelleği.
+* Çizme sırasında en iyi P zinciri doğrulaması.
+* Uygun giriş değerlerini kullanmak için maksimum bankta hesap ayarlandı.
+* from fazladan keten çıkarılmış.
+* `Height`Arayüze `snowman.Block`eklendi.
 
-* Removed deprecated formats of  platform.getTxStatus and platform.getCurrentValidators.
-* Added support for hex encodings of imported and exported users from the keystore API.
-* Set golang requirement to v1.15.5 to avoid a DoS vulnerability found in the golang standard lib.
-* Added API clients to act as helpers interacting with the node software.
-* Enabled falling back to bootstrapping if a node becomes disconnected from the rest of the network.
-* Fixed the GetUTXOs APIs when UTXOs referenced multiple addresses.
-* Refactored binary encoding to better generalize RPC options.
-* Fixed IP block filtering to correctly set the window length.
-* Generalized the codec package to be able to manage multiple codecs with different versions.
-* Added Epoch to the Vertex interface in preparation of a future release.
-* Deferred transaction hashing to reduce CPU/Memory utilization past fast checks.
-* For those using [https://explorerapi.avax-dev.network/](https://explorerapi.avax-dev.network/), the URL is going to be shut down in a future release. Please switch over to [https://explorerapi.avax.network/](https://explorerapi.avax.network/). 
+## v1.1. 1 \([GitHub Görüntüsü](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
+**Kayısı 0. Aşama 1**
 
-## v1.0.5 AvalancheGo Release Notes  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
+{% hint style="danger" %}Bu güncelleme isteğe bağlı ama teşvik edildi. Bu yama hata düzeltmeleri ve performans iyileştirmeleri içerir.{% endhint %}
 
-{% hint style="danger" %}
-Please note that the release after this one, v1.0.6, will contain the breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
-{% endhint %}
+* Kullanıcılar API'yi devre dışı bıraktığında bir düğüm çarpma hatasını `Health`ayarladı.
+* Bir düğümün uzun zaman önce olduğunu bildirecek bir cihazı ayarladım.
+* Bir kullanım için vertex `Codec`ayrıştırılması.
+* Ayrı ayrı, statüsüz ve vertex yönetimi.
+* to tarla aralığı uzunluğu eklendi.
+* `TypeID`Gruplar birleştiren yeni bir codec tipi tanıtıldı.
+* Sunulan mesaj bayrakları to sunuldu.
+* Gelecekteki bir veritabanı göçü sırasında kullanılacak bir semanticdb paketi sundu.
+* Epoch takip eklendi, zincir bağlamına eklendi.
+* İşlem doğrulaması sırasında geri dönen bazı hata mesajları geliştirildi.
+* DB sürümünde GC basıncı azaldı.
 
-The changes in this release, v1.0.5, are backwards compatible with previous releases. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
+## v1.1. 0 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0)
 
-* Added `IssueTx` and `GetUTXOs` to the C-chain API to enable issuing atomic swaps without revealing private keys to a node.
-* Fixed memory leak in the snowman request manager with oracle block processing.
-* Fix UTXO pagination bug that under-reported available funds.
-* Moved chain http logs to live in the human-readable chain logs folder.
-* Restructure how IDs are managed to avoid heap allocations.
-* Optimized the `UniformSampler`s to avoid creating multiple maps.
-* Reduced usage of `ids.Set` in favor of `[]ids.ID` to better utilize continuous memory.
-* Introduced `[]byte` reuse in `PrefixDB`.
-* Implemented type-specific sorting functions to avoid frequent interface conversion allocations.
-* Optimized AVM load user to avoid reading unnecessary information from disk.
-* Removed a memory allocation + copy in socket sending for the full length of the message.
+**Kayısı Aşaması 0.**
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+{% hint style="danger" %}**Lütfen bu yükseltmenin önceki sürümlerle ters uyumlu olmadığını unutmayın. Güncelleme 7 Aralık Pazartesi günü saat 11:00'de gerçekleştirilmeli. Başlangıçta Aralık ayı ortalarında planlanan güncelleme, şimdi önemli bir işaretli kilitleme hatasını düzeltmek için hızlandırılıyor. Toplumdaki herkesi düğümlerinin etkilenmemesini sağlamak için en kısa sürede yükseltmeye çağırıyoruz.**{% endhint %}
 
-## v1.0.4 AvalancheGo Release Notes  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
+Bu güncellemenin iki ana bileşeni vardır:
 
-![AvalancheGo release notes v1.0.4.png](../../.gitbook/assets/image%20%2817%29.png)
+* Önümüzde olan Apricot ağı güncellemesi için genel hazırlıklar Apricot Sıfır Yükseltilmesi adı verilen
+* Bu sorun, kilitleri geçtikten sonra kilitlenebilir outputs kilitlenmesini engelleyen bir sorunu düzeltmek.
 
-{% hint style="danger" %}
-This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
-{% endhint %}
+## v1.0.6 \([GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)
+
+{% hint style="danger" %}Bu salınımın [burada](https://docs.avax.network/build/apis/deprecated-api-calls) tanımlanan değişiklikleri içeren bir not edin. Platform.getTxStatus ve of öntanımlı tepki biçimini değiştirir. Güncelleme isteğe bağlı ama teşvik edildi. Bu yama performans iyileştirmeleri ve yaşam kalitesi açısından bazı iyileştirmeler içerir.{% endhint %}
+
+* Platform.getTxStatus ve platform.getCurrentValidators. kaldırılmış biçimleri.
+* İçeriye aktarılmış ve ihraç edilen kullanıcıların büyü kodları için destek eklendi.
+* Golang standart in bulunan DoS savunmasızlığından kaçınmak için v1.15.5 v'ye golang gereksinimini ayarlayın.
+* Bağlı yazılımla etkileşim içinde yardımcı olarak hareket etmek için API istemcileri eklendi.
+* Eğer bir düğüm ağın geri kalanından koparsa kayma işlemi etkinleştirilir.
+* UTXOs birden fazla adres referans edince GetUTXOs API'leri ayarlandı.
+* RPC seçeneklerini daha iyi genelleştirmek için ikili kodlama yazılmış.
+* Pencere uzunluğunu doğru ayarlamak için IP bloğu filtreleniyor.
+* Farklı sürümlerle birden fazla kodlayıcıyı yönetebilmek için codec paketini genelleştirdi.
+* Gelecekte bir serbest bırakma hazırlığı için Epoch Vertex arayüzüne eklendi.
+* Hızlı kontroller geçmiş CPU/Hafıza kullanımını azaltmak için engelli işlem hashing
+* [those](https://explorerapi.avax-dev.network/) için URL gelecekteki bir sürüm içinde kapatılacak. Lütfen [to](https://explorerapi.avax.network/) / adresine geçiniz.
+
+Bu güncellemede yardım için, [Geliştirici](https://support.avalabs.org/en/collections/2618154-developer-faq) our takip edin, eğer hala sorunlarla uğraşıyorsanız [Discord](https://chat.avax.network/) ile yardım için bize katılabilirsiniz.
+
+## v1.0.5 [\(GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)
+
+{% hint style="danger" %}Lütfen bu seferki v1.0.6 sürümünün [burada](https://docs.avax.network/build/apis/deprecated-api-calls) tanımlanan kırılma değişiklikleri içereceğini unutmayın. `platform.getTxStatus`Yani tepki biçimi `platform.getCurrentValidators`değişecek.{% endhint %}
+
+Bu sürümdeki değişiklikler, v1.0.5 önceki sürümlerle ters uyumludur. Güncelleme isteğe bağlı ama teşvik edildi. Bu yama performans iyileştirmeleri ve yaşam kalitesi açısından bazı iyileştirmeler içerir.
+
+* Eklendi `IssueTx`ve C-chain `GetUTXOs`API'ye atom değişimlerini özel anahtarları bir düğüme açıklamadan sunmak için eklendi.
+* Kardan adam talep yöneticisinde bellek sızıntısı ve kahin blok işleme işleme ile birlikte.
+* UTXO pagination bug cihazını ayarla ve rapor edilmemiş fonları ayarla.
+* İnsan okunabilir zincir kütüklerinde yaşamak için taşınmış http günlükleri.
+* Kimliklerin yığınları ayırmaktan kaçınma yöntemini yeniden yapılandır.
+* `UniformSampler`S'leri birden fazla harita yaratmaktan kaçınmak için en iyi şekilde değerlendirdim.
+* `ids.Set`Sürekli hafızayı daha iyi kullanmak `[]ids.ID`için kullanım kullanımını azalttı.
+* Yeniden `[]byte`kullanılmaya başladı.`PrefixDB`
+* Sıklıkla arayüz dönüştürme tahsilatlarından kaçınmak için uygulanan type-specific fonksiyonları
+* Diskten gereksiz bilgileri okumamak için en iyi AVM yükleme kullanıcısı.
+* Mesajın tam uzunluğunu gönderen soket içinde bir bellek tahsis \+ kopyası kaldırıldı.
+
+Bu güncellemede yardım için, [Geliştirici](https://support.avalabs.org/en/collections/2618154-developer-faq) our takip edin, eğer hala sorunlarla uğraşıyorsanız [Discord](https://chat.avax.network) ile yardım için bize katılabilirsiniz.
+
+## v1.0.4 [\(GitHub'da Görünüm](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)
+
+![AvalancheGo notları v1.0.4.png](../../.gitbook/assets/image%20%2817%29.png)
+
+{% hint style="danger" %}Bu güncelleme isteğe bağlı ama teşvik edildi. Bu yamada yaşam iyileştirmeleri ve çeşitli performans iyileştirmeleri yer alıyor. Bu güncellemenin CLI parametrelerinin belirtilmesi gerektiğini not edin, ya da --- Örneğin, artık izin `-public-ip=127.0.0.1`verilmemektedir ve belirtilmesi gerekir.`--public-ip=127.0.0.1` Aksi takdirde, bu güncelleme ters uyumludur.{% endhint %}
 
 ```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.
@@ -394,5 +854,5 @@ In this new format, reason will not be present unless the status is Dropped.
 Anything that depends on platform.getTxStatus should switch to using the includeReason argument and use the new response format. After a few releases, we'll only support the new response format.
 ```
 
-For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
+Bu güncellemede yardım için, [Geliştirici](https://support.avalabs.org/en/collections/2618154-developer-faq) our takip edin, eğer hala sorunlarla uğraşıyorsanız [Discord](https://chat.avax.network) ile yardım için bize katılabilirsiniz.
 
