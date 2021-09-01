@@ -1,6 +1,6 @@
-# Manage X-Chain Keys
+# X-Chainキーを管理する
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it’s registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice.
+AvalancheJSには、独自のAVMキーチェーンが付属しています。このKeyChainは、APIの機能で使用され、登録された鍵を使用して署名できるようにします。このプロセスにおける最初のステップは、我々のAvalancheプラットフォームエンドポイントに接続されたAvalancheJSのインスタンスを作成することです。
 
 ```text
 import {
@@ -8,7 +8,7 @@ import {
     BinTools,
     Buffer,
     BN
-  } from "avalanche" 
+  } from "avalanche"
 
 let bintools = BinTools.getInstance();
 
@@ -18,41 +18,41 @@ let ava = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBloc
 let xchain = ava.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Accessing the Keychain <a id="accessing-the-keychain"></a>
+## キーチェーンにアクセスする<a id="accessing-the-keychain"></a>
 
-The KeyChain is accessed through the X-Chain and can be referenced directly or through a reference variable.
+KeyChainは、X-Chain経由でアクセスされ、直接参照可変数経由で参照することができます。
 
 ```text
 let myKeychain = xchain.keyChain();
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+これにより、X-Chain APIが作成されたときに作成されるクラスAVMKeyChainのインスタンスが公開されます。現在、ECDSA鍵ペアのsecp256k1カーブをサポートしています。
 
-## Creating X-Chain Key Pairs <a id="creating-x-chain-key-pairs"></a>
+## X-Chain鍵ペアを作成する<a id="creating-x-chain-key-pairs"></a>
 
-The KeyChain has the ability to create new KeyPairs for you and return the address associated with the key pair.
+KeyChainは、あなたのために新しいKeyPairを作成し、鍵ペアに関連付けられたアドレスを返すことができます。
 
 ```text
 let newAddress1 = myKeychain.makeKey(); //returns a Buffer for the address
 ```
 
-You may also import your existing private key into the KeyChain using either a Buffer…
+バッファ…を使用して、既存の秘密鍵をKeyChainにインポートすることもできます。
 
 ```text
 let mypk = bintools.avaDeserialize("24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5"); //returns a Buffer
 let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 ```
 
-… or an Avalanche serialized string works, too:
+…あるいはAvalancheシリアライズされた文字列も機能します：
 
 ```text
 let mypk = "24jUJ9vZexUM6expyMcT48LBx27k1m7xpraoV62oSQAHdziao5";
 let newAddress2 = myKeychain.importKey(mypk); //returns a Buffer for the address
 ```
 
-## Working with Keychains <a id="working-with-keychains"></a>
+## キーチェーンで作業する<a id="working-with-keychains"></a>
 
-The X-Chains’s KeyChain has standardized key management capabilities. The following functions are available on any KeyChain that implements this interface.
+X-ChainsのKeyChainは、標準化された鍵管理機能を持っています。このインターフェースを実装するあらゆるKeyChain上で以下の機能が利用できます。
 
 ```text
 let addresses = myKeychain.getAddresses(); //returns an array of Buffers for the addresses
@@ -61,9 +61,9 @@ let exists = myKeychain.hasKey(newAddress1); //returns true if the address is ma
 let keypair = myKeychain.getKey(newAddress1); //returns the KeyPair class
 ```
 
-## Working with Keypairs <a id="working-with-keypairs"></a>
+## キーペアで作業する<a id="working-with-keypairs"></a>
 
-The X-Chain’s KeyPair has standardized KeyPair functionality. The following operations are available on any KeyPair that implements this interface.
+X-ChainのKeyPairは、標準化されたKeyPair機能を持ちます。このインターフェースを実装するすべてのKeyPair上で以下の操作が可能です。
 
 ```text
 let address = keypair.getAddress(); //returns Buffer
