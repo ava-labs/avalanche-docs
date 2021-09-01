@@ -1,59 +1,64 @@
 # AvalancheJS
 
-AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](../../../#avalanche) platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+AvalancheJSは[、](../../../#avalanche)AvalancheプラットフォームとインターフェームのためのJavaScriptライブラリです。TypeScriptを使用して構築され、ブラウザとNode.js両方をサポートすることを意図しています。AvalancheJSにより、AvalancheノードAPIにコマンドを発行することができます。
 
-The APIs currently supported by default are:
+現在デフォルトでサポートされているAPIは、以下の通りです。
 
-* Admin API
-* AVM API \(X-Chain\)
-* Health API
-* Info API
-* Keystore API
+* 管理API
+* Auth API
+* AVM API（X-Chain）
+* EVM API（C-Chain）
+* ヘルスAPI
+* 情報API
+* キーストアAPI
 * Metrics API
-* PlatformVM API
+* プラットフォームVM API
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network/).
+我々は、使いやすいことを念頭に置いてAvalancheJSを構築しました。このライブラリにより、Javascript開発者は、Avalancheプラットフォーム上のノードとやり取りできます。[Avalancheプラットフォーム仕様](https://docs.avax.network)で最新の変更により、ライブラリを最新の状態に保ちます。
 
-Using AvalancheJS, developers can:
+AvalancheJSを使用する場合、開発者は次のことができます。
 
-* Locally manage private keys
-* Retrieve balances on addresses
-* Get UTXOs for addresses
-* Build and sign transactions
-* Issue signed transactions to the X-Chain
-* Create a Subnetwork
-* Administer a local node
-* Retrieve Avalanche network information from a node
+* ローカルに管理する
+* アドレス上の残高を取り戻す
+* アドレスのためにUTXOを取得する
+* トランザクションを構築し、サインする
+* プライマリネットワーク上でX-Chain、P-Chain、C-Chainに署名された取引を発行する
+* サブネットワークを作成する
+* X-Chain、P-Chain、C-Chain間でAVAXとアセットをスワップします。
+* プライマリネットワークにバリデータを追加する
+* プライマリネットワークにデリゲータを追加する
+* ローカルノードを管理する
+* ノードからAvalancheネットワーク情報を取得する
 
-## Requirements
+## 要件
 
-AvalancheJS requires Node.js LTS version 12.14.1 or higher to compile.
+AvalancheJSは、コンパイルするには、Node.jsバージョン12.14.1以上が必要です。
 
-## Installation
+## インストール
 
-Avalanche is available for install via `npm`:
+Avalancheは、以下の経由でインストールできます`npm`。
 
 `npm install --save avalanche`
 
-You can also pull the repo down directly and build it from scratch:
+また、直接レポをプルダウンし、ゼロからビルドすることもできます：
 
 `npm run build`
 
-This will generate a pure Javascript library and place it in a folder named “web” in the project root. The “avalanchejs” file can then be dropped into any project as a pure javascript implementation of Avalanche.
+これにより純粋なJavascriptライブラリが生成され、プロジェクトルートで「ウェブ」という名前のフォルダに配置されます。Avalancheの純粋なjavascript実装として、「avalanchejs」ファイルは任意のプロジェクトにドロップすることができます。
 
-The AvalancheJS library can be imported into your existing Node.js project as follows:
+AvalancheJSライブラリは、以下のように既存のNode.jsプロジェクトにインポートすることができます。
 
 ```text
 const avalanche = require("avalanche");
 ```
 
-Or into your TypeScript project like this:
+あるいは、以下のようにTypeScriptプロジェクトに入る
 
 ```text
 import { Avalanche } from "avalanche"
 ```
 
-## Importing essentials
+## エッセンシャルをインポート
 
 ```text
 import {
@@ -66,10 +71,10 @@ import {
 let bintools = BinTools.getInstance();
 ```
 
-The above lines import the libraries used in the tutorials. The libraries include:
+上記の行は、チュートリアルで使用されるライブラリをインポートします。ライブラリは、次のものを含みます：
 
-* avalanche: Our javascript module.
-* bn.js: A bignumber module use by AvalancheJS.
-* buffer: A Buffer library.
-* BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
+* avalanche：
+* bn.js：AvalancheJSで使用するビグナンバーモジュール。
+* バッファ：
+* BinTools：AvalancheJSに組み込まれたシングルトン。
 
