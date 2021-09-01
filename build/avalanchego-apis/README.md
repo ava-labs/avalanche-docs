@@ -1,18 +1,21 @@
-# AvalancheGo APIs
+# AvalancheGo API
 
-Clients interact with Avalanche through APIs calls to nodes. Numeric parameters in API calls may be given as strings \(e.g., `"5"` or `5` are both ok for an integer argument\). Numeric return values are always given as strings \(e.g., `"5"` rather than `5`\). In examples, API calls are made to a node listening for HTTP traffic on `127.0.0.1:9650`.
+クライアントは、APIによってノードに呼び出される経由でAvalancheとやり取りします。`"5"``5`API呼び出し中の数値パラメータは、文字列として与えられることができます（例えば、整数引数として大丈夫です）。`"5"`数値戻り値は、常に（例:`5`）文字列として与えられます。例として、API呼び出しは、HTTPトラフィックをオンにしたをリスニングするノードに行われます`127.0.0.1:9650`。
 
-| Title | Description |
+| タイトル | 説明 |
 | :--- | :--- |
-| [**Issuing API Calls**](issuing-api-calls.md) | This guide explains how to make calls to APIs exposed by Avalanche nodes. |
-| The [**Platform Chain \(P-Chain\) API**](platform-chain-p-chain-api.md) | Allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain and subnet creation. |
-| The [**Contract Chain \(C-Chain\) API**](contract-chain-c-chain-api.md) | Allows clients to interact with the C-Chain, Avalanche’s main EVM instance, as well as other EVM instances. |
-| The [**Exchange Chain \(X-Chain\) API**](exchange-chain-x-chain-api.md) | Allows clients to create and trade assets, including AVAX, on the X-Chain as well as other instances of the AVM. |
-| The [**Admin API**](admin-api.md) | Allows clients to examine a node’s internal state, set of connections, and similar internal protocol data. |
-| The [**Auth API**](auth-api.md) | Allows clients to manage the creation and revocation of authorization tokens. |
-| The [**Health API**](health-api.md) | Allows clients to check a node’s health. |
-| The [**Info API**](info-api.md) | Allows clients to examine basic information about a node. |
-| The [**IPC API**](ipc-api.md) | Allows users to create UNIX domain sockets for blockchains to publish to. |
-| The [**Keystore API**](keystore-api.md) | Allows customers to use the embedded Keystore file of an Avalanche node. |
-| The [**Metrics API**](metrics-api.md) | Allows clients to get statistics about a node’s health and performance. |
+| [**APIコールを発行する**](issuing-api-calls.md) | このガイドでは、Avalancheノードで公開されるAPIへの呼び出し方法を説明します。 |
+| [**プラットフォームチェーン（P-Chain）API**](platform-chain-p-chain-api.md) | Avalancheのバリデータセットを維持し、ブロックチェーンとサブネットの作成を処理するP-Chain（プラットフォームチェーン）とやり取りできるようにします。 |
+| [**コントラクトチェーン（C-Chain）API**](contract-chain-c-chain-api.md) | AvalancheのメインなEVMインスタンス、および他のEVMインスタンスとクライアントがやり取りできるようにします。 |
+| [**取引所チェーン（X-Chain）API**](exchange-chain-x-chain-api.md) | AVAXなどのアセットを作成し、取引できるようにします。 |
+| [**管理API**](admin-api.md) | クライアントがノードの内部ステート、コネクションのセット、および同様の内部プロトコルデータを検査できるようになります。 |
+| [**Auth API**](auth-api.md) | 認可トークンの作成と失効を管理することができます。 |
+| [**Health API**](health-api.md) | クライアントがノードの健康をチェックできるようにします。 |
+| [**インデックスAPI**](index-api.md) | トランザクション、vertex、またはIDでブロックする。 |
+| [**情報API**](info-api.md) | クライアントがノードについての基本情報を調べることができます。 |
+| [**IPC API**](ipc-api.md) | ブロックチェーンのためのUNIXドメインソケットを作成できるようになります。 |
+| [**キーストアAPI**](keystore-api.md) | Avalancheノードで埋め込まれたKeystoreファイルを使用できるようにします。 |
+| [**Metrics API**](metrics-api.md) | クライアントがノードの健康とパフォーマンスについての統計を得ることができます。 |
+
+
 
