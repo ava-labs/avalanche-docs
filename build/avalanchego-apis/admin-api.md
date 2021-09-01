@@ -1,38 +1,38 @@
-# Admin API
+# API yönetir
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+Bu API şifre ölçümü ve hata hattını ölçmek için kullanılabilir. Admin API'nin güvenlik nedenleri yüzünden varsayılan olarak devre dışı bırakıldığını unutmayın. Admin API etkinleştirilebilir bir düğüm çalıştırmak için [komut satırı argümanı](../references/command-line-interface.md) `--api-admin-enabled=true`kullanın.
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Bu API, `json 2.0`RPC formatını kullanır.
 
 {% page-ref page="issuing-api-calls.md" %}
 
-## Endpoint
+## Sonucu noktası
 
 ```text
 /ext/admin
 ```
 
-## API Methods
+## API Yöntemleri
 
 ### admin.alias
 
-Assign an API endpoint an alias, a different endpoint for the API. The original endpoint will still work. This change only affects this node; other nodes will not know about this alias.
+API sonlu bir isim belirleyin, API için farklı bir son. Orijinal sonumuz hala işe yarayacak. Bu değişim, sadece bu düğümleri etkiler; diğer düğümler bu takma isimlerden haberdar olmayacaktır.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.alias({endpoint:string, alias:string}) -> {success:bool}
 ```
 
-* `endpoint` is the original endpoint of the API. `endpoint` should only include the part of the endpoint after `/ext/`.
-* The API being aliased can now be called at `ext/alias`.
-* `alias` can be at most 512 characters.
+* `endpoint`API'nin orijinal sonucudur. Sadece sonun sonrasını `endpoint`içermelidir.`/ext/`
+* API takma adıyla adlandırılabilir `ext/alias`artık.
+* `alias`En fazla 512 karakter olabilir.
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -44,7 +44,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -56,13 +56,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, calls to the X-Chain can be made to either `/ext/bc/X` or, equivalently, to `/ext/myAlias`.
+to yapılan aramalar ya `/ext/bc/X`da eşdeğer olarak yapılabilir.`/ext/myAlias`
 
 ### admin.aliasChain
 
-Give a blockchain an alias, a different name that can be used any place the blockchain’s ID is used.
+Bir blok zinciri takma isim ver, blok zincirinin kimlik kullandıkları herhangi bir yerde kullanılabilecek farklı bir isim ver.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.aliasChain(
@@ -73,12 +73,12 @@ admin.aliasChain(
 ) -> {success:bool}
 ```
 
-* `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `chain`blockchain’s kimliği.
+* `alias`Bu nedenle bu sistem \(API sonları olarak\) olarak kullanılabilir \(örneğin API sonları olarak\)
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -102,13 +102,13 @@ curl -X POST --data '{
 }
 ```
 
-Now, instead of interacting with the blockchain whose ID is `sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM` by making API calls to `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`, one can also make calls to `ext/bc/myBlockchainAlias`.
+`sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`Kimliği API aramakla olan blok zinciriyle etkileşime girmek yerine, `/ext/bc/sV6o671RtkGBcno1FiaDbVcFv2sG5aVXMZYzKdP4VQAWmJQnM`aynı zamanda telefon görüşmesi yapabilir.`ext/bc/myBlockchainAlias`
 
-### admin.getChainAliases
+### admin.getChainAliases admin.getChainAliases lar
 
-Returns the aliases of the chain
+Zincirin takma isimlerini geri getiriyor
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.getChainAliases(
@@ -118,11 +118,11 @@ admin.getChainAliases(
 ) -> {aliases:string[]}
 ```
 
-* `chain` is the blockchain’s ID.
+* `chain`blockchain’s kimliği.
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -149,19 +149,72 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+### Admin. admin.getLoggerLevel
 
-Writes a profile of mutex statistics to `lock.profile`.
+Günlük ve görüntü seviyeleri kaydedicileri geri getiriyor.
 
-#### **Signature**
+#### **İmzalanma**
+
+```text
+admin.getLoggerLevel(
+    {
+        loggerName:string // optional
+    }
+) -> {
+        loggerLevels: {
+            loggerName: {
+                    logLevel: string,
+                    displayLevel: string
+            }
+        }
+    }
+```
+
+* `loggerName`Kayıtlara geri dönecek kişinin adı bu. Bu isteğe bağlı bir tartışma. Eğer belirtilmemişse, tüm olası loggers. geri getirir.
+
+#### **Örnek Example**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.getLoggerLevel",
+    "params": {
+        "loggerName": "C"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Örnek Tepki**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "loggerLevels": {
+            "C": {
+                "logLevel": "DEBUG",
+                "displayLevel": "INFO"
+            }
+        }
+    },
+    "id": 1
+}
+```
+
+### Admin. admin.lockProfile
+
+Muteks istatistiklerinin profilini `lock.profile`yazıyordu.
+
+#### **İmzalanma**
 
 ```text
 admin.lockProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -170,7 +223,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -182,19 +235,19 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+### Admin. Bellek Profili
 
-Writes a memory profile of the to `mem.profile`.
+Bir bellek profili `mem.profile`yazıyor.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.memoryProfile() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -203,7 +256,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -215,19 +268,68 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+### Admin.setLoggerLevel
 
-Start profiling the CPU utilization of the node. To stop, call `admin.stopCPUProfiler`. On stop, writes the profile to `cpu.profile`.
+Günlük ve görüntü seviyeleri belirler.
 
-#### **Signature**
+#### **İmzalanma**
+
+```text
+admin.setLoggerLevel(
+    {
+        loggerName: string, // optional
+        logLevel: string, // optional
+        displayLevel: string, // optional
+    }
+) -> {success:bool}
+```
+
+* `loggerName`the adı değiştirilecek. Bu bir seçeneği işareti. Eğer belirtilmediyse, tüm olası loggers. değiştirir.
+* `logLevel`Yazılı günlüklerin günlük seviyesi, atılabilir.
+* `displayLevel`Görüntülenen kütüklerin kütük seviyesi, atılabilir.
+
+`logLevel`Aynı anda da `displayLevel`atılamaz.
+
+#### **Örnek Example**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLoggerLevel",
+    "params": {
+        "loggerName": "C",
+        "logLevel": "DEBUG",
+        "displayLevel": "INFO"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Örnek Tepki**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### Admin. admin.startCPUProfiler
+
+Düğümün CPU kullanımını profiling başla. Durmak için, `admin.stopCPUProfiler`ara. Durakta, profili `cpu.profile`yazacak.
+
+#### **İmzalanma**
 
 ```text
 admin.startCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -236,7 +338,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
@@ -248,19 +350,19 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+### Admin. admin.stopCPUProfiler
 
-Stop the CPU profile that was previously started.
+Daha önce başlatılan CPU profilini durdurun.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```text
 admin.stopCPUProfiler() -> {success:bool}
 ```
 
-#### **Example Call**
+#### **Örnek Example**
 
-```text
+```bash
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -268,7 +370,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
 
-#### **Example Response**
+#### **Örnek Tepki**
 
 ```javascript
 {
