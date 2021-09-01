@@ -1,200 +1,200 @@
-# Run an Avalanche Node with Amazon Web Services \(AWS\)
+# Amazon Web Services（AWS）でAvalancheノードを実行する
 
-## Introduction
+## はじめに
 
-This tutorial will guide you through setting up an Avalanche node on [Amazon Web Services \(AWS\)](https://aws.amazon.com/). Cloud services like AWS are a good way to ensure that your node is highly secure, available, and accessible.
+このチュートリアルでは、[Amazon Web Services（AWS）](https://aws.amazon.com/)上にAvalancheノードを設定する方法を説明します。AWSのようなクラウドサービスは、あなたのノードが安全かつ利用可能かつアクセス可能であることを確実にする良い方法です。
 
-To get started, you'll need:
+始めるには、以下の必要がございます：
 
-* An AWS account
-* A terminal with which to SSH into your AWS machine
-* A place to securely store and back up files
+* AWSアカウント
+* AWSマシンにSSHを入手するターミナル
+* 安全にファイルを保存、バックアップする場所
 
-This tutorial assumes your local machine has a Unix style terminal. If you're on Windows, you'll have to adapt some of the commands used here.
+このチュートリアルでは、ローカルマシンにUnixスタイルターミナルが存在していると想定します。Windows上で使用されるコマンドを適応する必要があります。
 
-## Log Into AWS <a id="ff31"></a>
+## AWSにログイン<a id="ff31"></a>
 
-Signing up for AWS is outside the scope of this article, but Amazon has instructions [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account).
+AWSに登録するのはこの記事の範囲外ではありませんが、Amazonには[ここ](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account)に手順があります。
 
-It is _highly_ recommended that you set up Multi-Factor Authentication on your AWS root user account to protect it. Amazon has documentation for this [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root).
+_AWSルートユーザーアカウントにマルチファクタ認証を設定して保護することを[お](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root)_勧めします。Amazonにはここにドキュメントがあります。
 
-Once your account is set up, you should create a new EC2 instance. An EC2 is a virtual machine instance in AWS's cloud. Go to the [AWS Management Console](https://console.aws.amazon.com/) and enter the EC2 dashboard.
+アカウントがセットアップされた後、新しいEC2インスタンスを作成する必要があります。EC2は、AWSのクラウド上の仮想マシンインスタンスです。[AWS管理](https://console.aws.amazon.com/)コンソールに移動し、EC2ダッシュボードに入力します。
 
-![AWS Management Console.png](../../../.gitbook/assets/image%20%2835%29.png)
+![AWSマネジメント Console.png](../../../.gitbook/assets/image%20%2835%29.png)
 
-To log into the EC2 instance, you will need a key on your local machine that grants access to the instance. First, create that key so that it can be assigned to the EC2 instance later on. On the bar on the left side, under **Network & Security**, select **Key Pairs.**
+EC2インスタンスにログインするには、あなたのローカルマシン上でインスタンスにアクセスを許可する鍵が必要になります。まず、その鍵を作成し、後でEC2インスタンスに割り当てられるようにします。左側のバーで、**ネットワークとセキュリティで**、**鍵ペアを選択します。**
 
-![Select &quot;Key Pairs&quot; under the &quot;Network &amp; Security&quot; drop-down.](../../../.gitbook/assets/image%20%2838%29.png)
+![&quot;キーペア&quot;&quot;ネットワーク &amp;セキュリティ&quot;ドロップダウンで、&quot;&quot;を選択します。](../../../.gitbook/assets/image%20%2838%29.png)
 
-Select **Create key pair** to launch the key pair creation wizard.
+**を選択し、鍵ペア作成ウィザードを開始**します。
 
-![Select &quot;Create key pair.&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
+![を選択する&quot;キーペアを作成する。&quot;](https://miro.medium.com/max/847/1*UZ4L0DGUogCfBq-TZ5U3Kw.png)
 
-Name your key `avalanche`. If your local machine has MacOS or Linux, select the `pem` file format. If it's Windows, use the `ppk` file format. Optionally, you can add tags for the key pair to assist with tracking.
+鍵に名前を付けます`avalanche`。ローカルマシンにMacOSあるいはLinuxがある場合、`pem`ファイル形式を選択します。Windowsであれば、`ppk`ファイル形式を使用してください。オプションで、キーペアのタグを追加してトラッキングを支援することができます。
 
-![Create a key pair that will later be assigned to your EC2 instance.](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
+![後でEC2インスタンスに割り当てられるキーペアを作成します。](https://miro.medium.com/max/827/1*Bo30BXjwPTGpgFtoU9VDBA.png)
 
-Click `Create key pair`. You should see a success message, and the key file should be downloaded to your local machine. Without this file, you will not be able to access your EC2 instance. **Make a copy of this file and put it on a separate storage medium such as an external hard drive. Keep this file secret; do not share it with others.**
+をクリックします`Create key pair`。成功メッセージが表示されたはずで、キーファイルはローカルマシンにダウンロードする必要があります。このファイルがなければ、EC2インスタンスにアクセスすることはできません。**このファイルのコピーを作成し、外付けハードドライブなどの別々のストレージメディアに置きましょう。このファイル秘密を保持し、他の人と共有しないでください。**
 
-![Success message after creating a key pair.](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
+![鍵ペアを作成した後、成功メッセージ。](https://miro.medium.com/max/534/1*RGpHRWWFjNKMZb7cQTyeWQ.png)
 
-## Create a Security Group <a id="f8df"></a>
+## セキュリティグループを作成する<a id="f8df"></a>
 
-An AWS Security Group defines what internet traffic can enter and leave your EC2 instance. Think of it like a firewall. Create a new Security Group by selecting **Security Groups** under the **Network & Security** drop-down.
+AWSセキュリティグループは、EC2インスタンスを残すことができるインターネットトラフィックが定義します。ファイアウォールと考えてください。****ネットワークとセキュリティドロップダウンで**セキュリティグループを選択して新しいセキュリティグループを作成します**。
 
-![Select &quot;Security Groups&quot; underneath &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
+![&quot;セキュリティグループ&quot;&quot; ネットワーク &amp; セキュリティ.&quot; 以下に](https://miro.medium.com/max/214/1*pFOMpS0HhzcAYbl_VfyWlA.png)
 
-This opens the Security Groups panel. Click **Create security group** in the top right of the Security Groups panel.
+これにより、セキュリティグループパネルが開きます。**セキュリティグループパネルの右上のパネル**で、セキュリティグループを作成するをクリックします。
 
-![Select &quot;Create security group.&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
+![を選択する&quot;セキュリティグループを作成する。&quot;](https://miro.medium.com/max/772/1*B0JSYoMBplAtCz2Yb2e1sA.png)
 
-You'll need to specify what inbound traffic is allowed. Allow SSH traffic from your IP address so that you can log into your EC2 instance. \(Each time your ISP changes your IP address, you will need to modify this rule. If your ISP changes regularly, you may allow SSH traffic from anywhere to avoid having to modify this rule frequently.\) Allow TCP traffic on port 9651 so your node can communicate with other nodes on the network. Allow TCP traffic on port 9650 from your IP so you can make API calls to your node. **It's important that you only allow traffic on this port from your IP.** If you allow incoming traffic from anywhere, this could be used as an denial of service attack vector. Finally, allow all outbound traffic.
+インバウンドトラフィックが許可されているかを指定する必要があります。IPアドレスからSSHトラフィックを許可し、EC2インスタンスにログインできるようにします。（ISPがIPアドレスを変更するたびに、このルールを変更する必要があります。ISPが定期的に変更された場合、いつでもどこからでもSSHトラフィックを許可して、このルールを頻繁に変更する必要がないようにすることができます。）9651ポート上でTCPトラフィックを許可し、ノードはネットワーク上の他のノードと通信できるようになります。IPからポート9650でTCPトラフィックを許可し、ノードにAPIコールを行うことができます。**IPからこのポート上のトラフィックしか許可しないことが重要です。**どこからでも着信トラフィックを許可した場合、サービス拒否アタックベクトルとして使用することができます。最後に、すべてのアウトバウンドトラフィックを許可します。
 
-![Your inbound and outbound rules should look like this.](../../../.gitbook/assets/inbound-rules.png)
+![インバウンドとアウトバウンドルールは、こうしたようです。](../../../.gitbook/assets/inbound-rules.png)
 
-Add a tag to the new security group with key `Name` and value`Avalanche Security Group`. This will enable us to know what this security group is when we see it in the list of security groups.
+キー`Name`と値で新しいセキュリティグループにタグを追加します。`Avalanche Security Group`これにより、我々がセキュリティグループのリストで見たときに、このセキュリティグループが何であるか知ることが可能になります。
 
-![Tag the security group so you can identify it later.](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
+![セキュリティグループにタグを付けて、後で識別できるようにします。](https://miro.medium.com/max/961/1*QehD3uyplkb4RPxddP1qkg.png)
 
-Click `Create security group`. You should see the new security group in the list of security groups.
+をクリックします`Create security group`。新しいセキュリティグループが、セキュリティグループリストで表示されるはずです。
 
-## Launch an EC2 Instance <a id="0682"></a>
+## EC2インスタンスを立ち上げる<a id="0682"></a>
 
-Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select **Launch instance**.
+これでEC2インスタンスを立ち上げる準備が完了しました。EC2ダッシュボードに移動し、「**起動」インスタンスを選択します**。
 
-![Select &quot;Launch Instance.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
+![を選択&quot;インスタンスを起動する.&quot;](https://miro.medium.com/max/813/1*zsawPDMBFlonC_7kg060wQ.png)
 
-Select **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** for the operating system.
+オペレーティングシステム**のために**Ubuntu 20.04 LTS（HVM）、SSDボリュームタイプを選択します。
 
-![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
+![Ubuntu 20.04 LTSを選択します。](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.large**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.large instance, select the **Compute-optimized** option from the filter drop-down menu.
+次に、インスタンスタイプを選択しますこれにより、クラウドインスタンスのハードウェア仕様を定義します。このチュートリアルでは、c5.largeを設定します****。Avalancheは軽量コンセンサスプロトコルであるため、これは十分に強力でなければなりません。c5.largeインスタンスを作成するには、フィルタードロップダウンメニューからCompute最適**化**オプションを選択します。
 
-![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
+![最適化された計算でフィルターします。](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Select the checkbox next to the c5.large instance in the table.
+テーブル内のc5.largeインスタンス横のチェックボックスを選択します。
 
-![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
+![c5.largeを選択します。](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
 
-Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
+右下隅の「次へ**：インスタンス詳細を構成する**ボタンをクリックします。
 
 ![](https://miro.medium.com/max/575/1*LdOFvctYF3HkFxmyNGDGSg.png)
 
-The instance details can stay as their defaults.
+インスタンス詳細は、デフォルトとして維持できます。
 
-### Optional: Using Spot Instances or Reserved Instances <a id="c99a"></a>
+### オプション：スポットインスタンスあるいは予約インスタンスを使用する<a id="c99a"></a>
 
-By default, you will be charged hourly for running your EC2 instance. There are two ways you may be able to pay less for your EC2.
+デフォルトでは、EC2インスタンスを実行するために毎時間請求されます。EC2代目にあたる料金を少なくする方法は2種類あります。
 
-The first is by launching your EC2 as a **Spot Instance**. Spot instances are instances that are not guaranteed to always be up, but which cost less on average than persistent instances. Spot instances use a supply-and-demand market price structure. As demand for instances goes up, the price for a spot instance goes up. You can set a maximum price you’re willing to pay for the spot instance. You may be able to save a significant amount of money, with the caveat that your EC2 instance may stop if the price increases. Do your own research before selecting this option to determine if the interruption frequency at your maximum price justifies the cost savings. If you choose to use a spot instance, be sure to set the interruption behavior to **Stop**, not **Terminate,** and check the **Persistent Request** option.
+まず、EC2を**スポットインスタンスとして立ち上げることです**。スポットインスタンスは、常にアップが保証されることなく、平均で永続的なインスタンスよりもコストがかかりません。スポットインスタンスは、供給と需要市場価格構造を使用します。インスタンスに対する需要が上昇すると、スポットインスタンスの価格が上昇します。スポットインスタンスで支払いを希望する最大価格を設定することができます。価格が上昇した場合、EC2インスタンスが停止できるという注意で、大幅な金額を節約できます。このオプションを選択する前に、あなたの最大価格で中断頻度がコスト削減を正当化するかどうかを判断します。**スポットインスタンスを使用する場合、中断動作を停止するように設定し、「終了」をチェック**し****、「**Persistent Requestオプションをチェックしてください**。
 
-The other way you could save money is by using a **Reserved Instance**. With a reserved instance, you pay upfront for an entire year of EC2 usage, and receive a lower per-hour rate in exchange for locking in. If you intend to run a node for a long time and don't want to risk service interruptions, this is a good option to save money. Again, do your own research before selecting this option.
+お金を節約できるもう一つの方法は、**予約インスタンスを使用することです**。予約されたインスタンスにより、EC2使用期間中の年間で前払いを行い、ロックと引き換えに、1時間あたりの低レートを受け取ります。長期間にわたってノードを実行しようとし、サービス中断をリスクにしたくない場合、これはお金を節約するための良いオプションです。繰り返しますが、このオプションを選択する前に、自身で調査を行います。
 
-### Add Storage, Tags, Security Group <a id="dbf5"></a>
+### ストレージ、タグ、セキュリティグループを追加する<a id="dbf5"></a>
 
-Click the **Next: Add Storage** button in the bottom right corner of the screen.
+画面右下にある「次へ**：ストレージを追加する**ボタンをクリックします。
 
-You need to add space to your instance's disk. We use 100 GB in this example. The Avalanche database will continually grow until pruning is implemented , so it’s safer to have a larger hard drive allocation for now.
+インスタンスディスクにスペースを追加する必要があります。この例では、100 GBを使用します。Avalancheデータベースは、プルーンが実装されるまで継続的に成長していきます。そのため、現在のところより大きなハードドライブ割当を確保する場合は安全です。
 
-![Select 100 GB for the disk size.](../../../.gitbook/assets/add-storage.png)
+![ディスクサイズで100GBを選択します。](../../../.gitbook/assets/add-storage.png)
 
-Click **Next: Add Tags** in the bottom right corner of the screen to add tags to the instance. Tags enable us to associate metadata with our instance. Add a tag with key `Name` and value `My Avalanche Node`. This will make it clear what this instance is on your list of EC2 instances.
+次へ**：画面右下のタグ**を追加して、インスタンスにタグを追加します。タグにより、メタデータを、我々のインスタンスと関連付けることができます。キー`Name`と値でタグを追加します。`My Avalanche Node`これにより、EC2インスタンスリストに載っていることが明確になります。
 
-![Add a tag with key &quot;Name&quot; and value &quot;My Avalanche Node.&quot;](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
+![キーで&quot;Name&quot;そして値で&quot;My Avalanche Node.&quot;でタグを追加する](https://miro.medium.com/max/1295/1*Ov1MfCZuHRzWl7YATKYDwg.png)
 
-Now assign the security group created earlier to the instance. Choose **Select an existing security group** and choose the security group created earlier.
+以前に作成したセキュリティグループをインスタンスに割り当てます。既存のセキュリティグループ**を選択し、より早く作成されたセキュリティグループを選択**します。
 
-![Choose the security group created earlier.](../../../.gitbook/assets/configure-security-group.png)
+![以前に作成したセキュリティグループを選択します。](../../../.gitbook/assets/configure-security-group.png)
 
-Finally, click **Review and Launch** in the bottom right. A review page will show the details of the instance you're about to launch. Review those, and if all looks good, click the blue **Launch** button in the bottom right corner of the screen.
+最後に、右下**の「**レビューと起動」をクリックします。レビューページで、ローンチしようとしているインスタンス詳細が表示されます。これらのことを確認し、すべてが良い場合、画面右下にある青い**起動**ボタンをクリックします。
 
-You'll be asked to select a key pair for this instance. Select **Choose an existing key pair** and then select the `avalanche` key pair you made earlier in the tutorial. Check the box acknowledging that you have access to the `.pem` or `.ppk` file created earlier \(make sure you've backed it up!\) and then click **Launch Instances**.
+この場合の鍵ペアを選択するよう求められます。既存の鍵ペア**を選択し、チュートリアルの前に作った`avalanche`鍵ペアを選択**します。`.ppk`以前に作成されたファイル`.pem`やアクセス権があることを確認したボックスをチェックする（バックアップが完了したことを確認してください！その後、「インスタンスを**立ち上げる」をクリックします**。
 
-![Use the key pair created earlier.](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
+![以前に作成した鍵ペアを使用します。](https://miro.medium.com/max/700/1*isN2Z7Y39JgoBAaDZ75x-g.png)
 
-You should see a new pop up that confirms the instance is launching!
+インスタンスが立ち上げられていることを確認する新しいポップアップ
 
-![Your instance is launching!](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
+![あなたのインスタンスがローンチしました！](https://miro.medium.com/max/727/1*QEmh9Kpn1RbHmoKLHRpTPQ.png)
 
-### Assign an Elastic IP
+### Elastic IPを割り当てる
 
-By default, your instance will not have a fixed IP. Let's give it a fixed IP through AWS's Elastic IP service. Go back to the EC2 dashboard. Under **Network & Security,** select **Elastic IPs**.
+デフォルトで、あなたのインスタンスには固定IPは存在しません。AWSのElastic IPサービスを通じて固定IPを与えましょう。EC2ダッシュボードに戻ります。**ネットワークとセキュリティで、**Elastic IP**を選択します**。
 
-![Select &quot;Elastic IPs&quot; under &quot;Network &amp; Security.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
+![&quot;Elastic IPs&quot;&quot;ネットワーク &amp;セキュリティ.&quot;](https://miro.medium.com/max/192/1*BGm6pR_LV9QnZxoWJ7TgJw.png)
 
-Select **Allocate Elastic IP address**.
+Elastic IPアドレスを**割り当てるを選択します**。
 
-![Select &quot;Allocate Elastic IP address.&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
+![&quot;Elastic IPアドレスを割り当てる。&quot;](https://miro.medium.com/max/503/1*pjDWA9ybZBKnEr1JTg_Mmw.png)
 
-Select the region your instance is running in, and choose to use Amazon’s pool of IPv4 addresses. Click **Allocate**.
+あなたのインスタンスが実行されている地域を選択し、AmazonのIPv4アドレスのプールを使用するを選択します。Allocateをクリックします****。
 
-![Settings for the Elastic IP.](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
+![Elastic IPの設定。](https://miro.medium.com/max/840/1*hL5TtBcD_kR71OGYLQnyBg.png)
 
-Select the Elastic IP you just created from the Elastic IP manager. From the **Actions** drop-down, choose **Associate Elastic IP address**.
+Elastic IPマネージャから作成したElastic IPを選択します。**アクションドロップダウンから**、**アソシエイト Elastic IPアドレスを選択します**。
 
-![Under &quot;Actions&quot;, select &quot;Associate Elastic IP address.&quot;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
+![&quot;Actions&quot;下で、 &quot; 選択 &aspic IPアドレス.&quot; クォート; クォート;](https://miro.medium.com/max/490/1*Mj6N7CllYVJDl_-zcCl-gw.png)
 
-Select the instance you just created. This will associate the new Elastic IP with the instance and give it a public IP address that won't change.
+作成したばかりのインスタンスを選択しますこれにより、新しいElastic IPがインスタンスと関連付けられ、変わらないパブリックIPアドレスが与えられます。
 
-![Assign the Elastic IP to your EC2 instance.](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
+![EC2インスタンスにElastic IPを割り当てます。](https://miro.medium.com/max/834/1*NW-S4LzL3EC1q2_4AkIPUg.png)
 
-## Set Up AvalancheGo <a id="829e"></a>
+## AvalancheGoをセットアップする<a id="829e"></a>
 
-Go back to the EC2 Dashboard and select `Running Instances`.
+EC2ダッシュボードに戻し、選択します`Running Instances`。
 
-![Go to your running instances.](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
+![ランニングインスタンスに移動します。](https://miro.medium.com/max/672/1*CHJZQ7piTCl_nsuEAeWpDw.png)
 
-Select the newly created EC2 instance. This opens a details panel with information about the instance.
+新しく作成されたEC2インスタンスを選択します。これにより、インスタンスについての情報が入手された詳細パネルが開きます。
 
-![Details about your new instance.](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
+![新しいインスタンスについての詳細。](https://miro.medium.com/max/1125/1*3DNT5ecS-Dbf33I_gxKMlg.png)
 
-Copy the `IPv4 Public IP` field to use later. From now on we call this value `PUBLICIP`.
+後で使用する`IPv4 Public IP`フィールドをコピーします。これからこの値を呼びます`PUBLICIP`。
 
-**Remember: the terminal commands below assume you're running Linux. Commands may differ for MacOS or other operating systems. When copy-pasting a command from a code block, copy and paste the entirety of the text in the block.**
+**覚えておく：以下のターミナルコマンドは、あなたがLinuxを実行していると仮定します。MacOSや他のオペレーティングシステムでコマンドが異なる場合があります。コードブロックからコマンドをコピーする際、ブロックにテキストの全体をコピーして貼り付けます。**
 
-Log into the AWS instance from your local machine. Open a terminal \(try shortcut `CTRL + ALT + T`\) and navigate to the directory containing the `.pem` file you downloaded earlier.
+ローカルマシンからAWSインスタンスにログインします。`CTRL + ALT + T`ターミナルを開き、以前にダウンロードした`.pem`ファイルを含むディレクトリに移動します。
 
-Move the `.pem` file to `$HOME/.ssh` \(where `.pem` files generally live\) with:
+以下のもので、（一般的に`.pem`ファイルが存在する`$HOME/.ssh`場合）`.pem`ファイルを移動します。
 
 ```bash
 mv avalanche.pem ~/.ssh
 ```
 
-Add it to the SSH agent so that we can use it to SSH into your EC2 instance, and mark it as read-only.
+SSHエージェントに追加し、EC2インスタンスにSSHに使用できるようにします。
 
 ```bash
 ssh-add ~/.ssh/avalanche.pem; chmod 400 ~/.ssh/avalanche.pem
 ```
 
-SSH into the instance. \(Remember to replace `PUBLICIP` with the public IP field from earlier.\)
+SSH。（以前からパブリックIPフィールド`PUBLICIP`に置き換えることを忘れないでください。
 
 ```text
 ssh ubuntu@PUBLICIP
 ```
 
-If the permissions are **not** set correctly, you will see the following error.
+パーミッションが正しく**設定されてい**ない場合、以下のエラーが表示されます。
 
-![Make sure you set the permissions correctly.](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
+![権限を正しく設定してください。](https://miro.medium.com/max/1065/1*Lfp8o3DTsGfoy2HOOLw3pg.png)
 
-You are now logged into the EC2 instance.
+EC2インスタンスにログインが完了しました。
 
-![You&apos;re on the EC2 instance.](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
+![You&apos;re EC2インスタンス上で](https://miro.medium.com/max/1030/1*XNdOvUznKbuuMF5pMf186w.png)
 
-If you have not already done so, update the instance to make sure it has the latest operating system and security updates:
+既にそうでない場合、最新のオペレーティングシステムとセキュリティアップデートがあることを確認するように更新します。
 
 ```text
 sudo apt update; sudo apt upgrade -y; sudo reboot
 ```
 
-This also reboots the instance. Wait 5 minutes, then log in again by running this command on your local machine:
+これにより、インスタンスを再起動します。5分待機し、その後、ローカルマシン上でこのコマンドを実行して再度ログインします：
 
 ```bash
 ssh ubuntu@PUBLICIP
 ```
 
-You're logged into the EC2 instance again. Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial which automates the installation process. You will need the `PUBLICIP` we set up earlier.
+EC2インスタンスに再度ログインします。さて、Avalancheノードをセットアップする必要があります。これを実行するには、[Avalanche](set-up-node-with-installer.md)ノードウィンドインストーラチュートリアルに従ってインストールプロセスを自動化します。以前にセットアップした`PUBLICIP`ものが必要になります。
 
-Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few hours. To check if it's done, you can issue an API call using `curl`. If you're making the request from the EC2 instance, the request is:
+AvalancheGoノードが実行され、ブートストラップのプロセス中に実行されるはずです。完了かどうか確認するには、を使用してAPIコールを発行することができます`curl`。EC2インスタンスからリクエストを行っている場合、リクエストは次のようになります。
 
 ```text
 curl -X POST --data '{
@@ -207,7 +207,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Once the node is finished bootstrapping, the response will be:
+ノードがブートストラップが完了すると、レスポンスは次のようになります。
 
 ```text
 {
@@ -219,9 +219,9 @@ Once the node is finished bootstrapping, the response will be:
 }
 ```
 
-You can continue on, even if AvalancheGo isn't done bootstrapping.
+AvalancheGoがブートストラップが行われない場合でも、継続できます。
 
-In order to make your node a validator, you'll need its node ID. To get it, run:
+ノードがバリデータになるには、ノードIDが必要です。それを取得するには、以下の実行を実行します。
 
 ```text
 curl -X POST --data '{
@@ -231,47 +231,47 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response contains the node ID.
+レスポンスにはノードIDが含まれています。
 
 ```text
 {"jsonrpc":"2.0","result":{"nodeID":"NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM"},"id":1}
 ```
 
-In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`. Copy your node ID for later. Your node ID is not a secret, so you can just paste it into a text editor.
+上記の例では、ノードIDは次のとおりです`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`。後で、ノードIDをコピーします。ノードIDは秘密ではありません。
 
-AvalancheGo has other APIs, such as the [Health API](../../avalanchego-apis/health-api.md), that may be used to interact with the node. Some APIs are disabled by default. To enable such APIs, modify the ExecStart section of `/etc/systemd/system/avalanchego.service` \(created during the installation process\) to include flags that enable these endpoints. Don't manually enable any APIs unless you have a reason to.
+AvalancheGoは、[ヘルスAPI](../../avalanchego-apis/health-api.md)など、他のAPIを持っています。一部のAPIは、デフォルトで無効化されています。こうしたAPIを有効にするには、（インストールプロセス中に`/etc/systemd/system/avalanchego.service`作成された）ExecStartセクションを変更して、これらのエンドポイントが可能にするフラグを追加してください。理由がない場合を除き、手動でAPIを有効にしないでください。
 
-![Some APIs are disabled by default.](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
+![一部のAPIは、デフォルトで無効化されています。](https://miro.medium.com/max/881/1*Vm-Uh2yV0pDCVn8zqFw64A.png)
 
-Back up the node's staking key and certificate in case the EC2 instance is corrupted or otherwise unavailable. The node's ID is derived from its staking key and certificate. If you lose your staking key or certificate then your node will get a new node ID, which could cause you to become ineligible for a staking reward if your node is a validator. **It is very strongly advised that you copy your node's staking key and certificate**. The first time you run a node, it will generate a new staking key/certificate pair and store them in directory `/home/ubuntu/.avalanchego/staking`.
+EC2インスタンスが破損した場合、または利用不能の場合に備えて、ノードのステーキングキーと証明書をバックアップします。ノードのIDは、ステーキングキーと証明書から派生します。ステーキングキーや証明書を失った場合、ノードは新しいノードIDが取得されます。そのため、バリデータである場合、ステーキング報酬の対象外になる可能性があります。**ノードステーキングキーと証明**書をコピーすることをお勧めします。ノードを実行すると、新しいステーキングキー/証明書ペアを生成し、ディレクトリに保存します`/home/ubuntu/.avalanchego/staking`。
 
-Exit out of the SSH instance by running:
+SSHインスタンスから出力するには、以下の実行で
 
 ```bash
 exit
 ```
 
-Now you're no longer connected to the EC2 instance; you're back on your local machine.
+現在、EC2インスタンスに接続できなくなります。
 
-To copy the staking key and certificate to your machine, run the following command. As always, replace `PUBLICIP`.
+ステーキングキーと証明書をマシンにコピーする場合は、以下のコマンドを実行します。いつものように、置き換えてください`PUBLICIP`。
 
 ```text
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/aws_avalanche_backup
 ```
 
-Now your staking key and certificate are in directory `~/aws_avalanche_backup` . **The contents of this directory are secret.** You should hold this directory on storage not connected to the internet \(like an external hard drive.\)
+ステーキングキーと証明書がディレクトリに含まれます`~/aws_avalanche_backup`。**このディレクトリの内容は秘密です。**インターネットに接続されていないストレージ上にこのディレクトリを保持する必要があります。
 
-### Upgrading Your Node <a id="9ac7"></a>
+### ノードのアップグレード<a id="9ac7"></a>
 
-AvalancheGo is an ongoing project and there are regular version upgrades. Most upgrades are recommended but not required. Advance notice will be given for upgrades that are not backwards compatible. To update your node to the latest version, SSH into your AWS instance as before and run the installer script again.
+AvalancheGoは、進行中のプロジェクトであり、定期的なバージョンアップが存在します。ほとんどのアップグレードをお勧めしますが、必要ありません。バックカーバーと互換性がないアップグレードについては、事前の通知がお受けします。最新バージョンに更新するには、SSHは、以前と同様にAWSインスタンスに登録し、インストーラスクリプトを再度実行してください。
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+現在、あなたのマシンは、最新のAvalancheGoバージョンを実行しています。AvalancheGoサービスのステータスを見るには、実行してください。`sudo systemctl status avalanchego.`
 
-## Wrap Up
+## ラップアップ
 
-That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We recommend setting up [node monitoring ](setting-up-node-monitoring.md)for your AvalancheGo node. We also recommend setting up AWS billing alerts so you're not surprised when the bill arrives. If you have feedback on this tutorial, or anything else, send us a message on [Discord](https://chat.avalabs.org).
+それで終わりました！AWS EC2インスタンス上で実行されるAvalancheGoノードが誕生します。AvalancheGo[ノードの](setting-up-node-monitoring.md)ためのノードモニタリングを設定することをお勧めします。AWSビルアラートを設定することも推奨します。このチュートリアルのフィードバックなどでご意見をお持ちの場合、[Discord](https://chat.avalabs.org)上でメッセージをお送りください。
 
