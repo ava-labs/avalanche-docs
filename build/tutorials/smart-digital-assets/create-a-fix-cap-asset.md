@@ -1,20 +1,20 @@
-# Create a Fixed-Cap Asset
+# 固定キャップアセットを作成する
 
-## Introduction
+## はじめに
 
-This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
+このチュートリアルでは、Avalancheを使用して固定資産を作成、取引できる方法を説明します。アセットの初期化時にアセットの特定の量が作成され、その後、これ以上生成されることはありません。
 
-Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
+100万株を持つ所得分担協定（ISA）が存在し、これ以上株式が作成されないとしましょう。ISAの1つのシェアを表すアセットを作成しましょう。
 
-## Requirements
+## 要件
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+完了した[Avalancheノードを実行](../nodes-and-staking/run-avalanche-node.md)し、Avalancheアーキテクチャに精通しています[。](../../../learn/platform-overview/)
 
-## Create the Asset
+## アセットを作成する
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+X[-Chain](../../../learn/platform-overview/#exchange-chain-x-chain)上に存在するので、X-Chain APIの方法`avm.createFixedCapAsset`として我々が呼ぶアセットを作成するように、[我々の](../../avalanchego-apis/exchange-chain-x-chain-api.md)アセットを作成します。
 
-The signature for this method is:
+このメソッドの署名は、次のとおりです。
 
 ```cpp
 avm.createFixedCapAsset({
@@ -36,22 +36,22 @@ avm.createFixedCapAsset({
 }
 ```
 
-### Parameters
+### パラメータ
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name`これは、アセットの人間が読みやすい名前です。必ずしも一意ではない。
+* `symbol`iss は、アセットのショートランドシンボルです。0から4文字の間で。必ずしも一意ではない。省略可能。
+* `denomination`このアセットの残高がユーザーインターフェースでどのように表示されるかを決定します。デノミネーションが0の場合、このアセットの100ユニットが100として表示されます。デノミネーションが2の場合、このアセットの100ユニットは.100などと表示されます。
+* X-Chain上で取引を行うには、AVAXで支払われたトランザクション手数料が必要です。そして`username`、手数料を支払ったユーザーを`password`表します。
+* 内に含まれる各要素は、ジェネシスでアセットの`amount`単位を`address`保持する指定を`initialHolders`します。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
 
-### Response
+### レスポンス
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID`は、新しいアセットのID。
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
+さて、アセットを作成する。`address`そのため、新たにミントされたアセットをすべてコントロールし、後でこのチュートリアルの送信が可能になります。
 
 ```cpp
 curl -X POST --data '{
@@ -76,7 +76,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the asset’s ID, which is also the ID of this transaction:
+レスポンスにはアセットIDが含まれています。これは、このトランザクションのIDです:
 
 ```cpp
 {
@@ -89,13 +89,13 @@ The response contains the asset’s ID, which is also the ID of this transaction
 }
 ```
 
-## Trade the Asset
+## アセットを取引する
 
-### Check a balance
+### バランスを確認する
 
-All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
+アセット（株式）の10,000,000台がすべて、我々が指定したアドレスによってコントロールされます`initialHolders`。
 
-To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+これを確認するため、以下のように呼び出します[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance)。
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +109,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+この対応により、我々のアセット作成が成功したことを確認し、予期されるアドレスは、10,000,000株の株式すべてが保持されていることを確認します。
 
 ```cpp
 {
@@ -121,11 +121,11 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the asset
+### アセットを送信する
 
-Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send).
+さて、呼び出しで100株の株式を送りましょう[`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send)。
 
-To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
+株式を送信するためには、共有が送信されたユーザーをコントロールする必要があります。したがって、今回は記入`username`し`password`
 
 ```cpp
 curl -X POST --data '{
@@ -142,9 +142,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-### Check the transaction status
+### トランザクションステータスを確認する
 
-The response from the above call should look like this:
+上記のコールからのレスポンスは、次のようになります。
 
 ```cpp
 {
@@ -157,9 +157,9 @@ The response from the above call should look like this:
 }
 ```
 
-`txID` is the ID of the `send` transaction we sent to the network.
+`txID`は、我々がネットワークに送信した`send`トランザクションのIDです。
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+2秒～2秒後に、トランザクションが確定される必要があります。トランザクションのステータスを見ることができます[`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus)：
 
 ```cpp
 curl -X POST --data '{
@@ -172,7 +172,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+レスポンスは次のようになります：
 
 ```cpp
 {
@@ -184,9 +184,9 @@ The response should look like this:
 }
 ```
 
-You might also see that `status` is `Pending` if the network has not yet finalized it yet.
+また、ネットワークがまだファイナリズムが`status`行われていないかどう`Pending`かもご覧かもしれません。
 
-Now let’s check the balance of the `to` address:
+次に、アドレスが残っているかを確認しましょう`to`：
 
 ```cpp
 curl -X POST --data '{
@@ -200,7 +200,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+応答は、次のようになります：
 
 ```cpp
 {
@@ -212,11 +212,11 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## ラッピングアップ
 
-In this tutorial, we:
+このチュートリアルでは、以下のようにします：
 
-* Called `createFixedCapAsset` to create a fixed cap asset
-* Called `getBalance` to check address balances
-* Called `send` to transfer a quantity of our asset
+* 固定資本アセットを作成`createFixedCapAsset`するために呼び出されました
+* アドレス残高を確認`getBalance`する
+* 我々のアセットの数量を移転する`send`よう呼び出されました
 
