@@ -1,30 +1,30 @@
-# Info API
+# 情報API
 
-This API can be used to access basic information about the node.
+このAPIを使用して、ノードに関する基本情報にアクセスすることができます。
 
-## Format
+## フォーマット
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+このAPIは、`json 2.0`RPC形式を使用します。JSON RPC呼び出し方法の詳細については、ここを参照[してください。](issuing-api-calls.md)
 
-## Endpoint
+## エンドポイント
 
 ```text
 /ext/info
 ```
 
-## API Methods
+## APIメソッド
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
+ブロックチェーンのエイリアスを考えると、IDを取得します。（.を参照してください[`admin.aliasChain`](admin-api.md#admin-aliaschain)）
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -37,7 +37,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -51,15 +51,15 @@ curl -X POST --data '{
 
 ### info.getNetworkID
 
-Get the ID of the network this node is participating in.
+このノードが参加しているネットワークのIDを取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 info.getNetworkID() -> {networkID:int}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -69,7 +69,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -83,15 +83,15 @@ curl -X POST --data '{
 
 ### info.getNetworkName
 
-Get the name of the network this node is participating in.
+このノードが参加しているネットワークの名前を取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 info.getNetworkName() -> {networkName:string}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -101,7 +101,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -115,15 +115,15 @@ curl -X POST --data '{
 
 ### info.getNodeID
 
-Get the ID of this node.
+このノードIDを取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 info.getNodeID() -> {nodeID: string}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -133,7 +133,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -147,15 +147,15 @@ curl -X POST --data '{
 
 ### info.getNodeIP
 
-Get the IP of this node.
+このノードでIPを取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```text
 info.getNodeIP() -> {ip: string}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -165,7 +165,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -179,15 +179,27 @@ curl -X POST --data '{
 
 ### info.getNodeVersion
 
-Get the version of this node.
+このノードのバージョンを取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
-info.getNodeVersion() -> {version: string}
+info.getNodeVersion() -> {
+    version: string,
+    databaseVersion: string,
+    gitCommit: string,
+    vmVersions: map[string]string,
+}
 ```
 
-#### **Example Call**
+ここで：
+
+* `version`このノードバージョン
+* `databaseVersion`は、このノードが使用しているデータベースのバージョン
+* `gitCommit`iss
+* `vmVersions`ismマップで、各キー/値ペアがVMの名前であり、このノードが実行するVMバージョンがマップされます。
+
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -197,31 +209,38 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/1.1.0"
+        "version": "avalanche/1.4.10",
+        "databaseVersion": "v1.4.5",
+        "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
+        "vmVersions": {
+            "avm": "v1.4.10",
+            "evm": "v0.5.5-rc.1",
+            "platform": "v1.4.10"
+        }
     },
     "id": 1
 }
 ```
 
-### info.isBootstrapped
+### info.is
 
-Check whether a given chain is done bootstrapping
+指定されたチェーンがブートストラップが完了するかどうか確認する
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
-`chain` is the ID or alias of a chain.
+`chain`は、チェーンのIDあるいはエイリアスです。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -234,7 +253,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -246,14 +265,16 @@ curl -X POST --data '{
 }
 ```
 
-### info.peers
+### info.peer
 
-Get a description of peer connections.
+ピアコネクションの説明を取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
-info.peers() -> 
+info.peers({
+    nodeIDs: string[] // optional
+}) ->
 {
     numPeers: int,
     peers:[]{
@@ -267,17 +288,22 @@ info.peers() ->
 }
 ```
 
-#### **Example Call**
+* `nodeIDs`iss オプションパラメータで、 nodeIDの記述が返すべきかを指定します。このパラメータが空のままにした場合、すべてのアクティブコネクションについての説明が返されます。指定された nodeIDに接続されていない場合、レスポンスからエントリが省略されます。
+
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"info.peers"
+    "method" :"info.peers",
+    "params": {
+        "nodeIDs": []
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -317,22 +343,22 @@ curl -X POST --data '{
 
 ### info.getTxFee
 
-Get the fees of the network.
+ネットワークの手数料を取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
-info.getTxFee() -> 
+info.getTxFee() ->
 {
     creationTxFee: uint64,
     txFee: uint64
 }
 ```
 
-* `creationTxFee` is the fee for creating assets on the network.
-* `txFee` is the fee for making transactions on the network.
+* `creationTxFee`ネットワーク上にアセットを作成するための手数料です。
+* `txFee`ネットワーク上で取引を行うための手数料です。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -342,7 +368,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
