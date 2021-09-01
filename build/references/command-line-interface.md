@@ -1,499 +1,701 @@
-# Command Line Interface
+# Komut Satırı Arayüzü
 
-When running a node, there are a variety of possible configurations that are supported.
+Aşağıdaki argümanlarla bir düğümün yapılandırmasını belirtebilirsiniz.
 
-## Arguments
+## Tartışmalar
 
-### Config File
+### Dosya Yapılandırma
 
-`--config-file` \(string\):
+`--config-file`- Evet.
 
-Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file.
+Bu düğümün yapılandırmasını belirleyen bir JSON dosyasına giden yol. Komut satırı argümanları yapılandırma dosyasında belirlenen argümanları geçersiz kılacaktır.
 
-Example JSON config file:
+Örnek JSON yapılandırma dosyası:
 
 ```javascript
 {
-    "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
 }
 ```
 
-### APIs
+### API'ler
 
-`--api-admin-enabled` \(boolean\):
+`--api-admin-enabled`\(boolean\):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
+Eğer bu `false`düğüm, yönetici API'yi ortaya çıkarmaz. `false`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/admin-api.md) bak.
 
-`--api-auth-required` \(boolean\):
+`--api-auth-required`\(boolean\):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+Eğer `true`ayarlanırsa, API çağrıları izin işaretine ihtiyaç duyar. `false`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/auth-api.md) bak.
 
-`--api-auth-password` \(string\):
+`--api-auth-password`- Evet.
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
+Parola oluşturma/geri alma yetkisi işaretleri oluşturmak için gerekli Eğer belirtilmek `--api-auth-required=true`zorundaysa, aksi takdirde görmezden gelinir. Daha fazla bilgi için [buraya](../avalanchego-apis/auth-api.md) bak.
 
-`--api-health-enabled` \(boolean\):
+`--api-health-enabled`\(boolean\):
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health-api.md) for more information.
+Eğer bu `true`düğüm, sağlık API'sini ortaya çıkaracak. `true`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/health-api.md) bak.
 
-`--api-info-enabled` \(boolean\):
+`--index-enabled`\(boolean\):
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info-api.md) for more information.
+Eğer bu `false`düğüm, indexer not ve Endeks API mevcut olmayacak. `false`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/index-api.md) bak.
 
-`--api-ipcs-enabled` \(boolean\):
+`--api-info-enabled`\(boolean\):
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
+Eğer bu `true`düğüm, Bilgi API'yi ortaya çıkaracak. `true`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/info-api.md) bak.
 
-`--api-keystore-enabled` \(boolean\):
+`--api-ipcs-enabled`\(boolean\):
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
+Eğer bu `true`düğüm, IPCs API'yi ortaya çıkaracak. `false`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/ipc-api.md) bak.
 
-`--api-metrics-enabled` \(boolean\):
+`--api-keystore-enabled`\(boolean\):
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+Eğer bu `false`düğüm, Keystore API'yi ortaya çıkarmaz. `true`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/keystore-api.md) bak.
 
-### Assertions
+`--api-metrics-enabled`\(boolean\):
 
-`--assertions-enabled` \(boolean\):
+Eğer bu `false`düğüm, metrik API'yi ortaya çıkarmaz. `true`Defaults Daha fazla bilgi için [buraya](../avalanchego-apis/metrics-api.md) bak.
 
-When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+### İddialar
 
-### Bootstrapping
+`--assertions-enabled`\(boolean\):
 
-`--bootstrap-ids` \(string\):
+Bu `true`işlemler yapıldığında kod tabanı boyunca çalışma zamanında uygulanacaktır. Bu hata hataları için kullanılmak üzere çünkü daha özel bir hata mesajı alabiliriz. `true`Defaults
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+### - Çizme takıntısı
 
-`--bootstrap-ips` \(string\):
+`--bootstrap-beacon-connection-timeout`\(süre\):
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+Kayıplar işaretlerine bağlanmaya çalışırken zaman aşımı. `1m`Defaults
 
-`--bootstrap-retry-enabled` \(boolean\):
+`--bootstrap-ids`- Evet.
 
-If true, will retry bootstrapping if it fails.
+Bootstrap kimlikleri bir doğrulayıcı kimlik dizisidir. Bu kimlikler kaydırma eylemlerini doğrulamak için kullanılacak. Bu alanın bir örneği `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`olabilir. Varsayılan değer ağ kimliğine bağlıdır.
 
-`--bootstrap-retry-max-attempts` \(uint\):
+`--bootstrap-ips`- Evet.
 
-Max number of times to retry bootstrapping after a failure.
+Bootstrap IPs, IPv4:port çiftlerinin bir dizisidir. Bu IP Adresleri mevcut Avalanche durumunu bağlamak için kullanılacaktır. Bu alanın bir örneği `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`olabilir. Varsayılan değer ağ kimliğine bağlıdır.
 
-### Connection Metering
+`--bootstrap-retry-enabled`\(boolean\):
 
-`--conn-meter-max-conns` \(int\):
+Eğer doğruysa, başarısız olursa kayma işlemi tekrar deneyecektir.
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+`--bootstrap-retry-max-attempts`\(uint\):
 
-`--conn-meter-reset-duration` \(duration\):
+Başarısızlıktan sonra kaymayı tekrar denemek için çok sayı.
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+### Veritaban
 
-### Database
+`--db-dir`\(ip, dosya yolu\):
 
-`--db-dir` \(string, file path\):
+Veritabanının devam ettiği dizini belirler. `"$HOME/.avalanchego/db"`Defaults
 
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
+`--db-type`- Evet.
 
-`--db-enabled` \(boolean\):
+Kullanılacak veritabanı türünü belirler. `leveldb``rocksdb``memdb`Bir tanesi hafızası olmayan bir `memdb`veritabanıdır.
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+Dikkat edin ki, `leveldb`düğüm, koşarken devam eden verileri `rocksdb`okuyamaz, ve ters çevir.
+
+**about ilgili iki önemli not: Birincisi, **RocksDB tüm bilgisayarlarda çalışmaz. İkincisi, RocksDB varsayılan olarak inşa edilmemiş ve halka açık şekilde serbest bırakılan ikili içeriğe dahil edilmemiştir. RocksDB ile AvalancheGo inşa etmek için `export ROCKSDBALLOWED=1`terminalinde koş ve sonra da`scripts/build.sh` Bunu kullanmadan önce `--db-type=rocksdb`yapmalısın.
 
 ### Genesis
 
-`--genesis` \(string\):
+`--genesis`- Evet.
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks \(Mainnet, Testnet.\) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+Kullanılacak genez verilerini içeren bir JSON dosyasına giden yol. Standart ağları çalıştırırken \(Mainnet, Testnet\) görmezden gelindi. Verilmezse, varsayılan gen verileri kullanır. Genesis verisinin JSON temsili için bir örnek olarak [buraya](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16) bakınız.
 
-### HTTP Server
+### HTTP Sunucusu
 
-`--http-host` \(string\):
+`--http-host`- Evet.
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`.
+HTTP APIs dinlediği adres. `127.0.0.1`Defaults Bu demek oluyor ki, düğümünüz sadece aynı makineden yapılan API çağrılarını halledebilir. Diğer makinelerden API çağrılarına izin vermek için, `--http-host=`kullanın.
 
-`--http-port` \(int\):
+`--http-port`\(int\):
 
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
+Her düğüm, düğüm, ve Avalanche ağıyla etkileşim için API'leri sağlayan bir HTTP sunucusu çalıştırır. Bu argüman HTTP sunucusunun dinleyeceği portu belirler. Varsayılan `9650`değerdir.
 
-`--http-tls-cert-file` \(string, file path\):
+`--http-tls-cert-file`\(ip, dosya yolu\):
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Bu argüman HTTPS sunucusu için düğümle kullanılan TLS sertifikasının yerini belirler. Bu durum ne zaman `--http-tls-enabled=true`belirtilmeli. Varsayılan değeri yok.
 
-`--http-tls-enabled` \(boolean\):
+`--http-tls-enabled`\(boolean\):
 
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
+Eğer bu bayrak `true`ayarlanırsa, sunucuya to kullanmak için yükseltmeye çalışacak. `false`Defaults
 
-`--http-tls-key-file` \(string, file path\):
+`--http-tls-key-file`\(ip, dosya yolu\):
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+Bu argüman HTTPS sunucusu için düğümle kullanılan TLS özel anahtarının konumunu belirler. Bu durum ne zaman `--http-tls-enabled=true`belirtilmeli. Varsayılan değeri yok.
 
 ### IPCS
 
-`--ipcs-chain-ids` \(string\)
+`--ipcs-chain-ids`\(ip\)
 
-Comma separated list of chain ids to connect to. There is no default value.
+Bağlanacak zincir kimlikleri listesi ayrılmış. Varsayılan değeri yok.
 
-`--ipcs-path` \(string\)
+`--ipcs-path`\(ip\)
 
-The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
+Dizin \(Unix\) veya IPC sockets. için boru directory \(Windows\) olarak adlandırılır. to Defaults
 
-### File Descriptor Limit
+### Dosya Descriptor Sınırı
 
-`--fd-limit` \(int\)
+`--fd-limit`\(int\)
 
-Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+Bu işlem dosyası tanımlayıcısı sınırını en azından bu değere yükseltme girişimi. Öntanımlı`32768`
 
-### Logging
+### Kaydım
 
-`--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
+`--log-level`\(ip, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
+Günlük seviyesi hangi olayların günlüğe gireceğini belirler. En yüksek öncelikten en düşük seviyeye kadar 7 farklı seviye vardır.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+* `Off`- Hiç bir kütük bu seviyeye sahip değildir.
+* `Fatal`- not ölümcül hatalar.
+* `Error`Bu hatalar sayesinde bu hatalar ortaya çıkabildi.
+* `Warn`- Bu uyarı, fevkalade bir byzantine düğümünün veya potansiyel bir gelecek hatasının göstergesi olabilir.
+* `Info`: düğüm durumu güncellemelerinin yararlı tanımları.
+* `Debug`Hata kaydı koddaki olası hataları anlamaya çalışırken kullanışlıdır. Normal kullanım için istenen daha fazla bilgi gösterilecektir.
+* `Verbo`Bu düğümün işlediği çok sayıda bilgiyi takip eder. Bu durum son derece düşük seviye protokol analizi için veri içeriği ve ikili atımları içerir.
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
+Bir kütük seviyesi notası belirtirken, belirtilen öncelikli veya daha yüksek olan tüm günlüklerin izleneceği belirtilir. `Info`Defaults
 
-`--log-display-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
+`--log-display-level`\(ip, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
-The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
+Görünüm seviyesi ekranda hangi olayları göstereceğini belirler. Eğer boş kalırsa, sağlanan değer için varsayılan olarak `--log-level`varsayılır.
 
-`--log-display-highlight` \(string, `{auto, plain, colors}`\):
+`--log-display-highlight`\(ip, `{auto, plain, colors}`\):
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+Renk/vurgulama görüntüleme günlüklerinin olup olmadığı Çıkış terminal olduğunda öntanımlı noktalar belirsiz. Aksi takdirde, bir tanesi olmalı.`{auto, plain, colors}`
 
-`--log-dir` \(string, file path\):
+`--log-dir`\(ip, dosya yolu\):
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+Sistem kayıtlarının tutulduğu dizini belirler. `"$HOME/.avalanchego/logs"`Defaults
 
-### Network ID
+### Ağ Kimliği
 
-`--network-id` \(string\):
+`--network-id`- Evet.
 
-The identity of the network the node should connect to. Can be one of:
+Düğünün bağlanması gereken ağın kimliği. Bunlardan biri olabilir:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+* `--network-id=mainnet`-> Ana ağa Bağ \(öntanımlı\).
+* `--network-id=fuji`-> Fuji test ağına bağlan.
+* `--network-id=testnet`- > Şu anki test ağına bağlan. \(Şu anda Fuji'den bahsediyoruz.\)
+* `--network-id=local`-> Yerel bir test ağına bağlan.
+* `--network-id=network-{id}``id`- > Verilen Kimlik ile ağa bağlan. Menzil içinde olmalı.`[0, 2^32)`
 
-### Public IP
+### & IP
 
-`--public-ip` \(string\):
+`--public-ip`- Evet.
 
-Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
+Doğrulayıcılar halka açık IP adreslerini bilmeliler, böylece diğer düğümlerin onlarla nasıl bağlantı kuracaklarını bilmelerini sağlarlar. Eğer bu argüman sağlanmazsa, düğüm, düğümün halka açık IP'sini almak için NAT traversal gerçekleştirmeye çalışacak. Yerel bir ağ oluşturmak `127.0.0.1`için ayarlanmalı. Eğer kurulmadıysa, NAT traversal. kullanarak IP öğrenme çabaları vardır.
 
-`--dynamic-public-ip` \(string\):
+`--dynamic-public-ip`- Evet.
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+`opendns`Eğer param mevcut olduğu geçerli değerler: `ifconfigco`veya`ifconfigme` Bu çok `--public-ip`zor. Eğer kurulursa, uzaktan hizmet için her bir `--dynamic-update-duration`ankete ve düğümün halka açık IP adresini güncelleyecektir.
 
-`--dynamic-update-duration` \(duration\):
+`--dynamic-update-duration`\(süre\):
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+Anketler arasında bir süre, ya `--dynamic-public-ip`da NAT travesti için. Önerilen minimum 1 dakika. `5m`Defaults
 
-### Signature Verification
+### İmza Onaylaması
 
-`--signature-verification-enabled` \(boolean\):
+`--signature-verification-enabled`\(boolean\):
 
-Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+İmza doğrulanmasını etkinleştirir. `false`İmzaların devre dışı bırakılmasına izin veren in imzalar kontrol edilmeyecektir. `true`Defaults
 
-### Staking
+### - Takılıyor
 
-`--staking-port` \(string\):
+`--staking-port`- Evet.
 
-The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
+İzleme sunucusunun Avalanche ağına dış bağlantısını sağlayan port. `9651`Defaults
 
-`--p2p-tls-enabled` \(boolean\):
+`--staking-enabled`\(boolean\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers. However, This can be disabled for testing. When TLS is disabled, the `stakingID` will be derived from the IP Address the node claims it owns. This will also disable encryption of inter-node communication. This should only be specified for testing. Defaults to `true`. This must be true when `--staking-enabled=true`.
+Avalanche Sybil direnişi olarak Stake Kanıtı \(PoS\) kullanır ve ağa saldırmak için yasaklı bir şekilde pahalıya patlar. Eğer yanlış ise, sybil direniş engellenir ve tüm akrabalar uzlaşma sırasında ezilecektir. `true`Defaults
 
-`--staking-enabled` \(boolean\):
+`--staking-tls-cert-file`\(ip, dosya yolu\):
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. When this is `true`, `--p2p-tls-enabled` must be set to `true` in order to secure P2P communications.
+Avalanche düğümleri güvenli bir şekilde bağlamak için iki yönlü doğrulanmış TLS bağlantılarını kullanır. Bu argüman düğümler tarafından kullanılan TLS sertifikasının yerini belirler. Öntanımlı olarak, düğüm, TLS sertifikasının hazır olmasını `$HOME/.avalanchego/staking/staker.crt`bekler.
 
-`--staking-tls-cert-file` \(string, file path\):
+`--staking-tls-key-file`\(ip, dosya yolu\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS certificate used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Avalanche düğümleri güvenli bir şekilde bağlamak için iki yönlü doğrulanmış TLS bağlantılarını kullanır. Bu argüman düğüm, kullanılan TLS özel anahtarının yerini belirler. Öntanımlı olarak, düğüm, TLS özel anahtarının açık olmasını `$HOME/.avalanchego/staking/staker.key`bekler.
 
-`--staking-tls-key-file` \(string, file path\):
+`--staking-disabled-weight`\(int\):
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS private key used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+Her bir akraba engelli olduğunda sağlama için ağırlık. `1`Defaults
 
-`--staking-disabled-weight` \(int\):
+### Sürüm
 
-Weight to provide to each peer when staking is disabled. Defaults to `1`.
+`--version`\(boolean\)
 
-### Version
+Eğer bu `true`ise, sürümü basıp bırak. `false`Defaults
 
-`--version` \(boolean\)
+## Gelişmiş Seçenekler
 
-If this is `true`, print the version and quit. Defaults to `false`.
-
-## Advanced Options
-
-The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+Aşağıdaki seçenekler bir düğümün doğruluğunu etkileyebilir. Sadece güç kullanıcıları bunları değiştirebilir.
 
 ### Benchlist
 
-`--benchlist-duration` \(duration\):
+`--benchlist-duration`\(süre\):
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+Bir akran daha sonra bir süre için yedek listeye `--benchlist-fail-threshold`alınır. `1h`Defaults
 
-`--benchlist-fail-threshold` \(int\):
+`--benchlist-fail-threshold`\(int\):
 
-Number of consecutive failed queries to a node before benching it \(assuming all queries to it will fail\). Defaults to `10`.
+Bir düğmeye bağlamadan önce ardışık sayıda başarısız soru Number sorgu başarısız olacaksa\) `10`Defaults
 
-`--benchlist-peer-summary-enabled` \(boolean\):
+`--benchlist-peer-summary-enabled`\(boolean\):
 
-Enables peer specific query latency metrics. Defaults to `false`.
+Sorgu gecikme metriklerini etkinleştirir. `false`Defaults
 
-`--benchlist-min-failing-duration` \(duration\):
+`--benchlist-min-failing-duration`\(süre\):
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+Bir akraba için en az zaman iletisi akranı kaldırılmadan önce bozulmalıdır. `5m`Defaults
 
-### Consensus Parameters
+### Dizin Yapılandır
 
-`--consensus-gossip-frequency` \(duration\):
+`--build-dir`- Evet.
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+AvalancheGo alt ikili ve eklenti ikililerini nerede bulacağını belirler. İkili AvalancheGo ikili yolunun önünü açıyor. Bu dizinin yapısı şu şekilde olmalı:
 
-`--consensus-shutdown-timeout` \(duration\):
+```text
+build-dir  
+|_avalanchego-latest  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+|_avalanchego-preupgrade  
+    |_avalanchego-process (the binary from compiling the app directory)  
+    |_plugins  
+      |_evm  
+      |_other_plugin
+```
 
-Timeout before killing an unresponsive chain. Defaults to `5s`.
+### Zincir Yapılandırmaları
 
-`--creation-tx-fee` \(int\):
+Bazı zincirler \(şu anda sadece C-Chain\) düğüm operatörünün özel bir yapılandırma sağlamasına izin verir. AvalancheGo dosyalardan zincir yapılandırmalarını okuyabilir ve başlatma üzerine ilgili zincirlere aktarabilir.
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX \(.001 AVAX\) per transaction.
+AvalancheGo belirtilen dizinde bu dosyaları `--chain-config-dir`arar. Bu dizin, isimleri zincir kimlikleri veya zincir takma isimleri olan alt dizinlere sahip olabilir. Her alt dizin, dizin adı içinde belirtilmiş zincir için yapılandırma içerir. Her alt `config`dizin, karşılık gelen zincir başlatıldığında değeri geçilen bir dosya içermelidir. `[chain-config-dir-goes-here]/C/config.json`Örneğin, C-Chain için yapılandırma şu olmalıdır:
 
-`--min-delegator-stake` \(int\):
+Bu dosyaların sahip olması gereken uzantı, ve bu dosyaların içeriği VM-dependent. `config.txt`Örneğin, bazı zincirler bazılarının beklentilerini karşılayabilir.`config.json` `config.txt`Eğer birden fazla dosya aynı adı ama farklı uzantıları \(örn. `config.json`ve \) ile sağlanırsa, AvalancheGo bir hata ile çıkacaktır.
 
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
+Verilen bir zincir için, AvalancheGo ilk olarak zincir kimliği olan bir yapılandırma alt dizini arayacaktır. Eğer bulunmazsa, zincir birincil takma adı olan bir yapılandırma alt dizini arıyor. Eğer bulunamadıysa, zincir için başka bir takma adı olan bir alt dizini arıyor. Tüm klasör ve dosya isimleri çok hassas.
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+Bu özel yapılandırmaları sağlamak için gerekli değildir. Eğer sağlanmazsa, VM özel varsayılan yapılandırma kullanılacaktır.
 
-`--min-delegation-fee` \(int\):
+`--chain-config-dir`- Evet.
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
+Yukarıda tarif edildiği gibi zincir incir içeren dizini belirler. `$HOME/.avalanchego/configs/chains`Defaults Eğer bu bayrak sağlanmazsa ve öntanımlı dizin mevcut değilse, AvalancheGo özel yapılandırmalar seçeneği olduğu için çıkmayacak. Ancak, bayrak ayarlanırsa, belirlenen dizin var olmalı yoksa AvalancheGo bir hata ile ayrılacaktır.
 
-`--min-stake-duration` \(duration\):
+#### C-Chain Yapılandırması
 
-Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
+C-Chain için bir yapılandırma belirtmek için, bir JSON yapılandırma dosyası `{chain-config-dir}/C/config.json`\(veya yukarıda belirtildiği gibi geçerli bir konumda yerleştirilmelidir\)
 
-`--min-validator-stake` \(int\):
+`config.json`Örneğin, eğer öntanımlı değerine `chain-config-dir`sahipse, o zaman bu `$HOME/.avalanchego/configs/chains/C/config.json`içeriklerle yerleştirilebilir:
 
-The minimum stake, in nAVAX, required to validate the Primary Network.
+```javascript
+{
+  "rpc-tx-fee-cap": 90,
+  "eth-api-enabled": true,
+  "tx-pool-api-enabled": true,
+  "debug-api-enabled": true,
+  "web3-api-enabled": true
+}
+```
 
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+C-Chain yapılandırmaları hakkında daha fazla bilgi için, [buraya](command-line-interface.md#coreth-config) bakın.
 
-`--max-stake-duration` \(duration\):
+#### X-Chain Yapılandırması
 
-The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Main Net.
+X-Chain için bir yapılandırma belirtmek için, bir JSON yapılandırma dosyası `{chain-config-dir}/X/config.json`\(veya yukarıda belirtildiği gibi geçerli bir konumda yerleştirilmelidir\)
 
-`--max-validator-stake` \(int\):s
+`config.json`Örneğin, eğer öntanımlı değerine `chain-config-dir`sahipse, o zaman bu `$HOME/.avalanchego/configs/chains/X/config.json`içeriklerle yerleştirilebilir:
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
+```javascript
+{
+  "index-transactions": true,
+  "index-allow-incomplete": false
+}
+```
 
-`--snow-avalanche-batch-size` \(int\):
+X-Chain yapılandırmaları hakkında daha fazla bilgi için, [buraya](command-line-interface.md#avm-config) bakın.
 
-DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
+### C-Chain / Coreth<a id="coreth-config"></a>
 
-`--snow-avalanche-num-parents` \(int\):
+`--coreth-config`\(json\):
 
-DAG implementations of Snow consensus define `p` as the number of parents a vertex should include. Increasing `p` will improve the amortization of network queries. However, by increasing the connectivity of the graph, the complexity of the graph traversals is increased. The value must be at least `2`. Defaults to `5`.
+\(Bu argüman [Zincir Configs](command-line-interface.md#chain-configs) kullanım lehine reddedilmiştir.\)
 
-`--snow-concurrent-repolls` \(int\):
+Bu da into aktarılacak bir yapılandırma belirtmenizi sağlar. Bu yapılandırma için öntanımlı değerler:
 
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
+```javascript
+{
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "rpc-gas-cap": 2500000000,
+  "rpc-tx-fee-cap": 100,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": false,
+  "debug-api-enabled": false,
+  "web3-api-enabled": true,
+  "local-txs-enabled": false,
+  "pruning-enabled": false,
+  "api-max-duration": 0, // Default to no maximum
+  "api-max-blocks-per-request": 0, // Default to no maximum
+  "allow-unfinalized-queries": false
+}
+```
 
-`--snow-sample-size` \(int\):
+Öntanımlı değerler sadece in açıkça belirtildiği takdirde geçersiz sayılabilir.
 
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
+parametreler şöyle:
 
-`--snow-quorum-size` \(int\):
+#### Corce APIS
 
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
+`snowman-api-enabled`\(boolean\):
 
-`--snow-virtuous-commit-threshold` \(int\):
+Snowman API'yi etkinleştirir. Yanlış yere düşürülür.
 
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
+`coreth-admin-api-enabled`\(boolean\):
 
-`--snow-rogue-commit-threshold` \(int\):
+Admin API'yi etkinleştirir. Yanlış yere düşürülür.
 
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
+`net-api-enabled`\(boolean\):
 
-`--stake-minting-period` \(duration\):
+API'yi `net_*`etkinleştirir. Doğru söylüyor.
 
-Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
+#### Coreth API Gazı / Fiyat Kapakları
 
-`--tx-fee` \(int\):
+`rpc-gas-cap`\(int\):
 
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
+`eth_estimateGas`NAVAX \(GWei\) ile ölçülen bir RPC Çağrısı tarafından tüketilecek maksimum gaz. 2,500,000,000 tahlil var.
 
-`--uptime-requirement` \(float\):
+`rpc-tx-fee-cap`\(int\):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
+Küresel işlem ücreti \(fiyat \* gazı sınırı\) cap \(measured ölçülen\) send-transction varyantları için 100'e çıkarılıyor.
 
-### Message Handling
+#### Veritabanı Uygulaması
 
-`--max-non-staker-pending-msgs` \(int\):
+`pruning-enabled`\(bool\):
 
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
+Eğer doğruysa, eski tarihi verilerin veritabanı açılması etkinleştirilecektir. Tarihsel köklerdeki tüm verilere erişimi olan düğümler için devre dışı bırakılmalıdır. Pruning sadece yeni veriler için yapılacaktır. V1.4.9 `false`ve sonraki `true`sürümlerde be
 
-`--staker-msg-reserved` \(float\):
+#### Eth API
 
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
+`eth-api-enabled`\(boolean\):
 
-`--staker-cpu-reserved` \(float\):
+API'yi `eth_*`etkinleştirir. Doğru söylüyor.
 
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
+`personal-api-enabled`\(boolean\):
 
-### Network
+API'yi `personal_*`etkinleştirir. Yanlış yere düşürülür.
 
-`--network-initial-timeout` \(duration\):
+`tx-pool-api-enabled`\(boolean\):
 
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+API'yi `txpool_*`etkinleştirir. Yanlış yere düşürülür.
 
-`--network-minimum-timeout` \(duration\):
+`debug-api-enabled`\(boolean\):
 
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `2s`.
+API'yi `debug_*`etkinleştirir. Yanlış yere düşürülür.
 
-`--network-maximum-timeout` \(duration\):
+`web3-api-enabled`\(boolean\):
 
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
+API'yi `web3_*`etkinleştirir. Doğru söylüyor.
 
-`--network-timeout-halflife` \(duration\):
+#### Eth Ayarları
 
-Halflife used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
+`local-txs-enabled`\(boolean\):
 
-`--network-timeout-coefficient` \(duration\):
+Yerel işlem işlemlerini etkinleştirir. Yanlış yere düşürülür.
 
-Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
+`api-max-duration`\(süre\):
 
-`--network-health-min-conn-peers` \(uint\):
+Maksimum API arama süresi süresi. API çağrıları bu süreyi aşarsa, zaman ayırırlar. 0 \(maksimum yok\).
 
-Node will report unhealthy if connected to less than this many peers. Defaults to `1`.
+`api-max-blocks-per-request`\(int\):
 
-`--network-health-max-time-since-msg-received` \(duration\):
+İstek başına hizmet edecek en fazla sayıda blok `getLogs`var. 0 ile \(maksimum yok\).
 
-Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+`allow-unfinalized-queries`\(boolean\):
 
-`--network-health-max-time-since-no-requests` \(duration\):
+Sonuçsuz sorulara izin verir \(henüz kabul edilmedi\) bloklar/işlemler için Yanlış yere düşürülür.
 
-Node will report unhealthy if it hasn't received a message for this amount of time. Defaults to `1m`.
+#### Devam Ettirici Profille
 
-`--network-health-max-portion-send-queue-full` \(float\):
+Düğününüzü hafıza/CPU profillerini sürekli çalıştırmak ve en son olanları kaydetmek için yapılandırabilirsiniz. Eğer `continuous-profiler-dir`ayarlanırsa sürekli bellek / CPU profilleme etkinleştirilir.
 
-Node will report unhealthy if its send queue is more than this portion full. Must be in \[0,1\]. Defaults to `0.9`.
+`continuous-profiler-dir`- Evet.
 
-`--network-health-max-send-fail-rate` \(float\):
+Eğer boş değilse, düğüm, hafıza/CPU profillerini sürekli çalıştırır ve bu dizine koyar. Boş sicime \(etkinleştirilmedi\) Defaults \(etkinleştirilmedi\).
 
-Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
+`continuous-profiler-frequency`\(süre\):
 
-### Health
+Ne sıklıkla yeni bir CPU/memory profili oluşturulur. `15m`Defaults
 
-`--health-check-frequency` \(duration\):
+`continuous-profiler-max-files`\(int\):
 
-Health check runs with this freqency. Defaults to `30s`.
+Kalacak en fazla sayıdaki CPU/memory profilleri Defaults 5'e kadar.
 
-`--health-check-averager-halflife` \(duration\):
+#### Keystore Ayarları
 
-Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
+`keystore-directory`- Evet.
 
-### Throughput Server
+Özel anahtarları içeren dizin. Bu da göreceli bir yol olarak verilebilir. Boş ise, geçici bir dizin `coreth-keystore`kullanır. Boş iplere Defaults
 
-`--xput-server-enabled` \[Deprecated\] \(boolean\):
+`keystore-external-signer`- Evet.
 
-An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
+Bir clef-type tipi belirleyici için harici bir URI belirler. Boş sicime \(etkinleştirilmedi\) Defaults \(etkinleştirilmedi\).
 
-`--xput-server-port` \[Deprecated\] \(string\):
+`keystore-insecure-unlock-allowed`\(bool\):
 
-This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
+Eğer doğruysa, kullanıcıların güvenli olmayan HTTP ortamında hesapları açmalarına izin verin. Yanlış yere düşürülür.
+
+### Konsensus Parametreleri
+
+`--consensus-gossip-frequency`\(süre\):
+
+Dedikodu kabul edilen sınırlar arasındaki zaman. `10s`Defaults
+
+`--consensus-shutdown-timeout`\(süre\):
+
+Tepkisiz bir zinciri öldürmeden önce zaman kaybı. `5s`Defaults
+
+`--creation-tx-fee`\(int\):
+
+Yeni bir eyalete yol açan işlemler için in işlem ücreti var. `1000000`NAVAX \(.001 AVAX\) işlemleri için Defaults
+
+`--min-delegator-stake`\(int\):
+
+in en düşük kazık, birincil Ağ'ın onaylayıcı bir vekiline devredilebilir.
+
+Ana Ağ'da `25000000000`\(25 AVAX\) Defaults Test Net'te `5000000`\(.005 AVAX\) öntanımlı olarak kullanılır.
+
+`--min-delegation-fee`\(int\):
+
+Asgari heyet ücreti ile birincil ağdaki heyet için ödenebilir, `10,000`çarpılır. Menzilde `[0, 1000000]`olmalı. Ana Ağ'da \(%2\) öntanımlı olarak \(% `20000`2\)
+
+`--min-stake-duration`\(süre\):
+
+En az bekleme süresi. Ana Net üzerinde öntanımlı `336h`\(iki hafta\)
+
+`--min-validator-stake`\(int\):
+
+in en az kazık, birincil Ağ'ı onaylamak için gerekli olan asgari kazık.
+
+Ana Ağ'da `2000000000000`\(2.000 AVAX\) öntanımlı olarak kullanılıyor. Test Net'te `5000000`\(.005 AVAX\) öntanımlı olarak kullanılır.
+
+`--max-stake-duration`\(süre\):
+
+En fazla bekleme süresi, saatlerce. Ana Ağ'da `8760h`\(365 gün\) Defaults
+
+`--max-validator-stake`\(int\): s
+
+in maksimum kazık, birincil ağdaki bir doğrulama a yerleştirilebilir. Ana Ağ'da `3000000000000000`\(3.000.000 AVAX\) öntanımlı olarak kullanılıyor. Bu durum hem onaylayıcı hem de delegeler tarafından onaylanan kazık içerir.
+
+`--snow-avalanche-batch-size`\(int\):
+
+Kardan uzlaşmasının DAG uygulamaları, bir vertex dahil edilecek işlem sayısı olarak `b`tanımlanır. `b`Artırma teorik olarak artma gecikme artarken vasıtasıyla artacaktır. Düğüm bir grup toplaması için 1 saniye bekleyecek ve tüm sürüyü bir seferde yayınlayacak. En azından değer `1`olmalı. `30`Defaults
+
+`--snow-avalanche-num-parents`\(int\):
+
+`p`Karın konsensus DAG uygulamaları, bir vertex dahil olmak üzere ebeveynlerin sayısını tanımlar. Artırma, ağ sorgularının the `p`iyileştirir. Ancak, grafiğin bağlantısını artırarak grafiğin çevreleyen karmaşıklığı artmıştır. En azından değer `2`olmalı. `5`Defaults
+
+`--snow-concurrent-repolls`\(int\):
+
+Kar uzlaşması ağ kullanım zamanlarında verilen yeniden anket işlemleri gerektirir. Bu parametre istemcinin bu işlemleri tamamlamada ne kadar agresif olacağını tanımlar. Bu durum sadece Kardan anlaşmasının özenle değerlendirilmesinden sonra değiştirilmelidir. `1`En azından değer olmalı.`--snow-rogue-commit-threshold` `4`Defaults
+
+`--snow-sample-size`\(int\):
+
+`k`Kar uzlaşması, her ağ anketinde sürülen onaylayıcı sayısının sayısını tanımlar. Bu parametre uzlaşma için kullanılan `k`değeri tanımlar. Bu durum sadece Kardan anlaşmasının özenle değerlendirilmesinden sonra değiştirilmelidir. En azından değer `1`olmalı. `20`Defaults
+
+`--snow-quorum-size`\(int\):
+
+Kar uzlaşması, her ağ anketinde bir işlem yapmayı tercih eden validators sayısı olarak `alpha`tanımlanır. Bu parametre uzlaşma için kullanılan `alpha`değeri tanımlamamıza izin verir. Bu durum sadece Kardan anlaşmasının özenle değerlendirilmesinden sonra değiştirilmelidir. Değer, daha büyük `k/2`olmalı. `14`Defaults
+
+`--snow-virtuous-commit-threshold`\(int\):
+
+`beta1`Kardan fikir birliği art arda yapılan anketlerin sayısını tanımlar, erdemli bir işlemin kabul edilebilmesi için güvenini artırması gerekir. Bu parametre uzlaşma için kullanılan `beta1`değeri tanımlamamıza izin verir. Bu durum sadece Kardan anlaşmasının özenle değerlendirilmesinden sonra değiştirilmelidir. En azından değer `1`olmalı. `15`Defaults
+
+`--snow-rogue-commit-threshold`\(int\):
+
+`beta2`Kardan fikir birliği art arda yapılan anketlerin sayısını tanımlar, dolandırıcı bir işlemin kabul edilebilmesi için güvenini artırması gerekir. Bu parametre uzlaşma için kullanılan `beta2`değeri tanımlamamıza izin verir. Bu durum sadece Kardan anlaşmasının özenle değerlendirilmesinden sonra değiştirilmelidir. En azından değer `beta1`olmalı. `30`Defaults
+
+`--stake-minting-period`\(süre\):
+
+Bekleme fonksiyonunun tüketim süresi, saatler içinde. Ana Net üzerinde öntanımlı `8760h`\(365 gün\).
+
+`--tx-fee`\(int\):
+
+Bir işlem için yakılması gereken nAVAX miktarı geçerli olacak. Bu parametre mevcut formunda ağ anlaşması gerektirir. Bu değerin öntanımlı olarak değiştirilmesi sadece özel ağlarda yapılmalıdır. İşlem başına `1000000`to Defaults
+
+`--uptime-requirement`\(yüzer\):
+
+Bir validator ödül almak için çevrimiçi olması gerekir. `0.6`Defaults
+
+### Sağlık
+
+`--health-check-frequency`\(süre\):
+
+Sağlık kontrolü bu frekans ile çalışıyor. `30s`Defaults
+
+`--health-check-averager-halflife`\(süre\):
+
+Sağlık kontrollerinde kullanılan yarı ömürlü bilgisayar \(örneğin mesaj başarısızlıklarının oranını ölçmek için\) Daha büyük değer --> ortalama hesaplama daha az uçucu hesaplama. `10s`Defaults
+
+### Mesaj Oranı Sınırlandırma \(Throttling\)
+
+Bu bayraklar gelen ve dış iletilerin sınırlandırılmasına bağlıdır. Oranın sınırlandırılması ve aşağıdaki bayraklar hakkında daha fazla bilgi için `throttling`in pakete bakınız.
+
+`--throttler-inbound-at-large-alloc-size`\(uint\):
+
+İleti the büyük tahsis edilen iletinin boyutu. 32 to defaults to `33554432`\(32 mebibytes\).
+
+`--throttler-inbound-validator-alloc-size`\(uint\):
+
+İleti the doğrulama tahsis edilmesi, baytların boyutu. 32 to defaults to `33554432`\(32 mebibytes\).
+
+`--throttler-inbound-node-max-at-large-bytes`\(uint\):
+
+Bir düğümün en fazla sayısı, içe giden mesaj the büyük bir tahsis edilmesinden alınabilir. `2048`\(2 mebibytes\) için Defaults
+
+`--throttler-outbound-at-large-alloc-size`\(uint\):
+
+Boyut, baytlar, dış iletinin of büyük bir tahsis edilmesi. 32 to defaults to `33554432`\(32 mebibytes\).
+
+`--throttler-outbound-validator-alloc-size`\(uint\):
+
+İleti gazı iletinin doğrulama değerinin boyutu, baytlar. 32 to defaults to `33554432`\(32 mebibytes\).
+
+`--throttler-outbound-node-max-at-large-bytes`\(uint\):
+
+Bir düğümün en fazla sayısı, iletinin iletinin ileticisinin büyük bir tahsis edilmesinden alınabilir. `2048`\(2 mebibytes\) için Defaults
+
+### Ağ Ağı
+
+`--network-compression-enabled`\(bool\) \(v1.4.11\):
+
+Eğer doğruysa, sürüm >= v1.4.11 üzerinden gönderilen belirli mesajları bant genişliği kullanımını azaltmak için sıkıştır.
+
+`--network-initial-timeout`\(süre\):
+
+adaptive adaptif zaman aşımı yöneticisinin ilk zaman aşımı değeri. `5s`Defaults
+
+`--network-minimum-timeout`\(süre\):
+
+adaptive adaptif zaman aşımı yöneticisinin en az zaman ölçümü değeri `2s`Defaults
+
+`--network-maximum-timeout`\(süre\):
+
+adaptive adaptif zaman aşımı yöneticisinin en fazla zaman ölçümü değeri `10s`Defaults
+
+`--network-timeout-halflife`\(süre\):
+
+Halflife ortalama ağ gecikmesi hesaplandığında kullanılır. Daha büyük değer --> daha az uçucu ağ gecikme hesaplaması. `5m`Defaults
+
+`--network-timeout-coefficient`\(süre\):
+
+[ortalama istek `network-timeout-coefficient`gecikmesi] sonrasında eyalete yönelik talepler mola verecek. `2`Defaults
+
+`--network-health-min-conn-peers`\(uint\):
+
+Bu kadar çok arkadaşa bağlı olursa düğüm, sağlıksız rapor edecektir. `1`Defaults
+
+`--network-health-max-time-since-msg-received`\(süre\):
+
+Bu kadar zaman içinde mesaj almadığı takdirde Node sağlıksız rapor edecektir. `1m`Defaults
+
+`--network-health-max-time-since-no-requests`\(süre\):
+
+Bu kadar zaman içinde mesaj almadığı takdirde Node sağlıksız rapor edecektir. `1m`Defaults
+
+`--network-health-max-portion-send-queue-full`\(yüzer\):
+
+Bu bölümden daha fazlası gönderilen kuyruklar ise düğüm, sağlıksız rapor edecektir. [0,1] içinde olmalı. `0.9`Defaults
+
+`--network-health-max-send-fail-rate`\(yüzer\):
+
+Bu mesajın bu kısmından daha fazla hata göndermesi durumunda düğüm, sağlıksız rapor edecektir. [0,1] içinde olmalı. `0.25`Defaults
+
+`--inbound-connection-throtting-cooldown`\(süresi\)
+
+`--inbound-connection-throttling-max-recent`\(uint\)
+
+Node sadece son olarak yapılmadığı takdirde bir IP üzerinden bağlanan bir bağlantı kabul `inbound-connection-throtting-cooldown`eder. `inbound-connection-throttling-max-recent`Düğüm sadece her IPS üzerinden izin verir.`inbound-connection-throttling-max-recent`
+
+### Göç Listesi Gossiping
+
+Her düğüm, güncel bir akran listesi olabilsin diye birbirleriyle dedikodu yapar. `--network-peer-list-gossip-size`Bir düğüm `--network-peer-list-size`akranları her akrabalarına gossips`--network-peer-list-gossip-frequency`
+
+`--network-peer-list-gossip-frequency`\(süre\):
+
+`1m`Defaults
+
+`--network-peer-list-gossip-size`\(int\):
+
+`50`Defaults
+
+`--network-peer-list-size`\(int\):
+
+`20`Defaults
+
+### Eklenti Kipi
+
+`--plugin-mode-enabled`\(bool\):
+
+Eğer doğruysa, düğümleri [bir](https://github.com/hashicorp/go-plugin) eklenti olarak çalıştırır. `false`Defaults
 
 ### Subnet Whitelist
 
-`--whitelisted-subnets` \(string\):
+`--whitelisted-subnets`- Evet.
 
-Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+Bu düğümün eklendiğinde geçerli olacağı alt ağların komma listesini ayırdı. Boş olarak Defaults \(sadece ana ağını onaylar\).
 
-### Restart on Disconnect
+### Sanal Makine \(VM\) Yapılandırma<a id="vm-configs"></a>
 
-Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
+`--vm-aliases-file`- Evet.
 
-`--restart-on-disconnected` \(boolean, defaults to `false`\)
+Sanal Makine kimlikleri tanımlayan JSON dosyasına giden yol. `~/.avalanchego/configs/vms/aliases.json`Defaults Örnek içeriği:
 
-`--disconnected-check-frequency` \(duration, defaults to `10s`\)
-
-`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
-
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart.
-
-If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
-
-### Plugins
-
-`--plugin-dir` \(string, file path\):
-
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
-
-`--coreth-config` \(json\):
-
-This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
-
-```cpp
+```javascript
 {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "rpc-gas-cap": 2500000000,
-    "rpc-tx-fee-cap": 100,
-    "eth-api-enabled": true,
-    "personal-api-enabled": true,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": false,
-    "web3-api-enabled": true
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timerpc"
+  ]
 }
 ```
 
-Note: if a config is specified, all default options are overridden. For example:
+Bu örnek, kimliği `"timestampvm"`ve kimliğinin belli olduğu `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"`VM'yi tanımlar.`"timerpc"`
 
-```text
-./build/avalanchego --config-file=config.json
-```
+### X-Chain / AVM<a id="avm-config"></a>
 
-config.json:
+Bu da into aktarılacak bir yapılandırma belirtmenizi sağlar. Bu yapılandırma için öntanımlı değerler:
 
-```cpp
+```javascript
 {
-    "coreth-config": {
-        "snowman-api-enabled": false,
-        "coreth-admin-api-enabled": false,
-        "net-api-enabled": true,
-        "rpc-gas-cap": 2500000000,
-        "rpc-tx-fee-cap": 100,
-        "eth-api-enabled": true,
-        "tx-pool-api-enabled": true,
-        "debug-api-enabled": true,
-        "web3-api-enabled": true
-    }
+  "index-transactions": false,
+  "index-allow-incomplete": false
 }
 ```
 
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+Öntanımlı değerler sadece in açıkça belirtildiği takdirde geçersiz sayılabilir.
 
-The options specify parameters for Coreth \(the C Chain\) as follows:
+parametreler şöyle:
 
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
+#### İşlem Endeksleniyor
+
+`index-transactions`\(boolean\):
+
+Eğer ayarlanırsa AVM işlem indeksini `true`etkinleştirir. Öntanımlı değer `false`değerdir. `address`Bu `true`işlemler için ayarlandığında AVM işlemleri etkinliğe karşı `assetID`indekslenir. Bu veri [API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api) aracılığıyla `avm.getAddressTxs`mevcuttur.
+
+`index-transactions`Lütfen unutmayın, eğer doğru olursa düğümün hayatı için her zaman doğru olması gerekir. `index-allow-incomplete`Eğer ayarlandıktan `false`sonra düğüm, aynı zamanda belirlenmedikçe başlamayı reddedecektir `true``true`\(aşağıya\)
+
+`index-allow-incomplete`\(boolean\):
+
+Eksik yerlerden oluşur. Öntanımlı değer `false`değerdir.
+
+`index-transactions`DB'de X-Chain indekslenmiş veri yoksa bu yapılandırma değeri göz ardı edilir.`false`
 
