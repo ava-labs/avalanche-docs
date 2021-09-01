@@ -1,44 +1,44 @@
-# Issuing API Calls
+# APIコールを発行する
 
-This guide explains how to make calls to APIs exposed by Avalanche nodes.
+このガイドでは、Avalancheノードで公開されるAPIへの呼び出し方法を説明します。
 
-### Endpoint <a id="endpoint"></a>
+### エンドポイント<a id="endpoint"></a>
 
-An API call is made to an endpoint, which is a URL. The base of the URL is always:
+APIコールが、URLになります。URLのベースは、常に
 
 `[node-ip]:[http-port]`
 
-where
+ここで
 
-* `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
+* `node-ip`iss は、呼び出しが求めるノードのIPアドレスです。
+* `http-port`は、HTTP呼び出しのためにノードがリスニングしたポートです。[コマンドライン引数](../references/command-line-interface.md#http-server)（`http-port`デフォルト値）で指定されます`9650`。
 
-For example, the base URL might look like this: `127.0.0.1:9650`.
+`127.0.0.1:9650`たとえば、ベースURLは次のようになります。
 
-Each API’s documentation specifies what endpoint a user should make calls to in order to access the API’s methods.
+各APIドキュメントにより、APIのメソッドにアクセスするために、ユーザーが呼び出すべきエンドポイントが指定されます。
 
-## JSON RPC Formatted APIs
+## JSON RPCフォーマットされたAPI
 
-Several built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specification) format to describe their requests and responses. Such APIs include the Platform API and the X-Chain API.
+いくつかの組み込みAPIが、[JSON RPC 2.0](https://www.jsonrpc.org/specification)フォーマットを使用して、リクエストとレスポンスを記述します。こうしたAPIには、プラットフォームAPIやX-Chain APIが含まれます。
 
-### Making a JSON RPC Request
+### JSON RPCリクエスト
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](exchange-chain-x-chain-api.md). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+[X-Chain API](exchange-chain-x-chain-api.md)の`getTxStatus`メソッドを呼び出したいとします。X-Chain APIドキュメントにより、このAPIのエンドポイントが次のようになります`/ext/bc/X`。
 
-That means that the endpoint we send our API call to is:
+つまり、APIコールを送信するエンドポイントは次のようになります。
 
 `[node-ip]:[http-port]/ext/bc/X`
 
-The X-Chain API documentation tells us that the signature of `getTxStatus` is:
+X-Chain APIドキュメントにより、以下の署名は次のようになります`getTxStatus`。
 
 [`avm.getTxStatus`](exchange-chain-x-chain-api.md#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
-where:
+ここで：
 
-* Argument `txID` is the ID of the transaction we’re getting the status of.
-* Returned value `status` is the status of the transaction in question.
+* Argumentは、我々がステータスを得たトランザクションのID`txID`です。
+* 戻された値は、問題の取引ステータス`status`です。
 
-To call this method, then:
+このメソッドを呼び出すには、次のようにしてください：
 
 ```cpp
 curl -X POST --data '{
@@ -51,16 +51,16 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. \(In practice is always 2.0\)
-* `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
-* `params` specifies the arguments to the method.
-* `id` is the ID of this request. Request IDs should be unique.
+* `jsonrpc`JSON RPCプロトコルのバージョンを指定します。（実際には常に2.0です）
+* `method``getTxStatus`呼び出したいサービス（）`avm`とメソッド（）を指定します。
+* `params`メソッドに引数を指定します。
+* `id`iss は、この要求のIDです。リクエストIDは一意でなければなりません。
 
-That’s it!
+それで終わりました！
 
-### JSON RPC Success Response
+### JSON RPC成功レスポンス
 
-If the call is successful, the response will look like this:
+コールが成功した場合、レスポンスは次のようになります。
 
 ```cpp
 {
@@ -72,14 +72,14 @@ If the call is successful, the response will look like this:
 }
 ```
 
-* `id` is the ID of the request that this response corresponds to.
-* `result` is the returned values of `getTxStatus`.
+* `id`isは、このレスポンスが対応するリクエストのIDです。
+* `result`は、返された値で`getTxStatus`
 
-### JSON RPC Error Response
+### JSON RPC エラーレスポンス
 
-If the API method invoked returns an error then the response will have a field `error` in place of `result`. Additionally, there is an extra field, `data`, which holds additional information about the error that occurred.
+呼び出されたAPIメソッドがエラーを返した場合、レスポンスはその代わり`error`にフィールドとなります。`result`さらに、余分フィールドがあり`data`、発生したエラーについて追加情報が保持されます。
 
-Such a response would look like:
+こうしたレスポンスは、次のようになります。
 
 ```cpp
 {
@@ -93,11 +93,11 @@ Such a response would look like:
 }
 ```
 
-## Other API Formats
+## その他のAPIフォーマット
 
-Some APIs may use a standard other than JSON RPC 2.0 to format their requests and responses. Such extension should specify how to make calls and parse responses to them in their documentation.
+一部のAPIでは、JSON RPC 2.0以外のスタンダードを使用して、リクエストとレスポンスをフォーマットすることができます。こうした拡張は、ドキュメントで呼び出しとレスポンスを解析する方法を指定する必要があります。
 
-## Sending and Receiving Bytes
+## バイトの送信と受信
 
-Unless otherwise noted, when bytes are sent in an API call/response, they are in [CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) representation, a base-58 encoding with a checksum
+APIコール/レスポンスでバイトが送信される場合、特に記載されていない限り、チェックサムでBase-58エンコードである[CB58](https://support.avalabs.org/en/articles/4587395-what-is-cb58)表現になります。
 
