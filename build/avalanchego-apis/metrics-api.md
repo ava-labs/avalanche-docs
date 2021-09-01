@@ -1,24 +1,24 @@
 # Metrics API
 
-The API allows clients to get statistics about a node’s health and performance.
+APIにより、クライアントがノードの健康とパフォーマンスについての統計を得ることができます。
 
-## Endpoint
+## エンドポイント
 
 ```text
 /ext/metrics
 ```
 
-## Usage
+## 使用
 
-To get the node metrics:
+ノードメトリクスを取得するには：
 
 ```cpp
 curl -X POST 127.0.0.1:9650/ext/metrics
 ```
 
-## Format
+## フォーマット
 
-This API produces Prometheus compatible metrics. See [here](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md) for information on Prometheus’ formatting.
+このAPIにより、Prometheus互換メトリクスを生成します。Prometheusのフォーマットに関する情報は[、ここ](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md)を参照してください。
 
-[Here](../tutorials/nodes-and-staking/setting-up-node-monitoring.md) is a tutorial that shows how to set up Prometheus and Grafana to monitor AvalancheGo node using the Metrics API.
+[以下は](../tutorials/nodes-and-staking/setting-up-node-monitoring.md)、Metrics APIを使用してAvalancheGoノードをモニターする方法を示すチュートリアルです。
 
