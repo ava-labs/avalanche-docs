@@ -16,7 +16,6 @@ For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit
 ## Requirements
 
 - [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-- [Git](https://git-scm.com/) installed in the system.
 - [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
 - [Metamask](https://metamask.io) extension added to the browser.
 
