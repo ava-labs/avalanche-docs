@@ -1,89 +1,88 @@
-# Stake AVAX, by Validating or Delegating, with the Avalanche Wallet
+# Avalancheウォレットで、AVAXをバリデーションあるいはデレギートすることでステークします。
 
-## **Introduction** <a id="001f"></a>
+## **はじめに**<a id="001f"></a>
 
-The Avalanche Wallet is a web-based application with no middleware or any kind of server communication. The Avalanche Wallet is written in Vue JS and can be either accessed online or compiled and run locally.
+Avalancheウォレットは、ミドルウェアやあらゆる種類のサーバー通信が存在しません。Avalancheウォレットは、Vue JSで書かれており、オンラインでアクセスするか、コンパイルしてローカルで実行することができます。
 
-The Avalanche Wallet can be accessed [here](https://wallet.avax.network/).  
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+Avalancheウォレットは[こちらから](https://wallet.avax.network/)アクセスできます。  Avalancheウォレットソースコードは[、ここから](https://github.com/ava-labs/avalanche-wallet)入手できます。
 
-**Let’s get staking!**
+**ステーキングを始めましょう！**
 
-### **Step 1 — Open the Avalanche Wallet** <a id="552d"></a>
+### **ステップ 1 —Avalancheウォレットを開く**<a id="552d"></a>
 
-![Image for post](https://miro.medium.com/max/1552/0*tpBIOjLdppuNKMjA)
+![ポストのための画像](https://miro.medium.com/max/1552/0*tpBIOjLdppuNKMjA)
 
-You can access your wallet using your key phrase, keystore file, or Ledger Nano S \(coming soon!\)
+鍵フレーズ、キーストアファイル、あるいはレジャーナノSを使用してウォレットにアクセスすることができます。（間もなく公開されます！）
 
-### **Step 2 — Navigate to “Earn” section** <a id="dc5a"></a>
+### **ステップ 2: 「獲得」セクションに移動します。**<a id="dc5a"></a>
 
-![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
+![ポストのための画像](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
-**To stake, you need to have your funds available on the** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/#platform-chain-p-chain)**! If your funds are on the** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
+**ステークを起こすには、**[**プラットフォームチェーン（P-Chain）**](../../../learn/platform-overview/#platform-chain-p-chain)上で資金を利用する必要があります**！あなたの資金が**[**取引所チェーン（X-Chain）**](../../../learn/platform-overview/#exchange-chain-x-chain)上に存在する場合、クロスチェーン振り込みを開始することにより、P-**Chainに移動する必要があります。あなたのトークンがロックされている場合、すでにP-Chain上に存在するので、X-ChainからP-Chainへのクロスチェーン移行を実行する必要はありません。**
 
-![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
+![ポストのための画像](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
-Enter the amount you wish to transfer to your P-Chain and complete the transfer by clicking the “Transfer” button below.
+P-Chainに送金したい金額を入力し、下記の「転送」ボタンをクリックして、転送を完了します。
 
-![Image for post](https://miro.medium.com/max/1488/0*aremeYNYtKP5nGPx)
+![ポストのための画像](https://miro.medium.com/max/1488/0*aremeYNYtKP5nGPx)
 
-Voila!
+Voila！
 
-![Image for post](https://miro.medium.com/max/1512/0*XP8f8CISy-LJ_Lc3)
+![ポストのための画像](https://miro.medium.com/max/1512/0*XP8f8CISy-LJ_Lc3)
 
-Now, we have our funds ready for staking on the P-Chain. Next, you can add a validator or a delegator to your wallet.
+現在、P-Chain上にステーキングするための資金が用意されています。次に、バリデータやデリゲータをウォレットに追加することができます。
 
-### **Step 3A: Become a validator!** <a id="60f0"></a>
+### **ステップ3A：バリデータになる！**<a id="60f0"></a>
 
-To add a validator, we need to have a node running. We can set one up using the released [binaries](https://github.com/ava-labs/avalanchego/releases/) or build them from the [AvalancheGo source code](https://github.com/ava-labs/avalanchego).
+バリデータを追加するには、ノード実行が必要です。リリースされた[バイナリ](https://github.com/ava-labs/avalanchego/releases/)を使用してセットアップするか、[AvalancheGo](https://github.com/ava-labs/avalanchego)ソースコードからビルドすることができます。
 
-Using the binaries is easy and convenient and sets you up to be a validator in 4 steps:
+バイナリの使用は簡単で便利です。そして、4ステップでバリデータとして設定するようにします。
 
-* Download the latest release tar.gz \(zip for osx and windows\) found [here](https://github.com/ava-labs/avalanchego/releases)
-* Unpack into a folder of our choosing:
+* [最新](https://github.com/ava-labs/avalanchego/releases)リリース tar.gz（osxとウィンドウのzip）をダウンロードする
+* 我々が選択したフォルダに展開します：
 
-\* Linux: tar -xvf avalanchego-linux-&lt;VERSION&gt;.tar.gz
+\* Linux：tar -xvf avalanchego-linux-<VERSION>.tar.gz
 
-\* OSX: unzip avalanchego-macos-&lt;VERSION&gt;.zip
+\* OSX：unzip avalanchego-macos-<VERSION>.zip
 
-\* Windows: unzip avalanchego-win-&lt;VERSION&gt;.zip
+\*Windows：unzip avalanchego-win-<VERSION>.zip
 
-* Navigate to the binaries directory cd avalanchego-&lt;VERSION&gt;
-* Run the binary with ./avalanchego on Linux and OSX and AvalancheGo on Windows
+* バイナリディレクトリ cd avalanchego-<VERSION>
+* Linux、OSX、Windows上でAvalancheGoで./avalanchegoでバイナリを実行します。
 
-We will let our node bootstrap and sync with the rest with the network, and we are ready to roll.
+ノードブートストラップや残りのネットワークと同期させ、ロールできるようになります。
 
-We will need our Node ID. Let’s find that using the [info API](../../avalanchego-apis/info-api.md)!
+ノードIDが必要になります。[情報API](../../avalanchego-apis/info-api.md)を使用していることが見つかろう！
 
-If you need any help setting up your node, join us on [Discord](https://chat.avax.network/).
+ノード設定にヘルプが必要な場合、[Discord](https://chat.avax.network/)上で参加してください。
 
-![Image for post](https://miro.medium.com/max/1600/0*6hZSaT651Dd7R4bL)
+![ポストのための画像](https://miro.medium.com/max/1600/0*6hZSaT651Dd7R4bL)
 
-Fill the fields and confirm!
+フィールドを入力し、確認しましょう！
 
-![Image for post](https://miro.medium.com/max/1600/0*cy61ZMDY5veMvCZj)
+![ポストのための画像](https://miro.medium.com/max/1600/0*cy61ZMDY5veMvCZj)
 
-Carefully check the details, and click “Confirm” again!
+注意深く詳細を確認し、再度「確認」を押してください！
 
-![Image for post](https://miro.medium.com/max/1600/0*f3GlN03He6TFkOV7)
+![ポストのための画像](https://miro.medium.com/max/1600/0*f3GlN03He6TFkOV7)
 
-Congratulations. You are now validating the Avalanche Primary Network!
+おめでとうございます。Avalancheプライマリネットワークをバリデートしています！
 
-### **Step 3B: Add a Delegator!** <a id="59bd"></a>
+### **ステップ3B：デレゲータを追加！**<a id="59bd"></a>
 
-![Image for post](https://miro.medium.com/max/1600/0*f-wXi2SiSm4eBmHt)
+![ポストのための画像](https://miro.medium.com/max/1600/0*f-wXi2SiSm4eBmHt)
 
-Select a validator you want to delegate your tokens with from the list of active network validators.
+アクティブなネットワークバリデータリストから、トークンを委任するバリデータを選択します。
 
-![Image for post](https://miro.medium.com/max/1600/0*uNnT2PtjCslRKFbF)
+![ポストのための画像](https://miro.medium.com/max/1600/0*uNnT2PtjCslRKFbF)
 
-Specify your staking period and stake amount. Pay attention to the end time of the selected validator. Your delegation period cannot be set to end past the end date that the validator has set.
+ステーキング期間とステーク金額を指定します。選択されたバリデータ終了時刻に注意してください。バリデータが設定された終了日を超えてデータが終了するように設定することはできません。
 
-![Image for post](https://miro.medium.com/max/1600/0*M_6_7L9jtYuPTp-A)
+![ポストのための画像](https://miro.medium.com/max/1600/0*M_6_7L9jtYuPTp-A)
 
-Confirm the details!
+詳細を確認しましょう！
 
-![Image for post](https://miro.medium.com/max/1600/0*Silj8-uZTm5g9xSi)
+![ポストのための画像](https://miro.medium.com/max/1600/0*Silj8-uZTm5g9xSi)
 
-Congratulations. You are now delegating the Avalanche Primary Network!
+おめでとうございます。Avalancheプライマリネットワークを委任しています！
 
