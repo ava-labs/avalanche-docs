@@ -1,6 +1,6 @@
-# Send an Asset on the X-Chain
+# X-Chain bir varlık gönderin
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+Bu örnek in bir varlık tek bir alıcıya gönderir. Bu sürecin ilk adımı, Avalanche Platformu seçim noktasına bağlı bir Avalanche örneğini oluşturmaktır.
 
 ```text
 import {
@@ -8,7 +8,7 @@ import {
     BinTools,
     Buffer,
     BN
-  } from "avalanche" 
+  } from "avalanche"
 
 let myNetworkID = 1; //default is 3, we want to override that for our local network
 let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // The X-Chain blockchainID on this network
@@ -16,15 +16,15 @@ let avax = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlo
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-We’re also assuming that the keystore contains a list of addresses used in this transaction.
+Ayrıca bu işlemde kullanılan adreslerin bir listesini de kapsıyoruz.
 
-## Getting the UTXO Set <a id="getting-the-utxo-set"></a>
+## UTXO Set<a id="getting-the-utxo-set"></a>
 
-The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
+X-Chain tüm mevcut dengeleri "Harcanmamış İşletme Çıktıları" \(UTXOs\) adlı bir veri tabanında depoluyor. UTXO Set işlemler, bu çıkışları geçirebilecek adresler ve çıkış saatleri gibi diğer değişkenlerin \(çıkış için kaç tane imza gereklidir\) eşiklerinin \(çıkış için ne kadar imza gereklidir\).
 
-For the case of this example, we’re going to create a simple transaction that spends an amount of available coins and sends it to a single address without any restrictions. The management of the UTXOs will mostly be abstracted away.
+Bu örnek için, mevcut miktarda para harcayan basit bir işlem yaratacağız ve herhangi bir kısıtlama olmadan tek bir adrese göndereceğiz. UTXOs yönetimi çoğunlukla will
 
-However, we do need to get the UTXO Set for the addresses we’re managing.
+Ancak yönettiğimiz adresler için UTXO Set ayarını almamız gerekiyor.
 
 ```text
 let myAddresses = xchain.keyChain().getAddresses(); //returns an array of addresses the KeyChain manages
@@ -32,16 +32,16 @@ let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array o
 let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
-## Spending the UTXOs <a id="spending-the-utxos"></a>
+## UTXOs harcanıyor<a id="spending-the-utxos"></a>
 
-The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
+`buildBaseTx()`Yardım fonksiyonu tek bir varlık tipi gönderir. Alıcı adrese göndermek istediğimiz bir özel bir varlık var. Bu örnek için hayali bir varlık. 400 bozukluk olduğuna inanıyoruz. Bu işlem için gerekli paraların bizde olduğunu doğrulayalım.
 
 ```text
 let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6"; //avaSerialized string
 let mybalance = utxos.getBalance(myAddresses, assetid); //returns 400 as a BN
 ```
 
-We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
+400 sikkemiz var! Bu paralardan 100 tanesini arkadaşımızın adresine göndereceğiz.
 
 ```text
 let sendAmount = new BN(100); //amounts are in BN format
@@ -60,29 +60,29 @@ let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
 ```
 
-And the transaction is sent!
+Ve işlem gönderildi!
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## İşlemin durumunu öğrenin<a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
+Şimdi bu işlemi ağa gönderdiğimize göre işlemlerin geçip geçmediğini anlamak birkaç saniye sürüyor. X-Chain aracılığıyla TxID kullanarak işlem hakkında güncellenmiş bir durum alabiliriz.
 
 ```text
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+Bu durum "kabul edilme", "Süreç", "Bilinmeyen Bilinmeyen ve "Accepted", gibi bir şey olabilir:
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Kabul edildi" bu işlem ağ tarafından geçerli kabul edildiğini ve çalıştırıldığını gösteriyor
+* "İşlem" işlemlerin oylandığını gösteriyor.
+* "Bilinmiyor" düğümün işlemle ilgili hiçbir şey bilmediğini gösteriyor ve düğümün onda olmadığını gösteriyor.
+* "Reddedilmek" düğümün işlemden haberi olduğunu gösteriyor ama kabul edilen bir işlem ile çelişiyor.
 
-## Check the results <a id="check-the-results"></a>
+## Sonuçları kontrol et<a id="check-the-results"></a>
 
-The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+Bu işlem sonunda "Kabul Edildi" olarak geri geldi, şimdi the güncelleyelim ve işlem dengesini beklediğimiz gibi doğrulayalım.
 
-_Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
+_Not: Gerçek bir ağ içinde denge bu senaryoya uymaz. İşlem ücretleri veya ek harcamalar dengeyi değiştirebilir. Bu örnekten dolayı bu davaların hiçbirini de hesaba katmıyoruz._
 
 ```text
 let updatedUTXOs = await xchain.getUTXOs();
