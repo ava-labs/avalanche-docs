@@ -1,96 +1,96 @@
-# Deploy a Smart Contract on Avalanche Using Remix and MetaMask
+# RemixとMetaMaskを使用してAvalanche上にスマートコントラクトを展開します
 
-## Introduction
+## はじめに
 
-![Primary Network](../../../.gitbook/assets/image%20%2821%29.png)
+![プライマリネットワーク](../../../.gitbook/assets/image%20%2821%29.png)
 
-Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](../../avalanchego-apis/contract-chain-c-chain-api.md) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties that could considerably improve the performance of DApps and the user experience.
+Avalancheのプライマリネットワークは、P-Chain、X-Chain、C-Chainの3つのチェーンを持つサブネットです。C-Chainは、AvalancheのSnowmanコンセンサスプロトコルにより可能になるイーサリアムバーチャルマシンのインスタンスです。[C-Chain RPC](../../avalanchego-apis/contract-chain-c-chain-api.md)は、イーサリアム標準のRPC呼び出しを使用することにより、典型的なイーサリアムクライアントができることはできます。イーサリアムではなくC-Chainを使用する際のメリットは、Avalancheを使用する際にメリットです。DAppsとユーザーエクスペリエンスを大幅に向上させることができるこれらのプロパティ。
 
-Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
+本日、RemixとMetaMaskを使用してAvalanche上にスマートコントラクトを展開、テストします。
 
-## Step 1: Setting up MetaMask
+## ステップ 1: MetaMaskをセットアップ
 
-Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
+MetaMaskにログイン ->ネットワークドロップダウンをクリックする ->カスタムRPCを選択する
 
-![metamask network dropdown](../../../.gitbook/assets/image%20%2860%29.png)
+![metamaskネットワークドロップダウン](../../../.gitbook/assets/image%20%2860%29.png)
 
-#### **Avalanche Mainnet Settings:**
+#### **Avalancheメインネット設定：**
 
-* **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-* **ChainID**: `0xa86a`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+* **ネットワーク名**：AvalancheメインネットC-Chain
+* **新しいRPC URL**：[https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+* **ChainID**：`43114`
+* **シンボル**：`AVAX`
+* **エクスプローラ**：[https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
-#### **FUJI Testnet Settings:**
+#### **FUJIテストネット設定：**
 
-* **Network Name**: Avalanche FUJI C-Chain
-* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `0xa869`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **ネットワーク名**：Avalanche FUJI C-Chain
+* **新しいRPC URL**：[https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+* **ChainID**：`43113`
+* **シンボル**：`AVAX`
+* **エクスプローラ**：[https://cchain.explorer.avax-test.net](https://cchain.explorer.avax-test.network/)
 
-#### **Local Testnet \(AVASH\) Settings:**
+#### **ローカルテストネット（AVASH）設定：[（Avashチュートリアル）](../../tools/avash.md)**
 
-* **Network Name**: Avalanche Local
-* **New RPC URL**:[ ](http://localhost:9650/ext/bc/C/rpc)[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
-* **ChainID**: `0xa868`
-* **Symbol**: `AVAX`
-* **Explorer**: N/A
+* **ネットワーク名**:Avalancheローカル
+* **新しいRPC URL:[http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)**
+* **ChainID**：`43112`
+* **シンボル**：`AVAX`
+* **エクスプローラ**：なし
 
-## Step 2: Funding your C-Chain address
+## ステップ 2：C-Chainアドレスを資金調達する
 
-### **Using Avalanche Wallet**
+### **Avalancheウォレットを使用する**
 
-On the main net, you can use the [Avalanche Wallet](https://wallet.avax.network/) to transfer funds from the X-Chain to your C-Chain address. The process is simple, as explained in this [tutorial](../platform/transfer-avax-between-x-chain-and-c-chain.md). Wallet can be used on test and local networks, too.
+メインネット上で、[Avalancheウォレット](https://wallet.avax.network/)を使用して、X-ChainからC-Chainアドレスに資金を送金することができます。この[チュートリアル](../platform/transfer-avax-between-x-chain-and-c-chain.md)で説明したように、プロセスはシンプルウォレットは、テストやローカルネットワーク上でも使用できます。
 
-### **Using Test Network Faucet**
+### **テストネットワークフォーセットを使用する**
 
-For funding on the test network, you can also use the Test Network Faucet. Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+テストネットワーク上で資金を提供するには、テストネットワークコーセットを使用することができます。[https://faucet.avax-test.network/](https://faucet.avax-test.network/)に移動し、C-Chainアドレスを貼り付けます。Faucetは、AVAXをC-Chainに送信する必要があることを自動的に知ることができます。captchaチェックボックスをクリックし、「AVAXを要求する」ボタンを選択します。アドレスは、数秒でAVAXテストを受け取ります。
 
-### Funding on local testnet
+### ローカルテストネット上で資金を提供
 
-On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+ローカルネットワーク上で、[これ](../platform/create-a-local-test-network.md#getting-avax)に従うことで簡単にアドレスを資金調達ができます。
 
-## Step 3: Connect MetaMask and deploy a smart contract using Remix
+## ステップ3：MetaMaskを接続し、Remixを使用してスマートコントラクトを展開します。
 
-Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
+[オープンリミックス](https://remix.ethereum.org/) ->Solidityを選択
 
-![remix file explorer](../../../.gitbook/assets/remix-file-explorer.png)
+![remixファイルエクスプローラ](../../../.gitbook/assets/remix-file-explorer.png)
 
-Load or create the smart contracts that we want to compile and deploy using Remix file explorer.
+Remixファイルエクスプローラを使用して、コンパイル、デプロイをしたいスマートコントラクトをロードしたり作成したりします。
 
-For this example, we will deploy an ERC20 contract from [OpenZeppelin](https://openzeppelin.com/contracts).
+この例では、[OpenZeppelin](https://openzeppelin.com/contracts)からERC20コントラクトを展開します。
 
-![ERC20 Contract](../../../.gitbook/assets/erc20-contract.png)
+![ERC20コントラクト](../../../.gitbook/assets/erc20-contract.png)
 
-Navigate to Deploy Tab -&gt; Open the “ENVIRONMENT” drop-down and select Injected Web3 \(make sure MetaMask is loaded\)
+Deploy Tabに移動します。 -> "環境"ドロップダウンを開き、インジェクションWeb3を選択します（MetaMaskがロードされていることを確認してください）。
 
-![Deploy and run transactions](../../../.gitbook/assets/deploy-and-run-transactions.png)
+![トランザクションを展開し、実行する](../../../.gitbook/assets/deploy-and-run-transactions.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab
+web3-> インジェクションが完了したら、コンパイラに戻り、選択したコントラクトをコンパイルします。 -> デプロイタブに移動します。
 
-![Solidity compiler](../../../.gitbook/assets/solidity-compiler.png)
+![Solidityコンパイラ](../../../.gitbook/assets/solidity-compiler.png)
 
-Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC20. Click “Deploy.”
+スマートコントラクトがコンパイルされ、MetaMaskがインジェクションされ、ERC20を展開する準備が完了しました。「デプロイ.」をクリックします。
 
-![Deploy erc20](../../../.gitbook/assets/deploy-erc20.png)
+![erc20](../../../.gitbook/assets/deploy-erc20.png)
 
-Confirm the transaction on the MetaMask pop up.
+MetaMaskポップアップ上のトランザクションを確認します。
 
-![Confirm ERC20](../../../.gitbook/assets/confirm-erc20.png)
+![ERC20を確認する](../../../.gitbook/assets/confirm-erc20.png)
 
-Our contract is successfully deployed!
+我々のコントラクトが正常に展開されました！
 
-![Published metadata](../../../.gitbook/assets/published-metadata.png)
+![公開メタデータ](../../../.gitbook/assets/published-metadata.png)
 
-Now, we can expand it by selecting it from the “Deployed Contracts” tab and test it out.
+現在、「デプロイされたコントラクト」タブから選択し、テストアウトすることで展開できます。
 
-![Interact with contract](../../../.gitbook/assets/interact-with-contract.png)
+![コントラクトとやり取り](../../../.gitbook/assets/interact-with-contract.png)
 
-The contract ABI and Bytecode are available on the compiler tab.
+コントラクトABIとBytecodeは、コンパイラタブで利用可能です。
 
-![ABI bytecode](../../../.gitbook/assets/abi-bytecode.png)
+![ABIバイトコード](../../../.gitbook/assets/abi-bytecode.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
+このチュートリアルの後で困難が発生した場合、あるいはAvalancheと話し合いたい場合、[Discord](https://chat.avalabs.org/)で我々のコミュニティに参加することができます！
 
