@@ -1,26 +1,26 @@
-# Create an Asset on the X-Chain
+# on bir Varlık oluştur
 
-This example creates an asset on the X-Chain and publishes it to the Avalanche platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche platform endpoint of choice. In this example we're using the local network `12345` via [Avash](https://github.com/ava-labs/avalanche-docs/tree/bba457018ce99b2a1bdf51e488b136049254e330/build/tools/avash/README.md). The code examples are written in typescript. The script is in full, in both typescript and javascript, after the individual steps.
+Bu örnek X-Chain üzerinde bir varlık yaratır ve Avalanche platformuna yayınlar. Bu sürecin ilk adımı, Avalanche platformunun seçim noktasına bağlı bir AvalancheJS örneğini oluşturmaktır. Bu örnekte [Avash](https://github.com/ava-labs/avalanche-docs/tree/bba457018ce99b2a1bdf51e488b136049254e330/build/tools/avash/README.md) `12345`üzerinden yerel ağı kullanıyoruz. Kod örnekleri yazı yazılarak yazılmıştır. Senaryo her iki tip yazma ve yazma halinde bireysel adımlardan sonra tam olarak doludur.
 
 ```typescript
-import { 
+import {
   Avalanche,
   BinTools,
   BN,
   Buffer
  } from "avalanche"
-import { 
-  AVMAPI, 
-  InitialStates, 
+import {
+  AVMAPI,
+  InitialStates,
   KeyChain,
-  SECPMintOutput, 
-  SECPTransferOutput, 
+  SECPMintOutput,
+  SECPTransferOutput,
   Tx,
   UnsignedTx,
   UTXOSet
 } from "avalanche/dist/apis/avm"
-import { 
-  iAVMUTXOResponse 
+import {
+  iAVMUTXOResponse
 } from "avalanche/dist/apis/avm/interfaces"
 
 const ip: string = "localhost"
@@ -31,9 +31,9 @@ const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
 const xchain: AVMAPI = avalanche.XChain() // Returns a reference to the X-Chain used by AvalancheJS
 ```
 
-## Import the local network's pre-funded address
+## Yerel ağın önceden finanse edilmiş adresini içeriye aktar
 
-Next we get an instance of bintools, for dealing with binary data, an the X-Chain local keychain. The local network `12345` has a pre-funded address which you can access with the private key `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. Lastly get the pre-funded address as a `Buffer` and as a `string`.
+Bir sonraki örnek, ikili verilerle uğraşmak için, bir X-Chain yerel anahtarlığı var. Yerel ağ özel anahtarla erişebileceğiniz önceden finanse edilmiş bir adres `12345`var.`PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN` Son olarak önceden finanse edilen adresi A `Buffer`ve a olarak al.`string`
 
 ```typescript
 const bintools: BinTools = BinTools.getInstance()
@@ -44,9 +44,9 @@ const xAddresses: Buffer[] = xchain.keyChain().getAddresses()
 const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 ```
 
-## Prepare for the Mint Output
+## Mint Çıktısına hazırlanın
 
-Now we need to create an empty array for the `SECPMintOutput` which we're going to create. We also need a `threshold` and `locktime` for the outputs which we're going to create. Each X-Chain transaction can can contain a `memo` field of up to 256 bytes. of arbitrary data.
+`SECPMintOutput`Şimdi yaratacağımız bir diziyi oluşturmamız gerekiyor. Ayrıca yaratacağımız çıkışlar `locktime`için bir `threshold`de ihtiyacımız var. Her X-Chain işlemleri 256 baytlık bir `memo`alana sahip olabilir.
 
 ```typescript
 const outputs: SECPMintOutput[] = []
@@ -55,9 +55,9 @@ const locktime: BN = new BN(0)
 const memo: Buffer = bintools.stringToBuffer("AVM utility method buildCreateAssetTx to create an ANT")
 ```
 
-## Describe the new asset
+## Yeni varlığı tanımla
 
-The first step in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
+AvalancheJS kullanarak yeni bir varlık yaratmanın ilk adımı, varlığın niteliklerini belirlemektir. Varlığa bir isim vereceğiz, bir kalça sembolü ve bir de denomination. vereceğiz.
 
 ```typescript
 const name: string = "TestToken"
@@ -67,9 +67,9 @@ const symbol: string = "TEST"
 const denomination: number = 3
 ```
 
-## Set up async/await
+## async/await ayarla
 
-The remaining code will be encapsulated by this `main` function so that we can use the `async` / `await` pattern.
+Kalan kod bu `main`fonksiyon tarafından will böylece / desenini `async``await`kullanabiliriz.
 
 ```typescript
 const main = async (): Promise<any> => {
@@ -77,18 +77,18 @@ const main = async (): Promise<any> => {
 main()
 ```
 
-## Fetch the UTXO
+## UTXO getir
 
-Pass the `xAddressStrings` to `xchain.getUTXOs` to fetch the UTXO.
+`xAddressStrings`UTXO. getirmeleri `xchain.getUTXOs`için pas verin.
 
 ```typescript
   const avmUTXOResponse: iAVMUTXOResponse = await xchain.getUTXOs(xAddressStrings)
   const utxoSet: UTXOSet = avmUTXOResponse.utxos
 ```
 
-## Creating the initial state
+## İlk durum oluşturuluyor
 
-We want to mint an asset with 507 units of the asset held by the managed key. This sets up the state that will result from the Create Asset transaction.
+Yönetilen anahtar tarafından tutulan 507 ünite varlığı olan bir varlığı nane olarak değerlendirmek istiyoruz. Bu durum yaratılma varlıklarının işleminden kaynaklanacak bir durum oluşturmaktadır.
 
 ```typescript
 // Create outputs for the asset's initial state
@@ -100,18 +100,18 @@ const initialStates: InitialStates = new InitialStates()
 initialStates.addOutput(secpTransferOutput)
 ```
 
-## Create the Mint Output
+## Mint Çıktısını Oluştur
 
-We also want to create a `SECPMintOutput` so that we can mint more of this asset later.
+Bu varlığı daha sonra daha fazla nane yapabilmek `SECPMintOutput`için bir tane yaratacağız.
 
 ```typescript
 const secpMintOutput: SECPMintOutput = new SECPMintOutput(xAddresses, locktime, threshold)
 outputs.push(secpMintOutput
 ```
 
-## Creating the signed transaction
+## İmzalı işlem oluşturuluyor
 
-Now that we know what we want an asset to look like, we create a transaction to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
+Artık bir varlığın neye benzemesini istediğimizi bildiğimize göre ağa göndermek için bir işlem yaratacağız. `buildCreateAssetTx()`AVM yardım fonksiyonu var. Bu da bunu yapıyor.
 
 ```typescript
 const unsignedTx: UnsignedTx = await xchain.buildCreateAssetTx(
@@ -127,11 +127,11 @@ const unsignedTx: UnsignedTx = await xchain.buildCreateAssetTx(
 )
 ```
 
-## Sign and issue the transaction
+## İşlemi imzala ve yayınla
 
-Now let's sign the transaction and issue it to the Avalanche network. If successful it will return a [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) serialized string for the TxID.
+Şimdi alışverişi imzalayalım ve Avalanche ağına bildirelim. Başarılı olursa TxID için serileştirilmiş bir [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) dizisini geri verecek.
 
-Now that we have a signed transaction ready to send to the network, let’s issue it!
+Şimdi şebekeye göndermeye hazır bir anlaşma that göre, bunu yayınlayalım!
 
 ```typescript
 const tx: Tx = unsignedTx.sign(xKeychain)
@@ -139,23 +139,23 @@ const id: string = await xchain.issueTx(tx)
 console.log(id)
 ```
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## İşlemin durumunu öğrenin<a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
+Şimdi bu işlemi ağa gönderdiğimize göre işlemlerin geçip geçmediğini anlamak birkaç saniye sürüyor. TxID kullanarak işlem hakkında güncelleştirilmiş bir durum alabiliriz. AVM API aracılığıyla TxID kullanarak.
 
 ```typescript
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
 const status: string = await xchain.getTxStatus(id)
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+Bu durum "kabul edilme", "Süreç", "Bilinmeyen Bilinmeyen ve "Accepted", gibi bir şey olabilir:
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "Kabul edildi" bu işlem ağ tarafından geçerli kabul edildiğini ve çalıştırıldığını gösteriyor
+* "İşlem" işlemlerin oylandığını gösteriyor.
+* "Bilinmiyor" düğümün işlemle ilgili hiçbir şey bilmediğini gösteriyor ve düğümün onda olmadığını gösteriyor.
+* "Reddedilmek" düğümün işlemden haberi olduğunu gösteriyor ama kabul edilen bir işlem ile çelişiyor.
 
-## Identifying the newly created asset <a id="identifying-the-newly-created-asset"></a>
+## Yeni yaratılmış varlığı tanımlamak@ info: whatsthis<a id="identifying-the-newly-created-asset"></a>
 
-The X-Chain uses the TxID of the transaction which created the asset as the unique identifier for the asset. This unique identifier is henceforth known as the “AssetID” of the asset. When assets are traded around the X-Chain, they always reference the AssetID that they represent.
+X-Chain, varlığı yaratan işlemin TxID 'sini kullanır. Bu tanımlayıcı şu andan itibaren varlığın "AssetID" olarak bilinir. X-Chain etrafında mal varlıkları takas edildiğinde, her zaman temsil ettikleri AssetID ile anlaşırlar.
 
