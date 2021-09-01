@@ -1,25 +1,25 @@
-# Create a Variable-Cap Asset
+# バリアブルキャップアセットを作成する
 
-## Introduction
+## はじめに
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+このチュートリアルでは、可変キャップで可変性のアセットを作成する方法を説明します。アセットが初期化された時点でアセットの単位は存在しませんが、より多くのアセットの単位がミントされる可能性があります。アセット作成上に、より多くのユニットをミントする可能性のあるアドレスセットを指定します。
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+_単一のアドレスではなく、より多くのアセットをミントできる_アドレスセットを指定する理由をお疑問に思うかもしれません。ここに理由は次のような理由です：
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **セキュリティ：1つのアドレスだけがより多くのアセットを失い、そのアドレスに秘密鍵が紛失した**場合、これ以上のユニットのミントは発生できません。同様に、より多くのアセットを発行できるアドレスだけが、そのアドレスが希望する限り、一方的にマイトするのを止めることはありません。
+* **柔軟性：「Alice**は、このアセットのより多くのユニット、Dinesh、Ellin、Jamieを2つで、同時により多くのミントできるようにすることができます。」などのロジックをエンコードできるのは素晴らしいことです。
 
-Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
+企業の株式を代表する資産を発行したいとしましょう。最初に株式は存在しませんが、より多くの株式が後で作成される可能性があります。こうしたアセットを作成しましょう。
 
-## Requirements
+## 要件
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+完了した[Avalancheノードを実行](../nodes-and-staking/run-avalanche-node.md)し、Avalancheアーキテクチャに精通しています[。](../../../learn/platform-overview/)
 
-## Create the Asset
+## アセットを作成する
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+[`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset)我々のアセットはX-Chain上に存在するため、我々が呼び出すアセットを作成するため、[X-ChainのAPI](../../avalanchego-apis/exchange-chain-x-chain-api.md)の方法です。
 
-The signature for this method is:
+このメソッドの署名は、次のとおりです。
 
 ```cpp
 avm.createVariableCapAsset({
@@ -41,22 +41,22 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### パラメータ
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name`これは、我々のアセットのための人間が読みやすい名前です。必ずしも一意ではない。0から128文字の間で。
+* `symbol`iss は、このアセットのためのショートランドシンボル。0から4文字の間で。必ずしも一意ではない。省略可能。
+* `denomination`このアセットの残高がユーザーインターフェースでどのように表示されるかを決定します。デノミネーションが0の場合、このアセットの100ユニットが100として表示されます。デノミネーションが2の場合、このアセットの100ユニットは.100などと表示されます。
+* `minterSets``minters`は、各要素が、中に含まれたアドレスのリスト`threshold`が、ミントトランザクションに署名することにより、より多くのアセットをまとめて指定するリストを一覧で示します。
+* X-Chain上で取引を行うには、AVAXで支払われたトランザクション手数料が必要です。そして`username`、手数料を支払ったユーザーを`password`表します。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
 
-### Response
+### レスポンス
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID`は、新しいアセットのID。
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+後でこの例の例では、より多くの株式を獲得します。そのため、2番目のミンターで、少なくとも2つのアドレスを、あなたのユーザーコントロールされたアドレスと置き換えるようにしてください。
 
 ```cpp
 curl -X POST --data '{
@@ -90,7 +90,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+レスポンスは次のようになります：
 
 ```cpp
 {
@@ -103,18 +103,18 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## アセットをミントする
 
-Right now 0 shares exist. Let’s mint 10M shares.
+現在0株が存在します。100万株をミントしましょう。
 
-### Create the Unsigned Transaction
+### 未署名トランザクションを作成する
 
-We’ll use [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+我々は株式をミントするために使用[`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint)します。
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `amount`は、作成される株式の数です。
+* `assetID`これが、より多くのアセットのIDです。
+* `to`isは、新たに発行された株式を受領するアドレスです。ユーザーコントロールされたアドレス`to`に置き換えることで、後で新しくミントされた株式を送付することができます。
+* `username`より多くのこのアセットをミントする権限を与える鍵を保持するユーザーでなければなりません。つまり、上記で指定したミンターセットのいずれかで、少なくとも_閾値_キーをコントロールします。
 
 ```cpp
 curl -X POST --data '{
@@ -131,7 +131,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+レスポンスには、トランザクションのIDが含まれています：
 
 ```cpp
 {
@@ -144,7 +144,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+以下の方法で、我々がネットワークに送信したトランザクションステータスが確認できます[`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus)。
 
 ```cpp
 curl -X POST --data '{
@@ -157,7 +157,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+これにより以下のようなことが可能になります：
 
 ```cpp
 {
@@ -169,11 +169,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
+## アセットを取引する
 
-### Check a Balance
+### バランスを確認する
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
+100万株はすべて、我々が指定した`to`アドレスによってコントロールされます。`mint`これを確認するため、以下のようにしてください[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance)：
 
 ```cpp
 curl -X POST --data '{
@@ -187,7 +187,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+この対応により、我々のアセット作成が成功したことを確認し、予期されるアドレスは、10,000,000株の株式すべてが保持されていることを確認します。
 
 ```cpp
 {
@@ -199,9 +199,9 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### アセットを送信する
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+100株を別のアドレスに送りましょう[`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send)。そうするには、次のようにします：
 
 ```cpp
 curl -X POST --data '{
@@ -218,7 +218,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+アドレスの残高を確認しましょう`to`：
 
 ```cpp
 curl -X POST --data '{
@@ -232,7 +232,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+応答は、次のようになります：
 
 ```cpp
 {
@@ -244,12 +244,12 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## ラッピングアップ
 
-In this tutorial, we:
+このチュートリアルでは、以下のようにします：
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* 株式を表す可変資金アセットを作成`createVariableCapAsset`するために使用されます。
+* より多くのアセットをミントする`mint`のに使用されます。
+* アドレス残高を確認するために使用`getBalance`されます。
+* 株式の移転`send`に使用します。
 
