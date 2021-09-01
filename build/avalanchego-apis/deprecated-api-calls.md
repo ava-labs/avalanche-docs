@@ -1,16 +1,15 @@
 ---
 description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+  このページでは、廃止推奨となり、将来のリリースで削除あるいは変更される、APIメソッド、引数、レスポンスをリストします。
 ---
 
-# Deprecated API Calls
+# 廃止されたAPIコール
 
 ## P-Chain API
 
 ### `getCurrentValidators`
 
-In v1.0.0, the signature was:
+v1.0.0では、署名は次のようになっています。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -46,7 +45,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
+後期バージョンでは、署名は以下のようになります。各バリデータには、そのデリゲーターのリストが含まれていますことに注意してください。現在の動作については、次のノートをご覧ください。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +93,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+v1.0.6以降、`delegators`トップレベルフィールドは削除されます。署名は、現在次のようになります：
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -132,13 +131,13 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 ### `getTxStatus`
 
-Before v1.0.4, the signature was:
+v1.0.4以前は、署名は以下のようでした。
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+v1.0.4 引数を追加`includeReason`。提供されているか否か`false`が、このメソッドのレスポンスは以前と同じものでした。このメソッドのレスポンスがこの新しいフォーマットを持たせた場合`true`：
 
 ```cpp
 {
@@ -147,7 +146,7 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+`reason``status`トランザクションが削除された理由`reason`です。`"Dropped"`
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+v1.0.6以降、`includeReason`引数は無視され、このメソッドのレスポンスは常に新しいフォーマットです。
 
