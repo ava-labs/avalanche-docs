@@ -1,29 +1,29 @@
-# Coreth Atomic Transaction Format
+# Coreth Atomicトランザクションフォーマット
 
-This page is meant to be the single source of truth for how we serialize atomic transactions in `Coreth`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) for cryptographic user identification.
+このページは、アトミックトランザクションをシリアル化する単一の真実源であることを意味します`Coreth`。このドキュメントは、パッキングに[プリミティブシリアライズ](serialization-primitives.md)形式を使用し、暗号ユーザ識別には[secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine)を使用します。
 
-## Codec ID
+## コーデックID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+一部のデータは、コーデックID（unt16）でプリペンドされています。つまり、データがどのようにデスリアライズされるかを示します。現在のところ、有効なコーデックIDは0 \(\)です`0x00 0x00`。
 
-## Inputs
+## 入力
 
-Inputs to Coreth Atomic Transactions are either an `EVMInput` from this chain or a `TransferableInput` \(which contains a `SECP256K1TransferInput`\) from another chain. The `EVMInput` will be used in `ExportTx` to spend funds from this chain, while the `TransferableInput` will be used to import atomic UTXOs from another chain.
+Coreth Atomic Transactaxは、このチェーン`EVMInput`からあるいは別のチェーン`SECP256K1TransferInput`から（`TransferableInput`1つを含む）いずれかです。`TransferableInput`このチェーンから資金を稼ぐ`ExportTx`ために使用`EVMInput`されること、一方で、アトミックUTXOを別のチェーンからインポートする際に使用されます。
 
-### EVM Input
+### EVM入力
 
-Input type that specifies an EVM account to deduct the funds from as part of an `ExportTx`.
+`ExportTx`EVMアカウントを指定し、1つの一部として資金を差し引く型。
 
-#### What EVM Input Contains
+#### EVM入力が含まれているもの
 
-An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
+`amount``assetID``nonce`EVM入力には、1`address`、そして。
 
-* **`Address`** is the EVM address from which to transfer funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
-* **`Nonce`** is the nonce of the EVM account exporting funds.
+* **`Address`**これは、資金を移動するEVMアドレスです。
+* **`Amount`**（AVAXのためにnAVAXで指定され、他のすべてのアセットで最小のデノミネーション）の移転するアセットの額です。
+* **`AssetID`**は、移転するアセットのIDです。
+* **`Nonce`**EVMアカウントエクスポート資金のノンスの
 
-#### Gantt EVM Input Specification
+#### Gantt EVM入力仕様
 
 ```text
 +----------+----------+-------------------------+
@@ -39,7 +39,7 @@ An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
                       +-------------------------+
 ```
 
-#### Proto EVM Input Specification
+#### Proto EVM入力仕様
 
 ```text
 message  {
@@ -50,9 +50,9 @@ message  {
 }
 ```
 
-#### EVM Input Example
+#### EVM入力例
 
-Let's make an EVM Input:
+EVM入力を作りましょう：
 
 * `Address: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc`
 * `Amount: 2000000`
@@ -84,20 +84,20 @@ Let's make an EVM Input:
 ]
 ```
 
-### Transferable Input
+### トランスファブル入力
 
-Transferable Input wraps a `SECP256K1TransferInput`. Transferable inputs describe a specific UTXO with a provided transfer input.
+トランスファブルインプットは、aをラップします`SECP256K1TransferInput`。トランスファブル入力は、提供されたトランスファー入力で特定のUTXOを説明します。
 
-#### What Transferable Input Contains
+#### トランスファブルインプットが含まれているもの
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+`UTXOIndex``AssetID`移転可能な入力には、a`TxID`、。`Input`
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is a `SECP256K1TransferInput`, as defined below.
+* **`TxID`**isは、この入力が出力を消費するトランザクションを定義する
+* **`UTXOIndex`**isは、指定されたトランザクションでこの入力が消費されているutxoを定義するint。
+* **`AssetID`**これは、この入力参照のアセットを定義する32バイト配列です。
+* **`Input`**は、以下に定義したように、`SECP256K1TransferInput`そのままです。
 
-#### Gantt Transferable Input Specification
+#### Ganttトランスファブル入力仕様
 
 ```text
 +------------+----------+------------------------+
@@ -113,7 +113,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-#### Proto Transferable Input Specification
+#### Proto Transferable Input仕様
 
 ```text
 message TransferableInput {
@@ -124,9 +124,9 @@ message TransferableInput {
 }
 ```
 
-#### Transferable Input Example
+#### トランスファー可能な入力例
 
-Let's make a transferable input:
+移転可能な入力を作りましょう：
 
 * `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
 * `UTXOIndex: 1`
@@ -161,19 +161,19 @@ Let's make a transferable input:
 ]
 ```
 
-### SECP256K1 Transfer Input
+### SECP256K1トランスファー入力
 
-A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
+[secp256k](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine)1トランスファ入力により、未使用のsecp256k1トランスファ出力が可能になります。
 
-#### What SECP256K1 Transfer Input Contains
+#### SECP256K1トランスファーインプットが含まれているもの
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+secp256k1トランスファ入力には、an`Amount`とが含まれています。`AddressIndices`
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`**iss は、この入力タイプのIDです。それは`0x00000005`。
+* **`Amount`**は、UTXOからこの入力が消費する数を指定する長い陽性でなければなりません。UTXOで指定された金額に等しいこと。
+* **`AddressIndices`**UTXOを使うために使用されている秘密鍵を定義するユニークなインツのリストです。UTXOには、UTXOを費やすことができるアドレスの配列があります。各イントは、このトランザクションに署名するこのアドレスアレイ内のインデックスを表します。配列は、低から高くソートする必要があります。
 
-#### Gantt SECP256K1 Transfer Input Specification
+#### Gantt SECP256K1トランスファー入力仕様
 
 ```text
 +-------------------------+-------------------------------------+
@@ -187,7 +187,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Input Specification
+#### Proto SECP256K1トランスファー入力仕様
 
 ```text
 message SECP256K1TransferInput {
@@ -197,13 +197,13 @@ message SECP256K1TransferInput {
 }
 ```
 
-#### SECP256K1 Transfer Input Example
+#### SECP256K1トランスファー入力例
 
-Let's make a payment input with:
+以下の通りで支払いを入力しよう：
 
 * **`TypeId`**: 5
-* **`Amount`**: 500000000000
-* **`AddressIndices`**: \[0\]
+* **`Amount`**500
+* **`AddressIndices`**: [0]
 
 ```text
 [
@@ -224,25 +224,25 @@ Let's make a payment input with:
 ]
 ```
 
-## Outputs
+## アウトプット
 
-Outputs to Coreth Atomic Transactions are either an `EVMOutput` to be added to the balance of an address on this chain or a `TransferableOutput` \(whcih contains a `SECP256K1TransferOutput`\) to be moved to another chain.
+`EVMOutput`Coreth Atomic トランザクションは、このチェーン上のアドレスのバランスに追加するか、（（一時期`TransferableOutput`）別のチェーンに移動`SECP256K1TransferOutput`するかのいずれかです。
 
-The EVM Output will be used in `ImportTx` to add funds to this chain, while the `TransferableOutput` will be used to export atomic UTXOs to another chain.
+`ImportTx``TransferableOutput`EVM出力は、このチェーンに資金を追加する際に使用されますが、アトミックUTXOを別のチェーンにエクスポートする際に使用されます。
 
-### EVM Output
+### EVM
 
-Output type specifying a state change to be applied to an EVM account as part of an `ImportTx`.
+1つの一部としてEVMアカウントに適用されるステート変更を指定する出力タイプ`ImportTx`。
 
-#### What EVM Output Contains
+#### EVM出力が含まれているもの
 
-An EVM Output contains an `address`, `amount`, and `assetID`.
+`amount`EVM出力には、1`address`、そして`assetID`。
 
-* **`Address`** is the EVM address that will receive the funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
+* **`Address`**iss は、資金を受け取るEVMアドレスです。
+* **`Amount`**（AVAXのためにnAVAXで指定され、他のすべてのアセットで最小のデノミネーション）の移転するアセットの額です。
+* **`AssetID`**は、移転するアセットのIDです。
 
-#### Gantt EVM Output Specification
+#### Gantt EVM出力仕様
 
 ```text
 +----------+----------+-------------------------+
@@ -256,7 +256,7 @@ An EVM Output contains an `address`, `amount`, and `assetID`.
                       +-------------------------+
 ```
 
-#### Proto EVM Output Specification
+#### Proto EVM出力仕様
 
 ```text
 message  {
@@ -266,9 +266,9 @@ message  {
 }
 ```
 
-#### EVM Output Example
+#### EVM出力例
 
-Let's make an EVM Output:
+EVM出力を作りましょう：
 
 * `Address: 0x0eb5ccb85c29009b6060decb353a38ea3b52cd20`
 * `Amount: 500000000000`
@@ -296,18 +296,18 @@ Let's make an EVM Output:
 ]
 ```
 
-### Transferable Output
+### トランスファブル出力
 
-Transferable outputs wrap a `SECP256K1TransferOutput` with an asset ID.
+トランスファー可能な出力は、アセットID`SECP256K1TransferOutput`でラップします。
 
-#### What Transferable Output Contains
+#### トランスファブル出力が含まれているもの
 
-A transferable output contains an `AssetID` and an `Output` which is a `SECP256K1TransferOutput`.
+`Output`移転可能な出力には、an`AssetID`とそのものが含まれています。`SECP256K1TransferOutput`
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is a `SECP256K1TransferOutput` as defined below.
+* **`AssetID`**は、この出力参照のアセットを定義する32バイト配列です。
+* **`Output`**は、以下に定義したように`SECP256K1TransferOutput`です。
 
-#### Gantt Transferable Output Specification
+#### Ganttトランスファブル出力仕様
 
 ```text
 +----------+----------+-------------------------+
@@ -328,9 +328,9 @@ message TransferableOutput {
 }
 ```
 
-#### Transferable Output Example
+#### トランスファブル出力例
 
-Let's make a transferable output:
+トランスファブルアウトプットを作りましょう：
 
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -361,21 +361,21 @@ Let's make a transferable output:
 ]
 ```
 
-### SECP256K1 Transfer Output
+### SECP256K1トランスファー出力
 
-A [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+[secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine)転送出力により、指定されたunix時間後に数量のアセットをコレクションに送信することができます。
 
-#### What SECP256K1 Transfer Output Contains
+#### SECP256K1トランスファー出力が含まれているもの
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+`Threshold`secp256k1トランスファ出力には、a `TypeID`, `Amount`, `Locktime`,、とが含まれています`Addresses`。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**iss は、この出力タイプのIDです。それは`0x00000007`。
+* **`Amount`**は、この出力が所有するアセットの数を指定する長い陽性でなければなりません。
+* **`Locktime`**は、この出力が後に使用できるunixタイムスタンプが含まれている長いです。unixタイムスタンプは、第二に固有です。
+* **`Threshold`**iss is is an implementation is an implementation is an implementation.その長さに相当するものでなければなりません**`Addresses`**。空**`Addresses`**の場合、0でなければなりません。
+* **`Addresses`**isは、この出力を費やすために使用できる秘密鍵に相当するユニークアドレスのリストです。アドレスは、辞書でソートする必要があります。
 
-#### Gantt SECP256K1 Transfer Output Specification
+#### Gantt SECP256K1トランスファー出力仕様
 
 ```text
 +-----------+------------+--------------------------------+
@@ -393,7 +393,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Output Specification
+#### Proto SECP256K1トランスファー出力仕様
 
 ```text
 message SECP256K1TransferOutput {
@@ -405,16 +405,16 @@ message SECP256K1TransferOutput {
 }
 ```
 
-#### SECP256K1 Transfer Output Example
+#### SECP256K1トランスファー出力例
 
-Let's make a secp256k1 transfer output with:
+secp256k1トランスファー出力を次のようにします。
 
 * **`TypeID`**: 7
-* **`Amount`**: 1000000
+* **`Amount`**: 100
 * **`Locktime`**: 0
 * **`Threshold`**: 1
 * **`Addresses`**:
-  * 0x66f90db6137a78f76b3693f7f2bc507956dae563
+   * 0x66f90db6137a78f76b3693f7f2bc507956dae563
 
 ```text
 [
@@ -445,26 +445,26 @@ Let's make a secp256k1 transfer output with:
 ]
 ```
 
-## Atomic Transactions
+## アトミックトランザクション
 
-Atomic Transactions are used to move funds between chains. There are two types `ImportTx` and `ExportTx`.
+アトミックトランザクションは、チェーン間で資金を移動するために使用されます。2種類`ImportTx`があります。`ExportTx`
 
 ### ExportTx
 
-ExportTx is a transaction to export funds from Coreth to a different chain.
+ExportTxは、Corethから異なるチェーンに資金を輸出するための取引です。
 
-#### What ExportTx Contains
+#### ExportTxが含まれている
 
-An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, and `exportedOutputs`.
+`networkID``blockchainID``destinationChain``inputs`ExportTxには、`typeID`1、3、3が含まれています`exportedOutputs`。
 
-* **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`destinationChain`** is a 32-byte array that defines which blockchain this transaction exports funds to.
-* **`inputs`** is an array of EVM Inputs to fund the ExportTx.
-* **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
+* **`typeID`**ExportTxの型を意味する。exportTxのためのタイプIDは1です。
+* **`networkID`**isは、このトランザクションが発行されるAvalancheネットワークを定義するイントです。メインネットやフジなどを参照し、EVMのネットワークIDと異なります。
+* **`blockchainID`**このトランザクションが発行されたブロックチェーンを定義する32バイトのアレイです。
+* **`destinationChain`**このトランザクションが資金を輸出するブロックチェーンを定義する32バイトのアレイです。
+* **`inputs`**ExportTxに資金を提供するEVM入力の配列です。
+* **`exportedOutputs`**TransferableOutputsの配列です。`destinationChain`
 
-#### Gantt ExportTx Specification
+#### Gantt ExportTx仕様
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -484,18 +484,18 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ExportTx Example
+#### ExportTx例
 
-Let's make an EVM Output:
+EVM出力を作りましょう：
 
-* **`TypeID`**: `1`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`TypeID`**:`1`
+* **`NetworkID`**:`12345`
+* **`BlockchainID`**:`0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+* **`DestinationChain`**:`0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Inputs`**:
-  * `"Example EVMInput as defined above"`
+   * `"Example EVMInput as defined above"`
 * **`Exportedoutputs`**:
-  * `"Example TransferableOutput as defined above"`
+   * `"Example TransferableOutput as defined above"`
 
 ```text
 [
@@ -556,20 +556,20 @@ Let's make an EVM Output:
 
 ### ImportTx
 
-ImportTx is a transaction to import funds to Coreth from another chain.
+ImportTxは、別のチェーンからCorethに資金をインポートするための取引です。
 
-#### What ImportTx Contains
+#### ImportTxが含まれているもの
 
-An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
+`networkID``blockchainID``destinationChain``importedInputs`ImportTxには、`typeID`1、3、3が含まれています`Outs`。
 
-* **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`sourceChain`** is a 32-byte array that defines which blockchain from which to import funds.
-* **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
-* **`Outs`** is an array of EVM Outputs to be imported to this chain.
+* **`typeID`**isin is ImportTxの型を意味する。1つのタイプIDは0`ImportTx`です。
+* **`networkID`**isは、このトランザクションが発行されるAvalancheネットワークを定義するイントです。メインネットやフジなどを参照し、EVMのネットワークIDと異なります。
+* **`blockchainID`**このトランザクションが発行されたブロックチェーンを定義する32バイトのアレイです。
+* **`sourceChain`**これは、資金をインポートするブロックチェーンを定義する32バイトのアレイです。
+* **`importedInputs`**issimplifiedTxに資金を提供するTransferableInputsの配列です。
+* **`Outs`**isは、このチェーンにインポートするEVM出力の配列です。
 
-#### Gantt ImportTx Specification
+#### Gantt ImportTx仕様
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -589,18 +589,18 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ImportTx Example
+#### ImportTx例
 
-Let's make an ImportTx:
+ImportTxを作りましょう：
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`TypeID`**:`0`
+* **`NetworkID`**:`12345`
+* **`BlockchainID`**:`0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+* **`SourceChain`**:`0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`ImportedInputs`**:
-  * `"Example TransferableInput as defined above"`
+   * `"Example TransferableInput as defined above"`
 * **`Outs`**:
-  * `"Exapmle EVMOutput as defined above"`
+   * `"Exapmle EVMOutput as defined above"`
 
 ```text
 [
@@ -659,20 +659,20 @@ Let's make an ImportTx:
 ]
 ```
 
-## Credentials
+## 認証情報
 
-Credentials have one possible type: `SECP256K1Credential`. Each credential is paired with an Input. The order of the credentials match the order of the inputs.
+認証情報は、1つの可能なタイプがあります。`SECP256K1Credential`。各認証情報は、インプットとペアリングされます。認証情報の順番は、入力の順序と一致します。
 
-### SECP256K1 Credential
+### SECP256K1
 
-A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) credential contains a list of 65-byte recoverable signatures.
+[secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine)認証情報には、65バイトで回復可能な署名のリストが含まれます。
 
-#### What SECP256K1 Credential Contains
+#### SECP256K1認証情報が含まれているもの
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
+* **`TypeID`**iss は、このタイプのIDです。それは`0x00000009`。
+* **`Signatures`**is 65バイト回復可能な署名の配列です。署名の順番は、入力の署名指標と一致する必要があります。
 
-#### Gantt SECP256K1 Credential Specification
+#### Gantt SECP256K1
 
 ```text
 +------------------------------+---------------------------------+
@@ -684,7 +684,7 @@ A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b
                                +---------------------------------+
 ```
 
-#### Proto SECP256K1 Credential Specification
+#### Proto SECP256K1
 
 ```text
 message SECP256K1Credential {
@@ -693,13 +693,13 @@ message SECP256K1Credential {
 }
 ```
 
-#### SECP256K1 Credential Example
+#### SECP256K1
 
-Let's make a payment input with:
+以下の通りで支払いを入力しよう：
 
 * **`TypeID`**: 9
 * **`signatures`**:
-  * `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
+   * `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
 
 ```text
 [
@@ -727,19 +727,19 @@ Let's make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## 署名されたトランザクション
 
-A signed transaction contains an unsigned `AtomicTx` and credentials.
+署名されたトランザクションには、未署名`AtomicTx`と認証情報が含まれます。
 
-### What Signed Transaction Contains
+### 署名されたトランザクションが含まれているもの
 
-A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
+`AtomicTx`署名されたトランザクションには、a `CodecID`,と`Credentials`。
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`AtomicTx`** is an atomic transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential corresponds to the input at the same index in the AtomicTx
+* **`CodecID`**現在の有効なコーデックidは唯一です。`00 00`
+* **`AtomicTx`**は、上記のようにアミトトランザクションです。
+* **`Credentials`**iss は、認証情報の配列です。各認証情報は、AtomicTx内の同じインデックスで入力に対応します。
 
-### Gantt Signed Transaction Specification
+### Gantt署名されたトランザクション仕様
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -753,7 +753,7 @@ A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Proto署名されたトランザクション仕様
 
 ```text
 message Tx {
@@ -763,15 +763,15 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### 署名されたトランザクション例
 
-Let's make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+以前の例から、未署名トランザクションと認証情報を使用する署名トランザクションを作りましょう。
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+* **`CodecID`**:`0`
+* **`UnsignedTx`**:`0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
 * **`Credentials`**
 
-  `0x00000009000000010acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a300`
+   `0x00000009000000010acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a300`
 
 ```text
 [
@@ -832,19 +832,19 @@ Let's make a signed transaction that uses the unsigned transaction and credentia
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXOは、トランザクション出力をスタンドアロンで表したものです。
 
-### What UTXO Contains
+### UTXOが含まれている
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+`TxID``AssetID``Output`UTXOには、a `CodecID`, , `UTXOIndex`,と.
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`**`CodecID`有効な唯一のものは`00 00`
+* **`TxID`**は32バイトのトランザクションIDトランザクションIDは、署名されたトランザクションのバイト数で、sha256をとって計算されます。
+* **`UTXOIndex`**isinで、このutxoが指定したトランザクションでどの出力が指定され**`TxID`**たかを指定します。
+* **`AssetID`**は、このutxo参照アセットを定義する32バイト配列です。
+* **`Output`**は、このutxoを作成した出力オブジェクトアウトプットのシリアリゼーションは上記の定義となりました。
 
-### Gantt UTXO Specification
+### Gantt UTXO
 
 ```text
 +--------------+----------+-------------------------+
@@ -862,7 +862,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### Proto UTXO
 
 ```text
 message Utxo {
@@ -874,15 +874,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO例
 
-Let’s make a UTXO from the signed transaction created above:
+上記で作成された署名トランザクションからUTXOを作りましょう：
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: 0 = 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example EVMOutput as defined above"`
+* **`CodecID`**:`0`
+* **`TxID`**:`0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`UTXOIndex`**: 0 = 0x00
+* **`AssetID`**:`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**:`"Example EVMOutput as defined above"`
 
 ```text
 [
