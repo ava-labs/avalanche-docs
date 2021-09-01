@@ -1,27 +1,27 @@
-# Create a Variable-Cap Asset
+# Créer un actif de variable
 
 ## Introduction
 
-This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation, we specify which sets of addresses may mint more units.
+Ce tutoriel illustre comment créer un actif fongible et variable. Aucune unité de l'actif n'existe lorsque l'actif est initialisé, mais d'autres unités de l'actif peuvent être frappées. Sur la création d'actifs, nous spécifions les jeux d'adresses qui peuvent taper plus d'unités.
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+Vous vous demandez peut-être pourquoi nous spécifions des _ensembles d'adresses qui peuvent taper plus d'unités de l'actif que _d'une seule adresse. Voici pourquoi:
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **Sécurité : **si une seule adresse peut n'être plus d'actifs et que la clé privée pour cette adresse est perdue, ni plus d'unités ne peuvent jamais être n'être n'importe où. De même, si une seule adresse peut n'importe quelle autre adresse peut n'importe quel autre élément de l'actif, rien ne empêche le titulaire de cette adresse de n'importe quel point de frappe unilatéralement ce qu'ils veulent.
+* ****Flexibilité : il est agréable de pouvoir encoder une logique comme, « Alice peut unilatéralement frapper plus d'unités de cet actif, ou 2 de Dinesh, Ellin et Jamie peuvent en coder plus ».
 
-Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
+Supposons que nous voulons émettre un actif qui représente les actions d'une société. Aucune action n'existe pour commencer, mais d'autres actions peuvent être créées ultérieurement. Créons un tel actif.
 
-## Requirements
+## Exigences
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+Vous avez terminé [Exécuter un nœud Avalanche](../nodes-and-staking/run-avalanche-node.md) et êtes familier avec [l'architecture d'Avalanche](../../../learn/platform-overview/).
 
-## Create the Asset
+## Créer l'actif
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../apis/exchange-chain-x-chain-api.md).
+[`avm.createVariableCapAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createvariablecapasset)Notre actif existera sur la X-Chain, afin de créer notre actif que nous appellerons , qui est une méthode de [l'API](../../avalanchego-apis/exchange-chain-x-chain-api.md) de la X-Chain.
 
-The signature for this method is:
+La signature pour cette méthode est :
 
-```text
+```cpp
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
@@ -41,24 +41,24 @@ avm.createVariableCapAsset({
 }
 ```
 
-### Parameters
+### Paramètres
 
-* `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `name`est un nom lisible par l'homme pour notre actif. Pas nécessairement unique. Entre 0 et 128 caractères.
+* `symbol`est un symbole de shorthand pour cet actif. Entre 0 et 4 caractères. Pas nécessairement unique. Peut être omis.
+* `denomination`détermine comment les soldes de cet actif sont affichés par les interfaces d'utilisateur. Si la dénomination est de 0, 100 unités de cet actif sont affichées comme 100. Si la dénomination est de 1, 100 unités de cet actif sont affichées comme 10,0. Si la dénomination est de 2, 100 unités de cet actif sont affichées sous la forme de .100, etc.
+* `minterSets`est une liste où chaque élément spécifie celle des adresses dans `minters`peut ensemble taper plus de `threshold`l'actif en signant une transaction de frappe.
+* `username``password`Pour effectuer une transaction sur la X-Chain, une taxe de transaction est payée sur AVAX.
+* `from`sont les adresses que vous souhaitez utiliser pour cette opération. Si omis, utilise l'une de vos adresses au besoin.
+* `changeAddr`est l'adresse que tout changement sera envoyé. Si omis, le changement est envoyé à l'une des adresses contrôlées par l'utilisateur.
 
-### Response
+### Réponse
 
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID`est l'ID du nouvel actif.
+* `changeAddr`dans le résultat est l'adresse où tout changement a été envoyé.
 
-Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
+Plus tard dans cet exemple, nous allons taper plus d'actions, donc assurez-vous de remplacer au moins 2 adresses dans le second jeu de minter avec les adresses de vos contrôles d'utilisateurs.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -90,9 +90,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+La réponse devrait ressembler à ce qui suit :
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -103,20 +103,20 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+## Frapper l'actif
 
-Right now 0 shares exist. Let’s mint 10M shares.
+En ce moment là, 0 parts existent. Let's pitons 10M shares.
 
-### Create the Unsigned Transaction
+### Créer la transaction non signée
 
-We’ll use [`avm.mint`](../../apis/exchange-chain-x-chain-api.md#avm-mint) to mint the shares.
+Nous utiliserons [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mint)pour frapper les actions.
 
-* `amount` is the number of shares that will be created.
-* `assetID` is the ID of the asset we’re creating more of.
-* `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
-* `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
+* `amount`est le nombre d'actions qui seront créées.
+* `assetID`est l'ID de l'actif que nous créons plus de.
+* `to`est l'adresse qui recevra les actions nouvellement frappées. Remplacez `to`par une adresse vos commandes d'utilisateur afin que vous puissiez envoyer plus tard certaines des actions nouvellement frappées.
+* `username`doit être un utilisateur qui détient des clés lui donnant la permission de naître plus de cet actif. C'est-à-dire qu'il contrôle au moins les _clés de _seuil pour l'une des jeux de minter que nous avons spécifiés ci-dessus.
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -131,9 +131,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+La réponse contient l'ID de la transaction :
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -144,9 +144,9 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Nous pouvons vérifier l'état de la transaction que nous venons de envoyer au réseau en utilisant [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -157,9 +157,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+Cela devrait donner :
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -171,11 +171,11 @@ This should give:
 
 ## Trade the Asset
 
-### Check a Balance
+### Vérifier l'équilibre
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../apis/exchange-chain-x-chain-api.md#avm-getbalance):
+Toutes les actions de 10M sont contrôlées par `to`l'adresse que nous avons spécifiée dans .`mint` Pour vérifier cela, nous utiliserons [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance):
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -187,9 +187,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
+La réponse confirme que notre création d'actifs a été réussie et que l'adresse prévue détient toutes les 10 000 000 actions :
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -199,11 +199,11 @@ The response confirms that our asset creation was successful and that the expect
 }
 ```
 
-### Send the Asset
+### Envoyer l'actif
 
-Let’s send 100 shares to another address by using [`avm.send`](../../apis/exchange-chain-x-chain-api.md#avm-send). To do so:
+Envoyons 100 actions à une autre adresse en utilisant [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-send). Pour ce faire:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -218,9 +218,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Let’s check the balances of the `to` address:
+Vérifions les soldes de l'adresse `to`:
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -232,9 +232,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+La réponse devrait être :
 
-```text
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -244,12 +244,12 @@ The response should be:
 }
 ```
 
-## Wrapping up
+## Wrapping
 
-In this tutorial, we:
+Dans ce tutoriel, nous :
 
-* Used `createVariableCapAsset` to create a variable-cap asset that represents shares.
-* Used `mint` to mint more units of an asset.
-* Used `getBalance` to check address balances.
-* Used `send` to transfer shares.
+* Utilisé `createVariableCapAsset`pour créer un actif à plafond variable qui représente des actions.
+* Utilisé `mint`pour frapper plus d'unités d'un actif.
+* Utilisé pour vérifier les soldes `getBalance`d'adresses.
+* Utilisé `send`pour transférer des actions.
 
