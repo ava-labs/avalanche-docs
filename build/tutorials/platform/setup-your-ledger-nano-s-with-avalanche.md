@@ -1,88 +1,78 @@
-# Set up Your Ledger Nano S with Avalanche
+# AvalancheでレジャーナノSあるいはナノX
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
+暗号通貨を安全に安全に安全にするための業界標準は、ハードウェアウォレット、特別なデバイスで、コンピュータと秘密鍵間で完全な孤立を提供します。
 
-If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+以前に作成したAvalancheアドレスを使用する場合は、Avalancheウォレットから得たmnemonic フレーズを使用してリカバリフレーズ手順[から復元](https://support.ledger.com/hc/en-us/articles/360005434914)する必要があります。新しいアドレスを設定する場合は、[新しいデバイス](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device)手順として定期的にセットアップするに従ってください。
 
-The Avalanche Ledger wallet app is currently available via [Ledger Live](https://www.ledger.com/ledger-live) in Experimental Mode.
+Avalanche Ledgerウォレットアプリは、[Ledger Live](https://www.ledger.com/ledger-live)経由で利用できます。
 
-## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
+## Ledger Live上でAvalancheをセットアップする方法<a id="1c80"></a>
 
-First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
+まず、[Ledger Live](https://www.ledger.com/ledger-live)MacOS、Windows、Linuxだけでなく、iOSとAndroidのためのダウンロードがあります。
 
-Next, fire up Ledger Live and click the “Settings” button.
+{% hint style="danger" %}手続き前に、Ledger Liveアプリケーションを最新版でお持ちください。古いバージョンでは、最新のデバイスファームウェアとAvalancheバージョンが表示されない場合があります。書き込み時の最新のLedger Liveアプリバージョンは、2.26.1です。{% endhint %}
 
-![Settings button on ledger live](https://miro.medium.com/max/3052/1*lMnVGJneUAqgRvZBIDv_rA.png)
+アプリをインストールした後、実行します。「マネージャ」タブに移動し、デバイスの両方のボタンを押して、デバイス管理を許可します。アプリカタログ検索フィールドに "Avalanche"と入力します。Avalancheアプリがv0.5.2（以上）であることを確認し、「インストール」ボタンをクリックします。
 
-Once in settings then go to the “Experimental features” tab.
+![Avalanche Ledgerアプリインストールボタン](../../../.gitbook/assets/ledger-06-live-install.png)
 
-![](https://miro.medium.com/max/4072/1*HrSweaL-kelTl47QRt38iA.png)
+Avalanche v0.5.2を見るべき「アプリがインストールされた」タブに移動することで、インストールが完了したことを確認できます。
 
-Scroll down to the “Developer mode” toggle switch, and enable it.
+![Avalanche Ledgerアプリインストールボタン](../../../.gitbook/assets/ledger-07-live-version.png)
 
-![Toggle on developer mode](https://miro.medium.com/max/2908/1*qdte7MSvSZdfqfCIUMNp2Q.png)
+## LedgerでAvalancheウォレットを使用する<a id="48a3"></a>
 
-Now with “Developer mode” enabled, you can go to the “Manager” tab and search for “Avalanche”. Confirm that the Avalanche app is v0.2.1, and click the “Install” button.
+Avalancheアプリをインストールした後、Ledger経由で[Avalancheウォレット](https://wallet.avax.network/)とやり取りすることができます。これにより、AVAX、トークン、NFTs、クロスチェーンスワップの送信だけでなく、ステーキングやデリゲートが含まれます。
 
-![Avalanche Ledger app install button](https://miro.medium.com/max/4040/1*rGFrSBEfxRlIkc-k7hS2Vg.png)
+まず、ウォレットにアクセスするには、レジャーをコンピュータに接続し、ピンを入力します。
 
-You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.2.1.
+![PINコード画面](../../../.gitbook/assets/ledger-03-pin.png)
 
-![](https://miro.medium.com/max/3020/1*qBSuxqY52-wxWfM-w1YR_w.png)
+デバイスに複数のアプリがインストールされている場合、左右ボタンを使用してAvalancheアプリを選択します：
 
-## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
+![Avalancheアプリ](../../../.gitbook/assets/ledger-04-app-start.png)
 
-Once you have the Avalanche app installed then you’re able to interact with the [Avalanche Wallet](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps between the X-Chain&lt;-&gt;P-Chain as well as staking tokens.
+両方のボタンを押してアプリを起動します。「Avalanche」アプリ画面上に立ち上げる必要があります。
 
-First, to access the wallet, plug in the Ledger to your computer and if needed, enter your pin.
+![アプリバージョン](../../../.gitbook/assets/ledger-05-app-version.png)
 
-![PIN code screen](https://miro.medium.com/max/1852/1*A_1VgMMLeJCYzNst6tdq9A.jpeg)
+Avalancheアプリが実行されていることを確認した後、ウォレットホームページで「ウォレットにアクセスする」ボタンをクリックします。
 
-Next, if you see the text “Pending Ledger review” then click both buttons on the top of the device to skip that screen.
+![ウォレットボタン](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-![](https://miro.medium.com/max/1820/1*OxLbAWq5hzjC6P1SmiCqmg.jpeg)
+後続の「ウォレットにアクセスしたいですか？」で、「レジャー」ボタンをクリックしてください。
 
-Lastly, you should land on the “Avalanche” app screen where you can confirm that the app is version 0.2.1.
+![レジャーアクセス](../../../.gitbook/assets/ledger-01-wallet-access.png)
 
-![](https://miro.medium.com/max/1802/1*Qevjy6nhw5UM0ufvxIL_qg.jpeg)
+次に、Ledgerデバイス上の公開鍵へのアクセスを確認するメッセージが表示されます。デバイス上のプロンプトと最後の画面上の確認画面で、両方のボタンを押すことで、右ボタンをクリックします。
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
+![](../../../.gitbook/assets/ledger-02-confirm-access.png)
 
-![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
+異なるチェーンで異なる鍵が使用されるため、これを2回行う必要があります。成功した場合、ウォレットにサインされ、以前の残高が表示されます。
 
-On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
+![ウェブウォレットポートフォリオタブ](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-![Ledger Access](../../../.gitbook/assets/ledger-access.png)
+資金を移動するには、「送信」タブに移動し、X-アドレスを「アドレスを「宛先」フィールドに貼り付けます。額を設定し、オプションでメモを設定します。「確認」を押し、「トランザクションを送信する」ボタン。
 
-You’ll now be prompted to confirm on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
+![トランザクションを送信する](../../../.gitbook/assets/send-transaction.png)
 
-![](https://miro.medium.com/max/3828/1*xpNt2ajcTdEivDr4xEedQQ.png)
-
-If successful you will be signed into the wallet and any previous balances will be displayed.
-
-![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
-
-To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
-
-![Send Transaction](../../../.gitbook/assets/send-transaction.png)
-
-You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
+Ledger上でアクションを確認するメッセージが表示されます。ウェブウォレットに表示されるハッシュが、レジャー上に表示されるものと一致することを確認します。すべてが一致した場合、最後の画面で両方のボタンを押してトランザクションを送信します。
 
 ![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
+バランスを更新するアイコンをクリックすると、送金された額と取引手数料あたり減少するはずです。
 
-![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
+![ウォレットバランスの更新](../../../.gitbook/assets/refresh-wallet-balance.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+右側のコラムには、最新のトランザクションが表示されます。拡大ガラスのアイコンをクリックすると、我々のエクスプローラでトランザクションが開きます。
 
-![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
+![拡大ガラスを](../../../.gitbook/assets/magnifying-glass.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+最後に、我々のエクスプローラでトランザクションの詳細を確認できるはずです。これにより、トランザクションID、トランザクションが発生した時のステータス、そしてすべての入力と出力に関する情報が一覧表示されます。
 
-![Transaction details](../../../.gitbook/assets/transaction-details.png)
+![トランザクション詳細](../../../.gitbook/assets/transaction-details.png)
 
-## More Tools to Come <a id="135b"></a>
+## より多くのツール<a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Labsは、ファイナンスインターネットを構築しています。我々は、人々がファイナンスアプリケーションを構築し、使用方法を再定義することにより、フリクションのない世界を創出するソリューションを開発しています。このインフラの重要な部分はハードウェアウォレットなので、ユーザーは、潜在的に悪意のあるアクターから完全に孤立していると完全に確信することができます。新しくリリースされたLedgerアプリは、ユーザーとコインを安全かつ安全に保つために、業界のベストプラクティスに従うことにより、まさにこれを実行します。
 
