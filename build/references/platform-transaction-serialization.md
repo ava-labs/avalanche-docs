@@ -1,23 +1,23 @@
-# Platform Transaction Format
+# Platform İşletme Biçimi
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+`Platform Chain`Bu dosya Avalanche’s Platform Sanal in işlemleri nasıl we tek gerçek kaynağı olarak tanımlanmaktadır.`P-Chain` Bu belge, şifreli kullanıcı tanımlaması için paketi paketlemek ve [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) için [ilkel serileştirme](serialization-primitives.md) biçimini kullanır.
 
-## Codec ID
+## Codec kimlik
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Bazı veriler verilerin nasıl çölleşmesi gerektiğini belirten bir kod kod kimliği \(16\) ile önceden tasarlanmıştır. Şu anda geçerli kod çözücü kimlik 0 `0x00 0x00`\(\).
 
-## Transferable Output
+## Transfer Edilebilir Çıktı
 
-Transferable outputs wrap an output with an asset ID.
+Transferable çıktılar, bir çıktıyı varlık kimliğiyle paketler.
 
-### What Transferable Output Contains
+### Hangi Aktarılabilir Çıktı Içeriyor
 
-A transferable output contains an `AssetID` and an `Output`.
+Transfer edilebilir bir çıkış bir `AssetID`ve bir içerir.`Output`
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`AssetID`**Bu çıkış referanslarını belirleyen 32 byte dizilimidir. `AssetID`Tek geçerli olan AVAX`AssetID`
+* **`Output`**Aşağıda tanımlandığı gibi bir output, Örneğin, SECP256K1 transfer çıkışı olabilir.
 
-### Gantt Transferable Output Specification
+### Gantt Transferable Çıktı Specification
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ A transferable output contains an `AssetID` and an `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Proto Transferable Output Specification Specification
 
 ```text
 message TransferableOutput {
@@ -38,9 +38,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### Transfer Edilebilir Çıktı Örnek
 
-Let’s make a transferable output:
+Transfer edilebilir bir çıkış yapalım:
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -67,20 +67,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## Transfer Edilebilir Girdi
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+Transferable girdiler, belirli bir UTXO aktarımı ile tanımlar.
 
-### What Transferable Input Contains
+### Hangi Aktarılabilir Girdi Içeriyor
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+`TxID`Transfer edilebilir bir giriş bir `UTXOIndex``AssetID`ve bir tane içerir.`Input`
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Input`** is a transferable input object.
+* **`TxID`**Bu girişin bir çıkışı tüketen işlemin hangi işlevi olduğunu belirleyen 32 byte dizidir.
+* **`UTXOIndex`**Bu girişin belirtilen işlemleri hangi utxo ile birlikte olduğunu tanımlayan bir is
+* **`AssetID`**Bu giriş referanslarını belirleyen 32 byte dizilimidir. `AssetID`Tek geçerli olan AVAX`AssetID`
+* **`Input`**...transferi edilebilir bir girişim nesnesi.
 
-### Gantt Transferable Input Specification
+### Gantt Transferable Input Specification Comment
 
 ```text
 +------------+----------+------------------------+
@@ -107,14 +107,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### Transfer Edilebilir Girdi Örnekleri
 
-Let’s make a transferable input:
+Transfer edilebilir bir girişim yapalım:
 
-* **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
-* **`UTXOIndex`**: `0`
-* **`AssetID`**: `0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* **`Input`**: `"Example SECP256K1 Transfer Input from below"`
+* **`TxID`**:`0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
+* **`UTXOIndex`**:`0`
+* **`AssetID`**:`0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
+* **`Input`**:`"Example SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -144,25 +144,25 @@ Let’s make a transferable input:
 ]
 ```
 
-## Outputs
+## Çıktı
 
-Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwners`.
+`SECP256K1TransferOutput``SECP256K1OutputOwners`Çıkışların iki olası tipi vardır:
 
-## SECP256K1 Transfer Output
+## SECP256K1 Transfer Çıktı
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time. The only valid asset is AVAX.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer çıktısı, belirtilen bir unix zaman sonrasında bir adresler koleksiyonuna bir miktar varlık gönderme imkanı sağlar. Tek geçerli varlık AVAX.
 
-### **What SECP256K1 Transfer Output Contains**
+### **SECP256K1 Aktarım Çıktısını Içeriyor**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+`Amount``Locktime``Threshold`Bir secp256k1 transfer çıktısı içeriyor, `TypeID`, ve `Addresses`de.
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**Bu çıktıyı gösteren bir kimlik - Evet, `0x00000007`öyle.
+* **`Amount`**Bu çıkışın sahip olduğu varlığın miktarını belirten uzun bir süredir. Olumlu olmalı.
+* **`Locktime`**Bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunlukta. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**Çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int Boyuna eşit ya da daha az **`Addresses`**olmalı. **`Addresses`**Eğer boşsa, 0 olmalı.
+* **`Addresses`**Bu verileri harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### **Gantt SECP256K1 Transfer Çıktı Specification**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -180,7 +180,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Proto SECP256K1 Transfer Çıktı Specification**
 
 ```text
 message SECP256K1TransferOutput {
@@ -192,16 +192,16 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1 Transfer Çıktı Örneği**
 
-Let’s make a secp256k1 transfer output with:
+Bir secp256k1 transfer çıktısı yapalım:
 
-* **`TypeID`**: 7
-* **`Amount`**: 3999000000
-* **`Locktime`**: 0
-* **`Threshold`**: 1
+* **`TypeID`**7:
+* **`Amount`**399900.
+* **`Locktime`**0
+* **`Threshold`**1:
 * **`Addresses`**:
-  * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+   * 0xda2bee01be82ecc0c34f361eda8eb30fb5a715c
 
 ```text
 [
@@ -232,20 +232,20 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Output Owners Output
+## SECP256K1 Çıktı Sahipleri Çıktı
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) çıkışı kapama süresi bittiğinde sergi ödüllerini alacak.
 
-### **What SECP256K1 Output Owners Output Contains**
+### **SECP256K1 Çıktı Sahipleri Çıktı Çıktı Içeriyor**
 
-A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+`TypeID``Locktime``Threshold`Bir secp256k1 çıkışı sahipleri bir , ve bir şey `Addresses`içermektedir.
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**Bu çıktıyı gösteren bir kimlik - Evet, `0x0000000b`öyle.
+* **`Locktime`**Bu çıkışın sonra harcanabileceği unix zaman damgasını içerecek uzunlukta. İkinciye özgü zaman damgası özeldir.
+* **`Threshold`**Çıkışı harcamak için gerekli eşsiz imzaların sayısını belirleyen bir int Boyuna eşit ya da daha az **`Addresses`**olmalı. **`Addresses`**Eğer boşsa, 0 olmalı.
+* **`Addresses`**Bu verileri harcamak için kullanılabilecek özel anahtarlara karşılık gelen eşsiz adreslerin listesidir. Adresler lexicographically. olarak sıralanmalıdır.
 
-### **Gantt SECP256K1 Output Owners Output Specification**
+### **Gantt SECP256K1 Çıktı Sahipleri Çıktı Specification**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -261,7 +261,7 @@ A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, a
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Output Owners Output Specification**
+### **Proto SECP256K1 Çıktı Sahipleri Çıktı Specification**
 
 ```text
 message SECP256K1OutputOwnersOutput {
@@ -272,15 +272,15 @@ message SECP256K1OutputOwnersOutput {
 }
 ```
 
-### **SECP256K1 Output Owners Output Example**
+### **SECP256K1 Çıktı Sahibi Çıktı Örnek**
 
-Let’s make a secp256k1 output owners output with:
+Hadi bir secp256k1 çıktısını şöyle yapalım:
 
-* **`TypeID`**: 11
-* **`Locktime`**: 0
-* **`Threshold`**: 1
+* **`TypeID`**11
+* **`Locktime`**0
+* **`Threshold`**1:
 * **`Addresses`**:
-  * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+   * 0xda2bee01be82ecc0c34f361eda8eb30fb5a715c
 
 ```text
 [
@@ -308,23 +308,23 @@ Let’s make a secp256k1 output owners output with:
 ]
 ```
 
-## Inputs
+## Girdiler
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+`SECP256K1TransferInput`Girdilerin tek bir tipi vardır:
 
-## SECP256K1 Transfer Input
+## SECP256K1 Transfer Girdi
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer girdisi harcanmamış bir secp256k1 transfer çıktısını harcamasına izin verir.
 
-### **What SECP256K1 Transfer Input Contains**
+### **SECP256K1 Aktarma Girdi Içeriyor**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+Bir secp256k1 transfer girdisi bir `Amount`ve.`AddressIndices`
 
-* **`TypeID`** is the ID for this output type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`**Bu çıktıyı gösteren bir kimlik - Evet, `0x00000005`öyle.
+* **`Amount`**Bu girişin from tüketilmesi gereken miktarı belirten uzun bir süredir. Olumlu olmalı. in belirtilen miktara eşit olmalı.
+* **`AddressIndices`**Bu özel anahtarları tanımlayan benzersiz özelliklerin listesi. UTXO. harcamak için kullanılıyor. UTXO her bir adresi UTXO. harcayabilecek bir dizi adres vardır. Her int bu işlem için imza atan adres dizisindeki indeksi temsil eder. Dizinin üst seviyeye kadar sıralanması gerekiyor.
 
-### **Gantt SECP256K1 Transfer Input Specification**
+### **Gantt SECP256K1 Transfer Girdi Belirtisi**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -338,7 +338,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-**Proto SECP256K1 Transfer Input Specification**
+**Proto SECP256K1 Transfer Girdi Belirtisi**
 
 ```text
 message SECP256K1TransferInput {
@@ -348,13 +348,13 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1 Transfer Girdi Örnek**
 
-Let’s make a payment input with:
+Ödeme girdisi ile yapalım:
 
-* **`TypeID`**: 5
-* **`Amount`**: 4000000000
-* **`AddressIndices`**: \[0\]
+* **`TypeID`**5
+* **`Amount`**400.
+* **`AddressIndices`**[0]
 
 ```text
 [
@@ -375,22 +375,22 @@ Let’s make a payment input with:
 ]
 ```
 
-## Unsigned Transactions
+## İmzalamamış İşlemler
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
+İmzalanmamış işlemler sadece imzalar eksik olan bir işlemin tam içeriğini içermektedir. `AddDelegatorTx``CreateSubnetTx``ImportTx``ExportTx`İmzalanmamış işlemler altı olası tür: `AddValidatorTx`, `AddSubnetValidatorTx`, , ve `BaseTx`Bu da ortak alanlar ve operasyonlar içeriyor.
 
-## Unsigned BaseTx
+## İmzalanmamış BaseTx
 
-### **What Base Tx Contains**
+### **Hangi Taban Tx Içeriyor**
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+`NetworkID``Outputs``Inputs`Bir taban tx bir `TypeID`, `BlockchainID`, , ve bir `Memo`içerir.
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`**Bu tip için kimlik var. - Evet, `0x00000000`öyle.
+* **`NetworkID`**Bu işlem için hangi ağ verileceğini belirleyen bir is Bu değer işlem yönlendirmesini desteklemek için tasarlanır ve yeniden oynanma saldırı önleme için tasarlanmaz.
+* **`BlockchainID`**Bu işlem için hangi blok zincirini tanımlayan 32 byte dizilimidir. Bu işlem ağ veya blok zinciri boyunca geçerli olabilecek işlemler için yeniden oynanma saldırı önleme için kullanılır.
+* **`Outputs`**Bu bir dizi transfer edilebilir çıktı. Çıkışlar seri temsili lexicographically olarak sıralamalıdır. Bu çıkışlarda yaratılan varlıkların toplam miktarı girdilerde tüketilen toplam varlığın toplam miktarına eşit veya işlem ücreti eksi olarak tüketilmesine eşit olmalıdır.
+* **`Inputs`**Bu bir dizi transfer edilebilir girişim nesnesi. Girdilerin sıralanması ve eşsiz olması gerekir. **`UTXOIndex`**Girdiler, önce lexicographically olarak **`TxID`**sıralanır, sonra da aşağıdan yükseklere sıralanır. **`UTXOIndex`**Eğer aynı girdilerde varsa **`TxID`**ve bu işlem iki kez harcanabilir.
+* **`Memo`**Memo alanı 256 baytlık bir baytlık içermektedir.
 
 ### **Gantt Base Tx Specification**
 
@@ -425,17 +425,17 @@ message BaseTx {
 }
 ```
 
-### **Base Tx Example**
+### **Bas Tx Örnek**
 
-Let’s make a base tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan bir baz tx yapalım:
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x000000000000000000000000000000000000000000000000000000000000000`
+* **`TypeID`**:`0`
+* **`NetworkID`**:`12345`
+* **`BlockchainID`**:`0x000000000000000000000000000000000000000000000000000000000000000`
 * **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
+   * `"Example Transferable Output as defined above"`
 * **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+   * `"Example Transferable Input as defined above"`
 
 ```text
 [
@@ -493,24 +493,24 @@ Let’s make a base tx that uses the inputs and outputs from the previous exampl
 ]
 ```
 
-## Unsigned Add Validator Tx
+## İmzalamamış Doğrulayıcı Tx
 
-### **What Unsigned Add Validator Tx Contains**
+### **İmzalamamış Doğrulayıcı Tx Içerir**
 
-An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
+`Validator``Stake``RewardsOwner`İmzalanmamış bir doğrulayıcı tx bir `BaseTx`, , ve `Shares`içerir. Bu tip `TypeID`bir şey.`0x0000000c`
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** A `SECP256K1OutputOwners`
-* **`Shares`** 10,000 times percentage of reward taken from delegators
+* **`Validator`**`NodeID`Validator bir `StartTime``EndTime`ve...`Weight`
+   * **`NodeID`**20 bayt ve bu the düğümü.
+   * **`StartTime`**validator onaylanmasının zamanı Unix zamanıdır.
+   * **`EndTime`**validator geçersiz saymayı bırakan Unix zamanı uzun bir süredir.
+   * **`Weight`**Bu uzun bir süredir. Bu da validator bahisleri
+* **`Stake`**Stake`LockedOuts`
+   * **`LockedOuts`**Bir dizi Transferable Çıktı dizisi, gözetleme süresi boyunca kilitli. Bu dönemde bu çıkımlar kendi adreslerine geri ödenmektedir.
+* **`RewardsOwner`**A`SECP256K1OutputOwners`
+* **`Shares`**Delegelerden alınan ödülün yüzde 10,000 katı.
 
-### **Gantt Unsigned Add Validator Tx Specification**
+### **Gantt İmzalamamış Doğrulayıcı Tx Specification Ekle**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -528,7 +528,7 @@ An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `Rewards
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Validator Tx Specification**
+### **İmzalamamış Proto Doğrulayıcı Tx Specification Ekle**
 
 ```text
 message AddValidatorTx {
@@ -540,21 +540,21 @@ message AddValidatorTx {
 }
 ```
 
-### **Unsigned Add Validator Tx Example**
+### **İmzalamamış Doğrulayıcı Tx Örnek**
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan imzasız bir doğrulama ekleyici tx yapalım:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
-* **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-* **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
-* **`Shares`**: `0x00000064`
+* **`BaseTx`**:`"Example BaseTx as defined above with ID set to 0c"`
+* **`Validator`**`NodeID`Validator bir `StartTime``EndTime`ve...`Weight`
+   * **`NodeID`**20 bayt ve bu the düğümü.
+   * **`StartTime`**validator onaylanmasının zamanı Unix zamanıdır.
+   * **`EndTime`**validator geçersiz saymayı bırakan Unix zamanı uzun bir süredir.
+   * **`Weight`**Bu uzun bir süredir. Bu da validator bahisleri
+* **`Stake`**:`0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
+* **`RewardsOwner`**:`0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
+* **`Shares`**:`0x00000064`
 
-  0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
+   001dae082ecc34f361eda83bb5c
 
 ```text
 [
@@ -633,22 +633,22 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## İmzalamamış Subnet Doğrulayıcı Tx
 
-### **What Unsigned Add Subnet Validator Tx Contains**
+### **İmzalamamış Subnet Doğrulayıcısı Tx Içeriyor**
 
-An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+`Validator``SubnetID`İmzalanmamış bir alt net doğrulayıcı tx bir `BaseTx`, ve `SubnetAuth`içerir. Bu tip `TypeID`bir şey.`0x0000000d`
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
-* **`SubnetID`** a 32 byte subnet id
-* **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
+* **`Validator`**`NodeID`Validator bir `StartTime``EndTime`ve...`Weight`
+   * **`NodeID`**20 bayt ve bu the düğümü.
+   * **`StartTime`**validator onaylanmasının zamanı Unix zamanıdır.
+   * **`EndTime`**validator geçersiz saymayı bırakan Unix zamanı uzun bir süredir.
+   * **`Weight`**Bu uzun bir süredir. Bu da validator bahisleri
+* **`SubnetID`**32 byte subnet kimliği
+* **`SubnetAuth`**Bir kimlik içerir `SigIndices`ve türü vardır. Bir alt ağa bir doğrulayıcı eklemek için kontrol imzasını imzalayan adreslerin `SigIndices`tanımladığı eşsiz ints `0x0000000a`listesidir. Dizinin üst seviyeye kadar sıralanması gerekiyor.
 
-### **Gantt Unsigned Add Subnet Validator Tx Specification**
+### **Gantt İmzalamamış Subnet Doğrulayıcı Tx Specification**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -664,7 +664,7 @@ An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
                                    +---------------------------------------------+
 ```
 
-### **Proto Unsigned Add Subnet Validator Tx Specification**
+### **İmzalamamış Proto Subnet Doğrulayıcı Tx Specification**
 
 ```text
 message AddSubnetValidatorTx {
@@ -675,19 +675,19 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### **Unsigned Add Subnet Validator Tx Example**
+### **İmzalamamış Subnet Doğrulayıcı Tx Örnek**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous examples:
+Daha önceki örneklerden giriş ve çıkışları kullanan imzasız bir subnet doğrulayıcı tx yapalım:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
-* **`SubnetID`**: `0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb`
+* **`BaseTx`**:`"Example BaseTx as defined above with ID set to 0d"`
+* **`NodeID`**:`0xe9094f73698002fd52c90819b457b9fbc866ab80`
+* **`StarTime`**:`0x000000005f21f31d`
+* **`EndTime`**:`0x000000005f497dc6`
+* **`Weight`**:`0x000000000000d431`
+* **`SubnetID`**:`0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb`
 * **`SubnetAuth`**:
-  * **`TypeID`**: `0x0000000a`
-  * **`SigIndices`**: `0x00000000`
+   * **`TypeID`**:`0x0000000a`
+   * **`SigIndices`**:`0x00000000`
 
 ```text
 [
@@ -759,23 +759,23 @@ Let’s make an unsigned add subnet validator tx that uses the inputs and output
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## İmzalamamış Ekle Ekleme Tx
 
-### **What Unsigned Add Delegator Tx Contains**
+### **İmzalamamış Delege Tx Içerir**
 
-An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
+`Validator``Stake``RewardsOwner`İmzasız bir ekleme delege tx `BaseTx`içeriyor, ve Bu tip `TypeID`bir şey.`0x0000000e`
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-  * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-  * **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
-* **`RewardsOwner`** An `SECP256K1OutputOwners`
+* **`Validator`**`NodeID`Validator bir `StartTime``EndTime`ve...`Weight`
+   * **`NodeID`**Delege üyesinin kimlik numarası.
+   * **`StartTime`**Delege kurulmaya başladığı zaman Unix zamanı çok uzun.
+   * **`EndTime`**Delege görevlerini bıraktığında Unix zamanı \(ve oyulan AVAX geri döndüğü zaman\).
+   * **`Weight`**Delege için çok uzun bir miktar.
+* **`Stake`**Stake`LockedOuts`
+   * **`LockedOuts`**Bir dizi Transferable Çıktı dizisi, gözetleme süresi boyunca kilitli. Bu dönemde bu çıkımlar kendi adreslerine geri ödenmektedir.
+* **`RewardsOwner`**An`SECP256K1OutputOwners`
 
-### **Gantt Unsigned Add Delegator Tx Specification**
+### **Gantt İmzalamamış Delege Ekleyici Tx Belirtisi**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -791,7 +791,7 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Delegator Tx Specification**
+### **İmzalamamış Proto Add Tx Specification**
 
 ```text
 message AddDelegatorTx {
@@ -802,17 +802,17 @@ message AddDelegatorTx {
 }
 ```
 
-### **Unsigned Add Delegator Tx Example**
+### **İmzalamamış Ekle Ekleme Tx Örnek**
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous examples:
+Önceki örneklerden giriş ve çıkışları kullanan imzasız bir ekleme tx yapalım:
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
-* **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-* **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
+* **`BaseTx`**:`"Example BaseTx as defined above with ID set to 0e"`
+* **`NodeID`**:`0xe9094f73698002fd52c90819b457b9fbc866ab80`
+* **`StarTime`**:`0x000000005f21f31d`
+* **`EndTime`**:`0x000000005f497dc6`
+* **`Weight`**:`0x000000000000d431`
+* **`Stake`**:`0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
+* **`RewardsOwner`**:`0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
 
 ```text
 [
@@ -888,16 +888,16 @@ Let’s make an unsigned add delegator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## İmzalamamış Subnet Tx Oluştur
 
-### **What Unsigned Create Subnet Tx Contains**
+### **İmzalamamış Subnet Tx Içeriyor**
 
-An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+`BaseTx`İmzasız bir alt ağ tx içerir ve bir de `RewardsOwner`içerir. Bu tip `TypeID`bir şey.`0x00000010`
 
 * **`BaseTx`**
-* **`RewardsOwner`** A `SECP256K1OutputOwners`
+* **`RewardsOwner`**A`SECP256K1OutputOwners`
 
-### **Gantt Unsigned Create Subnet Tx Specification**
+### **Gantt İmzalamamış Subnet Tx Specification Oluştur**
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -909,7 +909,7 @@ An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### **Proto Unsigned Create Subnet Tx Specification**
+### **Proto İmzalamadı Subnet Tx Specification Oluştur**
 
 ```text
 message CreateSubnetTx {
@@ -918,16 +918,16 @@ message CreateSubnetTx {
 }
 ```
 
-### **Unsigned Create Subnet Tx Example**
+### **İmzalamamış Subnet Tx Örnekleri Oluşturuldu**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
+Önceki örneklerden girdileri kullanan imzasız bir alt net tx oluşturalım:
 
-* **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
+* **`BaseTx`**: "Örnek BaseTx yukarıda tanımlanır ama TypeID 16'ya ayarlanır."
 * **`RewardsOwner`**:
-  * **`TypeId`**: 11
-  * **`Locktime`**: 0
-  * **`Threshold`**: 1
-  * **`Addresses`**: \[ 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c \]
+   * **`TypeId`**11
+   * **`Locktime`**0
+   * **`Threshold`**1:
+   * **`Addresses`**[ 0xda2bee01be82ecc0c34f361eda8eb30fb5a715c ]
 
 ```text
 [
@@ -975,17 +975,17 @@ Let’s make an unsigned create subnet tx that uses the inputs from the previous
 ]
 ```
 
-## Unsigned Import Tx
+## İmzalı Aktarma Tx
 
-### **What Unsigned Import Tx Contains**
+### **İmzalanmamış Tx Içeriyor**
 
-An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
+`BaseTx``SourceChain``Ins`İmzasız bir ithal tx bir şey içerir ve Bu tip `TypeID`bir şey.`0x00000011`
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`**32 byte kaynak zinciri kimliği.
+* **`Ins`**Transferable of değişken uzunluk dizisi.
 
-### **Gantt Unsigned Import Tx Specification**
+### **Gantt İmzalanmamış Aktarma Tx Tx**
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -999,7 +999,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
                             +--------------------------------------+
 ```
 
-### **Proto Unsigned Import Tx Specification**
+### **İmzalanmamış Proto Aktarma Tx Tx**
 
 ```text
 message ImportTx {
@@ -1009,13 +1009,13 @@ message ImportTx {
 }
 ```
 
-### **Unsigned Import Tx Example**
+### **İmzalanmamış Tx Örnek**
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+Önceki örneklerden girdileri kullanan imzasız bir aktarma tx yapalım:
 
-* **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
+* **`BaseTx`**: "Örnek BaseTx TypeID seti 17'ye yukarıda tanımlanır
 * **`SourceChain`**:
-* **`Ins`**: “Example SECP256K1 Transfer Input as defined above”
+* **`Ins`**: "Örnek SECP256K1 Aktarım Girdi yukarıda tanımlanır
 
 ```text
 [
@@ -1071,16 +1071,16 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 ]
 ```
 
-## Unsigned Export Tx
+## İmzalanmamış Aktarma Tx
 
-### **What Unsigned Export Tx Contains**
+### **İmzalanmamış Aktarma Tx Içeriyor**
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000012`.
+`BaseTx``DestinationChain``Outs`İmzasız bir ihracat tx bir şey içerir ve Bu tip `TypeID`bir şey.`0x00000012`
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`**Bu da fonların ihraç edildiği zincirin 32 byte kimliği.
+* **`Outs`**Transferable Outputs değişken uzunluk dizisi.
 
-### **Gantt Unsigned Export Tx Specification**
+### **Gantt İmzalamamış Aktarma Tx Tx**
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1094,7 +1094,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### **Proto Unsigned Export Tx Specification**
+### **Proto İmzalamadı Aktarma Tx Tx**
 
 ```text
 message ExportTx {
@@ -1104,13 +1104,13 @@ message ExportTx {
 }
 ```
 
-### **Unsigned Export Tx Example**
+### **İmzalanmamış Aktarma Tx Örnekleri**
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+Önceki örneklerden çıkan çıktıları kullanan imzasız bir aktarma tx yapalım:
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
-* `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `BaseTx`: "Örnek BaseTx yukarıda tanımlanır 18 `TypeID`sete
+* `DestinationChain`:`0x0000000000000000000000000000000000000000000000000000000000000000`
+* `Outs`: "Örnek SECP256K1 Transfer Çıktı yukarıda tanımlanır
 
 ```text
 [
@@ -1180,20 +1180,20 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 ]
 ```
 
-## Credentials
+## Kimlikler
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+`SECP256K1Credential`Kimliklerin tek bir olasılığı vardır: Her bir giriş veya operasyon ile eşleştirilir. Kimlik düzeni girişin veya operasyonların sırasıyla uyuşuyor.
 
 ## SECP256K1 Credential
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+Bir [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) referansları 65 byte geri alınabilir imzalar listesi içerir.
 
-### **What SECP256K1 Credential Contains**
+### **SECP256K1 Credential Içeriyor**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`TypeID`**Bu tip için kimlik var. - Evet, `0x00000009`öyle.
+* **`Signatures`**65 byte bir dizi düzeltilebilir imza. İmzaların sırası, girişin imza input’s uymalıdır.
 
-### **Gantt SECP256K1 Credential Specification**
+### **Gantt SECP256K1 Credential Specification Specification**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1214,9 +1214,9 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1 Credential Örnek**
 
-Let’s make a payment input with:
+Ödeme girdisi ile yapalım:
 
 * **`signatures`**:
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
@@ -1258,19 +1258,19 @@ Let’s make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## İmzalamış İşlem
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+İmzalı işlem, bir dizi kimlik dizisinin eklenmesiyle imzalanmamış bir işlemdir.
 
-### What Signed Transaction Contains
+### İmzaladığı Işlem Içeriyor
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+`CodecID``UnsignedTx`İmzalı bir işlem içerir ve bir `Credentials`de.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`**Geçerli kod çözücü tek kimlik.`00 00`
+* **`UnsignedTx`**Bu da yukarıda belirtildiği gibi imzalanmamış bir işlemdir.
+* **`Credentials`**Bir dizi kimlik belgesi. Her bir kimlik bu kimlik belgesindeki girdilerle aynı girişte eşleştirilecektir.
 
-### Gantt Signed Transaction Specification
+### Gantt İmzalamış İşlem Belirtisi
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1284,7 +1284,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Proto İmzalamış İşlem Belirtisi
 
 ```text
 message Tx {
@@ -1294,12 +1294,12 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### İmzalamış Aktarım Örnekleri
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+İmzasız işlem ve özgün örneklerden gelen imzalı bir işlem yapalım.
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
+* **`CodecID`**:`0`
+* **`UnsignedTx`**:`0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
 * **`Credentials`** `0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
 
 ```text
@@ -1371,19 +1371,19 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXO bir işlem çıkışını temsil eden tek bir uygulamadır.
 
-### What UTXO Contains
+### UTXO Içeriyor
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
+`TxID``UTXOIndex`UTXO bir şey `CodecID`içeriyor, ve bir `Output`de.
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`**Geçerli kod çözücü tek kimlik.`00 00`
+* **`TxID`**32 byte işlem kimliği. İşlem kimlikleri imzalanmış işlemlerin bytes Sha256 ile hesaplanır.
+* **`UTXOIndex`****`TxID`**Bu utxo yaratılmasıyla belirtilen işlemde hangi çıktıyı belirleyen bir is
+* **`AssetID`**Bu utxo referanslarını belirleyen 32 byte dizilimidir.
+* **`Output`**Bu utxo yaratan çıkış object Çıkışların seri düzleştirilmesi yukarıda tanımlanmıştı.
 
-#### Gantt UTXO Specification <a id="gantt-utxo-specification"></a>
+#### Gantt UTXO Specification<a id="gantt-utxo-specification"></a>
 
 ```text
 +--------------+----------+-------------------------+
@@ -1413,15 +1413,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO Örnek
 
-Let’s make a UTXO from the signed transaction created above:
+Yukarıda yaratılan imzalı işlemden UTXO yapalım:
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`CodecID`**:`0`
+* **`TxID`**:`0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`UTXOIndex`**0x00.
+* **`AssetID`**:`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**:`"Example SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1460,19 +1460,19 @@ Let’s make a UTXO from the signed transaction created above:
 ]
 ```
 
-## StakeableLockIn
+## - StakeableLockIn Kilit
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its locktime has passed.
+StakeableLockin kazık ve kilitli bir giriştir. StakeableLockin, sadece kilitlenme süresi geçene kadar StakeableLockOuts aynı adresten finanse edebilir.
 
-### **What StakeableLockIn Contains**
+### **Hangi Riskli Kilit Içeriyor**
 
-A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
+`TypeID`Bir StakeableLockin içerir ve bir `Locktime`de.`TransferableIn`
 
-* **`TypeID`** is the ID for this output type. It is `0x00000015`.
-* **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
-* **`TransferableIn`** is a transferable input object.
+* **`TypeID`**Bu çıktıyı gösteren bir kimlik - Evet, `0x00000015`öyle.
+* **`Locktime`**Bu uzun bir süredir, girişin sadece kazığa konabileceği tek zaman damgasını içeriyor. İkinciye özgü zaman damgası özeldir.
+* **`TransferableIn`**...transferi edilebilir bir girişim nesnesi.
 
-### **Gantt StakeableLockIn Specification**
+### **Gantt StakeableLockIn StakeableLockIn Specification StakeableLockIn**
 
 ```text
 +-----------------+-------------------+--------------------------------+
@@ -1486,7 +1486,7 @@ A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
                                     +----------------------------------+
 ```
 
-### **Proto StakeableLockIn Specification**
+### **Proto StakeableLockIn StakeableLockIn Specification StakeableLockIn StakeableLockIn**
 
 ```text
 message StakeableLockIn {
@@ -1496,13 +1496,13 @@ message StakeableLockIn {
 }
 ```
 
-### **StakeableLockIn Example**
+### **StakeableLockIn StakeableLockIn Örnek**
 
-Let’s make a StakeableLockIn with:
+StakeableLockIn bir StakeableLockIn yapalım.
 
-* **`TypeID`**: 21
-* **`Locktime`**: 54321
-* **`TransferableIn`**: “Example SECP256K1 Transfer Input as defined above”
+* **`TypeID`**21
+* **`Locktime`**54321
+* **`TransferableIn`**: "Örnek SECP256K1 Aktarım Girdi yukarıda tanımlanır
 
 ```text
 [
@@ -1534,19 +1534,19 @@ Let’s make a StakeableLockIn with:
 ]
 ```
 
-## StakeableLockOut
+## Kapalı Kapı
 
-A StakeableLockOut is an output that is locked until its locktime, but can be staked in the meantime.
+Bir StakeableLockout çıkış çıkış kilitlenene kadar kilitlenmiş ama bu süre içinde that bir çıkıştır.
 
-### **What StakeableLockOut Contains**
+### **Hangi Riskli Kilit Kapısı Içeriyor**
 
-A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
+`TypeID`Bir StakeableLockOut bir parçası `Locktime`ve bir de içeriyor.`TransferableOut`
 
-* **`TypeID`** is the ID for this output type. It is `0x00000016`.
-* **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
-* **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
+* **`TypeID`**Bu çıktıyı gösteren bir kimlik - Evet, `0x00000016`öyle.
+* **`Locktime`**Bu uzun bir süredir, bu da öncekinin sadece kazığa konabileceği tek zaman damgasını içeriyor. İkinciye özgü zaman damgası özeldir.
+* **`transferableout`**: "Örnek SECP256K1 Transfer Çıktı yukarıda tanımlanır
 
-### **Gantt StakeableLockOut Specification**
+### **Gantt Gizlenebilir Kaplama Specification**
 
 ```text
 +------------------+--------------------+--------------------------------+
@@ -1560,7 +1560,7 @@ A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
                                      +-----------------------------------+
 ```
 
-### **Proto StakeableLockOut Specification**
+### **Proto StakeableLockOut Lockout Specification Specification**
 
 ```text
 message StakeableLockOut {
@@ -1570,13 +1570,13 @@ message StakeableLockOut {
 }
 ```
 
-### **StakeableLockOut Example**
+### **Gizlenebilir Kilit Kapısı Örnekleri**
 
-Let’s make a stakeablelockout with:
+Bir gözetleme işi yapalım:
 
-* **`TypeID`**: 22
-* **`Locktime`**: 54321
-* **`TransferableOutput`**: `"Example SECP256K1 Transfer Output from above"`
+* **`TypeID`**22
+* **`Locktime`**54321
+* **`TransferableOutput`**:`"Example SECP256K1 Transfer Output from above"`
 
 ```text
 [
