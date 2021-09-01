@@ -1,14 +1,226 @@
 ---
-description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
+description: X-Chainは、Avalancheバーチャルマシン（AVM）のインスタンスです。
 ---
 
-# Exchange Chain \(X-Chain\) API
+# 取引所チェーン（X-Chain）API
 
-The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+Avalancheのネイティブプラットフォームである[X-Chain](../../learn/platform-overview/#exchange-chain-x-chain)は、Avalancheバーチャルマシン（AVM）のインスタンスです。このAPIにより、X-ChainやAVMの他のインスタンス上にアセットを作成、取引が可能になります。
 
 {% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
-#### **Signature**
+## フォーマット
+
+このAPIは、`json 2.0`RPC形式を使用します。JSON RPC呼び出し方法の詳細については、ここを参照[してください。](issuing-api-calls.md)
+
+## エンドポイント
+
+`/ext/bc/X`X-Chainとやり取りする。
+
+`/ext/bc/blockchainID`AVMを実行するブロックチェーンのID`blockchainID`である他のAVMインスタンスとやり取りします。
+
+## メソッド
+
+### avm.build
+
+このバーチャルマシンのジェネシスステートのJSON表現が与えられ、そのステートのバイト表現を作成します。
+
+#### **エンドポイント**
+
+この呼び出しは、AVMの静的APIエンドポイントに実行されます：
+
+`/ext/vm/avm`
+
+注意：アドレスにチェーンプレフィックスを含めることはできません（つまり、チェーンプレフィックスを含めることはできません。これらのプレフィックスは特定のチェーンを参照するため、静的APIエンドポイント呼び出しでX-\)が実行されます。
+
+#### **シグネチャ**
+
+```cpp
+avm.buildGenesis({
+    networkID: int,
+    genesisData: JSON,
+    encoding: string, //optional
+}) -> {
+    bytes: string,
+    encoding: string,
+}
+```
+
+エンコーディングは、任意のバイトに使用するエンコード形式を指定します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
+
+`genesisData`以下のフォームを持ちます：
+
+```cpp
+{
+"genesisData" :
+    {
+        "assetAlias1": {               // Each object defines an asset
+            "name": "human readable name",
+            "symbol":"AVAL",           // Symbol is between 0 and 4 characters
+            "initialState": {
+                "fixedCap" : [         // Choose the asset type.
+                    {                  // Can be "fixedCap", "variableCap", "limitedTransfer", "nonFungible"
+                        "amount":1000, // At genesis, address A has
+                        "address":"A"  // 1000 units of asset
+                    },
+                    {
+                        "amount":5000, // At genesis, address B has
+                        "address":"B"  // 1000 units of asset
+                    },
+                    ...                // Can have many initial holders
+                ]
+            }
+        },
+        "assetAliasCanBeAnythingUnique": { // Asset alias can be used in place of assetID in calls
+            "name": "human readable name", // names need not be unique
+            "symbol": "AVAL",              // symbols need not be unique
+            "initialState": {
+                "variableCap" : [          // No units of the asset exist at genesis
+                    {
+                        "minters": [       // The signature of A or B can mint more of
+                            "A",           // the asset.
+                            "B"
+                        ],
+                        "threshold":1
+                    },
+                    {
+                        "minters": [       // The signatures of 2 of A, B and C can mint
+                            "A",           // more of the asset
+                            "B",
+                            "C"
+                        ],
+                        "threshold":2
+                    },
+                    ...                    // Can have many minter sets
+                ]
+            }
+        },
+        ...                                // Can list more assets
+    }
+}
+```
+
+#### **コール例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id"     : 1,
+    "method" : "avm.buildGenesis",
+    "params" : {
+        "networkId": 16,
+        "genesisData": {
+            "asset1": {
+                "name": "myFixedCapAsset",
+                "symbol":"MFCA",
+                "initialState": {
+                    "fixedCap" : [
+                        {
+                            "amount":100000,
+                            "address": "avax13ery2kvdrkd2nkquvs892gl8hg7mq4a6ufnrn6"
+                        },
+                        {
+                            "amount":100000,
+                            "address": "avax1rvks3vpe4cm9yc0rrk8d5855nd6yxxutfc2h2r"
+                        },
+                        {
+                            "amount":50000,
+                            "address": "avax1ntj922dj4crc4pre4e0xt3dyj0t5rsw9uw0tus"
+                        },
+                        {
+                            "amount":50000,
+                            "address": "avax1yk0xzmqyyaxn26sqceuky2tc2fh2q327vcwvda"
+                        }
+                    ]
+                }
+            },
+            "asset2": {
+                "name": "myVarCapAsset",
+                "symbol":"MVCA",
+                "initialState": {
+                    "variableCap" : [
+                        {
+                            "minters": [
+                                "avax1kcfg6avc94ct3qh2mtdg47thsk8nrflnrgwjqr",
+                                "avax14e2s22wxvf3c7309txxpqs0qe9tjwwtk0dme8e"
+                            ],
+                            "threshold":1
+                        },
+                        {
+                            "minters": [
+                                "avax1y8pveyn82gjyqr7kqzp72pqym6xlch9gt5grck",
+                                "avax1c5cmm0gem70rd8dcnpel63apzfnfxye9kd4wwe",
+                                "avax12euam2lwtwa8apvfdl700ckhg86euag2hlhmyw"
+                            ],
+                            "threshold":2
+                        }
+                    ]
+                }
+            }
+        },
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
+```
+
+#### **例**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "bytes": "0x0000000000010006617373657431000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f6d794669786564436170417373657400044d464341000000000100000000000000010000000700000000000186a10000000000000000000000010000000152b219bc1b9ab0a9f2e3f9216e4460bd5db8d153bfa57c3c",
+        "encoding": "hex"
+    },
+    "id": 1
+}
+```
+
+### avm.createAddress
+
+指定されたユーザーによってコントロールされる新しいアドレスを作成します。
+
+#### **シグネチャ**
+
+```cpp
+avm.createAddress({
+    username: string,
+    password: string
+}) -> {address: string}
+```
+
+#### **コール例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.createAddress",
+    "params": {
+        "username": "myUsername",
+        "password": "myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **例**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "address": "X-avax12c6n252g5v3w6a6v69f0mnnzwr77jxzr3q3u7d"
+    },
+    "id": 1
+}
+```
+
+### avm.createFixedCapAsset
+
+新しい固定キャップ、真菌アセットを作成します。初期化時に数量が作成され、これ以上作成されることはありません。アセットは、以下で送信することができます`avm.send`。
+
+{% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
+
+#### **シグネチャ**
 
 ```cpp
 avm.createFixedCapAsset({
@@ -30,16 +242,16 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displays as .100, etc. Defaults to 0.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+* `name`これは、アセットの人間が読みやすい名前です。必ずしも一意ではない。
+* `symbol`iss は、アセットのショートランドシンボルです。0から4文字の間で。必ずしも一意ではない。省略可能。
+* `denomination`このアセットの残高がユーザーインターフェースでどのように表示されるかを決定します。`denomination`0`denomination`の場合、このアセットの100ユニットが100として表示されます。1の場合、このアセットの100ユニットが10.0として表示されます。2`denomination`の場合、このアセットの100ユニットが1.00などとして表示されます。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* `username`そして、トランザクション手数料を支払うユーザーを`password`示します。
+* 内に含まれる各要素は、ジェネシスでアセットの`amount`単位を`address`保持する指定を`initialHolders`します。
+* `assetID`は、新しいアセットのID。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -67,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -82,9 +294,9 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
+[`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.mint({
@@ -102,14 +314,14 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `amount``assetID`単位は、アドレスで作成、コントロールされます。`to`
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* `username`トランザクション手数料を支払うユーザーです。このアセットをより多くのミントする権限を与える鍵を保持しなければなり`username`ません。つまり、ミンターセットのいずれかに対して少なくとも_閾値_キーをコントロールする必要があります。
+* `txID`このトランザクションID
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -128,7 +340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -143,9 +355,11 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+新しい可変キャップ、カンビルアセットを作成します。初期化時にはアセットのユニットは存在しません。Mintersは、を使用してこのアセットの単位をミントすることができます`avm.mint`。
 
-#### **Signature**
+{% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
+
+#### **シグネチャ**
 
 ```cpp
 avm.createVariableCapAsset({
@@ -167,17 +381,17 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name`これは、アセットの人間が読みやすい名前です。必ずしも一意ではない。
+* `symbol`iss は、アセットのショートランドシンボルです。0から4文字の間で。必ずしも一意ではない。省略可能。
+* `denomination`このアセットの残高がユーザーインターフェースでどのように表示されるかを決定します。デノミネーションが0の場合、このアセットの100ユニットが100として表示されます。デノミネーションが2の場合、このアセットの100ユニットは.100などと表示されます。
+* `minterSets``minters`は、各要素が、中に含まれたアドレスのリスト`threshold`が、ミントトランザクションに署名することにより、より多くのアセットをまとめて指定するリストを一覧で示します。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* `username`トランザクション手数料を支払います。
+* `assetID`は、新しいアセットのID。
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -211,7 +425,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -226,9 +440,11 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+新しい非真菌アセットを作成します。初期化時にはアセットのユニットは存在しません。Mintersは、を使用してこのアセットの単位をミントすることができます`avm.mintNFT`。
 
-#### **Signature**
+{% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
+
+#### **シグネチャ**
 
 ```cpp
 avm.createNFTAsset({
@@ -249,16 +465,16 @@ avm.createNFTAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name`これは、アセットの人間が読みやすい名前です。必ずしも一意ではない。
+* `symbol`iss は、アセットのショートランドシンボルです。0から4文字の間で。必ずしも一意ではない。省略可能。
+* `minterSets``minters`は、各要素が、中に含まれたアドレスのリスト`threshold`が、ミントトランザクションに署名することにより、より多くのアセットをまとめて指定するリストを一覧で示します。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* `username`トランザクション手数料を支払います。
+* `assetID`は、新しいアセットのID。
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -284,7 +500,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -299,11 +515,11 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+ミントノンファンジブルトークン[`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset)。
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.mintNFT({
@@ -322,16 +538,16 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `assetID`は、新しく作成されたNFTアセットのアセットID
+* `payload`は、1024バイトまでの任意ペイロードです。そのエンコード形式は、引数で指定されます`encoding`。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* `username`トランザクション手数料を支払うユーザーです。このアセットをより多くのミントする権限を与える鍵を保持しなければなり`username`ません。つまり、ミンターセットのいずれかに対して少なくとも_閾値_キーをコントロールする必要があります。
+* `txID`このトランザクションID
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
+* `encoding`は、ペイロード引数に使用するエンコーディングフォーマットです。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -350,7 +566,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -365,9 +581,9 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+X-ChainからP-ChainあるいはC-Chainに非AVAXを送信します。このメソッドを呼び出した後、C-Chain[`avax.import`](contract-chain-c-chain-api.md#avax-import)に呼び出して、振り込みが完了する必要があります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.export({
@@ -385,16 +601,16 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to`iss a p-ChainあるいはC-Chainアドレス。
+* `amount`iss は、送信するアセットの額です。
+* `assetID`送信されたアセットのアセットid。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* アセットは、以下によってコントロールされたアドレスから送信されます。`username`
+* `txID`このトランザクションID
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -413,7 +629,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -428,9 +644,9 @@ curl -X POST --data '{
 
 ### avm.exportAVAX
 
-Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
+X-ChainからAVAXを別のチェーンに送信します。このメソッドを呼び出した後、他のチェーン`import`に呼び出して、振り込みを完了する必要があります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.exportAVAX({
@@ -447,15 +663,15 @@ avm.exportAVAX({
 }
 ```
 
-* `to` is the P-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to`AVAXが送信されるP-Chainアドレスです。
+* `amount`issimplyは、送信するnAVAX額です。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* AVAXは、以下によってコントロールされたアドレスから送信されます。`username`
+* `txID`このトランザクションID
+* `changeAddr`その結果、変更が送信されたアドレスとなります。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -473,7 +689,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -488,10 +704,9 @@ curl -X POST --data '{
 
 ### avm.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
+指定されたアドレスをコントロールする秘密鍵を取得します。  返却された秘密鍵は、. でユーザーに追加することができます[`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey)。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.exportKey({
@@ -501,10 +716,10 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username`コントロールする必要があります。`address`
+* `privateKey`コントロールする秘密鍵の文字列表現`address`
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -519,7 +734,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -533,9 +748,9 @@ curl -X POST --data '{
 
 ### avm.getAllBalances
 
-Get the balances of all assets controlled by a given address.
+指定されたアドレスでコントロールされるすべてのアセットの残高を取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getAllBalances({address:string}) -> {
@@ -546,7 +761,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -554,12 +769,12 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7haclsz5r"
+        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7hapvdyht"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -582,9 +797,9 @@ curl -X POST --data '{
 
 ### avm.getAssetDescription
 
-Get information about an asset.
+アセットについての情報を入手します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
@@ -595,12 +810,12 @@ avm.getAssetDescription({assetID: string}) -> {
 }
 ```
 
-* `assetID` is the id of the asset for which the information is requested.
-* `name` is the asset’s human-readable, not necessarily unique name.
-* `symbol` is the asset’s symbol.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `assetID`iss は、情報が要求されたアセットのidです。
+* `name`これは、必ずしも一意の名前ではありません。
+* `symbol`これは、アセットのシンボルです。
+* `denomination`このアセットの残高がユーザーインターフェースでどのように表示されるかを決定します。デノミネーションが0の場合、このアセットの100ユニットが100として表示されます。デノミネーションが2の場合、このアセットの100ユニットは.100などと表示されます。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -613,7 +828,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -630,9 +845,9 @@ curl -X POST --data '{
 
 ### avm.getBalance
 
-Get the balance of an asset controlled by a given address.
+指定されたアドレスでコントロールされたアセットの残高を取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getBalance({
@@ -641,10 +856,10 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `assetID` id of the asset for which the balance is requested
+* `address`アセットのオーナー
+* `assetID`バランスが要求されたアセットのid
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -658,7 +873,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -676,11 +891,75 @@ curl -X POST --data '{
 }
 ```
 
+### avm.getAdddressTxs<a id="avm-get-address-txs-api"></a>
+
+指定されたアドレスがバランスを変えるすべてのトランザクションを返します。どちらかが真である場合、トランザクションはアドレスいのバランスを変更すると言われています。
+
+* トランザクションが消費するUTXOは、少なくとも部分的に、アドレスによって所有されていません。
+* トランザクションが生成するUTXOは、少なくとも一部は、アドレスによって所有されます。
+
+注意：インデックス（`index-transactions`）は、X-chain設定で有効化する必要があります。
+
+#### **シグネチャ**
+
+```cpp
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+**リクエストパラメータ**
+
+* `address`：我々が関連したトランザクションを取得するアドレス
+* `assetID`：このアセットのバランスが変更になったトランザクションのみを返します。IDあるいはアセットのエイリアでなければなりません。
+* `pageSize`：ページごとに返却するアイテム数。オプションデフォルトは1024です。
+
+**レスポンスパラメータ**
+
+* `txIDs`：このアドレスのバランスに影響を及ぼしたトランザクションIDのリスト。
+* `cursor`：ページ番号あるいはオフセット。次のページを取得するには、要求でこれを使用してください。
+
+#### **コール例**
+
+```cpp
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **例**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txIDs": [
+            "SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"
+        ],
+        "cursor": "1"
+    },
+    "id": 1
+}
+```
+
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+指定されたトランザクションを返します。`encoding`パラメーターは、返されたトランザクションのフォーマットを設定します。`"cb58"``"hex"`あるいは、その.`"json"`デフォルトは、「cb58」になります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getTx({
@@ -692,7 +971,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -706,7 +985,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -721,22 +1000,22 @@ curl -X POST --data '{
 
 ### avm.getTxStatus
 
-Get the status of a transaction sent to the network.
+ネットワークに送信されたトランザクションステータスを得る。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` is one of:
+`status`次のいずれかです：
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
-* `Unknown`: The transaction hasn’t been seen by this node
+* `Accepted`：トランザクションは、すべてのノードで受け入れられる（あるいは受け入れられる）
+* `Processing`：トランザクションは、このノードによって投票されます
+* `Rejected`：トランザクションは、ネットワーク内のいかなるノードから受け入れられないことはありません。
+* `Unknown`：このノードではトランザクションは見ることができません。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -749,7 +1028,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -761,11 +1040,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getUTXOs
+### avm.getUTXO
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+指定されたアドレスを参照するUTXOを取得します。sourceCainが指定された場合、そのチェーンからXチェーンにエクスポートされたアトミックUTXOを回収します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.getUTXOs({
@@ -789,17 +1068,17 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `utxos`UTXOのリストにより、各UTXOが少なくとも1つのアドレスを参照する`addresses`
+* ほとんどの`limit`UTXOは返却されます。`limit`省略された場合、1024を超える場合、1024に設定されます。
+* この方法は、ページネーションを`endIndex`サポートします。`startIndex`次のUTXOセットを取得するには、次の呼び出し時にその値`endIndex`を使用してください。
+* `startIndex`省略された場合、UTXOを最大限に取得します。`limit`
+* `startIndex`（提供時）ページネーションを使用する際、UTXOは、複数の呼び出しで一意のものを保証することはできません。つまり、UTXOは、最初の呼び出しの結果に表示され、その後、2回目の呼び出しで表示される場合があります。
+* ページネーションを使用する際、複数の呼び出しで一貫性が保証されることはありません。つまり、呼び出し間でアドレスのUTXOセットが変更された可能性があります。
+* `encoding`戻されたUTXOのフォーマットを設定します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
 
-#### **Example**
+#### **例**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+少なくとも1つと`X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`を参照するすべてのUTXOを望むとします。`X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`
 
 ```cpp
 curl -X POST --data '{
@@ -814,7 +1093,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+これにより応答が得られます：
 
 ```cpp
 {
@@ -838,7 +1117,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+`numFetched`そのため、フェッチされていないUTXOがより多く存在する可能性が、`limit`我々に示すことができます。今回は、次のようにしてメソッドを呼び出します`startIndex`：
 
 ```cpp
 curl -X POST --data '{
@@ -857,7 +1136,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+これにより応答が得られます：
 
 ```cpp
 {
@@ -880,9 +1159,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+`numFetched``limit`それより少ないので、UTXOを取得したが、再びこのメソッドを呼び出す必要はありません。
 
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+PチェーンからXチェーンにエクスポートされたUTXOを取得し、ImportTxを構築したいとしましょう。その後、アトミックUTXOを取得するために、sourceChain引数でGetUTXOを呼び出す必要があります：
 
 ```cpp
 curl -X POST --data '{
@@ -898,7 +1177,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+これにより応答が得られます：
 
 ```cpp
 {
@@ -920,9 +1199,9 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+P-ChainあるいはC-ChainからX-ChainにAVAXの移動を完了します。このメソッドが呼び出される前に、P-Chain’s[`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax)あるいはC-Chain’[`avax.export`](contract-chain-c-chain-api.md#avax-export)sメソッドを呼び出して転送を開始する必要があります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.import({
@@ -933,12 +1212,12 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
-* `username` is the user that controls `to`.
-* `txID` is the ID of the newly created atomic transaction.
+* `to`AVAXが送信されるアドレスP-Chain`exportAVAX`あるいはC-Chainの呼び出しに伴う`to`引数と同じでなければなりません。`export`
+* `sourceChain`AVAXがインポートされるチェーンのIDまたはエイリアです。C-Chainから資金をインポートするには、使用してください`"C"`。
+* `username`は、コントロールするユーザです。`to`
+* `txID`は、新しく作成したアトミックトランザクションのIDです。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -954,7 +1233,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -968,9 +1247,9 @@ curl -X POST --data '{
 
 ### avm.importAVAX
 
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
+P-ChainからX-ChainにAVAXの移動を完了します。このメソッドが呼び出される前に、P-Chainの[`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax)メソッドを呼び出して転送を開始する必要があります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.importAVAX({
@@ -981,11 +1260,11 @@ avm.importAVAX({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
-* `username` is the user that controls `to`.
+* `to`AVAXが送信されるアドレスP-Chainに呼び出される際に、`to`引数と同じでなければなりません。`exportAVAX`
+* `sourceChain`AVAXがインポートされるチェーンのIDまたはエイリアです。P-Chainから資金をインポートするには、 `"P"`.
+* `username`は、コントロールするユーザです。`to`
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1001,7 +1280,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1015,9 +1294,9 @@ curl -X POST --data '{
 
 ### avm.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+アドレスをコントロールする秘密鍵を提供することにより、ユーザーにアドレスをコントロールします。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.importKey({
@@ -1027,9 +1306,9 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* `username`秘密鍵のセットに追加します。`username`現在、秘密鍵でコントロール`privateKey`されるアドレス`address`です。
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1044,7 +1323,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1058,9 +1337,9 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+`encoding`署名トランザクションをネットワークに送信します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.issueTx({
@@ -1071,7 +1350,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1085,7 +1364,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1099,9 +1378,9 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
-List addresses controlled by the given user.
+指定されたユーザーによってコントロールされるアドレスを一覧します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.listAddresses({
@@ -1110,7 +1389,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1124,7 +1403,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1138,9 +1417,9 @@ curl -X POST --data '{
 
 ### avm.send
 
-Send a quantity of an asset to an address.
+数量のアセットをアドレスに送信します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.send({
@@ -1155,14 +1434,14 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `amount`IDでアセット`amount`を送信し、. アドレスを`assetID`確保`to`します。AVAXの場合、1 nAVAX \(1AVAXの10億分の1\)です。
+* `to`iss a good is a good asset to good asset to good asset to g
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* その長さは256バイトまで可能で`memo`、添付できます。
+* アセットは、ユーザーによってコントロールされたアドレスから送信されます`username`。（もちろん、そのユーザーは、少なくとも送信されたアセットの残高を保持する必要があります。）
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1182,7 +1461,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1195,11 +1474,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.sendMultiple
+### avm.send
 
-Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+`amount`所有されたアドレスリストから指定されたアドレスへ、複数の移動を送信`assetID`します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.sendMultiple({
@@ -1216,13 +1495,13 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `memo` is an optional message, whose length can be up to 256 bytes.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `outputs`は、それぞれが、そのを含むオブジェクトリテラルの配列です`assetID``amount`。`to`
+* `memo`オプションで、長さは256バイトまで可能になります。
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* アセットは、ユーザーによってコントロールされたアドレスから送信されます`username`。（もちろん、そのユーザーは、少なくとも送信されたアセットの残高を保持する必要があります。）
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1251,7 +1530,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1266,9 +1545,9 @@ curl -X POST --data '{
 
 ### avm.sendNFT
 
-Send a non-fungible token.
+非真菌トークンを送信します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avm.sendNFT({
@@ -1282,13 +1561,13 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
-* `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
-* `to` is the X-Chain address the NFT is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
+* `assetID`送信されたNFTのアセットID。
+* `groupID`は、NFTを送信するNFTグループです。NFT作成により、各NFT ID下で複数のグループが可能になります。各グループに複数のNFTを発行できます。
+* `to`isNFTが送信したX-Chainアドレス。
+* `from`は、この操作に使用するアドレスです。`changeAddr`省略した場合、必要に応じてあなたのアドレスを使用します。省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* アセットは、ユーザーによってコントロールされたアドレスから送信されます`username`。（もちろん、そのユーザーは、少なくとも送信されたNFTのバランスを保持する必要があります。）
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1307,7 +1586,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1322,13 +1601,13 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+署名トランザクションをネットワークに送信し、txが受け付けられると想定します。署名トランザクションのフォーマットを指定`encoding`します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
 
-This call is made to the wallet API endpoint:
+この呼び出しは、ウォレットAPIエンドポイントに渡されます：
 
 `/ext/bc/X/wallet`
 
-#### Signature
+#### シグネチャ
 
 ```cpp
 wallet.issueTx({
@@ -1339,7 +1618,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+#### 例
 
 ```cpp
 curl -X POST --data '{
@@ -1353,7 +1632,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+#### 例
 
 ```cpp
 {
@@ -1367,13 +1646,13 @@ curl -X POST --data '{
 
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+数量のアセットをアドレスに送信し、txが受け入れられると想定し、将来のコールが変更されたUTXOセットを使用できるようにします。
 
-This call is made to the wallet API endpoint:
+この呼び出しは、ウォレットAPIエンドポイントに渡されます：
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 wallet.send({
@@ -1388,14 +1667,14 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `amount`IDでアセット`amount`を送信し、. アドレスを`assetID`確保`to`します。AVAXの場合、1 nAVAX \(1AVAXの10億分の1\)です。
+* `to`iss a good is a good asset to good asset to good asset to g
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* その長さは256バイトまで可能で`memo`、添付できます。
+* アセットは、ユーザーによってコントロールされたアドレスから送信されます`username`。（もちろん、そのユーザーは、少なくとも送信されたアセットの残高を保持する必要があります。）
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1415,7 +1694,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1430,13 +1709,13 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+`amount`その後の呼び出しが変更されたUTXOセットを使用できるようにするように、アドレスが所有するリストから指定されたアドレス`assetID`に、複数の移動を送信します。
 
-This call is made to the wallet API endpoint:
+この呼び出しは、ウォレットAPIエンドポイントに渡されます：
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 wallet.sendMultiple({
@@ -1453,13 +1732,13 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `outputs`は、それぞれが、そのを含むオブジェクトリテラルの配列です`assetID``amount`。`to`
+* `from`は、この操作に使用するアドレスです。省略した場合、必要に応じてあなたのアドレスを使用します。
+* `changeAddr`変更があった場合は、アドレス省略した場合、変更はユーザーがコントロールするアドレスのひとつに送信されます。
+* その長さは256バイトまで可能で`memo`、添付できます。
+* アセットは、ユーザーによってコントロールされたアドレスから送信されます`username`。（もちろん、そのユーザーは、少なくとも送信されたアセットの残高を保持する必要があります。）
 
-#### **Example Call**
+#### **コール例**
 
 ```cpp
 curl -X POST --data '{
@@ -1488,7 +1767,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **例**
 
 ```cpp
 {
@@ -1499,5 +1778,114 @@ curl -X POST --data '{
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
     }
 }
+```
+
+### イベント
+
+指定されたアドレス上でトランザクションを確認します。
+
+この呼び出しは、イベントAPIエンドポイントまで行われます：
+
+`/ext/bc/X/events`
+
+#### **Golang例**
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "log"
+    "net"
+    "net/http"
+    "sync"
+
+    "github.com/ava-labs/avalanchego/api"
+    "github.com/ava-labs/avalanchego/pubsub"
+    "github.com/gorilla/websocket"
+)
+
+func main() {
+    dialer := websocket.Dialer{
+        NetDial: func(netw, addr string) (net.Conn, error) {
+            return net.Dial(netw, addr)
+        },
+    }
+
+    httpHeader := http.Header{}
+    conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup := &sync.WaitGroup{}
+    waitGroup.Add(1)
+
+    readMsg := func() {
+        defer waitGroup.Done()
+
+        for {
+            mt, msg, err := conn.ReadMessage()
+            if err != nil {
+                log.Println(err)
+                return
+            }
+            switch mt {
+            case websocket.TextMessage:
+                log.Println(string(msg))
+            default:
+                log.Println(mt, string(msg))
+            }
+        }
+    }
+
+    go readMsg()
+
+    cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+    cmdmsg, err := json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    var addresses []string
+    addresses = append(addresses, " X-fuji....")
+    cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+    cmdmsg, err = json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup.Wait()
+}
+```
+
+**オペレーション**
+
+| コマンド | 説明 | 例 | 引数 |
+| :--- | :--- | :--- | :--- |
+| **NewSet** | 新しいアドレスマップセットを作成 | {"newSet":{}} |  |
+| **NewBloom** | 新しいブルームセットを作成します。 | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"} | maxElements - フィルター内の要素数が0以上で、0以上のコリジョンプロブで、許可されたコリジョン確率は0以上で、0以上、<= 1でなければなりません。 |
+| **Adddaddresses** | セットにアドレスを追加する | {"addAdddresses":{"addresses":["X-fuji..."]} | アドレス - |
+
+NewSet**あるいは****NewBloomを呼び出すことで、フィルターを**リセットし、Addressesで続く必要があります****。**Addaddressesは、複数回呼び出す**ことができます。
+
+**詳細**
+
+* ****NewSetは、アドレスがセットにされている場合、トランザクションが送信されます。
+* ****NewBloom [フィルターにより](https://en.wikipedia.org/wiki/Bloom_filter)誤検出が可能になります。しかし、より多くのアドレスをフィルターすることができます。アドレスがフィルター内に存在する場合、トランザクションが送信されます。
+
+#### **例**
+
+```cpp
+2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
 
