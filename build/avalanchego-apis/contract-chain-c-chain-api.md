@@ -1,12 +1,12 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+description: C-Chain Ethereum Sanal Makinesi'nin \(EVM\) bir örneğidir.
 ---
 
-# Contract Chain \(C-Chain\) API
+# Kontrat Zinciri \(C-Chain\) API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
+_Not: Ethereum kendi düşüncesi `networkID`ve düşüncesi vardır.`chainID` Bu durum Avalanche’s ağ kimliği ve zincir ile bir ilişkisi yoktur ve [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain) ile tamamen iç içe __konumdadır. On C-Chain `1`ve bu değerler `43114`için kullanılır. `43113``chainID`Fuji On bu değerler `1`için kullanılır `networkID`ve ayrıca yöntemler ve yöntemler kullanılarak elde `net_version``eth_chainId`edilebilir._
 
-## Deploying a Smart Contract
+## Akıllı bir Sözleşme Düzenlemesi
 
 {% page-ref page="../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
@@ -16,47 +16,47 @@ _Note: Ethereum has its own notion of `networkID` and `chainID`. These have no r
 
 #### JSON-RPC Endpoints
 
-To interact with C-Chain via the JSON-RPC endpoint:
+JSON-RPC sonları aracılığıyla C-Chain ile etkileşime geçmek:
 
 ```cpp
 /ext/bc/C/rpc
 ```
 
-To interact with other instances of the EVM via the JSON-RPC endpoint:
+of diğer örnekleriyle JSON-RPC sonları aracılığıyla etkileşime geçmek:
 
 ```cpp
 /ext/bc/blockchainID/rpc
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+`blockchainID`of çalıştıran blok zincirinin kimliği nerede?
 
 #### WebSocket Endpoints
 
-To interact with C-Chain via the websocket endpoint:
+Web soketi sonucu üzerinden C-Chain ile etkileşime geçmek:
 
 ```cpp
 /ext/bc/C/ws
 ```
 
-For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
+Örneğin, yerel konuttaki web sitesi aracılığıyla C-Chain's Ethereum API'si ile etkileşime geçmek için:
 
 ```cpp
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-To interact with other instances of the EVM via the websocket endpoint:
+Web soketi noktası üzerinden of diğer örnekleriyle etkileşime geçmek:
 
 ```cpp
 /ext/bc/blockchainID/ws
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+`blockchainID`of çalıştıran blok zincirinin kimliği nerede?
 
-### Methods
+### Yöntemler
 
-#### Standard Ethereum APIs
+#### Standart Ethereum API
 
-Avalanche offers an API interface identical to Geth's API except that it only supports the following services:
+Avalanche sadece aşağıdaki hizmetleri desteklemesi dışında Geth's Geth's benzer API arayüzü sunuyor:
 
 * `web3_`
 * `net_`
@@ -65,13 +65,13 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 * `txpool_`
 * `debug_`
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
+Bu hizmetlerle aynı şekilde etkileşime girebilirsiniz. Geth ile etkileşim halinde. [Ethereum Wiki'nin JSON-RPC Belgeleme](https://eth.wiki/json-rpc/API) ve [Geth’s JSON-RPC](https://geth.ethereum.org/docs/rpc/server) Belgelemesi, API'nin tam tanımını sunar.
 
-#### eth\_getAssetBalance
+#### eth\_getAssetBalance Dengesi
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain \(excluding AVAX, which must be fetched with `eth_getBalance`\).
+`eth_getAssetBalance`Standart Ethereum API'ye ek olarak, Avalanche C-Chain üzerindeki Avalanche Yerli of dengesini geri almayı teklif eder \(AVAX `eth_getBalance`hariç\).
 
-**Signature**
+**İmzalanma**
 
 ```cpp
 eth_getAssetBalance({
@@ -81,11 +81,11 @@ eth_getAssetBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `blk` is the block number or hash at which to retrieve the balance
-* `assetID` id of the asset for which the balance is requested
+* `address`Varlığın sahibi.
+* `blk`Bu blok numarası veya özet dengeyi geri almak için
+* `assetID`Dengenin istendiği varlığın kimliği
 
-**Example Call**
+**Örnek Example**
 
 ```cpp
 curl -X POST --data '{
@@ -100,9 +100,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
-**Example Response**
+**Örnek Tepki**
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -110,27 +110,27 @@ curl -X POST --data '{
 }
 ```
 
-## Avalanche Specific APIs
+## Çığ Özel API
 
-### Avalanche Specific API Endpoints
+### Çığ Özel API Uçları
 
-To interact with the `avax` specific RPC calls on the C-Chain:
+on `avax`belirli RPC çağrılarıyla etkileşime geçmek için:
 
 ```cpp
 /ext/bc/C/avax
 ```
 
-To interact with other instances of the EVM AVAX endpoints:
+EVM AVAX sonlarının diğer örnekleriyle etkileşime geçmek:
 
 ```cpp
 /ext/bc/blockchainID/avax
 ```
 
-### avax.export
+### avax. Dışarıya aktarılıyor
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
+from to bir varlık aktar. Bu yöntemi aradıktan sonra, transferi tamamlamak için [`avm.import`](exchange-chain-x-chain-api.md#avm-import)on çağırmalısınız.
 
-#### Signature
+#### İmzalanma
 
 ```cpp
 avax.export({
@@ -142,14 +142,14 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* The asset is sent from addresses controlled by `username` and `password`.
+* `to`Varlığın gönderdiği X-Chain adresi.
+* `amount`Gönderilecek varlığın miktarı.
+* `assetID`Bu muhbirin kimliği. `"AVAX"`AVAX kullanımını dışa aktarmak için.`assetID`
+* `username`Varlık kontrol edilen adreslerden gönderiliyor.`password`
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -164,7 +164,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -176,13 +176,13 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportAVAX
+### avax. avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
+**DEPRECATED—instead yerine [**use**](contract-chain-c-chain-api.md#avax-export) **kullan.
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
+AVAX AVAX AVAX gönder. Bu yöntemi aradıktan sonra, transferi tamamlamak için [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax)on çağırmalısınız.
 
-#### Signature
+#### İmzalanma
 
 ```go
 avax.exportAVAX({
@@ -196,22 +196,22 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**İstek**
 
-* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
-* `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
-* `amount` is the amount of nAVAX to send.
-* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
-* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
-* The AVAX is sent from addresses controlled by `username`
+* `from`C-Chain gönderdiği C-Chain adresleri. Büyü formatında olmalılar.
+* `to`X-Chain gönderdiği X-Chain adresi. Bech32 formatında olmalı.
+* `amount`Gönderilecek nAVAX miktarı.
+* `destinationChain`AVAX gönderdiği zincir. to fon aktarmak için, `"X"`kullanın.
+* `changeAddr`Bu C-Chain adresine herhangi bir değişiklik gönderildiği yerdir. Büyü formatında olmalı.
+* AVAX kontrol edilen adreslerden gönderiliyor`username`
 
-**Response**
+**Yanıt**
 
-* `txID` is the txid of the completed ExportTx.
+* `txID`Bu tamamlanmış of txid
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -228,7 +228,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -240,11 +240,11 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportKey
+### avax. avax.exportKey
 
-Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+Verilen adresi kontrol eden özel anahtarı al. Geri dönen özel anahtar bir kullanıcıya `avax.importKey`eklenebilir.
 
-#### Signature
+#### İmzalanma
 
 ```go
 avax.exportKey({
@@ -254,19 +254,19 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-**Request**
+**İstek**
 
-* `username` must control `address`.
-* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+* `username`Kontrol etmek zorundadır.`address`
+* `address`Bu adres, karşılık gelen özel anahtarı aktarmak istediğiniz adres. Büyü formatında olmalı.
 
-**Response**
+**Yanıt**
 
-* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+* `privateKey`Bu özel anahtarın CB58 kodlanmış sicim temsili.`address` Bir `PrivateKey-`önekleme vardır ve bir anahtarı içeriye aktarmak için kullanılabilir.`avax.importKey`
+* `privateKeyHex`Bu özel anahtarın büyü sicimi temsilidir.`address` into bir hesabı aktarmak için kullanılabilir.
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -294,9 +294,9 @@ curl -X POST --data '{
 
 ### avax.getUTXOs
 
-Gets the UTXOs that reference a given address.
+Verilen adresi gönderen UTXOs ulaşıyor.
 
-#### **Signature**
+#### **İmzalanma**
 
 ```cpp
 avax.getUTXOs(
@@ -310,7 +310,7 @@ avax.getUTXOs(
         sourceChain: string,
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -321,17 +321,17 @@ avax.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `utxos`UTXOs listesi, UTXO referansları en az bir adres içeriyor.`addresses`
+* Çoğu `limit`UTXOs geri döner. `limit`Eğer 1024 den fazla veya daha büyük ise 1024 yılına ayarlanmıştır.
+* Bu yöntem pagination. destekler. Son the geri döndüğü anlamına `endIndex`gelir. `startIndex`Bir sonraki UTXOs, için bir sonraki çağrıda olduğu `endIndex`gibi değerini kullanın.
+* Eğer `startIndex`reddedilirse, tüm UTXOs getirecektir.`limit`
+* `startIndex`pagination \(ie a a \) kullandığında, UTXOs birden fazla arama arasında eşsiz olması garantilemez. Bu da ilk çağrının sonucu olarak UTXO görünebilir, sonra ikinci çağrıda da görünebilir.
+* pagination, kullanırken tutarlılık birden fazla arama arasında garanti edilmez. Bu da UTXO adresleri aramalar arasında değişmiş olabilir.
+* `encoding`Geri dönen UTXOs. için biçimi belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
 
-#### **Example**
+#### **Örnek olarak**
 
-Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+Tüm UTXOs en azından birini istediğini `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`varsayalım.
 
 ```cpp
 curl -X POST --data '{
@@ -350,9 +350,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-This gives response:
+Bu cevap verir:
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -372,11 +372,11 @@ This gives response:
 }
 ```
 
-### avax.import
+### avax.import aktarılabilir
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+non-AVAX to bir AVAX veya AVAX transferini tamamlayın. Bu yöntem çağrılmadan önce X-Chain's transferi başlatmak için [`avm.export`](exchange-chain-x-chain-api.md#avm-export)yöntemini aramanız gerekir.
 
-#### Signature
+#### İmzalanma
 
 ```go
 avax.import({
@@ -387,19 +387,19 @@ avax.import({
 }) -> {txID: string}
 ```
 
-**Request**
+**İstek**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to`Varlığın gönderdiği adres. Bu C-Chain's çağrısında bulunan `to`argümanla aynı olmalı.`export`
+* `sourceChain`Varlığın ithal edildiği zincirin kimliği ya da takma isimleri. from fonları aktarmak için, `"X"`kullanın.
+* `username`Bu kullanıcı kontrol eder.`to`
 
-**Response**
+**Yanıt**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID`of kimliği
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -413,7 +413,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -425,13 +425,13 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importAVAX
+### avax, avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
+**DEPRECATED—instead bunun yerine [**avax.import**](contract-chain-c-chain-api.md#avax-import) **aktarma kullan
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+from to aktarma işlemi tamamlayın. Bu yöntem çağrılmadan önce X-Chain's transferi başlatmak için [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax)yöntemini aramanız gerekir.
 
-#### Signature
+#### İmzalanma
 
 ```go
 avax.importAVAX({
@@ -442,19 +442,19 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**İstek**
 
-* `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to`AVAX gönderdiği adres. Büyü formatında olmalı.
+* `sourceChain`of ithal edildiği zincirin kimliği veya takma isimleri. from fonları aktarmak için, `"X"`kullanın.
+* `username`Bu kullanıcı kontrol eder.`to`
 
-**Response**
+**Yanıt**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID`of kimliği
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -468,7 +468,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -480,11 +480,11 @@ curl -X POST --data '{
 }
 ```
 
-### avax.importKey
+### avax. avax.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Adresi kontrol eden özel anahtarı sağlayarak bir kullanıcı adresi kontrol ettir.
 
-#### Signature
+#### İmzalanma
 
 ```go
 avax.importKey({
@@ -494,17 +494,17 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-**Request**
+**İstek**
 
-* Add `privateKey` to `username`'s set of private keys.
+* `privateKey`Özel `username`anahtarları da ekle.
 
-**Response**
+**Yanıt**
 
-* `address` is the address `username` now controls with the private key. It will be in hex format.
+* `address`Adres şu `username`anda özel anahtarla kontrol ediliyor. Büyü formatında olacak.
 
-#### Example Call
+#### Örnek Example
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -517,7 +517,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### Örnek Tepki
 
 ```javascript
 {
@@ -526,6 +526,93 @@ curl -X POST --data '{
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     },
     "id": 1
+}
+```
+
+### avax.
+
+İmzalı bir işlem gönderin. İmzalı işlemlerin biçimini `encoding`belirler. "cb58" veya "hece" olabilir. "Cb58" için Defaults
+
+#### **İmzalanma**
+
+```cpp
+avax.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### **Örnek Example**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avax.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Örnek Tepki**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
+### avax.getAtomicTxStatus
+
+Ağa gönderilen bir atom işlem durumunu bildir.
+
+#### **İmzalanma**
+
+```cpp
+avax.getAtomicTxStatus({txID: string}) -> {
+  status: string,
+  blockHeight: string // returned when status is Accepted
+}
+```
+
+`status`"...bir tanesi:
+
+* `Accepted`Bu işlem her düğümle kabul edilir. `blockHeight`Mülkü kontrol et.
+* `Processing`- Bu düğümle işlem oylanıyor
+* `Dropped`: Bu düğüm, işlem geçersiz olduğunu düşündüğü için işlem bu düğümle düşürüldü.
+* `Unknown`: Bu düğümle işlem görülmedi.
+
+#### **Örnek Example**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **Örnek Tepki**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "status":"Accepted",
+        "blockHeight": "1"
+    }
 }
 ```
 
