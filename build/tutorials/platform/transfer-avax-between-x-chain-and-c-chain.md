@@ -1,89 +1,89 @@
-# Transfer AVAX Between the X-Chain and C-Chain
+# X-Chain ve C-Chain arasında AVAX aktarın
 
-## Introduction
+## Tanıştırma
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. In this tutorial, we’ll send AVAX tokens between the X-Chain and C-Chain.
+AVAX işaretleri on mevcut olup, traded, takas edilebilir, burada Primary Network'ü onaylarken ve akıllı sözleşmelerde kullanılabilecekleri veya benzin için ödeme yapılabilecek on de bulunur. Bu özel ders için, X-Chain ve C-Chain arasında AVAX işaretleri göndereceğiz.
 
-## Requirements
+## Gereklilik
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Bir Avalanche](../nodes-and-staking/run-avalanche-node.md) an tamamladınız. [Avalanche's mimarisini](../../../learn/platform-overview/) biliyorsunuz.
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
+to göndermek için biraz AVAX kullanmanız gerek! Borsada satın alarak gerçek AVAX elde edebilirsiniz ya da [AVAX Test](https://faucet.avax-test.network) from testnet AVAX alabilirsiniz ki bu Avalanche ile oynamak için ücretsiz ve kolay bir yoldur.
 
-## Transferring AVAX using the web wallet
+## Web cüzdanı kullanarak AVAX Transferring
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/) which is a non-custodial and secure way to access and move AVAX.
+to zincirler arasında aktarmanın en kolay yolu to taşımak için özel olmayan ve güvenli bir yol olan [Avalanche Cüzdanını](https://wallet.avax.network/) kullanmaktır.
 
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+Avalanche Cüzdan kaynak kodu [burada](https://github.com/ava-labs/avalanche-wallet) bulunabilir.
 
-### Step 1 - Open the Avalanche Wallet
+### Adım 1 - Çığ Cüzdanını Aç
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
+Cüzdanınızı girmek **için **giriş cüzdanını seçin. Cüzdanı ana Avalanche ağı dışında bir ağa bağlamak için **to seçin **ve bağlanacak ağı seçin.
 
-### Step 2 - Log In to Your Wallet
+### İkinci Adım - Cüzdanına Gir.
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
+Cüzdanınıza özel anahtar, mnemonik anahtar cümlesi, anahtar dosyası veya Ledger Nano S. C-Chain aktarımları kullanarak erişebilirsiniz.
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+Başarılı bir giriş yaptıktan sonra dengenizi görebilirsiniz, portföyü ve çeşitli diğer bilgilerinizi varlığınıza göre.
 
-### Step 3 - Go to the Cross Chain Tab
+### Adım 3 - Çapraz Zincir Tablosuna Git
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+Zincir arasındaki tokaların transfer edilmesinin fonksiyonelliği **Cross Chain hesabında **bulunmaktadır.
 
-### Step 4 - Enter Amount to Transfer
+### Adım 4 - Aktarıma Miktarı Girin
 
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
+**Kaynak Zinciri **ve **Hedef Zinciri için bir seçim **sunacaksınız. X-Chain ve C-Chain seçin, sırasıyla X ve C dengelerinizi ve kaynaktan hedef zincirine aktarmak için miktarı girme için bir giriş alanı göreceksiniz.
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
 
-Enter the amount you wish to transfer from the X-Chain to the C-Chain.
+from to aktarmak istediğiniz miktarı girin.
 
-### Step 5 - Confirm the Transaction
+### Adım 5 - İşlemi Onayla.
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
 
-Press **Confirm**, and then **Transfer** to initiate the transfer.
+****Tetikte ve sonra transferi başlatmak **için **transferi başlat.
 
-### Step 6 - Done!
+### - Adım 6.
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the C-Chain. The wallet will do both and show its the progress while doing so.
+Çapraz zincir transferi, iki adım işlemidir: ilk olarak from fonları aktarmak için bir işlem, diğeri ise to aktarmak için. Cüzdan ikisini de yapar ve bunu yaparken gelişimini gösterecektir.
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
+![Posta için resim](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
+İşte böyle! AVAX AVAX AVAX transfer ettin! Şimdi onları on akıllı sözleşmeler yerleştirmek için kullanabilirsin.
 
-### Transfer from the C-Chain to X-chain
+### from to aktar.
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+AVAX to geri döndürmek için ters yönde transfer yapmanız gerekir.
 
-Swap source and destination chain, by selecting them from the **Source** and **Destination** dropdown menu. The rest of the process is the same: enter the amount, confirm and transfer.
+Kaynak ve hedef zinciri, onları **Kaynak **ve **Hedef **indirme menüsünden seçerek değiştir. Sürecin geri kalanı aynı: miktarı girin, onaylayın ve aktarın.
 
-## Transferring from the X-Chain to C-Chain with API Calls
+## from API Çağrıları ile to aktarılıyor.
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+Avalanche ağına bir uygulama inşa ediyorsanız, transfer işlemi programlamalı olarak daha geniş bir işlevselliğin parçası olarak yapmak isteyebilirsiniz. Bunu AvalancheGo düğümündeki API'leri arayarak yapabilirsin. Diğer öğretmenler bir AvalancheGo düğümüne erişebileceğinizi varsayıyor on AVAX işaretleri ve düğümün anahtarında [oluşturulmuş](../../avalanchego-apis/keystore-api.md#keystorecreateuser) ve depolanan kullanıcı kimlik bilgilerine erişiminiz var.
 
-All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+Aşağıdaki tüm API çağrıları düğümün yerel olarak çalıştığını varsayar \(yani `127.0.0.1`dinleme\). Düğün, ana ağa, test ağı veya yerel bir ağa bağlı olabilir. Her durumda, API çağrıları ve yanıtlar aynı olmalıdır, adres formatları hariç. Düğüm yerel olmamalıdır; başka bir yere ev sahipliği yapan bir düğümle telefon edebilirsiniz.
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
+AVAX Avalanche Cüzdan kullanılarak transfer edildiğini fark etmiş olabileceğiniz gibi, bir çapraz zincir transfer iki işlem operasyonu:
 
-* Export AVAX from the X-Chain
-* Import AVAX to the C-Chain
+* from AVAX aktar
+* AVAX to Aktar
 
-Before we can do the transfer, we need to set up the address on the C-Chain, along with the controlling key.
+Transferi yapmadan önce on adresini kontrol anahtarıyla birlikte ayarlamalıyız.
 
-### Set Up Address and Key on the C-Chain
+### on Adres ve Anahtarı ayarla
 
-The X-Chain uses [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) addresses and the C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
+X-Chain [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) adreslerini kullanır ve C-Chain Hex Ethereum Sanal Makinesi \(EVM\) adreslerini kullanır. Adresi bir formattan diğerine dönüştürmenin hiçbir yolu yoktur, çünkü ikisi de tek yönlü şifreleme fonksiyonu kullanarak özel bir anahtardan türetilmiştir.
 
-In order to get around this, you can export a private key from the X-Chain and then import it to the C-Chain. This way, you can use the X-Chain address and change the X- prefix to a C- prefix in order to get the correct Bech32 address to use for the C-Chain.
+Bu konuyu aşmak için, from özel bir anahtar aktarabilir ve sonra to aktarabilirsiniz. Bu şekilde, X-Chain adresini kullanabilir ve C-Chain için kullanılacak doğru Bech32 adresini almak için bir C- prefix C- önekini değiştirebilirsiniz.
 
-First, export a private key from the X-Chain:
+İlk olarak, from özel bir anahtar dışarıya aktar:
 
 ```cpp
 curl -X POST --data '{
@@ -98,7 +98,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Response:
+Yanıt:
 
 ```cpp
 {
@@ -110,14 +110,14 @@ Response:
 }
 ```
 
-Now, import the same private key to the C-Chain:
+Şimdi, aynı özel anahtarı to aktar:
 
 ```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
-    "method" :"avax.importKey", 
-    "params" :{ 
+    "method" :"avax.importKey",
+    "params" :{
         "username" :"myUsername",   
         "password":"myPassword",    
         "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"    
@@ -125,7 +125,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-The response contains a hex-encoded EVM address:
+Cevap Hx kodlanmış EVM adresi içeriyor:
 
 ```cpp
 {
@@ -137,124 +137,124 @@ The response contains a hex-encoded EVM address:
 }
 ```
 
-Now we have everything we need to transfer the tokens.
+Şimdi işaretleri transfer etmek için her şeye sahibiz.
 
-### Transfer from the X-Chain to C-Chain
+### from to aktar.
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) call:
+İhracat ettiğiniz özel anahtara karşılık gelen adresi kullan ve [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax)çağrıda C- prefix kullan:
 
 ```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
-    "method" :"avm.exportAVAX", 
-    "params" :{ 
+    "method" :"avm.exportAVAX",
+    "params" :{
         "to":"C-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e",   
         "destinationChain": "C",    
         "amount": 5000000,  
         "username":"myUsername",    
-        "password":"myPassword" 
+        "password":"myPassword"
     }   
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import the AVAX to an address that you own in MetaMask or another third-party service.
+Anahtarlık kullanıcınız on özel anahtara sahip olduğu için, AVAX seçtiğiniz adrese aktarabilirsiniz. İhraç edildiği aynı adrese aktarmak gereksiz; the MetaMask veya başka bir üçüncü taraf hizmetine aktarabilirsiniz.
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,    
     "method" :"avax.importAVAX",    
-    "params" :{ 
+    "params" :{
         "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",  
         "sourceChain":"X",  
         "username":"myUsername",    
-        "password":"myPassword" 
+        "password":"myPassword"
     }   
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-where `to` is a hex-encoded EVM address of your choice.
+Burası senin seçtiğin bir evM adresi `to`olabilir.
 
-The response looks like this:
+Tepki şöyle görünüyor:
 
 ```cpp
 {   
     "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3" 
+    "result": {
+        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
     },  
-    "id": 1 
+    "id": 1
 }
 ```
 
-Note: there is no transaction fee for import transactions to the C Chain.
+Not: C Zincirine aktarım için işlem ücreti yoktur.
 
-Once your AVAX has been transferred to the C-Chain, you can use it to deploy and interact with smart contracts.
+your to transfer edildikten sonra akıllı sözleşmelerle etkileşim kurmak için kullanabilirsiniz.
 
-## Transfer from the C-Chain to X-Chain
+## from to aktar.
 
-Now, you can move AVAX back from the C-Chain to the X-Chain. First we need to export:
+AVAX from to geri taşıyabilirsin. Önce ihracat yapmalıyız:
 
 ```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
     "method" :"avax.exportAVAX",
-    "params" :{ 
+    "params" :{
         "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",   
         "amount": 5000000,  
         "username":"myUsername",    
-        "password":"myPassword" 
+        "password":"myPassword"
     }   
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-where `to` is the bech32 encoded address of an X-Chain address you hold. Make sure that the amount you export exceeds the transaction fee because both the export and import transactions will charge a transaction fee.
+`to`Burada sakladığınız X-Chain adresinin bech32 kodlanmış adresi var. İhracat ettiğiniz miktarın işlem ücretinin aştığından emin olun. Çünkü ihracat ve ithalat işlemleri bir işlem ücreti alacak.
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {   
     "jsonrpc": "2.0",   
-    "result": { 
+    "result": {
         "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"    
     },  
-    "id": 1 
+    "id": 1
 }
 ```
 
-To finish the transfer, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
+Transferi bitirmek için [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax)ara.
 
 ```cpp
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
-    "method": "avm.importAVAX", 
-    "params": { 
+    "method": "avm.importAVAX",
+    "params": {
         "username":"myUsername",    
         "password":"myPassword",    
-        "sourceChain": "C", 
+        "sourceChain": "C",
         "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
     }   
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the bech32 encoded address the X-Chain address which you sent the funds to in the previous step.
+`to`Önceki adreste gönderdiğiniz X-Chain adresi bech32 kodlu adres nerede?
 
-The response should look like this:
+Tepki şöyle olmalı:
 
 ```cpp
 {   
     "jsonrpc": "2.0",   
-    "result": { 
+    "result": {
         "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"    
     },  
-    "id": 1 
+    "id": 1
 }
 ```
 
-## Wrapping Up
+## Toplantı
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+İşte böyle! AVAX hem X-Chain hem de C-Chain arasında bir geri değiştirebilirsiniz. Avalanche Cüzdan kullanarak. Ve uygun API çağrılarını Avalanche düğümünden çağırarak.
 
