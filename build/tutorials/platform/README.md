@@ -1,12 +1,15 @@
 # Platform
 
-| Title | Description |
+| Başlık | Tarif edilmesi |
 | :--- | :--- |
-| [**Create a Blockchain**](create-a-new-blockchain.md) | Create a blockchain by creating a new instance of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain). |
-| [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
-| [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
-| [**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md) | Create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
-| [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
-| [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
-| [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
+| [**Ethereum your kapat**](launch-your-ethereum-dapp.md) | Varolan dapps to aktarmak için kılavuz |
+| [**AVM'yi çalıştıran bir Blok zinciri oluştur**](create-avm-blockchain.md) | [Avalanche Sanal Makinesi'nin \(AVM\)](../../../learn/platform-overview/#exchange-chain-x-chain) yeni bir örnek oluştur. |
+| [**Yerel Test Ağı Oluştur**](create-a-local-test-network.md) | Yerel bir Avalanche test ağı oluştur. |
+| [**Bir Subnet Oluştur**](create-a-subnet.md) | Yeni bir [alt ağ](../../../learn/platform-overview/#subnets) oluştur. |
+| [**Sanal Makine Oluştur \(VM\)**](create-a-virtual-machine-vm.md) | Çok basit [bir sanal makine](../../../learn/platform-overview/#virtual-machines) oluşturun. |
+| [**Özel Bir Blok zinciri Oluştur**](create-custom-blockchain.md) | [Sanal makineyle](../../../learn/platform-overview/#virtual-machines) özel blok zinciri oluşturun. |
+| [**"Defterini Nano S" ile Avalanche ile kur.**](setup-your-ledger-nano-s-with-avalanche.md) | Ledger Live ve Avalanche Cüzdan ile birlikte defterini kur. |
+| [**X-Chain ve P-Chain Arasındaki AVAX Aktar**](transfer-avax-between-x-chain-and-p-chain.md) | X-Chain ve P-Chain arasında AVAX gönder |
+| [**X-Chain ve C-Chain arasında AVAX aktarın**](transfer-avax-between-x-chain-and-c-chain.md) | X-Chain ve C-Chain arasında AVAX gönder. |
+| [**C-Chain ile Bütünleşme**](integrate-exchange-with-avalanche.md) | Ethereum uyumlu C-Chain ile takas için rehberlik |
 
