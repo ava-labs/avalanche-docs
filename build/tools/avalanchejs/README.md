@@ -1,64 +1,64 @@
-# AvalancheJS
+# Çığ Çığlıkları
 
-AvalancheJS is a JavaScript Library for interfacing with the [Avalanche](../../../#avalanche) platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows one to issue commands to the Avalanche node APIs.
+AvalancheJS, [Avalanche](../../../#avalanche) platformu ile etkileşim kurmak için bir JavaScript Kütüphanesi. Tip Yazılım kullanarak inşa edilmiş ve hem tarayıcı hem de Node.js. desteklemek amacıyla tasarlanmıştır. AvalancheJS kütüphanesi Avalanche node to komutlar yayınlamasına izin verir.
 
-The APIs currently supported by default are:
+Şu anda öntanımlı olarak desteklenen API'ler şunlardır:
 
-* Admin API
-* Auth API
+* API yönetir
+* API
 * AVM API \(X-Chain\)
 * EVM API \(C-Chain\)
-* Health API
-* Info API
+* Sağlık API
+* Bilgi API
 * Keystore API
-* Metrics API
+* Metrik API
 * PlatformVM API
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network).
+AvalancheJS tasarladık. Zihnimizde kullanım kolaylığı ile. Bu kütüphane, herhangi bir Javascript geliştiricisi geliştiricinin tüketimi için API uç noktalarını etkinleştiren Avalanche Platformunda bir düğüm ile etkileşime girebilir. Kütüphaneyi [Avalanche Platform](https://docs.avax.network) in son değişikliklerle güncel tutuyoruz.
 
-Using AvalancheJS, developers can:
+AvalancheJS kullanarak, geliştiriciler yapabilir:
 
-* Locally manage private keys
-* Retrieve balances on addresses
-* Get UTXOs for addresses
-* Build and sign transactions
-* Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
-* Create a Subnetwork
-* Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
-* Add a Validator to the Primary network
-* Add a Delegator to the Primary network
-* Administer a local node
-* Retrieve Avalanche network information from a node
+* Özel anahtarları yerel yönetir
+* Adreslerdeki dengeleri geri getir
+* Adresler için UTXOs al.
+* İşlemleri yapın ve imzalayın
+* Ana ağdaki X-Chain, P-Chain ve C-Chain ile işlemleri imzaladı
+* Bir Alt Ağ Oluştur
+* AVAX ve X-Chain, P-Chain ve C-Chain arasındaki varlıkları takas edin.
+* Ana ağa bir Validator ekle
+* Ana ağa bir Delegator ekle
+* Yerel bir düğüm yap
+* Avalanche ağı bilgilerini düğümden geri al
 
-## Requirements
+## Gereklilik
 
-AvalancheJS requires Node.js version 12.14.1 or higher to compile.
+AvalancheJS Node.js sürümü 12.14.1 veya derlemek için daha yüksek gerektirir.
 
-## Installation
+## Kurum
 
-Avalanche is available for install via `npm`:
+Avalanche şu şekilde yüklemek için `npm`kullanılabilir:
 
 `npm install --save avalanche`
 
-You can also pull the repo down directly and build it from scratch:
+Ayrıca repoyu doğrudan aşağı çekebilir ve sıfırdan inşa edebilirsin:
 
 `npm run build`
 
-This will generate a pure Javascript library and place it in a folder named “web” in the project root. The “avalanchejs” file can then be dropped into any project as a pure javascript implementation of Avalanche.
+Bu da saf Javascript kütüphanesi oluşturacak ve proje köküne "web" adlı bir dizine koyacak. "Çığlık" dosyası daha sonra of saf bir javascript uygulaması olarak herhangi bir projeye atılır.
 
-The AvalancheJS library can be imported into your existing Node.js project as follows:
+AvalancheJS kütüphanesi şu şekilde mevcut Node.js projenize aktarılabilir:
 
 ```text
 const avalanche = require("avalanche");
 ```
 
-Or into your TypeScript project like this:
+Ya da senin TypeScript projen:
 
 ```text
 import { Avalanche } from "avalanche"
 ```
 
-## Importing essentials
+## Temel bilgileri aktarılıyor.
 
 ```text
 import {
@@ -71,10 +71,10 @@ import {
 let bintools = BinTools.getInstance();
 ```
 
-The above lines import the libraries used in the tutorials. The libraries include:
+Yukarıdaki satırlar ders verileri için kullanılan kütüphaneleri ithal ediyor. Kütüphaneler şunlardır:
 
-* avalanche: Our javascript module.
-* bn.js: A bignumber module use by AvalancheJS.
-* buffer: A Buffer library.
-* BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
+* Çığ : Bizim javascript modülümüz.
+* Bn.js: AvalancheJS tarafından büyük sayılı modül kullanımı.
+* Bir Buffer kütüphanesi.
+* BinTools: İkili verilerle uğraşmak için kullanılan AvalancheJS içine inşa edilmiş bir singleton.
 
