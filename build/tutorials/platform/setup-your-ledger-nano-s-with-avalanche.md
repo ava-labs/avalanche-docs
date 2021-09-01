@@ -1,76 +1,78 @@
-# Set up Your Ledger Nano S or Nano X with Avalanche
+# Bir Ledger Nano S veya Nano X kullanın ve Avalanche ile
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
+cryptocurrencies güvenli bir şekilde güvenle güvence altına almak için sanayi, bilgisayarınız ve özel anahtarlarınız arasında tam izole sağlayan özel cihazlardır.
 
-If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+Daha önce yarattığınız Avalanche adresini kullanmak istiyorsanız Avalanche cüzdanından elde ettiğiniz mnemonik cümle kullanarak [geri kazanma prosedüründen geri dönüşü](https://support.ledger.com/hc/en-us/articles/360005434914) kullanmanız gerekir. Yeni bir adres you're [yeni cihaz](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) prosedürü olarak düzenli olarak follow
 
-The Avalanche Ledger wallet app is available via [Ledger Live](https://www.ledger.com/ledger-live).
+Avalanche Ledger Cüzdan uygulaması [Ledger Live](https://www.ledger.com/ledger-live) aracılığıyla mevcuttur.
 
-## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
+## Ledger Live üzerinde nasıl Çığlık Kurma<a id="1c80"></a>
 
-First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
+İlk olarak, [Ledger Live](https://www.ledger.com/ledger-live)'ı kurmanız gerekecek. MacOS, Windows ve Linux ve iOS ve Android için indirme vardır.
 
-After successfully installing the app run it. Go to the “Manager” tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter “Avalanche”. Confirm that the Avalanche app is v0.5.2 \(or greater\), and click the “Install” button.
+{% hint style="danger" %}Devam etmeden önce Ledger Live uygulamasının son sürümünü aldığından emin ol. Eski sürümler en son aygıt yazılımı ve Avalanche uygulama sürümünü gösteremeyebilir. Yazma zamanındaki en son Ledger Live uygulama sürümü 2.26.1'dir.{% endhint %}
 
-![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-06-live-install.png)
+Uygulamayı başarıyla yükledikten sonra çalıştır. "Yönetici" sekmesine gidin ve aygıtın her iki düğmesine de basarak aygıt yönetimine izin verin. Uygulama Kataloğu arama alanı "Avalanche" girişi ile girilir. Avalanche uygulamasının v0.5.2 \(veya daha büyük\) olduğunu doğrulayın ve "Kur" düğmesine tıklayın.
 
-You can confirm the installation was successful by going to the “Apps installed” tab where you should see Avalanche v0.5.2.
+![Avalanche Ledger uygulaması yükleme düğmesi](../../../.gitbook/assets/ledger-06-live-install.png)
 
-![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-07-live-version.png)
+Kurulumun "kurulu Uygulamalar" sekmesine girerek başarılı olduğunu doğrulayabilirsiniz. Avalanche v0.5.2'yi görmeniz gerekiyor.
 
-## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
+![Avalanche Ledger uygulaması yükleme düğmesi](../../../.gitbook/assets/ledger-07-live-version.png)
 
-Once you have the Avalanche app installed then you’re able to interact with the [Avalanche Wallet](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps as well as staking or delegating.
+## Ledger ile Avalanche Cüzdanını kullan<a id="48a3"></a>
 
-First, to access the wallet, plug in the Ledger to your computer and enter your pin.
+Avalanche uygulamasını bir kez kurduğunuzda Ledger aracılığıyla [Avalanche Cüzdan](https://wallet.avax.network/) ile etkileşime girebilirsiniz. Bu durum AVAX, işaretler, NFTs, çapraz zincir değişimleri ve gizleme veya delege göndermeyi içerir.
 
-![PIN code screen](../../../.gitbook/assets/ledger-03-pin.png)
+Önce cüzdana erişmek için bilgisayarına Ledger'ı takıp iğneni gir.
 
-If you have more than one app installed on the device, use left and right buttons to select Avalanche app:
+![PP kod ekranı](../../../.gitbook/assets/ledger-03-pin.png)
 
-![Avalanche app](../../../.gitbook/assets/ledger-04-app-start.png)
+Cihazın üzerinde birden fazla uygulama varsa, Avalanche uygulamasını seçmek için sol ve sağ düğmeleri kullan:
 
-Press both buttons to start the app. You should land on the “Avalanche” app screen where you can confirm that the app is version 0.5.2 \(or greater\).
+![Avalanche uygulaması](../../../.gitbook/assets/ledger-04-app-start.png)
 
-![App version](../../../.gitbook/assets/ledger-05-app-version.png)
+Uygulamayı başlatmak için iki düğmeye de basın. Uygulamanın 0.5.2 \(veya daha büyük\) olduğunu you "Avalanche" uygulama ekranına inmelisiniz.
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the “Access Wallet” button.
+![Uygulama sürümü](../../../.gitbook/assets/ledger-05-app-version.png)
 
-![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
+Avalanche uygulamasının çalıştığını onayladıktan sonra cüzdanın ana sayfasında "Giriş Cüzdanı" düğmesine tıklayın.
 
-On the subsequent “How do you want to access your wallet?”, click the “Ledger” button.
+![Cüzdan düğmesine erişin](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-![Ledger Access](../../../.gitbook/assets/ledger-01-wallet-access.png)
+Sonraki "Cüzdanına nasıl erişmek istersin?" adlı tuşuna "Ledger" tuşuna bas.
 
-You’ll now be prompted to confirm access to the public keys on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
+![Ledger Erişimi](../../../.gitbook/assets/ledger-01-wallet-access.png)
+
+Şimdi Ledger cihazındaki halka açık anahtarlara erişimi onaylamak için harekete geçeceksiniz. Aygıttaki işlemleri sağ düğmeye tıklayın ve son ekranda her iki düğmeye basarak doğrulayın.
 
 ![](../../../.gitbook/assets/ledger-02-confirm-access.png)
 
-You will need to do this twice, because different keys are used for different chains. If successful you will be signed into the wallet and any previous balances will be displayed.
+Bunu iki kez yapman gerekecek çünkü farklı anahtarlar farklı zincirlerde kullanılır. Eğer başarılı olursanız cüzdanın içine imzalarsınız ve önceki dengeler görüntülenecek.
 
-![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
+![Web Cüzdan Portfolio Tabu](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-To transfer funds, go to the “Send” tab and paste an X-Address into the “To Address” field. Set an amount and optionally set a memo. Press "Confirm" and then the “Send Transaction” button.
+Fonları transfer etmek için "Gönder" sekmesine git ve "Adres" alanına bir X-Address yapıştır. Bir miktar ayarla ve isteğe bağlı olarak bir not ayarla. "Onayla" tuşuna bas, sonra da "Gönder" düğmesine bas.
 
-![Send Transaction](../../../.gitbook/assets/send-transaction.png)
+![İşlemi Gönder](../../../.gitbook/assets/send-transaction.png)
 
-You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
+your eylemi onaylamak için harekete geçeceksiniz. Web cüzdanında gösterilen özet Ledger'da which eşleşti. Eğer her şey eşleşirse işlemleri göndermek için son ekrandaki her iki düğmeye basarak onaylayın.
 
 ![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
+Dengeyi tazelemek için simge tıklayabilirsiniz. Az önce gönderdiğiniz miktara ve işlem ücretine göre azaldığını görmelisiniz.
 
-![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
+![Cüzdan dengesini tazeleyin](../../../.gitbook/assets/refresh-wallet-balance.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+Sağ kolunda son işlemlerini göreceksiniz. Büyütücü cam simgesini tıklamak in işlemleri açacaktır.
 
-![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
+![Cam Büyüteç](../../../.gitbook/assets/magnifying-glass.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+Sonunda in işlem detaylarını görebileceksiniz. Bu işlem ile ilgili her şey listelenir, işlem kimliği, işlem gerçekleştiği zaman ve girişim ve çıktılar hakkında tüm bilgiler dahil olmak üzere.
 
-![Transaction details](../../../.gitbook/assets/transaction-details.png)
+![İşlem ayrıntıları](../../../.gitbook/assets/transaction-details.png)
 
-## More Tools to Come <a id="135b"></a>
+## Daha Çok Araç Gelsin<a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Laboratuvarı Maliye İnternet inşa ediyor. İnsanların inşa etme ve finans uygulamalarını kullanma şeklini yeniden tanımlayarak frictionless bir dünya yaratacak çözümler geliştiriyoruz. Bu altyapının kritik bir kısmı bir donanım cüzdanıdır, böylece kullanıcılar özel anahtarları ve paralarının potansiyel kötü niyetli oyunculardan tamamen ayrı olduğundan emin olabilirler. Yeni piyasaya çıkan Ledger uygulaması, kullanıcıların ve paraları güvende tutmak için en iyi uygulamaları takip ederek bunu yapıyor.
 
