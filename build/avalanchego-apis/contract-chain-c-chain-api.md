@@ -1,56 +1,136 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+description: C-Chainは、イーサリアムバーチャルマシン（EVM）のインスタンスです。
 ---
 
-# Contract Chain \(C-Chain\) API
+# コントラクトチェーン（C-Chain）API
 
-_Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` anc `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below._
+_注意：イーサリアムは、その独自の概念を持ち`networkID`ます。`chainID`これらは、AvalancheのnetworkIDとchainIDとは関係がなく、[_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)にまさしく内部となっています__。Mainnetでは、C-Chainがこれらの値`43114`のために使用`1`されます。`net_version``eth_chainId`富士テストネット上で、これらの値`43113`を`1`用いて取得`networkID`すること`chainID`も可能です。_
 
-## Deploying a Smart Contract
+## スマートコントラクトを展開する
 
 {% page-ref page="../tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
-## Methods
+## イーサリアムAPI
 
-This API is identical to Geth’s API except that it only supports the following services:
+### イーサリアムAPIエンドポイント
+
+#### JSON-RPCエンドポイント
+
+JSON-RPCエンドポイント経由でC-Chainとやり取りするには：
+
+```cpp
+/ext/bc/C/rpc
+```
+
+JSON-RPCエンドポイントを通じてEVMの他のインスタンスとやり取りするには：
+
+```cpp
+/ext/bc/blockchainID/rpc
+```
+
+EVMを実行するブロックチェーンのID`blockchainID`です。
+
+#### WebSocket エンドポイント
+
+ウェブソケットエンドポイントを通じてC-Chainとやり取りするには：
+
+```cpp
+/ext/bc/C/ws
+```
+
+例えば、ローカルホスト上でウェブソケットを介してC-ChainのイーサリアムAPIとやり取りするには、以下のようにしてください。
+
+```cpp
+ws://127.0.0.1:9650/ext/bc/C/ws
+```
+
+ウェブソケットエンドポイントを通じてEVMの他のインスタンスとやり取りするには：
+
+```cpp
+/ext/bc/blockchainID/ws
+```
+
+EVMを実行するブロックチェーンのID`blockchainID`です。
+
+### メソッド
+
+#### 標準イーサリアムAPI
+
+Avalancheは、GethのAPIと同一のAPIインターフェースを提供します。ただし、以下のサービスのみをサポートします。
 
 * `web3_`
 * `net_`
 * `eth_`
 * `personal_`
 * `txpool_`
+* `debug_`
 
-You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
+これらのサービスとやり取りできます。[イーサリアムウィキのJSON-RPC](https://eth.wiki/json-rpc/API)ドキュメントと[GethのJSON-RPC](https://geth.ethereum.org/docs/rpc/server)ドキュメントをご覧ください。このAPIの詳細については、
 
-## JSON-RPC Endpoints
+#### eth\_getAssetBalance
 
-To interact with C-Chain:
+標準的なイーサリアムAPIに加え、Avalancheは、C-Chain上でファーストクラスのAvalancheネイティブトークンのバランスを取り出すよう提供しています（AVAXを除く、Cチェーンでフェッチ`eth_getAssetBalance`する必要があります`eth_getBalance`。
 
-```cpp
-/ext/bc/C/rpc
-```
-
-To interact with other instances of the EVM:
+**シグネチャ**
 
 ```cpp
-/ext/bc/blockchainID/rpc
+eth_getAssetBalance({
+    address: string,
+    blk: BlkNrOrHash,
+    assetID: string,
+}) -> {balance: int}
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM.
+* `address`アセットのオーナー
+* `blk`バランスを取り戻すブロック番号あるいはハッシュ
+* `assetID`バランスが要求されたアセットのid
 
-To interact with the `avax` specific RPC calls
+**コール例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getAssetBalance",
+    "params": [
+        "0x8723e5773847A4Eb5FeEDabD9320802c5c812F46",
+        "latest",
+        "3RvKBAmQnfYionFXMfW5P8TDZgZiogKbHjM8cjpu16LKAgF5T"
+    ],
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+**例**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x1388"
+}
+```
+
+## Avalanche固有API
+
+### Avalanche 固有 API エンドポイント
+
+C-Chain上で呼び出される`avax`特定のRPCとやり取りするには、次のようにします。
 
 ```cpp
 /ext/bc/C/avax
 ```
 
-## AVAX RPC endpoints
+EVM AVAXエンドポイントの他のインスタンスとやり取りするには：
+
+```cpp
+/ext/bc/blockchainID/avax
+```
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
+C-ChainからX-Chainにアセットをエクスポートします。このメソッドを呼び出した後、X-Chain[`avm.import`](exchange-chain-x-chain-api.md#avm-import)に呼び出して、振り込みが完了する必要があります。
 
-#### Signature
+#### シグネチャ
 
 ```cpp
 avax.export({
@@ -62,14 +142,14 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* The asset is sent from addresses controlled by `username` and `password`.
+* `to`iss a good is a good asset to good asset to good asset to g
+* `amount`iss は、送信するアセットの額です。
+* `assetID`は、アセットのID。AVAX`"AVAX"`で使用される輸出をするには、`assetID`
+* アセットは、管理された`username`アドレスから送信されます。`password`
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -84,7 +164,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -98,11 +178,11 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
+**DEPRECATED—代わりに[**avax.export**](contract-chain-c-chain-api.md#avax-export)を使用**する
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) on the X-Chain to complete the transfer.
+CチェーンからX-ChainにAVAXを送信します。このメソッドを呼び出した後、X-Chain[`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax)に呼び出して、振り込みが完了する必要があります。
 
-#### Signature
+#### シグネチャ
 
 ```go
 avax.exportAVAX({
@@ -116,22 +196,22 @@ avax.exportAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**リクエスト**
 
-* `from` is the C-Chain addresses the AVAX is sent from. They should be in hex format.
-* `to` is the X-Chain address the AVAX is sent to. It should be in bech32 format.
-* `amount` is the amount of nAVAX to send.
-* `destinationChain` is the chain the AVAX is sent to. To export funds to the X-Chain, use `"X"`.
-* `changeAddr` is the C-Chain address where any change is sent to. It should be in hex format.
-* The AVAX is sent from addresses controlled by `username`
+* `from`iss a C-Chainアドレス彼らは16進形式でなければなりません。
+* `to`AVAXが送信されるX-Chainアドレス。bech32形式でなければなりません。
+* `amount`issimplyは、送信するnAVAX額です。
+* `destinationChain`AVAXが送信されるチェーンです。X-Chainに資金を輸出するには、使用してください`"X"`。
+* `changeAddr`変更が送信されたC-Chainアドレス。16進形式でなければなりません。
+* AVAXは、以下によってコントロールされたアドレスから送信されます。`username`
 
-**Response**
+**レスポンス**
 
-* `txID` is the txid of the completed ExportTx.
+* `txID`issiminceは、完了したExportTxのtxidです。
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -148,7 +228,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -162,9 +242,9 @@ curl -X POST --data '{
 
 ### avax.exportKey
 
-Get the private key that controls a given address. The returned private key can be added to a user with `avax.importKey`.
+指定されたアドレスをコントロールする秘密鍵を取得します。返却された秘密鍵は、. でユーザーに追加することができます`avax.importKey`。
 
-#### Signature
+#### シグネチャ
 
 ```go
 avax.exportKey({
@@ -174,19 +254,19 @@ avax.exportKey({
 }) -> {privateKey: string}
 ```
 
-**Request**
+**リクエスト**
 
-* `username` must control `address`.
-* `address` is the address for which you want to export the corresponding private key. It should be in hex format.
+* `username`コントロールする必要があります。`address`
+* `address`は、対応する秘密をエクスポートしたいアドレスです。16進形式でなければなりません。
 
-**Response**
+**レスポンス**
 
-* `privateKey` is the CB58 endcoded string representation of the private key that controls `address`. It has a `PrivateKey-` prefix and can be used to import a key via `avax.importKey`.
-* `privateKeyHex` is the hex string representation of the private key that controls `address`. It can be used to import an account into Metamask.
+* `privateKey`コントロールする秘密鍵のCB58エンコードされた文字列表現`address``PrivateKey-`プレフィックスがあり、 . を経由して鍵をインポートするのに使用できます。`avax.importKey`
+* `privateKeyHex`is is コントロールする秘密鍵の10進文字列表現`address`Metamaskにアカウントをインポートするために使用できます。
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -199,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -212,11 +292,11 @@ curl -X POST --data '{
 }}
 ```
 
-### avax.getUTXOs
+### avax.getUTXO
 
-Gets the UTXOs that reference a given address.
+指定されたアドレスを参照するUTXOを取得します。
 
-#### **Signature**
+#### **シグネチャ**
 
 ```cpp
 avax.getUTXOs(
@@ -230,7 +310,7 @@ avax.getUTXOs(
         sourceChain: string,
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -241,17 +321,17 @@ avax.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `utxos`UTXOのリストにより、各UTXOが少なくとも1つのアドレスを参照する`addresses`
+* ほとんどの`limit`UTXOは返却されます。`limit`省略された場合、1024を超える場合、1024に設定されます。
+* この方法は、ページネーションを`endIndex`サポートします。`startIndex`次のUTXOセットを取得するには、次の呼び出し時にその値`endIndex`を使用してください。
+* `startIndex`省略された場合、UTXOを最大限に取得します。`limit`
+* （す`startIndex`なわち、提供時）ページネーションを使用する際、UTXOは、複数の呼び出しでユニークであることが保証されることはありません。つまり、UTXOは、最初の呼び出しの結果に表示され、その後、2回目の呼び出しで表示される場合があります。
+* ページネーションを使用する際、複数の呼び出しで一貫性が保証されることはありません。つまり、呼び出し間でアドレスのUTXOセットが変更された可能性があります。
+* `encoding`戻されたUTXOのフォーマットを設定します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
 
-#### **Example**
+#### **例**
 
-Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
+少なくとも1つを参照するすべてのUTXOを望むとします`C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`。
 
 ```cpp
 curl -X POST --data '{
@@ -270,9 +350,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-This gives response:
+これにより応答が得られます：
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
@@ -294,9 +374,9 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method to initiate the transfer.
+X-ChainからC-Chainに非AVAXあるいはAVAXの移動を完了します。このメソッドが呼び出される前に、X-Chainの[`avm.export`](exchange-chain-x-chain-api.md#avm-export)メソッドを呼び出して転送を開始する必要があります。
 
-#### Signature
+#### シグネチャ
 
 ```go
 avax.import({
@@ -307,19 +387,19 @@ avax.import({
 }) -> {txID: string}
 ```
 
-**Request**
+**リクエスト**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to`iss は、アセットが送信されたアドレスです。C-Chainに呼び出される際に、これは`to`引数と同じでなければなりません。`export`
+* `sourceChain`iss a good is is a good asset from the kernel how to complete relative relativeX-Chainから資金をインポートするには、 `"X"`.
+* `username`は、コントロールするユーザです。`to`
 
-**Response**
+**レスポンス**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID`issimplified ImportTxのID。
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -333,7 +413,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -347,11 +427,11 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
+**DEPRECATED—代わりに[**avax.import**](contract-chain-c-chain-api.md#avax-import)**を使用する
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+X-ChainからC-ChainにAVAXの移動を完了します。このメソッドが呼び出される前に、X-Chainの[`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax)メソッドを呼び出して転送を開始する必要があります。
 
-#### Signature
+#### シグネチャ
 
 ```go
 avax.importAVAX({
@@ -362,19 +442,19 @@ avax.importAVAX({
 }) -> {txID: string}
 ```
 
-**Request**
+**リクエスト**
 
-* `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `username` is the user that controls `to`.
+* `to`AVAXが送信されるアドレス16進形式でなければなりません。
+* `sourceChain`AVAXがインポートされるチェーンのIDまたはエイリアです。X-Chainから資金をインポートするには、 `"X"`.
+* `username`は、コントロールするユーザです。`to`
 
-**Response**
+**レスポンス**
 
-* `txID` is the ID of the completed ImportTx.
+* `txID`issimplified ImportTxのID。
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -388,7 +468,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -402,9 +482,9 @@ curl -X POST --data '{
 
 ### avax.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+アドレスをコントロールする秘密鍵を提供することにより、ユーザーにアドレスをコントロールします。
 
-#### Signature
+#### シグネチャ
 
 ```go
 avax.importKey({
@@ -414,17 +494,17 @@ avax.importKey({
 }) -> {address: string}
 ```
 
-**Request**
+**リクエスト**
 
-* Add `privateKey` to `username`'s set of private keys.
+* 秘密鍵`username`のセットに追加`privateKey`します。
 
-**Response**
+**レスポンス**
 
-* `address` is the address `username` now controls with the private key. It will be in hex format.
+* `address`は、`username`現在秘密鍵でコントロールされているアドレスです。16進形式でとなります。
 
-#### Example Call
+#### コール例
 
-```javascript
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -437,7 +517,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-#### Example Response
+#### 例
 
 ```javascript
 {
@@ -446,6 +526,93 @@ curl -X POST --data '{
         "address": "0xc876DF0F099b3eb32cBB78820d39F5813f73E18C"
     },
     "id": 1
+}
+```
+
+### avax.issueTx
+
+`encoding`署名トランザクションをネットワークに送信します。「cb58」あるいは「六角」のいずれかでできます。デフォルトは、「cb58」になります。
+
+#### **シグネチャ**
+
+```cpp
+avax.issueTx({
+    tx: string,
+    encoding: string, //optional
+}) -> {
+    txID: string
+}
+```
+
+#### **コール例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avax.issueTx",
+    "params" :{
+        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **例**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "txID":"NUPLwbt2hsYxpQg4H2o451hmTWQ4JZx2zMzM4SinwtHgAdX1JLPHXvWSXEnpecStLj"
+    }
+}
+```
+
+### avax.getAtomicTxStatus
+
+ネットワークに送信されたアトミックトランザクションステータスを取得します。
+
+#### **シグネチャ**
+
+```cpp
+avax.getAtomicTxStatus({txID: string}) -> {
+  status: string,
+  blockHeight: string // returned when status is Accepted
+}
+```
+
+`status`次のいずれかです：
+
+* `Accepted`：トランザクションは、すべてのノードで受け入れられる（あるいは受け入れられる）ものです。`blockHeight`プロパティを確認する
+* `Processing`：トランザクションは、このノードによって投票されます
+* `Dropped`：トランザクションが無効と考えられていたため、このノードによってトランザクションは削除されました。
+* `Unknown`：このノードではトランザクションは見ることができません。
+
+#### **コール例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTxStatus",
+    "params" :{
+        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### **例**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "status":"Accepted",
+        "blockHeight": "1"
+    }
 }
 ```
 
