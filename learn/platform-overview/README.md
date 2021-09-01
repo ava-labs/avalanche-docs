@@ -1,90 +1,92 @@
 ---
-description: Learn the core concepts and architecture of Avalanche
+description: of temel kavramlarını ve mimarisini öğren.
 ---
 
-# Platform Overview
+# Platform Gözlemesi
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche 3 yerleşik blok zincirine sahiptir: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform**](./#platform-chain-p-chain) Zinciri \(P-Chain\) ve [**Kontrat Zinciri **\(C-Chain\)](./#contract-chain-c-chain) Üç blok zincirinin hepsi de [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network) tarafından [onaylanmış](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) ve güvence altına alınmıştır. Ana Ağ özel bir [alt ağdır](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet) ve tüm özel alt ağların üyeleri en az 2.000 AVAX gözetleyerek birincil Ağ'ın bir üyesi olmalıdır.
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
+Burada [alt ağ oluşturma](../../build/tutorials/platform/create-a-subnet.md) ve bir alt ağa [doğrulayıcı ekleme](../../build/tutorials/nodes-and-staking/add-a-validator.md) konusunda özel bilgiler var.
 
-![Primary network](../../.gitbook/assets/image%20%2821%29.png)
+![Ana ağ](../../.gitbook/assets/image%20%2821%29.png)
 
-## Subnets
+## Alt ağlar
 
-A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+Alt ****ağ veya alt ağ bir blok zincirinin durumu üzerinde uzlaşma sağlamak için birlikte çalışan bir doğrulayıcı kümesidir. Her blok zinciri tam olarak bir alt ağ tarafından geçerlidir. Bir alt ağ birçok blok zincirini doğrulayabilir. Bir düğüm birçok alt ağ üyesi olabilir.
 
-A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+Bir alt ağ kendi üyeliğini yönetir ve kurucu its belirli özelliklere sahip olması gerekebilir. Bu çok yararlı ve daha derinlerde onun etkilerini araştırıyoruz:
 
-### Compliance
+### Uygun
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
+Avalanche’s alt ağ mimarisi düzenleyici uyum sağlayabilir. Yukarıda belirtildiği gibi, alt ağ bir dizi gereksinim setini yerine getirmek için onaylayıcı gerekebilir.
 
-Some examples include:
+Bazı örnekler şunlardır:
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+* Verilen bir ülkede Validators bulunmalı
+* Doğrulayıcılar KYC/AML checks geçmeli
+* Validators belirli bir lisans sahibi olmalıdırlar
 
-### Support for Private Blockchains
+### Özel Blokçular için destek
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+Sadece belirli önceden tanımlanmış validators katılabileceği ve blok zincirlerinin içeriğinin sadece validators. için görünür olduğu özel bir alt ağ oluşturabilirsiniz. Bu bilgi bilgilerini gizli tutmak isteyen örgütler için ideal.
 
-### Separation of Concerns
+### Endişelerin Ayrılması
 
-In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
+Heterojen blok zincirleri ağında, bazı doğrulayıcılar belirli blok zincirlerini onaylamak istemezler, çünkü bu blockchains. zincirlerle ilgilenmezler. Alt ağ modeli validators sadece değer verdikleri blok zincirleriyle ilgilenmelerini sağlar. Bu durum on yükünü azaltıyor.
 
-### Application-Specific Requirements
+### Uygulama Özel-Özel Gereklilikleri
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+Farklı blok zinciri tabanlı uygulamalar belirli özelliklere sahip olmak için geçerli olanlardır. Büyük miktarda RAM veya CPU gücü gerektiren bir uygulama olduğunu varsayalım. Bir Subnet, validators belirli [donanım gereksinimlerini](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) yerine getirmesi için başvurunun düşük performanslı bir performans göstermemesi için gerekli olabilir.
 
-## Virtual Machines
+## Sanal Makineler
 
-A **Virtual Machine** \(VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+Bir **Sanal Makine **\(VM\) bir blok zincirinin uygulama seviyesindeki mantığını tanımlar. Teknik terimlerde, blok zincirinin durumu, devlet geçiş fonksiyonları, işlemleri ve API kullanıcıların blok zinciriyle etkileşim sağlayabilecekleri API belirler. on her blok zinciri bir VM örneğidir.
 
-When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
+Bir VM yazdığınızda, ağ, uzlaşma ve blok zincirinin yapısını gibi düşük seviyeli mantık ile ilgilenmenize gerek yok. Avalanche bunu sahnelerin arkasında yapıyor, böylece yapmak istediğin şeye odaklanabilesin.
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+Bir blok zinciri için bir VM'yi bir plan olarak düşün; aynı VM'yi birçok blok zinciri oluşturmak için kullanabilirsiniz, her biri aynı kural setini takip eder, ancak mantıksal olarak diğer blok zincirlerinden bağımsız olarak kullanabilirsiniz.
 
-### Why Virtual Machines?
+### Neden Sanal Makineler?
 
-At first, blockchain networks had one Virtual Machine \(VM\) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
+Başlangıçta, blok zinciri ağları önceden tanımlanmış ve statik işlevsellik kümesi olan bir Sanal Makine \(VM\) vardı. Bu katı monolitik tasarım bu tür ağlarda bir blok zincirli uygulamaların çalıştırılabileceği kadar kısıtlı.
 
-People who wanted custom decentralized applications had to create their own, entirely new blockchain network from scratch. Doing so required a great deal of time and effort, offered limited security, and generally resulted in a bespoke, fragile blockchain that never got off the ground.
+Özel merkeziyetli uygulamaları isteyen insanlar kendi yeni blok zinciri ağı oluşturmak zorunda kaldılar. Bu yüzden çok fazla zaman ve çaba gerektirdi, sınırlı güvenlik önerdi ve genellikle yerden hiç inmeyen hassas bir blok zinciriyle sonuçlandı.
 
-Ethereum made a step toward solving this problem with smart contracts. Developers didn’t need to worry about networking and consensus, but creating decentralized applications was still hard. The Ethereum VM has low performance and imposes restrictions on smart contract developers. Solidity and the other few languages for writing Ethereum smart contracts are unfamiliar to most programmers.
+Ethereum bu sorunu akıllı sözleşmelerle çözme yolunda bir adım attı. Geliştiricilerin ağ ve uzlaşma konusunda endişelenmelerine gerek yoktu, ancak merkeziyetli uygulamalar yaratmak hala zordu. Ethereum VM, düşük performansı ve akıllı kontrat geliştiricilerine kısıtlamalar uyguluyor. Ethereum akıllı sözleşmeleri yazma konusunda doğruluk ve diğer birkaç dil, birçok programcıya aşina değildir.
 
-Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go \(other languages will be supported in the future\).
+Avalanche VM'leri \(AVM\) blok zinciri tabanlı ademi merkeziyetli bir uygulamayı tanımlamayı kolaylaştırır. Yeni ve sınırlı diller yerine geliştiriciler Go içinde VMs yazabilir \(gelecekte diğer diller desteklenecektir\).
 
-### Creating Your Blockchain and Virtual Machine
+### Blockchain ve Sanal Makineyi Oluştur
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
+Avalanche yeni instances kurulmasını destekliyor.
 
-{% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
+{% page-ref page="../../build/tutorials/platform/create-avm-blockchain.md" %}
 
-In the future, Avalanche will allow you to define and launch custom blockchains, and we’ll release SDKs to help you do so.
+Avalanche ayrıca sanal makinelerle özel blok zincirleri oluşturmayı da destekler.
 
 {% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
 
-## Exchange Chain \(X-Chain\)
+{% page-ref page="../../build/tutorials/platform/create-custom-blockchain.md" %}
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like “can’t be traded until tomorrow” or “can only be sent to US citizens.”
+## Takas Zinciri \(X-Chain\)
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
+**X-Chain dijital akıllı varlıkların oluşturulması ve ticareti için merkeziyetli bir platform olarak hareket eder, gerçek dünya kaynaklarının \(örneğin, eşitlik, bağlar\) davranışlarını yöneten bir dizi kuralla, "yarına kadar takas edilemez" veya "sadece ABD vatandaşlarına gönderilebilir." gibi bir dizi kuralla bir temsili olarak hareket **eder.
 
-The X-Chain is an instance of the Avalanche Virtual Machine \(AVM\). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+on takas edilen bir varlık is on bir blok zincirine işlem yaptığınızda, in belirlenen bir ücret ödersiniz.
+
+X-Chain, Avalanche Sanal Makinesi'nin \(AVM\) bir örneğidir. [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md), istemcilere X-Chain ve AVM'nin diğer örneklerinde varlık oluşturma ve ticaret imkanı sağlar.
 
 {% page-ref page="../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-## Platform Chain \(P-Chain\)
+## Platform Zinciri \(P-Chain\)
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+****P-Chain, Avalanche üzerindeki metadata blok zinciridir ve geçerli validators, koordinatlar, aktif subnets, takip eder ve yeni alt ağların oluşturulmasını sağlar. P-Chain [Snowman uzlaşma protokolünü](../../#snowman-consensus-protocol) uyguluyor.
 
-The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+[P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md), istemcilere alt ağ oluşturma, alt ağlara doğrulayıcı eklemesine ve blok zincirleri oluşturmasına izin verir.
 
-## Contract Chain \(C-Chain\)
+## Kontrat Zinciri \(C-Chain\)
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
+**C-Chain, [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md)'sini kullanarak yaratılma akıllı sözleşmelerini **sağlar.
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
+C-Chain, [Avalanche](../../) tarafından çalışan Ethereum Sanal Makinesi'nin bir örneğidir.
 
