@@ -1,6 +1,6 @@
-# Send an Asset on the X-Chain
+# Envoyer un actif sur la X-Chain
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+Cet exemple envoie un actif dans la chaîne X à un seul destinataire. La première étape de ce processus est de créer une instance d'Avalanche connecté à notre endpoint de choix de la plateforme Avalanche.
 
 ```text
 import {
@@ -8,40 +8,40 @@ import {
     BinTools,
     Buffer,
     BN
-  } from "avalanche" 
+  } from "avalanche"
 
 let myNetworkID = 1; //default is 3, we want to override that for our local network
-let myBlockchainID = "GJABrZ9A6UQFpwjPU8MDxDd8vuyRoDVeDAXc694wJ5t3zEkhU"; // The X-Chain blockchainID on this network
+let myBlockchainID = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"; // The X-Chain blockchainID on this network
 let avax = new avalanche.Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
 let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 ```
 
-We’re also assuming that the keystore contains a list of addresses used in this transaction.
+Nous supposons également que la keystore contient une liste d'adresses utilisées dans cette transaction.
 
-## Getting the UTXO Set <a id="getting-the-utxo-set"></a>
+## Obtenir l'ensemble UTXO<a id="getting-the-utxo-set"></a>
 
-The X-Chain stores all available balances in a datastore called Unspent Transaction Outputs \(UTXOs\). A UTXO Set is the unique list of outputs produced by transactions, addresses that can spend those outputs, and other variables such as lockout times \(a timestamp after which the output can be spent\) and thresholds \(how many signers are required to spend the output\).
+La X-Chain stocke tous les soldes disponibles dans un datastore appelé Extrants de transaction non dépensés \(UTXOs\). Un ensemble UTXO est la liste unique des sorties produites par les transactions, des adresses qui peuvent dépenser ces sorties et d'autres variables telles que les temps de verrouillage \(un stamp après lequel la sortie peut être dépensée\) et des seuils \(combien de signataires sont nécessaires pour dépenser la sortie\).
 
-For the case of this example, we’re going to create a simple transaction that spends an amount of available coins and sends it to a single address without any restrictions. The management of the UTXOs will mostly be abstracted away.
+Pour le cas de cet exemple, nous allons créer une transaction simple qui dépense une quantité de pièces disponibles et l'envoie à une seule adresse sans aucune restriction. La gestion des UTXOs sera principalement abstraite.
 
-However, we do need to get the UTXO Set for the addresses we’re managing.
+Cependant, nous devons obtenir l'ensemble UTXO pour les adresses que nous gérons.
 
 ```text
 let myAddresses = xchain.keyChain().getAddresses(); //returns an array of addresses the KeyChain manages
 let addressStrings = xchain.keyChain().getAddressStrings(); //returns an array of addresses the KeyChain manages as strings
-let utxos = await xchain.getUTXOs(myAddresses);
+let utxos = (await xchain.getUTXOs(myAddresses)).utxos;
 ```
 
-## Spending the UTXOs <a id="spending-the-utxos"></a>
+## dépenser les UTXOs<a id="spending-the-utxos"></a>
 
-The `buildBaseTx()` helper function sends a single asset type. We have a particular assetID whose coins we want to send to a recipient address. This is an imaginary asset for this example which we believe to have 400 coins. Let’s verify that we have the funds available for the transaction.
+La fonction `buildBaseTx()`d'aide envoie un seul type d'actifs. Nous avons un identifiant d'actif particulier dont nous voulons envoyer des pièces à une adresse de destinataire. C'est un actif imaginaire pour cet exemple que nous croyons avoir 400 pièces. Vérifiez que nous avons les fonds disponibles pour la transaction.
 
 ```text
 let assetid = "23wKfz3viWLmjWo2UZ7xWegjvnZFenGAVkouwQCeB9ubPXodG6"; //avaSerialized string
 let mybalance = utxos.getBalance(myAddresses, assetid); //returns 400 as a BN
 ```
 
-We have 400 coins! We’re going to now send 100 of those coins to our friend’s address.
+Nous avons 400 pièces ! Nous allons maintenant envoyer 100 de ces pièces à l'adresse de notre ami.
 
 ```text
 let sendAmount = new BN(100); //amounts are in BN format
@@ -56,33 +56,33 @@ let friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk"; // address
 //   * An array of addresses any leftover funds are sent
 //   * The AssetID of the funds being sent
 let unsignedTx = await xchain.buildBaseTx(utxos, sendAmount, [friendsAddress], addressStrings, addressStrings, assetid);
-let signedTx = xchain.signTx(unsignedTx);
+let signedTx = unsignedTx.sign(myKeychain)
 let txid = await xchain.issueTx(signedTx);
 ```
 
-And the transaction is sent!
+Et la transaction est envoyée !
 
-## Get the status of the transaction <a id="get-the-status-of-the-transaction"></a>
+## Obtenez l'état de la transaction<a id="get-the-status-of-the-transaction"></a>
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the X-Chain.
+Maintenant que nous avons envoyé la transaction au réseau, il faut quelques secondes pour déterminer si la transaction a été traversée. Nous pouvons obtenir un statut mis à jour sur la transaction en utilisant la TxID via la X-Chain.
 
 ```text
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"
 let status = await xchain.getTxStatus(txid);
 ```
 
-The statuses can be one of “Accepted”, “Processing”, “Unknown”, and “Rejected”:
+Les statuts peuvent être l'un des statuts « acceptés », « Traitement  », « Inconnu » et « rejetés » :
 
-* “Accepted” indicates that the transaction has been accepted as valid by the network and executed
-* “Processing” indicates that the transaction is being voted on.
-* “Unknown” indicates that node knows nothing about the transaction, indicating the node doesn’t have it
-* “Rejected” indicates the node knows about the transaction, but it conflicted with an accepted transaction
+* "accepté" indique que la transaction a été acceptée comme valide par le réseau et exécuté
+* « Traitement » indique que la transaction est votée
+* « Unknown » indique que le nœud ne sait rien sur la transaction, indiquant que le nœud ne l'a pas.
+* "Rejeté" indique que le nœud sait sur la transaction, mais qu'il est en conflit avec une transaction acceptée
 
-## Check the results <a id="check-the-results"></a>
+## Vérifier les résultats<a id="check-the-results"></a>
 
-The transaction finally came back as “Accepted”, now let’s update the UTXOSet and verify that the transaction balance is as we expected.
+La transaction est finalement revenue comme étant « acceptée », maintenant mettons à jour l'UTXOSet et vérifions que le solde de la transaction est comme nous l'attendons.
 
-_Note: In a real network the balance isn’t guaranteed to match this scenario. Transaction fees or additional spends may vary the balance. For the purpose of this example, we assume neither of those cases._
+_Remarque : dans un vrai réseau, le solde n'est pas garanti pour correspondre à ce scénario. Les frais de transaction ou les dépenses supplémentaires peuvent varier le solde. Aux fins de cet exemple, nous ne supposons ni l'un ni l'un de ces cas._
 
 ```text
 let updatedUTXOs = await xchain.getUTXOs();
