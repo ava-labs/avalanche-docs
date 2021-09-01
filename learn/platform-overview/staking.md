@@ -1,104 +1,95 @@
 ---
-description: Avalanche üzerinde validasyon veya delegasyon ile nasıl stake edeceğinizi öğrenin
+description: Geçerli ya da delege yaparak on kazık kazığı öğren.
 ---
 
-# Staking
+# - Takılıyor
 
-Staking veya stake etme, bir network'e destek olmak amacıyla tokenları kilitleme ve bunun karşılığında bir ödül alma sürecidir.\(Örneğin bu ödül, parasal bir karşılık olabilir.\) Staking konseptini, [resmi olarak ilk kez] (https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) Peercoin’den Sunny King ve Scott Nadal sunmuştur.
+Bu nedenle bir ağ için bir ağ desteği için tokens kilitlemek için bir süreç \(karşılığında ödül olarak da artarak ağ yararı, para tazminatı vb.\) İlk [olarak](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) Sunny King ve Scott Nadal tarafından tanıtıldı.
 
-### Proof-of-stake nasıl çalışır?
+### Kazık kanıtları nasıl çalışıyor?
 
-Merkezi olmayan bir ağın [Sybil ataklarına](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack) direnmesi için network etkisi karşılığında nadir bir kaynak ile ödeme yapılması gerekir. Bu, ağın güvenliğini tehlikeye atacak bir saldırının nüfuz kazanmasını mümkün olmayacak şekilde masraflı hale getirir. Bu nadir kaynak, proof-of-work sistemlerinde işlem gücüdür. Avalanche’da ise bu nadir kaynak [AVAX native tokenidir](../../#avalanche-avax-token). Bir node’un yani blokzincir düğümünün Avalanche üzerindeki bir blockzincir üzerinde [validasyon sağlaması](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) için AVAX stake etmesi gerekir.
+[Sistem saldırılarına](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack) karşı koymak için, decentralized bir ağ nüfuzunun az kaynak ile ödenmesini gerektirir. Bu durum bir saldırganın ağ üzerinde güvenliğini tehlikeye atacak kadar nüfuz kazanması için inanılmaz derecede pahalı hale getiriyor. Çalışma sistemlerinde az kaynak hesaplama gücüdür. On nadir kaynaklar yerli işaret [is](../../#avalanche-avax-token) on bir blok zincirini [onaylamak](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) için on kazık kazık atması gerekir.
 
-## Avalanche'ın Stake Etme Parametreleri
+## on Saplanan Parametreler
 
-Bir validatör, [ana network’ü](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network) valide etmeyi bitirdiğinde, stake ettiği AVAX tokenlarını geri alacaktır. \(Ayrıca, ağın güvenliğini sağlamaya yardımcı olduğu için bir ödül alabilir.\) Bir validatör, validasyon süreci boyunca sadece yeterli oranda yanıt verebildiği ve doğru olduğu takdirde bir [validasyon ödülü](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) alır. AVAX ve staking mekanikleri hakkında daha fazla bilgi için lütfen [Avalanche tokenın whitepaper'ını] okuyun.  
-{% hint style="warning" %}
-**Bu parametreler sağlandığı sürece** staking ödülleri, staking dönemi bittiğinde cüzdan adresinize yollanır.
-{% endhint %}
+Bir onaylayıcı [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network)'ü onayladığında, AVAX işaretlerini geri alır. Ağı güvenceye almak için bir ödül alabilir. Bir doğrulayıcı sadece doğru ve doğru olan bir şekilde doğru olan [bir doğrulama ödülü](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) alır. AVAX ve gizlenme mekaniği hakkında daha fazla bilgi edinmek için [Avalanche token beyaz aper](https://files.avalabs.org/papers/token.pdf) oku.
 
-* Bir validatörün stake etmesi gereken minimum miktar: 2,000 AVAX
-* Bir delegatörün delege etmesi gereken minimum miktar: 25 AVAX
-* Validasyon için minimum stake edilme süresi: 2 hafta
-* Validasyon için maksimum stake edilme süresi: 1 yıl
-* Delegasyon için minimum stake edilme süresi: 2 hafta
-* Delegasyon için maksimum stake edilme süresi: 1 yıl
-* Minimum delegasyon ücreti oranı: %2
-* Bir validatörün maksimum yükü/ağırlığı\(kendi stake’leri+kendisine delege edilen stake’ler) en az 3e6 AVAX ve validatörün stake’lerinin 5 katıdır. Örneğin, eğer bir validatör olmak için 2,000 AVAX stake ettiyseniz node toplamınıza sadece 8000 AVAX delege edebilir.\(delegatör başına değil\)
-* Bir validatörün ödül alması için doğru ve çevrimiçi olması gereken minimum süre %60'tır.
+{% hint style="warning" %}**Bu parametrelerin hepsi yerine getirildiği sürece bu sürenin sonunda cüzdan adresinize gönderilir.**{% endhint %}
 
-## Validatörler
+* Bir a kazığı en az 2000 AVAX
+* Delege göndermesi gereken en az miktar 25 AVAX
+* Onaylama için en az zaman harcama miktarı 2 hafta
+* Onaylama için para kazanacak en fazla zaman 1 yıl
+* Delegasyon için en az zaman harcama miktarı 2 hafta
+* Delegasyon için para kazanacak en fazla zaman 1 yıl
+* Asgari heyet ücreti %2'dir.
+* Bir validator maksimum ağırlığı, \(kendi kazık \+ kazığı delegeler\) en az 3e6 AVAX ve validator çarptığı miktarın 5 katıdır. Örneğin, onaylayıcı olmak için 2000 AVAX kazık attığınızda, sadece 8000 AVAX sizin your \(delege başına değil\) tayin edilebilir.
+* Bir validator bir ödül almak için en az yüzde 60 doğru ve çevrimiçi olması gerekir.
 
-**Validatörler** Avalanche’ın güvenliğini sağlar, yeni bloklar/verteksler oluşturur ve transferleri gerçekleştirir. Validatörler, konsensüse varmak için birbirlerinden tekrar tekrar örnek alırlar. Belirli bir validatörün örneklenme olasılığı, stake'i ile orantılıdır.
+## Validators
 
-Validatör setine bir node eklediğinizde şunları belirtmiş olursunuz:
+**Geçerli kişiler Avalanche, güvence altına **alır, yeni bloklar/köşeler oluşturur ve işlemleri işletir. consensus, elde etmek için, validators sürekli birbirlerinden örnek alırlar. Verilen bir validator sürgülü olma olasılığı kazığa orantılıdır.
 
-* Node'unuzun ID'si\(no'su\)
-* Ne zaman delege etmeye başlamak ve delege etmeyi durdurmak istediğiniz
-* Kaç adet AVAX stake ettiğiniz
-* Ödüllerin gönderileceği adres
-* Delegasyon ücreti oranınız\(aşağıya bakın\)
+Doğrulayıcı setine bir düğüm eklediğinizde belirtiniz:
 
-{% hint style="info" %}
-Bir validatörün stake etmesi gereken en düşük miktar 2,000 AVAX'dır.
-{% endhint %}
+* Düğününün kimliği
+* Başlamak ve onaylamayı bıraktığınızda
+* Kaç tane AVAX gözetliyorsun?
+* Ödül göndermek için adres
+* Delege ücreti oran \(aşağıya bakınız\)
 
-{% hint style="danger" %}
-Not: Validatör olarak bir node eklemek için ilgili işlemi gerçekleştirdiğinizde, parametreleri değiştirmenin bir yolu olmadığını unutmayın. **Stake ettiğiniz AVAX’ı erken çekemezsiniz. Stake edilen miktarı, node’unuzun kimliğini ve ödül adresinizi değiştiremezsiniz.** Lütfen aşağıda belirtilen API çağrılarında doğru değerleri kullandığınızdan emin olun. Eğer emin değilseniz, [Discord](https://chat.avax.network) üzerinden yardım isteyebilir veya Sıkça Sorunlar Sorular kısmına[Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq) göz gezdirebilirsiniz.
-{% endhint %}
+{% hint style="info" %}Bir a kazığı en az 2000 AVAX olması gerekir.{% endhint %}
 
-### Validasyon ve Node Bağlantısı <a id="running-a-validator"></a>
+{% hint style="danger" %}Bir kere bir geçiş kartı eklemek için işlem yapınca parametreleri değiştirmenin yolu olmadığını unutmayın.** your erken kaldıramazsınız, ya da kazık miktarını, düğümünü veya ödül adresi değiştiremezsiniz.** Lütfen aşağıdaki API çağrılarında doğru değerleri kullandığınızdan emin olun. Emin değilseniz, [Discord](https://chat.avax.network) için yardım isteyin veya [Geliştirici FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). tarayın.{% endhint %}
 
-Eğer validasyon yapıyorsanız, ödülü alacağınızdan emin olmak adına node'unuzun bağlantısının doğru yapılması önemlidir.
-Detaylı bilgi için [tıklayın.](http://support.avalabs.org/en/articles/4594192-networking-setup).
+### Geçerli Bir Geçerli Çalıştırıyor<a id="running-a-validator"></a>
 
-Bir validatör eklemek için ilgili işlemi gerçekleştirdiğinizde stake ettiğiniz tokenlar ve işlem ücreti, kontrol ettiğiniz hesaplardan çekilir. Validasyon döneminiz bittiğinde stake edilen fonlar geldikleri adreslere geri döner. Eğer bir ödül kazandıysanız, ödülünüz kendinizi validatör olarak eklerken belirttiğiniz adrese yollanır.
+Eğer bir onaylayıcı çalıştırıyorsanız, your iyi bir şekilde bir ödül almanızı sağlamak için bağlanması önemlidir. [Şuraya](http://support.avalabs.org/en/articles/4594192-networking-setup) bak.
 
-#### API çağrılarına izin verin <a id="allow-api-calls"></a>
+Bir doğrulayıcı eklemek için işlem yaparken, kazık işaretleri ve işlem ücreti kontrol ettiğiniz adreslerden düşer. Doğrulamayı bitirdiğinizde, kazık fonlar geldiği adreslere geri verilecek. Ödül kazanmışsanız, kendinizi onaylayıcı olarak eklediğiniz adrese gönderilir.
 
-Uzaktan bağlantı sağlanılan makinalardan kendi node’unuza API çağrıları yapmak için API portunda\(Varsayılan değeri `9650`\) trafiğe izin verin ve node’unuzu şu argümanla çalıştırın: `--http-host=`
+#### API çağrılarına izin ver<a id="allow-api-calls"></a>
 
-Komut satırı argümanları üzerinden kullanmayacağınız tüm API’leri etkisiz hale getirin. Network’ünüzü, API portlarına yalnızca güvenilir makinelerden erişime izin verecek şekilde yapılandırmalısınız. \(Örneğin kişisel bilgisayarınız\)
+Uzak makinelerden gelen düğümlerinizi aramak için API bağlantı noktasında trafiğe izin verin \(varsayılan `9650`olarak\) ve your tartışarak çalıştırın.`--http-host=`
 
-#### Çalışma süresi\(uptime\) neden düşük? <a id="why-is-my-uptime-low"></a>
+Komuta satırı argümanları aracılığıyla kullanmayacağınız tüm API'leri devre dışı bırakmalısınız. Ağınızı sadece güvenilir makinelerden API portuna erişebilmeniz için yapılandırmalısınız. \(örneğin, kişisel bilgisayarınız\)
 
-Avalanche üzerindeki her validatör, diğer validatörlerin çalışma süresinin kaydını tutar. Bir node’un bağlantılarını ve her bağlantının çalışma süresini `info.peers`’ı çağırarak görebilirsiniz. **Bu sadece bir node’un bakış açısıdır**. Diğer node’lar sizin node’unuzun çalışma süresini farklı algılayabilir. Sadece bir node’un sizin çalışma sürenizi düşük algılaması staking ödülü kazanamayacağınız anlamına gelmez.
+#### Neden benim üstümde düşük bir şey var?<a id="why-is-my-uptime-low"></a>
 
-Node’unuzun başka bir node’a bağlı olmamasının olası nedeni, NAT geçişinin başarısız olması ve node’unuzun `--public-ip = [Node’un Public IP’si]` ile başlatmamış olmasıdır. Önümüzdeki zamanlarda node'unuzun doğru bir şekilde bağlandığının doğrulamasını kolaylaştırmak adına daha iyi bir gözlemleme özelliği ekleyeceğiz.
+on her onaylayıcı diğer of güncel bilgilerini takip ediyor. Bir düğümün arayarak sahip olduğu bağlantıları `info.peers`görebilirsiniz, aynı zamanda her bağlantının üst tarihini de görebilirsiniz.** Bu sadece bir düğümün bakış **açısıdır. Diğer düğümler of üst günlerini farklı algılayabilir. Bir düğüm, düşük olduğunu algılar diye bu ödül alamayacağın anlamına gelmez.
 
-#### Gizlilik <a id="secret-management"></a>
+Düğününüzün başka bir düğümle bağlantılı olmamasının muhtemel nedeni NAT transversal başarısız olmuş ve düğümünü `--public-ip=[NODE'S PUBLIC IP]`did Gelecekte, düğümünün iyi bağlantılı olduğunu doğrulamak için daha iyi izleme ekleyeceğiz.
 
-Validasyon sağlayan node’unuzda gizli tutmanız gereken tek şey Staking Key’inizdir.\(Node’unuzun ID’sini belirleyen TLS anahtarı\). Bir node’u ilk kez çalıştırdığınızda Staking anahtarı oluşturulur ve `$HOME/.avalanchego/staking/staker.key` dosyasının içine kaydedilir. Bu dosyayı \(ve `staker.crt`\’ı) güvenli bir yere yedeklemelisiniz. Staking Key’inizi kaybetmeniz halinde node’unuzun yeni bir ID’si olacağından dolayı validasyon ödüllerinizi tehlikeye atabilirsiniz.
+#### Gizli Yönetim:<a id="secret-management"></a>
 
-Validasyon yaptığınız node’da AVAX bulundurmanız gerekmemektedir. Aslında, node’unuzda çok fazla fon olmaması ve fonlarınızın neredeyse tümünün, private key’ini herhangi bir bilgisayara kaydetmediğiniz soğuk adreslerde saklanması daha doğru ve sağlıklıdır.
+Geçerli your ihtiyacınız olan tek sır düğümünün kimliğini belirleyen Stake Key'i TLS anahtarıdır. İlk düğmeye başladığında, Stake Anahtar yaratılır ve içine `$HOME/.avalanchego/staking/staker.key`koyar. `staker.crt`Bu dosyayı güvenli bir yerde desteklemelisiniz. Stake Anahtar kaybetmek, onaylama ödülünüzü tehlikeye atabilir. Çünkü düğümünüz yeni bir kimlik olacak.
 
-#### Gözlemleme <a id="monitoring"></a>
+Geçerli on AVAX fonu bulundurmanıza gerek yok. **Aslında, senin düğümünde çok fazla para **olmaması en iyi uygulamadır. Neredeyse tüm fonların "soğuk" adreslerinde olmalı. Özel anahtarı hiçbir bilgisayarda yok.
 
-Node'unuzun çalışma süresini, genel sağlık durumu vb. şeyleri nasıl gözlemleyeceğinizi bu tutorial'ı takip ederek öğrenebilirsiniz.
+#### İzliyor<a id="monitoring"></a>
+
+Bu öğretmeni takip et, your güncel durumunu nasıl izleyebileceğinizi öğrenin. Genel sağlığınızı, vb.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
-## Delegatörler
+## Delegeler
 
-Bir delegatör, staking'e katılmak isteyen ancak delegasyon yoluyla mevcut bir validasyon node'una güvenmeyi seçen bir token sahibidir.
+Bir delege bir gösterge sahibidir, ama mevcut geçerli bir düğümle delege aracılığıyla güvenmeyi seçer.
 
-Stake'lerinizi bir validatör üzerinden delege etmek istediğinizde, şunları belirtiyorsunuz:
+Bir doğrulama doğrulama doğrulama için kazığı When belirtiniz:
 
-* Delege ettiğiniz node'un ID'si\(no'su\)
-* Ne zaman delege etmeye başlamak ve delege etmeyi durdumak istediğiniz \(Bu süreçte validatör hale valide ediyor olmalı\)
-* Kaç adet AVAX stake ettiğiniz
-* Ödüllerin gönderileceği adres
+* Verdiğin düğümün kimliği.
+* Eğer başlatmak istiyorsanız \(doğrulama doğrulama doğrulama sürecini durdurun\)
+* Kaç tane AVAX gözetliyorsun?
+* Ödül göndermek için adres
 
-{% hint style="info" %}
-Bir delegatörün stake etmesi gereken en düşük miktar 25 AVAX'dır.
-{% endhint %}
+{% hint style="info" %}Bir delege için en az 25 AVAX verilmesi gerekiyor.{% endhint %}
 
-{% hint style="danger" %}
-Not: Stake’inizi bir delegatöre eklemek için işlemi gerçekleştirdiğinizde, parametreleri değiştirmenin bir yolu olmadığını unutmayın. **Stake ettiğiniz AVAX'ı erken çekemezsiniz. Stake edilen miktarı, node’unuzun kimliğini ve ödül adresinizi değiştiremezsiniz.** Eğer emin değilseniz [Discord](https://chat.avax.network) üzerinden yardım isteyebilir veya Sıkça Sorulan Sorular kısmına [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq) göz gezdirebilirsiniz.
-{% endhint %}
+{% hint style="danger" %}Bir delege için hissesini eklediğiniz zaman parametreleri değiştirmenin hiçbir yolu olmadığını unutmayın.** your erken kaldıramazsınız, ya da kazık miktarını, düğümünü veya ödül adresi değiştiremezsiniz.** Emin değilseniz, [Discord](https://chat.avax.network) için yardım isteyin veya [Geliştirici FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). tarayın.{% endhint %}
 
-### Delegatör ödülleri <a id="delegator-rewards"></a>
+### Delegator ödülleri<a id="delegator-rewards"></a>
 
-Eğer tokenlarınızı delege eden validatör, yeterli oranda yanıt verebilir ve doğru olursa, delegasyon döneminiz bittiğinde ödül kazanmış olursunuz. Delegatörler ile validatörler aynı şekilde ödül kazanmaktadırlar. Fakat delege ettiğiniz validatör, ödülünüzden belirttiği delegasyon ücretine göre bir kesinti yapar ve bu kesinti kendisine ait olur.
+Eğer delegate gönderdiğiniz onaylayıcı yeterince doğru ve tepki verirse, göreviniz bittiğinde bir ödül alacaksınız. Delegeler doğrulayıcılar ile aynı fonksiyona göre ödüllendirilir. Bununla birlikte, delegate heyet ücreti ücreti ile belirtilen ödülünüzün bir kısmını tutmak için görevlendirdiğiniz onaylayıcı onay.
 
-Tokenlarınızı delege etmek için ilgili işlemi gerçekleştirdiğinizde stake ettiğiniz tokenlar ve işlem ücreti, kontrol ettiğiniz hesaplardan çekilir. Delegasyon döneminiz bittiğinde stake edilen fonlar geldikleri adreslere geri döner. Eğer bir ödül kazandıysanız, ödülünüz tokenlarınızı delege ederken belirttiğiniz adrese yollanır.
+İşaretleri delege etmek için işlem yaparken, kazık işaretleri ve işlem ücreti kontrol ettiğiniz adreslerden düşer. Görevlendirme işini bitirdiğinizde, kazık işaretleri adresinize geri verilecek. Ödül kazanmışsanız, işaretleri gönderdiğiniz adrese gönderilir.
+
