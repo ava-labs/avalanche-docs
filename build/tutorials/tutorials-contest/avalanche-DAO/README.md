@@ -20,16 +20,16 @@ For example if you have a hundred of the governance tokens but you deposited onl
 ## Let's start to build our DAO
 
 * **Tools We will use**  
-    * [REMIX IDE](https://remix.ethereum.org/)
-    * [Metamask Wallet](https://metamask.io/)
+  * [REMIX IDE](https://remix.ethereum.org/)
+  * [Metamask Wallet](https://metamask.io/)
 
-    > We need to setup the FUJI Testnet on our Metamask. [`find here the rpc values`](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
+> We need to setup the FUJI Testnet on our Metamask. [`find here the rpc values`](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
 
 ### Step 1: Creating a new .sol file on REMIX
 
 On REMIX we click the new file icon and put some name, in my case my file name is `MyDAO.sol`
 
-<img src="assets/newFile-Dao.png" width="800">
+<img src="assets/newFile-remix-avalanche-dao.png" width="800">
 
 and we add the basic lines of code:
 
@@ -37,7 +37,8 @@ and we add the basic lines of code:
 `pragma` Specifies that the source code is written for Solidity version 0.7.0 or a newer version of the language up to, but not including version 0.9.0.  
 `contract MyDAO {...}` specifies the name and a new block of code for our contract.
 ``
-<img src="assets/firstLines.png" width="800">
+
+<img src="assets/firstLines-avalanche-dao.png" width="800">
 
 ### Step 2: Defining our DAO functions
 
@@ -50,8 +51,7 @@ Commonly the DAO's contract has four main functions:
 
 We use AVAX our governance token.
 FUJI contract address: 0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70
-and we need import IERC20 template from [openzeppelin](https://openzeppelin.com/).  
-`https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol`
+and we need import [IERC20](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol) template from [openzeppelin](https://openzeppelin.com/).  
 
 ### Step 3: Defining the proposal variables
 
@@ -69,13 +69,15 @@ For the voting options and the proposal status we will use an `enums` types.
 
 `Enums` can be used to create custom types with a finite set of 'constant values'. **[see more about enums](https://docs.soliditylang.org/en/v0.8.7/types.html#enums)**
 
-``` enum VotingOptions { Yes, No } ```  
-``` enum Status { Accepted, Rejected, Pending } ```
+```solidity
+enum VotingOptions { Yes, No } 
+enum Status { Accepted, Rejected, Pending }
+```  
 
 for the other proposal properties we can use an `struct` type.  
 `Structs` alow us to define a custom group of properties. **[see more about structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**  
 
-```moonscript
+```solidity
     struct Proposal {
         uint256 id;
         address author;
@@ -89,7 +91,7 @@ for the other proposal properties we can use an `struct` type.
 
 Until this step our Dao contract looks like this:
 
-```moonscript
+```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
@@ -115,7 +117,7 @@ contract MyDAO {
 
 Now we need to store all the proposals created for our DAO, we need to be sure that someone does not vote more than once, also set a period of vote for the proposals and set a minimum number of governance tokens to create a new proposal, we can take the number of governance tokens are deposited like a shares for an shareholder and give a proportional weight to their vote.
 
-```
+```solidity
 // store all proposals
 mapping(uint => Proposal) public proposals;
 // who already votes for who and to avoid vote twice
@@ -136,14 +138,15 @@ uint public nextProposalId;
 We already have our necessary variables to create, save and vote a proposal in our DAO, now we need our user deposit his `AVAX` tokens to avoid that the same user can use the same amount of tokens for vote other option in the same proposal.
 To interact with AVAX as our token the governance we need to initialize the token address in the constructor.
 
-```
+```solidity
 constructor() {
     token = IERC20(0xA048B6a5c1be4b81d99C3Fd993c98783adC2eF70); // AVAX address
 }
 ```
+
 For the deposit function.
 
-```
+```solidity
 function deposit(uint _amount) external {
     shares[msg.sender] += _amount;
     totalShares += _amount;
@@ -153,7 +156,7 @@ function deposit(uint _amount) external {
 
 And we need to allow our users to withdraw their tokens when the voting period is over.
 
-```
+```solidity
 function withdraw(uint _amount) external {
     require(shares[msg.sender] >= _amount, 'Not enough shares');
     shares[msg.sender] -= _amount;
@@ -164,7 +167,7 @@ function withdraw(uint _amount) external {
 
 until this point our smart contract look like this:
 
-```moonscript
+```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
@@ -222,7 +225,7 @@ contract MyDAO {
 
 For our `createProposal` function we will add the condition that if the user does not have minimum 25 AVAX tokens He cannot create a new proposal.
 
-```moonscript
+```solidity
 function createProposal(string memory name) external {
     // validate the user has enough shares to create a proposal
     require(shares[msg.sender] >= CREATE_PROPOSAL_MIN_SHARE, 'Not enough shares to create a proposal');
@@ -243,7 +246,7 @@ function createProposal(string memory name) external {
 For the `Vote` function we need to receive the id for the proposal and the vote choice, we will validate that the user has not voted already and the vote period is currently open.  
 Also we validate if the proposal has more than fifty percent of votes in one option we need to change the proposal status to Accepted or Rejected.
 
-```moonscript
+```solidity
 function vote(uint _proposalId, VotingOptions _vote) external {
     Proposal storage proposal = proposals[_proposalId];
     require(votes[msg.sender][_proposalId] == false, 'already voted');
@@ -265,26 +268,26 @@ function vote(uint _proposalId, VotingOptions _vote) external {
 
 Finally our DAO contract looks like this.
 
-<img src="assets/daoSC.png" width="850">
+<img src="assets/avalanche-dao-SC.png" width="850">
 
 ### Step 6: Deploy our DAO contract on FUJI
 
 Now we need compile our contract, I'm using the 0.8.0 version compiler, and click on the `Compile` button.
 
-<img src="assets/compiler.png" width="350">
+<img src="assets/remix-compiler-avalanche-dao.png" width="350">
 
 In the environment section we choose the `Injected Web3` option, in account we chose an account from our metamask plugin in the FUJI network, make sure that your account have the necessary avax for the deploy and the minimum for create a proposal.   
 [Here you can find the Faucet](https://faucet.avax-test.network/).  
 Click on the `Deploy` button and confirm the transaction in REMIX and Metamask and await for a few seconds.  
 
-<img src="assets/deploySc.png" width="350">
+<img src="assets/deploy-smartContract-avalanche-dao.png" width="350">
 
-<img src="assets/confirmDeploy.png" width="650">
+<img src="assets/confirm-avalanche-dao-deploy.png" width="650">
 
-<img src="assets/metamask.png" width="300">
+<img src="assets/metamask-avalanche-dao.png" width="300">
 
 If the contract is deployed successfully on FUJI we can see the succes transaction on the REMIX inspector.
 
-<img src="assets/remixTx.png" width="650">
+<img src="assets/remix-Tx-avalanche-dao.png" width="650">
 
 Now we can test the different functions for our DAO.
