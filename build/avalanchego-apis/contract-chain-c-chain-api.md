@@ -176,7 +176,7 @@ curl -X POST --data '{
 }
 ```
 
-For more example on dynamic fees see the [C-Chain section of the transaction fee documentation](https://docs.avax.network/learn/platform-overview/transaction-fees#c-chain-fees).
+For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](https://docs.avax.network/learn/platform-overview/transaction-fees#c-chain-fees).
 
 ## Avalanche Specific APIs
 
