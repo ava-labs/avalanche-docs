@@ -4,6 +4,8 @@ Step by step tutorial to build your own NFT marketplace on Avalanche using Hardh
 
 # Table of contents
 
+- [NFT Marketplace on Avalanche](#nft-marketplace-on-avalanche)
+- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Requirements](#requirements)
@@ -857,7 +859,7 @@ We need to add few elements to our form. The user has to type in the start price
 </form>
 ```
 
-![create](images/nft-marketplace-create-auction.png)
+![Create Auction](images/nft-marketplace-create-auction.png)
 
 Our form is ready! Let's see how we are going to interact with the contracts.
 
@@ -932,8 +934,8 @@ Inside the init function we are creating instances of the signer, auction manage
 [Take a look at here to learn more about Ethers JS.](https://docs.ethers.io/v5/getting-started/)
 Refresh the page now, metamask should prompt you to connect your account.
 
-![1](images/nft-marketplace-choose-account.png)
-![2](images/nft-marketplace-choose-account-next.png)
+![Choose account](images/nft-marketplace-choose-account.png)
+![Choose account next](images/nft-marketplace-choose-account-next.png)
 
 Choose your account and continue.
 Congrats! We have connected metamask to our website.
@@ -969,11 +971,11 @@ Call this function when the button is pressed.
 
 Then click the Mint NFT button on the web page.
 
-![confirm](images/nft-marketplace-confirm.png)
+![Confirm transaction](images/nft-marketplace-confirm.png)
 
 Confirm the transaction. After a few seconds the transaction should get mined.
 
-![mined](images/nft-marketplace-done.png)
+![Transaction mined](images/nft-marketplace-done.png)
 
 Congrats! We have just minted ourselves an NFT token! I will mint myself two more. You can do as many as you want!
 
@@ -1017,7 +1019,7 @@ Call this function at the end of the `init()` function, so each time the wallet 
   }
 ```
 
-![bignumbers](images/nft-marketplace-bignumbers.png)
+![Big numbers on console](images/nft-marketplace-bignumbers.png)
 
 If you reload the page and take a look at the developer console, you may notice that the array contains values in `BigNumber` format. We have to convert them to normal numbers.
 
@@ -1031,7 +1033,7 @@ async getItems() {
 
 Now refresh the page.
 
-![owned](images/nft-marketplace-owned.png)
+![Owned NFT's](images/nft-marketplace-owned.png)
 
 Here they are! I can see all the NFT's I've minted.
 
@@ -1137,15 +1139,15 @@ Call this function when the `Create Auction` button is pressed.
 
 We are ready to start our first auction! Fill the form and press on `Create Auction` button.
 
-![form](images/nft-marketplace-form.png)
+![Create auction form](images/nft-marketplace-form.png)
 
 Approve the auction manager contract to transfer the NFT token with ID 2.
 
-![approvenft](images/nft-marketplace-approvenft.png)
+![Approve NFT](images/nft-marketplace-approvenft.png)
 
 Start the auction!
 
-![startauction](images/nft-marketplace-startauction.png)
+![Start auction](images/nft-marketplace-startauction.png)
 
 That's it, we have just started our first auction on our NFT marketplace.
 
@@ -1178,7 +1180,7 @@ We should call this function at the end of the `init()` function.
 
 Now, take a look at the developer console logs.
 
-![consolenumbers](images/nft-marketplace-consolebig.png)
+![Big numbers on console](images/nft-marketplace-consolebig.png)
 
 The numbers are again in big number format. We can convert the `tokenId` and `endTime` using `.toNumber()` method; however, for the `BigNumber`s that represent a price, we should use `ethers.utils.formatEther` to get the exact value in AVAX.
 
@@ -1271,7 +1273,7 @@ render() {
 
 Let's see the result!
 
-![result](images/nft-marketplace-res.png)
+![Our first auction displayed on the web page](images/nft-marketplace-first-auction-on-web-page.png)
 
 Awesome! There is the auction we've just created.
 
@@ -1487,7 +1489,7 @@ Edit the `render` function
 ...
 ```
 
-![renderAuction](images/nft-marketplace-lookinggood.png)
+![Auction Page](images/nft-marketplace-auction-page.png)
 
 Now, we will have to make those buttons at the bottom functional.
 Let's write a function for each one!
@@ -1533,7 +1535,7 @@ Next, call this function when the button is pressed.
 
 Before placing a bid, we must switch to another account on metamask since the auction creator cannot place bids. Do not forget to connect the account to the dApp when you switch your account.
 
-![bidPlaced](images/nft-marketplace-bidplaced.png)
+![Bid Placed on Auction](images/nft-marketplace-bidplaced.png)
 
 We've placed a bid on the auction!
 Now let's wait a bit until the auction is over, then we can withdraw our new token if no one bids a higher value.
@@ -1570,7 +1572,7 @@ Approving the transaction...
 
 Refresh the page and we just got our new NFT!
 
-![newnft](images/nft-marketplace-newnft.png)
+![New NFT from auction](images/nft-marketplace-newnft.png)
 
 ### Withdraw Funds
 
@@ -1595,11 +1597,11 @@ Call this function when the `Withdraw Funds` button is pressed.
 
 Since the auction is already over, we can switch back to the account in which we created the auction and withdraw our funds.
 
-![account1](images/nft-marketplace-backtoaccount1.png)
+![Switched to account 1](images/nft-marketplace-backtoaccount1.png)
 
 Then we will click on the `Withdraw Funds` button and confirm the transaction.
 
-![Withdraw Funds](images/nft-marketplace-fundsback.png)
+![Withdraw Funds transaction](images/nft-marketplace-fundsback.png)
 
 Awesome! We have just sold an NFT and earned some AVAX.
 
