@@ -153,7 +153,7 @@ Get the priority fee needed to be included in a block.
 eth_maxPriorityFeePerGas() -> {}
 ```
 
-`result` is the priority fee needed to be included in a block.
+`result` is hex value of the priority fee needed to be included in a block.
 
 #### **Example Call**
 
@@ -175,6 +175,8 @@ curl -X POST --data '{
     "result": "0x2540be400"
 }
 ```
+
+For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](https://docs.avax.network/learn/platform-overview/transaction-fees#c-chain-fees).
 
 ## Avalanche Specific APIs
 
