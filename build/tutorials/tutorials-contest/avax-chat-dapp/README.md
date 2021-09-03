@@ -4,7 +4,7 @@
 In this tutorial we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
 
 # Requirements
-* Basic familiarity with Reactjs and Solidity
+* Basic familiarity with [ReactJS](https://reactjs.org/) and [Solidity](https://soliditylang.org/)
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
 
@@ -62,13 +62,13 @@ We would maintain 2 collections in our database:
 
 Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 
-![Metamask](./images/metamask.png)
+![Metamask](./images/avax-chat-app-metamask.png)
 
 **FUJI Testnet Settings:**
 
 * **Network Name**: Avalanche FUJI C-Chain
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `43114`
+* **ChainID**: `43113`
 * **Symbol**: `C-AVAX`
 * **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
@@ -78,11 +78,11 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
 Open [Remix](https://remix.ethereum.org/) -> Select Solidity
 
-![remix-preview](./images/remix.png)
+![remix-preview](./images/avax-chat-app-remix.png)
 
 Create a `Database.sol` file in the Remix file explorer, and paste the following code :
 
-```javascript
+```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
@@ -292,7 +292,7 @@ export function NavBar( props ){
 }
 ```
 
-All the contacts will have a card with contacts' name and public key. Create a new file called `ChatCard.jsx` and paste the following code :
+All the contacts will have a card with their name and public key. Create a new file called `ChatCard.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -344,7 +344,7 @@ export function Message( props ){
 }
 ```
 
-To add a new contact we will make AddNewChat component. It will show a modal on clicking the NewChat button and ask for the contacts' details. Create a new file called `AddNewChat.jsx` and paste the following code :
+To add a new contact we will make AddNewChat component. It will show a modal on clicking the NewChat button and ask for the contact details. Create a new file called `AddNewChat.jsx` and paste the following code :
 
 ```javascript
 import React from "react";
@@ -802,11 +802,11 @@ npm start
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the app.
 
 * User registration and adding a new friend  
-![preview](./images/register.gif)   
+![preview](./images/avax-chat-app-register.gif)   
 Make sure your friend is also registered to the application while adding him as a friend.
 
 * Chatting with friend  
-![preview](./images/chat.gif)
+![preview](./images/avax-chat-app-chat_preview.gif)
 
 # Conclusion
 Congratulations! We have successfully developed a decentralized chat application which can be deployed on Avalanche. We also created a boilerplate React application to use as the frontend for our dApp. As a next step, You can improve the application by adding features like delete messages, block users, or create groups of friends. You can also optimize the gas cost by limiting the maximum number of messages stored.
@@ -817,15 +817,15 @@ Congratulations! We have successfully developed a decentralized chat application
 
 * Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
-![Zero balance preview](./images/zero_balance.jpeg)
+![Zero balance preview](./images/avax-chat-app-zero_balance.jpeg)
 
 * Make sure that you have selected the correct account on metamask if you have more than one account connected to the site.
 
-![Multiple account preview](./images/multiple_accounts.jpeg)
+![Multiple account preview](./images/avax-chat-app-multiple_accounts.jpeg)
 
 ## Application crash
 
-![Error](./images/error.png)
+![Error](./images/avax-chat-app-error.png)
 Check if you have updated the `CONTRACT_ADDRESS` variable in `src/index.js` properly!
 
 # About the Author(s)
