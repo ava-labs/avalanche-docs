@@ -4,8 +4,6 @@ Step by step tutorial to build your own NFT marketplace on Avalanche using Hardh
 
 # Table of contents
 
-- [NFT Marketplace on Avalanche](#nft-marketplace-on-avalanche)
-- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Requirements](#requirements)
