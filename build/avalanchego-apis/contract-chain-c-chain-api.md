@@ -110,6 +110,72 @@ curl -X POST --data '{
 }
 ```
 
+### eth_baseFee
+
+Get the base fee for the next block.
+
+#### **Signature**
+
+```cpp
+eth_baseFee() -> {}
+```
+
+`result` is the hex value of the base fee for the next block.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_baseFee",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x34630b8a00"
+}
+```
+
+### eth_maxPriorityFeePerGas
+
+Get the priority fee needed to be included in a block.
+
+#### **Signature**
+
+```cpp
+eth_maxPriorityFeePerGas() -> {}
+```
+
+`result` is the priority fee needed to be included in a block.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_maxPriorityFeePerGas",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x2540be400"
+}
+```
+
 ## Avalanche Specific APIs
 
 ### Avalanche Specific API Endpoints
@@ -615,4 +681,3 @@ curl -X POST --data '{
     }
 }
 ```
-
