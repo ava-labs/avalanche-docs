@@ -4,6 +4,8 @@ Step by step tutorial to build your own NFT marketplace on Avalanche using Hardh
 
 # Table of contents
 
+- [NFT Marketplace on Avalanche](#nft-marketplace-on-avalanche)
+- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Requirements](#requirements)
@@ -86,8 +88,12 @@ We will be using [React JS](https://reactjs.org) to build the frontend of our NF
 
 Let's get started by setting up our workspace using [Hardhat](https://hardhat.org/).
 
-- `npx hardhat init` -> choose sample project
-- Delete the `Greeter.sol` file inside contracts
+- Execute `$ npx hardhat init` in your working directory.
+- When you are prompted on the terminal
+  - Choose `Create a basic sample project`.
+  - Add the `.gitignore` file.
+  - Install the dependencies.
+- Delete the `Greeter.sol` file inside the contracts folder.
 
 This will set up our initial workspace.
 
@@ -97,7 +103,7 @@ First, we need to create an NFT token that will be displayed in our marketplace.
 
 Create a simple ERC-721 token.
 
-[NFT.sol](contracts/NFT.sol)
+[NFT.sol](NFT-Marketplace-dApp/contracts/NFT.sol)
 
 ```solidity
 contract NFT is ERC721 {
@@ -139,7 +145,11 @@ contract NFT is ERC721 {
 }
 ```
 
-> Note: Secure random-number generation in the blockchain is a very difficult problem. Our method here is insecure, but since this is just an example, it will be good enough for our purposes.
+**ALERT**
+
+> **Secure random-number generation in the blockchain is a very difficult problem. Our method here is insecure, but since this is just an example, it will be good enough for our purposes.**
+
+**ALERT**
 
 The logic here is very simple.
 
@@ -439,8 +449,8 @@ function allBids()
 }
 ```
 
-Our Auction contract is ready.
-[Auction Contract](contracts/Auction.sol)
+Our **Auction** contract is ready. Here is the complete code:
+[Auction Contract](NFT-Marketplace-dApp/contracts/Auction.sol)
 
 ## Auction Manager Contract
 
@@ -590,7 +600,7 @@ function getAuctionInfo(address[] calldata _auctionsList)
 }
 ```
 
-See the full [AuctionManager.sol here](contracts/AuctionManager.sol)
+Here is the complete code: [AuctionManager.sol](NFT-Marketplace-dApp/contracts/AuctionManager.sol)
 
 That's all for the contracts!
 
@@ -598,7 +608,7 @@ That's all for the contracts!
 
 We are going to test the marketplace on AVAX Fuji Testnet. First, you need to add AVAX Fuji Testnet to metamask. Open metamask and view networks, then click on `Custom RPC`.
 
-![networks](images/networks.png)
+![Networks](images/nft-marketplace-networks.png)
 
 We will deploy our contracts on FUJI testnet.
 FUJI Testnet Settings:
@@ -611,7 +621,7 @@ FUJI Testnet Settings:
 
 You may find the configurations for the Avalanche Mainnet and Local Testnet (AVASH) [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask).
 
-Next, we will add the network configuration in hardhat config file](`hardhat.config.js`). If you do not know how that file works then take a look at [here](https://hardhat.org/config/#networks-configuration).
+Next, we will add the network configuration in hardhat config file [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not know how that file works then take a look at [here](https://hardhat.org/config/#networks-configuration).
 
 ```js
 networks:{
@@ -631,7 +641,7 @@ Lastly, we will need some AVAX to deploy our contracts. Use this [AVAX Fuji Test
 
 # Deploying the contracts
 
-We need to deploy our `NFT` and `AuctionManager` contracts to the Fuji Testnet. We will use hardhat to deploy the contracts, [learn more about it here](https://hardhat.org/guides/deploying.html). Start by editing the `scripts/deploy.js` file.
+We need to deploy our `NFT` and `AuctionManager` contracts to the Fuji Testnet. We will use hardhat to deploy the contracts, [learn more about it here](https://hardhat.org/guides/deploying.html). Start by editing the [`scripts/deploy.js`](NFT-Marketplace-dApp/scripts/deploy.js) file.
 
 ```js
 const main = async () => {
@@ -657,7 +667,7 @@ main()
   });
 ```
 
-After you are done editing `deploy.js`, run the script.
+After you are done editing [`deploy.js`](deploy.NFT-Marketplace-dApp/scripts/deploy.js), execute the following lines on your terminal to run the [`deploy.js`](deploy.NFT-Marketplace-dApp/scripts/deploy.js) script.
 
 ```shell
 $ npx hardhat compile
@@ -667,20 +677,22 @@ $ npx hardhat run scripts/deploy.js --network fuji
 Pretty simple! If this looks unfamiliar to you, you may want to take a look at [hardhat guides](https://hardhat.org/guides/deploying.html).
 
 Do not forget to note the addresses, as we will need them afterward to interact with the contracts.
-![deployed](images/deployed.png)
+![Deployed](images/nft-marketplace-deployed.png)
 
 # React App
 
 Let's build an interface to interact with our marketplace. We are going to use `react` and `ether.js`.
 
+Execute the following lines on your terminal to get started.
+
 ```bash
-create-react-app frontend
-cd frontend
-npm install --save ethers
-npm run start
+create-react-app frontend # creates a react app inside the frontend folder
+cd frontend # go inside the frontend folder
+npm install --save ethers # install ethers package
+npm run start # start the react app
 ```
 
-Add bootstrap CDN in `public/index.html` file. We will use bootstrap to speed up.
+Add bootstrap CDN in the head section of [`public/index.html`](NFT-Marketplace-dApp/frontend/public/index.html) file. We will use bootstrap to speed up.
 
 ```diff
 <head>
@@ -698,7 +710,9 @@ Add bootstrap CDN in `public/index.html` file. We will use bootstrap to speed up
 </html>
 ```
 
-Start with a fresh `App.js` file. Start by importing `ethers` and assigning the contract addresses to constant strings. Since there aren't any auctions yet, we need to create one first. However, before creating an auction, we need to mint an NFT.
+Start with a fresh [`App.js`](NFT-Marketplace-dApp/frontend/src/App.js) file. Import the `ethers` library and assign the contract addresses to constant strings.
+
+Since there aren't any auctions yet, we need to create one first. However, before creating an auction, we need to mint an NFT.
 
 ```js
 import React from "react";
@@ -845,7 +859,7 @@ We need to add few elements to our form. The user has to type in the start price
 </form>
 ```
 
-![create](images/create.png)
+![create](images/nft-marketplace-create-auction.png)
 
 Our form is ready! Let's see how we are going to interact with the contracts.
 
@@ -863,7 +877,7 @@ mv artifacts/contracts/NFT.sol/NFT.json frontend/src/artifacts/NFT.json
 mv artifacts/contracts/AuctionManager.sol/AuctionManager.json frontend/src/artifacts/AuctionManager.json
 ```
 
-Import them in the React code.
+Import them in the React code at the top of [App.js](App.NFT-Marketplace-dApp/frontend/src/App.js).
 
 ```js
 import AuctionArtifact from "./artifacts/Auction.json";
@@ -920,8 +934,8 @@ Inside the init function we are creating instances of the signer, auction manage
 [Take a look at here to learn more about Ethers JS.](https://docs.ethers.io/v5/getting-started/)
 Refresh the page now, metamask should prompt you to connect your account.
 
-![1](images/1.png)
-![2](images/2.png)
+![1](images/nft-marketplace-choose-account.png)
+![2](images/nft-marketplace-choose-account-next.png)
 
 Choose your account and continue.
 Congrats! We have connected metamask to our website.
@@ -957,11 +971,11 @@ Call this function when the button is pressed.
 
 Then click the Mint NFT button on the web page.
 
-![confirm](images/confirm.png)
+![confirm](images/nft-marketplace-confirm.png)
 
 Confirm the transaction. After a few seconds the transaction should get mined.
 
-![mined](images/done.png)
+![mined](images/nft-marketplace-done.png)
 
 Congrats! We have just minted ourselves an NFT token! I will mint myself two more. You can do as many as you want!
 
@@ -1005,7 +1019,7 @@ Call this function at the end of the `init()` function, so each time the wallet 
   }
 ```
 
-![bignumbers](images/bignumbers.png)
+![bignumbers](images/nft-marketplace-bignumbers.png)
 
 If you reload the page and take a look at the developer console, you may notice that the array contains values in `BigNumber` format. We have to convert them to normal numbers.
 
@@ -1019,7 +1033,7 @@ async getItems() {
 
 Now refresh the page.
 
-![owned](images/owned.png)
+![owned](images/nft-marketplace-owned.png)
 
 Here they are! I can see all the NFT's I've minted.
 
@@ -1125,15 +1139,15 @@ Call this function when the `Create Auction` button is pressed.
 
 We are ready to start our first auction! Fill the form and press on `Create Auction` button.
 
-![form](/images/form.png)
+![form](images/nft-marketplace-form.png)
 
 Approve the auction manager contract to transfer the NFT token with ID 2.
 
-![approvenft](/images/approvenft.png)
+![approvenft](images/nft-marketplace-approvenft.png)
 
 Start the auction!
 
-![startauction](/images/startauction.png)
+![startauction](images/nft-marketplace-startauction.png)
 
 That's it, we have just started our first auction on our NFT marketplace.
 
@@ -1166,7 +1180,7 @@ We should call this function at the end of the `init()` function.
 
 Now, take a look at the developer console logs.
 
-![consolenumbers](/images/consolebig.png)
+![consolenumbers](images/nft-marketplace-consolebig.png)
 
 The numbers are again in big number format. We can convert the `tokenId` and `endTime` using `.toNumber()` method; however, for the `BigNumber`s that represent a price, we should use `ethers.utils.formatEther` to get the exact value in AVAX.
 
@@ -1259,7 +1273,7 @@ render() {
 
 Let's see the result!
 
-![result](images/res.png)
+![result](images/nft-marketplace-res.png)
 
 Awesome! There is the auction we've just created.
 
@@ -1475,7 +1489,7 @@ Edit the `render` function
 ...
 ```
 
-![renderAuction](/images/lookinggood.png)
+![renderAuction](images/nft-marketplace-lookinggood.png)
 
 Now, we will have to make those buttons at the bottom functional.
 Let's write a function for each one!
@@ -1521,7 +1535,7 @@ Next, call this function when the button is pressed.
 
 Before placing a bid, we must switch to another account on metamask since the auction creator cannot place bids. Do not forget to connect the account to the dApp when you switch your account.
 
-![bidPlaced](images/bidplaced.png)
+![bidPlaced](images/nft-marketplace-bidplaced.png)
 
 We've placed a bid on the auction!
 Now let's wait a bit until the auction is over, then we can withdraw our new token if no one bids a higher value.
@@ -1547,18 +1561,18 @@ Call this function when the `Withdraw Token` button is pressed.
 ...
 ```
 
-![ended](/images/ended.png)
+![Auction Ended](images/nft-marketplace-auction-ended.png)
 
 After some time, the auction is finally over, and our bid is still the highest one. Let's withdraw our new NFT token.
 Note: It would be nice to hide the end time when the auction is not open.
 
 Approving the transaction...
 
-![withdrawtransac](images/withdrawtransac.png)
+![Withdraw Transaction](images/nft-marketplace-withdrawtransaction-confirm.png)
 
 Refresh the page and we just got our new NFT!
 
-![newnft](images/newnft.png)
+![newnft](images/nft-marketplace-newnft.png)
 
 ### Withdraw Funds
 
@@ -1583,11 +1597,11 @@ Call this function when the `Withdraw Funds` button is pressed.
 
 Since the auction is already over, we can switch back to the account in which we created the auction and withdraw our funds.
 
-![account1](images/backtoaccount1.png)
+![account1](images/nft-marketplace-backtoaccount1.png)
 
 Then we will click on the `Withdraw Funds` button and confirm the transaction.
 
-![fundsback](images/fundsback.png)
+![Withdraw Funds](images/nft-marketplace-fundsback.png)
 
 Awesome! We have just sold an NFT and earned some AVAX.
 
@@ -1619,7 +1633,7 @@ Create a new auction, click on the `Cancel Auction` button and confirm the trans
 
 After refreshing the page, we can see that the auction has been canceled.
 
-![canceled](/images/canceled.png)
+![Canceled Auction](images/nft-marketplace-canceled.png)
 
 We can also see that the token was sent back to use after we've canceled the auction.
 
@@ -1797,7 +1811,7 @@ It's always good to give the user clear instructions and make them feel comforta
 
 Deploying to Mainnet is the same as deploying to [Testnet](#avax-fuji-testnet); the only difference is that you have to pay real funds instead of test funds.
 
-Again, we have to get the configurations for the Avalanche Mainnet from [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#avalanche-mainnet-settings) and add the network in our hardhat config file (`hardhat.config.js`).
+Again, we have to get the configurations for the Avalanche Mainnet from [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#avalanche-mainnet-settings) and add the network in our hardhat config file [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js).
 
 ```js
 networks:{
