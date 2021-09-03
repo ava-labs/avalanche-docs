@@ -4,8 +4,6 @@ Step by step tutorial to build your own NFT marketplace on Avalanche using Hardh
 
 # Table of contents
 
-- [NFT Marketplace on Avalanche](#nft-marketplace-on-avalanche)
-- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Requirements](#requirements)
@@ -670,8 +668,8 @@ main()
 After you are done editing [`deploy.js`](deploy.NFT-Marketplace-dApp/scripts/deploy.js), execute the following lines on your terminal to run the [`deploy.js`](deploy.NFT-Marketplace-dApp/scripts/deploy.js) script.
 
 ```shell
-$ npx hardhat compile
-$ npx hardhat run scripts/deploy.js --network fuji
+$ npx hardhat compile  # Compiles the contracts
+$ npx hardhat run scripts/deploy.js --network fuji # runs the "deploy.js" script on fuji test network, "fuji" is specified inside the hardhat config file
 ```
 
 Pretty simple! If this looks unfamiliar to you, you may want to take a look at [hardhat guides](https://hardhat.org/guides/deploying.html).
@@ -868,13 +866,15 @@ Our form is ready! Let's see how we are going to interact with the contracts.
 ### Contract ABI's
 
 We will use Contract Application Binary Interface (ABI) to interact with the contracts. It is the standard way to do it.
-You can find the `ABI` of compile contracts in `artifacts/contracts/ContractName/ContractName.json`. Create a `frontend/src/artifacts` folder and move all those `json` files there to reach them easier within the React code.
+You can find the `ABI` of the compiled contracts in `artifacts/contracts/ContractName/ContractName.json` file. Create a `frontend/src/artifacts` folder and move all those `json` files there to reach them easier within the React code.
+
+**If you can not find the json files try running `npx hardhat compile` on your terminal**
 
 ```shell
-mkdir frontend/src/artifacts
-mv artifacts/contracts/Auction.sol/Auction.json frontend/src/artifacts/Auction.json
-mv artifacts/contracts/NFT.sol/NFT.json frontend/src/artifacts/NFT.json
-mv artifacts/contracts/AuctionManager.sol/AuctionManager.json frontend/src/artifacts/AuctionManager.json
+mkdir frontend/src/artifacts # creates a folder named "artifacts" inside the "src" folder of your React app
+mv artifacts/contracts/Auction.sol/Auction.json frontend/src/artifacts/Auction.json # Moves Auction.json to the newly created folder.
+mv artifacts/contracts/NFT.sol/NFT.json frontend/src/artifacts/NFT.json # Moves NFT.json to the newly created folder.
+mv artifacts/contracts/AuctionManager.sol/AuctionManager.json frontend/src/artifacts/AuctionManager.json # Moves AuctionManager.json to the newly created folder.
 ```
 
 Import them in the React code at the top of [App.js](App.NFT-Marketplace-dApp/frontend/src/App.js).
@@ -1829,8 +1829,8 @@ networks:{
 After that, we will run the deploy script just like we did when deploying to the test net.
 
 ```shell
-$ npx hardhat compile
-$ npx hardhat run scripts/deploy.js --network mainnet
+$ npx hardhat compile # Compiles the contracts
+$ npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Avalanche Mainnet, "mainnet" is specified inside the hardhat config file
 ```
 
 # Conclusion
