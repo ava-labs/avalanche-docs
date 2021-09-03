@@ -153,7 +153,7 @@ Get the priority fee needed to be included in a block.
 eth_maxPriorityFeePerGas() -> {}
 ```
 
-`result` is the priority fee needed to be included in a block.
+`result` is hex value of the priority fee needed to be included in a block.
 
 #### **Example Call**
 
