@@ -1,0 +1,11 @@
+node_modules
+
+#Hardhat files
+cache
+artifacts
+typechain
+
+
+#IntelliJ file
+*.iml
+.idea
