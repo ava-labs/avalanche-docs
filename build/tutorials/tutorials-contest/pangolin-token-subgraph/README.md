@@ -29,9 +29,7 @@ If you look under the hood of The Graph protocol, you will discover that the hos
 
 In this section of the tutorial, you will be shown the integral pieces of The Graph protocol, how they fit together and what a typical workflow looks like.
 
-
-![alt_text](images/image1.png "Schematic Diagram of The Graph Protocol")
-
+![alt_text](images/pangolin-token-subgraph-image1.png "Schematic Diagram of The Graph Protocol")
 
 Source: [https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md](https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md)
 
@@ -123,20 +121,13 @@ The Graph also includes support for sorting, pagination, filtering, time-travel 
 
 ### What is Avalanche
 
-Avalanche can best be described as a blockchain ecosystem and smart contracts platform that is built from the ground up to combat the notion that blockchains are inherently slow and not scalable. It does this through a novel consensus algorithm which is orders of magnitude more efficient and robust than Classical and Nakamoto consensus used in blockchains like Bitcoin and Ethereum. Avalanche boasts of higher throughput and lower latency when compared to other Layer 1 blockchains with about 4,500 transactions per second (tps) and an average time-to-finality of 2 seconds. It achieves these performance gains without sacrificing decentralization as its Proof-of-Stake network allows validators to stake 2,000 [AVAX](https://www.avax.network/individuals) (the native cryptocurrency of Avalanche) to secure the network using regular computer hardware as it is energy efficient and CPU optimized. Becoming a validator on Avalanche does not require specialized hardware and as a result, it has thousands of validators securing the network.
-
-The architecture of Avalanche is comprised of [3 main chains](https://docs.avax.network/learn/platform-overview) which derive their security guarantees from the [primary network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network). The chains are the [Exchange Chain (X-Chain)](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api), the [Platform Chain (P-Chain)](https://docs.avax.network/build/avalanchego-apis/platform-chain-p-chain-api), and the [Contract Chain (C-Chain)](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api). The Exchange Chain is used for creating and trading digital assets and relies on Avalanche Consensus Protocol, the Platform Chain is used for creating new [subnets](https://docs.avax.network/build/tutorials/platform/create-a-subnet) and custom blockchains. Subnets are a set of validators that can validate a set of blockchains because in Avalanche, a blockchain is validated by exactly one subnet but a subnet can validate several blockchains. The Contract Chain is an instance of the [Ethereum Virtual Machine (EVM)](https://ethereum.org/en/developers/docs/evm/) running on Avalanche. Both the Platform Chain and the Contract Chain use the [Snowman Consensus Protocol](https://docs.avax.network/#snowman-consensus-protocol). Avalanche, therefore supports Ethereum tooling and [Solidity](https://docs.soliditylang.org/en/v0.8.7/) as smart contracts built for Ethereum can be deployed on the Contract Chain with the added benefit of increased throughput. Decentralized applications can also be built natively for the Contract Chain using tools like [MetaMask](https://metamask.io/), [Truffle](https://www.trufflesuite.com/), [Waffle](https://getwaffle.io/), [Remix](https://remix.ethereum.org/). etc.
+Avalanche can best be described as a blockchain ecosystem and smart contracts platform that is built from the ground up to combat the notion that blockchains are inherently slow and not scalable. The architecture of Avalanche is comprised of [3 main chains](https://docs.avax.network/learn/platform-overview) which derive their security guarantees from the [primary network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network). The chains are the [Exchange Chain (X-Chain)](https://docs.avax.network/build/avalanchego-apis/exchange-chain-x-chain-api), the [Platform Chain (P-Chain)](https://docs.avax.network/build/avalanchego-apis/platform-chain-p-chain-api), and the [Contract Chain (C-Chain)](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api). The Exchange Chain is used for creating and trading digital assets and relies on Avalanche Consensus Protocol, the Platform Chain is used for creating new [subnets](https://docs.avax.network/build/tutorials/platform/create-a-subnet) and custom blockchains. The Contract Chain is an instance of the [Ethereum Virtual Machine (EVM)](https://ethereum.org/en/developers/docs/evm/) running on Avalanche. Both the Platform Chain and the Contract Chain use the [Snowman Consensus Protocol](https://docs.avax.network/#snowman-consensus-protocol). Avalanche, therefore supports Ethereum tooling and [Solidity](https://docs.soliditylang.org/en/v0.8.7/) as smart contracts built for Ethereum can be deployed on the Contract Chain with the added benefit of increased throughput. Decentralized applications can also be built natively for the Contract Chain using tools like [MetaMask](https://metamask.io/), [Truffle](https://www.trufflesuite.com/), [Waffle](https://getwaffle.io/), [Remix](https://remix.ethereum.org/). etc. For more explanations about concepts in Avalanche, you can consult the official [documentation](https://docs.avax.network/).
 
 Below is a diagram that further illustrates the points discussed.
 
-
-
-![alt_text](images/image2.png "Avalanche Architecture")
-
+![alt_text](images/pangolin-token-subgraph-image2.png "Avalanche Architecture")
 
 Source: [https://docs.avax.network/learn/platform-overview](https://docs.avax.network/learn/platform-overview)
-
-Avalanche enables the creation of both private and public blockchains. Custom blockchains can be created using the Platform Chain and requirements can be set for validators joining the subnet that validates transactions on that custom blockchain in line with the business needs of an enterprise or entity. Assets can also be swapped in a cross-chain fashion between the different chains in the Avalanche network, for example, assets can be transferred from the Exchange Chain to the Contract Chain and vice versa. For more explanations about concepts in Avalanche, you can consult the official [documentation](https://docs.avax.network/).
 
 ### The Graph and Avalanche
 
@@ -146,14 +137,11 @@ In line with The Graph’s vision of providing open access to the world’s data
 
 In this section, you will learn how to query Avalanche data from an already deployed subgraph on The Graph’s [hosted service](https://thegraph.com/legacy-explorer/). The subgraph you will use indexes data from the [Pangolin](https://pangolin.exchange/) decentralized exchange on Avalanche. Pangolin is an [Automated Market Maker (AMM)](https://support.avax.network/en/articles/4840276-what-is-an-automated-market-maker-amm) on Avalanche, similar in operation to [Uniswap](https://uniswap.org/). It can be used to swap Ethereum and Avalanche assets and has fast settlement times and low transaction fees. The Graph’s hosted service provides a playground for deployed subgraphs. The playground is an IDE-like environment based on [GraphiQL](https://github.com/graphql/graphiql) where you can write sample queries to fetch data supported by a subgraph. It is a valuable tool when getting to know the queries that are supported by third-party subgraphs deployed by various projects. The Pangolin exchange subgraph can be accessed [here](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground). Below is an image of the playground interface.
 
-
-![alt_text](images/image3.png "The Graph Playground")
-
+![alt_text](images/pangolin-token-subgraph-image3.png "The Graph Playground")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground)
 
 The playground consists of the 3 sections, the query section, the results section, and the schema section. You can modify queries, click on the play button and have the returned data displayed in the middle section (results section). The schema section enables you to go through the entities and their associated fields to know what kind of queries are supported by that particular subgraph. Below is an example query you can initiate on the Pangolin exchange subgraph.
-
 
 ```graphql
 {
@@ -235,12 +223,9 @@ The result shows that there was no volume on the first day but the volume and th
 
 More data can be gotten from this particular entity by constructing queries that match the fields supported. These fields can be identified from the schema as shown in the image below.
 
-
-![alt_text](images/image4.png "Pangolin DEX Schema")
-
+![alt_text](images/pangolin-token-subgraph-image4.png "Pangolin DEX Schema")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground](https://thegraph.com/legacy-explorer/subgraph/dasconnor/pangolin-dex?selected=playground)
-
 
 You can also interact with a deployed subgraph programmatically from your frontend application. To do this, you will need a GraphQL client like [Apollo](https://www.apollographql.com/docs/) that will act as a communication layer between your application and The Graph. First, open up a terminal in your project folder and install Apollo and GraphQL. You can use either  [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) to install both using the commands below like so.
 
@@ -288,17 +273,13 @@ In the previous section, you were shown how to integrate an already deployed sub
 
 Follow the instructions below to begin the process.
 
-
-
 * The first thing to do is to sign in to the [hosted service](https://thegraph.com/legacy-explorer/) if you already have an account. If you do not have an account, you will be required to create one using your [GitHub](https://github.com/) profile.
 * Next, click on your GitHub profile picture at the top right-hand corner to access the Dashboard menu item.
 * Once on the Dashboard click on the Add Subgraph button.
 * Next, on the Create a Subgraph page, input relevant details like your subgraph name, subtitle, description, GitHub URL, etc. then create the subgraph.
 * You will be presented with a page containing instructions on the next steps. Do not worry about these as you will perform them in this section.
 
-
-![alt_text](images/image5.png "New Subgraph Instructions")
-
+![alt_text](images/pangolin-token-subgraph-image5.png "New Subgraph Instructions")
 
 The subgraph project you will build will be based on the governance token of the Pangolin exchange [PNG](https://cchain.explorer.avax.network/address/0x60781C2586D68229fde47564546784ab3fACA982/transactions). It will be a simple project with a single entity - `Transfer`, which will be used to track Transfer events of the token. At the end of building this project, you will have hands-on experience of how the various pieces fit together in a Graph project.
 
@@ -316,15 +297,11 @@ Replace the variables in the command above with your GitHub username and the nam
 
 You will be prompted in the terminal to answer some questions such as the subgraph name, the directory to create the subgraph, the blockchain network, etc. Do not forget to switch the network to Avalanche.
 
-
-![alt_text](images/image6.png "Subgraph Network")
-
+![alt_text](images/pangolin-token-subgraph-image6.png "Subgraph Network")
 
 In a typical workflow where you are building your own smart contracts for Avalanche Contract Chain, you will supply your deployed smart contract address when prompted to do so in the terminal. The smart contract serves as the data source for your subgraph. In our example, we will use the Pangolin token which is already deployed on Avalanche. Do note that if The Graph fails to automatically detect your deployed smart contract address from the online block explorer, you will be required to provide a path to the contract’s Application Binary Interface (ABI) file. If it is a project you are building you can generate the ABI files from your Solidity code. If it is an external project, you can download the source code from the project’s GitHub repository and generate the ABI files locally. Alternatively, you can copy the ABI of the deployed contract from [Avalanche Contract Chain Explorer](https://cchain.explorer.avax.network/) into a file. However, this is not the recommended approach as the version you find on the Contract Chain Explorer may not be the latest, also you run the risk of erroneously copying a malicious ABI. If you must copy the ABI from the explorer, make sure you get the contract address from the project’s documentation. For Pangolin token, you can find it [here](https://pangolin.exchange/tutorials/getting-started). Copy the Pangolin token ABI from the Contract Chain Explorer [code tab](https://cchain.explorer.avax.network/address/0x60781C2586D68229fde47564546784ab3fACA982/contracts), save it in a file with the name Png.json and provide the file path to the Graph CLI when asked if you run into issues with automatic detection from the contract address. Provide the value Png for the contract name when prompted by the CLI. The Graph CLI will generate a scaffolding containing several files and the supplied ABI. Below is what the generated file structure looks like.
 
-
-![alt_text](images/image7.png "File Structure")
-
+![alt_text](images/pangolin-token-subgraph-image7.png "File Structure")
 
 The `subgraph.yaml` file is the main entry point to your subgraph project, it contains the subgraph manifest.
 
@@ -417,9 +394,7 @@ The final step is to run the deployment command below and replace the variables 
 
 This initiates the deployment process and you should see your subgraph being uploaded to IPFS. After a while the upload is complete. You can now switch to your project dashboard on the hosted service. Your subgraph will have a status of syncing as it indexes the event of interest from the genesis block of the blockchain. If you want indexing to start at a specific block, you can specify it in the `startBlock` field under the `source` field in your `subgraph.yaml` file. For a full list of options for the subgraph manifest look at the official [documentation](https://thegraph.com/docs/developer/create-subgraph-hosted#the-subgraph-manifest).
 
-
-![alt_text](images/image8.png "Syncing Parameters")
-
+![alt_text](images/pangolin-token-subgraph-image8.png "Syncing Parameters")
 
 Source: [https://thegraph.com/legacy-explorer/subgraph/ofemeteng/pangolin-token](https://thegraph.com/legacy-explorer/subgraph/ofemeteng/pangolin-token)
 
@@ -474,7 +449,3 @@ You can find the full code for the Pangolin Token subgraph in this [Github repos
 Congratulations on getting to the end of this tutorial. That was an extensive tour of The Graph and Avalanche ecosystems. In this tutorial, you were introduced to the concepts underpinning The Graph protocol and how it is set to bring about a new era of open APIs through which developers can build on the work of others in an open, decentralized, and permissionless manner. You were also introduced to GraphQL, the query language that powers The Graph protocol. The unique tweaks of The Graph protocol as relates to GraphQL were also highlighted and it was shown that The Graph currently only supports the Query type in the GraphQL specification. Next, you were introduced to the Avalanche blockchain, which was designed specifically to solve some of the scaling issues currently being experienced by other Layer 1 blockchain networks. Avalanche architecture and design choices were highlighted. Even though Avalanche operates based on a novel consensus algorithm, its Contract Chain which is one of 3 chains that make up the Avalanche ecosystem is EVM compatible. This means that developers from Ethereum and other EVM-based chains can use tools that they are already familiar with. Avalanche support for Solidity also means that DApps built for these chains can be deployed on Avalanche and immediately reap the benefits associated with low transfer fees and increased throughput. You were also shown how to use The Graph protocol to query data from Avalanche. The playground provided by The Graph was used to interact with the Pangolin decentralized exchange subgraph and you were also introduced to Apollo Client through which you can programmatically interact with subgraphs via your frontend projects. Finally, you built your own subgraph from scratch and deployed it on the hosted service by leveraging the governance token of Pangolin.
 
 At this point, you should be well equipped with the knowledge and tools you need to build awesome data-based projects using The Graph and Avalanche. Happy BUIDLing.
-
-
-
- 
