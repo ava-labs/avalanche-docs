@@ -1,0 +1,32 @@
+{
+  "name": "avax-tutorial-nft",
+  "version": "1.0.0",
+  "description": "A tutorial done for the Avalanche ecosystem",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metodi96/avax-tutorial-nft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metodi96/avax-tutorial-nft/issues"
+  },
+  "homepage": "https://github.com/metodi96/avax-tutorial-nft#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0",
+    "@truffle/hdwallet-provider": "^1.4.2",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.12",
+    "solidity-coverage": "^0.7.16"
+  }
+}
