@@ -27,7 +27,7 @@ To achieve this we need to rename our images/videos with respect to tokenID. Mak
 
 Image / Video for tokenID 0 should be named 0 followed by the extension (jpg, png, tiff, gif, mp4, etc...) 
 
-![image-naming](assets/minting-erc721-00-image-naming.png)
+![image-naming](../../../../.gitbook/assets/minting-erc721-00-image-naming.png)
 
 Here I have a single image named 0 to represent the image corresponding to the tokenID 0. You can name your assets similarly starting from 0 or 1 make sure that your contract also start the tokenID from 0 if you start naming from 0 otherwise 1 whichever is your case. In this tutorial, we will start from 0.
 
@@ -35,27 +35,27 @@ Let's upload these assets to pinata for pinning on IPFS.
 
 In the pinata dashboard you should see an upload button. 
 
-![pinata-upload-button](assets/minting-erc721-01-pinata-upload-button.png)
+![pinata-upload-button](../../../../.gitbook/assets/minting-erc721-01-pinata-upload-button.png)
 
 We are supposed to upload the entire folder the reason for that is we get the same baseURI and tokenID type URL if we upload the folder more about it below. <br>
 
-![pinata-select-folder](assets/minting-erc721-02-pinata-select-folder.png)
+![pinata-select-folder](../../../../.gitbook/assets/minting-erc721-02-pinata-select-folder.png)
 
 Upload the folder by clicking the "Click to upload" button we don't want a custom name for the pin and we need not preserve the directory name so we can ignore those options for now.<br>
 
-![pinata-upload-folder-button](assets/minting-erc721-03-pinata-upload-folder-button.png)
+![pinata-upload-folder-button](../../../../.gitbook/assets/minting-erc721-03-pinata-upload-folder-button.png)
 
 You can see the files that are about to upload since I have only one you can see it in the image below. Click the "Upload" button to start uploading.<br>
 
-![pinata-folder-upload-button](assets/minting-erc721-04-pinata-folder-upload-button.png)
+![pinata-folder-upload-button](../../../../.gitbook/assets/minting-erc721-04-pinata-folder-upload-button.png)
 
 Once done you should see the folder in the files section as shown in the image below.
 
-![pinata-folder-uploaded](assets/minting-erc721-05-pinata-folder-uploaded.png)
+![pinata-folder-uploaded](../../../../.gitbook/assets/minting-erc721-05-pinata-folder-uploaded.png)
 
 You can now click on the name of the folder to see its content on IPFS.
 
-![ipfs-image-folder-content](assets/minting-erc721-06-ipfs-image-folder-content.png)
+![ipfs-image-folder-content](../../../../.gitbook/assets/minting-erc721-06-ipfs-image-folder-content.png)
 
 So now we have the baseURI for the assets to get any asset all we need to do is append the tokenID and extension to the baseURI.
 
@@ -79,7 +79,7 @@ Create a separate folder to store all the metadata files. Create a text file usi
 
 This is the metadata format expected by marketplaces like OpenSea.
 
-![metadata-format](assets/minting-erc721-07-metadata-format.png)
+![metadata-format](../../../../.gitbook/assets/minting-erc721-07-metadata-format.png)
 
  - Let's go through every attribute one by one.
     - `name` - specify the name of the NFT.
@@ -94,11 +94,11 @@ You will need to create such a metadata file for every NFT in the collection. Us
 
 Once you are done you should have a folder of metadata files ready to be uploaded to pinata.
 
-![metadata-file-in-folder](assets/minting-erc721-08-metadata-file-in-folder.png)
+![metadata-file-in-folder](../../../../.gitbook/assets/minting-erc721-08-metadata-file-in-folder.png)
 
 Upload the folder of metadata to pinata.
 
-![pinata-metadata-folder-uploaded](assets/minting-erc721-09-pinata-metadata-folder-uploaded.png)
+![pinata-metadata-folder-uploaded](../../../../.gitbook/assets/minting-erc721-09-pinata-metadata-folder-uploaded.png)
 
 You can click on the folder name and see the contents on IPFS.
 
@@ -110,15 +110,15 @@ Let's now write the code for the ERC721 token. In this tutorial we will use the 
 
 This is how the Remix IDE interface looks like and we can see our project files on the left.
 
-![remix-ide-interface](assets/minting-erc721-10-remix-ide-interface.png)
+![remix-ide-interface](../../../../.gitbook/assets/minting-erc721-10-remix-ide-interface.png)
 
 Let's create a file under the <code>contracts</code> folder for our token.<br>
 
-![create-file-remix](assets/minting-erc721-11-create-file-remix.png)
+![create-file-remix](../../../../.gitbook/assets/minting-erc721-11-create-file-remix.png)
 
 For this tutorial I named it <code>MyNFT.sol</code> make sure to have the <code>.sol</code> extension. As a good practice, you can name the file with the same name as the token.<br>
 
-![remix-file-created](assets/minting-erc721-12-remix-file-created.png)
+![remix-file-created](../../../../.gitbook/assets/minting-erc721-12-remix-file-created.png)
 
 I have attached the code for the NFT in the same repository. 
 
@@ -142,21 +142,21 @@ I have attached the code for the NFT in the same repository.
 
 Let's now compile the code to check if there are any errors. To compile the shortcut is Ctrl / Command + S or click the icon shown in the image below.
 
-![remix-compile-button](assets/minting-erc721-13-remix-compile-button.png)
+![remix-compile-button](../../../../.gitbook/assets/minting-erc721-13-remix-compile-button.png)
 
 Make sure you have the correct compiler selected from the dropdown and click the "Compile" button.
 
-![compile-nft](assets/minting-erc721-14-compile-nft.png)
+![compile-nft](../../../../.gitbook/assets/minting-erc721-14-compile-nft.png)
 
 Once compiled we can now deploy the contract to the Avalanche FUJI C-Chain testnet. *The steps to deploy on the mainnet are the same.*
 
 Click the deploy button as shown in the image below.<br>
 
-![remix-deploy-button](assets/minting-erc721-15-remix-deploy-button.png)
+![remix-deploy-button](../../../../.gitbook/assets/minting-erc721-15-remix-deploy-button.png)
 
 In the deploy section make sure you have "Injected web3" selected in the dropdown.
 
-![deploy-section](assets/minting-erc721-16-deploy-section.png)
+![deploy-section](../../../../.gitbook/assets/minting-erc721-16-deploy-section.png)
 
 Make sure it shows the correct account that you want to use to deploy the NFT. Make sure the correct contract is selected to be deployed.
 
@@ -164,28 +164,28 @@ Once ready you can hit the "Deploy" button.
 
 You should get a "Confirm Transaction" prompt, hit the "Confirm" button.
 
-![confirm-transaction-dialog](assets/minting-erc721-17-confirm-transaction-dialog.png)
+![confirm-transaction-dialog](../../../../.gitbook/assets/minting-erc721-17-confirm-transaction-dialog.png)
 
 You should get a metamask pop-up asking to confirm the transaction.<br>
 
-![metamask-popup](assets/minting-erc721-18-metamask-popup.png)
+![metamask-popup](../../../../.gitbook/assets/minting-erc721-18-metamask-popup.png)
 
 Make sure you are on the correct network and hit the "Confirm" button. You should be able to see the contract deployment under progress in your metamask.
-![contract-deployment-in-progress](assets/minting-erc721-19-contract-deployment-in-progress.png)
+![contract-deployment-in-progress](../../../../.gitbook/assets/minting-erc721-19-contract-deployment-in-progress.png)
 
 Once the contract is deployed you should be able to see it under the "Deployed Contracts" section.
 
-![deployed-contract](assets/minting-erc721-20-deployed-contract.png)
+![deployed-contract](../../../../.gitbook/assets/minting-erc721-20-deployed-contract.png)
 
 Nice! We now have deployed the contract however we don't own any NFT. To own an NFT we need to mint it.
 
 Expand the contract and see for the "mint" button.<br>
 
-![contract-mint-button](assets/minting-erc721-21-contract-mint-button.png)
+![contract-mint-button](../../../../.gitbook/assets/minting-erc721-21-contract-mint-button.png)
 
 You won't be able to mint unless you pay 0.01 AVAX in order to mint. For that, you will need to specify the amount to pay. Remix IDE doesn't let you specify decimals so we need to specify it in finney which is a lower unit than ether. 1 ether = 1000 finney. We need 0.01 ether so 10 finney.<br>
 
-![enter-amount](assets/minting-erc721-22-enter-amount.png)
+![enter-amount](../../../../.gitbook/assets/minting-erc721-22-enter-amount.png)
 
 Now try clicking the "mint" button. "Confirm Transaction" dialog might appear confirm it. Make sure you are on the correct network, the amount is correct, and hit the "Confirm" button.
 
@@ -199,7 +199,7 @@ You can check the NFT on the explorer. My URL is below.
 
 https://cchain.explorer.avax-test.network/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers
 
-![nft-on-explorer](assets/minting-erc721-23-nft-on-explorer.png)
+![nft-on-explorer](../../../../.gitbook/assets/minting-erc721-23-nft-on-explorer.png)
 
 The format is as follows.
 
