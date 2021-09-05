@@ -30,11 +30,11 @@ From the title, **Distributed File Manager**, you have got an idea that it's abo
 
 Currently, we are dominated by the **client-server** model of communication which is following **HTTP** aka **Hypertext Transfer Protocol**. This means that, in between the communication between two devices, one has to be the server (which will serve or respond with data) and the other should be the client (which will receive or request data). The major problem with this client-server model is that the client would have to request data from the server, far away from it, even if the same data was previously received by its neighbour or was available somewhere closer. This would cause high latency (delay in receiving data) and low bandwidths (speed of data transfer).
 
-![](./assets/server-vs-p2p.jpeg)
+![](./assets/distributed-file-manager-00-server-vs-p2p.jpeg)
 
 **IPFS** is a relatively new protocol, which aims to resolve these issues. It follows the **peer-to-peer** model of communication, in which there could be an arbitrary number of servers responding to the client with the required data. Once the client has the data (or even just bits of other data), it can then act as a server. Every node connected to the network can act as a server if it has the required software installed. Sending data from multiple servers may seem inefficient, however, the protocol is designed this way. The data is hashed and divided into pieces that can be transmitted and stored separately, but given sufficient, information can be re-joined later. Once all the pieces are in place, it makes the whole file.
 
-![](./assets/ipfs-swarm.jpeg)
+![](./assets/distributed-file-manager-01-ipfs-swarm.jpeg)
 
 **IPFS** is a large swarm of such nodes, which chose to serve data. We need IPFS clients to connect to those nodes and upload data. We can also connect to the network using the available javascript client libraries like `ipfs-http-client`. There are several providers like **Infura**, which provides an HTTP portal to view the files on the IPFS. More technical details are provided ahead in the tutorial.
 
@@ -65,7 +65,7 @@ npm install --save dotenv web3 @truffle/contract @truffle/hdwallet-provider
 
 Open the file `index.html` file inside of the `public` directory and replace the existing code with the following HTML :
 
-```markup
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -216,15 +216,15 @@ Then the root seed is passed to a one-way hash function to generate a 512-bit se
 * A seed called a chain code (256 bits)
 * An index number (32 bits)
 
-![](./assets/master-private-public-key-generation.png)
+![](./assets/distributed-file-manager-02-master-private-public-key-generation.png)
 
 The index number can range from 0 to 2^32 - 1. Thus using a parent with a given private key and chain code we can generate 2^32 or around 4 Billion child key pairs. In a normal derivation, we use parent public key and chain code to generate children. But this could be vulnerable to security threats and hence we can make derivation hard by using the parent's private key instead of the public key for CKD. This process is known as **Hardened child key derivation**. And to distinguish it from normal derivation, we use different index numbers. For normal derivation index number is from 0 to 2^31 - 1 and for hardened derivation, it is from 2^31 to 2^32 - 1. Hardened index number start from 2 Billion which make it difficult to read, so we use i' to represent index 2^31 + i, where 0 &lt;= i &lt;= 2^32 - 1.
 
-![](./assets/child-public-private-key-generation.png)
+![](./assets/distributed-file-manager-03-child-public-private-key-generation.png)
 
 Master keys along with master chain code can create child keys which can further create grandchild keys and so on. Each generation is known as a tree level. Keys in an HD wallet are identified using a **path** naming convention, with each level of the tree separated by a slash (/) character. Private keys derived from the master private key start with **m**. Public keys derived from the master public key start with **M**. An HD path `m/0` represents the 0th or first child private key derived from the master. Similarly, `m/3'/1` denotes the 2nd child private key of the 4th or (2^31 + 3)th hardened child derived from the master.
 
-![](./assets/hdwallet.png)
+![](./assets/distributed-file-manager-04-hdwallet.png)
 
 There are various Bitcoin Improvement Proposals (BIP) that proposes the standard way of deriving paths. BIP0044 (44th proposal) specifies the structure as consisting of five predefined tree levels:
 
@@ -268,17 +268,17 @@ npm start
 
 It might take few seconds, to show output as in the image below.
 
-![](./assets/localhost-react-server.png)
+![](./assets/distributed-file-manager-05-localhost-react-server.png)
 
 In a web browser, visit the URL [http://localhost:3000](http://localhost:3000). If npm start has not encountered any errors, we will see the text "Distributed File Manager" at the top of the page as shown in this image :
 
-![](./assets/localhost-frontend.png)
+![](./assets/distributed-file-manager-06-localhost-frontend.png)
 
 ## Create the FileManager contract
 
 Create the file `FileManager.sol` (`.sol` stands for Solidity) inside of the `contracts` directory and paste the following code:
 
-```javascript
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0;
 
@@ -390,7 +390,7 @@ When deploying smart contracts to the Avalanche network, it will require some de
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax-test.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
-![](./assets/avalanche-c-chain-address.png)
+![](./assets/distributed-file-manager-07-avalanche-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -551,116 +551,7 @@ export class GetAccount extends React.Component {
 
 ### IPFSUploader Component
 
-Now let's make a component that will upload the files from our system to the IPFS network. So, make a file named `IPFSUploader.js` in the `src` directory and paste the following code inside it.
-
-```jsx
-import React from "react";
-import Compressor from "compressorjs";
-import { Loader } from "rimble-ui";
-
-const { create } = require("ipfs-http-client");
-const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
-
-class IPFSUploader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      buffer: null,
-      fileName: null,
-      fileType: null,
-      cid: null,
-      account: this.props.state.account,
-      loading: false,
-      loadingReason: "",
-    };
-  }
-
-  captureFile = (event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
-    var type = file.type.split("/");
-
-    if (type[0] === "image") {
-      new Compressor(file, {
-        quality: 0.2,
-        success: (compressedResult) => {
-          const reader = new window.FileReader();
-          reader.readAsArrayBuffer(compressedResult);
-          reader.onloadend = () => {
-            this.setState({
-              buffer: Buffer(reader.result),
-              fileName: file.name,
-              fileType: file.type,
-            });
-          };
-        },
-      });
-    } else {
-      const reader = new window.FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onloadend = () => {
-        this.setState({
-          buffer: Buffer(reader.result),
-          fileName: file.name,
-          fileType: file.type,
-        });
-      };
-    }
-  };
-
-  onSubmit = async (event) => {
-    event.preventDefault();
-
-    this.setState({ loading: true, loadingReason: "Uploading to IPFS" });
-    const { cid } = await ipfs.add(this.state.buffer);
-    this.setState({ cid: cid.string, loadingReason: "Waiting for approval" });
-
-    try {
-      await this.props.state.contract.addFile(
-        [this.state.fileName, this.state.fileType],
-        this.state.cid,
-        { from: this.props.state.account, gas: 20000000 }
-      );
-    } catch (e) {
-      console.log("Transaction failed");
-    }
-
-    this.setState({ loading: false });
-  };
-
-  render() {
-    return (
-      <div>
-        <center style={{ margin: "50px auto" }}>
-          <form onSubmit={this.onSubmit}>
-            <input
-              className="text-light bg-dark"
-              type="file"
-              onChange={this.captureFile}
-            />
-            <br />
-            <br />
-
-            {this.state.loading ? (
-              <center>
-                <Loader size="40px" color="white" />
-                <br />
-                <font size="2" color="white" style={{ marginTop: "-10px" }}>
-                  {this.state.loadingReason}
-                </font>
-              </center>
-            ) : (
-              <input className="btn btn-dark" type="submit" />
-            )}
-          </form>
-        </center>
-      </div>
-    );
-  }
-}
-
-export default IPFSUploader;
-```
+Now let's make a component that will upload the files from our system to the IPFS network. So, make a file named `IPFSUploader.js` in the `src` directory and use the code as present in this [file](./frontend/IPFSUploader.js).
 
 Let's understand this component block by block.
 
@@ -686,292 +577,7 @@ npm install --save ipfs-http-client compressorjs rimble-ui --force
 
 ### IPFSViewer Component
 
-Now make a new file named `IPFSViewer.js`. This component would be used to fetch file information from the deployed smart contract and display it on the website. Add the following code inside it.
-
-```jsx
-import React from "react";
-import App from "./App";
-import IPFSViewerCSS from "./IPFSViewerCSS.css";
-
-class IPFSViewer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageFiles: [],
-      videoFiles: [],
-      applicationFiles: [],
-      audioFiles: [],
-      otherFiles: [],
-    };
-  }
-
-  app = null;
-
-  async componentDidMount() {
-    this.app = new App();
-    await this.app.init();
-    await this.loadFiles();
-  }
-
-  loadFiles = async () => {
-    const files = await this.app.contract.getFiles(this.app.account[0]);
-    var imageFiles = [], videoFiles = [], audioFiles = [], applicationFiles = [], otherFiles = [];
-
-    files.forEach((file) => {
-      var type = file[2].split("/");
-      if (type[0] === "image") {
-        imageFiles.push(file);
-      } else if (type[0] === "video") {
-        videoFiles.push(file);
-      } else if (type[0] === "audio") {
-        audioFiles.push(file);
-      } else if (type[0] === "application") {
-        applicationFiles.push(file);
-      } else {
-        otherFiles.push(file);
-      }
-    });
-
-    this.setState({
-      imageFiles,
-      videoFiles,
-      audioFiles,
-      applicationFiles,
-      otherFiles,
-    });
-  };
-
-  showImageFiles = () => {
-    var fileComponent = [];
-
-    this.state.imageFiles.forEach((file) => {
-      var fileName;
-      if (file[1].length < 12) {
-        fileName = file[1];
-      } else {
-        fileName = file[1].substring(0, 6) + "..." + file[1].substring(file[1].length - 8, file[1].length);
-      }
-
-      fileComponent.push(
-        <a href={`https://ipfs.infura.io/ipfs/${file[3]}`}>
-          <img
-            alt={fileName}
-            src={`https://ipfs.infura.io/ipfs/${file[3]}`}
-            style={{
-              margin: "5px",
-              width: "200px",
-              height: "150px",
-              border: "solid white 2px",
-              borderRadius: "5px",
-            }}
-          />
-          <center>{fileName}</center>
-        </a>
-      );
-    });
-    return fileComponent;
-  };
-
-  showVideoFiles = () => {
-    var fileComponent = [];
-    this.state.videoFiles.forEach((file) => {
-      var fileName;
-      if (file[1].length < 12) {
-        fileName = file[1];
-      } else {
-        fileName = file[1].substring(0, 6) + "..." + file[1].substring(file[1].length - 8, file[1].length);
-      }
-      fileComponent.push(
-        <div>
-          <video
-            src={`https://ipfs.infura.io/ipfs/${file[3]}#t=0.1`}
-            controls
-            style={{
-              margin: "5px",
-              width: "290px",
-              height: "200px",
-              border: "solid white 2px",
-              borderRadius: "5px",
-            }}
-          />
-          <center>{fileName}</center>
-        </div>
-      );
-    });
-    return fileComponent;
-  };
-
-  showAudioFiles = () => {
-    var fileComponent = [];
-    this.state.audioFiles.forEach((file) => {
-      var fileName;
-      if (file[1].length < 12) {
-        fileName = file[1];
-      } else {
-        fileName = file[1].substring(0, 6) + "..." + file[1].substring(file[1].length - 8, file[1].length);
-      }
-      fileComponent.push(
-        <div>
-          <audio
-            src={`https://ipfs.infura.io/ipfs/${file[3]}#t=0.1`}
-            controls
-            style={{ margin: "10px" }}
-          />
-          <center>{fileName}</center>
-        </div>
-      );
-    });
-    return fileComponent;
-  };
-
-  showApplicationFiles = () => {
-    var fileComponent = [];
-    this.state.applicationFiles.forEach((file) => {
-      var fileName;
-      if (file[1].length < 12) {
-        fileName = file[1];
-      } else {
-        fileName = file[1].substring(0, 6) + "..." + file[1].substring(file[1].length - 8, file[1].length);
-      }
-      fileComponent.push(
-        <div style={{ width: "120px" }}>
-          <center
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              window.location.href = `https://ipfs.infura.io/ipfs/${file[3]}`;
-            }}
-          >
-            <a href={`https://ipfs.infura.io/ipfs/${file[3]}`}>
-              <img
-                alt={fileName}
-                src={
-                  "https://img2.pngio.com/filetype-docs-icon-material-iconset-zhoolego-file-icon-png-256_256.png"
-                }
-                style={{ width: "50px", height: "50px" }}
-              />
-              <br />
-              {fileName}
-            </a>
-          </center>
-        </div>
-      );
-    });
-    return fileComponent;
-  };
-
-  showOtherFiles = () => {
-    var fileComponent = [];
-    this.state.otherFiles.forEach((file) => {
-      var fileName;
-      if (file[1].length < 12) {
-        fileName = file[1];
-      } else {
-        fileName =
-          file[1].substring(0, 6) +
-          "..." +
-          file[1].substring(file[1].length - 8, file[1].length);
-      }
-      fileComponent.push(
-        <div style={{ width: "120px" }}>
-          <center style={{ cursor: "pointer" }}>
-            <a href={`https://ipfs.infura.io/ipfs/${file[3]}`}>
-              <img
-                alt={fileName}
-                src={
-                  "https://images.vexels.com/media/users/3/152864/isolated/preview/2e095de08301a57890aad6898ad8ba4c-yellow-circle-question-mark-icon-by-vexels.png"
-                }
-                style={{ width: "50px", height: "50px" }}
-              />
-              <br />
-              {fileName}
-            </a>
-          </center>
-        </div>
-      );
-    });
-    return fileComponent;
-  };
-
-  render() {
-    var imageFiles = this.showImageFiles(), videoFiles = this.showVideoFiles(), audioFiles = this.showAudioFiles(), applicationFiles = this.showApplicationFiles(), otherFiles = this.showOtherFiles();
-
-    return (
-      <div style={{ margin: "20px" }}>
-        <b style={{ color: "white" }}>Images</b> <br /><br />
-
-        <div
-          className={"imageViewer"}
-          style={{
-            color: "white",
-            height: "200px",
-            display: "flex",
-            overflowX: "scroll",
-          }}
-        >
-          {imageFiles.length === 0 ? "No files to show" : imageFiles}
-        </div> <br /><br />
-
-        <b style={{ color: "white" }}>Videos</b> <br /><br />
-        <div
-          className={"imageViewer"}
-          style={{
-            color: "white",
-            height: "250px",
-            display: "flex",
-            overflowX: "scroll",
-          }}
-        >
-          {videoFiles.length === 0 ? "No files to show" : videoFiles}
-        </div> <br /><br />
-
-        <b style={{ color: "white" }}>Audio</b> <br /><br />
-
-        <div
-          className={"imageViewer"}
-          style={{
-            color: "white",
-            height: "250px",
-            display: "flex",
-            overflowX: "scroll",
-          }}
-        >
-          {audioFiles.length === 0 ? "No files to show" : audioFiles}
-        </div> <br /><br />
-
-        <b style={{ color: "white" }}>Applications</b> <br /><br />
-
-        <div
-          className={"imageViewer"}
-          style={{
-            color: "white",
-            height: "150px",
-            display: "flex",
-            overflowX: "scroll",
-          }}
-        >
-          {applicationFiles.length === 0 ? "No files to show" : applicationFiles}
-        </div> <br /><br />
-
-        <b style={{ color: "white" }}>Others</b> <br /><br />
-
-        <div
-          className={"imageViewer"}
-          style={{
-            color: "white",
-            height: "150px",
-            display: "flex",
-            overflowX: "scroll",
-          }}
-        >
-          {otherFiles.length === 0 ? "No files to show" : otherFiles}
-        </div>
-      </div>
-    );
-  }
-}
-
-export default IPFSViewer;
-```
+Now make a new file named `IPFSViewer.js`. This component would be used to fetch file information from the deployed smart contract and display it on the website. Use the code as present in this [file](./frontend/IPFSViewer.js).
 
 Let's understand the above component block by block.
 
@@ -1063,6 +669,10 @@ this.setState({contract: this.contract});
 <IPFSUploader state = {this.state} />
 ```
 
+Your `App.js` would now look like this [file](./frontend/App.js)
+
+## Starting the application
+
 Now go to the project root directory of the project, i.e. `dfm-avalanche-react` directory, and run the command `npm start`. The ReactJS server would start automatically. Visit [http://localhost:3000](http://localhost:3000) to interact with the built dApp.
 
 Don't forget to set up Metamask with Avalanche Fuji testnet and also fund the account with Avalanche test tokens to upload files.
@@ -1079,7 +689,7 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 
 > If you find any difficulty in setting up the project, then feel free to clone this repository [https://github.com/rajranjan0608/dfm/tree/avalanche](https://github.com/rajranjan0608/dfm/tree/avalanche), and follow the steps in the `README.md` file of this repo in order to run the application.
 
-![](./assets/final-dapplication.gif)
+![](./assets/distributed-file-manager-08-final-dapplication.gif)
 
 ## Conclusion
 
