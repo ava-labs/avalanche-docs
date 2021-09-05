@@ -170,118 +170,14 @@ npm start
 
 ## Create Auction smart contract
 
-Create an `Auction.sol` (sol stands for solidity) file inside the contracts directory and paste the following code given below:
-
-```javascript
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.0;
-
-contract AuctionManager {
-  uint public uId = 0;
-  uint public aId = 0;
-
-  // Structure to store user information
-  struct User {
-    uint userId;
-    string name;
-    address publicAddress;
-  }
-
-  // Structure to store bid information
-  struct Bid {
-    uint userId;
-    uint bidPrice;
-  }
-
-  // Structure to store auction information
-  struct Auction {
-    uint auctionId;
-    uint userId;
-    string name;
-    string description;
-    uint msp;
-    uint auctionBidId;
-  }
-
-  // Structure to store real time analytics of each auction
-  struct AuctionAnalytics {
-    uint auctionId;
-    uint auctionBidId;
-    uint latestBid;
-    uint lowestBid;
-    uint highestBid;
-  }
-
-  // List of all auctions
-  Auction[] public auctions;
-
-  // Mapping for storing user info, bids and auction analytics
-  mapping (uint => User) public users;
-  mapping (uint => Bid[]) public bids;
-  mapping (uint => AuctionAnalytics) public auctionAnalytics;
-
-  // Public function to check the registration of users (public address)
-  function isRegistered(address _publicAddress) public view returns (uint256[2] memory) {
-    uint256[2] memory result = [uint256(0), uint256(0)];
-    for(uint i = 0; i < uId; i++) {
-      if(_publicAddress == users[i].publicAddress) {
-        result[0] = 1;
-        result[1] = i;
-        return result;
-      }
-    }
-    return result;
-  }
-
-  // Creating new users
-  function createUser(string memory _name) public {
-    require((isRegistered(msg.sender))[0] == 0, "User already registered!");
-    users[uId] = User(uId, _name, msg.sender);
-    uId++;
-  }
-
-  // Creating new auctions
-  function createAuction(string memory _name, string memory _description, uint _msp) public {
-    require((isRegistered(msg.sender))[0] == 1, "User not registered!");
-    uint MAX_UINT = 2 ** 256 - 1;
-    auctions.push(Auction(aId, isRegistered(msg.sender)[1], _name, _description, _msp, 0));
-    auctionAnalytics[aId] = AuctionAnalytics(aId, 0, 0, MAX_UINT, 0);
-    aId++;
-  }
-
-  // Private function to update auction analytics after the new bids
-  function updateAucionAnalytics(uint _aId, uint _latestBid) private {
-    auctionAnalytics[_aId].latestBid = _latestBid;
-    auctionAnalytics[_aId].auctionBidId = auctions[_aId].auctionBidId;
-    if(_latestBid < auctionAnalytics[_aId].lowestBid) {
-      auctionAnalytics[_aId].lowestBid = _latestBid;
-    }
-    if(_latestBid > auctionAnalytics[_aId].highestBid) {
-      auctionAnalytics[_aId].highestBid = _latestBid;
-    }
-  }
-
-  // Creating new bids
-  function createBid(uint _aId, uint _bidPrice) public {
-    require((isRegistered(msg.sender))[0] == 1, "User not registered!");
-    bids[_aId].push(Bid((isRegistered(msg.sender))[1], _bidPrice));
-    auctions[_aId].auctionBidId++;
-    updateAucionAnalytics(_aId, _bidPrice);
-  }
-
-  // Return list of all auctions
-  function showAuctions() public view returns (Auction[] memory) {
-    return auctions;
-  }
-}
-```
+Create an `Auction.sol` (sol stands for solidity) file inside the contracts directory and use the code given in this [file](./contracts/Auction.sol).
 
 `Auction` is a solidity contract which enables us to view Auction details and correspondingly its minimum price. We will be accessing the deployed Auction contracts using their `address` and `ABI`. Each time when a new auction is created, the solidity code will be deployed to the blockchain.
 
 ## Let's understand this contract in detail
 
 ### Users, bids, auctions and analytics
-```javascript
+```solidity
 // List of all auctions
 Auction[] public auctions;
 
@@ -294,7 +190,7 @@ The above block of code will declare public variables for storing user informati
 
 ### Function to check registered user
 
-```javascript
+```solidity
 // Public function to check the registration of users (public address)
 function isRegistered(address _publicAddress) public view returns (uint256[2] memory) {
     uint256[2] memory result = [uint256(0), uint256(0)];
@@ -315,7 +211,7 @@ This function takes the public address as its argument and returns an integer ar
 We have created a mapping for storing analytics like latest bid, highest bid, lowest bid, etc. for each auction. This mapping will map **auctionId** to **AuctionAnalytic** struct. Every time a new auction is created, we initialize its corresponding entry in the **AuctionAnalytics** map.
 
 ### Updating auction analytics
-```javascript
+```solidity
 // Private function to update auction analytics after the new bids
 function updateAucionAnalytics(uint _aId, uint _latestBid) private {
     auctionAnalytics[_aId].latestBid = _latestBid;
@@ -336,7 +232,7 @@ The rest of the functions are self-explanatory but are well commented for the re
 
 Create the file `Migration.sol` inside of the contracts directory and paste the following code:
 
-```javascript 
+```solidity 
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
@@ -398,7 +294,7 @@ During the deployment of the smart contract to the C-chain, deployment cost will
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain, and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax-test.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
-![](./assets/wallet-c-chain-address.png)
+![](./assets/drizzle-auction-00-wallet-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -630,133 +526,8 @@ export default App;
 `drizzleVariables.initialized` would ensure that, `Loading...` state is visible until Drizzle is ready for interaction.
 
 ## Auction Component
-Create a file `Auction.js` inside the `drizzle-auction/client/src/` directory. and paste the following code mention below. This component deals with the entry-point of our application, where all the data like `userInfo`, `AuctionLists`, `AuctionDetails` etc. get generated.
+Create a file `Auction.js` inside the `drizzle-auction/client/src/` directory. and paste the code given in this [file](./frontend/Auction.js). This component deals with the entry-point of our application, where all the data like `userInfo`, `AuctionLists`, `AuctionDetails` etc. get generated.
 
-```javascript
-import React, { useState, useEffect } from "react";
-import { useDrizzleContext } from './drizzleContext';
-import FetchAuctions from './AuctionList';
-import CreateAuction from './CreateAuction';
-
-function Auction() {
-    // Importing drizzle variables from drizzle context
-    const { drizzleVariables } = useDrizzleContext();
-    const { AuctionManager, subscriber, accounts } = drizzleVariables;
-
-    // Setting up cache keys corresponding to cache calls
-    const [cacheKeys, setCacheKey] = useState({
-        uId: null,
-        aId: null,
-        showAuctions: null,
-        isRegistered: null,
-        auctionAnalytics: [null]
-    });
-    const [auctionAnalyticsCacheKey, setAuctionAnalyticsCacheKey] = useState(null);
-
-    // Setting up cache calls for requried functions
-    const cacheCalls = {
-        isRegistered: subscriber?.isRegistered[cacheKeys?.isRegistered]?.value,
-        user: subscriber?.users[cacheKeys?.uId]?.value,
-        aId: subscriber?.aId[cacheKeys?.aId]?.value,
-        showAuctions: subscriber?.showAuctions[cacheKeys?.showAuctions]?.value,
-        auctionAnalytics: []
-    }
-
-    for(var i = 0; i < cacheCalls.aId; i++) {
-        cacheCalls.auctionAnalytics.push(subscriber?.auctionAnalytics[auctionAnalyticsCacheKey[i]]?.value)
-    }
-
-    const [isRegistered, setIsRegistered] = useState(false);
-    const [userInfo, setUserInfo] = useState({
-        id: null,
-        name: null
-    });
-
-    // Initializing cache keys
-    useEffect(() => {
-        const _auctionCacheKey = AuctionManager?.showAuctions?.cacheCall();
-        const _aIdCacheKey = AuctionManager?.aId?.cacheCall();
-        const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0]);
-        setCacheKey({
-            ...cacheKeys,
-            showAuctions: _auctionCacheKey,
-            aId: _aIdCacheKey,
-            isRegistered: _isRegistered
-        });
-    }, []);
-
-    useEffect(() => {
-        var _auctionAnalyticsCacheKey = [];
-        for(var i = 0; i < cacheCalls.aId; i++) {
-            _auctionAnalyticsCacheKey.push(AuctionManager?.auctionAnalytics?.cacheCall(i))
-        }
-        setAuctionAnalyticsCacheKey(_auctionAnalyticsCacheKey)
-    }, [cacheCalls.aId])
-
-    useEffect(() => {
-        if(cacheCalls.isRegistered !== undefined && cacheCalls.isRegistered[0] == 1) {
-            setIsRegistered(true);
-            (async () => {
-                const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call();
-                setUserInfo({
-                    id: userInfo.userId,
-                    name: userInfo.name
-                })
-            })();
-        } else {
-            setIsRegistered(false);
-        }
-    }, [cacheCalls.isRegistered]);
-
-    const createUser = async (name) => {
-        await AuctionManager?.createUser(name)?.send({from: accounts[0]});
-    }
-
-    const [userName, setUserName] = useState("");
-
-    const handleUserNameChange = (event) => {
-        setUserName(event.target.value);
-    }
-
-    const submitLogin = event => {
-        event.preventDefault();
-        createUser(userName);
-    }
-
-    const UserInfo = () => {
-        return (
-            <div>
-                <label style={{color: "red"}}>ID: </label> {userInfo.id}
-                <label style={{marginLeft: "50px", color: "green"}}>Name: </label> {userInfo.name} <br/><br/>
-            </div>
-        )
-    }
-
-    return (
-        <div>
-            <h1>Auctions</h1>
-            {
-                isRegistered
-                ? 
-                <>
-                    <UserInfo/>
-                    <FetchAuctions cacheCalls={cacheCalls} userInfo={userInfo}/> <br/><br/>
-                    <CreateAuction/>
-                </>
-                : 
-                <form onSubmit={submitLogin}>
-                    <font color="red" font="2">This address is not yet registered!</font><br/><br/>
-                    <label>Address: </label><input disabled value={accounts[0]}/><br/><br/>
-                    <label>Name: </label><input key="1" value={userName} required onChange={handleUserNameChange} placeholder="Enter your name"/><br/><br/>
-                    <input type="submit" value="Register" />
-                </form>              
-            }
-        </div>
-    )
-}
-
-export default Auction;
-```
 In order to keep data fresh from the blockchain, Drizzle uses the caching mechanism. On our behalf Drizzle keeps track of every change on the blockchain. If there is any transaction involving our smart contracts, then it will notify our DApp.
 
 We need to specifically define the calls which we want to monitor. Caching a particular method will provide cache keys (hash) to us. Each cached method is associated with a particular unique hash. Using this key, we can get live data from the blockchain, and the component will re-render anytime there is some new value associated with this call.
@@ -786,162 +557,12 @@ const realTimeIsRegistered = subscriber?.isRegistered[cacheKeys?.isRegistered]?.
 In this component, we made a simple object of cached call variables named `cacheCall`, which implements the above code snippet. The cached version of `isRegistered` can be accessed as `cacheCalls.isRegistered`.
 
 ## Auction List
-Create a file `Auctionlist.js` inside the `drizzle-auction/client/src/` directory and paste the following code as mentioned below. This component deals with the management of the auction like creating a new bid, displaying the real-time auction analytics, etc. All these data are passed by its parent component i.e. `Auction.js` which manages the cache keys and calls.
-```javascript
-import React, { useState } from "react";
-import { useDrizzleContext } from './drizzleContext';
-
-function FetchAuctions({cacheCalls, userInfo}) {
-    const { drizzleVariables } = useDrizzleContext();
-    const { AuctionManager, accounts } = drizzleVariables;
-
-    const [bidPrices, setBidPrices] = useState(new Map([]))
-
-    const createBid = async (id, bidPrice) => {
-        await AuctionManager?.createBid(id, bidPrice).send({from: accounts[0]});
-        clearBidPriceInput(id);
-    }
-
-    const submitNewBid = (event, id) => {
-        event.preventDefault();
-        createBid(id, bidPrices.get(id));
-    }
-
-    const handleBidPriceChange = (event, id) => {
-        let _bidPrices = bidPrices;
-        _bidPrices.set(id, event.target.value);
-        setBidPrices(_bidPrices)
-    }
-
-    const clearBidPriceInput = (id) => {
-        let _bidPrices = bidPrices;
-        _bidPrices[id] = "";
-        setBidPrices(_bidPrices)
-    }
-
-    const getAuctionAnalytics = () => {
-        var auctionAnalytics = [];
-        for(var i = 0; i < cacheCalls.aId; i++) {
-            auctionAnalytics.push(cacheCalls.auctionAnalytics[i]);
-        }
-        return auctionAnalytics;
-    }
-
-    const allAuctions = cacheCalls.showAuctions;
-    const auctionAnalytics = getAuctionAnalytics();
-    return (
-        <table border="1" style={{maxWidth: "800px", width: "90%"}}>
-            <tr>
-                <td>Auction ID</td>
-                <td>Auction Details</td>
-                <td>Minimum Price</td>
-                <td>Bid</td>
-            </tr>
-            {
-                allAuctions !== undefined && allAuctions.map((auction, index) => (
-                    <tr>
-                        <td>
-                            {auction.auctionId}
-                        </td>
-                        <td>
-                            <b>{auction.name} <font size="2" color="green">{auction.userId == userInfo.id && "(created by you)"}</font></b><br/>
-                            <font size="2">{auction.description}</font><br/>
-                            <tr>
-                                <td>Total Bids</td>
-                                <td>Latest Bid</td>
-                                <td>Highest Bid</td>
-                                <td>Lowest Bid</td>
-                            </tr>
-                            <tr>
-                                <td>{auctionAnalytics[index]?.auctionBidId}</td>
-                                <td>₹{auctionAnalytics[index]?.latestBid}</td>
-                                <td>₹{auctionAnalytics[index]?.highestBid}</td>
-                                <td>₹{auctionAnalytics[index]?.auctionBidId == 0 ? 0 : auctionAnalytics[index]?.lowestBid}</td>
-                            </tr>
-                        </td>
-                        <td>
-                            ₹{auction.msp}
-                        </td>
-                        <td>
-                            <form onSubmit={(event) => submitNewBid(event, auction.auctionId)} style={{margin: "10px"}}>
-                                <input required type="number" min={auction.msp} onChange={(event) => handleBidPriceChange(event, auction.auctionId)} placeholder="Enter your bid price"/><br/><br/>
-                                <input type="submit" value="Make Bid"/><br/><br/>
-                            </form>
-                        </td>
-                    </tr>
-                ))
-            }
-        </table>
-    )
-}
-
-export default FetchAuctions;
-```
+Create a file `Auctionlist.js` inside the `drizzle-auction/client/src/` directory and use the code as given in this [file](./frontend/AuctionList.js). This component deals with the management of the auction like creating a new bid, displaying the real-time auction analytics, etc. All these data are passed by its parent component i.e. `Auction.js` which manages the cache keys and calls.
 
 ## Creating new Auctions
-Create a file `CreateAuction.js` inside the `drizzle-auction/client/src/` directory and paste the following code as mentioned below. This component deals with creation of new Auctions, by submitting transactions on the network.
-```javascript
-import React, { useState } from "react";
-import { useDrizzleContext } from './drizzleContext';
+Create a file `CreateAuction.js` inside the `drizzle-auction/client/src/` directory and use the code as given in this [file](./frontend/CreateAuction.js). This component deals with creation of new Auctions, by submitting transactions on the network.
 
-function CreateAuction() {
-    // Importing drizzle variables from drizzle context
-    const { drizzleVariables } = useDrizzleContext();
-    const { AuctionManager, accounts } = drizzleVariables;
-
-    const createAuction = async ({title, description, msp}) => {
-        await AuctionManager?.createAuction(title, description, msp)?.send({from: accounts[0]});
-        setAuctionDetails({
-            title: "",
-            description: "",
-            msp: ""
-        })
-    }
-
-    const [auctionDetails, setAuctionDetails] = useState({
-        title: "",
-        description: "",
-        msp: ""
-    });
-
-    const handleAuctionTitleChange = (event) => {
-        setAuctionDetails({
-            ...auctionDetails,
-            title: event.target.value
-        });
-    }
-
-    const handleAuctionDescriptionChange = (event) => {
-        setAuctionDetails({
-            ...auctionDetails,
-            description: event.target.value
-        });
-    }
-
-    const handleAuctionMspChange = (event) => {
-        setAuctionDetails({
-            ...auctionDetails,
-            msp: event.target.value
-        });
-    }
-
-    const submitNewAuction = (event) => {
-        event.preventDefault();
-        createAuction(auctionDetails);
-    }
-
-    return (
-        <form onSubmit={submitNewAuction} style={{border: "1px black solid", maxWidth: "400px", padding: "10px"}}>
-            <label>Title: </label><br/><input value={auctionDetails.title} onChange={handleAuctionTitleChange}/><br/><br/>
-            <label>Description: </label><br/><textarea rows="4" value={auctionDetails.description} onChange={handleAuctionDescriptionChange}/><br/><br/>
-            <label>MSP: </label><br/><input value={auctionDetails.msp} onChange={handleAuctionMspChange}/><br/><br/>
-            <input type="submit" value="Create Auction" />
-        </form>
-    )
-}
-
-export default CreateAuction;
-```
+## Starting the application
 
 Now go to the project root directory of the project, i.e. `drizzle-auction` directory, and run the command `npm start`. The ReactJS server would start automatically. Visit [http://localhost:3000](http://localhost:3000) to interact with the built dApp.
 
@@ -958,7 +579,7 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 | Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
 
 
-![](./assets/demo-drizzle-auction.gif)
+![](./assets/drizzle-auction-01-demo-drizzle-auction.gif)
 
 ## Conclusion
 We have successfully built a dApp through which we can organize auctions, bid in them and declare results, with both frontend and smart contracts. We have used the Drizzle library from Trufflesuite for integrating our frontend with the blockchain and to keep our data updated in real-time.
