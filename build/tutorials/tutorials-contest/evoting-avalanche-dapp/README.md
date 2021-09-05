@@ -200,69 +200,15 @@ npm start
 
 It might take few seconds, to show output as in the image below.
 
-![](./assets/localhost-react-server.png)
+![](./assets/evoting-dapp-00-localhost-react-server.png)
 
 In a browser, visit the URL of our running dApp: [http://localhost:3000](http://localhost:3000). If you followed the above steps, you would see the page as shown below.
 
-![](./assets/localhost-frontend.png)
+![](./assets/evoting-dapp-01-localhost-frontend.png)
 
 ## **Create Election smart contract**
 
-Create the file `Election.sol` \(`.sol` stands for Solidity\) inside of the `contracts` directory and paste the following code:
-
-```javascript
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.0;
-
-contract Election {
-  // Election details will be stored in these variables
-  string public name;
-  string public description;
-
-  // Structure of candidate standing in the election
-  struct Candidate {
-    uint256 id;
-    string name;
-    uint256 voteCount;
-  }
-
-  // Storing candidates in a map
-  mapping(uint256 => Candidate) public candidates;
-
-  // Storing address of those voters who already voted
-  mapping(address => bool) public voters;
-
-  // Number of candidates in standing in the election
-  uint256 public candidatesCount = 0;
-
-  // Setting of variables and data, during the creation of election contract
-  constructor(string[] memory _nda, string[] memory _candidates) public {
-    require(_candidates.length > 0, "There should be atleast 1 candidate.");
-    name = _nda[0];
-    description = _nda[1];
-    for (uint256 i = 0; i < _candidates.length; i++) {
-      addCandidate(_candidates[i]);
-    }
-  }
-
-  // Private function to add a candidate
-  function addCandidate(string memory _name) private {
-    candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
-    candidatesCount++;
-  }
-
-  // Public vote function for voting a candidate
-  function vote(uint256 _candidate) public {
-    require(!voters[msg.sender], "Voter has already Voted!");
-    require(
-      _candidate < candidatesCount && _candidate >= 0,
-      "Invalid candidate to Vote!"
-    );
-    voters[msg.sender] = true;
-    candidates[_candidate].voteCount++;
-  }
-}
-```
+Create the file `Election.sol` \(`.sol` stands for Solidity\) inside of the `contracts` directory and use the code as given in this [file](./contracts/Election.sol).
 
 `Election` is a Solidity contract that lets us view the name and description, the candidates standing in an election, and vote for them. For this dApp, we will be accessing the deployed Election contracts using their `address` and `ABI`. This Solidity code is what will be deployed to the blockchain, each time we create a new election.
 
@@ -272,7 +218,7 @@ The code for smart contract is everything within `contract Election { }`.
 
 **Basic fields about election** - This block of code would be storing basic fields of each `Election` contract. Fields include `name` and `description`.
 
-```javascript
+```solidity
 // Election details will be stored in these variables
 string public name;
 string public description;
@@ -280,7 +226,7 @@ string public description;
 
 **Storing candidate details** - The `Candidate` struct consists of the data fields `id`, `name` and `voteCount`. We will define a mapping between an unsigned integer \(`uint`\) and each instance of a Candidate. This will enable us to refer to each candidate by its index within the mapping - `candidates[n]`, where `n` is the corresponding `uint` value.
 
-```javascript
+```solidity
 // Structure of candidate standing in the election
 struct Candidate {
   uint256 id;
@@ -294,7 +240,7 @@ mapping(uint256 => Candidate) public candidates;
 
 **Storing address of voters who have already voted and the number of candidates** - `voters` is a mapping between the address of the voter and a boolean. In Solidity, the default boolean value is `false`, so if the return value of `voters(address)` is `false` we can understand that this address has not voted. `true` indicates that the account has voted already.
 
-```javascript
+```solidity
 // Storing address of those voters who already voted
 mapping(address => bool) public voters;
 
@@ -304,7 +250,7 @@ uint public candidatesCount = 0;
 
 **Constructor call and adding candidates to the election** - When a smart contract is deployed on Avalanche, the first function to be called is the `constructor()` function. Whatever we want to initialize in our Solidity smart contract, we do it inside the `constructor()` function. We will be adding a name, description, and candidates to the election. Here, `addCandidate()` is a private function, so that it cannot be called publicly. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
 
-```javascript
+```solidity
 // Setting of variables and data, during the creation of election contract
 constructor (string[] memory _nda, string[] memory _candidates) public {
   require(_candidates.length > 0, "There should be atleast 1 candidate.");
@@ -324,7 +270,7 @@ function addCandidate (string memory _name) private {
 
 **Voting candidates in an election** - We made a `vote()` function. It takes `candidateId` as an argument and increments the vote of the respective candidate. It requires two things, a voter should not have voted in the particular election by checking boolean across the `voters` mapping and `candidateId` should be a valid one, i.e. `0 <= candidateId < candiatesCount`.
 
-```javascript
+```solidity
 // Public vote function for voting a candidate
 function vote (uint _candidate) public {
   require(!voters[msg.sender], "Voter has already Voted!");
@@ -338,7 +284,7 @@ function vote (uint _candidate) public {
 
 Create the file `MainContract.sol` inside of the `contracts` directory and paste the following code:
 
-```javascript
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0;
 
@@ -360,14 +306,14 @@ contract MainContract {
 
 Here `electionId` is used for assigning ID's to each election that a user creates and is incremented for using it while creating the next election. Also, `Elections` is a public mapping between `electionId` and the address of the deployed election contract.
 
-```javascript
+```solidity
 uint public electionId = 0;
 mapping (uint => address) public Elections;
 ```
 
 We have made a `createElection()` function which will be used to deploy our `Election` smart contract. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
 
-```javascript
+```solidity
 function createElection (string[] memory _nda, string[] memory _candidates) public {
   Election election = new Election(_nda, _candidates);
   Elections[electionId] = address(election);
@@ -421,7 +367,7 @@ When deploying smart contracts to the C-Chain, it will require some deployment c
 
 We need funds in our C-Chain address, as smart contracts are deployed on C-Chain i.e. Contract-Chain. This address can easily be found on the [Avalanche Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains: X-Chain, P-Chain and C-Chain. The address of all these chains can be found by switching tabs at the bottom of the division, where there is a QR code. So, switch to C-Chain, and copy the address. Now fund your account using the faucet link [here](https://faucet.avax-test.network/) and paste your C-Chain address in the input field. Refer to the below image, to identify the address section.
 
-![](./assets/wallet-c-chain-address.png)
+![](./assets/evoting-dapp-02-wallet-c-chain-address.png)
 
 > You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = \(1/1000,000,000\) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -602,459 +548,15 @@ this.setState({mainInstance: this.mainInstance});
 
 ### CreateElection Component
 
-Now let's make a component that will create new elections using our deployed smart contract. Create the file `CreateElection.js` inside of the project `src` directory and paste the following code. The code is commented to draw attention to the important parts.
-
-```javascript
-import React, { Component } from "react";
-import App from "./App";
-
-class CreateElection extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onChangeElectionName = this.onChangeElectionName.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    // These state variables would maintain inputs of the form
-    this.state = {
-      electionname: "",
-      description: "",
-      candidates: [],
-    };
-  }
-
-  // To store App.js instance
-  app = null;
-
-  // Connect application with Metamask and create smart-contract's instance
-  async init() {
-    this.app = new App();
-    await this.app.init();
-  }
-
-  componentDidMount() {
-    this.init();
-  }
-
-  onChangeElectionName(e) {
-    this.setState({
-      electionname: e.target.value,
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value,
-    });
-  }
-
-  // Function to be called when the form is submitted
-  async onSubmit(e) {
-    e.preventDefault();
-
-    // Structuring Election details from the form before submitting transaction to the smart-contract
-    const electionDetails = {
-      electionname: this.state.electionname,
-      description: this.state.description,
-      candidateObjects: document.getElementsByName("candidate").values(),
-      candidates: [],
-    };
-
-    var i = 0;
-
-    for (var value of electionDetails.candidateObjects) {
-      electionDetails.candidates[i] = value.value;
-      i++;
-    }
-
-    // Making transaction to the MainContract instance, for creating a new election
-    await this.app.mainInstance.createElection(
-      [electionDetails.electionname, electionDetails.description],
-      electionDetails.candidates,
-      { from: this.app.account[0] }
-    );
-
-    window.location = "/active";
-  }
-
-  render() {
-    return (
-      <div className="container card">
-        <h3>Create New Election</h3>
-
-        {/* New Election Form */}
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              placeholder="Enter election name"
-              onChange={this.onChangeElectionName}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Description</label>
-            <textarea
-              type="text"
-              required
-              className="form-control"
-              placeholder="Describe your Election here"
-              onChange={this.onChangeDescription}
-            ></textarea>
-          </div>
-
-          <table>
-            <tr>
-              <td id="1" className="form-group">
-                <label>Candidate 1</label>
-                <td>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Candidate Name"
-                    name="candidate"
-                  />
-                </td>
-
-                <br />
-                <label>Candidate 2</label>
-                <td>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    placeholder="Candidate Name"
-                    name="candidate"
-                  />
-                </td>
-              </td>
-            </tr>
-          </table>
-
-          <br />
-
-          <div>
-            <button
-              className="btn btn-success grid-item"
-              style={{ width: 100 }}
-              type="submit"
-            >
-              Submit
-            </button>
-          </div>
-
-          <br />
-        </form>
-      </div>
-    );
-  }
-}
-
-export default CreateElection;
-```
+Now let's make a component that will create new elections using our deployed smart contract. Create the file `CreateElection.js` inside of the project `src` directory and use the code as given in this [file](./frontend/CreateElection.js). The code is commented to draw attention to the important parts.
 
 ### ActiveElections Component
 
-Create the file `ActiveElections.js` inside of the project `src` directory and paste the following code:
-
-```javascript
-import React, { Component } from "react";
-import { Loader } from "rimble-ui";
-import { Link } from "react-router-dom";
-
-import App from "./App";
-import ElectionJSON from "./build/contracts/Election.json";
-import VoteModal from "./VoteModal";
-
-// Election component for organising election details
-var Election = (props) => (
-  <tr>
-    <td>{props.election.electionId}</td>
-
-    <td>
-      {props.election.electionName} <br />
-      <font className="text-muted" size="2">
-        <b>{props.election.electionDescription}</b>
-      </font>
-      <br />
-      <font className="text-muted" size="2">
-        {props.election.electionAddress}
-      </font>
-    </td>
-
-    <td style={{ textAlign: "center" }}>{props.candidateComponent}</td>
-
-    <td style={{ textAlign: "center" }}>
-      {!props.election.hasVoted ? (
-        // Vote Modal would be mounted if the user has not voted
-        <VoteModal election={props.election} candidates={props.candidates} />
-      ) : (
-        <font size="2" color="green">
-          You have voted!
-        </font>
-      )}
-    </td>
-  </tr>
-);
-
-// Candidate component for organising candidate details of each candidate
-var Candidates = (props) => (
-  <font size="2">
-    <b>{props.name}</b> ({props.voteCount}) <br />
-  </font>
-);
-
-// ActiveElections component would fetch and display all the the elections deployed by the MainContract.sol
-class ActiveElections extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loading: false,
-    };
-  }
-
-  // To store App.js instance
-  app = null;
-
-  // Connect application with Metamask and create smart-contract's instance
-  async init() {
-    this.app = new App();
-    await this.app.init();
-    await this.loadData();
-  }
-
-  loader = false;
-
-  componentDidMount() {
-    this.init();
-  }
-
-  loadData = async () => {
-    this.setState({ loading: true });
-
-    // electionId maps to total elections created
-    var eCount = await this.app.mainInstance.electionId();
-    var elections = [], electionDetails = [], electionComponents = [];
-
-    // Election details of every election created by MainContract
-    for (var i = 0; i < eCount; i++) {
-      elections[i] = await this.app.mainInstance.Elections(i);
-      var election = await new this.app.web3.eth.Contract(ElectionJSON.abi, elections[i]);
-
-      electionDetails[i] = [];
-
-      // Account address of the voter
-      electionDetails[i].account = this.app.account[0];
-
-      // Each contract's instance
-      electionDetails[i].contractInstance = election;
-
-      // Address of each election contract
-      electionDetails[i].electionAddress = elections[i];
-
-      // Boolean indicating wether the contract address has voted or not
-      electionDetails[i].hasVoted = await election.methods.voters(this.app.account[0]).call();
-
-      // Name of the election
-      electionDetails[i].electionName = await election.methods.name().call();
-
-      // Description of the election
-      electionDetails[i].electionDescription = await election.methods.description().call();
-
-      // Election id
-      electionDetails[i].electionId = i;
-
-      // Organising candidates into components
-      var candidatesCount = await election.methods.candidatesCount().call();
-      var candidates = [], candidateComponents = [];
-      candidates[i] = [];
-      candidateComponents[i] = [];
-
-      for (var j = 0; j < candidatesCount; j++) {
-        candidates[i].push(await election.methods.candidates(j).call());
-        candidateComponents[i].push(
-          <Candidates
-            name={candidates[i][j][1]}
-            voteCount={candidates[i][j][2]}
-          />
-        );
-      }
-
-      // Saving the electionDetails in the form of a component
-      electionComponents[i] = (
-        <Election
-          election={electionDetails[i]}
-          candidates={candidates[i]}
-          candidateComponent={candidateComponents[i]}
-        />
-      );
-    }
-
-    this.setState({
-      data: electionComponents,
-      loading: false,
-    });
-  };
-
-  render() {
-    return (
-      // Simple container to store table with election data
-      <div className="container">
-        <div style={{ float: "right", marginBottom: "10px" }}>
-          <img
-            style={{ width: "25px", marginRight: "20px", cursor: "pointer" }}
-            onClick={this.loadData}
-            src="https://img.icons8.com/color/50/000000/synchronize.png"
-          />
-          <Link to="/createElection">
-            <img
-              style={{ width: "25px", cursor: "pointer" }}
-              src="https://img.icons8.com/color/48/000000/plus-math.png"
-            />
-          </Link>
-        </div>
-
-        <table className="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th style={{ width: "120px" }}>Election ID</th>
-              <th>Election Name</th>
-              <th style={{ textAlign: "center" }}>Candiates</th>
-              <th style={{ textAlign: "center" }}>Vote</th>
-            </tr>
-          </thead>
-
-          <tbody>{this.state.data}</tbody>
-        </table>
-
-        <center>{this.state.loading ? <Loader size="40px" /> : <></>}</center>
-      </div>
-    );
-  }
-}
-
-export default ActiveElections;
-```
+Create the file `ActiveElections.js` inside of the project `src` directory and use the code as given in this [file](./frontend/ActiveElections.js)
 
 ### VoteModal Component
 
-In the above component `ActiveElections.js`, we have used a component called `VoteModal` which contains the candidate details and a button to cast a vote. Now we will make this component available by creating a file named `VoteModal.js` inside the `src` directory. Once created, put the following code inside it :
-
-```javascript
-import React, { useState } from "react";
-import { Box, Flex, Modal, Button, Text, Card, Radio, Field, Loader } from "rimble-ui";
-
-// Data like election and candidate details will be passed in the props by ActiveElections.js (parent)
-function VoteModal(props) {
-  // These are React Hooks and are used only for UX like opening and closing of Voting Modal and loaders
-  const [isOpen, setIsOpen] = useState(false);
-  const [loading, isLoading] = useState(false);
-
-  // This Hook will be used to maintain the selected candidate ID by a voter
-  const [cid, changeCid] = useState(0);
-
-  const closeModal = (e) => {
-    e.preventDefault();
-    setIsOpen(false);
-  };
-
-  const openModal = (e) => {
-    e.preventDefault();
-    setIsOpen(true);
-  };
-
-  const onRadioChange = (e) => {
-    changeCid(e.target.value);
-  };
-
-  // vote() function would be used to transact a vote
-  const vote = async (eid) => {
-    isLoading(true);
-    await props.election.contractInstance.methods.vote(cid).send({ from: props.election.account });
-    isLoading(false);
-  };
-
-  var candid = [],
-    candidVote = [];
-  for (var i = 0; i < props.candidates.length; i++) {
-    var candidDetail = props.candidates[i][1] + " (" + props.candidates[i][2] + ")";
-
-    candid.push(
-      <Radio
-        name="candidate"
-        key={i}
-        label={candidDetail}
-        my={2}
-        value={props.candidates[i][0]}
-        onChange={onRadioChange}
-      />
-    );
-
-    candidVote.push(props.candidates[i][2]);
-  }
-
-  return (
-    // This is a rimble-ui builtin modal for triggering vote() function
-    <Box className="App" p={0}>
-      <Box>
-        <Button onClick={openModal}>Vote</Button>
-
-        <Modal isOpen={isOpen}>
-          <Card width={"420px"} p={0}>
-            {/* Close icon to close the modal */}
-            <Button.Text
-              icononly
-              icon={"Close"}
-              color={"moon-gray"}
-              position={"absolute"}
-              top={0}
-              right={0}
-              mt={3}
-              mr={3}
-              onClick={closeModal}
-            />
-
-            {/* List of candidates with their vote count */}
-            <Box p={4} mb={3}>
-              <h3>{props.election.electionName}</h3>
-              <Field label="Choose candidate from below">{candid}</Field>
-            </Box>
-
-            {/* Vote button to cast a vote */}
-            <Flex
-              px={4}
-              py={3}
-              borderTop={1}
-              borderColor={"#E8E8E8"}
-              justifyContent={"flex-end"}
-            >
-              {loading ? (
-                <Loader size="40px" />
-              ) : (
-                <Button.Outline
-                  onClick={() => {
-                    vote(props.election.electionId);
-                  }}
-                >
-                  Vote
-                </Button.Outline>
-              )}
-            </Flex>
-          </Card>
-        </Modal>
-      </Box>
-    </Box>
-  );
-}
-
-export default VoteModal;
-```
+In the above component `ActiveElections.js`, we have used a component called `VoteModal` which contains the candidate details and a button to cast a vote. Now we will make this component available by creating a file named `VoteModal.js` inside the `src` directory. Use the code as present in this [file](./frontend/VoteModal.js).
 
 ### Integrating Components into App.js
 
@@ -1122,7 +624,7 @@ Don't forget to set up Metamask with Fuji testnet and also fund the account with
 
 You have successfully built a full-fledged e-voting dApp with advanced features like creating custom elections, voting in them and deployed the smart contract on the Fuji test network using Truffle Suite. Along with that, we have also built the client-side application using ReactJS for interacting with the network. From this tutorial, you have learned not only how to make make and deploy smart contracts but also how to integrate ReactJS with the blockchain using Truffle Suite.
 
-![](./assets/evoting-demo.gif)
+![](./assets/evoting-dapp-03-evoting-demo.gif)
 
 ## What's next?
 
