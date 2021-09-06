@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this tutorial you will get familiar with ERC721 (NFT) smart contracts and how to deploy these to the Avalanche Fuji testnet and also the Avalanche mainnet (C-Chain). The goal of this tutorial is to be as beginner friendly as possible. I will go through each line of code in order to give you a full understanding of what is happening, so that you can use the concepts as a basis for your first NFT decentralized application. The plan is to showcase:
+In this tutorial you will get familiar with [ERC721 (NFT)](https://medium.com/crypto-currently/the-anatomy-of-erc721-e9db77abfc24) smart contracts and how to deploy these to the [Avalanche Fuji testnet](https://docs.avax.network/build/tutorials/platform/fuji-workflow) and also the [Avalanche mainnet (C-Chain)](https://support.avax.network/en/articles/4058262-what-is-the-contract-chain-c-chain). The goal of this tutorial is to be as beginner friendly as possible. I will go through each line of code in order to give you a full understanding of what is happening, so that you can use the concepts as a basis for your first NFT decentralized application. The plan is to showcase:
 
-1. How to create an ERC721 smart contract, so that you can mint your own ERC721 NFT on Avalanche using Open Zeppelin and the Truffle framework;
+1. How to create an ERC721 smart contract, so that you can mint your own ERC721 NFT on Avalanche using [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc721) and the [Truffle framework](https://www.trufflesuite.com/docs/truffle/overview);
 2. How to extend the contract, so that each token has royalties;
 3. How to create your own NFT marketplace where you can list your items, cancel listings and purchase other NFTs;
 4. How to extensively test your smart contracts using Truffle's built in Mocha.js library and Open Zeppelin's Test Helper assertion library achieving 100% code coverage;
@@ -86,116 +86,32 @@ Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/services/
 
 ### Writing our first ERC721 contract
 
-1. Inside the **contracts/** folder of your Truffle project create a new Collectible.sol file and paste in the following code:
+1. Inside the [**contracts/**](./contracts) folder of your Truffle project we will create a new [**Collectible.sol**](./contracts/Collectible.sol) file and implement the functions we need. Now that we have this, let us start from the top and explain what the smart contract does.
 
-```javascript
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.6;
+2. [**Collectible.sol**](./contracts/Collectible.sol) logic
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+* At the top we define the [Solidity version 0.8.6](https://docs.soliditylang.org/en/v0.8.6/) which at the time of this tutorial is the latest one:
 
-contract Collectible is ERC721URIStorage {
-    // Mapping to check if the metadata has been minted
-    mapping(string => bool) public hasBeenMinted;
-
-    // Mapping to keep track of the Item
-    mapping(uint256 => Item) public tokenIdToItem;
-
-    // A struct for the collectible item containing info about `owner`, `creator` and the `royalty`
-    struct Item {
-        address owner;
-        address creator;
-        uint256 royalty;
-    }
-
-    Item[] private items;
-
-    /**
-     * @dev Emitted when a `tokenId` has been bought for a `price` by a `buyer`
-    */
-    event ItemMinted(uint256 tokenId, address creator, string metadata, uint256 royalty);
-
-    /**
-     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection inheriting from the ERC721 smart contract.
-     */
-    constructor() ERC721("NFTCollectible", "NFTC") {}
-
-    /**
-     * @dev create a collectible with a `metadata` for the msg.sender
-     *
-     * Requirements:
-     * - `metadata` has not been minted before
-     * - `royalty` must be between 0% and 40%
-     *
-     * Emits a {Transfer} event - comes from the ERC-721 smart contract.
-     */
-    function createCollectible(string memory metadata, uint256 royalty)
-        public
-        returns (uint256)
-    {
-        require(
-            !hasBeenMinted[metadata],
-            "This metadata has already been used to mint an NFT."
-        );
-        require(
-            royalty >= 0 && royalty <= 40,
-            "Royalties must be between 0% and 40%."
-        );
-        Item memory newItem = Item(msg.sender, msg.sender, royalty);
-        items.push(newItem);
-        uint256 newItemId = items.length;
-        _safeMint(msg.sender, newItemId);
-        _setTokenURI(newItemId, metadata);
-        tokenIdToItem[newItemId] = newItem;
-        hasBeenMinted[metadata] = true;
-        emit ItemMinted(newItemId, msg.sender, metadata, royalty);
-        return newItemId;
-    }
-
-    /**
-     * @dev return the length of the items array
-     */
-    function getItemsLength() public view returns (uint256) {
-        return items.length;
-    }
-
-    /**
-     * @dev return an item associated to a provided `tokenId`
-     */
-    function getItem(uint256 tokenId) public view returns (address, address, uint256)
-    {
-        return (tokenIdToItem[tokenId].owner, tokenIdToItem[tokenId].creator, tokenIdToItem[tokenId].royalty);
-    }
-}
-```
-
-Now that we have this let us start from the top and explain what the smart contract does.
-
-2. **Collectible.sol** logic
-
-* At the top we define the solidity version. At the time of this tutorial this is the latest Solidity version:
-
-```javascript
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 ```
 
-* Next we import the **ERC721URIStorage.sol** contract from Open Zeppelin. This contract is an extension of their **ERC721.sol** contract which takes metadata of an NFT into account as well. We will also use the popular **SafeMath.sol** library for our mathematical operations. This is a library which prevents unsigned integer overflows: 
+* Next we import the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) contract from Open Zeppelin. This contract is an extension of their [**ERC721.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol) contract which takes metadata of an NFT into account as well. We will also use the popular [**SafeMath.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol) library for our mathematical operations. This is a library which prevents unsigned integer overflows: 
 
-```javascript
+```solidity
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 ```
 
 * Now that we have done that let us define our **Collectible** contract which will inherit from the **ERC721URIStorage**. This would allow us to use all the functions and access all the public state variables which that contract offers. Pretty cool, right? 
-```javascript
+```solidity
 contract Collectible is ERC721URIStorage {
 ```
 
 * Afterwards we will define the state variables and also the constructor of our contract:
 
-```javascript
+```solidity
     mapping(string => bool) public hasBeenMinted;
     mapping(uint256 => Item) public tokenIdToItem;
     struct Item {
@@ -216,7 +132,7 @@ The mappings are used to keep track of information such as whether a metadata ha
 
 * The **createCollectible(string memory metadata, uint256 royalty)** function:
 
-```javascript
+```solidity
 function createCollectible(string memory metadata, uint256 royalty) public returns (uint256)
     {
         require(
@@ -240,9 +156,9 @@ function createCollectible(string memory metadata, uint256 royalty) public retur
 ```
 
 The function takes two parameters - metadata and royalty. In the beginning of the function body we see a couple of guard conditions which are used to prevent unwanted transaction execution and to revert the transaction if the conditions are not fulfilled. We use the mapping which we have defined above to check whether the metadata has been minted. We also check whether the royalty is between 0% and 40%. Should we pass these conditions, we can now move on to creating our **Item** with the information we have. 
-At this point the creator is both the owner and the creator, so we use **msg.sender** which is one of Solidity's global variables and denotes the caller of the function. Our third property is the royalty. After we push this **Item** to the array, we make use of the functions which the **ERC721URIStorage.sol** provides us, namely: 
+At this point the creator is both the owner and the creator, so we use **msg.sender** which is one of Solidity's global variables and denotes the caller of the function. Our third property is the royalty. After we push this **Item** to the array, we make use of the functions which the [**ERC721URIStorage.sol**](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol) provides us, namely: 
 
-```javascript
+```solidity
 _safeMint(msg.sender, newItemId);
 _setTokenURI(newItemId, metadata);
 ```
@@ -251,7 +167,7 @@ This will do the minting for us and associate the item id (token id) with the me
 
 * Furthermore, we define a couple of view functions. These do not cost any gas, since we do not change the state of the blockchain by calling them. In the second function you can notice that in the **returns** part we do not have **Item**, but rather the properties of the **Item**. Solidity allows returning multiple values.
 
-```javascript
+```solidity
     function getItemsLength() public view returns (uint256) {
         return items.length;
     }
@@ -265,166 +181,20 @@ This will do the minting for us and associate the item id (token id) with the me
 
 ### Creating our NFT Marketplace.sol contract
 
-1. Inside the **contracts/** folder of your Truffle project create a new Marketplace.sol file and paste in the following code:
-
-```javascript
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.6;
-
-import './Collectible.sol';
-
-contract Marketplace is Collectible {
-    using SafeMath for uint256;
-
-    struct Listing {
-        uint256 price;
-        address owner;
-    }
-
-    // Mapping for a token id to Listing
-    mapping (uint256 => Listing) public tokenIdToListing;
-
-    // Mapping to prevent the same item being listed twice
-    mapping (uint256 => bool) public hasBeenListed;
-
-    // Mapping used for listing when the owner transfers the token to the contract and would then wish to cancel the listing
-    mapping (uint256 => address) public claimableByAccount;
-
-    /**
-     * @dev Emitted when a `tokenId` has been listed for a `price` by a `seller`
-    */
-    event ItemListed(uint256 tokenId, uint256 price, address seller);
-
-    /**
-     * @dev Emitted when a `tokenId` listing for a `price` has been cancelled by a `seller`
-    */
-    event ListingCancelled(uint256 tokenId, uint256 price, address seller);
-
-    /**
-     * @dev Emitted when a `tokenId` has been bought for a `price` by a `buyer`
-    */
-    event ItemBought(uint256 tokenId, uint256 price, address buyer);
-
-    modifier onlyTokenOwner(uint256 tokenId) {
-        require(
-            msg.sender == ownerOf(tokenId),
-            "Only the owner of the token id can call this function."
-        );
-        _;
-    }
-
-    modifier onlyListingAccount(uint256 tokenId) {
-        require(
-            msg.sender == claimableByAccount[tokenId],
-            "Only the address that has listed the token can cancel the listing."
-        );
-        _;
-    }
-
-    /**
-     * @dev list an item with a `tokenId` for a `price`
-     *
-     * Requirements:
-     * - Only the owner of the `tokenId` can list the item
-     * - The `tokenId` can only be listed once
-     *
-     * Emits a {Transfer} event - transfer the token to this smart contract.
-     * Emits a {ItemListed} event
-     */
-    function listItem(uint256 tokenId, uint256 price) public onlyTokenOwner(tokenId) {
-        require(!hasBeenListed[tokenId], "The token can only be listed once");
-        //send the token to the smart contract
-        _transfer(msg.sender, address(this), tokenId);
-        claimableByAccount[tokenId] = msg.sender;
-        tokenIdToListing[tokenId] = Listing(
-            price,
-            msg.sender
-        );
-        hasBeenListed[tokenId] = true;
-        emit ItemListed(tokenId, price, msg.sender);
-    }
-
-    /**
-     * @dev Cancel a listing of an item with a `tokenId`
-     *
-     * Requirements:
-     * - Only the account that has listed the `tokenId` can delist it
-     *
-     * Emits a {Transfer} event - transfer the token from this smart contract to the owner.
-     * Emits a {ListingCancelled} event.
-     */
-    function cancelListing(uint256 tokenId) public onlyListingAccount(tokenId) {
-        //send the token from the smart contract back to the one who listed it
-        _transfer(address(this), msg.sender, tokenId);
-        uint256 price = tokenIdToListing[tokenId].price;
-        delete claimableByAccount[tokenId];
-        delete tokenIdToListing[tokenId];
-        delete hasBeenListed[tokenId];
-        emit ListingCancelled(tokenId, price, msg.sender);
-    }
-
-    /**
-     * @dev Buy an item with a `tokenId` and pay the owner and the creator
-     *
-     * Requirements:
-     * - `tokenId` has to be listed
-     * - `price` needs to be the same as the value sent by the caller
-     *
-     * Emits a {Transfer} event - transfer the item from this smart contract to the buyer.
-     * Emits an {ItemBought} event.
-     */
-    function buyItem(uint256 tokenId) public payable {
-        require(hasBeenListed[tokenId], "The token needs to be listed in order to be bought.");
-        require(tokenIdToListing[tokenId].price == msg.value, "You need to pay the correct price.");
-
-        //split up the price between owner and creator
-        uint256 royaltyForCreator = tokenIdToItem[tokenId].royalty.mul(msg.value).div(100);
-        uint256 remainder = msg.value.sub(royaltyForCreator);
-        //send to creator
-        (bool isRoyaltySent, ) = tokenIdToItem[tokenId].creator.call{value: royaltyForCreator}("");
-        require(isRoyaltySent, "Failed to send AVAX");
-        //send to owner
-        (bool isRemainderSent, ) = tokenIdToItem[tokenId].owner.call{value: remainder}("");
-        require(isRemainderSent, "Failed to send AVAX");
-
-        //transfer the token from the smart contract back to the buyer
-        _transfer(address(this), msg.sender, tokenId);
-
-        //Modify the owner property of the item to be the buyer
-        Collectible.Item storage item = tokenIdToItem[tokenId];
-        item.owner = msg.sender;
-
-        //clean up
-        delete tokenIdToListing[tokenId];
-        delete claimableByAccount[tokenId];
-        delete hasBeenListed[tokenId];
-        emit ItemBought(tokenId, msg.value, msg.sender);
-    }
-
-    /**
-     * @dev return a listing of a `tokenId`
-     */
-    function getListing(uint256 tokenId) public view returns (uint256, address)
-    {
-        return (tokenIdToListing[tokenId].price, tokenIdToListing[tokenId].owner);
-    }
-
-}
-```
-
+1. Inside the [**contracts/**](./contracts) we create a new [**Marketplace.sol**](./contracts/Marketplace.sol) file again with the necessary functionality.
 This might look slighly more complicated but once again, I will go through each line of code, so that at the end you can make sense of the logic entirely.
 
-2. **Marketplace.sol** logic
+2. [**Marketplace.sol**](./contracts/Marketplace.sol) logic
 
 * At the top we define as usual the solidity version:
 
-```javascript
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 ```
-* Next we will import our already created **Collectible.sol** contract and inherit from it, since we would want to make use of some of the public state variables there: 
+* Next we will import our already created [**Collectible.sol**](./contracts/Collectible.sol) contract and inherit from it, since we would want to make use of some of the public state variables there: 
 
-```javascript
+```solidity
 import './Collectible.sol';
 
 contract Marketplace is Collectible {
@@ -435,7 +205,7 @@ Note: You might have noticed that we again use **SafeMath** for the uint256. Thi
 
 * Afterwards we will define the state variables, events and modifiers:
 
-```javascript
+```solidity
     struct Listing {
         uint256 price;
         address owner;
@@ -468,7 +238,7 @@ You can see that again we have a struct for the **Listing** of a NFT. We use it 
 
 * The **listItem(uint256 tokenId, uint256 price)** function:
  
-```javascript
+```solidity
 function listItem(uint256 tokenId, uint256 price) public onlyTokenOwner(tokenId) 
     {
         require(!hasBeenListed[tokenId], "The token can only be listed once");
@@ -487,7 +257,7 @@ The function takes two parameters, namely the token id and the price. We begin b
 
 * The **cancelListing(uint256 tokenId)** function:
 
-```javascript
+```solidity
 function cancelListing(uint256 tokenId) public onlyListingAccount(tokenId) 
     {
         _transfer(address(this), msg.sender, tokenId);
@@ -503,7 +273,7 @@ Here our constraint is that only the address that has listed the item can cancel
 
 * The **buyItem(uint256 tokenId)** function:
 
-```javascript
+```solidity
 function buyItem(uint256 tokenId) public payable {
         require(hasBeenListed[tokenId], "The token needs to be listed in order to be bought.");
         require(tokenIdToListing[tokenId].price == msg.value, "You need to pay the correct price.");
@@ -535,13 +305,13 @@ function buyItem(uint256 tokenId) public payable {
 
 Here the function takes the token id as a parameter and is a **payable** function, meaning that the user can send AVAX via it to the smart contract. We then first check whether the item has been listed and whether the **msg.value** which we send with our function call equals the price of the token. If that is the case we split up the **msg.value** based on the royalty that is defined in the **Item**. **msg.value** is another global variable in Solidity:
 
-```javascript
+```solidity
 uint256 royaltyForCreator = tokenIdToItem[tokenId].royalty.mul(msg.value).div(100);
 uint256 remainder = msg.value.sub(royaltyForCreator);
 ```
 In the first line we multiply the royalty by the msg.value and then divide it by 100, since we are talking about percentages. Meaning that if the buyer pays 10 AVAX for the NFT and the royalty is 20%, 2 AVAX would go to the creator and the remaining 8 AVAX would go to the seller. This happens in the next lines:
 
-```javascript
+```solidity
 (bool isRoyaltySent, ) = tokenIdToItem[tokenId].creator.call{value: royaltyForCreator}("");
 require(isRoyaltySent, "Failed to send AVAX");
 (bool isRemainderSent, ) = tokenIdToItem[tokenId].owner.call{value: remainder}("");
@@ -552,7 +322,7 @@ Afterwards we transfer the NFT from the Marketplace smart contract to the buyer 
 
 * At the end we define a view function which is used to obtain information about a certain listing. Again, calling this function costs no gas.
 
-```javascript
+```solidity
     function getListing(uint256 tokenId) public view returns (uint256, address)
     {
         return (tokenIdToListing[tokenId].price, tokenIdToListing[tokenId].owner);
@@ -562,99 +332,14 @@ Afterwards we transfer the NFT from the Marketplace smart contract to the buyer 
 
 ### Testing our smart contracts
 
-Now that we have finished writing our smart contracts it is very important that we test them thoroughly for erroneous behaviour. As we know, once deployed on the blockchain, they are immutable. We will be using [Mocha.js](https://mochajs.org/) for testing our contracts. It is integrated into the Truffle framework, so we do not need to install it. We do, however, need Open Zeppelin's Test Helpers, so we will import these in our tests. With that in mind, let us quickly jump into the **test/** directory of our project root and inside of it create two files, namely:
+Now that we have finished writing our smart contracts it is very important that we test them thoroughly for erroneous behaviour. As we know, once deployed on the blockchain, they are immutable. We will be using [Mocha.js](https://mochajs.org/) for testing our contracts. It is integrated into the Truffle framework, so we do not need to install it. We do, however, need [Open Zeppelin's Test Helpers](https://docs.openzeppelin.com/test-helpers/0.5/), so we will import these in our tests. With that in mind, let us quickly jump into the [**test/**](./test) directory of our project root and inside of it create two files, namely:
 
-**collectible.test.js**
+- [**collectible.test.js**](./test/collectible.test.js)
+- [**marketplace.test.js**](./test/marketplace.test.js)
 
-**marketplace.test.js**
+I. Let us start with the first one:
 
-I. Go inside the first one and copy the code below:
-
-```javascript
-const Collectible = artifacts.require('./Collectible')
-const { expectRevert } = require('@openzeppelin/test-helpers')
-
-contract('Collectible', ([contractDeployer, creator, buyer]) => {
-    let collectible;
-
-    before(async () => {
-        collectible = await Collectible.new({ from: contractDeployer })
-    });
-
-    describe('Collectible deployment', async () => {
-        it('Deploys the Collectible SC successfully.', async () => {
-            console.log('Address is ', collectible.address)
-            assert.notEqual(collectible.address, '', 'should not be empty');
-            assert.notEqual(collectible.address, 0x0, 'should not be the 0x0 address');
-            assert.notEqual(collectible.address, null, 'should not be null');
-            assert.notEqual(collectible.address, undefined, 'should not be undefined');
-        })
-
-        it('The collectible SC should have a name and a symbol.', async () => {
-            const name = await collectible.name()
-            assert.equal(name, 'NFTCollectible', 'The name should be NFTCollectible.')
-            const symbol = await collectible.symbol()
-            assert.equal(symbol, 'NFTC', 'The symbol should be NFTC.')
-        })
-    })
-
-    describe('Mint an NFT and set a royalty.', async () => {
-
-        it('The hash \'metadata\' is not minted before the function call.', async () => {
-            const hasBeenMinted = await collectible.hasBeenMinted('metadata')
-            assert.equal(hasBeenMinted, false, 'The hash \'metadata\' has not been minted, so it should be false.')
-        })
-
-        it('The royalty needs to be a number between 0 and 40.', async () => {
-            await expectRevert(collectible.createCollectible('metadata', 41), "Royalties must be between 0% and 40%.");
-        })
-
-        it('Give a new id to a newly created token', async () => {
-            const newTokenId = await collectible.createCollectible.call('metadata', 20, { from: creator })
-            assert.equal(parseInt(newTokenId.toString()), 1, 'The new token id should be 1.')
-        })
-
-        it('Mint a NFT and emit events.', async () => {
-            const result = await collectible.createCollectible('metadata', 20, { from: creator })
-            assert.equal(result.logs.length, 2, 'Should trigger two events.');
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-            assert.equal(result.logs[0].event, 'Transfer', 'Should be the \'Transfer\' event.');
-            assert.equal(result.logs[0].args.from, 0x0, 'Should be the 0x0 address.');
-            assert.equal(result.logs[0].args.to, creator, 'Should log the recipient which is the creator.');
-            assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event ItemMinted(uint256 tokenId, address creator, string metadata, uint256 royalty);
-            assert.equal(result.logs[1].event, 'ItemMinted', 'Should be the \'ItemMinted\' event.');
-            assert.equal(result.logs[1].args.tokenId, 1, 'Should be the token id 1.');
-            assert.equal(result.logs[1].args.creator, creator, 'Should log the creator.');
-            assert.equal(result.logs[1].args.metadata, 'metadata', 'Should log the metadata correctly.');
-            assert.equal(result.logs[1].args.royalty, 20, 'Should log the royalty as 20.');
-        })
-
-        it('The items array has a length of 1.', async () => {
-            const itemsLength = await collectible.getItemsLength()
-            assert.equal(itemsLength, 1, 'The items array should have 1 entry in it.')
-        })
-
-        it('The new item has the correct data.', async () => {
-            const item = await collectible.getItem(1)
-            assert.notEqual(item['0'], buyer, 'The buyer should not be the creator.')
-            assert.equal(item['0'], creator, 'The creator is the owner.')
-            assert.equal(item['1'], creator, 'The creator is the creator.')
-            assert.equal(item['2'], 20, 'The royalty is set to 20.')
-        })
-
-        it('Check if hash has been minted and that you cannot mint the same hash again.', async () => {
-            const hasBeenMinted = await collectible.hasBeenMinted('metadata')
-            assert.equal(hasBeenMinted, true, 'The hash \'metadata\' has been minted.')
-            await expectRevert(collectible.createCollectible('metadata', 30, { from: creator }), 'This metadata has already been used to mint an NFT.');
-        })
-
-    })
-});
-```
-
-I will not go through absolutely everything as most of the actions are repetitive, but will note down some key components.
+As you may notice most of the actions are repetitive, but will note down some key components which you would need in order to understand how to approach some often met cases.
 
 1. First, we import our dependencies at the top and then we define the scope of our test:
 
@@ -665,7 +350,7 @@ const { expectRevert } = require('@openzeppelin/test-helpers')
 contract('Collectible', ([contractDeployer, creator, buyer]) => {
 ```
 
-As you can see we import the **Collectible** contract and also an **expectRevert** function that will help us with checking whether the functions revert correctly upon false input. Afterwards, we define the scope of our test. Truffle uses the **contract()** function instead of Mocha's **describe()** function. The differences are minimal, so think of them as identical. If you are curious, check out the Truffle docs about the [explanation](https://www.trufflesuite.com/docs/truffle/testing/writing-tests-in-javascript#use-contract-instead-of-describe-). The first parameter is the contract name, the second is simply a list of addresses. In this case Truffle's testing environment provides us with 10 accounts, each funded with 100 ETH. Yes, the Truffle's testing environment is based on Ethereum, but since the C-Chain is EVM compatible, think of them as 100 AVAX. Of course, these funds are not real ones and serve only for testing purposes.
+As you can see we import the **Collectible** contract and also an **expectRevert** function that will help us with checking whether the functions revert correctly upon false input. Afterwards, we define the scope of our test. Truffle uses the **contract()** function instead of Mocha's **describe()** function. The differences are minimal, so think of them as identical. If you are curious, check out the Truffle docs about the [explanation](https://www.trufflesuite.com/docs/truffle/testing/writing-tests-in-javascript#use-contract-instead-of-describe-). The first parameter is the contract name, the second is simply a list of addresses. In this case Truffle's testing environment provides us with 10 accounts, each funded with 100 ETH. Yes, the Truffle's testing environment is based on Ethereum, but since the C-Chain is [EVM](https://ethereum.org/en/developers/docs/evm/) compatible, think of them as 100 AVAX. Of course, these funds are not real ones and serve only for testing purposes.
 
 2. Afterwards, we define a **before()** hook. This hook runs before our tests and we can use it to deploy the contract.
 
@@ -804,242 +489,10 @@ truffle test
 
 Note: You might notice that this would run the command *truffle compile* beforehand. This would create a **build/contracts** folder in our root directory where the .json representations of all of our used contracts are stored. These are in fact used when you call functions on the frontend.
 
-II. Go inside the **marketplace.test.js** file and copy the code below:
+II. Go inside the [**marketplace.test.js**](./test/marketplace.test.js) file and have a look at the code.
+As you may notice, most of the concepts such as testing the deployment, function reverts and emitted events are repeated here, so I will only go through the differences:
 
-```javascript
-const Marketplace = artifacts.require('./Marketplace')
-const { expectRevert, BN } = require('@openzeppelin/test-helpers')
-const { convertTokensToWei } = require('../utils/tokens')
-const { toBN } = web3.utils;
-
-contract('Marketplace', ([contractDeployer, creator, buyer, secondBuyer]) => {
-    let marketplace;
-
-    before(async () => {
-        marketplace = await Marketplace.new({ from: contractDeployer })
-        await marketplace.createCollectible('metadata', 20, { from: creator })
-    });
-
-    describe('marketplace deployment', async () => {
-        it('Deploys the Marketplace SC successfully.', async () => {
-            console.log('Address is ', marketplace.address)
-            assert.notEqual(marketplace.address, '', 'Should not be empty');
-            assert.notEqual(marketplace.address, 0x0, 'Should not be the 0x0 address');
-            assert.notEqual(marketplace.address, null, 'Should not be null');
-            assert.notEqual(marketplace.address, undefined, 'Should not be undefined');
-        })
-    })
-
-    describe('List a NFT.', async () => {
-        it('The token id 0 has not been listed.', async () => {
-            const hasBeenListed = await marketplace.hasBeenListed(1)
-            assert.equal(hasBeenListed, false, 'The NFT with token id 1 has not been listed yet.')
-        })
-
-        it('The NFT with token id 1 cannot be listed by anyone who doesn\'t own it.', async () => {
-            await expectRevert(marketplace.listItem(1, convertTokensToWei('5'), { from: contractDeployer }), 'Only the owner of the token id can call this function.');
-            await expectRevert(marketplace.listItem(1, convertTokensToWei('5'), { from: buyer }), 'Only the owner of the token id can call this function.');
-        })
-
-        it('Transfer the NFT to the Marketplace SC.', async () => {
-            const result = await marketplace.listItem(1, convertTokensToWei('5'), { from: creator })
-            assert.equal(result.logs.length, 3, 'Should trigger three events.');
-
-            //event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-            assert.equal(result.logs[0].event, 'Approval', 'Should be the \'Approval\' event.');
-            assert.equal(result.logs[0].args.owner, creator, 'Should be the creator address.');
-            assert.equal(result.logs[0].args.approved, 0x0, 'Should log the address(0) to approve in order to clear previous approvals.');
-            assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-            assert.equal(result.logs[1].event, 'Transfer', 'Should be the \'Transfer\' event.');
-            assert.equal(result.logs[1].args.from, creator, 'Should be the creator address.');
-            assert.equal(result.logs[1].args.to, marketplace.address, 'Should log the recipient which is the marketplace.');
-            assert.equal(result.logs[1].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event event ItemListed(uint256 tokenId, uint256 price, address seller);
-            assert.equal(result.logs[2].event, 'ItemListed', 'Should be the \'ItemListed\' event.');
-            assert.equal(result.logs[2].args.tokenId, 1, 'Should be the token id 1.');
-            assert.equal(result.logs[2].args.price, convertTokensToWei('5'), 'Should log the price which is 5 AVAX.');
-            assert.equal(result.logs[2].args.seller, creator, 'Should log the creator as the seller.');
-        })
-
-        it('The listing has the correct data.', async () => {
-            const listing = await marketplace.getListing(1)
-            assert.equal(listing['0'], convertTokensToWei('5'), 'The price is 5 AVAX.')
-            assert.equal(listing['1'], creator, 'The one who listed it is the creator.')
-        })  
-
-        it('The Marketplace SC is now the owner of the NFT and not the seller.', async () => {
-            const ownerOfNFT = await marketplace.ownerOf(1)
-            assert.equal(ownerOfNFT, marketplace.address, 'The owner should be the marketplace.');
-            assert.notEqual(ownerOfNFT, creator, 'The owner should not be the creator.');
-        })
-        
-        //Actually this can be skipped, as the owner is technically the smart contract at this point
-        it('The NFT with token id 1 cannot be listed again.', async () => {
-            await expectRevert.unspecified(marketplace.listItem(1, convertTokensToWei('5'), { from: creator }));
-        })
-
-        it('The token id 1 can be claimed back by the creator if not sold.', async () => {
-            const claimableBySeller = await marketplace.claimableByAccount(1)
-            assert.equal(claimableBySeller, creator, 'The NFT with token id 1 can be claimed by the creator if not sold.')
-        })
-
-        it('The token id 1 has been listed.', async () => {
-            const hasBeenListed = await marketplace.hasBeenListed(1)
-            assert.equal(hasBeenListed, true, 'The NFT with token id 1 has been listed.')
-        })
-
-    })
-
-    describe('Cancel the listing.', async () => {
-        it('The listing cannot be cancelled by an address that does not have the right to claim it.', async () => {
-            await expectRevert(marketplace.cancelListing(1, { from: contractDeployer }), 'Only the address that has listed the token can cancel the listing.');
-            await expectRevert(marketplace.cancelListing(1, { from: buyer }), 'Only the address that has listed the token can cancel the listing.');
-        })
-
-        it('Transfer the NFT back to the owner.', async () => {
-            const result = await marketplace.cancelListing(1, { from: creator })
-            assert.equal(result.logs.length, 3, 'Should trigger three events.');
-
-            //event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-            assert.equal(result.logs[0].event, 'Approval', 'Should be the \'Approval\' event.');
-            assert.equal(result.logs[0].args.owner, marketplace.address, 'Should be the marketplace address.');
-            assert.equal(result.logs[0].args.approved, 0x0, 'Should log the address(0) to approve in order to clear previous approvals.');
-            assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-            assert.equal(result.logs[1].event, 'Transfer', 'Should be the \'Transfer\' event.');
-            assert.equal(result.logs[1].args.from, marketplace.address, 'Should be the marketplace address.');
-            assert.equal(result.logs[1].args.to, creator, 'Should log the recipient that is the creator.');
-            assert.equal(result.logs[1].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event event ListingCancelled(uint256 tokenId, uint256 price, address seller);
-            assert.equal(result.logs[2].event, 'ListingCancelled', 'Should be the \'ListingCancelled\' event.');
-            assert.equal(result.logs[2].args.tokenId, 1, 'Should be the token id 1.');
-            assert.equal(result.logs[2].args.price, convertTokensToWei('5'), 'Should log the price which is 5 AVAX.');
-            assert.equal(result.logs[2].args.seller, creator, 'Should log the creator as the one who cancels the listing.');
-        })
-
-        it('The seller is now the owner of the NFT and not the Marketplace SC.', async () => {
-            const ownerOfNFT = await marketplace.ownerOf(1)
-            assert.equal(ownerOfNFT, creator, 'The owner should be the creator.');
-            assert.notEqual(ownerOfNFT, marketplace.address, 'The owner should not be the marketplace.');
-        })
-
-        it('The claimableByAccount mapping should be cleared.', async () => {
-            const claimableBySeller = await marketplace.claimableByAccount(1)
-            assert.equal(claimableBySeller, 0x0, 'The NFT with token id 1 cannot be claimed by anyone after its no longer listed.')
-        })
-
-        it('The listing should not exist anymore.', async () => {
-            const listing = await marketplace.getListing(1)
-            assert.equal(listing['0'], 0, 'The price is reset to 0.')
-            assert.equal(listing['1'], 0x0, 'The address(0) should be the one which owns the listing.')
-        })
-
-        it('The token id 1 is not listed anymore.', async () => {
-            const hasBeenListed = await marketplace.hasBeenListed(1)
-            assert.equal(hasBeenListed, false, 'The NFT with token id 1 is not listed anymore.')
-        })
-
-    })
-
-    describe('Buy a NFT.', async () => {
-        //Make sure to list the item again
-        before(async () => {
-            await marketplace.listItem(1, convertTokensToWei('5'), { from: creator })
-        });
-
-        it('You cannot buy an item that is not listed or does not exist.', async () => {
-            await expectRevert(marketplace.buyItem(2, { from: buyer }), 'The token needs to be listed in order to be bought.');
-        })
-
-        it('You need to pay the correct price of 5 AVAX.', async () => {
-            await expectRevert(marketplace.buyItem(1, { from: buyer, value: convertTokensToWei('4') }), 'You need to pay the correct price.');
-        })
-
-        //Define the balances to check later whether they've increased or decreased by the correct amount
-        let balanceOfCreatorBeforePurchase;
-
-        it('Buy the NFT.', async () => {
-            balanceOfCreatorBeforePurchase = await web3.eth.getBalance(creator)
-            const result = await marketplace.buyItem(1, { from: buyer, value: convertTokensToWei('5') })
-            assert.equal(result.logs.length, 3, 'Should trigger three events.');
-
-            //event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-            assert.equal(result.logs[0].event, 'Approval', 'Should be the \'Approval\' event.');
-            assert.equal(result.logs[0].args.owner, marketplace.address, 'Should be the marketplace address.');
-            assert.equal(result.logs[0].args.approved, 0x0, 'Should log the address(0) to approve in order to clear previous approvals.');
-            assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-            assert.equal(result.logs[1].event, 'Transfer', 'Should be the \'Transfer\' event.');
-            assert.equal(result.logs[1].args.from, marketplace.address, 'Should be the marketplace address.');
-            assert.equal(result.logs[1].args.to, buyer, 'Should log the recipient that is the buyer.');
-            assert.equal(result.logs[1].args.tokenId, 1, 'Should log the token id which is 1.');
-
-            //event event ItemBought(uint256 tokenId, uint256 price, address seller);
-            assert.equal(result.logs[2].event, 'ItemBought', 'Should be the \'ItemBought\' event.');
-            assert.equal(result.logs[2].args.tokenId, 1, 'Should be the token id 1.');
-            assert.equal(result.logs[2].args.price, convertTokensToWei('5'), 'Should log the price which is 5 AVAX.');
-            assert.equal(result.logs[2].args.buyer, buyer, 'Should log the buyer address as the buyer.');
-        })
-
-        it('The buyer is now the owner of the NFT and not the Marketplace SC.', async () => {
-            const ownerOfNFT = await marketplace.ownerOf(1)
-            assert.equal(ownerOfNFT, buyer, 'The owner should be the buyer.');
-            assert.notEqual(ownerOfNFT, marketplace.address, 'The owner should not be the marketplace.');
-        })
-
-        it('The claimableByAccount mapping should be cleared.', async () => {
-            const claimableBySeller = await marketplace.claimableByAccount(1)
-            assert.equal(claimableBySeller, 0x0, 'The NFT with token id 1 cannot be claimed by anyone after its no longer listed.')
-        })
-
-        it('The listing should not exist anymore.', async () => {
-            const listing = await marketplace.getListing(1)
-            assert.equal(listing['0'], 0, 'The price is reset to 0.')
-            assert.equal(listing['1'], 0x0, 'The address(0) should be the one which owns the listing.')
-        })
-
-        it('The token id 1 is not listed anymore.', async () => {
-            const hasBeenListed = await marketplace.hasBeenListed(1)
-            assert.equal(hasBeenListed, false, 'The NFT with token id 1 should not be listed anymore.')
-        })
-
-        it('The item has the correct data.', async () => {
-            const item = await marketplace.getItem(1)
-            assert.notEqual(item['0'], creator, 'The owner should not be the creator.')
-            assert.equal(item['0'], buyer, 'The buyer is the owner now.')
-            assert.equal(item['1'], creator, 'The creator remains the creator address.')
-            assert.equal(item['2'], 20, 'The royalty is set to 20.')
-        })
-
-        it('The balances of creator and first buyer are correct.', async () => {
-            const balanceOfCreatorAfterPurchase = await web3.eth.getBalance(creator)
-            assert.equal(balanceOfCreatorAfterPurchase, toBN(balanceOfCreatorBeforePurchase).add(toBN(convertTokensToWei('5'))), 'The balance of the creator should be increased by 5 AVAX after the purchase.')
-        })
-
-        it('The balances of creator, first buyer who is now the seller and second buyer are correct.', async () => {
-            //List the item again, only this time by the new owner
-            await marketplace.listItem(1, convertTokensToWei('10'), { from: buyer })
-            const balanceOfBuyerBeforePurchase = await web3.eth.getBalance(buyer)
-            const balanceOfCreatorBeforePurchase = await web3.eth.getBalance(creator)
-            await marketplace.buyItem(1, { from: secondBuyer, value: convertTokensToWei('10') })
-            const balanceOfBuyerAfterPurchase = await web3.eth.getBalance(buyer)
-            const balanceOfCreatorAfterPurchase = await web3.eth.getBalance(creator)
-            assert.equal(balanceOfBuyerAfterPurchase, toBN(balanceOfBuyerBeforePurchase).add(toBN(convertTokensToWei('10')).mul(new BN('80')).div(new BN('100'))), 'The balance of the seller should increase by 80% of the sold amount.')
-            assert.equal(balanceOfCreatorAfterPurchase, toBN(balanceOfCreatorBeforePurchase).add(toBN(convertTokensToWei('10')).mul(new BN('20')).div(new BN('100'))), 'The balance of the creator should increase by 20% of the sold amount.')
-        })
-    })
-});
-```
-
-Most of the concepts such as testing deployment, function reverts and emitted events are repeated here, so I will only go through the differences:
-
-1. As you can see at the top we are importing the **Marketplace** contract as well as some helping functions:
+1. Once again, at the top we are importing the **Marketplace** contract as well as some helping functions:
 
 ```javascript
 const Marketplace = artifacts.require('./Marketplace')
@@ -1048,7 +501,7 @@ const { convertTokensToWei } = require('../utils/tokens')
 const { toBN } = web3.utils;
 ```
 
-We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a **utils/** folder of our project's root which we do not have yet, so let us create it and inside of it create a **tokens.js** file.
+We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a [**utils/**](./utils) folder of our project's root which we do not have yet, so let us create it and inside of it create a [**tokens.js**](./utils/tokens.js) file.
 Then copy the code below in there:
 
 ```javascript
@@ -1059,7 +512,7 @@ module.exports = { convertTokensToWei }
 ```
 
 We use this function, so that we do not have to write 18 zeroes after the AVAX amount that a buyer would pay for a NFT. In reality, transfering 5 AVAX means that we transfer 5000000000000000000 as a value. In order to not have to write all those zeroes, we can simply call convertTokensToWei('5') and the function will add the zeroes for us.
-Now, back to our **marketplace.test.js** test script. 
+Now, back to our [**marketplace.test.js**](./test/marketplace.test.js) test script. 
 
 2. We create a **before()** hook. There we deploy the marketplace contract and we also mint a NFT. Notice again that our **Marketplace.sol** has all the functions which **Collectible.sol** has, hence we can call the **createCollectible()** function: 
 
@@ -1126,7 +579,7 @@ truffle run coverage
 
 ### Deploying our smart contracts
 
-1. Now that our contracts have passed the tests, let us have a look at the **migrations/** folder which Truffle provided us in the beginning. Inside of it we have the **1_initial_migration.js** script which is used to deploy the **Migrations.sol** contract that is available in the **contracts/** folder. This contract simply keeps track of the migrations that we do. In order to migrate our own contracts, we create another script called **2_deploy_contracts.js** and inside of it paste the following lines of code:
+1. Now that our contracts have passed the tests, let us have a look at the [**migrations/**](./migrations) folder which Truffle provided us in the beginning. Inside of it we have the [**1_initial_migration.js**](./migrations/1_initial_migration.js) script which is used to deploy the [**Migrations.sol**](./contracts/Migrations.sol) contract that is available in the [**contracts/**](./contracts) folder. This contract simply keeps track of the migrations that we do. In order to migrate our own contracts, we create another script called [**2_deploy_contracts.js**](./migrations/2_deploy_contracts.js) and inside of it paste the following lines of code:
 
 ```javascript
 const Collectible = artifacts.require('Collectible')
@@ -1139,13 +592,13 @@ module.exports = async (deployer, network, [owner]) => {
 ```
 As you can see, it is pretty straightforward. We import the contracts and deploy them via the deployer parameter. This is taken care by Truffle.
 
-2.1. In order to deploy our contracts to the Fuji testnet, all we need to do is simply run the command:
+2.1. In order to deploy our contracts to the [Fuji testnet](https://docs.avax.network/build/tutorials/platform/fuji-workflow), all we need to do is simply run the command:
 
 ```powershell
 truffle migrate --network fuji
 ```
 
-2.2. And should we want to deploy to the Avalanche mainnet, we simply run:
+2.2. And should we want to deploy to the Avalanche C-Chain, we simply run:
 
 ```powershell
 truffle migrate --network mainnet
@@ -1155,7 +608,7 @@ truffle migrate --network mainnet
 
 To sum up, in this tutorial we got familiar with the following concepts:
 
-1. We managed to create our very own ERC721 smart contract based on the Open Zeppelin implementation utilizing the Truffle framework;
+1. We managed to create our very own [ERC721 smart contract](https://medium.com/crypto-currently/the-anatomy-of-erc721-e9db77abfc24) based on the [Open Zeppelin implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol) utilizing the Truffle framework;
 2. We extended this contract by including royalties;
 3. We created a marketplace where one could list their NFTs, cancel their listings or buy other NFTs;
 4. We learned how to test our smart contracts extensively using the integrated Mocha.js library in Truffle;
@@ -1163,8 +616,8 @@ To sum up, in this tutorial we got familiar with the following concepts:
 
 Last but not least, should you try to extend the smart contracts, here are some potential ideas:
 
-* For the **Collectible.sol** you could add more special properties for your NFTs should you want to use gamification;
-* For the **Marketplace.sol** you could implement the option to bid on an item;
+* For the [**Collectible.sol**](./contracts/Collectible.sol) you could add more special properties for your NFTs should you want to use gamification;
+* For the [**Marketplace.sol**](./contracts/Marketplace.sol) you could implement the option to bid on an item;
 * Include an expiration date for a listing on the marketplace;
 
 Or literally anything else that comes to your mind. The opportunities are limitless :)
