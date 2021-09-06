@@ -44,7 +44,7 @@ Verify that you've installed Docker by running the command below:
 $ docker -v
 ```
 
-![docker-v](img/docker-v.png)
+![docker-v](img/chainlink-tutorial-00-docker-v.png)
 
 The next step is to download and install the Go language (a.k.a. "golang") which is required for building AvalancheGo, later in this section.
 
@@ -68,7 +68,7 @@ Verify that you've installed Go by running the command below:
 ```
 $ go version
 ```
-![go-v](img/go-v.png)
+![go-v](img/chainlink-tutorial-01-go-v.png)
 
 
 ## Build the AvalancheGo image
@@ -90,7 +90,7 @@ To check the build image run the command below:
 ```
 $ docker images
 ```
-![docker-images](img/docker-images.png)
+![docker-images](img/chainlink-tutorial-02-docker-images.png)
 
 The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx is the shortened commit of the Avalanche source it was built from. In our case it is 254b53da.
 
@@ -126,7 +126,7 @@ $ docker ps
 ```
 This will list the AvalancheGo container status:
 
-![docker-go-ps](img/docker-go-ps.png)
+![docker-go-ps](img/chainlink-tutorial-03-docker-go-ps.png)
 
 Also, you can check by requesting a CURL command and seeing if it returns JSON data, as it does here:
 
@@ -140,7 +140,7 @@ $ curl -X POST --data '{
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
-![curl](img/curl.png)
+![curl](img/chainlink-tutorial-04-curl.png)
 
 ### 2. Run PostgreSQL
 
@@ -164,7 +164,7 @@ $ docker ps
 ```
 This will list the Postgres container status:
 
-![docker-pg-ps](img/docker-pg-ps.png)
+![docker-pg-ps](img/chainlink-tutorial-05-docker-pg-ps.png)
 
 ### Run the Chainlink node
 
@@ -229,7 +229,7 @@ $ docker ps
 ```
 This will list the Chainlink node container status:
 
-![docker-ch-ps](img/docker-ch-ps.png)
+![docker-ch-ps](img/chainlink-tutorial-06-docker-ch-ps.png)
 
 # Setup a Chainlink job
 
@@ -243,13 +243,13 @@ ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 Access http://localhost:6688 in your favorite browser, and this will return to the Chainlink login page:
 
-![chainlink-login](img/Chainlink-login2.png)
+![chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)
 
 ## Create a new bridge
 
 First, create a new bridge which will point to the external adaptor listening address, which is in our case (http://<$HOST>:8081)
 
-![chainlink-bridge](img/Chainlink-bridge.png)
+![chainlink-bridge](img/chainlink-tutorial-08-chainlink-bridge.png)
 
 ## Create a new job
 
@@ -280,11 +280,11 @@ Below is a code snippet for the job specification to test the job within the Cha
 ```
 Now, in the jobs section, the newly created _Avalanche nodejs adapter test_ will be listed. Select that and click the Run button to test and see the result.
 
-![chainlink-job-run](img/Chainlink-job-run.png)
+![chainlink-job-run](img/chainlink-tutorial-09-chainlink-job-run.png)
 
 Then, click on the Runs tab, and select the job id to see the result. It should be in _Completed_ status:
 
-![chainlink-job-result](img/Chainlink-job-result.png)
+![chainlink-job-result](img/chainlink-tutorial-10-chainlink-job-result.png)
 
 ### Using type: "runlog"
 
@@ -331,10 +331,24 @@ The [RunLog](https://docs.chain.link/docs/initiators/) initiator is the easiest 
 
 This section will explain the smart contracts we have written for communicating with the Chainlink node through oracle address and job id.
 
-Below is the code snippet which you can copy and paste into the Remix IDE and then compile and deploy.
+We have used the solidity and compiler version 0.4.24 for this tutorial. For more details please refer to [link](https://remix-ide.readthedocs.io/en/latest/compile.html) on how to compile the solidity program.
 
-```
+To deploy the smart contracts go to the Deploy & Run Transactions Tab.
 
+There are 3 type of environments Remix can be plugged to:
+- Javascript VM
+- Injected Web3
+- Web3 Provider
+
+Both Injected Web3 and Web3 Provider require the use of an external tool.
+
+An external tool for Injected provider is Metamask. Some external tools used with Web3 provider are a Truffle Ganache-CLI, Hardhat node, or an Ethereum node itself.
+
+In this tutorial, we have used the Injected Web3 as environment and loaded the Metamask with Avalanche Fuji Testnet. Please have a look at this [**section**](####deployed-smart-contracts:) you can see our Avalanche Fuji Testnet Address has been choosen in the Account dropdown. For more details please refer to [link](https://remix-ide.readthedocs.io/en/latest/run.html) on how to run & deploy the smart contracts .
+
+Below is the code snippet which you can copy and paste into the Remix IDE and then compile and deploy as suggested above.
+
+```solidity
 pragma solidity 0.4.24;
 
 import "https://github.com/smartcontractkit/chainlink/contracts/src/v0.4/ChainlinkClient.sol";
@@ -389,9 +403,8 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 
 }
 ```
-Deployed smart contracts:
-
-![smartcontracts-deployed](img/smartContract-deploy.png)
+#### Deployed smart contracts:
+![smartcontracts-deployed](img/chainlink-tutorial-11-smart-contract-deploy.png)
 
 Add tokens to the Avalanche Fuji Testnet so that you can transfer some LINKs to the deployed blockchain address to perform the transactions. Please refer to [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask) on how to add custom tokens. 
 
@@ -399,7 +412,7 @@ Use the Avalanche Faucet (https://linkfaucet.protofire.io/fuji) and send some LI
 
 Then transfer LINKS to the deployed blockchain address to perform the transaction.
 
-![smartContract-add-link](img/smartContract-add-link.png)
+![smartContract-add-link](img/chainlink-tutorial-12-smart-contract-add-link.png)
 
 Now, call the requestCurrentAvaxSupply method on the deployed blockchain with params oracle_address & job id. 
 
@@ -413,16 +426,23 @@ The oracle address should be _your own oracle address_. Please have a look at th
 * oracle_address - 0xaC830Beb7a2f1cED128e347e6B9A37DCc2e971B7
 * job id - 52c3344f35eb4f2e93343810199ab313"
 
-![smartContract-confirm-txn](img/smartContract-confirm-txn.png)
+![smartContract-confirm-txn](img/chainlink-tutorial-13-smart-contract-confirm-txn.png)
 
 Now, you can check the Runs tab in chainlink GUI it will show that the job has triggered and completed:
 
-![Chainlink-runlog-status](img/Chainlink-runlog-status.png)
+![Chainlink-runlog-status](img/chainlink-tutorial-14-chainlink-runlog-status.png)
 
 Then, click the supply button on the deployed contract it will return the current AVAX supply value:
 
-![smartContract-supply-value](img/smartContract-supply-value.png)
+![smartContract-supply-value](img/chainlink-tutorial-15-smart-contract-supply-value.png)
 
+# Conclusion
+
+Having completed this tutorial, you are now no longer restricted to using only the oracles that Chainlink provides; now you can make your own!
+
+You know how to setup a Chainlink node with the Avalanche Fuji Testnet and create dApp smart contracts to connect to the Chainlink node. You can follow this methodology to gather any real-world information that your dApp needs just by following this tutorial and designing your Chainlink adapter to gather different information.
+
+As a final word, remember that in this tutorial, we describe each step of setting up the environment by hand, but in order to make your life easier now that you know how it works, we have included a set of Ansible scripts to complete this process automatically.
 
 # Resources
 Here is a list of resources that can give you a detailed idea of what is mentioned in this tutorial.
