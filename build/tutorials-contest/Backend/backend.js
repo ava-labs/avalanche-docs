@@ -2,9 +2,8 @@
 // to the user-chosen node.
 
 import fs from "fs";
-import avalanche, { BN } from "avalanche";
+import Avalanche, { BinTools, BN, Buffer } from "avalanche";
 import Web3 from "web3";
-import { Buffer } from "buffer";
 import {
     SECPTransferInput,
     SECPTransferOutput,
@@ -12,8 +11,8 @@ import {
     TransferableOutput,
     UnsignedTx
 } from "avalanche/dist/apis/avm/index.js";
-import {NodeIDStringToBuffer, UnixNow} from "avalanche/dist/utils/index.js";
-import {AddDelegatorTx, ParseableOutput, SECPOwnerOutput} from "avalanche/dist/apis/platformvm/index.js";
+import { NodeIDStringToBuffer, UnixNow } from "avalanche/dist/utils/index.js";
+import { AddDelegatorTx, ParseableOutput, SECPOwnerOutput } from "avalanche/dist/apis/platformvm/index.js";
 
 let xChain, xKeyChain, xChainAddress;
 let cChain, cKeyChain, cChainAddress;
@@ -25,6 +24,9 @@ let web3;
 
 let contractAbi;
 
+const FOURTHEEN_DAYS = 60*60*24*14;
+const FULL_YEAR = 60*60*24*365;
+
 async function waitForStaked() {
     let stakingContract = new web3.eth.Contract(contractAbi, "0x319c9E5bd0451A5F51451F64f4F36cdB60e3f3D1");
     let stakedEvent = stakingContract.events.Staked();
@@ -34,9 +36,10 @@ async function waitForStaked() {
     }, async function (error, logs) {
         if (!error) {
             let dataHex = logs.data.substring(2);
+            console.log(dataHex);
             let stakeId = parseInt(dataHex.substring(0, 64), 16);
             let amountWithDecimals = parseInt(dataHex.substring(64), 16);
-            await CtoP(amountWithDecimals, stakeId);
+            //await CtoP(amountWithDecimals, stakeId);
         } else {
             console.log(error)
         }
@@ -71,6 +74,18 @@ async function stakeToNode(stakeAmount, stakeId, locktime) {
     )
     outputs.push(transferableOutput)
     
+    const stakeOuts = []
+    
+    const stakeSECPTransferOutput = new SECPTransferOutput(
+    stakeAmount.minValidatorStake,
+    pChainAddress,
+    locktime
+  )
+  const stakeTransferableOutput = new TransferableOutput(
+    pAvaxAssetId,
+    stakeSECPTransferOutput
+  )
+  stakeOuts.push(stakeTransferableOutput)
     
     const rewardOutputOwners = new SECPOwnerOutput(
         pChainAddress,
@@ -129,8 +144,8 @@ async function stakeToNode(stakeAmount, stakeId, locktime) {
 
 async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
     // On the C-Chain, the ERC-20 token WAVAX has 18 decimals. We need to convert it to 9 decimals, for AVAX.
-    let amountInAvax = amountWithDecimals / 10**18;
-    let amountInNAvax = String(amountInAvax * 10**9);
+    let amountInAvax = amountWithDecimals / 10 ** 18;
+    let amountInNAvax = String(amountInAvax * 10 ** 9);
     
     let utxoset;
     
@@ -138,7 +153,7 @@ async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain trans
     cChainAddress = cKeyChain.getAddressStrings();
     pChainAddress = pKeyChain.getAddressStrings();
     
-    let amount = new avalanche.BN(amountInNAvax); //1 AVAX
+    let amount = new BN(amountInNAvax); //1 AVAX
     
     let cChainHexAddress = "";
     
@@ -231,10 +246,18 @@ async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain trans
                     let importPTx = await pChain.issueTx(signedImportPTx);
                     
                     console.log("importPTx " + importPTx);
-            
+                    
                     amount = amount.sub(pFees);
                     
-                    await stakeToNode(amount, stakeId);
+                    let locktime = endingTimestamp - UnixNow()
+                    
+                    if (locktime < FOURTHEEN_DAYS) {
+                        locktime = FOURTHEEN_DAYS
+                    } else if (locktime > FULL_YEAR) {
+                        locktime = FULL_YEAR
+                    }
+                    
+                    await stakeToNode(amount, stakeId, locktime);
                 } else {
                     console.log("An error happened for a transaction with ID: " + XtoPTxId)
                 }
@@ -245,7 +268,7 @@ async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain trans
     })
 }
 
-let binTools = avalanche.BinTools.getInstance();
+let binTools = BinTools.getInstance();
 
 async function importKeys() {
     const pKeyHex = JSON.parse(await fs.readFileSync("./data.json")).privateKey;
@@ -298,7 +321,7 @@ async function getInformations() {
     const web3Protocol = "wss";
     const web3Path = '/ext/bc/C/ws';
     
-    avalancheInstance = new avalanche.Avalanche(ip, port, protocol, networkID);
+    avalancheInstance = new Avalanche(ip, port, protocol, networkID);
     web3 = new Web3(`${web3Protocol}://${ip}:${port}${web3Path}`);
     
     xChain = avalancheInstance.XChain();
@@ -331,7 +354,8 @@ async function setup() {
 }
 
 async function main() {
-    await setup();
+    //await setup();
+    web3 = new Web3(`wss://api.avax-test.network/ext/bc/C/rpc/ws`)
     await waitForStaked();
 }
 
