@@ -3,7 +3,7 @@
 
 This tutorial will show you how to use an Avalanche C-Chain dApp to verify the signature of a message like this that has been signed using the Avalanche Wallet.
 
-![WALLET MESSAGE PIC HERE](walletsign.png)
+![WALLET MESSAGE PIC HERE](sig-verify-tutoria-00-walletsign.png)
 
 We at [red·dev](https://www.red.dev) needed to do this for our current software project under development, [RediYeti](https://www.rediyeti.com). We have a use-case where we need to verify ownership of an Avalanche X-Chain address before the dApp sends funds related to this address. To prevent fraud, the verification must take place inside of the dApp.
 
