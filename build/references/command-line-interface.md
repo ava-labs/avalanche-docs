@@ -379,9 +379,17 @@ Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-t
 
 #### Database Pruning
 
-`pruning-enabled`\(bool\):
+`pruning-enabled`\(boolean\):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+#### Logging
+
+`--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
+
+The log level determines which events to log. There are 6 different levels.
+
+Defaults to `debug`.
 
 #### Eth APIs
 
