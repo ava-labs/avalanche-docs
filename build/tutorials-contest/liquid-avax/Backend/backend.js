@@ -28,35 +28,37 @@ const FOURTHEEN_DAYS = 60*60*24*14;
 const FULL_YEAR = 60*60*24*365;
 
 async function waitForStaked() {
-    let stakingContract = new web3.eth.Contract(contractAbi, "0x319c9E5bd0451A5F51451F64f4F36cdB60e3f3D1");
+    let stakingContract = new web3.eth.Contract(contractAbi, "0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04");
     let stakedEvent = stakingContract.events.Staked();
     await web3.eth.subscribe('logs', {
         address: stakedEvent.arguments[0].address,
         topics: stakedEvent.arguments[0].topics,
     }, async function (error, logs) {
         if (!error) {
+            let sender = "0x" + logs.topics[1].substring(26);
+            let txHash = logs.transactionHash;
             let dataHex = logs.data.substring(2);
-            console.log(dataHex);
             let stakeId = parseInt(dataHex.substring(0, 64), 16);
-            let amountWithDecimals = parseInt(dataHex.substring(64), 16);
-            //await CtoP(amountWithDecimals, stakeId);
+            let amountWithDecimals = parseInt(dataHex.substring(64, 128), 16);
+            let endingTimestamp = parseInt(dataHex.substring(128), 16);
+            //await CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash);
         } else {
             console.log(error)
         }
     })
 }
 
-async function stakeToNode(stakeAmount, stakeId, locktime) {
+async function stakeToNode(stakeAmount, stakeId, locktime, sender, txHash) {
     let nodeId = "NodeID-LPLhV54tkseYMQ4Ap9oUCoE2KAEPmyNUK";
     
     let memo;
-    if (stakeId) {
+    if (stakeId && sender) {
         memo = Buffer.from(
-            `Liquid-avax-ID${stakeId}`
+            `Liquid-avax-ID${stakeId}-FROM${sender}-TXHASH${txHash}`
         )
     } else {
         memo = Buffer.from(
-            `Liquid-avax-ID${undefined}`
+            `Liquid-avax-ID${undefined}` // We hopefully don't want that
         )
     }
     
@@ -142,7 +144,7 @@ async function stakeToNode(stakeAmount, stakeId, locktime) {
     console.log(`Success! TXID: ${txid}`)
 }
 
-async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
+async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash) { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
     // On the C-Chain, the ERC-20 token WAVAX has 18 decimals. We need to convert it to 9 decimals, for AVAX.
     let amountInAvax = amountWithDecimals / 10 ** 18;
     let amountInNAvax = String(amountInAvax * 10 ** 9);
@@ -257,7 +259,7 @@ async function CtoP(amountWithDecimals, stakeId) { //a C --> P cross-chain trans
                         locktime = FULL_YEAR
                     }
                     
-                    await stakeToNode(amount, stakeId, locktime);
+                    await stakeToNode(amount, stakeId, locktime, sender, txHash);
                 } else {
                     console.log("An error happened for a transaction with ID: " + XtoPTxId)
                 }
@@ -355,7 +357,8 @@ async function setup() {
 
 async function main() {
     //await setup();
-    web3 = new Web3(`wss://api.avax-test.network/ext/bc/C/rpc/ws`)
+    web3 = new Web3(`wss://api.avax-test.network/ext/bc/C/ws`)
+    contractAbi = JSON.parse(await fs.readFileSync("./abi.json"))
     await waitForStaked();
 }
 
