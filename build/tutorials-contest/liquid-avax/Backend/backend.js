@@ -38,7 +38,7 @@ async function waitForStaked() {
             let amountWithDecimals = parseInt(dataHex.substring(64), 16);
             //Withdraw amount staked
             web3.eth.defaultAccount = masterAddress
-            let data = await stakingContract.methods.withdraw(id).encodeABI();
+            let data = stakingContract.methods.withdraw(id).encodeABI();
             let nonce = await web3.eth.getTransactionCount(masterAddress, "pending");
             let tx = {from:masterAddress, to:"0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04", data:data, gasPrice:225*10**9, gas:2100000, nonce:nonce}
             let stx = await web3.eth.accounts.signTransaction(tx, privateKey);
