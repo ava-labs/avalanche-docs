@@ -29,7 +29,7 @@ For example if you have a hundred of the governance tokens but you deposited onl
 
 On REMIX we click the new file icon and put some name, in my case my file name is `MyDAO.sol`
 
-<img src="assets/newFile-remix-avalanche-dao.png" width="800">
+<img src="assets/avalanche-dao-newFile-remix.png" width="800">
 
 and we add the basic lines of code:
 
@@ -38,7 +38,7 @@ and we add the basic lines of code:
 `contract MyDAO {...}` specifies the name and a new block of code for our contract.
 ``
 
-<img src="assets/firstLines-avalanche-dao.png" width="800">
+<img src="assets/avalanche-dao-firstLines.png" width="800">
 
 ### Step 2: Defining our DAO functions
 
@@ -274,20 +274,20 @@ Finally our DAO contract looks like this.
 
 Now we need compile our contract, I'm using the 0.8.0 version compiler, and click on the `Compile` button.
 
-<img src="assets/remix-compiler-avalanche-dao.png" width="350">
+<img src="assets/avalanche-dao-remix-compiler.png" width="350">
 
 In the environment section we choose the `Injected Web3` option, in account we chose an account from our metamask plugin in the FUJI network, make sure that your account have the necessary avax for the deploy and the minimum for create a proposal.   
 [Here you can find the Faucet](https://faucet.avax-test.network/).  
 Click on the `Deploy` button and confirm the transaction in REMIX and Metamask and await for a few seconds.  
 
-<img src="assets/deploy-smartContract-avalanche-dao.png" width="350">
+<img src="assets/avalanche-dao-deploy-smartContract.png" width="350">
 
-<img src="assets/confirm-avalanche-dao-deploy.png" width="650">
+<img src="assets/avalanche-dao-confirm-deploy.png" width="650">
 
-<img src="assets/metamask-avalanche-dao.png" width="300">
+<img src="assets/avalanche-dao-metamask.png" width="300">
 
 If the contract is deployed successfully on FUJI we can see the succes transaction on the REMIX inspector.
 
-<img src="assets/remix-Tx-avalanche-dao.png" width="650">
+<img src="assets/avalanche-dao-remix-Tx.png" width="650">
 
 Now we can test the different functions for our DAO.
