@@ -15,6 +15,10 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 * Added functionality to track changes in validator weight by block.
 * Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
 
+**C-Chain**
+* Incorporate changes from Geth v1.10.8
+* Remove references to Ancients
+
 **Consensus**
 * Added method `Timestamp()` to the `snowman.Block` interface.
 
