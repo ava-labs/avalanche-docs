@@ -17,7 +17,7 @@ let web3;
 let contractAbi;
 
 let masterAddress = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78";
-let privateKey = "f96a766a685973853fe2100d1766f3edd1e476b07c4423839ad563e7218bd851";
+let privateKey = JSON.parse(await fs.readFileSync("./data.json")).privateKey;
 
 let currentTxId = [];
 
@@ -180,8 +180,7 @@ async function CtoP() { //a C --> P cross-chain transfer doesn't exists, but C -
 let binTools = BinTools.getInstance();
 
 async function importKeys() {
-    const pKeyHex = JSON.parse(await fs.readFileSync("./data.json")).privateKey;
-    let buffer = Buffer.from(pKeyHex, 'hex')
+    let buffer = Buffer.from(privateKey, 'hex')
     let CB58Encoded = `PrivateKey-${binTools.cb58Encode(buffer)}`
     xKeyChain.importKey(CB58Encoded);
     cKeyChain.importKey(buffer);
