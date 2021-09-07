@@ -2,17 +2,9 @@
 // to the user-chosen node.
 
 import fs from "fs";
-import Avalanche, { BinTools, BN, Buffer } from "avalanche";
+import {Avalanche, BinTools, BN} from "avalanche";
 import Web3 from "web3";
-import {
-    SECPTransferInput,
-    SECPTransferOutput,
-    TransferableInput,
-    TransferableOutput,
-    UnsignedTx
-} from "avalanche/dist/apis/avm/index.js";
-import { NodeIDStringToBuffer, UnixNow } from "avalanche/dist/utils/index.js";
-import { AddDelegatorTx, ParseableOutput, SECPOwnerOutput } from "avalanche/dist/apis/platformvm/index.js";
+import { Buffer } from "buffer";
 
 let xChain, xKeyChain, xChainAddress;
 let cChain, cKeyChain, cChainAddress;
@@ -24,8 +16,13 @@ let web3;
 
 let contractAbi;
 
-const FOURTHEEN_DAYS = 60*60*24*14;
-const FULL_YEAR = 60*60*24*365;
+let masterAddress = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78";
+let privateKey = "f96a766a685973853fe2100d1766f3edd1e476b07c4423839ad563e7218bd851";
+
+let currentTxId = [];
+
+let utxoset;
+
 
 async function waitForStaked() {
     let stakingContract = new web3.eth.Contract(contractAbi, "0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04");
@@ -35,129 +32,40 @@ async function waitForStaked() {
         topics: stakedEvent.arguments[0].topics,
     }, async function (error, logs) {
         if (!error) {
-            let sender = "0x" + logs.topics[1].substring(26);
-            let txHash = logs.transactionHash;
+            console.log("New stake")
             let dataHex = logs.data.substring(2);
-            let stakeId = parseInt(dataHex.substring(0, 64), 16);
-            let amountWithDecimals = parseInt(dataHex.substring(64, 128), 16);
-            let endingTimestamp = parseInt(dataHex.substring(128), 16);
-            //await CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash);
+            let id = parseInt(dataHex.substring(0, 64), 16);
+            let amountWithDecimals = parseInt(dataHex.substring(64), 16);
+            //Withdraw amount staked
+            web3.eth.defaultAccount = masterAddress
+            let data = await stakingContract.methods.withdraw(id).encodeABI();
+            let nonce = await web3.eth.getTransactionCount(masterAddress, "pending");
+            let tx = {from:masterAddress, to:"0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04", data:data, gasPrice:225*10**9, gas:2100000, nonce:nonce}
+            let stx = await web3.eth.accounts.signTransaction(tx, privateKey);
+            let htx = await web3.eth.sendSignedTransaction(stx.rawTransaction);
+            console.log(htx)
+            await CtoP(id, amountWithDecimals);
         } else {
             console.log(error)
         }
     })
 }
 
-async function stakeToNode(stakeAmount, stakeId, locktime, sender, txHash) {
-    let nodeId = "NodeID-LPLhV54tkseYMQ4Ap9oUCoE2KAEPmyNUK";
+async function stakeToNode(nodeId) {
     
-    let memo;
-    if (stakeId && sender) {
-        memo = Buffer.from(
-            `Liquid-avax-ID${stakeId}-FROM${sender}-TXHASH${txHash}`
-        )
-    } else {
-        memo = Buffer.from(
-            `Liquid-avax-ID${undefined}` // We hopefully don't want that
-        )
-    }
-    
-    const getBalanceResponse = await pChain.getBalance(pChainAddress[0])
-    const unlocked = new BN(getBalanceResponse.unlocked)
-    const secpTransferOutput = new SECPTransferOutput(
-        unlocked.sub(pFees).sub(stakeAmount.minValidatorStake),
-        pChainAddress,
-        locktime
-    )
-    const outputs = [];
-    const transferableOutput = new TransferableOutput(
-        pAvaxAssetId,
-        secpTransferOutput
-    )
-    outputs.push(transferableOutput)
-    
-    const stakeOuts = []
-    
-    const stakeSECPTransferOutput = new SECPTransferOutput(
-    stakeAmount.minValidatorStake,
-    pChainAddress,
-    locktime
-  )
-  const stakeTransferableOutput = new TransferableOutput(
-    pAvaxAssetId,
-    stakeSECPTransferOutput
-  )
-  stakeOuts.push(stakeTransferableOutput)
-    
-    const rewardOutputOwners = new SECPOwnerOutput(
-        pChainAddress,
-        locktime
-    )
-    const rewardOwners = new ParseableOutput(rewardOutputOwners)
-    
-    const platformVMUTXOResponse = await pChain.getUTXOs(pChainAddress)
-    const utxoSet = platformVMUTXOResponse.utxos
-    const utxos = utxoSet.getAllUTXOs()
-    
-    const inputs = [];
-    utxos.forEach((utxo) => {
-        const output = utxo.getOutput()
-        if (output.getOutputID() === 7) { // Equal 7, why ???
-            const amountOutput = utxo.getOutput()
-            const amt = amountOutput.getAmount().clone()
-            const txid = utxo.getTxID()
-            const outputidx = utxo.getOutputIdx()
-            
-            const secpTransferInput = new SECPTransferInput(amt)
-            secpTransferInput.addSignatureIdx(0, pChainAddress[0])
-            
-            const input = new TransferableInput(
-                txid,
-                outputidx,
-                pAvaxAssetId,
-                secpTransferInput
-            )
-            inputs.push(input)
-        }
-    })
-    
-    const startTime = UnixNow()
-    const endTime = startTime.add(new BN(endingTimestamp))
-    
-    const addDelegatorTx = new AddDelegatorTx(
-        pChainBlockchainID,
-        binTools.cb58Decode(pChainBlockchainID),
-        outputs,
-        inputs,
-        memo,
-        NodeIDStringToBuffer(nodeId),
-        startTime,
-        endTime,
-        stakeAmount.minDelegatorStake,
-        stakeOuts,
-        rewardOwners
-    )
-    
-    const unsignedTx = new UnsignedTx(addDelegatorTx)
-    const tx = unsignedTx.sign(pKeychain)
-    const txid = await pchain.issueTx(tx)
-    console.log(`Success! TXID: ${txid}`)
 }
 
-async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash) { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
-    // On the C-Chain, the ERC-20 token WAVAX has 18 decimals. We need to convert it to 9 decimals, for AVAX.
-    let amountInAvax = amountWithDecimals / 10 ** 18;
-    let amountInNAvax = String(amountInAvax * 10 ** 9);
+async function CtoP() { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
     
-    let utxoset;
+    // Includes the fees in the transferred AVAX
     
     xChainAddress = xKeyChain.getAddressStrings();
     cChainAddress = cKeyChain.getAddressStrings();
     pChainAddress = pKeyChain.getAddressStrings();
     
-    let amount = new BN(amountInNAvax); //1 AVAX
+    let amount = new BN("1000000000"); //1 AVAX
     
-    let cChainHexAddress = "";
+    let cChainHexAddress = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78";
     
     let nonce = await web3.eth.getTransactionCount(cChainHexAddress, "pending");
     
@@ -177,11 +85,13 @@ async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash
     
     console.log("CtoXTxId " + CtoXTxId);
     
-    amount = amount.sub(cFees);
+    let fee = cChain.getDefaultTxFee();
+    
+    amount = amount.sub(fee);
     
     return new Promise(function (resolve, reject) {
         pollTransaction(waitForStatusC, CtoXTxId, resolve, reject);
-    }).then(async (resolve) => {
+    }).then(async (resolve, reject) => {
         if (resolve === "Accepted") {
             utxoset = (await xChain.getUTXOs(
                 xChainAddress,
@@ -202,12 +112,15 @@ async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash
             
             console.log("importXTx " + importXTx);
             
-            amount = amount.sub(xFees);
+            fee = xChain.getDefaultTxFee();
+            
+            amount = amount.sub(fee);
             
             // C --> X done, now let's start X --> P.
             
             utxoset = (await xChain.getUTXOs(
-                xChainAddress
+                xChainAddress,
+                //xChainBlockchainID
             )).utxos;
             
             let unsignedXtoPTx = await xChain.buildExportTx(
@@ -224,11 +137,13 @@ async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash
             
             console.log("XtoPTxId " + XtoPTxId);
             
-            amount = amount.sub(xFees);
+            fee = xChain.getDefaultTxFee();
+            
+            amount = amount.sub(fee);
             
             return new Promise(function (resolve, reject) {
                 pollTransaction(waitForStatusX, XtoPTxId, resolve, reject);
-            }).then(async (resolve) => {
+            }).then(async (resolve, reject) => {
                 if (resolve === "Accepted") { // ... And import the transaction on the P chain.
                     utxoset = (await pChain.getUTXOs(
                         pChainAddress,
@@ -249,23 +164,15 @@ async function CtoP(amountWithDecimals, stakeId, endingTimestamp, sender, txHash
                     
                     console.log("importPTx " + importPTx);
                     
-                    amount = amount.sub(pFees);
-                    
-                    let locktime = endingTimestamp - UnixNow()
-                    
-                    if (locktime < FOURTHEEN_DAYS) {
-                        locktime = FOURTHEEN_DAYS
-                    } else if (locktime > FULL_YEAR) {
-                        locktime = FULL_YEAR
-                    }
-                    
-                    await stakeToNode(amount, stakeId, locktime, sender, txHash);
+                    fee = pChain.getDefaultTxFee();
+            
+                    amount = amount.sub(fee);
                 } else {
-                    console.log("An error happened for a transaction with ID: " + XtoPTxId)
+                    // Error
                 }
             })
         } else {
-            console.log("An error happened for a transaction with ID: " + CtoXTxId)
+            // Throw an error
         }
     })
 }
@@ -288,7 +195,7 @@ async function waitForStatusX(transactionId) {
     return transactionStatus;
 }
 
-async function waitForStatusP(transactionId) {
+async function waitForStatusP(transactionId) { //Either X or P chain.
     transactionStatus = (await pChain.getTxStatus(transactionId)).status;
     return transactionStatus;
 }
@@ -310,8 +217,7 @@ async function pollTransaction(func, transactionID, resolve, reject) {
     }
 }
 
-let xAvaxAssetId, cAvaxAssetId, pAvaxAssetId;
-let xFees, cFees, pFees;
+let xAvaxAssetId, cAvaxAssetId;
 
 let avalancheInstance;
 
@@ -320,34 +226,34 @@ async function getInformations() {
     const port = 9650;
     const protocol = "http";
     const networkID = 5;
-    const web3Protocol = "wss";
-    const web3Path = '/ext/bc/C/ws';
-    
     avalancheInstance = new Avalanche(ip, port, protocol, networkID);
-    web3 = new Web3(`${web3Protocol}://${ip}:${port}${web3Path}`);
+    
+    const path = '/ext/bc/C/rpc';
     
     xChain = avalancheInstance.XChain();
     xKeyChain = xChain.keyChain();
     xChainBlockchainID = xChain.getBlockchainID();
-    xFees = xChain.getDefaultTxFee();
     
     cChain = avalancheInstance.CChain();
     cKeyChain = cChain.keyChain();
     cChainBlockchainID = cChain.getBlockchainID();
     cChainAddress = cKeyChain.getAddressStrings();
-    cFees = xChain.getDefaultTxFee();
     
     pChain = avalancheInstance.PChain();
     pKeyChain = pChain.keyChain();
     pChainBlockchainID = pChain.getBlockchainID();
     pChainAddress = pKeyChain.getAddressStrings();
-    pFees = xChain.getDefaultTxFee();
     
     xAvaxAssetId = binTools.cb58Encode((await xChain.getAssetDescription("AVAX")).assetID);
     cAvaxAssetId = binTools.cb58Encode((await cChain.getAssetDescription("AVAX")).assetID);
-    pAvaxAssetId = binTools.cb58Encode((await pChain.getAssetDescription("AVAX")).assetID);
     
-    contractAbi = JSON.parse(await fs.readFileSync("./abi.json"))
+    const web3Protocol = "wss";
+    const web3Path = '/ext/bc/C/ws';
+    
+    //web3 = new Web3(`${web3Protocol}://${ip}:${port}${web3Path}`);
+    web3 = new Web3("wss://api.avax-test.network/ext/bc/C/ws");
+    
+    contractAbi = JSON.parse(await fs.readFileSync("./sAvaxABI.json"))
 }
 
 async function setup() {
@@ -356,9 +262,9 @@ async function setup() {
 }
 
 async function main() {
-    //await setup();
-    web3 = new Web3(`wss://api.avax-test.network/ext/bc/C/ws`)
-    contractAbi = JSON.parse(await fs.readFileSync("./abi.json"))
+    console.log("Setup")
+    await setup();
+    console.log("Waiting for stakes")
     await waitForStaked();
 }
 
