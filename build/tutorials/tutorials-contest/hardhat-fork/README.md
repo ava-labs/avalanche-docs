@@ -11,27 +11,6 @@ I would recommend you to clone the repo and start with the following commands:
 - npm i
 - npm test
 
-
-
-### Avalanche
-
-Avalanche is a platform for creating custom blockchain networks and decentralized applications (dApps). Created by Ava
-Labs, the Avalanche crypto platform is one of many projects seeking to unseat Ethereum as the blockchain ecosystem's
-most widely utilized smart contract platform.
-
-It is the fastest smart contracts platform in the blockchain industry, as measured by time-to-finality, and has the most
-validators securing its activity of any proof-of-stake protocol.
-
-If you want to know more about it, I recommend you those links:
-
-- https://medium.com/avalancheavax/avalanche-101-an-overview-of-the-internet-of-finance-7cdc5a2bee46
-- https://cryptoseq.medium.com/a-quick-overview-of-avalanche-avax-and-why-you-should-be-paying-attention-612278598da2
-- https://docs.avax.network/
-- https://github.com/ava-labs/avalanche-smart-contract-quickstart
-
-I've put a [bunch more links](#additional-links) at the bottom if you are interested to learn more and join the awesome
-Avalanche community !
-
 ### Hardhat ?
 
 Hardhat is an **Ethereum development environment for professionals**. It was developed for Ethereum, but since lots of
@@ -214,8 +193,7 @@ hardhat: {
 
 - `chainId` is set with to the mainnet value, as seen
   [here](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api).
-- `gasPrice` is -currently- a fixed value on avalanche and set at 225 nAVAX, stay tuned for the next release and dynamic
-  fees introduction.
+- `gasPrice` is a dynamic value on Avalanche's CChain (see this [post](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) for more information). For test purposes we can use a fixed value (225 nAvax)
 - `forking` is where you configure the parameter of the fork.
     - `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
       running as full archive node. Hardhat will take care of getting the state of the CChain from this node and start a
@@ -488,7 +466,7 @@ If you want to see the code in action, you should run this command in the termin
 `npx hardhat test` .
 
 This should produce an output looking like this:
-![img.png](img.png)
+![hardhat_tuto_img_01.png](hardhat_tuto_img_01.png)
 
 Yeay ! We successfully tested our contract using a fork of the Avalanche's CChain mainnet.
 
