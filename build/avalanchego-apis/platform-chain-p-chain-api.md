@@ -1563,7 +1563,7 @@ platform.getValidatorsAt(
 ```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "platform.getCurrentValidators",
+    "method": "platform.getValidatorsAt",
     "params": {
         "height":1
     },
