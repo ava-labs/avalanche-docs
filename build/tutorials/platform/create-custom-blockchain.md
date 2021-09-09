@@ -6,6 +6,8 @@ Avalanche supports creating blockchains with virtual machines in subnets. In thi
 
 If you want a blockchain that has capabilities of X-Chain \(AVM\), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
 
+_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
+
 ### Prerequisites
 
 You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) tutorial.
@@ -178,7 +180,7 @@ More information can be found in the [Adding a Subnet Validator](../nodes-and-st
 
 ## Interacting with the New Blockchain <a id="interact-with-the-new-blockchain"></a>
 
-You can interact with this new instance of the VM. The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`.
+You can interact with this new instance of the VM. The API endpoint of the blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. The last part in the endpoint is the blockchain ID, which is `sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. Every blockchain ID is different from each other, so this is not a static ID. Your blockchain ID and the endpoint can be different.
 
 You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
 
