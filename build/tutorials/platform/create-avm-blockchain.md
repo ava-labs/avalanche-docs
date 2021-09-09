@@ -6,6 +6,8 @@ One of the core features of Avalanche is the ability to create new blockchains. 
 
 If you're interested in building custom blockchains, see [Create a Virtual Machine \(VM\)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
+_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
+
 ### Prerequisites
 
 You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) tutorial.
@@ -273,12 +275,12 @@ More information can be found in the [Adding a Subnet Validator](../nodes-and-st
 
 You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain). There are some small differences:
 
-* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
+* The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. The last pasrt in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
 
   [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain)
 
-* Addresses are prepended with `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`.
-* Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX..
+* Addresses are prepended with custom blockchain's ID `xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH-` rather than `X-`. This can be a different ID when you create your blockchain.
+* Fees are paid with the first asset specified in the genesis data, as noted above, rather than AVAX...
 
 ### Verify Balance
 

@@ -8,6 +8,8 @@ When a subnet is created, a threshold and a set of keys are specified. \(Actuall
 
 In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
 
+_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
+
 ### Generate the Control Keys <a id="generate-the-control-keys"></a>
 
 First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
