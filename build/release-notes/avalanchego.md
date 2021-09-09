@@ -6,6 +6,9 @@
 
 This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
 
+**Uptime**
+* Changed minimum uptime requirement to receive a staking reward from 60% to 80%.
+
 **Networking**
 * Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
 * Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
