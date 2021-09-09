@@ -2,6 +2,36 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.5.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3)\)
+
+This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
+
+**Uptime**
+* Changed minimum uptime requirement to receive a staking reward from 60% to 80%.
+
+**Networking**
+* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
+* Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
+* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --> `SendPut`). 
+
+**P-Chain**
+* Added functionality to track changes in validator weight by block.
+* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
+
+**C-Chain**
+* Incorporate changes from Geth v1.10.8
+* Remove references to Ancients
+
+**Consensus**
+* Added method `Timestamp()` to the `snowman.Block` interface.
+
+**Local Networks**
+* Updated the start time of the validators in the local genesis. The end time for validators specified in the local config in versions before v1.5.3 is Sep. 10, 2021 00:00:00 UTC. **Because of this, you must upgrade to AvalancheGo v1.5.3 in order to run a local network after this time.**
+
+**Config Options**
+* Added AvalancheGo config option `consensus-app-gossip-size`, which defines the number of peers an `AppGossip` message is gossiped to.
+* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` (as before.)
+
 ## v1.5.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)\)
 
 
@@ -20,13 +50,11 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 * Added additional logging around bubbling votes.
 
-
 ## v1.5.1-eth_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
 
 This update is a hotfix for v1.5.1 that allows using eth_call without the externally owned account check.
-
 
 ## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
 
