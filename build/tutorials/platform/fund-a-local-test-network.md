@@ -146,7 +146,7 @@ curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 
 ## P-Chain
 
-Import `ewoq` into the [C-Chain](../../avalanchego-apis/platform-chain-p-chain-api.md).
+Import `ewoq` into the [P-Chain](../../avalanchego-apis/platform-chain-p-chain-api.md).
 
 ```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
