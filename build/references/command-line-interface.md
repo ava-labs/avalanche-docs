@@ -345,7 +345,8 @@ This allows you to specify a config to be passed into the C-Chain. The default v
   "pruning-enabled": false,
   "api-max-duration": 0, // Default to no maximum
   "api-max-blocks-per-request": 0, // Default to no maximum
-  "allow-unfinalized-queries": false
+  "allow-unfinalized-queries": false,
+  "log-level": "info"
 }
 ```
 
@@ -422,6 +423,12 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 `allow-unfinalized-queries` \(boolean\):
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
+
+#### Log Level
+
+`log-level` \(string\):
+
+Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
 
 ### Continuous Profiling
 
