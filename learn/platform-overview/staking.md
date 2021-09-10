@@ -45,7 +45,7 @@ The minimum amount that a validator must stake is 2,000 AVAX.
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 {% endhint %}
 
 ### Running a Validator <a id="running-a-validator"></a>
