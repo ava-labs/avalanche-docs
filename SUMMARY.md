@@ -28,6 +28,7 @@
     * [Create a Blockchain Running the AVM](build/tutorials/platform/create-avm-blockchain.md)
     * [Create a Custom Blockchain](build/tutorials/platform/create-custom-blockchain.md)
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
+    * [Fund a Local Test Network](build/tutorials/platform/fund-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
