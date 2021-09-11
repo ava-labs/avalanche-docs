@@ -6,12 +6,18 @@ import { Avalanche, BinTools, BN, Buffer } from "avalanche"
 import Web3 from "web3"
 import { ethers } from "ethers"
 import {AbiItem} from "web3-utils";
+import {AVMAPI, UTXOSet as AVMUTXOSet} from "avalanche/dist/apis/avm";
+import {EVMAPI} from "avalanche/dist/apis/evm";
+import {PlatformVMAPI, UTXOSet as PlatformVPUTXOSet} from "avalanche/dist/apis/platformvm";
+import {KeyChain as AVMKeyChain} from "avalanche/src/apis/avm"
+import {KeyChain as EVMKeyChain} from "avalanche/src/apis/evm"
+import {KeyChain as PlatformVMKeyChain} from "avalanche/src/apis/platformvm"
 
-let xChain, xKeyChain, xChainAddress
-let cChain, cKeyChain, cChainAddress
-let pChain, pKeyChain, pChainAddress
+let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddress: string[]
+let cChain: EVMAPI, cKeyChain: EVMKeyChain, cChainAddress: string[]
+let pChain: PlatformVMAPI, pKeyChain: PlatformVMKeyChain, pChainAddress: string[]
 
-let xChainBlockchainID, cChainBlockchainID, pChainBlockchainID
+let xChainBlockchainID: string, cChainBlockchainID: string, pChainBlockchainID: string
 
 let web3
 
@@ -19,8 +25,6 @@ let contractAbi: AbiItem
 
 let masterAddress: string = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78"
 let privateKey: string
-
-let utxoset
 
 const TEN_POWER_EIGHTEEN = ethers.BigNumber.from(ethers.BigNumber.from(10).pow(ethers.BigNumber.from(18)))
 const TEN_POWER_NINE = ethers.BigNumber.from(ethers.BigNumber.from(10).pow(ethers.BigNumber.from(9)))
@@ -77,7 +81,7 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
         nonce,
     )
     
-    let signedCtoXTx = await unsignedCtoXTx.sign(cKeyChain)
+    let signedCtoXTx = unsignedCtoXTx.sign(cKeyChain)
     
     let ctoXTxId = await cChain.issueTx(signedCtoXTx)
     
@@ -91,13 +95,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
         pollTransaction(waitForStatusC, ctoXTxId, resolve, reject)
     }).then(async (resolve): Promise<any> => {
         if (resolve === "Accepted") {
-            utxoset = (await xChain.getUTXOs(
+            const xUtxoset1: AVMUTXOSet = (await xChain.getUTXOs(
                 xChainAddress,
                 cChainBlockchainID,
             )).utxos
 
             let unsignedImportXTx = await xChain.buildImportTx(
-                utxoset,
+                xUtxoset1,
                 xChainAddress,
                 cChainBlockchainID,
                 xChainAddress,
@@ -116,13 +120,12 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
 
             // C --> X done, now let's start X --> P.
 
-            utxoset = (await xChain.getUTXOs(
-                xChainAddress,
-                //xChainBlockchainID
+            const xUtxoset2: AVMUTXOSet = (await xChain.getUTXOs(
+                xChainAddress
             )).utxos
 
             let unsignedXtoPTx = await xChain.buildExportTx(
-                utxoset,
+                xUtxoset2,
                 amountInNavax,
                 pChainBlockchainID,
                 pChainAddress,
@@ -143,13 +146,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                 pollTransaction(waitForStatusX, xtoPTxId, resolve, reject)
             }).then(async (resolve): Promise<any> => {
                 if (resolve === "Accepted") { // ... And import the transaction on the P chain.
-                    utxoset = (await pChain.getUTXOs(
+                    const pUtxoset: PlatformVPUTXOSet = (await pChain.getUTXOs(
                         pChainAddress,
                         pChainBlockchainID
                     )).utxos
 
                     let unsignedImportPTx = await pChain.buildImportTx(
-                        utxoset,
+                        pUtxoset,
                         pChainAddress,
                         xChainBlockchainID,
                         pChainAddress,
