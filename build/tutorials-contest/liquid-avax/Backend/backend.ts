@@ -54,10 +54,6 @@ const waitForStaked = async (): Promise<any> => {
     })
 }
 
-const stakeToNode = async (nodeId): Promise<any> => {
-
-}
-
 const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
 
     const amountWithoutDecimals = amountWithDecimals.div(TEN_POWER_EIGHTEEN)
