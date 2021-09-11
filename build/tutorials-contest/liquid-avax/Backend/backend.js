@@ -19,8 +19,6 @@ let contractAbi;
 let masterAddress = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78";
 let privateKey = JSON.parse(await fs.readFileSync("./data.json")).privateKey;
 
-let currentTxId = [];
-
 let utxoset;
 
 
@@ -52,7 +50,7 @@ async function waitForStaked() {
 }
 
 async function stakeToNode(nodeId) {
-    
+
 }
 
 async function CtoP() { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
@@ -185,6 +183,9 @@ async function importKeys() {
     xKeyChain.importKey(CB58Encoded);
     cKeyChain.importKey(buffer);
     pKeyChain.importKey(CB58Encoded);
+    
+    cChainAddress = cKeyChain.getAddressStrings();
+    pChainAddress = pKeyChain.getAddressStrings();
 }
 
 let transactionStatus;
@@ -227,8 +228,6 @@ async function getInformations() {
     const networkID = 5;
     avalancheInstance = new Avalanche(ip, port, protocol, networkID);
     
-    const path = '/ext/bc/C/rpc';
-    
     xChain = avalancheInstance.XChain();
     xKeyChain = xChain.keyChain();
     xChainBlockchainID = xChain.getBlockchainID();
@@ -236,12 +235,10 @@ async function getInformations() {
     cChain = avalancheInstance.CChain();
     cKeyChain = cChain.keyChain();
     cChainBlockchainID = cChain.getBlockchainID();
-    cChainAddress = cKeyChain.getAddressStrings();
     
     pChain = avalancheInstance.PChain();
     pKeyChain = pChain.keyChain();
     pChainBlockchainID = pChain.getBlockchainID();
-    pChainAddress = pKeyChain.getAddressStrings();
     
     xAvaxAssetId = binTools.cb58Encode((await xChain.getAssetDescription("AVAX")).assetID);
     cAvaxAssetId = binTools.cb58Encode((await cChain.getAssetDescription("AVAX")).assetID);
@@ -249,8 +246,7 @@ async function getInformations() {
     const web3Protocol = "wss";
     const web3Path = '/ext/bc/C/ws';
     
-    //web3 = new Web3(`${web3Protocol}://${ip}:${port}${web3Path}`);
-    web3 = new Web3("wss://api.avax-test.network/ext/bc/C/ws");
+    web3 = new Web3(`${web3Protocol}://api.avax-test.network${web3Path}`);
     
     contractAbi = JSON.parse(await fs.readFileSync("./sAvaxABI.json"))
 }
