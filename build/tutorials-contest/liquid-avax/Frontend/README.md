@@ -2,4 +2,4 @@
 
 ##Frontend url
 
-https://github.com/iFrostizz/fluidavax-frontend/tree/devel
+<https://github.com/iFrostizz/fluidavax-frontend/tree/devel>
