@@ -78,6 +78,10 @@ Follow this tutorial to learn how to monitor your node's uptime, general health,
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
+#### Validating In Fuji
+
+Validating in Fuji requires just `1 AVAX`. So you can easily set up your validator node and learn more about validating.
+
 ## Delegators
 
 A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
