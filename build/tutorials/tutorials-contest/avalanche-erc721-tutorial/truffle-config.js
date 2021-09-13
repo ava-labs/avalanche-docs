@@ -1,3 +1,6 @@
+//we need this to be able to run our .ts tests
+require('ts-node/register')
+
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 require('dotenv').config()
 module.exports = {
@@ -30,5 +33,6 @@ module.exports = {
       version: "0.8.6"
     }
   },
-  plugins: ["solidity-coverage"]
-};
+  plugins: ["solidity-coverage"],
+  test_file_extension_regexp: /.*\.ts$/
+}

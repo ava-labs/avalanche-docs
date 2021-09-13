@@ -29,18 +29,24 @@ npm init -y
 2. The first one will provide you with a base structure of a Truffle project and the second one will include a **package.json** file to keep track of the dependencies.
 Afterwards, include the following dependencies which will help us build and test the smart contracts.
 ```powershell
-npm install @openzeppelin/contracts @truffle/hdwallet-provider dotenv
+npm install @openzeppelin/contracts @truffle/hdwallet-provider dotenv typescript typechain truffle-typings ts-node 
 npm install --save-dev @openzeppelin/test-helpers solidity-coverage
 ```
 * The [@openzeppelin/contracts](https://github.com/OpenZeppelin/openzeppelin-contracts) is a library for a secure smart contract development. We inherit from their ERC721 smart contract;
 * The [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) is used to sign transactions for addresses derived from a 12 or 24 word mnemonic. In our case we will create a MetaMask wallet and provide the mnemonic from there to deploy to the Avalanche Fuji testnet;
 * The [dotenv](https://www.npmjs.com/package/dotenv) is a zero-dependency module that loads environment variables from a .env file into process.env. We do not want to leak our mnemonic to other people after all;
+* The [typechain](https://www.npmjs.com/package/typechain) allows us to use TypeScript within Truffle;
+* The [truffle-typings](https://www.npmjs.com/package/truffle-typings) is a library that goes with TypeChain should you want to use TypeScript for your Truffle environment;
+* The [ts-node](https://www.npmjs.com/package/ts-node) is a package which we would need for a TypeScript execution of our scripts in Node.js;
 * The [@openzeppelin/test-helpers](https://docs.openzeppelin.com/test-helpers/0.5/) is a library that will helps us test when transactions revert and also handle Big Numbers for us. It is a dev dependency;
 * The [solidity-coverage](https://www.npmjs.com/package/solidity-coverage) is a library that we will use to check how much coverage our tests have. It is again a dev dependency;
 
 3. Now that we have all the necessary dependencies installed, let us go to the **truffle-config.js** in the root of our project and paste the following lines of code in there:
 
 ```javascript
+//we need this to be able to run our .ts tests
+require('ts-node/register')
+
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 require('dotenv').config()
 module.exports = {
@@ -73,8 +79,9 @@ module.exports = {
       version: "0.8.6"
     }
   },
-  plugins: ["solidity-coverage"]
-};
+  plugins: ["solidity-coverage"],
+  test_file_extension_regexp: /.*\.ts$/
+}
 ```
 
 This file is the entrypoint of our Truffle project. As you can see, we specify two networks on which we would like to deploy our smart contracts after we are done with them, namely *fuji* and *mainnet*. We utilize the [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) library, so that we provide a RPC to which we can connect to to deploy our contracts as well as a mnemonic which will be used to sign the transaction to do that. As you can see, some of the variables are accessed via process.env. These are defined in a separate **.env** file in the root of our project and have the following structure:
@@ -83,6 +90,57 @@ MNEMONIC='paste your metamask mnemonic here which is twelve words long believe m
 APIKEY=YOUR_DATAHUB_API_KEY_FOR_THE_FUJI_TESTNET
 ```
 Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/services/avalanche)'s testnet RPC. There is a free plan which you can use. For that you would need to register, grab your APIKEY and paste it into your **.env** file. 
+
+4. We would also need two more configuration files in order to build our initial TypeScript environment. Let us create a **tsconfig.json** under the root of our project with the following contents:
+
+```json
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "strict": true,
+        "moduleResolution": "node",
+        "noImplicitThis": true,
+        "noImplicitAny": false,
+        "alwaysStrict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": [
+            "es2015"
+        ],
+        "sourceMap": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ],
+        "types": [
+            "node",
+            "truffle-typings"
+        ]
+    },
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
+}
+```
+
+As well as a **tsconfig.migrate.json** again under the root folder of our project:
+
+```json
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "./migrations/*.ts"
+    ]
+}
+```
+
+This file simply extends our base **tsconfig.json** by taking the [**migrations/**](./migrations) contents into account. We will go through migrating in more detail after we have finished implementing and testing our contracts.
 
 ### Writing our first ERC721 contract
 
@@ -334,8 +392,8 @@ Afterwards we transfer the NFT from the Marketplace smart contract to the buyer 
 
 Now that we have finished writing our smart contracts it is very important that we test them thoroughly for erroneous behaviour. As we know, once deployed on the blockchain, they are immutable. We will be using [Mocha.js](https://mochajs.org/) for testing our contracts. It is integrated into the Truffle framework, so we do not need to install it. We do, however, need [Open Zeppelin's Test Helpers](https://docs.openzeppelin.com/test-helpers/0.5/), so we will import these in our tests. With that in mind, let us quickly jump into the [**test/**](./test) directory of our project root and inside of it create two files, namely:
 
-- [**collectible.test.js**](./test/collectible.test.js)
-- [**marketplace.test.js**](./test/marketplace.test.js)
+- [**collectible.test.ts**](./test/collectible.test.ts)
+- [**marketplace.test.ts**](./test/marketplace.test.ts)
 
 I. Let us start with the first one:
 
@@ -343,9 +401,9 @@ As you may notice most of the actions are repetitive, but will note down some ke
 
 1. First, we import our dependencies at the top and then we define the scope of our test:
 
-```javascript
+```typescript
 const Collectible = artifacts.require('./Collectible')
-const { expectRevert } = require('@openzeppelin/test-helpers')
+import { expectRevert } from '@openzeppelin/test-helpers'
 
 contract('Collectible', ([contractDeployer, creator, buyer]) => {
 ```
@@ -354,7 +412,7 @@ As you can see we import the **Collectible** contract and also an **expectRevert
 
 2. Afterwards, we define a **before()** hook. This hook runs before our tests and we can use it to deploy the contract.
 
-```javascript
+```typescript
 let collectible;
 
 before(async () => {
@@ -366,7 +424,7 @@ Each function of our contracts would be part of a **describe()** block. That way
 
 3. In the first **describe()** block we test whether our contract was deployed correctly. For that we need to write individual tests or **it()**. 
 
-```javascript 
+```typescript 
 describe('Collectible deployment', async () => {
         it('Deploys the Collectible SC successfully.', async () => {
             console.log('Address is ', collectible.address)
@@ -389,7 +447,7 @@ As you can see an **it()** function takes as parameters a description of the tes
 
 3. In the second **describe()** block we test our **createCollectible()** function. For that we need to write individual tests for every statement that we make.
 
-```javascript
+```typescript
  describe('Mint an NFT and set a royalty.', async () => {
 
         it('The hash \'metadata\' is not minted before the function call.', async () => {
@@ -409,13 +467,13 @@ As you can see an **it()** function takes as parameters a description of the tes
         it('Mint a NFT and emit events.', async () => {
             const result = await collectible.createCollectible('metadata', 20, { from: creator })
             assert.equal(result.logs.length, 2, 'Should trigger two events.');
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+            //event Transfer
             assert.equal(result.logs[0].event, 'Transfer', 'Should be the \'Transfer\' event.');
             assert.equal(result.logs[0].args.from, 0x0, 'Should be the 0x0 address.');
             assert.equal(result.logs[0].args.to, creator, 'Should log the recipient which is the creator.');
             assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
 
-            //event ItemMinted(uint256 tokenId, address creator, string metadata, uint256 royalty);
+            //event ItemMinted
             assert.equal(result.logs[1].event, 'ItemMinted', 'Should be the \'ItemMinted\' event.');
             assert.equal(result.logs[1].args.tokenId, 1, 'Should be the token id 1.');
             assert.equal(result.logs[1].args.creator, creator, 'Should log the creator.');
@@ -448,7 +506,7 @@ As you can see an **it()** function takes as parameters a description of the tes
 * Afterwards, we expect that the minting function reverts if we provide a royalty that is not between 0% and 40%. In that case we try with 41%.
 * Then, before we complete the transaction we can check what the return value would be. As we know, our **createCollectible()** function returns a token id. We can grab this by executing the function without changing the state:
 
-```javascript
+```typescript
 it('Give a new id to a newly created token', async () => {
     const newTokenId = await collectible.createCollectible.call('metadata', 20, { from: creator })
     assert.equal(parseInt(newTokenId.toString()), 1, 'The new token id should be 1.')
@@ -458,17 +516,17 @@ Then we simply compare the newTokenId to 1 and expect them to be equal, since ou
 
 * Now we do not only exectute the **createCollectible()** function but also change the state in our next **it()**:
 
-```javascript
+```typescript
 it('Mint a NFT and emit events.', async () => {
             const result = await collectible.createCollectible('metadata', 20, { from: creator })
             assert.equal(result.logs.length, 2, 'Should trigger two events.');
-            //event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+            //event Transfer
             assert.equal(result.logs[0].event, 'Transfer', 'Should be the \'Transfer\' event.');
             assert.equal(result.logs[0].args.from, 0x0, 'Should be the 0x0 address.');
             assert.equal(result.logs[0].args.to, creator, 'Should log the recipient which is the creator.');
             assert.equal(result.logs[0].args.tokenId, 1, 'Should log the token id which is 1.');
 
-            //event ItemMinted(uint256 tokenId, address creator, string metadata, uint256 royalty);
+            //event ItemMinted
             assert.equal(result.logs[1].event, 'ItemMinted', 'Should be the \'ItemMinted\' event.');
             assert.equal(result.logs[1].args.tokenId, 1, 'Should be the token id 1.');
             assert.equal(result.logs[1].args.creator, creator, 'Should log the creator.');
@@ -484,39 +542,40 @@ Our variable which is the result of the function call is no longer the token id,
 4. Now that we are done writing the test, in our console we simply run the command:
 
 ```powershell
-truffle test
+npx truffle test
 ```
 
 Note: You might notice that this would run the command *truffle compile* beforehand. This would create a **build/contracts** folder in our root directory where the .json representations of all of our used contracts are stored. These are in fact used when you call functions on the frontend.
 
-II. Go inside the [**marketplace.test.js**](./test/marketplace.test.js) file and have a look at the code.
+II. Go inside the [**marketplace.test.ts**](./test/marketplace.test.ts) file and have a look at the code.
 As you may notice, most of the concepts such as testing the deployment, function reverts and emitted events are repeated here, so I will only go through the differences:
 
 1. Once again, at the top we are importing the **Marketplace** contract as well as some helping functions:
 
-```javascript
+```typescript
 const Marketplace = artifacts.require('./Marketplace')
-const { expectRevert, BN } = require('@openzeppelin/test-helpers')
-const { convertTokensToWei } = require('../utils/tokens')
-const { toBN } = web3.utils;
+const { toBN } = web3.utils
+import { expectRevert, BN } from '@openzeppelin/test-helpers'
+import { convertTokensToWei } from '../utils/tokens'
 ```
 
-We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a [**utils/**](./utils) folder of our project's root which we do not have yet, so let us create it and inside of it create a [**tokens.js**](./utils/tokens.js) file.
+We use the **toBN()** function to convert the balances of the addresses, which are returned as strings, to Big Numbers, so that we can perform an adding. We also import a function **convertTokenToWei** from a [**utils/**](./utils) folder of our project's root which we do not have yet, so let us create it and inside of it create a [**tokens.ts**](./utils/tokens.ts) file.
 Then copy the code below in there:
 
-```javascript
-const convertTokensToWei = (n) => {
-    return web3.utils.toWei(n, 'ether');
+```typescript
+export const convertTokensToWei = (n) => {
+    return web3.utils.toWei(n, 'ether')
 }
+
 module.exports = { convertTokensToWei }
 ```
 
 We use this function, so that we do not have to write 18 zeroes after the AVAX amount that a buyer would pay for a NFT. In reality, transfering 5 AVAX means that we transfer 5000000000000000000 as a value. In order to not have to write all those zeroes, we can simply call convertTokensToWei('5') and the function will add the zeroes for us.
-Now, back to our [**marketplace.test.js**](./test/marketplace.test.js) test script. 
+Now, back to our [**marketplace.test.ts**](./test/marketplace.test.ts) test script. 
 
 2. We create a **before()** hook. There we deploy the marketplace contract and we also mint a NFT. Notice again that our **Marketplace.sol** has all the functions which **Collectible.sol** has, hence we can call the **createCollectible()** function: 
 
-```javascript
+```typescript
 before(async () => {
         marketplace = await Marketplace.new({ from: contractDeployer })
         await marketplace.createCollectible('metadata', 20, { from: creator })
@@ -524,11 +583,11 @@ before(async () => {
 ```
 In this case the creator address is the one who calls the function and therefore is the owner of the first NFT.
 
-4. Afterwards, we simply test every statement which we make inside the function just like we did for the **collectible.test.js**.
+4. Afterwards, we simply test every statement which we make inside the function just like we did for the **collectible.test.ts**.
 5. We do the same for the **cancelListing()** function.
 6. For the **buyItem()** function things are not that different. The interesting part is the final **it()** where we check the balances of the seller, buyer and creator after the second sale, since for the first one the seller is equal to the creator:
 
-```javascript
+```typescript
 it('The balances of creator, first buyer who is now the seller and second buyer are correct.', async () => {
             //List the item again, only this time by the new owner
             await marketplace.listItem(1, convertTokensToWei('10'), { from: buyer })
@@ -548,7 +607,7 @@ it('The balances of creator, first buyer who is now the seller and second buyer 
 
 What we do here is that the new owner lists the item for 10 AVAX. He is denoted by the **buyer** address, since he has previously bought the NFT from the creator. A **secondBuyer** purchases the item, so we check whether the **secondBuyer** has at least 10 AVAX less, because we need to take into account the gas paid:
 
-```javascript
+```typescript
 const balanceOfSecondBuyerBeforePurchase = await web3.eth.getBalance(secondBuyer)
             await marketplace.buyItem(1, { from: secondBuyer, value: convertTokensToWei('10') })
             const balanceOfSecondBuyerAfterPurchase = await web3.eth.getBalance(secondBuyer)
@@ -558,7 +617,7 @@ const balanceOfSecondBuyerBeforePurchase = await web3.eth.getBalance(secondBuyer
 
 For the **creator** we also check their balance before and after the purchase and that it needs to be larger by 20% of the purchase amount. The seller which is in this case the **buyer** address should get 80% of the price:
 
-```javascript
+```typescript
 const balanceOfBuyerAfterPurchase = await web3.eth.getBalance(buyer)
 const balanceOfCreatorAfterPurchase = await web3.eth.getBalance(creator)
 assert.equal(balanceOfBuyerAfterPurchase, toBN(balanceOfBuyerBeforePurchase).add(toBN(convertTokensToWei('10')).mul(new BN('80')).div(new BN('100'))), 'The balance of the seller should increase by 80% of the sold amount.')
@@ -568,7 +627,7 @@ assert.equal(balanceOfCreatorAfterPurchase, toBN(balanceOfCreatorBeforePurchase)
 4. Now that we are done writing the test, in our console we simply run the command:
 
 ```powershell
-truffle test
+npx truffle test
 ```
 
 5. To check the test coverage we can run the command:
@@ -579,16 +638,19 @@ truffle run coverage
 
 ### Deploying our smart contracts
 
-1. Now that our contracts have passed the tests, let us have a look at the [**migrations/**](./migrations) folder which Truffle provided us in the beginning. Inside of it we have the [**1_initial_migration.js**](./migrations/1_initial_migration.js) script which is used to deploy the [**Migrations.sol**](./contracts/Migrations.sol) contract that is available in the [**contracts/**](./contracts) folder. This contract simply keeps track of the migrations that we do. In order to migrate our own contracts, we create another script called [**2_deploy_contracts.js**](./migrations/2_deploy_contracts.js) and inside of it paste the following lines of code:
+1. Now that our contracts have passed the tests, let us have a look at the [**migrations/**](./migrations) folder which Truffle provided us in the beginning. Inside of it we have the [**1_initial_migration.ts**](./migrations/1_initial_migration.ts) script which is used to deploy the [**Migrations.sol**](./contracts/Migrations.sol) contract that is available in the [**contracts/**](./contracts) folder. This contract simply keeps track of the migrations that we do. In order to migrate our own contracts, we create another script called [**2_deploy_contracts.ts**](./migrations/2_deploy_contracts.ts) and inside of it paste the following lines of code:
 
-```javascript
+```typescript
 const Collectible = artifacts.require('Collectible')
 const Marketplace = artifacts.require('Marketplace')
 
-module.exports = async (deployer, network, [owner]) => {
-    await deployer.deploy(Collectible)
-    await deployer.deploy(Marketplace)
-}
+module.exports = function (deployer) {
+    deployer.deploy(Collectible)
+    deployer.deploy(Marketplace)
+} as Truffle.Migration
+
+// because of https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
+export { }
 ```
 As you can see, it is pretty straightforward. We import the contracts and deploy them via the deployer parameter. This is taken care by Truffle.
 
