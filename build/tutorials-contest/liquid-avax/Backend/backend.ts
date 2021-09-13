@@ -19,16 +19,30 @@ import {
     PlatformVMAPI,
     UTXOSet as PlatformVPUTXOSet,
     UnsignedTx as PlatformVMUnsignedTx,
-    Tx as PlatformVMTx
+    Tx as PlatformVMTx,
+    SECPTransferOutput,
+    TransferableOutput,
+    SECPOwnerOutput,
+    ParseableOutput,
+    UTXOSet,
+    UTXO,
+    AmountOutput, SECPTransferInput, TransferableInput, AddDelegatorTx, UnsignedTx, Tx
 } from "avalanche/dist/apis/platformvm"
 import {SignedTransaction} from "web3-core"
 import {TransactionConfig} from "web3-eth"
+import {Output} from "avalanche/dist/common";
+import {NodeIDStringToBuffer, UnixNow} from "avalanche/dist/utils";
 
-let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddress: string[], xChainFees: BN, xChainBlockchainID: string
-let cChain: EVMAPI, cKeyChain: EVMKeyChain, cChainAddress: string[], cChainFees: BN, cChainBlockchainID: string, cAvaxAssetId: string
-let pChain: PlatformVMAPI, pKeyChain: PlatformVMKeyChain, pChainAddress: string[], pChainFees: BN, pChainBlockchainID: string
+let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddressesString: string[], xChainFees: BN, xChainBlockchainID: string
+let cChain: EVMAPI, cKeyChain: EVMKeyChain, cChainAddressesString: string[], cChainFees: BN, cChainBlockchainID: string, cAvaxAssetId: string
+let pChain: PlatformVMAPI, pKeyChain: PlatformVMKeyChain, pChainAddressesString: string[], pChainAddressesBuffer: Buffer[], pChainFees: BN, pAvaxAssetId: Buffer, pChainBlockchainID: string
 
 let avalancheInstance: Avalanche
+
+const ip: string = "localhost"
+const port: number = 9650
+const protocol: string = "http"
+const networkID: number = 5
 
 let contractAbi: AbiItem
 
@@ -44,16 +58,22 @@ type PromiseResolve<T> = (value?: T | PromiseLike<T>) => void;
 type PromiseReject = (error?: any) => void;
 
 const waitForStaked = async (): Promise<any> => {
+    console.log("Let's listen")
     const stakingContract: Contract = new web3.eth.Contract(contractAbi, contractAddress)
     const stakedEvent: any = stakingContract.events.Staked()
     await web3.eth.subscribe('logs', {
       address: stakedEvent.arguments[0].address,
       topics: stakedEvent.arguments[0].topics,
-    }, async (error, logs) : Promise<any> => {
+    }, async (error, logs): Promise<any> => {
+        console.log(error, logs)
         if (!error) {
+            const sender = `0x${logs.topics[1].substring(26)}`
             const dataHex: string = logs.data.substring(2)
+            console.log(dataHex)
             const id: number = parseInt(dataHex.substring(0, 64), 16)
-            const amountWithDecimals: BN = new BN("0x" + dataHex.substring(64))
+            const amountWithDecimals: BN = new BN(dataHex.substring(64, 128), 16)
+            const endingTimestamp: BN = new BN(dataHex.substring(128), 16)
+            console.log(id, parseInt(amountWithDecimals.toString()), parseInt(endingTimestamp.toString()))
             web3.eth.defaultAccount = masterAddress
             const data: string = stakingContract.methods.withdraw(id).encodeABI()
             const nonce: number = await web3.eth.getTransactionCount(masterAddress, "pending")
@@ -67,7 +87,7 @@ const waitForStaked = async (): Promise<any> => {
             }
             const stx: SignedTransaction = await web3.eth.accounts.signTransaction(tx, privateKey)
             await web3.eth.sendSignedTransaction(stx.rawTransaction).on("confirmation", async (): Promise<any> => {
-                await CtoP(id, amountWithDecimals)
+                await CtoP(id, amountWithDecimals, endingTimestamp, sender)
             }).on("error", (error: Error): Promise<any> => {
                 throw error
             })
@@ -77,7 +97,7 @@ const waitForStaked = async (): Promise<any> => {
     })
 }
 
-const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
+const CtoP = async (id: number, amountWithDecimals: BN, endingTimestamp: BN, sender: string): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
     let amountInNavax: BN = amountWithDecimals.div(TEN_POWER_NINE)
 
     const cChainHexAddress: string = masterAddress
@@ -89,8 +109,8 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
         cAvaxAssetId,
         xChainBlockchainID,
         cChainHexAddress,
-        cChainAddress[0],
-        xChainAddress,
+        cChainAddressesString[0],
+        xChainAddressesString,
         nonce,
     )
 
@@ -105,16 +125,16 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
     }).then(async (resolve: string): Promise<any> => {
         if (resolve === "Accepted") {
             const xUtxoset1: AVMUTXOSet = (await xChain.getUTXOs(
-                xChainAddress,
+                xChainAddressesString,
                 cChainBlockchainID,
             )).utxos
 
             const unsignedImportXTx: AVMUnsignedTx = await xChain.buildImportTx(
                 xUtxoset1,
-                xChainAddress,
+                xChainAddressesString,
                 cChainBlockchainID,
-                xChainAddress,
-                xChainAddress,
+                xChainAddressesString,
+                xChainAddressesString,
             )
 
             const signedImportXTx: AVMTx = await unsignedImportXTx.sign(xKeyChain)
@@ -126,15 +146,15 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
             // C --> X done, now let's start X --> P.
 
             const xUtxoset2: AVMUTXOSet = (await xChain.getUTXOs(
-                xChainAddress
+                xChainAddressesString
             )).utxos
 
             const unsignedXtoPTx: AVMUnsignedTx = await xChain.buildExportTx(
                 xUtxoset2,
                 amountInNavax,
                 pChainBlockchainID,
-                pChainAddress,
-                xChainAddress,
+                pChainAddressesString,
+                xChainAddressesString,
             )
 
             const signedXtoPTx: AVMTx = unsignedXtoPTx.sign(xKeyChain)
@@ -148,16 +168,16 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
             }).then(async (resolve: string): Promise<any> => {
                 if (resolve === "Accepted") { // ... And import the transaction on the P chain.
                     const pUtxoset: PlatformVPUTXOSet = (await pChain.getUTXOs(
-                        pChainAddress,
+                        pChainAddressesString,
                         pChainBlockchainID
                     )).utxos
 
                     const unsignedImportPTx: PlatformVMUnsignedTx = await pChain.buildImportTx(
                         pUtxoset,
-                        pChainAddress,
+                        pChainAddressesString,
                         xChainBlockchainID,
-                        pChainAddress,
-                        pChainAddress,
+                        pChainAddressesString,
+                        pChainAddressesString,
                     )
 
                     const signedImportPTx: PlatformVMTx = unsignedImportPTx.sign(pKeyChain)
@@ -165,6 +185,8 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
                     const importPTxId: string = await pChain.issueTx(signedImportPTx)
 
                     amountInNavax = amountInNavax.sub(pChainFees)
+
+                    await stakeToNode(amountInNavax, id, endingTimestamp, sender)
                 } else {
                     throw `Looks like the X --> P transaction with ${exportXtoPTxId} id has not been accepted!`
                 }
@@ -173,6 +195,97 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
             throw `Looks like the C --> X transaction with ${exportCtoXTxId} id has not been accepted!`
         }
     })
+}
+
+const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, sender: string): Promise<any> => {
+    const outputs: TransferableOutput[] = []
+    const inputs: TransferableInput[] = []
+    const stakeOuts: TransferableOutput[] = []
+
+    const nodeID: string = "nodeID..." // Maybe pass this argument, or make the verification here?
+    const startTime = UnixNow()
+    const endTime = UnixNow().add(endingTimestamp)
+
+    const memo: Buffer = Buffer.from(
+        `liquidAvax-ID${id}-SENDER${sender}`
+    )
+    
+    const stakeAmount: any = await pChain.getMinStake()
+    const locktime: BN = new BN(0)
+    const threshold: number = 1
+    const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
+        amountInNavax.sub(pChainFees).sub(stakeAmount.minValidatorStake),
+        pChainAddressesBuffer,
+        locktime,
+        threshold
+    )
+    const transferableOutput: TransferableOutput = new TransferableOutput(
+        pAvaxAssetId,
+        secpTransferOutput
+    )
+    outputs.push(transferableOutput)
+
+    const stakeSECPTransferOutput: SECPTransferOutput = new SECPTransferOutput(
+        stakeAmount.minValidatorStake,
+        pChainAddressesBuffer,
+        locktime,
+        threshold
+    )
+    const stakeTransferableOutput: TransferableOutput = new TransferableOutput(
+        pAvaxAssetId,
+        stakeSECPTransferOutput
+    )
+    stakeOuts.push(stakeTransferableOutput)
+
+    const rewardOutputOwners: SECPOwnerOutput = new SECPOwnerOutput(
+        pChainAddressesBuffer,
+        locktime,
+        threshold
+    )
+    const rewardOwners: ParseableOutput = new ParseableOutput(rewardOutputOwners)
+
+    const platformVMUTXOResponse: any = await pChain.getUTXOs(pChainAddressesString)
+    const utxoSet: UTXOSet = platformVMUTXOResponse.utxos
+    const utxos: UTXO[] = utxoSet.getAllUTXOs()
+    utxos.forEach((utxo: UTXO) => {
+        const output: Output = utxo.getOutput()
+        if (output.getOutputID() === 7) {
+            const amountOutput: AmountOutput = utxo.getOutput() as AmountOutput
+            const amt: BN = amountOutput.getAmount().clone()
+            const txid: Buffer = utxo.getTxID()
+            const outputidx: Buffer = utxo.getOutputIdx()
+
+            const secpTransferInput: SECPTransferInput = new SECPTransferInput(amt)
+            secpTransferInput.addSignatureIdx(0, pChainAddressesBuffer[0])
+
+            const input: TransferableInput = new TransferableInput(
+                txid,
+                outputidx,
+                pAvaxAssetId,
+                secpTransferInput
+            )
+            inputs.push(input)
+        }
+    })
+
+    const addDelegatorTx: AddDelegatorTx = new AddDelegatorTx(
+        networkID,
+        binTools.cb58Decode(pChainBlockchainID),
+        outputs,
+        inputs,
+        memo,
+        NodeIDStringToBuffer(nodeID),
+        startTime,
+        endTime,
+        stakeAmount.minDelegatorStake,
+        stakeOuts,
+        rewardOwners
+    )
+
+    const unsignedTx: UnsignedTx = new UnsignedTx(addDelegatorTx)
+    const tx: Tx = unsignedTx.sign(pKeyChain)
+    const txid: string = await pChain.issueTx(tx)
+    console.log(`Success! TXID: ${txid}`)
 }
 
 const binTools: BinTools = BinTools.getInstance()
@@ -184,9 +297,11 @@ const importKeys = async (): Promise<any> => {
     cKeyChain.importKey(bufferedPrivateKey)
     pKeyChain.importKey(CB58Encoded)
 
-    xChainAddress = xKeyChain.getAddressStrings()
-    cChainAddress = cKeyChain.getAddressStrings()
-    pChainAddress = pKeyChain.getAddressStrings()
+    xChainAddressesString = xKeyChain.getAddressStrings()
+    cChainAddressesString = cKeyChain.getAddressStrings()
+    pChainAddressesString = pKeyChain.getAddressStrings()
+
+    pChainAddressesBuffer = pKeyChain.getAddresses()
 }
 
 const waitForStatusX = async(transactionId: string): Promise<any> => {
@@ -210,10 +325,6 @@ const pollTransaction = async(func: Function, transactionID: string, resolve: Pr
 }
 
 const getInformation = async(): Promise<any> => {
-    const ip: string = "localhost"
-    const port: number = 9650
-    const protocol: string = "http"
-    const networkID: number = 5
     avalancheInstance = new Avalanche(ip, port, protocol, networkID)
     
     xChain = avalancheInstance.XChain()
@@ -231,6 +342,7 @@ const getInformation = async(): Promise<any> => {
     pKeyChain = pChain.keyChain()
     pChainBlockchainID = pChain.getBlockchainID()
     pChainFees = pChain.getDefaultTxFee()
+    pAvaxAssetId = await pChain.getAVAXAssetID()
 
     const web3Protocol: string = "ws"
     const web3Ip: string = "localhost"
