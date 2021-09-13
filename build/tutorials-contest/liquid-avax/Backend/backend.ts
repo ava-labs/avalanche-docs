@@ -41,12 +41,15 @@ let privateKey: string
 const TEN_POWER_EIGHTEEN: BN = new BN(new BN(10).pow(new BN(18)))
 const TEN_POWER_NINE: BN = new BN(new BN(10).pow(new BN(9)))
 
+type PromiseResolve<T> = (value?: T | PromiseLike<T>) => void;
+type PromiseReject = (error?: any) => void;
+
 const waitForStaked = async (): Promise<any> => {
     const stakingContract: Contract = new web3.eth.Contract(contractAbi, contractAddress)
     const stakedEvent: any = stakingContract.events.Staked()
     await web3.eth.subscribe('logs', {
-        address: stakedEvent.arguments[0].address,
-        topics: stakedEvent.arguments[0].topics,
+      address: stakedEvent.arguments[0].address,
+      topics: stakedEvent.arguments[0].topics,
     }, async (error, logs) : Promise<any> => {
         if (!error) {
             const dataHex: string = logs.data.substring(2)
@@ -56,12 +59,12 @@ const waitForStaked = async (): Promise<any> => {
             const data: string = stakingContract.methods.withdraw(id).encodeABI()
             const nonce: number = await web3.eth.getTransactionCount(masterAddress, "pending")
             const tx: TransactionConfig = {
-                from: masterAddress,
-                to: contractAddress,
-                data: data,
-                gasPrice: 225*10**9,
-                gas: 2100000,
-                nonce: nonce
+              from: masterAddress,
+              to: contractAddress,
+              data: data,
+              gasPrice: 225*10**9,
+              gas: 2100000,
+              nonce: nonce
             }
             const stx: SignedTransaction = await web3.eth.accounts.signTransaction(tx, privateKey)
             await web3.eth.sendSignedTransaction(stx.rawTransaction)
@@ -92,15 +95,13 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
     
     const signedCtoXTx: EVMTx = unsignedCtoXTx.sign(cKeyChain)
     
-    const ctoXTxId: string = await cChain.issueTx(signedCtoXTx)
-    
-    console.log(`C --> X export Tx id: ${ctoXTxId}`)
+    const exportCtoXTxId: string = await cChain.issueTx(signedCtoXTx)
     
     amountInNavax = amountInNavax.sub(cChainFees)
     
-    return new Promise(function (resolve, reject) {
-        pollTransaction(waitForStatusC, ctoXTxId, resolve, reject)
-    }).then(async (resolve): Promise<any> => {
+    return new Promise((resolve: PromiseResolve<string>, reject: PromiseReject): void => {
+        pollTransaction(waitForStatusC, exportCtoXTxId, resolve, reject)
+    }).then(async (resolve: string): Promise<any> => {
         if (resolve === "Accepted") {
             const xUtxoset1: AVMUTXOSet = (await xChain.getUTXOs(
                 xChainAddress,
@@ -118,8 +119,6 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
             const signedImportXTx: AVMTx = await unsignedImportXTx.sign(xKeyChain)
 
             const importXTxId: string = await xChain.issueTx(signedImportXTx)
-
-            console.log(`C --> X import Tx id: ${importXTxId}`)
 
             amountInNavax = amountInNavax.sub(xChainFees)
 
@@ -139,15 +138,13 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
 
             const signedXtoPTx: AVMTx = unsignedXtoPTx.sign(xKeyChain)
 
-            const xtoPTxId: string = await xChain.issueTx(signedXtoPTx)
-
-            console.log(`X --> P export Tx id: ${xtoPTxId}`)
+            const exportXtoPTxId: string = await xChain.issueTx(signedXtoPTx)
 
             amountInNavax = amountInNavax.sub(xChainFees)
 
-            return new Promise(function (resolve, reject) {
-                pollTransaction(waitForStatusX, xtoPTxId, resolve, reject)
-            }).then(async (resolve): Promise<any> => {
+            return new Promise((resolve: PromiseResolve<string>, reject: PromiseReject): void => {
+                pollTransaction(waitForStatusX, exportXtoPTxId, resolve, reject)
+            }).then(async (resolve: string): Promise<any> => {
                 if (resolve === "Accepted") { // ... And import the transaction on the P chain.
                     const pUtxoset: PlatformVPUTXOSet = (await pChain.getUTXOs(
                         pChainAddress,
@@ -166,15 +163,13 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
 
                     const importPTxId: string = await pChain.issueTx(signedImportPTx)
 
-                    console.log(`X --> P import Tx id: ${importPTxId}`)
-
                     amountInNavax = amountInNavax.sub(pChainFees)
                 } else {
-                    throw `Looks like the X --> P transaction with ${xtoPTxId} id has not been accepted!`
+                    throw `Looks like the X --> P transaction with ${exportXtoPTxId} id has not been accepted!`
                 }
             })
         } else {
-            throw `Looks like the C --> X transaction with ${ctoXTxId} id has not been accepted!`
+            throw `Looks like the C --> X transaction with ${exportCtoXTxId} id has not been accepted!`
         }
     })
 }
@@ -182,10 +177,10 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
 const binTools: BinTools = BinTools.getInstance()
 
 const importKeys = async () => {
-    const bufferedPrivatekey = Buffer.from(privateKey, 'hex')
-    const CB58Encoded = `PrivateKey-${binTools.cb58Encode(bufferedPrivatekey)}`
+    const bufferedPrivateKey: Buffer = Buffer.from(privateKey, 'hex')
+    const CB58Encoded: string = `PrivateKey-${binTools.cb58Encode(bufferedPrivateKey)}`
     xKeyChain.importKey(CB58Encoded)
-    cKeyChain.importKey(bufferedPrivatekey)
+    cKeyChain.importKey(bufferedPrivateKey)
     pKeyChain.importKey(CB58Encoded)
 
     xChainAddress = xKeyChain.getAddressStrings()
@@ -215,7 +210,7 @@ const pollTransaction = async(func, transactionID, resolve, reject): Promise<any
     }
 }
 
-const getInformations = async() => {
+const getInformation = async() => {
     const ip = "localhost"
     const port = 9650
     const protocol = "http"
@@ -250,7 +245,7 @@ const getInformations = async() => {
 }
 
 const setup = async() => {
-    await getInformations()
+    await getInformation()
     await importKeys()
 }
 
@@ -259,4 +254,6 @@ const main = async() => {
     await waitForStaked()
 }
 
-main()
+main().catch((error) => {
+    throw `An error occurred: ${error}`
+})
