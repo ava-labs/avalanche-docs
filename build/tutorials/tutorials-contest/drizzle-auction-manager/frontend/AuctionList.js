@@ -30,8 +30,8 @@ function FetchAuctions({cacheCalls, userInfo}) {
     }
 
     const getAuctionAnalytics = () => {
-        var auctionAnalytics = [];
-        for(var i = 0; i < cacheCalls.aId; i++) {
+        let auctionAnalytics = [];
+        for(let i = 0; i < cacheCalls.aId; i++) {
             auctionAnalytics.push(cacheCalls.auctionAnalytics[i]);
         }
         return auctionAnalytics;

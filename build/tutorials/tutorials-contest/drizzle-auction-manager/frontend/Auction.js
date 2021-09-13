@@ -27,7 +27,7 @@ function Auction() {
         auctionAnalytics: []
     }
 
-    for(var i = 0; i < cacheCalls.aId; i++) {
+    for(let i = 0; i < cacheCalls.aId; i++) {
         cacheCalls.auctionAnalytics.push(subscriber?.auctionAnalytics[auctionAnalyticsCacheKey[i]]?.value)
     }
 
@@ -39,20 +39,20 @@ function Auction() {
 
     // Initializing cache keys
     useEffect(() => {
-        const _auctionCacheKey = AuctionManager?.showAuctions?.cacheCall();
-        const _aIdCacheKey = AuctionManager?.aId?.cacheCall();
-        const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0]);
+        const _auctionCacheKey = AuctionManager?.showAuctions?.cacheCall()
+        const _aIdCacheKey = AuctionManager?.aId?.cacheCall()
+        const _isRegistered = AuctionManager?.isRegistered?.cacheCall(accounts[0])
         setCacheKey({
             ...cacheKeys,
             showAuctions: _auctionCacheKey,
             aId: _aIdCacheKey,
             isRegistered: _isRegistered
-        });
+        })
     }, []);
 
     useEffect(() => {
-        var _auctionAnalyticsCacheKey = [];
-        for(var i = 0; i < cacheCalls.aId; i++) {
+        let _auctionAnalyticsCacheKey = [];
+        for(let i = 0; i < cacheCalls.aId; i++) {
             _auctionAnalyticsCacheKey.push(AuctionManager?.auctionAnalytics?.cacheCall(i))
         }
         setAuctionAnalyticsCacheKey(_auctionAnalyticsCacheKey)
@@ -60,32 +60,32 @@ function Auction() {
 
     useEffect(() => {
         if(cacheCalls.isRegistered !== undefined && cacheCalls.isRegistered[0] == 1) {
-            setIsRegistered(true);
+            setIsRegistered(true)
             (async () => {
-                const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call();
+                const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call()
                 setUserInfo({
                     id: userInfo.userId,
                     name: userInfo.name
                 })
             })();
         } else {
-            setIsRegistered(false);
+            setIsRegistered(false)
         }
     }, [cacheCalls.isRegistered]);
 
     const createUser = async (name) => {
-        await AuctionManager?.createUser(name)?.send({from: accounts[0]});
+        await AuctionManager?.createUser(name)?.send({from: accounts[0]})
     }
 
     const [userName, setUserName] = useState("");
 
     const handleUserNameChange = (event) => {
-        setUserName(event.target.value);
+        setUserName(event.target.value)
     }
 
     const submitLogin = event => {
-        event.preventDefault();
-        createUser(userName);
+        event.preventDefault()
+        createUser(userName)
     }
 
     const UserInfo = () => {
