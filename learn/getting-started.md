@@ -6,7 +6,7 @@ We recommend reading this document entirely before using Avalanche so that you c
 
 You can find a general overview of Avalanche [here](https://support.avax.network/en/articles/4135427-avalanche-platform-overview). It will be useful in understanding similarities and differences between Avalanche and other platforms.
 
-## Fees
+## AVAX Tokens and Fees
 
 All fees on Avalanche are paid in the native token, AVAX, so you'll need some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Other ways ways are explained below.
 
