@@ -78,7 +78,7 @@ Transferable inputs describe a specific UTXO with a provided transfer input.
 
 A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
+* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
 * **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
 * **`AssetID`** is a 32-byte array that defines which asset this input references.
 * **`Input`** is an input, as defined below. This can currently only be a [SECP256K1 transfer input](avm-transaction-serialization.md#secp256k1-transfer-input)
@@ -153,7 +153,7 @@ Transferable operations describe a set of UTXOs with a provided transfer operati
 
 ### What Transferable Op Contains
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+A transferable operation contains an `AssetID`, `UTXOIDs`, and a `TransferOp`.
 
 * **`AssetID`** is a 32-byte array that defines which asset this operation changes.
 * **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
@@ -812,8 +812,8 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 * **`AddressIndices`**:
 * `0x00000003`
 * `0x00000007`
-* **`MintOutput`**: `“Example SECP256K1 Mint Output from above”`
-* **`TransferOutput`**: `“Example SECP256K1 Transfer Output from above”`
+* **`MintOutput`**: `"Example SECP256K1 Mint Output from above"`
+* **`TransferOutput`**: `"Example SECP256K1 Transfer Output from above"`
 
 ```text
 [
@@ -1478,18 +1478,18 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-ops).
+* **`Ops`** is a variable-length array of [Transferable Ops](avm-transaction-serialization.md#transferable-op).
 
 ### Gantt Unsigned Operation Tx Specification
 
 ```text
-+---------+--------------+-------------------------------------+
-| base_tx : BaseTx       |                 size(base_tx) bytes |
-+---------+--------------+-------------------------------------+
-| ops     : []TransferOp |                 4 + size(ops) bytes |
-+---------+--------------+-------------------------------------+
-                         | 4 + size(ops) + size(base_tx) bytes |
-                         +-------------------------------------+
++---------+------------------+-------------------------------------+
+| base_tx : BaseTx           |                 size(base_tx) bytes |
++---------+------------------+-------------------------------------+
+| ops     : []TransferableOp |                 4 + size(ops) bytes |
++---------+------------------+-------------------------------------+
+                             | 4 + size(ops) + size(base_tx) bytes |
+                             +-------------------------------------+
 ```
 
 ### Proto Unsigned Operation Tx Specification
@@ -1506,7 +1506,7 @@ message OperationTx {
 Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
 
 * `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* **`Ops`**: \[`"Example Transferable Op as defined above"`\]
 
 ```text
 [
@@ -1611,9 +1611,9 @@ message ImportTx {
 
 Let’s make an unsigned import tx that uses the inputs from the previous examples:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `3`
+* `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `3`
 * `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: `“Example SECP256K1 Transfer Input as defined above”`
+* `Ins`: `"Example SECP256K1 Transfer Input as defined above"`
 
 ```text
 [
@@ -1719,9 +1719,9 @@ message ExportTx {
 
 Let’s make an unsigned export tx that uses the outputs from the previous examples:
 
-* `BaseTx`: `“Example BaseTx as defined above”`, but with `TypeID` set to `4`
+* `BaseTx`: `"Example BaseTx as defined above"`, but with `TypeID` set to `4`
 * `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: `“Example SECP256K1 Transfer Output as defined above”`
+* `Outs`: `"Example SECP256K1 Transfer Output as defined above"`
 
 ```text
 [
@@ -1990,6 +1990,149 @@ Let’s make a UTXO from the signed transaction created above:
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
     0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
     0x24, 0x25, 0x26, 0x27,
+]
+```
+
+## GenesisAsset
+
+An asset to be issued in an instance of the AVM's Genesis
+
+### What GenesisAsset Contains
+
+An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, `Memo`, `Name`, `Symbol`, `Denomination`, and `InitialStates`.
+
+* **`Alias`** is the alias for this asset.
+* **`NetworkID`** defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
+* **`BlockchainID`** is the ID \(32-byte array\) that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
+* **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
+* **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
+* **`Memo`** is a memo field that contains arbitrary bytes, up to 256 bytes.
+* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
+* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
+* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
+* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the [initial state](avm-transaction-serialization.md#initial-state) of those feature extensions.
+
+### Gantt GenesisAsset Specification
+
+```text
++----------------+----------------------+--------------------------------+
+| alias          : string               |           2 + len(alias) bytes |
++----------------+----------------------+--------------------------------+
+| network_id     : int                  |                        4 bytes |
++----------------+----------------------+--------------------------------+
+| blockchain_id  : [32]byte             |                       32 bytes |
++----------------+----------------------+--------------------------------+
+| outputs        : []TransferableOutput |        4 + size(outputs) bytes |
++----------------+----------------------+--------------------------------+
+| inputs         : []TransferableInput  |         4 + size(inputs) bytes |
++----------------+----------------------+--------------------------------+
+| memo           : [256]byte            |           4 + size(memo) bytes |
++----------------+----------------------+--------------------------------+
+| name           : string               |            2 + len(name) bytes |
++----------------+----------------------+--------------------------------+
+| symbol         : string               |          2 + len(symbol) bytes |
++----------------+----------------------+--------------------------------+
+| denomination   : byte                 |                        1 bytes |
++----------------+----------------------+--------------------------------+
+| initial_states : []InitialState       | 4 + size(initial_states) bytes |
++----------------+----------------------+--------------------------------+
+|           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
+|                 + len(name) + len(symbol) + size(initial_states) bytes |
++------------------------------------------------------------------------+
+```
+
+### Proto GenesisAsset Specification
+
+```text
+message GenesisAsset {
+    string alias = 1;                          // 2 bytes + len(alias)
+    uint32 network_id = 2;                     // 04 bytes
+    bytes blockchain_id = 3;                   // 32 bytes
+    repeated Output outputs = 4;               // 04 bytes + size(outputs)
+    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
+    bytes memo = 6;                            // 04 bytes + size(memo)
+    string name = 7;                           // 2 bytes + len(name)
+    name symbol = 8;                           // 2 bytes + len(symbol)
+    uint8 denomination = 9;                    // 1 bytes
+    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
+}
+```
+
+### GenesisAsset Example
+
+Let’s make a GenesisAsset:
+
+* **`Alias`**: `asset1`
+* **`NetworkID`**: `12345`
+* **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
+* **`Outputs`**: \[\]
+* **`Inputs`**: \[\]
+* **`Memo`**: `2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X`
+* **`Name`**: `asset1`
+* **`Symbol`**: `MFCA`
+* **`Denomination`**: `1`
+* **`InitialStates`**:
+* `"Example Initial State as defined above"`
+
+```text
+[
+    Alias         <- 0x617373657431
+    NetworkID     <- 0x00003039
+    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs       <- []
+    Inputs        <- []
+    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Name          <- 0x617373657431 
+    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    InitialStates <- [
+        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    ]
+]
+=
+[
+    // asset alias len: 
+    0x00, 0x06, 
+    // asset alias: 
+    0x61, 0x73, 0x73, 0x65, 0x74, 0x31, 
+    // network_id: 
+    0x00, 0x00, 0x30, 0x39, 
+    // blockchain_id: 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    // output_len: 
+    0x00, 0x00, 0x00, 0x00, 
+    // input_len: 
+    0x00, 0x00, 0x00, 0x00, 
+    // memo_len: 
+    0x00, 0x00, 0x00, 0x1b, 
+    // memo: 
+    0x66, 0x72, 0x6f, 0x6d, 0x20, 0x73, 0x6e, 0x6f, 0x77, 0x66, 0x6c, 0x61, 
+    0x6b, 0x65, 0x20, 0x74, 0x6f, 0x20, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x68, 0x65, 
+    // asset_name_len: 
+    0x00, 0x0f, 
+    // asset_name: 
+    0x6d, 0x79, 0x46, 0x69, 0x78, 0x65, 0x64, 0x43, 0x61, 0x70, 0x41, 0x73, 0x73, 0x65, 0x74, 
+    // symbol_len: 
+    0x00, 0x04, 
+    // symbol: 
+    0x4d, 0x46, 0x43, 0x41, 
+    // denomination: 
+    0x07, 
+    // number of InitialStates:
+    0x00, 0x00, 0x00, 0x01,
+    // InitialStates[0]:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
 ]
 ```
 

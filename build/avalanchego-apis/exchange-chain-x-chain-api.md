@@ -45,7 +45,7 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either "cb58" or "hex". Defaults to "cb58".
 
 `genesisData` has this form:
 
@@ -642,7 +642,7 @@ avm.mintNFT({
 * `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 
@@ -867,7 +867,7 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.getAllBalances",
     "params" :{
-        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7haclsz5r"
+        "address":"X-avax1c79e0dd0susp7dc8udq34jgk2yvve7hapvdyht"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -989,9 +989,73 @@ curl -X POST --data '{
 }
 ```
 
+### avm.getAddressTxs <a id="avm-get-address-txs-api"></a>
+
+Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
+
+* A UTXO that the transaction consumes was at least partially owned by the address.
+* A UTXO that the transaction produces is at least partially owned by the address.
+
+Note: Indexing \(`index-transactions`\) must be enabled in the X-chain config.
+
+#### **Signature**
+
+```cpp
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+**Request parameters**
+
+* `address`: The address for which we're fetching related transactions
+* `assetID`: Only return transactions that changed the balance of this asset. Must be an ID or an alias for an asset.
+* `pageSize`: Number of items to return per page. Optional. Defaults to 1024.
+
+**Response parameters**
+
+* `txIDs`: List of transaction IDs that affected the balance of this address.
+* `cursor`: Page number or offset. Use this in request to get the next page.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txIDs": [
+            "SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"
+        ],
+        "cursor": "1"
+    },
+    "id": 1
+}
+```
+
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be, `"cb58"`, `"hex"` or `"json"`. Defaults to "cb58".
 
 #### **Signature**
 
@@ -1108,7 +1172,7 @@ avm.getUTXOs({
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example**
 
@@ -1371,7 +1435,7 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1789,7 +1853,7 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 This call is made to the wallet API endpoint:
 
@@ -1966,5 +2030,114 @@ curl -X POST --data '{
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
     }
 }
+```
+
+### events
+
+Listen for transactions on a specified address.
+
+This call is made to the events API endpoint:
+
+`/ext/bc/X/events`
+
+#### **Golang Example**
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "log"
+    "net"
+    "net/http"
+    "sync"
+
+    "github.com/ava-labs/avalanchego/api"
+    "github.com/ava-labs/avalanchego/pubsub"
+    "github.com/gorilla/websocket"
+)
+
+func main() {
+    dialer := websocket.Dialer{
+        NetDial: func(netw, addr string) (net.Conn, error) {
+            return net.Dial(netw, addr)
+        },
+    }
+
+    httpHeader := http.Header{}
+    conn, _, err := dialer.Dial("ws://localhost:9650/ext/bc/X/events", httpHeader)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup := &sync.WaitGroup{}
+    waitGroup.Add(1)
+
+    readMsg := func() {
+        defer waitGroup.Done()
+
+        for {
+            mt, msg, err := conn.ReadMessage()
+            if err != nil {
+                log.Println(err)
+                return
+            }
+            switch mt {
+            case websocket.TextMessage:
+                log.Println(string(msg))
+            default:
+                log.Println(mt, string(msg))
+            }
+        }
+    }
+
+    go readMsg()
+
+    cmd := &pubsub.Command{NewSet: &pubsub.NewSet{}}
+    cmdmsg, err := json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    var addresses []string
+    addresses = append(addresses, " X-fuji....")
+    cmd = &pubsub.Command{AddAddresses: &pubsub.AddAddresses{JSONAddresses: api.JSONAddresses{Addresses: addresses}}}
+    cmdmsg, err = json.Marshal(cmd)
+    if err != nil {
+        panic(err)
+    }
+
+    err = conn.WriteMessage(websocket.TextMessage, cmdmsg)
+    if err != nil {
+        panic(err)
+    }
+
+    waitGroup.Wait()
+}
+```
+
+**Operations**
+
+| Command | Description | Example | Arguments |
+| :--- | :--- | :--- | :--- |
+| **NewSet** | create a new address map set | {"newSet":{}} |  |
+| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
+| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":\["X-fuji..."\]}} | addresses - list of addresses to match |
+
+Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
+
+**Set details**
+
+* **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
+* **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered.  If the addresses is in the filter, you will be sent the transaction.
+
+#### **Example Response**
+
+```cpp
+2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
 ```
 

@@ -10,12 +10,12 @@
 
 ### Variables
 
-* [serializer](api_platformvm_importtx.md#const-serializer)
+* [serialization](api_platformvm_importtx.md#const-serialization)
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/importtx.ts:21](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/importtx.ts#L21)*
+*Defined in [src/apis/platformvm/importtx.ts:22](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/importtx.ts#L22)*

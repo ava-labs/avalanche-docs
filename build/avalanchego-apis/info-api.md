@@ -184,8 +184,20 @@ Get the version of this node.
 #### **Signature**
 
 ```cpp
-info.getNodeVersion() -> {version: string}
+info.getNodeVersion() -> {
+    version: string,
+    databaseVersion: string,
+    gitCommit: string,
+    vmVersions: map[string]string,
+}
 ```
+
+where:
+
+* `version` is this node's version
+* `databaseVersion` is the version of the database this node is using
+* `gitCommit` is the Git commit that this node was built from
+* `vmVersions` is map where each key/value pair is the name of a VM, and the version of that VM this node runs
 
 #### **Example Call**
 
@@ -199,11 +211,18 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```javascript
 {
     "jsonrpc": "2.0",
     "result": {
-        "version": "avalanche/1.1.0"
+        "version": "avalanche/1.4.10",
+        "databaseVersion": "v1.4.5",
+        "gitCommit": "a3930fe3fa115c018e71eb1e97ca8cec34db67f1",
+        "vmVersions": {
+            "avm": "v1.4.10",
+            "evm": "v0.5.5-rc.1",
+            "platform": "v1.4.10"
+        }
     },
     "id": 1
 }
@@ -253,7 +272,9 @@ Get a description of peer connections.
 #### **Signature**
 
 ```cpp
-info.peers() -> 
+info.peers({
+    nodeIDs: string[] // optional
+}) -> 
 {
     numPeers: int,
     peers:[]{
@@ -267,13 +288,18 @@ info.peers() ->
 }
 ```
 
+* `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+
 #### **Example Call**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"info.peers"
+    "method" :"info.peers",
+    "params": {
+        "nodeIDs": []
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 

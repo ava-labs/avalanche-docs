@@ -1,4 +1,4 @@
-# Run an Avalanche Node Monitoring
+# Monitor an Avalanche Node
 
 _Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
 
@@ -10,7 +10,7 @@ This tutorial will show how to set up infrastructure to monitor an instance of [
 
 * [Prometheus](https://prometheus.io/) to gather and store data
 * [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) to get information about the node
+* AvalancheGo’s [metrics API](https://docs.avax.network/build/avalanchego-apis/metrics-api) to get information about the node
 * [Grafana](https://grafana.com/) to visualize data on a dashboard.
 
 Prerequisites:
@@ -41,6 +41,16 @@ sudo useradd -M -r -s /bin/false prometheus
 sudo mkdir /etc/prometheus /var/lib/prometheus
 ```
 
+Get the necessary utilities, in case they are not already installed:
+
+```cpp
+sudo apt-get install -y apt-transport-https
+```
+
+```cpp
+sudo apt-get install -y software-properties-common wget
+```
+
 Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
 
 ```cpp
@@ -48,15 +58,15 @@ mkdir -p /tmp/prometheus && cd /tmp/prometheus
 ```
 
 ```cpp
-wget https://github.com/prometheus/prometheus/releases/download/v2.21.0/prometheus-2.21.0.linux-amd64.tar.gz
+wget https://github.com/prometheus/prometheus/releases/download/v2.25.0/prometheus-2.25.0.linux-amd64.tar.gz
 ```
 
 ```cpp
-tar xvf prometheus-2.21.0.linux-amd64.tar.gz
+tar xvf prometheus-2.25.0.linux-amd64.tar.gz
 ```
 
 ```cpp
-cd prometheus-2.21.0.linux-amd64
+cd prometheus-2.25.0.linux-amd64
 ```
 
 Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
@@ -107,8 +117,7 @@ Type=simple
 User=prometheus
 Group=prometheus
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/prometheus   --config.file=/etc/prometheus/prometheus.yml   --storage.tsdb.path=/var/lib/prometheus   --web.console.templates=/
-etc/prometheus/consoles   --web.console.libraries=/etc/prometheus/console_libraries   --web.listen-address=0.0.0.0:9090   --web.external-url=
+ExecStart=/usr/local/bin/prometheus   --config.file=/etc/prometheus/prometheus.yml   --storage.tsdb.path=/var/lib/prometheus   --web.console.templates=/etc/prometheus/consoles   --web.console.libraries=/etc/prometheus/console_libraries   --web.listen-address=0.0.0.0:9090   --web.external-url=
 
 SyslogIdentifier=prometheus
 Restart=always
@@ -134,7 +143,7 @@ sudo systemctl enable prometheus
 Prometheus should now be running. To make sure, we can check with:
 
 ```cpp
-systemctl status prometheus
+sudo systemctl status prometheus
 ```
 
 which should produce something like:
@@ -164,14 +173,6 @@ You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
 ## Install Grafana
 
 To set up Grafana project repositories with Ubuntu:
-
-```cpp
-sudo apt-get install -y apt-transport-https
-```
-
-```cpp
-sudo apt-get install -y software-properties-common wget
-```
 
 ```cpp
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
@@ -226,7 +227,7 @@ On Grafana’s web interface:
 * Select Prometheus.
 * In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
 * Click `Save & Test`
-* Check for “Data source is working” green message.
+* Check for "Data source is working" green message.
 
 ## Set up node\_exporter
 
@@ -241,12 +242,14 @@ curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | 
 change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
 
 ```cpp
-tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
+tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
 ```
 
 ```cpp
-sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
+sudo mv node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
 ```
+
+Check that it is installed correctly with:
 
 ```cpp
 node_exporter --version
@@ -262,7 +265,7 @@ sudo nano /etc/systemd/system/node_exporter.service
 
 ```cpp
 [Unit]
-Description=Prometheus
+Description=Prometheus Node Exporter
 Documentation=https://github.com/prometheus/node_exporter
 Wants=network-online.target
 After=network-online.target
@@ -309,9 +312,13 @@ sudo systemctl start node_exporter
 sudo systemctl enable node_exporter
 ```
 
+Again, we check that the service is running correctly:
+
 ```cpp
 sudo systemctl status node_exporter
 ```
+
+If you see messages such as `Ignoring unknown escape sequences`, double check that the contents of the service file is correctly copied over and there are no extra backslashes or extra newlines. Correct if necessary and restart the service afterwards.
 
 Now, we’re ready to tie it all together.
 
@@ -342,7 +349,7 @@ sudo nano /etc/prometheus/prometheus.yml
           alias: 'machine'
 ```
 
-**Indentation is important**. Make sure `-job_name` is aligned with existing `-job_name entry`, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
+**Indentation is important**. Make sure `-job_name` is aligned vertically with existing `-job_name` entry, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
 
 Save the config file and restart Prometheus:
 
@@ -356,13 +363,16 @@ Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You s
 * avalanchego
 * avalanchego-machine
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+Make sure that all of them have `State` as `UP`.
+
+Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards).
 
 To import the preconfigured dashboard:
 
 * Open Grafana’s web interface
 * Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file
+* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
+* Select `Prometheus` as Data Source
 
 That’s it! You may now marvel at all the things your node does. Woohoo!
 

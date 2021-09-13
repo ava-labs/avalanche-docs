@@ -1,4 +1,4 @@
-# Add a Validator
+# Add a node to the Validator Set
 
 ## Introduction
 
@@ -12,7 +12,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 ## Requirements
 
-You've completed [Run an Avalanche Node](../../get-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+You've completed [Run an Avalanche Node](run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
@@ -218,7 +218,7 @@ The response should include the node we just added:
                 "endtime": "1584121156",
                 "stakeAmount": "2000000000000",
             }
-        ] 
+        ]
     },
     "id": 1
 }
@@ -267,7 +267,7 @@ Similar to above, these are the Unix times that the validator will start and sto
 
 `weight`
 
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus.
+This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` \(default 20\). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 
 `changeAddr`
 
@@ -288,7 +288,7 @@ curl -X POST --data '{
         "subnetID":"nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr",
         "startTime":'$(date --date="10 minutes" +%s)',
         "endTime":'$(date --date="30 days" +%s)',
-        "weight":1,
+        "weight":30,
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"USERNAME",
         "password":"PASSWORD"
@@ -345,7 +345,7 @@ The response should include the node we just added:
                 "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
                 "startTime":1584042912,
                 "endTime":1584121156,
-                "weight": "1"
+                "weight": "30"
             }
         ]
     },

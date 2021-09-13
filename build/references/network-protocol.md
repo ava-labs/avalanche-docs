@@ -268,7 +268,7 @@ The OpCode used by `PushQuery` messages is: `0x06`.
 
 ### What PushQuery contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
+A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Container`.
 
 **`SubnetID`** defines which subnet this message is destined for.
 
@@ -293,7 +293,7 @@ The node should attempt to add the container to consensus. After the container i
 
 ### When PushQuery is sent
 
-A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+A node should send a `PushQuery` message if it wants to learn of this node’s current preferences and it feels that it is possible the node hasn’t learned of `Container` yet. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for "awhile".
 
 ### PushQuery Example
 
@@ -329,7 +329,7 @@ The OpCode used by `PullQuery` messages is: `0x07`.
 
 ### What PullQuery contains
 
-A `Put` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
+A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 
 **`SubnetID`** defines which subnet this message is destined for.
 
@@ -351,7 +351,7 @@ If the node hasn’t added `ContainerID`, it should attempt to add the container
 
 ### When PullQuery is sent
 
-A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for “awhile”.
+A node should send a `PullQuery` message if it wants to learn of this node’s current preferences and it feels that it quite likely the node has already learned of `Container`. The node will want to learn of nodes preferences when it learns of a new container or it has had pending containers for "awhile".
 
 ### PullQuery Example
 

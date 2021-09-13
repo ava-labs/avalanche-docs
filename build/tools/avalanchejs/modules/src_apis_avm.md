@@ -14,6 +14,8 @@
 * [BaseTx](src_apis_avm.md#basetx)
 * [CreateAssetTx](src_apis_avm.md#createassettx)
 * [ExportTx](src_apis_avm.md#exporttx)
+* [GenesisAsset](src_apis_avm.md#genesisasset)
+* [GenesisData](src_apis_avm.md#genesisdata)
 * [ImportTx](src_apis_avm.md#importtx)
 * [InitialStates](src_apis_avm.md#initialstates)
 * [KeyChain](src_apis_avm.md#keychain)
@@ -93,6 +95,18 @@ ___
 ###  ExportTx
 
 • **ExportTx**:
+
+___
+
+###  GenesisAsset
+
+• **GenesisAsset**:
+
+___
+
+###  GenesisData
+
+• **GenesisData**:
 
 ___
 

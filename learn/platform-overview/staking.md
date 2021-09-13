@@ -26,7 +26,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 * The maximum amount of time one can stake funds for delegation is 1 year
 * The minimum delegation fee rate is 2%
 * The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 60%
+* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 80%
 
 ## Validators
 
@@ -45,7 +45,7 @@ The minimum amount that a validator must stake is 2,000 AVAX.
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 {% endhint %}
 
 ### Running a Validator <a id="running-a-validator"></a>
@@ -70,13 +70,17 @@ The likely reason that your node is not connected to another node is that NAT tr
 
 The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
 
-You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in “cold" addresses whose private key is not on any computer.
+You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in "cold" addresses whose private key is not on any computer.
 
 #### Monitoring <a id="monitoring"></a>
 
 Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
+
+#### Validating In Fuji
+
+Validating in Fuji requires just `1 AVAX`. So you can easily set up your validator node and learn more about validating.
 
 ## Delegators
 

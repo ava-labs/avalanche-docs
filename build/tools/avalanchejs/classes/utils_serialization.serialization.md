@@ -33,7 +33,7 @@
 
 \+ **new Serialization**(): *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L83)*
+*Defined in [src/utils/serialization.ts:99](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L99)*
 
 **Returns:** *[Serialization](utils_serialization.serialization.md)*
 
@@ -43,7 +43,7 @@
 
 • **bintools**: *[BinTools](utils_bintools.bintools.md)*
 
-*Defined in [src/utils/serialization.ts:88](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L88)*
+*Defined in [src/utils/serialization.ts:104](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L104)*
 
 ___
 
@@ -51,59 +51,67 @@ ___
 
 ▪ **instance**: *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:83](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L83)*
+*Defined in [src/utils/serialization.ts:99](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L99)*
 
 ## Methods
 
 ###  bufferToType
 
-▸ **bufferToType**(`vb`: Buffer, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *any*
+▸ **bufferToType**(`vb`: Buffer, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: any[]): *any*
 
-*Defined in [src/utils/serialization.ts:100](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L100)*
+*Defined in [src/utils/serialization.ts:124](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L124)*
+
+Convert [Buffer](https://github.com/feross/buffer) to [SerializedType](../modules/utils_serialization.md#serializedtype)
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`vb` | Buffer |
-`type` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`...args` | Array‹any› |
+Name | Type | Description |
+------ | ------ | ------ |
+`vb` | Buffer | [Buffer](https://github.com/feross/buffer) |
+`type` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`...args` | any[] | - |
 
 **Returns:** *any*
+
+type of [SerializedType](../modules/utils_serialization.md#serializedtype)
 
 ___
 
 ###  decoder
 
-▸ **decoder**(`value`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *any*
+▸ **decoder**(`value`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: any[]): *any*
 
-*Defined in [src/utils/serialization.ts:193](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L193)*
+*Defined in [src/utils/serialization.ts:244](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L244)*
+
+Convert value to type of [SerializedType](../modules/utils_serialization.md#serializedtype) or [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`value` | string |
-`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) |
-`intype` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`outtype` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`...args` | Array‹any› |
+Name | Type | Description |
+------ | ------ | ------ |
+`value` | string | - |
+`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) |
+`intype` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`outtype` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`...args` | any[] | - |
 
 **Returns:** *any*
+
+type of [SerializedType](../modules/utils_serialization.md#serializedtype) or [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)
 
 ___
 
 ###  deserialize
 
-▸ **deserialize**(`input`: object, `output`: [Serializable](utils_serialization.serializable.md)): *void*
+▸ **deserialize**(`input`: [Serialized](../interfaces/common_interfaces.serialized.md), `output`: [Serializable](utils_serialization.serializable.md)): *void*
 
-*Defined in [src/utils/serialization.ts:217](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L217)*
+*Defined in [src/utils/serialization.ts:268](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L268)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`input` | object |
+`input` | [Serialized](../interfaces/common_interfaces.serialized.md) |
 `output` | [Serializable](utils_serialization.serializable.md) |
 
 **Returns:** *void*
@@ -112,29 +120,33 @@ ___
 
 ###  encoder
 
-▸ **encoder**(`value`: any, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *string*
+▸ **encoder**(`value`: any, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `intype`: [SerializedType](../modules/utils_serialization.md#serializedtype), `outtype`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: any[]): *any*
 
-*Defined in [src/utils/serialization.ts:181](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L181)*
+*Defined in [src/utils/serialization.ts:223](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L223)*
+
+Convert value to type of [SerializedType](../modules/utils_serialization.md#serializedtype) or [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`value` | any |
-`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) |
-`intype` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`outtype` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`...args` | Array‹any› |
+Name | Type | Description |
+------ | ------ | ------ |
+`value` | any | - |
+`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) |
+`intype` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`outtype` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`...args` | any[] | - |
 
-**Returns:** *string*
+**Returns:** *any*
+
+type of [SerializedType](../modules/utils_serialization.md#serializedtype) or [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)
 
 ___
 
 ###  serialize
 
-▸ **serialize**(`serialize`: [Serializable](utils_serialization.serializable.md), `vm`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `notes`: string): *object*
+▸ **serialize**(`serialize`: [Serializable](utils_serialization.serializable.md), `vm`: string, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding), `notes`: string): *[Serialized](../interfaces/common_interfaces.serialized.md)*
 
-*Defined in [src/utils/serialization.ts:204](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L204)*
+*Defined in [src/utils/serialization.ts:255](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L255)*
 
 **Parameters:**
 
@@ -145,25 +157,29 @@ Name | Type | Default |
 `encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) | "display" |
 `notes` | string | undefined |
 
-**Returns:** *object*
+**Returns:** *[Serialized](../interfaces/common_interfaces.serialized.md)*
 
 ___
 
 ###  typeToBuffer
 
-▸ **typeToBuffer**(`v`: any, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: Array‹any›): *Buffer*
+▸ **typeToBuffer**(`v`: any, `type`: [SerializedType](../modules/utils_serialization.md#serializedtype), ...`args`: any[]): *Buffer*
 
-*Defined in [src/utils/serialization.ts:132](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L132)*
+*Defined in [src/utils/serialization.ts:164](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L164)*
+
+Convert [SerializedType](../modules/utils_serialization.md#serializedtype) to [Buffer](https://github.com/feross/buffer)
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`v` | any |
-`type` | [SerializedType](../modules/utils_serialization.md#serializedtype) |
-`...args` | Array‹any› |
+Name | Type | Description |
+------ | ------ | ------ |
+`v` | any | type of [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`type` | [SerializedType](../modules/utils_serialization.md#serializedtype) | [SerializedType](../modules/utils_serialization.md#serializedtype) |
+`...args` | any[] | - |
 
 **Returns:** *Buffer*
+
+[Buffer](https://github.com/feross/buffer)
 
 ___
 
@@ -171,7 +187,7 @@ ___
 
 ▸ **getInstance**(): *[Serialization](utils_serialization.serialization.md)*
 
-*Defined in [src/utils/serialization.ts:93](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/utils/serialization.ts#L93)*
+*Defined in [src/utils/serialization.ts:109](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/utils/serialization.ts#L109)*
 
 Retrieves the Serialization singleton.
 

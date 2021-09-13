@@ -321,7 +321,7 @@ platform.createBlockchain(
 * `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
 * `name` is a human-readable name for the new blockchain. Not necessarily unique.
 * `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
+* `encoding` specifies the format to use for `genesisData`. Can be either "cb58" or "hex". Defaults to "cb58". Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
@@ -785,7 +785,8 @@ The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcur
 
 ```cpp
 platform.getCurrentValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -821,6 +822,7 @@ platform.getCurrentValidators({
 ```
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+* `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
 * `validators`:
   * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
@@ -983,7 +985,8 @@ List the validators in the pending validator set of the specified Subnet. Each v
 
 ```cpp
 platform.getPendingValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -1006,6 +1009,7 @@ platform.getPendingValidators({
 ```
 
 * `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
+* `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
 * `validators`:
   * `txID` is the validator transaction.
   * `startTime` is the Unix time when the validator starts validating the Subnet.
@@ -1058,6 +1062,58 @@ curl -X POST --data '{
                 "nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
             }
         ]
+    },
+    "id": 1
+}
+```
+
+### platform.getRewardUTXOs
+
+Returns the UTXOs that were rewarded after the provided transaction's staking or delegation period ended.
+
+#### **Signature**
+
+```cpp
+platform.getRewardUTXOs({
+    txID: string,
+    encoding: string //optional
+}) -> {
+    numFetched: integer,
+    utxos: []string,
+    encoding: string
+}
+```
+
+* `txID` is the ID of the staking or delegating transaction
+* `numFetched` is the number of returned UTXOs
+* `utxos` is an array of encoded reward UTXOs 
+* `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getRewardUTXOs",
+    "params": {
+        "txID": "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y5"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "2",
+        "utxos": [
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+        ],
+        "encoding": "cb58"
     },
     "id": 1
 }
@@ -1239,7 +1295,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1293,6 +1349,13 @@ platform.getTxStatus({
     txID: string
 }) -> {status: string}
 ```
+
+`status` is one of:
+
+* `Committed`: The transaction is \(or will be\) accepted by every node
+* `Processing`: The transaction is being voted on by this node
+* `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field for more information
+* `Unknown`: The transaction hasn’t been seen by this node
 
 #### **Example Call**
 
@@ -1355,7 +1418,7 @@ platform.getUTXOs(
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
 * When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
+* `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 
 #### **Example**
 
@@ -1477,6 +1540,57 @@ This gives response:
 }
 ```
 
+### platform.getValidatorsAt
+
+Get the validators and their weights of a subnet or the Primary Network at a given P-Chain height.
+
+#### **Signature**
+
+```cpp
+platform.getValidatorsAt(
+    {
+        height: int,
+        subnetID: string, // optional
+    }
+)
+```
+
+* `height` is the P-Chain height to get the validator set at.
+* `subnetID` is the subnet ID to get the validator set of. If not given, gets validator set of the Primary Network.
+
+#### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getValidatorsAt",
+    "params": {
+        "height":1
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+
+```
+
+#### **Example Response**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "validators": {
+            "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg": 2000000000000000,
+            "NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu": 2000000000000000,
+            "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ": 2000000000000000,
+            "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN": 2000000000000000,
+            "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5": 2000000000000000
+        }
+    },
+    "id": 1
+}
+```
+
+
 ### platform.importAVAX
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
@@ -1597,7 +1711,7 @@ platform.issueTx({
 ```
 
 * `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
+* `encoding` specifies the encoding format for the transaction bytes. Can be either "cb58" or "hex". Defaults to "cb58".
 * `txID` is the transaction’s ID.
 
 #### **Example Call**

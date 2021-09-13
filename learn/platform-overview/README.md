@@ -8,7 +8,7 @@ Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#e
 
 Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
 
-![Primary network](../../.gitbook/assets/primary-network.png)
+![Primary network](../../.gitbook/assets/image%20%2821%29.png)
 
 ## Subnets
 
@@ -20,11 +20,13 @@ A subnet manages its own membership, and it may require that its constituent val
 
 Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
 
-Some examples include:
+Some examples of requirements include:
 
 * Validators must be located in a given country
 * Validators must pass a KYC/AML checks
 * Validators must hold a certain license
+
+(To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
 
 ### Support for Private Blockchains
 
@@ -58,17 +60,19 @@ Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized a
 
 ### Creating Your Blockchain and Virtual Machine
 
-Avalanche does not yet support the creation of new Virtual Machines \(VMs\). Presently, Avalanche only supports the creation of new instances of the Avalanche VM.
+Avalanche supports the creation of new instances of the Avalanche VM.
 
-{% page-ref page="../../build/tutorials/platform/create-a-new-blockchain.md" %}
+{% page-ref page="../../build/tutorials/platform/create-avm-blockchain.md" %}
 
-In the future, Avalanche will allow you to define and launch custom blockchains, and we’ll release SDKs to help you do so.
+Avalanche also supports creating custom blockchains with virtual machines.
 
 {% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
 
+{% page-ref page="../../build/tutorials/platform/create-custom-blockchain.md" %}
+
 ## Exchange Chain \(X-Chain\)
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like “can’t be traded until tomorrow” or “can only be sent to US citizens.”
+The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 

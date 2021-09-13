@@ -14,7 +14,7 @@
 
 ### Variables
 
-* [serializer](api_platformvm_inputs.md#const-serializer)
+* [serialization](api_platformvm_inputs.md#const-serialization)
 
 ### Functions
 
@@ -22,19 +22,19 @@
 
 ## Variables
 
-### `Const` serializer
+### `Const` serialization
 
-• **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)‹›* = Serialization.getInstance()
+• **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/inputs.ts:16](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/inputs.ts#L16)*
+*Defined in [src/apis/platformvm/inputs.ts:17](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/inputs.ts#L17)*
 
 ## Functions
 
 ### `Const` SelectInputClass
 
-▸ **SelectInputClass**(`inputid`: number, ...`args`: Array‹any›): *[Input](../classes/common_inputs.input.md)*
+▸ **SelectInputClass**(`inputid`: number, ...`args`: any[]): *[Input](../classes/common_inputs.input.md)*
 
-*Defined in [src/apis/platformvm/inputs.ts:25](https://github.com/ava-labs/avalanchejs/blob/2850ce5/src/apis/platformvm/inputs.ts#L25)*
+*Defined in [src/apis/platformvm/inputs.ts:26](https://github.com/ava-labs/avalanchejs/blob/ae78dee/src/apis/platformvm/inputs.ts#L26)*
 
 Takes a buffer representing the output and returns the proper [Input](../classes/common_inputs.input.md) instance.
 
@@ -43,7 +43,7 @@ Takes a buffer representing the output and returns the proper [Input](../classes
 Name | Type | Description |
 ------ | ------ | ------ |
 `inputid` | number | A number representing the inputID parsed prior to the bytes passed in  |
-`...args` | Array‹any› | - |
+`...args` | any[] | - |
 
 **Returns:** *[Input](../classes/common_inputs.input.md)*
 
