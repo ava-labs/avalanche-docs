@@ -213,12 +213,12 @@ avax.getAtomicTx({
 
 **Request**
 
-* `txID` is the transacion ID. They should be in cb58 format.
+* `txID` is the transacion ID. It should be in cb58 format.
 * `encoding` is the encoding format to use. Can be either `cb58` or `hex`. Defaults to `cb58`.
 
 **Response**
 
-* `tx` is the encoded to `encoding`.
+* `tx` is the transaction encoded to `encoding`.
 * `encoding` is the `encoding`.
 * `blockHeight` is the height of the block which the transaction was included in.
 
