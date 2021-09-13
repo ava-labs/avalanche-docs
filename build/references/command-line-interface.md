@@ -290,7 +290,7 @@ Specifies the directory that contains chain configs, as described above. Default
 
 #### C-Chain Configs
 
-Currently, the C-Chain is the only chain that supports custom configurations. In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
 For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`, with these contents:
 
@@ -305,6 +305,21 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 ```
 
 For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
+
+#### X-Chain Configs
+
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
+
+For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`, with these contents:
+
+```javascript
+{
+  "index-transactions": true,
+  "index-allow-incomplete": false
+}
+```
+
+For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
 
 ### C-Chain / Coreth <a id="coreth-config"></a>
 
@@ -330,7 +345,8 @@ This allows you to specify a config to be passed into the C-Chain. The default v
   "pruning-enabled": false,
   "api-max-duration": 0, // Default to no maximum
   "api-max-blocks-per-request": 0, // Default to no maximum
-  "allow-unfinalized-queries": false
+  "allow-unfinalized-queries": false,
+  "log-level": "info"
 }
 ```
 
@@ -408,23 +424,34 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
-#### Continuous Profiling
+#### Log Level
 
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `continuous-profiler-dir` is set.
+`log-level` \(string\):
 
-`continuous-profiler-dir` \(string\):
+Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
 
-If non-empty, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the empty string \(not enabled\).
+### Continuous Profiling
 
-`continuous-profiler-frequency` \(duration\):
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
+
+
+`profile-continuous-enabled` \(boolean\):
+
+Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
+
+`profile-dir` \(string\):
+
+If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+
+`profile-continuous-freq` \(duration\):
 
 How often a new CPU/memory profile is created. Defaults to `15m`.
 
-`continuous-profiler-max-files` \(int\):
+`profile-continuous-max-files` \(int\):
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
-#### Keystore Settings
+### Keystore Settings
 
 `keystore-directory` \(string\):
 
@@ -662,4 +689,33 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 ```
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
+
+### X-Chain / AVM <a id="avm-config"></a>
+
+This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
+
+```javascript
+{
+  "index-transactions": false,
+  "index-allow-incomplete": false
+}
+```
+
+Default values are overridden only if explicitly specified in the config.
+
+The parameters are as follows:
+
+#### Transaction Indexing
+
+`index-transactions` \(boolean\):
+
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api).
+
+Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` \(see below\).
+
+`index-allow-incomplete` \(boolean\):
+
+Allows incomplete indices. Default value is `false`.
+
+This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 

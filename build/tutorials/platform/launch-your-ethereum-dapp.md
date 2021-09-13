@@ -48,7 +48,9 @@ Instead of proxying network operations through MetaMask, you can use the public 
 
 The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) for the mainnet and [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) for the testnet.
 
-For more information, refer to the [documentation](../../tools/public-api.md).
+For more information, see documentation:
+
+{% page-ref page="../../tools/public-api.md" %}
 
 ### Running Your Own Node
 
@@ -60,7 +62,11 @@ For development purposes, [here](../nodes-and-staking/run-avalanche-node.md) is 
 
 If you need a private test network to test your dapp, [Avash](https://github.com/ava-labs/avash) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-Avash uses Lua as a scripting language for orchestrating local networks. You can find a tutorial for Avash [here](../../tools/avash.md).
+Avash uses Lua as a scripting language for orchestrating local networks.
+
+For more information, see documentation:
+
+{% page-ref page="../../tools/avash.md" %}
 
 ## Developing and Deploying Contracts
 
@@ -68,17 +74,22 @@ Being an Ethereum-compatible blockchain, all of the usual Ethereum developer too
 
 ### Remix
 
-[Here](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to Avalanche network.
+There is a tutorial for using Remix to deploy smart contracts on Avalanche. It relies on MetaMask for access to the Avalanche network.
+
+{% page-ref page="../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
 
 ### Truffle
 
-You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in [this](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md) tutorial.
+You can also use Truffle to test and deploy smart contracts on Avalanche. Find out how in this tutorial:
+
+{% page-ref page="../smart-contracts/using-truffle-with-the-avalanche-c-chain.md" %}
 
 ### Hardhat
 
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
-[Here](https://github.com/ava-labs/avalanche-smart-contract-quickstart) is a quickstart repository that our developers use to start new projects. It is already configured for Avalanche so no additional setup is required.
+For more information see:
+{% page-ref page="../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md" %}
 
 ## Avalanche Explorer
 
@@ -133,27 +144,29 @@ On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so yo
 
 Gas on Avalanche is burned. Validators don't keep the gas for themselves \(they get rewarded for staking\), so the dynamics of 'gas wars' where higher-priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
 
-### Coreth Configuration
+### C-Chain Configuration
 
-By default, coreth is configured in a way that is optimal for publicly running nodes used as validators. For development or dapps, you may want to change some defaults to settings more appropriate for your usage. This is done through node's command-line options. Command-line options for coreth are listed [here](../../references/command-line-interface.md#coreth-config), along with their default values.
+Individual chains, including the C-Chain, have their own configuration options that can be given in a config file. You may want to use a C-Chain configiguration other than the default when developing dapps. For more details on chain configs, see [here.](../../references/command-line-interface.md#chain-configs)
 
-You can supply options on the command line, or use the config file, which can be easier to work with when a lot of custom options are configured. Use `—config-file=config.json` option, and then provide a complete configuration in the `config.json` file, for example:
+The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/command-line-interface.md#coreth-config). An example C-Chain config file:
 
 ```javascript
 {
-  "coreth-config": {
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "eth-api-enabled": true,
-    "personal-api-enabled": false,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": true,
-    "web3-api-enabled": true,
-    "local-txs-enabled": true
-  }
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": true,
+  "debug-api-enabled": true,
+  "web3-api-enabled": true,
+  "local-txs-enabled": true
 }
 ```
+
+{% hint style="warning" %}
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
+{% endhint %}
 
 ### Using `eth_newFilter` and Related Calls with the Public API
 

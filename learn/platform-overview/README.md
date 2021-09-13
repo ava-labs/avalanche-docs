@@ -20,11 +20,13 @@ A subnet manages its own membership, and it may require that its constituent val
 
 Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
 
-Some examples include:
+Some examples of requirements include:
 
 * Validators must be located in a given country
 * Validators must pass a KYC/AML checks
 * Validators must hold a certain license
+
+(To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
 
 ### Support for Private Blockchains
 

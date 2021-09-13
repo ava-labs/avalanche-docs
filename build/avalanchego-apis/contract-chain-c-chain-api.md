@@ -110,6 +110,74 @@ curl -X POST --data '{
 }
 ```
 
+### eth_baseFee
+
+Get the base fee for the next block.
+
+#### **Signature**
+
+```cpp
+eth_baseFee() -> {}
+```
+
+`result` is the hex value of the base fee for the next block.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_baseFee",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x34630b8a00"
+}
+```
+
+### eth_maxPriorityFeePerGas
+
+Get the priority fee needed to be included in a block.
+
+#### **Signature**
+
+```cpp
+eth_maxPriorityFeePerGas() -> {}
+```
+
+`result` is hex value of the priority fee needed to be included in a block.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_maxPriorityFeePerGas",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x2540be400"
+}
+```
+
+For more information on dynamic fees see the [C-Chain section of the transaction fee documentation](https://docs.avax.network/learn/platform-overview/transaction-fees#c-chain-fees).
+
 ## Avalanche Specific APIs
 
 ### Avalanche Specific API Endpoints
@@ -124,6 +192,62 @@ To interact with other instances of the EVM AVAX endpoints:
 
 ```cpp
 /ext/bc/blockchainID/avax
+```
+
+### avax.getAtomicTx
+
+Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned transaction. Can be either `cb58` or `hex`. Defaults to `cb58`.
+
+#### Signature
+
+```go
+avax.getAtomicTx({
+    txID: string,
+    encoding: string, //optional
+}) -> {
+    tx: string,
+    encoding: string,
+    blockHeight: string
+}
+```
+
+**Request**
+
+* `txID` is the transacion ID. It should be in cb58 format.
+* `encoding` is the encoding format to use. Can be either `cb58` or `hex`. Defaults to `cb58`.
+
+**Response**
+
+* `tx` is the transaction encoded to `encoding`.
+* `encoding` is the `encoding`.
+* `blockHeight` is the height of the block which the transaction was included in.
+
+#### Example Call
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.getAtomicTx",
+    "params" :{
+        "txID":"2GD5SRYJQr2kw5jE73trBFiAgVQyrCaeg223TaTyJFYXf2kPty",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "tx": "111111115k3oJsP1JGxvsZPFh1WXzSYNVDtvgvZ4qDWtAs5ccogA1RtT3Me5x8xgkj7cyxaNGEHuMv5U34qo94fnvHweLeSRf31ggt3MoD7MHSDw6LbiXeaJa3uwBDHzd6tPxw17478X13Ff7DkHtbWYYx2WTcJYk4nVP2swCHjBE3uQjmu6RdhtgZCxvnD6YVpEsXqvam6cDzpf5BLaosYCSt5p8SmLU2ppaSb6DPA4EW4679ygUxiDNP3SFagjUvzSrfBJRFCzsan4ZJqH8haYqpJL42TUN4q3eFKvscZfp2v2WWEEwJYmJP4Nc1P7wndeMxPFEm3vjkBaVUZ5k25TpYtghq6Kx897dVNaMSsTAoudwqTR1cCUGiR3bLfi82MgnvuApsYqtRfaD9deSHc8UA1ohPehkj9eaY",
+        "encoding": "cb58",
+        "blockHeight": "1"
+    },
+    "id": 1
+}
 ```
 
 ### avax.export
@@ -615,4 +739,3 @@ curl -X POST --data '{
     }
 }
 ```
-

@@ -2,6 +2,133 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.5.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3)\)
+
+This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
+
+**Uptime**
+* Changed minimum uptime requirement to receive a staking reward from 60% to 80%.
+
+**Networking**
+* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
+* Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
+* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --> `SendPut`). 
+
+**P-Chain**
+* Added functionality to track changes in validator weight by block.
+* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
+
+**C-Chain**
+* Incorporate changes from Geth v1.10.8
+* Remove references to Ancients
+
+**Consensus**
+* Added method `Timestamp()` to the `snowman.Block` interface.
+
+**Local Networks**
+* Updated the start time of the validators in the local genesis. The end time for validators specified in the local config in versions before v1.5.3 is Sep. 10, 2021 00:00:00 UTC. **Because of this, you must upgrade to AvalancheGo v1.5.3 in order to run a local network after this time.**
+
+**Config Options**
+* Added AvalancheGo config option `consensus-app-gossip-size`, which defines the number of peers an `AppGossip` message is gossiped to.
+* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` (as before.)
+
+## v1.5.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)\)
+
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
+
+**Coreth**
+
+* Patched a [Geth security vulnerability](https://twitter.com/go_ethereum/status/1430067637996990464)
+* Patched a panic in the api backend.
+
+**AVM**
+
+* Introduced stateless codec generation for improved tooling.
+
+**Consensus**
+
+* Added additional logging around bubbling votes.
+
+## v1.5.1-eth_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
+
+This update is a hotfix for v1.5.1 that allows using eth_call without the externally owned account check.
+
+## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
+
+This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
+
+**Configuration**
+
+* Removed option `bootstrap-retry-max-attempts` and added option `bootstrap-retry-warn-frequency`
+
+**Subnets**
+
+* Added `subnetID`s to the handshake message. This notifies peers about which subnets a node is interesting in syncing.
+* Optimized subnet container gossiping.
+
+**AVM**
+
+* Fixed `avm.GetTx`'s JSON endpoint to properly report `amount`s on UTXOs.
+
+**Bootstrapping**
+
+* Fixed busy loop that could occur if a node's internet dropped during bootstrapping, causing the node to report a fatal error.
+
+**RPCChainVM**
+
+* Improved caching of unverified blocks.
+
+**Coreth**
+
+* Updated to Geth v1.10.7.  
+
+## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
+
+**This change is not backwards compatible with previous releases.**
+
+This upgrade adds dynamic fees to the C-chain, along with various other improvements.
+
+The changes in the upgrade go into effect at 10 AM EDT, August 24th 2021 on Mainnet. You should upgrade your node before the changes go into effect, otherwise you may experience loss of uptime on your node.
+
+More info can be found [here](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60).
+
+**Network Upgrades**
+
+* Added dynamic fee calculations to the C-chain.
+* Increased `CreateSubnetTx` and `CreateChainTx` fees.
+* Fixed heap corruption bug in delegator validation.
+* Enforced `MaxStakeWeight` for delegation transactions.
+
+**Client Upgrades**
+
+* Added transaction indexing capabilities to the X-chain to enable historical lookups of transactions by address and asset.
+* Added `./avalanchego` as the default command in the docker image.
+* Used static dependency versions in the docker image.
+* Removed database migration support and deamon runner.
+* Refactored node config parsing.
+* Optimized container gossiping sampling.
+* Added the ability to statically build the AvalancheGo and EVM binaries.
+* Simplified the `Block` interface to only expose the parent block's ID rather than fetching the full parent block.
+* Added additional metrics for pending jobs in the consensus engines.
+* Refactored P-chain statuses to handle blockchain validation statuses separately from transaction confirmation statuses.
+
+**Updated APIs**
+
+* Added `GetAddressTxs` to the `avm` API.
+* Added `SetLoggerLevel` and `GetLoggerLevel` to the `Admin` API to allow fine grained tuning of log levels while the node is still running.
+* Added `GetConfig` to the `Admin` API to allow fetching the node config that the node is currently using.
+* Updated `platformvm.Client` to allow specifying `nodeID`s in `GetCurrentValidators` and `GetPendingValidators` and generalized the response to `GetStake`.
+
+**Updated CLI Arguments**
+
+* Removed `fetch-only`.
+* Added JSON config parsing to `avm` VM.
+  * Added `indexTransactions`
+  * Added `indexAllowIncomplete`
+
 ## PRE\_RELEASE v1.5.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji)\)
 
 **Please note that this release is unable to run mainnet - and will display "this node version doesn't support mainnet" if attempted to run with a mainnet configuration. If you run a mainnet node, no action is required until the official release is published next week.**

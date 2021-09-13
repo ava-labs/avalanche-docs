@@ -60,27 +60,56 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 truffle init
 ```
 
+Development (local) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+
+```text
+npm install @truffle/hdwallet-provider
+```
+
 ## Update truffle-config.js
 
 One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
 
 ```javascript
-const Web3 = require('web3');
+const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 const protocol = "http";
 const ip = "localhost";
 const port = 9650;
+const provider = new Web3.providers.HttpProvider(
+  `${protocol}://${ip}:${port}/ext/bc/C/rpc`
+);
+
+const privateKeys = [
+  "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+  "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
+  "0x15614556be13730e9e8d6eacc1603143e7b96987429df8726384c2ec4502ef6e",
+  "0x31b571bf6894a248831ff937bb49f7754509fe93bbd2517c9c73c4144c0e97dc",
+  "0x6934bef917e01692b789da754a0eae31a8536eb465e7bff752ea291dad88c675",
+  "0xe700bdbdbc279b808b1ec45f8c2370e4616d3a02c336e68d85d4668e08f53cff",
+  "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
+  "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
+  "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
+  "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
+];
+
 module.exports = {
   networks: {
-   development: {
-     provider: function() {
-      return new Web3.providers.HttpProvider(`${protocol}://${ip}:${port}/ext/bc/C/rpc`)
-     },
-     network_id: "*",
-     gas: 3000000,
-     gasPrice: 225000000000
-   }
-  }
+    development: {
+      provider: () => {
+        return new HDWalletProvider({
+          privateKeys: privateKeys,
+          providerOrUrl: provider,
+        });
+      },
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 225000000000,
+    },
+  },
 };
+
 ```
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
@@ -110,7 +139,7 @@ contract Storage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
     function retrieve() public view returns (uint256){
@@ -153,75 +182,79 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+## Accounts on C-chain
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
+When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations. We have added some pre-defined private keys as our accounts in the `truffle-config.json`. The first and default account should have some pre-funded AVAX.
 
-### Create an account
+### Truffle Accounts
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
+You can view imported accounts with truffle console.
 
-```text
-truffle console --network development
+To open the truffle console:
+```bash
+$ truffle console --network development
 ```
 
-Then, in the console, create the account:
+Note: If you see  `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
 
-```text
-truffle(development)> let account = await web3.eth.personal.newAccount()
+Inside truffle console:
+```bash
+truffle(development)> accounts
+[
+  '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+  '0x9632a79656af553F58738B0FB750320158495942',
+  '0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430',
+  '0x4Cf2eD3665F6bFA95cE6A11CFDb7A2EF5FC1C7E4',
+  '0x0B891dB1901D4875056896f28B6665083935C7A8',
+  '0x01F253bE2EBF0bd64649FA468bF7b95ca933BDe2',
+  '0x78A23300E04FB5d5D2820E23cc679738982e1fd5',
+  '0x3C7daE394BBf8e9EE1359ad14C1C47003bD06293',
+  '0x61e0B3CD93F36847Abbd5d40d6F00a8eC6f3cfFB',
+  '0x0Fa8EA536Be85F32724D57A37758761B86416123'
+]
 ```
 
-This returns:
+You can see balances with:
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0])
+'50000000000000000000000000'
+
+truffle(development)> await web3.eth.getBalance(accounts[1])
+'0'
+```
+Notice that `accounts[0]` (default account) has some balance, while `accounts[1]` has no balance.
+
+
+
+### Scripting account funding
+There is a convenient script that funds the `accounts` list . You can find it [here](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/fund-cchain-addresses.js). You can also download it using this command:
 
 ```text
-undefined
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js;
 ```
-
-Print the account:
-
-```text
-truffle(development)> account
-```
-
-This prints the account:
-
-```text
-'0x090172CD36e9f4906Af17B2C36D662E69f162282'
-```
-
-### Unlock your account:
-
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account)
-```
-
-This returns:
-
-```text
-true
-```
-
-### Fund your account
-
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
-
-### Scripting account creation and funding
-
-Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js). Download it using this command:
-
-```text
-wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
-```
-
-**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 \(the default used by truffle\).
 
 You can run the script with:
 
 ```text
-truffle exec make_accounts.js --network development
+truffle exec fund-cchain-addresses.js --network development
 ```
 
-Script will create an account and fund its C-Chain address. You can customize the number of accounts and the amount of AVAX deposited by editing the `maxAccounts` and `amount` variables in the script.
+Script will fund 1000 AVAX to each account in `accounts` list above. After succesfully running the script you can check balances with:
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0]);
+'50000001000000000000000000'
+truffle(development)> await web3.eth.getBalance(accounts[1]);
+'1000000000000000000'
+```
+
+### Fund your account
+
+If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+
+### Personal APIs
+
+Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `personal-api-enabled`. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs).
+
 
 ## Run Migrations
 
@@ -304,13 +337,6 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlock the account, you'll see this error:
-
-```text
-Error:  *** Deployment Failed ***
-
-"Migrations" -- Returned error: authentication needed: password or unlock.
-```
 
 ## Interacting with your contract
 
@@ -334,18 +360,6 @@ Now that you have an instance of the `Storage` contract, call it's `store` metho
 
 ```javascript
 truffle(development)> instance.store(1234)
-```
-
-If you see this error:
-
-```text
-Error: Returned error: authentication needed: password or unlock
-```
-
-Then run this again:
-
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account[0])
 ```
 
 You should see something like:

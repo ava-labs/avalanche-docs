@@ -4,13 +4,15 @@
 
 One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
+In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [timestamp server](https://github.com/ava-labs/timestampvm). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
 
 Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
 
 A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
 Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/)
+
+_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
 ## Interfaces
 
@@ -81,7 +83,7 @@ type ChainVM interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-```cpp
+```go
 // VM describes the interface that all consensus VMs must implement
 type VM interface {
     // Returns nil if the VM is healthy.
@@ -168,7 +170,7 @@ You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` 
 
 Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
-```cpp
+```go
 // Block is a possible decision that dictates the next canonical block.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
@@ -182,11 +184,8 @@ Let’s look at this interface and its methods, which we copy from [here.](https
 type Block interface {
     choices.Decidable
 
-    // Parent returns the block that this block points to.
-    //
-    // If the parent block is not known, a Block should be returned with the
-    // status Unknown.
-    Parent() Block
+    // Parent returns the ID of this block's parent.
+    Parent() ids.ID
 
     // Verify that the state transition this block would make if accepted is
     // valid. If the state transition is invalid, a non-nil error should be
@@ -316,7 +315,7 @@ func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) 
         return nil, err
     }
     blkID := blk.ID()
-    parentID := blk.Parent().ID()
+    parentID := blk.Parent()
     return &vmproto.BuildBlockResponse{
         Id:       blkID[:],
         ParentID: parentID[:],
@@ -372,9 +371,14 @@ func (b *Block) Verify() error {
     }
 
     // Get [b]'s parent
-    parent, ok := b.Parent().(*Block)
-    if !ok {
+    parentID := b.Parent()
+    parentIntf, err := b.VM.GetBlock(parentID)
+    if err != nil {
         return errDatabaseGet
+    }
+    parent, ok := parentIntf.(*Block)
+    if !ok {
+        return errBlockType
     }
 
     // Ensure [b]'s timestamp is after its parent's timestamp.
@@ -687,7 +691,7 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain.
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](./create-custom-blockchain.md#interact-with-the-new-blockchain).
 
 #### timestampvm.getBlock
 
@@ -794,7 +798,7 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
     // Fill out the response with the block's data
     reply.APIBlock.ID = block.ID().String()
     reply.APIBlock.Timestamp = json.Uint64(block.Timestamp)
-    reply.APIBlock.ParentID = block.ParentID().String()
+    reply.APIBlock.ParentID = block.Parent().String()
     reply.Data, err = formatting.Encode(formatting.CB58, block.Data[:])
     return err
 }

@@ -4,6 +4,7 @@
 
 ## Learn
 
+* [Getting Started](learn/getting-started.md)
 * [Platform Overview](learn/platform-overview/README.md)
   * [Avalanche Consensus](learn/platform-overview/avalanche-consensus.md)
   * [Staking](learn/platform-overview/staking.md)
@@ -27,6 +28,7 @@
     * [Create a Blockchain Running the AVM](build/tutorials/platform/create-avm-blockchain.md)
     * [Create a Custom Blockchain](build/tutorials/platform/create-custom-blockchain.md)
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
+    * [Fund a Local Test Network](build/tutorials/platform/fund-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
@@ -51,6 +53,7 @@
     * [Upgrade Your AvalancheGo Node](build/tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md)
   * [Smart Contracts](build/tutorials/smart-contracts/README.md)
     * [Deploy a Smart Contract on Avalanche Using Remix and MetaMask](build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+    * [Using Hardhat with the Avalanche C-Chain](build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
     * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
     * [Verify Smart Contracts on the C-Chain Explorer](build/tutorials/smart-contracts/verify-smart-contracts.md)
     * [Add Avalanche to MetaMask Programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
