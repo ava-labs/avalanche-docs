@@ -12,3 +12,4 @@
 
 [**Postman collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
 
+[**Avalanche Stats**](avalanche-stats.md): You can learn the status of Avalanche and nodes.
