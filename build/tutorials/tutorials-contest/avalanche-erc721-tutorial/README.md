@@ -138,6 +138,16 @@ As well as a **tsconfig.migrate.json** again under the root folder of our projec
 
 This file simply extends our base **tsconfig.json** by taking the [**migrations/**](./migrations) contents into account. We will go through migrating in more detail after we have finished implementing and testing our contracts.
 
+5. Add `generate` script in your **package.json**: 
+
+```json
+"scripts": {
+    "generate": "typechain --target=truffle-v5 'build/contracts/*.json'"
+}
+```
+
+Whenever you make changes to your smart contract you would need to run `npm run generate`.
+
 ### Writing our first ERC721 contract
 
 1. Inside the [**contracts/**](./contracts) folder of your Truffle project we will create a new [**Collectible.sol**](./contracts/Collectible.sol) file and implement the functions we need. Now that we have this, let us start from the top and explain what the smart contract does.
