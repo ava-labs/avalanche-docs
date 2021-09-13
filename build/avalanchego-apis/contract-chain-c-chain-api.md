@@ -194,56 +194,6 @@ To interact with other instances of the EVM AVAX endpoints:
 /ext/bc/blockchainID/avax
 ```
 
-### avax.export
-
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
-
-#### Signature
-
-```cpp
-avax.export({
-    to: string,
-    amount: int,
-    assetID: string,
-    username: string,
-    password:string,
-}) -> {txID: string}
-```
-
-* `to` is the X-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
-* The asset is sent from addresses controlled by `username` and `password`.
-
-#### Example Call
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avax.export",
-    "params" :{
-        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
-        "amount": 500,
-        "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-#### Example Response
-
-```javascript
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2W5JuFENitZKTpJsy9igBpTcEeBKxBHHGAUkgsSUnkjVVGQ9i8"
-    },
-    "id": 1
-}
-```
-
 ### avax.getAtomicTx
 
 Gets a transaction by its ID. Optional encoding parameter to specify the format for the returned transaction. Can be either `cb58` or `hex`. Defaults to `cb58`.
@@ -295,6 +245,56 @@ curl -X POST --data '{
         "tx": "111111115k3oJsP1JGxvsZPFh1WXzSYNVDtvgvZ4qDWtAs5ccogA1RtT3Me5x8xgkj7cyxaNGEHuMv5U34qo94fnvHweLeSRf31ggt3MoD7MHSDw6LbiXeaJa3uwBDHzd6tPxw17478X13Ff7DkHtbWYYx2WTcJYk4nVP2swCHjBE3uQjmu6RdhtgZCxvnD6YVpEsXqvam6cDzpf5BLaosYCSt5p8SmLU2ppaSb6DPA4EW4679ygUxiDNP3SFagjUvzSrfBJRFCzsan4ZJqH8haYqpJL42TUN4q3eFKvscZfp2v2WWEEwJYmJP4Nc1P7wndeMxPFEm3vjkBaVUZ5k25TpYtghq6Kx897dVNaMSsTAoudwqTR1cCUGiR3bLfi82MgnvuApsYqtRfaD9deSHc8UA1ohPehkj9eaY",
         "encoding": "cb58",
         "blockHeight": "1"
+    },
+    "id": 1
+}
+```
+
+### avax.export
+
+Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.md#avm-import) on the X-Chain to complete the transfer.
+
+#### Signature
+
+```cpp
+avax.export({
+    to: string,
+    amount: int,
+    assetID: string,
+    username: string,
+    password:string,
+}) -> {txID: string}
+```
+
+* `to` is the X-Chain address the asset is sent to.
+* `amount` is the amount of the asset to send.
+* `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
+* The asset is sent from addresses controlled by `username` and `password`.
+
+#### Example Call
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.export",
+    "params" :{
+        "to":"X-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
+        "amount": 500,
+        "assetID": "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+#### Example Response
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2W5JuFENitZKTpJsy9igBpTcEeBKxBHHGAUkgsSUnkjVVGQ9i8"
     },
     "id": 1
 }
