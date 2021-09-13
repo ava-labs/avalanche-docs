@@ -38,7 +38,6 @@ const masterAddress: string = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78"
 const contractAddress: string = "0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04"
 let privateKey: string
 
-const TEN_POWER_EIGHTEEN: BN = new BN(new BN(10).pow(new BN(18)))
 const TEN_POWER_NINE: BN = new BN(new BN(10).pow(new BN(9)))
 
 type PromiseResolve<T> = (value?: T | PromiseLike<T>) => void;
@@ -67,8 +66,11 @@ const waitForStaked = async (): Promise<any> => {
               nonce: nonce
             }
             const stx: SignedTransaction = await web3.eth.accounts.signTransaction(tx, privateKey)
-            await web3.eth.sendSignedTransaction(stx.rawTransaction)
-            await CtoP(id, amountWithDecimals)
+            await web3.eth.sendSignedTransaction(stx.rawTransaction).on("confirmation", async (): Promise<any> => {
+                await CtoP(id, amountWithDecimals)
+            }).on("error", (error: Error): Promise<any> => {
+                throw error
+            })
         } else {
             throw error
         }
@@ -76,8 +78,7 @@ const waitForStaked = async (): Promise<any> => {
 }
 
 const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
-    const amountWithoutDecimals: BN = amountWithDecimals.div(TEN_POWER_EIGHTEEN)
-    let amountInNavax: BN = amountWithoutDecimals.mul(TEN_POWER_NINE)
+    let amountInNavax: BN = amountWithDecimals.div(TEN_POWER_NINE)
 
     const cChainHexAddress: string = masterAddress
     
@@ -92,9 +93,9 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
         xChainAddress,
         nonce,
     )
-    
+
     const signedCtoXTx: EVMTx = unsignedCtoXTx.sign(cKeyChain)
-    
+
     const exportCtoXTxId: string = await cChain.issueTx(signedCtoXTx)
     
     amountInNavax = amountInNavax.sub(cChainFees)
@@ -176,7 +177,7 @@ const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C
 
 const binTools: BinTools = BinTools.getInstance()
 
-const importKeys = async () => {
+const importKeys = async (): Promise<any> => {
     const bufferedPrivateKey: Buffer = Buffer.from(privateKey, 'hex')
     const CB58Encoded: string = `PrivateKey-${binTools.cb58Encode(bufferedPrivateKey)}`
     xKeyChain.importKey(CB58Encoded)
@@ -186,8 +187,6 @@ const importKeys = async () => {
     xChainAddress = xKeyChain.getAddressStrings()
     cChainAddress = cKeyChain.getAddressStrings()
     pChainAddress = pKeyChain.getAddressStrings()
-
-    await CtoP(1, new BN("1000000000"))
 }
 
 const waitForStatusX = async(transactionId: string): Promise<any> => {
