@@ -8,8 +8,8 @@ If you want to jump right into the code, here's a [link](https://github.com/tbru
 to the github repo containing the code of this tutorial.
 
 I would recommend you to clone the repo and start with the following commands:
-- npm i
-- npm test
+* npm i
+* npm test
 
 ### Hardhat ?
 
@@ -22,8 +22,8 @@ your Solidity code. It has even a functionality to let you use 'console.log' in 
 It's not the purpose of this tutorial to go over all those functionalities (maybe in another tutorial, why not :) ), so
 here is a few links if you want to know more about it:
 
-- https://hardhat.org/getting-started/
-- https://github.com/nomiclabs/hardhat
+* https://hardhat.org/getting-started/
+* https://github.com/nomiclabs/hardhat
 
 ## What is the 'fork' functionality ?
 
@@ -38,20 +38,20 @@ we will use [Pangolin](https://pangolin.exchange/)
 The flow of it would be:
 
 ```
-1- Your send a call to Swapper's swap function 
-2- Swapper use Pangolin's router `swapExactTokensForTokens` function, it will find the appropriate Pair contract address to call
-3- Pangolin's router call a Pair contract to make the swap
+1* Your send a call to Swapper's swap function 
+2* Swapper use Pangolin's router `swapExactTokensForTokens` function, it will find the appropriate Pair contract address to call
+3* Pangolin's router call a Pair contract to make the swap
 ```
 
 Notice how it requires calls to external contracts.
 
 If you want to test your Swapper `swap` function you then need to set up in your test environment :
 
-- 2 ERC20 contracts
-- Pangolin Factory
-- Pangolin router's contract
-- A Pair contract (PGL) using your 2 previously created ERC20.
-- And all this with the appropriate constructor params, linking all this together. Doable but it'll require some time to
+* 2 ERC20 contracts
+* Pangolin Factory
+* Pangolin router's contract
+* A Pair contract (PGL) using your 2 previously created ERC20.
+* And all this with the appropriate constructor params, linking all this together. Doable but it'll require some time to
   set up all this properly.
 
 So, what if I told you that we could avoid all of this and jump directly to the step where you create tests for your
@@ -158,8 +158,8 @@ const config: HardhatUserConfig = {
 The most interesting portion of code here is the `network` part. That's where you configure networks that you want to
 use with your project. As you can see above we have defined two networks for this tutorial:
 
-- `hardhat`, which is also the `defaultNetwork`.
-- `fuji`, which is pointing to fuji testnet.
+* `hardhat`, which is also the `defaultNetwork`.
+* `fuji`, which is pointing to fuji testnet.
 
 Note that you can put mutliple network definition, one of it is considered as the 'default' one. Meaning that when you
 are using
@@ -191,14 +191,14 @@ hardhat: {
 ,
 ```
 
-- `chainId` is set with to the mainnet value, as seen
+* `chainId` is set with to the mainnet value, as seen
   [here](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api).
-- `gasPrice` is a dynamic value on Avalanche's CChain (see this [post](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) for more information). For test purposes we can use a fixed value (225 nAvax)
-- `forking` is where you configure the parameter of the fork.
-    - `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
+* `gasPrice` is a dynamic value on Avalanche's CChain (see this [post](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) for more information). For test purposes we can use a fixed value (225 nAvax)
+* `forking` is where you configure the parameter of the fork.
+    * `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
       running as full archive node. Hardhat will take care of getting the state of the CChain from this node and start a
       local development network on which you'll be able to deploy and test your code.
-    - `blockNumber` Specify at which block Hardhat will create a fork. It is optional so if you don't set it, the
+    * `blockNumber` Specify at which block Hardhat will create a fork. It is optional so if you don't set it, the
       default behaviour would be to fork the CChain at the latest known block. Now since you want to be able to run your
       tests in a deterministic manner, I recommend you to specify a specific block number.
 
@@ -349,14 +349,14 @@ describe("Swappity swap", function () {
 
 Couple of things to note here :
 
-- `await ethers.provider.send(
+* `await ethers.provider.send(
   "hardhat_reset", ...` It will reset the state of your CChain fork. Meaning that each one of your test will run on a 
    clean instance.
-- `let accounts = await ethers.getSigners()` Ethers provides us a way to get access to some ``Signers`. Which is a 
+* `let accounts = await ethers.getSigners()` Ethers provides us a way to get access to some ``Signers`. Which is a 
    way to represent CChain account that we can use in our tests.
-- `const swapperFactory = await ethers.getContractFactory("Swapper")` We get here via Ethers a ContractFactory that is an
+* `const swapperFactory = await ethers.getContractFactory("Swapper")` We get here via Ethers a ContractFactory that is an
   abstraction used to deploy smart contracts.
-- `swapper = await swapperFactory.deploy(process.env.WAVAX_ADDRES as string, "0x....");`
+* `swapper = await swapperFactory.deploy(process.env.WAVAX_ADDRES as string, "0x....");`
   Here we use the factory to actually deploy the contract on the hardhat network, which is a forked version of cchain
   mainnet ! The resulting `swapper` is an object (fully typed thanks to typechain) that represent the `Swapper` conract,
   and on which you will be able to call functions, like the `swap` one !
@@ -429,12 +429,12 @@ the approve function of the WAVAX contract. And we also check the balance of our
 Then we do the actual call to the swap function of Swapper contract. Passing in the necessary parameters. Here is an
 overview of the parameters :
 
-- `100`, the minimum amount of token we want to receive for this swap. It's intentioanally put low as it is just a test.
-- `[WAVAX_ADDRESS, PNG_ADDRESS]` an array of address that correspond to the path we want to take, basically saying that
+* `100`, the minimum amount of token we want to receive for this swap. It's intentioanally put low as it is just a test.
+* `[WAVAX_ADDRESS, PNG_ADDRESS]` an array of address that correspond to the path we want to take, basically saying that
   we want to go from WAVAX to PNG token.
-- `0xd7538cABBf8605BdE1f4901B47B8D42c61DE0367` correspond to the address of the Pangolin Liquidity Pair for WAVAX - PNG.
-- `1000000000` the amount of wavax we are ready to swap for PNG.
-- `1807909162115` this can be ignored as it correspond to the deadline parameter. Which is useless on avalanche (afaik)
+* `0xd7538cABBf8605BdE1f4901B47B8D42c61DE0367` correspond to the address of the Pangolin Liquidity Pair for WAVAX * PNG.
+* `1000000000` the amount of wavax we are ready to swap for PNG.
+* `1807909162115` this can be ignored as it correspond to the deadline parameter. Which is useless on avalanche (afaik)
   because transactions are finalized in a very short time frame (< second most of the time).
 
 Then we fetch again the balance of our address. And we check if the balances correspond to our assumptions. If it does,

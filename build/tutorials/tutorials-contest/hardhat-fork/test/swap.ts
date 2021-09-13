@@ -11,12 +11,12 @@ const WAVAX_ADDRESS: string = process.env.WAVAX_ADDRESS as string;
 const AVALANCHE_NODE_URL: string = process.env.AVALANCHE_MAINNET_URL as string;
 const PNG_ADDRESS = "0x60781C2586D68229fde47564546784ab3fACA982"
 
-describe("Swappity swap", function () {
+describe("Swappity swap",  () => {
 
     let swapper: Swapper;
     let account1: SignerWithAddress;
 
-    beforeEach(async function () {
+    beforeEach(async (): Promise<any> => {
         await ethers.provider.send(
             "hardhat_reset",
             [
@@ -39,7 +39,7 @@ describe("Swappity swap", function () {
         swapper = await swapperFactory.deploy(process.env.WAVAX_ADDRESS as string, "0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106");
     });
 
-    it("should swap wavax for png", async function () {
+    it("should swap wavax for png", async (): Promise<any> => {
 
         // We get an instance of the wavax contract
         const wavaxTokenContract = await ethers.getContractAt("IWAVAX", WAVAX_ADDRESS)
