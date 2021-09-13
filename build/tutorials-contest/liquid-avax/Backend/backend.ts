@@ -2,51 +2,69 @@
 // to the user-chosen node.
 
 import * as fs from "fs"
-import { Avalanche, BinTools, BN, Buffer } from "avalanche"
+import {Avalanche, BinTools, BN, Buffer} from "avalanche"
 import Web3 from "web3"
-import { ethers } from "ethers"
+import {Contract} from "web3-eth-contract";
 import {AbiItem} from "web3-utils";
-import {AVMAPI, UTXOSet as AVMUTXOSet} from "avalanche/dist/apis/avm";
-import {EVMAPI} from "avalanche/dist/apis/evm";
-import {PlatformVMAPI, UTXOSet as PlatformVPUTXOSet} from "avalanche/dist/apis/platformvm";
-import {KeyChain as AVMKeyChain} from "avalanche/src/apis/avm"
-import {KeyChain as EVMKeyChain} from "avalanche/src/apis/evm"
-import {KeyChain as PlatformVMKeyChain} from "avalanche/src/apis/platformvm"
+import {
+    AVMAPI,
+    KeyChain as AVMKeyChain,
+    UnsignedTx as AVMUnsignedTx,
+    UTXOSet as AVMUTXOSet,
+    Tx as AVMTx
+} from "avalanche/dist/apis/avm";
+import {EVMAPI, KeyChain as EVMKeyChain, UnsignedTx as EVMUnsignedTx, Tx as EVMTx} from "avalanche/dist/apis/evm";
+import {
+    KeyChain as PlatformVMKeyChain,
+    PlatformVMAPI,
+    UTXOSet as PlatformVPUTXOSet,
+    UnsignedTx as PlatformVMUnsignedTx,
+    Tx as PlatformVMTx
+} from "avalanche/dist/apis/platformvm";
+import {SignedTransaction} from "web3-core";
+import {TransactionConfig} from "web3-eth"
 
-let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddress: string[]
-let cChain: EVMAPI, cKeyChain: EVMKeyChain, cChainAddress: string[]
-let pChain: PlatformVMAPI, pKeyChain: PlatformVMKeyChain, pChainAddress: string[]
+let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddress: string[], xChainFees: BN, xChainBlockchainID: string
+let cChain: EVMAPI, cKeyChain: EVMKeyChain, cChainAddress: string[], cChainFees: BN, cChainBlockchainID: string, cAvaxAssetId: string
+let pChain: PlatformVMAPI, pKeyChain: PlatformVMKeyChain, pChainAddress: string[], pChainFees: BN, pChainBlockchainID: string
 
-let xChainBlockchainID: string, cChainBlockchainID: string, pChainBlockchainID: string
-
-let web3
+let avalancheInstance: Avalanche
 
 let contractAbi: AbiItem
 
-let masterAddress: string = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78"
+let web3: any
+
+const masterAddress: string = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78"
+const contractAddress: string = "0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04"
 let privateKey: string
 
-const TEN_POWER_EIGHTEEN = ethers.BigNumber.from(ethers.BigNumber.from(10).pow(ethers.BigNumber.from(18)))
-const TEN_POWER_NINE = ethers.BigNumber.from(ethers.BigNumber.from(10).pow(ethers.BigNumber.from(9)))
+const TEN_POWER_EIGHTEEN: BN = new BN(new BN(10).pow(new BN(18)))
+const TEN_POWER_NINE: BN = new BN(new BN(10).pow(new BN(9)))
 
 const waitForStaked = async (): Promise<any> => {
-    const stakingContract = new web3.eth.Contract(contractAbi, "0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04")
-    const stakedEvent = stakingContract.events.Staked()
+    const stakingContract: Contract = new web3.eth.Contract(contractAbi, contractAddress)
+    const stakedEvent: any = stakingContract.events.Staked()
     await web3.eth.subscribe('logs', {
         address: stakedEvent.arguments[0].address,
         topics: stakedEvent.arguments[0].topics,
     }, async (error, logs) : Promise<any> => {
         if (!error) {
-            const dataHex = logs.data.substring(2)
-            const id = parseInt(dataHex.substring(0, 64), 16)
-            const amountWithDecimals = ethers.BigNumber.from("0x" + dataHex.substring(64))
-            //Withdraw amount staked
+            const dataHex: string = logs.data.substring(2)
+            const id: number = parseInt(dataHex.substring(0, 64), 16)
+            const amountWithDecimals: BN = new BN("0x" + dataHex.substring(64))
             web3.eth.defaultAccount = masterAddress
-            const data = stakingContract.methods.withdraw(id).encodeABI()
-            const nonce = await web3.eth.getTransactionCount(masterAddress, "pending")
-            const tx = {from:masterAddress, to:"0x5bD27eF83d57915FC3eE7feB2FebEB9c69d52B04", data:data, gasPrice:225*10**9, gas:2100000, nonce:nonce}
-            const stx = await web3.eth.accounts.signTransaction(tx, privateKey)
-            const htx = await web3.eth.sendSignedTransaction(stx.rawTransaction)
+            const data: string = stakingContract.methods.withdraw(id).encodeABI()
+            const nonce: number = await web3.eth.getTransactionCount(masterAddress, "pending")
+            const tx: TransactionConfig = {
+                from: masterAddress,
+                to: contractAddress,
+                data: data,
+                gasPrice: 225*10**9,
+                gas: 2100000,
+                nonce: nonce
+            }
+            const stx: SignedTransaction = await web3.eth.accounts.signTransaction(tx, privateKey)
+            await web3.eth.sendSignedTransaction(stx.rawTransaction)
             await CtoP(id, amountWithDecimals)
         } else {
             throw error
@@ -54,20 +72,15 @@ const waitForStaked = async (): Promise<any> => {
     })
 }
 
-const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
+const CtoP = async (id: number, amountWithDecimals: BN): Promise<any> => { //a C --> P cross-chain transfer doesn't exists, but C --> X, X --> P does.
+    const amountWithoutDecimals: BN = amountWithDecimals.div(TEN_POWER_EIGHTEEN)
+    let amountInNavax: BN = amountWithoutDecimals.mul(TEN_POWER_NINE)
 
-    const amountWithoutDecimals = amountWithDecimals.div(TEN_POWER_EIGHTEEN)
-    let amountInNavax = amountWithoutDecimals.mul(TEN_POWER_NINE)
+    const cChainHexAddress: string = masterAddress
     
-    xChainAddress = xKeyChain.getAddressStrings()
-    cChainAddress = cKeyChain.getAddressStrings()
-    pChainAddress = pKeyChain.getAddressStrings()
+    const nonce: number = await web3.eth.getTransactionCount(cChainHexAddress, "pending")
     
-    let cChainHexAddress = "0x7bD7A7D2Ba70db40740780828b236F9246BB7F78"
-    
-    let nonce = await web3.eth.getTransactionCount(cChainHexAddress, "pending")
-    
-    let unsignedCtoXTx = await cChain.buildExportTx(
+    const unsignedCtoXTx: EVMUnsignedTx = await cChain.buildExportTx(
         amountInNavax,
         cAvaxAssetId,
         xChainBlockchainID,
@@ -77,15 +90,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
         nonce,
     )
     
-    let signedCtoXTx = unsignedCtoXTx.sign(cKeyChain)
+    const signedCtoXTx: EVMTx = unsignedCtoXTx.sign(cKeyChain)
     
-    let ctoXTxId = await cChain.issueTx(signedCtoXTx)
+    const ctoXTxId: string = await cChain.issueTx(signedCtoXTx)
     
     console.log(`C --> X export Tx id: ${ctoXTxId}`)
     
-    let fee = cChain.getDefaultTxFee()
-    
-    amountInNavax = amountInNavax.sub(fee)
+    amountInNavax = amountInNavax.sub(cChainFees)
     
     return new Promise(function (resolve, reject) {
         pollTransaction(waitForStatusC, ctoXTxId, resolve, reject)
@@ -96,7 +107,7 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                 cChainBlockchainID,
             )).utxos
 
-            let unsignedImportXTx = await xChain.buildImportTx(
+            const unsignedImportXTx: AVMUnsignedTx = await xChain.buildImportTx(
                 xUtxoset1,
                 xChainAddress,
                 cChainBlockchainID,
@@ -104,15 +115,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                 xChainAddress,
             )
 
-            let signedImportXTx = await unsignedImportXTx.sign(xKeyChain)
+            const signedImportXTx: AVMTx = await unsignedImportXTx.sign(xKeyChain)
 
-            let importXTx = await xChain.issueTx(signedImportXTx)
+            const importXTxId: string = await xChain.issueTx(signedImportXTx)
 
-            console.log(`C --> X import Tx id: ${importXTx}`)
+            console.log(`C --> X import Tx id: ${importXTxId}`)
 
-            fee = xChain.getDefaultTxFee()
-
-            amountInNavax = amountInNavax.sub(fee)
+            amountInNavax = amountInNavax.sub(xChainFees)
 
             // C --> X done, now let's start X --> P.
 
@@ -120,7 +129,7 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                 xChainAddress
             )).utxos
 
-            let unsignedXtoPTx = await xChain.buildExportTx(
+            const unsignedXtoPTx: AVMUnsignedTx = await xChain.buildExportTx(
                 xUtxoset2,
                 amountInNavax,
                 pChainBlockchainID,
@@ -128,15 +137,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                 xChainAddress,
             )
 
-            let signedXtoPTx = unsignedXtoPTx.sign(xKeyChain)
+            const signedXtoPTx: AVMTx = unsignedXtoPTx.sign(xKeyChain)
 
-            let xtoPTxId = await xChain.issueTx(signedXtoPTx)
+            const xtoPTxId: string = await xChain.issueTx(signedXtoPTx)
 
             console.log(`X --> P export Tx id: ${xtoPTxId}`)
 
-            fee = xChain.getDefaultTxFee()
-
-            amountInNavax = amountInNavax.sub(fee)
+            amountInNavax = amountInNavax.sub(xChainFees)
 
             return new Promise(function (resolve, reject) {
                 pollTransaction(waitForStatusX, xtoPTxId, resolve, reject)
@@ -147,7 +154,7 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                         pChainBlockchainID
                     )).utxos
 
-                    let unsignedImportPTx = await pChain.buildImportTx(
+                    const unsignedImportPTx: PlatformVMUnsignedTx = await pChain.buildImportTx(
                         pUtxoset,
                         pChainAddress,
                         xChainBlockchainID,
@@ -155,15 +162,13 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
                         pChainAddress,
                     )
 
-                    let signedImportPTx = unsignedImportPTx.sign(pKeyChain)
+                    const signedImportPTx: PlatformVMTx = unsignedImportPTx.sign(pKeyChain)
 
-                    let importPTx = await pChain.issueTx(signedImportPTx)
+                    const importPTxId: string = await pChain.issueTx(signedImportPTx)
 
-                    console.log(`X --> P import Tx id: ${importPTx}`)
+                    console.log(`X --> P import Tx id: ${importPTxId}`)
 
-                    fee = pChain.getDefaultTxFee()
-
-                    amountInNavax = amountInNavax.sub(fee)
+                    amountInNavax = amountInNavax.sub(pChainFees)
                 } else {
                     throw `Looks like the X --> P transaction with ${xtoPTxId} id has not been accepted!`
                 }
@@ -174,7 +179,7 @@ const CtoP = async (id, amountWithDecimals): Promise<any> => { //a C --> P cross
     })
 }
 
-let binTools = BinTools.getInstance()
+const binTools: BinTools = BinTools.getInstance()
 
 const importKeys = async () => {
     const bufferedPrivatekey = Buffer.from(privateKey, 'hex')
@@ -182,25 +187,24 @@ const importKeys = async () => {
     xKeyChain.importKey(CB58Encoded)
     cKeyChain.importKey(bufferedPrivatekey)
     pKeyChain.importKey(CB58Encoded)
-    
+
+    xChainAddress = xKeyChain.getAddressStrings()
     cChainAddress = cKeyChain.getAddressStrings()
     pChainAddress = pKeyChain.getAddressStrings()
+
+    await CtoP(1, new BN("1000000000"))
 }
 
-let transactionStatus
-
 const waitForStatusX = async(transactionId): Promise<any> => {
-    transactionStatus = await xChain.getTxStatus(transactionId)
-    return transactionStatus
+    return await xChain.getTxStatus(transactionId)
 }
 
 const waitForStatusC = async(transactionId): Promise<any> => {
-    transactionStatus = await cChain.getAtomicTxStatus(transactionId)
-    return transactionStatus
+    return await cChain.getAtomicTxStatus(transactionId)
 }
 
 const pollTransaction = async(func, transactionID, resolve, reject): Promise<any> => {
-    transactionStatus = await func(transactionID)
+    const transactionStatus = await func(transactionID)
     if (transactionStatus === "Rejected") {
         reject(transactionStatus)
     }
@@ -210,10 +214,6 @@ const pollTransaction = async(func, transactionID, resolve, reject): Promise<any
         resolve(transactionStatus)
     }
 }
-
-let xAvaxAssetId, cAvaxAssetId
-
-let avalancheInstance
 
 const getInformations = async() => {
     const ip = "localhost"
@@ -225,26 +225,28 @@ const getInformations = async() => {
     xChain = avalancheInstance.XChain()
     xKeyChain = xChain.keyChain()
     xChainBlockchainID = xChain.getBlockchainID()
+    xChainFees = xChain.getDefaultTxFee()
     
     cChain = avalancheInstance.CChain()
     cKeyChain = cChain.keyChain()
     cChainBlockchainID = cChain.getBlockchainID()
+    cChainFees = cChain.getDefaultTxFee()
+    cAvaxAssetId = binTools.cb58Encode((await cChain.getAssetDescription("AVAX")).assetID)
     
     pChain = avalancheInstance.PChain()
     pKeyChain = pChain.keyChain()
     pChainBlockchainID = pChain.getBlockchainID()
-    
-    xAvaxAssetId = binTools.cb58Encode((await xChain.getAssetDescription("AVAX")).assetID)
-    cAvaxAssetId = binTools.cb58Encode((await cChain.getAssetDescription("AVAX")).assetID)
-    
-    const web3Protocol = "wss"
-    const web3Path = '/ext/bc/C/ws'
-    
-    web3 = new Web3(`${web3Protocol}://api.avax-test.network${web3Path}`)
+    pChainFees = pChain.getDefaultTxFee()
+
+    const web3Protocol: string = "ws"
+    const web3Ip: string = "localhost"
+    const web3Port: string = "9650"
+    const web3Path: string = '/ext/bc/C/ws'
+
+    web3 = new Web3(`${web3Protocol}://${web3Ip}:${web3Port}${web3Path}`)
     
     contractAbi = JSON.parse((await fs.readFileSync("./sAvaxABI.json")).toString())
-
-    privateKey = JSON.parse((await fs.readFileSync("./privateData.json")).toString())
+    privateKey = (JSON.parse((await fs.readFileSync("./privateData.json")).toString())).privateKey
 }
 
 const setup = async() => {
@@ -253,12 +255,8 @@ const setup = async() => {
 }
 
 const main = async() => {
-    console.log("Setup")
     await setup()
-    console.log("Waiting for stakes")
     await waitForStaked()
 }
 
-main().catch((e) => {
-  console.log("We got an error! " + e)
-})
+main()
