@@ -4,24 +4,24 @@
 import * as fs from "fs"
 import {Avalanche, BinTools, BN, Buffer} from "avalanche"
 import Web3 from "web3"
-import {Contract} from "web3-eth-contract";
-import {AbiItem} from "web3-utils";
+import {Contract} from "web3-eth-contract"
+import {AbiItem} from "web3-utils"
 import {
     AVMAPI,
     KeyChain as AVMKeyChain,
     UnsignedTx as AVMUnsignedTx,
     UTXOSet as AVMUTXOSet,
     Tx as AVMTx
-} from "avalanche/dist/apis/avm";
-import {EVMAPI, KeyChain as EVMKeyChain, UnsignedTx as EVMUnsignedTx, Tx as EVMTx} from "avalanche/dist/apis/evm";
+} from "avalanche/dist/apis/avm"
+import {EVMAPI, KeyChain as EVMKeyChain, UnsignedTx as EVMUnsignedTx, Tx as EVMTx} from "avalanche/dist/apis/evm"
 import {
     KeyChain as PlatformVMKeyChain,
     PlatformVMAPI,
     UTXOSet as PlatformVPUTXOSet,
     UnsignedTx as PlatformVMUnsignedTx,
     Tx as PlatformVMTx
-} from "avalanche/dist/apis/platformvm";
-import {SignedTransaction} from "web3-core";
+} from "avalanche/dist/apis/platformvm"
+import {SignedTransaction} from "web3-core"
 import {TransactionConfig} from "web3-eth"
 
 let xChain: AVMAPI, xKeyChain: AVMKeyChain, xChainAddress: string[], xChainFees: BN, xChainBlockchainID: string
