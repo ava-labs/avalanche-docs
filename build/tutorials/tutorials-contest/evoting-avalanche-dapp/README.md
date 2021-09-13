@@ -1,21 +1,23 @@
+
 # Create a Voting dApp on Avalanche using ReactJS
 
 ## Introduction
+
 We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the [Avalanche](advanced-evoting-avalanche-reactjs.md) blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
 Truffle Suite is a toolkit for launching decentralized applications \(dApps\) on Ethereum Virtual Machine \(EVM\) compatible blockchains like Avalanche. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Prerequisites
 
-- Basic familarity with [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-- Basic familarity with [ReactJS](https://reactjs.org/).
-- Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
+* Basic familarity with [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
+* Basic familarity with [ReactJS](https://reactjs.org/).
+* Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-- [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-- [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
-- [Metamask](https://metamask.io) extension added to the browser.
+* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
+* [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
+* [Metamask](https://metamask.io) extension added to the browser.
 
 ## Initializing the working directory
 
@@ -618,7 +620,6 @@ Don't forget to set up Metamask with Fuji testnet and also fund the account with
 | Chain ID | 43113 |
 | Currency Symbol | AVAX-C |
 | Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
-
 
 ## Conclusion
 

@@ -31,10 +31,10 @@ function VoteModal(props) {
     isLoading(false);
   };
 
-  var candid = [],
+  let candid = [],
     candidVote = [];
-  for (var i = 0; i < props.candidates.length; i++) {
-    var candidDetail = props.candidates[i][1] + " (" + props.candidates[i][2] + ")";
+  for (let i = 0; i < props.candidates.length; i++) {
+    let candidDetail = props.candidates[i][1] + " (" + props.candidates[i][2] + ")";
 
     candid.push(
       <Radio

@@ -54,9 +54,9 @@ class CreateElection extends Component {
       candidates: [],
     };
 
-    var i = 0;
+    let i = 0;
 
-    for (var value of electionDetails.candidateObjects) {
+    for (let value of electionDetails.candidateObjects) {
       electionDetails.candidates[i] = value.value;
       i++;
     }

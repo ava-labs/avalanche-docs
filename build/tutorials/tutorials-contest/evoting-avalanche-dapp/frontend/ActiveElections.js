@@ -7,7 +7,7 @@ import ElectionJSON from "./build/contracts/Election.json";
 import VoteModal from "./VoteModal";
 
 // Election component for organising election details
-var Election = (props) => (
+let Election = (props) => (
   <tr>
     <td>{props.election.electionId}</td>
 
@@ -38,7 +38,7 @@ var Election = (props) => (
 );
 
 // Candidate component for organising candidate details of each candidate
-var Candidates = (props) => (
+let Candidates = (props) => (
   <font size="2">
     <b>{props.name}</b> ({props.voteCount}) <br />
   </font>
@@ -74,13 +74,13 @@ class ActiveElections extends Component {
     this.setState({ loading: true });
 
     // electionId maps to total elections created
-    var eCount = await this.app.mainInstance.electionId();
-    var elections = [], electionDetails = [], electionComponents = [];
+    let eCount = await this.app.mainInstance.electionId();
+    let elections = [], electionDetails = [], electionComponents = [];
 
     // Election details of every election created by MainContract
-    for (var i = 0; i < eCount; i++) {
+    for (let i = 0; i < eCount; i++) {
       elections[i] = await this.app.mainInstance.Elections(i);
-      var election = await new this.app.web3.eth.Contract(ElectionJSON.abi, elections[i]);
+      let election = await new this.app.web3.eth.Contract(ElectionJSON.abi, elections[i]);
 
       electionDetails[i] = [];
 
@@ -106,12 +106,12 @@ class ActiveElections extends Component {
       electionDetails[i].electionId = i;
 
       // Organising candidates into components
-      var candidatesCount = await election.methods.candidatesCount().call();
-      var candidates = [], candidateComponents = [];
+      let candidatesCount = await election.methods.candidatesCount().call();
+      let candidates = [], candidateComponents = [];
       candidates[i] = [];
       candidateComponents[i] = [];
 
-      for (var j = 0; j < candidatesCount; j++) {
+      for (let j = 0; j < candidatesCount; j++) {
         candidates[i].push(await election.methods.candidates(j).call());
         candidateComponents[i].push(
           <Candidates
