@@ -1,3 +1,4 @@
+
 # Distributed File Manager (DFM) using Avalanche, IPFS and ReactJS
 
 ## Introduction
@@ -9,15 +10,15 @@ For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit
 
 ## Prerequisites
 
-- Basic familarity with [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-- Basic familarity with [ReactJS](https://reactjs.org/).
-- Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
+* Basic familarity with [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
+* Basic familarity with [ReactJS](https://reactjs.org/).
+* Basic familarity with [Avalanche](https://avax.network) network, [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-- [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
-- [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
-- [Metamask](https://metamask.io) extension added to the browser.
+* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >= 5.6 installed.
+* [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
+* [Metamask](https://metamask.io) extension added to the browser.
 
 ## Understanding the project
 

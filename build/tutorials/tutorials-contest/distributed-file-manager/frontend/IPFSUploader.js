@@ -22,7 +22,7 @@ class IPFSUploader extends React.Component {
   captureFile = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
-    var type = file.type.split("/");
+    let type = file.type.split("/");
 
     if (type[0] === "image") {
       new Compressor(file, {

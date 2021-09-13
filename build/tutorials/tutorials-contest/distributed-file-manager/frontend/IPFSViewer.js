@@ -24,10 +24,10 @@ class IPFSViewer extends React.Component {
 
   loadFiles = async () => {
     const files = await this.app.contract.getFiles(this.app.account[0]);
-    var imageFiles = [], videoFiles = [], audioFiles = [], applicationFiles = [], otherFiles = [];
+    let imageFiles = [], videoFiles = [], audioFiles = [], applicationFiles = [], otherFiles = [];
 
     files.forEach((file) => {
-      var type = file[2].split("/");
+      let type = file[2].split("/");
       if (type[0] === "image") {
         imageFiles.push(file);
       } else if (type[0] === "video") {
@@ -51,10 +51,10 @@ class IPFSViewer extends React.Component {
   };
 
   showImageFiles = () => {
-    var fileComponent = [];
+    let fileComponent = [];
 
     this.state.imageFiles.forEach((file) => {
-      var fileName;
+      let fileName;
       if (file[1].length < 12) {
         fileName = file[1];
       } else {
@@ -82,9 +82,9 @@ class IPFSViewer extends React.Component {
   };
 
   showVideoFiles = () => {
-    var fileComponent = [];
+    let fileComponent = [];
     this.state.videoFiles.forEach((file) => {
-      var fileName;
+      let fileName;
       if (file[1].length < 12) {
         fileName = file[1];
       } else {
@@ -111,9 +111,9 @@ class IPFSViewer extends React.Component {
   };
 
   showAudioFiles = () => {
-    var fileComponent = [];
+    let fileComponent = [];
     this.state.audioFiles.forEach((file) => {
-      var fileName;
+      let fileName;
       if (file[1].length < 12) {
         fileName = file[1];
       } else {
@@ -134,9 +134,9 @@ class IPFSViewer extends React.Component {
   };
 
   showApplicationFiles = () => {
-    var fileComponent = [];
+    let fileComponent = [];
     this.state.applicationFiles.forEach((file) => {
-      var fileName;
+      let fileName;
       if (file[1].length < 12) {
         fileName = file[1];
       } else {
@@ -169,9 +169,9 @@ class IPFSViewer extends React.Component {
   };
 
   showOtherFiles = () => {
-    var fileComponent = [];
+    let fileComponent = [];
     this.state.otherFiles.forEach((file) => {
-      var fileName;
+      let fileName;
       if (file[1].length < 12) {
         fileName = file[1];
       } else {
@@ -202,7 +202,7 @@ class IPFSViewer extends React.Component {
   };
 
   render() {
-    var imageFiles = this.showImageFiles(), videoFiles = this.showVideoFiles(), audioFiles = this.showAudioFiles(), applicationFiles = this.showApplicationFiles(), otherFiles = this.showOtherFiles();
+    let imageFiles = this.showImageFiles(), videoFiles = this.showVideoFiles(), audioFiles = this.showAudioFiles(), applicationFiles = this.showApplicationFiles(), otherFiles = this.showOtherFiles();
 
     return (
       <div style={{ margin: "20px" }}>
