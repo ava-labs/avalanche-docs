@@ -110,10 +110,6 @@ Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/services/
             "es2015"
         ],
         "sourceMap": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./types"
-        ],
         "types": [
             "node",
             "truffle-typings"
