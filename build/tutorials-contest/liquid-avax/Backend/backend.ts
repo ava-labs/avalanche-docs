@@ -190,16 +190,16 @@ const importKeys = async () => {
     await CtoP(1, new BN("1000000000"))
 }
 
-const waitForStatusX = async(transactionId): Promise<any> => {
+const waitForStatusX = async(transactionId: string): Promise<any> => {
     return await xChain.getTxStatus(transactionId)
 }
 
-const waitForStatusC = async(transactionId): Promise<any> => {
+const waitForStatusC = async(transactionId: string): Promise<any> => {
     return await cChain.getAtomicTxStatus(transactionId)
 }
 
-const pollTransaction = async(func, transactionID, resolve, reject): Promise<any> => {
-    const transactionStatus = await func(transactionID)
+const pollTransaction = async(func: Function, transactionID: string, resolve: PromiseResolve<string>, reject: PromiseReject): Promise<any> => {
+    const transactionStatus: string = await func(transactionID)
     if (transactionStatus === "Rejected") {
         reject(transactionStatus)
     }
@@ -210,11 +210,11 @@ const pollTransaction = async(func, transactionID, resolve, reject): Promise<any
     }
 }
 
-const getInformation = async() => {
-    const ip = "localhost"
-    const port = 9650
-    const protocol = "http"
-    const networkID = 5
+const getInformation = async(): Promise<any> => {
+    const ip: string = "localhost"
+    const port: number = 9650
+    const protocol: string = "http"
+    const networkID: number = 5
     avalancheInstance = new Avalanche(ip, port, protocol, networkID)
     
     xChain = avalancheInstance.XChain()
@@ -244,12 +244,12 @@ const getInformation = async() => {
     privateKey = (JSON.parse((await fs.readFileSync("./privateData.json")).toString())).privateKey
 }
 
-const setup = async() => {
+const setup = async(): Promise<any> => {
     await getInformation()
     await importKeys()
 }
 
-const main = async() => {
+const main = async(): Promise<any> => {
     await setup()
     await waitForStaked()
 }
