@@ -197,24 +197,29 @@ const CtoP = async (id: number, amountWithDecimals: BN, endingTimestamp: BN, sen
     })
 }
 
+const FOURTEEN_DAYS: BN = new BN(new BN(14).mul(new BN(24)).mul(new BN(60)).mul(new BN(60)))
+const ONE_YEAR: BN = new BN(new BN(365).mul(new BN(24)).mul(new BN(60)).mul(new BN(60)))
+
 const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, sender: string): Promise<any> => {
     const outputs: TransferableOutput[] = []
     const inputs: TransferableInput[] = []
     const stakeOuts: TransferableOutput[] = []
 
-    const nodeID: string = "nodeID..." // Maybe pass this argument, or make the verification here?
-    const startTime = UnixNow()
-    const endTime = UnixNow().add(endingTimestamp)
+    const nodeID: string = "NodeID-4B4rc5vdD1758JSBYL1xyvE5NHGzz6xzH" // Maybe pass this argument, or make the verification here?
 
     const memo: Buffer = Buffer.from(
-        `liquidAvax-ID${id}-SENDER${sender}`
+        `liquidAvax-ID:${id}-SENDER:${sender}`
     )
     
     const stakeAmount: any = await pChain.getMinStake()
+
+    const getBalanceResponse: any = await pChain.getBalance(pChainAddressesString[0])
+    const unlocked: BN = new BN(getBalanceResponse.unlocked)
+
     const locktime: BN = new BN(0)
     const threshold: number = 1
     const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
-        amountInNavax.sub(pChainFees).sub(stakeAmount.minValidatorStake),
+        unlocked.sub(pChainFees).sub(stakeAmount.minValidatorStake),
         pChainAddressesBuffer,
         locktime,
         threshold
@@ -268,6 +273,17 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
         }
     })
 
+    const startTime: BN = UnixNow().add(new BN(60))
+
+    if (endingTimestamp.sub(startTime).lt(FOURTEEN_DAYS)) {
+        endingTimestamp = startTime.add(FOURTEEN_DAYS)
+    }
+    if (endingTimestamp.sub(startTime).gt(ONE_YEAR)) {
+        endingTimestamp = startTime.add(ONE_YEAR)
+    }
+
+    console.log(startTime.toString(), endingTimestamp.toString())
+
     const addDelegatorTx: AddDelegatorTx = new AddDelegatorTx(
         networkID,
         binTools.cb58Decode(pChainBlockchainID),
@@ -276,7 +292,7 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
         memo,
         NodeIDStringToBuffer(nodeID),
         startTime,
-        endTime,
+        endingTimestamp,
         stakeAmount.minDelegatorStake,
         stakeOuts,
         rewardOwners
@@ -284,8 +300,8 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
 
     const unsignedTx: UnsignedTx = new UnsignedTx(addDelegatorTx)
     const tx: Tx = unsignedTx.sign(pKeyChain)
+
     const txid: string = await pChain.issueTx(tx)
-    console.log(`Success! TXID: ${txid}`)
 }
 
 const binTools: BinTools = BinTools.getInstance()
