@@ -1,4 +1,5 @@
 # How to Configure and Use Your Own Chainlink Node And External Adapter In Your Avalanche dApp
+
 # Introduction
 
 This tutorial will show you how to setup a Chainlink node with the Avalanche Fuji Testnet and create dApp smart contracts to connect to the Chainlink node.
@@ -256,6 +257,7 @@ First, create a new bridge which will point to the external adaptor listening ad
 The next step is to create a new job in the Chainlink node. 
 
 ### Using type: "web"
+
 Below is a code snippet for the job specification to test the job within the Chainlink GUI. This can be done by using the "type": "web". Please check the Chainlink official [documentation](https://docs.chain.link/docs/job-specifications/) for more details. Later, in this section we also cover the "type": "runlog" which will be used to integrate Chainlink with on-chain contracts. 
 
 ```
@@ -404,6 +406,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 }
 ```
 #### Deployed smart contracts:
+
 ![smartcontracts-deployed](img/chainlink-tutorial-11-smart-contract-deploy.png)
 
 Add tokens to the Avalanche Fuji Testnet so that you can transfer some LINKs to the deployed blockchain address to perform the transactions. Please refer to [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask) on how to add custom tokens. 
