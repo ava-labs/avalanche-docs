@@ -90,6 +90,7 @@
   * [Public API](build/tools/public-api.md)
   * [Ortelius API](build/tools/ortelius.md)
   * [Postman collection](build/tools/postman-avalanche-collection.md)
+  * [Avalanche Stats](build/tools/avalanche-stats.md)
 * [References](build/references/README.md)
   * [Avalanche Native Tokens and ARC-20s](build/references/coreth-arc20s.md)
   * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
