@@ -139,7 +139,7 @@ const CtoP = async (id: number, amountWithDecimals: BN, endingTimestamp: BN, sen
 
             const signedImportXTx: AVMTx = await unsignedImportXTx.sign(xKeyChain)
 
-            const importXTxId: string = await xChain.issueTx(signedImportXTx)
+            await xChain.issueTx(signedImportXTx)
 
             amountInNavax = amountInNavax.sub(xChainFees)
 
@@ -182,7 +182,7 @@ const CtoP = async (id: number, amountWithDecimals: BN, endingTimestamp: BN, sen
 
                     const signedImportPTx: PlatformVMTx = unsignedImportPTx.sign(pKeyChain)
 
-                    const importPTxId: string = await pChain.issueTx(signedImportPTx)
+                    await pChain.issueTx(signedImportPTx)
 
                     amountInNavax = amountInNavax.sub(pChainFees)
 
@@ -256,16 +256,16 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
         const output: Output = utxo.getOutput()
         if (output.getOutputID() === 7) {
             const amountOutput: AmountOutput = utxo.getOutput() as AmountOutput
-            const amt: BN = amountOutput.getAmount().clone()
-            const txid: Buffer = utxo.getTxID()
-            const outputidx: Buffer = utxo.getOutputIdx()
+            const amount: BN = amountOutput.getAmount().clone()
+            const txId: Buffer = utxo.getTxID()
+            const outputIdx: Buffer = utxo.getOutputIdx()
 
-            const secpTransferInput: SECPTransferInput = new SECPTransferInput(amt)
+            const secpTransferInput: SECPTransferInput = new SECPTransferInput(amount)
             secpTransferInput.addSignatureIdx(0, pChainAddressesBuffer[0])
 
             const input: TransferableInput = new TransferableInput(
-                txid,
-                outputidx,
+                txId,
+                outputIdx,
                 pAvaxAssetId,
                 secpTransferInput
             )
@@ -301,7 +301,7 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
     const unsignedTx: UnsignedTx = new UnsignedTx(addDelegatorTx)
     const tx: Tx = unsignedTx.sign(pKeyChain)
 
-    const txid: string = await pChain.issueTx(tx)
+    await pChain.issueTx(tx)
 }
 
 const binTools: BinTools = BinTools.getInstance()
