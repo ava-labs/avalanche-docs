@@ -6,7 +6,7 @@ We created a [stats][https://stats.avax.network/] website that you can learn a l
 
 ## What is in there
 
-We have 3 main concept in our stats: Staking, Validator Health Check and C-Chain Activity.
+We have 3 main concepts in our stats: Staking, Validator Health Check and C-Chain Activity.
 
 ## Staking
 
@@ -19,14 +19,14 @@ You can access this part from [this][https://stats.avax.network/dashboard/stakin
 * Stake Offline
 * Stake Benched
 * Validator/Delegator Count (graphically)
-* Validator/Delegator Count (graphically)
+* Validator/Delegator Stake (graphically)
 * Average Validator Weight (graphically)
-* Percentage of Version's of Validators
+* Stake Version Distribution 
 * Delegationg Fee Distribution
 * Validator Weight Distribution (graphically)
 * Validator Stake Distribution (graphically)
 * Delegation Stake Distribution
-* Time Responsive of Nodes
+* Responsive Validators
 * Trending Responsive
 * Unresponsive Validators
 * Trending Unresponsive
@@ -42,19 +42,19 @@ You can access this part from [this][https://stats.avax.network/dashboard/stakin
 
 When you enter a node id to [this][https://stats.avax.network/dashboard/validator-health-check/] link, you can see these information about that node:
 
-### Is my validator OK
+### Is my validator OK?
 
 Attention, this is not for online-offline status.
 
-### Is my validator benched
+### Is my validator responsive (not "benched")? 
 
 When a node doesn't respond to queries from other nodes for 5 minutes, it will temporarily be considered offline by other nodes (called "benching"). A benched node can be fixed by upgrading your hardware to the recommended spec.
 
-### Is my validator offline
+### Is my validator online?
 
 Offline nodes cannot be connected to by any nodes (staking nor non-staking). An offline node can be fixed by restarting it and/or opening its peering port (9651) to inbound traffic.
 
-### Is my validator inaccessible
+### Is my validator accessible?
 
 A node is considered inaccessible if another node cannot connect to it on its advertised ip:port but the node still attempts to connect to other nodes (unlike an offline mode). An inaccessible node can be fixed by opening up the 9651 port (peering port) for inbound connections.
 
@@ -120,15 +120,15 @@ Minumum gas price for the last 8 hours.
 
 ### Daily Fees Burned
 
-Shows how much gas is burned in the last day.
+Shows how much gas is burned in every day.
 
 ### Daily Gas Used
 
-Shows how much gas is used in the last day.
+Shows how much gas is used in every day.
 
 ### Daily Tx Count
 
-Shows how many transaction were made in the last day.
+Shows how many transaction were made in every day.
 
 ### Cumulative Address Count
 
