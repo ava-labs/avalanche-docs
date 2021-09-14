@@ -58,22 +58,18 @@ type PromiseResolve<T> = (value?: T | PromiseLike<T>) => void;
 type PromiseReject = (error?: any) => void;
 
 const waitForStaked = async (): Promise<any> => {
-    console.log("Let's listen")
     const stakingContract: Contract = new web3.eth.Contract(contractAbi, contractAddress)
     const stakedEvent: any = stakingContract.events.Staked()
     await web3.eth.subscribe('logs', {
       address: stakedEvent.arguments[0].address,
       topics: stakedEvent.arguments[0].topics,
     }, async (error, logs): Promise<any> => {
-        console.log(error, logs)
         if (!error) {
-            const sender = `0x${logs.topics[1].substring(26)}`
+            const sender: string = `0x${logs.topics[1].substring(26)}`
             const dataHex: string = logs.data.substring(2)
-            console.log(dataHex)
             const id: number = parseInt(dataHex.substring(0, 64), 16)
             const amountWithDecimals: BN = new BN(dataHex.substring(64, 128), 16)
             const endingTimestamp: BN = new BN(dataHex.substring(128), 16)
-            console.log(id, parseInt(amountWithDecimals.toString()), parseInt(endingTimestamp.toString()))
             web3.eth.defaultAccount = masterAddress
             const data: string = stakingContract.methods.withdraw(id).encodeABI()
             const nonce: number = await web3.eth.getTransactionCount(masterAddress, "pending")
@@ -281,8 +277,6 @@ const stakeToNode = async (amountInNavax: BN, id: number, endingTimestamp: BN, s
     if (endingTimestamp.sub(startTime).gt(ONE_YEAR)) {
         endingTimestamp = startTime.add(ONE_YEAR)
     }
-
-    console.log(startTime.toString(), endingTimestamp.toString())
 
     const addDelegatorTx: AddDelegatorTx = new AddDelegatorTx(
         networkID,
