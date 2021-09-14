@@ -6,9 +6,9 @@ We have created a [stats](https://stats.avax.network) website from where you can
 
 ## What are included?
 
-We have 3 main areas in our stats: Staking, Validator Health Check and C-Chain Activity.
+We have 3 main areas in our stats: [Staking](avalanche-stats.md#staking), [Validator Health Check](avalanche-stats.md#validator-health-check) and [C-Chain Activity](avalanche-stats.md#c-chain-activity).
 
-## Staking
+## Staking <a id="staking"></a>
 
 You can access this part from [this](https://stats.avax.network/dashboard/staking) link from which you will get following info:
 
@@ -38,7 +38,7 @@ You can access this part from [this](https://stats.avax.network/dashboard/stakin
 * Inaccessible Nodes Table
 * Benched Nodes Table
 
-## Validator Health Check
+## Validator Health Check <a id="validator-health-check"></a>
 
 When you enter a node id to [this](https://stats.avax.network/dashboard/validator-health-check) link, you can see these information about that node:
 
@@ -94,9 +94,9 @@ Shows the amount delegates have staked on your node.
 
 Those are graphichs that shows your node's status for benched, offline and inaccessible status.
 
-## C-Chain Activity
+## C-Chain Activity <a id="c-chain-activity"></a> 
 
-You can see our C-Chain stats from [here][https://stats.avax.network/dashboard/c-chain-activity/].
+You can see our C-Chain stats from [here](https://stats.avax.network/dashboard/c-chain-activity/).
 
 ### Max TPS Observed (All-Time, last 7 days, last 30 minutes)
 
