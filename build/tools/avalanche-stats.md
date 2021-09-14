@@ -2,7 +2,7 @@
 
 ## Introduction
 
-We have created a [stats][https://stats.avax.network/] website from where you can learn a lot of things about avalanche's current stats.
+We have created a [stats](https://stats.avax.network) website from where you can learn a lot of things about avalanche's current stats.
 
 ## What are included?
 
@@ -10,7 +10,7 @@ We have 3 main areas in our stats: Staking, Validator Health Check and C-Chain A
 
 ## Staking
 
-You can access this part from [this][https://stats.avax.network/dashboard/staking/] link from which you will get following info:
+You can access this part from [this](https://stats.avax.network/dashboard/staking) link from which you will get following info:
 
 * Active Validator Count
 * Active Delegation Count
@@ -40,7 +40,7 @@ You can access this part from [this][https://stats.avax.network/dashboard/stakin
 
 ## Validator Health Check
 
-When you enter a node id to [this][https://stats.avax.network/dashboard/validator-health-check/] link, you can see these information about that node:
+When you enter a node id to [this](https://stats.avax.network/dashboard/validator-health-check) link, you can see these information about that node:
 
 ### Is my validator OK?
 
@@ -80,7 +80,7 @@ Amount of staked by your node (in AVAX).
 
 ### Delegation Fee (%)
 
-You can learn more about this from [here][https://docs.avax.network/learn/platform-overview/staking#delegator-rewards]
+You can learn more about this from [here](https://docs.avax.network/learn/platform-overview/staking#delegator-rewards)
 
 ### Delegators
 
