@@ -122,7 +122,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 
 ### Check the C-Chain balance
 
-Confirm the `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` address has a balance of 50m AVAX on the C-Chain.
+Confirm the `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` address has a balance of 50m (0x295be96e64066972000000 in hex) AVAX on the C-Chain.
 
 ```zsh
 curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
