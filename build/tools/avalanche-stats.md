@@ -2,15 +2,15 @@
 
 ## Introduction
 
-We created a [stats][https://stats.avax.network/] website that you can learn a lot of things about avalanche's current status.
+We have created a [stats][https://stats.avax.network/] website from where you can learn a lot of things about avalanche's current stats.
 
-## What is in there
+## What are included?
 
-We have 3 main concepts in our stats: Staking, Validator Health Check and C-Chain Activity.
+We have 3 main areas in our stats: Staking, Validator Health Check and C-Chain Activity.
 
 ## Staking
 
-You can access this part from [this][https://stats.avax.network/dashboard/staking/] link. And you can see:
+You can access this part from [this][https://stats.avax.network/dashboard/staking/] link from which you will get following info:
 
 * Active Validator Count
 * Active Delegation Count
