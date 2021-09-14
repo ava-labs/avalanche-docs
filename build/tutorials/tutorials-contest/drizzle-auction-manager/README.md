@@ -416,7 +416,7 @@ In the `drizzleContext.js` file, **DrizzleProvider** is the provider component a
 
 ## Drizzle Option component
 
-Create a file `drizzleOption.js` inside the `drizzle-auction/client/src/` directory and paste the following code:
+Create a file `drizzleOptions.js` inside the `drizzle-auction/client/src/` directory and paste the following code:
 
 ```javascript
 import AuctionManager from "./build/contracts/AuctionManager.json";

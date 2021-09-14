@@ -60,7 +60,7 @@ function Auction() {
 
     useEffect(() => {
         if(cacheCalls.isRegistered !== undefined && cacheCalls.isRegistered[0] == 1) {
-            setIsRegistered(true)
+            setIsRegistered(true);
             (async () => {
                 const userInfo = await AuctionManager.users(cacheCalls.isRegistered[1]).call()
                 setUserInfo({
