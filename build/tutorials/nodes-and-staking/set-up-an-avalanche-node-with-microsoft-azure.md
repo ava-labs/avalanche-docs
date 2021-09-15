@@ -90,7 +90,7 @@ Below you can see the price history of the VM over the last 3 months for North E
 
 ### Cheaper than Amazon AWS <a id="45e9"></a>
 
-As a comparison a c5.2xlarge instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
+As a comparison a c5.large instance costs $0.085 USD per hour on AWS. This totals ~$745 USD per year. Spot instances can save 62%, bringing that total down to $462.
 
 The next step is to change the username for the VM, to align with other Avalanche tutorials change the username to ubuntu. Otherwise you will need to change several commands later in this article and swap out ubuntu with your new username.
 
