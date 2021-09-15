@@ -375,6 +375,6 @@ const main = async(): Promise<any> => {
     await waitForStaked()
 }
 
-main().catch((error) => {
+main().catch((error): Promise<any> => {
     throw `An error occurred: ${error}`
 })
