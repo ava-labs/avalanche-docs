@@ -49,7 +49,7 @@ Get the most recently accepted container.
 #### **Signature**
 
 ```cpp
-info.getLastAccepted({
+index.getLastAccepted({
   encoding:string
 }) -> {
   id: string,
@@ -106,7 +106,7 @@ Get container by index. The first container accepted is at index 0, the second i
 #### **Signature**
 
 ```cpp
-info.getContainerByIndex({
+index.getContainerByIndex({
   index: uint64,
   encoding: string
 }) -> {
@@ -163,7 +163,7 @@ Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startI
 #### **Signature**
 
 ```cpp
-info.getContainerRange({
+index.getContainerRange({
   startIndex: uint64, 
   numToFetch: uint64, 
   encoding: string
@@ -222,7 +222,7 @@ Get a container's index.
 #### **Signature**
 
 ```cpp
-info.getIndex({
+index.getIndex({
   containerID: string,
   encoding: string
 }) -> {
@@ -268,7 +268,7 @@ Returns true if the container is in this index.
 #### **Signature**
 
 ```cpp
-info.isAccepted({
+index.isAccepted({
   containerID: string,
   encoding: string
 }) -> {
