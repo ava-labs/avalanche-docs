@@ -38,8 +38,8 @@ Metamask needs to be installed on your browser, and you need to be connected to 
 
 ```typescript
 function checkMetamaskStatus() {
-    if(window.ethereum) {
-        if(window.ethereum.chainId != '0xa869') {
+    if((window as any).ethereum) {
+        if((window as any).ethereum.chainId != '0xa869') {
             result = "Failed: Not connected to Avalanche Fuji Testnet via Metamask."
         }
         else {
@@ -79,14 +79,14 @@ The prefix is a so-called "magic prefix" string `\x1AAvalanche Signed Message:\n
 
 ```typescript
 function hashMessage(message: string) {
-    let mBuf: Uint8Array = Buffer.from(message, 'utf8')
-    let msgSize: Uint8Array = Buffer.alloc(4)
+    let mBuf: Buffer = Buffer.from(message, 'utf8')
+    let msgSize: Buffer = Buffer.alloc(4)
     msgSize.writeUInt32BE(mBuf.length, 0)
-    let msgBuf: Uint8Array = Buffer.from(`\x1AAvalanche Signed Message:\n${msgSize}${message}`, 'utf8')
-    let hash: Uint8Array = createHash('sha256').update(msgBuf).digest()
-    let hashex:string = hash.toString('hex')
-    let hashBuff: Uint8Array = Buffer.from(hashex, 'hex')
-    let messageHash:string = '0x' + hashex
+    let msgBuf: Buffer = Buffer.from(`\x1AAvalanche Signed Message:\n${msgSize}${message}`, 'utf8')
+    let hash: Buffer = createHash('sha256').update(msgBuf).digest()
+    let hashex: string = hash.toString('hex')
+    let hashBuff: Buffer = Buffer.from(hashex, 'hex')
+    let messageHash: string = '0x' + hashex
     return {hashBuff, messageHash}
 }
 ```
@@ -103,7 +103,7 @@ Note, while decoding the signature, if the signature has been altered, the **cb5
 function splitSig(signature: string) {
     try{
         let bintools: Bintools = BinTools.getInstance()
-        let decodedSig: Uint8Array = bintools.cb58Decode(signature)
+        let decodedSig: Buffer = bintools.cb58Decode(signature)
         const r: BN = new BN(bintools.copyFrom(decodedSig, 0, 32))
         const s: BN = new BN(bintools.copyFrom(decodedSig, 32, 64))
         const v: number = bintools.copyFrom(decodedSig, 64, 65).readUIntBE(0, 1)
@@ -130,11 +130,11 @@ The public key can be recovered from the hashed message, r, s, and v parameters 
 ```typescript
 function recover(msgHash: Buffer, sig: any) {
     let ec: EC = new EC('secp256k1')
-    const pubk: BasePoint = ec.recoverPubKey(msgHash, sig, sig.v)
+    const pubk: any = ec.recoverPubKey(msgHash, sig, sig.v)
     const pubkx: string = '0x' + pubk.x.toString('hex')
     const pubky: string = '0x' + pubk.y.toString('hex')
     let pubkCord: Array<string> = [pubkx, pubky]
-    let pubkBuff: Uint8Array = Buffer.from(pubk.encodeCompressed())
+    let pubkBuff: Buffer = Buffer.from(pubk.encodeCompressed())
     return {pubkCord, pubkBuff}
 }
 ```
@@ -144,8 +144,8 @@ Here is the full code for verification, including the call to the dApp function 
 ```typescript
 async function verify() {
     //Create the provider and contract object to access the dApp functions
-    const provider: Provider = new ethers.providers.Web3Provider(window.ethereum)
-    const elliptic: Contract = new ethers.Contract(contractAddress.Contract, ECArtifact.abi, provider)
+    const provider: any = new ethers.providers.Web3Provider((window as any).ethereum)
+    const elliptic: any = new ethers.Contract(contractAddress.Contract, ECArtifact.abi, provider)
     //Extract all the data needed for signature verification
     let message: any = hashMessage(msg)
     let sign: any = splitSig(sig)
