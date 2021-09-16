@@ -2,6 +2,24 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## PRE\_RELEASE v1.6.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji)\)
+
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
+
+This upgrade adds a contention limiter to the C-chain and P-chain, introduces a block based fee on the C-chain, and tunes some dynamic fee parameters on the C-chain.
+
+The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on the Fuji testnet. After Fuji is updated and verified, a Mainnet compatible release will be published.
+
+**All Fuji nodes should upgrade before 5 PM EDT, September 16th 2021.**
+
+**Upgrades**
+
+- Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
+- Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM<->VM communication layer.
+- Added a block based fee to C-chain blocks.
+- Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
+- Added metrics for the number of blocks built and the number of failed build block attempts.
+
 ## v1.5.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3)\)
 
 This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
