@@ -13,7 +13,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
 {% hint style="warning" %}
-The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(GWei\) prior to Apricot Phase 3 (AP3). The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). AP3 introduces dynamic fees to the C-Chain which allows the gas price to fluctuate between 75 nAVAX \(GWei\) and 225 nAVAX \(GWei\) \(dependent on network activity\). Apricot Phase 4 (AP4) further expands the dynamic fee range to 25 nAVAX (66% reduction from AP3) and 1000 nAVAX, respectively. See below for more detailed information on dynamic fees.
+The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(GWei\) prior to Apricot Phase 3 (AP3). The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). AP3 introduces dynamic fees to the C-Chain which allows the gas price to fluctuate between 75 nAVAX \(GWei\) and 225 nAVAX \(GWei\) \(dependent on network activity\). Apricot Phase 4 (AP4) further expands the dynamic fee range to between 25 nAVAX (66% reduction from AP3) and 1000 nAVAX. See below for more detailed information on dynamic fees.
 {% endhint %}
 
 ```cpp
