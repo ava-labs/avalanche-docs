@@ -4,17 +4,15 @@
 
 ## PRE\_RELEASE v1.6.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji)\)
 
-**Please note that this release is unable to run mainnet - and will display "this node version doesn't support mainnet" if attempted to run with a mainnet configuration. If you run a mainnet node, no action is required until the official release is published soon.**
-
-**All Fuji nodes should upgrade before 5 PM EDT, September 16th 2021.**
-
-**This change is not backwards compatible with previous releases.**
+**Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
 
 This upgrade adds a contention limiter to the C-chain and P-chain, introduces a block based fee on the C-chain, and tunes some dynamic fee parameters on the C-chain.
 
-The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on the Fuji testnet. After Fuji is updated and verified, a mainnet compatible release will be published.
+The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on the Fuji testnet. After Fuji is updated and verified, a Mainnet compatible release will be published.
 
-## Upgrades
+**All Fuji nodes should upgrade before 5 PM EDT, September 16th 2021.**
+
+**Upgrades**
 
 - Introduced `Snowman++` on the P-chain and C-chain.
 - Introduced `mempool gossiping to the P-chain` and C-chain using the VM<->VM communication layer.
