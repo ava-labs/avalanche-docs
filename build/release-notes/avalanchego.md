@@ -14,8 +14,8 @@ The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on th
 
 **Upgrades**
 
-- Introduced `Snowman++` on the P-chain and C-chain.
-- Introduced `mempool gossiping to the P-chain` and C-chain using the VM<->VM communication layer.
+- Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
+- Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM<->VM communication layer.
 - Added a block based fee to C-chain blocks.
 - Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
 - Added metrics for the number of blocks built and the number of failed build block attempts.
