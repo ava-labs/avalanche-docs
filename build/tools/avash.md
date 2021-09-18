@@ -8,7 +8,7 @@ Avash provides the ability to run Lua scripts, which can execute a sequence of s
 
 ### Requirements <a id="requirements"></a>
 
-* Golang 1.15.5 or later
+* Golang 1.16.8 or later
 * AvalancheGo
 
 ### Quick Setup <a id="quick-setup"></a>

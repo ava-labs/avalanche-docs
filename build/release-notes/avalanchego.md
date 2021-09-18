@@ -2,6 +2,40 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.6.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0)\)
+
+**This change is not backwards compatible with previous releases.**
+
+This upgrade adds a contention limiter to the C-chain and P-chain, introduces a block based fee on the C-chain, and tunes some dynamic fee parameters on the C-chain.
+
+The changes in the upgrade go into effect at **5 PM EDT / 9 PM UTC, September 22th 2021 on Mainnet**. You should upgrade your node before the changes go into effect, otherwise you may experience loss of uptime on your node. 
+
+More info can be found [here](https://medium.com/avalancheavax/apricot-phase-four-snowman-and-reduced-c-chain-transaction-fees-1e1f67b42ecf).
+
+**Go**
+
+The minimum Go version required to build AvalancheGo is now Go 1.16.8
+
+**Bug Fixes**
+
+Fix race condition during timeout manager startup.  
+
+**Upgrades**
+
+- Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
+- Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM<->VM communication layer.
+- Added a block based fee to C-chain blocks.
+- Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
+- Rate limit incoming connections
+
+**New Metrics**
+- `avalanche_C_blks_built` / `avalanche_P_blks_built`: Number of blocks that have been built locally on the C-Chain and P-Chain, respectively.
+- `avalanche_C_blks_builds_failed` / `avalanche_P_blks_builds_failed`: Number of calls to BuildBlock that failed on the C-Chain and P-Chain, respectively.
+
+**Config Options**
+- Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../references/command-line-interface.md))
+- Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
+
 ## PRE\_RELEASE v1.6.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji)\)
 
 **Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**

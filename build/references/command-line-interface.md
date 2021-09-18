@@ -234,6 +234,12 @@ If this is `true`, print the version and quit. Defaults to `false`.
 
 The following options may affect the correctness of a node. Only power users should change these.
 
+### App Gossiping
+
+`--consensus-app-gossip-size` \(uint\):
+
+Number of peers an AppGossip message is gossiped to.
+
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
@@ -639,11 +645,18 @@ Node will report unhealthy if its send queue is more than this portion full. Mus
 
 Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
 
-`--inbound-connection-throtting-cooldown` \(duration\)
+`--inbound-connection-throtting-cooldown` \(duration\):
 
-`--inbound-connection-throttling-max-recent` \(uint\)
+Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`.
+If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
 
-Node will only accept \(attempt to upgrade\) an inbound connection from an IP if it has not done so in the last `inbound-connection-throtting-cooldown`. Node will only allow `inbound-connection-throttling-max-recent` from all IPS per `inbound-connection-throttling-max-recent`.
+`--inbound-connection-throttling-max-conns-per-sec` \(uint\):
+
+Node will accept at most this many inbound connections per second. Defaults to `512`.
+
+`--inbound-connection-throttling-max-recent` \(uint\):
+
+Deprecated. Ignored as of AvalancheGo v1.6.0.
 
 ### Peer List Gossiping
 
