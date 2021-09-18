@@ -90,7 +90,7 @@ Don't rush into unknown projects that promise outsized returns. Any dapp you dep
 
 ### Fake tokens
 
-Anyone can create a new token, and on Avalanche it is pretty cheap. Also, liquidity pool creation on DEXes is permissionless so anyone can create a new pair with a fake token that has the same name and token image as the real thing. To avoid that kind of scams, always select tokens from the official token lists on the DEXes, don't use links from other places.
+Anyone can create a new token, and on Avalanche it is pretty cheap. Also, liquidity pool creation on DEXes is permissionless so anyone can create a new pair with a fake token that has the same name and token image as the real thing. To avoid that kind of scam, always select tokens from the official token lists on the DEXes, don't use links from other places.
 
 ## Explorers
 
