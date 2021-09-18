@@ -239,6 +239,7 @@ The following options may affect the correctness of a node. Only power users sho
 `--consensus-app-gossip-size` \(uint\):
 
 Number of peers an AppGossip message is gossiped to.
+
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
