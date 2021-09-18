@@ -78,7 +78,7 @@ It's crucial to understand that **your secret passphrase is your wallet**. Whoev
 
 The only place where you can enter the passphrase is into the [official Avalanche Wallet](https://wallet.avax.network) website, and even then, make sure you're on a secure network and that the website is the right one by typing the address `https://wallet.avax.network` address yourself. Check the padlock icon in your browser to make sure your connection is secure. If you're in doubt as to whether to enter your passphrase, don't.
 
-If you're working with non-trivial amounts of tokens (in other words, money you can't comfortably lose), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access yourf funds.
+If you're working with non-trivial amounts of tokens (in other words, money you can't comfortably lose), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access your funds.
 
 ### DYOR
 
