@@ -70,7 +70,7 @@ Dip in, browse, and try stuff. There are many gems in there.
 
 ## Security
 
-As elsewhere in the cryptocurrency space, you need to be keenly aware of the dangers. All transactions are final and irreversible, and if you fall victim to a scamm, nobody will be able to retrieve your funds.
+As elsewhere in the cryptocurrency space, you need to be keenly aware of the dangers. All transactions are final and irreversible, and if you fall victim to a scam, nobody will be able to retrieve your funds.
 
 ### Wallet Passphrase
 
