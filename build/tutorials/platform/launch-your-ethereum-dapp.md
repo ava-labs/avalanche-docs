@@ -10,7 +10,7 @@ Avalanche is a [network of networks](../../../learn/platform-overview/). It mean
 
 C-Chain runs a fork of [go-ethereum](https://geth.ethereum.org/docs/rpc/server) called [coreth](https://github.com/ava-labs/coreth) that has the networking and consensus portions replaced with Avalanche equivalents. What's left is the Ethereum VM, which runs Solidity smart contracts and manages data structures and blocks on the chain. As a result, you get a blockchain that can run all the Solidity smart contracts from Ethereum, but with much greater transaction bandwidth and instant finality that [Avalanche's revolutionary consensus](../../../learn/platform-overview/avalanche-consensus.md) enables.
 
-Coreth is loaded as a plugin into [AvalancheGo](https://github.com/ava-labs/avalancheg), the client node application used to run Avalanche network.
+Coreth is loaded as a plugin into [AvalancheGo](https://github.com/ava-labs/avalanchego), the client node application used to run Avalanche network.
 
 As far as your dapp is concerned, it will be running the same as on Ethereum, just quicker and cheaper. Let's find out how.
 
