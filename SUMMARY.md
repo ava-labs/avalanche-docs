@@ -58,7 +58,6 @@
     * [Verify Smart Contracts on the C-Chain Explorer](build/tutorials/smart-contracts/verify-smart-contracts.md)
     * [Add Avalanche to MetaMask Programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
     * [Create Your First DApp](build/tutorials/smart-contracts/react-and-ethers-dapp.md)
-
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
     * [Create a Fixed-Cap Asset](build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md)
