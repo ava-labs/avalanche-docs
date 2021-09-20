@@ -635,7 +635,7 @@ cd /tmp
 ```
 
 ```cpp
-wget https://golang.org/dl/go1.116.8.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.16.8.linux-amd64.tar.gz
 ```
 
 ```cpp
