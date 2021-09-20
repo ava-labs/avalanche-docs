@@ -628,18 +628,18 @@ source .bashrc
 puis reprendre à `./scripts/build.sh`
 
 Si vous rencontrez cette erreur :  
-**AvalancheGo requires Go &gt;= 1.15.5, Go 1.15.2 found.**
+**AvalancheGo requires Go &gt;= 1.xx.x, Go 1.xx.x found.**
 
 ```cpp
 cd /tmp
 ```
 
 ```cpp
-wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.116.8.linux-amd64.tar.gz
 ```
 
 ```cpp
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.1.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.16.8.linux-amd64.tar.gz
 ```
 
 ```cpp
