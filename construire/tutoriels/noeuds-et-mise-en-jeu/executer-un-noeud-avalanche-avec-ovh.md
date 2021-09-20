@@ -635,11 +635,11 @@ cd /tmp
 ```
 
 ```cpp
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz
 ```
 
 ```cpp
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.1.linux-amd64.tar.gz
 ```
 
 ```cpp
