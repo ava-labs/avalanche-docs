@@ -108,7 +108,7 @@ Path to a JSON file containing the genesis data to use. Ignored when running sta
 
 `--http-host` \(string\):
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`.
+The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. You can also enter domain names as parameter.
 
 `--http-port` \(int\):
 
