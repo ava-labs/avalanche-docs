@@ -26,7 +26,7 @@ Some examples of requirements include:
 * Validators must pass a KYC/AML checks
 * Validators must hold a certain license
 
-(To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.)
+\(To be abundantly clear, the above examples are just that: examples. These requirements do not apply to the Avalanche Primary Network.\)
 
 ### Support for Private Blockchains
 

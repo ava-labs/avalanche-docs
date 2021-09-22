@@ -6,7 +6,7 @@ The Avalanche Bridge \(AB\) can be used to transfer ERC20 tokens from Ethereum t
 
 ### Important Notes
 
-1. There is a bug in the Metamask Mobile app that affects bridge transactions (**only on mobile**). Until this is resolved, don't use the Metamask mobile app for bridge transfers. Use the desktop app, or, if on mobile, Coinbase Wallet.
+1. There is a bug in the Metamask Mobile app that affects bridge transactions \(**only on mobile**\). Until this is resolved, don't use the Metamask mobile app for bridge transfers. Use the desktop app, or, if on mobile, Coinbase Wallet.
 2. You need AVAX to pay for transaction fees on Avalanche. **You should use the AVAX you receive in the airdop to do a swap for more AVAX on an AMM so that you can pay for transaction fees.** If you run out of AVAX, you will not be able to do transactions on Avalanche.
 
 ### Transactions
@@ -19,13 +19,11 @@ Is is possible, but very unlikely, that the Ethereum transaction issued by the b
 
 #### How long does a bridge transfer take?
 
-The Ethereum transaction should take 10 - 15 minutes.
-The Avalance transaction takes a few seconds.
+The Ethereum transaction should take 10 - 15 minutes. The Avalance transaction takes a few seconds.
 
 #### Why is the Avalanche transaction part of the bridge taking so long?
 
-It only takes a few seconds. If the bridge interface shows it taking longer, it's just a problem with the interface. 
-Your assets have been transferred after a few seconds. Check your wallet and the C-Chain explorer.
+It only takes a few seconds. If the bridge interface shows it taking longer, it's just a problem with the interface. Your assets have been transferred after a few seconds. Check your wallet and the C-Chain explorer.
 
 #### What if the gas price is more than the amount I am transferring?
 
@@ -82,7 +80,7 @@ The bridge charges transfer fees in order to cover the cost of the transaction f
 
 When moving assets from Ethereum to Avalanche, the fee is $3 worth of the ERC20 asset being transferred. Transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
-When moving assets from Avalanche to Ethereum, the fee is the value of the maximum Ethereum transaction fee (gas limit * current gas price), plus a constant dollar amount \(currently $5\) to account for price volatility. Note that the maximum Ethereum transaction fee is based on the gas limit and may be higher than the actual transaction fee, which is based on the amount of gas used by the transaction.
+When moving assets from Avalanche to Ethereum, the fee is the value of the maximum Ethereum transaction fee \(gas limit \* current gas price\), plus a constant dollar amount \(currently $5\) to account for price volatility. Note that the maximum Ethereum transaction fee is based on the gas limit and may be higher than the actual transaction fee, which is based on the amount of gas used by the transaction.
 
 #### Why doesn't the amount of asset I received on one network match the amount that I sent from the other?
 
@@ -173,10 +171,10 @@ The Avalanche Bridge does not currently support NFT transfers.
 
 The Avalanche Bridge currently only supports transfer of Ethereum ERC20s to the Avalanche C-Chain and vice versa. There are plans to support transfer of ERC20s created on the Avalanche C-Chain. There are also plans to support networks other than Avalanche and Ethereum.
 
-#### Can I bridge assets from (network) to Avalanche?
+#### Can I bridge assets from \(network\) to Avalanche?
 
-The Avalanche Bridge can only transfer assets between Ethereum and Avalanche.
-To get assets from another network onto Avalanche, you can do one of the following:
+The Avalanche Bridge can only transfer assets between Ethereum and Avalanche. To get assets from another network onto Avalanche, you can do one of the following:
+
 * Transfer those assets to Ethereum, and from Ethereum to Avalanche
 * Use a third party bridge not created/maintained/supported by Ava Labs
 * Buy AVAX on a centralized exchange and withdraw AVAX to Avalanche, then use an AMM to swap for other assets.
@@ -205,11 +203,11 @@ No single party has access to the SGX enclave address. Only the enclave itself c
 
 #### Why doesn't the bridge hold funds in a a smart contract?
 
-Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers. 
+Not using a smart contract simplifies the end-to-end transfer requirements, resulting in lower gas fees and faster transfers.
 
 #### Can I integrate bridge transfers into my own smart contracts?
 
-Currently, the bridge only supports cross-chain transfers from externally owned accounts (EOAs). This is because the bridge uses the same address on both networks, ensuring that funds moved across the bridge are kept within the same wallet, and there is not a way to ensure that a smart contract at a given address on Ethereum also exists at the same address on Avalanche. ERC20 tokens sent to the bridge address from smart contracts on the Ethereum network will not be minted as wrapped tokens on Avalanche.
+Currently, the bridge only supports cross-chain transfers from externally owned accounts \(EOAs\). This is because the bridge uses the same address on both networks, ensuring that funds moved across the bridge are kept within the same wallet, and there is not a way to ensure that a smart contract at a given address on Ethereum also exists at the same address on Avalanche. ERC20 tokens sent to the bridge address from smart contracts on the Ethereum network will not be minted as wrapped tokens on Avalanche.
 
 #### Is the use of tx.origin in the BridgeToken contracts safe?
 
@@ -239,8 +237,7 @@ Depending on your location, you may be able to buy AVAX on a centralized exchang
 
 #### How can I contact someone for support?
 
-Support is available using the chat at [support.avax.network](https://support.avax.network), or on our [Discord](https://chat.avax.network/) server.
-**Please make a reasonable effort to search for the answer to your question before asking!** Someone else has almost certainly asked it.
+Support is available using the chat at [support.avax.network](https://support.avax.network), or on our [Discord](https://chat.avax.network/) server. **Please make a reasonable effort to search for the answer to your question before asking!** Someone else has almost certainly asked it.
 
 #### What does the .e suffix in the token name mean?
 
@@ -276,3 +273,4 @@ Specifications for the banner are as follows:
 * Portrait and Mobile:  720px \* 337px
 * Design elements in middle of banner or they will be cut off
 * Use solid color as BG or have gradient that fades into \#000000 \(edited\) 
+

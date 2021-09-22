@@ -63,7 +63,7 @@ For development purposes, Avalanche supports all the popular tooling for Ethereu
 
 * [MetaMask and Remix](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
 * [Truffle](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
-* [Hardhat](../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
+* [Hardhat](https://github.com/ava-labs/avalanche-docs/tree/102aa38f7591cab9e899c34937a3a86297c201ae/build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
 
 ## Ingesting On-Chain Data
 
