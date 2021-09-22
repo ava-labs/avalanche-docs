@@ -158,11 +158,11 @@ To see this account on Metamask, follow these steps:
 
 2. Create a new account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask 
 
-![Metamaks Import Account](../../../.gitbook/assets/Metamask-Import-Account.png)
+![](../../../.gitbook/assets/Metamask-Import-Account.png)
 
 3. Now you can see the balance of this newly created account on `Avalanche Local`
 
-![Local Pre-funded Account](../../../.gitbook/assets/local-pre-funded-account.png)
+![](../../../.gitbook/assets/local-pre-funded-account.png)
 
 
 ## P-Chain
