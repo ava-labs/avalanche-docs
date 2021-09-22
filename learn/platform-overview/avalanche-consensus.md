@@ -96,21 +96,21 @@ If a node gets an α majority response for a transaction then you give that tran
 
 There is also a notion of **confidence**, which is the sum of a vertex's chit plus the sum of its descendants' chits. For example, transaction **V** has a chit. It also has three descendants which have a chit so its confidence is increased from `3` to `4`. Similarly, transactions **W** and **X** both have a chit and they both have a descendant with a chit, so they each have confidence `2`. Transaction Y has confidence `1`.
 
-**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction, or a descendant of the transaction, received a successful α majority query response. Previously, transaction V had `3` consecutive successes, itself and its two children, and now it has `4` consecutive successes with transaction Y. Similarly for transactions W and X.
+**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction, or a descendant of the transaction, received a successful α majority query response. Previously, transaction V had `3` consecutive successes, itself and its two children, and now it has `4` consecutive successes with transaction **Y**. Similarly for transactions **W** and **X**.
 
 ![Working example 3](../../.gitbook/assets/cons-04-Consensus_Doc_txY-2.png)
 
-In this example we the acceptance threshold, β, is `4`. Transaction V has `4` consecutive success so it's **accepted**. This node is sure that every other correct node will eventually accept this transaction.
+In this example we the acceptance threshold, β, is `4`. Transaction **V** has `4` consecutive success so it's **accepted**. This node is sure that every other correct node will eventually accept this transaction.
 
 ![Working example 4](../../.gitbook/assets/cons-05-Consensus_Doc_txY-3.png)
 
-Now suppose the node learns about transaction **Y'** which conflicts with transaction Y. It follows the same steps as before and subsamples _k_ \(`4`\) validators and asks if they prefer transaction Y'. In this case, two of them say that they prefer Y' and two of them say that they do not prefer Y'. This time there is no α majority response, and the DAG is updated accordingly.
+Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It follows the same steps as before and subsamples _k_ \(`4`\) validators and asks if they prefer transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated accordingly.
 
 ![Working example 5](../../.gitbook/assets/cons-06-Consensus_Doc_txY-4.png)
 
-Transactions Y and Y' are in a conflict set; only one of them can ultimately get accepted. Transaction Y' doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. Thus consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
+Transactions **Y** and **Y'** are in a conflict set; only one of them can ultimately get accepted. Transaction **Y'** doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. Transaction **W**'s  consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
 
-When a node is asked whether it prefers a given transaction, it replies yes if that transaction has the highest confidence of any transaction in the transaction's conflict set. In this example, transaction Y has confidence `1` and transaction Y' has confidence `0` so the node prefer transaction Y to transaction Y'.
+When a node is asked whether it prefers a given transaction, it replies yes if that transaction has the highest confidence of any transaction in the transaction's conflict set. In this example, transaction **Y** has confidence `1` and transaction **Y'** has confidence `0` so the node prefer transaction **Y** to transaction **Y'**.
 
 ![Working example 6](../../.gitbook/assets/cons-07-Consensus_Doc_txY-1.png)
 
