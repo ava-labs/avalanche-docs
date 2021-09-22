@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Avalanche is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers—helping you build anything you can imagine.
+Avalanche is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers&mdash;helping you build anything you can imagine.
 
-The Avalanche Network is composed of many blockchains. One of these blockchains is the C-Chain \(Contract Chain\), which is an Ethereum Virtual Machine instance. The C-Chain's API is almost identical to an Ethereum node's API. Avalanche offers the same interface as Ethereum but with higher speed, higher throughput, lower fees and lower transaction confirmation times. These properties considerably improve the performance of DApps and the user experience of smart contracts.
+The Avalanche Network is composed of many blockchains. One of these blockchains is the C-Chain (Contract Chain), which is an Ethereum Virtual Machine instance. The C-Chain's API is almost identical to an Ethereum node's API. Avalanche offers the same interface as Ethereum but with higher speed, higher throughput, lower fees and lower transaction confirmation times. These properties considerably improve the performance of DApps and the user experience of smart contracts.
 
 The goal of this guide is to lay out best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain. We'll be building smart contracts with development environment [Hardhat](https://hardhat.org).
 
@@ -12,11 +12,11 @@ The goal of this guide is to lay out best practices regarding writing, testing a
 
 ### NodeJS and Yarn
 
-First, install the LTS \(long-term support\) version of [nodejs](https://nodejs.org/en). This is `14.17.0` at the time of writing. NodeJS bundles `npm`.
+First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `14.17.0` at the time of writing. NodeJS bundles `npm`.
 
 Next, install [yarn](https://yarnpkg.com):
 
-```text
+```zsh
 npm install -g yarn
 ```
 
@@ -32,7 +32,7 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 
 Clone the [quickstart repository](https://github.com/ava-labs/avalanche-smart-contract-quickstart) and install the necessary packages via `yarn`.
 
-```text
+```zsh
 $ git clone https://github.com/ava-labs/avalanche-smart-contract-quickstart.git
 $ cd avalanche-smart-contract-quickstart
 $ yarn
@@ -52,7 +52,7 @@ In our repository we use a pre-configured file [hardhat.config.ts](https://githu
 
 You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/hardhat.config.ts). There are two tasks included as examples: `accounts` and `balances`. Both have scripts in [package.json](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json).
 
-```javascript
+```json
 "accounts": "npx hardhat accounts",
 "balances": "npx hardhat balances"
 ```
@@ -63,7 +63,7 @@ You can define custom hardhat tasks in [hardhat.config.ts](https://github.com/av
 
 Prints a list of accounts on the local Avash network.
 
-```text
+```zsh
 $ yarn accounts --network local
 yarn run v1.22.4
 npx hardhat accounts --network local
@@ -83,7 +83,7 @@ npx hardhat accounts --network local
 
 Prints a list of accounts and their corresponding AVAX balances on the local Avash network.
 
-```text
+```zsh
 $ yarn balances --network local
 yarn run v1.22.4
 npx hardhat balances --network local
@@ -101,6 +101,7 @@ npx hardhat balances --network local
 
 Notice that the first account is already funded. This is because this address is pre-funded in the local network genesis file.
 
+
 ## Hardhat Help
 
 Run `yarn hardhat` to list Hardhat's version, usage instructions, global options and available tasks.
@@ -111,18 +112,18 @@ Run `yarn hardhat` to list Hardhat's version, usage instructions, global options
 
 First confirm you have the latest AvalancheGo built.
 
-```text
+```zsh
 $ cd /path/to/avalanchego
 $ git fetch -p
 $ git checkout master
 $ ./scripts/build.sh
 ```
 
-\(Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.\)
+(Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
 Start Avash and run a script to start a new local network.
 
-```text
+```zsh
 $ cd /path/to/avash
 $ git fetch -p
 $ git checkout master
@@ -143,7 +144,8 @@ Transfer 1,000 AVAX from the X-Chain to each of the 10 accounts in `hardhat.conf
 
 Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
 
-```text
+
+```zsh
 $ cd /path/to/avalanche-smart-contract-quickstart
 $ yarn fund-cchain-addresses
 yarn run v1.22.4
@@ -157,7 +159,7 @@ Importing AVAX to the C-Chain...
 
 Confirm each of the accounts are funded with 1000 AVAX.
 
-```text
+```zsh
 $ yarn balances --network local
 yarn run v1.22.4
 npx hardhat balances --network local
@@ -176,7 +178,7 @@ npx hardhat balances --network local
 
 Send each of the accounts some AVAX from the first account.
 
-```text
+```zsh
 $ yarn send-avax-wallet-signer --network local
 yarn run v1.22.4
 npx hardhat run scripts/sendAvaWalletSigner.ts --network local
@@ -186,7 +188,7 @@ Seeding addresses with AVAX
 
 Confirm that the balances are updated
 
-```text
+```zsh
 $ yarn balances --network local
 yarn run v1.22.4
 npx hardhat balances --network local
@@ -206,7 +208,7 @@ npx hardhat balances --network local
 
 In [`package.json`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/package.json) there's a `compile` script.
 
-```javascript
+```json
 "compile": "npx hardhat compile",
 ```
 
@@ -214,7 +216,7 @@ Run `yarn compile` to make sure your project compiles.
 
 Compile the smart contract.
 
-```text
+```zsh
 $ yarn compile
 yarn run v1.22.4
 rimraf ./build/
@@ -230,19 +232,19 @@ Hardhat enables deploying to multiple environments. In [package.json](https://gi
 
 Edit the deployment script in `scripts/deploy.ts`
 
-```javascript
+```json
 "deploy": "npx hardhat run scripts/deploy.ts",
 ```
 
-You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` \(e.g. a local network created with Avash\), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
+You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avash), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
 
-```text
+```zsh
 yarn deploy --network mainnet
 ```
 
 Deploy the contract to your local network
 
-```text
+```zsh
 $ yarn deploy --network local
 yarn run v1.22.4
 npx hardhat run scripts/deploy.ts --network local
@@ -254,11 +256,12 @@ We now have a token deployed at `0x17aB05351fC94a1a67Bf3f56DdbB941aE6`.
 
 ### Interact with Smart Contract
 
-Hardhat has a developer console to interact with contracts and the network. For more information about Hardhat's console see [here](https://hardhat.org/guides/hardhat-console.html). Hardhat console is a NodeJS-REPL, and you can use different tools in it. [ethers](https://docs.ethers.io/v5/) is the library that we'll use to interact with our network.
+Hardhat has a developer console to interact with contracts and the network. For more information about Hardhat's console see [here](https://hardhat.org/guides/hardhat-console.html).
+Hardhat console is a NodeJS-REPL, and you can use different tools in it. [ethers](https://docs.ethers.io/v5/) is the library that we'll use to interact with our network.
 
 You can open console with:
 
-```text
+```zsh
 $ yarn console --network local
 yarn run v1.22.11
 npx hardhat console --network local
@@ -269,7 +272,7 @@ Type ".help" for more information.
 
 Get the contract instance with factory and contract address to interact with our contract:
 
-```javascript
+```js
 > const Coin = await ethers.getContractFactory('ExampleERC20');
 undefined
 > const coin = await Coin.attach('0x17aB05351fC94a1a67Bf3f56DdbB941aE6')
@@ -280,7 +283,7 @@ The first line retrieves contract factory with ABI & bytecode. The second line r
 
 Fetch the accounts:
 
-```javascript
+```js
 > let accounts = await ethers.provider.listAccounts()
 undefined
 > accounts
@@ -297,12 +300,11 @@ undefined
   '0x0Fa8EA536Be85F32724D57A37758761B86416123'
 ]
 ```
-
 This is exactly the same account list as in `yarn accounts`.
 
 Now we can interact with our `ERC-20` contract:
 
-```javascript
+```js
 > let value = await coin.balanceOf(accounts[0])
 undefined
 > value.toString()
@@ -317,7 +319,7 @@ undefined
 
 `accounts[1]` currently has no balance. Send some tokens to `accounts[1]`, which is `0x9632a79656af553F58738B0FB750320158495942`.
 
-```javascript
+```js
 > let result = await coin.transfer(accounts[1], 100)
 undefined
 > result
@@ -349,7 +351,7 @@ Note: Since this is a local network, we did not need to wait until transaction i
 
 Now we can ensure that tokens are transferred:
 
-```javascript
+```js
 > let value = await coin.balanceOf(accounts[0])
 undefined
 > value.toString()
@@ -362,14 +364,14 @@ undefined
 
 As you might noticed there was no "sender" information in `await coin.transfer(accounts[1], 100)`; this is because `ethers` uses the first signer as the default signer. In our case this is `account[0]`. If we want to use another account we need to connect with it first.
 
-```javascript
+```js
 > let signer1 = await ethers.provider.getSigner(1)
 > let contractAsSigner1 = coin.connect(signer1)
 ```
 
 Now we can call the contract with `signer1`, which is `account[1]`.
 
-```javascript
+```js
 > await contractAsSigner1.transfer(accounts[0], 5)
 {
   hash: '0x807947f1c40bb723ac312739d238b62764ae3c3387c6cdbbb6534501577382dd',
@@ -397,7 +399,7 @@ Now we can call the contract with `signer1`, which is `account[1]`.
 
 Let's check balances now:
 
-```javascript
+```js
 > let value = await coin.balanceOf(accounts[0])
 undefined
 > value.toString()
@@ -415,4 +417,3 @@ We've succesfully transfered 5 tokes from `accounts[1]` to `accounts[0]`
 Now you have the tools you need to launch a local Avalanche network, create a Hardhat project, as well as create, compile, deploy and interact with Solidity contracts.
 
 Join our [Discord Server](https://chat.avax.network) to learn more and ask any questions you may have.
-

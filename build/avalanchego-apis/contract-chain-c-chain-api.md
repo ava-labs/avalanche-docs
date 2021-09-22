@@ -110,7 +110,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth\_baseFee
+### eth_baseFee
 
 Get the base fee for the next block.
 
@@ -143,7 +143,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth\_maxPriorityFeePerGas
+### eth_maxPriorityFeePerGas
 
 Get the priority fee needed to be included in a block.
 
@@ -739,4 +739,3 @@ curl -X POST --data '{
     }
 }
 ```
-

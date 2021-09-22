@@ -60,7 +60,7 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 truffle init
 ```
 
-Development \(local\) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+Development (local) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
 
 ```text
 npm install @truffle/hdwallet-provider
@@ -109,6 +109,7 @@ module.exports = {
     },
   },
 };
+
 ```
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
@@ -190,15 +191,13 @@ When deploying smart contracts to the C-Chain, truffle will default to the first
 You can view imported accounts with truffle console.
 
 To open the truffle console:
-
 ```bash
 $ truffle console --network development
 ```
 
-Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
+Note: If you see  `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
 
 Inside truffle console:
-
 ```bash
 truffle(development)> accounts
 [
@@ -216,7 +215,6 @@ truffle(development)> accounts
 ```
 
 You can see balances with:
-
 ```bash
 truffle(development)> await web3.eth.getBalance(accounts[0])
 '50000000000000000000000000'
@@ -224,11 +222,11 @@ truffle(development)> await web3.eth.getBalance(accounts[0])
 truffle(development)> await web3.eth.getBalance(accounts[1])
 '0'
 ```
+Notice that `accounts[0]` (default account) has some balance, while `accounts[1]` has no balance.
 
-Notice that `accounts[0]` \(default account\) has some balance, while `accounts[1]` has no balance.
+
 
 ### Scripting account funding
-
 There is a convenient script that funds the `accounts` list . You can find it [here](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/fund-cchain-addresses.js). You can also download it using this command:
 
 ```text
@@ -242,7 +240,6 @@ truffle exec fund-cchain-addresses.js --network development
 ```
 
 Script will fund 1000 AVAX to each account in `accounts` list above. After succesfully running the script you can check balances with:
-
 ```bash
 truffle(development)> await web3.eth.getBalance(accounts[0]);
 '50000001000000000000000000'
@@ -257,6 +254,7 @@ If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Be
 ### Personal APIs
 
 Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `personal-api-enabled`. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs).
+
 
 ## Run Migrations
 
@@ -338,6 +336,7 @@ Error:  *** Deployment Failed ***
    * Try:
       + Using an adequately funded account
 ```
+
 
 ## Interacting with your contract
 

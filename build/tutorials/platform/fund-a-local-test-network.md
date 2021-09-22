@@ -2,15 +2,15 @@
 
 ## Introduction
 
-In [Create a Local Test Network](create-a-local-test-network.md), we showed you how to launch a 5 node local test network. Once you have a local network the next step is to fund an address so that you can begin creating transactions and interacting with smart-contracts.
+In [Create a Local Test Network](./create-a-local-test-network.md), we showed you how to launch a 5 node local test network. Once you have a local network the next step is to fund an address so that you can begin creating transactions and interacting with smart-contracts.
 
-We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain. **NOTE** this same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../../tools/avalanchejs/). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
+We'll show you how to leverage a pre-funded private key to access funds on the X-Chain, C-Chain and P-Chain. **NOTE** this same private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`, can be used to sign txs locally using [AvalancheJS](../../tools/avalanchejs/README.md). You don't need to import the key into the local keystore in order to access those funds. They are in the genesis vertex and block for each respective chain.
 
 ## Create a User
 
 First run `keystore.createUser` to create a user in the local keystore.
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/keystore' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -32,13 +32,13 @@ curl --location --request POST '127.0.0.1:9650/ext/keystore' \
 }
 ```
 
-Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`—aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
+Next you can import the pre-funded private key, `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`&mdash;aka `ewoq`, into any of the 3 blockchains on the default subnet. After importing the key you can check the balance to confirm that it worked.
 
 ## X-Chain
 
 Import `ewoq` into the [X-Chain](../../avalanchego-apis/exchange-chain-x-chain-api.md).
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -65,7 +65,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 
 Confirm the `X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u` address now has a balance of 300m AVAX on the X-Chain.
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -97,7 +97,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 
 Import `ewoq` into the [C-Chain](../../avalanchego-apis/contract-chain-c-chain-api.md).
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -122,9 +122,9 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/C/avax' \
 
 ### Check the C-Chain balance
 
-Confirm the `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` address has a balance of 50m \(0x295be96e64066972000000 in hex\) AVAX on the C-Chain.
+Confirm the `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` address has a balance of 50m (0x295be96e64066972000000 in hex) AVAX on the C-Chain.
 
-```text
+```zsh
 curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -164,11 +164,12 @@ To see this account on Metamask, follow these steps:
 
 ![](../../../.gitbook/assets/local-pre-funded-account.png)
 
+
 ## P-Chain
 
 Import `ewoq` into the [P-Chain](../../avalanchego-apis/platform-chain-p-chain-api.md).
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -195,7 +196,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 
 Confirm the `P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u` address has a balance of 30m AVAX on the P-Chain. 20m should be unlocked and 10m locked and stakeable.
 
-```text
+```zsh
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -228,4 +229,3 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
     "id": 1
 }
 ```
-

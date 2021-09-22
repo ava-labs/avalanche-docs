@@ -13,7 +13,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
 {% hint style="warning" %}
-The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(GWei\) prior to Apricot Phase 3 \(AP3\). The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). AP3 introduces dynamic fees to the C-Chain which allows the gas price to fluctuate between 75 nAVAX \(GWei\) and 225 nAVAX \(GWei\) \(dependent on network activity\). Apricot Phase 4 \(AP4\) further expands the dynamic fee range to between 25 nAVAX \(66% reduction from AP3\) and 1000 nAVAX. See below for more detailed information on dynamic fees.
+The [C-Chain](./#contract-chain-c-chain) gas price is 225 nAVAX \(GWei\) prior to Apricot Phase 3 (AP3). The C-Chain gas limit is 8 \* 10e6 \(8,000,000\). AP3 introduces dynamic fees to the C-Chain which allows the gas price to fluctuate between 75 nAVAX \(GWei\) and 225 nAVAX \(GWei\) \(dependent on network activity\). Apricot Phase 4 (AP4) further expands the dynamic fee range to between 25 nAVAX (66% reduction from AP3) and 1000 nAVAX. See below for more detailed information on dynamic fees.
 {% endhint %}
 
 ```cpp
@@ -54,9 +54,9 @@ The Avalanche C-Chain uses an algorithm to determine the "base fee" for a transa
 
 ### Base Fee
 
-The base fee can go as low as 25 nAVAX \(GWei\) and as high as 1000 nAVAX \(GWei\) after AP4.
+The base fee can go as low as 25 nAVAX \(GWei\) and as high as 1000 nAVAX \(GWei\) after AP4. 
 
-Please note that the maximum gas price is not capped by the static gas price of AP2 \(225 nAVAX\). If you don’t migrate to use the built-in dynamic fee endpoints prior to AP4 activation, it is possible that the processing of your transactions will be delayed \(if the minimum network gas price rises above 225 nAVAX\). We recommend that users switch to using the [eth\_baseFee](https://github.com/ava-labs/avalanche-docs/tree/ddab7fa003383dd9dc236d8e309d2c9a57af00fa/build/avalanchego-apis/contract-chain-c-chain-api/README.md#eth_basefee) and [eth\_maxPriorityFeePerGas](https://github.com/ava-labs/avalanche-docs/tree/ddab7fa003383dd9dc236d8e309d2c9a57af00fa/build/avalanchego-apis/contract-chain-c-chain-api/README.md#eth_maxpriorityfeepergas) API methods to estimate what fee to use in their transactions.
+Please note that the maximum gas price is not capped by the static gas price of AP2 (225 nAVAX). If you don’t migrate to use the built-in dynamic fee endpoints prior to AP4 activation, it is possible that the processing of your transactions will be delayed (if the minimum network gas price rises above 225 nAVAX). We recommend that users switch to using the [eth_baseFee](../../build/avalanchego-apis/contract-chain-c-chain-api#eth_basefee) and [eth_maxPriorityFeePerGas](../../build/avalanchego-apis/contract-chain-c-chain-api#eth_maxpriorityfeepergas) API methods to estimate what fee to use in their transactions.
 
 ### Dynamic Fee Transactions
 

@@ -448,6 +448,7 @@ Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, 
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
 
+
 `profile-continuous-enabled` \(boolean\):
 
 Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
@@ -646,7 +647,8 @@ Node will report unhealthy if more than this portion of message sends fail. Must
 
 `--inbound-connection-throtting-cooldown` \(duration\):
 
-Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
+Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`.
+If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
 
 `--inbound-connection-throttling-max-conns-per-sec` \(uint\):
 
