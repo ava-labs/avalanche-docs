@@ -92,11 +92,11 @@ A node finds out about a new transaction **Y**. It queries the network based on 
 
 ![Working example 2](../../.gitbook/assets/cons-03-Consensus_Doc_txY-6.png)
 
-If a node gets an α majority response for a transaction then you give that transaction a **chit**, which is a boolean that says, "When I queried the network about this transaction, an α majority said that they preferred it." In our example, transaction Y gets a chit.
+If a node gets an α majority response for a transaction then you give that transaction a **chit**, which is a boolean that says, "When I queried the network about this transaction, an α majority said that they preferred it." In our example, transaction **Y** gets a chit.
 
-There is also a notion of **confidence**, which is the sum of a vertex's chit plus the sum of its descendants' chits. For example, transaction **V** has a chit. It also has three descendants which have a chit so its confidence is increased from `3` to `4`. Similarly, transactions **W** and **X** both have a chit and they both have a descendant with a chit, so they each have confidence `2`. Transaction Y has confidence `1`.
+There is also a notion of **confidence**, which is the sum of a vertex's chit plus the sum of its descendants' chits. For example, transaction **V** has a chit. It also has three descendants which have a chit so its confidence is increased from `3` to `4`. Similarly, transactions **W** and **X** both have a chit and they both have a descendant with a chit, so they each have confidence `2`. Transaction **Y** has confidence `1`.
 
-**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction, or a descendant of the transaction, received a successful α majority query response. Previously, transaction V had `3` consecutive successes, itself and its two children, and now it has `4` consecutive successes with transaction **Y**. Similarly for transactions **W** and **X**.
+**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction, or a descendant of the transaction, received a successful α majority query response. Previously, transaction **V** had `3` consecutive successes, itself and its two children, and now it has `4` consecutive successes with transaction **Y**. Similarly for transactions **W** and **X**.
 
 ![Working example 3](../../.gitbook/assets/cons-04-Consensus_Doc_txY-2.png)
 
@@ -118,7 +118,7 @@ Now the node learns about a new transaction, **Z**, and it does the same thing a
 
 ![Working example 7](../../.gitbook/assets/cons-08-Consensus_Doc_txY-5.png)
 
-Transaction Z gets a chit. It also has a confidence of `1` and `1` consecutive success. The processing ancestors are updated, too. No transactions have `4` consecutive successes so no ancestors are accepted.
+Transaction **Z** gets a chit. It also has a confidence of `1` and `1` consecutive success. The processing ancestors are updated, too. No transactions have `4` consecutive successes so no ancestors are accepted.
 
 ## Vertices
 
