@@ -1560,7 +1560,7 @@ platform.getValidatorsAt(
 
 #### **Example Call**
 
-```bash
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getValidatorsAt",
@@ -1569,11 +1569,12 @@ curl -X POST --data '{
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+
 ```
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1588,6 +1589,7 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+
 
 ### platform.importAVAX
 
