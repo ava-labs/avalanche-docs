@@ -148,19 +148,13 @@ curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 
 To see this account on Metamask, follow these steps: 
 
-1. Set up Metamask by following [this](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md#step-1-setting-up-metamask) and create a `Avalanche Local` network with these values
+* Set up Metamask by following [this](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md#local-testnet-avash-settings-avash-tutorial) and create a `Avalanche Local` network.
 
-* **Network Name**: Avalanche Local
-* **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
-* **ChainID**: `43112`
-* **Symbol**: `AVAX`
-* **Explorer**: N/A
-
-2. Create a new account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask 
+* Create a new account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask 
 
 ![](../../../.gitbook/assets/Metamask-Import-Account.png)
 
-3. Now you can see the balance of this newly created account on `Avalanche Local`
+* Now you can see the balance of this newly created account on `Avalanche Local`
 
 ![](../../../.gitbook/assets/local-pre-funded-account.png)
 
