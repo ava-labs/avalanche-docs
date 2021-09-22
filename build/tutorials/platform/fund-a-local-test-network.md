@@ -148,7 +148,7 @@ curl --location --request POST 'localhost:9650/ext/bc/C/rpc' \
 
 To see this account on Metamask, follow these steps: 
 
-1. Set up Metamask by following [this](https://github.com/ava-labs/avalanche-docs/tree/52117d8837350201aeb9d845117c6425d35e7051/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask/README.md#step-1-setting-up-metamask) and create a `Avalanche Local` network with these values
+1. Set up Metamask by following [this](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md#step-1-setting-up-metamask) and create a `Avalanche Local` network with these values
 
 * **Network Name**: Avalanche Local
 * **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
