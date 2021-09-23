@@ -1,6 +1,6 @@
 # Run a Five Node Network with Avash
 
-[Avash](../../tools/avash) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate environments to be in any state that you wish. This greatly accelerates local development work and testing.
+[Avash](../../tools/avash) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate the local network to be in any state that you wish. This greatly accelerates local development work and testing.
 
 ## Dependencies
 
@@ -8,7 +8,7 @@ To get started make sure that you have the latest-and-greatest versions of each 
 
 ### Golang
 
-First, confirm you have the [latest version of Golang](https://golang.org/dl) installed and if not then install it.
+First, confirm you have the [latest version of Golang](https://golang.org/dl) installed and if not then install it. This tutorial uses `go1.17.1`.
 
 ```zsh
 go version
@@ -17,7 +17,7 @@ go version go1.17.1 darwin/amd64
 
 ### AvalancheGo
 
-Next, confirm you have the [latest version of AvalancheGo](https://github.com/ava-labs/avalanchego/releases) installed and built.
+Next, confirm you have the [latest version of AvalancheGo](https://github.com/ava-labs/avalanchego/releases) installed and built. This tutorial uses `avalanche/1.6.0`.
 
 ```zsh
 cd /path/to/avalanchego
@@ -34,7 +34,7 @@ avalanche/1.6.0 [database=v1.4.5, commit=43ab26923909bf5750c1edeb8477a3b912e40ea
 
 ### Avash
 
-Then, confirm you have the [latest versions of Avash](https://github.com/ava-labs/avalanchego/releases) installed and built. Call the `help` command to confirm Avash properly built.
+Then, confirm you have the [latest version of Avash](https://github.com/ava-labs/avalanchego/releases) installed and built. This tutorial uses `v1.2.0`. Call the `help` command to confirm Avash built properly.
 
 ```zsh
 cd /path/to/avash
@@ -106,7 +106,7 @@ If you successfully completed each of the previous steps then your local avash n
 
 ## Inspect the network
 
-Avash's shell provides the `procmanager` which enables you to list, stop, and start processes registered with the process manager.
+Avash's shell provides the `procmanager` command which enables you to list, stop, and start processes registered with the process manager.
 
 Available Commands:
 
