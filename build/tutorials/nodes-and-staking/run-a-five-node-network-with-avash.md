@@ -1,6 +1,6 @@
 # Run a Five Node Network with Avash
 
-Avash is a development network for running test or private Avalanche networks on your local machine. You can configure and automate environments to be in any state that you wish. This greatly accelerates local development work and testing.
+[Avash](../../tools/avash) is a development network for running test or private Avalanche networks on your local machine. You can configure and automate environments to be in any state that you wish. This greatly accelerates local development work and testing.
 
 ## Dependencies
 
@@ -8,7 +8,7 @@ To get started make sure that you have the latest-and-greatest versions of each 
 
 ### Golang
 
-First, confirm you have the latest and greatest version of Golang and if not then [install it](https://golang.org/dl).
+First, confirm you have the [latest version of Golang](https://golang.org/dl) and if not then install it.
 
 ```zsh
 go version
