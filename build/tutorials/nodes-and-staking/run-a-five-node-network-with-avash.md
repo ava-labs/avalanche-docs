@@ -104,6 +104,29 @@ curl --location --request POST 'http://localhost:9650/ext/info' \
 
 If you successfully completed each of the previous steps then your local avash network is good to go.
 
+## Inspect the network
+
+Avash's shell provides the `procmanager` which enables you to list, stop, and start processes registered with the process manager.
+
+Available Commands:
+
+```txt
+kill        Kills the process named if currently running.
+killall     Kills all processes if currently running.
+list        Lists the processes currently running.
+metadata    Prints the metadata associated with the node name.
+remove      Removes the process named.
+removeall   Removes all processes.
+start       Starts the process named if not currently running.
+startall    Starts all processes if currently stopped.
+stop        Stops the process named if currently running.
+stopall     Stops all processes if currently running.
+```
+
+When you `list` all processes you can view the values of all the flags which were used to fire up that AvalancheGo instance. 
+
+![List processes](../../../.gitbook/assets/procmanager-list.png)
+
 ## Summary
 
 Avash serves the critical function of enabling developers to test their work quickly in a highly configurable environment with non value-bearing assets. Each instance of AvalancheGo is a full node and Avash is an actual AvalancheGo network performing real consensus and producing real blocks and vertices. 
