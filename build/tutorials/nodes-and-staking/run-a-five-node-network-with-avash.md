@@ -8,7 +8,7 @@ To get started make sure that you have the latest-and-greatest versions of each 
 
 ### Golang
 
-First, confirm you have the [latest version of Golang](https://golang.org/dl) and if not then install it.
+First, confirm you have the [latest version of Golang](https://golang.org/dl) installed and if not then install it.
 
 ```zsh
 go version
@@ -98,6 +98,10 @@ curl --location --request POST 'http://localhost:9650/ext/info' \
 }
 ```
 
+If you successfully completed each of the previous steps then your local avash network is good to go.
+
 ## Summary
 
-If you successfully completed each of the previous steps then your local avash network is good to go.
+Avash serves the critical function of enabling developers to test their work quickly in a highly configurable environment with non value-bearing assets. Each instance of AvalancheGo is a full node and Avash is an actual AvalancheGo network performing real consensus and producing real blocks and vertices. 
+
+If you're writing sofware for the Avalanche network then Avash should be a fundamental building block of your workflow. You should start each new bit of code deployed on a local Avash network and only after extensive testing and QA should you deploy your work to the Fuji testnet and ultimately mainnet.
