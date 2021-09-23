@@ -42,6 +42,7 @@
     * [Maintain an Avalanche Node](https://youtu.be/o4Fww-sHoaQ)
     * [Monitor an Avalanche Node](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
     * [Node backup and restore](build/tutorials/nodes-and-staking/node-backup-and-restore.md)
+    * [Run a Five Node Network with Avash](build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash.md)
     * [Run an Avalanche Node](build/tutorials/nodes-and-staking/run-avalanche-node.md)
     * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
     * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
