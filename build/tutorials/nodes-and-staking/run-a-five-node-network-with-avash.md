@@ -1,6 +1,6 @@
 # Run a Five Node Network with Avash
 
-[Avash](../../tools/avash) is a development network for running test or private Avalanche networks on your local machine. You can configure and automate environments to be in any state that you wish. This greatly accelerates local development work and testing.
+[Avash](../../tools/avash) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate environments to be in any state that you wish. This greatly accelerates local development work and testing.
 
 ## Dependencies
 
@@ -52,7 +52,7 @@ With all the dependencies properly built you're now ready to fire up a local Ava
 
 ### Five Node Staking Script
 
-Avash lets you automate your development environment to be an arbitrary number of local AvalancheGo instances with a unique configuration for each instance. The `five_node_staking.lua`, for example, script fires up a local Avalanche network with 5 full AvalancheGo Nodes. You can interact with each individual node over RPC.
+Avash lets you automate your development environment to be an arbitrary number of local AvalancheGo instances with a unique configuration for each instance. The `five_node_staking.lua` script, for example, fires up a local Avalanche network with 5 full AvalancheGo Nodes. You can interact with each individual node over RPC.
 
 In the following `five_node_staking.lua` script notice you can run and configure an arbitrary number of full nodes. You are limited by the number of staker keys in the [Avash certs/ directory](https://github.com/ava-labs/avash/tree/master/certs). AvalancheGo ships with 7 staker keys.
 
@@ -108,4 +108,4 @@ If you successfully completed each of the previous steps then your local avash n
 
 Avash serves the critical function of enabling developers to test their work quickly in a highly configurable environment with non value-bearing assets. Each instance of AvalancheGo is a full node and Avash is an actual AvalancheGo network performing real consensus and producing real blocks and vertices. 
 
-If you're writing sofware for the Avalanche network then Avash should be a fundamental building block of your workflow. You should start each new bit of code deployed on a local Avash network and only after extensive testing and QA should you deploy your work to the Fuji testnet and ultimately mainnet.
+If you're writing sofware for the Avalanche network then Avash should be a fundamental building block of your workflow. You should start each new project on a local Avash network and only after extensive testing and QA should you deploy your work to the Fuji testnet and ultimately mainnet.
