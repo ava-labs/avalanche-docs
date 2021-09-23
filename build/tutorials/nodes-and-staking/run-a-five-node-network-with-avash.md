@@ -52,6 +52,12 @@ With all the dependencies properly built you're now ready to fire up a local Ava
 
 ### Five Node Staking Script
 
+Avash lets you automate your development environment to be an arbitrary number of local AvalancheGo instances with a unique configuration for each instance. The `five_node_staking.lua`, for example, script fires up a local Avalanche network with 5 full AvalancheGo Nodes. You can interact with each individual node over RPC.
+
+In the following `five_node_staking.lua` script notice you can run and configure an arbitrary number of full nodes. You are limited by the number of staker keys in the [Avash certs/ directory](https://github.com/ava-labs/avash/tree/master/certs). AvalancheGo ships with 7 staker keys.
+
+Configure each node separately by passing in valid [AvalancheGo command line arguments](https://docs.avax.network/build/references/command-line-interface).
+
 ```lua
 cmds = {
     "startnode node1 --db-type=memdb --staking-enabled=true --http-port=9650 --staking-port=9651 --log-level=debug --bootstrap-ips= --staking-tls-cert-file=certs/keys1/staker.crt --staking-tls-key-file=certs/keys1/staker.key",
@@ -65,8 +71,6 @@ for key, cmd in ipairs(cmds) do
     avash_call(cmd)
 end
 ```
-
-Avash lets you automate your development environment to be an arbitrary number of local AvalancheGo instances with unique configuration for each instance. The `five_node_staking.lua` script fires up a local Avalanche network with 5 full AvalancheGo Nodes. You can interact with each individual node over RPC.
 
 Start avash and run the `five_node_staking.lua` script via the Avash shell.
 
