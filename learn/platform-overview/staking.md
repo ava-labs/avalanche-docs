@@ -111,8 +111,16 @@ When you issue the transaction to delegate tokens, the staked tokens and transac
 
 ### Is there a tool to check the health of a validator?
 
-Visit [here](https://stats.avax.network/dashboard/validator-health-check) and put your Node-ID in the *Node-ID* field. More info can be found [here](../../build/tools/avalanche-stats#validator-health-check).
+Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check). More information about this tool can be found [here](../../build/tools/avalanche-stats#validator-health-check).
 
 
-### How is staking reward decided?
-Uptime requirement is over the staking period, and only the staking period, as that is the period the reward is given for. At the end of the staking period a question is put up for consensus decision: was this node up for 80% or more of its staking time? yes/no. Each node answers for itself, not with a percentage, but with yes/no. So the average uptime shown on some websites is not exactly a good measure. For example: you can have 10 nodes observing a node to be at 79% and one node at 100%. The average will be over 80%, but the reward will not be awarded, because 90% of the nodes would have actually voted no reward.
+### How is it determined whether a validator receives a staking reward?
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not.
+If a validator thinks that the node was online and responsive for more than the required amount of time (currently 80%), the validator will vote for the node to receive a staking reward.
+Otherwise, the validator will vote that the node should not receive a staking reward.
+The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
+
+Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
+
+Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again.
+The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
