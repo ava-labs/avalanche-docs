@@ -6,7 +6,7 @@ description: Learn how to stake on Avalanche by validating or delegating
 
 Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
-### How does proof-of-stake work?
+## How does proof-of-stake work?
 
 To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
@@ -107,3 +107,12 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
+## FAQ
+
+### Is there a tool to check the health of a validator?
+
+Visit [here](https://stats.avax.network/dashboard/validator-health-check) and put your Node-ID in the *Node-ID* field. More info can be found [here](../../build/tools/avalanche-stats#validator-health-check).
+
+
+### How is staking reward decided?
+Uptime requirement is over the staking period, and only the staking period, as that is the period the reward is given for. At the end of the staking period a question is put up for consensus decision: was this node up for 80% or more of its staking time? yes/no. Each node answers for itself, not with a percentage, but with yes/no. So the average uptime shown on some websites is not exactly a good measure. For example: you can have 10 nodes observing a node to be at 79% and one node at 100%. The average will be over 80%, but the reward will not be awarded, because 90% of the nodes would have actually voted no reward.
