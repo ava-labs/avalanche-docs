@@ -151,7 +151,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -190,7 +190,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -204,7 +204,7 @@ curl -X POST --data '{
 
 ### avm.createFixedCapAsset
 
-Créez un nouvel actif fongible à plafond fixe. Une quantité de celui-ci est créée lors de l'initialisation, puis plus n'est jamais créée. L'élément peut être envoyé avec `avm.send`.
+Créez un nouvel actif fongible à plafond fixe. Une quantité de celui-ci est créée lors de l'initialisation, sans que cette quantité ne puisse être ensuite augmentée. L'élément peut être envoyé avec `avm.send`.
 
 **Signature**
 
@@ -265,7 +265,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -326,7 +326,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -409,7 +409,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -451,9 +451,10 @@ avm.createNFTAsset({
 * `symbol` est un symbole abrégé de l'actif. Entre 0 et 4 caractères. Pas nécessairement unique. Peut être omis.
 * `minterSets` est une liste où chaque élément spécifie que le seuil `threshold` des adresses dans les `minters` peut ensemble minter plus de pièces de l'actif en signant une transaction de frappe.
 * Effectuer une transaction sur la X-Chain nécessite des frais de transaction payés en AVAX. `username` et `password` indiquent quel utilisateur paie les frais.
-* Chaque élément de `initialHolders` spécifie que l'`address` contient les unités de montant de l'actif `amount` lors de la genèse.
 * `from` sont les adresses que vous souhaitez utiliser pour cette opération. En cas d'omission, utilise l'une de vos adresses au besoin.
 * `changeAddr` est l'adresse à laquelle tout changement sera envoyé. En cas d'omission, la modification est envoyée à l'une des adresses contrôlées par l'utilisateur.
+* `assetID` est l'ID de l'actif créé
+* `changeAddr` (dans le retour) est l'adresse qui recevra les changements.
 
 **Exemple d'un Appel**
 
@@ -481,7 +482,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -543,7 +544,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -604,7 +605,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -650,7 +651,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -690,7 +691,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -738,7 +739,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -778,7 +779,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -819,7 +820,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -861,7 +862,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1058,7 +1059,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1101,7 +1102,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1136,7 +1137,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1175,7 +1176,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1233,7 +1234,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1267,7 +1268,7 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` est un tableau d'objets littéraux contenant chacin un `assetID`, `amount` et`to`.
+* `outputs` est un tableau d'objets littéraux contenant chacun un `assetID`, `amount` et`to`.
 * `from` sont les adresses que vous souhaitez utiliser pour cette opération. En cas d'omission, utilise l'une de vos adresses au besoin.
 * `changeAddr` est l'adresse à laquelle tout changement sera envoyé. En cas d'omission, la modification est envoyée à l'une des adresses contrôlées par l'utilisateur.
 * Vous pouvez joindre un `memo`, dont la longueur peut aller jusqu'à 256 octets.
@@ -1297,7 +1298,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
@@ -1353,7 +1354,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-**Exémple de Réponse**
+**Exemple de Réponse**
 
 ```cpp
 {
