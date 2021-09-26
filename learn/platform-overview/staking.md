@@ -6,7 +6,7 @@ description: Learn how to stake on Avalanche by validating or delegating
 
 Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
-### How does proof-of-stake work?
+## How does proof-of-stake work?
 
 To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
 
@@ -107,3 +107,20 @@ If the validator that you delegate tokens to is sufficiently correct and respons
 
 When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
 
+## FAQ
+
+### Is there a tool to check the health of a validator?
+
+Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check). More information about this tool can be found [here](../../build/tools/avalanche-stats#validator-health-check).
+
+
+### How is it determined whether a validator receives a staking reward?
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not.
+If a validator thinks that the node was online and responsive for more than the required amount of time (currently 80%), the validator will vote for the node to receive a staking reward.
+Otherwise, the validator will vote that the node should not receive a staking reward.
+The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
+
+Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
+
+Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again.
+The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
