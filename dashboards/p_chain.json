@@ -8,6 +8,12 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
@@ -719,6 +725,38 @@
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request ",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_failed_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed ",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_response_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_gossip_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "P"
         }
       ],
       "timeFrom": null,
@@ -885,6 +923,38 @@
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_app_request_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_failed_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_app_request_failed_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_gossip_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_app_gossip_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_response_sum{job=\"avalanchego\"}[5m])/rate(avalanche_P_handler_app_response_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "P"
         }
       ],
       "timeFrom": null,
@@ -1142,6 +1212,38 @@
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_request_failed_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_response_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_P_handler_app_gossip_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "O"
         }
       ],
       "timeFrom": null,
@@ -1230,18 +1332,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 50
-      },
-      "id": 31,
-      "title": "Possible Problem Indicators (these should return to 0 after a few minutes)",
-      "type": "row"
-    },
-    {
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
@@ -1253,7 +1343,7 @@
             "axisPlacement": "auto",
             "axisSoftMin": 0,
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1299,7 +1389,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 51
+        "y": 50
       },
       "id": 19,
       "options": {
@@ -1332,45 +1422,80 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 51
+        "y": 50
       },
-      "hiddenSeries": false,
       "id": 33,
-      "legend": {
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "8.0.6",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "expr": "increase(avalanche_P_handler_expired[1m])",
@@ -1379,46 +1504,10 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Incoming Messages Expired in Last Minute",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     }
   ],
   "refresh": "",
@@ -1431,7 +1520,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1451,5 +1540,5 @@
   "timezone": "",
   "title": "P-Chain",
   "uid": "uWlS20i7z",
-  "version": 29
+  "version": 36
 }

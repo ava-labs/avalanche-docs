@@ -8,6 +8,12 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
@@ -565,6 +571,38 @@
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_failed_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_response_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_gossip_sum{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "P"
         }
       ],
       "timeFrom": null,
@@ -731,6 +769,38 @@
           "interval": "",
           "legendFormat": "get ancestors failed",
           "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_sum{job=\"avalanchego\"}[5m])/rate(avalanche_X_handler_app_request_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_failed_sum{job=\"avalanchego\"}[5m])/rate(avalanche_X_handler_app_request_failed_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_gossip_sum{job=\"avalanchego\"}[5m])/rate(avalanche_X_handler_app_gossip_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_response_sum{job=\"avalanchego\"}[5m])/rate(avalanche_X_handler_app_response_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "P"
         }
       ],
       "timeFrom": null,
@@ -996,6 +1066,38 @@
           "interval": "",
           "legendFormat": "chits",
           "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_request_failed_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request failed",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_response_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_X_handler_app_gossip_count{job=\"avalanchego\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "Q"
         }
       ],
       "timeFrom": null,
@@ -1085,18 +1187,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 42
-      },
-      "id": 27,
-      "title": "Possible Problem Indicators (these should return to 0 after a few minutes)",
-      "type": "row"
-    },
-    {
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
@@ -1107,7 +1197,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
@@ -1154,7 +1244,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 43
+        "y": 42
       },
       "id": 43,
       "options": {
@@ -1197,7 +1287,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
@@ -1244,7 +1334,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 43
+        "y": 42
       },
       "id": 33,
       "options": {
@@ -1285,7 +1375,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1305,5 +1395,5 @@
   "timezone": "",
   "title": "X-Chain",
   "uid": "ceRH2Am7z",
-  "version": 26
+  "version": 32
 }
