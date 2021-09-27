@@ -18,7 +18,7 @@ Main network data:
 
 ```javascript
 export const AVALANCHE_MAINNET_PARAMS = {
-    chainId: '43114',
+    chainId: '0xA86A',
     chainName: 'Avalanche Mainnet C-Chain',
     nativeCurrency: {
         name: 'Avalanche',
@@ -34,7 +34,7 @@ Test network data:
 
 ```javascript
 export const AVALANCHE_TESTNET_PARAMS = {
-    chainId: '43113',
+    chainId: '0xA869',
     chainName: 'Avalanche Testnet C-Chain',
     nativeCurrency: {
         name: 'Avalanche',
