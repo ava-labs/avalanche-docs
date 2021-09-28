@@ -29,7 +29,7 @@ Your assets have been transferred after a few seconds. Check your wallet and the
 
 #### What if the gas price is more than the amount I am transferring?
 
-When moving ERC20 assets from Ethereum to Avalanche, you are allowed to transfer any number of tokens you would like to. The bridge was designed in such a way that minimizes transaction fees. However, if the transaction fee is higher than the value you are looking to transfer, it may make sense to wait until the Ethereum gas price decreases.
+When moving ERC20 assets from Ethereum to Avalanche, you use Metamask to send an Ethereum transaction transferring the funds. The transaction fee to do so can be highly variable depending on the current gas price on the Ethereum network. If the gas price is such that the transaction fee is more than the amount of value being transferred, you may want to wait until the gas price decreases.
 
 When moving assets from Avalanche back to Ethereum, the bridge charges an in-kind transfer fee, as described [here](avalanche-bridge-faq.md#fees). The user interface does now allow transfers less than the fee amount. If a user manually generates and issues such a transaction, the bridge will mark the transfer as invalid and not process it.
 
@@ -78,11 +78,11 @@ Note that **you should not directly transfer tokens to these addresses**. You sh
 
 #### How do fees work on the Avalanche Bridge?
 
-The bridge charges transfer fees in order to cover the cost of the transaction fees on the Avalanche and Ethereum networks, as well as the operational costs of the bridge infrastructure. These fees are charged in-kind with the ERC20 asset being transferred. That is, when you transfer a token, a portion of the balance transferred is taken by the AB as a fee.
+The bridge charges transfer fees in order to cover the cost of the transaction fees on the Avalanche and Ethereum networks, as well as the operational costs of the bridge infrastructure. These fees are charged in-kind with the ERC20 asset being transferred. That is, when you transfer a token, a portion of the balance transferred goes towards covering the fee.
 
 When moving assets from Ethereum to Avalanche, the fee is $3 worth of the ERC20 asset being transferred. Transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
-When moving assets from Avalanche to Ethereum, the fee is the value of the maximum Ethereum transaction fee (gas limit * current gas price), plus a constant dollar amount \(currently $5\) to account for price volatility. Note that the maximum Ethereum transaction fee is based on the gas limit and may be higher than the actual transaction fee, which is based on the amount of gas used by the transaction.
+When moving assets from Avalanche to Ethereum, the fee is largely based on the **expected** Ethereum transaction fee. This amount is calculated using current asset prices, the current Ethereum gas price, and the approximate amount of gas that will be used by the transaction. As such, this fee amount can be highly variable. In order to account for price volatility, the calculation is padded by a constant dollar amount \(currently $15\). Note that the fee may end up being different than the transaction fee value displayed in explorers such as Etherscan due to asset and gas price fluctuations, as well as the amount of gas actually used by the transaction being different than the approximation. The current expected fee amounts are displayed in the bridge UI when performing a transfer.
 
 #### Why doesn't the amount of asset I received on one network match the amount that I sent from the other?
 
