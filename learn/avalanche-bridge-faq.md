@@ -29,7 +29,7 @@ Your assets have been transferred after a few seconds. Check your wallet and the
 
 #### What if the gas price is more than the amount I am transferring?
 
-When moving ERC20 assets from Ethereum to Avalanche, you use Metamask to send an Ethereum transaction transferring the funds. The transaction fee to do so can be highly variable depending on the current gas price on the Ethereum network. If the gas price is such that the transaction fee is more than the amount of value being transferred, you may want to wait until the gas price decreases.
+When moving ERC20 assets from Ethereum to Avalanche, you use Metamask to send an Ethereum transaction transferring the funds. That transaction's fee depends on the current gas price on the Ethereum network, which is highly variable. If the gas price is so high that the transaction fee is more than the amount of value being transferred, you may want to wait until the gas price decreases.
 
 When moving assets from Avalanche back to Ethereum, the bridge charges an in-kind transfer fee, as described [here](avalanche-bridge-faq.md#fees). The user interface does now allow transfers less than the fee amount. If a user manually generates and issues such a transaction, the bridge will mark the transfer as invalid and not process it.
 
