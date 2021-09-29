@@ -434,7 +434,7 @@ avax.getUTXOs(
         sourceChain: string,
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
