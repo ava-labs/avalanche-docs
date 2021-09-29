@@ -2062,14 +2062,14 @@ A collection of AVM transactions.
 
 An instance of a Vertex contains an `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TxSize`, `Restrictions`, and `Transactions`.
 
-* **`ChainID`** 
-* **`Height`** 
-* **`Epoch`** 
-* **`ParentIDs`** Array of 32 byte vertex IDs
-* **`TransactionCount`** 
-* **`TxSize`** 
-* **`Restrictions`** 
-* **`Transactions`** 
+* **`ChainID`** is a 32-byte array that defines the chain ID.
+* **`Height`** is a long that is the vertex height.
+* **`Epoch`** is an int that is the epoch.
+* **`ParentIDs`** is an array of 32 byte parent IDs.
+* **`TransactionCount`** is an int that is the transaction count.
+* **`TxSize`** is an int that is the transaction size.
+* **`Restrictions`** is an array of 32 byte restrictions.
+* **`Transactions`** is an array of 32 byte transactions.
 
 ### Gantt Vertex Specification
 
@@ -2114,12 +2114,12 @@ message Vertex {
 
 Let’s make a Vertex:
 
-* **`ChainID`**: ``
-* **`Height`**: ``
-* **`Epoch`**: ``
-* **`ParentIDs`**: []
-* **`TransactionCount`**: 
-* **`TxSize`**: ``
+* **`ChainID`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`Height`**: `3`
+* **`Epoch`**: `0`
+* **`ParentIDs`**: ["0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
+* **`TransactionCount`**: `1`
+* **`TxSize`**: `385`
 * **`Restrictions`**: []
 * `"Example BaseTx as defined above"`
 
