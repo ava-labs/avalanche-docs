@@ -240,9 +240,13 @@ The following options may affect the correctness of a node. Only power users sho
 
 Number of peers (non-validators) to gossip an AppGossip message to.
 
+Defaults to `2`.
+
 `--consensus-app-gossip-validator-size` \(uint\):
 
-Number of validators to gossip an AppGossip message to
+Number of validators to gossip an AppGossip message to.
+
+Defaults to `4`.
 
 ### Benchlist
 
@@ -605,13 +609,25 @@ Maximum number of bytes a node can take from the at-large allocation of the outb
 
 ### Network
 
-`--network-compression-enabled` \(bool\) \(v1.4.11\):
+`--network-allow-private-ips` \(bool\):
 
-If true, compress certain messages sent to peers on version &gt;= v1.4.11 to reduce bandwidth usage.
+Allows the node to connect peers with private IPs. Defaults to `true`.
+
+`--network-compression-enabled` \(bool\):
+
+If true, compress certain messages sent to peers to reduce bandwidth usage.
 
 `--network-initial-timeout` \(duration\):
 
 Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
+
+`--network-initial-reconnect-delay` \(duration\):
+
+Initial delay duration must be waited before attempting to reconnect a peer. Defaults to `1s`.
+
+`--network-max-reconnect-delay` \(duration\):
+
+Maximum delay duration must be waited before attempting to reconnect a peer. Defaults to `1h`.
 
 `--network-minimum-timeout` \(duration\):
 
@@ -628,6 +644,22 @@ Halflife used when calculating average network latency. Larger value --&gt; less
 `--network-timeout-coefficient` \(duration\):
 
 Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
+
+`--network-get-version-timeout` \(duration):
+
+Timeout for waiting GetVersion response from peers in handshake. Defaults to `10s`.
+
+`--network-read-handshake-timeout` \(duration):
+
+Timeout value for reading handshake messages. Defaults to `15s`.
+
+`--network-ping-timeout` \(duration):
+
+Timeout value for Ping-Pong with a peer. Defaults to `30s`.
+
+`--network-ping-frequency` \(duration):
+
+Frequency of pinging other peers. Defaults to `22.5s`.
 
 `--network-health-min-conn-peers` \(uint\):
 
@@ -649,6 +681,14 @@ Node will report unhealthy if its send queue is more than this portion full. Mus
 
 Node will report unhealthy if more than this portion of message sends fail. Must be in \[0,1\]. Defaults to `0.25`.
 
+`--network-max-clock-difference` \(duration\):
+
+Max allowed clock difference value between this node and peers. Defaults to `1m`.
+
+`--network-require-validator-to-connect` \(bool\):
+
+Requires a connection to have a least one validator to be made. Defaults to `false`.
+
 `--inbound-connection-throtting-cooldown` \(duration\):
 
 Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`.
@@ -662,7 +702,7 @@ Node will accept at most this many inbound connections per second. Defaults to `
 
 Deprecated. Ignored as of AvalancheGo v1.6.0.
 
-### Peer List Gossiping
+#### Peer List Gossiping
 
 Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
 
@@ -677,6 +717,12 @@ Defaults to `50`.
 `--network-peer-list-size` \(int\):
 
 Defaults to `20`.
+
+`--network-peer-list-staker-gossip-fraction` \(uint\):
+
+Ratio of stakers to `network-peer-list-gossip-size` in a gossiped peer list.
+
+Defaults to `2`.
 
 ### Plugin Mode
 
