@@ -236,9 +236,13 @@ The following options may affect the correctness of a node. Only power users sho
 
 ### App Gossiping
 
-`--consensus-app-gossip-size` \(uint\):
+`--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers an AppGossip message is gossiped to.
+Number of peers (non-validators) to gossip an AppGossip message to.
+
+`--consensus-app-gossip-validator-size` \(uint\):
+
+Number of validators to gossip an AppGossip message to
 
 ### Benchlist
 
@@ -265,16 +269,16 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary. The structure of this directory must be as follows:
 
 ```text
-build-dir  
-|_avalanchego-latest  
-    |_avalanchego-process (the binary from compiling the app directory)  
-    |_plugins  
-      |_evm  
+build-dir
+|_avalanchego-latest
+    |_avalanchego-process (the binary from compiling the app directory)
+    |_plugins
+      |_evm
       |_other_plugin
-|_avalanchego-preupgrade  
-    |_avalanchego-process (the binary from compiling the app directory)  
-    |_plugins  
-      |_evm  
+|_avalanchego-preupgrade
+    |_avalanchego-process (the binary from compiling the app directory)
+    |_plugins
+      |_evm
       |_other_plugin
 ```
 

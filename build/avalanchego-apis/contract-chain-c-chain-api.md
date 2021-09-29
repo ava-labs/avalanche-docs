@@ -300,7 +300,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportAVAX
+### avax.exportAVAX (Removed in AvalancheGo v1.6.1)
 
 **DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
@@ -434,7 +434,7 @@ avax.getUTXOs(
         sourceChain: string,
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
