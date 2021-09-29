@@ -2054,3 +2054,103 @@ Let’s make a GenesisAsset:
 ]
 ```
 
+## Vertex
+
+A collection of AVM transactions.
+
+### What Vertex Contains
+
+An instance of a Vertex contains an `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TxSize`, `Restrictions`, and `Transactions`.
+
+* **`ChainID`** 
+* **`Height`** 
+* **`Epoch`** 
+* **`ParentIDs`** Array of 32 byte vertex IDs
+* **`TransactionCount`** 
+* **`TxSize`** 
+* **`Restrictions`** 
+* **`Transactions`** 
+
+### Gantt Vertex Specification
+
+```text
++--------------+---------------+------------------------------+
+| chain_id     : [32]byte      | 32 bytes                     |
++--------------+---------------+------------------------------+
+| height       : long          | 8 bytes                      |
++--------------+---------------+------------------------------+
+| epoch        : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| parent_ids   : []ParentID    | 4 + size(parent_ids) bytes   |
++--------------+---------------+------------------------------+
+| tx_count     : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| tx_size      : int           | 4 bytes                      |
++--------------+---------------+------------------------------+
+| restrictions : []Restriction | 4 + size(restrictions) bytes |
++--------------+---------------+------------------------------+
+| transactions : []Transaction | 4 + size(transactions) bytes |
++--------------+---------------+-----------------------------------------+
+|   64 + size(parentIDs) + size(restrictions) + size(transactions) bytes |
++------------------------------------------------------------------------+
+```
+
+### Proto Vertex Specification
+
+```text
+message Vertex {
+    bytes chain_id = 1;              // 2 bytes + len(alias)
+    uint64 height = 2;               // 08 bytes
+    uint32 epoch = 3;                // 04 bytes
+    repeated bytes parent_ids = 4;   // 04 bytes + 32 bytes * len(parent_ids)
+    uint32 tx_count = 5;             // 04 bytes
+    uint32 tx_size = 6;              // 04 bytes
+    repeated bytes restrictions = 7; // 04 bytes + 32 bytes * len(restrictions)
+    repeated bytes transactions = 8; // 04 bytes + 32 bytes * len(transactions)
+}
+```
+
+### Vertex Example
+
+Let’s make a Vertex:
+
+* **`ChainID`**: ``
+* **`Height`**: ``
+* **`Epoch`**: ``
+* **`ParentIDs`**: []
+* **`TransactionCount`**: 
+* **`TxSize`**: ``
+* **`Restrictions`**: []
+* `"Example BaseTx as defined above"`
+
+```text
+[
+    ChainID          <- 0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf
+    Height           <- 0x0000000000000003 
+    Epoch            <- 0x00000000
+    ParentIDs        <- [0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
+    TransactionCount <- 0x00000001
+    TxSize           <-  0x00000181
+    Restrictions     <- []
+]
+=
+[
+    // chain id
+    d8 91 ad 56 05 6d 9c 01 f1 8f 43 f5 8b 5c 78 4a d0 7a 4a 49 cf 3d 1f 11 62 38 04 b5 cb a2 c6 bf 
+    // height
+    00 00 00 00 00 00 00 03 
+    // epoch
+    00 00 00 00 
+    // num parent IDs
+   00 00 00 01 
+   // parent id 1
+   73 fa 32 c4 86 fe 9f ee b3 92 ee 37 45 30 c6 fe 07 6b 08 a1 11 fd 58 e9 74 e7 f9 03 a5 29 51 d2 
+   // num txs
+   00 00 00 01 
+   // tx 1 size
+   00 00 01 81 
+   // num restrictions
+   00 00 00 00 
+   // base tx from above
+]
+```
