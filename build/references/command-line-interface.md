@@ -2,9 +2,7 @@
 
 You can specify the configuration of a node with the arguments below.
 
-## Arguments
-
-### Config File
+## Config File
 
 `--config-file` \(string\):
 
@@ -18,7 +16,7 @@ Example JSON config file:
 }
 ```
 
-### APIs
+## APIs
 
 `--api-admin-enabled` \(boolean\):
 
@@ -56,13 +54,13 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
-### Assertions
+## Assertions
 
 `--assertions-enabled` \(boolean\):
 
 When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
 
-### Bootstrapping
+## Bootstrapping
 
 `--bootstrap-beacon-connection-timeout` \(duration\):
 
@@ -84,7 +82,7 @@ If true, will retry bootstrapping if it fails.
 
 Max number of times to retry bootstrapping after a failure.
 
-### Database
+## Database
 
 `--db-dir` \(string, file path\):
 
@@ -98,13 +96,13 @@ Note that when running with `leveldb`, the node can't read data that was persist
 
 **Two important notes about RocksDB**: First, RocksDB does not work on all computers. Second, RocksDB is not built by default and is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`.
 
-### Genesis
+## Genesis
 
 `--genesis` \(string\):
 
 Path to a JSON file containing the genesis data to use. Ignored when running standard networks \(Mainnet, Testnet.\) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
 
-### HTTP Server
+## HTTP Server
 
 `--http-host` \(string\):
 
@@ -126,7 +124,7 @@ If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Def
 
 This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
 
-### IPCS
+## IPCS
 
 `--ipcs-chain-ids` \(string\)
 
@@ -136,13 +134,13 @@ Comma separated list of chain ids to connect to. There is no default value.
 
 The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
 
-### File Descriptor Limit
+## File Descriptor Limit
 
 `--fd-limit` \(int\)
 
 Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
 
-### Logging
+## Logging
 
 `--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
 
@@ -170,7 +168,7 @@ Whether to color/highlight display logs. Default highlights when the output is a
 
 Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
 
-### Network ID
+## Network ID
 
 `--network-id` \(string\):
 
@@ -182,7 +180,7 @@ The identity of the network the node should connect to. Can be one of:
 * `--network-id=local` -&gt; Connect to a local test-network.
 * `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
-### Public IP
+## Public IP
 
 `--public-ip` \(string\):
 
@@ -196,13 +194,13 @@ Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This 
 
 The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
 
-### Signature Verification
+## Signature Verification
 
 `--signature-verification-enabled` \(boolean\):
 
 Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
 
-### Staking
+## Staking
 
 `--staking-port` \(string\):
 
@@ -224,7 +222,7 @@ Avalanche uses two-way authenticated TLS connections to securely connect nodes. 
 
 Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
-### Version
+## Version
 
 `--version` \(boolean\)
 
@@ -234,7 +232,7 @@ If this is `true`, print the version and quit. Defaults to `false`.
 
 The following options may affect the correctness of a node. Only power users should change these.
 
-### App Gossiping
+## App Gossiping
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
@@ -248,7 +246,7 @@ Number of validators to gossip an AppGossip message to.
 
 Defaults to `4`.
 
-### Benchlist
+## Benchlist
 
 `--benchlist-duration` \(duration\):
 
@@ -266,7 +264,7 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
 
-### Build Directory
+## Build Directory
 
 `--build-dir` \(string\):
 
@@ -286,7 +284,7 @@ build-dir
       |_other_plugin
 ```
 
-### Chain Configs
+## Chain Configs
 
 Some chains \(right now, just the C-Chain\) allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
@@ -302,7 +300,7 @@ It is not required to provide these custom configurations. If they are not provi
 
 Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
 
-#### C-Chain Configs
+### C-Chain Configs
 
 In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
@@ -320,7 +318,7 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 
 For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
 
-#### X-Chain Configs
+### X-Chain Configs
 
 In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
 
@@ -335,7 +333,7 @@ For example if `chain-config-dir` has the default value, then `config.json` can 
 
 For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
 
-### C-Chain / Coreth <a id="coreth-config"></a>
+## C-Chain / Coreth <a id="coreth-config"></a>
 
 `--coreth-config` \(json\):
 
@@ -368,7 +366,7 @@ Default values are overridden only if explicitly specified in the config.
 
 The parameters are as follows:
 
-#### Coreth APIs
+### Coreth APIs
 
 `snowman-api-enabled` \(boolean\):
 
@@ -382,7 +380,7 @@ Enables the Admin API. Defaults to false.
 
 Enables the `net_*` API. Defaults to true.
 
-#### Coreth API Gas/Price Caps
+### Coreth API Gas/Price Caps
 
 `rpc-gas-cap` \(int\):
 
@@ -392,13 +390,13 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), mea
 
 Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
 
-#### Database Pruning
+### Database Pruning
 
 `pruning-enabled`\(boolean\):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
-#### Logging
+### Logging
 
 `--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
 
@@ -406,7 +404,7 @@ The log level determines which events to log. There are 6 different levels.
 
 Defaults to `debug`.
 
-#### Eth APIs
+### Eth APIs
 
 `eth-api-enabled` \(boolean\):
 
@@ -428,7 +426,7 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-#### Eth Settings
+### Eth Settings
 
 `local-txs-enabled` \(boolean\):
 
@@ -446,13 +444,13 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
-#### Log Level
+### Log Level
 
 `log-level` \(string\):
 
 Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
 
-### Continuous Profiling
+## Continuous Profiling
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
 
@@ -473,7 +471,7 @@ How often a new CPU/memory profile is created. Defaults to `15m`.
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
-### Keystore Settings
+## Keystore Settings
 
 `keystore-directory` \(string\):
 
@@ -487,7 +485,7 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string \
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
-### Consensus Parameters
+## Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
 
@@ -569,7 +567,7 @@ The required amount of nAVAX to be burned for a transaction to be valid. This pa
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
-### Health
+## Health
 
 `--health-check-frequency` \(duration\):
 
@@ -579,7 +577,7 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
-### Message Rate-Limiting \(Throttling\)
+## Message Rate-Limiting \(Throttling\)
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
@@ -607,7 +605,7 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 mebibytes\).
 
-### Network
+## Network
 
 `--network-allow-private-ips` \(bool\):
 
@@ -702,7 +700,7 @@ Node will accept at most this many inbound connections per second. Defaults to `
 
 Deprecated. Ignored as of AvalancheGo v1.6.0.
 
-#### Peer List Gossiping
+### Peer List Gossiping
 
 Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
 
@@ -724,19 +722,19 @@ Ratio of stakers to `network-peer-list-gossip-size` in a gossiped peer list.
 
 Defaults to `2`.
 
-### Plugin Mode
+## Plugin Mode
 
 `--plugin-mode-enabled` \(bool\):
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
-### Subnet Whitelist
+## Subnet Whitelist
 
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
-### Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
+## Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
 
 `--vm-aliases-file` \(string\):
 
@@ -753,7 +751,7 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
 
-### X-Chain / AVM <a id="avm-config"></a>
+## X-Chain / AVM <a id="avm-config"></a>
 
 This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
 
@@ -768,7 +766,7 @@ Default values are overridden only if explicitly specified in the config.
 
 The parameters are as follows:
 
-#### Transaction Indexing
+### Transaction Indexing
 
 `index-transactions` \(boolean\):
 
