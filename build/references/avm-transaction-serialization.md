@@ -1958,65 +1958,7 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, 
 |                 + len(name) + len(symbol) + size(initial_states) bytes |
 +------------------------------------------------------------------------+
 ```
-
-### Proto GenesisAsset Specification
-
-```text
-message GenesisAsset {
-    string alias = 1;                          // 2 bytes + len(alias)
-    uint32 network_id = 2;                     // 04 bytes
-    bytes blockchain_id = 3;                   // 32 bytes
-    repeated Output outputs = 4;               // 04 bytes + size(outputs)
-    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
-    bytes memo = 6;                            // 04 bytes + size(memo)
-    string name = 7;                           // 2 bytes + len(name)
-    name symbol = 8;                           // 2 bytes + len(symbol)
-    uint8 denomination = 9;                    // 1 bytes
-    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
-}
-```
-
-### GenesisAsset Example
-
-Let’s make a GenesisAsset:
-
-* **`Alias`**: `asset1`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* **`Outputs`**: \[\]
-* **`Inputs`**: \[\]
-* **`Memo`**: `2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X`
-* **`Name`**: `asset1`
-* **`Symbol`**: `MFCA`
-* **`Denomination`**: `1`
-* **`InitialStates`**:
-* `"Example Initial State as defined above"`
-
-```text
-[
-    Alias         <- 0x617373657431
-    NetworkID     <- 0x00003039
-    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
-    Outputs       <- []
-    Inputs        <- []
-    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
-    Name          <- 0x617373657431 
-    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
-    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
-    InitialStates <- [
-        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
-    ]
-]
-=
-[
-    // asset alias len: 
-    0x00, 0x06, 
-    // asset alias: 
-    0x61, 0x73, 0x73, 0x65, 0x74, 0x31, 
-    // network_id: 
-    0x00, 0x00, 0x30, 0x39, 
-    // blockchain_id: 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+base tx from above0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     // output_len: 
@@ -2056,24 +1998,24 @@ Let’s make a GenesisAsset:
 
 ## Vertex
 
-A collection of AVM transactions.
+A vertex is a collection of transactions. It's the DAG equivalent of a block in a linear blockchain.
 
 ### What Vertex Contains
 
-An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `VertexSize`, `Restrictions`, and `Transactions`.
+A vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `VertexSize`, `Restrictions`, and `Transactions`.
 
-* **`ChainID`** is a 32-byte array that defines the chain ID.
-* **`Height`** is a long that is the vertex height.
-* **`Epoch`** is an int that is the epoch.
-* **`ParentIDs`** is an array of 32 byte parent IDs.
-* **`TransactionCount`** is an int that is the transaction count.
-* **`VertexSize`** is an int that is the vertex size.
-* **`Restrictions`** is an array of 32 byte restrictions.
-* **`Transactions`** is an array of 32 byte transactions.
+* **`ChainID`** is the ID of the chain this vertex exists on.
+* **`Height`** is the maximum height of a parent vertex plus 1.
+* **`Epoch`** is the epoch this vertex belongs to.
+* **`ParentIDs`** are the IDs of this vertex's parents.
+* **`Transactions`** are the transactions in this vertex.
+* **`Restrictions`** are IDs of transactions that must be accepted in the same epoch as this vertex or an earlier one.
 
 ### Gantt Vertex Specification
 
 ```text
++--------------+---------------+------------------------------+
+| codec_id     : uint16        | 2 bytes                      |
 +--------------+---------------+------------------------------+
 | chain_id     : [32]byte      | 32 bytes                     |
 +--------------+---------------+------------------------------+
@@ -2085,11 +2027,9 @@ An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `T
 +--------------+---------------+------------------------------+
 | tx_count     : int           | 4 bytes                      |
 +--------------+---------------+------------------------------+
-| vertex_size  : int           | 4 bytes                      |
+| transactions : []Transaction | 4 + size(transactions) bytes |
 +--------------+---------------+------------------------------+
 | restrictions : []Restriction | 4 + size(restrictions) bytes |
-+--------------+---------------+------------------------------+
-| transactions : []Transaction | 4 + size(transactions) bytes |
 +--------------+---------------+-----------------------------------------+
 |   64 + size(parentIDs) + size(restrictions) + size(transactions) bytes |
 +------------------------------------------------------------------------+
@@ -2099,42 +2039,42 @@ An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `T
 
 ```text
 message Vertex {
-    bytes chain_id = 1;              // 32 bytes
-    uint64 height = 2;               // 08 bytes
-    uint32 epoch = 3;                // 04 bytes
-    repeated bytes parent_ids = 4;   // 04 bytes + 32 bytes * len(parent_ids)
+    uint16 codec_id = 1;             // 04 bytes
+    bytes chain_id = 2;              // 32 bytes
+    uint64 height = 3;               // 08 bytes
+    uint32 epoch = 4;                // 04 bytes
+    repeated bytes parent_ids = 5;   // 04 bytes + 32 bytes * len(parent_ids)
     uint32 tx_count = 5;             // 04 bytes
-    uint32 vertex_size = 6;          // 04 bytes
-    repeated bytes restrictions = 7; // 04 bytes + 32 bytes * len(restrictions)
-    repeated bytes transactions = 8; // 04 bytes + 32 bytes * len(transactions)
+    repeated bytes transactions = 7; // 04 bytes + 32 bytes * len(transactions)
+    repeated bytes restrictions = 8; // 04 bytes + 32 bytes * len(restrictions)
 }
 ```
 
 ### Vertex Example
 
 Let’s make a Vertex:
-
+* **`CodecID`**: `0x0000`
 * **`ChainID`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Height`**: `3`
 * **`Epoch`**: `0`
 * **`ParentIDs`**: ["0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
-* **`TransactionCount`**: `1`
-* **`VertexSize`**: `385`
+* **`Transactions`**: `[Example BaseTx as defined above]`
 * **`Restrictions`**: []
-* `"Example BaseTx as defined above"`
 
 ```text
 [
+    CodecID          <- 0x0000
     ChainID          <- 0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf
     Height           <- 0x0000000000000003 
     Epoch            <- 0x00000000
     ParentIDs        <- [0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
-    TransactionCount <- 0x00000001
-    VertexSize       <-  0x00000181
+    Transactions     <- [Example BaseTx defined above]
     Restrictions     <- []
 ]
 =
 [
+    // codec id
+    00 00
     // chain id
     d8 91 ad 56 05 6d 9c 01 f1 8f 43 f5 8b 5c 78 4a d0 7a 4a 49 cf 3d 1f 11 62 38 04 b5 cb a2 c6 bf 
     // height
@@ -2147,10 +2087,9 @@ Let’s make a Vertex:
    73 fa 32 c4 86 fe 9f ee b3 92 ee 37 45 30 c6 fe 07 6b 08 a1 11 fd 58 e9 74 e7 f9 03 a5 29 51 d2 
    // num txs
    00 00 00 01 
-   // vertex size
-   00 00 01 81 
+   // base tx from above
+   [omitted for brevity]
    // num restrictions
    00 00 00 00 
-   // base tx from above
 ]
 ```
