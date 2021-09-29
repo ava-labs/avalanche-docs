@@ -236,15 +236,11 @@ The following options may affect the correctness of a node. Only power users sho
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers (non-validators) to gossip an AppGossip message to.
-
-Defaults to `2`.
+Number of peers (non-validators) to gossip an AppGossip message to. Defaults to `2`.
 
 `--consensus-app-gossip-validator-size` \(uint\):
 
-Number of validators to gossip an AppGossip message to.
-
-Defaults to `4`.
+Number of validators to gossip an AppGossip message to. Defaults to `4`.
 
 ## Benchlist
 
@@ -527,6 +523,20 @@ The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Main
 
 The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
 
+`--stake-minting-period` \(duration\):
+
+Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
+
+`--tx-fee` \(int\):
+
+The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
+
+`--uptime-requirement` \(float\):
+
+Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
+
+### Snow Parameters
+
 `--snow-avalanche-batch-size` \(int\):
 
 DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
@@ -554,18 +564,6 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 `--snow-rogue-commit-threshold` \(int\):
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
-
-`--stake-minting-period` \(duration\):
-
-Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
-
-`--tx-fee` \(int\):
-
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
-
-`--uptime-requirement` \(float\):
-
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
 
 ## Health
 
@@ -728,11 +726,51 @@ Defaults to `2`.
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
-## Subnet Whitelist
+## Subnets
+
+### Whitelist
 
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
+
+### Configs
+
+It is possible to provide parameters for subnets. Parameters here applies to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnet-IDs specified in `--whitelisted-subnet` parameter.\
+
+`--subnet-config-dir` \(string\):
+
+Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.
+
+Example: Let's say we have a subnetID = `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create config under default config-dir as follows: `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config content would be:
+
+```json
+{
+  "consensusParameters": {
+    "k": 25,
+    "alpha": 18
+  }
+}
+```
+
+#### Consensus Parameters
+
+Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys.
+| CLI Key                          | JSON Key              |
+| -------------------------------- | --------------------- |
+| --snow-sample-size               | k                     |
+| --snow-quorum-size               | alpha                 |
+| --snow-virtuous-commit-threshold | betaVirtuous          |
+| --snow-rogue-commit-threshold    | betaRogue             |
+| --snow-concurrent-repolls        | concurrentRepolls     |
+| --snow-optimal-processing        | optimalProcessing     |
+| --snow-max-processing            | maxOutstandingItems   |
+| --snow-max-time-processing       | maxItemProcessingTime |
+| --snow-avalanche-batch-size      | batchSize             |
+| --snow-avalanche-num-parents     | parentSize            |
+
+Subnet consensus parameter defaults are same as their matching `CLI` parameter values. See snow parameters in [here](#snow-parameters) for more information.
+
 
 ## Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
 
