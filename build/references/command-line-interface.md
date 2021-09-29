@@ -174,7 +174,7 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
+* `--network-id=mainnet` -&gt; Connect to Mainnet \(default\).
 * `--network-id=fuji` -&gt; Connect to the Fuji test-network.
 * `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
 * `--network-id=local` -&gt; Connect to a local test-network.
@@ -236,7 +236,7 @@ The following options may affect the correctness of a node. Only power users sho
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers (non-validators) to gossip an AppGossip message to. Defaults to `2`.
+Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `2`.
 
 `--consensus-app-gossip-validator-size` \(uint\):
 
@@ -264,25 +264,18 @@ Minimum amount of time messages to a peer must be failing before the peer is ben
 
 `--build-dir` \(string\):
 
-Specifies where to find AvalancheGo sub-binaries & plugin binaries. Defaults to the path of executed AvalancheGo binary. The structure of this directory must be as follows:
+Specifies where to find AvalancheGo & plugin binaries. Defaults to the path of executed AvalancheGo binary. The structure of this directory must be as follows:
 
 ```text
 build-dir
-|_avalanchego-latest
-    |_avalanchego-process (the binary from compiling the app directory)
+|_avalanchego
     |_plugins
       |_evm
-      |_other_plugin
-|_avalanchego-preupgrade
-    |_avalanchego-process (the binary from compiling the app directory)
-    |_plugins
-      |_evm
-      |_other_plugin
 ```
 
 ## Chain Configs
 
-Some chains \(right now, just the C-Chain\) allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
+Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
 AvalancheGo looks for these files in the directory specified by `--chain-config-dir`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized. For example, the config for the C-Chain should be at: `[chain-config-dir-goes-here]/C/config.json`.
 
@@ -296,46 +289,15 @@ It is not required to provide these custom configurations. If they are not provi
 
 Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
 
-### C-Chain Configs
+### C-Chain Config
 
 In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`, with these contents:
+For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
 
-```javascript
-{
-  "rpc-tx-fee-cap": 90,
-  "eth-api-enabled": true,
-  "tx-pool-api-enabled": true,
-  "debug-api-enabled": true,
-  "web3-api-enabled": true
-}
-```
+The C-Chain config options described below.
 
-For more information about C-Chain configs, see [here](command-line-interface.md#coreth-config).
-
-### X-Chain Configs
-
-In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
-
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`, with these contents:
-
-```javascript
-{
-  "index-transactions": true,
-  "index-allow-incomplete": false
-}
-```
-
-For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
-
-## C-Chain / Coreth <a id="coreth-config"></a>
-
-`--coreth-config` \(json\):
-
-\(This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs).\)
-
-This allows you to specify a config to be passed into the C-Chain. The default values for this config are:
+The default C-Chain config is:
 
 ```javascript
 {
@@ -358,11 +320,9 @@ This allows you to specify a config to be passed into the C-Chain. The default v
 }
 ```
 
-Default values are overridden only if explicitly specified in the config.
+Default values are overridden only if specified in the given config.
 
-The parameters are as follows:
-
-### Coreth APIs
+#### APIs
 
 `snowman-api-enabled` \(boolean\):
 
@@ -375,32 +335,6 @@ Enables the Admin API. Defaults to false.
 `net-api-enabled` \(boolean\):
 
 Enables the `net_*` API. Defaults to true.
-
-### Coreth API Gas/Price Caps
-
-`rpc-gas-cap` \(int\):
-
-The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 2,500,000,000.
-
-`rpc-tx-fee-cap` \(int\):
-
-Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
-
-### Database Pruning
-
-`pruning-enabled`\(boolean\):
-
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
-
-### Logging
-
-`--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
-
-The log level determines which events to log. There are 6 different levels.
-
-Defaults to `debug`.
-
-### Eth APIs
 
 `eth-api-enabled` \(boolean\):
 
@@ -422,7 +356,37 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-### Eth Settings
+#### API Gas/Price Caps
+
+`rpc-gas-cap` \(int\):
+
+The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 2,500,000,000.
+
+`rpc-tx-fee-cap` \(int\):
+
+Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
+
+#### Database Pruning
+
+`pruning-enabled`\(boolean\):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+#### Logging
+
+`--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
+
+The log level determines which events to log. There are 6 different levels.
+
+Defaults to `debug`.
+
+#### Log Level
+
+`log-level` \(string\):
+
+Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+
+#### Other Settings
 
 `local-txs-enabled` \(boolean\):
 
@@ -440,11 +404,26 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
-### Log Level
+### X-Chain Configs
 
-`log-level` \(string\):
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
 
-Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`, with these contents:
+
+```javascript
+{
+  "index-transactions": true,
+  "index-allow-incomplete": false
+}
+```
+
+For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
+
+## C-Chain / Coreth <a id="coreth-config"></a>
+
+`--coreth-config` \(json\):
+
+This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs). You should not use this.
 
 ## Continuous Profiling
 
@@ -499,41 +478,41 @@ Transaction fee, in nAVAX, for transactions that create new state. Defaults to `
 
 The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+Defaults to `25000000000` \(25 AVAX\) on Mainnet. Defaults to `5000000` \(.005 AVAX\) on Test Net.
 
 `--min-delegation-fee` \(int\):
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
+The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Mainnet.
 
 `--min-stake-duration` \(duration\):
 
-Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
+Minimum staking duration. The Default on Mainnet is `336h` \(two weeks.\)
 
 `--min-validator-stake` \(int\):
 
 The minimum stake, in nAVAX, required to validate the Primary Network.
 
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+Defaults to `2000000000000` \(2,000 AVAX\) on Mainnet. Defaults to `5000000` \(.005 AVAX\) on Test Net.
 
 `--max-stake-duration` \(duration\):
 
-The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Main Net.
+The maximum staking duration, in hours. Defaults to `8760h` \(365 days\) on Mainnet.
 
 `--max-validator-stake` \(int\):s
 
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
+The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Mainnet. This includes stake provided by both the validator and by delegators to the validator.
 
 `--stake-minting-period` \(duration\):
 
-Consumption period of the staking function, in hours. The Default on Main Net is `8760h` \(365 days\).
+Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` \(365 days\).
 
 `--tx-fee` \(int\):
 
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
+The required amount of nAVAX to be burned for a transaction to be valid on the X-Chain, and for import/export transactions on the P-Chain. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1,000,000` nAVAX per transaction.
 
 `--uptime-requirement` \(float\):
 
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
+Fraction of time a validator must be online to receive rewards. Defaults to `0.8`.
 
 ### Snow Parameters
 
@@ -641,19 +620,19 @@ Halflife used when calculating average network latency. Larger value --&gt; less
 
 Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
 
-`--network-get-version-timeout` \(duration):
+`--network-get-version-timeout` \(duration\):
 
 Timeout for waiting GetVersion response from peers in handshake. Defaults to `10s`.
 
-`--network-read-handshake-timeout` \(duration):
+`--network-read-handshake-timeout` \(duration\):
 
 Timeout value for reading handshake messages. Defaults to `15s`.
 
-`--network-ping-timeout` \(duration):
+`--network-ping-timeout` \(duration\):
 
 Timeout value for Ping-Pong with a peer. Defaults to `30s`.
 
-`--network-ping-frequency` \(duration):
+`--network-ping-frequency` \(duration\):
 
 Frequency of pinging other peers. Defaults to `22.5s`.
 
@@ -683,7 +662,7 @@ Max allowed clock difference value between this node and peers. Defaults to `1m`
 
 `--network-require-validator-to-connect` \(bool\):
 
-Requires a connection to have a least one validator to be made. Defaults to `false`.
+If true, this node will only maintain a connection with another node if this node is a validator, the other node is a validator, or the other node is a beacon.
 
 `--inbound-connection-throtting-cooldown` \(duration\):
 
@@ -716,7 +695,7 @@ Defaults to `20`.
 
 `--network-peer-list-staker-gossip-fraction` \(uint\):
 
-Ratio of stakers to `network-peer-list-gossip-size` in a gossiped peer list.
+1 of each `network-peer-list-staker-gossip-fraction` peer list messages gossiped will sent to a validator.
 
 Defaults to `2`.
 
@@ -736,13 +715,13 @@ Comma separated list of subnets that this node would validate if added to. Defau
 
 ### Configs
 
-It is possible to provide parameters for subnets. Parameters here applies to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnet-IDs specified in `--whitelisted-subnet` parameter.\
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
 
 `--subnet-config-dir` \(string\):
 
 Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.
 
-Example: Let's say we have a subnetID = `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create config under default config-dir as follows: `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config content would be:
+Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
 ```json
 {
@@ -769,8 +748,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 | --snow-avalanche-batch-size      | batchSize             |
 | --snow-avalanche-num-parents     | parentSize            |
 
-Subnet consensus parameter defaults are same as their matching `CLI` parameter values. See snow parameters in [here](#snow-parameters) for more information.
-
+The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](#snow-parameters).
 
 ## Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
 
