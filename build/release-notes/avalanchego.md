@@ -2,6 +2,21 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
+
+This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0).
+
+**Upgrades**
+
+- Added ability to specify subnet configs
+- Added various new networking config values
+- Removed legacy messages from the network library
+- Fixed P-chain mempool bug that impacted local network AddValidator transactions
+- Changed tx gossip rules to gossip to a fixed number of validators as well as all peers
+- Removed deprecated getLiveness call from the Health API
+- Addeded config option to disallow useless connections
+
+
 ## v1.6.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0)\)
 
 **This change is not backwards compatible with previous releases.**
