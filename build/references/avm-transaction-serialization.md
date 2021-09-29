@@ -2060,14 +2060,14 @@ A collection of AVM transactions.
 
 ### What Vertex Contains
 
-An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TxSize`, `Restrictions`, and `Transactions`.
+An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `VertexSize`, `Restrictions`, and `Transactions`.
 
 * **`ChainID`** is a 32-byte array that defines the chain ID.
 * **`Height`** is a long that is the vertex height.
 * **`Epoch`** is an int that is the epoch.
 * **`ParentIDs`** is an array of 32 byte parent IDs.
 * **`TransactionCount`** is an int that is the transaction count.
-* **`TxSize`** is an int that is the transaction size.
+* **`VertexSize`** is an int that is the vertex size.
 * **`Restrictions`** is an array of 32 byte restrictions.
 * **`Transactions`** is an array of 32 byte transactions.
 
@@ -2085,7 +2085,7 @@ An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `T
 +--------------+---------------+------------------------------+
 | tx_count     : int           | 4 bytes                      |
 +--------------+---------------+------------------------------+
-| tx_size      : int           | 4 bytes                      |
+| vertex_size  : int           | 4 bytes                      |
 +--------------+---------------+------------------------------+
 | restrictions : []Restriction | 4 + size(restrictions) bytes |
 +--------------+---------------+------------------------------+
@@ -2099,12 +2099,12 @@ An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `T
 
 ```text
 message Vertex {
-    bytes chain_id = 1;              // 2 bytes + len(alias)
+    bytes chain_id = 1;              // 32 bytes
     uint64 height = 2;               // 08 bytes
     uint32 epoch = 3;                // 04 bytes
     repeated bytes parent_ids = 4;   // 04 bytes + 32 bytes * len(parent_ids)
     uint32 tx_count = 5;             // 04 bytes
-    uint32 tx_size = 6;              // 04 bytes
+    uint32 vertex_size = 6;          // 04 bytes
     repeated bytes restrictions = 7; // 04 bytes + 32 bytes * len(restrictions)
     repeated bytes transactions = 8; // 04 bytes + 32 bytes * len(transactions)
 }
@@ -2119,7 +2119,7 @@ Let’s make a Vertex:
 * **`Epoch`**: `0`
 * **`ParentIDs`**: ["0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
 * **`TransactionCount`**: `1`
-* **`TxSize`**: `385`
+* **`VertexSize`**: `385`
 * **`Restrictions`**: []
 * `"Example BaseTx as defined above"`
 
@@ -2130,7 +2130,7 @@ Let’s make a Vertex:
     Epoch            <- 0x00000000
     ParentIDs        <- [0x73fa32c486fe9feeb392ee374530c6fe076b08a111fd58e974e7f903a52951d2]
     TransactionCount <- 0x00000001
-    TxSize           <-  0x00000181
+    VertexSize       <-  0x00000181
     Restrictions     <- []
 ]
 =
@@ -2147,7 +2147,7 @@ Let’s make a Vertex:
    73 fa 32 c4 86 fe 9f ee b3 92 ee 37 45 30 c6 fe 07 6b 08 a1 11 fd 58 e9 74 e7 f9 03 a5 29 51 d2 
    // num txs
    00 00 00 01 
-   // tx 1 size
+   // vertex size
    00 00 01 81 
    // num restrictions
    00 00 00 00 
