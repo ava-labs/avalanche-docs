@@ -300,7 +300,7 @@ curl -X POST --data '{
 }
 ```
 
-### avax.exportAVAX (Removed in AvalancheGo v1.6.1)
+### avax.exportAVAX
 
 **DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
 
