@@ -64,7 +64,7 @@ Now we sorted everything out, and we're ready to query the node.
 
 ## Making API calls
 
-Open one of the API call groups, for example `Health`. Double-click `getLiveness` call:
+Open one of the API call groups, for example `Health`. Double-click `health` call:
 
 ![API call](../../.gitbook/assets/postman_07_making_calls.png)
 
