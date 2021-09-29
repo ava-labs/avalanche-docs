@@ -2060,7 +2060,7 @@ A collection of AVM transactions.
 
 ### What Vertex Contains
 
-An instance of a Vertex contains an `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TxSize`, `Restrictions`, and `Transactions`.
+An instance of a Vertex contains a `ChainID`, `Height`, `Epoch`, `ParentIDs`, `TransactionCount`, `TxSize`, `Restrictions`, and `Transactions`.
 
 * **`ChainID`** is a 32-byte array that defines the chain ID.
 * **`Height`** is a long that is the vertex height.
