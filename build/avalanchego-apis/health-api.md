@@ -16,14 +16,14 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
-### health.getLiveness
+### health.health
 
 The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
 
 #### **Signature**
 
 ```cpp
-health.getLiveness() -> {
+health.health() -> {
     checks: []{
         checkName: {
             message: JSON,
@@ -57,7 +57,7 @@ More information on these measurements can be found in the documentation for the
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"health.getLiveness"
+    "method" :"health.health"
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
