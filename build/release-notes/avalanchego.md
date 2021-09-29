@@ -16,6 +16,14 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 - Removed deprecated `getLiveness` method from the Health API
 - Added config option to disallow connections between non-validators
 
+**Note**
+
+The following are deprecated and should no longer be used. They may be removed in any future version:
+
+- API method `avm.exportAVAX` should be removed in favor of `avm.export`
+- API method `avm.importAVAX` should be removed in favor of `avm.import`
+- Config option `coreth-config` should be removed in favor of a [chain config file](../references/command-line-interface.md#c-chain-config).
+
 ## v1.6.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0)\)
 
 **This change is not backwards compatible with previous releases.**
