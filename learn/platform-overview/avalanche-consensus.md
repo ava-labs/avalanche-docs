@@ -88,7 +88,7 @@ Suppose we have an Avalanche network running with the following parameters. The 
 
 ![Working example 1](../../.gitbook/assets/cons-02-Consensus_Doc_txY.png)
 
-A node finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_ \(`4`\) validators and asks, "Do you prefer this transaction?" It gets back responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there is an α majority \(quorum\) of yes responses. Now we the node updates its DAG.
+A node finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_ \(`4`\) validators and asks, "Do you prefer this transaction?" It gets back responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there is an α majority \(quorum\) of yes responses. Now the node updates its DAG.
 
 ![Working example 2](../../.gitbook/assets/cons-03-Consensus_Doc_txY-6.png)
 
