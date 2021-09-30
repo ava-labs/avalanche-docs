@@ -232,7 +232,7 @@ If this is `true`, print the version and quit. Defaults to `false`.
 
 The following options may affect the correctness of a node. Only power users should change these.
 
-## App Gossiping
+### App Gossiping
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
@@ -242,7 +242,7 @@ Number of peers (which may or may not be validators) to gossip an AppGossip mess
 
 Number of validators to gossip an AppGossip message to. Defaults to `4`.
 
-## Benchlist
+### Benchlist
 
 `--benchlist-duration` \(duration\):
 
@@ -260,7 +260,7 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
 
-## Build Directory
+### Build Directory
 
 `--build-dir` \(string\):
 
@@ -273,7 +273,7 @@ build-dir
       |_evm
 ```
 
-## Chain Configs
+### Chain Configs
 
 Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
 
@@ -289,7 +289,7 @@ It is not required to provide these custom configurations. If they are not provi
 
 Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
 
-### C-Chain Config
+#### C-Chain Config
 
 In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` \(or another valid location, as specified above.\)
 
@@ -322,7 +322,7 @@ The default C-Chain config is:
 
 Default values are overridden only if specified in the given config.
 
-#### APIs
+##### APIs
 
 `snowman-api-enabled` \(boolean\):
 
@@ -356,7 +356,7 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-#### API Gas/Price Caps
+##### API Gas/Price Caps
 
 `rpc-gas-cap` \(int\):
 
@@ -366,13 +366,13 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), mea
 
 Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
 
-#### Database Pruning
+##### Database Pruning
 
 `pruning-enabled`\(boolean\):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
-#### Logging
+##### Logging
 
 `--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
 
@@ -380,13 +380,13 @@ The log level determines which events to log. There are 6 different levels.
 
 Defaults to `debug`.
 
-#### Log Level
+##### Log Level
 
 `log-level` \(string\):
 
 Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
 
-#### Other Settings
+##### Other Settings
 
 `local-txs-enabled` \(boolean\):
 
@@ -404,28 +404,46 @@ Maximum number of blocks to serve per `getLogs` request. Defaults to 0 \(no maxi
 
 Allows queries for unfinalized \(not yet accepted\) blocks/transactions. Defaults to false.
 
-### X-Chain Configs
+#### X-Chain Configs
 
 In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` \(or another valid location, as specified above.\)
 
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`, with these contents:
+For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
+
+This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
 
 ```javascript
 {
-  "index-transactions": true,
+  "index-transactions": false,
   "index-allow-incomplete": false
 }
 ```
 
-For more information about X-Chain configs, see [here](command-line-interface.md#avm-config).
+Default values are overridden only if explicitly specified in the config.
 
-## C-Chain / Coreth <a id="coreth-config"></a>
+The parameters are as follows:
+
+##### Transaction Indexing
+
+`index-transactions` \(boolean\):
+
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api).
+
+Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` \(see below\).
+
+`index-allow-incomplete` \(boolean\):
+
+Allows incomplete indices. Default value is `false`.
+
+This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
+
+### C-Chain / Coreth <a id="coreth-config"></a>
 
 `--coreth-config` \(json\):
 
 This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs). You should not use this.
 
-## Continuous Profiling
+### Continuous Profiling
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
 
@@ -446,7 +464,7 @@ How often a new CPU/memory profile is created. Defaults to `15m`.
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
-## Keystore Settings
+### Keystore Settings
 
 `keystore-directory` \(string\):
 
@@ -460,7 +478,7 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string \
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
-## Consensus Parameters
+### Consensus Parameters
 
 `--consensus-gossip-frequency` \(duration\):
 
@@ -514,7 +532,7 @@ The required amount of nAVAX to be burned for a transaction to be valid on the X
 
 Fraction of time a validator must be online to receive rewards. Defaults to `0.8`.
 
-### Snow Parameters
+#### Snow Parameters
 
 `--snow-avalanche-batch-size` \(int\):
 
@@ -544,7 +562,7 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
 
-## Health
+### Health
 
 `--health-check-frequency` \(duration\):
 
@@ -554,7 +572,7 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
-## Message Rate-Limiting \(Throttling\)
+### Message Rate-Limiting \(Throttling\)
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
@@ -582,7 +600,7 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 mebibytes\).
 
-## Network
+### Network
 
 `--network-allow-private-ips` \(bool\):
 
@@ -677,7 +695,7 @@ Node will accept at most this many inbound connections per second. Defaults to `
 
 Deprecated. Ignored as of AvalancheGo v1.6.0.
 
-### Peer List Gossiping
+#### Peer List Gossiping
 
 Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
 
@@ -699,21 +717,21 @@ Defaults to `20`.
 
 Defaults to `2`.
 
-## Plugin Mode
+### Plugin Mode
 
 `--plugin-mode-enabled` \(bool\):
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
 
-## Subnets
+### Subnets
 
-### Whitelist
+#### Whitelist
 
 `--whitelisted-subnets` \(string\):
 
 Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
 
-### Configs
+#### Subnet Configs
 
 It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
 
@@ -732,7 +750,7 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 }
 ```
 
-#### Consensus Parameters
+##### Consensus Parameters
 
 Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys.
 | CLI Key                          | JSON Key              |
@@ -750,7 +768,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 
 The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](#snow-parameters).
 
-## Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
+### Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
 
 `--vm-aliases-file` \(string\):
 
@@ -766,33 +784,3 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 ```
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
-
-## X-Chain / AVM <a id="avm-config"></a>
-
-This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
-
-```javascript
-{
-  "index-transactions": false,
-  "index-allow-incomplete": false
-}
-```
-
-Default values are overridden only if explicitly specified in the config.
-
-The parameters are as follows:
-
-### Transaction Indexing
-
-`index-transactions` \(boolean\):
-
-Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api).
-
-Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` \(see below\).
-
-`index-allow-incomplete` \(boolean\):
-
-Allows incomplete indices. Default value is `false`.
-
-This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
-
