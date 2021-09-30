@@ -4,7 +4,7 @@
 
 ## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
 
-This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0).
+This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
 **Upgrades**
 
