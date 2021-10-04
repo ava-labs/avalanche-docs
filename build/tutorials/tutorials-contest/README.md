@@ -13,7 +13,7 @@ Here you can see the entries of the Avalanche Developer Contest Winners:
 
 ## Smart Contracts
 * [Hardhat forking tutorial](hardhat-fork/README.md) by [Tristan Brunain](https://github.com/tbrunain)
-* [Signature Verification in a dApp](red-dev-avalanche-chainlink-tutorial/README.md) by [red·dev](https://www.red.dev)
+* [Signature Verification in a dApp](red-dev-sig-verify-tutorial/README.md) by [red·dev](https://www.red.dev)
 
 ## Social DApps
 * [eVoting Dapp](evoting-avalanche-dapp/README.md) by [Raj Ranjan](https://github.com/rajranjan0608)
