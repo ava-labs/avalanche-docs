@@ -103,4 +103,4 @@
   * [Serialization Primitives](build/references/serialization-primitives.md)
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
-
+* [Audits](https://github.com/ava-labs/audits)
