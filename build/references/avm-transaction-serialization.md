@@ -1957,8 +1957,65 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, 
 |           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
 |                 + len(name) + len(symbol) + size(initial_states) bytes |
 +------------------------------------------------------------------------+
+
+### Proto GenesisAsset Specification
+
+```text
+message GenesisAsset {
+    string alias = 1;                          // 2 bytes + len(alias)
+    uint32 network_id = 2;                     // 04 bytes
+    bytes blockchain_id = 3;                   // 32 bytes
+    repeated Output outputs = 4;               // 04 bytes + size(outputs)
+    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
+    bytes memo = 6;                            // 04 bytes + size(memo)
+    string name = 7;                           // 2 bytes + len(name)
+    name symbol = 8;                           // 2 bytes + len(symbol)
+    uint8 denomination = 9;                    // 1 bytes
+    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
+}
 ```
-base tx from above0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+
+### GenesisAsset Example
+
+Let’s make a GenesisAsset:
+
+* **`Alias`**: `asset1`
+* **`NetworkID`**: `12345`
+* **`BlockchainID`**: `0x0000000000000000000000000000000000000000000000000000000000000000`
+* **`Outputs`**: \[\]
+* **`Inputs`**: \[\]
+* **`Memo`**: `2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X`
+* **`Name`**: `asset1`
+* **`Symbol`**: `MFCA`
+* **`Denomination`**: `1`
+* **`InitialStates`**:
+* `"Example Initial State as defined above"`
+
+```text
+[
+    Alias         <- 0x617373657431
+    NetworkID     <- 0x00003039
+    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs       <- []
+    Inputs        <- []
+    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Name          <- 0x617373657431 
+    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865 
+    InitialStates <- [
+        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    ]
+]
+=
+[
+    // asset alias len: 
+    0x00, 0x06, 
+    // asset alias: 
+    0x61, 0x73, 0x73, 0x65, 0x74, 0x31, 
+    // network_id: 
+    0x00, 0x00, 0x30, 0x39, 
+    // blockchain_id: 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     // output_len: 
@@ -2053,6 +2110,7 @@ message Vertex {
 ### Vertex Example
 
 Let’s make a Vertex:
+
 * **`CodecID`**: `0x0000`
 * **`ChainID`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Height`**: `3`
