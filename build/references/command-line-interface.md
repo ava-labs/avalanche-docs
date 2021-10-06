@@ -236,7 +236,7 @@ The following options may affect the correctness of a node. Only power users sho
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `2`.
+Number of peers \(which may or may not be validators\) to gossip an AppGossip message to. Defaults to `2`.
 
 `--consensus-app-gossip-validator-size` \(uint\):
 
@@ -322,7 +322,7 @@ The default C-Chain config is:
 
 Default values are overridden only if specified in the given config.
 
-##### APIs
+**APIs**
 
 `snowman-api-enabled` \(boolean\):
 
@@ -356,7 +356,7 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-##### API Gas/Price Caps
+**API Gas/Price Caps**
 
 `rpc-gas-cap` \(int\):
 
@@ -366,13 +366,13 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), mea
 
 Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
 
-##### Database Pruning
+**Database Pruning**
 
 `pruning-enabled`\(boolean\):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
-##### Logging
+**Logging**
 
 `--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
 
@@ -380,13 +380,13 @@ The log level determines which events to log. There are 6 different levels.
 
 Defaults to `debug`.
 
-##### Log Level
+**Log Level**
 
 `log-level` \(string\):
 
 Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
 
-##### Other Settings
+**Other Settings**
 
 `local-txs-enabled` \(boolean\):
 
@@ -423,7 +423,7 @@ Default values are overridden only if explicitly specified in the config.
 
 The parameters are as follows:
 
-##### Transaction Indexing
+**Transaction Indexing**
 
 `index-transactions` \(boolean\):
 
@@ -446,7 +446,6 @@ This argument is deprecated in favor of using [Chain Configs](command-line-inter
 ### Continuous Profiling
 
 You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
-
 
 `profile-continuous-enabled` \(boolean\):
 
@@ -684,8 +683,7 @@ If true, this node will only maintain a connection with another node if this nod
 
 `--inbound-connection-throtting-cooldown` \(duration\):
 
-Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`.
-If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
+Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
 
 `--inbound-connection-throttling-max-conns-per-sec` \(uint\):
 
@@ -741,7 +739,7 @@ Specifies the directory that contains subnet configs, as described above. Defaul
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
-```json
+```javascript
 {
   "consensusParameters": {
     "k": 25,
@@ -750,23 +748,24 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 }
 ```
 
-##### Consensus Parameters
+**Consensus Parameters**
 
 Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys.
-| CLI Key                          | JSON Key              |
-| -------------------------------- | --------------------- |
-| --snow-sample-size               | k                     |
-| --snow-quorum-size               | alpha                 |
-| --snow-virtuous-commit-threshold | betaVirtuous          |
-| --snow-rogue-commit-threshold    | betaRogue             |
-| --snow-concurrent-repolls        | concurrentRepolls     |
-| --snow-optimal-processing        | optimalProcessing     |
-| --snow-max-processing            | maxOutstandingItems   |
-| --snow-max-time-processing       | maxItemProcessingTime |
-| --snow-avalanche-batch-size      | batchSize             |
-| --snow-avalanche-num-parents     | parentSize            |
 
-The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](#snow-parameters).
+| CLI Key | JSON Key |
+| :--- | :--- |
+| --snow-sample-size | k |
+| --snow-quorum-size | alpha |
+| --snow-virtuous-commit-threshold | betaVirtuous |
+| --snow-rogue-commit-threshold | betaRogue |
+| --snow-concurrent-repolls | concurrentRepolls |
+| --snow-optimal-processing | optimalProcessing |
+| --snow-max-processing | maxOutstandingItems |
+| --snow-max-time-processing | maxItemProcessingTime |
+| --snow-avalanche-batch-size | batchSize |
+| --snow-avalanche-num-parents | parentSize |
+
+The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](command-line-interface.md#snow-parameters).
 
 ### Virtual Machine \(VM\) Configs <a id="vm-configs"></a>
 
@@ -784,3 +783,4 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 ```
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
+

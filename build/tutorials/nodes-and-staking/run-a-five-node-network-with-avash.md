@@ -1,6 +1,6 @@
 # Run a Five Node Network with Avash
 
-[Avash](../../tools/avash) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate the local network to be in any state that you wish. This greatly accelerates local development work and testing.
+[Avash](https://github.com/ava-labs/avalanche-docs/tree/5d8eee7598db8da63038af14437e5ed6dac39af7/build/tools/avash/README.md) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate the local network to be in any state that you wish. This greatly accelerates local development work and testing.
 
 ## Dependencies
 
@@ -10,7 +10,7 @@ To get started make sure that you have the latest-and-greatest versions of each 
 
 First, confirm you have the [latest version of Golang](https://golang.org/dl) installed and if not then install it. This tutorial uses `go1.17.1`.
 
-```zsh
+```text
 go version
 go version go1.17.1 darwin/amd64
 ```
@@ -19,7 +19,7 @@ go version go1.17.1 darwin/amd64
 
 Next, confirm you have the [latest version of AvalancheGo](https://github.com/ava-labs/avalanchego/releases) installed and built. This tutorial uses `avalanche/1.6.0`.
 
-```zsh
+```text
 cd /path/to/avalanchego
 git fetch -p
 git checkout v1.6.0
@@ -36,7 +36,7 @@ avalanche/1.6.0 [database=v1.4.5, commit=43ab26923909bf5750c1edeb8477a3b912e40ea
 
 Then, confirm you have the [latest version of Avash](https://github.com/ava-labs/avalanchego/releases) installed and built. This tutorial uses `v1.2.0`. Call the `help` command to confirm Avash built properly.
 
-```zsh
+```text
 cd /path/to/avash
 git fetch -p
 git checkout v1.2.0
@@ -48,7 +48,7 @@ A shell environment for launching and interacting with multiple Avalanche nodes.
 
 ## Fire Up a Local Network
 
-With all the dependencies properly built you're now ready to fire up a local Avalanche network. In this example we'll run a `five_node_staking.lua` script which comes bundled w/ Avash. 
+With all the dependencies properly built you're now ready to fire up a local Avalanche network. In this example we'll run a `five_node_staking.lua` script which comes bundled w/ Avash.
 
 ### Five Node Staking Script
 
@@ -74,7 +74,7 @@ end
 
 Start avash and run the `five_node_staking.lua` script via the Avash shell.
 
-```zsh
+```text
 cd /path/to/avash
 ./avash
 avash> runscript scripts/five_node_staking.lua
@@ -82,7 +82,7 @@ avash> runscript scripts/five_node_staking.lua
 
 Now open a new tab and run this `curl`
 
-```zsh
+```text
 curl --location --request POST 'http://localhost:9650/ext/info' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -110,7 +110,7 @@ Avash's shell provides the `procmanager` command which enables you to list, stop
 
 Available Commands:
 
-```txt
+```text
 kill        Kills the process named if currently running.
 killall     Kills all processes if currently running.
 list        Lists the processes currently running.
@@ -123,12 +123,13 @@ stop        Stops the process named if currently running.
 stopall     Stops all processes if currently running.
 ```
 
-When you `list` all processes you can view the values of all the flags which were used to fire up that AvalancheGo instance. 
+When you `list` all processes you can view the values of all the flags which were used to fire up that AvalancheGo instance.
 
 ![List processes](../../../.gitbook/assets/procmanager-list.png)
 
 ## Summary
 
-Avash serves the critical function of enabling developers to test their work quickly in a highly configurable environment with non value-bearing assets. Each instance of AvalancheGo is a full node and Avash is an actual AvalancheGo network performing real consensus and producing real blocks and vertices. 
+Avash serves the critical function of enabling developers to test their work quickly in a highly configurable environment with non value-bearing assets. Each instance of AvalancheGo is a full node and Avash is an actual AvalancheGo network performing real consensus and producing real blocks and vertices.
 
 If you're writing sofware for the Avalanche network then Avash should be a fundamental building block of your workflow. You should start each new project on a local Avash network and only after extensive testing and QA should you deploy your work to the Fuji testnet and ultimately mainnet.
+

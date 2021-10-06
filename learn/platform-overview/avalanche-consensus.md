@@ -108,7 +108,7 @@ Now suppose the node learns about transaction **Y'** which conflicts with transa
 
 ![Working example 5](../../.gitbook/assets/cons-06-Consensus_Doc_txY-4.png)
 
-Transactions **Y** and **Y'** are in a conflict set; only one of them can ultimately get accepted. Transaction **Y'** doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. Transaction **W**'s  consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
+Transactions **Y** and **Y'** are in a conflict set; only one of them can ultimately get accepted. Transaction **Y'** doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. Transaction **W**'s consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
 
 When a node is asked whether it prefers a given transaction, it replies yes if that transaction has the highest confidence of any transaction in the transaction's conflict set. In this example, transaction **Y** has confidence `1` and transaction **Y'** has confidence `0` so the node prefer transaction **Y** to transaction **Y'**.
 

@@ -8,21 +8,21 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Upgrades**
 
-- Added ability to specify subnet configs
-- Added various new networking config values
-- Removed legacy messages from the network library
-- Fixed P-chain mempool bug that impacted AddValidator transactions on local networks
-- Changed transaction gossip rules to gossip to a fixed number of validators as well as all peers
-- Removed deprecated `getLiveness` method from the Health API
-- Added config option to disallow connections between non-validators
+* Added ability to specify subnet configs
+* Added various new networking config values
+* Removed legacy messages from the network library
+* Fixed P-chain mempool bug that impacted AddValidator transactions on local networks
+* Changed transaction gossip rules to gossip to a fixed number of validators as well as all peers
+* Removed deprecated `getLiveness` method from the Health API
+* Added config option to disallow connections between non-validators
 
 **Note**
 
 The following are deprecated and should no longer be used. They may be removed in any future version:
 
-- API method `avm.exportAVAX` should be removed in favor of `avm.export`
-- API method `avm.importAVAX` should be removed in favor of `avm.import`
-- Config option `coreth-config` should be removed in favor of a [chain config file](../references/command-line-interface.md#c-chain-config).
+* API method `avm.exportAVAX` should be removed in favor of `avm.export`
+* API method `avm.importAVAX` should be removed in favor of `avm.import`
+* Config option `coreth-config` should be removed in favor of a [chain config file](../references/command-line-interface.md#c-chain-config).
 
 ## v1.6.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0)\)
 
@@ -30,7 +30,7 @@ The following are deprecated and should no longer be used. They may be removed i
 
 This upgrade adds a contention limiter to the C-chain and P-chain, introduces a block based fee on the C-chain, and tunes some dynamic fee parameters on the C-chain.
 
-The changes in the upgrade go into effect at **5 PM EDT / 9 PM UTC, September 22th 2021 on Mainnet**. You should upgrade your node before the changes go into effect, otherwise you may experience loss of uptime on your node. 
+The changes in the upgrade go into effect at **5 PM EDT / 9 PM UTC, September 22th 2021 on Mainnet**. You should upgrade your node before the changes go into effect, otherwise you may experience loss of uptime on your node.
 
 More info can be found [here](https://medium.com/avalancheavax/apricot-phase-four-snowman-and-reduced-c-chain-transaction-fees-1e1f67b42ecf).
 
@@ -40,23 +40,25 @@ The minimum Go version required to build AvalancheGo is now Go 1.16.8
 
 **Bug Fixes**
 
-Fix race condition during timeout manager startup.  
+Fix race condition during timeout manager startup.
 
 **Upgrades**
 
-- Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
-- Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM<->VM communication layer.
-- Added a block based fee to C-chain blocks.
-- Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
-- Rate limit incoming connections
+* Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
+* Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM&lt;-&gt;VM communication layer.
+* Added a block based fee to C-chain blocks.
+* Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
+* Rate limit incoming connections
 
 **New Metrics**
-- `avalanche_C_blks_built` / `avalanche_P_blks_built`: Number of blocks that have been built locally on the C-Chain and P-Chain, respectively.
-- `avalanche_C_blks_builds_failed` / `avalanche_P_blks_builds_failed`: Number of calls to BuildBlock that failed on the C-Chain and P-Chain, respectively.
+
+* `avalanche_C_blks_built` / `avalanche_P_blks_built`: Number of blocks that have been built locally on the C-Chain and P-Chain, respectively.
+* `avalanche_C_blks_builds_failed` / `avalanche_P_blks_builds_failed`: Number of calls to BuildBlock that failed on the C-Chain and P-Chain, respectively.
 
 **Config Options**
-- Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../references/command-line-interface.md))
-- Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
+
+* Added flag `inbound-connection-throttling-max-conns-per-sec`.\(See [config documentation.](../references/command-line-interface.md)\)
+* Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
 
 ## PRE\_RELEASE v1.6.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji)\)
 
@@ -70,44 +72,50 @@ The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on th
 
 **Upgrades**
 
-- Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
-- Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM<->VM communication layer.
-- Added a block based fee to C-chain blocks.
-- Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
-- Added metrics for the number of blocks built and the number of failed build block attempts.
+* Introduced [Snowman++](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/proposervm/README.md) on the P-chain and C-chain.
+* Introduced [mempool gossiping to the P-chain](https://github.com/ava-labs/avalanchego/blob/v1.6.0-fuji/vms/platformvm/README.md) and C-chain using the VM&lt;-&gt;VM communication layer.
+* Added a block based fee to C-chain blocks.
+* Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
+* Added metrics for the number of blocks built and the number of failed build block attempts.
 
 ## v1.5.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3)\)
 
 This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
 
 **Uptime**
+
 * Changed minimum uptime requirement to receive a staking reward from 60% to 80%.
 
 **Networking**
-* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
+
+* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages \(`Put`, `PushQuery`, etc.\). See `snow/engine/common/engine.go`.
 * Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
-* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --> `SendPut`). 
+* Prepended method named in `common.Sender` with `Send` for clarity \(e.g. `Put` --&gt; `SendPut`\). 
 
 **P-Chain**
+
 * Added functionality to track changes in validator weight by block.
-* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
+* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's \(or the Primary Network's\) validator set at a given P-Chain height.
 
 **C-Chain**
+
 * Incorporate changes from Geth v1.10.8
 * Remove references to Ancients
 
 **Consensus**
+
 * Added method `Timestamp()` to the `snowman.Block` interface.
 
 **Local Networks**
+
 * Updated the start time of the validators in the local genesis. The end time for validators specified in the local config in versions before v1.5.3 is Sep. 10, 2021 00:00:00 UTC. **Because of this, you must upgrade to AvalancheGo v1.5.3 in order to run a local network after this time.**
 
 **Config Options**
+
 * Added AvalancheGo config option `consensus-app-gossip-size`, which defines the number of peers an `AppGossip` message is gossiped to.
-* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` (as before.)
+* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` \(as before.\)
 
 ## v1.5.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)\)
-
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
 
@@ -124,11 +132,11 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 * Added additional logging around bubbling votes.
 
-## v1.5.1-eth_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
+## v1.5.1-eth\_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
 
-This update is a hotfix for v1.5.1 that allows using eth_call without the externally owned account check.
+This update is a hotfix for v1.5.1 that allows using eth\_call without the externally owned account check.
 
 ## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
 

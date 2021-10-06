@@ -45,7 +45,7 @@ The minimum amount that a validator must stake is 2,000 AVAX.
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount \(so delegating to yourself goes against your delegation cap\).
 {% endhint %}
 
 ### Running a Validator <a id="running-a-validator"></a>
@@ -111,16 +111,13 @@ When you issue the transaction to delegate tokens, the staked tokens and transac
 
 ### Is there a tool to check the health of a validator?
 
-Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check). More information about this tool can be found [here](../../build/tools/avalanche-stats#validator-health-check).
-
+Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-health-check). More information about this tool can be found [here](https://github.com/ava-labs/avalanche-docs/tree/5522f4864aab0089e456bfa3876f2dc4a4c01fe9/build/tools/avalanche-stats/README.md#validator-health-check).
 
 ### How is it determined whether a validator receives a staking reward?
-When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not.
-If a validator thinks that the node was online and responsive for more than the required amount of time (currently 80%), the validator will vote for the node to receive a staking reward.
-Otherwise, the validator will vote that the node should not receive a staking reward.
-The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
+
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator thinks that the node was online and responsive for more than the required amount of time \(currently 80%\), the validator will vote for the node to receive a staking reward. Otherwise, the validator will vote that the node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
 
 Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
 
-Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again.
-The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
+Each validation period is considered separately. That is, suppose a node joins the validator set, and then leaves. Then it joins and leaves again. The node's uptime during its first period in the validator set does not affect whether it receives a staking reward for its second period in the validator set.
+

@@ -89,6 +89,7 @@ You can also use Truffle to test and deploy smart contracts on Avalanche. Find o
 Hardhat is the newest development and testing environment for Solidity smart contracts, and the one our developers use the most. Due to its superb testing support, it is the recommended way of developing for Avalanche.
 
 For more information see:
+
 {% page-ref page="../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md" %}
 
 ## Avalanche Explorer
