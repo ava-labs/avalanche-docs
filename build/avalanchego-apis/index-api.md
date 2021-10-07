@@ -12,6 +12,11 @@ This document shows how to query data from AvalancheGo's Index API. The Index AP
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
 
+For data format, please refer to following:
+* [AVM (X-Chain) Transaction Format](../references/avm-transaction-serialization.md)
+* [Platform Transaction Format](../references/platform-transaction-serialization.md)
+* [Coreth Atomic Transaction Format](../references/coreth-atomic-transaction-serialization.md)
+
 ## Endpoints
 
 Each chain has one or more index. To see if a C-Chain block is accepted, for example, send an API call to the C-Chain block index. To see if an X-Chain vertex is accepted, for example, send an API call to the X-Chain vertex index.
