@@ -642,69 +642,9 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportAVAX
-
-Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
-
-#### **Signature**
-
-```cpp
-avm.exportAVAX({
-    to: string,
-    amount: int,
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,
-    password: string,
-}) ->
-{
-    txID: string,
-    changeAddr: string,
-}
-```
-
-* `to` is the P-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-
-#### **Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.exportAVAX",
-    "params" :{
-        "to":"P-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
-        "amount": 500,
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-#### **Example Response**
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "25VzbNzt3gi2vkE3Kr6H9KJeSR2tXkr8FsBCm3vARnB5foLVmx",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    },
-    "id": 1
-}
-```
-
 ### avm.exportKey
 
-Get the private key that controls a given address.  
+Get the private key that controls a given address.
 The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
 
 #### **Signature**
@@ -1246,52 +1186,6 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importAVAX
-
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
-
-#### **Signature**
-
-```cpp
-avm.importAVAX({
-    to: string,
-    sourceChain: string,
-    username: string,
-    password: string,
-}) -> {txID: string}
-```
-
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
-* `username` is the user that controls `to`.
-
-#### **Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.importAVAX",
-    "params" :{
-        "to":"X-avax1s7aygrkrtxflmrlyadlhqu70a6f4a4n8l2tru8",
-        "sourceChain":"P",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-#### **Example Response**
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "MqEaeWc4rfkw9fhRMuMTN7KUTNpFmh9Fd7KSre1ZqTsTQG73h"
-    },
-    "id": 1
-}
-```
 
 ### avm.importKey
 
