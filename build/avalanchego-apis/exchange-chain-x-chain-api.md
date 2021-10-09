@@ -438,6 +438,84 @@ curl -X POST --data '{
 }
 ```
 
+### avm.createAsset
+
+Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `createMintTx`, `signMintTx` and `issueTx`. The asset can be sent with `avm.send`
+
+#### **Signature**
+
+```cpp
+avm.createAsset({
+    name: string,
+    symbol: string,
+    denomination: int, //optional
+    minterSets: []{
+        minters: []string,
+        threshold: int
+    },
+    from: []string, //optional
+    changeAddr: string, //optional
+    username: string,
+    password: string
+}) ->
+{
+    assetID: string,
+    changeAddr: string,
+}
+```
+
+* `name` is a human-readable name for the asset. Not necessarily unique.
+* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
+* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
+* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
+* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
+* `username` pays the transaction fee.
+* `assetID` is the ID of the new asset.
+* `changeAddr` in the result is the address where any change was sent.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"avm.createVariableCapAsset",
+    "params": {
+    "name": "myVariableCapAsset",
+    "symbol": "MFCA",
+    "denomination": 0,
+    "minterSets": [
+    {
+        "minters": [
+        "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+        ],
+        "threshold": 1
+    }
+    ],
+    "from": [
+    "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
+    ],
+    "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
+    "username":"myUsername",
+    "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "assetID": "e9dvVDRYTA7iRg3ChoBpiXi83USLQFQNtpSmjWb5Ya9LW6DW",
+        "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
+    }
+}
+```
+
 ### avm.createNFTAsset
 
 Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
@@ -921,7 +999,7 @@ curl -X POST --data '{
     "method" :"avm.getTx",
     "params" :{
         "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -933,8 +1011,8 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "result" :{
-        "tx":"1111111vQFqEEHkkAGwJnpdAJgga28zHk9pFARHp1VWe3QM5wC7ztGA5cZAPanFWXHkhbWEbFs9qsEpNZ7QHrzucUUZqLEPrAwJZLrZBik4dEhbsTCF3nS6s2fXVzc5ar2esLFD92WVMZmJNuTUQuKjVkjag2Gy3HHYSqm6bojrG62KrazywKPhrYx8QF9AqNfYYwD3XcSUV1g46r7sQ1WqzM8nyG4qL517JS1YVuTC3aWPeN5cxP6FdvbYexwHcgaBtiQsYbCEeZ9cuJqhE2Pxx8BJFpicLN8FBexb6fzQyBLiFR7yx6v6YBjq7dtu9MBczFdNCnDE4MsG2SyPZsdUv1XxQYVVwDqgqi8Zto5esJKph72YZbrXX3SHVSZBFZXkKbTzyEQFWHCF1jC",
-        "encoding": "cb58"
+        "tx":"0x00000000000000003039d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf00000002dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db0000000700000000773594000000000000000000000000010000000101fa4255a6e85fe4b371b1d246a21dc45cbae6e5dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429c921fbb697c0000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c000000018838fa481846b25580fb722824b63e29dfa32ba7499860a88b8eea173738335f00000000dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000050429c92272fb6e00000000010000000000000000000000010000000900000001e6fa1997d4a1d7eebcffc65fa22e14cc8326711cfdd068223cd45bf8fc86eeca1512bf4858faeb9e122ba4a69f4901bf61648d05bce3e06578c2d9c490c6de6a011bd1c857",
+        "encoding": "hex"
     }
 }
 ```
@@ -1029,7 +1107,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf", "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz"],
         "limit":5,
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -1042,17 +1120,17 @@ This gives response:
     "result": {
         "numFetched": "5",
         "utxos": [
-            "11PQ1sNw9tcXjVki7261souJnr1TPFrdVCu5JGZC7Shedq3a7xvnTXkBQ162qMYxoerMdwzCM2iM1wEQPwTxZbtkPASf2tWvddnsxPEYndVSxLv8PDFMwBGp6UoL35gd9MQW3UitpfmFsLnAUCSAZHWCgqft2iHKnKRQRz",
-            "11RCDVNLzFT8KmriEJN7W1in6vB2cPteTZHnwaQF6kt8B2UANfUkcroi8b8ZSEXJE74LzX1mmBvtU34K6VZPNAVxzF6KfEA8RbYT7xhraioTsHqxVr2DJhZHpR3wGWdjUnRrqSSeeKGE76HTiQQ8WXoABesvs8GkhVpXMK",
-            "11GxS4Kj2od4bocNWMQiQhcBEHsC3ZgBP6edTgYbGY7iiXgRVjPKQGkhX5zj4NC62ZdYR3sZAgp6nUc75RJKwcvBKm4MGjHvje7GvegYFCt4RmwRbFDDvbeMYusEnfVwvpYwQycXQdPFMe12z4SP4jXjnueernYbRtC4qL",
-            "11S1AL9rxocRf2NVzQkZ6bfaWxgCYch7Bp2mgzBT6f5ru3XEMiVZM6F8DufeaVvJZnvnHWtZqocoSRZPHT5GM6qqCmdbXuuqb44oqdSMRvLphzhircmMnUbNz4TjBxcChtks3ZiVFhdkCb7kBNLbBEmtuHcDxM7MkgPjHw",
-            "11Cn3i2T9SMArCmamYUBt5xhNEsrdRCYKQsANw3EqBkeThbQgAKxVJomfc2DE4ViYcPtz4tcEfja38nY7kQV7gGb3Fq5gxvbLdb4yZatwCZE7u4mrEXT3bNZy46ByU8A3JnT91uJmfrhHPV1M3NUHYbt6Q3mJ3bFM1KQjE"
+            "0x0000cd7e80ded4d12ab6e787a4c4b8bd3e432a12dfb80f2d6b2760e24ca21bd1c85700000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db000000070429c921fbb697c0000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c4ba5c079",
+            "0x0000e30f74cd7d914a828d8b9c298ecc974fbb41d7026e0ddec148fb7cd32fb244cf00000002e30f74cd7d914a828d8b9c298ecc974fbb41d7026e0ddec148fb7cd32fb244cf0000000a00000001000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c017adc4a",
+            "0x0000e30f74cd7d914a828d8b9c298ecc974fbb41d7026e0ddec148fb7cd32fb244cf00000001e30f74cd7d914a828d8b9c298ecc974fbb41d7026e0ddec148fb7cd32fb244cf0000000a00000000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c2ef86cbf",
+            "0x0000676a70a70b389b2b76fcf96ed374b9cc7ef204eef808910856ccd52a1570b15700000001676a70a70b389b2b76fcf96ed374b9cc7ef204eef808910856ccd52a1570b15700000006000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c828d5df2",
+            "0x00009357f28ea889981b7dd947256b70ee9f767fa9e2f04626a7a4e5274aa03e78d2000000029357f28ea889981b7dd947256b70ee9f767fa9e2f04626a7a4e5274aa03e78d200000007000000000000c350000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29ccef2fe36"
         ],
         "endIndex": {
             "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1072,7 +1150,7 @@ curl -X POST --data '{
             "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -1094,7 +1172,7 @@ This gives response:
             "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
             "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1113,7 +1191,7 @@ curl -X POST --data '{
         "addresses":["X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf", "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz"],
         "limit":5,
         "sourceChain": "P",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -1132,7 +1210,7 @@ This gives response:
             "address": "X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz",
             "utxo": "2Sz2XwRYqUHwPeiKoRnZ6ht88YqzAF1SQjMYZQQaB5wBFkAqST"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1253,8 +1331,8 @@ curl -X POST --data '{
     "id"     : 1,
     "method" :"avm.issueTx",
     "params" :{
-        "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
-        "encoding": "cb58"
+        "tx":"22zd7kFnVjtHfhVJwHbxPcpgorYH5CFrqet56A1wwRdtCzKfPy",
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
@@ -1522,7 +1600,7 @@ curl -X POST --data '{
     "method" :"wallet.issueTx",
     "params" :{
         "tx":"6sTENqXfk3gahxkJbEPsmX9eJTEFZRSRw83cRJqoHWBiaeAhVbz9QV4i6SLd6Dek4eLsojeR8FbT3arFtsGz9ycpHFaWHLX69edJPEmj2tPApsEqsFd7wDVp7fFxkG6HmySR",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
