@@ -43,7 +43,8 @@ For example, to interact with the C-Chain's Ethereum APIs via websocket on local
 ```cpp
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
-Note: on localhost, it is ws, on production, it is wss.
+
+Note: on localhost, use `ws://`. When using the [Public API](../tools/public-api.md) or another host that supports encryption, use `wss://`.
 
 To interact with other instances of the EVM via the websocket endpoint:
 

@@ -128,7 +128,7 @@ This argument specifies the location of the TLS private key used by the node for
 
 `--ipcs-chain-ids` \(string\)
 
-Comma separated list of chain ids to connect to, example: 11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH. There is no default value.
+Comma separated list of chain ids to connect to (e.g. `11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`). There is no default value.
 
 `--ipcs-path` \(string\)
 
