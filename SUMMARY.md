@@ -4,6 +4,7 @@
 
 ## Learn
 
+* [Getting Started](learn/getting-started.md)
 * [Platform Overview](learn/platform-overview/README.md)
   * [Avalanche Consensus](learn/platform-overview/avalanche-consensus.md)
   * [Staking](learn/platform-overview/staking.md)
@@ -27,6 +28,7 @@
     * [Create a Blockchain Running the AVM](build/tutorials/platform/create-avm-blockchain.md)
     * [Create a Custom Blockchain](build/tutorials/platform/create-custom-blockchain.md)
     * [Create a Local Test Network](build/tutorials/platform/create-a-local-test-network.md)
+    * [Fund a Local Test Network](build/tutorials/platform/fund-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
@@ -40,6 +42,7 @@
     * [Maintain an Avalanche Node](https://youtu.be/o4Fww-sHoaQ)
     * [Monitor an Avalanche Node](build/tutorials/nodes-and-staking/setting-up-node-monitoring.md)
     * [Node backup and restore](build/tutorials/nodes-and-staking/node-backup-and-restore.md)
+    * [Run a Five Node Network with Avash](build/tutorials/nodes-and-staking/run-a-five-node-network-with-avash.md)
     * [Run an Avalanche Node](build/tutorials/nodes-and-staking/run-avalanche-node.md)
     * [Run an Avalanche Node and Become a Validator](https://youtu.be/ZyQPeSSCbYU)
     * [Run an Avalanche Node with Oracle VM VirtualBox](https://www.youtube.com/watch?v=7Tx1iKg-jL0)
@@ -62,6 +65,7 @@
     * [Create an NFT \(Part 1\)](build/tutorials/smart-digital-assets/creating-a-nft-part-1.md)
     * [Create NFTs with the Avalanche Wallet](build/tutorials/smart-digital-assets/wallet-nft-studio.md)
     * [Use Wrapped AVAX \(WAVAX\) on Avalanche](build/tutorials/smart-digital-assets/how-to-use-wavax-on-avalanche.md)
+  * [Tutorials Contest](build/tutorials/tutorials-contest.md)
 * [AvalancheGo APIs](build/avalanchego-apis/README.md)
   * [Issuing API Calls](build/avalanchego-apis/issuing-api-calls.md)
   * [Platform Chain \(P-Chain\) API](build/avalanchego-apis/platform-chain-p-chain-api.md)
@@ -88,6 +92,7 @@
   * [Public API](build/tools/public-api.md)
   * [Ortelius API](build/tools/ortelius.md)
   * [Postman collection](build/tools/postman-avalanche-collection.md)
+  * [Avalanche Stats](build/tools/avalanche-stats.md)
 * [References](build/references/README.md)
   * [Avalanche Native Tokens and ARC-20s](build/references/coreth-arc20s.md)
   * [AVM Transaction Format](build/references/avm-transaction-serialization.md)
@@ -98,4 +103,5 @@
   * [Serialization Primitives](build/references/serialization-primitives.md)
   * [Platform Transaction Format](build/references/platform-transaction-serialization.md)
 * [Whitepapers](https://www.avalabs.org/whitepapers)
+* [Audits](https://github.com/ava-labs/audits)
 

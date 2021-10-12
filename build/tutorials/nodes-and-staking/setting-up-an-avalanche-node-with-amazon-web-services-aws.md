@@ -68,13 +68,13 @@ Select **Ubuntu 20.04 LTS \(HVM\), SSD Volume Type** for the operating system.
 
 ![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
 
-Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.large**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.large instance, select the **Compute-optimized** option from the filter drop-down menu.
+Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.2xlarge**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.2xlarge instance, select the **Compute-optimized** option from the filter drop-down menu.
 
 ![Filter by compute optimized.](https://miro.medium.com/max/595/1*tLVhk8BUXVShgm8XHOzmCQ.png)
 
-Select the checkbox next to the c5.large instance in the table.
+Select the checkbox next to the c5.2xlarge instance in the table.
 
-![Select c5.large.](https://miro.medium.com/max/883/1*YSmQYAGvwJmKEFg0iA60aQ.png)
+![Select c5.2xlarge.](../../../.gitbook/assets/c5-2xlarge.png)
 
 Click the **Next: Configure Instance Details** button in the bottom right-hand corner.
 

@@ -23,9 +23,11 @@ This tutorial is primarily geared toward developers and people interested in how
 
 ## Requirements
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest. Note that as network usage increases, hardware requirements may change.
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 200 GB free space
+* CPU: Equivalent of 8 AWS vCPU
+* RAM: 16 GB
+* Storage: 200 GB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
@@ -42,9 +44,9 @@ Building the node from source is recommended if you're a developer looking to ex
 
 #### **Source Code**
 
-If you want to build the node from source, you're first going to need to install Go 1.15.5 or later. Follow the instructions [here](https://golang.org/doc/install).
+If you want to build the node from source, you're first going to need to install Go 1.16.8 or later. Follow the instructions [here](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.16.8 or above.** Run `echo $GOPATH`. **It should not be empty.**
 
 Download the AvalancheGo repository:
 
@@ -214,7 +216,7 @@ Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, th
 
 Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
 
-![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%2819%29.png)
+![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%285%29.png)
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 

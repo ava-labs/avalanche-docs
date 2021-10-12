@@ -57,7 +57,7 @@ You can find the Rosetta server implementation for Avalanche C-Chain [here](http
 Avalanche C-Chain transactions are identical to standard EVM transactions with 2 exceptions:
 
 * They must be signed with Avalanche’s ChainID \(43114\).
-* The gas price is fixed to 225 Gwei.
+* The detailed dynamic gas fee can be found [here](../../../learn/platform-overview/transaction-fees.md#c-chain-fees).
 
 For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
 

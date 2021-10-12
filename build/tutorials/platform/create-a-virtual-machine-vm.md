@@ -12,6 +12,8 @@ A blockchain can run as a separate process from AvalancheGo and can communicate 
 
 Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/)
 
+_Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
+
 ## Interfaces
 
 ### `block.ChainVM`
@@ -689,7 +691,7 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain.
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](create-custom-blockchain.md#interact-with-the-new-blockchain).
 
 #### timestampvm.getBlock
 

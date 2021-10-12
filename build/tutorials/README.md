@@ -10,5 +10,5 @@ Check out all of the tutorials that will help you build on Avalanche. We would b
 
 {% page-ref page="smart-digital-assets/" %}
 
-
+{% page-ref page="tutorials-contest.md" %}
 

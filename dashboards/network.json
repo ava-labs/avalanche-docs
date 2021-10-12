@@ -8,6 +8,12 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
@@ -166,7 +172,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Network timeout is dynamic parameter indicating how long will node wait for response, latency is the actual time to response.",
+      "description": "Shows the amount of time this node will wait for a response to a request before considering the request failed, and the average time it takes to get a response to a request.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -214,7 +220,7 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "ns"
         },
         "overrides": []
       },
@@ -241,16 +247,18 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
-          "expr": "avalanche_requests_current_timeout/1000000000",
+          "exemplar": true,
+          "expr": "avalanche_requests_current_timeout",
           "interval": "",
           "legendFormat": "Timeout",
           "refId": "A"
         },
         {
-          "expr": "avalanche_requests_average_latency/1000000000",
+          "exemplar": true,
+          "expr": "avalanche_requests_average_latency",
           "hide": false,
           "interval": "",
-          "legendFormat": "Latency",
+          "legendFormat": "Average Response Time",
           "refId": "B"
         }
       ],
@@ -440,6 +448,30 @@
           "interval": "",
           "legendFormat": "chits",
           "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_gossip_received{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_request_received{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "Q"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_response_received{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "R"
         }
       ],
       "timeFrom": null,
@@ -615,6 +647,30 @@
           "interval": "",
           "legendFormat": "chits",
           "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_gossip_sent{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_request_sent{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "Q"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_response_sent{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "R"
         }
       ],
       "timeFrom": null,
@@ -796,6 +852,30 @@
           "interval": "",
           "legendFormat": "chits",
           "refId": "N"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_gossip_failed{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app gossip",
+          "refId": "O"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_request_failed{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app request",
+          "refId": "P"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_response_failed{job=\"avalanchego\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "app response",
+          "refId": "Q"
         }
       ],
       "timeFrom": null,
@@ -815,7 +895,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -897,7 +977,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1020,32 +1100,7 @@
           },
           "unit": "short"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "X chain"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1192,7 +1247,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1253,7 +1308,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_network_throttler_inbound_awaiting_release",
+          "expr": "avalanche_network_throttler_inbound_awaiting_release>0",
           "interval": "",
           "legendFormat": "Messages Awaiting Release",
           "refId": "A"
@@ -1519,7 +1574,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1576,7 +1631,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_msgs_failed_to_parse[1m])",
+          "expr": "increase(avalanche_network_msgs_failed_to_parse[1m])>0",
           "interval": "",
           "legendFormat": "Failed to Parse",
           "refId": "A"
@@ -1597,7 +1652,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1658,7 +1713,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_network_throttler_outbound_awaiting_release",
+          "expr": "avalanche_network_throttler_outbound_awaiting_release>0",
           "interval": "",
           "legendFormat": "Messages Awaiting Send",
           "refId": "A"
@@ -1679,7 +1734,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -1710,10 +1765,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -1877,10 +1928,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -1929,7 +1976,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -2047,33 +2094,7 @@
           },
           "unit": "Bps"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Outbound Push Query",
-                  "Inbound Push Query"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -2155,6 +2176,54 @@
           "interval": "",
           "legendFormat": "Outbound Peer List",
           "refId": "H"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_gossip_compression_saved_received_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inbound App Gossip",
+          "refId": "I"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_gossip_compression_saved_sent_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Outbound App Gossip",
+          "refId": "J"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_request_compression_saved_received_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inbound App Request",
+          "refId": "K"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_request_compression_saved_sent_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Outbound App Request",
+          "refId": "L"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_response_compression_saved_received_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inbound App Response",
+          "refId": "M"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_app_response_compression_saved_sent_bytes_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Outbound App Response",
+          "refId": "N"
         }
       ],
       "title": "Bytes Saved by Compression",
@@ -2263,6 +2332,30 @@
           "interval": "",
           "legendFormat": "Peer List",
           "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_app_gossip_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_app_gossip_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Gossip",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_app_request_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_app_request_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Request",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "(increase(avalanche_network_codec_app_response_compress_time_sum[5m])+1)/(increase(avalanche_network_codec_app_response_compress_time_count[5m])+1)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Response",
+          "refId": "G"
         }
       ],
       "title": "Average Message Compression Time",
@@ -2371,6 +2464,30 @@
           "interval": "",
           "legendFormat": "Peer List",
           "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_app_gossip_compress_time_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Gossip",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_app_request_compress_time_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Request",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(avalanche_network_codec_app_response_compress_time_sum[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "App Response",
+          "refId": "G"
         }
       ],
       "title": "Total Message Compression Time per Second",
@@ -2378,7 +2495,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Considers all outbound traffic, including non-consensus messages",
+      "description": "Considers the X-Chain, P-Chain and C-Chain. A lower value indicates vote pipelining (good.) A higher value indicates failed polls (not good.)",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2423,7 +2540,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "none"
         },
         "overrides": []
       },
@@ -2452,75 +2569,11 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(avalanche_network_accepted_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "accepted",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_accepted_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get accepted",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_accepted_frontier_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get accepted frontier",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_ancestors_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get ancestors",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_put_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "put",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_multi_put_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "multiput",
-          "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_version_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get version",
-          "refId": "G"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_peerlist_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get peerlist",
-          "refId": "H"
-        },
-        {
-          "exemplar": true,
           "expr": "increase(avalanche_network_pull_query_sent{job=\"avalanchego\"}[5m])",
           "hide": true,
           "interval": "",
           "legendFormat": "pull query",
-          "refId": "I"
+          "refId": "A"
         },
         {
           "exemplar": true,
@@ -2528,47 +2581,7 @@
           "hide": true,
           "interval": "",
           "legendFormat": "push query",
-          "refId": "J"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_version_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "version",
-          "refId": "K"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_ping_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "ping",
-          "refId": "L"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_pong_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "pong",
-          "refId": "M"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_get_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "get",
-          "refId": "N"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_chits_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "chits",
-          "refId": "O"
+          "refId": "B"
         },
         {
           "exemplar": true,
@@ -2576,7 +2589,7 @@
           "hide": true,
           "interval": "",
           "legendFormat": "",
-          "refId": "P"
+          "refId": "C"
         },
         {
           "exemplar": true,
@@ -2584,7 +2597,7 @@
           "hide": true,
           "interval": "",
           "legendFormat": "",
-          "refId": "Q"
+          "refId": "D"
         },
         {
           "exemplar": true,
@@ -2592,11 +2605,11 @@
           "hide": true,
           "interval": "",
           "legendFormat": "",
-          "refId": "R"
+          "refId": "E"
         },
         {
           "datasource": "__expr__",
-          "expression": "($A + $B + $C + $D +  $E + $F + $G + $H + $I + $J +  $K + $L + $M + $N + $O) / ($P + $Q + $R)",
+          "expression": "($A + $B) / ($C + $D + $E)",
           "hide": false,
           "refId": "S",
           "type": "math"
@@ -2604,11 +2617,11 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Bytes Sent per Accepted Container",
+      "title": "Queries Sent per Accepted Container",
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -2618,7 +2631,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -2637,5 +2650,5 @@
   "timezone": "",
   "title": "Network",
   "uid": "jB1TgdZ7z",
-  "version": 34
+  "version": 55
 }
