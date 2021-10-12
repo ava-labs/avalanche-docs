@@ -2,6 +2,21 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.6.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.2)\)
+
+This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
+
+**Upgrades**
+
+* API method `avm.exportAVAX` has been replaced by `avm.export`
+* API method `avm.importAVAX` has been replaced by `avm.import`
+
+**Note**
+
+
+
+
+
 ## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
