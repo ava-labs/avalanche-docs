@@ -1,5 +1,3 @@
-# Verify Smart Contracts with Sourcify and Truffle
-
 _This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
 _Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
 
@@ -96,7 +94,7 @@ Configure your ``truffle-config.js`` file to the appropriate settings:
    },
  };
 ```
-_Network can be configured for mainnet deployment(see Alternatives)_ 
+_Network can be configured for mainnet deployment(see [Alternatives](verify-smart-contracts-with-sourcify-truffle.md#alternatives))_ 
 
 Run the following command:
 
@@ -142,36 +140,36 @@ The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) an
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ## Steps
-1. Navigate to the _Code_ tab at the Explorer page for your contract's address
+* Navigate to the _Code_ tab at the Explorer page for your contract's address
 
 ![CodeTab2](https://user-images.githubusercontent.com/73849597/128950386-35d89fe5-c61f-41b0-badf-87a487bf422c.png)
 
 
-2. Click _Verify & Publish_ to enter the smart contract verification page
+* Click _Verify & Publish_ to enter the smart contract verification page
 
 ![SourcifyVerify](https://user-images.githubusercontent.com/73849597/128950515-cc74c92f-6da3-485f-bb7f-a033eb59bd2e.png)
 
 
-3. Click _Sourcify: sources and metadataJSON file_
+* Click _Sourcify: sources and metadataJSON file_
 
-4. Click _Next_
+* Click _Next_
 
 ![JSONSourcify](https://user-images.githubusercontent.com/73849597/128950634-55bdd46e-885b-437e-84d2-534bd1801df0.png)
 
-5. Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
+* Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
 
-6. Click _Verify & Publish_
+* Click _Verify & Publish_
 
 
 
 ![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
 
-7. View the verified contract: [MetaCoin](https://cchain.explorer.avax-test.network/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
+* View the verified contract: [MetaCoin](https://cchain.explorer.avax-test.network/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
 
 
-## Alternatives
+# Alternatives
 
-### Flatten files for verification
+## Flatten files for verification
 ```zsh
 yarn add truffle-flattener
 ```
@@ -184,7 +182,7 @@ npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 
 repeat compiliation, migration, and verification steps 
 
-### Mainnet deployment
+## Mainnet deployment
 
 Configure your ``truffle-config.js`` file to the appropriate settings:
 
