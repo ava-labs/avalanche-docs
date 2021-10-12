@@ -43,7 +43,7 @@ platform.addDelegator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -125,7 +125,7 @@ platform.addValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -200,7 +200,7 @@ platform.addSubnetValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string,
@@ -310,7 +310,7 @@ platform.createBlockchain(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -341,7 +341,7 @@ curl -X POST --data '{
         "subnetID":"2bRCr6B4MiEfSjidDwxDpdCyviwnfUVqB2HGwhm947w9YYqb7r",
         "name":"My new timestamp",
         "genesisData": "45oj4CqFViNHUtBxJ55TZfqaVAXFwMRMj2XkHVqUYjJYoTaEM",
-        "encoding": "cb58",
+        "encoding": "hex",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
         "username":"myUsername",
@@ -382,7 +382,7 @@ platform.createSubnet(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -444,7 +444,7 @@ platform.exportAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -492,7 +492,7 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
+Get the private key that controls a given address.
 The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Signature**
@@ -947,7 +947,7 @@ Get the minimum amount of AVAX required to validate the Primary Network and the 
 #### **Signature**
 
 ```cpp
-platform.getMinStake() -> 
+platform.getMinStake() ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
@@ -1086,7 +1086,7 @@ platform.getRewardUTXOs({
 
 * `txID` is the ID of the staking or delegating transaction
 * `numFetched` is the number of returned UTXOs
-* `utxos` is an array of encoded reward UTXOs 
+* `utxos` is an array of encoded reward UTXOs
 * `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 
 #### **Example Call**
@@ -1113,7 +1113,7 @@ curl -X POST --data '{
             "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
             "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
         ],
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1181,8 +1181,8 @@ platform.getSubnets(
 ```
 
 * `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `id` is the Subnet’s ID.
+* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1225,8 +1225,10 @@ Get the amount of nAVAX staked by a set of addresses. The amount returned does n
 #### **Signature**
 
 ```cpp
-platform.getStake({addresses: []string}) -> {staked: int}
+platform.getStake({addresses: []string, encoding: string //optional}) -> {staked: int}
 ```
+
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
 
 #### **Example Call**
 
@@ -1238,7 +1240,8 @@ curl -X POST --data '{
         "addresses": [
             "P-everest1g3ea9z5kmkzwnxp8vr8rpjh6lqw4r0ufec460d",
             "P-everest12un03rm579fewele99c4v53qnmymwu46dv3s5v"
-        ]
+        ],
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1251,7 +1254,9 @@ curl -X POST --data '{
 {
     "jsonrpc": "2.0",
     "result": {
-        "staked": "5000000"
+        "staked": "5000000",
+        "stakedOutputs": [],
+        "encoding": "hex",
     },
     "id": 1
 }
@@ -1317,7 +1322,7 @@ curl -X POST --data '{
     "method": "platform.getTx",
     "params": {
         "txID":"TAG9Ns1sa723mZy1GSoGqWipK6Mvpaj7CAswVJGM6MkVJDF9Q",
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
@@ -1330,7 +1335,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "result": {
         "tx": "111117XV7Rm5EoKbwXFJp5WWWouAENJcF1zXGxPDPCfTbpiLfwkUXcoHKnfzdXz7sRgGYeaVtJkcD9MNgGuKGXsyWEWpTK2zAToEf64ezp7r7SyvyL7RqC5oqvNbRDShn5hm9pDV4JTCjZR5RzAxjBEJZ2V8eqtU6jvpsJMHxNBtCwL6Atc1t2Dt7s5nqf7wdbFUBvwKXppBb2Yps8wUvtTKQifssMUAPygc2Rv4rGd9LRANk4JTiT15qzUjXX7zSzz16pxdBXc4jp2Z2UJRWbdxZdaybL3mYCFj197bBnYieRYzRohaUEpEjGcohrmkSfHB8S2eD74o2r66sVGdpXYo95vkZeayQkrMRit6unwWBx8FJR7Sd7GysxS9A3CiMc8cL4oRmr7XyvcFCrnPbUZK7rnN1Gtq3MN8k4JVvX6DuiFAS7xe61jY3VKJAZM9Lg3BgU6TAU3gZ",
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1400,7 +1405,7 @@ platform.getUTXOs(
         sourceChain: string, //optional
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -1432,7 +1437,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx", "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr"],
         "limit":5,
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1455,7 +1460,7 @@ This gives response:
             "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1475,7 +1480,7 @@ curl -X POST --data '{
             "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
             "utxo": "kbUThAUfmBXUmRgTpgD6r3nLj7rJUGho6xyht5nouNNypH45j"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1497,7 +1502,7 @@ This gives response:
             "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
             "utxo": "21jG2RfqyHUUgkTLe2tUp6ETGLriSDTW3th8JXFbPRNiSZ11jK"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1515,7 +1520,7 @@ curl -X POST --data '{
     "params" :{
         "addresses":["P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr"],
         "sourceChain": "X",
-        "encoding": "cb58"
+        "encoding": "hex"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
@@ -1534,7 +1539,7 @@ This gives response:
             "address": "P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr",
             "utxo": "S5UKgWoVpoGFyxfisebmmRf8WqC7ZwcmYwS7XaDVZqoaFcCwK"
         },
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }
@@ -1607,7 +1612,7 @@ platform.importAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     tx: string,
     changeAddr: string
@@ -1720,7 +1725,7 @@ curl -X POST --data '{
     "method": "platform.issueTx",
     "params": {
         "tx":"111Bit5JNASbJyTLrd2kWkYRoc96swEWoWdmEhuGAFK3rCAyTnTzomuFwgx1SCUdUE71KbtXPnqj93KGr3CeftpPN37kVyqBaAQ5xaDjr7wVBTUYi9iV7kYJnHF61yovViJF74mJJy7WWQKeRMDRTiPuii5gsd11gtNahCCsKbm9seJtk2h1wAPZn9M1eL84CGVPnLUiLP",
-        "encoding": "cb58"
+        "encoding": "hex"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
