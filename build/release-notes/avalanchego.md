@@ -6,16 +6,29 @@
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
-**Upgrades**
+**Config Options**
+* Removed `--coreth-config`. See [here.](../references/command-line-interface.md#c-chain-config)
+* Added `--throttler-inbound-node-max-processing-msgs` (see below.)
+* Added `--db-config-file`
 
-* API method `avm.exportAVAX` has been replaced by `avm.export`
-* API method `avm.importAVAX` has been replaced by `avm.import`
+**API**
+* API method `avm.exportAVAX` has been removed. Use `avm.export` instead.
+* API method `avm.importAVAX` has been removed. Use `avm.import` instead.
 
-**Note**
+**Benchlist**
+* Changed the minimum time a validator must be unresponsive and the maximum amount of time a validator will be benched for. These used to be 5 minutes and 30 minutes, respectively, and are now 2.5 minutes and 15 minutes.
 
+**Networking**
+* Changed the default size of the inbound at-large message allocation from 32 MiB to 6 MiB.
+* Changed the default size of the outbound at-large message allocation from 32 MiB to 6 MiB.
+* Changed the default maximum number of bytes a node can take from the inbound at-large message allocation from 4 MiB to 2 MiB.
+* Changed the default maximum number of bytes a node can take from the outbound at-large message allocation from 4 MiB to 2 MiB.
+* Added additional inbound message rate-limiting. A node will not read more messages from a peer until it is processing less than `--throttler-inbound-node-max-processing-msgs` from that peer.  
+* Change default number of non-validators an AppGossip message is gossiped to from 2 to 0.
+* Change default number of validators an AppGossip message is gossiped to from 4 to 6.
 
-
-
+**Database**
+* Allow users to specify database config with flag `--db-config-file`.
 
 ## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
 

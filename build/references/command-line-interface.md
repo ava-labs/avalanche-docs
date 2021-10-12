@@ -739,7 +739,7 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 
 `validatorOnly` \(bool\):
 
-If `true` this node does not expose subnet's blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see: [Private Subnets](../platform/create-a-subnet.md#private-subnets)
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../platform/create-a-subnet.md#private-subnets)
 
 **Consensus Parameters**
 
