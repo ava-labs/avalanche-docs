@@ -236,17 +236,17 @@ The following options may affect the correctness of a node. Only power users sho
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers \(which may or may not be validators\) to gossip an AppGossip message to. Defaults to `2`.
+Number of peers \(which may or may not be validators\) to gossip an AppGossip message to. Defaults to `0`.
 
 `--consensus-app-gossip-validator-size` \(uint\):
 
-Number of validators to gossip an AppGossip message to. Defaults to `4`.
+Number of validators to gossip an AppGossip message to. Defaults to `6`.
 
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `15m`.
 
 `--benchlist-fail-threshold` \(int\):
 
@@ -258,7 +258,7 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 `--benchlist-min-failing-duration` \(duration\):
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
 
 ### Build Directory
 
@@ -547,6 +547,62 @@ How often a new CPU/memory profile is created. Defaults to `15m`.
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
+### Database Config
+
+`--db-config-file` \(string\):
+
+Path to the database config file.
+
+#### LevelDB Config
+
+A LevelDB config file must be JSON and may have these keys. 
+Any keys not given will receive the default value.
+
+```
+{
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockCacheCapacity": int
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockSize": int
+	// CompactionExpandLimitFactor limits compaction size after expanded.  This
+	// will be multiplied by table size limit at compaction target level.
+	"compactionExpandLimitFactor": int
+	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
+	// that a single 'sorted table' generates.  This will be multiplied by
+	// table size limit at grandparent level.
+	"compactionGPOverlapsFactor": int
+	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
+	// trigger compaction.
+	"compactionL0Trigger": int
+	// CompactionSourceLimitFactor limits compaction source size. This doesn't
+	// apply to level-0.  This will be multiplied by table size limit at
+	// compaction target level.
+	"compactionSourceLimitFactor": int
+	// CompactionTableSize limits size of 'sorted table' that compaction
+	// generates.  The limits for each level will be calculated as:
+	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
+	// The multiplier for each level can also fine-tuned using
+	// CompactionTableSizeMultiplierPerLevel.
+	"compactionTableSize": int
+	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	"compactionTableSizeMultiplier": float
+	"compactionTableSizeMultiplierPerLevel": []float
+	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+	"compactionTotalSizeMultiplier": float64
+	// OpenFilesCacheCapacity defines the capacity of the open files caching.
+	"openFilesCacheCapacity": int
+	// There are two buffers of size WriteBuffer used.
+	"writeBuffer": int
+	"filterBitsPerKey": int
+}
+```
+
+#### RocksDB Config File
+
+Custom config is not yet supported for RocksDB.
+
 ### Health
 
 `--health-check-frequency` \(duration\):
@@ -563,7 +619,7 @@ These flags govern rate-limiting of inbound and outbound messages. For more info
 
 `--throttler-inbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 mebibytes\).
 
 `--throttler-inbound-validator-alloc-size` \(uint\):
 
@@ -573,9 +629,15 @@ Size, in bytes, of validator allocation in the inbound message throttler. Defaul
 
 Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 mebibytes\).
 
+`--throttler-inbound-node-max-processing-msgs` \(uint\):
+
+Node will stop reading messages from a peer when it is processing this many messages from the peer.
+Will resume reading messages from the peer when it is processing less than this many messages.
+Defaults to `1024`.
+
 `--throttler-outbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 mebibytes\).
 
 `--throttler-outbound-validator-alloc-size` \(uint\):
 

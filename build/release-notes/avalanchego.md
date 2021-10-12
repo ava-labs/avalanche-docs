@@ -8,8 +8,8 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 
 **Config Options**
 * Removed `--coreth-config`. See [here.](../references/command-line-interface.md#c-chain-config)
-* Added `--throttler-inbound-node-max-processing-msgs` (see below.)
-* Added `--db-config-file`
+* Added `--throttler-inbound-node-max-processing-msgs`. See [here.](../references/command-line-interface.md#message-rate-limiting-throttling)
+* Added `--db-config-file`. See [here.](../references/command-line-interface.md#database-config)
 
 **API**
 * API method `avm.exportAVAX` has been removed. Use `avm.export` instead.
