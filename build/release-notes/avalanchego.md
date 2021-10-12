@@ -14,6 +14,11 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 **API**
 * API method `avm.exportAVAX` has been removed. Use `avm.export` instead.
 * API method `avm.importAVAX` has been removed. Use `avm.import` instead.
+* API method `info.peers` now treats the `PublicIP` field as option and only populates it when a valid IP is provided.
+* API client `platform.getValidatorsAt` has been added.
+* API client `admin.lockProfile` has been fixed to correctly call `lockProfile`.
+* API client `health.health` has been fixed to properly handle responses from an unhealthy server.
+* Improved responses from the Health Check API to be more descriptive.
 
 **Benchlist**
 * Changed the minimum time a validator must be unresponsive and the maximum amount of time a validator will be benched for. These used to be 5 minutes and 30 minutes, respectively, and are now 2.5 minutes and 15 minutes.
@@ -21,8 +26,8 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 **Database**
 * Allowed users to specify database config with flag `--db-config-file`.
 
-**Health Checking**
-* Made responses from the Health Check API more verbose and useful.
+**Subnets**
+* Added the ability for a client to configure a subnet as private to restrict membership to only approved validators.
 
 **Networking**
 * Changed the default size of the inbound at-large message allocation from 32 MiB to 6 MiB.
@@ -32,9 +37,28 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 * Added additional inbound message rate-limiting. A node will not read more messages from a peer until it is processing less than `--throttler-inbound-node-max-processing-msgs` from that peer.  
 * Changed default number of non-validators an AppGossip message is gossiped to from 2 to 0.
 * Changed default number of validators an AppGossip message is gossiped to from 4 to 6.
+* Introduced the ability for a VM to gossip to specific validators rather than just uniformly randomly.
+* Fixed an issue that caused some nodes to never attempt to reconnect to a previously disconnected node.
+
+**ProposerVM**
+* Introduced a pessimistic P-chain height lag to improve stability during high P-chain block issuance.
+* Correctly applied the requested block delay.
+
+**Metrics**
+* Removed API request histogram metrics from the X-chain and the P-chain.
+* Added P-chain mempool metrics.
+* Added `validator_sets` metrics to the platformvm.
 
 **Other**
 * Refactored node startup and shutdown to avoid ungraceful shutdowns in the event that the node is started and then immediately stopped.
+* Fixed P-chain mempool to correctly track the number of allocated bytes.
+* Upgraded the C-chain to run geth 1.10.9.
+* Supported abigen for the C-chain.
+* Added support for pre-image support on the C-chain.
+* Added support for the fee history endpoint on the C-chain.
+* Refactored ID aliasing to better support GRPC tests.
+* Removed the end-to-end test branch matchup logic.
+* Removed the deprecated main entry point for the database migration's process manager.
 
 ## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
 
