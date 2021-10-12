@@ -1,38 +1,34 @@
-# Verifying contracts with Sourcify : truffle
+# Verify Smart Contracts with Sourcify and Truffle
 
-_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_<br>
+_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
 _Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
 
-
-
-### Create a project
+## Create a project
 
 Make sure you have truffle installed:
 ```
 npm install -g truffle
 ```
-<br>
 
 Create a new directory for your Truffle project:
-<br>
 
 ```zsh
 mkdir MetaCoin
 cd MetaCoin
 ```
-<br>
+
 
 Download ("unbox") the MetaCoin box:
 ```
 truffle unbox metacoin
 ```
-<br>
+
 
 Once this operation is completed, you'll now have a project structure with the following items:
 
-* ``contracts/``: Directory for Solidity contracts<br>
-* ``migrations/``: Directory for scriptable deployment files<br>
-* ``test/``: Directory for test files for testing your application and contracts<br>
+* ``contracts/``: Directory for Solidity contracts
+* ``migrations/``: Directory for scriptable deployment files
+* ``test/``: Directory for test files for testing your application and contracts
 * ``truffle.js``: Truffle configuration file
 
 ## Compiling
@@ -41,17 +37,16 @@ Set up your environment:
 ```zsh
 yarn add @truffle/hdwallet-provider
 ```
-<br>
+
 
 Create a ``.env.json`` file in your project's root directory:
 
 ```json
 {"mnemonic": "your-wallet-seed-phrase"}
 ```
-<br>
 
 Configure your ``truffle-config.js`` file to the appropriate settings:
-<br>
+
 
 ```js
 /**
@@ -108,31 +103,32 @@ Run the following command:
 ```zsh
 truffle compile
 ```
-<br>
+
 
 Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
-<br>
 
-* ``ConvertLib.json`` <br>
-* ``MetaCoin.json``<br>
-* ``Migrations.json``<br>
+
+* ``ConvertLib.json`` 
+* ``MetaCoin.json``
+* ``Migrations.json``
 
 _You will need ``MetaCoin.json`` for future use_
 
-### Migrate
+## Migrate
 
 Run the following command:
 ```zsh
 truffle migrate --network fuji
 ```
-<br>
 
 You should see the txn activity in your terminal
+
 ![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
+<br>
 ![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
+<br>
 ![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
 
-<br>
 
 _You will need your MetaCoin contract address for future use_
 
@@ -171,7 +167,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 ![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
 
 7. View the verified contract: [MetaCoin](https://cchain.explorer.avax-test.network/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
-<br>
+
 
 ## Alternatives
 
@@ -186,11 +182,11 @@ Run the following command:
 npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol
 ```
 
-repeat compiliation, migration, and verification steps <br>
+repeat compiliation, migration, and verification steps 
 
 ### Mainnet deployment
 
-Configure your ``truffle-config.js`` file to the appropriate settings:<br>
+Configure your ``truffle-config.js`` file to the appropriate settings:
 
 ```js
 module.exports = {
