@@ -619,15 +619,15 @@ These flags govern rate-limiting of inbound and outbound messages. For more info
 
 `--throttler-inbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 mebibytes\).
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 MiB\).
 
 `--throttler-inbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 MiB\).
 
 `--throttler-inbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 MiB\).
 
 `--throttler-inbound-node-max-processing-msgs` \(uint\):
 
@@ -637,15 +637,15 @@ Defaults to `1024`.
 
 `--throttler-outbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 mebibytes\).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 MiB\).
 
 `--throttler-outbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 MiB\).
 
 `--throttler-outbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
 
 ### Network
 
