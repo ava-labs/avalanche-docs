@@ -299,7 +299,7 @@ The C-Chain config options described below.
 
 The default C-Chain config is:
 
-```javascript
+```json
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
@@ -372,19 +372,25 @@ Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-t
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
-**Logging**
-
-`--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
-
-The log level determines which events to log. There are 6 different levels.
-
-Defaults to `debug`.
-
 **Log Level**
 
 `log-level` \(string\):
 
 Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+
+**Keystore Settings**
+
+`keystore-directory` \(string\):
+
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
+
+`keystore-external-signer` \(string\):
+
+Specifies an external URI for a clef-type signer. Defaults to the empty string \(not enabled\).
+
+`keystore-insecure-unlock-allowed` \(bool\):
+
+If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
 **Other Settings**
 
@@ -436,46 +442,6 @@ Please note that if `index-transactions` is set to true, it must always be set t
 Allows incomplete indices. Default value is `false`.
 
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
-
-### C-Chain / Coreth <a id="coreth-config"></a>
-
-`--coreth-config` \(json\):
-
-This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs). You should not use this.
-
-### Continuous Profiling
-
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
-
-`profile-continuous-enabled` \(boolean\):
-
-Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
-
-`profile-dir` \(string\):
-
-If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
-
-`profile-continuous-freq` \(duration\):
-
-How often a new CPU/memory profile is created. Defaults to `15m`.
-
-`profile-continuous-max-files` \(int\):
-
-Maximum number of CPU/memory profiles files to keep. Defaults to 5.
-
-### Keystore Settings
-
-`keystore-directory` \(string\):
-
-The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
-
-`keystore-external-signer` \(string\):
-
-Specifies an external URI for a clef-type signer. Defaults to the empty string \(not enabled\).
-
-`keystore-insecure-unlock-allowed` \(bool\):
-
-If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
 ### Consensus Parameters
 
@@ -560,6 +526,26 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 `--snow-rogue-commit-threshold` \(int\):
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
+
+### Continuous Profiling
+
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `--profile-continuous-enabled` is set.
+
+`--profile-continuous-enabled` \(boolean\):
+
+Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
+
+`--profile-dir` \(string\):
+
+If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+
+`--profile-continuous-freq` \(duration\):
+
+How often a new CPU/memory profile is created. Defaults to `15m`.
+
+`--profile-continuous-max-files` \(int\):
+
+Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 ### Health
 
@@ -739,14 +725,21 @@ Specifies the directory that contains subnet configs, as described above. Defaul
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
-```javascript
+```json
 {
+  "validatorOnly": false,
   "consensusParameters": {
     "k": 25,
     "alpha": 18
   }
 }
 ```
+
+**Validator Only**
+
+`validatorOnly` \(bool\):
+
+If `true` this node does not expose subnet's blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see: [Private Subnets](../platform/create-a-subnet.md#private-subnets)
 
 **Consensus Parameters**
 
