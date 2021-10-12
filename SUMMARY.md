@@ -57,6 +57,7 @@
     * [Using Hardhat with the Avalanche C-Chain](build/tutorials/smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
     * [Using Truffle with the Avalanche C-Chain](build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
     * [Verify Smart Contracts on the C-Chain Explorer](build/tutorials/smart-contracts/verify-smart-contracts.md)
+    * [Verify Smart Contracts with Sourcify and Truffle](build/tutorials/smart-contracts/verify-smart-contracts-with-sourcify-truffle.md)
     * [Add Avalanche to MetaMask Programmatically](build/tutorials/smart-contracts/add-avalanche-to-metamask-programmatically.md)
   * [Smart Digital Assets](build/tutorials/smart-digital-assets/README.md)
     * [Create an ERC-20 Token](build/tutorials/smart-digital-assets/create-erc-20-token-on-avalanche-c-chain.md)
