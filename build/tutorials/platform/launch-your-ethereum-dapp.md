@@ -1,4 +1,4 @@
-# Launch Your Ethereum Dapp
+# Launch Your Ethereum dApp
 
 ## Overview
 
