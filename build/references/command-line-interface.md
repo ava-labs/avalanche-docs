@@ -236,17 +236,17 @@ The following options may affect the correctness of a node. Only power users sho
 
 `--consensus-app-gossip-non-validator-size` \(uint\):
 
-Number of peers \(which may or may not be validators\) to gossip an AppGossip message to. Defaults to `2`.
+Number of peers \(which may or may not be validators\) to gossip an AppGossip message to. Defaults to `0`.
 
 `--consensus-app-gossip-validator-size` \(uint\):
 
-Number of validators to gossip an AppGossip message to. Defaults to `4`.
+Number of validators to gossip an AppGossip message to. Defaults to `6`.
 
 ### Benchlist
 
 `--benchlist-duration` \(duration\):
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `15m`.
 
 `--benchlist-fail-threshold` \(int\):
 
@@ -258,7 +258,7 @@ Enables peer specific query latency metrics. Defaults to `false`.
 
 `--benchlist-min-failing-duration` \(duration\):
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
 
 ### Build Directory
 
@@ -299,7 +299,7 @@ The C-Chain config options described below.
 
 The default C-Chain config is:
 
-```javascript
+```json
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
@@ -372,19 +372,25 @@ Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-t
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
 
-**Logging**
-
-`--log-level` \(string, `{trace | trce, debug | dbug, info, warn, error | eror, crit}`\):
-
-The log level determines which events to log. There are 6 different levels.
-
-Defaults to `debug`.
-
 **Log Level**
 
 `log-level` \(string\):
 
 Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+
+**Keystore Settings**
+
+`keystore-directory` \(string\):
+
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
+
+`keystore-external-signer` \(string\):
+
+Specifies an external URI for a clef-type signer. Defaults to the empty string \(not enabled\).
+
+`keystore-insecure-unlock-allowed` \(bool\):
+
+If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
 **Other Settings**
 
@@ -436,46 +442,6 @@ Please note that if `index-transactions` is set to true, it must always be set t
 Allows incomplete indices. Default value is `false`.
 
 This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
-
-### C-Chain / Coreth <a id="coreth-config"></a>
-
-`--coreth-config` \(json\):
-
-This argument is deprecated in favor of using [Chain Configs](command-line-interface.md#chain-configs). You should not use this.
-
-### Continuous Profiling
-
-You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `profile-continuous-enabled` is set.
-
-`profile-continuous-enabled` \(boolean\):
-
-Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
-
-`profile-dir` \(string\):
-
-If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
-
-`profile-continuous-freq` \(duration\):
-
-How often a new CPU/memory profile is created. Defaults to `15m`.
-
-`profile-continuous-max-files` \(int\):
-
-Maximum number of CPU/memory profiles files to keep. Defaults to 5.
-
-### Keystore Settings
-
-`keystore-directory` \(string\):
-
-The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
-
-`keystore-external-signer` \(string\):
-
-Specifies an external URI for a clef-type signer. Defaults to the empty string \(not enabled\).
-
-`keystore-insecure-unlock-allowed` \(bool\):
-
-If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
 
 ### Consensus Parameters
 
@@ -561,6 +527,82 @@ Snow consensus defines `beta1` as the number of consecutive polls that a virtuou
 
 Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
 
+### Continuous Profiling
+
+You can configure your node to continuously run memory/CPU profiles and save the most recent ones. Continuous memory/CPU profiling is enabled if `--profile-continuous-enabled` is set.
+
+`--profile-continuous-enabled` \(boolean\):
+
+Whether the app should continuously produce performance profiles. Defaults to the false \(not enabled\).
+
+`--profile-dir` \(string\):
+
+If profiling enabled, node continuously runs memory/CPU profiles and puts them at this directory. Defaults to the `$HOME/.avalanchego/profiles/`.
+
+`--profile-continuous-freq` \(duration\):
+
+How often a new CPU/memory profile is created. Defaults to `15m`.
+
+`--profile-continuous-max-files` \(int\):
+
+Maximum number of CPU/memory profiles files to keep. Defaults to 5.
+
+### Database Config
+
+`--db-config-file` \(string\):
+
+Path to the database config file.
+
+#### LevelDB Config
+
+A LevelDB config file must be JSON and may have these keys. 
+Any keys not given will receive the default value.
+
+```
+{
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockCacheCapacity": int
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockSize": int
+	// CompactionExpandLimitFactor limits compaction size after expanded.  This
+	// will be multiplied by table size limit at compaction target level.
+	"compactionExpandLimitFactor": int
+	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
+	// that a single 'sorted table' generates.  This will be multiplied by
+	// table size limit at grandparent level.
+	"compactionGPOverlapsFactor": int
+	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
+	// trigger compaction.
+	"compactionL0Trigger": int
+	// CompactionSourceLimitFactor limits compaction source size. This doesn't
+	// apply to level-0.  This will be multiplied by table size limit at
+	// compaction target level.
+	"compactionSourceLimitFactor": int
+	// CompactionTableSize limits size of 'sorted table' that compaction
+	// generates.  The limits for each level will be calculated as:
+	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
+	// The multiplier for each level can also fine-tuned using
+	// CompactionTableSizeMultiplierPerLevel.
+	"compactionTableSize": int
+	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	"compactionTableSizeMultiplier": float
+	"compactionTableSizeMultiplierPerLevel": []float
+	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+	"compactionTotalSizeMultiplier": float64
+	// OpenFilesCacheCapacity defines the capacity of the open files caching.
+	"openFilesCacheCapacity": int
+	// There are two buffers of size WriteBuffer used.
+	"writeBuffer": int
+	"filterBitsPerKey": int
+}
+```
+
+#### RocksDB Config File
+
+Custom config is not yet supported for RocksDB.
+
 ### Health
 
 `--health-check-frequency` \(duration\):
@@ -577,27 +619,33 @@ These flags govern rate-limiting of inbound and outbound messages. For more info
 
 `--throttler-inbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 MiB\).
 
 `--throttler-inbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 MiB\).
 
 `--throttler-inbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 MiB\).
+
+`--throttler-inbound-node-max-processing-msgs` \(uint\):
+
+Node will stop reading messages from a peer when it is processing this many messages from the peer.
+Will resume reading messages from the peer when it is processing less than this many messages.
+Defaults to `1024`.
 
 `--throttler-outbound-at-large-alloc-size` \(uint\):
 
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 MiB\).
 
 `--throttler-outbound-validator-alloc-size` \(uint\):
 
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 mebibytes\).
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 MiB\).
 
 `--throttler-outbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 mebibytes\).
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
 
 ### Network
 
@@ -739,14 +787,21 @@ Specifies the directory that contains subnet configs, as described above. Defaul
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
-```javascript
+```json
 {
+  "validatorOnly": false,
   "consensusParameters": {
     "k": 25,
     "alpha": 18
   }
 }
 ```
+
+**Validator Only**
+
+`validatorOnly` \(bool\):
+
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../platform/create-a-subnet.md#private-subnets)
 
 **Consensus Parameters**
 
