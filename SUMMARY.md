@@ -33,7 +33,7 @@
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
     * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
     * [Integrate an Exchange with Avalanche C-Chain](build/tutorials/platform/integrate-exchange-with-avalanche.md)
-    * [Launch Your Ethereum Dapp](build/tutorials/platform/launch-your-ethereum-dapp.md)
+    * [Launch Your Ethereum dApp](build/tutorials/platform/launch-your-ethereum-dapp.md)
     * [Use a Ledger Nano S or Nano X with Avalanche](build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche.md)
     * [Transfer AVAX Between the X-Chain and P-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain.md)
     * [Transfer AVAX Between the X-Chain and C-Chain](build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain.md)
