@@ -1,6 +1,4 @@
-# Verify Smart Contracts with Sourcify and Truffle
-
-## Create a project
+# Create a project
 
 _This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart), and it is inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
 
