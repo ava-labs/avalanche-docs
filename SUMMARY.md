@@ -31,6 +31,7 @@
     * [Fund a Local Test Network](build/tutorials/platform/fund-a-local-test-network.md)
     * [Create a Subnet](build/tutorials/platform/create-a-subnet.md)
     * [Create a Virtual Machine \(VM\)](build/tutorials/platform/create-a-virtual-machine-vm.md)
+    * [Avalanche Local Simulator](build/tutorials/platform/ava-sim.md)
     * [Fuji Workflow](build/tutorials/platform/fuji-workflow.md)
     * [Integrate an Exchange with Avalanche C-Chain](build/tutorials/platform/integrate-exchange-with-avalanche.md)
     * [Launch Your Ethereum dApp](build/tutorials/platform/launch-your-ethereum-dapp.md)
