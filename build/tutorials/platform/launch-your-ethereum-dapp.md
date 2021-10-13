@@ -113,6 +113,8 @@ Smart contract verification provides transparency for users interacting with sma
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
 
+See [this](../smart-contracts/verify-smart-contracts-with-sourcify-truffle.md) for a detailed tutorial with Sourcify and Truffle.
+
 ## Contract security checks
 
 Due to the nature of distributed apps, it is very hard to fix bugs once the application is deployed. Because of that, making sure your app is running correctly and securely before deployment is of great importance. Contract security reviews are done by specialized companies and services. They can be very expensive, which might be out of reach for single developers and startups. But, there are also automated services and programs that are free to use.
