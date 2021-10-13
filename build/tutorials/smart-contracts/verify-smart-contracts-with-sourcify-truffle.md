@@ -1,7 +1,8 @@
-_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
-_Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
+# Verify Smart Contracts with Sourcify and Truffle
 
 ## Create a project
+
+_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart), and it is inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
 
 Make sure you have truffle installed:
 ```
@@ -14,7 +15,6 @@ Create a new directory for your Truffle project:
 mkdir MetaCoin
 cd MetaCoin
 ```
-
 
 Download ("unbox") the MetaCoin box:
 ```
