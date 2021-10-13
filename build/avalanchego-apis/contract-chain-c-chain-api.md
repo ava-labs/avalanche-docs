@@ -392,7 +392,7 @@ curl -X POST --data '{
 
 ### eth\_getBlockByHash
 
-Getting a block by hash.
+Get a block by hash.
 
 #### **Example Call**
 
