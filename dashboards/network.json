@@ -21,7 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 54,
+  "id": 45,
   "links": [
     {
       "icon": "external link",
@@ -135,7 +135,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -226,8 +226,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 12,
@@ -258,13 +258,98 @@
           "expr": "avalanche_requests_average_latency",
           "hide": false,
           "interval": "",
-          "legendFormat": "Average Response Time",
+          "legendFormat": "Response Time",
           "refId": "B"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
       "title": "Network Timing",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of outstanding requests related to consensus/bootstrapping. Doesn't include handshake messages.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 34,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_requests_outstanding",
+          "interval": "",
+          "legendFormat": "Outstanding Requests",
+          "refId": "A"
+        }
+      ],
+      "title": "Outstanding Requests",
       "type": "timeseries"
     },
     {
@@ -680,215 +765,6 @@
     },
     {
       "datasource": null,
-      "description": "Number of outstanding requests related to consensus/bootstrapping. Doesn't include handshake messages.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 4,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 17
-      },
-      "id": 34,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "avalanche_requests_outstanding",
-          "interval": "",
-          "legendFormat": "Outstanding Requests",
-          "refId": "A"
-        }
-      ],
-      "title": "Outstanding Requests",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "Considers the X-Chain, P-Chain and C-Chain. A lower value indicates vote pipelining (good.) A higher value indicates failed polls (not good.)",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "min": 1,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 17
-      },
-      "id": 45,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "lastNotNull"
-          ],
-          "displayMode": "hidden",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "pluginVersion": "8.0.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_pull_query_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "pull query",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_push_query_sent{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "push query",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[5m]) ",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[5m]) ",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[5m])",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "E"
-        },
-        {
-          "datasource": "__expr__",
-          "expression": "($A + $B) / ($C + $D + $E)",
-          "hide": false,
-          "refId": "S",
-          "type": "math"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Queries Sent per Accepted Container",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
       "description": "Amount of the stake in AVAX that is benched (ignored) because the nodes are unhealthy",
       "fieldConfig": {
         "defaults": {
@@ -946,15 +822,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 25
+        "y": 17
       },
       "id": 14,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "lastNotNull",
-            "max"
+            "max",
+            "last"
           ],
           "displayMode": "table",
           "placement": "right"
@@ -989,6 +865,155 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Benched stake",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "Considers the X-Chain, P-Chain and C-Chain. A lower value indicates vote pipelining (good.) A higher value indicates failed polls (not good.)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.3",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_pull_query_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "pull query",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_push_query_sent{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "push query",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[5m]) ",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[5m]) ",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[5m])",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "E"
+        },
+        {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": "__expr__",
+          "expression": "($A + $B) / ($C + $D + $E)",
+          "hide": false,
+          "refId": "S",
+          "type": "math"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Queries Sent per Accepted Container",
       "type": "timeseries"
     },
     {
@@ -1046,14 +1071,18 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 25
+        "w": 6,
+        "x": 18,
+        "y": 17
       },
       "id": 29,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1066,7 +1095,7 @@
           "exemplar": true,
           "expr": "avalanche_network_throttler_outbound_awaiting_release",
           "interval": "",
-          "legendFormat": "Messages Awaiting Send",
+          "legendFormat": "Messages",
           "refId": "A"
         }
       ],
@@ -1080,7 +1109,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 25
       },
       "id": 48,
       "panels": [],
@@ -1142,14 +1171,18 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
-        "y": 34
+        "y": 26
       },
       "id": 18,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1224,14 +1257,18 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 34
+        "w": 8,
+        "x": 8,
+        "y": 26
       },
       "id": 20,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1308,14 +1345,18 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 42
+        "w": 8,
+        "x": 16,
+        "y": 26
       },
       "id": 23,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1333,6 +1374,172 @@
         }
       ],
       "title": "Inbound Byte Throttler Remaining Validator Bytyes",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "The amount of time, on average, that we wait to acquire bytes from the throttler before reading a message.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 34
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_byte_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_network_byte_throttler_inbound_acquire_latency_count[2m])",
+          "interval": "",
+          "legendFormat": "Acquire",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Byte Throttler Acquire Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "The amount of time, on average, that we wait to acquire from the throttler before reading a message.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 34
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "increase(avalanche_network_buffer_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_network_buffer_throttler_inbound_acquire_latency_count[2m])",
+          "interval": "",
+          "legendFormat": "Acquire",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Buffer Throttler Acquire Latency",
       "type": "timeseries"
     },
     {
@@ -1392,14 +1599,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 6,
         "x": 12,
-        "y": 42
+        "y": 34
       },
       "id": 22,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "min"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1412,169 +1622,11 @@
           "exemplar": true,
           "expr": "avalanche_network_byte_throttler_inbound_remaining_at_large_bytes",
           "interval": "",
-          "legendFormat": "Inbound Throttler Remaining Bytes",
+          "legendFormat": "Remaining Bytes",
           "refId": "A"
         }
       ],
       "title": "Inbound Byte Throttler Remaining At-Large Bytes",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
-      "description": "The amount of time, on average, that we wait to acquire bytes from the throttler before reading a message.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "ns"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 50
-      },
-      "id": 16,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_byte_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_network_byte_throttler_inbound_acquire_latency_count[2m])",
-          "interval": "",
-          "legendFormat": "Acquire Bytes Latency",
-          "refId": "A"
-        }
-      ],
-      "title": "Inbound Byte Throttler Acquire Latency",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
-      "description": "The amount of time, on average, that we wait to acquire from the throttler before reading a message.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "ns"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 50
-      },
-      "id": 50,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "increase(avalanche_network_buffer_throttler_inbound_acquire_latency_sum[2m])/increase(avalanche_network_buffer_throttler_inbound_acquire_latency_count[2m])",
-          "interval": "",
-          "legendFormat": "Acquire Bytes Latency",
-          "refId": "A"
-        }
-      ],
-      "title": "Inbound Buffer Throttler Acquire Latency",
       "type": "timeseries"
     },
     {
@@ -1632,14 +1684,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 58
+        "w": 6,
+        "x": 18,
+        "y": 34
       },
       "id": 49,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1652,7 +1707,7 @@
           "exemplar": true,
           "expr": "avalanche_network_buffer_throttler_inbound_awaiting_acquire",
           "interval": "",
-          "legendFormat": "Messages Awaiting Acquire",
+          "legendFormat": "Messages Awaiting",
           "refId": "A"
         }
       ],
@@ -1666,7 +1721,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 42
       },
       "id": 28,
       "panels": [],
@@ -1732,12 +1787,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 43
       },
       "id": 30,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "min"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1812,12 +1870,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 67
+        "y": 43
       },
       "id": 31,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "min"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1844,7 +1905,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 51
       },
       "id": 57,
       "panels": [],
@@ -1909,7 +1970,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 76
+        "y": 52
       },
       "id": 10,
       "options": {
@@ -2109,12 +2170,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 76
+        "y": 52
       },
       "id": 25,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -2189,14 +2253,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
-        "y": 84
+        "y": 60
       },
       "id": 32,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -2267,14 +2334,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 84
+        "w": 8,
+        "x": 8,
+        "y": 60
       },
       "id": 26,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -2345,14 +2415,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 92
+        "w": 8,
+        "x": 16,
+        "y": 60
       },
       "id": 36,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -2379,7 +2452,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 68
       },
       "id": 55,
       "panels": [],
@@ -2444,7 +2517,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 101
+        "y": 69
       },
       "id": 39,
       "options": {
@@ -2576,7 +2649,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 101
+        "y": 69
       },
       "id": 46,
       "options": {
@@ -2705,17 +2778,20 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 10,
+        "w": 24,
         "x": 0,
-        "y": 109
+        "y": 77
       },
       "id": 38,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
         },
         "tooltip": {
           "mode": "single"
@@ -2838,7 +2914,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "10s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -2848,7 +2924,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -2867,5 +2943,5 @@
   "timezone": "",
   "title": "Network",
   "uid": "jB1TgdZ7z",
-  "version": 72
+  "version": 3
 }
