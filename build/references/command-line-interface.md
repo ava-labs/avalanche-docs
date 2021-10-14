@@ -613,40 +613,6 @@ Health check runs with this freqency. Defaults to `30s`.
 
 Halflife of averagers used in health checks \(to measure the rate of message failures, for example.\) Larger value --&gt; less volatile calculation of averages. Defaults to `10s`.
 
-### Message Rate-Limiting \(Throttling\)
-
-These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
-
-`--throttler-inbound-at-large-alloc-size` \(uint\):
-
-Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 MiB\).
-
-`--throttler-inbound-validator-alloc-size` \(uint\):
-
-Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 MiB\).
-
-`--throttler-inbound-node-max-at-large-bytes` \(uint\):
-
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 MiB\).
-
-`--throttler-inbound-node-max-processing-msgs` \(uint\):
-
-Node will stop reading messages from a peer when it is processing this many messages from the peer.
-Will resume reading messages from the peer when it is processing less than this many messages.
-Defaults to `1024`.
-
-`--throttler-outbound-at-large-alloc-size` \(uint\):
-
-Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 MiB\).
-
-`--throttler-outbound-validator-alloc-size` \(uint\):
-
-Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 MiB\).
-
-`--throttler-outbound-node-max-at-large-bytes` \(uint\):
-
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
-
 ### Network
 
 `--network-allow-private-ips` \(bool\):
@@ -729,6 +695,45 @@ Max allowed clock difference value between this node and peers. Defaults to `1m`
 
 If true, this node will only maintain a connection with another node if this node is a validator, the other node is a validator, or the other node is a beacon.
 
+`--outbound-connection-timeout` \(duration\):
+
+Timeout while dialing a peer.
+
+#### Message Rate-Limiting
+
+These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
+
+`--throttler-inbound-at-large-alloc-size` \(uint\):
+
+Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 MiB\).
+
+`--throttler-inbound-validator-alloc-size` \(uint\):
+
+Size, in bytes, of validator allocation in the inbound message throttler. Defaults to `33554432` \(32 MiB\).
+
+`--throttler-inbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 MiB\).
+
+`--throttler-inbound-node-max-processing-msgs` \(uint\):
+
+Node will stop reading messages from a peer when it is processing this many messages from the peer.
+Will resume reading messages from the peer when it is processing less than this many messages.
+Defaults to `1024`.
+
+`--throttler-outbound-at-large-alloc-size` \(uint\):
+
+Size, in bytes, of at-large allocation in the outbound message throttler. Defaults to `6291456` \(6 MiB\).
+
+`--throttler-outbound-validator-alloc-size` \(uint\):
+
+Size, in bytes, of validator allocation in the outbound message throttler. Defaults to `33554432` \(32 MiB\).
+
+`--throttler-outbound-node-max-at-large-bytes` \(uint\):
+
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
+#### Connection Rate-Limiting
+
 `--inbound-connection-throtting-cooldown` \(duration\):
 
 Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
@@ -740,6 +745,10 @@ Node will accept at most this many inbound connections per second. Defaults to `
 `--inbound-connection-throttling-max-recent` \(uint\):
 
 Deprecated. Ignored as of AvalancheGo v1.6.0.
+
+`--outbound-connection-throttling-rps` \(uint\):
+
+Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
 
 #### Peer List Gossiping
 
