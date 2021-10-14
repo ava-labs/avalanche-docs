@@ -2,8 +2,6 @@
 description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
 ---
 
-{{cchainAddress}} =  0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc
-
 # Contract Chain \(C-Chain\) API
 
 _Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID and are purely internal to the_ [_C-Chain_](../../learn/platform-overview/#contract-chain-c-chain)_. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods._
@@ -282,7 +280,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"eth_getBalance",
     "params" : [
-        "{{cchainAddress}}",
+        "0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc",
         "latest"
     ],
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
@@ -344,7 +342,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"eth_getTransactionCount,
     "params" :[
-        "{{cchainAddress}}",
+        "0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc",
         "latest"
     ],
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
@@ -469,7 +467,7 @@ curl -X POST --data '{
 
 ### eth\_getBlockByNumber
 
-Getting a block by number in hex value.
+Get a block by number in hex value.
 
 #### **Example Call**
 
