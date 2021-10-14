@@ -9,6 +9,8 @@
 | [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
 | [**Create a Virtual Machine \(VM\)**](create-a-virtual-machine-vm.md) | Create a very simple [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
 | [**Create a Custom Blockchain**](create-custom-blockchain.md) | Create custom blockchain with [virtual machine \(VM\)](../../../learn/platform-overview/#virtual-machines). |
+| [**Avalanche Local Simulator**](ava-sim.md) | Spin up a local instance of an Avalanche network to interact with the standard APIs or to test a custom VM. |
+| [**Fuji Workflow**](fuji-workflow.md) | Avalanche Fuji Workflow. |
 | [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
 | [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
 | [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
