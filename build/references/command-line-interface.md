@@ -210,6 +210,10 @@ The port through which the staking server will connect to the Avalanche network 
 
 Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`.
 
+Setting this flag to `false` **does not** mean "this node is not a validator." 
+It means that this node will sample all nodes, not just validators.
+**You should not set this flag to false unless you understand what you are doing.**  
+
 `--staking-tls-cert-file` \(string, file path\):
 
 Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`.
