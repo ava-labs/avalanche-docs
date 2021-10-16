@@ -738,7 +738,7 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
 #### Connection Rate-Limiting
 
-`--inbound-connection-throtting-cooldown` \(duration\):
+`--inbound-connection-throttling-cooldown` \(duration\):
 
 Node will upgrade an inbound connection from a given IP at most once within this duration. Defaults to `10s`. If 0 or negative, will not consider recency of last upgrade when deciding whether to upgrade.
 
