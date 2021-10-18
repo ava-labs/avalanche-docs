@@ -2,7 +2,7 @@
 
 Compile a solidity contract into golang to deploy and call contracts progrmatically.
 
-## Howto Build
+## How to Build
 
 Download the solidity compiler from [solc-bin](https://github.com/ethereum/solc-bin).
 
