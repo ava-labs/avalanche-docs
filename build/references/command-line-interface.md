@@ -210,9 +210,9 @@ The port through which the staking server will connect to the Avalanche network 
 
 Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`.
 
-Setting this flag to `false` **does not** mean "this node is not a validator." 
+Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
-**You should not set this flag to false unless you understand what you are doing.**  
+**You should not set this flag to false unless you understand what you are doing.**
 
 `--staking-tls-cert-file` \(string, file path\):
 
@@ -559,7 +559,7 @@ Path to the database config file.
 
 #### LevelDB Config
 
-A LevelDB config file must be JSON and may have these keys. 
+A LevelDB config file must be JSON and may have these keys.
 Any keys not given will receive the default value.
 
 ```
@@ -717,7 +717,7 @@ Size, in bytes, of validator allocation in the inbound message throttler. Defaul
 
 `--throttler-inbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2048` \(2 MiB\).
+Maximum number of bytes a node can take from the at-large allocation of the inbound message throttler. Defaults to `2097152` \(2 MiB\).
 
 `--throttler-inbound-node-max-processing-msgs` \(uint\):
 
@@ -735,7 +735,7 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 
 `--throttler-outbound-node-max-at-large-bytes` \(uint\):
 
-Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2048` \(2 MiB\).
+Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` \(2 MiB\).
 #### Connection Rate-Limiting
 
 `--inbound-connection-throttling-cooldown` \(duration\):
