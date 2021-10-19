@@ -65,7 +65,7 @@ where:
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
+* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
@@ -121,7 +121,7 @@ index.getContainerByIndex({
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
+* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
@@ -156,6 +156,63 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
+### index.getContainerByID
+
+Get container by ID.
+
+#### **Signature**
+
+```cpp
+index.getContainerByID({
+  containerID: string,
+  encoding: string
+}) -> {
+  id: string,
+  bytes: string,
+  timestamp: string,
+  encoding: string,
+  index: string
+}
+```
+
+* `id` is the container's ID
+* `bytes` is the byte representation of the container
+* `timestamp` is the time at which this node accepted the container
+* `index` is how many containers were accepted in this index before this one
+* `encoding` is `"cb58"` or `"hex"`
+
+#### **Example Call**
+
+```cpp
+curl --location --request POST 'localhost:9650/ext/index/X/tx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "jsonrpc": "2.0",
+    "method": "index.getContainerByID",
+    "params": {
+        "containerID": "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+        "encoding":"hex"
+    },
+    "id": 1
+}'
+```
+
+#### **Example Response**
+
+```cpp
+{
+  "jsonrpc":"2.0",
+  "id"     :1,
+  "result" : {
+      "id":"6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+      "bytes":"111115HRzXVDSeonLBcv6QdJkQFjPzPEobMWy7PyGuoheggsMCx73MVXZo2hJMEXXvR5gFFasTRJH36aVkLiWHtTTFcghyFTqjaHnBhdXTRiLaYcro3jpseqLAFVn3ngnAB47nebQiBBKmg3nFWKzQUDxMuE6uDGXgnGouDSaEKZxfKreoLHYNUxH56rgi5c8gKFYSDi8AWBgy26siwAWj6V8EgFnPVgm9pmKCfXio6BP7Bua4vrupoX8jRGqdrdkN12dqGAibJ78Rf44SSUXhEvJtPxAzjEGfiTyAm5BWFqPdheKN72HyrBBtwC6y7wG6suHngZ1PMBh93Ubkbt8jjjGoEgs5NjpasJpE8YA9ZMLTPeNZ6ELFxV99zA46wvkjAwYHGzegBXvzGU5pGPbg28iW3iKhLoYAnReysY4x3fBhjPBsags37Z9P3SqioVifVX4wwzxYqbV72u1AWZ4JNmsnhVDP196Gu99QTzmySGTVGP5ABNdZrngTRfmGTFCRbt9CHsgNbhgetkxbsEG7tySi3gFxMzGuJ2Npk2gnSr68LgtYdSHf48Ns",
+      "timestamp":"2021-04-02T15:34:00.262979-07:00",
+      "encoding":"hex",
+      "index":"0"
+    }
+}
+```
+
 ### index.getContainerRange
 
 Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startIndex` + `numToFetch` - 1\]. `numToFetch` must be in `[0,1024]`.
@@ -164,8 +221,8 @@ Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startI
 
 ```cpp
 index.getContainerRange({
-  startIndex: uint64, 
-  numToFetch: uint64, 
+  startIndex: uint64,
+  numToFetch: uint64,
   encoding: string
 }) -> []{
   id: string,
@@ -179,7 +236,7 @@ index.getContainerRange({
 * `id` is the container's ID
 * `bytes` is the byte representation of the container
 * `timestamp` is the time at which this node accepted the container
-* `index` is how many containers were accepted in this index before this one 
+* `index` is how many containers were accepted in this index before this one
 * `encoding` is `"cb58"` or `"hex"`
 
 #### **Example Call**
@@ -297,7 +354,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 ```cpp
 {
   "jsonrpc":"2.0",
-  "result": 
+  "result":
     {
       "isAccepted": true
     },
