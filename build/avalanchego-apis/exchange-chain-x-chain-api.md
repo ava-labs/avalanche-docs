@@ -480,7 +480,7 @@ avm.createAsset({
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
-    "method" :"avm.createVariableCapAsset",
+    "method" :"avm.createAsset",
     "params": {
     "name": "myVariableCapAsset",
     "symbol": "MFCA",
