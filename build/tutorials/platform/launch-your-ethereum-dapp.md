@@ -1,4 +1,4 @@
-# Launch Your Ethereum Dapp
+# Launch Your Ethereum dApp
 
 ## Overview
 
@@ -112,6 +112,8 @@ Smart contract verification provides transparency for users interacting with sma
 * click `verify & publish`
 
 If successful, the `code` tab will now have a green checkmark, and your users will be able to verify the contents of your contract. This is a strong positive signal that your users can trust your contracts, and it is strongly recommended for all production contracts.
+
+See [this](../smart-contracts/verify-smart-contracts-with-sourcify-truffle.md) for a detailed tutorial with Sourcify and Truffle.
 
 ## Contract security checks
 

@@ -14,3 +14,4 @@
 
 [**Avalanche Stats**](avalanche-stats.md): Dashboard for Avalanche stats.
 
+[**Abigen**](abigen.md)**:** allows you to compile `solidity` contracts into a programatic interface suitable for embeding in `golang`.

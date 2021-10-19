@@ -1262,6 +1262,40 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getTimestamp
+
+Get the current P-Chain timestamp.
+
+#### **Signature**
+
+```cpp
+platform.getTimestamp() -> {time: string}
+```
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTimestamp",
+    "params": {},
+    "id": 1
+}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Example Response**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "timestamp": "2021-09-07T00:00:00-04:00"
+    },
+    "id": 1
+}
+```
+
 ### platform.getTotalStake
 
 Get the total amount of nAVAX staked on the Primary Network.
