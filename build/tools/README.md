@@ -10,6 +10,8 @@
 
 [**Ortelius API**](ortelius.md) allows clients to interact with Ortelius, which indexes the Avalanche Network.
 
+[**Guide to Sunset Ortelius**](index-api-4-ortelius.md.md) How to replace Ortelius with Index APIs?
+
 [**Postman collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
 
 [**Avalanche Stats**](avalanche-stats.md): Dashboard for Avalanche stats.
