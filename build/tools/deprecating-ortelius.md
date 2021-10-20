@@ -1,6 +1,6 @@
 # Replacing Ortelius with the Index APIs
 
-This guide explains how to replace usage of [the Ortelius API](ortelius.md) with other APIs, including [AvalancheGo's Index API](../references/../avalanchego-apis/index-api.md). **Ortelius is deprecated. You should use other APIs to get the information that you used to get from Ortelius.**
+This guide explains how to replace usage of [the Ortelius API](ortelius.md) with other APIs, including [AvalancheGo's Index API](../avalanchego-apis/index-api.md). **Ortelius is deprecated. You should use other APIs to get the information that you used to get from Ortelius.**
 
 ## Index API
 AvalancheGo can be configured to run with an indexer. That is, it saves \(indexes\) every container \(a block, vertex or transaction\) it accepts on the X-Chain, P-Chain and C-Chain. To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`. AvalancheGo will only index containers that are accepted when running with `--index-enabled`. For more information, see [the Index API documentation.](../avalanchego-apis/index-api.md) Please be sure to read the Index API documentation in its entirety.
@@ -18,9 +18,9 @@ You can also use chain-specific APIs.
 ### Index API
 
 The snippet below uses the Index API Client to get an X-Chain container by its ID.
-To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
-To get a P-Chain block, replace `/ext/index/X/tx` with `/ext/index/P/block`.
-To get an X-Chain vertex, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
+* To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block`. 
+* To get a P-Chain block, replace `/ext/index/X/tx` with `/ext/index/P/block`.
+* To get an X-Chain vertex, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
 
 ```go
 package main
