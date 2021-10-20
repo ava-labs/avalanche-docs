@@ -8,6 +8,10 @@ Note that for DAGs \(including the X-Chain\), nodes may accept vertices and tran
 
 This document shows how to query data from AvalancheGo's Index API. The Index API is only available when running with `--index-enabled`.
 
+## Go Client
+
+There is a Go implementation of an Index API client. See documentation [here](https://pkg.go.dev/github.com/ava-labs/avalanchego/indexer#Client). This client can be used inside a Go program to connect to an AvalancheGo node that is running with the Index API enabled and make calls to the Index API.
+
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).

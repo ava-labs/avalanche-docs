@@ -93,7 +93,7 @@
   * [Avash](build/tools/avash.md)
   * [Public API](build/tools/public-api.md)
   * [Ortelius API](build/tools/ortelius.md)
-  * [Guide to Sunset Ortelius](build/tools/index-api-4-ortelius.md)
+  * [Deprecating Ortelius](build/tools/deprecating-ortelius.md)
   * [Postman collection](build/tools/postman-avalanche-collection.md)
   * [Avalanche Stats](build/tools/avalanche-stats.md)
   * [Abigen](build/tools/abigen.md)

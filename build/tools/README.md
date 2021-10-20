@@ -8,9 +8,9 @@
 
 [**Public API**](public-api.md): Learn about the public API server you can use to interact with the Avalanche Network.
 
-[**Ortelius API**](ortelius.md) allows clients to interact with Ortelius, which indexes the Avalanche Network.
+[**Ortelius API**](ortelius.md): Interact with Ortelius, a tool that indexes the Avalanche Network. **Note: Ortelius is deprecated. You should [use the Index API instead.](deprecating-ortelius.md)**
 
-[**Guide to Sunset Ortelius**](index-api-4-ortelius.md.md) How to replace Ortelius with Index APIs?
+[**Deprecating Ortelius**](deprecating-ortelius.md): How to replace Ortelius with the Index API
 
 [**Postman collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
 
