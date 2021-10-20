@@ -18,7 +18,7 @@ You can also use chain-specific APIs.
 ### Index API
 
 The snippet below uses the Index API Client to get an X-Chain container by its ID.
-* To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block`. 
+* To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
 * To get a P-Chain block, replace `/ext/index/X/tx` with `/ext/index/P/block`.
 * To get an X-Chain vertex, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
 
@@ -76,9 +76,9 @@ You can use the Index API to get the number of blocks/vertices/transactions that
 
 The snippet below uses the Index API Client to get the total number of X-Chain transactions that have been accepted.
 
-To get the number of accepted C-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
-To get the number of accepted P-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/P/block`.
-To get the number of accepted X-Chain vertices, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
+* To get the number of accepted C-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
+* To get the number of accepted P-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/P/block`.
+* To get the number of accepted X-Chain vertices, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
 
 ```go
 package main
