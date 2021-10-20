@@ -16,8 +16,19 @@ The following Ortelius APIs are identified to be used by our partners:
 
 
 ## Get Transaction by ID
-[Ortelius API to get transaction by ID](ortelius.md#get-transaction)
+[/transactions/{txid}](ortelius.md#get-transaction) can be replaced by [avm.gettx](../avalanchego-apis/exchange-chain-x-chain-api#avm.gettx). The `encoding` parameter can be set to "json" as in 
 
+```javascript
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.getTx",
+    "params": {
+        "txID": "2NFwvZvDJcbFGM4C4PMzhYrPdqxMLihPnD3dPkWWq4eX42jPcF",
+        "encoding": "json"
+    }
+}
+```
 
 ## Get Transaction List
 [Ortelius API to list transactions](ortelius.md#list-transactions)
