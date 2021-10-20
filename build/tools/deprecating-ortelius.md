@@ -17,7 +17,7 @@ You can also use chain-specific APIs.
 
 ### Index API
 
-The snippet below uses the Index API Client to get an X-Chain container by its ID.
+The snippet below uses the Index API Client with [getIndex API](../avalanchego-apis/index-api.md#index.getindex) to get an X-Chain container by its ID.
 * To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
 * To get a P-Chain block, replace `/ext/index/X/tx` with `/ext/index/P/block`.
 * To get an X-Chain vertex, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
@@ -64,7 +64,7 @@ You can use X-Chain API method [avm.getTx](../avalanchego-apis/exchange-chain-x-
 
 #### P-Chain
 
-You can use P-Chain API method [platform.getTx](../avalanchego-apis/platform-chain-p-chain-api#platform.gettx) to get a P-Chain transaction by its ID.
+You can use P-Chain API method [platform.getTx](../avalanchego-apis/platform-chain-p-chain-api.md#platform.gettx) to get a P-Chain transaction by its ID.
 
 #### C-Chain
 
@@ -74,7 +74,7 @@ You can use the C-Chain's API to get a transaction by its ID, a block by its ID,
 
 You can use the Index API to get the number of blocks/vertices/transactions that have been accepted on a given chain. 
 
-The snippet below uses the Index API Client to get the total number of X-Chain transactions that have been accepted.
+The snippet below uses the Index API Client with [getlastaccepted API](../avalanchego-apis/index-api.md#index.getlastaccepted) to get the total number of X-Chain transactions that have been accepted.
 
 * To get the number of accepted C-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
 * To get the number of accepted P-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/P/block`.
