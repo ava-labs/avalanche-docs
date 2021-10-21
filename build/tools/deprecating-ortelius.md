@@ -128,6 +128,9 @@ func main() {
 }
 ```
 
+`curl` example of `getContainerByID` can be found [here](../avalanchego-apis/index-api.md#index.getcontainerbyid).
+
+
 ### Chain-Specific APIs
 
 #### X-Chain
