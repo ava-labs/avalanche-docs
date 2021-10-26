@@ -18,7 +18,7 @@ AVAX plays the same role on the C-Chain that ETH does on the Ethereum Network. W
 
 ANTs, however, have no counterpart within the EVM. Therefore, the C-Chain has some modifications to support holding ANT balances and transferring ANTs on the C-Chain.
 
-The C-Chain keeps a mapping \[assetID -&gt; balance\] in each account's storage to support ANTs. These tokens can be exported back to the X-Chain, or they can be used on the C-Chain using `nativeAssetCall` and `nativeAssetBalance`. `nativeAssetCall` and `nativeAssetBalance` are precompiled contracts released in Apricot Phase 2 that allow richer use of ANTs on the C-Chain.
+Normally ANTs are stored into user's wallet in the X-Chain thus the C-Chain keeps a mapping `\[assetID -&gt; balance\]` in each account's storage to support ANTs. These tokens can be exported back to the X-Chain, or they can be used on the C-Chain using `nativeAssetCall` and `nativeAssetBalance`. `nativeAssetCall` and `nativeAssetBalance` are precompiled contracts released in Apricot Phase 2 that allow richer use of ANTs on the C-Chain.
 
 #### nativeAssetCall
 
@@ -35,7 +35,11 @@ An EVM Transaction is composed of the following fields:
 `nativeAssetCall` is a precompiled contract at address `0x0100000000000000000000000000000000000002`. `nativeAssetCall` allows users to atomically transfer a native asset to a given address and, optionally, make a contract call to that address. This is parallel to how a normal transaction can send value to an address and atomically call that address with some `data`.
 
 ```text
-nativeAssetCall(address addr, uint256 assetID, uint256 assetAmount, bytes memory callData) -> {ret: bytes memory}
+nativeAssetCall(
+    address addr, 
+    uint256 assetID,
+    uint256 assetAmount,
+    bytes memory callData) -> {ret: bytes memory}
 ```
 
 These arguments can be packed by `abi.encodePacked(...)` in Solidity since there is only one argument with variadic length \(`callData`\). The first three arguments are constant length, so the precompiled contract simply parses the call input as:
@@ -58,7 +62,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since there
 
 For example, to send an ANT with an assetID of `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK` from address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` to address `0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address which is receiving the ANT, assetID and assetAmount and POST the value as the `data` param to the `0x0100000000000000000000000000000000000002` address using the `eth_sendTransaction` RPC.
 
-```text
+```bash
 curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -81,6 +85,36 @@ curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
     "id": 1,
     "result": "0x451ffb79936be1baba438b591781192cbc9659d1f3a693a7a434b4a93dda639f"
 }
+```
+
+The same transaction can be constructed with `avalanchejs` and `ethersjs`.
+```javascript
+const { ethers, BigNumber } = require("ethers");
+const { BinTools } = require("avalanche");
+const { exit } = require("process");
+
+const bintools = BinTools.getInstance();
+
+const ABI = ["function deposit()"];
+const iface = new ethers.utils.Interface(ABI);
+const amount = BigNumber.from(100);
+
+const transaction_data = ethers.utils.solidityPack (
+    ["address", "uint256", "uint256", "bytes"],
+    [
+        "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+        "2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK",
+        assetAmount,
+        iface.encodeFunctionData("deposit"),
+    ]
+);
+const tx = {
+    from: "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+    to: "0x0100000000000000000000000000000000000002",
+    value: ethers.constants.Zero,
+    gasLimit: BigNumber.from(8000000),
+    data: transaction_data,
+};
 ```
 
 #### nativeAssetBalance
@@ -107,7 +141,7 @@ These arguments can be packed by `abi.encodePacked(...)` in Solidity since all o
 
 For example, to get the balance of address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` and assetID `2nzgmhZLuVq8jc7NNu2eahkKwoJcbFWXWJCxHBVWAJEZkhquoK`, first convert the assetID to hex, `0xec21e629d1252b3540e9d2fcd174a63af081417ea6826612e96815463b8a41d7`. Next concatenate the address and assetID and POST the value as the `data` param to the `0x0100000000000000000000000000000000000001` address using the `eth_call` RPC.
 
-```text
+```bash
 curl --location --request POST 'https://api.avax.network:443/ext/bc/C/rpc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -157,6 +191,9 @@ event Approval(address indexed _owner, address indexed _spender, uint256 _value)
 ```
 
 An ERC-20 is implemented by a smart contract, meaning they maintain their own state. That is, if your account owns 5 of a given ERC-20, then the data that gives your account ownership is actually stored in that ERC-20's contract. By contrast, an ETH balance is kept in your own account's storage.
+For this reason, the transfer operations in both chains differ. To visualise this, take a look at the following transfers:
+
+![Difference Between ANT&ARC-20](../../.gitbook/assets/ant-arc20-transfer-diff.png)
 
 ### From ANT to ARC-20
 
@@ -201,6 +238,9 @@ Note: the contract's balance of `assetID` may become out of sync with the total 
         emit Deposit(msg.sender, depositAmount);
     }
 ```
+
+![Deposit Operation](../../.gitbook/assets/ant-arc20-deposit.png)
+
 
 #### ARC-20 Withdrawals
 
