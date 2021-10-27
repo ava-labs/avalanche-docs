@@ -1,16 +1,15 @@
 ---
 description: >-
-  This page lists API methods, arguments and responses that are deprecated and
-  will be removed or modified in a future release.
+  このページでは、非推奨であり、将来のリリースで削除または変更される予定のAPIメソッド、引数、レスポンスをリストアップしています。
 ---
 
-# Deprecated API Calls
+# 非推奨のAPI呼び出し
 
 ## P-Chain API
 
 ### `getCurrentValidators`
 
-In v1.0.0, the signature was:
+v1.0.0では、署名は次のようになっていました。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -46,7 +45,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
+それ以降のバージョンでは、署名は次のようになっていました。各バリデーターには、そのデリゲーターのリストが含まれていることに注意してください。現在の動作については、次のノートを参照してください。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -94,7 +93,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 }
 ```
 
-Since v1.0.6, top level `delegators` field is removed. The signature is now:
+v1.0.6以降、トップレベルの`delegators`フィールドがなくなりました。署名は現在次の通りです。
 
 ```cpp
 platform.getCurrentValidators({subnetID: string}) ->
@@ -132,13 +131,13 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 ### `getTxStatus`
 
-Before v1.0.4, the signature was:
+v1.0.4以前は、署名は以下のようになっていました。
 
 ```cpp
 platform.getTxStatus({txID: string} -> status: string
 ```
 
-v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
+v1.0.4では、引数`includeReason`が追加されました。`false`または指定されていない場合、このメソッドのレスポンスは以前と同じでした。`true`を指定すると、このメソッドのレスポンスは、次に示す新しいフォーマットになります。
 
 ```cpp
 {
@@ -147,7 +146,7 @@ v1.0.4 added an argument `includeReason`. If `false` or not provided, this metho
 }
 ```
 
-Where `reason` is the reason the transaction was dropped. `reason` is only present if `status` is `"Dropped"`.
+ここで、`reason`は、トランザクションがドロップされた理由です。`reason`は`status`が`"Dropped"`の場合のみ存在します。
 
-Since v1.0.6, the `includeReason` argument is ignored, and this method's response is always in the new format.
+v1.0.6 以降、`includeReason`引数は無視され、このメソッドのレスポンスは常に新しいフォーマットになります。
 
