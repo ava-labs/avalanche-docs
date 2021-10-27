@@ -1,8 +1,10 @@
-# Upgrade Your AvalancheGo Node
+# AvalancheGoノードをアップグレードする
 
-## **Backup your node**
+{% embed url="https://youtu.be/o4Fww-sHoaQ" caption="" %}
 
-Before upgrading your node, it is recommended you backup your staker files which are used to identify your node on the network. In the default installation, you can copy them by running following commands:
+## **ノードをバックアップする**
+
+ノードをアップグレードする前に、ネットワークでノードを識別するのに使うstakerファイルをバックアップするよう推奨します。デフォルトのインストールでは、次のコマンドを実行してコピーできます。
 
 ```text
 cd
@@ -10,19 +12,19 @@ cp ~/.avalanchego/staking/staker.crt .
 cp ~/.avalanchego/staking/staker.key .
 ```
 
-Then download `staker.crt` and `staker.key` files and keep them somewhere safe and private. If anything happens to your node or the machine node runs on, these files can be used to fully recreate your node.
+次に、`staker.crt`と`staker.key`ファイルをダウンロードし、安全にプライベートに保管します。ノードに何かが起こった場合やマシンノードが実行している場合、これらのファイルでノードを完全に再作成することができます。
 
-If you use your node for development purposes and have keystore users on your node, you should back up those too.
+開発目的でノードを使用し、ノードにキーストアユーザーがある場合は、それらもバックアップする必要があります。
 
-## Node installed using the installer script
+## インストーラスクリプトを使用してインストールしたノード
 
-If you installed your node using the [installer script](set-up-node-with-installer.md), to upgrade your node, just run the installer script again.
+[インストーラスクリプト](set-up-node-with-installer.md)でノードをインストールしてノードをアップグレードする場合は、再びインストーラスクリプトを実行します。
 
 ```text
 ./avalanchego-installer.sh
 ```
 
-It will detect that you already have AvalancheGo installed:
+すでにAvalancheGoがインストールされていることを検知します。
 
 ```text
 AvalancheGo installer
@@ -33,7 +35,7 @@ Found AvalancheGo systemd service already installed, switching to upgrade mode.
 Stopping service...
 ```
 
-It will then upgrade your node to the latest version, and after it's done, start the node back up, and print out the information about the latest version:
+そしてノードを最新版にアップグレードし、その後ノードのバックアップを開始します。最新版の情報を印刷しておいてください。
 
 ```text
 Node upgraded, starting service...
@@ -42,137 +44,132 @@ avalanche/1.1.1 [network=mainnet, database=v1.0.0, commit=f76f1fd5f99736cf468413
 Done!
 ```
 
-And that is it, your node is upgraded to the latest version.
+これで完了です。ノードは最新のバージョンにアップグレードされています。
 
-If you installed your node manually, proceed with the rest of the tutorial.
+手動でノードをインストールする場合は、チュートリアルの後半に進んでください。
 
-## **Stop the old node version**
+## **古いノードバージョンを停止する**
 
-After the backup is secured, you may start upgrading your node. Begin by stopping the currently running version.
+バックアップ後に、ノードのアップグレードを開始できます。現在実行しているバージョンを停止することから始めましょう。
 
-### Node running from terminal
+### ターミナルから実行しているノード
 
-If your node is running in a terminal stop it by pressing `ctrl+c`.
+ターミナルでノードを実行している場合は、`ctrl+c`を押して停止します。
 
-### Node running as a service
+### サービスとして実行しているノード
 
-If your node is running as a service, stop it by entering:
+ノードをサービスとして実行している場合は、次を入力して停止します。
 
 `sudo systemctl stop avalanchego.service`
 
-\(your service may be named differently, `avalanche.service`, or similar\)
+（サービスには別の名前、`avalanche.service`、または類似の名前を付けることができます）
 
-### Node running in background
+### バックグラウンドで実行しているノード
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+ノードをバックグラウンドで実行している場合（例えば　`nohup`で実行している）は、`ps aux | grep avalanche` を実行してノードを実行するプロセスを見つけます。これにより、次のような出力が生成されます。
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
 ubuntu  2630 26.1  9.4 2459236 753316 ?      Sl   Dec02 1220:52 /home/ubuntu/build/avalanchego
 ```
 
-In this example, second line shows information about your node. Note the process id, in this case, `2630`. Stop the node by running `kill -2 2630`.
+この例では、2行目にノードに関する情報を表示しています。この場合、プロセスID、`2630`に注意してください。`kill -2 2630`を実行してノードを停止します。
 
-Now we are ready to download the new version of the node. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+これで、ノードの新しいバージョンをダウンロードする準備ができました。ソースコードをダウンロードし、バイナリプログラムを構築するか、構築済のバイナリをダウンロードすることができます。両方を行う必要はありません。
 
-Downloading pre-built binary is easier and recommended if you're just looking to run your own node and stake on it.
+構築済のバイナリのダウンロードは簡単です。自分のノードを実行し、ステークしたい場合に推奨
 
-Building the node [from source](upgrade-your-avalanchego-node.md#build-from-source) is recommended if you're a developer looking to experiment and build on Avalanche.
+Avalanche上で実験し、構築したい開発者である場合は、[ソースから](upgrade-your-avalanchego-node.md#build-from-source)ノードを構築することが推奨されます。
 
-## **Download Pre-built Binary**
+## **構築済のバイナリをダウンロードする**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+自分で構築する代わりに構築済のバイナリをダウンロードする場合は、[リリースページ](https://github.com/ava-labs/avalanchego/releases)に移動し、希望するリリース（おそらく最新のもの）を選択します。
 
-Under `Assets`, select the appropriate file.
+`Assets`で、適切なファイルを選択します。
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+MacOSの場合  ：ダウンロード`avalanchego-macos-<VERSION>.zip`  ：解凍：`unzip avalanchego-macos-<VERSION>.zip`  結果として生じるフォルダ、`avalanchego-<VERSION>`、はバイナリを含んでいます。
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+PCまたはクラウドプロバイダ上で動作するLinuxの場合  ：ダウンロード`avalanchego-linux-amd64-<VERSION>.tar.gz`  ：解凍：`tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  結果として生じるフォルダ、`avalanchego-<VERSION>-linux`、はバイナリを含んでいます。
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+RaspberryPi4または同様のArm64ベースのコンピュータで動作するLinuxの場合  ：ダウンロード`avalanchego-linux-arm64-<VERSION>.tar.gz`  ：解凍：`tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  結果として生じるフォルダ、`avalanchego-<VERSION>-linux`、はバイナリを含んでいます。
 
-You are now ready to run the new version of the node.
+これで、ノードの新しいバージョンを実行する準備ができました。
 
-### Running the node from terminal
+### ターミナルからノードを実行する
 
-If you are using the pre-built binaries on MacOS:
+MacOSであらかじめ構築されたバイナリを使用する場合：
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+構築済のバイナリをLinux上で使用する場合：
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-Add `nohup` at the start of the command if you want to run the node in the background.
+バックグラウンドでノードを実行する場合は、コマンドの起動時に`nohup`を追加します。
 
-### Running the node as a service
+### サービスとしてノードを実行する
 
-If you're running the node as a service, you need to replace the old binaries with the new ones.
+サービスとしてノードを実行している場合は、古いバイナリを新しいものに置き換える必要があります。
 
 `cp -r avalanchego-<VERSION>-linux/* <DIRECTORY_WITH_OLD_BINARIES>`
 
-and then restart the service with `sudo systemctl start avalanchego.service`.
+次に、`sudo systemctl start avalanchego.service`でサービスを再起動します。
 
-## **Build from source**
+## **ソースから構築する**
 
-First clone our Github repo \(you can skip this step if you’ve done this before\):
+まず、Githubレポをクローンします（以前にこれを行っている場合は、この手順を省くことができます）。
 
 ```text
 git clone https://github.com/ava-labs/avalanchego.git
 ```
 
-Then move to the avalanchego directory:
+次に、avalanchegoディレクトリに移動します。
 
 ```text
 cd avalanchego
 ```
 
-Pull the latest code:
+最新のコードをプルします。
 
 ```text
 git pull
 ```
 
-Check that your local code is up to date. Do:
+注意：マスターブランチが最新のリリースタグで更新されていない場合は、`git pull`ではなく、まず`git fetch --all --tags`そして`git checkout --force tags/<tag>`（`<tag>`が最新リリースタグ、例えば`v1.3.2`）を実行して直接入手できます。ローカルコピーは「切り離されたHEADの状態」状態になりますが、これはリポジトリにプッシュしたいソースに変更を行わない場合は問題ではありません（この場合は、ブランチ、そして通常のマージを確認してください）。また、`--force`フラグがローカルの変更を全て無視することに注意してください。
+
+ローカルコードが最新であることを確認します。次を行います。
 
 ```text
 git rev-parse HEAD
 ```
 
-and check that the first 7 characters printed match the Latest commit field on our [Github.](https://github.com/ava-labs/avalanchego)
+そして、印刷された最初の7文字が[Github](https://github.com/ava-labs/avalanchego)の最新コミットフィールドと一致することを確認します。
 
-Now build the binary:
+注意：`git checkout tags/<tag>`を使用した場合、これら最初の7文字はそのタグのコミットハッシュと一致する必要があります。
+
+では、バイナリを構築しましょう。
 
 ```text
 ./scripts/build.sh
 ```
 
-This should print:
+これは印刷する必要があります。
 
 ```text
 Build Successful
 ```
 
-You can check what version you’re running by doing:
+実行しているバージョンは、次を実行して確認できます。
 
 ```text
 ./build/avalanchego --version
 ```
 
-You can run your node with:
+次でノードを実行することができます。
 
 ```text
 ./build/avalanchego
