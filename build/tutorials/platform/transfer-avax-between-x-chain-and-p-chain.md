@@ -1,85 +1,85 @@
-# Transfer AVAX Between the X-Chain and P-Chain
+# X-ChainとP-Chain間でAVAXを転送する
 
-## Introduction
+## はじめに
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. Avalanche supports movement of AVAX between these chains, and in the future, Avalanche will support more generic atomic swaps between chains. In this tutorial, we’ll send AVAX tokens between the X-Chain and P-Chain.
+AVAXトークンは、取引可能なX-Chain上、一次ネットワークを検証する際にステークとして提供できるP-Chain上、スマートコントラクトで使用するあるいはガス代を支払う C-Chain上に存在しています。Avalancheは、これらのチェーン間でのAVAXの移動をサポートしています。そして将来的には、Avalancheはチェーン間でのより一般的なアトミックスワップのサポートを予定しています。このチュートリアルでは、X-ChainとP-Chain間でAVAXトークンを送信します。
 
-## Requirements
+## 要件
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Getting Started（はじめに）](../nodes-and-staking/run-avalanche-node.md)を修了したので、[Avalancheのアーキテクチャ](../../../learn/platform-overview/)をよく理解されていることと思います。
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
+AVAXを送信するには、AVAXがいくらか必要です。実際のAVAXを取得するには、取引所で購入することもできますし、[AVAX Test Faucet](https://faucet.avax-test.network)からテストネットAVAXを取得することもできます。後者は、Avalanche上で試してみるには無料で簡単な方法です。
 
-## Transferring AVAX Using the Web Wallet
+## ウェブウォレットを使用してAVAXを転送する
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/), which is a non-custodial and secure way to access and move AVAX.
+チェーン間でAVAXを転送する最も簡単な方法は、[Avalancheウォレット](https://wallet.avax.network/)を使用することです。これは、AVAXにアクセスし、移行させる非管理かつ安全な方法です。
 
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+Avalancheウォレットのソースコードは、[ここ](https://github.com/ava-labs/avalanche-wallet)にあります。
 
-### Step 1 - Open the Avalanche Wallet
+### ステップ1 - Avalancheウォレットを開く
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
+**Access Wallet（ウォレットにアクセス）**を選択し、自分のウォレットを入力します。メインのAvalancheネットワーク以外のネットワークにウォレットを接続させるには、**Mainnet**を選択し、接続するネットワークを選びます。
 
-### Step 2 - Log In to Your Wallet
+### ステップ2 - ウォレットにログインする
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S.
+秘密鍵、ニーモニック鍵フレーズ、キーストアファイルあるいはLedger Nano Sを使用して、ウォレットにアクセスできます。
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+ログインに成功すると、残高、資産ポートフォリオや様々な情報が表示されます。
 
-### Step 3 - Go to the Cross Chain Tab
+### ステップ3 - Cross Chain（クロスチェーン）タブに移動する
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+チェーン間でトークンを転送するための機能は、**Cross Chain（クロスチェーン）**タブにあります。
 
-### Step 4 - Enter Amount to Transfer
+### ステップ4 - 転送する金額を入力する
 
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and P-Chain, respectively. You will see your X and P balances, and an input field for entering the amount to transfer from source to destination chain.
+**Source Chain（送信元チェーン）**と**Destination Chain（送信先チェーン）**の選択が表示されます。X-ChainとP-Chainをそれぞれ選択します。XとPでの残高と送信元から送信先チェーンへ転送する金額を入力するフィールドが表示されます。
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
 
-Enter the amount you wish to transfer from the X-Chain to the P-Chain.
+X-ChainからP-Chainに転送する金額を入力します。
 
-### Step 5 - Confirm the Transaction
+### ステップ5 - トランザクションを確認する
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
 
-Press **Confirm**, and then **Transfer** to initiate the transfer.
+**Confirm（確認）**を押し、その後**Transfer(転送）**を押して、転送を開始します。
 
-### Step 6 - Done!
+### ステップ6 - 完了しました。
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the P-Chain. The wallet will do both and show its the progress while doing so.
+クロスチェーン転送は2段階のプロセスで行われます。まずX-Chainから資金をエクスポートするトランザクション、そしてP-Chainにインポートするトランザクションです。ウォレットは両方を行い、実行中進捗を表示します。
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
 
-That's it! You've transferred AVAX from the X-Chain to P-Chain! Now you can use them to validate or delegate on the Avalanche network.
+完了です。AVAXは、X-ChainからP-Chainに転送されました。これで、Avalancheネットワーク上でAVAXを使用して検証またはデリゲートすることができます。
 
-### Transfer from P-Chain to X-Chain
+### P-ChainからX-Chainへの転送
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+AVAXをX-Chainに戻すには、逆の方向に転送を行う必要があります。
 
-Swap the source and destination chains by selecting them from the **Source** and **Destination** drop-down menu. The rest of the process is the same: enter the amount, confirm and transfer.
+**Source（送信元）**と**Destination(送信先）**をドロップダウンメニューから選択し、送信元と送信先を入れ替えます。後のプロセスは同じです。金額を入力し、確認し、転送します。
 
-## Transferring from the X-Chain to P-Chain with API Calls
+## APIコールでのX-ChainからP-Chainへの転送
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+Avalancheネットワーク上でアプリケーションを構築している場合は、より広範な機能の一部としてプログラムによる転送を行うことを望まれるかもしれません。AvalancheGoノード上で適切なAPIを呼び出すことで可能です。このチュートリアルのここ以降では、AvalancheGoノード、X-Chain上のAVAXトークン、およびノードのキーストアで[作成](../../avalanchego-apis/keystore-api.md#keystorecreateuser)、保存されたユーザー認証情報にアクセスできることを前提にしています。
 
-All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+次のAPIコールの例はすべて、ノードがローカルで実行されている（つまり`127.0.0.1`上でリスニングしている）ことを前提にしています。ノードは、メインネットワーク、テストネットワーク、またはローカルネットワークに接続することができます。それぞれのケースで、アドレスの形式を除き、APIコールとレスポンスは同じでなければなりません。ノードはローカルである必要はありません。他の場所でホスティングされているノードを呼び出すことも可能です。
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
+Avalancheウォレットを使用してAVAXを転送する際に気づかれているかもしれませんが、クロスチェーン転送は2つのトランザクションオペレーションからなります。
 
-* Export AVAX from the X-Chain
-* Import AVAX to the P-chain
+* X-ChainからAVAXをエクスポートする
+* P-ChainにAVAXをインポートする
 
-### Step 1 - Export AVAX from the X-Chain
+### ステップ1 - X-ChainからAVAXをエクスポートする
 
-To export AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
+AVAXをエクスポートするには、X-Chai[`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax)nのメソッドを呼び出します。
 
-Your call should look like this:
+呼び出しは、次のようになります。
 
 ```cpp
 curl -X POST --data '{
@@ -97,13 +97,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
+`to`に、ユーザーが管理するP-Chainのアドレスがあり、`changeAddr`は変更を送信するアドレスです。`changeAddr`は、空白のままにしておくこともできます。空白のままにしておくと、変更はユーザーが管理するアドレスに返されます。（新しいP-Chainのアドレスの作成手順は[ここ](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress)を参照してください。）
 
-Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
+エクスポートとインポートの両方にトランザクション手数料を支払うことに注意してください。ここでは、トランザクション手数料が`.001`AVAXであるとします。上記のエクスポートでは、`.006`AVAXが消費されます。そして`.005`はP-Chainに移動し、トランザクション手数料と`.001`してが使い果されます。
 
-Make sure that the amount that you’re sending exceeds the transaction fee. Otherwise, when you import AVAX on the P-Chain, it will consume the transaction fee, and you’ll end up with _less_ AVAX on the P-Chain.
+送信する額がトランザクション手数料を上回っていることを確認してください。さもなければ、AVAXをP-Chain上にインポートするときに、トランザクション手数料が消費され、P-Chain上のAVAXが_マイナス_になって終了してしまいます。
 
-The response should look like this:
+レスポンスは、次のようになります。
 
 ```cpp
 {
@@ -116,7 +116,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+このトランザクションが、[`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus)を呼び出すことで受け入れられたことを検証することができます。
 
 ```cpp
 curl -X POST --data '{
@@ -129,7 +129,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Which shows our transaction is accepted:
+これがトランザクションが受け入れられていることを示すものです。
 
 ```cpp
 {
@@ -141,7 +141,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance)を呼び出して、AVAXがユーザーが保有するアドレスから差し引かれたことを確認することもできます。
 
 ```cpp
 curl -X POST --data '{
@@ -155,13 +155,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`.005` AVAX in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+差し引かれた額は、エクスポートされた額（この例では`.005`AVAX）にトランザクション手数料を加えた額です。ユーザーが複数のX-Chainアドレスを管理する場合、AVAXはそのいずれの組み合わせからでも送信される場合があります。
 
-### Step 2 - Import AVAX to the P-Chain
+### ステップ2 - P-ChainにAVAXをインポートする
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) method to finish the transfer.
+転送はまだ完了していません。転送を完了させるには、P-Chainの[`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax)メソッドを呼び出す必要があります。
 
-Your call should look like this:
+呼び出しは、次のようになります。
 
 ```cpp
 curl -X POST --data '{
@@ -178,7 +178,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This returns the transaction ID:
+これによりトランザクションIDを返します。
 
 ```cpp
 {
@@ -191,7 +191,7 @@ This returns the transaction ID:
 }
 ```
 
-We can check that the transaction was accepted with:
+トランザクションが受け入れられたことを確認することができます。
 
 ```cpp
 curl -X POST --data '{
@@ -204,7 +204,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
+これは、`Committed`となり、転送が完了したことを意味します。アドレスの残高を確認することもできます。
 
 ```cpp
 curl -X POST --data '{
@@ -217,7 +217,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-The response should look like this:
+レスポンスは、次のようになります。
 
 ```cpp
 {
@@ -235,20 +235,20 @@ The response should look like this:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`.004` AVAX\) less the transaction fee \(`.001` AVAX in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+表示されている残高が、X-Chain（`.004`AVAX）からエクスポートされた金額からトランザクション手数料（この例`.001`ではAVAX）をマイナスしたものであることにご注意ください。これで、P-Chainアドレスで保有しているAVAXを使用してPrimary Networkを検証するためにステークを提供することができます。
 
-## Transferring from the P-Chain to X-Chain programmatically
+## P-ChainからX-Chainにプログラムで転送する
 
-Now, let’s move AVAX from the P-Chain back to the X-Chain.
+さて、P-ChainからX-ChainにAVAXを移動してみましょう。
 
-Same as before, this is also a two transaction operation:
+上記で説明したように、これは、2つのトランザクション操作です。
 
-* Export from the P-Chain
-* Import to the X-Chain
+* P-Chainからエクスポートする
+* X-Chainにインポートする
 
-### Step 1 - Export AVAX from the P-Chain
+### ステップ1 - P-ChainからAVAXをエクスポートする
 
-To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
+これを行うのに、[`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax)を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -265,13 +265,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-where `to` is the X-Chain address the AVAX is being sent to.
+`to`に、AVAXの送信先となるX-Chainアドレスがあります。
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+これによりトランザクションIDを返します。そして、別の[`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus)への呼び出しでトランザクションがコミットされたことを確認します。繰り返しになりますが、送信する額がトランザクション手数料を上回ることを確認してください。
 
-### Step 2 - Import AVAX to X-Chain
+### ステップ2 - X-ChainにAVAXをインポートする
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
+P-ChainからX-Chainへの転送を完了させるには、[`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax)を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -288,13 +288,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
+`to`は、[`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax)への呼び出しで指定した同じアドレスであることに注意してください。
 
-Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+前述のように、[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance)を呼び出して、資金を受け取ったことを確認することができます。残高がトランザクション手数料を差し引いた`.003`AVAX増えているはずです。
 
-## Wrapping Up
+## まとめ
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+完了です。これで、Avalancheウォレットを使用してと、Avalancheノード上の適切なAPIコールを呼び出すことで、X-ChainとP-Chain間でAVAXを交換することができるようになりました。
 
-Now you can use the tokens on the P-Chain to [add a node as a validator](../nodes-and-staking/add-a-validator.md) on the Primary Network.
+これで、P-Chain上のトークンを使用して、一次ネットワーク上で[バリデータとしてノードを追加する追加する](../nodes-and-staking/add-a-validator.md)ことができます。
 
