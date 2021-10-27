@@ -1,22 +1,22 @@
-# Create an NFT \(Part 1\)
+# NFTを作成する（パート1）
 
-## Introduction
+## はじめに
 
-On Avalanche, digital goods are represented as tokens. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
+Avalancheでは、デジタル商品はトークンとして表されます。トークンの中には、別のトークンと交換可能であることを意味する**代替性**のあるものがあります。実世界の通貨は代替性があります。例えば、5ドル紙幣は、他の5ドル紙幣と同じものと扱われます。
 
-Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is unique and not perfectly interchangeable for any other NFT. For example, there could be an NFT that represents ownership of a real-world piece of art; each piece of art, like each NFT, is unique. NFTs represent digital scarcity and may prove to have even greater utility than traditional fungible tokens.
+Avalancheでは、非代替性トークン（NFT）もサポートしています。定義上、それぞれのNFTは独自のものであり、他のNFTと完全に交換可能なわけではありません。例えば、実世界でのアートの所有を表すNFTがあります。それぞれのNFTと同様それぞれのアートは独自のものです。NFTはデジタルの希少性を表わし、従来の代替性トークンよりもさらに大きな有用性を持っていことがわかるでしょう。
 
-In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial, we’ll create a custom NFT family using [AvalancheJS](../../tools/avalanchejs/) and explore NFTs in more detail.
+このチュートリアルでは、AvalancheGoのAPIを使用してNFTを作成して送信します。今後のチュートリアルでは、[AvalancheJS](../../tools/avalanchejs/)を使用してカスタムのNFTファミリーを作成し、より詳細にNFTを探っていきます。
 
-## Requirements
+## 要件
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+[Run an Avalanche Node1（Avalancheノードを実行する）](../nodes-and-staking/run-avalanche-node.md)を修了したので、[Avalancheのアーキテクチャ](../../../learn/platform-overview/)をよく理解されていると思います。このチュートリアルでは、[AvalancheのPostmanコレクション](https://github.com/ava-labs/avalanche-postman-collection)を使用して、API呼び出しができるようサポートします。
 
-## Create the NFT Family
+## NFTファミリーを作成する
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md).
+それぞれのNFTは、名前とシンボルを持つ**ファミリー**に属します。各ファミリーは、**グループ**で構成されています。ファミリーを作成する際に、ファミリーの中のグループ数を指定します。X-Chain上にNFTが存在しています、そのため、NFTファミリーを作成するには、[X-Chain API](../../avalanchego-apis/exchange-chain-x-chain-api.md)のメソッドである[`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)を呼び出します。
 
-The signature for this method is:
+このメソッドの署名は、次のとおりです。
 
 ```cpp
 avm.createNFTAsset({
@@ -37,25 +37,25 @@ avm.createNFTAsset({
 }
 ```
 
-### **Method**
+### **メソッド**
 
 * [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)
 
-**Parameters**
+**パラメータ**
 
-* `name` is a human-readable name for our NFT family. Not necessarily unique. Between 0 and 128 characters.
-* `symbol` is a shorthand symbol for this NFT family. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting operation.
-* Performing a transaction on the X-Chain requires a transaction fee paid in AVAX. `username` and `password` denote the user paying the fee.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to any of your addresses.
+* `name`は、人が読むことのできるNFTファミリーの名前です。必ずしも固有のものである必要はありません。0～128文字の間で指定します。
+* `symbol`は、このNFTファミリーの省略表現であるシンボルです。0～4文字の間で指定します。必ずしも固有のものである必要はありません。省略しても構いません。
+* `minterSets`はリストで、各要素は、`minters`のアドレスのうちの`threshold`が、ミントオペレーションに署名することで、より多くの資産を一緒にミントできるよう指定するリストです。
+* X-Chain上でトランザクションを行うには、AVAXで支払われるトランザクション手数料が必要です。`username`と`password`は手数料を支払うユーザーを示します。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更があった場合の送信先アドレスです。省略したい場合は、任意のアドレスに変更を送信します。
 
-### **Response**
+### **レスポンス**
 
-* `assetID` is the ID of the new asset that we’ll have created.
-* `changeAddr` in the result is the address where any change was sent.
+* `assetID`は、作成された新しい資産のIDです。
+* `changeAddr`の結果には、変更があった場合の送付先が表示されます。
 
-Later in this example, we’ll mint an NFT, so be sure to replace at least 1 address in the minter set with an address which your user controls.
+この例の後半では、NFTをミントし、minter set上の少なくとも1つのアドレスをユーザーが管理するアドレスと確実に置き換えます。
 
 ```cpp
 curl -X POST --data '{
@@ -79,7 +79,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should look like this:
+レスポンスは、次のようになります。
 
 ```cpp
 {
@@ -92,30 +92,30 @@ The response should look like this:
 }
 ```
 
-A couple things to note: first, in addition to creating an NFT family, AvalancheGo’s [`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset) also creates a group for each of the `minterSets`, which are passed in. For example, if `minterSets` has 3 elements, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
+注意事項が2つあります。1つは、NFTファミリーを作成するのに加え、AvalancheGoの[`avm.createNFTAsset`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createnftasset)は、渡される`minterSets`のそれぞれのグループも作成するということです。例えば、`minterSets`が3つの要素を持つ場合、NFTファミリーは3つのグループをも持ちます。2つ目は、レスポンスで返される`assetID`に注意することです。これは、新しく作成されたNFTファミリーの`assetID`であり、NFTを発行するときに後で必要になります。
 
-You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
+単一のアドレスではなく、より多くの資産単位をミントできるアドレス_セット_を指定するのか疑問に思われるかもしれません。理由は、次の通りです。
 
-* **Security:** if only one address can mint more of the asset, and the private key for that address is lost, no more units can ever be minted. Similarly, if only one address can mint more of the asset, nothing stops the holder of that address from unilaterally minting as much as they want.
-* **Flexibility:** it’s nice to be able to encode logic like, “Alice can unilaterally mint more units of this asset, or 2 of Dinesh, Ellin, and Jamie can together mint more.”
+* **セキュリティ： **1つのアドレスのみがより多くの資産をミントできる場合には、そのアドレスの秘密鍵が失われた場合、これ以上の資産単位をミントすることができなくなります。同様に、1つのアドレスのみがより多くの資産をミントできる場合には、そのアドレスの所有者が一方的にミントすることを止めることができません。
+* **柔軟性：**「アリスが一方的にこの資産のより多くの単位をミントできる、あるいは、ディネッシュ、エリン、ジェイミーのうち2人が一緒により多くの単位をミントできる。」というようなロジックをエンコードできるといった柔軟性があるとよいですね。
 
-## Get UTXOs for NFT
+## NFT用にUTXOを取得する
 
-NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) or [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
+NFT出力は、[`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance)あるいは[`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getallbalances)への呼び出しでは表示されません。自分のNFTを確認するには、[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)を呼び出し、uxtoを解析して、タイプIDを確認する必要があります。NFTミント出力は、16進数の`00 00 00 0a`(10進数では`10`)のタイプIDを持ち、NFTトランスファー出力は、16進数の`00 00 00 0b`(10進数では`11`)のタイプIDを持ちます。
 
-### **Method**
+### **メソッド**
 
 * [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)
 
-### **Parameters**
+### **パラメータ**
 
-* `addresses` are the addresses to fetch UTXOs for.
+* `addresses`は、UTXOを取得するアドレスです。
 
-**Response:**
+**レスポンス：**
 
-* `numFetched` is the total number of UTXOs in the response.
-* `utxos` is an array of CB58 encoded strings.
-* `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
+* `numFetched`は、レスポンスにおけるUTXOの合計数です。
+* `utxos`は、CB58エンコードされた文字列の配列です。
+* `endIndex`このメソッドは、ページネーションをサポートしています。. `endIndex`は、最後のUTXOが返されたことを示します。
 
 ```cpp
 curl -X POST --data '{
@@ -128,7 +128,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains a list of UTXOs:
+このレスポンスには、UTXOのリストが含まれています。
 
 ```cpp
 {
@@ -148,19 +148,19 @@ The response contains a list of UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)は2UTXOを返します。最初のものを取得し、デコードして、[NFTミント出力](../../references/avm-transaction-serialization.md#nft-mint-output)であることを確認します。まず、[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)から返されるBase58Checkでエンコードされた文字列を16進法に変換します。次の[CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58)文字列：
 
 ```cpp
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
-is expressed in hexadecimal as:
+次のように16進数で表現されます。
 
 ```cpp
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](../../references/avm-transaction-serialization.md):
+さて、[transaction serialization format(取引シリアライゼーションフォーマット）](../../references/avm-transaction-serialization.md)を参照することで、この16進数をUTXOの各コンポーネントに分解できます。
 
 ```cpp
 NFT Mint Output
@@ -177,28 +177,28 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
+`TypeID`は、NFTミントアウトプットの正しいタイプIDである`00 00 00 0a`であることに注意してください。また、`GroupID`は`00 00 00 00`であることに注意してください。この`GroupID`は、`avm.createNFTAsset`に渡した`MinterSets`の数に基づいて作成されました
 
-## Mint the Asset
+## 資産をミントする
 
-Now that we have an NFT family and a group for the single `MinterSet` we’re able to create NFTs belonging to this group. To do that we call [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft):
+今、このグループに属するNFTを作成することができるシングル`MinterSet`のためのNFTファミリーと1つのグループができました。それを行うために、[`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft)を呼び出します。
 
-### **Method**
+### **メソッド**
 
 * [`avm.mintNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-mintnft)
 
-### **Parameters**
+### **パラメータ**
 
-* `assetID` is the ID of the NFT family.
-* `payload` is an arbitrary CB58 encoded payload of up to 1024 bytes. In Part 2 \(**COMING SOON**\) we’ll explore creating a protocol around the NFT payload. For this tutorial, the payload is the string “AVA Labs”.
-* `to` is the address that will receive the newly minted NFT. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted NFT.
-* `username` must be a user that holds keys giving it permission to mint more of this NFT. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
-* `password` is the valid password for `username`
+* `assetID`は、NFTファミリーのIDです。
+* `payload`は、最大1024バイトの任意のCB58エンコードされたペイロードです。パート２（**まもなく公開**）では、NFTペイロードまわりのプロトコルの作成を行います。このチュートリアルでは、ペイロードは、「AVA Labs」の文字列です。
+* `to`は、新しくミントされたNFTを受け取るアドレスです。`to`をユーザーが管理するアドレスと置き換えます。そうすることにより、新しくミントされたNFTのいくらかをあとで送信することができます。
+* `username`は、このNFTをより多くミントする許可を与える鍵を持つユーザーである必要があります。つまり、上記で指定したミンターセットの一つに使用する_しきい値_鍵を管理します。
+* `password`は、`username`の有効なパスワードです。
 
-### **Response**
+### **レスポンス**
 
-* `txID` is the transaction ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID`は、トランザクションIDです。
+* `changeAddr`の結果には、変更があった場合の送付先が表示されます。
 
 ```cpp
 curl -X POST --data '{
@@ -215,7 +215,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response contains the transaction’s ID:
+レスポンスには、トランザクションのIDが含まれています。
 
 ```cpp
 {
@@ -228,7 +228,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
+前のステップと同様に、[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)を呼び出し、UTXOを解析して、NFTがミントされたことを確認できます。これで、[NFTトランスファーアウトプット](../../references/avm-transaction-serialization.md#nft-transfer-output)があることを確認できます。
 
 ```cpp
 curl -X POST --data '{
@@ -241,7 +241,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This should give:
+これにより、次が与えられます。
 
 ```cpp
 {
@@ -261,21 +261,21 @@ This should give:
 }
 ```
 
-As in the previous step, we can now decode the CB58 encoded UTXO to hexidecimal and then decompose it to its individual components to confirm that we have the correct UTXO and type.
+前のステップと同様に、CB58エンコードされたUTXOを16進法にデコードし、個々のコンポーネントに分解して、正しいUTXOとタイプがあることを確認します。
 
-First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) in to hex. The following CB58 string:
+まず、[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)から返されるBase58Checkでエンコードされた文字列を16進法に変換します。次のCB58文字列：
 
 ```cpp
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
 ```
 
-is expressed in hexadecimal as:
+次のように16進数で表現されます。
 
 ```cpp
 00 00 7d 07 0d 1e fe a6 4e 45 09 05 c6 11 ee b1 cf 61 9f 21 22 eb 17 db aa ea 9a fe 2d ff 17 be 27 6b 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0b 00 00 00 00 00 00 00 08 41 56 41 20 4c 61 62 73 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Now, we can decompose the hex into the UTXO’s individual components:
+さて、16進数をUTXOの個々のコンポーネントに分解できます。
 
 ```cpp
 NFT Mint Output
@@ -294,28 +294,28 @@ Address Count: 00 00 00 01
 Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
-Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output). Also, note that the Payload is included.
+`TypeID`は、[NFTトランスファーアウトプット](../../references/avm-transaction-serialization.md#nft-transfer-output)の正しいタイプidである`00 00 00 0b`だということに注意してください。また、ペイロードが含まれていることに注意します。
 
-## Send the NFT
+## NFTを送信する
 
-Now, you can send the NFT to anyone. To do that, use AvalancheGo’s [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft) API method.
+これで、誰にでもNFTを送信できるようになりました。これを行うには、AvalancheGoの[`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft)APIメソッドを使用します。
 
-**Method**
+**メソッド**
 
 * [`avm.sendNFT`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-sendnft)
 
-**Parameters**
+**パラメータ**
 
-* `assetID` is the ID of the NFT we’re sending.
-* `to` is the address that will receive the newly minted NFT.
-* `groupID` is the NFT group from which to send the NFT.
-* `username` is the user that controls the NFT.
-* `password` is the valid password for `username`
+* `assetID`は、送信するNFTのIDです。
+* `to`は、新しくミントされたNFTを受け取るアドレスです。
+* `groupID`は、NFTを送るための送信元NFTグループです。
+* `username`は、NFTを管理するユーザーです。
+* `password`は、`username`の有効なパスワードです。
 
-**Response**
+**レスポンス**
 
-* `txID` is the transaction ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `txID`は、トランザクションIDです。
+* `changeAddr`の結果には、変更があった場合の送付先が表示されます。
 
 ```cpp
 curl -X POST --data '{
@@ -332,7 +332,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response confirms that our NFT Transfer Operation was successful:
+このレスポンスにより、NFTトランスファーアウトプットが成功したことが確認できます。
 
 ```cpp
 {
@@ -345,16 +345,16 @@ The response confirms that our NFT Transfer Operation was successful:
 }
 ```
 
-You can call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
+NFTを送信したアドレスに[`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getutxos)を呼び出し、CB58から16進数に変換した後返されたUTXOを分解し、UXTOが、16進数で`00 00 00 0b`の、10進数で`11`のタイプIDとあることを確認できます。
 
-## Wrapping up
+## まとめ
 
-Blockchain technology and tokenomics represent a radical new way of representing digital assets. Non-fungible tokens allow scarce assets to be tokenized. In this tutorial, we:
+ブロックチェーン技術とトークノミクスは、デジタル資産を表現する革新的で新しい方法を表しています。非代替性トークンは、希少な資産をトークン化することを可能にします。このチュートリアルでは：
 
-* Used `createNFTAsset` to create a non-fungible asset family and group.
-* Used `mintNFT` to mint units of an NFT to the group.
-* Used `getUTXOs` to fetch UTXOs for an address. We then converted the CB58 encoded UTXO to hex and decomposed it to its individual components.
-* Used `sendNFT` to transfer NFTs between addresses.
+* `createNFTAsset`を使用して、非代替性資産ファミリーとグループを作りました。
+* `mintNFT`を使用して、NFTの単位をグループにミントしました。
+* を使用して、UTXOを一つのアドレスにフェッチしました`getUTXOs`。そして、CB58エンコードされたUTXOを16進数に変換し、個々のコンポーネントに分解しました。
+* `sendNFT`を使って、NFTをアドレス間で転送しました。
 
-In Part 2 of this series, we’ll go more in-depth by using AvalancheJS to create a protocol for our NFT payload by issuing it to multiple groups.
+このシリーズのパート2では、AvalancheJSを使用して、多数のグループに発行することによりNFTペイロードのプロトコルを作成するためにより深く学びます。
 
