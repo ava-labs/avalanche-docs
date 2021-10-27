@@ -1,23 +1,23 @@
-# Platform Transaction Format
+# プラットフォームトランザクションフォーマット
 
-This file is meant to be the single source of truth for how we serialize transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain` or `P-Chain`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic user identification.
+このページは、Avalancheのプラットフォーム仮想マシン`Platform Chain`または`P-Chain`でトランザクションをシリアライズする方法の信頼できる唯一の情報源となることを目的としています。このドキュメントでは、パッキングには[プリミティブシリアライゼーション](serialization-primitives.md)フォーマットを使用し、暗号化されたユーザー識別には[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)を使用しています。
 
-## Codec ID
+## コーデックID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+一部のデータには、そのデータをどのようにデシリアライズすべきかを示すコーデックID(unt16)が先頭に追加されています。現在のところ、有効なコーデックIDは0(`0x00 0x00`)のみです。
 
-## Transferable Output
+## 転送可能な出力
 
-Transferable outputs wrap an output with an asset ID.
+転送可能な出力では、出力を資産IDでラップします。
 
-### What Transferable Output Contains
+### 転送可能な出力の内容
 
-A transferable output contains an `AssetID` and an `Output`.
+転送可能な出力には、`AssetID`と`Output`が含まれています。
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`AssetID`**は、この出力がどの資産を参照するかを定義する32バイトの配列です。唯一有効な`AssetID`は、AVAX`AssetID`です。
+* **`Output`** は、次に定義される出力です。例えば、SECP256K1の転送出力となります。
 
-### Gantt Transferable Output Specification
+### Gantt転送可能な出力仕様
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ A transferable output contains an `AssetID` and an `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Prot転送可能な出力仕様
 
 ```text
 message TransferableOutput {
@@ -38,9 +38,9 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### 転送可能な出力例
 
-Let’s make a transferable output:
+転送可能な出力を作りましょう。
 
 * `AssetID: 0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -67,20 +67,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## 転送可能な入力
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+転送可能な入力は、提供された転送入力で特定のUTXOを記述します。
 
-### What Transferable Input Contains
+### 転送可能な入力の内容
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+転送可能な入力には、`TxID``UTXOIndex``AssetID``Input`が含まれています。
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references. The only valid `AssetID` is the AVAX `AssetID`.
-* **`Input`** is a transferable input object.
+* **`TxID`** は、この入力がどのトランザクションからの出力を消費するかを定義する32バイトの配列です。
+* **`UTXOIndex`**は、この入力がどのUTXOが指定されたトランザクションを消費しているかを定義する整数です。
+* **`AssetID`**は、この入力がどの資産を参照するかを定義する32バイトの配列です。唯一有効な`AssetID`は、AVAX`AssetID`です。
+* **`Input`** は、転送可能な入力オブジェクトです。
 
-### Gantt Transferable Input Specification
+### Gantt 転送入力仕様
 
 ```text
 +------------+----------+------------------------+
@@ -96,7 +96,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Protoの転送入力の仕様
 
 ```text
 message TransferableInput {
@@ -107,14 +107,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### 転送可能な入力の例
 
-Let’s make a transferable input:
+転送可能な入力をしよう:
 
-* **`TxID`**: `0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
-* **`UTXOIndex`**: `0`
-* **`AssetID`**: `0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
-* **`Input`**: `"Example SECP256K1 Transfer Input from below"`
+* **`TxID`**：`0x0dfafbdf5c81f635c9257824ff21c8e3e6f7b632ac306e11446ee540d34711a15`
+* **`UTXOIndex`**：`0`
+* **`AssetID`**：`0x6870b7d66ac32540311379e5b5dbad28ec7eb8ddbfc8f4d67299ebb48475907a`
+* **`Input`**：`"Example SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -144,25 +144,25 @@ Let’s make a transferable input:
 ]
 ```
 
-## Outputs
+## 出力
 
-Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwners`.
+出力には`SECP256K1TransferOutput`、`SECP256K1OutputOwners`の2つのタイプがあります。
 
-## SECP256K1 Transfer Output
+## SECP256K1 転送出力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time. The only valid asset is AVAX.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の転送出力では、指定されたunix時間後に資産の数量を複数のアドレスに送信することができます。有効な資産となるのはAVAXだけです。
 
-### **What SECP256K1 Transfer Output Contains**
+### **SECP256K1の転送出力に含まれるもの**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+secp256k1の転送出力には、`TypeID`、`Amount`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x00000007`となります。
+* **`Amount`**は、この出力が所有する資産の数量を指定する長さです。正の値でなければなりません。
+* **`Locktime`**は、この出力が後に消費できるunixタイムスタンプを含む長さです。このunixタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### **Gantt SECP256K1の転送出力の仕様**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -180,7 +180,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Proto SECP256K1の転送出力の仕様**
 
 ```text
 message SECP256K1TransferOutput {
@@ -192,16 +192,16 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1の転送出力の例**
 
-Let’s make a secp256k1 transfer output with:
+secp256k1の転送出力を、次でしてみましょう。
 
-* **`TypeID`**: 7
-* **`Amount`**: 3999000000
-* **`Locktime`**: 0
-* **`Threshold`**: 1
-* **`Addresses`**:
-  * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+* **`TypeID`**：7
+* **`Amount`**：3999000000
+* **`Locktime`**：0
+* **`Threshold`**：1
+* **`Addresses`**：
+   * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
 
 ```text
 [
@@ -232,20 +232,20 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Output Owners Output
+## SECP256K1の出力に関する所有者の出力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の出力に関する所有者の出力は、ロックアップ期間が終了するとステーキングの報酬を受け取ることができます。
 
-### **What SECP256K1 Output Owners Output Contains**
+### **SECP256K1の出力に関する所有者の出力に含まれるもの**
 
-A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+secp256k1の出力に関する所有者の出力には、`TypeID`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x0000000b`となります。
+* **`Locktime`**は、この出力が後に消費できるunixタイムスタンプを含む長さです。このunixタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt SECP256K1 Output Owners Output Specification**
+### **Gantt SECP256K1の出力に関する所有者の出力の仕様**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -261,7 +261,7 @@ A secp256k1 output owners output contains a `TypeID`, `Locktime`, `Threshold`, a
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Output Owners Output Specification**
+### **Proto SECP256K1の出力に関する所有者の出力の仕様**
 
 ```text
 message SECP256K1OutputOwnersOutput {
@@ -272,15 +272,15 @@ message SECP256K1OutputOwnersOutput {
 }
 ```
 
-### **SECP256K1 Output Owners Output Example**
+### **SECP256K1の出力に関する所有者の出力の例**
 
-Let’s make a secp256k1 output owners output with:
+secp256k1の出力に関する所有者の出力を行ってみましょう。
 
-* **`TypeID`**: 11
-* **`Locktime`**: 0
-* **`Threshold`**: 1
-* **`Addresses`**:
-  * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
+* **`TypeID`**：11
+* **`Locktime`**：0
+* **`Threshold`**：1
+* **`Addresses`**：
+   * 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c
 
 ```text
 [
@@ -308,23 +308,23 @@ Let’s make a secp256k1 output owners output with:
 ]
 ```
 
-## Inputs
+## 入力
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+入力には1つのタイプがあります。`SECP256K1TransferInput`
 
-## SECP256K1 Transfer Input
+## SECP256K1の転送入力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の転送入力では、未使用のsecp256k1の転送出力を使うことができます。
 
-### **What SECP256K1 Transfer Input Contains**
+### **SECP256K1の転送入力に含まれるもの**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+secp256k1の転送入力には、`Amount`と`AddressIndices`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`**は、この出力タイプのIDです。`0x00000005`となります。
+* **`Amount`**は、この入力がUTXOから消費されるべき量を指定する長さです。正の値でなければなりません。UTXOで指定された量と同じでなければなりません
+* **`AddressIndices`**は、UTXOを消費するために使用される秘密鍵を定義する一意の整数のリストです。各UTXOには、そのUTXOを使うことができるアドレスの配列があります。各整数は、このトランザクションに署名する、このアドレス配列のインデックスを表します。配列は低い方から高い方へとソートされなければなりません。
 
-### **Gantt SECP256K1 Transfer Input Specification**
+### **Gantt SECP256K1の転送入力の仕様**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -338,7 +338,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-**Proto SECP256K1 Transfer Input Specification**
+**Proto SECP256K1の転送入力の仕様**
 
 ```text
 message SECP256K1TransferInput {
@@ -348,13 +348,13 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1の転送入力の例**
 
-Let’s make a payment input with:
+決済入力を行ってみましょう。
 
-* **`TypeID`**: 5
-* **`Amount`**: 4000000000
-* **`AddressIndices`**: \[0\]
+* **`TypeID`**：5
+* **`Amount`**：4000000000
+* **`AddressIndices`**：[0]
 
 ```text
 [
@@ -375,24 +375,24 @@ Let’s make a payment input with:
 ]
 ```
 
-## Unsigned Transactions
+## 未署名のトランザクション
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have six possible types: `AddValidatorTx`, `AddSubnetValidatorTx`, `AddDelegatorTx`, `CreateSubnetTx`, `ImportTx`, and `ExportTx`. They embed `BaseTx`, which contains common fields and operations.
+未署名のトランザクションは、署名のみが欠けたトランザクションのすべての内容を含みます。無署名のトランザクションには、次の6つのタイプがあります。`AddValidatorTx`、`AddSubnetValidatorTx`、`AddDelegatorTx`、`CreateSubnetTx`、`ImportTx`および`ExportTx`です。これらは、共通のフィールドや操作を含む`BaseTx`が組み込まれています。
 
-## Unsigned BaseTx
+## 未署名のBaseTx
 
-### **What Base Tx Contains**
+### **ベーストランザクションに含まれるもの**
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+ベーストランザクションには、`TypeID`、`NetworkID`、`BlockchainID`、`Outputs`、`Inputs`、`Memo`が含まれています。
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`**は、このタイプのIDです。`0x00000000`となります。
+* **`NetworkID`**は、このトランザクションがどのネットワークに対して発行されるかを定義する整数です。この値は、トランザクションのルーティングをサポートするためのもので、反射攻撃の防止を目的としたものではありません。
+* **`BlockchainID`**は、このトランザクションがどのブロックチェーンに発行されたかを定義する32バイトの配列です。これは、ネットワークやブロックチェーン間で潜在的に有効なトランザクションに対する反射攻撃の防止のために使用されます。
+* **`Outputs`**は、転送可能な出力オブジェクトの配列です。出力は、シリアライズされた表現により、辞書的にソートされなければなりません。これらの出力で作成された資産の総量は、入力で消費された各資産の総量から取引手数料を差し引いた値以下でなければなりません。
+* **`Inputs`**は、転送可能な入力オブジェクトの配列です。入力は、ソートされた一意のものでなければなりません。入力はまず、**`TxID`**で辞書的にソートされ、次に**`UTXOIndex`**で低いものから高いものへとソートされます。**`TxID`**と**`UTXOIndex`**で同じ入力がある場合、二重支出になるため、その取引は無効になります。
+* **`Memo`**メモフィールドは任意のバイトを含み、最大256バイトまでです。
 
-### **Gantt Base Tx Specification**
+### **Ganttのベーストランザクションの仕様**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -412,7 +412,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### **Proto Base Tx Specification**
+### **Protoのベーストランザクションの仕様**
 
 ```text
 message BaseTx {
@@ -425,17 +425,17 @@ message BaseTx {
 }
 ```
 
-### **Base Tx Example**
+### **ベーストランザクションの例**
 
-Let’s make a base tx that uses the inputs and outputs from the previous examples:
+これまでの例にある入力と出力を使用して、ベーストランザクションを作りましょう。
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x000000000000000000000000000000000000000000000000000000000000000`
-* **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
-* **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
+* **`TypeID`**：`0`
+* **`NetworkID`**：`12345`
+* **`BlockchainID`**：`0x000000000000000000000000000000000000000000000000000000000000000`
+* **`Outputs`**：
+   * `"Example Transferable Output as defined above"`
+* **`Inputs`**：
+   * `"Example Transferable Input as defined above"`
 
 ```text
 [
@@ -493,23 +493,24 @@ Let’s make a base tx that uses the inputs and outputs from the previous exampl
 ]
 ```
 
-## Unsigned Add Validator Tx
+## 未署名の追加バリデーターのトランザクション
 
-### **What Unsigned Add Validator Tx Contains**
+### **未署名の追加バリデーターのトランザクションに含まれるもの**
 
-An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `RewardsOwner`, and `Shares`. The `TypeID` for this type is `0x0000000c`.
+未署名の追加バリデーターのトランザクションには、`BaseTx`、`Validator`、`Stake`、`RewardsOwner`、`Shares`が含まれます。このタイプの`TypeID`は`0x0000000c`です。
 
 * **`BaseTx`**
-* **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-* **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-* **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
+* **`Validator`**バリデーターには、`NodeID`、`StartTime`、`EndTime`、`Weight`があります。
+   * **`NodeID`**は20バイトで、バリデーターのノードIDとなります。
+   * **`StartTime`**は、バリデーターがバリデーションを開始するUnixの時間を表す長さです。
+   * **`EndTime`**は、バリデーターがバリデーションを終了するUnixの時間を表す長さです。
+   * **`Weight`**は、バリデーターの取得量を表す長さです。
+* **`Stake`**ステークは`LockedOuts`を持っています。
+   * **`LockedOuts`**ステーク期間中にロックされる転送可能な出力の配列です。ステーク期間が終了すると、これらの出力はそれぞれのアドレスに返金されます。
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
-* **`Shares`** 10,000 times percentage of reward taken from delegators
+* **`Shares`**報酬の10,000倍の割合で代表者から受け取ります
 
-### **Gantt Unsigned Add Validator Tx Specification**
+### **Ganttの未署名の追加バリデーターのトランザクションの仕様**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -527,7 +528,7 @@ An unsigned add validator tx contains a `BaseTx`, `Validator`, `Stake`, `Rewards
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Validator Tx Specification**
+### **Protoの未署名の追加バリデーターのトランザクションの仕様**
 
 ```text
 message AddValidatorTx {
@@ -539,20 +540,21 @@ message AddValidatorTx {
 }
 ```
 
-### **Unsigned Add Validator Tx Example**
+### **未署名の追加バリデーターのトランザクションの例**
 
-Let’s make an unsigned add validator tx that uses the inputs and outputs from the previous examples:
+前述の例にある入力と出力を使用して、未署名の追加バリデーターのトランザクションを作ってみましょう。
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0c"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
-* **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-* **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
-* **`Shares`**: `0x00000064`
+* **`BaseTx`**：`"Example BaseTx as defined above with ID set to 0c"`
+* **`Validator`**バリデーターには、`NodeID`、`StartTime`、`EndTime`、`Weight`があります。
+   * **`NodeID`**は20バイトで、バリデーターのノードIDとなります。
+   * **`StartTime`**は、バリデーターがバリデーションを開始するUnixの時間を表す長さです。
+   * **`EndTime`**は、バリデーターがバリデーションを終了するUnixの時間を表す長さです。
+   * **`Weight`**は、バリデーターの取得量を表す長さです。
+* **`Stake`**：`0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
+* **`RewardsOwner`**：`0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
+* **`Shares`**：`0x00000064`
 
-  0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
+   0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c
 
 ```text
 [
@@ -631,22 +633,22 @@ Let’s make an unsigned add validator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Add Subnet Validator Tx
+## 未署名の追加サブネットバリデーターのトランザクション
 
-### **What Unsigned Add Subnet Validator Tx Contains**
+### **未署名の追加サブネットバリデーターのトランザクションに含まれるもの**
 
-An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
+未署名の追加サブネットバリデーターのトランザクションには、`BaseTx`、`Validator`、`SubnetID`、`SubnetAuth`が含まれます。このタイプの`TypeID`は`0x0000000d`です。
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the validator.
-  * **`StartTime`** is a long which is the Unix time when the validator starts validating.
-  * **`EndTime`** is a long which is the Unix time when the validator stops validating.
-  * **`Weight`** is a long which is the amount the validator stakes
-* **`SubnetID`** a 32 byte subnet id
-* **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`. `SigIndices` is a list of unique ints that define the addresses signing the control signature to add a validator to a subnet. The array must be sorted low to high.
+* **`Validator`**バリデーターには、`NodeID`、`StartTime`、`EndTime`、`Weight`があります。
+   * **`NodeID`**は20バイトで、バリデーターのノードIDとなります。
+   * **`StartTime`**は、バリデーターがバリデーションを開始するUnixの時間を表す長さです。
+   * **`EndTime`**は、バリデーターがバリデーションを終了するUnixの時間を表す長さです。
+   * **`Weight`**は、バリデーターの取得量を表す長さです。
+* **`SubnetID`**32バイトのサブネットID
+* **`SubnetAuth`**は`SigIndices`を含み、`0x0000000a`のタイプIDを持っています。`SigIndices`は、サブネットにバリデーターを追加するための制御署名を行うアドレスを定義する、一意の整数のリストです。この配列は低位から高位にソートされていなければなりません。
 
-### **Gantt Unsigned Add Subnet Validator Tx Specification**
+### **Ganttの追加サブネットバリデーターのトランザクションの仕様**
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -662,7 +664,7 @@ An unsigned add subnet validator tx contains a `BaseTx`, `Validator`, `SubnetID`
                                    +---------------------------------------------+
 ```
 
-### **Proto Unsigned Add Subnet Validator Tx Specification**
+### **Protoの未署名の追加サブネットバリデーターのトランザクションの仕様**
 
 ```text
 message AddSubnetValidatorTx {
@@ -673,19 +675,19 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### **Unsigned Add Subnet Validator Tx Example**
+### **未署名の追加サブネットバリデーターのトランザクションの例**
 
-Let’s make an unsigned add subnet validator tx that uses the inputs and outputs from the previous examples:
+前述の例にある入力と出力を使用して、未署名の追加サブネットバリデーターのトランザクションを作ってみましょう。
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
-* **`SubnetID`**: `0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb`
-* **`SubnetAuth`**:
-  * **`TypeID`**: `0x0000000a`
-  * **`SigIndices`**: `0x00000000`
+* **`BaseTx`**：`"Example BaseTx as defined above with ID set to 0d"`
+* **`NodeID`**：`0xe9094f73698002fd52c90819b457b9fbc866ab80`
+* **`StarTime`**：`0x000000005f21f31d`
+* **`EndTime`**：`0x000000005f497dc6`
+* **`Weight`**：`0x000000000000d431`
+* **`SubnetID`**：`0x58b1092871db85bc752742054e2e8be0adf8166ec1f0f0769f4779f14c71d7eb`
+* **`SubnetAuth`**：
+   * **`TypeID`**：`0x0000000a`
+   * **`SigIndices`**：`0x00000000`
 
 ```text
 [
@@ -757,23 +759,23 @@ Let’s make an unsigned add subnet validator tx that uses the inputs and output
 ]
 ```
 
-## Unsigned Add Delegator Tx
+## 未署名の追加デリゲーターのトランザクション
 
-### **What Unsigned Add Delegator Tx Contains**
+### **未署名の追加デリゲーターのトランザクションに含まれるもの**
 
-An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `RewardsOwner`. The `TypeID` for this type is `0x0000000e`.
+未署名の追加デリゲーターのトランザクションには、`BaseTx`、`Validator`、`Stake`、`RewardsOwner`があります。このタイプの`TypeID`は`0x0000000e`です。
 
 * **`BaseTx`**
-* **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
-  * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
-  * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-  * **`Weight`** is a long which is the amount the delegator stakes
-* **`Stake`** Stake has `LockedOuts`
-  * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.
+* **`Validator`**バリデーターには、`NodeID`、`StartTime`、`EndTime`、`Weight`があります。
+   * **`NodeID`**は20バイトで、デリゲーティのノードIDです。
+   * **`StartTime`**は、デリゲーターがデリゲーションを開始したUnixの時間を表す長さです。
+   * **`EndTime`**は、デリゲーターがデリゲーションを終了した（そしてステークされたAVAXが返された）Unixの時間を表す長さです。
+   * **`Weight`**は長さで、デリゲーターがステークした金額です。
+* **`Stake`**ステークは`LockedOuts`を持っています。
+   * **`LockedOuts`**ステーク期間中にロックされる転送可能な出力の配列です。ステーク期間が終了すると、これらの出力はそれぞれのアドレスに返金されます。
 * **`RewardsOwner`** An `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Add Delegator Tx Specification**
+### **Ganttの未署名の追加デリゲーターのトランザクションの仕様**
 
 ```text
 +---------------+-----------------------+-----------------------------------------+
@@ -789,7 +791,7 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
                   +--------------------------------------------------------------+
 ```
 
-### **Proto Unsigned Add Delegator Tx Specification**
+### **Protoの未署名の追加デリゲーターのトランザクションの仕様**
 
 ```text
 message AddDelegatorTx {
@@ -800,17 +802,17 @@ message AddDelegatorTx {
 }
 ```
 
-### **Unsigned Add Delegator Tx Example**
+### **未署名の追加デリゲーターのトランザクションの例**
 
-Let’s make an unsigned add delegator tx that uses the inputs and outputs from the previous examples:
+前述の例で得られた入力と出力を使用して、未署名の追加デリゲーターのトランザクションを作ってみましょう。
 
-* **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0e"`
-* **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
-* **`StarTime`**: `0x000000005f21f31d`
-* **`EndTime`**: `0x000000005f497dc6`
-* **`Weight`**: `0x000000000000d431`
-* **`Stake`**: `0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
-* **`RewardsOwner`**: `0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
+* **`BaseTx`**：`"Example BaseTx as defined above with ID set to 0e"`
+* **`NodeID`**：`0xe9094f73698002fd52c90819b457b9fbc866ab80`
+* **`StarTime`**：`0x000000005f21f31d`
+* **`EndTime`**：`0x000000005f497dc6`
+* **`Weight`**：`0x000000000000d431`
+* **`Stake`**：`0x0000000139c33a499ce4c33a3b09cdd2cfa01ae70dbf2d18b2d7d168524440e55d55008800000007000001d1a94a2000000000000000000000000001000000013cb7d3842e8cee6a0ebd09f1fe884f6861e1b29c`
+* **`RewardsOwner`**：`0x0000000b00000000000000000000000100000001da2bee01be82ecc00c34f361eda8eb30fb5a715c`
 
 ```text
 [
@@ -886,16 +888,16 @@ Let’s make an unsigned add delegator tx that uses the inputs and outputs from 
 ]
 ```
 
-## Unsigned Create Subnet Tx
+## 未署名のクリエイトサブネットのトランザクション
 
-### **What Unsigned Create Subnet Tx Contains**
+### **未署名のクリエイトサブネットのトランザクションに含まれるもの**
 
-An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+未署名のクリエイトサブネットのトランザクションには、`BaseTx`と`RewardsOwner`が含まれています。このタイプの`TypeID`は`0x00000010`です。
 
 * **`BaseTx`**
 * **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### **Gantt Unsigned Create Subnet Tx Specification**
+### **Ganttの未署名のクリエイトサブネットのトランザクションの仕様**
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -907,7 +909,7 @@ An unsigned create subnet tx contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### **Proto Unsigned Create Subnet Tx Specification**
+### **Protoの未署名のクリエイトサブネットのトランザクションの仕様**
 
 ```text
 message CreateSubnetTx {
@@ -916,16 +918,16 @@ message CreateSubnetTx {
 }
 ```
 
-### **Unsigned Create Subnet Tx Example**
+### **未署名のクリエイトサブネットのトランザクションの例**
 
-Let’s make an unsigned create subnet tx that uses the inputs from the previous examples:
+前述の例で得られた入力を使用して、未署名のクリエイトサブネットのトランザクションを作ってみましょう。
 
-* **`BaseTx`**: “Example BaseTx as defined above but with TypeID set to 16”
-* **`RewardsOwner`**:
-  * **`TypeId`**: 11
-  * **`Locktime`**: 0
-  * **`Threshold`**: 1
-  * **`Addresses`**: \[ 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c \]
+* **`BaseTx`**：「例：タイプIDを16に設定した上記のベーストランザクション」
+* **`RewardsOwner`**：
+   * **`TypeId`**：11
+   * **`Locktime`**：0
+   * **`Threshold`**：1
+   * **`Addresses`**：[ 0xda2bee01be82ecc00c34f361eda8eb30fb5a715c ]
 
 ```text
 [
@@ -973,17 +975,17 @@ Let’s make an unsigned create subnet tx that uses the inputs from the previous
 ]
 ```
 
-## Unsigned Import Tx
+## 未署名のインポートトランザクション
 
-### **What Unsigned Import Tx Contains**
+### **未署名のインポートトランザクションに含まれるもの**
 
-An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID` for this type is `0x00000011`.
+未署名のインポートトランザクションには、`BaseTx`、`SourceChain`、`Ins`が含まれています。このタイプの`TypeID`は`0x00000011`です。
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`**は、32バイトのソースブロックチェーンIDです。
+* **`Ins`**は転送可能な入力の可変長の配列です。
 
-### **Gantt Unsigned Import Tx Specification**
+### **Ganttの未署名のインポートトランザクション仕様**
 
 ```text
 +-----------------+--------------|---------------------------------+
@@ -997,7 +999,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain`, and `Ins`. The `TypeID
                             +--------------------------------------+
 ```
 
-### **Proto Unsigned Import Tx Specification**
+### **Protoの未署名のインポートトランザクション仕様**
 
 ```text
 message ImportTx {
@@ -1007,13 +1009,13 @@ message ImportTx {
 }
 ```
 
-### **Unsigned Import Tx Example**
+### **未署名のインポートトランザクション例**
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+前述の例で得られた入力を使用して、未署名のインポートトランザクションを作ってみましょう。
 
-* **`BaseTx`**: “Example BaseTx as defined above with TypeID set to 17”
-* **`SourceChain`**:
-* **`Ins`**: “Example SECP256K1 Transfer Input as defined above”
+* **`BaseTx`**：「タイプIDが17に設定された上記で定義されているベーストランザクションの例」
+* **`SourceChain`**：
+* **`Ins`**：「SECP256K1の転送入力の例は、上記で定義されています」
 
 ```text
 [
@@ -1069,16 +1071,16 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 ]
 ```
 
-## Unsigned Export Tx
+## 未署名のエクスポートトランザクション
 
-### **What Unsigned Export Tx Contains**
+### **未署名のエクスポートトランザクションに含まれるもの**
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000012`.
+未署名のエクスポートトランザクションには、`BaseTx`、`DestinationChain`、`Outs`が含まれます。このタイプの`TypeID`は`0x00000012`です。
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`**は、資金のエクスポート先となるチェーンの32バイトのIDです。
+* **`Outs`**は、転送可能な出力の可変長の配列です。
 
-### **Gantt Unsigned Export Tx Specification**
+### **Ganttの未署名のエクスポートトランザクションの仕様**
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1092,7 +1094,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### **Proto Unsigned Export Tx Specification**
+### **Protoの未署名のエクスポートトランザクションの仕様**
 
 ```text
 message ExportTx {
@@ -1102,13 +1104,13 @@ message ExportTx {
 }
 ```
 
-### **Unsigned Export Tx Example**
+### **未署名のエクスポートトランザクションの例**
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+前述の例で得られた出力を使用して、未署名のエクスポートトランザクションを作ってみましょう。
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to 18
-* `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `BaseTx`：`TypeID`を18に設定した「上記で定義されているベーストランザクションの例」
+* `DestinationChain`：`0x0000000000000000000000000000000000000000000000000000000000000000`
+* `Outs`：「SECP256K1の転送出力の例は、上記で定義されています」
 
 ```text
 [
@@ -1178,20 +1180,20 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 ]
 ```
 
-## Credentials
+## 認証情報
 
-Credentials have one possible types: `SECP256K1Credential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+認証情報には、可能となる1つのタイプがあります。`SECP256K1Credential`各認証情報は、入力または操作と対になっています。認証情報の順序は、入力または操作の順序と一致します。
 
-## SECP256K1 Credential
+## SECP256K1の認証情報
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の認証情報には、65バイトの復元可能な署名のリストが含まれています。
 
-### **What SECP256K1 Credential Contains**
+### **SECP256K1の認証情報に含まれるもの**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`TypeID`**は、このタイプのIDです。それは`0x00000009`です。
+* **`Signatures`**は、65バイトの復元可能な署名の配列です。署名の順番は、入力の署名のインデックスと一致しなければなりません。
 
-### **Gantt SECP256K1 Credential Specification**
+### **Gantt SECP256K1の認証情報の仕様**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1203,7 +1205,7 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential cont
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Proto SECP256K1の認証情報の仕様**
 
 ```text
 message SECP256K1Credential {
@@ -1212,11 +1214,11 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1の認証情報の例**
 
-Let’s make a payment input with:
+決済入力を行ってみましょう。
 
-* **`signatures`**:
+* **`signatures`**：
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
 * `0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
 
@@ -1256,19 +1258,19 @@ Let’s make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## 署名済みのトランザクション
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+署名済みのトランザクションとは、未署名のトランザクションに認証情報の配列を加えたものです。
 
-### What Signed Transaction Contains
+### 署名済みのトランザクションに含まれるもの
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+署名済みのトランザクションには、`CodecID`、`UnsignedTx`、`Credentials`が含まれます。
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`**現在有効なコーデックIDは`00 00`のみです。
+* **`UnsignedTx`**は、上述のように未署名のトランザクションです。
+* **`Credentials`**は、認証情報の配列です。各認証情報は、この認証情報で同じインデックスの入力とペアになります。
 
-### Gantt Signed Transaction Specification
+### Ganttの署名済みのトランザクションの仕様
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1282,7 +1284,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Protoの署名済みのトランザクションの仕様
 
 ```text
 message Tx {
@@ -1292,12 +1294,12 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### 署名済みのトランザクションの例
 
-Let’s make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+前述の例で使用した未署名のトランザクションと認証情報を使用して、署名済みのトランザクションを作成してみましょう。
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
+* **`CodecID`**：`0`
+* **`UnsignedTx`**：`0x0000000100000003ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000003000000070000000400010203`
 * **`Credentials`** `0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
 
 ```text
@@ -1369,19 +1371,19 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXOは、トランザクション出力の独立した表現です。
 
-### What UTXO Contains
+### UTXOに含まれるもの
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
+UTXOには、`CodecID`、`TxID`、`UTXOIndex`、`Output`が含まれます。
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`**現在有効なコーデックIDは`00 00`のみです。
+* **`TxID`**は、32バイトのトランザクションIDです。トランザクションIDは、署名されたトランザクションのバイトのsha256を取って計算されます。
+* **`UTXOIndex`**は、**`TxID`**で指定されたトランザクションの中で、このutxoがどの出力で作成されたかを指定する整数です。
+* **`AssetID`**は、このUTXOがどの資産を参照するかを定義する32バイトの配列です。
+* **`Output`**は、このutxoを作成した出力オブジェクトです。出力のシリアル化は上記で定義されています。
 
-#### Gantt UTXO Specification <a id="gantt-utxo-specification"></a>
+#### Gantt UTXOの仕様<a id="gantt-utxo-specification"></a>
 
 ```text
 +--------------+----------+-------------------------+
@@ -1399,7 +1401,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### Proto UTXOの仕様
 
 ```text
 message Utxo {
@@ -1411,15 +1413,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXOの例
 
-Let’s make a UTXO from the signed transaction created above:
+上記で作成した署名付きトランザクションからUTXOを作ってみましょう。
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`CodecID`**：`0`
+* **`TxID`**：`0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`AssetID`**：`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**：`"Example SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1460,17 +1462,17 @@ Let’s make a UTXO from the signed transaction created above:
 
 ## StakeableLockIn
 
-A StakeableLockIn is a staked and locked input. The StakeableLockIn can only fund StakeableLockOuts with the same address until its locktime has passed.
+StakeableLockInとは、ステークしてロックした入力のことです。StakeableLockInは、そのロックタイムが経過するまで、同じアドレスのStakeableLockOutsにのみ出資することができます。
 
-### **What StakeableLockIn Contains**
+### **StakeableLockInに含まれるもの**
 
-A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
+StakeableLockInには、`TypeID`、`Locktime`、`TransferableIn`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000015`.
-* **`Locktime`** is a long that contains the unix timestamp before which the input can be consumed only to stake. The unix timestamp is specific to the second.
-* **`TransferableIn`** is a transferable input object.
+* **`TypeID`**は、このタイプのIDです。それは`0x00000015`です。
+* **`Locktime`**は、入力がステークにのみ消費されるようになるまでのunixタイムスタンプを含む長さです。このunixタイムスタンプは、秒単位で指定します。
+* **`TransferableIn`** は、転送可能な入力オブジェクトです。
 
-### **Gantt StakeableLockIn Specification**
+### **Gantt StakeableLockInの仕様**
 
 ```text
 +-----------------+-------------------+--------------------------------+
@@ -1484,7 +1486,7 @@ A StakeableLockIn contains a `TypeID`, `Locktime` and `TransferableIn`.
                                     +----------------------------------+
 ```
 
-### **Proto StakeableLockIn Specification**
+### **Proto StakeableLockInの仕様**
 
 ```text
 message StakeableLockIn {
@@ -1494,13 +1496,13 @@ message StakeableLockIn {
 }
 ```
 
-### **StakeableLockIn Example**
+### **StakeableLockInの例**
 
-Let’s make a StakeableLockIn with:
+StakeableLockInを作ってみましょう。
 
-* **`TypeID`**: 21
-* **`Locktime`**: 54321
-* **`TransferableIn`**: “Example SECP256K1 Transfer Input as defined above”
+* **`TypeID`**：21
+* **`Locktime`**：54321
+* **`TransferableIn`**：「SECP256K1の転送入力の例は、上記で定義されています」
 
 ```text
 [
@@ -1534,17 +1536,17 @@ Let’s make a StakeableLockIn with:
 
 ## StakeableLockOut
 
-A StakeableLockOut is an output that is locked until its locktime, but can be staked in the meantime.
+StakeableLockOutは、ロックタイムまではロックされているが、その間はステーク可能な出力です。
 
-### **What StakeableLockOut Contains**
+### **StakeableLockOutに含まれるもの**
 
-A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
+StakeableLockOutには、`TypeID`、`Locktime`、`TransferableOut`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000016`.
-* **`Locktime`** is a long that contains the unix timestamp before which the output can be consumed only to stake. The unix timestamp is specific to the second.
-* **`transferableout`**: “Example SECP256K1 Transfer Output as defined above”
+* **`TypeID`**は、このタイプのIDです。それは`0x00000016`です。
+* **`Locktime`**は、出力がステークにのみ消費されるようになるまでのunixタイムスタンプを含む長さです。このunixタイムスタンプは、秒単位で指定します出力
+* **`transferableout`**：「SECP256K1の転送出力の例は、上記で定義されています」
 
-### **Gantt StakeableLockOut Specification**
+### **Gantt StakeableLockOutの仕様**
 
 ```text
 +------------------+--------------------+--------------------------------+
@@ -1558,7 +1560,7 @@ A StakeableLockOut contains a `TypeID`, `Locktime` and `TransferableOut`.
                                      +-----------------------------------+
 ```
 
-### **Proto StakeableLockOut Specification**
+### **Proto StakeableLockOutの仕様**
 
 ```text
 message StakeableLockOut {
@@ -1568,13 +1570,13 @@ message StakeableLockOut {
 }
 ```
 
-### **StakeableLockOut Example**
+### **StakeableLockOutの例**
 
-Let’s make a stakeablelockout with:
+stakeablelockoutを作ってみましょう。
 
-* **`TypeID`**: 22
-* **`Locktime`**: 54321
-* **`TransferableOutput`**: `"Example SECP256K1 Transfer Output from above"`
+* **`TypeID`**：22
+* **`Locktime`**：54321
+* **`TransferableOutput`**：`"Example SECP256K1 Transfer Output from above"`
 
 ```text
 [
