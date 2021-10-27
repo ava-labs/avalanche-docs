@@ -1,12 +1,12 @@
-# Serialization Primitives
+# シリアル化プリミティブ
 
-[Avalanche](../../#avalanche) uses a simple, uniform, and elegant representation for all internal data. This document describes how primitive types are encoded on the Avalanche platform. Transactions are encoded in terms of these basic primitive types.
+[Avalanche](../../#avalanche)では、すべての内部データに簡単で一定の方式に従う洗練された表現を使用しています。このドキュメントでは、Avalancheプラットフォームでのプリミティブ型のエンコード方法について説明します。トランザクションは、これらの基本的なプリミティブ型を使ってエンコードされます。
 
-## Byte
+## バイト
 
-Bytes are packed as-is into the message payload.
+バイトはそのままでメッセージのペイロードにパックされます。
 
-Example:
+例：
 
 ```text
 Packing:
@@ -15,11 +15,11 @@ Results in:
     [0x01]
 ```
 
-## Short
+## ショート
 
-Shorts are packed in BigEndian format into the message payload.
+ショートはBigEndianフォーマットでメッセージのペイロードにパックされます。
 
-Example:
+例：
 
 ```text
 Packing:
@@ -28,11 +28,11 @@ Results in:
     [0x01, 0x02]
 ```
 
-## Integer
+## 整数
 
-Integers are 32-bit values packed in BigEndian format into the message payload.
+整数は、BigEndianフォーマットでメッセージのペイロードにパックされた32ビットの値です。
 
-Example:
+例：
 
 ```text
 Packing:
@@ -41,11 +41,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04]
 ```
 
-## Long Integers
+## 長整数
 
-Long integers are 64-bit values packed in BigEndian format into the message payload.
+長整数は、BigEndianフォーマットでメッセージのペイロードにパックされた64ビットの値です。
 
-Example:
+例：
 
 ```text
 Packing:
@@ -54,11 +54,11 @@ Results in:
     [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]
 ```
 
-## IP Addresses
+## IPアドレス
 
-IP addresses are represented as 16-byte IPv6 format, with the port appended into the message payload as a Short. IPv4 addresses are padded with 12 bytes of leading 0x00s.
+IPアドレスは、16バイトのIPv6フォーマットで表現され、ポートはメッセージのペイロードにショートとして埋め込まれます。IPv4アドレスは、先頭の0x00に12バイトを埋め込んでいます。
 
-IPv4 example:
+IPv4の例：
 
 ```text
 Packing:
@@ -71,7 +71,7 @@ Results in:
     ]
 ```
 
-IPv6 example:
+IPv6の例：
 
 ```text
 Packing:
@@ -84,11 +84,11 @@ Results in:
     ]
 ```
 
-## Fixed-Length Array
+## 固定長の配列
 
-Fixed-length arrays, whose length is known ahead of time and by context, are packed in order.
+固定長の配列は、その長さを事前にコンテキストが認識するので、順番にパックされます。
 
-Byte array example:
+バイト配列の例：
 
 ```text
 Packing:
@@ -97,7 +97,7 @@ Results in:
     [0x01, 0x02]
 ```
 
-Integer array example:
+整数配列の例：
 
 ```text
 Packing:
@@ -106,11 +106,11 @@ Results in:
     [0x03, 0x04, 0x05, 0x06]
 ```
 
-## Variable Length Array
+## 可変長の配列
 
-The length of the array is prefixed in Integer format, followed by the packing of the array contents in Fixed Length Array format.
+配列の長さは、整数フォーマットでプレフィックスが付けられ、その後に固定長配列フォーマットで配列のコンテンツがパックされます。
 
-Byte array example:
+バイト配列の例：
 
 ```text
 Packing:
@@ -119,7 +119,7 @@ Results in:
     [0x00, 0x00, 0x00, 0x02, 0x01, 0x02]
 ```
 
-Int array example:
+整数配列の例：
 
 ```text
 Packing:
@@ -128,11 +128,11 @@ Results in:
     [0x00, 0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x06]
 ```
 
-## String
+## 文字列
 
-A String is packed similarly to a variable-length byte array. However, the length prefix is a short rather than an int. Strings are encoded in UTF-8 format.
+文字列は、可変長のバイト配列と同様にパックされます。ただし、プレフィックス長は整数ではなくショートです。文字列は、UTF-8フォーマットでエンコードされます。
 
-Example:
+例：
 
 ```text
 Packing:
