@@ -1,14 +1,14 @@
 # IPC API
 
-The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
+IPC APIにより、ユーザーはブロックチェーンを公開するためのUNIXドメインのソケットを作成することができます。ブロックチェーンが頂点/ブロックを受け入れると、それをソケットに公開し、その中に含まれる決定事項を別のソケットに公開します。
 
-A node will only expose this API if it is started with [command line argument](../references/command-line-interface.md) `api-ipcs-enabled=true`.
+ノードは、[コマンドライン引数](../references/command-line-interface.md)で起動された場合に、このAPIのみを公開します`api-ipcs-enabled=true`。
 
-## IPC Message Format
+## IPCメッセージフォーマット
 
-Socket messages consist of a 64bit integer in BigEndian format followed by that many bytes.
+ソケットメッセージは、BigEndianフォーマットの64ビット整数と、それに続くバイト数で構成されています。
 
-Example:
+例：
 
 ```text
 Sending:
@@ -17,35 +17,35 @@ Writes to the socket:
     [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x41, 0x76, 0x61, 0x78]
 ```
 
-## IPC Socket URL Format
+## IPCソケットのURLフォーマット
 
-The names of the sockets are of the form `<network_id>-<chain_id>-<event_type>` where `<event_type>` is either `consensus` or `decisions`. The consensus socket receives verticies and blocks and while the decisions socket recives individual transactions.
+ソケットの名前は`<network_id>-<chain_id>-<event_type>`の形式で、`<event_type>`は`consensus`または`decisions`のいずれかです。コンセンサスソケットは、頂点とブロックを受信し、デシジョンソケットは、個々のトランザクションを受信します。
 
-## Format
+## フォーマット
 
-This API uses the `json 2.0` RPC format.
+このAPIは`json 2.0`RPCフォーマットを使用しています。
 
-## Endpoint
+## エンドポイント
 
 `/ext/ipcs`
 
-## Methods
+## メソッド
 
 ### ipcs.publishBlockchain
 
-Register a blockchain so it publishes accepted vertices to a Unix domain socket.
+ブロックチェーンを登録し、受け入れた頂点をUNIXドメインソケットに公開します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
-* `blockchainID` is the blockchain that will publish accepted vertices.
-* `consensusURL` is the path of the Unix domain socket the vertices are published to.
-* `decisionsURL` is the path of the Unix domain socket the transactions are published to.
+* `blockchainID`は、受け入れられた頂点を公開するブロックチェーンです。
+* `consensusURL`は、頂点が公開されているUNIXドメインソケットのパスです。
+* `decisionsURL`は、トランザクションが公開されるUNIXドメインソケットのパスです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -58,7 +58,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -73,17 +73,17 @@ curl -X POST --data '{
 
 ### ipcs.unpublishBlockchain
 
-Deregister a blockchain so that it no longer publishes to a Unix domain socket.
+ブロックチェーンの登録を解除し、UNIXドメインソケットへの公開を行わないようにします。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
-* `blockchainID` is the blockchain that will no longer publish to a Unix domain socket.
+* `blockchainID`は、UNIXドメインソケットへの公開を行わなくなるブロックチェーンです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -96,7 +96,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/ipcs
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
