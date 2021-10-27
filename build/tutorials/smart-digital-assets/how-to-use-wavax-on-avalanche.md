@@ -1,143 +1,143 @@
-# Use Wrapped AVAX \(WAVAX\) on Avalanche
+# Avalanche上でラップされたAVAX（WAVAX）を使用する
 
-## What is WAVAX?
+## WAVAXとは？
 
-[AVAX](../../../#avalanche-avax-token) is the native token on the [Avalanche platform](../../../learn/platform-overview/). Many smart contracts on the [Contract Chain \(C-Chain\)](../../../learn/platform-overview/#contract-chain-c-chain), which is an instance of the Ethereum Virtual Machine, are designed to work with Ethereum's ERC-20 tokens. In order to use AVAX in such contracts, you must use wrapped AVAX \(WAVAX\), which is ERC-20 compatible.
+[AVAX](../../../#avalanche-avax-token)は、[Avalancheプラットフォーム](../../../learn/platform-overview/)上のネイティブトークンです。Ethereum Virtual Machineのインスタンスである[コントラクトチェーン（ C-Chain）](../../../learn/platform-overview/#contract-chain-c-chain)上の多くのスマートコントラクトは、EthereumのERC-20トークンで動作するように設計されています。このようなコントラクトでAVAXを使用するには、ERC-20と互換性のあるラップされたAVAX（WAVAX）を使用する必要があります。
 
-## Overview
+## 概要
 
-To convert AVAX to WAVAX you will deposit AVAX into a smart contract which will lock the AVAX and issue WAVAX to you. To convert WAVAX to AVAX, you will return the WAVAX to the smart contract, which will burn the WAVAX and return your AVAX.
+AVAXをWAVAXに変換するには、AVAXをロックし、WAVAXを発行するスマートコントラクトにAVAXをデポジットします。WAVAXをAVAXに変換するには、スマートコントラクトにWAVAXを返します。そこで、WAVAXを使い果し、AVAXを返却します。
 
-In this tutorial, you will:
+このチュートリアルでは、次を行います。
 
-* Connect Metamask to Avalanche
-* Fund your Metamask account  
-* Load the WAVAX contract into Remix
-* Connect to the pre-deployed WAVAX contract
-* Convert AVAX to WAVAX and back
-* Add WAVAX as a custom token to Metamask
+* MetamaskをAvalancheに接続する
+* Metamaskアカウントに資金を入れる
+* WAVAXコントラクトをRemixにロードする
+* デプロイ前のWAVAXコントラクトに接続する
+* AVAXをWAVAXに変換し、戻す
+* MetamaskにカスタムトークンとしてWAVAXを追加する
 
-## Connect Metamask
+## Metamaskを接続する
 
-[Metamask](https://metamask.io/) is a popular web browser extension that makes it easy to interact with Ethereum and compatible blockchains, such as Avalanche's C-Chain. Setting up Metamask and creating an account on it is beyond the scope of this tutorial, but there are a number of resources on the internet to walk you through that.
+[Metamask](https://metamask.io/)は、Avalancheの C-ChainなどのEthereumや互換性のあるブロックチェーンと簡単にやり取りできる、よく使用されているウェブブラウザの拡張機能です。Metamaskを設定し、Metamask上にアカウントを作成するのは、このチュートリアルの範囲外ですが、インターネット上にその方法を説明する多くのリソースがあります。
 
-After you log in to your Metamask account, connect it to the Avalanche network. Click the Network drop-down -&gt; Select **Custom RPC**:
+Metamaskアカウントにログインした後、Avalancheネットワークに接続します。「ネットワーク」ドロップダウンをクリックして、 **Custom RPC（カスタムRPC）**を選択します。
 
-![metamask network dropdown](../../../.gitbook/assets/image%20%2860%29.png)
+![metamaskネットワークドロップダウン](../../../.gitbook/assets/image%20%2860%29.png)
 
-Enter the information for the network of your choice:
+選択したネットワークの情報を次のように入力します。
 
-### Avalanche Mainnet Settings:
+### Avalanche Mainnet の設定：
 
-* **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
-* **ChainID**: `0xa86a`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+* **Network Name（ネットワーク名）**：Avalanche Mainnet C-Chain
+* **New RPC URL2（新しいRPC URL）**： [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+* **ChainID **：`43114`
+* **Symbol（シンボル）**： `AVAX`
+* **Explorer（エクスプローラ）**： [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
 
-### Fuji Testnet Settings:
+### Fuji Testnetの設定：
 
-* **Network Name**: Avalanche Fuji C-Chain
-* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
-* **ChainID**: `0xa869`
-* **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **Network Name（ネットワーク名）**： Avalanche Fuji C-Chain
+* **New RPC URL（新しいRPC URL）**： [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+* **ChainID **：`43113`
+* **Symbol（シンボル）**： `AVAX`
+* **Explorer（エクスプローラ）**： [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
 
-After saving the changes, select the Avalanche network you just specified. You should see your AVAX balance, which will probably be 0.
+変更を保存したのち、指定したAvalancheネットワークを選択します。AVAXの残高を見てください。これは、おそらく「0」となっています。
 
-## Fund Your C-Chain Account
+##  C-Chainアカウントに資金を入れる
 
-You need to get some AVAX into your account.
+アカウントにAVAXをいくらか取得する必要があります。
 
-### **Using the Avalanche Wallet**
+### **Avalancheウォレットを使用する**
 
-If you already have some AVAX, you can transfer them to the Metamask account using your [Avalanche Wallet](https://wallet.avax.network/). You can see where your funds are by selecting **show breakdown** in the wallet panel showing your balance. If you don't have the funds on the C-Chain already, you need do a [Cross Chain Transfer](../platform/transfer-avax-between-x-chain-and-c-chain.md), to move your AVAX from X-Chain to C-Chain.
+すでにいくらかAVAXをお持ちの場合は、[Avalancheウォレット](https://wallet.avax.network/)を使用してMetamaskアカウントに転送することができます。残高を表示するウォレットパネルの**show breakdown（詳細を表示）**を選択して自分の資金がどこにあるかを確認することができます。 C-Chain上にまだ資金がない場合は、[Cross Chain Transfer（クロスチェーン転送）](../platform/transfer-avax-between-x-chain-and-c-chain.md)を行ってAVAXをX-Chainから C-Chainに移動する必要があります。
 
-After you have funds on the C-Chain, select **Send** on the left side menu in the Wallet, and then switch the source chain to **C Contract**. In the **To Address** field paste your Metamask address. Enter the amount to send and click **Confirm** and then **Send**.
+ C-Chain上に資金を確保したのち、ウォレットの左側メニューの**Send（送信）**を選択し、送信元チェーンを**C Contract（Cコントラクト）**に切り替えます。**To Address（送信先アドレス）**フィールドに、Metamaskアドレスを貼り付けます。送信する数量を入力し、**Confirm（確認）**、そして**Send（送信）**をクリックします。
 
-![Send to Metamask](../../../.gitbook/assets/wavax2avax-01-send-to-metamask.png)
+![Metamaskに送信](../../../.gitbook/assets/wavax2avax-01-send-to-metamask.png)
 
-Funds should soon be visible in your Metamask account.
+資金は、Metamaskアカウント上に間もなく表示されます。
 
-### **Using the Test Network Faucet**
+### **Test Network Faucetを使用する**
 
-If you're connected to the test network, you can use its faucet to fund your Metamask account. Navigate to [the faucet](https://faucet.avax-test.network/) and paste your Ethereum address, which is shown below the account name in Metamask \(e.g.`0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`\). When you click on the account name, it will copy the account to the clipboard.
+テストネットワークにすでに接続されている場合は、そのフォーセットを使用して、Metamaskアカウントに資金を入れることができます。[フォーセット](https://faucet.avax-test.network/)に移動し、Metamaskのアカウント名の下に表示されているEthereumのアドレス（例：`0xDd1749831fbF70d88AB7bB07ef7CD9c53D054a57`）を貼り付けてください。アカウント名をクリックすると、アカウントがクリップボードにコピーされます。
 
-![Faucet funding](../../../.gitbook/assets/wavax2avax-02-faucet.png)
+![フォーセット資金調達](../../../.gitbook/assets/wavax2avax-02-faucet.png)
 
-Paste that address into the faucet, prove that you're not a robot, and then request test AVAX. They should appear in your Metamask shortly.
+そのアドレスをフォーセットに貼り付け、ロボットではないことを証明し、AVAXテストをリクエストします。まもなくMetamaskにこれらが表示されます。
 
-## Load WAVAX contract into Remix
+## WAVAXコントラクトをRemixにロードする
 
-Remix is a popular browser-based tool for writing, deploying, and interacting with smart contracts. Naviate to [Remix's website](https://remix.ethereum.org/). Scroll down until you see options for importing contracts.
+Remixは、スマートコントラクトを書き、デプロイし、やり取りするための人気のあるブラウザベースのツールです。[Remixのウェブサイト](https://remix.ethereum.org/)に移動します。コントラクトをインポートするためのオプションが出てくるまで下にスクロールします。
 
-![Import from GitHub](../../../.gitbook/assets/wavax2avax-03-remix-import.png)
+![GitHubからインポートする](../../../.gitbook/assets/wavax2avax-03-remix-import.png)
 
-Select **GitHub**, and in the input field paste `https://raw.githubusercontent.com/ava-labs/wrapped-assets/main/WAVAX.sol` and select **OK**. That will load the contract into Remix.
+**GitHub**を選択し、入力フィールドに`https://raw.githubusercontent.com/ava-labs/wrapped-assets/main/WAVAX.sol`を貼り付け**OK**を選択します。これにより、コントラクトをRemixにロードします。
 
-![File Explorer](../../../.gitbook/assets/wavax2avax-04-contract.png)
+![File Explorer（ファイルエクスプローラ）](../../../.gitbook/assets/wavax2avax-04-contract.png)
 
-Switching to the File Explorer tab on the left and select `WAVAX.sol`, which is the contract we just loaded.
+左側にある「File Explorer（ファイルエクスプローラ）」タブに切り替え、たった今ロードしたコントラクトである`WAVAX.sol`を選択します。
 
-On the left side menu, switch to Compile tab:
+左のサイドメニューで、「Compile（コンパイル）」タブに切り替えます。
 
-![Compile](../../../.gitbook/assets/wavax2avax-05-compile.png)
+![コンパイル](../../../.gitbook/assets/wavax2avax-05-compile.png)
 
-Check that the compiler version is compatible with the contract, as shown. Press **Compile WAVAX.sol**, and check that WAVAX contract has appeared in the `CONTRACT` field below. Now you're ready to connect to the WAVAX contract, which has already been deployed on the Avalanche network.
+表示されているように、コンパイラーのバージョンがコントラクトと互換性があることを確認してください。**Compile WAVAX.sol（WAVAX.solをコンパイルする）**をクリックし、WAVAXコントラクトが次の`CONTRACT`フィールドに表示されていることを確認します。これでAvalancheネットワーク上で既にデプロイされているWAVAXコントラクトに接続する準備ができました。
 
-## Connect to the WAVAX contract
+## WAVAXコントラクトに接続する
 
-Switch to the **Deploy & Run Tranasactions** tab on the left side.
+左側から**Deploy & Run Transactions（トランザクションをデプロイし実行する）**タブに切り替える。
 
-![Connect](../../../.gitbook/assets/wavax2avax-06-deploy.png)
+![接続](../../../.gitbook/assets/wavax2avax-06-deploy.png)
 
-Make sure you're logged in to your Metamask. In the **Environment** dropdown menu, select `Injected Web3`. Metamask will pop up and ask you to select the account. Choose the one connected to Avalanche and allow it to connect. This will pre-fill the **Account** field. Make sure the **Contract** field is set to the `WAVAX` contract. Now we can connect to the contract, which has already published on Avalanche. In the **At Address** edit field, copy:
+Metamaskにログインしていることを確認してください。**Environment（環境）**ドロップダウンメニューで、`Injected Web3`を選択します。Metamaskがポップアップされ、アカウントを選択するよう求められます。Avalancheに接続したものを選択し、接続を許可します。これにより、**Account（アカウント）**フィールドにあらかじめ記入されます。**Contract（コントラクト）**フィールドが`WAVAX`コントラクトに設定されていることを確認してください。これで、Avalancheで既に公開されているコントラクトに接続することができます。**At Address（アドレス）**の編集フィールドに、次をコピーしてください。
 
-* For Mainnet: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
-* For Fuji Testnet: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
+* Mainnetの場合：`0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
+* Fuji Testnetの場合：`0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
-After pasting the address, press the **At Address** button.
+アドレスを貼り付けた後、**At Address（アドレス）**ボタンを押してください。
 
-Remix should find the deployed contract:
+Remixがデプロイされたコントラクトを見つけます。
 
-![Connect](../../../.gitbook/assets/wavax2avax-07-avalanche-contract.png)
+![接続](../../../.gitbook/assets/wavax2avax-07-avalanche-contract.png)
 
-We are now ready to interact with the contract. Open the contract interface by pressing the highlighted arrow.
+これでコントラクトとやり取りする準備ができました。ハイライトされた矢印をクリックしコントラクトインターフェースを開きます。
 
-## Issue Commands to the WAVAX Contract
+## WAVAXコントラクトに対してコマンドを発行する
 
-Let's wrap some AVAX!
+AVAXをいくらかラップしましょう。
 
-Since ETH is denominated in 10^18 smaller units \(wei\), and AVAX is denominated in 10^9, switch the value selector from `wei` to `gwei` \(gigawei\). 1 gwei = 10^9 wei = 1 nAVAX.
+ETHは10^18のより小さい単位 (wei)で、AVAXは10^9でデノミされているため、VALUEセレクタで`wei`から`gwei`（gigawei）に切り替えます。
 
-![Interaction](../../../.gitbook/assets/wavax2avax-08-interact.png)
+![やり取り](../../../.gitbook/assets/wavax2avax-08-interact.png)
 
-### Wrap AVAX to Create WAVAX
+### AVAXをラップしてWAVAXを作成する
 
-To wrap 10 AVAX, enter `10000000000` \(10^10\) gwei in the **Value** field. To initiate the wrapping, click **Deposit**. You will be presented with a prompt by Remix to confirm the transaction. When you press **Confirm** Metamask will pop up, also asking for confirmation. Press **Confirm** in Metamask, too. You should notice your AVAX balance lowered by 10, plus the fee amount. Skip to the next section to see your WAVAX in Metamask.
+10AVAXをラップするには、**Value（値）**フィールドに`10000000000`（10^10）gweiを入力します。ラップを開始するには、**Deposit（デポジット）**をクリックします。Remixでトランザクションを確認するプロンプトが表示されます。**Confirm（確認）**を押すと、Metamaskがポップアップされ、確認も求められます。Metamaskでも**Confirm（確認）**を押してください。AVAXの残高が10プラス代金分が引かれたことに気づくでしょう。Metamask上でWAVAXを確認するには次のセクションに移動します。
 
-## Add WAVAX to Metamask
+## WAVAXをMetamaskに追加する
 
-To see your WAVAX balance, you must add WAVAX as a custom token to Metamask. In Metamask, select the three dots next to your account name and select `Expand View`. This opens a new browser tab. Scroll down and select **Add token**. Switch to the **Custom Token** tab.
+WAVAXの残高を見るには、MetamaskにカスタムトークンとしてWAVAXを追加する必要があります。Metamaskで、アカウント名の横にある3つの点を選び、`Expand View`を選択します。これにより新しいブラウザタブが開きます。下にスクロールし、**Add Token（トークンを追加）**を選択します。**Custom Token（カスタムトークン）**タブに切り替えます。
 
-![Custom Token](../../../.gitbook/assets/wavax2avax-10-add-token.png)
+![Custom Token（カスタムトークン）](../../../.gitbook/assets/wavax2avax-10-add-token.png)
 
-In the **Token Contract Address** paste the same contract address we used before:
+**Token Contract Address（トークンコントラクトアドレス）**に、以前使った同じコントラクトアドレスを貼り付けます。
 
-* For main net: `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
-* For Fuji test net: `0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
+* メインネット用：`0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7`
+* Fuji Testnet用：`0xd00ae08403B9bbb9124bB305C09058E32C39A48c`
 
-Click **Next** and **Add Tokens**. Your WAVAX should now be visible in under your account in Metmask.
+まず、**Next（次へ）**、そして**Add Tokens（トークンを追加）**をクリックします。maMetmaskのアカウントには、WAVAXが表示されています。
 
-### Unwrap WAVAX to AVAX
+### WAVAXをAVAXにアンラップする
 
-To unwrap WAVAX, expand the arrow next to **Withdraw** button:
+WAVAXをアンラップするには、**Withdraw（引き出す）**ボタンの隣にある矢印を展開します。
 
-![Withdraw](../../../.gitbook/assets/wavax2avax-09-withdraw.png)
+![引き出し](../../../.gitbook/assets/wavax2avax-09-withdraw.png)
 
-Unfortunately, the withdraw field is denominated in wei, so 10 AVAX is represented as `10000000000000000000` \(10^19\) for the withdraw amount. Pressing **Transact** will trigger the same confirmation first in Remix, then in Metamask. Your AVAX should be back in the account, minus the fee amount.
+残念ながら、withdraw（引き出し）フィールドは、wei建てのため、10AVAXは`10000000000000000000`（10^19）として表現されます。**Transact（取引）**を押すと、まずRemix上で、そのあとMetamask上で同じ確認をスタートします。AVAXは手数料が差し引かれた状態でアカウントに戻りました。
 
-## Conclusion
+## 結論
 
-You can now interact with smart contracts on Avalanche's C-Chain with WAVAX, the ERC-20 version of AVAX. In the future, converting between AVAX and WAVAX will be significantly simpler, with built-in support from the Wallet and exchanges, but in the meantime, you can still access DEXes, bridges and other Solidity-based contracts on the Avalanche Platform.
+これで、AVAXのERC-20バージョンであるWAVAXで、Avalancheの C-Chain上でスマートコントラクトとやり取りできるようになりました。将来的には、AVAXとWAVAXの変換は、ウォレットと取引所からのビルトインサポートを得てずっとシンプルになる予定です。しかし、しばらくの間は、Avalancheプラットフォーム上で、DEX、ブリッジ、その他のSolidityベースのコントラクトにアクセスしていただけます。
 
