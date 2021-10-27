@@ -1,18 +1,14 @@
-# Tutorials
+# チュートリアル
 
-Check out all of the tutorials that will help you build on Avalanche. We would be thrilled if you would like to contribute to our [GitHub](https://github.com/ava-labs) or suggest a tutorial on [Discord](https://chat.avax.network)!
+Avalanche上での構築に役立つすべてのチュートリアルを確認しましょう。[GitHub](https://github.com/ava-labs)に貢献したい、あるいは[Discord](https://chat.avax.network)でチュートリアルを提案したいと思っていただけたら本当に嬉しいと思います。
 
 {% page-ref page="platform/" %}
 
-{% endpage-ref %}
-
 {% page-ref page="nodes-and-staking/" %}
-
-{% endpage-ref %}
 
 {% page-ref page="smart-contracts/" %}
 
-{% endpage-ref %}
-
 {% page-ref page="smart-digital-assets/" %}
+
+
 
