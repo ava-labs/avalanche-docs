@@ -1,23 +1,23 @@
-# AVM Transaction Format
+# AVMトランザクションのフォーマット
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine \(AVM\). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+このファイルは、Avalanche Virtual Machine (AVM)でのトランザクションをシリアライズする方法を示す唯一の情報源となります。このドキュメントでは、パッキングには[プリミティブシリアライゼーション](serialization-primitives.md)フォーマットを使用し、暗号化されたユーザー識別には[secp256k1](cryptographic-primitives.md#secp256k1-addresses)を使用しています。
 
-## Codec ID
+## コーデックID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+一部のデータには、そのデータをどのようにデシリアライズすべきかを示すコーデックID(unt16)が先頭に追加されています。現在のところ、有効なコーデックIDは0(`0x00 0x00`)のみです。
 
-## Transferable Output
+## 転送可能な出力
 
-Transferable outputs wrap an output with an asset ID.
+転送可能な出力では、出力を資産IDでラップします。
 
-### What Transferable Output Contains
+### 伝達可能なアウトプットの内容
 
-A transferable output contains an `AssetID` and an `Output`.
+転送可能な出力には、`AssetID`と[`Output`](avm-transaction-serialization.md#outputs)があります。
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is an output, as defined below. For example, this can be a SECP256K1 transfer output.
+* **`AssetID`**は、この出力がどの資産を参照するかを定義する32バイトの配列です。
+* **`Output`**は、[次](avm-transaction-serialization.md#outputs)に定義される出力です。例えば、[SECP256K1の転送出力](avm-transaction-serialization.md#secp256k1-transfer-output)となります。
 
-### Gantt Transferable Output Specification
+### Ganttの転送可能な出力仕様
 
 ```text
 +----------+----------+-------------------------+
@@ -29,7 +29,7 @@ A transferable output contains an `AssetID` and an `Output`.
                       +-------------------------+
 ```
 
-### Proto Transferable Output Specification
+### Protoの転送可能な出力仕様
 
 ```text
 message TransferableOutput {
@@ -38,12 +38,12 @@ message TransferableOutput {
 }
 ```
 
-### Transferable Output Example
+### 転送可能な出力例
 
-Let’s make a transferable output:
+転送可能な出力を作りましょう：
 
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Output: "Example SECP256K1 Transfer Output from below"`
+* `AssetID`：`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `Output`：`"Example SECP256K1 Transfer Output from below"`
 
 ```text
 [
@@ -70,20 +70,20 @@ Let’s make a transferable output:
 ]
 ```
 
-## Transferable Input
+## 転送可能な入力
 
-Transferable inputs describe a specific UTXO with a provided transfer input.
+転送可能な入力は、提供された転送入力で特定のUTXOを記述します。
 
-### What Transferable Input Contains
+### 伝達可能なインプットの内容
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+転送可能な入力には、`TxID`、`UTXOIndex``AssetID`と`Input`があります。
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is an input, as defined below. This will be a SECP256K1 transfer input
+* **`TxID`**は、この入力がどのトランザクションからの出力を消費するかを定義する32バイトの配列です。トランザクションIDは、署名されたトランザクションのバイトのsha256を取って計算されます。
+* **`UTXOIndex`**は、指定されたトランザクションでこの入力がどのUTXOを消費するかを定義する整数です。
+* **`AssetID`**は、この入力がどの資産を参照するかを定義する32バイトの配列です。
+* **`Input`**は、次のように定義される入力です。これは現在、[SECP256K1の転送入力](avm-transaction-serialization.md#secp256k1-transfer-input)のみとなります
 
-### Gantt Transferable Input Specification
+### Ganttの転送可能な入力仕様
 
 ```text
 +------------+----------+------------------------+
@@ -99,7 +99,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-### Proto Transferable Input Specification
+### Protoの転送可能な入力仕様
 
 ```text
 message TransferableInput {
@@ -110,14 +110,14 @@ message TransferableInput {
 }
 ```
 
-### Transferable Input Example
+### 転送可能な入力の例
 
-Let’s make a transferable input:
+転送可能な入力をしましょう。
 
-* `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
-* `UTXOIndex: 5`
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `Input: "Example SECP256K1 Transfer Input from below"`
+* `TxID`：`0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
+* `UTXOIndex`：`5`
+* `AssetID`：`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `Input`：`"Example SECP256K1 Transfer Input from below"`
 
 ```text
 [
@@ -143,23 +143,23 @@ Let’s make a transferable input:
     // input:
     0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00,
     0x07, 0x5b, 0xcd, 0x15, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x03
+    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x07
 ]
 ```
 
-## Transferable Op
+## 転送可能なOp
 
-Transferable operations describe a set of UTXOs with a provided transfer operation. Only one Asset ID is able to be referenced per operation.
+転送可能な操作とは、提供された転送操作を持つUTXOのセットを記述するものです。1回の操作で参照できる資産IDは1つだけです。
 
-### What Transferable Op Contains
+### 転送可能なOpの内容
 
-A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
+転送可能な操作には、`AssetID`、`UTXOIDs`、`TransferOp`があります。
 
-* **`AssetID`** is a 32-byte array that defines which asset this operation changes.
-* **`UTXOIDs`** is an array of TxID-OutputIndex tuples. This array must be sorted in lexicographical order.
-* **`TransferOp`** is a transferable operation object.
+* **`AssetID`**は、どの資産を変更するかを定義する32バイトの配列です。
+* **`UTXOIDs`**は、TxID-OutputIndexのタプルの配列です。この配列は、辞書順にソートされていなければなりません。
+* **`TransferOp`**は[転送可能な操作オブジェクト](avm-transaction-serialization.md#operations)です。
 
-### Gantt Transferable Op Specification
+### Ganttの転送可能Op仕様
 
 ```text
 +-------------+------------+------------------------------+
@@ -174,7 +174,7 @@ A transferable operation contains an `AssetID`, `UTXOIDs`, and `TransferOp`.
                            +------------------------------+
 ```
 
-### Proto Transferable Op Specification
+### Protoの転送可能Op仕様
 
 ```text
 message UTXOID {
@@ -188,16 +188,16 @@ message TransferableOp {
 }
 ```
 
-### Transferable Op Example
+### 転送可能Opの例
 
-Let’s make a transferable operation:
+転送可能な操作をしましょう。
 
-* `AssetID: 0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* `UTXOIDs:`
-  * `UTXOID:`
-    * `TxID: 0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
-    * `UTXOIndex: 5`
-* `Op: "Example Transfer Op from below"`
+* `AssetID`：`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* `UTXOIDs`：
+   * `UTXOID`：
+      * `TxID`：`0xf1e1d1c1b1a191817161514131211101f0e0d0c0b0a090807060504030201000`
+      * `UTXOIndex`：`5`
+* `Op`：`"Example Transfer Op from below"`
 
 ```text
 [
@@ -240,25 +240,25 @@ Let’s make a transferable operation:
 ]
 ```
 
-## Outputs
+## 出力
 
-Outputs have four possible types: `SECP256K1TransferOutput`, `SECP256K1MintOutput`, `NFTTransferOutput` and `NFTMintOutput`.
+出力は、次の4種類の可能性があります。[`SECP256K1TransferOutput`](avm-transaction-serialization.md#secp256k1-transfer-output)、[`SECP256K1MintOutput`](avm-transaction-serialization.md#secp256k1-mint-output)、[`NFTTransferOutput`](avm-transaction-serialization.md#nft-transfer-output)、[`NFTMintOutput`](avm-transaction-serialization.md#nft-mint-output)です。
 
-## SECP256K1 Transfer Output
+## SECP256K1の転送出力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)転送出力では、指定されたUNIX時間後に資産の数量を複数のアドレスに送信することができます。
 
-### **What SECP256K1 Transfer Output Contains**
+### **SECP256K1の転送出力の内容**
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+secp256k1の転送出力には、`TypeID`、`Amount`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x00000007`となります。
+* **`Amount`**は、この出力が所有する資産の数量を指定する長さです。正の値でなければなりません。
+* **`Locktime`**は、この出力が後に消費できるUNIXタイムスタンプを含む長さです。このUNIXタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt SECP256K1 Transfer Output Specification**
+### **Gantt SECP256K1の転送出力仕様**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -276,7 +276,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Output Specification**
+### **Proto SECP256K1の転送出力仕様**
 
 ```text
 message SECP256K1TransferOutput {
@@ -288,17 +288,17 @@ message SECP256K1TransferOutput {
 }
 ```
 
-### **SECP256K1 Transfer Output Example**
+### **SECP256K1の転送出力例**
 
-Let’s make a secp256k1 transfer output with:
+secp256k1の転送出力をしてみましょう。
 
-* **`TypeID`**: 7
-* **`Amount`**: 12345
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* **`TypeID`**：`7`
+* **`Amount`**：`12345`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -334,20 +334,20 @@ Let’s make a secp256k1 transfer output with:
 ]
 ```
 
-## SECP256K1 Mint Output
+## SECP256K1ミント出力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint output is an output that is owned by a collection of addresses.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)のミント出力とは、アドレスの集まりが所有する出力のことです。
 
-### **What SECP256K1 Mint Output Contains**
+### **SECP256K1のミント出力の内容**
 
-A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+secp256k1のミント出力には、`TypeID`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000006`.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x00000006`となります。
+* **`Locktime`**は、この出力が後に消費できるUNIXタイムスタンプを含む長さです。このUNIXタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt SECP256K1 Mint Output Specification**
+### **Gantt SECP256K1のミント出力仕様**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -363,7 +363,7 @@ A secp256k1 Mint output contains a `TypeID`, `Locktime`, `Threshold`, and `Addre
                          +--------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Output Specification**
+### **Proto SECP256K1のミント出力仕様**
 
 ```text
 message SECP256K1MintOutput {
@@ -374,16 +374,16 @@ message SECP256K1MintOutput {
 }
 ```
 
-### **SECP256K1 Mint Output Example**
+### **SECP256K1のミント出力例**
 
-Let’s make a SECP256K1 mint output with:
+SECP256K1のミント出力を操作してみましょう。
 
-* **`TypeID`**: 6
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* **`TypeID`**：`6`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -416,22 +416,22 @@ Let’s make a SECP256K1 mint output with:
 ]
 ```
 
-## NFT Transfer Output
+## NFTの転送出力
 
-An NFT transfer output is an NFT that is owned by a collection of addresses.
+NFTの転送出力とは、アドレスの集まりが所有するNFTのことです。
 
-### **What NFT Transfer Output Contains**
+### **NFTの転送出力の内容**
 
-An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `Threshold`, and `Addresses`.
+NFTの転送出力には、`TypeID`、`GroupID`、`Payload`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000b`.
-* **`GroupID`** is an int that specifies the group this NFT was issued with.
-* **`Payload`** is an arbitrary string of bytes no long longer than 1024 bytes.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x0000000b`となります。
+* **`GroupID`**は、このNFTが発行されたグループを指定する整数です。
+* **`Payload`**は、1024バイトを超えない任意のバイト列です。
+* **`Locktime`**は、この出力が後に消費できるUNIXタイムスタンプを含む長さです。このUNIXタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt NFT Transfer Output Specification**
+### **Gantt NFTの転送出力仕様**
 
 ```text
 +-----------+------------+-------------------------------+
@@ -452,7 +452,7 @@ An NFT transfer output contains a `TypeID`, `GroupID`, `Payload`, `Locktime`, `T
                          +-------------------------------+
 ```
 
-### **Proto NFT Transfer Output Specification**
+### **Proto NFTの転送出力仕様**
 
 ```text
 message NFTTransferOutput {
@@ -465,18 +465,18 @@ message NFTTransferOutput {
 }
 ```
 
-### **NFT Transfer Output Example**
+### **NFTの転送出力例**
 
-Let’s make an NFT transfer output with:
+NFTの転送出力を操作してみましょう。
 
-* **`TypeID`**: 11
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* **`TypeID`**：`11`
+* **`GroupID`**：`12345`
+* **`Payload`**：`0x431100`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -517,21 +517,21 @@ Let’s make an NFT transfer output with:
 ]
 ```
 
-## NFT Mint Output
+## NFTのミント出力
 
-An NFT mint output is an NFT that is owned by a collection of addresses.
+NFTのミント出力とは、アドレスの集まりが所有するNFTのことです。
 
-### **What NFT Mint Output Contains**
+### **NFTのミント出力の内容**
 
-An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and `Addresses`.
+NFTのミント出力には、`TypeID`、`GroupID`、`Locktime`、`Threshold`、`Addresses`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000a`.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この出力タイプのIDです。`0x0000000a`となります。
+* **`GroupID`**は、このNFTの発行対象となるグループを指定する整数です。
+* **`Locktime`**は、この出力が後に消費できるUNIXタイムスタンプを含む長さです。このUNIXタイムスタンプは、秒単位で指定します。
+* **`Threshold`**は、出力を消費するために必要な固有の署名の数を指定する整数です。**`Addresses`**の長さ以下でなければなりません。**`Addresses`**が空の場合、0でなければなりません。
+* **`Addresses`**は、この出力を消費するために使用できる秘密鍵に対応する一意のアドレスのリストです。アドレスは、辞書的にソートされている必要があります。
 
-### **Gantt NFT Mint Output Specification**
+### **Gantt NFTのミント出力仕様**
 
 ```text
 +-----------+------------+--------------------------------+
@@ -549,7 +549,7 @@ An NFT Mint output contains a `TypeID`, `GroupID`, `Locktime`, `Threshold`, and 
                          +--------------------------------+
 ```
 
-### **Proto NFT Mint Output Specification**
+### **Proto NFTのミント出力仕様**
 
 ```text
 message NFTMintOutput {
@@ -561,17 +561,17 @@ message NFTMintOutput {
 }
 ```
 
-### **NFT Mint Output Example**
+### **NFTのミント出力例**
 
-Let’s make an NFT mint output with:
+NFTミントの出力を操作してみましょう。
 
-* **`TypeID`**: 10
-* **`GroupID`**: 12345
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* **`TypeID`**：`10`
+* **`GroupID`**：`12345`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
@@ -607,23 +607,23 @@ Let’s make an NFT mint output with:
 ]
 ```
 
-## Inputs
+## 入力
 
-Inputs have one possible type: `SECP256K1TransferInput`.
+入力には以下の1つのタイプがあります。`SECP256K1TransferInput`。
 
-## SECP256K1 Transfer Input
+## SECP256K1の転送入力
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) transfer input allows for spending an unspent secp256k1 transfer output.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の転送入力では、未使用のsecp256k1転送出力を使うことができます。
 
-### **What SECP256K1 Transfer Input Contains**
+### **SECP256K1の転送入力の内容**
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+secp256k1の転送入力には、`Amount`と`AddressIndices`が含まれています。
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`**は、この入力タイプのIDです。`0x00000005`となります。
+* **`Amount`**は、この入力がUTXOから消費されるべき量を指定する長さです。正の値でなければなりません。UTXOで指定された量と同じでなければなりません。
+* **`AddressIndices`**は、UTXOを消費するために使用される秘密鍵を定義する一意の整数のリストです。各UTXOには、そのUTXOを使うことができるアドレスの配列があります。各整数は、このトランザクションに署名する、このアドレス配列のインデックスを表します。配列は低い方から高い方へとソートされなければなりません。
 
-### **Gantt SECP256K1 Transfer Input Specification**
+### **Gantt SECP256K1の転送入力仕様**
 
 ```text
 +-------------------------+-------------------------------------+
@@ -637,7 +637,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-### **Proto SECP256K1 Transfer Input Specification**
+### **Proto SECP256K1の転送入力仕様**
 
 ```text
 message SECP256K1TransferInput {
@@ -647,19 +647,19 @@ message SECP256K1TransferInput {
 }
 ```
 
-### **SECP256K1 Transfer Input Example**
+### **SECP256K1の転送入力例**
 
-Let’s make a payment input with:
+決済入力をしてみましょう。
 
-* **`TypeId`**: 5
-* **`Amount`**: 123456789
-* **`AddressIndices`**: \[7,3\]
+* **`TypeId`**：`5`
+* **`Amount`**：`123456789`
+* **`AddressIndices`**：[`3`、`7`]
 
 ```text
 [
     TypeID         <- 0x00000005
     Amount         <- 123456789 = 0x00000000075bcd15,
-    AddressIndices <- [0x00000007, 0x00000003]
+    AddressIndices <- [0x00000003, 0x00000007]
 ]
 =
 [
@@ -670,30 +670,30 @@ Let’s make a payment input with:
     // length:
     0x00, 0x00, 0x00, 0x02,
     // sig[0]
-    0x00, 0x00, 0x00, 0x07,
-    // sig[1]
     0x00, 0x00, 0x00, 0x03,
+    // sig[1]
+    0x00, 0x00, 0x00, 0x07,
 ]
 ```
 
-## Operations
+## 操作
 
-Operations have three possible types: `SECP256K1MintOperation`, `NFTMintOp`, and `NFTTransferOp`.
+操作には、`SECP256K1MintOperation`、`NFTMintOp`、`NFTTransferOp`の3つのタイプがあります。
 
-## **SECP256K1 Mint Operation**
+## **SECP256K1のミントの操作**
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation consumes a SECP256K1 mint output, creates a new mint output and sends a transfer output to a new set of owners.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)のミントの操作は、SECP256K1のミント出力を消費し、新しいミント出力を作成し、転送出力を新しいオーナーのセットに送信します。
 
-### **What SECP256K1 Mint Operation Contains**
+### **SECP256K1のミントの操作内容**
 
-A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, and `TransferOutput`.
+secp256k1のミントの操作には、`TypeID`、`AddressIndices`、`MintOutput`、`TransferOutput`があります。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000008`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`MintOutput`** is a SECP256K1 Mint output.
-* **`TransferOutput`** is a SECP256K1 Transfer output
+* **`TypeID`**は、この出力タイプのIDです。`0x00000008`となります。
+* **`AddressIndices`**は、[UTXO](avm-transaction-serialization.md#utxo)を消費するために使用される秘密鍵を定義する一意の整数のリストです。各UTXOには、そのUTXOを使うことができるアドレスの配列があります。各整数は、このトランザクションに署名する、このアドレス配列のインデックスを表します。配列は低い方から高い方へとソートされなければなりません。
+* **`MintOutput`**は、[SECP256K1のミントの出力](avm-transaction-serialization.md#secp256k1-mint-output)です。
+* **`TransferOutput`**は、[SECP256K1の転送の出力](avm-transaction-serialization.md#secp256k1-transfer-output)です。
 
-### **Gantt SECP256K1 Mint Operation Specification**
+### **Gantt SECP256K1のミントの操作仕様**
 
 ```text
 +----------------------------------+------------------------------------+
@@ -711,7 +711,7 @@ A secp256k1 Mint operation contains a `TypeID`, `AddressIndices`, `MintOutput`, 
                                    +------------------------------------+
 ```
 
-### **Proto SECP256K1 Mint Operation Specification**
+### **Proto SECP256K1のミントの操作仕様**
 
 ```text
 message SECP256K1MintOperation {
@@ -722,21 +722,21 @@ message SECP256K1MintOperation {
 }
 ```
 
-### **SECP256K1 Mint Operation Example**
+### **SECP256K1のミントの操作例**
 
-Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mint operation with:
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)のミントの操作をしてみましょう。
 
-* **`TypeId`**: 8
-* **`AddressIndices`**:
-* 0x00000007
-* 0x00000003
-* **`MintOutput`**: “Example SECP256K1 Mint Output from above”
-* **`TransferOutput`**: “Example SECP256K1 Transfer Output from above”
+* **`TypeId`**：`8`
+* **`AddressIndices`**：
+* `0x00000003`
+* `0x00000007`
+* **`MintOutput`**：`"Example SECP256K1 Mint Output from above"`
+* **`TransferOutput`**：`"Example SECP256K1 Transfer Output from above"`
 
 ```text
 [
     TypeID <- 0x00000008
-    AddressIndices <- [0x00000007, 0x00000003]
+    AddressIndices <- [0x00000003, 0x00000007]
     MintOutput <- 0x00000006000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c89
     TransferOutput <- 0x000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
 ]
@@ -747,9 +747,9 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
     // number of address_indices:
     0x00, 0x00, 0x00, 0x02,
     // address_indices[0]:
-    0x00, 0x00, 0x00, 0x07,
-    // address_indices[1]:
     0x00, 0x00, 0x00, 0x03,
+    // address_indices[1]:
+    0x00, 0x00, 0x00, 0x07,
     // mint output
     0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
@@ -772,21 +772,21 @@ Let’s make a [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) mi
 ]
 ```
 
-## NFT Mint Op
+## NFTのミントOp
 
-An NFT mint operation consumes an NFT mint output and sends an unspent output to a new set of owners.
+NFTのミントの操作は、NFTのミントの出力を消費し、消費されなかった出力を新しいオーナーのセットに送ります。
 
-### **What NFT Mint Op Contains**
+### **NFTのミントOpの内容**
 
-An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload`, and `Output` of addresses.
+NFTのミントの操作には、アドレスの`TypeID`、`AddressIndices`、`GroupID`、`Payload`、`Output`が含まれています。
 
-* **`TypeID`** is the ID for this operation type. It is `0x0000000c`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`GroupID`** is an int that specifies the group this NFT is issued to.
-* **`Payload`** is an arbitrary string of bytes no longer than 1024 bytes.
-* **`Output`** is a locktime, threshold, and an array of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**は、この操作タイプのIDです。`0x0000000c`となります。
+* **`AddressIndices`**は、UTXOを消費するために使用される秘密鍵を定義する一意の整数のリストです。各UTXOには、そのUTXOを使うことができるアドレスの配列があります。各整数は、このトランザクションに署名する、このアドレス配列のインデックスを表します。配列は低い方から高い方へとソートされなければなりません。
+* **`GroupID`**は、このNFTの発行対象となるグループを指定する整数です。
+* **`Payload`**は、1024バイト以下の任意のバイト文字列です。
+* **`Output`**は`TransferableOutput`ではなく、ロックタイム、閾値、そしてこの出力を消費するために使用できる秘密鍵に対応する一意のアドレスの配列です。アドレスは辞書的にソートされている必要があります。
 
-### **Gantt NFT Mint Op Specification**
+### **GanttNFTのミントOpの仕様**
 
 ```text
 +------------------------------+------------------------------------+
@@ -807,7 +807,7 @@ An NFT mint operation contains a `TypeID`, `AddressIndices`, `GroupID`, `Payload
                                +------------------------------------+
 ```
 
-### **Proto NFT Mint Op Specification**
+### **Proto NFTのミントOpの仕様**
 
 ```text
 message NFTMintOp {
@@ -819,27 +819,27 @@ message NFTMintOp {
 }
 ```
 
-### **NFT Mint Op Example**
+### **NFTのミントOpの例**
 
-Let’s make an NFT mint operation with:
+NFTのミントの操作をしてみましょう。
 
-* **`TypeId`**: 12
-* **`AddressIndices`**:
-  * 0x00000007
-  * 0x00000003
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0xc3344128e060128ede3523a24a461c8943ab0859
+* **`TypeId`**：`12`
+* **`AddressIndices`**：
+   * `0x00000003`
+   * `0x00000007`
+* **`GroupID`**：`12345`
+* **`Payload`**：`0x431100`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
 
 ```text
 [
     TypeID         <- 0x0000000c
     AddressIndices <- [
-        0x00000007,
         0x00000003,
+        0x00000007,
     ]
     GroupID        <- 0x00003039
     Payload        <- 0x431100
@@ -856,9 +856,9 @@ Let’s make an NFT mint operation with:
     // number of address indices:
     0x00, 0x00, 0x00, 0x02,
     // address index 0:
-    0x00, 0x00, 0x00, 0x07,
-    // address index 1:
     0x00, 0x00, 0x00, 0x03,
+    // address index 1:
+    0x00, 0x00, 0x00, 0x07,
     // groupID:
     0x00, 0x00, 0x30, 0x39,
     // length of payload:
@@ -881,19 +881,19 @@ Let’s make an NFT mint operation with:
 ]
 ```
 
-## NFT Transfer Op
+## NFTの転送Op
 
-An NFT transfer operation sends an unspent NFT transfer output to a new set of owners.
+NFTの転送操作は、未使用のNFT転送出力を新しい所有者のセットに送信します。
 
-### **What NFT Transfer Op Contains**
+### **NFTの転送Opの内容**
 
-An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `NFTTransferOutput`.
+NFTの転送操作には、`TypeID`、`AddressIndices`、そして型付けされていない`NFTTransferOutput`が含まれています。
 
-* **`TypeID`** is the ID for this output type. It is `0x0000000d`.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
-* **`NFTTransferOutput`** is the output of this operation and must be an NFT Transfer Output. This output doesn’t have the **`TypeId`**, because the type is known by the context of being in this operation.
+* **`TypeID`**は、この出力タイプのIDです。`0x0000000d`となります。
+* **`AddressIndices`**は、UTXOを消費するために使用される秘密鍵を定義する一意の整数のリストです。各UTXOには、そのUTXOを使うことができるアドレスの配列があります。各整数は、このトランザクションに署名する、このアドレス配列のインデックスを表します。配列は低い方から高い方へとソートされなければなりません。
+* **`NFTTransferOutput`**は、この操作の出力であり、[NFTの転送出力](avm-transaction-serialization.md#nft-transfer-output)でなければなりません。この出力には、**`TypeId`**はありません。なぜなら、そのタイプは、この操作の中にあるというコンテキストによって知られているからです。
 
-### **Gantt NFT Transfer Op Specification**
+### **Gantt NFTの転送Opの仕様**
 
 ```text
 +------------------------------+------------------------------------+
@@ -917,7 +917,7 @@ An NFT transfer operation contains a `TypeID`, `AddressIndices` and an untyped `
                                +------------------------------------+
 ```
 
-### **Proto NFT Transfer Op Specification**
+### **Proto NFTの転送Opの仕様**
 
 ```text
 message NFTTransferOp {
@@ -931,21 +931,21 @@ message NFTTransferOp {
 }
 ```
 
-### **NFT Transfer Op Example**
+### **NFTの転送Opの例**
 
-Let’s make an NFT transfer operation with:
+NFTの転送の操作をしてみましょう。
 
-* **`TypeID`**: 13
-* **`AddressIndices`**:
-* 0x00000007
-* 0x00000003
-* **`GroupID`**: 12345
-* **`Payload`**: 0x431100
-* **`Locktime`**: 54321
-* **`Threshold`**: 1
-* **`Addresses`**:
-* 0xc3344128e060128ede3523a24a461c8943ab0859
-* 0x51025c61fbcfc078f69334f834be6dd26d55a955
+* **`TypeID`**：`13`
+* **`AddressIndices`**：
+* `0x00000007`
+* `0x00000003`
+* **`GroupID`**：`12345`
+* **`Payload`**：`0x431100`
+* **`Locktime`**：`54321`
+* **`Threshold`**：`1`
+* **`Addresses`**：
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
 
 ```text
 [
@@ -996,18 +996,18 @@ Let’s make an NFT transfer operation with:
 ]
 ```
 
-## Initial State
+## 初期状態
 
-Initial state describes the initial state of an asset when it is created. It contains the ID of the feature extension that the asset uses, and a variable length array of outputs that denote the genesis UTXO set of the asset.
+初期状態は、資産が作成されたときの初期状態を記述します。資産が使用する機能拡張のIDと、資産のジェネシスUTXOセットを示す可変長の出力配列が含まれます。
 
-### What Initial State Contains
+### 初期状態の内容
 
-Initial state contains a `FxID` and an array of `Output`.
+初期状態では、`FxID`と`Output`の配列が含まれています。
 
-* **`FxID`** is an int that defines which feature extension this state is part of. For SECP256K1 assets, this is `0x00000000`. For NFT assets, this is `0x00000001`.
-* **`Outputs`** is a variable length array of outputs, as defined above.
+* **`FxID`**は、この状態がどの機能拡張に属しているかを定義する整数です。SECP256K1の資産については`0x00000000`となります。NFT資産の場合は`0x00000001`となります。
+* **`Outputs`**は、上記で定義したように、[出力](avm-transaction-serialization.md#outputs)の可変長配列です。
 
-### Gantt Initial State Specification
+### Ganttの初期状態の仕様
 
 ```text
 +---------------+----------+-------------------------------+
@@ -1019,7 +1019,7 @@ Initial state contains a `FxID` and an array of `Output`.
                            +-------------------------------+
 ```
 
-### Proto Initial State Specification
+### Protoの初期状態の仕様
 
 ```text
 message InitialState {
@@ -1028,12 +1028,12 @@ message InitialState {
 }
 ```
 
-### Initial State Example
+### 初期状態の例
 
-Let’s make an initial state:
+初期状態を作ってみましょう。
 
-* `FxID: 0x00000000`
-* `InitialState: ["Example SECP256K1 Transfer Output from above"]`
+* `FxID`：`0x00000000`
+* `InitialState`：`["Example SECP256K1 Transfer Output from above"]`
 
 ```text
 [
@@ -1061,20 +1061,20 @@ Let’s make an initial state:
 ]
 ```
 
-## Credentials
+## 認証情報
 
-Credentials have two possible types: `SECP256K1Credential`, and `NFTCredential`. Each credential is paired with an Input or Operation. The order of the credentials match the order of the inputs or operations.
+認証情報には以下の2つのタイプがあります。`SECP256K1Credential`と`NFTCredential`です。各認証情報は、入力または操作とペアになっています。認証情報の順序は、入力または操作の順序と一致します。
 
-## SECP256K1 Credential
+## SECP256K1の認証情報
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential contains a list of 65-byte recoverable signatures.
+[secp256k1](cryptographic-primitives.md#secp-256-k1-addresses)の認証情報には、65バイトの復元可能な署名のリストが含まれています。
 
-### **What SECP256K1 Credential Contains**
+### **SECP256K1の認証情報の内容**
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input’s signature indices.
+* **`TypeID`**は、このタイプのIDです。`0x00000009`となります。
+* **`Signatures`**は65バイトの復元可能な署名の配列です。署名の順序は、入力の署名インデックスと一致しなければなりません。
 
-### **Gantt SECP256K1 Credential Specification**
+### **Gantt SECP256K1の認証情報の仕様**
 
 ```text
 +------------------------------+---------------------------------+
@@ -1086,7 +1086,7 @@ A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) credential cont
                                +---------------------------------+
 ```
 
-### **Proto SECP256K1 Credential Specification**
+### **Proto SECP256K1の認証情報の仕様**
 
 ```text
 message SECP256K1Credential {
@@ -1095,12 +1095,12 @@ message SECP256K1Credential {
 }
 ```
 
-### **SECP256K1 Credential Example**
+### **SECP256K1の認証情報の例**
 
-Let’s make a payment input with:
+決済入力をしてみましょう。
 
-* **`TypeID`**: 9
-* **`signatures`**:
+* **`TypeID`**：`9`
+* **`signatures`**：
 * `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00`
 * `0x404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
 
@@ -1141,26 +1141,26 @@ Let’s make a payment input with:
 ]
 ```
 
-## NFT Credential
+## NFTの認証情報
 
-An NFT credential is the same as an secp256k1 credential with a different TypeID. The TypeID for an NFT credential is `0x0000000e`.
+NFTの認証情報は、異なるTypeIDを持つ[secp256k1の認証情報](avm-transaction-serialization.md#secp256k1-credential)と同じです。NFTの認証情報のタイプIDは`0x0000000e`です。
 
-## Unsigned Transactions
+## 未署名のトランザクション
 
-Unsigned transactions contain the full content of a transaction with only the signatures missing. Unsigned transactions have four possible types: `CreateAssetTx`, `OperationTx`, `ImportTx`, and `ExportTx`. They all embed `BaseTx`, which contains common fields and operations.
+未署名のトランザクションは、署名だけが欠けたトランザクションのすべての内容を含みます。無署名のトランザクションには以下の4つのタイプがあります。[`CreateAssetTx`](avm-transaction-serialization.md#what-unsigned-create-asset-tx-contains)、[`OperationTx`](avm-transaction-serialization.md#what-unsigned-operation-tx-contains)、[`ImportTx`](avm-transaction-serialization.md#what-unsigned-import-tx-contains)、および[`ExportTx`](avm-transaction-serialization.md#what-unsigned-export-tx-contains)です。これらはすべてには、共通のフィールドと演算を含む[`BaseTx`](avm-transaction-serialization.md#what-base-tx-contains)が埋め込まれています。
 
-### What Base Tx Contains
+### ベーストランザクションの内容
 
-A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`, and `Memo`.
+ベースとなるトランザクションには、`TypeID`、`NetworkID`、`BlockchainID`、`Outputs`、`Inputs`、`Memo`が含まれています。
 
-* **`TypeID`** is the ID for this type. It is `0x00000000`.
-* **`NetworkID`** is an int that defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
-* **`Outputs`** is an array of transferable output objects. Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
-* **`Inputs`** is an array of transferable input objects. Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
-* **`Memo`** Memo field contains arbitrary bytes, up to 256 bytes.
+* **`TypeID`**は、このタイプのIDです。`0x00000000`となります。
+* **`NetworkID`**は、このトランザクションがどのネットワークに対して発行されるかを定義する整数です。この値は、トランザクションのルーティングをサポートするためのもので、反射攻撃の防止を目的としたものではありません。
+* **`BlockchainID`**は、このトランザクションがどのブロックチェーンに発行されたかを定義する32バイトの配列です。これは、ネットワークやブロックチェーン間で潜在的に有効なトランザクションに対する反射攻撃防止のために使用されます。
+* **`Outputs`**は、[転送可能な出力オブジェクト](avm-transaction-serialization.md#transferable-output)の配列です。出力は、シリアル化された表現により、辞書的にソートされなければなりません。これらの出力で作成された資産の総量は、入力で消費された各資産の総量からトランザクション手数料を差し引いた値以下でなければなりません。
+* **`Inputs`**は、[転送可能な入力オブジェクト](avm-transaction-serialization.md#transferable-input)の配列です。入力は、ソートされた一意である必要があります。入力はまず**`TxID`**で辞書的にソートされ、次に****`UTXOIndex`で低いものから高いものへとソートされます。**`TxID`**と**`UTXOIndex`**が同じ入力がある場合、二重支払いになるため、そのトランザクションは無効です。
+* **`Memo`**メモフィールドは任意のバイトを含み、最大256バイトまでです。
 
-### Gantt Base Tx Specification
+### Ganttのベーストランザクションの仕様
 
 ```text
 +--------------------------------------+-----------------------------------------+
@@ -1180,7 +1180,7 @@ A base tx contains a `TypeID`, `NetworkID`, `BlockchainID`, `Outputs`, `Inputs`,
                           +------------------------------------------------------+
 ```
 
-### Proto Base Tx Specification
+### Protoのベーストランザクションの仕様
 
 ```text
 message BaseTx {
@@ -1193,18 +1193,18 @@ message BaseTx {
 }
 ```
 
-### Base Tx Example
+### ベーストランザクションの例
 
-Let’s make an base tx that uses the inputs and outputs from the previous examples:
+これまでの例の入力と出力を使用して、ベーストランザクションを作りましょう。
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `4`
-* **`BlockchainID`**: `0xffffffffeeeeeeeeddddddddcccccccbbbbbbbbaaaaaaaa9999999988888888`
-* **`Outputs`**:
-  * `"Example Transferable Output as defined above"`
-* **`Inputs`**:
-  * `"Example Transferable Input as defined above"`
-* **`Memo`**: `0x00010203`
+* **`TypeID`**：`0`
+* **`NetworkID`**：`4`
+* **`BlockchainID`**：`0xffffffffeeeeeeeeddddddddcccccccbbbbbbbbaaaaaaaa9999999988888888`
+* **`Outputs`**：
+   * `"Example Transferable Output as defined above"`
+* **`Inputs`**：
+   * `"Example Transferable Input as defined above"`
+* **`Memo`**：`0x00010203`
 
 ```text
 [
@@ -1268,17 +1268,17 @@ Let’s make an base tx that uses the inputs and outputs from the previous examp
 ]
 ```
 
-### What Unsigned Create Asset Tx Contains
+### 未署名資産の作成トランザクションの内容
 
-An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination`, and `InitialStates`. The `TypeID` is `0x00000001`.
+未署名資産の作成トランザクションには、`BaseTx`、`Name`、`Symbol`、`Denomination`、`InitialStates`が含まれています。`TypeID`は`0x00000001`です。
 
 * **`BaseTx`**
-* **`Name`** is a human readable string that defines the name of the asset this transaction will create. The name is not guaranteed to be unique. The name must consist of only printable ASCII characters and must be no longer than 128 characters.
-* **`Symbol`** is a human readable string that defines the symbol of the asset this transaction will create. The symbol is not guaranteed to be unique. The symbol must consist of only printable ASCII characters and must be no longer than 4 characters.
-* **`Denomination`** is a byte that defines the divisibility of the asset this transaction will create. For example, the AVAX token is divisible into billionths. Therefore, the denomination of the AVAX token is 9. The denomination must be no more than 32.
-* **`InitialStates`** is a variable length array that defines the feature extensions this asset supports, and the initial state of those feature extensions.
+* **`Name`**は、このトランザクションで作成される資産の名前を定義する人間が読める文字列です。この名前は一意であることは保証されません。名前は印刷可能なASCII文字のみで構成され、128文字以下でなければなりません。
+* **`Symbol`**は、このトランザクションで作成される資産のシンボルを定義する人間が読める文字列です。シンボルは一意であることが保証されません。シンボルは印刷可能なASCII文字のみで構成され、4文字以内でなければなりません。
+* **`Denomination`**は、このトランザクションで作成される資産の分割可能性を定義するバイトです。例えば、AVAXトークンは10億分の1に分割可能です。したがって、AVAXトークンのデノミネーションは9です。デノミネーションは32以下でなければなりません。
+* **`InitialStates`**は、この資産がサポートする機能拡張と、その機能拡張の[初期状態](avm-transaction-serialization.md#initial-state)を定義する可変長の配列です。
 
-### Gantt Unsigned Create Asset Tx Specification
+### Ganttの未署名資産の作成トランザクションの仕様
 
 ```text
 +----------------+----------------+--------------------------------------+
@@ -1297,7 +1297,7 @@ An unsigned create asset tx contains a `BaseTx`, `Name`, `Symbol`, `Denomination
                                   +--------------------------------------+
 ```
 
-### Proto Unsigned Create Asset Tx Specification
+### Protoの未署名資産の作成トランザクションの仕様
 
 ```text
 message CreateAssetTx {
@@ -1309,15 +1309,15 @@ message CreateAssetTx {
 }
 ```
 
-### Unsigned Create Asset Tx Example
+### 未署名資産の作成トランザクションの例
 
-Let’s make an unsigned base tx that uses the inputs and outputs from the previous examples:
+前述の例の入力と出力を使用して、未署名のベーストランザクションを作ってみましょう。
 
-* `BaseTx`: `"Example BaseTx as defined above with ID set to 1"`
-* `Name`: `Volatility Index`
-* `Symbol`: `VIX`
-* `Denomination`: `2`
-* **`InitialStates`**:
+* `BaseTx`：`"Example BaseTx as defined above with ID set to 1"`
+* `Name`：`Volatility Index`
+* `Symbol`：`VIX`
+* `Denomination`：`2`
+* **`InitialStates`**：
 * `"Example Initial State as defined above"`
 
 ```text
@@ -1333,22 +1333,22 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 =
 [
     // base tx:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 
-    0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee, 
-    0xdd, 0xdd, 0xdd, 0xdd, 
-    0xcc, 0xcc, 0xcc, 0xcc, 0xbb, 0xbb, 0xbb, 0xbb, 
-    0xaa, 0xaa, 0xaa, 0xaa, 0x99, 0x99, 0x99, 0x99, 
-    0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x01, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04,
+    0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee,
+    0xdd, 0xdd, 0xdd, 0xdd,
+    0xcc, 0xcc, 0xcc, 0xcc, 0xbb, 0xbb, 0xbb, 0xbb,
+    0xaa, 0xaa, 0xaa, 0xaa, 0x99, 0x99, 0x99, 0x99,
+    0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x01,
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
     0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 
-    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00, 
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61, 
-    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8, 
-    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55, 
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
     0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
     0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
     0x43, 0xab, 0x08, 0x59, 0x00, 0x00, 0x00, 0x01,
@@ -1391,26 +1391,26 @@ Let’s make an unsigned base tx that uses the inputs and outputs from the previ
 ]
 ```
 
-### What Unsigned Operation Tx Contains
+### 未署名操作のトランザクションの内容
 
-An unsigned operation tx contains a `BaseTx`, and `Ops`. The `TypeID` for this type is `0x00000002`.
+未署名操作のトランザクションには、`BaseTx`、`Ops`があります。このタイプの`TypeID`は`0x00000002`です。
 
 * **`BaseTx`**
-* **`Ops`** is a variable-length array of Transferable Ops.
+* **`Ops`**は、[転送可能なOp](avm-transaction-serialization.md#transferable-op)の可変長配列です。
 
-### Gantt Unsigned Operation Tx Specification
+### Ganttの未署名操作のトランザクション仕様
 
 ```text
-+---------+--------------+-------------------------------------+
-| base_tx : BaseTx       |                 size(base_tx) bytes |
-+---------+--------------+-------------------------------------+
-| ops     : []TransferOp |                 4 + size(ops) bytes |
-+---------+--------------+-------------------------------------+
-                         | 4 + size(ops) + size(base_tx) bytes |
-                         +-------------------------------------+
++---------+------------------+-------------------------------------+
+| base_tx : BaseTx           |                 size(base_tx) bytes |
++---------+------------------+-------------------------------------+
+| ops     : []TransferableOp |                 4 + size(ops) bytes |
++---------+------------------+-------------------------------------+
+                             | 4 + size(ops) + size(base_tx) bytes |
+                             +-------------------------------------+
 ```
 
-### Proto Unsigned Operation Tx Specification
+### Protoの未署名操作のトランザクションの仕様
 
 ```text
 message OperationTx {
@@ -1419,12 +1419,12 @@ message OperationTx {
 }
 ```
 
-### Unsigned Operation Tx Example
+### 未署名操作のトランザクションの例
 
-Let’s make an unsigned operation tx that uses the inputs and outputs from the previous examples:
+前述の例の入力と出力を使用して、未署名操作のトランザクションを作ってみましょう。
 
-* `BaseTx`: `"Example BaseTx above" with TypeID set to 2`
-* **`Ops`**: \[`"Example Transfer Op as defined above"`\]
+* `BaseTx`：`"Example BaseTx above" with TypeID set to 2`
+* **`Ops`**：[`"Example Transferable Op as defined above"`]
 
 ```text
 [
@@ -1493,15 +1493,15 @@ Let’s make an unsigned operation tx that uses the inputs and outputs from the 
 ]
 ```
 
-### What Unsigned Import Tx Contains
+### 未署名インポートのトランザクションの内容
 
-An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `TypeID`for this type is `0x00000003`.
+未署名インポートのトランザクションには、`BaseTx`、`SourceChain`、`Ins`があります。*このタイプの`TypeID`は`0x00000003`です。
 
 * **`BaseTx`**
-* **`SourceChain`** is a 32-byte source blockchain ID.
-* **`Ins`** is a variable length array of Transferable Inputs.
+* **`SourceChain`**は、32バイトのソースブロックチェーンIDです。
+* **`Ins`**は[転送可能な入力](avm-transaction-serialization.md#transferable-input)の可変長の配列です。
 
-### Gantt Unsigned Import Tx Specification
+### Ganttの未署名インポートのトランザクションの仕様
 
 ```text
 +---------+----------------------+-----------------------------+
@@ -1515,7 +1515,7 @@ An unsigned import tx contains a `BaseTx`, `SourceChain` and `Ins`. \* The `Type
                         +--------------------------------------+
 ```
 
-### Proto Unsigned Import Tx Specification
+### Protoの未署名インポートのトランザクションの仕様
 
 ```text
 message ImportTx {
@@ -1525,13 +1525,13 @@ message ImportTx {
 }
 ```
 
-### Unsigned Import Tx Example
+### 未署名インポートのトランザクションの例
 
-Let’s make an unsigned import tx that uses the inputs from the previous examples:
+前述の例で得られた入力を使用して、未署名インポートのトランザクションを作ってみましょう。
 
-* `BaseTx`: “Example BaseTx as defined above” but with `TypeID` set to `3`
-* `SourceChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Ins`: “Example SECP256K1 Transfer Input as defined above”
+* `BaseTx`：`"Example BaseTx as defined above"`ですが、`TypeID`を`3`に設定しています
+* `SourceChain`：`0x0000000000000000000000000000000000000000000000000000000000000000`
+* `Ins`：`"Example SECP256K1 Transfer Input as defined above"`
 
 ```text
 [
@@ -1602,14 +1602,14 @@ Let’s make an unsigned import tx that uses the inputs from the previous exampl
 ]
 ```
 
-### What Unsigned Export Tx Contains
+### 未署名エクスポートのトランザクションの内容
 
-An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `TypeID` for this type is `0x00000004`.
+未署名エクスポートのトランザクションは、`BaseTx`、`DestinationChain`、`Outs`を含みます。このタイプの`TypeID`は`0x00000004`です。
 
-* **`DestinationChain`** is the 32 byte ID of the chain where the funds are being exported to.
-* **`Outs`** is a variable length array of Transferable Outputs.
+* **`DestinationChain`**は、資金のエクスポート先となるチェーンの32バイトのIDです。
+* **`Outs`**は、[転送可能な出力](avm-transaction-serialization.md#transferable-output)の可変長配列です。
 
-### Gantt Unsigned Export Tx Specification
+### Ganttの未署名エクスポートのトランザクション仕様
 
 ```text
 +-------------------+---------------+--------------------------------------+
@@ -1623,7 +1623,7 @@ An unsigned export tx contains a `BaseTx`, `DestinationChain`, and `Outs`. The `
                           +---------------------------------------+
 ```
 
-### Proto Unsigned Export Tx Specification
+### Protoの未署名エクスポートトランザクションの仕様
 
 ```text
 message ExportTx {
@@ -1633,13 +1633,13 @@ message ExportTx {
 }
 ```
 
-### Unsigned Export Tx Example
+### 未署名エクスポートトランザクションの例
 
-Let’s make an unsigned export tx that uses the outputs from the previous examples:
+前述の例で得られた出力を使用して、未署名エクスポートのトランザクションを作ってみましょう。
 
-* `BaseTx`: “Example BaseTx as defined above” with `TypeID` set to `4`
-* `DestinationChain`: `0x0000000000000000000000000000000000000000000000000000000000000000`
-* `Outs`: “Example SECP256K1 Transfer Output as defined above”
+* `BaseTx`：`"Example BaseTx as defined above"`ですが、`TypeID`を`4`に設定しています
+* `DestinationChain`：`0x0000000000000000000000000000000000000000000000000000000000000000`
+* `Outs`：`"Example SECP256K1 Transfer Output as defined above"`
 
 ```text
 [
@@ -1709,19 +1709,19 @@ Let’s make an unsigned export tx that uses the outputs from the previous examp
 ]
 ```
 
-## Signed Transaction
+## 署名済みのトランザクション
 
-A signed transaction is an unsigned transaction with the addition of an array of credentials.
+署名済のトランザクションとは、未署名のトランザクションに[認証情報](avm-transaction-serialization.md#credentials)の配列を加えたものです。
 
-### What Signed Transaction Contains
+### 署名済のトランザクションの内容
 
-A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
+署名済みのトランザクションには、`CodecID`、`UnsignedTx`、`Credentials`が含まれます。
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`UnsignedTx`** is an unsigned transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential will be paired with the input in the same index at this credential.
+* **`CodecID`**現在有効なコーデックIDは`00 00`のみです。
+* **`UnsignedTx`**は、上述のように未署名のトランザクションです。
+* **`Credentials`** は、[認証情報](avm-transaction-serialization.md#credentials)の配列です。各認証情報は、この認証情報で同じインデックスの入力とペアになります。
 
-### Gantt Signed Transaction Specification
+### Ganttの署名済みのトランザクションの仕様
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -1735,7 +1735,7 @@ A signed transaction contains a `CodecID`, `UnsignedTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Protoの署名済みのトランザクションの仕様
 
 ```text
 message Tx {
@@ -1745,12 +1745,12 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### 署名済みのトランザクションの例
 
-Let’s make a signed transaction that uses the unsigned transaction and credentials from the previous examples.
+前述の例で使用した未署名のトランザクションと認証情報を使用して、署名済みのトランザクションを作成してみましょう。
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
+* **`CodecID`**：`0`
+* **`UnsignedTx`**：`0x0000000100000004ffffffffeeeeeeeeddddddddccccccccbbbbbbbbaaaaaaaa999999998888888800000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab085900000001f1e1d1c1b1a191817161514131211101f0e0d0c0b0a09080706050403020100000000005000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0000000500000000075bcd150000000200000007000000030000000400010203`
 * **`Credentials`** `0x0000000900000002000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1e1d1f202122232425262728292a2b2c2e2d2f303132333435363738393a3b3c3d3e3f00404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5e5d5f606162636465666768696a6b6c6e6d6f707172737475767778797a7b7c7d7e7f00`
 
 ```text
@@ -1766,12 +1766,12 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
     // Codec ID
     0x00, 0x00,
     // unsigned transaction:
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04,
     0xff, 0xff, 0xff, 0xff, 0xee, 0xee, 0xee, 0xee,
     0xdd, 0xdd, 0xdd, 0xdd, 0xcc, 0xcc, 0xcc, 0xcc,
-    0xbb, 0xbb, 0xbb, 0xbb, 0xaa, 0xaa, 0xaa, 0xaa, 
+    0xbb, 0xbb, 0xbb, 0xbb, 0xaa, 0xaa, 0xaa, 0xaa,
     0x99, 0x99, 0x99, 0x99, 0x88, 0x88, 0x88, 0x88,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03,
     0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
     0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
@@ -1779,7 +1779,7 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x39,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
     0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
-    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78, 
+    0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
     0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
     0x6d, 0x55, 0xa9, 0x55, 0xc3, 0x34, 0x41, 0x28,
     0xe0, 0x60, 0x12, 0x8e, 0xde, 0x35, 0x23, 0xa2,
@@ -1822,19 +1822,19 @@ Let’s make a signed transaction that uses the unsigned transaction and credent
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXOは、トランザクションの出力についての独立した表現です。
 
-### What UTXO Contains
+### UTXOの内容
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+UTXOには`CodecID`、`TxID`、`UTXOIndex`、`AssetID`、`Output`が含まれています。
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`**唯一有効な`CodecID`は`00 00`です
+* **`TxID`**は、32バイトのトランザクションIDです。トランザクションIDは、署名済みのトランザクションのバイトのsha256を取得することによって計算されます。
+* **`UTXOIndex`**は、**`TxID`**で指定されたトランザクションの中で、このUTXOがどの出力で作成されたかを指定する整数です。
+* **`AssetID`**は、このUTXOがどの資産を参照するかを定義する32バイトの配列です。
+* **`Output`**は、このUTXOを作成した[出力](avm-transaction-serialization.md#transferable-output)オブジェクトです。出力のシリアル化は上記で定義されています。
 
-### Gantt UTXO Specification
+### GanttのUTXOの仕様
 
 ```text
 +--------------+----------+-------------------------+
@@ -1852,7 +1852,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### ProtoのUTXOの仕様
 
 ```text
 message Utxo {
@@ -1864,15 +1864,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXOの例
 
-Let’s make a UTXO from the signed transaction created above:
+上記で作成した署名済みのトランザクションからUTXOを作ってみましょう。
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
-* **`UTXOIndex`**: 0 = 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example SECP256K1 Transferable Output as defined above"`
+* **`CodecID`**：`0`
+* **`TxID`**：`0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`UTXOIndex`**：`0`=`0x00000000`
+* **`AssetID`**：`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**：`"Example SECP256K1 Transferable Output as defined above"`
 
 ```text
 [
@@ -1908,6 +1908,149 @@ Let’s make a UTXO from the signed transaction created above:
     0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b,
     0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
     0x24, 0x25, 0x26, 0x27,
+]
+```
+
+## GenesisAsset
+
+AVMのジェネシスのインスタンスで発行される資産です
+
+### GenesisAssetの内容
+
+GenesisAssetのインスタンスには、`Alias`、`NetworkID`、`BlockchainID`、`Outputs`、`Inputs`、`Memo`、`Name`、`Symbol`、`Denomination`、`InitialStates`が含まれています。
+
+* **`Alias`**は、この資産のエイリアスです。
+* **`NetworkID`**は、このトランザクションがどのネットワークに発行されるかを定義します。この値は、トランザクションのルーティングをサポートするためのもので、反射攻撃の防止を目的としたものではありません。
+* **`BlockchainID`**は、このトランザクションがどのブロックチェーンに発行されるかを定義するID（32バイトの配列）です。これは、ネットワークやブロックチェーン間で潜在的に有効なトランザクションに対する反射攻撃防止のために使用されます。
+* **`Outputs`**は、[転送可能な出力オブジェクト](avm-transaction-serialization.md#transferable-output)の配列です。出力は、シリアル化された表現により、辞書的にソートされなければなりません。これらの出力で作成された資産の総量は、入力で消費された各資産の総量からトランザクション手数料を差し引いた値以下でなければなりません。
+* **`Inputs`**は、[転送可能な入力オブジェクト](avm-transaction-serialization.md#transferable-input)の配列です。入力は、ソートされた一意である必要があります。入力はまず**`TxID`**で辞書的にソートされ、次に****`UTXOIndex`で低いものから高いものへとソートされます。**`TxID`**と**`UTXOIndex`**が同じ入力がある場合、二重支払いになるため、そのトランザクションは無効です。
+* **`Memo`**は、最大256バイトまでの任意のバイトを含むメモフィールドです。
+* **`Name`**は、このトランザクションで作成される資産の名前を定義する人間が読める文字列です。この名前は一意であることは保証されません。名前は印刷可能なASCII文字のみで構成され、128文字以下でなければなりません。
+* **`Symbol`**は、このトランザクションで作成される資産のシンボルを定義する人間が読める文字列です。シンボルは一意であることが保証されません。シンボルは印刷可能なASCII文字のみで構成され、4文字以内でなければなりません。
+* **`Denomination`**は、このトランザクションで作成される資産の分割可能性を定義するバイトです。例えば、AVAXトークンは10億分の1に分割可能です。したがって、AVAXトークンのデノミネーションは9です。デノミネーションは32以下でなければなりません。
+* **`InitialStates`**は、この資産がサポートする機能拡張と、その機能拡張の[初期状態](avm-transaction-serialization.md#initial-state)を定義する可変長の配列です。
+
+### GanttのGenesisAssetの仕様
+
+```text
++----------------+----------------------+--------------------------------+
+| alias          : string               |           2 + len(alias) bytes |
++----------------+----------------------+--------------------------------+
+| network_id     : int                  |                        4 bytes |
++----------------+----------------------+--------------------------------+
+| blockchain_id  : [32]byte             |                       32 bytes |
++----------------+----------------------+--------------------------------+
+| outputs        : []TransferableOutput |        4 + size(outputs) bytes |
++----------------+----------------------+--------------------------------+
+| inputs         : []TransferableInput  |         4 + size(inputs) bytes |
++----------------+----------------------+--------------------------------+
+| memo           : [256]byte            |           4 + size(memo) bytes |
++----------------+----------------------+--------------------------------+
+| name           : string               |            2 + len(name) bytes |
++----------------+----------------------+--------------------------------+
+| symbol         : string               |          2 + len(symbol) bytes |
++----------------+----------------------+--------------------------------+
+| denomination   : byte                 |                        1 bytes |
++----------------+----------------------+--------------------------------+
+| initial_states : []InitialState       | 4 + size(initial_states) bytes |
++----------------+----------------------+--------------------------------+
+|           59 + size(alias) + size(outputs) + size(inputs) + size(memo) |
+|                 + len(name) + len(symbol) + size(initial_states) bytes |
++------------------------------------------------------------------------+
+```
+
+### ProtoのGenesisAssetの仕様
+
+```text
+message GenesisAsset {
+    string alias = 1;                          // 2 bytes + len(alias)
+    uint32 network_id = 2;                     // 04 bytes
+    bytes blockchain_id = 3;                   // 32 bytes
+    repeated Output outputs = 4;               // 04 bytes + size(outputs)
+    repeated Input inputs = 5;                 // 04 bytes + size(inputs)
+    bytes memo = 6;                            // 04 bytes + size(memo)
+    string name = 7;                           // 2 bytes + len(name)
+    name symbol = 8;                           // 2 bytes + len(symbol)
+    uint8 denomination = 9;                    // 1 bytes
+    repeated InitialState initial_states = 10; // 4 bytes + size(initial_states)
+}
+```
+
+### GenesisAssetの例
+
+以下のGenesisAssetを作りましょう。
+
+* **`Alias`**：`asset1`
+* **`NetworkID`**：`12345`
+* **`BlockchainID`**：`0x0000000000000000000000000000000000000000000000000000000000000000`
+* **`Outputs`**：[]
+* **`Inputs`**：[]
+* **`Memo`**：`2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X`
+* **`Name`**：`asset1`
+* **`Symbol`**：`MFCA`
+* **`Denomination`**：`1`
+* **`InitialStates`**：
+* `"Example Initial State as defined above"`
+
+```text
+[
+    Alias         <- 0x617373657431
+    NetworkID     <- 0x00003039
+    BlockchainID  <- 0x0000000000000000000000000000000000000000000000000000000000000000
+    Outputs       <- []
+    Inputs        <- []
+    Memo          <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    Name          <- 0x617373657431
+    Symbol        <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    Denomination  <- 0x66x726f6d20736e6f77666c616b6520746f206176616c616e636865
+    InitialStates <- [
+        0x0000000000000001000000070000000000003039000000000000d431000000010000000251025c61fbcfc078f69334f834be6dd26d55a955c3344128e060128ede3523a24a461c8943ab0859
+    ]
+]
+=
+[
+    // asset alias len:
+    0x00, 0x06,
+    // asset alias:
+    0x61, 0x73, 0x73, 0x65, 0x74, 0x31,
+    // network_id:
+    0x00, 0x00, 0x30, 0x39,
+    // blockchain_id:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    // output_len:
+    0x00, 0x00, 0x00, 0x00,
+    // input_len:
+    0x00, 0x00, 0x00, 0x00,
+    // memo_len:
+    0x00, 0x00, 0x00, 0x1b,
+    // memo:
+    0x66, 0x72, 0x6f, 0x6d, 0x20, 0x73, 0x6e, 0x6f, 0x77, 0x66, 0x6c, 0x61,
+    0x6b, 0x65, 0x20, 0x74, 0x6f, 0x20, 0x61, 0x76, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x68, 0x65,
+    // asset_name_len:
+    0x00, 0x0f,
+    // asset_name:
+    0x6d, 0x79, 0x46, 0x69, 0x78, 0x65, 0x64, 0x43, 0x61, 0x70, 0x41, 0x73, 0x73, 0x65, 0x74,
+    // symbol_len:
+    0x00, 0x04,
+    // symbol:
+    0x4d, 0x46, 0x43, 0x41,
+    // denomination:
+    0x07,
+    // number of InitialStates:
+    0x00, 0x00, 0x00, 0x01,
+    // InitialStates[0]:
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x39, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xd4, 0x31, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x00, 0x02, 0x51, 0x02, 0x5c, 0x61,
+    0xfb, 0xcf, 0xc0, 0x78, 0xf6, 0x93, 0x34, 0xf8,
+    0x34, 0xbe, 0x6d, 0xd2, 0x6d, 0x55, 0xa9, 0x55,
+    0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+    0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+    0x43, 0xab, 0x08, 0x59,
 ]
 ```
 
