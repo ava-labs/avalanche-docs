@@ -1,11 +1,11 @@
-# Smart Digital Assets
+# スマートなデジタル資産
 
-| Title | Description |
+| タイトル | 説明 |
 | :--- | :--- |
-| [**Create a Fixed-Cap Asset**](create-a-fix-cap-asset.md) | Create and trade a fixed-cap, fungible asset on Avalanche. |
-| [**Create a Variable-Cap Asset**](creating-a-variable-cap-asset.md) | Create and trade a variable-cap, fungible asset on Avalanche. |
-| [**Create an NFT \(Part 1\)**](creating-a-nft-part-1.md) | Create and send NFTs using AvalancheGo's API. |
-| [**Create an ERC-20 token on Avalanche C-Chain**](create-erc-20-token-on-avalanche-c-chain.md) | Create an Ethereum ERC-20 token on Avalanche. |
-| [**Mint NFTs with the Avalanche Wallet**](wallet-nft-studio.md) | Easily mint NFTs using NFT Studio within the Avalanche Wallet. |
-| [**Use Wrapped AVAX \(WAVAX\) on Avalanche**](how-to-use-wavax-on-avalanche.md) | How to use Wrapped AVAX \(WAVAX\) on Avalanche. |
+| [**Avalanche  C-Chain上でERC-20トークンを作成する**](create-erc-20-token-on-avalanche-c-chain.md) | Avalanche上でEthereumのERC-20トークンを作成します。 |
+| [**固定キャップ資産を作成する**](create-a-fix-cap-asset.md) | Avalanche上で固定キャップの代替性資産を作成、取引します。 |
+| [**可変キャップ資産を作成する**](creating-a-variable-cap-asset.md) | Avalanche上で可変キャップの代替性資産を作成し、取引します。 |
+| [**NFTを作成する（パート1）**](creating-a-nft-part-1.md) | AvalancheGoのAPIを使用してNFTを作成、送信します。 |
+| [**AvalancheウォレットでNFTをミントする**](wallet-nft-studio.md) | Avalancheウォレット内のNFT Studioを使用して簡単にNFTをミントします。 |
+| [**Avalanche上でラップされたAVAX（WAVAX）を使用する**](how-to-use-wavax-on-avalanche.md) | Avalanche上でのWavax（WAVAX）の使用方法。 |
 
