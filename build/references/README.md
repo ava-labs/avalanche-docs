@@ -1,2 +1,2 @@
-# References
+# 参考資料
 
