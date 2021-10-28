@@ -19,9 +19,10 @@
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 45,
+  "id": 54,
   "links": [
     {
       "icon": "external link",
@@ -31,6 +32,7 @@
       "type": "dashboards"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -1204,92 +1206,6 @@
     },
     {
       "datasource": null,
-      "description": "Number of messages that are currently being handled and haven't yet returned their bytes to the inbound message throttler.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 26
-      },
-      "id": 20,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "last"
-          ],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "avalanche_network_byte_throttler_inbound_awaiting_release",
-          "interval": "",
-          "legendFormat": "Messages Awaiting Release",
-          "refId": "A"
-        }
-      ],
-      "title": "Inbound Byte Throttler Awaiting Release (Messages Processing)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": null,
       "description": "Number of bytes left in the validator byte allocation of the inbound message throttler",
       "fieldConfig": {
         "defaults": {
@@ -1346,7 +1262,7 @@
       "gridPos": {
         "h": 8,
         "w": 8,
-        "x": 16,
+        "x": 8,
         "y": 26
       },
       "id": 23,
@@ -1430,8 +1346,8 @@
       "gridPos": {
         "h": 8,
         "w": 6,
-        "x": 0,
-        "y": 34
+        "x": 16,
+        "y": 26
       },
       "id": 16,
       "options": {
@@ -1513,7 +1429,7 @@
       "gridPos": {
         "h": 8,
         "w": 6,
-        "x": 6,
+        "x": 0,
         "y": 34
       },
       "id": 50,
@@ -1540,6 +1456,177 @@
         }
       ],
       "title": "Inbound Buffer Throttler Acquire Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of messages that are currently being handled and haven't yet returned their bytes to the inbound message throttler.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 6,
+        "y": 34
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_network_byte_throttler_inbound_awaiting_release",
+          "interval": "",
+          "legendFormat": "Messages Awaiting Release",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Byte Throttler Awaiting Release (Messages Processing)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "Number of messages waiting to acquire from the inbound message buffer throttler.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 14,
+        "y": 34
+      },
+      "id": 49,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avalanche_network_buffer_throttler_inbound_awaiting_acquire",
+          "interval": "",
+          "legendFormat": "Messages Awaiting",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Buffer Throttler Awaiting Acquire",
       "type": "timeseries"
     },
     {
@@ -1600,8 +1687,8 @@
       "gridPos": {
         "h": 8,
         "w": 6,
-        "x": 12,
-        "y": 34
+        "x": 0,
+        "y": 42
       },
       "id": 22,
       "options": {
@@ -1631,7 +1718,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of messages waiting to acquire from the inbound message buffer throttler.",
+      "description": "Number of messages waiting to acquire bytes from the inbound bandwidth throttler.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1684,16 +1771,17 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 18,
-        "y": 34
+        "w": 8,
+        "x": 6,
+        "y": 42
       },
-      "id": 49,
+      "id": 60,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "max"
+            "max",
+            "last"
           ],
           "displayMode": "list",
           "placement": "bottom"
@@ -1705,13 +1793,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avalanche_network_buffer_throttler_inbound_awaiting_acquire",
+          "expr": "avalanche_network_bandwidth_throttler_inbound_awaiting_acquire",
           "interval": "",
-          "legendFormat": "Messages Awaiting",
+          "legendFormat": "Messages Awaiting Acquire",
           "refId": "A"
         }
       ],
-      "title": "Inbound Buffer Throttler Awaiting Acquire",
+      "title": "Inbound Bandwidth Throttler Awaiting Acquire",
       "type": "timeseries"
     },
     {
@@ -1721,7 +1809,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 50
       },
       "id": 28,
       "panels": [],
@@ -1787,7 +1875,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 51
       },
       "id": 30,
       "options": {
@@ -1870,7 +1958,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 51
       },
       "id": 31,
       "options": {
@@ -1905,7 +1993,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 59
       },
       "id": 57,
       "panels": [],
@@ -1970,7 +2058,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 60
       },
       "id": 10,
       "options": {
@@ -2170,7 +2258,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 52
+        "y": 60
       },
       "id": 25,
       "options": {
@@ -2255,7 +2343,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 60
+        "y": 68
       },
       "id": 32,
       "options": {
@@ -2336,7 +2424,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 60
+        "y": 68
       },
       "id": 26,
       "options": {
@@ -2417,7 +2505,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 60
+        "y": 68
       },
       "id": 36,
       "options": {
@@ -2452,7 +2540,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 68
+        "y": 76
       },
       "id": 55,
       "panels": [],
@@ -2517,7 +2605,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 77
       },
       "id": 39,
       "options": {
@@ -2649,7 +2737,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 77
       },
       "id": 46,
       "options": {
@@ -2781,7 +2869,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 77
+        "y": 85
       },
       "id": 38,
       "options": {
@@ -2915,7 +3003,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": [
     "Avalanche"
@@ -2943,5 +3031,5 @@
   "timezone": "",
   "title": "Network",
   "uid": "jB1TgdZ7z",
-  "version": 3
+  "version": 75
 }
