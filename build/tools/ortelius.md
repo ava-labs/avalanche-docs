@@ -4,7 +4,7 @@ description: 'This API allows clients to interact with Ortelius, the Avalanche i
 
 # Ortelius API
 
-This API has been deprecated. See [here](deprecating-ortelius.md) on how to migrate away.
+**This API has been deprecated. See [here](deprecating-ortelius.md) on how to migrate away.**
 
 ## Ortelius API
 
