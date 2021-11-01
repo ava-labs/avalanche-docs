@@ -52,3 +52,135 @@ curl -X POST --data '{
     }
 }
 ```
+
+### admin.startCPUProfiler
+
+Starts a CPU profile writing to the specified file
+
+#### **Signature**
+
+```text
+admin.startCPUProfiler() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.startCPUProfiler",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.stopCPUProfiler
+
+Stops the CPU profile
+
+#### **Signature**
+
+```text
+admin.stopCPUProfiler() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.stopCPUProfiler",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.memoryProfile
+
+Runs a memory profile writing to the specified file.
+
+#### **Signature**
+
+```text
+admin.memoryProfile() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLogLevel",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+### admin.lockProfile
+
+Runs a mutex profile writing to the specified file.
+
+#### **Signature**
+
+```text
+admin.lockProfile() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.lockProfile",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
