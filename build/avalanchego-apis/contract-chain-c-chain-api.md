@@ -182,7 +182,7 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 ## Avalanche Specific APIs
 
-### Avalanche Specific API Endpoints
+### Endpoints
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
@@ -742,3 +742,183 @@ curl -X POST --data '{
 }
 ```
 
+## Admin API
+
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md#c-chain-config) `--coreth-admin-api-enabled:true`.
+
+### Endpoint
+
+```text
+/ext/bc/C/admin
+```
+
+### Methods
+
+#### admin.setLogLevel
+
+Sets the log level of the C-Chain.
+
+#### **Signature**
+
+```text
+admin.setLogLevel({level:string}) -> {success:bool}
+```
+
+* `level` is the log level to be set.
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLogLevel",
+    "params": {
+        "level":"info",
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+#### admin.startCPUProfiler
+
+Starts a CPU profile.
+
+#### **Signature**
+
+```text
+admin.startCPUProfiler() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.startCPUProfiler",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+#### admin.stopCPUProfiler
+
+Stops and writes a CPU profile.
+
+#### **Signature**
+
+```text
+admin.stopCPUProfiler() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.stopCPUProfiler",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+#### admin.memoryProfile
+
+Runs and writes a memory profile.
+
+#### **Signature**
+
+```text
+admin.memoryProfile() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.setLogLevel",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```
+
+#### admin.lockProfile
+
+Runs a mutex profile writing to the `coreth_performance_c` directory.
+
+#### **Signature**
+
+```text
+admin.lockProfile() -> {success:bool}
+```
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.lockProfile",
+    "params": {}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "success":true
+    }
+}
+```

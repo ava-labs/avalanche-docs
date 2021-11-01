@@ -1,6 +1,6 @@
 # Replacing Ortelius with the Index APIs
 
-This guide explains how to replace usage of [the Ortelius API](ortelius.md) with other APIs, including [AvalancheGo's Index API](../avalanchego-apis/index-api.md). **Ortelius is deprecated. You should use other APIs to get the information that you used to get from Ortelius.**
+This guide explains how to replace usage of [the Ortelius API](ortelius.md) with other APIs, including [AvalancheGo's Index API](../avalanchego-apis/index-api.md). **Ortelius is deprecated. You should use other AvalancheGo APIs to get the information that you used to get from Ortelius.**
 
 ## Index API
 AvalancheGo can be configured to run with an indexer. That is, it saves \(indexes\) every container \(a block, vertex or transaction\) it accepts on the X-Chain, P-Chain and C-Chain. To run AvalancheGo with indexing enabled, use command line flag `--index-enabled`. AvalancheGo will only index containers that are accepted when running with `--index-enabled`. For more information, see [the Index API documentation.](../avalanchego-apis/index-api.md) Please be sure to read the Index API documentation in its entirety.

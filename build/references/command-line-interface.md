@@ -307,6 +307,7 @@ The default C-Chain config is:
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
+  "coreth-performance-api-enabled": false,
   "net-api-enabled": true,
   "rpc-gas-cap": 2500000000,
   "rpc-tx-fee-cap": 100,
@@ -335,6 +336,10 @@ Enables the Snowman API. Defaults to false.
 `coreth-admin-api-enabled` \(boolean\):
 
 Enables the Admin API. Defaults to false.
+
+`coreth-performance-api-enabled` \(boolean\):
+
+Enables the Performance API. Defaults to false.
 
 `net-api-enabled` \(boolean\):
 
