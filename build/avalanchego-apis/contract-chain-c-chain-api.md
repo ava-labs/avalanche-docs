@@ -793,7 +793,7 @@ curl -X POST --data '{
 
 #### admin.startCPUProfiler
 
-Starts a CPU profile file.
+Starts a CPU profile.
 
 #### **Signature**
 
@@ -826,7 +826,7 @@ curl -X POST --data '{
 
 #### admin.stopCPUProfiler
 
-Stops and writes a CPU profile
+Stops and writes a CPU profile.
 
 #### **Signature**
 
