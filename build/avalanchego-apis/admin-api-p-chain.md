@@ -1,4 +1,4 @@
-# Admin API
+# Admin API (P-Chain)
 
 This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
 
