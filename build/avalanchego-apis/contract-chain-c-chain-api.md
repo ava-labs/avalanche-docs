@@ -182,7 +182,7 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 ## Avalanche Specific APIs
 
-### Avalanche Specific API Endpoints
+### Endpoints
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
@@ -742,25 +742,19 @@ curl -X POST --data '{
 }
 ```
 
-# Admin API
+## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md#c-chain-config) `--coreth-admin-api-enabled:true`.
 
-## Format
-
-This API uses the `json 2.0` RPC format.
-
-{% page-ref page="issuing-api-calls.md" %}
-
-## Endpoint
+### Endpoint
 
 ```text
 /ext/bc/C/admin
 ```
 
-## API Methods
+### Methods
 
-### admin.setLogLevel
+#### admin.setLogLevel
 
 Sets the log level of the C-Chain.
 
@@ -797,9 +791,9 @@ curl -X POST --data '{
 }
 ```
 
-### admin.startCPUProfiler
+#### admin.startCPUProfiler
 
-Starts a CPU profile writing to a file in the `coreth_performance_c` directory
+Starts a CPU profile file.
 
 #### **Signature**
 
@@ -830,9 +824,9 @@ curl -X POST --data '{
 }
 ```
 
-### admin.stopCPUProfiler
+#### admin.stopCPUProfiler
 
-Stops the CPU profile
+Stops and writes a CPU profile
 
 #### **Signature**
 
@@ -863,9 +857,9 @@ curl -X POST --data '{
 }
 ```
 
-### admin.memoryProfile
+#### admin.memoryProfile
 
-Runs a memory profile writing to a file in the `coreth_performance_c` directory.
+Runs and writes a memory profile.
 
 #### **Signature**
 
@@ -896,7 +890,7 @@ curl -X POST --data '{
 }
 ```
 
-### admin.lockProfile
+#### admin.lockProfile
 
 Runs a mutex profile writing to the `coreth_performance_c` directory.
 
@@ -928,4 +922,3 @@ curl -X POST --data '{
     }
 }
 ```
-
