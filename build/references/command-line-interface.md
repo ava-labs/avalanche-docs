@@ -712,6 +712,14 @@ Timeout while dialing a peer.
 
 These flags govern rate-limiting of inbound and outbound messages. For more information on rate-limiting and the flags below, see package `throttling` in AvalancheGo.
 
+`--throttler-inbound-bandwidth-refill-rate` \(uint\):
+
+Max average inbound bandwidth usage of a peer, in bytes per second. See interface `throttling.BandwidthThrottler`. Defaults to `512`.
+
+`--throttler-inbound-bandwidth-max-burst-size` \(uint\):
+
+Max inbound bandwidth a node can use at once. See interface `throttling.BandwidthThrottler`. Defaults to `2 MiB`.
+
 `--throttler-inbound-at-large-alloc-size` \(uint\):
 
 Size, in bytes, of at-large allocation in the inbound message throttler. Defaults to `6291456` \(6 MiB\).
