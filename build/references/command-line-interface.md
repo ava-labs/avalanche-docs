@@ -20,7 +20,7 @@ Example JSON config file:
 
 `--api-admin-enabled` \(boolean\):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api-p-chain.md) for more information.
+If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
 
 `--api-auth-required` \(boolean\):
 
