@@ -128,4 +128,3 @@ It bears repeating: do not give anyone your secret 24 word passphrase or your pr
 Avalanche is a young platform, but it offers many interesting and exciting opportunities to get engaged and participate in the new frontier of blockchains. Getting started can feel daunting, but we hope this document will ease your introduction and onboarding.
 
 If you have any questions, or doubts, need something to be cleared up, or just want to chat, please join us on our [Discord server](http://chat.avax.network/). We'd love to hear from you.
-
