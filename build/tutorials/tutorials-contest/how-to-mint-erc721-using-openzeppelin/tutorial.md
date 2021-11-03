@@ -196,16 +196,16 @@ Hooray! We have now minted an NFT to ourselves! 🎉
 
 You can check the NFT on the explorer. My URL is below.
 
-https://cchain.explorer.avax-test.network/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers
+https://testnet.snowtrace.io/tokens/0x10075f07b799f9ce7a585e95a2711766b1e248a2/instance/0/token-transfers
 
 ![nft-on-explorer](images/minting-erc721-23-nft-on-explorer.png)
 
 The format is as follows.
 
 *Testnet* - 
-https://cchain.explorer.avax-test.network/tokens/{contract-address}/instance/{tokenId}/token-transfers
+https://testnet.snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
 
-*Mainnet* - https://cchain.explorer.avax.network/tokens/{contract-address}/instance/{tokenId}/token-transfers
+*Mainnet* - https://snowtrace.io/tokens/{contract-address}/instance/{tokenId}/token-transfers
 
 
 ### Conclusion

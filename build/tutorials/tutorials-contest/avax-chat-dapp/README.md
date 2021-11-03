@@ -70,7 +70,7 @@ Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `C-AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **Explorer**: [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
 
 Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
@@ -815,7 +815,7 @@ Congratulations! We have successfully developed a decentralized chat application
 
 ## Transaction Failure
 
-* Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
+* Check if your account has sufficient balance at [fuji block-explorer](https://testnet.snowtrace.io/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
 ![Zero balance preview](./images/avax-chat-app-zero_balance.jpeg)
 

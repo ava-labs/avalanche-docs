@@ -33,8 +33,8 @@ Now, we need to set these boxes with correct values.
   * **Local Testnet:** `43112` 
 * **Symbol**: AVAX
 * **Explorer**:
-  * **Mainnet:** [https://cchain.explorer.avax.network](https://cchain.explorer.avax.network/) 
-  * **Fuji Testnet:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+  * **Mainnet:** [https://snowtrace.io](https://snowtrace.io/) 
+  * **Fuji Testnet:** [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
   * **Localnet:** n/a 
 
 ![Image for post](../../../.gitbook/assets/erc20-metamask.png)
@@ -115,7 +115,7 @@ After confirming all these pop-ups we have deployed our token to avalanche C-Cha
 
 ## Interact with Token
 
-We can see our transaction that deployed on avalanche C-Chain via this [c-chain explorer](https://cchain.explorer.avax-test.network/).
+We can see our transaction that deployed on avalanche C-Chain via this [c-chain explorer](https://testnet.snowtrace.io/).
 
 But firstly, let’s see our transaction hash from the remix console.
 
@@ -125,7 +125,7 @@ After deploying the contract, we should see a log in remix console. When you cli
 
 ![Image for post](https://miro.medium.com/max/1909/1*NBXgtkYv2VfBkZx1OsBm7A.png)
 
-Just paste the transaction hash to the [explorer](https://cchain.explorer.avax-test.network/) I shared above and press enter.
+Just paste the transaction hash to the [explorer](https://testnet.snowtrace.io/) I shared above and press enter.
 
 ![Image for post](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
 

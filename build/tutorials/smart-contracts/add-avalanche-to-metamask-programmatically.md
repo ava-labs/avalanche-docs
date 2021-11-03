@@ -26,7 +26,7 @@ export const AVALANCHE_MAINNET_PARAMS = {
         decimals: 18
     },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://cchain.explorer.avax.network/']
+    blockExplorerUrls: ['https://snowtrace.io/']
 }
 ```
 
@@ -42,7 +42,7 @@ export const AVALANCHE_TESTNET_PARAMS = {
         decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://cchain.explorer.avax-test.network/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/']
 }
 ```
 

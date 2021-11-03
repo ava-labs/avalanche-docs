@@ -685,7 +685,7 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 | New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
 | Chain ID | 43113 |
 | Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
 
 > If you find any difficulty in setting up the project, then feel free to clone this repository [https://github.com/rajranjan0608/dfm/tree/avalanche](https://github.com/rajranjan0608/dfm/tree/avalanche), and follow the steps in the `README.md` file of this repo in order to run the application.
 

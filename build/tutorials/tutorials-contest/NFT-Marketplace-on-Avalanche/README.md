@@ -615,7 +615,7 @@ FUJI Testnet Settings:
 - New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
 - ChainID: 43113
 - Symbol: AVAX
-- Explorer: https://cchain.explorer.avax-test.network
+- Explorer: https://testnet.snowtrace.io
 
 You may find the configurations for the Avalanche Mainnet and Local Testnet (AVASH) [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask).
 

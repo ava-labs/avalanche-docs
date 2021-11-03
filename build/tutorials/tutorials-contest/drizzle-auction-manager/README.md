@@ -591,7 +591,7 @@ In the Metamask extension, add a custom RPC by clicking at the network dropdown 
 | New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
 | Chain ID | 43113 |
 | Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
 
 
 ![](./assets/drizzle-auction-01-demo-drizzle-auction.gif)
