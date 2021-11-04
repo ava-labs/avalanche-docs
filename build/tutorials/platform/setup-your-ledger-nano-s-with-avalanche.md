@@ -1,80 +1,80 @@
-# Use a Ledger Nano S or Nano X with Avalanche
+# 将 Ledger Nano S 或 Nano X 与 Avalanche 结合使用
 
-The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
+安全保护加密货币的行业标准是硬件钱包，这是一种在您的计算机和您的私钥之间提供完全隔离的专用设备。
 
-If you want to use the Avalanche address you created earlier, you need to use the [restore from recovery phrase](https://support.ledger.com/hc/en-us/articles/360005434914) procedure using mnemonic phrase you got from the Avalanche wallet. If you're setting up a fresh address, just follow regular [set up as new device](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device) procedure.
+如果您想使用您之前创建的 Avalanche 地址，您需要使用从 Avalanche 钱包获得的助记词[从恢复阶段程序中恢复](https://support.ledger.com/hc/en-us/articles/4404382560913-Restore-from-recovery-phrase)。如果您要设置新地址，只需按照常规[设置为新设备](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-as-new-device)程序即可。
 
-The Avalanche Ledger wallet app is available via [Ledger Live](https://www.ledger.com/ledger-live).
+Avalanche Ledger 钱包应用程序可通过 [Ledger Live](https://www.ledger.com/ledger-live) 获得。
 
-## How to Set Up Avalanche on Ledger Live <a id="1c80"></a>
+## 如何在 Ledger Live <a id="1c80"></a>上设置 Avalanche
 
-First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
+首先，您需要安装 [Ledger Live](https://www.ledger.com/ledger-live)。有适用于 MacOS、Windows 和 Linux 以及 iOS 和 Android 的下载版本。
 
 {% hint style="danger" %}
-Make sure you have the latest version of the Ledger Live application before proceeding. Older versions may not show the latest device firmware and Avalanche app version. The latest Ledger Live app version at the time of writing is 2.26.1.
+在继续之前，请确保您拥有最新版本的 Ledger Live 应用程序。旧版本可能不会显示最新的设备固件和 Avalanche 应用程序版本。在撰写本文时，最新的 Ledger Live 应用程序版本是 2.26.1。
 {% endhint %}
 
-After successfully installing the app run it. Go to the "Manager" tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter "Avalanche". Confirm that the Avalanche app is v0.5.2 \(or greater\), and click the "Install" button.
+成功安装应用程序后运行。转到“管理器”选项卡，并通过按设备上的两个按钮来允许设备管理。在应用程序目录搜索栏位中，输入“Avalanche”。确认 Avalanche 应用程序是 v0.5.2（或更高版本），然后单击“安装”按钮。
 
-![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-06-live-install.png)
+![Avalanche Ledger 应用程序安装按钮](../../../.gitbook/assets/ledger-06-live-install.png)
 
-You can confirm the installation was successful by going to the "Apps installed" tab where you should see Avalanche v0.5.2.
+您可以通过转到“已安装的应用程序”选项卡来确认安装是否成功，您应能在其中看到 Avalanche v0.5.2。
 
-![Avalanche Ledger app install button](../../../.gitbook/assets/ledger-07-live-version.png)
+![Avalanche Ledger 应用程序安装按钮](../../../.gitbook/assets/ledger-07-live-version.png)
 
-## Use the Avalanche Wallet with Ledger <a id="48a3"></a>
+## 将 Avalanche 钱包与 Ledger <a id="48a3"></a>结合使用
 
-Once you have the Avalanche app installed then you’re able to interact with the [Avalanche Wallet](https://wallet.avax.network/) via the Ledger. This includes sending AVAX, tokens, NFTs, cross-chain swaps as well as staking or delegating.
+在安装 Avalanche 应用程序后，您就可以通过 Ledger 与 [Avalanche 钱包](https://wallet.avax.network/)进行交互。这包括发送 AVAX、代币、NFT、跨链互换以及质押或委托。
 
-First, to access the wallet, plug in the Ledger to your computer and enter your pin.
+首先，如果要访问钱包，请将 Ledger 插入您的计算机并输入您的 PIN。
 
-![PIN code screen](../../../.gitbook/assets/ledger-03-pin.png)
+![PIN 码画面](../../../.gitbook/assets/ledger-03-pin.png)
 
-If you have more than one app installed on the device, use left and right buttons to select Avalanche app:
+如果您在设备上安装了多个应用程序，请使用左右按钮选择 Avalanche 应用程序：
 
-![Avalanche app](../../../.gitbook/assets/ledger-04-app-start.png)
+![Avalanche 应用程序](../../../.gitbook/assets/ledger-04-app-start.png)
 
-Press both buttons to start the app. You should land on the "Avalanche" app screen where you can confirm that the app is version 0.5.2 \(or greater\).
+按两个按钮启动应用程序。您应该登录“Avalanche”应用程序画面，您可以在其中确认该应用程序的版本为 0.5.2（或更高版本）。
 
-![App version](../../../.gitbook/assets/ledger-05-app-version.png)
+![应用程序版本](../../../.gitbook/assets/ledger-05-app-version.png)
 
-After you confirm that the Avalanche app is running then on the wallet homepage click the "Access Wallet" button.
+在确认 Avalanche 应用程序正在运行后，请在钱包主页上单击“访问钱包”按钮。
 
-![Access wallet button](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
+![访问钱包按钮](https://miro.medium.com/max/2364/1*SC1uM5xFybz3lfPiKwOHUw.png)
 
-On the subsequent "How do you want to access your wallet?", click the "Ledger" button.
+在随后的“您想如何访问您的钱包？”提示中，单击“Ledger”按钮。
 
-![Ledger Access](../../../.gitbook/assets/ledger-01-wallet-access.png)
+![Ledger 访问](../../../.gitbook/assets/ledger-01-wallet-access.png)
 
-You’ll now be prompted to confirm access to the public keys on your Ledger device. Click right button through the prompts on the device and on the last screen confirm by pressing both buttons.
+现在系统会提示您确认访问 Ledger 设备上的公钥。在设备上的提示中单击右侧按钮，在最后一个画面上按下两个按钮进行确认。
 
 ![](../../../.gitbook/assets/ledger-02-confirm-access.png)
 
-You will need to do this twice, because different keys are used for different chains. If successful you will be signed into the wallet and any previous balances will be displayed.
+您将需要执行此操作两次，因为不同的密钥用于不同的链。如果成功，您将登录钱包并显示任何以前的余额。
 
-![Web Wallet Portfolio Tab](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
+![网络钱包资产组合选项卡](../../../.gitbook/assets/web-wallet-portfolio-tab.png)
 
-To transfer funds, go to the "Send" tab and paste an X-Address into the "To Address" field. Set an amount and optionally set a memo. Press "Confirm" and then the "Send Transaction" button.
+如果要进行资金转账，请转到“发送”选项卡并将 X 地址粘贴到“目标地址”字段。设置金额并可选择设置备注。按“确认”，然后按“发送交易”按钮。
 
-![Send Transaction](../../../.gitbook/assets/send-transaction.png)
+![发送交易](../../../.gitbook/assets/send-transaction.png)
 
-You’ll be prompted to confirm the action on your Ledger. Check that the hash which is displayed in the web wallet matches what is displayed on your Ledger. If everything matches then confirm by pressing both buttons on the last screen to send the transaction.
+系统会提示您确认您在 Ledger 上的操作。检查网络钱包中显示的哈希值是否与您的 Ledger.上显示的哈希值匹配。如果一切都匹配，则通过按下最后一个画面上的两个按钮进行确认，以发送交易。
 
 ![](https://miro.medium.com/max/2932/1*XI8fzBRpDr0PXcuVQPHLvQ.png)
 
-You can click the icon to refresh your balance and you should see it decrease per the amount which you just sent and the transaction fee.
+您可以单击该图标来刷新您的余额，您应该会看到余额随着您刚刚发送的金额和交易费用而减少。
 
-![Refresh wallet balance](../../../.gitbook/assets/refresh-wallet-balance.png)
+![刷新钱包余额](../../../.gitbook/assets/refresh-wallet-balance.png)
 
-In the right-hand column, you will see your latest transaction. Clicking the magnifying glass icon will open the transaction in our explorer.
+在右侧栏中，您将看到您的最新交易。单击放大镜图标将在我们的浏览器中打开交易。
 
-![Magnifying Glass](../../../.gitbook/assets/magnifying-glass.png)
+![放大镜](../../../.gitbook/assets/magnifying-glass.png)
 
-Finally, you should be able to see the transaction details in our explorer. This lists everything about the transaction, including transaction ID, status, when the transaction occurred, and all of the information regarding inputs and outputs.
+最后，您应该能够在我们的浏览器中看到交易详情。其中列出了有关交易的所有内容，包括交易 ID、状态、交易发生的时间，以及有关输入和输出的所有信息。
 
-![Transaction details](../../../.gitbook/assets/transaction-details.png)
+![交易详情](../../../.gitbook/assets/transaction-details.png)
 
-## More Tools to Come <a id="135b"></a>
+## 即将推出更多工具<a id="135b"></a>
 
-Ava Labs is building the Internet of Finance. We’re developing solutions to create a frictionless world by redefining the way people build and use finance applications. A critical part of this infrastructure is a hardware wallet so users can be totally confident that their private keys and coins are completely isolated from any potentially malicious actors. Our newly released Ledger app does just this by following industry best practices to keep users and coins safe and secure.
+Ava Labs 正在构建金融互联网。我们正在开发解决方案，通过重新定义人们构建和使用金融应用程序的方式，来创建一个畅通无阻的世界。该基础设施的一个关键部分是硬件钱包，因此用户可以充分确信他们的私钥和代币完全杜绝任何潜在的恶意行为。我们新发布的 Ledger 应用程序做到了这一点，通过遵循行业最佳实践，确保用户和代币的安全。
 
