@@ -1,29 +1,29 @@
 # Health API
 
-This API can be used for measuring node health.
+此 API 可用于测量节点的健康状况。
 
-To get an HTTP status code response that indicates the node’s health, make a `GET` request to `/ext/health`. If the node is healthy, it will return a `200` status code. If you want more in-depth information about a node’s health, use the methods below.
+要获得指示节点健康状况的 HTTP 状态代码响应，请向 `/ext/health` 发出 `GET` 请求。如果节点健康，它将返回一个 `200` 状态代码。如果您想了解有关节点健康状况的更多信息，请使用以下方法。
 
-## Format
+## 格式
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+本 API 使用 `json 2.0`RPC 格式。有关进行 JSON  RPC 调用的更多信息，请参阅[此处](issuing-api-calls.md)。
 
-## Endpoint
+## 端点
 
 ```text
 /ext/health
 ```
 
-## Methods
+## 方法
 
-### health.getLiveness
+### health.health
 
-The node runs a set of health checks every 30 seconds, including a health check for each chain. This method returns the last set of health check results.
+节点每 30 秒运行一组健康检查，包括对每条区块链的健康检查。此方法返回最后一组健康检查的结果。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
-health.getLiveness() -> {
+health.health() -> {
     checks: []{
         checkName: {
             message: JSON,
@@ -38,32 +38,32 @@ health.getLiveness() -> {
 }
 ```
 
-`healthy` is true if the node if all health checks are passing.
+ 如果所有健康检查都通过，则节点的 `healthy` 为 true。
 
-`checks` is a list of health check responses.
+`checks` 是健康检查响应的列表。
 
-* A check response may include a `message` with additional context.
-* A check response may include an `error` describing why the check failed.
-* `timestamp` is the timestamp of the last health check.
-* `duration` is the execution duration of the last health check, in nanoseconds.
-* `contiguousFailures` is the number of times in a row this check failed.
-* `timeOfFirstFailure` is the time this check first failed.
+* 检查响应可能包括带有附加上下文的 `message`。
+* 检查响应可能包括 `error` 以描述检查失败的原因。
+* `timestamp` 是最后一次健康检查的时间戳。
+* `duration` 是最后一次健康检查的执行持续时间，以纳秒为单位。
+* `contiguousFailures` 是此检查失败的连续次数。
+* `timeOfFirstFailure` 是此检查首次失败的时间。
 
-More information on these measurements can be found in the documentation for the [go-sundheit](https://github.com/AppsFlyer/go-sundheit) library.
+有关这些测量的更多信息，请参阅 [ go-sundheit](https://github.com/AppsFlyer/go-sundheit) 库的文档。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"health.getLiveness"
+    "method" :"health.health"
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health
 ```
 
-#### **Example Response**
+#### **示例响应**
 
-In this example response, the C-Chain’s health check is failing.
+在此响应示例中，C-Chain 的健康检查失败了。
 
 ```cpp
 {
