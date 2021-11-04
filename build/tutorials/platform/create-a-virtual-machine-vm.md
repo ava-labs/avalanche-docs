@@ -1,24 +1,26 @@
-# Create a Virtual Machine \(VM\)
+# 创建虚拟机 (VM)
 
-## Introduction
+## 简介
 
-One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/#virtual-machines)
+Avalanche 的核心特征之一是能够创建新的自定义区块链，这由[虚拟机 (VM)](../../../learn/platform-overview/#virtual-machines)来定义
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a timestamp server. Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
+在本教程中，我们将创建一个非常简单的虚拟机。虚拟机定义的区块链是一个[ 时间戳服务器](https://github.com/ava-labs/timestampvm)。区块链中的每个区块在创建时都包含时间戳，连同 32 字节的数据 (有效载荷)。 每个区块的时间戳是在父级时间戳之后。
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+此类服务器很有用，因为可以用于证明在创建区块时已存在一段数据。假设您拥有一份书籍手稿，并且希望将来能够证明手稿今天已存在。您可以将一个区块添加到区块链，该区块的有效载荷就是手稿的哈希。将来，您可以通过展示该区块的有效载荷中有手稿的哈希，证明手稿今天已存在（这是因为不可能找到哈希的原像）。
 
-A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
+区块链可以作为独立于 AvalancheGo 的进程运行，并可通过 gRPC 与 AvalancheGo 进行通信。这可以通过 `rpcchainvm`（一种特定虚拟机，使用 [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) 并打包另一个虚拟机实施）来实现。例如，C-Chain 以此方式运行 [Coreth](https://github.com/ava-labs/coreth) 虚拟机。
 
-Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/)
+在着手实施虚拟机之前，我们将查看虚拟机为了兼容 AvalancheGo 的共识引擎而必须实施的接口。我们将在代码片段中显示和解释所有代码。如果您希望在一个地方看到所有代码，请参阅[此储存库。](https://github.com/ava-labs/timestampvm/)
 
-## Interfaces
+_注意：每个运行/网络的区块链、子网、交易和地址的 ID 都可能不同。这意味着当您尝试时，教程中的一些输入、端点等可能不同。_
+
+## 接口
 
 ### `block.ChainVM`
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which we include below from [its declaration](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+为了就线性区块链（而非 DAG 区块链）达成共识，Avalanche使用 Snowman 共识引擎。为了兼容 Snowman，虚拟机必须实施 `block.ChainVM` 接口，我们在下面从[其声明](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go)中包含该接口。
 
-The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away.
+接口非常大，但不要担心，我们将解释每种方法并查看实施示例，而立即了解每一个细节并不重要。
 
 ```go
 package block
@@ -79,9 +81,9 @@ type ChainVM interface {
 
 ### `common.VM`
 
-`common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
+`common.VM` 是每一个 `VM` 必须实施的类型，不论是 DAG 还是线性链。
 
-```cpp
+```go
 // VM describes the interface that all consensus VMs must implement
 type VM interface {
     // Returns nil if the VM is healthy.
@@ -164,11 +166,11 @@ type VM interface {
 
 ### `snowman.Block`
 
-You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+您可能已注意到 `block.ChainVM` 界面中引用了 `snowman.Block` 类型。它描述了一个区块要成为线性（Snowman）链中的区块而必须实施的方法。
 
-Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
+我们查看该接口及其方法，我们从[此处](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)复制得来。
 
-```cpp
+```go
 // Block is a possible decision that dictates the next canonical block.
 //
 // Blocks are guaranteed to be Verified, Accepted, and Rejected in topological
@@ -182,11 +184,8 @@ Let’s look at this interface and its methods, which we copy from [here.](https
 type Block interface {
     choices.Decidable
 
-    // Parent returns the block that this block points to.
-    //
-    // If the parent block is not known, a Block should be returned with the
-    // status Unknown.
-    Parent() Block
+    // Parent returns the ID of this block's parent.
+    Parent() ids.ID
 
     // Verify that the state transition this block would make if accepted is
     // valid. If the state transition is invalid, a non-nil error should be
@@ -208,7 +207,7 @@ type Block interface {
 
 ### `choices.Decidable`
 
-This interface is the superset of every decidable object, such as transactions, blocks and vertices.
+该接口是每一个可判定对象的超级集合，例如交易、区块和顶点。
 
 ```go
 // Decidable represents element that can be decided.
@@ -244,19 +243,19 @@ type Decidable interface {
 }
 ```
 
-## Helper Libraries
+## 辅助库
 
-We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
+我们已创建虚拟机实施可以嵌入（嵌入类似于 Go 的版本继承）的某些类型，以便处理样板代码。
 
-In our example, we use both of the library types below, and we encourage you to use them too.
+在示例中，我们使用下面的两个库类型，我们鼓励您也使用。
 
 ### core.SnowmanVM
 
-This helper type is a struct that implements many of the `block.ChainVM` methods. Its implementation can be found [here](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go).
+该辅助类型是实施许多 `block.ChainVM` 方法的结构。可在[此处](https://github.com/ava-labs/avalanchego/blob/master/vms/components/core/snowman_vm.go)找到其实施。
 
-#### Methods
+#### 方法
 
-Some `block.ChainVM` methods implemented by `core.SnowmanVM` are:
+`core.SnowmanVM` 实施的某些 `block.ChainVM` 方法是：
 
 * `ParseBlock`
 * `GetBlock`
@@ -267,26 +266,26 @@ Some `block.ChainVM` methods implemented by `core.SnowmanVM` are:
 * `Bootstrapped`
 * `Initialize`
 
-If your VM implementation embeds a `core.SnowmanVM`, you need not implement any of these methods because they are already implemented by `core.SnowmanVM`. You may, if you want, override these inherited methods.
+如果您的虚拟机实施嵌入 `core.SnowmanVM`，则不需要实施任何这些方法，因为 `core.SnowmanVM` 已经实施了。您可以按自己的意愿超越这些继承的方法。
 
-#### Fields
+#### 字段
 
-This type contains several fields that you’ll want to include in your VM implementation. Among them:
+该类型含有您希望在虚拟机实施中包含的几个字段。其中包括：
 
-* `DB`: the blockchain’s database
-* `Ctx`: the blockchain’s runtime context
-* `preferred`: ID of the preferred block, which new blocks will be built on
-* `LastAcceptedID`: ID of the most recently accepted block
-* `ToEngine`: channel used to send messages to the consensus engine powering this blockchain
-* `State`: used to persist data such as blocks
+* `DB`：区块链的数据库
+* `Ctx`：区块链的运行时上下文
+* `preferred`：将构建新区块所在的首选区块的 ID
+* `LastAcceptedID`：最近已接受区块的 ID
+* `ToEngine`：用于将消息发送到驱动该区块链的共识引擎的渠道
+* `State`：用于持续存储数据，例如区块
 
 ### core.Block
 
-This helper type implements many methods of the `snowman.Block` interface.
+该辅助类型实施 `snowman.Block` 接口的多种方法。
 
-#### Methods
+#### 方法
 
-Some implemented `snowman.Block` interface methods are:
+某些实施的 `snowman.Block` 接口方法是：
 
 * `ID`
 * `Parent`
@@ -295,19 +294,19 @@ Some implemented `snowman.Block` interface methods are:
 * `Status`
 * `Height`
 
-The blocks in your VM implementation will probably override `Accept` and `Reject` so that those methods cause application-specific state changes.
+您的虚拟机实施中的区块可能会超越 `Accept` 和 `Reject`，因此这些方法会导致应用特定的状态发生改变。
 
-#### Fields
+#### 字段
 
-`core.Block` has a field `VM`, which is a reference to a `core.SnowmanVM`. This means that a `core.Block` has access to all of the fields and methods of that type.
+`core.Block` 有一个字段 `VM`，是指 `core.SnowmanVM`。这意味着 `core.Block` 可以访问该类型的所有字段和方法。
 
 ### rpcchainvm
 
-`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [`server`](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
+`rpcchainvm` 是打包 `block.ChainVM` 的特殊虚拟机，允许打包的区块链在自己的进程中运行，独立于 AvalancheGo。`rpcchainvm` 具有两个重要部分：服务器和客户端。[`server`](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_server.go) 在其自己的进程中运行基本 `block.ChainVM`，并允许通过 gRPC 调用基本虚拟机方法。[客户端](https://github.com/ava-labs/avalanchego/blob/master/vms/rpcchainvm/vm_client.go) 作为 AvalancheGo 的一部分运行，并且将对相应的服务器进行 gRPC 调用，以更新或查询区块链的状态。
 
-To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
+具体而言：假设 AvalancheGo 希望从以这种方式运行的链中检索区块。AvalancheGo 调用客户端的 `GetBlock` 方法，该方法向在单独进程中运行的服务器发出 gRPC 调用。服务器调用基础虚拟机的 `GetBlock` 方法并向客户端发送响应，然后客户端向 AvalancheGo 发送响应。
 
-As another example, let's look at the server's `BuildBlock` method:
+作为另一个示例，我们查看服务器的 `BuildBlock` 方法：
 
 ```go
 func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) (*vmproto.BuildBlockResponse, error) {
@@ -316,7 +315,7 @@ func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) 
         return nil, err
     }
     blkID := blk.ID()
-    parentID := blk.Parent().ID()
+    parentID := blk.Parent()
     return &vmproto.BuildBlockResponse{
         Id:       blkID[:],
         ParentID: parentID[:],
@@ -326,19 +325,19 @@ func (vm *VMServer) BuildBlock(_ context.Context, _ *vmproto.BuildBlockRequest) 
 }
 ```
 
-It calls `vm.vm.BuildBlock()`, where `vm.vm` is the underlying VM implementation, and returns a new block.
+它调用 `vm.vm.BuildBlock()`，其中 `vm.vm` 是基础虚拟机实施，然后返回一个新的区块。
 
-## Timestamp Server Implementation
+## 时间戳服务器实施
 
-Now we know the interface our VM must implement and the libraries we can use to build a VM.
+目前我们知道虚拟机必须实施的接口以及可以用于构建虚拟机的库。
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`.
+让我们编写虚拟机，虚拟机实施 `block.ChainVM`，其区块实施 `snowman.Block`。
 
-### Block
+### 区块
 
-First, let’s look at our block implementation.
+首先，查看我们的区块实施。
 
-The type declaration is:
+类型声明是：
 
 ```go
 // Block is a block on the chain.
@@ -352,11 +351,11 @@ type Block struct {
 }
 ```
 
-The `serialize:"true"` tag indicates that the field should be included in the byte representation of the block used when persisting the block or sending it to other nodes.
+`serialize:"true"` 标签表明，当持续存储区块或将其发送到其他节点时，该字段应包含在区块的字节表示中。
 
-#### Verify
+#### 验证
 
-This method verifies that a block is valid and saves it in the database.
+此方法验证区块是否有效并将其保存在数据库中。
 
 ```go
 // Verify returns nil iff this block is valid.
@@ -372,9 +371,14 @@ func (b *Block) Verify() error {
     }
 
     // Get [b]'s parent
-    parent, ok := b.Parent().(*Block)
-    if !ok {
+    parentID := b.Parent()
+    parentIntf, err := b.VM.GetBlock(parentID)
+    if err != nil {
         return errDatabaseGet
+    }
+    parent, ok := parentIntf.(*Block)
+    if !ok {
+        return errBlockType
     }
 
     // Ensure [b]'s timestamp is after its parent's timestamp.
@@ -400,13 +404,13 @@ func (b *Block) Verify() error {
 }
 ```
 
-That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
+这是我们用于区块实施的全部代码！我们的 `Block` 必须实施的 `snowman.Block` 的所有其他方法都是从 `*core.Block` 继承。
 
-### Virtual Machine
+### 虚拟机
 
-Now, let’s look at our timestamp VM implementation, which implements the `block.ChainVM` interface.
+现在，查看我们的时间戳虚拟机实施，其实施了 `block.ChainVM` 接口。
 
-The declaration is:
+声明是：
 
 ```go
 // This Virtual Machine defines a blockchain that acts as a timestamp server
@@ -428,9 +432,9 @@ type VM struct {
 }
 ```
 
-#### Initialize
+#### 初始化
 
-This method is called when a new instance of VM is initialized. Genesis block is created under this method.
+当虚拟机的新实例初始化时，调用此方法。创世区块是根据本方法创建。
 
 ```go
 // Initialize this vm
@@ -513,7 +517,7 @@ func (vm *VM) Initialize(
 
 #### proposeBlock
 
-This method adds a piece of data to the mempool and notifies the consensus layer of the blockchain that a new block is ready to be built and voted on. This is called by API method `ProposeBlock`, which we’ll see later.
+此方法将一条数据添加到内存池中，并通知区块链的共识层，即一个新的区块已准备好构建和投票。这是通过 API 方法 `ProposeBlock` 来调用，我们稍后再来讨论。
 
 ```go
 // proposeBlock appends [data] to [p.mempool].
@@ -528,7 +532,7 @@ func (vm *VM) proposeBlock(data [dataLen]byte) {
 
 #### ParseBlock
 
-Parse a block from its byte representation.
+从字节表示中解析区块。
 
 ```go
 // ParseBlock parses [bytes] to a snowman.Block
@@ -556,7 +560,7 @@ func (vm *VM) ParseBlock(bytes []byte) (snowman.Block, error) {
 
 #### CreateHandlers
 
-Registed handlers defined in `Service`. See [below](create-a-virtual-machine-vm.md#api) for more on APIs.
+注册 `Service` 中定义的处理器。查看[下文](create-a-virtual-machine-vm.md#api)了解关于 API 的更多信息。
 
 ```go
 // CreateHandlers returns a map where:
@@ -577,7 +581,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`. See [below](create-a-virtual-machine-vm.md#static-api) for more on static APIs.
+注册 `StaticService` 中定义的静态处理器。查看[下文](create-a-virtual-machine-vm.md#static-api)了解关于静态 API 的更多信息。
 
 ```go
 // CreateStaticHandlers returns a map where:
@@ -599,26 +603,26 @@ func (vm *VM) CreateStaticHandlers() (map[string]*common.HTTPHandler, error) {
 }
 ```
 
-### Static API
+### 静态 API
 
-A VM may have a static API, which allows clients to call methods that do not query or update the state of a particular blockchain, but rather apply to the VM as a whole. This is analagous to static methods in computer programming. AvalancheGo uses [Gorilla’s RPC library](https://www.gorillatoolkit.org/pkg/rpc) to implement HTTP APIs.
+虚拟机可能拥有静态 API，允许客户端调用方法，这些方法不查询或更新特定区块链的状态，但适用于整个虚拟机。这与计算机编程中的静态方法相似。AvalancheGo 使用 [Gorilla 的 RPC 库](https://www.gorillatoolkit.org/pkg/rpc)来实施 HTTP API。
 
-`StaticService` implements the static API for our VM.
+`StaticService` 为我们的虚拟机实施静态 API。
 
 ```go
 // StaticService defines the static API for the timestamp vm
 type StaticService struct{}
 ```
 
-#### Encode
+#### 编码
 
-For each API method, there is:
+对于每种 API 方法，都有：
 
-* A struct that defines the method’s arguments
-* A struct that defines the method’s return values
-* A method that implements the API method, and is parameterized on the above 2 structs
+* 一种定义方法参数的结构
+* 一种定义方法返回值的结构
+* 一种实施 API 的方法，并且在上述两种结构上实现参数化。
 
-This API method encodes a string to its byte representation using a given encoding scheme. It can be used to encode data that is then put in a block and proposed as the next block for this chain.
+此 API 方法使用给定的编码方案，将一个字符串编码成字节表示。它可用于对数据进行编码，然后将数据放入一个区块中并提议作为该链的下一个区块。
 
 ```go
 // EncodeArgs are arguments for Encode
@@ -645,9 +649,9 @@ func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *Encode
 }
 ```
 
-#### Decode
+#### 解码
 
-This API method is the inverse of `Encode`.
+此 API 方法与 `Encode` 正好相反。
 
 ```go
 // DecoderArgs are arguments for Decode
@@ -676,24 +680,24 @@ func (ss *StaticService) Decode(_ *http.Request, args *DecoderArgs, reply *Decod
 
 ### API
 
-A VM may also have a non-static HTTP API, which allows clients to query and update the blockchain's state.
+虚拟机还可以有非静态 HTTP API，允许客户端查询和更新区块链的状态。
 
-`Service`'s declaration is:
+`Service`的声明是：
 
 ```go
 // Service is the API service for this VM
 type Service struct{ vm *VM }
 ```
 
-Note that this struct has a reference to the VM, so it can query and update state.
+请注意，此结构引用虚拟机，因此可以查询和更新状态。
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain.
+此虚拟机的 API 有两种方法。一种方法允许客户端按 ID 获取区块。另一种方法允许客户端提议此区块链的下一个区块。端点中的区块链 ID 会发生变化，因为每个区块链都有唯一的 ID。有关更多信息，请参阅[与新区块链交互](create-custom-blockchain.md#interact-with-the-new-blockchain)。
 
 #### timestampvm.getBlock
 
-Get a block by its ID. If no ID is provided, get the latest block.
+按 ID 获取区块。如果没有提供 ID，则获取最新区块。
 
-**Signature**
+**签名**
 
 ```cpp
 timestampvm.getBlock({id: string}) ->
@@ -705,12 +709,12 @@ timestampvm.getBlock({id: string}) ->
     }
 ```
 
-* `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
-* `timestamp` is the Unix timestamp when this block was created
-* `parentID` is the block’s parent
+* `id` 是被检索区块的 ID。如果参数中省略，则获取最新区块
+* `data` 是区块 32 字节有效载荷的 base 58（带校验和）表示
+* `timestamp` 是创建此区块时的 Unix 时间戳
+* `parentID` 是该区块的父级
 
-**Example Call**
+**示例调用**
 
 ```bash
 curl -X POST --data '{
@@ -723,7 +727,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-**Example Response**
+**示例响应**
 
 ```javascript
 {
@@ -738,7 +742,7 @@ curl -X POST --data '{
 }
 ```
 
-**Implementation**
+**实施**
 
 ```go
 // APIBlock is the API representation of a block
@@ -794,7 +798,7 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
     // Fill out the response with the block's data
     reply.APIBlock.ID = block.ID().String()
     reply.APIBlock.Timestamp = json.Uint64(block.Timestamp)
-    reply.APIBlock.ParentID = block.ParentID().String()
+    reply.APIBlock.ParentID = block.Parent().String()
     reply.Data, err = formatting.Encode(formatting.CB58, block.Data[:])
     return err
 }
@@ -802,17 +806,17 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 
 #### timestampvm.proposeBlock
 
-Propose the next block on this blockchain.
+提议此区块链上的下一个区块。
 
-**Signature**
+**签名**
 
 ```cpp
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
-* `data` is the base 58 \(with checksum\) representation of the proposed block’s 32 byte payload.
+* `data` 是提议区块的 32 字节有效载荷的 base 58（带校验和）表示。
 
-**Example Call**
+**示例调用**
 
 ```bash
 curl -X POST --data '{
@@ -825,7 +829,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-**Example Response**
+**示例响应**
 
 ```javascript
 {
@@ -837,7 +841,7 @@ curl -X POST --data '{
 }
 ```
 
-**Implementation**
+**实施**
 
 ```go
 // ProposeBlockArgs are the arguments to ProposeValue
@@ -872,11 +876,11 @@ func (s *Service) ProposeBlock(_ *http.Request, args *ProposeBlockArgs, reply *P
 }
 ```
 
-### Plugin
+### 插件
 
-In order to make this VM compatible with `go-plugin`, we need to define a `main` package and method, which serves our VM over gRPC so that AvalancheGo can call its methods.
+为了使此虚拟机与 `go-plugin` 兼容，我们需要定义一个 `main` 软件包和方法，以便通过 gRPC 为虚拟机服务，这样 AvalancheGo 可以调用其方法。
 
-`main.go`'s contents are:
+`main.go` 的内容是：
 
 ```go
 func main() {
@@ -893,11 +897,11 @@ func main() {
 }
 ```
 
-Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
+现在 AvalancheGo 的 `rpcchainvm` 可以连接到此插件并调用其方法。
 
-#### VM Aliases
+#### 虚拟机别名
 
-It's possible to alias VMs and their API endpoints. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
+可以给虚拟机及其 API 端点指定别名。例如，我们可以通过以下命令在 `~/.avalanchego/configs/vms/aliases.json` 创建一个 JSON 文件，给 `TimestampVM` 指定别名：
 
 ```javascript
 {
@@ -908,38 +912,38 @@ It's possible to alias VMs and their API endpoints. For example, we can alias `T
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. Giving a VM an alias has other implications, as we'll see below. For more details, see [here](../../references/command-line-interface.md#vm-configs).
+现在可以在端点 `/ext/vm/timestampvm` 和 `/ext/vm/timestamp` 访问此虚拟机的静态 API。给虚拟机指定别名会产生其他影响，如下所示。如需了解更多详情，请查看[此处](../../references/command-line-interface.md#vm-configs)。
 
-#### Building the Executable
+#### 创建可执行文件
 
-This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that builds an executable of this VM \(when invoked, it runs the `main` method from above.\)
+此虚拟机有一个[构建脚本](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh)，可以构建此虚拟机的可执行文件（在调用时，它会运行上述 `main` 方法）。
 
-The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
+可执行文件的路径及其名称可以通过参数提供给构建脚本。例如：
 
 ```text
 ./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins timestampvm
 ```
 
-If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` \(`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.\)
+如果环境变量未设置，则路径默认为 `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`（`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` 是此虚拟机的 ID）。
 
-AvalancheGo searches for and registers plugins under `[buildDir]/avalanchego-latest/plugins`. See [here](../../references/command-line-interface.md#build-directory) for more information.
+AvalancheGo 在 `[buildDir]/avalanchego-latest/plugins` 下搜索和注册插件。请参阅[此处](../../references/command-line-interface.md#build-directory) 了解更多信息。
 
-Executable names must be either a full VM ID \(encoded in CB58\), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
+可执行文件的名称必须是完整的虚拟机 ID（CB58 编码），或者必须是[虚拟机别名配置](../../references/command-line-interface.md#vm-configs)定义的虚拟机别名。
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are aliases for this VM.
+本教程中，为了简化流程，我们使用虚拟机 ID 作为可执行文件的名称。但 AvalancheGo 也会接受 `timestampvm` 或 `timestamp`，因为它们是此虚拟机的别名。
 
-### Wrapping Up
+### 结语
 
-That’s it! That’s the entire implementation of a VM which defines a blockchain-based timestamp server.
+就这样！以上就是虚拟机（定义了基于区块链的时间戳服务器）的完整实施过程。
 
-In this tutorial, we learned:
+在本教程中，我们学习了：
 
-* The `block.ChainVM` interface, which all VMs that define a linear chain must implement
-* The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
-* The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
-* The `rpcchainvm` type, which allows blockchains to run in their own processes.
+* `block.ChainVM` 接口，定义了线性链的所有虚拟机都必须实施此接口
+* `snowman.Block` 接口，作为线性链一部分的所有区块都必须实施此接口
+* `core.SnowmanVM` 和 `core.Block` 库类型，可以更快捷定义虚拟机
+* `rpcchainvm` 类型，允许区块链在自己的进程中运行。
 
-Now we can create a new blockchain with this custom virtual machine.
+现在我们可以使用这个自定义虚拟机创建一个新的区块链。
 
 {% page-ref page="create-custom-blockchain.md" %}
 
