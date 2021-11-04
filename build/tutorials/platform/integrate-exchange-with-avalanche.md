@@ -1,26 +1,26 @@
-# Integrate an Exchange with Avalanche C-Chain
+# 将交易所与 Avalanche C-Chain 集成
 
-## Overview
+## 概览
 
-The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions.
+本文档的目标是简要说明如何与 EVM 兼容的 Avalanche C-Chain 相集成。对于已支持 ETH 的团队，支持 C-Chain 与启动 Avalanche 节点（该节点具有与 [go-ethhoreum](https://geth.ethereum.org/docs/rpc/server) 相同的 [API](https://eth.wiki/json-rpc/API)）以及在创建交易时填充 Avalanche 的 ChainID (43114) 一样简单。
 
-Additionally, Ava Labs maintains an implementation of the [Rosetta API](https://www.rosetta-api.org/) for the C-Chain called [avalanche-rosetta](https://github.com/ava-labs/avalanche-rosetta). You can learn more about this standardized integration path on the attached Rosetta API website.
+此外，Ava Labs 为称作 [Avalanche-rosetta](https://github.com/ava-labs/avalanche-rosetta) 的 C-Chain 实施 [Rosetta API](https://www.rosetta-api.org/)。您可以在随附的 Rosetta API 网站上了解此标准化集成路径。
 
-## Integration using EVM Endpoints
+## 使用 EVM 端点进行集成
 
-### Running an Avalanche node
+### 运行 Avalanche 节点
 
-If you want to build your node form source or include it in a docker image, reference the [AvalancheGo GitHub repository](https://github.com/ava-labs/avalanchego). To quickly get up and running, you can use the [node installation script](../nodes-and-staking/set-up-node-with-installer.md) that automates installing and updating avalanchego node as a systemd service on Linux, using prebuilt binaries.
+如果您希望从源代码构建节点或将它包含在 docker 镜像中，请参阅 [AvalancheGo GitHub 储存库](https://github.com/ava-labs/avalanchego)。为了快速启动和运行，您可以使用[节点安装脚本](../nodes-and-staking/set-up-node-with-installer.md)，该脚本使用预先构建的二进制程序，自动安装和更新作为 Linux 系统服务的 avalanchego 节点。
 
-### Configuring an Avalanche node
+### 配置 Avalanche 节点
 
-All configuration options and their default values are described [here](../../references/command-line-interface.md).
+[此处](../../references/command-line-interface.md)描述了所有配置选项及其默认值。
 
-You can supply configuration options on the command line, or use a config file, which can be easier to work with when supplying many options. You can specify the config file location with `—config-file=config.json`, where `config.json` is a JSON file whose keys and values are option names and values.
+您可以在命令行上提供配置选项，或使用配置文件（在提供多个选项时这样做更容易使用）。您可以使用 `—config-file=config.json` 指定配置文件的位置，其中 `config.json` 是一个 JSON 文件，其密钥和值为选项名称和值。
 
-Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
+单独的链（包括 C-Chain 在内）都拥有自己的配置选项，这些选项与节点级选项相分开。这些也可以在配置文件中指定。如需了解更多详情，请查看[此处](../../references/command-line-interface.md#chain-configs)。
 
-The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. An example C-Chain config file:
+C-Chain 配置文件应在 `$HOME/.avalanchego/configs/chains/C/config.json`。您还可以通过选项 `--chain-config-dir` 告诉 AvalancheGo 在其他地方查找 C-Chain 配置文件。C-Chain 配置文件示例：
 
 ```javascript
 {
@@ -37,49 +37,49 @@ The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config
 ```
 
 {% hint style="warning" %}
-If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
+如果您需要以太坊 [存档节点](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node)功能，则需要禁用 C-Chain 精简，该功能自 AvalancheGo v1.4.10 以来已默认启用。如要禁用精简，请将 `"pruning-enabled": false` 包含在 C-Chain 配置文件中。
 {% endhint %}
 
-### Interacting with the C-Chain
+### 与 C-Chain 交互
 
-Interacting with the C-Chain is identical to interacting with [go-ethereum](https://geth.ethereum.org/). You can find the reference material for C-Chain API [here](../../avalanchego-apis/contract-chain-c-chain-api.md).
+与 C-Chain 交互与 [go-ethhoreum](https://geth.ethereum.org/) 交互相同。您可以在[此处](../../avalanchego-apis/contract-chain-c-chain-api.md)查找 C-Chain API 的参考材料。
 
-Please note that `personal_` namespace is turned off by default. To turn it on, you need to pass the appropriate command line switch to your node, like in the above config example.
+请注意，`personal_` 命名空间默认关闭。如要启用，您需要将适当的命令行开关传到节点，如上文配置示例所示。
 
-## Integration using Rosetta
+## 使用 Rosetta 进行集成
 
-[Rosetta](https://www.rosetta-api.org/) is an open-source specification and set of tools that makes integrating with different blockchain networks easier by presenting the same set of APIs for every network. The Rosetta API is made up of 2 core components, the [Data API](https://www.rosetta-api.org/docs/data_api_introduction.html) and the [Construction API](https://www.rosetta-api.org/docs/construction_api_introduction.html). Together, these APIs allow for anyone to read and write to blockchains in a standard format over a standard communication protocol. The specifications for these APIs can be found in the [rosetta-specifications](https://github.com/coinbase/rosetta-specifications) repository.
+[Rosetta](https://www.rosetta-api.org/) 是一套开源规格和工具集，通过为每个网络提供相同的 API 集，让不同区块链网络的集成变得更容易。Rosetta API 由 2 个核心组件组成，即 [Data API](https://www.rosetta-api.org/docs/data_api_introduction.html) 和 [Construction API](https://www.rosetta-api.org/docs/construction_api_introduction.html)。借助这些 API，任何人都可以通过标准通信协议以标准格式读取和写入区块链。这些 API 的规格可在 [rosetta 规格](https://github.com/coinbase/rosetta-specifications)储存库中找到。
 
-You can find the Rosetta server implementation for Avalanche C-Chain [here](https://github.com/ava-labs/avalanche-rosetta), all you need to do is install and run the server with proper configuration. It comes with a Dockerfile that packages both the server and the Avalanche client. Detailed instructions can be found in the linked repository.
+您可以在[此处](https://github.com/ava-labs/avalanche-rosetta)找到 Avalanche C-Chain 的 Rosetta 服务器实施，您只需要使用适当的配置安装和运行服务器。配备了 Dockerfile，该文件打包了服务器和 Avalanche 客户端。详细的说明可在链接的储存库中找到。
 
-## Constructing transactions
+## 创建交易
 
-Avalanche C-Chain transactions are identical to standard EVM transactions with 2 exceptions:
+Avalanche C-Chain 交易与标准的 EVM 交易相同，但存在 2 个例外：
 
-* They must be signed with Avalanche’s ChainID \(43114\).
-* The gas price is fixed to 225 Gwei.
+* 交易必须用 Avalanche 的 ChainID (43114) 来签名。
+* 可以在[此处](../../../learn/platform-overview/transaction-fees.md#c-chain-fees)找到详细的动态 gas 费用。
 
-For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
+出于开发目的，Avalanche 支持以太坊的所有流行工具，因此熟悉以太坊和 Solidity 的开发人员可以感到轻松自在。我们有多个流行开发环境的教程和储存库：
 
-* [MetaMask and Remix](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
+* [MetaMask 和 Remix](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md)
 * [Truffle](../smart-contracts/using-truffle-with-the-avalanche-c-chain.md)
-* [Hardhat](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
+* [Hardhat](../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md)
 
-## Ingesting On-Chain Data
+## 获取链上数据
 
-You can use any standard way of ingesting on-chain data you use for Ethereum network.
+您可以使用任何标准方式来获取用于以太坊网络的链上数据。
 
-### Determining Finality
+### 确定最终性
 
-Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value \(i.e. block, balance, state, etc\) with the `latest` parameter. If you query above the last finalized block \(i.e. eth\_blockNumber returns 10 and you query 11\), an error will be thrown indicating that unfinalized data cannot be queried \(as of avalanchego@v1.3.2\).
+Avalanche 共识提供 1-2 秒的快速和不可逆转最终性。如需查询最最新的最终区块，使用 `latest` 参数查询任何值（即区块、余额、状态等）。如果您在最后一个完成的区块上查询（即 eth_blockNumber 返回 10，您查询 11），将出现错误，指明无法查询未最终完成的数据（从 avalanchego@v1.3.2 起）。
 
-### \(Optional\) Custom Golang SDK
+### （可选）自定义 Golang SDK
 
-If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly \(when you call `block.Hash()`\) because it doesn't take into account the added `[ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)` header field in Avalanche C-Chain blocks, which is used move AVAX between chains \(X-Chain and P-Chain\). You can read more about our multi-chain abstraction [here](../../../learn/platform-overview/) \(out of scope for a normal C-Chain integration\).
+如果您计划使用 golang 从 C-Chain 提取数据并放入您自己的系统，建议使用我们的自定义 [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient)。标准 go-ehhoreum 以太坊客户端未能正确计算区块哈希值（在您调用 `block.Hash()` 时），因为它未考虑到 Avalanche C-Chain 区块中添加的 `[ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)` 标头字段，该字段用于在链（X-Chain 和 P-Chain）之间移动 AVAX。您可以在[此处](../../../learn/platform-overview/)了解有关我们的多链提取详情（此内容超出了正常 C-Chain 集成的范围）。
 
-If you plan on reading JSON responses directly or use web3.js \(doesn't recompute hash received over the wire\) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
+如果您计划直接读取 JSON 响应或使用 web3.js（不会重新计算通过网络收到的哈希值）提取链上交易数据/日志/收据，应该不会遇到任何问题！
 
-## Support
+## 支持
 
-If you have any problems or questions, reach out either directly to our developers, or on our public [Discord](https://chat.avalabs.org/) server.
+如果您有任何问题或疑问，请直接与我们的开发人员联系，或在我们的公共 [Discord](https://chat.avalabs.org/) 服务器上与我们联系。
 
