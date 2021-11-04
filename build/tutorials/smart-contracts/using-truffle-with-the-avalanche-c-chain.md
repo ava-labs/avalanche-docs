@@ -1,24 +1,24 @@
-# Using Truffle with the Avalanche C-Chain
+# 将 Truffle 与 Avalanche C-Chain 结合使用
 
-## Introduction
+## 简介
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com) 是一个用于在 EVM 上启动去中心化应用程序 (dapp) 的工具套件。使用 Truffle，您可以编写和编译智能合约、构建工件、运行迁移并与已部署的合约进行交互。本教程说明了如何将 Truffle 与 Avalanche 的 C-Chain（EVM 的一个实例）结合使用。
 
-## Requirements
+## 要求
 
-You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to get funds to your C-Chain address.
+您完成了 [Avalanche 节点运行](../nodes-and-staking/run-avalanche-node.md)流程，熟悉了 [Avalanche 的架构](../../../learn/platform-overview/)。您还通过[在 X-Chain 和 C-Chain 之间转移 AVAX](../platform/transfer-avax-between-x-chain-and-c-chain.md)教程执行了跨链互换，将资金转至您的 C-Chain 地址。
 
-## Dependencies
+## 依赖关系
 
-* [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
-* [NodeJS](https://nodejs.org/en) v8.9.4 or later.
-* Truffle, which you can install with `npm install -g truffle`
+* [Avash](https://github.com/ava-labs/avash) 是一个用于运行本地 Avalanche 网络的工具。它类似于 Truffle 的 [Ganache](https://www.trufflesuite.com/ganache)。
+* [NodeJS](https://nodejs.org/en) v8.9.4 或更高版本。
+* Truffle，您可以用 `npm install -g truffle` 安装
 
-## Start up a local Avalanche network
+## 启动本地 Avalanche 网络
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) 允许您使用多达 15 个开箱即用的 AvalancheGo 节点来加速专用测试网络部署。Avash 支持通过 lua 脚本自动执行常规任务。这可以针对各种配置实现快速测试。第一次使用 avash 时，您需要[进行安装和构建](https://github.com/ava-labs/avash#quick-setup)。
 
-Start a local five node Avalanche network:
+启动一个五节点的本地 Avalanche 网络：
 
 ```text
 cd /path/to/avash
@@ -30,64 +30,92 @@ go build
 runscript scripts/five_node_staking.lua
 ```
 
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
+五节点 Avalanche 网络正在您的机器上运行。当您想退出 Avash 时，请运行 `exit`，但现在不要运行，也不要关闭此终端选项卡。
 
-## Create truffle directory and install dependencies
+## 创建 Truffle 目录并安装依赖项
 
-Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
+打开一个新的终端选项卡，以便我们可以创建一个 `truffle` 目录并安装更多的依赖项。
 
-First, navigate to the directory within which you intend to create your `truffle` working directory:
+首先，导航到您打算在其中创建 `truffle` 工作目录的目录：
 
 ```text
 cd /path/to/directory
 ```
 
-Create and enter a new directory named `truffle`:
+创建一个新目录并取名为 `truffle`：
 
 ```text
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
+使用 `npm` 安装 [web3](https://web3js.readthedocs.io)，这是一个我们可以通过它与 EVM 通信的库：
 
 ```text
 npm install web3 -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+我们将使用 web3 来设置 HTTP Provider，这是 web3 与 EVM 通信的方式。最后，创建一个 boilerplace truffle 项目：
 
 ```text
 truffle init
 ```
 
-## Update truffle-config.js
+Avash 中的开发（本地）网络在创建时预先对一些静态地址进行注资。我们将使用 [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) 将这些预先注资的地址用作我们的账户。
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+```text
+npm install @truffle/hdwallet-provider
+```
+
+## 更新 truffle-config.js
+
+运行 `truffle-config.js` 时创建的文件之一是 `truffle init`。将以下内容添加到 `truffle-config.js`。
 
 ```javascript
-const Web3 = require('web3');
+const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 const protocol = "http";
 const ip = "localhost";
 const port = 9650;
+const provider = new Web3.providers.HttpProvider(
+  `${protocol}://${ip}:${port}/ext/bc/C/rpc`
+);
+
+const privateKeys = [
+  "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+  "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
+  "0x15614556be13730e9e8d6eacc1603143e7b96987429df8726384c2ec4502ef6e",
+  "0x31b571bf6894a248831ff937bb49f7754509fe93bbd2517c9c73c4144c0e97dc",
+  "0x6934bef917e01692b789da754a0eae31a8536eb465e7bff752ea291dad88c675",
+  "0xe700bdbdbc279b808b1ec45f8c2370e4616d3a02c336e68d85d4668e08f53cff",
+  "0xbbc2865b76ba28016bc2255c7504d000e046ae01934b04c694592a6276988630",
+  "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
+  "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
+  "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
+];
+
 module.exports = {
   networks: {
-   development: {
-     provider: function() {
-      return new Web3.providers.HttpProvider(`${protocol}://${ip}:${port}/ext/bc/C/rpc`)
-     },
-     network_id: "*",
-     gas: 3000000,
-     gasPrice: 225000000000
-   }
-  }
+    development: {
+      provider: () => {
+        return new HDWalletProvider({
+          privateKeys: privateKeys,
+          providerOrUrl: provider,
+        });
+      },
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 225000000000,
+    },
+  },
 };
 ```
 
-Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+请注意，如果您想将 API 调用定向到不同的 AvalancheGo 节点，您可以更改 `protocol`、`ip` 和 `port`。另请注意，我们为 Avalanche C-Chain 将 `gasPrice` 和 `gas` 设置到适当的值。
 
-## Add Storage.sol
+## 添加 Storage.sol
 
-In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
+在 `contracts` 目录中添加一个名为 `Storage.sol` 的新文件，并添加以下代码块：
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -110,7 +138,7 @@ contract Storage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
     function retrieve() public view returns (uint256){
@@ -119,11 +147,11 @@ contract Storage {
 }
 ```
 
-`Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
+`Storage` 是一个 Solidity 智能合约，使我们可以通过 `store` 函数将一个数字写入区块链，然后通过 `retrieve` 函数从区块链中读取该数字。
 
-## Add new migration
+## 添加新迁移
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
+在名为 `2_deploy_contracts.js` 的 `migrations` 目录中创建一个新文件，并添加以下代码块。这会将 `Storage` 智能合约部署到区块链。
 
 ```javascript
 const Storage = artifacts.require("Storage");
@@ -133,15 +161,15 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+## 使用 Truffle 编译合约
 
-Any time you make a change to `Storage.sol` you need to run `truffle compile`.
+任何时候如果您更改 `Storage.sol`，都需要运行 `truffle compile`。
 
 ```text
 truffle compile
 ```
 
-You should see:
+您应能看到：
 
 ```text
 Compiling your contracts...
@@ -153,85 +181,92 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+## C-chain 上的账户
 
-When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
+将智能合约部署到 C-Chain 时，truffle 将默认为您的 C-Chain 客户端提供的第一个可用账户，作为迁移期间使用的 `from` 地址。我们添加了一些预定义的私钥作为我们在 `truffle-config.json` 中的账户。第一个账户和默认账户应该预先注资一些 AVAX。
 
-### Create an account
+### Truffle 账户
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
+您可以使用 truffle 控制台查看导入的账户。
 
-```text
-truffle console --network development
+要打开 Truffle 控制台：
+
+```bash
+$ truffle console --network development
 ```
 
-Then, in the console, create the account:
+注意：如果看到 `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`，则需要等到网络完成引导并准备就绪。这应该不会花太长时间。
 
-```text
-truffle(development)> let account = await web3.eth.personal.newAccount()
+Truffle 控制台内部：
+
+```bash
+truffle(development)> accounts
+[
+  '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+  '0x9632a79656af553F58738B0FB750320158495942',
+  '0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430',
+  '0x4Cf2eD3665F6bFA95cE6A11CFDb7A2EF5FC1C7E4',
+  '0x0B891dB1901D4875056896f28B6665083935C7A8',
+  '0x01F253bE2EBF0bd64649FA468bF7b95ca933BDe2',
+  '0x78A23300E04FB5d5D2820E23cc679738982e1fd5',
+  '0x3C7daE394BBf8e9EE1359ad14C1C47003bD06293',
+  '0x61e0B3CD93F36847Abbd5d40d6F00a8eC6f3cfFB',
+  '0x0Fa8EA536Be85F32724D57A37758761B86416123'
+]
 ```
 
-This returns:
+您可以通过以下方式查看余额：
 
-```text
-undefined
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0])
+'50000000000000000000000000'
+
+truffle(development)> await web3.eth.getBalance(accounts[1])
+'0'
 ```
 
-Print the account:
+请注意，`accounts[0]`（默认账户）有一些余额，而 `accounts[1]` 没有余额。
+
+### 为账户注资编写脚本
+
+有一个为 `accounts` 列表注资的方便脚本。您可以在[此处](https://github.com/ava-labs/avalanche-docs/blob/master/scripts/fund-cchain-addresses.js)找到。您也可以使用以下命令进行下载：
 
 ```text
-truffle(development)> account
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js;
 ```
 
-This prints the account:
+您可以通过以下方式运行脚本：
 
 ```text
-'0x090172CD36e9f4906Af17B2C36D662E69f162282'
+truffle exec fund-cchain-addresses.js --network development
 ```
 
-### Unlock your account:
+脚本将为上面 `accounts` 列表中的每个账户注资 1,000 个 AVAX。在成功运行脚本后，您可以通过以下方式检查余额：
 
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account)
+```bash
+truffle(development)> await web3.eth.getBalance(accounts[0]);
+'50000001000000000000000000'
+truffle(development)> await web3.eth.getBalance(accounts[1]);
+'1000000000000000000'
 ```
 
-This returns:
+### 为您的账户注资
 
-```text
-true
-```
+如果您想为自己的账户注资，请按照[在 X-Chain 和 C-Chain 之间转移 AVAX](../platform/transfer-avax-between-x-chain-and-c-chain.md)教程中的步骤进行操作。您至少需要向账户发送 `135422040` 个 nAVAX，以支付合约部署的费用。
 
-### Fund your account
+### Personal API
 
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](../platform/transfer-avax-between-x-chain-and-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+Personal API 与节点的账户交互。`web3` 有一些使用该 API 的函数，例如：`web3.eth.personal.newAccount`、`web3.eth.personal.unlockAccount` 等...但是，此 API 默认禁用。可以用 `Coreth`/`C-chain` 配置来启用。Avash 目前不支持启用此 API。所以如果您想使用这些功能，您需要用 `personal-api-enabled` 手动运行您自己的网络。请参阅[创建本地测试网络/手动](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually)和 [C-Chain 配置](https://docs.avax.network/build/references/command-line-interface#c-chain-configs)。
 
-### Scripting account creation and funding
+## 运行迁移
 
-Community member [Cinque McFarlane-Blake](https://github.com/cinquemb) has made a convenient script that automates this process. You can find it [here](https://github.com/ava-labs/avalanche-docs/tree/1b06df86bb23632b5fa7bf5bd5b10e8378061929/scripts/make_accounts.js). Download it using this command:
-
-```text
-wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/make_accounts.js;
-```
-
-**Note**: If you followed the steps at the beginning of this tutorial when setting up your `truffle-config.js`, then you will need to modify the `make_accounts.js` script to use port 9650 instead of port 9545 \(the default used by truffle\).
-
-You can run the script with:
-
-```text
-truffle exec make_accounts.js --network development
-```
-
-Script will create an account and fund its C-Chain address. You can customize the number of accounts and the amount of AVAX deposited by editing the `maxAccounts` and `amount` variables in the script.
-
-## Run Migrations
-
-Now everything is in place to run migrations and deploy the `Storage` contract:
+现在一切就绪，可以运行迁移和部署 `Storage` 合约：
 
 ```text
 truffle(development)> migrate --network development
 ```
 
-You should see:
+您应能看到：
 
 ```text
 Compiling your contracts...
@@ -285,13 +320,13 @@ Summary
 > Final cost:          0.13542204 ETH
 ```
 
-If you didn't create an account on the C-Chain you'll see this error:
+如果您没有在 C-Chain 上创建账户，您将看到以下错误：
 
 ```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
-If you didn't fund the account, you'll see this error:
+如果您没有为该账户注资，您将看到以下错误：
 
 ```text
 Error:  *** Deployment Failed ***
@@ -304,51 +339,31 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-If you didn't unlock the account, you'll see this error:
+## 与您的合约交互
 
-```text
-Error:  *** Deployment Failed ***
+现在 `Storage` 合约已经部署完毕。让我们向区块链写入一个数字，然后将其读回。再次打开 truffle 控制台：
 
-"Migrations" -- Returned error: authentication needed: password or unlock.
-```
-
-## Interacting with your contract
-
-Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
-
-Get an instance of the deployed `Storage` contract:
+获取已部署 `Storage` 合约的实例：
 
 ```javascript
 truffle(development)> let instance = await Storage.deployed()
 ```
 
-This returns:
+这将返回：
 
 ```text
 undefined
 ```
 
-### Writing a number to the blockchain
+### 将数字写入区块链
 
-Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
+现在您有了 `Storage` 合约的实例，调用它的 `store` 方法并传入一个数字来写入区块链。
 
 ```javascript
 truffle(development)> instance.store(1234)
 ```
 
-If you see this error:
-
-```text
-Error: Returned error: authentication needed: password or unlock
-```
-
-Then run this again:
-
-```text
-truffle(development)> await web3.eth.personal.unlockAccount(account[0])
-```
-
-You should see something like:
+您会看到以下显示：
 
 ```javascript
 {
@@ -372,33 +387,33 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+### 从区块链中读取一个数字
 
-To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
+要从区块链中读取数字，请调用 `Storage`合约实例的 `retrieve` 方法。
 
 ```javascript
 truffle(development)> let i = await instance.retrieve()
 ```
 
-This should return:
+返回：
 
 ```javascript
 undefined
 ```
 
-The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumber` method to see the value:
+调用 `retrieve` 的结果是一个 `BN`（大数）。调用它的 `.toNumber` 方法来查看值：
 
 ```javascript
 truffle(development)> i.toNumber()
 ```
 
-You should see the number you stored.
+您应能看到您存储的数字。
 
 ```javascript
 1234
 ```
 
-## Summary
+## 摘要
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+现在您拥有启动本地 Avalanche 网络、创建 truffle 项目以及创建、编译、部署和与 Solidity 合约交互所需的工具。
 
