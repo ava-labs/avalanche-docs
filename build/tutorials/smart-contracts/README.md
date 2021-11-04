@@ -1,9 +1,10 @@
-# Smart Contracts
+# 智能合约
 
-| Title | Description |
+| 标题 | 描述 |
 | :--- | :--- |
-| [**Deploy a Smart Contract on Avalanche Using Remix and MetaMask**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | Deploy and test a smart contract on Avalanche using Remix and MetaMask. |
-| [**Using Truffle with the Avalanche C-Chain**](using-truffle-with-the-avalanche-c-chain.md) | Using Truffle with the Avalanche's C-Chain, an instance of the Ethereum Virtual Machine \(EVM\) |
-| [**Add Avalanche to MetaMask programmatically**](add-avalanche-to-metamask-programmatically.md) | Simple tutorial showing how to add Avalanche network to MetaMask from your front-end code. |
-| [**Verify Smart Contracts on the C-Chain Explorer**](verify-smart-contracts.md) | Verifying smart contracts. |
-
+| [**使用 Remix 和 MetaMask 在 Avalanche 上部署智能合约**](deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md) | 使用 Remix 和 MetaMask 在 Avalanche 上部署和测试智能合约。 |
+| [**将 Hardhat 与 Avalanche C-Chain 结合使用**](using-hardhat-with-the-avalanche-c-chain.md) | 将 Hardhat 与 Avalanche 的 C-Chain（以太坊虚拟机 (EVM) 的一个实例）结合使用 |
+| [**将 Truffle 与 Avalanche C-Chain 结合使用**](using-truffle-with-the-avalanche-c-chain.md) | 将 Truffle 与 Avalanche 的 C-Chain（以太坊虚拟机 (EVM) 的一个实例）结合使用 |
+| [**以编程方式将 Avalanche 添加到 MetaMask**](add-avalanche-to-metamask-programmatically.md) | 讲解如何从前端代码将 Avalanche 网络添加到 MetaMask 的简明教程。 |
+| [**在 C-Chain 浏览器上验证智能合约**](verify-smart-contracts.md) | 验证智能合约。 |
+| [**通过 Sourcify 和 Truffle 验证智能合约**](verify-smart-contracts-with-sourcify-truffle.md) | 通过 Sourcify 和 Truffle 验证智能合约 |
