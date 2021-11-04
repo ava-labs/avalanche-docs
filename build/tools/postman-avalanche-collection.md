@@ -1,86 +1,86 @@
-# Postman collection
+# Postman 系列
 
-## What is Postman?
+## Postman 是什么？
 
-Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs. It is available as both an online tool and an application for Linux, MacOS and Windows. Postman allows you to quickly issue API calls and see the responses in a nicely formatted, searchable form.
+Postman 是一款免费工具，供开发人员快速轻松地发送 REST、SOAP 和 GraphQL 请求，并测试 API。它既是在线工具，也是 Linux、MacOS 和 Windows 应用程序。您可以通过 Postman 快速发出 API 调用，并以整洁、可搜索的格式查看响应。
 
-We have made a Postman collection for [Avalanche](https://docs.avax.network), that includes all the public API calls that are available on [AvalancheGo instance](../release-notes/avalanchego.md), allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
+我们针对 [Avalanche](https://docs.avax.network) 开发了 Postman 系列，包括 [AvalancheGo 实例](../release-notes/avalanchego.md)中可用的全部公共 API 调用，便于您快速向节点发出命令并查看响应，无需复制粘贴冗长复杂的 `curl` 命令。
 
-Along with the API collection, there is also the example Avalanche environment for Postman, that defines common variables such as IP address of the node, your Avalanche addresses and similar common elements of the queries, so you don't have to enter them multiple times.
+除了 API 系列，还有针对 Postman 的 Avalanche 环境示例。该环境定义了常见变量，如节点的 IP 地址、您的 Avalanche 地址和查询的类似公共元素，因此无需多次输入。
 
-Combined, they will allow you to easily keep tabs on your node, check on its state and do quick queries to find out details about its operation.
+总的看来，它们让您轻松密切地关注自己的节点，查看节点状态并进行快速查询，以了解其运行情况。
 
-## Setup
+## 设置
 
-### Postman installation
+### Postman 安装
 
-Postman can be installed locally or used as a web app. We recommend installing the application, as it simplifies operation. You can download Postman from its [website](https://www.postman.com/downloads/). It is recommended that you sign up using your email address as then your workspace can be easily backed up and shared between web app and the app installed on your computer.
+Postman 可以本地安装，也可以作为 web 应用程序使用。我们建议您安装应用程序，因为可以简化操作。您可以从其[网站](https://www.postman.com/downloads/)上下载 Postman。建议您使用电子邮件地址注册账户，让您的工作区在 web 应用程序和计算机安装的应用程序之间轻松备份和共享。
 
-![Download Postman](../../.gitbook/assets/postman_01_download.png)
+![下载 Postman](../../.gitbook/assets/postman_01_download.png)
 
-After you installed the application, run it. It will prompt you to create an account or log in. Do so. Again, it is not necessary, but recommended.
+安装应用程序，然后运行。应用程序会提示您创建账户或登录账户。按提示操作。同样，不一定要这样做，但建议您这样做。
 
-### Collection import
+### 系列导入
 
-Select `New workspace` from Workspaces tab and follow the prompts to crate a new workspace. This will where the rest of the work will be done.
+在 Workspaces 选项卡中选择 `New workspace`，按照提示创建新的工作区。剩余的工作就完成了。
 
-![New workspace](../../.gitbook/assets/postman_02_workspace.png)
+![新工作区](../../.gitbook/assets/postman_02_workspace.png)
 
-We're ready to import the collection. On the header of the Worskspaces tab select `New` and switch to `Link` tab.
+我们准备导入系列了。在 Workspaces 选项卡标题上选择 `New`，然后切换到 `Link` 选项卡。
 
-![Import collection](../../.gitbook/assets/postman_03_import.png)
+![导入系列](../../.gitbook/assets/postman_03_import.png)
 
-There, in the URL input field paste the link to the collection:
+在 URL 输入字段中粘贴系列的链接：
 
 ```text
 https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Avalanche.postman_collection.json
 ```
 
-Postman will recognize the format of the file content and offer to import the file as a collection. Complete the import. Now you will have Avalanche collection in your Workspace.
+Postman 将识别文件内容的格式，然后导入文件作为一个系列。完成导入。至此，您的工作区里有了 Avalanche 系列。
 
-![Collection content](../../.gitbook/assets/postman_04_collection.png)
+![系列内容](../../.gitbook/assets/postman_04_collection.png)
 
-### Environment import
+### 环境导入
 
-Next, we have to import the environment variables. Again, the header of the Worskspaces tab select `New` and switch to `Link` tab. this time, paste the link to the environment JSON:
+接下来，我们要导入环境变量。同样，在 Workspaces 选项卡标题上选择 `New`，然后切换到 `Link` 选项卡。这次要粘贴环境 JSON 链接：
 
 ```text
 https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Example-Avalanche-Environment.postman_environment.json
 ```
 
-Postman will recognize the format of the file:
+Postman 将识别文件的格式：
 
-![Environment import](../../.gitbook/assets/postman_05_environment.png)
+![环境导入](../../.gitbook/assets/postman_05_environment.png)
 
-Import it to your workspace. Now, we will need to edit that environment to suit the actual parameters of your particular installation. These are the parameters that differ from the defaults in the imported file.
+导入到您的工作区。现在我们要编辑该环境，以适应特定安装情况的实际参数。这些参数不同于导入文件中的默认值。
 
-Click the eye icon next to the environment dropdown:
+单击环境下拉列表旁边的眼睛图标：
 
-![Environment content](../../.gitbook/assets/postman_06_variables.png)
+![环境内容](../../.gitbook/assets/postman_06_variables.png)
 
-Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node \(change both the `initial` and `current` values\). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/command-line-interface.md#http-server).
+选择 `Edit` 按钮更改默认值。至少需要更改节点的 IP 地址，这也是 `host` 变量的值。将其改成节点的 IP（同时更改 `initial` 和 `current` 值）。此外，如果您的节点并不在安装 Postman 的同一台机器上运行，请勾选相应的[命令行选项](../references/command-line-interface.md#http-server)，确保您的节点通过 API 端口接受外部的连接。﻿﻿
 
-Now we sorted everything out, and we're ready to query the node.
+至此，一切准备就绪，可以查询节点了。
 
-## Making API calls
+## 进行 API 调用
 
-Open one of the API call groups, for example `Health`. Double-click `getLiveness` call:
+打开其中一个 API 调用组，例如 `Health`。双击 `health` 调用：
 
-![API call](../../.gitbook/assets/postman_07_making_calls.png)
+![API 调用](../../.gitbook/assets/postman_07_making_calls.png)
 
-You will see that format of the call uses the `http`, `host` and `port` environment variables. Click `Send`. Request will be sent, and soon you will see the response, in the `Body` tab in the `Response`:
+您会看到，调用的格式使用了 `http`、`host` 及`port` 环境变量。单击 `Send`。将发出请求，您会很快收到响应，就在 `Response` 的 `Body` 选项卡中：
 
-![Response](../../.gitbook/assets/postman_08_response.png)
+![响应](../../.gitbook/assets/postman_08_response.png)
 
-To see the actual call and the variables that are sent to the node, switch to `Body` tab in the API call tabs. There you can quickly change the variables to see the response to different queries.
+要查看实际调用和发送到节点的变量，请切换到 API 调用选项卡中的 `Body` 选项卡。您可以在那里快速修改变量，以查看针对不同查询的响应。
 
-## Conclusion
+## 结论
 
-If you completed the tutorial, you are now able to quickly issue API calls to your node without messing with the curl commands in the terminal. This allows you to quickly see the state of your node, track changes or double-check the health or liveness of your node.
+如果学完了本教程，现在就可以快速向节点发出 API 调用，而不会弄乱终端中的 curl 命令。这样便于您快速查看节点的状态、跟踪变更，或仔细检查节点的运行状况或活性。
 
-## Contributing
+## 贡献
 
-We're hoping to continuously keep this collection up-to-date with the [Avalanche APIs](https://docs.avax.network/build/avalanchego-apis), and also add [data visualizations](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data). If you're able to help improve the Avalanche Postman Collection in any way, first create a feature branch by branching off of `master`, next make the improvements on your feature branch and lastly create a [pull request](https://github.com/ava-labs/avalanche-docs/pulls) to merge your work back in to `master`.
+我们希望通过 [Avalanche API](https://docs.avax.network/build/avalanchego-apis) 持续更新该系列，同时增加[数据可视化](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data)。如果您能够以任何方式帮助改进 Avalanche Postman 系列，首先从 `master`中创建一个功能分支，然后改进功能分支，最后创建一个[拉取请求](https://github.com/ava-labs/avalanche-docs/pulls)，将您的工作重新合并到 `master`。
 
-If you have any other questions or suggestions, come [talk to us](https://chat.avalabs.org/).
+如有任何其他问题或建议，[请与我们商谈](https://chat.avalabs.org/)。
 
