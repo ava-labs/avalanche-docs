@@ -1,92 +1,94 @@
 ---
-description: Learn the core concepts and architecture of Avalanche
+description: 学习 Avalanche 的核心概念和架构
 ---
 
-# Platform Overview
+# 平台概览
 
-Avalanche features 3 built-in blockchains: [**Exchange Chain \(X-Chain\)**](./#exchange-chain-x-chain), [**Platform Chain \(P-Chain\)**](./#platform-chain-p-chain), and [**Contract Chain \(C-Chain**\)](./#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
+Avalanche 内置 3 条区块链：[**交易链 \(X-Chain\)**](./#exchange-chain-x-chain)、[**平台链 \(P-Chain\)**](./#platform-chain-p-chain) 以及[**合约链 \(C-Chain**\)](./#contract-chain-c-chain)。所有 3 个区块链都由的[**主网](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network)[验证](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)**和保护。主网是一个特殊的[子网](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet)，所有自定义子网的所有成员也必须通过质押至少 2,000 个 AVAX 成为主网的成员。
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
+以下是有关[创建子网](../../build/tutorials/platform/create-a-subnet.md)和向子网[添加验证者](../../build/tutorials/nodes-and-staking/add-a-validator.md)的教程。
 
-![Primary network](../../.gitbook/assets/image%20%2821%29.png)
+![主网](../../.gitbook/assets/image%20%2821%29.png)
 
-## Subnets
+## 子网
 
-A **subnet**, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets.
+**子网**或子网络是一组动态的验证者，它们协同工作以就一组区块链的状态达成共识。每个区块链都确切地由一个子网验证。一个子网可以验证许多区块链。一个节点可能是许多子网的成员。
 
-A subnet manages its own membership, and it may require that its constituent validators have certain properties. This is very useful, and we explore its ramifications in more depth below:
+子网管理自己的成员资格，并且可能要求其组成验证者具有某些属性。这非常有用，我们将在下面更深入地探讨其后果：
 
-### Compliance
+### 合规
 
-Avalanche’s subnet architecture makes regulatory compliance manageable. As mentioned above, a subnet may require validators to meet a set of requirements.
+Avalanche 的子网架构使合规性易于管理。如上所述，子网可能需要验证者来满足一组要求。
 
-Some examples include:
+一些关于要求的例子包括：
 
-* Validators must be located in a given country
-* Validators must pass a KYC/AML checks
-* Validators must hold a certain license
+* 验证者必须位于给定的国家/地区
+* 验证者必须通过 KYC/AML 检查
+* 验证者必须持有特定的许可证
 
-### Support for Private Blockchains
+（很明显，上面的例子只是：例子。这些要求不适用于 Avalanche 主网）。
 
-You can create a subnet where only certain pre-defined validators may join and create a private subnet where the contents of the blockchains would be visible only to those validators. This is ideal for organizations interested in keeping their information private.
+### 支持私有区块链
 
-### Separation of Concerns
+您可以创建一个只有某些预定义验证者可以加入的子网，并创建一个私有子网，其中区块链的内容仅对这些验证者可见。这对于有意将其信息保密的组织来说是理想的选择。
 
-In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains. The subnet model allows validators to only concern themselves with blockchains that they care about. This reduces the burden on validators.
+### 关注点分离
 
-### Application-Specific Requirements
+在异构的区块链网络中，一些验证者不想验证某些区块链，因为它们根本对这些区块链不感兴趣。子网模型允许验证者只关注它们重视的区块链。这减轻了验证者的负担。
 
-Different blockchain-based applications may require validators to have certain properties. Suppose there is an application that requires large amounts of RAM or CPU power. A Subnet could require that validators meet certain [hardware requirements](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche) so that the application doesn’t suffer from low performance due to slow validators.
+### 特定于应用程序的要求
 
-## Virtual Machines
+不同的基于区块链的应用程序可能需要验证者具有某些属性。假设有一个应用程序需要占用大量的 RAM 或 CPU 性能。子网可能要求验证者满足某些[硬件要求](http://support.avalabs.org/en/articles/4064879-technical-requirements-for-running-a-validator-node-on-avalanche)，以便应用程序不会因验证者速度慢而导致性能低下。
 
-A **Virtual Machine** \(VM\) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. Every blockchain on Avalanche is an instance of a VM.
+## 虚拟机
 
-When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and the structure of the blockchain. Avalanche does this behind the scenes so you can focus on the thing you would like to build.
+**虚拟机 **\(VM\) 定义了区块链的应用层逻辑。在技术方面，它指定了区块链的状态、状态转换函数、交易以及用户可以与区块链交互的 API。Avalanche 上的每个区块链都是虚拟机的一个实例。
 
-Think of a VM as a blueprint for a blockchain; you can use the same VM to create many blockchains, each of which follows the same ruleset but is logically independent of other blockchains.
+在编写虚拟机时，您无需关注网络、共识和区块链结构等底层逻辑。Avalanche 在幕后执行此操作，因此您可以专注于您想要构建的事物。
 
-### Why Virtual Machines?
+将虚拟机视为区块链的蓝图；您可以使用相同的虚拟机创建多个区块链，每个区块链都遵循相同的规则集，但在逻辑上独立于其他区块链。
 
-At first, blockchain networks had one Virtual Machine \(VM\) with a pre-defined, static set of functionality. This rigid, monolithic design limited what blockchain-based applications one could run on such networks.
+### 为什么是虚拟机？
 
-People who wanted custom decentralized applications had to create their own, entirely new blockchain network from scratch. Doing so required a great deal of time and effort, offered limited security, and generally resulted in a bespoke, fragile blockchain that never got off the ground.
+起初，区块链网络有一个具有预定义静态功能集的虚拟机 \(VM\)。这种僵化的整体设计限制了可以在此类网络上运行的基于区块链的应用程序。
 
-Ethereum made a step toward solving this problem with smart contracts. Developers didn’t need to worry about networking and consensus, but creating decentralized applications was still hard. The Ethereum VM has low performance and imposes restrictions on smart contract developers. Solidity and the other few languages for writing Ethereum smart contracts are unfamiliar to most programmers.
+想要定制去中心化应用程序的人必须从头开始创建自己全新的区块链网络。这样做需要大量的时间和精力，提供的安全性有限，并且通常会导致定制的、脆弱的区块链从未启动。
 
-Avalanche VMs \(AVMs\) make it easy to define a blockchain-based decentralized application. Rather than new, limited languages like Solidity, developers can write VMs in Go \(other languages will be supported in the future\).
+以太坊朝着通过智能合约解决这个问题迈出了一步。开发人员无需担心网络和共识，但创建去中心化应用程序仍然很困难。以太坊虚拟机性能低下，并且对智能合约开发人员施加了限制。大多数程序员都不熟悉 Solidity 和其他几种编写以太坊智能合约的语言。
 
-### Creating Your Blockchain and Virtual Machine
+Avalanche 虚拟机 \(AVM\) 可以轻松定义基于区块链的去中心化应用程序。开发人员可以用 Go 编写虚拟机，而不是像 Solidity 这样有限制的新语言（将来会支持其他语言）。
 
-Avalanche supports the creation of new instances of the Avalanche VM.
+### 创建您的区块链和虚拟机
+
+Avalanche 支持创建 Avalanche 虚拟机的新实例。
 
 {% page-ref page="../../build/tutorials/platform/create-avm-blockchain.md" %}
 
-Avalanche also supports creating custom blockchains with virtual machines.
+Avalanche 还支持使用虚拟机创建自定义区块链。
 
 {% page-ref page="../../build/tutorials/platform/create-a-virtual-machine-vm.md" %}
 
 {% page-ref page="../../build/tutorials/platform/create-custom-blockchain.md" %}
 
-## Exchange Chain \(X-Chain\)
+## 交错链（X-链）
 
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource \(e.g., equity, bonds\) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
+**X-Chain** 被用作创建和交易数字智能资产的去中心化平台，代表现实世界的资源（例如，股票、债券），具有一套治理其行为的规则，就像是“明天才能交易”或“只能发送给美国公民”。
 
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
+在 X-Chain 上交易的一种资产是 AVAX。当您在 Avalanche 上向区块链发出交易时，您需要支付以 AVAX 计价的费用。
 
-The X-Chain is an instance of the Avalanche Virtual Machine \(AVM\). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+X-Chain 是 Avalanche 虚拟机 \(AVM\) 的实例。此 [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.md) 允许客户在 X-Chain 和 AVM 的其他实例上创建和交易资产。
 
 {% page-ref page="../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-## Platform Chain \(P-Chain\)
+## 平台链 \(P-Chain\)
 
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
+**P-Chain **是 Avalanche 上的元数据区块链，可以协调验证者，追踪活动子网，并支持创建新子网。P-Chain 实现了[雪人共识协议](../../#snowman-consensus-protocol)。
 
-The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
+[P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) 允许客户端创建子网、向子网添加验证者以及创建区块链。
 
-## Contract Chain \(C-Chain\)
+## 合约链 \(C-Chain\)
 
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
+**C-Chain **允许使用 [C-Chain 的 API](../../build/avalanchego-apis/contract-chain-c-chain-api.md) 创建智能合约。
 
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
+C-Chain 是由 [Avalanche](../../) 提供支持的以太坊虚拟机（EVM）的实例。
 
