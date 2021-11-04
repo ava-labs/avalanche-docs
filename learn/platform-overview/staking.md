@@ -1,105 +1,120 @@
 ---
-description: Learn how to stake on Avalanche by validating or delegating
+description: 了解如何通过验证或委托在 Avalanche 上进行权益质押
 ---
 
-# Staking
+# 权益质押
 
-Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
+权益质押是指锁定代币以支持网络同时获得奖励回报的过程（奖励回报可以是增加网络效用、货币补偿等）。权益质押的概念首先由 Peercoin 的 Sunny King 和 Scott Nadal [正式提出](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf)。
 
-### How does proof-of-stake work?
+## 权益证明如何运作？
 
-To resist [sybil attacks](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), a decentralized network must require that network influence is paid with a scarce resource. This makes it infeasibly expensive for an attacker to gain enough influence over the network to compromise its security. In proof-of-work systems, the scarce resource is computing power. On Avalanche, the scarce resource is the native token, [AVAX](../../#avalanche-avax-token). For a node to [validate](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) a blockchain on Avalanche, it must stake AVAX.
+为了抵抗[女巫攻击](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack)，去中心化网络必须要求以稀缺资源支付网络影响力。这使得攻击者在网络上获得足够的影响力以损害其安全性，在成本上变得昂贵而不可行。在工作量证明系统中，稀缺资源是计算能力。在 Avalanche 上，稀缺资源是原生代币 [AVAX](../../#avalanche-avax-token)。如果要让节点在 Avalanche 上[验证](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)区块链，就必须质押 AVAX。
 
-## Staking Parameters on Avalanche
+## Avalanche 上的权益质押参数
 
-When a validator is done validating the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network), it receives back the AVAX tokens it staked. It may receive a reward for helping to secure the network. A validator only receives a [validation reward](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) if it is sufficiently responsive and correct during the time it validates. Read the [Avalanche token whitepaper](https://files.avalabs.org/papers/token.pdf) to learn more about AVAX and the mechanics of staking.
+当验证者完成对[主网](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network)的验证后，它会收回其质押的 AVAX 代币。它可能会因帮助保护网络而获得奖励。验证者只有在其验证期间响应充分且正确时，才会获得[验证奖励](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards)。阅读 [Avalanche 代币白皮书](https://files.avalabs.org/papers/token.pdf)，了解有关 AVAX 和质押机制的详细信息。
 
 {% hint style="warning" %}
-Staking rewards are sent to your wallet address at the end of the staking term **as long as all of these parameters are met**.
+只要满足所有这些参数，权益质押奖励就会在益质押期限结束时**发送到您的钱包地址。**.
 {% endhint %}
 
-* The minimum amount that a validator must stake is 2,000 AVAX
-* The minimum amount that a delegator must delegate is 25 AVAX
-* The minimum amount of time one can stake funds for validation is 2 weeks
-* The maximum amount of time one can stake funds for validation is 1 year
-* The minimum amount of time one can stake funds for delegation is 2 weeks
-* The maximum amount of time one can stake funds for delegation is 1 year
-* The minimum delegation fee rate is 2%
-* The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 60%
+* 验证者必须质押的最低金额为 2,000 个 AVAX
+* 委托人必须委托的最低金额为 25 个 AVAX
+* 可以质押资金进行验证的最短时间为 2 周
+* 可以质押资金进行验证的最长时间为 1 年
+* 可以质押资金进行委托的最短时间为 2 周
+* 可以质押资金进行委托的最长时间为 1 年
+* 最低委托费率为 2%
+* 验证者的最大权重（其自身的质押 \+ 委托的质押）是 3e6 AVAX 的最低值，并且是验证者质押金额的 5 倍。例如，如果您质押 2,000 个 AVAX 成为验证者，则只能将 8,000 个 AVAX 委托给您的节点总数（并非每个委托人）
+* 验证者必须正确且在线才能获得奖励的最低时间百分比为 80%
 
-## Validators
+## 验证器
 
-**Validators** secure Avalanche, create new blocks/vertices, and process transactions. To achieve consensus, validators repeatedly sample each other. The probability that a given validator is sampled is proportional to its stake.
+**验证者可以**保护 Avalanche，创建新区块/顶点，并处理交易。为了达成共识，验证者反复相互采样。给定验证者被采样的概率与其权益质押成正比。
 
-When you add a node to the validator set, you specify:
+当您将节点添加到验证者集时，您需要指定：
 
-* Your node’s ID
-* When you want to start and stop validating
-* How many AVAX you are staking
-* The address to send any rewards to
-* Your delegation fee rate \(see below\)
+* 您节点的 ID
+* 何时开始和停止验证
+* 您质押了多少个 AVAX
+* 发送任何奖励的目标地址
+* 您的委托费率（请参阅下文）
 
 {% hint style="info" %}
-The minimum amount that a validator must stake is 2,000 AVAX.
+验证者必须质押的最低金额为 2,000 个 AVAX。
 {% endhint %}
 
-{% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
-{% endhint %}
+{% hint style="danger" %}注意，一旦您发布交易将节点添加为验证者，就无法更改参数。**您不能提前移除您的质押，或更改质押金额、节点 ID 或奖励地址。**请确保在下面的 API 调用中使用正确的数值。如果您不确定，请在 [Discord](https://chat.avax.network) 上寻求帮助，或浏览我们的[开发人员常见问题解答](http://support.avalabs.org/en/collections/2618154-developer-faq)。如果您想向您自己的验证者添加更多代币，您可以将代币委托到这个节点，但您无法增加基础验证数额（因此委托给您自己违反了您的委托上限）。{% endhint %}
 
-### Running a Validator <a id="running-a-validator"></a>
+### 运行验证者<a id="running-a-validator"></a>
 
-If you’re running a validator, it’s important that your node is well connected to ensure that you receive a reward. See [here](http://support.avalabs.org/en/articles/4594192-networking-setup).
+如果您正在运行验证者，重要的是您的节点连接良好，以确保您获得奖励。请参阅[此处](http://support.avalabs.org/en/articles/4594192-networking-setup)。
 
-When you issue the transaction to add a validator, the staked tokens and transaction fee are deducted from the addresses you control. When you are done validating, the staked funds are returned to the addresses they came from. If you earned a reward, it is sent to the address you specified when you added yourself as a validator.
+当您发出交易以添加验证者时，将从您控制的地址中扣除质押的代币和交易费用。在完成验证后，质押资金将返回到它们的来源地址。如果您获得了奖励，它会发送到您将自己添加为验证者时指定的地址。
 
-#### Allow API calls <a id="allow-api-calls"></a>
+#### 允许 API 调用<a id="allow-api-calls"></a>
 
-To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
+如果要从远程机器对您的节点进行 API 调用，请允许 API 端口上的流量（`9650`默认情况下），并使用参数运行您的节点`--http-host=`
 
-You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
+您应该通过命令行参数禁用所有不会使用的 API。您应该将您的网络配置为仅允许从受信任的机器（例如，您的个人计算机）访问 API 端口。
 
-#### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
+#### 为什么我的正常运行时间很短？<a id="why-is-my-uptime-low"></a>
 
-Every validator on Avalanche keeps track of the uptime of other validators. You can see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
+Avalanche 上的每个验证者都会追踪其他验证者的正常运行时间。您可以通过调用来查看节点拥有的连接`info.peers`，以及每个连接的正常运行时间。****这只是一个节点的观点其他节点可能会以不同的方式感知您节点的正常运行时间。仅仅因为一个节点认为您的正常运行时间很短，并不意味着您不会获得质押奖励。
 
-The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
+您的节点未连接到另一个节点的可能原因是 NAT 遍历失败，并且您没有使用启动您的节点`--public-ip=[NODE'S PUBLIC IP]`。将来，我们将添加更好的监控功能，以便更轻松地验证您的节点是否连接良好。
 
-#### Secret Management <a id="secret-management"></a>
+#### 保密管理<a id="secret-management"></a>
 
-The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
+您在验证节点方面唯一需要的机密信息是其权益质押密钥，即确定您节点 ID 的 TLS 密钥。第一次启动节点时，会创建权益质押密钥，并放入`$HOME/.avalanchego/staking/staker.key`。您应该将此文件（和 `staker.crt`）备份到安全的地方。丢失权益质押密钥可能会危及您的验证奖励，因为您的节点将拥有一个新 ID。
 
-You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in "cold" addresses whose private key is not on any computer.
+在验证节点时，您不需要拥有 AVAX 资金。事实上，最好的做法是在您的节点上**不**存放大量的资金。几乎所有的资金都应该存放在私钥不在任何计算机上的“冷”地址中。
 
-#### Monitoring <a id="monitoring"></a>
+#### 监控<a id="monitoring"></a>
 
-Follow this tutorial to learn how to monitor your node's uptime, general health, etc.
+按照本教程学习如何监控节点的正常运行时间、总体健康状况等。
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
-## Delegators
+#### 在 Fuji 中验证
 
-A delegator is a token holder, who wants to participate in staking, but chooses to trust an existing validating node through delegation.
+在 Fuji 中验证只需要 `1 AVAX`。因此，您可以轻松设置您的验证者节点，并了解有关验证的详细信息。
 
-When you delegate stake to a validator, you specify:
+## 委托人
 
-* The ID of the node you’re delegating to
-* When you want to start/stop delegating stake \(must be while the validator is validating\)
-* How many AVAX you are staking
-* The address to send any rewards to
+委托人是想参与质押的代币持有者，但选择通过委托来信任现有的验证节点。
+
+当您将权益质押委托给验证者时，您需要指定：
+
+* 您委托的目标节点的 ID
+* 当您想要开始/停止委托权益质押时（必须在验证者正在验证时）
+* 您质押了多少个 AVAX
+* 发送任何奖励的目标地址
 
 {% hint style="info" %}
-The minimum amount that a delegator must delegate is 25 AVAX.
+ 委托人必须委托的最低金额为 25 个 AVAX。
 {% endhint %}
 
 {% hint style="danger" %}
-Note that once you issue the transaction to add your stake to a delegator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq).
-{% endhint %}
+请注意，一旦您发出交易以将您的权益质押添加到委托人，就无法更改参数。**您不能提前移除您的权益，或更改权益金额、节点ID或奖励地址。**如果您不确定，请在 [Discord](https://chat.avax.network) 上寻求帮助，或浏览我们的[开发人员常见问题解答。](http://support.avalabs.org/en/collections/2618154-developer-faq){% endhint %}
 
-### Delegator rewards <a id="delegator-rewards"></a>
+### 委托人奖励<a id="delegator-rewards"></a>
 
-If the validator that you delegate tokens to is sufficiently correct and responsive, you will receive a reward when you are done delegating. Delegators are rewarded according to the same function as validators. However, the validator that you delegate to keeps a portion of your reward–specified by the validator’s delegation fee rate.
+如果您委托代币的目标验证者足够正确且响应迅速，您将在完成委托后获得奖励。委托人根据与验证者相同的功能获得奖励。但是，您委托的验证者会保留一部分奖励——由验证者的委托费率指定。
 
-When you issue the transaction to delegate tokens, the staked tokens and transaction fee are deducted from the addresses you control. When you are done delegating, the staked tokens are returned to your address. If you earned a reward, it is sent to the address you specified when you delegated tokens.
+当您发出交易以委托代币时，质押的代币和交易费用将从您控制的地址中扣除。在完成委托后，质押的代币将返回到您的地址。如果您获得了奖励，它会被发送到您委托代币时指定的地址。
+
+## 常见问题解答
+
+### 是否有一个检查验证者运行状况的工具？
+
+是的，在[此处](https://stats.avax.network/dashboard/validator-health-check)输入您的节点 ID。可以在[此处](https://github.com/ava-labs/avalanche-docs/tree/5522f4864aab0089e456bfa3876f2dc4a4c01fe9/build/tools/avalanche-stats/README.md#validator-health-check)查看有关此工具的更多信息。
+
+### 如何确定验证者是否收到质押奖励？
+
+当节点离开验证者集时，验证者投票决定离开的节点是否应该获得质押奖励。如果验证者认为节点在线而且响应时间超过了所需时间（目前为 80%），则验证者将投票支持该节点获得质押奖励。否则，验证者将投票决定该节点不应获得质押奖励。此次投票的结果按质押加权，决定节点是否获得奖励。
+
+每个验证者只投票“是”或“ 否”。例如，它们不分享其对节点正常运行时间的意见，然后计算响应的平均值。
+
+单独考虑每个验证期。也就是说，假设节点加入验证者集，然后离开。然后它再次加入并离开。节点在验证者集的第一个时期内的正常运行时间不影响它在验证者集的第二个时期是否获得质押奖励。
 
