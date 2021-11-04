@@ -1,35 +1,35 @@
 ---
-description: A deep dive into the Avalanche consensus protocol
+description: 深入了解 Avalanche 共识协议
 ---
 
-# Avalanche Consensus
+# Avalanche 共识
 
-Consensus is the task of getting a group of computers to come to an agreement on a decision. Computers can reach a consensus by following a set of steps called a consensus protocol. Avalanche is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high throughput. It is energy efficient and does not require special computer hardware. It performs well in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche consensus protocol. The whitepaper is [here.](https://www.avalabs.org/whitepapers)
+共识就是让一组计算机就某项决定达成一致意见的任务。计算机可以通过遵循一组步骤（称为共识协议）达成共识。Avalanche 是一种新的共识协议，具有可扩展性、功能强大和去中心化的特点。它具有低延迟和高吞吐量。它节能且不需要特殊的计算机硬件。它在对抗性条件下表现良好，并且能弹性应对“51% 的攻击”。本文档对 Avalanche 共识协议进行了说明。白皮书在[此处](https://www.avalabs.org/whitepapers)。
 
-## Video
+## 视频
 
-{% embed url="https://www.youtube.com/watch?v=ZUF9sIu-D\_k" caption="" %}
+{% embed url="https://www.youtube.com/watch?v=ZUF9sIu-D_k" caption="" %}
 
-## Intuition
+## 直观
 
-First, let's develop some intuition about the protocol. Imagine a room full of people trying to agree on what to get for lunch. Suppose it's a binary choice between pizza and barbecue. Some people might initially prefer pizza while others initially prefer barbecue. Ultimately, though, everyone's goal is to achieve **consensus**.
+首先，让我们对该协议建立一些直观的了解。想象在一个房间里挤满了试图就午餐吃什么达成一致的人。假设这是披萨和烧烤之间的二元选择问题。有些人最初可能更喜欢披萨，而其他人最初可能更喜欢烧烤。但最终，每个人的目标都要达成**共识**。
 
-Everyone asks a random subset of the people in the room what their lunch preference is. If more than half say pizza, the person thinks, "Ok, looks like things are leaning toward pizza. I prefer pizza now." That is, they adopt the _preference_ of the majority. Similarly, if a majority say barbecue, the person adopts barbecue as their preference.
+每个人都随机询问房间里的小部分人，他们的午餐偏好是什么。如果超过一半的人说披萨，这个人会想，“好吧，看起来大家倾向于选择披萨。我现在更喜欢披萨。”也就是说，他们采纳了多数人的_偏好_。同样，如果大多数人选烧烤，则该人采纳烧烤作为他们的偏好。
 
-Everyone repeats this process. Each round, more and more people have the same preference. This is because the more people that prefer an option, the more likely someone is to receive a majority reply and adopt that option as their preference. After enough rounds, they reach consensus and decide on one option, which everyone prefers.
+每个人都重复这个过程。每一轮，越来越多的人有相同的偏好。这是因为喜欢某个选项的人越多，就越有可能有人收到占大多数的答复，并该选项作为他们的偏好。经过足够多的回合后，他们达成共识并决定每个人都喜欢的一个选项。
 
 ## Snowball
 
-The intuition above outlines the Snowball Algorithm, which is a building block of Avalanche consensus. Let's review the Snowball algorithm.
+上面的直觉概述了 Snowball 算法，它是 Avalanche 共识的基石。让我们回顾一下 Snowball 算法。
 
-### Parameters
+### 参数
 
-* _n_: number of participants
-* _k_ \(sample size\): between 1 and _n_
-* α \(quorum size\): between 1 and _k_
-* β \(decision threshold\): &gt;= 1
+* _n_：参加人数
+* _k_（样本人数）：介于 1 和 _n_ 之间
+* α（法定人数）：介于 1 和 _k_ 之间
+* β（决策阈值）：>= 1
 
-### Algorithm
+### 算法
 
 ```text
 preference := pizza
@@ -48,135 +48,136 @@ while not decided:
     decide(preference)
 ```
 
-### Algorithm Explained
+### 算法说明
 
-Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query _k_ people \(the sample size\) and ask them what they prefer. If α or more people give the same response, that response is adopted as the new preference. α is called the _quorum size_. If the new preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If the new preference is different then the old preference, the `consecutiveSucccesses` counter to `1`. If no response gets a quorum \(an α majority of the same response\) then the `consecutiveSuccesses` counter is set to `0`.
+每个人最初都偏爱披萨或烧烤。在有人做出_决定_之前，他们会询问 _k _个人（样本人数），问他们喜欢哪个。如果 α 或更多人给出相同的回答，则将该回答采纳为新的偏好。α 被称为_法定人数_。如果新偏好与旧偏好相同，则 `consecutiveSuccesses` 计数器递增。如果新偏好与旧偏好不同，`consecutiveSucccesses` 则为 `1`。如果没有回答达到法定人数（同一回答的 α 多数），则 `consecutiveSuccesses` 计数器设置为 `0`。
 
-Everyone repeats this until they get a quorum for the same response β times in a row. If one person decides pizza, then every other person following the protocol will eventually also decide on pizza.
+每个人都重复此操作，直到他们连续 β 次达到相同回答的法定人数。如果某个人决定选披萨，那么遵循协议的所有其他人最终也会决定选披萨。
 
-Random changes in preference, caused by random sampling, cause a network preference for one choice, which begets more network preference for that choice until it becomes irreversible and then the nodes can decide.
+由随机抽样引起的偏好的随机变化，会导致网络对某个选择的偏好，这会为该选择产生更多的网络偏好，直到变得不可逆转，然后节点才能做出决定。
 
 {% hint style="info" %}
-For a great visualization, check out [this demo](https://tedyin.com/archive/snow-bft-demo/#/snow) from Ava Labs' Co-Founder Ted Yin.
+如需详细的可视化讲解，[请查看 Ava Labs 联合创始人 Ted Yin 的演示](https://tedyin.com/archive/snow-bft-demo/#/snow)。
 {% endhint %}
 
-In our example, there is a binary choice between pizza or barbecue, but Snowball can be adapted to achieve consensus on decisions with many possible choices.
+在我们的示例中，在披萨或烧烤之间有一个二元选择，但可以调整 Snowball 算法，以就具有许多可能选择的决定达成共识。
 
-The liveness and safety thresholds are parameterizable. As the quorum size, α, increases, the safety threshold increases, and the liveness threshold decreases. This means the network can tolerate more byzantine \(deliberately incorrect, malicious\) nodes and remain safe, meaning all nodes will eventually agree whether something is accepted or rejected. The liveness threshold is the number of malicious participants that can be tolerated before the protocol is unable to make progress.
+活性和安全阈值是可参数化的。随着法定人数 α 的增加，安全阈值会提高，活性阈值会降低。这意味着网络可以容忍更多拜占庭（故意不正确的，恶意的）节点并保持安全，这意味着所有节点最终都会就接受或拒绝某些内容达成共识。活性阈值是在协议无法取得进展之前可以容忍的恶意参与者的数量。
 
-These values, which are constants, are quite small on the Avalanche Network. The sample size, _k_, is `20`. So when a node asks a group of nodes their opinion, it only queries `20` nodes out of the whole network. The quorum size, α, is `14`. So if `14` or more nodes give the same response, that response is adopted as the querying node's preference. The decision threshold, β, is `20`. A node decides on choice after receiving `20` consecutive quorum \(α majority\) responses.
+这些作为常数的值在 Avalanche 网络上非常小。样本人数 _k _为 `20`。所以当一个节点向一组节点询问它们的意见时，它只询问整个网络外的 `20` 个节点。法定人数 α 为 `14`。因此，如果 `14` 或更多节点给出相同的响应，则该响应将被采纳作为查询节点的偏好。决定阈值 β 是 `20`。节点在收到 `20` 个连续法定人数（α 多数）响应后做出选择决定。
 
-Snowball is very scalable as the number of nodes on the network, _n_, increases. Regardless of the number of participants in the network, the number of consensus messages sent remains the same because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in the network.
+Snowball 算法会随着网络上节点数 _n_ 的增加而扩展。无论网络中有多少参与者，发送的共识消息数量保持不变，因为在给定的查询中，即使网络中有数千个节点，节点也只会查询 `20` 个节点。
 
-## DAGs \(**D**irected **A**cyclic **G**raphs\)
+## DAG（**D**irected **A**cyclic **G**raphs，有向无环图）
 
-Now let's introduce a data structure called a DAG or Directed Acyclic Graph. A DAG gives a **partial ordering** of decisions. For example, check out the DAG in this diagram:
+现在让我们介绍一种称为 DAG 或有向无环图的数据结构。DAG 给出了决定的**偏序**。例如，查看此图中的 DAG：
 
-![Basic DAG](../../.gitbook/assets/cons-01-Frame16.png)
+![基本 DAG](../../.gitbook/assets/cons-01-Frame16.png)
 
-**a** is before **b**. **b** is before **d**. **c** is before **e**. Transitively, we can say that **a** comes before **e**. However, since this is a partial ordering: for some elements, ordering is not defined. For example, both **b** and **c** are after **a** but there is no notion of whether **b** is before or after **c**.
+**a** 在 **b**之前。**b** 在 **d**之前。**c** 在 **e**之前。依此类推，我们可以说 **a** 出现在 **e** 之前。但是，由于这是偏序：对于某些元素，顺序没有明确。例如，**b** 和 **c** 都在 **a**之后，但没有关于**b** 是在 **c** 之前还是之后的概念。
 
-Two additional DAG related concepts are **ancestors** and **descendants**. Ancestors are any nodes in the DAG which you can draw a line up to. For example, the ancestors of **d** are **a**, **b**, and **c**. The ancestors of **e** are **a** and **c**. Descendants are the opposite of ancestors. The descendants of **a** are **b**, **c**, **d**, and **e**. The descendant of **b** is **d**.
+与 DAG 相关的两个其他概念是**祖代**和**后代**。祖代是 DAG 中可以向上连线的任何节点。例如，**d** 的祖代是 **a**、**b** 和 **c**。**e **的祖代是 **a** 和 **c**。后代是祖代的相对概念。**a** 的后代有 **b**、**c**、**d** 和 **e**。**b** 的后代是 **d**。
 
-Both Bitcoin and Ethereum, for example, have a linear chain where every block has one parent and one child. Avalanche uses a DAG to store data rather than a linear chain. Each element of the DAG may have multiple parents. The parent-child relationship in the DAG does not imply an application-level dependency.
+例如，比特币和以太坊都有一个线性链，其中每个区块都有一个父节点和一个子节点。Avalanche 使用 DAG 而非线性链来存储数据。DAG 的每个元素可能有多个父。DAG 中的父子关系并不意味着应用程序级别的依赖关系。
 
-In a consensus protocol, the name of the game is to prevent the inclusion of **conflicting transactions** into the DAG. Conflicts are application-defined. Different applications will have different notions about what it means for two transactions to conflict. For example, in a P2P payment system, transactions that consume the same UTXO \([Unspent Transaction Output](https://en.wikipedia.org/wiki/Unspent_transaction_output)\) would conflict. In Avalanche every transaction belongs to a **conflict set** which consists of conflicting transactions. Only one transaction in a conflict set can be included in the DAG. Each node **prefers** one transaction in a conflict set.
+在共识协议中，最主要的是要防止将**冲突交易**包含在 DAG 中。冲突是应用程序定义的。不同的应用程序对于两个交易发生冲突意味着什么会有不同的概念。例如，在 P2P 支付系统中，消耗相同 UTXO（[未花费的交易输出](https://en.wikipedia.org/wiki/Unspent_transaction_output)）的交易会发生冲突。在 Avalanche 中，每个交易都属于由冲突交易组成的**冲突集**。DAG 中只能包含冲突集中的一个交易。每个节点都**偏好**冲突集中的一个交易。
 
-## Working Example
+## 工作示例
 
-Suppose we have an Avalanche network running with the following parameters. The sample size, _k_, is `4`. The quorum size, α, is `3`. The number of consecutive success, β, is `4`.
+假设我们有一个使用以下参数运行的 Avalanche 网络。样本人数 _k _为 `4`。法定人数 α 为 `3`。连续成功的次数 β 为 `4`。
 
-![Working example 1](../../.gitbook/assets/cons-02-Consensus_Doc_txY.png)
+![工作示例 1](../../.gitbook/assets/cons-02-Consensus_Doc_txY.png)
 
-A node finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_ \(`4`\) validators and asks, "Do you prefer this transaction?" It gets back responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there is an α majority \(quorum\) of yes responses. Now we the node updates its DAG.
+一个节点发现了一个新的交易 **Y**。它根据上述参数查询网络。它查询 _k_\(`4`\) 个验证者并询问，“是否喜欢这个交易？”`3`它得到响应——其中三个说**是**，其中一个说**不**。法定人数 α 是肯定响应的 α 多数（法定人数）。现在，节点更新了 DAG。
 
-![Working example 2](../../.gitbook/assets/cons-03-Consensus_Doc_txY-6.png)
+![工作示例 2](../../.gitbook/assets/cons-03-Consensus_Doc_txY-6.png)
 
-If a node gets an α majority response for a transaction then you give that transaction a **chit**, which is a boolean that says, "When I queried the network about this transaction, an α majority said that they preferred it." In our example, transaction Y gets a chit.
+如果一个节点得到一个交易的 α 多数响应，那么您给该交易一个 **chit**，它是一个布尔值，表示“当我向网络查询此交易时，α 多数表示他们更喜欢它。”在我们的例子中，交易 **Y **得到了一个 chit。
 
-There is also a notion of **confidence**, which is the sum of a vertex's chit plus the sum of its descendants' chits. For example, transaction **V** has a chit. It also has three descendants which have a chit so its confidence is increased from `3` to `4`. Similarly, transactions **W** and **X** both have a chit and they both have a descendant with a chit, so they each have confidence `2`. Transaction Y has confidence `1`.
+还有一个**置信度**的概念，即顶点的 chit 加上其后代的 chit 的总和。例如，交易 **V **有一个 chit。它也有三个后代，它们都有一个 chit，所以它的置信度从`3`到`4`增加。类似地，交易 **W **和 **X** 都有一个 chit 并且它们都有一个带有 chit 的后代，所以它们都有置信度`2`。交易 **Y **有置信度`1`。
 
-**Consecutive successes** are the same as in Snowball. It's the number of times that a transaction, or a descendant of the transaction, received a successful α majority query response. Previously, transaction V had `3` consecutive successes, itself and its two children, and now it has `4` consecutive successes with transaction Y. Similarly for transactions W and X.
+**连续成功**与 Snowball 算法中的情况相同。它是交易或交易的后代收到成功的 α 多数查询响应的次数。以前，交易** V **有 `3` 次连续成功，它本身和它的两个子项，现在它的交易 **Y ** 有 `4` 次连续成功。交易 **W **和 **X **也类似于此。
 
-![Working example 3](../../.gitbook/assets/cons-04-Consensus_Doc_txY-2.png)
+![工作示例 3](../../.gitbook/assets/cons-04-Consensus_Doc_txY-2.png)
 
-In this example we the acceptance threshold, β, is `4`. Transaction V has `4` consecutive success so it's **accepted**. This node is sure that every other correct node will eventually accept this transaction.
+在这个例子中，我们的接受阈值 β 为`4`。交易 **V **有  `4` 次连续成功，因此其 **被接受**。这个节点确信其他所有正确的节点最终都会接受这个交易。
 
-![Working example 4](../../.gitbook/assets/cons-05-Consensus_Doc_txY-3.png)
+![工作示例 4](../../.gitbook/assets/cons-05-Consensus_Doc_txY-3.png)
 
-Now suppose the node learns about transaction **Y'** which conflicts with transaction Y. It follows the same steps as before and subsamples _k_ \(`4`\) validators and asks if they prefer transaction Y'. In this case, two of them say that they prefer Y' and two of them say that they do not prefer Y'. This time there is no α majority response, and the DAG is updated accordingly.
+现在假设节点了解与交易 **Y **冲突的交易 **Y'**。它遵循与之前相同的步骤并对 _k_\(`4`\) 个验证者进行子采样，并询问它们是否更喜欢交易 **Y'**。在这个例子中，它们中的两个说更喜欢 **Y'**，它们中的两个说他们不喜欢 **Y'**。这次没有 α 多数响应，DAG 会相应进行更新。
 
-![Working example 5](../../.gitbook/assets/cons-06-Consensus_Doc_txY-4.png)
+![工作示例 5](../../.gitbook/assets/cons-06-Consensus_Doc_txY-4.png)
 
-Transactions Y and Y' are in a conflict set; only one of them can ultimately get accepted. Transaction Y' doesn't get a chit because it didn't get an α majority response. It has confidence `0` because it doesn't have a chit and it doesn't have any descendants with a chit. It has `0` consecutive successes because the previous query didn't get an α majority response. W's consecutive success counter goes from `2` to `0`. Its confidence is still `2`.
+交易 **Y **和 **Y' **在冲突集中；只有其中之一可以最终被接受。交易 **Y'** 没有得到 chit，因为它没有得到 α 多数响应。它有置信度，`0`因为它没有 chit，也没有任何带有 chit 的后代。它有 `0` 次连续成功，因为前一个查询没有得到 α 多数响应。交易 **W **的连续成功计数器从  `2` 到 `0`。它的置信度仍然为 `2`。
 
-When a node is asked whether it prefers a given transaction, it replies yes if that transaction has the highest confidence of any transaction in the transaction's conflict set. In this example, transaction Y has confidence `1` and transaction Y' has confidence `0` so the node prefer transaction Y to transaction Y'.
+当一个节点被问到它是否更喜欢某个给定的交易时，如果该交易在交易冲突集中的任何交易中具有最高的置信度，它就会回答“是”。在这个例子中，交易 **Y **有置信度`1`，交易 **Y' **有置信度 `0`，所以节点更喜欢交易 **Y **而不是交易 **Y'**。
 
-![Working example 6](../../.gitbook/assets/cons-07-Consensus_Doc_txY-1.png)
+![工作示例 6](../../.gitbook/assets/cons-07-Consensus_Doc_txY-1.png)
 
-Now the node learns about a new transaction, **Z**, and it does the same thing as before. It queries _k_ nodes, gets back an α majority response, and updates the DAG.
+现在该节点知道了一个新交易 **Z**，并且它会做与之前相同的操作。它查询 _k_ 个节点，返回 α 多数响应，并更新 DAG。
 
-![Working example 7](../../.gitbook/assets/cons-08-Consensus_Doc_txY-5.png)
+![工作示例 7](../../.gitbook/assets/cons-08-Consensus_Doc_txY-5.png)
 
-Transaction Z gets a chit. It also has a confidence of `1` and `1` consecutive success. The processing ancestors are updated, too. No transactions have `4` consecutive successes so no ancestors are accepted.
+交易 **Z **获得了 chit。它也有置信度 `1` 和 `1` 次连续成功。处理祖代也会更新。没有交易达到 `4` 次连续成功，因此不接受任何祖代。
 
-## Vertices
+## 顶点
 
-Everything discussed to this point is how Avalanche is described in [the Avalanche whitepaper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). The implementation of the Avalanche consensus protocol by Ava Labs \(namely in AvalancheGo\) has some optimizations for latency and throughput. The most important optimization is the use of **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very similar to how it's described above.
+到目前为止讨论的所有内容都是 [Avalanche 白皮书](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf)中对 Avalanche 的说明。Ava Labs（即在 AvalancheGo 中）实施的 Avalanche 共识协议对延迟和吞吐量进行了一些优化。最重要的优化是**顶点**的使用。顶点就像线性区块链中的一个区块。它包含其父项的哈希值，并包含一个交易列表。顶点允许对交易进行批处理和分组投票，而无需逐个进行。DAG 由顶点组成，并且协议的工作方式与上面说明的非常相似。
 
-If a node receives a vote for a vertex, it counts as a vote for all the transactions in a vertex, and votes are applied transitively upward. A vertex is accepted when all the transactions which are in it are accepted. If a vertex contains a rejected transaction then it is rejected and all of its descendants are rejected. If a vertex is rejected, any valid transactions are re-issued into a new vertex which is not the child of a rejected vertex. New vertices are appended to preferred vertices.
+如果一个节点收到了对某个顶点的投票，它就算作对一个顶点中所有交易的投票，并且投票向上传递。当一个顶点中的所有交易都被接受时，它就被接受了。如果一个顶点包含一个被拒绝的交易，那么它就会被拒绝，并且它的所有后代都被拒绝。如果一个顶点被拒绝，任何有效的交易都会被重新发布到一个新的顶点，这个新顶点不是被拒绝顶点的子节点。新顶点被附加到偏好顶点。
 
-## Finality
+## 最终性
 
-Avalanche consensus is probabilistically safe up to a safety threshold. That is, the probability that a correct node accepts a transaction that another correct node rejects can be made arbitrarily low by adjusting system parameters. In Nakamoto consensus protocol \(as used in Bitcoin and Ethereum, for example\), a block may be included in the chain but then be removed and not end up in the canonical chain. This means waiting an hour for transaction settlement. In Avalanche, acceptance/rejection are **final and irreversible** and take a few seconds.
+Avalanche 共识在概率上是安全的直到安全阈值为止。也就是说，通过调整系统参数，一个正确节点接受另一个正确节点拒绝的交易的概率可以任意降低。在 Nakamoto 共识协议中（例如，在比特币和以太坊中使用），一个区块可能包含在链中，但随后被删除，而不是在标准链中结束。这意味着等待一个小时进行交易结算。在 Avalanche 中，接受/拒绝是**最终的且不可逆转的**，并且需要花费几秒钟。
 
-## Optimizations
+## 优化
 
-It's not efficient for nodes to just ask, "Do you prefer this vertex?" when they query validators. In Ava Labs' implementation, during a query a node asks, "Given that this vertex exists, which vertices do you prefer?" Instead of getting back a binary yes/no, the node receives the other node's preferred vertex set.
+当节点查询验证者时仅仅问“您是否偏好这个顶点？”是没有效率的。在 Ava Labs 的实现中，在查询过程中，一个节点会询问：“鉴于此顶点存在，您偏好哪个顶点？”该节点没有返回二进制是/否，而是接收另一个节点的偏好顶点集。
 
-Nodes don't only query upon hearing of a new transaction. They repeatedly query until there are no virtuous vertices processing. A virtuous vertex is one that has no conflicts.
+节点不仅会在听到新交易时进行查询。他们反复查询，直到没有良性顶点处理。良性顶点是指没有冲突的顶点。
 
-Nodes don't need to wait until they get all _k_ query responses before registering the outcome of a poll. If no transaction can get an α majority then there's no need to wait for the rest of the responses.
+在注册轮询结果之前，节点不需要等到它们获得全部 _k_ 个查询响应。如果没有交易可以获得 α 多数，则无需等待其余的响应。
 
-## Validators
+## 验证器
 
-If it were free to become a validator on the Avalanche network, that would be problematic because a malicious actor could start many, many nodes which would get queried very frequently. The malicious actor could make the node act badly and cause a safety or liveness failure. The validators, the nodes which are queried as part of consensus, have influence over the network. They have to pay for that influence with real-world value in order to prevent this kind of ballot stuffing. This idea of using real-world value to buy influence over the network is called Proof of Stake.
+如果它可以自由地成为 Avalanche 网络上的验证者，那将是有问题的，因为恶意行为者可以启动许多节点，这些节点会被非常频繁地查询。恶意行为者可能使节点出现不良行为，并导致安全或活性问题。验证者是指作为共识的一部分被查询的节点，会对网络有影响。他们必须用现实世界的价值来为这这种影响付出代价，以防止这种投票填充。这种使用现实世界的价值来购买网络影响力的想法称为质押证明。
 
-To become a validator, a node must **bond** \(stake\) something valuable \(**AVAX**\). The more AVAX a node bonds, the more often that node is queried by other nodes. When a node samples the network it's not uniformly random. Rather, it's weighted by stake amount. Nodes are incentivized to be validators because they get a reward if, while they validate, they're sufficiently correct and responsive.
+如果要成为验证者，节点必须**绑定**（质押）一些有价值的东西 \(**AVAX**\)。节点绑定的 AVAX 越多，其他节点查询该节点的频率就越高。当一个节点对网络进行采样时，不是均匀随机的。相反，它按质押金额加权。节点被激励成为验证者，因为如果在验证时它们足够正确且响应迅速，它们将获得奖励。
 
-Avalanche doesn't have slashing. If a node doesn't behave well while validating, such as giving incorrect responses or perhaps not responding at all, its stake is still returned in whole, but with no reward. As long as a sufficient portion of the bonded AVAX is held by correct nodes, then the network is safe, and is live for virtuous transactions.
 
-## Big Ideas
+Avalanche 没有削减功能。如果一个节点在验证时表现不佳，例如给出错误的响应或可能根本没有响应，它的质押仍会全部返还，但没有奖励。只要有足够部分的绑定 AVAX 由正确的节点持有，那么网络就是安全的，并且可以进行良性交易。
 
-Two big ideas in Avalanche are **subsampling** and **transitive voting**. Subsampling has low message overhead. It doesn't matter if there are twenty validators or two thousand validators; the number of consensus messages a node sends during a query remains constant.
+## 大创意
 
-![Working example 8](../../.gitbook/assets/cons-09-Consensus_Doc_txY-7.png)
+Avalanche 的两个重要思想是**子采样**和**传递投票**。子采样具有低消息开销。有二十个验证者还是两千个验证者都没有关系；节点在查询期间发送的共识消息数量保持不变。
 
-Transitive voting, where a vote for a vertex is a vote for all it's ancestors, helps with transaction throughput. Each vote is actually many votes in one. For example, in the above diagram, if a node gets a vote for vertex **D**, that implies a vote for all it's ancestors; a vote for **D** is also a vote for **A**, **B**, and **C**.
+![工作示例 8](../../.gitbook/assets/cons-09-Consensus_Doc_txY-7.png)
 
-## Loose Ends
+传递投票，其中对顶点的投票就是对其所有祖代的投票，有助于提高交易吞吐量。每张票实际上是多票合一。例如，在上图中，如果一个节点获得对顶点 **D** 的投票，****这意味着对其所有祖代投票；**A**, **B**，和 **C**的投票。
 
-Transactions are created by users which call an API on the [AvalancheGo](https://github.com/ava-labs/avalanchego) full node or create them using a library such as [AvalancheJS](https://github.com/ava-labs/avalanchejs). Vertices are created when nodes batch incoming transactions together or when accepted transactions from a rejected vertex get reissued and added to the DAG. A vertex's parents are chosen from the virtuous frontier, which are the nodes at the tip of the DAG with no conflicts. It's important to build on virtuous vertices because if we built on non-virtuous vertices there would be a higher chance that the node would get rejected which means there's a higher chance it's ancestors get rejected and we would make less progress.
+## 收尾工作
 
-## Other Observations
+交易由调用 [AvalancheGo](https://github.com/ava-labs/avalanchego) 完整节点上的 API 的用户创建，或使用 [AvalancheJS](https://github.com/ava-labs/avalanchejs) 等库创建。当节点将传入的交易一起批处理或当来自被拒绝顶点的接受交易被重新发布并添加到 DAG 时，就会创建顶点。顶点的父节点是从良性边界中选择的，它们是 DAG 尖端的节点，没有冲突。建立在良性顶点上很重要，因为如果我们建立在非良性顶点上，则节点被拒绝的可能性更高，这意味着它的祖代被拒绝的可能性更高，我们将取得更少的进展。
 
-Conflicting transactions are not guaranteed to be live. That's not really a problem because if you want your transaction to be live then you should not issue a conflicting transaction.
+## 其他观察
 
-Avalanche works for linear chains too. The protocol is largely the same as above, but each vertex has only have one parent. This gives a total ordering of vertices. This is useful for certain applications where one needs to know if a transaction came before another transaction, such as with smart contracts. Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol for linear chains.
+不保证发生冲突的交易是有活性的。这不是真正的问题，因为如果您希望您的交易有效，那么您不应该发出有冲突的交易。
 
-If there are no undecided transactions, the Avalanche consensus protocol _quiesces_. That is, it does nothing if there is no work to be done. Avalanche is more sustainable than Proof-of-work where nodes need to constantly do work.
+Avalanche 也适用于线性链。该协议与上述内容基本相同，但每个顶点只有一个父级。这给出了顶点的总排序。这对于某些需要知道交易是否在另一笔交易之前发生的应用程序很有用，例如智能合约。Snowman 是 Ava Labs 为线性链实施的 Avalanche 共识协议的名称。
 
-Avalanche has no leader. Any node can propose a transaction and any node that has staked AVAX can vote on every transaction, which makes the network more robust and decentralized.
+如果没有未决交易，Avalanche 共识协议将处于_静默状态_。也就是说，如果没有工作要做，它什么也会不做。Avalanche 比节点需要不断工作的工作证明更具可持续性。
 
-## Why Do We Care?
+Avalanche 没有领导者。任何节点都可以提出交易，任何质押 AVAX 的节点都可以对每笔交易进行投票，这使得网络更加强大和去中心化。
 
-Avalanche is a general consensus engine. It doesn't matter what type of application is put on top of it. The protocol allows the decoupling of the application layer from the consensus layer. If you're building a Dapp on Avalanche then you just need to define a few things, like how conflicts are defined and what is in a transaction. You don't need to worry about how nodes come to an agreement. The consensus protocol is a black box that put something into it and it comes back as accepted or rejected.
+## 我们为什么对此关心？
 
-Avalanche can be used for all kinds of applications, not just P2P payment networks. Avalanche's Primary Network has an instance of the Ethereum Virtual Machine, which is backward compatible with existing Ethereum Dapps and dev tooling. The Ethereum consensus protocol has been replaced with Avalanche consensus to enable lower block latency and higher throughput.
+Avalanche 是一个通用的共识引擎。在它上面放置什么类型的应用程序并不重要。该协议允许应用层与共识层解耦合。如果您在 Avalanche 上构建一个 Dapp，那么您只需要进行一些定义，比如如何定义冲突以及交易中的内容。您无需担心节点如何达成共识。共识协议是一个黑匣子，将某些东西放入其中，然后在决定出接受或拒绝后返回。
 
-Avalanche is very performant. It can process thousands of transactions per second with one to two second acceptance latency.
+Avalanche 可用于各种应用程序，而不仅仅是 P2P 支付网络。Avalanche 的主网有一个以太坊虚拟机的实例，它向后兼容现有的以太坊 Dapp 和开发工具。以太坊共识协议已被 Avalanche 共识取代，以实现更低的区块延迟和更高的吞吐量。
 
-## Summary
+Avalanche 的性能非常好。它每秒可以处理数千笔交易，接受延迟为一到两秒。
 
-Avalanche consensus is a radical breakthrough in distributed systems. It represents as large a leap forward as the classical and Nakamoto consensus protocols that came before it. Now that you have a better understanding of how it works, check out other [documentation](https://docs.avax.network) for building game-changing Dapps and financial instruments on Avalanche.
+## 摘要
+
+Avalanche 共识是分布式系统的一个根本性突破。它代表了与之前的经典和 Nakamoto 共识协议一样巨大的飞跃。既然您对它的工作原理有了更好的了解，请查阅其他[文档](https://docs.avax.network)，以了解在 Avalanche 上构建改变游戏规则的 Dapp 和金融工具。
 
