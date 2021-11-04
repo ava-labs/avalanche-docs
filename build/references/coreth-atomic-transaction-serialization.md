@@ -1,29 +1,29 @@
-# Coreth Atomic Transaction Format
+# Coreth 原子交易格式
 
-This page is meant to be the single source of truth for how we serialize atomic transactions in `Coreth`. This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) for cryptographic user identification.
+本页旨在成为我们如何在 `Coreth` 中序列化原子交易的唯一真实来源。本文档使用 [原始序列化](serialization-primitives.md)格式来打包并使用 [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) 来加密用户身份。
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+有些数据的前置信息带有编解码器 ID (unt16)，表示应该如何将数据反序列化。目前，唯一有效的 codec ID 是 0（`0x00 0x00`）。
 
-## Inputs
+## 输入
 
-Inputs to Coreth Atomic Transactions are either an `EVMInput` from this chain or a `TransferableInput` \(which contains a `SECP256K1TransferInput`\) from another chain. The `EVMInput` will be used in `ExportTx` to spend funds from this chain, while the `TransferableInput` will be used to import atomic UTXOs from another chain.
+Coreth 原子交易的输入要么是来自此链的`EVMInput`，要么是来自另一个链的`TransferableInput`（包含`SECP256K1TransferInput`）。`EVMInput`将在`ExportTx`中，用于使用来自这个链的资金，而`TransferableInput`将用于从另一个链导入原子 UTXO。
 
-### EVM Input
+### EVM 输入
 
-Input type that specifies an EVM account to deduct the funds from as part of an `ExportTx`.
+此输入类型指定要从中扣除资金的 EVM 账户，以作为 `ExportTx` 的一部分。
 
-#### What EVM Input Contains
+#### EVM 输入包含的内容
 
-An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
+EVM 输入包含`address`、`amount``assetID`、和`nonce`。
 
-* **`Address`** is the EVM address from which to transfer funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
-* **`Nonce`** is the nonce of the EVM account exporting funds.
+* **`Address`**是一个用于转移资金的 EVM 地址。
+* **`Amount`**是要转移的资产金额（为 AVAX 指定，以 nAVAX 为单位，所有其他资产的最小面值)。
+* **`AssetID`**是要转移的资产的 ID。
+* **`Nonce`**是 EVM 账户输出资金的时间点。
 
-#### Gantt EVM Input Specification
+#### Gantt EVM 输入规格
 
 ```text
 +----------+----------+-------------------------+
@@ -39,7 +39,7 @@ An EVM Input contains an `address`, `amount`, `assetID`, and `nonce`.
                       +-------------------------+
 ```
 
-#### Proto EVM Input Specification
+#### Proto EVM 输入规格
 
 ```text
 message  {
@@ -50,9 +50,9 @@ message  {
 }
 ```
 
-#### EVM Input Example
+#### EVM 输入示例
 
-Let's make an EVM Input:
+我们进行 EVM 输入：
 
 * `Address: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc`
 * `Amount: 2000000`
@@ -61,7 +61,7 @@ Let's make an EVM Input:
 
 ```text
 [
-    Address   <- 0xc3344128e060128ede3523a24a461c8943ab0859,
+    Address   <- 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc,
     Amount    <- 0x00000000001e8480
     AssetID   <- 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db
     Nonce     <- 0x0000000000000000
@@ -84,20 +84,20 @@ Let's make an EVM Input:
 ]
 ```
 
-### Transferable Input
+### 可转移输入
 
-Transferable Input wraps a `SECP256K1TransferInput`. Transferable inputs describe a specific UTXO with a provided transfer input.
+可转移输入打包一个 `SECP256K1TransferInput`。可转移输入描述带有指定转移输入的特定 UTXO。
 
-#### What Transferable Input Contains
+#### 可转移输入包含的内容
 
-A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
+可转移输入包含`TxID`、`UTXOIndex``AssetID`和`Input`。
 
-* **`TxID`** is a 32-byte array that defines which transaction this input is consuming an output from.
-* **`UTXOIndex`** is an int that defines which utxo this input is consuming in the specified transaction.
-* **`AssetID`** is a 32-byte array that defines which asset this input references.
-* **`Input`** is a `SECP256K1TransferInput`, as defined below.
+* **`TxID`** 是一个 32 字节数组，它定义此输入消耗的输出来自哪个交易。
+* **`UTXOIndex`** 是一个整数，定义此输入消耗指定交易中的哪个 UTXO。
+* **`AssetID`**是一个 32 字节数组，定义此输入引用了哪个资产。
+* **`Input`**是一个`SECP256K1TransferInput`，定义如下文。
 
-#### Gantt Transferable Input Specification
+#### Gantt 可转移输入规格
 
 ```text
 +------------+----------+------------------------+
@@ -113,7 +113,7 @@ A transferable input contains a `TxID`, `UTXOIndex` `AssetID` and an `Input`.
                         +------------------------+
 ```
 
-#### Proto Transferable Input Specification
+#### Proto 可转移输入规格
 
 ```text
 message TransferableInput {
@@ -124,9 +124,9 @@ message TransferableInput {
 }
 ```
 
-#### Transferable Input Example
+#### 可转移输入示例
 
-Let's make a transferable input:
+我们来创建一个可转移输入：
 
 * `TxID: 0x6613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e59`
 * `UTXOIndex: 1`
@@ -161,19 +161,19 @@ Let's make a transferable input:
 ]
 ```
 
-### SECP256K1 Transfer Input
+### SECP256K1 转移输入
 
-A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) transfer input allows for spending an unspent secp256k1 transfer output.
+[Secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine)转移输入允许支出一个未支出的 secp256k1 转移输出。
 
-#### What SECP256K1 Transfer Input Contains
+#### SECP256K1 转移输入包含的内容
 
-A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
+secp256k1 转移输入包含 `Amount`和 `AddressIndices`。
 
-* **`TypeID`** is the ID for this input type. It is `0x00000005`.
-* **`Amount`** is a long that specifies the quantity that this input should be consuming from the UTXO. Must be positive. Must be equal to the amount specified in the UTXO.
-* **`AddressIndices`** is a list of unique ints that define the private keys that are being used to spend the UTXO. Each UTXO has an array of addresses that can spend the UTXO. Each int represents the index in this address array that will sign this transaction. The array must be sorted low to high.
+* **`TypeID`**是此输入类型的 ID。它是 `0x00000005`。
+* **`Amount`**一个长整型，指定该输入应该从 UTXO 消耗的时间量。必须是正数。必须等于 UTXO 中指定的数量。
+* **`AddressIndices`**是一个唯一整数列表，定义用于支出 UTXO 的私钥。每个 UTXO 都有可以支出  UTXO 的地址数组。每个整数代表将签名此交易的地址数组中的索引。数组必须从低到高排序。
 
-#### Gantt SECP256K1 Transfer Input Specification
+#### Gantt SECP256K1 转移输入规格
 
 ```text
 +-------------------------+-------------------------------------+
@@ -187,7 +187,7 @@ A secp256k1 transfer input contains an `Amount` and `AddressIndices`.
                           +-------------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Input Specification
+#### Proto SECP256K1 转移输入规格
 
 ```text
 message SECP256K1TransferInput {
@@ -197,13 +197,14 @@ message SECP256K1TransferInput {
 }
 ```
 
-#### SECP256K1 Transfer Input Example
+#### SECP256K1 转移输入示例
 
-Let's make a payment input with:
+我们通过以下方式进行支付输入：
 
-* **`TypeId`**: 5
+* **`TypeId`**：5
+
 * **`Amount`**: 500000000000
-* **`AddressIndices`**: \[0\]
+* **`AddressIndices`**：[0]
 
 ```text
 [
@@ -224,25 +225,25 @@ Let's make a payment input with:
 ]
 ```
 
-## Outputs
+## 输出
 
-Outputs to Coreth Atomic Transactions are either an `EVMOutput` to be added to the balance of an address on this chain or a `TransferableOutput` \(whcih contains a `SECP256K1TransferOutput`\) to be moved to another chain.
+Coreth 原子交易的输出要么是一个`EVMOutput`要添加到此链上的一个地址的余额，要么是一个（包含`SECP256K1TransferOutput`）要移动到另一个链上的`TransferableOutput`。
 
-The EVM Output will be used in `ImportTx` to add funds to this chain, while the `TransferableOutput` will be used to export atomic UTXOs to another chain.
+EVM Output 将用在`ImportTx`中，用于向该链添加资金，而`TransferableOutput`将用于将原子 UTXO 导出到另一个链。
 
-### EVM Output
+### EVM 输出
 
-Output type specifying a state change to be applied to an EVM account as part of an `ImportTx`.
+此输出类型指定要应用到 EVM 账户的状态更改，以作为 `ImportTx` 的一部分。
 
-#### What EVM Output Contains
+#### EVM 输出包含的内容
 
-An EVM Output contains an `address`, `amount`, and `assetID`.
+EVM 输出包含`address`、`amount`和`assetID`。
 
-* **`Address`** is the EVM address that will receive the funds.
-* **`Amount`** is the amount of the asset to be transferred \(specified in nAVAX for AVAX and the smallest denomination for all other assets\).
-* **`AssetID`** is the ID of the asset to transfer.
+* **`Address`**是收到资金的 EVM 地址。
+* **`Amount`**是要转移的资产金额（为 AVAX 指定，以 nAVAX 为单位，所有其他资产的最小面值)。
+* **`AssetID`**是要转移的资产的 ID。
 
-#### Gantt EVM Output Specification
+#### Gantt EVM 输出规格
 
 ```text
 +----------+----------+-------------------------+
@@ -256,7 +257,7 @@ An EVM Output contains an `address`, `amount`, and `assetID`.
                       +-------------------------+
 ```
 
-#### Proto EVM Output Specification
+#### Proto EVM 输出规格
 
 ```text
 message  {
@@ -266,9 +267,9 @@ message  {
 }
 ```
 
-#### EVM Output Example
+#### EVM 输出示例
 
-Let's make an EVM Output:
+我们进行 EVM 输出：
 
 * `Address: 0x0eb5ccb85c29009b6060decb353a38ea3b52cd20`
 * `Amount: 500000000000`
@@ -296,18 +297,18 @@ Let's make an EVM Output:
 ]
 ```
 
-### Transferable Output
+### 可转移输出
 
-Transferable outputs wrap a `SECP256K1TransferOutput` with an asset ID.
+可转移输出用资产 ID 将 `SECP256K1TransferOutput` 打包。
 
-#### What Transferable Output Contains
+#### 可转移输出包含的内容
 
-A transferable output contains an `AssetID` and an `Output` which is a `SECP256K1TransferOutput`.
+可转移输出包含一个`AssetID`和一个`Output`，这是一个`SECP256K1TransferOutput`。
 
-* **`AssetID`** is a 32-byte array that defines which asset this output references.
-* **`Output`** is a `SECP256K1TransferOutput` as defined below.
+* **`AssetID`** 是一个 32 字节数组，定义此输出引用了哪些资产。
+* **`Output`**是一个`SECP256K1TransferOutput`，定义如下文。
 
-#### Gantt Transferable Output Specification
+#### Gantt 可转移输出规格
 
 ```text
 +----------+----------+-------------------------+
@@ -319,7 +320,7 @@ A transferable output contains an `AssetID` and an `Output` which is a `SECP256K
                       +-------------------------+
 ```
 
-#### Proto Transferable Output Specification
+#### Proto 可转移输出规格
 
 ```text
 message TransferableOutput {
@@ -328,9 +329,9 @@ message TransferableOutput {
 }
 ```
 
-#### Transferable Output Example
+#### 可转移输出示例
 
-Let's make a transferable output:
+我们进行可转移输出：
 
 * `AssetID: 0xdbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
 * `Output: "Example SECP256K1 Transfer Output from below"`
@@ -361,21 +362,21 @@ Let's make a transferable output:
 ]
 ```
 
-### SECP256K1 Transfer Output
+### SECP256K1 转移输出
 
-A [secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) transfer output allows for sending a quantity of an asset to a collection of addresses after a specified unix time.
+[secp256k1](cryptographic-primitives.md#cryptography-in-the-avalanche-virtual-machine) 转移输出允许在指定单元时间后将资产数量发送到一系列地址。
 
-#### What SECP256K1 Transfer Output Contains
+#### SECP256K1 转移输出包含的内容
 
-A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshold`, and `Addresses`.
+`TypeID``Amount``Locktime`secp256k1 转移输出包含、`Threshold`、以及`Addresses`。
 
-* **`TypeID`** is the ID for this output type. It is `0x00000007`.
-* **`Amount`** is a long that specifies the quantity of the asset that this output owns. Must be positive.
-* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
-* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
-* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+* **`TypeID`**是此输出类型的 ID。它是 `0x00000007`。
+* **`Amount`** 是一个长整型，它指定此输出拥有的资产数量。必须是正数。
+* **`Locktime`** 是一个长整型, 包含本输出之后花费的时间长度。 Unix 时间戳具体到秒。
+* **`Threshold`** 是一个整数，指定支出本输出所需的唯一签名的数量。必须小于或等于 **`Addresses`**的长度。如果 **`Addresses`**是空，则必须是 0。
+* **`Addresses`** 是一份唯一地址列表，这些地址对应于可用于支出此输出的私钥。地址必须按字典顺序排序。
 
-#### Gantt SECP256K1 Transfer Output Specification
+#### Gantt SECP256K1 转移输出规格
 
 ```text
 +-----------+------------+--------------------------------+
@@ -393,7 +394,7 @@ A secp256k1 transfer output contains a `TypeID`, `Amount`, `Locktime`, `Threshol
                          +--------------------------------+
 ```
 
-#### Proto SECP256K1 Transfer Output Specification
+#### Proto SECP256K1 转移输出规格
 
 ```text
 message SECP256K1TransferOutput {
@@ -405,16 +406,16 @@ message SECP256K1TransferOutput {
 }
 ```
 
-#### SECP256K1 Transfer Output Example
+#### SECP256K1 转移输出示例
 
-Let's make a secp256k1 transfer output with:
+我们通过以下方式进行 secp256k1 转移输出：
 
 * **`TypeID`**: 7
 * **`Amount`**: 1000000
 * **`Locktime`**: 0
-* **`Threshold`**: 1
+* **`Threshold`**：1
 * **`Addresses`**:
-  * 0x66f90db6137a78f76b3693f7f2bc507956dae563
+   * 0x66f90db6137a78f76b3693f7f2bc507956dae563
 
 ```text
 [
@@ -445,26 +446,26 @@ Let's make a secp256k1 transfer output with:
 ]
 ```
 
-## Atomic Transactions
+## 原子交易
 
-Atomic Transactions are used to move funds between chains. There are two types `ImportTx` and `ExportTx`.
+原子交易用于在链之间转移资金。有两种类型，`ImportTx`和 `ExportTx`。
 
 ### ExportTx
 
-ExportTx is a transaction to export funds from Coreth to a different chain.
+ExportTx 是从 Coreth 导出资金到不同的链的交易。
 
-#### What ExportTx Contains
+#### ExportTx 包含的内容
 
-An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `inputs`, and `exportedOutputs`.
+ExportTx 包含 `typeID`、`networkID`、`blockchainID`、`destinationChain`、 `inputs`和 `exportedOutputs`。
 
-* **`typeID`** is an int that the type for an ExportTx. The typeID for an exportTx is 1.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`destinationChain`** is a 32-byte array that defines which blockchain this transaction exports funds to.
-* **`inputs`** is an array of EVM Inputs to fund the ExportTx.
-* **`exportedOutputs`** is an array of TransferableOutputs to be transferred to `destinationChain`.
+* **`typeID`**是一个整数，ExportTx 的类型。exportTx 的 typeID 为 1。
+* **`networkID`**是一个整数，定义该交易将被发布到哪个 Avalanche 网络。这可能是指主网、 fuji 等，与 EVM 的网络 ID不同。
+* **`blockchainID`**是一个 32 字节数组，定义该交易被发布到哪个区块链。
+* **`destinationChain`**是一个 32 字节数组，定义该交易将资金导出到哪个区块链。
+* **`inputs`**是一个 EVM 输入数组，为 ExportTx 提供资金。
+* **`exportedOutputs`**是一个将转移到`destinationChain`的 TransferableOutputs 数组。
 
-#### Gantt ExportTx Specification
+#### Gantt ExportTx 规格
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -484,18 +485,18 @@ An ExportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ExportTx Example
+#### ExportTx 示例
 
-Let's make an EVM Output:
+我们进行 EVM 输出：
 
-* **`TypeID`**: `1`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`DestinationChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`TypeID`**:`1`
+* **`NetworkID`**:`12345`
+* **`BlockchainID`**:`0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+* **`DestinationChain`**:`0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`Inputs`**:
-  * `"Example EVMInput as defined above"`
+   * `"Example EVMInput as defined above"`
 * **`Exportedoutputs`**:
-  * `"Example TransferableOutput as defined above"`
+   * `"Example TransferableOutput as defined above"`
 
 ```text
 [
@@ -556,20 +557,20 @@ Let's make an EVM Output:
 
 ### ImportTx
 
-ImportTx is a transaction to import funds to Coreth from another chain.
+ImportTx 是从另一个链将资金导入 Coreth 的交易。
 
-#### What ImportTx Contains
+#### ImportTx 包含的内容
 
-An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain`, `importedInputs`, and `Outs`.
+ImportTx 包含 `typeID`、`networkID`、`blockchainID`、`destinationChain`、 `importedInputs`和 `Outs`。
 
-* **`typeID`** is an int that the type for an ImportTx. The typeID for an `ImportTx` is 0.
-* **`networkID`** is an int that defines which Avalanche network this transaction is meant to be issued to. This could refer to mainnet, fuji, etc. and is different than the EVM's network ID.
-* **`blockchainID`** is a 32-byte array that defines which blockchain this transaction was issued to.
-* **`sourceChain`** is a 32-byte array that defines which blockchain from which to import funds.
-* **`importedInputs`** is an array of TransferableInputs to fund the ImportTx.
-* **`Outs`** is an array of EVM Outputs to be imported to this chain.
+* **`typeID`**是一个整数，ImportTx 的类型。`ImportTx`的 typeID 是 0。
+* **`networkID`**是一个整数，定义该交易将被发布到哪个 Avalanche 网络。这可能是指主网、 fuji 等，与 EVM 的网络 ID不同。
+* **`blockchainID`**是一个 32 字节数组，定义该交易被发布到哪个区块链。
+* **`sourceChain`**是一个 32 字节数组，定义从哪个区块链导入资金。
+* **`importedInputs`**是一个 TranferableInputs 数组，为 ImportTx 提供资金。
+* **`Outs`**是一个将导入到此链的 EVM 输出数组。
 
-#### Gantt ImportTx Specification
+#### Gantt ImportTx 规格
 
 ```text
 +---------------------+----------------------+-------------------------------------------------+
@@ -589,18 +590,18 @@ An ImportTx contains an `typeID`, `networkID`, `blockchainID`, `destinationChain
                                              +-------------------------------------------------+
 ```
 
-#### ImportTx Example
+#### ImportTx 示例
 
-Let's make an ImportTx:
+我们来创建一个 ImportTx：
 
-* **`TypeID`**: `0`
-* **`NetworkID`**: `12345`
-* **`BlockchainID`**: `0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
-* **`SourceChain`**: `0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
+* **`TypeID`**:`0`
+* **`NetworkID`**:`12345`
+* **`BlockchainID`**:`0x91060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735`
+* **`SourceChain`**:`0xd891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf`
 * **`ImportedInputs`**:
-  * `"Example TransferableInput as defined above"`
+   * `"Example TransferableInput as defined above"`
 * **`Outs`**:
-  * `"Exapmle EVMOutput as defined above"`
+   * `"Exapmle EVMOutput as defined above"`
 
 ```text
 [
@@ -659,20 +660,20 @@ Let's make an ImportTx:
 ]
 ```
 
-## Credentials
+## 凭据
 
-Credentials have one possible type: `SECP256K1Credential`. Each credential is paired with an Input. The order of the credentials match the order of the inputs.
+凭据有一种可能的类型：`SECP256K1Credential`每本凭据都与输入配对。凭据的顺序与输入的顺序相匹配。
 
-### SECP256K1 Credential
+### SECP256K1 凭据
 
-A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) credential contains a list of 65-byte recoverable signatures.
+[secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b830f9b44b4aa60089ac755/build/cryptographic-primitives/README.md#cryptography-in-the-avalanche-virtual-machine) 凭据包含 65 字节可恢复签名的列表。
 
-#### What SECP256K1 Credential Contains
+#### SECP256K1 凭据包含的内容
 
-* **`TypeID`** is the ID for this type. It is `0x00000009`.
-* **`Signatures`** is an array of 65-byte recoverable signatures. The order of the signatures must match the input's signature indices.
+* **`TypeID`**是此类型的 ID。它是 `0x00000009`。
+* **`Signatures`**为一组 65 字节可恢复签名。 签名的顺序必须与输入的签名索引相匹配。
 
-#### Gantt SECP256K1 Credential Specification
+#### Gantt SECP256K1 凭据规格
 
 ```text
 +------------------------------+---------------------------------+
@@ -684,7 +685,7 @@ A [secp256k1](https://github.com/ava-labs/avalanche-docs/tree/94d2e4aeddbf91f89b
                                +---------------------------------+
 ```
 
-#### Proto SECP256K1 Credential Specification
+#### Proto SECP256K1 凭据规格
 
 ```text
 message SECP256K1Credential {
@@ -693,13 +694,13 @@ message SECP256K1Credential {
 }
 ```
 
-#### SECP256K1 Credential Example
+#### SECP256K1 凭据示例
 
-Let's make a payment input with:
+我们通过以下方式进行支付输入：
 
 * **`TypeID`**: 9
 * **`signatures`**:
-  * `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
+   * `0x0acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a30010199dbf`
 
 ```text
 [
@@ -727,19 +728,19 @@ Let's make a payment input with:
 ]
 ```
 
-## Signed Transaction
+## 签名交易
 
-A signed transaction contains an unsigned `AtomicTx` and credentials.
+签名交易包含未签名`AtomicTx`和凭据。
 
-### What Signed Transaction Contains
+### 签名交易包含的内容
 
-A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
+签名交易包含 `CodecID`、和`AtomicTx``Credentials`。
 
-* **`CodecID`** The only current valid codec id is `00 00`.
-* **`AtomicTx`** is an atomic transaction, as described above.
-* **`Credentials`** is an array of credentials. Each credential corresponds to the input at the same index in the AtomicTx
+* **`CodecID`**唯一当前有效的 codec id 是`00 00`。
+* **`AtomicTx`**是一个原子交易，如上所述。
+* **`Credentials`**是一组凭据。每个凭据都对应于 AtomicTx 中同一索引中的输入
 
-### Gantt Signed Transaction Specification
+### Gantt 签名交易规格
 
 ```text
 +---------------------+--------------+------------------------------------------------+
@@ -753,7 +754,7 @@ A signed transaction contains a `CodecID`, `AtomicTx`, and `Credentials`.
                                      +------------------------------------------------+
 ```
 
-### Proto Signed Transaction Specification
+### Proto 签名交易规格
 
 ```text
 message Tx {
@@ -763,15 +764,15 @@ message Tx {
 }
 ```
 
-### Signed Transaction Example
+### 签名交易示例
 
-Let's make a signed transaction that uses the unsigned transaction and credential from the previous examples.
+让我们进行一个签名交易，使用前面示例的未签名交易和凭据。
 
-* **`CodecID`**: `0`
-* **`UnsignedTx`**: `0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
+* **`CodecID`**:`0`
+* **`UnsignedTx`**:`0x000000000000303991060eabfb5a571720109b5896e5ff00010a1cfe6b103d585e6ebf27b97a1735d891ad56056d9c01f18f43f58b5c784ad07a4a49cf3d1f11623804b5cba2c6bf000000016613a40dcdd8d22ea4aa99a4c84349056317cf550b6685e045e459954f258e5900000001dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db00000005000000746a5288000000000100000000000000010eb5ccb85c29009b6060decb353a38ea3b52cd20000000746a528800dbcf890f77f49b96857648b72b77f9f82937f28a68704af05da0dc12ba53f2db`
 * **`Credentials`**
 
-  `0x00000009000000010acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a300`
+   `0x00000009000000010acccf47a820549a84428440e2421975138790e41be262f7197f3d93faa26cc8741060d743ffaf025782c8c86b862d2b9febebe7d352f0b4591afbd1a737f8a300`
 
 ```text
 [
@@ -832,19 +833,19 @@ Let's make a signed transaction that uses the unsigned transaction and credentia
 
 ## UTXO
 
-A UTXO is a standalone representation of a transaction output.
+UTXO 是交易输出的一个独立表达式。
 
-### What UTXO Contains
+### UTXO 包含的内容
 
-A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
+UTXO 包含一个`CodecID`、`TxID`、`UTXOIndex`、`AssetID`和`Output`。
 
-* **`CodecID`** The only valid `CodecID` is `00 00`
-* **`TxID`** is a 32-byte transaction ID. Transaction IDs are calculated by taking sha256 of the bytes of the signed transaction.
-* **`UTXOIndex`** is an int that specifies which output in the transaction specified by **`TxID`** that this utxo was created by.
-* **`AssetID`** is a 32-byte array that defines which asset this utxo references.
-* **`Output`** is the output object that created this utxo. The serialization of Outputs was defined above.
+* **`CodecID`**唯一有效的 `CodecID`是`00 00`
+* **`TxID`**是 32 字节交易 ID。交易 ID 是通过获取已签名交易的字节中的 sha256 来计算。
+* **`UTXOIndex`** 是一个整数，它规定该交易中的哪次输出由 **`TxID`**指定， 而此 utxo 是由后者创建的。
+* **`AssetID`**是一种 32 字节数组，定义该 utxo 引用了哪个资产。
+* **`Output`**是创建此 utxo 的输出对象。输出序列化定义如上述。
 
-### Gantt UTXO Specification
+### Gantt UTXO 规格
 
 ```text
 +--------------+----------+-------------------------+
@@ -862,7 +863,7 @@ A UTXO contains a `CodecID`, `TxID`, `UTXOIndex`, `AssetID`, and `Output`.
                           +-------------------------+
 ```
 
-### Proto UTXO Specification
+### Proto UTXO 规格
 
 ```text
 message Utxo {
@@ -874,15 +875,15 @@ message Utxo {
 }
 ```
 
-### UTXO Example
+### UTXO 示例
 
-Let’s make a UTXO from the signed transaction created above:
+我们来从上文创建的签名交易创建一个 UTXO：
 
-* **`CodecID`**: `0`
-* **`TxID`**: `0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
+* **`CodecID`**:`0`
+* **`TxID`**:`0xf966750f438867c3c9828ddcdbe660e21ccdbb36a9276958f011ba472f75d4e7`
 * **`UTXOIndex`**: 0 = 0x00000000
-* **`AssetID`**: `0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
-* **`Output`**: `"Example EVMOutput as defined above"`
+* **`AssetID`**:`0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`
+* **`Output`**:`"Example EVMOutput as defined above"`
 
 ```text
 [
