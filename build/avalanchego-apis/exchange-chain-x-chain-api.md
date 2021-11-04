@@ -1,38 +1,38 @@
 ---
-description: The X-Chain is an instance of the Avalanche Virtual Machine (AVM)
+description: X-Chain 是 Avalanche 虚拟机（AVM） 的实例。
 ---
 
-# Exchange Chain \(X-Chain\) API
+# 交换链 \(X-Chain\) API
 
-The [X-Chain](../../learn/platform-overview/#exchange-chain-x-chain), Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
+[X-Chain](../../learn/platform-overview/#exchange-chain-x-chain) 是 Avalanche 创建和交易资产的原生平台，是 Avalanche 虚拟机（AVM） 的实例。此 API 允许客户在 X-Chain 和 AVM 的其他实例上创建和交易资产。
 
 {% embed url="https://www.youtube.com/watch?v=rD-IOd1nvFo" caption="" %}
 
-## Format
+## 格式
 
-This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see [here](issuing-api-calls.md).
+本 API 使用 `json 2.0`RPC 格式。有关进行 JSON  RPC 调用的更多信息，请参阅[此处](issuing-api-calls.md)。
 
-## Endpoints
+## 端点
 
-`/ext/bc/X` to interact with the X-Chain.
+`/ext/bc/X`与 X-Chain 交互。
 
-`/ext/bc/blockchainID` to interact with other AVM instances, where `blockchainID` is the ID of a blockchain running the AVM.
+`/ext/bc/blockchainID`与其它 AVM 实例交互，  其中，`blockchainID`为运行 AVM 的区块链的 ID 。
 
-## Methods
+## 方法
 
 ### avm.buildGenesis
 
-Given a JSON representation of this Virtual Machine’s genesis state, create the byte representation of that state.
+鉴于此虚拟机的 genesis 状态的 JSON 表达式，请创建该状态的字节表达式。
 
-#### **Endpoint**
+#### **端点**
 
-This call is made to the AVM’s static API endpoint:
+本调用是针对 AVM 的静态 API 端点：
 
 `/ext/vm/avm`
 
-Note: addresses should not include a chain prefix \(ie. X-\) in calls to the static API endpoint because these prefixes refer to a specific chain.
+注意：地址在调用静态 API 端点时不应该包含链前缀（比如 X-\)，因为这些前缀引用特定的链。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.buildGenesis({
@@ -45,9 +45,9 @@ avm.buildGenesis({
 }
 ```
 
-Encoding specifies the encoding format to use for arbitrary bytes ie. the genesis bytes that are returned. Can be either "cb58" or "hex". Defaults to "cb58".
+编码指定了用于任意字节（比如返回的 genesis 字节）的编码格式。可以是“cb58”或“hex”。默认为“cb58”。
 
-`genesisData` has this form:
+`genesisData`有此形式：
 
 ```cpp
 {
@@ -99,7 +99,7 @@ Encoding specifies the encoding format to use for arbitrary bytes ie. the genesi
 }
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -162,7 +162,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/avm
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -177,9 +177,9 @@ curl -X POST --data '{
 
 ### avm.createAddress
 
-Create a new address controlled by the given user.
+创建由给定用户控制的新地址。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.createAddress({
@@ -188,7 +188,7 @@ avm.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -202,7 +202,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -216,11 +216,11 @@ curl -X POST --data '{
 
 ### avm.createFixedCapAsset
 
-Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and then no more is ever created. The asset can be sent with `avm.send`.
+创建新的固定资本、可替换资产。在初始化时创建一定的数量，然后不再创建了。可以用 `avm.send` 发送资产。
 
 {% page-ref page="../tutorials/smart-digital-assets/create-a-fix-cap-asset.md" %}
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.createFixedCapAsset({
@@ -242,16 +242,16 @@ avm.createFixedCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If `denomination` is 0, 100 units of this asset are displayed as 100. If `denomination` is 1, 100 units of this asset are displayed as 10.0. If `denomination` is 2, 100 units of this asset are displayed as 1.00, etc. Defaults to 0.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` and `password` denote the user paying the transaction fee.
-* Each element in `initialHolders` specifies that `address` holds `amount` units of the asset at genesis.
-* `assetID` is the ID of the new asset.
+* `name` 是人类可读的资产名称。未必具有唯一性。
+* `symbol` 是该资产的简短符号。介于 0 到 4 个字符之间。未必具有唯一性。可以被省略。
+* `denomination` 决定如何通过用户界面显示该资产的余额。如果 `denomination` 是 0，则本资产的 100 单位将被显示为 100。如果 `denomination` 是 1，则本资产的 100 单位将被显示为 10.0。如果 `denomination` 是 2，则本资产的 100 单位将被显示为 1.00 等。默认为 0。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* `username` 和 `password` 表示支付交易费的用户。
+* `initialHolders` 中的每个元素指定 `address` 在 genesis 时持有的 `amount` 资产单位。
+* `assetID` 是新资产的 ID。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -294,9 +294,9 @@ curl -X POST --data '{
 
 ### avm.mint
 
-Mint units of a variable-cap asset created with [`avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset).
+使用 [ `avm.createVariableCapAsset`](exchange-chain-x-chain-api.md#avm-createvariablecapasset) 创建的可变资本资产的铸币单位。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.mint({
@@ -314,14 +314,14 @@ avm.mint({
 }
 ```
 
-* `amount` units of `assetID` will be created and controlled by address `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* 通过地址 `to` 创建和控制的 `amount` 单位 `assetID`。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* `username` 是支付交易费的用户，`username` 必须持有授予权限以铸造更多此类资产的密钥。也就是说，它必须至少控制一个 minter 集的_阈值_密钥。
+* `txID` 是此交易的 ID。
+* 结果中的 `changeAddr` 是发送任何更改的地址。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -340,7 +340,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -355,11 +355,11 @@ curl -X POST --data '{
 
 ### avm.createVariableCapAsset
 
-Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mint`.
+创建新的可变资本、可替换资产。初始化时不存在任何单位的资产。铸币厂可以使用 `avm.mint` 铸造此资产。
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-variable-cap-asset.md" %}
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.createVariableCapAsset({
@@ -381,17 +381,17 @@ avm.createVariableCapAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name` 是人类可读的资产名称。未必具有唯一性。
+* `symbol` 是该资产的简短符号。介于 0 到 4 个字符之间。未必具有唯一性。可以被省略。
+* `denomination` 决定如何通过用户界面显示该资产的余额。如果面值为 0，则本资产的 100 单位将显示为 100 。如果面值为 1，则本资产的 100 单位将显示为 10.0。如果面值为 2，则本资产的 100 单位将显示为.100，以此类推。
+* `minterSets` 是一个列表，其中每个元素指定的 `minters` 中的地址的 `threshold` 可以通过签署铸币交易一起铸造更多资产。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* `username` 支付交易费。
+* `assetID` 是新资产的 ID。
+* 结果中的 `changeAddr` 是发送任何更改的地址。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -425,7 +425,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -440,11 +440,11 @@ curl -X POST --data '{
 
 ### avm.createNFTAsset
 
-Create a new non-fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `avm.mintNFT`.
+创建新的非同质化资产。初始化时不存在任何单位的资产。铸币厂可以使用 `avm.mintNFT` 铸造此资产。
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.createNFTAsset({
@@ -465,16 +465,16 @@ avm.createNFTAsset({
 }
 ```
 
-* `name` is a human-readable name for the asset. Not necessarily unique.
-* `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
-* `minterSets` is a list where each element specifies that `threshold` of the addresses in `minters` may together mint more of the asset by signing a minting transaction.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` pays the transaction fee.
-* `assetID` is the ID of the new asset.
-* `changeAddr` in the result is the address where any change was sent.
+* `name` 是人类可读的资产名称。未必具有唯一性。
+* `symbol` 是该资产的简短符号。介于 0 到 4 个字符之间。未必具有唯一性。可能被省略。
+* `minterSets` 是一个列表，其中每个元素指定的 `minters` 中的地址的 `threshold` 可以通过签署铸币交易一起铸造更多资产。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* `username` 支付交易费。
+* `assetID` 是新资产的 ID。
+* 结果中的 `changeAddr` 是发送任何更改的地址。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -500,7 +500,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -515,11 +515,11 @@ curl -X POST --data '{
 
 ### avm.mintNFT
 
-Mint non-fungible tokens which were created with [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset).
+铸造非同质化代币，该代币用 [`avm.createNFTAsset`](exchange-chain-x-chain-api.md#avm-createnftasset) 创建。
 
 {% page-ref page="../tutorials/smart-digital-assets/creating-a-nft-part-1.md" %}
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.mintNFT({
@@ -538,16 +538,16 @@ avm.mintNFT({
 }
 ```
 
-* `assetID` is the assetID of the newly created NFT asset.
-* `payload` is an arbitrary payload of up to 1024 bytes. Its encoding format is specified by the `encoding` argument.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. `username` must hold keys giving it permission to mint more of this asset. That is, it must control at least _threshold_ keys for one of the minter sets.
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-* `encoding` is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "cb58".
+* `assetID` 是新创建的 NFT 资产的 assetID。
+* `payload` 是长达 1024 字节的任意有效载荷。其编码格式由 `encoding` 参数指定。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* `username` 是支付交易费的用户，`username` 必须持有授予权限以铸造更多此类资产的密钥。也就是说，它必须至少控制一个 minter 集的_阈值_密钥。
+* `txID` 是此交易的 ID。
+* 结果中的 `changeAddr` 是发送任何更改的地址。
+* `encoding` 是用于有效载荷参数的编码格式。可以是“cb58”或“hex”。默认为“cb58”。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -566,7 +566,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -581,9 +581,9 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+从 X-Chain 发送一个 non-AVAX 到 P-Chain 或 C-Chain.。调用本方法后，您必须调用 C-Chain 上的 [`avax.import`](contract-chain-c-chain-api.md#avax-import) 以完成转移。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.export({
@@ -601,16 +601,16 @@ avm.export({
 }
 ```
 
-* `to` is the P-Chain or C-Chain address the asset is sent to.
-* `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
+* `to` 是资产发送到的 P-Chain 或 C-Chain 地址。
+* `amount` 是要发送的资产数量。
+* `assetID` 是发送资产的资产 ID。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 资产从 `username` 控制的地址发送
+* `txID` 是此交易的 ID。
+* 结果中的 `changeAddr` 是发送任何更改的地址。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -629,7 +629,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -642,72 +642,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.exportAVAX
-
-Send AVAX from the X-Chain to another chain. After calling this method, you must call `import` on the other chain to complete the transfer.
-
-#### **Signature**
-
-```cpp
-avm.exportAVAX({
-    to: string,
-    amount: int,
-    from: []string, //optional
-    changeAddr: string, //optional
-    username: string,
-    password: string,
-}) ->
-{
-    txID: string,
-    changeAddr: string,
-}
-```
-
-* `to` is the P-Chain address the AVAX is sent to.
-* `amount` is the amount of nAVAX to send.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The AVAX is sent from addresses controlled by `username`
-* `txID` is this transaction’s ID.
-* `changeAddr` in the result is the address where any change was sent.
-
-#### **Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.exportAVAX",
-    "params" :{
-        "to":"P-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
-        "amount": 500,
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-#### **Example Response**
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "25VzbNzt3gi2vkE3Kr6H9KJeSR2tXkr8FsBCm3vARnB5foLVmx",
-        "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8"
-    },
-    "id": 1
-}
-```
-
 ### avm.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey).
+获取控制给定地址的私钥。可以使用 [`avm.importKey`](exchange-chain-x-chain-api.md#avm-importkey) 将返回的私钥添加到用户。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.exportKey({
@@ -717,10 +656,10 @@ avm.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` must control `address`.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username` 必须控制 `address`。
+* `privateKey` 是控制 `address` 的私钥的字符串表达式。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -735,7 +674,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -749,9 +688,9 @@ curl -X POST --data '{
 
 ### avm.getAllBalances
 
-Get the balances of all assets controlled by a given address.
+获取由给定地址控制的所有资产的余额。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getAllBalances({address:string}) -> {
@@ -762,7 +701,7 @@ avm.getAllBalances({address:string}) -> {
 }
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -775,7 +714,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -798,9 +737,9 @@ curl -X POST --data '{
 
 ### avm.getAssetDescription
 
-Get information about an asset.
+获取有关资产的信息。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getAssetDescription({assetID: string}) -> {
@@ -811,12 +750,12 @@ avm.getAssetDescription({assetID: string}) -> {
 }
 ```
 
-* `assetID` is the id of the asset for which the information is requested.
-* `name` is the asset’s human-readable, not necessarily unique name.
-* `symbol` is the asset’s symbol.
-* `denomination` determines how balances of this asset are displayed by user interfaces. If denomination is 0, 100 units of this asset are displayed as 100. If denomination is 1, 100 units of this asset are displayed as 10.0. If denomination is 2, 100 units of this asset are displays as .100, etc.
+* `assetID` 是请求其信息的资产的 id。
+* `name` 是人类可读的资产名称，未必是唯一的名称。
+* `symbol` 是资产的符号。
+* `denomination` 决定如何通过用户界面显示该资产的余额。如果面值为 0，则本资产的 100 单位将显示为 100 。如果面值为 1，则本资产的 100 单位将显示为 10.0。如果面值为 2，则本资产的 100 单位将显示为 .100。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -829,7 +768,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -846,9 +785,9 @@ curl -X POST --data '{
 
 ### avm.getBalance
 
-Get the balance of an asset controlled by a given address.
+获取由给定地址控制的资产的余额。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getBalance({
@@ -857,10 +796,10 @@ avm.getBalance({
 }) -> {balance: int}
 ```
 
-* `address` owner of the asset
-* `assetID` id of the asset for which the balance is requested
+* 资产的 `address` 所有者
+* `assetID` 是请求其余额的资产的 id
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -874,7 +813,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -892,11 +831,75 @@ curl -X POST --data '{
 }
 ```
 
+### avm.getAddressTxs <a id="avm-get-address-txs-api"></a>
+
+返回所有更改给定地址的余额的交易。据说，如果任何一项为真，交易会更改地址的余额：
+
+* 交易消耗的 UTXO 至少部分由该地址拥有。
+* 交易产生的 UTXO 至少部分由该地址拥有。
+
+注意：必须在 X-chain 配置中启用索引（`index-transactions`）。
+
+#### **签名**
+
+```cpp
+avm.getAddressTxs({
+    address: string,
+    cursor: uint64,     // optional, leave empty to get the first page
+    assetID: string,
+    pageSize: uint64    // optional, defaults to 1024
+}) -> {
+    txIDs: []string,
+    cursor: uint64,
+}
+```
+
+**请求参数**
+
+* `address`：我们获取相关交易的地址
+* `assetID`：仅返回更改了该资产余额的交易。必须是资产的 ID 或别名。
+* `pageSize`：每个页面返回的项目数量。可选。默认为 1024。
+
+**响应参数**
+
+* `txIDs`：影响此地址余额的交易 ID 列表。
+* `cursor`：页码或抵销。在请求中使用这个来获取下一页。
+
+#### **示例调用**
+
+```cpp
+curl -X POST --data '{
+  "jsonrpc":"2.0",
+  "id"     : 1,
+  "method" :"avm.getAddressTxs",
+  "params" :{
+      "address":"X-local1kpprmfpzzm5lxyene32f6lr7j0aj7gxsu6hp9y",
+      "assetID":"AVAX",
+      "pageSize":20
+  }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+#### **示例响应**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txIDs": [
+            "SsJF7KKwxiUJkczygwmgLqo3XVRotmpKP8rMp74cpLuNLfwf6"
+        ],
+        "cursor": "1"
+    },
+    "id": 1
+}
+```
+
 ### avm.getTx
 
-Returns the specified transaction. The `encoding` parameter sets the format of the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+返回指定交易。`encoding` 参数设置返回交易的格式。可以是 `"json"`、`"cb58"` 或 `"hex"`。默认为“cb58”。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getTx({
@@ -908,7 +911,7 @@ avm.getTx({
 }
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -922,7 +925,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -937,22 +940,22 @@ curl -X POST --data '{
 
 ### avm.getTxStatus
 
-Get the status of a transaction sent to the network.
+获取发送到网络的交易状态。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getTxStatus({txID: string}) -> {status: string}
 ```
 
-`status` is one of:
+`status` 是其中之一：
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node
-* `Processing`: The transaction is being voted on by this node
-* `Rejected`: The transaction will never be accepted by any node in the network
-* `Unknown`: The transaction hasn’t been seen by this node
+* `Accepted`：交易已被（或将要被）每个节点接受
+* `Processing`：交易正在由此节点投票表决
+* `Rejected`：交易永远不会被网络中的任何节点接受
+* `Unknown`：交易尚未被此节点查看
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -965,7 +968,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -979,9 +982,9 @@ curl -X POST --data '{
 
 ### avm.getUTXOs
 
-Gets the UTXOs that reference a given address. If sourceChain is specified, then it will retrieve the atomic UTXOs exported from that chain to the X Chain.
+获取引用给定地址的 UTXO。如果指定了 sourceChain，那么它将检索从该链导出到 X Chain 的原子 UTXO。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.getUTXOs({
@@ -1005,17 +1008,17 @@ avm.getUTXOs({
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
+* `utxos` 是一个 UTXO 列表，以便每个 UTXO 在 `addresses` 中引用至少一个地址。
+* 最多返回 `limit` 个 UTXO。如果 `limit` 被省略或大于 1024，则将其设置为 1024。
+* 本方法支持页码。`endIndex` 表示最后一次返回的 UTXO。要获取下一个 UTXO 集，请在下次调用中使用 `endIndex` 的值作为 `startIndex`。
+* 如果 `startIndex` 被省略，将获取所有 UTXO，最多 `limit` 个。
+* 当使用页码时（提供 `startIndex` 时），无法保证 UTXO 在多个调用中是唯一的。也就是说，一个 UTXO 可能出现在第一次调用的结果中，然后在第二次调用中再次出现。
+* 使用页码时，不能保证多个调用之间的一致性。也就是说，地址的 UTXO 集可能在调用之间发生变化。
+* `encoding` 设置返回的 UTXO 的格式。可以是“cb58”或“hex”。默认为“cb58”。
 
-#### **Example**
+#### **示例**
 
-Suppose we want all UTXOs that reference at least one of `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` and `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz`.
+假设我们希望至少引用一个 `X-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf` 和 `X-avax1x459sj0ssujguq723cljfty4jlae28evjzt7xz` 的所有 UTXO。
 
 ```cpp
 curl -X POST --data '{
@@ -1030,7 +1033,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+这给出响应：
 
 ```cpp
 {
@@ -1054,7 +1057,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+由于 `numFetched` 与 `limit` 相同，我们可以判断可能有更多未提取的 UTXO。我们再次调用方法，这次通过 `startIndex` 调用：
 
 ```cpp
 curl -X POST --data '{
@@ -1073,7 +1076,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+这给出响应：
 
 ```cpp
 {
@@ -1096,9 +1099,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+由于 `numFetched` 小于 `limit`，我们知道我们已经完成了 UTXO 的获取，无需再次调用本方法。
 
-Suppose we want to fetch the UTXOs exported from the P Chain to the X Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+假设我们想获取从 P Chain 导出到 X Chain 的 UTXO，以创建 ImportTx。然后，我们需要使用 sourceChain 参数调用 GetUTXO，以便检索原子 UTXO：
 
 ```cpp
 curl -X POST --data '{
@@ -1114,7 +1117,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-This gives response:
+这给出响应：
 
 ```cpp
 {
@@ -1136,9 +1139,9 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+最后完成从 P-Chain 或 C-Chain 到 X-Chain 的 AVAX 转移。调用此方法之前，您必须调用 P-Chain 的 [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) 方法或 C-Chain 的 [`avax.export`](contract-chain-c-chain-api.md#avax-export) 方法以启动转移。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.import({
@@ -1149,12 +1152,12 @@ avm.import({
 }) -> {txID: string}
 ```
 
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX` or C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the C-Chain, use `"C"`.
-* `username` is the user that controls `to`.
-* `txID` is the ID of the newly created atomic transaction.
+* `to` 是 AVAX 发送到的地址。这必须与 P-Chain 的 `exportAVAX` 或 C-Chain 的 `export` 的相应调用中的 `to` 参数相同。
+* `sourceChain` 是导入 AVAX 所在的链的 ID 或别名。要从 C-Chain 导入资金，请使用 `"C"`。
+* `username` 是控制 `to` 的用户。
+* `txID` 是新创建的原子交易的 ID。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1170,7 +1173,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1182,58 +1185,11 @@ curl -X POST --data '{
 }
 ```
 
-### avm.importAVAX
-
-Finalize a transfer of AVAX from the P-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) method to initiate the transfer.
-
-#### **Signature**
-
-```cpp
-avm.importAVAX({
-    to: string,
-    sourceChain: string,
-    username: string,
-    password: string,
-}) -> {txID: string}
-```
-
-* `to` is the address the AVAX is sent to. This must be the same as the `to` argument in the corresponding call to the P-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the P-Chain, use `"P"`.
-* `username` is the user that controls `to`.
-
-#### **Example Call**
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.importAVAX",
-    "params" :{
-        "to":"X-avax1s7aygrkrtxflmrlyadlhqu70a6f4a4n8l2tru8",
-        "sourceChain":"P",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-#### **Example Response**
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "MqEaeWc4rfkw9fhRMuMTN7KUTNpFmh9Fd7KSre1ZqTsTQG73h"
-    },
-    "id": 1
-}
-```
-
 ### avm.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+通过提供控制地址的私钥，让用户控制该地址。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.importKey({
@@ -1243,9 +1199,9 @@ avm.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* 将 `privateKey` 添加到 `username` 的私钥集 。`address` 是现在通过私钥控制的地址 `username`。
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1260,7 +1216,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1274,9 +1230,9 @@ curl -X POST --data '{
 
 ### avm.issueTx
 
-Send a signed transaction to the network. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+将签名交易发送到网络。`encoding` 指定签名交易的格式。可以是“cb58”或“hex”。默认为“cb58”。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.issueTx({
@@ -1287,7 +1243,7 @@ avm.issueTx({
 }
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1301,7 +1257,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1315,9 +1271,9 @@ curl -X POST --data '{
 
 ### avm.listAddresses
 
-List addresses controlled by the given user.
+列出由给定用户控制的地址。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.listAddresses({
@@ -1326,7 +1282,7 @@ avm.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1340,7 +1296,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1354,9 +1310,9 @@ curl -X POST --data '{
 
 ### avm.send
 
-Send a quantity of an asset to an address.
+将资产数量发送到一个地址。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.send({
@@ -1371,14 +1327,14 @@ avm.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* 通过 ID `assetID` 发送 `amount` 单位的资产，以处理  `to`。`amount` 以资产的最小增量为单位。对于 AVAX，这是 1 nAVAX（十亿分之 1 AVAX。）
+* `to` 是资产被发送到的 X-Chain 地址。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 您可以附加一个 `memo`，其长度最多为 256 字节。
+* 资产从用户 `username` 控制的地址发送。（当然，该用户需要至少持有正在发送的资产的余额。）
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1398,7 +1354,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1413,9 +1369,9 @@ curl -X POST --data '{
 
 ### avm.sendMultiple
 
-Sends multiple transfers of `amount` of `assetID`, to a specified address from a list of owned addresses.
+将 `assetID` 的 `amount`多次转移发送到一份所拥有地址列表中的指定地址。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.sendMultiple({
@@ -1432,13 +1388,13 @@ avm.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `memo` is an optional message, whose length can be up to 256 bytes.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `outputs`是一组包含`assetID`、`amount`和`to`的对象字面量。
+* `memo` 是一个可选消息，其长度最多为 256 字节。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 资产从用户 `username` 控制的地址发送。（当然，该用户需要至少持有正在发送的资产的余额。）
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1467,7 +1423,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1482,9 +1438,9 @@ curl -X POST --data '{
 
 ### avm.sendNFT
 
-Send a non-fungible token.
+发送非同质化代币。
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 avm.sendNFT({
@@ -1498,13 +1454,14 @@ avm.sendNFT({
 }) -> {txID: string}
 ```
 
-* `assetID` is the asset ID of the NFT being sent.
-* `groupID` is the NFT group from which to send the NFT. NFT creation allows multiple groups under each NFT ID. You can issue multiple NFTs to each group.
-* `to` is the X-Chain address the NFT is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed. `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the NFT being sent.\)
+* `assetID` 是正在发送的 NFT 的资产 ID。
+* `groupID` 是发送 NFT 的 NFT 组。
+   NFT 允许在每个 NFT ID 下创建多个组。您可以向每个组发出多个 NFT。
+* `to` 是 NFT 被发送到的 X-Chain 地址。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。`changeAddr` 是任何更改将发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 资产从用户 `username` 控制的地址发送。（当然，该用户需要至少持有正在发送的 NFT 的余额。）
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1523,7 +1480,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1538,13 +1495,13 @@ curl -X POST --data '{
 
 ### wallet.issueTx
 
-Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+将签名交易发送到网络，并假设 tx 被接受。`encoding` 指定签名交易的格式。可以是“cb58”或“hex”。默认为“cb58”。
 
-This call is made to the wallet API endpoint:
+本调用是针对钱包 API 端点的：
 
 `/ext/bc/X/wallet`
 
-#### Signature
+#### 签名
 
 ```cpp
 wallet.issueTx({
@@ -1555,7 +1512,7 @@ wallet.issueTx({
 }
 ```
 
-#### Example call
+#### 示例调用
 
 ```cpp
 curl -X POST --data '{
@@ -1569,7 +1526,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### Example response
+#### 示例响应
 
 ```cpp
 {
@@ -1583,13 +1540,13 @@ curl -X POST --data '{
 
 ### wallet.send
 
-Send a quantity of an asset to an address and assume the tx will be accepted so that future calls can use the modified UTXO set.
+将一定数量资产发送到一个地址，并假设 tx 将被接受，这样未来调用可以使用经修改的 UTXO 集。
 
-This call is made to the wallet API endpoint:
+本调用是针对钱包 API 端点的：
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 wallet.send({
@@ -1604,14 +1561,14 @@ wallet.send({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* Sends `amount` units of asset with ID `assetID` to address `to`. `amount` is denominated in the smallest increment of the asset. For AVAX this is 1 nAVAX \(one billionth of 1 AVAX.\)
-* `to` is the X-Chain address the asset is sent to.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* 通过 ID `assetID` 发送 `amount` 单位的资产，以处理  `to`。`amount` 以资产的最小增量为单位。对于 AVAX，这是 1 nAVAX（十亿分之 1 AVAX。）
+* `to` 是资产被发送到的 X-Chain 地址。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 您可以附加一个 `memo`，其长度最多为 256 字节。
+* 资产从用户 `username` 控制的地址发送。（当然，该用户需要至少持有正在发送的资产的余额。）
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1631,7 +1588,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1646,13 +1603,13 @@ curl -X POST --data '{
 
 ### wallet.sendMultiple
 
-Send multiple transfers of `amount` of `assetID`, to a specified address from a list of owned of addresses and assume the tx will be accepted so that future calls can use the modified UTXO set.
+将 `assetID` 的 `amount` 多次转移发送到一份所拥有地址列表中的指定地址，并假设 tx 被接受，以便今后的调用可以使用修改的 UTXO 集。
 
-This call is made to the wallet API endpoint:
+本调用是针对钱包 API 端点的：
 
 `/ext/bc/X/wallet`
 
-#### **Signature**
+#### **签名**
 
 ```cpp
 wallet.sendMultiple({
@@ -1669,13 +1626,13 @@ wallet.sendMultiple({
 }) -> {txID: string, changeAddr: string}
 ```
 
-* `outputs` is an array of object literals which each contain an `assetID`, `amount` and `to`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* You can attach a `memo`, whose length can be up to 256 bytes.
-* The asset is sent from addresses controlled by user `username`. \(Of course, that user will need to hold at least the balance of the asset being sent.\)
+* `outputs`是一组包含`assetID`、`amount`和`to`的对象字面量。
+* `from` 是您想用于本操作的地址。如果被省略，请根据需要使用您的任何地址。
+* `changeAddr` 是任何更改将被发送到的地址。如果被省略，则将更改发送到由用户控制的其中一个地址。
+* 您可以附加一个 `memo`，其长度最多为 256 字节。
+* 资产从用户 `username` 控制的地址发送。（当然，该用户需要至少持有正在发送的资产的余额。）
 
-#### **Example Call**
+#### **示例调用**
 
 ```cpp
 curl -X POST --data '{
@@ -1704,7 +1661,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/wallet
 ```
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 {
@@ -1717,15 +1674,15 @@ curl -X POST --data '{
 }
 ```
 
-### events
+### 事件
 
-Listen for transactions on a specified address.
+监听指定地址上的交易。
 
-This call is made to the events API endpoint:
+本调用针对事件 API 端点：
 
 `/ext/bc/X/events`
 
-#### **Golang Example**
+#### **Golang 示例**
 
 ```go
 package main
@@ -1805,22 +1762,22 @@ func main() {
 }
 ```
 
-**Operations**
+**操作**
 
-| Command | Description | Example | Arguments |
+| 命令 | 描述 | 示例 | 参数 |
 | :--- | :--- | :--- | :--- |
-| **NewSet** | create a new address map set | {"newSet":{}} |  |
-| **NewBloom** | create a new bloom set. | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - number of elements in filter must be &gt; 0 collisionProb - allowed collision probability must be &gt; 0 and &lt;= 1 |
-| **AddAddresses** | add an address to the set | {"addAddresses":{"addresses":\["X-fuji..."\]}} | addresses - list of addresses to match |
+| **NewSet** | 创建新地址地图集。 | {"newSet":{}} |  |
+| **NewBloom** | 创建新的 bloom 集。 | {"newBloom":{"maxElements":"1000","collisionProb":"0.0100"}} | maxElements - 过滤器中的元素数量必须 > 0 collisionProb - 允许的碰撞概率必须 > 0 和 <= 1 |
+| **AddAddresses** | 将地址添加到集 | {"addAddresses":{"addresses":["X-fuji..."]}} | 地址 - 要匹配的地址列表 |
 
-Calling **NewSet** or **NewBloom** resets the filter, and must be followed with **AddAddresses**. **AddAddresses** can be called multiple times.
+调用 **NewSet **或 **NewBloom ** 会重置过滤器，必须使用 **AddAddresses ** 进行跟踪。**AddAddresses ** 可以被多次调用。
 
-**Set details**
+**设置详细信息**
 
-* **NewSet** performs absolute address matches, if the address is in the set you will be sent the transaction.
-* **NewBloom** [Bloom filtering](https://en.wikipedia.org/wiki/Bloom_filter) can produce false positives, but can allow a greater number of addresses to be filtered.  If the addresses is in the filter, you will be sent the transaction.
+* **NewSet** 执行绝对地址匹配，如果地址在集合中，您将会收到交易。
+* **NewBloom [Bloom 过滤](https://en.wikipedia.org/wiki/Bloom_filter)** 可以产生误报，但可以允许过滤更多的地址。如果地址在过滤器中，您将会收到交易。
 
-#### **Example Response**
+#### **示例响应**
 
 ```cpp
 2021/05/11 15:59:35 {"txID":"22HWKHrREyXyAiDnVmGp3TQQ79tHSSVxA9h26VfDEzoxvwveyk"}
