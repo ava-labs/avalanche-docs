@@ -1,459 +1,850 @@
-# Command Line Interface
+# コマンドラインインターフェース
 
-When running a node, there are a variety of possible configurations that are supported.
+次の引数でノードの設定を指定することができます。
 
-## Arguments
+## 設定ファイル
 
-### Config File
+`--config-file`（文字列）：
 
-`--config-file` \(string\):
+このノードの設定を指定するJSONファイルへのパス。コマンドラインの引数は、設定ファイルで設定された引数よりも優先されます。
 
-Config file specifies a JSON file to configure a node instead of specifying arguments via the command line. Command line arguments will override any options set in the config file.
+JSONコンフィグファイルの例。
 
-```text
-./build/avalanchego --config-file=config.json
-```
-
-config.json file:
-
-```cpp
+```javascript
 {
-    "plugin-dir": "/home/ubuntu/avalanchego/plugins",
     "log-level": "debug"
 }
 ```
 
-### APIs
+## API
 
-`--api-admin-enabled` \(boolean\):
+`--api-admin-enabled`（ブーリアン）：
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
+`false`に設定した場合、このノードはAdmin APIを公開しません。`false`デフォルトは(1)です。詳細は[こちら](../avalanchego-apis/admin-api.md)をご覧ください。
 
-`--api-auth-required` \(boolean\):
+`--api-auth-required`（ブーリアン）：
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+`true`に設定した場合、APIコールは認証トークンを必要とします。`false`デフォルトは(1)です。詳細は[こちら](../avalanchego-apis/auth-api.md)をご覧ください。
 
-`--api-auth-password` \(string\):
+`--api-auth-password`（文字列）：
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
+認証トークンの作成／取消に必要なパスワード。`--api-auth-required=true`の場合は指定する必要があります。そうでない場合は無視されます。詳細は[こちら](../avalanchego-apis/auth-api.md)をご覧ください。
 
-`--api-health-enabled` \(boolean\):
+`--api-health-enabled`（ブーリアン）：
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health-api.md) for more information.
+`true`に設定した場合、このノードはHealth APIを公開します。`true`デフォルトは(1)です。詳細は[こちら](../avalanchego-apis/health-api.md)をご覧ください。
 
-`--api-info-enabled` \(boolean\):
+`--index-enabled`（ブーリアン）：<a id="index-enabled"></a>
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info-api.md) for more information.
+`false`の場合、このノードはインデクサを有効にせず、Index APIは利用できません。`false`デフォルトは\(1\)です。詳細は[こちら](../avalanchego-apis/index-api.md)をご覧ください。
 
-`--api-ipcs-enabled` \(boolean\):
+`--api-info-enabled`（ブーリアン）：
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
+`true`に設定した場合、このノードはInfo APIを公開します。`true`デフォルトは\(1\)です。詳細は[こちら](../avalanchego-apis/info-api.md)をご覧ください。
 
-`--api-keystore-enabled` \(boolean\):
+`--api-ipcs-enabled`（ブーリアン）：
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
+`true`に設定した場合、このノードはIPCs APIを公開します。`false`デフォルトは\(1\)です。詳細は[こちら](../avalanchego-apis/ipc-api.md)をご覧ください。
 
-`--api-metrics-enabled` \(boolean\):
+`--api-keystore-enabled`（ブーリアン）：
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+`false`に設定した場合、このノードはKeystore APIを公開しません。`true`デフォルトは\(1\)です。詳細は[こちら](../avalanchego-apis/keystore-api.md)をご覧ください。
 
-### Assertions
+`--api-metrics-enabled`（ブーリアン）：
 
-`--assertions-enabled` \(boolean\):
+`false`に設定した場合、このノードはMetrics APIを公開しません。`true`デフォルトは\(1\)です。詳細は[こちら](../avalanchego-apis/metrics-api.md)をご覧ください。
 
-When set to `true`, assertions will execute at runtime throughout the codebase. This is intended for use in debugging, as we may get a more specific error message. Defaults to `true`.
+## アサーション
 
-### Bootstrapping
+`--assertions-enabled`（ブーリアン）：
 
-`--bootstrap-ids` \(string\):
+`true`に設定した場合、アサーションはコードベース全体でランタイムに実行されます。これは、より具体的なエラーメッセージを得ることができるため、デバッグ時に使用することを目的としています。`true`デフォルトは\(1\)です。
 
-Bootstrap IDs is an array of validator IDs. These IDs will be used to authenticate bootstrapping peers. This only needs to be set when `--p2p-tls-enabled=true`. An example setting of this field would be `--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+## ブートストラッピング
 
-`--bootstrap-ips` \(string\):
+`--bootstrap-beacon-connection-timeout`（デュレーション）：
 
-Bootstrap IPs is an array of IPv4:port pairs. These IP Addresses will be used to bootstrap the current Avalanche state. An example setting of this field would be `--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`. Defaults to empty \(does not attempt to bootstrap from other nodes.\)
+起動しているビーコンに接続しようとする際のタイムアウト。`1m`デフォルトは\(1\)です。
 
-### Connection Metering
+`--bootstrap-ids`（文字列）：
 
-`--conn-meter-max-conns` \(int\):
+ブートストラップIDは、バリデータIDの配列です。これらのIDは、ブートストラップピアの認証に使用されます。このフィールドの設定例は、`--bootstrap-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`です。デフォルト値は、ネットワークIDに依存します。
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+`--bootstrap-ips`（文字列）：
 
-`--conn-meter-reset-duration` \(duration\):
+ブートストラップIPは、IPv4:ポートのペアの配列です。これらのIPアドレスは、現在のAvalancheの状態をブートストラップするために使用されます。このフィールドの設定例は、`--bootstrap-ips="127.0.0.1:12345,1.2.3.4:5678"`です。デフォルト値は、ネットワークIDに依存します。
 
-Upgrade at most `conn-meter-max-conns` connections from a given IP per `conn-meter-reset-duration`. If `conn-meter-reset-duration` is 0, incoming connections are not rate-limited.
+`--bootstrap-retry-enabled`（ブーリアン）：
 
-### Database
+Trueの場合は、起動に失敗した場合に再起動します。
 
-`--db-dir` \(string, file path\):
+`--bootstrap-retry-max-attempts`（uint）：
 
-Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
+失敗した後にブートストラップを再試行する最大回数。
 
-`--db-enabled` \(boolean\):
+## データベース
 
-If set to `false`, state updates are performed solely to an in-memory database, without making any changes on permanent storage. When set to `true`, state updates are written to a local persistent database. Defaults to `true`.
+`--db-dir`（文字列、ファイルパス）：
 
-### HTTP Server
+データベースを永続化するためのディレクトリを指定します。`"$HOME/.avalanchego/db"`デフォルトは\(1\)です。
 
-`--http-host` \(string\):
+`--db-type`（文字列）：
 
-The address that HTTP APIs listen on. Defaults to `127.0.0.1`. This means that by default, your node can only handle API calls made from the same machine. To allow API calls from other machines, use `--http-host=`. For example if your public IP address is `1.2.3.4` and you’d like to access AvalancheGo’s RPC over that IP address then you need to pass in `--http-host=1.2.3.4`. To allow API calls from all IPs, use `http-host=`.
+使用するデータベースの種類を指定します。`leveldb`、`rocksdb`、`memdb`のいずれかである必要があります。`memdb`は、インメモリー、非パーシステッドデータベースです。
 
-`--http-port` \(int\):
+なお、`leveldb`を実行すると、`rocksdb`の実行時に永続化されたデータを読むことができなくなります。
 
-Each node runs an HTTP server that provides the APIs for interacting with the node and the Avalanche network. This argument specifies the port that the HTTP server will listen on. The default value is `9650`.
+**RocksDBに関する重要な注意点を2つ挙げておきます**。まず、RocksDBはすべてのコンピュータで動作するわけではありません。次に、RocksDBはデフォルトでは構成されておらず、一般に公開されているバイナリにも含まれていません。RocksDBでAvalancheGoを構築するには、ターミナルで`export ROCKSDBALLOWED=1`を実行し、次に`scripts/build.sh`を実行します。`--db-type=rocksdb`を使用する前にこれを行う必要があります。
 
-`--http-tls-cert-file` \(string, file path\):
+## Genesis（ジェネシス）
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+`--genesis`（文字列）：
 
-`--http-tls-enabled` \(boolean\):
+使用するgenesisデータを含むJSONファイルへのパス。標準ネットワーク（Mainnet、Testnet）を実行している場合は無視されます。与えられない場合は、デフォルトの genesis データを使用します。GenesisデータのJSON表現の例については、[こちら](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16)をご覧ください。
 
-If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Defaults to `false`.
+## HTTPサーバー
 
-`--http-tls-key-file` \(string, file path\):
+`--http-host`（文字列）：
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+HTTP APIがリッスンするアドレスです。`127.0.0.1`デフォルトは\(1\)です。つまりデフォルトでは、ノードは同じマシンからのAPIコールしか処理できません。他のマシンからのAPIコールを許可するには、`--http-host=`を使用します。また、パラメータとしてドメイン名を入力することもできます。
 
-### IPCS
+`--http-port`（int）：
 
-`--ipcs-chain-ids` \(string\)
+各ノードは、ノードやAvalancheネットワークと対話するためのAPIを提供するHTTPサーバーを実行します。この引数には、HTTPサーバーがリッスンするポートを指定します。デフォルト値は`9650`です。
 
-Comma separated list of chain ids to connect to. There is no default value.
+`--http-tls-cert-file`（文字列、ファイルパス）：
 
-`--ipcs-path` \(string\)
+この引数は、ノードがHTTPSサーバーに使用するTLS証明書の場所を指定します。`--http-tls-enabled=true`の時に指定する必要があります。デフォルト値はありません。
 
-The directory \(Unix\) or named pipe prefix \(Windows\) for IPC sockets. Defaults to /tmp.
+`--http-tls-enabled`（ブーリアン）：
 
-### File Descriptor Limit
+このフラグが`true`に設定されていると、HTTPSを使用するためにサーバーをアップグレードしようとします。`false`デフォルトは\(1\)です。
 
-`--fd-limit` \(int\)
+`--http-tls-key-file`（文字列、ファイルパス）：
 
-Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+この引数は、ノードがHTTPSサーバーに使用するTLS秘密鍵の場所を指定します。`--http-tls-enabled=true`の時に指定する必要があります。デフォルト値はありません。
 
-### Logging
+## IPCS
 
-`--log-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
+`--ipcs-chain-ids`（文字列）
 
-The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
+接続先となるチェーンIDのコンマ区切りリスト（例`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`）。デフォルト値はありません。
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+`--ipcs-path`（文字列）
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
+IPCソケット用のディレクトリ（Unix）または名前付きpipe prefix（Windows）です。デフォルトは/tmpです。
 
-`--log-display-level` \(string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`\):
+## ファイル記述子の制限
 
-The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
+`--fd-limit`（int）
 
-`--log-display-highlight` \(string, `{auto, plain, colors}`\):
+プロセスファイル記述子制限を少なくともこの値まで引き上げようとします。デフォルトは`32768`です。
 
-Whether to color/highlight display logs. Default highlights when the output is a terminal. Otherwise, should be one of `{auto, plain, colors}`
+## ロギング
 
-`--log-dir` \(string, file path\):
+`--log-level`（文字列、`{Off, Fatal, Error, Warn, Info, Debug, Verbo}`）：
 
-Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
+ログレベルは、どのイベントを記録するかを決定します。7つのレベルがあり、優先度の高いものから低いものへと順に並んでいます。
 
-### Network ID
+* `Off`：このレベルのログはありません。
+* `Fatal`：復旧できない致命的なエラー
+* `Error`：ノードが遭遇したエラーで、これらのエラーは回復することができました。
+* `Warn`：偽のビザンチンノードや将来のエラーの可能性を示す警告です。
+* `Info`：ノードのステータス更新に関する有用な記述。
+* `Debug`：デバッグログは、コードのバグを理解しようとする場合に便利です。通常の使用で必要とされるより多くの情報が表示されます。
+* `Verbo`：ノードが処理している膨大な量の情報を追跡します。これには、メッセージの内容や、極めて低いレベルのプロトコル分析のためのデータのバイナリダンプが含まれます。
 
-`--network-id` \(string\):
+ログレベルを指定する場合は、指定された優先度以上のログがすべて追跡されることに注意してください。`Info`デフォルトは\(1\)です。
 
-The identity of the network the node should connect to. Can be one of:
+`--log-display-level`（文字列、`{Off, Fatal, Error, Warn, Info, Debug, Verbo}`）：
 
-* `--network-id=mainnet` -&gt; Connect to Main net \(default\).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. \(Right now, this is Fuji.\)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+ログレベルによって、画面に表示するイベントが決まります。空白の場合、`--log-level`で指定した値がデフォルトになります。
 
-### Public IP
+`--log-display-highlight`（文字列、`{auto, plain, colors}`）：
 
-`--public-ip` \(string\):
+表示ログを色付け／ハイライトするかどうか。デフォルトでは、出力がターミナルの場合にハイライトされます。それ以外の場合は、`{auto, plain, colors}`のいずれかでなければなりません。
 
-Validators must know their public facing IP addresses so they can let other nodes know how to connect to them. If this argument is not provided, the node will attempt to perform NAT traversal to get the node’s public IP. Should be set to `127.0.0.1` to create a local network. If not set, attempts to learn IP using NAT traversal.
+`--log-dir`（文字列、ファイルパス）：
 
-`--dynamic-public-ip` \(string\):
+システムログを保持するディレクトリを指定します。`"$HOME/.avalanchego/logs"`デフォルトは\(1\)です。
 
-Valid values if param is present: `opendns`, `ifconfigco` or `ifconfigme`. This overrides `--public-ip`. If set, will poll the remote service every `--dynamic-update-duration` and update the node’s public IP address.
+## ネットワークID
 
-`--dynamic-update-duration` \(duration\):
+`--network-id`（文字列）：
 
-The time between poll events for `--dynamic-public-ip` or NAT traversal. The recommended minimum is 1 minute. Defaults to `5m`.
+ノードが接続するネットワークのID。次のいずれかになります。
 
-### Signature Verification
+* `--network-id=mainnet` -> Mainnetに接続します \(デフォルト\)。
+* `--network-id=fuji` -> Fuji test-networkに接続します。
+* `--network-id=testnet` -> 現在のテストネットワークに接続します。\(現在はFujiです。\)
+* `--network-id=local` -> ローカルテストネットワークに接続します。
+* `--network-id=network-{id}` -> 与えられたID`id`のネットワークに接続します`[0, 2^32)`。
 
-`--signature-verification-enabled` \(boolean\):
+## 公開IP
 
-Enables signature verification. When set to `false`, signatures won’t be checked in VMs that allow signatures to be disabled. Defaults to `true`.
+`--public-ip`（文字列）：
 
-### Staking
+バリデータは自分の公開IPアドレスを知っている必要があります。そうすることで他のノードに接続方法を知らせることができます。この引数を指定しなかった場合は、ノードの公開IPを取得するためにNATトラバーサルを試みます。ローカルネットワークを作成するには、`127.0.0.1`に設定する必要があります。設定されていない場合は、NATトラバーサルを使用してIPを取得しようとします。
 
-`--staking-port` \(string\):
+`--dynamic-public-ip`（文字列）：
 
-The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
+paramが存在する場合の有効な値。`opendns`、`ifconfigco`、`ifconfigme`のいずれかです。これは`--public-ip`よりも優先されます。設定されている場合、`--dynamic-update-duration`毎にリモートサービスをポーリングし、ノードの公開IPアドレスを更新します。
 
-`--p2p-tls-enabled` \(boolean\):
+`--dynamic-update-duration`（デュレーション）：
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers. However, This can be disabled for testing. When TLS is disabled, the `stakingID` will be derived from the IP Address the node claims it owns. This will also disable encryption of inter-node communication. This should only be specified for testing. Defaults to `true`. This must be true when `--staking-enabled=true`.
+`--dynamic-public-ip`またはNATトラバーサルのポールイベントの間隔。推奨される最小時間は1分です。`5m`デフォルトは\(1\)です。
 
-`--staking-enabled` \(boolean\):
+## 署名検証
 
-Avalanche uses Proof of Stake \(PoS\) as Sybil resistance to make it prohibitively expensive to attack the network. When this is `true`, `--p2p-tls-enabled` must be set to `true` in order to secure P2P communications.
+`--signature-verification-enabled`（ブーリアン）：
 
-`--staking-tls-cert-file` \(string, file path\):
+署名の検証を有効にします。`false`に設定すると、署名を無効化できるVMでは、署名の検証が行われません。`true`デフォルトは\(1\)です。
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS certificate used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+## ステーキング
 
-`--staking-tls-key-file` \(string, file path\):
+`--staking-port`（文字列）：
 
-Avalanche uses two-way authenticated TLS connections to securely identify the `stakingID` of connected peers when `--p2p-tls-enabled=true`. This argument specifies the location of the TLS private key used by the node. This must be specified when `--p2p-tls-enabled=true`. Defaults to `""`.
+ステーキングサーバーがAvalancheネットワークに外部から接続するためのポートです。`9651`デフォルトは\(1\)です。
 
-`--staking-disabled-weight` \(int\):
+`--staking-enabled`（ブーリアン）：
 
-Weight to provide to each peer when staking is disabled. Defaults to `1`.
+Avalancheはシビル耐性にプルーフ・オブ・ステーク（PoS）を使用し、ネットワークへの攻撃が非常に高額になるようにしています。falseの場合、シビル耐性は無効となり、コンセンサス中にすべてのピアがサンプリングされます。`true`デフォルトは\(1\)です。
 
-### Version
+このフラグを`false`に設定しても、「このノードがバリデータではない」という意味では**ありません**。このノードがバリデータだけではなく、すべてのノードをサンプリングするということを意味します。**何をしようとしているのかを十分理解している場合以外は、このフラグをfalseに設定してはなりません。**
 
-`--version` \(boolean\)
+`--staking-tls-cert-file`（文字列、ファイルパス）：
 
-If this is `true`, print the version and quit. Defaults to `false`.
+Avalancheは、双方向認証のTLS接続を使用してノードを安全に接続します。この引数は、ノードが使用するTLS証明書の場所を指定します。デフォルトでは、ノードはTLS証明書が`$HOME/.avalanchego/staking/staker.crt`にあることを想定しています。
 
-## Advanced Options
+`--staking-tls-key-file`（文字列、ファイルパス）：
 
-The following options affect the correctness of the platform. They may need to be changed network-wide, and as a result, an ordinary user should not change from the defaults.
+Avalancheは、双方向認証のTLS接続を使用してノードを安全に接続します。この引数は、ノードが使用するTLS証明書の場所を指定します。デフォルトでは、ノードはTLSプライベートキーが`$HOME/.avalanchego/staking/staker.key`であることを期待しています。
 
-### Benchlist
+`--staking-disabled-weight`（int）：
 
-`--benchlist-duration` \(duration\):
+ステーキングが無効になっている場合に各ピアに提供する重量。`1`デフォルトは\(1\)です。
 
-Amount of time a peer is benchlisted after surpassing `--benchlist-fail-threshold`. Defaults to `1h`.
+## バージョン
 
-`--benchlist-fail-threshold` \(int\):
+`--version`（ブーリアン）
 
-Number of consecutive failed queries to a node before benching it \(assuming all queries to it will fail\). Defaults to `10`.
+これが`true`の場合、バージョンを表示して終了します。`false`デフォルトは\(1\)です。
 
-`--benchlist-peer-summary-enabled` \(boolean\):
+## 高度なオプション
 
-Enables peer specific query latency metrics. Defaults to `false`.
+以下のオプションは、ノードの正しさに影響する可能性があります。パワーユーザーのみがこれらを変更する必要があります。
 
-`--benchlist-min-failing-duration` \(duration\):
+### アプリのゴシップ
 
-Minimum amount of time messages to a peer must be failing before the peer is benched. Defaults to `5m`.
+`--consensus-app-gossip-non-validator-size`（uint）：
 
-### Consensus Parameters
+AppGossipメッセージをゴシップするピアの数（バリデータである場合もそうでない場合もあります）。`0`デフォルトは\(1\)です。
 
-`--consensus-gossip-frequency` \(duration\):
+`--consensus-app-gossip-validator-size`（uint）：
 
-Time between gossiping accepted frontiers. Defaults to `10s`.
+AppGossipメッセージをゴシップするバリデータの数。`6`デフォルトは\(1\)です。
 
-`--consensus-shutdown-timeout` \(duration\):
+### ベンチリスト
 
-Timeout before killing an unresponsive chain. Defaults to `5s`.
+`--benchlist-duration`（デュレーション）：
 
-`--creation-tx-fee` \(int\):
+`--benchlist-fail-threshold`を超えた後にピアがベンチリストに登録されるまでの最大時間。`15m`デフォルトは\(1\)です。
 
-Transaction fee, in nAVAX, for transactions that create new state. Defaults to `1000000` nAVAX \(.001 AVAX\) per transaction.
+`--benchlist-fail-threshold`（int）：
 
-`--min-delegator-stake` \(int\):
+ベンチ処理する前にノードに対して連続して失敗をしたクエリの数（すべてのクエリが失敗すると仮定）。`10`デフォルトは\(1\)です。
 
-The minimum stake, in nAVAX, that can be delegated to a validator of the Primary Network.
+`--benchlist-peer-summary-enabled`（ブーリアン）：
 
-Defaults to `25000000000` \(25 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
+ピア固有のクエリ待機時間のメトリックを有効にします。`false`デフォルトは\(1\)です。
 
-`--min-delegation-fee` \(int\):
+`--benchlist-min-failing-duration`（デュレーション）：
 
-The minimum delegation fee that can be charged for delegation on the Primary Network, multiplied by `10,000` . Must be in the range `[0, 1000000]`. Defaults to `20000` \(2%\) on Main Net.
+ピアへのクエリが失敗してから、そのピアがベンチされるまでの最小時間。`150s`デフォルトは\(1\)です。
 
-`--min-stake-duration` \(duration\):
+### 構築ディレクトリ
 
-Minimum staking duration. The Default on Main Net is `336h` \(two weeks.\)
+`--build-dir`（文字列）：
 
-`--min-validator-stake` \(int\):
-
-The minimum stake, in nAVAX, required to validate the Primary Network.
-
-Defaults to `2000000000000` \(2,000 AVAX\) on Main Net. Defaults to `5000000` \(.005 AVAX\) on Test Net.
-
-`--max-stake-duration` \(duration\):
-
-The maximum staking duration, in seconds. Defaults to `8760h` \(365 days\) on Main Net.
-
-`--max-validator-stake` \(int\):
-
-The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` \(3,000,000 AVAX\) on Main Net. This includes stake provided by both the validator and by delegators to the validator.
-
-`--snow-avalanche-batch-size` \(int\):
-
-DAG implementations of Snow consensus define `b` as the number of transactions a vertex should include. Increasing `b` will, theoretically, increase throughput while increasing latency. The node will wait for at most 1 second to collect a batch, and will then issue the entire batch at once. The value must be at least `1`. Defaults to `30`.
-
-`--snow-avalanche-num-parents` \(int\):
-
-DAG implementations of Snow consensus define `p` as the number of parents a vertex should include. Increasing `p` will improve the amortization of network queries. However, by increasing the connectivity of the graph, the complexity of the graph traversals is increased. The value must be at least `2`. Defaults to `5`.
-
-`--snow-concurrent-repolls` \(int\):
-
-Snow consensus requires repolling transactions that are issued during low time of network usage. This parameter lets one define how aggressive the client will be in finalizing these pending transactions. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1` and at most `--snow-rogue-commit-threshold`. Defaults to `4`.
-
-`--snow-sample-size` \(int\):
-
-Snow consensus defines `k` as the number of validators that are sampled during each network poll. This parameter lets one define the `k` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `20`.
-
-`--snow-quorum-size` \(int\):
-
-Snow consensus defines `alpha` as the number of validators that must prefer a transaction during each network poll to increase the confidence in the transaction. This parameter lets us define the `alpha` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at greater than `k/2`. Defaults to `14`.
-
-`--snow-virtuous-commit-threshold` \(int\):
-
-Snow consensus defines `beta1` as the number of consecutive polls that a virtuous transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta1` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `1`. Defaults to `15`.
-
-`--snow-rogue-commit-threshold` \(int\):
-
-Snow consensus defines `beta2` as the number of consecutive polls that a rogue transaction must increase its confidence for it to be accepted. This parameter lets us define the `beta2` value used for consensus. This should only be changed after careful consideration of the tradeoffs of Snow consensus. The value must be at least `beta1`. Defaults to `30`.
-
-`--stake-minting-period` \(duration\):
-
-Consumption period of the staking function, in seconds. The Default on Main Net is `8760h` \(365 days\).
-
-`--tx-fee` \(int\):
-
-The required amount of nAVAX to be burned for a transaction to be valid. This parameter requires network agreement in its current form. Changing this value from the default should only be done on private networks. Defaults to `1000000` nAVAX per transaction.
-
-`--uptime-requirement` \(float\):
-
-Fraction of time a validator must be online to receive rewards. Defaults to `0.6`.
-
-### Message Handling
-
-`--max-non-staker-pending-msgs` \(int\):
-
-Maximum number of messages a non-staker is allowed to have pending. Defaults to `20`.
-
-`--staker-msg-reserved` \(float\):
-
-Portion of pending message buffer reserved for messages from validators. Defaults to `0.375`.
-
-`--staker-cpu-reserved` \(float\):
-
-Portion of chain’s CPU time reserved for messages from validators. Defaults to `0.375`.
-
-### Network Timeout
-
-`--network-initial-timeout` \(duration\):
-
-Initial timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
-
-`--network-minimum-timeout` \(duration\):
-
-Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `5s`.
-
-`--network-maximum-timeout` \(duration\):
-
-Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
-
-`--network-timeout-multiplier` \(float\):
-
-Multiplier of the timeout after a failed request. Defaults to `1.1`.
-
-`--network-timeout-reduction` \(duration\):
-
-Reduction of the timeout after a successful request, in nanoseconds. Defaults to `1`.
-
-### Throughput Server
-
-`--xput-server-enabled` \[Deprecated\] \(boolean\):
-
-An optional server helps run throughput tests by injecting load into the network on command. If enabled, this server is started up and listens for commands from a test coordinator. Defaults to `false`.
-
-`--xput-server-port` \[Deprecated\] \(string\):
-
-This option lets one specify on which port the throughput server, if enabled, will listen. Defaults to `9652`.
-
-### Subnet Whitelist
-
-`--whitelisted-subnets` \(string\):
-
-Comma separated list of subnets that this node would validate if added to. Defaults to empty \(will only validate the Primary Network\).
-
-### Restart on Disconnect
-
-Some users have had an issue where their AvalancheGo node gets into an unhealthy state when their node loses internet connectivity or when their IP address changes. To help deal with this, there are command line flags that cause the node to restart if it disconnected from all peers. They are:
-
-`--restart-on-disconnected` \(boolean, defaults to `false`\)
-
-`--disconnected-check-frequency` \(duration, defaults to `10s`\)
-
-`--disconnected-restart-timeout` \(duration, defaults to `1m`\)
-
-If `restart-on-disconnected` is `true`, the node will check every `disconnected-check-frequency` to see whether it has lost connection to all peers. If the node has lost connection to all peers for `disconnected-restart-timeout`, it will restart.
-
-If `restart-on-disconnected` is `false` or either`disconnected-check-frequency` or`disconnected-restart-timeout` is 0, node will not restart.
-
-### Plugins
-
-`--plugin-dir` \(string, file path\):
-
-Specifies the directory in which the `evm` plugin is kept. Defaults to `"$HOME/.avalanchego/build/plugins"`.
-
-`--coreth-config` \(json\):
-
-This allows you to specify a config to be passed into Coreth, the VM running the C Chain. The default values for this config are:
-
-```cpp
-{
-    "snowman-api-enabled": false,
-    "coreth-admin-api-enabled": false,
-    "net-api-enabled": true,
-    "rpc-gas-cap": 2500000000,
-    "rpc-tx-fee-cap": 100,
-    "eth-api-enabled": true,
-    "personal-api-enabled": true,
-    "tx-pool-api-enabled": true,
-    "debug-api-enabled": false,
-    "web3-api-enabled": true
-}
-```
-
-Note: if a config is specified, all default options are overridden. For example:
+AvalancheGoとプラグインバイナリを見つける場所を指定します。デフォルトでは、実行されたAvalancheGoバイナリのパスになっています。このディレクトリの構造は次のようになっていなければなりません。
 
 ```text
-./build/avalanchego --config-file=config.json
+build-dir
+|_avalanchego
+    |_plugins
+      |_evm
 ```
 
-config.json:
+### チェーンの設定
 
-```cpp
+一部のチェーンでは、ノードオペレータがカスタム設定を提供できます。AvalancheGoは、ファイルからチェーンの設定を読み取り、初期化時に対応するチェーンに渡すことができます。
+
+AvalancheGoは、`--chain-config-dir`で指定されたディレクトリでこれらのファイルを検索します。このディレクトリには、名前がチェーンIDやチェーンエイリアスであるサブディレクトリをもつことができます。各サブディレクトリには、ディレクトリ名で指定されたチェーンの設定が含まれます。各サブディレクトリには、対応するチェーンが初期化されるときに値が渡される`config`という名前のファイルを含める必要があります。例えば、C-Chainの設定は、`[chain-config-dir-goes-here]/C/config.json`にある必要があります。
+
+これらのファイルが持つべき拡張子やファイルの内容は、VMに依存します。例えば、あるチェーンでは`config.txt`を想定し、他のチェーンでは`config.json`を想定する場合があります。同じサブディレクトリに、同じ名前で異なる拡張子（例：`config.json`と`config.txt`）を持つ複数のファイルがある場合、AvalancheGoはエラーとなり終了します。
+
+特定のチェーンについて、AvalancheGoはまずチェーンIDを名前にもつ設定サブディレクトリを探します。それが見つからない場合は、チェーンのプライマリエイリアスを名前にもつ設定サブディレクトリを探します。それも見つからない場合は、そのチェーンの別のエイリアスの名前をもつ設定サブディレクトリを探します。すべてのフォルダ名とファイル名は、大文字と小文字が区別されます。
+
+これらのカスタム設定を提供する必要はありません。提供されない場合は、VM固有のデフォルト設定が使用されます。
+
+`--chain-config-dir`（文字列）：
+
+上述のようにチェーンの設定を含むディレクトリを指定します。`$HOME/.avalanchego/configs/chains`デフォルトは\(1\)です。このフラグが指定されておらず、デフォルトのディレクトリが存在しない場合でも、カスタム設定はオプションであるため、AvalancheGoは終了しません。ただし、フラグが設定されている場合は、指定されたフォルダが存在していなければなりません。存在しない場合は、AvalancheGoはエラーで終了します。
+
+#### C-Chainの設定
+
+C-Chainの設定を指定するには、JSON configファイルを`{chain-config-dir}/C/config.json`（または上記のような有効な場所）に配置する必要があります。
+
+例えば、`chain-config-dir`にデフォルト値がある場合、`config.json`は`$HOME/.avalanchego/configs/chains/C/config.json`に配置することができます。
+
+C-Chainの設定オプションを以下に示します。
+
+デフォルトのC-Chainの設定は次の通りです。
+
+```json
 {
-    "coreth-config": {
-        "snowman-api-enabled": false,
-        "coreth-admin-api-enabled": false,
-        "net-api-enabled": true,
-        "rpc-gas-cap": 2500000000,
-        "rpc-tx-fee-cap": 100,
-        "eth-api-enabled": true,
-        "tx-pool-api-enabled": true,
-        "debug-api-enabled": true,
-        "web3-api-enabled": true
-    }
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "net-api-enabled": true,
+  "rpc-gas-cap": 2500000000,
+  "rpc-tx-fee-cap": 100,
+  "eth-api-enabled": true,
+  "personal-api-enabled": false,
+  "tx-pool-api-enabled": false,
+  "debug-api-enabled": false,
+  "web3-api-enabled": true,
+  "local-txs-enabled": false,
+  "pruning-enabled": false,
+  "api-max-duration": 0, // Default to no maximum
+  "api-max-blocks-per-request": 0, // Default to no maximum
+  "allow-unfinalized-queries": false,
+  "log-level": "info"
 }
 ```
 
-Since the option `personal-api-enabled` is excluded, it will be set to false and disable the `personal_*` namespace.
+与えられた設定で指定されている場合のみ、デフォルト値の更新が行われます。
 
-The options specify parameters for Coreth \(the C Chain\) as follows:
+**API**
 
-* `snowman-api-enabled` -&gt; Enables Snowman API.
-* `coreth-admin-apienabled` -&gt; Enables Admin API on Coreth plugin.
-* `net-api-enabled` -&gt; Enables `net_*` API.
-* `rpc-gas-cap` -&gt; Sets the maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\)
-* `rpc-tx-fee-cap` -&gt; Sets the global transaction fee \(price \* gaslimit\) cap for send-transction variants. The unit is AVAX.
-* `eth-api-enabled` -&gt; Enables `eth_*` API.
-* `personal-api-enabled` -&gt; Enables `personal_*` API.
-* `tx-pool-api-enabled` -&gt; Enables `txpool_*` API.
-* `debug-api-enabled` -&gt; Enables `debug_*` API.
-* `web3-api-enabled` -&gt; Enables `web3_*` API.
+`snowman-api-enabled`（ブーリアン）：
+
+Snowman APIを有効にします。デフォルトはfalseです。
+
+`coreth-admin-api-enabled`（ブーリアン）：
+
+Admin APIを有効にします。デフォルトはfalseです。
+
+`net-api-enabled`（ブーリアン）：
+
+`net_*`APIを有効にします。デフォルトはTrueです。
+
+`eth-api-enabled`（ブーリアン）：
+
+`eth_*`APIを有効にします。デフォルトはTrueです。
+
+`personal-api-enabled`（ブーリアン）：
+
+`personal_*`APIを有効にします。デフォルトはfalseです。
+
+`tx-pool-api-enabled`（ブーリアン）：
+
+`txpool_*`APIを有効にします。デフォルトはfalseです。
+
+`debug-api-enabled`（ブーリアン）：
+
+`debug_*`APIを有効にします。デフォルトはfalseです。
+
+`web3-api-enabled`（ブーリアン）：
+
+`web3_*`APIを有効にします。デフォルトはTrueです。
+
+**APIガス／価格キャップ**
+
+`rpc-gas-cap`（int）：
+
+RPC呼び出し（`eth_estimateGas`で使用）で消費される最大のガス。nAVAX（GWei）で測定されます。デフォルトは2,500,000,000です。
+
+`rpc-tx-fee-cap`（int）：
+
+送信トランザクションバリアントのグローバルトランザクション手数料 \(価格 \* ガスリミット\) の上限 \(AVAXで測定\)。デフォルトは100です。
+
+**データベースのプルーニング**
+
+`pruning-enabled`（ブーリアン）：
+
+trueの場合、古い履歴データのデータベースプルーニングが有効になります。履歴ルートのすべてのデータにアクセスする必要があるノードでは、無効にする必要があります。プルーニングは新しいデータに対してのみ行われます。v1.4.9でのデフォルトは`false`で、それ以降のバージョンでは`true`です。
+
+**ログレベル**
+
+`log-level`（文字列）：
+
+ログレベルを定義します。`"trace"`、`"debug"`、`"info"`、`"warn"`、`"error"`、`"crit"`のいずれかでなければなりません。`"debug"`デフォルトは\(1\)です。
+
+**キーストアの設定**
+
+`keystore-directory`（文字列）：
+
+秘密鍵を格納するディレクトリ。相対パスとして指定できます。空白の場合は、`coreth-keystore`で一時ディレクトリを使用します。デフォルトは空の文字列です。
+
+`keystore-external-signer`（文字列）：
+
+clef型サイナーの外部URIを指定します。デフォルトは空の文字列です（有効ではありません）。
+
+`keystore-insecure-unlock-allowed`\(bool\):
+
+trueの場合、安全でないHTTP環境でユーザーがアカウントをロック解除することを許可します。デフォルトはfalseです。
+
+**その他の設定**
+
+`local-txs-enabled`（ブーリアン）：
+
+ローカルトランザクション処理を有効にします。デフォルトはfalseです。
+
+`api-max-duration`（デュレーション）：
+
+APIコールの最大継続時間。APIコールがこの継続時間を超えた場合、タイムアウトになります。デフォルトは0（最大値なし）です。
+
+`api-max-blocks-per-request`（int）：
+
+`getLogs`リクエストごとに提供するブロックの最大数。デフォルトは0（最大値なし）です。
+
+`allow-unfinalized-queries`（ブーリアン）：
+
+ファイナライズされていない（まだ受理されていない）ブロック／取引に対するクエリを許可します。デフォルトはfalseです。
+
+#### X-Chainの設定
+
+X-Chainの設定を指定するためには、JSON configファイルを`{chain-config-dir}/X/config.json`（または、上記で指定された他の有効な場所）に配置する必要があります。
+
+例えば、`chain-config-dir`にデフォルト値がある場合、`config.json`は`$HOME/.avalanchego/configs/chains/X/config.json`に配置することができます。
+
+これにより、X-Chainに渡すコンフィグを指定することができます。この設定のデフォルト値は
+
+```javascript
+{
+  "index-transactions": false,
+  "index-allow-incomplete": false
+}
+```
+
+デフォルト値は、設定で明示的に指定されている場合のみ上書きされます。
+
+パラメータは、次の通りです。
+
+**トランザクションのインデックス**
+
+`index-transactions`（ブーリアン）：
+
+`true`に設定されている場合、AVM トランザクションインデックスを有効にします。デフォルト値は`false`です。`true`に設定されている場合、AVMトランザクションは含まれる`address`および`assetID`に対してインデックスが作成されます。このデータは`avm.getAddressTxs`[API](https://github.com/ava-labs/avalanche-docs/tree/c747464781639d100a0a1183c037a972262fc893/build/references/exchange-chain-x-chain-api.md#avm-get-address-txs-api)を介して利用可能です。
+
+`index-transactions`をtrueに設定した場合、ノードが存続する限り常にtrueに設定しておく必要があることにご注意ください。いったん`true`に設定した後で`false`に設定すると、`index-allow-incomplete`も`true`に設定しない限り、ノードは起動を拒否します（下記をご覧ください）。
+
+`index-allow-incomplete`（ブーリアン）：
+
+不完全なインデックスを許可します。デフォルト値は`false`です。
+
+`index-transactions``false`この設定値は、DBにX-Chainインデックス付きのデータがなく、\(1\)が\(2\)に設定されている場合には無視されます。
+
+### コンセンサス・パラメータ
+
+`--consensus-gossip-frequency`（デュレーション）：
+
+ゴシップの間の時間がフロンティアを受け入れた。`10s`デフォルトは\(1\)です。
+
+`--consensus-shutdown-timeout`（デュレーション）：
+
+反応しないチェーンを殺す前のタイムアウト。`5s`デフォルトは\(1\)です。
+
+`--creation-tx-fee`（int）：
+
+新しい状態を作成するトランザクションのためのnAVAX単位の取引手数料。デフォルトでは、1トランザクションあたり`1000000`nAVAX（.001AVAX）です。
+
+`--min-delegator-stake`（int）：
+
+一次ネットワークのバリデータに委ねることができる最小の賭け金（nAVAX）。
+
+Mainnetでのデフォルトは、`25000000000`（25AVAX）です。Test Netでのデフォルトは、`5000000`（.005AVAX）です。
+
+`--min-delegation-fee`（int）：
+
+プライマリネットワークでのデリゲーションに課すことができる最小のデリゲーション料金に`10,000`を掛けたものです。`[0, 1000000]`の範囲でなければなりません。Mainnetでのデフォルトは、`20000`（2%）です。
+
+`--min-stake-duration`（デュレーション）：
+
+最小のステーキング期間。Mainnetでのデフォルトは、`336h`（2週間）です。
+
+`--min-validator-stake`（int）：
+
+一次ネットワークを有効にするために必要な最小の出資額（nAVAX）です。
+
+Mainnetでのデフォルトは、`2000000000000`（2,000AVAX）です。Test Netでのデフォルトは、`5000000`（.005AVAX）です。
+
+`--max-stake-duration`（デュレーション）：
+
+最大のステーキング期間（時間単位）。Mainnetでのデフォルトは、`8760h`（365日）です。
+
+`--max-validator-stake`（int）:s
+
+プライマリネットワーク上のバリデータにかけられる最大のステーク（単位：nAVAX）。Mainnetでのデフォルトは、`3000000000000000`（3,000,000AVAX）です。これにはバリデータとデリゲータの両方がバリデータに提供するステークが含まれます。
+
+`--stake-minting-period`（デュレーション）：
+
+ステーキング機能の消費期間（時間単位）。Mainnetでのデフォルトは、`8760h`（365日）です。
+
+`--tx-fee`（int）：
+
+X-Chain上でのトランザクションを有効にするため、またP-Chain上でインポート／エクスポートトランザクションが有効になるためにバーン（焼却）する必要のあるnAVAXの量です。このパラメータは、現在の形式でのネットワークの同意が必要です。この値をデフォルトから変更する場合は、必ずプライベートなネットワークでのみ行ってください。デフォルトは、トランザクションごとに`1,000,000`nAVAXです。
+
+`--uptime-requirement` \(フロート\):
+
+リワードを受け取るためにバリデータがオンラインでなければならない時間の割合。`0.8`デフォルトは\(1\)です。
+
+#### Snowのパラメータ
+
+`--snow-avalanche-batch-size`（int）：
+
+Snow consensusのDAG実装では、頂点に含めるトランザクションの数として`b`を定義しています。`b`を増加させると、理論的には、スループットが向上し、一方待機時間も増加します。ノードはバッチを収集するために最大で1秒間待機し、その後バッチ全体を一度に発行します。この値は`1`以上でなければなりません。`30`デフォルトは\(1\)です。
+
+`--snow-avalanche-num-parents`（int）：
+
+Snow consensusのDAG実装では、頂点に含めるべき親の数として`p`を定義します。`p`を増やすことで、ネットワーククエリの償却が改善されます。ただし、グラフの連結性を高めることで、グラフのトラバースの複雑さが増します。この値は`2`以上でなければなりません。`5`デフォルトは\(1\)です。
+
+`--snow-concurrent-repolls`（int）：
+
+Snowのコンセンサスでは、ネットワークの使用率が低い間に発行されたトランザクションを再ポーリングする必要があります。このパラメータでは、クライアントがどの程度の積極性でこれらの保留中のトランザクションをファイナライズさせるかを定義できます。このパラメータを変更するのは、Snow コンセンサスのトレードオフを慎重に検討してからにする必要があります。この値は`1`以上`--snow-rogue-commit-threshold`以下でなければなりません。`4`デフォルトは\(1\)です。
+
+`--snow-sample-size`（int）：
+
+Snowコンセンサスは、`k`を各ネットワークポーリング時にサンプリングされるバリデータの数と定義します。このパラメータでは、コンセンサスに使用する`k`値を定義できます。このパラメータを変更するのは、Snow コンセンサスのトレードオフを慎重に検討してからにする必要があります。この値は`1`以上でなければなりません。`20`デフォルトは\(1\)です。
+
+`--snow-quorum-size`（int）：
+
+Snowコンセンサスでは、`alpha`を、トランザクションの信頼性を高めるため、各ネットワークポーリング中にトランザクションを優先しなければならないバリデータの数として定義します。このパラメータでは、コンセンサスに使用する`alpha`値を定義することができます。このパラメータを変更するのは、Snow コンセンサスのトレードオフを慎重に検討してからにする必要があります。この値は`k/2`より大きくなければなりません。`14`デフォルトは\(1\)です。
+
+`--snow-virtuous-commit-threshold`（int）：
+
+`beta1`Snow consensusでは、\(1\)を、好ましい取引が受け入れられるために信頼性を高めなければならない連続したポールの回数と定義している。このパラメータでは、コンセンサスに使用する`beta1`値を定義することができます。このパラメータを変更するのは、Snow コンセンサスのトレードオフを慎重に検討してからにする必要があります。この値は`1`以上でなければなりません。`15`デフォルトは\(1\)です。
+
+`--snow-rogue-commit-threshold`（int）：
+
+Snowコンセンサスでは、`beta2`を、不正な取引が受け入れられるために信頼性を高めなければならない連続したポールの回数と定義しています。このパラメータでは、コンセンサスに使用する`beta2`値を定義することができます。このパラメータを変更するのは、Snow コンセンサスのトレードオフを慎重に検討してからにする必要があります。この値は`beta1`以上でなければなりません。`30`デフォルトは\(1\)です。
+
+### 連続プロファイリング
+
+メモリ／CPUのプロファイルを継続的に実行し、最新のプロファイルを保存するようにノードを設定することができます。`--profile-continuous-enabled`が設定されていると、連続的なメモリ／CPUプロファイルが有効になります。
+
+`--profile-continuous-enabled`（ブーリアン）：
+
+このアプリが継続的にパーフォーマンスプロファイルを生成する必要があるかどうか。デフォルトはfalse（有効ではない）です。
+
+`--profile-dir`（文字列）：
+
+プロファイリングが有効になっている場合、ノードは継続的にメモリ／CPUプロファイルを実行し、このディレクトリに配置します。デフォルトは`$HOME/.avalanchego/profiles/`です。
+
+`--profile-continuous-freq`（デュレーション）：
+
+新しいCPU/メモリプロファイルが作成される頻度。`15m`デフォルトは\(1\)です。
+
+`--profile-continuous-max-files`（int）：
+
+保持するCPU／メモリプロファイルの最大数。デフォルトは5です。
+
+### データベースの設定
+
+`--db-config-file`（文字列）：
+
+データベース設定ファイルへのパス。
+
+#### LevelDBの設定
+
+LevelDB設定ファイルはJSONでなければなりません。またこれらの鍵を持っている場合があります。指定されていない鍵はデフォルト値を受け取ります。
+
+```
+{
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockCacheCapacity": int
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockSize": int
+	// CompactionExpandLimitFactor limits compaction size after expanded.  This
+	// will be multiplied by table size limit at compaction target level.
+	"compactionExpandLimitFactor": int
+	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
+	// that a single 'sorted table' generates.  This will be multiplied by
+	// table size limit at grandparent level.
+	"compactionGPOverlapsFactor": int
+	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
+	// trigger compaction.
+	"compactionL0Trigger": int
+	// CompactionSourceLimitFactor limits compaction source size. This doesn't
+	// apply to level-0.  This will be multiplied by table size limit at
+	// compaction target level.
+	"compactionSourceLimitFactor": int
+	// CompactionTableSize limits size of 'sorted table' that compaction
+	// generates.  The limits for each level will be calculated as:
+	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
+	// The multiplier for each level can also fine-tuned using
+	// CompactionTableSizeMultiplierPerLevel.
+	"compactionTableSize": int
+	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	"compactionTableSizeMultiplier": float
+	"compactionTableSizeMultiplierPerLevel": []float
+	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+	"compactionTotalSizeMultiplier": float64
+	// OpenFilesCacheCapacity defines the capacity of the open files caching.
+	"openFilesCacheCapacity": int
+	// There are two buffers of size WriteBuffer used.
+	"writeBuffer": int
+	"filterBitsPerKey": int
+}
+```
+
+#### RocksDB設定ファイル
+
+カスタム設定はRocksDBではまだサポートされていません。
+
+### 健全性
+
+`--health-check-frequency`（デュレーション）：
+
+健全性チェックはこの頻度で実行されます。`30s`デフォルトは\(1\)です。
+
+`--health-check-averager-halflife`（デュレーション）：
+
+
+健全性チェックで使用される平均のハーフライフ（メッセージの失敗率を測定する場合など）。値が大きいほど、平均値の計算の安定性が増します。`10s`デフォルトは\(1\)です。
+
+### ネットワーク
+
+`--network-allow-private-ips`\(bool\):
+
+ノードがピアをプライベートIPと接続することを許可します。`true`デフォルトは\(1\)です。
+
+`--network-compression-enabled`\(bool\):
+
+trueの場合、ピアに送信された特定のメッセージを圧縮して、帯域幅の使用量を減らします。
+
+`--network-initial-timeout`（デュレーション）：
+
+アダプティブタイムアウトマネージャーの初期タイムアウト値（単位：ナノ秒）。`5s`デフォルトは\(1\)です。
+
+`--network-initial-reconnect-delay`（デュレーション）：
+
+ピアの再接続を試みる前に、初期待機時間を待つ必要があります。`1s`デフォルトは\(1\)です。
+
+`--network-max-reconnect-delay`（デュレーション）：
+
+ピアの再接続を試みる前に、最大待機時間を待つ必要があります。`1h`デフォルトは\(1\)です。
+
+`--network-minimum-timeout`（デュレーション）：
+
+アダプティブタイムアウトマネージャーの最小タイムアウト値（単位：ナノ秒）。`2s`デフォルトは\(1\)です。
+
+`--network-maximum-timeout`（デュレーション）：
+
+アダプティブタイムアウトマネージャーの最大タイムアウト値（単位：ナノ秒）。`10s`デフォルトは\(1\)です。
+
+`--network-timeout-halflife`（デュレーション）：
+
+平均ネットワーク待機時間を計算するのに使用されるハーフライフ。値が大きいほど、ネットワークの待機時間の計算の安定性が増します。`5m`デフォルトは\(1\)です。
+
+`--network-timeout-coefficient`（デュレーション）：
+
+`network-timeout-coefficient`ピアへのリクエストは、[\(1\)] \* [平均リクエストレイテンシー]後にタイムアウトします。`2`デフォルトは\(1\)です。
+
+`--network-get-version-timeout`（デュレーション）：
+
+ハンドシェイクでピアからのGetVersionレスポンスを待つためのタイムアウト。`10s`デフォルトは\(1\)です。
+
+`--network-read-handshake-timeout`（デュレーション）：
+
+ハンドシェイクメッセージを読み込む際のタイムアウト値。`15s`デフォルトは\(1\)です。
+
+`--network-ping-timeout`（デュレーション）：
+
+ピアとのPing-Pongのタイムアウト値。`30s`デフォルトは\(1\)です。
+
+`--network-ping-frequency`（デュレーション）：
+
+他のピアをピンギングする頻度。`22.5s`デフォルトは\(1\)です。
+
+`--network-health-min-conn-peers`（uint）：
+
+この数以下のピアにしか接続されていない場合、ノードは不健全性を報告します。`1`デフォルトは\(1\)です。
+
+`--network-health-max-time-since-msg-received`（デュレーション）：
+
+ノードは、この時間内にメッセージを受信しなかった場合、不健全性を報告します。`1m`デフォルトは\(1\)です。
+
+`--network-health-max-time-since-no-requests`（デュレーション）：
+
+ノードは、この時間内にメッセージを受信しなかった場合、不健全性を報告します。`1m`デフォルトは\(1\)です。
+
+`--network-health-max-portion-send-queue-full` \(フロート\):
+
+ノードは、送信キューがこの部分を超えていっぱいになった場合、不健全性を報告します。[0,1]でなければなりません。`0.9`デフォルトは\(1\)です。
+
+`--network-health-max-send-fail-rate` \(フロート\):
+
+メッセージの送信失敗がこの割合を超える場合、ノードは不健全性を報告します。[0,1]でなければなりません。`0.25`デフォルトは\(1\)です。
+
+`--network-max-clock-difference`（デュレーション）：
+
+このノードとピアの間のクロック差が許容される最大値。`1m`デフォルトは\(1\)です。
+
+`--network-require-validator-to-connect`\(bool\):
+
+trueの場合、このノードがバリデータであるか、他のノードがバリデータ、あるいは他のノードがビーコンである場合のみ別のノードとの接続性を維持します。
+
+`--outbound-connection-timeout`（デュレーション）：
+
+ピアをダイアル中のタイムアウト。
+
+#### メッセージレート制限
+
+これらのフラグでインバウンドおよびアウトバウンドメッセージのレート制限を制御します。レート制限と下記のフラグついての詳細の情報は、AvalancheGoのパッケージ`throttling`を参照してください。
+
+`--throttler-inbound-at-large-alloc-size`（uint）：
+
+インバウンドメッセージスロットルの全体割り当てのサイズ（バイト単位）。デフォルトは`6291456`（6MiB）です。
+
+`--throttler-inbound-validator-alloc-size`（uint）：
+
+インバウンドメッセージスロットルの全体割り当てのサイズ（バイト単位）。デフォルトは（32MiB）です`33554432`。
+
+`--throttler-inbound-node-max-at-large-bytes`（uint）：
+
+インバウンドメッセージスロットルの全体割り当てからノードが取得できる最大バイト数。デフォルトは`2097152`（2MiB）です。
+
+`--throttler-inbound-node-max-processing-msgs`（uint）：
+
+ピアからのこの大量のメッセージを処理する際、ノードはピアからのメッセージの読み取りを停止します。このメッセージ量より少ない場合は、ピアからのメッセージの読み取りを再開します。`1024`デフォルトは\(1\)です。
+
+`--throttler-outbound-at-large-alloc-size`（uint）：
+
+アウトバウンドメッセージスロットルの全体割り当てのサイズ（バイト単位）。デフォルトは`6291456`（6MiB）です。
+
+`--throttler-outbound-validator-alloc-size`（uint）：
+
+アウトバウンドメッセージスロットルのバリデータ割り当てのサイズ（バイト単位）。デフォルトは（32MiB）です`33554432`。
+
+`--throttler-outbound-node-max-at-large-bytes`（uint）：
+
+アウトバウンドメッセージスロットルの全体割り当てからノードが取得できる最大バイト数。デフォルトは`2097152`（2MiB）です。
+#### 接続レート制限
+
+`--inbound-connection-throttling-cooldown`（デュレーション）：
+
+ノードは、この期間中に最大1回、指定されたIPからのインバウンドコネクションをアップグレードします。`10s`デフォルトは\(1\)です。０かマイナスの場合、アップグレードするかどうか決定する際に、最後のアップグレードがいつだったかは考慮しません。
+
+`--inbound-connection-throttling-max-conns-per-sec`（uint）：
+
+ノードは毎秒、最大この数のインバウンドコネクションを受け入れます。`512`デフォルトは\(1\)です。
+
+`--inbound-connection-throttling-max-recent`（uint）：
+
+非推奨です。AvalancheGo v1.6.0では無視されます。
+
+`--outbound-connection-throttling-rps`（uint）：
+
+ノードは1秒当たり最大この量の送信ピア接続を行います。`50`デフォルトは\(1\)です。
+
+#### ピアリスト・ゴシップ
+
+ノードはピアをお互いにゴシップするため、各ノードは最新のピアリストを持つことができます。ノードは、`--network-peer-list-gossip-frequency`毎に、`--network-peer-list-size`ピアをそのピアの`--network-peer-list-gossip-size`にゴシップします。
+
+`--network-peer-list-gossip-frequency`（デュレーション）：
+
+`1m`デフォルトは\(1\)です。
+
+`--network-peer-list-gossip-size`（int）：
+
+`50`デフォルトは\(1\)です。
+
+`--network-peer-list-size`（int）：
+
+`20`デフォルトは\(1\)です。
+
+`--network-peer-list-staker-gossip-fraction`（uint）：
+
+ゴシップされた各`network-peer-list-staker-gossip-fraction`ピアリストメッセージのうち1つがバリデータに送信されます。
+
+`2`デフォルトは\(1\)です。
+
+### プラグインモード
+
+`--plugin-mode-enabled`\(bool\):
+
+[](https://github.com/hashicorp/go-plugin)trueの場合、ノードをプラグインとして実行します。`false`デフォルトは\(1\)です。
+
+### サブネット
+
+#### ホワイトリスト
+
+`--whitelisted-subnets`（文字列）：
+
+このノードが追加された場合に検証されるサブネットのコンマ区切りリスト。デフォルトは空です（プライマリネットワークのみを検証します）。
+
+#### サブネット設定
+
+サブネットにパラメータを指定することができます。ここのパラメータは、指定されたサブネットのすべてのチェーンに適用されます。パラメータは`--subnet-config-dir`下の`{subnetID}.json`設定ファイルで指定されなければなりません。AvalancheGoは、`--whitelisted-subnet`パラメータで指定されたサブネットの設定をロードします。
+
+`--subnet-config-dir`（文字列）：
+
+上に記載したようにサブネット設定を含むディレクトリを指定します。`$HOME/.avalanchego/configs/subnets`デフォルトは\(1\)です。フラグが明示的に設定されている場合、指定したフォルダが存在していなければなりません。そうでなければ、AvalancheGoはエラーで終了します。
+
+例：ID`p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`のサブネットがあるとします。`$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`のデフォルト`subnet-config-dir`下に設定ファイルを作成することができます。設定ファイルの例は次の通りです。
+
+```json
+{
+  "validatorOnly": false,
+  "consensusParameters": {
+    "k": 25,
+    "alpha": 18
+  }
+}
+```
+
+**バリデータのみ**
+
+`validatorOnly`\(bool\):
+
+`true`の場合、このノードはP2Pメッセージを介して、サブネットブロックチェーンの内容を非バリデータに公開ません。`false`デフォルトは\(1\)です。詳細については、[こちら](../platform/create-a-subnet.md#private-subnets)をご覧ください。
+
+**コンセンサス・パラメータ**
+
+サブネット設定では、新しいコンセンサスパラメータのロードがサポートされています。JSON鍵は、一致する`CLI`鍵とは異なります。
+
+| CLI鍵 | JSON鍵 |
+| :--- | :--- |
+| --snow-sample-size | k |
+| --snow-quorum-size | alpha |
+| --snow-virtuous-commit-threshold | betaVirtuous |
+| --snow-rogue-commit-threshold | betaRogue |
+| --snow-concurrent-repolls | concurrentRepolls |
+| --snow-optimal-processing | optimalProcessing |
+| --snow-max-processing | maxOutstandingItems |
+| --snow-max-time-processing | maxItemProcessingTime |
+| --snow-avalanche-batch-size | batchSize |
+| --snow-avalanche-num-parents | parentSize |
+
+サブネットのコンセンサスパラメータは、デフォルトでプライマリネットワークで使用される値と同じに設定されています。[ここ](command-line-interface.md#snow-parameters)で指定されている値です。
+
+### <a id="vm-configs"></a>仮想マシン（VM）の設定
+
+`--vm-aliases-file`（文字列）：
+
+仮想マシンIDのエイリアスを定義したJSONファイルへのパス。`~/.avalanchego/configs/vms/aliases.json`デフォルトは\(1\)です。コンテンツの例
+
+```javascript
+{
+  "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
+    "timestampvm",
+    "timerpc"
+  ]
+}
+```
+
+`"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"``"timestampvm"``"timerpc"`上記の例では、IDが\(1\)のVMを\(2\)と\(3\)にエイリアスしています。
 
