@@ -1,28 +1,26 @@
-# Add a Validator
+# バリデーターセットにノードを追加する
 
-## Introduction
+## はじめに
 
-The [Primary Network](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](https://avalanche.gitbook.io/avalanche/learn/platform-overview). In this tutorial, we’ll add a node to the Primary Network and a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) on Avalanche.
+[一次ネットワーク](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction)は、Avalancheプラットフォームに固有のもので、Avalancheの[組み込みブロックチェーン](https://avalanche.gitbook.io/avalanche/learn/platform-overview)を検証します。このチュートリアルでは、一次ネットワークにノードを追加し、Avalanche上で[サブネット](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets)を追加します。
 
-The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
+P-Chainは、Avalanche上でメタデータを管理します。これには、どのノードがどのサブネットにあるか、どのブロックチェーンが存在するか、どのサブネットがどのブロックチェーンを検証しているかの追跡が含まれます。バリデーターを追加するには、P-Chainに[トランザクション](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)を発行します。
 
-{% hint style="danger" %}
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, browse the [Developer FAQ's](http://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
-{% endhint %}
+{% hint style="danger" %}いったんトランザクションを発行し、ノードをバリデーターとして追加してしまうと、パラメータを変更する方法はないということに注意してください。**ステークを早期に削除したり、ステーク額、ノードID、報酬アドレスを変更したりすることはできません。**以下のAPIコールで正しい値を設定していることを確認してください。よくわからない場合は、[開発者向けのよくある質問](http://support.avalabs.org/en/collections/2618154-developer-faq)を参照するか、[Discord](https://chat.avalabs.org/)でヘルプを求めてください。{% endhint %}
 
-## Requirements
+## 要件
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
+[Run an Avalanche Node1（Avalancheノードを実行する）](run-avalanche-node.md)を修了したので、[Avalancheのアーキテクチャ](../../../learn/platform-overview/)をよく理解されていると思います。このチュートリアルでは、[AvalancheのPostmanコレクション](https://github.com/ava-labs/avalanche-postman-collection)を使用して、API呼び出しに役立てようと思います。
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
+ノードが正しく接続されていることを確認するには、ノードがステーキングポート（デフォルトは`9651`）でTCPを受信し、コマンドライン引数でノードを起動したことを確認してください`--public-ip=[YOUR NODE'S PUBLIC IP HERE]`。これらを行わないと、ステーキング報酬を損なう可能性があります。
 
-## Add a validator with Avalanche Wallet
+## Avalancheウォレットでバリデーターを追加する
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+まず、[Avalancheウォレット](https://wallet.avax.network)を使用し、ノードをバリデーターとして追加する方法を説明します。
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+[`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid)呼び出しでノードのIDを取得します。
 
-![getNodeID postman](../../../.gitbook/assets/getNodeID-postman.png)
+![getNodeIDポストマン](../../../.gitbook/assets/getNodeID-postman.png)
 
 ```cpp
 curl -X POST --data '{
@@ -32,7 +30,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+レスポンスには、ノードのIDがあります。
 
 ```cpp
 {
@@ -44,39 +42,39 @@ The response has your node’s ID:
 }
 ```
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose `Add Validator`.
+[ウォレット](https://wallet.avax.network/)を開き、`Earn`タブに移動します。(3`Add Validator`)を選択します。
 
-![Web wallet earn tab](../../../.gitbook/assets/web-wallet-earn-tab.png)
+![ウェブウォレット獲得タブ](../../../.gitbook/assets/web-wallet-earn-tab.png)
 
-Fill out the staking parameters. They are explained in more detail below. When you’ve filled in all the staking parameters and double-checked them, click `Confirm`. Make sure the staking period is at least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at least 2,000 AVAX.
+ステーキングパラメータを入力します。これらは、次でさらに詳細に説明します。すべてのステーキングパラメータを入力し、それらをダブルチェックしたら、`Confirm`をクリックします。ステーキング期間が少なくとも2週間で、デリゲート手数料率が2%、そして最低2,000AVAXをステーキングしていることを確認します。
 
 {% page-ref page="../../../learn/platform-overview/staking.md" %}
 
-![Earn validate](../../../.gitbook/assets/earn-validate.png)
+![検証を獲得](../../../.gitbook/assets/earn-validate.png)
 
-You should see this success message, and your balance should be updated.
+この成功メッセージが表示され、残高が更新されるはずです。
 
-![Your validation transaction is sent](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
+![検証トランザクションが送信されます。](../../../.gitbook/assets/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifies that our transaction was accepted.
+[`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators)呼び出しで、トランザクションが承認されたことを確認します。
 
-![getPendingValidators postman](../../../.gitbook/assets/getPendingValidators-postman.png)
+![getPendingValidatorsポストマン](../../../.gitbook/assets/getPendingValidators-postman.png)
 
-Go back to the `Earn` tab, and click `Estimated Rewards`.
+(`Earn`タブに戻り、`Estimated Rewards`をクリックします。
 
-![Earn, validate, delegate](../../../.gitbook/assets/earn-validate-delegate.png)
+![獲得、検証、デリゲート](../../../.gitbook/assets/earn-validate-delegate.png)
 
-Once your validator’s start time has passed, you will see the rewards it may earn, as well as its start time, end time, and the percentage of its validation period that has passed.
+バリデータの起動時間を経過すると、獲得するリワードと、その起動時間、終了時間、経過した検証期間の割合が表示されます。
 
-![Estimated rewards](../../../.gitbook/assets/estimated-rewards.png)
+![推定リワード](../../../.gitbook/assets/estimated-rewards.png)
 
-That’s it!
+完了です。
 
-## Add a validator with API calls
+## API呼び出しでバリデーターを追加する
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+また、ノードにAPI呼び出しを呼び出し、バリデーターセットにノードを追加することもできます。ノードを一次ネットワークに追加するには、[`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator)を呼び出します。
 
-This method’s signature is:
+このメソッドの署名は次の通りです。
 
 ```cpp
 platform.addValidator(
@@ -94,11 +92,11 @@ platform.addValidator(
 ) -> {txID: string}
 ```
 
-Let’s go through and examine these arguments.
+これらの引数を調べましょう。
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+これは、追加されるバリデーターのノードIDです。ノードのIDを取得するには、[`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid)を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +107,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+レスポンスには、ノードのIDがあります。
 
 ```cpp
 {
@@ -121,33 +119,33 @@ The response has your node’s ID:
 }
 ```
 
-`startTime` and `endTime`
+`startTime`と`endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+一次ネットワークに参加するためのトランザクションを発行する際には、参加（バリデーションの開始）と退出（バリデーションの停止）の時間を指定します。一次ネットワークを検証できる最小期間は24時間で、最大期間は1年です。一旦退出しても、再び一次ネットワークに入ることができます。連続的な最大_継続_時間は1年です。  `startTime`と`endTime`はそれぞれ、バリデーターが一次ネットワークを起動し、検証を停止するUnix時間です。 `startTime`は、トランザクションが発行された時点から見て未来のことでなければなりません。
 
 `stakeAmount`
 
-In order to validate the Primary Network, one must stake AVAX. This parameter defines the amount of AVAX staked.
+一次ネットワークを検証するには、AVAXをステークする必要があります。このパラメーターは、ステークされたAVAXの数を定義します。
 
 `rewardAddress`
 
-When a validator stops validating the Primary Network, they will receive a reward if they are sufficiently responsive and correct while they validated the Primary Network. These tokens are sent to `rewardAddress`. The original stake will be sent back to an address controlled by `username`.
+バリデーターが一次ネットワークの検証を停止すると、一次ネットワークの検証中に十分にレスポンスし、正しい場合にリワードが受けられます。これらのトークンは`rewardAddress`に送信されます。元のステークは、`username`で管理されるアドレスに送信されます。
 
-A validator’s stake is never slashed, regardless of their behavior; they will always receive their stake back when they’re done validating.
+バリデーターのステークは、行動にかかわらず、決してスラッシュされません。検証が完了すると、常にステークを受信します。
 
 `changeAddr`
 
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
+このトランザクションに起因する変更は、このアドレスに送信されます。このフィールドを空のままにすることができます。そうすると、ユーザーが管理するアドレスのいずれかに変更が送信されます。
 
 `delegationFeeRate`
 
-Avalanche allows for delegation of stake. This parameter is the percent fee this validator charges when others delegate stake to them. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
+Avalancheにより、ステークのデリゲートが可能になります。このパラメータは、他の人がステークにデリゲートする際に、このバリデーターに請求する割合です。例えば、`delegationFeeRate`が`1.2345`で、誰かがこのバリデーターをデリゲートする場合、デリゲート期間が終了すると、リワードの1.2345%がバリデーターに、残りはデリゲートした者に移動します。
 
-`username` and `password`
+`username`と`password`
 
-These parameters are the username and password of the user that pays the transaction fee, provides the staked AVAX, and to whom the staked AVAX will be returned.
+これらのパラメータは、トランザクション手数料を支払うユーザーのユーザー名とパスワードです。これらは、ステークされたAVAXを提供し、ステークされたAVAXが返される人に提供します。
 
-Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
+では、トランザクションを発行しましょう。シェルコマンド`date`を使用して、10分後と30日後のUnix時間を計算し、`startTime`と`endTime`それぞれの値として使用することができます。（注意：Macを使用している場合、`$(date`を`$(gdate`に置き換えてください。`gdate`がインストールされていない場合は、`brew install coreutils`を実行します。)この例では、2,000AVAXをステークします（2 x 1012 nAVAX）。
 
 ```cpp
 curl -X POST --data '{
@@ -168,7 +166,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response has the transaction ID, as well as the address the change went to.
+レスポンスには、トランザクションIDと、変更が行われたアドレスがあります。
 
 ```cpp
 {
@@ -181,7 +179,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+[`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus)呼び出しでトランザクションのステータスを確認することができます。
 
 ```cpp
 curl -X POST --data '{
@@ -194,7 +192,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+ステータスは、`Committed`でなければなりません。つまり、トランザクションが成功したことを意味します。[`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators)を呼び出して、ノードが、一次ネットワークの保留中のバリデーターセットにいることを確認することができます。
 
 ```cpp
 curl -X POST --data '{
@@ -205,7 +203,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response should include the node we just added:
+レスポンスには、先ほど追加されたノードが含まれます。
 
 ```cpp
 {
@@ -218,150 +216,14 @@ The response should include the node we just added:
                 "endtime": "1584121156",
                 "stakeAmount": "2000000000000",
             }
-        ] 
-    },
-    "id": 1
-}
-```
-
-When the time reaches `1584021450`, this node will start validating the Primary Network. When it reaches `1584121156`, this node will stop validating the Primary Network. The staked AVAX will be returned to an address controlled by `username`, and the rewards, if any, will be given to `rewardAddress`.
-
-## Adding a Subnet Validator
-
-### Issuing a Subnet Validator Transaction
-
-Now let’s add the same node to a subnet. The following will make more sense if you’ve already done this [tutorial on creating a Subnet](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/create-a-subnet). Right now you can only add validators to subnets with API calls, not with Avalanche Wallet.
-
-Suppose that the Subnet has ID `nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`, threshold 2, and that `username` holds at least 2 control keys.
-
-To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
-
-```cpp
-platform.addSubnetValidator(
-    {
-        nodeID: string,
-        subnetID: string,
-        startTime: int,
-        endTime: int,
-        weight: int,
-        changeAddr: string, (optional)
-        username: string,
-        password: string
-    }
-) -> {txID: string}
-```
-
-Let’s examine the parameters:
-
-`nodeID`
-
-This is the node ID of the validator being added to the subnet. **This validator must validate the Primary Network for the entire duration that it validates this Subnet.**
-
-`subnetID`
-
-This is the ID of the subnet we’re adding a validator to.
-
-`startTime` and `endTime`
-
-Similar to above, these are the Unix times that the validator will start and stop validating the subnet. `startTime` must be at or after the time that the validator starts validating the Primary Network, and `endTime` must be at or before the time that the validator stops validating the Primary Network.
-
-`weight`
-
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus.
-
-`changeAddr`
-
-Any change resulting from this transaction will be sent to this address. You can leave this field empty; if you do, change will be sent to one of the addresses your user controls.
-
-`username` and `password`
-
-These parameters are the username and password of the user that pays the transaction fee. This user must hold a sufficient number of this Subnet’s control keys in order to add a validator to this Subnet.
-
-We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.addSubnetValidator",
-    "params": {
-        "nodeID":"NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
-        "subnetID":"nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr",
-        "startTime":'$(date --date="10 minutes" +%s)',
-        "endTime":'$(date --date="30 days" +%s)',
-        "weight":1,
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
-        "username":"USERNAME",
-        "password":"PASSWORD"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
-```
-
-The response has the transaction ID, as well as the address the change went to.
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm",
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-    },
-    "id": 1
-}
-```
-
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getTxStatus",
-    "params": {
-        "txID":"2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm"
-    },
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
-```
-
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
-
-```cpp
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "platform.getPendingValidators",
-    "params": {"subnetID":"nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr"},
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
-```
-
-The response should include the node we just added:
-
-```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "validators": [
-            {
-                "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
-                "startTime":1584042912,
-                "endTime":1584121156,
-                "weight": "1"
-            }
         ]
     },
     "id": 1
 }
 ```
 
-When the time reaches `1584042912`, this node will start validating this Subnet. When it reaches `1584121156`, this node will stop validating this Subnet.
+時間になると`1584021450`、このノードは、一次ネットワークの検証を開始します`1584121156`に達すると、このノードは、一次ネットワークの検証を停止します。ステークされたAVAXは、`username`で管理されるアドレスに返されます。そして、リワードがある場合、`rewardAddress`に与えられます。
 
-### Whitelisting the Subnet
+## サブネットにバリデータを追加する
 
-Now that the node has been added as a validator of the subnet, let’s add it to the whitelist of subnets. The whitelist prevents the node from validating a subnet unintentionally.
-
-To whitelist the subnet, restart the node and add the parameter `--whitelisted-subnets` with a comma separated list of subnets to whitelist.
-
-The full command is:
-
-`./build/avalanchego --whitelisted-subnets=nTd2Q2nTLp8M9qv2VKHMdvYhtNWX7aTPa4SMEK7x7yJHbcWvr`
-
+この[チュートリアル](../platform/create-a-subnet.md#adding-subnet-validators)では、サブネットにバリデータ－を追加する方法を説明します。
