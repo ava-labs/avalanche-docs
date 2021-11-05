@@ -1,18 +1,20 @@
-# Create a Subnet
+# サブネットを作成する
 
-## Introduction
+## はじめに
 
-A [subnet](../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
+[サブネット](../../../learn/platform-overview/#subnets)とは、バリデーターのセットです。サブネットは、ブロックチェーンのセットを検証します。各ブロックチェーンは、ブロックチェーン作成で指定されているまさに1つのサブネットで検証されます。サブネットは、強力なプリミティブで、許可されたブロックチェーン作成を可能にします。
 
-When a subnet is created, a threshold and a set of keys are specified. \(Actually the addresses of the keys, not the keys themselves, are specified.\) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
+サブネットが作成された場合、閾値と鍵のセットが指定されます。（実際には鍵そのもののではなく、鍵のアドレスが指定されます。）そのサブネットにバリデーターを追加するには、これらの鍵からの_閾値_署名が必要です。これらをサブネットの**コントロール鍵**と呼び、サブネットにバリデーターを追加するトランザクションのコントロール鍵の署名を**コントロール署名と呼びます**。アップショットは、サブネットがメンバーシップを管理するものです。
 
-In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
+このチュートリアルでは、2つのコントロール鍵と2の閾値で新しいサブネットを作成します。
 
-### Generate the Control Keys <a id="generate-the-control-keys"></a>
+_注：ブロックチェーン、サブネット、トランザクション、アドレスのIDは、ラン/ネットワークごとに異なる場合があります。つまり、チュートリアルの入力やエンドポイントなどが、実際にやってみると違っていることがあるということです。_
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
+### コントロール鍵を生成する<a id="generate-the-control-keys"></a>
 
-To generate the first key:
+まず、2つのコントロール鍵を生成しましょう。そのためには、[`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress)を呼び出します。これにより、新しい秘密鍵を生成し、ユーザーに保存します。
+
+最初の鍵を生成するには、次を実行します。
 
 ```cpp
 curl -X POST --data '{
@@ -26,7 +28,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+これにより、最初のコントロール鍵が与えられます（改めて、実際には最初のコントロール鍵の_アドレス_が与えられます）鍵は、指定したユーザーが保持しています。
 
 ```cpp
 {
@@ -38,7 +40,7 @@ This gives the first control key \(again, it actually gives the _address_ of the
 }
 ```
 
-Generate the second key:
+2番目の鍵を生成します。
 
 ```cpp
 curl -X POST --data '{
@@ -52,7 +54,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response contains the second control key, which is held by the user we just specified:
+レスポンスには、指定したユーザーが保持する2番目のコントロール鍵が含まれています。
 
 ```cpp
 {
@@ -64,9 +66,9 @@ The response contains the second control key, which is held by the user we just 
 }
 ```
 
-### Create the Subnet <a id="create-the-subnet"></a>
+### サブネットを作成する<a id="create-the-subnet"></a>
 
-To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
+サブネットを作成するには、[`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet)を呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -85,7 +87,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
+レスポンスにより、トランザクションのIDが与えられます。これはまた、新しく作成されたサブネットのIDでもあります。
 
 ```cpp
 {
@@ -98,9 +100,9 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 }
 ```
 
-### Verifying Success <a id="verifying-success"></a>
+### 成功しているか検証する<a id="verifying-success"></a>
 
-We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
+[`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets)を呼び出して、存在するすべてのサブネットを取得できます。
 
 ```cpp
 curl -X POST --data '{
@@ -111,7 +113,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The response confirms that our subnet was created:
+レスポンスは、サブネットが作成されたことを確認します。
 
 ```cpp
 {
@@ -132,7 +134,154 @@ The response confirms that our subnet was created:
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-### Add Validators to the Subnet <a id="add-validators-to-the-subnet"></a>
+### サブネットバリデーターの追加<a id="adding-subnet-validators"></a>
 
-This [tutorial](../nodes-and-staking/add-a-validator.md) will show you how to add validators to a subnet.
+### サブネットバリデータートランザクションを発行する
+
+では、サブネットにバリエーターを追加してみましょう。今はAvalancheウォレットではなく、API呼び出しでサブネットにバリデーターを追加することのみが可能です。
+
+サブネットにID`3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`、閾値2があるとします。そして、その`username`は、少なくとも2つのコントロール鍵を保持しているとします。
+
+バリデーターを追加するには、APIメソッドを呼び出します[`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator)。その署名は、次の通りです。
+
+```cpp
+platform.addSubnetValidator(
+    {
+        nodeID: string,
+        subnetID: string,
+        startTime: int,
+        endTime: int,
+        weight: int,
+        changeAddr: string, (optional)
+        username: string,
+        password: string
+    }
+) -> {txID: string}
+```
+
+パラメータを調べましょう。
+
+`nodeID`
+
+これは、サブネットに追加されるバリデーターのノードIDです。**このバリデーターは、このサブネットを検証する期間全体を検証する必要があります。**
+
+`subnetID`
+
+これは、バリデーターを追加するサブネットのIDです。
+
+`startTime`と`endTime`
+
+上記と同様に、これらは、バリデーターがサブネットを起動し、停止するUnix時間です。`startTime`は、バリデーターがプ一次ネットワークの検証を開始する時間以後になければなりません。`endTime`は、バリデーターが一次ネットワークの検証を停止する時間またはそれ以前でなければなりません。
+
+`weight`
+
+これは、コンセンサスのためのバリデーターのサンプリング重量です。バリデーターの重量が1で、サブネット内のすべてのバリデーターの累積重量が100である場合、このバリデーターは、コンセンサス中に100サンプルごとに約1に含まれます。サブネット内のすべてのバリデーターの累積重量は、少なくとも`snow-sample-size`でなければなりません。例えば、サブネットにバリデーターが1つだけの場合、その重量は少なくとも`snow-sample-size`でなければなりません\(デフォルト２０）。バリデーターの重量は検証中に変更できないことを覚えておき、適切な値を使用するように注意してください。
+
+`changeAddr`
+
+このトランザクションに起因する変更は、このアドレスに送信されます。このフィールドを空のままにすることができます。そうすると、ユーザーが管理するアドレスのいずれかに変更が送信されます。
+
+`username`と`password`
+
+これらのパラメータは、トランザクション手数料を支払うユーザー名とパスワードです。このサブネットにバリデーターを追加するには、ユーザーはこのサブネットのコントロール鍵を十分な数量保持する必要があります。
+
+シェルコマンド`date`を使用して、10分後と30日後のUnix時間を計算し、`startTime`と`endTime`それぞれの値として使用することができます。（注意：Macを使用している場合、`$(date`を`$(gdate`に置き換えてください。`gdate`がインストールされていない場合は、`brew install coreutils`を実行します。\)
+
+例：
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.addSubnetValidator",
+    "params": {
+        "nodeID":"NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
+        "subnetID":"3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g",
+        "startTime":'$(date --date="10 minutes" +%s)',
+        "endTime":'$(date --date="30 days" +%s)',
+        "weight":30,
+        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
+        "username":"USERNAME GOES HERE",
+        "password":"PASSWORD GOES HERE"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+レスポンスには、トランザクションIDと、変更が行われたアドレスがあります。
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm",
+        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
+    },
+    "id": 1
+}
+```
+
+[`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus)呼び出しでトランザクションのステータスを確認することができます。
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTxStatus",
+    "params": {
+        "txID":"2exafyvRNSE5ehwjhafBVt6CTntot7DFjsZNcZ54GSxBbVLcCm"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+ステータスは、`Committed`でなければなりません。つまり、トランザクションが成功したことを意味します。[`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators)を呼び出して、ノードが、一次ネットワークの保留中のバリデーターセットにいることを確認することができます。今回は、サブネットIDを指定します。
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getPendingValidators",
+    "params": {"subnetID":"3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g"},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+レスポンスには、先ほど追加されたノードが含まれます。
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "validators": [
+            {
+                "nodeID": "NodeID-LMUue2dBBRWdDbPL4Yx47Ps31noeewJji",
+                "startTime":1584042912,
+                "endTime":1584121156,
+                "weight": "30"
+            }
+        ]
+    },
+    "id": 1
+}
+```
+
+`1584042912`時間に達すると、このノードは、このサブネットを検証を開始します。`1584121156`に達すると、このノードは、このサブネットの検証を停止します。
+
+### プライベートサブネット
+
+Avalancheのサブネットは公開されています。これは、すべてのノードがサブネット内の進行中のトランザクション/ブロックを同期してリッスンできることを意味します。ただし、リッスンされたサブネットを検証しているわけではありません。
+
+サブネットバリデーター/ビーコンは、オプションの`validatorOnly`設定により、ブロックチェーンのコンテンツを公開しないことを選択できます。[サブネットの設定](../../references/command-line-interface.md#subnet-configs)で設定をオンにすることができます。`validatorOnly`を`true`に設定すると、ノードはこのサブネットのバリデーターとのみメッセージを交換します。他のピアは、このノードからこのサブネットのコンテンツを知ることはできません。
+
+注：これはノード固有の設定です。このサブネットのすべてのバリデーターは、完全なプライベートサブネットを作成するために、この設定を使用する必要があります。
+
+### サブネットをホワイトリストする
+
+ノードがサブネットのバリデーターとして追加されたので、サブネットのホワイトリストに追加しましょう。ホワイトリストは、ノードがサブネットを意図せず検証しないようにします。
+
+サブネットをホワイトリストするには、ノードを再起動し、サブネットのコンマ区切られたリストのパラメータ`--whitelisted-subnets`を追加します。
+
+この例では、完全なコマンドは次のとおりです。
+
+`./build/avalanchego --whitelisted-subnets=3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`
+
+コマンドの詳細については、以下を参照してください：[whitelisted-subnetコマンドライン引数](../../references/command-line-interface.md#whitelist)。
 
