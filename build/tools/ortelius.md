@@ -1,60 +1,63 @@
 ---
-description: 'This API allows clients to interact with Ortelius, the Avalanche indexer.'
+description: 'このAPIにより、クライアントはAvalancheインデクサ―であるOrteliusとやり取りすることができます。'
 ---
 
 # Ortelius API
 
 ## Ortelius API
 
-### Format
+**このAPIは非推奨です。移行方法については、[こちら](deprecating-ortelius.md)をご覧ください。**
 
-This API uses GET HTTP requests using URL query parameters and returns JSON data.
+### フォーマット
 
-### Versioning
+このAPIは、URLクエリパラメータを使用してGET HTTPリクエストを使用し、JSONデータを返します。
 
-Starting with version 2, the API paths will be prefixed by a version tag, e.g. `http://localhost:8080/v2`.
+### バージョン管理
 
-The current version of the API is version 2. The [Legacy API](ortelius.md#legacy-api) documentation has information about using the v1 API.
+バージョン2以降、APIパスの先頭に、バージョンタグ\(例えば`http://localhost:8080/v2`\)付いています。
 
-### Data Types
+APIの最新バージョンは、バージョン2です。[Legacy API](ortelius.md#legacy-api)のドキュメントには、v1 APIを使用する情報があります。
 
-In addition to integers, strings, and booleans, the following data types are used throughout the API:
+### データタイプ
 
-| Name | Description | Examples |
+整数、文字列、ブーリアンに加えて、API全体で以下のデータタイプが使用されます。
+
+| 名前 | 説明 | 例 |
 | :--- | :--- | :--- |
-| `id` | A CB58 encoded object identifier, such as a chain, transaction, or asset ID | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
-| `address` | A bech-32 encoded address | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
-| `datetime` | A Unix timestamp as an integer or an RFC3339 formatted string | `1599696000`, `2020-09-10T00:00:00Z` |
+| `id` | CB58エンコードされたオブジェクト識別子（チェーン、トランザクション、資産IDなど） | `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM` |
+| `address` | bech-32エンコードアドレス（X-ChainとP-Chain上で使用されます） | `fuji1wycv8n7d2fg9aq6unp23pnj4q0arv03ysya8jw` |
+| `datetime` | 整数またはRFC3339フォーマットの文字列としてUnixタイムスタンプ | `1599696000`,`2020-09-10T00:00:00Z` |
+| `caddress` | 16進数エンコードアドレス（C-Chain上で使用されます） | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` |
+| `chash` | 16進数エンコードハッシュ | `0xe5b935988317e8552e769ad92b6a2fd01ac8f0f90d8ffa4377e50fcb8d970077` |
 
-### List Parameters
+### リストパラメータ
 
-All endpoints for listing resources accept the following parameters:
+リストされているリソースのすべてのエンドポイントは、次のパラメータを受け入れます。
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `limit` | `int` | The maximum number of items to return | `500` | `500` |
-| `offset` | `int` | The number of items to skip | `0` | None |
-| `query` | `string` | An ID prefix to filter items by | None | None |
-| `startTime` | `datetime` | Limits to items created on or after a given time | `0` | Now |
-| `endTime` | `datetime` | Limits to items created on or before a given time | Now | Now |
+| `limit` | `int` | 返すアイテムの最大数 | `5000` | `5000` |
+| `query` | `string` | 次でアイテムをフィルタするIDの接頭辞 | 該当なし | 該当なし |
+| `startTime` | `datetime` | 指定された時間または後に作成されるアイテムへの制限 | `0` | 今 |
+| `endTime` | `datetime` | 指定された時間または前に作成されるアイテムへの制限 | 今 | 今 |
 
-### Available Endpoints
+## 利用できるエンドポイント
 
-#### Overview
+### 概要
 
-The root of the API gives an overview of the constants for the active Avalanche network being indexed.
+APIのルートには、インデックスされるアクティブなAvalancheネットワークの定数の概要が表示されます。
 
 **Params**
 
-None
+該当なし
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -78,23 +81,23 @@ curl "http://localhost:8080/v2"
 }
 ```
 
-#### Search
+### 検索
 
-Find an address or a transaction by its ID.
+そのIDでアドレスまたはトランザクションを見つけます。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `query` | `string` | An ID prefix to filter items by | None | None |
+| `query` | `string` | 次でアイテムをフィルタするIDの接頭辞 | 該当なし | 該当なし |
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -167,24 +170,25 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 }
 ```
 
-#### Aggregate
+### 集計
 
-Calculate aggregate transaction data over a time frame.
+タイムフレーム上の集計トランザクションデータを計算します。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
+| `chainID` | `id` | 結果をフィルタするチェーンIDです。複数回供給されます。 | 該当なし | 該当なし |
+| `assetID` | `id` | 結果をフィルターする資産IDです。 | 該当なし | 該当なし |
+| `intervalSize` | `string` | 値 '分', '時間', '日', '週', '月', '年' | 該当なし | 該当なし |
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -202,17 +206,17 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 }
 ```
 
-#### TxFee Aggregate
+### TxFee集計
 
-AVAX Aggregate txfee
+AVAX 集計 txfe
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&endTime=2020-10-21T00:00:00Z"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -226,23 +230,23 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 }
 ```
 
-#### Address Chain
+### アドレスチェーン
 
-Responds with the chains an address appears on.
+アドレスが表示されるチェーンに応答します。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `address` | `address` | A address to filter results by. May be supplied multiple times. | None | None |
+| `address` | `address` | 結果をフィルタするアドレスです。複数回供給されます。 | 該当なし | 該当なし |
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -258,27 +262,26 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 }
 ```
 
-#### List Transactions
+### リストトランザクション
 
-Find transactions confirmed transactions from the network.
+承認されたトランザクションを見つけます。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `assetID` | `id` | An asset ID to filter results by. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `disableGenesis` | `bool` | When true, the data for the Genesis vertex is not returned. | true | N/A |
-| `sort` | `string` | A method to sort results by. May be `timestamp-asc` or `timestamp-desc`. | `timestamp-asc` | N/A |
+| `chainID` | `id` | 結果をフィルタするチェーンIDです。複数回供給されます。 | 該当なし | 該当なし |
+| `assetID` | `id` | 結果をフィルターする資産IDです。 | 該当なし | 該当なし |
+| `address` | `address` | 結果をフィルタするアドレスです。複数回供給されます。 | 該当なし | 該当なし |
+| `sort` | `string` | 結果をソートする方法です。 `timestamp-asc`または`timestamp-desc`かもしれません。 | `timestamp-asc` | N/A |
 
-**Example Call**
+**呼び出し例**
 
 ```bash
-curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111111111111111LpoYY&offset=100"
+curl "http://localhost:8080/v2/transactions?chainID=11111111111111111111111111111111LpoYY"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -348,17 +351,17 @@ curl "http://localhost:8080/v2/transactions?limit=1&chainID=11111111111111111111
 }
 ```
 
-#### Get Transaction
+### トランザクションを取得
 
-Find a single transaction by its ID.
+そのIDで単一トランザクションを見つけます。
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -422,24 +425,24 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 }
 ```
 
-#### List Addresses
+### リストアドレス
 
-Find addresses that have been involved in confirmed transactions.
+承認されたトランザクションで参照されているアドレスを見つけます。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
+| `chainID` | `id` | 結果をフィルタするチェーンIDです。複数回供給されます。 | 該当なし | 該当なし |
+| `address` | `address` | 結果をフィルタするアドレスです。複数回供給されます。 | 該当なし | 該当なし |
 
-**Example Call**
+**呼び出し例**
 
 ```text
-curl "http://localhost:8080/v2/addresses?limit=1"
+curl "http://localhost:8080/v2/addresses?address=X-avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -462,17 +465,17 @@ curl "http://localhost:8080/v2/addresses?limit=1"
 }
 ```
 
-#### Get Address
+### アドレスを取得
 
-Find a single address by its ID.
+そのIDで単一アドレスを見つけます。
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -491,23 +494,17 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 }
 ```
 
-#### List Assets
+### 資産をリストする
 
-Find assets that have been created on the X-chain.
+ X-Chain上で作成された資産を見つけます。
 
-**Params**
-
-| Name | Type | Description | Default | Max |
-| :--- | :--- | :--- | :--- | :--- |
-| `enableAggregate` | string | Values "minute", "hour", "day", "week", "month", or "year" when provided, aggregated data about the asset will be included. | N/A | N/A |
-
-**Example Call**
+**呼び出し例**
 
 ```text
-curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
+curl "http://localhost:8080/v2/assets"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -522,78 +519,23 @@ curl "http://localhost:8080/v2/assets?limit=1&enableAggregate=minute"
       "timestamp": "2020-09-10T00:00:00Z",
       "denomination": 9,
       "variableCap": 0,
-      "aggregates": {
-        "day": {
-          "startTime": "2020-11-15T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "hour": {
-          "startTime": "2020-11-16T03:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "minute": {
-          "startTime": "2020-11-16T04:46:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "month": {
-          "startTime": "2020-10-17T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "week": {
-          "startTime": "2020-11-09T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "0",
-          "transactionCount": 0,
-          "addressCount": 0,
-          "outputCount": 0,
-          "assetCount": 0
-        },
-        "year": {
-          "startTime": "2019-11-17T04:47:00Z",
-          "endTime": "2020-11-16T04:47:00Z",
-          "transactionVolume": "6637657099999996",
-          "transactionCount": 1,
-          "addressCount": 159,
-          "outputCount": 1,
-          "assetCount": 817
-        }
-      }
+      "nft": 1
     }
   ]
 }
 ```
 
-#### Get Asset
+### 資産を取得
 
-Find a single asset by its ID.
+そのIDで単一資産を見つけます。
 
-**Example Call**
+**呼び出し例**
 
 ```text
-curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z?enableAggregate=true"
+curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -606,84 +548,29 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
   "timestamp": "2020-09-10T00:00:00Z",
   "denomination": 9,
   "variableCap": 0,
-  "aggregates": {
-    "day": {
-      "startTime": "2020-11-15T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "hour": {
-      "startTime": "2020-11-16T03:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "minute": {
-      "startTime": "2020-11-16T04:49:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "month": {
-      "startTime": "2020-10-17T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "week": {
-      "startTime": "2020-11-09T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "0",
-      "transactionCount": 0,
-      "addressCount": 0,
-      "outputCount": 0,
-      "assetCount": 0
-    },
-    "year": {
-      "startTime": "2019-11-17T04:50:00Z",
-      "endTime": "2020-11-16T04:50:00Z",
-      "transactionVolume": "6637657099999996",
-      "transactionCount": 1,
-      "addressCount": 159,
-      "outputCount": 1,
-      "assetCount": 817
-    }
-  }
+  "nft": 1
 }
 ```
 
-#### List Outputs
+### リスト出力
 
-Find outputs that have been created by a transaction confirmed on the network.
+承認されたトランザクションで作成された出力を見つけます。
 
 **Params**
 
-| Name | Type | Description | Default | Max |
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
 | :--- | :--- | :--- | :--- | :--- |
-| `chainID` | `id` | A chain ID to filter results by. May be supplied multiple times. | None | None |
-| `address` | `address` | An address to filter results by. May be supplied multiple times. | None | None |
-| `spent` | `bool` | If set, results will be filtered by whether they're spent \(true\) or unspent \(false\) | None | N/A |
+| `chainID` | `id` | 結果をフィルタするチェーンIDです。複数回供給されます。 | 該当なし | 該当なし |
+| `address` | `address` | 結果をフィルタするアドレスです。複数回供給されます。 | 該当なし | 該当なし |
+| `spent` | `bool` | 設定すると、使用された結果（true）か未使用（false）かによってフィルタされます。 | 該当なし | N/A |
 
-**Example Call**
+**呼び出し例**
 
 ```text
-curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
+curl "http://localhost:8080/v2/outputs?address=X-avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u&spent=false"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -707,17 +594,17 @@ curl "http://localhost:8080/v2/outputs?limit=1&spent=false"
 }
 ```
 
-#### Get Output
+### 出力を取得
 
-Find a single output by its ID.
+そのIDで単一出力を見つけます。
 
-**Example Call**
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -737,17 +624,169 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 }
 ```
 
-### Legacy API
+### C-Chainブロックを取得
 
-Version 1 of the API was built to support only the X-chain, and it did not use a version prefix \(`/v1`\). It is available at the path `/x` off of the root, which is the Overview endpoint for only the X-chain:
+その番号で単一ブロックを見つけます。
 
-**Example Call**
+**呼び出し例**
+
+```text
+curl "http://localhost:8080/v2/ctxdata/10"
+```
+
+**レスポンス例**
+
+```javascript
+{
+    "blockNumber": "10",
+    "header": {
+        "parentHash": "0xbd9c3e357b29f403a2b5ba455960e17f595f82eb84e5e9a1c7f7bdaf4784d0e6",
+        "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+        "miner": "0x0100000000000000000000000000000000000000",
+        "stateRoot": "0x22e2b78756f092431f28ccc906cacc1a1c58d9b341b87fa86ba3af4141517f3d",
+        "transactionsRoot": "0x237cc8fb9965f0f7477bd6c06583aecb0b17af8cc8915d6990894c00762f0e4a",
+        "receiptsRoot": "0x056b23fbba480696b65fe5a59b8f2148a1299103c4f57df839233af2cf4ca2d2",
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "difficulty": "0x1",
+        "number": "0xa",
+        "gasLimit": "0x5e70b15",
+        "gasUsed": "0x5208",
+        "timestamp": "0x5f6dfb2a",
+        "extraData": "0xd683010916846765746886676f312e3133856c696e75786573c7769a0f720e36aef6bd06a29f56131b901d1e57392d2663e67fce32e7c4",
+        "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x0000000000000000",
+        "extDataHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "0x0af6d14cf36b0d52e0b49747460859804fcd7a6f8518fe374fba05c96c27d35a"
+    },
+    "uncles": null,
+    "txs": null,
+    "version": 0,
+    "received_at": "0001-01-01T00:00:00Z",
+    "blockExtraData": "",
+    "transactions": [
+        {
+            "nonce": "0x2",
+            "gasPrice": "0x6d6e2edc00",
+            "gas": "0x5208",
+            "to": "0x0c498d075ae2236cfd13800abc61caf04b8fad63",
+            "value": "0x38d7ea4c68000",
+            "input": "0x",
+            "v": "0x150f8",
+            "r": "0x30cb390fdc1ef12b2f6e2b1bc604d0ddc6996fe601b351908f762ec589ce53b6",
+            "s": "0x5529ac942dd2e5e970475cd6392291271f02ad0d5c48fdff68daea856c752e84",
+            "hash": "0xe91eeb7aca41cb41b6d32ffd841eee3a297ab9318e7467961ed43b5e0ee3e58e"
+        }
+    ],
+    "logs": [
+        {
+            "address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+            "topics": [
+                "0x7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65",
+                "0x000000000000000000000000e54ca86531e17ef3616d22ca28b0d458b6c89106"
+            ],
+            "data": "0x000000000000000000000000000000000000000000000000128fc29c60e5e255",
+            "blockNumber": "0x12bf12",
+            "transactionHash": "0xf5d3dfbdf9722db34907b65b22dca5715bb2eac4f02f4b4992ffe2c06f3a88d2",
+            "transactionIndex": "0x1",
+            "blockHash": "0xaf0f4d2c60544fe24d0393ec0160f31ba4bad8532af64ad37960719e34bc6c4c",
+            "logIndex": "0x9",
+            "removed": false
+        }
+    ]
+}
+```
+
+### C-Chainトランザクションをリスト
+
+承認されたC-Chainトランザクションを見つけます。
+
+**Params**
+
+| 名前 | タイプ | 説明 | デフォルト | 最大 |
+| :--- | :--- | :--- | :--- | :--- |
+| `toAddress` | `caddress` | アドレス | 該当なし | 該当なし |
+| `fromAddress` | `caddress` | アドレス | 該当なし | 該当なし |
+| `address` | `caddress` | アドレス（送受信） | 該当なし | 該当なし |
+| `hash` | `chash` | トランザクションハッシュ | 該当なし | 該当なし |
+| `blockStart` | `number` | 次を含むブロック番号を開始 | 該当なし | N/A |
+| `blockEnd` | `number` | エンディングブロック除外 | 該当なし | N/A |
+
+**呼び出し例**
+
+```text
+curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6dffd1eae0a0855a2a&blockStart=797380&blockEnd=797381"
+```
+
+**レスポンス例**
+
+```javascript
+{
+    "Transactions": [
+        {
+            "block": "797380",
+            "hash": "0x00000217bc17e7e3187efae9248523f4fe2bc90e029e3ba13ddd8ff69607c705",
+            "createdAt": "2021-03-28T07:42:30.471607Z",
+            "nonce": 0,
+            "gasPrice": "225000000000",
+            "gasLimit": 21000,
+            "blockGasUsed": 63000,
+            "blockGasLimit": 8000000,
+            "blockNonce": 0,
+            "blockHash": "0x51b403a5c193d922ecb0b027fb036d37167360dbc1e45ec8958393b290c5e2c0",
+            "recipient": "0x34ec164fd085ae43906eab6dffd1eae0a0855a2a",
+            "value": "597980000000000000",
+            "toAddr": "0x34ec164fd085ae43906eab6dffd1eae0a0855a2a",
+            "fromAddr": "0xb7b01ad34bc162a5d46d68aefebf713a8c084531",
+            "v": "86263",
+            "r": "23429721050439544961261311044009191980315981699252178414904071291824124200150",
+            "s": "93404286468504758513269147057107932118692478661841229003612084917267902194944",
+            "traces": [
+                {
+                    "callType": "call",
+                    "to": "0x34ec164fd085ae43906eab6dffd1eae0a0855a2a",
+                    "from": "0xb7b01ad34bc162a5d46d68aefebf713a8c084531",
+                    "type": "call",
+                    "gasUsed": "0",
+                    "gas": "0",
+                    "value": "597980000000000000"
+                }
+            ]
+        }
+    ],
+    "startTime": "0001-01-01T00:00:00Z",
+    "endTime": "2021-04-23T16:24:08Z"
+}
+```
+
+### Raw C-Chainトランザクションを取得
+
+そのIDで承認されたC-Chainトランザクションを取得します。
+
+**呼び出し例**
+
+```text
+curl "http://localhost:8080/v2/rawtransaction/pxiBJkwnaKhaJdYkkfAVRZXrJj47jJF3QAvsasbYF2Rfweoog"
+```
+
+**レスポンス例**
+
+```javascript
+{
+    "tx": "0x00000000000000000001ed5f38341..."
+}
+```
+
+### レガシーAPI
+
+APIのバージョン1は、X-Chain,のみをサポートするために構築され、バージョンの接頭辞（`/v1`）は使用されません。`/x`これは、X-Chainのみの概要で使用できます。
+
+**呼び出し例**
 
 ```text
 curl "http://localhost:8080/x"
 ```
 
-**Example Response**
+**レスポンス例**
 
 ```javascript
 {
@@ -759,55 +798,5 @@ curl "http://localhost:8080/x"
 }
 ```
 
-The legacy API supports the same endpoints and parameters as version 2, except the chainID parameter for all endpoints defaults to the X-chain ID.
-
-## Ortelius Configuration
-
-Configuration using a JSON file for Ortelius applications. The configuration defines which network and blockchains Ortelius should index, as well as connection information for the required backing services.
-
-## Example
-
-This configuration is the one used by the standalone Docker Compose setup and illustrates the various available settings. `kafka`, `mysql`, and `redis` are DNS names that resolve to relevant service.
-
-```javascript
-{
-  "networkID": 5,
-  "logDirectory": "/var/log/ortelius",
-  "listenAddr": "localhost:8080",
-  "chains": {
-    "11111111111111111111111111111111LpoYY": {
-      "id": "11111111111111111111111111111111LpoYY",
-      "alias": "P",
-      "vmType": "pvm"
-    },
-    "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm": {
-      "id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm",
-      "alias": "F",
-      "vmType": "avm"
-    }
-  },
-  "stream": {
-    "kafka": {
-      "brokers": [
-        "kafka:9092"
-      ]
-    },
-    "producer": {
-        "ipcRoot": "/tmp"
-    },
-    "consumer": {
-        "groupName": "indexer"
-    }
-  },
-  "services": {
-    "redis": {
-      "addr": "redis:6379"
-    },
-    "db": {
-      "dsn": "root:password@tcp(mysql:3306)/ortelius",
-      "driver": "mysql"
-    }
-  }
-}
-```
+レガシーAPIは、バージョン2と同じエンドポイントとパラメーターをサポートします。ただし、すべてのエンドポイントのchainIDパラメーターのデフォルトがX-Chain IDである場合を除きます。
 
