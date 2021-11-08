@@ -26,7 +26,9 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 * The maximum amount of time one can stake funds for delegation is 1 year
 * The minimum delegation fee rate is 2%
 * The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
-* The minimum percentage of the time a validator must be correct and online in order to receive a reward is 80%
+
+A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
+If your node's uptime as shown on Avalanche's [staking dashboard](https://stats.avax.network/dashboard/staking/) is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward. If this is the case, please contact us on [Discord](https://chat.avax.network) and we can help you find the issue. Note that only checking the uptime of your validator as measured by non-staking nodes, validators with small stake, or validators that have not been online for the full duration of your validation period can provide an inaccurate view of your true uptime.
 
 ## Validators
 
