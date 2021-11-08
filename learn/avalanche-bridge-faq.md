@@ -41,7 +41,7 @@ The AB does not currently support native ETH or BTC. However, you can transfer t
 
 #### What if my transaction is not visible in the explorer?
 
-The transactions that correspond to bridge transfers will appear on explorers for the Avalanche and Ethereum networks. It may take a few minutes for the transactions to appear. To search for your transaction in the explorer, copy and paste your address into [Avalanche's C-Chain Explorer](https://cchain.explorer.avax.network/) or [Etherscan](https://etherscan.io/). To view the transactions sent by the bridge itself, you can look [here](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04/transactions) for Avalanche and [here](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0) for Ethereum. If you still don't see your transaction, reach out on [Telegram](https://t.me/avalancheavax) or [Discord](https://chat.avax.network/).
+The transactions that correspond to bridge transfers will appear on explorers for the Avalanche and Ethereum networks. It may take a few minutes for the transactions to appear. To search for your transaction in the explorer, copy and paste your address into [Avalanche's C-Chain Explorer](https://snowtrace.io/) or [Etherscan](https://etherscan.io/). To view the transactions sent by the bridge itself, you can look [here](https://snowtrace.io/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04/transactions) for Avalanche and [here](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0) for Ethereum. If you still don't see your transaction, reach out on [Telegram](https://t.me/avalancheavax) or [Discord](https://chat.avax.network/).
 
 #### Are there tutorials on how to use the bridge?
 
@@ -68,7 +68,7 @@ When transferring from Avalanche to Ethereum, Metamask shows that 0 tokens are t
 Bridge Addresses:
 
 * Ethereum: [`0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0`](https://etherscan.io/address/0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0)
-* Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://cchain.explorer.avax.network/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
+* Avalanche: [`0x50Ff3B278fCC70ec7A9465063d68029AB460eA04`](https://snowtrace.io/address/0x50Ff3B278fCC70ec7A9465063d68029AB460eA04)
 
 Note that **you should not directly transfer tokens to these addresses**. You should use the Bridge's user interface, which checks for malformed transactions.
 

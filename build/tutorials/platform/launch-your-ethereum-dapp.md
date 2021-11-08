@@ -30,7 +30,7 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
 * **ChainID**: `43114`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+* **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
 #### **FUJI Testnet Settings:**
 
@@ -38,7 +38,7 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 In your application's web interface, you can [add Avalanche programmatically](../smart-contracts/add-avalanche-to-metamask-programmatically.md) so your users don't have to enter the network data manually. To see the adding custom network flow in action, check out [Pangolin DEX](https://app.pangolin.exchange/).
 
@@ -94,7 +94,7 @@ For more information see:
 
 ## Avalanche Explorer
 
-An essential part of the smart contract development environment is the explorer, which indexes and serves blockchain data. Mainnet C-Chain explorer is available at [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/) and testnet explorer at [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/). Besides the web interface, it also exposes the standard [Ethereum JSON RPC API](https://eth.wiki/json-rpc/API).
+An essential part of the smart contract development environment is the explorer, which indexes and serves blockchain data. Mainnet C-Chain explorer is available at [https://snowtrace.io/](https://snowtrace.io/) and testnet explorer at [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/). Besides the web interface, it also exposes the standard [Ethereum JSON RPC API](https://eth.wiki/json-rpc/API).
 
 ## Avalanche Faucet
 
@@ -104,7 +104,7 @@ If you need, you can also run a faucet locally, but building it from the [reposi
 
 ## Contract verification
 
-Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://cchain.explorer.avax.network/). The procedure is simple:
+Smart contract verification provides transparency for users interacting with smart contracts by publishing the source code, allowing everyone to attest that it really does what it claims to do. You can verify your smart contracts using the [C-Chain explorer](https://snowtrace.io/). The procedure is simple:
 
 * navigate to your published contract address on the explorer
 * on the `code` tab select `verify & publish`

@@ -20,7 +20,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
 * **ChainID**: `43114`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+* **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
 #### **FUJI Testnet Settings:**
 
@@ -28,7 +28,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 #### **Local Testnet \(AVASH\) Settings:** [\(Avash Tutorial\)](../../tools/avash.md)
 

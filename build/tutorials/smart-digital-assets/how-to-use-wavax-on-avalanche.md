@@ -33,7 +33,7 @@ Enter the information for the network of your choice:
 * **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
 * **ChainID**: `43114`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax.network/](https://cchain.explorer.avax.network/)
+* **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
 
 ### Fuji Testnet Settings:
 
@@ -41,7 +41,7 @@ Enter the information for the network of your choice:
 * **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 * **ChainID**: `43113`
 * **Symbol**: `AVAX`
-* **Explorer**: [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network/)
+* **Explorer**: [https://testnet.snowtrace.io](https://testnet.snowtrace.io/)
 
 After saving the changes, select the Avalanche network you just specified. You should see your AVAX balance, which will probably be 0.
 

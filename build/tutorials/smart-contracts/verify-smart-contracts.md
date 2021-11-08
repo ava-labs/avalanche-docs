@@ -2,7 +2,7 @@
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it.
 
-The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) and the Fuji Testnet Explorer is [here.](https://cchain.explorer.avax-test.network/)
+The Mainnet C-Chain Explorer is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here.](https://testnet.snowtrace.io/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
@@ -63,15 +63,15 @@ Example [online converter](https://emn178.github.io/online-tools/keccak_256.html
 
 ## Examples
 
-* [SwapFlashLoan](https://cchain.explorer.avax-test.network/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
+* [SwapFlashLoan](https://testnet.snowtrace.io/address/0x12DF75Fed4DEd309477C94cE491c67460727C0E8/contracts)
 
 SwapFlashLoan uses swaputils and mathutils:
 
-* [SwapUtils](https://cchain.explorer.avax-test.network/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
+* [SwapUtils](https://testnet.snowtrace.io/address/0x6703e4660E104Af1cD70095e2FeC337dcE034dc1/contracts)
 
 SwapUtils requires mathutils:
 
-* [MathUtils](https://cchain.explorer.avax-test.network/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
+* [MathUtils](https://testnet.snowtrace.io/address/0xbA21C84E4e593CB1c6Fe6FCba340fa7795476966/contracts)
 
 ## Caveats
 

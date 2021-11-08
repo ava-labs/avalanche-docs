@@ -133,7 +133,7 @@ _You will need your MetaCoin contract address for future use_
 
 The C-Chain Explorer supports verifying smart contracts, allowing users to review it
 
-The Mainnet C-Chain Explorer is [here](https://cchain.explorer.avax.network/) and the Fuji Testnet Explorer is [here](https://cchain.explorer.avax-test.network/)
+The Mainnet C-Chain Explorer is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here](https://testnet.snowtrace.io/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
@@ -162,7 +162,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
 
-* View the verified contract: [MetaCoin](https://cchain.explorer.avax-test.network/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
+* View the verified contract: [MetaCoin](https://testnet.snowtrace.io/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
 
 
 # Alternatives
