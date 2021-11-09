@@ -291,6 +291,14 @@ info.peers({
 ```
 
 * `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+* `ip` is the remote IP of the peer.
+* `publicIP` is the public IP of the peer.
+* `nodeID` is the prefixed Node ID of the peer.
+* `version` shows which version the peer runs on.
+* `lastSent` is the timestamp of last message sent to the peer.
+* `lastReceived` is the timestamp of last message received from the peer.
+* `benched` shows chain IDs that the peer is being benched.
+* `observedUptime` is the uptime of this node observed by the peer.
 
 #### **Example Call**
 
@@ -321,6 +329,7 @@ curl -X POST --data '{
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:57Z",
+             "benched": [],
              "observedUptime": "99",
           },
           {
@@ -330,6 +339,7 @@ curl -X POST --data '{
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:34Z",
+             "benched": [],
              "observedUptime": "75",
           },
           {
@@ -339,6 +349,7 @@ curl -X POST --data '{
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:55Z",
+             "benched": [],
              "observedUptime": "95",
           }
         ]
