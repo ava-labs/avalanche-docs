@@ -274,7 +274,7 @@ Get a description of peer connections.
 ```cpp
 info.peers({
     nodeIDs: string[] // optional
-}) -> 
+}) ->
 {
     numPeers: int,
     peers:[]{
@@ -283,7 +283,10 @@ info.peers({
         nodeID: string,
         version: string,
         lastSent: string,
-        lastReceived: string
+        lastReceived: string,
+        benched: string[],
+        observedUptime: int,
+        weight: uint64,
     }
 }
 ```
@@ -318,7 +321,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-8PYXX47kqLDe2wD4oPbvRRchcnSzMA4J4",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:57Z"
+             "lastReceived":"2020-06-01T15:22:57Z",
+             "observedUptime": "99",
+             "weight": "100000000000000"
           },
           {
              "ip":"158.255.67.151:9651",
@@ -326,7 +331,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-C14fr1n8EYNKyDfYixJ3rxSAVqTY3a8BP",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:34Z"
+             "lastReceived":"2020-06-01T15:22:34Z",
+             "observedUptime": "75",
+             "weight": "2000000000000"
           },
           {
              "ip":"83.42.13.44:9651",
@@ -334,7 +341,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-LPbcSMGJ4yocxYxvS2kBJ6umWeeFbctYZ",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:55Z"
+             "lastReceived":"2020-06-01T15:22:55Z",
+             "observedUptime": "95",
+             "weight": "3000000000000"
           }
         ]
     }
@@ -348,7 +357,7 @@ Get the fees of the network.
 #### **Signature**
 
 ```cpp
-info.getTxFee() -> 
+info.getTxFee() ->
 {
     creationTxFee: uint64,
     txFee: uint64
@@ -381,3 +390,42 @@ curl -X POST --data '{
 }
 ```
 
+### info.uptime <a id="info-uptime"></a>
+
+Returns the network's observed uptime of this node.
+
+#### **Signature**
+
+```cpp
+info.uptime() ->
+{
+    rewardingStakePercentage: float64,
+    weightedAveragePercentage: float64
+}
+```
+
+* `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
+* `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.uptime"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result": {
+        "rewardingStakePercentage": "100.0000",
+        "weightedAveragePercentage": "99.0000"
+    }
+}
+```
