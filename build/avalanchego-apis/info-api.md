@@ -286,7 +286,6 @@ info.peers({
         lastReceived: string,
         benched: string[],
         observedUptime: int,
-        weight: uint64,
     }
 }
 ```
@@ -323,7 +322,6 @@ curl -X POST --data '{
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:57Z",
              "observedUptime": "99",
-             "weight": "100000000000000"
           },
           {
              "ip":"158.255.67.151:9651",
@@ -333,7 +331,6 @@ curl -X POST --data '{
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:34Z",
              "observedUptime": "75",
-             "weight": "2000000000000"
           },
           {
              "ip":"83.42.13.44:9651",
@@ -343,7 +340,6 @@ curl -X POST --data '{
              "lastSent":"2020-06-01T15:23:02Z",
              "lastReceived":"2020-06-01T15:22:55Z",
              "observedUptime": "95",
-             "weight": "3000000000000"
           }
         ]
     }
