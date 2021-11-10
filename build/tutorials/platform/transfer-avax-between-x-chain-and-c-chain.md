@@ -113,15 +113,15 @@ Response:
 Now, import the same private key to the C-Chain:
 
 ```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avax.importKey", 
-    "params" :{ 
-        "username" :"myUsername",   
-        "password":"myPassword",    
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"    
-    }   
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.importKey",
+    "params" :{
+        "username" :"myUsername",
+        "password":"myPassword",
+        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
@@ -141,20 +141,20 @@ Now we have everything we need to transfer the tokens.
 
 ### Transfer from the X-Chain to C-Chain
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) call:
+Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-export) call:
 
 ```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avm.exportAVAX", 
-    "params" :{ 
-        "to":"C-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e",   
-        "destinationChain": "C",    
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.export`",
+    "params" :{
+        "destinationChain": "C",
+        "assetID": "AVAX",
+        "amount": 5000000,
+        "username":"myUsername",
+        "password":"myPassword"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
@@ -163,14 +163,14 @@ Since your keystore user owns the corresponding private key on the C-Chain, you 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
-    "id"     :1,    
-    "method" :"avax.importAVAX",    
-    "params" :{ 
-        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",  
-        "sourceChain":"X",  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
+    "id"     :1,
+    "method" :"avax.importAVAX",
+    "params" :{
+        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
+        "sourceChain":"X",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
@@ -179,12 +179,12 @@ where `to` is a hex-encoded EVM address of your choice.
 The response looks like this:
 
 ```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3" 
-    },  
-    "id": 1 
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
+    },
+    "id": 1
 }
 ```
 
@@ -197,16 +197,16 @@ Once your AVAX has been transferred to the C-Chain, you can use it to deploy and
 Now, you can move AVAX back from the C-Chain to the X-Chain. First we need to export:
 
 ```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
     "method" :"avax.exportAVAX",
-    "params" :{ 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",   
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
+    "params" :{
+        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
+        "amount": 5000000,
+        "username":"myUsername",
+        "password":"myPassword"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
@@ -215,28 +215,28 @@ where `to` is the bech32 encoded address of an X-Chain address you hold. Make su
 The response should look like this:
 
 ```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"    
-    },  
-    "id": 1 
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"
+    },
+    "id": 1
 }
 ```
 
-To finish the transfer, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
+To finish the transfer, call [`avm.import`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-import).
 
 ```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method": "avm.importAVAX", 
-    "params": { 
-        "username":"myUsername",    
-        "password":"myPassword",    
-        "sourceChain": "C", 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
-    }   
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method": "avm.import",
+    "params": {
+        "username":"myUsername",
+        "password":"myPassword",
+        "sourceChain": "C",
+        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
@@ -245,12 +245,12 @@ where `to` is the bech32 encoded address the X-Chain address which you sent the 
 The response should look like this:
 
 ```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"    
-    },  
-    "id": 1 
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"
+    },
+    "id": 1
 }
 ```
 

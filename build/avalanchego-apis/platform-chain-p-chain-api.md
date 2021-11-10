@@ -43,7 +43,7 @@ platform.addDelegator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -125,7 +125,7 @@ platform.addValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -200,7 +200,7 @@ platform.addSubnetValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string,
@@ -310,7 +310,7 @@ platform.createBlockchain(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -382,7 +382,7 @@ platform.createSubnet(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -430,7 +430,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.import`](exchange-chain-x-chain-api.md#avm-import) method with assetID `AVAX` to complete the transfer.
 
 #### **Signature**
 
@@ -444,7 +444,7 @@ platform.exportAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
@@ -492,7 +492,7 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
+Get the private key that controls a given address.
 The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
 
 #### **Signature**
@@ -947,7 +947,7 @@ Get the minimum amount of AVAX required to validate the Primary Network and the 
 #### **Signature**
 
 ```cpp
-platform.getMinStake() -> 
+platform.getMinStake() ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
@@ -1086,7 +1086,7 @@ platform.getRewardUTXOs({
 
 * `txID` is the ID of the staking or delegating transaction
 * `numFetched` is the number of returned UTXOs
-* `utxos` is an array of encoded reward UTXOs 
+* `utxos` is an array of encoded reward UTXOs
 * `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 
 #### **Example Call**
@@ -1181,8 +1181,8 @@ platform.getSubnets(
 ```
 
 * `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `id` is the Subnet’s ID.
+* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
 
 See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
 
@@ -1434,7 +1434,7 @@ platform.getUTXOs(
         sourceChain: string, //optional
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -1627,7 +1627,7 @@ curl -X POST --data '{
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.export`](exchange-chain-x-chain-api.md#avm-export) method with assetID `AVAX` to initiate the transfer.
 
 #### **Signature**
 
@@ -1637,22 +1637,20 @@ platform.importAVAX(
         from: []string, //optional
         to: string,
         changeAddr: string, //optional
-        sourceChain: string,
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     tx: string,
     changeAddr: string
 }
 ```
 
-* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
+* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `export`.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that controls the address specified in `to`.
+* `username` is the user that controls from and change addresses.
 * `password` is `username`‘s password.
 
 #### **Example Call**
@@ -1662,7 +1660,6 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "sourceChain": "X",
         "to": "P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
