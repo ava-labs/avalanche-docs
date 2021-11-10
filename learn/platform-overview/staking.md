@@ -69,7 +69,7 @@ You should disable all APIs you will not use via command-line arguments. You sho
 
 #### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
 
-Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to reveive a staking reward.
+Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to receive a staking reward.
 
 You can also see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
 
