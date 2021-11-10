@@ -69,11 +69,11 @@ You should disable all APIs you will not use via command-line arguments. You sho
 
 #### Why is my uptime low? <a id="why-is-my-uptime-low"></a>
 
-Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a different weights of stakes. Those stakes are important for your potential eligibility to receive staking rewards. You can see your stake-weighted uptime average and rewarding stake percentage with `info.uptime`. Weighted uptime average shows an average of all received uptime observations for your node, with stake weighted of each observing validators. Rewarding stake percentage shows what percent of stake thinks your node is eligible to receive rewards.
+Every validator on Avalanche keeps track of the uptime of other validators. Every validator has a weight (i.e. the amount staked on it.) The more weight a validator has, the more influence they have when validators vote on whether your node should receive a staking reward. You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network stake currently thinks your node has an uptime high enough to reveive a staking reward.
 
 You can also see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
 
-The likely reason that your node is not connected to another node is that NAT traversal failed, and you did not start your node with `--public-ip=[NODE'S PUBLIC IP]`. In the future, we will add better monitoring to make it easier to verify that your node is well-connected.
+If your node's uptime is low, make sure you're setting config option `--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP traffic on port 9651. 
 
 #### Secret Management <a id="secret-management"></a>
 
