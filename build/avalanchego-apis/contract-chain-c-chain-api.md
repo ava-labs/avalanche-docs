@@ -517,7 +517,7 @@ avax.import({
 
 * `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
 * `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
-* `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
+* `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
 * `password` is `username`‘s password.
 
