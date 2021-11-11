@@ -1159,7 +1159,7 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
 
 #### **Signature**
 
