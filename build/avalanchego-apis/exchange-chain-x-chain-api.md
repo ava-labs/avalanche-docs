@@ -581,7 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [C-Chain's `avax.import`](contract-chain-c-chain-api.md#avax-import) or [P-Chain's `avax.importAVAX`](platform-chain-p-chain-api.md#avax-importAVAX) to complete the transfer.
+Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call the [C-Chain's `avax.import`](contract-chain-c-chain-api.md#avax-import) or the [P-Chain's `avax.importAVAX`](platform-chain-p-chain-api.md#avax-importAVAX) to complete the transfer.
 
 #### **Signature**
 
