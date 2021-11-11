@@ -631,23 +631,6 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-```cpp
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.export",
-    "params" :{
-        "to":"C-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
-        "amount": 10,
-        "assetID": "2YmsQfMaCczE4mLG1DPYUnRURNGfhjj4qrqnLRR3LmZ3GxDWPt",
-        "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
-        "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
-        "username":"myUsername",
-        "password":"myPassword"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
 #### **Example Response**
 
 ```cpp

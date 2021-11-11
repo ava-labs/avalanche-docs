@@ -149,8 +149,8 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.export",
     "params" :{
-        "destinationChain": "C",
         "assetID": "AVAX",
+        "to": "C-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
         "amount": 5000000,
         "username":"myUsername",
         "password":"myPassword"
@@ -164,7 +164,7 @@ Since your keystore user owns the corresponding private key on the C-Chain, you 
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avax.importAVAX",
+    "method" :"avax.import",
     "params" :{
         "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
         "sourceChain":"X",
@@ -203,6 +203,7 @@ curl -X POST --data '{
     "method" :"avax.exportAVAX",
     "params" :{
         "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
+        "assetID": "AVAX",
         "amount": 5000000,
         "username":"myUsername",
         "password":"myPassword"

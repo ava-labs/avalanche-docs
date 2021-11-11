@@ -88,7 +88,6 @@ curl -X POST --data '{
     "method" :"avm.export",
     "params" :{
         "to":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
-        "destinationChain": "P",
         "assetID": "AVAX",
         "amount": 5000000,
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
