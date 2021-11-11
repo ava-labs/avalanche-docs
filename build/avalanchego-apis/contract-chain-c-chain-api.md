@@ -565,7 +565,7 @@ Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method 
 avax.importAVAX({
     to: string,
     sourceChain: string,
-    baseFee: int, \\ optional
+    baseFee: int, // optional
     username: string,
     password:string,
 }) -> {txID: string}
