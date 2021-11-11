@@ -507,7 +507,7 @@ Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Bef
 avax.import({
     to: string,
     sourceChain: string,
-    baseFee: int, \\ optional
+    baseFee: int, // optional
     username: string,
     password:string,
 }) -> {txID: string}
