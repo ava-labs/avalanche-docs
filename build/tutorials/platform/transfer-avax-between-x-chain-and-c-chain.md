@@ -147,7 +147,7 @@ Use the address corresponding to the private key you exported and switch to usin
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.export`",
+    "method" :"avm.export",
     "params" :{
         "destinationChain": "C",
         "assetID": "AVAX",
