@@ -29,7 +29,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
-You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../build/avalanchego-apis/info-api#info-uptime)
+You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../build/avalanchego-apis/info-api.md#info-uptime)
 You can get another opinion on your node's uptime from Avalanche's [staking dashboard](https://stats.avax.network/dashboard/staking/).
 If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward.
 If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.
@@ -73,7 +73,7 @@ Every validator on Avalanche keeps track of the uptime of other validators. Ever
 
 You can also see the connections a node has by calling `info.peers`, as well as the uptime of each connection. **This is only one node’s point of view**. Other nodes may perceive the uptime of your node differently. Just because one node perceives your uptime as being low does not mean that you will not receive staking rewards.
 
-If your node's uptime is low, make sure you're setting config option `--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP traffic on port 9651. 
+If your node's uptime is low, make sure you're setting config option `--public-ip=[NODE'S PUBLIC IP]` and that your node can receive incoming TCP traffic on port 9651.
 
 #### Secret Management <a id="secret-management"></a>
 
