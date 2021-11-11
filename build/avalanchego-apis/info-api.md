@@ -274,7 +274,7 @@ Get a description of peer connections.
 ```cpp
 info.peers({
     nodeIDs: string[] // optional
-}) -> 
+}) ->
 {
     numPeers: int,
     peers:[]{
@@ -283,12 +283,22 @@ info.peers({
         nodeID: string,
         version: string,
         lastSent: string,
-        lastReceived: string
+        lastReceived: string,
+        benched: string[],
+        observedUptime: int,
     }
 }
 ```
 
 * `nodeIDs` is an optional parameter to specify what nodeID's descriptions should be returned. If this parameter is left empty, descriptions for all active connections will be returned. If the node is not connected to a specified nodeID, it will be omitted from the response.
+* `ip` is the remote IP of the peer.
+* `publicIP` is the public IP of the peer.
+* `nodeID` is the prefixed Node ID of the peer.
+* `version` shows which version the peer runs on.
+* `lastSent` is the timestamp of last message sent to the peer.
+* `lastReceived` is the timestamp of last message received from the peer.
+* `benched` shows chain IDs that the peer is being benched.
+* `observedUptime` is the uptime of this node observed by the peer.
 
 #### **Example Call**
 
@@ -318,7 +328,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-8PYXX47kqLDe2wD4oPbvRRchcnSzMA4J4",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:57Z"
+             "lastReceived":"2020-06-01T15:22:57Z",
+             "benched": [],
+             "observedUptime": "99",
           },
           {
              "ip":"158.255.67.151:9651",
@@ -326,7 +338,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-C14fr1n8EYNKyDfYixJ3rxSAVqTY3a8BP",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:34Z"
+             "lastReceived":"2020-06-01T15:22:34Z",
+             "benched": [],
+             "observedUptime": "75",
           },
           {
              "ip":"83.42.13.44:9651",
@@ -334,7 +348,9 @@ curl -X POST --data '{
              "nodeID":"NodeID-LPbcSMGJ4yocxYxvS2kBJ6umWeeFbctYZ",
              "version":"avalanche/0.5.0",
              "lastSent":"2020-06-01T15:23:02Z",
-             "lastReceived":"2020-06-01T15:22:55Z"
+             "lastReceived":"2020-06-01T15:22:55Z",
+             "benched": [],
+             "observedUptime": "95",
           }
         ]
     }
@@ -348,7 +364,7 @@ Get the fees of the network.
 #### **Signature**
 
 ```cpp
-info.getTxFee() -> 
+info.getTxFee() ->
 {
     creationTxFee: uint64,
     txFee: uint64
@@ -381,3 +397,42 @@ curl -X POST --data '{
 }
 ```
 
+### info.uptime <a id="info-uptime"></a>
+
+Returns the network's observed uptime of this node.
+
+#### **Signature**
+
+```cpp
+info.uptime() ->
+{
+    rewardingStakePercentage: float64,
+    weightedAveragePercentage: float64
+}
+```
+
+* `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
+* `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.uptime"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result": {
+        "rewardingStakePercentage": "100.0000",
+        "weightedAveragePercentage": "99.0000"
+    }
+}
+```
