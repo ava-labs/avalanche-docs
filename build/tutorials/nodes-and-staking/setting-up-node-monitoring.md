@@ -1,10 +1,6 @@
 # Monitor an Avalanche Node
 
-_Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
-
 ## Introduction
-
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
 
 This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
 
@@ -12,6 +8,7 @@ This tutorial will show how to set up infrastructure to monitor an instance of [
 * [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
 * AvalancheGo’s [metrics API](https://docs.avax.network/build/avalanchego-apis/metrics-api) to get information about the node
 * [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* A set of pre-made [Avalanche dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards)
 
 Prerequisites:
 
@@ -19,345 +16,179 @@ Prerequisites:
 * Shell access to the machine running the node
 * Administrator privileges on the machine
 
-### **Caveat: Security**
+This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other Linux flavors that use `systemd` might work but have not been tested.
+
+### Caveat: Security
 
 {% hint style="danger" %}
 The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
 {% endhint %}
 
-### Contributions
+## Monitoring installer script
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+In order to make node monitoring easier to install, we have made a script that does most of the work for you. To download and run the script, log into the machine the node runs on with a user that has administrator privileges and enter the following command:
 
-## Set up Prometheus
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/monitoring-installer.sh;\
+chmod 755 monitoring-installer.sh;
+```
+This will download the script and make it executable.
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+Script itself is run multiple times with different arguments, each installing a different tool or part of the environment. To make sure it downloaded and set up correctly, begin by running:
 
-```cpp
-sudo useradd -M -r -s /bin/false prometheus
+```bash
+./monitoring-installer.sh --help
+```
+It should display:
+
+```text
+Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--help]
+
+Options:
+--help   Shows this message
+--1      Step 1: Installs Prometheus
+--2      Step 2: Installs Grafana
+--3      Step 3: Installs node_exporter
+--4      Step 4: Installs AvalancheGo Grafana dashboards
+
+Run without any options, script will download and install latest version of AvalancheGo dashboards.
 ```
 
-```cpp
-sudo mkdir /etc/prometheus /var/lib/prometheus
+Let's get to it.
+
+## Step 1: Set up Prometheus <a id="prometheus"></a>
+
+Run the script to execute the first step:
+
+```bash
+./monitoring-installer.sh --1
 ```
 
-Get the necessary utilities, in case they are not already installed:
+It should produce output something like this:
 
-```cpp
-sudo apt-get install -y apt-transport-https
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 1: Installing Prometheus
+
+Checking environment...
+Found arm64 architecture...
+Prometheus install archive found:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+Attempting to download:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+prometheus.tar.gz                           100%[=========================================================================================>]  65.11M   123MB/s    in 0.5s
+2021-11-05 14:16:11 URL:https://github-releases.githubusercontent.com/6838921/a215b0e7-df1f-402b-9541-a3ec9d431f76?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T141610Z&X-Amz-Expires=300&X-Amz-Signature=72a8ae4c6b5cea962bb9cad242cb4478082594b484d6a519de58b8241b319d94&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=6838921&response-content-disposition=attachment%3B%20filename%3Dprometheus-2.31.0.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [68274531/68274531] -> "prometheus.tar.gz" [1]
+...
 ```
-
-```cpp
-sudo apt-get install -y software-properties-common wget
-```
-
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
-
-```cpp
-mkdir -p /tmp/prometheus && cd /tmp/prometheus
-```
-
-```cpp
-wget https://github.com/prometheus/prometheus/releases/download/v2.25.0/prometheus-2.25.0.linux-amd64.tar.gz
-```
-
-```cpp
-tar xvf prometheus-2.25.0.linux-amd64.tar.gz
-```
-
-```cpp
-cd prometheus-2.25.0.linux-amd64
-```
-
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
-
-```cpp
-sudo cp {prometheus,promtool} /usr/local/bin/
-```
-
-```cpp
-sudo chown prometheus:prometheus /usr/local/bin/{prometheus,promtool}
-```
-
-```cpp
-sudo chown -R prometheus:prometheus /etc/prometheus
-```
-
-```cpp
-sudo chown prometheus:prometheus /var/lib/prometheus
-```
-
-```cpp
-sudo cp -r {consoles,console_libraries} /etc/prometheus/
-```
-
-```cpp
-sudo cp prometheus.yml /etc/prometheus/
-```
-
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
-
-Let’s set up Prometheus to run as a system service. Do**:**
-
-```cpp
-sudo nano /etc/systemd/system/prometheus.service
-```
-
-\(or open that file in the text editor of your choice\), and enter the following configuration:
-
-```cpp
-[Unit]
-Description=Prometheus
-Documentation=https://prometheus.io/docs/introduction/overview/
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/prometheus   --config.file=/etc/prometheus/prometheus.yml   --storage.tsdb.path=/var/lib/prometheus   --web.console.templates=/etc/prometheus/consoles   --web.console.libraries=/etc/prometheus/console_libraries   --web.listen-address=0.0.0.0:9090   --web.external-url=
-
-SyslogIdentifier=prometheus
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Save the file. Now, we can run Prometheus as a system service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start prometheus
-```
-
-```cpp
-sudo systemctl enable prometheus
-```
-
-Prometheus should now be running. To make sure, we can check with:
-
-```cpp
+You may be prompted to confirm additional package installs, do that if asked. Script run should end with instructions on how to check that Prometheus installed correctly. Let's do that, run:
+```bash
 sudo systemctl status prometheus
 ```
 
-which should produce something like:
+It should output something like:
 
-```cpp
+```text
 ● prometheus.service - Prometheus
-     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
-     Active: active (running) since Wed 2020-04-01 19:23:53 CEST; 5 months 12 days ago
-       Docs: https://prometheus.io/docs/introduction/overview/
-   Main PID: 1767 (prometheus)
-      Tasks: 12 (limit: 9255)
-     CGroup: /system.slice/prometheus.service
-             └─1767 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templa>
+Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
+Active: active (running) since Fri 2021-11-12 11:38:32 UTC; 17min ago
+Docs: https://prometheus.io/docs/introduction/overview/
+Main PID: 548 (prometheus)
+Tasks: 10 (limit: 9300)
+Memory: 95.6M
+CGroup: /system.slice/prometheus.service
+└─548 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templates=/etc/prometheus/con>
 
-Sep 13 13:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:04.744Z caller=head.go:792 component=tsdb msg="Head GC completed" duration=13.6>
-Sep 13 13:00:05 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:05.263Z caller=head.go:869 component=tsdb msg="WAL checkpoint complete" first=9>
-Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z caller=compact.go:495 component=tsdb msg="write block" mint=15999912000>
-...
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=81 maxSegment=84
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
 
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
+Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df). If on public internet, make sure to only allow your IP to connect!
 {% endhint %}
 
-## Install Grafana
+If everything is ok, let's move on.
 
-To set up Grafana project repositories with Ubuntu:
+## Step 2: Install Grafana <a id="grafana"></a>
 
-```cpp
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+Run the script to execute the second step:
+
+```bash
+./monitoring-installer.sh --1
 ```
 
-```cpp
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+It should produce output something like this:
+
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 2: Installing Grafana
+
+OK
+deb https://packages.grafana.com/oss/deb stable main
+Hit:1 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal InRelease
+Get:2 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-updates InRelease [114 kB]
+Get:3 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-backports InRelease [101 kB]
+Hit:4 http://ppa.launchpad.net/longsleep/golang-backports/ubuntu focal InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [114 kB]
+Get:6 https://packages.grafana.com/oss/deb stable InRelease [12.1 kB]
+...
 ```
-
-To install Grafana:
-
-```cpp
-sudo apt-get update
-```
-
-```cpp
-sudo apt-get install grafana
-```
-
-To configure it as a service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start grafana-server
-```
-
-```cpp
-sudo systemctl enable grafana-server.service
-```
-
 To make sure it’s running properly:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+which should again show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` from your browser.
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
+You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjust the cloud instance settings to allow connections to port 3000. If on public internet, make sure to only allow your IP to connect!
 {% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+We now need to finish Grafana setup. Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
 
 On Grafana’s web interface:
 
 * Go to Configuration on the left-side menu and select Data Sources.
 * Click Add Data Source
 * Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
+* In the form, enter the name `Prometheus`, and `http://localhost:9090` as the URL.
 * Click `Save & Test`
 * Check for "Data source is working" green message.
 
-## Set up node\_exporter
+Prometheus and Grafana are now connected, we're ready for the next step.
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
+## Step 3: Set up node\_exporter <a id="exporter"></a>
 
-Get the latest version with:
+In addition to metrics from AvalancheGo, let’s set up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
 
+Run the script to execute the third step:
+
+```bash
+./monitoring-installer.sh --3
+```
+The output should look something like this:
 ```text
-curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
+AvalancheGo monitoring installer
+--------------------------------
+STEP 3: Installing node_exporter
+
+Checking environment...
+Found arm64 architecture...
+Dowloading archive...
+https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
+node_exporter.tar.gz                        100%[=========================================================================================>]   7.91M  --.-KB/s    in 0.1s
+2021-11-05 14:57:25 URL:https://github-releases.githubusercontent.com/9524057/6dc22304-a1f5-419b-b296-906f6dd168dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T145725Z&X-Amz-Expires=300&X-Amz-Signature=3890e09e58ea9d4180684d9286c9e791b96b0c411d8f8a494f77e99f260bdcbb&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=9524057&response-content-disposition=attachment%3B%20filename%3Dnode_exporter-1.2.2.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [8296266/8296266] -> "node_exporter.tar.gz" [1]
+node_exporter-1.2.2.linux-arm64/LICENSE
 ```
-
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
-
-```cpp
-tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
-```
-
-```cpp
-sudo mv node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
-```
-
-Check that it is installed correctly with:
-
-```cpp
-node_exporter --version
-```
-
-Then we add node\_exporter as a service. Do:
-
-```cpp
-sudo nano /etc/systemd/system/node_exporter.service
-```
-
-\(or open that file in the text editor of your choice\) and populate it with:
-
-```cpp
-[Unit]
-Description=Prometheus Node Exporter
-Documentation=https://github.com/prometheus/node_exporter
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/node_exporter \
-    --collector.cpu \
-    --collector.diskstats \
-    --collector.filesystem \
-    --collector.loadavg \
-    --collector.meminfo \
-    --collector.filefd \
-    --collector.netdev \
-    --collector.stat \
-    --collector.netstat \
-    --collector.systemd \
-    --collector.uname \
-    --collector.vmstat \
-    --collector.time \
-    --collector.mdadm \
-    --collector.zfs \
-    --collector.tcpstat \
-    --collector.bonding \
-    --collector.hwmon \
-    --collector.arp \
-    --web.listen-address=:9100 \
-    --web.telemetry-path="/metrics"
-
-[Install]
-WantedBy=multi-user.target
-```
-
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
-
-```cpp
-sudo systemctl start node_exporter
-```
-
-```cpp
-sudo systemctl enable node_exporter
-```
-
 Again, we check that the service is running correctly:
-
 ```cpp
 sudo systemctl status node_exporter
 ```
-
-If you see messages such as `Ignoring unknown escape sequences`, double check that the contents of the service file is correctly copied over and there are no extra backslashes or extra newlines. Correct if necessary and restart the service afterwards.
-
-Now, we’re ready to tie it all together.
-
-## Configure AvalancheGo and node\_exporter Prometheus jobs
-
-Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
-
-We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
-
-Do :
-
-```cpp
-sudo nano /etc/prometheus/prometheus.yml
-```
-
-\(or open that file in the text editor of your choice\) and append to the end:
-
-```cpp
-  - job_name: 'avalanchego'
-    metrics_path: '/ext/metrics'
-    static_configs:
-      - targets: ['<your-host-ip>:9650']
-
-  - job_name: 'avalanchego-machine'
-    static_configs:
-      - targets: ['<your-host-ip>:9100']
-        labels:
-          alias: 'machine'
-```
-
-**Indentation is important**. Make sure `-job_name` is aligned vertically with existing `-job_name` entry, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
-
-Save the config file and restart Prometheus:
-
-```cpp
-sudo systemctl restart prometheus
-```
-
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+If the service is running, Prometheus, Grafana and node_exporter should all work together now. To check, in your browser visit Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
 
 * Prometheus
 * avalanchego
@@ -365,14 +196,43 @@ Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You s
 
 Make sure that all of them have `State` as `UP`.
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards).
+All that's left to do now is to install the actual dashboards that will show us the data.
 
-To import the preconfigured dashboard:
+## Step 4: Dashboards <a id="dashboards"></a>
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
-* Select `Prometheus` as Data Source
+Run the script to install the dashboards:
 
-That’s it! You may now marvel at all the things your node does. Woohoo!
+```bash
+./monitoring-installer.sh --4
+```
+It will produce output something like this:
+```text
+AvalancheGo monitoring installer
+--------------------------------
 
+Downloading...
+Last-modified header missing -- time-stamps turned off.
+2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
+FINISHED --2021-11-05 14:57:47--
+Total wall clock time: 0.2s
+Downloaded: 1 files, 49K in 0s (132 MB/s)
+Last-modified header missing -- time-stamps turned off.
+...
+```
+This will download the latest versions of the dashboards from GitHub and provision Grafana to load them. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
+![Imported dashboards](monitoring-01-dashboards.png)
+Select 'Avalanche Main Dashboard' by clicking its title. It should load, and look similar to this:
+![Main Dashboard](monitoring-02-main-dashboard.png)
+Some of the graphs may take some time to populate fully, as they need a series of datapoints in order to render correctly.
+
+You can bookmark the main dashboard as it shows the most important information about the node at a glance. Every dashboard has a link to all the others as the first row, so you can move between them easily.
+
+## Updating
+
+Available node metrics are updated constantly, new ones are added and obsolete removed, so it is good a practice to update the dashboards from time to time, especially if you notice any missing data in panels. Updating the dashboards is easy, just run the script with no arguments, and it will refresh the dashboards with the latest available versions. Allow up to 30s for dashboards to update in Grafana.
+
+## Summary
+
+Using the script to install node monitoring is easy, and it gives you insight into how your node is behaving and what's going on under the hood. Also, pretty graphs!
+
+If you have feedback on this tutorial, problems with the script or following the steps, send us a message on [Discord](https://chat.avalabs.org).
