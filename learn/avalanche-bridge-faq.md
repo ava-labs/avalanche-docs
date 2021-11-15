@@ -129,11 +129,15 @@ Yes, the code for the bridge, warden and smart contracts have been audited by Ha
 
 #### My transfer to Avalanche is complete but I don't see my assets on Metamask Avalanche. What happened? <a id="cant-see-funds"></a>
 
-You need to tell Metamask to look for the tokens. Make sure you've added the tokens from the [Avalanche Bridge token list](https://github.com/pangolindex/tokenlists/blob/main/ab.tokenlist.json) to Metamask.
+You need to tell Metamask to look for the tokens. Make sure you've added the tokens from the [Avalanche Bridge token list](https://github.com/pangolindex/tokenlists/blob/main/ab.tokenlist.json) to Metamask. The easiest way to do that is go to the [Proof of Assets](https://bridge.avax.network/proof-of-assets) web page and click the Metamask icon next to the wrapped token you need (for WETH that would be WETH.e, for USDT look for USDT.e, for example).
 
 #### What kind of tokens can be transferred across the bridge?
 
 Only supported ERC20 tokens can be transferred across the bridge. On Avalanche, these tokens are represented by the token symbol with ".e" appended. For example, the bridged DAI token is DAI.e.
+
+#### I sent ETH over the bridge but don't see it on Avalanche!
+
+You most likely didn't. Sending ETH to Avalanche over Avalanche Bridge is done through two transactions. First transaction, done entirely on Ethereum, wraps ETH to WETH which then gets deposited to your Ethereum wallet. After that is done, you need to initiate a second transaction to send WETH to Avalanche, where WETH.e will be deposited to your wallet, after 35 confirmations of the second transaction on Ethereum. You will need to add WETH.e to Metamask to see them in your wallet.
 
 #### How do I unwrap WETH.e to ETH on Avalanche?
 
