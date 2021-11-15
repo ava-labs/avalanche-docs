@@ -581,7 +581,7 @@ curl -X POST --data '{
 
 ### avm.export
 
-Send a non-AVAX from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call [`avax.import`](contract-chain-c-chain-api.md#avax-import) on the C-Chain to complete the transfer.
+Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call the [C-Chain's `avax.import`](contract-chain-c-chain-api.md#avax-import) or the [P-Chain's `avax.importAVAX`](platform-chain-p-chain-api.md#avax-importAVAX) to complete the transfer.
 
 #### **Signature**
 
@@ -603,10 +603,12 @@ avm.export({
 
 * `to` is the P-Chain or C-Chain address the asset is sent to.
 * `amount` is the amount of the asset to send.
-* `assetID` is the asset id of the asset which is sent.
+* `assetID` is the asset id of the asset which is sent. Use `AVAX` for AVAX exports.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 * The asset is sent from addresses controlled by `username`
+* `password` is `username`‘s password.
+
 * `txID` is this transaction’s ID.
 * `changeAddr` in the result is the address where any change was sent.
 
@@ -619,8 +621,8 @@ curl -X POST --data '{
     "method" :"avm.export",
     "params" :{
         "to":"C-avax1q9c6ltuxpsqz7ul8j0h0d0ha439qt70sr3x2m0",
-        "amount": 500,
-        "assetID": "2YmsQfMaCczE4mLG1DPYUnRURNGfhjj4qrqnLRR3LmZ3GxDWPt",
+        "amount": 10,
+        "assetID": "AVAX",
         "from":["X-avax1s65kep4smpr9cnf6uh9cuuud4ndm2z4jguj3gp"],
         "changeAddr":"X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
@@ -1140,7 +1142,7 @@ This gives response:
 
 ### avm.import
 
-Finalize a transfer of AVAX from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
+Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is called, you must call the P-Chain’s [`platform.exportAVAX`](platform-chain-p-chain-api.md#platform-exportavax) or C-Chain’s [`avax.export`](contract-chain-c-chain-api.md#avax-export) method to initiate the transfer.
 
 #### **Signature**
 

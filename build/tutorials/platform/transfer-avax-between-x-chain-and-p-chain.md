@@ -77,7 +77,7 @@ As you may have noticed while transferring AVAX using the Avalanche Wallet, a cr
 
 ### Step 1 - Export AVAX from the X-Chain
 
-To export AVAX, call the X-Chain’s [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) method.
+To export AVAX, call the X-Chain’s [`avm.export`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-export) method with `AVAX` assetID.
 
 Your call should look like this:
 
@@ -85,10 +85,10 @@ Your call should look like this:
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.exportAVAX",
+    "method" :"avm.export",
     "params" :{
         "to":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
-        "destinationChain": "P",
+        "assetID": "AVAX",
         "amount": 5000000,
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
@@ -271,13 +271,13 @@ This returns the transaction ID, and we can check that the transaction was commi
 
 ### Step 2 - Import AVAX to X-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax):
+To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-import):
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.importAVAX",
+    "method" :"avm.import",
     "params" :{
         "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
         "sourceChain":"P",
