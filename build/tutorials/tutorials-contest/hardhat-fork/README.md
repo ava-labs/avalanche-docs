@@ -4,13 +4,6 @@ In this tutorial we will cover the use of Hardhat, a powerful EVM development to
 specifically, we will cover how to configure it to work with Avalanche CChain and how to use the Hardhat `fork`
 mechanism to test your DeFi dApps.
 
-If you want to jump right into the code, here's a [link](https://github.com/tbrunain/avalanche-hardhat-fork-tutorial)
-to the github repo containing the code of this tutorial.
-
-I would recommend you to clone the repo and start with the following commands:
-* npm i
-* npm test
-
 ### Hardhat ?
 
 Hardhat is an **Ethereum development environment for professionals**. It was developed for Ethereum, but since lots of
