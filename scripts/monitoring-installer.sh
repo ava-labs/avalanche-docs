@@ -326,6 +326,7 @@ install_dashboards() {
       echo "      foldersFromFilesStructure: true"
     } >>avalanche.yaml
     sudo cp avalanche.yaml /etc/grafana/provisioning/dashboards/
+    sudo systemctl restart grafana-server
   fi
   echo
   echo "Done!"
