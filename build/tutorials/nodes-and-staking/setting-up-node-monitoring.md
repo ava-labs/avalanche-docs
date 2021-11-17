@@ -196,6 +196,20 @@ If the service is running, Prometheus, Grafana and node_exporter should all work
 
 Make sure that all of them have `State` as `UP`.
 
+{% hint style="info" %}
+If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
+```cpp
+  - job_name: 'avalanchego'
+    metrics_path: '/ext/metrics'
+    scheme: 'https'
+    tls_config:
+    insecure_skip_verify: true
+    static_configs:
+      - targets: ['localhost:9650']
+```
+Mind the spacing (leading spaces too)! Restart prometheus service after editing.
+{% endhint %}
+
 All that's left to do now is to install the actual dashboards that will show us the data.
 
 ## Step 4: Dashboards <a id="dashboards"></a>
