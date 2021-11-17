@@ -922,24 +922,110 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"avm.getTx",
     "params" :{
-        "txID":"2QouvFWUbjuySRxeX5xMbNCuAaKWfbk5FeEa2JmoF85RKLk2dD",
-        "encoding": "cb58"
+        "txID":"KMcVWV1dJAuWQXfrJgNFFr9uPHqXELQNZoFWoosYVqQV5qGj5",
+        "encoding": "json"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
 #### **Example Response**
 
-```cpp
+```json
 {
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "tx":"1111111vQFqEEHkkAGwJnpdAJgga28zHk9pFARHp1VWe3QM5wC7ztGA5cZAPanFWXHkhbWEbFs9qsEpNZ7QHrzucUUZqLEPrAwJZLrZBik4dEhbsTCF3nS6s2fXVzc5ar2esLFD92WVMZmJNuTUQuKjVkjag2Gy3HHYSqm6bojrG62KrazywKPhrYx8QF9AqNfYYwD3XcSUV1g46r7sQ1WqzM8nyG4qL517JS1YVuTC3aWPeN5cxP6FdvbYexwHcgaBtiQsYbCEeZ9cuJqhE2Pxx8BJFpicLN8FBexb6fzQyBLiFR7yx6v6YBjq7dtu9MBczFdNCnDE4MsG2SyPZsdUv1XxQYVVwDqgqi8Zto5esJKph72YZbrXX3SHVSZBFZXkKbTzyEQFWHCF1jC",
-        "encoding": "cb58"
+    "jsonrpc": "2.0",
+    "result": {
+        "tx": {
+            "unsignedTx": {
+                "networkID": 1,
+                "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+                "outputs": [
+                    {
+                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                        "output": {
+                            "addresses": [
+                                "X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"
+                            ],
+                            "amount": 1530084210,
+                            "locktime": 0,
+                            "threshold": 1
+                        }
+                    }
+                ],
+                "inputs": [],
+                "memo": "0x",
+                "sourceChain": "11111111111111111111111111111111LpoYY",
+                "importedInputs": [
+                    {
+                        "txID": "28jfD1CViCz7CKawJBzmHCQRWtk6xwzcBjCVErH6dBo11JLvmw",
+                        "outputIndex": 0,
+                        "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+                        "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                        "input": {
+                            "amount": 1531084210,
+                            "signatureIndices": [
+                                0
+                            ]
+                        }
+                    }
+                ]
+            },
+            "credentials": [
+                {
+                    "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                    "credential": {
+                        "signatures": [
+                            "0x447ea3c6725add24e240b3179f9cc28ab5410c48f822d32d12459861ca816765297dbfe07e1957e3b470d39e6f56f10269dd7f8c4e108857db874b2c4ba1a22401"
+                        ]
+                    }
+                }
+            ]
+        },
+        "encoding": "json"
+    },
+    "id": 1
+}
+```
+
+Where:
+
+* `credentials` is a list of this transaction's credentials. Each credential proves that this transaction's creator is allowed to consume one of this transaction's inputs. Each credential is a list of signatures.
+* `unsignedTx` is the non-signature portion of the transaction.
+* `networkID` is the ID of the network this transaction happened on. (Avalanche Mainnet is `1`.)
+* `blockchainID` is the ID of the blockchain this transaction happened on. (Avalanche Mainnet X-Chain is `2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM`.)
+* Each element of `outputs` is an output (UTXO) of this transaction that is not being exported to another chain.
+* Each element of `inputs` is an input of this transaction which has not been imported from another chain.
+* Import Transactions have additional fields `sourceChain` and `importedInputs`, which specify the blockchain ID that assets are being imported from, and the inputs that are being imported.
+* Export Transactions have additional fields `destinationChain` and `exportedOutputs`, which specify the blockchain ID that assets are being exported to, and the UTXOs that are being exported.
+
+An output contains:
+
+* `assetID`: The ID of the asset being transferred. (The Mainnet Avax ID is `FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z`.)
+* `fxID`: The ID of the FX this output uses.
+* `output`: The FX-specific contents of this output.
+
+Most outputs use the secp256k1 FX, look like this:
+
+```json
+{
+    "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+    "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+    "output": {
+        "addresses": [
+            "X-avax126rd3w35xwkmj8670zvf7y5r8k36qa9z9803wm"
+        ],
+        "amount": 1530084210,
+        "locktime": 0,
+        "threshold": 1
     }
 }
 ```
+
+The above output can be consumed after Unix time `locktime` by a transaction that has signatures from `threshold` of the addresses in `addresses`.
+
+### avm.getTxStatus
+
+Get the status of a transaction sent to the network.
 
 ### avm.getTxStatus
 
