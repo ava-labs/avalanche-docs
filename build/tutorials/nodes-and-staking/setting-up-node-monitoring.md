@@ -142,24 +142,13 @@ To make sure it’s running properly:
 sudo systemctl status grafana-server
 ```
 
-which should again show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` from your browser.
+which should again show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/` from your browser. Log in with username: admin, password: admin, and you will be prompted to set up a new, secure password. Do that.
 
 {% hint style="warning" %}
 You may need to do `sudo ufw allow 3000/tcp` if the firewall is on, and/or adjust the cloud instance settings to allow connections to port 3000. If on public internet, make sure to only allow your IP to connect!
 {% endhint %}
 
-We now need to finish Grafana setup. Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
-
-On Grafana’s web interface:
-
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name `Prometheus`, and `http://localhost:9090` as the URL.
-* Click `Save & Test`
-* Check for "Data source is working" green message.
-
-Prometheus and Grafana are now connected, we're ready for the next step.
+Prometheus and Grafana are now installed, we're ready for the next step.
 
 ## Step 3: Set up node\_exporter <a id="exporter"></a>
 
@@ -207,10 +196,10 @@ If you run your AvalancheGo node with TLS enabled on your API port, you will nee
     static_configs:
       - targets: ['localhost:9650']
 ```
-Mind the spacing (leading spaces too)! Restart prometheus service after editing.
+Mind the spacing (leading spaces too)! You will need admin privileges to do that (use `sudo`). Restart prometheus service afterwards with `sudo systemctl restart prometheus`.
 {% endhint %}
 
-All that's left to do now is to install the actual dashboards that will show us the data.
+All that's left to do now is to provision the datasource and install the actual dashboards that will show us the data.
 
 ## Step 4: Dashboards <a id="dashboards"></a>
 
@@ -233,11 +222,11 @@ Downloaded: 1 files, 49K in 0s (132 MB/s)
 Last-modified header missing -- time-stamps turned off.
 ...
 ```
-This will download the latest versions of the dashboards from GitHub and provision Grafana to load them. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
+This will download the latest versions of the dashboards from GitHub and provision Grafana to load them, as well as defining Prometheus as a datasource. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
 ![Imported dashboards](monitoring-01-dashboards.png)
 Select 'Avalanche Main Dashboard' by clicking its title. It should load, and look similar to this:
 ![Main Dashboard](monitoring-02-main-dashboard.png)
-Some of the graphs may take some time to populate fully, as they need a series of datapoints in order to render correctly.
+Some graphs may take some time to populate fully, as they need a series of datapoints in order to render correctly.
 
 You can bookmark the main dashboard as it shows the most important information about the node at a glance. Every dashboard has a link to all the others as the first row, so you can move between them easily.
 

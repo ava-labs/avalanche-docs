@@ -150,8 +150,8 @@ install_grafana() {
   echo
   wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
   echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
-  sudo apt-get update
-  sudo apt-get install grafana
+  sudo apt-get update -y
+  sudo apt-get install grafana -y
 
   echo "Starting Grafana service..."
   sudo systemctl daemon-reload
@@ -326,6 +326,21 @@ install_dashboards() {
       echo "      foldersFromFilesStructure: true"
     } >>avalanche.yaml
     sudo cp avalanche.yaml /etc/grafana/provisioning/dashboards/
+    echo "Provisioning datasource..."
+    {
+      echo "apiVersion: 1"
+      echo ""
+      echo "datasources:"
+      echo "  - name: Prometheus"
+      echo "    type: prometheus"
+      echo "    access: proxy"
+      echo "    orgId: 1"
+      echo "    url: http://localhost:9090"
+      echo "    isDefault: true"
+      echo "    version: 1"
+      echo "    editable: false"
+    } >>prom.yaml
+    sudo cp prom.yaml /etc/grafana/provisioning/datasources/
     sudo systemctl restart grafana-server
   fi
   echo
