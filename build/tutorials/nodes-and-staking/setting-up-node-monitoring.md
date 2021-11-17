@@ -116,7 +116,7 @@ If everything is ok, let's move on.
 Run the script to execute the second step:
 
 ```bash
-./monitoring-installer.sh --1
+./monitoring-installer.sh --2
 ```
 
 It should produce output something like this:
