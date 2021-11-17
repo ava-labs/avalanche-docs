@@ -15,7 +15,7 @@ The [Avalanche Bridge \(AB\)](https://bridge.avax.network/) can be used to trans
 
 If the Ethereum transaction transferring funds over the bridge to Avalanche seems stuck and does not have any confirmations, you can speed up the transaction as described [here](avalanche-bridge-faq.md#speed-up-transaction). If the Ethereum transaction has already received 35 confirmations, but the Avalanche transaction timer seems to be stuck, check your Metamask wallet balance on the Avalanche network. It could be that the transaction was already processed but is just not showing up on the user interface. Note that this may happen if you opted to "speed up" your transaction.
 
-Is is possible, but very unlikely, that the Ethereum transaction issued by the bridge when transferring funds to Ethereum takes a long time to receive 35 confirmations. This may occur if there is a sudden significant spike in Ethereum gas prices. If the transaction is not included within 200 blocks of when it was issued on Ethereum, a new transaction with a higher gas price may be issued to "unstick" the transfer.
+It is possible, but very unlikely, that the Ethereum transaction issued by the bridge when transferring funds to Ethereum takes a long time to receive 35 confirmations. This may occur if there is a sudden significant spike in Ethereum gas prices. If the transaction is not included within 200 blocks of when it was issued on Ethereum, a new transaction with a higher gas price may be issued to "unstick" the transfer.
 
 #### How long does a bridge transfer take?
 
