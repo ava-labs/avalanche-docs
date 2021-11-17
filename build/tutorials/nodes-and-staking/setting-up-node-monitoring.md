@@ -16,7 +16,7 @@ Prerequisites:
 * Shell access to the machine running the node
 * Administrator privileges on the machine
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other Linux flavors that use `systemd` might work but have not been tested.
+This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node. Other Linux flavors that use `systemd` for running services and `apt-get` for package management might work but have not been tested. Community member has reported it works on Debian 10, might work on other Debian releases as well.
 
 ### Caveat: Security
 
