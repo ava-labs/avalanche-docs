@@ -223,9 +223,13 @@ Last-modified header missing -- time-stamps turned off.
 ...
 ```
 This will download the latest versions of the dashboards from GitHub and provision Grafana to load them, as well as defining Prometheus as a datasource. It may take up to 30 seconds for the dashboards to show up. In your browser, go to: `http://your-node-host-ip:3000/dashboards`. You should see 7 Avalanche dashboards:
+
 ![Imported dashboards](monitoring-01-dashboards.png)
+
 Select 'Avalanche Main Dashboard' by clicking its title. It should load, and look similar to this:
+
 ![Main Dashboard](monitoring-02-main-dashboard.png)
+
 Some graphs may take some time to populate fully, as they need a series of datapoints in order to render correctly.
 
 You can bookmark the main dashboard as it shows the most important information about the node at a glance. Every dashboard has a link to all the others as the first row, so you can move between them easily.
