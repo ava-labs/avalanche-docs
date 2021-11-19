@@ -115,8 +115,7 @@ module.exports = {
         provider: () => new HDWalletProvider(mnemonic, `https://api.avax-test.network/ext/bc/C/rpc`),
         network_id: 1,
         timeoutBlocks: 200,
-        confirmations: 5,
-        production: true    // Treats this network as if it was a public net. (default: false)
+        confirmations: 5
     }
   }
 };
@@ -197,8 +196,7 @@ module.exports = {
         provider: () => new HDWalletProvider(mnemonic, `https://api.avax.network/ext/bc/C/rpc`),
         network_id: 1,
         timeoutBlocks: 200,
-        confirmations: 5,
-        production: true    // Treats this network as if it was a public net. (default: false)
+        confirmations: 5
     }
   }
 };
