@@ -95,7 +95,6 @@
   * [Ortelius API](build/tools/ortelius.md)
   * [Deprecating Ortelius](build/tools/deprecating-ortelius.md)
   * [Postman collection](build/tools/postman-avalanche-collection.md)
-  * [Avalanche Stats](build/tools/avalanche-stats.md)
   * [Abigen](build/tools/abigen.md)
 * [References](build/references/README.md)
   * [Avalanche Native Tokens and ARC-20s](build/references/coreth-arc20s.md)
