@@ -154,7 +154,7 @@ You should see the txn activity in your terminal
 
 <br>
 
-# Verify Smart Contracts with Truffle Verify
+# Verify Smart Contracts with truffle verify
 
 Truffle verify allows users to verify contracts from the CLI
 
