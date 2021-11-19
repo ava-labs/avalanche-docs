@@ -122,6 +122,7 @@ module.exports = {
 };
 ```
 _Network can be configured for mainnet deployment(see Alternatives)_ 
+<br> <br>
 
 Run the following command:
 
@@ -137,7 +138,6 @@ Once this operation is completed, your ``./build/contracts`` folder should conta
 * ``MetaCoin.json``<br>
 * ``Migrations.json``<br>
 
-_You will need ``MetaCoin.json`` for future use_
 
 ### Migrate
 
@@ -156,9 +156,9 @@ You should see the txn activity in your terminal
 
 # Verify Smart Contracts with Truffle Verify
 
-Truffle verify alls users to verify contracts from the CLI
+Truffle verify allows users to verify contracts from the CLI
 
-Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle Verify [here](https://github.com/rkalis/truffle-plugin-verify)
+Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle verify [here](https://github.com/rkalis/truffle-plugin-verify)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
@@ -176,7 +176,7 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 7. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) <br>
 <img width="1384" alt="step5" src="https://user-images.githubusercontent.com/73849597/142696234-99cb457e-3b52-4566-8868-a078e54465e7.png">
-
+<br>
 
 ## Mainnet deployment
 
