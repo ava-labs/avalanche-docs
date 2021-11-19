@@ -61,7 +61,7 @@ Create a ``.env.json`` file in your project's root directory:
 }
 ```
 _Get your snowtrace API key [here](https://snowtrace.io/myapikey)_
-<br>
+<br> <br>
 
 Configure your ``truffle-config.js`` file to the appropriate settings:
 <br>
