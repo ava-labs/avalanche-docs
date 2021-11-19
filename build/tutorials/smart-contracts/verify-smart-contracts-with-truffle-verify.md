@@ -143,9 +143,9 @@ npx truffle migrate --network fuji
 <br>
 
 You should see the txn activity in your terminal
-![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
-![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
-![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
+<img width="793" alt="step1" src="https://user-images.githubusercontent.com/73849597/142695096-4dcbfb58-cc9d-46ba-b146-67ea5f46048f.png">
+<img width="899" alt="step2" src="https://user-images.githubusercontent.com/73849597/142695128-5c4adc0d-78be-423e-ac8e-4a77c81a5d5a.png">
+<img width="794" alt="step3" src="https://user-images.githubusercontent.com/73849597/142695152-bbd7551a-9624-4dca-9649-17fa93a98ebc.png">
 
 <br>
 
