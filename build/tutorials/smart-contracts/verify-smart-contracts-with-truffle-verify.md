@@ -36,15 +36,19 @@ Once this operation is completed, you'll now have a project structure with the f
 * ``truffle.js``: Truffle configuration file
 
 ## Compiling
-Set up your environment:
+Before we compile our amart contract, we must set up our environment
+
+<br>
+
+Run the following commands:
 
 ```zsh
-npm init -y
+npm init -y 
 ```
 <br>
 
-```zsh
-yarn add @truffle/hdwallet-provider yarn add -D truffle-plugin-verify
+```zsh 
+yarn add @truffle/hdwallet-provider yarn add -D truffle-plugin-verify 
 ```
 
 <br>
