@@ -36,7 +36,7 @@ Once this operation is completed, you'll now have a project structure with the f
 * ``truffle.js``: Truffle configuration file
 
 ## Compiling
-Before we compile our amart contract, we must set up our environment
+Before we compile our smart contract, we must set up our environment
 
 <br>
 
@@ -160,7 +160,7 @@ _You will need your MetaCoin contract address for future use_
 
 Truffle verify alls users to verify contracts from the CLI
 
-Read more about Truffle Verify [here](https://github.com/rkalis/truffle-plugin-verify) and the Fuji Testnet Explorer is [here](https://testnet.snowtrace.io/)
+Read more about Truffle Verify [here](https://github.com/rkalis/truffle-plugin-verify) and take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
@@ -169,17 +169,16 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 ```zsh
 npx truffle run verify ConvertLib MetaCoin --network fuji
 ```
+<br>
 
 2. Wait for the verification message from the CLI
+<img width="867" alt="Screen Shot 2021-11-19 at 1 18 47 PM" src="https://user-images.githubusercontent.com/73849597/142695700-cdcfb290-d8a7-49f3-bae7-33ef38e604fe.png">
+<br>
 
 
 ![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
 
-7. View the verified contracts:
-<br>
-* [MetaCoin](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) <br>
-* [ConvertLib](https://testnet.snowtrace.io/address/0x526014A08b7c1229498e61d097928637b8B8faD2#code) <br>
-<br>
+7. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) <br>
 
 ## Mainnet deployment
 
