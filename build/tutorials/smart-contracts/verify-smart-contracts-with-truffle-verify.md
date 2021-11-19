@@ -1,7 +1,7 @@
 # Verifying contracts with truffle verify
 
 _This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_<br>
-_Inspired by [blockscout docs](https://docs.blockscout.com/for-users/smart-contract-interaction/verifying-a-smart-contract/contracts-verification-via-sourcify)_
+_Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
 
 
 
@@ -153,14 +153,11 @@ You should see the txn activity in your terminal
 
 <br>
 
-_You will need your MetaCoin contract address for future use_
-
-
 # Verify Smart Contracts with Truffle Verify
 
 Truffle verify alls users to verify contracts from the CLI
 
-Read more about Truffle Verify [here](https://github.com/rkalis/truffle-plugin-verify) and take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/)
+Take a look at the Fuji Testnet Explorer [here](https://testnet.snowtrace.io/) and read more about truffle Verify [here](https://github.com/rkalis/truffle-plugin-verify)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
@@ -173,12 +170,12 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 2. Wait for the verification message from the CLI
 <img width="867" alt="Screen Shot 2021-11-19 at 1 18 47 PM" src="https://user-images.githubusercontent.com/73849597/142695700-cdcfb290-d8a7-49f3-bae7-33ef38e604fe.png">
+
 <br>
 
-
-![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
-
 7. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) <br>
+<img width="1384" alt="step5" src="https://user-images.githubusercontent.com/73849597/142696234-99cb457e-3b52-4566-8868-a078e54465e7.png">
+
 
 ## Mainnet deployment
 
