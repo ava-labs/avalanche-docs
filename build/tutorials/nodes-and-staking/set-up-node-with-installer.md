@@ -4,9 +4,15 @@ We have a shell \(bash\) script that installs AvalancheGo on your computer. This
 
 ## Before you start
 
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
+
+* CPU: Equivalent of 8 AWS vCPU
+* RAM: 16 GB
+* Storage: 200 GB
+* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+
 This install script assumes:
 
-* OS: Ubuntu 18.04 or 20.04 \(sorry, MacOS and Windows not yet supported\)
 * AvalancheGo is not running and not already installed as a service
 * User running the script has superuser privileges \(can run `sudo`\)
 
