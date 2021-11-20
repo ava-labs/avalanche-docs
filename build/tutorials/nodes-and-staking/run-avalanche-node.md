@@ -2,9 +2,7 @@
 
 The quickest way to learn about Avalanche is to run a node and interact with the network.
 
-{% embed url="https://youtu.be/c\_SjtCiOFdg" caption="" %}
-
-In this tutorial \(est. time: 10 minutes\), we will:
+In this tutorial, we will:
 
 * Install and run an Avalanche node
 * Connect to Avalanche
