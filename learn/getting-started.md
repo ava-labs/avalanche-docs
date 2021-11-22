@@ -8,7 +8,7 @@ You can find a general overview of Avalanche [here](https://support.avax.network
 
 ## AVAX Token and Fees
 
-All fees on Avalanche are paid in the native token, AVAX, so you'll need some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Other ways ways are explained below.
+All fees on Avalanche are paid in the native token, AVAX, so you'll need some in order to interact with the Avalanche network. You can get it through [exchanges](https://ecosystem.avax.network/marketplace?tag=exchange). Another way to acquire AVAX is via credit card purchase on [Pangolin](https://app.pangolin.exchange/#/buy). Other ways are explained below.
 
 If you use the [Avalanche Bridge](https://bridge.avax.network) to transfer assets to Avalanche, you will need some AVAX to move/swap your assets. The Avalanche Bridge provides an [airdrop](https://support.avax.network/en/articles/5462264-is-there-an-airdrop) of AVAX to users who transfer more than a certain value of assets to Avalanche. Use this AVAX to swap some of your bridged assets for AVAX so that you can pay future transaction fees.
 
