@@ -2,7 +2,7 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
-# PRE\_RELEASE v1.7.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0-fuji))
+## PRE\_RELEASE v1.7.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0-fuji))
 
 **Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
 
