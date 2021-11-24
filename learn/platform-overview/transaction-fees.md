@@ -79,3 +79,24 @@ Next, use `eth_maxPriorityFeePerGas` API call to estimate the priority fee neede
 
 Based off of this information, you can specify the `gasFeeCap` and `gasTipCap` to your liking based on how you prioritize getting your transaction included as quickly as possible vs. minimizing the price paid per unit of gas.
 
+### Atomic Transaction Fees
+
+C-Chain atomic transactions charge dynamic fees based on the amount of gas used by the transaction and the base fee of the block that includes the atomic transaction.
+
+Gas Used:
+
+```cpp
++---------------------+-------+
+| Item                : Gas   |
++---------------------+-------+
+| Unsigned Tx Byte    : 1     |
++---------------------+-------+
+| Signature           : 1000  |
++---------------------+-------+
+| Per Atomic Tx       : 10000 |
++---------------------+-------+
+```
+
+Therefore, the gas used by an atomic transaction is `1 * len(unsignedTxBytes) + 1,000 * numSignatures + 10,000`
+
+The tx fee additionally takes the base fee into account. Due to the fact that atomic transactions use units denominated in 9 decimal places, the base fee must be converted to 9 decimal places before calculating the actual fee paid by the transaction. Therefore, the actual fee is: `gasUsed * baseFee (converted to 9 decimals)`.
