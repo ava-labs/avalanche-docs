@@ -149,7 +149,8 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 * Click _Verify & Publish_ to enter the smart contract verification page
 
-<img width="717" alt="Verifypub" src="https://user-images.githubusercontent.com/73849597/143322022-11ab0a39-ffb4-45fe-b1c3-02c36fa0c0a6.png">
+
+<img width="710" alt="Vewp" src="https://user-images.githubusercontent.com/73849597/143323526-07cd3911-044a-49b9-8131-76ac4ffd71a8.png">
 
 
 
@@ -170,8 +171,8 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 * Click _Verify & Publish_
 
 
+<img width="1351" alt="SRCCode" src="https://user-images.githubusercontent.com/73849597/143323279-2c33a07b-9642-4ae0-9285-e68fca0ee4f0.png">
 
-![MetaCoin](https://user-images.githubusercontent.com/73849597/128950810-b1b5c280-267b-47ce-9922-edd36a157cd6.png)
 
 * View the verified contract: [MetaCoin](https://testnet.snowtrace.io/address/0xf1201EA651Ed5F968920c8bC62Fd76ea4CBfd9C2/contracts)
 
