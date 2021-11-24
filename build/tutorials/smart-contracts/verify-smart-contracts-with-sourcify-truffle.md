@@ -165,7 +165,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ![JSONSourcify](https://user-images.githubusercontent.com/73849597/128950634-55bdd46e-885b-437e-84d2-534bd1801df0.png)
 
-* Upload ``MetaCoin.sol`` ``ConvertLib.sol`` and ``MetaCoin.json``(found in build folder)
+* Paste the Solidity Contract Code of ``MetaCoin_flat.sol`` into the form
 
 * Click _Verify & Publish_
 
