@@ -119,12 +119,11 @@ truffle migrate --network fuji
 
 You should see the txn activity in your terminal
 
-![Screen Shot 2021-11-24 at 1 59 54 PM](https://user-images.githubusercontent.com/73849597/143318376-88e5f04d-b1d0-45f7-bf06-71ef3edcc273.png)
+![Step1](https://user-images.githubusercontent.com/73849597/143319829-11686093-954d-4a85-8bb4-6b2d83251bcb.png)
 
-![Screen Shot 2021-11-24 at 2 01 12 PM](https://user-images.githubusercontent.com/73849597/143318988-c1f5d796-9869-4ecb-8e2f-69f576c428b7.png)
+![Step2](https://user-images.githubusercontent.com/73849597/143319842-43ccba01-ff68-4bf6-acad-829f39d86907.png)
 
 <br>
-
 
 _You will need your MetaCoin contract address for future use_
 
@@ -138,19 +137,27 @@ Snowtrace is [here](https://snowtrace.io/) and Snowtrace for Fuji is [here](http
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 ## Steps
-* Navigate to the _Code_ tab at the Explorer page for your contract's address
+* Navigate to the _Contract_ tab at the Explorer page for your contract's address
 
-![CodeTab2](https://user-images.githubusercontent.com/73849597/128950386-35d89fe5-c61f-41b0-badf-87a487bf422c.png)
+
+<img width="1361" alt="Contract Tab" src="https://user-images.githubusercontent.com/73849597/143319874-f00e38c1-ce58-4923-92c4-5a476f2d48e1.png">
 
 
 * Click _Verify & Publish_ to enter the smart contract verification page
 
-![SourcifyVerify](https://user-images.githubusercontent.com/73849597/128950515-cc74c92f-6da3-485f-bb7f-a033eb59bd2e.png)
+
+<img width="744" alt="Verify and publish" src="https://user-images.githubusercontent.com/73849597/143320172-4c1f1994-99a4-40d2-95a3-99122ee747fa.png">
 
 
-* Click _Sourcify: sources and metadataJSON file_
+* Enter the _Contract Adress_ you would like to verify
 
-* Click _Next_
+* Select _Solidity (Standard-Json-Input)_ for Compiler Type
+
+* Select _v0.7.0.commit.9e61f92b_ for Compiler Version 
+
+* Select _3) MIT license (MIT)_
+
+* Click _Continue_
 
 ![JSONSourcify](https://user-images.githubusercontent.com/73849597/128950634-55bdd46e-885b-437e-84d2-534bd1801df0.png)
 
