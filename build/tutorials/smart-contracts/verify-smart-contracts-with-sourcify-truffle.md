@@ -145,8 +145,8 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 * Click _Verify & Publish_ to enter the smart contract verification page
 
+<img width="717" alt="Verifypub" src="https://user-images.githubusercontent.com/73849597/143322022-11ab0a39-ffb4-45fe-b1c3-02c36fa0c0a6.png">
 
-<img width="744" alt="Verify and publish" src="https://user-images.githubusercontent.com/73849597/143320172-4c1f1994-99a4-40d2-95a3-99122ee747fa.png">
 
 
 * Enter the _Contract Adress_ you would like to verify
