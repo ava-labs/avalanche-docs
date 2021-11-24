@@ -1,6 +1,6 @@
 # Verifying Samrt Contracts with Truffle Verify
 
-_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_
+_This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_ <br>
 _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
 
 
