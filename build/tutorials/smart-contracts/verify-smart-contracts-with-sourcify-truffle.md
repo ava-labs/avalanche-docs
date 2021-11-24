@@ -119,11 +119,12 @@ truffle migrate --network fuji
 
 You should see the txn activity in your terminal
 
-![Step1](https://user-images.githubusercontent.com/73849597/128948790-654fc0dc-25d5-4713-9058-dfc4101a8366.png)
+![Step1]![Screen Shot 2021-11-24 at 1 59 54 PM](https://user-images.githubusercontent.com/73849597/143318376-88e5f04d-b1d0-45f7-bf06-71ef3edcc273.png)
+
 <br>
-![Step2](https://user-images.githubusercontent.com/73849597/128949004-c63d366f-3c0e-42e0-92f5-cb86da62bcba.png)
+![Step2]![Screen Shot 2021-11-24 at 2 00 50 PM](https://user-images.githubusercontent.com/73849597/143318416-f3c7507f-88cd-4b93-a476-9eb6cd7e0444.png)
+
 <br>
-![Step3](https://user-images.githubusercontent.com/73849597/128948793-3cb1beda-00c3-47e2-ab43-7b4712b1cf1d.png)
 
 
 _You will need your MetaCoin contract address for future use_
