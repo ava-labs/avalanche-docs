@@ -121,8 +121,6 @@ You should see the txn activity in your terminal
 
 ![Screen Shot 2021-11-24 at 1 59 54 PM](https://user-images.githubusercontent.com/73849597/143318376-88e5f04d-b1d0-45f7-bf06-71ef3edcc273.png)
 
-<br>
-
 ![Screen Shot 2021-11-24 at 2 01 12 PM](https://user-images.githubusercontent.com/73849597/143318988-c1f5d796-9869-4ecb-8e2f-69f576c428b7.png)
 
 <br>
