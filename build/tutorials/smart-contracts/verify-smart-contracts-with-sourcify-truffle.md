@@ -133,7 +133,7 @@ _You will need your MetaCoin contract address for future use_
 
 Snowtrace supports verifying smart contracts, allowing users to review it
 
-Snowtrace is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here](https://testnet.snowtrace.io/)
+Snowtrace is [here](https://snowtrace.io/) and Snowtrace for Fuji is [here](https://testnet.snowtrace.io/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
