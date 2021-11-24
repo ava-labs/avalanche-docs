@@ -151,7 +151,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 * Enter the _Contract Adress_ you would like to verify
 
-* Select _Solidity (Standard-Json-Input)_ for Compiler Type
+* Select _Solidity (Single file)_ for Compiler Type
 
 * Select _v0.6.12+commit.27d51765_ for Compiler Version 
 
