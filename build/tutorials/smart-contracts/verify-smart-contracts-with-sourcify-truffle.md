@@ -123,7 +123,7 @@ You should see the txn activity in your terminal
 
 <br>
 
-![Screen Shot 2021-11-24 at 2 00 50 PM](https://user-images.githubusercontent.com/73849597/143318416-f3c7507f-88cd-4b93-a476-9eb6cd7e0444.png)
+![Screen Shot 2021-11-24 at 2 01 12 PM](https://user-images.githubusercontent.com/73849597/143318988-c1f5d796-9869-4ecb-8e2f-69f576c428b7.png)
 
 <br>
 
