@@ -31,9 +31,12 @@ Once this operation is completed, you'll now have a project structure with the f
 Set up your environment:
 
 ```zsh
-yarn add @truffle/hdwallet-provider
+npm init -y
 ```
 
+```zsh
+yarn add @truffle/hdwallet-provider yarn add truffle-flattener
+```
 
 Create a ``.env.json`` file in your project's root directory:
 
@@ -94,21 +97,22 @@ Configure your ``truffle-config.js`` file to the appropriate settings:
 ```
 _Network can be configured for mainnet deployment(see [Alternatives](verify-smart-contracts-with-sourcify-truffle.md#alternatives))_ 
 
-Run the following command:
+Run the following commands:
 
 ```zsh
-truffle compile
+npx truffle-flattener contracts/MetaCoin.sol > contracts/MetaCoin_flat.sol & truffle compile
 ```
 
+Once this operation is completed, your ``./contracts`` folder should contain the following items:
 
-Once this operation is completed, your ``./build/contracts`` folder should contain the following items:
 
+* ``ConvertLib.sol`` 
+* ``MetaCoin_flat.sol``
+* ``MetaCoin.sol``
+* ``Migrations.sol``
 
-* ``ConvertLib.json`` 
-* ``MetaCoin.json``
-* ``Migrations.json``
-
-_You will need ``MetaCoin.json`` for future use_
+_You will need ``MetaCoin_flat.sol`` for future use_
+<br>
 
 ## Migrate
 
