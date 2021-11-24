@@ -153,7 +153,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 * Select _Solidity (Standard-Json-Input)_ for Compiler Type
 
-* Select _v0.7.0.commit.9e61f92b_ for Compiler Version 
+* Select _v0.6.12+commit.27d51765_ for Compiler Version 
 
 * Select _3) MIT license (MIT)_ for Open Source License Type
 
