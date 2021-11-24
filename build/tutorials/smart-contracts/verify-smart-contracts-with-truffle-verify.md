@@ -1,4 +1,4 @@
-# Verifying Samrt Contracts with Truffle Verify
+# Verifying Smart Contracts with Truffle Verify
 
 _This tutorial includes items from the truffle [quickstart docs](https://www.trufflesuite.com/docs/truffle/quickstart)_ <br>
 _Inspired by [truffle verify docs](https://www.npmjs.com/package/truffle-plugin-verify)_
@@ -150,7 +150,7 @@ You should see the txn activity in your terminal
 
 
 
-## Verify Smart Contracts with truffle verify
+## Truffle verify
 
 Truffle verify allows users to verify contracts from the CLI
 
