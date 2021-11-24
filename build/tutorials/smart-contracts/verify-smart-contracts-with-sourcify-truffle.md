@@ -130,11 +130,11 @@ You should see the txn activity in your terminal
 _You will need your MetaCoin contract address for future use_
 
 
-# Verify Smart Contracts on the C-Chain Explorer
+# Verify Smart Contracts on Snowtrace
 
-The C-Chain Explorer supports verifying smart contracts, allowing users to review it
+Snowtrace supports verifying smart contracts, allowing users to review it
 
-The Mainnet C-Chain Explorer is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here](https://testnet.snowtrace.io/)
+Snowtrace is [here](https://snowtrace.io/) and the Fuji Testnet Explorer is [here](https://testnet.snowtrace.io/)
 
 If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
