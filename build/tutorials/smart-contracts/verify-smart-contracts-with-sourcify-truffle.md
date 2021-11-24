@@ -155,7 +155,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org)
 
 * Select _v0.7.0.commit.9e61f92b_ for Compiler Version 
 
-* Select _3) MIT license (MIT)_
+* Select _3) MIT license (MIT)_ for Open Source License Type
 
 * Click _Continue_
 
