@@ -34,7 +34,7 @@ The changes in the upgrade go into effect at 1 PM EST, December 2nd 2021 on Main
 
 - Added support for metrics to be reported by plugin VMs.
 
-## Configs
+**Configs**
 
 - Removed `--snow-epoch-first-transition` and `snow-epoch-duration` as command line arguments.
 
