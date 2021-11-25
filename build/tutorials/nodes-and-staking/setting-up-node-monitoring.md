@@ -192,7 +192,7 @@ If you run your AvalancheGo node with TLS enabled on your API port, you will nee
     metrics_path: '/ext/metrics'
     scheme: 'https'
     tls_config:
-    insecure_skip_verify: true
+      insecure_skip_verify: true
     static_configs:
       - targets: ['localhost:9650']
 ```
