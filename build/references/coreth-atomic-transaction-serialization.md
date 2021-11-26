@@ -600,7 +600,7 @@ Let's make an ImportTx:
 * **`ImportedInputs`**:
   * `"Example TransferableInput as defined above"`
 * **`Outs`**:
-  * `"Exapmle EVMOutput as defined above"`
+  * `"Example EVMOutput as defined above"`
 
 ```text
 [

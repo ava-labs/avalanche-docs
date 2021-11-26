@@ -57,7 +57,7 @@ For funding on the test network, you can also use the Test Network Faucet. Navig
 
 On a local network, you can easily fund your addresses by deploying your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
 
-Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our C-Chain address, for exmaple "0xfe8886bec537252040Dff36448C0F104Be635650".
+Let’s go to [avax faucet](https://faucet.avax-test.network/) and paste our C-Chain address, for example "0xfe8886bec537252040Dff36448C0F104Be635650".
 
 ![Image for post](../../../.gitbook/assets/erc20-faucet.png)
 
