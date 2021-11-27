@@ -2,6 +2,18 @@
 
 {% page-ref page="../tutorials/nodes-and-staking/upgrade-your-avalanchego-node.md" %}
 
+## v1.7.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.1)\)
+
+This update is backwards compatible with [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). Please see the expected update times in the v1.7.0 release.
+
+**Coreth**
+
+- Reduced fee estimate volatility.
+
+**Consensus**
+
+- Fixed vote bubbling for unverified block chits.
+
 ## v1.7.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0)\)
 
 This upgrade adds support for issuing multiple atomic transactions into a single block and directly transferring assets between the P-chain and the C-chain.
