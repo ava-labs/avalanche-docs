@@ -8,9 +8,10 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
 ## Steps
 
-Navigate to the _Code_ tab at the Explorer page for your contract's address.
+Navigate to the _Contract_ tab at the Explorer page for your contract's address.
+<img width="1359" alt="contract_tab" src="https://user-images.githubusercontent.com/73849597/144131951-aa07c32b-3556-4378-a174-fcef714656b0.png">
 
-![Verify &amp; Publish](../../../.gitbook/assets/smart-contract-verify-page.png)
+
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
