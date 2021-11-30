@@ -171,7 +171,7 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 
 
-7. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) 
+3. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) 
 <img width="1384" alt="step5" src="https://user-images.githubusercontent.com/73849597/142696234-99cb457e-3b52-4566-8868-a078e54465e7.png">
 
 
