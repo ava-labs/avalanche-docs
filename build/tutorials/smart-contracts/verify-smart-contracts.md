@@ -15,11 +15,13 @@ Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
-![Contract Entry](../../../.gitbook/assets/smart-contract-input-page.png)
+![compiler_license](./compiler_license.png)
+![contract_input](./contract_input.png)
+
 
 [Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
-![Libraries](../../../.gitbook/assets/smart-contract-library.png)
+![libraries](./libraries.png)
 
 The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
 
