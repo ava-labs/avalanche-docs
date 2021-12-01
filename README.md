@@ -6,7 +6,7 @@
 # Avalanche Docs
 
 ## Overview
-This repo contains the contents for our docs deployed [here](https://docs-beta.avax.network).
+This repo contains the contents for our docs deployed [here](https://docs.avax.network).
 
 The website is built using [Docusaurus 2](https://docusaurus.io/).
 

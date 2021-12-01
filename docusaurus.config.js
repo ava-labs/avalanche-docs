@@ -8,13 +8,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Avalanche Docs',
   tagline: 'Documentation and Tutorials for Avalanche',
-  url: 'https://docs-beta.avax.network',
+  url: 'https://docs.avax.network',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
   organizationName: 'ava-labs', // Usually your GitHub org/user name.
-  projectName: 'avalanche-docs-beta', // Usually your repo name.
+  projectName: 'avalanche-docs', // Usually your repo name.
 
   scripts: [
     'scripts/intercom-app.js',
@@ -30,7 +30,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
           // Please change this to your repo.
-          editUrl: 'https://github.com/ava-labs/avalanche-docs-beta/edit/main/',
+          editUrl: 'https://github.com/ava-labs/avalanche-docs/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -88,7 +88,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/ava-labs/avalanche-docs-beta',
+                href: 'https://github.com/ava-labs/avalanche-docs',
               }
             ],
           },
