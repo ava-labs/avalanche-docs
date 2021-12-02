@@ -30,7 +30,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
           // Please change this to your repo.
-          editUrl: 'https://github.com/ava-labs/avalanche-docs/edit/dev/',
+          editUrl: 'https://github.com/ava-labs/avalanche-docs/edit/master/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
