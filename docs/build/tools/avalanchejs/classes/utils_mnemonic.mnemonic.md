@@ -176,7 +176,7 @@ ___
 
 *Defined in [src/utils/mnemonic.ts:67](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/mnemonic.ts#L67)*
 
-Asynchronously takes mnemonic and password and returns Promise<[Buffer](https://github.com/feross/buffer)>
+Asynchronously takes mnemonic and password and returns Promise [Buffer](https://github.com/feross/buffer)
 
 **Parameters:**
 
