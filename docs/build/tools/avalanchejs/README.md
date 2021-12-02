@@ -6,15 +6,17 @@ The APIs currently supported by default are:
 
 * Admin API
 * Auth API
-* AVM API \(X-Chain\)
-* EVM API \(C-Chain\)
+* AVM API (X-Chain)
+* EVM API (C-Chain)
 * Health API
+* Index API
 * Info API
 * Keystore API
 * Metrics API
 * PlatformVM API
+* Socket API
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network).
+We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer’s consumption. We keep the library up-to-date with the latest changes in the Avalanche Platform Specification found in the [Platform Chain Specification](../../../build/avalanchego-apis/platform-chain-p-chain-api), [Exchange Chain (X-Chain) Specification](../../../build/avalanchego-apis/exchange-chain-x-chain-api), [Contract Chain (C-Chain) Specification](../../../build/avalanchego-apis/contract-chain-c-chain-api).
 
 Using AvalancheJS, developers can:
 
@@ -32,13 +34,17 @@ Using AvalancheJS, developers can:
 
 ## Requirements
 
-AvalancheJS requires Node.js version 12.14.1 or higher to compile.
+AvalancheJS requires Node.js version 14.18.0 or higher to compile.
 
 ## Installation
 
-Avalanche is available for install via `npm`:
+Avalanche is available for install via `npm` or `yarn`. For installing via `npm`:
 
 `npm install --save avalanche`
+
+For installing via `yarn`:
+
+`yarn add avalanche`
 
 You can also pull the repo down directly and build it from scratch:
 
@@ -48,19 +54,19 @@ This will generate a pure Javascript library and place it in a folder named "web
 
 The AvalancheJS library can be imported into your existing Node.js project as follows:
 
-```text
+```ts
 const avalanche = require("avalanche");
 ```
 
 Or into your TypeScript project like this:
 
-```text
+```ts
 import { Avalanche } from "avalanche"
 ```
 
 ## Importing essentials
 
-```text
+```ts
 import {
     Avalanche,
     BinTools,
@@ -77,4 +83,3 @@ The above lines import the libraries used in the tutorials. The libraries includ
 * bn.js: A bignumber module use by AvalancheJS.
 * buffer: A Buffer library.
 * BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
-
