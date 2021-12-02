@@ -1,3 +1,1 @@
-window.intercomSettings = {
-    app_id: "aegcj3j9"
-  };
+window.intercomSettings = {app_id: "aegcj3j9"};
