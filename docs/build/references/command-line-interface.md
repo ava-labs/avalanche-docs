@@ -313,7 +313,7 @@ The default C-Chain config is:
   "coreth-admin-api-enabled": false,
   "coreth-performance-api-enabled": false,
   "net-api-enabled": true,
-  "rpc-gas-cap": 2500000000,
+  "rpc-gas-cap": 50000000,
   "rpc-tx-fee-cap": 100,
   "eth-api-enabled": true,
   "personal-api-enabled": false,
@@ -373,7 +373,7 @@ Enables the `web3_*` API. Defaults to true.
 
 `rpc-gas-cap` \(int\):
 
-The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 2,500,000,000.
+The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 50,000,000.
 
 `rpc-tx-fee-cap` \(int\):
 
