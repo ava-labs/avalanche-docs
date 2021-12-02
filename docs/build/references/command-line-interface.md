@@ -373,7 +373,7 @@ Enables the `web3_*` API. Defaults to true.
 
 `rpc-gas-cap` \(int\):
 
-The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas`\), measured in nAVAX \(GWei\). Defaults to 50,000,000.
+The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas` and `eth_call`\). Defaults to 50,000,000.
 
 `rpc-tx-fee-cap` \(int\):
 
