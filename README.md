@@ -20,8 +20,8 @@ Contributing to the docs site is a great way to get involved with the Avalanche 
 * Extensive docs for Docusaurus can be found [here](https://docusaurus.io/docs).
 
 ### Pull Request (PR)
-* `dev` branch is for development. Please create a PR from this branch.
-* After the PR being merged to `dev` branch, the content will be deployed on [https://docs-beta.avax.network/](https://docs-beta.avax.network/).
+* `dev` branch is the base branch for development from which your PR should be created. A link to *.avalanche-docs.pages.dev will be presented to you from Cloudfare, after a successful build, so that you can verify your changes. 
+* After the PR being reviewed and merged to `dev` branch, the changes will be deployed on [https://docs-beta.avax.network/](https://docs-beta.avax.network/).
 * Admin of this project will merge `dev` branch to `master` branch, whose contents are deployed on [https://docs.avax.network/](https://docs.avax.network/) 
 
 ### Installation
