@@ -145,11 +145,11 @@ npx truffle migrate --network fuji
 
 
 You should see the txn activity in your terminal
-![truffle-verify-txn1]("/img/truffle-verify-txn1.png") <br>
-![truffle-verify-txn2]("/img/truffle-verify-txn2.png") <br>
-![truffle-verify-txn3]("/img/truffle-verify-txn3.png") <br>
+![truffle-verify-txn1](/img/truffle-verify-txn1.png) 
 
+![truffle-verify-txn2](/img/truffle-verify-txn2.png) 
 
+![truffle-verify-txn3](/img/truffle-verify-txn3.png) 
 
 
 ## Truffle verify
@@ -169,12 +169,12 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 
 2. Wait for the verification message from the CLI
-![truffle-verify-message1]("/img/truffle-verify-message1.png")
+![truffle-verify-message1](/img/truffle-verify-message1.png)
 
 
 
 3. View the verified
-![truffle-verify-view-contract]("/img/truffle-verify-view-contract.png")
+![truffle-verify-view-contract](/img/truffle-verify-view-contract.png)
 
 
 ### Mainnet 
