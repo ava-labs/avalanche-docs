@@ -145,11 +145,10 @@ npx truffle migrate --network fuji
 
 
 You should see the txn activity in your terminal
-<img width="793" alt="step1" src="https://user-images.githubusercontent.com/73849597/142695096-4dcbfb58-cc9d-46ba-b146-67ea5f46048f.png"></img>
+![truffle-verify-txn1]("/img/truffle-verify-txn1.png") <br>
+![truffle-verify-txn2]("/img/truffle-verify-txn2.png") <br>
+![truffle-verify-txn3]("/img/truffle-verify-txn3.png") <br>
 
-<img width="899" alt="step2" src="https://user-images.githubusercontent.com/73849597/142695128-5c4adc0d-78be-423e-ac8e-4a77c81a5d5a.png"></img>
-
-<img width="794" alt="step3" src="https://user-images.githubusercontent.com/73849597/142695152-bbd7551a-9624-4dca-9649-17fa93a98ebc.png"></img>
 
 
 
@@ -170,12 +169,12 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 
 2. Wait for the verification message from the CLI
-<img width="867" alt="Screen Shot 2021-11-19 at 1 18 47 PM" src="https://user-images.githubusercontent.com/73849597/142695700-cdcfb290-d8a7-49f3-bae7-33ef38e604fe.png"></img>
+![truffle-verify-message1]("/img/truffle-verify-message1.png")
 
 
 
-3. View the verified [contracts](https://testnet.snowtrace.io/address/0xbA9c33d2605d25d555a301b938C47dc0D2bc6538#code) 
-<img width="1384" alt="step5" src="https://user-images.githubusercontent.com/73849597/142696234-99cb457e-3b52-4566-8868-a078e54465e7.png"></img>
+3. View the verified
+![truffle-verify-view-contract]("/img/truffle-verify-view-contract.png")
 
 
 ### Mainnet 
