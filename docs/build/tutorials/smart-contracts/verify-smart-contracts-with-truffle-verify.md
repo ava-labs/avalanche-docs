@@ -173,7 +173,7 @@ npx truffle run verify ConvertLib MetaCoin --network fuji
 
 
 
-3. View the verified
+3. View the verified contract
 ![truffle-verify-view-contract](/img/truffle-verify-view-contract.png)
 
 
