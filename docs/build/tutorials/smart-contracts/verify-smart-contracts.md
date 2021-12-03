@@ -10,18 +10,17 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
 Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
-![contract_tab](img/verify-and-publish1.png)
+![contract_tab](/img/verify-and-publish1.png)
 
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
-![SRC](img/verify-src.png)
+![SRC](/img/verify-src.png)
 
 
 [Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
-![libraries](img/verify-libraries.png)
-
+![libraries](/img/verify-libraries.png)
 
 
 The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
