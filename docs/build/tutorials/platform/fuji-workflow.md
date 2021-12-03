@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. \(You can use [Avash](https://docs.avax.network/build/tools/avash) to test things locally.\) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avash](https://docs.avax.network/build/tools/avash) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
 
 In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
 
@@ -31,7 +31,7 @@ console.log(m)
 
 ## Derive Addresses
 
-After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic \(HD\) keypairs.
+After generating a mnemonic we can use AvalancheJS to derive [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)-compliant hierarchical deterministic (HD) keypairs.
 
 ```typescript
 import HDNode from "avalanche/utils/hdnode"
@@ -63,7 +63,7 @@ We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the [Fu
 
 ![Requesting AVAX](/img/faucet-request.png)
 
-The faucet will send some AVAX to the address and return a transaction ID \(txID\). This txID can be used with the Fuji Testnet Explorer to learn more about the transaction.
+The faucet will send some AVAX to the address and return a transaction ID (txID). This txID can be used with the Fuji Testnet Explorer to learn more about the transaction.
 
 ![Receiving AVAX](/img/faucet-response.png)
 
@@ -199,7 +199,7 @@ For additional and valuable resources please see below.
 
 ### Faucet
 
-The [Fuji Faucet](https://faucet.avax-test.network) sends AVAX to X-Chain or C-Chain addresses to help you test. \(This testnet Avax has no value.\)
+The [Fuji Faucet](https://faucet.avax-test.network) sends AVAX to X-Chain or C-Chain addresses to help you test. (This testnet Avax has no value.)
 
 ### Wallet
 

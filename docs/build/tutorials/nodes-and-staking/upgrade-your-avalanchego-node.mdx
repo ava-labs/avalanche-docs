@@ -75,11 +75,11 @@ If your node is running as a service, stop it by entering:
 
 `sudo systemctl stop avalanchego.service`
 
-\(your service may be named differently, `avalanche.service`, or similar\)
+(your service may be named differently, `avalanche.service`, or similar)
 
 ### Node running in background
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+If your node is running in the background (by running with `nohup`, for example) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -96,7 +96,7 @@ Building the node [from source](upgrade-your-avalanchego-node.mdx#build-from-sou
 
 ## **Download Pre-built Binary**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want (probably the latest one.)
 
 Under `Assets`, select the appropriate file.
 
@@ -143,7 +143,7 @@ and then restart the service with `sudo systemctl start avalanchego.service`.
 
 ## **Build from source**
 
-First clone our Github repo \(you can skip this step if you’ve done this before\):
+First clone our Github repo (you can skip this step if you’ve done this before):
 
 ```text
 git clone https://github.com/ava-labs/avalanchego.git
@@ -161,7 +161,7 @@ Pull the latest code:
 git pull
 ```
 
-NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout --force tags/<tag>` \(where `<tag>` is the latest release tag; for example `v1.3.2`\) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository \(in which case you should check out to a branch and to the ordinary merges\). Note also that the `--force` flag will disregard any local changes you might have.
+NOTE: if the master branch has not been updated with the latest release tag, you can get to it directly via first running `git fetch --all --tags` and then `git checkout --force tags/<tag>` (where `<tag>` is the latest release tag; for example `v1.3.2`) instead of `git pull`. Note that your local copy will be in a 'detached HEAD' state, which is not an issue if you do not make changes to the source that you want push back to the repository (in which case you should check out to a branch and to the ordinary merges). Note also that the `--force` flag will disregard any local changes you might have.
 
 Check that your local code is up to date. Do:
 

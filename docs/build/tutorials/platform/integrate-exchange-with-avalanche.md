@@ -2,7 +2,7 @@
 
 ## Overview
 
-The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node \(which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)\) and populating Avalanche’s ChainID \(43114\) when constructing transactions.
+The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. For teams that already support ETH, supporting the C-Chain is as straightforward as spinning up an Avalanche node (which has the [same API](https://eth.wiki/json-rpc/API) as [go-ethereum](https://geth.ethereum.org/docs/rpc/server)) and populating Avalanche’s ChainID (43114) when constructing transactions.
 
 Additionally, Ava Labs maintains an implementation of the [Rosetta API](https://www.rosetta-api.org/) for the C-Chain called [avalanche-rosetta](https://github.com/ava-labs/avalanche-rosetta). You can learn more about this standardized integration path on the attached Rosetta API website.
 
@@ -56,7 +56,7 @@ You can find the Rosetta server implementation for Avalanche C-Chain [here](http
 
 Avalanche C-Chain transactions are identical to standard EVM transactions with 2 exceptions:
 
-* They must be signed with Avalanche’s ChainID \(43114\).
+* They must be signed with Avalanche’s ChainID (43114).
 * The detailed dynamic gas fee can be found [here](../../../learn/platform-overview/transaction-fees.md#c-chain-fees).
 
 For development purposes, Avalanche supports all the popular tooling for Ethereum, so developers familiar with Ethereum and Solidity can feel right at home. We have tutorials and repositories for several popular development environments:
@@ -71,13 +71,13 @@ You can use any standard way of ingesting on-chain data you use for Ethereum net
 
 ### Determining Finality
 
-Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value \(i.e. block, balance, state, etc\) with the `latest` parameter. If you query above the last finalized block \(i.e. eth\_blockNumber returns 10 and you query 11\), an error will be thrown indicating that unfinalized data cannot be queried \(as of avalanchego@v1.3.2\).
+Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value (i.e. block, balance, state, etc) with the `latest` parameter. If you query above the last finalized block (i.e. eth\_blockNumber returns 10 and you query 11), an error will be thrown indicating that unfinalized data cannot be queried (as of avalanchego@v1.3.2).
 
-### \(Optional\) Custom Golang SDK
+### (Optional) Custom Golang SDK
 
-If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly \(when you call `block.Hash()`\) because it doesn't take into account the added `[ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)` header field in Avalanche C-Chain blocks, which is used move AVAX between chains \(X-Chain and P-Chain\). You can read more about our multi-chain abstraction [here](../../../learn/platform-overview/README.md) \(out of scope for a normal C-Chain integration\).
+If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly (when you call `block.Hash()`) because it doesn't take into account the added `[ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)` header field in Avalanche C-Chain blocks, which is used move AVAX between chains (X-Chain and P-Chain). You can read more about our multi-chain abstraction [here](../../../learn/platform-overview/README.md) (out of scope for a normal C-Chain integration).
 
-If you plan on reading JSON responses directly or use web3.js \(doesn't recompute hash received over the wire\) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
+If you plan on reading JSON responses directly or use web3.js (doesn't recompute hash received over the wire) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
 
 ## Support
 

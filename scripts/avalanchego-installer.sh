@@ -94,7 +94,7 @@ then
       echo "Available versions:"
       wget -q -O - https://api.github.com/repos/ava-labs/avalanchego/releases \
       | grep tag_name \
-      | sed 's/.*: "\(.*\)".*/\1/' \
+      | sed 's/.*: "(.*)".*/\1/' \
       | head
       exit 0
       ;;
@@ -155,7 +155,7 @@ cd /tmp/avalanchego-install
 version=${version:-latest}
 echo "Looking for $getArch version $version..."
 if [ "$version" = "latest" ]; then
-  fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest | grep "avalanchego-linux-$getArch.*tar\(.gz\)*\"" | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
+  fileName="$(curl -s https://api.github.com/repos/ava-labs/avalanchego/releases/latest | grep "avalanchego-linux-$getArch.*tar(.gz)*\"" | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
 else
   fileName="https://github.com/ava-labs/avalanchego/releases/download/$version/avalanchego-linux-$getArch-$version.tar.gz"
 fi

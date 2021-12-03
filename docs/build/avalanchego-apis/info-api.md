@@ -20,7 +20,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. \(See [`admin.aliasChain`](admin-api.md#admin-aliaschain).\)
+Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin-api.md#admin-aliaschain).)
 
 #### **Signature**
 

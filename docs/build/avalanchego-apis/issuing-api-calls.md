@@ -14,7 +14,7 @@ An API call is made to an endpoint, which is a URL. The base of the URL is alway
 where
 
 * `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` \(default value `9650`\).
+* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` (default value `9650`).
 
 For example, the base URL might look like this: `127.0.0.1:9650`.
 
@@ -54,8 +54,8 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-* `jsonrpc` specifies the version of the JSON RPC protocol. \(In practice is always 2.0\)
-* `method` specifies the service \(`avm`\) and method \(`getTxStatus`\) that we want to invoke.
+* `jsonrpc` specifies the version of the JSON RPC protocol. (In practice is always 2.0)
+* `method` specifies the service (`avm`) and method (`getTxStatus`) that we want to invoke.
 * `params` specifies the arguments to the method.
 * `id` is the ID of this request. Request IDs should be unique.
 

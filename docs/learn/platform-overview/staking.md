@@ -4,7 +4,7 @@ description: Learn how to stake on Avalanche by validating or delegating
 
 # Staking
 
-Staking is the process of locking up tokens to support a network while receiving a reward in return \(rewards can be increased network utility, monetary compensation, etc.\). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
+Staking is the process of locking up tokens to support a network while receiving a reward in return (rewards can be increased network utility, monetary compensation, etc.). The concept of staking was [first formally introduced](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) by Sunny King and Scott Nadal of Peercoin.
 
 ## How does proof-of-stake work?
 
@@ -25,7 +25,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 * The minimum amount of time one can stake funds for delegation is 2 weeks
 * The maximum amount of time one can stake funds for delegation is 1 year
 * The minimum delegation fee rate is 2%
-* The maximum weight of a validator \(their own stake + stake delegated to them\) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total \(not per delegator\)
+* The maximum weight of a validator (their own stake + stake delegated to them) is the minimum of 3e6 AVAX and 5 times the amount the validator staked. For example, if you staked 2,000 AVAX to become a validator, only 8000 AVAX can be delegated to your node total (not per delegator)
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
@@ -45,14 +45,14 @@ When you add a node to the validator set, you specify:
 * When you want to start and stop validating
 * How many AVAX you are staking
 * The address to send any rewards to
-* Your delegation fee rate \(see below\)
+* Your delegation fee rate (see below)
 
 :::info
 The minimum amount that a validator must stake is 2,000 AVAX.
 :::
 
 :::danger
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount \(so delegating to yourself goes against your delegation cap\).
+Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove your stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values in the API calls below. If you’re not sure, ask for help on [Discord](https://chat.avax.network) or browse our [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq). If you want to add more tokens to your own validator, you can delegate the tokens to this node - but you cannot increase the base validation amount (so delegating to yourself goes against your delegation cap).
 :::
 
 ### Running a Validator {#running-a-validator}
@@ -63,9 +63,9 @@ When you issue the transaction to add a validator, the staked tokens and transac
 
 #### Allow API calls {#allow-api-calls}
 
-To make API calls to your node from remote machines, allow traffic on the API port \(`9650` by default\), and run your node with argument `--http-host=`
+To make API calls to your node from remote machines, allow traffic on the API port (`9650` by default), and run your node with argument `--http-host=`
 
-You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines \(e.g., your personal computer.\)
+You should disable all APIs you will not use via command-line arguments. You should configure your network to only allow access to the API port from trusted machines (e.g., your personal computer.)
 
 #### Why is my uptime low? {#why-is-my-uptime-low}
 
@@ -77,7 +77,7 @@ If your node's uptime is low, make sure you're setting config option `--public-i
 
 #### Secret Management {#secret-management}
 
-The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file \(and `staker.crt`\) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
+The only secret that you need on your validating node is its Staking Key, the TLS key that determines your node’s ID. The first time you start a node, the Staking Key is created and put in `$HOME/.avalanchego/staking/staker.key`. You should back up this file (and `staker.crt`) somewhere secure. Losing your Staking Key could jeopardize your validation reward, as your node will have a new ID.
 
 You do not need to have AVAX funds on your validating node. In fact, it's best practice to **not** have a lot of funds on your node. Almost all of your funds should be in "cold" addresses whose private key is not on any computer.
 
@@ -96,7 +96,7 @@ A delegator is a token holder, who wants to participate in staking, but chooses 
 When you delegate stake to a validator, you specify:
 
 * The ID of the node you’re delegating to
-* When you want to start/stop delegating stake \(must be while the validator is validating\)
+* When you want to start/stop delegating stake (must be while the validator is validating)
 * How many AVAX you are staking
 * The address to send any rewards to
 
@@ -122,7 +122,7 @@ Yes, enter your node ID [here](https://stats.avax.network/dashboard/validator-he
 
 ### How is it determined whether a validator receives a staking reward?
 
-When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator thinks that the node was online and responsive for more than the required amount of time \(currently 80%\), the validator will vote for the node to receive a staking reward. Otherwise, the validator will vote that the node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
+When a node leaves the validator set, the validators vote on whether the leaving node should receive a staking reward or not. If a validator thinks that the node was online and responsive for more than the required amount of time (currently 80%), the validator will vote for the node to receive a staking reward. Otherwise, the validator will vote that the node should not receive a staking reward. The result of this vote, which is weighted by stake, determines whether the node receives a reward or not.
 
 Each validator only votes "yes" or "no". They do not share their opinion on the node's uptime and then average the responses, for example.
 

@@ -72,7 +72,7 @@ You can interact with these services the same exact way you’d interact with Ge
 
 #### eth\_getAssetBalance
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain \(excluding AVAX, which must be fetched with `eth_getBalance`\).
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
 
 **Signature**
 
@@ -451,7 +451,7 @@ avax.getUTXOs(
 * At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
 * This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+* When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
 * `encoding` sets the format for the returned UTXOs. Can be either "cb58" or "hex". Defaults to "cb58".
 
@@ -717,7 +717,7 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 `status` is one of:
 
-* `Accepted`: The transaction is \(or will be\) accepted by every node. Check the `blockHeight` property
+* `Accepted`: The transaction is (or will be) accepted by every node. Check the `blockHeight` property
 * `Processing`: The transaction is being voted on by this node
 * `Dropped`: The transaction was dropped by this node because it thought the transaction invalid
 * `Unknown`: The transaction hasn’t been seen by this node
