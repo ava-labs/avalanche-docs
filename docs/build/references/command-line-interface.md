@@ -412,7 +412,7 @@ The maximum gas to be consumed by an RPC Call \(used in `eth_estimateGas` and `e
 
 `rpc-tx-fee-cap` \(int\):
 
-Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transction variants. Defaults to 100.
+Global transaction fee \(price \* gaslimit\) cap \(measured in AVAX\) for send-transaction variants. Defaults to 100.
 
 `api-max-duration` \(duration\):
 
