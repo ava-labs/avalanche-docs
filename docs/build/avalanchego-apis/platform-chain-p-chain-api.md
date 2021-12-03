@@ -22,9 +22,9 @@ This API uses the `json 2.0` RPC format.
 
 Add a delegator to the Primary Network.
 
-A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
+A delegator stakes AVAX and specifies a validator (the delegatee) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators (weight) in proportion to the stake delegated to them.
 
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward \(if any.\) A transaction that delegates stake has no fee.
+The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward (if any.) A transaction that delegates stake has no fee.
 
 The delegation period must be a subset of the period that the delegatee validates the Primary Network.
 
@@ -60,7 +60,7 @@ platform.addDelegator(
 
 * `nodeID` is the ID of the node to delegate to.
 * `startTime` is the Unix time when the delegator starts delegating.
-* `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
+* `endTime` is the Unix time when the delegator stops delegating (and staked AVAX is returned).
 * `stakeAmount` is the amount of nAVAX the delegator is staking.
 * `rewardAddress` is the address the validator reward goes to, if there is one.
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
@@ -107,7 +107,7 @@ curl -X POST --data '{
 
 Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
 
-The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward (if any.) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
 
 The validation period must be between 2 weeks and 1 year.
 
@@ -146,7 +146,7 @@ platform.addValidator(
 
 * `nodeID` is the node ID of the validator being added.
 * `startTime` is the Unix time when the validator starts validating the Primary Network.
-* `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
+* `endTime` is the Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
 * `stakeAmount` is the amount of nAVAX the validator is staking.
 * `rewardAddress` is the address the validator reward will go to, if there is one.
 * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
@@ -158,7 +158,7 @@ platform.addValidator(
 
 #### **Example Call**
 
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.)
 
 ```cpp
 curl -X POST --data '{
@@ -616,7 +616,7 @@ curl -X POST --data '{
 
 ### platform.getBlockchains
 
-Get all the blockchains that exist \(excluding the P-Chain\).
+Get all the blockchains that exist (excluding the P-Chain).
 
 #### **Signature**
 
@@ -855,7 +855,7 @@ platform.getCurrentValidators({
     * `nodeID` is the validating node’s node ID.
     * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
     * `potentialReward` is the potential reward earned from staking
-* `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
+* `delegators`: (**deprecated as of v1.0.1. See note at top of method documentation.**)
 
 #### **Example Call**
 
@@ -1398,7 +1398,7 @@ platform.getTxStatus({
 
 `status` is one of:
 
-* `Committed`: The transaction is \(or will be\) accepted by every node
+* `Committed`: The transaction is (or will be) accepted by every node
 * `Processing`: The transaction is being voted on by this node
 * `Dropped`: The transaction will never be accepted by any node in the network, check `reason` field for more information
 * `Unknown`: The transaction hasn’t been seen by this node
@@ -1462,7 +1462,7 @@ platform.getUTXOs(
 * At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
 * This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
 * If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
+* When using pagination (ie when `startIndex` is provided), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
 * When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
 * `encoding` specifies the format for the returned UTXOs. Can be either "cb58" or "hex" and defaults to "cb58".
 

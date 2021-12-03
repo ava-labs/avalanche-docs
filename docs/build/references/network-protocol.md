@@ -293,7 +293,7 @@ A `PushQuery` message contains a `SubnetID`, `RequestID`, `ContainerID`, and `Co
 
 ### How PushQuery is handled
 
-The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+The node should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference(s) of the node.
 
 ### When PushQuery is sent
 
@@ -351,7 +351,7 @@ A `PullQuery` message contains a `SubnetID`, `RequestID`, and `ContainerID`.
 
 ### How PullQuery is handled
 
-If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference\(s\) of the node.
+If the node hasn’t added `ContainerID`, it should attempt to add the container to consensus. After the container is added to consensus, a `Chits` message should be sent with the current preference(s) of the node.
 
 ### When PullQuery is sent
 
@@ -383,7 +383,7 @@ A node should send a `PullQuery` message if it wants to learn of this node’s c
 
 ### Overview
 
-A `Chits` message provides a requested set of preferred container\(s\) to a node.
+A `Chits` message provides a requested set of preferred container(s) to a node.
 
 The OpCode used by `Chits` messages is: `0x08`.
 

@@ -6,7 +6,7 @@ In this tutorial, we will show how to create a local test network.
 
 We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](../../tools/avash.md) and manually.
 
-The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` , and `9658`.
+The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 
 ## Create a Local Test Network
 
