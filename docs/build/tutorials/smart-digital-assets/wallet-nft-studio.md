@@ -2,7 +2,7 @@
 
 ## Non-Fungible Tokens on Avalanche
 
-[Avalanche](../platform/README.md) natively supports the creation of of digital assets including fixed-cap assets, variable-cap assets, and non-fungible tokens \(NFTs\).
+[Avalanche](../platform/README.md) natively supports the creation of of digital assets including fixed-cap assets, variable-cap assets, and non-fungible tokens (NFTs).
 
 Some assets are fungible, meaning all units of that asset are perfectly interchangeable. Notes of a currency are fungible, for example: one $5 note is the treated the same as any other $5 note. Some assets, by contrast, are non-fungible. That is, elements are not unique and perfectly interchangeable. Real estate is non-fungible because each piece of land is distinct.
 
@@ -20,13 +20,13 @@ This opens NFT Studio. There you have two options: **New Family**, for the creat
 
 ### Create NFT Family
 
-There you will be asked to enter the name of your collectible family, as well as a symbol \(ticker\). Names do not have to be unique.
+There you will be asked to enter the name of your collectible family, as well as a symbol (ticker). Names do not have to be unique.
 
 ![Create new family](/img/nft-studio-02-family.png)
 
 You will also need to enter a value for **Number of Groups**, which specifies how many distinct collectibles the newly created family holds. Choose carefully, because once created, the parameters of the collectible family cannot be changed.
 
-When you're done, press **Create** to create the collectible family. The transaction fee will be deducted from your wallet's balance. When the family is created, you will see the transaction ID \(TxID\), as well as parameters for the family. You can use the TxID to look up the transaction in [the explorer](https://explorer.avax.network/), but it is not necessary to write it down.
+When you're done, press **Create** to create the collectible family. The transaction fee will be deducted from your wallet's balance. When the family is created, you will see the transaction ID (TxID), as well as parameters for the family. You can use the TxID to look up the transaction in [the explorer](https://explorer.avax.network/), but it is not necessary to write it down.
 
 Press **Back to Studio** to return, and we're ready to create our first collectibles. Press **Mint Collectible**.
 

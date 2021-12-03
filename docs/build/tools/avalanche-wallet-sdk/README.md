@@ -4,7 +4,7 @@
 
 This library is under rapid development and there may be frequent breaking changes. An audit is pending.
 
-## Avalanche Wallet SDK \(Beta\)
+## Avalanche Wallet SDK (Beta)
 
 The Avalanche Wallet SDK is a TypeScript library for creating and managing non-custodial wallets on the Avalanche network.
 
@@ -108,7 +108,7 @@ Network.setNetwork(NetworkConstants.MainnetConfig)
 Network.setNetwork(NetworkConstants.TestnetConfig)
 ```
 
-#### Printing BN \(Big Number\)
+#### Printing BN (Big Number)
 
 Token amounts are represented in their smallest divisible unit using BN.js. The `Utils` namespace has helper functions to display BN numbers in a human readable way.
 

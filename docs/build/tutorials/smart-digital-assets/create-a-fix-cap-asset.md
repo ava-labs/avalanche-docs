@@ -4,7 +4,7 @@
 
 This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A specific quantity of the asset is created at the asset’s initialization, and then, no more is ever created.
 
-Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
+Suppose there is an Income Sharing Agreement (ISA) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
 
 ## Requirements
 
@@ -93,7 +93,7 @@ The response contains the asset’s ID, which is also the ID of this transaction
 
 ### Check a balance
 
-All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
+All 10,000,000 units of the asset (shares) are controlled by the address we specified in `initialHolders`.
 
 To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance):
 

@@ -37,7 +37,7 @@ Avalanche uses the convention `chainID-address` to specify which chain an addres
 
 Addresses on the X-Chain and P-Chain use the [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) standard outlined in [BIP 0173](https://en.bitcoin.it/wiki/BIP_0173). There are four parts to a Bech32 address scheme. In order of appearance:
 
-* A human-readable part \(HRP\). On mainnet this is `avax`.
+* A human-readable part (HRP). On mainnet this is `avax`.
 * The number `1`, which separates the HRP from the address and error correction code.
 * A base-32 encoded string representing the 20 byte address.
 * A 6-character base-32 encoded error correction code.
@@ -62,11 +62,11 @@ Suppose Rick and Morty are setting up a secure communication channel. Morty crea
 
 Private Key: `0x98cb077f972feb0481f1d894f272c6a1e3c15e272a1658ff716444f465200070`
 
-Public Key \(33-byte compressed\): `0x02b33c917f2f6103448d7feb42614037d05928433cb25e78f01a825aa829bb3c27`
+Public Key (33-byte compressed): `0x02b33c917f2f6103448d7feb42614037d05928433cb25e78f01a825aa829bb3c27`
 
 Because of Rick’s infinite wisdom, he doesn’t trust himself with carrying around Morty’s public key, so he only asks for Morty’s address. Morty follows the instructions, SHA256’s his public key, and then ripemd160’s that result to produce an address.
 
-SHA256\(Public Key\): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045bffa7b0d2f`
+SHA256(Public Key): `0x28d7670d71667e93ff586f664937f52828e6290068fa2a37782045bffa7b0d2f`
 
 Address: `0xe8777f38c88ca153a6fdc25942176d2bf5491b89`
 
@@ -127,7 +127,7 @@ After hashing with `sha256` and signing the pre-image we return the value [cb58]
 
 ## Cryptography in Ethereum Virtual Machine
 
-Avalanche nodes support the full Ethereum Virtual Machine \(EVM\) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
+Avalanche nodes support the full Ethereum Virtual Machine (EVM) and precisely duplicate all of the cryptographic constructs used in Ethereum. This includes the Keccak hash function and the other mechanisms used for cryptographic security in the EVM.
 
 ## Cryptography in Other Virtual Machines
 

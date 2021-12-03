@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine \(Timestamp VM\).
+Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine (Timestamp VM).
 
-If you want a blockchain that has capabilities of X-Chain \(AVM\), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
+If you want a blockchain that has capabilities of X-Chain (AVM), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
@@ -16,7 +16,7 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 
 ## Create the Virtual Machine
 
-Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains \(instances\) from Virtual Machines. In this case we will use [Timestamp VM](https://github.com/ava-labs/timestampvm), which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
+Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains (instances) from Virtual Machines. In this case we will use [Timestamp VM](https://github.com/ava-labs/timestampvm), which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
 
 :::info
 [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md)
@@ -74,7 +74,7 @@ Our genesis data will be `fP1vxkpyLWnH9dD6BQA`.
 
 Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
-Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine\(VM\)](create-a-virtual-machine-vm.md#vm-aliases).
+Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
 
 ```cpp
 curl -X POST --data '{
@@ -107,7 +107,7 @@ The response contains the transaction ID:
 
 ### Verify Success {#verify-success}
 
-After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
+After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
 To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
 
@@ -182,7 +182,7 @@ curl -X POST --data '{
 }
 ```
 
-If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` \(e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`\) as well as add the node to the subnet's validator set.
+If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
 
 More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
@@ -220,7 +220,7 @@ curl -X POST --data '{
 }
 ```
 
-As you can see our first block has `timestamp: 0`. Also the parent ID \(`11111111111111111111111111111111LpoYY`\) is the P-chain's ID. Let's decode the genesis data with VM's static API method. Recall that our TimestampVM ID is aliased with `timestampvm`:
+As you can see our first block has `timestamp: 0`. Also the parent ID (`11111111111111111111111111111111LpoYY`) is the P-chain's ID. Let's decode the genesis data with VM's static API method. Recall that our TimestampVM ID is aliased with `timestampvm`:
 
 ```cpp
 curl -X POST --data '{

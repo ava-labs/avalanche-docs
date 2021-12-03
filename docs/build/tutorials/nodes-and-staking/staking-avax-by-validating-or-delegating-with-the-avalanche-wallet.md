@@ -13,13 +13,13 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 ![Image for post](https://miro.medium.com/max/1552/0*tpBIOjLdppuNKMjA)
 
-You can access your wallet using your key phrase, keystore file, or Ledger Nano S \(coming soon!\)
+You can access your wallet using your key phrase, keystore file, or Ledger Nano S (coming soon!)
 
 ### **Step 2 — Navigate to "Earn" section** {#dc5a}
 
 ![Image for post](https://miro.medium.com/max/1504/0*XTh3nZzBI1bkLbwO)
 
-**To stake, you need to have your funds available on the** [**Platform Chain \(P-Chain\)**](../../../learn/platform-overview/README.md#platform-chain-p-chain)**! If your funds are on the** [**Exchange Chain \(X-Chain\)**](../../../learn/platform-overview/README.md#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
+**To stake, you need to have your funds available on the** [**Platform Chain (P-Chain)**](../../../learn/platform-overview/README.md#platform-chain-p-chain)**! If your funds are on the** [**Exchange Chain (X-Chain)**](../../../learn/platform-overview/README.md#exchange-chain-x-chain)**, we will need to transfer them to the P-Chain by initiating a cross-chain transfer. If your tokens are locked they are already on the P-Chain, so you don’t need to perform the Cross Chain Transfer from X-Chain to P-Chain.**
 
 ![Image for post](https://miro.medium.com/max/1522/0*xKAf0nXSzqIdmBDg)
 
@@ -39,7 +39,7 @@ To add a validator, we need to have a node running. We can set one up using the 
 
 Using the binaries is easy and convenient and sets you up to be a validator in 4 steps:
 
-* Download the latest release tar.gz \(zip for osx and windows\) found [here](https://github.com/ava-labs/avalanchego/releases)
+* Download the latest release tar.gz (zip for osx and windows) found [here](https://github.com/ava-labs/avalanchego/releases)
 * Unpack into a folder of our choosing:
 
 \* Linux: tar -xvf avalanchego-linux-&lt;VERSION&gt;.tar.gz

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+[Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dapps) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Requirements
 
@@ -60,7 +60,7 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 truffle init
 ```
 
-Development \(local\) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+Development (local) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
 
 ```text
 npm install @truffle/hdwallet-provider
@@ -225,7 +225,7 @@ truffle(development)> await web3.eth.getBalance(accounts[1])
 '0'
 ```
 
-Notice that `accounts[0]` \(default account\) has some balance, while `accounts[1]` has no balance.
+Notice that `accounts[0]` (default account) has some balance, while `accounts[1]` has no balance.
 
 ### Scripting account funding
 
@@ -401,7 +401,7 @@ This should return:
 undefined
 ```
 
-The result of the call to `retrieve` is a `BN` \(big number\). Call its `.toNumber` method to see the value:
+The result of the call to `retrieve` is a `BN` (big number). Call its `.toNumber` method to see the value:
 
 ```javascript
 truffle(development)> i.toNumber()

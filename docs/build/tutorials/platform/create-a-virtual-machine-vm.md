@@ -2,11 +2,11 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines \(VMs\)](../../../learn/platform-overview/README.md#virtual-machines)
+One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../../../learn/platform-overview/README.md#virtual-machines)
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [timestamp server](https://github.com/ava-labs/timestampvm). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data \(payload\). Each block’s timestamp is after its parent’s timestamp.
+In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [timestamp server](https://github.com/ava-labs/timestampvm). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
 
-Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload \(this follows from the fact that finding the pre-image of a hash is impossible\).
+Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
 
 A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
@@ -18,7 +18,7 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### `block.ChainVM`
 
-To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which we include below from [its declaration](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
+To reach consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which we include below from [its declaration](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/block/vm.go).
 
 The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away.
 
@@ -166,7 +166,7 @@ type VM interface {
 
 ### `snowman.Block`
 
-You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear \(Snowman\) chain.
+You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear (Snowman) chain.
 
 Let’s look at this interface and its methods, which we copy from [here.](https://github.com/ava-labs/avalanchego/blob/master/snow/consensus/snowman/block.go)
 
@@ -245,7 +245,7 @@ type Decidable interface {
 
 ## Helper Libraries
 
-We’ve created some types that your VM implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
+We’ve created some types that your VM implementation can embed (embedding is like Go’s version of inheritance) in order to handle boilerplate code.
 
 In our example, we use both of the library types below, and we encourage you to use them too.
 
@@ -710,7 +710,7 @@ timestampvm.getBlock({id: string}) ->
 ```
 
 * `id` is the ID of the block being retrieved. If omitted from arguments, gets the latest block
-* `data` is the base 58 \(with checksum\) representation of the block’s 32 byte payload
+* `data` is the base 58 (with checksum) representation of the block’s 32 byte payload
 * `timestamp` is the Unix timestamp when this block was created
 * `parentID` is the block’s parent
 
@@ -814,7 +814,7 @@ Propose the next block on this blockchain.
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
-* `data` is the base 58 \(with checksum\) representation of the proposed block’s 32 byte payload.
+* `data` is the base 58 (with checksum) representation of the proposed block’s 32 byte payload.
 
 **Example Call**
 
@@ -916,7 +916,7 @@ Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
 
 #### Building the Executable
 
-This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that builds an executable of this VM \(when invoked, it runs the `main` method from above.\)
+This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/main/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
 
 The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
 
@@ -924,11 +924,11 @@ The path to the executable, as well as its name, can be provided to the build sc
 ./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins timestampvm
 ```
 
-If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` \(`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.\)
+If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` (`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.)
 
 AvalancheGo searches for and registers plugins under `[buildDir]/avalanchego-latest/plugins`. See [here](../../references/command-line-interface.md#build-directory) for more information.
 
-Executable names must be either a full VM ID \(encoded in CB58\), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
+Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are aliases for this VM.
 
