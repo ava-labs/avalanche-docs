@@ -438,7 +438,7 @@ Enables local transaction handling (prioritizes transactions submitted through t
 
 `allow-unprotected-txs` \(boolean\):
 
-If true, the APIs will allow transactions that are not replay protected to be issued through this node. Defaults to false.
+If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
 
 `remote-tx-gossip-only-enabled` \(boolean\):
 
