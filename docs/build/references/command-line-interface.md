@@ -462,7 +462,7 @@ Enables metrics. Defaults to false.
 
 Enables expensive metrics. Defaults to false.
 
-**Databaset**
+**Database**
 
 `pruning-enabled` \(boolean\):
 
