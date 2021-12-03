@@ -10,7 +10,7 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
 Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
-![contract_tab](img/verify-and-publish.png)
+![contract_tab](img/verify-and-publish1.png)
 
 
 Click _Verify & Publish_ to enter the smart contract verification page.
