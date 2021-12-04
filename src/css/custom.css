@@ -70,3 +70,7 @@ html[data-theme='dark'] .DocSearch {
     var(--ifm-color-emphasis-100) 100%
   );
 }
+
+.theme-back-to-top-button {
+  display: none;
+}
