@@ -30,7 +30,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-#### **Local Testnet \(AVASH\) Settings:** [\(Avash Tutorial\)](../../tools/avash.md)
+#### **Local Testnet (AVASH) Settings:** [(Avash Tutorial)](../../tools/avash.md)
 
 * **Network Name**: Avalanche Local
 * **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
@@ -64,7 +64,7 @@ For this example, we will deploy an ERC20 contract from [OpenZeppelin](https://o
 
 ![ERC20 Contract](/img/erc20-contract.png)
 
-Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 \(make sure MetaMask is loaded\)
+Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure MetaMask is loaded)
 
 ![Deploy and run transactions](/img/deploy-and-run-transactions.png)
 

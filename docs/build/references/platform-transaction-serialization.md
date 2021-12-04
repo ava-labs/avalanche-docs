@@ -7,7 +7,7 @@ This file is meant to be the single source of truth for how we serialize transac
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
 ## Transferable Output
 
@@ -772,7 +772,7 @@ An unsigned add delegator tx contains a `BaseTx`, `Validator`, `Stake`, and `Rew
 * **`Validator`** Validator has a `NodeID`, `StartTime`, `EndTime`, and `Weight`
   * **`NodeID`** is 20 bytes which is the node ID of the delegatee.
   * **`StartTime`** is a long which is the Unix time when the delegator starts delegating.
-  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
+  * **`EndTime`** is a long which is the Unix time when the delegator stops delegating (and staked AVAX is returned).
   * **`Weight`** is a long which is the amount the delegator stakes
 * **`Stake`** Stake has `LockedOuts`
   * **`LockedOuts`** An array of Transferable Outputs that are locked for the duration of the staking period. At the end of the staking period, these outputs are refunded to their respective addresses.

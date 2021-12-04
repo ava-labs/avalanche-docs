@@ -31,7 +31,7 @@ The C-Chain Explorer can fetch constructor arguments automatically for simple sm
 * Contracts must be flattened.
   * Includes will not work.  
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
-  * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
+  * A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs.  This might cause validation issues.
 * The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
 
 ## Libraries
@@ -58,7 +58,7 @@ The compile bytecode will identify if there are are external libraries. If you r
 
 This requires you to add external libraries in order to veriy the code.
 
-A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies \(i.e. you might need to prune the Solidity code to exclude anything but the necessary classes\).
+A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies (i.e. you might need to prune the Solidity code to exclude anything but the necessary classes).
 
 You can also see references in the byte code in the form `__$75f20d36....$__`. The keccak256 hash is generated from the library name.
 
@@ -88,7 +88,7 @@ An SPDX must be provided.
 
 ### keccak256 Strings Processed
 
-The C-Chain Explorer interprets all keccak256\(...\) strings, even those in comments. This can cause issues with constructor args.
+The C-Chain Explorer interprets all keccak256(...) strings, even those in comments. This can cause issues with constructor args.
 
 ```javascript
 /// keccak256("1");

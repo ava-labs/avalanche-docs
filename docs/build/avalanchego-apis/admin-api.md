@@ -75,7 +75,7 @@ admin.aliasChain(
 ```
 
 * `chain` is the blockchain’s ID.
-* `alias` can now be used in place of the blockchain’s ID \(in API endpoints, for example.\)
+* `alias` can now be used in place of the blockchain’s ID (in API endpoints, for example.)
 
 #### **Example Call**
 

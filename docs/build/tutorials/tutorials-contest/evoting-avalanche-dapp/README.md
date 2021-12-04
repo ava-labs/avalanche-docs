@@ -5,7 +5,7 @@
 
 We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the Avalanche blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
-Truffle Suite is a toolkit for launching decentralized applications \(dApps\) on Ethereum Virtual Machine \(EVM\) compatible blockchains like Avalanche. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+Truffle Suite is a toolkit for launching decentralized applications (dApps) on Ethereum Virtual Machine (EVM) compatible blockchains like Avalanche. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ cd ~
 
 ### **Setting up the ReactJS project**
 
-Create a new react app using npx. npx is a npm package runner \(x probably stands for eXecute\). The typical use is to download and run a package temporarily or for trials. Using npx to execute the package binaries for create-react-app will generate a new React app scaffold in the specified directory.
+Create a new react app using npx. npx is a npm package runner (x probably stands for eXecute). The typical use is to download and run a package temporarily or for trials. Using npx to execute the package binaries for create-react-app will generate a new React app scaffold in the specified directory.
 
 ```bash
 npx create-react-app avalanche-voting
@@ -176,15 +176,15 @@ Note that we're setting the `gasPrice` and `gas` to the appropriate values for t
 
 ### **Get Avalanche credentials**
 
-For deploying smart contracts we need two things: A node connected to the Avalanche network and an account with few AVAX. Avalanche connected node through RPC \(Remote Procedure Call\) is provided for free by the Avalanche Networks.
+For deploying smart contracts we need two things: A node connected to the Avalanche network and an account with few AVAX. Avalanche connected node through RPC (Remote Procedure Call) is provided for free by the Avalanche Networks.
 
-Now we need an Avalanche wallet, where we would keep our funds, required for all the transactions on the network. So, visit [here](https://wallet.avax.network) and create an account. Save the mnemonic in a secure place \(we would need it later\). Instructions to add funds will be provided later in the tutorial.
+Now we need an Avalanche wallet, where we would keep our funds, required for all the transactions on the network. So, visit [here](https://wallet.avax.network) and create an account. Save the mnemonic in a secure place (we would need it later). Instructions to add funds will be provided later in the tutorial.
 
 ### **Add .env file**
 
 Now we need a **Avalanche** wallet, where we would keep our funds, required for all the transactions on the network. Visit the [Avalanche Wallet](https://wallet.avax.network/) and create an account. While creating your account you will see your public address and mnemonic. This public address will be required to transfer funds. Save the **mnemonic** in a secure place, we will need it later. Instructions to add funds will be provided later in the tutorial.
 
-Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\).
+Create a `.env` file in the project root folder. Please take a note that dot (.) is necessary for the `.env` file name. Now copy your Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes (" ").
 
 ```bash
 MNEMONIC="<avalanche-wallet-mnemonic>"
@@ -210,7 +210,7 @@ In a browser, visit the URL of our running dApp: [http://localhost:3000](http://
 
 ## **Create Election smart contract**
 
-Create the file `Election.sol` \(`.sol` stands for Solidity\) inside of the `contracts` directory and use the code as given in this [file](./contracts/Election.sol).
+Create the file `Election.sol` (`.sol` stands for Solidity) inside of the `contracts` directory and use the code as given in this [file](./contracts/Election.sol).
 
 `Election` is a Solidity contract that lets us view the name and description, the candidates standing in an election, and vote for them. For this dApp, we will be accessing the deployed Election contracts using their `address` and `ABI`. This Solidity code is what will be deployed to the blockchain, each time we create a new election.
 
@@ -226,7 +226,7 @@ string public name;
 string public description;
 ```
 
-**Storing candidate details** - The `Candidate` struct consists of the data fields `id`, `name` and `voteCount`. We will define a mapping between an unsigned integer \(`uint`\) and each instance of a Candidate. This will enable us to refer to each candidate by its index within the mapping - `candidates[n]`, where `n` is the corresponding `uint` value.
+**Storing candidate details** - The `Candidate` struct consists of the data fields `id`, `name` and `voteCount`. We will define a mapping between an unsigned integer (`uint`) and each instance of a Candidate. This will enable us to refer to each candidate by its index within the mapping - `candidates[n]`, where `n` is the corresponding `uint` value.
 
 ```solidity
 // Structure of candidate standing in the election
@@ -341,7 +341,7 @@ We are deploying only the `MainContract`, because the `Election` contract will b
 
 ## **Compile Contracts with Truffle**
 
-If we have altered the code within our Solidity source files or made new ones \(like `Elections.sol`\), we need to run `truffle compile` in the terminal, from inside the project root directory.
+If we have altered the code within our Solidity source files or made new ones (like `Elections.sol`), we need to run `truffle compile` in the terminal, from inside the project root directory.
 
 The expected output would look similar:
 
@@ -371,7 +371,7 @@ We need funds in our C-Chain address, as smart contracts are deployed on C-Chain
 
 ![](./assets/evoting-dapp-02-wallet-c-chain-address.png)
 
-> You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = \(1/1000,000,000\) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
+> You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers nano-AVAX i.e. billionth of an `AVAX` or simply 1 `nAVAX` = (1/1000,000,000) `AVAX`. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
 ### **Run Migrations**
 
@@ -383,7 +383,7 @@ truffle migrate --network fuji
 
 This might take a while depending upon your internet connection or traffic on the network.
 
-Note - For development purpose, we may deploy our contracts on the local network, by running Ganache \(Truffle's local blockchain simulation\) and using the command
+Note - For development purpose, we may deploy our contracts on the local network, by running Ganache (Truffle's local blockchain simulation) and using the command
 
 ```bash
 truffle migrate --network development
@@ -574,7 +574,7 @@ import ActiveElections from "./ActiveElections";
 import contractJson from './build/contracts/MainContract.json';
 ```
 
-**Load components** - Inside the `<div>` tag of `return()` function in `App.js`, replace the sample text \(`Avalanche evoting`\) with the the code of the following components.
+**Load components** - Inside the `<div>` tag of `return()` function in `App.js`, replace the sample text (`Avalanche evoting`) with the the code of the following components.
 
 ```javascript
 // For routing through the react application
