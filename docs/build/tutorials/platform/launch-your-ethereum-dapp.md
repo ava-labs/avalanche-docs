@@ -142,7 +142,7 @@ Gas on Avalanche is burned. Validators don't keep the gas for themselves (they g
 
 Individual chains, including the C-Chain, have their own configuration options that can be given in a config file. You may want to use a C-Chain configiguration other than the default when developing dapps. For more details on chain configs, see [here.](../../references/command-line-interface.md#chain-configs)
 
-The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/command-line-interface.md#coreth-config). An example C-Chain config file:
+The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/command-line-interface.md#c-chain-config). An example C-Chain config file:
 
 ```javascript
 {
@@ -158,9 +158,9 @@ The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config
 }
 ```
 
-{% hint style="warning" %}
+:::caution
 If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
-{% endhint %}
+:::
 
 ### Using `eth_newFilter` and Related Calls with the Public API
 

@@ -36,9 +36,11 @@ The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config
 }
 ```
 
-{% hint style="warning" %}
+:::caution
+
 If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
-{% endhint %}
+
+:::
 
 ### Interacting with the C-Chain
 
