@@ -6,6 +6,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en"],
+  },
+
   title: 'Avalanche Docs',
   tagline: 'Documentation and Tutorials for Avalanche',
   url: 'https://docs.avax.network',
@@ -49,6 +54,10 @@ const config = {
           src: 'img/Avalanche_Horizontal_Red.svg',
         },
         items: [
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
         ],
       },
       footer: {
