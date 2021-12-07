@@ -1,4 +1,4 @@
-# Postman collection
+# Postman Collection
 
 ## What is Postman?
 
