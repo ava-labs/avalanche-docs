@@ -12,8 +12,8 @@
 
 [**Deprecating Ortelius**](deprecating-ortelius.md): How to replace Ortelius with the Index API
 
-[**Postman collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
+[**Postman Collection**](postman-avalanche-collection.md): An AvalancheGo API template and environment collection for [Postman](https://postman.com/), a tool to simplify API development and experimentation. The collection covers all of AvalancheGo APIs, so you can easily issue commands to a node and examine the output in a nicely formatted, readable way.
 
 [**Abigen**](abigen.md)**:** allows you to compile `solidity` contracts into a programatic interface suitable for embeding in `golang`.
 
-[**Network runner**](netrunner.md)**:** Development tool which allows to build custom and default networks (for development and testing). Networks can be built by spawning local os processes or with kubernetes as a backend..
+[**Network Runner**](netrunner.md)**:** Development tool which allows to build custom and default networks (for development and testing). Networks can be built by spawning local os processes or with kubernetes as a backend..
