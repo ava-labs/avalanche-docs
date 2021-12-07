@@ -21,7 +21,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'doc',
-      id: 'intro', 
+      id: 'intro',
       label: 'Welcome'
     },
     {
@@ -30,14 +30,14 @@ const sidebars = {
       collapsible: true,
       collapsed: false,
       items: [
-        'learn/getting-started', 
+        'learn/getting-started',
         {
           type: 'category',
           label: 'Platform',
           items: [
-            'learn/platform-overview/README', 
-            'learn/platform-overview/avalanche-consensus', 
-            'learn/platform-overview/staking', 
+            'learn/platform-overview/README',
+            'learn/platform-overview/avalanche-consensus',
+            'learn/platform-overview/staking',
             'learn/platform-overview/transaction-fees'
           ],
         },
@@ -74,7 +74,7 @@ const sidebars = {
           type: 'category',
           label: 'Release Notes',
           items: [
-            'build/release-notes/avalanchego', 
+            'build/release-notes/avalanchego',
             {
               type: 'link',
               label: 'Avalanche Notify', // The link label
@@ -199,6 +199,7 @@ const sidebars = {
             'build/tools/deprecating-ortelius',
             'build/tools/postman-avalanche-collection',
             'build/tools/abigen',
+            'build/tools/netrunner',
           ],
         },
         {
@@ -224,7 +225,7 @@ const sidebars = {
       ],
     },
   ],
-   
+
 };
 
 module.exports = sidebars;
