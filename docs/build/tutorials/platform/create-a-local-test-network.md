@@ -4,15 +4,18 @@
 
 In this tutorial, we will show how to create a local test network.
 
-We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](../../tools/avash.md) and manually.
-
-The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
+We’ll show you how to launch a 5 node local test network. There are currently three options to launch such a local network:
+* Manually
+* Using [Avash](../../tools/avash.md)
+* Using the new [Network-runner](../../tools/netrunner.md)
 
 ## Create a Local Test Network
 
 The below commands assume you have [AvalancheGo](../nodes-and-staking/run-avalanche-node.md#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
 ### Manually
+
+The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 
 To start the network:
 
@@ -68,6 +71,7 @@ Now we’re in Avash. To start the network:
 runscript scripts/five_node_staking.lua
 ```
 
+The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 When you want to tear down the network, run `exit` to exit Avash.
 
 ### Verifying Nodes are Connected {#verifying-nodes-are-connected}
@@ -151,3 +155,34 @@ That’s it! Your local version of Avalanche is up and running. It has the defau
 
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 
+### Using the network-runner
+Install the [network-runner](../../tools/netrunner.md) by cloning the repo:
+```
+git clone https://github.com/ava-labs/avalanche-network-runner.git
+```
+As this is a `go` tool, we recommend installing according to the `$GOPATH` convention. The rest of this tutorial assumes this convention.
+
+Change the working directory to this repository:
+```cpp
+cd $GOPATH/src/github.com/ava-labs/avalanche-network-runner
+```
+
+Run the example network configuration:
+```
+go run ./examples/local/fivenodenetwork/main.go
+```
+
+This is a simple network which also creates a default 5 nodes network running on generated port numbers changing between executions. This means that the ports the avalanchego nodes run on always change - unless specified via supplied config options, in which case the configured ports will be used. Check the [docs](../../tools/netrunner.md) for details about how to provide and change configs.
+
+Therefore, to be able to connect to the nodes, run the above command and check the command line output for the ports. It will look something like this:
+```cpp
+INFO [12-07|18:32:48] local/network.go#380: adding node "node-0" 
+with tmp dir at /tmp/avalanchego-network-runner-2634315498, 
+logs at /tmp/avalanchego-network-runner-2634315498/logs, 
+DB at /tmp/avalanchego-network-runner-2634315498, 
+P2P port 33833, 
+API port 33695
+```
+To make API calls, use the `API port`, which in this example is `33695`. It obviously differs for every node. The `P2P port` is the consensus port (`33833`), which you usually don't interact with.
+
+It is then possible to make API calls just like [#verifying-nodes-are-connected](#verifying-nodes-are-connected) and [#getting-avax](#getting-avax). Don't forget to change the ports with the generated ones from the tool to execute the API calls.
