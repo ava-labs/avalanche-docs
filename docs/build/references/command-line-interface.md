@@ -58,6 +58,14 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
+`--http-shutdown-wait` (duration): 
+
+Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to 0.
+
+`--http-shutdown-timeout` (duration):
+
+Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
+
 ## Assertions
 
 `--assertions-enabled` (boolean):
