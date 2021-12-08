@@ -16,6 +16,7 @@
 
 [**Avash**](avash.md) is a shell client for interacting with Avalanche and can deploy local networks and interact with the nodes in those networks. You can use Avash to rapidly launch test network environments. **Note: Avash is being replaced by [Network Runner.](netrunner.md)**
 
+
 [**Deprecating Ortelius**](deprecating-ortelius.md): How to replace Ortelius with the Index API
 
 [**Ortelius API**](ortelius.md): Interact with Ortelius, a tool that indexes the Avalanche Network. **Note: Ortelius is deprecated. You should [use the Index API instead.](deprecating-ortelius.md)**
