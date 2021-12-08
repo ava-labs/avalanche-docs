@@ -10,7 +10,7 @@ You can specify the configuration of a node with the arguments below.
 
 `--config-file` (string):
 
-Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file.
+Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file. This flag is ignored if `--config-file-content` is specified.
 
 Example JSON config file:
 
@@ -19,6 +19,14 @@ Example JSON config file:
     "log-level": "debug"
 }
 ```
+
+`--config-file-content` (string):
+
+As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
+
+`--config-file-content-type` (string):
+
+Specifies the format of the base64 encoded config content. JSON, TOML, YAML are among currently supported file format (see [here](https://github.com/spf13/viper#reading-config-files) for full list). Required if `--config-file-content` is set.
 
 ## APIs
 
@@ -112,7 +120,11 @@ Note that when running with `leveldb`, the node can't read data that was persist
 
 `--genesis` (string):
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Testnet.) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+
+`--genesis-content` (string):
+
+As an alternative to `--genesis`, it allows specifying base64 encoded genesis data to use.
 
 ## HTTP Server
 
@@ -126,7 +138,11 @@ Each node runs an HTTP server that provides the APIs for interacting with the no
 
 `--http-tls-cert-file` (string, file path):
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-cert-file-content` is specified.
+
+`--http-tls-cert-file-content` (string):
+
+As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. Note that full certificate content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 `--http-tls-enabled` (boolean):
 
@@ -134,7 +150,11 @@ If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Def
 
 `--http-tls-key-file` (string, file path):
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-key-file-content` is specified.
+
+`--http-tls-key-file-content` (string):
+
+As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. Note that full private key content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 ## IPCS
 
@@ -228,11 +248,19 @@ It means that this node will sample all nodes, not just validators.
 
 `--staking-tls-cert-file` (string, file path):
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if `--staking-tls-cert-file-content` is specified.
+
+`--staking-tls-cert-file-content` (string):
+
+As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node. Note that full certificate content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-tls-key-file` (string, file path):
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`. This flag is ignored if `--staking-tls-key-file-content` is specified.
+
+`--staking-tls-key-file-content` (string):
+
+As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-disabled-weight` (int):
 
@@ -303,7 +331,11 @@ It is not required to provide these custom configurations. If they are not provi
 
 `--chain-config-dir` (string):
 
-Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
+Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--chain-config-content` is specified.
+
+`--chain-config-content` (string):
+
+As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
 
 #### C-Chain Config
 
@@ -572,7 +604,11 @@ Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 `--db-config-file` (string):
 
-Path to the database config file.
+Path to the database config file. Ignored if `--config-file-content` is specified.
+
+`--db-config-file-content` (string):
+
+As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
 
 #### LevelDB Config
 
@@ -821,7 +857,7 @@ It is possible to provide parameters for subnets. Parameters here apply to all c
 
 `--subnet-config-dir` (string):
 
-Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.
+Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--subnet-config-content` is specified.
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
@@ -834,6 +870,10 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
   }
 }
 ```
+
+`--subnet-config-content` (string):
+
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
 
 **Validator Only**
 
@@ -864,7 +904,7 @@ The consensus parameters of a subnet default to the same values used for the Pri
 
 `--vm-aliases-file` (string):
 
-Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example content:
+Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if `--vm-aliases-file-content` is specified. Example content:
 
 ```javascript
 {
@@ -877,3 +917,6 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
 
+`--vm-aliases-file-content` (string):
+
+As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.
