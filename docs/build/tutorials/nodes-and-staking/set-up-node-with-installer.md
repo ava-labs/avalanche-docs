@@ -309,7 +309,7 @@ That's it, you're running an AvalancheGo node! Congratulations! Let us know you 
 
 If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
+Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 
