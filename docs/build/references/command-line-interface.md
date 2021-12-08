@@ -26,7 +26,7 @@ As an alternative to `--config-file`, it allows specifying base64 encoded config
 
 `--config-file-content-type` (string):
 
-Specifies the format of the base64 encoded config content. Required if `--config-file-content` is set.
+Specifies the format of the base64 encoded config content. JSON, TOML, YAML are among currently supported file format (see [here](https://github.com/spf13/viper#reading-config-files) for full list). Required if `--config-file-content` is set.
 
 ## APIs
 
@@ -142,7 +142,7 @@ This argument specifies the location of the TLS certificate used by the node for
 
 `--http-tls-cert-file-content` (string):
 
-As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`.
+As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. Note that full certificate content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 `--http-tls-enabled` (boolean):
 
@@ -154,7 +154,7 @@ This argument specifies the location of the TLS private key used by the node for
 
 `--http-tls-key-file-content` (string):
 
-As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`.
+As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. Note that full private key content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 ## IPCS
 
@@ -252,7 +252,7 @@ Avalanche uses two-way authenticated TLS connections to securely connect nodes. 
 
 `--staking-tls-cert-file-content` (string):
 
-As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded of the TLS certificate used by the node.
+As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node. Note that full certificate content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-tls-key-file` (string, file path):
 
@@ -260,7 +260,7 @@ Avalanche uses two-way authenticated TLS connections to securely connect nodes. 
 
 `--staking-tls-key-file-content` (string):
 
-As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded of the TLS private key used by the node.
+As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-disabled-weight` (int):
 
