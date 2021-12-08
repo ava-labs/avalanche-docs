@@ -1,15 +1,12 @@
-# Network-runner
+# Network Runner
 
 The network-runner tool allows to define, start and shutdown default or custom avalanchego networks for development and testing.
 
 > **Please do not use this tool for running production nodes. We cannot take responsibility nor be able to give support in this case.**
 
-## How to install
-The network-runner repository is hosted at 
+## How to Install
+The network-runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
 
-```
-[https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
-```
 
 Opening that URL will display a README file with further details of this tool.
 
@@ -18,19 +15,19 @@ Clone the repository with
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-## Supported backends
+## Supported Backends
 The tool can run nodes
 
 * locally by spawning processes running on the same machine
 * using a kubernetes network as a backend
 
-The tool shares a common interface design, located at the `<REPOSITORY_ROOT>/network` package.
+The tool shares a common interface design, located at the [<REPOSITORY_ROOT>/network](https://github.com/ava-labs/avalanche-network-runner/tree/main/network) package.
 Then each backend implements its own runtime.
 
-* Local: `<REPOSITORY_ROOT>/local`
-* Kubernetes: `<REPOSITORY_ROOT>/k8s`
+* Local: [<REPOSITORY_ROOT>/local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local)
+* Kubernetes: [<REPOSITORY_ROOT>/k8s](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s)
 
-The `api` package contains client code to access avalanchego nodes.
+The [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) package contains client code to access avalanchego nodes.
 
 The basic steps to create and run a network are:
 * Define the network definition
@@ -38,19 +35,24 @@ The basic steps to create and run a network are:
 * Interact with it
 * Shutdown
 
-Please find examples at `<REPOSITORY_ROOT>/examples` for each backend.
+Please find examples at [<REPOSITORY_ROOT>/examples](https://github.com/ava-labs/avalanche-network-runner/tree/main/examples) for each backend.
 
-## Local processes
+## Local Processes
 The simplest and most straightforward way to use the tool is to run it locally on a computer by spawning individual operating system processes for each avalanchego node.
 **Please note that your system will set the boundaries about how many nodes you can run in this case.**
 
-An example can be found at `<REPOSITORY_ROOT>/examples/local/main.go`. It is a simple setup which just creates a new default network of 5 nodes, and performs some simple API calls.
+An example can be found at [<REPOSITORY_ROOT>/examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which just creates a new default network of 5 nodes, and performs some simple API calls.
 
 Creating a default network is as simple as:
-`network, err := local.NewDefaultNetwork(log, binaryPath)`, where `log` is a logger instance of type `logging.Logger` and `binaryPath` a string pointing the to **path of the location of the compiled avalanchego binary**.
-For example:
-`local.NewDefaultNetwork(log,"/home/user/go/src/github.com/ava-labs/avalanchego/build")`
+```
+network, err := local.NewDefaultNetwork(log, binaryPath)
+```
+where `log` is a logger instance of type `logging.Logger` and `binaryPath` a string pointing the to **path of the location of the compiled avalanchego binary**.
 
+For example:
+```
+local.NewDefaultNetwork(log,"/home/user/go/src/github.com/ava-labs/avalanchego/build")
+```
 This generates a default network configuration and starts the nodes.
 
 To wait until the network is ready to use, use the `Healthy` function. It returns a channel which will be notified when all nodes are being healthy.
@@ -100,7 +102,7 @@ After adding/removing nodes it's suggested to again wait for `Healthy` until per
 Finally run `network.Stop(ctx)` to stop the network. This will terminate all avalanchego nodes and also do a cleanup of all their temporary data.
 
 
-## Creating custom networks
+## Creating Custom Networks
 To create custom networks, the most important step is to pass a custom config to the `local.NewNetwork(logging.Logger, network.Config)` function (the second parameter). 
 It basically requires to provide the number of nodes, a custom genesis JSON and the array of individual node configs with the binary paths.
 
@@ -117,10 +119,7 @@ The basic operations (interface) of the general `Network` interface are being im
 **IMPORTANT**
 In order for avalanchego nodes to be running smoothly in a kubernetes cluster, we apply the [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/). Therefore, for such an avalanchego network to be runnable on kubernetes, the `avalanchego-operator` dependency must be fulfilled. Essentially, the operator allows avalanchego nodes to run inside a kubernetes cluster in a stateful mode.
 
-Please find the code for running the operator at 
-```
-[https://github.com/ava-labs/avalanchego-operator](https://github.com/ava-labs/avalanchego-operator)
-```
+Please find the code for running the operator at [https://github.com/ava-labs/avalanchego-operator.](https://github.com/ava-labs/avalanchego-operator)
 
 There is a multitude of possible configurations and setups when running kubernetes, depending on organization, preferences and environment. Generally, the kubernetes admin should be responsible to install and run the operator, as it involves setting up roles, services and permissions. Please refer to the operator docs on how to install, configure and deploy/run it. Feel free to reach out to us for support on this.
 
@@ -132,7 +131,7 @@ Generally it makes not much sense to run networks in kubernetes environments for
 This will run the avalanchego operator inside the cluster. The most important link to a deployment is the `Kind` parameter, which needs to be set to `Avalanchego` for the operator to kick in. See next chapter for details.
 
 
-### Kubernetes configuration
+### Kubernetes Configuration
 Essentially, setting up a kubernetes network follows the same sequence as the local processes implementation documented above.
 * Define the network definition
 * Start the network
