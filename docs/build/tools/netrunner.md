@@ -6,7 +6,7 @@ The Avalanche Network Runner allows a user to define, create and interact with a
 
 ## Installation
 
-The Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
+The Avalanche Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
 
 That repository's README details the tool.
 
