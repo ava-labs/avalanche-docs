@@ -33,7 +33,7 @@ Please find examples of usage in the [examples](https://github.com/ava-labs/aval
 
 ## Supported Backends
 
-As you can see in the Network Runner's README, it exposes a `Network` interface to the user. There are two implementations of this interface that you may use. One is the [local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local) implementation, where each node runs in a process on your machine. The other is the [Kubernetes](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s) implementation, where each node runs in its own Kubernetes pod.
+As you can see in the README, a `Network` interface is exposed. There are two implementations of this interface that you may use. One is the [local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local) implementation where each node runs in an isolated process on your machine. The other is the [Kubernetes](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s) implementation where each node runs in its own Kubernetes pod.
 
 ## Local Backend
 
