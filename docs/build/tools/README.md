@@ -14,7 +14,7 @@
 
 [**Abigen**](abigen.md)**:** allows you to compile `solidity` contracts into a programatic interface suitable for embeding in `golang`.
 
-[**Avash**](avash.md) is a shell client for interacting with Avalanche and can deploy local networks and interact with the nodes in those networks. You can use Avash to rapidly launch test network environments. **Note: Avash is being replaced by [Network Runner.](netrunner.md)**
+[**Avash**](avash.md) is a shell client for interacting with Avalanche and can deploy local networks and interact with the nodes in those networks. You can use Avash to rapidly launch test network environments. **Note: Avash is being replaced by the [Avalanche Network Runner.](netrunner.md)**
 
 
 [**Deprecating Ortelius**](deprecating-ortelius.md): How to replace Ortelius with the Index API
