@@ -116,7 +116,7 @@
 
 \+ **new AvalancheError**(`m`: string, `code`: string): *[AvalancheError](src_utils.avalancheerror.md)*
 
-*Defined in [src/utils/errors.ts:45](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L45)*
+*Defined in [src/utils/errors.ts:45](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L45)*
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ Name | Type |
 
 • **errorCode**: *string*
 
-*Defined in [src/utils/errors.ts:45](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L45)*
+*Defined in [src/utils/errors.ts:45](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L45)*
 
 ___
 
@@ -179,6 +179,6 @@ Defined in node_modules/typescript/lib/lib.es5.d.ts:1033
 
 ▸ **getCode**(): *string*
 
-*Defined in [src/utils/errors.ts:52](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L52)*
+*Defined in [src/utils/errors.ts:52](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L52)*
 
 **Returns:** *string*

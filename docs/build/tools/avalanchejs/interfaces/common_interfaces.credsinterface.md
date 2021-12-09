@@ -49,7 +49,7 @@
 
 • **password**: *string*
 
-*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/interfaces.ts#L11)*
+*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/interfaces.ts#L11)*
 
 ___
 
@@ -57,4 +57,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/interfaces.ts#L10)*
+*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/interfaces.ts#L10)*
