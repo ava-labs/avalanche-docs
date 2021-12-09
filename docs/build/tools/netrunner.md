@@ -16,7 +16,7 @@ Clone the repository with:
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-Except when otherwise specified, file paths given below are relative to the root of this repository. 
+Unless otherwise specified, file paths given below are relative to the root of this repository. 
 
 ## Usage
 
@@ -37,7 +37,7 @@ As you can see in the Network Runner's README, it exposes a `Network` interface 
 
 ## Local Backend
 
-The simplest and most straightforward way to use the Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specificaitons.**
+The simplest and most straightforward way to use the Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specifications.**
 
 An example can be found at [examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which creates a network of 5 nodes, and performs some simple API calls.
 
@@ -125,7 +125,7 @@ In order for AvalancheGo nodes to run in a Kubernetes cluster, we use the [Opera
 
 Please find the AvalancheGo Operator code at [https://github.com/ava-labs/avalanchego-operator.](https://github.com/ava-labs/avalanchego-operator)
 
-There are a multitude of possible configurations and setups when running Kubernetes, depending on your organization, preferences and environment. Generally, the Kubernetes admin should be responsible for installing and running the operator, as it involves setting up roles, services and permissions. Please refer to the AvalancheGo Operator documentation for instructions on installation, configuration, deployment, etc..
+There are a multitude of possible configurations and setups when running Kubernetes, depending on your organization, preferences and environment. Generally, the Kubernetes admin should be responsible for installing and running the operator, as it involves setting up roles, services and permissions. Please refer to the AvalancheGo Operator documentation for instructions on installation, configuration, deployment, etc.
 
 To install the AvalancheGo Operator in a local Kubernetes network (like `minikube` or `k3s`), assuming the Kubernetes environment has already been created and configured:
 
