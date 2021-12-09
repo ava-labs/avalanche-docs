@@ -10,7 +10,7 @@
 
 [**Grafana Dashboards**](dashboards/README.mdx): Pre-configured Grafana dashboards
 
-[**Network Runner**](netrunner.md): Tool for building and interacting with AvalancheGo networks for development and testing. Networks can be run locally or using Kubernetes.
+[**Avalanche Network Runner**](netrunner.md): Tool for building and interacting with AvalancheGo networks for development and testing. Networks can be run locally or using Kubernetes.
 
 [**Abigen**](abigen.md)**:** allows you to compile `solidity` contracts into a programatic interface suitable for embeding in `golang`.
 
