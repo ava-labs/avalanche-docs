@@ -68,7 +68,7 @@ Swap the source and destination chains by selecting them from the **Source** and
 
 If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
 
-All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+All the example API calls below assume the node is running locally (that is, listening on `127.0.0.1`). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
 As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
 
@@ -97,7 +97,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address\).
+where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user (see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address).
 
 Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
 
@@ -155,7 +155,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`.005` AVAX in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+The amount deducted is the exported amount (`.005` AVAX in this example) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
 
 ### Step 2 - Import AVAX to the P-Chain
 
@@ -235,7 +235,7 @@ The response should look like this:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`.004` AVAX\) less the transaction fee \(`.001` AVAX in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+Note that the balance we see is the amount exported from the X-Chain (`.004` AVAX) less the transaction fee (`.001` AVAX in this example). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
 
 ## Transferring from the P-Chain to X-Chain programmatically
 

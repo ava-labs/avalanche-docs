@@ -4,11 +4,11 @@ sidebar_position: 3
 
 # Avalanche Bridge (AB) FAQ
 
-The [Avalanche Bridge \(AB\)](https://bridge.avax.network/) can be used to transfer ERC20 tokens from Ethereum to Avalanche's C-Chain and vice versa. This document answers common questions about the bridge. If this document and other documentation don't answer your question, you can contact us on [Avalanche's support website](https://support.avax.network), [Discord](https://chat.avalabs.org) or [Telegram.](https://t.me/avalancheavax)
+The [Avalanche Bridge (AB)](https://bridge.avax.network/) can be used to transfer ERC20 tokens from Ethereum to Avalanche's C-Chain and vice versa. This document answers common questions about the bridge. If this document and other documentation don't answer your question, you can contact us on [Avalanche's support website](https://support.avax.network), [Discord](https://chat.avalabs.org) or [Telegram.](https://t.me/avalancheavax)
 
 ## Important Notes
 
-1. There is a bug in the Metamask Mobile app that affects bridge transactions \(**only on mobile**\). Until this is resolved, don't use the Metamask mobile app for bridge transfers. Use the desktop app, or, if on mobile, Coinbase Wallet.
+1. There is a bug in the Metamask Mobile app that affects bridge transactions (**only on mobile**). Until this is resolved, don't use the Metamask mobile app for bridge transfers. Use the desktop app, or, if on mobile, Coinbase Wallet.
 2. You need AVAX to pay for transaction fees on Avalanche. **You should use the AVAX you receive in the airdop to do a swap for more AVAX on an AMM so that you can pay for transaction fees.** If you run out of AVAX, you will not be able to do transactions on Avalanche.
 
 ## Transactions
@@ -39,7 +39,7 @@ Not yet. The AB currently only supports transfer of ERC20 tokens create on Ether
 
 ### Can I send ETH or BTC across the bridge?
 
-The AB does not currently support native ETH or BTC. However, you can transfer the wrapped version of these assets \(WETH and WBTC\) across the bridge.
+The AB does not currently support native ETH or BTC. However, you can transfer the wrapped version of these assets (WETH and WBTC) across the bridge.
 
 ### What if my transaction is not visible in the explorer?
 
@@ -51,7 +51,7 @@ Yes, you can view video tutorials for bridge functionality [here](https://www.yo
 
 ### How do I pay for transaction fees on Avalanche?
 
-On Avalanche, transaction fees are paid in the native asset, AVAX. In order to send transactions on the Avalanche C-Chain, you must have sufficient AVAX in your wallet to cover the cost of the gas for the transaction. To help you get started on Avalanche, the bridge will airdrop you a small amount of AVAX if you move more than $75 \(subject to change\) worth of tokens over from Ethereum. In order to avoid running out of AVAX to cover your transaction fees, we recommend first buying an adequate amount of AVAX. You can do so on [Pangolin](https://app.pangolin.exchange/).
+On Avalanche, transaction fees are paid in the native asset, AVAX. In order to send transactions on the Avalanche C-Chain, you must have sufficient AVAX in your wallet to cover the cost of the gas for the transaction. To help you get started on Avalanche, the bridge will airdrop you a small amount of AVAX if you move more than $75 (subject to change) worth of tokens over from Ethereum. In order to avoid running out of AVAX to cover your transaction fees, we recommend first buying an adequate amount of AVAX. You can do so on [Pangolin](https://app.pangolin.exchange/).
 
 #### Can I send to a different address on the other network?
 
@@ -59,7 +59,7 @@ The bridge only allows transfers to the same address on the other network. After
 
 ### Can I speed up my transaction? {#speed-up-transaction} 
 
-Yes, you can click on the “Speed Up” button on Metamask. “Speeding up” a transaction through Metamask issues a new transaction on Ethereum that has a higher gas price than the transaction that was originally sent. Since the new transaction has a higher gas price, it is more likely to be included in a block. Only one of the transactions \(the original and the "sped up"\) will be accepted. Speeding up a transaction that is transferring funds to the bridge is safe. However, the user interface will not be aware of the new transaction, meaning you may not see the confirmations in the user interface. Once the new transaction has 35 confirmations on Ethereum, check your Metamask wallet on Avalanche to see the wrapped funds.
+Yes, you can click on the “Speed Up” button on Metamask. “Speeding up” a transaction through Metamask issues a new transaction on Ethereum that has a higher gas price than the transaction that was originally sent. Since the new transaction has a higher gas price, it is more likely to be included in a block. Only one of the transactions (the original and the "sped up") will be accepted. Speeding up a transaction that is transferring funds to the bridge is safe. However, the user interface will not be aware of the new transaction, meaning you may not see the confirmations in the user interface. Once the new transaction has 35 confirmations on Ethereum, check your Metamask wallet on Avalanche to see the wrapped funds.
 
 ### Why does the number of tokens shown on Metamask not match the number I specified?
 
@@ -82,7 +82,7 @@ The bridge charges transfer fees in order to cover the cost of the transaction f
 
 When moving assets from Ethereum to Avalanche, the bridge fee is $3 worth of the ERC20 asset being transferred. Transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
-When moving assets from Avalanche to Ethereum, the bridge fee is largely based on the **expected** Ethereum transaction fee, which is calculated using current asset prices, the current Ethereum gas price, and the approximate amount of gas that will be used by the Ethereum transaction. As such, the Ethereum transaction fee, and thus also the bridge fee, can be highly varibale. To account for price volatility, a constant dollar amount \(currently $15\) is added to the bridge fee. Note that the bridge fee will be different than the Ethereum transaction fee displayed in explorers such as Etherscan because asset prices, the Ethereum gas price, and the amount of gas used by Ethererum transactions fluctuate. The expected bridge fee is displayed in the bridge UI when performing a transfer.
+When moving assets from Avalanche to Ethereum, the bridge fee is largely based on the **expected** Ethereum transaction fee, which is calculated using current asset prices, the current Ethereum gas price, and the approximate amount of gas that will be used by the Ethereum transaction. As such, the Ethereum transaction fee, and thus also the bridge fee, can be highly varibale. To account for price volatility, a constant dollar amount (currently $15) is added to the bridge fee. Note that the bridge fee will be different than the Ethereum transaction fee displayed in explorers such as Etherscan because asset prices, the Ethereum gas price, and the amount of gas used by Ethererum transactions fluctuate. The expected bridge fee is displayed in the bridge UI when performing a transfer.
 
 ### Why doesn't the amount of asset I received on one network match the amount that I sent from the other?
 
@@ -96,7 +96,7 @@ The bridge also uses Chainlink price feeds to determine token prices used to cal
 
 ### Is there an airdrop? {#airdrop}
 
-Users will be airdropped up to 0.1 AVAX when they transfer more than $75 \(subject to change\) of a token from Ethereum to Avalanche.
+Users will be airdropped up to 0.1 AVAX when they transfer more than $75 (subject to change) of a token from Ethereum to Avalanche.
 
 ### What if I did not receive my airdrop?
 
@@ -106,7 +106,7 @@ If you haven’t received your airdrop, please confirm that the transfer amount 
 
 ### Is the Avalanche Bridge trustless?
 
-The Avalanche Bridge is trustless in the sense that no one party is able to access any of the funds held as collateral or mint wrapped assets. All transfers across the bridge must be approved by 3 of 4 independent parties \(called wardens\). In this sense, use of the bridge does not require trust in any one party to transfer your funds.
+The Avalanche Bridge is trustless in the sense that no one party is able to access any of the funds held as collateral or mint wrapped assets. All transfers across the bridge must be approved by 3 of 4 independent parties (called wardens). In this sense, use of the bridge does not require trust in any one party to transfer your funds.
 
 ### What is the role of the wardens?
 
@@ -162,11 +162,11 @@ See [here](https://www.youtube.com/watch?v=vZqclPuPjMw&list=PLRHl-ulWK4-FPRA7SS1
 
 In general, when you are interacting with smart contracts and dapps such as Pangolin, **you want to use the token with .e at the end**.
 
-The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens have been deprecated in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
+The current-generation Avalanche Bridge (AB) to which this document refers is predated by a previous bridge implementation called the AEB. The AEB bridge and AB bridge each have their own unique token sets. The AEB tokens have been deprecated in favor of the AB tokens. AB tokens have a `.e` suffix. While a token's name and symbol are good references to differentiate the two, the only surefire way to verify a token is the contract address. The AB token contract addresses can be found [here.](https://github.com/ava-labs/avalanche-bridge-resources/blob/main/avalanche_contract_address.json)
 
 ### Why doesn’t the newly bridged token appear in my wallet automatically?
 
-Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet \(i.e. Metamask\) which smart contracts to check for balances held by your addresses.
+Tokens are not held by your C-chain address, but rather in the token's smart contract. You have to tell your wallet (i.e. Metamask) which smart contracts to check for balances held by your addresses.
 
 ### Does the Avalanche Bridge support transferring NFTs?
 
@@ -178,7 +178,7 @@ The Avalanche Bridge does not currently support NFT transfers.
 
 The Avalanche Bridge currently only supports transfer of Ethereum ERC20s to the Avalanche C-Chain and vice versa. There are plans to support transfer of ERC20s created on the Avalanche C-Chain. There are also plans to support networks other than Avalanche and Ethereum.
 
-### Can I bridge assets from \(network\) to Avalanche?
+### Can I bridge assets from (network) to Avalanche?
 
 The Avalanche Bridge can only transfer assets between Ethereum and Avalanche. To get assets from another network onto Avalanche, you can do one of the following:
 
@@ -186,19 +186,19 @@ The Avalanche Bridge can only transfer assets between Ethereum and Avalanche. To
 * Use a third party bridge not created/maintained/supported by Ava Labs
 * Buy AVAX on a centralized exchange and withdraw AVAX to Avalanche, then use an AMM to swap for other assets.
 
-## AEB \(Deprecated Bridge\)
+## AEB (Deprecated Bridge)
 
-The current-generation Avalanche Bridge \(AB\) to which this document refers is predated by a previous bridge implementation called the AEB. This section deals with questions about the previous bridge implementation \(AEB\).
+The current-generation Avalanche Bridge (AB) to which this document refers is predated by a previous bridge implementation called the AEB. This section deals with questions about the previous bridge implementation (AEB).
 
 ### When does the AEB stop operating?
 
-The AEB is deactivated and transfers across it are no longer possible. The funds held on the Ethereum side of the AEB have been moved to the new Avalanche Bridge \(AB\). Token conversions have been enabled on the Avalanche C-Chain, allowing users to convert their AEB tokens on a 1-1 basis for their equivalent on the Avalanche Bridge. This conversion can be done at [https://bridge.avax.network/convert](https://bridge.avax.network/convert). AEB token support timelines will be left up to the individual DApp projects.
+The AEB is deactivated and transfers across it are no longer possible. The funds held on the Ethereum side of the AEB have been moved to the new Avalanche Bridge (AB). Token conversions have been enabled on the Avalanche C-Chain, allowing users to convert their AEB tokens on a 1-1 basis for their equivalent on the Avalanche Bridge. This conversion can be done at [https://bridge.avax.network/convert](https://bridge.avax.network/convert). AEB token support timelines will be left up to the individual DApp projects.
 
 ### Can I transfer my AEB tokens to Ethereum?
 
 In order to move your AEB tokens to Ethereum, you must first convert them into AB tokens as described in the question above. Once converted, you can use the new Avalanche Bridge to move the AB tokens back to Ethereum.
 
-### How do I convert my AEB \(deprecated bridge\) tokens to Avalanche Bridge \(AB\) tokens?
+### How do I convert my AEB (deprecated bridge) tokens to Avalanche Bridge (AB) tokens?
 
 You can convert your AEB tokens to AB tokens using the [AB user interface](http://bridge.avax.network/convert). Further, many ecosystem projects such as Pangolin are working on making it easy for users to convert their tokens and enter new liquidity pools.
 
@@ -214,7 +214,7 @@ Not using a smart contract simplifies the end-to-end transfer requirements, resu
 
 ### Can I integrate bridge transfers into my own smart contracts?
 
-Currently, the bridge only supports cross-chain transfers from externally owned accounts \(EOAs\). This is because the bridge uses the same address on both networks, ensuring that funds moved across the bridge are kept within the same wallet, and there is not a way to ensure that a smart contract at a given address on Ethereum also exists at the same address on Avalanche. ERC20 tokens sent to the bridge address from smart contracts on the Ethereum network will not be minted as wrapped tokens on Avalanche.
+Currently, the bridge only supports cross-chain transfers from externally owned accounts (EOAs). This is because the bridge uses the same address on both networks, ensuring that funds moved across the bridge are kept within the same wallet, and there is not a way to ensure that a smart contract at a given address on Ethereum also exists at the same address on Avalanche. ERC20 tokens sent to the bridge address from smart contracts on the Ethereum network will not be minted as wrapped tokens on Avalanche.
 
 ### Is the use of tx.origin in the BridgeToken contracts safe?
 
@@ -232,7 +232,7 @@ No. It is very likely a user interface issue, and the tokens are there but you j
 
 ### On the Proof of Assets page, why don't the amount of an asset on Ethereum and Avalanche match?
 
-It is possible for the bridge to be over-collateralized \(i.e. hold more of an ERC20 asset on Ethereum than exists on Avalanche\) for three reasons. These are all expected.
+It is possible for the bridge to be over-collateralized (i.e. hold more of an ERC20 asset on Ethereum than exists on Avalanche) for three reasons. These are all expected.
 
 1. There are new transfers from Ethereum to Avalanche. The bridge only processes transfers once the Ethereum transaction receives 35 confirmations. Before then, the collateral balance will be more than the wrapped asset supply.
 2. AEB collateral has been transferred to the new AB bridge, but not all AEB tokens have been converted to AB tokens on Avalanche yet.
@@ -279,5 +279,5 @@ Specifications for the banner are as follows:
 * Desktop and Landscape:  1155px \* 440px
 * Portrait and Mobile:  720px \* 337px
 * Design elements in middle of banner or they will be cut off
-* Use solid color as BG or have gradient that fades into \#000000 \(edited\) 
+* Use solid color as BG or have gradient that fades into \#000000 (edited) 
 

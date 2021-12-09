@@ -2,15 +2,15 @@
 
 ## Introduction
 
-In the [Get Started tutorial](https://avalanche.gitbook.io/avalanche/build/getting-started), we connect a node to the test network. You might find it useful to create a local test network.
+In this tutorial, we will show how to create a local test network.
 
-We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash) and manually.
+We’ll show you how to launch a 5 node local test network. For both, we’ll show how to launch the network using [Avash](../../tools/avash.md) and manually.
 
-The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` , and `9658`.
+The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 
 ## Create a Local Test Network
 
-The below commands assume you have [AvalancheGo](https://avalanche.gitbook.io/avalanche/build/getting-started#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
+The below commands assume you have [AvalancheGo](../nodes-and-staking/run-avalanche-node.md#download-avalanchego) installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
 ### Manually
 
@@ -46,7 +46,7 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 
 ### With Avash
 
-We assume you’ve installed [Avash](https://avalanche.gitbook.io/avalanche/build/tools/avash).
+We assume you’ve installed [Avash](../../tools/avash.md).
 
 To open Avash:
 
@@ -72,7 +72,7 @@ When you want to tear down the network, run `exit` to exit Avash.
 
 ### Verifying Nodes are Connected {#verifying-nodes-are-connected}
 
-We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-peers).
+We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../../avalanchego-apis/info-api.md#infopeers).
 
 ```cpp
 curl -X POST --data '{
@@ -147,7 +147,7 @@ curl --location --request POST 'localhost:9650/ext/platform' \
 }'
 ```
 
-That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#exchange-chain-x-chain), [C-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#contract-chain-c-chain), and [P-Chain](https://avalanche.gitbook.io/avalanche/learn/platform-overview#platform-chain-p-chain). The only subnet that exists is the Primary Network.
+That’s it! Your local version of Avalanche is up and running. It has the default blockchains: the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), [C-Chain](../../../learn/platform-overview/README.md#contract-chain-c-chain), and [P-Chain](../../../learn/platform-overview/README.md#platform-chain-p-chain). The only subnet that exists is the Primary Network.
 
 You can add more nodes to the network. Just remember to give unique values for `db-dir`, `http-port` , and `staking-port`.
 

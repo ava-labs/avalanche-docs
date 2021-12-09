@@ -6,7 +6,40 @@
 
 :::
 
-## v1.7.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.1)\)
+## v1.7.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.2))
+
+This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
+
+**Coreth**
+
+- Fixed memory leak in the estimate gas API.
+- Reduced the default RPC gas limit to 50,000,000 gas.
+- Improved RPC logging.
+- Removed pre-AP5 legacy code.
+
+**PlatformVM**
+
+- Optimized validator set change calculations.
+- Removed storage of non-decided blocks.
+- Simplified error handling.
+- Removed pre-AP5 legacy code.
+
+**Networking**
+
+- Explicitly fail requests with responses that failed to be parsed.
+- Removed pre-AP5 legacy code.
+
+**Configs**
+
+- Introduced the ability for a delayed graceful node shutdown.
+- Added the ability to take all configs as environment variables for containerized deployments.
+
+**Utils**
+
+- Fixed panic bug in logging library when importing from external projects.
+
+
+## v1.7.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.1))
 
 This update is backwards compatible with [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). Please see the expected update times in the v1.7.0 release.
 
@@ -18,7 +51,7 @@ This update is backwards compatible with [v1.7.0](https://github.com/ava-labs/av
 
 - Fixed vote bubbling for unverified block chits.
 
-## v1.7.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0)\)
+## v1.7.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0))
 
 This upgrade adds support for issuing multiple atomic transactions into a single block and directly transferring assets between the P-chain and the C-chain.
 
@@ -113,7 +146,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 - Refactored request timeout registry to avoid a potential race condition.
 
 
-## v1.6.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.4)\)
+## v1.6.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.4))
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
@@ -156,7 +189,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 - Ensured that all possible chains are run in `--staking-enabled=false` networks.
 
 
-## v1.6.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.3)\)
+## v1.6.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.3))
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
@@ -195,7 +228,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 - Updated block `Delay` in `--staking-enabled=false` networks to be `0`.
 
 
-## v1.6.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.2)\)
+## v1.6.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.2))
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
@@ -253,7 +286,7 @@ This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/ava
 * Removed the end-to-end test branch matchup logic.
 * Removed the deprecated main entry point for the database migration's process manager.
 
-## v1.6.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1)\)
+## v1.6.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.1))
 
 This version is backwards compatible to [v1.6.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0). It is optional, but encouraged.
 
@@ -275,7 +308,7 @@ The following are deprecated and should no longer be used. They may be removed i
 * API method `avm.importAVAX` should be removed in favor of `avm.import`
 * Config option `coreth-config` should be removed in favor of a [chain config file](../references/command-line-interface.md#c-chain-config).
 
-## v1.6.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0)\)
+## v1.6.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0))
 
 **This change is not backwards compatible with previous releases.**
 
@@ -308,10 +341,10 @@ Fix race condition during timeout manager startup.
 
 **Config Options**
 
-* Added flag `inbound-connection-throttling-max-conns-per-sec`.\(See [config documentation.](../references/command-line-interface.md)\)
+* Added flag `inbound-connection-throttling-max-conns-per-sec`.(See [config documentation.](../references/command-line-interface.md))
 * Deprecated flag `inbound-connection-throttling-max-recent`. This flag is now ignored.
 
-## PRE\_RELEASE v1.6.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji)\)
+## PRE\_RELEASE v1.6.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.6.0-fuji))
 
 **Please note that this release is unable to run mainnet - and will display "mainnet is not supported" if attempted to run with a mainnet configuration.**
 
@@ -329,7 +362,7 @@ The changes in the upgrade go into effect at 5 PM EDT, September 16th 2021 on th
 * Set the minimum gas price to 25 nAVAX and the maximum gas price to 1000 nAVAX in the C-chain dynamic fee mechanism.
 * Added metrics for the number of blocks built and the number of failed build block attempts.
 
-## v1.5.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3)\)
+## v1.5.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.3))
 
 This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0).
 
@@ -339,14 +372,14 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 
 **Networking**
 
-* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages \(`Put`, `PushQuery`, etc.\). See `snow/engine/common/engine.go`.
+* Added 3 new network messages: `AppRequest`, `AppResponse` and `AppGossip`. These messages allow instances of a blockchain to send arbitrary data to each other as defined by their VM. Previously, instances of a blockchain could only communicate with one another by sending consensus messages (`Put`, `PushQuery`, etc.). See `snow/engine/common/engine.go`.
 * Upon receipt of a `Pong` message, disconnect from the sender if their version is incompatible.
-* Prepended method named in `common.Sender` with `Send` for clarity \(e.g. `Put` --&gt; `SendPut`\). 
+* Prepended method named in `common.Sender` with `Send` for clarity (e.g. `Put` --&gt; `SendPut`). 
 
 **P-Chain**
 
 * Added functionality to track changes in validator weight by block.
-* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's \(or the Primary Network's\) validator set at a given P-Chain height.
+* Added API method `GetValidatorsAt` which allows for retrieval of a subnet's (or the Primary Network's) validator set at a given P-Chain height.
 
 **C-Chain**
 
@@ -364,9 +397,9 @@ This version is backwards compatible to [v1.5.0](https://github.com/ava-labs/ava
 **Config Options**
 
 * Added AvalancheGo config option `consensus-app-gossip-size`, which defines the number of peers an `AppGossip` message is gossiped to.
-* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` \(as before.\)
+* Added C-Chain config option `log-level`. Options are: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"` (as before.)
 
-## v1.5.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2)\)
+## v1.5.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.2))
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected update times in the v1.5.0 release.
 
@@ -383,13 +416,13 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 * Added additional logging around bubbling votes.
 
-## v1.5.1-eth\_call \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call)\)
+## v1.5.1-eth\_call ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1-eth_call))
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
 
 This update is a hotfix for v1.5.1 that allows using eth\_call without the externally owned account check.
 
-## v1.5.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1)\)
+## v1.5.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.1))
 
 This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0). Please see the expected network upgrade times in the v1.5.0 release.
 
@@ -418,7 +451,7 @@ This update is backwards compatible with [v1.5.0](https://github.com/ava-labs/av
 
 * Updated to Geth v1.10.7.  
 
-## v1.5.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0)\)
+## v1.5.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0))
 
 **This change is not backwards compatible with previous releases.**
 
@@ -462,7 +495,7 @@ More info can be found [here](https://medium.com/avalancheavax/apricot-phase-thr
   * Added `indexTransactions`
   * Added `indexAllowIncomplete`
 
-## PRE\_RELEASE v1.5.0-fuji \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji)\)
+## PRE\_RELEASE v1.5.0-fuji ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.5.0-fuji))
 
 **Please note that this release is unable to run mainnet - and will display "this node version doesn't support mainnet" if attempted to run with a mainnet configuration. If you run a mainnet node, no action is required until the official release is published next week.**
 
@@ -506,7 +539,7 @@ The changes in the upgrade go into effect at 3 PM EDT, August 16th 2021 on the F
   * Added `indexTransactions`
   * Added `indexAllowIncomplete`
 
-## v1.4.12 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.12)\)
+## v1.4.12 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.12))
 
 This update is backwards compatible. It is optional, but encouraged.
 
@@ -533,7 +566,7 @@ This update is backwards compatible. It is optional, but encouraged.
 
 * Replace `Put` and `Remove` with `Apply` to allow for future atomic transaction optimization
 
-## v1.4.11 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11)\)
+## v1.4.11 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.11))
 
 **C-Chain**
 
@@ -581,13 +614,13 @@ Nodes now compress some P2P messages. If a peer is version &gt;= v1.4.11, Put, P
 
 Updated the bootstrap IPs for the Fuji Testnet.
 
-## v1.4.10 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10)\)
+## v1.4.10 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.10))
 
 **Apricot Phase 2 - Patch 10**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged.
-{% endhint %}
+:::
 
 The patch includes performance, throttling, and VM improvements:
 
@@ -601,13 +634,13 @@ The patch includes performance, throttling, and VM improvements:
 * Fixed protobuf code-gen script to place `grpc` files in the correct location.
 * Passed the block bytes through the `rpcchainvm#Block.Verify` to avoid any potential cache eviction verification failures.
 
-## v1.4.9 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9)\)
+## v1.4.9 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.9))
 
 **Apricot Phase 2 - Patch 9**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged.
-{% endhint %}
+:::
 
 The patch includes performance improvements, and monitoring improvements:
 
@@ -623,13 +656,13 @@ The patch includes performance improvements, and monitoring improvements:
 * Added auto deployment GitHub action for new tags.
 * Refactored config management to better support launching nodes programmatically.
 
-## v1.4.8 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.8)\)
+## v1.4.8 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.8))
 
 **Apricot Phase 2 - Patch 8**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged.
-{% endhint %}
+:::
 
 The patch includes performance improvements, monitoring improvements, and subnet fixes:
 
@@ -662,13 +695,13 @@ The patch includes performance improvements, monitoring improvements, and subnet
 * `outbound-connection-timeout`
 * `outbound-connection-throttling-rps`
 
-## v1.4.7 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7)\)
+## v1.4.7 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.7))
 
 **Apricot Phase 2 - Patch 7**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged. The patch includes performance improvements and bug fixes.
-{% endhint %}
+:::
 
 If the previously installed node version is &lt;= v1.4.4 then this node may have stopped processing blocks. This update will repair the node and perform a database migration. If the previously installed node version is &gt;=v1.4.5 then this node will use the existing database and does not need to perform a database migration.
 
@@ -679,13 +712,13 @@ If the previously installed node version is &lt;= v1.4.4 then this node may have
 * Added database benchmarks.
 * Reduced various repeated memory allocations.
 
-## v1.4.6 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.6)\)
+## v1.4.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.6))
 
 **Apricot Phase 2 - Patch 6**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged. This patch includes performance improvements and bug fixes.
-{% endhint %}
+:::
 
 **If the previously installed node version is &lt;= v1.4.4 then this node will perform a database migration. For details about the database migration please see the v1.4.5 release notes.** If the previously installed node version is v1.4.5 then this node use the existing database and does not need to perform a database migration.
 
@@ -698,15 +731,15 @@ This patch:
 * Enforced gossiping messages only to connections that have finished the peer handshake.
 * Reduced memory allocations during consensus traversals and bootstrapping.
 
-## v1.4.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5)\)
+## v1.4.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.5))
 
 **Apricot Phase 2 - Patch 5 - DB Upgrade**
 
 **This upgrade is more involved than the typical version update.**.**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged. The patch includes significant performance improvements and numerous other updates.
-{% endhint %}
+:::
 
 **VM Improvements:**
 
@@ -792,13 +825,13 @@ It is no longer required that the `bootstrap-ips` and `bootstrap-ids` are paired
 * `xput-server-port`
 * `xput-server-enabled`
 
-## v1.4.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4)\)
+## v1.4.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.4))
 
 **Apricot Phase 2 - Patch 4**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged.
-{% endhint %}
+:::
 
 The patch includes bug fixes and performance improvements that aim to optimize the upcoming `db-upgrade` release.
 
@@ -809,13 +842,13 @@ The patch includes bug fixes and performance improvements that aim to optimize t
 * Fixed log formatting.
 * Improved error messages.
 
-## v1.4.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.3)\)
+## v1.4.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.3))
 
 **Apricot Phase 2 - Patch 3**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible. It is optional, but encouraged.
-{% endhint %}
+:::
 
 The patch includes bug fixes, updated uptime monitoring, and performance improvements.
 
@@ -827,13 +860,13 @@ The patch includes bug fixes, updated uptime monitoring, and performance improve
 * Updated the validator set to be more performant during validator set changes.
 * Updated the networking to only attempt to re-connect to a peer on disconnect if they are currently a validator.
 
-## v1.4.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.2)\)
+## v1.4.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.2))
 
 **Apricot Phase 2 - Patch 2**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible with v1.4.0 and v1.4.1. The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
-{% endhint %}
+:::
 
 The patch further reduces the size of gossiped peerlist messages and introduces several new flags:
 
@@ -841,31 +874,31 @@ The patch further reduces the size of gossiped peerlist messages and introduces 
 * `network-peer-list-gossip-size` allows for tuning the number of peers to gossip `peerlist` messages to.
 * `network-peer-list-gossip-frequency` allows for tuning how frequently `peerlist`s are gossiped.
 
-## v1.4.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.1)\)
+## v1.4.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.1))
 
 **Apricot Phase 2 - Patch 1**
 
-{% hint style="warning" %}
+:::caution
 This update is backwards compatible with v1.4.0. Please see the expected update times in the v1.4.0 release.
-{% endhint %}
+:::
 
 The patch reduces the size of gossiped peerlist messages and introduces a new flag `--bootstrap-beacon-connection-timeout` that allows for the beacon connection timeout to be configured on startup.
 
-## v1.4.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0)\)
+## v1.4.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.4.0))
 
 **Apricot Phase 2**
 
-{% hint style="danger" %}
+:::danger
 **Please note that this change is not backwards compatible with previous releases.**
 
 **The related blog post can be found** [**here**](https://medium.com/avalancheavax/apricot-phase-two-berlin-eips-enhanced-avalanche-native-token-ant-support-c2ae0febe5bf)**.**
-{% endhint %}
+:::
 
-{% hint style="warning" %}
+:::caution
 This upgrade applies the Ethereum Berlin upgrade to the C-chain, adds a new AVM endpoint, and includes various stability improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
 
 The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji testnet and 7 AM EDT, May 10th 2021 on mainnet.
-{% endhint %}
+:::
 
 **The primary components to this upgrade include:**
 
@@ -891,13 +924,13 @@ The changes in the upgrade go into effect at 10 AM EDT, May 5th 2021 on the Fuji
 * `disconnected-restart-timeout`
 * `restart-on-disconnected`
 
-## v1.3.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2)\)
+## v1.3.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.2))
 
 **Apricot Phase 1 - Patch 2**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes security improvements, bug fixes, and monitoring improvements.
-{% endhint %}
+:::
 
 **Security Improvements**
 
@@ -913,15 +946,15 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 **Monitoring Improvements**
 
 * Added an optional node indexer that can provide a locally consistent ordering of operations accepted on a chain.
-* Updated ansible inventory to include numerous improvements \(Huge thanks to @moreati\).
+* Updated ansible inventory to include numerous improvements (Huge thanks to @moreati).
 
-## v1.3.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1)\)
+## v1.3.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.1))
 
 **Apricot Phase 1 - Patch 1**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, monitoring improvements, and minor bug fixes.
-{% endhint %}
+:::
 
 **The primary components to this upgrade include:**
 
@@ -940,15 +973,15 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 
 * `network-health-max-time-since-no-requests`
 
-## v1.3.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0)\)
+## v1.3.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.3.0))
 
 **Apricot Phase 1**
 
-{% hint style="danger" %}
+:::danger
 Please note that this change is not backwards compatible with previous releases.
 
 This upgrade reduces C-chain gas fees, removes C-chain gas refunds, and includes various security improvements. We urge everyone in the community to update as soon as possible in order to ensure that their nodes remain healthy.
-{% endhint %}
+:::
 
 The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the Fuji testnet and 10 AM EST, March 31st 2021 on mainnet.
 
@@ -974,13 +1007,13 @@ The changes in the upgrade go into effect at 10 AM EST, March 25th 2021 on the F
 
 * `api-auth-password`
 
-## **v1.2.4 \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**\)**
+## **v1.2.4 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.4)**)**
 
 **Apricot Phase 0 - Upgrade 1 - Patch 4**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
-{% endhint %}
+:::
 
 * Updated readme to correct storage requirements.
 * Added additional error handling to Avalanche Tx verification during bootstrapping.
@@ -988,24 +1021,24 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Added additional logging to CI.
 * Added the C-chain to the list of critical chains.
 
-## **v1.2.3 \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**\)**
+## **v1.2.3 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.3-signed)**)**
 
 **Apricot Phase 0 - Upgrade 1 - Patch 3**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability and monitoring improvements.
-{% endhint %}
+:::
 
 * Adjusted `[network, router, consensus]` health check parameters to remove flaky health checks.
 * Simplified C-chain block handling.
 
-## **v1.2.2 \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**\)**
+## **v1.2.2 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/releases/tag/v1.2.2)**)**
 
 **Apricot Phase 0 - Upgrade 1 - Patch 2**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
-{% endhint %}
+:::
 
 * Added IP aliases in the network library to avoid repeated `SYN` calls.
 * Fixed bootstrap message handling when bootstrapping from yourself.
@@ -1019,15 +1052,15 @@ This update is backwards compatible. It is optional, but encouraged. The patch i
 * Improved C-chain handling of canonical chain to reduce the number of reorgs.
 * Improved C-chain handling of mock calls performed on the `pending` block.
 
-## **v1.2.1 \(**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**\)**
+## **v1.2.1 (**[**View on GitHub**](https://github.com/ava-labs/avalanchego/tree/v1.2.1)**)**
 
 **Apricot Phase 0 - Upgrade 1 - Patch 1**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional, but encouraged. The patch includes stability, performance, and monitoring improvements.
 
 Please note that this update removes \`network-timeout-increase\` and ‘network-timeout-reduction\` as command line arguments.
-{% endhint %}
+:::
 
 Change Summary:
 
@@ -1071,13 +1104,13 @@ Removed command line arguments:
 * \`network-timeout-increase\`
 * \`network-timeout-reduction\`
 
-## v1.2.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.0)\)
+## v1.2.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.2.0))
 
 **Apricot Phase 0 - Upgrade 1**
 
-{% hint style="danger" %}
+:::danger
 **Please note that this patch is not backwards compatible with previous releases. This upgrade fixes performance issues related to interchange transfers between X, C, and P chains. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected. Also, note that nodes may take several extra minutes to connect after the upgrade and the process should be allowed to complete uninterrupted.**
-{% endhint %}
+:::
 
 The primary components to this upgrade include:
 
@@ -1091,26 +1124,26 @@ The primary components to this upgrade include:
 * Updated networking timeout default values and benchlist settings
 * Verified there was no safety violation after the initial network instability
 
-## v1.1.5 \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5)\)
+## v1.1.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.5))
 
 **Apricot Phase 0 - Patch 5**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional but encouraged. The patch includes stability improvements.
-{% endhint %}
+:::
 
-* Fixed a potential deadlock when registering new chains that could cause the P-chain and http\(s\) endpoint to block.
+* Fixed a potential deadlock when registering new chains that could cause the P-chain and http(s) endpoint to block.
 * Repairs TxID -&gt; Block Height indexing in the C-chain.
 * Added graceful handling of empty contract deployments in the debug\_traceTransaction API in the C-chain.
 * Improved error handling in the C-chain.
 
-## v1.1.4 \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.4)\)
+## v1.1.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.4))
 
 **Apricot Phase 0 - Patch 4**
 
-{% hint style="danger" %}
+:::danger
 This update is backwards compatible. It is optional but encouraged. The patch includes CLI upgrades, API bug fixes, stability improvements, and performance improvements.
-{% endhint %}
+:::
 
 * Fixed an issue where C-chain block indexes could map to unaccepted blocks at a given height.
 * Fixed VM crash when the RPCChainVM experienced high API loads.
@@ -1121,25 +1154,25 @@ This update is backwards compatible. It is optional but encouraged. The patch in
 * Added additional caching to the RPCChainVM.
 * Improved plugin directory lookup to always work with the binary releases.
 
-## v1.1.3 \([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3)\)
+## v1.1.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/tree/v1.1.3))
 
 **Apricot Phase 0 - Patch 3**
 
-{% hint style="danger" %}
+:::danger
 This update is optional but encouraged. The patch includes minor bug fixes relating to APIs.
-{% endhint %}
+:::
 
 * Fixed hanging call when attempting to filter C-chain logs.
 * Fixed C-chain client to call the proper multi-coin API.
 * Added `getAtomicUTXOs` to `avm` and `platformvm` API clients.
 
-## v1.1.2 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2)\)
+## v1.1.2 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.2))
 
 **Apricot Phase 0 - Patch 2**
 
-{% hint style="danger" %}
+:::danger
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
-{% endhint %}
+:::
 
 * Fixed bootstrapping processing cache to reduce duplicated traversals when bootstrapping Avalanche.
 * Optimized P-chain verification during bootstrapping.
@@ -1147,13 +1180,13 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Removed extra linter runs from CI.
 * Added `Height` to the `snowman.Block` interface.
 
-## v1.1.1 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1)\)
+## v1.1.1 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.1))
 
 **Apricot Phase 0 - Patch 1**
 
-{% hint style="danger" %}
+:::danger
 This update is optional but encouraged. The patch includes bug fixes and performance improvements.
-{% endhint %}
+:::
 
 * Fixed a node crash bug when users disabled the `Health` API.
 * Fixed a bug in uptime tracking that could over report a node's uptime.
@@ -1167,24 +1200,24 @@ This update is optional but encouraged. The patch includes bug fixes and perform
 * Improved some of the error messages returned during transaction validation.
 * Reduced GC pressure in the version DB.
 
-## v1.1.0 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0)\)
+## v1.1.0 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.1.0))
 
 **Apricot Phase 0**
 
-{% hint style="danger" %}
-**Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC \(6 p.m. EST\). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
-{% endhint %}
+:::danger
+**Please note that this upgrade is not backwards compatible with previous releases. Upgrades must be performed no later than Monday, December 7th at 11 p.m. UTC (6 p.m. EST). The upgrade, which was originally scheduled around mid December, is now being expedited to fix an important token unlocking bug. We urge everyone in the community to upgrade as soon as possible in order to ensure that their nodes are not affected.**
+:::
 
 There are two primary components to this upgrade:
 
 * General preparations for our upcoming Apricot network upgrade called the Apricot Phase Zero Upgrade
 * Fixing an issue that prevented stake-able locked outputs from being unlocked after their lock \_\*\*\_time had passed
 
-## v1.0.6 \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6)\)
+## v1.0.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.6))
 
-{% hint style="danger" %}
+:::danger
 Please note that this release contains breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). It changes the default response format of platform.getTxStatus and platform.getCurrentValidators. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
-{% endhint %}
+:::
 
 * Removed deprecated formats of  platform.getTxStatus and platform.getCurrentValidators.
 * Added support for hex encodings of imported and exported users from the keystore API.
@@ -1201,11 +1234,11 @@ Please note that this release contains breaking changes described [here](https:/
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network/) for help.
 
-## v1.0.5  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5)\)
+## v1.0.5  ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.5))
 
-{% hint style="danger" %}
+:::danger
 Please note that the release after this one, v1.0.6, will contain the breaking changes described [here](https://docs.avax.network/build/apis/deprecated-api-calls). Namely, the response format of `platform.getTxStatus` and `platform.getCurrentValidators` will change.
-{% endhint %}
+:::
 
 The changes in this release, v1.0.5, are backwards compatible with previous releases. The update is optional but encouraged. The patch includes performance improvements and some quality of life improvements.
 
@@ -1223,11 +1256,11 @@ The changes in this release, v1.0.5, are backwards compatible with previous rele
 
 For assistance with this update, follow our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq), if you are still running into issues you can join our [Discord](https://chat.avax.network) for help.
 
-## v1.0.4  \([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4)\)
+## v1.0.4  ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.0.4))
 
-{% hint style="danger" %}
+:::danger
 This update is optional but encouraged. The patch includes quality of life improvements and various performance enhancements. Note that this update requires the CLI parameters to be specified with -- rather than allowing for either - or --. For example, `-public-ip=127.0.0.1` is no longer allowed and must be specified as `--public-ip=127.0.0.1`. Otherwise, this update is backwards compatible.
-{% endhint %}
+:::
 
 ```text
 • Added subnet whitelisting to allow a node owner to choose which subnets to validate.

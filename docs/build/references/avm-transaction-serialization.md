@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # AVM Transaction Format
 
-This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine \(AVM\). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
+This file is meant to be the single source of truth for how we serialize transactions in the Avalanche Virtual Machine (AVM). This document uses the [primitive serialization](serialization-primitives.md) format for packing and [secp256k1](cryptographic-primitives.md#secp256k1-addresses) for cryptographic user identification.
 
 ## Codec ID
 
-Some data is prepended with a codec ID \(unt16\) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 \(`0x00 0x00`\).
+Some data is prepended with a codec ID (unt16) that denotes how the data should be deserialized. Right now, the only valid codec ID is 0 (`0x00 0x00`).
 
 ## Transferable Output
 
@@ -1925,7 +1925,7 @@ An instance of a GenesisAsset contains an `Alias`, `NetworkID`, `BlockchainID`, 
 
 * **`Alias`** is the alias for this asset.
 * **`NetworkID`** defines which network this transaction is meant to be issued to. This value is meant to support transaction routing and is not designed for replay attack prevention.
-* **`BlockchainID`** is the ID \(32-byte array\) that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
+* **`BlockchainID`** is the ID (32-byte array) that defines which blockchain this transaction was issued to. This is used for replay attack prevention for transactions that could potentially be valid across network or blockchain.
 * **`Outputs`** is an array of [transferable output objects](avm-transaction-serialization.md#transferable-output). Outputs must be sorted lexicographically by their serialized representation. The total quantity of the assets created in these outputs must be less than or equal to the total quantity of each asset consumed in the inputs minus the transaction fee.
 * **`Inputs`** is an array of [transferable input objects](avm-transaction-serialization.md#transferable-input). Inputs must be sorted and unique. Inputs are sorted first lexicographically by their **`TxID`** and then by the **`UTXOIndex`** from low to high. If there are inputs that have the same **`TxID`** and **`UTXOIndex`**, then the transaction is invalid as this would result in a double spend.
 * **`Memo`** is a memo field that contains arbitrary bytes, up to 256 bytes.

@@ -1,6 +1,6 @@
 # Run an Avalanche Node using the Install Script
 
-We have a shell \(bash\) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
+We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
 
 ## Before you start
 
@@ -14,7 +14,7 @@ Avalanche is an incredibly lightweight protocol, so nodes can run on commodity h
 This install script assumes:
 
 * AvalancheGo is not running and not already installed as a service
-* User running the script has superuser privileges \(can run `sudo`\)
+* User running the script has superuser privileges (can run `sudo`)
 
 ### Environment considerations
 
@@ -32,7 +32,7 @@ If your node is already running as a service, then you probably don't need this 
 
 #### Node running in the background
 
-If your node is running in the background \(by running with `nohup`, for example\) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
+If your node is running in the background (by running with `nohup`, for example) then find the process running the node by running `ps aux | grep avalanche`. This will produce output like:
 
 ```text
 ubuntu  6834  0.0  0.0   2828   676 pts/1    S+   19:54   0:00 grep avalanche
@@ -57,7 +57,7 @@ If your node is running on a cloud provider computer instance, it will have a st
 
 If you're running a node on a computer that is on a residential internet connection, you have a dynamic IP; that is, your IP will change periodically. The install script will configure the node appropriately for that situation. But, for a home connection, you will need to set up inbound port forwarding of port `9651` from the internet to the computer the node is installed on.
 
-As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found \(like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) \), and your service provider support might help too.
+As there are too many models and router configurations, we cannot provide instructions on what exactly to do, but there are online guides to be found (like [this](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/), or [this](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) ), and your service provider support might help too.
 
 ## Running the script
 
@@ -106,7 +106,7 @@ enter `1` if you have dynamic IP, and `2` if you have a static IP. If you are on
 Detected '3.15.152.14' as your public IP. Is this correct? [y,n]:
 ```
 
-Confirm with `y`, or `n` if the detected IP is wrong \(or empty\), and then enter the correct IP at the next prompt.
+Confirm with `y`, or `n` if the detected IP is wrong (or empty), and then enter the correct IP at the next prompt.
 
 The script will then continue with system service creation and finish with starting the service.
 
@@ -307,9 +307,9 @@ This will delete the existing service file, and run the installer from scratch, 
 
 That's it, you're running an AvalancheGo node! Congratulations! Let us know you did it on our [Twitter](https://twitter.com/avalancheavax), [Telegram](https://t.me/avalancheavax) or [Reddit](https://t.me/avalancheavax)!
 
-If you're on a residential network \(dynamic IP\), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
+If you're on a residential network (dynamic IP), don't forget to set up port forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
+Now you can [interact with your node](../../avalanchego-apis/issuing-api-calls.md), [stake your tokens](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md), or level up your installation by setting up [node monitoring](setting-up-node-monitoring.md) to get a better insight into what your node is doing. Also, you might want to use our [Postman Collection](../../tools/postman-avalanche-collection.md) to more easily issue commands to your node.
 
 Finally, if you haven't already, it is a good idea to [back up](node-backup-and-restore.md) important files in case you ever need to restore your node to a different machine.
 

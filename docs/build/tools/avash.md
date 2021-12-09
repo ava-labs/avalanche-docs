@@ -311,7 +311,7 @@ The functions available to Lua are:
 
 * `avash_call` - Takes a string and runs it as an Avash command, returning output
 * `avash_sleepmicro` - Takes an unsigned integer representing microseconds and sleeps for that long
-* `avash_setvar` - Takes a variable scope \(string\), a variable name \(string\), and a variable \(string\) and places it in the variable store. The scope must already have been created.
+* `avash_setvar` - Takes a variable scope (string), a variable name (string), and a variable (string) and places it in the variable store. The scope must already have been created.
 
 When writing Lua scripts, the standard Lua functionality is available to automate the execution of series of Avash commands. This allows a developer to automate:
 

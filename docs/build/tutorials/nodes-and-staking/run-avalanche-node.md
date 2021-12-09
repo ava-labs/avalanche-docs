@@ -70,7 +70,7 @@ The binary, named `avalanchego`, is in `avalanchego/build`.
 
 #### **Binary**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want (probably the latest one.)
 
 Under `Assets`, select the appropriate file.
 
@@ -105,7 +105,7 @@ If you are using the pre-built binaries on Linux:
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
+When the node starts, it has to bootstrap (catch up with the rest of the network). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
@@ -130,7 +130,7 @@ You can use `Ctrl + C` to kill the node.
 
 If you want to experiment and play with your node, read on.
 
-To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` (e.g. `./build/avalanchego --http-host=`)
 
 To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
 
@@ -186,7 +186,7 @@ curl -X POST --data '{
 
 If your node isn’t finished bootstrapping, this call will return status `503` with message `API call rejected because chain is not done bootstrapping`.
 
-Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID \(or alias\) is `X` \(i.e., the X-Chain\).
+Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID (or alias) is `X` (i.e., the X-Chain).
 
 The response should look like this:
 

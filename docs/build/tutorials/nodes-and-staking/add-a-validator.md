@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The [Primary Network](https://avalanche.gitbook.io/avalanche/build/tutorials/platform/add-a-validator#introduction) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](https://avalanche.gitbook.io/avalanche/learn/platform-overview). In this tutorial, we’ll add a node to the Primary Network and a [subnet](https://avalanche.gitbook.io/avalanche/learn/platform-overview#subnets) on Avalanche.
+The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network and a [subnet](../../../learn/platform-overview/README.md#subnets) on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 
@@ -14,13 +14,13 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 You've completed [Run an Avalanche Node](run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port \(`9651` by default\) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
+In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
 ## Add a validator with Avalanche Wallet
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+Get your node’s ID by calling [`info.getNodeID`](../../avalanchego-apis/info-api.md#infogetnodeid):
 
 ![getNodeID postman](/img/getNodeID-postman.png)
 
@@ -56,7 +56,7 @@ You should see this success message, and your balance should be updated.
 
 ![Your validation transaction is sent](/img/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) verifies that our transaction was accepted.
+Calling [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) verifies that our transaction was accepted.
 
 ![getPendingValidators postman](/img/getPendingValidators-postman.png)
 
@@ -72,7 +72,7 @@ That’s it!
 
 ## Add a validator with API calls
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addvalidator).
+We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformaddvalidator).
 
 This method’s signature is:
 
@@ -96,7 +96,7 @@ Let’s go through and examine these arguments.
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](https://avalanche.gitbook.io/avalanche/build/apis/info-api#info-getnodeid):
+This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../avalanchego-apis/info-api.md#infogetnodeid):
 
 ```cpp
 curl -X POST --data '{
@@ -121,7 +121,7 @@ The response has your node’s ID:
 
 `startTime` and `endTime`
 
-When one issues a transaction to join the Primary Network they specify the time they will enter \(start validating\) and leave \(stop validating.\) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
+When one issues a transaction to join the Primary Network they specify the time they will enter (start validating) and leave (stop validating.) The minimum duration that one can validate the Primary Network is 24 hours, and the maximum duration is one year. One can re-enter the Primary Network after leaving, it’s just that the maximum _continuous_ duration is one year. `startTime` and `endTime` are the Unix times when your validator will start and stop validating the Primary Network, respectively. `startTime` must be in the future relative to the time the transaction is issued.
 
 `stakeAmount`
 
@@ -145,7 +145,7 @@ Avalanche allows for delegation of stake. This parameter is the percent fee this
 
 These parameters are the username and password of the user that pays the transaction fee, provides the staked AVAX, and to whom the staked AVAX will be returned.
 
-Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\) In this example we stake 2,000 AVAX \(2 x 1012 nAVAX\).
+Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.) In this example we stake 2,000 AVAX (2 x 1012 nAVAX).
 
 ```cpp
 curl -X POST --data '{
@@ -179,7 +179,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -192,7 +192,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
 ```cpp
 curl -X POST --data '{

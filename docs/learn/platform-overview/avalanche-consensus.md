@@ -25,9 +25,9 @@ The intuition above outlines the Snowball Algorithm, which is a building block o
 ### Parameters
 
 * _n_: number of participants
-* _k_ \(sample size\): between 1 and _n_
-* α \(quorum size\): between 1 and _k_
-* β \(decision threshold\): &gt;= 1
+* _k_ (sample size): between 1 and _n_
+* α (quorum size): between 1 and _k_
+* β (decision threshold): &gt;= 1
 
 ### Algorithm
 
@@ -50,7 +50,7 @@ while not decided:
 
 ### Algorithm Explained
 
-Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query _k_ people \(the sample size\) and ask them what they prefer. If α or more people give the same response, that response is adopted as the new preference. α is called the _quorum size_. If the new preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If the new preference is different then the old preference, the `consecutiveSucccesses` counter to `1`. If no response gets a quorum \(an α majority of the same response\) then the `consecutiveSuccesses` counter is set to `0`.
+Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query _k_ people (the sample size) and ask them what they prefer. If α or more people give the same response, that response is adopted as the new preference. α is called the _quorum size_. If the new preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If the new preference is different then the old preference, the `consecutiveSuccesses` counter to `1`. If no response gets a quorum (an α majority of the same response) then the `consecutiveSuccesses` counter is set to `0`.
 
 Everyone repeats this until they get a quorum for the same response β times in a row. If one person decides pizza, then every other person following the protocol will eventually also decide on pizza.
 
@@ -62,13 +62,13 @@ For a great visualization, check out [this demo](https://tedyin.com/archive/snow
 
 In our example, there is a binary choice between pizza or barbecue, but Snowball can be adapted to achieve consensus on decisions with many possible choices.
 
-The liveness and safety thresholds are parameterizable. As the quorum size, α, increases, the safety threshold increases, and the liveness threshold decreases. This means the network can tolerate more byzantine \(deliberately incorrect, malicious\) nodes and remain safe, meaning all nodes will eventually agree whether something is accepted or rejected. The liveness threshold is the number of malicious participants that can be tolerated before the protocol is unable to make progress.
+The liveness and safety thresholds are parameterizable. As the quorum size, α, increases, the safety threshold increases, and the liveness threshold decreases. This means the network can tolerate more byzantine (deliberately incorrect, malicious) nodes and remain safe, meaning all nodes will eventually agree whether something is accepted or rejected. The liveness threshold is the number of malicious participants that can be tolerated before the protocol is unable to make progress.
 
-These values, which are constants, are quite small on the Avalanche Network. The sample size, _k_, is `20`. So when a node asks a group of nodes their opinion, it only queries `20` nodes out of the whole network. The quorum size, α, is `14`. So if `14` or more nodes give the same response, that response is adopted as the querying node's preference. The decision threshold, β, is `20`. A node decides on choice after receiving `20` consecutive quorum \(α majority\) responses.
+These values, which are constants, are quite small on the Avalanche Network. The sample size, _k_, is `20`. So when a node asks a group of nodes their opinion, it only queries `20` nodes out of the whole network. The quorum size, α, is `14`. So if `14` or more nodes give the same response, that response is adopted as the querying node's preference. The decision threshold, β, is `20`. A node decides on choice after receiving `20` consecutive quorum (α majority) responses.
 
 Snowball is very scalable as the number of nodes on the network, _n_, increases. Regardless of the number of participants in the network, the number of consensus messages sent remains the same because in a given query, a node only queries `20` nodes, even if there are thousands of nodes in the network.
 
-## DAGs \(**D**irected **A**cyclic **G**raphs\)
+## DAGs (**D**irected **A**cyclic **G**raphs)
 
 Now let's introduce a data structure called a DAG or Directed Acyclic Graph. A DAG gives a **partial ordering** of decisions. For example, check out the DAG in this diagram:
 
@@ -80,7 +80,7 @@ Two additional DAG related concepts are **ancestors** and **descendants**. Ances
 
 Both Bitcoin and Ethereum, for example, have a linear chain where every block has one parent and one child. Avalanche uses a DAG to store data rather than a linear chain. Each element of the DAG may have multiple parents. The parent-child relationship in the DAG does not imply an application-level dependency.
 
-In a consensus protocol, the name of the game is to prevent the inclusion of **conflicting transactions** into the DAG. Conflicts are application-defined. Different applications will have different notions about what it means for two transactions to conflict. For example, in a P2P payment system, transactions that consume the same UTXO \([Unspent Transaction Output](https://en.wikipedia.org/wiki/Unspent_transaction_output)\) would conflict. In Avalanche every transaction belongs to a **conflict set** which consists of conflicting transactions. Only one transaction in a conflict set can be included in the DAG. Each node **prefers** one transaction in a conflict set.
+In a consensus protocol, the name of the game is to prevent the inclusion of **conflicting transactions** into the DAG. Conflicts are application-defined. Different applications will have different notions about what it means for two transactions to conflict. For example, in a P2P payment system, transactions that consume the same UTXO ([Unspent Transaction Output](https://en.wikipedia.org/wiki/Unspent_transaction_output)) would conflict. In Avalanche every transaction belongs to a **conflict set** which consists of conflicting transactions. Only one transaction in a conflict set can be included in the DAG. Each node **prefers** one transaction in a conflict set.
 
 ## Working Example
 
@@ -88,7 +88,7 @@ Suppose we have an Avalanche network running with the following parameters. The 
 
 ![Working example 1](/img/cons-02-Consensus_Doc_txY.png)
 
-A node finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_ \(`4`\) validators and asks, "Do you prefer this transaction?" It gets back responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there is an α majority \(quorum\) of yes responses. Now the node updates its DAG.
+A node finds out about a new transaction **Y**. It queries the network based on the above parameters. It queries _k_ (`4`) validators and asks, "Do you prefer this transaction?" It gets back responses—three of them say **yes** and one of them says **no**. The quorum size, α, is `3` so there is an α majority (quorum) of yes responses. Now the node updates its DAG.
 
 ![Working example 2](/img/cons-03-Consensus_Doc_txY-6.png)
 
@@ -104,7 +104,7 @@ In this example we the acceptance threshold, β, is `4`. Transaction **V** has `
 
 ![Working example 4](/img/cons-05-Consensus_Doc_txY-3.png)
 
-Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It follows the same steps as before and subsamples _k_ \(`4`\) validators and asks if they prefer transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated accordingly.
+Now suppose the node learns about transaction **Y'** which conflicts with transaction **Y**. It follows the same steps as before and subsamples _k_ (`4`) validators and asks if they prefer transaction **Y'**. In this case, two of them say that they prefer **Y'** and two of them say that they do not prefer **Y'**. This time there is no α majority response, and the DAG is updated accordingly.
 
 ![Working example 5](/img/cons-06-Consensus_Doc_txY-4.png)
 
@@ -122,13 +122,13 @@ Transaction **Z** gets a chit. It also has a confidence of `1` and `1` consecuti
 
 ## Vertices
 
-Everything discussed to this point is how Avalanche is described in [the Avalanche whitepaper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). The implementation of the Avalanche consensus protocol by Ava Labs \(namely in AvalancheGo\) has some optimizations for latency and throughput. The most important optimization is the use of **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very similar to how it's described above.
+Everything discussed to this point is how Avalanche is described in [the Avalanche whitepaper](https://assets-global.website-files.com/5d80307810123f5ffbb34d6e/6009805681b416f34dcae012_Avalanche%20Consensus%20Whitepaper.pdf). The implementation of the Avalanche consensus protocol by Ava Labs (namely in AvalancheGo) has some optimizations for latency and throughput. The most important optimization is the use of **vertices**. A vertex is like a block in a linear blockchain. It contains the hashes of its parents, and it contains a list of transactions. Vertices allow transactions to be batched and voted on in groups rather than one by one. The DAG is composed of vertices, and the protocol works very similar to how it's described above.
 
 If a node receives a vote for a vertex, it counts as a vote for all the transactions in a vertex, and votes are applied transitively upward. A vertex is accepted when all the transactions which are in it are accepted. If a vertex contains a rejected transaction then it is rejected and all of its descendants are rejected. If a vertex is rejected, any valid transactions are re-issued into a new vertex which is not the child of a rejected vertex. New vertices are appended to preferred vertices.
 
 ## Finality
 
-Avalanche consensus is probabilistically safe up to a safety threshold. That is, the probability that a correct node accepts a transaction that another correct node rejects can be made arbitrarily low by adjusting system parameters. In Nakamoto consensus protocol \(as used in Bitcoin and Ethereum, for example\), a block may be included in the chain but then be removed and not end up in the canonical chain. This means waiting an hour for transaction settlement. In Avalanche, acceptance/rejection are **final and irreversible** and take a few seconds.
+Avalanche consensus is probabilistically safe up to a safety threshold. That is, the probability that a correct node accepts a transaction that another correct node rejects can be made arbitrarily low by adjusting system parameters. In Nakamoto consensus protocol (as used in Bitcoin and Ethereum, for example), a block may be included in the chain but then be removed and not end up in the canonical chain. This means waiting an hour for transaction settlement. In Avalanche, acceptance/rejection are **final and irreversible** and take a few seconds.
 
 ## Optimizations
 
@@ -142,7 +142,7 @@ Nodes don't need to wait until they get all _k_ query responses before registeri
 
 If it were free to become a validator on the Avalanche network, that would be problematic because a malicious actor could start many, many nodes which would get queried very frequently. The malicious actor could make the node act badly and cause a safety or liveness failure. The validators, the nodes which are queried as part of consensus, have influence over the network. They have to pay for that influence with real-world value in order to prevent this kind of ballot stuffing. This idea of using real-world value to buy influence over the network is called Proof of Stake.
 
-To become a validator, a node must **bond** \(stake\) something valuable \(**AVAX**\). The more AVAX a node bonds, the more often that node is queried by other nodes. When a node samples the network it's not uniformly random. Rather, it's weighted by stake amount. Nodes are incentivized to be validators because they get a reward if, while they validate, they're sufficiently correct and responsive.
+To become a validator, a node must **bond** (stake) something valuable (**AVAX**). The more AVAX a node bonds, the more often that node is queried by other nodes. When a node samples the network it's not uniformly random. Rather, it's weighted by stake amount. Nodes are incentivized to be validators because they get a reward if, while they validate, they're sufficiently correct and responsive.
 
 Avalanche doesn't have slashing. If a node doesn't behave well while validating, such as giving incorrect responses or perhaps not responding at all, its stake is still returned in whole, but with no reward. As long as a sufficient portion of the bonded AVAX is held by correct nodes, then the network is safe, and is live for virtuous transactions.
 

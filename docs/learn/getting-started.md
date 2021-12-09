@@ -30,25 +30,25 @@ Avalanche's Primary Network consists of three different chains, as explained in 
 
 ## Metamask
 
-Most of the activity on the Avalanche network happens on various dapps \(decentralized apps\). To interact with them, you can use a browser extension that will connect your wallet with the dapp. [Metamask](http://metamask.io/) is one such popular wallet extension.
+Most of the activity on the Avalanche network happens on various dapps (decentralized apps). To interact with them, you can use a browser extension that will connect your wallet with the dapp. [Metamask](http://metamask.io/) is one such popular wallet extension.
 
 By default, Metamask connects to Ethereum. To connect to Avalanche, you need to [add Avalanche as a custom network](https://support.avax.network/en/articles/4626956-how-do-i-set-up-metamask-on-avalanche).
 
-In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or by exporting the C-Chain private key from the wallet \(Select `Manage Keys`, then `View C Chain Private Key`\). If you use the Ledger hardware wallet, you can use it in Metamask too. It will connect to your wallet and have the same balances/addresses as if you accessed your wallet on the wallet website.
+In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or by exporting the C-Chain private key from the wallet (Select `Manage Keys`, then `View C Chain Private Key`). If you use the Ledger hardware wallet, you can use it in Metamask too. It will connect to your wallet and have the same balances/addresses as if you accessed your wallet on the wallet website.
 
-To see your funds in Metamask \(if you imported Avalanche Wallet\), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. If you transferred the funds from an exchange they will usually be on the X-Chain, so you will need to a cross-chain transfer, as explained in the previous section.
+To see your funds in Metamask (if you imported Avalanche Wallet), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. If you transferred the funds from an exchange they will usually be on the X-Chain, so you will need to a cross-chain transfer, as explained in the previous section.
 
 ## Transactions
 
-You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to an incorrect address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that you mean to send to an address on Avalanche and not a different network \(see next section.\)
+You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to an incorrect address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that you mean to send to an address on Avalanche and not a different network (see next section.)
 
 ### Sending to Other Networks
 
-Other networks may have address formats that are identical to the ones on Avalanche. But **that doesn't mean that you can send funds on Avalanche directly to other blockchain networks**, including, for example, Ethereum or BSC \(Binance Smart Chain\). If you tell Avalanche to send funds to address \(`0x12345`\), for example, it will do so **on Avalanche**, not another network, even if that address exists or is valid on another network. Your funds will not end up on the other network. Once the funds are sent, only the person who has the private keys that control the destination address can ever access them. If _you_ control the destination address, you can probably be able to retrieve them by importing the private key that controls the address to Metamask. If you sent them to someone else's address, though, you will need their cooperation, which may be difficult.
+Other networks may have address formats that are identical to the ones on Avalanche. But **that doesn't mean that you can send funds on Avalanche directly to other blockchain networks**, including, for example, Ethereum or BSC (Binance Smart Chain). If you tell Avalanche to send funds to address (`0x12345`), for example, it will do so **on Avalanche**, not another network, even if that address exists or is valid on another network. Your funds will not end up on the other network. Once the funds are sent, only the person who has the private keys that control the destination address can ever access them. If _you_ control the destination address, you can probably be able to retrieve them by importing the private key that controls the address to Metamask. If you sent them to someone else's address, though, you will need their cooperation, which may be difficult.
 
 The above applies in the reverse direction, too. You cannot send funds to an Avalanche address directly from Ethereum, BSC, etc. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](getting-started.md#avalanche-bridge) section below.
 
-If you're unsure of what you're attempting to do, or doing something for the first time, it's best to send a small amount \('dust'\) first, to check that it arrives at the intended destination.
+If you're unsure of what you're attempting to do, or doing something for the first time, it's best to send a small amount ('dust') first, to check that it arrives at the intended destination.
 
 ### Adding Tokens
 
@@ -60,7 +60,7 @@ When you add the address, the rest of the data will autofill, and your balance s
 
 ### Avalanche Bridge
 
-Once you have your browser extension \(Metamask for example\) set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do, such as _yield farming_, requires that you have tokens other than AVAX. If you have those tokens on Ethereum \(or an exchange that can send them to Ethereum\), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
+Once you have your browser extension (Metamask for example) set up, you are ready to interact with dapps on Avalanche. Most of what you will want to do, such as _yield farming_, requires that you have tokens other than AVAX. If you have those tokens on Ethereum (or an exchange that can send them to Ethereum), one of the cheapest and fastest ways of bringing them over is the [Avalanche Bridge](https://bridge.avax.network/).
 
 You can find a collection of video tutorials on the basic usage of the Avalanche Bridge [here](https://www.youtube.com/playlist?list=PLRHl-ulWK4-FPRA7SS1OrCOC8cOc2K8sP). Also, make sure that you go over the [FAQ](https://docs.avax.network/learn/avalanche-bridge-faq) which answers most common questions about the bridge and highlights things to watch out for.
 
@@ -68,7 +68,7 @@ When you bridge over $75 or more of assets, you will also be airdropped some AVA
 
 ### Ecosystem
 
-There is an ever-growing collection of dapps deployed on Avalanche. To find them, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects. \(You should not consider the presence of a project on the lists above as an endorsement of the project.\)
+There is an ever-growing collection of dapps deployed on Avalanche. To find them, you can go to our official [ecosystem website](https://ecosystem.avax.network/marketplace). You can filter the projects by selecting the tags for the areas of your interest. There is also a [community-driven](https://www.avax-projects.com/) list of projects. (You should not consider the presence of a project on the lists above as an endorsement of the project.)
 
 Dip in, browse, and try stuff. There are many gems in there.
 
@@ -82,7 +82,7 @@ It's crucial to understand that **your secret passphrase is your wallet**. Whoev
 
 The only place where you can enter the passphrase is into the [official Avalanche Wallet](https://wallet.avax.network) website, and even then, make sure you're on a secure network and that the website is the right one by typing the address `https://wallet.avax.network` address yourself. Check the padlock icon in your browser to make sure your connection is secure. If you're in doubt as to whether to enter your passphrase, don't.
 
-If you're working with non-trivial amounts of tokens \(in other words, money you can't comfortably lose\), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access your funds.
+If you're working with non-trivial amounts of tokens (in other words, money you can't comfortably lose), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access your funds.
 
 ### DYOR
 
@@ -119,7 +119,7 @@ We offer several ways of getting support. Here are some:
 * [Support site](https://support.avax.network/en/)
 * [Twitter tech support](https://twitter.com/avaxtechsupport).
 * [Telegram](https://t.me/avalancheavax)
-* [Discord server](http://chat.avax.network/) \(most popular and highest traffic.\)
+* [Discord server](http://chat.avax.network/) (most popular and highest traffic.)
 
 Expanding on the [DYOR](getting-started.md#dyor) section above: When using any public support channel, be suspicious of anyone contacting you in private via DMs, email or similar. They may pose as admins, moderators or team members. **Legitimate accounts will never contact you in DMs first!** Real admins and team members will always engage publicly first, and if needed request that you _contact them_ in direct message.
 

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine \(AVM\)](../../../learn/platform-overview/README.md#exchange-chain-x-chain). In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine (AVM)](../../../learn/platform-overview/README.md#exchange-chain-x-chain). In this tutorial, we’ll create a blockchain by creating a new instance of the AVM.
 
-If you're interested in building custom blockchains, see [Create a Virtual Machine \(VM\)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
+If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
@@ -87,7 +87,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` \(named `myFixedCapAsset`.\) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../learn/platform-overview/transaction-fees.md#transaction-fees)
+To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../learn/platform-overview/transaction-fees.md#transaction-fees)
 
 Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`:
 
@@ -197,7 +197,7 @@ The response contains the transaction ID:
 
 ### Verify Success {#verify-success}
 
-After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
+After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
 To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
 
@@ -272,7 +272,7 @@ curl -X POST --data '{
 }
 ```
 
-If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` \(e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`\) as well as add the node to the subnet's validator set.
+If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
 
 More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
@@ -428,7 +428,7 @@ curl -X POST --data '{
 }
 ```
 
-As mentioned above, transaction fees are paid with `asset1`. We can confirm 1,000,000 unit \(default\) is used as fee in our transaction. Let's check senders balance after the transaction.
+As mentioned above, transaction fees are paid with `asset1`. We can confirm 1,000,000 unit (default) is used as fee in our transaction. Let's check senders balance after the transaction.
 
 ```cpp
 curl -X POST --data '{

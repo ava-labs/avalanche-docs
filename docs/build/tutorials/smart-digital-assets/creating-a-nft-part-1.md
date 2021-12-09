@@ -4,7 +4,7 @@
 
 On Avalanche, digital goods are represented as tokens. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
 
-Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is unique and not perfectly interchangeable for any other NFT. For example, there could be an NFT that represents ownership of a real-world piece of art; each piece of art, like each NFT, is unique. NFTs represent digital scarcity and may prove to have even greater utility than traditional fungible tokens.
+Avalanche also supports non-fungible tokens (NFTs). By definition, each NFT is unique and not perfectly interchangeable for any other NFT. For example, there could be an NFT that represents ownership of a real-world piece of art; each piece of art, like each NFT, is unique. NFTs represent digital scarcity and may prove to have even greater utility than traditional fungible tokens.
 
 In this tutorial, we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial, we’ll create a custom NFT family using [AvalancheJS](../../tools/avalanchejs/README.md) and explore NFTs in more detail.
 
@@ -101,7 +101,7 @@ You may be wondering why we specify _sets_ of addresses that can mint more units
 
 ## Get UTXOs for NFT
 
-NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance) or [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal \(`10` in decimal\) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal \(`11` in decimal\).
+NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance) or [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal (`10` in decimal) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal (`11` in decimal).
 
 ### **Method**
 
@@ -190,7 +190,7 @@ Now that we have an NFT family and a group for the single `MinterSet` we’re ab
 ### **Parameters**
 
 * `assetID` is the ID of the NFT family.
-* `payload` is an arbitrary CB58 encoded payload of up to 1024 bytes. In Part 2 \(**COMING SOON**\) we’ll explore creating a protocol around the NFT payload. For this tutorial, the payload is the string "AVA Labs".
+* `payload` is an arbitrary CB58 encoded payload of up to 1024 bytes. In Part 2 (**COMING SOON**) we’ll explore creating a protocol around the NFT payload. For this tutorial, the payload is the string "AVA Labs".
 * `to` is the address that will receive the newly minted NFT. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted NFT.
 * `username` must be a user that holds keys giving it permission to mint more of this NFT. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
 * `password` is the valid password for `username`

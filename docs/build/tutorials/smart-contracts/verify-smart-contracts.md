@@ -8,17 +8,20 @@ If you have issues, contact us on [Discord](https://chat.avalabs.org).
 
 ## Steps
 
-Navigate to the _Code_ tab at the Explorer page for your contract's address.
+Navigate to the _Contract_ tab at the Explorer page for your contract's address.
 
-![Verify &amp; Publish](/img/smart-contract-verify-page.png)
+![contract_tab](/img/verify-and-publish1.png)
+
 
 Click _Verify & Publish_ to enter the smart contract verification page.
 
-![Contract Entry](/img/smart-contract-input-page.png)
+![SRC](/img/verify-src.png)
+
 
 [Libraries](https://docs.soliditylang.org/en/v0.8.4/contracts.html?highlight=libraries#libraries) can be provided. If they are, they must be deployed, independently verified and in the _Add Contract Libraries_ section.
 
-![Libraries](/img/smart-contract-library.png)
+![libraries](/img/verify-libraries.png)
+
 
 The C-Chain Explorer can fetch constructor arguments automatically for simple smart contracts. More complicated contracts might require you to pass in special constructor arguments. Smart contracts with complicated constructors [may have validation issues](verify-smart-contracts.md#caveats). You can try this [online abi encoder](https://abi.hashex.org/).
 
@@ -28,7 +31,7 @@ The C-Chain Explorer can fetch constructor arguments automatically for simple sm
 * Contracts must be flattened.
   * Includes will not work.  
 * Contracts should be compile-able in [Remix](https://remix.ethereum.org).
-  * A flattened contract with `pragma experimental ABIEncoderV2` \(as an example\) can create unusual binary and/or constructor blobs.  This might cause validation issues.
+  * A flattened contract with `pragma experimental ABIEncoderV2` (as an example) can create unusual binary and/or constructor blobs.  This might cause validation issues.
 * The C-Chain Explorer **only** validates [solc javascript](https://github.com/ethereum/solc-bin) and only supports [Solidity](https://docs.soliditylang.org) contracts.
 
 ## Libraries
@@ -55,7 +58,7 @@ The compile bytecode will identify if there are are external libraries. If you r
 
 This requires you to add external libraries in order to veriy the code.
 
-A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies \(i.e. you might need to prune the Solidity code to exclude anything but the necessary classes\).
+A library can have dependent libraries. To verify a library, the hierarchy of dependencies will need to be provided to the C-Chain Explorer. Verification may fail if you provide more than the library plus any dependencies (i.e. you might need to prune the Solidity code to exclude anything but the necessary classes).
 
 You can also see references in the byte code in the form `__$75f20d36....$__`. The keccak256 hash is generated from the library name.
 
@@ -85,7 +88,7 @@ An SPDX must be provided.
 
 ### keccak256 Strings Processed
 
-The C-Chain Explorer interprets all keccak256\(...\) strings, even those in comments. This can cause issues with constructor args.
+The C-Chain Explorer interprets all keccak256(...) strings, even those in comments. This can cause issues with constructor args.
 
 ```javascript
 /// keccak256("1");

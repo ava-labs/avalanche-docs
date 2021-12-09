@@ -4,7 +4,7 @@
 
 A [subnet](../../../learn/platform-overview/README.md#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
 
-When a subnet is created, a threshold and a set of keys are specified. \(Actually the addresses of the keys, not the keys themselves, are specified.\) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
+When a subnet is created, a threshold and a set of keys are specified. (Actually the addresses of the keys, not the keys themselves, are specified.) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
 
 In this tutorial, we’ll create a new subnet with 2 control keys and a threshold of 2.
 
@@ -28,7 +28,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-This gives the first control key \(again, it actually gives the _address_ of the first control key\). The key is held by the user we just specified.
+This gives the first control key (again, it actually gives the _address_ of the first control key). The key is held by the user we just specified.
 
 ```cpp
 {
@@ -142,7 +142,7 @@ Now let’s add a validator to a subnet. Right now you can only add validators t
 
 Suppose that the Subnet has ID `3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`, threshold 2, and that `username` holds at least 2 control keys.
 
-To add the validator, we’ll call API method [`platform.addSubnetValidator`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-addsubnetvalidator). Its signature is:
+To add the validator, we’ll call API method [`platform.addSubnetValidator`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformaddsubnetvalidator). Its signature is:
 
 ```cpp
 platform.addSubnetValidator(
@@ -175,7 +175,7 @@ Similar to above, these are the Unix times that the validator will start and sto
 
 `weight`
 
-This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` \(default 20\). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
+This is the validator’s sampling weight for consensus. If the validator’s weight is 1 and the cumulative weight of all validators in the subnet is 100, then this validator will be included in about 1 in every 100 samples during consensus. The cumulative weight of all validators in the subnet must be at least `snow-sample-size`. For example, if there is only one validator in the subnet, its weight must be at least `snow-sample-size` (default 20). Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
 
 `changeAddr`
 
@@ -185,7 +185,7 @@ Any change resulting from this transaction will be sent to this address. You can
 
 These parameters are the username and password of the user that pays the transaction fee. This user must hold a sufficient number of this Subnet’s control keys in order to add a validator to this Subnet.
 
-We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.)
 
 Example:
 
@@ -220,7 +220,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-gettxstatus):
+We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -233,7 +233,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](https://avalanche.gitbook.io/avalanche/build/apis/platform-chain-p-chain-api#platform-getpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
+The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
 
 ```cpp
 curl -X POST --data '{

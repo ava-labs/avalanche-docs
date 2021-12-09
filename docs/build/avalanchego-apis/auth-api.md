@@ -7,7 +7,7 @@ When you run a node, you can require that API calls have an authorization token 
 
 An authorization token provides access to one or more API endpoints. This is is useful for delegating access to a node’s APIs. Tokens expire after 12 hours.
 
-An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` \(where `TOKEN.GOES.HERE` is replaced with the token\).
+An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` (where `TOKEN.GOES.HERE` is replaced with the token).
 
 This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
@@ -60,7 +60,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` \(ie the X-Chain\) and `/ext/info` \(ie the [info API](info-api.md).\)
+This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` (ie the X-Chain) and `/ext/info` (ie the [info API](info-api.md).)
 
 #### **Example Response**
 

@@ -4,7 +4,7 @@
 
 Avalanche is an open-source platform for launching decentralized applications and enterprise blockchain deployments in one interoperable, highly scalable ecosystem. Avalanche gives you complete control on both the network and application layers—helping you build anything you can imagine.
 
-The Avalanche Network is composed of many blockchains. One of these blockchains is the C-Chain \(Contract Chain\), which is an Ethereum Virtual Machine instance. The C-Chain's API is almost identical to an Ethereum node's API. Avalanche offers the same interface as Ethereum but with higher speed, higher throughput, lower fees and lower transaction confirmation times. These properties considerably improve the performance of DApps and the user experience of smart contracts.
+The Avalanche Network is composed of many blockchains. One of these blockchains is the C-Chain (Contract Chain), which is an Ethereum Virtual Machine instance. The C-Chain's API is almost identical to an Ethereum node's API. Avalanche offers the same interface as Ethereum but with higher speed, higher throughput, lower fees and lower transaction confirmation times. These properties considerably improve the performance of DApps and the user experience of smart contracts.
 
 The goal of this guide is to lay out best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain. We'll be building smart contracts with development environment [Hardhat](https://hardhat.org).
 
@@ -12,7 +12,7 @@ The goal of this guide is to lay out best practices regarding writing, testing a
 
 ### NodeJS and Yarn
 
-First, install the LTS \(long-term support\) version of [nodejs](https://nodejs.org/en). This is `14.17.0` at the time of writing. NodeJS bundles `npm`.
+First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `14.17.0` at the time of writing. NodeJS bundles `npm`.
 
 Next, install [yarn](https://yarnpkg.com):
 
@@ -118,7 +118,7 @@ $ git checkout master
 $ ./scripts/build.sh
 ```
 
-\(Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.\)
+(Note that you can also [download pre-compiled AvalancheGo binaries](https://github.com/ava-labs/avalanchego/releases) rather than building from source.)
 
 Start Avash and run a script to start a new local network.
 
@@ -234,7 +234,7 @@ Edit the deployment script in `scripts/deploy.ts`
 "deploy": "npx hardhat run scripts/deploy.ts",
 ```
 
-You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` \(e.g. a local network created with Avash\), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
+You can choose which environment that you want to deploy to by passing in the `--network` flag with `local` (e.g. a local network created with Avash), `fuji`, or `mainnet` for each respective environment. If you don't pass in `--network` then it will default to the hardhat network. For example, if you want to deploy to mainnet:
 
 ```text
 yarn deploy --network mainnet

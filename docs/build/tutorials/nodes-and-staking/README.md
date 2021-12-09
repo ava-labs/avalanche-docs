@@ -4,7 +4,7 @@
 | :--- | :--- |
 | [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](https://docs.avax.network/learn/platform-overview) and a [subnet](https://docs.avax.network/learn/platform-overview#subnets) on Avalanche. |
 | [**How to Run Avalanche at Home: Oracle VM VirtualBox**](https://www.youtube.com/watch?v=7Tx1iKg-jL0) | Create a node that runs using Oracle VM VirtualBox container software. |
-| [**Set Up an Avalanche Node with Amazon Web Services \(AWS\)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Create a node that runs on AWS. |
+| [**Set Up an Avalanche Node with Amazon Web Services (AWS)**](https://docs.avax.network/build/tutorials/nodes-and-staking/setting-up-an-avalanche-node-with-amazon-web-services-aws)**​** | Create a node that runs on AWS. |
 | [**Set Up an Avalanche Node with Microsoft Azure**](https://docs.avax.network/build/tutorials/platform/set-up-an-avalanche-node-with-microsoft-azure)**​** | Create a node that runs on Microsoft Azure. |
 | [**Run a Five Node Network with Avash**](run-a-five-node-network-with-avash.md) | Run a Five Node Network with Avash. |
 | [**Set up Node on Linux using install script**](set-up-node-with-installer.md) | Create a node on Linux the easy way. |

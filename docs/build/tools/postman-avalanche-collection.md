@@ -1,4 +1,4 @@
-# Postman collection
+# Postman Collection
 
 ## What is Postman?
 
@@ -12,7 +12,7 @@ Combined, they will allow you to easily keep tabs on your node, check on its sta
 
 ## Setup
 
-### Postman installation
+### Postman Installation
 
 Postman can be installed locally or used as a web app. We recommend installing the application, as it simplifies operation. You can download Postman from its [website](https://www.postman.com/downloads/). It is recommended that you sign up using your email address as then your workspace can be easily backed up and shared between web app and the app installed on your computer.
 
@@ -20,7 +20,7 @@ Postman can be installed locally or used as a web app. We recommend installing t
 
 After you installed the application, run it. It will prompt you to create an account or log in. Do so. Again, it is not necessary, but recommended.
 
-### Collection import
+### Collection Import
 
 Select `New workspace` from Workspaces tab and follow the prompts to crate a new workspace. This will where the rest of the work will be done.
 
@@ -40,7 +40,7 @@ Postman will recognize the format of the file content and offer to import the fi
 
 ![Collection content](/img/postman_04_collection.png)
 
-### Environment import
+### Environment Import
 
 Next, we have to import the environment variables. Again, the header of the Worskspaces tab select `New` and switch to `Link` tab. this time, paste the link to the environment JSON:
 
@@ -58,11 +58,11 @@ Click the eye icon next to the environment dropdown:
 
 ![Environment content](/img/postman_06_variables.png)
 
-Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node \(change both the `initial` and `current` values\). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/command-line-interface.md#http-server).
+Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node (change both the `initial` and `current` values). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/command-line-interface.md#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 
-## Making API calls
+## Making API Calls
 
 Open one of the API call groups, for example `Health`. Double-click `health` call:
 
