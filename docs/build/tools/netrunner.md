@@ -55,7 +55,7 @@ For example, the below snippet creates a new network using default configuration
 network, err := local.NewDefaultNetwork(log,"/home/user/go/src/github.com/ava-labs/avalanchego/build")
 ```
 
-**Once you create a network, you must eventually call `Stop()` on it to make sure all of the nodes in the network stop.** Calling this method kills all of the Avalanche nodes that compose the network. You probably want to call this method in a `defer` statement to make sure it runs.
+**Once you create a network, you must eventually call `Stop()` on it to make sure all of the nodes in the network stop. **Calling this method kills all of the Avalanche nodes in the network. You probably want to call this method in a `defer` statement to make sure it runs.
 
 To wait until the network is ready to use, use the network's `Healthy` method. It returns a channel which will be notified when all nodes are healthy.
 
