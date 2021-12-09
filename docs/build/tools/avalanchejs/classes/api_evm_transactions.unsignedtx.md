@@ -47,7 +47,7 @@
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[constructor](common_transactions.evmstandardunsignedtx.md#constructor)*
 
-*Defined in [src/common/evmtx.ts:265](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L265)*
+*Defined in [src/common/evmtx.ts:265](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L265)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ Name | Type | Default |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[_typeID](common_transactions.evmstandardunsignedtx.md#protected-_typeid)*
 
-*Defined in [src/apis/evm/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L48)*
+*Defined in [src/apis/evm/tx.ts:48](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L48)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[_typeName](common_transactions.evmstandardunsignedtx.md#protected-_typename)*
 
-*Defined in [src/apis/evm/tx.ts:47](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L47)*
+*Defined in [src/apis/evm/tx.ts:47](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L47)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[codecID](common_transactions.evmstandardunsignedtx.md#protected-codecid)*
 
-*Defined in [src/common/evmtx.ts:168](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L168)*
+*Defined in [src/common/evmtx.ts:168](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L168)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[transaction](common_transactions.evmstandardunsignedtx.md#protected-transaction)*
 
-*Defined in [src/common/evmtx.ts:169](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L169)*
+*Defined in [src/common/evmtx.ts:169](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L169)*
 
 ## Methods
 
@@ -116,7 +116,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[deserialize](common_transactions.evmstandardunsignedtx.md#deserialize)*
 
-*Defined in [src/apis/evm/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L52)*
+*Defined in [src/apis/evm/tx.ts:52](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L52)*
 
 **Parameters:**
 
@@ -135,7 +135,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[fromBuffer](common_transactions.evmstandardunsignedtx.md#abstract-frombuffer)*
 
-*Defined in [src/apis/evm/tx.ts:62](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L62)*
+*Defined in [src/apis/evm/tx.ts:62](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L62)*
 
 **Parameters:**
 
@@ -154,7 +154,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[getBurn](common_transactions.evmstandardunsignedtx.md#getburn)*
 
-*Defined in [src/common/evmtx.ts:230](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L230)*
+*Defined in [src/common/evmtx.ts:230](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L230)*
 
 Returns the number of burned tokens as a BN
 
@@ -176,7 +176,7 @@ ___
 
 *Overrides [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/common/evmtx.ts:174](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L174)*
+*Defined in [src/common/evmtx.ts:174](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L174)*
 
 Returns the CodecID as a number
 
@@ -190,7 +190,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[getCodecIDBuffer](common_transactions.evmstandardunsignedtx.md#getcodecidbuffer)*
 
-*Defined in [src/common/evmtx.ts:179](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L179)*
+*Defined in [src/common/evmtx.ts:179](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L179)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the CodecID
 
@@ -204,7 +204,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[getInputTotal](common_transactions.evmstandardunsignedtx.md#getinputtotal)*
 
-*Defined in [src/common/evmtx.ts:188](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L188)*
+*Defined in [src/common/evmtx.ts:188](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L188)*
 
 Returns the inputTotal as a BN
 
@@ -224,7 +224,7 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[getOutputTotal](common_transactions.evmstandardunsignedtx.md#getoutputtotal)*
 
-*Defined in [src/common/evmtx.ts:208](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L208)*
+*Defined in [src/common/evmtx.ts:208](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L208)*
 
 Returns the outputTotal as a BN
 
@@ -244,7 +244,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[getTransaction](common_transactions.evmstandardunsignedtx.md#abstract-gettransaction)*
 
-*Defined in [src/apis/evm/tx.ts:58](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L58)*
+*Defined in [src/apis/evm/tx.ts:58](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L58)*
 
 **Returns:** *[EVMBaseTx](api_evm_basetx.evmbasetx.md)*
 
@@ -256,7 +256,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -270,7 +270,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -284,7 +284,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -306,7 +306,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/evmtx.ts:143](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L143)*
+*Defined in [src/common/evmtx.ts:143](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L143)*
 
 **Parameters:**
 
@@ -324,7 +324,7 @@ ___
 
 *Overrides [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[sign](common_transactions.evmstandardunsignedtx.md#abstract-sign)*
 
-*Defined in [src/apis/evm/tx.ts:80](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/tx.ts#L80)*
+*Defined in [src/apis/evm/tx.ts:80](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/tx.ts#L80)*
 
 Signs this [UnsignedTx](api_evm_transactions.unsignedtx.md) and returns signed [StandardTx](common_transactions.standardtx.md)
 
@@ -346,6 +346,6 @@ ___
 
 *Inherited from [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md).[toBuffer](common_transactions.evmstandardunsignedtx.md#tobuffer)*
 
-*Defined in [src/common/evmtx.ts:241](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L241)*
+*Defined in [src/common/evmtx.ts:241](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L241)*
 
 **Returns:** *Buffer*

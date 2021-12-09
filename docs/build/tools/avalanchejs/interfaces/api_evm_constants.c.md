@@ -29,7 +29,7 @@
 
 • **alias**: *string*
 
-*Defined in [src/apis/evm/constants.ts:28](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L28)*
+*Defined in [src/apis/evm/constants.ts:28](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L28)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **avaxAssetID**? : *string*
 
-*Defined in [src/apis/evm/constants.ts:38](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L38)*
+*Defined in [src/apis/evm/constants.ts:38](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L38)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • **blockchainID**: *string*
 
-*Defined in [src/apis/evm/constants.ts:27](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L27)*
+*Defined in [src/apis/evm/constants.ts:27](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L27)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • **chainID**? : *number*
 
-*Defined in [src/apis/evm/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L32)*
+*Defined in [src/apis/evm/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L32)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • **costPerSignature**? : *number*
 
-*Defined in [src/apis/evm/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L36)*
+*Defined in [src/apis/evm/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L36)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **fee**? : *BN*
 
-*Defined in [src/apis/evm/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L30)*
+*Defined in [src/apis/evm/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L30)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • **gasPrice**: *BN | number*
 
-*Defined in [src/apis/evm/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L31)*
+*Defined in [src/apis/evm/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L31)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **maxGasPrice**? : *BN*
 
-*Defined in [src/apis/evm/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L34)*
+*Defined in [src/apis/evm/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L34)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 • **minGasPrice**? : *BN*
 
-*Defined in [src/apis/evm/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L33)*
+*Defined in [src/apis/evm/constants.ts:33](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L33)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **txBytesGas**? : *number*
 
-*Defined in [src/apis/evm/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L35)*
+*Defined in [src/apis/evm/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L35)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **txFee**? : *BN*
 
-*Defined in [src/apis/evm/constants.ts:37](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L37)*
+*Defined in [src/apis/evm/constants.ts:37](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L37)*
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 • **vm**: *string*
 
-*Defined in [src/apis/evm/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L29)*
+*Defined in [src/apis/evm/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L29)*

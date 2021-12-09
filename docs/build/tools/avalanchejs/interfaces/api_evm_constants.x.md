@@ -24,7 +24,7 @@
 
 • **alias**: *string*
 
-*Defined in [src/apis/evm/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L42)*
+*Defined in [src/apis/evm/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L42)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **avaxAssetID**? : *string*
 
-*Defined in [src/apis/evm/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L45)*
+*Defined in [src/apis/evm/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L45)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **blockchainID**: *string*
 
-*Defined in [src/apis/evm/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L41)*
+*Defined in [src/apis/evm/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L41)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **creationTxFee**: *BN | number*
 
-*Defined in [src/apis/evm/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L44)*
+*Defined in [src/apis/evm/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L44)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **fee**? : *BN*
 
-*Defined in [src/apis/evm/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L47)*
+*Defined in [src/apis/evm/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L47)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **txFee**? : *BN | number*
 
-*Defined in [src/apis/evm/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L46)*
+*Defined in [src/apis/evm/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L46)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **vm**: *string*
 
-*Defined in [src/apis/evm/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L43)*
+*Defined in [src/apis/evm/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L43)*

@@ -19,7 +19,7 @@
 
 • **password**: *string*
 
-*Defined in [src/apis/auth/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/auth/interfaces.ts#L12)*
+*Defined in [src/apis/auth/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/auth/interfaces.ts#L12)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **token**: *string*
 
-*Defined in [src/apis/auth/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/auth/interfaces.ts#L13)*
+*Defined in [src/apis/auth/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/auth/interfaces.ts#L13)*

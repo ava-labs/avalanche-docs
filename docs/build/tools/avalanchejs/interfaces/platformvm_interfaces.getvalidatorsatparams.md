@@ -19,7 +19,7 @@
 
 • **height**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/interfaces.ts#L31)*
+*Defined in [src/apis/platformvm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/interfaces.ts#L31)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **subnetID**? : *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/interfaces.ts#L32)*
+*Defined in [src/apis/platformvm/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/interfaces.ts#L32)*

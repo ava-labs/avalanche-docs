@@ -19,7 +19,7 @@
 
 • **creationTxFee**: *BN*
 
-*Defined in [src/apis/info/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/info/interfaces.ts#L31)*
+*Defined in [src/apis/info/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/info/interfaces.ts#L31)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **txFee**: *BN*
 
-*Defined in [src/apis/info/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/info/interfaces.ts#L30)*
+*Defined in [src/apis/info/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/info/interfaces.ts#L30)*

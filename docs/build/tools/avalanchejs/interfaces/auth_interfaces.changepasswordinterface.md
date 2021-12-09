@@ -19,7 +19,7 @@
 
 • **newPassword**: *string*
 
-*Defined in [src/apis/auth/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/auth/interfaces.ts#L18)*
+*Defined in [src/apis/auth/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/auth/interfaces.ts#L18)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **oldPassword**: *string*
 
-*Defined in [src/apis/auth/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/auth/interfaces.ts#L17)*
+*Defined in [src/apis/auth/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/auth/interfaces.ts#L17)*
