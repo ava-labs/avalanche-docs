@@ -50,7 +50,7 @@ Instead, use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) function to
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/admin/api.ts:146](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L146)*
+*Defined in [src/apis/admin/api.ts:146](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L146)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi)
 method.
@@ -72,7 +72,7 @@ Name | Type | Default | Description |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseURL](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L29)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L28)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L28)*
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L30)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L30)*
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/jrpcapi.ts#L11)*
+*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/jrpcapi.ts#L11)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcID](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/jrpcapi.ts#L12)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/jrpcapi.ts#L12)*
 
 ## Methods
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **alias**(`endpoint`: string, `alias`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:34](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L34)*
+*Defined in [src/apis/admin/api.ts:34](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L34)*
 
 Assign an API an alias, a different endpoint for the API. The original endpoint will still
 work. This change only affects this node other nodes will not know about this alias.
@@ -144,7 +144,7 @@ ___
 
 ▸ **aliasChain**(`chain`: string, `alias`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:57](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L57)*
+*Defined in [src/apis/admin/api.ts:57](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L57)*
 
 Give a blockchain an alias, a different name that can be used any place the blockchain’s
 ID is used.
@@ -168,7 +168,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/jrpcapi.ts#L14)*
+*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/jrpcapi.ts#L14)*
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L53)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L53)*
 
 Returns the baseURL's path.
 
@@ -201,7 +201,7 @@ ___
 
 ▸ **getChainAliases**(`chain`: string): *Promise‹string[]›*
 
-*Defined in [src/apis/admin/api.ts:78](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L78)*
+*Defined in [src/apis/admin/api.ts:78](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L78)*
 
 Get all aliases for given blockchain
 
@@ -223,7 +223,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L58)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L58)*
 
 Returns the baseURL's database.
 
@@ -237,7 +237,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/jrpcapi.ts#L78)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -250,7 +250,7 @@ ___
 
 ▸ **lockProfile**(): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:96](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L96)*
+*Defined in [src/apis/admin/api.ts:96](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L96)*
 
 Dump the mutex statistics of the node to the specified file.
 
@@ -264,7 +264,7 @@ ___
 
 ▸ **memoryProfile**(): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:110](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L110)*
+*Defined in [src/apis/admin/api.ts:110](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L110)*
 
 Dump the current memory footprint of the node to the specified file.
 
@@ -280,7 +280,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/apibase.ts#L37)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseURL.
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **startCPUProfiler**(): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:125](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L125)*
+*Defined in [src/apis/admin/api.ts:125](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L125)*
 
 Start profiling the cpu utilization of the node. Will dump the profile information into
 the specified file on stop.
@@ -313,7 +313,7 @@ ___
 
 ▸ **stopCPUProfiler**(): *Promise‹boolean›*
 
-*Defined in [src/apis/admin/api.ts:139](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/api.ts#L139)*
+*Defined in [src/apis/admin/api.ts:139](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/api.ts#L139)*
 
 Stop the CPU profile that was previously started.
 

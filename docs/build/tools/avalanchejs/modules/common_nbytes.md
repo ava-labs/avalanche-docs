@@ -18,4 +18,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/nbytes.ts:19](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/nbytes.ts#L19)*
+*Defined in [src/common/nbytes.ts:19](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/nbytes.ts#L19)*

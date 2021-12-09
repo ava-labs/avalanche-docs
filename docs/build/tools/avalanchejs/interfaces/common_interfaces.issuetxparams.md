@@ -18,4 +18,4 @@
 
 • **tx**: *string*
 
-*Defined in [src/common/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/interfaces.ts#L15)*
+*Defined in [src/common/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/interfaces.ts#L15)*

@@ -1033,7 +1033,7 @@ ___
 
 • **ADDRESS_ERROR_CODE**: *string* = "1000"
 
-*Defined in [src/utils/errors.ts:1](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L1)*
+*Defined in [src/utils/errors.ts:1](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L1)*
 
 ___
 
@@ -1041,7 +1041,7 @@ ___
 
 • **ADDRESS_INDEX_ERROR_CODE**: *string* = "1028"
 
-*Defined in [src/utils/errors.ts:29](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L29)*
+*Defined in [src/utils/errors.ts:29](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L29)*
 
 ___
 
@@ -1049,7 +1049,7 @@ ___
 
 • **BASE58_ERROR_CODE**: *string* = "1031"
 
-*Defined in [src/utils/errors.ts:32](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L32)*
+*Defined in [src/utils/errors.ts:32](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L32)*
 
 ___
 
@@ -1057,7 +1057,7 @@ ___
 
 • **BECH32_ERROR_CODE**: *string* = "1037"
 
-*Defined in [src/utils/errors.ts:39](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L39)*
+*Defined in [src/utils/errors.ts:39](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L39)*
 
 ___
 
@@ -1065,7 +1065,7 @@ ___
 
 • **BUFFER_SIZE_ERROR_CODE**: *string* = "1027"
 
-*Defined in [src/utils/errors.ts:28](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L28)*
+*Defined in [src/utils/errors.ts:28](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L28)*
 
 ___
 
@@ -1073,7 +1073,7 @@ ___
 
 • **CHAIN_ID_ERROR_CODE**: *string* = "1002"
 
-*Defined in [src/utils/errors.ts:3](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L3)*
+*Defined in [src/utils/errors.ts:3](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L3)*
 
 ___
 
@@ -1081,7 +1081,7 @@ ___
 
 • **CHECKSUM_ERROR_CODE**: *string* = "1014"
 
-*Defined in [src/utils/errors.ts:15](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L15)*
+*Defined in [src/utils/errors.ts:15](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L15)*
 
 ___
 
@@ -1089,7 +1089,7 @@ ___
 
 • **CODEC_ID_ERROR_CODE**: *string* = "1007"
 
-*Defined in [src/utils/errors.ts:8](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L8)*
+*Defined in [src/utils/errors.ts:8](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L8)*
 
 ___
 
@@ -1097,7 +1097,7 @@ ___
 
 • **CRED_ID_ERROR_CODE**: *string* = "1008"
 
-*Defined in [src/utils/errors.ts:9](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L9)*
+*Defined in [src/utils/errors.ts:9](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L9)*
 
 ___
 
@@ -1105,7 +1105,7 @@ ___
 
 • **DELEGATION_FEE_ERROR_CODE**: *string* = "1025"
 
-*Defined in [src/utils/errors.ts:26](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L26)*
+*Defined in [src/utils/errors.ts:26](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L26)*
 
 ___
 
@@ -1113,7 +1113,7 @@ ___
 
 • **EVM_FEE_ERROR_CODE**: *string* = "1038"
 
-*Defined in [src/utils/errors.ts:40](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L40)*
+*Defined in [src/utils/errors.ts:40](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L40)*
 
 ___
 
@@ -1121,7 +1121,7 @@ ___
 
 • **EVM_INPUT_ERROR_CODE**: *string* = "1020"
 
-*Defined in [src/utils/errors.ts:21](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L21)*
+*Defined in [src/utils/errors.ts:21](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L21)*
 
 ___
 
@@ -1129,7 +1129,7 @@ ___
 
 • **EVM_OUTPUT_ERROR_CODE**: *string* = "1021"
 
-*Defined in [src/utils/errors.ts:22](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L22)*
+*Defined in [src/utils/errors.ts:22](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L22)*
 
 ___
 
@@ -1137,7 +1137,7 @@ ___
 
 • **FEE_ASSET_ERROR_CODE**: *string* = "1022"
 
-*Defined in [src/utils/errors.ts:23](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L23)*
+*Defined in [src/utils/errors.ts:23](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L23)*
 
 ___
 
@@ -1145,7 +1145,7 @@ ___
 
 • **GOOSE_EGG_CHECK_ERROR_CODE**: *string* = "1001"
 
-*Defined in [src/utils/errors.ts:2](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L2)*
+*Defined in [src/utils/errors.ts:2](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L2)*
 
 ___
 
@@ -1153,7 +1153,7 @@ ___
 
 • **HEX_ERROR_CODE**: *string* = "1034"
 
-*Defined in [src/utils/errors.ts:35](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L35)*
+*Defined in [src/utils/errors.ts:35](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L35)*
 
 ___
 
@@ -1161,7 +1161,7 @@ ___
 
 • **INPUT_ID_ERROR_CODE**: *string* = "1011"
 
-*Defined in [src/utils/errors.ts:12](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L12)*
+*Defined in [src/utils/errors.ts:12](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L12)*
 
 ___
 
@@ -1169,7 +1169,7 @@ ___
 
 • **INSUFFICIENT_FUNDS_ERROR_CODE**: *string* = "1017"
 
-*Defined in [src/utils/errors.ts:18](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L18)*
+*Defined in [src/utils/errors.ts:18](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L18)*
 
 ___
 
@@ -1177,7 +1177,7 @@ ___
 
 • **INVALID_ENTROPY**: *string* = "1039"
 
-*Defined in [src/utils/errors.ts:41](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L41)*
+*Defined in [src/utils/errors.ts:41](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L41)*
 
 ___
 
@@ -1185,7 +1185,7 @@ ___
 
 • **INVALID_OPERATION_ID_CODE**: *string* = "1013"
 
-*Defined in [src/utils/errors.ts:14](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L14)*
+*Defined in [src/utils/errors.ts:14](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L14)*
 
 ___
 
@@ -1193,7 +1193,7 @@ ___
 
 • **MERGE_RULE_ERROR_CODE**: *string* = "1030"
 
-*Defined in [src/utils/errors.ts:31](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L31)*
+*Defined in [src/utils/errors.ts:31](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L31)*
 
 ___
 
@@ -1201,7 +1201,7 @@ ___
 
 • **NAME_ERROR_CODE**: *string* = "1005"
 
-*Defined in [src/utils/errors.ts:6](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L6)*
+*Defined in [src/utils/errors.ts:6](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L6)*
 
 ___
 
@@ -1209,7 +1209,7 @@ ___
 
 • **NODE_ID_ERROR_CODE**: *string* = "1033"
 
-*Defined in [src/utils/errors.ts:34](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L34)*
+*Defined in [src/utils/errors.ts:34](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L34)*
 
 ___
 
@@ -1217,7 +1217,7 @@ ___
 
 • **NO_ATOMIX_UTXOS_ERROR_CODE**: *string* = "1003"
 
-*Defined in [src/utils/errors.ts:4](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L4)*
+*Defined in [src/utils/errors.ts:4](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L4)*
 
 ___
 
@@ -1225,7 +1225,7 @@ ___
 
 • **OPERATION_ERROR_CODE**: *string* = "1012"
 
-*Defined in [src/utils/errors.ts:13](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L13)*
+*Defined in [src/utils/errors.ts:13](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L13)*
 
 ___
 
@@ -1233,7 +1233,7 @@ ___
 
 • **OUTPUT_ID_ERROR_CODE**: *string* = "1015"
 
-*Defined in [src/utils/errors.ts:16](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L16)*
+*Defined in [src/utils/errors.ts:16](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L16)*
 
 ___
 
@@ -1241,7 +1241,7 @@ ___
 
 • **PRIVATE_KEY_ERROR_CODE**: *string* = "1032"
 
-*Defined in [src/utils/errors.ts:33](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L33)*
+*Defined in [src/utils/errors.ts:33](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L33)*
 
 ___
 
@@ -1249,7 +1249,7 @@ ___
 
 • **PROTOCOL_ERROR_CODE**: *string* = "1040"
 
-*Defined in [src/utils/errors.ts:42](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L42)*
+*Defined in [src/utils/errors.ts:42](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L42)*
 
 ___
 
@@ -1257,7 +1257,7 @@ ___
 
 • **PUBLIC_KEY_ERROR_CODE**: *string* = "1029"
 
-*Defined in [src/utils/errors.ts:30](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L30)*
+*Defined in [src/utils/errors.ts:30](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L30)*
 
 ___
 
@@ -1265,7 +1265,7 @@ ___
 
 • **SECP_MINT_OUTPUT_ERROR_CODE**: *string* = "1019"
 
-*Defined in [src/utils/errors.ts:20](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L20)*
+*Defined in [src/utils/errors.ts:20](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L20)*
 
 ___
 
@@ -1273,7 +1273,7 @@ ___
 
 • **STAKE_ERROR_CODE**: *string* = "1023"
 
-*Defined in [src/utils/errors.ts:24](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L24)*
+*Defined in [src/utils/errors.ts:24](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L24)*
 
 ___
 
@@ -1281,7 +1281,7 @@ ___
 
 • **SUBNET_OWNER_ERROR_CODE**: *string* = "1026"
 
-*Defined in [src/utils/errors.ts:27](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L27)*
+*Defined in [src/utils/errors.ts:27](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L27)*
 
 ___
 
@@ -1289,7 +1289,7 @@ ___
 
 • **SYMBOL_ERROR_CODE**: *string* = "1004"
 
-*Defined in [src/utils/errors.ts:5](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L5)*
+*Defined in [src/utils/errors.ts:5](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L5)*
 
 ___
 
@@ -1297,7 +1297,7 @@ ___
 
 • **THRESHOLD_ERROR_CODE**: *string* = "1018"
 
-*Defined in [src/utils/errors.ts:19](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L19)*
+*Defined in [src/utils/errors.ts:19](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L19)*
 
 ___
 
@@ -1305,7 +1305,7 @@ ___
 
 • **TIME_ERROR_CODE**: *string* = "1024"
 
-*Defined in [src/utils/errors.ts:25](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L25)*
+*Defined in [src/utils/errors.ts:25](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L25)*
 
 ___
 
@@ -1313,7 +1313,7 @@ ___
 
 • **TRANSACTION_ERROR_CODE**: *string* = "1006"
 
-*Defined in [src/utils/errors.ts:7](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L7)*
+*Defined in [src/utils/errors.ts:7](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L7)*
 
 ___
 
@@ -1321,7 +1321,7 @@ ___
 
 • **TRANSFERABLE_INPUT_ERROR_CODE**: *string* = "1010"
 
-*Defined in [src/utils/errors.ts:11](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L11)*
+*Defined in [src/utils/errors.ts:11](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L11)*
 
 ___
 
@@ -1329,7 +1329,7 @@ ___
 
 • **TRANSFERABLE_OUTPUT_ERROR_CODE**: *string* = "1009"
 
-*Defined in [src/utils/errors.ts:10](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L10)*
+*Defined in [src/utils/errors.ts:10](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L10)*
 
 ___
 
@@ -1337,7 +1337,7 @@ ___
 
 • **TYPE_ID_ERROR_CODE**: *string* = "1035"
 
-*Defined in [src/utils/errors.ts:36](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L36)*
+*Defined in [src/utils/errors.ts:36](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L36)*
 
 ___
 
@@ -1345,7 +1345,7 @@ ___
 
 • **TYPE_NAME_ERROR_CODE**: *string* = "1035"
 
-*Defined in [src/utils/errors.ts:37](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L37)*
+*Defined in [src/utils/errors.ts:37](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L37)*
 
 ___
 
@@ -1353,7 +1353,7 @@ ___
 
 • **UNKNOWN_TYPE_ERROR_CODE**: *string* = "1036"
 
-*Defined in [src/utils/errors.ts:38](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L38)*
+*Defined in [src/utils/errors.ts:38](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L38)*
 
 ___
 
@@ -1361,4 +1361,4 @@ ___
 
 • **UTXO_ERROR_CODE**: *string* = "1016"
 
-*Defined in [src/utils/errors.ts:17](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/errors.ts#L17)*
+*Defined in [src/utils/errors.ts:17](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/errors.ts#L17)*
