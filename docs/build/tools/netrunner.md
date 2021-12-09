@@ -1,4 +1,4 @@
-# Network Runner
+# Avalanche Network Runner
 
 The Avalanche Network Runner tool allows a user to define, create and interact with a network of Avalanche nodes. It can be used for development and testing.
 
