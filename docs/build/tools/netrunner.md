@@ -39,7 +39,7 @@ As you can see in the Network Runner's README, it exposes a `Network` interface 
 
 The simplest and most straightforward way to use the Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specificaitons.**
 
-An example can be found at [examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which just creates a network of 5 nodes, and performs some simple API calls.
+An example can be found at [examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which creates a network of 5 nodes, and performs some simple API calls.
 
 Creating a network is as simple as:
 
