@@ -1,88 +1,93 @@
 # Network Runner
 
-The network-runner tool allows to define, start and shutdown default or custom avalanchego networks for development and testing.
+The Avalanche Network Runner tool allows a user to define, create and interact with a network of Avalanche nodes. It can be used for development and testing.
 
-> **Please do not use this tool for running production nodes. We cannot take responsibility nor be able to give support in this case.**
+**Note that this tool is not for running production nodes.**
 
-## How to Install
-The network-runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner)
+## Installation
 
+The Network Runner repository is hosted at [https://github.com/ava-labs/avalanche-network-runner](https://github.com/ava-labs/avalanche-network-runner).
 
-Opening that URL will display a README file with further details of this tool.
+That repository's README details the tool.
 
-Clone the repository with
+Clone the repository with:
+
 ```
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
-## Supported Backends
-The tool can run nodes
+Unless otherwise specified, file paths given below are relative to the root of this repository. 
 
-* locally by spawning processes running on the same machine
-* using a kubernetes network as a backend
+## Usage
 
-The tool shares a common interface design, located at the [<REPOSITORY_ROOT>/network](https://github.com/ava-labs/avalanche-network-runner/tree/main/network) package.
-Then each backend implements its own runtime.
+The basic pattern for using the Avalanche Network Runner is:
 
-* Local: [<REPOSITORY_ROOT>/local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local)
-* Kubernetes: [<REPOSITORY_ROOT>/k8s](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s)
-
-The [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) package contains client code to access avalanchego nodes.
-
-The basic steps to create and run a network are:
-* Define the network definition
+* Define the network
 * Start the network
 * Interact with it
 * Shutdown
 
-Please find examples at [<REPOSITORY_ROOT>/examples](https://github.com/ava-labs/avalanche-network-runner/tree/main/examples) for each backend.
+The [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) package contains client code that allows the user to make API calls to Avalanche nodes within the network.
 
-## Local Processes
-The simplest and most straightforward way to use the tool is to run it locally on a computer by spawning individual operating system processes for each avalanchego node.
-**Please note that your system will set the boundaries about how many nodes you can run in this case.**
+Please find examples of usage in the [examples](https://github.com/ava-labs/avalanche-network-runner/tree/main/examples) subdirectory.
 
-An example can be found at [<REPOSITORY_ROOT>/examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which just creates a new default network of 5 nodes, and performs some simple API calls.
+## Supported Backends
 
-Creating a default network is as simple as:
+As you can see in the Network Runner's README, it exposes a `Network` interface to the user. There are two implementations of this interface that you may use. One is the [local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local) implementation, where each node runs in a process on your machine. The other is the [Kubernetes](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s) implementation, where each node runs in its own Kubernetes pod.
+
+## Local Backend
+
+The simplest and most straightforward way to use the Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specifications.**
+
+An example can be found at [examples/local/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/main.go). It is a simple setup which creates a network of 5 nodes, and performs some simple API calls.
+
+Creating a network is as simple as:
+
 ```
 network, err := local.NewDefaultNetwork(log, binaryPath)
 ```
-where `log` is a logger instance of type `logging.Logger` and `binaryPath` a string pointing the to **path of the location of the compiled avalanchego binary**.
 
-For example:
-```
-local.NewDefaultNetwork(log,"/home/user/go/src/github.com/ava-labs/avalanchego/build")
-```
-This generates a default network configuration and starts the nodes.
+where `log` is a logger of type [logging.Logger](https://github.com/ava-labs/avalanchego/blob/master/utils/logging/logger.go#L12) and `binaryPath` is the path of the AvalancheGo binary that each node that exists on network startup will run.
 
-To wait until the network is ready to use, use the `Healthy` function. It returns a channel which will be notified when all nodes are being healthy.
-
-`GetNodeNames()` returns a list of strings of node names. Use this to access single nodes with the `GetNode(string)` function, e.g.:
+For example, the below snippet creates a new network using default configurations, and each node in the network runs the binaries at `/home/user/go/src/github.com/ava-labs/avalanchego/build`:
 
 ```
+network, err := local.NewDefaultNetwork(log,"/home/user/go/src/github.com/ava-labs/avalanchego/build")
+```
+
+**Once you create a network, you must eventually call `Stop()` on it to make sure all of the nodes in the network stop.** Calling this method kills all of the Avalanche nodes that compose the network. You probably want to call this method in a `defer` statement to make sure it runs.
+
+To wait until the network is ready to use, use the network's `Healthy` method. It returns a channel which will be notified when all nodes are healthy.
+
+Each node has a unique name. Use the network's `GetNodeNames()` method to get the names of all nodes.
+
+Use the network's method `GetNode(string)` to get a node by its name. For example:
+
+```go
 names, _ := network.GetNodesNames()
-node := network.GetNode(names[index])
+node, _ := network.GetNode(names[0])
 ```
 
-It is then possible to execute API calls on the node:
+Then you can make API calls to the node:
 
-```
-id,_ := node.GetAPIClient().InfoAPI().GetNodeID()
-balance,_ := node.GetAPIClient().XChainAPI().GetBalance(addr,assetID,includePartial) //assumes these params are valid 
-```
-
-After a network has been created and is healthy, we can add new nodes to, or remove nodes from, the network:
-```
-network.AddNode(nodeConfig)
-network.RemoveNode(names[index])
+```go
+id, _ := node.GetAPIClient().InfoAPI().GetNodeID() // Gets the node's node ID
+balance, _ := node.GetAPIClient().XChainAPI().GetBalance(address,assetID,false) // Pretend these arguments are defined 
 ```
 
-The `nodeConfig` is a struct which contains information about the new node to be created.
+After a network has been created and is healthy, you can add or remove nodes to/from the network:
+
+```
+newNode, _ := network.AddNode(nodeConfig)
+err := network.RemoveNode(names[0])
+```
+
+Where `nodeConfig` is a struct which contains information about the new node to be created.
 For a local node, the most important elements are its name, its binary path and its identity, given by a TLS key/cert.
 
-**This means it is possible to create networks with different versions of avalanchego binaries.** Just provide different binary paths to each.
+You can create a network where nodes are running different binaries -- just provide different binary paths to each:
 
-```
+```go
   stakingCert, stakingKey, err := staking.NewCertAndKeyBytes()
   if err != nil {
    return err
@@ -97,57 +102,61 @@ For a local node, the most important elements are its name, its binary path and 
   }
 ```
 
-After adding/removing nodes it's suggested to again wait for `Healthy` until performing any operations on them.
+After adding a node, you may want to call the network's `Healthy` method again and wait until the new node is healthy before making API calls to it.
 
-Finally run `network.Stop(ctx)` to stop the network. This will terminate all avalanchego nodes and also do a cleanup of all their temporary data.
+### Creating Custom Networks
 
+To create custom networks, pass a custom config (the second parameter) to `local.NewNetwork(logging.Logger, network.Config)` function. The config provided defines the number of nodes when the network starts, the genesis state of the network, and the configs for each node.
 
-## Creating Custom Networks
-To create custom networks, the most important step is to pass a custom config to the `local.NewNetwork(logging.Logger, network.Config)` function (the second parameter). 
-It basically requires to provide the number of nodes, a custom genesis JSON and the array of individual node configs with the binary paths.
+Please refer to [NetworkConfig](https://github.com/ava-labs/avalanche-network-runner#network-creation) for more details.
 
-Please refer to [NetworkConfig](https://github.com/ava-labs/avalanche-network-runner#network-creation) for some more details about the required data.
+## Kubernetes Backend
 
+It's possible to create a network with a Kubernetes backend, offering higher flexibility and scalability in defining and running a development and test network.
 
-## Kubernetes
-It's possible to create a network with a kubernetes backend, offering higher flexibility and scalability in defining and running a development and test network.
+An example can be found at `examples/k8s/main.go`. This represents an example default network of 5 nodes which runs in a Kubernetes cluster.
 
-An example can be found at `<REPOSITORY_ROOT>/examples/k8s/main.go`. This represents an example default network of 5 nodes which can run in a kubernetes cluster.
-The basic operations (interface) of the general `Network` interface are being implemented by the kubernetes backend as well. 
+Note that the Kubernetes backend should only be used by advanced users, and requires more setup to use. 
 
-### Requirements
-**IMPORTANT**
-In order for avalanchego nodes to be running smoothly in a kubernetes cluster, we apply the [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/). Therefore, for such an avalanchego network to be runnable on kubernetes, the `avalanchego-operator` dependency must be fulfilled. Essentially, the operator allows avalanchego nodes to run inside a kubernetes cluster in a stateful mode.
+### AvalancheGo Operator
 
-Please find the code for running the operator at [https://github.com/ava-labs/avalanchego-operator.](https://github.com/ava-labs/avalanchego-operator)
+**IMPORTANT**:
+In order for AvalancheGo nodes to run in a Kubernetes cluster, we use the [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/). Therefore, for an AvalancheGo network to be runnable on Kubernetes, the `avalanchego-operator` dependency must be fulfilled. Essentially, the operator allows AvalancheGo nodes to run inside a Kubernetes cluster in a stateful manner.
 
-There is a multitude of possible configurations and setups when running kubernetes, depending on organization, preferences and environment. Generally, the kubernetes admin should be responsible to install and run the operator, as it involves setting up roles, services and permissions. Please refer to the operator docs on how to install, configure and deploy/run it. Feel free to reach out to us for support on this.
+Please find the AvalancheGo Operator code at [https://github.com/ava-labs/avalanchego-operator.](https://github.com/ava-labs/avalanchego-operator)
 
-Generally it makes not much sense to run networks in kubernetes environments for local development, like `minikube` or `k3s`. For such use cases, the local processes variant should be preferred. Nevertheless, for documentation purposes, to install the operator in a local kubernetes network (assuming the kubernetes environment has already been created and configured), it would be:
-* clone the operator repository above
-* execute `make install` inside the repository (requires standard build tools)
-* execute `make run`
+There are a multitude of possible configurations and setups when running Kubernetes, depending on your organization, preferences and environment. Generally, the Kubernetes admin should be responsible for installing and running the operator, as it involves setting up roles, services and permissions. Please refer to the AvalancheGo Operator documentation for instructions on installation, configuration, deployment, etc.
 
-This will run the avalanchego operator inside the cluster. The most important link to a deployment is the `Kind` parameter, which needs to be set to `Avalanchego` for the operator to kick in. See next chapter for details.
+To install the AvalancheGo Operator in a local Kubernetes network (like `minikube` or `k3s`), assuming the Kubernetes environment has already been created and configured:
 
+* Clone the AvalancheGo Operator repository above
+* `make install` inside the AvalancheGo Operator repository (requires standard build tools)
+* `make run` inside the AvalancheGo Operator repository
 
-### Kubernetes Configuration
-Essentially, setting up a kubernetes network follows the same sequence as the local processes implementation documented above.
-* Define the network definition
+This will run the AvalancheGo operator inside the cluster. The most important link to a deployment is the `Kind` parameter, which needs to be set to `Avalanchego` for the operator to kick in. (See next section for details.)
+
+You should only run the AvalancheGo Operator on a local Kubernetes cluster for testing before deploying to a remote Kubernetes cluster. If your goal is to simply run an Avalanche network locally, use the Local Backend of the Avalanche Network Runner.
+
+### Configuration
+
+Essentially, using a network with the Kubernetes backend is the same as using a network with the local backend:
+
+* Define the network
 * Start the network
 * Interact with it
 * Shutdown
 
-The difference lies in how to create the network definition due to the properties and requirements of kubernetes.
+The main difference lies in creating the network definition due to the properties and requirements of Kubernetes.
 
-The key elements which should be provided are the genesis JSON file, the TLS certificates and keys for the node identity, and optionally configuration files for the avalanchego nodes. This is also analog to the local processes implementation. 
+The key elements which should be provided are the genesis JSON file, the TLS certificates and keys for the node identity, and optionally configuration files for the AvalancheGo nodes. This is also analog to the local processes implementation. 
 
-It is left to the user to implement how to exactly provide the configuration to the network (implement go code, reading files from the file system, etc.). The `<REPOSITORY_ROOT>/examples/k8s/main.go` provides just an example of how to do it.
-The kubernetes specific information needs to be provided in the `ImplSpecificConfig` of the `network.Config` (describes the network) and the `node.Config` (describes each individual node) structs.
-For kubernetes, each of these finally are represented as `Avalanchego` types from the operator package `github.com/ava-labs/avalanchego-operator`, which provides the interface to kubernetes. The `k8s.ObjectSpec` acts as a helper layer to create such objects. Therefore, to create kubernetes node definitions compatible to the operator, define instances of `k8s.ObjectSpec` for each node and pass these as `ImplSpecificConfig` member to a `node.Config`.
+It is left to the user to implement a means of providing the configuration to the network (reading and parsing files, etc.). `examples/k8s/main.go` provides an example of how to do it.
+The Kubernetes-specific information needs to be provided in the `ImplSpecificConfig` of the `network.Config` (describes the network) and the `node.Config` (describes each individual node) structs.
+For Kubernetes, each of these are represented as `Avalanchego` types from the AvalancheGo Operator package `github.com/ava-labs/avalanchego-operator`, which provides the interface to Kubernetes. The `k8s.ObjectSpec` acts as a helper layer to create such objects. Therefore, to create Kubernetes node definitions compatible with the AvalancheGo Operator, define instances of `k8s.ObjectSpec` for each node and pass these as `ImplSpecificConfig` member to a `node.Config`.
 
-For example via JSON config file:
-```
+Example configuration defined in JSON:
+
+```go
     {
       "namespace": "my-avalanchego-test",
       "identifier": "node-id-0",
@@ -158,9 +167,10 @@ For example via JSON config file:
     }
 ```
 
-or via code:
-```
-&k8s.ObjectSpec{
+Example configuration defined in Go:
+
+```go
+spec := &k8s.ObjectSpec{
   Namespace:  "my-avalanchego-test",
   Identifier: "node-id-0",
   Kind:       "Avalanchego",
@@ -169,11 +179,11 @@ or via code:
   Tag:        "v1.7.1",
 ```
 
-**Note:** It is currently not possible to create a default network without any configuration for kubernetes. This might be addressed in a future iteration.
+**Note:** It is currently not possible to create a default network without any configuration for Kubernetes. This might be addressed in a future iteration.
 
 **IMPORTANT**
-To run a custom network in this way, the executable which will run this code needs to have access to the cluster. One way to achieve this is to deploy the executable as a pod itself into the cluster. An example script can be found at `<REPOSITORY_ROOT>/examples/k8s/Dockerfile`. Create its image by running `docker build -f ./examples/k8s/Dockerfile -t <IMAGE>:<TAG> .` from the `<REPOSITORY_ROOT>`. The defaults for these examples are `<IMAGE>=k8s-netrunner` and `<TAG>=alpha`. An example pod definition using these properties can then be deployed to the cluster via `kubectl apply -f <REPOSITORY_ROOT>/examples/k8s/simple-netrunner-pod.yaml`. Make sure the `Namespace` definitions match. If you change any of `IMAGE` or `TAG`, the `simple-netrunner-pod.yaml` file needs to be edited accordingly. Don't forget to edit `DOCKERFILE` if you start customizing.
+To run a custom network in this way, the executable which will run this code needs to have access to the cluster. One way to achieve this is to deploy the executable as a pod itself into the cluster. An example script can be found at `examples/k8s/Dockerfile`. Create its image by running `docker build -f ./examples/k8s/Dockerfile -t <IMAGE>:<TAG> .` from the Avalanche Network Runner repository root.  The defaults for these examples are `<IMAGE>=k8s-netrunner` and `<TAG>=alpha`. An example pod definition using these properties can then be deployed to the cluster via `kubectl apply -f examples/k8s/simple-netrunner-pod.yaml`. Make sure the `Namespace` definitions match. If you change any of `IMAGE` or `TAG`, the `simple-netrunner-pod.yaml` file needs to be edited accordingly. Don't forget to edit `DOCKERFILE` if you start customizing.
 
-Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script about how to make this happen is at `<REPOSITORY_ROOT>/examples/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f <REPOSITORY_ROOT>/examples/k8s/svc-rbac.yaml`. Once again make sure namespaces match if customizing.
+Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script for doing this is at `examples/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f examples/k8s/svc-rbac.yaml`. Once again, make sure namespaces match if customizing.
  
-Please note one more time that there are multitudes of ways about how to deploy and configure kubernetes networks. We provide here only a couple of examples. **NONE OF THESE EXAMPLES ARE MEANT TO BE USED IN ANY WAY FOR PRODUCTION** - apart from the fact that the tool itself is not meant for production anyways, but development and testing only.
+Please note one more time that there are multitudes of ways about how to deploy and configure Kubernetes networks. We provide here only a couple of examples. **None of these examples are meant to be used in production, and the Avalanche Network runner is not meant to run production nodes.**

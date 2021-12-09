@@ -2,7 +2,7 @@
 
 :::warning
 
-Avash is to be replaced by [Network Runner](./netrunner.md)
+Avash is deprecated and is being replaced with the [Avalanche Network Runner](./netrunner.md)
 
 :::
 
