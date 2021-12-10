@@ -351,25 +351,56 @@ The default C-Chain config is:
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
-  "coreth-performance-api-enabled": false,
+  "coreth-admin-api-dir": "",
   "net-api-enabled": true,
+  "continuous-profiler-dir": "",
+  "continuous-profiler-frequency": 900000000000,
+  "continuous-profiler-max-files": 5,
   "rpc-gas-cap": 50000000,
   "rpc-tx-fee-cap": 100,
   "eth-api-enabled": true,
-  "personal-api-enabled": false,
+  "personal-api-enabled": true,
   "tx-pool-api-enabled": false,
   "debug-api-enabled": false,
   "web3-api-enabled": true,
+  "preimages-enabled": false,
+  "pruning-enabled": true,
+  "snapshot-async": true,
+  "snapshot-verification-enabled": false,
+  "metrics-enabled": false,
+  "metrics-expensive-enabled": false,
   "local-txs-enabled": false,
-  "pruning-enabled": false,
   "api-max-duration": 0, // Default to no maximum
+  "ws-cpu-refill-rate": 0,
+  "ws-cpu-max-stored": 0,
   "api-max-blocks-per-request": 0, // Default to no maximum
   "allow-unfinalized-queries": false,
-  "log-level": "info"
+  "allow-unprotected-txs": false,
+  "keystore-directory": "",
+  "keystore-external-signer": "",
+  "keystore-insecure-unlock-allowed": false,
+  "remote-tx-gossip-only-enabled": false,
+  "tx-regossip-frequency": 60000000000,
+  "tx-regossip-max-size": 15,
+  "log-level": "debug"
 }
 ```
 
 Default values are overridden only if specified in the given config.
+
+**Continuous Profiling**
+
+`continuous-profiler-dir` (string):
+
+Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to "". If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
+
+`continuous-profiler-frequency` (duration):
+
+Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
+
+`continuous-profiler-max-files` (int):
+
+Specifies the maximum number of profiles to keep before removing the oldest.
 
 **APIs**
 
@@ -381,9 +412,9 @@ Enables the Snowman API. Defaults to false.
 
 Enables the Admin API. Defaults to false.
 
-`coreth-performance-api-enabled` (boolean):
+`coreth-admin-api-dir` (string):
 
-Enables the Performance API. Defaults to false.
+Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
 `net-api-enabled` (boolean):
 
@@ -409,7 +440,11 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-**API Gas/Price Caps**
+`allow-unfinalized-queries` (boolean):
+
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+
+**API Rate Limiting**
 
 `rpc-gas-cap` (int):
 
@@ -417,13 +452,75 @@ The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `et
 
 `rpc-tx-fee-cap` (int):
 
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transction variants. Defaults to 100.
+Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to 100.
 
-**Database Pruning**
+`api-max-duration` (duration):
 
-`pruning-enabled`(boolean):
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
+
+`api-max-blocks-per-request` (int):
+
+Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
+
+`ws-cpu-refill-rate` (duration):
+
+The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (0).
+
+`ws-cpu-max-stored` (duration):
+
+Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+
+**Transaction Pool**
+
+`local-txs-enabled` (boolean):
+
+Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to false.
+
+`allow-unprotected-txs` (boolean):
+
+If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
+
+`remote-tx-gossip-only-enabled` (boolean):
+
+If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to false.
+
+`tx-regossip-frequency` (duration):
+
+Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to 1 minute.
+
+`tx-regossip-max-size` (int):
+
+Maximum number of transactions to re-gossip at once. Defaults to 15.
+
+**Metrics**
+
+`metrics-enabled` (boolean):
+
+Enables metrics. Defaults to false.
+
+`metrics-expensive-enabled` (boolean):
+
+Enables expensive metrics. Defaults to false.
+
+**Database**
+
+`pruning-enabled` (boolean):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+`preimages-enabled` (boolean):
+
+If true, enables preimages. Defaults to false.
+
+**Snapshots**
+
+`snapshot-async` (boolean):
+
+If true, allows snapshot generation to be executed asynchronously. Defaults to true.
+
+`snapshot-verification-enabled` (boolean):
+
+If true, verifies the complete snapshot after it has been generated. Defaults to false.
 
 **Log Level**
 
@@ -444,24 +541,6 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 `keystore-insecure-unlock-allowed` (bool):
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
-
-**Other Settings**
-
-`local-txs-enabled` (boolean):
-
-Enables local transaction handling. Defaults to false.
-
-`api-max-duration` (duration):
-
-Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
-
-`api-max-blocks-per-request` (int):
-
-Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
-
-`allow-unfinalized-queries` (boolean):
-
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
 
 #### X-Chain Configs
 
