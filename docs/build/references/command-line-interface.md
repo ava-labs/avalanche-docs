@@ -234,7 +234,7 @@ Enables signature verification. When set to `false`, signatures won’t be check
 
 ## Staking
 
-`--staking-port` (string):
+`--staking-port` (int):
 
 The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
 
