@@ -18,4 +18,4 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/utils/hdnode.ts:9](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/hdnode.ts#L9)*
+*Defined in [src/utils/hdnode.ts:9](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/hdnode.ts#L9)*

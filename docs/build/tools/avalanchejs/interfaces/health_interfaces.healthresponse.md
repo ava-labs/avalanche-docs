@@ -19,7 +19,7 @@
 
 • **checks**: *[Checks](health_interfaces.checks.md)*
 
-*Defined in [src/apis/health/interfaces.ts:24](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/health/interfaces.ts#L24)*
+*Defined in [src/apis/health/interfaces.ts:24](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/health/interfaces.ts#L24)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **healthy**: *boolean*
 
-*Defined in [src/apis/health/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/health/interfaces.ts#L25)*
+*Defined in [src/apis/health/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/health/interfaces.ts#L25)*

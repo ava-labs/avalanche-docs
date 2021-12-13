@@ -47,6 +47,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/Avalanche-OG-Image.png',
       navbar: {
         title: '',
         logo: {

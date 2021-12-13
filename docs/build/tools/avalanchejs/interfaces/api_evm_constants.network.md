@@ -25,7 +25,7 @@
 
 • **C**: *[C](api_evm_constants.c.md)*
 
-*Defined in [src/apis/evm/constants.ts:68](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L68)*
+*Defined in [src/apis/evm/constants.ts:68](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L68)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **P**: *[P](api_evm_constants.p.md)*
 
-*Defined in [src/apis/evm/constants.ts:71](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L71)*
+*Defined in [src/apis/evm/constants.ts:71](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L71)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **X**: *[X](api_evm_constants.x.md)*
 
-*Defined in [src/apis/evm/constants.ts:70](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L70)*
+*Defined in [src/apis/evm/constants.ts:70](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L70)*
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 • **hrp**: *string*
 
-*Defined in [src/apis/evm/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/evm/constants.ts#L69)*
+*Defined in [src/apis/evm/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/evm/constants.ts#L69)*

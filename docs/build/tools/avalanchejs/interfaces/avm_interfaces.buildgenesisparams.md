@@ -18,4 +18,4 @@
 
 • **genesisData**: *object*
 
-*Defined in [src/apis/avm/interfaces.ts:109](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/avm/interfaces.ts#L109)*
+*Defined in [src/apis/avm/interfaces.ts:109](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/avm/interfaces.ts#L109)*

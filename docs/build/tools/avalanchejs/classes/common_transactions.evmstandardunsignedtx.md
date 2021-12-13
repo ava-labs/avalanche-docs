@@ -57,7 +57,7 @@ Class representing an unsigned transaction.
 
 \+ **new EVMStandardUnsignedTx**(`transaction`: SBTx, `codecID`: number): *[EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md)*
 
-*Defined in [src/common/evmtx.ts:265](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L265)*
+*Defined in [src/common/evmtx.ts:265](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L265)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ Name | Type | Default |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/common/evmtx.ts:141](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L141)*
+*Defined in [src/common/evmtx.ts:141](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L141)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/common/evmtx.ts:140](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L140)*
+*Defined in [src/common/evmtx.ts:140](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L140)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **codecID**: *number* = 0
 
-*Defined in [src/common/evmtx.ts:168](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L168)*
+*Defined in [src/common/evmtx.ts:168](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L168)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **transaction**: *SBTx*
 
-*Defined in [src/common/evmtx.ts:169](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L169)*
+*Defined in [src/common/evmtx.ts:169](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L169)*
 
 ## Methods
 
@@ -122,7 +122,7 @@ ___
 
 *Overrides [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
 
-*Defined in [src/common/evmtx.ts:158](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L158)*
+*Defined in [src/common/evmtx.ts:158](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L158)*
 
 **Parameters:**
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset?`: number): *number*
 
-*Defined in [src/common/evmtx.ts:239](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L239)*
+*Defined in [src/common/evmtx.ts:239](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L239)*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **getBurn**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/evmtx.ts:230](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L230)*
+*Defined in [src/common/evmtx.ts:230](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L230)*
 
 Returns the number of burned tokens as a BN
 
@@ -176,7 +176,7 @@ ___
 
 *Overrides [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/common/evmtx.ts:174](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L174)*
+*Defined in [src/common/evmtx.ts:174](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L174)*
 
 Returns the CodecID as a number
 
@@ -188,7 +188,7 @@ ___
 
 ▸ **getCodecIDBuffer**(): *Buffer*
 
-*Defined in [src/common/evmtx.ts:179](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L179)*
+*Defined in [src/common/evmtx.ts:179](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L179)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the CodecID
 
@@ -200,7 +200,7 @@ ___
 
 ▸ **getInputTotal**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/evmtx.ts:188](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L188)*
+*Defined in [src/common/evmtx.ts:188](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L188)*
 
 Returns the inputTotal as a BN
 
@@ -218,7 +218,7 @@ ___
 
 ▸ **getOutputTotal**(`assetID`: Buffer): *BN*
 
-*Defined in [src/common/evmtx.ts:208](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L208)*
+*Defined in [src/common/evmtx.ts:208](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L208)*
 
 Returns the outputTotal as a BN
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **getTransaction**(): *SBTx*
 
-*Defined in [src/common/evmtx.ts:237](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L237)*
+*Defined in [src/common/evmtx.ts:237](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L237)*
 
 Returns the Transaction
 
@@ -250,7 +250,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -264,7 +264,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -278,7 +278,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -298,7 +298,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/evmtx.ts:143](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L143)*
+*Defined in [src/common/evmtx.ts:143](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L143)*
 
 **Parameters:**
 
@@ -314,7 +314,7 @@ ___
 
 ▸ **sign**(`kc`: KCClass): *[EVMStandardTx](common_transactions.evmstandardtx.md)‹KPClass, KCClass, [EVMStandardUnsignedTx](common_transactions.evmstandardunsignedtx.md)‹KPClass, KCClass, SBTx››*
 
-*Defined in [src/common/evmtx.ts:259](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L259)*
+*Defined in [src/common/evmtx.ts:259](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L259)*
 
 Signs this [UnsignedTx](api_evm_transactions.unsignedtx.md) and returns signed [StandardTx](common_transactions.standardtx.md)
 
@@ -334,6 +334,6 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/common/evmtx.ts:241](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/evmtx.ts#L241)*
+*Defined in [src/common/evmtx.ts:241](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/evmtx.ts#L241)*
 
 **Returns:** *Buffer*
