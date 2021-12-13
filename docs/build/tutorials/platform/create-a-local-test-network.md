@@ -5,7 +5,7 @@
 This tutorial explains several methods of creating a local test network.
 
 There are currently three options to launch such a local network:
-* Using the [Avalanche Network Runner](../../tools/netrunner.md) (recommended)
+* Using the [Avalanche Network Runner](../../tools/network-runner.md) (recommended)
 * Manually starting each AvalancheGo node (not recommended)
 * Using [Avash](../../tools/avash.md) (Note that Avash is Deprecated)
 
@@ -15,7 +15,7 @@ The below commands assume you have [AvalancheGo](../nodes-and-staking/run-avalan
 
 ### Avalanche Network Runner
 
-Install the [Avalanche Network Runner](../../tools/netrunner.md) by cloning the repo:
+Install the [Avalanche Network Runner](../../tools/network-runner.md) by cloning the repo:
 
 ```
 git clone https://github.com/ava-labs/avalanche-network-runner.git
@@ -35,7 +35,7 @@ Run the example network configuration:
 go run ./examples/local/fivenodenetwork/main.go
 ```
 
-This creates a 5 node network where each node has a randomly generated API port. Note that you may provide configurations to the Avalanche Network Runner so that it uses predefined API ports for each node. Please see the Network Runner's [documentation](../../tools/netrunner.md) for details.
+This creates a 5 node network where each node has a randomly generated API port. Note that you may provide configurations to the Avalanche Network Runner so that it uses predefined API ports for each node. Please see the Network Runner's [documentation](../../tools/network-runner.md) for details.
 
 After you run the above command, check the output to see the API port of each node. The output will contain something like this:
 
