@@ -73,7 +73,7 @@ You can use any standard way of ingesting on-chain data you use for Ethereum net
 
 ### Determining Finality
 
-Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value (i.e. block, balance, state, etc) with the `latest` parameter. If you query above the last finalized block (i.e. eth\_blockNumber returns 10 and you query 11), an error will be thrown indicating that unfinalized data cannot be queried (as of avalanchego@v1.3.2).
+Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To query the most up-to-date finalized block, query any value (i.e. block, balance, state, etc) with the `latest` parameter. If you query above the last finalized block (i.e. eth_blockNumber returns 10 and you query 11), an error will be thrown indicating that unfinalized data cannot be queried (as of avalanchego@v1.3.2).
 
 ### (Optional) Custom Golang SDK
 
