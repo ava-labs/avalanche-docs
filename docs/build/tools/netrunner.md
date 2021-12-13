@@ -64,7 +64,7 @@ Each node has a unique name. Use the network's `GetNodeNames()` method to get th
 Use the network's method `GetNode(string)` to get a node by its name. For example:
 
 ```go
-names, _ := network.GetNodesNames()
+names, _ := network.GetNodeNames()
 node, _ := network.GetNode(names[0])
 ```
 
