@@ -195,6 +195,7 @@ const sidebars = {
               ],
             },
             'build/tools/dashboards/README',
+            'build/tools/netrunner',
             'build/tools/abigen',
             'build/tools/avash',
             'build/tools/deprecating-ortelius',
