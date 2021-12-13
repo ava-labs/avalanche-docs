@@ -47,7 +47,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/Avalanche-OG-Image.png',
+      image: 'img/Avalanche-OG-Image.png?force-reload-1',
       metadatas: [
         {name: 'twitter:card', content: 'summary_large_image'},
         {name: 'twitter:description', content: 'Avalanche is the fastest smart contracts platform in the blockchain industry, as measured by time-to-finality, and has the most validators securing its activity of any proof-of-stake protocol.'},
