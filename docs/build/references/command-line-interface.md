@@ -412,7 +412,7 @@ Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
 
 Specifies the maximum number of profiles to keep before removing the oldest.
 
-**APIs**
+**Enabling APIs**
 
 `snowman-api-enabled` (boolean):
 
@@ -426,35 +426,192 @@ Enables the Admin API. Defaults to false.
 
 Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
+
+`public-eth-api-enabled` (boolean):
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_coinbase`
+`eth_etherbase`
+
+`public-eth-filter-api-enabled` (boolean):
+
+Enables the public filter API for the `eth_*` namespace. Defaults to true.
+
+Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
+
+`eth_newPendingTransactionFilter`
+`eth_newPendingTransactions`
+`eth_newAcceptedTransactions`
+`eth_newBlockFilter`
+`eth_newHeads`
+`eth_logs`
+`eth_newFilter`
+`eth_getLogs`
+`eth_uninstallFilter`
+`eth_getFilterLogs`
+`eth_getFilterChanges`
+
+`private-admin-api-enabled` (boolean):
+
+Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
+
+`admin_importChain`
+`admin_exportChain`
+
+`public-debug-api-enabled` (boolean):
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_dumpBlock`
+`debug_accountRange`
+
+`private-debug-api-enabled` (boolean):
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_preimage`
+`debug_getBadBlocks`
+`debug_storageRangeAt`
+`debug_getModifiedAccountsByNumber`
+`debug_getModifiedAccountsByHash`
+`debug_getAccessibleState`
+
 `net-api-enabled` (boolean):
 
-Enables the `net_*` API. Defaults to true.
+Adds the following RPC calls to the `net_*` namespace. Defaults to true.
 
-`eth-api-enabled` (boolean):
+`net_listening`
+`net_peerCount`
+`net_version`
 
-Enables the `eth_*` API. Defaults to true.
+Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
 
-`personal-api-enabled` (boolean):
+`debug-tracer-api-enabled` (boolean):
 
-Enables the `personal_*` API. Defaults to false.
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
-`tx-pool-api-enabled` (boolean):
-
-Enables the `txpool_*` API. Defaults to false.
-
-`debug-api-enabled` (boolean):
-
-Enables the `debug_*` API. Defaults to false.
+`debug_traceChain`
+`debug_traceBlockByNumber`
+`debug_traceBlockByHash`
+`debug_traceBlock`
+`debug_traceBadBlock`
+`debug_intermediateRoots`
+`debug_traceTransaction`
+`debug_traceCall`
 
 `web3-api-enabled` (boolean):
 
-Enables the `web3_*` API. Defaults to true.
+Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 
-`allow-unfinalized-queries` (boolean):
+`web3_clientVersion`
+`web3_sha3`
 
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+`internal-public-eth-api-enabled` (boolean):
 
-**API Rate Limiting**
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_gasPrice`
+`eth_baseFee`
+`eth_maxPriorityFeePerGas`
+`eth_feeHistory`
+
+`internal-public-blockchain-api-enabled` (boolean):
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_chainId`
+`eth_blockNumber`
+`eth_getBalance`
+`eth_getAssetBalance`
+`eth_getProof`
+`eth_getHeaderByNumber`
+`eth_getHeaderByHash`
+`eth_getBlockByNumber`
+`eth_getBlockByHash`
+`eth_getUncleBlockByNumberAndIndex`
+`eth_getUncleBlockByBlockHashAndIndex`
+`eth_getUncleCountByBlockNumber`
+`eth_getUncleCountByBlockHash`
+`eth_getCode`
+`eth_getStorageAt`
+`eth_call`
+`eth_estimateGas`
+`eth_createAccessList`
+
+`internal-public-transaction-pool-api-enabled` (boolean):
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_getBlockTransactionCountByNumber`
+`eth_getBlockTransactionCountByHash`
+`eth_getTransactionByBlockNumberAndIndex`
+`eth_getTransactionByBlockHashAndIndex`
+`eth_getRawTransactionByBlockNumberAndIndex`
+`eth_getRawTransactionByBlockHashAndIndex`
+`eth_getTransactionCount`
+`eth_getTransactionByHash`
+`eth_getRawTransactionByHash`
+`eth_getTransactionReceipt`
+`eth_sendTransaction`
+`eth_fillTransaction`
+`eth_sendRawTransaction`
+`eth_sign`
+`eth_signTransaction`
+`eth_pendingTransactions`
+`eth_resend`
+
+`internal-public-tx-pool-api-enabled` (boolean):
+
+Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
+
+`txpool_content`
+`txpool_contentFrom`
+`txpool_status`
+`txpool_inspect`
+
+`internal-public-debug-api-enabled` (boolean):
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_getHeaderRlp`
+`debug_getBlockRlp`
+`debug_printBlock`
+
+`internal-private-debug-api-enabled` (boolean):
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_chaindbProperty`
+`debug_chaindbCompact`
+
+`internal-public-account-api-enabled` (boolean):
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_accounts`
+
+`internal-private-personal-api-enabled` (boolean):
+
+Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
+
+`personal_listAccounts`
+`personal_listWallets`
+`personal_openWallet`
+`personal_deriveAccount`
+`personal_newAccount`
+`personal_importRawKey`
+`personal_unlockAccount`
+`personal_lockAccount`
+`personal_sendTransaction`
+`personal_signTransaction`
+`personal_sign`
+`personal_ecRecover`
+`personal_signAndSendTransaction`
+`personal_initializeWallet`
+`personal_unpair`
+
+**API Configuration**
 
 `rpc-gas-cap` (int):
 
@@ -479,6 +636,10 @@ The refill rate specifies the maximum amount of CPU time to allot a single conne
 `ws-cpu-max-stored` (duration):
 
 Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+
+`allow-unfinalized-queries` (boolean):
+
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
 
 **Transaction Pool**
 
