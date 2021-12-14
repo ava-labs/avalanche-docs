@@ -200,6 +200,14 @@ else
   read -p "Detected '$foundIP' as your public IP. Is this correct? [y,n]: " correct
   if [ "$correct" != "y" ]; then
     read -p "Enter your public IP: " foundIP
+    check=false               # ensure its a valid IP
+    while [[ $check == false ]]
+    do 
+       read -p "Invalid IP. Please Enter your public IP: " foundIP
+       if [[ $foundIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            check=true
+        fi
+    done
   fi
   echo "Installing service with public IP: $foundIP"
 fi
