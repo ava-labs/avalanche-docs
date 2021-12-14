@@ -38,7 +38,7 @@ This will produce `contract.go` suitable to interact with contract.
 
 ## Example Code
 
-Setup the connection to `avalanhcego`, then deploy, call, and fetch values from the contract.
+Setup the connection to `avalanchego`, then deploy, call, and fetch values from the contract.
 
 Abigen offers more features for complicated contracts, the following is provided as an example to get started using the basic contract
 
