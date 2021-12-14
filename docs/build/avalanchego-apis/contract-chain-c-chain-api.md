@@ -132,7 +132,7 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"eth_baseFee",
-    "params" :{}
+    "params" :[]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
@@ -165,7 +165,7 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"eth_maxPriorityFeePerGas",
-    "params" :{}
+    "params" :[]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
