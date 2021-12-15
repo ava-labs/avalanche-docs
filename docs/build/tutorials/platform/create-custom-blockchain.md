@@ -4,7 +4,7 @@
 
 Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine (Timestamp VM).
 
-If you want a blockchain that has capabilities of X-Chain (AVM), see [Create AVM Blockchain](../nodes-and-staking/run-avalanche-node.md).
+If you want a blockchain that has capabilities of X-Chain (AVM) or C-Chain (EVM), see [Create AVM Blockchain](create-avm-blockchain.md) and [Create EVM Blockchain](create-evm-blockchain.md) respectively.
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
