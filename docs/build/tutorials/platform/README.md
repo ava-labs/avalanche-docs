@@ -7,7 +7,7 @@
 | [**Create a Blockchain Running the AVM**](create-avm-blockchain.md) | Create a new instance of the [Avalanche Virtual Machine (AVM)](../../../learn/platform-overview/README.md#exchange-chain-x-chain). |
 | [**Create a Local Test Network**](create-a-local-test-network.md) | Create a local Avalanche test network. |
 | [**Fund a Local Test Network**](fund-a-local-test-network.md) | Fund an address on a local Avalanche test network. |
-| [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/README.md#subnets). |
+| [**Create a Subnet**](create-a-subnet.md) | Create a new [subnet](../../../learn/platform-overview/#subnets). |
 | [**Create a Virtual Machine (VM)**](create-a-virtual-machine-vm.md) | Create a very simple [virtual machine (VM)](../../../learn/platform-overview/README.md#virtual-machines). |
 | [**Create a Custom Blockchain**](create-custom-blockchain.md) | Create custom blockchain with [virtual machine (VM)](../../../learn/platform-overview/README.md#virtual-machines). |
 | [**Avalanche Local Simulator**](ava-sim.md) | Spin up a local instance of an Avalanche network to interact with the standard APIs or to test a custom VM. |
