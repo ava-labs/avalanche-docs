@@ -5,7 +5,7 @@
 | [**Run an Avalanche Node**](run-avalanche-node.md) | How to run a node and interact with the network. |
 | [**Node Backup and Restore**](node-backup-and-restore.md) | Back up important files to be able to restore your node. |
 | [**Set up Node Monitoring**](setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo. |
-| [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](../../../learn/platform-overview/README.md) and a [subnet](../../../learn/platform-overview/) on Avalanche. |
+| [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](../../../learn/platform-overview/README.md) and a [subnet](../../../learn/platform-overview/#subnets) on Avalanche. |
 | [**Set up Node on Linux using install script**](set-up-node-with-installer.md) | Create a node on Linux the easy way. |
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet. |
 | [**Upgrade Your AvalancheGo Node**](upgrade-your-avalanchego-node.mdx) | Upgrade your Avalanche node. |
