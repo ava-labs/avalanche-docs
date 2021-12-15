@@ -780,7 +780,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"admin.setLogLevel",
     "params": {
-        "level":"info",
+        "level":"info"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
