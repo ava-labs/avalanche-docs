@@ -780,7 +780,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"admin.setLogLevel",
     "params": {
-        "level":"info",
+        "level":"info"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
@@ -879,7 +879,7 @@ admin.memoryProfile() -> {success:bool}
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"admin.setLogLevel",
+    "method" :"admin.memoryProfile",
     "params": {}
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
