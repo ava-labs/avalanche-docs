@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network and a [subnet](../../../learn/platform-overview/README.md#subnets) on Avalanche.
+The [Primary Network](https://support.avax.network/en/articles/4135650-what-is-the-primary-network) is inherent to the Avalanche platform and validates Avalanche’s [built-in blockchains](../../../learn/platform-overview/README.md). In this tutorial, we’ll add a node to the Primary Network and a [subnet](../../../learn/platform-overview/#subnets) on Avalanche.
 
 The P-Chain manages metadata on Avalanche. This includes tracking which nodes are in which subnets, which blockchains exist, and which subnets are validating which blockchains. To add a validator, we’ll issue [transactions](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) to the P-Chain.
 

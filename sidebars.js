@@ -117,11 +117,6 @@ const sidebars = {
                 },
                 {
                   type: 'link',
-                  label: 'Run an Avalanche Node with Oracle VM VirtualBox', // The link label
-                  href: 'https://www.youtube.com/watch?v=7Tx1iKg-jL0', // The external URL
-                },
-                {
-                  type: 'link',
                   label: 'Run an Avalanche Node and Stake with the Avalanche Wallet', // The link label
                   href: 'https://youtu.be/ZyQPeSSCbYU', // The external URL
                 },

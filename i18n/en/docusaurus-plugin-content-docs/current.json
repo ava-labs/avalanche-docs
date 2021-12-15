@@ -87,10 +87,6 @@
     "message": "Run an Avalanche Node and Become a Validator",
     "description": "The label for link Run an Avalanche Node and Become a Validator in sidebar tutorialSidebar, linking to https://youtu.be/ZyQPeSSCbYU"
   },
-  "sidebar.tutorialSidebar.link.Run an Avalanche Node with Oracle VM VirtualBox": {
-    "message": "Run an Avalanche Node with Oracle VM VirtualBox",
-    "description": "The label for link Run an Avalanche Node with Oracle VM VirtualBox in sidebar tutorialSidebar, linking to https://www.youtube.com/watch?v=7Tx1iKg-jL0"
-  },
   "sidebar.tutorialSidebar.link.Run an Avalanche Node and Stake with the Avalanche Wallet": {
     "message": "Run an Avalanche Node and Stake with the Avalanche Wallet",
     "description": "The label for link Run an Avalanche Node and Stake with the Avalanche Wallet in sidebar tutorialSidebar, linking to https://youtu.be/ZyQPeSSCbYU"

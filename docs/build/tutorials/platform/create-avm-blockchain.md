@@ -16,7 +16,7 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](../../../learn/platform-overview/README.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
 [Create a Subnet](create-a-subnet.md)
