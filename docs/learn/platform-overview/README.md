@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
+Here are tutorials on [creating a subnet](../../build/tutorials/platform/subnet/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
 
 ![Primary network](/img/primary-network.png)
 
@@ -61,7 +61,7 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 ### Creating Your Blockchain and Virtual Machine
 
 Avalanche supports the creation of new instances of the Avalanche VM.
-* [Create a BlockChain Running Subnet-EVM](../../build/tutorials/platform/create-evm-blockchain.md)
+* [Create a BlockChain Running Subnet-EVM](../../build/tutorials/platform/subnet/create-evm-blockchain.md)
 * [Create a BlockChain Running AVM](../../build/tutorials/platform/create-avm-blockchain.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
