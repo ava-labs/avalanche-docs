@@ -34,8 +34,6 @@ Fee is used to fight against DoS (denial of service) attacks. It's possible, and
 Blockchains in subnets use their own currencies. for instance see [here](create-avm-blockchain.md#create-the-genesis-data)
 
 
-## Development
-
 
 
 
