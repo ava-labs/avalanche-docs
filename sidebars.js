@@ -103,6 +103,7 @@ const sidebars = {
                   ],
                 },
                 'build/tutorials/platform/ava-sim',
+                'build/tutorials/platform/create-custom-blockchain',
                 'build/tutorials/platform/create-a-local-test-network',
                 'build/tutorials/platform/fuji-workflow',
                 'build/tutorials/platform/fund-a-local-test-network',
