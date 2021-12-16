@@ -82,6 +82,7 @@
             }
           },
           "mappings": [],
+          "max": 100,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -146,7 +147,7 @@
           "refId": "A"
         }
       ],
-      "title": "Uptime averageX",
+      "title": "Uptime average",
       "type": "timeseries"
     },
     {
@@ -185,6 +186,7 @@
             }
           },
           "mappings": [],
+          "max": 100,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1101,7 +1103,32 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Queries per Accepted Container {instance=\"localhost:9650\", job=\"avalanchego\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1127,6 +1154,7 @@
       "pluginVersion": "8.0.3",
       "targets": [
         {
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "increase(avalanche_network_pull_query_sent{job=\"avalanchego\"}[5m])",
           "hide": true,
@@ -1135,6 +1163,7 @@
           "refId": "A"
         },
         {
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "increase(avalanche_network_push_query_sent{job=\"avalanchego\"}[5m])",
           "hide": true,
@@ -1143,6 +1172,7 @@
           "refId": "B"
         },
         {
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "increase(avalanche_X_vtx_accepted_count{job=\"avalanchego\"}[5m]) ",
           "hide": true,
@@ -1151,6 +1181,7 @@
           "refId": "C"
         },
         {
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "increase(avalanche_C_blks_accepted_count{job=\"avalanchego\"}[5m]) ",
           "hide": true,
@@ -1159,6 +1190,7 @@
           "refId": "D"
         },
         {
+          "datasource": "Prometheus",
           "exemplar": true,
           "expr": "increase(avalanche_P_blks_accepted_count{job=\"avalanchego\"}[5m])",
           "hide": true,
@@ -1167,35 +1199,13 @@
           "refId": "E"
         },
         {
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0,
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": []
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
           "datasource": {
-            "type": "grafana-expression",
-            "uid": "-100"
+            "type": "__expr__",
+            "uid": "__expr__"
           },
           "expression": "($A + $B) / ($C + $D + $E)",
           "hide": false,
-          "refId": "S",
+          "refId": "Queries per Accepted Container",
           "type": "math"
         }
       ],
@@ -3190,6 +3200,6 @@
   "timezone": "",
   "title": "Network",
   "uid": "jB1TgdZ7z",
-  "version": 19,
+  "version": 23,
   "weekStart": ""
 }
