@@ -12,7 +12,6 @@ One of the core features of Avalanche is the ability to create new blockchains. 
 The answer is usually yes, because Subnet provides great flexibility to work almost anything.
 
 
-
 ## Fees
 
 ### How much does it cost to create a subnet?
@@ -20,5 +19,10 @@ The answer is usually yes, because Subnet provides great flexibility to work alm
 0.01 AVAX based on [this doc](../../../../learn/platform-overview/transaction-fees.md#fee-schedule)
 
 ### Could it be possible to create a subnet with free transaction?
+
+
+## Development
+
+
 
 
