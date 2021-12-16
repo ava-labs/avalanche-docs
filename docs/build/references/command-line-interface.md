@@ -412,7 +412,7 @@ Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
 
 Specifies the maximum number of profiles to keep before removing the oldest.
 
-**Enabling APIs**
+**Enabling Avalanche Specific APIs**
 
 `snowman-api-enabled` (boolean):
 
@@ -426,15 +426,22 @@ Enables the Admin API. Defaults to false.
 
 Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
+**Enabling EVM APIs**
 
-`public-eth-api-enabled` (boolean):
+`eth-apis` ([]string):
+
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
+
+Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
+
+`public-eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 `eth_coinbase`
 `eth_etherbase`
 
-`public-eth-filter-api-enabled` (boolean):
+`public-eth-filter`:
 
 Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
@@ -452,21 +459,21 @@ Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete doc
 `eth_getFilterLogs`
 `eth_getFilterChanges`
 
-`private-admin-api-enabled` (boolean):
+`private-admin`:
 
 Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
 `admin_importChain`
 `admin_exportChain`
 
-`public-debug-api-enabled` (boolean):
+`public-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 `debug_dumpBlock`
 `debug_accountRange`
 
-`private-debug-api-enabled` (boolean):
+`private-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -477,7 +484,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 `debug_getModifiedAccountsByHash`
 `debug_getAccessibleState`
 
-`net-api-enabled` (boolean):
+`net`:
 
 Adds the following RPC calls to the `net_*` namespace. Defaults to true.
 
@@ -487,7 +494,7 @@ Adds the following RPC calls to the `net_*` namespace. Defaults to true.
 
 Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
 
-`debug-tracer-api-enabled` (boolean):
+`debug-tracer`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -500,14 +507,14 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 `debug_traceTransaction`
 `debug_traceCall`
 
-`web3-api-enabled` (boolean):
+`web3`:
 
 Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
 
 `web3_clientVersion`
 `web3_sha3`
 
-`internal-public-eth-api-enabled` (boolean):
+`internal-public-eth`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -516,7 +523,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 `eth_maxPriorityFeePerGas`
 `eth_feeHistory`
 
-`internal-public-blockchain-api-enabled` (boolean):
+`internal-public-blockchain`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -539,7 +546,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 `eth_estimateGas`
 `eth_createAccessList`
 
-`internal-public-transaction-pool-api-enabled` (boolean):
+`internal-public-transaction-pool`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
@@ -561,7 +568,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 `eth_pendingTransactions`
 `eth_resend`
 
-`internal-public-tx-pool-api-enabled` (boolean):
+`internal-public-tx-pool`:
 
 Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 
@@ -570,7 +577,7 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
 `txpool_status`
 `txpool_inspect`
 
-`internal-public-debug-api-enabled` (boolean):
+`internal-public-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
@@ -578,20 +585,20 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 `debug_getBlockRlp`
 `debug_printBlock`
 
-`internal-private-debug-api-enabled` (boolean):
+`internal-private-debug`:
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
 
 `debug_chaindbProperty`
 `debug_chaindbCompact`
 
-`internal-public-account-api-enabled` (boolean):
+`internal-public-account`:
 
 Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
 `eth_accounts`
 
-`internal-private-personal-api-enabled` (boolean):
+`internal-private-personal`:
 
 Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
 
