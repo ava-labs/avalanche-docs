@@ -19,7 +19,7 @@
 
 • **addresses**: *string[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/interfaces.ts#L10)*
+*Defined in [src/apis/platformvm/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/interfaces.ts#L10)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **encoding**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/interfaces.ts#L11)*
+*Defined in [src/apis/platformvm/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/interfaces.ts#L11)*

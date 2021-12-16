@@ -70,7 +70,7 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
-#### eth\_getAssetBalance
+#### eth_getAssetBalance
 
 In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance` to retrieve the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, which must be fetched with `eth_getBalance`).
 
@@ -113,7 +113,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth\_baseFee
+### eth_baseFee
 
 Get the base fee for the next block.
 
@@ -132,7 +132,7 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"eth_baseFee",
-    "params" :{}
+    "params" :[]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
@@ -146,7 +146,7 @@ curl -X POST --data '{
 }
 ```
 
-### eth\_maxPriorityFeePerGas
+### eth_maxPriorityFeePerGas
 
 Get the priority fee needed to be included in a block.
 
@@ -165,7 +165,7 @@ curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"eth_maxPriorityFeePerGas",
-    "params" :{}
+    "params" :[]
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
 ```
 
@@ -780,7 +780,7 @@ curl -X POST --data '{
     "id"     :1,
     "method" :"admin.setLogLevel",
     "params": {
-        "level":"info",
+        "level":"info"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```
@@ -879,7 +879,7 @@ admin.memoryProfile() -> {success:bool}
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"admin.setLogLevel",
+    "method" :"admin.memoryProfile",
     "params": {}
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/admin
 ```

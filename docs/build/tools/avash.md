@@ -1,5 +1,11 @@
 # Avash
 
+:::warning
+
+Avash is deprecated and is being replaced with the [Avalanche Network Runner](./network-runner.md)
+
+:::
+
 Avash is a temporary shell execution environment used to deploy and test on Avalanche networks. Avalanche nodes deployed locally by Avash are exited when Avash exits.
 
 Avash provides the ability to run Lua scripts, which can execute a sequence of shell commands in Avash. This allows for automation of tasks. For instance, one could create a Lua script to deploy a network of Avalanche nodes where each node has some given configuration. This makes testing easier.

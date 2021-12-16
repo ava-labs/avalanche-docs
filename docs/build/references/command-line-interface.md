@@ -10,7 +10,7 @@ You can specify the configuration of a node with the arguments below.
 
 `--config-file` (string):
 
-Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file.
+Path to a JSON file that specifies this node's configuration. Command line arguments will override arguments set in the config file. This flag is ignored if `--config-file-content` is specified.
 
 Example JSON config file:
 
@@ -19,6 +19,14 @@ Example JSON config file:
     "log-level": "debug"
 }
 ```
+
+`--config-file-content` (string):
+
+As an alternative to `--config-file`, it allows specifying base64 encoded config content. Must be used in conjunction with `--config-file-content-type`.
+
+`--config-file-content-type` (string):
+
+Specifies the format of the base64 encoded config content. JSON, TOML, YAML are among currently supported file format (see [here](https://github.com/spf13/viper#reading-config-files) for full list). Required if `--config-file-content` is set.
 
 ## APIs
 
@@ -57,6 +65,14 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 `--api-metrics-enabled` (boolean):
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+
+`--http-shutdown-wait` (duration): 
+
+Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to 0.
+
+`--http-shutdown-timeout` (duration):
+
+Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
 
 ## Assertions
 
@@ -104,7 +120,11 @@ Note that when running with `leveldb`, the node can't read data that was persist
 
 `--genesis` (string):
 
-Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Testnet.) If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+Path to a JSON file containing the genesis data to use. Ignored when running standard networks (Mainnet, Fuji Testnet), or when `--genesis-content` is specified. If not given, uses default genesis data. For an example of a JSON representation of genesis data, see [here](https://github.com/ava-labs/avalanchego/blob/master/genesis/genesis_local.go#L16).
+
+`--genesis-content` (string):
+
+As an alternative to `--genesis`, it allows specifying base64 encoded genesis data to use.
 
 ## HTTP Server
 
@@ -118,7 +138,11 @@ Each node runs an HTTP server that provides the APIs for interacting with the no
 
 `--http-tls-cert-file` (string, file path):
 
-This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+This argument specifies the location of the TLS certificate used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-cert-file-content` is specified.
+
+`--http-tls-cert-file-content` (string):
+
+As an alternative to `--http-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node for the HTTPS server. Note that full certificate content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 `--http-tls-enabled` (boolean):
 
@@ -126,7 +150,11 @@ If set to `true`, this flag will attempt to upgrade the server to use HTTPS. Def
 
 `--http-tls-key-file` (string, file path):
 
-This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value.
+This argument specifies the location of the TLS private key used by the node for the HTTPS server. This must be specified when `--http-tls-enabled=true`. There is no default value. This flag is ignored if `--http-tls-key-file-content` is specified.
+
+`--http-tls-key-file-content` (string):
+
+As an alternative to `--http-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node for the HTTPS server. Note that full private key content, with the leading and trailing header, must be base64 encoded. This must be specified when `--http-tls-enabled=true`.
 
 ## IPCS
 
@@ -206,7 +234,7 @@ Enables signature verification. When set to `false`, signatures won’t be check
 
 ## Staking
 
-`--staking-port` (string):
+`--staking-port` (int):
 
 The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
 
@@ -220,11 +248,19 @@ It means that this node will sample all nodes, not just validators.
 
 `--staking-tls-cert-file` (string, file path):
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS certificate used by the node. By default, the node expects the TLS certificate to be at `$HOME/.avalanchego/staking/staker.crt`. This flag is ignored if `--staking-tls-cert-file-content` is specified.
+
+`--staking-tls-cert-file-content` (string):
+
+As an alternative to `--staking-tls-cert-file`, it allows specifying base64 encoded content of the TLS certificate used by the node. Note that full certificate content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-tls-key-file` (string, file path):
 
-Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`.
+Avalanche uses two-way authenticated TLS connections to securely connect nodes. This argument specifies the location of the TLS private key used by the node. By default, the node expects the TLS private key to be at `$HOME/.avalanchego/staking/staker.key`. This flag is ignored if `--staking-tls-key-file-content` is specified.
+
+`--staking-tls-key-file-content` (string):
+
+As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
 
 `--staking-disabled-weight` (int):
 
@@ -295,7 +331,11 @@ It is not required to provide these custom configurations. If they are not provi
 
 `--chain-config-dir` (string):
 
-Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.
+Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--chain-config-content` is specified.
+
+`--chain-config-content` (string):
+
+As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
 
 #### C-Chain Config
 
@@ -311,25 +351,56 @@ The default C-Chain config is:
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
-  "coreth-performance-api-enabled": false,
+  "coreth-admin-api-dir": "",
   "net-api-enabled": true,
+  "continuous-profiler-dir": "",
+  "continuous-profiler-frequency": 900000000000,
+  "continuous-profiler-max-files": 5,
   "rpc-gas-cap": 50000000,
   "rpc-tx-fee-cap": 100,
   "eth-api-enabled": true,
-  "personal-api-enabled": false,
+  "personal-api-enabled": true,
   "tx-pool-api-enabled": false,
   "debug-api-enabled": false,
   "web3-api-enabled": true,
+  "preimages-enabled": false,
+  "pruning-enabled": true,
+  "snapshot-async": true,
+  "snapshot-verification-enabled": false,
+  "metrics-enabled": false,
+  "metrics-expensive-enabled": false,
   "local-txs-enabled": false,
-  "pruning-enabled": false,
   "api-max-duration": 0, // Default to no maximum
+  "ws-cpu-refill-rate": 0,
+  "ws-cpu-max-stored": 0,
   "api-max-blocks-per-request": 0, // Default to no maximum
   "allow-unfinalized-queries": false,
-  "log-level": "info"
+  "allow-unprotected-txs": false,
+  "keystore-directory": "",
+  "keystore-external-signer": "",
+  "keystore-insecure-unlock-allowed": false,
+  "remote-tx-gossip-only-enabled": false,
+  "tx-regossip-frequency": 60000000000,
+  "tx-regossip-max-size": 15,
+  "log-level": "debug"
 }
 ```
 
 Default values are overridden only if specified in the given config.
+
+**Continuous Profiling**
+
+`continuous-profiler-dir` (string):
+
+Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to "". If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
+
+`continuous-profiler-frequency` (duration):
+
+Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
+
+`continuous-profiler-max-files` (int):
+
+Specifies the maximum number of profiles to keep before removing the oldest.
 
 **APIs**
 
@@ -341,9 +412,9 @@ Enables the Snowman API. Defaults to false.
 
 Enables the Admin API. Defaults to false.
 
-`coreth-performance-api-enabled` (boolean):
+`coreth-admin-api-dir` (string):
 
-Enables the Performance API. Defaults to false.
+Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
 `net-api-enabled` (boolean):
 
@@ -369,7 +440,11 @@ Enables the `debug_*` API. Defaults to false.
 
 Enables the `web3_*` API. Defaults to true.
 
-**API Gas/Price Caps**
+`allow-unfinalized-queries` (boolean):
+
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+
+**API Rate Limiting**
 
 `rpc-gas-cap` (int):
 
@@ -377,13 +452,75 @@ The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `et
 
 `rpc-tx-fee-cap` (int):
 
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transction variants. Defaults to 100.
+Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to 100.
 
-**Database Pruning**
+`api-max-duration` (duration):
 
-`pruning-enabled`(boolean):
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
+
+`api-max-blocks-per-request` (int):
+
+Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
+
+`ws-cpu-refill-rate` (duration):
+
+The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (0).
+
+`ws-cpu-max-stored` (duration):
+
+Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+
+**Transaction Pool**
+
+`local-txs-enabled` (boolean):
+
+Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to false.
+
+`allow-unprotected-txs` (boolean):
+
+If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
+
+`remote-tx-gossip-only-enabled` (boolean):
+
+If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to false.
+
+`tx-regossip-frequency` (duration):
+
+Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to 1 minute.
+
+`tx-regossip-max-size` (int):
+
+Maximum number of transactions to re-gossip at once. Defaults to 15.
+
+**Metrics**
+
+`metrics-enabled` (boolean):
+
+Enables metrics. Defaults to false.
+
+`metrics-expensive-enabled` (boolean):
+
+Enables expensive metrics. Defaults to false.
+
+**Database**
+
+`pruning-enabled` (boolean):
 
 If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+`preimages-enabled` (boolean):
+
+If true, enables preimages. Defaults to false.
+
+**Snapshots**
+
+`snapshot-async` (boolean):
+
+If true, allows snapshot generation to be executed asynchronously. Defaults to true.
+
+`snapshot-verification-enabled` (boolean):
+
+If true, verifies the complete snapshot after it has been generated. Defaults to false.
 
 **Log Level**
 
@@ -404,24 +541,6 @@ Specifies an external URI for a clef-type signer. Defaults to the empty string (
 `keystore-insecure-unlock-allowed` (bool):
 
 If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
-
-**Other Settings**
-
-`local-txs-enabled` (boolean):
-
-Enables local transaction handling. Defaults to false.
-
-`api-max-duration` (duration):
-
-Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
-
-`api-max-blocks-per-request` (int):
-
-Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
-
-`allow-unfinalized-queries` (boolean):
-
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
 
 #### X-Chain Configs
 
@@ -564,7 +683,11 @@ Maximum number of CPU/memory profiles files to keep. Defaults to 5.
 
 `--db-config-file` (string):
 
-Path to the database config file.
+Path to the database config file. Ignored if `--config-file-content` is specified.
+
+`--db-config-file-content` (string):
+
+As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
 
 #### LevelDB Config
 
@@ -813,7 +936,7 @@ It is possible to provide parameters for subnets. Parameters here apply to all c
 
 `--subnet-config-dir` (string):
 
-Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.
+Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--subnet-config-content` is specified.
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
@@ -826,6 +949,10 @@ Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
   }
 }
 ```
+
+`--subnet-config-content` (string):
+
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
 
 **Validator Only**
 
@@ -856,7 +983,7 @@ The consensus parameters of a subnet default to the same values used for the Pri
 
 `--vm-aliases-file` (string):
 
-Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. Example content:
+Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if `--vm-aliases-file-content` is specified. Example content:
 
 ```javascript
 {
@@ -869,3 +996,6 @@ Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.
 
 The above example aliases the VM whose ID is `"tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH"` to `"timestampvm"` and `"timerpc"`.
 
+`--vm-aliases-file-content` (string):
+
+As an alternative to `--vm-aliases-file`, it allows specifying base64 encoded aliases for Virtual Machine IDs.

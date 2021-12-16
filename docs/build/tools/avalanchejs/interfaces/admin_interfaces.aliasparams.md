@@ -19,7 +19,7 @@
 
 • **alias**: *string*
 
-*Defined in [src/apis/admin/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/interfaces.ts#L8)*
+*Defined in [src/apis/admin/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/interfaces.ts#L8)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **endpoint**: *string*
 
-*Defined in [src/apis/admin/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/admin/interfaces.ts#L7)*
+*Defined in [src/apis/admin/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/admin/interfaces.ts#L7)*

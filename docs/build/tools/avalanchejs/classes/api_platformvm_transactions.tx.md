@@ -45,7 +45,7 @@
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[constructor](common_transactions.standardtx.md#constructor)*
 
-*Defined in [src/common/tx.ts:448](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L448)*
+*Defined in [src/common/tx.ts:448](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L448)*
 
 Class representing a signed transaction.
 
@@ -66,7 +66,7 @@ Name | Type | Default | Description |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Overrides [StandardTx](common_transactions.standardtx.md).[_typeID](common_transactions.standardtx.md#protected-_typeid)*
 
-*Defined in [src/apis/platformvm/tx.ts:97](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/tx.ts#L97)*
+*Defined in [src/apis/platformvm/tx.ts:97](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/tx.ts#L97)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [StandardTx](common_transactions.standardtx.md).[_typeName](common_transactions.standardtx.md#protected-_typename)*
 
-*Defined in [src/apis/platformvm/tx.ts:96](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/tx.ts#L96)*
+*Defined in [src/apis/platformvm/tx.ts:96](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/tx.ts#L96)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[credentials](common_transactions.standardtx.md#protected-credentials)*
 
-*Defined in [src/common/tx.ts:381](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L381)*
+*Defined in [src/common/tx.ts:381](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L381)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[unsignedTx](common_transactions.standardtx.md#protected-unsignedtx)*
 
-*Defined in [src/common/tx.ts:380](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L380)*
+*Defined in [src/common/tx.ts:380](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L380)*
 
 ## Methods
 
@@ -116,7 +116,7 @@ ___
 
 *Overrides [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
 
-*Defined in [src/apis/platformvm/tx.ts:101](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/tx.ts#L101)*
+*Defined in [src/apis/platformvm/tx.ts:101](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/tx.ts#L101)*
 
 **Parameters:**
 
@@ -135,7 +135,7 @@ ___
 
 *Overrides [StandardTx](common_transactions.standardtx.md).[fromBuffer](common_transactions.standardtx.md#abstract-frombuffer)*
 
-*Defined in [src/apis/platformvm/tx.ts:123](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/apis/platformvm/tx.ts#L123)*
+*Defined in [src/apis/platformvm/tx.ts:123](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/tx.ts#L123)*
 
 Takes a [Buffer](https://github.com/feross/buffer) containing an [Tx](api_platformvm_transactions.tx.md), parses it, populates the class, and returns the length of the Tx in bytes.
 
@@ -158,7 +158,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[fromString](common_transactions.standardtx.md#fromstring)*
 
-*Defined in [src/common/tx.ts:436](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L436)*
+*Defined in [src/common/tx.ts:436](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L436)*
 
 Takes a base-58 string containing an [StandardTx](common_transactions.standardtx.md), parses it, populates the class, and returns the length of the Tx in bytes.
 
@@ -183,7 +183,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -197,7 +197,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[getCredentials](common_transactions.standardtx.md#getcredentials)*
 
-*Defined in [src/common/tx.ts:386](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L386)*
+*Defined in [src/common/tx.ts:386](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L386)*
 
 Returns the [[Credential[]]]
 
@@ -211,7 +211,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -225,7 +225,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -239,7 +239,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[getUnsignedTx](common_transactions.standardtx.md#getunsignedtx)*
 
-*Defined in [src/common/tx.ts:393](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L393)*
+*Defined in [src/common/tx.ts:393](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L393)*
 
 Returns the [StandardUnsignedTx](common_transactions.standardunsignedtx.md)
 
@@ -253,7 +253,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -275,7 +275,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/tx.ts:371](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L371)*
+*Defined in [src/common/tx.ts:371](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L371)*
 
 **Parameters:**
 
@@ -293,7 +293,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[toBuffer](common_transactions.standardtx.md#tobuffer)*
 
-*Defined in [src/common/tx.ts:402](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L402)*
+*Defined in [src/common/tx.ts:402](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L402)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [StandardTx](common_transactions.standardtx.md).
 
@@ -307,7 +307,7 @@ ___
 
 *Inherited from [StandardTx](common_transactions.standardtx.md).[toString](common_transactions.standardtx.md#tostring)*
 
-*Defined in [src/common/tx.ts:446](https://github.com/ava-labs/avalanchejs/blob/fa4a637/src/common/tx.ts#L446)*
+*Defined in [src/common/tx.ts:446](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/common/tx.ts#L446)*
 
 Returns a cb58 representation of the [StandardTx](common_transactions.standardtx.md).
 
