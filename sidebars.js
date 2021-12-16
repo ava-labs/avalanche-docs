@@ -109,6 +109,7 @@ const sidebars = {
                 'build/tutorials/platform/integrate-exchange-with-avalanche',
                 'build/tutorials/platform/launch-your-ethereum-dapp',
                 'build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche',
+                'build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain',
                 'build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain',
               ],
             },
