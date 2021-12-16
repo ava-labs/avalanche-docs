@@ -118,7 +118,8 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       algolia: {
-        apiKey: '3f4f2f0325144237da8308f56a43e48d',
+        appId: 'UAFD8IBIF7',
+        apiKey: '20006f8de4bf55970ebca9129c345a1d',
         indexName: 'avax',
         contextualSearch: true,
       },
