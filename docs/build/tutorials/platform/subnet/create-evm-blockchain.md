@@ -407,7 +407,7 @@ More information can be found in the [Adding a Subnet Validator](../../nodes-and
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
-You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain]( ../../../../learn/platform-overview/README.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain).
+You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../../../../learn/platform-overview/README.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain).
 
 ### Verify Chain ID
 
