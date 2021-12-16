@@ -4,7 +4,7 @@
 
 One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../../../../learn/platform-overview/README.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
 
-If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](../create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](../create-a-virtual-machine-vm.md).
+If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](../create-custom-blockchain.md).
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
