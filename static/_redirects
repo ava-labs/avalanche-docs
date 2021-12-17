@@ -3,6 +3,10 @@
 /learn/platf /learn/platform-overview  301
 /build/get-started /build/tutorials/ 301
 /build/tutorials/nodes-and-staking/avash /build/tools/avash  301
+/build/tutorials/platform/create-a-subnet /build/tutorials/platform/subnet/create-a-subnet 301
+/build/tutorials/platform/create-a-virtual-machine-vm /build/tutorials/platform/subnet/create-a-virtual-machine-vm 301
+/build/tutorials/platform/create-avm-blockchain /build/tutorials/platform/subnet/create-avm-blockchain 301
+/build/tutorials/platform/create-evm-blockchain /build/tutorials/platform/subnet/create-evm-blockchain 301
 /v/v1.0.4/build/apis /build/avalanchego-apis  301
 /v/v1.0.4/build/references/cryptographic-primitives /build/references/cryptographic-primitives  301
 /v/v1.0.4/build/references/platform-transaction-serialization /build/references/platform-transaction-serialization  301

@@ -1,8 +1,12 @@
+---
+sidebar_position: 4
+---
+
 # Create a Subnet
 
 ## Introduction
 
-A [subnet](../../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
+A [subnet](../../../../../learn/platform-overview/#subnets) is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
 
 When a subnet is created, a threshold and a set of keys are specified. (Actually the addresses of the keys, not the keys themselves, are specified.) In order to add a validator to that subnet, _threshold_ signatures from those keys are needed. We call these the subnet’s **control keys** and we call a control key’s signature on a transaction that adds a validator to a subnet a **control signature.** The upshot is that a subnet has control over its membership.
 
@@ -12,7 +16,7 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Generate the Control Keys {#generate-the-control-keys}
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
+First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) This generates a new private key and stores it for a user.
 
 To generate the first key:
 
@@ -68,7 +72,7 @@ The response contains the second control key, which is held by the user we just 
 
 ### Create the Subnet {#create-the-subnet}
 
-To create a subnet, we call [`platform.createSubnet`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
+To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createsubnet).
 
 ```cpp
 curl -X POST --data '{
@@ -102,7 +106,7 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 ### Verifying Success {#verifying-success}
 
-We can call [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
+We can call [`platform.getSubnets`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets) to get all Subnets that exist:
 
 ```cpp
 curl -X POST --data '{
@@ -142,7 +146,7 @@ Now let’s add a validator to a subnet. Right now you can only add validators t
 
 Suppose that the Subnet has ID `3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`, threshold 2, and that `username` holds at least 2 control keys.
 
-To add the validator, we’ll call API method [`platform.addSubnetValidator`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformaddsubnetvalidator). Its signature is:
+To add the validator, we’ll call API method [`platform.addSubnetValidator`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platformaddsubnetvalidator). Its signature is:
 
 ```cpp
 platform.addSubnetValidator(
@@ -220,7 +224,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgettxstatus):
+We can check the transaction’s status by calling [`platform.getTxStatus`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platformgettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -233,7 +237,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
+The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
 
 ```cpp
 curl -X POST --data '{
@@ -269,7 +273,7 @@ When the time reaches `1584042912`, this node will start validating this Subnet.
 
 Avalanche subnets are public. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
 
-Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../references/command-line-interface.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../../references/command-line-interface.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
 
 Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
 
@@ -283,5 +287,5 @@ In this example the full command is:
 
 `./build/avalanchego --whitelisted-subnets=3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`
 
-For more information about the command see: [whitelisted-subnet command-line argument](../../references/command-line-interface.md#whitelist).
+For more information about the command see: [whitelisted-subnet command-line argument](../../../references/command-line-interface.md#whitelist).
 

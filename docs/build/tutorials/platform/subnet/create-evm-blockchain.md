@@ -2,9 +2,9 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../../../learn/platform-overview/README.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Ethereum Virtual Machine (EVM)](../../../../learn/platform-overview/README.md#contract-chain-c-chain). In this tutorial, we’ll create a C-Chain alike blockchain by creating a new instance of the Subnet EVM. Subnet EVM is a fork of Avalanche's Coreth VM, simplified and adapted specifically for subnets.
 
-If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
+If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](../create-custom-blockchain.md).
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
@@ -31,9 +31,9 @@ The path to the executable, can be provided to the build script via arguments. F
 If no argument is given, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/spePNvBxaWSYL2tB5e2xMmMNBQkXMN8z2XEbz1ML2Aahatwoc`
 (The part `spePNvBxaWSYL2tB5e2xMmMNBQkXMN8z2XEbz1ML2Aahatwoc` is the default ID of this VM.)
 
-AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../references/command-line-interface.md#build-directory) for more information.
+AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/command-line-interface.md#build-directory) for more information.
 
-Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs). In this tutorial we used `spePNvBxaWSYL2tB5e2xMmMNBQkXMN8z2XEbz1ML2Aahatwoc` as our VM ID.
+Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../../references/command-line-interface.md#vm-configs). In this tutorial we used `spePNvBxaWSYL2tB5e2xMmMNBQkXMN8z2XEbz1ML2Aahatwoc` as our VM ID.
 
 Copy built VM binary into the AvalancheGo plugin directory. In this tutorial we put AvalancheGo and Subnet-EVM repositories under the same folder:
 ```sh
@@ -42,13 +42,13 @@ cp ./build/spePNvBxaWSYL2tB5e2xMmMNBQkXMN8z2XEbz1ML2Aahatwoc ../avalanchego/buil
 
 ## Running the Node
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) tutorial.
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../nodes-and-staking/run-avalanche-node.md) tutorial.
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](../../../learn/platform-overview/README.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../../../../learn/platform-overview/README.md#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
 [Create a Subnet](create-a-subnet.md)
@@ -59,7 +59,7 @@ Every blockchain is validated by a [subnet](../../../learn/platform-overview/REA
 The subnet needs validators in it to, well, validate blockchains.
 
 :::info
-[Add a node to the Validator Set](../nodes-and-staking/add-a-validator.md)
+[Add a node to the Validator Set](../../nodes-and-staking/add-a-validator.md)
 :::
 
 
@@ -297,7 +297,7 @@ This should return the same genesis block, provided in `subnetevm.buildGenesis` 
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
 Now let's create the blockchain by issuing the `platform.createBlockchain` call:
 
@@ -334,7 +334,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
 
 ```cpp
 curl -X POST --data '{
@@ -378,7 +378,7 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchainstatus) on that node:
 
 ```cpp
 curl -X POST --data '{
@@ -403,11 +403,11 @@ curl -X POST --data '{
 
 If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL`) as well as add the node to the subnet's validator set.
 
-More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
+More information can be found in the [Adding a Subnet Validator](../../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
-You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../../../learn/platform-overview/README.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain).
+You can interact with this new instance of the EVM almost the same way you’d interact with the [C-Chain](../../../../learn/platform-overview/README.md#contract-chain-c-chain). However the RPC API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/rpc`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `mycchain` for simpler API URLs. More information see [admin.aliasChain](https://docs.avax.network/build/avalanchego-apis/admin-api#admin-aliaschain).
 
 ### Verify Chain ID
 
@@ -487,5 +487,5 @@ You can inspect your confirmed transaction.
 
 ## Other Tools
 
-You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
 

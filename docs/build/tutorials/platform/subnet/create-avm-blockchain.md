@@ -2,7 +2,7 @@
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine (AVM)](../../../learn/platform-overview/README.md#exchange-chain-x-chain). In this tutorial, we’ll create a X-Chain alike blockchain by creating a new instance of the AVM.
+One of the core features of Avalanche is the ability to create new blockchains. Avalanche supports the creation of new instances of the [Avalanche Virtual Machine (AVM)](../../../../learn/platform-overview/README.md#exchange-chain-x-chain). In this tutorial, we’ll create a X-Chain alike blockchain by creating a new instance of the AVM.
 
 If you're interested in building custom blockchains, see [Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md) and [Create a Custom Blockchain](create-a-virtual-machine-vm.md).
 
@@ -10,13 +10,13 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Prerequisites
 
-You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node.md) tutorial.
+You will need a running node, a user on the node, and some AVAX in the address controlled by the user. All of that is covered in the [Run an Avalanche Node](../../nodes-and-staking/run-avalanche-node.md) tutorial.
 
-Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
+Next, you need to have your node be a validator on the [Primary Network](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). You can find out how to do that in the [Add a Validator](../../nodes-and-staking/add-a-validator.md) tutorial. It is recommended you do that [with API calls](../../nodes-and-staking/add-a-validator.md#add-a-validator-with-api-calls), since that is the way you will be interacting with your node in the rest of this tutorial.
 
 ## Create the Subnet
 
-Every blockchain is validated by a [subnet](../../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
+Every blockchain is validated by a [subnet](../../../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
 [Create a Subnet](create-a-subnet.md)
@@ -27,7 +27,7 @@ Every blockchain is validated by a [subnet](../../../../learn/platform-overview/
 The subnet needs validators in it to, well, validate blockchains.
 
 :::info
-[Add a node to the Validator Set](../nodes-and-staking/add-a-validator.md)
+[Add a node to the Validator Set](../../nodes-and-staking/add-a-validator.md)
 :::
 
 
@@ -35,7 +35,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. The AVM and Coreth have a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state.
 
-The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.mdx) specifies that the argument to [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis) should look like this:
+The [AVM’s documentation](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx) specifies that the argument to [`avm.buildGenesis`](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis) should look like this:
 
 ```cpp
 {
@@ -87,7 +87,7 @@ The [AVM’s documentation](../../avalanchego-apis/exchange-chain-x-chain-api.md
 }
 ```
 
-To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../learn/platform-overview/transaction-fees.md#transaction-fees)
+To create the byte representation of this genesis state, call [`avm.buildGenesis`](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.buildGenesis). Your call should look like the one below. Note that AVAX does not exist on custom blockchains, but you'll still need a way to pay for transaction fees on this new chain. On custom AVM instances, the transaction fees are denominated in the first asset specified in the `genesisData`. In this example, fees are paid with `asset1` (named `myFixedCapAsset`.) Make sure that you put enough amount to cover for fees. The default transaction fee is 1,000,000 of whatever asset the fees are denominated in. More information about fees can be found [`here.`](../../../../learn/platform-overview/transaction-fees.md#transaction-fees)
 
 Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`:
 
@@ -164,7 +164,7 @@ This returns the byte representation of your blockchain’s genesis state:
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
 ```cpp
 curl -X POST --data '{
@@ -199,7 +199,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchains). This returns a list of all blockchains that exist.
 
 ```cpp
 curl -X POST --data '{
@@ -249,7 +249,7 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getblockchainstatus) on that node:
 
 ```cpp
 curl -X POST --data '{
@@ -274,11 +274,11 @@ curl -X POST --data '{
 
 If it responds `"Validating"`, the node is validating the given chain. If it responds `"Syncing"`, then the chain tracked by this node but it is not validating. If it responde `"Created"` then the chain exists but it is not being synced. Note that in order to validate or watch a subnet, you need to start your node with argument `--whitelisted-subnets=[subnet ID goes here]` (e.g. `--whitelisted-subnets=KL1e8io1Zi2kr8cTXxvi321pAzfQuUa8tmBfadqpf9K2dc2TT`) as well as add the node to the subnet's validator set.
 
-More information can be found in the [Adding a Subnet Validator](../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
+More information can be found in the [Adding a Subnet Validator](../../nodes-and-staking/add-a-validator.md#adding-a-subnet-validator) tutorial.
 
 ## Interacting with the New Blockchain {#interact-with-the-new-blockchain}
 
-You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain). There are some small differences:
+You can interact with this new instance of the AVM almost the same way you’d interact with the [X-Chain](../../../../learn/platform-overview/README.md#exchange-chain-x-chain). There are some small differences:
 
 * The API endpoint of your blockchain is `127.0.0.1:9650/ext/bc/xAd5n5PQFV6RRo8UgH54Gf5tJs8oQdctQS2ygp5F2dKZDckYH`. The last part in the endpoint is the blockchain ID. This can be a different ID when you create your blockchain. You can also alias this chain ID with `myxchain` for simpler API URLs. More information:
 
@@ -345,7 +345,7 @@ curl -X POST --data '{
 }
 ```
 
-Now let's send 1 unit of `asset1` to the new address with [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.send).
+Now let's send 1 unit of `asset1` to the new address with [`avm.send`](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.send).
 
 ```cpp
 curl -X POST --data '{
@@ -462,7 +462,7 @@ This address had 100,000,000 `asset1`, then we sent 1 unit to the other address 
 
 ### Mint Asset
 
-Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
+Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
 
 ```cpp
 curl -X POST --data '{
@@ -495,7 +495,7 @@ curl -X POST --data '{
 }
 ```
 
-Let's check the balance with [`avm.getAllBalances`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.getAllBalances).
+Let's check the balance with [`avm.getAllBalances`](../../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm.getAllBalances).
 
 ```cpp
 curl -X POST --data '{

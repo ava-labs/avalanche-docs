@@ -6,8 +6,6 @@ sidebar_position: 1
 
 Avalanche features 3 built-in blockchains: [**Exchange Chain (X-Chain)**](#exchange-chain-x-chain), [**Platform Chain (P-Chain)**](#platform-chain-p-chain), and [**Contract Chain (C-Chain**)](#contract-chain-c-chain). All 3 blockchains are [validated](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) and secured by the [**Primary Network**](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network). The Primary Network is a special [subnet](http://support.avalabs.org/en/articles/4064861-what-is-a-subnetwork-subnet), and all members of all custom subnets must also be a member of the Primary Network by staking at least 2,000 AVAX.
 
-Here are tutorials on [creating a subnet](../../build/tutorials/platform/subnet/create-a-subnet.md) and [adding validators](../../build/tutorials/nodes-and-staking/add-a-validator.md) to a subnet.
-
 ![Primary network](/img/primary-network.png)
 
 ## Subnets
@@ -61,31 +59,9 @@ Avalanche VMs (AVMs) make it easy to define a blockchain-based decentralized app
 ### Creating Your Blockchain and Virtual Machine
 
 Avalanche supports the creation of new instances of the Avalanche VM.
-* [Create a BlockChain Running Subnet-EVM](../../build/tutorials/platform/subnet/create-evm-blockchain.md)
-* [Create a BlockChain Running AVM](../../build/tutorials/platform/subnet/create-avm-blockchain.md)
+* [Create a BlockChain Running Subnet-EVM](create-evm-blockchain.md)
+* [Create a BlockChain Running AVM](create-avm-blockchain.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
-* [Create a Vitual machine (VM)](../../build/tutorials/platform/subnet/create-a-virtual-machine-vm.md)
-* [Create a Customer Blockchain](../../build/tutorials/platform/create-custom-blockchain.md)
-
-## Exchange Chain (X-Chain)
-
-The **X-Chain** acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource (e.g., equity, bonds) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
-
-One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
-
-The X-Chain is an instance of the Avalanche Virtual Machine (AVM). The [X-Chain API](../../build/avalanchego-apis/exchange-chain-x-chain-api.mdx) allows clients to create and trade assets on the X-Chain and other instances of the AVM. See [this](../../build/tutorials/smart-digital-assets/create-a-fix-cap-asset.md) for more details.
-
-
-## Platform Chain (P-Chain)
-
-The **P-Chain** is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](../../#snowman-consensus-protocol).
-
-The [P-Chain API](../../build/avalanchego-apis/platform-chain-p-chain-api.md) allows clients to create subnets, add validators to subnets, and create blockchains.
-
-## Contract Chain (C-Chain)
-
-The **C-Chain** allows for the creation smart contracts using the [C-Chain’s API](../../build/avalanchego-apis/contract-chain-c-chain-api.md).
-
-The C-Chain is an instance of the Ethereum Virtual Machine powered by [Avalanche](../../).
-
+* [Create a Vitual machine (VM)](create-a-virtual-machine-vm.md)
+* [Create a Customer Blockchain](../create-custom-blockchain.md)

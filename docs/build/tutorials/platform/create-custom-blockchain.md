@@ -4,7 +4,7 @@
 
 Avalanche supports creating blockchains with virtual machines in subnets. In this tutorial, we’ll create a custom blockchain using a custom Virtual Machine (Timestamp VM).
 
-If you want a blockchain that has capabilities of X-Chain (AVM) or C-Chain (EVM), see [Create AVM Blockchain](create-avm-blockchain.md) and [Create EVM Blockchain](create-evm-blockchain.md) respectively.
+If you want a blockchain that has capabilities of X-Chain (AVM) or C-Chain (EVM), see [Create AVM Blockchain](subnet/create-avm-blockchain.md) and [Create EVM Blockchain](subnet/create-evm-blockchain.md) respectively.
 
 _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try._
 
@@ -19,7 +19,7 @@ Next, you need to have your node be a validator on the [Primary Network](http://
 Every blockchain is an instance of a virtual machine. For example X-Chain is an instance of AVM and C-Chain is EVM's instance. Avalanche supports creating new blockchains (instances) from Virtual Machines. In this case we will use [Timestamp VM](https://github.com/ava-labs/timestampvm), which is an external VM plugin. Timestamp VM will communicate with our AvalancheGo node through RPC.
 
 :::info
-[Create a Virtual Machine (VM)](create-a-virtual-machine-vm.md)
+[Create a Virtual Machine (VM)](subnet/create-a-virtual-machine-vm.md)
 :::
 
 ## Create the Subnet
@@ -27,7 +27,7 @@ Every blockchain is an instance of a virtual machine. For example X-Chain is an 
 Every blockchain is validated by a [subnet](../../../learn/platform-overview/#subnets). Before you can create a blockchain, you’ll need a subnet to validate it. You can also use a subnet that already exists if you have a sufficient number of its control keys.
 
 :::info
-[Create a Subnet](create-a-subnet.md)
+[Create a Subnet](subnet/create-a-subnet.md)
 :::
 
 
@@ -42,7 +42,7 @@ The subnet needs validators in it to, well, validate blockchains.
 
 ### Create the Genesis Data {#create-the-genesis-data}
 
-Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. TimestampVM uses CB58 encoded data as genesis data. There is `encode` and `decode` static API methods that can be used to encode/decode string data. See [TimestampVM API](create-a-virtual-machine-vm.md#api).
+Each blockchain has some genesis state when it’s created. Each VM defines the format and semantics of its genesis data. TimestampVM uses CB58 encoded data as genesis data. There is `encode` and `decode` static API methods that can be used to encode/decode string data. See [TimestampVM API](subnet/create-a-virtual-machine-vm.md#api).
 
 Let's generate a simple genesis data for TimestampVM:
 
@@ -74,7 +74,7 @@ Our genesis data will be `fP1vxkpyLWnH9dD6BQA`.
 
 Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-getsubnets).
 
-Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
+Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](subnet/create-a-virtual-machine-vm.md#vm-aliases).
 
 ```cpp
 curl -X POST --data '{
