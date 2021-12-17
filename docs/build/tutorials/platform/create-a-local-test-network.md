@@ -50,7 +50,7 @@ API port 33695
 
 To make API calls, use the `API port`, which in this example is `33695`. Each node will have a unique API port.
 
-Once you have a node's API port, you can make API calls to it as shown [here.](#verifying-nodes-are-connected-verifying-nodes-are-connected)
+Once you have a node's API port, you can make API calls to it as shown [here.](#verifying-nodes-are-connected)
 
 ### Manually
 
@@ -119,7 +119,7 @@ runscript scripts/five_node_staking.lua
 The 5 nodes will have HTTP ports (where API calls should be sent) `9650`, `9652`, `9654`, `9656` , and `9658`.
 When you want to tear down the network, run `exit` to exit Avash.
 
-### Verifying Nodes are Connected {#verifying-nodes-are-connected}
+### Verifying Nodes are Connected
 
 As a sanity check, we can look at one of the node’s peers to ensure that the nodes are connected. To do so, call [`info.peers`](../../avalanchego-apis/info-api.md#infopeers).
 
