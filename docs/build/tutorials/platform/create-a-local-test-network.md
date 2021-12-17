@@ -88,6 +88,12 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 
 ### Avash
 
+:::warning
+
+Avash is deprecated and is being replaced with the [Avalanche Network Runner](../../tools/network-runner.md)
+
+:::
+
 We assume you’ve installed [Avash](../../tools/avash.md).
 
 To open Avash:

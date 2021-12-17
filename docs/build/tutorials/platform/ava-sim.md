@@ -7,6 +7,3 @@ Detailed instructions can be found on the [github README](https://github.com/ava
 This tool is **NOT** intended to be a full-fledged node automation framework.
 Rather, it is meant to be a simple tool for anyone to get started with
 Avalanche.
-
-If you are looking for a more powerful framework, check out [avash](../../tools/avash.md). This tool lets
-you run multiple versions of the same binary and provide custom node configs.
