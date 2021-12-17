@@ -1,5 +1,12 @@
 # Run a Five Node Network with Avash
 
+:::warning
+
+Avash is deprecated and is being replaced with the [Avalanche Network Runner](../../tools/network-runner.md)
+
+:::
+
+
 [Avash](../../tools/avash.md) is a development network for running a test or private Avalanche network on your local machine. You can configure and automate the local network to be in any state that you wish. This greatly accelerates local development work and testing.
 
 ## Dependencies

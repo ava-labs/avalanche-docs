@@ -1,8 +1,12 @@
+---
+sidebar_position: 3
+---
+
 # Create a Virtual Machine (VM)
 
 ## Introduction
 
-One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../../../learn/platform-overview/README.md#virtual-machines)
+One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../../../../learn/platform-overview/README.md#virtual-machines)
 
 In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [timestamp server](https://github.com/ava-labs/timestampvm). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
 
@@ -691,7 +695,7 @@ type Service struct{ vm *VM }
 
 Note that this struct has a reference to the VM, so it can query and update state.
 
-This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](create-custom-blockchain.md#interact-with-the-new-blockchain).
+This VM's API has two methods. One allows a client to get a block by its ID. The other allows a client to propose the next block of this blockchain. The blockchain ID in the endpoint changes, since every blockchain has an unique ID. For more information, see [Interacting with the New Blockchain](../create-custom-blockchain.md#interact-with-the-new-blockchain).
 
 #### timestampvm.getBlock
 
@@ -912,7 +916,7 @@ It's possible to alias VMs and their API endpoints. For example, we can alias `T
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. Giving a VM an alias has other implications, as we'll see below. For more details, see [here](../../references/command-line-interface.md#vm-configs).
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. Giving a VM an alias has other implications, as we'll see below. For more details, see [here](../../../references/command-line-interface.md#vm-configs).
 
 #### Building the Executable
 
@@ -921,16 +925,16 @@ This VM has a [build script](https://github.com/ava-labs/timestampvm-rpc/blob/ma
 The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
 
 ```text
-./scripts/build.sh ../avalanchego/build/avalanchego-latest/plugins timestampvm
+./scripts/build.sh ../avalanchego/build/plugins timestampvm
 ```
 
-If the environment variable is not set, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego-latestplugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` (`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.)
+If no argument is given, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` (`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the ID of this VM.)
 
-AvalancheGo searches for and registers plugins under `[buildDir]/avalanchego-latest/plugins`. See [here](../../references/command-line-interface.md#build-directory) for more information.
+AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/command-line-interface.md#build-directory) for more information.
 
-Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../references/command-line-interface.md#vm-configs).
+Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../../references/command-line-interface.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are aliases for this VM.
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
 
 ### Wrapping Up
 
@@ -943,6 +947,6 @@ In this tutorial, we learned:
 * The `core.SnowmanVM` and `core.Block` library types, which make defining VMs faster
 * The `rpcchainvm` type, which allows blockchains to run in their own processes.
 
-Now we can create a new blockchain with this custom virtual machine by following [this](create-custom-blockchain.md).
+Now we can create a new blockchain with this custom virtual machine by following [this](../create-custom-blockchain.md).
 
 
