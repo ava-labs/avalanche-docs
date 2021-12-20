@@ -284,7 +284,7 @@ Number of peers (which may or may not be validators) to gossip an AppGossip mess
 
 `--consensus-app-gossip-validator-size` (uint):
 
-Number of validators to gossip an AppGossip message to. Defaults to `6`.
+Number of validators to gossip an AppGossip message to. Defaults to `10`.
 
 ### Benchlist
 
