@@ -26,13 +26,8 @@ The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config
 {
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
-  "net-api-enabled": true,
-  "eth-api-enabled": true,
-  "personal-api-enabled": false,
-  "tx-pool-api-enabled": true,
-  "debug-api-enabled": true,
-  "web3-api-enabled": true,
   "local-txs-enabled": true
+  "eth-apis": ["internal-public-eth", "internal-public-blockchain", "internal-public-transaction-pool", "internal-public-tx-pool", "internal-public-debug", "internal-private-debug", "internal-public-account", "internal-private-personal", "debug-tracer", "web3", "public-eth", "public-eth-filter", "private-admin", "public-debug", "private-debug", "net"]
 }
 ```
 
