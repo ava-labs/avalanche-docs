@@ -10,6 +10,8 @@ The public API server is at `https://api.avax.network/` for Avalanche Mainnet an
 
 The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](../avalanchego-apis/exchange-chain-x-chain-api.mdx), [P-Chain](../avalanchego-apis/platform-chain-p-chain-api.md) and [C-Chain](../avalanchego-apis/contract-chain-c-chain-api.md). For a full list of available APIs see [here](../avalanchego-apis/README.md).
 
+The public API only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
+
 ## Sticky sessions
 
 Requests to the public API server API are distributed by a load balancer to an individual node. As a result, consecutive requests may go to different nodes. That can cause issues for some use cases. For example, one node may think a given transaction is accepted, while for another node the transaction is still processing. To work around this, you can use 'sticky sessions', as documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials). This allows consecutive API calls to be routed to the same node.
