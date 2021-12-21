@@ -10,6 +10,8 @@
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
+**The first startup of the C-Chain will take a few minutes longer due to a minor index update.**
+
 **Consensus**
 
 - Introduced a notion of vertex conflicts that will be used in future X-chain improvements.
