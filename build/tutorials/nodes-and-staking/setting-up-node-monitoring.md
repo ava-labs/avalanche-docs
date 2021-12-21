@@ -1,378 +1,237 @@
-# Run an Avalanche Node Monitoring
+# Bir Avalanche Düğümünü İzleme
 
-_Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
+## Giriş
 
-## Introduction
+Bu eğitim makalesinde bir [AvalancheGo](https://github.com/ava-labs/avalanchego) instance'nın (örnek) izlenmesine yönelik altyapının nasıl kurulacağı gösterilecektir. Şunları kullanacağız:
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
+* Verileri toplamak ve depolamak için [Prometheus](https://prometheus.io/)
+* Makine hakkında bilgi almak için [node_exporter](https://github.com/prometheus/node_exporter),
+* Düğüm hakkında bilgi almak için AvalancheGo'nun [metrikler API](https://docs.avax.network/build/avalanchego-apis/metrics-api)'si
+* Verileri bir gösterge panelinde görüntülemek için [Grafana](https://grafana.com/).
+* Önceden hazırlanmış bir [Avalanche gösterge panelleri](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards) kümesi
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+Ön koşullar:
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/build/avalanchego-apis/metrics-api) to get information about the node
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* Çalışan bir AvalancheGo düğümü
+* Düğümü çalıştıran makineye shell (güvenli kabuk) erişimi
+* Makine üzerinde yönetici ayrıcalıkları
 
-Prerequisites:
+Bu eğitim makalesinde düğümünüzde Ubuntu 18.04 veya 20.04 çalıştırdığınız varsayılır. Servisleri çalıştırmak için `systemd` ve paket yönetimi için `apt-get` kullanan diğer Linux flavor'ları işe yarayabilir, ancak bunlar test edilmemiştir. Bir topluluk üyemiz bunun Debian 10'da çalıştığını ve diğer Debian sürümlerinde de çalışabileceğini bildirdi.
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
+### Uyarı: Güvenlik
 
-### **Caveat: Security**
+{% hint style="danger" %}Burada açıklanan sistem herkese açık internete **açılmamalıdır**. Burada görüntülenen ne Prometheus ne de Grafana izinsiz erişime karşı güçlendirilmiş değildir. Her ikisinin de sadece güvenli bir proxy, yerel ağ veya VPN üzerinden erişilebilir olduğundan emin olun. Bu kurulumu yapmak bu eğitim makalesinin kapsamının dışındadır ama dikkatli olmanızı öneririz. Kötü güvenlik uygulamaları saldırganların düğümünüzün kontrolünü ele geçirmelerine yol açabilir! Uygun güvenlik uygulamalarını takip etmek sizin sorumluluğunuzdadır.{% endhint %}
 
-{% hint style="danger" %}
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
-{% endhint %}
+## İzleme aracını yüklemek için installer script
 
-### Contributions
+Düğüm izleme aracının yüklenmesini kolaylaştırmak için, işlemin çoğunu sizin yerinize yapan bir script hazırladık. Script'i indirip çalıştırmak için, düğümün çalıştığı makinede yönetici ayrıcalıklarına sahip bir kullanıcı olarak oturum açın ve aşağıdaki komutu girin:
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/monitoring-installer.sh;\
+chmod 755 monitoring-installer.sh;
+```
+Bu işlem script'i indirip yürütmeye hazır hale getirecektir.
 
-## Set up Prometheus
+Bu script, her biri farklı bir araç veya ortam parçası yükleyen farklı argümanlarla birden fazla kez çalıştırılır. Script'in indirilip doğru kurulduğundan emin olmak için aşağıdakini çalıştırarak başlayın:
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+```bash
+./monitoring-installer.sh --help
+```
+Şunu göstermelidir:
 
-```cpp
-sudo useradd -M -r -s /bin/false prometheus
+```text
+Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--help]
+
+Options:
+--help   Shows this message
+--1      Step 1: Installs Prometheus
+--2      Step 2: Installs Grafana
+--3      Step 3: Installs node_exporter
+--4      Step 4: Installs AvalancheGo Grafana dashboards
+
+Run without any options, script will download and install latest version of AvalancheGo dashboards.
 ```
 
-```cpp
-sudo mkdir /etc/prometheus /var/lib/prometheus
+Şimdi başlayalım.
+
+## 1. Adım: Prometheus'u kurun <a id="prometheus"></a>
+
+İlk adımı yürütmek için script'i çalıştırın:
+
+```bash
+./monitoring-installer.sh --1
 ```
 
-Get the necessary utilities, in case they are not already installed:
+Şunun gibi bir çıktı üretmelidir:
 
-```cpp
-sudo apt-get install -y apt-transport-https
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 1: Installing Prometheus
+
+Checking environment...
+Found arm64 architecture...
+Prometheus install archive found:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+Attempting to download:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+prometheus.tar.gz                           100%[=========================================================================================>]  65.11M   123MB/s    in 0.5s
+2021-11-05 14:16:11 URL:https://github-releases.githubusercontent.com/6838921/a215b0e7-df1f-402b-9541-a3ec9d431f76?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T141610Z&X-Amz-Expires=300&X-Amz-Signature=72a8ae4c6b5cea962bb9cad242cb4478082594b484d6a519de58b8241b319d94&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=6838921&response-content-disposition=attachment%3B%20filename%3Dprometheus-2.31.0.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [68274531/68274531] -> "prometheus.tar.gz" [1]
+...
 ```
-
-```cpp
-sudo apt-get install -y software-properties-common wget
-```
-
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
-
-```cpp
-mkdir -p /tmp/prometheus && cd /tmp/prometheus
-```
-
-```cpp
-wget https://github.com/prometheus/prometheus/releases/download/v2.25.0/prometheus-2.25.0.linux-amd64.tar.gz
-```
-
-```cpp
-tar xvf prometheus-2.25.0.linux-amd64.tar.gz
-```
-
-```cpp
-cd prometheus-2.25.0.linux-amd64
-```
-
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
-
-```cpp
-sudo cp {prometheus,promtool} /usr/local/bin/
-```
-
-```cpp
-sudo chown prometheus:prometheus /usr/local/bin/{prometheus,promtool}
-```
-
-```cpp
-sudo chown -R prometheus:prometheus /etc/prometheus
-```
-
-```cpp
-sudo chown prometheus:prometheus /var/lib/prometheus
-```
-
-```cpp
-sudo cp -r {consoles,console_libraries} /etc/prometheus/
-```
-
-```cpp
-sudo cp prometheus.yml /etc/prometheus/
-```
-
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
-
-Let’s set up Prometheus to run as a system service. Do**:**
-
-```cpp
-sudo nano /etc/systemd/system/prometheus.service
-```
-
-\(or open that file in the text editor of your choice\), and enter the following configuration:
-
-```cpp
-[Unit]
-Description=Prometheus
-Documentation=https://prometheus.io/docs/introduction/overview/
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/prometheus   --config.file=/etc/prometheus/prometheus.yml   --storage.tsdb.path=/var/lib/prometheus   --web.console.templates=/etc/prometheus/consoles   --web.console.libraries=/etc/prometheus/console_libraries   --web.listen-address=0.0.0.0:9090   --web.external-url=
-
-SyslogIdentifier=prometheus
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Save the file. Now, we can run Prometheus as a system service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start prometheus
-```
-
-```cpp
-sudo systemctl enable prometheus
-```
-
-Prometheus should now be running. To make sure, we can check with:
-
-```cpp
+Sizden ek paket yüklemelerini onaylamanız istenebilir, istenirse bunu yapın. Script'in çalıştırılması sona erdiğinde, Prometheus'un doğru şekilde yüklendiğini nasıl kontrol edeceğinize ilişkin talimatlar gelir. Şimdi şunu çalıştıralım:
+```bash
 sudo systemctl status prometheus
 ```
 
-which should produce something like:
+Şunun gibi bir çıktısı olmalıdır:
 
-```cpp
+```text
 ● prometheus.service - Prometheus
-     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
-     Active: active (running) since Wed 2020-04-01 19:23:53 CEST; 5 months 12 days ago
-       Docs: https://prometheus.io/docs/introduction/overview/
-   Main PID: 1767 (prometheus)
-      Tasks: 12 (limit: 9255)
-     CGroup: /system.slice/prometheus.service
-             └─1767 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templa>
+Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
+Active: active (running) since Fri 2021-11-12 11:38:32 UTC; 17min ago
+Docs: https://prometheus.io/docs/introduction/overview/
+Main PID: 548 (prometheus)
+Tasks: 10 (limit: 9300)
+Memory: 95.6M
+CGroup: /system.slice/prometheus.service
+└─548 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templates=/etc/prometheus/con>
 
-Sep 13 13:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:04.744Z caller=head.go:792 component=tsdb msg="Head GC completed" duration=13.6>
-Sep 13 13:00:05 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:05.263Z caller=head.go:869 component=tsdb msg="WAL checkpoint complete" first=9>
-Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z caller=compact.go:495 component=tsdb msg="write block" mint=15999912000>
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=81 maxSegment=84
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
+```
+
+`active (running)` durumunu not edin \(çıkmak için `q` tuşuna basın\). Ayrıca `http://your-node-host-ip:9090/` adresinde bulunan Prometheus web arayüzüne de göz atabilirsiniz
+
+{% hint style="warning" %}Güvenlik duvarı açıksa `sudo ufw allow 9090/tcp` yapmanız ve/veya düğüm bir bulut sunucusunda çalışıyorsa, bağlantıların 9090 portuna gitmesine izin vermek için güvenlik ayarlarını yapılandırmanız gerekebilir. AWS için [buraya](setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df) bakabilirsiniz. Herkese açık internette yalnızca sizin IP'nizin bağlanmasına izin verdiğinizden emin olun!{% endhint %}
+
+Her şey yolundaysa, devam edelim.
+
+## 2. Adım: Grafana'yı Yükleyin <a id="grafana"></a>
+
+İkinci adımı yürütmek için script'i çalıştırın:
+
+```bash
+./monitoring-installer.sh --2
+```
+
+Şunun gibi bir çıktı üretmelidir:
+
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 2: Installing Grafana
+
+OK
+deb https://packages.grafana.com/oss/deb stable main
+Hit:1 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal InRelease
+Get:2 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-updates InRelease [114 kB]
+Get:3 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-backports InRelease [101 kB]
+Hit:4 http://ppa.launchpad.net/longsleep/golang-backports/ubuntu focal InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [114 kB]
+Get:6 https://packages.grafana.com/oss/deb stable InRelease [12.1 kB]
 ...
 ```
-
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
-
-{% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
-{% endhint %}
-
-## Install Grafana
-
-To set up Grafana project repositories with Ubuntu:
-
-```cpp
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-```
-
-```cpp
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
-```
-
-To install Grafana:
-
-```cpp
-sudo apt-get update
-```
-
-```cpp
-sudo apt-get install grafana
-```
-
-To configure it as a service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start grafana-server
-```
-
-```cpp
-sudo systemctl enable grafana-server.service
-```
-
-To make sure it’s running properly:
+Doğru çalıştığından emin olmak için:
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+grafana'yı tekrar `active` olarak göstermelidir. Grafana şimdi internet tarayıcınız yoluyla girdiğiniz `http://your-node-host-ip:3000/` adresinde kullanıma hazır olmalıdır. Kullanıcı adı: admin, şifre: admin ile oturum açın, sonrasında yeni, güvenli bir şifre oluşturmanız istenecektir. Bunu yapın.
 
-{% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
-{% endhint %}
+{% hint style="warning" %}Güvenlik duvarı açıksa `sudo ufw allow 3000/tcp` yapmanız ve/veya bağlantıların 3000 portuna gitmesine izin vermek için bulut sunucusu ayarlarını yapılandırmanız gerekebilir. Herkese açık internette yalnızca sizin IP'nizin bağlanmasına izin verdiğinizden emin olun!{% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+Prometheus ve Grafana şimdi yüklendi, bir sonraki adıma hazırız.
 
-On Grafana’s web interface:
+## 3. Adım: Node\_exporter'ı kurun <a id="exporter"></a>
 
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
-* Click `Save & Test`
-* Check for “Data source is working” green message.
+AvalancheGo'daki metriklere ek olarak, CPU, bellek, ağ ve disk kullanımı ögelerini kontrol edebilmek ve herhangi bir anormallikten haberdar olabilmek için makinenin kendisini izleme aracını da kuralım. Bunun için bir Prometheus eklentisi olan node\_exporter kullanacağız.
 
-## Set up node\_exporter
+Üçüncü adımı yürütmek için script'i çalıştırın:
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
-
-Get the latest version with:
-
+```bash
+./monitoring-installer.sh --3
+```
+Çıktı şunun gibi görünmeli:
 ```text
-curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
+AvalancheGo monitoring installer
+--------------------------------
+STEP 3: Installing node_exporter
+
+Checking environment...
+Found arm64 architecture...
+Dowloading archive...
+https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
+node_exporter.tar.gz                        100%[=========================================================================================>]   7.91M  --.-KB/s    in 0.1s
+2021-11-05 14:57:25 URL:https://github-releases.githubusercontent.com/9524057/6dc22304-a1f5-419b-b296-906f6dd168dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T145725Z&X-Amz-Expires=300&X-Amz-Signature=3890e09e58ea9d4180684d9286c9e791b96b0c411d8f8a494f77e99f260bdcbb&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=9524057&response-content-disposition=attachment%3B%20filename%3Dnode_exporter-1.2.2.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [8296266/8296266] -> "node_exporter.tar.gz" [1]
+node_exporter-1.2.2.linux-arm64/LICENSE
 ```
-
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
-
-```cpp
-tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
-```
-
-```cpp
-sudo mv node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
-```
-
-Check that it is installed correctly with:
-
-```cpp
-node_exporter --version
-```
-
-Then we add node\_exporter as a service. Do:
-
-```cpp
-sudo nano /etc/systemd/system/node_exporter.service
-```
-
-\(or open that file in the text editor of your choice\) and populate it with:
-
-```cpp
-[Unit]
-Description=Prometheus Node Exporter
-Documentation=https://github.com/prometheus/node_exporter
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/node_exporter \
-    --collector.cpu \
-    --collector.diskstats \
-    --collector.filesystem \
-    --collector.loadavg \
-    --collector.meminfo \
-    --collector.filefd \
-    --collector.netdev \
-    --collector.stat \
-    --collector.netstat \
-    --collector.systemd \
-    --collector.uname \
-    --collector.vmstat \
-    --collector.time \
-    --collector.mdadm \
-    --collector.zfs \
-    --collector.tcpstat \
-    --collector.bonding \
-    --collector.hwmon \
-    --collector.arp \
-    --web.listen-address=:9100 \
-    --web.telemetry-path="/metrics"
-
-[Install]
-WantedBy=multi-user.target
-```
-
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
-
-```cpp
-sudo systemctl start node_exporter
-```
-
-```cpp
-sudo systemctl enable node_exporter
-```
-
-Again, we check that the service is running correctly:
-
+Yine servisin doğru çalıştığını kontrol ediyoruz:
 ```cpp
 sudo systemctl status node_exporter
 ```
-
-If you see messages such as `Ignoring unknown escape sequences`, double check that the contents of the service file is correctly copied over and there are no extra backslashes or extra newlines. Correct if necessary and restart the service afterwards.
-
-Now, we’re ready to tie it all together.
-
-## Configure AvalancheGo and node\_exporter Prometheus jobs
-
-Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
-
-We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
-
-Do :
-
-```cpp
-sudo nano /etc/prometheus/prometheus.yml
-```
-
-\(or open that file in the text editor of your choice\) and append to the end:
-
-```cpp
-  - job_name: 'avalanchego'
-    metrics_path: '/ext/metrics'
-    static_configs:
-      - targets: ['<your-host-ip>:9650']
-
-  - job_name: 'avalanchego-machine'
-    static_configs:
-      - targets: ['<your-host-ip>:9100']
-        labels:
-          alias: 'machine'
-```
-
-**Indentation is important**. Make sure `-job_name` is aligned vertically with existing `-job_name` entry, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
-
-Save the config file and restart Prometheus:
-
-```cpp
-sudo systemctl restart prometheus
-```
-
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Servis çalışıyorsa, Prometheus, Grafana ve node\_exporter artık birlikte çalışabilmelidir. Kontrol etmek için internet tarayıcınızda `http://your-node-host-ip:9090/targets` adresindeki Prometheus web arayüzünü ziyaret edin. Üç hedefin etkinleştirildiğini görmeniz gerekir:
 
 * Prometheus
 * avalanchego
 * avalanchego-machine
 
-Make sure that all of them have `State` as `UP`.
+Hepsinin `State`'inin, yani durumunun `UP` \(çalışıyor\) olduğundan emin olun.
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/avalanche-docs/tree/c65ea53488738b0b624a53382fe89ac5e02597ca/dashboards/README.md).
+{% hint style="info" %}AvalancheGo düğümünüzü API bağlantı noktanızda TLS etkinken çalıştırırsanız, `/etc/prometheus/prometheus.yml` dosyasını manuel olarak düzenlemeniz ve `avalanchego` işini şöyle görünecek şekilde değiştirmeniz gerekir:
+```cpp
+  - job_name: 'avalanchego'
+    metrics_path: '/ext/metrics'
+    scheme: 'https'
+    tls_config:
+    insecure_skip_verify: true
+    static_configs:
+      - targets: ['localhost:9650']
+```
+Aralığa dikkat edin \(öndeki aralıklara da\)! Bunu yapmak için yönetici ayrıcalıklarına ihtiyacınız olacaktır \(`sudo` kullanın\). Ardından `sudo systemctl restart prometheus` komutuyla prometheus servisini yeniden başlatın.{% endhint %}
 
-To import the preconfigured dashboard:
+Şimdi yapılması gereken tek şey, veri kaynağını sağlamak ve bize verileri gösterecek olan asıl gösterge panellerini kurmaktır.
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file or paste the contents into `Import via panel json` area
-* Select `Prometheus` as Data Source
+## 4. Adım: Gösterge panelleri <a id="dashboards"></a>
 
-That’s it! You may now marvel at all the things your node does. Woohoo!
+Gösterge panellerini yüklemek için script'i çalıştırın:
 
+```bash
+./monitoring-installer.sh --4
+```
+Şunun gibi bir çıktı üretecektir:
+```text
+AvalancheGo monitoring installer
+--------------------------------
+
+Downloading...
+Last-modified header missing -- time-stamps turned off.
+2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
+FINISHED --2021-11-05 14:57:47--
+Total wall clock time: 0.2s
+Downloaded: 1 files, 49K in 0s (132 MB/s)
+Last-modified header missing -- time-stamps turned off.
+...
+```
+Bu, GitHub'dan gösterge panellerinin en son sürümlerini indirecek ve Prometheus'u bir veri kaynağı olarak tanımlamanın yanı sıra, bunları yüklemek için Grafana'yı sağlayacaktır. Gösterge panellerinin görünmesi 30 saniye alabilir. İnternet tarayıcınızda `http://your-node-host-ip:3000/dashboards` adresine gidin. 7 adet Avalanche gösterge paneli görmeniz gerekir:
+
+![İçe aktarılan gösterge panelleri](monitoring-01-dashboards.png)
+
+Başlığını tıklayarak 'Avalanche Main Dashboard'u seçin. Yüklenmeli ve şuna benzer görünmelidir:
+
+![Ana Gösterge Paneli](monitoring-02-main-dashboard.png)
+
+Bazı grafiklerin tamamen doldurulması biraz zaman alabilir, çünkü doğru şekilde oluşturulmaları için bir dizi veri noktasına ihtiyaç duyarlar.
+
+Düğümle ilgili en önemli bilgileri bir bakışta gösterdiği için ana gösterge paneline yer işareti koyabilirsiniz. Her gösterge panelinin ilk satır olarak diğer tüm gösterge panellerine bir bağlantısı vardır, bu sayede gösterge panelleri arasında kolayca geçiş yapabilirsiniz.
+
+## Güncelleniyor
+
+Sunulan düğüm metrikleri sürekli güncellenir, yenileri eklenir ve miadını dolduranlar kaldırılır, dolayısıyla gösterge panellerini zaman zaman güncellemek, özellikle de panellerde eksik veriler olduğunu fark ettiğinizde güncellemek iyi bir uygulamadır. Gösterge panellerini güncellemek kolaydır, sadece script'i argümansız olarak çalıştırın; gösterge panelleri mevcut en son versiyonlarıyla yenilenecektir. Grafana'da gösterge panellerinin güncellenmesi 30 saniye kadar sürebilir.
+
+## Özet
+
+Script'i kullanarak düğüm izleme aracını yüklemek kolaydır ve bu araç düğümünüzün nasıl davrandığı ve çıplak gözle görünmeyenler hakkında size bir fikir verir. Ayrıca, grafikler de güzeldir!
+
+Bu eğitim hakkında görüş bildirmek isterseniz veya script'le veya adımları takip etmekle ilgili sorunlar varsa, bize [Discord](https://chat.avalabs.org)'dan bir mesaj gönderin.
