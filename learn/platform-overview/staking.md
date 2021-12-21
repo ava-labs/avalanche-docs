@@ -1,104 +1,120 @@
 ---
-description: Avalanche üzerinde validasyon veya delegasyon ile nasıl stake edeceğinizi öğrenin
+description: Avalanche'ta doğrulama veya yetkilendirme yaparak stake etmeyi öğrenin
 ---
 
 # Staking
 
-Staking veya stake etme, bir network'e destek olmak amacıyla tokenları kilitleme ve bunun karşılığında bir ödül alma sürecidir.\(Örneğin bu ödül, parasal bir karşılık olabilir.\) Staking konseptini, [resmi olarak ilk kez] (https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf) Peercoin’den Sunny King ve Scott Nadal sunmuştur.
+Staking, bir ağı desteklemek için ödül karşılığında \(ödüller daha fazla ağ kullanımı, parasal karşılık, vb. olabilir\) token'ları kilitleme işlemidir. Staking kavramı ilk olarak Peercoin'den Sunny King ve Scott Nadal tarafından [resmi olarak ortaya atılmıştır](https://web.archive.org/web/20160306084128/https://peercoin.net/assets/paper/peercoin-paper.pdf).
 
-### Proof-of-stake nasıl çalışır?
+## Pay ispatı \(Proof-of-stake\) nasıl çalışır?
 
-Merkezi olmayan bir ağın [Sybil ataklarına](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack) direnmesi için network etkisi karşılığında nadir bir kaynak ile ödeme yapılması gerekir. Bu, ağın güvenliğini tehlikeye atacak bir saldırının nüfuz kazanmasını mümkün olmayacak şekilde masraflı hale getirir. Bu nadir kaynak, proof-of-work sistemlerinde işlem gücüdür. Avalanche’da ise bu nadir kaynak [AVAX native tokenidir](../../#avalanche-avax-token). Bir node’un yani blokzincir düğümünün Avalanche üzerindeki bir blockzincir üzerinde [validasyon sağlaması](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) için AVAX stake etmesi gerekir.
+Merkeziyetsiz bir ağın, [sybil saldırılarına](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack) direnmek için ağ etkisinin kıt bir kaynaktan ödenmesini gerektirmesi gerekir. Bu, saldıran için ağ üzerinde güvenliği tehlikeye atacak kadar etki elde etmeyi imkansız ölçüde pahalı hale getirir. İş ispatı \(proof-of-work\) sistemlerinde kıt kaynak işletim gücüdür. Avalanche'ta kıt kaynak yerel token [AVAX](../../#avalanche-avax-token)'tır. Bir düğümün Avalance'ta bir blok zincir [doğrulaması](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) için AVAX stake etmesi gerekir.
 
-## Avalanche'ın Stake Etme Parametreleri
+## Avalanche'ta Staking Parametreleri
 
-Bir validatör, [ana network’ü](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network) valide etmeyi bitirdiğinde, stake ettiği AVAX tokenlarını geri alacaktır. \(Ayrıca, ağın güvenliğini sağlamaya yardımcı olduğu için bir ödül alabilir.\) Bir validatör, validasyon süreci boyunca sadece yeterli oranda yanıt verebildiği ve doğru olduğu takdirde bir [validasyon ödülü](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) alır. AVAX ve staking mekanikleri hakkında daha fazla bilgi için lütfen [Avalanche tokenın whitepaper'ını] okuyun.  
+Bir doğrulayıcı [Birincil Ağ](http://support.avalabs.org/en/articles/4135650-what-is-the-primary-network)'da doğrulamayı tamamladığında stake ettiği AVAX token'ları geri alır. Ağı güvenceye almaya yardımcı olduğu için bir ödül alabilir. Doğrulayıcı sadece doğrulama sırasında yeterince duyarlı ve doğru olması halinde [doğrulama ödülü](http://support.avalabs.org/en/articles/4587396-what-are-validator-staking-rewards) alır. AVAX ve staking teknik yönleri hakkında daha fazlasını öğrenmek için [Avalanche token teknik dokümanını](https://files.avalabs.org/papers/token.pdf) okuyun.
+
 {% hint style="warning" %}
-**Bu parametreler sağlandığı sürece** staking ödülleri, staking dönemi bittiğinde cüzdan adresinize yollanır.
+Staking ödülleri, bu **parametrelerin hepsi karşılandığı sürece staking** döneminin sonunda cüzdan adresinize gönderilir.
 {% endhint %}
 
-* Bir validatörün stake etmesi gereken minimum miktar: 2,000 AVAX
-* Bir delegatörün delege etmesi gereken minimum miktar: 25 AVAX
-* Validasyon için minimum stake edilme süresi: 2 hafta
-* Validasyon için maksimum stake edilme süresi: 1 yıl
-* Delegasyon için minimum stake edilme süresi: 2 hafta
-* Delegasyon için maksimum stake edilme süresi: 1 yıl
-* Minimum delegasyon ücreti oranı: %2
-* Bir validatörün maksimum yükü/ağırlığı\(kendi stake’leri+kendisine delege edilen stake’ler) en az 3e6 AVAX ve validatörün stake’lerinin 5 katıdır. Örneğin, eğer bir validatör olmak için 2,000 AVAX stake ettiyseniz node toplamınıza sadece 8000 AVAX delege edebilir.\(delegatör başına değil\)
-* Bir validatörün ödül alması için doğru ve çevrimiçi olması gereken minimum süre %60'tır.
+* Bir doğrulayıcının stake etmesi gereken minimum tutar 2.000 AVAX'tır
+* Bir yetkilendiricinin \(delegator\) yetki vermesi gereken minimum tutar 25 AVAX'tır
+* Doğrulama için fon stake edilebilecek minimum süre 2 haftadır
+* Doğrulama için fon stake edilebilecek maksimum süre 1 yıldır
+* Yetkilendirme için fon stake edilebilecek minimum süre 2 haftadır
+* Yetkilendirme için fon stake edilebilecek maksimum süre 1 yıldır
+* Minimum yetkilendirme ücreti %2'dir
+* Doğrulayıcının maksimum ağırlığı \(kendi stake miktarı \+ onlara yetkisi verilen stake miktarı\), 3e6 AVAX ve doğrulayıcının stake ettiği tutarın 5 katı arasından küçük olana eşittir. Örneğin, doğrulayıcı olmak için 2000 AVAX stake ettiyseniz toplam düğümünüze \(yetkilendiciri başına değil\) sadece 8000 AVAX yetkilendirilebilir
 
-## Validatörler
+Bir doğrulayıcı, doğrulayıcıların stake miktarına göre ağırlıklandırılmış bir çoğunluğu tarafından ölçüldüğü üzere, bir doğrulama döneminin %80'inden daha fazlasında çevrimiçi olur ve yanıt verirse, bir staking ödülü alır. **Doğrulayıcınızın zamanın %100'ünde çevrimiçi ve yanıt verebilir olmasını hedeflemelisiniz.**
 
-**Validatörler** Avalanche’ın güvenliğini sağlar, yeni bloklar/verteksler oluşturur ve transferleri gerçekleştirir. Validatörler, konsensüse varmak için birbirlerinden tekrar tekrar örnek alırlar. Belirli bir validatörün örneklenme olasılığı, stake'i ile orantılıdır.
+Düğümünüzde `info.uptime` API metodunu çağırarak düğümünüzün ağırlıklandırılmış uptime'ını ve ağın yüzde kaçının şu anda düğümünüzün bir staking ödülü almak için yeterince yüksek bir uptime'a ulaştığını düşündüğünü öğrenebilirsiniz. [Buraya](../../build/avalanchego-apis/info-api.md#info-uptime) göz atın. Düğümünüzün uptime'ı hakkında Avalanche'ın [staking gösterge panelinden](https://stats.avax.network/dashboard/staking/) de bir fikir edinebilirsiniz. Rapor edilen uptime'ınız %100'e yakın değilse, düğümünüzün kurulumunda bir yanlışlık olabilir, bu da staking ödülünüzü tehlikeye düşürebilir. Durum buysa, lütfen [buraya](#why-is-my-uptime-low) bakın veya [Discord](https://chat.avax.network) üzerinden bizimle iletişime geçin, böylece sorunu bulmanıza yardımcı olabiliriz. Doğrulayıcınızın sadece staking yapmayan düğümler, küçük miktarda stake yapan doğrulayıcılar ya da doğrulama döneminin tüm süresi boyunca çevrimiçi olmamış doğrulayıcılar tarafından ölçülen uptime'ını kontrol etmek, düğümünüzün gerçek uptime'ı hakkında hatalı bir görüntü ortaya koyabilir.
 
-Validatör setine bir node eklediğinizde şunları belirtmiş olursunuz:
+## Doğrulayıcılar
 
-* Node'unuzun ID'si\(no'su\)
-* Ne zaman delege etmeye başlamak ve delege etmeyi durdurmak istediğiniz
-* Kaç adet AVAX stake ettiğiniz
+**Doğrulayıcılar** Avalanche'ıın güvenliğini sağlarlar, yeni bloklar/verteksler \(kesişim noktaları veya düğümler\) yaratırlar ve işlemleri işlerler. Konsesüs sağlamak için doğrulayıcılar tekrar tekrar birbirini örnekler. Belirli bir doğrulayıcının örneklenme olasılığı stake ettiği tutarla orantılıdır.
+
+Doğrulayıcı kümesine bir düğüm eklerseniz şunları belirtirsiniz:
+
+* Düğümünüzün kimliği
+* Doğrulamayı ne zaman başlatmak ve durdurmak istediğiniz
+* Kaç AVAX stake ettiğiniz
 * Ödüllerin gönderileceği adres
-* Delegasyon ücreti oranınız\(aşağıya bakın\)
+* Yetkilendirme ücreti oranınız \(aşağıya bakınız\)
 
-{% hint style="info" %}
-Bir validatörün stake etmesi gereken en düşük miktar 2,000 AVAX'dır.
-{% endhint %}
+{% hint style="info" %}Bir doğrulayıcının stake etmesi gereken minimum tutar 2.000 AVAX'tır.{% endhint %}
 
-{% hint style="danger" %}
-Not: Validatör olarak bir node eklemek için ilgili işlemi gerçekleştirdiğinizde, parametreleri değiştirmenin bir yolu olmadığını unutmayın. **Stake ettiğiniz AVAX’ı erken çekemezsiniz. Stake edilen miktarı, node’unuzun kimliğini ve ödül adresinizi değiştiremezsiniz.** Lütfen aşağıda belirtilen API çağrılarında doğru değerleri kullandığınızdan emin olun. Eğer emin değilseniz, [Discord](https://chat.avax.network) üzerinden yardım isteyebilir veya Sıkça Sorunlar Sorular kısmına[Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq) göz gezdirebilirsiniz.
-{% endhint %}
+{% hint style="danger" %}Bir doğrulayıcı olarak düğüm eklemek için işlem yayınladıktan sonra parametreleri değiştirmenin hiçbir yolunun olmayacağını unutmayın. **Stake'inizi vaktinden evvel kaldıramazsınız veya stake tutarını, düğüm kimliğini veya ödül adresini değiştiremezsiniz.** Aşağıdaki API çağrılarında doğru değerleri kullandığınızdan emin olun. Emin değilseniz [Discord](https://chat.avax.network) üzerinden yardım isteyin veya [Geliştirici SSS](http://support.avalabs.org/en/collections/2618154-developer-faq)'lerimizde gezinin. Kendi doğrulayıcınıza daha fazla token eklemek isterseniz token'ları bu düğüme yetkilendirebilirsiniz ancak taban doğrulama miktarını artıramazsınız \(dolayısıyla kendinize yetkilendirmek yetkilendirme sınırına karşı gelir\).{% endhint %}
 
-### Validasyon ve Node Bağlantısı <a id="running-a-validator"></a>
+### Bir Doğrulayıcının Çalıştırılması <a id="running-a-validator"></a>
 
-Eğer validasyon yapıyorsanız, ödülü alacağınızdan emin olmak adına node'unuzun bağlantısının doğru yapılması önemlidir.
-Detaylı bilgi için [tıklayın.](http://support.avalabs.org/en/articles/4594192-networking-setup).
+Bir doğrulayıcı çalıştırıyorsanız, ödül almanızı sağlamak için düğümünüzün iyi bağlı olması önemlidir. [Buraya](http://support.avalabs.org/en/articles/4594192-networking-setup) göz atın.
 
-Bir validatör eklemek için ilgili işlemi gerçekleştirdiğinizde stake ettiğiniz tokenlar ve işlem ücreti, kontrol ettiğiniz hesaplardan çekilir. Validasyon döneminiz bittiğinde stake edilen fonlar geldikleri adreslere geri döner. Eğer bir ödül kazandıysanız, ödülünüz kendinizi validatör olarak eklerken belirttiğiniz adrese yollanır.
+Bir doğrulayıcı eklemek için işlem çıkardığınızda, stake edilen token'lar ve işlem ücreti kontrol ettiğiniz adreslerden kesilir. Doğrulamayı bitirdiğiniz zaman, stake edilen fonlar geldikleri adrese geri dönerler. Ödül kazandıysanız, ödülünüz kendinizi doğrulayıcı olarak eklediğiniz zaman belirttiğiniz adrese gönderilir.
 
 #### API çağrılarına izin verin <a id="allow-api-calls"></a>
 
-Uzaktan bağlantı sağlanılan makinalardan kendi node’unuza API çağrıları yapmak için API portunda\(Varsayılan değeri `9650`\) trafiğe izin verin ve node’unuzu şu argümanla çalıştırın: `--http-host=`
+Uzak makinelerden düğümünüze API çağrıları yapmak için API portunda trafiğe izin verin \(varsayılan olarak\) `9650` ve düğümünüzü `--http-host=` argümanıyla çalıştırın
 
-Komut satırı argümanları üzerinden kullanmayacağınız tüm API’leri etkisiz hale getirin. Network’ünüzü, API portlarına yalnızca güvenilir makinelerden erişime izin verecek şekilde yapılandırmalısınız. \(Örneğin kişisel bilgisayarınız\)
+Kullanmayacağınız tüm API'leri komut satırı argümanlarıyla devre dışı bırakmalısınız. Ağınızı sadece güvenilir makinelerden \(ör. kişisel bilgisayarınız\) API portuna erişime izin verecek şekilde yapılandırmalısınız.
 
-#### Çalışma süresi\(uptime\) neden düşük? <a id="why-is-my-uptime-low"></a>
+#### Uptime'ım neden düşük? <a id="why-is-my-uptime-low"></a>
 
-Avalanche üzerindeki her validatör, diğer validatörlerin çalışma süresinin kaydını tutar. Bir node’un bağlantılarını ve her bağlantının çalışma süresini `info.peers`’ı çağırarak görebilirsiniz. **Bu sadece bir node’un bakış açısıdır**. Diğer node’lar sizin node’unuzun çalışma süresini farklı algılayabilir. Sadece bir node’un sizin çalışma sürenizi düşük algılaması staking ödülü kazanamayacağınız anlamına gelmez.
+Avalanche'taki her doğrulayıcı diğer doğrulayıcıların çalışma zamanını takip eder. Her doğrulayıcının bir ağırlığı vardır \(yani taşıdığı stake tutarı\) Bir doğrulayıcının ağırlığı ne kadar fazlaysa, o doğrulayıcının düğümünüzün bir staking ödülü alıp almayacağı doğrulayıcılar tarafından oylanırken etkisi o kadar fazla olur. Düğümünüzde `info.uptime` API metodunu çağırarak düğümünüzün ağırlıklandırılmış uptime'ını ve ağın yüzde kaçının şu anda düğümünüzün bir staking ödülü almak için yeterince yüksek bir uptime'a ulaştığını düşündüğünü öğrenebilirsiniz.
 
-Node’unuzun başka bir node’a bağlı olmamasının olası nedeni, NAT geçişinin başarısız olması ve node’unuzun `--public-ip = [Node’un Public IP’si]` ile başlatmamış olmasıdır. Önümüzdeki zamanlarda node'unuzun doğru bir şekilde bağlandığının doğrulamasını kolaylaştırmak adına daha iyi bir gözlemleme özelliği ekleyeceğiz.
+Ayrıca, `info.peers` ögesini çağırarak bir düğümün sahip olduğu bağlantıları, bunun yanı sıra her bir bağlantının uptime'ını da görebilirsiniz. **Bu sadece bir düğümün bakış açısıdır**. Diğer düğümler sizin düğümünüzün çalışma zamanını farklı algılayabilir. Bir düğümün çalışma zamanınızı düşük algılaması staking ödülü almayacağınız anlamına gelmez.
 
-#### Gizlilik <a id="secret-management"></a>
+Düğümünüzün uptime'ı düşükse, `--public-ip=[NODE'S PUBLIC IP]` yapılandırma seçeneğini ayarladığınızdan ve düğümünüzün 9651 portunda gelen TCP trafiği alabildiğinden emin olun.
 
-Validasyon sağlayan node’unuzda gizli tutmanız gereken tek şey Staking Key’inizdir.\(Node’unuzun ID’sini belirleyen TLS anahtarı\). Bir node’u ilk kez çalıştırdığınızda Staking anahtarı oluşturulur ve `$HOME/.avalanchego/staking/staker.key` dosyasının içine kaydedilir. Bu dosyayı \(ve `staker.crt`\’ı) güvenli bir yere yedeklemelisiniz. Staking Key’inizi kaybetmeniz halinde node’unuzun yeni bir ID’si olacağından dolayı validasyon ödüllerinizi tehlikeye atabilirsiniz.
+#### Gizli Yönetim <a id="secret-management"></a>
 
-Validasyon yaptığınız node’da AVAX bulundurmanız gerekmemektedir. Aslında, node’unuzda çok fazla fon olmaması ve fonlarınızın neredeyse tümünün, private key’ini herhangi bir bilgisayara kaydetmediğiniz soğuk adreslerde saklanması daha doğru ve sağlıklıdır.
+Doğrulama düğümünüzde ihtiyacınız olan tek sır, düğümünüzün kimliğini belirleyen TLS anahtarı olan Staking Anahtarıdır. Bir düğüm başlattığınız ilk anda Staking Anahtarı oluşturulur ve `$HOME/.avalanchego/staking/staker.key` içine konur. Bu dosyayı \(ve\) `staker.crt` güvenli bir yere yedeklemeniz gerekir. Staking Anahtarınızı kaybetmeniz halinde düğümünüz yeni bir kimliğe sahip olacağı için doğrulama ödülünüz tehlikeye girebilir.
 
-#### Gözlemleme <a id="monitoring"></a>
+Doğrulama düğümünüzde AVAX fonları bulunması gerekmez. Aslında, düğümünüzde çok fazla fon bulunmaması en iyi **uygulamadır**. Fonlarınızın neredeyse tamamı, özel anahtarı herhangi bir bilgisayarda bulunmayan "soğuk" adreslerde olmalıdır.
 
-Node'unuzun çalışma süresini, genel sağlık durumu vb. şeyleri nasıl gözlemleyeceğinizi bu tutorial'ı takip ederek öğrenebilirsiniz.
+#### İzleme <a id="monitoring"></a>
+
+Düğümünüzün çalışma zamanı, genel sağlığı, vb.'yi nasıl takip edeceğinizi öğrenmek için bu eğitim makalesini takip edin.
 
 {% page-ref page="../../build/tutorials/nodes-and-staking/setting-up-node-monitoring.md" %}
 
-## Delegatörler
+#### Fuji'de Doğrulama
 
-Bir delegatör, staking'e katılmak isteyen ancak delegasyon yoluyla mevcut bir validasyon node'una güvenmeyi seçen bir token sahibidir.
+Fuji'de doğrulama sadece `1 AVAX` gerektirir. Böylece doğrulama düğümünüzü kolayca kurabilir ve doğrulama hakkında daha fazlasını öğrenebilirsiniz.
 
-Stake'lerinizi bir validatör üzerinden delege etmek istediğinizde, şunları belirtiyorsunuz:
+## Yetkilendiriciler
 
-* Delege ettiğiniz node'un ID'si\(no'su\)
-* Ne zaman delege etmeye başlamak ve delege etmeyi durdumak istediğiniz \(Bu süreçte validatör hale valide ediyor olmalı\)
-* Kaç adet AVAX stake ettiğiniz
+Yetkilendirici, staking'e katılmak isteyen ancak var olan bir düğüme yetkilendirme \(delegation\) yoluyla güvenmeyi seçen bir token sahibidir.
+
+Bir doğrulayıcıya stake delege ettiğinizde şunları belirtirsiniz:
+
+* Yetki verdiğiniz düğümün kimliği
+* Stake için yetki vermeyi başlatmak/durdurmak istediğiniz zaman \(doğrulayıcının doğrulama yaptığı dönem içinde olmalıdır\)
+* Kaç AVAX stake ettiğiniz
 * Ödüllerin gönderileceği adres
 
-{% hint style="info" %}
-Bir delegatörün stake etmesi gereken en düşük miktar 25 AVAX'dır.
-{% endhint %}
+{% hint style="info" %}Bir yetkilendiricinin yetki vermesi gereken minimum tutar 25 AVAX'tır.{% endhint %}
 
-{% hint style="danger" %}
-Not: Stake’inizi bir delegatöre eklemek için işlemi gerçekleştirdiğinizde, parametreleri değiştirmenin bir yolu olmadığını unutmayın. **Stake ettiğiniz AVAX'ı erken çekemezsiniz. Stake edilen miktarı, node’unuzun kimliğini ve ödül adresinizi değiştiremezsiniz.** Eğer emin değilseniz [Discord](https://chat.avax.network) üzerinden yardım isteyebilir veya Sıkça Sorulan Sorular kısmına [Developer FAQs](http://support.avalabs.org/en/collections/2618154-developer-faq) göz gezdirebilirsiniz.
-{% endhint %}
+{% hint style="danger" %}Stake'inizi bir yetkilendiriciye eklemek için işlemi yayınladıktan sonra parametreleri değiştirmenin hiçbir yolunun olmadığını unutmayın. **Stake'inizi vaktinden evvel kaldıramazsınız veya stake tutarını, düğüm kimliğini veya ödül adresini değiştiremezsiniz.** Emin değilseniz [Discord](https://chat.avax.network) üzerinden yardım isteyin veya [Geliştirici SSS](http://support.avalabs.org/en/collections/2618154-developer-faq)'lerimizde gezinin.{% endhint %}
 
-### Delegatör ödülleri <a id="delegator-rewards"></a>
+### Yetkilendirici ödülleri <a id="delegator-rewards"></a>
 
-Eğer tokenlarınızı delege eden validatör, yeterli oranda yanıt verebilir ve doğru olursa, delegasyon döneminiz bittiğinde ödül kazanmış olursunuz. Delegatörler ile validatörler aynı şekilde ödül kazanmaktadırlar. Fakat delege ettiğiniz validatör, ödülünüzden belirttiği delegasyon ücretine göre bir kesinti yapar ve bu kesinti kendisine ait olur.
+Token'ları yetkilendirdiğiniz doğrulayıcı yeterince doğru ve duyarlıysa, yetkilendirmeyi tamamladığınızda ödül alırsınız. Yetkilendiriciler, doğrulayıcılarla aynı işleve göre ödüllendirilir. Ancak, yetki verdiğiniz doğrulayıcı ödülünüzün bir kısmını tutar ve bu kısım doğrulayıcının belirttiği yetkilendirme ücreti oranına karşılık gelir.
 
-Tokenlarınızı delege etmek için ilgili işlemi gerçekleştirdiğinizde stake ettiğiniz tokenlar ve işlem ücreti, kontrol ettiğiniz hesaplardan çekilir. Delegasyon döneminiz bittiğinde stake edilen fonlar geldikleri adreslere geri döner. Eğer bir ödül kazandıysanız, ödülünüz tokenlarınızı delege ederken belirttiğiniz adrese yollanır.
+Token yetkilendirmek için işlem çıkardığınızda, stake edilen token'lar ve işlem ücreti kontrol ettiğiniz adreslerden kesilir. Yetkilendirmeyi tamamladığınız zaman stake edilmiş token'lar adresinize geri döner. Ödül kazandıysanız, token'ları yetkilendirdiğiniz zaman belirttiğiniz adrese gönderilir.
+
+## SSS
+
+### Doğrulayıcının sağlığını kontrol etmeye yönelik araç var mıdır?
+
+Evet, düğüm kimliğinizi [buraya](https://stats.avax.network/dashboard/validator-health-check) girin.
+
+### Bir doğrulayıcının staking ödülü alıp almadığı nasıl belirlenir?
+
+Bir düğüm doğrulayıcı kümesinden ayrıldığında, doğrulayıcılar ayrılan düğümün staking ödülü alıp almaması için oy verir. Bir doğrulayıcı, düğümün gerekenden \(şu anda %80\) uzun süre boyunca online ve duyarlı olduğunu düşünürse düğümün staking ödülü alması için oy verir. Aksi takdirde doğrulayıcı düğümün staking ödülü almaması için oy verir. Stake'e göre ağırlıklandırılan bu oylamanın sonucu düğümün ödül alıp almayacağını belirler.
+
+Her doğrulayıcı sadece "evet" veya "hayır" oyu kullanır. Örneğin düğümün çalışma zamanına dair görüşlerini paylaşıp yanıtların ortalamasını almazlar.
+
+Her doğrulama dönemi ayrı olarak dikkate alınır. Yani, bir düğümün doğrulayıcı kümesine katıldığını ve sonra da ayrıldığını düşünün. Sonra katılıyor ve yeniden ayrılıyor. Düğümün doğrulayıcı kümesindeki ilk dönemindeki çalışma zamanı, doğrulayıcı kümesindeki ikinci döneminde staking ödülü alıp almayacağını etkilemez.
+
