@@ -1,8 +1,8 @@
-# Platform Chain \(P-Chain\) API
+# Platform Zinciri (P-Chain) API'si
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
+Bu API, müşterilerin Avalanche'ın [doğrulayıcı](../../learn/platform-overview/staking.md#validators) kümesini idame ettiren ve blok zincir yaratılmasını yöneten [P-Chain](../../learn/platform-overview/#platform-chain-p-chain) ile etkileşimde bulunmalarına imkan verir.
 
-## Endpoint
+## Son Nokta
 
 ```cpp
 /ext/P
@@ -10,25 +10,25 @@ This API allows clients to interact with the [P-Chain](../../learn/platform-over
 
 ## Format
 
-This API uses the `json 2.0` RPC format.
+Bu API, `json 2.0` RPC formatını kullanır.
 
-## Methods
+## Metotlar
 
 ### platform.addDelegator
 
-Add a delegator to the Primary Network.
+Birincil Ağ'a bir yetkilendirici (delegator) ekleyin.
 
-A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
+Bir yetkilendirici AVAX stake eder ve kendisi adına doğrulama yapacak bir doğrulayıcı (yetkilendirilen) belirler. Yetkilendirilen, kendisine delege edilen stake miktarıyla orantılı olarak artan bir diğer doğrulayıcılar tarafından örneklenme olasılığına (ağırlık) sahip olur.
 
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward \(if any.\) A transaction that delegates stake has no fee.
+Yetkilendirilen, yetkilendirenden bir ücret alır; yetkilendirilen, yetkilendirenin (eğer varsa) doğrulama ödülünün bir yüzdesini alır. Stake delege etme işlemi ücrete tabi değildir.
 
-The delegation period must be a subset of the period that the delegatee validates the Primary Network.
+Yetkilendirme (delegation) dönemi, yetkilendirilenin Birincil Ağ'ı doğruladığı dönemin bir subnet'i olmalıdır.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Bir yetkilendirici olarak bir düğüm eklemek için işlem yayınladıktan sonra parametreleri değiştirmenin hiçbir yolunun olmadığı aklınızda bulunsun. **Bir stake'i erken kaldıramazsınız ya da stake tutarını, düğüm kimliğini veya ödül adresini değiştiremezsiniz.** Doğru değerleri kullandığınızdan emin olun. Emin değilseniz, [Geliştirici SSS](https://support.avalabs.org/en/collections/2618154-developer-faq) bölümüne bakın veya [Discord](https://chat.avalabs.org/) platformunda yardım isteyin.
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.addDelegator(
@@ -43,25 +43,25 @@ platform.addDelegator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `nodeID` is the ID of the node to delegate to.
-* `startTime` is the Unix time when the delegator starts delegating.
-* `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the delegator is staking.
-* `rewardAddress` is the address the validator reward goes to, if there is one.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID`, yetkilendirmenin yapılacağı düğümün kimliğidir.
+* `startTime`, yetkilendirenin yetki delege etmeye başladığı Unix zamanıdır.
+* `endTime`, yetkilendirenin yetki delege etmeyi durdurduğu (ve stake edilen AVAX'ın geri verildiği) Unix zamanıdır.
+* `stakeAmount`, yetkilendirenin stake ettiği nAVAX'ın tutarıdır.
+* `rewardAddress`, eğer varsa, doğrulayıcının ödülünün gittiği adrestir.
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, işlem ücretini ödeyen kullanıcıdır.
+* `password`, `username`'in parolasıdır.
+* `txID`, işlem kimliğidir
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -82,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -97,19 +97,19 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
+Birincil Ağ'a bir doğrulayıcı ekleyin. Bunu yapmak için AVAX stake etmeniz gerekir. Eğer düğüm doğrulama yaparken yeterince doğru ve hemen yanıt verebilir durumdaysa, stake döneminin sonuna gelindiğinde bir ödül kazanırsınız. Doğrulayıcının konsensüs sırasında diğer doğrulayıcılar tarafından örneklenme olasılığı, stake edilen AVAX tutarıyla orantılıdır.
 
-The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+Doğrulayıcı, yetkilendirenlerden bir ücret alır; doğrulayıcı, yetkilendirenin (eğer varsa) doğrulama ödülünün bir yüzdesini alır. En düşük yetkilendirme (delegation) ücreti %2'dir. Bir doğrulayıcı ekleme işlemi ücrete tabi değildir.
 
-The validation period must be between 2 weeks and 1 year.
+Doğrulama dönemi 2 hafta ile 1 yıl arasında olmalıdır.
 
-There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
+Doğrulayıcılara uygulanan bir maksimum toplam ağırlık vardır. Bunun anlamı, hiçbir doğrulayıcı, bu değerden daha çok stake edilmiş ve kendisine delege edilmiş AVAX'a hiçbir zaman sahip olmayacak, demektir. Bu değer başlangıçta `min(5 * amount staked, 3M AVAX)` olarak ayarlanacaktır. Bir doğrulayıcı üzerindeki toplam değer 3 milyon AVAX'tır.
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+Bir doğrulayıcı olarak bir düğüm eklemek için işlem yayınladığınızda, parametreleri değiştirmenin hiçbir yolunun olmadığını aklınızda bulundurun. **Stake'inizi erken kaldıramazsınız ya da stake miktarını, düğüm kimliğini veya ödül adresini değiştiremezsiniz.** Doğru değerleri kullandığınızdan emin olun. Emin değilseniz, [Geliştirici SSS](https://support.avalabs.org/en/collections/2618154-developer-faq) bölümüne bakın veya [Discord](https://chat.avalabs.org/) platformunda yardım isteyin.
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.addValidator(
@@ -125,28 +125,28 @@ platform.addValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `nodeID` is the node ID of the validator being added.
-* `startTime` is the Unix time when the validator starts validating the Primary Network.
-* `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the validator is staking.
-* `rewardAddress` is the address the validator reward will go to, if there is one.
-* `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID`, eklenen doğrulayıcının düğüm kimliğidir.
+* `startTime`, doğrulayıcının Birincil Ağ'ı doğrulamaya başladığı Unix zamanıdır.
+* `endTime`, doğrulayıcının Birincil Ağ'ı doğrulamayı durdurduğu (ve stake edilen AVAX'ın geri verildiği) Unix zamanıdır.
+* `stakeAmount`, doğrulayıcının stake ettiği nAVAX tutarıdır.
+* `rewardAddress`, eğer varsa, doğrulayıcının ödülünün gönderileceği adrestir.
+* `delegationFeeRate`, bu doğrulayıcının diğerleri kendisine stake delege ettiğinde aldığı yüzdelik ücrettir. 4 ondalık basamağa kadar izin verilir; ilave ondalık basamaklar yok sayılır. 0 ile 100 (dahil) arasında olmalıdır. Örneğin, `delegationFeeRate` (yetkilendirme ücreti oranı) `1.2345` ise ve birisi bu doğrulayıcıyı yetkilendirirse, yetkilendirme dönemi sona erdiğinde, ödülün %1,2345'i doğrulayıcıya, kalanı yetkilendirene gider.
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, işlem ücretini ödeyen kullanıcıdır.
+* `password`, `username`'in parolasıdır.
+* `txID`, işlem kimliğidir
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+Bu örnekte, 10 dakika ve 2 gün sonraki Unix zamanlarını hesaplamak için `date` kabuk komutu kullanıyoruz. (Not: Mac kullanıcısıysanız `$(date` yerine `$(gdate` kullanın.  `gdate`kurulu değilse, `brew install coreutils` kullanın.)
 
 ```cpp
 curl -X POST --data '{
@@ -168,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -183,9 +183,9 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+Birincil Ağ dışında bir subnet'e bir doğrulayıcı ekleyin. Doğrulayıcı, Birincil Ağ'ı, bu subnet'i doğruladığı sürenin tamamı boyunca doğrulamalıdır.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.addSubnetValidator(
@@ -200,25 +200,25 @@ platform.addSubnetValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string,
 }
 ```
 
-* `nodeID` is the node ID of the validator.
-* `subnetID` is the subnet they will validate.
-* `startTime` is the unix time when the validator starts validating the subnet.
-* `endTime` is the unix time when the validator stops validating the subnet.
-* `weight` is the validator’s weight used for sampling.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+* `nodeID`, doğrulayıcının düğüm kimliğidir.
+* `subnetID`, doğrulama yapacağı subnet'tir.
+* `startTime`, doğrulayıcının subnet'i doğrulamaya başladığı unix zamanıdır.
+* `endTime`, doğrulayıcının subnet'i doğrulamayı durdurduğu unix zamanıdır.
+* `weight`, doğrulayıcının örneklenme için kullanılan ağırlığıdır.
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, işlem ücretini ödeyen kullanıcıdır.
+* `password`, `username`'in parolasıdır.
+* `txID`, işlem kimliğidir.
 
-#### **Example call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -239,7 +239,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -254,9 +254,9 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
-Create a new address controlled by the given user.
+Belli bir kullanıcı tarafından kontrol edilen yeni bir adres oluşturun.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.createAddress({
@@ -265,7 +265,7 @@ platform.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -279,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -293,9 +293,9 @@ curl -X POST --data '{
 
 ### platform.createBlockchain
 
-Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
+Yeni bir blok zincir yaratın. Şu anda sadece AVM'nin ve Timestamp VM'nin yeni instance'larının yaratılması desteklenmektedir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.createBlockchain(
@@ -310,27 +310,27 @@ platform.createBlockchain(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and can’t be the Primary Network.
-* `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
-* `name` is a human-readable name for the new blockchain. Not necessarily unique.
-* `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+* `subnetID`, yeni blok zinciri doğrulayan Subnet'in kimliğidir. Subnet mevcut olmalıdır ve Birincil Ağ olamaz.
+* `vmID`, blok zincirin çalıştığı Sanal Makine'nin kimliğidir. Sanal Makine'nin bir alias'ı (takma ad) da olabilir.
+* `name`, yeni blok zincirin insan tarafından okunabilir bir adıdır. Benzersiz olması gerekmez.
+* `genesisData`, yeni blok zincirin `encoding` parametresi vasıtasıyla belirlenen formatta kodlanan genesis durumunun bayt temsilidir.
+* `encoding`, `genesisData` için kullanılacak formatı belirler. "cb58" veya "hex" formatı olabilir. Varsayılan format "cb58"dir. Sanal Makineler, `genesisData` üretmek için kullanılabilecek `buildGenesis` adlı bir statik API metoduna sahip olmalıdır
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, işlem ücretini ödeyen kullanıcıdır. Bu kullanıcının subnet'in yeterli sayıda kontrol anahtarlarına sahip olması gerekir.
+* `password`, `username`'in parolasıdır.
+* `txID`, işlem kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
-In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
+Bu örnekte, Timestamp Sanal Makinesinin yeni bir instance'ını yaratıyoruz. `genesisData`, `timestamp.buildGenesis` çağrısından gelmiştir.
 
 ```cpp
 curl -X POST --data '{
@@ -351,7 +351,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -366,11 +366,11 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-Create a new subnet.
+Yeni bir subnet yaratın.
 
-The subnet’s ID is the same as this transaction’s ID.
+Subnet'in kimliği, bu işlemin kimliğiyle aynıdır.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.createSubnet(
@@ -382,20 +382,20 @@ platform.createSubnet(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
+* Bu subnet'e bir doğrulayıcı eklemek için, `controlKeys` parametresindeki adreslerden `threshold` (eşik) sayısı kadar imza gerekir
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, işlem ücretini ödeyen kullanıcıdır.
+* `password`, `username`'in parolasıdır.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -416,7 +416,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -430,9 +430,9 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
+P-Chain'deki bir adresten X-Chain'deki bir adrese AVAX gönderin. Bu işlemi yayınladıktan sonra, transferi tamamlamak için X-Chain'in [`avm.import`](exchange-chain-x-chain-api.md#avm-import) metodunu `AVAX` varlık kimliğiyle çağırmanız gerekir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.exportAVAX(
@@ -444,22 +444,22 @@ platform.exportAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `amount` is the amount of nAVAX to send.
-* `to` is the address on the X-Chain to send the AVAX to
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user sending the AVAX and paying the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the ID of this transaction.
+* `amount`, gönderilecek nAVAX tutarıdır.
+* `to`, X-Chain'deki AVAX gönderilecek adrestir
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username`, AVAX gönderen ve işlem ücretini ödeyen kullanıcıdır.
+* `password`, `username`'in parolasıdır.
+* `txID`, bu işlemin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -477,7 +477,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -492,10 +492,9 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+Belli bir adresi kontrol eden özel anahtarı getirin. Getirilen özel anahtar, [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey) komutuyla bir kullanıcıya eklenebilir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.exportKey({
@@ -505,11 +504,11 @@ platform.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` is the user that controls `address`.
-* `password` is `username`‘s password.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username`, `address`'i kontrol eden kullanıcıdır.
+* `password`, `username`'in parolasıdır.
+* `privateKey`, `address`'i kontrol eden özel anahtarın string temsilidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -524,7 +523,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -538,9 +537,9 @@ curl -X POST --data '{
 
 ### platform.getBalance
 
-Get the balance of AVAX controlled by a given address.
+Belli bir adres ile kontrol edilen AVAX bakiyesini getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getBalance({
@@ -557,14 +556,14 @@ platform.getBalance({
 }
 ```
 
-* `address` is the address to get the balance of.
-* `balance` is the total balance, in nAVAX.
-* `unlocked` is the unlocked balance, in nAVAX.
-* `lockedStakeable` is the locked stakeable balance, in nAVAX.
-* `lockedNotStakeable` is the locked and not stakeable balance, in nAVAX.
-* `utxoIDs` are the IDs of the UTXOs that reference `address`.
+* `address`, bakiyesi getirilecek adrestir.
+* `balance`, nAVAX cinsinden toplam bakiyedir.
+* `unlocked`, nAVAX cinsinden kilidi açılmış bakiyedir.
+* `lockedStakeable`, nAVAX cinsinden stake edilebilir kilitli bakiyedir.
+* `lockedNotStakeable`, nAVAX cinsinden kilitli ve stake edilemeyen bakiyedir.
+* `utxoIDs`, `address`'e referans yapan UTXO'ların kimlikleridir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -577,7 +576,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -604,9 +603,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchains
 
-Get all the blockchains that exist \(excluding the P-Chain\).
+Mevcut tüm blok zincirleri getirin (P-Chain hariç).
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getBlockchains() ->
@@ -620,13 +619,13 @@ platform.getBlockchains() ->
 }
 ```
 
-* `blockchains` is all of the blockchains that exists on the Avalanche network.
-* `name` is the human-readable name of this blockchain.
-* `id` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates this blockchain.
-* `vmID` is the ID of the Virtual Machine the blockchain runs.
+* `blockchains`, Avalanche ağında mevcut blok zincirlerin tümüdür.
+* `name` bu blok zincirin insan tarafından okunabilir adıdır.
+* `id` blok zincirin kimliğidir.
+* `subnetID`, bu blok zinciri doğrulayan Subnet'in kimliğidir.
+* `vmID`, blok zinciri çalıştıran Sanal Makine'nin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -637,7 +636,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -694,9 +693,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchainStatus
 
-Get the status of a blockchain.
+Bir blok zincirin durumunu getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getBlockchainStatus(
@@ -706,14 +705,14 @@ platform.getBlockchainStatus(
 ) -> {status: string}
 ```
 
-`status` is one of:
+`status`, şunlardan biridir:
 
-* `Validating`: The blockchain is being validated by this node.
-* `Created`: The blockchain exists but isn’t being validated by this node.
-* `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
-* `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
+* `Validating`: Blok zincir bu düğüm tarafından doğrulanıyor.
+* `Created`: Blok zincir mevcut ancak bu düğüm tarafından doğrulanmıyor.
+* `Preferred`: Blok zincirin yaratılması teklif edildi ve muhtemelen yaratılacak ancak işlem henüz kabul edilmedi.
+* `Unknown`: Blok zincir ya teklif edilmedi ya da blok zinciri yaratma teklifi tercih edilmedi. Teklif yeniden gönderilebilir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -726,7 +725,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -740,17 +739,17 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+Mevcut AVAX adedi için bir üst limit döndürür. Bu bir üst limittir, çünkü işlem ücretleri de dahil, yakılmış token'ları hesaba katmaz.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getCurrentSupply() -> {supply: int}
 ```
 
-* `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+* `supply`, mevcut nAVAX adedi üzerindeki AVAX cinsinden ifade edilen bir üst limittir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -761,7 +760,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -773,15 +772,15 @@ curl -X POST --data '{
 }
 ```
 
-The response in this example indicates that AVAX’s supply is at most 365.865 million.
+Bu örnekteki yanıt, AVAX arzının en fazla 365,865 milyon olduğunu gösterir.
 
 ### platform.getCurrentValidators
 
-List the current validators of the given Subnet.
+Belli bir Subnet'in güncel doğrulayıcılarını listeleyin.
 
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+Üst düzey alan `delegators`'ın v1.0.1 sürümü itibarıyla [kullanımdan kaldırılacağı ilan edilmiş](deprecated-api-calls.md#getcurrentvalidators) ve v.1.0.6 sürümünde kullanımdan kaldırılmıştı. Bunun yerine, `validators`'ın her bir ögesi şimdi o doğrulayıcıya ait yetkilendirenlerin listesini içerir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getCurrentValidators({
@@ -821,31 +820,31 @@ platform.getCurrentValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `nodeIDs` is a list of the nodeIDs of current validators to request. If omitted, all current validators are returned. If a specified nodeID is not in the set of current validators, it will not be included in the response.
+* `subnetID`, güncel doğrulayıcıları döndürülen subnet'tir. Kullanılmadıysa, Birincil Ağ'ın güncel doğrulayıcılarını döndürür.
+* `nodeIDs`, istenen güncel doğrulayıcıların düğüm kimliklerinin bir listesidir. Kullanılmazsa, tüm güncel doğrulayıcılar döndürülür. Belirtilen bir düğüm kimliği güncel doğrulayıcılar kümesinde değilse, gelen yanıtta yer almayacaktır.
 * `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
-  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
-  * `uptime` is the % of time the queried node has reported the peer as online.
-  * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator:
-    * `txID` is the delegator transaction.
-    * `startTime` is the Unix time when the delegator started.
-    * `endTime` is the Unix time when the delegator stops.
-    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-    * `nodeID` is the validating node’s node ID.
-    * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-    * `potentialReward` is the potential reward earned from staking
-* `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
+   * `txID`, doğrulayıcı işlemidir.
+   * `startTime`, doğrulayıcının Subnet'i doğrulamaya başladığı Unix zamanıdır.
+   * `endTime`, doğrulayıcının Subnet'i doğrulamayı durdurduğu Unix zamanıdır.
+   * `stakeAmount`, bu doğrulayıcının stake ettiği nAVAX tutarıdır. Eğer `subnetID` Birincil Ağ değilse, kullanılmaz.
+   * `nodeID`, doğrulayıcının düğüm kimliğidir.
+   * `weight`, doğrulayıcıların örneklenmesi sırasında doğrulayıcının ağırlığıdır. Eğer `subnetID` Birincil Ağ ise, kullanılmaz.
+   * `rewardOwner`, bir `OutputOwners` çıktısıdır ki `locktime`, `threshold` ve `addresses` dizisini içerir.
+   * `potentialReward`, staking'den kazanılan potansiyel ödüldür
+   * `delegationFeeRate`, bu doğrulayıcının diğerleri kendisine stake delege ettiğinde aldığı yüzdelik ücrettir.
+   * `uptime`, sorgulanan düğümün bu eşin (peer) çevrimiçi olduğunu rapor ettiği zamanın %'sidir.
+   * `connected` ise düğüm ağa bağlıdır
+   * `delegators`, bu doğrulayıcıyı yetkilendirenlerin listesidir:
+      * `txID`, yetkilendirici işlemidir.
+      * `startTime`, yetkilendiricinin başladığı andaki Unix zamanıdır.
+      * `endTime`, yetkilendiricinin durduğu andaki Unix zamanıdır.
+      * `stakeAmount`, bu yetkilendiricinin stake ettiği nAVAX tutarıdır. Eğer `subnetID` Birincil Ağ değilse, kullanılmaz.
+      * `nodeID`, doğrulayan düğümün düğüm kimliğidir.
+      * `rewardOwner`, bir `OutputOwners` çıktısıdır ki `locktime`, `threshold` ve `addresses` dizisini içerir.
+      * `potentialReward`, staking'den kazanılan potansiyel ödüldür
+* `delegators`: (**v1.0.1 versiyonunda kullanımdan kaldırılacağı ilan edilmiştir. Metot dokümanının başındaki nota bakın.**)
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -856,7 +855,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -906,9 +905,9 @@ curl -X POST --data '{
 
 ### platform.getHeight
 
-Returns the height of the last accepted block.
+Son kabul edilen blokun yüksekliğini döndürür.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getHeight() ->
@@ -917,7 +916,7 @@ platform.getHeight() ->
 }
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -928,7 +927,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -942,19 +941,19 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+Birincil Ağ'ı doğrulamak için gerekli minimum AVAX tutarını ve delege edilebilecek minimum AVAX tutarını getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
-platform.getMinStake() -> 
+platform.getMinStake() ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
 }
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -964,7 +963,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -979,9 +978,9 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
+Belirtilen Subnet'in kararı beklenen doğrulayıcı kümesini listeler. Her bir doğrulayıcı şu anda Subnet'i doğrulamıyor ancak gelecekte doğrulayacak.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getPendingValidators({
@@ -1008,24 +1007,24 @@ platform.getPendingValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `nodeIDs` is a list of the nodeIDs of pending validators to request. If omitted, all pending validators are returned. If a specified nodeID is not in the set of pending validators, it will not be included in the response.
+* `subnetID`, güncel doğrulayıcıları döndürülen subnet'tir. Kullanılmadıysa, Birincil Ağ'ın güncel doğrulayıcılarını döndürür.
+* `nodeIDs`, istenen kararı beklenen doğrulayıcıların düğüm kimliklerinin listesidir. Kullanılmazsa, tüm kararı beklenen doğrulayıcılar döndürülür. Belirtilen bir düğüm kimliği kararı beklenen doğrulayıcılar kümesinde değilse, bu bilgi gelen yanıtta yer almayacaktır.
 * `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `connected` if the node is connected.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
+   * `txID`, doğrulayıcı işlemidir.
+   * `startTime`, doğrulayıcının Subnet'i doğrulamaya başladığı Unix zamanıdır.
+   * `endTime`, doğrulayıcının Subnet'i doğrulamayı durdurduğu Unix zamanıdır.
+   * `stakeAmount`, bu doğrulayıcının stake ettiği nAVAX tutarıdır. Eğer `subnetID` Birincil Ağ değilse, kullanılmaz.
+   * `nodeID`, doğrulayıcının düğüm kimliğidir.
+   * `connected` ise düğüm bağlıdır.
+   * `weight`, doğrulayıcıların örneklenmesi sırasında doğrulayıcının ağırlığıdır. Eğer `subnetID` Birincil Ağ ise, kullanılmaz.
 * `delegators`:
-  * `txID` is the delegator transaction.
-  * `startTime` is the Unix time when the delegator starts.
-  * `endTime` is the Unix time when the delegator stops.
-  * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validating node’s node ID.
+   * `txID`, yetkilendirici işlemidir.
+   * `startTime`, yetkilendiricinin başladığı Unix zamanıdır.
+   * `endTime`, yetkilendiricinin durduğu andaki Unix zamanıdır.
+   * `stakeAmount`, bu yetkilendiricinin stake ettiği nAVAX tutarıdır. Eğer `subnetID` Birincil Ağ değilse, kullanılmaz.
+   * `nodeID`, doğrulayan düğümün düğüm kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1036,7 +1035,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1067,11 +1066,63 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getRewardUTXOs
+
+Belirtilen işlemin staking veya yetkilendirme dönemi sona erdikten sonra ödüllendirilen UTXO'lar döndürülür.
+
+#### **İmza**
+
+```cpp
+platform.getRewardUTXOs({
+    txID: string,
+    encoding: string //optional
+}) -> {
+    numFetched: integer,
+    utxos: []string,
+    encoding: string
+}
+```
+
+* `txID`, staking veya yetkilendirme işleminin kimliğidir
+* `numFetched`, döndürülen UTXO'ların sayısıdır
+* `utxos`, şifrelenmiş ödül UTXO'larının bir dizilimidir
+* `encoding`, döndürülen UTXO'ların formatını belirtir. "cb58" veya "hex" formatında alabilir ve varsayılan olarak "cb58"dir.
+
+#### **Örnek Çağrı**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getRewardUTXOs",
+    "params": {
+        "txID": "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y5"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Örnek Yanıt**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "2",
+        "utxos": [
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+        ],
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
+
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+Bir subnet'in staking varlığına ait bir varlık kimliğini getirin. Şu anda bu işlem sadece Birincil Ağ'ın staking varlık kimliğini döndürür.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getStakingAssetID({
@@ -1081,10 +1132,10 @@ platform.getStakingAssetID({
 }
 ```
 
-* `subnetID` is the subnet whose assetID is requested.
-* `assetID` is the assetID for a subnet’s staking asset.
+* `subnetID`, varlık kimliği istenen subnet'tir.
+* `assetID`, bir subnet'in staking varlığına ait varlık kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1097,7 +1148,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1111,9 +1162,9 @@ curl -X POST --data '{
 
 ### platform.getSubnets
 
-Get info about the Subnets.
+Subnet'ler hakkındaki bilgileri getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getSubnets(
@@ -1128,13 +1179,13 @@ platform.getSubnets(
 }
 ```
 
-* `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `ids`, hakkında bilgi alınacak subnet'lerin kimlikleridir. Kullanılmazsa, tüm subnet'ler hakkındaki bilgileri getirir.
+* `id`, Subnet'in kimliğidir.
+* Subnet'e bir doğrulayıcı eklemek için `controlKeys`'deki adreslerden `threshold` kadar imzaya ihtiyaç vardır.
 
-See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
+Bir Subnet'e bir doğrulayıcı eklenmesi hakkında bilgiler için [buraya](../tutorials/nodes-and-staking/add-a-validator.md) bakın.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1145,7 +1196,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1168,15 +1219,15 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
+Bir adresler kümesi tarafından stake edilen nAVAX tutarını getirin. Döndürülen tutara staking ödülleri dahil değildir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1193,7 +1244,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1205,17 +1256,51 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getTimestamp
+
+Şu andaki P-Chain zaman damgasını alın.
+
+#### **İmza**
+
+```cpp
+platform.getTimestamp() -> {time: string}
+```
+
+#### **Örnek Çağrı**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTimestamp",
+    "params": {},
+    "id": 1
+}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Örnek Yanıt**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "timestamp": "2021-09-07T00:00:00-04:00"
+    },
+    "id": 1
+}
+```
+
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+Birincil Ağ'da stake edilen toplam nAVAX tutarını getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getTotalStake() -> {stake: int}
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1227,7 +1312,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1241,11 +1326,11 @@ curl -X POST --data '{
 
 ### platform.getTx
 
-Gets a transaction by its ID.
+Bir işlemi o işlemin kimliği vasıtasıyla getirir.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+Döndürülen işlemin formatını belirlemek için isteğe bağlı `encoding` parametresi. "cb58" veya "hex" formatı olabilir. Varsayılan olarak "cb58"dir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getTx({
@@ -1257,7 +1342,7 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1271,7 +1356,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1286,11 +1371,11 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+Bir işlemin durumunu o işlemin kimliğini kullanarak getirir. İşlem düştüyse (dropped), gelen yanıtta işlemin neden düştüğü hakkında daha fazla bilgi içeren bir `reason` alanı olacaktır.
 
-See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
+Bir önceki davranışa dair notlar için [buraya](deprecated-api-calls.md#gettxstatus) bakın.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getTxStatus({
@@ -1298,7 +1383,14 @@ platform.getTxStatus({
 }) -> {status: string}
 ```
 
-#### **Example Call**
+`status`, şunlardan biridir:
+
+* `Committed`: İşlem her düğüm tarafından kabul edilir (veya edilecektir)
+* `Processing`: İşlem bu düğümde oylanıyor
+* `Dropped`: İşlem ağdaki herhangi bir düğüm tarafından asla kabul edilmeyecek, daha fazla bilgi için `reason` alanına bakın
+* `Unknown`: İşlem bu düğüm tarafından görülmedi
+
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1311,7 +1403,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1325,9 +1417,9 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set of addresses.
+Belli bir adresler kümesine referans yapan UTXO'ları getirir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.getUTXOs(
@@ -1341,7 +1433,7 @@ platform.getUTXOs(
         sourceChain: string, //optional
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -1353,17 +1445,17 @@ platform.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
+* `utxos`, her bir UTXO'nun `addresses`'deki en az bir adrese referans yaptığı UTXO'ların bir listesidir.
+* En çok `limit` kadar sayıda UTXO döndürülür. Eğer `limit` kullanılmazsa veya 1024'ten büyükse, 1024'e ayarlanır.
+* Bu metot sayfa düzenlemeyi (pagination) destekler. `endIndex`, en son döndürülen UTXO'yu ifade eder. Bir sonraki UTXO'lar kümesini getirmek için, bir sonraki çağrıda `endIndex` değerini `startIndex` olarak belirleyin.
+* Eğer `startIndex` kullanılmazsa, `limit` sayısına kadar olan tüm UTXO'ları getirecektir.
+* Sayfa düzeni kullanıldığında (yani `startIndex` verildiğinde), UTXO'ların çoklu çağrılarda benzersiz olması garanti değildir. Yani, bir UTXO birinci çağrının sonucunda görünebilir ve ardından ikinci çağrıda tekrar görünebilir.
+* Sayfa düzeni kullanıldığında, çoklu çağrılarda tutarlılık garanti değildir. Yani, UTXO adresler kümesi çağrılar arasında değişmiş olabilir.
+* `encoding`, döndürülen UTXO'ların formatını belirtir. "cb58" veya "hex" formatında alabilir ve varsayılan olarak "cb58"dir.
 
-#### **Example**
+#### **Örnek**
 
-Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
+Diyelim ki `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` ve `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`'dan en az birine referans yapan tüm UTXO'ları istiyoruz.
 
 ```cpp
 curl -X POST --data '{
@@ -1378,7 +1470,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Bu şu yanıtı verir:
 
 ```cpp
 {
@@ -1402,7 +1494,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+`numFetched` ve `limit` birbirinin aynı olduğu için, getirilmemiş daha fazla UTXO olabileceğini söyleyebiliriz. Metodu bu sefer `startIndex` ile tekrar çağırıyoruz:
 
 ```cpp
 curl -X POST --data '{
@@ -1421,7 +1513,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Bu şu yanıtı verir:
 
 ```cpp
 {
@@ -1444,9 +1536,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+`limit`, `numFetched`'ten daha az olduğu için UTXO'ları getirme işlemini bitirdiğimizi ve bu metodu tekrar çağırmamıza gerek olmadığını biliriz.
 
-Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+Diyelim ki bir ImportTx kurmak için X Chain'den P Chain'e aktarılmış UTXO'ları getirmek istiyoruz. Bu durumda atomik UTXO'ları getirmek için sourceChain argümanıyla GetUTXOs komutunu çağırmamız gerekir:
 
 ```cpp
 curl -X POST --data '{
@@ -1461,7 +1553,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+Bu şu yanıtı verir:
 
 ```cpp
 {
@@ -1481,13 +1573,62 @@ This gives response:
 }
 ```
 
+### platform.getValidatorsAt
+
+Belli bir P-Chain yüksekliğindeki bir subnet'in veya Birincil Ağ'ın doğrulayıcılarını ve bunların ağırlıklarını getirin.
+
+#### **İmza**
+
+```cpp
+platform.getValidatorsAt(
+    {
+        height: int,
+        subnetID: string, // optional
+    }
+)
+```
+
+* `height`, getirilecek doğrulayıcı kümesinin bulunduğu P-Chain yüksekliğidir.
+* `subnetID`, getirilecek doğrulayıcı kümesinin subnet kimliğidir. Belirtilmezse, Birincil Ağ'ın doğrulayıcı kümesini getirir.
+
+#### **Örnek Çağrı**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getValidatorsAt",
+    "params": {
+        "height":1
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Örnek Yanıt**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "validators": {
+            "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg": 2000000000000000,
+            "NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu": 2000000000000000,
+            "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ": 2000000000000000,
+            "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN": 2000000000000000,
+            "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5": 2000000000000000
+        }
+    },
+    "id": 1
+}
+```
+
 ### platform.importAVAX
 
-Complete a transfer of AVAX from the X-Chain to the P-Chain.
+X-Chain'den P-Chain'e bir AVAX aktarımı tamamlayın.
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+Bu metot çağrılmadan önce, transferi başlatmak için X-Chain'in [`avm.export`](exchange-chain-x-chain-api.md#avm-export) metodunu `AVAX` varlık kimliği ile çağırmanız gerekir.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.importAVAX(
@@ -1495,32 +1636,29 @@ platform.importAVAX(
         from: []string, //optional
         to: string,
         changeAddr: string, //optional
-        sourceChain: string,
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     tx: string,
     changeAddr: string
 }
 ```
 
-* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that controls the address specified in `to`.
-* `password` is `username`‘s password.
+* `to`, AVAX'ın içe aktarıldığı adresin kimliğidir. Bu, karşılık gelen X-Chain `export` çağrısındaki `to` argümanıyla aynı olmalıdır.
+* `from`, bu operasyon için kullanmak istediğiniz adreslerdir. Kullanılmazsa, adreslerinizden herhangi birini gereken şekilde kullanır.
+* `changeAddr`, para üstünün gönderileceği adrestir. Kullanılmazsa, para üstü kullanıcı tarafından kontrol edilen adreslerden birine gönderilir.
+* `username` adresleri kontrol eden ve değiştiren kullanıcıdır.
+* `password`, `username`'in parolasıdır.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "sourceChain": "X",
         "to": "P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
@@ -1531,7 +1669,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1546,9 +1684,9 @@ curl -X POST --data '{
 
 ### platform.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+Bir kullanıcıya bir adresi kontrol eden özel anahtarı vererek o kullanıcıya o adresin kontrolünü verin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.importKey({
@@ -1558,9 +1696,9 @@ platform.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* `username`'in özel anahtarlarına `privateKey` ekleyin. `address`, `username`'in şimdi özel anahtarla kontrol ettiği adrestir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1575,7 +1713,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1589,9 +1727,9 @@ curl -X POST --data '{
 
 ### platform.issueTx
 
-Issue a transaction to the Platform Chain.
+Platform Zincirine bir işlem gönderin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.issueTx({
@@ -1600,11 +1738,11 @@ platform.issueTx({
 }) -> {txID: string}
 ```
 
-* `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
-* `txID` is the transaction’s ID.
+* `tx`, bir işlemin bayt temsilidir.
+* `encoding`, işlem baytlarının şifreleme formatını belirler. "cb58" veya "hex" formatı olabilir. Varsayılan olarak "cb58"dir.
+* `txID`, işlemin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1618,7 +1756,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1632,9 +1770,9 @@ curl -X POST --data '{
 
 ### platform.listAddresses
 
-List addresses controlled by the given user.
+Belli bir kullanıcı tarafından kontrol edilen adresleri listeleyin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.listAddresses({
@@ -1643,7 +1781,7 @@ platform.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1657,7 +1795,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1671,9 +1809,9 @@ curl -X POST --data '{
 
 ### platform.sampleValidators
 
-Sample validators from the specified Subnet.
+Belirtilen Subnet'den doğrulayıcılar örnekleyin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.sampleValidators(
@@ -1687,11 +1825,11 @@ platform.sampleValidators(
 }
 ```
 
-* `size` is the number of validators to sample.
-* `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
-* Each element of `validators` is the ID of a validator.
+* `size`, örneklenecek doğrulayıcıların sayısıdır.
+* `subnetID`, örneklemenin yapılacağı Subnet'tir. Kullanılmazsa, varsayılan olarak Birincil Ağ'a ayarlanır.
+* `validators`'ın her bir ögesi, bir doğrulayıcının kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1704,7 +1842,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1721,9 +1859,9 @@ curl -X POST --data '{
 
 ### platform.validatedBy
 
-Get the Subnet that validates a given blockchain.
+Belli bir blok zinciri doğrulayan Subnet'i getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.validatedBy(
@@ -1733,10 +1871,10 @@ platform.validatedBy(
 ) -> {subnetID: string}
 ```
 
-* `blockchainID` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates the blockchain.
+* `blockchainID` blok zincirin kimliğidir.
+* `subnetID`, blok zinciri doğrulayan Subnet'in kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1749,7 +1887,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
@@ -1763,9 +1901,9 @@ curl -X POST --data '{
 
 ### platform.validates
 
-Get the IDs of the blockchains a Subnet validates.
+Bir Subnet'in doğruladığı blok zincirlerin kimliklerini getirin.
 
-#### **Signature**
+#### **İmza**
 
 ```cpp
 platform.validates(
@@ -1775,10 +1913,10 @@ platform.validates(
 ) -> {blockchainIDs: []string}
 ```
 
-* `subnetID` is the Subnet’s ID.
-* Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
+* `subnetID`, Subnet'in kimliğidir.
+* `blockchainIDs`'deki her bir öge, Subnet'in doğruladığı bir blok zincirin kimliğidir.
 
-#### **Example Call**
+#### **Örnek Çağrı**
 
 ```cpp
 curl -X POST --data '{
@@ -1791,7 +1929,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **Örnek Yanıt**
 
 ```cpp
 {
