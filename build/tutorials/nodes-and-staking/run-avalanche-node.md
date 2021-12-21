@@ -1,121 +1,106 @@
-# Run an Avalanche Node
+# Bir Avalanche Düğümü Çalıştırın
 
-The quickest way to learn about Avalanche is to run a node and interact with the network.
+Avalanche hakkında bilgi edinmenin en hızlı yolu bir düğüm çalıştırmak ve ağ ile etkileşim kurmaktır.
 
-{% embed url="https://youtu.be/c\_SjtCiOFdg" %}
+Bu eğitim makalesinde şunların nasıl yapılacağını öğreneceğiz:
 
-In this tutorial \(est. time: 10 minutes\), we will:
+* Bir Avalanche düğümü kurma ve çalıştırma
+* Avalanche'a bağlanma
+* AVAX gönderme
+* Düğümünüzü doğrulayıcı kümesine ekleme
 
-* Install and run an Avalanche node
-* Connect to Avalanche
-* Send AVAX
-* Add your node to the validator set
+{% hint style="warning" %}Karşılaştığınız sorun SSS'de ele alınmamışsa, [Avalanche Discord](https://chat.avax.network)'a gelin ve yardım isteyin! Engelleri aşmanıza yardımcı olmak için çalışacağız.{% endhint %}
 
-{% hint style="warning" %}
-If your issue isn’t addressed in the FAQ, come ask for help in the [Avalanche Discord](https://chat.avax.network)! We will work to get you through any obstacles.
-{% endhint %}
+{% hint style="info" %}Düğümünüzü barındırmak veya bir doğrulayıcı çalıştırmak için bir üçüncü taraf servis kullanmayı düşünürseniz, [seçeneklere göz atın](https://docs.avax.network/learn/community#blockchain-infrastructure-and-node-services).{% endhint %}
 
-{% hint style="info" %}
-If you're interested in using a third-party service to host your node or run a validator, [check out the options](https://docs.avax.network/learn/community#blockchain-infrastructure-and-node-services).
-{% endhint %}
+Bu eğitim makalesi öncelikle geliştiricilere ve Avalanche Platformunun nasıl çalıştığına ilgi duyan kişilere yönelik olarak hazırlanmıştır. Sadece staking için bir düğüm oluşturmakla ilgileniyorsanız, bu makale yerine [Installer ile Avalanche Düğüm Kurulumu](set-up-node-with-installer.md) eğitim makalesini takip edebilirsiniz. Installer, kurulum sürecini otomatikleştirir ve bir sistem servisi olarak ayarlar, dolayısıyla başında beklemeden çalıştırma için tavsiye edilir. Ayrıca, önce bu eğitim makalesini takip ederek denemeler yapabilir, daha sonra installer'ı kullanarak düğümün ayarlarını kalıcı bir çözüm olarak yapabilirsiniz.
 
-This tutorial is primarily geared toward developers and people interested in how the Avalanche Platform works. If you're just interested in setting up a node for staking, you may want to follow the [Set Up Avalanche Node With Installer](set-up-node-with-installer.md) tutorial instead. Installer automates the installation process and sets it up as a system service, which is recommended for unattended operation. You may also try things out by following this tutorial first, and then later set up the node using the installer as a permanent solution.
+## Gereklilikler
 
+Avalanche inanılmaz derecede hafif bir protokoldür, dolayısıyla düğümler sıradan bir donanımda çalışabilir. Ağ kullanımı arttıkça donanım gereksinimlerinin değişebileceğini aklınızda bulundurun.
 
+* CPU: 8 AWS vCPU eşdeğeri
+* RAM: 16 GB
+* Depolama alanı: 200 GB
+* İşletim Sistemi: Ubuntu 18.04/20.04 veya MacOS >= Catalina
 
-## Requirements
+## Bir Avalanche Düğümünü Çalıştırma ve Fonlar Gönderme
 
-Avalanche is an incredibly lightweight protocol, so the minimum computer requirements are quite modest.
+Şimdi bir Avalanche düğümün Go implementasyonu olan AvalancheGo'yu kuralım ve Avalanche Public Testnet'ine bağlanalım.
 
-* Hardware: CPU &gt; 2 GHz, RAM &gt; 4 GB, Storage &gt; 10 GB free space
-* OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
+### AvalancheGo'yu indir
 
-## Run an Avalanche Node and Send Funds
+Düğüm, bir binary programdır. Kaynak kodunu indirebilir ve sonra binary programı kurabilir, ya da önceden kurulmuş binary'yi indirebilirsiniz. Her ikisini yapmanıza gerek yoktur.
 
-Let’s install AvalancheGo, the Go implementation of an Avalanche node, and connect to the Avalanche Public Testnet.
+Sadece kendi düğümünüzü çalıştırmak ve o düğümde stake yapmak istiyorsanız, [önceden kurulu binary'yi](run-avalanche-node.md#binary) indirmek daha kolaydır ve tavsiye edilir.
 
-### Download AvalancheGo
+Avalanche'ı deneyimlemek ve onun üzerinde kurulum yapmak isteyen bir geliştirici iseniz, kaynaktan bir düğüm kurmanız tavsiye edilir.
 
-The node is a binary program. You can either download the source code and then build the binary program, or you can download the pre-built binary. You don’t need to do both.
+#### **Kaynak Kodu**
 
-Downloading [pre-built binary](run-avalanche-node.md#binary) is easier and recommended if you're just looking to run your own node and stake on it.
+Düğümü kaynaktan kurmak isterseniz, önce Go 1.16.8 sürümünü veya daha sonraki bir sürümünü kurmanız gerekecek. [Buradaki](https://golang.org/doc/install) talimatları takip edin.
 
-Building the node from source is recommended if you're a developer looking to experiment and build on Avalanche.
+`go version`'ı çalıştırın. **1.16.8 veya üstü bir sürüm olmalıdır.** `echo $GOPATH`'ı çalıştırın. **Boş olmamalıdır.**
 
-#### **Source Code**
-
-If you want to build the node from source, you're first going to need to install Go 1.15.5 or later. Follow the instructions [here](https://golang.org/doc/install).
-
-Run `go version`. **It should be 1.15.5 or above.** Run `echo $GOPATH`. **It should not be empty.**
-
-Download the AvalancheGo repository:
+AvalancheGo yazılım havuzunu indirin:
 
 ```cpp
 go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
-Note to advanced users: AvalancheGo uses Go modules, so you can clone the [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
+İleri düzey kullanıcılara not: AvalancheGo, Go modülleri kullanır, dolayısıyla [AvalancheGo repository](https://github.com/ava-labs/avalanchego)'yi GOPATH dışındaki konumlara klonlayabilirsiniz.
 
-Change to the `avalanchego` directory:
+`avalanchego` dizini olarak değiştirin:
 
 ```cpp
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
-Build AvalancheGo:
+AvalancheGo'yu kurun:
 
 ```cpp
 ./scripts/build.sh
 ```
 
-The binary, named `avalanchego`, is in `avalanchego/build`.
+`avalanchego` adlı binary `avalanchego/build` içindedir.
 
 #### **Binary**
 
-If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want \(probably the latest one.\)
+Kendiniz bir binary kurmak yerine önceden kurulmuş bir binary'yi indirmek isterseniz, [sürümler sayfamıza](https://github.com/ava-labs/avalanchego/releases) gidin ve istediğiniz sürümü seçin (muhtemelen en sonuncusu).
 
-Under `Assets`, select the appropriate file.
+`Assets` altında, uygun dosyayı seçin.
 
-For MacOS:  
-Download: `avalanchego-macos-<VERSION>.zip`  
-Unzip: `unzip avalanchego-macos-<VERSION>.zip`  
-The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
+MacOS için: İndirin: `avalanchego-macos-<VERSION>.zip`  Açın: `unzip avalanchego-macos-<VERSION>.zip` Çıkan klasör `avalanchego-<VERSION>`, binary'leri içerir.
 
-For Linux on PCs or cloud providers:  
-Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+PC'lerde veya bulut sağlayıcılarda Linux için: İndirin: `avalanchego-linux-amd64-<VERSION>.tar.gz`  Açın: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  Çıkan klasör, `avalanchego-<VERSION>-linux`, binary'leri içerir.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers:  
-Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
-The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
+RaspberryPi4 veya benzeri Arm64 tabanlı bilgisayarlarda Linux için: İndirin: `avalanchego-linux-arm64-<VERSION>.tar.gz`  Açın: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  Çıkan klasör, `avalanchego-<VERSION>-linux`, binary'leri içerir.
 
-### Start a Node, and Connect to Avalanche
+### Bir Düğümü Başlatma ve Avalanche'a Bağlanma
 
-If you built from source:
+Kaynaktan kurduysanız:
 
 ```cpp
 ./build/avalanchego
 ```
 
-If you are using the pre-built binaries on MacOS:
+MacOS'de önceden kurulmuş binary'ler kullanıyorsanız:
 
 ```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
-If you are using the pre-built binaries on Linux:
+Linux'da önceden kurulmuş binary'ler kullanıyorsanız:
 
 ```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
-When the node starts, it has to bootstrap \(catch up with the rest of the network\). You will see logs about bootstrapping. When a given chain is done bootstrapping, it will print a log like this:
+Düğüm başladığında, (ağın geri kalanıyla eşitlenmek için) önyükleme yapması gerekir. Önyükleme ile ilgili günlükleri göreceksiniz. Belli bir zincire önyükleme yaptırıldığında, şöyle bir günlük oluşturacaktır:
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info-api.md#info-isbootstrapped) by copying and pasting the following command:
+Belli bir zincirin önyükleme yapıp yapmadığını kontrol etmek için, başka bir terminal penceresinde aşağıdaki komutu kopyalayıp yapıştırarak [`info.isBootstrapped`](../../avalanchego-apis/info-api.md#info-isbootstrapped)  komutunu çağırın.
 
 ```cpp
 curl -X POST --data '{
@@ -128,21 +113,21 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-If this returns `true`, the chain is bootstrapped. If you make an API call to a chain that is not done bootstrapping, it will return `API call rejected because chain is not done bootstrapping`. If your node never finishes bootstrapping, follow [this FAQ](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping), if you are still experiencing issues please contact us on [Discord.](https://chat.avalabs.org/)
+Bu komut `true` olarak dönerse, zincir önyükleme yapmış demektir. Önyükleme yapmamış bir zincire bir API çağrısı gönderirseniz, bu çağrı `API call rejected because chain is not done bootstrapping`  olarak dönecektir. Düğümünüz önyüklemeyi bir türlü bitirmiyorsa, [bu SSS'i](http://support.avalabs.org/en/articles/4593908-is-my-node-done-bootstrapping) takip edin. Sorunlar yaşamaya devam ederseniz lütfen [Discord](https://chat.avalabs.org/) üzerinden bizimle iletişime geçin.
 
-Your node is running and connected now. If you want to use your node as a validator on the main net, check out [this tutorial](add-a-validator.md#add-a-validator-with-avalanche-wallet) to find out how to add your node as a validator using the web wallet.
+Şimdi düğümünüz çalışıyor ve bağlı. Düğümünüzü ana ağda bir doğrulayıcı olarak kullanmak isterseniz, düğümünüzü web cüzdan kullanarak bir doğrulayıcı olarak nasıl ekleyeceğinizi öğrenmek için [bu eğitim makalesine](add-a-validator.md#add-a-validator-with-avalanche-wallet) bakın.
 
-You can use `Ctrl + C` to kill the node.
+Düğümü kaldırmak için `Ctrl + C` tuşlarını kullanabilirsiniz.
 
-If you want to experiment and play with your node, read on.
+Düğümünüzü deneyimlemek ve onunla oyunlar oynamak isterseniz okumaya devam edin.
 
-To be able to make API calls to your node from other machines, when starting up the node include argument `--http-host=` \(e.g. `./build/avalanchego --http-host=`\)
+Düğümünüze başka makinelerden API çağırısı yapabilmek için, düğümü başlatırken `--http-host=` argümanını ekleyin (örn.: `./build/avalanchego --http-host=`)
 
-To connect to the Fuji Testnet instead of the main net, use argument `--network-id=fuji`. You can get funds on the Testnet from the [faucet.](https://faucet.avax-test.network/)
+Ana ağ yerine Fuji Testnet'e bağlanmak için, `--network-id=fuji` argümanını kullanın. Testnet'te [musluktan](https://faucet.avax-test.network/) (faucet) fonlar alabilirsiniz.
 
-### Create a Keystore User
+### Bir Keystore Kullanıcısı yaratma
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore-api.md#keystore-createuser):
+Avalanche düğümleri yerleşik bir **Keystore** (anahtar deposu) sağlar. Keystore, kullanıcıları yönetir ve esasında bir [cüzdan](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet) gibidir. Kullanıcı dediğiniz şey, bir müşterinin blok zincirlerle etkileşimde bulunurken kullanabildiği bir şifre korumalı kimliktir. **Sadece kendinizin işlettiği bir düğümde bir keystore kullanıcısı yaratmanız gerekir, çünkü düğüm işletmecisinin sizin plaintext şifrenize erişimi vardır.** Bir kullanıcı yaratmak için, [`keystore.createUser`](../../avalanchego-apis/keystore-api.md#keystore-createuser) komutunu çağırın:
 
 ```cpp
 curl -X POST --data '{
@@ -156,7 +141,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
 ```
 
-The response should be:
+Gelen yanıt şöyle olmalıdır:
 
 ```cpp
 {
@@ -166,17 +151,15 @@ The response should be:
 }
 ```
 
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](../../avalanchego-apis/keystore-api.md) to see how.
+Şimdi bu düğümde bir kullanıcıya sahipsiniz. Keystore verisi düğüm düzeyinde mevcuttur. Bir düğümün Keystore'unda yarattığınız kullanıcılar diğer düğümlerde mevcut değillerdir ama Keystore'dan veya Keystore'a kullanıcılar aktarabilirsiniz. Bunu nasıl yapacağınızı görmek için [Keystore API](../../avalanchego-apis/keystore-api.md)'ye bakın.
 
-{% hint style="danger" %}
-**You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
-{% endhint %}
+{% hint style="danger" %}**Düğümünüzde fonlarınızın sadece küçük bir miktarını tutmalısınız.** Fonlarınızın büyük bir kısmı, herhangi bir bilgisayara kaydedilmeyen bir nimonikle (mnemonic) güvenlik altına alınmalıdır.{% endhint %}
 
-### Create an Address
+### Bir Adres Yaratma
 
-Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
+Avalanche bir heterojen blok zincirler platformudur; bu blok zincirlerden biri [X-Chain](../../../learn/platform-overview/#exchange-chain-x-chain)'dir ve dijital varlıklar yaratılması ve alınıp satılması için kullanılan merkezi olmayan bir platformdur. Şimdi düğümümüzde AVAX tutacak bir adres yaratacağız.
 
-To create a new address on the X-Chain, call [`avm.createAddress`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress), a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.md):
+X-Chain'de yeni bir adres yaratmak için, [X-Chain API](../../avalanchego-apis/exchange-chain-x-chain-api.md)'nin bir metodu olan [`avm.createAddress`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-createaddress) komutunu çağırın:
 
 ```cpp
 curl -X POST --data '{
@@ -190,11 +173,11 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-If your node isn’t finished bootstrapping, this call will return status `503` with message `API call rejected because chain is not done bootstrapping`.
+Düğümünüz önyükleme işlemini tamamlamadıysa, bu çağrı durum olarak `503` , mesaj olarak  `API call rejected because chain is not done bootstrapping`getirecektir.
 
-Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion signifies that the request is being sent to the blockchain whose ID \(or alias\) is `X` \(i.e., the X-Chain\).
+Gördüğünüz gibi bu isteği `127.0.0.1:9650/ext/bc/X`'ye yapıyoruz. Satırın `bc/X` kısmı, isteğin, kimliği (ya da alias'ı) `X` olan blok zincire (örn. X-Chain) gönderildiğini gösterir.
 
-The response should look like this:
+Gelen yanıt şöyle görünmelidir:
 
 ```cpp
 {
@@ -206,23 +189,21 @@ The response should look like this:
 }
 ```
 
-Your user now controls the address `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` on the X-Chain. To tell apart addresses on different chains, the Avalanche convention is for an address to include the ID or alias of the chain it exists on. Hence, this address begins `X-`, denoting that it exists on the X-Chain.
+Şimdi kullanıcınız X-Chain'deki `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` adresini kontrol ediyor. Farklı zincirlerdeki adresleri ayırt etmek için kullanılan Avalanche yöntemi, bir adresin, üzerinde bulunduğu zincirin kimliğini ya da alias'ını içermesidir. Dolayısıyla, bu adres `X-` ile başlar, yani bu adresin X-Chain'de mevcut olduğunu gösterir.
 
-### Send Funds From Avalanche Wallet to Your Node
+### Avalanche Cüzdan'dan Düğümünüze Fonlar Gönderin
 
-{% hint style="warning" %}
-_**Note: the instructions below move real funds.**_
-{% endhint %}
+{% hint style="warning" %}_**Not: Aşağıdaki talimatlar gerçek fonları taşır.**_ {% endhint %}
 
-Let’s move funds from the Avalanche Wallet to your node.
+Şimdi Avalanche Cüzdan'dan düğümünüze fonlar taşıyalım.
 
-Go to [Avalanche Wallet](https://wallet.avax.network). Click `Access Wallet`, then `Mnemonic Key Phrase`. Enter your mnemonic phrase.
+[Avalanche Cüzdan](https://wallet.avax.network)'a gidin. `Access Wallet` komutunu, ardından `Mnemonic Key Phrase` ögesini tıklayın. Nimonik söz öbeğinizi (mnemonic phrase) girin.
 
-Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the address of your node, then click `Confirm`.
+Soldaki `Send` sekmesini tıklayın. Miktar olarak, `.002` AVAX seçin. Düğümünüzün adresini girin, ardından `Confirm`'i tıklayın.
 
-![web wallet send tab](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%289%29.png)
+![web cüzdan gönderme sekmesi](../../../.gitbook/assets/web-wallet-send-tab%20%284%29%20%284%29%20%285%29%20%285%29%20%286%29%20%287%29%20%284%29%20%281%29%20%285%29.png)
 
-We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
+Bir adresin belli bir varlık bakiyesini, X-Chain API'nin diğer bir metodu olan `avm.getBalance` komutunu çağırarak kontrol edebiliriz. Şimdi transferin gerçekleşip gerçekleşmediğini kontrol edelim:
 
 ```cpp
 curl -X POST --data '{
@@ -236,9 +217,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric string.
+AVAX'ın özel `AVAX` kimliğine sahip olduğu aklınızda bulunsun. Bir varlık kimliği genelde alfa sayısal bir dizgidir.
 
-The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
+Gelen yanıt `2,000,000 nAVAX` veya `0.002 AVAX` miktarına sahip olduğumuzu göstermelidir.
 
 ```cpp
 {
@@ -256,9 +237,9 @@ The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 }
 ```
 
-### Send AVAX
+### AVAX gönderme
 
-Now, let’s send some AVAX by making an API call to our node:
+Şimdi düğümümüze bir API çağrısı yaparak bir miktar AVAX gönderelim:
 
 ```cpp
 curl -X POST --data '{
@@ -276,17 +257,17 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-`amount` specifies the number of nAVAX to send.
+`amount`, gönderilecek nAVAX adedini belirtir.
 
-If you want to specify a particular address where change should go, you can specify it in `changeAddr`. You can leave this field empty; if you do, any change will go to one of the addresses your user controls.
+Para üstünün gideceği belli bir adres belirlemek isterseniz, bunu `changeAddr` parametresinde belirtebilirsiniz. Bu alanı boş bırakabilirsiniz; bu durumda para üstü kullanıcınızın kontrol ettiği adreslerden birine gidecektir.
 
-In order to prevent spam, Avalanche requires the payment of a transaction fee. The transaction fee will be automatically deducted from an address controlled by your user when you issue a transaction. Keep that in mind when you’re checking balances below.
+Spam'ı önlemek için, Avalanche bir işlem ücreti ödenmesini zorunlu kılar. İşlem ücreti, bir işlem yayınladığınızda kullanıcınızın kontrol ettiği bir adresten otomatik olarak kesilecektir. Bakiyeleri kontrol ederken bunu aklınızda tutun.
 
 {% page-ref page="../../../learn/platform-overview/transaction-fees.md" %}
 
-When you send this request, the node will authenticate you using your username and password. Then, it will look through all the [private keys](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) controlled by your user until it finds enough AVAX to satisfy the request.
+Bu istemi gönderdiğinizde, düğüm, kullanıcı adınızı ve şifrenizi kullanarak kimliğinizi doğrulayacaktır. Ardından, bu istemi karşılayacak yeterli AVAX bulana kadar kullanıcınızın kontrol ettiği tüm [özel anahtarları](http://support.avalabs.org/en/articles/4587058-what-are-public-and-private-keys) yoklayacaktır.
 
-The response contains the transaction’s ID. It will be different for every invocation of `send`.
+Gelen yanıtta işlemin kimliği bulunur. Bu kimlik her `send` çağrısında farklı olacaktır.
 
 ```cpp
 {
@@ -299,9 +280,9 @@ The response contains the transaction’s ID. It will be different for every inv
 }
 ```
 
-#### Checking the Transaction Status
+#### İşlem Durumunu kontrol etme
 
-This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus):
+Bu işlemi kesinleştirmek sadece bir veya iki saniye alır. İşlemin durumunu [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus) komutu ile kontrol edebiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -314,7 +295,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should indicate that the transaction was accepted:
+Gelen yanıt işlemin kabul edildiğini göstermelidir:
 
 ```cpp
 {
@@ -326,9 +307,9 @@ The response should indicate that the transaction was accepted:
 }
 ```
 
-You might also see that `status` is `Processing` if the network has not yet finalized the transaction.
+Ayrıca, ağ işlemi henüz kesinleştirmemişse, `status`'un `Processing` (işleniyor) olduğunu da görebilirsiniz.
 
-Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
+İşlemin `Accepted` olduğunu gördüğünüzde, `to` adresinin bakiyesini kontrol ederek gönderdiğimiz AVAX'ın orada olup olmadığını görebiliriz:
 
 ```cpp
 curl -X POST --data '{
@@ -342,7 +323,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The response should be:
+Gelen yanıt şöyle olmalıdır:
 
 ```cpp
 {
@@ -354,13 +335,15 @@ The response should be:
 }
 ```
 
-In the same fashion, we could check `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` to see that AVAX we sent was deducted from its balance, as well as the transaction fee.
+Aynı şekilde, `X-avax1xeaj0h9uy7c5jn6fxjp0rg4g39jeh0hl27vf75` adresini kontrol ederek, gönderdiğimiz AVAX'ın işlem ücreti ile birlikte bu adresin bakiyesinden düşülüp düşülmediğini görebiliriz.
 
 {% page-ref page="add-a-validator.md" %}
 
 {% page-ref page="../../tools/avalanchejs/create-an-asset-on-the-x-chain.md" %}
 
-{% page-ref page="../platform/create-a-new-blockchain.md" %}
+{% page-ref page="../platform/create-avm-blockchain.md" %}
+
+{% page-ref page="../platform/create-custom-blockchain.md" %}
 
 {% page-ref page="../platform/create-a-subnet.md" %}
 
