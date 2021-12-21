@@ -284,7 +284,7 @@ Number of peers (which may or may not be validators) to gossip an AppGossip mess
 
 `--consensus-app-gossip-validator-size` (uint):
 
-Number of validators to gossip an AppGossip message to. Defaults to `6`.
+Number of validators to gossip an AppGossip message to. Defaults to `10`.
 
 ### Benchlist
 
@@ -352,17 +352,12 @@ The default C-Chain config is:
   "snowman-api-enabled": false,
   "coreth-admin-api-enabled": false,
   "coreth-admin-api-dir": "",
-  "net-api-enabled": true,
+  "eth-apis": ["public-eth", "public-eth-filter", "net", "web3", "internal-public-eth", "internal-public-blockchain",  "internal-public-transaction-pool", "internal-public-account"],
   "continuous-profiler-dir": "",
   "continuous-profiler-frequency": 900000000000,
   "continuous-profiler-max-files": 5,
   "rpc-gas-cap": 50000000,
   "rpc-tx-fee-cap": 100,
-  "eth-api-enabled": true,
-  "personal-api-enabled": true,
-  "tx-pool-api-enabled": false,
-  "debug-api-enabled": false,
-  "web3-api-enabled": true,
   "preimages-enabled": false,
   "pruning-enabled": true,
   "snapshot-async": true,
@@ -402,7 +397,7 @@ Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
 
 Specifies the maximum number of profiles to keep before removing the oldest.
 
-**APIs**
+**Enabling Avalanche Specific APIs**
 
 `snowman-api-enabled` (boolean):
 
@@ -416,35 +411,199 @@ Enables the Admin API. Defaults to false.
 
 Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
-`net-api-enabled` (boolean):
+**Enabling EVM APIs**
 
-Enables the `net_*` API. Defaults to true.
+`eth-apis` ([]string):
 
-`eth-api-enabled` (boolean):
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
 
-Enables the `eth_*` API. Defaults to true.
+Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
 
-`personal-api-enabled` (boolean):
+`public-eth`:
 
-Enables the `personal_*` API. Defaults to false.
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
 
-`tx-pool-api-enabled` (boolean):
+`eth_coinbase`
+`eth_etherbase`
 
-Enables the `txpool_*` API. Defaults to false.
+`public-eth-filter`:
 
-`debug-api-enabled` (boolean):
+Enables the public filter API for the `eth_*` namespace. Defaults to true.
 
-Enables the `debug_*` API. Defaults to false.
+Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
 
-`web3-api-enabled` (boolean):
+`eth_newPendingTransactionFilter`
+`eth_newPendingTransactions`
+`eth_newAcceptedTransactions`
+`eth_newBlockFilter`
+`eth_newHeads`
+`eth_logs`
+`eth_newFilter`
+`eth_getLogs`
+`eth_uninstallFilter`
+`eth_getFilterLogs`
+`eth_getFilterChanges`
 
-Enables the `web3_*` API. Defaults to true.
+`private-admin`:
 
-`allow-unfinalized-queries` (boolean):
+Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
 
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+`admin_importChain`
+`admin_exportChain`
 
-**API Rate Limiting**
+`public-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_dumpBlock`
+`debug_accountRange`
+
+`private-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_preimage`
+`debug_getBadBlocks`
+`debug_storageRangeAt`
+`debug_getModifiedAccountsByNumber`
+`debug_getModifiedAccountsByHash`
+`debug_getAccessibleState`
+
+`net`:
+
+Adds the following RPC calls to the `net_*` namespace. Defaults to true.
+
+`net_listening`
+`net_peerCount`
+`net_version`
+
+Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
+
+`debug-tracer`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_traceChain`
+`debug_traceBlockByNumber`
+`debug_traceBlockByHash`
+`debug_traceBlock`
+`debug_traceBadBlock`
+`debug_intermediateRoots`
+`debug_traceTransaction`
+`debug_traceCall`
+
+`web3`:
+
+Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
+
+`web3_clientVersion`
+`web3_sha3`
+
+`internal-public-eth`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_gasPrice`
+`eth_baseFee`
+`eth_maxPriorityFeePerGas`
+`eth_feeHistory`
+
+`internal-public-blockchain`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_chainId`
+`eth_blockNumber`
+`eth_getBalance`
+`eth_getAssetBalance`
+`eth_getProof`
+`eth_getHeaderByNumber`
+`eth_getHeaderByHash`
+`eth_getBlockByNumber`
+`eth_getBlockByHash`
+`eth_getUncleBlockByNumberAndIndex`
+`eth_getUncleBlockByBlockHashAndIndex`
+`eth_getUncleCountByBlockNumber`
+`eth_getUncleCountByBlockHash`
+`eth_getCode`
+`eth_getStorageAt`
+`eth_call`
+`eth_estimateGas`
+`eth_createAccessList`
+
+`internal-public-transaction-pool`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_getBlockTransactionCountByNumber`
+`eth_getBlockTransactionCountByHash`
+`eth_getTransactionByBlockNumberAndIndex`
+`eth_getTransactionByBlockHashAndIndex`
+`eth_getRawTransactionByBlockNumberAndIndex`
+`eth_getRawTransactionByBlockHashAndIndex`
+`eth_getTransactionCount`
+`eth_getTransactionByHash`
+`eth_getRawTransactionByHash`
+`eth_getTransactionReceipt`
+`eth_sendTransaction`
+`eth_fillTransaction`
+`eth_sendRawTransaction`
+`eth_sign`
+`eth_signTransaction`
+`eth_pendingTransactions`
+`eth_resend`
+
+`internal-public-tx-pool`:
+
+Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
+
+`txpool_content`
+`txpool_contentFrom`
+`txpool_status`
+`txpool_inspect`
+
+`internal-public-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_getHeaderRlp`
+`debug_getBlockRlp`
+`debug_printBlock`
+
+`internal-private-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+`debug_chaindbProperty`
+`debug_chaindbCompact`
+
+`internal-public-account`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_accounts`
+
+`internal-private-personal`:
+
+Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
+
+`personal_listAccounts`
+`personal_listWallets`
+`personal_openWallet`
+`personal_deriveAccount`
+`personal_newAccount`
+`personal_importRawKey`
+`personal_unlockAccount`
+`personal_lockAccount`
+`personal_sendTransaction`
+`personal_signTransaction`
+`personal_sign`
+`personal_ecRecover`
+`personal_signAndSendTransaction`
+`personal_initializeWallet`
+`personal_unpair`
+
+**API Configuration**
 
 `rpc-gas-cap` (int):
 
@@ -469,6 +628,10 @@ The refill rate specifies the maximum amount of CPU time to allot a single conne
 `ws-cpu-max-stored` (duration):
 
 Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+
+`allow-unfinalized-queries` (boolean):
+
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
 
 **Transaction Pool**
 
