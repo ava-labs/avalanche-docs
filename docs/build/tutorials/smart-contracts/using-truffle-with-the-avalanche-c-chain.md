@@ -256,7 +256,7 @@ If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Be
 
 ### Personal APIs
 
-Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `personal-api-enabled`. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs).
+Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs).
 
 ## Run Migrations
 
