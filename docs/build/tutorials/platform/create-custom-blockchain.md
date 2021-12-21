@@ -200,9 +200,7 @@ In the genesis we specified `fP1vxkpyLWnH9dD6BQA` as the genesis data. Let’s v
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.getBlock",
-    "params":{
-        "id":""
-    },
+    "params":{},
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
@@ -254,13 +252,13 @@ Let's get encoded data first. Blocks expect to have 32-length bytes. There is a 
 
 ```cpp
 curl -X POST --data '{
-   "jsonrpc": "2.0",
+    "jsonrpc": "2.0",
+    "id"     : 1,
     "method" : "timestampvm.encode",
     "params" : {
         "data": "mynewblock",
         "length": 32
     }
-    "id"     : 1,
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
 ```
 
@@ -308,9 +306,7 @@ Let's check latest block to verify existence of our proposed block:
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.getBlock",
-    "params":{
-        "id":""
-    },
+    "params":{},
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
