@@ -1,32 +1,34 @@
-# Platform Chain \(P-Chain\) API
+# Platform Chain (P-Chain) API
 
-This API allows clients to interact with the [P-Chain](../../learn/platform-overview/#platform-chain-p-chain), which maintains Avalanche’s [validator](../../learn/platform-overview/staking.md#validators) set and handles blockchain creation.
+このAPIにより、クライアントは、Avalancheの[バリデーター](../../learn/platform-overview/staking.md#validators)セットを維持し、ブロックチェーンの作成を処理する[P-Chain](../../learn/platform-overview/#platform-chain-p-chain)とやり取りすることができます。
 
-## Endpoint
+## エンドポイント
 
 ```cpp
 /ext/P
 ```
 
-## Format
+## フォーマット
 
-This API uses the `json 2.0` RPC format.
+このAPIは`json 2.0`RPCフォーマットを使用しています。
 
-## Methods
+## メソッド
 
 ### platform.addDelegator
 
-Add a delegator to the Primary Network.
+一次ネットワークにデリゲーターを追加します。
 
-A delegator stakes AVAX and specifies a validator \(the delegatee\) to validate on their behalf. The delegatee has an increased probability of being sampled by other validators \(weight\) in proportion to the stake delegated to them.
+デリゲーターはAVAXをステークし、代理でバリデーションを行うバリデータ（デリゲーティ）を指定します。デリゲーティは、デリゲートされたステークに比例して、他のバリデーターからサンプリングされる確率（重量）が高くなります。
 
-The delegatee charges a fee to the delegator; the former receives a percentage of the delegator’s validation reward \(if any.\) A transaction that delegates stake has no fee.
+デリゲーティはデリゲーターに手数料を請求します。前者は、デリゲーターの検証報酬（ある場合）の一定割合を受け取ります。ステークをデリゲートするトランザクションには手数料がありません。
 
-The delegation period must be a subset of the period that the delegatee validates the Primary Network.
+デリゲート期間は、デリゲーティが一次ネットワークを検証する期間のサブセットでなければなりません。
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t remove a stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+いったんトランザクションを発行し、ノードをデリゲータ―として追加してしまうと、パラメータを変更する方法はないということに注意してください。**ステークを早期に削除したり、ステーク量、ノードID、報酬アドレスの変更はできません。**正しい値を使用しているか確認してください。よくわからない場合は、[デベロッパー用FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)を確認するか、[Discord](https://chat.avalabs.org/)でヘルプを求めてください。
 
-#### **Signature**
+{% page-ref page="../../learn/platform-overview/staking.md" %}
+
+#### **署名**
 
 ```cpp
 platform.addDelegator(
@@ -41,25 +43,25 @@ platform.addDelegator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `nodeID` is the ID of the node to delegate to.
-* `startTime` is the Unix time when the delegator starts delegating.
-* `endTime` is the Unix time when the delegator stops delegating \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the delegator is staking.
-* `rewardAddress` is the address the validator reward goes to, if there is one.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID`は、デリゲートするノードのIDです。
+* `startTime`は、デリゲーターがデリゲートを開始したUNIX時間です。
+* `endTime`は、デリゲーターがデリゲートをやめる（そしてステークされたAVAXが返される）UNIX時間です。
+* `stakeAmount`は、デリゲーターがステーキングしているnAVAXの量です。
+* `rewardAddress`は、バリデータの報酬が送られるアドレスです（ある場合）。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`は、トランザクション手数料を支払うユーザーです。
+* `password`は`username`のパスワードです。
+* `txID`はトランザクションIDです
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -80,7 +82,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -95,19 +97,19 @@ curl -X POST --data '{
 
 ### platform.addValidator
 
-Add a validator to the Primary Network. You must stake AVAX to do this. If the node is sufficiently correct and responsive while validating, you receive a reward when end of staking period is reached. The validator’s probability of being sampled by other validators during consensus is in proportion to the amount of AVAX staked.
+バリデータをプライマリネットワークに追加します。これを行うにはAVAXをステークする必要があります。検証中にノードが十分に正しく反応していれば、ステーク期間が終了したときに報酬を受け取ることができます。コンセンサスの際に他のバリデータからサンプリングされる確率は、ステークしたAVAXの量に比例します。
 
-The validator charges a fee to delegators; the former receives a percentage of the delegator’s validation reward \(if any.\) The minimum delegation fee is 2%. A transaction that adds a validator has no fee.
+バリデータはデリゲーターに手数料を課します。バリデータは、デリゲーターの検証報酬（ある場合）の一定の割合を受け取ります。最小デリゲーション手数料は2%です。バリデータを追加するトランザクションは無料です。
 
-The validation period must be between 2 weeks and 1 year.
+検証期間は2週間から1年の間でなければなりません。
 
-There is a maximum total weight imposed on validators. This means that no validator will ever have more AVAX staked and delegated to it than this value. This value will initially be set to `min(5 * amount staked, 3M AVAX)`. The total value on a validator is 3 million AVAX.
+バリデータに課せられる総重量には上限があります。つまり、どのバリデータにもこの値を超えるAVAXがステークされたりデリゲートされたりすることはないということです。この値は初期状態では`min(5 * amount staked, 3M AVAX)`に設定されています。バリデータの総価値は300万AVAXです。
 
-Note that once you issue the transaction to add a node as a validator, there is no way to change the parameters. **You can’t remove stake early or change the stake amount, node ID, or reward address.** Please make sure you’re using the correct values. If you’re not sure, check out our [Developer FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq) or ask for help on [Discord.](https://chat.avalabs.org/)
+いったんトランザクションを発行し、ノードをバリデータとして追加してしまうと、パラメータを変更する方法はないということに注意してください。**ステークを早期に削除したり、ステーク額、ノードID、報酬アドレスを変更したりすることはできません。**正しい値を使用しているか確認してください。よくわからない場合は、[デベロッパー用FAQ](https://support.avalabs.org/en/collections/2618154-developer-faq)を確認するか、[Discord](https://chat.avalabs.org/)でヘルプを求めてください。
 
 {% page-ref page="../../learn/platform-overview/staking.md" %}
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.addValidator(
@@ -123,28 +125,28 @@ platform.addValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `nodeID` is the node ID of the validator being added.
-* `startTime` is the Unix time when the validator starts validating the Primary Network.
-* `endTime` is the Unix time when the validator stops validating the Primary Network \(and staked AVAX is returned\).
-* `stakeAmount` is the amount of nAVAX the validator is staking.
-* `rewardAddress` is the address the validator reward will go to, if there is one.
-* `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them. Up to 4 decimal places allowed; additional decimal places are ignored. Must be between 0 and 100, inclusive. For example, if `delegationFeeRate` is `1.2345` and someone delegates to this validator, then when the delegation period is over, 1.2345% of the reward goes to the validator and the rest goes to the delegator.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID
+* `nodeID`は、追加されるバリデーターのノードIDです。
+* `startTime`は、バリデーターが一次ネットワークの検証を開始したUNIX時間です。
+* `endTime`は、バリデーターが一次ネットワークの検証を終了する（そしてステークされたAVAXが返されます）UNIX時間です。
+* `stakeAmount`は、バリデーターがステーキングしているnAVAXの量です。
+* `rewardAddress`は、バリデーターの報酬が送られるアドレスです（ある場合）。
+* `delegationFeeRate`は、他の人がこのバリデータにステークをデリゲートする際に、このバリデータが請求する手数料の割合です。小数点第4位まで有効です。それを超える小数点以下のデータは無視されます。０から100までの間でなければなりません。例えば、`delegationFeeRate`が`1.2345`で、誰かがこのバリデーターをデリゲートする場合、デリゲート期間が終了すると、リワードの1.2345%がバリデーターに、残りはデリゲートした者に移動します。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`は、トランザクション手数料を支払うユーザーです。
+* `password`は`username`のパスワードです。
+* `txID`はトランザクションIDです
 
-#### **Example Call**
+#### **呼び出し例**
 
-In this example, we use shell command `date` to compute Unix times 10 minutes and 2 days in the future. \(Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.\)
+この例では、シェルコマンドを使用して10分後と2日後のUnix時間を計算`date`しています。（注意：Macを使用している場合、`$(date`を`$(gdate`に置き換えてください。`gdate`がインストールされていない場合は、`brew install coreutils`を実行します。)
 
 ```cpp
 curl -X POST --data '{
@@ -166,7 +168,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -181,9 +183,9 @@ curl -X POST --data '{
 
 ### platform.addSubnetValidator
 
-Add a validator to a subnet other than the Primary Network. The Validator must validate the Primary Network for the entire duration they validate this subnet.
+プライマリネットワーク以外のサブネットにバリデータを追加します。バリデータは、サブネットを検証している間中ずっと、プライマリネットワークを検証しなければなりません。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.addSubnetValidator(
@@ -198,25 +200,25 @@ platform.addSubnetValidator(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string,
 }
 ```
 
-* `nodeID` is the node ID of the validator.
-* `subnetID` is the subnet they will validate.
-* `startTime` is the unix time when the validator starts validating the subnet.
-* `endTime` is the unix time when the validator stops validating the subnet.
-* `weight` is the validator’s weight used for sampling.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+* `nodeID`はバリデーターのノードIDです。
+* `subnetID`は、検証するサブネットです。
+* `startTime`は、バリデーターがサブネットの検証を開始したUNIX時間です。
+* `endTime`は、バリデーターがサブネットの検証を終了するUNIX時間です。
+* `weight`は、サンプリングに使用するバリデーターの重量です。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`は、トランザクション手数料を支払うユーザーです。
+* `password`は`username`のパスワードです。
+* `txID`はトランザクションIDです。
 
-#### **Example call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -237,7 +239,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -252,9 +254,9 @@ curl -X POST --data '{
 
 ### platform.createAddress
 
-Create a new address controlled by the given user.
+指定ユーザーが管理する新しいアドレスを作成します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.createAddress({
@@ -263,7 +265,7 @@ platform.createAddress({
 }) -> {address: string}
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -277,7 +279,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -291,9 +293,9 @@ curl -X POST --data '{
 
 ### platform.createBlockchain
 
-Create a new blockchain. Currently only supports the creation of new instances of the AVM and the Timestamp VM.
+新しいブロックチェーンを作成します。現在は、AVMとタイムスタンプVMの新しいインスタンスの作成のみサポートしています。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.createBlockchain(
@@ -308,27 +310,27 @@ platform.createBlockchain(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `subnetID` is the ID of the Subnet that validates the new blockchain. The Subnet must exist and can’t be the Primary Network.
-* `vmID` is the ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine.
-* `name` is a human-readable name for the new blockchain. Not necessarily unique.
-* `genesisData` is the byte representation of the genesis state of the new blockchain encoded in the format specified by the `encoding` parameter.
-* `encoding` specifies the format to use for `genesisData`. Can be either “cb58” or “hex”. Defaults to “cb58”. Virtual Machines should have a static API method named `buildGenesis` that can be used to generate `genesisData`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee. This user must have a sufficient number of the subnet’s control keys.
-* `password` is `username`‘s password.
-* `txID` is the transaction ID.
+* `subnetID`は新しいブロックチェーンを検証するサブネットのIDです。サブネットは必ず存在していなければならず、プライマリネットワークにはなれません。
+* `vmID`は、ブロックチェーンが動作する仮想マシンのIDです。仮想マシンのエイリアスにすることもできます。
+* `name`は、新しいブロックチェーンの人間が読める名前です。必ずしも一意である必要はありません。
+* `genesisData`は、新しいブロックチェーンの生成状態を`encoding`のパラメータで指定されたフォーマットでエンコードしたバイト表現です。
+* `encoding`は`genesisData`で使用するフォーマットを指定します。「cb58」または「hex」のいずれかを指定します。デフォルトは「cb58」です。仮想マシンは、`genesisData`を作成するのに使用することのできる`buildGenesis`という名前の静的APIメソッドを持っている必要があります。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するアドレスのいずれかに送信されます。
+* `username`は、トランザクション手数料を支払うユーザーです。このユーザーは、十分な数のサブネットのコントロール鍵を持っている必要があります。
+* `password`は`username`のパスワードです。
+* `txID`はトランザクションIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
-In this example we’re creating a new instance of the Timestamp Virtual Machine. `genesisData` came from calling `timestamp.buildGenesis`.
+この例では、タイムスタンプ仮想マシンの新しいインスタンスを作成しています。`genesisData`は`timestamp.buildGenesis`から呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -349,7 +351,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -364,11 +366,11 @@ curl -X POST --data '{
 
 ### platform.createSubnet
 
-Create a new subnet.
+新しいサブネットを作成します。
 
-The subnet’s ID is the same as this transaction’s ID.
+サブネットのIDは、このトランザクションのIDと同じです。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.createSubnet(
@@ -380,20 +382,20 @@ platform.createSubnet(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* In order to add a validator to this subnet, `threshold` signatures are required from the addresses in `controlKeys`
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that pays the transaction fee.
-* `password` is `username`‘s password.
+* このサブネットにバリデーターを追加するには、`controlKeys`のアドレスにある`threshold`の署名が必要です。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`は、トランザクション手数料を支払うユーザーです。
+* `password`は`username`のパスワードです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -414,7 +416,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -428,9 +430,9 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.importAVAX`](exchange-chain-x-chain-api.md#avm-importavax) method to complete the transfer.
+P-Chain上のアドレスからX-Chain上のアドレスにAVAXを送信します。このトランザクションを発行した後、アセットID`AVAX`でX-Chainの[`avm.import`](exchange-chain-x-chain-api.md#avm-import)メソッドを呼び出し、転送を完了させる必要があります。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.exportAVAX(
@@ -442,22 +444,22 @@ platform.exportAVAX(
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     txID: string,
     changeAddr: string
 }
 ```
 
-* `amount` is the amount of nAVAX to send.
-* `to` is the address on the X-Chain to send the AVAX to
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user sending the AVAX and paying the transaction fee.
-* `password` is `username`‘s password.
-* `txID` is the ID of this transaction.
+* `amount`は、送信するnAVAXの量です。
+* `to`は、AVAXを送信するX-Chain上のアドレスです
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`は、ユーザーがAVAXを送信し、トランザクション手数料を支払うことになります。
+* `password`は`username`のパスワードです。
+* `txID`は、このトランザクションのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -475,7 +477,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -490,10 +492,9 @@ curl -X POST --data '{
 
 ### platform.exportKey
 
-Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+指定されたアドレスを管理する秘密鍵を取得します。返された秘密鍵は、[`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey)で、ユーザーに追加できます。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.exportKey({
@@ -503,11 +504,11 @@ platform.exportKey({
 }) -> {privateKey: string}
 ```
 
-* `username` is the user that controls `address`.
-* `password` is `username`‘s password.
-* `privateKey` is the string representation of the private key that controls `address`.
+* `username`は、`address`を管理するユーザーです。
+* `password`は`username`のパスワードです。
+* `privateKey`は、`address`を管理する秘密鍵の文字列表現です。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -522,7 +523,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -536,9 +537,9 @@ curl -X POST --data '{
 
 ### platform.getBalance
 
-Get the balance of AVAX controlled by a given address.
+指定されたアドレスで管理されているAVAXの残高を取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getBalance({
@@ -555,14 +556,14 @@ platform.getBalance({
 }
 ```
 
-* `address` is the address to get the balance of.
-* `balance` is the total balance, in nAVAX.
-* `unlocked` is the unlocked balance, in nAVAX.
-* `lockedStakeable` is the locked stackeable balance, in nAVAX.
-* `lockedNotStakeable` is the locked and not stackeable balance, in nAVAX.
-* `utxoIDs` are the IDs of the UTXOs that reference `address`.
+* `address`は、バランスを取るためのアドレスです。
+* `balance`は総残高で、単位はnAVAXです。
+* `unlocked`はロックされていない残高で、nAVAXの場合です。
+* `lockedStakeable`は、nAVAXでは、ロックされたステーブル残高です。
+* `lockedNotStakeable`は、nAVAXでは、ロックされていてステークできない残高です。
+* `utxoIDs`は、`address`を参照するUTXOのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -575,7 +576,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -602,9 +603,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchains
 
-Get all the blockchains that exist \(excluding the P-Chain\).
+存在するすべてのブロックチェーン（ P-Chainを除く）を取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getBlockchains() ->
@@ -618,13 +619,13 @@ platform.getBlockchains() ->
 }
 ```
 
-* `blockchains` is all of the blockchains that exists on the Avalanche network.
-* `name` is the human-readable name of this blockchain.
-* `id` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates this blockchain.
-* `vmID` is the ID of the Virtual Machine the blockchain runs.
+* `blockchains`は、Avalancheネットワーク上に存在するすべてのブロックチェーンのことです。
+* `name`は、このブロックチェーンの人間が読める名前です。
+* `id`は、ブロックチェーンのIDです。
+* `subnetID`は、このブロックチェーンを検証するサブネットのIDです。
+* `vmID`は、ブロックチェーンが動作する仮想マシンのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -635,7 +636,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -692,9 +693,9 @@ curl -X POST --data '{
 
 ### platform.getBlockchainStatus
 
-Get the status of a blockchain.
+ブロックチェーンのステータスを取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getBlockchainStatus(
@@ -704,14 +705,14 @@ platform.getBlockchainStatus(
 ) -> {status: string}
 ```
 
-`status` is one of:
+`status`は、次の1つです。
 
-* `Validating`: The blockchain is being validated by this node.
-* `Created`: The blockchain exists but isn’t being validated by this node.
-* `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
-* `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
+* `Validating`：このノードでブロックチェーンの検証が行われています。
+* `Created`：ブロックチェーンは存在していますが、このノードによって検証されていません。
+* `Preferred`：ブロックチェーンの作成が提案され、作成される可能性が高いが、トランザクションがまだ認められていません。
+* `Unknown`：ブロックチェーンが提案されていないか、ブロックチェーンを作成する提案が推奨されていません。提案は再提出することができます。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -724,7 +725,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -738,17 +739,17 @@ curl -X POST --data '{
 
 ### platform.getCurrentSupply
 
-Returns an upper bound on the number of AVAX that exist. This is an upper bound because it does not account for burnt tokens, including transaction fees.
+存在するAVAXの数の上限を返します。トランザクション手数料など、焼却されたトークンを考慮していないため、これが上限値となります。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getCurrentSupply() -> {supply: int}
 ```
 
-* `supply` is an upper bound on the number of AVAX that exist, denominated in nAVAX.
+* `supply`は、存在するAVAXの数の上限であり、nAVAXと表記されます。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -759,7 +760,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -771,19 +772,20 @@ curl -X POST --data '{
 }
 ```
 
-The response in this example indicates that AVAX’s supply is at most 365.865 million.
+この例のレスポンスは、AVAXの供給量が最大で365.865万個であることを示しています。
 
 ### platform.getCurrentValidators
 
-List the current validators of the given Subnet.
+指定したサブネットの現在のバリデーターを一覧表示します。
 
-The top level field `delegators` was [deprecated](deprecated-api-calls.md#getcurrentvalidators) as of v1.0.1, and removed in v1.0.6. Instead, each element of `validators` now contains the list of delegators for that validator.
+トップレベルのフィールド`delegators`は、v1.0.1時点で[非推奨](deprecated-api-calls.md#getcurrentvalidators)となり、v1.0.6で削除されました。代わりに、今の`validators`の各要素にはそのバリデータのデリゲータリストが含まれています。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getCurrentValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -818,30 +820,31 @@ platform.getCurrentValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-  * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-  * `potentialReward` is the potential reward earned from staking
-  * `delegationFeeRate` is the percent fee this validator charges when others delegate stake to them.
-  * `uptime` is the % of time the queried node has reported the peer as online.
-  * `connected` is if the node is connected to the network
-  * `delegators` is the list of delegators to this validator:
-    * `txID` is the delegator transaction.
-    * `startTime` is the Unix time when the delegator started.
-    * `endTime` is the Unix time when the delegator stops.
-    * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-    * `nodeID` is the validating node’s node ID.
-    * `rewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and array of `addresses`.
-    * `potentialReward` is the potential reward earned from staking
-* `delegators`: \(**deprecated as of v1.0.1. See note at top of method documentation.**\)
+* `subnetID`は現在のバリデータが返されるサブネットです。省略された場合は、プライマリネットワークの現在のバリデータを返します。
+* `nodeIDs`は、リクエストする現在のバリデータのnodeIDのリストです。省略された場合は、現在のすべてのバリデータを返します。指定したnodeIDが現在のバリデータセットに含まれていない場合は、そのノードはレスポンスに含まれません。
+* `validators`：
+   * `txID`はバリデーターのトランザクションです。
+   * `startTime`は、バリデーターがサブネットの検証を開始したUNIX時間です。
+   * `endTime`は、バリデーターがサブネットの検証を終了するUNIX時間です。
+   * `stakeAmount`は、このバリデータがステークしたnAVAXの量です。`subnetID`がプライマリネットワークではない場合は省略されます。
+   * `nodeID`はバリデーターのノードIDです。
+   * `weight`は、バリデータをサンプリングする際のバリデータの重量です。`subnetID`がプライマリネットワークの場合は省略されます。
+   * `rewardOwner`は、`locktime`、`threshold`、`addresses`の配列を含む`OutputOwners`の出力です。
+   * `potentialReward`はステーキングによって得られる潜在的な報酬です
+   * `delegationFeeRate`は、他の人がこのバリデーターにステークをデリゲートする際に、 このバリデーターが請求する手数料の割合です。
+   * `uptime`は、問い合わせ先のノードがピアをオンラインと報告した時間の割合です。
+   * `connected`は、そのノードがネットワークに接続されている場合です
+   * `delegators`は、このバリデーターに対するデリゲーターのリストです。
+      * `txID`はデリゲータートランザクションです。
+      * `startTime`はデリゲーターが起動したUNIX時間です。
+      * `endTime`は、デリゲーターが停止するUNIX時間です。
+      * `stakeAmount`は、デリゲーターがステークしたｎAVAXの量です。`subnetID`がプライマリネットワークではない場合は省略されます。
+      * `nodeID`は、検証ノードのノードIDです。
+      * `rewardOwner`は、`locktime`、`threshold`、`addresses`の配列を含む`OutputOwners`の出力です。
+      * `potentialReward`はステーキングによって得られる潜在的な報酬です
+* `delegators`：（**v1.0.1以降では非推奨です。メソッドのドキュメントの先頭にある注意書きを参照してください**。）
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -852,7 +855,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -902,9 +905,9 @@ curl -X POST --data '{
 
 ### platform.getHeight
 
-Returns the height of the last accepted block.
+最後に受け付けたブロックの高さを返します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getHeight() ->
@@ -913,7 +916,7 @@ platform.getHeight() ->
 }
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -924,7 +927,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -938,19 +941,19 @@ curl -X POST --data '{
 
 ### platform.getMinStake
 
-Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
+一次ネットワークの検証に必要なAVAXの最小量と、デリゲートできるAVAXの最小量を取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
-platform.getMinStake() -> 
+platform.getMinStake() ->
 {
     minValidatorStake : uint64,
     minDelegatorStake : uint64
 }
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -960,7 +963,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -975,13 +978,14 @@ curl -X POST --data '{
 
 ### platform.getPendingValidators
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not currently validating the Subnet but will in the future.
+指定したサブネットの保留中のバリデーターセットのバリデーターを一覧表示します。各バリデーターは、現在サブネットを検証していませんが、将来的には検証します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getPendingValidators({
-    subnetID: string //optional
+    subnetID: string, //optional
+    nodeIDs: string[], //optional
 }) -> {
     validators: []{
         txID: string,
@@ -1003,23 +1007,24 @@ platform.getPendingValidators({
 }
 ```
 
-* `subnetID` is the subnet whose current validators are returned. If omitted, returns the current validators of the Primary Network.
-* `validators`:
-  * `txID` is the validator transaction.
-  * `startTime` is the Unix time when the validator starts validating the Subnet.
-  * `endTime` is the Unix time when the validator stops validating the Subnet.
-  * `stakeAmount` is the amount of nAVAX this validator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validator’s node ID.
-  * `connected` if the node is connected.
-  * `weight` is the validator’s weight when sampling validators. Omitted if `subnetID` is the Primary Network.
-* `delegators`:
-  * `txID` is the delegator transaction.
-  * `startTime` is the Unix time when the delegator starts.
-  * `endTime` is the Unix time when the delegator stops.
-  * `stakeAmount` is the amount of nAVAX this delegator staked. Omitted if `subnetID` is not the Primary Network.
-  * `nodeID` is the validating node’s node ID.
+* `subnetID`は現在のバリデータが返されるサブネットです。省略された場合は、プライマリネットワークの現在のバリデータを返します。
+* `nodeIDs`は、リクエストする保留中のバリデータのnodeIDのリストです。省略した場合は、保留中のすべてのバリデータを返します。指定したnodeIDが保留中のバリデータのセットに含まれていない場合、レスポンスには含まれません。
+* `validators`：
+   * `txID`はバリデーターのトランザクションです。
+   * `startTime`は、バリデーターがサブネットの検証を開始したUNIX時間です。
+   * `endTime`は、バリデーターがサブネットの検証を終了するUNIX時間です。
+   * `stakeAmount`は、このバリデータがステークしたnAVAXの量です。`subnetID`がプライマリネットワークではない場合は省略されます。
+   * `nodeID`はバリデーターのノードIDです。
+   * `connected`ノードが接続されている場合です。
+   * `weight`は、バリデータをサンプリングする際のバリデータの重量です。`subnetID`がプライマリネットワークの場合は省略されます。
+* `delegators`：
+   * `txID`はデリゲータートランザクションです。
+   * `startTime`は、デリゲーターが起動したときのUNIX時間です。
+   * `endTime`は、デリゲーターが停止するUNIX時間です。
+   * `stakeAmount`は、デリゲーターがステークしたｎAVAXの量です。`subnetID`がプライマリネットワークではない場合は省略されます。
+   * `nodeID`は、検証ノードのノードIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1030,7 +1035,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1061,11 +1066,63 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getRewardUTXOs
+
+提供されたトランザクションのステーキング期間またはデリゲート期間が終了した後に報酬を得たUTXOを返します。
+
+#### **署名**
+
+```cpp
+platform.getRewardUTXOs({
+    txID: string,
+    encoding: string //optional
+}) -> {
+    numFetched: integer,
+    utxos: []string,
+    encoding: string
+}
+```
+
+* `txID`はステーキングまたはデリゲーショントランザクションのIDです
+* `numFetched`は返されたUTXOの数です
+* `utxos`は、エンコードされた報酬UTXOの配列です
+* `encoding`は、返されるUTXOのフォーマットを指定します。「cb58」または「hex」のいずれかで、デフォルトは「cb58」です。
+
+#### **呼び出し例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getRewardUTXOs",
+    "params": {
+        "txID": "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y5"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **レスポンス例**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "numFetched": "2",
+        "utxos": [
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1gz8G3BtLJ73MPspLkD83cygZufT4TPYZCmuxW5cRdPrVMbZAHfb6uyGM1jNGBhBiQAgQ6V1yceYf825g27TT6WU4bTdbniWdECDWdGdi84hdiqSJH2y",
+            "11Zf8cc55Qy1rVgy3t87MJVCSEu539whRSwpdbrtHS6oh5Hnwv1NjNhqZnievVs2kBD9qTrayBYRs81emGTtmnu2wzqpLstbAPJDdVjf3kjwGWywNCdjV6TPGojVR5vHpJhBVRtHTQXR9VP9MBdHXge8zEBsQJAoZhTbr2"
+        ],
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
+
 ### platform.getStakingAssetID
 
-Retrieve an assetID for a subnet’s staking asset. Currently, this only returns the Primary Network’s staking assetID.
+サブネットのステーキング資産の資産IDを取得します。現在は、プライマリネットワークのステーキング資産IDのみを返します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getStakingAssetID({
@@ -1075,10 +1132,10 @@ platform.getStakingAssetID({
 }
 ```
 
-* `subnetID` is the subnet whose assetID is requested.
-* `assetID` is the assetID for a subnet’s staking asset.
+* `subnetID`は、資産IDがリクエストされているサブネットです。
+* `assetID`は、サブネットのステーキング資産の資産IDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1091,7 +1148,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1105,9 +1162,9 @@ curl -X POST --data '{
 
 ### platform.getSubnets
 
-Get info about the Subnets.
+サブネットの情報を取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getSubnets(
@@ -1122,13 +1179,13 @@ platform.getSubnets(
 }
 ```
 
-* `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets.
-* `id` is the Subnet’s ID.  
-* `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
+* `ids`は情報を取得するサブネットのIDです。省略する場合は、すべてのサブネットの情報を取得します。
+* `id`は、サブネットのIDです。
+* `threshold`サブネットにバリデーターを追加するには、`controlKeys`のアドレスからの署名が必要です。
 
-See [here](../tutorials/nodes-and-staking/add-a-validator.md) for information on adding a validator to a Subnet.
+サブネットにバリデーターを追加する方法については[こちら](../tutorials/nodes-and-staking/add-a-validator.md)をご覧ください。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1139,7 +1196,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1162,15 +1219,15 @@ curl -X POST --data '{
 
 ### platform.getStake
 
-Get the amount of nAVAX staked by a set of addresses. The amount returned does not include staking rewards.
+一連のアドレスでステークされたnAVAXの量を取得します。返された金額にはステーキング報酬は含まれていません。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getStake({addresses: []string}) -> {staked: int}
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1187,7 +1244,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1199,17 +1256,51 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getTimestamp
+
+現在のP-Chainのタイムスタンプを取得します。
+
+#### **署名**
+
+```cpp
+platform.getTimestamp() -> {time: string}
+```
+
+#### **呼び出し例**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTimestamp",
+    "params": {},
+    "id": 1
+}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **レスポンス例**
+
+```json
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "timestamp": "2021-09-07T00:00:00-04:00"
+    },
+    "id": 1
+}
+```
+
 ### platform.getTotalStake
 
-Get the total amount of nAVAX staked on the Primary Network.
+一次ネットワークにステークされているnAVAXの総量を取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getTotalStake() -> {stake: int}
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1221,7 +1312,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1235,11 +1326,11 @@ curl -X POST --data '{
 
 ### platform.getTx
 
-Gets a transaction by its ID.
+トランザクションをそのIDで取得します。
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either “cb58” or “hex”. Defaults to “cb58”.
+返されるトランザクションのフォーマットを指定するオプションの`encoding`パラメータです。「cb58」または「hex」のいずれかを指定します。デフォルトは「cb58」です。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getTx({
@@ -1251,7 +1342,7 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1265,7 +1356,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1280,11 +1371,11 @@ curl -X POST --data '{
 
 ### platform.getTxStatus
 
-Gets a transaction’s status by its ID. If the transaction was dropped, response will include a `reason` field with more information why the transaction was dropped.
+そのIDでトランザクションのステータスを取得します。トランザクションがドロップされた場合、レスポンスには、トランザクションがドロップされた理由の詳細情報が示される`reason`フィールドが含まれます。
 
-See [here](deprecated-api-calls.md#gettxstatus) for notes on previous behavior.
+これまでの動作に関する注意点は[こちら](deprecated-api-calls.md#gettxstatus)をご覧ください。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getTxStatus({
@@ -1292,7 +1383,14 @@ platform.getTxStatus({
 }) -> {status: string}
 ```
 
-#### **Example Call**
+`status`は、次の内の1つです。
+
+* `Committed`：すべてのノードがトランザクションを受け入れます（または受け入れることになります）
+* `Processing`：トランザクションは、このノードが決定します
+* `Dropped`：そのトランザクションは、ネットワーク上のどのノードにも受け入れられません。詳しくは`reason`フィールドをご覧ください
+* `Unknown`：トランザクションがこのノードで確認されていません
+
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1305,7 +1403,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1319,9 +1417,9 @@ curl -X POST --data '{
 
 ### platform.getUTXOs
 
-Gets the UTXOs that reference a given set of addresses.
+指定アドレスのセットを参照するUTXOを取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.getUTXOs(
@@ -1335,7 +1433,7 @@ platform.getUTXOs(
         sourceChain: string, //optional
         encoding: string, //optional
     },
-) -> 
+) ->
 {
     numFetched: int,
     utxos: []string,
@@ -1347,17 +1445,17 @@ platform.getUTXOs(
 }
 ```
 
-* `utxos` is a list of UTXOs such that each UTXO references at least one address in `addresses`.
-* At most `limit` UTXOs are returned. If `limit` is omitted or greater than 1024, it is set to 1024.
-* This method supports pagination. `endIndex` denotes the last UTXO returned. To get the next set of UTXOs, use the value of `endIndex` as `startIndex` in the next call.
-* If `startIndex` is omitted, will fetch all UTXOs up to `limit`.
-* When using pagination \(ie when `startIndex` is provided\), UTXOs are not guaranteed to be unique across multiple calls. That is, a UTXO may appear in the result of the first call, and then again in the second call.
-* When using pagination, consistency is not guaranteed across multiple calls. That is, the UTXO set of the addresses may have changed between calls.
-* `encoding` specifies the format for the returned UTXOs. Can be either “cb58” or “hex” and defaults to “cb58”.
+* `utxos`は、各UTXOが`addresses`の少なくとも1つのアドレスを参照するようなUTXOのリストです。
+* 最大で`limit`UTXOが返されます。`limit`が省略されるか1024を超える場合は、1024に設定されます。
+* このメソッドはページネーションに対応しています。`endIndex`は、最後に返されたUTXOを示します。次のセットのUTXOのを取得するには、次の呼び出しで`endIndex`の値を`startIndex`として使用します。
+* `startIndex`が省略された場合は、`limit`までのUTXOをすべて取得します。
+* ページネーションを使用する場合（つまり`startIndex`が提供されている場合）、UTXOは複数回の呼び出しで一意であることは保証されません。つまり、あるUTXOは、最初の呼び出しの結果に現れ、その後、2回目の呼び出しで再び現れる可能性があります。
+* ページネーションを使用する場合、複数回の呼び出しでの一貫性は保証されません。つまり、アドレスのUTXOのセットが呼び出しの間に変更されている可能性があります。
+* `encoding`は、返されるUTXOのフォーマットを指定します。「cb58」または「hex」のいずれかで、デフォルトは「cb58」です。
 
-#### **Example**
+#### **例**
 
-Suppose we want all UTXOs that reference at least one of `P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx` and `P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`.
+`P-avax1s994jad0rtwvlfpkpyg2yau9nxt60qqfv023qx`と`P-avax1fquvrjkj7ma5srtayfvx7kncu7um3ym73ztydr`の少なくとも1つを参照するすべてのUTXOが欲しいとします。
 
 ```cpp
 curl -X POST --data '{
@@ -1372,7 +1470,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+これでレスポンスが得られます。
 
 ```cpp
 {
@@ -1396,7 +1494,7 @@ This gives response:
 }
 ```
 
-Since `numFetched` is the same as `limit`, we can tell that there may be more UTXOs that were not fetched. We call the method again, this time with `startIndex`:
+`numFetched`は`limit`と同じなので、フェッチされなかったUTXOがさらにあるのではないかと考えられます。今度は、`startIndex`でメソッドを再度呼び出します。
 
 ```cpp
 curl -X POST --data '{
@@ -1415,7 +1513,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+これでレスポンスが得られます。
 
 ```cpp
 {
@@ -1438,9 +1536,9 @@ This gives response:
 }
 ```
 
-Since `numFetched` is less than `limit`, we know that we are done fetching UTXOs and don’t need to call this method again.
+`numFetched`が`limit`よりも小さいので、UTXOの取得が完了したことがわかり、このメソッドを再度呼び出す必要はありません。
 
-Suppose we want to fetch the UTXOs exported from the X Chain to the P Chain in order to build an ImportTx. Then we need to call GetUTXOs with the sourceChain argument in order to retrieve the atomic UTXOs:
+ImportTxを構築するために、X ChainからP ChainにエクスポートしたUTXOをフェッチしたとします。アトミックUTXOを取得するためには、sourceChain引数でGetUTXOを呼び出す必要があります。
 
 ```cpp
 curl -X POST --data '{
@@ -1455,7 +1553,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This gives response:
+これでレスポンスが得られます。
 
 ```cpp
 {
@@ -1475,13 +1573,62 @@ This gives response:
 }
 ```
 
+### platform.getValidatorsAt
+
+バリデータと、指定されたP-Chainの高さでのサブネットあるいはプライマリネットワークの重量を取得します。
+
+#### **署名**
+
+```cpp
+platform.getValidatorsAt(
+    {
+        height: int,
+        subnetID: string, // optional
+    }
+)
+```
+
+* `height`は、バリデータを設定するP-Chainの高さです。
+* `subnetID`は、バリデータを設定するサブネットのIDです。指定しない場合は、プライマリネットワークのバリデータセットを取得します。
+
+#### **呼び出し例**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getValidatorsAt",
+    "params": {
+        "height":1
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **レスポンス例**
+
+```javascript
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "validators": {
+            "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg": 2000000000000000,
+            "NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu": 2000000000000000,
+            "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ": 2000000000000000,
+            "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN": 2000000000000000,
+            "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5": 2000000000000000
+        }
+    },
+    "id": 1
+}
+```
+
 ### platform.importAVAX
 
-Complete a transfer of AVAX from the X-Chain to the P-Chain.
+X-ChainからP-Chain.へのAVAXの転送を完了します。
 
-Before this method is called, you must call the X-Chain’s [`avm.exportAVAX`](exchange-chain-x-chain-api.md#avm-exportavax) method to initiate the transfer.
+メソッドを呼び出す前に、X-Chainの[`avm.export`](exchange-chain-x-chain-api.md#avm-export)メソッドをassetID`AVAX`で呼び出し、転送を開始する必要があります。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.importAVAX(
@@ -1489,32 +1636,29 @@ platform.importAVAX(
         from: []string, //optional
         to: string,
         changeAddr: string, //optional
-        sourceChain: string,
         username: string,
         password: string
     }
-) -> 
+) ->
 {
     tx: string,
     changeAddr: string
 }
 ```
 
-* `to` is the ID of the address the AVAX is imported to. This must be the same as the `to` argument in the corresponding call to the X-Chain’s `exportAVAX`.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
-* `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
-* `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
-* `username` is the user that controls the address specified in `to`.
-* `password` is `username`‘s password.
+* `to`は、AVAXがインポートされるアドレスのIDです。これは、X-Chainの`export`に対応する呼び出しの`to`の引数と同じでなければなりません。
+* `from`は、この操作に使用したいアドレスです。省略した場合は、必要に応じて自分のアドレスのいずれかを使用します。
+* `changeAddr`は、変更が行われた場合に送信されるアドレスです。省略した場合は、ユーザーが管理するいずれかのアドレスに送信されます。
+* `username`はアドレスの制御および変更を行うユーザーです。
+* `password`は`username`のパスワードです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
     "params": {
-        "sourceChain": "X",
         "to": "P-avax1apzq2zt0uaaatum3wdz83u4z7dv4st7l5m5n2a",
         "from": ["P-avax1gss39m5sx6jn7wlyzeqzm086yfq2l02xkvmecy"],
         "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u",
@@ -1525,7 +1669,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1540,9 +1684,9 @@ curl -X POST --data '{
 
 ### platform.importKey
 
-Give a user control over an address by providing the private key that controls the address.
+アドレスを管理する秘密鍵を提供することで、ユーザーにアドレスの管理できるようにします。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.importKey({
@@ -1552,9 +1696,9 @@ platform.importKey({
 }) -> {address: string}
 ```
 
-* Add `privateKey` to `username`‘s set of private keys. `address` is the address `username` now controls with the private key.
+* `username`の秘密鍵のセットに`privateKey`を追加します。`address`は、現在`username`が秘密鍵で管理しているアドレスです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1569,7 +1713,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1583,9 +1727,9 @@ curl -X POST --data '{
 
 ### platform.issueTx
 
-Issue a transaction to the Platform Chain.
+プラットフォームチェーンにトランザクションを発行します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.issueTx({
@@ -1594,11 +1738,11 @@ platform.issueTx({
 }) -> {txID: string}
 ```
 
-* `tx` is the byte representation of a transaction.
-* `encoding` specifies the encoding format for the transaction bytes. Can be either “cb58” or “hex”. Defaults to “cb58”.
-* `txID` is the transaction’s ID.
+* `tx`は、トランザクションのバイト表現です。
+* `encoding`はトランザクションバイトのエンコードフォーマットを指定します。「cb58」または「hex」のいずれかを指定します。デフォルトは「cb58」です。
+* `txID`はトランザクションのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1612,7 +1756,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1626,9 +1770,9 @@ curl -X POST --data '{
 
 ### platform.listAddresses
 
-List addresses controlled by the given user.
+指定されたユーザーが管理するアドレスを一覧表示します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.listAddresses({
@@ -1637,7 +1781,7 @@ platform.listAddresses({
 }) -> {addresses: []string}
 ```
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1651,7 +1795,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1665,9 +1809,9 @@ curl -X POST --data '{
 
 ### platform.sampleValidators
 
-Sample validators from the specified Subnet.
+指定したサブネットからバリデーターを抽出します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.sampleValidators(
@@ -1681,11 +1825,11 @@ platform.sampleValidators(
 }
 ```
 
-* `size` is the number of validators to sample.
-* `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
-* Each element of `validators` is the ID of a validator.
+* `size`は、サンプリングするバリデーターの数です。
+* `subnetID`は、サンプリングするサブネットです。省略した場合、デフォルトでプライマリネットワークとなります。
+* `validators`の各要素はバリデーターのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1698,7 +1842,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1715,9 +1859,9 @@ curl -X POST --data '{
 
 ### platform.validatedBy
 
-Get the Subnet that validates a given blockchain.
+指定ブロックチェーンを検証するサブネットを取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.validatedBy(
@@ -1727,10 +1871,10 @@ platform.validatedBy(
 ) -> {subnetID: string}
 ```
 
-* `blockchainID` is the blockchain’s ID.
-* `subnetID` is the ID of the Subnet that validates the blockchain.
+* `blockchainID`は、ブロックチェーンのIDです。
+* `subnetID`は、ブロックチェーンを検証するサブネットのIDです。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1743,7 +1887,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
@@ -1757,9 +1901,9 @@ curl -X POST --data '{
 
 ### platform.validates
 
-Get the IDs of the blockchains a Subnet validates.
+サブネットが検証しているブロックチェーンのIDを取得します。
 
-#### **Signature**
+#### **署名**
 
 ```cpp
 platform.validates(
@@ -1769,10 +1913,10 @@ platform.validates(
 ) -> {blockchainIDs: []string}
 ```
 
-* `subnetID` is the Subnet’s ID.
-* Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
+* `subnetID`は、サブネットのIDです。
+* の各要素は、サブネットが検証するブロックチェーンのID`blockchainIDs`です。
 
-#### **Example Call**
+#### **呼び出し例**
 
 ```cpp
 curl -X POST --data '{
@@ -1785,7 +1929,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+#### **レスポンス例**
 
 ```cpp
 {
