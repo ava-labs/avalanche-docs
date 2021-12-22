@@ -1,8 +1,17 @@
-# Tools
+# ツール
 
-[**AvalancheJS**](avalanchejs/)**:** is Avalanche's JavaScript library written in TypesScript which enables browser and Node.js clients to make API calls to Avalanche nodes. It provides a wide suite of tools to make asset creation, balance management, and funds transfer easy. AvalancheJS has tools for managing the node itself, accessing the Admin, Keystore, and Platform APIs built into Avalanche nodes.
+[**AvalancheウォレットSDK**](avalanche-wallet-sdk/)は、ウォレットを管理するためのTypeScriptライブラリです。
 
-[**Avash**](avash.md)**:** is a shell client for interacting with Avalanche and can deploy local networks and interact with the nodes in those networks. You can use Avash to rapidly launch test network environments.
+[**AvalancheJS**](avalanchejs/)は、TypesScriptで書かれたAvalancheのJavaScriptライブラリです。これにより、ブラウザとNode.jsクライアントがAvalancheノードへのAPI呼び出しを行うことができます。資産作成、残高管理、ファンド転送を容易にするさまざまなツールを提供しています。AvalancheJSには、ノード自体を管理するツールがあります。これにより、Avalancheノードに組み込まれたAdmin、Keystore、プラットフォームAPIにアクセスできます。
 
-[**Ortelius API**](ortelius.md): is an API that allows clients to interact with Ortelius, the Avalanche indexer.
+[**Avash**](avash.md)はAvalancheとやり取りするためのシェルクライアントであり、ローカルネットワークを展開し、それらのネットワーク上のノードとやり取りすることができます。Avashを使用して、テストネットワーク環境を迅速に起動することができます。
 
+[**公開API**](public-api.md)：Avalancheネットワークとのやり取りに使用できる公開APIサーバーについて学びます。
+
+[**Ortelius API**](ortelius.md)：Avalancheネットワークのインデックスを作成するツール、Orteliusと連動します。**注意：Orteliusは非推奨です。[代わりにインデックスAPI](deprecating-ortelius.md)を使用する必要があります。**
+
+[**Orteliusの廃止**](deprecating-ortelius.md)：OrteliusをインデックスAPIで置き換える方法
+
+[**Postmanコレクション**](postman-avalanche-collection.md)：[Postman](https://postman.com/)用のAvalancheGo APIテンプレートと環境コレクションで、API開発や実験を簡易化するツールです。コレクションはAvalancheGo APIすべてを網羅するため、ノードに容易にコマンドを発行し、その出力を正しくフォーマットされた読み取り可能な方法で検査することができます。
+
+[**Abigen**](abigen.md)**：** `solidity`コントラクトを、`golang`に組み込むのに適したプログラムインターフェースにコンパイルすることができます。
