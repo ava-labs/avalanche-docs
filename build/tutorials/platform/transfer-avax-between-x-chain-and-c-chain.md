@@ -1,89 +1,89 @@
-# Transfer AVAX Between the X-Chain and C-Chain
+# X-Chainと C-Chain間でAVAXを転送する
 
-## Introduction
+## はじめに
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. In this tutorial, we’ll send AVAX tokens between the X-Chain and C-Chain.
+AVAXトークンは、取引可能なX-Chain上、Primary Networkを検証する際にステークとして提供できるP-Chain上、スマートコントラクトで使用するあるいはガス代を支払う C-Chain上に存在しています。このチュートリアルでは、X-Chainと C-Chain間でAVAXトークンを送信します。
 
-## Requirements
+## 要件
 
-You've completed [Run an Avalanche Node](../../getting-started.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/).
+[Run an Avalanche Node（Avalancheノードを実行する）](../nodes-and-staking/run-avalanche-node.md)を修了されたので、[Avalancheのアーキテクチャ](../../../learn/platform-overview/)をよく理解されていることと思います。
 
-In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
+AVAXを送信するには、AVAXがいくらか必要です。実際のAVAXを取得するには、取引所で購入することもできますし、[AVAX Test Faucet](https://faucet.avax-test.network)からテストネットAVAXを取得することもできます。後者は、Avalanche上で試してみるには無料で簡単な方法です。
 
-## Transferring AVAX using the web wallet
+## ウェブウォレットを使用してAVAXを転送する
 
-The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/) which is a non-custodial and secure way to access and move AVAX.
+チェーン間でAVAXを転送する最も簡単な方法は、[Avalancheウォレット](https://wallet.avax.network/)を使用することです。これは、AVAXにアクセスし、移動させる非管理かつ安全な方法です。
 
-The Avalanche Wallet source code can be found [here](https://github.com/ava-labs/avalanche-wallet).
+Avalancheウォレットのソースコードは、[ここ](https://github.com/ava-labs/avalanche-wallet)にあります。
 
-### Step 1 - Open the Avalanche Wallet
+### ステップ1 - Avalancheウォレットを開く
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-01-login.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-01-login.png)
 
-Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
+**Access Wallet**（ウォレットにアクセス）を選択し、自分のウォレットを入力します。メインのAvalancheネットワーク以外のネットワークにウォレットを接続させるには、**Mainnet**を選択し、接続するネットワークを選びます。
 
-### Step 2 - Log In to Your Wallet
+### ステップ2 - ウォレットにログインする
 
-You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
+秘密鍵、ニーモニック鍵フレーズ、キーストアファイルあるいはLedger Nano Sを使って、ウォレットにアクセスすることができます。Ledgerを介したC-Chain転送はまだサポートされていません。
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-02-access.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-02-access.png)
 
-After a successful login you will see your balance, assets portfolio and various other information.
+ログインに成功すると、残高、資産ポートフォリオや様々な情報が表示されます。
 
-### Step 3 - Go to the Cross Chain Tab
+### ステップ3 - Cross Chain（クロスチェーン）タブに移動する
 
-![Image for post](../../../.gitbook/assets/wallet-x2p-03-earn.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2p-03-earn.png)
 
-Functionality for transferring tokens between chains is on the **Cross Chain** tab.
+チェーン間でトークンを転送するための機能は、**Cross Chain**（クロスチェーン）タブにあります。
 
-### Step 4 - Enter Amount to Transfer
+### ステップ4 - 転送する金額を入力する
 
-You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
+**Source Chain**（送信元チェーン）と**Destination Chain**（送信先チェーン）の選択が表示されます。X-Chainと C-Chainをそれぞれ選択します。XとCでの残高と送信元から送信先チェーンへ転送する金額を入力するフィールドが表示されます。
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2c-01-x-c.png)
 
-Enter the amount you wish to transfer from the X-Chain to the C-Chain.
+X-Chainから C-Chainに転送する金額を入力します。
 
-### Step 5 - Confirm the Transaction
+### ステップ5 - トランザクションを確認する
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2c-02-trasnfer.png)
 
-Press **Confirm**, and then **Transfer** to initiate the transfer.
+**Confirm**（確認）を押し、その後**Transfer**(転送）を押して、転送を開始します。
 
-### Step 6 - Done!
+### ステップ6 - 完了しました。
 
-A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the C-Chain. The wallet will do both and show its the progress while doing so.
+クロスチェーン転送は2段階のプロセスで行われます。まずX-Chainから資金をエクスポートするトランザクション、そして C-Chainにインポートするトランザクションです。ウォレットは両方を行い、実行中進捗を表示します。
 
-![Image for post](../../../.gitbook/assets/wallet-x2c-03-done.png)
+![掲載画像](../../../.gitbook/assets/wallet-x2c-03-done.png)
 
-That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
+完了です。AVAXは、X-Chainから C-Chainに転送されました。これで、 C-Chain上でスマートコントラクトをデプロイするのに使用できるようになりました。
 
-### Transfer from the C-Chain to X-chain
+###  C-ChainからX-Chainへ転送する
 
-To return the AVAX back to the X-Chain, you need to do the transfer in the opposite direction.
+AVAXをX-Chainに戻すには、逆の方向に転送を行う必要があります。
 
-Swap source and destination chain, by selecting them from the **Source** and **Destination** dropdown menu. The rest of the process is the same: enter the amount, confirm and transfer.
+**Source**（送信元）と**Destination**(送信先）をドロップダウンメニューから選択し、送信元と送信先を入れ替えます。後のプロセスは同じです。金額を入力し、確認し、転送します。
 
-## Transferring from the X-Chain to C-Chain with API Calls
+## APIコールを使ったX-Chainから C-Chainへの転送
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+Avalancheネットワーク上でアプリケーションを構築している場合は、より広範な機能の一部としてプログラムによる転送を行うことを望まれるかもしれません。AvalancheGoノード上で適切なAPIを呼び出すことで可能です。このチュートリアルのここ以降では、AvalancheGoノード、X-Chain上のAVAXトークン、およびノードのキーストアで[作成](../../avalanchego-apis/keystore-api.md#keystorecreateuser)、保存されたユーザー認証情報にアクセスできることを前提にしています。
 
-All the example API calls below assume the node is running locally \(that is, listening on `127.0.0.1`\). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
+次のAPI呼び出しの例はすべて、ノードがローカルで実行されている（つまり`127.0.0.1`上でリスニングしている）ことを前提にしています。ノードは、メインネットワーク、テストネットワーク、またはローカルネットワークに接続することができます。それぞれのケースで、アドレスの形式を除き、API呼び出しとレスポンスは同じでなければなりません。ノードはローカルである必要はありません。他の場所でホスティングされているノードを呼び出すことも可能です。
 
-As you may have noticed while transferring AVAX using the Avalanche Wallet, a cross-chain transfer is a two transaction operation:
+Avalancheウォレットを使用してAVAXを転送する際に気づかれているかもしれませんが、クロスチェーン転送は2つのトランザクションオペレーションからなります。
 
-* Export AVAX from the X-Chain
-* Import AVAX to the C-Chain
+* X-ChainからAVAXをエクスポートする
+*  C-ChainにAVAXをインポートする
 
-Before we can do the transfer, we need to set up the address on the C-Chain, along with the controlling key.
+転送を行う前に、 C-Chain上で、コントロール鍵とともにアドレスを設定する必要があります。
 
-### Set Up Address and Key on the C-Chain
+###  C-Chain上でアドレスと鍵を設定する
 
-The X-Chain uses [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) addresses and the C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
+X-Chainは、[Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32)アドレスを使用し、 C-Chainは、16進Ethereum仮想マシン（EVM）アドレスを使用します。一方向性暗号学的関数を使用して秘密鍵から派生させているため、ひとつのフォーマットから別のフォーマットに変換する方法はありません。
 
-In order to get around this, you can export a private key from the X-Chain and then import it to the C-Chain. This way, you can use the X-Chain address and change the X- prefix to a C- prefix in order to get the correct Bech32 address to use for the C-Chain.
+この問題を回避するため、X-Chainから秘密鍵をエクスポートし、 C-Chainにインポートすることができます。このように、X-Chainアドレスを使用し、X-の接頭辞をC-の接頭辞に変更して、 C-Chainで利用する正しいBech32アドレスを取得することもができます。
 
-First, export a private key from the X-Chain:
+まず、X-Chainから秘密鍵をエクスポートします。
 
 ```cpp
 curl -X POST --data '{
@@ -98,7 +98,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Response:
+レスポンス：
 
 ```cpp
 {
@@ -110,22 +110,22 @@ Response:
 }
 ```
 
-Now, import the same private key to the C-Chain:
+次に、 C-Chainに同じ秘密鍵をインポートします。
 
 ```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avax.importKey", 
-    "params" :{ 
-        "username" :"myUsername",   
-        "password":"myPassword",    
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"    
-    }   
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.importKey",
+    "params" :{
+        "username" :"myUsername",
+        "password":"myPassword",
+        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
 ```
 
-The response contains a hex-encoded EVM address:
+レスポンスには、16進数でエンコードされたEVMアドレスが含まれます。
 
 ```cpp
 {
@@ -137,124 +137,125 @@ The response contains a hex-encoded EVM address:
 }
 ```
 
-Now we have everything we need to transfer the tokens.
+これでトークンを転送するのに必要な準備がすべてできました。
 
-### Transfer from the X-Chain to C-Chain
+### X-Chainから C-Chainへ転送する
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-exportavax) call:
-
-```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avm.exportAVAX", 
-    "params" :{ 
-        "to":"C-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e",   
-        "destinationChain": "C",    
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import the AVAX to an address that you own in MetaMask or another third-party service.
+エクスポートした秘密鍵に対応するアドレスを使用し、[`avm.export`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-export)呼び出しでC-の接頭辞を使用して切り替えます。
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
-    "id"     :1,    
-    "method" :"avax.importAVAX",    
-    "params" :{ 
-        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",  
-        "sourceChain":"X",  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-where `to` is a hex-encoded EVM address of your choice.
-
-The response looks like this:
-
-```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3" 
-    },  
-    "id": 1 
-}
-```
-
-Note: there is no transaction fee for import transactions to the C Chain.
-
-Once your AVAX has been transferred to the C-Chain, you can use it to deploy and interact with smart contracts.
-
-## Transfer from the C-Chain to X-Chain
-
-Now, you can move AVAX back from the C-Chain to the X-Chain. First we need to export:
-
-```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avax.exportAVAX",
-    "params" :{ 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",   
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-where `to` is the bech32 encoded address of an X-Chain address you hold. Make sure that the amount you export exceeds the transaction fee because both the export and import transactions will charge a transaction fee.
-
-The response should look like this:
-
-```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"    
-    },  
-    "id": 1 
-}
-```
-
-To finish the transfer, call [`avm.importAVAX`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-importavax).
-
-```cpp
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method": "avm.importAVAX", 
-    "params": { 
-        "username":"myUsername",    
-        "password":"myPassword",    
-        "sourceChain": "C", 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
-    }   
+    "id"     :1,
+    "method" :"avm.export",
+    "params" :{
+        "assetID": "AVAX",
+        "to": "C-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
+        "amount": 5000000,
+        "username":"myUsername",
+        "password":"myPassword"
+    }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the bech32 encoded address the X-Chain address which you sent the funds to in the previous step.
-
-The response should look like this:
+キーストアユーザーは、 C-Chain上で対応する秘密鍵を所有しているので、AVAXを任意のアドレスにインポートすることができます。エクスポートされた宛先と同じアドレスにインポートする必要はありません。つまり、AVAXをMetaMask上や他のサードパーティーのサービスで所有しているアドレスにインポートすることができます。
 
 ```cpp
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"    
-    },  
-    "id": 1 
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.import",
+    "params" :{
+        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",
+        "sourceChain":"X",
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+`to`に、16進法でエンコードされている任意のEVMアドレスがあります。
+
+レスポンスは、次のようになります。
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3"
+    },
+    "id": 1
 }
 ```
 
-## Wrapping Up
+注意： C-Chainへのインポートトランザクションにトランザクション手数料は発生しません。
 
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
+一旦AVAXが C-Chainに転送されると、スマートコントラクトをデプロイしたり、やり取りするために使用できるようになります。
+
+##  C-ChainからX-Chainへの転送
+
+さて、 C-ChainからX-ChainにAVAXを戻すこともできます。まず、エクスポートする必要があります。
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.exportAVAX",
+    "params" :{
+        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
+        "assetID": "AVAX",
+        "amount": 5000000,
+        "username":"myUsername",
+        "password":"myPassword"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+```
+
+`to`に、保持しているX-Chainアドレスのbech32でエンコードされたアドレスがあります。エクスポート、インポートの両方に手数料がかかるため、エクスポートする金額がトランザクション手数料を上回るようにしてください。
+
+レスポンスは、次のようになります。
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"
+    },
+    "id": 1
+}
+```
+
+転送を完了させるには、[`avm.import`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-import)を呼び出します。
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method": "avm.import",
+    "params": {
+        "username":"myUsername",
+        "password":"myPassword",
+        "sourceChain": "C",
+        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+`to`に、ひとつ前のステップで資金を送信したX-Chainアドレスのbech32でエンコードされたアドレスがあります。
+
+レスポンスは、次のようになります。
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"
+    },
+    "id": 1
+}
+```
+
+## まとめ
+
+完了です。これで、Avalancheウォレットを使用し、Avalancheノード上で適切なAPIコールを呼び出すことで、X-Chainと C-Chain間でAVAXを相互にやり取りすることができるようになりました。
 
