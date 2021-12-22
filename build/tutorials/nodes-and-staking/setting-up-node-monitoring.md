@@ -1,368 +1,240 @@
-# Run an Avalanche Node Monitoring
+# Avalancheノードを監視する
 
-_Thank you to community member Jovica Popović, who wrote this tutorial. You can reach him on our_ [_Discord_](https://chat.avax.network) _if needed._
+## はじめに
 
-## Introduction
+このチュートリアルでは、[AvalancheGo](https://github.com/ava-labs/avalanchego)のインスタンスを監視するインフラストラクチャの設定方法を説明します。次を使用します。
 
-This tutorial assumes you have Ubuntu 18.04 or 20.04 running on your node \(a Mac OS X version of this tutorial will come later\).
+* データを収集・保存する[Prometheus](https://prometheus.io/)
+* マシン情報を入手する[node_exporter](https://github.com/prometheus/node_exporter)
+* ノード情報を入手するAvalancheGoの[メトリックAPI](https://docs.avax.network/build/avalanchego-apis/metrics-api)
+* ダッシュボードでデータを可視化する[Grafana](https://grafana.com/)。
+* あらかじめ作成された[Avalancheダッシュボード](https://github.com/ava-labs/avalanche-docs/tree/master/dashboards)のセット
 
-This tutorial will show how to set up infrastructure to monitor an instance of [AvalancheGo](https://github.com/ava-labs/avalanchego). We will use:
+前提条件：
 
-* [Prometheus](https://prometheus.io/) to gather and store data
-* [node\_exporter](https://github.com/prometheus/node_exporter) to get information about the machine,
-* AvalancheGo’s [metrics API](https://docs.avax.network/v1.0/en/api/metrics/) to get information about the node
-* [Grafana](https://grafana.com/) to visualize data on a dashboard.
+* AvalancheGoノードが実行していること
+* ノードを実行しているマシンへのシェルによるアクセス
+* マシン上の管理者権限
 
-Prerequisites:
+このチュートリアルでは、Ubuntu18.04または20.04がノード上で実行されていることを前提としています。サービスの実行に`systemd`を、パッケージ管理に`apt-get`を使用する他のLinuxフレーバーは機能するかもしれませんが、テストされていません。コミュニティメンバーによると、Debian10上では動作し、他のDebianリリースでも機能する可能性が報告されています。
 
-* A running AvalancheGo node
-* Shell access to the machine running the node
-* Administrator privileges on the machine
-
-### **Caveat: Security**
+### 差し止め請求：セキュリティ
 
 {% hint style="danger" %}
-The system as described here **should not** be opened to the public internet. Neither Prometheus nor Grafana as shown here is hardened against unauthorized access. Make sure that both of them are accessible only over a secured proxy, local network, or VPN. Setting that up is beyond the scope of this tutorial, but exercise caution. Bad security practices could lead to attackers gaining control over your node! It is your responsibility to follow proper security practices.
-{% endhint %}
+ここで説明したシステムは、一般のインターネットに公開しては**いけません**。ここで示すPrometheもGrafanaも、不正アクセスに対する耐性がありません。必ず両方とも、安全なプロキシ、ローカルネットワーク、VPNでのみアクセスできるようにしてください。その設定に関しては、当チュートリアルでは範疇外ですが、その点をご注意ください。セキュリティ状態が悪いと、攻撃者にノードをコントロールされる恐れがあります。適切なセキュリティ慣行に従うことは、皆さんの責任です。{% endhint %}
 
-### Contributions
+## インストーラースクリプトの監視
 
-The basis for the Grafana dashboard was taken from the good guys at [ColmenaLabs](https://blog.colmenalabs.org/index.html), which is apparently not available anymore. If you have ideas and suggestions on how to improve this tutorial, please say so, post an issue, or make a pull request on [Github](https://github.com/ava-labs).
+ノードモニタリングを簡単にインストールするために、ほとんどの作業を行うスクリプトを作成しました。スクリプトのダウンロードと実行を行うには、ノードを実行するマシンに管理者権限を持ったユーザーでログインし、以下のコマンドを入力してください。
 
-## Set up Prometheus
+```bash
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/monitoring-installer.sh;\
+chmod 755 monitoring-installer.sh;
+```
+これによりスクリプトがダウンロードされ、実行可能になります。
 
-First, we need to add a system user account and create directories \(you will need superuser credentials\):
+スクリプト自体は異なる引数で複数回実行され、それぞれ異なるツールや環境の一部をインストールします。ダウンロードと設定を正しく行うために、以下を実行することから始めてください。
 
-```cpp
-sudo useradd -M -r -s /bin/false prometheus
+```bash
+./monitoring-installer.sh --help
+```
+次のように表示されます。
+
+```text
+Usage: ./monitoring-installer.sh [--1|--2|--3|--4|--help]
+
+Options:
+--help   Shows this message
+--1      Step 1: Installs Prometheus
+--2      Step 2: Installs Grafana
+--3      Step 3: Installs node_exporter
+--4      Step 4: Installs AvalancheGo Grafana dashboards
+
+Run without any options, script will download and install latest version of AvalancheGo dashboards.
 ```
 
-```cpp
-sudo mkdir /etc/prometheus /var/lib/prometheus
+やってみましょう。
+
+## ステップ1：Prometheusを設定する<a id="prometheus"></a>
+
+スクリプトを実行して、最初のステップを実行します。
+
+```bash
+./monitoring-installer.sh --1
 ```
 
-Next, get the link to the latest version of Prometheus from the [downloads page](https://prometheus.io/download/) \(make sure you select the appropriate processor architecture\), and use wget to download it and tar to unpack the archive:
+このような出力が生成されます。
 
-```cpp
-mkdir -p /tmp/prometheus && cd /tmp/prometheus
-```
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 1: Installing Prometheus
 
-```cpp
-wget https://github.com/prometheus/prometheus/releases/download/v2.21.0/prometheus-2.21.0.linux-amd64.tar.gz
-```
-
-```cpp
-tar xvf prometheus-2.21.0.linux-amd64.tar.gz
-```
-
-```cpp
-cd prometheus-2.21.0.linux-amd64
-```
-
-Next, we need to move the binaries, set ownership, and move config files to appropriate locations:
-
-```cpp
-sudo cp {prometheus,promtool} /usr/local/bin/
-```
-
-```cpp
-sudo chown prometheus:prometheus /usr/local/bin/{prometheus,promtool}
-```
-
-```cpp
-sudo chown -R prometheus:prometheus /etc/prometheus
-```
-
-```cpp
-sudo chown prometheus:prometheus /var/lib/prometheus
-```
-
-```cpp
-sudo cp -r {consoles,console_libraries} /etc/prometheus/
-```
-
-```cpp
-sudo cp prometheus.yml /etc/prometheus/
-```
-
-`/etc/prometheus` is used for configuration, and `/var/lib/prometheus` for data.
-
-Let’s set up Prometheus to run as a system service. Do**:**
-
-```cpp
-sudo nano /etc/systemd/system/prometheus.service
-```
-
-\(or open that file in the text editor of your choice\), and enter the following configuration:
-
-```cpp
-[Unit]
-Description=Prometheus
-Documentation=https://prometheus.io/docs/introduction/overview/
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/prometheus   --config.file=/etc/prometheus/prometheus.yml   --storage.tsdb.path=/var/lib/prometheus   --web.console.templates=/
-etc/prometheus/consoles   --web.console.libraries=/etc/prometheus/console_libraries   --web.listen-address=0.0.0.0:9090   --web.external-url=
-
-SyslogIdentifier=prometheus
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Save the file. Now, we can run Prometheus as a system service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start prometheus
-```
-
-```cpp
-sudo systemctl enable prometheus
-```
-
-Prometheus should now be running. To make sure, we can check with:
-
-```cpp
-systemctl status prometheus
-```
-
-which should produce something like:
-
-```cpp
-● prometheus.service - Prometheus
-     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
-     Active: active (running) since Wed 2020-04-01 19:23:53 CEST; 5 months 12 days ago
-       Docs: https://prometheus.io/docs/introduction/overview/
-   Main PID: 1767 (prometheus)
-      Tasks: 12 (limit: 9255)
-     CGroup: /system.slice/prometheus.service
-             └─1767 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templa>
-
-Sep 13 13:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:04.744Z caller=head.go:792 component=tsdb msg="Head GC completed" duration=13.6>
-Sep 13 13:00:05 ubuntu prometheus[1767]: level=info ts=2020-09-13T11:00:05.263Z caller=head.go:869 component=tsdb msg="WAL checkpoint complete" first=9>
-Sep 13 15:00:04 ubuntu prometheus[1767]: level=info ts=2020-09-13T13:00:04.776Z caller=compact.go:495 component=tsdb msg="write block" mint=15999912000>
+Checking environment...
+Found arm64 architecture...
+Prometheus install archive found:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+Attempting to download:
+https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
+prometheus.tar.gz                           100%[=========================================================================================>]  65.11M   123MB/s    in 0.5s
+2021-11-05 14:16:11 URL:https://github-releases.githubusercontent.com/6838921/a215b0e7-df1f-402b-9541-a3ec9d431f76?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T141610Z&X-Amz-Expires=300&X-Amz-Signature=72a8ae4c6b5cea962bb9cad242cb4478082594b484d6a519de58b8241b319d94&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=6838921&response-content-disposition=attachment%3B%20filename%3Dprometheus-2.31.0.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [68274531/68274531] -> "prometheus.tar.gz" [1]
 ...
 ```
-
-You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
-
-{% hint style="warning" %}
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on**.**
-{% endhint %}
-
-## Install Grafana
-
-To set up Grafana project repositories with Ubuntu:
-
-```cpp
-sudo apt-get install -y apt-transport-https
+追加のパッケージのインストールの確認を求められる場合があります。その場合はインストールしてください。スクリプトの実行は、Prometheusが正しくインストールされているかを確認する手順で終了します。やってみましょう。以下を実行してください。
+```bash
+sudo systemctl status prometheus
 ```
 
-```cpp
-sudo apt-get install -y software-properties-common wget
+次のような出力になるはずです。
+
+```text
+● prometheus.service - Prometheus
+Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
+Active: active (running) since Fri 2021-11-12 11:38:32 UTC; 17min ago
+Docs: https://prometheus.io/docs/introduction/overview/
+Main PID: 548 (prometheus)
+Tasks: 10 (limit: 9300)
+Memory: 95.6M
+CGroup: /system.slice/prometheus.service
+└─548 /usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus --web.console.templates=/etc/prometheus/con>
+
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.644Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=81 maxSegment=84
+Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z caller=head.go:590 level=info component=tsdb msg="WAL segment loaded" segment=82 maxSegment=84
 ```
 
-```cpp
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+`active (running)`状態に注意してください（`q`を押して終了）。また、`http://your-node-host-ip:9090/`で利用できるPrometheusウェブインターフェースも確認できます。
+
+{% hint style="warning" %}ファイアーウォールが機能している場合は、`sudo ufw allow 9090/tcp`を行い、そして／あるいは、ノードがクラウドインスタンス上で実行されている場合は、セキュリティ設定を調整し、ポート9090への接続を許可する必要があります。AWSの場合は、[こちら](setting-up-an-avalanche-node-with-amazon-web-services-aws.md#f8df)を確認してください。公共のインターネット上では、必ず自分のIPのみが接続できるように設定してください。{% endhint %}
+
+すべてが完了したら次に進みましょう。
+
+## ステップ2：Grafanaをインストールする<a id="grafana"></a>
+
+スクリプトを実行し、2番目のステップを実行してください。
+
+```bash
+./monitoring-installer.sh --2
 ```
 
-```cpp
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+このような出力が生成されます。
+
+```text
+AvalancheGo monitoring installer
+--------------------------------
+STEP 2: Installing Grafana
+
+OK
+deb https://packages.grafana.com/oss/deb stable main
+Hit:1 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal InRelease
+Get:2 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-updates InRelease [114 kB]
+Get:3 http://us-east-2.ec2.ports.ubuntu.com/ubuntu-ports focal-backports InRelease [101 kB]
+Hit:4 http://ppa.launchpad.net/longsleep/golang-backports/ubuntu focal InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [114 kB]
+Get:6 https://packages.grafana.com/oss/deb stable InRelease [12.1 kB]
+...
 ```
-
-To install Grafana:
-
-```cpp
-sudo apt-get update
-```
-
-```cpp
-sudo apt-get install grafana
-```
-
-To configure it as a service:
-
-```cpp
-sudo systemctl daemon-reload
-```
-
-```cpp
-sudo systemctl start grafana-server
-```
-
-```cpp
-sudo systemctl enable grafana-server.service
-```
-
-To make sure it’s running properly:
+正しく実行されているいるかを確認するには、次を実行します。
 
 ```text
 sudo systemctl status grafana-server
 ```
 
-which should show grafana as `active`. Grafana should now be available at `http://your-node-host-ip:3000/`
+これには、再びgrafanaが`active`と表示されている必要があります。これで、Grafanaはブラウザから`http://your-node-host-ip:3000/`で利用できるようになっているはずです。ユーザーネーム：admin、パスワード：adminでログインしてください。新しい、安全なパスワードを設定するように求められます。パスワードを設定してください。
 
 {% hint style="warning" %}
-You may need to do `sudo ufw allow 3000/tcp` if the firewall is on**.**
-{% endhint %}
+ファイアーウォールがオンになっている場合、`sudo ufw allow 3000/tcp`を行い、そして／またはクラウドインスタンスの設定を調整し、ポート3000に接続を許可する必要があります。公共のインターネット上では、必ず自分のIPのみが接続できるように設定してください。{% endhint %}
 
-Log in with username/password admin/admin and set up a new, secure password. Now we need to connect Grafana to our data source, Prometheus.
+PrometheusとGrafanaがインストールされました。次のステップに進む準備ができました。
 
-On Grafana’s web interface:
+## ステップ3：node\_exporterを設定する<a id="exporter"></a>
 
-* Go to Configuration on the left-side menu and select Data Sources.
-* Click Add Data Source
-* Select Prometheus.
-* In the form, enter the name \(Prometheus will do\), and `http://localhost:9090` as the URL.
-* Click `Save & Test`
-* Check for “Data source is working” green message.
+AvalancheGoのメトリックに加えて、マシン自体のモニタリングを設定しましょう。そうすれば、CPU、メモリ、ネットワーク、ディスクの使用量を確認し、どのような異常でも認識できます。それには、Prometheusプラグインであるnode\_exporterを使用します。
 
-## Set up node\_exporter
+スクリプトを実行して、3番目のステップを実行します。
 
-In addition to metrics from AvalancheGo, let’s set up up monitoring of the machine itself, so we can check CPU, memory, network and disk usage and be aware of any anomalies. For that, we will use node\_exporter, a Prometheus plugin.
-
-Get the latest version with:
-
+```bash
+./monitoring-installer.sh --3
+```
+出力は、次のようになります。
 ```text
-curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 |  cut -d '"' -f 4 | wget -qi -
+AvalancheGo monitoring installer
+--------------------------------
+STEP 3: Installing node_exporter
+
+Checking environment...
+Found arm64 architecture...
+Dowloading archive...
+https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
+node_exporter.tar.gz                        100%[=========================================================================================>]   7.91M  --.-KB/s    in 0.1s
+2021-11-05 14:57:25 URL:https://github-releases.githubusercontent.com/9524057/6dc22304-a1f5-419b-b296-906f6dd168dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20211105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211105T145725Z&X-Amz-Expires=300&X-Amz-Signature=3890e09e58ea9d4180684d9286c9e791b96b0c411d8f8a494f77e99f260bdcbb&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=9524057&response-content-disposition=attachment%3B%20filename%3Dnode_exporter-1.2.2.linux-arm64.tar.gz&response-content-type=application%2Foctet-stream [8296266/8296266] -> "node_exporter.tar.gz" [1]
+node_exporter-1.2.2.linux-arm64/LICENSE
 ```
-
-change `linux-amd64` if you have a different architecture \(RaspberryPi is `linux-arm64`, for example\). Untar and move the executable:
-
-```cpp
-tar xvf node_exporter-1.0.1.linux-amd64.tar.gz
-```
-
-```cpp
-sudo mv node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin
-```
-
-```cpp
-node_exporter --version
-```
-
-Then we add node\_exporter as a service. Do:
-
-```cpp
-sudo nano /etc/systemd/system/node_exporter.service
-```
-
-\(or open that file in the text editor of your choice\) and populate it with:
-
-```cpp
-[Unit]
-Description=Prometheus
-Documentation=https://github.com/prometheus/node_exporter
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Type=simple
-User=prometheus
-Group=prometheus
-ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/node_exporter \
-    --collector.cpu \
-    --collector.diskstats \
-    --collector.filesystem \
-    --collector.loadavg \
-    --collector.meminfo \
-    --collector.filefd \
-    --collector.netdev \
-    --collector.stat \
-    --collector.netstat \
-    --collector.systemd \
-    --collector.uname \
-    --collector.vmstat \
-    --collector.time \
-    --collector.mdadm \
-    --collector.zfs \
-    --collector.tcpstat \
-    --collector.bonding \
-    --collector.hwmon \
-    --collector.arp \
-    --web.listen-address=:9100 \
-    --web.telemetry-path="/metrics"
-
-[Install]
-WantedBy=multi-user.target
-```
-
-This configures node\_exporter to collect various data we might find interesting. Start the service, and enable it on boot:
-
-```cpp
-sudo systemctl start node_exporter
-```
-
-```cpp
-sudo systemctl enable node_exporter
-```
-
+再度、サービスが正しく実行されていることを確認します。
 ```cpp
 sudo systemctl status node_exporter
 ```
+サービスが実行されている場合、Prometheus、Grafana、node\_exporterはすべて連携して動作しているはずです。確認するには、ブラウザで`http://your-node-host-ip:9090/targets`のPrometheusウェブインターフェースにアクセスします。3つのターゲットが有効になっています。
 
-Now, we’re ready to tie it all together.
+* Prometheus
+* AvalancheGo
+* avalanchego-machine
 
-## Configure AvalancheGo and node\_exporter Prometheus jobs
+そのすべてに`UP`として`State`があることを確認します。
 
-Make sure that your AvalancheGo node is running with appropriate [command line arguments](../../references/command-line-interface.md). The metrics API must be enabled \(by default, it is\). If you use CLI argument `--http-host` to make API calls from outside of the host machine, make note of the address at which APIs listen.
-
-We now need to define an appropriate Prometheus job. Let’s edit Prometheus configuration:
-
-Do :
-
-```cpp
-sudo nano /etc/prometheus/prometheus.yml
-```
-
-\(or open that file in the text editor of your choice\) and append to the end:
-
+{% hint style="info" %}APIポートでTLSが有効になっているAvalancheGoノードを実行する場合、`/etc/prometheus/prometheus.yml`ファイルを手動で編集し、`avalanchego`ジョブを次のように変更する必要があります。
 ```cpp
   - job_name: 'avalanchego'
     metrics_path: '/ext/metrics'
+    scheme: 'https'
+    tls_config:
+    insecure_skip_verify: true
     static_configs:
-      - targets: ['<your-host-ip>:9650']
-
-  - job_name: 'avalanchego-machine'
-    static_configs:
-      - targets: ['<your-host-ip>:9100']
-        labels:
-          alias: 'machine'
+      - targets: ['localhost:9650']
 ```
+スペースに（先頭のスペースにも）注意してください！これを行うには管理者権限が必要です（`sudo`を使用してください）。その後prometheusサービスを`sudo systemctl restart prometheus`で再起動します。
+{% endhint %}
 
-**Indentation is important**. Make sure `-job_name` is aligned with existing `-job_name entry`, and other lines are also indented properly. Make sure you use the correct host IP, or `localhost`, depending on how your node is configured.
+あとは、データソースを設定し、データを表示する実際のダッシュボードをインストールするだけです。
 
-Save the config file and restart Prometheus:
+## ステップ4：ダッシュボード<a id="dashboards"></a>
 
-```cpp
-sudo systemctl restart prometheus
+スクリプトを実行して、ダッシュボードをインストールします。
+
+```bash
+./monitoring-installer.sh --4
 ```
+次のような出力が生成されます。
+```text
+AvalancheGo monitoring installer
+--------------------------------
 
-Check Prometheus web interface on `http://your-node-host-ip:9090/targets`. You should see three targets enabled:
+Downloading...
+Last-modified header missing -- time-stamps turned off.
+2021-11-05 14:57:47 URL:https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/dashboards/c_chain.json [50282/50282] -> "c_chain.json" [1]
+FINISHED --2021-11-05 14:57:47--
+Total wall clock time: 0.2s
+Downloaded: 1 files, 49K in 0s (132 MB/s)
+Last-modified header missing -- time-stamps turned off.
+...
+```
+これにより、GitHubからダッシュボードの最新バージョンがダウンロードされ、Grafanaを設定して読み込み、Prometheusをデータソースとして定義します。ダッシュボードが表示されるまで最大30秒かかる場合があります。ブラウザで`http://your-node-host-ip:3000/dashboards`に移動します。7つのAvalancheダッシュボードが表示されます。
 
-* Prometheus
-* avalanchego
-* avalanchego-machine
+![インポートされたダッシュボード](monitoring-01-dashboards.png)
 
-Open Grafana; you can now create a dashboard using any of those sources. You can also use [the preconfigured dashboards](https://github.com/ava-labs/node-monitoring/tree/master/dashboards).
+タイトルをクリックして「Avalanche Main Dashboard（Avalanche メインダッシュボード）」を選択します。ロードが行われ、次のように表示されます。
 
-To import the preconfigured dashboard:
+![メインダッシュボード](monitoring-02-main-dashboard.png)
 
-* Open Grafana’s web interface
-* Click `+` on the left toolbar
-* Select `Import JSON` and then upload the JSON file
+一部のグラフが完全に表示されるまで、時間がかかる場合があります。これは、正しくレンダリングするために一連のデータポイントを必要とするためです。
 
-That’s it! You may now marvel at all the things your node does. Woohoo!
+ノードに関する最も重要な情報が一覧表示されているため、メインダッシュボードをブックマークすることができます。すべてのダッシュボードには、最初の行に他のすべてへのリンクがあるため、簡単に移動することができます。
 
+## 更新
+
+利用可能なノードのメトリックは常に更新され、新しいノードが追加され、古くなったノードが削除されます。そのため、随時、特にパネル上にデータがないことに気づいた場合にはダッシュボードを更新してください。ダッシュボードの更新は簡単です。引数なしでスクリプトを実行するだけです。そうすれば、利用可能な最新バージョンでダッシュボードが更新されます。Grafanaでダッシュボードを更新するには最大30秒許可します。
+
+## まとめ
+
+スクリプトを使用したノードモニタリングのインストールは簡単です。これにより、ノードがどのように動作しており、何が起こっているのかを把握することができます。それに素敵なグラフです！
+
+このチュートリアルについてのフィードバックや、スクリプトやステップを行うのに問題がある場合は[Discord](https://chat.avalabs.org)上でメッセージをお送りください。
