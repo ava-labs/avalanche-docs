@@ -6,19 +6,19 @@ If you want to use the Avalanche address you created earlier, you need to use th
 
 The Avalanche Ledger wallet app is available via [Ledger Live](https://www.ledger.com/ledger-live).
 
-## How to Set Up Avalanche on Ledger Live {#1c80}
+## How to Set Up Avalanche on Ledger Live
 
 First, you’ll need to install [Ledger Live](https://www.ledger.com/ledger-live). There’s a download for MacOS, Windows and Linux as well as iOS and Android.
 
 :::danger
-Make sure you have the latest version of the Ledger Live application before proceeding. Older versions may not show the latest device firmware and Avalanche app version. The latest Ledger Live app version at the time of writing is 2.26.1.
+Make sure you have the latest version of the Ledger Live application before proceeding. Older versions may not show the latest device firmware and Avalanche app version. The latest Ledger Live app version at the time of writing is 2.36.3. Also please make sure that the latest firmware has been installed on the ledger device. 
 :::
 
-After successfully installing the app run it. Go to the "Manager" tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter "Avalanche". Confirm that the Avalanche app is v0.5.2 (or greater), and click the "Install" button.
+After successfully installing the app run it. Go to the "Manager" tab, and allow device management by pressing both buttons on the device. In the App Catalog search field enter "Avalanche". Confirm that the Avalanche app is v0.5.9 (or greater), and click the "Install" button.
 
 ![Avalanche Ledger app install button](/img/ledger-06-live-install.png)
 
-You can confirm the installation was successful by going to the "Apps installed" tab where you should see Avalanche v0.5.2.
+You can confirm the installation was successful by going to the "Apps installed" tab where you should see Avalanche v0.5.9.
 
 ![Avalanche Ledger app install button](/img/ledger-07-live-version.png)
 
@@ -34,7 +34,7 @@ If you have more than one app installed on the device, use left and right button
 
 ![Avalanche app](/img/ledger-04-app-start.png)
 
-Press both buttons to start the app. You should land on the "Avalanche" app screen where you can confirm that the app is version 0.5.2 (or greater).
+Press both buttons to start the app. You should land on the "Avalanche" app screen where you can confirm that the app is version 0.5.9 (or greater).
 
 ![App version](/img/ledger-05-app-version.png)
 
