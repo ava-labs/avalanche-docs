@@ -41,6 +41,8 @@ const sidebars = {
             'learn/platform-overview/transaction-fees'
           ],
         },
+        'learn/avalanche-bridge-faq',
+        'learn/setup-your-ledger-nano-s-with-avalanche',
         {
           type: 'link',
           label: 'Blockchain Basic', // The link label
@@ -51,7 +53,7 @@ const sidebars = {
           label: 'FAQ', // The link label
           href: 'https://support.avax.network/en/', // The external URL
         },
-        'learn/avalanche-bridge-faq',
+
         {
           type: 'link',
           label: 'Forum', // The link label
@@ -109,7 +111,6 @@ const sidebars = {
                 'build/tutorials/platform/fund-a-local-test-network',
                 'build/tutorials/platform/integrate-exchange-with-avalanche',
                 'build/tutorials/platform/launch-your-ethereum-dapp',
-                'build/tutorials/platform/setup-your-ledger-nano-s-with-avalanche',
                 'build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain',
                 'build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain',
               ],
