@@ -108,7 +108,7 @@ You can create a network where nodes are running different binaries -- just prov
 
 After adding a node, you may want to call the network's `Healthy` method again and wait until the new node is healthy before making API calls to it.
 
-### Creating Custom Networks
+## Creating Custom Networks
 
 To create custom networks, pass a custom config (the second parameter) to the `local.NewNetwork(logging.Logger, network.Config)` function. The config defines the number of nodes when the network starts, the genesis state of the network, and the configs for each node.
 
