@@ -2,7 +2,7 @@
 
 The Avalanche Network Runner allows a user to define, create and interact with a network of Avalanche nodes. It can be used for development and testing.
 
-**Note that this tool is not for running production nodes.**
+**Note that this tool is not for running production nodes, and that because it is being heavily developed right now, documentation might differ slightly from the actual code.**
 
 ## Installation
 
@@ -12,7 +12,7 @@ That repository's README details the tool.
 
 Clone the repository with:
 
-```
+```sh
 git clone https://github.com/ava-labs/avalanche-network-runner.git
 ```
 
@@ -31,11 +31,7 @@ The [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) pa
 
 Please find examples of usage in the [examples](https://github.com/ava-labs/avalanche-network-runner/tree/main/examples) subdirectory.
 
-## Supported Backends
-
-As you can see in the README, a `Network` interface is exposed. There are two implementations of this interface that you may use. One is the [local](https://github.com/ava-labs/avalanche-network-runner/tree/main/local) implementation where each node runs in an isolated process on your machine. The other is the [Kubernetes](https://github.com/ava-labs/avalanche-network-runner/tree/main/k8s) implementation where each node runs in its own Kubernetes pod.
-
-## Local Backend
+## Run an Example
 
 The simplest and most straightforward way to use the Avalanche Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specifications.**
 
@@ -110,6 +106,7 @@ To create custom networks, pass a custom config (the second parameter) to the `l
 
 Please refer to [NetworkConfig](https://github.com/ava-labs/avalanche-network-runner#network-creation) for more details.
 
+<!--- TODO uncomment this when we suport K8s better
 ## Kubernetes Backend
 
 It's possible to create a network with a Kubernetes backend, offering higher flexibility and scalability in defining and running a development and test network.
@@ -181,3 +178,4 @@ To run a custom network in this way, the executable which will run this code nee
 Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script for doing this is at `examples/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f examples/k8s/svc-rbac.yaml`. Once again, make sure namespaces match if customizing.
  
 Please note one more time that there are multitudes of ways about how to deploy and configure Kubernetes networks. We provide here only a couple of examples. **None of these examples are meant to be used in production, and the Avalanche Network runner is not meant to run production nodes.**
+-->
