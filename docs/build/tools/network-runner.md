@@ -33,9 +33,17 @@ Please find examples of usage in the [examples](https://github.com/ava-labs/aval
 
 ## Run an Example
 
-The simplest and most straightforward way to use the Avalanche Network Runner is to use the local implementation. When you create a network with this tool, each node runs in a process on your machine. **Please note that the maximum size and performance of this network depend on your machine's specifications.**
+An example can be found at [examples/local/fivenodenetwork/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/fivenodenetwork/main.go). It creates a network of 5 nodes, waits for the nodes to become healthy and then waits for the user to terminate the program with a SIGINT (`CTRL + C`) or SIGTERM.
 
-An example can be found at [examples/local/indepth/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/indepth/main.go). It creates a network of 5 nodes, performs some simple API calls, and waits for the user to terminate the program with a SIGINT or SIGTERM.
+To run this example, do:
+
+```sh
+go run examples/local/fivenodenetwork/main.go
+```
+
+## Using Avalanche Network as a Library
+
+The Avalanche Network Runner is meant to be imported into your programs so that you can use it to programatically start, interact with and stop Avalanche networks. For an example of using the Network Runner in a program, see the code in the example [above](#run-an-example).
 
 Creating a network is as simple as:
 
