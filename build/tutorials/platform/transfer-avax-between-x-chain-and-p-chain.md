@@ -1,29 +1,94 @@
-# Transfer AVAX Between X-Chain, P-Chain, and C-Chain
+# Transférer de l'AVAX entre la X-Chain et la P-Chain
 
 ## Introduction
 
-AVAX tokens exist on both the X-Chain, where they can be traded, and the P-Chain, where they can be provided as a stake when validating the Primary Network. Avalanche supports **atomic swaps** of AVAX between the X-Chain and P-chain \(in the future, Avalanche will support more generic atomic swaps between chains\). In this tutorial, we’ll send AVAX tokens between the X-Chain, P-Chain, and C-Chain.
+Les jetons AVAX existent sur la X-Chain, où ils peuvent être échangés, sur la P-Chain, où ils peuvent être fournis en tant que participation lors de la validation du réseau principal, et sur la C-Chain, où ils peuvent être utilisés dans des contrats intelligents ou pour payer le gaz. Avalanche prend en charge le mouvement d'AVAX entre ces chaînes, et à l'avenir, Avalanche prendra en charge des échanges atomiques plus génériques entre les chaînes. Dans ce tutoriel, nous enverrons des jetons AVAX entre la X-Chain et la P-Chain.
 
-## Requirements
+## Exigences
 
-You've completed [Getting Started](../../getting-started.md) and are familiar with the [Avalanche's architecture](../../../learn/platform-overview/).
+Vous avez complété [Démarrer](../nodes-and-staking/run-avalanche-node.md) et vous connaissez l'[architecture d'Avalanche](../../../learn/platform-overview/).
 
-## Export AVAX from the X-Chain to the P-Chain
+Afin d'envoyer de l'AVAX, vous devez avoir du AVAX ! Vous pouvez obtenir le vrai AVAX en l'achetant sur un échange, ou vous pouvez obtenir l’AVAX du tesnet depuis le F[aucet testnet AVAX,](https://faucet.avax-test.network) qui est un moyen gratuit et facile de jouer avec Avalanche.
 
-In order to send AVAX, you need to have some AVAX! Use the [AVAX Test Faucet](https://faucet.avax-test.network) to send some AVAX to an X-Chain address you hold.
+## Transférer de l'AVAX en utilisant le portefeuille web
 
-To send the AVAX, call the X-Chain’s [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) method.
+Le moyen le plus simple de transférer de l'AVAX entre les chaînes est d'utiliser [le portefeuille Avalanche](https://wallet.avax.network/), qui est un moyen non custodial et sécurisé d'accéder et de déplacer de l'AVAX.
 
-Your call should look like this:
+Le code source du portefeuille Avalanche peut être trouvé [ici](https://github.com/ava-labs/avalanche-wallet).
 
-```text
+### Étape 1 - Ouvrez le portefeuille Avalanche
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-01-login.png)
+
+Sélectionnez **Accéder** au portefeuille pour entrer dans votre portefeuille. Pour connecter le portefeuille à un réseau autre que le réseau principal d'Avalanche, sélectionnez **Mainnet** et choisissez le réseau auquel vous connecter.
+
+### Étape 2 - Connectez-vous à votre portefeuille
+
+Vous pouvez accéder à votre portefeuille en utilisant la clé privée, la phrase clé mnémonique, le fichier keystore ou Ledger Nano S.
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-02-access.png)
+
+Après une connexion réussie, vous verrez votre solde, votre portefeuille d'actifs et diverses autres informations.
+
+### Étape 3 - Accédez à l'onglet Cross Chain
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-03-earn.png)
+
+La fonctionnalité de transfert de jetons entre les chaînes se trouve sur l'onglet **Cross Chain**.
+
+### Étape 4 - Introduisez un montant à transférer
+
+Vous serez présenté avec un choix pour **la chaîne source** et **la chaîne de destination**. Sélectionnez X-Chain et P-Chain, respectivement. Vous verrez vos soldes X et P et un champ de saisie pour saisir le montant à transférer de la chaîne source à la chaîne de destination.
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-05-x-p.png)
+
+Introduisez le montant que vous souhaitez transférer de la X-Chain à la P-Chain.
+
+### Étape 5 - Confirmez la transaction
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-06-confirm.png)
+
+Appuyez sur **Confimer**, puis **sur Transférer** pour lancer le transfert.
+
+### Étape 6 - C'est fait !
+
+Un transfert inter-chaîne est un processus en deux étapes : d'abord une transaction pour exporter les fonds de la X-Chain, et une autre pour les importer dans la P-Chain. Le portefeuille fera les deux et montrera sa progression tout en le faisant.
+
+![Image pour la publication](../../../.gitbook/assets/wallet-x2p-07-transfer.png)
+
+C'est tout ! Vous avez transféré de l'AVAX de la X-Chain vers la P-Chain ! Vous pouvez désormais les utiliser pour valider ou déléguer sur le réseau Avalanche.
+
+### Transfert de la P-Chain à la X-Chain
+
+Pour renvoyer l'AVAX à la X-Chain, vous devez effectuer le transfert dans la direction opposée.
+
+Permutez la chaîne source et la chaîne de destination en les sélectionnant dans le menu déroulant **Source** et **Destination**. Le reste du processus est le même : saisissez le montant, validez et transférez.
+
+## Transférer de la X-Chain à la P-Chain avec des appels API
+
+Si vous créez une application sur le réseau Avalanche, vous souhaiterez peut-être effectuer le transfert par programme dans le cadre d'une fonctionnalité plus large. Vous pouvez le faire en appelant les API appropriées sur un nœud AvalancheGo. Le reste du tutoriel suppose que vous avez accès à un nœud AvalancheGo, aux jetons AVAX sur la X-Chain et aux informations d'identification de l'utilisateur [créé](../../avalanchego-apis/keystore-api.md#keystorecreateuser) et stockées dans le keystore du nœud.
+
+Tous les exemples d'appels d'API ci-dessous supposent que le nœud s'exécute localement (c'est-à-dire écoute sur `127.0.0.1`). Le nœud peut être connecté au réseau principal, à un réseau de test ou à un réseau local. Dans chaque cas, les appels et les réponses de l'API doivent être identiques, à l'exception des formats d'adresse. Le nœud n'a pas besoin d'être local ; vous pouvez passer des appels vers un nœud hébergé ailleurs.
+
+Comme vous l'avez peut-être remarqué lors du transfert d'AVAX à l'aide du portefeuille Avalanche, un transfert inter-chaîne est une opération à deux transactions :
+
+* Exporter de l'AVAX à partir de la X-Chain
+* Importer de l'AVAX sur la P-Chain
+
+### Étape 1 - Exporter de l'AVAX à partir de la X-Chain
+
+Pour exporter AVAX, appelez la [`avm.export`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-export)méthode  de la X-Chain avec  `AVAX`assetID.
+
+Votre appel doit ressembler à ceci :
+
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.exportAVAX",
+    "method" :"avm.export",
     "params" :{
         "to":"P-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",
-        "destinationChain": "P",
+        "assetID": "AVAX",
         "amount": 5000000,
         "changeAddr": "X-avax1turszjwn05lflpewurw96rfrd3h6x8flgs5uf8",
         "username":"myUsername",
@@ -32,15 +97,15 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address you hold and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-createaddress) for instructions on creating a new P-Chain address\).
+Où `to` est l'adresse d'une adresse P-Chain que vous détenez et  `changeAddr`est l'adresse à laquelle envoyer toute modification. Vous pouvez laisser `changeAddr` vide ; si vous le faites, la modification sera retournée à une adresse contrôlée par votre utilisateur. (Voir [ici](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) pour obtenir des instructions sur la création d'une nouvelle adresse P-Chain.)
 
-Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `1,000,000` nAVAX. Then, the above export actually consumes `6,000,000` nAVAX; `5,000,000` goes to the P-Chain and `1,000,000` is burned as a transaction fee.
+Notez que vous paierez des frais de transaction pour les opérations d'exportation et d'importation. Dans cet exemple, supposons que les frais de transaction sont de `.001` AVAX. Ensuite, l'exportation ci-dessus consomme en fait `.006`AVAX ; `.005` vont à la P-Chain et  `.001`sont dépensés en frais de transaction.
 
-Make sure that the amount that you’re sending exceeds the transaction fee. Otherwise, when you import AVAX on the P-Chain, it will consume the transaction fee, and you’ll end up with _less_ AVAX on the P-Chain.
+Assurez-vous que le montant que vous envoyez dépasse les frais de transaction. Sinon, lorsque vous importez l'AVAX sur la P-Chain, les frais de transaction seront consommés et vous vous retrouverez avec _moins_ d'AVAX sur la P-Chain.
 
-The response should look like this:
+La réponse devrait ressembler à ça :
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -51,9 +116,9 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-gettxstatus):
+Nous pouvons vérifier que cette transaction a été acceptée en appelant [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-gettxstatus) :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.getTxStatus",
@@ -64,9 +129,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Which shows our transaction is accepted:
+Ce qui montre que notre transaction est acceptée :
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -76,9 +141,9 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+Nous pouvons également appeler [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) pour vérifier que l'AVAX a été déduit d'une adresse détenue par notre utilisateur :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -90,15 +155,15 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-The amount deducted is the exported amount \(`5,000,000` in this example\) plus the transaction fee. If your user controls multiple X-Chain addresses, AVAX may have been sent from any combination of them.
+Le montant déduit est le montant exporté (`.005` AVAX dans cet exemple) plus les frais de transaction. Si votre utilisateur contrôle plusieurs adresses X-Chain, l'AVAX peut avoir été envoyé à partir de n'importe quelle combinaison d'entre elles.
 
-## Import AVAX to the P-Chain from the X-Chain
+### Étape 2 - Importez AVAX dans la P-Chain
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-importavax) method to finish the transfer.
+Notre transfert n'est pas encore terminé. Nous devons appeler la méthode [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) de P-Chain pour terminer le transfert.
 
-Your call should look like this:
+Votre appel doit ressembler à ceci :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
@@ -113,9 +178,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-This returns the transaction ID:
+Cela renvoie l'ID de transaction :
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -126,9 +191,9 @@ This returns the transaction ID:
 }
 ```
 
-We can check that the transaction was accepted with:
+Nous pouvons vérifier que la transaction a été acceptée avec :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -139,9 +204,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
+Cela devrait `Committed`, ce qui signifie que le transfert est terminé. Nous pouvons également vérifier le solde de l'adresse avec :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBalance",
@@ -152,9 +217,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
-The response should look like this:
+La réponse devrait ressembler à ça :
 
-```text
+```cpp
 {
     "jsonrpc": "2.0",
     "result": {
@@ -170,15 +235,22 @@ The response should look like this:
 }
 ```
 
-Note that the balance we see is the amount exported from the X-Chain \(`5,000,000`\) less the transaction fee \(`1,000,000` in this example\). Now, we can use the AVAX held by this P-Chain address to provide a stake in order to validate the Primary Network.
+Notez que le solde que nous voyons est le montant exporté de la X-Chain (`.004` AVAX) moins les frais de transaction (`.001` AVAX dans cet exemple.) Maintenant, nous pouvons utiliser l'AVAX détenu par cette adresse P-Chain pour fournir une mise afin de valider le réseau primaire.
 
-## Export AVAX from the P-Chain to the X-Chain
+## Transfert de la P-Chain à la X-Chain par programmation
 
-Now, let’s move AVAX on the P-Chain back to the X-Chain.
+Maintenant, déplaçons AVAX sur la P-Chain vers la X-Chain.
 
-To do so, call [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax):
+Comme précédemment, il s'agit également d'une opération à deux transactions :
 
-```text
+* Exporter depuis la P-Chain
+* Importer dans la X-Chain
+
+### Étape 1 - Exporter de l'AVAX à partir de la P-Chain
+
+Pour ce faire, appelez [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax) :
+
+```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
@@ -193,19 +265,19 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-where `to` is the X-Chain address the AVAX is being sent to.
+Où `to` est l'adresse X-Chain à laquelle l'AVAX est envoyé.
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+Cela renvoie l'ID de transaction et nous pouvons vérifier que la transaction a été validée avec un autre appel à [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Encore une fois, assurez-vous que le montant que vous envoyez dépasse les frais de transaction.
 
-## Import AVAX to the X-Chain from the P-Chain
+### Étape 1 - Importer de l'AVAX vers X-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax):
+Pour terminer notre transfert de la P-Chain vers la X-Chain, appelez [`avm.import`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-import) :
 
-```text
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.importAVAX",
+    "method" :"avm.import",
     "params" :{
         "to":"X-avax1fjn5rffqvny7uk3tjegjs6snwjs3hhgcpcxfax",
         "sourceChain":"P",
@@ -216,188 +288,13 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`](https://docs.avax-dev.network/build/apis/platform-chain-p-chain-api#platform-exportavax).
+Notez que `to` est la même adresse spécifiée dans notre appel à [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
 
-Just as before, we can call [`avm.getBalance`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-getbalance) to verify the funds were received. The balance should have increased by `3,000,000` minus the transaction fee.
+Comme auparavant, nous pouvons appeler [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.md#avm-getbalance) pour vérifier que les fonds ont été reçus. Le solde aurait dû augmenter de `.003` AVAX moins les frais de transaction.
 
-## Export AVAX from the X-Chain to the C-Chain
+## Récapitulatif
 
-In addition to sending AVAX between the X-Chain and P-Chain, you can also send AVAX between the X-Chain and the C-Chain and back. The X-Chain uses [Bech32](http://support.avalabs.org/en/articles/4587392-what-is-bech32) addresses and the C-Chain uses hex Ethereum Virtual Machine \(EVM\) addresses. There is no way to convert the address from one format to the other since they are both derived from a private key using a one-way cryptographic function.
+C'est fini ! Vous pouvez maintenant permuter AVAX dans les deux sens entre la X-Chain et la P-Chain à la fois en utilisant le portefeuille Avalanche et en appelant les appels API appropriés sur un nœud Avalanche.
 
-In order to get around this, you can export a private key from the X-Chain and then import it to the C-Chain. This way, you can use the X-Chain address and change the X- prefix to a C- prefix in order to get the correct Bech32 address to use for the C-Chain.
-
-First, export a private key from the X Chain:
-
-```text
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avm.exportKey",
-    "params" :{
-        "username" :"myUsername",
-        "password":"myPassword",
-        "address": "X-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-Response:
-
-```text
-{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"
-    }
-}
-```
-
-Now, import the same private key to the C Chain:
-
-```text
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avax.importKey", 
-    "params" :{ 
-        "username" :"myUsername",   
-        "password":"myPassword",    
-        "privateKey":"PrivateKey-2w4XiXxPfQK4TypYqnohRL8DRNTz9cGiGmwQ1zmgEqD9c9KWLq"    
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-The response contains a hex-encoded EVM address:
-
-```text
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "address": "0x5Bf544EF123FE41B262295dBA41c5a9CFA8efDB4"
-    },
-    "id": 1
-}
-```
-
-Now, you can use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.exportAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-exportavax) call:
-
-```text
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avm.exportAVAX", 
-    "params" :{ 
-        "to":"C-avax1jggdngzc9l87rgurmfu0z0n0v4mxlqta0h3k6e",   
-        "destinationChain": "C",    
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to, so can import it directly to an address that you own in MetaMask or another third-party service.
-
-```text
-curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,    
-    "method" :"avax.importAVAX",    
-    "params" :{ 
-        "to":"0x4b879aff6b3d24352Ac1985c1F45BA4c3493A398",  
-        "sourceChain":"X",  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-where `to` is a hex-encoded EVM address of your choice.
-
-The response looks like this:
-
-```text
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "LWTRsiKnEUJC58y8ezAk6hhzmSMUCtemLvm3LZFw8fxDQpns3" 
-    },  
-    "id": 1 
-}
-```
-
-Note: there is no transaction fee for import transactions to the C Chain.
-
-Once your AVAX has been transferred to the C-Chain, you can immediately begin running smart contracts.
-
-{% page-ref page="deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md" %}
-
-## Export AVAX from the C-Chain to the X-Chain
-
-Now, you can move AVAX back from the C-Chain to the X-Chain
-
-```text
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method" :"avax.exportAVAX",
-    "params" :{ 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q",   
-        "amount": 5000000,  
-        "username":"myUsername",    
-        "password":"myPassword" 
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-```
-
-where `to` is the bech32 encoded address of an X-Chain address you hold. Make sure that the amount you export exceeds the transaction fee because both the export and import transactions will charge a transaction fee.
-
-The response should look like this:
-
-```text
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2ZDt3BNwzA8vm4CMP42pWD242VZy7TSWYUXEuBifkDh4BxbCvj"    
-    },  
-    "id": 1 
-}
-```
-
-## Import AVAX to the X-Chain from the C-Chain
-
-Lastly, we can finish up by importing AVAX from the C-Chain to the X-Chain, call [`avm.importAVAX`](https://docs.avax-dev.network/build/apis/exchange-chain-x-chain-api#avm-importavax).
-
-```text
-curl -X POST --data '{  
-    "jsonrpc":"2.0",    
-    "id"     :1,    
-    "method": "avm.importAVAX", 
-    "params": { 
-        "username":"myUsername",    
-        "password":"myPassword",    
-        "sourceChain": "C", 
-        "to":"X-avax1wkmfja9ve3lt3n9ye4qp3l3gj9k2mz7ep45j7q"    
-    }   
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
-```
-
-where `to` is the bech32 encoded address the X-Chain address which you sent the funds to in the previous step.
-
-The response should look like this:
-
-```text
-{   
-    "jsonrpc": "2.0",   
-    "result": { 
-        "txID": "2kxwWpHvZPhMsJcSTmM7a3Da7sExB8pPyF7t4cr2NSwnYqNHni"    
-    },  
-    "id": 1 
-}
-```
-
-## Wrapping Up
-
-That’s it! Now, you can swap AVAX back and forth between the X-Chain and P-Chain. In the future, Avalanche will support more generalized atomic swaps between chains.
+Vous pouvez maintenant utiliser les jetons sur la P-Chain pour [ajouter un nœud en tant que validateur](../nodes-and-staking/add-a-validator.md) sur le réseau principal.
 
