@@ -29,16 +29,16 @@ The basic pattern for using the Avalanche Network Runner is:
 
 The [api](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) package contains client code that allows the user to make API calls to Avalanche nodes within the network.
 
-Please find examples of usage in the [examples](https://github.com/ava-labs/avalanche-network-runner/tree/main/examples) subdirectory.
+Please find examples of usage in the [programs](https://github.com/ava-labs/avalanche-network-runner/tree/main/programs) subdirectory.
 
 ## Run an Example
 
-An example can be found at [examples/local/fivenodenetwork/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/examples/local/fivenodenetwork/main.go). It creates a network of 5 nodes, waits for the nodes to become healthy and then waits for the user to terminate the program with a SIGINT (`CTRL + C`) or SIGTERM.
+An example can be found at [programs/local/fivenodenetwork/main.go](https://github.com/ava-labs/avalanche-network-runner/blob/main/programs/local/fivenodenetwork/main.go). It creates a network of 5 nodes, waits for the nodes to become healthy and then waits for the user to terminate the program with a SIGINT (`CTRL + C`) or SIGTERM.
 
 To run this example, do:
 
 ```sh
-go run examples/local/fivenodenetwork/main.go
+go run programs/local/fivenodenetwork/main.go
 ```
 
 ## Using Avalanche Network as a Library
@@ -119,7 +119,7 @@ Please refer to [NetworkConfig](https://github.com/ava-labs/avalanche-network-ru
 
 It's possible to create a network with a Kubernetes backend, offering higher flexibility and scalability in defining and running a development and test network.
 
-An example can be found at `examples/k8s/main.go`. This example program creates a network of five nodes, each of which runs in a Kubernetes pod.
+An example can be found at `programs/k8s/main.go`. This example program creates a network of five nodes, each of which runs in a Kubernetes pod.
 
 Note that the Kubernetes backend should only be used by advanced users and requires significantly more setup to use. 
 
@@ -149,7 +149,7 @@ The main difference lies in creating the network definition due to the propertie
 
 The key elements which should be provided are the genesis JSON file, the TLS certificates and keys for the node identity, and optionally configuration files for the AvalancheGo nodes. This is similar to the local backend implementation. 
 
-It is left to the user to implement a means of providing the configuration to the network (reading and parsing files, etc.). `examples/k8s/main.go` provides an example of how to do it.
+It is left to the user to implement a means of providing the configuration to the network (reading and parsing files, etc.). `programs/k8s/main.go` provides an example of how to do it.
 The Kubernetes-specific information needs to be provided in the `ImplSpecificConfig` of the `network.Config` (describes the network) and the `node.Config` (describes each individual node) structs.
 For Kubernetes, each of these are represented as `Avalanchego` types from the AvalancheGo Operator package `github.com/ava-labs/avalanchego-operator`, which provides the interface to Kubernetes. The `k8s.ObjectSpec` acts as a helper layer to create such objects. Therefore, to create Kubernetes node definitions compatible with the AvalancheGo Operator, define instances of `k8s.ObjectSpec` for each node and pass these as `ImplSpecificConfig` member to a `node.Config`.
 
@@ -181,9 +181,9 @@ spec := &k8s.ObjectSpec{
 **Note:** It is currently not possible to create a default network without any configuration for Kubernetes. This might be addressed in a future iteration.
 
 **IMPORTANT**
-To run a custom network in this way, the executable which will run this code needs to have access to the Kubernetes cluster. One way to achieve this is to deploy the executable as a pod itself into the cluster. An example script can be found at `examples/k8s/Dockerfile`. Create its image by running `docker build -f ./examples/k8s/Dockerfile -t <IMAGE>:<TAG> .` from the Avalanche Network Runner repository root.  The defaults for these examples are `<IMAGE>=k8s-netrunner` and `<TAG>=alpha`. An example pod definition using these properties can then be deployed to the cluster via `kubectl apply -f examples/k8s/simple-netrunner-pod.yaml`. Make sure the `Namespace` definitions match. If you change any of `IMAGE` or `TAG`, the `simple-netrunner-pod.yaml` file needs to be edited accordingly. Don't forget to edit `DOCKERFILE` if you start customizing.
+To run a custom network in this way, the executable which will run this code needs to have access to the Kubernetes cluster. One way to achieve this is to deploy the executable as a pod itself into the cluster. An example script can be found at `programs/k8s/Dockerfile`. Create its image by running `docker build -f ./programs/k8s/Dockerfile -t <IMAGE>:<TAG> .` from the Avalanche Network Runner repository root.  The defaults for these examples are `<IMAGE>=k8s-netrunner` and `<TAG>=alpha`. An example pod definition using these properties can then be deployed to the cluster via `kubectl apply -f programs/k8s/simple-netrunner-pod.yaml`. Make sure the `Namespace` definitions match. If you change any of `IMAGE` or `TAG`, the `simple-netrunner-pod.yaml` file needs to be edited accordingly. Don't forget to edit `DOCKERFILE` if you start customizing.
 
-Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script for doing this is at `examples/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f examples/k8s/svc-rbac.yaml`. Once again, make sure namespaces match if customizing.
+Finally, to make this work altogether, the pod needs to have itself access to the cluster. An example script for doing this is at `programs/k8s/svc-rbac.yaml`. Apply it by running `kubectl apply -f programs/k8s/svc-rbac.yaml`. Once again, make sure namespaces match if customizing.
  
 Please note one more time that there are multitudes of ways about how to deploy and configure Kubernetes networks. We provide here only a couple of examples. **None of these examples are meant to be used in production, and the Avalanche Network runner is not meant to run production nodes.**
 -->

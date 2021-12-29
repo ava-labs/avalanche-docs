@@ -32,7 +32,7 @@ cd $GOPATH/src/github.com/ava-labs/avalanche-network-runner
 Run the example network configuration:
 
 ```
-go run ./examples/local/fivenodenetwork/main.go
+go run ./programs/local/fivenodenetwork/main.go
 ```
 
 This creates a 5 node network where each node has a randomly generated API port. Note that you may provide configurations to the Avalanche Network Runner so that it uses predefined API ports for each node. Please see the Network Runner's [documentation](../../tools/network-runner.md) for details.
