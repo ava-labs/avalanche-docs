@@ -65,8 +65,8 @@ Avalanche supports the creation of new instances of the Avalanche VM.
 * [Create a BlockChain Running AVM](../../build/tutorials/platform/subnet/create-avm-blockchain.md)
 
 Avalanche also supports creating custom blockchains with virtual machines.
-* [Create a Vitual machine (VM)](../../build/tutorials/platform/subnet/create-a-virtual-machine-vm.md)
-* [Create a Customer Blockchain](../../build/tutorials/platform/create-custom-blockchain.md)
+* [Create a Virtual machine (VM)](../../build/tutorials/platform/subnet/create-a-virtual-machine-vm.md)
+* [Create a Custom Blockchain](../../build/tutorials/platform/create-custom-blockchain.md)
 
 ## Exchange Chain (X-Chain)
 
