@@ -923,9 +923,9 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 +--------------+-------------+-----------------------------------------+
 | subnet_auth  : SubnetAuth  |                  size(subnetAuth) bytes |
 +--------------+-------------+-----------------------------------------+
-              | 74 + size(base_tx) + size(chain_name) + size(fxIDs) + |
-              |            size(genesisData) + size(subnetAuth) bytes |
-+---------------------------------------------------------------------+
+               | 74 + size(base_tx) + size(chain_name) + size(fxIDs) + |
+               |            size(genesisData) + size(subnetAuth) bytes |
++--------------+-------------------------------------------------------+
 ```
 
 ### **Proto Unsigned Create Chain Tx Specification**
