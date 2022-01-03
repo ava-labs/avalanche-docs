@@ -908,24 +908,24 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 ### **Gantt Unsigned Create Chain Tx Specification**
 
 ```text
-+--------------+-------------+-----------------------------------------+
-| base_tx      : BaseTx      |                     size(base_tx) bytes |
-+--------------+-------------+-----------------------------------------+
-| subnet_id    : SubnetID    |                                32 bytes |
-+--------------+-------------+-----------------------------------------+
-| chain_name   : ChainName   |               2 + len(chain_name) bytes |
-+--------------+-------------+-----------------------------------------+
-| vm_id        : VMID        |                                32 bytes |
-+--------------+-------------+-----------------------------------------+
-| fx_ids       : FxIDs       |                   4 + size(fxIDs) bytes |
-+--------------+-------------+-----------------------------------------+
-| genesis_data : GenesisData |             4 + size(genesisData) bytes |
-+--------------+-------------+-----------------------------------------+
-| subnet_auth  : SubnetAuth  |                  size(subnetAuth) bytes |
-+--------------+-------------+-----------------------------------------+
-              | 74 + size(base_tx) + size(chain_name) + size(fx_ids) + |
-              |           size(genesis_data) + size(subnet_auth) bytes |
-+--------------+-------------------------------------------------------+
++--------------+-------------+------------------------------------------+
+| base_tx      : BaseTx      |                      size(base_tx) bytes |
++--------------+-------------+------------------------------------------+
+| subnet_id    : SubnetID    |                                 32 bytes |
++--------------+-------------+------------------------------------------+
+| chain_name   : ChainName   |                2 + len(chain_name) bytes |
++--------------+-------------+------------------------------------------+
+| vm_id        : VMID        |                                 32 bytes |
++--------------+-------------+------------------------------------------+
+| fx_ids       : FxIDs       |                   4 + size(fx_ids) bytes |
++--------------+-------------+------------------------------------------+
+| genesis_data : GenesisData |             4 + size(genesis_data) bytes |
++--------------+-------------+------------------------------------------+
+| subnet_auth  : SubnetAuth  |                  size(subnet_auth) bytes |
++--------------+-------------+------------------------------------------+
+               | 74 + size(base_tx) + size(chain_name) + size(fx_ids) + |
+               |           size(genesis_data) + size(subnet_auth) bytes |
++--------------+--------------------------------------------------------+
 ```
 
 ### **Proto Unsigned Create Chain Tx Specification**
