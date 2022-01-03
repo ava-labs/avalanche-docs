@@ -938,7 +938,7 @@ message CreateChainTx {
     VMID vm_id = 4;                   // 32 bytes
     FxIDs fx_ids = 5;                 // 4 + size(fxIDs) bytes
     GenesisData genesis_data = 6      // 4 + size(genesisData) bytes
-    SubnetAuth subnet_auth = 7;       // 8 + size(subnetAuth) bytes
+    SubnetAuth subnet_auth = 7;       // size(subnetAuth) bytes
 }
 ```
 
