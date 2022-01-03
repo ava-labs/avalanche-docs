@@ -66,7 +66,7 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
 
-`--http-shutdown-wait` (duration): 
+`--http-shutdown-wait` (duration):
 
 Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to 0.
 
@@ -1121,7 +1121,7 @@ As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded 
 
 `validatorOnly` (bool):
 
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../tutorials/platform/subnet/create-a-subnet.md#private-subnets)
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../tutorials/platform/subnets/create-a-subnet.md#private-subnets)
 
 **Consensus Parameters**
 
