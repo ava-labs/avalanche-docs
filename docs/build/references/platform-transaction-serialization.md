@@ -932,13 +932,13 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 
 ```text
 message CreateChainTx {
-    BaseTx base_tx = 1;                      // size(base_tx)
-    SubnetID SubnetID = 2;                   // 32 bytes
-    ChainName ChainName = 3;                 // 2 + len(chain_name) bytes
-    VMID VMID = 4;                           // 32 bytes
-    FxIDs FxIDs = 5;                         // 4 + size(fxIDs) bytes
-    GenesisData GenesisData = 6;             // 4 + size(genesisData) bytes
-    SubnetAuth SubnetAuth = 7;               // 8 + size(subnetAuth) bytes
+    BaseTx base_tx = 1;               // size(base_tx)
+    SubnetID subnet_id = 2;           // 32 bytes
+    ChainName chain_name = 3;         // 2 + len(chain_name) bytes
+    VMID vm_id = 4;                   // 32 bytes
+    FxIDs fx_ids = 5;                 // 4 + size(fxIDs) bytes
+    GenesisData genesis_data = 6      // 4 + size(genesisData) bytes
+    SubnetAuth subnet_auth = 7;       // 8 + size(subnetAuth) bytes
 }
 ```
 
