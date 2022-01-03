@@ -903,7 +903,7 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 * **`VMID`** ID of the VM running on the new chain
 * **`FxIDs`** IDs of the feature extensions running on the new chain
 * **`GenesisData`** Byte representation of genesis state of the new chain
-* **`SubnetAuth`** Auth that will be allowing this validator into the network
+* **`SubnetAuth`** Authorizes this blockchain to be added to this subnet
 
 ### **Gantt Unsigned Create Chain Tx Specification**
 
@@ -950,7 +950,7 @@ Let’s make an unsigned create chain tx that uses the inputs and outputs from t
 * **`SubnetID`**: `24tZhrm8j8GCJRE9PomW8FaeqbgGS4UAQjJnqqn8pq5NwYSYV1`
 * **`ChainName`**: `EPIC AVM`
 * **`VMID`**: `avm`
-* **`FxIDs`**: `0x736563703235366b316678000000000000000000000000000000000000000000`
+* **`FxIDs`**: [`secp256k1fx`]
 * **`GenesisData`**: `11111DdZMhYXUZiFV9FNpfpTSQroysXhzWicG954YAKfkrk3bCEzLVY7gun1eAmAwMiQzVhtGpdR6dnPVcfhBE7brzkJ1r4wzi3dgA8G9Jwc4WpZ6Uh4Dr9aTdw7sFA5cpvCAVBsx6Xf3CB82jwH1gjPZ3WQnnCSKr2reoLtam6TfyYRra5xxXSkZcUm6BaJMW4fKzNP58uyExajPYKZvT5LrQ7MPJ9Fp7ebmYSzXg7YYauNARj`
 * **`SubnetAuth`**: `0x0000000a0000000100000000`
 
