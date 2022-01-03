@@ -915,13 +915,13 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 +-------------+-------------+-----------------------------------------+
 | chain_name  : ChainName   |               2 + len(chain_name) bytes |
 +-------------+-------------+-----------------------------------------+
-| vmID        : VMID        |               size(rewards_owner) bytes |
+| vmID        : VMID        |                                 3 bytes |
 +------------+--------------+-----------------------------------------+
-| fxIDs       : FxIDs       |                       size(FxIDs) bytes |
+| fxIDs       : FxIDs       |                       size(fxIDs) bytes |
 +-------------+-------------+-----------------------------------------+
-| genesisData : GenesisData |                 size(GenesisData) bytes |
+| genesisData : GenesisData |                 size(genesisData) bytes |
 +-------------+-------------+-----------------------------------------+
-| subnetAuth  : SubnetAuth  |                  size(SubnetAuth) bytes |
+| subnetAuth  : SubnetAuth  |                  size(subnetAuth) bytes |
 +-------------+-------------+-----------------------------------------+
                   | 44 + size(stake) + size(rewards_owner) + size(base_tx) bytes |
                   +--------------------------------------------------------------+
@@ -932,12 +932,12 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 ```text
 message CreateChainTx {
     BaseTx base_tx = 1;                      // size(base_tx)
-    SubnetID SubnetID = 2;                 // 44 bytes
-    ChainName ChainName = 3;                         // size(LockedOuts)
-    VMID VMID = 4; // size(rewards_owner)
-    FxIDs FxIDs = 5; // size(rewards_owner)
-    GenesisData GenesisData = 6; // size(rewards_owner)
-    SubnetAuth SubnetAuth = 7; // size(rewards_owner)
+    SubnetID SubnetID = 2;                   // 32 bytes
+    ChainName ChainName = 3;                 // 2 + len(chain_name) bytes
+    VMID VMID = 4;                           // 3 bytes
+    FxIDs FxIDs = 5;                         // size(fxIDs)
+    GenesisData GenesisData = 6;             // size(genesisData)
+    SubnetAuth SubnetAuth = 7;               // size(rewards_owner)
 }
 ```
 
