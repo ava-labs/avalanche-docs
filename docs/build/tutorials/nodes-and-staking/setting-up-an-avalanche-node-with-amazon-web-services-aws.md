@@ -1,3 +1,7 @@
+---
+sidebar_position: 7
+---
+
 # Run an Avalanche Node with Amazon Web Services (AWS)
 
 ## Introduction

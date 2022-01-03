@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Node Backup and Restore
 
 Once you have your node up and running, it's time to prepare for disaster recovery. Should your machine ever have a catastrophic failure due to either hardware or software issues, or even a case of natural disaster, it's best to be prepared for such a situation by making a backup.
@@ -108,6 +112,27 @@ curl -X POST --data '{
 ```
 
 You should see your original NodeID. Restore process is done.
+
+## Database
+
+Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process. In order to do this, you can create a back up of your database using the same method mentioned above (either from local node or remote node using scp). The default location of the database is located at `~/.avalanchego/db`. For `scp` command, you can just replace `.avalanchego/staking` with `.avalanchego/db` in the commands above.
+
+:::warning
+You must stop the Avalanche node before you back up the database.
+:::
+
+After the database has been restored on a new node, use this command to start the node:
+```
+sudo systemctl start avalanchego
+```
+
+Node should now be running from the database on the new instance. To check that everything is in order and that node is not bootstrapping from scratch (which would indicate a problem), use:
+```
+journalctl -u avalanchego -f
+```
+
+Node should be catching up to the network and fetching a small number of blocks before resuming normal operation.
+
 
 ## Summary
 

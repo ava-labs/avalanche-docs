@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Add a Node to the Validator Set
 
 ## Introduction
