@@ -12,7 +12,6 @@
 | [**Create a Custom Blockchain**](create-custom-blockchain.md) | Create custom blockchain with [virtual machine (VM)](../../../learn/platform-overview/README.md#virtual-machines). |
 | [**Avalanche Local Simulator**](ava-sim.md) | Spin up a local instance of an Avalanche network to interact with the standard APIs or to test a custom VM. |
 | [**Fuji Workflow**](fuji-workflow.md) | Avalanche Fuji Workflow. |
-| [**Set up Your Ledger Nano S with Avalanche**](setup-your-ledger-nano-s-with-avalanche.md) | Set up your Ledger with Ledger Live and the Avalanche Wallet |
 | [**Transfer AVAX Between the X-Chain and P-Chain**](transfer-avax-between-x-chain-and-p-chain.md) | Send AVAX between the X-Chain and P-Chain |
 | [**Transfer AVAX Between the X-Chain and C-Chain**](transfer-avax-between-x-chain-and-c-chain.md) | Send AVAX between the X-Chain and C-Chain |
 | [**Integration with C-Chain**](integrate-exchange-with-avalanche.md) | Guidelines for exchange integration with Ethereum-compatible C-Chain |
