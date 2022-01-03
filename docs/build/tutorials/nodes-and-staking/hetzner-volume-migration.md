@@ -4,10 +4,11 @@ sidebar_position: 12
 
 # Hetzner Volume Migration
 
-[Hetzner](https://www.hetzner.com/) is a cloud provider which can be used to run an Avalanche node. However, it does not provide for local storage expansion (local storage comes with an instance when created). The only way to expand over 360GB is to attach a Cloud Volume to an existing instance and move the extra files there. This article shows the steps on how to do that.
+[Hetzner](https://www.hetzner.com/) is a cloud provider which can be used to run an Avalanche node. However, it does not provide for local storage expansion (local storage comes with an instance when created). There are two ways to migrate the database: one is to attach a Cloud Volume to an existing instance and move the extra files there; the other is to migrate to another machine.
 
+## Attach a Cloud Volume
 
-On instance dashboard:
+On Hetzner's instance dashboard:
 
 ![instance dashboard](/img/Hetzner-instance.png)
 
@@ -21,7 +22,6 @@ Select the size and leave default mount and file system selections:
 
 
 Press `Create and Buy now`. This will create, format and mount a new volume onto the instance. We can now move the database files there.
-
 
 
 Log into the instance.
@@ -61,4 +61,8 @@ journalctl -u avalanchego -f
 ```
 
 Node should be catching up to the network and fetching a small number of blocks before resuming normal operation.
+
+## Database Backup and Restore
+
+Detailed steps are specified [here](./node-backup-and-restore.md#database )
 
