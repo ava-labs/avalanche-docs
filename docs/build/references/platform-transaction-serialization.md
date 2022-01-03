@@ -923,8 +923,8 @@ An unsigned create chain tx contains a `BaseTx`, `SubnetID`, `ChainName`, `VMID`
 +--------------+-------------+-----------------------------------------+
 | subnet_auth  : SubnetAuth  |                  size(subnetAuth) bytes |
 +--------------+-------------+-----------------------------------------+
-               | 74 + size(base_tx) + size(chain_name) + size(fxIDs) + |
-               |            size(genesisData) + size(subnetAuth) bytes |
+              | 74 + size(base_tx) + size(chain_name) + size(fx_ids) + |
+              |           size(genesis_data) + size(subnet_auth) bytes |
 +--------------+-------------------------------------------------------+
 ```
 
@@ -936,9 +936,9 @@ message CreateChainTx {
     SubnetID subnet_id = 2;           // 32 bytes
     ChainName chain_name = 3;         // 2 + len(chain_name) bytes
     VMID vm_id = 4;                   // 32 bytes
-    FxIDs fx_ids = 5;                 // 4 + size(fxIDs) bytes
-    GenesisData genesis_data = 6      // 4 + size(genesisData) bytes
-    SubnetAuth subnet_auth = 7;       // size(subnetAuth) bytes
+    FxIDs fx_ids = 5;                 // 4 + size(fx_ids) bytes
+    GenesisData genesis_data = 6      // 4 + size(genesis_data) bytes
+    SubnetAuth subnet_auth = 7;       // size(subnet_auth) bytes
 }
 ```
 
