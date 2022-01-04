@@ -134,7 +134,6 @@ You must stop the Avalanche node before you back up the database otherwise data
 could become corrupted.
 :::
 
-
 Once the node is stopped, you can `zip` the database directory to reduce the
 size of the backup and speed up the transfer using `scp`:
 
@@ -166,25 +165,23 @@ First, we need to do the usual [installation](set-up-node-with-installer.md) of 
 sudo systemctl stop avalanchego
 ```
 
-We're ready to restore the database. First, let's remove the DB on the existing
-node (**THIS IS AN IRREVERSIBLE OPERATION. MAKE SURE YOU KNOW WHAT YOU ARE
-DOING.**):
+:::warning
+You must stop the Avalanche node before you restore the database otherwise data
+could become corrupted.
+:::
+
+We're ready to restore the database. First, let's move the DB on the existing
+node (you can remove this old DB later if the restore was successful):
 
 ```
-rm -rf .avalanchego/db
+mv .avalanchego/db .avalanchego/db-old
 ```
 
 Next, we'll unzip the backup we moved from another node (this will place the
-unzipped files in `~/.avalanchego/db` if performed in the home directory):
+unzipped files in `~/.avalanchego/db` when the command is run in the home directory):
 
 ```
 unzip avalanche_db_backup.zip
-```
-
-Once the backup has been unzipped, it can be deleted:
-
-```
-rm avalanche_db_backup.zip
 ```
 
 After the database has been restored on a new node, use this command to start the node:
@@ -198,6 +195,12 @@ sudo journalctl -u avalanchego -f
 ```
 
 The node should be catching up to the network and fetching a small number of blocks before resuming normal operation (all the ones produced between the time the backup was made and when it was restored).
+
+Once the backup has been restored and is working as expected, the zip can be deleted:
+
+```
+rm avalanche_db_backup.zip
+```
 
 ## Summary
 
