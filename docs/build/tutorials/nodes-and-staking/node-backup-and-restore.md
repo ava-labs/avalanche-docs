@@ -139,7 +139,7 @@ Note: If you want to further reduce the backup file size, you can take advantage
 ```
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
 ```
-This assumes the username on the machine is ubuntu, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
+This assumes the username on the machine is `ubuntu`, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
 
 ```
 scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
