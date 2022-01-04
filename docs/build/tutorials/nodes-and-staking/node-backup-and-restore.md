@@ -115,7 +115,7 @@ You should see your original NodeID. Restore process is done.
 
 ## Database
 
-Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process by reusing an existing database. 
+Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process by reusing an existing database. This may also your node’s view of validator uptimes.
 
 In order to do this, you can create a backup of your database first using the same method mentioned above (either from local node or remote node using `scp`). 
 
@@ -134,6 +134,8 @@ Below are the commands with `scp` method.
 
 ### Database Backup
 
+Note: If you want to further reduce the backup file size, you can take advantage of the `zip` command line tool first to zip all the files under the `.avalanchego/db` directory before running the `scp` command. Please check the `zip` manual for details.
+
 ```
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
 ```
@@ -144,7 +146,9 @@ scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/av
 ```
 Once executed, this command will create `avalanche_backup/db` directory in you home directory and place the db files in it. 
 
+
 ### Database Restore
+
 
 First, we need to do the usual [installation](set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
 
@@ -153,6 +157,7 @@ sudo systemctl stop avalanchego
 ```
 
 We're ready to restore the database.
+
 
 Assuming the backed up files are located in the directory where the above backup procedure placed them:
 
@@ -168,6 +173,7 @@ scp -i /path/to/the/key.pem ~/avalanche_backup/db/*.* ubuntu@PUBLICIP:/home/ubun
 
 And again, replace `ubuntu` with correct username if different, and `PUBLICIP` with the actual public IP of the machine running the node, as well as the path to the SSH key if used.
 
+Note: if you have used `zip` before backing up the db, please `unzip` the file into the proper location before proceeding. Please check the `unzip` manual for details.
 
 After the database has been restored on a new node, use this command to start the node:
 ```
