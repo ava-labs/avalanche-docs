@@ -4,7 +4,9 @@ sidebar_position: 12
 
 # Hetzner Volume Migration
 
-[Hetzner](https://www.hetzner.com/) is a cloud provider which can be used to run an Avalanche node. However, it does not provide for local storage expansion (local storage comes with an instance when created). There are two ways to migrate the database: one is to attach a Cloud Volume to an existing instance and move the extra files there; the other is to migrate to another machine using database backup and restore.
+[Hetzner](https://www.hetzner.com/) is a cloud provider which can be used to run an Avalanche node. It may become necessary to add more disk space to your node as Avalanche Network activity grows, however, Hetzner does not provide for local storage expansion (local storage comes with an instance when created).
+
+There are two known solutions to resolve this issue: one is to attach a Hetzner Cloud Volume to an existing instance and to move the node DB there; the other is to migrate the node DB to another machine (on a different cloud provider) using [database backup and restore.](./node-backup-and-restore.md#database)
 
 ## Attach a Cloud Volume
 
@@ -12,7 +14,7 @@ On Hetzner's instance dashboard:
 
 ![instance dashboard](/img/Hetzner-instance.png)
 
-select volumes from the left option list, press ‘create volume’:
+select volumes from the left option list, press `Create Volume`:
 
 ![volume](/img/Hetzner-volume.png)
 
@@ -64,5 +66,5 @@ Node should be catching up to the network and fetching a small number of blocks 
 
 ## Database Backup and Restore
 
-Another way is to back up the database and restore it on another machine. Detailed steps can be found [here.](./node-backup-and-restore.md#database)
+It is possible to avoid attaching a Hetzner Cloud Volume by backing up the database and restoring it on another machine. Detailed steps can be found [here.](./node-backup-and-restore.md#database)
 
