@@ -1,3 +1,6 @@
+---
+sidebar_position: 9
+---
 # Stake AVAX, by Validating or Delegating, with the Avalanche Wallet
 
 ## **Introduction** {#001f}

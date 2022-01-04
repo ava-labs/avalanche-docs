@@ -1,3 +1,7 @@
+---
+sidebar_position: 7
+---
+
 # Run an Avalanche Node with Amazon Web Services (AWS)
 
 ## Introduction
@@ -270,6 +274,15 @@ AvalancheGo is an ongoing project and there are regular version upgrades. Most u
 ```
 
 Your machine is now running the newest AvalancheGo version. To see the status of the AvalancheGo service, run `sudo systemctl status avalanchego.`
+
+
+## Increase Volume Size
+
+If you need to increase the volume size, follow these instructions from AWS:
+
+* [Request modifications to your EBS volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html)
+* [Extend a Linux file system after resizing a volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html)
+
 
 ## Wrap Up
 

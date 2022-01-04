@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Monitor an Avalanche Node
 
 ## Introduction
