@@ -115,40 +115,50 @@ You should see your original NodeID. Restore process is done.
 
 ## Database
 
-Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process by reusing an existing database. This may also your node’s view of validator uptimes.
+Normally, when starting a new node, you can just bootstrap from scratch. However, there are situations when you
+may prefer to reuse an existing database (ex: preserve keystore records, reduce sync time).
 
-In order to do this, you can create a backup of your database first using the same method mentioned above (either from local node or remote node using `scp`). 
+This tutorial will walk you through compressing your node's
+DB and moving it to another computer using `zip` and `scp`.
 
-:::warning
-You must stop the Avalanche node before you back up and restore the database.
-:::
+### Database Backup
 
-
-To stop AvalancheGo, run:
+First, make sure to stop AvalancheGo, run:
 
 ```
 sudo systemctl stop avalanchego
 ```
 
-Below are the commands with `scp` method. 
+:::warning
+You must stop the Avalanche node before you back up the database otherwise data
+could become corrupted.
+:::
 
-### Database Backup
 
-Note: If you want to further reduce the backup file size, you can take advantage of the `zip` command line tool first to zip all the files under the `.avalanchego/db` directory before running the `scp` command. Please check the `zip` manual for details.
+Once the node is stopped, you can `zip` the database directory to reduce the
+size of the backup and speed up the transfer using `scp`:
 
 ```
-scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
+zip -r avalanche_backup.zip ~/.avalanchego/db
+```
+_Note: It may take > 30 minutes to zip the node's DB._
+
+Next, you can transfer the backup to another machine:
+```
+scp -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_backup.zip ~/avalanche_backup.zip
 ```
 This assumes the username on the machine is ubuntu, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
 
 ```
-scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
+scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_backup.zip ~/avalanche_backup.zip
 ```
-Once executed, this command will create `avalanche_backup/db` directory in you home directory and place the db files in it. 
+Once executed, this command will create `avalanche_backup.zip` directory in you home directory.
 
 
 ### Database Restore
 
+_This tutorial assumes you have already completed "Database Backup" and have
+a backup at ~/avalanche_backup.zip._
 
 First, we need to do the usual [installation](set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
 
@@ -156,24 +166,20 @@ First, we need to do the usual [installation](set-up-node-with-installer.md) of 
 sudo systemctl stop avalanchego
 ```
 
-We're ready to restore the database.
-
-
-Assuming the backed up files are located in the directory where the above backup procedure placed them:
-
-```
-scp ~/avalanche_backup/db/*.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db
-```
-
-Or if you need to specify the path to the SSH key:
+We're ready to restore the database. First, let's remove the DB on the existing
+node (**THIS IS AN IRREVERSIBLE OPERATION. MAKE SURE YOU KNOW WHAT YOU ARE
+DOING.**):
 
 ```
-scp -i /path/to/the/key.pem ~/avalanche_backup/db/*.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db
+rm -rf ~/.avalanchego/db
 ```
 
-And again, replace `ubuntu` with correct username if different, and `PUBLICIP` with the actual public IP of the machine running the node, as well as the path to the SSH key if used.
+Next, we'll unzip the backup we moved from another node (this should place the
+unzipped files in `~/.avalanchego/db`:
 
-Note: if you have used `zip` before backing up the db, please `unzip` the file into the proper location before proceeding. Please check the `unzip` manual for details.
+```
+unzip ~/avalanche_backup.zip
+```
 
 After the database has been restored on a new node, use this command to start the node:
 ```
