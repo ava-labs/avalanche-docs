@@ -115,11 +115,59 @@ You should see your original NodeID. Restore process is done.
 
 ## Database
 
-Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process. In order to do this, you can create a back up of your database using the same method mentioned above (either from local node or remote node using scp). The default location of the database is located at `~/.avalanchego/db`. For `scp` command, you can just replace `.avalanchego/staking` with `.avalanchego/db` in the commands above.
+Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process by reusing an existing database. 
+
+In order to do this, you can create a backup of your database first using the same method mentioned above (either from local node or remote node using scp). 
 
 :::warning
-You must stop the Avalanche node before you back up the database.
+You must stop the Avalanche node before you back up and restore the database.
 :::
+
+
+To stop AvalancheGo, run:
+
+```
+sudo systemctl stop avalanchego
+```
+
+Below are the commands with `scp` method. 
+
+### Database Backup
+
+```
+scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
+```
+This assumes the username on the machine is ubuntu, replace with correct username in both places if it is different. Also, replace PUBLICIP with the actual public IP of the machine. If scp doesn't automatically use your downloaded SSH key, you can point to it manually:
+
+```
+scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
+```
+Once executed, this command will create `avalanche_backup/db` directory in you home directory and place the db files in it. 
+
+### Database Restore
+
+First, we need to do the usual [installation](set-up-node-with-installer.md) of the node.  When the node is installed correctly, log into the machine where the node is running and stop it:
+
+```
+sudo systemctl stop avalanchego
+```
+
+We're ready to restore the database.
+
+Assuming the backed up files are located in the directory where the above backup procedure placed them:
+
+```
+scp ~/avalanche_backup/db/*.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db
+```
+
+Or if you need to specify the path to the SSH key:
+
+```
+scp -i /path/to/the/key.pem ~/avalanche_backup/db/*.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db
+```
+
+And again, replace `ubuntu` with correct username if different, and `PUBLICIP` with the actual public IP of the machine running the node, as well as the path to the SSH key if used.
+
 
 After the database has been restored on a new node, use this command to start the node:
 ```
@@ -128,7 +176,7 @@ sudo systemctl start avalanchego
 
 Node should now be running from the database on the new instance. To check that everything is in order and that node is not bootstrapping from scratch (which would indicate a problem), use:
 ```
-journalctl -u avalanchego -f
+sudo journalctl -u avalanchego -f
 ```
 
 Node should be catching up to the network and fetching a small number of blocks before resuming normal operation.
