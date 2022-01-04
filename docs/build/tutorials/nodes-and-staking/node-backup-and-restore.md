@@ -35,13 +35,13 @@ If someone gets a hold of your staker files, they still cannot get to your funds
 
 Let's get the staker files off the machine running the node.
 
-### From local node
+### From Local Node
 
 If you're running the node locally, on your desktop computer, just navigate to where the files are and copy them somewhere safe.
 
 On a default Linux installation, the path to them will be `/home/USERNAME/.avalanchego/staking/`, where `USERNAME` needs to be replaced with the actual username running the node. Select and copy the files from there to a backup location. You don't need to stop the node to do that.
 
-### From remote node using `scp`
+### From Remote Node Using `scp`
 
 `scp` is a 'secure copy' command line program, available built-in on Linux and MacOS computers. There is also a Windows version, `pscp`, as part of the [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) package. If using `pscp`, in the following commands replace each usage of `scp` with `pscp -scp`.
 
@@ -73,11 +73,11 @@ sudo systemctl stop avalanchego
 
 We're ready to restore the node.
 
-### To local node
+### To Local Node
 
 If you're running the node locally, just copy the `staker.key` and `staker.crt` files from the backup location into the working directory, which on the default Linux installation will be `/home/USERNAME/.avalanchego/staking/`. Replace `USERNAME` with the actual username used to run the node.
 
-### To remote node using `scp`
+### To Remote Node Using `scp`
 
 Again, the process is just the reverse operation. Using `scp` we need to copy the `staker.key` and `staker.crt` files from the backup location into the remote working directory. Assuming the backed up files are located in the directory where the above backup procedure placed them:
 
@@ -93,7 +93,7 @@ scp -i /path/to/the/key.pem ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ub
 
 And again, replace `ubuntu` with correct username if different, and `PUBLICIP` with the actual public IP of the machine running the node, as well as the path to the SSH key if used.
 
-### Restart the node and verify
+### Restart the Node and Verify
 
 Once the files have been replaced, log into the machine and start the node using:
 
