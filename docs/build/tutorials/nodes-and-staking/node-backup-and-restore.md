@@ -117,7 +117,7 @@ You should see your original NodeID. Restore process is done.
 
 Normally, when starting a new node, you can just bootstrap from the scratch. However, there are situations where you would like to speed up the process by reusing an existing database. 
 
-In order to do this, you can create a backup of your database first using the same method mentioned above (either from local node or remote node using scp). 
+In order to do this, you can create a backup of your database first using the same method mentioned above (either from local node or remote node using `scp`). 
 
 :::warning
 You must stop the Avalanche node before you back up and restore the database.
@@ -137,7 +137,7 @@ Below are the commands with `scp` method.
 ```
 scp -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
 ```
-This assumes the username on the machine is ubuntu, replace with correct username in both places if it is different. Also, replace PUBLICIP with the actual public IP of the machine. If scp doesn't automatically use your downloaded SSH key, you can point to it manually:
+This assumes the username on the machine is ubuntu, replace with correct username in both places if it is different. Also, replace `PUBLICIP` with the actual public IP of the machine. If `scp` doesn't automatically use your downloaded SSH key, you can point to it manually:
 
 ```
 scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/db ~/avalanche_backup/db
