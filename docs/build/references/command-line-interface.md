@@ -411,7 +411,7 @@ Enables the Admin API. Defaults to false.
 
 Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
 
-**Enabling EVM APIs**
+#### Enabling EVM APIs
 
 `eth-apis` ([]string):
 
