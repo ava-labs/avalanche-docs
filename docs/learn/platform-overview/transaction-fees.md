@@ -58,6 +58,8 @@ Use the [eth_baseFee](../../build/avalanchego-apis/contract-chain-c-chain-api.md
 
 Next, use [eth_maxPriorityFeePerGas](../../build/avalanchego-apis/contract-chain-c-chain-api.md#eth_maxpriorityfeepergas) API call to estimate the priority fee needed to be included in a block. This API call will look at the most recent blocks and see what tips have been paid by recent transactions in order to be included in the block.
 
+Transactions are ordered by the priority fee, then the timestamp.
+
 Based off of this information, you can specify the `gasFeeCap` and `gasTipCap` to your liking based on how you prioritize getting your transaction included as quickly as possible vs. minimizing the price paid per unit of gas.
 
 #### Base Fee
