@@ -74,7 +74,7 @@ Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. T
 
 Maximum duration to wait for existing connections to complete during node shutdown. Defaults to 10 seconds.
 
-### Assertions
+## Assertions
 
 #### `--assertions-enabled` (boolean):
 
