@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 6
 ---
 
 # Subnet FAQ
@@ -26,7 +26,7 @@ The answer is usually yes, because Subnet provides great flexibility to work alm
 
 Fee is used to fight against DoS (denial of service) attacks. It's possible to create a subnet with free transaction, however, it requires modification to existing VMs and is certainly not advised.
 
-### Can transaction fees in subnet blockchains be paid with another currency other than AVAX? 
+### Can transaction fees in subnet blockchains be paid with another currency other than AVAX?
 
 Blockchains in subnets use their own currencies. for instance see [here.](create-avm-blockchain.md#create-the-genesis-data)
 
