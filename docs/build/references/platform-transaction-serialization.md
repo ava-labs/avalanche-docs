@@ -1811,12 +1811,12 @@ Let’s make a subnet auth:
 =
 [
   // type id
-  00 00 00 0a 
+  0x00, 0x00, 00x0, 0x0a, 
 
   // num address indices
-  00 00 00 01 
+  0x00, 0x00, 0x00, 0x01, 
  
   // address index 1
-  00 00 00 00
+  0x00, 0x00, 0x00, 0x00
 ]
 ```
