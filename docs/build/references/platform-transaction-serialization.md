@@ -1763,3 +1763,60 @@ Let’s make a stakeablelockout with:
 ]
 ```
 
+## Subnet Auth
+
+### **What Subnet Auth Contains**
+
+Specifies the addresses whose signatures will be provided to demonstrate that the owners of a subnet approve something.
+
+* **`TypeID`** is the ID for this type. It is `0x0000000a`.
+* **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
+
+### **Gantt Subnet Auth Specification**
+
+```text
++-----------------+------------------+-------------------------------------+
+| type_id         : int              |                             4 bytes |
++-----------------+------------------+-------------------------------------+
+| address_indices : []int            |    4 + 4*len(address_indices) bytes |
++-----------------+------------------+-------------------------------------+
+                  |                       8 + 4*len(address_indices) bytes |
++-----------------+--------------------------------------------------------+
+```
+
+### **Proto Subnet Auth Specification**
+
+```text
+message SubnetAuth {
+    uint32 type_id = 1;                          // 04 bytes
+    repeated AddressIndex address_indices = 2;   // 04 + 4*len(address_indices) bytes
+}
+```
+
+### **Subnet Auth Example**
+
+Let’s make a subnet auth:
+
+* **`TypeID`**: `10`
+* **`AddressIndices`**: [`0`]
+
+```text
+[
+    TypeID                <- 0x0000000a
+    AddressIndices        <-  [
+       0x00000000
+    ]
+]
+
+=
+[
+  // type id
+  0x00, 0x00, 00x0, 0x0a, 
+
+  // num address indices
+  0x00, 0x00, 0x00, 0x01, 
+ 
+  // address index 1
+  0x00, 0x00, 0x00, 0x00
+]
+```
