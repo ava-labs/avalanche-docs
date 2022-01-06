@@ -1788,7 +1788,8 @@ Authorizes this blockchain to be added to this subnet. A subnet auth contains an
 
 ```text
 message SubnetAuth {
-    repeated AddressIndex address_indices = 1;   // 04 bytes + size(address_indices)
+    uint32 type_id = 1;                          // 04 bytes
+    repeated AddressIndex address_indices = 2;   // 04 bytes + size(address_indices)
 }
 ```
 
