@@ -1763,3 +1763,59 @@ Let’s make a stakeablelockout with:
 ]
 ```
 
+## Subnet Auth
+
+### **What Subnet Auth Contains**
+
+Authorizes this blockchain to be added to this subnet. A subnet auth contains an array of `AddressIndices`. The `TypeID` for this type is `0x0000000a`.
+
+* **`TypeID`** is the ID for this type. It is `0x0000000a`.
+* **`AddressIndices`** the indices of the addresses which authorize this blockchain
+
+### **Gantt Subnet Auth Specification**
+
+```text
++-----------------+------------------+-------------------------------------+
+| type_id         : int              |                             4 bytes |
++-----------------+------------------+-------------------------------------+
+| address_indices : []AddressIndices |     4 + size(address_indices) bytes |
++-----------------+------------------+-------------------------------------+
+                  |                              8 + size(address_indices) |
++-----------------+--------------------------------------------------------+
+```
+
+### **Proto Subnet Auth Specification**
+
+```text
+message SubnetAuth {
+    repeated AddressIndex address_indices = 1;   // 04 bytes + size(address_indices)
+}
+```
+
+### **Subnet Auth Example**
+
+Let’s make a subnet auth:
+
+* **`TypeID`**: `10`
+* **`AddressIndices`**: [`0`]
+
+```text
+[
+    TypeID                <- 0x0000000a
+    AddressIndices        <-  [
+       0x00000000
+    ]
+]
+
+=
+[
+  // type id
+  00 00 00 0a 
+
+  // num address indices
+  00 00 00 01 
+ 
+  // address index 1
+  00 00 00 00
+]
+```
