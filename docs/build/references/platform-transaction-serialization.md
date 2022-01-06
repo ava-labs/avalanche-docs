@@ -1767,10 +1767,10 @@ Let’s make a stakeablelockout with:
 
 ### **What Subnet Auth Contains**
 
-Authorizes this blockchain to be added to this subnet. A subnet auth contains an array of `AddressIndices`. The `TypeID` for this type is `0x0000000a`.
+Specifies the addresses whose signatures will be provided to demonstrate that the owners of a subnet approve something.
 
 * **`TypeID`** is the ID for this type. It is `0x0000000a`.
-* **`AddressIndices`** the indices of the addresses which authorize this blockchain
+* **`AddressIndices`** defines which addresses' signatures will be attached to this transaction. AddressIndices[i] is the index in a subnet owner list that corresponds to the signature at index i in the signature list. Must be sorted low to high and not have duplicates.
 
 ### **Gantt Subnet Auth Specification**
 
@@ -1778,9 +1778,9 @@ Authorizes this blockchain to be added to this subnet. A subnet auth contains an
 +-----------------+------------------+-------------------------------------+
 | type_id         : int              |                             4 bytes |
 +-----------------+------------------+-------------------------------------+
-| address_indices : []AddressIndices |     4 + size(address_indices) bytes |
+| address_indices : []int            |    4 + 4*len(address_indices) bytes |
 +-----------------+------------------+-------------------------------------+
-                  |                              8 + size(address_indices) |
+                  |                       8 + 4*len(address_indices) bytes |
 +-----------------+--------------------------------------------------------+
 ```
 
@@ -1789,7 +1789,7 @@ Authorizes this blockchain to be added to this subnet. A subnet auth contains an
 ```text
 message SubnetAuth {
     uint32 type_id = 1;                          // 04 bytes
-    repeated AddressIndex address_indices = 2;   // 04 bytes + size(address_indices)
+    repeated AddressIndex address_indices = 2;   // 04 + 4*len(address_indices) bytes
 }
 ```
 
