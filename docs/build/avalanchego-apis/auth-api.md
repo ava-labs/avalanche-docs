@@ -1,5 +1,6 @@
 ---
 sidebar_position: 8
+slug: auth
 ---
 # Auth API
 

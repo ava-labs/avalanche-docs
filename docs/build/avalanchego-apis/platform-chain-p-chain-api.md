@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+slug: p-chain
 ---
 
 # Platform Chain (P-Chain) API

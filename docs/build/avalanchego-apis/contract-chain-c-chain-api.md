@@ -1,6 +1,7 @@
 ---
 description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
 sidebar_position: 4
+slug: c-chain
 ---
 
 # Contract Chain (C-Chain) API
