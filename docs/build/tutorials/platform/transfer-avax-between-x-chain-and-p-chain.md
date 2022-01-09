@@ -197,11 +197,11 @@ We can check that the transaction was accepted with:
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
-    "method" :"avm.getTxStatus",
+    "method" :"platform.getTxStatus",
     "params" :{
         "txID":"2sxo3ySETZ4xzXqAtgsUvZ5pdkqG4SML4c7Z7NoKLZcp77YNXC"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
