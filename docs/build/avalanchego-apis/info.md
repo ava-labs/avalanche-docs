@@ -1,6 +1,5 @@
 ---
 sidebar_position: 11
-slug: info
 ---
 
 # Info API
