@@ -66,7 +66,7 @@ Swap the source and destination chains by selecting them from the **Source** and
 
 ## Transferring from the X-Chain to P-Chain with API Calls
 
-If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore-api.md#keystorecreateuser) and stored in the node's keystore.
+If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created](../../avalanchego-apis/keystore.md#keystorecreateuser) and stored in the node's keystore.
 
 All the example API calls below assume the node is running locally (that is, listening on `127.0.0.1`). The node can be connected to the main network, a test network or a local network. In each case, the API calls and responses should be the same, except for the address formats. The node need not be local; you can make calls to a node hosted elsewhere.
 
@@ -77,7 +77,7 @@ As you may have noticed while transferring AVAX using the Avalanche Wallet, a cr
 
 ### Step 1 - Export AVAX from the X-Chain
 
-To export AVAX, call the X-Chain’s [`avm.export`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-export) method with `AVAX` assetID.
+To export AVAX, call the X-Chain’s [`avm.export`](../../avalanchego-apis/x-chain.mdx#avm-export) method with `AVAX` assetID.
 
 Your call should look like this:
 
@@ -97,7 +97,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user (see [here](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-createaddress) for instructions on creating a new P-Chain address).
+where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user (see [here](../../avalanchego-apis/p-chain.md#platform-createaddress) for instructions on creating a new P-Chain address).
 
 Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
 
@@ -116,7 +116,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-gettxstatus):
+We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -141,7 +141,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
+We can also call [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance) to check that the AVAX was deducted from an address held by our user:
 
 ```cpp
 curl -X POST --data '{
@@ -159,7 +159,7 @@ The amount deducted is the exported amount (`.005` AVAX in this example) plus th
 
 ### Step 2 - Import AVAX to the P-Chain
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-importavax) method to finish the transfer.
+Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](../../avalanchego-apis/p-chain.md#platform-importavax) method to finish the transfer.
 
 Your call should look like this:
 
@@ -248,7 +248,7 @@ Same as before, this is also a two transaction operation:
 
 ### Step 1 - Export AVAX from the P-Chain
 
-To do so, call [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax):
+To do so, call [`platform.exportAVAX`](../../avalanchego-apis/p-chain.md#platform-exportavax):
 
 ```cpp
 curl -X POST --data '{
@@ -267,11 +267,11 @@ curl -X POST --data '{
 
 where `to` is the X-Chain address the AVAX is being sent to.
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
+This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](../../avalanchego-apis/p-chain.md#platform-gettxstatus). Again, make sure that the amount you’re sending exceeds the transaction fee.
 
 ### Step 2 - Import AVAX to X-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-import):
+To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../../avalanchego-apis/x-chain.mdx#avm-import):
 
 ```cpp
 curl -X POST --data '{
@@ -288,9 +288,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/platform-chain-p-chain-api.md#platform-exportavax).
+Note that `to` is the same address specified in our call to [`platform.exportAVAX`](../../avalanchego-apis/p-chain.md#platform-exportavax).
 
-Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+Just as before, we can call [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
 
 ## Wrapping Up
 

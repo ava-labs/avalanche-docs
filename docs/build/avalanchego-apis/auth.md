@@ -60,7 +60,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` (ie the X-Chain) and `/ext/info` (ie the [info API](info-api.md).)
+This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` (ie the X-Chain) and `/ext/info` (ie the [info API](info.md).)
 
 #### **Example Response**
 
@@ -76,7 +76,7 @@ This call will generate an authorization token that allows access to API endpoin
 
 This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](info-api.md#info-peers) with this token:
+For example, to call [`info.peers`](info.md#info-peers) with this token:
 
 ```cpp
 curl -X POST --data '{

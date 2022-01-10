@@ -442,7 +442,7 @@ curl -X POST --data '{
 
 ### platform.exportAVAX
 
-Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.import`](exchange-chain-x-chain-api.mdx#avm-import) method with assetID `AVAX` to complete the transfer.
+Send AVAX from an address on the P-Chain to an address on the X-Chain. After issuing this transaction, you must call the X-Chain’s [`avm.import`](x-chain.mdx#avm-import) method with assetID `AVAX` to complete the transfer.
 
 #### **Signature**
 
@@ -505,7 +505,7 @@ curl -X POST --data '{
 ### platform.exportKey
 
 Get the private key that controls a given address.  
-The returned private key can be added to a user with [`platform.importKey`](platform-chain-p-chain-api.md#platform-importkey).
+The returned private key can be added to a user with [`platform.importKey`](p-chain.md#platform-importkey).
 
 #### **Signature**
 
@@ -1639,7 +1639,7 @@ curl -X POST --data '{
 
 Complete a transfer of AVAX from the X-Chain to the P-Chain.
 
-Before this method is called, you must call the X-Chain’s [`avm.export`](exchange-chain-x-chain-api.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
+Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
 
 #### **Signature**
 

@@ -113,7 +113,7 @@ When the node starts, it has to bootstrap (catch up with the rest of the network
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info-api.md#info-isbootstrapped) by copying and pasting the following command:
+To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info.md#info-isbootstrapped) by copying and pasting the following command:
 
 ```cpp
 curl -X POST --data '{
@@ -140,7 +140,7 @@ To connect to the Fuji Testnet instead of the main net, use argument `--network-
 
 ### Create a Keystore User
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore-api.md#keystore-createuser):
+Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore.md#keystore-createuser):
 
 ```cpp
 curl -X POST --data '{
@@ -164,7 +164,7 @@ The response should be:
 }
 ```
 
-Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](../../avalanchego-apis/keystore-api.md) to see how.
+Now, you have a user on this node. Keystore data exists at the node level. Users you create on one node’s Keystore do not exist on other nodes but you can import/export users to/from the Keystore. See the [Keystore API](../../avalanchego-apis/keystore.md) to see how.
 
 :::danger
 **You should only keep a small amount of your funds on your node.** Most of your funds should be secured by a mnemonic that is not saved to any computer.
@@ -174,7 +174,7 @@ Now, you have a user on this node. Keystore data exists at the node level. Users
 
 Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), which acts as a decentralized platform for creating and trading digital assets. We are now going to create an address to hold AVAX on our node.
 
-To create a new address on the X-Chain, call [`avm.createAddress`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-createaddress), a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.mdx):
+To create a new address on the X-Chain, call [`avm.createAddress`](../../avalanchego-apis/x-chain.mdx#avm-createaddress), a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx):
 
 ```cpp
 curl -X POST --data '{
@@ -303,7 +303,7 @@ The response contains the transaction’s ID. It will be different for every inv
 
 #### Checking the Transaction Status
 
-This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-gettxstatus):
+This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{

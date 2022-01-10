@@ -26,7 +26,7 @@ Several built-in APIs use the [JSON RPC 2.0](https://www.jsonrpc.org/specificati
 
 ### Making a JSON RPC Request
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain API](exchange-chain-x-chain-api.mdx). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
+Suppose we want to call the `getTxStatus` method of the [X-Chain API](x-chain.mdx). The X-Chain API documentation tells us that the endpoint for this API is `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:
 
@@ -34,7 +34,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](exchange-chain-x-chain-api.mdx#avm-gettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](x-chain.mdx#avm-gettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 

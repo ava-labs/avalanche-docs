@@ -16,7 +16,7 @@ As far as your dapp is concerned, it will be running the same as on Ethereum, ju
 
 ## Accessing Avalanche C-Chain
 
-C-Chain exposes the [same API](../../avalanchego-apis/contract-chain-c-chain-api.md) as go-ethereum, so you can use all the familiar APIs that are available on Ethereum for interaction with the platform.
+C-Chain exposes the [same API](../../avalanchego-apis/c-chain.md) as go-ethereum, so you can use all the familiar APIs that are available on Ethereum for interaction with the platform.
 
 There are multiple ways of working with the C-Chain.
 
