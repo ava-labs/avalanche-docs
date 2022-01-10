@@ -28,7 +28,7 @@
     "description": "The label of footer link with label=YouTube linking to https://youtube.com/avalancheavax"
   },
   "link.item.label.Ecosystem": {
-    "message": "Ecosystem",
+    "message": "生态系统",
     "description": "The label of footer link with label=Ecosystem linking to https://ecosystem.avax.network"
   },
   "link.item.label.GitHub": {

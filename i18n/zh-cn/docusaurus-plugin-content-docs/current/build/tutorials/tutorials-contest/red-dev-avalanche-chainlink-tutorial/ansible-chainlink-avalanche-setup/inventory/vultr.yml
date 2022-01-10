@@ -1,0 +1,7 @@
+---
+plugin: vultr
+api_account: reddev
+user: root
+keyed_groups:
+  - prefix: tag
+    key: tag
