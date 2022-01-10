@@ -185,7 +185,7 @@ hardhat: {
 ```
 
 * `chainId` is set with to the mainnet value, as seen
-  [here](https://docs.avax.network/build/avalanchego-apis/contract-chain-c-chain-api).
+  [here](https://docs.avax.network/build/avalanchego-apis/c-chain).
 * `gasPrice` is a dynamic value on Avalanche's CChain (see this [post](https://medium.com/avalancheavax/apricot-phase-three-c-chain-dynamic-fees-432d32d67b60) for more information). For test purposes we can use a fixed value (225 nAvax)
 * `forking` is where you configure the parameter of the fork.
     * `url` here we see that we point to the Ava labs api endpoint This could be your local node, as long as it is
