@@ -194,7 +194,7 @@ More information can be found in the [Adding a Subnet Validator](../../nodes-and
 
 You can interact with this new instance of the VM. The API endpoint of the blockchain is `127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. The last part in the endpoint is the blockchain ID, which is `sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk`. Every blockchain ID is different from each other, so this is not a static ID. Your blockchain ID and the endpoint can be different.
 
-You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](https://docs.avax.network/build/../avalanchego-apis/admin-api#admin-aliaschain)
+You can also alias this chain ID with `timestampbc`, or whatever you like, for simpler API URLs. More information: [admin.aliasChain](https://docs.avax.network/build/../avalanchego-apis/admin#admin-aliaschain)
 
 ### Verify Genesis Block
 

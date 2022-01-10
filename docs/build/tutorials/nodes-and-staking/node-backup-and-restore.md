@@ -101,7 +101,7 @@ Once the files have been replaced, log into the machine and start the node using
 sudo systemctl start avalanchego
 ```
 
-You can now check that the node is restored with the correct NodeID by issuing the [getNodeID](https://docs.avax.network/build/avalanchego-apis/info-api#info-getnodeid) API call in the same console you ran the previous command:
+You can now check that the node is restored with the correct NodeID by issuing the [getNodeID](https://docs.avax.network/build/avalanchego-apis/info#info-getnodeid) API call in the same console you ran the previous command:
 
 ```text
 curl -X POST --data '{
