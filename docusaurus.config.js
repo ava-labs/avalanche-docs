@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "zh-cn"],
   },
 
   title: 'Avalanche Docs',
