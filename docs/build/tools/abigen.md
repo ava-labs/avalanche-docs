@@ -92,7 +92,7 @@ func main() {
 	// derive 'c' address
 	cAddress := crypto.PubkeyToAddress(privateKeyECDSA.PublicKey)
 
-	// setup siner and transaction options.
+	// setup signer and transaction options.
 	signer := types.LatestSignerForChainID(networkId)
 	to := &bind.TransactOpts{
 		Signer: func(address common.Address, transaction *types.Transaction) (*types.Transaction, error) {
