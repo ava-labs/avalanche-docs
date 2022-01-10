@@ -3,10 +3,6 @@
     "message": "下一个",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.doc.Welcome": {
-    "message": "欢迎",
-    "description": "The label for doc Welcome in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.Learn": {
     "message": "学习",
     "description": "The label for category Learn in sidebar tutorialSidebar"
