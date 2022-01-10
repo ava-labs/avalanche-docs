@@ -12,7 +12,7 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ## Create the Asset
 
-Our asset will exist on the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/exchange-chain-x-chain-api.mdx).
+Our asset will exist on the [X-Chain](../../../learn/platform-overview/README.md#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
 
 The signature for this method is:
 
@@ -95,7 +95,7 @@ The response contains the asset’s ID, which is also the ID of this transaction
 
 All 10,000,000 units of the asset (shares) are controlled by the address we specified in `initialHolders`.
 
-To verify this, we call [`avm.getBalance`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-getbalance):
+To verify this, we call [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -123,7 +123,7 @@ The response confirms that our asset creation was successful and that the expect
 
 ### Send the asset
 
-Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-send).
+Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/x-chain.mdx#avm-send).
 
 To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
 
@@ -159,7 +159,7 @@ The response from the above call should look like this:
 
 `txID` is the ID of the `send` transaction we sent to the network.
 
-After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-gettxstatus):
+After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
 
 ```cpp
 curl -X POST --data '{

@@ -1,7 +1,6 @@
 ---
 description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
 sidebar_position: 4
-slug: c-chain
 ---
 
 # Contract Chain (C-Chain) API
@@ -256,7 +255,7 @@ curl -X POST --data '{
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.mdx#avm-import) on the X-Chain to complete the transfer.
+Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avm-import) on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -309,9 +308,9 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](contract-chain-c-chain-api.md#avax-export).
+**DEPRECATED—instead use** [**avax.export**](c-chain.md#avax-export).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](exchange-chain-x-chain-api.mdx#avm-import) with assetID `AVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avm-import) with assetID `AVAX` on the X-Chain to complete the transfer.
 
 #### Signature
 
@@ -501,7 +500,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -557,9 +556,9 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](contract-chain-c-chain-api.md#avax-import)
+**DEPRECATED—instead use** [**avax.import**](c-chain.md#avax-import)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](exchange-chain-x-chain-api.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 

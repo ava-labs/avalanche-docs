@@ -24,7 +24,7 @@ In order to ensure your node is well-connected, make sure that your node can rec
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
-Get your node’s ID by calling [`info.getNodeID`](../../avalanchego-apis/info-api.md#infogetnodeid):
+Get your node’s ID by calling [`info.getNodeID`](../../avalanchego-apis/info.md#infogetnodeid):
 
 ![getNodeID postman](/img/getNodeID-postman.png)
 
@@ -60,7 +60,7 @@ You should see this success message, and your balance should be updated.
 
 ![Your validation transaction is sent](/img/your-validation-transaction-is-sent.png)
 
-Calling [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) verifies that our transaction was accepted.
+Calling [`platform.getPendingValidators`](../../avalanchego-apis/p-chain.md#platformgetpendingvalidators) verifies that our transaction was accepted.
 
 ![getPendingValidators postman](/img/getPendingValidators-postman.png)
 
@@ -76,7 +76,7 @@ That’s it!
 
 ## Add a validator with API calls
 
-We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformaddvalidator).
+We can also add a node to the validator set by making API calls to our node. To add a node the Primary Network, we’ll call [`platform.addValidator`](../../avalanchego-apis/p-chain.md#platformaddvalidator).
 
 This method’s signature is:
 
@@ -100,7 +100,7 @@ Let’s go through and examine these arguments.
 
 `nodeID`
 
-This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../avalanchego-apis/info-api.md#infogetnodeid):
+This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../avalanchego-apis/info.md#infogetnodeid):
 
 ```cpp
 curl -X POST --data '{
@@ -183,7 +183,7 @@ The response has the transaction ID, as well as the address the change went to.
 }
 ```
 
-We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgettxstatus):
+We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/p-chain.md#platformgettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -196,7 +196,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/platform-chain-p-chain-api.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
+The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
 ```cpp
 curl -X POST --data '{

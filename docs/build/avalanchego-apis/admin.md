@@ -1,6 +1,5 @@
 ---
 sidebar_position: 7
-slug: admin
 ---
 # Admin API
 

@@ -1,6 +1,5 @@
 ---
 sidebar_position: 10
-slug: index
 ---
 # Index API
 

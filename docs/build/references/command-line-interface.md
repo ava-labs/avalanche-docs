@@ -32,39 +32,39 @@ Specifies the format of the base64 encoded config content. JSON, TOML, YAML are 
 
 #### `--api-admin-enabled` (boolean):
 
-If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin-api.md) for more information.
+If set to `false`, this node will not expose the Admin API. Defaults to `false`. See [here](../avalanchego-apis/admin.md) for more information.
 
 #### `--api-auth-required` (boolean):
 
-If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth-api.md) for more information.
+If set to `true`, API calls require an authorization token. Defaults to `false`. See [here](../avalanchego-apis/auth.md) for more information.
 
 #### `--api-auth-password` (string):
 
-The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth-api.md) for more information.
+The password needed to create/revoke authorization tokens. If `--api-auth-required=true`, must be specified; otherwise ignored. See [here](../avalanchego-apis/auth.md) for more information.
 
 #### `--api-health-enabled` (boolean):
 
-If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health-api.md) for more information.
+If set to `true`, this node will expose the Health API. Defaults to `true`. See [here](../avalanchego-apis/health.md) for more information.
 
 #### `--index-enabled` (boolean): {#index-enabled}
 
-If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
+If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index.md) for more information.
 
 #### `--api-info-enabled` (boolean):
 
-If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info-api.md) for more information.
+If set to `true`, this node will expose the Info API. Defaults to `true`. See [here](../avalanchego-apis/info.md) for more information.
 
 #### `--api-ipcs-enabled` (boolean):
 
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc-api.md) for more information.
+If set to `true`, this node will expose the IPCs API. Defaults to `false`. See [here](../avalanchego-apis/ipc.md) for more information.
 
 #### `--api-keystore-enabled` (boolean):
 
-If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore-api.md) for more information.
+If set to `false`, this node will not expose the Keystore API. Defaults to `true`. See [here](../avalanchego-apis/keystore.md) for more information.
 
 #### `--api-metrics-enabled` (boolean):
 
-If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics-api.md) for more information.
+If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics.md) for more information.
 
 #### `--http-shutdown-wait` (duration): 
 
@@ -728,7 +728,7 @@ The parameters are as follows:
 
 #### `index-transactions` (boolean):
 
-Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../avalanchego-apis/exchange-chain-x-chain-api.mdx#avm-get-address-txs-api).
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../avalanchego-apis/x-chain.mdx#avm-get-address-txs-api).
 
 Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
 

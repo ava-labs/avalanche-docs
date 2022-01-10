@@ -1,6 +1,5 @@
 ---
 sidebar_position: 14
-slug: metrics
 ---
 
 # Metrics API

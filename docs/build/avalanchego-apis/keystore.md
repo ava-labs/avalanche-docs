@@ -1,6 +1,5 @@
 ---
 sidebar_position: 13
-slug: keystore
 ---
 # Keystore API
 
@@ -102,7 +101,7 @@ curl -X POST --data '{
 
 ### keystore.exportUser
 
-Export a user. The user can be imported to another node with [`keystore.importUser`](keystore-api.md#keystore-importuser). The user’s password remains encrypted.
+Export a user. The user can be imported to another node with [`keystore.importUser`](keystore.md#keystore-importuser). The user’s password remains encrypted.
 
 #### **Signature**
 
