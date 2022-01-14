@@ -48,7 +48,10 @@ Building the node from source is recommended if you're a developer looking to ex
 
 If you want to build the node from source, you're first going to need to install Go 1.16.8 or later. Follow the instructions [here](https://golang.org/doc/install).
 
-Run `go version`. **It should be 1.16.8 or above.** Run `echo $GOPATH`. **It should not be empty.**
+Run `go version`. **It should be 1.16.8 or above.** 
+Run `echo $GOPATH`. **It should not be empty.**
+
+**If your go version 1.17.x then run `export GO111MODULE=off` before downloading AvalancheGo repository.**
 
 Download the AvalancheGo repository:
 
