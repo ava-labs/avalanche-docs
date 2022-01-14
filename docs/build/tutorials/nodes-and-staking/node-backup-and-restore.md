@@ -224,7 +224,7 @@ ssh -i /path/to/the/key.pem ubuntu@PUBLICIP 'tar czf - .avalanchego/db' | tar xv
 
 Make sure to replace the correct path to the key, and correct IP of the source machine. This will compress the database, but instead of writing it to a file it will pipe it over ssh directly to destination machine, where it will be decompressed and written to disk. The process can take a long time, make sure it completes before continuing.
 
-AFter copying is done, all you need to do now is move the database to the correct location on the destination machine. Assuming there is an installation there, we remove the old database and replace it with the new one:
+After copying is done, all you need to do now is move the database to the correct location on the destination machine. Assuming there is an installation there, we remove the old database and replace it with the new one:
 
 ```
 rm -rf ~/.avalanchego/db
