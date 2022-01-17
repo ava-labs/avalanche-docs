@@ -1113,7 +1113,7 @@ func (vm *VM) HealthCheck() (interface{}, error) { return nil, nil }
 
 VMs should implement the `Factory` interface. `New` method in the interface returns a new VM instance.
 
-```go title"=/timestampvm/factory.go"
+```go title="/timestampvm/factory.go"
 var _ vms.Factory = &Factory{}
 
 // Factory ...
