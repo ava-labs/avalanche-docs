@@ -1149,6 +1149,7 @@ This API method encodes a string to its byte representation using a given encodi
 type EncodeArgs struct {
     Data     string              `json:"data"`
     Encoding formatting.Encoding `json:"encoding"`
+    Length int32 `json:"length"`
 }
 
 // EncodeReply is the reply from Encoder
@@ -1159,7 +1160,18 @@ type EncodeReply struct {
 
 // Encoder returns the encoded data
 func (ss *StaticService) Encode(_ *http.Request, args *EncodeArgs, reply *EncodeReply) error {
-    bytes, err := formatting.Encode(args.Encoding, []byte(args.Data))
+    if len(args.Data) == 0 {
+        return fmt.Errorf("argument Data cannot be empty")
+    }
+    var argBytes []byte
+    if args.Length > 0 {
+        argBytes = make([]byte, args.Length)
+        copy(argBytes, args.Data)
+    } else {
+        argBytes = []byte(args.Data)
+    }
+
+    bytes, err := formatting.EncodeWithChecksum(args.Encoding, argBytes)
     if err != nil {
         return fmt.Errorf("couldn't encode data as string: %s", err)
     }
