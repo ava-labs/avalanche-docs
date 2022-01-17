@@ -689,6 +689,9 @@ func (b *Block) Status() choices.Status { return b.status }
 
 // Bytes returns the byte repr. of this block
 func (b *Block) Bytes() []byte { return b.bytes }
+
+// SetStatus sets the status of this block
+func (b *Block) SetStatus(status choices.Status) { b.status = status }
 ```
 
 ### Virtual Machine
