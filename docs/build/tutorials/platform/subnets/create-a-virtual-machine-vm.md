@@ -697,7 +697,7 @@ Now, let’s look at our timestamp VM implementation, which implements the `bloc
 
 The declaration is:
 
-```go title="/timestampvm/block.go"
+```go title="/timestampvm/vm.go"
 // This Virtual Machine defines a blockchain that acts as a timestamp server
 // Each block contains data (a payload) and the timestamp when it was created
 
@@ -1113,7 +1113,7 @@ func (vm *VM) HealthCheck() (interface{}, error) { return nil, nil }
 
 VMs should implement the `Factory` interface. `New` method in the interface returns a new VM instance.
 
-```go title"=/timestampvm/factory.go"
+```go title="/timestampvm/factory.go"
 var _ vms.Factory = &Factory{}
 
 // Factory ...
