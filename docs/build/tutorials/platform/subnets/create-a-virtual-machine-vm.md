@@ -1149,7 +1149,8 @@ This API method encodes a string to its byte representation using a given encodi
 type EncodeArgs struct {
     Data     string              `json:"data"`
     Encoding formatting.Encoding `json:"encoding"`
-    Length int32 `json:"length"`
+    Length   int32               `json:"length"`
+}
 }
 
 // EncodeReply is the reply from Encoder
