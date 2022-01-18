@@ -1151,7 +1151,6 @@ type EncodeArgs struct {
     Encoding formatting.Encoding `json:"encoding"`
     Length   int32               `json:"length"`
 }
-}
 
 // EncodeReply is the reply from Encoder
 type EncodeReply struct {
