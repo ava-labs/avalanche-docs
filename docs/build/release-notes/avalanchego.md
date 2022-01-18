@@ -6,11 +6,11 @@
 
 :::
 
-
-
 ## [v1.7.4]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.4))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
+
+**The first startup of the C-Chain will take a few minutes longer due to an index update.**
 
 **Consensus**
 
@@ -22,8 +22,9 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 
 **Coreth**
 
-- Added an index mapping height to the list of accepted atomic operations at that height in a trie. Generating this index will cause the node to take approximately 2 minutes longer to startup the C-Chain for the first restart.
+- Added an index mapping height to the list of accepted atomic operations at that height in a trie. Generating this index will cause the node to take a few minutes longer to startup the C-Chain for the first restart.
 - Updated Geth dependency to `v1.10.15`.
+- Updated `networkID` to match `chainID`.
 
 **VMs**
 
@@ -45,6 +46,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Added `--stake-supply-cap` which defaults to `720,000,000,000,000,000` nAVAX.
 - Renamed `--bootstrap-multiput-max-containers-sent` to `--bootstrap-ancestors-max-containers-sent`.
 - Renamed `--bootstrap-multiput-max-containers-received` to `--bootstrap-ancestors-max-containers-received`.
+- Enforced that `--staking-enabled=false` can not be specified on public networks (`Fuji` and `Mainnet`).
 
 **Metrics**
 
@@ -55,6 +57,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Improved `corruptabledb` error reporting by tracking the first reported error.
 - Updated CPU tracking to use the proper EWMA tracker rather than a linear approximation.
 - Separated health checks into `readiness`, `healthiness`, and `liveness` checks to support more fine-grained monitoring.
+- Refactored API client utilities to use a `Context` rather than an explicit timeout.
 
 
 ## [v1.7.3]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.3))
