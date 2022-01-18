@@ -1318,7 +1318,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of successful queries per chain in the last minute",
+      "description": "Percentage of successful queries per chain in the last minute",
       "fieldConfig": {
         "defaults": {
           "color": {
