@@ -459,7 +459,7 @@
           "links": [
             {
               "title": "Machine details",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -529,7 +529,7 @@
           "links": [
             {
               "title": "Detail view",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
