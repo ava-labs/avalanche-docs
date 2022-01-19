@@ -369,3 +369,133 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 }
 ```
 
+## Example: Iterating Through X-Chain Transaction
+
+Here is an example how to iterate through all transactions on X-Chain.
+
+:::warning
+To help users to try out this example and other index apis, we have set up a testing indexer node located at https://indexer.avax.network which is restricted by an auth token `980fba496a0f02f38d39c518be3a1f340d075af6f9c5cec2fdec76b5d6b4d1ab`. This indexer node is not for production use. We may change or shut it down at any time without notice.
+:::
+
+You can use the Index API to get the ID of every transaction that has been accepted on X-Chain, and use the X-Chain API method `avm.getTx` to get a human-readable representation of the transaction.
+
+To get an X-Chain transaction by its index (the order it was accepted in), use Index API method [index.getlastaccepted](#indexgetlastaccepted).
+
+For example, to get the *second* transaction (note that `“index”:1`) accepted on the X-Chain, do:
+
+```cpp
+curl --location --request POST 'https://indexer.avax.network/ext/index/X/tx?token=980fba496a0f02f38d39c518be3a1f340d075af6f9c5cec2fdec76b5d6b4d1ab' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "jsonrpc": "2.0",
+   "method": "index.getContainerByIndex",
+   "params": {
+       "encoding":"hex",
+       "index":1
+   },
+   "id": 1
+}'
+```
+
+This returns the ID of the second transaction accepted in the network history. To get the third transaction on the X-Chain, use `“index”:2`, and so on. 
+
+The above API call gives the response below:
+
+```cpp
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "id": "ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo",
+    "bytes": "0x00000000000000000001ed5f38341e436e5d46e2bb00b45d62ae97d1b050c64bc634ae10626739e35c4b0000000221e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000000129f6afc0000000000000000000000001000000017416792e228a765c65e2d76d28ab5a16d18c342f21e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff0000000700000222afa575c00000000000000000000000010000000187d6a6dd3cd7740c8b13a410bea39b01fa83bb3e000000016f375c785edb28d52edb59b54035c96c198e9d80f5f5f5eee070592fe9465b8d0000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff0000000500000223d9ab67c0000000010000000000000000000000010000000900000001beb83d3d29f1247efb4a3a1141ab5c966f46f946f9c943b9bc19f858bd416d10060c23d5d9c7db3a0da23446b97cd9cf9f8e61df98e1b1692d764c84a686f5f801a8da6e40",
+    "timestamp": "2021-11-04T00:42:55.01643414Z",
+    "encoding": "hex",
+    "index": "1"
+  },
+  "id": 1
+}
+```
+
+The ID of this transaction is `ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo`.
+
+To get the transaction by its ID, use avm.getTx:
+
+```cpp
+curl -X POST --data '{                           
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.getTx",
+    "params" :{
+        "txID":"ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo",
+        "encoding": "json"
+    }
+}' -H 'content-type:application/json;' https://api.avax.network/ext/bc/X
+```
+
+Response:
+
+```cpp
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "networkID": 1,
+        "blockchainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+        "outputs": [
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj"
+              ],
+              "amount": 4999000000,
+              "locktime": 0,
+              "threshold": 1
+            }
+          },
+          {
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "X-avax1slt2dhfu6a6qezcn5sgtagumq8ag8we75f84sw"
+              ],
+              "amount": 2347999000000,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
+        ],
+        "inputs": [
+          {
+            "txID": "qysTYUMCWdsR3MctzyfXiSvoSf6evbeFGRLLzA4j2BjNXTknh",
+            "outputIndex": 0,
+            "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "input": {
+              "amount": 2352999000000,
+              "signatureIndices": [
+                0
+              ]
+            }
+          }
+        ],
+        "memo": "0x"
+      },
+      "credentials": [
+        {
+          "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+          "credential": {
+            "signatures": [
+              "0xbeb83d3d29f1247efb4a3a1141ab5c966f46f946f9c943b9bc19f858bd416d10060c23d5d9c7db3a0da23446b97cd9cf9f8e61df98e1b1692d764c84a686f5f801"
+            ]
+          }
+        }
+      ]
+    },
+    "encoding": "json"
+  },
+  "id": 1
+}
+```
