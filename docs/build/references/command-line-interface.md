@@ -48,7 +48,7 @@ If set to `true`, this node will expose the Health API. Defaults to `true`. See 
 
 #### `--index-enabled` (boolean): {#index-enabled}
 
-If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index.md) for more information.
+If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
 
 #### `--api-info-enabled` (boolean):
 
