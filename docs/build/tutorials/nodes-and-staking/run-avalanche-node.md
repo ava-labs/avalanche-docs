@@ -28,8 +28,8 @@ This tutorial is primarily geared toward developers and people interested in how
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 * CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GB
-* Storage: 200 GB
+* RAM: 16 GiB
+* Storage: 512 GiB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
