@@ -433,7 +433,7 @@ curl -X POST --data '{
 
 Response:
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
