@@ -383,7 +383,7 @@ To get an X-Chain transaction by its index (the order it was accepted in), use I
 
 For example, to get the *second* transaction (note that `“index”:1`) accepted on the X-Chain, do:
 
-```cpp
+```sh
 curl --location --request POST 'https://indexer.avax.network/ext/index/X/tx?token=980fba496a0f02f38d39c518be3a1f340d075af6f9c5cec2fdec76b5d6b4d1ab' \
 --header 'Content-Type: application/json' \
 --data-raw '{
