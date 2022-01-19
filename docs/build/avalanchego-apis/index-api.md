@@ -55,7 +55,7 @@ Get the most recently accepted container.
 
 #### **Signature**
 
-```cpp
+```sh
 index.getLastAccepted({
   encoding:string
 }) -> {
@@ -77,7 +77,7 @@ where:
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -92,7 +92,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "id"     :1,
@@ -112,7 +112,7 @@ Get container by index. The first container accepted is at index 0, the second i
 
 #### **Signature**
 
-```cpp
+```sh
 index.getContainerByIndex({
   index: uint64,
   encoding: string
@@ -133,7 +133,7 @@ index.getContainerByIndex({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -149,7 +149,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "id"     :1,
@@ -169,7 +169,7 @@ Get container by ID.
 
 #### **Signature**
 
-```cpp
+```sh
 index.getContainerByID({
   containerID: string,
   encoding: string
@@ -190,7 +190,7 @@ index.getContainerByID({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -206,7 +206,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "id"     :1,
@@ -226,7 +226,7 @@ Returns containers with indices in \[`startIndex`, `startIndex+1`, ... , `startI
 
 #### **Signature**
 
-```cpp
+```sh
 index.getContainerRange({
   startIndex: uint64,
   numToFetch: uint64,
@@ -248,7 +248,7 @@ index.getContainerRange({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -265,7 +265,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "id"     :1,
@@ -285,7 +285,7 @@ Get a container's index.
 
 #### **Signature**
 
-```cpp
+```sh
 index.getIndex({
   containerID: string,
   encoding: string
@@ -298,7 +298,7 @@ where `encoding` is `"cb58"` or `"hex"`.
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -314,7 +314,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "result":
@@ -331,7 +331,7 @@ Returns true if the container is in this index.
 
 #### **Signature**
 
-```cpp
+```sh
 index.isAccepted({
   containerID: string,
   encoding: string
@@ -342,7 +342,7 @@ index.isAccepted({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -358,7 +358,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc":"2.0",
   "result":
@@ -383,7 +383,7 @@ To get an X-Chain transaction by its index (the order it was accepted in), use I
 
 For example, to get the *second* transaction (note that `“index”:1`) accepted on the X-Chain, do:
 
-```cpp
+```sh
 curl --location --request POST 'https://indexer-demo.avax.network/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -401,7 +401,7 @@ This returns the ID of the second transaction accepted in the network history. T
 
 The above API call gives the response below:
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -417,9 +417,9 @@ The above API call gives the response below:
 
 The ID of this transaction is `ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo`.
 
-To get the transaction by its ID, use avm.getTx:
+To get the transaction by its ID, use API method `avm.getTx`:
 
-```cpp
+```sh
 curl -X POST --data '{                           
     "jsonrpc":"2.0",
     "id"     :1,
@@ -433,7 +433,7 @@ curl -X POST --data '{
 
 Response:
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
