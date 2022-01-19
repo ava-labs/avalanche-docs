@@ -401,7 +401,7 @@ This returns the ID of the second transaction accepted in the network history. T
 
 The above API call gives the response below:
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
