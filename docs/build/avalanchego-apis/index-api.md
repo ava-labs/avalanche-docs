@@ -397,7 +397,7 @@ curl --location --request POST 'https://indexer-demo.avax.network/ext/index/X/tx
 }'
 ```
 
-This returns the ID of the second transaction accepted in the network history. To get the third transaction on the X-Chain, use `“index”:2`, and so on. 
+This returns the ID of the second transaction accepted in the X-Chain's history. To get the third transaction on the X-Chain, use `"index":2`, and so on. 
 
 The above API call gives the response below:
 
