@@ -374,7 +374,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 Here is an example how to iterate through all transactions on X-Chain.
 
 :::warning
-To help users to try out this example and other index apis, we have set up a testing indexer node located at https://indexer.avax.network which is restricted by an auth token `980fba496a0f02f38d39c518be3a1f340d075af6f9c5cec2fdec76b5d6b4d1ab`. This indexer node is not for production use. We may change or shut it down at any time without notice.
+To help users to try out this example and other index apis, we have set up a testing indexer node located at https://indexer-demo.avax.network. This indexer node is not for production use. We may change or shut it down at any time without notice.
 :::
 
 You can use the Index API to get the ID of every transaction that has been accepted on X-Chain, and use the X-Chain API method `avm.getTx` to get a human-readable representation of the transaction.
@@ -384,7 +384,7 @@ To get an X-Chain transaction by its index (the order it was accepted in), use I
 For example, to get the *second* transaction (note that `“index”:1`) accepted on the X-Chain, do:
 
 ```cpp
-curl --location --request POST 'https://indexer.avax.network/ext/index/X/tx?token=980fba496a0f02f38d39c518be3a1f340d075af6f9c5cec2fdec76b5d6b4d1ab' \
+curl --location --request POST 'https://indexer-demo.avax.network/ext/index/X/tx' \
 --header 'Content-Type: application/json' \
 --data-raw '{
    "jsonrpc": "2.0",
