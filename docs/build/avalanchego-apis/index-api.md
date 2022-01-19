@@ -371,7 +371,7 @@ curl --location --request POST 'localhost:9650/ext/index/X/tx' \
 
 ## Example: Iterating Through X-Chain Transaction
 
-Here is an example how to iterate through all transactions on X-Chain.
+Here is an example of how to iterate through all transactions on the X-Chain.
 
 :::warning
 To help users to try out this example and other index apis, we have set up a testing indexer node located at https://indexer-demo.avax.network. This indexer node is not for production use. We may change or shut it down at any time without notice.
