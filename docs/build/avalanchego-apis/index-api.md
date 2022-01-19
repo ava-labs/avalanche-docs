@@ -417,7 +417,7 @@ The above API call gives the response below:
 
 The ID of this transaction is `ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo`.
 
-To get the transaction by its ID, use avm.getTx:
+To get the transaction by its ID, use API method `avm.getTx`:
 
 ```cpp
 curl -X POST --data '{                           
