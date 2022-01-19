@@ -419,7 +419,7 @@ The ID of this transaction is `ZGYTSU8w3zUP6VFseGC798vA2Vnxnfj6fz1QPfA9N93bhjJvo
 
 To get the transaction by its ID, use API method `avm.getTx`:
 
-```cpp
+```sh
 curl -X POST --data '{                           
     "jsonrpc":"2.0",
     "id"     :1,
