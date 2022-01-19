@@ -381,7 +381,7 @@ You can use the Index API to get the ID of every transaction that has been accep
 
 To get an X-Chain transaction by its index (the order it was accepted in), use Index API method [index.getlastaccepted](#indexgetlastaccepted).
 
-For example, to get the *second* transaction (note that `“index”:1`) accepted on the X-Chain, do:
+For example, to get the *second* transaction (note that `"index":1`) accepted on the X-Chain, do:
 
 ```sh
 curl --location --request POST 'https://indexer-demo.avax.network/ext/index/X/tx' \
