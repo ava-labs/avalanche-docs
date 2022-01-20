@@ -8,18 +8,18 @@ sidebar_position: 4
 
 One of the core features of Avalanche is the ability to create new, custom blockchains, which are defined by [Virtual Machines (VMs)](../../../../learn/platform-overview/README.md#virtual-machines)
 
-In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.0). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
+In this tutorial, we’ll create a very simple VM. The blockchain defined by the VM is a [TimestampVM](https://github.com/ava-labs/timestampvm/tree/v1.2.1). Each block in the blockchain contains the timestamp when it was created along with a 32-byte piece of data (payload). Each block’s timestamp is after its parent’s timestamp.
 
 Such a server is useful because it can be used to prove a piece of data existed at the time the block was created. Suppose you have a book manuscript, and you want to be able to prove in the future that the manuscript exists today. You can add a block to the blockchain where the block’s payload is a hash of your manuscript. In the future, you can prove that the manuscript existed today by showing that the block has the hash of your manuscript in its payload (this follows from the fact that finding the pre-image of a hash is impossible).
 
 A blockchain can run as a separate process from AvalancheGo and can communicate with AvalancheGo over gRPC. This is enabled by `rpcchainvm`, a special VM that uses [`go-plugin`](https://pkg.go.dev/github.com/hashicorp/go-plugin) and wraps another VM implementation. The C-Chain, for example, runs the [Coreth](https://github.com/ava-labs/coreth) VM in this fashion.
 
-Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/tree/v1.2.0)
+Before we get to the implementation of a VM, we’ll look at the interface that a VM must implement to be compatible with AvalancheGo's consensus engine. We’ll show and explain all the code in snippets. If you want to see all the code in one place, see [this repository.](https://github.com/ava-labs/timestampvm/tree/v1.2.1)
 
 ---
 **NOTES**
 * IDs of Blockchains, Subnets, Transactions and Addresses can be different for each run/network. It means that some inputs, endpoints etc. in the tutorial can be different when you try.
-* In this tutorial we used AvalancheGo v1.7.0 and TimestampVM v1.2.0. The code in latest version/branch can be different than ones presented in this page.
+* In this tutorial we used AvalancheGo v1.7.4 and TimestampVM v1.2.1. The code in latest version/branch can be different than ones presented in this page.
 ---
 
 
@@ -28,7 +28,7 @@ Before we get to the implementation of a VM, we’ll look at the interface that 
 
 ### `block.ChainVM`
 
-To reach consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessible from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/v1.7.0/snow/engine/snowman/block/vm.go).
+To reach consensus on linear blockchains (as opposed to DAG blockchains), Avalanche uses the Snowman consensus engine. In order to be compatible with Snowman, a VM must implement the `block.ChainVM` interface, which can be accessible from [AvalancheGo repository](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/snowman/block/vm.go).
 
 The interface is big, but don’t worry, we’ll explain each method and see an implementation example, and it isn't important that you understand every detail right away. Comments in the code provide more detail about interface methods.
 
@@ -94,7 +94,7 @@ type Parser interface {
 
 `common.VM` is a type that every `VM`, whether a DAG or linear chain, must implement.
 
-You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.0/snow/engine/common/vm.go)
+You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/engine/common/vm.go)
 
 ```go title="/snow/engine/common/vm.go"
 // VM describes the interface that all consensus VMs must implement
@@ -185,7 +185,7 @@ type VM interface {
 
 You may have noticed the `snowman.Block` type referenced in the `block.ChainVM` interface. It describes the methods that a block must implement to be a block in a linear (Snowman) chain.
 
-Let’s look at this interface and its methods. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.0/snow/consensus/snowman/block.go)
+Let’s look at this interface and its methods. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/consensus/snowman/block.go)
 
 ```go title="/snow/consensus/snowman/block.go"
 // Block is a possible decision that dictates the next canonical block.
@@ -224,7 +224,7 @@ type Block interface {
 
 ### `choices.Decidable`
 
-This interface is the superset of every decidable object, such as transactions, blocks and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.0/snow/choices/decidable.go)
+This interface is the superset of every decidable object, such as transactions, blocks and vertices. You can see the full file from [here.](https://github.com/ava-labs/avalanchego/blob/v1.7.4/snow/choices/decidable.go)
 
 
 ```go title="/snow/choices/decidable.go"
@@ -263,7 +263,7 @@ type Decidable interface {
 
 ## rpcchainvm
 
-`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [server](https://github.com/ava-labs/avalanchego/blob/v1.7.0/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/v1.7.0/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
+`rpcchainvm` is a special VM that wraps a `block.ChainVM` and allows the wrapped blockchain to run in its own process separate from AvalancheGo. `rpcchainvm` has two important parts: a server and a client. The [server](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_server.go) runs the underlying `block.ChainVM` in its own process and allows the underlying VM's methods to be called via gRPC. The [client](https://github.com/ava-labs/avalanchego/blob/v1.7.4/vms/rpcchainvm/vm_client.go) runs as part of AvalancheGo and makes gRPC calls to the corresponding server in order to update or query the state of the blockchain.
 
 To make things more concrete: suppose that AvalancheGo wants to retrieve a block from a chain run in this fashion. AvalancheGo calls the client's `GetBlock` method, which makes a gRPC call to the server, which is running in a separate process. The server calls the underlying VM's `GetBlock` method and serves the response to the client, which in turn gives the response to AvalancheGo.
 
@@ -294,7 +294,7 @@ It calls `vm.vm.BuildBlock()`, where `vm.vm` is the underlying VM implementation
 
 Now we know the interface our VM must implement and the libraries we can use to build a VM.
 
-Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/v1.2.0).
+Let’s write our VM, which implements `block.ChainVM` and whose blocks implement `snowman.Block`. You can also follow the code in the [TimestampVM repository](https://github.com/ava-labs/timestampvm/tree/v1.2.1).
 
 ### Codec
 
@@ -691,18 +691,35 @@ func (b *Block) Status() choices.Status { return b.status }
 func (b *Block) Bytes() []byte { return b.bytes }
 ```
 
+#### Helper Functions
+
+These methods are convenience methods for blocks, they're not a part of the block interface.
+```go
+// Initialize sets [b.bytes] to [bytes], [b.id] to hash([b.bytes]),
+// [b.status] to [status] and [b.vm] to [vm]
+func (b *Block) Initialize(bytes []byte, status choices.Status, vm *VM) {
+	b.bytes = bytes
+	b.id = hashing.ComputeHash256Array(b.bytes)
+	b.status = status
+	b.vm = vm
+}
+
+// SetStatus sets the status of this block
+func (b *Block) SetStatus(status choices.Status) { b.status = status }
+```
+
 ### Virtual Machine
 
 Now, let’s look at our timestamp VM implementation, which implements the `block.ChainVM` interface.
 
 The declaration is:
 
-```go title="/timestampvm/vm.go"
+```go title="/timestampvm/block.go"
 // This Virtual Machine defines a blockchain that acts as a timestamp server
 // Each block contains data (a payload) and the timestamp when it was created
 
 const (
-    dataLen      = 32
+  dataLen = 32
 	Name    = "timestampvm"
 )
 
@@ -1077,7 +1094,7 @@ func (vm *VM) Version() (string, error) {
 	return Version.String(), nil
 }
 
-func (vm *VM) Connected(id ids.ShortID) error {
+func (vm *VM) Connected(id ids.ShortID, nodeVersion version.Application) error {
 	return nil // noop
 }
 
@@ -1423,7 +1440,7 @@ Now AvalancheGo's `rpcchainvm` can connect to this plugin and calls its methods.
 
 ### Executable Binary
 
-This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.0/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
+This VM has a [build script](https://github.com/ava-labs/timestampvm/blob/v1.2.1/scripts/build.sh) that builds an executable of this VM (when invoked, it runs the `main` method from above.)
 
 The path to the executable, as well as its name, can be provided to the build script via arguments. For example:
 
