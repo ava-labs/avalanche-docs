@@ -18,7 +18,7 @@
       }
     ]
   },
-  "description": "Home dashboard with most important indicators for your node and machine",
+  "description": "Home dashboard with the most important indicators for your node and machine",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
@@ -459,7 +459,7 @@
           "links": [
             {
               "title": "Machine details",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -529,7 +529,7 @@
           "links": [
             {
               "title": "Detail view",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -655,7 +655,7 @@
     },
     {
       "datasource": null,
-      "description": "Average time it takes to get a response from a peer",
+      "description": "Average time to get a response from a peer",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1175,7 +1175,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of blocks/vrtices currently being processed by the node",
+      "description": "Number of blocks/vertices currently being processed by the node",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1318,7 +1318,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of successful queries per chain in the last minute",
+      "description": "Percentage of successful queries per chain in the last minute",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1398,7 +1398,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Measures how long each database operation is taking on average",
+      "description": "How long each database operation is taking on average",
       "fieldConfig": {
         "defaults": {
           "color": {
