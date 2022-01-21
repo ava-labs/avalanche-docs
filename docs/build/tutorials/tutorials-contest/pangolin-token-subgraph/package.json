@@ -10,7 +10,7 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ofemeteng/pangolin-token"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.21.1",
+    "@graphprotocol/graph-cli": "0.25.1",
     "@graphprotocol/graph-ts": "0.20.0"
   }
 }
