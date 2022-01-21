@@ -14,7 +14,6 @@
 /build/avalanchego-apis/admin-api/ /build/avalanchego-apis/admin 301
 /build/avalanchego-apis/auth-api/ /build/avalanchego-apis/auth 301
 /build/avalanchego-apis/health-api/ /build/avalanchego-apis/health 301
-/build/avalanchego-apis/index-api/ /build/avalanchego-apis/index 301
 /build/avalanchego-apis/info-api/ /build/avalanchego-apis/info 301
 /build/avalanchego-apis/ipc-api/ /build/avalanchego-apis/ipc 301
 /build/avalanchego-apis/keystore-api/ /build/avalanchego-apis/keystore 301
