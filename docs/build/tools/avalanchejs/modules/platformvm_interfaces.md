@@ -6,6 +6,8 @@
 
 ### Interfaces
 
+* [GetCurrentValidatorsParams](../interfaces/platformvm_interfaces.getcurrentvalidatorsparams.md)
+* [GetPendingValidatorsParams](../interfaces/platformvm_interfaces.getpendingvalidatorsparams.md)
 * [GetRewardUTXOsParams](../interfaces/platformvm_interfaces.getrewardutxosparams.md)
 * [GetRewardUTXOsResponse](../interfaces/platformvm_interfaces.getrewardutxosresponse.md)
 * [GetStakeParams](../interfaces/platformvm_interfaces.getstakeparams.md)
