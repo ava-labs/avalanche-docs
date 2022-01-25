@@ -1838,11 +1838,11 @@ A validator verifies transactions on a blockchain.
 +------------------+----------+
 | node_id : string | 20 bytes |
 +------------------+----------+
-| start   : number | 8 bytes  |
+| start   : uint64 | 8 bytes  |
 +------------------+----------+
-| end     : number | 8 bytes  |
+| end     : uint64 | 8 bytes  |
 +------------------+----------+
-| wght    : number | 8 bytes  |
+| wght    : uint64 | 8 bytes  |
 +------------------+----------+
 |                  | 44 bytes |
 +------------------+----------+
@@ -1852,7 +1852,7 @@ A validator verifies transactions on a blockchain.
 
 ```text
 message Validator {
-    uint32 node_id = 1;        // 20 bytes
+    string node_id = 1;        // 20 bytes
     uint64 start = 2;          // 08 bytes
     uint64 end = 3;            // 08 bytes
     uint64 wght = 4;           // 08 bytes
