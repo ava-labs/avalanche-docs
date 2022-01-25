@@ -1820,3 +1820,77 @@ Let’s make a subnet auth:
   0x00, 0x00, 0x00, 0x00
 ]
 ```
+
+## Validator
+
+### **What Validator Contains**
+
+A validator verifies transactions on a blockchain. 
+
+* **`NodeID`** is the ID of the validator
+* **`Start`** Unix time this validator starts validating
+* **`End`** Unix time this validator stops validating
+* **`Wght`** Weight of this validator used when sampling
+
+### **Gantt Validator Specification**
+
+```text
++------------------+----------+
+| node_id : string | 20 bytes |
++------------------+----------+
+| start   : number | 8 bytes  |
++------------------+----------+
+| end     : number | 8 bytes  |
++------------------+----------+
+| wght    : number | 8 bytes  |
++------------------+----------+
+|                  | 44 bytes |
++------------------+----------+
+```
+
+### **Proto Validator Specification**
+
+```text
+message Validator {
+    uint32 node_id = 1;        // 20 bytes
+    uint64 start = 2;          // 08 bytes
+    uint64 end = 3;            // 08 bytes
+    uint64 wght = 4;           // 08 bytes
+}
+```
+
+### **Validator Example**
+
+Let’s make a validator:
+
+* **`NodeID`**: `"NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu"`
+* **`Start`**: `1643068824`
+* **`End`**: `1644364767`
+* **`Wght`**: `20`
+
+```text
+[
+    NodeID  <- 0xaa18d3991cf637aa6c162f5e95cf163f69cd8291
+    Start   <- 0x61ef3d98
+    End     <- 0x620303df
+    Wght    <- 0x14
+]
+
+=
+[
+  // node id
+  0xaa, 0x18, 0xd3, 0x99, 0x1c, 0xf6, 0x37, 
+  0xaa, 0x6c, 0x16, 0x2f, 0x5e, 0x95, 0xcf, 
+  0x16, 0x3f, 0x69, 0xcd, 0x82, 0x91,
+
+  // start
+  0x61, 0xef, 0x3d, 0x98,
+
+ 
+  // end
+  0x62, 0x03, 0x03, 0xdf,
+
+  // wght
+  0x14,
+]
+```
