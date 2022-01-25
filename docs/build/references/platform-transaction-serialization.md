@@ -1823,9 +1823,11 @@ Let’s make a subnet auth:
 
 ## Validator
 
+A validator verifies transactions on a blockchain. 
+
 ### **What Validator Contains**
 
-A validator verifies transactions on a blockchain. 
+A validator contains `NodeID`, `Start`, `End`, and `Wght`
 
 * **`NodeID`** is the ID of the validator
 * **`Start`** Unix time this validator starts validating
@@ -1892,5 +1894,92 @@ Let’s make a validator:
 
   // wght
   0x14,
+]
+```
+
+## Rewards Owner
+
+Where to send staking rewards when done validating
+
+### **What Rewards Owner Contains**
+
+A rewards owner contains a `TypeID`, `Locktime`, `Threshold`, and `Addresses`.
+
+* **`TypeID`** is the ID for this validator. It is `0x0000000b`.
+* **`Locktime`** is a long that contains the unix timestamp that this output can be spent after. The unix timestamp is specific to the second.
+* **`Threshold`** is an int that names the number of unique signatures required to spend the output. Must be less than or equal to the length of **`Addresses`**. If **`Addresses`** is empty, must be 0.
+* **`Addresses`** is a list of unique addresses that correspond to the private keys that can be used to spend this output. Addresses must be sorted lexicographically.
+
+### **Gantt Rewards Owner Specification**
+
+```text
++------------------------+-------------------------------+
+| type_id   : int        | 4 bytes                       |
++------------------------+-------------------------------+
+| locktime  : long       | 8 bytes                       |
++------------------------+-------------------------------+
+| threshold : int        | 4 bytes                       |
++------------------------+-------------------------------+
+| addresses : [][20]byte | 4 + 20 * len(addresses) bytes |
++------------------------+-------------------------------+
+|                        | 40 bytes                      |
++------------------------+-------------------------------+
+```
+
+### **Proto Rewards Owner Specification**
+
+```text
+message RewardsOwner {
+    string type_id = 1;           // 4 bytes
+    uint64 locktime = 2;          // 08 bytes
+    uint32 threshold = 3;         // 04 bytes
+    repeated bytes addresses = 4; // 04 bytes + 20 bytes * len(addresses)
+}
+```
+
+### **Rewards Owner Example**
+
+Let’s make a rewards owner:
+
+* **`TypeID`**: `11`
+* **`Locktime`**: `54321`
+* **`Threshold`**: `1`
+* **`Addresses`**:
+* `0x51025c61fbcfc078f69334f834be6dd26d55a955`
+* `0xc3344128e060128ede3523a24a461c8943ab0859`
+
+```text
+[
+    TypeID  <- 0x0000000b
+    Locktime  <- 0x000000000000d431
+    Threshold <- 0x00000001
+    Addresses <- [
+        0x51025c61fbcfc078f69334f834be6dd26d55a955,
+        0xc3344128e060128ede3523a24a461c8943ab0859,
+    ]
+]
+
+=
+[
+  // type id
+  0x00, 0x00, 0x00, 0x0b,
+
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd4, 0x31,
+
+  // threshold:
+  0x00, 0x00, 0x00, 0x01,
+
+  // number of addresses:
+  0x00, 0x00, 0x00, 0x02,
+
+  // addrs[0]:
+  0x51, 0x02, 0x5c, 0x61, 0xfb, 0xcf, 0xc0, 0x78,
+  0xf6, 0x93, 0x34, 0xf8, 0x34, 0xbe, 0x6d, 0xd2,
+  0x6d, 0x55, 0xa9, 0x55,
+
+  // addrs[1]:
+  0xc3, 0x34, 0x41, 0x28, 0xe0, 0x60, 0x12, 0x8e,
+  0xde, 0x35, 0x23, 0xa2, 0x4a, 0x46, 0x1c, 0x89,
+  0x43, 0xab, 0x08, 0x59,
 ]
 ```
