@@ -70,7 +70,7 @@ Now you're ready to launch an EC2 instance. Go to the EC2 Dashboard and select *
 
 Select **Ubuntu 20.04 LTS (HVM), SSD Volume Type** for the operating system.
 
-![Select Ubuntu 20.04 LTS.](https://miro.medium.com/max/1591/1*u438irkY1UoRGHO6v76jRw.png)
+![Select Ubuntu 20.04 LTS.](/img/Ubuntu-20.04-LTS.png)
 
 Next, choose your instance type. This defines the hardware specifications of the cloud instance. In this tutorial we set up a **c5.2xlarge**. This should be more than powerful enough since Avalanche is a lightweight consensus protocol. To create a c5.2xlarge instance, select the **Compute-optimized** option from the filter drop-down menu.
 
