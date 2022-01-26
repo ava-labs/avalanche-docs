@@ -15,5 +15,6 @@ sidebar_position: 1
 | [**Upgrade Your AvalancheGo Node**](upgrade-your-avalanchego-node.mdx) | Upgrade your Avalanche node |
 | [**Set Up an Avalanche Node with Amazon Web Services (AWS)**](setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS |
 | [**Set Up an Avalanche Node with Microsoft Azure**](set-up-an-avalanche-node-with-microsoft-azure.md) | Create a node that runs on Microsoft Azure |
+| [**Set Up an Avalanche Node with Google GCP**](set-up-an-avalanche-node-with-google-cloud-platform.md) | Create a node that runs on Google GCP |
 | [**Run a Five Node Network with Avash**](run-a-five-node-network-with-avash.md) | Run a Five Node Network with Avash |
 | [**Hetzner Volume Migration**](hetzner-volume-migration.md) | Hetzner Volume Migration |
