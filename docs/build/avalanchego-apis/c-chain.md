@@ -70,7 +70,7 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
-Note: For batched requests, the maximum number of items is 40. We are working on to support a larger batch. 
+Note: For batched requests, the maximum number of items is 40. We are working on to support a larger batch size. 
 
 #### eth_getAssetBalance
 
