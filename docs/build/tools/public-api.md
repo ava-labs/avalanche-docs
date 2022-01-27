@@ -8,7 +8,7 @@ The public API server is at `https://api.avax.network/` for Avalanche Mainnet an
 
 * For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
 * For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
-* For p-Chain API, the URL is `https://api.avax.network/ext/P`.
+* For P-Chain API, the URL is `https://api.avax.network/ext/P`.
 
 ## Supported APIs
 
