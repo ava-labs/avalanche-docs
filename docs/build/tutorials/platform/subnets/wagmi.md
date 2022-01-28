@@ -6,7 +6,13 @@ sidebar_position: 7
 
 The WAGMI ("We're All Going to Make It") Subnet Demo is a high throughput testbed for EVM (Ethereum Virtual Machine) optimizations. It is parameterized to run at a factor more capacity than Fuji/Mainnet C-Chain and will be used to experiment with release candidates before they make it into an official coreth release.
 
-![wagi-param](/img/wagi-params.png)
+## Network Parameters
+* Network ID: 11111
+* Chain ID: 11111
+* Block Gas Limit: 20,000,000 (2.5x C-Chain)
+* 10s Gas Target: 100,000,000 (~6.67x C-Chain)
+* Min Fee: 1 GWei (4% of C-Chain)
+* Target Block Rate: 2s (Same as C-Chain)
 
 Everyone that has used the the C-Chain more than twice (~970k addresses) has been airdropped 10 WGM tokens. With the current fee parameterization, this should be enough for hundreds of txs.
 
