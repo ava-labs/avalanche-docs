@@ -4,6 +4,9 @@ sidebar_position: 1
 
 # Create a Subnet
 
+**Please checkout [subnet-cli](https://github.com/ava-labs/subnet-cli#subnet-cli-wizard) for the fast way to create a subnet.** You are welcome to read this document to understand how subnet is created.
+
+
 ## Introduction
 
 A subnet is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
