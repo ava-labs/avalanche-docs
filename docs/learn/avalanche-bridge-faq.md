@@ -21,7 +21,7 @@ It is possible, but very unlikely, that the Ethereum transaction issued by the b
 
 ### How long does a bridge transfer take?
 
-The Ethereum transaction should take 10 - 15 minutes. The Avalance transaction takes a few seconds.
+The Ethereum transaction should take 10 - 15 minutes. The Avalanche transaction takes a few seconds.
 
 ### Why is the Avalanche transaction part of the bridge taking so long?
 
