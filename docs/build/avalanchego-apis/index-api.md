@@ -9,6 +9,8 @@ Indexed containers (that is, accepted blocks, vertices and transactions) are tim
 
 Note that for DAGs (including the X-Chain), nodes may accept vertices and transactions in a different order from one another.
 
+If `--index-enabled` is changed to `false` from `true`,  AvalancheGo won't start as doing so would cause a previously complete index to become incomplete, unless the user explicitly says to do so with `--index-allow-incomplete`. This protects you from accidentally running with indexing disabled, after previously running with it enabled, which would result in an incomplete index.
+
 This document shows how to query data from AvalancheGo's Index API. The Index API is only available when running with `--index-enabled`.
 
 ## Go Client
