@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: The quickest way to learn about Avalanche is to run a node and interact with the network and geared toward people interested in how the Avalanche Platform works.
 ---
 
 # Run an Avalanche Node

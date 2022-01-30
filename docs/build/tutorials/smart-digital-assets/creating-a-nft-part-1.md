@@ -1,3 +1,8 @@
+---
+description: Avalanche also supports non-fungible tokens (NFTs). By definition, each NFT is unique and not perfectly interchangeable for any other NFT.
+---
+
+
 # Create an NFT (Part 1)
 
 ## Introduction

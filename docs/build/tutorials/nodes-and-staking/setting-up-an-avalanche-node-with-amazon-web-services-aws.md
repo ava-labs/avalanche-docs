@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7
+description: This tutorial will guide you through setting up an Avalanche node on Amazon Web Services (AWS). Cloud services like AWS are a good way to ensure that your node is highly secure, available, and accessible.
 ---
 
 # Run an Avalanche Node with Amazon Web Services (AWS)
