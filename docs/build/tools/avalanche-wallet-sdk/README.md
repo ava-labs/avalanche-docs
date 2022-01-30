@@ -1,3 +1,7 @@
+---
+description: The Avalanche Wallet SDK is a TypeScript library for creating and managing non-custodial wallets on the Avalanche platform.
+---
+
 # Overview
 
 ## Notice: Beta Release🔴

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: The Avalanche Bridge (AB) can be used to transfer ERC20 tokens from Ethereum to Avalanche's C-Chain and vice versa. This document answers common questions about the bridge. 
 ---
 
 # Avalanche Bridge (AB) FAQ

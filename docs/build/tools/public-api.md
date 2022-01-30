@@ -1,3 +1,7 @@
+---
+description: There is a public API server that allows developers to access the Avalanche platform without having to run a node themselves.
+---
+
 # Public API
 
 There is a public API server that allows developers to access the Avalanche network without having to run a node themselves. The public API server is actually several [AvalancheGo](https://github.com/ava-labs/avalanchego) nodes behind a load balancer to ensure high availability and high request throughput.

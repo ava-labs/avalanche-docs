@@ -1,5 +1,5 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+description: More information available regarding Avalanche Go APIs and learning how to interact with the C-Chain. 
 sidebar_position: 4
 ---
 
