@@ -31,3 +31,4 @@ We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) t
 * RPC URL: https://api.trywagmi.xyz/rpc
 * Chain ID: 11111
 * Symbol: WGM
+* Explorer: https://trywagmi.xyz
