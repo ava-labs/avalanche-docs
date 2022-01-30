@@ -2,7 +2,7 @@
 description: The industry standard for safely securing cryptocurrencies is hardware wallets. This Avalanche doc provides a tutorial how to safely store your crypto.
 ---
 
-# How to Use Ledger Nano S or Ledger Nano X With Avalanche 
+# How to Use Ledger Nano S or Nano X With Avalanche 
 
 The industry standard for safely securing cryptocurrencies is hardware wallets, specialized devices that provide full isolation between your computer and your private keys.
 
