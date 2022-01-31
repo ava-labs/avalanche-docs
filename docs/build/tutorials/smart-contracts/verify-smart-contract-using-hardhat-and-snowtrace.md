@@ -56,8 +56,10 @@ Example ```.env.json```:
   "APIKEY": "your-snowtrace-api-key"
 }
 ```
+<br>
 
-Below is a sample ```hardhat.config.ts``` used for deployment and verification ```(See LN 45: etherscan)```
+Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
+<br>
 
 ```ts
 import { task } from 'hardhat/config'
@@ -128,7 +130,7 @@ export default {
       //   url: 'https://api.avax.network/ext/bc/C/rpc',
       // },
     },
-    FUJI: {
+    fuji: {
       url: 'https://api.avax-test.network/ext/bc/C/rpc',
       gasPrice: 225000000000,
       chainId: 43113,
@@ -144,8 +146,110 @@ export default {
 }
 ```
 
-Once the contract is deployed, verify with hardhat verify by running the following :
-```npx hardhat verify <contract address> <arguments> --network <network>```
+<br>
+Once the contract is deployed, verify with hardhat verify by running the following:
+
+```zsh
+npx hardhat verify <contract address> <arguments> --network <network>
+```
+<br>
+
+Example:
+
+```zsh
+npx hardhat verify 0x3972c87769886C4f1Ff3a8b52bc57738E82192D5 MockNFT Mock ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY 100 --network fuji
+```
+<br>
+
+You can also verify contracts programmatically via script
 
 
+Example: 
 
+```ts
+import { ethers } from 'hardhat'
+import { custodians, claimAddress } from '../helpers/constants'
+import console from 'console'
+const hre = require('hardhat')
+
+// Define the NFT
+const name = 'MockNFT'
+const symbol = 'Mock'
+const _metadataUri = 'ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY'
+const _maxTokens = '100'
+
+async function main() {
+await hre.run('verify:verify', {
+  address: '0x3972c87769886C4f1Ff3a8b52bc57738E82192D5',
+  constructorArguments: [
+    name,
+    symbol,
+    _metadataUri,
+    _maxTokens
+  ],
+})
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+```
+<br>
+
+Execute the script via hardhat by running the following:
+ 
+```zsh
+npx hardhat run scripts/<scriptname.ts> --network <network>
+```
+
+<br>
+
+Example:
+
+```zsh
+npx hardhat run scripts/5-verifyNFT.ts --network fuji
+```
+<br>
+
+Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your _Constructor Arguments_
+
+Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
+
+```TS
+import { ethers } from 'hardhat'
+import { custodians, claimAddress } from '../helpers/constants'
+import console from 'console'
+const hre = require('hardhat')
+
+// Define the NFT
+const name = 'Particle_Love_Is_In_The_Air'
+const symbol = 'LIITA'
+const _metadataUri =
+  'ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Particle_Love_Is_In_The_Air'
+const _royaltyRecipient = '0x1806a362c455d8d8448dda1a51c93d6d5b34725f'
+const _royaltyValue = '50000000000000000'
+const _custodians = [
+  '0x845095a03a6686e24b90fed55e11f4ec808b1ab3',
+  '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+  '0x70997970c51812dc3a010c7d01b50e0d17dc79c8',
+]
+const _saleLength = '172800'
+const _claimAddress = '0x1806a362c455d8d8448dda1a51c93d6d5b34725f'
+
+async function main() {
+await hre.run('verify:verify', {
+  address: '0x08bf160B8e56899723f2E6F9780535241F145470',
+  constructorArguments: [
+    name,
+    symbol,
+    _metadataUri,
+    _royaltyRecipient,
+    _royaltyValue,
+    _custodians,
+    _saleLength,
+    _claimAddress,
+  ],
+})
