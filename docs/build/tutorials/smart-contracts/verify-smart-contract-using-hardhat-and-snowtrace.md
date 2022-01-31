@@ -60,7 +60,7 @@ Example ```.env.json```:
 <br>
 
 Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
-```typescript
+```js
 import { task } from 'hardhat/config'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { BigNumber } from 'ethers'
@@ -168,7 +168,7 @@ You can also verify contracts programmatically via script
 
 Example: 
 
-```typescript
+```js
 import { ethers } from 'hardhat'
 import { custodians, claimAddress } from '../helpers/constants'
 import console from 'console'
@@ -222,7 +222,7 @@ Verifying via terminal will not allow you to pass an array as an argument, howev
 
 Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
 
-```typescript
+```js
 import console from 'console'
 const hre = require('hardhat')
 
