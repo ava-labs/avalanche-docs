@@ -56,9 +56,11 @@ Example ```.env.json```:
   "APIKEY": "your-snowtrace-api-key"
 }
 ```
+
 <br>
 
 Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
+
 <br>
 
 ```ts
@@ -147,11 +149,13 @@ export default {
 ```
 
 <br>
+
 Once the contract is deployed, verify with hardhat verify by running the following:
 
 ```zsh
 npx hardhat verify <contract address> <arguments> --network <network>
 ```
+
 <br>
 
 Example:
@@ -159,6 +163,7 @@ Example:
 ```zsh
 npx hardhat verify 0x3972c87769886C4f1Ff3a8b52bc57738E82192D5 MockNFT Mock ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY 100 --network fuji
 ```
+
 <br>
 
 You can also verify contracts programmatically via script
@@ -197,6 +202,7 @@ main()
     process.exit(1)
   })
 ```
+
 <br>
 
 First create your script, then execute it via hardhat by running the following:
@@ -212,6 +218,7 @@ Example:
 ```zsh
 npx hardhat run scripts/5-verifyNFT.ts --network fuji
 ```
+
 <br>
 
 Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your *Constructor Arguments*
@@ -225,7 +232,7 @@ import console from 'console'
 const hre = require('hardhat')
 
 // Define the NFT
-const name = 'Mock NFT'
+const name = 'MockNFT'
 const symbol = 'Mock'
 const _metadataUri =
   'ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Example'
