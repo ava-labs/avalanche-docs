@@ -225,7 +225,7 @@ import console from 'console'
 const hre = require('hardhat')
 
 // Define the NFT
-const name = 'Mock NFT'
+const name = 'MockNFT'
 const symbol = 'Mock'
 const _metadataUri =
   'ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Example'
