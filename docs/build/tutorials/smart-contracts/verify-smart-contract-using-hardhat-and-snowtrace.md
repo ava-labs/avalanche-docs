@@ -223,8 +223,6 @@ Verifying via terminal will not allow you to pass an array as an argument, howev
 Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
 
 ```ts
-import { ethers } from 'hardhat'
-import { custodians, claimAddress } from '../helpers/constants'
 import console from 'console'
 const hre = require('hardhat')
 
