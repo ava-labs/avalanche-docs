@@ -60,9 +60,6 @@ Example ```.env.json```:
 <br>
 
 Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
-
-<br>
-
 ```ts
 import { task } from 'hardhat/config'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
