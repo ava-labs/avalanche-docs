@@ -60,7 +60,7 @@ Example ```.env.json```:
 <br>
 
 Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
-```javascript
+```typescript
 import { task } from 'hardhat/config'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { BigNumber } from 'ethers'
@@ -168,7 +168,7 @@ You can also verify contracts programmatically via script
 
 Example: 
 
-```javascript
+```typescript
 import { ethers } from 'hardhat'
 import { custodians, claimAddress } from '../helpers/constants'
 import console from 'console'
@@ -222,7 +222,7 @@ Verifying via terminal will not allow you to pass an array as an argument, howev
 
 Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
 
-```javascript
+```typescript
 import console from 'console'
 const hre = require('hardhat')
 
@@ -242,19 +242,19 @@ const _saleLength = '172800'
 const _claimAddress = '0xcd3b766ccdd6ae721141f452c550ca635964ce71'
 
 async function main() {
-await hre.run('verify:verify', {
-  address: '0x08bf160B8e56899723f2E6F9780535241F145470',
-  constructorArguments: [
-    name,
-    symbol,
-    _metadataUri,
-    _royaltyRecipient,
-    _royaltyValue,
-    _custodians,
-    _saleLength,
-    _claimAddress,
-  ],
-})
+  await hre.run('verify:verify', {
+    address: '0x08bf160B8e56899723f2E6F9780535241F145470',
+    constructorArguments: [
+      name,
+      symbol,
+      _metadataUri,
+      _royaltyRecipient,
+      _royaltyValue,
+      _custodians,
+      _saleLength,
+      _claimAddress,
+    ],
+  })
 }
 
 main()
@@ -262,5 +262,5 @@ main()
   .catch((error) => {
     console.error(error)
     process.exit(1)
-  })
+})
 ```
