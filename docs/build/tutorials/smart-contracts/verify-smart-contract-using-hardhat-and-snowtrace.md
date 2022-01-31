@@ -199,7 +199,7 @@ main()
 ```
 <br>
 
-Execute the script via hardhat by running the following:
+First create your script, then execute it via hardhat by running the following:
  
 ```zsh
 npx hardhat run scripts/<scriptname.ts> --network <network>
@@ -214,7 +214,7 @@ npx hardhat run scripts/5-verifyNFT.ts --network fuji
 ```
 <br>
 
-Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your _Constructor Arguments_
+Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your *Constructor Arguments*
 
 Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
 
@@ -225,19 +225,19 @@ import console from 'console'
 const hre = require('hardhat')
 
 // Define the NFT
-const name = 'Particle_Love_Is_In_The_Air'
-const symbol = 'LIITA'
+const name = 'Mock NFT'
+const symbol = 'Mock'
 const _metadataUri =
-  'ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Particle_Love_Is_In_The_Air'
-const _royaltyRecipient = '0x1806a362c455d8d8448dda1a51c93d6d5b34725f'
+  'ipfs://QmQn2jepp3jZ3tVxoCisMMF8kSi8c5uPKYxd71xGWG38hV/Example'
+const _royaltyRecipient = '0xcd3b766ccdd6ae721141f452c550ca635964ce71'
 const _royaltyValue = '50000000000000000'
 const _custodians = [
-  '0x845095a03a6686e24b90fed55e11f4ec808b1ab3',
+  '0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199',
   '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
-  '0x70997970c51812dc3a010c7d01b50e0d17dc79c8',
+  '0xdd2fd4581271e230360230f9337d5c0430bf44c0',
 ]
 const _saleLength = '172800'
-const _claimAddress = '0x1806a362c455d8d8448dda1a51c93d6d5b34725f'
+const _claimAddress = '0xcd3b766ccdd6ae721141f452c550ca635964ce71'
 
 async function main() {
 await hre.run('verify:verify', {
