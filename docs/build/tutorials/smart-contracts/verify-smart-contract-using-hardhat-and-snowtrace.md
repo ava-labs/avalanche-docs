@@ -252,7 +252,7 @@ async function main() {
       _royaltyValue,
       _custodians,
       _saleLength,
-      _claimAddress,
+      _claimAddress
     ],
   })
 }
