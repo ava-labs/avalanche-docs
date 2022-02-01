@@ -46,7 +46,7 @@ This part of the tutorial assumes that the contract was deployed using Hardhat a
 
 You will need to create a ```.env.json``` with your *Wallet Seed Phrase* and *Snowtrace API key*
 
-You will need to obtain an *API key* from https://snowtrace.io/myapikey
+You will need to obtain an *API key* [here](https://snowtrace.io/myapikey)
 
 Example ```.env.json```:
 
@@ -56,7 +56,7 @@ Example ```.env.json```:
   "APIKEY": "your-snowtrace-api-key"
 }
 ```
-<br>
+<br></br>
 
 Below is a sample ```hardhat.config.ts``` used for deployment and verification (See LN 45: ```etherscan```)
 ```typescript
@@ -102,10 +102,9 @@ task('balances', 'Prints the list of AVAX account balances', async (args, hre): 
     console.log(`${account.address} has balance ${balance.toString()}`)
   }
 })
-
 export default {
   etherscan: {
-    // Your API key for Etherscan
+    // Your API key for Snowtrace
     // Obtain one at https://snowtrace.io/
     apiKey: APIKEY,
   },
@@ -143,30 +142,28 @@ export default {
   },
 }
 ```
-<br>
+<br></br>
 
 Once the contract is deployed, verify with hardhat verify by running the following:
 
 ```zsh
 npx hardhat verify <contract address> <arguments> --network <network>
 ```
-<br>
+<br></br>
 
 Example:
 
 ```zsh
 npx hardhat verify 0x3972c87769886C4f1Ff3a8b52bc57738E82192D5 MockNFT Mock ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY 100 --network fuji
 ```
-<br>
+<br></br>
 
 You can also verify contracts programmatically via script
 
 
 Example: 
 
-<!-- ```typescript
-import { ethers } from 'hardhat'
-import { custodians, claimAddress } from '../helpers/constants'
+```typescript
 import console from 'console'
 const hre = require('hardhat')
 
@@ -177,15 +174,15 @@ const _metadataUri = 'ipfs://QmQ2RFEmZaMds8bRjZCTJxo4DusvcBdLTS6XuDbhp5BZjY'
 const _maxTokens = '100'
 
 async function main() {
-await hre.run('verify:verify', {
-  address: '0x3972c87769886C4f1Ff3a8b52bc57738E82192D5',
-  constructorArguments: [
-    name,
-    symbol,
-    _metadataUri,
-    _maxTokens
-  ],
-})
+  await hre.run('verify:verify', {
+    address: '0x3972c87769886C4f1Ff3a8b52bc57738E82192D5',
+    constructorArguments: [
+      name,
+      symbol,
+      _metadataUri,
+      _maxTokens
+    ],
+  })
 }
 
 main()
@@ -194,28 +191,28 @@ main()
     console.error(error)
     process.exit(1)
   })
-``` -->
-<br>
+```
+<br></br>
 
 First create your script, then execute it via hardhat by running the following:
  
 ```zsh
 npx hardhat run scripts/<scriptname.ts> --network <network>
 ```
-<br>
+<br></br>
 
 Example:
 
 ```zsh
 npx hardhat run scripts/5-verifyNFT.ts --network fuji
 ```
-<br>
+<br></br>
 
 Verifying via terminal will not allow you to pass an array as an argument, however, you can do this when verifying via script by including the array in your *Constructor Arguments*
 
 Example: (see LN13 ```_custodians```, LN 30 ```_custodians```)
 
-<!-- ```typescript
+```typescript
 import console from 'console'
 const hre = require('hardhat')
 
@@ -255,5 +252,5 @@ main()
   .catch((error) => {
     console.error(error)
     process.exit(1)
-})
-``` -->
+  })
+```
