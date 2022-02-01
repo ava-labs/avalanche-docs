@@ -27,14 +27,26 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
 1. Search for the contract in Snowtrace
 2. Click on the contract tab
     1. If the contract is unverified you will see something similar to the image below
+    ![snowtraceHH-1](/img/snowtraceHH-1.png)
+
+    <br></br>
+
 3. Click Verify and Publish
 4. On the next screen in the dropdown menus select the following
     1. **Solidity (Single file)**
     2. **The compiler version you used to compile the deployed contract**
     3. The open-source license type (select none if applicable)
+    ![snowtraceHH-2](/img/snowtraceHH-2.png) 
+
+    <br></br>
+    
 5. Copy and paste the code from the flattened contract into the appropriate box
 6. **If optimization was used when compiling the contract, make sure to select “Yes” in the dropdown menu labeled “Optimization”**
     1. If optimization was used, expand the bottom box labeled “Misc Settings” and input the number of runs
+    ![snowtraceHH-3](/img/snowtraceHH-3.png)
+    
+    <br></br>
+     
 7. Select Verify and Publish
     1. If successful, all Contracts with the same bytecode will be verified
     2. If unsuccessful, read the error messages provided and make the appropriate changes
