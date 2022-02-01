@@ -332,7 +332,7 @@ Name | Type | Default | Description |
 `blockchainID` | Buffer | - | The [Buffer](https://github.com/feross/buffer) representing the BlockchainID for the transaction |
 `amount` | BN | - | The amount being exported as a [BN](https://github.com/indutny/bn.js/) |
 `assetID` | Buffer | - | - |
-`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who recieves the AVAX |
+`toAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who receives the AVAX |
 `fromAddresses` | Buffer[] | - | An array of addresses as [Buffer](https://github.com/feross/buffer) who owns the AVAX |
 `changeAddresses` | Buffer[] | undefined | Optional. The addresses that can spend the change remaining from the spent UTXOs. |
 `destinationChain` | Buffer | undefined | Optional. A [Buffer](https://github.com/feross/buffer) for the chainid where to send the asset. |
@@ -396,7 +396,7 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `networkID` | number | - | The number representing NetworkID of the node |
 `blockchainID` | Buffer | - | The [Buffer](https://github.com/feross/buffer) representing the BlockchainID for the transaction |
-`toAddresses` | Buffer[] | - | An array of [Buffer](https://github.com/feross/buffer)s which indicate who recieves the NFT |
+`toAddresses` | Buffer[] | - | An array of [Buffer](https://github.com/feross/buffer)s which indicate who receives the NFT |
 `fromAddresses` | Buffer[] | - | An array for [Buffer](https://github.com/feross/buffer) who owns the NFT |
 `changeAddresses` | Buffer[] | - | Optional. The addresses that can spend the change remaining from the spent UTXOs. |
 `utxoids` | string[] | - | An array of strings for the NFTs being transferred |
