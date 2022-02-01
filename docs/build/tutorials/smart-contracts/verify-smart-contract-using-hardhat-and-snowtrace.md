@@ -164,7 +164,7 @@ You can also verify contracts programmatically via script
 
 Example: 
 
-```typescript
+<!-- ```typescript
 import { ethers } from 'hardhat'
 import { custodians, claimAddress } from '../helpers/constants'
 import console from 'console'
@@ -194,7 +194,7 @@ main()
     console.error(error)
     process.exit(1)
   })
-```
+``` -->
 <br>
 
 First create your script, then execute it via hardhat by running the following:
