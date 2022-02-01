@@ -22,7 +22,7 @@ An _address_ can hold a balance of cryptocurrencies. A _wallet_ controls a set o
 
 You can access your wallet on the [Avalanche Wallet](https://wallet.avax.network/) website. You can follow [this](https://support.avax.network/en/articles/5315160-creating-a-new-wallet-with-the-avalanche-wallet) guide to set up a new own wallet.
 
-You can and should use a [hardware Ledger](./setup-your-ledger-nano-s-with-avalanche.md) to log into your wallet. **Using a hardware wallet is the most secure way of accessing your tokens** because your private keys and the passphrase never leave the device.
+You can and should use a [hardware Ledger](./setup-your-ledger-nano-s-with-avalanche.md) to log into your wallet. **Using a hardware wallet is the most secure way of accessing your tokens** because your private keys and the passphrase never leave the device. If you have an amount of tokens you would not be comfortable losing, it is strongly advised to invest in a hardware wallet.
 
 Once you have your wallet, you may want to send your AVAX from an exchange to your wallet. See [here](https://support.avax.network/en/articles/5315157-how-to-send-avax-from-an-exchange-to-the-avalanche-wallet) for a guide on doing so.
 
@@ -36,19 +36,33 @@ By default, Metamask connects to Ethereum. To connect to Avalanche, you need to 
 
 In Metamask you can create a new account and send funds to it from your main Avalanche wallet, or import the existing Avalanche Wallet account. You can import the account either by using the secret passphrase or by exporting the C-Chain private key from the wallet (Select `Manage Keys`, then `View C Chain Private Key`). If you use the Ledger hardware wallet, you can use it in Metamask too. It will connect to your wallet and have the same balances/addresses as if you accessed your wallet on the wallet website.
 
-To see your funds in Metamask (if you imported Avalanche Wallet), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. If you transferred the funds from an exchange they will usually be on the X-Chain, so you will need to a cross-chain transfer, as explained in the previous section.
+To see your funds in Metamask (if you imported Avalanche Wallet), or to be able to send funds from the Wallet account to Metamask account, you will need to have your funds on the C-Chain. Most exchanges are connected to the C-Chain, so you can withdraw AVAX directly from the exchange to your Metamask wallet. For details on networks and tokens available for deposit/withdrawal please consult the exchange support pages. List of exchanges can be found [here](https://ecosystem.avax.network/marketplace?tag=exchange).
 
 ## Transactions
 
-You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to an incorrect address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that you mean to send to an address on Avalanche and not a different network (see next section.)
+You can send tokens from the Avalanche Wallet or Metamask. It is important to have in mind that all transactions are final and irreversible. If you make a mistake and send funds to an incorrect address, there is no mechanism that can revert the transaction and return the funds to you. That's why it's critically important to be sure that the address you're sending the tokens to is correct and that you mean to send to an address on Avalanche and not a different network (see next section.) If you are not sure, test the validity of the transfer by sending a small amount first.
 
 ### Sending to Other Networks
 
-Other networks may have address formats that are identical to the ones on Avalanche. But **that doesn't mean that you can send funds on Avalanche directly to other blockchain networks**, including, for example, Ethereum or BSC (Binance Smart Chain). If you tell Avalanche to send funds to address (`0x12345`), for example, it will do so **on Avalanche**, not another network, even if that address exists or is valid on another network. Your funds will not end up on the other network. Once the funds are sent, only the person who has the private keys that control the destination address can ever access them. If _you_ control the destination address, you can probably be able to retrieve them by importing the private key that controls the address to Metamask. If you sent them to someone else's address, though, you will need their cooperation, which may be difficult.
+Other networks may have address formats that are identical to the ones on Avalanche. But **that doesn't mean that you can send funds on Avalanche directly to other blockchain networks**, including, for example, Ethereum or BSC (Binance Smart Chain). If you tell Avalanche to send funds to address (`0x12345`), for example, it will do so **on Avalanche**, not another network, even if that address exists or is valid on another network. Your funds will not end up on the other network. Once the funds are sent, only the person who has the private keys that control the destination address can ever access them.
 
-The above applies in the reverse direction, too. You cannot send funds to an Avalanche address directly from Ethereum, BSC, etc. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](getting-started.md#avalanche-bridge) section below.
+The above applies in the reverse direction, too. You cannot send funds to an Avalanche network address directly from Ethereum, BSC, etc. The addresses may look the same and be accepted, but that doesn't mean the funds will arrive in your wallet. If you want to send or receive funds from Ethereum, see the [Avalanche Bridge](getting-started.md#avalanche-bridge) section below.
 
 If you're unsure of what you're attempting to do, or doing something for the first time, it's best to send a small amount ('dust') first, to check that it arrives at the intended destination.
+
+#### Help! I did try to send tokens to/from another network, what now?
+
+Well, you shouldn't have done that. But even if you did, there _might_ be a way out. It is important to understand what happened: the tokens are still on the network where you posted the transaction, deposited to the destination address. To know what to do next, the question is: who controls the destination address?
+
+If you attempted to send the tokens to _your_ wallet then the solution is available: use the private keys for that address on the network where the transaction was posted. If using Metamask, it might be as simple as switching to the correct network with the account selected. You may also need to add the token to Metamask. Tokens on different networks usually have different contract addresses so make sure you're using the correct token address for the network.
+
+If you attempted to send the tokens to _somebody else's_ wallet, then you will need their cooperation. They will need to use the private keys to connect to the network where you made the transaction and retrieve the tokens.
+
+If the destination address belongs to an exchange (it is their deposit address) then you need to contact their support and explain the situation. They might be able to help you, but be warned, exchange security procedures will usually not allow manual manipulation of the private keys. There might be a solution still. If the exchange does not accept deposits from that network, it might in the future, and then they might retrieve the tokens and credit your exchange balance.
+
+### Depositing and withdrawing from exchanges
+
+Before attempting to deposit or withdraw from any exchange, make sure what you're trying to do is supported. Every exchange will have a different set of supported operations, just because you can make a transaction does not mean that the exchange will credit your balance. Check if the chain you're using is supported (some exchanges support both the X-Chain and the C-Chain, some just one or the other). Also, even though all exchanges support deposit and withdrawal of AVAX, not all of them support various other tokens that exist on the platform. Check with their support before sending the transaction. Failing to do so might result in a loss of tokens! 
 
 ### Adding Tokens
 
@@ -80,7 +94,7 @@ As elsewhere in the cryptocurrency space, you need to be keenly aware of the dan
 
 It's crucial to understand that **your secret passphrase is your wallet**. Whoever has access to the secret 24 word passphrase has complete and full access and control over everything in the wallet. If you give someone your passphrase, you have given them everything in it. Therefore, **never give your passphrase to anyone**. Do not send it anywhere. Do not type it into websites you found online or that someone sent you a link to. Best practice is to not have your passphrase saved on any computer.
 
-The only place where you can enter the passphrase is into the [official Avalanche Wallet](https://wallet.avax.network) website, and even then, make sure you're on a secure network and that the website is the right one by typing the address `https://wallet.avax.network` address yourself. Check the padlock icon in your browser to make sure your connection is secure. If you're in doubt as to whether to enter your passphrase, don't.
+The only place where you can enter the passphrase is into the [official Avalanche Wallet](https://wallet.avax.network) website, and even then, make sure you're on a secure network and that the website is the right one by typing the address `https://wallet.avax.network` address yourself. Check the padlock icon in your browser to make sure your connection is secure. If using a search engine, be aware that the first link might be ad for a malicious site impersonating the official one. Always carefully check the address! If you're in doubt as to whether to enter your passphrase, don't.
 
 If you're working with non-trivial amounts of tokens (in other words, money you can't comfortably lose), we strongly advise that you use a [Ledger hardware wallet](https://www.ledger.com/) to access your funds.
 
