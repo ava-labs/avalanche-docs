@@ -1,8 +1,8 @@
 ---
-description: ERC-20 tokens are the most fundamental and essential concept in Ethereum. This same token standard is adopted in the Avalanche ecosystem.
+description: 'Provided by Community member: Murat Çeliktepe'
 ---
 
-# Create an ERC-20 Token Using Solidity
+# Create an ERC-20 Token
 
 ERC-20 tokens are the most fundamental and essential concept in Ethereum. As the Avalanche community and the ecosystem are growing, new use cases and projects that are running on Ethereum or different chains would be implemented to Avalanche. The token standard that would be used for the projects is not specific and everyone can create their own standard and own token.
 

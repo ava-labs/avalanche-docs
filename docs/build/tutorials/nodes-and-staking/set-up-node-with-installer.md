@@ -12,8 +12,8 @@ We have a shell (bash) script that installs AvalancheGo on your computer. This s
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 * CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 512 GiB
+* RAM: 16 GB
+* Storage: 200 GB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 This install script assumes:

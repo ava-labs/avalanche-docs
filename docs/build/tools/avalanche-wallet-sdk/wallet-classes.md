@@ -1,7 +1,3 @@
----
-description: The core of the SDK are the wallet classes that let users easily create and manage different types of wallets. Find out more info here.
----
-
 # Wallet Classes
 
 The core of the SDK are the wallet classes that let users easily create and manage different types of wallets.

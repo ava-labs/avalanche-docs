@@ -1,8 +1,8 @@
 ---
-description: In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in AVAX. Find out more information here. 
+description: Learn more about Avalanche's transaction fees
 ---
 
-# Avax Transaction Fee
+# Transaction Fees
 
 In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned (destroyed forever).**
 

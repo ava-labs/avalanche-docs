@@ -33,7 +33,6 @@
 * [SECPXFEROUTPUTID](api_platformvm_constants.platformvmconstants.md#static-secpxferoutputid)
 * [STAKEABLELOCKINID](api_platformvm_constants.platformvmconstants.md#static-stakeablelockinid)
 * [STAKEABLELOCKOUTID](api_platformvm_constants.platformvmconstants.md#static-stakeablelockoutid)
-* [SUBNETAUTH](api_platformvm_constants.platformvmconstants.md#static-subnetauth)
 * [SUBNETAUTHID](api_platformvm_constants.platformvmconstants.md#static-subnetauthid)
 * [SYMBOLMAXLEN](api_platformvm_constants.platformvmconstants.md#static-symbolmaxlen)
 
@@ -43,7 +42,7 @@
 
 ▪ **ADDDELEGATORTX**: *number* = 14
 
-*Defined in [src/apis/platformvm/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L36)*
+*Defined in [src/apis/platformvm/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L34)*
 
 ___
 
@@ -51,7 +50,7 @@ ___
 
 ▪ **ADDRESSLENGTH**: *number* = 20
 
-*Defined in [src/apis/platformvm/constants.ts:60](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L60)*
+*Defined in [src/apis/platformvm/constants.ts:58](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L58)*
 
 ___
 
@@ -59,7 +58,7 @@ ___
 
 ▪ **ADDSUBNETVALIDATORTX**: *number* = 13
 
-*Defined in [src/apis/platformvm/constants.ts:34](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L34)*
+*Defined in [src/apis/platformvm/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L32)*
 
 ___
 
@@ -67,7 +66,7 @@ ___
 
 ▪ **ADDVALIDATORTX**: *number* = 12
 
-*Defined in [src/apis/platformvm/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L32)*
+*Defined in [src/apis/platformvm/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L30)*
 
 ___
 
@@ -75,7 +74,7 @@ ___
 
 ▪ **ADVANCETIMETX**: *number* = 19
 
-*Defined in [src/apis/platformvm/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L46)*
+*Defined in [src/apis/platformvm/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L44)*
 
 ___
 
@@ -83,7 +82,7 @@ ___
 
 ▪ **ASSETIDLEN**: *number* = 32
 
-*Defined in [src/apis/platformvm/constants.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L52)*
+*Defined in [src/apis/platformvm/constants.ts:50](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L50)*
 
 ___
 
@@ -91,7 +90,7 @@ ___
 
 ▪ **ASSETNAMELEN**: *number* = 128
 
-*Defined in [src/apis/platformvm/constants.ts:58](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L58)*
+*Defined in [src/apis/platformvm/constants.ts:56](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L56)*
 
 ___
 
@@ -99,7 +98,7 @@ ___
 
 ▪ **BASETX**: *number* = 0
 
-*Defined in [src/apis/platformvm/constants.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L28)*
+*Defined in [src/apis/platformvm/constants.ts:28](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L28)*
 
 ___
 
@@ -107,7 +106,7 @@ ___
 
 ▪ **BLOCKCHAINIDLEN**: *number* = 32
 
-*Defined in [src/apis/platformvm/constants.ts:54](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L54)*
+*Defined in [src/apis/platformvm/constants.ts:52](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L52)*
 
 ___
 
@@ -115,7 +114,7 @@ ___
 
 ▪ **CREATECHAINTX**: *number* = 15
 
-*Defined in [src/apis/platformvm/constants.ts:38](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L38)*
+*Defined in [src/apis/platformvm/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L36)*
 
 ___
 
@@ -123,7 +122,7 @@ ___
 
 ▪ **CREATESUBNETTX**: *number* = 16
 
-*Defined in [src/apis/platformvm/constants.ts:40](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L40)*
+*Defined in [src/apis/platformvm/constants.ts:38](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L38)*
 
 ___
 
@@ -131,7 +130,7 @@ ___
 
 ▪ **EXPORTTX**: *number* = 18
 
-*Defined in [src/apis/platformvm/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L44)*
+*Defined in [src/apis/platformvm/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L42)*
 
 ___
 
@@ -139,7 +138,7 @@ ___
 
 ▪ **IMPORTTX**: *number* = 17
 
-*Defined in [src/apis/platformvm/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L42)*
+*Defined in [src/apis/platformvm/constants.ts:40](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L40)*
 
 ___
 
@@ -147,7 +146,7 @@ ___
 
 ▪ **LATESTCODEC**: *number* = 0
 
-*Defined in [src/apis/platformvm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L7)*
+*Defined in [src/apis/platformvm/constants.ts:7](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L7)*
 
 ___
 
@@ -158,7 +157,7 @@ ___
     PlatformVMConstants.STAKEABLELOCKOUTID
   ]
 
-*Defined in [src/apis/platformvm/constants.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L23)*
+*Defined in [src/apis/platformvm/constants.ts:23](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L23)*
 
 ___
 
@@ -166,7 +165,7 @@ ___
 
 ▪ **REWARDVALIDATORTX**: *number* = 20
 
-*Defined in [src/apis/platformvm/constants.ts:48](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L48)*
+*Defined in [src/apis/platformvm/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L46)*
 
 ___
 
@@ -174,7 +173,7 @@ ___
 
 ▪ **SECPCREDENTIAL**: *number* = 9
 
-*Defined in [src/apis/platformvm/constants.ts:50](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L50)*
+*Defined in [src/apis/platformvm/constants.ts:48](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L48)*
 
 ___
 
@@ -182,7 +181,7 @@ ___
 
 ▪ **SECPFXID**: *number* = 0
 
-*Defined in [src/apis/platformvm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L9)*
+*Defined in [src/apis/platformvm/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L9)*
 
 ___
 
@@ -190,7 +189,7 @@ ___
 
 ▪ **SECPINPUTID**: *number* = 5
 
-*Defined in [src/apis/platformvm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L19)*
+*Defined in [src/apis/platformvm/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L19)*
 
 ___
 
@@ -198,7 +197,7 @@ ___
 
 ▪ **SECPOWNEROUTPUTID**: *number* = 11
 
-*Defined in [src/apis/platformvm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L15)*
+*Defined in [src/apis/platformvm/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L15)*
 
 ___
 
@@ -206,7 +205,7 @@ ___
 
 ▪ **SECPXFEROUTPUTID**: *number* = 7
 
-*Defined in [src/apis/platformvm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L11)*
+*Defined in [src/apis/platformvm/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L11)*
 
 ___
 
@@ -214,7 +213,7 @@ ___
 
 ▪ **STAKEABLELOCKINID**: *number* = 21
 
-*Defined in [src/apis/platformvm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L21)*
+*Defined in [src/apis/platformvm/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L21)*
 
 ___
 
@@ -222,15 +221,7 @@ ___
 
 ▪ **STAKEABLELOCKOUTID**: *number* = 22
 
-*Defined in [src/apis/platformvm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L17)*
-
-___
-
-### `Static` SUBNETAUTH
-
-▪ **SUBNETAUTH**: *number* = 10
-
-*Defined in [src/apis/platformvm/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L30)*
+*Defined in [src/apis/platformvm/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L17)*
 
 ___
 
@@ -238,7 +229,7 @@ ___
 
 ▪ **SUBNETAUTHID**: *number* = 10
 
-*Defined in [src/apis/platformvm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L13)*
+*Defined in [src/apis/platformvm/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L13)*
 
 ___
 
@@ -246,4 +237,4 @@ ___
 
 ▪ **SYMBOLMAXLEN**: *number* = 4
 
-*Defined in [src/apis/platformvm/constants.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/constants.ts#L56)*
+*Defined in [src/apis/platformvm/constants.ts:54](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/apis/platformvm/constants.ts#L54)*

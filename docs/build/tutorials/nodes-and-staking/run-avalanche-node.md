@@ -1,6 +1,5 @@
 ---
 sidebar_position: 2
-description: The quickest way to learn about Avalanche is to run a node and interact with the network and geared toward people interested in how the Avalanche Platform works.
 ---
 
 # Run an Avalanche Node
@@ -29,8 +28,8 @@ This tutorial is primarily geared toward developers and people interested in how
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 * CPU: Equivalent of 8 AWS vCPU
-* RAM: 16 GiB
-* Storage: 512 GiB
+* RAM: 16 GB
+* Storage: 200 GB
 * OS: Ubuntu 18.04/20.04 or MacOS &gt;= Catalina
 
 ## Run an Avalanche Node and Send Funds
@@ -53,21 +52,21 @@ Run `go version`. **It should be 1.16.8 or above.** Run `echo $GOPATH`. **It sho
 
 Download the AvalancheGo repository:
 
-```sh
-git clone git@github.com:ava-labs/avalanchego.git
+```cpp
+go get -v -d github.com/ava-labs/avalanchego/...
 ```
 
-Note: This checkouts to master branch. For the latest stable version, checkout to the latest tag.
+Note to advanced users: AvalancheGo uses Go modules, so you can clone the [AvalancheGo repository](https://github.com/ava-labs/avalanchego) to locations other than your GOPATH.
 
 Change to the `avalanchego` directory:
 
-```sh
-cd avalanchego
+```cpp
+cd $GOPATH/src/github.com/ava-labs/avalanchego
 ```
 
 Build AvalancheGo:
 
-```sh
+```cpp
 ./scripts/build.sh
 ```
 
@@ -79,34 +78,34 @@ If you want to download a pre-built binary instead of building it yourself, go t
 
 Under `Assets`, select the appropriate file.
 
-For MacOS: Download: `avalanchego-macos-<VERSION>.zip`
+For MacOS: Download: `avalanchego-macos-<VERSION>.zip`  
 Unzip: `unzip avalanchego-macos-<VERSION>.zip` The resulting folder, `avalanchego-<VERSION>`, contains the binaries.
 
-For Linux on PCs or cloud providers: Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`
-Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`
+For Linux on PCs or cloud providers: Download: `avalanchego-linux-amd64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-amd64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
-For Linux on RaspberryPi4 or similar Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`
-Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`
+For Linux on RaspberryPi4 or similar Arm64-based computers: Download: `avalanchego-linux-arm64-<VERSION>.tar.gz`  
+Unzip: `tar -xvf avalanchego-linux-arm64-<VERSION>.tar.gz`  
 The resulting folder, `avalanchego-<VERSION>-linux`, contains the binaries.
 
 ### Start a Node, and Connect to Avalanche
 
 If you built from source:
 
-```sh
+```cpp
 ./build/avalanchego
 ```
 
 If you are using the pre-built binaries on MacOS:
 
-```sh
+```cpp
 ./avalanchego-<VERSION>/build/avalanchego
 ```
 
 If you are using the pre-built binaries on Linux:
 
-```sh
+```cpp
 ./avalanchego-<VERSION>-linux/avalanchego
 ```
 
@@ -116,7 +115,7 @@ When the node starts, it has to bootstrap (catch up with the rest of the network
 
 To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info.md#info-isbootstrapped) by copying and pasting the following command:
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -143,7 +142,7 @@ To connect to the Fuji Testnet instead of the main net, use argument `--network-
 
 Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore.md#keystore-createuser):
 
-```sh
+```cpp
 curl -X POST --data '{
      "jsonrpc": "2.0",
      "id": 1,
@@ -157,7 +156,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```json
+```cpp
 {
      "jsonrpc":"2.0",
      "result":{"success":true},
@@ -177,7 +176,7 @@ Avalanche is a platform of heterogeneous blockchains, one of which is the [X-Cha
 
 To create a new address on the X-Chain, call [`avm.createAddress`](../../avalanchego-apis/x-chain.mdx#avm-createaddress), a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx):
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :2,
@@ -195,7 +194,7 @@ Note that we make this request to `127.0.0.1:9650/ext/bc/X`. The `bc/X` portion 
 
 The response should look like this:
 
-```json
+```cpp
 {
     "jsonrpc":"2.0",
     "id":2,
@@ -223,7 +222,7 @@ Click the `Send` tab on the left. For amount, select, `.002` AVAX. Enter the add
 
 We can check an address’s balance of a given asset by calling `avm.getBalance`, another method of the X-Chain’s API. Let’s check that the transfer went through:
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :3,
@@ -239,7 +238,7 @@ Note that AVAX has the special ID `AVAX`. Usually an asset ID is an alphanumeric
 
 The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 
-```json
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :3,
@@ -259,7 +258,7 @@ The response should indicate that we have `2,000,000 nAVAX` or `0.002 AVAX`.
 
 Now, let’s send some AVAX by making an API call to our node:
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :5,
@@ -291,7 +290,7 @@ When you send this request, the node will authenticate you using your username a
 
 The response contains the transaction’s ID. It will be different for every invocation of `send`.
 
-```json
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :5,
@@ -306,7 +305,7 @@ The response contains the transaction’s ID. It will be different for every inv
 
 This transaction will only take a second or two to finalize. We can check its status with [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :6,
@@ -319,7 +318,7 @@ curl -X POST --data '{
 
 The response should indicate that the transaction was accepted:
 
-```json
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :6,
@@ -333,7 +332,7 @@ You might also see that `status` is `Processing` if the network has not yet fina
 
 Once you see that the transaction is `Accepted`, check the balance of the `to` address to see that it has the AVAX we sent:
 
-```sh
+```cpp
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :7,
@@ -347,7 +346,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```json
+```cpp
 {
     "jsonrpc":"2.0",
     "id"     :7,

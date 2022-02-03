@@ -194,60 +194,13 @@ Node should now be running from the database on the new instance. To check that 
 sudo journalctl -u avalanchego -f
 ```
 
-The node should be catching up to the network and fetching a small number of blocks before resuming normal operation (all the ones produced from the time when the node was stopped before the backup).
+The node should be catching up to the network and fetching a small number of blocks before resuming normal operation (all the ones produced between the time the backup was made and when it was restored).
 
 Once the backup has been restored and is working as expected, the zip can be deleted:
 
 ```
 rm avalanche_db_backup.zip
 ```
-
-### Database Direct Copy
-
-You may be in a situation where you don't have enough disk space to create the archive containing the whole database, so you cannot complete the backup process as described previously.
-
-In that case, you can still migrate your database to a new computer, by using a different approach: `direct copy`. Instead of creating the archive, moving the archive and unpacking it, we can do all of that on the fly.
-
-To do so, you will need `ssh` access from the destination machine (where you want the database to end up) to the source machine (where the database currently is). Setting up `ssh` is the same as explained for `scp` earlier in the document.
-
-Same as shown previously, you need to stop the node (on both machines):
-
-```
-sudo systemctl stop avalanchego
-```
-:::warning
-You must stop the Avalanche node before you back up the database otherwise data
-could become corrupted.
-:::
-
-Then, on the destination machine, change to a directory where you would like to the put the database files, enter the following command:
-
-```
-ssh -i /path/to/the/key.pem ubuntu@PUBLICIP 'tar czf - .avalanchego/db' | tar xvzf - -C .
-```
-
-Make sure to replace the correct path to the key, and correct IP of the source machine. This will compress the database, but instead of writing it to a file it will pipe it over `ssh` directly to destination machine, where it will be decompressed and written to disk. The process can take a long time, make sure it completes before continuing.
-
-After copying is done, all you need to do now is move the database to the correct location on the destination machine. Assuming there is a default AvalancheGo node installation, we remove the old database and replace it with the new one:
-
-```
-rm -rf ~/.avalanchego/db
-mv db ~/.avalanchego/db
-```
-
-You can now start the node on the destination machine:
-
-```
-sudo systemctl start avalanchego
-```
-
-Node should now be running from the copied database. To check that everything is in order and that node is not bootstrapping from scratch (which would indicate a problem), use:
-
-```
-sudo journalctl -u avalanchego -f
-```
-
-The node should be catching up to the network and fetching a small number of blocks before resuming normal operation (all the ones produced from the time when the node was stopped before the backup).
 
 ## Summary
 

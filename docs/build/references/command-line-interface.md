@@ -48,7 +48,7 @@ If set to `true`, this node will expose the Health API. Defaults to `true`. See 
 
 #### `--index-enabled` (boolean): {#index-enabled}
 
-If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index-api.md) for more information.
+If `false`, this node will not enable the indexer and the Index API will not be available. Defaults to `false`. See [here](../avalanchego-apis/index.md) for more information.
 
 #### `--api-info-enabled` (boolean):
 
@@ -101,12 +101,6 @@ If true, will retry bootstrapping if it fails.
 #### `--bootstrap-retry-max-attempts` (uint):
 
 Max number of times to retry bootstrapping after a failure.
-
-#### `--bootstrap-ancestors-max-containers-sent` (uint)
-Max number of containers in an Ancestors message sent by this node. Defaults to `2000`.
-
-#### `--bootstrap-ancestors-max-containers-received` (unit)
-This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
 
 ## Database
 
@@ -246,7 +240,7 @@ The port through which the staking server will connect to the Avalanche network 
 
 #### `--staking-enabled` (boolean):
 
-Avalanche uses Proof of Stake (PoS) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`. Note that this can not be specified on public networks (`Fuji` and `Mainnet`).
+Avalanche uses Proof of Stake (PoS) as Sybil resistance to make it prohibitively expensive to attack the network. If false, sybil resistance is disabled and all peers will be sampled during consensus. Defaults to `true`.
 
 Setting this flag to `false` **does not** mean "this node is not a validator."
 It means that this node will sample all nodes, not just validators.
@@ -782,22 +776,13 @@ Defaults to `2000000000000` (2,000 AVAX) on Mainnet. Defaults to `5000000` (.005
 
 The maximum staking duration, in hours. Defaults to `8760h` (365 days) on Mainnet.
 
-#### `--max-validator-stake` (int):
+#### `--max-validator-stake` (int):s
 
 The maximum stake, in nAVAX, that can be placed on a validator on the primary network. Defaults to `3000000000000000` (3,000,000 AVAX) on Mainnet. This includes stake provided by both the validator and by delegators to the validator.
 
 #### `--stake-minting-period` (duration):
 
 Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days).
-
-#### `--stake-max-consumption-rate` (uint):
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. 
-
-#### `--stake-min-consumption-rate` (uint):
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. 
-
-#### `--stake-supply-cap` (uint):
-The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX.
 
 #### `--tx-fee` (int):
 

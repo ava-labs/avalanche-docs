@@ -1,8 +1,3 @@
----
-description: Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs.
----
-
-
 # Postman Collection
 
 ## What is Postman?

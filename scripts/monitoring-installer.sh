@@ -75,15 +75,15 @@ install_prometheus() {
   mkdir -p /tmp/avalanche-monitoring-installer/prometheus
   cd /tmp/avalanche-monitoring-installer/prometheus
 
-  promFileName="$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep -o "http.*linux-$getArch\.tar\.gz")"
-  if [[ $(wget -S --spider "$promFileName"  2>&1 | grep 'HTTP/1.1 200 OK') ]]; then
+  promFileName="$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep "linux-$getArch"  | cut -d : -f 2,3 | tr -d \" | cut -d , -f 2)"
+  if [[ `wget -S --spider $promFileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
     echo "Prometheus install archive found: $promFileName"
   else
     echo "Unable to find Prometheus install archive. Exiting."
     exit
   fi
   echo "Attempting to download: $promFileName"
-  wget -nv --show-progress -O prometheus.tar.gz "$promFileName"
+  wget -nv --show-progress -O prometheus.tar.gz $promFileName
   mkdir prometheus
   tar xvf prometheus.tar.gz -C prometheus --strip-components=1
   echo "Installing..."
@@ -184,9 +184,9 @@ install_exporter() {
   mkdir -p /tmp/avalanche-monitoring-installer/exporter_archive
   cd /tmp/avalanche-monitoring-installer/exporter_archive
   echo "Dowloading archive..."
-  nodeFileName="$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep -o "http.*linux-$getArch\.tar\.gz")" 
+  nodeFileName="$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-$getArch |  cut -d '"' -f 4)"
   echo $nodeFileName
-  wget -nv --show-progress -O node_exporter.tar.gz "$nodeFileName"
+  wget -nv --show-progress -O node_exporter.tar.gz $nodeFileName
   tar xvf node_exporter.tar.gz -C /tmp/avalanche-monitoring-installer/exporter_archive --strip-components=1
   sudo mv /tmp/avalanche-monitoring-installer/exporter_archive/node_exporter /usr/local/bin
   echo "Installed, version:"

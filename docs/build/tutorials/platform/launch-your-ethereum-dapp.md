@@ -1,8 +1,3 @@
----
-description: The purpose of this document is to help you with launching your existing Ethereum dapp on Avalanche, get the basics of Avalanche Platform and how it works.
----
-
-
 # Launch Your Ethereum dApp on Avalanche
 
 ## Overview

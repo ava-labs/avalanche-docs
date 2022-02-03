@@ -64,4 +64,4 @@ Avalanche supports the creation of new instances of the Avalanche VM.
 
 Avalanche also supports creating custom blockchains with virtual machines.
 * [Create a Virtual machine (VM)](create-a-virtual-machine-vm.md)
-* [Create a Custom Blockchain](create-custom-blockchain.md)
+* [Create a Customer Blockchain](create-custom-blockchain.md)

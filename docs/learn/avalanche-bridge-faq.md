@@ -1,31 +1,15 @@
 ---
 sidebar_position: 3
-description: The Avalanche Bridge (AB) can be used to transfer ERC20 tokens from Ethereum to Avalanche's C-Chain and vice versa. This document answers common questions about the bridge. 
 ---
 
 # Avalanche Bridge (AB) FAQ
 
 The [Avalanche Bridge (AB)](https://bridge.avax.network/) can be used to transfer ERC20 tokens from Ethereum to Avalanche's C-Chain and vice versa. This document answers common questions about the bridge. If this document and other documentation don't answer your question, you can contact us on [Avalanche's support website](https://support.avax.network), [Discord](https://chat.avalabs.org) or [Telegram.](https://t.me/avalancheavax)
 
-
-
-## Important Information
-To ensure the safety of users and the protection of their funds, the Avalanche Bridge should only be accessed and used through the UI, located [here](https://bridge.avax.network/). Any other use of the Avalanche Bridge could result in the permanent loss of funds. The non-exhaustive list below enumerates possible ways to permanently lose funds by attempting to use the Avalanche Bridge through not recommended means. Funds lost in the below ways are permanently lost and are not recoverable by Ava Labs, the Wardens, or the bridge.
-
-* **USERS MUST NOT SEND FUNDS DIRECTLY TO ANY OF THE AVALANCHE BRIDGE’S CONTRACT ADDRESSES.** The Avalanche Bridge should only be accessed through the Avalanche Bridge’s UI, located [here](https://bridge.avax.network/). Any funds sent directly to the Avalanche Bridge’s contract addresses will be permanently lost and not recoverable.
-* **USERS MUST NOT SEND FUNDS DIRECTLY TO ANY OF THE AVALANCHE BRIDGE’S WALLET ADDRESSES.** The Avalanche Bridge should only be accessed through the Avalanche Bridge’s UI, located [here](https://bridge.avax.network/). Any funds sent directly to the Avalanche Bridge’s wallet addresses will be permanently lost and not recoverable.
-* **DO NOT ATTEMPT TO USE ANY SMART-CONTRACT WALLET WITH THE AVALANCHE BRIDGE.** The Avalanche Bridge is currently not compatible with smart contract wallets because smart contracts are currently not supported by the Avalanche Bridge. Using the Avalanche Bridge with a smart contract wallet or smart contract will result in the permanent loss of funds. Users should not use smart contracts with the Avalanche Bridge at this time because no one can retrieve tokens lost when smart contract wallets try to use the Avalanche Bridge. This is not a statement against smart contracts wallets or the below list of smart contract wallet projects, which is not an exhaustive list. This is to make users aware of the current technical architecture. WE CANNOT RETRIEVE YOUR TOKENS.
-  * [Ambire](https://www.ambire.com/)
-  * [Argent](https://www.argent.xyz/)
-  * [Gnosis Safe](https://gnosis-safe.io/)
-
-
-
-## User Notes
+## Important Notes
 
 1. There is a bug in the Metamask Mobile app that affects bridge transactions (**only on mobile**). Until this is resolved, don't use the Metamask mobile app for bridge transfers. Use the desktop app, or, if on mobile, Coinbase Wallet.
 2. You need AVAX to pay for transaction fees on Avalanche. **You should use the AVAX you receive in the airdop to do a swap for more AVAX on an AMM so that you can pay for transaction fees.** If you run out of AVAX, you will not be able to do transactions on Avalanche.
-
 
 ## Transactions
 
@@ -37,7 +21,7 @@ It is possible, but very unlikely, that the Ethereum transaction issued by the b
 
 ### How long does a bridge transfer take?
 
-The Ethereum transaction should take 10 - 15 minutes. The Avalanche transaction takes a few seconds.
+The Ethereum transaction should take 10 - 15 minutes. The Avalance transaction takes a few seconds.
 
 ### Why is the Avalanche transaction part of the bridge taking so long?
 
