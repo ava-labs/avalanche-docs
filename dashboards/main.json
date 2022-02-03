@@ -18,7 +18,7 @@
       }
     ]
   },
-  "description": "Home dashboard with most important indicators for your node and machine",
+  "description": "Home dashboard with the most important indicators for your node and machine",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
@@ -248,7 +248,7 @@
       "links": [
         {
           "title": "X Chain dashboard",
-          "url": "/d/eE8nd3dGk/x-chain?orgId=1"
+          "url": "/d/ceRH2Am7z/x-chain?orgId=1"
         }
       ],
       "options": {
@@ -352,7 +352,7 @@
       "links": [
         {
           "title": "P Chain dashboard",
-          "url": "/d/eE8nd3dGk/x-chain?orgId=1"
+          "url": "/d/uWlS20i7z/p-chain?orgId=1"
         }
       ],
       "options": {
@@ -459,7 +459,7 @@
           "links": [
             {
               "title": "Machine details",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -529,7 +529,7 @@
           "links": [
             {
               "title": "Detail view",
-              "url": "/d/h3onCuzMk/machine-metrics?orgId=1&refresh=10s"
+              "url": "/d/DHT8r2znz/machine-metrics?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -655,7 +655,7 @@
     },
     {
       "datasource": null,
-      "description": "Average time it takes to get a response from a peer",
+      "description": "Average time to get a response from a peer",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -664,7 +664,7 @@
           "links": [
             {
               "title": "Networking Dashboard",
-              "url": "/d/mdn45aXzGi/avalanche-general?orgId=1&refresh=10s"
+              "url": "/d/jB1TgdZ7z/network?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -887,7 +887,7 @@
           "links": [
             {
               "title": "Networking Dashboard",
-              "url": "/d/mdn45aXzGi/avalanche-general?orgId=1&refresh=10s"
+              "url": "/d/jB1TgdZ7z/network?orgId=1&refresh=10s"
             }
           ],
           "mappings": [],
@@ -1005,7 +1005,7 @@
       "links": [
         {
           "title": "C Chain dashboard",
-          "url": "/d/eE8nd3dGk/x-chain?orgId=1"
+          "url": "/d/Gl1I20mnk/c-chain?orgId=1"
         }
       ],
       "options": {
@@ -1175,7 +1175,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of blocks/vrtices currently being processed by the node",
+      "description": "Number of blocks/vertices currently being processed by the node",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1318,7 +1318,7 @@
     },
     {
       "datasource": null,
-      "description": "Number of successful queries per chain in the last minute",
+      "description": "Percentage of successful queries per chain in the last minute",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1398,7 +1398,7 @@
     },
     {
       "datasource": "Prometheus",
-      "description": "Measures how long each database operation is taking on average",
+      "description": "How long each database operation is taking on average",
       "fieldConfig": {
         "defaults": {
           "color": {

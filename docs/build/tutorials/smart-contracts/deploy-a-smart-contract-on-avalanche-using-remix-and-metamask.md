@@ -1,3 +1,7 @@
+---
+decription: In this doc, learn how to deploy and test a smart contract on Avalanche using Remix and MetaMask.
+---
+
 # Deploy a Smart Contract on Avalanche Using Remix and MetaMask
 
 ## Introduction

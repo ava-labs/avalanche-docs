@@ -1,14 +1,28 @@
 ---
-description: A deep dive into the Avalanche consensus protocol
+description: Consensus is the task of getting a group of computers to come to an agreement on a decision. Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
 ---
 
-# Avalanche Consensus
+# Avalanche Blockchain Consensus
 
 Consensus is the task of getting a group of computers to come to an agreement on a decision. Computers can reach a consensus by following a set of steps called a consensus protocol. Avalanche is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high throughput. It is energy efficient and does not require special computer hardware. It performs well in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche consensus protocol. The whitepaper is [here.](https://www.avalabs.org/whitepapers)
 
 ## Video
 
-[Deep Dive on the Avalanche Protocol](https://www.youtube.com/watch?v=ZUF9sIu-D\_k)
+<div align="center">
+    <b>Deep Dive on the Avalanche Protocol</b>
+</div>
+
+<iframe src="https://www.youtube.com/embed/ZUF9sIu-D_k"
+        width="100%" 
+        height="480px"  
+        title="Deep Dive on the Avalanche Protocol" 
+        className="video-container"
+        display="initial"
+        position="relative"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+</iframe>
 
 ## Intuition
 

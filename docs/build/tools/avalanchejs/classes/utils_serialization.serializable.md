@@ -44,6 +44,8 @@
 
   ↳ [GenesisData](api_avm_genesisdata.genesisdata.md)
 
+  ↳ [SubnetAuth](api_platformvm_subnetauth.subnetauth.md)
+
 ## Index
 
 ### Properties
@@ -67,7 +69,7 @@
 
 • **_codecID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -75,7 +77,7 @@ ___
 
 • **_typeID**: *number* = undefined
 
-*Defined in [src/utils/serialization.ts:50](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L50)*
+*Defined in [src/utils/serialization.ts:50](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L50)*
 
 ___
 
@@ -83,7 +85,7 @@ ___
 
 • **_typeName**: *string* = undefined
 
-*Defined in [src/utils/serialization.ts:49](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L49)*
+*Defined in [src/utils/serialization.ts:49](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L49)*
 
 ## Methods
 
@@ -91,7 +93,7 @@ ___
 
 ▸ **deserialize**(`fields`: object, `encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *void*
 
-*Defined in [src/utils/serialization.ts:97](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L97)*
+*Defined in [src/utils/serialization.ts:97](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L97)*
 
 **Parameters:**
 
@@ -108,7 +110,7 @@ ___
 
 ▸ **getCodecID**(): *number*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -120,7 +122,7 @@ ___
 
 ▸ **getTypeID**(): *number*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -132,7 +134,7 @@ ___
 
 ▸ **getTypeName**(): *string*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -144,7 +146,7 @@ ___
 
 ▸ **sanitizeObject**(`obj`: object): *object*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -162,7 +164,7 @@ ___
 
 ▸ **serialize**(`encoding?`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *object*
 
-*Defined in [src/utils/serialization.ts:90](https://github.com/ava-labs/avalanchejs/blob/8c220c6/src/utils/serialization.ts#L90)*
+*Defined in [src/utils/serialization.ts:90](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L90)*
 
 **Parameters:**
 

@@ -1,10 +1,18 @@
+---
+description: There is a public API server that allows developers to access the Avalanche platform without having to run a node themselves.
+---
+
 # Public API
 
 There is a public API server that allows developers to access the Avalanche network without having to run a node themselves. The public API server is actually several [AvalancheGo](https://github.com/ava-labs/avalanchego) nodes behind a load balancer to ensure high availability and high request throughput.
 
 ## Using the Public API nodes
 
-The public API server is at `https://api.avax.network/` for Avalanche Mainnet and `https://api.avax-test.network/` for Avalanche Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](../avalanchego-apis/issuing-api-calls.md). For example, the URL to send X-Chain API calls to is `https://api.avax.network/ext/bc/X`.
+The public API server is at `https://api.avax.network/` for Avalanche Mainnet and `https://api.avax-test.network/` for Avalanche Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](../avalanchego-apis/issuing-api-calls.md). Namely, use the following end points for each chain respectively:
+
+* For C-Chain API, the URL is `https://api.avax.network/ext/bc/C/rpc`.
+* For X-Chain API, the URL is `https://api.avax.network/ext/bc/X`.
+* For P-Chain API, the URL is `https://api.avax.network/ext/P`.
 
 ## Supported APIs
 

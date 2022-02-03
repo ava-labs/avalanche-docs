@@ -12,6 +12,7 @@
 * [AmountOutput](src_apis_platformvm.md#amountoutput)
 * [AssetAmountDestination](src_apis_platformvm.md#assetamountdestination)
 * [BaseTx](src_apis_platformvm.md#basetx)
+* [CreateChainTx](src_apis_platformvm.md#createchaintx)
 * [CreateSubnetTx](src_apis_platformvm.md#createsubnettx)
 * [ExportTx](src_apis_platformvm.md#exporttx)
 * [ImportTx](src_apis_platformvm.md#importtx)
@@ -31,6 +32,7 @@
 * [SelectTxClass](src_apis_platformvm.md#selecttxclass)
 * [StakeableLockIn](src_apis_platformvm.md#stakeablelockin)
 * [StakeableLockOut](src_apis_platformvm.md#stakeablelockout)
+* [SubnetAuth](src_apis_platformvm.md#subnetauth)
 * [TransferableInput](src_apis_platformvm.md#transferableinput)
 * [TransferableOutput](src_apis_platformvm.md#transferableoutput)
 * [Tx](src_apis_platformvm.md#tx)
@@ -75,6 +77,12 @@ ___
 ###  BaseTx
 
 • **BaseTx**:
+
+___
+
+###  CreateChainTx
+
+• **CreateChainTx**:
 
 ___
 
@@ -189,6 +197,12 @@ ___
 ###  StakeableLockOut
 
 • **StakeableLockOut**:
+
+___
+
+###  SubnetAuth
+
+• **SubnetAuth**:
 
 ___
 
