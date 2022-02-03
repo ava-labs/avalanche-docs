@@ -3,50 +3,51 @@
 </div>
 
 ---
-# Avalanche Docs
+# Avalanche Dokümanları
 
-## Overview
-This repo contains the contents for our docs deployed [here](https://docs.avax.network).
+## Genel Bakış
+Bu yazılım havuzunda, [burada](https://docs.avax.network) kullanıma sunulan belgelerimizin içerikleri mevcuttur.
 
-The website is built using [Docusaurus 2](https://docusaurus.io/).
+Bu web sitesi, [Docusaurus 2](https://docusaurus.io/) kullanılarak kurulmuştur.
 
-## Contributing
+## Katkı sağlama
 
-Contributing to the docs site is a great way to get involved with the Avalanche dev community! Here's some things you need to know to get started.
+Dokümanlar sitesine katkıda bulunmak, Avalanche geliştirici topluluğuna katılmanın harika bir yoludur! İşte başlamak için bilmeniz gereken bazı şeyler.
 
-### Contents
-* All the docs are located in the [docs](docs) directory.
-* The left side-bar of the page is controlled by [sidebars.js](sidebars.js).
-* Extensive docs for Docusaurus can be found [here](https://docusaurus.io/docs).
+### İçindekiler
+* Tüm dokümanlar [docs](docs) dizininde bulunur.
+* Sayfanın sol tarafındaki çubuk, [sidebars.js](sidebars.js) vasıtasıyla kontrol edilir.
+* Docusaurus'la ilgili geniş kapsamlı dokümanları [burada](https://docusaurus.io/docs) bulabilirsiniz.
 
-### Pull Request (PR)
-* All PRs should be made against the `master` branch.
-* Following a successful build, Cloudflare Pages will comment on the PR with a link to *.avalanche-docs.pages.dev where you can verify your changes.
-* Once your PR is merged into `master`, [https://docs.avax.network/](https://docs.avax.network/) will be updated with your changes.
+### Pull Request \(PR\) \(Çekme İsteği\)
+* Bütün PR'ler \(çekme istekleri\) `master` dalına yapılmalıdır.
+* Başarılı bir kurmanın ardından, Cloudflare Pages'de PR hakkında bir açıklama belirecek ve \*.avalanche-docs.pages.dev adresine bir link verilecektir; değişikliklerinizi orada doğrulayabilirsiniz.
+* PR'niz `master`'a eklendiğinde,
+    [https://docs.avax.network/](https://docs.avax.network/) yaptığınız değişikliklerle güncellenecektir.
 
-### Installation
+### Kurulum
 
 ```
 $ yarn
 ```
 
-### Local Development
+### Yerel Geliştirme
 
 ```
 $ yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+Bu komut yerel bir geliştirme sunucusu başlatır ve bir tarayıcı penceresi açar. Çoğu değişiklik sunucuyu yeniden başlatmaya gerek kalmadan canlı olarak yansıtılır.
 
-### Build
+### Build \(Oluştur\)
 
 ```
 $ yarn build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service. 
+Bu komut `build` dizininde statik içerik üretir ve herhangi bir statik içerik barındırma hizmeti kullanılarak sunulabilir.
 
-**Please make sure that you run this command to see if there is any error in building the package, and fix them before pushing your changes.**
+**Lütfen paketi oluştururken herhangi bir hata olup olmadığını görmek için bu komutu çalıştırdığınızdan emin olun ve değişikliklerinizi göndermeden önce bunları düzeltin.**
 
-## Search
-Search is powered by Algolia and the config file is located [here](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json). 
+## Search \(Ara\)
+Arama aracı \(search\), Algolia tarafından desteklenir ve yapılandırma dosyası [burada](https://github.com/algolia/docsearch-configs/blob/master/configs/avax.json) bulunur.
