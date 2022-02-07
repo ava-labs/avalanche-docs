@@ -383,7 +383,10 @@ The default C-Chain config is:
   "remote-tx-gossip-only-enabled": false,
   "tx-regossip-frequency": 60000000000,
   "tx-regossip-max-size": 15,
-  "log-level": "debug"
+  "log-level": "debug",
+  "offline-pruning-enabled": false,
+  "offline-pruning-bloom-filter-size": 512, // MB
+  "offline-pruning-data-directory": "",
 }
 ```
 
@@ -680,6 +683,22 @@ If true, database pruning of obsolete historical data will be enabled. Should be
 #### `preimages-enabled` (boolean):
 
 If true, enables preimages. Defaults to false.
+
+#### `offline-pruning-enabled` (boolean):
+
+If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes.
+
+Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
+
+This is meant to be run manually, so after running with this flag once, it must be toggled back to false before running the node again. Therefore, you should run with this flag set to true and then set it to false on the subsequent run.
+
+#### `offline-pruning-bloom-filter-size` (int):
+
+This flag sets the size of the bloom filter to use in offline pruning (denominated in MB and defaulting to 512 MB).
+
+#### `offline-pruning-data-directory` (boolean):
+
+This flag must be set when offline pruning is enabled and sets the directory that offline pruning will use to write its bloom filter to disk. This directory should not be changed in between runs until offline pruning has completed.
 
 ### Snapshots
 
