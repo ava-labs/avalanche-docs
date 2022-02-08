@@ -33,6 +33,11 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 #### WebSocket Endpoints
 
+:::info
+On the [public api node](../tools/public-api.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
+:::
+
+
 To interact with C-Chain via the websocket endpoint:
 
 ```cpp
@@ -71,7 +76,9 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
 :::info
+
 Note: For batched requests on the [public api node](../tools/public-api.md) , the maximum number of items is 40. We are working on to support a larger batch size. 
+
 :::
 
 #### eth_getAssetBalance
