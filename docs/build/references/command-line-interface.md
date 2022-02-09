@@ -698,7 +698,7 @@ This flag sets the size of the bloom filter to use in offline pruning (denominat
 
 The active state is added to the bloom filter before iterating the DB to find trie nodes that can be safely deleted, any trie nodes not in the bloom filter are considered safe for deletion. The size of the bloom filter may impact its false positive rate, which can impact the results of offline pruning. This is an advanced parameter that has been tuned to 512 MB and should not be changed without thoughtful consideration.
 
-#### `offline-pruning-data-directory` (boolean):
+#### `offline-pruning-data-directory` (string):
 
 This flag must be set when offline pruning is enabled and sets the directory that offline pruning will use to write its bloom filter to disk. This directory should not be changed in between runs until offline pruning has completed.
 
