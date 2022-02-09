@@ -34,7 +34,7 @@ Compile a contract.
 # abigen --sol counter.sol --pkg main --out counter.go
 ```
 
-This will produce `contract.go` suitable to interact with contract.
+This will produce `counter.go` suitable to interact with contract.
 
 ## Example Code
 
