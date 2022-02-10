@@ -132,9 +132,9 @@ As an alternative to `--chain-config-dir`, chains custom configurations can be l
 
 ### C-Chain Configs
 
-In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json`.
 
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
 
 The C-Chain config options described below.
 
@@ -530,13 +530,13 @@ If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to 
 
 ### X-Chain Configs
 
-In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` (or another valid location, as specified above.)
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json`.
 
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
 
 This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
 
-```javascript
+```json
 {
   "index-transactions": false,
   "index-allow-incomplete": false
