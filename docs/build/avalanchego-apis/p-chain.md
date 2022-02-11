@@ -952,6 +952,59 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getMaxStakeAmount
+
+Returns the maximum amount of nAVAX staking to the named node during a particular time period.
+
+#### **Signature**
+
+```cpp
+platform.getMaxStakeAmount(
+    {
+        subnetID: string,
+        nodeID: string,
+        startTime: int,
+        endTime: int
+    }
+) -> 
+{
+    amount: uint64
+}
+```
+
+* `subnetID` is a Buffer or cb58 string representing subnet
+* `nodeID` is a string representing ID of the node whose stake amount is required during the given duration
+* `startTime` is a big number denoting start time of the duration during which stake amount of the node is required.
+* `endTime` is a big number denoting end time of the duration during which stake amount of the node is required.
+
+#### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getMaxStakeAmount",
+    "params": {
+        "subnetID":"11111111111111111111111111111111LpoYY",
+        "nodeID":"NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
+        "startTime": 1644240334,
+        "endTime": 1644240634
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+#### **Example Response**
+
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "amount": "2000000000000000"
+    },
+    "id": 1
+}
+```
+
 ### platform.getMinStake
 
 Get the minimum amount of AVAX required to validate the Primary Network and the minimum amount of AVAX that can be delegated.
