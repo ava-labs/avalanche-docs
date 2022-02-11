@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-description: This API can be used for measuring node health. Use Avalanche docs as a referrence when testing node health. Helpful examples provided. 
+description: This API can be used for measuring node health. Use Avalanche docs as a reference when testing node health. Helpful examples provided. 
 ---
 
 # Health API
