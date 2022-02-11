@@ -1,8 +1,8 @@
----
-description: In this tutorial we are going to be learning about Typescript and Object Oriented programming(OOP) coding patterns by creating a simple Blockchain class.  
+## Introduction
+
+In this tutorial we are going to be learning about Typescript and Object Oriented programming(OOP) coding patterns by creating a simple Blockchain class.  
 
 The goal of this tutorial is to provide an example of how we can use Typescript to create a class and from that, create instances of that class. We will use our new skills to build a Blockchain class where we will copy the private property from one instance to another. 
----
 
 ## Typescript
 
