@@ -16,7 +16,7 @@ The public API server is at `https://api.avax.network/` for Avalanche Mainnet an
 
 ## Supported APIs
 
-The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](../avalanchego-apis/x-chain), [P-Chain](../avalanchego-apis/p-chain) and [C-Chain](../avalanchego-apis/c-chain). For a full list of available APIs see [here](../avalanchego-apis/README.md).
+The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](../avalanchego-apis/x-chain.mdx), [P-Chain](../avalanchego-apis/p-chain.md) and [C-Chain](../avalanchego-apis/c-chain.md). For a full list of available APIs see [here](../avalanchego-apis/README.md).
 
 
 :::info
