@@ -828,7 +828,7 @@ curl -X POST --data '{
 }
 ```
 
-### avm.getAddressTxs {#avm-get-address-txs-api}
+### avm.getAddressTxs 
 
 Returns all transactions that change the balance of the given address. A transaction is said to change an address's balance if either is true:
 
@@ -1017,9 +1017,6 @@ Most outputs use the secp256k1 FX, look like this:
 
 The above output can be consumed after Unix time `locktime` by a transaction that has signatures from `threshold` of the addresses in `addresses`.
 
-### avm.getTxStatus
-
-Get the status of a transaction sent to the network.
 
 ### avm.getTxStatus
 
