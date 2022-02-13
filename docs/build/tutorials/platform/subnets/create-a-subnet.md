@@ -19,7 +19,7 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Generate the Control Keys {#generate-the-control-keys}
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../../avalanchego-apis/p-chain.md#platform-createaddress) This generates a new private key and stores it for a user.
+First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../../avalanchego-apis/p-chain.md#platformcreateaddress) This generates a new private key and stores it for a user.
 
 To generate the first key:
 
@@ -75,7 +75,7 @@ The response contains the second control key, which is held by the user we just 
 
 ### Create the Subnet {#create-the-subnet}
 
-To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/p-chain.md#platform-createsubnet).
+To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/p-chain.md#platformcreatesubnet).
 
 ```cpp
 curl -X POST --data '{
@@ -109,7 +109,7 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 ### Verifying Success {#verifying-success}
 
-We can call [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platform-getsubnets) to get all Subnets that exist:
+We can call [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets) to get all Subnets that exist:
 
 ```cpp
 curl -X POST --data '{
