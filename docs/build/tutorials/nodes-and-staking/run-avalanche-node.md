@@ -114,7 +114,7 @@ When the node starts, it has to bootstrap (catch up with the rest of the network
 
 `INFO [06-07|19:54:06] <X Chain> /snow/engine/avalanche/transitive.go#80: bootstrapping finished with 1 vertices in the accepted frontier`
 
-To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info.md#info-isbootstrapped) by copying and pasting the following command:
+To check if a given chain is done bootstrapping, in another terminal window call [`info.isBootstrapped`](../../avalanchego-apis/info.md#infoisbootstrapped) by copying and pasting the following command:
 
 ```sh
 curl -X POST --data '{
