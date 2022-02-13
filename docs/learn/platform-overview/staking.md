@@ -29,7 +29,7 @@ Staking rewards are sent to your wallet address at the end of the staking term *
 
 A validator will receive a staking reward if they are online and response for more than 80% of their validation period, as measured by a majority of validators, weighted by stake. **You should aim for your validator be online and responsive 100% of the time.**
 
-You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../build/avalanchego-apis/info.md#info-uptime)
+You can call API method `info.uptime` on your node to learn its weighted uptime and what percentage of the network currently thinks your node has an uptime high enough to reveive a staking reward. See [here.](../../build/avalanchego-apis/info.md#infouptime)
 You can get another opinion on your node's uptime from Avalanche's [staking dashboard](https://stats.avax.network/dashboard/staking/).
 If your reported uptime is not close to 100%, there may be something wrong with your node setup, which may jeopardize your staking reward.
 If this is the case, please see [here](#why-is-my-uptime-low) or contact us on [Discord](https://chat.avax.network) so we can help you find the issue.

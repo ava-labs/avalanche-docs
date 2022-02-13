@@ -401,7 +401,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.uptime {#info-uptime}
+### info.uptime
 
 Returns the network's observed uptime of this node.
 

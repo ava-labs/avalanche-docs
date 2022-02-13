@@ -12,7 +12,7 @@ Below, we provide instructions on how to use the Index API to:
 ## Get Total Block/Transaction Count
 
 You can use the Index API to get the number of blocks/vertices/transactions that have been accepted on a given chain. 
-You can use `curl` or the the Index API Client's [getLastAccepted](../avalanchego-apis/index-api.md#index.getlastaccepted) method to accomplish this.
+You can use `curl` or the the Index API Client's [getLastAccepted](../avalanchego-apis/index-api.md#indexgetlastaccepted) method to accomplish this.
 
 In the examples below, we're getting the number of X-Chain transactions that have been accepted.
 * To get the number of accepted C-Chain blocks, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
@@ -89,7 +89,7 @@ You can also use chain-specific APIs.
 
 ### Index API Client
 
-The snippet below uses the Index API Client's [getContainerByID](../avalanchego-apis/index-api.md#index.getcontainerbyid) method to get an X-Chain container by its ID.
+The snippet below uses the Index API Client's [getContainerByID](../avalanchego-apis/index-api.md#indexgetcontainerbyid) method to get an X-Chain container by its ID.
 * To get a C-Chain block, replace `/ext/index/X/tx` with `/ext/index/C/block` below. 
 * To get a P-Chain block, replace `/ext/index/X/tx` with `/ext/index/P/block`.
 * To get an X-Chain vertex, replace `/ext/index/X/tx` with `/ext/index/X/vtx`.
@@ -128,14 +128,14 @@ func main() {
 }
 ```
 
-`curl` example of `getContainerByID` can be found [here](../avalanchego-apis/index-api.md#index.getcontainerbyid).
+`curl` example of `getContainerByID` can be found [here](../avalanchego-apis/index-api.md#indexgetcontainerbyid).
 
 
 ### Chain-Specific APIs
 
 #### X-Chain
 
-You can use X-Chain API method [avm.getTx](../avalanchego-apis/x-chain.mdx#avm.gettx) to get an X-Chain transaction by its ID. Set `encoding` to `json` to get a human-readable JSON response.
+You can use X-Chain API method [avm.getTx](../avalanchego-apis/x-chain.mdx#avmgettx) to get an X-Chain transaction by its ID. Set `encoding` to `json` to get a human-readable JSON response.
 
 **Example Call**
 

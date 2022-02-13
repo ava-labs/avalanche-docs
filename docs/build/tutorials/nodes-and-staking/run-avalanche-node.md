@@ -141,7 +141,7 @@ To connect to the Fuji Testnet instead of the main net, use argument `--network-
 
 ### Create a Keystore User
 
-Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore.md#keystore-createuser):
+Avalanche nodes provide a built-in **Keystore.** The Keystore manages users and is a lot like a [wallet](http://support.avalabs.org/en/articles/4587108-what-is-a-blockchain-wallet). A user is a password-protected identity that a client can use when interacting with blockchains. **You should only create a keystore user on a node that you operate, as the node operator has access to your plaintext password.** To create a user, call [`keystore.createUser`](../../avalanchego-apis/keystore.md#keystorecreateuser):
 
 ```sh
 curl -X POST --data '{
