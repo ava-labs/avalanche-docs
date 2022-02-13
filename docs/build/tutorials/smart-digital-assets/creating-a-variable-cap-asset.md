@@ -17,7 +17,7 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ## Create the Asset
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/x-chain.mdx#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
+Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/x-chain.mdx#avmcreatevariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
 
 The signature for this method is:
 
@@ -109,7 +109,7 @@ Right now 0 shares exist. Let’s mint 10M shares.
 
 ### Create the Unsigned Transaction
 
-We’ll use [`avm.mint`](../../avalanchego-apis/x-chain.mdx#avm-mint) to mint the shares.
+We’ll use [`avm.mint`](../../avalanchego-apis/x-chain.mdx#avmmint) to mint the shares.
 
 * `amount` is the number of shares that will be created.
 * `assetID` is the ID of the asset we’re creating more of.
@@ -144,7 +144,7 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
+We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avmgettxstatus):
 
 ```cpp
 curl -X POST --data '{
@@ -173,7 +173,7 @@ This should give:
 
 ### Check a Balance
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance):
+All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avmgetbalance):
 
 ```cpp
 curl -X POST --data '{
@@ -201,7 +201,7 @@ The response confirms that our asset creation was successful and that the expect
 
 ### Send the Asset
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/x-chain.mdx#avm-send). To do so:
+Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/x-chain.mdx#avmsend). To do so:
 
 ```cpp
 curl -X POST --data '{
