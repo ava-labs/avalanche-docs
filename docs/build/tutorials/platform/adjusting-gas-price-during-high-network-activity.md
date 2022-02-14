@@ -2,11 +2,11 @@
 description: This tutorial will help users to adjust their priority fee and max fee cap during high network activity and take the benefits of dynamic fees algorithm.
 ---
 
-# Adjusting gas price during high network activity
+# Adjusting Gas Price During High Network Activity
 
 Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may cause panic among the users if they couldn't figure out what went wrong!
 
-## Probable reasons you are here
+## Probable Reasons You are Here
 * Your transaction has stalled, and you don't know what to do
 * Your transaction has failed, with an error - `transaction underpriced`
 * It's your first transaction, and you want to be sure about any potential issues
@@ -14,7 +14,7 @@ Sometimes during periods of high network activity, transactions either remain pe
 
 If these are your reasons for being here, then you can either go through this entire section, for a better understanding of the scenario or directly skip to the [solution](#Adjusting-gas-fees-before-submitting-the-transaction).
 
-## Good to know keywords and concepts
+## Good to Know Keywords and Concepts
 
 The amount of computation used by a transaction is measured in units of `gas`. Each gas has a dynamic price (to be paid in AVAX) which depends upon the network activity, and this is known as `gas price`.
 
@@ -53,7 +53,7 @@ Consider the following examples (here GWEI or nAVAX is one-billionth of AVAX) -
 Look at transactions **A** and **B**. In these scenarios, it looks like transaction B is paying a higher tip, however, this depends on the base fee of the block where the transactions are included. The effective tip of A is more than that of B. So, if both of these transaction competes for being included in the next block, then the validators would prioritize transaction A, due to higher effective tip.
 
 
-## Why my transaction is on hold or failing?
+## Why my Transaction is on Hold or Failing?
 
 If your transaction is failing and giving an error - `transaction underpriced`, then the max fee cap of your transaction must be less than the minimum base price that the network supports (as of now, it's 25 nAVAX or GWEI). Although the base fee is automatically estimated in wallets like Metamask, you can try increasing the max fee cap in the wallet.
 
@@ -63,7 +63,7 @@ Another reason for pending transactions is the max fee cap being significantly b
 
 These fee adjustments can be made through wallets like Metamask.
 
-## Adjusting gas fees before submitting the transaction
+## Adjusting Gas Fees Before Submitting the Transaction
 
 You may not need to edit the gas fees on normal days. This is only required if there is heavy congestion on the network, and the base fees are frequently fluctuating.
 
@@ -96,7 +96,7 @@ You may not need to edit the gas fees on normal days. This is only required if t
 | 1           | 78 GWEI     | 50 GWEI     | 25 GWEI    | 50 GWEI       | 75 GWEI     |
 
 
-## Speeding up the pending transaction
+## Speeding Up the Pending Transaction
 
 If your transaction is on hold for a very long time, you can speed up through Metamask. As shown in the below image, click on the **Speed Up** button, to edit your priority and max fee. By default, the new transaction has slightly more priority and max fee (say 10% more than the previous), but you can edit as per your convenience.
 
