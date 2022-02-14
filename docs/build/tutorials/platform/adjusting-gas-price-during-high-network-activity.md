@@ -16,9 +16,9 @@ If these are your reasons for being here, then you can either go through this en
 
 ## Good to know keywords and concepts
 
-We measure the amount of computation used by a transaction in units of `gas`. Each gas has a dynamic price (to be paid in AVAX) which depends upon the network activity, and this is known as `gas price`.
+The amount of computation used by a transaction is measured in units of `gas`. Each gas has a dynamic price (to be paid in AVAX) which depends upon the network activity, and this is known as `gas price`.
 
-To avoid using computation infinitely and draining the user's wallet, transactions need to be submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction could consume.
+To avoid draining the user's wallet due to using computation infinitely, transactions need to be submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction could consume.
 
 If a transaction uses more than the gas limit, then it would be rejected. Total fees paid by the user is calculated as `(gas consumed) * (gas price)`, and is known as `gas fees`. Similarly, maximum gas fees are calculated as `(gas limit) * (gas price)`.
 
@@ -50,7 +50,7 @@ Consider the following examples (here GWEI or nAVAX is one-billionth of AVAX) -
 | A           | 50 GWEI     | 10 GWEI     | 40 GWEI    | 10 GWEI       | 50 GWEI     |
 | B           | 40 GWEI     | 40 GWEI     | 40 GWEI    | 0 GWEI        | 40 GWEI     |
 
-Look at transactions **A** and **B**. In this scenario, it looks like transaction B is paying a higher tip, however, this depends on the base fee of the block where the transactions are included. The effective tip of A is more than that of B. So, if both of these transaction competes for being included in the next block, then the validators would prioritize transaction A, due to higher effective tip.
+Look at transactions **A** and **B**. In these scenarios, it looks like transaction B is paying a higher tip, however, this depends on the base fee of the block where the transactions are included. The effective tip of A is more than that of B. So, if both of these transaction competes for being included in the next block, then the validators would prioritize transaction A, due to higher effective tip.
 
 
 ## Why my transaction is on hold or failing?
@@ -59,7 +59,7 @@ If your transaction is failing and giving an error - `transaction underpriced`, 
 
 During a period of heavy congestion on the network, all submitted transactions couldn't be included in the same block, due to the block's gas limit. So, validators choose transactions giving more priority to transactions with higher effective tip. Your transaction will have to wait until the effective tip is highest among the pending transactions.
 
-Another reason for pending transactions is the max fee cap being significantly below the current base fee that the network is charging. In this case, we need to increase the max fee cap of the transaction.
+Another reason for pending transactions is the max fee cap being significantly below the current base fee that the network is charging. In this case, you would need to increase the max fee cap of the transaction.
 
 These fee adjustments can be made through wallets like Metamask.
 
@@ -67,7 +67,7 @@ These fee adjustments can be made through wallets like Metamask.
 
 You may not need to edit the gas fees on normal days. This is only required if there is heavy congestion on the network, and the base fees are frequently fluctuating.
 
-1. Let's create a sample transaction on Fuji testnet, in which we will be sending 0.1 AVAX to a receiver using the Metamask wallet extension. By clicking **Next** we can review gas fees and the amount which we want to send.
+1. Let's create a sample transaction on Fuji testnet, in which we will be sending 0.1 AVAX to a receiver using the Metamask. By clicking **Next** we can review gas fees and the amount which we want to send.
 
 ![](/img/dynamic-fees-adjustment-1.png)
 
@@ -77,11 +77,11 @@ You may not need to edit the gas fees on normal days. This is only required if t
 ![](/img/dynamic-fees-adjustment-2.png)
 
 
-3. On this page, you can edit the priority fee (gas tip cap) and max fee (max fee cap). You can estimate the max fee as shown on [snowtrace](https://snowtrace.io/gastracker) which represents the average max fee over the last 3 seconds.
+3. On this page, you can edit the priority fee (gas tip cap) and max fee (max fee cap). You can estimate the max fee as shown on [snowtrace](https://snowtrace.io/gastracker) which represents the average max fee over the last 3 seconds. For more detailed statistics, you can have a look [here](https://stats.avax.network/dashboard/c-chain-activity/).
 
 ![](/img/dynamic-fees-adjustment-3.png)
 
-4. If the network activity is high, we have to edit the priority and max fees accordingly, as given on snowtrace. Consider the example below, where the average max fee is 78 GWEI (nAVAX).
+4. If the network activity is high, you have to edit the priority and max fees accordingly, as given on snowtrace. Consider the example below, where the average max fee is 78 GWEI (nAVAX).
 
 ![](/img/dynamic-fees-adjustment-4.png)
 
