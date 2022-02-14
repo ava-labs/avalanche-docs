@@ -20,7 +20,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### info.getBlockchainID
 
-Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#admin-aliaschain).)
+Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adminaliaschain).)
 
 #### **Signature**
 
@@ -401,7 +401,7 @@ curl -X POST --data '{
 }
 ```
 
-### info.uptime {#info-uptime}
+### info.uptime
 
 Returns the network's observed uptime of this node.
 

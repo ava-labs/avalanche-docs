@@ -76,7 +76,7 @@ Our genesis data will be `fP1vxkpyLWnH9dD6BQA`.
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/p-chain.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platform-getsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets).
 
 Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
 
@@ -113,7 +113,7 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platform-getblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
 ```cpp
 curl -X POST --data '{
@@ -163,7 +163,7 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platform-getblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platformgetblockchainstatus) on that node:
 
 ```cpp
 curl -X POST --data '{

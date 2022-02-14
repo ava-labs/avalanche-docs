@@ -66,7 +66,7 @@ If set to `false`, this node will not expose the Keystore API. Defaults to `true
 
 If set to `false`, this node will not expose the Metrics API. Defaults to `true`. See [here](../avalanchego-apis/metrics.md) for more information.
 
-#### `--http-shutdown-wait` (duration): 
+#### `--http-shutdown-wait` (duration):
 
 Duration to wait after receiving SIGTERM or SIGINT before initiating shutdown. The `/health` endpoint will return unhealthy during this duration (if the Health API is enabled.) Defaults to 0.
 
@@ -103,24 +103,537 @@ If true, will retry bootstrapping if it fails.
 Max number of times to retry bootstrapping after a failure.
 
 #### `--bootstrap-ancestors-max-containers-sent` (uint)
+
 Max number of containers in an Ancestors message sent by this node. Defaults to `2000`.
 
 #### `--bootstrap-ancestors-max-containers-received` (unit)
+
 This node reads at most this many containers from an incoming Ancestors message. Defaults to `2000`.
+
+## Chain Configs
+
+Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
+
+AvalancheGo looks for these files in the directory specified by `--chain-config-dir`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized (see below for extension). For example, the config for the C-Chain should be at: `{chain-config-dir}/C/config.json`.
+
+The filename extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
+
+For a given chain, AvalancheGo will look first for a config sub-directory whose name is the chain ID. If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias. If it's not found, it looks for a config sub-directory whose name is another alias for the chain. All folder and file names are case sensitive.
+
+It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used.
+
+#### `--chain-config-dir` (string):
+
+Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--chain-config-content` is specified.
+
+#### `--chain-config-content` (string):
+
+As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
+
+### C-Chain Configs
+
+In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json`.
+
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
+
+The C-Chain config options described below.
+
+The default C-Chain config is:
+
+```json
+{
+  "snowman-api-enabled": false,
+  "coreth-admin-api-enabled": false,
+  "coreth-admin-api-dir": "",
+  "eth-apis": [
+    "public-eth",
+    "public-eth-filter",
+    "net",
+    "web3",
+    "internal-public-eth",
+    "internal-public-blockchain",
+    "internal-public-transaction-pool",
+    "internal-public-account"
+  ],
+  "continuous-profiler-dir": "",
+  "continuous-profiler-frequency": 900000000000,
+  "continuous-profiler-max-files": 5,
+  "rpc-gas-cap": 50000000,
+  "rpc-tx-fee-cap": 100,
+  "preimages-enabled": false,
+  "pruning-enabled": true,
+  "snapshot-async": true,
+  "snapshot-verification-enabled": false,
+  "metrics-enabled": false,
+  "metrics-expensive-enabled": false,
+  "local-txs-enabled": false,
+  "api-max-duration": 0, // Default to no maximum
+  "ws-cpu-refill-rate": 0,
+  "ws-cpu-max-stored": 0,
+  "api-max-blocks-per-request": 0, // Default to no maximum
+  "allow-unfinalized-queries": false,
+  "allow-unprotected-txs": false,
+  "keystore-directory": "",
+  "keystore-external-signer": "",
+  "keystore-insecure-unlock-allowed": false,
+  "remote-tx-gossip-only-enabled": false,
+  "tx-regossip-frequency": 60000000000,
+  "tx-regossip-max-size": 15,
+  "log-level": "debug",
+  "offline-pruning-enabled": false,
+  "offline-pruning-bloom-filter-size": 512, // MB
+  "offline-pruning-data-directory": ""
+}
+```
+
+Default values are overridden only if specified in the given config.
+
+#### Continuous Profiling
+
+##### `continuous-profiler-dir` (string):
+
+Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to "". If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
+
+##### `continuous-profiler-frequency` (duration):
+
+Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
+
+##### `continuous-profiler-max-files` (int):
+
+Specifies the maximum number of profiles to keep before removing the oldest.
+
+#### Enabling Avalanche Specific APIs
+
+##### `snowman-api-enabled` (boolean):
+
+Enables the Snowman API. Defaults to false.
+
+##### `coreth-admin-api-enabled` (boolean):
+
+Enables the Admin API. Defaults to false.
+
+##### `coreth-admin-api-dir` (string):
+
+Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
+
+#### Enabling EVM APIs
+
+##### `eth-apis` ([]string):
+
+Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
+
+Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
+
+##### `public-eth`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+`eth_coinbase`
+`eth_etherbase`
+
+##### `public-eth-filter`:
+
+Enables the public filter API for the `eth_*` namespace. Defaults to true.
+
+Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
+
+- `eth_newPendingTransactionFilter`
+- `eth_newPendingTransactions`
+- `eth_newAcceptedTransactions`
+- `eth_newBlockFilter`
+- `eth_newHeads`
+- `eth_logs`
+- `eth_newFilter`
+- `eth_getLogs`
+- `eth_uninstallFilter`
+- `eth_getFilterLogs`
+- `eth_getFilterChanges`
+
+##### `private-admin`:
+
+Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
+
+- `admin_importChain`
+- `admin_exportChain`
+
+##### `public-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_dumpBlock`
+- `debug_accountRange`
+
+##### `private-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_preimage`
+- `debug_getBadBlocks`
+- `debug_storageRangeAt`
+- `debug_getModifiedAccountsByNumber`
+- `debug_getModifiedAccountsByHash`
+- `debug_getAccessibleState`
+
+##### `net`:
+
+Adds the following RPC calls to the `net_*` namespace. Defaults to true.
+
+- `net_listening`
+- `net_peerCount`
+- `net_version`
+
+Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
+
+##### `debug-tracer`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_traceChain`
+- `debug_traceBlockByNumber`
+- `debug_traceBlockByHash`
+- `debug_traceBlock`
+- `debug_traceBadBlock`
+- `debug_intermediateRoots`
+- `debug_traceTransaction`
+- `debug_traceCall`
+
+##### `web3`:
+
+Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
+
+- `web3_clientVersion`
+- `web3_sha3`
+
+##### `internal-public-eth`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+- `eth_gasPrice`
+- `eth_baseFee`
+- `eth_maxPriorityFeePerGas`
+- `eth_feeHistory`
+
+##### `internal-public-blockchain`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+- `eth_chainId`
+- `eth_blockNumber`
+- `eth_getBalance`
+- `eth_getAssetBalance`
+- `eth_getProof`
+- `eth_getHeaderByNumber`
+- `eth_getHeaderByHash`
+- `eth_getBlockByNumber`
+- `eth_getBlockByHash`
+- `eth_getUncleBlockByNumberAndIndex`
+- `eth_getUncleBlockByBlockHashAndIndex`
+- `eth_getUncleCountByBlockNumber`
+- `eth_getUncleCountByBlockHash`
+- `eth_getCode`
+- `eth_getStorageAt`
+- `eth_call`
+- `eth_estimateGas`
+- `eth_createAccessList`
+
+##### `internal-public-transaction-pool`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+- `eth_getBlockTransactionCountByNumber`
+- `eth_getBlockTransactionCountByHash`
+- `eth_getTransactionByBlockNumberAndIndex`
+- `eth_getTransactionByBlockHashAndIndex`
+- `eth_getRawTransactionByBlockNumberAndIndex`
+- `eth_getRawTransactionByBlockHashAndIndex`
+- `eth_getTransactionCount`
+- `eth_getTransactionByHash`
+- `eth_getRawTransactionByHash`
+- `eth_getTransactionReceipt`
+- `eth_sendTransaction`
+- `eth_fillTransaction`
+- `eth_sendRawTransaction`
+- `eth_sign`
+- `eth_signTransaction`
+- `eth_pendingTransactions`
+- `eth_resend`
+
+##### `internal-public-tx-pool`:
+
+Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
+
+- `txpool_content`
+- `txpool_contentFrom`
+- `txpool_status`
+- `txpool_inspect`
+
+##### `internal-public-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_getHeaderRlp`
+- `debug_getBlockRlp`
+- `debug_printBlock`
+
+##### `internal-private-debug`:
+
+Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
+
+- `debug_chaindbProperty`
+- `debug_chaindbCompact`
+
+##### `internal-public-account`:
+
+Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
+
+- `eth_accounts`
+
+##### `internal-private-personal`:
+
+Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
+
+- `personal_listAccounts`
+- `personal_listWallets`
+- `personal_openWallet`
+- `personal_deriveAccount`
+- `personal_newAccount`
+- `personal_importRawKey`
+- `personal_unlockAccount`
+- `personal_lockAccount`
+- `personal_sendTransaction`
+- `personal_signTransaction`
+- `personal_sign`
+- `personal_ecRecover`
+- `personal_signAndSendTransaction`
+- `personal_initializeWallet`
+- `personal_unpair`
+
+#### API Configuration
+
+##### `rpc-gas-cap` (int):
+
+The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `eth_call`). Defaults to 50,000,000.
+
+##### `rpc-tx-fee-cap` (int):
+
+Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to 100.
+
+##### `api-max-duration` (duration):
+
+Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
+
+##### `api-max-blocks-per-request` (int):
+
+Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
+
+##### `ws-cpu-refill-rate` (duration):
+
+The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (0).
+
+##### `ws-cpu-max-stored` (duration):
+
+Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
+
+##### `allow-unfinalized-queries` (boolean):
+
+Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
+
+#### Transaction Pool
+
+##### `local-txs-enabled` (boolean):
+
+Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to false.
+
+##### `allow-unprotected-txs` (boolean):
+
+If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
+
+##### `remote-tx-gossip-only-enabled` (boolean):
+
+If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to false.
+
+##### `tx-regossip-frequency` (duration):
+
+Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to 1 minute.
+
+##### `tx-regossip-max-size` (int):
+
+Maximum number of transactions to re-gossip at once. Defaults to 15.
+
+#### Metrics
+
+##### `metrics-enabled` (boolean):
+
+Enables metrics. Defaults to false.
+
+##### `metrics-expensive-enabled` (boolean):
+
+Enables expensive metrics. Defaults to false.
+
+#### Database
+
+##### `pruning-enabled` (boolean):
+
+If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
+
+##### `preimages-enabled` (boolean):
+
+If true, enables preimages. Defaults to false.
+
+##### `offline-pruning-enabled` (boolean):
+
+If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.**
+
+Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
+
+This is meant to be run manually, so after running with this flag once, it must be toggled back to false before running the node again. Therefore, you should run with this flag set to true and then set it to false on the subsequent run.
+
+##### `offline-pruning-bloom-filter-size` (int):
+
+This flag sets the size of the bloom filter to use in offline pruning (denominated in MB and defaulting to 512 MB). The bloom filter is kept in memory for efficient checks during pruning and is also written to disk to allow pruning to resume withou re-generating the bloom filter.
+
+The active state is added to the bloom filter before iterating the DB to find trie nodes that can be safely deleted, any trie nodes not in the bloom filter are considered safe for deletion. The size of the bloom filter may impact its false positive rate, which can impact the results of offline pruning. This is an advanced parameter that has been tuned to 512 MB and should not be changed without thoughtful consideration.
+
+##### `offline-pruning-data-directory` (string):
+
+This flag must be set when offline pruning is enabled and sets the directory that offline pruning will use to write its bloom filter to disk. This directory should not be changed in between runs until offline pruning has completed.
+
+#### Snapshots
+
+##### `snapshot-async` (boolean):
+
+If true, allows snapshot generation to be executed asynchronously. Defaults to true.
+
+##### `snapshot-verification-enabled` (boolean):
+
+If true, verifies the complete snapshot after it has been generated. Defaults to false.
+
+#### Log Level
+
+##### `log-level` (string):
+
+Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+
+#### Keystore Settings
+
+##### `keystore-directory` (string):
+
+The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
+
+##### `keystore-external-signer` (string):
+
+Specifies an external URI for a clef-type signer. Defaults to the empty string (not enabled).
+
+##### `keystore-insecure-unlock-allowed` (bool):
+
+If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
+
+### X-Chain Configs
+
+In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json`.
+
+For example if `chain-config-dir` has the default value which is `$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
+
+This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
+
+```json
+{
+  "index-transactions": false,
+  "index-allow-incomplete": false
+}
+```
+
+Default values are overridden only if explicitly specified in the config.
+
+The parameters are as follows:
+
+**Transaction Indexing**
+
+#### `index-transactions` (boolean):
+
+Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../avalanchego-apis/x-chain.mdx#avmgetaddresstxs).
+
+Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
+
+#### `index-allow-incomplete` (boolean):
+
+Allows incomplete indices. Default value is `false`.
+
+This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
 
 ## Database
 
-#### `--db-dir` (string, file path):
+##### `--db-dir` (string, file path):
 
 Specifies the directory to which the database is persisted. Defaults to `"$HOME/.avalanchego/db"`.
 
-#### `--db-type` (string):
+##### `--db-type` (string):
 
 Specifies the type of database to use. Must be one of `leveldb`, `rocksdb`, `memdb`. `memdb` is an in-memory, non-persisted database.
 
 Note that when running with `leveldb`, the node can't read data that was persisted when running with `rocksdb`, and vice-versa.
 
 **Two important notes about RocksDB**: First, RocksDB does not work on all computers. Second, RocksDB is not built by default and is not included in publicly released binaries. To build AvalancheGo with RocksDB, run `export ROCKSDBALLOWED=1` in your terminal and then `scripts/build.sh`. You must do this before you can use `--db-type=rocksdb`.
+
+### Database Config
+
+#### `--db-config-file` (string):
+
+Path to the database config file. Ignored if `--config-file-content` is specified.
+
+#### `--db-config-file-content` (string):
+
+As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
+
+#### LevelDB Config
+
+A LevelDB config file must be JSON and may have these keys.
+Any keys not given will receive the default value.
+
+```go
+{
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockCacheCapacity": int
+	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
+	// table' block.
+	"blockSize": int
+	// CompactionExpandLimitFactor limits compaction size after expanded.  This
+	// will be multiplied by table size limit at compaction target level.
+	"compactionExpandLimitFactor": int
+	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
+	// that a single 'sorted table' generates.  This will be multiplied by
+	// table size limit at grandparent level.
+	"compactionGPOverlapsFactor": int
+	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
+	// trigger compaction.
+	"compactionL0Trigger": int
+	// CompactionSourceLimitFactor limits compaction source size. This doesn't
+	// apply to level-0.  This will be multiplied by table size limit at
+	// compaction target level.
+	"compactionSourceLimitFactor": int
+	// CompactionTableSize limits size of 'sorted table' that compaction
+	// generates.  The limits for each level will be calculated as:
+	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
+	// The multiplier for each level can also fine-tuned using
+	// CompactionTableSizeMultiplierPerLevel.
+	"compactionTableSize": int
+	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
+	"compactionTableSizeMultiplier": float
+	"compactionTableSizeMultiplierPerLevel": []float
+	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
+	"compactionTotalSizeMultiplier": float64
+	// OpenFilesCacheCapacity defines the capacity of the open files caching.
+	"openFilesCacheCapacity": int
+	// There are two buffers of size WriteBuffer used.
+	"writeBuffer": int
+	"filterBitsPerKey": int
+}
+```
+
+#### RocksDB Config File
+
+Custom config is not yet supported for RocksDB.
 
 ## Genesis
 
@@ -184,13 +697,13 @@ Attempts to raise the process file descriptor limit to at least this value. Defa
 
 The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
 
-* `Off`: No logs have this level of logging.
-* `Fatal`: Fatal errors that are not recoverable.
-* `Error`: Errors that the node encounters, these errors were able to be recovered.
-* `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-* `Info`: Useful descriptions of node status updates.
-* `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-* `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `Off`: No logs have this level of logging.
+- `Fatal`: Fatal errors that are not recoverable.
+- `Error`: Errors that the node encounters, these errors were able to be recovered.
+- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `Info`: Useful descriptions of node status updates.
+- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
@@ -212,11 +725,11 @@ Specifies the directory in which system logs are kept. Defaults to `"$HOME/.aval
 
 The identity of the network the node should connect to. Can be one of:
 
-* `--network-id=mainnet` -&gt; Connect to Mainnet (default).
-* `--network-id=fuji` -&gt; Connect to the Fuji test-network.
-* `--network-id=testnet` -&gt; Connect to the current test-network. (Right now, this is Fuji.)
-* `--network-id=local` -&gt; Connect to a local test-network.
-* `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
+- `--network-id=mainnet` -&gt; Connect to Mainnet (default).
+- `--network-id=fuji` -&gt; Connect to the Fuji test-network.
+- `--network-id=testnet` -&gt; Connect to the current test-network. (Right now, this is Fuji.)
+- `--network-id=local` -&gt; Connect to a local test-network.
+- `--network-id=network-{id}` -&gt; Connect to the network with the given ID. `id` must be in the range `[0, 2^32)`.
 
 ## Public IP
 
@@ -323,427 +836,6 @@ build-dir
       |_evm
 ```
 
-### Chain Configs
-
-Some chains allow the node operator to provide a custom configuration. AvalancheGo can read chain configurations from files and pass them to the corresponding chains on initialization.
-
-AvalancheGo looks for these files in the directory specified by `--chain-config-dir`. This directory can have sub-directories whose names are chain IDs or chain aliases. Each sub-directory contains the configuration for the chain specified in the directory name. Each sub-directory should contain a file named `config`, whose value is passed in when the corresponding chain is initialized. For example, the config for the C-Chain should be at: `[chain-config-dir-goes-here]/C/config.json`.
-
-The extension that these files should have, and the contents of these files, is VM-dependent. For example, some chains may expect `config.txt` while others expect `config.json`. If multiple files are provided with the same name but different extensions (e.g. `config.json` and `config.txt`) in the same sub-directory, AvalancheGo will exit with an error.
-
-For a given chain, AvalancheGo will look first for a config sub-directory whose name is the chain ID. If it isn't found, it looks for a config sub-directory whose name is the chain's primary alias. If it's not found, it looks for a config sub-directory whose name is another alias for the chain. All folder and file names are case sensitive.
-
-It is not required to provide these custom configurations. If they are not provided, a VM-specific default config will be used.
-
-#### `--chain-config-dir` (string):
-
-Specifies the directory that contains chain configs, as described above. Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--chain-config-content` is specified.
-
-#### `--chain-config-content` (string):
-
-As an alternative to `--chain-config-dir`, chains custom configurations can be loaded altogether from command line via `--chain-config-content` flag. Content must be base64 encoded.
-
-### C-Chain Config
-
-In order to specify a config for the C-Chain, a JSON config file should be placed at `{chain-config-dir}/C/config.json` (or another valid location, as specified above.)
-
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/C/config.json`.
-
-The C-Chain config options described below.
-
-The default C-Chain config is:
-
-```json
-{
-  "snowman-api-enabled": false,
-  "coreth-admin-api-enabled": false,
-  "coreth-admin-api-dir": "",
-  "eth-apis": ["public-eth", "public-eth-filter", "net", "web3", "internal-public-eth", "internal-public-blockchain",  "internal-public-transaction-pool", "internal-public-account"],
-  "continuous-profiler-dir": "",
-  "continuous-profiler-frequency": 900000000000,
-  "continuous-profiler-max-files": 5,
-  "rpc-gas-cap": 50000000,
-  "rpc-tx-fee-cap": 100,
-  "preimages-enabled": false,
-  "pruning-enabled": true,
-  "snapshot-async": true,
-  "snapshot-verification-enabled": false,
-  "metrics-enabled": false,
-  "metrics-expensive-enabled": false,
-  "local-txs-enabled": false,
-  "api-max-duration": 0, // Default to no maximum
-  "ws-cpu-refill-rate": 0,
-  "ws-cpu-max-stored": 0,
-  "api-max-blocks-per-request": 0, // Default to no maximum
-  "allow-unfinalized-queries": false,
-  "allow-unprotected-txs": false,
-  "keystore-directory": "",
-  "keystore-external-signer": "",
-  "keystore-insecure-unlock-allowed": false,
-  "remote-tx-gossip-only-enabled": false,
-  "tx-regossip-frequency": 60000000000,
-  "tx-regossip-max-size": 15,
-  "log-level": "debug"
-}
-```
-
-Default values are overridden only if specified in the given config.
-
-### Continuous Profiling
-
-#### `continuous-profiler-dir` (string):
-
-Enables the continuous profiler (captures a CPU/Memory/Lock profile at a specified interval). Defaults to "". If a non-empty string is provided, it enables the continuous profiler and specifies the directory to place the profiles in.
-
-#### `continuous-profiler-frequency` (duration):
-
-Specifies the frequency to run the continuous profiler. Defaults to 15 minutes.
-
-#### `continuous-profiler-max-files` (int):
-
-Specifies the maximum number of profiles to keep before removing the oldest.
-
-### Enabling Avalanche Specific APIs
-
-#### `snowman-api-enabled` (boolean):
-
-Enables the Snowman API. Defaults to false.
-
-#### `coreth-admin-api-enabled` (boolean):
-
-Enables the Admin API. Defaults to false.
-
-#### `coreth-admin-api-dir` (string):
-
-Specifies the directory for the Admin API to use to store CPU/Mem/Lock Profiles. Defaults to "".
-
-### Enabling EVM APIs
-
-#### `eth-apis` ([]string):
-
-Use the `eth-apis` field to specify the exact set of below services to enable on your node. If this field is not set, then the default list will be: `["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool"]`.
-
-Note: if you populate this field, it will override the defaults so you must include every service you wish to enable.
-
-#### `public-eth`:
-
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
-
-`eth_coinbase`
-`eth_etherbase`
-
-#### `public-eth-filter`:
-
-Enables the public filter API for the `eth_*` namespace. Defaults to true.
-
-Adds the following RPC calls (see https://eth.wiki/json-rpc/API for complete documentation):
-
-* `eth_newPendingTransactionFilter`
-* `eth_newPendingTransactions`
-* `eth_newAcceptedTransactions`
-* `eth_newBlockFilter`
-* `eth_newHeads`
-* `eth_logs`
-* `eth_newFilter`
-* `eth_getLogs`
-* `eth_uninstallFilter`
-* `eth_getFilterLogs`
-* `eth_getFilterChanges`
-
-#### `private-admin`:
-
-Adds the following RPC calls to the `admin_*` namespace. Defaults to false.
-
-* `admin_importChain`
-* `admin_exportChain`
-
-#### `public-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
-* `debug_dumpBlock`
-* `debug_accountRange`
-
-#### `private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
-* `debug_preimage`
-* `debug_getBadBlocks`
-* `debug_storageRangeAt`
-* `debug_getModifiedAccountsByNumber`
-* `debug_getModifiedAccountsByHash`
-* `debug_getAccessibleState`
-
-#### `net`:
-
-Adds the following RPC calls to the `net_*` namespace. Defaults to true.
-
-* `net_listening`
-* `net_peerCount`
-* `net_version`
-
-Note: Coreth is a virtual machine and does not have direct access to the networking layer, so `net_listening` always returns true and `net_peerCount` always returns 0. For accurate metrics on the network layer, users should use the AvalancheGo APIs.
-
-#### `debug-tracer`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
-* `debug_traceChain`
-* `debug_traceBlockByNumber`
-* `debug_traceBlockByHash`
-* `debug_traceBlock`
-* `debug_traceBadBlock`
-* `debug_intermediateRoots`
-* `debug_traceTransaction`
-* `debug_traceCall`
-
-#### `web3`:
-
-Adds the following RPC calls to the `web3_*` namespace. Defaults to true.
-
-* `web3_clientVersion`
-* `web3_sha3`
-
-#### `internal-public-eth`:
-
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
-
-* `eth_gasPrice`
-* `eth_baseFee`
-* `eth_maxPriorityFeePerGas`
-* `eth_feeHistory`
-
-#### `internal-public-blockchain`:
-
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
-
-* `eth_chainId`
-* `eth_blockNumber`
-* `eth_getBalance`
-* `eth_getAssetBalance`
-* `eth_getProof`
-* `eth_getHeaderByNumber`
-* `eth_getHeaderByHash`
-* `eth_getBlockByNumber`
-* `eth_getBlockByHash`
-* `eth_getUncleBlockByNumberAndIndex`
-* `eth_getUncleBlockByBlockHashAndIndex`
-* `eth_getUncleCountByBlockNumber`
-* `eth_getUncleCountByBlockHash`
-* `eth_getCode`
-* `eth_getStorageAt`
-* `eth_call`
-* `eth_estimateGas`
-* `eth_createAccessList`
-
-#### `internal-public-transaction-pool`:
-
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
-
-* `eth_getBlockTransactionCountByNumber`
-* `eth_getBlockTransactionCountByHash`
-* `eth_getTransactionByBlockNumberAndIndex`
-* `eth_getTransactionByBlockHashAndIndex`
-* `eth_getRawTransactionByBlockNumberAndIndex`
-* `eth_getRawTransactionByBlockHashAndIndex`
-* `eth_getTransactionCount`
-* `eth_getTransactionByHash`
-* `eth_getRawTransactionByHash`
-* `eth_getTransactionReceipt`
-* `eth_sendTransaction`
-* `eth_fillTransaction`
-* `eth_sendRawTransaction`
-* `eth_sign`
-* `eth_signTransaction`
-* `eth_pendingTransactions`
-* `eth_resend`
-
-#### `internal-public-tx-pool`:
-
-Adds the following RPC calls to the `txpool_*` namespace. Defaults to false.
-
-* `txpool_content`
-* `txpool_contentFrom`
-* `txpool_status`
-* `txpool_inspect`
-
-#### `internal-public-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
-* `debug_getHeaderRlp`
-* `debug_getBlockRlp`
-* `debug_printBlock`
-
-#### `internal-private-debug`:
-
-Adds the following RPC calls to the `debug_*` namespace. Defaults to false.
-
-* `debug_chaindbProperty`
-* `debug_chaindbCompact`
-
-#### `internal-public-account`:
-
-Adds the following RPC calls to the `eth_*` namespace. Defaults to true.
-
-* `eth_accounts`
-
-#### `internal-private-personal`:
-
-Adds the following RPC calls to the `personal_*` namespace. Defaults to false.
-
-* `personal_listAccounts`
-* `personal_listWallets`
-* `personal_openWallet`
-* `personal_deriveAccount`
-* `personal_newAccount`
-* `personal_importRawKey`
-* `personal_unlockAccount`
-* `personal_lockAccount`
-* `personal_sendTransaction`
-* `personal_signTransaction`
-* `personal_sign`
-* `personal_ecRecover`
-* `personal_signAndSendTransaction`
-* `personal_initializeWallet`
-* `personal_unpair`
-
-### API Configuration
-
-#### `rpc-gas-cap` (int):
-
-The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and `eth_call`). Defaults to 50,000,000.
-
-#### `rpc-tx-fee-cap` (int):
-
-Global transaction fee (price \* gaslimit) cap (measured in AVAX) for send-transaction variants. Defaults to 100.
-
-#### `api-max-duration` (duration):
-
-Maximum API call duration. If API calls exceed this duration, they will time out. Defaults to 0 (no maximum).
-
-#### `api-max-blocks-per-request` (int):
-
-Maximum number of blocks to serve per `getLogs` request. Defaults to 0 (no maximum).
-
-#### `ws-cpu-refill-rate` (duration):
-
-The refill rate specifies the maximum amount of CPU time to allot a single connection per second. Defaults to no maximum (0).
-
-#### `ws-cpu-max-stored` (duration):
-
-Specifies the maximum amount of CPU time that can be stored for a single WS connection. Defaults to no maximum (0).
-
-#### `allow-unfinalized-queries` (boolean):
-
-Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults to false.
-
-### Transaction Pool
-
-#### `local-txs-enabled` (boolean):
-
-Enables local transaction handling (prioritizes transactions submitted through this node). Defaults to false.
-
-#### `allow-unprotected-txs` (boolean):
-
-If true, the APIs will allow transactions that are not replay protected (EIP-155) to be issued through this node. Defaults to false.
-
-#### `remote-tx-gossip-only-enabled` (boolean):
-
-If true, the node will only gossip remote transactions to prevent transactions issued through this node from being broadcast to the network. Defaults to false.
-
-#### `tx-regossip-frequency` (duration):
-
-Amount of time that should elapse before we attempt to re-gossip a transaction that was already gossiped once. Defaults to 1 minute.
-
-#### `tx-regossip-max-size` (int):
-
-Maximum number of transactions to re-gossip at once. Defaults to 15.
-
-### Metrics
-
-#### `metrics-enabled` (boolean):
-
-Enables metrics. Defaults to false.
-
-#### `metrics-expensive-enabled` (boolean):
-
-Enables expensive metrics. Defaults to false.
-
-### Database
-
-#### `pruning-enabled` (boolean):
-
-If true, database pruning of obsolete historical data will be enabled. Should be disabled for nodes that need access to all data at historical roots. Pruning will be done only for new data. Defaults to `false` in v1.4.9, and `true` in subsequent versions.
-
-#### `preimages-enabled` (boolean):
-
-If true, enables preimages. Defaults to false.
-
-### Snapshots
-
-#### `snapshot-async` (boolean):
-
-If true, allows snapshot generation to be executed asynchronously. Defaults to true.
-
-#### `snapshot-verification-enabled` (boolean):
-
-If true, verifies the complete snapshot after it has been generated. Defaults to false.
-
-### Log Level
-
-#### `log-level` (string):
-
-Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
-
-### Keystore Settings
-
-#### `keystore-directory` (string):
-
-The directory that contains private keys. Can be given as a relative path. If empty, uses a temporary directory at `coreth-keystore`. Defaults to empty string.
-
-#### `keystore-external-signer` (string):
-
-Specifies an external URI for a clef-type signer. Defaults to the empty string (not enabled).
-
-#### `keystore-insecure-unlock-allowed` (bool):
-
-If true, allow users to unlock accounts in unsafe HTTP environment. Defaults to false.
-
-### X-Chain Configs
-
-In order to specify a config for the X-Chain, a JSON config file should be placed at `{chain-config-dir}/X/config.json` (or another valid location, as specified above.)
-
-For example if `chain-config-dir` has the default value, then `config.json` can be placed at `$HOME/.avalanchego/configs/chains/X/config.json`.
-
-This allows you to specify a config to be passed into the X-Chain. The default values for this config are:
-
-```javascript
-{
-  "index-transactions": false,
-  "index-allow-incomplete": false
-}
-```
-
-Default values are overridden only if explicitly specified in the config.
-
-The parameters are as follows:
-
-**Transaction Indexing**
-
-#### `index-transactions` (boolean):
-
-Enables AVM transaction indexing if set to `true`. Default value is `false`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](../avalanchego-apis/x-chain.mdx#avm-get-address-txs-api).
-
-Please note that if `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).
-
-#### `index-allow-incomplete` (boolean):
-
-Allows incomplete indices. Default value is `false`.
-
-This config value is ignored if there is no X-Chain indexed data in the DB and `index-transactions` is set to `false`.
-
 ### Consensus Parameters
 
 #### `--consensus-gossip-frequency` (duration):
@@ -791,12 +883,15 @@ The maximum stake, in nAVAX, that can be placed on a validator on the primary ne
 Consumption period of the staking function, in hours. The Default on Mainnet is `8760h` (365 days).
 
 #### `--stake-max-consumption-rate` (uint):
-The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years. 
+
+The maximum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `120,000` which is 12% per years.
 
 #### `--stake-min-consumption-rate` (uint):
-The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years. 
+
+The minimum percentage of the consumption rate for the remaining token supply in the minting period, which is 1 year on Mainnet. Defaults to `100,000` which is 10% per years.
 
 #### `--stake-supply-cap` (uint):
+
 The maximum stake supply, in nAVAX, that can be placed on a validator. Defaults to `720,000,000,000,000,000` nAVAX.
 
 #### `--tx-fee` (int):
@@ -856,66 +951,6 @@ How often a new CPU/memory profile is created. Defaults to `15m`.
 #### `--profile-continuous-max-files` (int):
 
 Maximum number of CPU/memory profiles files to keep. Defaults to 5.
-
-### Database Config
-
-#### `--db-config-file` (string):
-
-Path to the database config file. Ignored if `--config-file-content` is specified.
-
-#### `--db-config-file-content` (string):
-
-As an alternative to `--db-config-file`, it allows specifying base64 encoded database config content.
-
-### LevelDB Config
-
-A LevelDB config file must be JSON and may have these keys.
-Any keys not given will receive the default value.
-
-```go
-{
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
-	"blockCacheCapacity": int
-	// BlockSize is the minimum uncompressed size in bytes of each 'sorted
-	// table' block.
-	"blockSize": int
-	// CompactionExpandLimitFactor limits compaction size after expanded.  This
-	// will be multiplied by table size limit at compaction target level.
-	"compactionExpandLimitFactor": int
-	// CompactionGPOverlapsFactor limits overlaps in grandparent (Level + 2)
-	// that a single 'sorted table' generates.  This will be multiplied by
-	// table size limit at grandparent level.
-	"compactionGPOverlapsFactor": int
-	// CompactionL0Trigger defines number of 'sorted table' at level-0 that will
-	// trigger compaction.
-	"compactionL0Trigger": int
-	// CompactionSourceLimitFactor limits compaction source size. This doesn't
-	// apply to level-0.  This will be multiplied by table size limit at
-	// compaction target level.
-	"compactionSourceLimitFactor": int
-	// CompactionTableSize limits size of 'sorted table' that compaction
-	// generates.  The limits for each level will be calculated as:
-	//   CompactionTableSize * (CompactionTableSizeMultiplier ^ Level)
-	// The multiplier for each level can also fine-tuned using
-	// CompactionTableSizeMultiplierPerLevel.
-	"compactionTableSize": int
-	// CompactionTableSizeMultiplier defines multiplier for CompactionTableSize.
-	"compactionTableSizeMultiplier": float
-	"compactionTableSizeMultiplierPerLevel": []float
-	// CompactionTotalSizeMultiplier defines multiplier for CompactionTotalSize.
-	"compactionTotalSizeMultiplier": float64
-	// OpenFilesCacheCapacity defines the capacity of the open files caching.
-	"openFilesCacheCapacity": int
-	// There are two buffers of size WriteBuffer used.
-	"writeBuffer": int
-	"filterBitsPerKey": int
-}
-```
-
-### RocksDB Config File
-
-Custom config is not yet supported for RocksDB.
 
 ### Health
 
@@ -1054,6 +1089,7 @@ Size, in bytes, of validator allocation in the outbound message throttler. Defau
 #### `--throttler-outbound-node-max-at-large-bytes` (uint):
 
 Maximum number of bytes a node can take from the at-large allocation of the outbound message throttler. Defaults to `2097152` (2 MiB).
+
 ### Connection Rate-Limiting
 
 #### `--inbound-connection-throttling-cooldown` (duration):
@@ -1114,7 +1150,7 @@ It is possible to provide parameters for subnets. Parameters here apply to all c
 
 #### `--subnet-config-dir` (string):
 
-Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error.  This flag is ignored if `--subnet-config-content` is specified.
+Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
 
 Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
@@ -1142,18 +1178,18 @@ If `true` this node does not expose subnet blockchain contents to non-validators
 
 Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys.
 
-| CLI Key | JSON Key |
-| :--- | :--- |
-| --snow-sample-size | k |
-| --snow-quorum-size | alpha |
-| --snow-virtuous-commit-threshold | betaVirtuous |
-| --snow-rogue-commit-threshold | betaRogue |
-| --snow-concurrent-repolls | concurrentRepolls |
-| --snow-optimal-processing | optimalProcessing |
-| --snow-max-processing | maxOutstandingItems |
-| --snow-max-time-processing | maxItemProcessingTime |
-| --snow-avalanche-batch-size | batchSize |
-| --snow-avalanche-num-parents | parentSize |
+| CLI Key                          | JSON Key              |
+| :------------------------------- | :-------------------- |
+| --snow-sample-size               | k                     |
+| --snow-quorum-size               | alpha                 |
+| --snow-virtuous-commit-threshold | betaVirtuous          |
+| --snow-rogue-commit-threshold    | betaRogue             |
+| --snow-concurrent-repolls        | concurrentRepolls     |
+| --snow-optimal-processing        | optimalProcessing     |
+| --snow-max-processing            | maxOutstandingItems   |
+| --snow-max-time-processing       | maxItemProcessingTime |
+| --snow-avalanche-batch-size      | batchSize             |
+| --snow-avalanche-num-parents     | parentSize            |
 
 The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](command-line-interface.md#snow-parameters).
 

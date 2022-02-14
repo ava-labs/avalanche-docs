@@ -34,7 +34,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](x-chain.mdx#avm-gettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](x-chain.mdx#avmgettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 

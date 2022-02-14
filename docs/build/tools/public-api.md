@@ -16,9 +16,15 @@ The public API server is at `https://api.avax.network/` for Avalanche Mainnet an
 
 ## Supported APIs
 
-The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](../avalanchego-apis/x-chain), [P-Chain](../avalanchego-apis/p-chain) and [C-Chain](../avalanchego-apis/c-chain). For a full list of available APIs see [here](../avalanchego-apis/README.md).
+The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](../avalanchego-apis/x-chain.mdx), [P-Chain](../avalanchego-apis/p-chain.md) and [C-Chain](../avalanchego-apis/c-chain.md). For a full list of available APIs see [here](../avalanchego-apis/README.md).
 
+
+:::info
 The public API only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API.
+
+For batched C-Chain requests on the public api node, the maximum number of items is 40. We are working on to support a larger batch size. 
+:::
+
 
 ## Sticky sessions
 
