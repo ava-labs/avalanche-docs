@@ -12,7 +12,7 @@ Sometimes during periods of high network activity, transactions either remain pe
 * It's your first transaction, and you want to be sure about any potential issues
 * Just for general knowledge on adjusting dynamic fee settings
 
-If these are your reasons for being here, then you can either go through this entire section, for a better understanding of the scenario or directly skip to the [solution](#Adjusting-gas-fees-before-submitting-the-transaction).
+If these are your reasons for being here, then you can either go through this entire section, for a better understanding of the scenario or directly skip to the [solution](#adjusting-gas-fees-before-submitting-the-transaction).
 
 ## Good to Know Keywords and Concepts
 
@@ -26,9 +26,9 @@ Earlier users have to bid how much they want to pay per gas for their transactio
 
 This was later replaced by a more deterministic algorithm to estimate the gas price according to the network activity.
 
-Each block has a target for the units of gas to be included in it. This is called `TargetGas`. Currently, it is `15M` gas units per block. To make the gas price more predictable, each block is associated with a `base price or base fee` for each gas.
+For the estimation, we look over the blocks of the last few seconds, known as a window. Each window has a target for the units of gas to be included in it. This is called `Gas Target`. Currently, it is `15M` gas units per window. To make the gas price more predictable, each block is associated with a `base price or base fee` for each gas.
 
-Base price could increase or decrease depending upon the congestion on the network in the last few seconds (window). If the total gas in the last few blocks of the window is more, less or the same than the target gas, then the base price will increase, decrease or remain the same, respectively.
+Base price could increase, decrease or remain the same depending upon the congestion on the network in the recent window. If the total gas in the last few blocks of the window is more, less or the same than the target gas, then the base price will increase, decrease or remain the same, respectively.
 
 Along with a gas limit, users now have to pass 2 more values - `gas fee cap` and `gas tip cap`.
 
