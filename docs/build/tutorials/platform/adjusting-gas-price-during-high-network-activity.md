@@ -1,3 +1,7 @@
+---
+description: This tutorial will help users to adjust their priority fee and max fee cap during high network activity and take the benefits of dynamic fees algorithm.
+---
+
 # Adjusting gas price during high network activity
 
 Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may cause panic among the users if they couldn't figure out what went wrong!
