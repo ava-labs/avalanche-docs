@@ -32,7 +32,7 @@ Base price could increase or decrease depending upon the congestion on the netwo
 
 Along with a gas limit, users now have to pass 2 more values - `gas fee cap` and `gas tip cap`.
 
-The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction would remain pending until the base fee will be less or equal to the provided gas fee cap.
+The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction would remain pending until the base fee has been changed to be less or equal to the provided gas fee cap.
 
 `Gas tip cap` is the maximum price per unit of gas, that the user is willing to pay above the base price to prioritize their transaction. But the tip is capped by a gas tip cap as well as a gas fee cap. The final tip with which a transaction is included in a block is the `effective gas tip`.
 
