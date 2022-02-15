@@ -14,6 +14,8 @@ After generating the bloom filter, offline pruning itererates over the database 
 
 A bloom filter is a probabilistic data structure that reports whether an item is definitely not in a set or possibly in a set. Therefore, for each key we iterate, we check if it is in the bloom filter. If the key is definitely not in the bloom filter, then it is not in the active state and we can safely delete it. If the key is possibly in the set, then we skip over it to ensure we do not delete any active state.
 
+During iteration, the underlying database (leveldb) writes deletion markers, causing a temporary increase in disk usage.
+
 After iterating over the database and deleting any old trie nodes that it can, offline pruning then runs compaction to minimize the DB size after the potentially large number of delete operations.
 
 ## Finding the C-Chain Config File
@@ -175,3 +177,11 @@ INFO [02-09|01:00:07] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#40
 ```
 
 At this point, the node will go into bootstrapping and (once bootstrapping completes) resume consensus and operate as normal.
+
+## Disk space considerations
+
+To ensure the node does not enter an inconsistent state, the bloom filter used for pruning is persisted to `offline-pruning-data-directory` for the duration of the operation. This directory should have `offline-pruning-bloom-filter-size` available in disk space (default 512 MB).
+
+The underlying database (leveldb) uses deletion markers (tombstones) to identify newly deleted keys. These markers are temporarily persisted to disk until they are removed during a process known as compaction. This will lead to an increase in disk usage during pruning. If your node runs out of disk space during pruning, you may safely restart the pruning operation. This may succeed as restarting the node triggers compaction.
+
+If restarting the pruning operation does not succeed, additional disk space should be provisioned.
