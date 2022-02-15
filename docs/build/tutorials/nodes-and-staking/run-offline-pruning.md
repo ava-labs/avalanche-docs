@@ -178,7 +178,7 @@ INFO [02-09|01:00:07] <C Chain> snow/engine/snowman/bootstrap/bootstrapper.go#40
 
 At this point, the node will go into bootstrapping and (once bootstrapping completes) resume consensus and operate as normal.
 
-## Disk space considerations
+## Disk Space Considerations
 
 To ensure the node does not enter an inconsistent state, the bloom filter used for pruning is persisted to `offline-pruning-data-directory` for the duration of the operation. This directory should have `offline-pruning-bloom-filter-size` available in disk space (default 512 MB).
 
