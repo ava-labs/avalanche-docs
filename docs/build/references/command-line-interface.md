@@ -483,7 +483,7 @@ If true, enables preimages. Defaults to false.
 ##### `offline-pruning-enabled` (boolean):
 
 If true, offline pruning will run on startup and block until it completes (approximately one hour on mainnet). This will reduce the size of the database by deleting old trie nodes. **While performing offline pruning, your node will not be able to process blocks and will be considered offline.**
-While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](../tutorials/nodes-and-staking/run-offline-pruning.md#disk-space-considerations).
+While ongoing, the pruning process consumes a small amount of additional disk space (for deletion markers and the bloom filter). For more information see [here.](../tutorials/nodes-and-staking/run-offline-pruning.md#disk-space-considerations)
 
 Since offline pruning deletes old state data, this should not be run on nodes that need to support archival API requests.
 
