@@ -1,12 +1,13 @@
 ---
-description: This tutorial will help users to adjust their priority fee and max fee cap during high network activity and take the benefits of dynamic fees algorithm.
+description: This tutorial will help users to adjust their priority fee and max fee cap during high network activity and take advantage of the benefits of dynamic fee transactions.
 ---
 
 # Adjusting Gas Price During High Network Activity
 
-Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may cause panic among the users if they couldn't figure out what went wrong!
+Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may cause panic among users if they can't figure out what went wrong!
 
 ## Probable Reasons You are Here
+
 * Your transaction has stalled, and you don't know what to do
 * Your transaction has failed, with an error - `transaction underpriced`
 * It's your first transaction, and you want to be sure about any potential issues
@@ -16,25 +17,27 @@ If these are your reasons for being here, then you can either go through this en
 
 ## Good to Know Keywords and Concepts
 
-The amount of computation used by a transaction is measured in units of `gas`. Each gas has a dynamic price (to be paid in AVAX) which depends upon the network activity, and this is known as `gas price`.
+The amount of computation used by a transaction is measured in units of `gas`. Each unit of gas is paid for in AVAX at the `gas price` for the transaction. The `gas price` of the transaction is determined by the parameters of the transaction and the `base fee` of the block that it is included in.
 
-To avoid draining the user's wallet due to using computation infinitely, transactions need to be submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction could consume.
+To avoid draining the user's wallet due to using computation infinitely, transactions are submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction is allowed to consume.
 
-If a transaction uses more than the gas limit, then it would be rejected. Total fees paid by the user is calculated as `(gas consumed) * (gas price)`, and is known as `gas fees`. Similarly, maximum gas fees are calculated as `(gas limit) * (gas price)`.
+If a transaction attempts to use more than this limit, then the transaction will revert and still consume and pay for the full `gas limit`. Total fees paid by the user can be calculated as `(gas consumed) * (gas price)`, and is known as `gas fees`. Similarly, maximum gas fees can be calculated as `(gas limit) * (gas price)`.
 
-Earlier users have to bid how much they want to pay per gas for their transactions. The transaction with a higher bid was picked by the validators. This made the estimation difficult, and users often pay a higher price than required.
+Originally, transactions could only set a single parameter to define how much they were willing to pay for gas: `gas price`. When dynamic fees were introduced, EIP-1559 style transactions were introduced as well which contain two parameters `maxFeeCap` and `maxPriorityFee` to determine the price a transaction is willing to pay.
+ 
+With the introduction of dynamic fees, legacy style transactions that only have a single `gas price` parameter can lead to both delayed transactions and overpaying for transactions. Dynamic fee transactions are the solution!
 
-This was later replaced by a more deterministic algorithm to estimate the gas price according to the network activity.
+For the dynamic fee algorithm, when a block is produced or verified, we look over the past 10s to see how much gas has been consumed within that window (with an added charge for each block produced in that window) to determine the current network utilization. This window has a target utilization, which is currently set to `15M` gas units. Lastly, there is an added charge if a block is produced faster than the target rate of block production. Currently, the target rate of block production is one block every two seconds, so if a new block is produced one second after its parent, then there is an additional surcharge added into the base fee calculation.
 
-For the estimation, we look over the blocks of the last few seconds, known as a window. Each window has a target for the units of gas to be included in it. This is called `Gas Target`. Currently, it is `15M` gas units per window. To make the gas price more predictable, each block is associated with a `base price or base fee` for each gas.
+Base price could increase, decrease, or remain the same depending upon the amount of activity on the network in the most recent window. If the total gas in the last few blocks of the window is more, less or the same than the target gas, then the base price will increase, decrease, or remain the same, respectively.
 
-Base price could increase, decrease or remain the same depending upon the congestion on the network in the recent window. If the total gas in the last few blocks of the window is more, less or the same than the target gas, then the base price will increase, decrease or remain the same, respectively.
+When estimating the base fee for users, we simply look at the currently preferred block and calculate what the base fee would be for a block built on top of that block immediately.
 
-Along with a gas limit, users now have to pass 2 more values - `gas fee cap` and `gas tip cap`.
+Along with a gas limit, users can now pass 2 values in dynamic fee transactions - `gas fee cap` and `gas tip cap`.
 
-The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction would remain pending until the base fee has been changed to be less or equal to the provided gas fee cap.
+The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction will remain in the transaction until the base fee has been changed to be less or equal to the provided gas fee cap (note: the transaction pool limits the number of transactions in pending, so if the number of pending transactions exceeds the configured cap then the transactions with the lowest fees may be evicted from the transaction pool and need to be re-issued).
 
-`Gas tip cap` is the maximum price per unit of gas, that the user is willing to pay above the base price to prioritize their transaction. But the tip is capped by a gas tip cap as well as a gas fee cap. The final tip with which a transaction is included in a block is the `effective gas tip`.
+`Gas tip cap` is the maximum price per unit of gas, that the user is willing to pay above the base price to prioritize their transaction. But the tip is capped by both the gas tip cap as well as the gas fee cap. The actual tip paid above the `base fee` of the block is known as the `effective gas tip`.
 
 ```javascript
 EffectiveTip = min(MaxFeeCap - BaseFee, GasTipCap)
@@ -50,18 +53,18 @@ Consider the following examples (here GWEI or nAVAX is one-billionth of AVAX) -
 | A           | 50 GWEI     | 10 GWEI     | 40 GWEI    | 10 GWEI       | 50 GWEI     |
 | B           | 40 GWEI     | 40 GWEI     | 40 GWEI    | 0 GWEI        | 40 GWEI     |
 
-Look at transactions **A** and **B**. In these scenarios, it looks like transaction B is paying a higher tip, however, this depends on the base fee of the block where the transactions are included. The effective tip of A is more than that of B. So, if both of these transaction competes for being included in the next block, then the validators would prioritize transaction A, due to higher effective tip.
+Look at transactions **A** and **B** (the bottom two transactions). In these scenarios, it looks like transaction B is paying a higher tip, however, this depends on the base fee of the block where the transactions are included. The effective tip of A is more than that of B. So, if both of these transaction competes for being included in the next block, then the validators would prioritize transaction A since it pays a higher effective tip.
 
 
 ## Why my Transaction is on Hold or Failing?
 
 If your transaction is failing and giving an error - `transaction underpriced`, then the max fee cap of your transaction must be less than the minimum base price that the network supports (as of now, it's 25 nAVAX or GWEI). Although the base fee is automatically estimated in wallets like Metamask, you can try increasing the max fee cap in the wallet.
 
-During a period of heavy congestion on the network, all submitted transactions couldn't be included in the same block, due to the block's gas limit. So, validators choose transactions giving more priority to transactions with higher effective tip. Your transaction will have to wait until the effective tip is highest among the pending transactions.
+During a period of heavy congestion on the network, all submitted transactions can't be included in the same block, due to the block's gas limit. So, validators choose transactions giving higher priority to transactions with the highest effective tips. Your transaction will have to wait until the effective tip is highest among the pending transactions.
 
-Another reason for pending transactions is the max fee cap being significantly below the current base fee that the network is charging. In this case, you would need to increase the max fee cap of the transaction.
+Another reason for pending transactions is the max fee cap being below the current base fee that the network is charging. In this case, you nat need to increase the max fee cap of the transaction.
 
-These fee adjustments can be made through wallets like Metamask.
+These fee adjustments can be made through wallets like MetaMask.
 
 ## Adjusting Gas Fees Before Submitting the Transaction
 
@@ -98,7 +101,7 @@ You may not need to edit the gas fees on normal days. This is only required if t
 
 ## Speeding Up the Pending Transaction
 
-If your transaction is on hold for a very long time, you can speed up through Metamask. As shown in the below image, click on the **Speed Up** button, to edit your priority and max fee. By default, the new transaction has slightly more priority and max fee (say 10% more than the previous), but you can edit as per your convenience.
+If your transaction is on hold for a very long time, you can speed up through MetaMask. As shown in the below image, click on the **Speed Up** button, to edit your priority and max fee. By default, the new transaction has slightly more priority and max fee (say 10% more than the previous), but you can edit as per your convenience.
 
 ![](/img/dynamic-fees-adjustment-6.png)
 
