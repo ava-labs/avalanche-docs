@@ -155,7 +155,7 @@ With this enabled, your validators can specify their addresses to collect fees. 
 
 ```json
 {
-  "feeRecipient": "<YOU 0x-ADDRESS>"
+  "feeRecipient": "<YOUR 0x-ADDRESS>"
 }
 ```
 
