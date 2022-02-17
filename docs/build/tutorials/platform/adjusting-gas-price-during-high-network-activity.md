@@ -19,7 +19,7 @@ If these are your reasons for being here, then you can either go through this en
 
 The amount of computation used by a transaction is measured in units of `gas`. Each unit of gas is paid for in AVAX at the `gas price` for the transaction. The `gas price` of the transaction is determined by the parameters of the transaction and the `base fee` of the block that it is included in.
 
-To avoid draining the user's wallet due to using computation infinitely, transactions are submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction is allowed to consume.
+To avoid draining the user's wallet due to non-terminating execution through the EVM, transactions are submitted with a `gas limit`, which denotes the maximum units of gas that a particular transaction is allowed to consume.
 
 If a transaction attempts to use more than this limit, then the transaction will revert and still consume and pay for the full `gas limit`. Total fees paid by the user can be calculated as `(gas consumed) * (gas price)`, and is known as `gas fees`. Similarly, maximum gas fees can be calculated as `(gas limit) * (gas price)`.
 
@@ -35,7 +35,7 @@ When estimating the base fee for users, we simply look at the currently preferre
 
 Along with a gas limit, users can now pass 2 values in dynamic fee transactions - `gas fee cap` and `gas tip cap`.
 
-The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction will remain in the transaction until the base fee has been changed to be less or equal to the provided gas fee cap (note: the transaction pool limits the number of transactions in pending, so if the number of pending transactions exceeds the configured cap then the transactions with the lowest fees may be evicted from the transaction pool and need to be re-issued).
+The maximum price per unit of gas, that the user is willing to pay for their transaction is called `gas fee cap`. If the base price for a block is more than the gas fee cap, then the transaction will remain in the transaction pool until the base fee has been changed to be less than or equal to the provided gas fee cap (note: the transaction pool limits the number of pending transactions, so if the number of pending transactions exceeds the configured cap then the transactions with the lowest fees may be evicted from the transaction pool and need to be re-issued).
 
 `Gas tip cap` is the maximum price per unit of gas, that the user is willing to pay above the base price to prioritize their transaction. But the tip is capped by both the gas tip cap as well as the gas fee cap. The actual tip paid above the `base fee` of the block is known as the `effective gas tip`.
 
@@ -58,11 +58,11 @@ Look at transactions **A** and **B** (the bottom two transactions). In these sce
 
 ## Why my Transaction is on Hold or Failing?
 
-If your transaction is failing and giving an error - `transaction underpriced`, then the max fee cap of your transaction must be less than the minimum base price that the network supports (as of now, it's 25 nAVAX or GWEI). Although the base fee is automatically estimated in wallets like Metamask, you can try increasing the max fee cap in the wallet.
+If your transaction is failing and giving an error - `transaction underpriced`, then the max fee cap of your transaction must be less than the minimum base price that the network supports (as of now, it's 25 nAVAX or GWEI). Although the base fee is automatically estimated in wallets like MetaMask, you can try increasing the max fee cap in the wallet.
 
-During a period of heavy congestion on the network, all submitted transactions can't be included in the same block, due to the block's gas limit. So, validators choose transactions giving higher priority to transactions with the highest effective tips. Your transaction will have to wait until the effective tip is highest among the pending transactions.
+During a period of heavy congestion on the network, all submitted transactions can't be included in the same block, due to the block's gas limit. So, validators choose transactions giving higher priority to transactions with the highest effective tips.
 
-Another reason for pending transactions is the max fee cap being below the current base fee that the network is charging. In this case, you nat need to increase the max fee cap of the transaction.
+Another reason your transaction may get stuck in pending, is that the max fee cap may be below the current base fee that the network is charging. In this case, you need to increase the max fee cap of your transaction above the current base fee for it to be included in the block.
 
 These fee adjustments can be made through wallets like MetaMask.
 
