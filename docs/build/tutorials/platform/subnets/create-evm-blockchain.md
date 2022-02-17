@@ -19,6 +19,7 @@ Ava-Sim can be used as a quick development and test environment for Subnet EVM. 
 ## Building the VM
 
 First start with cloning the Subnet EVM repository.
+
 ```sh
 git clone git@github.com:ava-labs/subnet-evm.git
 cd subnet-evm
@@ -40,6 +41,7 @@ AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You 
 Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias defined by the [VM Aliases Config](../../../references/command-line-interface.md#vm-configs). In this tutorial we used `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` as our VM ID.
 
 Copy built VM binary into the AvalancheGo plugin directory. In this tutorial we put AvalancheGo and Subnet-EVM repositories under the same folder:
+
 ```sh
 cp ./build/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy ../avalanchego/build/plugins/
 ```
@@ -65,7 +67,6 @@ The subnet needs validators in it to, well, validate blockchains.
 :::info
 [Add a node to the Validator Set](../../nodes-and-staking/add-a-validator.md)
 :::
-
 
 ## Create the Genesis Data {#create-the-genesis-data}
 
@@ -99,7 +100,8 @@ The default Subnet EVM provided below has some well defined parameters. The defa
       "maxBlockGasCost": 1000000,
       "targetBlockRate": 2,
       "blockGasCostStep": 200000
-    }
+    },
+    "allowFeeRecipients": false
   },
   "alloc": {
     "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
@@ -144,6 +146,20 @@ The default Subnet EVM provided below has some well defined parameters. The defa
 `targetBlockRate`: The targeted block rate that network should produce blocks. If the network starts producing faster than this, base fees are increased accordingly.
 
 `blockGasCostStep`: The block gas cost change step between blocks.
+
+##### Custom Fee Recipients
+
+`allowFeeRecipients`: Enables fee recipients. By default, all fees are burned (sent to the blackhole address). However, it is possible to enable block producers to set a fee recipient (get compensated for blocks they produce).
+
+With this enabled, your validators can specify their addresses to collect fees. They need to update their [chain config](../../../references/command-line-interface.md#chain-configs) with the following:
+
+```json
+{
+  "feeRecipient": "<YOUR 0x-ADDRESS>"
+}
+```
+
+Note: If you enable this feature but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks they produce.
 
 #### Alloc
 
@@ -199,6 +215,7 @@ curl -X POST --data '{
           "maxBlockGasCost": 1000000,
           "blockGasCostStep": 200000
         }
+        "allowFeeRecipients": false,
       },
       "alloc": {
         "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
@@ -247,6 +264,7 @@ curl -X POST --data '{
 ```
 
 This should return the same genesis block, provided in `subnetevm.buildGenesis` call. Order of fields can be different:
+
 ```cpp
 {
     "jsonrpc": "2.0",
@@ -297,7 +315,6 @@ This should return the same genesis block, provided in `subnetevm.buildGenesis` 
     "id": 1
 }
 ```
-
 
 ## Create the Blockchain
 
@@ -427,11 +444,12 @@ curl -X POST --data '{
 ```
 
 Result should be:
+
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0x339d"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x339d"
 }
 ```
 
@@ -455,15 +473,17 @@ It should look like:
 Now we can access our account with initial balance. We used `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as our initial account. The private key of this account is `56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`. This private key is publicly shared, so don't use this account in mainnet or testnets. The genesis block allocates 333,333,333,333,333,333,333 coins to this account, which is equivalent to `333.3333` SET.
 
 Let's import this private key into Metamask.
+
 - Click on Metamask.
 - From "My Accounts" click on "Import Account":
-![Import Account](/img/sevm-m2.png)
+  ![Import Account](/img/sevm-m2.png)
 
 Now you can import your private key in this screen. When you pasted your private key, click on "Import". You should be able to see your account with some balances in it. For example:
 
 ![Account with Balance](/img/sevm-m3.png)
 
 Now we can send funds to another account:
+
 - Click on "Send" in your Metamask.
 - Input an address or select "Transfer between my accounts"
 - Select an address
@@ -473,7 +493,7 @@ Now we can send funds to another account:
 
 - Click on Next
 - You can inspect your transaction in this screen:
-![Account with Balance](/img/sevm-m5.png)
+  ![Account with Balance](/img/sevm-m5.png)
 
 For example let's verify the base fee is indeed the configured one. Remind that in our genesis we specified `minBaseFee` as 13000000000 which is equivalent to 13 Gwei. Let's click "Edit" above on the "Estimated gas fee" section.
 
@@ -492,4 +512,3 @@ You can inspect your confirmed transaction.
 ## Other Tools
 
 You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](../../smart-contracts/using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
-
