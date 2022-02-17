@@ -4,7 +4,7 @@ description: This tutorial will help users to adjust their priority fee and max 
 
 # Adjusting Gas Price During High Network Activity
 
-Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may cause panic among users if they can't figure out what went wrong!
+Sometimes during periods of high network activity, transactions either remain pending for a very long duration or instantly get a failed transaction notification. This may confuse and frustrate users, especially if they don't understand why their transactions are not getting accepted.
 
 ## Probable Reasons You are Here
 
