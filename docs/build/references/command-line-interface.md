@@ -993,6 +993,10 @@ Minimum timeout value of the adaptive timeout manager, in nanoseconds. Defaults 
 
 Maximum timeout value of the adaptive timeout manager, in nanoseconds. Defaults to `10s`.
 
+#### `--network-maximum-inbound-timeout` (duration):
+
+Maximum timeout value of an inbound message. Defines duration within which an incoming message must be fulfilled. Incoming messages containing deadline higher than this value will be overridden with this value. Defaults to `10s`.
+
 #### `--network-timeout-halflife` (duration):
 
 Halflife used when calculating average network latency. Larger value --&gt; less volatile network latency calculation. Defaults to `5m`.
