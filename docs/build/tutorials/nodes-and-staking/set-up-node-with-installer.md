@@ -300,7 +300,7 @@ Installer script gets updated from time to time, with new features and capabilit
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
 ```
 
-After the script has updated, run it again with the `--reinstall` config flag argument:
+After the script has updated, run it again with the `--reinstall` config flag:
 
 ```bash
 ./avalanchego-installer.sh --reinstall

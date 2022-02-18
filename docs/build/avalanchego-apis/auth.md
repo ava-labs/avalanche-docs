@@ -9,7 +9,7 @@ An authorization token provides access to one or more API endpoints. This is is 
 
 An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` (where `TOKEN.GOES.HERE` is replaced with the token).
 
-This API is only reachable if the node is started with [config flag argument](../references/avalanchego-config-flags.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+This API is only reachable if the node is started with [config flag](../references/avalanchego-config-flags.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
 Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
 
