@@ -282,12 +282,12 @@ In this example the full command is:
 
 `./build/avalanchego --whitelisted-subnets=3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`
 
-For more information about the command see: [whitelisted-subnet command-line argument](../../../references/command-line-interface.md#whitelist).
+For more information about the command see: [whitelisted-subnet command-line argument](../../../references/avalanchego-config-flags.md#whitelist).
 
 ### Private Subnets
 
 Avalanche subnets are public. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
 
-Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../../references/command-line-interface.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../../references/avalanchego-config-flags.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
 
 Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.

@@ -2,6 +2,7 @@
 /learn/ /learn/getting-started/ 301
 /learn/platf /learn/platform-overview  301
 /build/get-started /build/tutorials/ 301
+/build/references/command-line-interface/ /build/references/avalanchego-config-flags/ 301
 /build/tutorials/nodes-and-staking/avash /build/tools/avash  301
 /build/tutorials/platform/create-a-subnet /build/tutorials/platform/subnets/create-a-subnet 301
 /build/tutorials/platform/create-a-virtual-machine-vm /build/tutorials/platform/subnets/create-a-virtual-machine-vm 301

@@ -14,7 +14,7 @@ An API call is made to an endpoint, which is a URL. The base of the URL is alway
 where
 
 * `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` (default value `9650`).
+* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/avalanchego-config-flags.md#http-server) `http-port` (default value `9650`).
 
 For example, the base URL might look like this: `127.0.0.1:9650`.
 

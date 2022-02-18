@@ -240,7 +240,7 @@ hosts:
         # ...
 ```
 
-This can be used to simultaneously deploy many nodes on many hosts. A full list of CLI flags can be found [here](https://docs.avax.network/build/references/command-line-interface).
+This can be used to simultaneously deploy many nodes on many hosts. A full list of configuration flags can be found [here](https://docs.avax.network/build/references/avalanchego-config-flags).
 
 **procmanager**
 

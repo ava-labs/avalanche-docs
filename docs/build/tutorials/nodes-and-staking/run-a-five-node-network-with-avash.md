@@ -68,7 +68,7 @@ Avash lets you automate your development environment to be an arbitrary number o
 
 In the following `five_node_staking.lua` script notice you can run and configure an arbitrary number of full nodes. You are limited by the number of staker keys in the [Avash certs/ directory](https://github.com/ava-labs/avash/tree/master/certs). AvalancheGo ships with 7 staker keys.
 
-Configure each node separately by passing in valid [AvalancheGo command line arguments](https://docs.avax.network/build/references/command-line-interface).
+Configure each node separately by passing in valid [AvalancheGo configuration arguments](https://docs.avax.network/build/references/avalanchego-config-flags).
 
 ```lua
 cmds = {
