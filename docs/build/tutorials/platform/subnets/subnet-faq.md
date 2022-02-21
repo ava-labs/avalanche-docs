@@ -62,10 +62,6 @@ The simplest way to define some form of minting logic, will be to set the Coinba
 
 You can define any minting logic that you want, you just have to dive into the subnet-evm to make the necessary modifications. If you have any ideas, we are happy to discuss and potentially even add first-class support for it within the [subnet-evm repo](https://github.com/ava-labs/subnet-evm) if it’s something that many others might find useful as well.
 
-### Can we use an ERC-20 token as the native token of our subnet?
-
-We are working on adding support for using an ERC-20 token as the native token on subnet-evm to make it as easy as possible to deploy a new subnet, while keeping whatever minting logic that you may be used to coming from the C-Chain.
-
 
 ## Compatibility
 
