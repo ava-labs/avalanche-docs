@@ -71,4 +71,4 @@ We are working on adding support for using an ERC-20 token as the native token o
 
 ### Can I create a subnet for xxx?
 
-The answer is usually yes, because Subnet provides great flexibility to work almost anything.
+The answer is usually yes. Custom Virtual Machines are non-opinionated. This brings great flexibility to Subnets. There are few interfaces and structures that a VM needs to implement for consensus requirements. Other than these, a Virtual Machine can be fully customized to provide any custom business logic.  
