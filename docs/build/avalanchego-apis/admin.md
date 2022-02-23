@@ -232,7 +232,7 @@ curl -sX POST --data '{
 ```javascript
 {
     "jsonrpc": "2.0",
-        "result": {
+    "result": {
         "newVMs": {
             "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["foovm"]
         },
