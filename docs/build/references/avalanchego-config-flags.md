@@ -1,8 +1,9 @@
 ---
 sidebar_position: 3
+description: This documents list all available configuration and flags for AvalancheGo.
 ---
 
-# Command Line Interface
+# AvalancheGo Config and Flags
 
 You can specify the configuration of a node with the arguments below.
 
@@ -1196,7 +1197,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 | --snow-avalanche-batch-size      | batchSize             |
 | --snow-avalanche-num-parents     | parentSize            |
 
-The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](command-line-interface.md#snow-parameters).
+The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](avalanchego-config-flags.md#snow-parameters).
 
 ### Virtual Machine (VM) Configs {#vm-configs}
 
