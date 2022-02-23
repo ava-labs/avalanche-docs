@@ -259,7 +259,7 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc": "2.0",
-        "result": {
+    "result": {
         "vms": {
             "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq": [
                 "avm"
