@@ -209,8 +209,8 @@ Dynamically loads any virtual machines installed on the node as plugins.
 
 ```text
 admin.loadVMs() -> {
-    failedVMs: map[string]string,
     newVMs: map[string][]string
+    failedVMs: map[string]string,
 }
 ```
 
