@@ -219,7 +219,7 @@ admin.loadVMs() -> {
 #### **Example Call**
 
 ```bash
-curl -sX POST --data '{
+curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"admin.loadVMs",
