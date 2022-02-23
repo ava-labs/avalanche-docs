@@ -214,7 +214,7 @@ admin.loadVMs() -> {
 }
 ```
 
-* `failedVMs` is only included in the response of at least one VM fails to be loaded.
+* `failedVMs` is only included in the response if at least one VM fails to be loaded.
 
 #### **Example Call**
 
