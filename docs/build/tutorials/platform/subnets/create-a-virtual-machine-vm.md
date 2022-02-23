@@ -1450,7 +1450,7 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/command-line-interface.md#build-directory) for more information. Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias as explained below.
+AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/avalanchego-config-flags.md#build-directory) for more information. Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias as explained below.
 
 #### VM Aliases
 
@@ -1468,7 +1468,7 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
 ```
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
-For more details about VM configs, see [here](../../../references/command-line-interface.md#vm-configs).
+For more details about VM configs, see [here](../../../references/avalanchego-config-flags.md#vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
 
