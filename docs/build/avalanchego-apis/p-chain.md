@@ -1424,6 +1424,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
+##### CB58
 ```cpp
 {
     "jsonrpc": "2.0",
@@ -1434,6 +1435,18 @@ curl -X POST --data '{
     "id": 1
 }
 ```
+##### JSON
+```cpp
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "tx": "111117XV7Rm5EoKbwXFJp5WWWouAENJcF1zXGxPDPCfTbpiLfwkUXcoHKnfzdXz7sRgGYeaVtJkcD9MNgGuKGXsyWEWpTK2zAToEf64ezp7r7SyvyL7RqC5oqvNbRDShn5hm9pDV4JTCjZR5RzAxjBEJZ2V8eqtU6jvpsJMHxNBtCwL6Atc1t2Dt7s5nqf7wdbFUBvwKXppBb2Yps8wUvtTKQifssMUAPygc2Rv4rGd9LRANk4JTiT15qzUjXX7zSzz16pxdBXc4jp2Z2UJRWbdxZdaybL3mYCFj197bBnYieRYzRohaUEpEjGcohrmkSfHB8S2eD74o2r66sVGdpXYo95vkZeayQkrMRit6unwWBx8FJR7Sd7GysxS9A3CiMc8cL4oRmr7XyvcFCrnPbUZK7rnN1Gtq3MN8k4JVvX6DuiFAS7xe61jY3VKJAZM9Lg3BgU6TAU3gZ",
+        "encoding": "cb58"
+    },
+    "id": 1
+}
+```
+
 
 ### platform.getTxStatus
 
