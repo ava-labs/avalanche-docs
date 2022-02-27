@@ -1,6 +1,6 @@
 # Abigen
 
-Compile a solidity contract into golang to deploy and call contracts progrmatically.
+Compile a solidity contract into golang to deploy and call contracts programmatically.
 
 ## How to Build
 
