@@ -1450,9 +1450,7 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/avalanchego-config-flags.md#build-directory) for more information. Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias as explained below.
-
-#### VM Aliases
+### VM Aliases
 
 Each VM has a pre-defined, static ID. For instance, the default ID of the TimestampVM is: `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
 
@@ -1466,6 +1464,39 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
   ]
 }
 ```
+j
+### Installing a VM
+
+AvalancheGo searches for and registers plugins under the `plugins` directory of the [build directory](https://docs.avax.network/build/references/avalanchego-config-flags/#build-directory).
+
+To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory. Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+
+1. Copy the binary into the plugins directory
+```bash
+cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
+```
+2. Load the binary with the `loadVMs` API.
+```json
+avalanchego-internal git:(vm-registry) curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.loadVMs",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9660/ext/admin | jq
+```
+3. Confirm the respones of `loadVMs` contains the newly installed virtual machine.
+```
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["timestampvm", "timestamp"]
+    }
+  },
+  "id": 1
+}
+```
+
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
 For more details about VM configs, see [here](../../../references/avalanchego-config-flags.md#vm-configs).

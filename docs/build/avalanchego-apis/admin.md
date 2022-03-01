@@ -205,7 +205,7 @@ curl -X POST --data '{
 
 ### admin.loadVMs
 
-Dynamically loads any virtual machines installed on the node as plugins.
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
 
 ```text
 admin.loadVMs() -> {
