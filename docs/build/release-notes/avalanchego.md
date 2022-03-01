@@ -6,7 +6,7 @@
 
 :::
 
-## [v1.7.6]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.6))
+## v1.7.6 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.6))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
@@ -41,7 +41,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Performed various cleanup passes.
 
 
-## [v1.7.5]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.5))
+## v1.7.5 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.5))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
@@ -73,7 +73,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Fixed bug in handling updated chain config on startup.
 
 
-## [v1.7.4]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.4))
+## v1.7.4 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.4))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
@@ -128,7 +128,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Refactored API client utilities to use a `Context` rather than an explicit timeout.
 
 
-## [v1.7.3]([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.3))
+## v1.7.3 ([View on GitHub](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.3))
 
 This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.0). It is optional, but encouraged.
 
