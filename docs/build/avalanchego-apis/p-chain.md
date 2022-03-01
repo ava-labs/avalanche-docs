@@ -1437,13 +1437,104 @@ curl -X POST --data '{
 ```
 ##### JSON
 ```cpp
-{
-    "jsonrpc": "2.0",
-    "result": {
-        "tx": "111117XV7Rm5EoKbwXFJp5WWWouAENJcF1zXGxPDPCfTbpiLfwkUXcoHKnfzdXz7sRgGYeaVtJkcD9MNgGuKGXsyWEWpTK2zAToEf64ezp7r7SyvyL7RqC5oqvNbRDShn5hm9pDV4JTCjZR5RzAxjBEJZ2V8eqtU6jvpsJMHxNBtCwL6Atc1t2Dt7s5nqf7wdbFUBvwKXppBb2Yps8wUvtTKQifssMUAPygc2Rv4rGd9LRANk4JTiT15qzUjXX7zSzz16pxdBXc4jp2Z2UJRWbdxZdaybL3mYCFj197bBnYieRYzRohaUEpEjGcohrmkSfHB8S2eD74o2r66sVGdpXYo95vkZeayQkrMRit6unwWBx8FJR7Sd7GysxS9A3CiMc8cL4oRmr7XyvcFCrnPbUZK7rnN1Gtq3MN8k4JVvX6DuiFAS7xe61jY3VKJAZM9Lg3BgU6TAU3gZ",
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "inputs": {
+          "networkID": 5,
+          "blockchainID": "11111111111111111111111111111111LpoYY",
+          "outputs": [],
+          "inputs": [
+            {
+              "txID": "Fea8vzeWHVt8tnfoNe7HYtiPK3v7XXqHZ8uKZ8Zpxui3MN3H5",
+              "outputIndex": 0,
+              "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+              "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+              "input": {
+                "amount": 7995475000,
+                "signatureIndices": [
+                  0
+                ]
+              }
+            },
+            {
+              "txID": "2Jcdy6AqqpZ41p7YPVQKvhSZiy81W8EXQwkZ2igM1ZTWHJjd37",
+              "outputIndex": 0,
+              "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+              "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+              "input": {
+                "amount": 886937475305,
+                "signatureIndices": [
+                  0
+                ]
+              }
+            },
+            {
+              "txID": "2Jcdy6AqqpZ41p7YPVQKvhSZiy81W8EXQwkZ2igM1ZTWHJjd37",
+              "outputIndex": 1,
+              "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+              "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+              "input": {
+                "amount": 463101749,
+                "signatureIndices": [
+                  0
+                ]
+              }
+            }
+          ],
+          "memo": "0x"
+        },
+        "validator": {
+          "nodeID": "L8Ux78vnskLhFutwqgMTvvqs3ny4WuKhy",
+          "start": 1644292262,
+          "end": 1644465062,
+          "weight": 895396052054
+        },
+        "stake": [
+          {
+            "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "P-fuji1xh43nxvh6mq6d4jd7y2z7ye9np0ak0pzte7r0s"
+              ],
+              "amount": 895396052054,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
+        ],
+        "rewardsOwner": {
+          "addresses": [
+            "P-fuji1xh43nxvh6mq6d4jd7y2z7ye9np0ak0pzte7r0s"
+          ],
+          "locktime": 0,
+          "threshold": 1
+        },
+        "shares": 1000000
+      },
+      "credentials": [
+        {
+          "signatures": [
+            "0x3d43a3a30e329798013d5eda34fea568402c966cc445d399167688c52f890a031c05e3775006e16e011aca9f1d983730aff6736ca8b4af0f8207f84256c7b56e00"
+          ]
+        },
+        {
+          "signatures": [
+            "0x3d43a3a30e329798013d5eda34fea568402c966cc445d399167688c52f890a031c05e3775006e16e011aca9f1d983730aff6736ca8b4af0f8207f84256c7b56e00"
+          ]
+        },
+        {
+          "signatures": [
+            "0x3d43a3a30e329798013d5eda34fea568402c966cc445d399167688c52f890a031c05e3775006e16e011aca9f1d983730aff6736ca8b4af0f8207f84256c7b56e00"
+          ]
+        }
+      ]
     },
-    "id": 1
+    "encoding": "json"
+  },
+  "id": 1
 }
 ```
 
