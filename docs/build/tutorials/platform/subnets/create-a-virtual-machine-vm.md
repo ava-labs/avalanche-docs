@@ -1468,7 +1468,7 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
 ### Installing a VM
 
 AvalancheGo searches for and registers plugins under the `plugins` directory of the
-[build directory](../references/avalanchego-config-flags/#build-directory).
+[build directory](../references/avalanchego-config-flags#build-directory).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory.
 Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
@@ -1480,7 +1480,7 @@ cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 
 #### Node is not running
 If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
-See [here](../tutorials/nodes-and-staking/run-avalanche-node/#start-a-node-and-connect-to-avalanche) for references on
+See [here](../tutorials/nodes-and-staking/run-avalanche-node#start-a-node-and-connect-to-avalanche) for references on
 how to start your Avalanche node.
 
 #### Node is already running
