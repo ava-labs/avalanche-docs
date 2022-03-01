@@ -1408,7 +1408,9 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### CB58 Example
+
+##### **Example Call**
 
 ```cpp
 curl -X POST --data '{
@@ -1422,10 +1424,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+##### **Example Response**
 
-##### CB58
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -1435,8 +1436,26 @@ curl -X POST --data '{
     "id": 1
 }
 ```
-##### JSON
+
+#### JSON Example
+
+##### **Example Call**
+
 ```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTx",
+    "params": {
+        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
+        "encoding": "json"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+##### **Example Response**
+
+```json
 {
   "jsonrpc": "2.0",
   "result": {
