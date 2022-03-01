@@ -618,6 +618,18 @@ curl -X POST --data '{
 
 Get a block by its ID.
 
+#### **Signature**
+
+```cpp
+platform.getBlock({
+    blockID: string
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}
+```
+
 #### CB58 Example
 
 ##### **Example Call**
