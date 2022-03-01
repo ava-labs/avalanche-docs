@@ -270,8 +270,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-        "id"     :1,
-        "result" :{
+    "id"     :1,
+    "result" :{
         "success":true
     }
 }
@@ -303,8 +303,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-        "id"     :1,
-        "result" :{
+    "id"     :1,
+    "result" :{
         "success":true
     }
 }
@@ -352,8 +352,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-        "id"     :1,
-        "result" :{
+    "id"     :1,
+    "result" :{
         "success":true
     }
 }
@@ -385,8 +385,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-        "id"     :1,
-        "result" :{
+    "id"     :1,
+    "result" :{
         "success":true
     }
 }
@@ -417,8 +417,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-        "id"     :1,
-        "result" :{
+    "id"     :1,
+    "result" :{
         "success":true
     }
 }
