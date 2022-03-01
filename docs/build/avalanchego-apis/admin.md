@@ -231,16 +231,16 @@ curl -X POST --data '{
 
 ```javascript
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "newVMs": {
-            "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["foovm"]
-        },
-        "failedVMs": {
-            "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": "error message"
-        }
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["foovm"]
     },
-    "id": 1
+    "failedVMs": {
+      "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": "error message"
+    }
+  },
+  "id": 1
 }
 ```
 
@@ -270,8 +270,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+        "id"     :1,
+        "result" :{
         "success":true
     }
 }
@@ -303,8 +303,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+        "id"     :1,
+        "result" :{
         "success":true
     }
 }
@@ -352,8 +352,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+        "id"     :1,
+        "result" :{
         "success":true
     }
 }
@@ -385,8 +385,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+        "id"     :1,
+        "result" :{
         "success":true
     }
 }
@@ -417,8 +417,8 @@ curl -X POST --data '{
 ```javascript
 {
     "jsonrpc":"2.0",
-    "id"     :1,
-    "result" :{
+        "id"     :1,
+        "result" :{
         "success":true
     }
 }
