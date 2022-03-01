@@ -237,7 +237,7 @@ curl -X POST --data '{
 
 Get the virtual machines installed on this node.
 
-```text
+```cpp
 info.getVMs() -> {
     vms: map[string][]string
 }
@@ -256,7 +256,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {

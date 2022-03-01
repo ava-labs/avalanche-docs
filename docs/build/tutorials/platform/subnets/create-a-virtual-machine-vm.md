@@ -1464,33 +1464,46 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
   ]
 }
 ```
-j
+
 ### Installing a VM
 
-AvalancheGo searches for and registers plugins under the `plugins` directory of the [build directory](https://docs.avax.network/build/references/avalanchego-config-flags/#build-directory).
+AvalancheGo searches for and registers plugins under the `plugins` directory of the
+[build directory](../references/avalanchego-config-flags/#build-directory).
 
-To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory. Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory.
+Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
-1. Copy the binary into the plugins directory.
+Copy the binary into the plugins directory.
 ```bash
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
-2. Load the binary with the `loadVMs` API.
+
+#### Node is not running
+If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
+See [here](../tutorials/nodes-and-staking/run-avalanche-node/#start-a-node-and-connect-to-avalanche) for references on
+how to start your Avalanche node.
+
+#### Node is already running
+
+Load the binary with the `loadVMs` API.
 ```bash
 curl -sX POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"admin.loadVMs",
     "params" :{}
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin | jq
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
 ```
-3. Confirm the response of `loadVMs` contains the newly installed virtual machine.
-```
+Confirm the response of `loadVMs` contains the newly installed virtual machine
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any others that weren't
+already installed previously in the response.
+```json
 {
   "jsonrpc": "2.0",
   "result": {
     "newVMs": {
-      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["timestampvm", "timestamp"]
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["timestampvm", "timestamp"],
+      "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": []
     }
   },
   "id": 1
@@ -1501,7 +1514,8 @@ curl -sX POST --data '{
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
 For more details about VM configs, see [here](../../../references/avalanchego-config-flags.md#vm-configs).
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also
+accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
 
 ## Wrapping Up
 
