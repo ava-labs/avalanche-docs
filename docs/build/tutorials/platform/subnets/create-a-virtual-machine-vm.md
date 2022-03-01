@@ -1484,7 +1484,7 @@ curl -sX POST --data '{
     "params" :{}
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin | jq
 ```
-3. Confirm the respones of `loadVMs` contains the newly installed virtual machine.
+3. Confirm the response of `loadVMs` contains the newly installed virtual machine.
 ```
 {
   "jsonrpc": "2.0",
