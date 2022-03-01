@@ -1476,8 +1476,8 @@ To install the virtual machine onto your node, you need to move the built virtua
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
 2. Load the binary with the `loadVMs` API.
-```json
-avalanchego-internal git:(vm-registry) curl -sX POST --data '{
+```bash
+curl -sX POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
     "method" :"admin.loadVMs",
