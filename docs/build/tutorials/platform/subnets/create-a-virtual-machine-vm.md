@@ -1471,7 +1471,7 @@ AvalancheGo searches for and registers plugins under the `plugins` directory of 
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory. Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
-1. Copy the binary into the plugins directory
+1. Copy the binary into the plugins directory.
 ```bash
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
