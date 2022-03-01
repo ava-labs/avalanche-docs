@@ -1482,7 +1482,7 @@ curl -sX POST --data '{
     "id"     :1,
     "method" :"admin.loadVMs",
     "params" :{}
-}' -H 'content-type:application/json;' 127.0.0.1:9660/ext/admin | jq
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin | jq
 ```
 3. Confirm the respones of `loadVMs` contains the newly installed virtual machine.
 ```
