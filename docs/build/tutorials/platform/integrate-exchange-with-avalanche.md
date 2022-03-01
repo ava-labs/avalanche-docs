@@ -22,20 +22,40 @@ Individual chains, including the C-Chain, have their own configuration options w
 
 The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. An example C-Chain config file:
 
-```javascript
+:::caution
+
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file as shown below.
+
+:::
+
+
+```json
 {
-  "snowman-api-enabled": false,
-  "coreth-admin-api-enabled": false,
-  "local-txs-enabled": true
-  "eth-apis": ["internal-public-eth", "internal-public-blockchain", "internal-public-transaction-pool", "internal-public-tx-pool", "internal-public-debug", "internal-private-debug", "internal-public-account", "internal-private-personal", "debug-tracer", "web3", "public-eth", "public-eth-filter", "private-admin", "public-debug", "private-debug", "net"]
+    "snowman-api-enabled": false,
+    "coreth-admin-api-enabled": false,
+    "local-txs-enabled": true,
+    "pruning-enabled": false,
+    "eth-apis": [
+        "internal-public-eth",
+        "internal-public-blockchain",
+        "internal-public-transaction-pool",
+        "internal-public-tx-pool",
+        "internal-public-debug",
+        "internal-private-debug",
+        "internal-public-account",
+        "internal-private-personal",
+        "debug-tracer",
+        "web3",
+        "public-eth",
+        "public-eth-filter",
+        "private-admin",
+        "public-debug",
+        "private-debug",
+        "net"
+    ]
 }
 ```
 
-:::caution
-
-If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
-
-:::
 
 ### Interacting with the C-Chain
 
