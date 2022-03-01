@@ -614,6 +614,118 @@ curl -X POST --data '{
 }
 ```
 
+### platform.getBlock
+
+Get a block by its ID.
+
+#### CB58 Example
+
+##### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getBlock",
+    "params": {
+        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "encoding": "cb58"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+##### **Example Response**
+
+```cpp
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "11111Ec6zcH8CxqjdHC2wdcqYRJe4oTPmP2Et5YEEMP9HyuByeE26dzv5wawghNVJrZZjfNEzNnKFM8C8sJe2iCFfVY3C2UXG2AMmt7SQUTkzLBibgtQurk68qMaoKpKg7tN4nFBzpP5ywRAhzEq3LmTeGc9P5561LAmg9Tuvz3hqRwVfBp5fb2wrZhJvzMRQp4pGPuX9HTkXqrPLhnaqht8mMWEZS67caaCUarNpTLkhA62rmXXDta3meM9YsWQre3Ldu7VE72rLmjCU1mWheED4uuokczAJzuZ8WPTTT3ZtZHuxpHb4jXApfeV9mChJj1Ga6fHPP5MREtGLJqH2RC5856B5SPEuUZbc5Kbvw2TGp5Qn4q9EBc4mKeDdqfb2xD9CMir2J8rVTK1GgfUGiFQXCn2RktqKzpzdXD8iD4FXe2MWWidR5GTisUdLS2ruEB1fy1HVdFnHM3khotTf5hnFrY73vqQyPiqSgNjcjawmXA4dGKg9Q1TJwm1DUHePyV5Jr8f7LN6W3",
+    "encoding": "cb58"
+  },
+  "id": 1
+}
+```
+
+#### JSON Example
+
+##### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getBlock",
+    "params": {
+        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "encoding": "json"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P 
+```
+##### **Example Response**
+
+```cpp
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": {
+      "parentID": "2WJFJK5RitRttFFy9vXav3fTYeDTPAscAvwJLo37U2SsbvQ7mw",
+      "height": 60361,
+      "txs": [
+        {
+          "unsignedTx": {
+            "inputs": {
+              "networkID": 5,
+              "blockchainID": "11111111111111111111111111111111LpoYY",
+              "outputs": [
+                {
+                  "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+                  "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                  "output": {
+                    "addresses": [
+                      "P-fuji19c97fz4yugpk6v0w540zzvd0nzk9v6cwrdfzyp"
+                    ],
+                    "amount": 9996900390,
+                    "locktime": 0,
+                    "threshold": 1
+                  }
+                }
+              ],
+              "inputs": [],
+              "memo": "0x"
+            },
+            "sourceChain": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
+            "importedInputs": [
+              {
+                "txID": "2GEje3bHja1c311HcxUVKByAFwDAJQ2yxpH4NjXjr6WCMCTyxz",
+                "outputIndex": 0,
+                "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+                "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+                "input": {
+                  "amount": 9997900390,
+                  "signatureIndices": [
+                    0
+                  ]
+                }
+              }
+            ]
+          },
+          "credentials": [
+            {
+              "signatures": [
+                "0x40d65f595b1544aac894f518d3aee13ff318386dcfb555ae845ee69e9cce796133a4bfbd4a44d97c56b3f6da316968863d9fc515150e86a2fe4c16b25f4386bd00"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "encoding": "json"
+  },
+  "id": 1
+}
+```
+
 ### platform.getBlockchains
 
 Get all the blockchains that exist (excluding the P-Chain).
