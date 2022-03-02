@@ -203,6 +203,47 @@ curl -X POST --data '{
 }
 ```
 
+### admin.loadVMs
+
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
+
+```cpp
+admin.loadVMs() -> {
+    newVMs: map[string][]string
+    failedVMs: map[string]string,
+}
+```
+
+* `failedVMs` is only included in the response if at least one virtual machine fails to be loaded.
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.loadVMs",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```javascript
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["foovm"]
+    },
+    "failedVMs": {
+      "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": "error message"
+    }
+  },
+  "id": 1
+}
+```
+
 ### admin.lockProfile
 
 Writes a profile of mutex statistics to `lock.profile`.
