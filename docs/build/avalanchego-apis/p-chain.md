@@ -1557,7 +1557,7 @@ curl -X POST --data '{
 
 Gets a transaction by its ID.
 
-Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58" or "hex". Defaults to "cb58".
+Optional `encoding` parameter to specify the format for the returned transaction. Can be either "cb58", "hex", or "json". Defaults to "cb58".
 
 #### **Signature**
 
@@ -1571,32 +1571,109 @@ platform.getTx({
 }
 ```
 
-#### **Example Call**
+#### CB58 Example
+
+##### **Example Call**
 
 ```cpp
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTx",
     "params": {
-        "txID":"TAG9Ns1sa723mZy1GSoGqWipK6Mvpaj7CAswVJGM6MkVJDF9Q",
+        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
         "encoding": "cb58"
     },
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-#### **Example Response**
+##### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
-        "tx": "111117XV7Rm5EoKbwXFJp5WWWouAENJcF1zXGxPDPCfTbpiLfwkUXcoHKnfzdXz7sRgGYeaVtJkcD9MNgGuKGXsyWEWpTK2zAToEf64ezp7r7SyvyL7RqC5oqvNbRDShn5hm9pDV4JTCjZR5RzAxjBEJZ2V8eqtU6jvpsJMHxNBtCwL6Atc1t2Dt7s5nqf7wdbFUBvwKXppBb2Yps8wUvtTKQifssMUAPygc2Rv4rGd9LRANk4JTiT15qzUjXX7zSzz16pxdBXc4jp2Z2UJRWbdxZdaybL3mYCFj197bBnYieRYzRohaUEpEjGcohrmkSfHB8S2eD74o2r66sVGdpXYo95vkZeayQkrMRit6unwWBx8FJR7Sd7GysxS9A3CiMc8cL4oRmr7XyvcFCrnPbUZK7rnN1Gtq3MN8k4JVvX6DuiFAS7xe61jY3VKJAZM9Lg3BgU6TAU3gZ",
+        "tx": "111117ukQs6mcsKobtCH2jrVemXbPL2SgZTxJ4Lg7zazMjo4Kyyo33YNwnwhUJToHRk7zmCFXbL6BieJWpLch9Aa8opKr7qJeWPjSWhriX9TQLBt5jxq9ijX9JB3dwNG7MtY5KXS6EWF3w3tHBL5GTfL36F2b1PJfcWQQoTgeQWoe8MJXM27LGjnkhTMEzuNpTyrEcranPgXwdy9nNVZiLGMyYpzXbnmV2JUkGZXap8Ye3faWBwNg1La4aCXFKZ7ADMSiQUgqWYDMGZkDEg3yXNifSsBiAvqeCTx8kKp4B5W1vsgf3Tko2XW6A3SrkNVFVmbqCNjPKPpKeoSPnAC5Wmrb9zTMSZqYG9F6E7myow4o7tubbeDU3FC6fSws5ytQAnFseKUUT94jBGFGDD9pAuXExFwdwgRRUUS228ai4AZMqEF7KW5J9FhFQCUxMyprLxdPEUrjw3jW",
         "encoding": "cb58"
     },
     "id": 1
 }
 ```
+
+#### JSON Example
+
+##### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getTx",
+    "params": {
+        "txID":"2Eug3Y6j1yD745y5bQ9bFCf5nvU2qT1eB53GSpD15EkGUfu8xh",
+        "encoding": "json"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+##### **Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "tx": {
+      "unsignedTx": {
+        "inputs": {
+          "networkID": 5,
+          "blockchainID": "11111111111111111111111111111111LpoYY",
+          "outputs": [],
+          "inputs": [
+            {
+              "txID": "2QYG5yR6YW55ixmBvR4zXLCZKV9we9bmSWHHiGppF4Ko17bTPn",
+              "outputIndex": 0,
+              "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+              "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+              "input": {
+                "amount": 1998000000,
+                "signatureIndices": [
+                  0
+                ]
+              }
+            }
+          ],
+          "memo": "0x"
+        },
+        "destinationChain": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
+        "exportedOutputs": [
+          {
+            "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+            "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
+            "output": {
+              "addresses": [
+                "P-fuji1yhem6kev6gkfsyse3m5z09e6qsuxujz0arpw8v"
+              ],
+              "amount": 1997000000,
+              "locktime": 0,
+              "threshold": 1
+            }
+          }
+        ]
+      },
+      "credentials": [
+        {
+          "signatures": [
+            "0xdbc03ebd7d06927baacf7aea85cdebd7e0b95cf5b57715a09981fd5a75dac2cb610636bf3657ba4ca47dad4beed2e7f0ec692e7f12f1bbc9f3c34fc5c18ae35d01"
+          ]
+        }
+      ]
+    },
+    "encoding": "json"
+  },
+  "id": 1
+}
+```
+
 
 ### platform.getTxStatus
 
