@@ -107,13 +107,16 @@ The function `sendAvax()` takes 4 arguments -
 * `address` - Destination address to which we want to send AVAX
 * `maxFeePerGas` - Desired maximum fee per gas you want to pay in nAVAX
 * `maxPriorityFeePerGas` - Desired maximum priority fee per gas you want to pay in nAVAX
+* `nonce` - Used as a differentiator for more than 1 transaction with same signer
 
-The last 2 arguments are optional, and if `undefined` is passed, then it will use the `calcFeeData()` function to estimate them. Each transaction with the same data and parameters is differentiated by a nonce value. Two transactions with the same nonce signed by the same address will never be accepted.
+The last 3 arguments are optional, and if `undefined` is passed, then it will use the `calcFeeData()` function to estimate them. Each transaction with the same data and parameters is differentiated by a nonce value. If there are more than 1 transactions with the same nonce signed by the same address, then only 1 of them with the highest effective priority fee will be accepted. `nonce` parameter should only be used when you are either re-issuing or cancelling a stucked transaction.
 
 ```javascript
 // Function to send AVAX
-const sendAvax = async (amount, to, maxFeePerGas = undefined, maxPriorityFeePerGas = undefined) => {
-	let nonce = await HTTPSProvider.getTransactionCount(address); 
+const sendAvax = async (amount, to, maxFeePerGas = undefined, maxPriorityFeePerGas = undefined, nonce = undefined) => {
+	if(nonce == undefined) {
+		nonce = await HTTPSProvider.getTransactionCount(address);
+	}
 	
 	// If the max fee or max priority fee is not provided, then it will automatically calculate using CChain APIs
 	({ maxFeePerGas, maxPriorityFeePerGas } = await calcFeeData(maxFeePerGas, maxPriorityFeePerGas));
@@ -137,7 +140,7 @@ const sendAvax = async (amount, to, maxFeePerGas = undefined, maxPriorityFeePerG
 	const signedTx = await wallet.signTransaction(tx); 
 	const txHash = ethers.utils.keccak256(signedTx);
 
-	console.log(`View transaction: https://testnet.snowtrace.io/tx/${txHash}\n`);
+	console.log(`View transaction with nonce ${nonce}: https://testnet.snowtrace.io/tx/${txHash}\n`);
 
 	// Sending a signed transaction and waiting for its inclusion
 	await (await HTTPSProvider.sendTransaction(signedTx)).wait();
@@ -170,5 +173,17 @@ There could be the following cases -
 
 You will get the following output on the successful submission of the signed transactions. Using this URL you can view the status of your transaction on Snowtrace.
 ```bash
-View transaction: https://testnet.snowtrace.io/tx/0xd5b92b85beaf283fbaeeefb95c9a17a6b346a05b6f9687f2d6e421aa79243b35
+View transaction with nonce 25: https://testnet.snowtrace.io/tx/0xd5b92b85beaf283fbaeeefb95c9a17a6b346a05b6f9687f2d6e421aa79243b35
+```
+
+## Reissuance of stucked transaction
+
+Sometimes during high network activity, all transactions couldn't make it to the latest blocks for a long time, due to relatively lower effective tip than the other transactions in the pool. We can either re-issue the same transaction with a higher priority fee or cancel the transaction. To re-issue the stucked transaction, you can send a new one with same amount and data but higher priority fee and same nonce value as the stucked transaction. The transaction with lower effective tip will automatically be rejected (due to same nonce), and you do not need to worry about it. You can also cancel the stucked transaction, by keeping the amount to 0, with a higher priority fee and same nonce. Let's say, the above transaction with a nonce value of 25 has stucked. You can then re-issue a new transaction with same nonce, but higher priority fee this time.
+
+```javascript
+// reissuing transaction with nonce 25
+sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
+
+// cancelling transaction with nonce 25
+sendAvax("0", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
 ```
