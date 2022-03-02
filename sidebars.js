@@ -109,6 +109,7 @@ const sidebars = {
                 'build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain',
                 'build/tutorials/platform/transfer-avax-between-p-chain-and-c-chain',
                 'build/tutorials/platform/adjusting-gas-price-during-high-network-activity',
+                'build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript',
               ],
             },
             {
