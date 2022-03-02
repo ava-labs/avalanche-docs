@@ -630,6 +630,16 @@ platform.getBlock({
 }
 ```
 
+**Request**
+
+* `blockID` is the block ID. It should be in cb58 format.
+* `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
+
+**Response**
+
+* `block` is the transaction encoded to `encoding`.
+* `encoding` is the `encoding`.
+
 #### CB58 Example
 
 ##### **Example Call**
@@ -654,6 +664,35 @@ curl -X POST --data '{
   "result": {
     "block": "11111Ec6zcH8CxqjdHC2wdcqYRJe4oTPmP2Et5YEEMP9HyuByeE26dzv5wawghNVJrZZjfNEzNnKFM8C8sJe2iCFfVY3C2UXG2AMmt7SQUTkzLBibgtQurk68qMaoKpKg7tN4nFBzpP5ywRAhzEq3LmTeGc9P5561LAmg9Tuvz3hqRwVfBp5fb2wrZhJvzMRQp4pGPuX9HTkXqrPLhnaqht8mMWEZS67caaCUarNpTLkhA62rmXXDta3meM9YsWQre3Ldu7VE72rLmjCU1mWheED4uuokczAJzuZ8WPTTT3ZtZHuxpHb4jXApfeV9mChJj1Ga6fHPP5MREtGLJqH2RC5856B5SPEuUZbc5Kbvw2TGp5Qn4q9EBc4mKeDdqfb2xD9CMir2J8rVTK1GgfUGiFQXCn2RktqKzpzdXD8iD4FXe2MWWidR5GTisUdLS2ruEB1fy1HVdFnHM3khotTf5hnFrY73vqQyPiqSgNjcjawmXA4dGKg9Q1TJwm1DUHePyV5Jr8f7LN6W3",
     "encoding": "cb58"
+  },
+  "id": 1
+}
+```
+
+#### Hex Example
+
+##### **Example Call**
+
+```cpp
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getBlock",
+    "params": {
+        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "encoding": "hex"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+##### **Example Response**
+
+```cpp
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block": "0x000000000003c6382571b11710a99fbeff3f4eb1e43d673597ef516b2dffd30ddb7a6219ac5a000000000000ebc90000000100000011000000050000000000000000000000000000000000000000000000000000000000000000000000013d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa000000070000000253dc9826000000000000000000000001000000012e0be48aa4e2036d31eea55e2131af98ac566b0e00000000000000007fc93d85c6d62c5b2ac0b519c87010ea5294012d1e407030d6acd0021cac10d500000001a64b0b6c25748d340206c1a7333b6d94c7d5594fdd0437d24cb71e64861864cc000000003d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa000000050000000253ebda66000000010000000000000001000000090000000140d65f595b1544aac894f518d3aee13ff318386dcfb555ae845ee69e9cce796133a4bfbd4a44d97c56b3f6da316968863d9fc515150e86a2fe4c16b25f4386bd00cf2a9980",
+    "encoding": "hex"
   },
   "id": 1
 }
