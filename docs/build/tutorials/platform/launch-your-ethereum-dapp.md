@@ -55,19 +55,57 @@ The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.
 
 For more information, see [documentation](../../tools/public-api.md).
 
-### Running Your Own Node
+However, Public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
 
-If you don't want your dapp to depend on a centralized service you don't control, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
+## Running Your Own Node
 
-For development purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial for downloading, building, and installation of AvalancheGo. If you're going to run a production node on a Linux machine, [here](../nodes-and-staking/set-up-node-with-installer.md) is a tutorial that shows how to use the installer script to quickly and easily install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
+If you don't want your dapp to depend on a centralized service you don't control, or have specific needs that cannot be met through the public API, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
+
+For development and experimental purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). Simplest solution, if you're going to run a node on a Linux machine, is to use the [installer script](../nodes-and-staking/set-up-node-with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
+
+### Node Configuration
+
+Node configuration options are explained [here](../../references/avalanchego-config-flags.md). But unless you have specific needs, you can mostly leave the main node config options at their default values.
+
+On the other hand, you will most likely need to adjust C-Chain configuration to suit your intended use. You can look up complete configuration options for C-Chain [here](../../references/avalanchego-config-flags.md#c-chain-configs) as well as the default configuration. Note that only the options that are different from their default values need to be included in the config file.
+
+By default, the C-Chain config file is located at `$HOME/.avalanchego/configs/chains/C/config.json`. We will go over how to adjust the config to cover some common use cases in the following sections.
+
+#### Running an Archival Node
+
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which is enabled by default to conserve disk space. To preserve full historical state, include `"pruning-enabled": false` in the C-Chain config file.
+
+:::note
+After changing the flag to disable the database pruning, you will need to run the bootstrap process again, as the node will not backfill any already pruned and missing data.
+
+To re-bootstrap the node, stop it, delete the database (by default stored in `~/.avalanchego/db/`) and start the node again.
+:::
+
+#### Running a Node in Debug Mode
+
+By default, debug APIs are disabled. To enable them, you need to enable the appropriate EVM APIs in the config file by including the `eth-apis` value in your C-Chain config file to include the `public-debug`, `private-debug`, `debug-tracer`, `internal-public-debug` and `internal-private-debug` APIs.
+
+:::note
+Including the `eth-apis` in the config flag overrides the defaults, so you need to include the default APIs as well!
+:::
+
+#### Example C-Chain config file
+
+An example C-Chain config file that includes the archival mode, enables debug APIs as well as default EVM APIs:
+
+```javascript
+{
+  "eth-apis": ["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool","public-debug", "private-debug","debug-tracer","internal-public-debug","internal-private-debug"],
+  "pruning-enabled": false
+}
+```
+Default config values for the C-Chain can be seen [here](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
 
 ### Running a Local Test Network
 
-If you need a private test network to test your dapp, [Avash](https://github.com/ava-labs/avash) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
+If you need a private test network to test your dapp, [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a shell client for launching local Avalanche networks, similar to Ganache on Ethereum.
 
-Avash uses Lua as a scripting language for orchestrating local networks.
-
-For more information, see [documentation](../../tools/avash.md).
+For more information, see [documentation](../../tools/network-runner.md).
 
 ## Developing and Deploying Contracts
 
@@ -138,28 +176,6 @@ Instead of block rate, you should measure time simply by reading the timestamp a
 ### Finality
 
 On Ethereum, the blockchain can be reorganized and blocks can be orphaned, so you cannot rely on the fact that a block has been accepted until it is several blocks further from the tip (usually, it is presumed that blocks 6 places deep are safe). That is not the case on Avalanche. Blocks are either accepted or rejected within a second or two. And once the block has been accepted, it is final, and cannot be replaced, dropped, or modified. So the concept of 'number of confirmations' on Avalanche is not used. As soon as a block is accepted and available in the explorer, it is final.
-
-### Gas Price
-
-Gas on Avalanche is burned. Validators don't keep the gas for themselves (they get rewarded for staking), so the dynamics of 'gas wars' where higher-priced transactions are included first is non-existent. Therefore, there is never a need to put a higher gas price on your transactions. You'll only be burning gas in vain.
-
-### C-Chain Configuration
-
-Individual chains, including the C-Chain, have their own configuration options that can be given in a config file. You may want to use a C-Chain configiguration other than the default when developing dapps. For more details on chain configs, see [here.](../../references/avalanchego-config-flags.md#chain-configs)
-
-The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. You can look up complete configuration options for C-Chain [here](../../references/avalanchego-config-flags.md#c-chain-config). An example C-Chain config file:
-
-```javascript
-{
-  "snowman-api-enabled": false,
-  "coreth-admin-api-enabled": false,
-  "local-txs-enabled": true
-}
-```
-
-:::caution
-If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
-:::
 
 ### Using `eth_newFilter` and Related Calls with the Public API
 
