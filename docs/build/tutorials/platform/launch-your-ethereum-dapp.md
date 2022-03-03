@@ -55,13 +55,13 @@ The C-Chain API endpoint is [https://api.avax.network/ext/bc/C/rpc](https://api.
 
 For more information, see [documentation](../../tools/public-api.md).
 
-However, Public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
+However, public API does not expose all the APIs that are available on the node, as some of them would not make sense on a publicly accessible service, and some would present a security risk. If you need to use an API that is not available publicly, you can run your own node.  
 
 ## Running Your Own Node
 
 If you don't want your dapp to depend on a centralized service you don't control, or have specific needs that cannot be met through the public API, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
 
-For development and experimental purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). Simplest solution, if you're going to run a node on a Linux machine, is to use the [installer script](../nodes-and-staking/set-up-node-with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
+For development and experimental purposes, [here](../nodes-and-staking/run-avalanche-node.md) is a tutorial that shows how to download, build, and install AvalancheGo. Simpler solution is to use the prebuilt binary, available on [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to run a node on a Linux machine, you can use the [installer script](../nodes-and-staking/set-up-node-with-installer.md) to install the node as a `systemd` service. Script also handles node upgrading. If you want to run a node in a docker container, there are [build scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the AvalancheGo repo for various Docker configs.
 
 ### Node Configuration
 
@@ -93,12 +93,26 @@ Including the `eth-apis` in the config flag overrides the defaults, so you need 
 
 An example C-Chain config file that includes the archival mode, enables debug APIs as well as default EVM APIs:
 
-```javascript
+```json
 {
-  "eth-apis": ["public-eth","public-eth-filter","net","web3","internal-public-eth","internal-public-blockchain","internal-public-transaction-pool","public-debug", "private-debug","debug-tracer","internal-public-debug","internal-private-debug"],
-  "pruning-enabled": false
+    "eth-apis": [
+        "public-eth",
+        "public-eth-filter",
+        "net",
+        "web3",
+        "internal-public-eth",
+        "internal-public-blockchain",
+        "internal-public-transaction-pool",
+        "public-debug",
+        "private-debug",
+        "debug-tracer",
+        "internal-public-debug",
+        "internal-private-debug"
+    ],
+    "pruning-enabled": false
 }
 ```
+
 Default config values for the C-Chain can be seen [here](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
 
 ### Running a Local Test Network
