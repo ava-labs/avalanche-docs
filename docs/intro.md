@@ -1,73 +1,73 @@
 ---
-sidebar_position: 1
+sidebar\_position: 1
 slug: /
 ---
 
-# What is Avalanche?
+# Avalanche nedir?
 
-## Introduction
+## Giriş
 
-[Avalanche](https://avax.network) is an open-source platform for launching [decentralized applications](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) and enterprise [blockchain](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) deployments in one interoperable, highly scalable ecosystem. Avalanche is the first decentralized smart contracts platform built for the scale of global finance, with near-instant transaction finality. Ethereum developers can quickly build on Avalanche as Solidity works out-of-the-box.
+[Avalanche](https://avax.network), [merkeziyetsiz uygulamaları](https://support.avalabs.org/en/articles/4587146-what-is-a-decentralized-application-dapp) ve kurumsal [blok zincir](http://support.avalabs.org/en/articles/4064677-what-is-a-blockchain) konuşlanmalarını karşılıklı işletilebilir, yüksek düzeyde ölçeklenebilir tek bir ekosistemde kullanıma sunmak için tasarlanmış açık kaynaklı bir platformdur. Avalanche, neredeyse anında işlem kesinleştirme hızıyla küresel finans ölçeğinde geliştirilmiş ilk merkeziyetsiz akıllı sözleşmeler platformudur. Ethereum geliştiricileri Avalanche'da hızlı bir şekilde kurulum yapabilirler, çünkü Solidity mükemmel çalışır.
 
-A key difference between Avalanche and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Avalanche protocol employs a novel approach to consensus to achieve its strong safety guarantees, quick finality, and high-throughput without compromising decentralization.
+Avalanche ve diğer merkeziyetsiz ağlar arasındaki temel farklardan biri konsensüs protokolüdür. Zamanla insanlar blok zincirlerin yavaş olması ve ölçeklenebilir olmaması gerektiği şeklinde yanlış bir anlayış edindiler. Avalanche protokolü, merkeziyetsizlikten ödün vermeden güçlü güvenlik garantileri, hızlı işlem kesinleştirme ve yüksek iş çıkarma yeteneği sağlamak için konsensüse yeni bir yaklaşım kullanır.
 
 ## AVAX
 
-AVAX is the native token of Avalanche. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the multiple subnets created on Avalanche. `1 nAVAX` is equal to `0.000000001 AVAX`.
+AVAX, Avalanche platformunun yerel tokenıdır. Bu token, ücretler ödemek, staking yoluyla platformun güvenliğini sağlamak ve güvenceye almak ve Avalanche üzerinde yaratılan birden çok subnet arasında temel bir hesap birimi sağlamak için kullanılan sıkı bir arz limitine bağlanmış, nadir bir varlıktır. `1 nAVAX` eşittir `0.000000001 AVAX`.
 
-## Avalanche Consensus Protocol
+## Avalanche Konsensüs Protokolü
 
-![Consensus Comparison](/img/Consensus-protocol-comparison.png)
+![Konsensüs Karşılaştırması](/img/Consensus-protocol-comparison.png)
 
-Protocols in the Avalanche family operate through repeated sub-sampled voting. When a [validator](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) is determining whether a [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be accepted or rejected, it asks a small, random subset of validators whether they think the transaction should be accepted or rejected. If the queried validator thinks the transaction is invalid, has already rejected the transaction, or prefers a conflicting transaction, it replies that it thinks the transaction should be rejected. Otherwise, it replies that it thinks the transaction should be accepted.
+Avalanche ailesindeki protokoller, alt örneklere ayrılmış tekrarlayan oylama yoluyla işler. Bir [doğrulayıcı](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator) bir [işlemin](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) kabul edilmesine veya reddedilmesine karar verirken, küçük ve rastgele seçilen bir doğrulayıcı alt kümesine işlemin kabul edilmesi veya reddedilmesi konusunda ne düşündüklerini sorar. Sorgulanan doğrulayıcı işlemin geçersiz olduğunu düşünüyorsa, zaten işlemi reddetmişse veya çatışan bir işleme öncelik tanıyorsa, işlemin reddedilmesi gerektiği kanısında olduğunu belirten bir yanıt gönderir. Aksi takdirde, işlemin kabul edilmesi gerektiği kanısında olduğunu belirten bir yanıt gönderir.
 
-If a sufficiently large portion (_alpha_ α) of the validators sampled reply that they think the transaction should be accepted, the validator prefers to accept the transaction. That is, when it is queried about the transaction in the future, it will reply that it thinks the transaction should be accepted. Similarly, the validator will prefer to reject the transaction if a sufficiently large portion of the validators replies that they think the transaction should be rejected.
+Eğer örneklenen doğrulayıcıların yeterince büyük bir bölümü \(_alfa_ α\) işlemin kabul edilmesi kanısında olduklarını belirten bir yanıt gönderirse, doğrulayıcı işlemi kabul etmeyi tercih eder. Yani, gelecekte işlem hakkında sorgulandığında işlemin kabul edilmesi kanısında olduğunu belirten bir yanıt gönderecektir. Aynı şekilde, doğrulayıcıların yeterince büyük bir bölümü işlemin reddedilmesi kanısında olduklarını belirten bir yanıt gönderirse, doğrulayıcı işlemi reddetmeyi tercih edecektir.
 
-The validator repeats this sampling process until _alpha_ of the validators queried reply the same way (accept or reject) for _beta_ β consecutive rounds.
+Doğrulayıcı bu örnekleme sürecini, sorgulanan doğrulayıcıların _alfa_ bölümü birbirini izleyen _beta_ β turunda aynı şekilde \(kabul veya ret\) yanıt gönderene kadar tekrarlar.
 
-In the common case when a transaction has no conflicts, finalization happens very quickly. When conflicts exist, honest validators quickly cluster around conflicting transactions, entering a positive feedback loop until all correct validators prefer that transaction. This leads to the acceptance of non-conflicting transactions and the rejection of conflicting transactions.
+Yaygın senaryoda, bir işlemin hiçbir çatışması yoksa, işlemin kesinleştirilmesi çok çabuk gerçekleşir. Çatışan işlemler mevcut olduğunda, dürüst doğrulayıcılar hızla çatışan işlemlerin etrafında kümelenerek olumlu geri bildirim döngüsü başlatırlar, ta ki tüm doğru doğrulayıcılar o işlemi tercih edene kadar. Bu, çatışmayan işlemlerin kabul edilmesiyle ve çatışan işlemlerin reddedilmesiyle sonuçlanır.
 
-![How Avalanche Consensus Works](/img/howavalancheconsensusworks.png)
+![Avalanche Konsensüsü Nasıl İşler](/img/howavalancheconsensusworks.png)
 
-It is guaranteed (with high probability based on system parameters) that if any honest validator accepts or rejects a transaction, all honest validators will accept or reject that transaction.
+Eğer dürüst bir doğrulayıcı bir işlemi kabul veya ret ederse, tüm dürüst doğrulayıcıların o işlemi kabul veya ret etmesi \(sistem parametreleri gereğince yüksek bir olasılıkla\) garanti edilir.
 
-Learn more technical components of the Avalanche consensus protocol by reading the [whitepaper](https://arxiv.org/pdf/1906.08936.pdf).
+[Teknik dokümanı](https://arxiv.org/pdf/1906.08936.pdf) okuyarak Avalanche konsensüs protokolünün teknik bileşenleri hakkında daha fazla bilgi edinin.
 
-## Snowman Consensus Protocol
+## Snowman Konsensüs Protokolü
 
-Snowman is a chain-optimized consensus protocol–high-throughput, totally-ordered, and great for smart contracts. Snowman is powered by the [Avalanche consensus protocol](./#avalanche-consensus-protocol). Both [P-Chain](learn/platform-overview/README.md#platform-chain-p-chain) and [C-Chain](learn/platform-overview/README.md#contract-chain-c-chain) implement the Snowman consensus protocol.
+Snowman, zincir için optimize edilmiş bir konsensüs protokolüdür -yüksek iş çıkarma yeteneğine sahiptir, tamamen sıralıdır ve zincir ve akıllı sözleşmeler için idealdir. Snowman, [Avalanche konsensüs protokolü](./#avalanche-consensus-protocol) ile desteklenir. Hem [P-Chain](learn/platform-overview/README.md#platform-chain-p-chain) hem de [C-Chain](learn/platform-overview/README.md#contract-chain-c-chain) platformları Snowman konsensüs protokolünü kullanır.
 
-## Key Features
+## Önemli Özellikleri
 
-### Speed
+### Hız
 
-Uses a novel consensus protocol, developed by a team of Cornell computer scientists, and is able to permanently confirm transactions in under 1 second.
+Cornell bilgisayar bilimcilerinden oluşan bir ekip tarafından geliştirilmiş yeni bir konsensüs protokolü kullanır ve işlemleri sürekli olarak 1 saniyenin altındaki sürelerde onaylayabilir.
 
-### Scalability
+### Ölçeklenebilirlik
 
-Capable of 4,500 transactions per second–an order of magnitude greater than existing blockchains.
+Saniyede 4.500 işlem kapasitesine sahiptir -mevcut blok zincirlerden daha büyük bir işlem hacmi.
 
-### Security
+### Güvenlik
 
-Ensures stronger security guarantees well-above the 51% standard of other networks.
+Diğer ağlardaki %51 standardının oldukça üzerinde daha güçlü güvenlik garantileri sağlar.
 
-### Flexibility
+### Esneklik
 
-Easily create custom blockchains and decentralized apps that contain almost any arbitrary logic.
+Neredeyse her türlü gelişigüzel \(arbitrary\) mantığı içeren kişiselleştirilmiş blok zincirleri ve merkeziyetsiz uygulamaları kolayca oluşturur.
 
-### Sustainability
+### Sürdürülebilirlik
 
-Uses energy-efficient proof-of-stake consensus algorithm rather than proof-of-work.
+İş ispatı yerine enerji verimliliği sağlayan pay ispatı konsensüs algoritması kullanır.
 
-### Smart Contract Support
+### Akıllı Sözleşme Desteği
 
-Supports the creation of Solidity smart contracts and your favorite Ethereum tools like Remix, Metamask, Truffle, and more.
+Solidity tabanlı akıllı sözleşmeler oluşturmayı ve Remix, Metamask, Truffle gibi sevdiğiniz birçok Ethereum aracını destekler.
 
-### Private and Public Blockchains
+### Özel ve Genel Blok Zincirler
 
-Create your own public or private blockchains.
+Kendi genel veya özel blok zincirlerinizi oluşturun.
 
-### Designed for Finance
+### Finans için tasarlanmıştır
 
-Native support for easily creating and trading digital smart assets with complex, custom rulesets.
+Dijital akıllı varlıkların kompleks, kişiselleştirilmiş kurallarla kolayca oluşturulması ve alınıp satılması için yerel destek.
 
