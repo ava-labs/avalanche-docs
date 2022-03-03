@@ -6,14 +6,14 @@ description: This tutorial will help users to send transactions with dynamic fee
 
 ## Overview
 
-The objective of this document is to provide and explain sending transactions with dynamic fees using javascript. Make sure you have followed the [tutorial](./adjusting-gas-price-during-high-network-activity.md) on adjusting the dynamic fees using MetaMask. There, we have explained the key concepts related to dynamic fees and EIP1559 type of transactions.
+The objective of this document is to provide and explain sending transactions with dynamic fees using javascript. Make sure you have followed [the tutorial on adjusting the dynamic fees using MetaMask](./adjusting-gas-price-during-high-network-activity.md). There, we have explained the key concepts related to dynamic fees and EIP1559 type of transactions.
 
 ## Prerequisites
 
-* Basic familarity with [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
-* Basic familarity with [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-* Basic familarity with [Avalanche C-Chain](https://docs.avax.network/build/avalanchego-apis/c-chain) network and [EVM compatibility](https://ethereum.org/en/developers/docs/evm/)
-* Basic understanding of [dynamic fee](https://docs.avax.network/build/tutorials/platform/adjusting-gas-price-during-high-network-activity#good-to-know-keywords-and-concepts) transactions
+* Basic familiarity with [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+* Basic familiarity with [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
+* Basic familiarity with [the Avalanche C-Chain](https://docs.avax.network/build/avalanchego-apis/c-chain) network and [EVM compatibility](https://ethereum.org/en/developers/docs/evm/)
+* Basic understanding of [dynamic fee transactions](https://docs.avax.network/build/tutorials/platform/adjusting-gas-price-during-high-network-activity#good-to-know-keywords-and-concepts) transactions
 
 ## Installing dependencies
 
@@ -84,18 +84,18 @@ The function `calcFeeData()` estimates the max fee and max priority fee per gas 
 ```javascript
 // Function to estimate max fee and max priority fee
 const calcFeeData = async (maxFeePerGas = undefined, maxPriorityFeePerGas = undefined) => {
-	const baseFee = parseInt(await cchain.getBaseFee(), 16) / 1e9;
-	maxPriorityFeePerGas = maxPriorityFeePerGas == undefined ? parseInt(await cchain.getMaxPriorityFeePerGas(), 16) / 1e9 : maxPriorityFeePerGas;
-	maxFeePerGas = maxFeePerGas == undefined ? baseFee + maxPriorityFeePerGas : maxFeePerGas;
+  const baseFee = parseInt(await cchain.getBaseFee(), 16) / 1e9;
+  maxPriorityFeePerGas = maxPriorityFeePerGas == undefined ? parseInt(await cchain.getMaxPriorityFeePerGas(), 16) / 1e9 : maxPriorityFeePerGas;
+  maxFeePerGas = maxFeePerGas == undefined ? baseFee + maxPriorityFeePerGas : maxFeePerGas;
 
-	if(maxFeePerGas < maxPriorityFeePerGas) {
-		throw("Error: Max fee per gas cannot be less than max priority fee per gas");
-	}
+  if(maxFeePerGas < maxPriorityFeePerGas) {
+    throw("Error: Max fee per gas cannot be less than max priority fee per gas");
+  }
 
-	return {
-		maxFeePerGas: maxFeePerGas.toString(),
-		maxPriorityFeePerGas: maxPriorityFeePerGas.toString()
-	};
+  return {
+    maxFeePerGas: maxFeePerGas.toString(),
+    maxPriorityFeePerGas: maxPriorityFeePerGas.toString()
+  };
 }
 ```
 Actual API returns base fee and priority fee in units of `wei` which is one-billionth of a billionth of `AVAX` (1 AVAX = 10^18 wei).
@@ -109,41 +109,43 @@ The function `sendAvax()` takes 4 arguments -
 * `maxPriorityFeePerGas` - Desired maximum priority fee per gas you want to pay in nAVAX
 * `nonce` - Used as a differentiator for more than 1 transaction with same signer
 
-The last 3 arguments are optional, and if `undefined` is passed, then it will use the `calcFeeData()` function to estimate them. Each transaction with the same data and parameters is differentiated by a nonce value. If there are more than 1 transactions with the same nonce signed by the same address, then only 1 of them with the highest effective priority fee will be accepted. `nonce` parameter should only be used when you are either re-issuing or cancelling a stucked transaction.
+The last 3 arguments are optional, and if `undefined` is passed, then it will use the `calcFeeData()` function to estimate them. Each transaction with the same data and parameters is differentiated by a nonce value. If there are more than 1 transactions with the same nonce signed by the same address, then only 1 of them with the highest effective priority fee will be accepted. `nonce` parameter should only be used when you are either re-issuing or cancelling a stuck transaction.
 
 ```javascript
 // Function to send AVAX
 const sendAvax = async (amount, to, maxFeePerGas = undefined, maxPriorityFeePerGas = undefined, nonce = undefined) => {
-	if(nonce == undefined) {
-		nonce = await HTTPSProvider.getTransactionCount(address);
-	}
-	
-	// If the max fee or max priority fee is not provided, then it will automatically calculate using CChain APIs
-	({ maxFeePerGas, maxPriorityFeePerGas } = await calcFeeData(maxFeePerGas, maxPriorityFeePerGas));
-	
-	maxFeePerGas = ethers.utils.parseUnits(maxFeePerGas, "gwei");
-	maxPriorityFeePerGas = ethers.utils.parseUnits(maxPriorityFeePerGas, "gwei");
+  if(nonce == undefined) {
+    nonce = await HTTPSProvider.getTransactionCount(address);
+  }
+  
+  // If the max fee or max priority fee is not provided, then it will automatically calculate using CChain APIs
+  ({ maxFeePerGas, maxPriorityFeePerGas } = await calcFeeData(maxFeePerGas, maxPriorityFeePerGas));
+  
+  maxFeePerGas = ethers.utils.parseUnits(maxFeePerGas, "gwei");
+  maxPriorityFeePerGas = ethers.utils.parseUnits(maxPriorityFeePerGas, "gwei");
 
-	// Type 2 transaction is for EIP1559
-	const tx = {
-		type: 2,
-		nonce,
-		to, 
-		maxPriorityFeePerGas,
-		maxFeePerGas,
-		value: ethers.utils.parseEther(amount),
-		chainId,
-	};
+  // Type 2 transaction is for EIP1559
+  const tx = {
+    type: 2,
+    nonce,
+    to, 
+    maxPriorityFeePerGas,
+    maxFeePerGas,
+    value: ethers.utils.parseEther(amount),
+    chainId,
+  };
 
-	tx.gasLimit = await HTTPSProvider.estimateGas(tx);
+  tx.gasLimit = await HTTPSProvider.estimateGas(tx);
 
-	const signedTx = await wallet.signTransaction(tx); 
-	const txHash = ethers.utils.keccak256(signedTx);
+  const signedTx = await wallet.signTransaction(tx); 
+  const txHash = ethers.utils.keccak256(signedTx);
 
-	console.log(`View transaction with nonce ${nonce}: https://testnet.snowtrace.io/tx/${txHash}\n`);
+  console.log('Sending signed transaction');
 
-	// Sending a signed transaction and waiting for its inclusion
-	await (await HTTPSProvider.sendTransaction(signedTx)).wait();
+  // Sending a signed transaction and waiting for its inclusion
+  await (await HTTPSProvider.sendTransaction(signedTx)).wait();
+
+  console.log(`View transaction with nonce ${nonce}: https://testnet.snowtrace.io/tx/${txHash}`);
 };
 ```
 
@@ -176,9 +178,9 @@ You will get the following output on the successful submission of the signed tra
 View transaction with nonce 25: https://testnet.snowtrace.io/tx/0xd5b92b85beaf283fbaeeefb95c9a17a6b346a05b6f9687f2d6e421aa79243b35
 ```
 
-## Reissuance of stucked transaction
+## Reissuance of Stuck Transaction
 
-Sometimes during high network activity, all transactions couldn't make it to the latest blocks for a long time, due to relatively lower effective tip than the other transactions in the pool. We can either re-issue the same transaction with a higher priority fee or cancel the transaction. To re-issue the stucked transaction, you can send a new one with same amount and data but higher priority fee and same nonce value as the stucked transaction. The transaction with lower effective tip will automatically be rejected (due to same nonce), and you do not need to worry about it. You can also cancel the stucked transaction, by keeping the amount to 0, with a higher priority fee and same nonce. Let's say, the above transaction with a nonce value of 25 has stucked. You can then re-issue a new transaction with same nonce, but higher priority fee this time.
+Sometimes during high network activity, all transactions couldn't make it to the latest blocks for a long time, due to relatively lower effective tip than the other transactions in the pool. We can either re-issue the same transaction with a higher priority fee or cancel the transaction. To re-issue the stuck transaction, you can send a new one with same amount and data but higher priority fee and same nonce value as the stuck transaction. The transaction with lower effective tip will automatically be rejected (due to same nonce), and you do not need to worry about it. You can also cancel the stuck transaction, by keeping the amount to 0, with a higher priority fee and same nonce. Let's say, the above transaction with a nonce value of 25 has stuck. You can then re-issue a new transaction with same nonce, but higher priority fee this time.
 
 ```javascript
 // reissuing transaction with nonce 25
@@ -187,3 +189,7 @@ sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
 // cancelling transaction with nonce 25
 sendAvax("0", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
 ```
+
+## Conclusion
+
+You have learned about creating, signing, and sending transactions with dynamic fee parameters to the C-Chain of Avalanche network using javascript. It also explained, how to re-issue or cancel a stuck transaction, by sending a transaction with the same nonce. This tutorial points out the recommended way for choosing max fee cap and max priority fee cap for transactions and can also work as a general guide for all the EVM-based chains.
