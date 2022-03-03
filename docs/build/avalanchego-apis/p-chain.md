@@ -886,6 +886,7 @@ platform.getBlockchainStatus(
 * `Validating`: The blockchain is being validated by this node.
 * `Created`: The blockchain exists but isn’t being validated by this node.
 * `Preferred`: The blockchain was proposed to be created and is likely to be created but the transaction isn’t yet accepted.
+* `Syncing`: This node is participating in this blockchain as a non-validating node.
 * `Unknown`: The blockchain either wasn’t proposed or the proposal to create it isn’t preferred. The proposal may be resubmitted.
 
 #### **Example Call**
