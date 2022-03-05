@@ -265,7 +265,7 @@ contract Migrations {
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Auction` smart contract to the blockchain.
 
 ```javascript
-const AuctionManager = artifacts.require("./Auction.sol");
+const AuctionManager = artifacts.require("./AuctionManager.sol");
 
 module.exports = function(deployer) {
   deployer.deploy(AuctionManager);
