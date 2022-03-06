@@ -34,7 +34,15 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `AVAX`
 * **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-#### **Local Testnet (AVASH) Settings:** [(Avash Tutorial)](../../tools/avash.md)
+#### **Local Testnet (Avalanche Network Runner) Settings:** [(Avalanche Network Runner Tutorial)](../../tools/network-runner.md)
+
+* **Network Name**: Avalanche Local C-Chain
+* **New RPC URL**: [http://127.0.0.1:34890/ext/bc/C/rpc](http://127.0.0.1:34890/ext/bc/C/rpc) (Note: the port number should match your local setting which can be different from 34890.)
+* **ChainID**: `43112`
+* **Symbol**: `AVAX`
+* **Explorer**: N/A
+
+#### **[Deprecated] Local Testnet (AVASH) Settings:** [(Avash Tutorial)](../../tools/avash.md)
 
 * **Network Name**: Avalanche Local
 * **New RPC URL**: [http://localhost:9650/ext/bc/C/rpc](http://localhost:9650/ext/bc/C/rpc)
