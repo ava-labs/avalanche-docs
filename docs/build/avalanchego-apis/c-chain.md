@@ -19,13 +19,13 @@ _Note: Ethereum has its own notion of `networkID` and `chainID`. These have no r
 
 To interact with C-Chain via the JSON-RPC endpoint:
 
-```cpp
+```
 /ext/bc/C/rpc
 ```
 
 To interact with other instances of the EVM via the JSON-RPC endpoint:
 
-```cpp
+```
 /ext/bc/blockchainID/rpc
 ```
 
@@ -40,13 +40,13 @@ On the [public api node](../tools/public-api.md#supported-apis), it only support
 
 To interact with C-Chain via the websocket endpoint:
 
-```cpp
+```
 /ext/bc/C/ws
 ```
 
 For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
 
-```cpp
+```
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
@@ -54,7 +54,7 @@ Note: on localhost, use `ws://`. When using the [Public API](../tools/public-api
 
 To interact with other instances of the EVM via the websocket endpoint:
 
-```cpp
+```
 /ext/bc/blockchainID/ws
 ```
 
@@ -87,7 +87,7 @@ In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance
 
 **Signature**
 
-```cpp
+```sh
 eth_getAssetBalance({
     address: string,
     blk: BlkNrOrHash,
@@ -101,7 +101,7 @@ eth_getAssetBalance({
 
 **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "eth_getAssetBalance",
@@ -116,7 +116,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -130,7 +130,7 @@ Get the base fee for the next block.
 
 #### **Signature**
 
-```cpp
+```sh
 eth_baseFee() -> {}
 ```
 
@@ -138,7 +138,7 @@ eth_baseFee() -> {}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -149,7 +149,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -163,7 +163,7 @@ Get the priority fee needed to be included in a block.
 
 #### **Signature**
 
-```cpp
+```sh
 eth_maxPriorityFeePerGas() -> {}
 ```
 
@@ -171,7 +171,7 @@ eth_maxPriorityFeePerGas() -> {}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -182,7 +182,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -198,13 +198,13 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
-```cpp
+```
 /ext/bc/C/avax
 ```
 
 To interact with other instances of the EVM AVAX endpoints:
 
-```cpp
+```
 /ext/bc/blockchainID/avax
 ```
 
@@ -238,7 +238,7 @@ avax.getAtomicTx({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -252,7 +252,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -270,7 +270,7 @@ Export an asset from the C-Chain to the X-Chain. After calling this method, you 
 
 #### Signature
 
-```cpp
+```
 avax.export({
     to: string,
     amount: int,
@@ -290,7 +290,7 @@ avax.export({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -307,7 +307,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -349,7 +349,7 @@ avax.export({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -367,7 +367,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -403,7 +403,7 @@ avax.exportKey({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -418,7 +418,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -435,7 +435,7 @@ Gets the UTXOs that reference a given address.
 
 #### **Signature**
 
-```cpp
+```sh
 avax.getUTXOs(
     {
         addresses: string,
@@ -470,7 +470,7 @@ avax.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -489,7 +489,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -539,7 +539,7 @@ avax.import({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -555,7 +555,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -597,7 +597,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -613,7 +613,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -647,7 +647,7 @@ avax.importKey({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -662,7 +662,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -678,7 +678,7 @@ Send a signed transaction to the network. `encoding` specifies the format of the
 
 #### **Signature**
 
-```cpp
+```sh
 avax.issueTx({
     tx: string,
     encoding: string, //optional
@@ -689,7 +689,7 @@ avax.issueTx({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -703,7 +703,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -719,7 +719,7 @@ Get the status of an atomic transaction sent to the network.
 
 #### **Signature**
 
-```cpp
+```sh
 avax.getAtomicTxStatus({txID: string}) -> {
   status: string,
   blockHeight: string // returned when status is Accepted
@@ -735,7 +735,7 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -748,7 +748,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -798,7 +798,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -831,7 +831,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -864,7 +864,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -897,7 +897,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -930,7 +930,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

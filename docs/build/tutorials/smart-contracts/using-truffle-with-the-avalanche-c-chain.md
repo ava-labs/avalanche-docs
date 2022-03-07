@@ -365,7 +365,7 @@ truffle(development)> instance.store(1234)
 
 You should see something like:
 
-```javascript
+```json
 {
   tx: '0x10afbc5e0b9fa0c1ef1d9ec3cdd673e7947bd8760b22b8cdfe08f27f3a93ef1e',
   receipt: {

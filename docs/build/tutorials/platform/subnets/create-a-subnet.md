@@ -23,7 +23,7 @@ First, let’s generate the 2 control keys. To do so we call [`platform.createAd
 
 To generate the first key:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -37,7 +37,7 @@ curl -X POST --data '{
 
 This gives the first control key (again, it actually gives the _address_ of the first control key). The key is held by the user we just specified.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -49,7 +49,7 @@ This gives the first control key (again, it actually gives the _address_ of the 
 
 Generate the second key:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -63,7 +63,7 @@ curl -X POST --data '{
 
 The response contains the second control key, which is held by the user we just specified:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -77,7 +77,7 @@ The response contains the second control key, which is held by the user we just 
 
 To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/p-chain.md#platformcreatesubnet).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -96,7 +96,7 @@ curl -X POST --data '{
 
 The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -111,7 +111,7 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 We can call [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets) to get all Subnets that exist:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -122,7 +122,7 @@ curl -X POST --data '{
 
 The response confirms that our subnet was created:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -151,7 +151,7 @@ Suppose that the Subnet has ID `3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9
 
 To add the validator, we’ll call API method [`platform.addSubnetValidator`](../../../avalanchego-apis/p-chain.md#platformaddsubnetvalidator). Its signature is:
 
-```cpp
+```
 platform.addSubnetValidator(
     {
         nodeID: string,
@@ -196,7 +196,7 @@ We use the shell command `date` to compute the Unix time 10 minutes and 30 days 
 
 Example:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addSubnetValidator",
@@ -216,7 +216,7 @@ curl -X POST --data '{
 
 The response has the transaction ID, as well as the address the change went to.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -229,7 +229,7 @@ The response has the transaction ID, as well as the address the change went to.
 
 We can check the transaction’s status by calling [`platform.getTxStatus`](../../../avalanchego-apis/p-chain.md#platformgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -242,7 +242,7 @@ curl -X POST --data '{
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../../avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -253,7 +253,7 @@ curl -X POST --data '{
 
 The response should include the node we just added:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {

@@ -13,7 +13,7 @@ sidebar_position: 6
 
 In v1.0.0, the signature was:
 
-```cpp
+```
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -49,7 +49,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 In later versions, the signature was as follows. Note that each validator contains a list of its delegators. Please see the next note for current behavior.
 
-```cpp
+```
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -97,7 +97,7 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 Since v1.0.6, top level `delegators` field is removed. The signature is now:
 
-```cpp
+```
 platform.getCurrentValidators({subnetID: string}) ->
 {
     validators: []{
@@ -135,13 +135,13 @@ platform.getCurrentValidators({subnetID: string}) ->
 
 Before v1.0.4, the signature was:
 
-```cpp
+```
 platform.getTxStatus({txID: string} -> status: string
 ```
 
 v1.0.4 added an argument `includeReason`. If `false` or not provided, this method's response was the same as before. If `true`, this method's response had this new format:
 
-```cpp
+```
 {
   status: string,
   reason: string //optional

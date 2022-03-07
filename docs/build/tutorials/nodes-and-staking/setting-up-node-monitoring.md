@@ -191,7 +191,7 @@ Make sure that all of them have `State` as `UP`.
 
 :::info
 If you run your AvalancheGo node with TLS enabled on your API port, you will need to manually edit the `/etc/prometheus/prometheus.yml` file and change the `avalanchego` job to look like this:
-```cpp
+```yaml
   - job_name: 'avalanchego'
     metrics_path: '/ext/metrics'
     scheme: 'https'

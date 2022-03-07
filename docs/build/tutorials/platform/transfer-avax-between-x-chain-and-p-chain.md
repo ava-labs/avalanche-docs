@@ -81,7 +81,7 @@ To export AVAX, call the X-Chain’s [`avm.export`](../../avalanchego-apis/x-cha
 
 Your call should look like this:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -105,7 +105,7 @@ Make sure that the amount that you’re sending exceeds the transaction fee. Oth
 
 The response should look like this:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -118,7 +118,7 @@ The response should look like this:
 
 We can verify that this transaction was accepted by calling [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avmgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.getTxStatus",
@@ -131,7 +131,7 @@ curl -X POST --data '{
 
 Which shows our transaction is accepted:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -143,7 +143,7 @@ Which shows our transaction is accepted:
 
 We can also call [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avmgetbalance) to check that the AVAX was deducted from an address held by our user:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -163,7 +163,7 @@ Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.i
 
 Your call should look like this:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.importAVAX",
@@ -180,7 +180,7 @@ curl -X POST --data '{
 
 This returns the transaction ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -193,7 +193,7 @@ This returns the transaction ID:
 
 We can check that the transaction was accepted with:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -206,7 +206,7 @@ curl -X POST --data '{
 
 It should be `Committed`, meaning the transfer is complete. We can also check the balance of the address with:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBalance",
@@ -219,7 +219,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -250,7 +250,7 @@ Same as before, this is also a two transaction operation:
 
 To do so, call [`platform.exportAVAX`](../../avalanchego-apis/p-chain.md#platformexportavax):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.exportAVAX",
@@ -273,7 +273,7 @@ This returns the transaction ID, and we can check that the transaction was commi
 
 To finish our transfer from the P-Chain to the X-Chain, call [`avm.import`](../../avalanchego-apis/x-chain.mdx#avmimport):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,

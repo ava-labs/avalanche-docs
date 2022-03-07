@@ -43,7 +43,7 @@ where:
 
 To call this method, then:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :4,
@@ -65,7 +65,7 @@ That’s it!
 
 If the call is successful, the response will look like this:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -84,7 +84,7 @@ If the API method invoked returns an error then the response will have a field `
 
 Such a response would look like:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "error": {

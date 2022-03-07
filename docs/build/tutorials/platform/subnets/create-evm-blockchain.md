@@ -185,7 +185,7 @@ Remind that our VM ID was `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`. C
 
 To create the byte representation of this genesis state, call `subnetevm.buildGenesis`.
 
-```cpp
+```sh
 curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
@@ -237,7 +237,7 @@ curl -X POST --data '{
 
 This returns the byte representation of your blockchain’s genesis state:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -250,7 +250,7 @@ This returns the byte representation of your blockchain’s genesis state:
 
 You can also issue a `subnetevm.decodeBlock` to make sure your encoded genesis bytes are intact:
 
-```cpp
+```sh
 curl -X POST --data '{
     {
     "jsonrpc": "2.0",
@@ -265,7 +265,7 @@ curl -X POST --data '{
 
 This should return the same genesis block, provided in `subnetevm.buildGenesis` call. Order of fields can be different:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -322,7 +322,7 @@ Now let’s create the new blockchain. To do so, we call [`platform.createBlockc
 
 Now let's create the blockchain by issuing the `platform.createBlockchain` call:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -340,7 +340,7 @@ curl -X POST --data '{
 
 The response contains the transaction ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -357,7 +357,7 @@ After a few seconds, the transaction to create our blockchain should have been a
 
 To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -368,7 +368,7 @@ curl -X POST --data '{
 
 The response confirms that the blockchain was created:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -401,7 +401,7 @@ The response confirms that the blockchain was created:
 
 Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platformgetblockchainstatus) on that node:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -412,7 +412,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -434,7 +434,7 @@ You can interact with this new instance of the EVM almost the same way you’d i
 
 We specified a chainID of `13213`, which is equivalent to `0x339d` in hex. Let's verify our chain ID with the RPC call:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "eth_chainId",
