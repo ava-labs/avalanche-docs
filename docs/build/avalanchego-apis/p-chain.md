@@ -649,7 +649,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlock",
     "params": {
-        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
         "encoding": "cb58"
     },
     "id": 1
@@ -658,15 +658,16 @@ curl -X POST --data '{
 
 ##### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
-    "block": "11111Ec6zcH8CxqjdHC2wdcqYRJe4oTPmP2Et5YEEMP9HyuByeE26dzv5wawghNVJrZZjfNEzNnKFM8C8sJe2iCFfVY3C2UXG2AMmt7SQUTkzLBibgtQurk68qMaoKpKg7tN4nFBzpP5ywRAhzEq3LmTeGc9P5561LAmg9Tuvz3hqRwVfBp5fb2wrZhJvzMRQp4pGPuX9HTkXqrPLhnaqht8mMWEZS67caaCUarNpTLkhA62rmXXDta3meM9YsWQre3Ldu7VE72rLmjCU1mWheED4uuokczAJzuZ8WPTTT3ZtZHuxpHb4jXApfeV9mChJj1Ga6fHPP5MREtGLJqH2RC5856B5SPEuUZbc5Kbvw2TGp5Qn4q9EBc4mKeDdqfb2xD9CMir2J8rVTK1GgfUGiFQXCn2RktqKzpzdXD8iD4FXe2MWWidR5GTisUdLS2ruEB1fy1HVdFnHM3khotTf5hnFrY73vqQyPiqSgNjcjawmXA4dGKg9Q1TJwm1DUHePyV5Jr8f7LN6W3",
+    "block": "11111BwoDGdFYQfsbfJ35VKjMP6z5dtggBJqFay7KN33GdqpU8ZFAvaSVegwfADYFipsCpTft27TA8h99krBjsMvFZ5TgFYrQCNN2DkyXQSVuGadYh8UhZ6Ptp3HwVYvXWHaDwjt3mEs9fkoS5JiTDfrrp3w6ws2LTksv3LGtb66iWjWgnHU46WgY2wVqnwrit2x7mYGTgJpXeziLCY66Hnnu1jAy5hYhK2Ek37XhvBcd1UeTcPAFsEtFdLr8Ku19K2dYYNvvuz7YnJjuqxUjtNoC61UcKrtTyJCqRuyA85NRFD7ZYVKwSd13CevyZWuBiBWZkukUpLhJwTcWnFnzbntKDCMdip4kAtQueDkjYnrXu2AWS3SXiJTSmZm55iwn4iE9sqBs6Rj1CnrakGi7sCcXg1UyYu5scmb5RVDKDtZPNLr5Vb6oTWaM4egHfwgT98koZ28rSw8otJfv4q1BH9vrS4N7pUJxh9grnksG9TQDtjBjD9tmhxC8iSLYTwGNxitAqjZd7SGE9",
     "encoding": "cb58"
   },
   "id": 1
 }
+
 ```
 
 #### Hex Example
@@ -678,7 +679,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlock",
     "params": {
-        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
         "encoding": "hex"
     },
     "id": 1
@@ -687,11 +688,11 @@ curl -X POST --data '{
 
 ##### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
-    "block": "0x000000000003c6382571b11710a99fbeff3f4eb1e43d673597ef516b2dffd30ddb7a6219ac5a000000000000ebc90000000100000011000000050000000000000000000000000000000000000000000000000000000000000000000000013d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa000000070000000253dc9826000000000000000000000001000000012e0be48aa4e2036d31eea55e2131af98ac566b0e00000000000000007fc93d85c6d62c5b2ac0b519c87010ea5294012d1e407030d6acd0021cac10d500000001a64b0b6c25748d340206c1a7333b6d94c7d5594fdd0437d24cb71e64861864cc000000003d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa000000050000000253ebda66000000010000000000000001000000090000000140d65f595b1544aac894f518d3aee13ff318386dcfb555ae845ee69e9cce796133a4bfbd4a44d97c56b3f6da316968863d9fc515150e86a2fe4c16b25f4386bd00cf2a9980",
+    "block": "0x00000000000309473dc99a0851a29174d84e522da8ccb1a56ac23f7b0ba79f80acce34cf576900000000000f4241000000010000001200000001000000000000000000000000000000000000000000000000000000000000000000000000000000011c4c57e1bcb3c567f9f03caa75563502d1a21393173c06d9d79ea247b20e24800000000021e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000050000000338e0465f0000000100000000000000000427d4b22a2a78bcddd456742caf91b56badbff985ee19aef14573e7343fd6520000000121e67317cbc4be2aeb00677ad6462778a8f52274b9d605df2591b23027a87dff000000070000000338d1041f0000000000000000000000010000000195a4467dd8f939554ea4e6501c08294386938cbf000000010000000900000001c79711c4b48dcde205b63603efef7c61773a0eb47efb503fcebe40d21962b7c25ebd734057400a12cce9cf99aceec8462923d5d91fffe1cb908372281ed738580119286dde",
     "encoding": "hex"
   },
   "id": 1
@@ -707,7 +708,7 @@ curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getBlock",
     "params": {
-        "blockID": "2AdKuPrbrBmNdgxULmXW3Xng2uWYBsz7GePWQ7DRdPqtMndt1Y",
+        "blockID": "d7WYmb8VeZNHsny3EJCwMm6QA37s1EHwMxw1Y71V3FqPZ5EFG",
         "encoding": "json"
     },
     "id": 1
@@ -715,48 +716,48 @@ curl -X POST --data '{
 ```
 ##### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
     "block": {
-      "parentID": "2WJFJK5RitRttFFy9vXav3fTYeDTPAscAvwJLo37U2SsbvQ7mw",
-      "height": 60361,
+      "parentID": "5615di9ytxujackzaXNrVuWQy5y8Yrt8chPCscMr5Ku9YxJ1S",
+      "height": 1000001,
       "txs": [
         {
           "unsignedTx": {
             "inputs": {
-              "networkID": 5,
+              "networkID": 1,
               "blockchainID": "11111111111111111111111111111111LpoYY",
-              "outputs": [
+              "outputs": [],
+              "inputs": [
                 {
-                  "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+                  "txID": "DTqiagiMFdqbNQ62V2Gt1GddTVLkKUk2caGr4pyza9hTtsfta",
+                  "outputIndex": 0,
+                  "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
                   "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                  "output": {
-                    "addresses": [
-                      "P-fuji19c97fz4yugpk6v0w540zzvd0nzk9v6cwrdfzyp"
-                    ],
-                    "amount": 9996900390,
-                    "locktime": 0,
-                    "threshold": 1
+                  "input": {
+                    "amount": 13839124063,
+                    "signatureIndices": [
+                      0
+                    ]
                   }
                 }
               ],
-              "inputs": [],
               "memo": "0x"
             },
-            "sourceChain": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
-            "importedInputs": [
+            "destinationChain": "2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5",
+            "exportedOutputs": [
               {
-                "txID": "2GEje3bHja1c311HcxUVKByAFwDAJQ2yxpH4NjXjr6WCMCTyxz",
-                "outputIndex": 0,
-                "assetID": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
+                "assetID": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
                 "fxID": "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ",
-                "input": {
-                  "amount": 9997900390,
-                  "signatureIndices": [
-                    0
-                  ]
+                "output": {
+                  "addresses": [
+                    "P-avax1jkjyvlwclyu42n4yuegpczpfgwrf8r9lyj0d3c"
+                  ],
+                  "amount": 13838124063,
+                  "locktime": 0,
+                  "threshold": 1
                 }
               }
             ]
@@ -764,7 +765,7 @@ curl -X POST --data '{
           "credentials": [
             {
               "signatures": [
-                "0x40d65f595b1544aac894f518d3aee13ff318386dcfb555ae845ee69e9cce796133a4bfbd4a44d97c56b3f6da316968863d9fc515150e86a2fe4c16b25f4386bd00"
+                "0xc79711c4b48dcde205b63603efef7c61773a0eb47efb503fcebe40d21962b7c25ebd734057400a12cce9cf99aceec8462923d5d91fffe1cb908372281ed7385801"
               ]
             }
           ]
