@@ -1248,7 +1248,7 @@ Get a block by its ID. If no ID is provided, get the latest block.
 
 **Signature**
 
-```cpp
+```sh
 timestampvm.getBlock({id: string}) ->
     {
         id: string,
@@ -1278,7 +1278,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -1351,7 +1351,7 @@ Propose the next block on this blockchain.
 
 **Signature**
 
-```cpp
+```sh
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
@@ -1372,7 +1372,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -1456,7 +1456,7 @@ Each VM has a pre-defined, static ID. For instance, the default ID of the Timest
 
 It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
 
-```javascript
+```json
 {
   "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
     "timestampvm",

@@ -59,7 +59,7 @@ curl "http://localhost:8080/v2"
 
 **Example Response**
 
-```javascript
+```json
 {
   "network_id": 1,
   "chains": {
@@ -99,7 +99,7 @@ curl "http://localhost:8080/v2/search?query=2jEugPDFN89KXLEXtf5"
 
 **Example Response**
 
-```javascript
+```json
 {
   "count": 1,
   "results": [
@@ -190,7 +190,7 @@ curl "http://localhost:8080/v2/aggregates?startTime=2020-09-21T00:00:00Z&endTime
 
 **Example Response**
 
-```javascript
+```json
 {
   "startTime": "2020-09-21T00:00:00Z",
   "endTime": "2020-10-21T00:00:00Z",
@@ -218,7 +218,7 @@ curl "http://localhost:8080/v2/txfeeAggregates?startTime=2020-09-21T00:00:00Z&en
 
 **Example Response**
 
-```javascript
+```json
 {
   "aggregates": {
     "startTime": "2020-09-21T00:00:00Z",
@@ -248,7 +248,7 @@ curl "http://localhost:8080/v2/addressChains?address=X-fujiABC"
 
 **Example Response**
 
-```javascript
+```json
 {
   "addressChains": {
     "avax14q43wu6wp8fs745dt6y5s0a02vx57ypq4xc5s3": [
@@ -283,7 +283,7 @@ curl "http://localhost:8080/v2/transactions?chainID=1111111111111111111111111111
 
 **Example Response**
 
-```javascript
+```json
 {
   "startTime": "0001-01-01T00:00:00Z",
   "endTime": "2020-11-16T04:18:07Z",
@@ -363,7 +363,7 @@ curl "http://localhost:8080/v2/transactions/2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4
 
 **Example Response**
 
-```javascript
+```json
 {
   "id": "2jEugPDFN89KXLEXtf5oKp5spsJawTht2zP4kKJjkQwwRsDdLX",
   "chainID": "11111111111111111111111111111111LpoYY",
@@ -444,7 +444,7 @@ curl "http://localhost:8080/v2/addresses?address=X-avax1y8cyrzn2kg4udccs5d625gka
 
 **Example Response**
 
-```javascript
+```json
 {
   "addresses": [
     {
@@ -477,7 +477,7 @@ curl "http://localhost:8080/v2/addresses/avax1y8cyrzn2kg4udccs5d625gkac7a99pe452
 
 **Example Response**
 
-```javascript
+```json
 {
   "address": "avax1y8cyrzn2kg4udccs5d625gkac7a99pe452cy5u",
   "publicKey": null,
@@ -506,7 +506,7 @@ curl "http://localhost:8080/v2/assets"
 
 **Example Response**
 
-```javascript
+```json
 {
   "assets": [
     {
@@ -537,7 +537,7 @@ curl "http://localhost:8080/v2/assets/FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDND
 
 **Example Response**
 
-```javascript
+```json
 {
   "id": "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z",
   "chainID": "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
@@ -572,7 +572,7 @@ curl "http://localhost:8080/v2/outputs?address=X-avax1y8cyrzn2kg4udccs5d625gkac7
 
 **Example Response**
 
-```javascript
+```json
 {
   "outputs": [
     {
@@ -606,7 +606,7 @@ curl "http://localhost:8080/v2/outputs/114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdj
 
 **Example Response**
 
-```javascript
+```json
 {
   "id": "114RMPhYM7do7cDX7KWSqFeLkbUXFrLKcqPL4GMdjTvemPzvc",
   "transactionID": "dhU8aMRrtMWvBWSh41aTxUbwArYootNUBcL3N3UJXVPL8H9ip",
@@ -636,7 +636,7 @@ curl "http://localhost:8080/v2/ctxdata/10"
 
 **Example Response**
 
-```javascript
+```json
 {
     "blockNumber": "10",
     "header": {
@@ -719,7 +719,7 @@ curl "http://localhost:8080/v2/ctransactions?toAddress=0x34ec164fd085ae43906eab6
 
 **Example Response**
 
-```javascript
+```json
 {
     "Transactions": [
         {
@@ -770,7 +770,7 @@ curl "http://localhost:8080/v2/rawtransaction/pxiBJkwnaKhaJdYkkfAVRZXrJj47jJF3QA
 
 **Example Response**
 
-```javascript
+```json
 {
     "tx": "0x00000000000000000001ed5f38341..."
 }
@@ -788,7 +788,7 @@ curl "http://localhost:8080/x"
 
 **Example Response**
 
-```javascript
+```json
 {
   "networkID": 1,
   "vm": "avm",

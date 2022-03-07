@@ -24,13 +24,13 @@ Given a blockchain’s alias, get its ID. (See [`admin.aliasChain`](admin.md#adm
 
 #### **Signature**
 
-```cpp
+```sh
 info.getBlockchainID({alias:string}) -> {blockchainID:string}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -43,7 +43,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -59,13 +59,13 @@ Get the ID of the network this node is participating in.
 
 #### **Signature**
 
-```cpp
+```sh
 info.getNetworkID() -> {networkID:int}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -75,7 +75,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -91,13 +91,13 @@ Get the name of the network this node is participating in.
 
 #### **Signature**
 
-```cpp
+```sh
 info.getNetworkName() -> {networkName:string}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -107,7 +107,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -123,13 +123,13 @@ Get the ID of this node.
 
 #### **Signature**
 
-```cpp
+```sh
 info.getNodeID() -> {nodeID: string}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -139,7 +139,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -161,7 +161,7 @@ info.getNodeIP() -> {ip: string}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -171,7 +171,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -187,7 +187,7 @@ Get the version of this node.
 
 #### **Signature**
 
-```cpp
+```sh
 info.getNodeVersion() -> {
     version: string,
     databaseVersion: string,
@@ -205,7 +205,7 @@ where:
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -215,7 +215,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -236,8 +236,9 @@ curl -X POST --data '{
 ### info.getVMs
 
 Get the virtual machines installed on this node.
+#### **Signature**
 
-```cpp
+```
 info.getVMs() -> {
     vms: map[string][]string
 }
@@ -256,7 +257,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -291,7 +292,7 @@ Check whether a given chain is done bootstrapping
 
 #### **Signature**
 
-```cpp
+```sh
 info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 ```
 
@@ -299,7 +300,7 @@ info.isBootstrapped({chain: string}) -> {isBootstrapped: bool}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -312,7 +313,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -328,7 +329,7 @@ Get a description of peer connections.
 
 #### **Signature**
 
-```cpp
+```sh
 info.peers({
     nodeIDs: string[] // optional
 }) ->
@@ -359,7 +360,7 @@ info.peers({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -372,7 +373,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -420,7 +421,7 @@ Get the fees of the network.
 
 #### **Signature**
 
-```cpp
+```sh
 info.getTxFee() ->
 {
     creationTxFee: uint64,
@@ -433,7 +434,7 @@ info.getTxFee() ->
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -443,7 +444,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -460,7 +461,7 @@ Returns the network's observed uptime of this node.
 
 #### **Signature**
 
-```cpp
+```sh
 info.uptime() ->
 {
     rewardingStakePercentage: float64,
@@ -473,7 +474,7 @@ info.uptime() ->
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -483,7 +484,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

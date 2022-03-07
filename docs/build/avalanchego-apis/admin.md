@@ -47,7 +47,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -93,7 +93,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -136,7 +136,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -188,7 +188,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -207,7 +207,9 @@ curl -X POST --data '{
 
 Dynamically loads any virtual machines installed on the node as plugins. See [here](../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
 
-```cpp
+#### Signature
+
+```sh
 admin.loadVMs() -> {
     newVMs: map[string][]string
     failedVMs: map[string]string,
@@ -229,7 +231,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -267,7 +269,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -300,7 +302,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -349,7 +351,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -382,7 +384,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -414,7 +416,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

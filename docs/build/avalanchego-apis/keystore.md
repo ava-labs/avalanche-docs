@@ -27,7 +27,7 @@ Create a new user with the specified username and password.
 
 #### **Signature**
 
-```cpp
+```sh
 keystore.createUser(
     {
         username:string,
@@ -41,7 +41,7 @@ keystore.createUser(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -55,7 +55,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -71,13 +71,13 @@ Delete a user.
 
 #### **Signature**
 
-```cpp
+```sh
 keystore.deleteUser({username: string, password:string}) -> {success: bool}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -91,7 +91,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -105,7 +105,7 @@ Export a user. The user can be imported to another node with [`keystore.importUs
 
 #### **Signature**
 
-```cpp
+```sh
 keystore.exportUser(
     {
         username:string,
@@ -122,7 +122,7 @@ keystore.exportUser(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -136,7 +136,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -153,7 +153,7 @@ Import a user. `password` must match the user’s password. `username` doesn’t
 
 #### **Signature**
 
-```cpp
+```sh
 keystore.importUser(
     {
         username:string,
@@ -168,7 +168,7 @@ keystore.importUser(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -183,7 +183,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -199,13 +199,13 @@ List the users in this keystore.
 
 #### **Signature**
 
-```cpp
+```sh
 keystore.ListUsers() -> {users:[]string}
 ```
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -215,7 +215,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

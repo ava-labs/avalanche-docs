@@ -50,7 +50,7 @@ Each blockchain has some genesis state when it’s created. Each VM defines the 
 
 Let's generate a simple genesis data for TimestampVM:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.encode",
@@ -61,7 +61,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -80,7 +80,7 @@ Now let’s create the new blockchain. To do so, we call [`platform.createBlockc
 
 Recall that we used `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` as our VM ID in [Create A Virtual Machine(VM)](create-a-virtual-machine-vm.md#vm-aliases).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -98,7 +98,7 @@ curl -X POST --data '{
 
 The response contains the transaction ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -115,7 +115,7 @@ After a few seconds, the transaction to create our blockchain should have been a
 
 To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -126,7 +126,7 @@ curl -X POST --data '{
 
 The response confirms that the blockchain was created:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -165,7 +165,7 @@ The response confirms that the blockchain was created:
 
 Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platformgetblockchainstatus) on that node:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -176,7 +176,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -200,7 +200,7 @@ You can also alias this chain ID with `timestampbc`, or whatever you like, for s
 
 In the genesis we specified `fP1vxkpyLWnH9dD6BQA` as the genesis data. Let’s verify that:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.getBlock",
@@ -209,7 +209,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/sw813hGSWH8pdU9uzaYy9fCtYFfY7AjDd2c9rm64SbApnvjmk
 ```
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -224,7 +224,7 @@ curl -X POST --data '{
 
 As you can see our first block has `timestamp: 0`. Also the parent ID (`11111111111111111111111111111111LpoYY`) is the P-chain's ID. Let's decode the genesis data with VM's static API method. Recall that our TimestampVM ID is aliased with `timestampvm`:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -235,7 +235,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/vm/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH
 ```
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -254,7 +254,7 @@ We can propose new blocks to our blockchain with some data in it.
 
 Let's get encoded data first. Blocks expect to have 32-length bytes. There is a `length` argument in encode method:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -268,7 +268,7 @@ curl -X POST --data '{
 
 Result:
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -281,7 +281,7 @@ Result:
 
 Now we can propose a new block with the data:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.proposeBlock",
@@ -294,7 +294,7 @@ curl -X POST --data '{
 
 Result:
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -306,7 +306,7 @@ Result:
 
 Let's check latest block to verify existence of our proposed block:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "timestampvm.getBlock",
@@ -317,7 +317,7 @@ curl -X POST --data '{
 
 Result:
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {

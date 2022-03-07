@@ -243,7 +243,7 @@ Done!
 
 File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/avalanchego-config-flags.md). Default configuration may look like this:
 
-```javascript
+```json
 {
   "dynamic-public-ip": "opendns",
   "http-host": ""

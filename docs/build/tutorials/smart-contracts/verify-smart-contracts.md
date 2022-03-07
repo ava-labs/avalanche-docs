@@ -38,7 +38,7 @@ The C-Chain Explorer can fetch constructor arguments automatically for simple sm
 
 The compile bytecode will identify if there are are external libraries. If you released with Remix, you will also see multiple transactions created.
 
-```javascript
+```json
 {
   "linkReferences": {
     "contracts/Storage.sol": {

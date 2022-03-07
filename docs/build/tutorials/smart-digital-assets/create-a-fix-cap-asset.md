@@ -16,7 +16,7 @@ Our asset will exist on the [X-Chain](../../../learn/platform-overview/README.md
 
 The signature for this method is:
 
-```cpp
+```
 avm.createFixedCapAsset({
     name: string,
     symbol: string,
@@ -53,7 +53,7 @@ avm.createFixedCapAsset({
 
 Now, on to creating the asset. You’ll want to replace `address` with an address you control so that you will control all of the newly minted assets and be able to send it later in this tutorial.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -78,7 +78,7 @@ curl -X POST --data '{
 
 The response contains the asset’s ID, which is also the ID of this transaction:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -97,7 +97,7 @@ All 10,000,000 units of the asset (shares) are controlled by the address we spec
 
 To verify this, we call [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avmgetbalance):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -111,7 +111,7 @@ curl -X POST --data '{
 
 The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -127,7 +127,7 @@ Now, let’s send 100 shares by calling [`avm.send`](../../avalanchego-apis/x-ch
 
 To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -146,7 +146,7 @@ curl -X POST --data '{
 
 The response from the above call should look like this:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -161,7 +161,7 @@ The response from the above call should look like this:
 
 After a second or two, the transaction should be finalized. We can check the status of the transaction with [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avmgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -174,7 +174,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -188,7 +188,7 @@ You might also see that `status` is `Pending` if the network has not yet finaliz
 
 Now let’s check the balance of the `to` address:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -202,7 +202,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

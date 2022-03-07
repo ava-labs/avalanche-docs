@@ -33,7 +33,7 @@ Creates a new authorization token that grants access to one or more API endpoint
 
 #### **Signature**
 
-```cpp
+```sh
 auth.newToken(
     {
         password: string,
@@ -48,7 +48,7 @@ auth.newToken(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.newToken",
@@ -64,7 +64,7 @@ This call will generate an authorization token that allows access to API endpoin
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -78,7 +78,7 @@ This authorization token should be included in API calls by giving header `Autho
 
 For example, to call [`info.peers`](info.md#infopeers) with this token:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -94,7 +94,7 @@ Revoke a previously generated token. The given token will no longer grant access
 
 #### **Signature**
 
-```cpp
+```sh
 auth.revokeToken(
     {
         password: string,
@@ -108,7 +108,7 @@ auth.revokeToken(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.revokeToken",
@@ -122,7 +122,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -138,7 +138,7 @@ Change this node’s authorization token password. Any authorization tokens crea
 
 #### **Signature**
 
-```cpp
+```sh
 auth.changePassword(
     {
         oldPassword: string,
@@ -152,7 +152,7 @@ auth.changePassword(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.changePassword",
@@ -166,7 +166,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {

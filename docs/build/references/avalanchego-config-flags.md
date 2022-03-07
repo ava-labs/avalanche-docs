@@ -15,7 +15,7 @@ Path to a JSON file that specifies this node's configuration. Command line argum
 
 Example JSON config file:
 
-```javascript
+```json
 {
     "log-level": "debug"
 }
@@ -1205,7 +1205,7 @@ The consensus parameters of a subnet default to the same values used for the Pri
 
 Path to JSON file that defines aliases for Virtual Machine IDs. Defaults to `~/.avalanchego/configs/vms/aliases.json`. This flag is ignored if `--vm-aliases-file-content` is specified. Example content:
 
-```javascript
+```json
 {
   "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
     "timestampvm",
