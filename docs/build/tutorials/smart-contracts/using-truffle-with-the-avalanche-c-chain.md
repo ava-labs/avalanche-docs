@@ -20,7 +20,6 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ```text
 cd /path/to/avalanche-network-runner
-# build Avash if you haven't done so
 # start a five node staking network
 ./go run examples/local/fivenodenetwork/main.go
 ```
@@ -55,7 +54,7 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 truffle init
 ```
 
-Development (local) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+The local development network pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
 
 ```text
 npm install @truffle/hdwallet-provider
@@ -252,7 +251,7 @@ If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Be
 
 ### Personal APIs
 
-Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
+Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. The Avalanche Network Runner currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
 
 ## Run Migrations
 
