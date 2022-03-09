@@ -214,7 +214,7 @@ curl -X POST --data '{
           "minBlockGasCost": 0,
           "maxBlockGasCost": 1000000,
           "blockGasCostStep": 200000
-        }
+        },
         "allowFeeRecipients": false,
       },
       "alloc": {
