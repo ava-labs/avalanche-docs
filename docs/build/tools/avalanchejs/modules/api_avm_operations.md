@@ -32,7 +32,7 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/apis/avm/ops.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L29)*
+*Defined in [src/apis/avm/ops.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L29)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **buffer**: *[SerializedType](src_utils.md#serializedtype)* = "Buffer"
 
-*Defined in [src/apis/avm/ops.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L32)*
+*Defined in [src/apis/avm/ops.ts:32](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L32)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **cb58**: *[SerializedType](src_utils.md#serializedtype)* = "cb58"
 
-*Defined in [src/apis/avm/ops.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L31)*
+*Defined in [src/apis/avm/ops.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L31)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **decimalString**: *[SerializedType](src_utils.md#serializedtype)* = "decimalString"
 
-*Defined in [src/apis/avm/ops.ts:34](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L34)*
+*Defined in [src/apis/avm/ops.ts:34](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L34)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **hex**: *[SerializedType](src_utils.md#serializedtype)* = "hex"
 
-*Defined in [src/apis/avm/ops.ts:33](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L33)*
+*Defined in [src/apis/avm/ops.ts:33](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L33)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/ops.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L30)*
+*Defined in [src/apis/avm/ops.ts:30](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L30)*
 
 ## Functions
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **SelectOperationClass**(`opid`: number, ...`args`: any[]): *[Operation](../classes/api_avm_operations.operation.md)*
 
-*Defined in [src/apis/avm/ops.ts:43](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/ops.ts#L43)*
+*Defined in [src/apis/avm/ops.ts:43](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/ops.ts#L43)*
 
 Takes a buffer representing the output and returns the proper [Operation](../classes/api_avm_operations.operation.md) instance.
 

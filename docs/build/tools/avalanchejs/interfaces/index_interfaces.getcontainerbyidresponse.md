@@ -26,7 +26,7 @@
 
 *Inherited from [BaseIndexResponse](index_interfaces.baseindexresponse.md).[bytes](index_interfaces.baseindexresponse.md#bytes)*
 
-*Defined in [src/apis/index/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L12)*
+*Defined in [src/apis/index/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L12)*
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 *Inherited from [BaseIndexResponse](index_interfaces.baseindexresponse.md).[encoding](index_interfaces.baseindexresponse.md#encoding)*
 
-*Defined in [src/apis/index/interfaces.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L14)*
+*Defined in [src/apis/index/interfaces.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L14)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 *Inherited from [BaseIndexResponse](index_interfaces.baseindexresponse.md).[id](index_interfaces.baseindexresponse.md#id)*
 
-*Defined in [src/apis/index/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L11)*
+*Defined in [src/apis/index/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L11)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 *Inherited from [BaseIndexResponse](index_interfaces.baseindexresponse.md).[index](index_interfaces.baseindexresponse.md#index)*
 
-*Defined in [src/apis/index/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L15)*
+*Defined in [src/apis/index/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L15)*
 
 ___
 
@@ -66,4 +66,4 @@ ___
 
 *Inherited from [BaseIndexResponse](index_interfaces.baseindexresponse.md).[timestamp](index_interfaces.baseindexresponse.md#timestamp)*
 
-*Defined in [src/apis/index/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L13)*
+*Defined in [src/apis/index/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L13)*

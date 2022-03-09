@@ -18,7 +18,7 @@ Class for representing a private and public keypair on the Platform Chain.
 
 ### Properties
 
-* [chainid](api_platformvm_keychain.keypair.md#protected-chainid)
+* [chainID](api_platformvm_keychain.keypair.md#protected-chainid)
 * [hrp](api_platformvm_keychain.keypair.md#protected-hrp)
 * [keypair](api_platformvm_keychain.keypair.md#protected-keypair)
 * [privk](api_platformvm_keychain.keypair.md#protected-privk)
@@ -26,7 +26,6 @@ Class for representing a private and public keypair on the Platform Chain.
 
 ### Methods
 
-* [addressFromPublicKey](api_platformvm_keychain.keypair.md#addressfrompublickey)
 * [clone](api_platformvm_keychain.keypair.md#clone)
 * [create](api_platformvm_keychain.keypair.md#create)
 * [generateKey](api_platformvm_keychain.keypair.md#generatekey)
@@ -44,33 +43,36 @@ Class for representing a private and public keypair on the Platform Chain.
 * [setHRP](api_platformvm_keychain.keypair.md#sethrp)
 * [sign](api_platformvm_keychain.keypair.md#sign)
 * [verify](api_platformvm_keychain.keypair.md#verify)
+* [addressFromPublicKey](api_platformvm_keychain.keypair.md#static-addressfrompublickey)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new KeyPair**(`hrp`: string, `chainid`: string): *[KeyPair](api_platformvm_keychain.keypair.md)*
+\+ **new KeyPair**(`hrp`: string, `chainID`: string): *[KeyPair](api_platformvm_keychain.keypair.md)*
 
-*Overrides [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[constructor](common_secp256k1keychain.secp256k1keypair.md#constructor)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[constructor](common_secp256k1keychain.secp256k1keypair.md#constructor)*
 
-*Defined in [src/apis/platformvm/keychain.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L77)*
+*Defined in [src/common/secp256k1.ts:253](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L253)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `hrp` | string |
-`chainid` | string |
+`chainID` | string |
 
 **Returns:** *[KeyPair](api_platformvm_keychain.keypair.md)*
 
 ## Properties
 
-### `Protected` chainid
+### `Protected` chainID
 
-• **chainid**: *string* = ""
+• **chainID**: *string* = ""
 
-*Defined in [src/apis/platformvm/keychain.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L20)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[chainID](common_secp256k1keychain.secp256k1keypair.md#protected-chainid)*
+
+*Defined in [src/common/secp256k1.ts:45](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L45)*
 
 ___
 
@@ -78,7 +80,9 @@ ___
 
 • **hrp**: *string* = ""
 
-*Defined in [src/apis/platformvm/keychain.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L21)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[hrp](common_secp256k1keychain.secp256k1keypair.md#protected-hrp)*
+
+*Defined in [src/common/secp256k1.ts:46](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L46)*
 
 ___
 
@@ -88,7 +92,7 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[keypair](common_secp256k1keychain.secp256k1keypair.md#protected-keypair)*
 
-*Defined in [src/common/secp256k1.ts:42](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L42)*
+*Defined in [src/common/secp256k1.ts:44](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L44)*
 
 ___
 
@@ -98,7 +102,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[privk](common_keychain.standardkeypair.md#protected-privk)*
 
-*Defined in [src/common/keychain.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/keychain.ts#L14)*
+*Defined in [src/common/keychain.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/keychain.ts#L14)*
 
 ___
 
@@ -108,31 +112,9 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[pubk](common_keychain.standardkeypair.md#protected-pubk)*
 
-*Defined in [src/common/keychain.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/keychain.ts#L13)*
+*Defined in [src/common/keychain.ts:13](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/keychain.ts#L13)*
 
 ## Methods
-
-###  addressFromPublicKey
-
-▸ **addressFromPublicKey**(`pubk`: Buffer): *Buffer*
-
-*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[addressFromPublicKey](common_secp256k1keychain.secp256k1keypair.md#addressfrompublickey)*
-
-*Defined in [src/common/secp256k1.ts:126](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L126)*
-
-Returns an address given a public key.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`pubk` | Buffer | A [Buffer](https://github.com/feross/buffer) representing the public key  |
-
-**Returns:** *Buffer*
-
-A [Buffer](https://github.com/feross/buffer) for the address of the public key.
-
-___
 
 ###  clone
 
@@ -140,7 +122,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[clone](common_keychain.standardkeypair.md#abstract-clone)*
 
-*Defined in [src/apis/platformvm/keychain.ts:66](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L66)*
+*Defined in [src/apis/platformvm/keychain.ts:20](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/keychain.ts#L20)*
 
 **Returns:** *this*
 
@@ -152,7 +134,7 @@ ___
 
 *Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[create](common_keychain.standardkeypair.md#abstract-create)*
 
-*Defined in [src/apis/platformvm/keychain.ts:72](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L72)*
+*Defined in [src/apis/platformvm/keychain.ts:26](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/keychain.ts#L26)*
 
 **Parameters:**
 
@@ -170,9 +152,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[generateKey](common_secp256k1keychain.secp256k1keypair.md#generatekey)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[generateKey](common_keychain.standardkeypair.md#generatekey)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[generateKey](common_keychain.standardkeypair.md#abstract-generatekey)*
 
-*Defined in [src/common/secp256k1.ts:64](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L64)*
+*Defined in [src/common/secp256k1.ts:68](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L68)*
 
 Generates a new keypair.
 
@@ -186,9 +168,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getAddress](common_secp256k1keychain.secp256k1keypair.md#getaddress)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getAddress](common_keychain.standardkeypair.md#getaddress)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getAddress](common_keychain.standardkeypair.md#abstract-getaddress)*
 
-*Defined in [src/common/secp256k1.ts:108](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L108)*
+*Defined in [src/common/secp256k1.ts:112](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L112)*
 
 Returns the address as a [Buffer](https://github.com/feross/buffer).
 
@@ -202,9 +184,11 @@ ___
 
 ▸ **getAddressString**(): *string*
 
-*Overrides [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getAddressString](common_secp256k1keychain.secp256k1keypair.md#getaddressstring)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getAddressString](common_secp256k1keychain.secp256k1keypair.md#getaddressstring)*
 
-*Defined in [src/apis/platformvm/keychain.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L28)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getAddressString](common_keychain.standardkeypair.md#abstract-getaddressstring)*
+
+*Defined in [src/common/secp256k1.ts:121](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L121)*
 
 Returns the address's string representation.
 
@@ -218,7 +202,9 @@ ___
 
 ▸ **getChainID**(): *string*
 
-*Defined in [src/apis/platformvm/keychain.ts:39](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L39)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getChainID](common_secp256k1keychain.secp256k1keypair.md#getchainid)*
+
+*Defined in [src/common/secp256k1.ts:224](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L224)*
 
 Returns the chainID associated with this key.
 
@@ -232,7 +218,9 @@ ___
 
 ▸ **getHRP**(): *string*
 
-*Defined in [src/apis/platformvm/keychain.ts:55](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L55)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getHRP](common_secp256k1keychain.secp256k1keypair.md#gethrp)*
+
+*Defined in [src/common/secp256k1.ts:242](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L242)*
 
 Returns the Human-Readable-Part of the network associated with this key.
 
@@ -248,7 +236,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[getPrivateKey](common_keychain.standardkeypair.md#getprivatekey)*
 
-*Defined in [src/common/keychain.ts:69](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/keychain.ts#L69)*
+*Defined in [src/common/keychain.ts:69](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/keychain.ts#L69)*
 
 Returns a reference to the private key.
 
@@ -264,9 +252,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getPrivateKeyString](common_secp256k1keychain.secp256k1keypair.md#getprivatekeystring)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPrivateKeyString](common_keychain.standardkeypair.md#getprivatekeystring)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPrivateKeyString](common_keychain.standardkeypair.md#abstract-getprivatekeystring)*
 
-*Defined in [src/common/secp256k1.ts:152](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L152)*
+*Defined in [src/common/secp256k1.ts:160](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L160)*
 
 Returns a string representation of the private key.
 
@@ -282,7 +270,7 @@ ___
 
 *Inherited from [StandardKeyPair](common_keychain.standardkeypair.md).[getPublicKey](common_keychain.standardkeypair.md#getpublickey)*
 
-*Defined in [src/common/keychain.ts:76](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/keychain.ts#L76)*
+*Defined in [src/common/keychain.ts:78](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/keychain.ts#L78)*
 
 Returns a reference to the public key.
 
@@ -298,9 +286,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[getPublicKeyString](common_secp256k1keychain.secp256k1keypair.md#getpublickeystring)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPublicKeyString](common_keychain.standardkeypair.md#getpublickeystring)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[getPublicKeyString](common_keychain.standardkeypair.md#abstract-getpublickeystring)*
 
-*Defined in [src/common/secp256k1.ts:161](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L161)*
+*Defined in [src/common/secp256k1.ts:169](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L169)*
 
 Returns the public key.
 
@@ -316,9 +304,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[importKey](common_secp256k1keychain.secp256k1keypair.md#importkey)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[importKey](common_keychain.standardkeypair.md#importkey)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[importKey](common_keychain.standardkeypair.md#abstract-importkey)*
 
-*Defined in [src/common/secp256k1.ts:85](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L85)*
+*Defined in [src/common/secp256k1.ts:89](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L89)*
 
 Imports a private key and generates the appropriate public key.
 
@@ -340,9 +328,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[recover](common_secp256k1keychain.secp256k1keypair.md#recover)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[recover](common_keychain.standardkeypair.md#recover)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[recover](common_keychain.standardkeypair.md#abstract-recover)*
 
-*Defined in [src/common/secp256k1.ts:205](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L205)*
+*Defined in [src/common/secp256k1.ts:213](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L213)*
 
 Recovers the public key of a message signer from a message and its associated signature.
 
@@ -361,9 +349,11 @@ ___
 
 ###  setChainID
 
-▸ **setChainID**(`chainid`: string): *void*
+▸ **setChainID**(`chainID`: string): *void*
 
-*Defined in [src/apis/platformvm/keychain.ts:46](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L46)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[setChainID](common_secp256k1keychain.secp256k1keypair.md#setchainid)*
+
+*Defined in [src/common/secp256k1.ts:233](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L233)*
 
 Sets the the chainID associated with this key.
 
@@ -371,7 +361,7 @@ Sets the the chainID associated with this key.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`chainid` | string | String for the chainID  |
+`chainID` | string | String for the chainID  |
 
 **Returns:** *void*
 
@@ -381,7 +371,9 @@ ___
 
 ▸ **setHRP**(`hrp`: string): *void*
 
-*Defined in [src/apis/platformvm/keychain.ts:62](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/keychain.ts#L62)*
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[setHRP](common_secp256k1keychain.secp256k1keypair.md#sethrp)*
+
+*Defined in [src/common/secp256k1.ts:251](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L251)*
 
 Sets the the Human-Readable-Part of the network associated with this key.
 
@@ -401,9 +393,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[sign](common_secp256k1keychain.secp256k1keypair.md#sign)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[sign](common_keychain.standardkeypair.md#sign)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[sign](common_keychain.standardkeypair.md#abstract-sign)*
 
-*Defined in [src/common/secp256k1.ts:172](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L172)*
+*Defined in [src/common/secp256k1.ts:180](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L180)*
 
 Takes a message, signs it, and returns the signature.
 
@@ -425,9 +417,9 @@ ___
 
 *Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[verify](common_secp256k1keychain.secp256k1keypair.md#verify)*
 
-*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[verify](common_keychain.standardkeypair.md#verify)*
+*Overrides [StandardKeyPair](common_keychain.standardkeypair.md).[verify](common_keychain.standardkeypair.md#abstract-verify)*
 
-*Defined in [src/common/secp256k1.ts:192](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/secp256k1.ts#L192)*
+*Defined in [src/common/secp256k1.ts:200](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L200)*
 
 Verifies that the private key associated with the provided public key produces the signature associated with the given message.
 
@@ -441,3 +433,25 @@ Name | Type | Description |
 **Returns:** *boolean*
 
 True on success, false on failure
+
+___
+
+### `Static` addressFromPublicKey
+
+▸ **addressFromPublicKey**(`pubk`: Buffer): *Buffer*
+
+*Inherited from [SECP256k1KeyPair](common_secp256k1keychain.secp256k1keypair.md).[addressFromPublicKey](common_secp256k1keychain.secp256k1keypair.md#static-addressfrompublickey)*
+
+*Defined in [src/common/secp256k1.ts:134](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/secp256k1.ts#L134)*
+
+Returns an address given a public key.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`pubk` | Buffer | A [Buffer](https://github.com/feross/buffer) representing the public key  |
+
+**Returns:** *Buffer*
+
+A [Buffer](https://github.com/feross/buffer) for the address of the public key.

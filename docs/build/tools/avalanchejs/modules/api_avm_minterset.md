@@ -22,7 +22,7 @@
 
 • **buffer**: *[SerializedType](src_utils.md#serializedtype)* = "Buffer"
 
-*Defined in [src/apis/avm/minterset.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/minterset.ts#L23)*
+*Defined in [src/apis/avm/minterset.ts:23](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/minterset.ts#L23)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **cb58**: *[SerializedType](src_utils.md#serializedtype)* = "cb58"
 
-*Defined in [src/apis/avm/minterset.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/minterset.ts#L21)*
+*Defined in [src/apis/avm/minterset.ts:21](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/minterset.ts#L21)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **decimalString**: *[SerializedType](src_utils.md#serializedtype)* = "decimalString"
 
-*Defined in [src/apis/avm/minterset.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/minterset.ts#L20)*
+*Defined in [src/apis/avm/minterset.ts:20](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/minterset.ts#L20)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **num**: *[SerializedType](src_utils.md#serializedtype)* = "number"
 
-*Defined in [src/apis/avm/minterset.ts:22](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/minterset.ts#L22)*
+*Defined in [src/apis/avm/minterset.ts:22](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/minterset.ts#L22)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/avm/minterset.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/minterset.ts#L19)*
+*Defined in [src/apis/avm/minterset.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/minterset.ts#L19)*

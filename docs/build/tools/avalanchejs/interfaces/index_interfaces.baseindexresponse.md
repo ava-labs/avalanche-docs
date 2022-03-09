@@ -30,7 +30,7 @@
 
 • **bytes**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L12)*
+*Defined in [src/apis/index/interfaces.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L12)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **encoding**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L14)*
+*Defined in [src/apis/index/interfaces.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L14)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L11)*
+*Defined in [src/apis/index/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L11)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **index**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L15)*
+*Defined in [src/apis/index/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L15)*
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 • **timestamp**: *string*
 
-*Defined in [src/apis/index/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/index/interfaces.ts#L13)*
+*Defined in [src/apis/index/interfaces.ts:13](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/index/interfaces.ts#L13)*

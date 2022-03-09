@@ -16,7 +16,6 @@
 * [info](avalanche.md#info)
 * [keystore](avalanche.md#keystore)
 * [metrics](avalanche.md#metrics)
-* [platformvm](avalanche.md#platformvm)
 
 ### Classes
 
@@ -81,9 +80,3 @@ ___
 ###  metrics
 
 • **metrics**:
-
-___
-
-###  platformvm
-
-• **platformvm**:

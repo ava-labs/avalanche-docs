@@ -18,4 +18,4 @@
 
 • **address**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:68](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L68)*
+*Defined in [src/apis/avm/interfaces.ts:79](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L79)*

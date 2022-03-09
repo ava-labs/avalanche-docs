@@ -49,7 +49,7 @@ Class for interacting with a node API that is using the node's KeystoreAPI.
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/keystore/api.ts:125](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L125)*
+*Defined in [src/apis/keystore/api.ts:125](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L125)*
 
 This class should not be instantiated directly. Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
 
@@ -70,7 +70,7 @@ Name | Type | Default | Description |
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseURL](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L29)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L28)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L28)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L30)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L30)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L11)*
+*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L11)*
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcID](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L12)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L12)*
 
 ## Methods
 
@@ -120,7 +120,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L14)*
+*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L14)*
 
 **Parameters:**
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **createUser**(`username`: string, `password`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/keystore/api.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L29)*
+*Defined in [src/apis/keystore/api.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L29)*
 
 Creates a user in the node's database.
 
@@ -160,7 +160,7 @@ ___
 
 ▸ **deleteUser**(`username`: string, `password`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/keystore/api.ts:113](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L113)*
+*Defined in [src/apis/keystore/api.ts:113](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L113)*
 
 Deletes a user in the node's database.
 
@@ -181,7 +181,7 @@ ___
 
 ▸ **exportUser**(`username`: string, `password`: string): *Promise‹string›*
 
-*Defined in [src/apis/keystore/api.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L51)*
+*Defined in [src/apis/keystore/api.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L51)*
 
 Exports a user. The user can be imported to another node with keystore.importUser .
 
@@ -204,7 +204,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L53)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L53)*
 
 Returns the baseURL's path.
 
@@ -218,7 +218,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L58)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L58)*
 
 Returns the baseURL's database.
 
@@ -232,7 +232,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L78)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -245,7 +245,7 @@ ___
 
 ▸ **importUser**(`username`: string, `user`: string, `password`: string): *Promise‹boolean›*
 
-*Defined in [src/apis/keystore/api.ts:74](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L74)*
+*Defined in [src/apis/keystore/api.ts:74](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L74)*
 
 Imports a user file into the node's user database and assigns it to a username.
 
@@ -267,7 +267,7 @@ ___
 
 ▸ **listUsers**(): *Promise‹string[]›*
 
-*Defined in [src/apis/keystore/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/keystore/api.ts#L98)*
+*Defined in [src/apis/keystore/api.ts:98](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/keystore/api.ts#L98)*
 
 Lists the names of all users on the node.
 
@@ -283,7 +283,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L37)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseURL.
 

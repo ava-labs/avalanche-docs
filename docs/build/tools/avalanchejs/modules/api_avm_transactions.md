@@ -19,7 +19,7 @@
 
 ▸ **SelectTxClass**(`txtype`: number, ...`args`: any[]): *[BaseTx](../classes/api_avm_basetx.basetx.md)*
 
-*Defined in [src/apis/avm/tx.ts:33](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/tx.ts#L33)*
+*Defined in [src/apis/avm/tx.ts:33](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/tx.ts#L33)*
 
 Takes a buffer representing the output and returns the proper [BaseTx](../classes/api_avm_basetx.basetx.md) instance.
 

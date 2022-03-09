@@ -44,7 +44,7 @@
 
 \+ **new StandardParseableInput**(`input`: [Input](common_inputs.input.md)): *[StandardParseableInput](common_inputs.standardparseableinput.md)*
 
-*Defined in [src/common/input.ts:172](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L172)*
+*Defined in [src/common/input.ts:172](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L172)*
 
 Class representing an [StandardParseableInput](common_inputs.standardparseableinput.md) for a transaction.
 
@@ -64,7 +64,7 @@ Name | Type | Default | Description |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/common/input.ts:135](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L135)*
+*Defined in [src/common/input.ts:135](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L135)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/common/input.ts:134](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L134)*
+*Defined in [src/common/input.ts:134](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L134)*
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • **input**: *[Input](common_inputs.input.md)*
 
-*Defined in [src/common/input.ts:145](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L145)*
+*Defined in [src/common/input.ts:145](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L145)*
 
 ## Methods
 
@@ -102,7 +102,7 @@ ___
 
 *Inherited from [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
 
-*Defined in [src/utils/serialization.ts:97](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L97)*
+*Defined in [src/utils/serialization.ts:97](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L97)*
 
 **Parameters:**
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset?`: number): *number*
 
-*Defined in [src/common/input.ts:164](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L164)*
+*Defined in [src/common/input.ts:164](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L164)*
 
 **Parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -150,7 +150,7 @@ ___
 
 ▸ **getInput**(): *[Input](common_inputs.input.md)*
 
-*Defined in [src/common/input.ts:161](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L161)*
+*Defined in [src/common/input.ts:161](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L161)*
 
 **Returns:** *[Input](common_inputs.input.md)*
 
@@ -162,7 +162,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -176,7 +176,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -190,7 +190,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -210,7 +210,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/input.ts:137](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L137)*
+*Defined in [src/common/input.ts:137](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L137)*
 
 **Parameters:**
 
@@ -226,7 +226,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/common/input.ts:166](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L166)*
+*Defined in [src/common/input.ts:166](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L166)*
 
 **Returns:** *Buffer*
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **comparator**(): *function*
 
-*Defined in [src/common/input.ts:150](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/input.ts#L150)*
+*Defined in [src/common/input.ts:150](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/input.ts#L150)*
 
 Returns a function used to sort an array of [StandardParseableInput](common_inputs.standardparseableinput.md)s
 

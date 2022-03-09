@@ -19,7 +19,7 @@
 
 ▸ **SelectTxClass**(`txTypeID`: number, ...`args`: any[]): *[EVMBaseTx](../classes/api_evm_basetx.evmbasetx.md)*
 
-*Defined in [src/apis/evm/tx.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/tx.ts#L32)*
+*Defined in [src/apis/evm/tx.ts:32](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/tx.ts#L32)*
 
 Takes a buffer representing the output and returns the proper [EVMBaseTx](../classes/api_evm_basetx.evmbasetx.md) instance.
 

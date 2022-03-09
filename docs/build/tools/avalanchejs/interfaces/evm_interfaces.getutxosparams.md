@@ -21,7 +21,7 @@
 
 • **addresses**: *string[] | string*
 
-*Defined in [src/apis/evm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/interfaces.ts#L31)*
+*Defined in [src/apis/evm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L31)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **limit**: *number*
 
-*Defined in [src/apis/evm/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/interfaces.ts#L32)*
+*Defined in [src/apis/evm/interfaces.ts:32](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L32)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **sourceChain**? : *string*
 
-*Defined in [src/apis/evm/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/interfaces.ts#L33)*
+*Defined in [src/apis/evm/interfaces.ts:33](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L33)*
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 • **startIndex**? : *[Index](common_interfaces.index.md)*
 
-*Defined in [src/apis/evm/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/interfaces.ts#L34)*
+*Defined in [src/apis/evm/interfaces.ts:34](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L34)*
