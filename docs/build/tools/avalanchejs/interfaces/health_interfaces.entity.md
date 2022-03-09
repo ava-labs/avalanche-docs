@@ -22,7 +22,7 @@
 
 • **contiguousFailures**: *number*
 
-*Defined in [src/apis/health/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L10)*
+*Defined in [src/apis/health/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L10)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **duration**: *number*
 
-*Defined in [src/apis/health/interfaces.ts:9](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L9)*
+*Defined in [src/apis/health/interfaces.ts:9](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L9)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **message**? : *Object[]*
 
-*Defined in [src/apis/health/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L7)*
+*Defined in [src/apis/health/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L7)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **timeOfFirstFailure**: *string*
 
-*Defined in [src/apis/health/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L11)*
+*Defined in [src/apis/health/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L11)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **timestamp**: *string*
 
-*Defined in [src/apis/health/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L8)*
+*Defined in [src/apis/health/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L8)*

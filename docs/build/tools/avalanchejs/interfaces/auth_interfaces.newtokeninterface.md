@@ -19,7 +19,7 @@
 
 • **endpoints**: *string[]*
 
-*Defined in [src/apis/auth/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/auth/interfaces.ts#L8)*
+*Defined in [src/apis/auth/interfaces.ts:8](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/auth/interfaces.ts#L8)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/apis/auth/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/auth/interfaces.ts#L7)*
+*Defined in [src/apis/auth/interfaces.ts:7](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/auth/interfaces.ts#L7)*

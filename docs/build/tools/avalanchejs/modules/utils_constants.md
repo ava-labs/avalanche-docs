@@ -8,6 +8,14 @@
 
 * [Defaults](../classes/utils_constants.defaults.md)
 
+### Interfaces
+
+* [C](../interfaces/utils_constants.c.md)
+* [Network](../interfaces/utils_constants.network.md)
+* [Networks](../interfaces/utils_constants.networks.md)
+* [P](../interfaces/utils_constants.p.md)
+* [X](../interfaces/utils_constants.x.md)
+
 ### Type aliases
 
 * [MergeRule](utils_constants.md#mergerule)
@@ -59,6 +67,9 @@
 * [n12345C](utils_constants.md#const-n12345c)
 * [n12345P](utils_constants.md#const-n12345p)
 * [n12345X](utils_constants.md#const-n12345x)
+* [n1337C](utils_constants.md#const-n1337c)
+* [n1337P](utils_constants.md#const-n1337p)
+* [n1337X](utils_constants.md#const-n1337x)
 * [n1C](utils_constants.md#const-n1c)
 * [n1P](utils_constants.md#const-n1p)
 * [n1X](utils_constants.md#const-n1x)
@@ -81,7 +92,7 @@
 
 Ƭ **MergeRule**: *"intersection" | "differenceSelf" | "differenceNew" | "symDifference" | "union" | "unionMinusNew" | "unionMinusSelf" | "ERROR"*
 
-*Defined in [src/utils/constants.ts:432](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L432)*
+*Defined in [src/utils/constants.ts:520](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L520)*
 
 Rules used when merging sets
 
@@ -91,7 +102,7 @@ Rules used when merging sets
 
 • **AVAXGWEI**: *BN* = NANOAVAX.clone()
 
-*Defined in [src/utils/constants.ts:99](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L99)*
+*Defined in [src/utils/constants.ts:159](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L159)*
 
 ___
 
@@ -99,7 +110,7 @@ ___
 
 • **AVAXSTAKECAP**: *BN* = ONEAVAX.mul(new BN(3000000))
 
-*Defined in [src/utils/constants.ts:101](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L101)*
+*Defined in [src/utils/constants.ts:161](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L161)*
 
 ___
 
@@ -107,7 +118,7 @@ ___
 
 • **CChainAlias**: *string* = "C"
 
-*Defined in [src/utils/constants.ts:66](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L66)*
+*Defined in [src/utils/constants.ts:126](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L126)*
 
 ___
 
@@ -115,7 +126,7 @@ ___
 
 • **CChainVMName**: *string* = "evm"
 
-*Defined in [src/utils/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L69)*
+*Defined in [src/utils/constants.ts:129](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L129)*
 
 ___
 
@@ -123,7 +134,7 @@ ___
 
 • **CENTIAVAX**: *BN* = ONEAVAX.div(new BN(100))
 
-*Defined in [src/utils/constants.ts:87](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L87)*
+*Defined in [src/utils/constants.ts:147](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L147)*
 
 ___
 
@@ -131,7 +142,7 @@ ___
 
 • **DECIAVAX**: *BN* = ONEAVAX.div(new BN(10))
 
-*Defined in [src/utils/constants.ts:85](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L85)*
+*Defined in [src/utils/constants.ts:145](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L145)*
 
 ___
 
@@ -139,7 +150,7 @@ ___
 
 • **DefaultEVMLocalGenesisAddress**: *string* = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
 
-*Defined in [src/utils/constants.ts:78](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L78)*
+*Defined in [src/utils/constants.ts:138](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L138)*
 
 ___
 
@@ -147,7 +158,7 @@ ___
 
 • **DefaultEVMLocalGenesisPrivateKey**: *string* = "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"
 
-*Defined in [src/utils/constants.ts:76](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L76)*
+*Defined in [src/utils/constants.ts:136](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L136)*
 
 ___
 
@@ -155,7 +166,7 @@ ___
 
 • **DefaultLocalGenesisPrivateKey**: *string* = "ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
 
-*Defined in [src/utils/constants.ts:74](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L74)*
+*Defined in [src/utils/constants.ts:134](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L134)*
 
 ___
 
@@ -163,7 +174,7 @@ ___
 
 • **DefaultNetworkID**: *number* = 1
 
-*Defined in [src/utils/constants.ts:61](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L61)*
+*Defined in [src/utils/constants.ts:121](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L121)*
 
 ___
 
@@ -171,7 +182,7 @@ ___
 
 • **FallbackEVMChainID**: *number* = 43112
 
-*Defined in [src/utils/constants.ts:59](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L59)*
+*Defined in [src/utils/constants.ts:119](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L119)*
 
 ___
 
@@ -179,7 +190,7 @@ ___
 
 • **FallbackHRP**: *string* = "custom"
 
-*Defined in [src/utils/constants.ts:57](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L57)*
+*Defined in [src/utils/constants.ts:117](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L117)*
 
 ___
 
@@ -187,7 +198,7 @@ ___
 
 • **FallbackNetworkName**: *string* = "Custom Network"
 
-*Defined in [src/utils/constants.ts:58](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L58)*
+*Defined in [src/utils/constants.ts:118](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L118)*
 
 ___
 
@@ -195,7 +206,7 @@ ___
 
 • **FujiAPI**: *string* = "api.avax-test.network"
 
-*Defined in [src/utils/constants.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L13)*
+*Defined in [src/utils/constants.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L12)*
 
 ___
 
@@ -203,7 +214,7 @@ ___
 
 • **GWEI**: *BN* = WEI.mul(new BN(1000000000))
 
-*Defined in [src/utils/constants.ts:97](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L97)*
+*Defined in [src/utils/constants.ts:157](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L157)*
 
 ___
 
@@ -211,7 +222,7 @@ ___
 
 • **MICROAVAX**: *BN* = ONEAVAX.div(new BN(1000000))
 
-*Defined in [src/utils/constants.ts:91](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L91)*
+*Defined in [src/utils/constants.ts:151](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L151)*
 
 ___
 
@@ -219,7 +230,7 @@ ___
 
 • **MILLIAVAX**: *BN* = ONEAVAX.div(new BN(1000))
 
-*Defined in [src/utils/constants.ts:89](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L89)*
+*Defined in [src/utils/constants.ts:149](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L149)*
 
 ___
 
@@ -227,7 +238,7 @@ ___
 
 • **MainnetAPI**: *string* = "api.avax.network"
 
-*Defined in [src/utils/constants.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L12)*
+*Defined in [src/utils/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L11)*
 
 ___
 
@@ -235,7 +246,7 @@ ___
 
 • **NANOAVAX**: *BN* = ONEAVAX.div(new BN(1000000000))
 
-*Defined in [src/utils/constants.ts:93](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L93)*
+*Defined in [src/utils/constants.ts:153](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L153)*
 
 ___
 
@@ -243,7 +254,7 @@ ___
 
 • **NodeIDPrefix**: *string* = "NodeID-"
 
-*Defined in [src/utils/constants.ts:10](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L10)*
+*Defined in [src/utils/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L9)*
 
 ___
 
@@ -251,7 +262,7 @@ ___
 
 • **ONEAVAX**: *BN* = new BN(1000000000)
 
-*Defined in [src/utils/constants.ts:83](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L83)*
+*Defined in [src/utils/constants.ts:143](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L143)*
 
 ___
 
@@ -259,7 +270,7 @@ ___
 
 • **PChainAlias**: *string* = "P"
 
-*Defined in [src/utils/constants.ts:67](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L67)*
+*Defined in [src/utils/constants.ts:127](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L127)*
 
 ___
 
@@ -267,7 +278,7 @@ ___
 
 • **PChainVMName**: *string* = "platformvm"
 
-*Defined in [src/utils/constants.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L70)*
+*Defined in [src/utils/constants.ts:130](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L130)*
 
 ___
 
@@ -275,7 +286,7 @@ ___
 
 • **PlatformChainID**: *string* = "11111111111111111111111111111111LpoYY"
 
-*Defined in [src/utils/constants.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L63)*
+*Defined in [src/utils/constants.ts:123](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L123)*
 
 ___
 
@@ -283,7 +294,7 @@ ___
 
 • **PrimaryAssetAlias**: *string* = "AVAX"
 
-*Defined in [src/utils/constants.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L11)*
+*Defined in [src/utils/constants.ts:10](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L10)*
 
 ___
 
@@ -291,7 +302,7 @@ ___
 
 • **PrimaryNetworkID**: *string* = "11111111111111111111111111111111LpoYY"
 
-*Defined in [src/utils/constants.ts:64](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L64)*
+*Defined in [src/utils/constants.ts:124](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L124)*
 
 ___
 
@@ -299,7 +310,7 @@ ___
 
 • **PrivateKeyPrefix**: *string* = "PrivateKey-"
 
-*Defined in [src/utils/constants.ts:9](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L9)*
+*Defined in [src/utils/constants.ts:8](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L8)*
 
 ___
 
@@ -307,7 +318,7 @@ ___
 
 • **WEI**: *BN* = new BN(1)
 
-*Defined in [src/utils/constants.ts:95](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L95)*
+*Defined in [src/utils/constants.ts:155](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L155)*
 
 ___
 
@@ -315,7 +326,7 @@ ___
 
 • **XChainAlias**: *string* = "X"
 
-*Defined in [src/utils/constants.ts:65](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L65)*
+*Defined in [src/utils/constants.ts:125](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L125)*
 
 ___
 
@@ -323,7 +334,7 @@ ___
 
 • **XChainVMName**: *string* = "avm"
 
-*Defined in [src/utils/constants.ts:68](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L68)*
+*Defined in [src/utils/constants.ts:128](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L128)*
 
 ___
 
@@ -331,7 +342,7 @@ ___
 
 • **avaxAssetID**: *string* = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
 
-*Defined in [src/utils/constants.ts:142](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L142)*
+*Defined in [src/utils/constants.ts:203](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L203)*
 
 ___
 
@@ -339,7 +350,7 @@ ___
 
 • **mnemonic**: *string* = "output tooth keep tooth bracket fox city sustain blood raise install pond stem reject long scene clap gloom purpose mean music piece unknown light"
 
-*Defined in [src/utils/constants.ts:80](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L80)*
+*Defined in [src/utils/constants.ts:140](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L140)*
 
 ## Object literals
 
@@ -347,49 +358,55 @@ ___
 
 ### ▪ **HRPToNetworkID**: *object*
 
-*Defined in [src/utils/constants.ts:25](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L25)*
+*Defined in [src/utils/constants.ts:80](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L80)*
 
 ###  avax
 
 • **avax**: *number* = 1
 
-*Defined in [src/utils/constants.ts:27](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L27)*
+*Defined in [src/utils/constants.ts:82](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L82)*
 
 ###  cascade
 
 • **cascade**: *number* = 2
 
-*Defined in [src/utils/constants.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L28)*
+*Defined in [src/utils/constants.ts:83](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L83)*
 
 ###  custom
 
-• **custom**: *number* = 0
+• **custom**: *number* = 1337
 
-*Defined in [src/utils/constants.ts:26](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L26)*
+*Defined in [src/utils/constants.ts:87](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L87)*
 
 ###  denali
 
 • **denali**: *number* = 3
 
-*Defined in [src/utils/constants.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L29)*
+*Defined in [src/utils/constants.ts:84](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L84)*
 
 ###  everest
 
 • **everest**: *number* = 4
 
-*Defined in [src/utils/constants.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L30)*
+*Defined in [src/utils/constants.ts:85](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L85)*
 
 ###  fuji
 
 • **fuji**: *number* = 5
 
-*Defined in [src/utils/constants.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L31)*
+*Defined in [src/utils/constants.ts:86](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L86)*
 
 ###  local
 
 • **local**: *number* = 12345
 
-*Defined in [src/utils/constants.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L32)*
+*Defined in [src/utils/constants.ts:88](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L88)*
+
+###  manhattan
+
+• **manhattan**: *number* = 0
+
+*Defined in [src/utils/constants.ts:81](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L81)*
 
 ___
 
@@ -397,49 +414,55 @@ ___
 
 ### ▪ **NetworkIDToHRP**: *object*
 
-*Defined in [src/utils/constants.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L15)*
+*Defined in [src/utils/constants.ts:69](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L69)*
 
 ###  0
 
 • **0**: *string* = "custom"
 
-*Defined in [src/utils/constants.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L16)*
+*Defined in [src/utils/constants.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L70)*
 
 ###  1
 
 • **1**: *string* = "avax"
 
-*Defined in [src/utils/constants.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L17)*
+*Defined in [src/utils/constants.ts:71](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L71)*
 
 ###  12345
 
 • **12345**: *string* = "local"
 
-*Defined in [src/utils/constants.ts:22](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L22)*
+*Defined in [src/utils/constants.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L77)*
+
+###  1337
+
+• **1337**: *string* = "custom"
+
+*Defined in [src/utils/constants.ts:76](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L76)*
 
 ###  2
 
 • **2**: *string* = "cascade"
 
-*Defined in [src/utils/constants.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L18)*
+*Defined in [src/utils/constants.ts:72](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L72)*
 
 ###  3
 
 • **3**: *string* = "denali"
 
-*Defined in [src/utils/constants.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L19)*
+*Defined in [src/utils/constants.ts:73](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L73)*
 
 ###  4
 
 • **4**: *string* = "everest"
 
-*Defined in [src/utils/constants.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L20)*
+*Defined in [src/utils/constants.ts:74](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L74)*
 
 ###  5
 
 • **5**: *string* = "fuji"
 
-*Defined in [src/utils/constants.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L21)*
+*Defined in [src/utils/constants.ts:75](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L75)*
 
 ___
 
@@ -447,49 +470,55 @@ ___
 
 ### ▪ **NetworkIDToNetworkNames**: *object*
 
-*Defined in [src/utils/constants.ts:35](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L35)*
+*Defined in [src/utils/constants.ts:91](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L91)*
 
 ###  0
 
 • **0**: *string[]* = ["Manhattan"]
 
-*Defined in [src/utils/constants.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L36)*
+*Defined in [src/utils/constants.ts:92](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L92)*
 
 ###  1
 
 • **1**: *string[]* = ["Avalanche", "Mainnet"]
 
-*Defined in [src/utils/constants.ts:37](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L37)*
+*Defined in [src/utils/constants.ts:93](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L93)*
 
 ###  12345
 
 • **12345**: *string[]* = ["Local Network"]
 
-*Defined in [src/utils/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L42)*
+*Defined in [src/utils/constants.ts:99](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L99)*
+
+###  1337
+
+• **1337**: *string[]* = ["Custom Network"]
+
+*Defined in [src/utils/constants.ts:98](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L98)*
 
 ###  2
 
 • **2**: *string[]* = ["Cascade"]
 
-*Defined in [src/utils/constants.ts:38](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L38)*
+*Defined in [src/utils/constants.ts:94](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L94)*
 
 ###  3
 
 • **3**: *string[]* = ["Denali"]
 
-*Defined in [src/utils/constants.ts:39](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L39)*
+*Defined in [src/utils/constants.ts:95](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L95)*
 
 ###  4
 
 • **4**: *string[]* = ["Everest"]
 
-*Defined in [src/utils/constants.ts:40](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L40)*
+*Defined in [src/utils/constants.ts:96](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L96)*
 
 ###  5
 
 • **5**: *string[]* = ["Fuji", "Testnet"]
 
-*Defined in [src/utils/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L41)*
+*Defined in [src/utils/constants.ts:97](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L97)*
 
 ___
 
@@ -497,61 +526,79 @@ ___
 
 ### ▪ **NetworkNameToNetworkID**: *object*
 
-*Defined in [src/utils/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L45)*
+*Defined in [src/utils/constants.ts:102](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L102)*
 
 ###  Avalanche
 
 • **Avalanche**: *number* = 1
 
-*Defined in [src/utils/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L47)*
+*Defined in [src/utils/constants.ts:104](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L104)*
 
 ###  Cascade
 
 • **Cascade**: *number* = 2
 
-*Defined in [src/utils/constants.ts:49](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L49)*
+*Defined in [src/utils/constants.ts:106](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L106)*
+
+###  Custom
+
+• **Custom**: *number* = 1337
+
+*Defined in [src/utils/constants.ts:111](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L111)*
+
+###  Custom Network
+
+• **Custom Network**: *number* = 1337
+
+*Defined in [src/utils/constants.ts:112](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L112)*
 
 ###  Denali
 
 • **Denali**: *number* = 3
 
-*Defined in [src/utils/constants.ts:50](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L50)*
+*Defined in [src/utils/constants.ts:107](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L107)*
 
 ###  Everest
 
 • **Everest**: *number* = 4
 
-*Defined in [src/utils/constants.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L51)*
+*Defined in [src/utils/constants.ts:108](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L108)*
 
 ###  Fuji
 
 • **Fuji**: *number* = 5
 
-*Defined in [src/utils/constants.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L52)*
+*Defined in [src/utils/constants.ts:109](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L109)*
+
+###  Local
+
+• **Local**: *number* = 12345
+
+*Defined in [src/utils/constants.ts:113](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L113)*
 
 ###  Local Network
 
 • **Local Network**: *number* = 12345
 
-*Defined in [src/utils/constants.ts:54](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L54)*
+*Defined in [src/utils/constants.ts:114](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L114)*
 
 ###  Mainnet
 
 • **Mainnet**: *number* = 1
 
-*Defined in [src/utils/constants.ts:48](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L48)*
+*Defined in [src/utils/constants.ts:105](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L105)*
 
 ###  Manhattan
 
 • **Manhattan**: *number* = 0
 
-*Defined in [src/utils/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L46)*
+*Defined in [src/utils/constants.ts:103](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L103)*
 
 ###  Testnet
 
 • **Testnet**: *number* = 5
 
-*Defined in [src/utils/constants.ts:53](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L53)*
+*Defined in [src/utils/constants.ts:110](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L110)*
 
 ___
 
@@ -559,43 +606,43 @@ ___
 
 ### ▪ **n0C**: *object*
 
-*Defined in [src/utils/constants.ts:131](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L131)*
+*Defined in [src/utils/constants.ts:192](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L192)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:133](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L133)*
+*Defined in [src/utils/constants.ts:194](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L194)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2fFZQibQXcd6LTE4rpBPBAkLVXFE91Kit8pgxaBG1mRnh5xqbb"
 
-*Defined in [src/utils/constants.ts:132](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L132)*
+*Defined in [src/utils/constants.ts:193](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L193)*
 
 ###  chainID
 
 • **chainID**: *number* = 43111
 
-*Defined in [src/utils/constants.ts:137](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L137)*
+*Defined in [src/utils/constants.ts:198](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L198)*
 
 ###  fee
 
 • **fee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:135](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L135)*
+*Defined in [src/utils/constants.ts:196](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L196)*
 
 ###  gasPrice
 
 • **gasPrice**: *BN‹›* = GWEI.mul(new BN(470))
 
-*Defined in [src/utils/constants.ts:136](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L136)*
+*Defined in [src/utils/constants.ts:197](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L197)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:134](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L134)*
+*Defined in [src/utils/constants.ts:195](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L195)*
 
 ___
 
@@ -603,103 +650,103 @@ ___
 
 ### ▪ **n0P**: *object*
 
-*Defined in [src/utils/constants.ts:112](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L112)*
+*Defined in [src/utils/constants.ts:173](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L173)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:114](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L114)*
+*Defined in [src/utils/constants.ts:175](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L175)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/utils/constants.ts:113](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L113)*
+*Defined in [src/utils/constants.ts:174](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L174)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:119](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L119)*
+*Defined in [src/utils/constants.ts:180](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L180)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:118](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L118)*
+*Defined in [src/utils/constants.ts:179](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L179)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:117](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L117)*
+*Defined in [src/utils/constants.ts:178](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L178)*
 
 ###  fee
 
 • **fee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:116](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L116)*
+*Defined in [src/utils/constants.ts:177](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L177)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:121](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L121)*
+*Defined in [src/utils/constants.ts:182](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L182)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:126](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L126)*
+*Defined in [src/utils/constants.ts:187](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L187)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:122](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L122)*
+*Defined in [src/utils/constants.ts:183](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L183)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:123](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L123)*
+*Defined in [src/utils/constants.ts:184](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L184)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:120](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L120)*
+*Defined in [src/utils/constants.ts:181](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L181)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:128](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L128)*
+*Defined in [src/utils/constants.ts:189](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L189)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:127](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L127)*
+*Defined in [src/utils/constants.ts:188](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L188)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX.mul(new BN(2000))
 
-*Defined in [src/utils/constants.ts:124](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L124)*
+*Defined in [src/utils/constants.ts:185](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L185)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 2 * 7 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:125](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L125)*
+*Defined in [src/utils/constants.ts:186](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L186)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:115](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L115)*
+*Defined in [src/utils/constants.ts:176](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L176)*
 
 ___
 
@@ -707,37 +754,43 @@ ___
 
 ### ▪ **n0X**: *object*
 
-*Defined in [src/utils/constants.ts:104](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L104)*
+*Defined in [src/utils/constants.ts:164](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L164)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:106](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L106)*
+*Defined in [src/utils/constants.ts:166](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L166)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2vrXWHgGxh5n3YsLHMV16YVVJTpT4z45Fmb4y3bL6si8kLCyg9"
 
-*Defined in [src/utils/constants.ts:105](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L105)*
+*Defined in [src/utils/constants.ts:165](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L165)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:109](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L109)*
+*Defined in [src/utils/constants.ts:169](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L169)*
 
 ###  fee
 
 • **fee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:108](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L108)*
+*Defined in [src/utils/constants.ts:168](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L168)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = MILLIAVAX
+
+*Defined in [src/utils/constants.ts:170](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L170)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:107](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L107)*
+*Defined in [src/utils/constants.ts:167](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L167)*
 
 ___
 
@@ -745,7 +798,7 @@ ___
 
 ### ▪ **n12345C**: *object*
 
-*Defined in [src/utils/constants.ts:355](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L355)*
+*Defined in [src/utils/constants.ts:434](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L434)*
 
 ___
 
@@ -753,7 +806,7 @@ ___
 
 ### ▪ **n12345P**: *object*
 
-*Defined in [src/utils/constants.ts:353](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L353)*
+*Defined in [src/utils/constants.ts:432](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L432)*
 
 ___
 
@@ -761,7 +814,31 @@ ___
 
 ### ▪ **n12345X**: *object*
 
-*Defined in [src/utils/constants.ts:350](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L350)*
+*Defined in [src/utils/constants.ts:429](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L429)*
+
+___
+
+### `Const` n1337C
+
+### ▪ **n1337C**: *object*
+
+*Defined in [src/utils/constants.ts:421](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L421)*
+
+___
+
+### `Const` n1337P
+
+### ▪ **n1337P**: *object*
+
+*Defined in [src/utils/constants.ts:419](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L419)*
+
+___
+
+### `Const` n1337X
+
+### ▪ **n1337X**: *object*
+
+*Defined in [src/utils/constants.ts:416](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L416)*
 
 ___
 
@@ -769,67 +846,67 @@ ___
 
 ### ▪ **n1C**: *object*
 
-*Defined in [src/utils/constants.ts:172](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L172)*
+*Defined in [src/utils/constants.ts:234](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L234)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:174](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L174)*
+*Defined in [src/utils/constants.ts:236](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L236)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5"
 
-*Defined in [src/utils/constants.ts:173](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L173)*
+*Defined in [src/utils/constants.ts:235](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L235)*
 
 ###  chainID
 
 • **chainID**: *number* = 43114
 
-*Defined in [src/utils/constants.ts:186](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L186)*
+*Defined in [src/utils/constants.ts:248](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L248)*
 
 ###  costPerSignature
 
 • **costPerSignature**: *number* = 1000
 
-*Defined in [src/utils/constants.ts:177](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L177)*
+*Defined in [src/utils/constants.ts:239](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L239)*
 
 ###  gasPrice
 
 • **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
-*Defined in [src/utils/constants.ts:183](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L183)*
+*Defined in [src/utils/constants.ts:245](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L245)*
 
 ###  maxGasPrice
 
 • **maxGasPrice**: *BN‹›* = GWEI.mul(new BN(1000))
 
-*Defined in [src/utils/constants.ts:185](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L185)*
+*Defined in [src/utils/constants.ts:247](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L247)*
 
 ###  minGasPrice
 
 • **minGasPrice**: *BN‹›* = GWEI.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:184](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L184)*
+*Defined in [src/utils/constants.ts:246](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L246)*
 
 ###  txBytesGas
 
 • **txBytesGas**: *number* = 1
 
-*Defined in [src/utils/constants.ts:176](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L176)*
+*Defined in [src/utils/constants.ts:238](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L238)*
 
 ###  txFee
 
 • **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:180](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L180)*
+*Defined in [src/utils/constants.ts:242](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L242)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:175](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L175)*
+*Defined in [src/utils/constants.ts:237](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L237)*
 
 ___
 
@@ -837,109 +914,109 @@ ___
 
 ### ▪ **n1P**: *object*
 
-*Defined in [src/utils/constants.ts:152](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L152)*
+*Defined in [src/utils/constants.ts:214](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L214)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:155](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L155)*
+*Defined in [src/utils/constants.ts:217](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L217)*
 
 ###  avaxAssetID
 
 • **avaxAssetID**: *string* = avaxAssetID
 
-*Defined in [src/utils/constants.ts:154](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L154)*
+*Defined in [src/utils/constants.ts:216](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L216)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/utils/constants.ts:153](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L153)*
+*Defined in [src/utils/constants.ts:215](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L215)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:159](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L159)*
+*Defined in [src/utils/constants.ts:221](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L221)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:158](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L158)*
+*Defined in [src/utils/constants.ts:220](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L220)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:160](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L160)*
+*Defined in [src/utils/constants.ts:222](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L222)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:162](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L162)*
+*Defined in [src/utils/constants.ts:224](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L224)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:167](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L167)*
+*Defined in [src/utils/constants.ts:229](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L229)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:163](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L163)*
+*Defined in [src/utils/constants.ts:225](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L225)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:164](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L164)*
+*Defined in [src/utils/constants.ts:226](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L226)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:161](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L161)*
+*Defined in [src/utils/constants.ts:223](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L223)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:169](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L169)*
+*Defined in [src/utils/constants.ts:231](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L231)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:168](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L168)*
+*Defined in [src/utils/constants.ts:230](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L230)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX.mul(new BN(2000))
 
-*Defined in [src/utils/constants.ts:165](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L165)*
+*Defined in [src/utils/constants.ts:227](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L227)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 2 * 7 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:166](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L166)*
+*Defined in [src/utils/constants.ts:228](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L228)*
 
 ###  txFee
 
-• **txFee**: *BN‹›* = ONEAVAX
+• **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:157](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L157)*
+*Defined in [src/utils/constants.ts:219](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L219)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:156](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L156)*
+*Defined in [src/utils/constants.ts:218](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L218)*
 
 ___
 
@@ -947,43 +1024,49 @@ ___
 
 ### ▪ **n1X**: *object*
 
-*Defined in [src/utils/constants.ts:143](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L143)*
+*Defined in [src/utils/constants.ts:204](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L204)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:146](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L146)*
+*Defined in [src/utils/constants.ts:207](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L207)*
 
 ###  avaxAssetID
 
 • **avaxAssetID**: *string* = avaxAssetID
 
-*Defined in [src/utils/constants.ts:145](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L145)*
+*Defined in [src/utils/constants.ts:206](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L206)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM"
 
-*Defined in [src/utils/constants.ts:144](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L144)*
+*Defined in [src/utils/constants.ts:205](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L205)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:149](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L149)*
+*Defined in [src/utils/constants.ts:210](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L210)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = MILLIAVAX
+
+*Defined in [src/utils/constants.ts:211](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L211)*
 
 ###  txFee
 
 • **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:148](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L148)*
+*Defined in [src/utils/constants.ts:209](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L209)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:147](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L147)*
+*Defined in [src/utils/constants.ts:208](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L208)*
 
 ___
 
@@ -991,31 +1074,31 @@ ___
 
 ### ▪ **n2C**: *object*
 
-*Defined in [src/utils/constants.ts:218](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L218)*
+*Defined in [src/utils/constants.ts:281](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L281)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:220](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L220)*
+*Defined in [src/utils/constants.ts:283](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L283)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2mUYSXfLrDtigwbzj1LxKVsHwELghc5sisoXrzJwLqAAQHF4i"
 
-*Defined in [src/utils/constants.ts:219](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L219)*
+*Defined in [src/utils/constants.ts:282](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L282)*
 
 ###  gasPrice
 
 • **gasPrice**: *number* = 0
 
-*Defined in [src/utils/constants.ts:222](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L222)*
+*Defined in [src/utils/constants.ts:285](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L285)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:221](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L221)*
+*Defined in [src/utils/constants.ts:284](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L284)*
 
 ___
 
@@ -1023,103 +1106,103 @@ ___
 
 ### ▪ **n2P**: *object*
 
-*Defined in [src/utils/constants.ts:199](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L199)*
+*Defined in [src/utils/constants.ts:262](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L262)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:201](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L201)*
+*Defined in [src/utils/constants.ts:264](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L264)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/utils/constants.ts:200](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L200)*
+*Defined in [src/utils/constants.ts:263](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L263)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:206](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L206)*
+*Defined in [src/utils/constants.ts:269](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L269)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:205](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L205)*
+*Defined in [src/utils/constants.ts:268](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L268)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:204](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L204)*
+*Defined in [src/utils/constants.ts:267](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L267)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:208](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L208)*
+*Defined in [src/utils/constants.ts:271](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L271)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:213](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L213)*
+*Defined in [src/utils/constants.ts:276](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L276)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:209](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L209)*
+*Defined in [src/utils/constants.ts:272](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L272)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:210](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L210)*
+*Defined in [src/utils/constants.ts:273](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L273)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:207](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L207)*
+*Defined in [src/utils/constants.ts:270](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L270)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:215](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L215)*
+*Defined in [src/utils/constants.ts:278](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L278)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:214](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L214)*
+*Defined in [src/utils/constants.ts:277](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L277)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX.mul(new BN(2000))
 
-*Defined in [src/utils/constants.ts:211](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L211)*
+*Defined in [src/utils/constants.ts:274](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L274)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 2 * 7 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:212](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L212)*
+*Defined in [src/utils/constants.ts:275](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L275)*
 
 ###  txFee
 
 • **txFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:203](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L203)*
+*Defined in [src/utils/constants.ts:266](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L266)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:202](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L202)*
+*Defined in [src/utils/constants.ts:265](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L265)*
 
 ___
 
@@ -1127,37 +1210,43 @@ ___
 
 ### ▪ **n2X**: *object*
 
-*Defined in [src/utils/constants.ts:191](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L191)*
+*Defined in [src/utils/constants.ts:253](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L253)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:193](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L193)*
+*Defined in [src/utils/constants.ts:255](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L255)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "4ktRjsAKxgMr2aEzv9SWmrU7Xk5FniHUrVCX4P1TZSfTLZWFM"
 
-*Defined in [src/utils/constants.ts:192](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L192)*
+*Defined in [src/utils/constants.ts:254](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L254)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:196](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L196)*
+*Defined in [src/utils/constants.ts:258](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L258)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = new BN(0)
+
+*Defined in [src/utils/constants.ts:259](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L259)*
 
 ###  txFee
 
 • **txFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:195](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L195)*
+*Defined in [src/utils/constants.ts:257](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L257)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:194](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L194)*
+*Defined in [src/utils/constants.ts:256](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L256)*
 
 ___
 
@@ -1165,31 +1254,31 @@ ___
 
 ### ▪ **n3C**: *object*
 
-*Defined in [src/utils/constants.ts:254](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L254)*
+*Defined in [src/utils/constants.ts:318](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L318)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:256](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L256)*
+*Defined in [src/utils/constants.ts:320](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L320)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "zJytnh96Pc8rM337bBrtMvJDbEdDNjcXG3WkTNCiLp18ergm9"
 
-*Defined in [src/utils/constants.ts:255](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L255)*
+*Defined in [src/utils/constants.ts:319](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L319)*
 
 ###  gasPrice
 
 • **gasPrice**: *number* = 0
 
-*Defined in [src/utils/constants.ts:258](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L258)*
+*Defined in [src/utils/constants.ts:322](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L322)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:257](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L257)*
+*Defined in [src/utils/constants.ts:321](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L321)*
 
 ___
 
@@ -1197,103 +1286,103 @@ ___
 
 ### ▪ **n3P**: *object*
 
-*Defined in [src/utils/constants.ts:235](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L235)*
+*Defined in [src/utils/constants.ts:299](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L299)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:237](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L237)*
+*Defined in [src/utils/constants.ts:301](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L301)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = ""
 
-*Defined in [src/utils/constants.ts:236](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L236)*
+*Defined in [src/utils/constants.ts:300](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L300)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:242](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L242)*
+*Defined in [src/utils/constants.ts:306](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L306)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:241](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L241)*
+*Defined in [src/utils/constants.ts:305](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L305)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:240](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L240)*
+*Defined in [src/utils/constants.ts:304](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L304)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:244](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L244)*
+*Defined in [src/utils/constants.ts:308](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L308)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:249](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L249)*
+*Defined in [src/utils/constants.ts:313](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L313)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:245](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L245)*
+*Defined in [src/utils/constants.ts:309](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L309)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:246](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L246)*
+*Defined in [src/utils/constants.ts:310](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L310)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:243](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L243)*
+*Defined in [src/utils/constants.ts:307](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L307)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:251](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L251)*
+*Defined in [src/utils/constants.ts:315](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L315)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:250](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L250)*
+*Defined in [src/utils/constants.ts:314](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L314)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX.mul(new BN(2000))
 
-*Defined in [src/utils/constants.ts:247](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L247)*
+*Defined in [src/utils/constants.ts:311](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L311)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 2 * 7 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:248](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L248)*
+*Defined in [src/utils/constants.ts:312](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L312)*
 
 ###  txFee
 
 • **txFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:239](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L239)*
+*Defined in [src/utils/constants.ts:303](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L303)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:238](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L238)*
+*Defined in [src/utils/constants.ts:302](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L302)*
 
 ___
 
@@ -1301,37 +1390,43 @@ ___
 
 ### ▪ **n3X**: *object*
 
-*Defined in [src/utils/constants.ts:227](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L227)*
+*Defined in [src/utils/constants.ts:290](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L290)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:229](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L229)*
+*Defined in [src/utils/constants.ts:292](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L292)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "rrEWX7gc7D9mwcdrdBxBTdqh1a7WDVsMuadhTZgyXfFcRz45L"
 
-*Defined in [src/utils/constants.ts:228](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L228)*
+*Defined in [src/utils/constants.ts:291](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L291)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:232](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L232)*
+*Defined in [src/utils/constants.ts:295](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L295)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = new BN(0)
+
+*Defined in [src/utils/constants.ts:296](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L296)*
 
 ###  txFee
 
 • **txFee**: *number* = 0
 
-*Defined in [src/utils/constants.ts:231](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L231)*
+*Defined in [src/utils/constants.ts:294](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L294)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:230](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L230)*
+*Defined in [src/utils/constants.ts:293](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L293)*
 
 ___
 
@@ -1339,37 +1434,37 @@ ___
 
 ### ▪ **n4C**: *object*
 
-*Defined in [src/utils/constants.ts:290](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L290)*
+*Defined in [src/utils/constants.ts:355](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L355)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:292](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L292)*
+*Defined in [src/utils/constants.ts:357](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L357)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "saMG5YgNsFxzjz4NMkEkt3bAH6hVxWdZkWcEnGB3Z15pcAmsK"
 
-*Defined in [src/utils/constants.ts:291](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L291)*
+*Defined in [src/utils/constants.ts:356](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L356)*
 
 ###  chainID
 
 • **chainID**: *number* = 43110
 
-*Defined in [src/utils/constants.ts:295](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L295)*
+*Defined in [src/utils/constants.ts:360](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L360)*
 
 ###  gasPrice
 
 • **gasPrice**: *BN‹›* = GWEI.mul(new BN(470))
 
-*Defined in [src/utils/constants.ts:294](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L294)*
+*Defined in [src/utils/constants.ts:359](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L359)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:293](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L293)*
+*Defined in [src/utils/constants.ts:358](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L358)*
 
 ___
 
@@ -1377,103 +1472,103 @@ ___
 
 ### ▪ **n4P**: *object*
 
-*Defined in [src/utils/constants.ts:271](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L271)*
+*Defined in [src/utils/constants.ts:336](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L336)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:273](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L273)*
+*Defined in [src/utils/constants.ts:338](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L338)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/utils/constants.ts:272](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L272)*
+*Defined in [src/utils/constants.ts:337](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L337)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:278](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L278)*
+*Defined in [src/utils/constants.ts:343](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L343)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:277](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L277)*
+*Defined in [src/utils/constants.ts:342](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L342)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:276](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L276)*
+*Defined in [src/utils/constants.ts:341](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L341)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:280](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L280)*
+*Defined in [src/utils/constants.ts:345](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L345)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:285](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L285)*
+*Defined in [src/utils/constants.ts:350](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L350)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:281](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L281)*
+*Defined in [src/utils/constants.ts:346](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L346)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:282](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L282)*
+*Defined in [src/utils/constants.ts:347](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L347)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:279](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L279)*
+*Defined in [src/utils/constants.ts:344](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L344)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:287](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L287)*
+*Defined in [src/utils/constants.ts:352](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L352)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:286](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L286)*
+*Defined in [src/utils/constants.ts:351](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L351)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX.mul(new BN(2000))
 
-*Defined in [src/utils/constants.ts:283](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L283)*
+*Defined in [src/utils/constants.ts:348](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L348)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 2 * 7 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:284](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L284)*
+*Defined in [src/utils/constants.ts:349](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L349)*
 
 ###  txFee
 
-• **txFee**: *BN‹›* = ONEAVAX
+• **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:275](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L275)*
+*Defined in [src/utils/constants.ts:340](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L340)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:274](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L274)*
+*Defined in [src/utils/constants.ts:339](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L339)*
 
 ___
 
@@ -1481,37 +1576,43 @@ ___
 
 ### ▪ **n4X**: *object*
 
-*Defined in [src/utils/constants.ts:263](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L263)*
+*Defined in [src/utils/constants.ts:327](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L327)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:265](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L265)*
+*Defined in [src/utils/constants.ts:329](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L329)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "jnUjZSRt16TcRnZzmh5aMhavwVHz3zBrSN8GfFMTQkzUnoBxC"
 
-*Defined in [src/utils/constants.ts:264](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L264)*
+*Defined in [src/utils/constants.ts:328](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L328)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:268](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L268)*
+*Defined in [src/utils/constants.ts:332](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L332)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = MILLIAVAX
+
+*Defined in [src/utils/constants.ts:333](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L333)*
 
 ###  txFee
 
 • **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:267](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L267)*
+*Defined in [src/utils/constants.ts:331](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L331)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:266](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L266)*
+*Defined in [src/utils/constants.ts:330](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L330)*
 
 ___
 
@@ -1519,67 +1620,67 @@ ___
 
 ### ▪ **n5C**: *object*
 
-*Defined in [src/utils/constants.ts:330](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L330)*
+*Defined in [src/utils/constants.ts:396](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L396)*
 
 ###  alias
 
 • **alias**: *string* = CChainAlias
 
-*Defined in [src/utils/constants.ts:332](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L332)*
+*Defined in [src/utils/constants.ts:398](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L398)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp"
 
-*Defined in [src/utils/constants.ts:331](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L331)*
+*Defined in [src/utils/constants.ts:397](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L397)*
 
 ###  chainID
 
 • **chainID**: *number* = 43113
 
-*Defined in [src/utils/constants.ts:344](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L344)*
+*Defined in [src/utils/constants.ts:410](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L410)*
 
 ###  costPerSignature
 
 • **costPerSignature**: *number* = 1000
 
-*Defined in [src/utils/constants.ts:335](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L335)*
+*Defined in [src/utils/constants.ts:401](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L401)*
 
 ###  gasPrice
 
 • **gasPrice**: *BN‹›* = GWEI.mul(new BN(225))
 
-*Defined in [src/utils/constants.ts:341](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L341)*
+*Defined in [src/utils/constants.ts:407](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L407)*
 
 ###  maxGasPrice
 
 • **maxGasPrice**: *BN‹›* = GWEI.mul(new BN(1000))
 
-*Defined in [src/utils/constants.ts:343](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L343)*
+*Defined in [src/utils/constants.ts:409](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L409)*
 
 ###  minGasPrice
 
 • **minGasPrice**: *BN‹›* = GWEI.mul(new BN(25))
 
-*Defined in [src/utils/constants.ts:342](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L342)*
+*Defined in [src/utils/constants.ts:408](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L408)*
 
 ###  txBytesGas
 
 • **txBytesGas**: *number* = 1
 
-*Defined in [src/utils/constants.ts:334](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L334)*
+*Defined in [src/utils/constants.ts:400](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L400)*
 
 ###  txFee
 
 • **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:338](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L338)*
+*Defined in [src/utils/constants.ts:404](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L404)*
 
 ###  vm
 
 • **vm**: *string* = CChainVMName
 
-*Defined in [src/utils/constants.ts:333](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L333)*
+*Defined in [src/utils/constants.ts:399](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L399)*
 
 ___
 
@@ -1587,109 +1688,109 @@ ___
 
 ### ▪ **n5P**: *object*
 
-*Defined in [src/utils/constants.ts:310](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L310)*
+*Defined in [src/utils/constants.ts:376](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L376)*
 
 ###  alias
 
 • **alias**: *string* = PChainAlias
 
-*Defined in [src/utils/constants.ts:313](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L313)*
+*Defined in [src/utils/constants.ts:379](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L379)*
 
 ###  avaxAssetID
 
 • **avaxAssetID**: *string* = avaxAssetID
 
-*Defined in [src/utils/constants.ts:312](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L312)*
+*Defined in [src/utils/constants.ts:378](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L378)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/utils/constants.ts:311](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L311)*
+*Defined in [src/utils/constants.ts:377](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L377)*
 
 ###  createChainTx
 
 • **createChainTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:318](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L318)*
+*Defined in [src/utils/constants.ts:384](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L384)*
 
 ###  createSubnetTx
 
 • **createSubnetTx**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:317](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L317)*
+*Defined in [src/utils/constants.ts:383](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L383)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:316](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L316)*
+*Defined in [src/utils/constants.ts:382](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L382)*
 
 ###  maxConsumption
 
 • **maxConsumption**: *number* = 0.12
 
-*Defined in [src/utils/constants.ts:320](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L320)*
+*Defined in [src/utils/constants.ts:386](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L386)*
 
 ###  maxStakeDuration
 
 • **maxStakeDuration**: *number* = 365 * 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:325](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L325)*
+*Defined in [src/utils/constants.ts:391](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L391)*
 
 ###  maxStakingDuration
 
 • **maxStakingDuration**: *BN‹›* = new BN(31536000)
 
-*Defined in [src/utils/constants.ts:321](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L321)*
+*Defined in [src/utils/constants.ts:387](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L387)*
 
 ###  maxSupply
 
 • **maxSupply**: *BN‹›* = new BN(720000000).mul(ONEAVAX)
 
-*Defined in [src/utils/constants.ts:322](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L322)*
+*Defined in [src/utils/constants.ts:388](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L388)*
 
 ###  minConsumption
 
 • **minConsumption**: *number* = 0.1
 
-*Defined in [src/utils/constants.ts:319](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L319)*
+*Defined in [src/utils/constants.ts:385](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L385)*
 
 ###  minDelegationFee
 
 • **minDelegationFee**: *BN‹›* = new BN(2)
 
-*Defined in [src/utils/constants.ts:327](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L327)*
+*Defined in [src/utils/constants.ts:393](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L393)*
 
 ###  minDelegationStake
 
 • **minDelegationStake**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:326](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L326)*
+*Defined in [src/utils/constants.ts:392](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L392)*
 
 ###  minStake
 
 • **minStake**: *BN‹›* = ONEAVAX
 
-*Defined in [src/utils/constants.ts:323](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L323)*
+*Defined in [src/utils/constants.ts:389](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L389)*
 
 ###  minStakeDuration
 
 • **minStakeDuration**: *number* = 24 * 60 * 60
 
-*Defined in [src/utils/constants.ts:324](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L324)*
+*Defined in [src/utils/constants.ts:390](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L390)*
 
 ###  txFee
 
-• **txFee**: *BN‹›* = ONEAVAX
+• **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:315](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L315)*
+*Defined in [src/utils/constants.ts:381](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L381)*
 
 ###  vm
 
 • **vm**: *string* = PChainVMName
 
-*Defined in [src/utils/constants.ts:314](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L314)*
+*Defined in [src/utils/constants.ts:380](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L380)*
 
 ___
 
@@ -1697,40 +1798,46 @@ ___
 
 ### ▪ **n5X**: *object*
 
-*Defined in [src/utils/constants.ts:301](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L301)*
+*Defined in [src/utils/constants.ts:366](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L366)*
 
 ###  alias
 
 • **alias**: *string* = XChainAlias
 
-*Defined in [src/utils/constants.ts:304](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L304)*
+*Defined in [src/utils/constants.ts:369](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L369)*
 
 ###  avaxAssetID
 
 • **avaxAssetID**: *string* = avaxAssetID
 
-*Defined in [src/utils/constants.ts:303](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L303)*
+*Defined in [src/utils/constants.ts:368](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L368)*
 
 ###  blockchainID
 
 • **blockchainID**: *string* = "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"
 
-*Defined in [src/utils/constants.ts:302](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L302)*
+*Defined in [src/utils/constants.ts:367](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L367)*
 
 ###  creationTxFee
 
 • **creationTxFee**: *BN‹›* = CENTIAVAX
 
-*Defined in [src/utils/constants.ts:307](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L307)*
+*Defined in [src/utils/constants.ts:372](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L372)*
+
+###  mintTxFee
+
+• **mintTxFee**: *BN‹›* = MILLIAVAX
+
+*Defined in [src/utils/constants.ts:373](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L373)*
 
 ###  txFee
 
 • **txFee**: *BN‹›* = MILLIAVAX
 
-*Defined in [src/utils/constants.ts:306](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L306)*
+*Defined in [src/utils/constants.ts:371](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L371)*
 
 ###  vm
 
 • **vm**: *string* = XChainVMName
 
-*Defined in [src/utils/constants.ts:305](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/constants.ts#L305)*
+*Defined in [src/utils/constants.ts:370](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L370)*

@@ -25,7 +25,7 @@
 
 • **amount**: *number | BN*
 
-*Defined in [src/apis/avm/interfaces.ts:40](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L40)*
+*Defined in [src/apis/avm/interfaces.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L51)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **assetID**: *Buffer | string*
 
-*Defined in [src/apis/avm/interfaces.ts:41](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L41)*
+*Defined in [src/apis/avm/interfaces.ts:52](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L52)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **minters**: *string[]*
 
-*Defined in [src/apis/avm/interfaces.ts:43](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L43)*
+*Defined in [src/apis/avm/interfaces.ts:54](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L54)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[password](common_interfaces.credsinterface.md#password)*
 
-*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L11)*
+*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L11)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **to**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:42](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L42)*
+*Defined in [src/apis/avm/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L53)*
 
 ___
 
@@ -69,4 +69,4 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[username](common_interfaces.credsinterface.md#username)*
 
-*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L10)*
+*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L10)*

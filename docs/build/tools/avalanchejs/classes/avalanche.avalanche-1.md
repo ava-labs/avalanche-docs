@@ -83,7 +83,7 @@ const avalanche: Avalanche = new Avalanche("127.0.0.1", 9650, "https")
 
 *Overrides [AvalancheCore](avalanchecore.avalanchecore-1.md).[constructor](avalanchecore.avalanchecore-1.md#constructor)*
 
-*Defined in [src/index.ts:88](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L88)*
+*Defined in [src/index.ts:88](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L88)*
 
 Creates a new Avalanche instance. Sets the address and port of the main Avalanche Client.
 
@@ -94,7 +94,7 @@ Name | Type | Default | Description |
 `host` | string | - | The hostname to resolve to reach the Avalanche Client RPC APIs |
 `port` | number | - | The port to resolve to reach the Avalanche Client RPC APIs |
 `protocol` | string | "http" | The protocol string to use before a "://" in a request, ex: "http", "https", "git", "ws", etc. Defaults to http |
-`networkID` | number | DefaultNetworkID | Sets the NetworkID of the class. Default [DefaultNetworkID](../modules/src_utils.md#defaultnetworkid) |
+`networkID` | number | DefaultNetworkID | Sets the NetworkID of the class. Default [DefaultNetworkID](../modules/utils_constants.md#const-defaultnetworkid) |
 `XChainID` | string | undefined | Sets the blockchainID for the AVM. Will try to auto-detect, otherwise default "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed" |
 `CChainID` | string | undefined | Sets the blockchainID for the EVM. Will try to auto-detect, otherwise default "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU" |
 `hrp` | string | undefined | The human-readable part of the bech32 addresses |
@@ -110,7 +110,7 @@ Name | Type | Default | Description |
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[apis](avalanchecore.avalanchecore-1.md#protected-apis)*
 
-*Defined in [src/avalanche.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L36)*
+*Defined in [src/avalanche.ts:36](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L36)*
 
 #### Type declaration:
 
@@ -124,7 +124,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[auth](avalanchecore.avalanchecore-1.md#protected-auth)*
 
-*Defined in [src/avalanche.ts:33](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L33)*
+*Defined in [src/avalanche.ts:33](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L33)*
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[headers](avalanchecore.avalanchecore-1.md#protected-headers)*
 
-*Defined in [src/avalanche.ts:34](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L34)*
+*Defined in [src/avalanche.ts:34](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L34)*
 
 #### Type declaration:
 
@@ -148,7 +148,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[host](avalanchecore.avalanchecore-1.md#protected-host)*
 
-*Defined in [src/avalanche.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L30)*
+*Defined in [src/avalanche.ts:30](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L30)*
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[hrp](avalanchecore.avalanchecore-1.md#protected-hrp)*
 
-*Defined in [src/avalanche.ts:27](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L27)*
+*Defined in [src/avalanche.ts:27](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L27)*
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[ip](avalanchecore.avalanchecore-1.md#protected-ip)*
 
-*Defined in [src/avalanche.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L29)*
+*Defined in [src/avalanche.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L29)*
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[networkID](avalanchecore.avalanchecore-1.md#protected-networkid)*
 
-*Defined in [src/avalanche.ts:26](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L26)*
+*Defined in [src/avalanche.ts:26](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L26)*
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[port](avalanchecore.avalanchecore-1.md#protected-port)*
 
-*Defined in [src/avalanche.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L31)*
+*Defined in [src/avalanche.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L31)*
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[protocol](avalanchecore.avalanchecore-1.md#protected-protocol)*
 
-*Defined in [src/avalanche.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L28)*
+*Defined in [src/avalanche.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L28)*
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[requestConfig](avalanchecore.avalanchecore-1.md#protected-requestconfig)*
 
-*Defined in [src/avalanche.ts:35](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L35)*
+*Defined in [src/avalanche.ts:35](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L35)*
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[url](avalanchecore.avalanchecore-1.md#protected-url)*
 
-*Defined in [src/avalanche.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L32)*
+*Defined in [src/avalanche.ts:32](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L32)*
 
 ## Methods
 
@@ -226,7 +226,7 @@ ___
 
 ▸ **Admin**(): *[AdminAPI](api_admin.adminapi.md)‹›*
 
-*Defined in [src/index.ts:42](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L42)*
+*Defined in [src/index.ts:42](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L42)*
 
 Returns a reference to the Admin RPC.
 
@@ -238,7 +238,7 @@ ___
 
 ▸ **Auth**(): *[AuthAPI](api_auth.authapi.md)‹›*
 
-*Defined in [src/index.ts:47](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L47)*
+*Defined in [src/index.ts:47](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L47)*
 
 Returns a reference to the Auth RPC.
 
@@ -250,7 +250,7 @@ ___
 
 ▸ **CChain**(): *[EVMAPI](api_evm.evmapi.md)‹›*
 
-*Defined in [src/index.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L52)*
+*Defined in [src/index.ts:52](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L52)*
 
 Returns a reference to the EVMAPI RPC pointed at the C-Chain.
 
@@ -262,7 +262,7 @@ ___
 
 ▸ **Health**(): *[HealthAPI](api_health.healthapi.md)‹›*
 
-*Defined in [src/index.ts:62](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L62)*
+*Defined in [src/index.ts:62](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L62)*
 
 Returns a reference to the Health RPC for a node.
 
@@ -274,7 +274,7 @@ ___
 
 ▸ **Index**(): *[IndexAPI](api_index.indexapi.md)‹›*
 
-*Defined in [src/index.ts:67](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L67)*
+*Defined in [src/index.ts:67](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L67)*
 
 Returns a reference to the Index RPC for a node.
 
@@ -286,7 +286,7 @@ ___
 
 ▸ **Info**(): *[InfoAPI](api_info.infoapi.md)‹›*
 
-*Defined in [src/index.ts:72](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L72)*
+*Defined in [src/index.ts:72](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L72)*
 
 Returns a reference to the Info RPC for a node.
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **Metrics**(): *[MetricsAPI](api_metrics.metricsapi.md)‹›*
 
-*Defined in [src/index.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L77)*
+*Defined in [src/index.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L77)*
 
 Returns a reference to the Metrics RPC.
 
@@ -310,7 +310,7 @@ ___
 
 ▸ **NodeKeys**(): *[KeystoreAPI](api_keystore.keystoreapi.md)‹›*
 
-*Defined in [src/index.ts:83](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L83)*
+*Defined in [src/index.ts:83](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L83)*
 
 Returns a reference to the Keystore RPC for a node. We label it "NodeKeys" to reduce
 confusion about what it's accessing.
@@ -323,7 +323,7 @@ ___
 
 ▸ **PChain**(): *[PlatformVMAPI](api_platformvm.platformvmapi.md)‹›*
 
-*Defined in [src/index.ts:88](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L88)*
+*Defined in [src/index.ts:88](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L88)*
 
 Returns a reference to the PlatformVM RPC pointed at the P-Chain.
 
@@ -335,7 +335,7 @@ ___
 
 ▸ **XChain**(): *[AVMAPI](api_avm.avmapi.md)‹›*
 
-*Defined in [src/index.ts:57](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/index.ts#L57)*
+*Defined in [src/index.ts:57](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/index.ts#L57)*
 
 Returns a reference to the AVM RPC pointed at the X-Chain.
 
@@ -349,7 +349,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[_setHeaders](avalanchecore.avalanchecore-1.md#protected-_setheaders)*
 
-*Defined in [src/avalanche.ts:206](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L206)*
+*Defined in [src/avalanche.ts:206](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L206)*
 
 **Parameters:**
 
@@ -367,7 +367,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[addAPI](avalanchecore.avalanchecore-1.md#addapi)*
 
-*Defined in [src/avalanche.ts:238](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L238)*
+*Defined in [src/avalanche.ts:238](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L238)*
 
 Adds an API to the middleware. The API resolves to a registered blockchain's RPC.
 
@@ -406,7 +406,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[api](avalanchecore.avalanchecore-1.md#api)*
 
-*Defined in [src/avalanche.ts:260](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L260)*
+*Defined in [src/avalanche.ts:260](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L260)*
 
 Retrieves a reference to an API by its apiName label.
 
@@ -430,7 +430,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[delete](avalanchecore.avalanchecore-1.md#delete)*
 
-*Defined in [src/avalanche.ts:341](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L341)*
+*Defined in [src/avalanche.ts:341](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L341)*
 
 Makes a DELETE call to an API.
 
@@ -455,7 +455,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[get](avalanchecore.avalanchecore-1.md#get)*
 
-*Defined in [src/avalanche.ts:315](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L315)*
+*Defined in [src/avalanche.ts:315](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L315)*
 
 Makes a GET call to an API.
 
@@ -480,7 +480,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getHRP](avalanchecore.avalanchecore-1.md#gethrp)*
 
-*Defined in [src/avalanche.ts:126](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L126)*
+*Defined in [src/avalanche.ts:126](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L126)*
 
 Returns the Human-Readable-Part of the network associated with this key.
 
@@ -496,7 +496,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getHeaders](avalanchecore.avalanchecore-1.md#getheaders)*
 
-*Defined in [src/avalanche.ts:101](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L101)*
+*Defined in [src/avalanche.ts:101](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L101)*
 
 Returns the custom headers
 
@@ -510,7 +510,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getHost](avalanchecore.avalanchecore-1.md#gethost)*
 
-*Defined in [src/avalanche.ts:81](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L81)*
+*Defined in [src/avalanche.ts:81](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L81)*
 
 Returns the host for the Avalanche node.
 
@@ -524,7 +524,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getIP](avalanchecore.avalanchecore-1.md#getip)*
 
-*Defined in [src/avalanche.ts:86](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L86)*
+*Defined in [src/avalanche.ts:86](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L86)*
 
 Returns the IP for the Avalanche node.
 
@@ -538,7 +538,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getNetworkID](avalanchecore.avalanchecore-1.md#getnetworkid)*
 
-*Defined in [src/avalanche.ts:111](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L111)*
+*Defined in [src/avalanche.ts:111](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L111)*
 
 Returns the networkID
 
@@ -552,7 +552,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getPort](avalanchecore.avalanchecore-1.md#getport)*
 
-*Defined in [src/avalanche.ts:91](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L91)*
+*Defined in [src/avalanche.ts:91](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L91)*
 
 Returns the port for the Avalanche node.
 
@@ -566,7 +566,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getProtocol](avalanchecore.avalanchecore-1.md#getprotocol)*
 
-*Defined in [src/avalanche.ts:76](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L76)*
+*Defined in [src/avalanche.ts:76](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L76)*
 
 Returns the protocol such as "http", "https", "git", "ws", etc.
 
@@ -580,7 +580,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getRequestConfig](avalanchecore.avalanchecore-1.md#getrequestconfig)*
 
-*Defined in [src/avalanche.ts:106](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L106)*
+*Defined in [src/avalanche.ts:106](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L106)*
 
 Returns the custom request config
 
@@ -594,7 +594,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[getURL](avalanchecore.avalanchecore-1.md#geturl)*
 
-*Defined in [src/avalanche.ts:96](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L96)*
+*Defined in [src/avalanche.ts:96](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L96)*
 
 Returns the URL of the Avalanche node (ip + port)
 
@@ -608,7 +608,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[patch](avalanchecore.avalanchecore-1.md#patch)*
 
-*Defined in [src/avalanche.ts:425](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L425)*
+*Defined in [src/avalanche.ts:425](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L425)*
 
 Makes a PATCH call to an API.
 
@@ -634,7 +634,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[post](avalanchecore.avalanchecore-1.md#post)*
 
-*Defined in [src/avalanche.ts:368](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L368)*
+*Defined in [src/avalanche.ts:368](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L368)*
 
 Makes a POST call to an API.
 
@@ -660,7 +660,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[put](avalanchecore.avalanchecore-1.md#put)*
 
-*Defined in [src/avalanche.ts:396](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L396)*
+*Defined in [src/avalanche.ts:396](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L396)*
 
 Makes a PUT call to an API.
 
@@ -686,7 +686,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[removeAllHeaders](avalanchecore.avalanchecore-1.md#removeallheaders)*
 
-*Defined in [src/avalanche.ts:159](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L159)*
+*Defined in [src/avalanche.ts:159](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L159)*
 
 Removes all headers.
 
@@ -700,7 +700,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[removeAllRequestConfigs](avalanchecore.avalanchecore-1.md#removeallrequestconfigs)*
 
-*Defined in [src/avalanche.ts:189](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L189)*
+*Defined in [src/avalanche.ts:189](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L189)*
 
 Removes all request configs.
 
@@ -714,7 +714,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[removeHeader](avalanchecore.avalanchecore-1.md#removeheader)*
 
-*Defined in [src/avalanche.ts:152](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L152)*
+*Defined in [src/avalanche.ts:152](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L152)*
 
 Removes a previously added custom header.
 
@@ -734,7 +734,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[removeRequestConfig](avalanchecore.avalanchecore-1.md#removerequestconfig)*
 
-*Defined in [src/avalanche.ts:182](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L182)*
+*Defined in [src/avalanche.ts:182](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L182)*
 
 Removes a previously added request config.
 
@@ -754,7 +754,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setAddress](avalanchecore.avalanchecore-1.md#setaddress)*
 
-*Defined in [src/avalanche.ts:48](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L48)*
+*Defined in [src/avalanche.ts:48](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L48)*
 
 Sets the address and port of the main Avalanche Client.
 
@@ -776,7 +776,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setAuthToken](avalanchecore.avalanchecore-1.md#setauthtoken)*
 
-*Defined in [src/avalanche.ts:202](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L202)*
+*Defined in [src/avalanche.ts:202](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L202)*
 
 Sets the temporary auth token used for communicating with the node.
 
@@ -796,7 +796,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setHRP](avalanchecore.avalanchecore-1.md#sethrp)*
 
-*Defined in [src/avalanche.ts:133](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L133)*
+*Defined in [src/avalanche.ts:133](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L133)*
 
 Sets the the Human-Readable-Part of the network associated with this key.
 
@@ -816,7 +816,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setHeader](avalanchecore.avalanchecore-1.md#setheader)*
 
-*Defined in [src/avalanche.ts:143](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L143)*
+*Defined in [src/avalanche.ts:143](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L143)*
 
 Adds a new custom header to be included with all requests.
 
@@ -837,7 +837,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setNetworkID](avalanchecore.avalanchecore-1.md#setnetworkid)*
 
-*Defined in [src/avalanche.ts:116](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L116)*
+*Defined in [src/avalanche.ts:116](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L116)*
 
 Sets the networkID
 
@@ -857,7 +857,7 @@ ___
 
 *Inherited from [AvalancheCore](avalanchecore.avalanchecore-1.md).[setRequestConfig](avalanchecore.avalanchecore-1.md#setrequestconfig)*
 
-*Defined in [src/avalanche.ts:173](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/avalanche.ts#L173)*
+*Defined in [src/avalanche.ts:173](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/avalanche.ts#L173)*
 
 Adds a new custom config value to be included with all requests.
 

@@ -1,6 +1,6 @@
 # API
 
-## AvalancheJS - [v3.11.0](https://github.com/ava-labs/avalanchejs/releases/tag/v3.11.0)
+## AvalancheJS - [v3.12.1](https://github.com/ava-labs/avalanchejs/releases/tag/v3.12.1)
 
 ### Modules
 
@@ -41,7 +41,6 @@
 * [Keystore](modules/api_keystore.md)
 * [Metrics](modules/api_metrics.md)
 * [PlatformVM](modules/api_platformvm.md)
-  * [PlatformVM AddSubnetValidatorTx](modules/api_platformvm_addsubnetvalidatortx.md)
   * [PlatformVM BaseTx](modules/api_platformvm_basetx.md)
   * [PlatformVM Constants](modules/api_platformvm_constants.md)
   * [PlatformVM CreateChainTx](modules/api_platformvm_createchaintx.md)

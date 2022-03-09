@@ -6,6 +6,7 @@
 
 ### Interfaces
 
+* [CreateKeyPairResponse](../interfaces/evm_interfaces.createkeypairresponse.md)
 * [ExportAVAXParams](../interfaces/evm_interfaces.exportavaxparams.md)
 * [ExportKeyParams](../interfaces/evm_interfaces.exportkeyparams.md)
 * [ExportParams](../interfaces/evm_interfaces.exportparams.md)

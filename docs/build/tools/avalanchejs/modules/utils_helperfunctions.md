@@ -23,7 +23,7 @@
 
 ▸ **MaxWeightFormula**(`staked`: BN, `cap`: BN): *BN*
 
-*Defined in [src/utils/helperfunctions.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L32)*
+*Defined in [src/utils/helperfunctions.ts:32](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L32)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **NodeIDStringToBuffer**(`pk`: string): *Buffer*
 
-*Defined in [src/utils/helperfunctions.ts:81](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L81)*
+*Defined in [src/utils/helperfunctions.ts:81](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L81)*
 
 Takes a nodeID string and produces a nodeID [Buffer](https://github.com/feross/buffer).
 
@@ -58,7 +58,7 @@ ___
 
 ▸ **UnixNow**(): *BN*
 
-*Defined in [src/utils/helperfunctions.ts:39](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L39)*
+*Defined in [src/utils/helperfunctions.ts:39](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L39)*
 
 Function providing the current UNIX time using a [BN](https://github.com/indutny/bn.js/).
 
@@ -70,7 +70,7 @@ ___
 
 ▸ **bufferToNodeIDString**(`pk`: Buffer): *string*
 
-*Defined in [src/utils/helperfunctions.ts:72](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L72)*
+*Defined in [src/utils/helperfunctions.ts:72](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L72)*
 
 Takes a nodeID buffer and produces a nodeID string with prefix.
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **bufferToPrivateKeyString**(`pk`: Buffer): *string*
 
-*Defined in [src/utils/helperfunctions.ts:48](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L48)*
+*Defined in [src/utils/helperfunctions.ts:48](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L48)*
 
 Takes a private key buffer and produces a private key string with prefix.
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **calcBytesCost**(`len`: number): *number*
 
-*Defined in [src/utils/helperfunctions.ts:102](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L102)*
+*Defined in [src/utils/helperfunctions.ts:102](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L102)*
 
 **Parameters:**
 
@@ -122,7 +122,7 @@ ___
 
 ▸ **costExportTx**(`tx`: [UnsignedTx](../classes/api_evm_transactions.unsignedtx.md)): *number*
 
-*Defined in [src/utils/helperfunctions.ts:106](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L106)*
+*Defined in [src/utils/helperfunctions.ts:106](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L106)*
 
 **Parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 ▸ **costImportTx**(`tx`: [UnsignedTx](../classes/api_evm_transactions.unsignedtx.md)): *number*
 
-*Defined in [src/utils/helperfunctions.ts:91](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L91)*
+*Defined in [src/utils/helperfunctions.ts:91](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L91)*
 
 **Parameters:**
 
@@ -154,7 +154,7 @@ ___
 
 ▸ **getPreferredHRP**(`networkID`: number): *string*
 
-*Defined in [src/utils/helperfunctions.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L23)*
+*Defined in [src/utils/helperfunctions.ts:23](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L23)*
 
 **Parameters:**
 
@@ -170,7 +170,7 @@ ___
 
 ▸ **privateKeyStringToBuffer**(`pk`: string): *Buffer*
 
-*Defined in [src/utils/helperfunctions.ts:57](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/helperfunctions.ts#L57)*
+*Defined in [src/utils/helperfunctions.ts:57](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/helperfunctions.ts#L57)*
 
 Takes a private key string and produces a private key [Buffer](https://github.com/feross/buffer).
 

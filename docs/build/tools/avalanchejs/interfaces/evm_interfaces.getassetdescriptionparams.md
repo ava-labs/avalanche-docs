@@ -18,4 +18,4 @@
 
 • **assetID**: *Buffer | string*
 
-*Defined in [src/apis/evm/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/interfaces.ts#L10)*
+*Defined in [src/apis/evm/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L10)*

@@ -20,7 +20,7 @@
 
 • **amount**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:97](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L97)*
+*Defined in [src/apis/avm/interfaces.ts:127](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L127)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **assetID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:96](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L96)*
+*Defined in [src/apis/avm/interfaces.ts:126](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L126)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **to**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:98](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L98)*
+*Defined in [src/apis/avm/interfaces.ts:128](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L128)*

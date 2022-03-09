@@ -38,7 +38,7 @@ BIP39 Mnemonic code for generating deterministic keys.
 
 \+ **new Mnemonic**(): *[Mnemonic](utils_mnemonic.mnemonic.md)*
 
-*Defined in [src/utils/mnemonic.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L17)*
+*Defined in [src/utils/mnemonic.ts:17](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L17)*
 
 **Returns:** *[Mnemonic](utils_mnemonic.mnemonic.md)*
 
@@ -48,7 +48,7 @@ BIP39 Mnemonic code for generating deterministic keys.
 
 • **wordlists**: *string[]* = bip39.wordlists
 
-*Defined in [src/utils/mnemonic.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L19)*
+*Defined in [src/utils/mnemonic.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L19)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 ▪ **instance**: *[Mnemonic](utils_mnemonic.mnemonic.md)*
 
-*Defined in [src/utils/mnemonic.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L17)*
+*Defined in [src/utils/mnemonic.ts:17](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L17)*
 
 ## Methods
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **entropyToMnemonic**(`entropy`: Buffer | string, `wordlist?`: string[]): *string*
 
-*Defined in [src/utils/mnemonic.ts:95](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L95)*
+*Defined in [src/utils/mnemonic.ts:95](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L95)*
 
 Takes mnemonic and wordlist and returns buffer
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **generateMnemonic**(`strength?`: number, `rng?`: function, `wordlist?`: string[]): *string*
 
-*Defined in [src/utils/mnemonic.ts:138](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L138)*
+*Defined in [src/utils/mnemonic.ts:138](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L138)*
 
 Generate a random mnemonic (uses crypto.randomBytes under the hood), defaults to 256-bits of entropy
 
@@ -119,7 +119,7 @@ ___
 
 ▸ **getDefaultWordlist**(): *string*
 
-*Defined in [src/utils/mnemonic.ts:126](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L126)*
+*Defined in [src/utils/mnemonic.ts:126](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L126)*
 
 Returns the language of the default word list
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **getWordlists**(`language?`: string): *string[] | Wordlist*
 
-*Defined in [src/utils/mnemonic.ts:38](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L38)*
+*Defined in [src/utils/mnemonic.ts:38](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L38)*
 
 Return wordlists
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **mnemonicToEntropy**(`mnemonic`: string, `wordlist?`: string[]): *string*
 
-*Defined in [src/utils/mnemonic.ts:83](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L83)*
+*Defined in [src/utils/mnemonic.ts:83](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L83)*
 
 Takes mnemonic and wordlist and returns buffer
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **mnemonicToSeed**(`mnemonic`: string, `password`: string): *Promise‹Buffer›*
 
-*Defined in [src/utils/mnemonic.ts:67](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L67)*
+*Defined in [src/utils/mnemonic.ts:67](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L67)*
 
 Asynchronously takes mnemonic and password and returns Promise [Buffer](https://github.com/feross/buffer)
 
@@ -195,7 +195,7 @@ ___
 
 ▸ **mnemonicToSeedSync**(`mnemonic`: string, `password`: string): *Buffer*
 
-*Defined in [src/utils/mnemonic.ts:54](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L54)*
+*Defined in [src/utils/mnemonic.ts:54](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L54)*
 
 Synchronously takes mnemonic and password and returns [Buffer](https://github.com/feross/buffer)
 
@@ -216,7 +216,7 @@ ___
 
 ▸ **setDefaultWordlist**(`language`: string): *void*
 
-*Defined in [src/utils/mnemonic.ts:117](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L117)*
+*Defined in [src/utils/mnemonic.ts:117](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L117)*
 
 Sets the default word list
 
@@ -234,7 +234,7 @@ ___
 
 ▸ **validateMnemonic**(`mnemonic`: string, `wordlist?`: string[]): *string*
 
-*Defined in [src/utils/mnemonic.ts:107](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L107)*
+*Defined in [src/utils/mnemonic.ts:107](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L107)*
 
 Validates a mnemonic
 11*
@@ -256,7 +256,7 @@ ___
 
 ▸ **getInstance**(): *[Mnemonic](utils_mnemonic.mnemonic.md)*
 
-*Defined in [src/utils/mnemonic.ts:24](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/mnemonic.ts#L24)*
+*Defined in [src/utils/mnemonic.ts:24](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/mnemonic.ts#L24)*
 
 Retrieves the Mnemonic singleton.
 

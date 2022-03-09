@@ -60,7 +60,7 @@ Class for representing a single StandardUTXO.
 
 \+ **new StandardUTXO**(`codecID`: number, `txID`: Buffer, `outputidx`: Buffer | number, `assetID`: Buffer, `output`: [Output](common_output.output.md)): *[StandardUTXO](common_utxos.standardutxo.md)*
 
-*Defined in [src/common/utxos.ts:172](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L172)*
+*Defined in [src/common/utxos.ts:172](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L172)*
 
 Class for representing a single StandardUTXO.
 
@@ -84,7 +84,7 @@ Name | Type | Default | Description |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeID](utils_serialization.serializable.md#protected-_typeid)*
 
-*Defined in [src/common/utxos.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L29)*
+*Defined in [src/common/utxos.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L29)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[_typeName](utils_serialization.serializable.md#protected-_typename)*
 
-*Defined in [src/common/utxos.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L28)*
+*Defined in [src/common/utxos.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L28)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **assetID**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/common/utxos.ts:87](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L87)*
+*Defined in [src/common/utxos.ts:87](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L87)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **codecID**: *Buffer* = Buffer.alloc(2)
 
-*Defined in [src/common/utxos.ts:84](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L84)*
+*Defined in [src/common/utxos.ts:84](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L84)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **output**: *[Output](common_output.output.md)* = undefined
 
-*Defined in [src/common/utxos.ts:88](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L88)*
+*Defined in [src/common/utxos.ts:88](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L88)*
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 • **outputidx**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/common/utxos.ts:86](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L86)*
+*Defined in [src/common/utxos.ts:86](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L86)*
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 • **txid**: *Buffer* = Buffer.alloc(32)
 
-*Defined in [src/common/utxos.ts:85](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L85)*
+*Defined in [src/common/utxos.ts:85](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L85)*
 
 ## Methods
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **clone**(): *this*
 
-*Defined in [src/common/utxos.ts:164](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L164)*
+*Defined in [src/common/utxos.ts:164](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L164)*
 
 **Returns:** *this*
 
@@ -162,7 +162,7 @@ ___
 
 ▸ **create**(`codecID?`: number, `txid?`: Buffer, `outputidx?`: Buffer | number, `assetID?`: Buffer, `output?`: [Output](common_output.output.md)): *this*
 
-*Defined in [src/common/utxos.ts:166](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L166)*
+*Defined in [src/common/utxos.ts:166](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L166)*
 
 **Parameters:**
 
@@ -184,7 +184,7 @@ ___
 
 *Overrides [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
 
-*Defined in [src/common/utxos.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L52)*
+*Defined in [src/common/utxos.ts:52](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L52)*
 
 **Parameters:**
 
@@ -201,7 +201,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset?`: number): *number*
 
-*Defined in [src/common/utxos.ts:132](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L132)*
+*Defined in [src/common/utxos.ts:132](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L132)*
 
 Takes a [Buffer](https://github.com/feross/buffer) containing an [StandardUTXO](common_utxos.standardutxo.md), parses it, populates the class, and returns the length of the StandardUTXO in bytes.
 
@@ -220,7 +220,7 @@ ___
 
 ▸ **fromString**(`serialized`: string): *number*
 
-*Defined in [src/common/utxos.ts:160](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L160)*
+*Defined in [src/common/utxos.ts:160](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L160)*
 
 **Parameters:**
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **getAssetID**(): *Buffer*
 
-*Defined in [src/common/utxos.ts:114](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L114)*
+*Defined in [src/common/utxos.ts:114](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L114)*
 
 Returns the assetID as a [Buffer](https://github.com/feross/buffer).
 
@@ -250,7 +250,7 @@ ___
 
 *Overrides [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/common/utxos.ts:93](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L93)*
+*Defined in [src/common/utxos.ts:93](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L93)*
 
 Returns the numeric representation of the CodecID.
 
@@ -262,7 +262,7 @@ ___
 
 ▸ **getCodecIDBuffer**(): *Buffer*
 
-*Defined in [src/common/utxos.ts:99](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L99)*
+*Defined in [src/common/utxos.ts:99](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L99)*
 
 Returns the [Buffer](https://github.com/feross/buffer) representation of the CodecID
 
@@ -274,7 +274,7 @@ ___
 
 ▸ **getOutput**(): *[Output](common_output.output.md)*
 
-*Defined in [src/common/utxos.ts:125](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L125)*
+*Defined in [src/common/utxos.ts:125](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L125)*
 
 Returns a reference to the output
 
@@ -286,7 +286,7 @@ ___
 
 ▸ **getOutputIdx**(): *Buffer*
 
-*Defined in [src/common/utxos.ts:109](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L109)*
+*Defined in [src/common/utxos.ts:109](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L109)*
 
 Returns a [Buffer](https://github.com/feross/buffer)  of the OutputIdx.
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **getTxID**(): *Buffer*
 
-*Defined in [src/common/utxos.ts:104](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L104)*
+*Defined in [src/common/utxos.ts:104](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L104)*
 
 Returns a [Buffer](https://github.com/feross/buffer) of the TxID.
 
@@ -312,7 +312,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -326,7 +326,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -338,7 +338,7 @@ ___
 
 ▸ **getUTXOID**(): *string*
 
-*Defined in [src/common/utxos.ts:119](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L119)*
+*Defined in [src/common/utxos.ts:119](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L119)*
 
 Returns the UTXOID as a base-58 string (UTXOID is a string )
 
@@ -352,7 +352,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -372,7 +372,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/utxos.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L31)*
+*Defined in [src/common/utxos.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L31)*
 
 **Parameters:**
 
@@ -388,7 +388,7 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Defined in [src/common/utxos.ts:137](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L137)*
+*Defined in [src/common/utxos.ts:137](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L137)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [StandardUTXO](common_utxos.standardutxo.md).
 
@@ -400,6 +400,6 @@ ___
 
 ▸ **toString**(): *string*
 
-*Defined in [src/common/utxos.ts:162](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/utxos.ts#L162)*
+*Defined in [src/common/utxos.ts:162](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/utxos.ts#L162)*
 
 **Returns:** *string*

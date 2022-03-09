@@ -30,9 +30,9 @@ A class for defining the persistance behavior of this an API call.
 
 ###  constructor
 
-\+ **new PersistanceOptions**(`name`: string, `overwrite`: boolean, `mergeRule`: [MergeRule](../modules/src_utils.md#mergerule)): *[PersistanceOptions](utils_persistanceoptions.persistanceoptions.md)*
+\+ **new PersistanceOptions**(`name`: string, `overwrite`: boolean, `mergeRule`: [MergeRule](../modules/utils_constants.md#mergerule)): *[PersistanceOptions](utils_persistanceoptions.persistanceoptions.md)*
 
-*Defined in [src/utils/persistenceoptions.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L31)*
+*Defined in [src/utils/persistenceoptions.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L31)*
 
 **`remarks`** 
 The merge rules are as follows:
@@ -50,7 +50,7 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `name` | string | - | The namespace of the database the data |
 `overwrite` | boolean | false | True if the data should be completey overwritten |
-`mergeRule` | [MergeRule](../modules/src_utils.md#mergerule) | - | - |
+`mergeRule` | [MergeRule](../modules/utils_constants.md#mergerule) | - | - |
 
 **Returns:** *[PersistanceOptions](utils_persistanceoptions.persistanceoptions.md)*
 
@@ -58,9 +58,9 @@ Name | Type | Default | Description |
 
 ### `Protected` mergeRule
 
-• **mergeRule**: *[MergeRule](../modules/src_utils.md#mergerule)* = "union"
+• **mergeRule**: *[MergeRule](../modules/utils_constants.md#mergerule)* = "union"
 
-*Defined in [src/utils/persistenceoptions.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L16)*
+*Defined in [src/utils/persistenceoptions.ts:16](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L16)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **name**: *string* = undefined
 
-*Defined in [src/utils/persistenceoptions.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L12)*
+*Defined in [src/utils/persistenceoptions.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L12)*
 
 ___
 
@@ -76,19 +76,19 @@ ___
 
 • **overwrite**: *boolean* = false
 
-*Defined in [src/utils/persistenceoptions.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L14)*
+*Defined in [src/utils/persistenceoptions.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L14)*
 
 ## Methods
 
 ###  getMergeRule
 
-▸ **getMergeRule**(): *[MergeRule](../modules/src_utils.md#mergerule)*
+▸ **getMergeRule**(): *[MergeRule](../modules/utils_constants.md#mergerule)*
 
-*Defined in [src/utils/persistenceoptions.ts:31](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L31)*
+*Defined in [src/utils/persistenceoptions.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L31)*
 
-Returns the [MergeRule](../modules/src_utils.md#mergerule) of the instance
+Returns the [MergeRule](../modules/utils_constants.md#mergerule) of the instance
 
-**Returns:** *[MergeRule](../modules/src_utils.md#mergerule)*
+**Returns:** *[MergeRule](../modules/utils_constants.md#mergerule)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 ▸ **getName**(): *string*
 
-*Defined in [src/utils/persistenceoptions.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L21)*
+*Defined in [src/utils/persistenceoptions.ts:21](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L21)*
 
 Returns the namespace of the instance
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **getOverwrite**(): *boolean*
 
-*Defined in [src/utils/persistenceoptions.ts:26](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/persistenceoptions.ts#L26)*
+*Defined in [src/utils/persistenceoptions.ts:26](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/persistenceoptions.ts#L26)*
 
 Returns the overwrite rule of the instance
 

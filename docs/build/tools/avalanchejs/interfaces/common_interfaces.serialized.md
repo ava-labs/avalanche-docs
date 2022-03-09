@@ -22,7 +22,7 @@
 
 • **encoding**: *[SerializedEncoding](../modules/src_utils.md#serializedencoding)*
 
-*Defined in [src/common/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L62)*
+*Defined in [src/common/interfaces.ts:62](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L62)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **fields**: *object*
 
-*Defined in [src/common/interfaces.ts:65](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L65)*
+*Defined in [src/common/interfaces.ts:65](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L65)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **notes**: *string*
 
-*Defined in [src/common/interfaces.ts:64](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L64)*
+*Defined in [src/common/interfaces.ts:64](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L64)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **version**: *number*
 
-*Defined in [src/common/interfaces.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L63)*
+*Defined in [src/common/interfaces.ts:63](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L63)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **vm**: *string*
 
-*Defined in [src/common/interfaces.ts:61](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L61)*
+*Defined in [src/common/interfaces.ts:61](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L61)*

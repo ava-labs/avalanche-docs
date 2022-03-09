@@ -47,7 +47,7 @@ Class for payloads representing chain addresses.
 
 *Overrides [PayloadBase](utils_payload.payloadbase.md).[constructor](utils_payload.payloadbase.md#constructor)*
 
-*Defined in [src/utils/payload.ts:448](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L448)*
+*Defined in [src/utils/payload.ts:448](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L448)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ Name | Type | Default | Description |
 
 • **chainid**: *string* = ""
 
-*Defined in [src/utils/payload.ts:433](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L433)*
+*Defined in [src/utils/payload.ts:433](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L433)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[payload](utils_payload.payloadbase.md#protected-payload)*
 
-*Defined in [src/utils/payload.ts:198](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L198)*
+*Defined in [src/utils/payload.ts:198](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L198)*
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 *Overrides [PayloadBase](utils_payload.payloadbase.md).[typeid](utils_payload.payloadbase.md#protected-typeid)*
 
-*Defined in [src/utils/payload.ts:432](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L432)*
+*Defined in [src/utils/payload.ts:432](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L432)*
 
 ## Methods
 
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[fromBuffer](utils_payload.payloadbase.md#frombuffer)*
 
-*Defined in [src/utils/payload.ts:236](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L236)*
+*Defined in [src/utils/payload.ts:236](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L236)*
 
 Decodes the payload as a [Buffer](https://github.com/feross/buffer) including 4 bytes for the length and TypeID.
 
@@ -115,7 +115,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[getContent](utils_payload.payloadbase.md#getcontent)*
 
-*Defined in [src/utils/payload.ts:218](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L218)*
+*Defined in [src/utils/payload.ts:218](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L218)*
 
 Returns the payload content (minus typeID).
 
@@ -129,7 +129,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[getPayload](utils_payload.payloadbase.md#getpayload)*
 
-*Defined in [src/utils/payload.ts:226](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L226)*
+*Defined in [src/utils/payload.ts:226](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L226)*
 
 Returns the payload (with typeID).
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **returnChainID**(): *string*
 
-*Defined in [src/utils/payload.ts:438](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L438)*
+*Defined in [src/utils/payload.ts:438](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L438)*
 
 Returns the chainid.
 
@@ -155,7 +155,7 @@ ___
 
 *Overrides [PayloadBase](utils_payload.payloadbase.md).[returnType](utils_payload.payloadbase.md#abstract-returntype)*
 
-*Defined in [src/utils/payload.ts:445](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L445)*
+*Defined in [src/utils/payload.ts:445](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L445)*
 
 Returns an address string for the payload.
 
@@ -175,7 +175,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[toBuffer](utils_payload.payloadbase.md#tobuffer)*
 
-*Defined in [src/utils/payload.ts:251](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L251)*
+*Defined in [src/utils/payload.ts:251](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L251)*
 
 Encodes the payload as a [Buffer](https://github.com/feross/buffer) including 4 bytes for the length and TypeID.
 
@@ -189,7 +189,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[typeID](utils_payload.payloadbase.md#typeid)*
 
-*Defined in [src/utils/payload.ts:204](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L204)*
+*Defined in [src/utils/payload.ts:204](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L204)*
 
 Returns the TypeID for the payload.
 
@@ -203,7 +203,7 @@ ___
 
 *Inherited from [PayloadBase](utils_payload.payloadbase.md).[typeName](utils_payload.payloadbase.md#typename)*
 
-*Defined in [src/utils/payload.ts:211](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L211)*
+*Defined in [src/utils/payload.ts:211](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L211)*
 
 Returns the string name for the payload's type.
 

@@ -50,7 +50,7 @@
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[constructor](api_evm_outputs.evmoutput.md#constructor)*
 
-*Defined in [src/apis/evm/inputs.ts:198](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L198)*
+*Defined in [src/apis/evm/inputs.ts:198](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L198)*
 
 An [EVMInput](api_evm_inputs.evminput.md) class which contains address, amount, assetID, nonce.
 
@@ -73,7 +73,7 @@ Name | Type | Default | Description |
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[address](api_evm_inputs.evminput.md#protected-address)*
 
-*Defined in [src/apis/evm/outputs.ts:109](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L109)*
+*Defined in [src/apis/evm/outputs.ts:109](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L109)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[amount](api_evm_inputs.evminput.md#protected-amount)*
 
-*Defined in [src/apis/evm/outputs.ts:110](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L110)*
+*Defined in [src/apis/evm/outputs.ts:110](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L110)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[amountValue](api_evm_inputs.evminput.md#protected-amountvalue)*
 
-*Defined in [src/apis/evm/outputs.ts:111](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L111)*
+*Defined in [src/apis/evm/outputs.ts:111](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L111)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[assetID](api_evm_inputs.evminput.md#protected-assetid)*
 
-*Defined in [src/apis/evm/outputs.ts:112](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L112)*
+*Defined in [src/apis/evm/outputs.ts:112](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L112)*
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 • **nonce**: *Buffer* = Buffer.alloc(8)
 
-*Defined in [src/apis/evm/inputs.ts:127](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L127)*
+*Defined in [src/apis/evm/inputs.ts:127](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L127)*
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 • **nonceValue**: *BN* = new BN(0)
 
-*Defined in [src/apis/evm/inputs.ts:128](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L128)*
+*Defined in [src/apis/evm/inputs.ts:128](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L128)*
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 • **sigCount**: *Buffer* = Buffer.alloc(4)
 
-*Defined in [src/apis/evm/inputs.ts:129](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L129)*
+*Defined in [src/apis/evm/inputs.ts:129](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L129)*
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 • **sigIdxs**: *[SigIdx](common_signature.sigidx.md)[]* = []
 
-*Defined in [src/apis/evm/inputs.ts:130](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L130)*
+*Defined in [src/apis/evm/inputs.ts:130](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L130)*
 
 ## Methods
 
@@ -143,7 +143,7 @@ ___
 
 ▸ **addSignatureIdx**(`addressIdx`: number, `address`: Buffer): *void*
 
-*Defined in [src/apis/evm/inputs.ts:143](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L143)*
+*Defined in [src/apis/evm/inputs.ts:143](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L143)*
 
 Creates and adds a [SigIdx](common_signature.sigidx.md) to the [Input](common_inputs.input.md).
 
@@ -164,7 +164,7 @@ ___
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[clone](api_evm_outputs.evmoutput.md#clone)*
 
-*Defined in [src/apis/evm/inputs.ts:194](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L194)*
+*Defined in [src/apis/evm/inputs.ts:194](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L194)*
 
 **Returns:** *this*
 
@@ -176,7 +176,7 @@ ___
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[create](api_evm_outputs.evmoutput.md#create)*
 
-*Defined in [src/apis/evm/inputs.ts:190](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L190)*
+*Defined in [src/apis/evm/inputs.ts:190](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L190)*
 
 **Parameters:**
 
@@ -194,7 +194,7 @@ ___
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[fromBuffer](api_evm_outputs.evmoutput.md#frombuffer)*
 
-*Defined in [src/apis/evm/inputs.ts:176](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L176)*
+*Defined in [src/apis/evm/inputs.ts:176](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L176)*
 
 Decodes the [EVMInput](api_evm_inputs.evminput.md) as a [Buffer](https://github.com/feross/buffer) and returns the size.
 
@@ -215,7 +215,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[getAddress](api_evm_inputs.evminput.md#getaddress)*
 
-*Defined in [src/apis/evm/outputs.ts:134](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L134)*
+*Defined in [src/apis/evm/outputs.ts:134](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L134)*
 
 Returns the address of the input as [Buffer](https://github.com/feross/buffer)
 
@@ -229,7 +229,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[getAddressString](api_evm_inputs.evminput.md#getaddressstring)*
 
-*Defined in [src/apis/evm/outputs.ts:139](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L139)*
+*Defined in [src/apis/evm/outputs.ts:139](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L139)*
 
 Returns the address as a bech32 encoded string.
 
@@ -243,7 +243,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[getAmount](api_evm_inputs.evminput.md#getamount)*
 
-*Defined in [src/apis/evm/outputs.ts:144](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L144)*
+*Defined in [src/apis/evm/outputs.ts:144](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L144)*
 
 Returns the amount as a [BN](https://github.com/indutny/bn.js/).
 
@@ -257,7 +257,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[getAssetID](api_evm_inputs.evminput.md#getassetid)*
 
-*Defined in [src/apis/evm/outputs.ts:149](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L149)*
+*Defined in [src/apis/evm/outputs.ts:149](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L149)*
 
 Returns the assetID of the input as [Buffer](https://github.com/feross/buffer)
 
@@ -269,7 +269,7 @@ ___
 
 ▸ **getCredentialID**(): *number*
 
-*Defined in [src/apis/evm/inputs.ts:168](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L168)*
+*Defined in [src/apis/evm/inputs.ts:168](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L168)*
 
 **Returns:** *number*
 
@@ -279,7 +279,7 @@ ___
 
 ▸ **getNonce**(): *BN*
 
-*Defined in [src/apis/evm/inputs.ts:156](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L156)*
+*Defined in [src/apis/evm/inputs.ts:156](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L156)*
 
 Returns the nonce as a [BN](https://github.com/indutny/bn.js/).
 
@@ -291,7 +291,7 @@ ___
 
 ▸ **getSigIdxs**(): *[SigIdx](common_signature.sigidx.md)[]*
 
-*Defined in [src/apis/evm/inputs.ts:135](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L135)*
+*Defined in [src/apis/evm/inputs.ts:135](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L135)*
 
 Returns the array of [SigIdx](common_signature.sigidx.md) for this [Input](common_inputs.input.md)
 
@@ -305,7 +305,7 @@ ___
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[toBuffer](api_evm_outputs.evmoutput.md#tobuffer)*
 
-*Defined in [src/apis/evm/inputs.ts:161](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L161)*
+*Defined in [src/apis/evm/inputs.ts:161](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L161)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [EVMOutput](api_evm_outputs.evmoutput.md).
 
@@ -319,7 +319,7 @@ ___
 
 *Overrides [EVMOutput](api_evm_outputs.evmoutput.md).[toString](api_evm_outputs.evmoutput.md#tostring)*
 
-*Defined in [src/apis/evm/inputs.ts:186](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/inputs.ts#L186)*
+*Defined in [src/apis/evm/inputs.ts:186](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/inputs.ts#L186)*
 
 Returns a base-58 representation of the [EVMInput](api_evm_inputs.evminput.md).
 
@@ -333,7 +333,7 @@ ___
 
 *Inherited from [EVMInput](api_evm_inputs.evminput.md).[comparator](api_evm_inputs.evminput.md#static-comparator)*
 
-*Defined in [src/apis/evm/outputs.ts:117](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L117)*
+*Defined in [src/apis/evm/outputs.ts:117](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/outputs.ts#L117)*
 
 Returns a function used to sort an array of [EVMOutput](api_evm_outputs.evmoutput.md)s
 

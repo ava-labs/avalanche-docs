@@ -28,7 +28,7 @@ Response data for HTTP requests.
 
 \+ **new RequestResponseData**(`data`: any, `headers`: any, `status`: number, `statusText`: string, `request`: ClientRequest | XMLHttpRequest): *[RequestResponseData](common_apibase.requestresponsedata.md)*
 
-*Defined in [src/common/apibase.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L14)*
+*Defined in [src/common/apibase.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L14)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ Name | Type |
 
 • **data**: *any*
 
-*Defined in [src/common/apibase.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L16)*
+*Defined in [src/common/apibase.ts:16](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L16)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **headers**: *any*
 
-*Defined in [src/common/apibase.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L17)*
+*Defined in [src/common/apibase.ts:17](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L17)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **request**: *ClientRequest | XMLHttpRequest*
 
-*Defined in [src/common/apibase.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L20)*
+*Defined in [src/common/apibase.ts:20](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L20)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **status**: *number*
 
-*Defined in [src/common/apibase.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L18)*
+*Defined in [src/common/apibase.ts:18](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L18)*
 
 ___
 
@@ -80,4 +80,4 @@ ___
 
 • **statusText**: *string*
 
-*Defined in [src/common/apibase.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L19)*
+*Defined in [src/common/apibase.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L19)*

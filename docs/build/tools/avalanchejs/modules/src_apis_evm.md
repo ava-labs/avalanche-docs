@@ -9,7 +9,6 @@
 * [AmountInput](src_apis_evm.md#amountinput)
 * [AmountOutput](src_apis_evm.md#amountoutput)
 * [AssetAmountDestination](src_apis_evm.md#assetamountdestination)
-* [C](src_apis_evm.md#c)
 * [EVMAPI](src_apis_evm.md#evmapi)
 * [EVMBaseTx](src_apis_evm.md#evmbasetx)
 * [EVMConstants](src_apis_evm.md#evmconstants)
@@ -19,9 +18,6 @@
 * [ImportTx](src_apis_evm.md#importtx)
 * [KeyChain](src_apis_evm.md#keychain)
 * [KeyPair](src_apis_evm.md#keypair)
-* [Network](src_apis_evm.md#network)
-* [Networks](src_apis_evm.md#networks)
-* [P](src_apis_evm.md#p)
 * [SECPCredential](src_apis_evm.md#secpcredential)
 * [SECPTransferInput](src_apis_evm.md#secptransferinput)
 * [SECPTransferOutput](src_apis_evm.md#secptransferoutput)
@@ -35,7 +31,6 @@
 * [UTXO](src_apis_evm.md#utxo)
 * [UTXOSet](src_apis_evm.md#utxoset)
 * [UnsignedTx](src_apis_evm.md#unsignedtx)
-* [X](src_apis_evm.md#x)
 
 ## References
 
@@ -54,12 +49,6 @@ ___
 ###  AssetAmountDestination
 
 • **AssetAmountDestination**:
-
-___
-
-###  C
-
-• **C**:
 
 ___
 
@@ -114,24 +103,6 @@ ___
 ###  KeyPair
 
 • **KeyPair**:
-
-___
-
-###  Network
-
-• **Network**:
-
-___
-
-###  Networks
-
-• **Networks**:
-
-___
-
-###  P
-
-• **P**:
 
 ___
 
@@ -210,9 +181,3 @@ ___
 ###  UnsignedTx
 
 • **UnsignedTx**:
-
-___
-
-###  X
-
-• **X**:

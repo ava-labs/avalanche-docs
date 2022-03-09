@@ -46,7 +46,7 @@
 
 *Inherited from [Credential](common_signature.credential.md).[constructor](common_signature.credential.md#constructor)*
 
-*Defined in [src/common/credentials.ts:176](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L176)*
+*Defined in [src/common/credentials.ts:176](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L176)*
 
 **Parameters:**
 
@@ -64,7 +64,7 @@ Name | Type | Default |
 
 *Overrides [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/apis/avm/credentials.ts:39](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L39)*
+*Defined in [src/apis/avm/credentials.ts:39](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L39)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[_typeID](common_signature.credential.md#protected-_typeid)*
 
-*Defined in [src/apis/avm/credentials.ts:40](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L40)*
+*Defined in [src/apis/avm/credentials.ts:40](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L40)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[_typeName](common_signature.credential.md#protected-_typename)*
 
-*Defined in [src/apis/avm/credentials.ts:38](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L38)*
+*Defined in [src/apis/avm/credentials.ts:38](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L38)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Inherited from [Credential](common_signature.credential.md).[sigArray](common_signature.credential.md#protected-sigarray)*
 
-*Defined in [src/common/credentials.ts:128](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L128)*
+*Defined in [src/common/credentials.ts:128](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L128)*
 
 ## Methods
 
@@ -106,7 +106,7 @@ ___
 
 *Inherited from [Credential](common_signature.credential.md).[addSignature](common_signature.credential.md#addsignature)*
 
-*Defined in [src/common/credentials.ts:142](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L142)*
+*Defined in [src/common/credentials.ts:142](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L142)*
 
 Adds a signature to the credentials and returns the index off the added signature.
 
@@ -126,7 +126,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[clone](common_signature.credential.md#abstract-clone)*
 
-*Defined in [src/apis/avm/credentials.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L70)*
+*Defined in [src/apis/avm/credentials.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L70)*
 
 **Returns:** *this*
 
@@ -138,7 +138,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[create](common_signature.credential.md#abstract-create)*
 
-*Defined in [src/apis/avm/credentials.ts:76](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L76)*
+*Defined in [src/apis/avm/credentials.ts:76](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L76)*
 
 **Parameters:**
 
@@ -158,7 +158,7 @@ ___
 
 *Overrides [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
 
-*Defined in [src/common/credentials.ts:119](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L119)*
+*Defined in [src/common/credentials.ts:119](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L119)*
 
 **Parameters:**
 
@@ -177,7 +177,7 @@ ___
 
 *Inherited from [Credential](common_signature.credential.md).[fromBuffer](common_signature.credential.md#frombuffer)*
 
-*Defined in [src/common/credentials.ts:147](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L147)*
+*Defined in [src/common/credentials.ts:147](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L147)*
 
 **Parameters:**
 
@@ -196,7 +196,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -210,7 +210,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[getCredentialID](common_signature.credential.md#abstract-getcredentialid)*
 
-*Defined in [src/apis/avm/credentials.ts:66](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L66)*
+*Defined in [src/apis/avm/credentials.ts:66](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L66)*
 
 **Returns:** *number*
 
@@ -222,7 +222,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -236,7 +236,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -250,7 +250,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -270,7 +270,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[select](common_signature.credential.md#abstract-select)*
 
-*Defined in [src/apis/avm/credentials.ts:80](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L80)*
+*Defined in [src/apis/avm/credentials.ts:80](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L80)*
 
 **Parameters:**
 
@@ -291,7 +291,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/credentials.ts:112](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L112)*
+*Defined in [src/common/credentials.ts:112](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L112)*
 
 **Parameters:**
 
@@ -309,7 +309,7 @@ ___
 
 *Overrides [Credential](common_signature.credential.md).[setCodecID](common_signature.credential.md#setcodecid)*
 
-*Defined in [src/apis/avm/credentials.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/credentials.ts#L52)*
+*Defined in [src/apis/avm/credentials.ts:52](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/credentials.ts#L52)*
 
 Set the codecID
 
@@ -329,6 +329,6 @@ ___
 
 *Inherited from [Credential](common_signature.credential.md).[toBuffer](common_signature.credential.md#tobuffer)*
 
-*Defined in [src/common/credentials.ts:161](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L161)*
+*Defined in [src/common/credentials.ts:161](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/credentials.ts#L161)*
 
 **Returns:** *Buffer*

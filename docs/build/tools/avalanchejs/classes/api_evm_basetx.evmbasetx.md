@@ -55,7 +55,7 @@ Class representing a base for all transactions.
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[constructor](common_transactions.evmstandardbasetx.md#constructor)*
 
-*Defined in [src/apis/evm/basetx.ts:83](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L83)*
+*Defined in [src/apis/evm/basetx.ts:83](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L83)*
 
 Class representing an EVMBaseTx which is the foundation for all EVM transactions.
 
@@ -63,7 +63,7 @@ Class representing an EVMBaseTx which is the foundation for all EVM transactions
 
 Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
-`networkID` | number | DefaultNetworkID | Optional networkID, [DefaultNetworkID](../modules/src_utils.md#defaultnetworkid) |
+`networkID` | number | DefaultNetworkID | Optional networkID, [DefaultNetworkID](../modules/utils_constants.md#const-defaultnetworkid) |
 `blockchainID` | Buffer | Buffer.alloc(32, 16) | Optional blockchainID, default Buffer.alloc(32, 16)  |
 
 **Returns:** *[EVMBaseTx](api_evm_basetx.evmbasetx.md)*
@@ -76,7 +76,7 @@ Name | Type | Default | Description |
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[_typeID](common_transactions.evmstandardbasetx.md#protected-_typeid)*
 
-*Defined in [src/apis/evm/basetx.ts:25](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L25)*
+*Defined in [src/apis/evm/basetx.ts:25](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L25)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[_typeName](common_transactions.evmstandardbasetx.md#protected-_typename)*
 
-*Defined in [src/apis/evm/basetx.ts:24](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L24)*
+*Defined in [src/apis/evm/basetx.ts:24](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L24)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[blockchainID](common_transactions.evmstandardbasetx.md#protected-blockchainid)*
 
-*Defined in [src/common/evmtx.ts:74](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L74)*
+*Defined in [src/common/evmtx.ts:74](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L74)*
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[networkID](common_transactions.evmstandardbasetx.md#protected-networkid)*
 
-*Defined in [src/common/evmtx.ts:73](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L73)*
+*Defined in [src/common/evmtx.ts:73](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L73)*
 
 ## Methods
 
@@ -126,7 +126,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[clone](common_transactions.evmstandardbasetx.md#abstract-clone)*
 
-*Defined in [src/apis/evm/basetx.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L70)*
+*Defined in [src/apis/evm/basetx.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L70)*
 
 **Returns:** *this*
 
@@ -138,7 +138,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[create](common_transactions.evmstandardbasetx.md#abstract-create)*
 
-*Defined in [src/apis/evm/basetx.ts:76](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L76)*
+*Defined in [src/apis/evm/basetx.ts:76](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L76)*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[deserialize](common_transactions.evmstandardbasetx.md#deserialize)*
 
-*Defined in [src/apis/evm/basetx.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L29)*
+*Defined in [src/apis/evm/basetx.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L29)*
 
 **Parameters:**
 
@@ -173,7 +173,7 @@ ___
 
 ▸ **fromBuffer**(`bytes`: Buffer, `offset`: number): *number*
 
-*Defined in [src/apis/evm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L49)*
+*Defined in [src/apis/evm/basetx.ts:49](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L49)*
 
 Takes a [Buffer](https://github.com/feross/buffer) containing an [BaseTx](api_avm_basetx.basetx.md), parses it, populates the class, and returns the length of the BaseTx in bytes.
 
@@ -198,7 +198,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[getBlockchainID](common_transactions.evmstandardbasetx.md#getblockchainid)*
 
-*Defined in [src/common/evmtx.ts:91](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L91)*
+*Defined in [src/common/evmtx.ts:91](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L91)*
 
 Returns the Buffer representation of the BlockchainID
 
@@ -212,7 +212,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -226,7 +226,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[getNetworkID](common_transactions.evmstandardbasetx.md#getnetworkid)*
 
-*Defined in [src/common/evmtx.ts:84](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L84)*
+*Defined in [src/common/evmtx.ts:84](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L84)*
 
 Returns the NetworkID as a number
 
@@ -240,7 +240,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[getTxType](common_transactions.evmstandardbasetx.md#abstract-gettxtype)*
 
-*Defined in [src/apis/evm/basetx.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L36)*
+*Defined in [src/apis/evm/basetx.ts:36](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L36)*
 
 Returns the id of the [BaseTx](api_avm_basetx.basetx.md)
 
@@ -254,7 +254,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -268,7 +268,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -282,7 +282,7 @@ ___
 
 *Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -302,7 +302,7 @@ ___
 
 *Overrides [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[select](common_transactions.evmstandardbasetx.md#abstract-select)*
 
-*Defined in [src/apis/evm/basetx.ts:80](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L80)*
+*Defined in [src/apis/evm/basetx.ts:80](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L80)*
 
 **Parameters:**
 
@@ -323,7 +323,7 @@ ___
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/evmtx.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L36)*
+*Defined in [src/common/evmtx.ts:36](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L36)*
 
 **Parameters:**
 
@@ -339,7 +339,7 @@ ___
 
 ▸ **sign**(`msg`: Buffer, `kc`: [KeyChain](api_evm_keychain.keychain.md)): *[Credential](common_signature.credential.md)[]*
 
-*Defined in [src/apis/evm/basetx.ts:65](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/basetx.ts#L65)*
+*Defined in [src/apis/evm/basetx.ts:65](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/basetx.ts#L65)*
 
 Takes the bytes of an [UnsignedTx](api_evm_transactions.unsignedtx.md) and returns an array of [Credential](common_signature.credential.md)s
 
@@ -362,7 +362,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[toBuffer](common_transactions.evmstandardbasetx.md#tobuffer)*
 
-*Defined in [src/common/evmtx.ts:98](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L98)*
+*Defined in [src/common/evmtx.ts:98](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L98)*
 
 Returns a [Buffer](https://github.com/feross/buffer) representation of the [StandardBaseTx](common_transactions.standardbasetx.md).
 
@@ -376,7 +376,7 @@ ___
 
 *Inherited from [EVMStandardBaseTx](common_transactions.evmstandardbasetx.md).[toString](common_transactions.evmstandardbasetx.md#tostring)*
 
-*Defined in [src/common/evmtx.ts:108](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L108)*
+*Defined in [src/common/evmtx.ts:108](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/evmtx.ts#L108)*
 
 Returns a base-58 representation of the [StandardBaseTx](common_transactions.standardbasetx.md).
 

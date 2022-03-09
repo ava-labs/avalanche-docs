@@ -37,7 +37,7 @@ BIP32 hierarchical deterministic keys.
 
 \+ **new HDNode**(`from`: string | Buffer): *[HDNode](utils_hdnode.hdnode.md)*
 
-*Defined in [src/utils/hdnode.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L70)*
+*Defined in [src/utils/hdnode.ts:70](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L70)*
 
 Creates an HDNode from a master seed or an extended public/private key
 
@@ -55,7 +55,7 @@ Name | Type | Description |
 
 • **chainCode**: *Buffer*
 
-*Defined in [src/utils/hdnode.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L20)*
+*Defined in [src/utils/hdnode.ts:20](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L20)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • **hdkey**: *any*
 
-*Defined in [src/utils/hdnode.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L16)*
+*Defined in [src/utils/hdnode.ts:16](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L16)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **privateExtendedKey**: *string*
 
-*Defined in [src/utils/hdnode.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L21)*
+*Defined in [src/utils/hdnode.ts:21](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L21)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 • **privateKey**: *Buffer*
 
-*Defined in [src/utils/hdnode.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L18)*
+*Defined in [src/utils/hdnode.ts:18](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L18)*
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • **privateKeyCB58**: *string*
 
-*Defined in [src/utils/hdnode.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L19)*
+*Defined in [src/utils/hdnode.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L19)*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 • **publicExtendedKey**: *string*
 
-*Defined in [src/utils/hdnode.ts:22](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L22)*
+*Defined in [src/utils/hdnode.ts:22](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L22)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 • **publicKey**: *Buffer*
 
-*Defined in [src/utils/hdnode.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L17)*
+*Defined in [src/utils/hdnode.ts:17](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L17)*
 
 ## Methods
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **derive**(`path`: string): *[HDNode](utils_hdnode.hdnode.md)*
 
-*Defined in [src/utils/hdnode.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L29)*
+*Defined in [src/utils/hdnode.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L29)*
 
 Derives the HDNode at path from the current HDNode.
 
@@ -131,7 +131,7 @@ ___
 
 ▸ **sign**(`hash`: Buffer): *Buffer*
 
-*Defined in [src/utils/hdnode.ts:45](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L45)*
+*Defined in [src/utils/hdnode.ts:45](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L45)*
 
 Signs the buffer hash with the private key using secp256k1 and returns the signature as a buffer.
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **verify**(`hash`: Buffer, `signature`: Buffer): *boolean*
 
-*Defined in [src/utils/hdnode.ts:57](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L57)*
+*Defined in [src/utils/hdnode.ts:57](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L57)*
 
 Verifies that the signature is valid for hash and the HDNode's public key using secp256k1.
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **wipePrivateData**(): *void*
 
-*Defined in [src/utils/hdnode.ts:65](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/hdnode.ts#L65)*
+*Defined in [src/utils/hdnode.ts:65](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/hdnode.ts#L65)*
 
 Wipes all record of the private key from the HDNode instance.
 After calling this method, the instance will behave as if it was created via an xpub.

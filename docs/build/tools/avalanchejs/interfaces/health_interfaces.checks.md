@@ -23,7 +23,7 @@
 
 • **C**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L15)*
+*Defined in [src/apis/health/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L15)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **P**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L16)*
+*Defined in [src/apis/health/interfaces.ts:16](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L16)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **X**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L17)*
+*Defined in [src/apis/health/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L17)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **isBootstrapped**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L18)*
+*Defined in [src/apis/health/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L18)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **network**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L19)*
+*Defined in [src/apis/health/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L19)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **router**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L20)*
+*Defined in [src/apis/health/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/health/interfaces.ts#L20)*

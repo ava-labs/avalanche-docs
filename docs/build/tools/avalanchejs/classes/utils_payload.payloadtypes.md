@@ -36,7 +36,7 @@ Class for determining payload types and managing the lookup table.
 
 \+ **new PayloadTypes**(): *[PayloadTypes](utils_payload.payloadtypes.md)*
 
-*Defined in [src/utils/payload.ts:155](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L155)*
+*Defined in [src/utils/payload.ts:155](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L155)*
 
 **Returns:** *[PayloadTypes](utils_payload.payloadtypes.md)*
 
@@ -46,7 +46,7 @@ Class for determining payload types and managing the lookup table.
 
 • **types**: *string[]* = []
 
-*Defined in [src/utils/payload.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L23)*
+*Defined in [src/utils/payload.ts:23](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L23)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 ▪ **instance**: *[PayloadTypes](utils_payload.payloadtypes.md)*
 
-*Defined in [src/utils/payload.ts:22](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L22)*
+*Defined in [src/utils/payload.ts:22](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L22)*
 
 ## Methods
 
@@ -62,7 +62,7 @@ ___
 
 ▸ **getContent**(`payload`: Buffer): *Buffer*
 
-*Defined in [src/utils/payload.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L28)*
+*Defined in [src/utils/payload.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L28)*
 
 Given an encoded payload buffer returns the payload content (minus typeID).
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **getPayload**(`payload`: Buffer): *Buffer*
 
-*Defined in [src/utils/payload.ts:36](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L36)*
+*Defined in [src/utils/payload.ts:36](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L36)*
 
 Given an encoded payload buffer returns the payload (with typeID).
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **getTypeID**(`payload`: Buffer): *number*
 
-*Defined in [src/utils/payload.ts:44](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L44)*
+*Defined in [src/utils/payload.ts:44](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L44)*
 
 Given a payload buffer returns the proper TypeID.
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **lookupID**(`typestr`: string): *number*
 
-*Defined in [src/utils/payload.ts:55](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L55)*
+*Defined in [src/utils/payload.ts:55](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L55)*
 
 Given a type string returns the proper TypeID.
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **lookupType**(`value`: number): *string*
 
-*Defined in [src/utils/payload.ts:62](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L62)*
+*Defined in [src/utils/payload.ts:62](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L62)*
 
 Given a TypeID returns a string describing the payload type.
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **recast**(`unknowPayload`: [PayloadBase](utils_payload.payloadbase.md)): *[PayloadBase](utils_payload.payloadbase.md)*
 
-*Defined in [src/utils/payload.ts:142](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L142)*
+*Defined in [src/utils/payload.ts:142](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L142)*
 
 Given a [PayloadBase](utils_payload.payloadbase.md) which may not be cast properly, returns a properly cast [PayloadBase](utils_payload.payloadbase.md).
 
@@ -170,7 +170,7 @@ ___
 
 ▸ **select**(`typeID`: number, ...`args`: any[]): *[PayloadBase](utils_payload.payloadbase.md)*
 
-*Defined in [src/utils/payload.ts:69](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L69)*
+*Defined in [src/utils/payload.ts:69](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L69)*
 
 Given a TypeID returns the proper [PayloadBase](utils_payload.payloadbase.md).
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **getInstance**(): *[PayloadTypes](utils_payload.payloadtypes.md)*
 
-*Defined in [src/utils/payload.ts:149](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L149)*
+*Defined in [src/utils/payload.ts:149](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/payload.ts#L149)*
 
 Returns the [PayloadTypes](utils_payload.payloadtypes.md) singleton.
 

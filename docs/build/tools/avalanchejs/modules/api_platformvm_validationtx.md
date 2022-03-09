@@ -21,4 +21,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/apis/platformvm/validationtx.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/validationtx.ts#L23)*
+*Defined in [src/apis/platformvm/validationtx.ts:23](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/validationtx.ts#L23)*

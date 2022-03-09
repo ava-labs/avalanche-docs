@@ -68,6 +68,7 @@ Class for interacting with a node's PlatformVMAPI
 * [getDefaultCreationTxFee](api_platformvm.platformvmapi.md#getdefaultcreationtxfee)
 * [getDefaultTxFee](api_platformvm.platformvmapi.md#getdefaulttxfee)
 * [getHeight](api_platformvm.platformvmapi.md#getheight)
+* [getMaxStakeAmount](api_platformvm.platformvmapi.md#getmaxstakeamount)
 * [getMinStake](api_platformvm.platformvmapi.md#getminstake)
 * [getPendingValidators](api_platformvm.platformvmapi.md#getpendingvalidators)
 * [getRPCID](api_platformvm.platformvmapi.md#getrpcid)
@@ -75,6 +76,8 @@ Class for interacting with a node's PlatformVMAPI
 * [getStake](api_platformvm.platformvmapi.md#getstake)
 * [getStakingAssetID](api_platformvm.platformvmapi.md#getstakingassetid)
 * [getSubnets](api_platformvm.platformvmapi.md#getsubnets)
+* [getTimestamp](api_platformvm.platformvmapi.md#gettimestamp)
+* [getTotalStake](api_platformvm.platformvmapi.md#gettotalstake)
 * [getTx](api_platformvm.platformvmapi.md#gettx)
 * [getTxFee](api_platformvm.platformvmapi.md#gettxfee)
 * [getTxStatus](api_platformvm.platformvmapi.md#gettxstatus)
@@ -105,7 +108,7 @@ Class for interacting with a node's PlatformVMAPI
 
 *Overrides [JRPCAPI](common_jrpcapi.jrpcapi.md).[constructor](common_jrpcapi.jrpcapi.md#constructor)*
 
-*Defined in [src/apis/platformvm/api.ts:1851](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1851)*
+*Defined in [src/apis/platformvm/api.ts:1928](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1928)*
 
 This class should not be instantiated directly.
 Instead use the [Avalanche.addAPI](avalanche.avalanche-1.md#addapi) method.
@@ -125,7 +128,7 @@ Name | Type | Default | Description |
 
 • **AVAXAssetID**: *Buffer* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:67](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L67)*
+*Defined in [src/apis/platformvm/api.ts:87](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L87)*
 
 ___
 
@@ -135,7 +138,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[baseURL](common_apibase.apibase.md#protected-baseurl)*
 
-*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L29)*
+*Defined in [src/common/apibase.ts:29](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L29)*
 
 ___
 
@@ -143,7 +146,7 @@ ___
 
 • **blockchainAlias**: *string* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:65](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L65)*
+*Defined in [src/apis/platformvm/api.ts:85](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L85)*
 
 ___
 
@@ -151,7 +154,7 @@ ___
 
 • **blockchainID**: *string* = PlatformChainID
 
-*Defined in [src/apis/platformvm/api.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L63)*
+*Defined in [src/apis/platformvm/api.ts:83](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L83)*
 
 ___
 
@@ -161,7 +164,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[core](common_apibase.apibase.md#protected-core)*
 
-*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L28)*
+*Defined in [src/common/apibase.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L28)*
 
 ___
 
@@ -169,7 +172,7 @@ ___
 
 • **creationTxFee**: *BN* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:71](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L71)*
+*Defined in [src/apis/platformvm/api.ts:91](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L91)*
 
 ___
 
@@ -179,7 +182,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[db](common_apibase.apibase.md#protected-db)*
 
-*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L30)*
+*Defined in [src/common/apibase.ts:30](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L30)*
 
 ___
 
@@ -189,7 +192,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[jrpcVersion](common_jrpcapi.jrpcapi.md#protected-jrpcversion)*
 
-*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L11)*
+*Defined in [src/common/jrpcapi.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L11)*
 
 ___
 
@@ -197,7 +200,7 @@ ___
 
 • **minDelegatorStake**: *BN* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:75](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L75)*
+*Defined in [src/apis/platformvm/api.ts:95](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L95)*
 
 ___
 
@@ -205,7 +208,7 @@ ___
 
 • **minValidatorStake**: *BN* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:73](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L73)*
+*Defined in [src/apis/platformvm/api.ts:93](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L93)*
 
 ___
 
@@ -215,7 +218,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[rpcID](common_jrpcapi.jrpcapi.md#protected-rpcid)*
 
-*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L12)*
+*Defined in [src/common/jrpcapi.ts:12](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L12)*
 
 ___
 
@@ -223,7 +226,7 @@ ___
 
 • **txFee**: *BN* = undefined
 
-*Defined in [src/apis/platformvm/api.ts:69](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L69)*
+*Defined in [src/apis/platformvm/api.ts:89](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L89)*
 
 ## Methods
 
@@ -231,7 +234,7 @@ ___
 
 ▸ **addDelegator**(`username`: string, `password`: string, `nodeID`: string, `startTime`: Date, `endTime`: Date, `stakeAmount`: BN, `rewardAddress`: string): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:696](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L696)*
+*Defined in [src/apis/platformvm/api.ts:716](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L716)*
 
 Add a delegator to the Primary Network.
 
@@ -257,7 +260,7 @@ ___
 
 ▸ **addSubnetValidator**(`username`: string, `password`: string, `nodeID`: string, `subnetID`: Buffer | string, `startTime`: Date, `endTime`: Date, `weight`: number): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:652](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L652)*
+*Defined in [src/apis/platformvm/api.ts:672](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L672)*
 
 Add a validator to a Subnet other than the Primary Network. The validator must validate the Primary Network for the entire duration they validate this Subnet.
 
@@ -283,7 +286,7 @@ ___
 
 ▸ **addValidator**(`username`: string, `password`: string, `nodeID`: string, `startTime`: Date, `endTime`: Date, `stakeAmount`: BN, `rewardAddress`: string, `delegationFeeRate`: BN): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:610](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L610)*
+*Defined in [src/apis/platformvm/api.ts:630](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L630)*
 
 Add a validator to the Primary Network.
 
@@ -310,7 +313,7 @@ ___
 
 ▸ **addressFromBuffer**(`address`: Buffer): *string*
 
-*Defined in [src/apis/platformvm/api.ts:158](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L158)*
+*Defined in [src/apis/platformvm/api.ts:178](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L178)*
 
 **Parameters:**
 
@@ -326,7 +329,7 @@ ___
 
 ▸ **buildAddDelegatorTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `toAddresses`: string[], `fromAddresses`: string[], `changeAddresses`: string[], `nodeID`: string, `startTime`: BN, `endTime`: BN, `stakeAmount`: BN, `rewardAddresses`: string[], `rewardLocktime`: BN, `rewardThreshold`: number, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1487](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1487)*
+*Defined in [src/apis/platformvm/api.ts:1564](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1564)*
 
 Helper function which creates an unsigned [AddDelegatorTx](api_platformvm_validationtx.adddelegatortx.md). For more granular control, you may create your own
 [UnsignedTx](api_evm_transactions.unsignedtx.md) manually and import the [AddDelegatorTx](api_platformvm_validationtx.adddelegatortx.md) class directly.
@@ -359,7 +362,7 @@ ___
 
 ▸ **buildAddValidatorTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `toAddresses`: string[], `fromAddresses`: string[], `changeAddresses`: string[], `nodeID`: string, `startTime`: BN, `endTime`: BN, `stakeAmount`: BN, `rewardAddresses`: string[], `delegationFee`: number, `rewardLocktime`: BN, `rewardThreshold`: number, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1589](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1589)*
+*Defined in [src/apis/platformvm/api.ts:1666](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1666)*
 
 Helper function which creates an unsigned [AddValidatorTx](api_platformvm_validationtx.addvalidatortx.md). For more granular control, you may create your own
 [UnsignedTx](api_evm_transactions.unsignedtx.md) manually and import the [AddValidatorTx](api_platformvm_validationtx.addvalidatortx.md) class directly.
@@ -393,7 +396,7 @@ ___
 
 ▸ **buildCreateChainTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `fromAddresses`: string[], `changeAddresses`: string[], `subnetID`: string | Buffer, `chainName`: string, `vmID`: string, `fxIDs`: string[], `genesisData`: [GenesisData](api_avm_genesisdata.genesisdata.md), `subnetAuth`: [SubnetAuth](api_platformvm_subnetauth.subnetauth.md), `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1761](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1761)*
+*Defined in [src/apis/platformvm/api.ts:1838](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1838)*
 
 Build an unsigned [CreateChainTx](api_platformvm_createchaintx.createchaintx.md).
 
@@ -423,7 +426,7 @@ ___
 
 ▸ **buildCreateSubnetTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `fromAddresses`: string[], `changeAddresses`: string[], `subnetOwnerAddresses`: string[], `subnetOwnerThreshold`: number, `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1695](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1695)*
+*Defined in [src/apis/platformvm/api.ts:1772](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1772)*
 
 Class representing an unsigned [CreateSubnetTx](api_platformvm_createsubnettx.createsubnettx.md) transaction.
 
@@ -449,7 +452,7 @@ ___
 
 ▸ **buildExportTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `amount`: BN, `destinationChain`: Buffer | string, `toAddresses`: string[], `fromAddresses`: string[], `changeAddresses`: string[], `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1313](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1313)*
+*Defined in [src/apis/platformvm/api.ts:1390](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1390)*
 
 Helper function which creates an unsigned Export Tx. For more granular control, you may create your own
 [UnsignedTx](api_evm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_evm_inputs.transferableinput.md)s, [TransferableOutput](api_evm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -479,7 +482,7 @@ ___
 
 ▸ **buildImportTx**(`utxoset`: [UTXOSet](api_platformvm_utxos.utxoset.md), `ownerAddresses`: string[], `sourceChain`: Buffer | string, `toAddresses`: string[], `fromAddresses`: string[], `changeAddresses`: string[], `memo`: [PayloadBase](utils_payload.payloadbase.md) | Buffer, `asOf`: BN, `locktime`: BN, `threshold`: number): *Promise‹[UnsignedTx](api_platformvm_transactions.unsignedtx.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1221](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1221)*
+*Defined in [src/apis/platformvm/api.ts:1298](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1298)*
 
 Helper function which creates an unsigned Import Tx. For more granular control, you may create your own
 [UnsignedTx](api_evm_transactions.unsignedtx.md) manually (with their corresponding [TransferableInput](api_evm_inputs.transferableinput.md)s, [TransferableOutput](api_evm_outputs.transferableoutput.md)s, and [[TransferOperation]]s).
@@ -514,7 +517,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[callMethod](common_jrpcapi.jrpcapi.md#callmethod)*
 
-*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L14)*
+*Defined in [src/common/jrpcapi.ts:14](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L14)*
 
 **Parameters:**
 
@@ -533,7 +536,7 @@ ___
 
 ▸ **checkGooseEgg**(`utx`: [UnsignedTx](api_platformvm_transactions.unsignedtx.md), `outTotal`: BN): *Promise‹boolean›*
 
-*Defined in [src/apis/platformvm/api.ts:319](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L319)*
+*Defined in [src/apis/platformvm/api.ts:339](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L339)*
 
 Helper function which determines if a tx is a goose egg transaction.
 
@@ -557,7 +560,7 @@ ___
 
 ▸ **createAddress**(`username`: string, `password`: string): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:440](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L440)*
+*Defined in [src/apis/platformvm/api.ts:460](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L460)*
 
 Create an address in the node's keystore.
 
@@ -578,7 +581,7 @@ ___
 
 ▸ **createBlockchain**(`username`: string, `password`: string, `subnetID`: Buffer | string, `vmID`: string, `fxIDs`: number[], `name`: string, `genesis`: string): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:360](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L360)*
+*Defined in [src/apis/platformvm/api.ts:380](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L380)*
 
 Creates a new blockchain.
 
@@ -590,7 +593,7 @@ Name | Type | Default | Description |
 `password` | string | - | The password of the Keystore user that controls the new account |
 `subnetID` | Buffer &#124; string | undefined | Optional. Either a [Buffer](https://github.com/feross/buffer) or an cb58 serialized string for the SubnetID or its alias. |
 `vmID` | string | - | The ID of the Virtual Machine the blockchain runs. Can also be an alias of the Virtual Machine. |
-`fxIDs` | number[] | - | - |
+`fxIDs` | number[] | - | The ids of the FXs the VM is running. |
 `name` | string | - | A human-readable name for the new blockchain |
 `genesis` | string | - | The base 58 (with checksum) representation of the genesis state of the new blockchain. Virtual Machines should have a static API method named buildGenesis that can be used to generate genesisData.  |
 
@@ -604,7 +607,7 @@ ___
 
 ▸ **createSubnet**(`username`: string, `password`: string, `controlKeys`: string[], `threshold`: number): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:733](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L733)*
+*Defined in [src/apis/platformvm/api.ts:753](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L753)*
 
 Create an unsigned transaction to create a new Subnet. The unsigned transaction must be
 signed with the key of the account paying the transaction fee. The Subnet’s ID is the ID of the transaction that creates it (ie the response from issueTx when issuing the signed transaction).
@@ -628,7 +631,7 @@ ___
 
 ▸ **exportAVAX**(`username`: string, `password`: string, `amount`: BN, `to`: string): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:823](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L823)*
+*Defined in [src/apis/platformvm/api.ts:843](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L843)*
 
 Send AVAX from an account on the P-Chain to an address on the X-Chain. This transaction
 must be signed with the key of the account that the AVAX is sent from and which pays the
@@ -655,7 +658,7 @@ ___
 
 ▸ **exportKey**(`username`: string, `password`: string, `address`: string): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1042](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1042)*
+*Defined in [src/apis/platformvm/api.ts:1115](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1115)*
 
 Exports the private key for an address.
 
@@ -677,7 +680,7 @@ ___
 
 ▸ **getAVAXAssetID**(`refresh`: boolean): *Promise‹Buffer›*
 
-*Defined in [src/apis/platformvm/api.ts:178](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L178)*
+*Defined in [src/apis/platformvm/api.ts:198](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L198)*
 
 Fetches the AVAX AssetID and returns it in a Promise.
 
@@ -695,9 +698,9 @@ ___
 
 ###  getBalance
 
-▸ **getBalance**(`address`: string): *Promise‹object›*
+▸ **getBalance**(`address`: string): *Promise‹[GetBalanceResponse](../interfaces/platformvm_interfaces.getbalanceresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:462](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L462)*
+*Defined in [src/apis/platformvm/api.ts:482](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L482)*
 
 Gets the balance of a particular asset.
 
@@ -707,7 +710,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `address` | string | The address to pull the asset balance from  |
 
-**Returns:** *Promise‹object›*
+**Returns:** *Promise‹[GetBalanceResponse](../interfaces/platformvm_interfaces.getbalanceresponse.md)›*
 
 Promise with the balance as a [BN](https://github.com/indutny/bn.js/) on the provided address.
 
@@ -719,7 +722,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getBaseURL](common_apibase.apibase.md#getbaseurl)*
 
-*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L53)*
+*Defined in [src/common/apibase.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L53)*
 
 Returns the baseURL's path.
 
@@ -731,7 +734,7 @@ ___
 
 ▸ **getBlockchainAlias**(): *string*
 
-*Defined in [src/apis/platformvm/api.ts:82](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L82)*
+*Defined in [src/apis/platformvm/api.ts:102](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L102)*
 
 Gets the alias for the blockchainID if it exists, otherwise returns `undefined`.
 
@@ -745,7 +748,7 @@ ___
 
 ▸ **getBlockchainID**(): *string*
 
-*Defined in [src/apis/platformvm/api.ts:117](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L117)*
+*Defined in [src/apis/platformvm/api.ts:137](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L137)*
 
 Gets the blockchainID and returns it.
 
@@ -759,7 +762,7 @@ ___
 
 ▸ **getBlockchainStatus**(`blockchainID`: string): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:396](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L396)*
+*Defined in [src/apis/platformvm/api.ts:416](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L416)*
 
 Gets the status of a blockchain.
 
@@ -777,13 +780,13 @@ ___
 
 ###  getBlockchains
 
-▸ **getBlockchains**(): *Promise‹object[]›*
+▸ **getBlockchains**(): *Promise‹[Blockchain](../interfaces/platformvm_interfaces.blockchain.md)[]›*
 
-*Defined in [src/apis/platformvm/api.ts:802](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L802)*
+*Defined in [src/apis/platformvm/api.ts:822](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L822)*
 
 Get all the blockchains that exist (excluding the P-Chain).
 
-**Returns:** *Promise‹object[]›*
+**Returns:** *Promise‹[Blockchain](../interfaces/platformvm_interfaces.blockchain.md)[]›*
 
 Promise for an array of objects containing fields "id", "subnetID", and "vmID".
 
@@ -793,7 +796,7 @@ ___
 
 ▸ **getCreateChainTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:241](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L241)*
+*Defined in [src/apis/platformvm/api.ts:261](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L261)*
 
 Gets the CreateChainTx fee.
 
@@ -807,7 +810,7 @@ ___
 
 ▸ **getCreateSubnetTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:228](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L228)*
+*Defined in [src/apis/platformvm/api.ts:248](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L248)*
 
 Gets the CreateSubnetTx fee.
 
@@ -821,7 +824,7 @@ ___
 
 ▸ **getCreationTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:272](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L272)*
+*Defined in [src/apis/platformvm/api.ts:292](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L292)*
 
 Gets the creation fee for this chain.
 
@@ -835,7 +838,7 @@ ___
 
 ▸ **getCurrentSupply**(): *Promise‹BN›*
 
-*Defined in [src/apis/platformvm/api.ts:916](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L916)*
+*Defined in [src/apis/platformvm/api.ts:936](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L936)*
 
 Returns an upper bound on the amount of tokens that exist. Not monotonically increasing because this number can go down if a staker"s reward is denied.
 
@@ -847,7 +850,7 @@ ___
 
 ▸ **getCurrentValidators**(`subnetID`: Buffer | string, `nodeIDs`: string[]): *Promise‹object›*
 
-*Defined in [src/apis/platformvm/api.ts:512](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L512)*
+*Defined in [src/apis/platformvm/api.ts:532](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L532)*
 
 Lists the set of current validators.
 
@@ -870,7 +873,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[getDB](common_apibase.apibase.md#getdb)*
 
-*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L58)*
+*Defined in [src/common/apibase.ts:58](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L58)*
 
 Returns the baseURL's database.
 
@@ -882,7 +885,7 @@ ___
 
 ▸ **getDefaultCreationTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:261](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L261)*
+*Defined in [src/apis/platformvm/api.ts:281](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L281)*
 
 Gets the default creation fee for this chain.
 
@@ -896,7 +899,7 @@ ___
 
 ▸ **getDefaultTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:205](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L205)*
+*Defined in [src/apis/platformvm/api.ts:225](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L225)*
 
 Gets the default tx fee for this chain.
 
@@ -910,7 +913,7 @@ ___
 
 ▸ **getHeight**(): *Promise‹BN›*
 
-*Defined in [src/apis/platformvm/api.ts:926](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L926)*
+*Defined in [src/apis/platformvm/api.ts:946](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L946)*
 
 Returns the height of the platform chain.
 
@@ -918,11 +921,34 @@ Returns the height of the platform chain.
 
 ___
 
+###  getMaxStakeAmount
+
+▸ **getMaxStakeAmount**(`subnetID`: string | Buffer, `nodeID`: string, `startTime`: BN, `endTime`: BN): *Promise‹BN›*
+
+*Defined in [src/apis/platformvm/api.ts:1003](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1003)*
+
+getMaxStakeAmount() returns the maximum amount of nAVAX staking to the named node during the time period.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`subnetID` | string &#124; Buffer | A Buffer or cb58 string representing subnet |
+`nodeID` | string | A string representing ID of the node whose stake amount is required during the given duration |
+`startTime` | BN | A big number denoting start time of the duration during which stake amount of the node is required. |
+`endTime` | BN | A big number denoting end time of the duration during which stake amount of the node is required. |
+
+**Returns:** *Promise‹BN›*
+
+A big number representing total staked by validators on the primary network
+
+___
+
 ###  getMinStake
 
-▸ **getMinStake**(`refresh`: boolean): *Promise‹object›*
+▸ **getMinStake**(`refresh`: boolean): *Promise‹[GetMinStakeResponse](../interfaces/platformvm_interfaces.getminstakeresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:938](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L938)*
+*Defined in [src/apis/platformvm/api.ts:958](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L958)*
 
 Gets the minimum staking amount.
 
@@ -932,7 +958,7 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `refresh` | boolean | false | A boolean to bypass the local cached value of Minimum Stake Amount, polling the node instead.  |
 
-**Returns:** *Promise‹object›*
+**Returns:** *Promise‹[GetMinStakeResponse](../interfaces/platformvm_interfaces.getminstakeresponse.md)›*
 
 ___
 
@@ -940,7 +966,7 @@ ___
 
 ▸ **getPendingValidators**(`subnetID`: Buffer | string, `nodeIDs`: string[]): *Promise‹object›*
 
-*Defined in [src/apis/platformvm/api.ts:542](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L542)*
+*Defined in [src/apis/platformvm/api.ts:562](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L562)*
 
 Lists the set of pending validators.
 
@@ -963,7 +989,7 @@ ___
 
 *Inherited from [JRPCAPI](common_jrpcapi.jrpcapi.md).[getRPCID](common_jrpcapi.jrpcapi.md#getrpcid)*
 
-*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/jrpcapi.ts#L78)*
+*Defined in [src/common/jrpcapi.ts:78](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/jrpcapi.ts#L78)*
 
 Returns the rpcid, a strictly-increasing number, starting from 1, indicating the next
 request ID that will be sent.
@@ -976,7 +1002,7 @@ ___
 
 ▸ **getRewardUTXOs**(`txID`: string, `encoding?`: string): *Promise‹[GetRewardUTXOsResponse](../interfaces/platformvm_interfaces.getrewardutxosresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1878](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1878)*
+*Defined in [src/apis/platformvm/api.ts:1965](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1965)*
 
 **Parameters:**
 
@@ -995,7 +1021,7 @@ ___
 
 ▸ **getStake**(`addresses`: string[], `encoding`: string): *Promise‹[GetStakeResponse](../interfaces/platformvm_interfaces.getstakeresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:982](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L982)*
+*Defined in [src/apis/platformvm/api.ts:1055](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1055)*
 
 Gets the total amount staked for an array of addresses.
 
@@ -1014,7 +1040,7 @@ ___
 
 ▸ **getStakingAssetID**(): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:340](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L340)*
+*Defined in [src/apis/platformvm/api.ts:360](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L360)*
 
 Retrieves an assetID for a subnet"s staking assset.
 
@@ -1026,9 +1052,9 @@ ___
 
 ###  getSubnets
 
-▸ **getSubnets**(`ids`: string[]): *Promise‹object[]›*
+▸ **getSubnets**(`ids`: string[]): *Promise‹[Subnet](../interfaces/platformvm_interfaces.subnet.md)[]›*
 
-*Defined in [src/apis/platformvm/api.ts:1021](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1021)*
+*Defined in [src/apis/platformvm/api.ts:1094](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1094)*
 
 Get all the subnets that exist.
 
@@ -1038,30 +1064,57 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `ids` | string[] | undefined | IDs of the subnets to retrieve information about. If omitted, gets all subnets  |
 
-**Returns:** *Promise‹object[]›*
+**Returns:** *Promise‹[Subnet](../interfaces/platformvm_interfaces.subnet.md)[]›*
 
 Promise for an array of objects containing fields "id",
 "controlKeys", and "threshold".
 
 ___
 
+###  getTimestamp
+
+▸ **getTimestamp**(): *Promise‹number›*
+
+*Defined in [src/apis/platformvm/api.ts:1955](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1955)*
+
+**Returns:** *Promise‹number›*
+
+the current timestamp on chain.
+
+___
+
+###  getTotalStake
+
+▸ **getTotalStake**(): *Promise‹BN›*
+
+*Defined in [src/apis/platformvm/api.ts:987](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L987)*
+
+getTotalStake() returns the total amount staked on the Primary Network
+
+**Returns:** *Promise‹BN›*
+
+A big number representing total staked by validators on the primary network
+
+___
+
 ###  getTx
 
-▸ **getTx**(`txid`: string): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
+▸ **getTx**(`txID`: string, `encoding`: string): *Promise‹string | object›*
 
-*Defined in [src/apis/platformvm/api.ts:1097](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1097)*
+*Defined in [src/apis/platformvm/api.ts:1171](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1171)*
 
 Returns the treansaction data of a provided transaction ID by calling the node's `getTx` method.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`txid` | string | The string representation of the transaction ID  |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`txID` | string | - | The string representation of the transaction ID |
+`encoding` | string | "cb58" | sets the format of the returned transaction. Can be, "cb58", "hex" or "json". Defaults to "cb58".  |
 
-**Returns:** *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
+**Returns:** *Promise‹string | object›*
 
-Returns a Promise string or ErrorResponseObject containing the bytes retrieved from the node
+Returns a Promise string or object containing the bytes retrieved from the node
 
 ___
 
@@ -1069,7 +1122,7 @@ ___
 
 ▸ **getTxFee**(): *BN*
 
-*Defined in [src/apis/platformvm/api.ts:216](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L216)*
+*Defined in [src/apis/platformvm/api.ts:236](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L236)*
 
 Gets the tx fee for this chain.
 
@@ -1081,9 +1134,9 @@ ___
 
 ###  getTxStatus
 
-▸ **getTxStatus**(`txid`: string, `includeReason`: boolean): *Promise‹string | object›*
+▸ **getTxStatus**(`txid`: string, `includeReason`: boolean): *Promise‹string | [GetTxStatusResponse](../interfaces/platformvm_interfaces.gettxstatusresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1118](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1118)*
+*Defined in [src/apis/platformvm/api.ts:1196](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1196)*
 
 Returns the status of a provided transaction ID by calling the node's `getTxStatus` method.
 
@@ -1094,7 +1147,7 @@ Name | Type | Default | Description |
 `txid` | string | - | The string representation of the transaction ID |
 `includeReason` | boolean | true | Return the reason tx was dropped, if applicable. Defaults to true  |
 
-**Returns:** *Promise‹string | object›*
+**Returns:** *Promise‹string | [GetTxStatusResponse](../interfaces/platformvm_interfaces.gettxstatusresponse.md)›*
 
 Returns a Promise string containing the status retrieved from the node and the reason a tx was dropped, if applicable.
 
@@ -1102,9 +1155,9 @@ ___
 
 ###  getUTXOs
 
-▸ **getUTXOs**(`addresses`: string[] | string, `sourceChain`: string, `limit`: number, `startIndex`: object, `persistOpts`: [PersistanceOptions](utils_persistanceoptions.persistanceoptions.md)): *Promise‹object›*
+▸ **getUTXOs**(`addresses`: string[] | string, `sourceChain`: string, `limit`: number, `startIndex`: object, `persistOpts`: [PersistanceOptions](utils_persistanceoptions.persistanceoptions.md), `encoding`: string): *Promise‹[GetUTXOsResponse](../interfaces/platformvm_interfaces.getutxosresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1148](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1148)*
+*Defined in [src/apis/platformvm/api.ts:1227](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1227)*
 
 Retrieves the UTXOs related to the addresses provided from the node's `getUTXOs` method.
 
@@ -1140,7 +1193,11 @@ Name | Type |
 
 Options available to persist these UTXOs in local storage
 
-**Returns:** *Promise‹object›*
+▪`Default value`  **encoding**: *string*= "cb58"
+
+Optional.  is the encoding format to use for the payload argument. Can be either "cb58" or "hex". Defaults to "hex".
+
+**Returns:** *Promise‹[GetUTXOsResponse](../interfaces/platformvm_interfaces.getutxosresponse.md)›*
 
 ___
 
@@ -1148,7 +1205,7 @@ ___
 
 ▸ **getValidatorsAt**(`height`: number, `subnetID?`: string): *Promise‹[GetValidatorsAtResponse](../interfaces/platformvm_interfaces.getvalidatorsatresponse.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:415](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L415)*
+*Defined in [src/apis/platformvm/api.ts:435](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L435)*
 
 Get the validators and their weights of a subnet or the Primary Network at a given P-Chain height.
 
@@ -1169,7 +1226,7 @@ ___
 
 ▸ **importAVAX**(`username`: string, `password`: string, `to`: string, `sourceChain`: string): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:859](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L859)*
+*Defined in [src/apis/platformvm/api.ts:879](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L879)*
 
 Send AVAX from an account on the P-Chain to an address on the X-Chain. This transaction
 must be signed with the key of the account that the AVAX is sent from and which pays
@@ -1196,7 +1253,7 @@ ___
 
 ▸ **importKey**(`username`: string, `password`: string, `privateKey`: string): *Promise‹string | [ErrorResponseObject](../interfaces/src_utils.errorresponseobject.md)›*
 
-*Defined in [src/apis/platformvm/api.ts:1070](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L1070)*
+*Defined in [src/apis/platformvm/api.ts:1143](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1143)*
 
 Give a user control over an address by providing the private key that controls the address.
 
@@ -1218,7 +1275,7 @@ ___
 
 ▸ **issueTx**(`tx`: string | Buffer | [Tx](api_platformvm_transactions.tx.md)): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:887](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L887)*
+*Defined in [src/apis/platformvm/api.ts:907](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L907)*
 
 Calls the node's issueTx method from the API and returns the resulting transaction ID as a string.
 
@@ -1238,7 +1295,7 @@ ___
 
 ▸ **keyChain**(): *[KeyChain](api_platformvm_keychain.keychain.md)*
 
-*Defined in [src/apis/platformvm/api.ts:293](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L293)*
+*Defined in [src/apis/platformvm/api.ts:313](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L313)*
 
 Gets a reference to the keychain for this class.
 
@@ -1252,7 +1309,7 @@ ___
 
 ▸ **listAddresses**(`username`: string, `password`: string): *Promise‹string[]›*
 
-*Defined in [src/apis/platformvm/api.ts:487](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L487)*
+*Defined in [src/apis/platformvm/api.ts:507](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L507)*
 
 List the addresses controlled by the user.
 
@@ -1273,7 +1330,7 @@ ___
 
 ▸ **parseAddress**(`addr`: string): *Buffer*
 
-*Defined in [src/apis/platformvm/api.ts:147](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L147)*
+*Defined in [src/apis/platformvm/api.ts:167](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L167)*
 
 Takes an address string and returns its [Buffer](https://github.com/feross/buffer) representation if valid.
 
@@ -1293,7 +1350,7 @@ ___
 
 ▸ **refreshBlockchainID**(`blockchainID`: string): *boolean*
 
-*Defined in [src/apis/platformvm/api.ts:126](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L126)*
+*Defined in [src/apis/platformvm/api.ts:146](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L146)*
 
 Refresh blockchainID, and if a blockchainID is passed in, use that.
 
@@ -1313,7 +1370,7 @@ ___
 
 ▸ **sampleValidators**(`sampleSize`: number, `subnetID`: Buffer | string): *Promise‹string[]›*
 
-*Defined in [src/apis/platformvm/api.ts:572](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L572)*
+*Defined in [src/apis/platformvm/api.ts:592](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L592)*
 
 Samples `Size` validators from the current validator set.
 
@@ -1334,7 +1391,7 @@ ___
 
 ▸ **setAVAXAssetID**(`avaxAssetID`: string | Buffer): *void*
 
-*Defined in [src/apis/platformvm/api.ts:193](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L193)*
+*Defined in [src/apis/platformvm/api.ts:213](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L213)*
 
 Overrides the defaults and sets the cache to a specific AVAX AssetID
 
@@ -1356,7 +1413,7 @@ ___
 
 *Inherited from [APIBase](common_apibase.apibase.md).[setBaseURL](common_apibase.apibase.md#setbaseurl)*
 
-*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/apibase.ts#L37)*
+*Defined in [src/common/apibase.ts:37](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/apibase.ts#L37)*
 
 Sets the path of the APIs baseURL.
 
@@ -1374,7 +1431,7 @@ ___
 
 ▸ **setBlockchainAlias**(`alias`: string): *string*
 
-*Defined in [src/apis/platformvm/api.ts:106](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L106)*
+*Defined in [src/apis/platformvm/api.ts:126](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L126)*
 
 Sets the alias for the blockchainID.
 
@@ -1392,7 +1449,7 @@ ___
 
 ▸ **setCreationTxFee**(`fee`: BN): *void*
 
-*Defined in [src/apis/platformvm/api.ts:284](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L284)*
+*Defined in [src/apis/platformvm/api.ts:304](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L304)*
 
 Sets the creation fee for this chain.
 
@@ -1410,7 +1467,7 @@ ___
 
 ▸ **setMinStake**(`minValidatorStake`: BN, `minDelegatorStake`: BN): *void*
 
-*Defined in [src/apis/platformvm/api.ts:967](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L967)*
+*Defined in [src/apis/platformvm/api.ts:1040](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L1040)*
 
 Sets the minimum stake cached in this class.
 
@@ -1429,7 +1486,7 @@ ___
 
 ▸ **setTxFee**(`fee`: BN): *void*
 
-*Defined in [src/apis/platformvm/api.ts:252](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L252)*
+*Defined in [src/apis/platformvm/api.ts:272](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L272)*
 
 Sets the tx fee for this chain.
 
@@ -1447,7 +1504,7 @@ ___
 
 ▸ **validatedBy**(`blockchainID`: string): *Promise‹string›*
 
-*Defined in [src/apis/platformvm/api.ts:762](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L762)*
+*Defined in [src/apis/platformvm/api.ts:782](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L782)*
 
 Get the Subnet that validates a given blockchain.
 
@@ -1467,7 +1524,7 @@ ___
 
 ▸ **validates**(`subnetID`: Buffer | string): *Promise‹string[]›*
 
-*Defined in [src/apis/platformvm/api.ts:781](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/platformvm/api.ts#L781)*
+*Defined in [src/apis/platformvm/api.ts:801](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/api.ts#L801)*
 
 Get the IDs of the blockchains a Subnet validates.
 

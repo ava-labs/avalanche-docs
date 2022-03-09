@@ -20,7 +20,7 @@
 
 ▸ **addAddresses**(`addresses`: string[]): *string*
 
-*Defined in [src/utils/pubsub.ts:13](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/pubsub.ts#L13)*
+*Defined in [src/utils/pubsub.ts:13](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/pubsub.ts#L13)*
 
 **Parameters:**
 
@@ -36,7 +36,7 @@ ___
 
 ▸ **newBloom**(`maxElements`: number, `collisionProb`: number): *string*
 
-*Defined in [src/utils/pubsub.ts:5](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/pubsub.ts#L5)*
+*Defined in [src/utils/pubsub.ts:5](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/pubsub.ts#L5)*
 
 **Parameters:**
 
@@ -53,6 +53,6 @@ ___
 
 ▸ **newSet**(): *string*
 
-*Defined in [src/utils/pubsub.ts:2](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/pubsub.ts#L2)*
+*Defined in [src/utils/pubsub.ts:2](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/pubsub.ts#L2)*
 
 **Returns:** *string*

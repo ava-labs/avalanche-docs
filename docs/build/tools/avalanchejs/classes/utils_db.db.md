@@ -38,7 +38,7 @@ const blockchaindb = db.getNamespace("mychain");
 
 \+ **new DB**(): *[DB](utils_db.db.md)*
 
-*Defined in [src/utils/db.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/db.ts#L21)*
+*Defined in [src/utils/db.ts:21](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/db.ts#L21)*
 
 **Returns:** *[DB](utils_db.db.md)*
 
@@ -48,15 +48,15 @@ const blockchaindb = db.getNamespace("mychain");
 
 ▪ **instance**: *[DB](utils_db.db.md)*
 
-*Defined in [src/utils/db.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/db.ts#L19)*
+*Defined in [src/utils/db.ts:19](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/db.ts#L19)*
 
 ___
 
 ### `Static` `Private` store
 
-▪ **store**: *store* = store
+▪ **store**: *StoreType* = store
 
-*Defined in [src/utils/db.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/db.ts#L21)*
+*Defined in [src/utils/db.ts:21](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/db.ts#L21)*
 
 ## Methods
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **getInstance**(): *[DB](utils_db.db.md)*
 
-*Defined in [src/utils/db.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/db.ts#L28)*
+*Defined in [src/utils/db.ts:28](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/db.ts#L28)*
 
 Retrieves the database singleton.
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **getNamespace**(`ns`: string): *StoreAPI*
 
-*Defined in [src/utils/db.ts:40](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/db.ts#L40)*
+*Defined in [src/utils/db.ts:40](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/db.ts#L40)*
 
 Gets a namespace from the database singleton.
 

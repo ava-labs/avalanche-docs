@@ -24,7 +24,7 @@
 
 • **amount**: *BN*
 
-*Defined in [src/apis/avm/interfaces.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L56)*
+*Defined in [src/apis/avm/interfaces.ts:67](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L67)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **assetID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:57](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L57)*
+*Defined in [src/apis/avm/interfaces.ts:68](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L68)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[password](common_interfaces.credsinterface.md#password)*
 
-*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L11)*
+*Defined in [src/common/interfaces.ts:11](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L11)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **to**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:55](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/interfaces.ts#L55)*
+*Defined in [src/apis/avm/interfaces.ts:66](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L66)*
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 *Inherited from [CredsInterface](common_interfaces.credsinterface.md).[username](common_interfaces.credsinterface.md#username)*
 
-*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/interfaces.ts#L10)*
+*Defined in [src/common/interfaces.ts:10](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/common/interfaces.ts#L10)*
