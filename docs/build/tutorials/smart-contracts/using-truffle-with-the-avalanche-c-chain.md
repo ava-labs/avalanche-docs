@@ -22,7 +22,7 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 cd /path/to/avalanche-network-runner
 # build Avash if you haven't done so
 # start a five node staking network
-./go run examples/local/fivenodenetwork/main.g
+./go run examples/local/fivenodenetwork/main.go
 ```
 
 A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
