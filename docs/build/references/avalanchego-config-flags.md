@@ -817,9 +817,6 @@ Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-
 
 Number of consecutive failed queries to a node before benching it (assuming all queries to it will fail). Defaults to `10`.
 
-#### `--benchlist-peer-summary-enabled` (boolean):
-
-Enables peer specific query latency metrics. Defaults to `false`.
 
 #### `--benchlist-min-failing-duration` (duration):
 
@@ -1006,9 +1003,6 @@ Halflife used when calculating average network latency. Larger value --&gt; less
 
 Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
 
-#### `--network-get-version-timeout` (duration):
-
-Timeout for waiting GetVersion response from peers in handshake. Defaults to `10s`.
 
 #### `--network-read-handshake-timeout` (duration):
 
@@ -1106,9 +1100,6 @@ Node will upgrade an inbound connection from a given IP at most once within this
 
 Node will accept at most this many inbound connections per second. Defaults to `512`.
 
-#### `--inbound-connection-throttling-max-recent` (uint):
-
-Deprecated. Ignored as of AvalancheGo v1.6.0.
 
 #### `--outbound-connection-throttling-rps` (uint):
 
@@ -1122,19 +1113,11 @@ Nodes gossip peers to each other so that each node can have an up-to-date peer l
 
 Defaults to `1m`.
 
-#### `--network-peer-list-gossip-size` (int):
 
-Defaults to `50`.
-
-#### `--network-peer-list-size` (int):
+#### `--network-peer-list-num-validator-ips` (int):
 
 Defaults to `20`.
 
-#### `--network-peer-list-staker-gossip-fraction` (uint):
-
-1 of each `network-peer-list-staker-gossip-fraction` peer list messages gossiped will sent to a validator.
-
-Defaults to `2`.
 
 ### Plugin Mode
 
