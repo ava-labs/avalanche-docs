@@ -817,10 +817,6 @@ Maximum amount of time a peer is benchlisted after surpassing `--benchlist-fail-
 
 Number of consecutive failed queries to a node before benching it (assuming all queries to it will fail). Defaults to `10`.
 
-#### `--benchlist-peer-summary-enabled` (boolean):
-
-Enables peer specific query latency metrics. Defaults to `false`.
-
 #### `--benchlist-min-failing-duration` (duration):
 
 Minimum amount of time queries to a peer must be failing before the peer is benched. Defaults to `150s`.
@@ -1006,10 +1002,6 @@ Halflife used when calculating average network latency. Larger value --&gt; less
 
 Requests to peers will time out after \[`network-timeout-coefficient`\] \* \[average request latency\]. Defaults to `2`.
 
-#### `--network-get-version-timeout` (duration):
-
-Timeout for waiting GetVersion response from peers in handshake. Defaults to `10s`.
-
 #### `--network-read-handshake-timeout` (duration):
 
 Timeout value for reading handshake messages. Defaults to `15s`.
@@ -1106,35 +1098,29 @@ Node will upgrade an inbound connection from a given IP at most once within this
 
 Node will accept at most this many inbound connections per second. Defaults to `512`.
 
-#### `--inbound-connection-throttling-max-recent` (uint):
-
-Deprecated. Ignored as of AvalancheGo v1.6.0.
-
 #### `--outbound-connection-throttling-rps` (uint):
 
 Node makes at most this many outgoing peer connection attempts per second. Defaults to `50`.
 
 ### Peer List Gossiping
 
-Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-size` peers to `--network-peer-list-gossip-size` of its peers every `--network-peer-list-gossip-frequency`.
+Nodes gossip peers to each other so that each node can have an up-to-date peer list. A node gossips `--network-peer-list-num-validator-ips` peers to `--network-peer-list-validator-gossip-size` validators and `--network-peer-list-non-validator-gossip-size` non-validators every `--network-peer-list-gossip-frequency`.
 
 #### `--network-peer-list-gossip-frequency` (duration):
 
 Defaults to `1m`.
 
-#### `--network-peer-list-gossip-size` (int):
-
-Defaults to `50`.
-
-#### `--network-peer-list-size` (int):
+#### `--network-peer-list-num-validator-ips` (int):
 
 Defaults to `20`.
 
-#### `--network-peer-list-staker-gossip-fraction` (uint):
+#### `--network-peer-list-validator-gossip-size` (int):
 
-1 of each `network-peer-list-staker-gossip-fraction` peer list messages gossiped will sent to a validator.
+Defaults to `25`.
 
-Defaults to `2`.
+#### `--network-peer-list-non-validator-gossip-size` (int):
+
+Defaults to `25`.
 
 ### Plugin Mode
 
