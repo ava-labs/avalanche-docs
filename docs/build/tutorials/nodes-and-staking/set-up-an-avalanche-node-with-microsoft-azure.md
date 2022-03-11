@@ -13,7 +13,7 @@ Running a validator and staking with Avalanche provides extremely competitive re
 
 Not only does running a validator node enable you to receive rewards in AVAX, but later you will also be able to validate other subnets in the ecosystem as well and receive rewards in the token native to their subnets.
 
-You only need modest hardware requirements of 2 CPU cores, 4 GB Memory and 200 GB SSD to run a validator and it doesn’t use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
+Hardware requirements to run a validator are relatively modest: 8 CPU cores, 16 GB of RAM and 512 GB SSD. It also doesn't use enormous amounts of energy. Avalanche’s [revolutionary consensus mechanism](https://medium.com/ava-hub/avalanche-consensus-the-biggest-breakthrough-since-nakamoto-66e9917fd656) is able to scale to millions of validators participating in consensus at once, offering unparalleled decentralisation.
 
 Currently the minimum amount required to stake to become a validator is 2,000 AVAX (which can be reduced over time as price increases). Alternatively, validators can also charge a small fee to enable users to delegate their stake with them to help towards running costs. You can use a calculator [here](https://vscout.io/) to see how much rewards you would earn when running a node, compared to delegating.
 
