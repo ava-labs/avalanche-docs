@@ -34,7 +34,7 @@ The path to the executable, can be provided to the build script via arguments. F
 ```
 
 If no argument is given, the path defaults to `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
-(The part `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` is the default ID of this VM.)
+(The part `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy` is the default ID of this VM and corresponds to the string "subnetevm" zero-extended in a 32 byte array and encoded in CB58.)
 
 AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/avalanchego-config-flags.md#build-directory) for more information.
 
