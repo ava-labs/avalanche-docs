@@ -151,13 +151,15 @@ The default Subnet EVM provided below has some well defined parameters. The defa
 
 `allowFeeRecipients`: Enables fee recipients. By default, all fees are burned (sent to the blackhole address). However, it is possible to enable block producers to set a fee recipient (get compensated for blocks they produce).
 
-With this enabled, your validators can specify their addresses to collect fees. They need to update their [chain config](../../../references/avalanchego-config-flags.md#chain-configs) with the following:
+With this enabled, your validators can specify their addresses to collect fees. They need to update their AvalancheGo [chain config](../../../references/avalanchego-config-flags.md#chain-configs) with the following:
 
 ```json
 {
   "feeRecipient": "<YOUR 0x-ADDRESS>"
 }
 ```
+
+For example if the created chain ID is `zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE` then you should put that configuration under `~/.avalanchego/configs/chains/zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE/config.json`. Note that the chain ID part (`zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE`) can be different when you create your own chain.
 
 Note: If you enable this feature but a validator doesn't specify a "feeRecipient", the fees will be burned in blocks they produce.
 
@@ -239,12 +241,12 @@ This returns the byte representation of your blockchain’s genesis state:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "genesisBytes": "FT1GtzvmB3sw5wm2qHXtxy7zXWSzxnoj5vNzu6XCqBCBry2d7MVhYfHg9LJkSpALjPpWKUK3wCGfr5syszjDkLSpEccQXNLvnvhrPTRjyBPdikKLLxqJFqrHpHcxVh3dnoxxP8DAp6h6Vvu4Y4xWU6SH9d5UfR8AHkQfaXLZGNgpj8EdtBALpyyS6KD5UY6W8MeYTfmtH5DW5hrsKZLe8oWEc62wEWNesruy6rtLjQ4He5wLh1Tq81PTdN4KJEmnrS68uYeZexPNZ6avxTDNWFLAqNVaMxuC1uuwzf366SxZsZjsm4t3MBwzSYiCQPYo7ruxXeN9xoqcZT2MoP1TTSTdeweFHdq1w9HT7RGdS2MzgJKy8YeU6enUXtWqcDtQ3BNb3Q6Bh11vdqPMoyRkWmFrcZTgc9jjaRx3XrRXY9wA4qCYRhjRYjKzSg5K463janpNkgvwH6eF4ev2xFcVFHFYqUVLpTEoigKesopASGkNf4v2HPQ1ZLvVofiEbfp5g9CfnKN2S7dkXvYbS2YdkjAo4G4M74uBRGpqrk4qJH6M1zqbFTZHnt6A1rsFBhnGEJFyw4Nimu5w6PTW9w3RLUFrnMejfscDLvN2ETGuXqX847Bd1Aw8NfMdqfvDfCjvAuX5se6BfTJYXMedDR6sWjjsEJGhiMLZpUfrgMzMtkZGVHqV5augcWPqHEjUXkLXEUCU8AcvdzNciRP9Q9s7ZzLqHauzdDc1ae2K9itGJVHXuyhqWk7xSGuZRusvutjxDDqfAngLHF5hqyku42ZaDtNYe7wSGyAdDt8a4VstuUd7LNmt2zHDescsAauEVZE6WjYSrc3dcmSQE5HV6zgEbqgSkEo5ZZMcb5xupT7GAyXn8opFH28kjTPgnnWZi6MNCdrvdMzgshwf3N5ecaJZh1vx9LSwUScw2jg8G6AF4bw7gBpB7t2P4EYd4LtMbNzQCS5Hexak7WEmdhcJ2s1Y2aYcs84F4QgHFy63FhfMxa3iDM252nHC4NPN2XMRd2cbzy59jBcMk99mderGstng25bsxyMhZFGQEnwbLZ4Xs3phCiwcAAo7wkNTyC7eWqmk7FNhGCovucBLgfjNLuUD4DMPEHMMrApknXQh132gp6uUvWbGFnoyDsamaB6L2sVAmo2cCg4Xk6tcNEm3KCdf8H4iXz1a7mbEzUcy9FmxGrhk1YppQryUXP97Nt2tQjd7GM2expSsxdTAyQFjoHeuGHbu6oNmdQLbFgprRd16hDeJJD9PxN79AQAojJQBU14LHN5vLEH5GoKDs7yoMa3iC7h",
-        "encoding": "cb58"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "genesisBytes": "FT1GtzvmB3sw5wm2qHXtxy7zXWSzxnoj5vNzu6XCqBCBry2d7MVhYfHg9LJkSpALjPpWKUK3wCGfr5syszjDkLSpEccQXNLvnvhrPTRjyBPdikKLLxqJFqrHpHcxVh3dnoxxP8DAp6h6Vvu4Y4xWU6SH9d5UfR8AHkQfaXLZGNgpj8EdtBALpyyS6KD5UY6W8MeYTfmtH5DW5hrsKZLe8oWEc62wEWNesruy6rtLjQ4He5wLh1Tq81PTdN4KJEmnrS68uYeZexPNZ6avxTDNWFLAqNVaMxuC1uuwzf366SxZsZjsm4t3MBwzSYiCQPYo7ruxXeN9xoqcZT2MoP1TTSTdeweFHdq1w9HT7RGdS2MzgJKy8YeU6enUXtWqcDtQ3BNb3Q6Bh11vdqPMoyRkWmFrcZTgc9jjaRx3XrRXY9wA4qCYRhjRYjKzSg5K463janpNkgvwH6eF4ev2xFcVFHFYqUVLpTEoigKesopASGkNf4v2HPQ1ZLvVofiEbfp5g9CfnKN2S7dkXvYbS2YdkjAo4G4M74uBRGpqrk4qJH6M1zqbFTZHnt6A1rsFBhnGEJFyw4Nimu5w6PTW9w3RLUFrnMejfscDLvN2ETGuXqX847Bd1Aw8NfMdqfvDfCjvAuX5se6BfTJYXMedDR6sWjjsEJGhiMLZpUfrgMzMtkZGVHqV5augcWPqHEjUXkLXEUCU8AcvdzNciRP9Q9s7ZzLqHauzdDc1ae2K9itGJVHXuyhqWk7xSGuZRusvutjxDDqfAngLHF5hqyku42ZaDtNYe7wSGyAdDt8a4VstuUd7LNmt2zHDescsAauEVZE6WjYSrc3dcmSQE5HV6zgEbqgSkEo5ZZMcb5xupT7GAyXn8opFH28kjTPgnnWZi6MNCdrvdMzgshwf3N5ecaJZh1vx9LSwUScw2jg8G6AF4bw7gBpB7t2P4EYd4LtMbNzQCS5Hexak7WEmdhcJ2s1Y2aYcs84F4QgHFy63FhfMxa3iDM252nHC4NPN2XMRd2cbzy59jBcMk99mderGstng25bsxyMhZFGQEnwbLZ4Xs3phCiwcAAo7wkNTyC7eWqmk7FNhGCovucBLgfjNLuUD4DMPEHMMrApknXQh132gp6uUvWbGFnoyDsamaB6L2sVAmo2cCg4Xk6tcNEm3KCdf8H4iXz1a7mbEzUcy9FmxGrhk1YppQryUXP97Nt2tQjd7GM2expSsxdTAyQFjoHeuGHbu6oNmdQLbFgprRd16hDeJJD9PxN79AQAojJQBU14LHN5vLEH5GoKDs7yoMa3iC7h",
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -267,52 +269,52 @@ This should return the same genesis block, provided in `subnetevm.buildGenesis` 
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "genesisData": {
-            "config": {
-                "chainId": 13213,
-                "homesteadBlock": 0,
-                "eip150Block": 0,
-                "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-                "eip155Block": 0,
-                "eip158Block": 0,
-                "byzantiumBlock": 0,
-                "constantinopleBlock": 0,
-                "petersburgBlock": 0,
-                "istanbulBlock": 0,
-                "muirGlacierBlock": 0,
-                "subnetEVMTimestamp": 0,
-                "feeConfig": {
-                    "gasLimit": 8000000,
-                    "targetBlockRate": 2,
-                    "minBaseFee": 13000000000,
-                    "targetGas": 15000000,
-                    "baseFeeChangeDenominator": 36,
-                    "minBlockGasCost": 0,
-                    "maxBlockGasCost": 1000000,
-                    "blockGasCostStep": 200000
-                }
-            },
-            "nonce": "0x0",
-            "timestamp": "0x0",
-            "extraData": "0x",
-            "gasLimit": "0x7A1200",
-            "difficulty": "0x0",
-            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "coinbase": "0x0000000000000000000000000000000000000000",
-            "alloc": {
-                "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
-                    "balance": "0x1211ede4974a355555"
-                }
-            },
-            "number": "0x0",
-            "gasUsed": "0x0",
-            "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-        },
-        "encoding": "cb58"
+  "jsonrpc": "2.0",
+  "result": {
+    "genesisData": {
+      "config": {
+        "chainId": 13213,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "petersburgBlock": 0,
+        "istanbulBlock": 0,
+        "muirGlacierBlock": 0,
+        "subnetEVMTimestamp": 0,
+        "feeConfig": {
+          "gasLimit": 8000000,
+          "targetBlockRate": 2,
+          "minBaseFee": 13000000000,
+          "targetGas": 15000000,
+          "baseFeeChangeDenominator": 36,
+          "minBlockGasCost": 0,
+          "maxBlockGasCost": 1000000,
+          "blockGasCostStep": 200000
+        }
+      },
+      "nonce": "0x0",
+      "timestamp": "0x0",
+      "extraData": "0x",
+      "gasLimit": "0x7A1200",
+      "difficulty": "0x0",
+      "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "coinbase": "0x0000000000000000000000000000000000000000",
+      "alloc": {
+        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
+          "balance": "0x1211ede4974a355555"
+        }
+      },
+      "number": "0x0",
+      "gasUsed": "0x0",
+      "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
     },
-    "id": 1
+    "encoding": "cb58"
+  },
+  "id": 1
 }
 ```
 
@@ -342,14 +344,16 @@ The response contains the transaction ID:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "txID": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
-        "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "txID": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
+    "changeAddr": "P-avax103y30cxeulkjfe3kwfnpt432ylmnxux8r73r8u"
+  },
+  "id": 1
 }
 ```
+
+The chain ID is same this transaction ID. So our chain ID in this example is `zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE`.
 
 ### Verify Success {#verify-success}
 
@@ -370,30 +374,30 @@ The response confirms that the blockchain was created:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "blockchains": [
-            {
-                "id": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
-                "name": "evm2",
-                "subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL",
-                "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"
-            },
-            {
-                "id": "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU",
-                "name": "C-Chain",
-                "subnetID": "11111111111111111111111111111111LpoYY",
-                "vmID": "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6"
-            },
-            {
-                "id": "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed",
-                "name": "X-Chain",
-                "subnetID": "11111111111111111111111111111111LpoYY",
-                "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
-            }
-        ]
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "blockchains": [
+      {
+        "id": "zZtgbGDPpJaz7zWL6cXi1sSJRW1sMQH4s119GURVYGPXkrUaE",
+        "name": "evm2",
+        "subnetID": "29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL",
+        "vmID": "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"
+      },
+      {
+        "id": "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU",
+        "name": "C-Chain",
+        "subnetID": "11111111111111111111111111111111LpoYY",
+        "vmID": "mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6"
+      },
+      {
+        "id": "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed",
+        "name": "X-Chain",
+        "subnetID": "11111111111111111111111111111111LpoYY",
+        "vmID": "jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq"
+      }
+    ]
+  },
+  "id": 1
 }
 ```
 
