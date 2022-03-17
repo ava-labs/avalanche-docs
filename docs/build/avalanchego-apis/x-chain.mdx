@@ -1572,6 +1572,128 @@ curl -X POST --data '{
 }
 ```
 
+### vertex.getVertex
+
+#### **Signature**
+
+```sh
+vertex.getVertex({
+    vertexID: string
+    encoding: string // optional
+}) -> {
+    vertex: string,
+    encoding: string
+}
+```
+
+**Request**
+
+* `vertexID` is the vertex ID. It should be in cb58 format.
+* `encoding` is the encoding format to use. Can be either `cb58`, `hex`, or `json`. Defaults to `cb58`.
+
+**Response**
+
+* `vertex` is the vertex encoded to `encoding`.
+* `encoding` is the `encoding`.
+
+#### JSON Example
+
+##### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"vertex.getVertex",
+    "params" :{
+        "vertexID":"FwTDoE9f2T6JezQwfhqs9NdTB8fYavkG8e4Jn4wezFh21qzio",
+        "encoding": "json"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/vertex
+```
+
+##### **Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "vertex": {
+      "version": 0,
+      "chainID": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm",
+      "height": 378523,
+      "epoch": 0,
+      "parentIDs": [
+        "2awsMGhSo1axbE7wCxUh3pETfQNxTfBGimZz6eaj5tmjo4JiCE"
+      ],
+      "txs": [
+        "AAAAAAAAAAAABato6x7hQqBc/naMNuEfC1lttaPGx3qr5mXa2eY4ypT3AAAAAj2b2sDtHXYTMM9oDv3rGkIVnrOH1tKVDJb30o9hu+KqAAAABwAAAAB3NZQAAAAAAAAAAAAAAAABAAAAAWLYzznsNZx45QE8pWYCOlaaq2kLPZvawO0ddhMwz2gO/esaQhWes4fW0pUMlvfSj2G74qoAAAAHADl9mcK6htcAAAAAAAAAAAAAAAEAAAABMHZn/kMLAZMNg5K0maEMG/piu3EAAAAB6zqHJN7FIHHl5ziMNPNNTzUP1gOJWSsez8Nm2BH5TpIAAAABPZvawO0ddhMwz2gO/esaQhWes4fW0pUMlvfSj2G74qoAAAAFADl9mjn/XRcAAAABAAAAAAAAAA0AC0ZhdWNldCBkcmlwAAAAAQAAAAkAAAABkXfDE9JZb+uB9Sum2GPF/ISiEkMcFROMW9T/jVBOlzlxKFJxHdgKdQv66NdjWYPBh7vD/xqajmsCf98JYpxcpgA="
+      ]
+    },
+    "encoding": "json"
+  },
+  "id": 1
+}
+```
+
+#### CB58 Example
+
+##### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"vertex.getVertex",
+    "params" :{
+        "vertexID":"FwTDoE9f2T6JezQwfhqs9NdTB8fYavkG8e4Jn4wezFh21qzio",
+        "encoding": "cb58"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/vertex
+```
+
+##### **Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "vertex": "11cbs3xR37nFN8WUxBNUczTSEXwNc917wT2hKjsTxxUuULy9GTs345PZ4MpqBRWAqxBrkdGjXcvNCeDreJUbjtKLtLP2QsvdEBoENEnsrkZC2x5PC18vAnyTgz9hrgs73Wu95sfdHQvCxJXrZTK7eetBqd9qtqixPDMGoMmiJzNVLRpkKiMFeU6iH7RXH763PQsYq6ePkarHW1DD6gxuUD35GFuBnCWUAdP9bXxkp9wEiCi66LQQGkc8DF8S6HP1GxWE8fFJ8iiNT3dxUioFz4ztgYx7ZPt8vf6h8K35fTuTbuQbnAstZ9YDesRB5MWBEd5FbQBBf9eeaegix5AhwZAGuV26dHwYyBdCKq7jeyAq4obCpoCf5Au7rbNKPivZm2DHb4YuwEVnrxdznxyhHWUZ4THGtd4qfECSPJtBw1y1dWBBeMmcHJSHBVPG5ZJxRREfiKRHKp1d1k56R4CgZak8fHrap3xi61pD8ox9Py1VN2WV1roTT1BBu3SKTwzYwYg3dwUpUa7xXLSgBxtsJ6nF8fSrp9JeLwbJhvWFJmZ2gLRZmZw7LsUknBicHDxZStbhZp8d1YQGrC2V2x7yZLjrZMN5d6P4E1BhrHMpaUuT5rQcuXrQx39kYTnuxdAU7Xo2z7kJez1e6qqz3x1szK1",
+    "encoding": "cb58"
+  },
+  "id": 1
+}
+```
+
+#### Hex Example
+
+##### **Example Call**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     : 1,
+    "method" :"vertex.getVertex",
+    "params" :{
+        "vertexID":"FwTDoE9f2T6JezQwfhqs9NdTB8fYavkG8e4Jn4wezFh21qzio",
+        "encoding": "hex"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X/vertex
+```
+
+##### **Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "vertex": "0x0000ab68eb1ee142a05cfe768c36e11f0b596db5a3c6c77aabe665dad9e638ca94f7000000000005c69b0000000000000001d0c64f1e284274092c741917ff68b9929b5a3992cc3a64fe00f45f62a2dfd3df000000010000018800000000000000000005ab68eb1ee142a05cfe768c36e11f0b596db5a3c6c77aabe665dad9e638ca94f7000000023d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa0000000700000000773594000000000000000000000000010000000162d8cf39ec359c78e5013ca566023a569aab690b3d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa0000000700397d99c2ba86d700000000000000000000000100000001307667fe430b01930d8392b499a10c1bfa62bb7100000001eb3a8724dec52071e5e7388c34f34d4f350fd60389592b1ecfc366d811f94e92000000013d9bdac0ed1d761330cf680efdeb1a42159eb387d6d2950c96f7d28f61bbe2aa0000000500397d9a39ff5d1700000001000000000000000d000b46617563657420647269700000000100000009000000019177c313d2596feb81f52ba6d863c5fc84a212431c15138c5bd4ff8d504e9739712852711dd80a750bfae8d7635983c187bbc3ff1a9a8e6b027fdf09629c5ca6009ea00148",
+    "encoding": "hex"
+  },
+  "id": 1
+}
+```
+
 ### wallet.issueTx
 
 Send a signed transaction to the network and assume the tx will be accepted. `encoding` specifies the format of the signed transaction. Can be either "cb58" or "hex". Defaults to "cb58".
