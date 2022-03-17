@@ -757,7 +757,7 @@ Enables signature verification. When set to `false`, signatures won’t be check
 
 #### `--staking-port` (int):
 
-The port through which the staking server will connect to the Avalanche network externally. Defaults to `9651`.
+The port through which the network peers will connect to this node externally. Having this port accessible from the internet is required for correct node operation. Defaults to `9651`.
 
 #### `--staking-enabled` (boolean):
 
