@@ -1122,6 +1122,15 @@ Defaults to `25`.
 
 Defaults to `25`.
 
+#### ` --network-peer-read-buffer-size` (int):
+
+Size of the buffer that peer messages are read into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+
+#### `--network-peer-write-buffer-size` (int):
+
+Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
+
+
 ### Plugin Mode
 
 #### `--plugin-mode-enabled` (bool):
