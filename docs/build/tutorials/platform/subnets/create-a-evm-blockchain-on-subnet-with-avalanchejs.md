@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. On Avalanche, VM serves as the blueprint for creating different instances of independent blockchains, yet sharing the same ruleset.
+A blockchain is an instance of **Virtual Machine (VM)** that processes transactions to change the genesis (base) and the subsequent states. VMs define blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain. On Avalanche, VM serves as the blueprint for creating different instances of independent blockchains, yet sharing the same ruleset.
 
-All transactions on a blockchain need to be validated by the distributed nodes or validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, there is one primary subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their subnets and invite other validators to be a part of it. A validator can be a part of multiple subnets, but it must be validating the primary subnet.
+All transactions on a blockchain need to be validated by the validators. **Subnets** are the group of validators that can validate one or many chains. On Avalanche, the primary subnet, that currently validates 3 blockchains, and each chain serves a different purpose. One can easily deploy their subnet and invite other validators to be a part of it. A validator can be a part of multiple subnets, but it must be validating the primary subnet.
 
-On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages subnets, subnet validators, subnet blockchain, etc. In this tutorial, you will learn about creating your subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [subnet series of tutorials](https://docs.avax.network/build/tutorials/platform/subnets/), you can get various great articles explaining subnets, building custom VMs, and a lot more.
+On Avalanche, out of the 3 chains, **Platform Chain** (P-Chain) manages subnets, subnet validators, subnet blockchain, etc. In this tutorial, you will learn about creating your subnet and deploying **Ethereum Virtual Machine (EVM)** based blockchain on that subnet through your Node.js application using **AvalancheJS**. AvalancheJS is a javascript library that allows you to issue commands to the Avalanche node APIs without worrying about transaction serialization, signing it with the keys etc. On our [subnet series of tutorials](../subnets/README.md), you can get various great articles explaining subnets, building custom VMs, and a lot more.
 
 
 ## Requirements
@@ -36,7 +36,7 @@ cd avalanchego
 
 ### Build Binary
 
-Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory.
+Running the below command will create an `avalanchego` binary inside the `build/` directory and will install the coreth `evm` binary inside the `build/plugins` directory. For more information on running a node, please refer [this](../../nodes-and-staking/run-avalanche-node.md).
 
 ```bash
 ./scripts/build.sh
@@ -65,7 +65,7 @@ You can directly build the `subnet-evm` binary inside the plugins folder as well
 
 ## Setting up Local Avalanche Network
 
-For the development purpose, we can use **Avalanche Network Runner (ANR)**. It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
+For the development purpose, we can use [**Avalanche Network Runner (ANR)**](../../../tools/network-runner.md). It helps us in simulating the actual network. For this tutorial, we will be installing ANR binary and will interact with the network through RPCs.
 
 
 ### Clone Avalanche Network Runner
@@ -144,6 +144,8 @@ $HOME
     |_avalanche-network-runner
     |_subnet-evm-js
 ```
+
+There is no hard and fast rule to have the same project structre as demonstrated above. You can clone these repositories anywhere you want. You just have to run the commands accordingly to build binaries, copy VMs to `avalanchego/build/plugins/`, run avalanche network runner with the avalanchego's binary etc.
 
 ### Installing dependencies
 
@@ -289,7 +291,7 @@ Put your Ethereum derived hexadecimal address (without `0x`) like what you have 
 ```json
 "chainId": 11111
 ```
-Put a unique number as chain id for your chain. Conflicting chain ids can cause problems. You can read more about all of these parameters [here](https://docs.avax.network/build/tutorials/platform/subnets/create-evm-blockchain#create-the-genesis-data).
+Put a unique number as chain id for your chain. Conflicting chain ids can cause problems. You can read more about all of these parameters [here](../subnets/create-evm-blockchain#create-the-genesis-data).
 
 ## Creating Subnet
 
@@ -542,4 +544,4 @@ Once the node has restarted, it will again be re-assigned to a random API port. 
 
 ## Interacting with the New Blockchain with MetaMask
 
-We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](https://docs.avax.network/build/tutorials/platform/subnets/create-evm-blockchain#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
+We have created the new subnet, deployed a new blockchain using the `subnet-evm`, and finally added a validator to this subnet, for validating different chains. Now it's time to interact with the new chain. You can follow this [part](../subnets/create-evm-blockchain#interact-with-the-new-blockchain) in our docs, to learn, how you can set up your MetaMask to interact with this chain. You can send tokens, create smart contracts, and do everything that you can do on C-Chain.
