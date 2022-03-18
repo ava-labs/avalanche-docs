@@ -11,7 +11,7 @@ An authorization token is provided in the header of an API call. Specifically, t
 
 This API is only reachable if the node is started with [config flag](../references/avalanchego-config-flags.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
-Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify the file to read the Auth API's password from, with argument `--api-auth-password-file`. You must provide this password in order to create/revoke authorization tokens.
 
 Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
 
