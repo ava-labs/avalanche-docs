@@ -177,7 +177,7 @@ Alloc defines addresses and their initial balances. This should be changed accor
 
 #### Header
 
-The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`, `number`, `gasUsed`, `parentHash` defines the genesis block header. Changing these can cause issues. Leave default values if you're not sure.
+The fields `nonce`, `timestamp`, `extraData`, `gasLimit`, `difficulty`, `mixHash`, `coinbase`, `number`, `gasUsed`, `parentHash` defines the genesis block header. The field `gasLimit` should be set to match the `gasLimit` set in the `feeConfig`. You do not need to change any of the other genesis header fields.
 
 ### Build Genesis
 
