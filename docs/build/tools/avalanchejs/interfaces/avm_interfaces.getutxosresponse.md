@@ -20,7 +20,7 @@
 
 • **endIndex**: *[EndIndex](avm_interfaces.endindex.md)*
 
-*Defined in [src/apis/avm/interfaces.ts:122](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L122)*
+*Defined in [src/apis/avm/interfaces.ts:122](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L122)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **numFetched**: *number*
 
-*Defined in [src/apis/avm/interfaces.ts:120](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L120)*
+*Defined in [src/apis/avm/interfaces.ts:120](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L120)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **utxos**: *[UTXOSet](../classes/api_avm_utxos.utxoset.md)*
 
-*Defined in [src/apis/avm/interfaces.ts:121](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L121)*
+*Defined in [src/apis/avm/interfaces.ts:121](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L121)*

@@ -19,7 +19,7 @@
 
 • **nodeIDs**? : *string[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:79](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L79)*
+*Defined in [src/apis/platformvm/interfaces.ts:79](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L79)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **subnetID**? : *Buffer | string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:78](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L78)*
+*Defined in [src/apis/platformvm/interfaces.ts:78](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L78)*

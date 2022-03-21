@@ -19,7 +19,7 @@
 
 • **outputIndex**: *number*
 
-*Defined in [src/apis/avm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L31)*
+*Defined in [src/apis/avm/interfaces.ts:31](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L31)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **txID**: *string*
 
-*Defined in [src/apis/avm/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L30)*
+*Defined in [src/apis/avm/interfaces.ts:30](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L30)*

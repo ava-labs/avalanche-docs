@@ -19,7 +19,7 @@
 
 • **balance**: *number | BN*
 
-*Defined in [src/apis/avm/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L25)*
+*Defined in [src/apis/avm/interfaces.ts:25](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L25)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **utxoIDs**: *[UTXOID](avm_interfaces.utxoid.md)[]*
 
-*Defined in [src/apis/avm/interfaces.ts:26](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L26)*
+*Defined in [src/apis/avm/interfaces.ts:26](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L26)*

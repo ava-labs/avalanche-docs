@@ -7,6 +7,7 @@
 ### References
 
 * [AddDelegatorTx](src_apis_platformvm.md#adddelegatortx)
+* [AddSubnetValidatorTx](src_apis_platformvm.md#addsubnetvalidatortx)
 * [AddValidatorTx](src_apis_platformvm.md#addvalidatortx)
 * [AmountInput](src_apis_platformvm.md#amountinput)
 * [AmountOutput](src_apis_platformvm.md#amountoutput)
@@ -47,6 +48,12 @@
 ###  AddDelegatorTx
 
 • **AddDelegatorTx**:
+
+___
+
+###  AddSubnetValidatorTx
+
+• **AddSubnetValidatorTx**:
 
 ___
 
