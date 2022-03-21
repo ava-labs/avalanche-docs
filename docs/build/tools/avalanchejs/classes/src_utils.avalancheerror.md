@@ -94,6 +94,10 @@
 
   ↳ [SubnetIdError](src_utils.subnetiderror.md)
 
+  ↳ [SubnetThresholdError](src_utils.subnetthresholderror.md)
+
+  ↳ [SubnetAddressError](src_utils.subnetaddresserror.md)
+
 ## Index
 
 ### Constructors
@@ -118,7 +122,7 @@
 
 \+ **new AvalancheError**(`m`: string, `code`: string): *[AvalancheError](src_utils.avalancheerror.md)*
 
-*Defined in [src/utils/errors.ts:46](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/errors.ts#L46)*
+*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L48)*
 
 **Parameters:**
 
@@ -135,7 +139,7 @@ Name | Type |
 
 • **errorCode**: *string*
 
-*Defined in [src/utils/errors.ts:46](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/errors.ts#L46)*
+*Defined in [src/utils/errors.ts:48](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L48)*
 
 ___
 
@@ -181,6 +185,6 @@ Defined in node_modules/typescript/lib/lib.es5.d.ts:1033
 
 ▸ **getCode**(): *string*
 
-*Defined in [src/utils/errors.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/errors.ts#L53)*
+*Defined in [src/utils/errors.ts:55](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/errors.ts#L55)*
 
 **Returns:** *string*

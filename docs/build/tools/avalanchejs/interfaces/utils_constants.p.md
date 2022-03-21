@@ -35,7 +35,7 @@
 
 • **alias**: *string*
 
-*Defined in [src/utils/constants.ts:40](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L40)*
+*Defined in [src/utils/constants.ts:40](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L40)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • **avaxAssetID**? : *string*
 
-*Defined in [src/utils/constants.ts:54](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L54)*
+*Defined in [src/utils/constants.ts:54](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L54)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **blockchainID**: *string*
 
-*Defined in [src/utils/constants.ts:39](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L39)*
+*Defined in [src/utils/constants.ts:39](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L39)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • **createChainTx**: *BN | number*
 
-*Defined in [src/utils/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L44)*
+*Defined in [src/utils/constants.ts:44](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L44)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **createSubnetTx**: *BN | number*
 
-*Defined in [src/utils/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L43)*
+*Defined in [src/utils/constants.ts:43](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L43)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 • **creationTxFee**: *BN | number*
 
-*Defined in [src/utils/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L42)*
+*Defined in [src/utils/constants.ts:42](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L42)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 • **fee**? : *BN*
 
-*Defined in [src/utils/constants.ts:56](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L56)*
+*Defined in [src/utils/constants.ts:56](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L56)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 • **maxConsumption**: *number*
 
-*Defined in [src/utils/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L46)*
+*Defined in [src/utils/constants.ts:46](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L46)*
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 • **maxStakeDuration**: *number*
 
-*Defined in [src/utils/constants.ts:51](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L51)*
+*Defined in [src/utils/constants.ts:51](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L51)*
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 • **maxStakingDuration**: *BN*
 
-*Defined in [src/utils/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L47)*
+*Defined in [src/utils/constants.ts:47](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L47)*
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 • **maxSupply**: *BN*
 
-*Defined in [src/utils/constants.ts:48](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L48)*
+*Defined in [src/utils/constants.ts:48](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L48)*
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 • **minConsumption**: *number*
 
-*Defined in [src/utils/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L45)*
+*Defined in [src/utils/constants.ts:45](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L45)*
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 • **minDelegationFee**: *BN*
 
-*Defined in [src/utils/constants.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L53)*
+*Defined in [src/utils/constants.ts:53](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L53)*
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 • **minDelegationStake**: *BN*
 
-*Defined in [src/utils/constants.ts:52](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L52)*
+*Defined in [src/utils/constants.ts:52](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L52)*
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 • **minStake**: *BN*
 
-*Defined in [src/utils/constants.ts:49](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L49)*
+*Defined in [src/utils/constants.ts:49](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L49)*
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 • **minStakeDuration**: *number*
 
-*Defined in [src/utils/constants.ts:50](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L50)*
+*Defined in [src/utils/constants.ts:50](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L50)*
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 • **txFee**? : *BN | number*
 
-*Defined in [src/utils/constants.ts:55](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L55)*
+*Defined in [src/utils/constants.ts:55](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L55)*
 
 ___
 
@@ -171,4 +171,4 @@ ___
 
 • **vm**: *string*
 
-*Defined in [src/utils/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/utils/constants.ts#L41)*
+*Defined in [src/utils/constants.ts:41](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/constants.ts#L41)*

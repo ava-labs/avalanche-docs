@@ -22,7 +22,7 @@
 
 • **balance**: *BN | number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:109](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L109)*
+*Defined in [src/apis/platformvm/interfaces.ts:109](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L109)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **lockedNotStakeable**: *BN | number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:112](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L112)*
+*Defined in [src/apis/platformvm/interfaces.ts:112](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L112)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **lockedStakeable**: *BN | number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:111](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L111)*
+*Defined in [src/apis/platformvm/interfaces.ts:111](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L111)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **unlocked**: *BN | number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:110](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L110)*
+*Defined in [src/apis/platformvm/interfaces.ts:110](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L110)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **utxoIDs**: *object[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:113](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L113)*
+*Defined in [src/apis/platformvm/interfaces.ts:113](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L113)*
