@@ -828,7 +828,7 @@ If `true` this node does not expose subnet blockchain contents to non-validators
 
 ##### Consensus Parameters
 
-Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
+Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
 
 | CLI Key                          | JSON Key              |
 | :------------------------------- | :-------------------- |
