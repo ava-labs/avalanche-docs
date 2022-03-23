@@ -845,7 +845,7 @@ Subnet configs supports loading new consensus parameters. JSON keys are differen
 
 ##### Gossip Configs
 
-It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different than their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
+It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
 
 | CLI Key                                   | JSON Key                   |
 | :---------------------------------------- | :------------------------- |
