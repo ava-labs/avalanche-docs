@@ -793,7 +793,7 @@ Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
 #### `--whitelisted-subnets` (string):
 
-Comma separated list of subnets that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
+Comma separated list of subnet IDs that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
 
 ### Subnet Configs
 
