@@ -12,8 +12,8 @@ The objective of this document is to provide and explain sending transactions wi
 
 * Basic familiarity with [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 * Basic familiarity with [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-* Basic familiarity with [the Avalanche C-Chain](https://docs.avax.network/build/avalanchego-apis/c-chain) network and [EVM compatibility](https://ethereum.org/en/developers/docs/evm/)
-* Basic understanding of [dynamic fee transactions](https://docs.avax.network/build/tutorials/platform/adjusting-gas-price-during-high-network-activity#good-to-know-keywords-and-concepts) transactions
+* Basic familiarity with [the Avalanche C-Chain](../../avalanchego-apis/c-chain.md) network and [EVM compatibility](https://ethereum.org/en/developers/docs/evm/)
+* Basic understanding of [dynamic fee transactions](./adjusting-gas-price-during-high-network-activity.md#good-to-know-keywords-and-concepts) transactions
 
 ## Installing dependencies
 

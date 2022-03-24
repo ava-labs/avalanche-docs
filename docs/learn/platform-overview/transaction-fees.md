@@ -66,6 +66,12 @@ Based off of this information, you can specify the `gasFeeCap` and `gasTipCap` t
 
 The base fee can go as low as 25 nAVAX (GWei) and has no upper bound. You can use the [eth_baseFee](../../build/avalanchego-apis/c-chain.md#eth_basefee) and [eth_maxPriorityFeePerGas](../../build/avalanchego-apis/c-chain.md#eth_maxpriorityfeepergas) API methods, or [Snowtrace's C-Chain Gas Tracker](https://snowtrace.io/gastracker), to estimate the gas price to use in your transactions.
 
+
+#### Further Readings
+* [Adjusting Gas Price During High Network Activity](../../build/tutorials/platform/adjusting-gas-price-during-high-network-activity.md)
+* [Sending Transactions with Dynamic Fees using Javascript](../../build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript.md)
+
+
 ### Atomic Transaction Fees
 
 C-Chain atomic transactions (i.e. imports and exports from/to other chains) charge dynamic fees based on the amount of gas used by the transaction and the base fee of the block that includes the atomic transaction.
