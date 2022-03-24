@@ -20,7 +20,7 @@
 
 • **address**: *string*
 
-*Defined in [src/apis/evm/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L53)*
+*Defined in [src/apis/evm/interfaces.ts:53](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/interfaces.ts#L53)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **privateKey**: *string*
 
-*Defined in [src/apis/evm/interfaces.ts:55](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L55)*
+*Defined in [src/apis/evm/interfaces.ts:55](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/interfaces.ts#L55)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **publicKey**: *string*
 
-*Defined in [src/apis/evm/interfaces.ts:54](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/evm/interfaces.ts#L54)*
+*Defined in [src/apis/evm/interfaces.ts:54](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/interfaces.ts#L54)*

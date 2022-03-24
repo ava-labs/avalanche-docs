@@ -17,7 +17,7 @@ Example JSON config file:
 
 ```json
 {
-    "log-level": "debug"
+  "log-level": "debug"
 }
 ```
 
@@ -787,6 +787,73 @@ As an alternative to `--staking-tls-key-file`, it allows specifying base64 encod
 
 Weight to provide to each peer when staking is disabled. Defaults to `1`.
 
+## Subnets
+
+### Whitelist
+
+#### `--whitelisted-subnets` (string):
+
+Comma separated list of subnet IDs that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
+
+### Subnet Configs
+
+It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
+
+#### `--subnet-config-dir` (string):
+
+Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
+
+Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
+
+```json
+{
+  "validatorOnly": false,
+  "consensusParameters": {
+    "k": 25,
+    "alpha": 18
+  },
+  "appGossipNonValidatorSize": 10
+}
+```
+
+#### `--subnet-config-content` (string):
+
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
+
+#### Parameters
+
+##### `validatorOnly` (bool):
+
+If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../tutorials/platform/subnets/create-a-subnet.md#private-subnets)
+
+##### Consensus Parameters
+
+Subnet configs supports loading new consensus parameters. JSON keys are different from their matching `CLI` keys. These parameters must be grouped under `consensusParameters` key. The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [CLI Snow Parameters](avalanchego-config-flags.md#snow-parameters).
+
+| CLI Key                          | JSON Key              |
+| :------------------------------- | :-------------------- |
+| --snow-sample-size               | k                     |
+| --snow-quorum-size               | alpha                 |
+| --snow-virtuous-commit-threshold | betaVirtuous          |
+| --snow-rogue-commit-threshold    | betaRogue             |
+| --snow-concurrent-repolls        | concurrentRepolls     |
+| --snow-optimal-processing        | optimalProcessing     |
+| --snow-max-processing            | maxOutstandingItems   |
+| --snow-max-time-processing       | maxItemProcessingTime |
+| --snow-avalanche-batch-size      | batchSize             |
+| --snow-avalanche-num-parents     | parentSize            |
+
+##### Gossip Configs
+
+It's possible to define different Gossip configurations for each subnet without changing values for Primary Network. For example in Primary Network transaction mempools are not gossipped to non-validators (`--consensus-app-gossip-validator-size` is `0`). You can change this for your subnet and share mempool with non-validators as well. JSON keys of these parameters are different from their matching `CLI` keys. These parameters default to the same values used for the Primary Network. For more information see [CLI Gossip Configs](avalanchego-config-flags.md#gossiping).
+
+| CLI Key                                   | JSON Key                   |
+| :---------------------------------------- | :------------------------- |
+| --consensus-accepted-frontier-gossip-size | gossipAcceptedFrontierSize |
+| --consensus-on-accept-gossip-size         | gossipOnAcceptSize         |
+| --consensus-app-gossip-non-validator-size | appGossipNonValidatorSize  |
+| --consensus-app-gossip-validator-size     | appGossipValidatorSize     |
+
 ## Version
 
 #### `--version` (boolean)
@@ -797,7 +864,7 @@ If this is `true`, print the version and quit. Defaults to `false`.
 
 The following options may affect the correctness of a node. Only power users should change these.
 
-### App Gossiping
+### Gossiping
 
 #### `--consensus-app-gossip-non-validator-size` (uint):
 
@@ -806,6 +873,14 @@ Number of peers (which may or may not be validators) to gossip an AppGossip mess
 #### `--consensus-app-gossip-validator-size` (uint):
 
 Number of validators to gossip an AppGossip message to. Defaults to `10`.
+
+#### `--consensus-accepted-frontier-gossip-size` (uint):
+
+Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
+
+#### `--consensus-on-accept-gossip-size` (uint):
+
+Number of peers to gossip to each accepted container to. Defaults to `20`.
 
 ### Benchlist
 
@@ -1130,69 +1205,11 @@ Size of the buffer that peer messages are read into (there is one buffer per pee
 
 Size of the buffer that peer messages are written into (there is one buffer per peer), defaults to `8` KiB (8192 Bytes).
 
-
 ### Plugin Mode
 
 #### `--plugin-mode-enabled` (bool):
 
 If true, runs the node as a [plugin.](https://github.com/hashicorp/go-plugin) Defaults to `false`.
-
-### Subnets
-
-### Whitelist
-
-#### `--whitelisted-subnets` (string):
-
-Comma separated list of subnets that this node would validate if added to. Defaults to empty (will only validate the Primary Network).
-
-### Subnet Configs
-
-It is possible to provide parameters for subnets. Parameters here apply to all chains in the specified subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for subnets specified in `--whitelisted-subnet` parameter.
-
-#### `--subnet-config-dir` (string):
-
-Specifies the directory that contains subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
-
-Example: Let's say we have a subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
-
-```json
-{
-  "validatorOnly": false,
-  "consensusParameters": {
-    "k": 25,
-    "alpha": 18
-  }
-}
-```
-
-#### `--subnet-config-content` (string):
-
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for subnets.
-
-**Validator Only**
-
-#### `validatorOnly` (bool):
-
-If `true` this node does not expose subnet blockchain contents to non-validators via P2P messages. Defaults to `false`. For more information see [here.](../tutorials/platform/subnets/create-a-subnet.md#private-subnets)
-
-**Consensus Parameters**
-
-Subnet configs supports loading new consensus parameters. JSON keys are different than their matching `CLI` keys.
-
-| CLI Key                          | JSON Key              |
-| :------------------------------- | :-------------------- |
-| --snow-sample-size               | k                     |
-| --snow-quorum-size               | alpha                 |
-| --snow-virtuous-commit-threshold | betaVirtuous          |
-| --snow-rogue-commit-threshold    | betaRogue             |
-| --snow-concurrent-repolls        | concurrentRepolls     |
-| --snow-optimal-processing        | optimalProcessing     |
-| --snow-max-processing            | maxOutstandingItems   |
-| --snow-max-time-processing       | maxItemProcessingTime |
-| --snow-avalanche-batch-size      | batchSize             |
-| --snow-avalanche-num-parents     | parentSize            |
-
-The consensus parameters of a subnet default to the same values used for the Primary Network, which are given [here](avalanchego-config-flags.md#snow-parameters).
 
 ### Virtual Machine (VM) Configs {#vm-configs}
 

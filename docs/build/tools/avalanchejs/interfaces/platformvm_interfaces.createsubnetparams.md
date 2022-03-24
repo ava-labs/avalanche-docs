@@ -21,7 +21,7 @@
 
 • **controlKeys**: *string[]*
 
-*Defined in [src/apis/platformvm/interfaces.ts:157](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L157)*
+*Defined in [src/apis/platformvm/interfaces.ts:157](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L157)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:156](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L156)*
+*Defined in [src/apis/platformvm/interfaces.ts:156](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L156)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **threshold**: *number*
 
-*Defined in [src/apis/platformvm/interfaces.ts:158](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L158)*
+*Defined in [src/apis/platformvm/interfaces.ts:158](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L158)*
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [src/apis/platformvm/interfaces.ts:155](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/platformvm/interfaces.ts#L155)*
+*Defined in [src/apis/platformvm/interfaces.ts:155](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/platformvm/interfaces.ts#L155)*

@@ -19,7 +19,7 @@
 
 • **cursor**: *number*
 
-*Defined in [src/apis/avm/interfaces.ts:172](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L172)*
+*Defined in [src/apis/avm/interfaces.ts:172](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L172)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **txIDs**: *string[]*
 
-*Defined in [src/apis/avm/interfaces.ts:171](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L171)*
+*Defined in [src/apis/avm/interfaces.ts:171](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L171)*

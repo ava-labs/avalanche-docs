@@ -19,7 +19,7 @@
 
 • **minters**: *string[]*
 
-*Defined in [src/apis/avm/interfaces.ts:208](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L208)*
+*Defined in [src/apis/avm/interfaces.ts:208](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L208)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **threshold**: *number*
 
-*Defined in [src/apis/avm/interfaces.ts:207](https://github.com/ava-labs/avalanchejs/blob/62a14d4/src/apis/avm/interfaces.ts#L207)*
+*Defined in [src/apis/avm/interfaces.ts:207](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/interfaces.ts#L207)*
