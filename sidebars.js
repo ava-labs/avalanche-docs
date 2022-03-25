@@ -102,6 +102,7 @@ const sidebars = {
                 },
                 'build/tutorials/platform/create-a-local-test-network',
                 'build/tutorials/platform/fuji-workflow',
+                'build/tutorials/platform/download-fuji-db',
                 'build/tutorials/platform/fund-a-local-test-network',
                 'build/tutorials/platform/integrate-exchange-with-avalanche',
                 'build/tutorials/platform/launch-your-ethereum-dapp',
