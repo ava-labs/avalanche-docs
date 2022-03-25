@@ -4,7 +4,7 @@
 
 Interest in Avalanche Subnets has been exploding. With the recent announcement of [Multiverse](https://medium.com/avalancheavax/avalanche-foundation-launches-multiverse-an-up-to-290m-incentive-program-to-accelerate-growth-of-c815ac5692c7), an up to $290M incentive program to accelerate growth of Subnets, we expect that interest to accelerate.
 
-A requirement of running a custom subnet is to first have a validator on the primary subnet.  Currently fully syncing the Fuji network takes multiple days. A common request from developers is a quicker path to having a fully synced Fuji node. With that in mind, and in time for the [Avalanche Summit Hackthons](https://www.avalanchesummit.com) uploaded a DB to S3 that you can use to start your own Fuji validator.
+A requirement of running a custom subnet is to first have a validator on the primary subnet.  Currently fully syncing the Fuji network takes multiple days. A common request from developers is a quicker path to having a fully synced Fuji node. With that in mind, and in time for the [Avalanche Summit Hackthon](https://www.avalanchesummit.com), we've uploaded a DB to S3 that you can use to start your own Fuji validator.
 
 ## Download AvalancheGo
 
@@ -16,7 +16,7 @@ Check out the [AvalancheGo repo](https://github.com/ava-labs/avalanchego) and fo
 
 ### Run From Binary
 
-Alternatively you can use a [pre-build binary](https://github.com/ava-labs/avalanchego/releases).
+Alternatively you can use a [pre-built binary](https://github.com/ava-labs/avalanchego/releases).
 
 ## Install the Fuji DB
 
