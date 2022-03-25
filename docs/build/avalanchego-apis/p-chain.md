@@ -235,7 +235,7 @@ platform.addSubnetValidator(
 ```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "platform.addSubnetvalidator",
+    "method": "platform.addSubnetValidator",
     "params": {
         "nodeID":"NodeID-7xhw2mdxuds44j42tcb6u5579esbst3lg",
         "subnetID":"zbfoww1ffkpvrfywpj1cvqrfnyesepdfc61hmu2n9jnghduel",
