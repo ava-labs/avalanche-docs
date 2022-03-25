@@ -55,7 +55,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 {
     "jsonrpc": "2.0",
     "result": {
-        "address": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
+        "address": "X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"
     },
     "id": 1
 }
@@ -63,7 +63,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
 
 ### Check X-Chain balance
 
-Confirm the `X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u` address now has a balance of 300m AVAX on the X-Chain.
+Confirm the `X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address now has a balance of 300m AVAX on the X-Chain.
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
@@ -73,7 +73,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
   "id"     : 1,
   "method" :"avm.getBalance",
   "params" :{
-      "address":"X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+      "address":"X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p",
       "assetID": "AVAX"
   }
 } '
@@ -84,7 +84,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/X' \
         "balance": "300000000000000000",
         "utxoIDs": [
             {
-                "txID": "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe",
+                "txID": "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC",
                 "outputIndex": 1
             }
         ]
@@ -151,11 +151,11 @@ To see this account on Metamask, follow these steps:
 * Set up Metamask by following [this](../smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask.md#local-testnet-avash-settings-avash-tutorial) and create a `Avalanche Local` network.
 * Create a new account by importing this private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027` on Metamask
 
-![](/img/Metamask-Import-Account.png)
+!["Metamask import account"](/img/Metamask-Import-Account.png)
 
 * Now you can see the balance of this newly created account on `Avalanche Local`
 
-![](/img/local-pre-funded-account.png)
+!["Local pre-funded account"](/img/local-pre-funded-account.png)
 
 ## P-Chain
 
@@ -178,7 +178,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 {
     "jsonrpc": "2.0",
     "result": {
-        "address": "P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
+        "address": "P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"
     },
     "id": 1
 }
@@ -186,7 +186,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
 
 ### Check P-Chain balance
 
-Confirm the `P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u` address has a balance of 30m AVAX on the P-Chain. 20m should be unlocked and 10m locked and stakeable.
+Confirm the `P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p` address has a balance of 30m AVAX on the P-Chain. 20m should be unlocked and 10m locked and stakeable.
 
 ```text
 curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
@@ -196,7 +196,7 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
     "id"     :1,
     "method" :"platform.getBalance",
     "params" :{
-      "address":"P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"    
+      "address":"P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"    
     }
 }'
 
@@ -204,17 +204,17 @@ curl --location --request POST '127.0.0.1:9650/ext/bc/P' \
     "jsonrpc": "2.0",
     "result": {
         "balance": "30000000000000000",
-        "unlocked": "20000000000000000",
-        "lockedStakeable": "10000000000000000",
+        "unlocked": "30000000000000000",
+        "lockedStakeable": "0",
         "lockedNotStakeable": "0",
         "utxoIDs": [
             {
                 "txID": "11111111111111111111111111111111LpoYY",
-                "outputIndex": 1
+                "outputIndex": 0
             },
             {
                 "txID": "11111111111111111111111111111111LpoYY",
-                "outputIndex": 0
+                "outputIndex": 1
             }
         ]
     },
