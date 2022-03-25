@@ -1,4 +1,4 @@
-# Download the Fuji DB
+# Avalanche Summit: Fuji Quickstart 
 
 ## Introduction
 
