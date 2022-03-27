@@ -94,7 +94,7 @@ class ActiveElections extends Component {
       // Address of each election contract
       electionDetails[i].electionAddress = elections[i];
 
-      // Boolean indicating wether the contract address has voted or not
+      // Boolean indicating whether the contract address has voted or not
       electionDetails[i].hasVoted = await election.methods.voters(this.app.account[0]).call();
 
       // Name of the election
