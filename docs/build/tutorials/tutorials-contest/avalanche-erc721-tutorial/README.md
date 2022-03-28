@@ -89,7 +89,7 @@ This file is the entrypoint of our Truffle project. As you can see, we specify t
 MNEMONIC='paste your metamask mnemonic here which is twelve words long believe me'
 APIKEY=YOUR_DATAHUB_API_KEY_FOR_THE_FUJI_TESTNET
 ```
-Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/auth/login)'s testnet RPC. There is a free plan which you can use. For that you would need to register, grab your APIKEY and paste it into your **.env** file. 
+Note: For the Fuji testnet I used [DataHub](https://datahub.figment.io/signup)'s testnet RPC. There is a free plan which you can use. For that you would need to register, grab your APIKEY and paste it into your **.env** file. 
 Complete DataHub onboarding guide to DataHub 2.0 can be found [HERE](https://docs.figment.io/guides/getting-started-with-datahub)
 
 4. We would also need two more configuration files in order to build our initial TypeScript environment. Let us create a **tsconfig.json** under the root of our project with the following contents:
