@@ -151,7 +151,7 @@ There is no hard and fast rule to have the same project structre as demonstrated
 
 Here, `subnet-evm-js` is our node.js project folder. Move to the project directory and install the following dependencies.
 
-* avalanche
+* avalanche (3.13.3 or above)
 * axios
 * dotenv
 * yargs
@@ -189,7 +189,7 @@ Always put secret information like the `.env` file restricted to yourself only a
 This code will serve as the helper function for all other functions spread over different files. It will instantiate all the necessary Avalanche APIs using AvalancheJS and export them for other files to use it. Other files can simply import and re-use. Make a new file `importAPI.js` and paste the following code inside it.
 
 ```javascript
-const { Avalanche, BinTools } = require("avalanche")
+const { Avalanche, BinTools, BN } = require("avalanche")
 
 // Importing node details and Private key from the config file.
 const { ip, port, protocol, networkID, privKey } = require('./config.js')
@@ -222,7 +222,8 @@ module.exports = {
 	pKeyChain,
 	pAddressStrings,
 	bintools,
-	utxoSet
+	utxoSet,
+  BN
 }
 ```
 
@@ -328,155 +329,16 @@ Make sure to keep the `txID` you received for this transaction. Once this transa
 node createSubnet.js
 ```
 
-## Building VM Genesis and Blockchain
-
-Once the subnet setup is complete, subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not there, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
-
-Let's write functions to build a new blockchain using the already created `genesis.json` and `subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps as it will include multiple utility functions. Go through the steps by understanding each function and pasting it in your `createBlockchain.js` file.
-
-### Importing dependencies
-
-Let's import the dependencies by using the following snippet. We are importing `axios` and `yargs` because -
-
-* Axios for requesting static method of the VM to build genesis.
-* Yargs for reading command-line flags.
-
-```javascript
-const axios = require('axios').default;
-const args = require('yargs').argv;
-const SubnetAuth = require('avalanche').platformvm.SubnetAuth
-
-const genesisJSON = require('./genesis.json');
-const { protocol, ip, port } = require('./config.js');
-const { platform, pKeyChain, pAddressStrings, bintools, utxoSet } = require('./importAPI');
-```
-
-### Building Genesis Bytes
-
-We will be making an API call to the static method of VM - `subnetevm.buildGenesis` for encoding our genesis (JSON) data into CB58 format. This function takes vmID and genesis (in JSON) and returns the encoded data.
-
-```javascript
-// Building chain's genesis using VM's static method
-async function buildSbunetVMGenesis(vmID, genesisJSON) {
-  // subnet vm's static RPC url
-  const buildGenesisURL = `${protocol}://${ip}:${port}/ext/vm/${vmID}/rpc`;
-
-  try {
-    // Making RPC request to VM's static method to build genesis bytes
-    const response = await axios.post(buildGenesisURL, {
-      "jsonrpc": "2.0",
-      "id": 1,
-      "method": "subnetevm.buildGenesis",
-      "params": {
-        "genesisData": genesisJSON
-      }
-    });
-
-    return [response.data.result.genesisBytes, "Successful", false];
-  } catch (err) {
-    return [null, "Error building genesis byte code!", true];
-  }
-}
-```
-
-### Encoding `vmName` to CB58 `vmID`
-
-We have used the utility function for creating `vmID` from the `vmName`. vmID is zero-extended in a 32-byte array and encoded in CB58 from a string. Paste the function shown below.
-
-```javascript
-// Returns zero-extended in a 32 byte array and encoded in CB58 from a string
-function get32ByteCB58(str) {
-  const strBuffer = Buffer.from(str);
-
-  if (strBuffer.length > 32) {
-    console.log("Error:String size cannot be more than 32 bytes!");
-    return;
-  }
-
-  const extendedBuffer = Buffer.alloc(32 - strBuffer.length);
-  const finalBuffer = Buffer.concat([strBuffer, extendedBuffer]);
-  return bintools.cb58Encode(finalBuffer);
-}
-```
-
-### Creating Blockchain
-
-Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags as its input. The user must provide `subnetID` and `chainName` flag. The 3rd argument could be either `vmID` or `vmName`. If both are provided then they should represent the same thing. Chain name is the name of blockchain you want to create with the provided `vmID`. The `vmID` must be the same as what we have created the `subnet-evm` binary with.
-
-```javascript
-// Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
-async function createBlockchain() {
-  const { subnetID, chainName } = args;
-
-  // Generating vmID if vmName is provied, else assigning args.vmID 
-  const vmID = typeof args.vmID !== "undefined" ? args.vmID : get32ByteCB58(args.vmName);
-
-  // Returning error if both vmID and vmName is passed but doesn't represent same thing
-  if (typeof args.vmName != "undefined" && typeof args.vmID != "undefined") {
-    if (args.vmID != get32ByteCB58(args.vmName)) {
-      console.log("Error: vmID and vmName passed doesn't represent same thing!");
-      return;
-    }
-  }
-
-  // Getting CB58 encoded bytes of genesis
-  const [genesisBytes, remarks, err] = await buildSbunetVMGenesis(vmID, genesisJSON);
-
-  if (!err) {
-    // Creating subnet auth
-    const addressIndex = Buffer.alloc(4);
-    addressIndex.writeUIntBE(0x0, 0, 4);
-    const subnetAuth = new SubnetAuth([addressIndex]);
-
-    // Creating unsgined tx
-    const unsignedTx = await platform.buildCreateChainTx(
-      await utxoSet(),    // set of utxos this tx is consuming
-      pAddressStrings,    // from
-      pAddressStrings,    // change
-      subnetID,           // id of subnet on which chain is being created
-      chainName,          // Name of blockchain
-      vmID,               // ID of VM this blockchain is referencing
-      [],                 // Array of feature extensions 
-      genesisBytes,       // CB58 encoded genesis data
-      subnetAuth          // subnet owners' address indices signing this tx
-    );
-
-    // signing unsgined tx with pKeyChain
-    const tx = unsignedTx.sign(pKeyChain);
-
-    // issuing tx
-    const txId = await platform.issueTx(tx);
-    console.log("Create chain transaction ID: ", txId);
-  } else {
-    console.log(remarks);
-  }
-}
-```
-
-The code above is self-explanatory -
-* Processing command-line flags to constants - `subnetID`, `chainName` and `vmID`.
-* Building CB58 encoded genesis bytes.
-* Creating subnet auth array.
-* Creating unsigned tx by calling `platform.buildCreateChainTx`.
-* Signing and issuing the signed tx.
-
-Make sure to keep txID received by running this code. Once the transaction is committed, the txID will be the `blockchainID` or identifier for the newly created chain. You can run this program now with the following command.
-
-```bash
-node createBlockchain.js \
---subnetID <YOUR_SUBNET_ID> \
---chainName <CUSTOM_CHAIN_NAME> \
---vmName subnetevm
-```
-
 ## Adding Subnet Validator
 
-The newly created subnet requires validators to validate the transactions on their blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the subnet. Only transactions signed by the threshold (here 1) number of subnet owners will be accepted to add validators. The subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`.
+The newly created subnet requires validators to validate the transactions on the subnet's every blockchain. Now we will write the code in `addSubnetValidator.js` to add validators to the subnet. Only transactions signed by the threshold (here 1) number of subnet owners will be accepted to add validators. The subnet owners which will sign this transaction is passed as the `subnetAuth` parameter. It is an array of indices, representing the subnet owners from the array of addresses that we passed earlier in the `createSubnetTx()`. 
+
+The arguments for the AvalancheJS API call for `buildAddSubnetValidatorTx()` is explained with the help of comments. All the transaction calls of AvalancheJS starting with `build` will return an unsigned transaction. We then have to sign it with our key chain and issue the signed transaction to the network.
 
 ```javascript
 const args = require('yargs').argv;
 const SubnetAuth = require('avalanche').platformvm.SubnetAuth
-const { platform, info, pKeyChain, pAddressStrings, utxoSet } = require('./importAPI.js');
+const { platform, info, pKeyChain, pAddressStrings, utxoSet, BN } = require('./importAPI.js');
 
 async function addSubnetValidator() {
   let {
@@ -493,14 +355,14 @@ async function addSubnetValidator() {
   const subnetAuth = new SubnetAuth([addressIndex]);
 
   // Creating unsgined tx
-  const unsignedTx = await platform.addSubnetValidator(
+  const unsignedTx = await platform.buildAddSubnetValidatorTx(
     await utxoSet(),     // set of utxos this tx will consume
     pAddressStrings,     // from
     pAddressStrings,     // change
     nodeID,              // node id of the validator
-    startTime,           // timestamp after which validation starts
-    endTime,             // timestamp after which validation ends
-    weight,              // weight of the validator
+    new BN(startTime),   // timestamp after which validation starts
+    new BN(endTime),     // timestamp after which validation ends
+    new BN(weight),      // weight of the validator
     subnetID,            // subnet id for validation
     subnetAuth           // subnet owners' address indices signing this tx
   );
@@ -541,6 +403,108 @@ avalanche-network-runner control restart-node \
 ```
 
 Once the node has restarted, it will again be re-assigned to a random API port. We have to update the `config.js` file with the new port.
+
+## Building VM Genesis and Blockchain
+
+Once the subnet setup is complete, subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by the subnet validators, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
+
+Let's write functions to build a new blockchain using the already created `genesis.json` and `subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps. Go through the steps by understanding each function and pasting it in your `createBlockchain.js` file.
+
+### Importing dependencies
+
+Let's import the dependencies by using the following snippet. We are importing `axios` and `yargs` because -
+
+* Axios for requesting static method of the VM to build genesis.
+* Yargs for reading command-line flags.
+
+```javascript
+const axios = require('axios').default;
+const args = require('yargs').argv;
+const SubnetAuth = require('avalanche').platformvm.SubnetAuth
+
+const genesisJSON = require('./genesis.json');
+const { platform, pKeyChain, pAddressStrings, bintools, utxoSet } = require('./importAPI');
+```
+
+### Decoding CB58 `vmID` to string
+
+We have used the utility function for decoding `vmName` from the `vmID`. vmID is zero-extended in a 32-byte array and encoded in CB58 from a string. Paste the function shown below.
+
+```javascript
+// Returns string representing vmName of the provided vmID
+function convertCB58ToString(cb58Str) {
+  const buff = bintools.cb58Decode(cb58Str)
+  return buff.toString()
+}
+```
+
+### Creating Blockchain
+
+Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags as its input. The user must provide `subnetID` and `chainName` flag. The 3rd argument could be either `vmID` or `vmName`. If both are provided then they should represent the same thing. Chain name is the name of blockchain you want to create with the provided `vmID`. The `vmID` must be the same as what we have created the `subnet-evm` binary with.
+
+```javascript
+// Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
+async function createBlockchain() {
+  const { subnetID, chainName } = args;
+
+  // Generating vmName if only vmID is provied, else assigning args.vmID 
+  const vmName = typeof args.vmName !== "undefined" ? args.vmName : convertCB58ToString(args.vmID);
+
+  // Returning error if both vmID and vmName is passed but doesn't represent same thing
+  if (typeof args.vmName != "undefined" && typeof args.vmID != "undefined") {
+    if (args.vmName != convertCB58ToString(args.vmID)) {
+      console.log("Error: vmID and vmName passed doesn't represent same thing!");
+      return;
+    }
+  }
+  
+  // Getting CB58 encoded bytes of genesis
+  genesisBytes = JSON.stringify(genesisJSON);
+
+  // Creating subnet auth
+  const addressIndex = Buffer.alloc(4);
+  addressIndex.writeUIntBE(0x0, 0, 4);
+  const subnetAuth = new SubnetAuth([addressIndex]);
+
+  // Creating unsgined tx
+  const unsignedTx = await platform.buildCreateChainTx(
+    await utxoSet(),    // set of utxos this tx is consuming
+    pAddressStrings,    // from
+    pAddressStrings,    // change
+    subnetID,           // id of subnet on which chain is being created
+    chainName,          // Name of blockchain
+    vmName,             // Name of the VM this chain is referencing
+    [],                 // Array of feature extensions 
+    genesisBytes,       // Stringified geneis JSON file
+    subnetAuth          // subnet owners' address indices signing this tx
+  );
+
+  // signing unsgined tx with pKeyChain
+  const tx = unsignedTx.sign(pKeyChain);
+
+  // issuing tx
+  const txId = await platform.issueTx(tx);
+  console.log("Create chain transaction ID: ", txId);
+}
+```
+
+The code above is self-explanatory -
+* Processing command-line flags to constants - `subnetID`, `chainName` and `vmID`.
+* Building stringified JSON from genesis.json
+* Creating subnet auth array.
+* Creating unsigned tx by calling `platform.buildCreateChainTx`.
+* Signing and issuing the signed tx.
+
+Make sure to keep txID received by running this code. Once the transaction is committed, the txID will be the `blockchainID` or identifier for the newly created chain. You can run this program now with the following command.
+
+```bash
+node createBlockchain.js \
+--subnetID <YOUR_SUBNET_ID> \
+--chainName <CUSTOM_CHAIN_NAME> \
+--vmName subnetevm
+```
+
+Creating a new chain will take few seconds. You can also view the logs on the Avalanche Network Runner tab of the terminal.
 
 ## Interacting with the New Blockchain with MetaMask
 
