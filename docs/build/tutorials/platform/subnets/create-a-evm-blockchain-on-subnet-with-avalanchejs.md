@@ -152,12 +152,11 @@ There is no hard and fast rule to have the same project structre as demonstrated
 Here, `subnet-evm-js` is our node.js project folder. Move to the project directory and install the following dependencies.
 
 * avalanche (3.13.3 or above)
-* axios
 * dotenv
 * yargs
 
 ```bash
-npm install --save avalanche axios dotenv yargs
+npm install --save avalanche dotenv yargs
 ```
 
 ### Configuration and other details
@@ -404,21 +403,17 @@ avalanche-network-runner control restart-node \
 
 Once the node has restarted, it will again be re-assigned to a random API port. We have to update the `config.js` file with the new port.
 
-## Building VM Genesis and Blockchain
+## Creating Blockchain
 
 Once the subnet setup is complete, subnet owners can deploy any number of blockchains by building their own VMs or reusing the existing ones. If the VM for the new blockchain is not being used by the subnet validators, then each node has to place the new VM binary in their `avalanchego/build/plugins/` folder.
 
 Let's write functions to build a new blockchain using the already created `genesis.json` and `subnet-evm` as a blueprint (VM) for this chain. We will write the code in steps. Go through the steps by understanding each function and pasting it in your `createBlockchain.js` file.
 
-### Importing dependencies
+### Importing Dependencies
 
-Let's import the dependencies by using the following snippet. We are importing `axios` and `yargs` because -
-
-* Axios for requesting static method of the VM to build genesis.
-* Yargs for reading command-line flags.
+Let's import the dependencies by using the following snippet. We are importing `yargs` for reading command-line flags.
 
 ```javascript
-const axios = require('axios').default;
 const args = require('yargs').argv;
 const SubnetAuth = require('avalanche').platformvm.SubnetAuth
 
@@ -426,7 +421,7 @@ const genesisJSON = require('./genesis.json');
 const { platform, pKeyChain, pAddressStrings, bintools, utxoSet } = require('./importAPI');
 ```
 
-### Decoding CB58 `vmID` to string
+### Decoding CB58 `vmID` to String
 
 We have used the utility function for decoding `vmName` from the `vmID`. vmID is zero-extended in a 32-byte array and encoded in CB58 from a string. Paste the function shown below.
 
