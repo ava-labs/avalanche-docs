@@ -25,7 +25,7 @@ If a transaction attempts to use more than this limit, then the transaction will
 
 Originally, transactions could only set a single parameter to define how much they were willing to pay for gas: `gas price`. When dynamic fees were introduced, EIP-1559 style transactions were introduced as well which contain two parameters `maxFeeCap` and `maxPriorityFee` to determine the price a transaction is willing to pay.
  
-With the introduction of dynamic fees, legacy style transactions that only have a single `gas price` parameter can lead to both delayed transactions and overpaying for transactions. Dynamic fee transactions are the solution!
+With the introduction of dynamic fees, legacy style transactions that only have a single `gas price` parameter can lead to both delayed transactions and overpaying for transactions. Dynamic fee transactions are the solution! For more info, read [this](../../../learn/platform-overview/transaction-fees.md#dynamic-fee-transactions).
 
 For the dynamic fee algorithm, when a block is produced or verified, we look over the past 10s to see how much gas has been consumed within that window (with an added charge for each block produced in that window) to determine the current network utilization. This window has a target utilization, which is currently set to `15M` gas units. Lastly, there is an added charge if a block is produced faster than the target rate of block production. Currently, the target rate of block production is one block every two seconds, so if a new block is produced one second after its parent, then there is an additional surcharge added into the base fee calculation.
 

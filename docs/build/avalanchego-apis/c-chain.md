@@ -266,7 +266,7 @@ curl -X POST --data '{
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avmimport) on the X-Chain to complete the transfer.
+Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
 #### Signature
 
@@ -281,7 +281,7 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
+* `to` is the X-Chain or P-Chain address the asset is sent to.
 * `amount` is the amount of the asset to send.
 * `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
 * `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
@@ -321,12 +321,12 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avmimport) with assetID `AVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete the transfer.
 
 #### Signature
 
 ```go
-avax.export({
+avax.exportAVAX({
     to: string,
     amount: int,
     baseFee: int,
@@ -337,7 +337,7 @@ avax.export({
 
 **Request**
 
-* `to` is the X-Chain address the asset is sent to.
+* `to` is X-Chain or P-Chain address the asset is sent to.
 * `amount` is the amount of the asset to send.
 * `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
@@ -511,7 +511,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avmexport) method with assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -527,8 +527,8 @@ avax.import({
 
 **Request**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
+* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the X-Chain's or P-Chain's `export`.
+* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
 * `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
 * `password` is `username`‘s password.
@@ -569,7 +569,7 @@ curl -X POST --data '{
 
 **DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avmexport) method with assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -586,7 +586,7 @@ avax.importAVAX({
 **Request**
 
 * `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
+* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
 * `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
 * `password` is `username`‘s password.
