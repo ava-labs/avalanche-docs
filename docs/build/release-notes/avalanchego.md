@@ -16,6 +16,7 @@ This version is backwards compatible to [v1.7.0](https://github.com/ava-labs/ava
 - Improved subnet gossip to only send messages to nodes participating in that subnet.
 - Fixed inlined VM initialization to correctly register static APIs.
 - Added logging for file descriptor limit errors.
+- Removed dead code from network packer.
 - Improved logging of invalid hash length errors.
 
 
