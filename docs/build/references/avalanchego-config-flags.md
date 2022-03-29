@@ -691,7 +691,7 @@ The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to
 
 #### `--fd-limit` (int)
 
-Attempts to raise the process file descriptor limit to at least this value. Defaults to `32768`
+Attempts to raise the process file descriptor limit to at least this value and error if the value is above the system max. Linux default `32768`.
 
 ## Logging
 

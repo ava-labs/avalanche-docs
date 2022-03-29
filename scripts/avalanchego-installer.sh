@@ -22,6 +22,7 @@ create_service_file () {
   echo "User=$(whoami)">>avalanchego.service
   echo "WorkingDirectory=$HOME">>avalanchego.service
   echo "ExecStart=$HOME/avalanche-node/avalanchego --config-file=$HOME/.avalanchego/configs/node.json">>avalanchego.service
+  echo "LimitNOFILE=32768">>avalanchego.service
   echo "Restart=always">>avalanchego.service
   echo "RestartSec=1">>avalanchego.service
   echo "[Install]">>avalanchego.service
