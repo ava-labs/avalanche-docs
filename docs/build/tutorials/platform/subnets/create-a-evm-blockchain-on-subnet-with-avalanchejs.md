@@ -435,7 +435,7 @@ function convertCB58ToString(cb58Str) {
 
 ### Creating Blockchain
 
-Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags as its input. The user must provide `subnetID` and `chainName` flag. The 3rd argument could be either `vmID` or `vmName`. If both are provided then they should represent the same thing. Chain name is the name of blockchain you want to create with the provided `vmID`. The `vmID` must be the same as what we have created the `subnet-evm` binary with.
+Now we will work upon the `createBlockchain()` function. This function takes 3-4 command line flags as its input. The user must provide `subnetID` and `chainName` flag. The 3rd argument could be either `vmID` or `vmName`. Either one of them must be provided with the flags. Chain name is the name of blockchain you want to create with the provided `vmID` or `vmName`. The `vmID` must be the same as what we have created the `subnet-evm` binary with.
 
 ```javascript
 // Creating blockchain with the subnetID, chain name and vmID (CB58 encoded VM name)
@@ -444,14 +444,6 @@ async function createBlockchain() {
 
   // Generating vmName if only vmID is provied, else assigning args.vmID 
   const vmName = typeof args.vmName !== "undefined" ? args.vmName : convertCB58ToString(args.vmID);
-
-  // Returning error if both vmID and vmName is passed but doesn't represent same thing
-  if (typeof args.vmName != "undefined" && typeof args.vmID != "undefined") {
-    if (args.vmName != convertCB58ToString(args.vmID)) {
-      console.log("Error: vmID and vmName passed doesn't represent same thing!");
-      return;
-    }
-  }
   
   // Getting CB58 encoded bytes of genesis
   genesisBytes = JSON.stringify(genesisJSON);
