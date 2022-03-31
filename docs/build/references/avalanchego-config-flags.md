@@ -697,19 +697,20 @@ Attempts to raise the process file descriptor limit to at least this value and e
 
 #### `--log-level` (string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`):
 
-The log level determines which events to log. There are 7 different levels, in order from highest priority to lowest.
+The log level determines which events to log. There are 8 different levels, in order from highest priority to lowest.
 
 - `Off`: No logs have this level of logging.
 - `Fatal`: Fatal errors that are not recoverable.
 - `Error`: Errors that the node encounters, these errors were able to be recovered.
 - `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
 - `Info`: Useful descriptions of node status updates.
+- `Trace`: Traces container (block, vertex, transaction) job results. Useful for tracing container IDs and their outcomes.
 - `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
 - `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
 
 When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
 
-#### `--log-display-level` (string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`):
+#### `--log-display-level` (string, `{Off, Fatal, Error, Warn, Info, Trace, Debug, Verbo}`):
 
 The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
 
