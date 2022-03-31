@@ -153,8 +153,7 @@ The default C-Chain config is:
     "web3",
     "internal-public-eth",
     "internal-public-blockchain",
-    "internal-public-transaction-pool",
-    "internal-public-account"
+    "internal-public-transaction-pool"
   ],
   "continuous-profiler-dir": "",
   "continuous-profiler-frequency": 900000000000,
@@ -162,10 +161,12 @@ The default C-Chain config is:
   "rpc-gas-cap": 50000000,
   "rpc-tx-fee-cap": 100,
   "preimages-enabled": false,
-  "pruning-enabled": true,
   "snapshot-async": true,
   "snapshot-verification-enabled": false,
-  "metrics-enabled": false,
+  "pruning-enabled": true,
+  "allow-missing-tries": false,
+  "populate-missing-tries-parallelism": 1024,
+  "metrics-enabled": true,
   "metrics-expensive-enabled": false,
   "local-txs-enabled": false,
   "api-max-duration": 0, // Default to no maximum
@@ -180,10 +181,11 @@ The default C-Chain config is:
   "remote-tx-gossip-only-enabled": false,
   "tx-regossip-frequency": 60000000000,
   "tx-regossip-max-size": 15,
-  "log-level": "debug",
+  "log-level": "info",
   "offline-pruning-enabled": false,
   "offline-pruning-bloom-filter-size": 512, // MB
-  "offline-pruning-data-directory": ""
+  "offline-pruning-data-directory": "",
+  "max-outbound-active-requests": 8
 }
 ```
 
@@ -514,7 +516,7 @@ If true, verifies the complete snapshot after it has been generated. Defaults to
 
 ##### `log-level` (string):
 
-Defines the log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"debug"`.
+Defines the C-chain log level. Must be one of `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
 
 #### Keystore Settings
 
@@ -695,22 +697,22 @@ Attempts to raise the process file descriptor limit to at least this value and e
 
 ## Logging
 
-#### `--log-level` (string, `{Off, Fatal, Error, Warn, Info, Debug, Verbo}`):
+#### `--log-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`):
 
 The log level determines which events to log. There are 8 different levels, in order from highest priority to lowest.
 
-- `Off`: No logs have this level of logging.
-- `Fatal`: Fatal errors that are not recoverable.
-- `Error`: Errors that the node encounters, these errors were able to be recovered.
-- `Warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
-- `Info`: Useful descriptions of node status updates.
-- `Trace`: Traces container (block, vertex, transaction) job results. Useful for tracing container IDs and their outcomes.
-- `Debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
-- `Verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `fatal`: Fatal errors that are not recoverable.
+- `error`: Errors that the node encounters, these errors were able to be recovered.
+- `warn`: A Warning that might be indicative of a spurious byzantine node, or potential future error.
+- `info`: Useful descriptions of node status updates.
+- `trace`: Traces container (block, vertex, transaction) job results. Useful for tracing container IDs and their outcomes.
+- `debug`: Debug logging is useful when attempting to understand possible bugs in the code. More information that would be typically desired for normal usage will be displayed.
+- `verbo`: Tracks extensive amounts of information the node is processing. This includes message contents and binary dumps of data for extremely low level protocol analysis.
+- `off`: No logs have this level of logging. Turns off logging.
 
-When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `Info`.
+When specifying a log level note that all logs with the specified priority or higher will be tracked. Defaults to `info`.
 
-#### `--log-display-level` (string, `{Off, Fatal, Error, Warn, Info, Trace, Debug, Verbo}`):
+#### `--log-display-level` (string, `{verbo, debug, trace, info, warn, error, fatal, off}`):
 
 The log level determines which events to display to the screen. If left blank, will default to the value provided to `--log-level`.
 
