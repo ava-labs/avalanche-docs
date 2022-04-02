@@ -1,9 +1,9 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 ---
 
 
-# Run an Avalanche Node using the Install Script
+# Run an Avalanche Node
 
 We have a shell (bash) script that installs AvalancheGo on your computer. This script sets up full, running node in a matter of minutes with minimal user input required.
 

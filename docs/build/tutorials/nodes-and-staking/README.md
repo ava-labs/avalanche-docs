@@ -6,11 +6,11 @@ sidebar_position: 1
 
 |  |  |
 | :--- | :--- |
-| [**Run an Avalanche Node**](run-avalanche-node.md) | How to run a node and interact with the network |
+| [**Run an Avalanche Node**](set-up-node-with-installer.md) | How to install and run AvalancheGo |
 | [**Node Backup and Restore**](node-backup-and-restore.md) | Back up important files to be able to restore your node |
 | [**Set up Node Monitoring**](setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo |
 | [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](../../../learn/platform-overview/README.md) |
-| [**Set up Node on Linux using install script**](set-up-node-with-installer.md) | Create a node on Linux the easy way |
+| [**Run a node manually, or from source**](run-avalanche-node.md) | How to install without the installer script |
 | [**Stake AVAX, by Validating or Delegating, with the Avalanche Wallet**](staking-avax-by-validating-or-delegating-with-the-avalanche-wallet.md) | Stake AVAX from the Avalanche wallet |
 | [**Upgrade Your AvalancheGo Node**](upgrade-your-avalanchego-node.mdx) | Upgrade your Avalanche node |
 | [**Set Up an Avalanche Node with Amazon Web Services (AWS)**](setting-up-an-avalanche-node-with-amazon-web-services-aws.md) | Create a node that runs on AWS |
