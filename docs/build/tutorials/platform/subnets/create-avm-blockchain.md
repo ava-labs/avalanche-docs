@@ -41,7 +41,7 @@ Each blockchain has some genesis state when it’s created. Each VM defines the 
 
 The [AVM’s documentation](../../../avalanchego-apis/x-chain.mdx) specifies that the argument to [`avm.buildGenesis`](../../../avalanchego-apis/x-chain.mdx#avm.buildGenesis) should look like this:
 
-```cpp
+```json
 {
 "genesisData":
     {
@@ -95,7 +95,7 @@ To create the byte representation of this genesis state, call [`avm.buildGenesis
 
 Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -156,7 +156,7 @@ curl -X POST --data '{
 
 This returns the byte representation of your blockchain’s genesis state:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -168,9 +168,9 @@ This returns the byte representation of your blockchain’s genesis state:
 
 ## Create the Blockchain
 
-Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/p-chain.md#platform-createblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platform-getsubnets).
+Now let’s create the new blockchain. To do so, we call [`platform.createBlockchain`](../../../avalanchego-apis/p-chain.md#platformcreateblockchain). Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the subnet’s control keys. As a reminder, you can find out what a subnet’s threshold and control keys are by calling [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -188,7 +188,7 @@ curl -X POST --data '{
 
 The response contains the transaction ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -203,9 +203,9 @@ The response contains the transaction ID:
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist (assuming the request was well-formed, etc.)
 
-To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platform-getblockchains). This returns a list of all blockchains that exist.
+To check, call [`platform.getBlockchains`](../../../avalanchego-apis/p-chain.md#platformgetblockchains). This returns a list of all blockchains that exist.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -216,7 +216,7 @@ curl -X POST --data '{
 
 The response confirms that the blockchain was created:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -253,9 +253,9 @@ The response confirms that the blockchain was created:
 
 ### Validating the Blockchain {#validating-blockchain}
 
-Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platform-getblockchainstatus) on that node:
+Every blockchain needs a set of validators to validate and process transactions on it. You can check if a node is validating a given blockchain by calling [`platform.getBlockchainStatus`](../../../avalanchego-apis/p-chain.md#platformgetblockchainstatus) on that node:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -266,7 +266,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -295,7 +295,7 @@ You can interact with this new instance of the AVM almost the same way you’d i
 
 In the genesis data we specified that address `avax1dmrwka6uck44zkaamagq46hhntta67yxfy9h9z` has 100,000,000 units of the asset with alias `asset1`. Let’s verify that:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -307,7 +307,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -327,7 +327,7 @@ curl -X POST --data '{
 
 Let's send some `asset1` to another address. First, create a recipient address:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "avm.createAddress",
@@ -339,7 +339,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -351,7 +351,7 @@ curl -X POST --data '{
 
 Now let's send 1 unit of `asset1` to the new address with [`avm.send`](../../../avalanchego-apis/x-chain.mdx#avm.send).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -368,7 +368,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -381,7 +381,7 @@ curl -X POST --data '{
 
 We can verify transaction status with:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -392,7 +392,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -404,7 +404,7 @@ curl -X POST --data '{
 
 Now we can confirm balances are changed accordingly:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -416,7 +416,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -434,7 +434,7 @@ curl -X POST --data '{
 
 As mentioned above, transaction fees are paid with `asset1`. We can confirm 1,000,000 unit (default) is used as fee in our transaction. Let's check senders balance after the transaction.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -446,7 +446,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -468,7 +468,7 @@ This address had 100,000,000 `asset1`, then we sent 1 unit to the other address 
 
 Our blockchain has another asset `asset2` named `myVarCapAsset`. It is a variable-cap asset. Let's mint more units of this asset with [`avm.mint`](../../../avalanchego-apis/x-chain.mdx#avm.mint). Address `avax16k8n4d8xmhplqn5vhhm342g6n9rkxuj8wn6u70` controls the mintable asset `asset2`, and it also has 5,000,000 unit `asset1`, which is enough to pay the transaction fee.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -488,7 +488,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -501,7 +501,7 @@ curl -X POST --data '{
 
 Let's check the balance with [`avm.getAllBalances`](../../../avalanchego-apis/x-chain.mdx#avm.getAllBalances).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -512,7 +512,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/myxchain
 ```
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {

@@ -85,7 +85,7 @@ In order to get around this, you can export a private key from the X-Chain and t
 
 First, export a private key from the X-Chain:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -100,7 +100,7 @@ curl -X POST --data '{
 
 Response:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -112,7 +112,7 @@ Response:
 
 Now, import the same private key to the C-Chain:
 
-```cpp
+```sh
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -127,7 +127,7 @@ curl -X POST --data '{
 
 The response contains a hex-encoded EVM address:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -141,9 +141,9 @@ Now we have everything we need to transfer the tokens.
 
 ### Transfer from the X-Chain to C-Chain
 
-Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../../avalanchego-apis/x-chain.mdx#avm-export) call:
+Use the address corresponding to the private key you exported and switch to using the C- prefix in the [`avm.export`](../../avalanchego-apis/x-chain.mdx#avmexport) call:
 
-```cpp
+```sh
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -160,7 +160,7 @@ curl -X POST --data '{
 
 Since your keystore user owns the corresponding private key on the C-Chain, you can now import the AVAX to the address of your choice. It’s not necessary to import it to the same address that it was exported to; you can import the AVAX to an address that you own in MetaMask or another third-party service.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,    
@@ -178,7 +178,7 @@ where `to` is a hex-encoded EVM address of your choice.
 
 The response looks like this:
 
-```cpp
+```json
 {   
     "jsonrpc": "2.0",   
     "result": { 
@@ -196,7 +196,7 @@ Once your AVAX has been transferred to the C-Chain, you can use it to deploy and
 
 Now, you can move AVAX back from the C-Chain to the X-Chain. First we need to export:
 
-```cpp
+```sh
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -215,7 +215,7 @@ where `to` is the bech32 encoded address of an X-Chain address you hold. Make su
 
 The response should look like this:
 
-```cpp
+```json
 {   
     "jsonrpc": "2.0",   
     "result": { 
@@ -225,9 +225,9 @@ The response should look like this:
 }
 ```
 
-To finish the transfer, call [`avm.import`](../../avalanchego-apis/x-chain.mdx#avm-import).
+To finish the transfer, call [`avm.import`](../../avalanchego-apis/x-chain.mdx#avmimport).
 
-```cpp
+```sh
 curl -X POST --data '{  
     "jsonrpc":"2.0",    
     "id"     :1,    
@@ -245,7 +245,7 @@ where `to` is the bech32 encoded address the X-Chain address which you sent the 
 
 The response should look like this:
 
-```cpp
+```json
 {   
     "jsonrpc": "2.0",   
     "result": { 

@@ -46,7 +46,7 @@ Signature for a [Tx](api_evm_transactions.tx.md)
 
 \+ **new Signature**(): *[Signature](common_signature.signature.md)*
 
-*Defined in [src/common/credentials.ts:98](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L98)*
+*Defined in [src/common/credentials.ts:98](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L98)*
 
 Signature for a [Tx](api_evm_transactions.tx.md)
 
@@ -58,9 +58,9 @@ Signature for a [Tx](api_evm_transactions.tx.md)
 
 • **_codecID**: *number* = undefined
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[_codecID](common_signature.sigidx.md#protected-_codecid)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[_codecID](common_nbytes.nbytes.md#protected-_codecid)*
 
-*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L51)*
+*Defined in [src/utils/serialization.ts:51](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L51)*
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeID](common_nbytes.nbytes.md#protected-_typeid)*
 
-*Defined in [src/common/credentials.ts:83](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L83)*
+*Defined in [src/common/credentials.ts:83](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L83)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[_typeName](common_nbytes.nbytes.md#protected-_typename)*
 
-*Defined in [src/common/credentials.ts:82](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L82)*
+*Defined in [src/common/credentials.ts:82](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L82)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bsize](common_nbytes.nbytes.md#protected-bsize)*
 
-*Defined in [src/common/credentials.ts:88](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L88)*
+*Defined in [src/common/credentials.ts:88](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L88)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[bytes](common_nbytes.nbytes.md#protected-bytes)*
 
-*Defined in [src/common/credentials.ts:87](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L87)*
+*Defined in [src/common/credentials.ts:87](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L87)*
 
 ## Methods
 
@@ -110,7 +110,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[clone](common_nbytes.nbytes.md#abstract-clone)*
 
-*Defined in [src/common/credentials.ts:90](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L90)*
+*Defined in [src/common/credentials.ts:90](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L90)*
 
 **Returns:** *this*
 
@@ -122,7 +122,7 @@ ___
 
 *Overrides [NBytes](common_nbytes.nbytes.md).[create](common_nbytes.nbytes.md#abstract-create)*
 
-*Defined in [src/common/credentials.ts:96](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/credentials.ts#L96)*
+*Defined in [src/common/credentials.ts:96](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/credentials.ts#L96)*
 
 **Parameters:**
 
@@ -136,20 +136,20 @@ ___
 
 ###  deserialize
 
-▸ **deserialize**(`fields`: object, `encoding`: [SerializedEncoding](../modules/src_utils.md#serializedencoding)): *void*
+▸ **deserialize**(`fields`: object, `encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *void*
 
-*Inherited from [Signature](common_signature.signature.md).[deserialize](common_signature.signature.md#deserialize)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[deserialize](common_nbytes.nbytes.md#deserialize)*
 
-*Overrides [StandardParseableInput](common_inputs.standardparseableinput.md).[deserialize](common_inputs.standardparseableinput.md#deserialize)*
+*Overrides [StandardParseableOutput](common_output.standardparseableoutput.md).[deserialize](common_output.standardparseableoutput.md#deserialize)*
 
-*Defined in [src/common/nbytes.ts:52](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L52)*
+*Defined in [src/common/nbytes.ts:52](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L52)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
 `fields` | object | - |
-`encoding` | [SerializedEncoding](../modules/src_utils.md#serializedencoding) | "hex" |
+`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) | "hex" |
 
 **Returns:** *void*
 
@@ -159,9 +159,9 @@ ___
 
 ▸ **fromBuffer**(`buff`: Buffer, `offset`: number): *number*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[fromBuffer](common_signature.sigidx.md#frombuffer)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[fromBuffer](common_nbytes.nbytes.md#frombuffer)*
 
-*Defined in [src/common/nbytes.ts:102](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L102)*
+*Defined in [src/common/nbytes.ts:102](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L102)*
 
 Takes a [[Buffer]], verifies its length, and stores it.
 
@@ -182,9 +182,9 @@ ___
 
 ▸ **fromString**(`b58str`: string): *number*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[fromString](common_signature.sigidx.md#fromstring)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[fromString](common_nbytes.nbytes.md#fromstring)*
 
-*Defined in [src/common/nbytes.ts:85](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L85)*
+*Defined in [src/common/nbytes.ts:85](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L85)*
 
 Takes a base-58 encoded string, verifies its length, and stores it.
 
@@ -204,9 +204,9 @@ ___
 
 ▸ **getCodecID**(): *number*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[getCodecID](common_signature.sigidx.md#getcodecid)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[getCodecID](common_nbytes.nbytes.md#getcodecid)*
 
-*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L70)*
+*Defined in [src/utils/serialization.ts:70](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L70)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -218,9 +218,9 @@ ___
 
 ▸ **getSize**(): *number*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[getSize](common_signature.sigidx.md#getsize)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[getSize](common_nbytes.nbytes.md#getsize)*
 
-*Defined in [src/common/nbytes.ts:78](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L78)*
+*Defined in [src/common/nbytes.ts:78](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L78)*
 
 Returns the length of the [Buffer](https://github.com/feross/buffer).
 
@@ -234,9 +234,9 @@ ___
 
 ▸ **getTypeID**(): *number*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[getTypeID](common_signature.sigidx.md#gettypeid)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[getTypeID](common_nbytes.nbytes.md#gettypeid)*
 
-*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L63)*
+*Defined in [src/utils/serialization.ts:63](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L63)*
 
 Used in serialization. Optional. TypeID is a number for the typeID of object being output.
 
@@ -248,9 +248,9 @@ ___
 
 ▸ **getTypeName**(): *string*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[getTypeName](common_signature.sigidx.md#gettypename)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[getTypeName](common_nbytes.nbytes.md#gettypename)*
 
-*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L56)*
+*Defined in [src/utils/serialization.ts:56](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L56)*
 
 Used in serialization. TypeName is a string name for the type of object being output.
 
@@ -262,9 +262,9 @@ ___
 
 ▸ **sanitizeObject**(`obj`: object): *object*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[sanitizeObject](common_signature.sigidx.md#sanitizeobject)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[sanitizeObject](common_nbytes.nbytes.md#sanitizeobject)*
 
-*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/serialization.ts#L77)*
+*Defined in [src/utils/serialization.ts:77](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/serialization.ts#L77)*
 
 Sanitize to prevent cross scripting attacks.
 
@@ -280,19 +280,19 @@ ___
 
 ###  serialize
 
-▸ **serialize**(`encoding`: [SerializedEncoding](../modules/src_utils.md#serializedencoding)): *object*
+▸ **serialize**(`encoding`: [SerializedEncoding](../modules/utils_serialization.md#serializedencoding)): *object*
 
-*Inherited from [Signature](common_signature.signature.md).[serialize](common_signature.signature.md#serialize)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[serialize](common_nbytes.nbytes.md#serialize)*
 
 *Overrides [Serializable](utils_serialization.serializable.md).[serialize](utils_serialization.serializable.md#serialize)*
 
-*Defined in [src/common/nbytes.ts:32](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L32)*
+*Defined in [src/common/nbytes.ts:32](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L32)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`encoding` | [SerializedEncoding](../modules/src_utils.md#serializedencoding) | "hex" |
+`encoding` | [SerializedEncoding](../modules/utils_serialization.md#serializedencoding) | "hex" |
 
 **Returns:** *object*
 
@@ -302,9 +302,9 @@ ___
 
 ▸ **toBuffer**(): *Buffer*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[toBuffer](common_signature.sigidx.md#tobuffer)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[toBuffer](common_nbytes.nbytes.md#tobuffer)*
 
-*Defined in [src/common/nbytes.ts:124](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L124)*
+*Defined in [src/common/nbytes.ts:124](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L124)*
 
 **Returns:** *Buffer*
 
@@ -316,9 +316,9 @@ ___
 
 ▸ **toString**(): *string*
 
-*Inherited from [SigIdx](common_signature.sigidx.md).[toString](common_signature.sigidx.md#tostring)*
+*Inherited from [NBytes](common_nbytes.nbytes.md).[toString](common_nbytes.nbytes.md#tostring)*
 
-*Defined in [src/common/nbytes.ts:131](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/nbytes.ts#L131)*
+*Defined in [src/common/nbytes.ts:131](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/nbytes.ts#L131)*
 
 **Returns:** *string*
 

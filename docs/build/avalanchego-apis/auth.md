@@ -9,9 +9,9 @@ An authorization token provides access to one or more API endpoints. This is is 
 
 An authorization token is provided in the header of an API call. Specifically, the header `Authorization` should have value `Bearer TOKEN.GOES.HERE` (where `TOKEN.GOES.HERE` is replaced with the token).
 
-This API is only reachable if the node is started with [command line argument ](../references/command-line-interface.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
+This API is only reachable if the node is started with [config flag](../references/avalanchego-config-flags.md)`--api-auth-required`. If the node is started without this CLI, API calls do not require authorization tokens, so this API is not reachable. This API never requires an authorization token to be reached.
 
-Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify an authorization token password with argument `--api-auth-password`. You must provide this password in order to create/revoke authorization tokens.
+Authorization token creation must be permissioned. If you run your node with `--api-auth-required`, you must also specify the file to read the Auth API's password from, with argument `--api-auth-password-file`. You must provide this password in order to create/revoke authorization tokens.
 
 Note that if you run your node with `--api-auth-required` then some tools like MetaMask may not be able to make API calls to your node because they don’t have an auth token.
 
@@ -33,7 +33,7 @@ Creates a new authorization token that grants access to one or more API endpoint
 
 #### **Signature**
 
-```cpp
+```sh
 auth.newToken(
     {
         password: string,
@@ -48,7 +48,7 @@ auth.newToken(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.newToken",
@@ -64,7 +64,7 @@ This call will generate an authorization token that allows access to API endpoin
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -76,9 +76,9 @@ This call will generate an authorization token that allows access to API endpoin
 
 This authorization token should be included in API calls by giving header `Authorization` value `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbmRwb2ludHMiOlsiKiJdLCJleHAiOjE1OTM0NzU4OTR9.Cqo7TraN_CFN13q3ae4GRJCMgd8ZOlQwBzyC29M6Aps`.
 
-For example, to call [`info.peers`](info.md#info-peers) with this token:
+For example, to call [`info.peers`](info.md#infopeers) with this token:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -94,7 +94,7 @@ Revoke a previously generated token. The given token will no longer grant access
 
 #### **Signature**
 
-```cpp
+```sh
 auth.revokeToken(
     {
         password: string,
@@ -108,7 +108,7 @@ auth.revokeToken(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.revokeToken",
@@ -122,7 +122,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -138,7 +138,7 @@ Change this node’s authorization token password. Any authorization tokens crea
 
 #### **Signature**
 
-```cpp
+```sh
 auth.changePassword(
     {
         oldPassword: string,
@@ -152,7 +152,7 @@ auth.changePassword(
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "auth.changePassword",
@@ -166,7 +166,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {

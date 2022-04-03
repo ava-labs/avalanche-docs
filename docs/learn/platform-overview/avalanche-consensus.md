@@ -1,8 +1,8 @@
 ---
-description: A deep dive into the Avalanche consensus protocol
+description: Consensus is the task of getting a group of computers to come to an agreement on a decision. Avalanche is a new consensus protocol that is scalable, robust, and decentralized.
 ---
 
-# Avalanche Consensus
+# Avalanche Blockchain Consensus
 
 Consensus is the task of getting a group of computers to come to an agreement on a decision. Computers can reach a consensus by following a set of steps called a consensus protocol. Avalanche is a new consensus protocol that is scalable, robust, and decentralized. It has low latency and high throughput. It is energy efficient and does not require special computer hardware. It performs well in adversarial conditions and is resilient to "51% attacks." This document explains the Avalanche consensus protocol. The whitepaper is [here.](https://www.avalabs.org/whitepapers)
 
@@ -64,7 +64,7 @@ while not decided:
 
 ### Algorithm Explained
 
-Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query _k_ people (the sample size) and ask them what they prefer. If α or more people give the same response, that response is adopted as the new preference. α is called the _quorum size_. If the new preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If the new preference is different then the old preference, the `consecutiveSuccesses` counter to `1`. If no response gets a quorum (an α majority of the same response) then the `consecutiveSuccesses` counter is set to `0`.
+Everyone has an initial preference for pizza or barbecue. Until someone has _decided_, they query _k_ people (the sample size) and ask them what they prefer. If α or more people give the same response, that response is adopted as the new preference. α is called the _quorum size_. If the new preference is the same as the old preference, the `consecutiveSuccesses` counter is incremented. If the new preference is different then the old preference, the `consecutiveSuccesses` counter is set to `1`. If no response gets a quorum (an α majority of the same response) then the `consecutiveSuccesses` counter is set to `0`.
 
 Everyone repeats this until they get a quorum for the same response β times in a row. If one person decides pizza, then every other person following the protocol will eventually also decide on pizza.
 

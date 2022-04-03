@@ -1,3 +1,8 @@
+---
+description: Avalanche also supports non-fungible tokens (NFTs). By definition, each NFT is unique and not perfectly interchangeable for any other NFT.
+---
+
+
 # Create an NFT (Part 1)
 
 ## Introduction
@@ -14,11 +19,11 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ## Create the NFT Family
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avm-createnftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
+Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avmcreatenftasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
 
 The signature for this method is:
 
-```cpp
+```
 avm.createNFTAsset({
     name: string,
     symbol: string,
@@ -39,7 +44,7 @@ avm.createNFTAsset({
 
 ### **Method**
 
-* [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avm-createnftasset)
+* [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avmcreatenftasset)
 
 **Parameters**
 
@@ -57,7 +62,7 @@ avm.createNFTAsset({
 
 Later in this example, we’ll mint an NFT, so be sure to replace at least 1 address in the minter set with an address which your user controls.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -81,7 +86,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -92,7 +97,7 @@ The response should look like this:
 }
 ```
 
-A couple things to note: first, in addition to creating an NFT family, AvalancheGo’s [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avm-createnftasset) also creates a group for each of the `minterSets`, which are passed in. For example, if `minterSets` has 3 elements, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
+A couple things to note: first, in addition to creating an NFT family, AvalancheGo’s [`avm.createNFTAsset`](../../avalanchego-apis/x-chain.mdx#avmcreatenftasset) also creates a group for each of the `minterSets`, which are passed in. For example, if `minterSets` has 3 elements, the NFT family has 3 groups. Second, take note of the `assetID` which is returned in the response. This is the `assetID` of the newly created NFT family, and you’ll need it later to issue NFTs.
 
 You may be wondering why we specify _sets_ of addresses that can mint more units of the asset rather than a single address. Here's why:
 
@@ -101,11 +106,11 @@ You may be wondering why we specify _sets_ of addresses that can mint more units
 
 ## Get UTXOs for NFT
 
-NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance) or [`avm.getAllBalances`](../../avalanchego-apis/x-chain.mdx#avm-getallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal (`10` in decimal) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal (`11` in decimal).
+NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avmgetbalance) or [`avm.getAllBalances`](../../avalanchego-apis/x-chain.mdx#avmgetallbalances). To see your NFTs, you have to call [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) and then parse the utxo to check for the type ID. NFT Mint Outputs have a type id of `00 00 00 0a` in hexidecimal (`10` in decimal) and NFT Transfer Outputs have a type id of `00 00 00 0b` in hexdecimal (`11` in decimal).
 
 ### **Method**
 
-* [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos)
+* [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos)
 
 ### **Parameters**
 
@@ -117,7 +122,7 @@ NFT outputs don’t show up in calls to [`avm.getBalance`](../../avalanchego-api
 * `utxos` is an array of CB58 encoded strings.
 * `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -130,7 +135,7 @@ curl -X POST --data '{
 
 The response contains a list of UTXOs:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -148,21 +153,21 @@ The response contains a list of UTXOs:
 }
 ```
 
-[`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
+[`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an [NFT Mint Output.](../../references/avm-transaction-serialization.md#nft-mint-output) First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) in to hex. The following [CB58](http://support.avalabs.org/en/articles/4587395-what-is-cb58) string:
 
-```cpp
+```
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
 is expressed in hexadecimal as:
 
-```cpp
+```
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
 Now, we can decompose the hex into the UTXO’s individual components by referring to the [transaction serialization format](../../references/avm-transaction-serialization.md):
 
-```cpp
+```
 NFT Mint Output
 
 CodecID: 00 00
@@ -181,11 +186,11 @@ Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT 
 
 ## Mint the Asset
 
-Now that we have an NFT family and a group for the single `MinterSet` we’re able to create NFTs belonging to this group. To do that we call [`avm.mintNFT`](../../avalanchego-apis/x-chain.mdx#avm-mintnft):
+Now that we have an NFT family and a group for the single `MinterSet` we’re able to create NFTs belonging to this group. To do that we call [`avm.mintNFT`](../../avalanchego-apis/x-chain.mdx#avmmintnft):
 
 ### **Method**
 
-* [`avm.mintNFT`](../../avalanchego-apis/x-chain.mdx#avm-mintnft)
+* [`avm.mintNFT`](../../avalanchego-apis/x-chain.mdx#avmmintnft)
 
 ### **Parameters**
 
@@ -200,7 +205,7 @@ Now that we have an NFT family and a group for the single `MinterSet` we’re ab
 * `txID` is the transaction ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -217,7 +222,7 @@ curl -X POST --data '{
 
 The response contains the transaction’s ID:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -228,9 +233,9 @@ The response contains the transaction’s ID:
 }
 ```
 
-Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
+Similar to the previous step, we can now confirm that an NFT was minted by calling [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) and parsing the UTXO to confirm that we now have an [NFT Transfer Output](../../references/avm-transaction-serialization.md#nft-transfer-output).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -243,7 +248,7 @@ curl -X POST --data '{
 
 This should give:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -263,21 +268,21 @@ This should give:
 
 As in the previous step, we can now decode the CB58 encoded UTXO to hexidecimal and then decompose it to its individual components to confirm that we have the correct UTXO and type.
 
-First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) in to hex. The following CB58 string:
+First, we convert the Base58Check encoded string which is returned from [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) in to hex. The following CB58 string:
 
-```cpp
+```
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
 ```
 
 is expressed in hexadecimal as:
 
-```cpp
+```
 00 00 7d 07 0d 1e fe a6 4e 45 09 05 c6 11 ee b1 cf 61 9f 21 22 eb 17 db aa ea 9a fe 2d ff 17 be 27 6b 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0b 00 00 00 00 00 00 00 08 41 56 41 20 4c 61 62 73 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
 Now, we can decompose the hex into the UTXO’s individual components:
 
-```cpp
+```
 NFT Mint Output
 
 CodecID: 00 00
@@ -298,11 +303,11 @@ Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT
 
 ## Send the NFT
 
-Now, you can send the NFT to anyone. To do that, use AvalancheGo’s [`avm.sendNFT`](../../avalanchego-apis/x-chain.mdx#avm-sendnft) API method.
+Now, you can send the NFT to anyone. To do that, use AvalancheGo’s [`avm.sendNFT`](../../avalanchego-apis/x-chain.mdx#avmsendnft) API method.
 
 **Method**
 
-* [`avm.sendNFT`](../../avalanchego-apis/x-chain.mdx#avm-sendnft)
+* [`avm.sendNFT`](../../avalanchego-apis/x-chain.mdx#avmsendnft)
 
 **Parameters**
 
@@ -317,7 +322,7 @@ Now, you can send the NFT to anyone. To do that, use AvalancheGo’s [`avm.sendN
 * `txID` is the transaction ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -334,7 +339,7 @@ curl -X POST --data '{
 
 The response confirms that our NFT Transfer Operation was successful:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -345,7 +350,7 @@ The response confirms that our NFT Transfer Operation was successful:
 }
 ```
 
-You can call [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avm-getutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
+You can call [`avm.getUTXOs`](../../avalanchego-apis/x-chain.mdx#avmgetutxos) for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
 
 ## Wrapping up
 

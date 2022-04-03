@@ -1,5 +1,5 @@
 ---
-description: The C-Chain is an instance of the Ethereum Virtual Machine (EVM)
+description: More information available regarding Avalanche Go APIs and learning how to interact with the C-Chain. 
 sidebar_position: 4
 ---
 
@@ -19,13 +19,13 @@ _Note: Ethereum has its own notion of `networkID` and `chainID`. These have no r
 
 To interact with C-Chain via the JSON-RPC endpoint:
 
-```cpp
+```
 /ext/bc/C/rpc
 ```
 
 To interact with other instances of the EVM via the JSON-RPC endpoint:
 
-```cpp
+```
 /ext/bc/blockchainID/rpc
 ```
 
@@ -33,15 +33,20 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 
 #### WebSocket Endpoints
 
+:::info
+On the [public api node](../tools/public-api.md#supported-apis), it only supports C-Chain websocket API calls for API methods that don't exist on the C-Chain's HTTP API
+:::
+
+
 To interact with C-Chain via the websocket endpoint:
 
-```cpp
+```
 /ext/bc/C/ws
 ```
 
 For example, to interact with the C-Chain's Ethereum APIs via websocket on localhost you can use:
 
-```cpp
+```
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
@@ -49,7 +54,7 @@ Note: on localhost, use `ws://`. When using the [Public API](../tools/public-api
 
 To interact with other instances of the EVM via the websocket endpoint:
 
-```cpp
+```
 /ext/bc/blockchainID/ws
 ```
 
@@ -70,7 +75,11 @@ Avalanche offers an API interface identical to Geth's API except that it only su
 
 You can interact with these services the same exact way you’d interact with Geth. See the [Ethereum Wiki’s JSON-RPC Documentation](https://eth.wiki/json-rpc/API) and [Geth’s JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server) for a full description of this API.
 
-Note: For batched requests, the maximum number of items is 40. We are working on to support a larger batch size. 
+:::info
+
+Note: For batched requests on the [public api node](../tools/public-api.md) , the maximum number of items is 40. We are working on to support a larger batch size. 
+
+:::
 
 #### eth_getAssetBalance
 
@@ -78,7 +87,7 @@ In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance
 
 **Signature**
 
-```cpp
+```sh
 eth_getAssetBalance({
     address: string,
     blk: BlkNrOrHash,
@@ -92,7 +101,7 @@ eth_getAssetBalance({
 
 **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "eth_getAssetBalance",
@@ -107,7 +116,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -121,7 +130,7 @@ Get the base fee for the next block.
 
 #### **Signature**
 
-```cpp
+```sh
 eth_baseFee() -> {}
 ```
 
@@ -129,7 +138,7 @@ eth_baseFee() -> {}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -140,7 +149,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -154,7 +163,7 @@ Get the priority fee needed to be included in a block.
 
 #### **Signature**
 
-```cpp
+```sh
 eth_maxPriorityFeePerGas() -> {}
 ```
 
@@ -162,7 +171,7 @@ eth_maxPriorityFeePerGas() -> {}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -173,7 +182,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -189,13 +198,13 @@ For more information on dynamic fees see the [C-Chain section of the transaction
 
 To interact with the `avax` specific RPC calls on the C-Chain:
 
-```cpp
+```
 /ext/bc/C/avax
 ```
 
 To interact with other instances of the EVM AVAX endpoints:
 
-```cpp
+```
 /ext/bc/blockchainID/avax
 ```
 
@@ -229,7 +238,7 @@ avax.getAtomicTx({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -243,7 +252,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -257,11 +266,11 @@ curl -X POST --data '{
 
 ### avax.export
 
-Export an asset from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avm-import) on the X-Chain to complete the transfer.
+Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax).
 
 #### Signature
 
-```cpp
+```
 avax.export({
     to: string,
     amount: int,
@@ -272,7 +281,7 @@ avax.export({
 }) -> {txID: string}
 ```
 
-* `to` is the X-Chain address the asset is sent to.
+* `to` is the X-Chain or P-Chain address the asset is sent to.
 * `amount` is the amount of the asset to send.
 * `assetID` is the ID of the asset. To export AVAX use `"AVAX"` as the `assetID`.
 * `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
@@ -281,7 +290,7 @@ avax.export({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -298,7 +307,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -310,14 +319,14 @@ curl -X POST --data '{
 
 ### avax.exportAVAX
 
-**DEPRECATED—instead use** [**avax.export**](c-chain.md#avax-export).
+**DEPRECATED—instead use** [**avax.export**](c-chain.md#avaxexport).
 
-Send AVAX from the C-Chain to the X-Chain. After calling this method, you must call [`avm.import`](x-chain.mdx#avm-import) with assetID `AVAX` on the X-Chain to complete the transfer.
+Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the X-Chain's [`avm.import`](x-chain.mdx#avmimport) or P-Chain's [`platform.import`](p-chain.md#platformimportavax) with assetID `AVAX` on the X-Chain to complete the transfer.
 
 #### Signature
 
 ```go
-avax.export({
+avax.exportAVAX({
     to: string,
     amount: int,
     baseFee: int,
@@ -328,7 +337,7 @@ avax.export({
 
 **Request**
 
-* `to` is the X-Chain address the asset is sent to.
+* `to` is X-Chain or P-Chain address the asset is sent to.
 * `amount` is the amount of the asset to send.
 * `baseFee` is the base fee that should be used when creating the transaction. If ommitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
@@ -340,7 +349,7 @@ avax.export({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -358,7 +367,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -394,7 +403,7 @@ avax.exportKey({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -409,7 +418,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -426,7 +435,7 @@ Gets the UTXOs that reference a given address.
 
 #### **Signature**
 
-```cpp
+```sh
 avax.getUTXOs(
     {
         addresses: string,
@@ -461,7 +470,7 @@ avax.getUTXOs(
 
 Suppose we want all UTXOs that reference at least one of `C-avax1yzt57wd8me6xmy3t42lz8m5lg6yruy79m6whsf`.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -480,7 +489,7 @@ curl -X POST --data '{
 
 This gives response:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -502,7 +511,7 @@ This gives response:
 
 ### avax.import
 
-Finalize the transfer of a non-AVAX or AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -518,8 +527,8 @@ avax.import({
 
 **Request**
 
-* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the C-Chain's `export`.
-* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`.
+* `to` is the address the asset is sent to. This must be the same as the `to` argument in the corresponding call to the X-Chain's or P-Chain's `export`.
+* `sourceChain` is the ID or alias of the chain the asset is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
 * `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
 * `password` is `username`‘s password.
@@ -530,7 +539,7 @@ avax.import({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -546,7 +555,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -558,9 +567,9 @@ curl -X POST --data '{
 
 ### avax.importAVAX
 
-**DEPRECATED—instead use** [**avax.import**](c-chain.md#avax-import)
+**DEPRECATED—instead use** [**avax.import**](c-chain.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain to the C-Chain. Before this method is called, you must call the X-Chain's [`avm.export`](x-chain.mdx#avm-export) method with assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is called, you must call the X-Chain’s [`avm.export`](x-chain.mdx#avmexport) or P-Chain’s [`platform.exportAVAX`](p-chain.md#platformexportavax) with assetID `AVAX` to initiate the transfer.
 
 #### Signature
 
@@ -577,7 +586,7 @@ avax.importAVAX({
 **Request**
 
 * `to` is the address the AVAX is sent to. It should be in hex format.
-* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`.
+* `sourceChain` is the ID or alias of the chain the AVAX is being imported from. To import funds from the X-Chain, use `"X"`; for the P-Chain, use `"P"`.
 * `baseFee` is the base fee that should be used when creating the transaction. If omitted, a suggested fee will be used.
 * `username` is the user that controls the address that transaction will be sent from.
 * `password` is `username`‘s password.
@@ -588,7 +597,7 @@ avax.importAVAX({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -604,7 +613,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -638,7 +647,7 @@ avax.importKey({
 
 #### Example Call
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -653,7 +662,7 @@ curl -X POST --data '{
 
 #### Example Response
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -669,7 +678,7 @@ Send a signed transaction to the network. `encoding` specifies the format of the
 
 #### **Signature**
 
-```cpp
+```sh
 avax.issueTx({
     tx: string,
     encoding: string, //optional
@@ -680,7 +689,7 @@ avax.issueTx({
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -694,7 +703,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -710,7 +719,7 @@ Get the status of an atomic transaction sent to the network.
 
 #### **Signature**
 
-```cpp
+```sh
 avax.getAtomicTxStatus({txID: string}) -> {
   status: string,
   blockHeight: string // returned when status is Accepted
@@ -726,7 +735,7 @@ avax.getAtomicTxStatus({txID: string}) -> {
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -739,7 +748,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -752,7 +761,7 @@ curl -X POST --data '{
 
 ## Admin API
 
-This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md#c-chain-config) `--coreth-admin-api-enabled:true`.
+This API can be used for debugging. Note that the Admin API is disabled by default. To run a node with the Admin API enabled, use [config flag](../references/avalanchego-config-flags.md#c-chain-config) `--coreth-admin-api-enabled:true`.
 
 ### Endpoint
 
@@ -789,7 +798,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -822,7 +831,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -855,7 +864,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -888,7 +897,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -921,7 +930,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

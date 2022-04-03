@@ -1,11 +1,12 @@
 ---
 sidebar_position: 12
+description: The IPC API allows users to create UNIX domain sockets for blockchains to publish to. Find out more information here. 
 ---
 # IPC API
 
 The IPC API allows users to create UNIX domain sockets for blockchains to publish to. When the blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside will be published to another.
 
-A node will only expose this API if it is started with [command line argument](../references/command-line-interface.md) `api-ipcs-enabled=true`.
+A node will only expose this API if it is started with [config flag](../references/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
 
 ## IPC Message Format
 
@@ -40,7 +41,7 @@ Register a blockchain so it publishes accepted vertices to a Unix domain socket.
 
 #### **Signature**
 
-```cpp
+```sh
 ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisionsURL: string}
 ```
 
@@ -50,7 +51,7 @@ ipcs.publishBlockchain({blockchainID: string}) -> {consensusURL: string, decisio
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.publishBlockchain",
@@ -63,7 +64,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "result":{
@@ -80,7 +81,7 @@ Deregister a blockchain so that it no longer publishes to a Unix domain socket.
 
 #### **Signature**
 
-```cpp
+```sh
 ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 ```
 
@@ -88,7 +89,7 @@ ipcs.unpublishBlockchain({blockchainID: string}) -> {success: bool}
 
 #### **Example Call**
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "ipcs.unpublishBlockchain",
@@ -101,7 +102,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "result":{

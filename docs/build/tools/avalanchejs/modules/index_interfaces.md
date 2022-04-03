@@ -18,3 +18,4 @@
 * [GetIsAcceptedParams](../interfaces/index_interfaces.getisacceptedparams.md)
 * [GetLastAcceptedParams](../interfaces/index_interfaces.getlastacceptedparams.md)
 * [GetLastAcceptedResponse](../interfaces/index_interfaces.getlastacceptedresponse.md)
+* [IsAcceptedResponse](../interfaces/index_interfaces.isacceptedresponse.md)

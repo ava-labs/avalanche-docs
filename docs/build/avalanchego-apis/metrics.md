@@ -16,7 +16,7 @@ The API allows clients to get statistics about a node’s health and performance
 
 To get the node metrics:
 
-```cpp
+```sh
 curl -X POST 127.0.0.1:9650/ext/metrics
 ```
 

@@ -52,4 +52,4 @@
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/utils/payload.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/utils/payload.ts#L16)*
+*Defined in [src/utils/payload.ts:16](https://github.com/ava-labs/avalanchejs/blob/5511161/src/utils/payload.ts#L16)*

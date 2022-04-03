@@ -13,7 +13,7 @@
 * [C](health_interfaces.checks.md#c)
 * [P](health_interfaces.checks.md#p)
 * [X](health_interfaces.checks.md#x)
-* [isBootstrapped](health_interfaces.checks.md#isbootstrapped)
+* [bootstrapped](health_interfaces.checks.md#bootstrapped)
 * [network](health_interfaces.checks.md#network)
 * [router](health_interfaces.checks.md#router)
 
@@ -23,7 +23,7 @@
 
 • **C**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L15)*
+*Defined in [src/apis/health/interfaces.ts:15](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L15)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **P**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:16](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L16)*
+*Defined in [src/apis/health/interfaces.ts:16](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L16)*
 
 ___
 
@@ -39,15 +39,15 @@ ___
 
 • **X**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L17)*
+*Defined in [src/apis/health/interfaces.ts:17](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L17)*
 
 ___
 
-###  isBootstrapped
+###  bootstrapped
 
-• **isBootstrapped**: *[Entity](health_interfaces.entity.md)*
+• **bootstrapped**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L18)*
+*Defined in [src/apis/health/interfaces.ts:18](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L18)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **network**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L19)*
+*Defined in [src/apis/health/interfaces.ts:19](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L19)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **router**: *[Entity](health_interfaces.entity.md)*
 
-*Defined in [src/apis/health/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/health/interfaces.ts#L20)*
+*Defined in [src/apis/health/interfaces.ts:20](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/health/interfaces.ts#L20)*
