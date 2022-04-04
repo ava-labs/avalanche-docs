@@ -6,7 +6,7 @@ sidebar_position: 1
 
 |  |  |
 | :--- | :--- |
-| [**Run an Avalanche Node**](set-up-node-with-installer.md) | How to install and run AvalancheGo |
+| [**Run an Avalanche Node Using Install Script**](set-up-node-with-installer.md) | How to install and run AvalancheGo |
 | [**Node Backup and Restore**](node-backup-and-restore.md) | Back up important files to be able to restore your node |
 | [**Set up Node Monitoring**](setting-up-node-monitoring.md) | Set up infrastructure to monitor an instance of AvalancheGo |
 | [**Add a Validator**](add-a-validator.md) | Add a node to the [Primary Network](../../../learn/platform-overview/README.md) |
