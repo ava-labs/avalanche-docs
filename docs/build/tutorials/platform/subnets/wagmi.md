@@ -31,4 +31,4 @@ We created a basic WAGMI Explorer [https://trywagmi.xyz](https://trywagmi.xyz) t
 * RPC URL: https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc
 * Chain ID: 11111
 * Symbol: WGM
-* Explorer: https://trywagmi.xyz
+* Explorer: https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer
