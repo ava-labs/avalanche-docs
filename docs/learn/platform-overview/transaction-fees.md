@@ -1,8 +1,8 @@
 ---
-description: Learn more about Avalanche's transaction fees
+description: In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in AVAX. Find out more information here. 
 ---
 
-# Transaction Fees
+# Avalanche Transaction Fee
 
 In order to prevent spam, transactions on Avalanche require the payment of a transaction fee. The fee is paid in [AVAX](../../#avalanche-avax-token). **The transaction fee is burned (destroyed forever).**
 
@@ -12,7 +12,7 @@ When you issue a transaction through Avalanche’s API, the transaction fee is a
 
 Different types of transactions require payment of a different transaction fee. This table shows the transaction fee schedule:
 
-```cpp
+```
 +----------+-------------------+------------------------+
 | Chain    : Transaction Type  | Transaction Fee (AVAX) |
 +----------+-------------------+------------------------+
@@ -65,6 +65,12 @@ Based off of this information, you can specify the `gasFeeCap` and `gasTipCap` t
 #### Base Fee
 
 The base fee can go as low as 25 nAVAX (GWei) and has no upper bound. You can use the [eth_baseFee](../../build/avalanchego-apis/c-chain.md#eth_basefee) and [eth_maxPriorityFeePerGas](../../build/avalanchego-apis/c-chain.md#eth_maxpriorityfeepergas) API methods, or [Snowtrace's C-Chain Gas Tracker](https://snowtrace.io/gastracker), to estimate the gas price to use in your transactions.
+
+
+#### Further Readings
+* [Adjusting Gas Price During High Network Activity](../../build/tutorials/platform/adjusting-gas-price-during-high-network-activity.md)
+* [Sending Transactions with Dynamic Fees using Javascript](../../build/tutorials/platform/sending-transactions-with-dynamic-fees-using-javascript.md)
+
 
 ### Atomic Transaction Fees
 

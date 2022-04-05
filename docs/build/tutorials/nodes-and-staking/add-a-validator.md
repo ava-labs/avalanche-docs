@@ -18,7 +18,7 @@ Note that once you issue the transaction to add a node as a validator, there is 
 
 You've completed [Run an Avalanche Node](run-avalanche-node.md) and are familiar with [Avalanche's architecture](../../../learn/platform-overview/README.md). In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
-In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with command line argument `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
+In order to ensure your node is well-connected, make sure that your node can receive and send TCP traffic on the staking port (`9651` by default) and that you started your node with config flag `--public-ip=[YOUR NODE'S PUBLIC IP HERE]`. Failing to do either of these may jeopardize your staking reward.
 
 ## Add a validator with Avalanche Wallet
 
@@ -28,7 +28,7 @@ Get your node’s ID by calling [`info.getNodeID`](../../avalanchego-apis/info.m
 
 ![getNodeID postman](/img/getNodeID-postman.png)
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -38,7 +38,7 @@ curl -X POST --data '{
 
 The response has your node’s ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -80,7 +80,7 @@ We can also add a node to the validator set by making API calls to our node. To 
 
 This method’s signature is:
 
-```cpp
+```
 platform.addValidator(
     {
         nodeID: string,
@@ -102,7 +102,7 @@ Let’s go through and examine these arguments.
 
 This is the node ID of the validator being added. To get your node’s ID, call [`info.getNodeID`](../../avalanchego-apis/info.md#infogetnodeid):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "info.getNodeID",
@@ -113,7 +113,7 @@ curl -X POST --data '{
 
 The response has your node’s ID:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -151,7 +151,7 @@ These parameters are the username and password of the user that pays the transac
 
 Now let’s issue the transaction. We use the shell command `date` to compute the Unix time 10 minutes and 30 days in the future to use as the values of `startTime` and `endTime`, respectively. (Note: If you’re on a Mac, replace `$(date` with `$(gdate`. If you don’t have `gdate` installed, do `brew install coreutils`.) In this example we stake 2,000 AVAX (2 x 1012 nAVAX).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addValidator",
@@ -172,7 +172,7 @@ curl -X POST --data '{
 
 The response has the transaction ID, as well as the address the change went to.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -185,7 +185,7 @@ The response has the transaction ID, as well as the address the change went to.
 
 We can check the transaction’s status by calling [`platform.getTxStatus`](../../avalanchego-apis/p-chain.md#platformgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -198,7 +198,7 @@ curl -X POST --data '{
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -209,7 +209,7 @@ curl -X POST --data '{
 
 The response should include the node we just added:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {

@@ -241,9 +241,9 @@ Done!
 
 ## Node configuration
 
-File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/command-line-interface.md). Default configuration may look like this:
+File that configures node operation is `~/.avalanchego/configs/node.json`. You can edit it to add or change configuration options. The documentation of configuration options can be found [here](../../references/avalanchego-config-flags.md). Default configuration may look like this:
 
-```javascript
+```json
 {
   "dynamic-public-ip": "opendns",
   "http-host": ""
@@ -300,7 +300,7 @@ Installer script gets updated from time to time, with new features and capabilit
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/avalanchego-installer.sh
 ```
 
-After the script has updated, run it again with the `--reinstall` command line argument:
+After the script has updated, run it again with the `--reinstall` config flag:
 
 ```bash
 ./avalanchego-installer.sh --reinstall

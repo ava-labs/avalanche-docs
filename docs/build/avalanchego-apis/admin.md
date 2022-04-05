@@ -3,7 +3,7 @@ sidebar_position: 7
 ---
 # Admin API
 
-This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [command line argument](../references/command-line-interface.md) `--api-admin-enabled=true`.
+This API can be used for measuring node health and debugging. Note that the Admin API is disabled by default for security reasons. To run a node with the Admin API enabled, use [config flag](../references/avalanchego-config-flags.md) `--api-admin-enabled=true`.
 
 ## Format
 
@@ -47,7 +47,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -93,7 +93,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -136,7 +136,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -188,7 +188,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -200,6 +200,49 @@ curl -X POST --data '{
         }
     },
     "id": 1
+}
+```
+
+### admin.loadVMs
+
+Dynamically loads any virtual machines installed on the node as plugins. See [here](../tutorials/platform/subnets/create-a-virtual-machine-vm.md/#installing-a-vm) for more information on how to install a virtual machine on a node.
+
+#### Signature
+
+```sh
+admin.loadVMs() -> {
+    newVMs: map[string][]string
+    failedVMs: map[string]string,
+}
+```
+
+* `failedVMs` is only included in the response if at least one virtual machine fails to be loaded.
+
+#### **Example Call**
+
+```bash
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.loadVMs",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+#### **Example Response**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["foovm"]
+    },
+    "failedVMs": {
+      "rXJsCSEYXg2TehWxCEEGj6JU2PWKTkd6cBdNLjoe2SpsKD9cy": "error message"
+    }
+  },
+  "id": 1
 }
 ```
 
@@ -226,7 +269,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -259,7 +302,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -308,7 +351,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -341,7 +384,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -373,7 +416,7 @@ curl -X POST --data '{
 
 #### **Example Response**
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

@@ -2,16 +2,26 @@
 
 ## Introduction
 
-Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avash](https://docs.avax.network/build/tools/avash) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
+Fuji is the Avalanche network's test network. You can use it to test your dapp or smart contract after you've developed it locally. (You can use [Avalanche Network Runner](https://docs.avax.network/build/tools/network-runner) to test things locally.) Fuji is typically on the same version as the Avalanche Mainnet, but sometimes it is running an unreleased version of AvalancheGo. In general, you can expect Fuji's behavior to be about the same as Avalanche Mainnet. Tools such as a explorers and wallets should work with the Fuji Testnet.
 
 In this tutorial, we’ll go through an example Fuji workflow to show how it can be used. We'll do the following:
 
-1. Generate a 24 word english mnemonic via AvalancheJS
-2. Derive external BIP44 X-Chain addresses via AvalancheJS
-3. Get AVAX from the Fuji faucet
-4. Send AVAX via AvalancheJS
-5. Examine the resulting transaction on the Avalanche Explorer
-6. Use the mnemonic to sign into the web wallet
+1. Set up Fuji network on Metamask (optional)
+2. Generate a 24 word english mnemonic via AvalancheJS
+3. Derive external BIP44 X-Chain addresses via AvalancheJS
+4. Get AVAX from the Fuji faucet
+5. Send AVAX via AvalancheJS
+6. Examine the resulting transaction on the Avalanche Explorer
+7. Use the mnemonic to sign into the web wallet
+
+
+## Set up Fuji network on Metamask (optional)
+* **Network Name**: Avalanche FUJI C-Chain
+* **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+* **ChainID**: `43113`
+* **Symbol**: `AVAX`
+* **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
+
 
 ## Generate a Mnemonic
 

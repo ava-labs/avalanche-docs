@@ -26,33 +26,33 @@
 
 ### `Const` buffer
 
-• **buffer**: *[SerializedType](src_utils.md#serializedtype)* = "Buffer"
+• **buffer**: *[SerializedType](utils_serialization.md#serializedtype)* = "Buffer"
 
-*Defined in [src/common/tx.ts:28](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/tx.ts#L28)*
+*Defined in [src/common/tx.ts:28](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/tx.ts#L28)*
 
 ___
 
 ### `Const` cb58
 
-• **cb58**: *[SerializedType](src_utils.md#serializedtype)* = "cb58"
+• **cb58**: *[SerializedType](utils_serialization.md#serializedtype)* = "cb58"
 
-*Defined in [src/common/tx.ts:25](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/tx.ts#L25)*
+*Defined in [src/common/tx.ts:25](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/tx.ts#L25)*
 
 ___
 
 ### `Const` decimalString
 
-• **decimalString**: *[SerializedType](src_utils.md#serializedtype)* = "decimalString"
+• **decimalString**: *[SerializedType](utils_serialization.md#serializedtype)* = "decimalString"
 
-*Defined in [src/common/tx.ts:27](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/tx.ts#L27)*
+*Defined in [src/common/tx.ts:27](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/tx.ts#L27)*
 
 ___
 
 ### `Const` hex
 
-• **hex**: *[SerializedType](src_utils.md#serializedtype)* = "hex"
+• **hex**: *[SerializedType](utils_serialization.md#serializedtype)* = "hex"
 
-*Defined in [src/common/tx.ts:26](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/tx.ts#L26)*
+*Defined in [src/common/tx.ts:26](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/tx.ts#L26)*
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • **serialization**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/tx.ts:24](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/tx.ts#L24)*
+*Defined in [src/common/tx.ts:24](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/tx.ts#L24)*
 
 ___
 
@@ -68,4 +68,4 @@ ___
 
 • **serializer**: *[Serialization](../classes/utils_serialization.serialization.md)* = Serialization.getInstance()
 
-*Defined in [src/common/evmtx.ts:24](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/common/evmtx.ts#L24)*
+*Defined in [src/common/evmtx.ts:24](https://github.com/ava-labs/avalanchejs/blob/5511161/src/common/evmtx.ts#L24)*

@@ -14,28 +14,48 @@ If you want to build your node form source or include it in a docker image, refe
 
 ### Configuring an Avalanche node
 
-All configuration options and their default values are described [here](../../references/command-line-interface.md).
+All configuration options and their default values are described [here](../../references/avalanchego-config-flags.md).
 
 You can supply configuration options on the command line, or use a config file, which can be easier to work with when supplying many options. You can specify the config file location with `—config-file=config.json`, where `config.json` is a JSON file whose keys and values are option names and values.
 
-Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../references/command-line-interface.md#chain-configs).
+Individual chains, including the C-Chain, have their own configuration options which are separate from the node-level options. These can also be specified in a config file. For more details, see [here](../../references/avalanchego-config-flags.md#chain-configs).
 
 The C-Chain config file should be at `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo to look somewhere else for the C-Chain config file with option `--chain-config-dir`. An example C-Chain config file:
 
-```javascript
+:::caution
+
+If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file as shown below.
+
+:::
+
+
+```json
 {
-  "snowman-api-enabled": false,
-  "coreth-admin-api-enabled": false,
-  "local-txs-enabled": true
-  "eth-apis": ["internal-public-eth", "internal-public-blockchain", "internal-public-transaction-pool", "internal-public-tx-pool", "internal-public-debug", "internal-private-debug", "internal-public-account", "internal-private-personal", "debug-tracer", "web3", "public-eth", "public-eth-filter", "private-admin", "public-debug", "private-debug", "net"]
+    "snowman-api-enabled": false,
+    "coreth-admin-api-enabled": false,
+    "local-txs-enabled": true,
+    "pruning-enabled": false,
+    "eth-apis": [
+        "internal-public-eth",
+        "internal-public-blockchain",
+        "internal-public-transaction-pool",
+        "internal-public-tx-pool",
+        "internal-public-debug",
+        "internal-private-debug",
+        "internal-public-account",
+        "internal-private-personal",
+        "debug-tracer",
+        "web3",
+        "public-eth",
+        "public-eth-filter",
+        "private-admin",
+        "public-debug",
+        "private-debug",
+        "net"
+    ]
 }
 ```
 
-:::caution
-
-If you need Ethereum [Archive Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) functionality, you need to disable C-Chain pruning, which has been enabled by default since AvalancheGo v1.4.10. To disable pruning, include `"pruning-enabled": false` in the C-Chain config file.
-
-:::
 
 ### Interacting with the C-Chain
 
@@ -72,7 +92,7 @@ Avalanche consensus provides fast and irreversible finality with 1-2 seconds. To
 
 ### (Optional) Custom Golang SDK
 
-If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly (when you call `block.Hash()`) because it doesn't take into account the added `[ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98)` header field in Avalanche C-Chain blocks, which is used move AVAX between chains (X-Chain and P-Chain). You can read more about our multi-chain abstraction [here](../../../learn/platform-overview/README.md) (out of scope for a normal C-Chain integration).
+If you plan on extracting data from the C-Chain into your own systems using golang, we recommend using our custom [ethclient](https://github.com/ava-labs/coreth/tree/master/ethclient). The standard go-ethereum Ethereum client does not compute block hashes correctly (when you call `block.Hash()`) because it doesn't take into account the added [ExtDataHash](https://github.com/ava-labs/coreth/blob/2c3cfac5f766ce5f32a2eddc43451bdb473b84f1/core/types/block.go#L98) header field in Avalanche C-Chain blocks, which is used move AVAX between chains (X-Chain and P-Chain). You can read more about our multi-chain abstraction [here](../../../learn/platform-overview/README.md) (out of scope for a normal C-Chain integration).
 
 If you plan on reading JSON responses directly or use web3.js (doesn't recompute hash received over the wire) to extract on-chain transaction data/logs/receipts, you shouldn't have any issues!
 

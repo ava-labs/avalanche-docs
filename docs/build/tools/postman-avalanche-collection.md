@@ -1,3 +1,8 @@
+---
+description: Postman is a free tool used by developers to quickly and easily send REST, SOAP, and GraphQL requests and test APIs.
+---
+
+
 # Postman Collection
 
 ## What is Postman?
@@ -58,7 +63,7 @@ Click the eye icon next to the environment dropdown:
 
 ![Environment content](/img/postman_06_variables.png)
 
-Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node (change both the `initial` and `current` values). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/command-line-interface.md#http-server).
+Select the `Edit` button to change the defaults. As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node (change both the `initial` and `current` values). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](../references/avalanchego-config-flags.md#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 

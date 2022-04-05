@@ -14,7 +14,7 @@ An API call is made to an endpoint, which is a URL. The base of the URL is alway
 where
 
 * `node-ip` is the IP address of the node the call is to.
-* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/command-line-interface.md#http-server) `http-port` (default value `9650`).
+* `http-port` is the port the node listens on for HTTP calls. This is specified by [command-line argument](../references/avalanchego-config-flags.md#http-server) `http-port` (default value `9650`).
 
 For example, the base URL might look like this: `127.0.0.1:9650`.
 
@@ -34,7 +34,7 @@ That means that the endpoint we send our API call to is:
 
 The X-Chain API documentation tells us that the signature of `getTxStatus` is:
 
-[`avm.getTxStatus`](x-chain.mdx#avm-gettxstatus)`(txID:bytes) -> (status:string)`
+[`avm.getTxStatus`](x-chain.mdx#avmgettxstatus)`(txID:bytes) -> (status:string)`
 
 where:
 
@@ -43,7 +43,7 @@ where:
 
 To call this method, then:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :4,
@@ -65,7 +65,7 @@ That’s it!
 
 If the call is successful, the response will look like this:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -84,7 +84,7 @@ If the API method invoked returns an error then the response will have a field `
 
 Such a response would look like:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "error": {

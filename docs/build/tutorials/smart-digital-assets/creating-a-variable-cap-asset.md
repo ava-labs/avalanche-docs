@@ -17,11 +17,11 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ## Create the Asset
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/x-chain.mdx#avm-createvariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
+Our asset will exist on the X-Chain, so to create our asset we’ll call [`avm.createVariableCapAsset`](../../avalanchego-apis/x-chain.mdx#avmcreatevariablecapasset), which is a method of the [X-Chain’s API](../../avalanchego-apis/x-chain.mdx).
 
 The signature for this method is:
 
-```cpp
+```
 avm.createVariableCapAsset({
     name: string,
     symbol: string,
@@ -58,7 +58,7 @@ avm.createVariableCapAsset({
 
 Later in this example, we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -92,7 +92,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -109,14 +109,14 @@ Right now 0 shares exist. Let’s mint 10M shares.
 
 ### Create the Unsigned Transaction
 
-We’ll use [`avm.mint`](../../avalanchego-apis/x-chain.mdx#avm-mint) to mint the shares.
+We’ll use [`avm.mint`](../../avalanchego-apis/x-chain.mdx#avmmint) to mint the shares.
 
 * `amount` is the number of shares that will be created.
 * `assetID` is the ID of the asset we’re creating more of.
 * `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
 * `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -133,7 +133,7 @@ curl -X POST --data '{
 
 The response contains the transaction’s ID:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -144,9 +144,9 @@ The response contains the transaction’s ID:
 }
 ```
 
-We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avm-gettxstatus):
+We can check the status of the transaction we’ve just sent to the network using [`avm.getTxStatus`](../../avalanchego-apis/x-chain.mdx#avmgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -159,7 +159,7 @@ curl -X POST --data '{
 
 This should give:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -173,9 +173,9 @@ This should give:
 
 ### Check a Balance
 
-All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avm-getbalance):
+All 10M shares are controlled by the `to` address we specified in `mint`. To verify this, we’ll use [`avm.getBalance`](../../avalanchego-apis/x-chain.mdx#avmgetbalance):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -189,7 +189,7 @@ curl -X POST --data '{
 
 The response confirms that our asset creation was successful and that the expected address holds all 10,000,000 shares:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -201,9 +201,9 @@ The response confirms that our asset creation was successful and that the expect
 
 ### Send the Asset
 
-Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/x-chain.mdx#avm-send). To do so:
+Let’s send 100 shares to another address by using [`avm.send`](../../avalanchego-apis/x-chain.mdx#avmsend). To do so:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -220,7 +220,7 @@ curl -X POST --data '{
 
 Let’s check the balances of the `to` address:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -234,7 +234,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```cpp
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,

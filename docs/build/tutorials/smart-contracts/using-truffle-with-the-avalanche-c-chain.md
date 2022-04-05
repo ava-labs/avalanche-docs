@@ -10,27 +10,21 @@ You've completed [Run an Avalanche Node](../nodes-and-staking/run-avalanche-node
 
 ## Dependencies
 
-* [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
+* [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
 
 ## Start up a local Avalanche network
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
-
-Start a local five node Avalanche network:
+[Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner) allows you to spin up private test network deployments. Start a local five node Avalanche network:
 
 ```text
-cd /path/to/avash
-# build Avash if you haven't done so
-go build
-# start Avash
-./avash
+cd /path/to/avalanche-network-runner
 # start a five node staking network
-runscript scripts/five_node_staking.lua
+./go run examples/local/fivenodenetwork/main.go
 ```
 
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
+A five node Avalanche network is running on your machine. Network will run until you CTRL + C to exit.
 
 ## Create truffle directory and install dependencies
 
@@ -48,10 +42,10 @@ Create and enter a new directory named `truffle`:
 mkdir truffle; cd truffle
 ```
 
-Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
+Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM and [AvalancheJS](../../tools/avalanchejs/README.md) which is used for cross chain swaps.
 
 ```text
-npm install web3 -s
+npm install web3 avalanche -s
 ```
 
 We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
@@ -60,7 +54,7 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 truffle init
 ```
 
-Development (local) network in Avash pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
+The local development network pre-funds some static addresses when created. We'll use [@truffle/hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) to use these pre-funded addresses as our accounts.
 
 ```text
 npm install @truffle/hdwallet-provider
@@ -77,6 +71,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const protocol = "http";
 const ip = "localhost";
 const port = 9650;
+Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
 const provider = new Web3.providers.HttpProvider(
   `${protocol}://${ip}:${port}/ext/bc/C/rpc`
 );
@@ -119,7 +114,7 @@ In the `contracts` directory add a new file called `Storage.sol` and add the fol
 
 ```text
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.8.0;
+pragma solidity >=0.4.22 <0.9.0;
 
 /**
  * @title Storage
@@ -192,7 +187,7 @@ You can view imported accounts with truffle console.
 To open the truffle console:
 
 ```bash
-$ truffle console --network development
+truffle console --network development
 ```
 
 Note: If you see `Error: Invalid JSON RPC response: "API call rejected because chain is not done bootstrapping"`, you need to wait until network is bootstrapped and ready to use. It should not take too long.
@@ -232,7 +227,7 @@ Notice that `accounts[0]` (default account) has some balance, while `accounts[1]
 There is a convenient script that funds the `accounts` list . You can find it [here](https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js). You can also download it using this command:
 
 ```text
-wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js;
+wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-docs/master/scripts/fund-cchain-addresses.js
 ```
 
 You can run the script with:
@@ -256,7 +251,7 @@ If you wish to fund accounts your own, follow the steps in the [Transfer AVAX Be
 
 ### Personal APIs
 
-Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. Avash currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/command-line-interface#c-chain-configs).
+Personal APIs interact with node’s accounts. `web3` has some functions that uses it, e.g: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount` etc... However this API is disabled by default. It can be activated with `C-chain`/`Coreth` configs. The Avalanche Network Runner currently does not support activating this API. So if you want to use these features you need to run your own network manually with `internal-private-personal` API enabled via the `eth-apis` flag. See [Create a Local Test Network/Manually](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network#manually) and [C-Chain Configs](https://docs.avax.network/build/references/avalanchego-config-flags#c-chain-configs).
 
 ## Run Migrations
 
@@ -365,7 +360,7 @@ truffle(development)> instance.store(1234)
 
 You should see something like:
 
-```javascript
+```js
 {
   tx: '0x10afbc5e0b9fa0c1ef1d9ec3cdd673e7947bd8760b22b8cdfe08f27f3a93ef1e',
   receipt: {
@@ -416,4 +411,3 @@ You should see the number you stored.
 ## Summary
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
-

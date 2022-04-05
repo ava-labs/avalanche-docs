@@ -714,7 +714,7 @@ Now, let’s look at our timestamp VM implementation, which implements the `bloc
 
 The declaration is:
 
-```go title="/timestampvm/block.go"
+```go title="/timestampvm/vm.go"
 // This Virtual Machine defines a blockchain that acts as a timestamp server
 // Each block contains data (a payload) and the timestamp when it was created
 
@@ -1248,7 +1248,7 @@ Get a block by its ID. If no ID is provided, get the latest block.
 
 **Signature**
 
-```cpp
+```sh
 timestampvm.getBlock({id: string}) ->
     {
         id: string,
@@ -1278,7 +1278,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -1351,7 +1351,7 @@ Propose the next block on this blockchain.
 
 **Signature**
 
-```cpp
+```sh
 timestampvm.proposeBlock({data: string}) -> {success: bool}
 ```
 
@@ -1372,7 +1372,7 @@ curl -X POST --data '{
 
 **Example Response**
 
-```javascript
+```json
 {
   "jsonrpc": "2.0",
   "result": {
@@ -1450,15 +1450,15 @@ The path to the executable, as well as its name, can be provided to the build sc
 
 If no argument is given, the path defaults to a binary named with default VM ID: `$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`
 
-AvalancheGo searches for and registers plugins under `[buildDir]/plugins/`. You need to put built VM binary under this path. The `[buildDir]` defaults to the path of executed AvalancheGo binary. See [here](../../../references/command-line-interface.md#build-directory) for more information. Executable names must be either a full VM ID (encoded in CB58), or must be a VM alias as explained below.
+This name `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH` is the CB58 encoded 32 byte identifier for the VM. For the timestampvm, this is the string "timestampvm" zero-extended in a 32 byte array and encoded in CB58.
 
-#### VM Aliases
+### VM Aliases
 
 Each VM has a pre-defined, static ID. For instance, the default ID of the TimestampVM is: `tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`.
 
 It's possible to give an alias for these IDs. For example, we can alias `TimestampVM` by creating a JSON file at `~/.avalanchego/configs/vms/aliases.json` with:
 
-```javascript
+```json
 {
   "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": [
     "timestampvm",
@@ -1467,10 +1467,55 @@ It's possible to give an alias for these IDs. For example, we can alias `Timesta
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
-For more details about VM configs, see [here](../../../references/command-line-interface.md#vm-configs).
+### Installing a VM
 
-In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
+AvalancheGo searches for and registers plugins under the `plugins` directory of the
+[build directory](../../../references/avalanchego-config-flags#build-directory).
+
+To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory.
+Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
+
+Copy the binary into the plugins directory.
+```bash
+cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
+```
+
+#### Node is not running
+If your node isn't running yet, you can install all virtual machines under your `plugin` directory by starting the node.
+
+#### Node is already running
+
+Load the binary with the `loadVMs` API.
+```bash
+curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"admin.loadVMs",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+Confirm the response of `loadVMs` contains the newly installed virtual machine
+`tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH`. You'll see this virtual machine as well as any others that weren't
+already installed previously in the response.
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "newVMs": {
+      "tGas3T58KzdjLHhBDMnH2TvrddhqTji5iZAMZ3RXs2NLpSnhH": ["timestampvm", "timestamp"],
+      "spdxUxVJQbX85MGxMHbKw1sHxMnSqJ3QBzDyDYEP3h6TLuxqQ": []
+    }
+  },
+  "id": 1
+}
+```
+
+
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`.
+For more details about VM configs, see [here](../../../references/avalanchego-config-flags.md#vm-configs).
+
+In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also
+accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
 
 ## Wrapping Up
 

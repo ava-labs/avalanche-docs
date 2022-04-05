@@ -21,28 +21,28 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/apis/avm/genesisasset.ts:21](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/genesisasset.ts#L21)*
+*Defined in [src/apis/avm/genesisasset.ts:21](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisasset.ts#L21)*
 
 ___
 
 ### `Const` buffer
 
-• **buffer**: *[SerializedType](src_utils.md#serializedtype)* = "Buffer"
+• **buffer**: *[SerializedType](utils_serialization.md#serializedtype)* = "Buffer"
 
-*Defined in [src/apis/avm/genesisasset.ts:23](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/genesisasset.ts#L23)*
+*Defined in [src/apis/avm/genesisasset.ts:23](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisasset.ts#L23)*
 
 ___
 
 ### `Const` decimalString
 
-• **decimalString**: *[SerializedType](src_utils.md#serializedtype)* = "decimalString"
+• **decimalString**: *[SerializedType](utils_serialization.md#serializedtype)* = "decimalString"
 
-*Defined in [src/apis/avm/genesisasset.ts:24](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/genesisasset.ts#L24)*
+*Defined in [src/apis/avm/genesisasset.ts:24](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisasset.ts#L24)*
 
 ___
 
 ### `Const` utf8
 
-• **utf8**: *[SerializedType](src_utils.md#serializedtype)* = "utf8"
+• **utf8**: *[SerializedType](utils_serialization.md#serializedtype)* = "utf8"
 
-*Defined in [src/apis/avm/genesisasset.ts:22](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/avm/genesisasset.ts#L22)*
+*Defined in [src/apis/avm/genesisasset.ts:22](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/avm/genesisasset.ts#L22)*

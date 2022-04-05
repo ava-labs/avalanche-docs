@@ -25,7 +25,7 @@
 
 • **bintools**: *[BinTools](../classes/utils_bintools.bintools.md)* = BinTools.getInstance()
 
-*Defined in [src/apis/evm/outputs.ts:18](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L18)*
+*Defined in [src/apis/evm/outputs.ts:18](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/outputs.ts#L18)*
 
 ## Functions
 
@@ -33,7 +33,7 @@
 
 ▸ **SelectOutputClass**(`outputID`: number, ...`args`: any[]): *[Output](../classes/common_output.output.md)*
 
-*Defined in [src/apis/evm/outputs.ts:27](https://github.com/ava-labs/avalanchejs/blob/598fbcc/src/apis/evm/outputs.ts#L27)*
+*Defined in [src/apis/evm/outputs.ts:27](https://github.com/ava-labs/avalanchejs/blob/5511161/src/apis/evm/outputs.ts#L27)*
 
 Takes a buffer representing the output and returns the proper Output instance.
 
@@ -46,4 +46,4 @@ Name | Type | Description |
 
 **Returns:** *[Output](../classes/common_output.output.md)*
 
-An instance of an [Output](src_common.md#output)-extended class.
+An instance of an [Output](../classes/common_output.output.md)-extended class.

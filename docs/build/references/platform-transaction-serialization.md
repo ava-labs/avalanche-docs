@@ -237,7 +237,7 @@ Let’s make a secp256k1 transfer output with:
 
 ## SECP256K1 Output Owners Output
 
-A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will recieve the staking rewards when the lock up period ends.
+A [secp256k1](cryptographic-primitives.md#secp-256-k1-addresses) output owners output will receive the staking rewards when the lock up period ends.
 
 ### **What SECP256K1 Output Owners Output Contains**
 

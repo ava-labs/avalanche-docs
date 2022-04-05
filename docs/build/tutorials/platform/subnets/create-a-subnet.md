@@ -4,6 +4,9 @@ sidebar_position: 1
 
 # Create a Subnet
 
+**Please checkout [subnet-cli](https://github.com/ava-labs/subnet-cli#subnet-cli-wizard) for the fast way to create a subnet.** You are welcome to read this document to understand how subnet is created.
+
+
 ## Introduction
 
 A subnet is a set of validators. A subnet validates a set of blockchains. Each blockchain is validated by exactly one subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allows the creation of permissioned blockchains.
@@ -16,11 +19,11 @@ _Note: IDs of Blockchains, Subnets, Transactions and Addresses can be different 
 
 ### Generate the Control Keys {#generate-the-control-keys}
 
-First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../../avalanchego-apis/p-chain.md#platform-createaddress) This generates a new private key and stores it for a user.
+First, let’s generate the 2 control keys. To do so we call [`platform.createAddress`](../../../avalanchego-apis/p-chain.md#platformcreateaddress) This generates a new private key and stores it for a user.
 
 To generate the first key:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -34,7 +37,7 @@ curl -X POST --data '{
 
 This gives the first control key (again, it actually gives the _address_ of the first control key). The key is held by the user we just specified.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -46,7 +49,7 @@ This gives the first control key (again, it actually gives the _address_ of the 
 
 Generate the second key:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createAddress",
@@ -60,7 +63,7 @@ curl -X POST --data '{
 
 The response contains the second control key, which is held by the user we just specified:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -72,9 +75,9 @@ The response contains the second control key, which is held by the user we just 
 
 ### Create the Subnet {#create-the-subnet}
 
-To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/p-chain.md#platform-createsubnet).
+To create a subnet, we call [`platform.createSubnet`](../../../avalanchego-apis/p-chain.md#platformcreatesubnet).
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createSubnet",
@@ -93,7 +96,7 @@ curl -X POST --data '{
 
 The response gives us the transaction’s ID, which is also the ID of the newly created Subnet.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -106,9 +109,9 @@ The response gives us the transaction’s ID, which is also the ID of the newly 
 
 ### Verifying Success {#verifying-success}
 
-We can call [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platform-getsubnets) to get all Subnets that exist:
+We can call [`platform.getSubnets`](../../../avalanchego-apis/p-chain.md#platformgetsubnets) to get all Subnets that exist:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getSubnets",
@@ -119,7 +122,7 @@ curl -X POST --data '{
 
 The response confirms that our subnet was created:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -148,7 +151,7 @@ Suppose that the Subnet has ID `3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9
 
 To add the validator, we’ll call API method [`platform.addSubnetValidator`](../../../avalanchego-apis/p-chain.md#platformaddsubnetvalidator). Its signature is:
 
-```cpp
+```
 platform.addSubnetValidator(
     {
         nodeID: string,
@@ -193,7 +196,7 @@ We use the shell command `date` to compute the Unix time 10 minutes and 30 days 
 
 Example:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.addSubnetValidator",
@@ -213,7 +216,7 @@ curl -X POST --data '{
 
 The response has the transaction ID, as well as the address the change went to.
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -226,7 +229,7 @@ The response has the transaction ID, as well as the address the change went to.
 
 We can check the transaction’s status by calling [`platform.getTxStatus`](../../../avalanchego-apis/p-chain.md#platformgettxstatus):
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getTxStatus",
@@ -239,7 +242,7 @@ curl -X POST --data '{
 
 The status should be `Committed`, meaning the transaction was successful. We can call [`platform.getPendingValidators`](../../../avalanchego-apis/p-chain.md#platformgetpendingvalidators) and see that the node is now in the pending validator set for the Primary Network. This time, we specify the subnet ID:
 
-```cpp
+```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.getPendingValidators",
@@ -250,7 +253,7 @@ curl -X POST --data '{
 
 The response should include the node we just added:
 
-```cpp
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -279,12 +282,12 @@ In this example the full command is:
 
 `./build/avalanchego --whitelisted-subnets=3fbrm3z38NoDB4yMC3hg5pRvc72XqnAGiu7NgaEp1dwZ8AD9g`
 
-For more information about the command see: [whitelisted-subnet command-line argument](../../../references/command-line-interface.md#whitelist).
+For more information about the command see: [whitelisted-subnet command-line argument](../../../references/avalanchego-config-flags.md#whitelist).
 
 ### Private Subnets
 
 Avalanche subnets are public. It means that every node can sync and listen ongoing transactions/blocks in subnets, even they're not validating the listened subnet.
 
-Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../../references/command-line-interface.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
+Subnet validators/beacons can choose not to publish contents of blockchains via an optional `validatorOnly` configuration. The configuration can be turned on with [Subnet Configs](../../../references/avalanchego-config-flags.md#subnet-configs). If a node sets `validatorOnly` to `true`, the node exchanges messages only with this subnet's validators. Other peers will not be able to learn contents of this subnet from this node.
 
 Note: This is a node-specific configuration. Every validator of this subnet has to use this configuration in order to create a full private subnet.
