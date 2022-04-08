@@ -854,12 +854,12 @@ It's possible to define different Gossip configurations for each subnet without 
 | :------------------------------------------------------ | :--------------------------------------|
 | --consensus-accepted-frontier-gossip-validator-size     | gossipAcceptedFrontierValidatorSize    |
 | --consensus-accepted-frontier-gossip-non-validator-size | gossipAcceptedFrontierNonValidatorSize |
-| --consensus-accepted-frontier-gossip-size               | gossipAcceptedFrontierSize             |
+| --consensus-accepted-frontier-gossip-peer-size          | gossipAcceptedFrontierPeerSize         |
 | --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
 | --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
-| --consensus-on-accept-gossip-size                       | gossipOnAcceptSize                     |
-| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
+| --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
 | --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
+| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
 | --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
 
 ## Version
@@ -883,9 +883,9 @@ Number of validators to gossip an AppGossip message to. Defaults to `10`.
 
 Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
 
-#### `--consensus-on-accept-gossip-peers-size` (uint):
+#### `--consensus-app-gossip-peer-size` (uint):
 
-Number of peers (which may or may not be validators) to gossip to each accepted container to. Defaults to `0`.
+Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
 
 #### `--consensus-accepted-frontier-gossip-validator-size` (uint):
 
@@ -895,7 +895,7 @@ Number of validators to gossip to when gossiping accepted frontier. Defaults to 
 
 Number of non-validators to gossip to when gossiping accepted frontier. Defaults to `0`.
 
-#### `--consensus-accepted-frontier-gossip-size` (uint):
+#### `--consensus-accepted-frontier-gossip-peer-size` (uint):
 
 Number of peers to gossip to when gossiping accepted frontier. Defaults to `35`.
 
@@ -907,11 +907,9 @@ Number of validators to gossip to each accepted container to. Defaults to `0`.
 
 Number of non-validators to gossip to each accepted container to. Defaults to `0`.
 
-#### `--consensus-on-accept-gossip-size` (uint):
+#### `--consensus-on-accept-gossip-peer-size` (uint):
 
 Number of peers to gossip to each accepted container to. Defaults to `20`.
-
-
 
 ### Benchlist
 
