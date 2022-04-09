@@ -34,11 +34,10 @@ create_config_file () {
   rm -f node.json
   echo "{" >>node.json
   if [ "$ipChoice" = "1" ]; then
-    echo "  \"dynamic-public-ip\": \"opendns\",">>node.json
+    echo "  \"dynamic-public-ip\": \"opendns\"">>node.json
   else
-    echo "  \"public-ip\": \"$foundIP\",">>node.json
+    echo "  \"public-ip\": \"$foundIP\"">>node.json
   fi
-  echo "  \"http-host\": \"\"">>node.json
   echo "}" >>node.json
   mkdir -p $HOME/.avalanchego/configs
   cp -f node.json $HOME/.avalanchego/configs/node.json
