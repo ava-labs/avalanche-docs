@@ -286,6 +286,9 @@ Whether to color/highlight display logs. Default highlights when the output is a
 
 Specifies the directory in which system logs are kept. Defaults to `"$HOME/.avalanchego/logs"`.
 
+#### `--log-disable-display-plugin-logs` (boolean):
+Disables displaying plugin logs in stdout. Defaults to `false`.
+
 ## Network ID
 
 #### `--network-id` (string):
