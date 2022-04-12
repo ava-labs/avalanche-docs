@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this tutorial, we will be building a bridge between **WAGMI** and **Fuji**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
+In this tutorial, we will be building a bridge between **[WAGMI](./subnets/wagmi)** and **[Fuji](./fuji-workflow)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 
 The wrapped version of a native coin is its pegged ERC20 representation. Wrapping it with the ERC20 standard makes certain processes like delegated transactions much easier. You can easily get wrapped tokens by sending the native coin to the wrapped token contract address.
 
@@ -12,11 +12,11 @@ We will be using **Chainsafe**'s bridge repository, to easily set up a robust an
 
 ## Workflow of the Bridge
 
-Two chains are not interconnected. But we could communicate between the chains through off-chain relayers. Relayers watch for events (by polling blocks) on one chain and perform necessary action using those events on the other chain. This way we can also perform bridging of tokens from one chain to the other chain through the use of smart contracts.
+WAGMI and Fuji chains are not interconnected by default, however, we could make them communicate. Relayers watch for events (by polling blocks) on one chain and perform necessary action using those events on the other chain. This way we can also perform bridging of tokens from one chain to the other chain through the use of smart contracts.
 
 Here is the basic high-level workflow of the bridge -
 
-* User deposits token on the Bridge contract
+* Users deposit token on the Bridge contract
 * Bridge contract asks Handler contract to perform deposit action
 * Handler contract **locks** the deposited token in the token safe
 * Bridge contract emits `Deposit` event
@@ -33,7 +33,7 @@ Bridging tokens from source to destination chain involves the **lock and mint** 
 
 These are the requirement to follow this tutorial -
 
-* Add WAGMI and Fuji chain on the MetaMask network
+* Add [WAGMI](./subnets/wagmi) and [Fuji](./fuji-workflow) chain on the MetaMask network
 * Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 * `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 * `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax-test.network/)
@@ -97,11 +97,16 @@ We need to set up our source chain as follows -
 
 The command-line tool `cb-sol-cli` will help us to deploy the contracts. Run the following command in the terminal session where the config vars are loaded. It will add `SRC_ADDR` as the default relayer for relaying events from the Wagmi chain (source) to the Fuji chain (destination).
 
+**One of the most important parameter to take care of while deploying bridge contract is the `expiry` value. It is the numer of blocks after which a proposal is considered cancelled. By default it is set to `100`. On Avalanche mainnet, with this value, the proposals could be expired within 3-4 minutes. You should choose a very large expiry value, according to the chain you are deploying bridge to. Otherwise your proposal will be cancelled if the thereshold number of vote proposals are not received on time.**
+
+You should also keep this in mind that sometimes during high network activity, a transaction could stuck for a long time. Proposal transactions stuck in this scenario, could result in the cancellation of previous proposals. Therefore, expiry values should be large enought, and relayers should issue transactions with a competitive max gas price.
+
 ```bash
 cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 25000000000 deploy \
     --bridge --erc20Handler \
     --relayers $SRC_ADDR \
     --relayerThreshold 1 \
+    --expiry 500 \
     --chainId 0
 ```
 
@@ -233,7 +238,7 @@ echo "{
         \"erc20Handler\": \"$SRC_HANDLER\",
         \"genericHandler\": \"$SRC_HANDLER\",
         \"gasLimit\": \"1000000\",
-        \"maxGasPrice\": \"25000000000\",
+        \"maxGasPrice\": \"50000000000\",
         \"http\": \"true\",
         \"blockConfirmations\":\"0\"
       }
@@ -249,7 +254,7 @@ echo "{
         \"erc20Handler\": \"$DST_HANDLER\",
         \"genericHandler\": \"$DST_HANDLER\",
         \"gasLimit\": \"1000000\",
-        \"maxGasPrice\": \"25000000000\",
+        \"maxGasPrice\": \"50000000000\",
         \"http\": \"true\",
         \"blockConfirmations\":\"0\"
       }
@@ -259,7 +264,7 @@ echo "{
 ```
 Check and confirm the details in the `config.json` file.
 
-> In the above command, you can see that `blockConfirmations` is set to `0`. This will work well for networks like Avalanche because the block is confirmed once it's committed. Unlike other chains such as Ethereum, which requires 6-10 block confirmations. Therefore, use this configuration with caution, depending on the type of chain you are using.
+> In the above command, you can see that `blockConfirmations` is set to `0`. This will work well for networks like Avalanche because the block is confirmed once it's committed. Unlike other chains such as Ethereum, which requires 20-30 block confirmations. Therefore, use this configuration with caution, depending on the type of chain you are using.
 > 
 > It can cause serious problems if a corresponding token is minted or released based on an unconfirmed block.
 
