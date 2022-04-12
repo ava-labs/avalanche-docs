@@ -198,6 +198,8 @@ cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 erc20 
     --erc20Address $DST_TOKEN
 ```
 
+> **The deployer of the contracts (here `SRC_ADDR` or `DST_ADDR`) holds the admin rights. An admin can add or remove a new relayer, minter, admin etc. It can also mint new ERC20 tokens on the destination chain. You can issue these commands using `cb-sol-cli` with the options mentioned in these [files](https://github.com/ChainSafe/chainbridge-deploy/tree/main/cb-sol-cli/docs). The mint command should not be used manually, unless some intervention is required, when the relayers failed to mint the tokens on the destination chain on time.**
+
 ## Deploy Relayer
 
 All the on-chain setups like deploying bridges, handlers, tokens, etc. are complete. But the two chains are not interconnected. We need some off-chain relayer to communicate messages between the chains. The relayer will poll for deposit events on one chain, and submit vote proposals to mint or release the corresponding token on another chain.
