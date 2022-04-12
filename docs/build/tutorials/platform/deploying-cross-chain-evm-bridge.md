@@ -33,7 +33,7 @@ Bridging tokens from source to destination chain involves the **lock and mint** 
 
 These are the requirement to follow this tutorial -
 
-* Add [WAGMI](./subnets/wagmi) and [Fuji](./fuji-workflow) chain on the MetaMask network
+* Add [WAGMI](./subnets/wagmi#adding-wagmi-to-metamask) and [Fuji](./fuji-workflow#set-up-fuji-network-on-metamask-optional) chain on the MetaMask network
 * Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 * `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 * `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax-test.network/)
