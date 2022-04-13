@@ -114,9 +114,21 @@ Anyone can create a new token, and on Avalanche it is pretty cheap. Also, liquid
 
 Explorers are websites that index and present network activity, where you can look up individual transactions, and find out more about what's flowing through the network.
 
-### Official explorer
+### Official Primary Network Explorer
 
-[explorer.avax.network](https://explorer.avax.network/) is the official network explorer maintained by Ava Labs.
+[explorer.avax.network](https://explorer.avax.network/) is the official primary network explorer maintained by Ava Labs.
+
+### Official Subnet Explorers
+
+These are the official explorers for chains within Avalanche subnets, maintained by Ava Labs
+
+[DeFi Kingdoms' official explorer](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer) for the DFK Chain on the custom DeFi Kingdoms subnet.
+
+[WAGMI Testnet Explorer](https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer) for the demo and testbed chain in the WAGMI subnet.
+
+Attribution: Pricing in subnet explorers sourced from [coingecko](https://www.coingecko.com/)
+
+
 
 ### AvaScan
 
