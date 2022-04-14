@@ -40,7 +40,7 @@ In Remix Home _Click_ the GitHub button.
 
 ![remix subnet evm sc load panel](/img/remix-subnet-evm-sc-load-panel.png)
 
-Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup and _click_ import.
+Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup and _Click_ import.
 
 ![remix subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
@@ -80,7 +80,7 @@ If you are having trouble with underpricing errors then try the following: <br><
 _Note: reference the `minBaseFee` you set in your [Genesis file](../platform/subnets/create-evm-blockchain#build-genesis)_
 
 ![remix subnet evm sc set2](/img/remix-subnet-evm-sc-set2.png)
-#### Step 4: Confirm the transaction on the MetaMask pop up.
+#### Step 4: Confirm the transaction on the MetaMask pop up
 
 ![remix subnet evm sc conf2](/img/remix-subnet-evm-sc-conf2.png)
 
