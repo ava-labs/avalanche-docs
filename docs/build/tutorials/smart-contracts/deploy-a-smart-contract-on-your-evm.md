@@ -7,10 +7,10 @@ sidebar_position: 3
 ## Introduction
 
 This tutorial assumes that: <br></br>
-- A [Subnet](./create-a-subnet.md) has been created<br></br>
-- An [EVM blockchain](./create-evm-blockchain.md) has been created<br></br>
-- Your node is currently [validating](./create-a-subnet#adding-subnet-validators) your target Subnet<br></br>
-- You have a wallet with the native Subnet token<br></br>
+- A [Subnet](../platform/subnets/create-a-subnet.md) has been created<br></br>
+- An [EVM blockchain](../platform/subnets/create-evm-blockchain.md) has been created<br></br>
+- Your node is currently [validating](../platform/subnets/create-a-subnet#adding-subnet-validators) your target Subnet<br></br>
+- Your wallet has the Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain#build-genesis))<br></br>
 
 You can run the following command to start your node with a whitelisted subnet:<br></br>
 ```sh
@@ -28,7 +28,12 @@ You can run the following command to start your node with a whitelisted subnet:<
 * **Explorer**: N/A
 <br></br>
 
-You should have a wallet with native Subnet tokens in it
+![remix subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
+
+You should see your Subnet's native token in Metamask
+
+![remix subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
+
 
 ## Step 2: Connect MetaMask and deploy a smart contract using Remix
 
