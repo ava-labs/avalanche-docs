@@ -1,69 +1,58 @@
----
-sidebar_position: 3
----
-
-# Deploy a Smart Contract on your Subnet EVM
+# Deploy a Smart Contract on your Subnet EVM using Remix and Metamask
 
 ## Introduction
 
 This tutorial assumes that: <br></br>
 - A [Subnet](../platform/subnets/create-a-subnet.md) has been created<br></br>
 - An [EVM blockchain](../platform/subnets/create-evm-blockchain.md) has been created<br></br>
-- Your node is currently [validating](../platform/subnets/create-a-subnet#adding-subnet-validators) your target Subnet<br></br>
-- Your wallet has the Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain#build-genesis))<br></br>
-
-You can run the following command to start your node with a whitelisted subnet:<br></br>
-```sh
-./avalanchego --network-id=fuji --http-host=127.0.0.1 --whitelisted-subnets=<Whitelisted Subnet ID>
-```
+- Your Node is currently [validating](../platform/subnets/create-a-subnet#adding-subnet-validators) your target Subnet<br></br>
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain#build-genesis))<br></br>
 
 ## Step 1: Setting up MetaMask
 
-#### **EVM Subnet Settings:** [(Create EVM Tutorial)](../platform/subnets/create-evm-blockchain.md)
+#### **EVM Subnet Settings:** [(EVM Metamask Tutorial)](../platform/subnets/create-evm-blockchain#connect-with-metamask)
 
-* **Network Name**: Custom Subnet EVM
-* **New RPC URL**: [http://127.0.0.1:9650/ext/bc/BlockchainID/rpc](http://127.0.0.1:9650/ext/bc/BlockchainID/rpc) (Note: the port number should match your local setting which can be different from 9650.)
-* **ChainID**: `Subnet EVM ChainID`
-* **Symbol**: `Subnet EVM Gas Token Symbol `
-* **Explorer**: N/A
+* **``Network Name``**: Custom Subnet EVM
+* **``New RPC URL``**: http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc (Note: the port number should match your local setting which can be different from 9650.)
+* **``ChainID``**: Subnet EVM ChainID
+* **``Symbol``**: Subnet EVM Token Symbol
+* **``Explorer``**: N/A
 <br></br>
 
 ![remix subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
 
-You should see your Subnet's native token in Metamask
+You should see your Subnet's Native Token in Metamask.
 
 ![remix subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
 
-
 ## Step 2: Connect MetaMask and deploy a smart contract using Remix
 
-Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
+Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
 
 ![remix subnet evm sc](/img/remix-subnet-evm-sc.png)
 
 Create the smart contracts that we want to compile and deploy using Remix file explorer
 
 #### Or
-### Load the smart contract using Github
+### Load the Smart Contract using Github
 
-#### Step 1: In Remix Home _Click_ the GitHub Button
+In Remix Home _Click_ the GitHub button.
 
 ![remix subnet evm sc2](/img/remix-subnet-evm-sc2.png)
 
-
-#### Step 2: Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup
+Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup and _click_ import.
 
 ![remix subnet evm sc3](/img/remix-subnet-evm-sc3.png)
 
-For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
+For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
 ![remix subnet evm sc4](/img/remix-subnet-evm-sc4.png)
 
-Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure MetaMask is loaded)
+Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure MetaMask is loaded).
 
 ![remix subnet evm sc5](/img/remix-subnet-evm-sc5.png)
 
-Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab
+Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab.
 
 ![remix subnet evm sc6](/img/remix-subnet-evm-sc6.png)
 
