@@ -41,8 +41,18 @@ Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
 
 ![remix subnet evm sc](/img/remix-subnet-evm-sc.png)
 
-### Load the smart contract
+Create the smart contracts that we want to compile and deploy using Remix file explorer
+
+#### Or
+### Load the smart contract using Github
+
+#### Step 1: In Remix Home _Click_ the GitHub Button
+
 ![remix subnet evm sc2](/img/remix-subnet-evm-sc2.png)
+
+
+#### Step 2: Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup
+
 ![remix subnet evm sc3](/img/remix-subnet-evm-sc3.png)
 
 For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
@@ -69,17 +79,17 @@ Confirm the transaction on the MetaMask pop up.
 ### Adjusting Gas
 If you are having trouble with underpricing errors then try the following: <br></br>
 
-In the Metamask confirmation window _Click_ Edit
+#### Step 1: In the Metamask confirmation window _Click_ Edit
+
+![remix subnet evm sc edit](/img/remix-subnet-evm-sc-edit.png)
+#### Step 2: _Click_ Edit suggested gas fee
 
 ![remix subnet evm sc9](/img/remix-subnet-evm-sc9.png)
 
-_Click_ Edit suggested gas fee
+#### Step 3: Change the gas price and _Click_ save
 
 ![remix subnet evm sc10](/img/remix-subnet-evm-sc10.png)
-
-Change the gas price and _Click_ save
-
-Confirm the transaction on the MetaMask pop up.
+#### Step 4: Confirm the transaction on the MetaMask pop up.
 
 ![remix subnet evm sc14](/img/remix-subnet-evm-sc14.png)
 
