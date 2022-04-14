@@ -19,7 +19,7 @@ You can run the following command to start your node with a whitelisted subnet:<
 
 ## Step 1: Setting up MetaMask
 
-#### **EVM Subnet Settings:** [(Create EVM Tutorial)](./create-evm-blockchain.md)
+#### **EVM Subnet Settings:** [(Create EVM Tutorial)](../platform/subnets/create-evm-blockchain.md)
 
 * **Network Name**: Custom Subnet EVM
 * **New RPC URL**: [http://127.0.0.1:9650/ext/bc/BlockchainID/rpc](http://127.0.0.1:9650/ext/bc/BlockchainID/rpc) (Note: the port number should match your local setting which can be different from 9650.)
