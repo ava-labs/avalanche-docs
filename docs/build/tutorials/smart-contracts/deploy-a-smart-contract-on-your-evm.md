@@ -29,7 +29,7 @@ You should see your Subnet's Native Token in Metamask.
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
 
-![remix subnet evm sc](/img/remix-subnet-evm-sc.png)
+![remix subnet evm sc home](/img/remix-subnet-evm-sc-home.png)
 
 Create the smart contracts that we want to compile and deploy using Remix file explorer
 
@@ -38,32 +38,32 @@ Create the smart contracts that we want to compile and deploy using Remix file e
 
 In Remix Home _Click_ the GitHub button.
 
-![remix subnet evm sc2](/img/remix-subnet-evm-sc2.png)
+![remix subnet evm sc load panel](/img/remix-subnet-evm-sc-load-panel.png)
 
 Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/NFT.sol) into the popup and _click_ import.
 
-![remix subnet evm sc3](/img/remix-subnet-evm-sc3.png)
+![remix subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
 For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
 
-![remix subnet evm sc4](/img/remix-subnet-evm-sc4.png)
+![remix subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
 Navigate to Deploy Tab -&gt; Open the "ENVIRONMENT" drop-down and select Injected Web3 (make sure MetaMask is loaded).
 
-![remix subnet evm sc5](/img/remix-subnet-evm-sc5.png)
+![remix subnet evm sc web3](/img/remix-subnet-evm-sc-web3.png)
 
 Once we injected the web3-&gt; Go back to the compiler, and compile the selected contract -&gt; Navigate to Deploy Tab.
 
-![remix subnet evm sc6](/img/remix-subnet-evm-sc6.png)
+![remix subnet evm sc compile](/img/remix-subnet-evm-sc-compile.png)
 
 Now, the smart contract is compiled, MetaMask is injected, and we are ready to deploy our ERC721. Click "Deploy."
 
-![remix subnet evm sc7](/img/remix-subnet-evm-sc7.png)
+![remix subnet evm sc deploy](/img/remix-subnet-evm-sc-deploy.png)
 
 
 Confirm the transaction on the MetaMask pop up.
 
-![remix subnet evm sc8](/img/remix-subnet-evm-sc8.png)
+![remix subnet evm sc conf1](/img/remix-subnet-evm-sc-conf1.png)
 
 ### Adjusting Gas
 If you are having trouble with underpricing errors then try the following: <br></br>
@@ -73,26 +73,26 @@ If you are having trouble with underpricing errors then try the following: <br><
 ![remix subnet evm sc edit](/img/remix-subnet-evm-sc-edit.png)
 #### Step 2: _Click_ Edit suggested gas fee
 
-![remix subnet evm sc9](/img/remix-subnet-evm-sc9.png)
+![remix subnet evm sc set1](/img/remix-subnet-evm-sc-set1.png)
 
 #### Step 3: Change the gas price and _Click_ save
 
-![remix subnet evm sc10](/img/remix-subnet-evm-sc10.png)
+![remix subnet evm sc set2](/img/remix-subnet-evm-sc-set2.png)
 #### Step 4: Confirm the transaction on the MetaMask pop up.
 
-![remix subnet evm sc14](/img/remix-subnet-evm-sc14.png)
+![remix subnet evm sc conf2](/img/remix-subnet-evm-sc-conf2.png)
 
 Our contract is successfully deployed!
 
-![remix subnet evm sc15](/img/remix-subnet-evm-sc15.png)
+![remix subnet evm sc deployed](/img/remix-subnet-evm-sc-deployed.png)
 
 Now, we can expand it by selecting it from the "Deployed Contracts" tab and test it out.
 
-![remix subnet evm sc16](/img/remix-subnet-evm-sc16.png)
+![remix subnet evm sc end](/img/remix-subnet-evm-sc-end.png)
 
 The contract ABI and Bytecode are available on the compiler tab.
 
-![remix subnet evm sc12](/img/remix-subnet-evm-sc12.png)
+![remix subnet evm sc abi](/img/remix-subnet-evm-sc-abi.png)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
