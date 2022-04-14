@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This tutorial assumes that: <br></br>
-- A [Subnet](../platform/subnets/create-a-subnet.md) has been created<br></br>
-- An [EVM blockchain](../platform/subnets/create-evm-blockchain.md) has been created<br></br>
-- Your Node is currently [validating](../platform/subnets/create-a-subnet#adding-subnet-validators) your target Subnet<br></br>
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain#build-genesis))<br></br>
+This tutorial assumes that:
+- A [Subnet](../platform/subnets/create-a-subnet.md) has been created
+- An [EVM blockchain](../platform/subnets/create-evm-blockchain.md) has been created
+- Your Node is currently [validating](../platform/subnets/create-a-subnet#adding-subnet-validators) your target Subnet
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your [Genesis File](../platform/subnets/create-evm-blockchain#build-genesis))
 
 ## Step 1: Setting up MetaMask
 
@@ -17,7 +17,7 @@ This tutorial assumes that: <br></br>
 * **``ChainID``**: Subnet EVM ChainID
 * **``Symbol``**: Subnet EVM Token Symbol
 * **``Explorer``**: N/A
-<br></br>
+
 
 ![remix subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
 
@@ -66,7 +66,7 @@ Confirm the transaction on the MetaMask pop up.
 ![remix subnet evm sc conf1](/img/remix-subnet-evm-sc-conf1.png)
 
 ### Adjusting Gas
-If you are having trouble with underpricing errors then try the following: <br></br>
+If you are having trouble with underpricing errors then try the following: 
 
 #### Step 1: In the Metamask confirmation window _Click_ Edit
 
