@@ -77,6 +77,8 @@ If you are having trouble with underpricing errors then try the following: <br><
 
 #### Step 3: Change the gas price and _Click_ save
 
+_Note: reference the `minBaseFee` you set in your [Genesis file](../platform/subnets/create-evm-blockchain#build-genesis)_
+
 ![remix subnet evm sc set2](/img/remix-subnet-evm-sc-set2.png)
 #### Step 4: Confirm the transaction on the MetaMask pop up.
 
