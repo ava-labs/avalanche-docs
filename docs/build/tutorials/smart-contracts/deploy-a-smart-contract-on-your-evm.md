@@ -44,7 +44,7 @@ Paste the [link to the Smart Contract](https://github.com/ava-labs/avalanche-sma
 
 ![remix subnet evm sc import](/img/remix-subnet-evm-sc-import.png)
 
-For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart)
+For this example, we will deploy an ERC721 contract from the [Avalanche Smart Contract Quickstart Repo](https://github.com/ava-labs/avalanche-smart-contract-quickstart).
 
 ![remix subnet evm sc file explorer](/img/remix-subnet-evm-sc-file-explorer.png)
 
