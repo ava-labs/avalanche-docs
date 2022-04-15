@@ -70,6 +70,12 @@ Build AvalancheGo:
 
 The binary, named `avalanchego`, is in `avalanchego/build`. If you've followed the instructions so far, this will be within your `$GOPATH` at: `$GOPATH/src/github.com/ava-labs/avalanchego/build`.
 
+To begin running AvalancheGo, run the following (hit Ctrl+C to stop your node):
+
+```sh
+./build/avalanchego
+```
+
 #### **Binary**
 
 If you want to download a pre-built binary instead of building it yourself, go to our [releases page](https://github.com/ava-labs/avalanchego/releases), and select the release you want (probably the latest one.)
