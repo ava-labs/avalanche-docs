@@ -66,25 +66,6 @@ Confirm the transaction on the MetaMask pop up.
 
 ![remix subnet evm sc conf1](/img/remix-subnet-evm-sc-conf1.png)
 
-### Adjusting Gas
-If you are having trouble with underpricing errors then try the following: 
-
-#### Step 1: In the Metamask confirmation window _Click_ Edit
-
-![remix subnet evm sc edit](/img/remix-subnet-evm-sc-edit.png)
-#### Step 2: _Click_ Edit suggested gas fee
-
-![remix subnet evm sc set1](/img/remix-subnet-evm-sc-set1.png)
-
-#### Step 3: Change the gas price and _Click_ save
-
-_Note: reference the `minBaseFee` you set in your [Genesis file](../platform/subnets/create-evm-blockchain#build-genesis)_
-
-![remix subnet evm sc set2](/img/remix-subnet-evm-sc-set2.png)
-#### Step 4: Confirm the transaction on the MetaMask pop up
-
-![remix subnet evm sc conf2](/img/remix-subnet-evm-sc-conf2.png)
-
 Our contract is successfully deployed!
 
 ![remix subnet evm sc deployed](/img/remix-subnet-evm-sc-deployed.png)
@@ -103,4 +84,4 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 ## Other Tools
 
-You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick starter](./using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
+You can use Subnet EVM just like you use C-Chain and EVM tools. Only differences are `chainID` and RPC URL. For example you can deploy your contracts with [hardhat quick start guide](./using-hardhat-with-the-avalanche-c-chain.md) by changing `url` and `chainId` in the `hardhat.config.ts`.
