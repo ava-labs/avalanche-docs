@@ -22,7 +22,7 @@
 /build/tutorials/platform/subnet/create-evm-blockchain/ /build/tutorials/platform/subnets/create-evm-blockchain 301
 /build/tutorials/platform/subnet/create-a-subnet/ /build/tutorials/platform/subnets/create-a-subnet 301
 /build/tutorials/platform/subnet/create-avm-blockchain/ /build/tutorials/platform/subnets/create-avm-blockchain 301
-/build/tutorials/platform/subnet/create-a-virtual-machine-vm/ docs/build/tutorials/platform/subnets/create-a-virtual-machine-vm 301
+/build/tutorials/platform/subnet/create-a-virtual-machine-vm/ /docs/build/tutorials/platform/subnets/create-a-virtual-machine-vm 301
 /build/tutorials/platform/subnet/create-custom-blockchain/ /build/tutorials/platform/subnets/create-custom-blockchain 301
 /build/tutorials/platform/subnet/subnet-faq/ /build/tutorials/platform/subnets/subnet-faq 301
 /v/v1.0.4/build/apis /build/avalanchego-apis  301
