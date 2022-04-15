@@ -2,10 +2,6 @@
 
 ## Introduction
 
-We recently deployed the DFK subnet on Avalanche mainnet and successfully launched the [DFK chain](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer) on that subnet. This subnet is maintained by the [DeFi Kingdom](https://defikingdoms.com/)'s team and is based on Avalanche's [subnet-evm](https://github.com/ava-labs/subnet-evm).
-
-A subnet, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets. You can learn more about subnets [here](../subnets/README.md).
-
 [DeFi Kingdom](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
 
 This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
