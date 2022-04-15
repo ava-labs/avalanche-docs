@@ -146,4 +146,4 @@ To connect to the Fuji Testnet instead of the main net, use argument `--network-
 
 Now that you've launched your Avalanche node, what should you do next?
 
-Your Avalanche node will perform consensus on its own, but the rest of the network won't actually sample it during consensus since it is not yet a validator on the network. If you want to add your node as a validator, check out [Add a Validator](add-a-validator.md) to take it a step further.
+Your Avalanche node will perform consensus on its own, but it is not yet a validator on the network. This means that the rest of the network will not query your node when sampling the network during consensus. If you want to add your node as a validator, check out [Add a Validator](add-a-validator.md) to take it a step further.
