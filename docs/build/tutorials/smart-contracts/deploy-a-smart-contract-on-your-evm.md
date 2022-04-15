@@ -33,7 +33,6 @@ Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
 
 Create the smart contracts that we want to compile and deploy using Remix file explorer
 
-#### Or
 ### Load the Smart Contract using Github
 
 In Remix Home _Click_ the GitHub button.
