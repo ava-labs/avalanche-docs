@@ -25,7 +25,9 @@ You should see a balance of your Subnet's Native Token in Metamask.
 
 ![remix subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
 
-## Step 2: Connect MetaMask and deploy a smart contract using Remix
+## Step 2: Connect MetaMask and Deploy a Smart Contract 
+
+### Using Remix
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity.
 
