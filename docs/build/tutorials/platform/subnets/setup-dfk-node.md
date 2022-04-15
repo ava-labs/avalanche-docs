@@ -2,50 +2,58 @@
 
 ## Introduction
 
-We recently deployed the DFK subnet on Avalanche mainnet and successfully launched the [DFK chain](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer) on that subnet. This subnet is maintained by the [DeFi Kingdom](https://defikingdoms.com/)'s team and is based on Avalanche's [subnet-evm](https://github.com/ava-labs/subnet-evm).
+[DeFi Kingdom](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
 
-A subnet, or subnetwork, is a dynamic set of validators working together to achieve consensus on the state of a set of blockchains. Each blockchain is validated by exactly one subnet. A subnet can validate many blockchains. A node may be a member of many subnets. You can learn more about subnets [here](../subnets/README.md).
+This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
+
+1) Build the AvalancheGo build directory
+2) Build the plugin binary for the DFK subnet-evm
+3) Whitelist the DFK Subnet
+4) Run your node and validate the DFK Subnet!
 
 ## Requirement
 
 There is a requirement to run a node on the DFK subnet - 
 
-* You must be running a node on the Avalanche Primary Network. You can use this [guide](../../nodes-and-staking/set-up-node-with-installer) to set up your node using the installer script.
-* You are using the same system where you have deployed your mainnet node.
+* You must be running a node on the Avalanche Primary Network. You can use this [guide](../../nodes-and-staking/run-avalanche-node.md) to set up your Avalanche node by building from source (recommended for this tutorial).
+* You should be using the same machine as where you build AvalancheGo from source.
 
 ## Setup
 
-Let's make a separate directory `dfk-subnet` for keeping and building our binaries. Move to the following directory and follow the rest of the tutorial.
-
+We'll assume that you have followed the instructions to build AvalancheGo from source in [this guide](../../nodes-and-staking/run-avalanche-node.md) and are still in the AvalancheGo directory.
 ## Build Binary
 
-Clone the Defi Kindom's subnet-evm repository which is originally forked from Avalanche's subnet-evm. And build it using the following command.
+First, we will assume that you're starting out in the AvalancheGo directory within your `$GOPATH`, and you will clone the DFK subnet-evm repository.
 
 ```bash
-git clone https://github.com/DefiKingdoms/subnet-evm \
-&& cd subnet-evm \
-&& ./scripts/build.sh build/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
+cd $GOPATH/src/github.com
+mkdir DeFiKingdoms
+cd DeFiKingdoms
+git clone https://github.com/DefiKingdoms/subnet-evm
+cd subnet-evm
 ```
 
-The above command will clone the `subnet-evm` repository and build its binary inside the `subnet-evm/build` directory. The name of the binary will be the same as its vmID.
-
-## Move Binary to Plugins Directory
-
-Now we need to move the built binary to the `avalanchego/build/plugins` directory. Run the following command to move the binary to the `plugins` folder. Make sure to use the actual location of your `avalanchego` source and other relative paths. This command assumes we are in the `dfk-subnet` folder and the `avalanchego` source is in its sibling (.\./) folder.
+Now that you are in the DeFiKingdoms/subnet-evm repository, you will build the binary and place it directly into the AvalancheGo `build/plugins` directory. To do this, you will pass in the desired path to place the plugin binary. You will want to place this binary into the plugins directory of AvalancheGo, which was created when building AvalancheGo from source.
 
 ```bash
-mv subnet-evm/build/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv ../avalanchego/build/plugins/
+./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 ```
+
+The long string `mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv` is the CB58 encoded VMID of the DFK subnet-evm. AvalancheGo will use the name of this file to determine what VMs are available to run from the `plugins` directory.
 
 ## Whitelisting DFK Subnet and Restarting the Node
 
-To start syncing the state with the chains on a subnet, we need to whitelist the subnet and restart the node. You can either add the whitelisted subnets in a config file or pass them through command-line options.
+AvalancheGo will only validate the primary network by default. In order to add the DFK Subnet, you will need to add the DFK Subnet ID to the set of whitelisted subnets in the node's config file or pass it through the command line options of the node. Once the node's config file has been updated, you will need to start the Avalanche node (restart if already running).
+
+Once you start the node, it will begin syncing the Primary Network. Once the node reaches the point in the Platform Chain where the DFK Subnet is created, it will begin syncing the DFK Subnet as well, and will start validating once it has fully bootstrapped.
 
 ### Updating Config File
 
 You can skip this section if you want to pass whitelisted subnets through command-line flags.
 
-You need to edit your existing config file for your node. If you are running a node using [installer script](../../nodes-and-staking/set-up-node-with-installer), it can be found in `~/.avalanchego/configs/node.json`. If you are not using any config file, then you can make it anywhere on your system. Update this JSON file with the whitelisted subnet. 
+You need to edit your existing config file for your node. In this tutorial, you will create a config file at: `~/.avalanchego/config.json`. Note: you can create a config file anywhere on your file system, you will just need to specify its location via the flag `--config-file=<file path>` when you start your node.
+
+You will need to add the DFK Subnet ID to the whitelisted subnets section of the config file:
 
 ```json
 {
@@ -54,18 +62,24 @@ You need to edit your existing config file for your node. If you are running a n
 }
 ```
 
-### Restarting the Node
+Whitelisted subnets is a comma separated list of subnet IDs, so if you are validating more than one subnet, you can simply add a comma to the end of the list and append the DFK Subnet ID `Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ`.
+
+### Running the Node
+
+First, make sure to shut down your node in case it is still running. Then, you will navigate back into the AvalancheGo directory:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/avalanchego
+```
+
+If you went through the steps to set up a config file, then you can launch your node by specifying the config file on the command line:
+
+```bash
+./build/avalanchego --config-file ~/.avalanchego/config.json
+```
 
 If you want to pass the whitelisted subnets through the command line flag. You can append the other flags or even the `--config-file` flag as well, according to your need.
 
 ```bash
-./avalanchego/build/avalanchego --whitelisted-subnets mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
+./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
-
-If you want to pass the whitelisted subnets through the config file.
-
-```bash
-./avalanchego/build/avalanchego --config-file ./config.json
-```
-
-Use the relative paths of binaries and config files as per your need.
