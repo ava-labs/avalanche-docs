@@ -21,7 +21,7 @@ This tutorial assumes that:
 
 ![remix subnet evm sc mm](/img/remix-subnet-evm-sc-mm.png)
 
-You should see your a balance of your Subnet's Native Token in Metamask.
+You should see a balance of your Subnet's Native Token in Metamask.
 
 ![remix subnet evm sc mm dash](/img/remix-subnet-evm-sc-mm-dash.png)
 
