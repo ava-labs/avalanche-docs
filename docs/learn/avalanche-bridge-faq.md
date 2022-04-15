@@ -69,7 +69,7 @@ Yes, you can view video tutorials for bridge functionality [here](https://www.yo
 
 On Avalanche, transaction fees are paid in the native asset, AVAX. In order to send transactions on the Avalanche C-Chain, you must have sufficient AVAX in your wallet to cover the cost of the gas for the transaction. To help you get started on Avalanche, the bridge will airdrop you a small amount of AVAX if you move more than $75 (subject to change) worth of tokens over from Ethereum. In order to avoid running out of AVAX to cover your transaction fees, we recommend first buying an adequate amount of AVAX. You can do so on [Pangolin](https://app.pangolin.exchange/).
 
-#### Can I send to a different address on the other network?
+### Can I send to a different address on the other network?
 
 The bridge only allows transfers to the same address on the other network. After the asset is transferred to the other network, it can be sent to any address or contract.
 
@@ -98,7 +98,7 @@ The bridge charges transfer fees in order to cover the cost of the transaction f
 
 When moving assets from Ethereum to Avalanche, the bridge fee is $3 worth of the ERC20 asset being transferred. Transfers to Avalanche may qualify for an AVAX airdrop as described [here](avalanche-bridge-faq.md#airdrop).
 
-When moving assets from Avalanche to Ethereum, the bridge fee is largely based on the **expected** Ethereum transaction fee, which is calculated using current asset prices, the current Ethereum gas price, and the approximate amount of gas that will be used by the Ethereum transaction. As such, the Ethereum transaction fee, and thus also the bridge fee, can be highly variable. To account for price volatility, a constant dollar amount (currently $15) is added to the bridge fee. Note that the bridge fee will be different than the Ethereum transaction fee displayed in explorers such as Etherscan because asset prices, the Ethereum gas price, and the amount of gas used by Ethererum transactions fluctuate. The expected bridge fee is displayed in the bridge UI when performing a transfer.
+When moving assets from Avalanche to Ethereum, the bridge fee is largely based on the **expected** Ethereum transaction fee, which is calculated using current asset prices, the current Ethereum gas price, and the approximate amount of gas that will be used by the Ethereum transaction. As such, the Ethereum transaction fee, and thus also the bridge fee, can be highly variable. To account for price volatility, a constant dollar amount (currently $20) is added to the bridge fee. Note that the bridge fee will be different than the Ethereum transaction fee displayed in explorers such as Etherscan because asset prices, the Ethereum gas price, and the amount of gas used by Ethererum transactions fluctuate. The expected bridge fee is displayed in the bridge UI when performing a transfer.
 
 ### Why doesn't the amount of asset I received on one network match the amount that I sent from the other?
 
