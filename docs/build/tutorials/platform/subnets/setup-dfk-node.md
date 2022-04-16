@@ -2,14 +2,14 @@
 
 ## Introduction
 
-[DeFi Kingdom](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
+[DeFi Kingdoms](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
 
 This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
 
-1) Build the AvalancheGo build directory
-2) Build the plugin binary for the DFK subnet-evm
-3) Whitelist the DFK Subnet
-4) Run your node and validate the DFK Subnet!
+1. Build the AvalancheGo build directory
+2. Build the plugin binary for the DFK subnet-evm
+3. Whitelist the DFK Subnet
+4. Run your node and validate the DFK Subnet!
 
 ## Requirement
 
