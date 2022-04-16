@@ -6,9 +6,9 @@
 
 This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
 
-1. Build the AvalancheGo binary and create the plugin build directory
-2. Build the plugin binary for the DFK subnet-evm
-3. Whitelist the DFK Subnet
+1. Build the AvalancheGo binary and create the plugin build directory.
+2. Build the plugin binary for the DFK subnet-evm.
+3. Whitelist the DFK Subnet.
 4. Connect to the DFK Subnet!
 
 ## Build `AvalancheGo` Binary and Create the Plugin Build Directory
