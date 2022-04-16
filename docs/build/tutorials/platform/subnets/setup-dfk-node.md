@@ -11,7 +11,7 @@ This tutorial will take you through the necessary steps to run your node on the 
 3. Whitelist the DFK Subnet
 4. Connect to the DFK Subnet!
 
-_Just want the commands? Jump the the [end](#just-want-the-commands-we-got-you)!_
+_Just want the commands? Jump to the [end](#just-want-the-commands-we-got-you)!_
 
 ## Build `AvalancheGo` Binary and Create the Plugin Build Directory
 
