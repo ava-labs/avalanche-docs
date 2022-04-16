@@ -2,28 +2,26 @@
 
 ## Introduction
 
-[DeFi Kingdom](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
+[DeFi Kingdoms](https://defikingdoms.com/) recently launched the [DFK Subnet](https://subnets.avax.network/defi-kingdoms/dfk-chain/explorer).
 
 This tutorial will take you through the necessary steps to run your node on the DFK Subnet:
 
-1) Build the AvalancheGo build directory
-2) Build the plugin binary for the DFK subnet-evm
-3) Whitelist the DFK Subnet
-4) Run your node and validate the DFK Subnet!
+1. Build the AvalancheGo binary and create the plugin build directory
+2. Build the plugin binary for the DFK subnet-evm
+3. Whitelist the DFK Subnet
+4. Connect to the DFK Subnet!
 
-## Requirement
+## Build `AvalancheGo` Binary and Create the Plugin Build Directory
 
-There is a requirement to run a node on the DFK subnet - 
+First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
+You can follow [this comprehensive guide](../../nodes-and-staking/run-avalanche-node.md) to complete
+this step. For this tutorial, we recommend compiling from source instead of using the `AvalancheGo Installer`.
 
-* You must be running a node on the Avalanche Primary Network. You can use this [guide](../../nodes-and-staking/run-avalanche-node.md) to set up your Avalanche node by building from source (recommended for this tutorial).
-* You should be using the same machine as where you build AvalancheGo from source.
+## Build `subnet-evm` Binary
 
-## Setup
+_For the steps below, we will assume that you completed first step successfully and are now in your AvalancheGo directory (within your `$GOPATH`)._
 
-We'll assume that you have followed the instructions to build AvalancheGo from source in [this guide](../../nodes-and-staking/run-avalanche-node.md) and are still in the AvalancheGo directory.
-## Build Binary
-
-First, we will assume that you're starting out in the AvalancheGo directory within your `$GOPATH`, and you will clone the DFK subnet-evm repository.
+Next, you will clone the DFK subnet-evm repository:
 
 ```bash
 cd $GOPATH/src/github.com
@@ -33,7 +31,7 @@ git clone https://github.com/DefiKingdoms/subnet-evm
 cd subnet-evm
 ```
 
-Now that you are in the DeFiKingdoms/subnet-evm repository, you will build the binary and place it directly into the AvalancheGo `build/plugins` directory. To do this, you will pass in the desired path to place the plugin binary. You will want to place this binary into the plugins directory of AvalancheGo, which was created when building AvalancheGo from source.
+Now that you are in the `DeFiKingdoms/subnet-evm` repository, you will build the binary and place it directly into the AvalancheGo `build/plugins` directory. To do this, you will pass in the desired path to place the plugin binary. You will want to place this binary into the plugins directory of AvalancheGo, which was created when building AvalancheGo from source.
 
 ```bash
 ./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
