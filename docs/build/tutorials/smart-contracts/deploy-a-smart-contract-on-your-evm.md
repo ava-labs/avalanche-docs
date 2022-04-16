@@ -1,4 +1,4 @@
-# Deploy a Smart Contract on Your Subnet Evm Using Remix and Metamask
+# Deploy a Smart Contract on Your Subnet EVM Using Remix and Metamask
 
 ## Introduction
 
