@@ -11,6 +11,8 @@ This tutorial will take you through the necessary steps to run your node on the 
 3. Whitelist the DFK Subnet
 4. Connect to the DFK Subnet!
 
+_Just want the commands? Jump the the [end](#just-want-the-commands-we-got-you)!_
+
 ## Build `AvalancheGo` Binary and Create the Plugin Build Directory
 
 First, you need to download and build AvalancheGo (handles the orchestration of running Custom VMs).
@@ -79,5 +81,24 @@ If you went through the steps to set up a config file, then you can launch your 
 If you want to pass the whitelisted subnets through the command line flag. You can append the other flags or even the `--config-file` flag as well, according to your need.
 
 ```bash
+./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
+```
+
+## Just want the commands? We got you...
+
+Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
+
+```bash
+cd $GOPATH
+mkdir -p src/github.com/ava-labs
+git clone git@github.com:ava-labs/avalanchego.git
+cd avalanchego
+./scripts/build.sh
+cd $GOPATH/src/github.com
+mkdir DeFiKingdoms
+cd DeFiKingdoms
+git clone https://github.com/DefiKingdoms/subnet-evm
+cd subnet-evm
+./scripts/build.sh $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/mDV3QWRXfwgKUWb9sggkv4vQxAQR4y2CyKrt5pLZ5SzQ7EHBv
 ./build/avalanchego --whitelisted-subnets Vn3aX6hNRstj5VHHm63TCgPNaeGnRSqCYXQqemSqDd2TQH4qJ
 ```
