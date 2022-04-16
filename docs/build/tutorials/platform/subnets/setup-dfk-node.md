@@ -86,7 +86,9 @@ If you want to pass the whitelisted subnets through the command line flag. You c
 
 ## Just want the commands? We got you...
 
+:::caution
 Run `go version`. **It should be 1.17.9 or above.** Run `echo $GOPATH`. **It should not be empty.**
+:::
 
 ```bash
 cd $GOPATH
