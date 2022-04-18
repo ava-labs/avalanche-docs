@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this tutorial, we will be building a bridge between **[WAGMI](./subnets/wagmi)** and **[Fuji](./fuji-workflow)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
+In this tutorial, we will be building a bridge between **[WAGMI](./wagmi.md)** and **[Fuji](../../platform/fuji-workflow.md)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 
 The wrapped version of a native coin is its pegged ERC20 representation. Wrapping it with the ERC20 standard makes certain processes like delegated transactions much easier. You can easily get wrapped tokens by sending the native coin to the wrapped token contract address.
 
@@ -33,7 +33,7 @@ Bridging tokens from source to destination chain involves the **lock and mint** 
 
 These are the requirement to follow this tutorial -
 
-* Add [WAGMI](./subnets/wagmi#adding-wagmi-to-metamask) and [Fuji](./fuji-workflow#set-up-fuji-network-on-metamask-optional) chain on the MetaMask network
+* Add [WAGMI](./wagmi.md#adding-wagmi-to-metamask) and [Fuji](../../platform/fuji-workflow.md#set-up-fuji-network-on-metamask-optional) chain on the MetaMask network
 * Import `wWGM` token (asset) on the WAGMI network (MetaMask). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 * `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 * `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://faucet.avax-test.network/)
